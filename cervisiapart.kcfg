@@ -4,6 +4,27 @@
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile name="cervisiapartrc" />
+  <group name="Colors" >
+    <entry name="DiffChangeColor" key="DiffChange" type="Color">
+      <default>#edbebe</default>
+    </entry>
+    <entry name="DiffDeleteColor" key="DiffDelete" type="Color">
+      <default>#beedbe</default>
+    </entry>
+    <entry name="DiffInsertColor" key="DiffInsert" type="Color">
+      <default>#bebeed</default>
+    </entry>
+    <entry name="LocalChangeColor" key="LocalChange" type="Color">
+      <default>#8282ff</default>
+    </entry>
+    <entry name="RemoteChangeColor" key="RemoteChange" type="Color">
+      <default>#46d246</default>
+    </entry>
+    <entry name="ConflictColor" key="Conflict" type="Color">
+      <label>The foreground color used to highlight files with a conflict in the file view.</label>
+      <default>#ff8282</default>
+    </entry>
+  </group>
   <group name="General" >
     <entry key="Timeout" type="UInt">
       <label>Delay (ms) until the progress dialog appears.</label>
