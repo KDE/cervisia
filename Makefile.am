@@ -7,7 +7,7 @@ bin_PROGRAMS = cervisia
 kde_module_LTLIBRARIES = libcervisiapart.la
 noinst_LTLIBRARIES = libcervisia.la
 
-libcervisia_la_SOURCES = annotatedlg.cpp diffdlg.cpp logdlg.cpp \
+libcervisia_la_SOURCES = annotatedlg.cpp diffdlg.cpp patchoptiondlg.cpp logdlg.cpp \
 		   progressdlg.cpp progressdlg.skel resolvedlg.cpp resolvedlg_p.cpp annotateview.cpp \
 		   diffview.cpp loglist.cpp logplainview.cpp logtree.cpp annotatectl.cpp   \
 		   loginfo.cpp misc.cpp qttableview.cpp tooltip.cpp cervisiasettings.kcfgc \
