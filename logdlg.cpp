@@ -376,6 +376,9 @@ bool LogDialog::parseCvsLog(DCOPRef& service, const QString& fileName)
         tagcombo[1]->insertItem(str);
     }
 
+    tree->collectConnections();
+    tree->recomputeCellSizes();
+
     return true;    // successful
 }
 
