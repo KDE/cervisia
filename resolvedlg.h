@@ -1,6 +1,7 @@
 /* 
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
+ *  Copyright (c) 2003-2004 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -24,7 +25,6 @@
 class DiffView;
 
 class QLabel;
-class QMultiLineEdit;
 class QTextCodec;
 class KConfig;
 class ResolveItem;
@@ -38,7 +38,6 @@ public:
     enum ChooseType { ChA, ChB, ChAB, ChBA, ChEdit };
 
     explicit ResolveDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
-
     virtual ~ResolveDialog();
 
     bool parseFile(const QString &name);
@@ -63,6 +62,10 @@ private:
     void choose(ChooseType ch);
     void chooseEdit();
     void saveFile(const QString &name);
+    QString readFile();
+    void addToMergeAndVersionA(const QString& line, int& lineNo);
+    void addToVersionB(const QString& line, int& lineNo);
+    void updateMergedVersion(ResolveItem* item, ChooseType chosen);
     
     QLabel *nofnlabel;
     QPushButton *backbutton, *forwbutton;
@@ -74,24 +77,12 @@ private:
     QTextCodec *fcodec;
     int markeditem;
     KConfig& partConfig;
+    
+    QString    m_contentVersionA,
+               m_contentVersionB,
+               m_contentMergedVersion;
 };
 
-
-class ResolveEditorDialog : public KDialogBase
-{
-public:
-
-    explicit ResolveEditorDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
-
-    virtual ~ResolveEditorDialog();
-
-    void setContent(const QStringList &l);
-    QStringList content() const;
-
-private:   
-    QMultiLineEdit *edit;
-    KConfig& partConfig;
-};  
 
 #endif
 
