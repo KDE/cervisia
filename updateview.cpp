@@ -14,6 +14,8 @@
 
 #include "updateview.h"
 
+#include <set>
+
 #include <sys/stat.h>
 #include <unistd.h>
 #include <locale.h>
@@ -324,6 +326,9 @@ void UpdateDirItem::syncWithEntries()
 }
 
 
+/**
+ * Test if files was removed from repository.
+ */
 void UpdateDirItem::syncWithDirectory()
 {
     // Do not use CvsDir here, because CVS/Entries may
@@ -331,34 +336,30 @@ void UpdateDirItem::syncWithDirectory()
     // idea, but that's possible...)
     const QDir dir( dirPath(), QString::null, QDir::Name,
                     QDir::Files|QDir::Hidden|QDir::NoSymLinks );
+    const QStringList& files(dir.entryList());
 
-    const QFileInfoList *files = dir.exists()? dir.entryInfoList() : 0;
+    // copy all files in a set for better performance when we test for existence
+    std::set<QString> setFiles;
+    QStringList::ConstIterator const itFileEnd = files.end();
+    for (QStringList::ConstIterator itFile = files.begin();
+         itFile != itFileEnd; ++itFile)
+        setFiles.insert(setFiles.end(), *itFile);
 
-    for (QListViewItem *item = firstChild(); item;
-         item = item->nextSibling() )
+    for (QListViewItem *item = firstChild(); item; item = item->nextSibling())
+    {
+        // only files
+        if (UpdateView::isDirItem(item) == false)
         {
-            // Look if file still exists. We never remove directories!
-            bool exists = false;
-            if (UpdateView::isDirItem(item))
-                exists = true;
-            else if (files)
-                {
-                    QFileInfoListIterator it(*files);
-                    for ( ; it.current(); ++it)
-                        if (it.current()->fileName() == item->text(UpdateViewItem::File))
-                            {
-                                exists = true;
-                                break;
-                            }
-                }
-            if (!exists)
-                {
-                    UpdateViewItem *viewitem = static_cast<UpdateViewItem*>(item);
-                    UpdateView::Filter filter = updateView()->filter();
-                    viewitem->setStatus(UpdateView::Removed, filter);
-                    viewitem->setRevTag(QString::null, QString::null);
-                }
+            // is file removed?
+            if (setFiles.find(item->text(UpdateViewItem::File)) == setFiles.end())
+            {
+                UpdateViewItem *viewitem = static_cast<UpdateViewItem*>(item);
+                UpdateView::Filter filter = updateView()->filter();
+                viewitem->setStatus(UpdateView::Removed, filter);
+                viewitem->setRevTag(QString::null, QString::null);
+            }
         }
+    }
 }
 
 
@@ -490,15 +491,15 @@ void UpdateViewItem::setRevTag(const QString& rev, const QString& tag)
         && tag[17] == '.')
         {
             m_tag = tag.mid(1, 4);
-            m_tag += "/";
+            m_tag += '/';
             m_tag += tag.mid(6, 2);
-            m_tag += "/";
+            m_tag += '/';
             m_tag += tag.mid(9, 2);
-            m_tag += " ";
+            m_tag += ' ';
             m_tag += tag.mid(12, 2);
-            m_tag += ":";
+            m_tag += ':';
             m_tag += tag.mid(15, 2);
-            m_tag += ":";
+            m_tag += ':';
             m_tag += tag.mid(18, 2);
         }
     else if (tag.length() > 1 && tag[0] == 'T')
@@ -827,7 +828,7 @@ QStringList UpdateView::multipleSelection() const
                             if (!dirpath.isEmpty())
                                 dirpath.truncate(dirpath.length()-1);
                             else
-                                dirpath = ".";
+                                dirpath = '.';
                             res.append(dirpath);
                         }
                     else
@@ -1002,60 +1003,42 @@ void UpdateView::markUpdated(bool laststage, bool success)
  */
 void UpdateView::rememberSelection(bool recursive)
 {
-    // Collect all selected dir and file items into relevantSelection
+    std::set<QListViewItem*> setItems;
+    for (QListViewItemIterator it(this); it.current(); ++it)
+    {
+        QListViewItem* item(it.current());
 
-    QPtrList<QListViewItem> shallowItems, deepItems;
-
-    QPtrStack<QListViewItem> s;
-    for ( QListViewItem *item = firstChild(); item;
-	  item = item->nextSibling()? item->nextSibling() : s.pop() )
-	{
-            if (item->firstChild())
-                s.push(item->firstChild());
-            if (isSelected(item))
-                shallowItems.append(item);
-	}
-
-    // In the recursive case, we add all directories from the hierarchies
-    // under the selected directories.
-    
-    if (recursive)
+        // if this item is selected and if it was not inserted already
+        // and if we work recursive and if it is a dir item then insert
+        // all sub dirs
+        // DON'T CHANGE TESTING ORDER
+        if (item->isSelected()
+            && setItems.insert(item).second
+            && recursive
+            && isDirItem(item))
         {
-            QPtrListIterator<QListViewItem> it(shallowItems);
-            for ( ; it.current(); ++it)
-                if (isDirItem(it.current()))
-                    for ( QListViewItem *item = it.current()->firstChild(); item;
-                          item = item->nextSibling()? item->nextSibling() : s.pop() )
-                        {
-                            if (item->firstChild())
-                                s.push(item->firstChild());
-                            if (isDirItem(item))
-                                deepItems.append(item);
-                        }
+            QPtrStack<QListViewItem> s;
+            for (QListViewItem* childItem = item->firstChild(); childItem;
+                 childItem = childItem->nextSibling() ? childItem->nextSibling() : s.pop())
+            {
+                // if this item is a dir item and if it is was not
+                // inserted already then insert all sub dirs
+                // DON'T CHANGE TESTING ORDER
+                if (isDirItem(childItem) && setItems.insert(childItem).second)
+                {
+                    if (QListViewItem* childChildItem = childItem->firstChild())
+                        s.push(childChildItem);
+                }
+            }
         }
+    }
 
-#if 0
-    DEBUGOUT("Deep:");
-    QPtrListIterator<QListViewItem> it42(deepItems);
-    for (; it42.current(); ++it42)
-        DEBUGOUT("  " << (*it42)->text(UpdateViewItem::File));
-    DEBUGOUT("Shallow:");
-    QPtrListIterator<QListViewItem> it43(shallowItems);
-    for (; it43.current(); ++it43)
-        DEBUGOUT("  " << (*it43)->text(UpdateViewItem::File));
-#endif
-    
-    // Collect everything together, and avoid duplicates:
-    
+    // Copy the set to the list
     relevantSelection.clear();
-    QPtrListIterator<QListViewItem> it1(shallowItems);
-    for ( ; it1.current(); ++it1)
-        if (!relevantSelection.contains(it1.current()))
-            relevantSelection.append(it1.current());
-    QPtrListIterator<QListViewItem> it2(deepItems);
-    for ( ; it2.current(); ++it2)
-        if (!relevantSelection.contains(it2.current()))
-            relevantSelection.append(it2.current());
+    std::set<QListViewItem*>::const_iterator const itItemEnd = setItems.end();
+    for (std::set<QListViewItem*>::const_iterator itItem = setItems.begin();
+         itItem != itItemEnd; ++itItem)
+        relevantSelection.append(*itItem);
 
 #if 0
     DEBUGOUT("Relevant:");
@@ -1073,30 +1056,38 @@ void UpdateView::rememberSelection(bool recursive)
  */
 void UpdateView::syncSelection()
 {
-    QPtrList<UpdateDirItem> dirs;
-    
-    QPtrListIterator<QListViewItem> it1(relevantSelection);
-    for ( ; it1.current(); ++it1)
-	{
-            UpdateDirItem *diritem = 0;
-            if (isDirItem(it1.current()))
-                diritem = static_cast<UpdateDirItem*>(it1.current());
-            else if (it1.current()->parent())
-                diritem = static_cast<UpdateDirItem*>(it1.current()->parent());
-            if (diritem && !dirs.contains(diritem))
-                dirs.append(diritem);
-        }
+    // compute all directories which are selected or contain a selected file
+    // (in recursive mode this includes all sub directories)
+    std::set<UpdateDirItem*> setDirItems;
+    for (QPtrListIterator<QListViewItem> itItem(relevantSelection);
+         itItem.current(); ++itItem)
+    {
+        QListViewItem* item(itItem.current());
+
+        UpdateDirItem* dirItem(0);
+        if (isDirItem(item))
+            dirItem = static_cast<UpdateDirItem*>(item);
+        else if (QListViewItem* parentItem = item->parent())
+            dirItem = static_cast<UpdateDirItem*>(parentItem);
+
+        if (dirItem)
+            setDirItems.insert(dirItem);
+    }
 
     QApplication::setOverrideCursor(waitCursor);
-    
-    QPtrListIterator<UpdateDirItem> it2(dirs);
-    for ( ; it2.current(); ++it2)
-	{
-            it2.current()->syncWithDirectory();
-            it2.current()->syncWithEntries();
-            qApp->processEvents();
-        }
-    
+
+    std::set<UpdateDirItem*>::const_iterator const itDirItemEnd = setDirItems.end();
+    for (std::set<UpdateDirItem*>::const_iterator itDirItem = setDirItems.begin();
+         itDirItem != itDirItemEnd; ++itDirItem)
+    {
+        UpdateDirItem* dirItem = *itDirItem;
+
+        dirItem->syncWithDirectory();
+        dirItem->syncWithEntries();
+
+        qApp->processEvents();
+    }
+
     QApplication::restoreOverrideCursor();
 }
 
@@ -1172,7 +1163,7 @@ void UpdateView::updateItem(const QString &name, Status status, bool isdir)
     QString dirpath(fi.dirPath());
     const QString fileName(fi.fileName());
 
-    if (dirpath == ".") 
+    if (dirpath == ".")
         dirpath = QString::null;
     else
 	dirpath += '/';
