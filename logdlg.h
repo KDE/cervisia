@@ -54,6 +54,9 @@ public:
 
     bool parseCvsLog(CvsService_stub* service, const QString& fileName);
 
+protected slots:
+    void slotOk();
+
 private slots:
     void findClicked();
     void diffClicked();

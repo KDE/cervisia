@@ -15,8 +15,8 @@
 
 #include "logdlg.h"
 
-#include <stdio.h>
 #include <qcombobox.h>
+#include <qdir.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qtabwidget.h>
@@ -29,11 +29,15 @@
 #include <kconfig.h>
 #include <kprocess.h>
 #include <krfcdate.h>
-#include <kwin.h>
+#include <krun.h>
+#include <ktempfile.h>
+#include <kurl.h>
 
 #include "cvsservice_stub.h"
+#include "repository_stub.h"
 #include "annotatedlg.h"
 #include "annotatectl.h"
+#include "cvsprogressdlg.h"
 #include "diffdlg.h"
 #include "loginfo.h"
 #include "loglist.h"
@@ -50,7 +54,7 @@
 
 LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     : KDialogBase(parent, name, false, QString::null,
-                  Close | Help | User1 | User2 | User3, Close, true,
+                  Ok | Close | Help | User1 | User2 | User3, Close, true,
                   KGuiItem(i18n("&Annotate")),
                   KGuiItem(i18n("&Diff")),
                   KGuiItem(i18n("&Find"), "find"))
@@ -168,6 +172,8 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
              this, SLOT(diffClicked()) );
     connect( this, SIGNAL(user3Clicked()),
              this, SLOT(findClicked()) );
+
+    setButtonOKText(i18n("to view something", "&View"));
 
     setHelp("browsinglogs");
 
@@ -370,6 +376,59 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
     tree->recomputeCellSizes();
 
     return true;    // successful
+}
+
+
+void LogDialog::slotOk()
+{
+    // make sure that the user selected a revision
+    if( selectionA.isEmpty() && selectionB.isEmpty() )
+    {
+        KMessageBox::information(this,
+            i18n("Please select revision A or B first."), "Cervisia");
+        return;
+    }
+
+    // retrieve the selected revision
+    QString revision;
+    if( !selectionA.isEmpty() )
+        revision = selectionA;
+    else
+        revision = selectionB;
+
+    // create a temporary file
+    const QString suffix("-" + revision + "-" + filename);
+    KTempFile file(QString::null, suffix);
+
+    // create a command line to retrieve the file revision from
+    // cvs and save it into the temporary file
+    // FIXME CL hardcoded call to cvs command-line client!!!
+    QString cmdline = "cvs update -p -r ";
+    cmdline += KProcess::quote(revision);
+    cmdline += " ";
+    cmdline += KProcess::quote(filename);
+    cmdline += " > ";
+    cmdline += file.name();
+
+    // FIXME: We shouldn't need to use CvsProgressDialog here
+    Repository_stub cvsRepository(cvsService->app(), "CvsRepository");
+    QString sandbox    = cvsRepository.workingCopy();
+    QString repository = cvsRepository.location();
+
+    CvsProgressDialog dlg("View", this);
+    if( dlg.execCommand(sandbox, repository, cmdline, "view", &partConfig) )
+    {
+        // make file read-only
+        chmod(QFile::encodeName(file.name()), 0400);
+
+        // open file in preferred editor
+        QDir dir(sandbox);
+        KURL url;
+        url.setPath(file.name());
+        (void) new KRun(url, 0, true, false);
+    }
+
+    file.close();
 }
 
 
