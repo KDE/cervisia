@@ -1,7 +1,7 @@
 #include "resolvedlg_p.h"
 using namespace Cervisia;
 
-#include <qmultilineedit.h>
+#include <ktextedit.h>
 
 
 ResolveEditorDialog::ResolveEditorDialog(KConfig& cfg, QWidget *parent, const char *name)
@@ -9,7 +9,7 @@ ResolveEditorDialog::ResolveEditorDialog(KConfig& cfg, QWidget *parent, const ch
                   Ok | Cancel, Ok, true)
     , m_partConfig(cfg)
 {
-    m_edit = new QMultiLineEdit(this);
+    m_edit = new KTextEdit(this);
     m_edit->setFocus();
 
     setMainWidget(m_edit);

@@ -3,7 +3,7 @@
 
 #include <kdialogbase.h>
 
-class QMultiLineEdit;
+class KTextEdit;
 class QStringList;
 class KConfig;
 
@@ -22,8 +22,8 @@ public:
     QString content() const;
 
 private:   
-    QMultiLineEdit* m_edit;
-    KConfig&        m_partConfig;
+    KTextEdit* m_edit;
+    KConfig&   m_partConfig;
 };  
 
 
