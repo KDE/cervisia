@@ -26,17 +26,22 @@ class PluginBase;
 class PluginManager
 {
 public:
-    PluginManager(KParts::Part* part);
+    static PluginManager* self();
     ~PluginManager();
+
+    void setPart(KParts::Part* part);
 
     bool activatePluginForUrl(const KURL& url);
 
     PluginBase* currentPlugin() const;
 
 private:
+    PluginManager();
+
     KParts::Part*            m_part;
     PluginBase*              m_currentPlugin;
     QPtrList<KParts::Plugin> m_pluginList;
+    static PluginManager*    m_self;
 };
 
 

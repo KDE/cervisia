@@ -14,16 +14,41 @@
 using Cervisia::PluginManager;
 
 #include <kdebug.h>
+#include <kstaticdeleter.h>
 #include <kxmlguifactory.h>
 
 #include "pluginbase.h"
 
 
-PluginManager::PluginManager(KParts::Part* part)
-    : m_part(part)
+PluginManager* PluginManager::m_self = 0;
+static KStaticDeleter<PluginManager> staticDeleter;
+
+PluginManager* PluginManager::self()
+{
+    if( !m_self )
+        staticDeleter.setObject(m_self, new PluginManager());
+
+    return m_self;
+}
+
+
+PluginManager::PluginManager()
+    : m_part(0)
     , m_currentPlugin(0)
 {
     kdDebug() << "PluginManager::PluginManager()" << endl;
+}
+
+
+PluginManager::~PluginManager()
+{
+    kdDebug() << "PluginManager::~PluginManager()" << endl;
+}
+
+
+void PluginManager::setPart(KParts::Part* part)
+{
+    m_part = part;
 
     // get the list of all KPart plugins
     m_pluginList = KParts::Plugin::pluginObjects(m_part);
@@ -37,11 +62,6 @@ PluginManager::PluginManager(KParts::Part* part)
             m_part->factory()->removeClient(plugin);
         }
     }
-}
-
-
-PluginManager::~PluginManager()
-{
 }
 
 
