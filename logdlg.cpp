@@ -371,10 +371,10 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
 
 void LogDialog::diffClicked()
 {
-    if (selectionA.isEmpty() || selectionB.isEmpty())
+    if (selectionA.isEmpty())
 	{
 	    KMessageBox::information(this,
-				     i18n("Please select revisions A and B first."),
+				     i18n("Please select revision A or revisions A and B first."),
 				     "Cervisia");
 	    return;
 	}
