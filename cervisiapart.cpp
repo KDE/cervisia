@@ -97,8 +97,18 @@ KAboutData *CervisiaFactory::aboutData()
 
 CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
                             QObject *parent, const char *name )
-    : KParts::ReadOnlyPart( parent, name ),
-      recent( 0 )
+    : KParts::ReadOnlyPart( parent, name )
+    , hasRunningJob( false )
+    , opt_hideFiles( false )
+    , opt_hideUpToDate( false )
+    , opt_hideRemoved( false )
+    , opt_hideNotInCVS( false )
+    , opt_createDirs( false )
+    , opt_pruneDirs( false )
+    , opt_updateRecursive( true )
+    , opt_commitRecursive( true )
+    , opt_doCVSEdit( false )
+    , recent( 0 )
 {
     hasRunningJob = false;
     setInstance( CervisiaFactory::instance() );

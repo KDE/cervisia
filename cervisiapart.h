@@ -148,7 +148,6 @@ private:
     ProtocolView *protocol;
     bool hasRunningJob;
     QSplitter *splitter;
-    QTimer *timer;
 
     // TODO: Find a new way to handle the status items as you can't do this with KParts yet
     //    QLabel *filterLabel;
