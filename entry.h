@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003-2004 André Wöbbeking <Woebbeking@web.de>
+ * Copyright (c) 2003-2005 André Wöbbeking <Woebbeking@web.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
