@@ -44,8 +44,10 @@ public:
     QString releaseTag() const;
     QString ignoreFiles() const;
     QString comment() const;
+    QString alias() const;
     bool importBinary() const;
     bool useModificationTime() const;
+    bool exportOnly() const;
 
 protected:
     virtual void slotOk();
@@ -53,6 +55,7 @@ protected:
 private slots:
     void dirButtonClicked();
     void moduleButtonClicked();
+    void branchTextChanged();
 
 private:
     void saveUserInput();
@@ -61,8 +64,8 @@ private:
     QComboBox *repo_combo, *module_combo;
     KLineEdit *module_edit, *workdir_edit;
     KLineEdit *branch_edit, *comment_edit;
-    KLineEdit *vendortag_edit, *releasetag_edit, *ignore_edit;
-    QCheckBox *binary_box;
+    KLineEdit *vendortag_edit, *releasetag_edit, *ignore_edit, *alias_edit;
+    QCheckBox *binary_box, *export_box;
     QCheckBox* m_useModificationTimeBox;
     ActionType act;
     KConfig&   partConfig;

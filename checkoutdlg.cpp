@@ -160,6 +160,20 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
                 i18n("Use file's modification time as time of import"), mainWidget);
         grid->addMultiCellWidget(m_useModificationTimeBox, 8, 8, 0, 1);
     }
+    else
+    {
+        alias_edit = new KLineEdit(mainWidget);
+        grid->addWidget(alias_edit, 4, 1);
+
+        QLabel* alias_label = new QLabel(alias_edit, i18n("Chec&k out as:"), mainWidget);
+        grid->addWidget(alias_label, 4, 0, AlignLeft | AlignVCenter);
+
+        export_box = new QCheckBox(i18n("Ex&port only"), mainWidget);
+        grid->addMultiCellWidget(export_box, 5, 5, 0, 1);
+
+        connect( branch_edit, SIGNAL( textChanged( const QString&)),
+                 this, SLOT( branchTextChanged() ));
+    }
 
     QStringList list1 = Repositories::readCvsPassFile();
     QStringList::ConstIterator it1;
@@ -225,6 +239,10 @@ QString CheckoutDialog::comment() const
     return comment_edit->text();
 }
 
+QString CheckoutDialog::alias() const
+{
+    return alias_edit->text();
+}
 
 bool CheckoutDialog::importBinary() const
 {
@@ -234,6 +252,14 @@ bool CheckoutDialog::importBinary() const
 bool CheckoutDialog::useModificationTime() const
 {
     return m_useModificationTimeBox->isChecked();
+}
+
+bool CheckoutDialog::exportOnly() const
+{
+    if( export_box->isEnabled() )
+        return export_box->isChecked();
+
+    return false;
 }
 
 void CheckoutDialog::slotOk()
@@ -263,6 +289,15 @@ void CheckoutDialog::slotOk()
             KMessageBox::information(this,
                                      i18n("Tags must start with a letter and may contain\n"
                                           "letters, digits and the characters '-' and '_'."));
+            return;
+        }
+    }
+    else
+    {
+        if( branch().isEmpty() && exportOnly() )
+        {
+            KMessageBox::information(this,
+                            i18n("A branch must be specified for export."));
             return;
         }
     }
@@ -329,6 +364,8 @@ void CheckoutDialog::restoreUserInput()
     {
         module_combo->setEditText(partConfig.readEntry("Module"));
         branch_edit->setText(partConfig.readEntry("Branch"));
+        alias_edit->setText(partConfig.readEntry("Alias"));
+        export_box->setChecked(partConfig.readBoolEntry("ExportOnly"));
     }
 }
 
@@ -351,6 +388,21 @@ void CheckoutDialog::saveUserInput()
     else
     {
         partConfig.writeEntry("Branch", branch());
+        partConfig.writeEntry("Alias", alias());
+        partConfig.writeEntry("ExportOnly", exportOnly());
+    }
+}
+
+void CheckoutDialog::branchTextChanged()
+{
+    if( branch().isEmpty() )
+    {
+        export_box->setEnabled(false);
+        export_box->setChecked(false);
+    }
+    else
+    {
+        export_box->setEnabled(true);
     }
 }
 

@@ -1,3 +1,15 @@
+2004-06-02  Christian Loose  <christian.loose@kdemail.net>
+
+	* Implemented wish #77894:
+	  Added support for a checkout of a module without 
+	  the CVS folder. (cvs export)
+	  Patch by Dermot Daly
+
+	* Implemented wish #80177:
+	  It's now possible to checkout a project under an
+	  alias name. (cvs checkout -d)
+	  Patch by Dermot Daly
+
 2004-05-29  Christian Loose  <christian.loose@kdemail.net>
 
 	* Implemented wish #63592:

@@ -187,7 +187,7 @@ DCOPRef CvsService::annotate(const QString& fileName, const QString& revision)
 
 
 DCOPRef CvsService::checkout(const QString& workingDir, const QString& repository,
-                             const QString& module, const QString& tag, bool pruneDirs)
+                             const QString& module, const QString& tag, bool pruneDirs, const QString& alias, bool exportOnly)
 {
     if( d->hasRunningJob() )
         return DCOPRef();
@@ -195,19 +195,25 @@ DCOPRef CvsService::checkout(const QString& workingDir, const QString& repositor
     Repository repo(repository);
 
     // assemble the command line
-    // cd [DIRECTORY] && cvs -d [REPOSITORY] checkout [-r tag] [-P] [MODULE]
+    // cd [DIRECTORY] && cvs -d [REPOSITORY] checkout [-r tag] [-P]  [-d alias] [MODULE]
     d->singleCvsJob->clearCvsCommand();
 
     *d->singleCvsJob << "cd" << KProcess::quote(workingDir) << "&&"
                      << repo.cvsClient()
-                     << "-d" << repository
-                     << "checkout";
+                     << "-d" << repository;
+    if( exportOnly)
+      *d->singleCvsJob << "export";
+    else
+      *d->singleCvsJob << "checkout";
 
     if( !tag.isEmpty() )
         *d->singleCvsJob << "-r" << tag;
 
     if( pruneDirs )
         *d->singleCvsJob << "-P";
+
+    if( !alias.isEmpty() )
+      *d->singleCvsJob << "-d" << alias;
 
     *d->singleCvsJob << module;
 

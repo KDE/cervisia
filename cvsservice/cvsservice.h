@@ -72,12 +72,15 @@ k_dcop:
      * @param module the name of the module
      * @param tag
      * @param pruneDirs remove empty directories from the working copy.
+     * @param alias alternative directory to check out to
+     * @param exportOnly flag to show we want a cvs export rather than a checkout
      *
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
     DCOPRef checkout(const QString& workingDir, const QString& repository,
-                     const QString& module, const QString& tag, bool pruneDirs);
+                     const QString& module, const QString& tag, bool pruneDirs, 
+                     const QString& alias, bool exportOnly);
 
     /**
      *
