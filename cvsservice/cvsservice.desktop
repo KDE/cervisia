@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Service
-Encoding: UTF-8
+Encoding=UTF-8
 Name=CvsService
 Name[bs]=CvsServis
 Name[ca]=Servei de CVS
