@@ -659,7 +659,7 @@ UpdateView::UpdateView(QWidget *parent, const char *name)
     setShowSortIndicator(true);
     setSelectionMode(Extended);
 
-    addColumn(i18n("File name"));
+    addColumn(i18n("File Name"));
     addColumn(i18n("Status"));
     addColumn(i18n("Revision"));
     addColumn(i18n("Tag/Date"));
