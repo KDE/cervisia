@@ -20,6 +20,8 @@
 
 #include "cvsservice.h"
 
+#include <memory>
+
 #include <qintdict.h>
 #include <qstring.h>
 
@@ -87,9 +89,10 @@ CvsService::CvsService()
     if( config->readBoolEntry("UseSshAgent", false) )
     {
         // use the existing or start a new ssh-agent
-        // TODO CL do we need the return value?
         SshAgent ssh;
-        bool res = ssh.querySshAgent();
+        // TODO CL do we need the return value?
+        //bool res = ssh.querySshAgent();
+        ssh.querySshAgent();
     }
 }
 
@@ -157,15 +160,17 @@ DCOPRef CvsService::annotate(const QString& fileName, const QString& revision)
 DCOPRef CvsService::checkout(const QString& workingDir, const QString& repository,
                              const QString& module, const QString& tag, bool pruneDirs)
 {
-    if( !d->hasWorkingCopy() || d->hasRunningJob() )
+    if( d->hasRunningJob() )
         return DCOPRef();
 
+    std::auto_ptr<Repository> repo(new Repository(repository));
+    
     // assemble the command line
     // cd [DIRECTORY] && cvs -d [REPOSITORY] checkout [-r tag] [-P] [MODULE]
     d->singleCvsJob->clearCvsCommand();
 
     *d->singleCvsJob << "cd" << workingDir << "&&"
-                     << d->repository->cvsClient()
+                     << repo->cvsClient()
                      << "-d" << repository
                      << "checkout";
 
@@ -319,15 +324,21 @@ DCOPRef CvsService::logout()
 
 DCOPRef CvsService::moduleList(const QString& repository)
 {
-    if( !d->hasWorkingCopy() )
-        return DCOPRef();
-
+    std::auto_ptr<Repository> repo(new Repository(repository));
+    
     // create a cvs job
-    CvsJob* job = d->createCvsJob();
+    ++(d->lastJobId);
+
+    CvsJob* job = new CvsJob(d->lastJobId);
+    d->cvsJobs.insert(d->lastJobId, job);
+
+    job->setRSH(repo->rsh());
+    job->setServer(repo->server());
+    job->setDirectory(repo->workingCopy());
 
     // assemble the command line
     // cvs -d [REPOSITORY] checkout -c
-    *job << d->repository->cvsClient() << "-d" << repository << "checkout -c";
+    *job << repo->cvsClient() << "-d" << repository << "checkout -c";
 
     // return a DCOP reference to the cvs job
     return DCOPRef(d->appId, job->objId());
