@@ -24,15 +24,15 @@
 #include <kmessagebox.h>
 
 #include "misc.h"
+#include "cvsservice_stub.h"
 
 
-TagDialog::TagDialog(ActionType action, const QString &sbox, const QString &repo,
+TagDialog::TagDialog(ActionType action, CvsService_stub* service,
                      QWidget *parent, const char *name)
     : KDialogBase(parent, name, true, QString::null,
                   Ok | Cancel | Help, Ok, true),
       act(action),
-      sandbox(sbox),
-      repository(repo),
+      cvsService(service),
       branchtag_button(0),
       forcetag_button(0)
 {
@@ -128,7 +128,7 @@ void TagDialog::slotOk()
 void TagDialog::tagButtonClicked()
 {
     tag_combo->clear();
-    tag_combo->insertStringList(::fetchTags(sandbox, repository, this));
+    tag_combo->insertStringList(::fetchTags(cvsService, this));
 }
 
 

@@ -24,14 +24,14 @@
 #include <klocale.h>
 
 #include "misc.h"
+#include "cvsservice_stub.h"
 
 
-MergeDialog::MergeDialog(const QString &sbox, const QString &repo,
+MergeDialog::MergeDialog(CvsService_stub* service,
                          QWidget *parent, const char *name)
     : KDialogBase(parent, name, true, i18n("CVS Merge"),
                   Ok | Cancel, Ok, true),
-      sandbox(sbox),
-      repository(repo)
+      cvsService(service)
 {
     int const iComboBoxMinWidth(30 * fontMetrics().width('0'));
     int const iWidgetIndent(style().pixelMetric(QStyle::PM_ExclusiveIndicatorWidth, 0) + 6);
@@ -121,7 +121,7 @@ QString MergeDialog::tag2() const
 
 void MergeDialog::tagButtonClicked()
 {
-    QStringList const listTags(::fetchTags(sandbox, repository, this));
+    QStringList const listTags(::fetchTags(cvsService, this));
     tag1_combo->clear();
     tag1_combo->insertStringList(listTags);
     tag2_combo->clear();
@@ -132,7 +132,7 @@ void MergeDialog::tagButtonClicked()
 void MergeDialog::branchButtonClicked()
 {
     branch_combo->clear();
-    branch_combo->insertStringList(::fetchBranches(sandbox, repository, this));
+    branch_combo->insertStringList(::fetchBranches(cvsService, this));
 }
 
 

@@ -22,6 +22,7 @@
 class QComboBox;
 class QPushButton;
 class QRadioButton;
+class CvsService_stub;
 
 
 class MergeDialog : public KDialogBase
@@ -29,7 +30,7 @@ class MergeDialog : public KDialogBase
     Q_OBJECT
 
 public:
-    MergeDialog( const QString &sbox, const QString &repo,
+    MergeDialog( CvsService_stub* service,
                  QWidget *parent=0, const char *name=0 );
 
     bool byBranch() const;
@@ -43,8 +44,7 @@ private slots:
     void branchButtonClicked();
     
 private:
-
-    QString sandbox, repository;
+    CvsService_stub* cvsService;
     
     QRadioButton *bybranch_button, *bytags_button;
     QComboBox *branch_combo, *tag1_combo, *tag2_combo;

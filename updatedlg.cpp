@@ -24,14 +24,14 @@
 #include <klocale.h>
 
 #include "misc.h"
+#include "cvsservice_stub.h"
 
 
-UpdateDialog::UpdateDialog(const QString &sbox, const QString &repo,
+UpdateDialog::UpdateDialog(CvsService_stub* service,
                            QWidget *parent, const char *name)
     : KDialogBase(parent, name, true, i18n("CVS Update"),
                   Ok | Cancel, Ok, true),
-      sandbox(sbox),
-      repository(repo)
+      cvsService(service)
 {
     int const iComboBoxMinWidth(40 * fontMetrics().width('0'));
     int const iWidgetIndent(style().pixelMetric(QStyle::PM_ExclusiveIndicatorWidth, 0) + 6);
@@ -117,14 +117,14 @@ QString UpdateDialog::date() const
 void UpdateDialog::tagButtonClicked()
 {
     tag_combo->clear();
-    tag_combo->insertStringList(::fetchTags(sandbox, repository, this));
+    tag_combo->insertStringList(::fetchTags(cvsService, this));
 }
 
 
 void UpdateDialog::branchButtonClicked()
 {
     branch_combo->clear();
-    branch_combo->insertStringList(::fetchBranches(sandbox, repository, this));
+    branch_combo->insertStringList(::fetchBranches(cvsService, this));
 }
 
 

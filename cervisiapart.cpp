@@ -750,7 +750,7 @@ void CervisiaPart::slotStatus()
 
 void CervisiaPart::slotUpdateToTag()
 {
-    UpdateDialog *l = new UpdateDialog(sandbox, repository, widget() );
+    UpdateDialog *l = new UpdateDialog(cvsService, widget() );
 
     if (l->exec())
     {
@@ -786,7 +786,7 @@ void CervisiaPart::slotRevert()
 
 void CervisiaPart::slotMerge()
 {
-    MergeDialog *l = new MergeDialog(sandbox, repository, widget() );
+    MergeDialog *l = new MergeDialog(cvsService, widget() );
 
     if (l->exec())
     {
@@ -1304,7 +1304,7 @@ void CervisiaPart::createOrDeleteTag(TagDialog::ActionType action)
     if (list.isEmpty())
         return;
 
-    TagDialog *l = new TagDialog(action, sandbox, repository, widget());
+    TagDialog *l = new TagDialog(action, cvsService, widget());
 
     if (l->exec())
     {

@@ -23,6 +23,7 @@ class QComboBox;
 class QPushButton;
 class QRadioButton;
 class KLineEdit;
+class CvsService_stub;
 
 
 class UpdateDialog : public KDialogBase
@@ -30,7 +31,7 @@ class UpdateDialog : public KDialogBase
     Q_OBJECT
 
 public:
-    UpdateDialog( const QString &sbox, const QString &repo,
+    UpdateDialog( CvsService_stub* service,
                   QWidget *parent=0, const char *name=0 );
 
     bool byTag() const;
@@ -43,8 +44,7 @@ private slots:
     void branchButtonClicked();
     
 private:
-
-    QString sandbox, repository;
+    CvsService_stub* cvsService;
     
     QRadioButton *bytag_button, *bybranch_button, *bydate_button;
     QComboBox *tag_combo, *branch_combo;

@@ -22,6 +22,7 @@
 class QCheckBox;
 class QComboBox;
 class QLineEdit;
+class CvsService_stub;
 
 
 class TagDialog : public KDialogBase
@@ -31,7 +32,7 @@ class TagDialog : public KDialogBase
 public:
     enum ActionType { Create, Delete };
     
-    TagDialog( ActionType action, const QString &sbox, const QString &repo,
+    TagDialog( ActionType action, CvsService_stub* service,
                QWidget *parent=0, const char *name=0 );
 
     bool branchTag() const;
@@ -46,7 +47,7 @@ private slots:
 
 private:
     ActionType act;
-    QString sandbox, repository;
+    CvsService_stub* cvsService;
     
     QCheckBox *branchtag_button;
     QCheckBox *forcetag_button;

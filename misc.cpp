@@ -28,13 +28,14 @@
 #include "config.h"
 #include "cervisiapart.h"
 #include "cvsprogressdlg.h"
+#include "cvsservice_stub.h"
+#include "progressdlg.h"
 
 
 namespace
 {
     QStringList const fetchBranchesAndTags(QString const& rsSearchedType,
-                                           QString const& rsSandbox,
-                                           QString const& rsRepository,
+                                           CvsService_stub* cvsService,
                                            QWidget*       pParentWidget);
 }
 
@@ -150,24 +151,20 @@ QString cvsClient( QString sRepository )
 }
 
 
-QStringList const fetchBranches(QString const& rsSandbox,
-                                QString const& rsRepository,
+QStringList const fetchBranches(CvsService_stub* cvsService,
                                 QWidget*       pParentWidget)
 {
     return fetchBranchesAndTags(QString::fromLatin1("branch"),
-                                rsSandbox,
-                                rsRepository,
+                                cvsService,
                                 pParentWidget);
 }
 
 
-QStringList const fetchTags(QString const& rsSandbox,
-                            QString const& rsRepository,
+QStringList const fetchTags(CvsService_stub* cvsService,
                             QWidget*       pParentWidget)
 {
     return fetchBranchesAndTags(QString::fromLatin1("revision"),
-                                rsSandbox,
-                                rsRepository,
+                                cvsService,
                                 pParentWidget);
 }
 
@@ -235,20 +232,21 @@ QTextCodec *detectCodec(const QString &fileName)
 namespace
 {
     QStringList const fetchBranchesAndTags(QString const& rsSearchedType,
-                                           QString const& rsSandbox,
-                                           QString const& rsRepository,
+                                           CvsService_stub* cvsService,
                                            QWidget*       pParentWidget)
     {
-        QString const sCmdLine(::cvsClient(rsRepository) + QString::fromLatin1(" status -v"));
-
-        CvsProgressDialog stProgressDialog("Status", pParentWidget);
-        stProgressDialog.setCaption(i18n("CVS Status"));
-
         QStringList listBranchesOrTags;
-        if (stProgressDialog.execCommand(rsSandbox, rsRepository, sCmdLine, QString::null))
+        
+        DCOPRef job = cvsService->status(QString::null, true, true);
+        if( !cvsService->ok() )
+            return listBranchesOrTags;
+        
+        ProgressDialog dlg(pParentWidget, "Status", job, QString::null, i18n("CVS Status"));
+
+        if (dlg.execute())
         {
             QString sLine;
-            while (stProgressDialog.getOneLine(&sLine))
+            while (dlg.getLine(sLine))
             {
                 int pos1, pos2, pos3;
                 if (sLine.isEmpty() || sLine[0] != '\t')

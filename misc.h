@@ -21,6 +21,7 @@ class QString;
 class QStringList;
 class QTextCodec;
 class QWidget;
+class CvsService_stub;
 
 
 void chomp(QCString *line);
@@ -35,11 +36,9 @@ QTextCodec *detectCodec(const QString &fileName);
 
 bool isValidTag(const QString &str);
 QString cvsClient(QString sRepository);
-QStringList const fetchBranches(QString const& rsSandbox,
-                                QString const& rsRepository,
+QStringList const fetchBranches(CvsService_stub* cvsService,
                                 QWidget*       pParentWidget);
-QStringList const fetchTags(QString const& rsSandbox,
-                            QString const& rsRepository,
+QStringList const fetchTags(CvsService_stub* cvsService,
                             QWidget*       pParentWidget);
 
 
