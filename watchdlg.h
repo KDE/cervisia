@@ -15,29 +15,25 @@
 #ifndef WATCHDLG_H
 #define WATCHDLG_H
 
-#include <qdialog.h>
 
-class QButtonGroup;
+#include <kdialogbase.h>
+
+
 class QRadioButton;
 class QCheckBox;
 
 
-class WatchDialog : public QDialog
+class WatchDialog : public KDialogBase
 {
-    Q_OBJECT
-
 public:
     enum ActionType { Add, Remove };
     enum Events { None=0, All=1, Commits=2, Edits=4, Unedits=8 };
-    
-    WatchDialog( ActionType action, QWidget *parent=0, const char *name=0 );
-    Events events();
 
-private slots:
-    void helpClicked();
+    explicit WatchDialog( ActionType action, QWidget *parent=0, const char *name=0 );
+
+    Events events() const;
 
 private:
-    QButtonGroup *group;
     QRadioButton *all_button, *only_button;
     QCheckBox *commitbox, *editbox, *uneditbox;
 };

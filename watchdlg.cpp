@@ -18,88 +18,66 @@
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qpushbutton.h>
 #include <qradiobutton.h>
-#include <kapplication.h>
-#include <kbuttonbox.h>
 #include <klocale.h>
-
-#include "misc.h"
 
 
 WatchDialog::WatchDialog(ActionType action, QWidget *parent, const char *name)
-    : QDialog(parent, name, true)
+    : KDialogBase(parent, name, true, QString::null,
+                  Ok | Cancel | Help, Ok, true)
 {
     setCaption( (action==Add)? i18n("CVS Watch Add") : i18n("CVS Watch Remove") );
 
-    QBoxLayout *layout = new QVBoxLayout(this, 10);
-    
+    QFrame* mainWidget = makeMainWidget();
+
+    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
+
     QLabel *textlabel = new QLabel
 	( (action==Add)? i18n("Add watches for the following events:")
-          :  i18n("Remove watches for the following events:"), this );
+          :  i18n("Remove watches for the following events:"), mainWidget );
     layout->addWidget(textlabel, 0);
 
-    all_button = new QRadioButton(i18n("&All"), this);
+    all_button = new QRadioButton(i18n("&All"), mainWidget);
     all_button->setFocus();
     all_button->setChecked(true);
     layout->addWidget(all_button);
     
-    only_button = new QRadioButton(i18n("&Only:"), this);
+    only_button = new QRadioButton(i18n("&Only:"), mainWidget);
     layout->addWidget(only_button);
 
-    QGridLayout *eventslayout = new QGridLayout(3, 2);
-    layout->addLayout(eventslayout);
+    QGridLayout *eventslayout = new QGridLayout(layout);
     eventslayout->addColSpacing(0, 20);
     eventslayout->setColStretch(0, 0);
     eventslayout->setColStretch(1, 1);
     
-    commitbox = new QCheckBox(i18n("&Commits"), this);
+    commitbox = new QCheckBox(i18n("&Commits"), mainWidget);
     commitbox->setEnabled(false);
-    eventslayout->addWidget(commitbox, 0, 1, AlignLeft);
+    eventslayout->addWidget(commitbox, 0, 1);
     
-    editbox = new QCheckBox(i18n("&Edits"), this);
+    editbox = new QCheckBox(i18n("&Edits"), mainWidget);
     editbox->setEnabled(false);
-    eventslayout->addWidget(editbox, 1, 1, AlignLeft);
+    eventslayout->addWidget(editbox, 1, 1);
 
-    uneditbox = new QCheckBox(i18n("&Unedits"), this);
+    uneditbox = new QCheckBox(i18n("&Unedits"), mainWidget);
     uneditbox->setEnabled(false);
-    eventslayout->addWidget(uneditbox, 2, 1, AlignLeft);
+    eventslayout->addWidget(uneditbox, 2, 1);
 
-    group = new QButtonGroup();
+    QButtonGroup* group = new QButtonGroup;
     group->insert(all_button);
     group->insert(only_button);
+
     connect( only_button, SIGNAL(toggled(bool)),
              commitbox, SLOT(setEnabled(bool)) );
     connect( only_button, SIGNAL(toggled(bool)),
              editbox, SLOT(setEnabled(bool)) );
     connect( only_button, SIGNAL(toggled(bool)),
              uneditbox, SLOT(setEnabled(bool)) );
-    
-    QFrame *frame = new QFrame(this);
-    frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-    layout->addWidget(frame, 0);
 
-    KButtonBox *buttonbox = new KButtonBox(this);
-    QPushButton *helpbutton = buttonbox->addButton(i18n("&Help"));
-    helpbutton->setAutoDefault(false);
-    buttonbox->addStretch();
-    QPushButton *okbutton = buttonbox->addButton(i18n("OK"));
-    QPushButton *cancelbutton = buttonbox->addButton(i18n("Cancel"));
-    okbutton->setDefault(true);
-
-    connect( helpbutton, SIGNAL(clicked()), SLOT(helpClicked()) );
-    connect( okbutton, SIGNAL(clicked()), SLOT(accept()) );
-    connect( cancelbutton, SIGNAL(clicked()), SLOT(reject()) );
-
-    buttonbox->layout();
-    layout->addWidget(buttonbox, 0);
-
-    layout->activate();
-    resize(sizeHint());
+    setHelp("watches");
 }
 
 
-WatchDialog::Events WatchDialog::events()
+WatchDialog::Events WatchDialog::events() const
 {
     Events res = None;
     if (all_button->isChecked())
@@ -115,14 +93,6 @@ WatchDialog::Events WatchDialog::events()
         }
     return res;
 }
-
-
-void WatchDialog::helpClicked()
-{
-    kapp->invokeHelp("watches", "cervisia");
-}
-
-#include "watchdlg.moc"
 
 
 // Local Variables:
