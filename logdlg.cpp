@@ -186,16 +186,8 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     connect( this, SIGNAL(user3Clicked()),
              this, SLOT(findClicked()) );
 
-#if KDE_IS_VERSION(3,2,90)
-    setButtonGuiItem(Ok, KGuiItem(i18n("to view something", "&View"),"fileopen","",""));
-#else
-    if( KGlobalSettings::showIconsOnPushButtons() )
-      actionButton(Ok)->setIconSet(SmallIcon(QString::fromLatin1("fileopen")));
-    setButtonText(Ok, i18n("to view something", "&View"));
-    setButtonTip(Ok, QString::null);
-    setButtonWhatsThis(Ok, QString::null);
-#endif
-    setButtonGuiItem(Apply, KGuiItem(i18n("Create Patch..."), "", "", ""));
+    setButtonGuiItem(Ok, KGuiItem(i18n("to view something", "&View"),"fileopen"));
+    setButtonGuiItem(Apply, KGuiItem(i18n("Create Patch...")));
     setHelp("browsinglogs");
 
     setWFlags(Qt::WDestructiveClose | getWFlags());

@@ -107,13 +107,8 @@ bool SshAgent::addSshIdentities()
     proc.start(KProcess::DontCare, KProcess::AllOutput);
 
     // wait for process to finish
-#if KDE_IS_VERSION(3,1,90)
     // TODO CL use timeout?
     proc.wait();
-#else
-    while( proc.isRunning() )
-        kapp->processEvents();
-#endif
 
     kdDebug(8051) << "SshAgent::slotProcessExited(): added identities" << endl;
 
@@ -232,13 +227,8 @@ bool SshAgent::startSshAgent()
     proc.start(KProcess::NotifyOnExit, KProcess::All);
 
     // wait for process to finish
-#if KDE_IS_VERSION(3,1,90)
     // TODO CL use timeout?
     proc.wait();
-#else
-    while( proc.isRunning() )
-        kapp->processEvents();
-#endif
 
     return (proc.normalExit() && proc.exitStatus() == 0);
 }

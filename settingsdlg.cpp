@@ -161,11 +161,7 @@ void SettingsDialog::writeSettings()
 {
     // write entries to cvs DCOP service configuration
     serviceConfig->setGroup("General");
-#if KDE_IS_VERSION(3,1,3)
     serviceConfig->writePathEntry("CVSPath", cvspathedit->url());
-#else
-    serviceConfig->writeEntry("CVSPath", cvspathedit->url());
-#endif
     serviceConfig->writeEntry("Compression",
         m_advancedPage->kcfg_Compression->value());
     serviceConfig->writeEntry("UseSshAgent", 
@@ -178,11 +174,7 @@ void SettingsDialog::writeSettings()
     CervisiaSettings::setTimeout(m_advancedPage->kcfg_Timeout->value());
     config->writeEntry("Username", usernameedit->text());
 
-#if KDE_IS_VERSION(3,1,3)
     config->writePathEntry("ExternalDiff", extdiffedit->url());
-#else
-    config->writeEntry("ExternalDiff", extdiffedit->url());
-#endif
 
     config->writeEntry("ContextLines", (unsigned)contextedit->value());
     config->writeEntry("TabWidth", tabwidthedit->value());
