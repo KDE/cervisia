@@ -52,6 +52,8 @@ public:
      */
     QString location() const;
 
+    QString rsh() const;
+
 private:
     struct Private;
     Private* d;

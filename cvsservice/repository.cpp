@@ -114,3 +114,9 @@ QString Repository::location() const
 {
     return d->location;
 }
+
+    
+QString Repository::rsh() const
+{
+    return d->rsh;
+}
