@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,11 +12,13 @@
  */
 
 
-#include <qpushbutton.h>
+#include "tagdlg.h"
+
 #include <qcheckbox.h>
 #include <qcombobox.h>
-#include <qlayout.h>
 #include <qlabel.h>
+#include <qlayout.h>
+#include <qpushbutton.h>
 #include <kapplication.h>
 #include <kbuttonbox.h>
 #include <klineedit.h>
@@ -25,9 +27,6 @@
 
 #include "cvsprogressdlg.h"
 #include "misc.h"
-
-#include "tagdlg.h"
-#include "tagdlg.moc"
 
 
 TagDialog::TagDialog(ActionType action, const QString &sbox, const QString &repo,
@@ -167,9 +166,9 @@ void TagDialog::tagButtonClicked()
         tag_combo->insertItem(*it);
 }
 
+#include "tagdlg.moc"
+
 
 // Local Variables:
 // c-basic-offset: 4
 // End:
-
-    

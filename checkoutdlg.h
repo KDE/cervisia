@@ -12,13 +12,15 @@
  */
 
 
-#ifndef _CHECKOUTDLG_H_
-#define _CHECKOUTDLG_H_
+#ifndef CHECKOUTDLG_H
+#define CHECKOUTDLG_H
 
 #include <qdialog.h>
 #include <qcombobox.h>
 #include <qcheckbox.h>
 #include <klineedit.h>
+
+class KConfig;
 
 
 class CheckoutDialog : public QDialog

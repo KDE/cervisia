@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,6 +12,8 @@
  */
 
 
+#include "annotatedlg.h"
+
 #include <qpushbutton.h>
 #include <qfileinfo.h>
 #include <qframe.h>
@@ -19,15 +21,13 @@
 #include <kapplication.h>
 #include <kbuttonbox.h>
 #include <kconfig.h>
+#include <kdebug.h>
 #include <klocale.h>
 #include <kprocess.h>
 
 #include "annotateview.h"
 #include "cvsprogressdlg.h"
 #include "misc.h"
-
-#include "annotatedlg.h"
-#include "annotatedlg.moc"
 
 
 AnnotateDialog::Options *AnnotateDialog::options = 0;
@@ -104,9 +104,10 @@ bool AnnotateDialog::parseCvsAnnotate(const QString &sandbox, const QString &rep
     enum { Begin, Tags, Admin, Revision,
 	   Author, Branches, Comment, Finished } state;
 
-    setCaption(i18n("CVS Annotate: ") + filename);
+    setCaption(i18n("CVS Annotate: %1").arg(filename));
 
-    QString cmdline = cvsClient(repository);
+    QString cmdline = "( ";
+    cmdline += cvsClient(repository);
     cmdline += " log ";
     cmdline += KShellProcess::quote(filename);
     cmdline += " && ";
@@ -122,7 +123,7 @@ bool AnnotateDialog::parseCvsAnnotate(const QString &sandbox, const QString &rep
     cmdline += KShellProcess::quote(filename);
     // Hack because the string ´Annotations for blabla´ is
     // printed to stderr even with option -Q. Arg!
-    cmdline += " 2>&1";
+    cmdline += " ) 2>&1";
 
     CvsProgressDialog l("Annotate", this);
     l.setCaption(i18n("CVS Annotate"));
@@ -216,6 +217,8 @@ bool AnnotateDialog::parseCvsAnnotate(const QString &sandbox, const QString &rep
 
     return true; // successful
 }
+
+#include "annotatedlg.moc"
 
 
 // Local Variables:

@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,8 +12,8 @@
  */
 
 
-#ifndef _TIPLABEL_H_
-#define _TIPLABEL_H_
+#ifndef TIPLABEL_H
+#define TIPLABEL_H
 
 #include <qlabel.h>
 
@@ -35,3 +35,8 @@ private:
 };
 
 #endif
+
+
+// Local Variables:
+// c-basic-offset: 4
+// End:

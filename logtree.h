@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,33 +12,24 @@
  */
 
 
-#ifndef _LOGTREE_H_
-#define _LOGTREE_H_
+#ifndef LOGTREE_H
+#define LOGTREE_H
 
 #include <qobject.h>
-#if QT_VERSION < 300
-#include <qlist.h>
-#include <qtableview.h>
-#else
 #include <qarray.h>
 #include <qptrlist.h>
-#include <qttableview.h>
-#endif
+
+#include "qttableview.h"
 
 class LogTreeItem;
 class LogTreeConnection;
 class TipLabel;
 
-#if QT_VERSION < 300
-typedef QList<LogTreeItem> LogTreeItemList;
-typedef QList<LogTreeConnection> LogTreeConnectionList;
-#else
-typedef QtTableView QTableView; // XXX: Fix this!
 typedef QPtrList<LogTreeItem> LogTreeItemList;
 typedef QPtrList<LogTreeConnection> LogTreeConnectionList;
-#endif
 
-class LogTreeView : public QTableView
+
+class LogTreeView : public QtTableView
 {
     Q_OBJECT
 
@@ -58,8 +49,8 @@ signals:
     void revisionClicked(QString rev, bool rmb);
 
 protected:
-    virtual void windowActivationChange( bool oldActive );
-    virtual bool eventFilter(QObject * o, QEvent *e);
+    virtual void windowActivationChange(bool oldActive);
+    virtual bool eventFilter(QObject *o, QEvent *e);
     virtual void mousePressEvent(QMouseEvent *e);
     virtual void setupPainter(QPainter *p);
     virtual void paintCell(QPainter *p, int row, int col);
@@ -78,6 +69,9 @@ private:
     TipLabel *currentLabel;
     QArray<int> colWidths;
     QArray<int> rowHeights;
+
+    static const int BORDER;
+    static const int INSPACE;
 };
 
 #endif

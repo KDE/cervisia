@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -11,7 +11,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-#include "config.h"
+
+#include "updateview.h"
+
+#include <sys/stat.h>
+#include <unistd.h>
+#include <locale.h>
+#include <time.h>
 #include <qstrlist.h>
 #include <qdir.h>
 #include <qfileinfo.h>
@@ -23,16 +29,10 @@
 #include <kglobalsettings.h>
 #include <kiconloader.h>
 #include <klocale.h>
+
+#include "config.h"
 #include "misc.h"
 #include "cvsdir.h"
-
-#include <sys/stat.h>
-#include <unistd.h>
-#include <locale.h>
-#include <time.h>
-
-#include "updateview.h"
-#include "updateview.moc"
 
 
 class UpdateDirItem : public ListViewItem
@@ -1156,6 +1156,9 @@ void UpdateView::itemExecuted(QListViewItem *item)
     if (!isDirItem(item))
         emit fileOpened(static_cast<UpdateViewItem*>(item)->filePath());
 }
+
+#include "updateview.moc"
+
 
 // Local Variables:
 // c-basic-offset: 4

@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -11,6 +11,8 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
+
+#include "repositorydlg.h"
 
 #include <stdlib.h>
 #include <qdir.h>
@@ -25,10 +27,6 @@
 
 #include "repositories.h"
 #include "listview.h"
-
-#include "repositorydlg.h"
-#include "repositorydlg.moc"
-
 #include "repositorysettingsdlg.h"
 
 
@@ -410,6 +408,8 @@ void AddRepositoryDialog::repoChanged()
                          && repo.contains(":"));
     ok->setEnabled(!repo.isEmpty());
 }
+
+#include "repositorydlg.moc"
 
 
 // Local Variables:

@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,9 +12,10 @@
  */
 
 
+#include "protocolview.h"
+
 #include <qdir.h>
 #include <qpopupmenu.h>
-
 #include <kapplication.h>
 #include <kconfig.h>
 #include <kglobal.h>
@@ -26,9 +27,6 @@
 #include "repositories.h"
 #include "misc.h"
 #include "cervisiapart.h"
-
-#include "protocolview.h"
-#include "protocolview.moc"
 
 
 ProtocolView::ProtocolView(QWidget *parent, const char *name)
@@ -198,6 +196,9 @@ void ProtocolView::keyPressEvent(QKeyEvent *e)
     else
         QTextEdit::keyPressEvent(e);
 }
+
+#include "protocolview.moc"
+
 
 // Local Variables:
 // c-basic-offset: 4

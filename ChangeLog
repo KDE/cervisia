@@ -1,3 +1,17 @@
+2002-06-25  Bernd Gehrmann  <bernd@mail.berlios.de>
+
+	* Fixed char buffer to QString conversion in
+	  CvsProgressDialog, resulting in random garbage
+	  inserted in the annotate view. Also a bug
+	  introduced in 2002-06-11
+	* Change annotate view to QListView. Based
+	  on a patch by  André Wöbbeking <Woebbeking@web.de>
+	* Hide custom tooltips in list views when contents
+	  are scrolled
+	* Simplified history dialog filtering by
+	  using QListViewItem::setVisible()
+	* #include cleanup
+
 2002-06-22  Bernd Gehrmann  <bernd@mail.berlios.de>
 
 	* Fixed diff dialog bug due to changes from 2002-06-11

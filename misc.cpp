@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -11,7 +11,6 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-#include "config.h"
 #include <ctype.h>
 #include <pwd.h>
 #include <sys/types.h>
@@ -23,6 +22,8 @@
 #include <kconfig.h>
 #include <kprocess.h>
 #include <ktempfile.h>
+
+#include "config.h"
 #include "cervisiapart.h"
 #include "misc.h"
 

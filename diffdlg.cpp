@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -10,6 +10,8 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
+
+#include "diffdlg.h"
 
 #include <qpushbutton.h>
 #include <qcheckbox.h>
@@ -25,12 +27,11 @@
 #include <klocale.h>
 #include <ktempfile.h>
 #include <kprocess.h>
+
 #include "misc.h"
 #include "cervisiapart.h"
 #include "cvsprogressdlg.h"
 #include "diffview.h"
-#include "diffdlg.h"
-#include "diffdlg.moc"
 
 
 DiffDialog::Options *DiffDialog::options = 0;
@@ -263,7 +264,7 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
     int linenoA, linenoB;
     enum { Normal, VersionA, VersionB } state;
 
-    setCaption(i18n("CVS Diff: ") + filename);
+    setCaption(i18n("CVS Diff: %1").arg(filename));
     revlabel1->setText( revA.isEmpty()?
                         QString(i18n("Repository"))
                         : i18n("Revision ")+revA );
@@ -553,6 +554,8 @@ void DiffDialog::forwClicked()
         newitem = markeditem+1;
     updateHighlight(newitem);
 }
+
+#include "diffdlg.moc"
 
 // Local Variables:
 // c-basic-offset: 4

@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,6 +12,8 @@
  */
 
 
+#include "repositories.h"
+
 #include <stdlib.h>
 #include <qfile.h>
 #include <qdir.h>
@@ -20,7 +22,6 @@
 #include <kconfig.h>
 
 #include "cervisiapart.h"
-#include "repositories.h"
 
 
 void Repositories::readCvsPassFile(QStrList *list)
@@ -49,7 +50,7 @@ void Repositories::readConfigFile(QStrList *list)
 
     // Some people actually use CVSROOT, so we add it here
     char *env;
-    if ( (env = getenv("CVSROOT")) != 0 && !list->contains(env))
+    if ( (env = ::getenv("CVSROOT")) != 0 && !list->contains(env))
         list->append(env);
 }
 

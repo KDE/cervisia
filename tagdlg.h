@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,14 +12,13 @@
  */
 
 
-#ifndef _TAGDLG_H_
-#define _TAGDLG_H_
+#ifndef TAGDLG_H
+#define TAGDLG_H
 
+#include <qcheckbox.h>
+#include <qcombobox.h>
 #include <qdialog.h>
-
-class QCheckBox;
-class QComboBox;
-class KLineEdit;
+#include <klineedit.h>
 
 
 class TagDialog : public QDialog

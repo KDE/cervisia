@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,14 +12,16 @@
  */
 
 
-#ifndef _DIFFDLG_H_
-#define _DIFFDLG_H_
+#ifndef DIFFDLG_H
+#define DIFFDLG_H
 
 #include <qdialog.h>
+#include <qptrlist.h>
 
 class QLabel;
 class QCheckBox;
 class QComboBox;
+class KConfig;
 class DiffItem;
 class DiffView;
 
@@ -33,7 +35,6 @@ public:
 
     bool parseCvsDiff(const QString &sandbox, const QString &repository,
                       const QString &filename, const QString &revA, const QString &revB);
-    //    void updateViews();
 
     static void loadOptions(KConfig *config);
     static void saveOptions(KConfig *config);
@@ -66,7 +67,7 @@ private:
     QPushButton *backbutton, *forwbutton;
     DiffView *diff1, *diff2;
 
-    QList<DiffItem> items;
+    QPtrList<DiffItem> items;
     int markeditem;
 };
 

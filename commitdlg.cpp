@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -11,6 +11,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
+#include "commitdlg.h"
 
 #include <qlayout.h>
 #include <qpushbutton.h>
@@ -23,9 +24,6 @@
 #include <kdebug.h>
 #include "diffdlg.h"
 #include "misc.h"
-
-#include "commitdlg.h"
-#include "commitdlg.moc"
 
 
 CommitDialog::Options *CommitDialog::options = 0;
@@ -140,8 +138,6 @@ void CommitDialog::saveOptions(KConfig *config)
 void CommitDialog::setLogHistory(const QString &sbox, const QString &repo,
                                  const QStringList &list)
 {
-    kdDebug() << "CommitDialog::setLogHistory, list = " << list.join( "|" ) << endl;
-
     sandbox = sbox;
     repository = repo;
     commits = list;
@@ -199,6 +195,8 @@ void CommitDialog::fileSelected(int index)
     else
         delete l;
 }
+
+#include "commitdlg.moc"
 
 
 // Local Variables:

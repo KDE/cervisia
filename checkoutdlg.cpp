@@ -12,6 +12,8 @@
  */
 
 
+#include "checkoutdlg.h"
+
 #include <qlayout.h>
 #include <qpushbutton.h>
 #include <qlabel.h>
@@ -30,9 +32,6 @@
 #include "cvsprogressdlg.h"
 #include "repositories.h"
 #include "misc.h"
-
-#include "checkoutdlg.h"
-#include "checkoutdlg.moc"
 
 
 CheckoutDialog::Options *CheckoutDialog::options = 0;
@@ -349,6 +348,8 @@ void CheckoutDialog::moduleButtonClicked()
                 module_combo->insertItem(module);
         }
 }
+
+#include "checkoutdlg.moc"
 
 // Local Variables:
 // c-basic-offset: 4

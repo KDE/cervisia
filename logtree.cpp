@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -11,6 +11,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
+#include "logtree.h"
 
 #include <qtooltip.h>
 #include <qpainter.h>
@@ -18,16 +19,13 @@
 #include "tiplabel.h"
 #include "misc.h"
 
-#include "logtree.h"
-#include "logtree.moc"
 
-
-static const int BORDER = 8;
-static const int INSPACE = 3;
+const int LogTreeView::BORDER = 8;
+const int LogTreeView::INSPACE = 3;
 
 static bool static_initialized = false;
-static int  static_width;
-static int  static_height;
+static int static_width;
+static int static_height;
 
 
 class LogTreeItem
@@ -56,7 +54,7 @@ public:
 
 
 LogTreeView::LogTreeView(QWidget *parent, const char *name)
-    : QTableView(parent, name)
+    : QtTableView(parent, name)
 {
     if (!static_initialized)
 	{
@@ -91,7 +89,14 @@ LogTreeView::LogTreeView(QWidget *parent, const char *name)
 
 LogTreeView::~LogTreeView()
 {
-    qApp->installEventFilter(this);
+    delete currentLabel;
+}
+
+
+void LogTreeView::hideLabel()
+{
+    delete currentLabel;
+    currentLabel = 0;
 }
 
 
@@ -428,30 +433,22 @@ void LogTreeView::mousePressEvent(QMouseEvent *e)
 	}
 }
 
-void LogTreeView::hideLabel()
-{
-    if (currentLabel)
-        currentLabel->hide();
-    delete currentLabel;
-    currentLabel = 0;
-}
 
 void LogTreeView::windowActivationChange( bool )
 {
     hideLabel();
 }
 
+
 bool LogTreeView::eventFilter(QObject *o, QEvent *e)
 {
     if (o != this || e->type() != QEvent::MouseMove || !isActiveWindow())
-        return QTableView::eventFilter(o, e);
+        return QtTableView::eventFilter(o, e);
 
     int row = findRow(static_cast<QMouseEvent*>(e)->y());
     int col = findCol(static_cast<QMouseEvent*>(e)->x());
     if (row != currentRow || col != currentCol)
-        {
-            hideLabel();
-        }
+        hideLabel();
 
     LogTreeItem *item = 0;
 
@@ -465,8 +462,7 @@ bool LogTreeView::eventFilter(QObject *o, QEvent *e)
 
     if (!currentLabel && item)
         {
-            if (true)
-            //            if (!item->author.isNull())
+            if (!item->author.isNull())
                 {
                     QString text = "<qt><b>";
                     text += item->rev;
@@ -504,7 +500,7 @@ bool LogTreeView::eventFilter(QObject *o, QEvent *e)
                 }
         }
 
-    return QTableView::eventFilter(o, e);
+    return QtTableView::eventFilter(o, e);
 }
 
 
@@ -564,6 +560,8 @@ int LogTreeView::cellHeight(int row)
 
     return rowHeights[row];
 }
+
+#include "logtree.moc"
 
 
 // Local Variables:

@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,8 +12,8 @@
  */
 
 
-#ifndef _UPDATEDLG_H_
-#define _UPDATEDLG_H_
+#ifndef UPDATEDLG_H
+#define UPDATEDLG_H
 
 #include <qcombobox.h>
 #include <qdialog.h>

@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,9 +12,10 @@
  */
 
 
-#ifndef _UPDATEVIEW_H_
-#define _UPDATEVIEW_H_
+#ifndef UPDATEVIEW_H
+#define UPDATEVIEW_H
 
+#include <qlist.h>
 #include "listview.h"
 
 
@@ -57,7 +58,6 @@ signals:
     void fileOpened(QString filename);
     
 public slots:
-//    void deselectAll();
     void unfoldTree();
     void foldTree();
     void finishJob(bool success);

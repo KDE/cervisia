@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,15 +12,17 @@
  */
 
 
-#ifndef _REPOSITORYDLG_H_
-#define _REPOSITORYDLG_H_
+#ifndef REPOSITORYDLG_H
+#define REPOSITORYDLG_H
 
 #include <qdialog.h>
 #include <kconfig.h>
 #include <klineedit.h>
 
-class ListView;
 class QPushButton;
+class QListViewItem;
+class ListView;
+
 
 class RepositoryDialog : public QDialog
 {
@@ -47,6 +49,7 @@ private slots:
     void slotLogoutClicked();
     void slotSelectionChanged();
     void slotDoubleClicked(QListViewItem *);
+
 private:
     struct Options {
         QSize size;

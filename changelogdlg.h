@@ -12,10 +12,13 @@
  */
 
 
-#ifndef _CHANGELOGDLG_H_
-#define _CHANGELOGDLG_H_
+#ifndef CHANGELOGDLG_H
+#define CHANGELOGDLG_H
 
 #include <qdialog.h>
+
+class QMultiLineEdit;
+class KConfig;
 
 
 class ChangeLogDialog : public QDialog
@@ -25,7 +28,7 @@ class ChangeLogDialog : public QDialog
 public:
     ChangeLogDialog( QWidget *parent=0, const char *name=0 );
 
-    bool readFile(const QString &filename);
+    bool readFile(const QString &fileName);
     QString message();
 
     static void loadOptions(KConfig *config);

@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,8 +12,8 @@
  */
 
 
-#ifndef _CVSDIR_H_
-#define _CVSDIR_H_
+#ifndef CVSDIR_H
+#define CVSDIR_H
 
 #include <qdir.h>
 

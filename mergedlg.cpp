@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,19 +12,18 @@
  */
 
 
-#include <qpushbutton.h>
+#include "mergedlg.h"
+
 #include <qbuttongroup.h>
 #include <qlabel.h>
 #include <qlayout.h>
+#include <qpushbutton.h>
 #include <kapplication.h>
 #include <kbuttonbox.h>
 #include <klocale.h>
 
 #include "cvsprogressdlg.h"
 #include "misc.h"
-
-#include "mergedlg.h"
-#include "mergedlg.moc"
 
 
 MergeDialog::MergeDialog(const QString &sbox, const QString &repo,
@@ -194,8 +193,9 @@ void MergeDialog::toggled()
         tag1_combo->setFocus();
 }
 
+#include "mergedlg.moc"
+
+
 // Local Variables:
 // c-basic-offset: 4
 // End:
-
-    

@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,34 +12,24 @@
  */
 
 
-#ifndef _DIFFVIEW_H_
-#define _DIFFVIEW_H_
+#ifndef DIFFVIEW_H
+#define DIFFVIEW_H
 
 #include <qobject.h>
-#if QT_VERSION < 300
-#include <qlist.h>
-#include <qtableview.h>
-#else
 #include <qptrlist.h>
 #include <qttableview.h>
-#endif
 
 class DiffViewItem;
-#if QT_VERSION < 300
-typedef QList<DiffViewItem> DiffViewItemListBase;
-#else
-typedef QPtrList<DiffViewItem> DiffViewItemListBase;
-typedef QtTableView QTableView; // XXX: This is a hack
-#endif
 
-class DiffViewItemList : public DiffViewItemListBase
+
+class DiffViewItemList : public QPtrList<DiffViewItem>
 {
 protected:
     virtual int compareItems(QCollection::Item item1, QCollection::Item item2);
 };
 
 
-class DiffView : public QTableView
+class DiffView : public QtTableView
 {
     Q_OBJECT
     
@@ -90,7 +80,7 @@ private:
     bool marker;
     int textwidth;
     DiffView *partner;
-    
+    static const int BORDER;
 };
 
 
@@ -112,8 +102,6 @@ protected:
 private:
     DiffView *diffview;
 };
-
-
 
 #endif
 

@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,19 +12,19 @@
  */
 
 
-#include <qlayout.h>
+#include "watchdlg.h"
+
+#include <qbuttongroup.h>
+#include <qcheckbox.h>
 #include <qlabel.h>
+#include <qlayout.h>
+#include <qpushbutton.h>
+#include <qradiobutton.h>
 #include <kapplication.h>
 #include <kbuttonbox.h>
-#include <qpushbutton.h>
-#include <qbuttongroup.h>
-#include <qradiobutton.h>
-#include <qcheckbox.h>
 #include <klocale.h>
-#include "misc.h"
 
-#include "watchdlg.h"
-#include "watchdlg.moc"
+#include "misc.h"
 
 
 WatchDialog::WatchDialog(ActionType action, QWidget *parent, const char *name)
@@ -118,9 +118,9 @@ WatchDialog::Events WatchDialog::events()
     return res;
 }
 
+#include "watchdlg.moc"
+
 
 // Local Variables:
 // c-basic-offset: 4
 // End:
-
-    

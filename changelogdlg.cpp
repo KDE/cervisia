@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -11,6 +11,8 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
+
+#include "changelogdlg.h"
 
 #include <qfile.h>
 #include <qfileinfo.h>
@@ -27,9 +29,6 @@
 
 #include "misc.h"
 #include "cervisiapart.h"
-
-#include "changelogdlg.h"
-#include "changelogdlg.moc"
 
 
 static QString timeStringISO8601()
@@ -188,8 +187,7 @@ QString ChangeLogDialog::message()
     // Skip empty lines
     while (no < edit->numLines())
         {
-            // Replace with isEmpty() in 2.0
-            if (qstrcmp(edit->textLine(no).latin1(), "") != 0)
+            if (edit->textLine(no).isEmpty())
                 break;
             ++no;
         }
@@ -223,6 +221,8 @@ QString ChangeLogDialog::message()
     res.truncate(l+1);
     return res;
 }
+
+#include "changelogdlg.moc"
 
 
 // Local Variables:

@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,22 +12,20 @@
  */
 
 
+#include "diffview.h"
+
 #include <qpainter.h>
 #include <qscrollbar.h>
 #include <qpixmap.h>
-#if QT_VERSION >= 300
 #include <qstyle.h>
-#endif
 
 #include <kapplication.h>
 #include <kconfig.h>
 #include <kdebug.h>
 #include <klocale.h>
+
 #include "misc.h"
 #include "cervisiapart.h"
-
-#include "diffview.h"
-#include "diffview.moc"
 
 
 class DiffViewItem
@@ -47,12 +45,12 @@ int DiffViewItemList::compareItems(QCollection::Item item1, QCollection::Item it
 }
 
 
-static const int DIFFBORDER = 7;
+const int DiffView::BORDER = 7;
 
 
 DiffView::DiffView( bool withlinenos, bool withmarker,
 		    QWidget *parent, const char *name )
-    : QTableView(parent, name, WNorthWestGravity | WRepaintNoErase)
+    : QtTableView(parent, name, WNorthWestGravity | WRepaintNoErase)
 {
     setNumRows(0);
     setNumCols( 1 + (withlinenos?1:0) + (withmarker?1:0) );
@@ -79,7 +77,7 @@ DiffView::DiffView( bool withlinenos, bool withmarker,
 
 void DiffView::setFont(const QFont &font)
 {
-    QTableView::setFont(font);
+    QtTableView::setFont(font);
     QFontMetrics fm(font);
     setCellHeight(fm.lineSpacing());
 }
@@ -252,7 +250,7 @@ int DiffView::cellWidth(int col)
             QFontMetrics fm( fontMetrics() );
             return QMAX(QMAX( fm.width(i18n("Delete")),
                               fm.width(i18n("Insert"))),
-                        fm.width(i18n("Change")))+2*DIFFBORDER;
+                        fm.width(i18n("Change")))+2*BORDER;
         }
     else
 	{
@@ -319,7 +317,7 @@ void DiffView::paintCell(QPainter *p, int row, int col)
 	    backgroundColor = lightGray;
 	    inverted = false;
 	    align = AlignRight;
-	    innerborder = DIFFBORDER;
+	    innerborder = BORDER;
 	    str = (item->type==Change)? i18n("Change")
 		: (item->type==Insert)? i18n("Insert")
 		: (item->type==Delete)? i18n("Delete") : QString::null;
@@ -401,16 +399,12 @@ void DiffZoomWidget::paintEvent(QPaintEvent *)
     if (!bar)
         return;
 
-    int sliderMin, sliderMax, sliderLength, dummy;
+    int sliderMin, sliderMax, sliderLength;
     if (bar->isVisible())
         {
-#if QT_VERSION < 300
-            style().scrollBarMetrics(bar, sliderMin, sliderMax, sliderLength, dummy);
-#else
             sliderMin = style().pixelMetric(QStyle::PM_ScrollBarSliderMin, bar);
             sliderLength = style().pixelMetric(QStyle::PM_SliderLength, bar);
             sliderMax = style().pixelMetric(QStyle::PM_SliderSpaceAvailable, bar);
-#endif
         }
     else
         {
@@ -453,6 +447,8 @@ void DiffZoomWidget::paintEvent(QPaintEvent *)
     p.flush();
     bitBlt(this, 0, 0, &pixbuf);
 }
+
+#include "diffview.moc"
 
 
 // Local Variables:

@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,9 +12,10 @@
  */
 
 
-#ifndef _SETTINGSDLG_H_
-#define _SETTINGSDLG_H_
+#ifndef SETTINGSDLG_H
+#define SETTINGSDLG_H
 
+#include <qpushbutton.h>
 #include <kdialogbase.h>
 
 class QCheckBox;
@@ -27,9 +28,11 @@ class KLineEdit;
 class KConfig;
 class KURLRequester;
 
+
 class FontButton : public QPushButton
 {
     Q_OBJECT
+
 public:
     FontButton( const QString &text, QWidget *parent=0, const char *name=0 );
 

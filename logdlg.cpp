@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -11,6 +11,8 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
+
+#include "logdlg.h"
 
 #include <stdio.h>
 #include <qpushbutton.h>
@@ -25,12 +27,10 @@
 #include <kconfig.h>
 #include <kprocess.h>
 #include <diffdlg.h>
-#include <annotatedlg.h>
+
+#include "annotatedlg.h"
 #include "cvsprogressdlg.h"
 #include "misc.h"
-
-#include "logdlg.h"
-#include "logdlg.moc"
 
 
 LogDialog::Options *LogDialog::options = 0;
@@ -241,7 +241,6 @@ bool LogDialog::parseCvsLog(const QString &sbox, const QString &repo, const QStr
     QString line;
     while ( l.getOneLine(&line) )
         {
-            kdDebug() << "Line:#" << line << "#" << endl;
             switch (state)
                 {
                 case Begin:
@@ -479,6 +478,8 @@ void LogDialog::tagBSelected(int n)
     if (n)
         tagSelected(tags.at(n-1)->tag, true);
 }
+
+#include "logdlg.moc"
 
 // Local Variables:
 // c-basic-offset: 4

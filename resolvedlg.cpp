@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -11,6 +11,8 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
+
+#include "resolvedlg.h"
 
 #include <qfile.h>
 #include <qkeycode.h>
@@ -25,9 +27,6 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include "misc.h"
-
-#include "resolvedlg.h"
-#include "resolvedlg.moc"
 
 
 ResolveDialog::Options *ResolveDialog::options = 0;
@@ -609,6 +608,8 @@ QStringList ResolveEditorDialog::content() const
 
     return l;
 }
+
+#include "resolvedlg.moc"
 
 
 // Local Variables:

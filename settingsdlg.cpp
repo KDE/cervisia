@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,8 +12,12 @@
  */
 
 
+#include "settingsdlg.h"
+
+#include <qapplication.h>
 #include <qcheckbox.h>
 #include <qcombobox.h>
+#include <qgrid.h>
 #include <qgroupbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
@@ -31,10 +35,6 @@
 #include <knuminput.h>
 
 #include "misc.h"
-
-#include "settingsdlg.h"
-#include <qgrid.h>
-#include "settingsdlg.moc"
 
 
 FontButton::FontButton( const QString &text, QWidget *parent, const char *name )
@@ -264,6 +264,8 @@ void SettingsDialog::done(int res)
     QDialog::done(res);
     delete this;
 }
+
+#include "settingsdlg.moc"
 
 
 // Local Variables:
