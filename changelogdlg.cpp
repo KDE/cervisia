@@ -31,12 +31,9 @@
 #include "cervisiapart.h"
 
 
-static QString timeStringISO8601()
+static QString dateStringISO8601()
 {
-    QString res;
-    QDate cur = QDate::currentDate();
-    res.sprintf("%04i-%02i-%02i", cur.year(), cur.month(), cur.day());
-    return res;
+    return QDate::currentDate().toString(Qt::ISODate);
 }
 
 
@@ -169,7 +166,7 @@ bool ChangeLogDialog::readFile(const QString &filename)
     edit->insertLine("", 0);
     edit->insertLine("\t* ", 0);
     edit->insertLine("", 0);
-    edit->insertLine(timeStringISO8601() + "  " + config->readEntry("Username", userName()), 0);
+    edit->insertLine(dateStringISO8601() + "  " + config->readEntry("Username", userName()), 0);
     edit->setCursorPosition(2, 10);
     
     return true;
