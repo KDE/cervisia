@@ -119,16 +119,6 @@ void CervisiaShell::setupActions()
     action->setWhatsThis( hint );
 }
 
-void CervisiaShell::slotOpenSandbox()
-{
-    QString dirname = KFileDialog::getExistingDirectory(QDir::homeDirPath(), this,
-                                                        i18n("Open Sandbox"));
-    if (dirname.isEmpty())
-        return;
-
-    part->openSandbox(dirname);
-}
-
 void CervisiaShell::slotConfigureKeys()
 {
     KKeyDialog::configureKeys( actionCollection(), xmlFile() );

@@ -36,7 +36,6 @@ public:
     void restorePseudo(const QString &dirname);
 
 public slots:
-    void slotOpenSandbox();
     void slotConfigureKeys();
     void slotConfigureToolBars();
     void slotExit();
