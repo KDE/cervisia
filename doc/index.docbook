@@ -163,8 +163,8 @@ administrator.</para>
 <filename>:pserver:gehrmab@cvs.kde.org:/home/kde</filename></para>
 
 <para>This method accesses the server via a special protocol with a
- relatively weak authentification (<literal>pserver</literal> stands
- for password authentification). Before you can use such a server, you
+ relatively weak authentication (<literal>pserver</literal> stands
+ for password authentication). Before you can use such a server, you
  have to login. As this isn't directly supported by &cervisia;, enter
  on the command line </para>
 
@@ -627,7 +627,7 @@ release.</para>
  for binary
          files. For example, merging binary files normally does not make
          sense. Furthermore, by default &CVS; performs keyword expansion
-         string <literal>$Revision: 1.1 $</literal>) when a file is commited. In binary
+         string <literal>$Revision: 1.2 $</literal>) when a file is commited. In binary
          files, such replacements may corrupt the file and make it completely
          unusable. In order to switch this behaviour off, you should commit binary
          files (or other files, like Postscript) with a command line
