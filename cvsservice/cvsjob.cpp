@@ -27,13 +27,18 @@
 
 struct CvsJob::Private
 {
+    Private() : isRunning(false)
+    {
+        childproc = new KProcess;
+        childproc->setUseShell(true, "/bin/sh");
+    }   
+    ~Private() { delete childproc; }
+    
     KProcess*   childproc;
     QString     server;
     QString     rsh;
     QString     directory;
     bool        isRunning;
-    
-    void init();
 };
 
 
@@ -42,9 +47,6 @@ CvsJob::CvsJob(unsigned jobNum)
     , DCOPObject()
     , d(new Private)
 {
-    // initialize private data
-    d->init();
-    
     QString objId("CvsJob" + QString::number(jobNum));
     setObjId(objId.local8Bit());
 }
@@ -55,29 +57,12 @@ CvsJob::CvsJob(const QString& objId)
     , DCOPObject()
     , d(new Private)
 {
-    // initialize private data
-    d->init();
-    
     setObjId(objId.local8Bit());
-}
-
-
-void CvsJob::Private::init()
-{
-    // initialize private data
-    server    = QString::null;
-    rsh       = QString::null;
-    directory = QString::null;
-    isRunning = false;
-
-    childproc = new KProcess;
-    childproc->setUseShell(true, "/bin/sh");
 }
 
 
 CvsJob::~CvsJob()
 {
-    delete d->childproc;
     delete d;
 }
 
