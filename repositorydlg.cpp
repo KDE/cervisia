@@ -157,6 +157,8 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, QWidget *parent, const char *na
 
     setHelp("accessing-repository");
 
+    setWFlags(Qt::WDestructiveClose | getWFlags());
+
 #if KDE_IS_VERSION(3,1,90)
     QSize size = configDialogSize(partConfig, "RepositoryDialog");
 #else
