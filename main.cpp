@@ -144,10 +144,11 @@ int main(int argc, char **argv)
         CervisiaShell* shell = new CervisiaShell();
 
         const KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
-        QString dirName = args->count() ? QString(args->arg(0)) : QString::null;
-
-        if( !dirName.isEmpty() )
-            shell->openURL(KURL::fromPathOrURL(dirName));
+        if( args->count() )
+        {
+            KURL directory = args->url(0);
+            shell->openURL(directory);
+        }
 
         shell->setIcon(app.icon());
         app.setMainWidget(shell);
