@@ -75,3 +75,9 @@ Id=kde3.2/20030829
 File=cervisiapartrc
 Group=Communication
 RemoveKey=Editor
+#
+Id=kde3.2/20031014
+File=cervisiapartrc
+Group=General
+RemoveKey=CVSPath
+RemoveKey=Compression

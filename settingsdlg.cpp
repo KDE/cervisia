@@ -211,16 +211,13 @@ void SettingsDialog::writeSettings()
     config->setGroup("General");
     config->writeEntry("Timeout", (unsigned)timeoutedit->value());
     config->writeEntry("Username", usernameedit->text());
-    // TODO: remove when move to cvs DCOP service is complete
+
 #if KDE_IS_VERSION(3,1,3)
-    config->writePathEntry("CVSPath", cvspathedit->url());
     config->writePathEntry("ExternalDiff", extdiffedit->url());
 #else
-    config->writeEntry("CVSPath", cvspathedit->url());
     config->writeEntry("ExternalDiff", extdiffedit->url());
 #endif
-    config->writeEntry("Compression", compressioncombo->currentItem());
-    // END TODO
+
     config->writeEntry("ContextLines", (unsigned)contextedit->value());
     config->writeEntry("TabWidth", tabwidthedit->value());
     config->writeEntry("DiffOptions", diffoptedit->text());
