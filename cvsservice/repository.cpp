@@ -66,6 +66,24 @@ Repository::Repository()
 }
 
 
+Repository::Repository(const QString& repository)
+    : QObject()
+    , DCOPObject()
+    , d(new Private)
+{
+    d->location = repository;
+    d->readConfig();
+    
+    // other cvsservice instances might change the configuration file
+    // so we watch it for changes
+    d->configFileName = locate("config", "cvsservicerc");
+    KDirWatch* fileWatcher = new KDirWatch(this);
+    connect(fileWatcher, SIGNAL(dirty(const QString&)),
+            this, SLOT(slotConfigDirty(const QString&)));
+    fileWatcher->addFile(d->configFileName);
+}
+
+
 Repository::~Repository()
 {
     delete d;

@@ -38,6 +38,7 @@ class Repository : public QObject, public DCOPObject
 
 public:
     Repository();
+    explicit Repository(const QString& repository);
     ~Repository();
 
     /**
