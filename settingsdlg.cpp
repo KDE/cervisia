@@ -299,7 +299,7 @@ void SettingsDialog::addDiffPage()
 void SettingsDialog::addStatusPage()
 {
     QVBox* statusPage = addVBoxPage(i18n("Status"), QString::null,
-                                    LoadIcon("status"));
+                                    LoadIcon("fork"));
 
     remotestatusbox = new QCheckBox(i18n("When opening a sandbox from a &remote repository,\n"
                                          "start a File->Status command automatically"), statusPage);
@@ -317,7 +317,7 @@ void SettingsDialog::addStatusPage()
 void SettingsDialog::addAdvancedPage()
 {
     QGrid *advancedPage = addGridPage(2, QGrid::Horizontal, i18n("Advanced"),
-                                      QString::null, LoadIcon("advanced"));
+                                      QString::null, LoadIcon("configure"));
 
     QLabel *timeoutlabel = new QLabel( i18n("&Timeout after which a progress dialog appears (in ms):"),
                                        advancedPage );
