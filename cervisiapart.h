@@ -154,7 +154,6 @@ protected:
 
 private:
     void setupActions();
-    void setupGlobalConfig();
 
     void readSettings();
     void writeSettings();

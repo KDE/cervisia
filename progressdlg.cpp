@@ -13,7 +13,7 @@
 #include <kapplication.h>
 #include <kconfig.h>
 
-#include "globalconfig.h"
+#include "cervisiasettings.h"
 
 
 struct ProgressDialog::Private
@@ -111,7 +111,7 @@ bool ProgressDialog::execute()
     // force the dialog to show up
     d->timer = new QTimer(this);
     connect(d->timer, SIGNAL(timeout()), this, SLOT(slotTimeoutOccurred()));
-    d->timer->start(GlobalConfig().timeOut(), true);
+    d->timer->start(CervisiaSettings::timeout(), true);
 
     bool started = d->cvsJob->execute();
     if( !started )

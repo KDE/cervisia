@@ -56,7 +56,6 @@
 #include "misc.h"
 #include "cvsservice_stub.h"
 #include "repository_stub.h"
-#include "globalconfig.h"
 
 #include "cervisiapart.h"
 #include "version.h"
@@ -160,7 +159,6 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
         connect( update, SIGNAL( selectionChanged() ), this, SLOT( updateActions() ) );
     }
 
-    setupGlobalConfig();
     setXMLFile( "cervisiaui.rc" );
 }
 
@@ -599,17 +597,6 @@ void CervisiaPart::setupActions()
 
     //action = KStdAction::aboutApp( this, SLOT(aboutCervisia()),
     //               actionCollection(), "help_about_cervisia" );
-}
-
-
-void CervisiaPart::setupGlobalConfig()
-{
-    GlobalConfig global;
-
-    KConfig* cfg = config();
-    cfg->setGroup("General");
-
-    global.setTimeOut(cfg->readUnsignedNumEntry("Timeout", 4000));
 }
 
 

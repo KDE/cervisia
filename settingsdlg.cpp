@@ -37,8 +37,9 @@
 #include <knuminput.h>
 #include <kurlrequester.h>
 
-#include "globalconfig.h"
 #include "misc.h"
+#include "cervisiasettings.h"
+
 
 namespace
 {
@@ -126,7 +127,7 @@ void SettingsDialog::readSettings()
     usesshagent->setChecked(serviceConfig->readBoolEntry("UseSshAgent", false));
 
     config->setGroup("General");
-    timeoutedit->setValue((int)config->readUnsignedNumEntry("Timeout", 4000));
+    timeoutedit->setValue(CervisiaSettings::timeout());
     usernameedit->setText(config->readEntry("Username", Cervisia::UserName()));
 
     contextedit->setValue((int)config->readUnsignedNumEntry("ContextLines", 65535));
@@ -177,7 +178,7 @@ void SettingsDialog::writeSettings()
     serviceConfig->sync();
 
     config->setGroup("General");
-    config->writeEntry("Timeout", (unsigned)timeoutedit->value());
+    CervisiaSettings::setTimeout(timeoutedit->value());
     config->writeEntry("Username", usernameedit->text());
 
 #if KDE_IS_VERSION(3,1,3)
@@ -221,13 +222,11 @@ void SettingsDialog::writeSettings()
         }
     config->sync();
 
-    // Update global configuration
-    GlobalConfig().setTimeOut(static_cast<unsigned>(timeoutedit->value()));
+    CervisiaSettings::writeConfig();
 }
 
 void SettingsDialog::done(int res)
 {
-
     if (res == Accepted)
         writeSettings();
     KDialogBase::done(res);

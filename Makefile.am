@@ -10,7 +10,7 @@ noinst_LTLIBRARIES = libcervisia.la
 libcervisia_la_SOURCES = annotatedlg.cpp diffdlg.cpp logdlg.cpp \
 		   progressdlg.cpp progressdlg.skel resolvedlg.cpp resolvedlg_p.cpp annotateview.cpp \
 		   diffview.cpp loglist.cpp logplainview.cpp logtree.cpp annotatectl.cpp   \
-		   globalconfig.cpp loginfo.cpp misc.cpp qttableview.cpp tooltip.cpp
+		   loginfo.cpp misc.cpp qttableview.cpp tooltip.cpp cervisiasettings.kcfgc
 
 libcervisiapart_la_SOURCES = updateview.cpp protocolview.cpp protocolview.skel \
 		   watchdlg.cpp settingsdlg.cpp changelogdlg.cpp historydlg.cpp \
@@ -19,7 +19,7 @@ libcervisiapart_la_SOURCES = updateview.cpp protocolview.cpp protocolview.skel \
 		   addrepositorydlg.cpp addremovedlg.cpp watchersdlg.cpp \
 		   updateview_items.cpp updateview_visitors.cpp entry.cpp \
 		   entry_status.cpp stringmatcher.cpp cvsinitdlg.cpp ignorelistbase.cpp dirignorelist.cpp \
-		   globalignorelist.cpp                   
+		   globalignorelist.cpp
 libcervisiapart_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
 libcervisiapart_la_LIBADD = $(LIB_KFILE) $(LIB_KPARTS) $(LIB_KUTILS) \
 		   cvsservice/libcvsservice.la libcervisia.la
@@ -37,6 +37,8 @@ EXTRA_DIST = cervisia.desktop cervisia.png cervisia-small.png
 CLEANFILES = cervisia.1
 
 xdg_apps_DATA = cervisia.desktop
+
+kde_kcfg_DATA = cervisiapart.kcfg
 
 partrcdir = $(kde_datadir)/cervisiapart
 partrc_DATA = cervisiaui.rc

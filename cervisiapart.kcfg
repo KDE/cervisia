@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE kcfg SYSTEM "http://www.kde.org/standards/kcfg/1.0/kcfg.dtd">
+<kcfg>
+  <kcfgfile name="cervisiapartrc" />
+  <group name="General" >
+    <entry key="Timeout" type="UInt">
+      <default>4000</default>
+      <label>Delay (ms) until the progress dialog appears.</label>
+    </entry>
+  </group>
+</kcfg>
