@@ -2,6 +2,7 @@
 #include <qpushbutton.h>
 #include <qpopupmenu.h>
 #include <qtextstream.h>
+#include <qcursor.h>
 #include <kaboutdata.h>
 #include <kaction.h>
 #include <kapp.h>
