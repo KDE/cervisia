@@ -138,16 +138,20 @@ k_dcop:
     DCOPRef log(const QString& fileName);
 
     /**
+     * @param repository
+     *
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef login();
+    DCOPRef login(const QString& repository);
 
     /**
+     * @param repository
+     *
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef logout();
+    DCOPRef logout(const QString& repository);
 
     /**
      * @param repository

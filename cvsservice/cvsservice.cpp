@@ -336,36 +336,46 @@ DCOPRef CvsService::log(const QString& fileName)
 }
 
 
-DCOPRef CvsService::login()
+DCOPRef CvsService::login(const QString& repository)
 {
-    if( !d->hasWorkingCopy() )
-        return DCOPRef();
-
+    std::auto_ptr<Repository> repo(new Repository(repository));
+    
     // create a cvs job
-    CvsJob* job = d->createCvsJob();
+    ++(d->lastJobId);
+
+    CvsJob* job = new CvsJob(d->lastJobId);
+    d->cvsJobs.insert(d->lastJobId, job);
+
+    job->setRSH(repo->rsh());
+    job->setServer(repo->server());
+    job->setDirectory(repo->workingCopy());
 
     // assemble the command line
-    // cvs -d [REPOSITORY] login
-    *job << d->repository->cvsClient() << "-d" << d->repository->location()
-         << "login";
+    // cvs -d [REPOSITORY] checkout -c
+    *job << repo->cvsClient() << "-d" << repository << "login";
 
     // return a DCOP reference to the cvs job
     return DCOPRef(d->appId, job->objId());
 }
 
 
-DCOPRef CvsService::logout()
+DCOPRef CvsService::logout(const QString& repository)
 {
-    if( !d->hasWorkingCopy() )
-        return DCOPRef();
-
+    std::auto_ptr<Repository> repo(new Repository(repository));
+    
     // create a cvs job
-    CvsJob* job = d->createCvsJob();
+    ++(d->lastJobId);
+
+    CvsJob* job = new CvsJob(d->lastJobId);
+    d->cvsJobs.insert(d->lastJobId, job);
+
+    job->setRSH(repo->rsh());
+    job->setServer(repo->server());
+    job->setDirectory(repo->workingCopy());
 
     // assemble the command line
-    // cvs -d [REPOSITORY] logout
-    *job << d->repository->cvsClient() << "-d" << d->repository->location()
-         << "logout";
+    // cvs -d [REPOSITORY] checkout -c
+    *job << repo->cvsClient() << "-d" << repository << "logout";
 
     // return a DCOP reference to the cvs job
     return DCOPRef(d->appId, job->objId());
