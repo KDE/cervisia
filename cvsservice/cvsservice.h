@@ -65,7 +65,7 @@ k_dcop:
      *
      * @param workingDir path to a local working copy directory
      * @param repository
-     * @param module
+     * @param module the name of the module
      * @param tag
      * @param pruneDirs remove empty directories from the working copy.
      *
@@ -76,6 +76,11 @@ k_dcop:
                      const QString& module, const QString& tag, bool pruneDirs);
 
     /**
+     *
+     * @param files
+     * @param commitMessage
+     * @param recursive
+     *
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
@@ -83,6 +88,13 @@ k_dcop:
                    bool recursive);
 
     /**
+     *
+     * @param fileName
+     * @param revA
+     * @param revB
+     * @param diffOptions
+     * @param contextLines
+     *
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
@@ -113,7 +125,12 @@ k_dcop:
     DCOPRef logout();
 
     /**
+     * Deletes files from the local working copy and schedules them to be
+     * removed from the repository. The files don't actually disappear from
+     * the repository until a subsequent commit is performed.
+     *
      * @param files A list of files that should be removed from the repository.
+     * @param recursive descend into subdirectories.
      *
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
