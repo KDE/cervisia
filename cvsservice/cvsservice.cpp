@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
+ * Copyright (c) 2002-2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -231,6 +231,24 @@ DCOPRef CvsService::commit(const QStringList& files, const QString& commitMessag
 
     *d->singleCvsJob << "-m" << KProcess::quote(commitMessage)
                      << CvsServiceUtils::joinFileList(files) << REDIRECT_STDERR;
+
+    return d->setupNonConcurrentJob();
+}
+
+
+DCOPRef CvsService::createRepository(const QString& repository)
+{
+    if( d->hasRunningJob() )
+        return DCOPRef();
+        
+    // assemble the command line
+    // cvs -d [REPOSITORY] init
+    d->singleCvsJob->clearCvsCommand();
+    
+    *d->singleCvsJob << "mkdir -p" << repository << "&&"
+                     << d->repository->cvsClient() 
+                     << "-d" << repository
+                     << "init";
 
     return d->setupNonConcurrentJob();
 }
