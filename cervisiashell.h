@@ -17,6 +17,7 @@
 
 #include <kparts/mainwindow.h>
 
+class QLabel;
 class CervisiaPart;
 class KRecentFilesAction;
 
@@ -40,6 +41,9 @@ public slots:
     void slotConfigureKeys();
     void slotConfigureToolBars();
     void slotExit();
+    
+protected slots:
+    void slotChangeFilterStatus(QString status);
 
 protected:
     void setupActions();
@@ -50,6 +54,7 @@ protected:
 
 private:
     CervisiaPart *part;
+    QLabel *filterLabel;
 
 };
 

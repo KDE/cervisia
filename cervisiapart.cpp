@@ -1533,6 +1533,7 @@ void CervisiaPart::setFilter()
 
     // TODO: Find a new way to handle the status items as you can't do this with KParts yet
     //filterLabel->setText(str);
+    emit filterStatusChanged(str);
 }
 
 

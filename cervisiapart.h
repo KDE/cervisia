@@ -60,6 +60,9 @@ public:
     
     static KAboutData* createAboutData();
 
+signals:
+    void filterStatusChanged(QString status);
+
 public slots:
     virtual bool openFile() { return true; }
     virtual bool openURL( const KURL & );

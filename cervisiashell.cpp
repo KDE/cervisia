@@ -14,6 +14,8 @@
 
 #include "cervisiashell.h"
 
+#include <qlabel.h>
+#include <qtooltip.h>
 #include <kapplication.h>
 #include <kconfig.h>
 #include <kedittoolbar.h>
@@ -36,6 +38,17 @@ CervisiaShell::CervisiaShell( const char *name )
     setCentralWidget( part->widget() );
 
     setupActions();
+    
+    // create the active filter indicator and add it to the statusbar
+    filterLabel = new QLabel("UR", statusBar());
+    filterLabel->setFixedSize(filterLabel->sizeHint());
+    filterLabel->setText("");
+    QToolTip::add(filterLabel, i18n("F - All files are hidden, the tree shows only directories\n"
+                                    "N - All up-to-date files are hidden\n"
+                                    "R - All removed files are hidden"));
+    statusBar()->addWidget(filterLabel, 0, true);
+    connect( part, SIGNAL( filterStatusChanged(QString) ),
+             this, SLOT( slotChangeFilterStatus(QString) ) );
 
     //
     // Magic needed for status texts
@@ -138,6 +151,11 @@ void CervisiaShell::slotConfigureToolBars()
     KEditToolbar dlg( actionCollection() );
     if ( dlg.exec() )
         createGUI( part );
+}
+
+void CervisiaShell::slotChangeFilterStatus(QString status)
+{
+    filterLabel->setText(status);
 }
 
 void CervisiaShell::slotExit()
