@@ -131,7 +131,7 @@ static int ShowAnnotateDialog(const QString& fileName)
 }
 
 
-extern "C" int kdemain(int argc, char **argv)
+extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
 {
     static KCmdLineOptions options[] = {
         { "+[directory]", I18N_NOOP("The sandbox to be loaded"), 0 },
