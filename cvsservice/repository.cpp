@@ -107,6 +107,12 @@ QString Repository::cvsClient() const
 }
 
 
+QString Repository::clientOnly() const
+{
+    return d->client;
+}
+
+
 QString Repository::rsh() const
 {
     return d->rsh;

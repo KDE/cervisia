@@ -50,6 +50,10 @@ public:
     QString cvsClient() const;
 
     /**
+     */
+    QString clientOnly() const;
+    
+    /**
      * Remote shell command line client which should be used to
      * access the remote cvs repository, when :ext: access method
      * is specified. ($CVS_RSH)
