@@ -23,7 +23,6 @@
 #include <klineedit.h>
 #include <klocale.h>
 
-#include "cvsprogressdlg.h"
 #include "misc.h"
 
 
@@ -115,57 +114,17 @@ QString UpdateDialog::date() const
 }
 
 
-void UpdateDialog::buttonClicked(bool branch)
-{
-    QString cmdline = cvsClient(repository);
-    cmdline += " status -v";
-
-    CvsProgressDialog l("Status", this);
-    l.setCaption(i18n("CVS Status"));
-    if (!l.execCommand(sandbox, repository, cmdline, ""))
-        return;
-
-    QComboBox *combo = branch? branch_combo : tag_combo;
-    QString searchedtype = QString::fromLatin1(branch? "branch" : "revision");
-
-    QStringList tags;
-    QString str;
-    while (l.getOneLine(&str))
-        {
-            int pos1, pos2, pos3;
-            if (str.length() < 1 || str[0] != '\t')
-                continue;
-            if (((pos1 = str.find(' ', 2)) == -1) || ((pos1 = str.find('\t', 2)) == -1))
-               continue;
-            if ((pos2 = str.find('(', pos1+1)) == -1)
-               continue;
-            if ((pos3 = str.find(':', pos2+1)) == -1)
-                continue;
-            
-            QString tag = str.mid(1, pos1-1);
-            QString type = str.mid(pos2+1, pos3-pos2-1);
-            if (type == searchedtype && !tags.contains(tag))
-                tags.append(tag);
-        }
-
-    combo->clear();
-    tags.sort();
-
-    QStringList::ConstIterator it;
-    for (it = tags.begin(); it != tags.end(); ++it)
-        combo->insertItem(*it);
-}
-
-
 void UpdateDialog::tagButtonClicked()
 {
-    buttonClicked(false);
+    tag_combo->clear();
+    tag_combo->insertStringList(::fetchTags(sandbox, repository, this));
 }
 
 
 void UpdateDialog::branchButtonClicked()
 {
-    buttonClicked(true);
+    branch_combo->clear();
+    branch_combo->insertStringList(::fetchBranches(sandbox, repository, this));
 }
 
 

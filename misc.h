@@ -15,12 +15,18 @@
 #ifndef MISC_H
 #define MISC_H
 
-#include <qstrlist.h>
+
+class QCString;
+class QString;
+class QStringList;
+class QTextCodec;
+class QWidget;
 
 
 void chomp(QCString *line);
 QString joinLine(const QStringList &list);
 QStringList splitLine(QString, char delim=' ');
+int findWhiteSpace(QString const& rsString, int iStartIndex = 0);
 
 QString userName();
 QString tempFileName(const QString &suffix);
@@ -29,6 +35,13 @@ QTextCodec *detectCodec(const QString &fileName);
 
 bool isValidTag(const QString &str);
 QString cvsClient(QString sRepository);
+QStringList const fetchBranches(QString const& rsSandbox,
+                                QString const& rsRepository,
+                                QWidget*       pParentWidget);
+QStringList const fetchTags(QString const& rsSandbox,
+                            QString const& rsRepository,
+                            QWidget*       pParentWidget);
+
 
 #endif
 

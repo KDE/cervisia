@@ -43,8 +43,7 @@ private slots:
     void branchButtonClicked();
     
 private:
-    void buttonClicked(bool branch);
-    
+
     QString sandbox, repository;
     
     QRadioButton *bybranch_button, *bytags_button;

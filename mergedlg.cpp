@@ -23,7 +23,6 @@
 #include <qstyle.h>
 #include <klocale.h>
 
-#include "cvsprogressdlg.h"
 #include "misc.h"
 
 
@@ -120,71 +119,20 @@ QString MergeDialog::tag2() const
 }
 
 
-// Merge with UpdateDialog code in later version
-void MergeDialog::buttonClicked(bool branch)
-{
-    QString cmdline = cvsClient(repository);
-    cmdline += " status -v";
-
-    CvsProgressDialog l("Status", this);
-    l.setCaption(i18n("CVS Status"));
-    if (!l.execCommand(sandbox, repository, cmdline, ""))
-        return;
-
-    QString searchedtype = QString::fromLatin1(branch? "branch" : "revision");
-
-    QStringList tags;
-    QString str;
-    while (l.getOneLine(&str))
-        {
-            int pos1, pos2, pos3;
-            if (str.length() < 1 || str[0] != '\t')
-                continue;
-            if ((pos1 = str.find(' ', 2)) == -1)
-                continue;
-            if ((pos2 = str.find('(', pos1+1)) == -1)
-                continue;
-            if ((pos3 = str.find(':', pos2+1)) == -1)
-                continue;
-            
-            QString tag = str.mid(1, pos1-1);
-            QString type = str.mid(pos2+1, pos3-pos2-1);
-            if (type == searchedtype && !tags.contains(tag))
-                tags.append(tag);
-        }
-
-    if (branch)
-        branch_combo->clear();
-    else
-        {
-            tag1_combo->clear();
-            tag2_combo->clear();
-        }
-
-    tags.sort();
-
-    
-    QStringList::ConstIterator it;
-    for (it = tags.begin(); it != tags.end(); ++it)
-        if (branch)
-            branch_combo->insertItem(*it);
-        else
-            {
-                tag1_combo->insertItem(*it);
-                tag2_combo->insertItem(*it);
-            }
-}
-
-
 void MergeDialog::tagButtonClicked()
 {
-    buttonClicked(false);
+    QStringList const listTags(::fetchTags(sandbox, repository, this));
+    tag1_combo->clear();
+    tag1_combo->insertStringList(listTags);
+    tag2_combo->clear();
+    tag2_combo->insertStringList(listTags);
 }
 
 
 void MergeDialog::branchButtonClicked()
 {
-    buttonClicked(true);
+    branch_combo->clear();
+    branch_combo->insertStringList(::fetchBranches(sandbox, repository, this));
 }
 
 

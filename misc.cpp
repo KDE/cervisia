@@ -11,11 +11,15 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
+
+#include "misc.h"
+
 #include <ctype.h>
 #include <pwd.h>
 #include <sys/types.h>
 #include <unistd.h>
 #include <qfile.h>
+#include <qstringlist.h>
 #include <qtextcodec.h>
 #include <kconfig.h>
 #include <kprocess.h>
@@ -23,7 +27,16 @@
 
 #include "config.h"
 #include "cervisiapart.h"
-#include "misc.h"
+#include "cvsprogressdlg.h"
+
+
+namespace
+{
+    QStringList const fetchBranchesAndTags(QString const& rsSearchedType,
+                                           QString const& rsSandbox,
+                                           QString const& rsRepository,
+                                           QWidget*       pParentWidget);
+}
 
 
 void chomp(QCString *line)
@@ -66,6 +79,26 @@ QStringList splitLine(QString line, char delim)
     if (!line.isEmpty())
 	list.append(line);
     return list;
+}
+
+
+int findWhiteSpace(QString const& rsString, int iStartIndex)
+{
+    int const length(rsString.length());
+    if (iStartIndex < 0)
+        iStartIndex += length;
+    if (iStartIndex < 0 || iStartIndex >= length)
+        return -1;
+
+    QChar const* const startPos = rsString.unicode();
+    QChar const* const endPos   = startPos + length;
+
+    QChar const* pos = startPos + iStartIndex;
+    while (pos < endPos && pos->isSpace() == false)
+        ++pos;
+
+    int const foundIndex(pos - startPos);
+    return foundIndex < length ? foundIndex : -1;
 }
 
 
@@ -114,6 +147,28 @@ QString cvsClient( QString sRepository )
         }
 
     return sReturn;
+}
+
+
+QStringList const fetchBranches(QString const& rsSandbox,
+                                QString const& rsRepository,
+                                QWidget*       pParentWidget)
+{
+    return fetchBranchesAndTags(QString::fromLatin1("branch"),
+                                rsSandbox,
+                                rsRepository,
+                                pParentWidget);
+}
+
+
+QStringList const fetchTags(QString const& rsSandbox,
+                            QString const& rsRepository,
+                            QWidget*       pParentWidget)
+{
+    return fetchBranchesAndTags(QString::fromLatin1("revision"),
+                                rsSandbox,
+                                rsRepository,
+                                pParentWidget);
 }
 
 
@@ -175,6 +230,49 @@ QTextCodec *detectCodec(const QString &fileName)
 
     return QTextCodec::codecForLocale();
 }
+
+
+namespace
+{
+    QStringList const fetchBranchesAndTags(QString const& rsSearchedType,
+                                           QString const& rsSandbox,
+                                           QString const& rsRepository,
+                                           QWidget*       pParentWidget)
+    {
+        QString const sCmdLine(::cvsClient(rsRepository) + QString::fromLatin1(" status -v"));
+
+        CvsProgressDialog stProgressDialog("Status", pParentWidget);
+        stProgressDialog.setCaption(i18n("CVS Status"));
+
+        QStringList listBranchesOrTags;
+        if (stProgressDialog.execCommand(rsSandbox, rsRepository, sCmdLine, QString::null))
+        {
+            QString sLine;
+            while (stProgressDialog.getOneLine(&sLine))
+            {
+                int pos1, pos2, pos3;
+                if (sLine.isEmpty() || sLine[0] != '\t')
+                    continue;
+                if ((pos1 = ::findWhiteSpace(sLine, 2)) < 0)
+                    continue;
+                if ((pos2 = sLine.find('(', pos1 + 1)) < 0)
+                    continue;
+                if ((pos3 = sLine.find(':', pos2 + 1)) < 0)
+                    continue;
+
+                QString const tag(sLine.mid(1, pos1 - 1));
+                QString const type(sLine.mid(pos2 + 1, pos3 - pos2 - 1));
+                if (type == rsSearchedType && !listBranchesOrTags.contains(tag))
+                    listBranchesOrTags.push_back(tag);
+            }
+
+            listBranchesOrTags.sort();
+        }
+
+        return listBranchesOrTags;
+    }
+}
+
 
 // Local Variables:
 // c-basic-offset: 4

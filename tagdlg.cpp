@@ -23,7 +23,6 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 
-#include "cvsprogressdlg.h"
 #include "misc.h"
 
 
@@ -128,37 +127,8 @@ void TagDialog::slotOk()
 
 void TagDialog::tagButtonClicked()
 {
-    QString cmdline = cvsClient(repository);
-    cmdline += " status -v";
-
-    CvsProgressDialog l("Status", this);
-    l.setCaption(i18n("CVS Status"));
-    if (!l.execCommand(sandbox, repository, cmdline, ""))
-        return;
-
-    QStringList tags;
-    QString str;
-    while (l.getOneLine(&str))
-        {
-            int pos1, pos2, pos3;
-            if (str.isEmpty() || str[0] != '\t')
-                continue;
-            if ((pos1 = str.find(' ', 2)) < 0)
-                continue;
-            if ((pos2 = str.find('(', pos1 + 1)) < 0)
-                continue;
-            if ((pos3 = str.find(':', pos2 + 1)) < 0)
-                continue;
-
-            QString const tag(str.mid(1, pos1 - 1));
-            QString const type(str.mid(pos2 + 1, pos3 - pos2 - 1));
-            if (type == QString::fromLatin1("revision") && !tags.contains(tag))
-                tags.append(tag);
-        }
-
-    tags.sort();
     tag_combo->clear();
-    tag_combo->insertStringList(tags);
+    tag_combo->insertStringList(::fetchTags(sandbox, repository, this));
 }
 
 
