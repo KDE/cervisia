@@ -187,7 +187,8 @@ DCOPRef CvsService::annotate(const QString& fileName, const QString& revision)
 
 
 DCOPRef CvsService::checkout(const QString& workingDir, const QString& repository,
-                             const QString& module, const QString& tag, bool pruneDirs, const QString& alias, bool exportOnly)
+                             const QString& module, const QString& tag, 
+                             bool pruneDirs)
 {
     if( d->hasRunningJob() )
         return DCOPRef();
@@ -195,7 +196,37 @@ DCOPRef CvsService::checkout(const QString& workingDir, const QString& repositor
     Repository repo(repository);
 
     // assemble the command line
-    // cd [DIRECTORY] && cvs -d [REPOSITORY] checkout [-r tag] [-P]  [-d alias] [MODULE]
+    // cd [DIRECTORY] && cvs -d [REPOSITORY] checkout [-r tag] [-P] [MODULE]
+    d->singleCvsJob->clearCvsCommand();
+
+    *d->singleCvsJob << "cd" << KProcess::quote(workingDir) << "&&"
+                     << repo.cvsClient()
+                     << "-d" << repository
+                     << "checkout";
+
+    if( !tag.isEmpty() )
+        *d->singleCvsJob << "-r" << tag;
+
+    if( pruneDirs )
+        *d->singleCvsJob << "-P";
+
+    *d->singleCvsJob << module;
+
+    return d->setupNonConcurrentJob(&repo);
+}
+
+
+DCOPRef CvsService::checkout(const QString& workingDir, const QString& repository,
+                             const QString& module, const QString& tag, 
+                             bool pruneDirs, const QString& alias, bool exportOnly)
+{
+    if( d->hasRunningJob() )
+        return DCOPRef();
+
+    Repository repo(repository);
+
+    // assemble the command line
+    // cd [DIRECTORY] && cvs -d [REPOSITORY] co [-r tag] [-P] [-d alias] [MODULE]
     d->singleCvsJob->clearCvsCommand();
 
     *d->singleCvsJob << "cd" << KProcess::quote(workingDir) << "&&"
@@ -455,6 +486,42 @@ DCOPRef CvsService::history()
 
     // return a DCOP reference to the cvs job
     return DCOPRef(d->appId, job->objId());
+}
+
+
+DCOPRef CvsService::import(const QString& workingDir, const QString& repository,
+                           const QString& module, const QString& ignoreList,
+                           const QString& comment, const QString& vendorTag,
+                           const QString& releaseTag, bool importAsBinary)
+{
+    if( d->hasRunningJob() )
+        return DCOPRef();
+
+    Repository repo(repository);
+
+    // assemble the command line
+    d->singleCvsJob->clearCvsCommand();
+
+    *d->singleCvsJob << "cd" << KProcess::quote(workingDir) << "&&"
+                     << repo.cvsClient()
+                     << "-d" << repository
+                     << "import";
+
+    if( importAsBinary )
+        *d->singleCvsJob << "-kb";
+        
+    const QString ignore = ignoreList.stripWhiteSpace();
+    if( !ignore.isEmpty() )
+        *d->singleCvsJob << "-I" << KProcess::quote(ignore);
+
+    QString logMessage = comment.stripWhiteSpace();
+    logMessage.prepend("\"");
+    logMessage.append("\"");
+    *d->singleCvsJob << "-m" << logMessage;
+
+    *d->singleCvsJob << module << vendorTag << releaseTag;
+
+    return d->setupNonConcurrentJob(&repo);
 }
 
 
