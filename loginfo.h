@@ -11,8 +11,8 @@
  */
 
 
-#ifndef CERVISIA_MISC_H
-#define CERVISIA_MISC_H
+#ifndef CERVISIA_LOGINFO_H
+#define CERVISIA_LOGINFO_H
 
 
 #include <qdatetime.h>
@@ -151,4 +151,4 @@ struct LogInfo
 } // namespace Cervisia
 
 
-#endif // CERVISIA_MISC_H
+#endif // CERVISIA_LOGINFO_H
