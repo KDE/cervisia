@@ -14,6 +14,7 @@
 
 #include "addremovedlg.h"
 
+#include <qfileinfo.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qlistbox.h>
@@ -53,7 +54,18 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget *parent, const char 
 
 void AddRemoveDialog::setFileList(const QStringList &list)
 {
-    listbox->insertStringList(list);
+    // the dot for the root directory is hard to see, so
+    // we convert it to the absolut path   
+    if( list.find(".") != list.end() )
+    {
+        QStringList copy(list);
+        int idx = copy.findIndex(".");
+        copy[idx] = QFileInfo(".").absFilePath();
+        
+        listbox->insertStringList(copy);
+    }
+    else        
+        listbox->insertStringList(list);
 }
 
 
