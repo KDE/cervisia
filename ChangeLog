@@ -1,3 +1,8 @@
+2003-07-07  Christian Loose  <christian.loose@hamburg.de>
+
+	* Added createTag() and deleteTag() methods to the DCOP
+	   service and use them in the part.
+
 2003-07-04  Christian Loose  <christian.loose@hamburg.de>
 
 	* Implement BR #60604: It's now possible to select 

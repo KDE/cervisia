@@ -89,6 +89,16 @@ k_dcop:
                    bool recursive);
 
     /**
+     */
+    DCOPRef createTag(const QStringList& files, const QString& tag,
+                      bool branch, bool force);
+                      
+    /**
+     */
+    DCOPRef deleteTag(const QStringList& files, const QString& tag,
+                      bool branch, bool force);
+    
+    /**
      *
      * @param fileName
      * @param revA

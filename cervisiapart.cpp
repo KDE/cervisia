@@ -1350,24 +1350,24 @@ void CervisiaPart::createOrDeleteTag(TagDialog::ActionType action)
     QStringList list = update->multipleSelection();
     if (list.isEmpty())
         return;
-
+    
     TagDialog dlg(action, cvsService, widget());
 
     if (dlg.exec())
     {
-        QString cmdline = cvsClient(repository);
-        cmdline += " tag ";
-        if (action == TagDialog::Delete)
-            cmdline += "-d ";
-        if (dlg.branchTag())
-            cmdline += "-b ";
-        if (dlg.forceTag())
-            cmdline += "-F ";
-        cmdline += KProcess::quote(dlg.tag());
-        cmdline += " ";
-        cmdline += joinLine(list);
+        DCOPRef cvsJob;
+        
+        if( action == TagDialog::Create )
+            cvsJob = cvsService->createTag(list, dlg.tag(), dlg.branchTag(),
+                                           dlg.forceTag());
+        else
+            cvsJob = cvsService->deleteTag(list, dlg.tag(), dlg.branchTag(),
+                                           dlg.forceTag());
 
-        if (protocol->startJob(sandbox, repository, cmdline))
+        // get command line from cvs job
+        QString cmdline = cvsJob.call("cvsCommand()");
+
+        if( protocol->startJob() )
         {
             showJobStart(cmdline);
             connect( protocol, SIGNAL(jobFinished(bool, int)),

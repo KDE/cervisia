@@ -208,6 +208,56 @@ DCOPRef CvsService::commit(const QStringList& files, const QString& commitMessag
 }
 
 
+DCOPRef CvsService::createTag(const QStringList& files, const QString& tag,
+                              bool branch, bool force)
+{
+    if( !d->hasWorkingCopy() || d->hasRunningJob() )
+        return DCOPRef();
+
+    // assemble the command line
+    // cvs tag [-b] [-F] [TAG] [FILES]
+    d->singleCvsJob->clearCvsCommand();
+
+    *d->singleCvsJob << d->repository->cvsClient() << "tag";
+
+    if( branch )
+        *d->singleCvsJob << "-b";
+        
+    if( force )
+        *d->singleCvsJob << "-F";
+        
+    *d->singleCvsJob << KProcess::quote(tag)
+                     << CvsServiceUtils::joinFileList(files);
+
+    return d->setupNonConcurrentJob();
+}
+
+
+DCOPRef CvsService::deleteTag(const QStringList& files, const QString& tag,
+                              bool branch, bool force)
+{
+    if( !d->hasWorkingCopy() || d->hasRunningJob() )
+        return DCOPRef();
+
+    // assemble the command line
+    // cvs tag -d [-b] [-F] [TAG] [FILES]
+    d->singleCvsJob->clearCvsCommand();
+
+    *d->singleCvsJob << d->repository->cvsClient() << "tag" << "-d";
+
+    if( branch )
+        *d->singleCvsJob << "-b";
+        
+    if( force )
+        *d->singleCvsJob << "-F";
+        
+    *d->singleCvsJob << KProcess::quote(tag)
+                     << CvsServiceUtils::joinFileList(files);
+
+    return d->setupNonConcurrentJob();
+}
+
+
 DCOPRef CvsService::diff(const QString& fileName, const QString& revA,
                          const QString& revB, const QString& diffOptions,
                          unsigned contextLines)
