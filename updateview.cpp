@@ -121,7 +121,8 @@ QStringList UpdateView::multipleSelection() const
     for (QPtrListIterator<QListViewItem> it(listSelectedItems);
          it.current() != 0; ++it)
     {
-        res.append(static_cast<UpdateItem*>(*it)->filePath());
+        if ((*it)->isVisible())
+            res.append(static_cast<UpdateItem*>(*it)->filePath());
     }
 
     return res;
@@ -138,7 +139,7 @@ QStringList UpdateView::fileSelection() const
     {
         QListViewItem* item(*it);
 
-        if (isFileItem(item))
+        if (isFileItem(item) && item->isVisible())
             res.append(static_cast<UpdateFileItem*>(item)->filePath());
     }
 

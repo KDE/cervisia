@@ -1,3 +1,10 @@
+2004-01-16  André Wöbbeking  <Woebbeking@web.de>
+
+	* Fix BR 72519 (file view):
+	  Don't select hidden files when you select a range of files 
+	  with Shift key. This prevents you from evil accidents (i.e.
+	  "Remove from Repository").
+
 2003-10-04  Christian Loose  <christian.loose@hamburg.de>
 
 	* Do a cvs logout when a user removes a pserver repository item. 
@@ -52,7 +59,6 @@
 2003-08-02  André Wöbbeking  <Woebbeking@web.de>
 
 	* Fix/Implement FR 56042:
-
 	  Use the configured colors as foreground colors in the file AND
 	  protocol view and a bold font to improve readability of the text
 	  for modified, added and removed files.
