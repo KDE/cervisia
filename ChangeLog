@@ -1,3 +1,9 @@
+2003-05-25  Christian Loose  <christian.loose@hamburg.de>
+
+	* Added a method to retrieve a list of modules in the repository
+	  to the cvs DCOP service (cvs checkout -c).
+	* Use the new method in the CheckoutDialog.
+
 2003-05-22  Christian Loose  <christian.loose@hamburg.de>
 
 	* Added edit() and unedit() method to cvs DCOP service
