@@ -1,3 +1,8 @@
+2004-11-11  André Wöbbeking  <Woebbeking@web.de>
+
+	* Fix BR #92576:
+	  Use correct encoding for status messages.
+
 2004-09-10  Christian Loose  <christian.loose@kdemail.net>
 
 	* Fix bug #89215:

@@ -20,7 +20,7 @@
 
 #include "cvsjob.h"
 
-#include <qtextstream.h>
+#include <qfile.h>
 #include <kdebug.h>
 #include <kprocess.h>
 
@@ -131,11 +131,16 @@ CvsJob& CvsJob::operator<<(const QStringList& args)
 QString CvsJob::cvsCommand() const
 {
     QString command;
-    QTextOStream stream(&command);
 
-    QValueList<QCString> args = d->childproc->args();
-    qCopy(args.begin(), args.end(),
-            QTextOStreamIterator<QCString>(stream, " "));
+    const QValueList<QCString>& args(d->childproc->args());
+    for (QValueList<QCString>::const_iterator it = args.begin(), itEnd = args.end();
+         it != itEnd; ++it)
+    {
+        if (!command.isEmpty())
+            command += ' ';
+
+        command += QFile::decodeName(*it);
+    }
 
     return command;
 }
