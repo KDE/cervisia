@@ -1,3 +1,8 @@
+2004-05-29  André Wöbbeking  <Woebbeking@web.de>
+
+	* Fix BR #81665: don't show duplicated files in the file view (did 
+	  only occur when the option "Update Recursively" wasn't active).
+
 2004-05-21  Christian Loose  <christian.loose@kdemail.net>
 
 	* Added a new method to download the CVSROOT/cvsignore file

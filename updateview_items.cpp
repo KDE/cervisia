@@ -154,9 +154,7 @@ void UpdateDirItem::updateEntriesItem(const Entry& entry,
     if (entry.m_type == Entry::Dir)
         createDirItem(entry)->maybeScanDir(true);
     else
-    {
         createFileItem(entry);
-    }
 }
 
 
@@ -194,21 +192,42 @@ void UpdateDirItem::scanDirectory()
 
 UpdateDirItem* UpdateDirItem::createDirItem(const Entry& entry)
 {
-    UpdateDirItem* dirItem = new UpdateDirItem(this, entry);
-
-    m_itemsByName.insert(entry.m_name, dirItem);
-
-    return dirItem;
+    UpdateItem* item(insertItem(new UpdateDirItem(this, entry)));
+    assert(isDirItem(item));
+    return static_cast<UpdateDirItem*>(item);
 }
 
 
 UpdateFileItem* UpdateDirItem::createFileItem(const Entry& entry)
 {
-    UpdateFileItem* fileItem = new UpdateFileItem(this, entry);
+    UpdateItem* item(insertItem(new UpdateFileItem(this, entry)));
+    assert(isFileItem(item));
+    return static_cast<UpdateFileItem*>(item);
+}
 
-    m_itemsByName.insert(entry.m_name, fileItem);
 
-    return fileItem;
+UpdateItem* UpdateDirItem::insertItem(UpdateItem* item)
+{
+    QPair<TMapItemsByName::iterator, bool> result
+        = m_itemsByName.insert(TMapItemsByName::value_type(item->entry().m_name, item));
+    if (!result.second)
+    {
+        // OK, an item with that name already exists. If the item type is the
+        // same then keep the old one to preserve it's status information
+        UpdateItem* existingItem = *result.first;
+        if (existingItem->rtti() == item->rtti())
+        {
+            delete item;
+            item = existingItem;
+        }
+        else
+        {
+            delete existingItem;
+            *result.first = item;
+        }
+    }
+
+    return item;
 }
 
 
@@ -245,7 +264,7 @@ void UpdateDirItem::syncWithEntries()
             if( line[0] != '/' )
                 continue;
 
-            entry.m_type = isDir ? Entry::Dir : Cervisia::Entry::File;
+            entry.m_type = isDir ? Entry::Dir : Entry::File;
             entry.m_name = line.section('/', 1, 1);
 
             if (isDir)
@@ -622,9 +641,8 @@ QString UpdateFileItem::text(int column) const
         result = entry().m_tag;
         break;
     case Timestamp:
-        result = entry().m_dateTime.isValid()
-            ? KGlobal::locale()->formatDateTime(entry().m_dateTime)
-            : QString::null;
+        if (entry().m_dateTime.isValid())
+            result = KGlobal::locale()->formatDateTime(entry().m_dateTime);
         break;
     }
 
