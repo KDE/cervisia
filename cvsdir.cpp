@@ -11,16 +11,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-#include <qstringlist.h>
-#include <qdir.h>
-#include <stdlib.h>
-
-// For some reason fnmatch is defined as ap_fnmatch
-#define ap_fnmatch fnmatch
-#include <fnmatch.h>
-#include "misc.h"
 
 #include "cvsdir.h"
+
+#include <stdlib.h>
+
+#include "stringmatcher.h"
+
 
 
 class CvsIgnoreList
@@ -28,13 +25,15 @@ class CvsIgnoreList
 public:
     explicit CvsIgnoreList(const QDir &dir);
 
-    void addEntriesFromString(const QString &str);
-    void addEntriesFromFile(const QString &name);
-
     bool matches(const QFileInfo *fi) const;
 
 private:
-    QStrList ignoreList;
+
+    void addEntriesFromString(const QString& str);
+    void addEntriesFromFile(const QString& name);
+    void addEntry(const QString& entry);
+
+    Cervisia::StringMatcher m_stringMatcher;
 };
 
 
@@ -44,26 +43,27 @@ CvsIgnoreList::CvsIgnoreList(const QDir &dir)
 .nse_depinfo #* .#* cvslog.* ,* CVS CVS.adm .del-* *.a *.olb *.o *.obj\
 *.so *.Z *~ *.old *.elc *.ln *.bak *.BAK *.orig *.rej *.exe _$* *$";
 
-    addEntriesFromString(ignorestr);
+    addEntriesFromString(QString::fromLatin1(ignorestr));
     // TODO?: addEntriesFromFile($CVSROOT/CVSROOT/cvsignore)
     addEntriesFromFile(QDir::homeDirPath() + "/.cvsignore");
-    addEntriesFromString(::getenv("CVSIGNORE"));
+    addEntriesFromString(QString::fromLocal8Bit(::getenv("CVSIGNORE")));
     addEntriesFromFile(dir.absPath() + "/.cvsignore");
 }
 
 
-void CvsIgnoreList::addEntriesFromString(const QString &str)
+void CvsIgnoreList::addEntriesFromString(const QString& str)
 {
-    QStringList tokens = splitLine(str);
-    
-    for ( QStringList::Iterator it = tokens.begin();
-          it != tokens.end(); ++it )
-	{
-            if ( *it == "!" )
-		ignoreList.clear();
-	    else
-                ignoreList.append((*it).local8Bit());
-	}
+    int posLast(0);
+    int pos;
+    while ((pos = str.find(' ', posLast)) >= 0)
+    {
+        if (pos > posLast)
+            addEntry(str.mid(posLast, pos - posLast));
+        posLast = pos + 1;
+    }
+
+    if (posLast < static_cast<int>(str.length()))
+        addEntry(str.mid(posLast));
 }
 
 
@@ -74,30 +74,28 @@ void CvsIgnoreList::addEntriesFromFile(const QString &name)
     if( file.open(IO_ReadOnly) )
     {
         QString line;
-
         while( file.readLine(line, 512) != -1 )
             addEntriesFromString(line);
+    }
+}
 
-        file.close();
+
+void CvsIgnoreList::addEntry(const QString& entry)
+{
+    if (entry != QChar('!'))
+    {
+        m_stringMatcher.add(entry);
+    }
+    else
+    {
+        m_stringMatcher.clear();
     }
 }
 
 
 bool CvsIgnoreList::matches(const QFileInfo *fi) const
 {
-    // Directories e.g. with the name core never match
-    //    if (!fi->isFile())
-    //        return false;
-
-    const QCString& fileName(QFile::encodeName(fi->fileName()));
-    QStrListIterator it(ignoreList);
-    for (; it.current(); ++it)
-	{
-	    if (::fnmatch(it.current(), fileName, FNM_PATHNAME) == 0)
-		return true;
-	}
-    
-    return false;
+    return m_stringMatcher.match(fi->fileName());
 }
 
 
