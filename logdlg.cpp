@@ -169,11 +169,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     connect( this, SIGNAL(user3Clicked()),
              this, SLOT(findClicked()) );
 
-    if( KGlobalSettings::showIconsOnPushButtons() )
-      actionButton(Ok)->setIconSet(SmallIcon(QString::fromLatin1("fileopen")));
-    setButtonText(Ok, i18n("to view something", "&View"));
-    setButtonTip(Ok, QString::null);
-    setButtonWhatsThis(Ok, QString::null);
+    setButtonGuiItem(Ok, KGuiItem(i18n("to view something", "&View"),"fileopen","",""));
 
     setHelp("browsinglogs");
 
