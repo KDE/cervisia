@@ -28,7 +28,7 @@
 class QString;
 
 
-class CvsService : public DCOPObject
+class KDE_EXPORT CvsService : public DCOPObject
 {
     K_DCOP
 

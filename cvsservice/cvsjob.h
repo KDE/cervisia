@@ -29,7 +29,7 @@
 class KProcess;
 
 
-class CvsJob : public QObject, public DCOPObject
+class KDE_EXPORT CvsJob : public QObject, public DCOPObject
 {
     Q_OBJECT
     K_DCOP

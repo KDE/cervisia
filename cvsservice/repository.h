@@ -31,7 +31,7 @@ class QString;
  * Represents a local or remote cvs repository with
  * its repository-specific configuration data.
  */
-class Repository : public QObject, public DCOPObject
+class KDE_EXPORT Repository : public QObject, public DCOPObject
 {
     K_DCOP
     Q_OBJECT
