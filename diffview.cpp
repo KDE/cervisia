@@ -157,10 +157,18 @@ void DiffView::addLine(const QString &line, DiffType type, int no)
     QFont f(font());
     f.setBold(true);
     QFontMetrics fm(f);
-    textwidth = QMAX(textwidth, fm.width(line));
+
+    QString tabSpaces;
+    KConfig *config = CervisiaPart::config();
+    config->setGroup("General");
+    tabSpaces.fill(' ', config->readUnsignedNumEntry("TabWidth", 8) );
+
+    QString expandedLine=line;
+    expandedLine.replace( '\t', tabSpaces );
+    textwidth = QMAX(textwidth, fm.width(expandedLine));
 
     DiffViewItem *item = new DiffViewItem;
-    item->line = line;
+    item->line = expandedLine;
     item->type = type;
     item->no = no;
     item->inverted = false;
@@ -281,12 +289,6 @@ QSize DiffView::sizeHint() const
 
 void DiffView::paintCell(QPainter *p, int row, int col)
 {
-    KConfig *config = CervisiaPart::config();
-    config->setGroup("General");
-    uint tabWidth = config->readUnsignedNumEntry("TabWidth", 8);
-    QFontMetrics fm(font());
-    p->setTabStops(tabWidth * fm.maxWidth());
-
     DiffViewItem *item = items.at(row);
 
     int width = cellWidth(col);
@@ -359,7 +361,7 @@ void DiffView::paintCell(QPainter *p, int row, int col)
 	}
 
     p->fillRect(0, 0, width, height, backgroundColor);
-    p->drawText(innerborder, 0, width-2*innerborder, height, align|ExpandTabs, str);
+    p->drawText(innerborder, 0, width-2*innerborder, height, align, str);
     p->setFont(oldFont);
 }
 
