@@ -84,7 +84,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     connect(tabWidget, SIGNAL(currentChanged(QWidget*)),
             this, SLOT(tabChanged(QWidget*)));
 
-    QWhatsThis::add(tree, i18n("Choose revision A by clicking with the left"
+    QWhatsThis::add(tree, i18n("Choose revision A by clicking with the left "
                                "mouse button,\nrevision B by clicking with "
                                "the middle mouse button."));
 
