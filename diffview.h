@@ -85,6 +85,8 @@ private:
     QColor diffChangeColor;
     QColor diffInsertColor;
     QColor diffDeleteColor;
+
+    unsigned int    m_tabWidth;
 };
 
 
