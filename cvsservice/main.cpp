@@ -29,13 +29,17 @@ int main(int argc, char** argv)
 {
     KAboutData about("cvsservice", I18N_NOOP("CVS DCOP service"), "0.1",
             I18N_NOOP("DCOP service for CVS"), KAboutData::License_LGPL,
-            "Copyright (c) 2002 Christian Loose");
+            "Copyright (c) 2002-2003 Christian Loose");
     about.addAuthor("Christian Loose", I18N_NOOP("Developer"),
             "christian.loose@hamburg.de");
 
     KCmdLineArgs::init(argc, argv, &about);
 
     KApplication app;
+    
+    // This app is started automatically, no need for session management
+    app.disableSessionManagement();
+
     CvsService service;
 
     return app.exec();
