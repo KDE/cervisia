@@ -291,7 +291,8 @@ void DiffView::paintCell(QPainter *p, int row, int col)
     QFont oldFont(p->font());
     if (item->type==Separator)
         {
-            backgroundColor = gray;
+            backgroundColor = KGlobalSettings::highlightColor();
+            p->setPen(KGlobalSettings::highlightedTextColor());
             inverted = false;
             align = AlignLeft;
             innerborder = 0;
@@ -303,7 +304,8 @@ void DiffView::paintCell(QPainter *p, int row, int col)
         }
     else if (col == 0 && linenos)
 	{
-	    backgroundColor = QColor(222, 222, 222);
+	    backgroundColor = KGlobalSettings::highlightColor();
+	    p->setPen(KGlobalSettings::highlightedTextColor());
 	    inverted = false;
 	    align = AlignLeft;
 	    innerborder = 0;
@@ -314,7 +316,8 @@ void DiffView::paintCell(QPainter *p, int row, int col)
 	}
     else if (marker && (col == 0 || col == 1))
 	{
-	    backgroundColor = lightGray;
+	    backgroundColor = KGlobalSettings::alternateBackgroundColor();
+            p->setPen(KGlobalSettings::textColor());
 	    inverted = false;
 	    align = AlignRight;
 	    innerborder = BORDER;
@@ -328,8 +331,9 @@ void DiffView::paintCell(QPainter *p, int row, int col)
 		(item->type==Change)? QColor(237, 190, 190)
 		: (item->type==Insert)? QColor(190, 190, 237)
 		: (item->type==Delete)? QColor(190, 237, 190)
-		: (item->type==Neutral)? gray : white;
-	    inverted = item->inverted;
+		: (item->type==Neutral)? KGlobalSettings::alternateBackgroundColor() : KGlobalSettings::baseColor();
+            p->setPen(KGlobalSettings::textColor());
+            inverted = item->inverted;
 	    align = AlignLeft;
 	    innerborder = 0;
 	    str = item->line;
@@ -338,13 +342,12 @@ void DiffView::paintCell(QPainter *p, int row, int col)
     if (inverted)
 	{
 	    p->setPen(backgroundColor);
-	    backgroundColor = black;
+	    backgroundColor = KGlobalSettings::textColor();
             QFont f(oldFont);
             f.setBold(true);
             p->setFont(f);
 	}
-    else
-	p->setPen(black);
+
     p->fillRect(0, 0, width, height, backgroundColor);
     p->drawText(innerborder, 0, width-2*innerborder, height, align|ExpandTabs, str);
     p->setFont(oldFont);
@@ -431,11 +434,11 @@ void DiffZoomWidget::paintEvent(QPaintEvent *)
                     if (y1 != y0 || c != 'U')
                         {
                             QColor color =
-                              (c==' ')? gray
+                              (c==' ')? KGlobalSettings::alternateBackgroundColor()
                               : (c=='C')? QColor(237, 190, 190)
                               : (c=='I')? QColor(190, 190, 237)
                               : (c=='D')? QColor(190, 237, 190)
-                              : (c=='N')? gray : white;
+                              : (c=='N')? KGlobalSettings::alternateBackgroundColor() : KGlobalSettings::baseColor();
 
                             if (y2 == y1)
                                 y2++;
