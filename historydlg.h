@@ -40,6 +40,7 @@ private slots:
     virtual void done(int r);
     void choiceChanged();
     void toggled(bool b);
+    void helpClicked();
     
 private:
     struct Options {

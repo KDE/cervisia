@@ -48,11 +48,15 @@ AnnotateDialog::AnnotateDialog(QWidget *parent, const char *name)
     layout->addWidget(frame, 0);
 
     KButtonBox *buttonbox = new KButtonBox(this);
+    QPushButton *helpbutton = buttonbox->addButton("&Help");
+    helpbutton->setAutoDefault(false);
     buttonbox->addStretch();
-    connect( buttonbox->addButton(i18n("&Close")), SIGNAL(clicked()),
-	     SLOT(reject()) );
+    QPushButton *closebutton = buttonbox->addButton(i18n("&Close"));
     buttonbox->layout();
     layout->addWidget(buttonbox, 0);
+
+    connect( helpbutton, SIGNAL(clicked()), SLOT(helpClicked()) );
+    connect( closebutton, SIGNAL(clicked()), SLOT(reject()) );
 
     QFontMetrics fm(fontMetrics());
     setMinimumSize(fm.width("0123456789")*12,
@@ -216,6 +220,12 @@ bool AnnotateDialog::parseCvsAnnotate(const QString &sandbox, const QString &rep
 	}
 
     return true; // successful
+}
+
+
+void AnnotateDialog::helpClicked()
+{
+    kapp->invokeHelp("annotate", "cervisia");
 }
 
 #include "annotatedlg.moc"

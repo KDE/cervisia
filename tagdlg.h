@@ -43,6 +43,7 @@ protected:
 
 private slots:
     void tagButtonClicked();
+    void helpClicked();
     
 private:
     ActionType act;

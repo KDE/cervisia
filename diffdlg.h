@@ -50,6 +50,7 @@ private slots:
     void comboActivated(int index);
     void backClicked();
     void forwClicked();
+    void helpClicked();
     
 private:
     struct Options {

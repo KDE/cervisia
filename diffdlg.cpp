@@ -109,9 +109,10 @@ DiffDialog::DiffDialog(QWidget *parent, const char *name, bool modal)
     layout->addWidget(frame, 0);
 
     KButtonBox *buttonbox = new KButtonBox(this);
+    QPushButton *helpbutton = buttonbox->addButton(i18n("&Help"));
+    helpbutton->setAutoDefault(false);
     buttonbox->addStretch();
-    connect( buttonbox->addButton(i18n("&Close")), SIGNAL(clicked()),
-	     SLOT(reject()) );
+    QPushButton *closebutton = buttonbox->addButton(i18n("&Close"));
     buttonbox->layout();
     layout->addWidget(buttonbox, 0);
 
@@ -119,6 +120,9 @@ DiffDialog::DiffDialog(QWidget *parent, const char *name, bool modal)
     setMinimumSize(fm.width("0123456789")*12,
 		   fm.lineSpacing()*30);
 
+    connect( helpbutton, SIGNAL(clicked()), SLOT(helpClicked()) );
+    connect( closebutton, SIGNAL(clicked()), SLOT(reject()) );
+    
     if (options)
         {
             resize(options->size);
@@ -555,7 +559,14 @@ void DiffDialog::forwClicked()
     updateHighlight(newitem);
 }
 
+
+void DiffDialog::helpClicked()
+{
+    kapp->invokeHelp("diff", "cervisia");
+}
+
 #include "diffdlg.moc"
+
 
 // Local Variables:
 // c-basic-offset: 4

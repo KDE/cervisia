@@ -113,15 +113,21 @@ ResolveDialog::ResolveDialog( QWidget *parent, const char *name)
     layout->addWidget(frame, 0);
 
     KButtonBox *buttonbox = new KButtonBox(this);
-    connect( buttonbox->addButton(i18n("&Save")), SIGNAL(clicked()),
-	     SLOT(slotSave()) );
-    connect( buttonbox->addButton(i18n("Sa&ve As...")), SIGNAL(clicked()),
-	     SLOT(slotSaveAs()) );
+    QPushButton *helpbutton = buttonbox->addButton(i18n("&Help"));
+    helpbutton->setAutoDefault(false);
     buttonbox->addStretch();
-    connect( buttonbox->addButton(i18n("&Close")), SIGNAL(clicked()),
-	     SLOT(accept()) );
+    QPushButton *savebutton = buttonbox->addButton(i18n("&Save"));
+    savebutton->setAutoDefault(false);
+    QPushButton *saveasbutton = buttonbox->addButton(i18n("Sa&ve As..."));
+    saveasbutton->setAutoDefault(false);
+    QPushButton *closebutton = buttonbox->addButton(i18n("&Close"));
     buttonbox->layout();
     layout->addWidget(buttonbox, 0);
+
+    connect( helpbutton, SIGNAL(clicked()), SLOT(helpClicked()) );
+    connect( savebutton, SIGNAL(clicked()), SLOT(saveClicked()) );
+    connect( saveasbutton, SIGNAL(clicked()), SLOT(slotSaveAs()) );
+    connect( closebutton, SIGNAL(clicked()), SLOT(accept()) );
 
     setMinimumSize(fm.width("0123456789")*12,
 		   fm.lineSpacing()*40);
@@ -495,13 +501,19 @@ void ResolveDialog::editClicked()
 }
 
 
-void ResolveDialog::slotSave()
+void ResolveDialog::helpClicked()
+{
+    kapp->invokeHelp("resolvingconflicts", "cervisia");
+}
+
+
+void ResolveDialog::saveClicked()
 {
     saveFile(fname);
 }
 
 
-void ResolveDialog::slotSaveAs()
+void ResolveDialog::saveAsClicked()
 {
     QString filename =
 	KFileDialog::getSaveFileName(0, 0, this, 0);

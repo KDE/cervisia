@@ -104,10 +104,10 @@ HistoryDialog::HistoryDialog(QWidget *parent, const char *name)
     layout->addWidget(listview, 1);
     layout->addSpacing(10);
 
-    commit_box = new QCheckBox(i18n("Show &commit events"), this);
+    commit_box = new QCheckBox(i18n("Show c&ommit events"), this);
     commit_box->setChecked(true);
     commit_box->setMinimumSize(commit_box->sizeHint());
-    checkout_box = new QCheckBox(i18n("Show c&heckout events"), this);
+    checkout_box = new QCheckBox(i18n("Show ch&eckout events"), this);
     checkout_box->setChecked(true);
     checkout_box->setMinimumSize(checkout_box->sizeHint());
     tag_box = new QCheckBox(i18n("Show &tag events"), this);
@@ -185,13 +185,17 @@ HistoryDialog::HistoryDialog(QWidget *parent, const char *name)
     layout->addSpacing(8);
 
     KButtonBox *buttonbox = new KButtonBox(this);
+    QPushButton *helpbutton = buttonbox->addButton(i18n("&Help"));
+    helpbutton->setAutoDefault(false);
     buttonbox->addStretch();
     QPushButton *closebutton = buttonbox->addButton(i18n("&Close"));
     closebutton->setAutoDefault(false);
-    connect( closebutton, SIGNAL(clicked()), SLOT(reject()) );
     buttonbox->layout();
     buttonbox->setFixedHeight(buttonbox->height());
     layout->addWidget(buttonbox, 0);
+
+    connect( helpbutton, SIGNAL(clicked()), SLOT(helpClicked()) );
+    connect( closebutton, SIGNAL(clicked()), SLOT(reject()) );
 
     if (options)
         {
@@ -276,6 +280,12 @@ void HistoryDialog::toggled(bool b)
     edit->setEnabled(b);
     if (b)
         edit->setFocus();
+}
+
+
+void HistoryDialog::helpClicked()
+{
+    kapp->invokeHelp("browsinghistory", "cervisia");
 }
 
 

@@ -53,8 +53,9 @@ private slots:
     void abClicked();
     void baClicked();
     void editClicked();
-    void slotSave();
-    void slotSaveAs();
+    void helpClicked();
+    void saveClicked();
+    void saveAsClicked();
     
 private:
     struct Options {

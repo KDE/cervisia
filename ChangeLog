@@ -2,6 +2,8 @@
 
 	* Made editor configurable again
 	* Readded manpage
+	* Put help buttons in all dialogs, linked to
+	  the online docs
 
 2002-06-25  Bernd Gehrmann  <bernd@mail.berlios.de>
 

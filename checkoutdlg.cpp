@@ -149,15 +149,19 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
     layout->addWidget(frame, 0);
 
     KButtonBox *buttonbox = new KButtonBox(this);
+    QPushButton *helpbutton = buttonbox->addButton("&Help");
+    helpbutton->setAutoDefault(false);
     buttonbox->addStretch();
-    QPushButton *ok = buttonbox->addButton(i18n("OK"));
-    QPushButton *cancel = buttonbox->addButton(i18n("Cancel"));
-    ok->setDefault(true);
-    connect( ok, SIGNAL(clicked()), this, SLOT(accept()) );
-    connect( cancel, SIGNAL(clicked()), this, SLOT(reject()) );
+    QPushButton *okbutton = buttonbox->addButton(i18n("OK"));
+    QPushButton *cancelbutton = buttonbox->addButton(i18n("Cancel"));
+    okbutton->setDefault(true);
     buttonbox->layout();
     buttonbox->setFixedHeight(buttonbox->height());
     layout->addWidget(buttonbox, 0);
+
+    connect( helpbutton, SIGNAL(clicked()), SLOT(helpClicked()) );
+    connect( okbutton, SIGNAL(clicked()), this, SLOT(accept()) );
+    connect( cancelbutton, SIGNAL(clicked()), this, SLOT(reject()) );
 
     layout->activate();
     resize(sizeHint());
@@ -320,6 +324,13 @@ void CheckoutDialog::moduleButtonClicked()
             if ( !module.isEmpty() )
                 module_combo->insertItem(module);
         }
+}
+
+
+void CheckoutDialog::helpClicked()
+{
+    QString anchor = (act==Import)? "importing" : "checkingout";
+    kapp->invokeHelp(anchor, "cervisia");
 }
 
 #include "checkoutdlg.moc"

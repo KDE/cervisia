@@ -87,12 +87,17 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent, const char *name)
     layout->addWidget(frame, 0);
 
     KButtonBox *buttonbox = new KButtonBox(this);
+    QPushButton *helpbutton = buttonbox->addButton(i18n("&Help"));
+    helpbutton->setAutoDefault(false);
     buttonbox->addStretch();
-    QPushButton *ok = buttonbox->addButton(i18n("OK"));
-    QPushButton *cancel = buttonbox->addButton(i18n("Cancel"));
-    ok->setDefault(true);
-    connect( ok, SIGNAL(clicked()), this, SLOT(accept()) );
-    connect( cancel, SIGNAL(clicked()), this, SLOT(reject()) );
+    QPushButton *okbutton = buttonbox->addButton(i18n("OK"));
+    QPushButton *cancelbutton = buttonbox->addButton(i18n("Cancel"));
+    okbutton->setDefault(true);
+
+    connect( helpbutton, SIGNAL(clicked()), SLOT(helpClicked()) );
+    connect( okbutton, SIGNAL(clicked()), SLOT(accept()) );
+    connect( cancelbutton, SIGNAL(clicked()), SLOT(reject()) );
+
     buttonbox->layout();
     layout->addWidget(buttonbox, 0);
 
@@ -116,6 +121,12 @@ WatchDialog::Events WatchDialog::events()
                 res = Events(res | Unedits);
         }
     return res;
+}
+
+
+void WatchDialog::helpClicked()
+{
+    kapp->invokeHelp("watches", "cervisia");
 }
 
 #include "watchdlg.moc"

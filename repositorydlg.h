@@ -47,6 +47,7 @@ private slots:
     void slotSettingsClicked();
     void slotLoginClicked();
     void slotLogoutClicked();
+    void helpClicked();
 
 private:
     struct Options {

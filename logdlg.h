@@ -57,10 +57,11 @@ public:
     static void loadOptions(KConfig *config);
     static void saveOptions(KConfig *config);
 
-protected slots:
+protected:
     virtual void done(int res);
 
 private slots:
+    void helpClicked();
     void diffClicked();
     void annotateClicked();
     void revisionSelected(QString rev, bool rmb);

@@ -166,15 +166,19 @@ RepositoryDialog::RepositoryDialog(QWidget *parent, const char *name)
     layout->addWidget(frame, 0);
 
     KButtonBox *buttonbox = new KButtonBox(this);
+    QPushButton *helpbutton = buttonbox->addButton(i18n("&Help"));
+    helpbutton->setAutoDefault(false);
     buttonbox->addStretch();
-    QPushButton *ok = buttonbox->addButton(i18n("OK"));
-    QPushButton *cancel = buttonbox->addButton(i18n("Cancel"));
-    ok->setDefault(true);
-    connect( ok, SIGNAL(clicked()), this, SLOT(accept()) );
-    connect( cancel, SIGNAL(clicked()), this, SLOT(reject()) );
+    QPushButton *okbutton = buttonbox->addButton(i18n("OK"));
+    QPushButton *cancelbutton = buttonbox->addButton(i18n("Cancel"));
+    okbutton->setDefault(true);
     buttonbox->layout();
     buttonbox->setFixedHeight(buttonbox->height());
     layout->addWidget(buttonbox, 0);
+
+    connect( helpbutton, SIGNAL(clicked()), SLOT(helpClicked()) );
+    connect( okbutton, SIGNAL(clicked()), SLOT(accept()) );
+    connect( cancelbutton, SIGNAL(clicked()), SLOT(reject()) );
 
     layout->activate();
     resize(sizeHint());
@@ -350,6 +354,12 @@ void RepositoryDialog::slotLoginClicked()
 
 void RepositoryDialog::slotLogoutClicked()
 {
+}
+
+
+void RepositoryDialog::helpClicked()
+{
+    kapp->invokeHelp("accessing-repository", "cervisia");
 }
 
 

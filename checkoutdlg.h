@@ -60,6 +60,7 @@ protected:
 private slots:
     void dirButtonClicked();
     void moduleButtonClicked();
+    void helpClicked();
 
 private:
     struct Options {

@@ -33,6 +33,9 @@ public:
     WatchDialog( ActionType action, QWidget *parent=0, const char *name=0 );
     Events events();
 
+private slots:
+    void helpClicked();
+
 private:
     QButtonGroup *group;
     QRadioButton *all_button, *only_button;

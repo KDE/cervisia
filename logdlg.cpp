@@ -163,15 +163,21 @@ LogDialog::LogDialog(QWidget *parent, const char *name)
     layout->addSpacing(8);
 
     KButtonBox *buttonbox = new KButtonBox(this);
-    connect( buttonbox->addButton(i18n("&Diff")), SIGNAL(clicked()),
-	     SLOT(diffClicked()) );
-    connect( buttonbox->addButton(i18n("&Annotate")), SIGNAL(clicked()),
-	     SLOT(annotateClicked()) );
+    QPushButton *helpbutton = buttonbox->addButton(i18n("&Help"));
+    helpbutton->setAutoDefault(false);
     buttonbox->addStretch();
+    QPushButton *diffbutton = buttonbox->addButton(i18n("&Diff"));
+    diffbutton->setAutoDefault(false);
+    QPushButton *annotatebutton = buttonbox->addButton(i18n("&Annotate"));
+    annotatebutton->setAutoDefault(false);
     connect( buttonbox->addButton(i18n("&Close")), SIGNAL(clicked()),
 	     SLOT(reject()) );
     buttonbox->layout();
     layout->addWidget(buttonbox, 0);
+
+    connect( helpbutton, SIGNAL(clicked()), SLOT(helpClicked()) );
+    connect( diffbutton, SIGNAL(clicked()), SLOT(diffClicked()) );
+    connect( annotatebutton, SIGNAL(clicked()), SLOT(annotateClicked()) );
 
     if (options)
         {
@@ -394,6 +400,12 @@ bool LogDialog::parseCvsLog(const QString &sbox, const QString &repo, const QStr
     layout()->activate();
 
     return true; // successful
+}
+
+
+void LogDialog::helpClicked()
+{
+    kapp->invokeHelp("browsinglogs", "cervisia");
 }
 
 

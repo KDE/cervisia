@@ -58,7 +58,7 @@ void FontButton::chooseFont()
 
 SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name )
     : KDialogBase(KDialogBase::Tabbed, i18n("Configure Cervisia"),
-      KDialogBase::Ok | KDialogBase::Cancel,
+      KDialogBase::Ok | KDialogBase::Cancel | KDialogBase::Help,
       KDialogBase::Ok,
       parent, name, true)
 {
@@ -156,6 +156,8 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
     new QWidget(advancedPage);
 
     readSettings();
+
+    setHelp("customization", "cervisia");
 
 #if 0
     QGridLayout *editorlayout = new QGridLayout(editorgroup, 4, 2, 10, 6);
