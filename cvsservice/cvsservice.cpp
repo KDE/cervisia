@@ -215,7 +215,7 @@ DCOPRef CvsService::remove(const QStringList& files, bool recursive)
     
     *d->singleCvsJob << d->repository->cvsClient() << "remove -f";
     
-    if( recursive )
+    if( !recursive )
         *d->singleCvsJob << "-l";
     
     *d->singleCvsJob << CvsServiceUtils::joinFileList(files) << REDIRECT_STDERR;
