@@ -520,7 +520,8 @@ void CervisiaPart::updateActions()
     actionCollection()->action( "view_last_change" )->setEnabled( single );
 
     //    bool nojob = !( actionCollection()->action( "stop_job" )->isEnabled() );
-    bool nojob = !hasRunningJob && (update->currentItem()!=0);
+    bool selected=(update->currentItem()!=0);
+    bool nojob = !hasRunningJob && selected;
     actionCollection()->action( "file_update" )->setEnabled( nojob );
     actionCollection()->action( "file_status" )->setEnabled( nojob );
     actionCollection()->action( "file_commit" )->setEnabled( nojob );
@@ -545,6 +546,10 @@ void CervisiaPart::updateActions()
 
     actionCollection()->action( "repository_checkout" )->setEnabled( nojob );
     actionCollection()->action( "repository_import" )->setEnabled( nojob );
+
+    actionCollection()->action( "view_unfold_tree" )->setEnabled( selected );
+    actionCollection()->action( "view_fold_tree" )->setEnabled( selected );
+    actionCollection()->action( "view_history" )->setEnabled(selected);
 }
 
 
