@@ -1,3 +1,12 @@
+2003-01-09  Christian Loose <christian.loose@hamburg.de>
+
+	* Use DCOP stubs to access the methods of the cvs DCOP service
+	* Added new method update() and checkout() to DCOP service
+	* Use KProcess::operator<< instead of QString::operator+= to
+	  build the command line
+	* Make CVS_SERVER configurable in DCOP service
+	  (GUI is missing)
+
 2003-01-04  Christian Loose <christian.loose@hamburg.de>
 
 	* Use DCOP service to update status for UpdateView
