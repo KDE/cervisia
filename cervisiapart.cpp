@@ -448,7 +448,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KToggleAction( i18n("Hide Non CVS Files"), 0,
+    action = new KToggleAction( i18n("Hide Non-CVS Files"), 0,
                                 this, SLOT(slotHideNotInCVS()),
                                 actionCollection(), "settings_hide_notincvs" );
     hint = i18n("Determines whether files not in CVS are hidden");
