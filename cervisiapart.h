@@ -19,6 +19,7 @@
 #include <kparts/browserextension.h>
 #include <kparts/genericfactory.h>
 
+#include "addremovedlg.h"
 #include "commitdlg.h"
 #include "checkoutdlg.h"
 #include "watchdlg.h"
@@ -138,7 +139,7 @@ private:
 
     void openSandbox(const QString &dirname);
     void updateSandbox(const QString &extraopt = QString::null);
-    void commitOrAddOrRemove(CommitDialog::ActionType action);
+    void addOrRemove(AddRemoveDialog::ActionType action);
     void addOrRemoveWatch(WatchDialog::ActionType action);
     void importOrCheckout(CheckoutDialog::ActionType action);
     void createOrDeleteTag(TagDialog::ActionType action);

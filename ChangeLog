@@ -3,6 +3,9 @@
 	* Added help button to CommitDialog
 	* Use DCOP service to retrieve Tags and Branches for TagDialog,
 	  MergeDialog und UpdateDialog
+	* Added new AddRemoveDialog (extracted from CommitDialog)
+	* Make functionality to view diff in CommitDialog more visible
+	  by adding diff button.
 
 2003-01-09  Christian Loose <christian.loose@hamburg.de>
 

@@ -31,10 +31,8 @@ class CommitDialog : public KDialogBase
 {
     Q_OBJECT
 
-public:
-    enum ActionType { Commit, Add, AddBinary, Remove };
-    
-    explicit CommitDialog( ActionType action, QWidget *parent=0, const char *name=0 );
+public:   
+    explicit CommitDialog( QWidget *parent=0, const char *name=0 );
 
     virtual ~CommitDialog();
 
@@ -49,6 +47,8 @@ public:
 private slots:
     void comboActivated(int);
     void fileSelected(int);
+    void fileHighlighted(int);
+    void diffClicked();
 
 private:
     struct Options {
@@ -64,6 +64,7 @@ private:
     QString current_text;
     QString sandbox;
     QString repository;
+    int highlightedFile;
 };
 
 #endif

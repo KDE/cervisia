@@ -812,25 +812,71 @@ void CervisiaPart::slotMerge()
 
 void CervisiaPart::slotCommit()
 {
-    commitOrAddOrRemove(CommitDialog::Commit);
+    QStringList list = update->multipleSelection();
+    if (list.isEmpty())
+        return;
+
+    // modal dialog
+    CommitDialog dlg(widget());
+    dlg.setLogMessage(changelogstr);
+    dlg.setLogHistory(sandbox, repository, recentCommits);
+    dlg.setFileList(list);
+
+    if (dlg.exec())
+    {
+        QString msg = dlg.logMessage();
+        if( !recentCommits.contains( msg ) )
+        {
+            recentCommits.prepend( msg );
+            while (recentCommits.count() > 50)
+                recentCommits.remove( recentCommits.last() );
+
+            KConfig* conf = config();
+            conf->setGroup( "CommitLogs" );
+            conf->writeEntry( sandbox, recentCommits, COMMIT_SPLIT_CHAR );
+        }
+
+        update->prepareJob(opt_commitRecursive, UpdateView::Commit);
+        
+        QString cmdline = cvsClient(repository) + " commit ";
+        if (opt_commitRecursive)
+            cmdline += "-R ";
+        else
+            cmdline += "-l ";
+        cmdline += "-m ";
+        cmdline += KShellProcess::quote(dlg.logMessage());
+        cmdline += " ";
+
+        cmdline += joinLine(list);
+        cmdline += " 2>&1";
+
+        if (protocol->startJob(sandbox, repository, cmdline))
+        {
+            showJobStart(cmdline);
+            connect( protocol, SIGNAL(jobFinished(bool, int)),
+                     update, SLOT(finishJob(bool, int)) );
+            connect( protocol, SIGNAL(jobFinished(bool, int)),
+                     this, SLOT(slotJobFinished()) );
+        }
+    }
 }
 
 
 void CervisiaPart::slotAdd()
 {
-    commitOrAddOrRemove(CommitDialog::Add);
+    addOrRemove(AddRemoveDialog::Add);
 }
 
 
 void CervisiaPart::slotAddBinary()
 {
-    commitOrAddOrRemove(CommitDialog::AddBinary);
+    addOrRemove(AddRemoveDialog::AddBinary);
 }
 
 
 void CervisiaPart::slotRemove()
 {
-    commitOrAddOrRemove(CommitDialog::Remove);
+    addOrRemove(AddRemoveDialog::Remove);
 }
 
 
@@ -863,63 +909,32 @@ void CervisiaPart::updateSandbox(const QString &extraopt)
 }
 
 
-void CervisiaPart::commitOrAddOrRemove(CommitDialog::ActionType action)
+void CervisiaPart::addOrRemove(AddRemoveDialog::ActionType action)
 {
     QStringList list = update->multipleSelection();
     if (list.isEmpty())
         return;
 
     // modal dialog
-    CommitDialog *l = new CommitDialog(action, widget());
-    if (action == CommitDialog::Commit)
-    {
-        l->setLogMessage(changelogstr);
-        l->setLogHistory(sandbox, repository, recentCommits);
-    }
-    l->setFileList(list);
+    AddRemoveDialog dlg(action, widget());
+    dlg.setFileList(list);
 
-    if (l->exec())
+    if (dlg.exec())
     {
         QString cmdline;
         switch (action)
         {
-            case CommitDialog::Commit:
-            {
-                QString msg = l->logMessage();
-                if( !recentCommits.contains( msg ) )
-                {
-                    recentCommits.prepend( msg );
-                    while (recentCommits.count() > 50)
-                        recentCommits.remove( recentCommits.last() );
-
-                    KConfig* conf = config();
-                    conf->setGroup( "CommitLogs" );
-                    conf->writeEntry( sandbox, recentCommits, COMMIT_SPLIT_CHAR );
-                }
-
-                update->prepareJob(opt_commitRecursive, UpdateView::Commit);
-                cmdline = cvsClient(repository) + " commit ";
-                if (opt_commitRecursive)
-                    cmdline += "-R ";
-                else
-                    cmdline += "-l ";
-                cmdline += "-m ";
-                cmdline += KShellProcess::quote(l->logMessage());
-                cmdline += " ";
-            }
-            break;
-
-            case CommitDialog::Add:
+            case AddRemoveDialog::Add:
                 update->prepareJob(false, UpdateView::Add);
                 cmdline = cvsClient(repository) + " add ";
             break;
 
-            case CommitDialog::AddBinary:
+            case AddRemoveDialog::AddBinary:
                 update->prepareJob(false, UpdateView::Add);
                 cmdline = cvsClient(repository) + " add -kb ";
             break;
 
-            case CommitDialog::Remove:
+            case AddRemoveDialog::Remove:
                 update->prepareJob(opt_commitRecursive, UpdateView::Remove);
                 cmdline = cvsClient(repository) + " remove -f ";
                 if (opt_commitRecursive)
@@ -941,8 +956,6 @@ void CervisiaPart::commitOrAddOrRemove(CommitDialog::ActionType action)
                      this, SLOT(slotJobFinished()) );
         }
     }
-
-    delete l;
 }
 
 void CervisiaPart::slotBrowseLog()

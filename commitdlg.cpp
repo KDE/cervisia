@@ -27,72 +27,59 @@
 CommitDialog::Options *CommitDialog::options = 0;
 
 
-CommitDialog::CommitDialog(ActionType action, QWidget *parent, const char *name)
-    : KDialogBase(parent, name, true, QString::null,
-                  Ok | Cancel | Help, Ok, true),
-      edit(0)
+CommitDialog::CommitDialog(QWidget *parent, const char *name)
+    : KDialogBase(parent, name, true, i18n("CVS Commit"),
+                  Ok | Cancel | Help | User1, Ok, true)
 {
-    setCaption( (action==Add)?       i18n("CVS Add") :
-                (action==AddBinary)? i18n("CVS Add Binary") :
-                (action==Remove)?    i18n("CVS Remove") :
-                                     i18n("CVS Commit") );
-
     QFrame* mainWidget = makeMainWidget();
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 
-    QLabel *textlabel = new QLabel
-        ( (action==Add)?       i18n("Add the following files to the repository:") :
-          (action==AddBinary)? i18n("Add the following binary files to the repository:") :
-          (action==Remove)?    i18n("Remove the following files from the repository:") :
-                               i18n("Commit the following &files:"),
-          mainWidget );
+    QLabel *textlabel = new QLabel( i18n("Commit the following &files:"), mainWidget );
     layout->addWidget(textlabel);
 
     listbox = new QListBox(mainWidget);
     textlabel->setBuddy(listbox);
     connect( listbox, SIGNAL(selected(int)), this, SLOT(fileSelected(int)));
+    connect( listbox, SIGNAL(highlighted(int)), this, SLOT(fileHighlighted(int)));
     layout->addWidget(listbox, 5);
 
-    if (action == Commit)
-        {
-            QLabel *archivelabel = new QLabel(i18n("Older &messages:"), mainWidget);
-            layout->addWidget(archivelabel);
+    QLabel *archivelabel = new QLabel(i18n("Older &messages:"), mainWidget);
+    layout->addWidget(archivelabel);
             
-            combo = new QComboBox(mainWidget);
-            archivelabel->setBuddy(combo);
-            connect( combo, SIGNAL(activated(int)), this, SLOT(comboActivated(int)) );
-            // make sure that combobox is smaller than the screen
-            combo->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
-            layout->addWidget(combo);
+    combo = new QComboBox(mainWidget);
+    archivelabel->setBuddy(combo);
+    connect( combo, SIGNAL(activated(int)), this, SLOT(comboActivated(int)) );
+    // make sure that combobox is smaller than the screen
+    combo->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
+    layout->addWidget(combo);
             
-            QLabel *messagelabel = new QLabel(i18n("&Log message:"), mainWidget);
-            layout->addWidget(messagelabel);
+    QLabel *messagelabel = new QLabel(i18n("&Log message:"), mainWidget);
+    layout->addWidget(messagelabel);
 
-            edit = new QMultiLineEdit(mainWidget);
-            messagelabel->setBuddy(edit);
-            edit->setFocus();
-            edit->setMinimumSize(400, 100);
-            layout->addWidget(edit, 10);
-        }
-    else
-        listbox->setEnabled(false);
+    edit = new QMultiLineEdit(mainWidget);
+    messagelabel->setBuddy(edit);
+    edit->setFocus();
+    edit->setMinimumSize(400, 100);
+    layout->addWidget(edit, 10);
+
+    setButtonText(User1, i18n("&Diff"));
+    enableButton(User1, false);
+    connect( this, SIGNAL(user1Clicked()),
+             this, SLOT(diffClicked()) );            
 
     setHelp("commitingfiles");
 
-    if (options && edit) // Only for commits
+    if (options)
         resize(options->size);
 }
 
 
 CommitDialog::~CommitDialog()
 {
-    if (edit) // Only for commits
-        {
-            if (!options)
-                options = new Options;
-            options->size = size();
-        }
+    if (!options)
+        options = new Options;
+    options->size = size();
 }
 
 
@@ -194,6 +181,28 @@ void CommitDialog::fileSelected(int index)
     else
         delete l;
 }
+
+
+void CommitDialog::fileHighlighted(int index)
+{
+    highlightedFile = index;
+    enableButton(User1, true);
+}
+
+void CommitDialog::diffClicked()
+{
+    QListBoxItem *item = listbox->item(highlightedFile);
+    if ( !item )
+        return;
+    QString filename = item->text();
+
+    DiffDialog *l = new DiffDialog(this, "diffdialog", true);
+    if (l->parseCvsDiff(sandbox, repository, filename, "", ""))
+        l->show();
+    else
+        delete l;
+}
+
 
 #include "commitdlg.moc"
 
