@@ -60,6 +60,7 @@ CommitDialog::CommitDialog(ActionType action, QWidget *parent, const char *name)
             combo = new QComboBox(this);
             archivelabel->setBuddy(combo);
             connect( combo, SIGNAL(activated(int)), this, SLOT(comboActivated(int)) );
+            combo->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
             layout->addWidget(combo, 0);
             
             QLabel *messagelabel = new QLabel(i18n("&Log message:"), this);
