@@ -20,14 +20,16 @@
 #include <qfileinfo.h>
 #include <qlabel.h>
 #include <qlayout.h>
+#include <qpushbutton.h>
 #include <qtabwidget.h>
 #include <qtextedit.h>
 #include <qwhatsthis.h>
+#include <kconfig.h>
 #include <kdebug.h>
 #include <kfinddialog.h>
+#include <kiconloader.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kconfig.h>
 #include <kprocess.h>
 #include <krfcdate.h>
 #include <krun.h>
@@ -171,7 +173,10 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     connect( this, SIGNAL(user3Clicked()),
              this, SLOT(findClicked()) );
 
-    setButtonOKText(i18n("to view something", "&View"));
+    actionButton(Ok)->setIconSet(::SmallIcon(QString::fromLatin1("fileopen")));
+    setButtonText(Ok, i18n("to view something", "&View"));
+    setButtonTip(Ok, QString::null);
+    setButtonWhatsThis(Ok, QString::null);
 
     setHelp("browsinglogs");
 
@@ -395,7 +400,7 @@ void LogDialog::slotOk()
         revision = selectionB;
 
     // create a temporary file
-    const QString suffix("-" + QFileInfo(filename).fileName() + "-" + revision);
+    const QString suffix("-" + revision + "-" + QFileInfo(filename).fileName());
     const QString tempFileName(::tempFileName(suffix));
 
     // retrieve the file with the selected revision from cvs
