@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -27,7 +27,7 @@ class KIntNumInput;
 class KLineEdit;
 class KConfig;
 class KColorButton;
-
+class KURLRequester;
 
 class FontButton : public QPushButton
 {
@@ -63,7 +63,7 @@ private:
     KLineEdit *cvspathedit;
     QComboBox *compressioncombo;
     KLineEdit *usernameedit;
-    KLineEdit *editoredit;
+    KURLRequester *editoredit;
     KLineEdit *diffoptedit;
     KLineEdit *extdiffedit;
     QCheckBox *remotestatusbox;

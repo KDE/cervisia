@@ -33,6 +33,7 @@
 #include <klineedit.h>
 #include <klocale.h>
 #include <knuminput.h>
+#include <kurlrequester.h>
 
 #include "misc.h"
 
@@ -82,7 +83,7 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
     cvspathlabel->setBuddy(cvspathedit);
 
     QLabel *editorlabel = new QLabel( i18n("&Editor:"), generalPage );
-    editoredit = new KLineEdit(generalPage);
+    editoredit = new KURLRequester(generalPage);
     editorlabel->setBuddy(editoredit);
 
     new QWidget(generalPage);
@@ -236,7 +237,7 @@ void SettingsDialog::readSettings()
     serviceConfig->setGroup("General");
     cvspathedit->setText(serviceConfig->readEntry("CVSPath", "cvs"));
     compressioncombo->setCurrentItem(serviceConfig->readNumEntry("Compression", 0));
-    
+
     config->setGroup("General");
     timeoutedit->setValue((int)config->readUnsignedNumEntry("Timeout", 4000));
     usernameedit->setText(config->readEntry("Username", userName()));
@@ -248,7 +249,7 @@ void SettingsDialog::readSettings()
     remotestatusbox->setChecked(config->readBoolEntry("StatusForRemoteRepos", false));
     localstatusbox->setChecked(config->readBoolEntry("StatusForLocalRepos", false));
     config->setGroup("Communication");
-    editoredit->setText(config->readEntry("Editor"));
+    editoredit->lineEdit()->setText(config->readEntry("Editor"));
     config->setGroup("LookAndFeel");
     protocolfontbox->setFont(config->readFontEntry("ProtocolFont"));
     annotatefontbox->setFont(config->readFontEntry("AnnotateFont"));
@@ -296,7 +297,7 @@ void SettingsDialog::writeSettings()
     config->writeEntry("StatusForRemoteRepos", remotestatusbox->isChecked());
     config->writeEntry("StatusForLocalRepos", localstatusbox->isChecked());
     config->setGroup("Communication");
-    config->writeEntry("Editor", editoredit->text());
+    config->writeEntry("Editor", editoredit->lineEdit()->text());
 #if 0
     config->writeEntry("UseDCOP", usedcopbox->isChecked());
     config->writeEntry("DCOPClient", clientedit->text());
