@@ -47,7 +47,7 @@ TagDialog::TagDialog(ActionType action, const QString &sbox, const QString &repo
             
             QLabel *tag_label = new QLabel(tag_combo, i18n("&Name of tag:"), this);
 
-            QPushButton *tag_button = new QPushButton("Fetch &list", this);
+            QPushButton *tag_button = new QPushButton("Fetch &List", this);
             tag_button->setMinimumWidth(tag_button->sizeHint().width());
             connect( tag_button, SIGNAL(clicked()),
                      this, SLOT(tagButtonClicked()) );

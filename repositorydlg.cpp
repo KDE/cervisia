@@ -39,7 +39,7 @@ AddRepositoryDialog::Options *AddRepositoryDialog::options = 0;
 RepositoryDialog::RepositoryDialog(QWidget *parent, const char *name)
     : QDialog(parent, name, true)
 {
-    setCaption( i18n("Configure access to repositories") );
+    setCaption( i18n("Configure Access to Repositories") );
 
     QBoxLayout *layout = new QVBoxLayout(this, 10);
 

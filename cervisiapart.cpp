@@ -202,7 +202,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Add To Repository..."), Key_Plus,
+    action = new KAction( i18n("&Add to Repository..."), Key_Plus,
 			  this, SLOT( slotAdd() ),
 			  actionCollection(), "file_add" );
     hint = i18n("Adds (cvs add) the selected files to the repository");
@@ -216,7 +216,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Remove From Repository..."), Key_Minus,
+    action = new KAction( i18n("&Remove from Repository..."), Key_Minus,
 			  this, SLOT( slotRemove() ),
 			  actionCollection(), "file_remove" );
     hint = i18n("Removes (cvs remove) the selected files from the repository");
@@ -257,7 +257,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Difference To Repository..."), CTRL+Key_D,
+    action = new KAction( i18n("&Difference to Repository..."), CTRL+Key_D,
 			  this, SLOT(slotDiff()),
 			  actionCollection(), "view_diff" );
     hint = i18n("Shows the differences of the selected file to the BASE version");
@@ -309,14 +309,14 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Update To Tag/Date..."), 0,
+    action = new KAction( i18n("&Update to Tag/Date..."), 0,
 			  this, SLOT(slotUpdateToTag()),
 			  actionCollection(), "update_to_tag" );
     hint = i18n("Updates the selected files to a given tag, branch or date");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("Update To &HEAD"), 0,
+    action = new KAction( i18n("Update to &HEAD"), 0,
 			  this, SLOT(slotUpdateToHead()),
 			  actionCollection(), "update_to_head" );
     hint = i18n("Updates the selected files to the HEAD revision");
@@ -441,7 +441,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KToggleAction( i18n("Create &Directories On Update"), 0,
+    action = new KToggleAction( i18n("Create &Directories on Update"), 0,
 				this, SLOT(slotCreateDirs()),
 				actionCollection(), "settings_create_dirs" );
     hint = i18n("Determines whether updates create directories");

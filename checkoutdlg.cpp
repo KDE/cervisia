@@ -78,7 +78,7 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
             module_combo = new QComboBox(true, this);
             module_combo->setMinimumSize(module_combo->sizeHint());
             
-            QPushButton *module_button = new QPushButton("Fetch &list", this);
+            QPushButton *module_button = new QPushButton("Fetch &List", this);
             module_button->setMinimumWidth(module_button->sizeHint().width());
             connect( module_button, SIGNAL(clicked()),
                      this, SLOT(moduleButtonClicked()) );

@@ -44,7 +44,7 @@ MergeDialog::MergeDialog(const QString &sbox, const QString &repo,
     branch_combo->setMinimumSize(fm.width("0")*30, branch_combo->sizeHint().height());
     //    branch_combo->setFocus();
 
-    branch_button = new QPushButton("Fetch &list", this);
+    branch_button = new QPushButton("Fetch &List", this);
     connect( branch_button, SIGNAL(clicked()),
              this, SLOT(branchButtonClicked()) );
             

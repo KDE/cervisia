@@ -38,7 +38,7 @@ RepositorySettingsDialog::RepositorySettingsDialog(QWidget* parent,  const char*
     if (!name)
       setName("RepositorySettingsDialog");
 
-    setCaption(i18n("Repsitory Settings"));
+    setCaption(i18n("Repository Settings"));
 
     RepositorySettingsDialogLayout = new QVBoxLayout(this);     
     RepositorySettingsDialogLayout->setSpacing(6);
