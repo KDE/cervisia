@@ -429,39 +429,34 @@ bool DiffZoomWidget::eventFilter(QObject *o, QEvent *e)
 
 void DiffZoomWidget::paintEvent(QPaintEvent *)
 {
-    const QScrollBar *bar = diffview->scrollBar();
-    if (!bar)
+    const QScrollBar* scrollBar = diffview->scrollBar();
+    if (!scrollBar)
         return;
 
-    int scrollBarButtonHeight, scrollBarAreaHeight;
-    if (bar->isVisible())
-    {
-        scrollBarButtonHeight = style().pixelMetric(QStyle::PM_ScrollBarSliderMin);
-        scrollBarAreaHeight   = bar->height() - 2 * scrollBarButtonHeight;
-    }
-    else
-    {
-        scrollBarButtonHeight = 0;
-        scrollBarAreaHeight   = height();
-    }
+    // only y and height are important
+    const QRect scrollBarGroove(scrollBar->isVisible()
+                                ? style().querySubControlMetrics(QStyle::CC_ScrollBar,
+                                                                 scrollBar,
+                                                                 QStyle::SC_ScrollBarGroove)
+                                : rect());
 
     // draw rectangles at the positions of the differences
 
     const QByteArray& lineTypes(diffview->compressedContent());
 
-    QPixmap pixbuf(width(), scrollBarAreaHeight);
+    QPixmap pixbuf(width(), scrollBarGroove.height());
     pixbuf.fill(KGlobalSettings::baseColor());
 
     QPainter p(&pixbuf, this);
     if (const unsigned int numberOfLines = lineTypes.size())
     {
-        const double scale(((double) scrollBarAreaHeight) / numberOfLines);
+        const double scale(((double) scrollBarGroove.height()) / numberOfLines);
         for (unsigned int index(0); index < numberOfLines;)
         {
             const char lineType(lineTypes[index]);
 
             // don't use qRound() to avoid painting outside of the pixmap
-            // (yPos1 must be lesser than scrollBarAreaHeight)
+            // (yPos1 must be lesser than scrollBarGroove.height())
             const int yPos1(static_cast<int>(index * scale));
 
             // search next line with different lineType
@@ -496,7 +491,7 @@ void DiffZoomWidget::paintEvent(QPaintEvent *)
         }
     }
     p.flush();
-    bitBlt(this, 0, scrollBarButtonHeight, &pixbuf);
+    bitBlt(this, 0, scrollBarGroove.y(), &pixbuf);
 }
 
 #include "diffview.moc"
