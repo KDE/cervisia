@@ -43,6 +43,7 @@
 static const char SINGLE_JOB_ID[]   = "NonConcurrentJob";
 static const char REDIRECT_STDERR[] = "2>&1";
 
+enum WatchEvents { None=0, All=1, Commits=2, Edits=4, Unedits=8 };
 
 struct CvsService::Private
 {
@@ -124,6 +125,32 @@ DCOPRef CvsService::add(const QStringList& files, bool isBinary)
         *d->singleCvsJob << "-kb";
 
     *d->singleCvsJob << CvsServiceUtils::joinFileList(files) << REDIRECT_STDERR;
+
+    return d->setupNonConcurrentJob();
+}
+
+
+DCOPRef CvsService::addWatch(const QStringList& files, int events)
+{
+    if( !d->hasWorkingCopy() || d->hasRunningJob() )
+        return DCOPRef();
+
+    // assemble the command line
+    d->singleCvsJob->clearCvsCommand();
+
+    *d->singleCvsJob << d->repository->cvsClient() << "watch add";
+
+    if( events != All )
+    {
+        if( events & Commits )
+            *d->singleCvsJob << "-a commit";
+        if( events & Edits )
+            *d->singleCvsJob << "-a edit";
+        if( events & Unedits )
+            *d->singleCvsJob << "-a unedit";
+    }
+
+    *d->singleCvsJob << CvsServiceUtils::joinFileList(files);
 
     return d->setupNonConcurrentJob();
 }
@@ -565,6 +592,32 @@ DCOPRef CvsService::remove(const QStringList& files, bool recursive)
         *d->singleCvsJob << "-l";
 
     *d->singleCvsJob << CvsServiceUtils::joinFileList(files) << REDIRECT_STDERR;
+
+    return d->setupNonConcurrentJob();
+}
+
+
+DCOPRef CvsService::removeWatch(const QStringList& files, int events)
+{
+    if( !d->hasWorkingCopy() || d->hasRunningJob() )
+        return DCOPRef();
+
+    // assemble the command line
+    d->singleCvsJob->clearCvsCommand();
+
+    *d->singleCvsJob << d->repository->cvsClient() << "watch remove";
+
+    if( events != All )
+    {
+        if( events & Commits )
+            *d->singleCvsJob << "-a commit";
+        if( events & Edits )
+            *d->singleCvsJob << "-a edit";
+        if( events & Unedits )
+            *d->singleCvsJob << "-a unedit";
+    }
+
+    *d->singleCvsJob << CvsServiceUtils::joinFileList(files);
 
     return d->setupNonConcurrentJob();
 }

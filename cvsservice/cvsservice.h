@@ -50,6 +50,10 @@ k_dcop:
     DCOPRef add(const QStringList& files, bool isBinary);
 
     /**
+     */
+    DCOPRef addWatch(const QStringList& files, int events);
+
+    /**
      * Shows information on who last modified each line of a file and when.
      *
      * @param fileName the name of the file to show annotations for
@@ -186,7 +190,7 @@ k_dcop:
     /**
      */
     DCOPRef makePatch();
-    
+
     /**
      * @param repository
      *
@@ -207,6 +211,10 @@ k_dcop:
      *         null reference.
      */
     DCOPRef remove(const QStringList& files, bool recursive);
+
+    /**
+     */
+    DCOPRef removeWatch(const QStringList& files, int events);
 
     /**
      * Shows a summary of what's been done locally, without changing the
