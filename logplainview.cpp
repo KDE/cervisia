@@ -18,8 +18,9 @@
 #include <qstylesheet.h>
 #include <kfind.h>
 #include <kfinddialog.h>
-#include <kglobal.h>
 #include <klocale.h>
+
+#include "loginfo.h"
 
 
 LogPlainView::LogPlainView(QWidget* parent, const char* name)
@@ -37,64 +38,57 @@ LogPlainView::~LogPlainView()
 }
 
 
-void LogPlainView::addRevision(const QString& rev, const QString& author, 
-                               const QDateTime& date, const QString& comment, 
-                               const QString& tagcomment)
+void LogPlainView::addRevision(const Cervisia::LogInfo& logInfo)
 {
-    // convert timestamp to string   
-    const QString dateStr(KGlobal::locale()->formatDateTime(date));
-    
     setTextFormat(QStyleSheet::RichText);
 
     // assemble revision information lines
     QString logEntry;
     
-    logEntry += "<b>" + i18n("revision %1").arg(QStyleSheet::escape(rev)) + 
+    logEntry += "<b>" + i18n("revision %1").arg(QStyleSheet::escape(logInfo.m_revision)) + 
                 "</b>";
-    logEntry += " &nbsp;[<a href=\"revA#" + QStyleSheet::escape(rev) + "\">" + 
+    logEntry += " &nbsp;[<a href=\"revA#" + QStyleSheet::escape(logInfo.m_revision) + "\">" + 
                 i18n("Select for revision A") +
                 "</a>]";
-    logEntry += " [<a href=\"revB#" + QStyleSheet::escape(rev) + "\">" + 
+    logEntry += " [<a href=\"revB#" + QStyleSheet::escape(logInfo.m_revision) + "\">" + 
                 i18n("Select for revision B") +
                 "</a>]<br>";
     logEntry += "<i>" + 
-                i18n("date: %1; author: %2").arg(QStyleSheet::escape(dateStr))
-                                            .arg(QStyleSheet::escape(author)) +
+                i18n("date: %1; author: %2").arg(QStyleSheet::escape(logInfo.dateTimeToString()))
+                                            .arg(QStyleSheet::escape(logInfo.m_author)) +
                 "</i>";
 
     append(logEntry);
            
     setTextFormat(QStyleSheet::PlainText);
-                     
+
+    const QChar newline('\n');
+
     // split comment in separate lines
-    QStringList lines = QStringList::split("\n", comment);
+    QStringList lines = QStringList::split(newline, logInfo.m_comment, true);
     
-    append("\n");
+    append(newline);
     QStringList::Iterator it  = lines.begin();
     QStringList::Iterator end = lines.end();
     for( ; it != end; ++it )
     {
-        append(*it);
+        append((*it).isEmpty() ? QString(newline) : *it);
     }
-    append("\n");
+    append(newline);
 
     setTextFormat(QStyleSheet::RichText);
-    
-    // split tag comment in separate lines
-    lines = QStringList::split("\n", tagcomment);
-    
-    it  = lines.begin();
-    end = lines.end();
-    for( ; it != end; ++it )
+
+    for (Cervisia::LogInfo::TTagInfoSeq::const_iterator it = logInfo.m_tags.begin();
+         it != logInfo.m_tags.end(); ++it)
     {
-        append("<i>" + QStyleSheet::escape(*it) + "</i>");
+        append("<i>" + QStyleSheet::escape((*it).toString()) + "</i>");
     }
     
     // add an empty line when we had tags or branches
-    if( lines.begin() != lines.end() )
+    if( !logInfo.m_tags.empty() )
     {
         setTextFormat(QStyleSheet::PlainText);
-        append("\n");
+        append(newline);
     }
 
     // add horizontal line    

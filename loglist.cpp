@@ -15,14 +15,12 @@
 #include "loglist.h"
 
 #include <qapplication.h>
-#include <qdatetime.h>
 #include <qkeycode.h>
-#include <qstylesheet.h>
-#include <kglobal.h>
 #include <klocale.h>
 
-#include "tiplabel.h"
+#include "loginfo.h"
 #include "misc.h"
+#include "tiplabel.h"
 
 
 class LogListViewItem : public KListViewItem
@@ -31,31 +29,41 @@ public:
 
     enum { Revision, Author, Date, Branch, Comment, Tags };
 
-    LogListViewItem(QListView *list,
-                    const QString &rev, const QString &author, const QDateTime &date,
-                    const QString &comment, const QString &tagcomment);
+    LogListViewItem(QListView* list, const Cervisia::LogInfo& logInfo);
 
     virtual int compare(QListViewItem* i, int col, bool) const;
 
 private:
     static QString truncateLine(const QString &s);
-    static QString extractOrdinaryTags(const QString &s);
-    static QString extractBranchName(const QString &s);
 
-    QString mrev, mauthor;
-    QDateTime mdate;
-    QString mcomment, mtagcomment;
+    Cervisia::LogInfo m_logInfo;
     friend class LogListView;
 };
 
 
-LogListViewItem::LogListViewItem( QListView *list,
-                                  const QString &rev, const QString &author, const QDateTime &date,
-                                  const QString &comment, const QString &tagcomment )
-    : KListViewItem(list, rev, author, KGlobal::locale()->formatDateTime(date),
-                    extractBranchName(tagcomment), truncateLine(comment), extractOrdinaryTags(tagcomment)),
-    mrev(rev), mauthor(author), mdate(date), mcomment(comment), mtagcomment(tagcomment)
+LogListViewItem::LogListViewItem(QListView* list, const Cervisia::LogInfo& logInfo)
+    : KListViewItem(list),
+      m_logInfo(logInfo)
 {
+    setText(Revision, logInfo.m_revision);
+    setText(Author, logInfo.m_author);
+    setText(Date, logInfo.dateTimeToString());
+    setText(Comment, truncateLine(logInfo.m_comment));
+
+    for (Cervisia::LogInfo::TTagInfoSeq::const_iterator it = logInfo.m_tags.begin();
+         it != logInfo.m_tags.end(); ++it)
+    {
+        const Cervisia::TagInfo& tagInfo(*it);
+
+        if (tagInfo.m_type == Cervisia::TagInfo::OnBranch)
+        {
+            setText(Branch, tagInfo.m_name);
+        }
+    }
+
+    setText(Tags, logInfo.tagsToString(Cervisia::TagInfo::Tag,
+                                       Cervisia::LogInfo::NoTagType,
+                                       QString::fromLatin1(", ")));
 }
 
 
@@ -71,80 +79,18 @@ QString LogListViewItem::truncateLine(const QString &s)
 }
 
 
-static void takeLine(QString *s, QString *line)
-{
-    int pos = s->find('\n');
-    if (pos == -1)
-        {
-            *line = *s;
-            s->remove(0, s->length());
-        }
-    else
-        {
-            *line = s->left(pos);
-            s->remove(0, pos+1);
-        }
-}
-
-
-QString LogListViewItem::extractOrdinaryTags(const QString &s)
-{
-    QString res;
-
-    // Note: same translation as in logdlg.cpp
-    // This is a hack...
-    QString prefix = i18n("\nTag: ");
-    prefix.remove(0, 1);
-
-    QString rest = s;
-    while ( !rest.isEmpty() )
-        {
-            QString line;
-            takeLine(&rest, &line);
-            if (line.left(prefix.length()) == prefix)
-                {
-                    res += ", ";
-                    res += line.right(line.length()-prefix.length());
-                }
-        }
-    if (!res.isEmpty())
-        res.remove(0, 2);
-    return res;
-}
-
-
-QString LogListViewItem::extractBranchName(const QString &s)
-{
-    // Note: same translation as in logdlg.cpp
-    // This is a hack...
-    QString prefix = i18n("\nOn branch: ");
-    prefix.remove(0, 1);
-
-    QString rest = s;
-    while ( !rest.isEmpty() )
-        {
-            QString line;
-            takeLine(&rest, &line);
-            if (line.left(prefix.length()) == prefix)
-                return line.right(line.length()-prefix.length());
-        }
-    
-    return "";
-}
-
-
 int LogListViewItem::compare(QListViewItem* i, int col, bool ascending) const
 {
-    const LogListViewItem* pItem = static_cast<LogListViewItem*>(i);
+    const LogListViewItem* item = static_cast<LogListViewItem*>(i);
 
     int iResult;
     switch (col)
     {
     case Revision:
-        iResult = ::compareRevisions(mrev, pItem->mrev);
+        iResult = ::compareRevisions(m_logInfo.m_revision, item->m_logInfo.m_revision);
         break;
     case Date:
-        iResult = ::compare(mdate, pItem->mdate);
+        iResult = ::compare(m_logInfo.m_dateTime, item->m_logInfo.m_dateTime);
         break;
     default:
         iResult = QListViewItem::compare(i, col, ascending);
@@ -198,10 +144,9 @@ void LogListView::hideLabel()
 }
 
 
-void LogListView::addRevision(const QString &rev, const QString &author, const QDateTime &date,
-                              const QString &comment, const QString &tagcomment)
+void LogListView::addRevision(const Cervisia::LogInfo& logInfo)
 {
-    (void) new LogListViewItem(this, rev, author, date, comment, tagcomment);
+    (void) new LogListViewItem(this, logInfo);
 }
 
 
@@ -211,8 +156,8 @@ void LogListView::setSelectedPair(const QString &selectionA, const QString &sele
 	  item = item->nextSibling() )
 	{
             LogListViewItem *i = static_cast<LogListViewItem*>(item);
-            setSelected(i, (selectionA == i->text(0) ||
-                            selectionB == i->text(0)) );
+            setSelected(i, (selectionA == i->text(LogListViewItem::Revision) ||
+                            selectionB == i->text(LogListViewItem::Revision)) );
         }
 }
 
@@ -251,33 +196,7 @@ void LogListView::contentsMouseMoveEvent(QMouseEvent *e)
 
     if (!currentLabel && item)
         {
-            QString text = "<qt><b>";
-            text += QStyleSheet::escape(item->mrev);
-            text += "</b>&nbsp;&nbsp;";
-            text += QStyleSheet::escape(item->mauthor);
-            text += "&nbsp;&nbsp;<b>";
-            text += QStyleSheet::escape(KGlobal::locale()->formatDateTime(item->mdate));
-            text += "</b>";
-            QStringList list2 = QStringList::split("\n", item->mcomment);
-            QStringList::Iterator it2;
-            for (it2 = list2.begin(); it2 != list2.end(); ++it2)
-                {
-                    text += "<br>";
-                    text += QStyleSheet::escape(*it2);
-                }
-            if (!item->mtagcomment.isEmpty())
-                {
-                    text += "<i>";
-                    QStringList list3 = QStringList::split("\n", item->mtagcomment);
-                    QStringList::Iterator it3;
-                    for (it3 = list3.begin(); it3 != list3.end(); ++it3)
-                        {
-                            text += "<br>";
-                            text += QStyleSheet::escape(*it3);
-                        }
-                    text += "</i>";
-                }
-            text += "</qt>";
+            const QString text(item->m_logInfo.createToolTipText());
 
             int left = e->pos().x() + 20;
             int top = viewport()->mapTo(this, itemRect(item).bottomLeft()).y();

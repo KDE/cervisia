@@ -16,9 +16,13 @@
 
 #include <ktextbrowser.h>
 
-class QDateTime;
 class KConfig;
 class KFind;
+
+namespace Cervisia
+{
+struct LogInfo;
+}
 
 
 class LogPlainView : public KTextBrowser
@@ -29,9 +33,7 @@ public:
     explicit LogPlainView(QWidget* parent = 0, const char* name = 0);
     ~LogPlainView();
 
-    void addRevision(const QString& rev, const QString& author, 
-                     const QDateTime& date, const QString& comment, 
-                     const QString& tagcomment);            
+    void addRevision(const Cervisia::LogInfo& logInfo);
 
     void searchText(int options, const QString& pattern);
 

@@ -17,7 +17,8 @@
 
 #include <kdialogbase.h>
 
-#include <qdatetime.h>
+#include "loginfo.h"
+
 #include <qptrlist.h>
 
 
@@ -32,17 +33,6 @@ class QLabel;
 class QTabWidget;
 class QTextEdit;
 class CvsService_stub;
-
-class RevisionInfo
-{
-public:
-    QString rev;
-    QString author;
-    QDateTime date;
-    QString comment;
-    QString tagcomment;
-};
-
 
 class TagInfo
 {
@@ -77,7 +67,7 @@ private:
     void tagSelected(TagInfo* tag, bool rmb);
 
     QString filename;
-    QPtrList<RevisionInfo> items;
+    QPtrList<Cervisia::LogInfo> items;
     QPtrList<TagInfo> tags;
     QString selectionA;
     QString selectionB;

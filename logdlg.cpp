@@ -34,9 +34,10 @@
 #include "annotatedlg.h"
 #include "annotatectl.h"
 #include "diffdlg.h"
+#include "loginfo.h"
 #include "loglist.h"
-#include "logtree.h"
 #include "logplainview.h"
+#include "logtree.h"
 #include "misc.h"
 #include "progressdlg.h"
 
@@ -199,8 +200,10 @@ LogDialog::~LogDialog()
 
 bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
 {
-    QString tag, rev, author, comment;
-    QDateTime date;
+    QString rev;
+
+    Cervisia::LogInfo logInfo;
+
     enum { Begin, Tags, Admin, Revision,
        Author, Branches, Comment, Finished } state;
 
@@ -232,10 +235,10 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
             case Tags:
                 if( line[0] == '\t' )
                 {
-                    QStringList strlist = splitLine(line, ':');
-                    QString rev = strlist[1].simplifyWhiteSpace();
-                    QString tag = strlist[0].simplifyWhiteSpace();
-                    QString branchpoint = "";
+                    const QStringList strlist(splitLine(line, ':'));
+                    rev = strlist[1].simplifyWhiteSpace();
+                    const QString tag(strlist[0].simplifyWhiteSpace());
+                    QString branchpoint;
                     int pos1, pos2;
                     if( (pos2 = rev.findRev('.')) > 0 &&
                         (pos1 = rev.findRev('.', pos2-1)) > 0 &&
@@ -268,7 +271,7 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
                 }
                 break;
             case Revision:
-                rev = line.section(' ', 1, 1);
+                logInfo.m_revision = rev = line.section(' ', 1, 1);
                 state = Author;
                 break;
             case Author:
@@ -277,17 +280,16 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
                     // convert date in ISO format (YYYY-MM-DDTHH:MM:SS)
                     strlist[1].replace('/', '-');
                     strlist[2].truncate(8); // Time foramt is HH:MM:SS
-                    date.setTime_t(KRFCDate::parseDateISO8601(strlist[1] + 'T' + strlist[2]));
-                    author = strlist[4];
-                    author = author.left(author.length()-1);
-                    comment = "";
+                    logInfo.m_dateTime.setTime_t(KRFCDate::parseDateISO8601(strlist[1] + 'T' + strlist[2]));
+                    logInfo.m_author = strlist[4];
+                    logInfo.m_author.truncate(logInfo.m_author.length() - 1); // remove trailing ';'
                     state = Branches;
                 }
                 break;
             case Branches:
                 if( !line.startsWith("branches:") )
                 {
-                    comment = line;
+                    logInfo.m_comment = line;
                     state = Comment;
                 }
                 break;
@@ -301,61 +303,48 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
                     state = Finished;
                 }
                 if( state == Comment ) // still in message
-                    comment += QString("\n") + line;
+                    logInfo.m_comment += '\n' + line;
                 else
                 {
                     // Create tagcomment
-                    QString tagcomment, taglist, branchrev;
+                    QString branchrev;
                     int pos1, pos2;
                     // 1.60.x.y => revision belongs to branch 1.60.0.x
                     if( (pos2 = rev.findRev('.')) > 0 &&
                         (pos1 = rev.findRev('.', pos2-1)) > 0 )
                         branchrev = rev.left(pos2);
 
-                    // Build tagcomment and taglist:
-                    // tagcomment contains Tags, Branchpoints and 'On Branch's
-                    // taglist contains tags (without prefix) and Branchpoints
+                    // Build Cervisia::TagInfo for logInfo
                     QPtrListIterator<TagInfo> it(tags);
                     for( ; it.current(); ++it )
                     {
                         if( rev == it.current()->rev )
                         {
                             // This never matches branch tags...
-                            tagcomment += i18n("\nTag: ");
-                            tagcomment += it.current()->tag;
-                            taglist += "\n";
-                            taglist += it.current()->tag;
+                            logInfo.m_tags.push_back(Cervisia::TagInfo(it.current()->tag,
+                                                                       Cervisia::TagInfo::Tag));
                         }
                         if( rev == it.current()->branchpoint )
                         {
-                            tagcomment += i18n("\nBranchpoint: ");
-                            tagcomment += it.current()->tag;
-                            taglist += i18n("\nBranchpoint: ");
-                            taglist += it.current()->tag;
+                            logInfo.m_tags.push_back(Cervisia::TagInfo(it.current()->tag,
+                                                                       Cervisia::TagInfo::Branch));
                         }
                         if( branchrev == it.current()->rev )
                         {
                             // ... and this never matches ordinary tags :-)
-                            tagcomment += i18n("\nOn branch: ");
-                            tagcomment += it.current()->tag;
+                            logInfo.m_tags.push_back(Cervisia::TagInfo(it.current()->tag,
+                                                                       Cervisia::TagInfo::OnBranch));
                         }
                     }
 
-                    // remove leading '\n'
-                    if( !tagcomment.isEmpty() )
-                        tagcomment.remove(0, 1);
-                    if( !taglist.isEmpty() )
-                        taglist.remove(0, 1);
-                    plain->addRevision(rev, author, date, comment, tagcomment);
-                    tree->addRevision(rev, author, date, comment, taglist, tagcomment);
-                    list->addRevision(rev, author, date, comment, tagcomment);
-                    RevisionInfo *item = new RevisionInfo;
-                    item->rev = rev;
-                    item->author = author;
-                    item->date = date;
-                    item->comment = comment;
-                    item->tagcomment = tagcomment;
-                    items.append(item);
+                    plain->addRevision(logInfo);
+                    tree->addRevision(logInfo);
+                    list->addRevision(logInfo);
+
+                    items.append(new Cervisia::LogInfo(logInfo));
+
+                    // reset for next entry
+                    logInfo = Cervisia::LogInfo();
                 }
                 break;
             case Finished:
@@ -363,8 +352,8 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
         }
     }
 
-    tagcombo[0]->insertItem("");
-    tagcombo[1]->insertItem("");
+    tagcombo[0]->insertItem(QString::null);
+    tagcombo[1]->insertItem(QString::null);
     QPtrListIterator<TagInfo> it(tags);
     for( ; it.current(); ++it )
     {
@@ -421,9 +410,9 @@ void LogDialog::annotateClicked()
 
 void LogDialog::revisionSelected(QString rev, bool rmb)
 {
-    QPtrListIterator<RevisionInfo> it(items);
+    QPtrListIterator<Cervisia::LogInfo> it(items);
     for (; it.current(); ++it)
-        if (it.current()->rev == rev)
+        if (it.current()->m_revision == rev)
             {
                 if (rmb)
                     selectionB = rev;
@@ -431,10 +420,10 @@ void LogDialog::revisionSelected(QString rev, bool rmb)
                     selectionA = rev;
                 
                 revbox[rmb?1:0]->setText(rev);
-                authorbox[rmb?1:0]->setText(it.current()->author);
-                datebox[rmb?1:0]->setText(KGlobal::locale()->formatDateTime(it.current()->date));
-                commentbox[rmb?1:0]->setText(it.current()->comment);
-                tagsbox[rmb?1:0]->setText(it.current()->tagcomment);
+                authorbox[rmb?1:0]->setText(it.current()->m_author);
+                datebox[rmb?1:0]->setText(it.current()->dateTimeToString());
+                commentbox[rmb?1:0]->setText(it.current()->m_comment);
+                tagsbox[rmb?1:0]->setText(it.current()->tagsToString());
                 
                 tree->setSelectedPair(selectionA, selectionB);
                 list->setSelectedPair(selectionA, selectionB);

@@ -21,10 +21,15 @@
 #include "qttableview.h"
 
 
-class QDateTime;
 class LogTreeItem;
 class LogTreeConnection;
 class TipLabel;
+
+namespace Cervisia
+{
+struct LogInfo;
+}
+
 
 typedef QPtrList<LogTreeItem> LogTreeItemList;
 typedef QPtrList<LogTreeConnection> LogTreeConnectionList;
@@ -38,8 +43,7 @@ public:
     explicit LogTreeView( QWidget *parent=0, const char *name=0 );
     virtual ~LogTreeView();
     
-    void addRevision(const QString &rev, const QString &author, const QDateTime &date,
-                     const QString &comment, const QString &taglist, const QString &tagcomment);
+    void addRevision(const Cervisia::LogInfo& logInfo);
     void setSelectedPair(QString selectionA, QString selectionB);
     void collectConnections();
     void recomputeCellSizes();
@@ -61,7 +65,7 @@ protected:
     virtual int cellHeight(int row);
 
 private:
-    void paintRevisionCell(QPainter *p, int row, int col, QString line1, QString line2, QString line3,
+    void paintRevisionCell(QPainter *p, int row, int col, const Cervisia::LogInfo& logInfo,
 			   bool followed, bool branched, bool selected);
     void paintConnector(QPainter *p, int row, int col, bool followed, bool branched);
     void hideLabel();

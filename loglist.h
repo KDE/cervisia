@@ -19,10 +19,15 @@
 #include <klistview.h>
 
 
-class QDateTime;
 class KConfig;
+
 class TipLabel;
 class LogListViewItem;
+
+namespace Cervisia
+{
+struct LogInfo;
+}
 
 
 class LogListView : public KListView
@@ -33,8 +38,7 @@ public:
     explicit LogListView( KConfig& cfg, QWidget *parent=0, const char *name=0 );
     virtual ~LogListView();
     
-    void addRevision(const QString &rev, const QString &author, const QDateTime &date,
-                     const QString &comment, const QString &tagcomment);
+    void addRevision(const Cervisia::LogInfo& logInfo);
     void setSelectedPair(const QString &selectionA, const QString &selectionB);
 
 signals:
