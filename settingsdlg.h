@@ -12,7 +12,6 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-
 #ifndef SETTINGSDLG_H
 #define SETTINGSDLG_H
 
@@ -27,6 +26,7 @@ class KLineEdit;
 class KConfig;
 class KColorButton;
 class KURLRequester;
+class AdvancedPage;
 
 
 class FontButton : public QPushButton
@@ -63,12 +63,9 @@ private:
     void addLookAndFeelPage();
 
     KConfig *config;
-    KIntNumInput *timeoutedit;
     KIntNumInput *contextedit;
     KIntNumInput *tabwidthedit;
     KURLRequester *cvspathedit;
-    KIntNumInput* m_defaultCompression;
-    QCheckBox *usesshagent;
     KLineEdit *usernameedit;
     KLineEdit *diffoptedit;
     KURLRequester *extdiffedit;
@@ -87,6 +84,7 @@ private:
     KColorButton* m_diffDeleteButton;
 
     QCheckBox*    m_splitterBox;
+    AdvancedPage* m_advancedPage;
 
     KConfig* serviceConfig;
 };

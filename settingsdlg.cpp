@@ -12,7 +12,6 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-
 #include "settingsdlg.h"
 
 #include <qapplication.h>
@@ -39,6 +38,7 @@
 
 #include "misc.h"
 #include "cervisiasettings.h"
+#include "settingsdlg_advanced.h"
 
 
 namespace
@@ -123,11 +123,13 @@ void SettingsDialog::readSettings()
     // read entries from cvs DCOP service configuration
     serviceConfig->setGroup("General");
     cvspathedit->setURL(serviceConfig->readPathEntry("CVSPath", "cvs"));
-    m_defaultCompression->setValue(serviceConfig->readNumEntry("Compression", 0));
-    usesshagent->setChecked(serviceConfig->readBoolEntry("UseSshAgent", false));
+    m_advancedPage->kcfg_Compression->setValue(serviceConfig->readNumEntry(
+                                                   "Compression", 0));
+    m_advancedPage->kcfg_UseSshAgent->setChecked(serviceConfig->readBoolEntry(
+                                                   "UseSshAgent", false));
 
     config->setGroup("General");
-    timeoutedit->setValue(CervisiaSettings::timeout());
+    m_advancedPage->kcfg_Timeout->setValue(CervisiaSettings::timeout());
     usernameedit->setText(config->readEntry("Username", Cervisia::UserName()));
 
     contextedit->setValue((int)config->readUnsignedNumEntry("ContextLines", 65535));
@@ -145,20 +147,13 @@ void SettingsDialog::readSettings()
     m_changelogFontBox->setFont(config->readFontEntry("ChangeLogFont"));
     m_splitterBox->setChecked(config->readBoolEntry("SplitHorizontally",true));
 
-    config->setGroup("Colors");
-    QColor defaultColor = QColor(255, 130, 130);
-    m_conflictButton->setColor(config->readColorEntry("Conflict",&defaultColor));
-    defaultColor=QColor(130, 130, 255);
-    m_localChangeButton->setColor(config->readColorEntry("LocalChange",&defaultColor));
-    defaultColor=QColor(70, 210, 70);
-    m_remoteChangeButton->setColor(config->readColorEntry("RemoteChange",&defaultColor));
+    m_conflictButton->setColor(CervisiaSettings::conflictColor());
+    m_localChangeButton->setColor(CervisiaSettings::localChangeColor());  
+    m_remoteChangeButton->setColor(CervisiaSettings::remoteChangeColor());
 
-    defaultColor=QColor(237, 190, 190);
-    m_diffChangeButton->setColor(config->readColorEntry("DiffChange",&defaultColor));
-    defaultColor=QColor(190, 190, 237);
-    m_diffInsertButton->setColor(config->readColorEntry("DiffInsert",&defaultColor));
-    defaultColor=QColor(190, 237, 190);
-    m_diffDeleteButton->setColor(config->readColorEntry("DiffDelete",&defaultColor));
+    m_diffChangeButton->setColor(CervisiaSettings::diffChangeColor());
+    m_diffInsertButton->setColor(CervisiaSettings::diffInsertColor());
+    m_diffDeleteButton->setColor(CervisiaSettings::diffDeleteColor());    
 }
 
 
@@ -171,14 +166,16 @@ void SettingsDialog::writeSettings()
 #else
     serviceConfig->writeEntry("CVSPath", cvspathedit->url());
 #endif
-    serviceConfig->writeEntry("Compression", m_defaultCompression->value());
-    serviceConfig->writeEntry("UseSshAgent", usesshagent->isChecked());
+    serviceConfig->writeEntry("Compression",
+        m_advancedPage->kcfg_Compression->value());
+    serviceConfig->writeEntry("UseSshAgent", 
+        m_advancedPage->kcfg_UseSshAgent->isChecked());
 
     // write to disk so other services can reparse the configuration
     serviceConfig->sync();
 
     config->setGroup("General");
-    CervisiaSettings::setTimeout(timeoutedit->value());
+    CervisiaSettings::setTimeout(m_advancedPage->kcfg_Timeout->value());
     config->writeEntry("Username", usernameedit->text());
 
 #if KDE_IS_VERSION(3,1,3)
@@ -192,7 +189,7 @@ void SettingsDialog::writeSettings()
     config->writeEntry("DiffOptions", diffoptedit->text());
     config->writeEntry("StatusForRemoteRepos", remotestatusbox->isChecked());
     config->writeEntry("StatusForLocalRepos", localstatusbox->isChecked());
-    
+
     config->setGroup("LookAndFeel");
     config->writeEntry("ProtocolFont", m_protocolFontBox->font());
     config->writeEntry("AnnotateFont", m_annotateFontBox->font());
@@ -200,13 +197,12 @@ void SettingsDialog::writeSettings()
     config->writeEntry("ChangeLogFont", m_changelogFontBox->font());
     config->writeEntry("SplitHorizontally", m_splitterBox->isChecked());
 
-    config->setGroup("Colors");
-    config->writeEntry("Conflict", m_conflictButton->color());
-    config->writeEntry("LocalChange", m_localChangeButton->color());
-    config->writeEntry("RemoteChange", m_remoteChangeButton->color());
-    config->writeEntry("DiffChange", m_diffChangeButton->color());
-    config->writeEntry("DiffInsert", m_diffInsertButton->color());
-    config->writeEntry("DiffDelete", m_diffDeleteButton->color());
+    CervisiaSettings::setConflictColor(m_conflictButton->color());
+    CervisiaSettings::setLocalChangeColor(m_localChangeButton->color());
+    CervisiaSettings::setRemoteChangeColor(m_remoteChangeButton->color());
+    CervisiaSettings::setDiffChangeColor(m_diffChangeButton->color());
+    CervisiaSettings::setDiffInsertColor(m_diffInsertButton->color());
+    CervisiaSettings::setDiffDeleteColor(m_diffDeleteButton->color());
 
     // I'm not yet sure whether this is a hack or not :-)
     QWidgetListIt it(*QApplication::allWidgets());
@@ -316,28 +312,12 @@ void SettingsDialog::addStatusPage()
  */
 void SettingsDialog::addAdvancedPage()
 {
-    QGrid *advancedPage = addGridPage(2, QGrid::Horizontal, i18n("Advanced"),
-                                      QString::null, LoadIcon("configure"));
+    QVBox* frame = addVBoxPage(i18n("Advanced"), QString::null,
+                               LoadIcon("configure"));
 
-    QLabel *timeoutlabel = new QLabel( i18n("&Timeout after which a progress dialog appears (in ms):"),
-                                       advancedPage );
-    timeoutedit = new KIntNumInput( 0, advancedPage );
-    timeoutedit->setRange( 0, 50000, 100, false );
-    timeoutlabel->setBuddy( timeoutedit );
-
-    QLabel *compressionlabel = new QLabel( i18n("Default compression &level:"), advancedPage );
-    m_defaultCompression = new KIntNumInput(advancedPage);
-    m_defaultCompression->setRange(0, 9, 1, false);
-    compressionlabel->setBuddy(m_defaultCompression);
-
-    usesshagent = new QCheckBox(i18n("Utilize a running or start a new ssh-agent process"),
-                                advancedPage);
-
-    // dummy widget to fill the right side of the grid
-    new QWidget(advancedPage);
-
-    // dummy widget to take up the vertical space
-    new QWidget(advancedPage);
+    m_advancedPage = new AdvancedPage(frame);
+    m_advancedPage->kcfg_Timeout->setRange(0, 50000, 100, false);
+    m_advancedPage->kcfg_Compression->setRange(0, 9, 1, false);
 }
 
 

@@ -11,7 +11,7 @@ libcervisia_la_SOURCES = annotatedlg.cpp diffdlg.cpp patchoptiondlg.cpp logdlg.c
 		   progressdlg.cpp progressdlg.skel resolvedlg.cpp resolvedlg_p.cpp annotateview.cpp \
 		   diffview.cpp loglist.cpp logplainview.cpp logtree.cpp annotatectl.cpp   \
 		   loginfo.cpp misc.cpp qttableview.cpp tooltip.cpp cervisiasettings.kcfgc \
-		   settingsdlg.cpp
+		   settingsdlg.cpp settingsdlg_advanced.ui
 libcervisia_la_COMPILE_FIRST = cvsservice/cvsservice_stub.h
 
 libcervisiapart_la_SOURCES = updateview.cpp protocolview.cpp protocolview.skel \
