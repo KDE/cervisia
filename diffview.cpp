@@ -1,6 +1,6 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
- *                          bernd@physik.hu-berlin.de
+ *                          bernd@mail.berlios.de
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -378,7 +378,7 @@ void DiffZoomWidget::setDiffView(DiffView *view)
 
 QSize DiffZoomWidget::sizeHint() const
 {
-    return QSize(25, style().scrollBarExtent().height()); // XXX: Needs fixing for Qt3
+    return QSize(25, style().pixelMetric(QStyle::PM_ScrollBarExtent, this));
 }
 
 
