@@ -13,7 +13,7 @@
 #include <kapplication.h>
 #include <kconfig.h>
 
-#include "cervisiapart.h"
+#include "globalconfig.h"
 
 
 struct ProgressDialog::Private
@@ -95,10 +95,6 @@ void ProgressDialog::setupGui(const QString& heading)
 
 bool ProgressDialog::execute()
 {
-    KConfig* cfg = CervisiaPart::config();
-    cfg->setGroup("General");
-    unsigned timeout = cfg->readUnsignedNumEntry("Timeout", 4000);
-
     // get command line and display it
     QString cmdLine = d->cvsJob->cvsCommand();
     d->resultbox->insertItem(cmdLine);
@@ -115,7 +111,7 @@ bool ProgressDialog::execute()
     // force the dialog to show up
     d->timer = new QTimer(this);
     connect(d->timer, SIGNAL(timeout()), this, SLOT(slotTimeoutOccurred()));
-    d->timer->start(timeout, true);
+    d->timer->start(GlobalConfig().timeOut(), true);
 
     bool started = d->cvsJob->execute();
     if( !started )

@@ -36,6 +36,7 @@
 #include <knuminput.h>
 #include <kurlrequester.h>
 
+#include "globalconfig.h"
 #include "misc.h"
 
 
@@ -302,6 +303,9 @@ void SettingsDialog::writeSettings()
                 w->setFont(difffontbox->font());
         }
     config->sync();
+
+    // Update global configuration
+    GlobalConfig().setTimeOut(static_cast<unsigned>(timeoutedit->value()));
 }
 
 void SettingsDialog::done(int res)
