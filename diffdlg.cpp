@@ -293,36 +293,36 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
                     QString revAFilename = tempFileName(QString("-")+revA);
                     QString revBFilename = tempFileName(QString("-")+revB);
                     cmdline += " -r ";
-                    cmdline += revA;
+                    cmdline += KShellProcess::quote(revA);
                     cmdline += " ";
                     cmdline += KShellProcess::quote(filename);
                     cmdline += " > ";
-                    cmdline += revAFilename;
+                    cmdline += KShellProcess::quote(revAFilename);
                     cmdline += " ; cvs update -p ";
                     cmdline += " -r ";
-                    cmdline += revB;
+                    cmdline += KShellProcess::quote(revB);
                     cmdline += " ";
                     cmdline += KShellProcess::quote(filename);
                     cmdline += " > ";
-                    cmdline += revBFilename;
+                    cmdline += KShellProcess::quote(revBFilename);
                     
-                    extcmdline += revAFilename;
+                    extcmdline += KShellProcess::quote(revAFilename);
                     extcmdline += " ";
-                    extcmdline += revBFilename;
+                    extcmdline += KShellProcess::quote(revBFilename);
                 } else {
                     // We're comparing to a file, and perhaps one revision
                     QString revAFilename = tempFileName(revA);
                     if (!revA.isEmpty())
                         {
                             cmdline += " -r ";
-                            cmdline += revA;
+                            cmdline += KShellProcess::quote(revA);
                         }
                     cmdline += " ";
                     cmdline += KShellProcess::quote(filename);
                     cmdline += " > ";
-                    cmdline += revAFilename;
+                    cmdline += KShellProcess::quote(revAFilename);
                     
-                    extcmdline += revAFilename;
+                    extcmdline += KShellProcess::quote(revAFilename);
                     extcmdline += " ";
                     extcmdline += KShellProcess::quote(QFileInfo(filename).absFilePath());
                 }
@@ -343,12 +343,12 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
     if (!revA.isEmpty())
 	{
 	    cmdline += " -r ";
-	    cmdline += revA;
+	    cmdline += KShellProcess::quote(revA);
 	}
     if (!revB.isEmpty())
 	{
 	    cmdline += " -r ";
-	    cmdline += revB;
+	    cmdline += KShellProcess::quote(revB);
 	}
     cmdline += " ";
     cmdline += KShellProcess::quote(filename);

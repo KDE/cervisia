@@ -101,7 +101,7 @@ bool CvsProgressDialog::execCommand(const QString &sandbox, const QString &repos
     if (!sandbox.isEmpty())
         QDir::setCurrent(sandbox);
     if (!rsh.isEmpty())
-	*childproc << QString("CVS_RSH='" + rsh + "'");
+	*childproc << QString("CVS_RSH=" + KShellProcess::quote(rsh) );
     *childproc << cmdline;
 
     connect( childproc, SIGNAL(processExited(KProcess *)),

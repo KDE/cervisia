@@ -664,7 +664,9 @@ void CervisiaPart::openFiles(const QStringList &filenames)
     for ( QStringList::ConstIterator it = filenames.begin();
           it != filenames.end(); ++it )
     {
-        new KRun( KURL(dir.absFilePath(*it)), 0, true, false );
+        KURL u;
+        u.setPath(dir.absFilePath(*it));
+        (void) new KRun(u, 0, true, false);
     }
 }
 
