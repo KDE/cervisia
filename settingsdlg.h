@@ -47,6 +47,7 @@ class SettingsDialog : public KDialogBase
 
 public:
     SettingsDialog( KConfig *conf, QWidget *parent=0, const char *name=0 );
+    virtual ~SettingsDialog();
 
 protected slots:
      virtual void done(int res);
@@ -82,6 +83,8 @@ private:
     KColorButton *diffchangebutton;
     KColorButton *diffinsertbutton;
     KColorButton *diffdeletebutton;
+
+    KConfig* mServiceConfig;
 };
 
 #endif

@@ -64,6 +64,9 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
 {
     config = conf;
 
+    // open cvs DCOP service configuration file
+    mServiceConfig = new KConfig("cvsservicerc");
+
     //
     // General Options
     //
@@ -222,14 +225,17 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
     setHelp("customization", "cervisia");
 }
 
+SettingsDialog::~SettingsDialog()
+{
+    delete mServiceConfig;
+}
 
 void SettingsDialog::readSettings()
 {
     // read entries from cvs DCOP service configuration
-    KConfig* serviceConf = new KConfig("cvsservicerc");
-    serviceConf->setGroup("General");
-    cvspathedit->setText(serviceConf->readEntry("CVSPath", "cvs"));
-    compressioncombo->setCurrentItem(serviceConf->readNumEntry("Compression", 0));
+    mServiceConfig->setGroup("General");
+    cvspathedit->setText(mServiceConfig->readEntry("CVSPath", "cvs"));
+    compressioncombo->setCurrentItem(mServiceConfig->readNumEntry("Compression", 0));
     
     config->setGroup("General");
     timeoutedit->setValue((int)config->readUnsignedNumEntry("Timeout", 4000));
@@ -269,13 +275,12 @@ void SettingsDialog::readSettings()
 void SettingsDialog::writeSettings()
 {
     // write entries to cvs DCOP service configuration
-    KConfig* serviceConf = new KConfig("cvsservicerc");
-    serviceConf->setGroup("General");
-    serviceConf->writeEntry("CVSPath", cvspathedit->text());
-    serviceConf->writeEntry("Compression", compressioncombo->currentItem());
+    mServiceConfig->setGroup("General");
+    mServiceConfig->writeEntry("CVSPath", cvspathedit->text());
+    mServiceConfig->writeEntry("Compression", compressioncombo->currentItem());
 
     // write to disk so other services can reparse the configuration
-    serviceConf->sync();
+    mServiceConfig->sync();
 
     config->setGroup("General");
     config->writeEntry("Timeout", (unsigned)timeoutedit->value());
@@ -330,7 +335,7 @@ void SettingsDialog::done(int res)
 
     if (res == Accepted)
         writeSettings();
-    QDialog::done(res);
+    KDialogBase::done(res);
     delete this;
 }
 
