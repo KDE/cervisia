@@ -22,6 +22,7 @@
 #include <qstringlist.h>
 #include <qtextcodec.h>
 #include <kconfig.h>
+#include <kemailsettings.h>
 #include <kprocess.h>
 #include <ktempfile.h>
 
@@ -172,24 +173,35 @@ QStringList const fetchTags(CvsService_stub* cvsService,
 // Gives the user name (real name + mail address) for the changelog entry
 QString userName()
 {
-    char hostname[512];
+    // 1. Try to retrieve the information from the control center settings
+    KEMailSettings settings;
+    QString name  = settings.getSetting(KEMailSettings::RealName);
+    QString email = settings.getSetting(KEMailSettings::EmailAddress);
     
-    struct passwd *pw = ::getpwuid(getuid());
-    // pw==0 => the system must be really fucked up
-    if (!pw)
-        return QString();
-
-    // I guess we don't have to support users with longer host names ;-)
-    gethostname(hostname, sizeof hostname);
-
-    QString res = pw->pw_gecos;
-    res += "  <";
-    res += pw->pw_name;
-    res += "@";
-    res += hostname;
-    res += ">";
-
-    return res;
+    if (name.isNull() || email.isNull())
+    {
+        // 2. Try to retrieve the information from the system
+        struct passwd *pw = getpwuid(getuid());
+        if (!pw)
+            return QString::null;
+            
+        char hostname[512];
+        hostname[0] = '\0';
+        
+        if (!gethostname(hostname, sizeof(hostname)))
+            hostname[sizeof(hostname)-1] = '0';
+            
+        name  = QString::fromLocal8Bit(pw->pw_gecos);
+        email = QString::fromLocal8Bit(pw->pw_name) + "@" +
+                QString::fromLocal8Bit(hostname);
+    }
+    
+    QString result = name;
+    result += "  <";
+    result += email;
+    result += ">";
+    
+    return result;
 }
 
 

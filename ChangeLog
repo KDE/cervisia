@@ -1,3 +1,9 @@
+2003-02-06  Christian Loose  <christian.loose@hamburg.de>
+
+	* Try to get the user name and email address for the
+          changelog from the control center settings (KEMailSettings)
+          before asking the system.
+
 2003-02-02  Christian Loose <christian.loose@hamburg.de>
 
 	* Added login() and logout() methods to DCOP service.
