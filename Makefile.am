@@ -31,11 +31,11 @@ CLEANFILES = cervisia.1
 appsdir = $(kde_appsdir)/Development
 apps_DATA = cervisia.desktop
 
-rcdir = $(kde_datadir)/cervisia
-rc_DATA = cervisiaui.rc cervisiashellui.rc
+partrcdir = $(kde_datadir)/cervisiapart
+partrc_DATA = cervisiaui.rc 
 
-#partdir = $(kde_datadir)/cervisia
-#part_DATA = cervisiaui.rc cervisiashellui.rc
+shellrcdir = $(kde_datadir)/cervisia
+shellrc_DATA = cervisiashellui.rc
 
 messages: rc.cpp
 	$(EXTRACTRC) *.rc >> rc.cpp

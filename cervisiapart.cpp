@@ -88,7 +88,7 @@ KInstance *CervisiaFactory::instance()
 
 KAboutData *CervisiaFactory::aboutData()
 {
-    return new KAboutData( "cervisia", I18N_NOOP("Cervisia"),
+    return new KAboutData( "cervisiapart", I18N_NOOP("Cervisia"),
                            CERVISIA_VERSION,
                            I18N_NOOP("A CVS frontend"),
                            KAboutData::License_QPL,

@@ -20,6 +20,7 @@
 #include <kconfig.h>
 
 #include "repositories.h"
+#include "cervisiapart.h"
 
 
 QStringList Repositories::readCvsPassFile()
@@ -48,7 +49,7 @@ QStringList Repositories::readConfigFile()
 {
     QStringList list;
     
-    KConfig *config = kapp->config();
+    KConfig *config = CervisiaPart::config();
     config->setGroup("Repositories");
     list = config->readListEntry("Repos");
 
