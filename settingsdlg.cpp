@@ -1,6 +1,6 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
- *                          bernd@physik.hu-berlin.de
+ *                          bernd@mail.berlios.de
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -85,18 +85,6 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
     new QWidget(generalPage);
 
     //
-    // Look and Feel Options
-    //
-    QVBox *lookPage = addVBoxPage( i18n("&Appearance") );
-
-    protocolfontbox = new FontButton(i18n("Font for &Protocol Window"), lookPage);
-    annotatefontbox = new FontButton(i18n("Font for A&nnotate View"), lookPage);
-    difffontbox = new FontButton(i18n("Font for D&iff View"), lookPage);
-    splitterbox = new QCheckBox(i18n("Split main window &horizontally"), lookPage);
-
-    new QWidget(lookPage);
-
-    //
     // Diff Options
     //
     QGrid *diffPage = addGridPage( 2, QGrid::Horizontal, i18n("&Diff") );
@@ -154,6 +142,18 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
     compressioncombo->insertItem("3", 3);
 
     new QWidget(advancedPage);
+
+    //
+    // Look and Feel Options
+    //
+    QVBox *lookPage = addVBoxPage( i18n("&Appearance") );
+
+    protocolfontbox = new FontButton(i18n("Font for &Protocol Window"), lookPage);
+    annotatefontbox = new FontButton(i18n("Font for A&nnotate View"), lookPage);
+    difffontbox = new FontButton(i18n("Font for D&iff View"), lookPage);
+    splitterbox = new QCheckBox(i18n("Split main window &horizontally"), lookPage);
+
+    new QWidget(lookPage);
 
     readSettings();
 
