@@ -39,6 +39,8 @@
 #include "repository.h"
 
 
+static const char* SINGLE_JOB_ID = "NonConcurrentJob";
+
 struct CvsService::Private
 {
     CvsJob*             singleCvsJob;   // non-concurrent cvs job, like update or commit
@@ -60,12 +62,10 @@ CvsService::CvsService()
     , d(new Private)
 {
     // initialize private data
-    d->lastJobId  = 0;
-    d->repository = 0;
-    d->appId      = kapp->dcopClient()->appId();
-
-    ++d->lastJobId;
-    d->singleCvsJob = new CvsJob(d->lastJobId);
+    d->lastJobId    = 0;
+    d->repository   = 0;
+    d->appId        = kapp->dcopClient()->appId();
+    d->singleCvsJob = new CvsJob(SINGLE_JOB_ID);
 
     d->cvsJobs.setAutoDelete(true);
 
@@ -91,11 +91,11 @@ CvsService::~CvsService()
 
 bool CvsService::setWorkingCopy(const QString& dirName)
 {
-    QFileInfo fi(dirName);
+    const QFileInfo fi(dirName);
     QString path = fi.absFilePath();
     
     // is this really a cvs-controlled directory?
-    QFileInfo cvsDirInfo(path + "/CVS");
+    const QFileInfo cvsDirInfo(path + "/CVS");
     if( !cvsDirInfo.exists() || !cvsDirInfo.isDir() )
         return false;
 
@@ -144,7 +144,7 @@ DCOPRef CvsService::annotate(const QString& fileName, const QString& revision)
     QString cvsClient  = d->repository->cvsClient();
 
     *job << "(" << cvsClient << "log" << quotedName << "&&"
-        << cvsClient << "annotate";
+         << cvsClient << "annotate";
         
     if( !revision.isEmpty() )
         *job << "-r" << revision;
@@ -342,9 +342,12 @@ CvsJob* CvsService::Private::createCvsJob()
     ++lastJobId;
 
     // create a cvs job
-    CvsJob* job = new CvsJob(lastJobId, repository->rsh(), repository->server(),
-                             workingCopy);
+    CvsJob* job = new CvsJob(lastJobId);
     cvsJobs.insert(lastJobId, job);
+
+    job->setRSH(repository->rsh());
+    job->setServer(repository->server());
+    job->setDirectory(workingCopy);
 
     return job;
 }

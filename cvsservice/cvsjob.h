@@ -34,9 +34,8 @@ class CvsJob : public QObject, public DCOPObject
     K_DCOP
 
 public:
-    CvsJob(unsigned jobId, const QString& rsh = QString::null,
-           const QString& server = QString::null, 
-           const QString& directory = QString::null);
+    CvsJob(unsigned jobNum);
+    CvsJob(const QString& objId);
     ~CvsJob();
 
     void clearCvsCommand();

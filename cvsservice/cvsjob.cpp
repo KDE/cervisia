@@ -32,26 +32,46 @@ struct CvsJob::Private
     QString     rsh;
     QString     directory;
     bool        isRunning;
+    
+    void init();
 };
 
 
-CvsJob::CvsJob(unsigned jobId, const QString& rsh, const QString& server,
-               const QString& directory)
+CvsJob::CvsJob(unsigned jobNum)
     : QObject()
     , DCOPObject()
     , d(new Private)
 {
     // initialize private data
-    d->server    = server;
-    d->rsh       = rsh;
-    d->directory = directory;
-    d->isRunning = false;
-
-    QString objId("CvsJob" + QString::number(jobId));
+    d->init();
+    
+    QString objId("CvsJob" + QString::number(jobNum));
     setObjId(objId.local8Bit());
+}
 
-    d->childproc = new KProcess;
-    d->childproc->setUseShell(true, "/bin/sh");
+
+CvsJob::CvsJob(const QString& objId)
+    : QObject()
+    , DCOPObject()
+    , d(new Private)
+{
+    // initialize private data
+    d->init();
+    
+    setObjId(objId.local8Bit());
+}
+
+
+void CvsJob::Private::init()
+{
+    // initialize private data
+    server    = QString::null;
+    rsh       = QString::null;
+    directory = QString::null;
+    isRunning = false;
+
+    childproc = new KProcess;
+    childproc->setUseShell(true, "/bin/sh");
 }
 
 
