@@ -105,7 +105,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     QCString appId;
     if( KApplication::startServiceByDesktopName("cvsservice", QStringList(), &error, &appId) )
     {
-        KMessageBox::sorry(0, "Starting cvsservice failed with message: " +
+        KMessageBox::sorry(0, i18n("Starting cvsservice failed with message: ") +
             error, "Cervisia");
     }
     else
