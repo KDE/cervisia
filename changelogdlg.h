@@ -23,10 +23,10 @@ class KConfig;
 
 class ChangeLogDialog : public KDialogBase
 {
-    Q_OBJECT
-    
 public:
-    ChangeLogDialog( QWidget *parent=0, const char *name=0 );
+    explicit ChangeLogDialog( QWidget *parent=0, const char *name=0 );
+
+    virtual ~ChangeLogDialog();
 
     bool readFile(const QString &fileName);
     QString message();
@@ -34,8 +34,8 @@ public:
     static void loadOptions(KConfig *config);
     static void saveOptions(KConfig *config);
 
-protected slots:
-    virtual void done(int res);
+protected:
+    virtual void slotOk();
 
 private:
     struct Options {

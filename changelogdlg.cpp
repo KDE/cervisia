@@ -35,50 +35,50 @@ ChangeLogDialog::Options *ChangeLogDialog::options = 0;
 
 
 ChangeLogDialog::ChangeLogDialog(QWidget *parent, const char *name)
-    : KDialogBase(parent, name, true, QString::null, Ok | Cancel, Ok, true)
+    : KDialogBase(parent, name, true, i18n("Edit ChangeLog"),
+                  Ok | Cancel, Ok, true)
 {
-    setCaption(i18n("Edit ChangeLog"));
-
     edit = new KTextEdit(this);
-    setMainWidget(edit);
-    QFontMetrics fm(fontMetrics());
-    edit->setMinimumSize(fm.width("0123456789")*8,
-                         fm.lineSpacing()*20);
     edit->setFont(KGlobalSettings::fixedFont());
     edit->setFocus();
     edit->setWordWrap(QTextEdit::NoWrap);
     edit->setTextFormat(QTextEdit::PlainText);
+    QFontMetrics const fm(edit->fontMetrics());
+    edit->setMinimumSize(fm.width('0') * 80,
+                         fm.lineSpacing() * 20);
 
-    resize(sizeHint());
+    setMainWidget(edit);
 
     if (options)
         resize(options->size);
 }
 
 
-void ChangeLogDialog::done(int res)
+ChangeLogDialog::~ChangeLogDialog()
 {
-    if (res == Accepted)
-        {
-            // Write changelog
-            QFile f(fname);
-            if (!f.open(IO_ReadWrite))
-                {
-                    KMessageBox::sorry(this,
-                                       i18n("The ChangeLog file could not be written."),
-                                       "Cervisia");
-                    return;
-                }
-            
-            QTextStream stream(&f);
-            stream << edit->text();
-            f.close();
-        }
     if (!options)
         options = new Options;
     options->size = size();
+}
 
-    QDialog::done(res);
+
+void ChangeLogDialog::slotOk()
+{
+    // Write changelog
+    QFile f(fname);
+    if (!f.open(IO_ReadWrite))
+    {
+        KMessageBox::sorry(this,
+                           i18n("The ChangeLog file could not be written."),
+                           "Cervisia");
+        return;
+    }
+
+    QTextStream stream(&f);
+    stream << edit->text();
+    f.close();
+
+    KDialogBase::slotOk();
 }
 
 
@@ -191,8 +191,6 @@ QString ChangeLogDialog::message()
     res.truncate(l+1);
     return res;
 }
-
-#include "changelogdlg.moc"
 
 
 // Local Variables:
