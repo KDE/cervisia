@@ -19,6 +19,7 @@
 #include <qlistbox.h>
 #include <qmultilinedit.h>
 
+class QComboBox;
 
 class CommitDialog : public QDialog
 {
