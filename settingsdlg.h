@@ -15,19 +15,19 @@
 #ifndef SETTINGSDLG_H
 #define SETTINGSDLG_H
 
+
 #include <qpushbutton.h>
 #include <kdialogbase.h>
 
+
 class QCheckBox;
 class QComboBox;
-class QHButtonGroup;
-class QRadioButton;
-class KIntegerLine;
 class KIntNumInput;
 class KLineEdit;
 class KConfig;
 class KColorButton;
 class KURLRequester;
+
 
 class FontButton : public QPushButton
 {
@@ -60,12 +60,12 @@ private:
     KIntNumInput *timeoutedit;
     KIntNumInput *contextedit;
     KIntNumInput *tabwidthedit;
-    KLineEdit *cvspathedit;
+    KURLRequester *cvspathedit;
     QComboBox *compressioncombo;
     KLineEdit *usernameedit;
     KURLRequester *editoredit;
     KLineEdit *diffoptedit;
-    KLineEdit *extdiffedit;
+    KURLRequester *extdiffedit;
     QCheckBox *remotestatusbox;
     QCheckBox *localstatusbox;
 #if 0

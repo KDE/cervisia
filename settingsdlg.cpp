@@ -79,7 +79,7 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
     usernamelabel->setBuddy(usernameedit);
 
     QLabel *cvspathlabel = new QLabel( i18n("&Path to cvs:"), generalPage );
-    cvspathedit = new KLineEdit(generalPage);
+    cvspathedit = new KURLRequester(generalPage);
     cvspathlabel->setBuddy(cvspathedit);
 
     QLabel *editorlabel = new QLabel( i18n("&Editor:"), generalPage );
@@ -108,7 +108,7 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
     tabwidthlabel->setBuddy(tabwidthedit);
 
     QLabel *extdifflabel = new QLabel(i18n("External diff &frontend:"), diffPage);
-    extdiffedit = new KLineEdit(diffPage);
+    extdiffedit = new KURLRequester(diffPage);
     extdifflabel->setBuddy(extdiffedit);
 
     new QWidget(diffPage);
@@ -235,7 +235,7 @@ void SettingsDialog::readSettings()
 {
     // read entries from cvs DCOP service configuration
     serviceConfig->setGroup("General");
-    cvspathedit->setText(serviceConfig->readEntry("CVSPath", "cvs"));
+    cvspathedit->setURL(serviceConfig->readEntry("CVSPath", "cvs"));
     compressioncombo->setCurrentItem(serviceConfig->readNumEntry("Compression", 0));
 
     config->setGroup("General");
@@ -245,11 +245,11 @@ void SettingsDialog::readSettings()
     contextedit->setValue((int)config->readUnsignedNumEntry("ContextLines", 65535));
     tabwidthedit->setValue((int)config->readUnsignedNumEntry("TabWidth", 8));
     diffoptedit->setText(config->readEntry("DiffOptions", ""));
-    extdiffedit->setText(config->readEntry("ExternalDiff", ""));
+    extdiffedit->setURL(config->readEntry("ExternalDiff", ""));
     remotestatusbox->setChecked(config->readBoolEntry("StatusForRemoteRepos", false));
     localstatusbox->setChecked(config->readBoolEntry("StatusForLocalRepos", false));
     config->setGroup("Communication");
-    editoredit->lineEdit()->setText(config->readEntry("Editor"));
+    editoredit->setURL(config->readEntry("Editor"));
     config->setGroup("LookAndFeel");
     protocolfontbox->setFont(config->readFontEntry("ProtocolFont"));
     annotatefontbox->setFont(config->readFontEntry("AnnotateFont"));
@@ -277,7 +277,7 @@ void SettingsDialog::writeSettings()
 {
     // write entries to cvs DCOP service configuration
     serviceConfig->setGroup("General");
-    serviceConfig->writeEntry("CVSPath", cvspathedit->text());
+    serviceConfig->writeEntry("CVSPath", cvspathedit->url());
     serviceConfig->writeEntry("Compression", compressioncombo->currentItem());
 
     // write to disk so other services can reparse the configuration
@@ -287,17 +287,17 @@ void SettingsDialog::writeSettings()
     config->writeEntry("Timeout", (unsigned)timeoutedit->value());
     config->writeEntry("Username", usernameedit->text());
     // TODO: remove when move to cvs DCOP service is complete
-    config->writeEntry("CVSPath", cvspathedit->text());
+    config->writeEntry("CVSPath", cvspathedit->url());
     config->writeEntry("Compression", compressioncombo->currentItem());
     // END TODO
     config->writeEntry("ContextLines", (unsigned)contextedit->value());
     config->writeEntry("TabWidth", tabwidthedit->value());
     config->writeEntry("DiffOptions", diffoptedit->text());
-    config->writeEntry("ExternalDiff", extdiffedit->text());
+    config->writeEntry("ExternalDiff", extdiffedit->url());
     config->writeEntry("StatusForRemoteRepos", remotestatusbox->isChecked());
     config->writeEntry("StatusForLocalRepos", localstatusbox->isChecked());
     config->setGroup("Communication");
-    config->writeEntry("Editor", editoredit->lineEdit()->text());
+    config->writeEntry("Editor", editoredit->url());
 #if 0
     config->writeEntry("UseDCOP", usedcopbox->isChecked());
     config->writeEntry("DCOPClient", clientedit->text());
