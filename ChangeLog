@@ -1,3 +1,9 @@
+2004-04-26  Christian Loose  <christian.loose@kdemail.net>
+
+	* Fix BR #80291:
+	  Cervisia ignores the CVS_RSH=ssh setting during
+	  the checkout of a cvs module.
+
 2004-04-13  Christian Loose  <christian.loose@kdemail.net>
 
 	* Fix BR #46871:
