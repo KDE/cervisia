@@ -180,6 +180,88 @@ bool UpdateView::isUnfoldingTree() const
 }
 
 
+void UpdateView::unfoldSelectedFolders()
+{
+    QApplication::setOverrideCursor(waitCursor);
+
+    int previousDepth = 0;
+    bool isUnfolded = false;
+
+    QStringList selection = multipleSelection();
+
+    // setup name of selected folder
+    QString selectedItem = selection.first();
+    if( selectedItem.contains('/') )
+        selectedItem.remove(0, selectedItem.findRev('/')+1);
+
+    // avoid flicker
+    const bool updatesEnabled = isUpdatesEnabled();
+    setUpdatesEnabled(false);
+
+    QListViewItemIterator it(this);
+    while( QListViewItem* item = it.current() )
+    {
+        if( isDirItem(item) )
+        {
+            UpdateDirItem* dirItem = static_cast<UpdateDirItem*>(item);
+
+            // below selected folder?
+            if( previousDepth && dirItem->depth() > previousDepth )
+            {
+                // if this dir wasn't scanned already scan it recursive
+                // (this is only a hack to reduce the processEvents() calls,
+                // setOpen() would scan the dir too)
+                if (dirItem->wasScanned() == false)
+                {
+                    const bool recursive = true;
+                    dirItem->maybeScanDir(recursive);
+
+                    // scanning can take some time so keep the gui alive
+                    qApp->processEvents();
+                }
+
+                dirItem->setOpen(!isUnfolded);
+            }
+            // selected folder?
+            else if( selectedItem == dirItem->entry().m_name )
+            {
+                previousDepth = dirItem->depth();
+                isUnfolded = dirItem->isOpen();
+
+                // if this dir wasn't scanned already scan it recursive
+                // (this is only a hack to reduce the processEvents() calls,
+                // setOpen() would scan the dir too)
+                if (dirItem->wasScanned() == false)
+                {
+                    const bool recursive = true;
+                    dirItem->maybeScanDir(recursive);
+
+                    // scanning can take some time so keep the gui alive
+                    qApp->processEvents();
+                }
+
+                dirItem->setOpen(!isUnfolded);
+            }
+            // back to the level of the selected folder or above?
+            else if( previousDepth && dirItem->depth() >= previousDepth )
+            {
+                previousDepth = 0;
+            }
+        }
+
+        ++it;
+    }
+
+    // maybe some UpdateDirItem was opened the first time so check the whole tree
+    setFilter(filter());
+
+    setUpdatesEnabled(updatesEnabled);
+    triggerUpdate();
+
+    QApplication::restoreOverrideCursor();
+}
+
+
 void UpdateView::unfoldTree()
 {
     QApplication::setOverrideCursor(waitCursor);
