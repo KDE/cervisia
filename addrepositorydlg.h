@@ -28,7 +28,8 @@ class AddRepositoryDialog : public KDialogBase
     Q_OBJECT
 
 public:
-    explicit AddRepositoryDialog( const QString &repo, QWidget *parent=0, const char *name=0 );
+    AddRepositoryDialog( KConfig& cfg, const QString &repo, QWidget *parent=0, 
+                         const char *name=0 );
     virtual ~AddRepositoryDialog();
 
     void setRepository(const QString &repo);
@@ -39,21 +40,14 @@ public:
     QString rsh() const;
     int compression() const;
 
-    static void loadOptions(KConfig *config);
-    static void saveOptions(KConfig *config);
-
 private slots:
     void repoChanged();
     
 private:
-    struct Options {
-        QSize size;
-    };
-    static Options *options;
-
     KLineEdit *repo_edit;
     KLineEdit *rsh_edit;
     QButtonGroup *compression_group;
+    KConfig& partConfig;
 };
 
 #endif

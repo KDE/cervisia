@@ -1318,7 +1318,7 @@ void CervisiaPart::importOrCheckout(CheckoutDialog::ActionType action)
 
 void CervisiaPart::slotRepositories()
 {
-    RepositoryDialog *l = new RepositoryDialog(widget());
+    RepositoryDialog *l = new RepositoryDialog(*config(), widget());
     l->show();
 }
 
@@ -1822,8 +1822,6 @@ void CervisiaPart::readDialogProperties( KConfig *config )
 {
     config->setGroup("Checkout dialog");
     CheckoutDialog::loadOptions(config);
-    config->setGroup("Repository dialog");
-    RepositoryDialog::loadOptions(config);
 }
 
 
@@ -1831,8 +1829,6 @@ void CervisiaPart::saveDialogProperties( KConfig *config )
 {
     config->setGroup("Checkout dialog");
     CheckoutDialog::saveOptions(config);
-    config->setGroup("Repository dialog");
-    RepositoryDialog::saveOptions(config);
 }
 
 CervisiaBrowserExtension::CervisiaBrowserExtension( CervisiaPart *p )

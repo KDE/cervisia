@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -23,13 +23,17 @@
 #include <klineedit.h>
 #include <klocale.h>
 
+#include <kdeversion.h>
+#if KDE_VERSION < KDE_MAKE_VERSION(3,1,90)
+#include "configutils.h"
+#endif
 
-AddRepositoryDialog::Options *AddRepositoryDialog::options = 0;
 
-
-AddRepositoryDialog::AddRepositoryDialog(const QString &repo, QWidget *parent, const char *name)
+AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString &repo, 
+                                         QWidget *parent, const char *name)
     : KDialogBase(parent, name, true, i18n("Add Repository"),
                   Ok | Cancel, Ok, true)
+    , partConfig(cfg)
 {
     QFrame* mainWidget = makeMainWidget();
 
@@ -68,16 +72,22 @@ AddRepositoryDialog::AddRepositoryDialog(const QString &repo, QWidget *parent, c
              this, SLOT(repoChanged()) );
     repoChanged();
 
-    if (options)
-        resize(options->size);
+#if KDE_IS_VERSION(3,1,90)
+    QSize size = configDialogSize(partConfig, "AddRepositoryDialog");
+#else
+    QSize size = Cervisia::configDialogSize(this, partConfig, "AddRepositoryDialog");
+#endif
+    resize(size);
 }
 
 
 AddRepositoryDialog::~AddRepositoryDialog()
 {
-    if (!options)
-        options = new Options;
-    options->size = size();
+#if KDE_IS_VERSION(3,1,90)
+    saveDialogSize(partConfig, "AddRepositoryDialog");
+#else
+    Cervisia::saveDialogSize(this, partConfig, "AddRepositoryDialog");
+#endif
 }
 
 
@@ -108,26 +118,6 @@ QString AddRepositoryDialog::rsh() const
 int AddRepositoryDialog::compression() const
 {
     return compression_group->id(compression_group->selected()) - 1;
-}
-
-
-void AddRepositoryDialog::loadOptions(KConfig *config)
-{
-    if (!config->readEntry("Customized"))
-        return;
-
-    options = new Options;
-    options->size = config->readSizeEntry("Size");
-}
-
-
-void AddRepositoryDialog::saveOptions(KConfig *config)
-{
-    if (!options)
-        return;
-    
-    config->writeEntry("Customized", true);
-    config->writeEntry("Size", options->size);
 }
 
 

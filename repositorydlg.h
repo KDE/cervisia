@@ -30,15 +30,12 @@ class RepositoryDialog : public KDialogBase
     Q_OBJECT
 
 public:
-    explicit RepositoryDialog( QWidget *parent=0, const char *name=0 );
+    explicit RepositoryDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
 
     virtual ~RepositoryDialog();
 
     void readConfigFile();
     void readCvsPassFile(); 
-
-    static void loadOptions(KConfig *config);
-    static void saveOptions(KConfig *config);
 
 protected:
     virtual void slotOk();
@@ -52,13 +49,9 @@ private slots:
     void slotLogoutClicked();
 
 private:
-    struct Options {
-        QSize size;
-    };
-    static Options *options;
-
     ListView *repolist;
     KConfig* serviceConfig;
+    KConfig& partConfig;
 };
 
 #endif

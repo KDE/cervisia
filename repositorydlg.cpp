@@ -24,7 +24,11 @@
 #include "addrepositorydlg.h"
 #include "repositories.h"
 #include "listview.h"
-#include "cervisiapart.h"
+
+#include <kdeversion.h>
+#if KDE_VERSION < KDE_MAKE_VERSION(3,1,90)
+#include "configutils.h"
+#endif
 
 
 class RepositoryListItem : public QListViewItem
@@ -96,12 +100,11 @@ void RepositoryListItem::setCompression(int compression)
 }
 
 
-RepositoryDialog::Options *RepositoryDialog::options = 0;
 
-
-RepositoryDialog::RepositoryDialog(QWidget *parent, const char *name)
+RepositoryDialog::RepositoryDialog(KConfig& cfg, QWidget *parent, const char *name)
     : KDialogBase(parent, name, true, i18n("Configure Access to Repositories"),
                   Ok | Cancel | Help, Ok, true)
+    , partConfig(cfg)
 {
     QFrame* mainWidget = makeMainWidget();
 
@@ -155,44 +158,24 @@ RepositoryDialog::RepositoryDialog(QWidget *parent, const char *name)
 
     setHelp("accessing-repository");
 
-    if (options)
-        resize(options->size);
+#if KDE_IS_VERSION(3,1,90)
+    QSize size = configDialogSize(partConfig, "RepositoryDialog");
+#else
+    QSize size = Cervisia::configDialogSize(this, partConfig, "RepositoryDialog");
+#endif
+    resize(size);
 }
 
 
 RepositoryDialog::~RepositoryDialog()
 {
-    if (!options)
-        options = new Options;
-    options->size = size();
+#if KDE_IS_VERSION(3,1,90)
+    saveDialogSize(partConfig, "RepositoryDialog");
+#else
+    Cervisia::saveDialogSize(this, partConfig, "RepositoryDialog");
+#endif
     
     delete serviceConfig;
-}
-
-
-void RepositoryDialog::loadOptions(KConfig *config)
-{
-    if (!config->readEntry("Customized"))
-        return;
-
-    options = new Options;
-    options->size = config->readSizeEntry("Size");
-
-    config->setGroup("AddRepository dialog");
-    AddRepositoryDialog::loadOptions(config);
-}
-
-
-void RepositoryDialog::saveOptions(KConfig *config)
-{
-    if (!options)
-        return;
-    
-    config->writeEntry("Customized", true);
-    config->writeEntry("Size", options->size);
-
-    config->setGroup("AddRepository dialog");
-    AddRepositoryDialog::saveOptions(config);
 }
 
 
@@ -243,9 +226,8 @@ void RepositoryDialog::slotOk()
     for (item = repolist->firstChild(); item; item = item->nextSibling())
         list.append(item->text(0));
 
-    KConfig *config = CervisiaPart::config();
-    config->setGroup("Repositories");
-    config->writeEntry("Repos", list);
+    partConfig.setGroup("Repositories");
+    partConfig.writeEntry("Repos", list);
 
     for (item = repolist->firstChild(); item; item = item->nextSibling())
     {
@@ -256,9 +238,9 @@ void RepositoryDialog::slotOk()
         serviceConfig->writeEntry("Compression", ritem->compression());
 
         // TODO: remove when move to cvs DCOP service is complete
-        config->setGroup(QString("Repository-") + ritem->repository());
-        config->writeEntry("rsh", ritem->rsh());
-        config->writeEntry("Compression", ritem->compression());
+        partConfig.setGroup(QString("Repository-") + ritem->repository());
+        partConfig.writeEntry("rsh", ritem->rsh());
+        partConfig.writeEntry("Compression", ritem->compression());
         // END TODO
     }
 
@@ -271,7 +253,7 @@ void RepositoryDialog::slotOk()
 
 void RepositoryDialog::slotAddClicked()
 {
-    AddRepositoryDialog dlg(QString::null, this);
+    AddRepositoryDialog dlg(partConfig, QString::null, this);
     // default compression level
     dlg.setCompression(-1);
     if (dlg.exec())
@@ -302,10 +284,9 @@ void RepositoryDialog::slotAddClicked()
             serviceConfig->sync();
 
             // TODO: remove when move to cvs DCOP service is complete
-            KConfig *config = CervisiaPart::config();
-            config->setGroup(QString("Repository-") + repo);
-            config->writeEntry("rsh", rsh);
-            config->writeEntry("Compression", compression);
+            partConfig.setGroup(QString("Repository-") + repo);
+            partConfig.writeEntry("rsh", rsh);
+            partConfig.writeEntry("Compression", compression);
             // END TODO
         }
 }
@@ -327,7 +308,7 @@ void RepositoryDialog::slotDoubleClicked(QListViewItem *item)
     QString rsh = ritem->rsh();
     int compression = ritem->compression();
     
-    AddRepositoryDialog dlg(repo, this);
+    AddRepositoryDialog dlg(partConfig, repo, this);
     dlg.setRepository(repo);
     dlg.setRsh(rsh);
     dlg.setCompression(compression);
@@ -345,10 +326,9 @@ void RepositoryDialog::slotDoubleClicked(QListViewItem *item)
             serviceConfig->sync();
 
             // TODO: remove when move to cvs DCOP service is complete
-            KConfig *config = CervisiaPart::config();
-            config->setGroup(QString("Repository-") + repo);
-            config->writeEntry("rsh", dlg.rsh());
-            config->writeEntry("Compression", dlg.compression());
+            partConfig.setGroup(QString("Repository-") + repo);
+            partConfig.writeEntry("rsh", dlg.rsh());
+            partConfig.writeEntry("Compression", dlg.compression());
             // END TODO
         }
 }
