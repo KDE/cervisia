@@ -39,7 +39,7 @@ int main(int argc, char **argv)
     KCmdLineArgs::init(argc, argv, &about);
     KCmdLineArgs::addCmdLineOptions(options);
     
-    KApplication *app = new KApplication();
+    KApplication app;
 
     QString resolvefile = KCmdLineArgs::parsedArgs()->getOption("resolve");
     if (!resolvefile.isEmpty()) {
@@ -47,19 +47,19 @@ int main(int argc, char **argv)
         config->setGroup("Resolve dialog");
         ResolveDialog::loadOptions(config);
         ResolveDialog *l = new ResolveDialog();
-        app->setMainWidget(l);
+        app.setMainWidget(l);
         if (l->parseFile(resolvefile))
             l->show();
         else
             delete l;
-        int res = app->exec();
+        int res = app.exec();
         config->setGroup("Resolve dialog");
         ResolveDialog::saveOptions(config);
         delete CervisiaFactory::instance();
         return res;
     }
 
-    if ( app->isRestored() ) {
+    if ( app.isRestored() ) {
         RESTORE(CervisiaShell);
     } else {
         QString dirname = QString(KCmdLineArgs::parsedArgs()->count()?
@@ -71,12 +71,12 @@ int main(int argc, char **argv)
                   KApplication::desktop()->height()*8/10);
         
         t->restorePseudo(dirname);
-        t->setIcon(app->icon());
-        app->setMainWidget(t);
+        t->setIcon(app.icon());
+        app.setMainWidget(t);
         t->show();
     }
     
-    int res = app->exec();
+    int res = app.exec();
     cleanupTempFiles();
     return res;
 }
