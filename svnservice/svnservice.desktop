@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Service
+Encoding=UTF-8
+Name=SvnService
+Exec=svnservice
+X-DCOP-ServiceType=Multi
+X-KDE-StartupNotify=false
+Comment=A DCOP service that provides an interface to Subversion
