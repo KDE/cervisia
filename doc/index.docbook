@@ -555,7 +555,7 @@ a whole.
 &CVS; is not designed to provide meaningful revision control for binary
 files. For example, merging binary files normally does not make
 sense. Furthermore, by default &CVS; performs keyword expansion (&eg; on the
-string <literal>$Revision: 1.6 $</literal>) when a file is commited. In binary
+string <literal>&dollar;Revision: 1.6 &dollar;</literal>) when a file is commited. In binary
 files, such replacements may corrupt the file and make it completely
 unusable. In order to switch this behavior off, you should commit binary files
 (or other files, like Postscript) with a command line
