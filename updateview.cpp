@@ -18,27 +18,29 @@
 #include <unistd.h>
 #include <locale.h>
 #include <time.h>
-#include <qstrlist.h>
+#include <qapplication.h>
 #include <qdir.h>
 #include <qfileinfo.h>
 #include <qheader.h>
 #include <qstack.h>
-#include <kapplication.h>
+#include <kconfig.h>
 #include <kdebug.h>
-#include <kfileview.h>
 #include <kglobalsettings.h>
 #include <kiconloader.h>
 #include <klocale.h>
 
 #include "config.h"
 #include "misc.h"
+#include "cervisiapart.h"
 #include "cvsdir.h"
 
-#include "cervisiapart.h"
 
 class UpdateDirItem : public QListViewItem
 {
 public:
+
+    enum { Directory };
+
     UpdateDirItem( UpdateView *parent, QString dirname );
     UpdateDirItem( UpdateDirItem *parent, QString dirname );
 
@@ -48,7 +50,8 @@ public:
     void updateChildItem(QString name, UpdateView::Status status, bool isdir);
     void updateEntriesItem(QString name, UpdateView::Status status, bool isdir,
                            bool isbin, QString rev, QString tagname, time_t timestamp);
-    virtual QString key(int col, bool) const;
+
+    virtual int compare(QListViewItem* i, int col, bool) const;
     virtual QString text(int col) const;
     virtual void setOpen(bool o);
     virtual void setup();
@@ -70,6 +73,9 @@ private:
 class UpdateViewItem : public QListViewItem
 {
 public:
+
+    enum { File, Status, Revision, TagOrDate, Timestamp };
+
     UpdateViewItem( QListViewItem *parent, QString filename );
 
     QString filePath();
@@ -80,7 +86,7 @@ public:
     bool undefinedState() const
     { return m_undefined; }
 
-    virtual QString key(int col, bool) const;
+    virtual int compare(QListViewItem* i, int col, bool) const;
     virtual QString text(int col) const;
     virtual void paintCell(QPainter *p, const QColorGroup &cg,
 			   int col, int width, int align);
@@ -94,6 +100,9 @@ public:
     void markUpdated(bool laststage, bool success, UpdateView::Filter filter);
 
 private:
+
+    int statusClass() const;
+
     QString m_filename;
     QString m_revision;
     QString m_tag;
@@ -129,7 +138,7 @@ QString UpdateDirItem::dirPath()
 {
     UpdateDirItem *diritem = static_cast<UpdateDirItem*>(parent());
 
-    return parent()? diritem->dirPath() + m_dirname + "/" : QString("");
+    return parent()? diritem->dirPath() + m_dirname + "/" : QString::null;
 }                      
 
 
@@ -141,7 +150,7 @@ void UpdateDirItem::updateChildItem(QString name, UpdateView::Status status, boo
     for (QListViewItem *item = firstChild(); item;
 	 item = item->nextSibling() )
 	{
-	    if (item->text(0) == name)
+	    if (item->text(UpdateViewItem::File) == name)
 		{
 		    if (UpdateView::isDirItem(item))
                         ; // ignore
@@ -177,7 +186,7 @@ void UpdateDirItem::updateEntriesItem(QString name, UpdateView::Status status, b
     for (QListViewItem *item = firstChild(); item;
 	 item = item->nextSibling() )
 	{
-	    if (item->text(0) == name)
+	    if (item->text(UpdateViewItem::File) == name)
 		{
 		    if (UpdateView::isDirItem(item))
                         ; // ignore
@@ -240,7 +249,7 @@ static QString lastModifiedStr(const QString &fname)
 {
     struct stat st;
     if (lstat(fname.local8Bit(), &st) != 0)
-	return "";
+	return QString::null;
     struct tm *tm_p = gmtime(&st.st_mtime);
     char *p = asctime(tm_p);
     p[24] = '\0';
@@ -345,7 +354,7 @@ void UpdateDirItem::syncWithDirectory()
                 {
                     QFileInfoListIterator it(*files);
                     for ( ; it.current(); ++it)
-                        if (it.current()->fileName() == item->text(0))
+                        if (it.current()->fileName() == item->text(UpdateViewItem::File))
                             {
                                 exists = true;
                                 break;
@@ -356,7 +365,7 @@ void UpdateDirItem::syncWithDirectory()
                     UpdateViewItem *viewitem = static_cast<UpdateViewItem*>(item);
                     UpdateView::Filter filter = updateView()->filter();
                     viewitem->setStatus(UpdateView::Removed, filter);
-                    viewitem->setRevTag("", "");
+                    viewitem->setRevTag(QString::null, QString::null);
                 }
         }
 }
@@ -413,15 +422,16 @@ void UpdateDirItem::setOpen(bool o)
 }
 
 
-QString UpdateDirItem::key(int col, bool) const
+int UpdateDirItem::compare(QListViewItem* i, int, bool bAscending) const
 {
-    static QString tmp;
-    switch (col)
-	{
-	case 0: //return m_dirname;
-	case 1: return tmp = QString("0") + m_dirname;
-        default:return "";
-	}
+    // UpdateDirItems are always lesser than UpdateViewItems
+    if (UpdateView::isDirItem(i) == false)
+        return bAscending ? -1 : 1;
+
+    UpdateDirItem const* pItem = static_cast<UpdateDirItem*>(i);
+
+    // for every column just compare the directory name
+    return ::compare(m_dirname, pItem->m_dirname);
 }
 
 
@@ -429,8 +439,8 @@ QString UpdateDirItem::text(int col) const
 {
     switch (col)
 	{
-	case 0:  return m_dirname;
-	default: return "";
+	case Directory:  return m_dirname;
+	default: return QString::null;
 	}
 }
 
@@ -447,8 +457,6 @@ UpdateViewItem::UpdateViewItem( QListViewItem *parent, QString filename )
 {
     m_status = UpdateView::NotInCVS;
     m_filename = filename;
-    m_revision = "";
-    m_tag = "";
     m_undefined = false;
 
     KConfig *config = CervisiaPart::config();
@@ -549,53 +557,74 @@ void UpdateViewItem::markUpdated(bool laststage, bool success, UpdateView::Filte
 }
 
 
-QString UpdateViewItem::key(int col, bool) const
+int UpdateViewItem::statusClass() const
 {
-    static QString tmp;
-    QString prefix;
+    int iResult(0);
+    switch (m_status)
+    {
+    case UpdateView::Conflict:
+        iResult = 0;
+        break;
+    case UpdateView::LocallyAdded:
+        iResult = 1;
+        break;
+    case UpdateView::LocallyRemoved:
+        iResult = 2;
+        break;
+    case UpdateView::LocallyModified:
+        iResult = 3;
+        break;
+    case UpdateView::Updated:
+    case UpdateView::NeedsUpdate:
+    case UpdateView::Patched:
+    case UpdateView::Removed:
+    case UpdateView::NeedsPatch:
+    case UpdateView::NeedsMerge:
+        iResult = 4;
+        break;
+    case UpdateView::NotInCVS:
+        iResult = 5;
+        break;
+    case UpdateView::UpToDate:
+    case UpdateView::Unknown:
+        iResult = 6;
+        break;
+    }
 
+    return iResult;
+}
+
+
+int UpdateViewItem::compare(QListViewItem* i, int col, bool bAscending) const
+{
+    // UpdateDirItems are always lesser than UpdateViewItems
+    if (UpdateView::isDirItem(i))
+        return bAscending ? 1 : -1;
+
+    UpdateViewItem const* pItem = static_cast<UpdateViewItem*>(i);
+
+    int iResult(0);
     switch (col)
-	{
-	case 0:
-            // Put ordinary files behind all directories
-            return tmp = QString("1") + m_filename;
-	case 1:
-	    // We want to have a kind of priority order when
-	    // sorted by 'status'
-	    switch (m_status)
-		{
-		case UpdateView::Conflict:
-		    prefix = "1"; break;
-		case UpdateView::LocallyAdded:
-		    prefix = "2"; break;
-		case UpdateView::LocallyRemoved:
-		    prefix = "3"; break;
-		case UpdateView::LocallyModified:
-		    prefix = "4"; break;
-		case UpdateView::Updated:
-		case UpdateView::NeedsUpdate:
-		case UpdateView::Patched:
-                case UpdateView::Removed:
-		case UpdateView::NeedsPatch:
-		case UpdateView::NeedsMerge:
-		    prefix = "5"; break;
-		case UpdateView::NotInCVS:
-		    prefix = "6"; break;
-		default:  prefix = "7"; 
-		}
-	    return tmp = prefix + m_filename;
-        case 2:
-            return m_revision; // First approximation...
-        case 3:
-            return m_tag;
-        case 4:
-    //static QString sortingKey( const QString& value, bool isDir, int sortSpec);
-    //static QString sortingKey( KIO::filesize_t value, bool isDir,int sortSpec);
-            //return m_timestamp.toString();
-	    return KFileView::sortingKey(m_timestamp, false, QDir::Time);
-	default:
-	    return "";
-	}
+    {
+    case File:
+        iResult = ::compare(m_filename, pItem->m_filename);
+        break;
+    case Status:
+        if ((iResult = ::compare(statusClass(), pItem->statusClass())) == 0)
+            iResult = ::compare(m_filename, pItem->m_filename);
+        break;
+    case Revision:
+        iResult = ::compareRevisions(m_revision, pItem->m_revision);
+        break;
+    case TagOrDate:
+        iResult = ::compare(m_tag, pItem->m_tag);
+        break;
+    case Timestamp:
+        iResult = ::compare(m_timestamp, pItem->m_timestamp);
+        break;
+    }
+
+    return iResult;
 }
 
 
@@ -603,9 +632,9 @@ QString UpdateViewItem::text(int col) const
 {
     switch (col)
 	{
-	case 0:
+	case File:
 	    return m_filename;
-	case 1:
+	case Status:
 	    switch (m_status)
 		{
 		case UpdateView::LocallyModified:
@@ -634,18 +663,18 @@ QString UpdateViewItem::text(int col) const
 		    return i18n("Not in CVS");
 		default:  return i18n("Unknown");
 		}
-	case 2:
+	case Revision:
 		return m_revision;
-	case 3:
+	case TagOrDate:
 		return m_tag;
-	case 4:
-		{
-			QDateTime timestamp;
-			timestamp.setTime_t(m_timestamp);
-			return KGlobal::locale()->formatDateTime(timestamp);
+	case Timestamp:
+            {
+                QDateTime timestamp;
+                timestamp.setTime_t(m_timestamp);
+                return KGlobal::locale()->formatDateTime(timestamp);
 	    }
 	default:
-	    return "";
+	    return QString::null;
 	}
 }       
 
@@ -702,8 +731,8 @@ UpdateView::UpdateView(QWidget *parent, const char *name)
     width = QMAX(width, fm.width(i18n("Not in CVS")));
     width = QMAX(width, fm.width(i18n("Unknown")));
     
-    setColumnWidth(1, width+5);
-    setPreferredColumn(0);
+    setColumnWidth(UpdateViewItem::Status, width+5);
+    setPreferredColumn(UpdateViewItem::File);
     setFilter(NoFilter);
 
     connect( this, SIGNAL(doubleClicked(QListViewItem*)),
@@ -721,7 +750,7 @@ UpdateView::~UpdateView()
 
 bool UpdateView::isDirItem(QListViewItem *item)
 {
-    return item->text(1).isEmpty();
+    return item->text(UpdateViewItem::Status).isEmpty();
 }
 
 
@@ -987,11 +1016,11 @@ void UpdateView::rememberSelection(bool recursive)
     DEBUGOUT("Deep:");
     QPtrListIterator<QListViewItem> it42(deepItems);
     for (; it42.current(); ++it42)
-        DEBUGOUT("  " << (*it42)->text(0));
+        DEBUGOUT("  " << (*it42)->text(UpdateViewItem::File));
     DEBUGOUT("Shallow:");
     QPtrListIterator<QListViewItem> it43(shallowItems);
     for (; it43.current(); ++it43)
-        DEBUGOUT("  " << (*it43)->text(0));
+        DEBUGOUT("  " << (*it43)->text(UpdateViewItem::File));
 #endif
     
     // Collect everything together, and avoid duplicates:
@@ -1010,7 +1039,7 @@ void UpdateView::rememberSelection(bool recursive)
     DEBUGOUT("Relevant:");
     QPtrListIterator<QListViewItem> it44(relevantSelection);
     for (; it44.current(); ++it44)
-        DEBUGOUT("  " << (*it44)->text(0));
+        DEBUGOUT("  " << (*it44)->text(UpdateViewItem::File));
     DEBUGOUT("End");
 #endif
 }
@@ -1102,7 +1131,7 @@ void UpdateView::updateItem(const QString &name, Status status, bool isdir)
     QString fileName(fi.fileName());
 
     if (dirpath == ".") 
-    	dirpath = "";
+        dirpath = QString::null;
     else
 	dirpath += '/';
 
