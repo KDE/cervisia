@@ -34,10 +34,12 @@ public:
 
     void setRepository(const QString &repo);
     void setRsh(const QString &rsh);
+    void setServer(const QString &server);
     void setCompression(int compression);
     
     QString repository() const;
     QString rsh() const;
+    QString server() const;
     int compression() const;
 
 private slots:
@@ -46,6 +48,7 @@ private slots:
 private:
     KLineEdit *repo_edit;
     KLineEdit *rsh_edit;
+    KLineEdit *server_edit;
     QButtonGroup *compression_group;
     KConfig& partConfig;
 };

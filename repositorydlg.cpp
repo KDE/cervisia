@@ -36,6 +36,7 @@ class RepositoryListItem : public KListViewItem
 public:
     RepositoryListItem(KListView *parent, const QString &repo, bool loggedin);
     void setRsh(const QString &rsh);
+    void setServer(const QString &server) { mServer = server; }
     void setCompression(int compression);
     QString repository() const
     {
@@ -46,10 +47,13 @@ public:
         QString str = text(1);
         return (str.startsWith("ext (")? str.mid(5, str.length()-6) : QString::null);
     }
+    QString server() const { return mServer; }
     int compression() const
     {
         bool ok; int n = text(2).toInt(&ok); return ok? n : -1;
     }
+private:
+    QString mServer;
 };
 
 
@@ -210,10 +214,12 @@ void RepositoryDialog::readConfigFile()
 
             // read entries from cvs DCOP service configuration
             serviceConfig->setGroup(QString::fromLatin1("Repository-") + ritem->repository());
-            QString rsh = serviceConfig->readEntry("rsh", QString());
+            QString rsh     = serviceConfig->readEntry("rsh", QString());
+            QString server  = serviceConfig->readEntry("cvs_server", QString());
             int compression = serviceConfig->readNumEntry("Compression", -1);
 
             ritem->setRsh(rsh);
+            ritem->setServer(server);
             ritem->setCompression(compression);
         }
 }
@@ -236,6 +242,7 @@ void RepositoryDialog::slotOk()
         // write entries to cvs DCOP service configuration
         serviceConfig->setGroup(QString::fromLatin1("Repository-") + ritem->repository());
         serviceConfig->writeEntry("rsh", ritem->rsh());
+        serviceConfig->writeEntry("cvs_server", ritem->server());
         serviceConfig->writeEntry("Compression", ritem->compression());
 
         // TODO: remove when move to cvs DCOP service is complete
@@ -259,8 +266,9 @@ void RepositoryDialog::slotAddClicked()
     dlg.setCompression(-1);
     if (dlg.exec())
         {
-            QString repo = dlg.repository();
-            QString rsh = dlg.rsh();
+            QString repo    = dlg.repository();
+            QString rsh     = dlg.rsh();
+            QString server  = dlg.server();
             int compression = dlg.compression();
             
             QListViewItem *item = repolist->firstChild();
@@ -279,6 +287,7 @@ void RepositoryDialog::slotAddClicked()
             // write entries to cvs DCOP service configuration
             serviceConfig->setGroup(QString::fromLatin1("Repository-") + ritem->repository());
             serviceConfig->writeEntry("rsh", ritem->rsh());
+            serviceConfig->writeEntry("cvs_server", server);
             serviceConfig->writeEntry("Compression", ritem->compression());
 
             // write to disk so other services can reparse the configuration
@@ -305,22 +314,26 @@ void RepositoryDialog::slotDoubleClicked(QListViewItem *item)
         return;
 
     RepositoryListItem *ritem = static_cast<RepositoryListItem*>(item);
-    QString repo = ritem->repository();
-    QString rsh = ritem->rsh();
+    QString repo    = ritem->repository();
+    QString rsh     = ritem->rsh();
+    QString server  = ritem->server();
     int compression = ritem->compression();
     
     AddRepositoryDialog dlg(partConfig, repo, this);
     dlg.setRepository(repo);
     dlg.setRsh(rsh);
+    dlg.setServer(server);
     dlg.setCompression(compression);
     if (dlg.exec())
         {
             ritem->setRsh(dlg.rsh());
+            ritem->setServer(dlg.server());
             ritem->setCompression(dlg.compression());
 
             // write entries to cvs DCOP service configuration
             serviceConfig->setGroup(QString::fromLatin1("Repository-") + ritem->repository());
             serviceConfig->writeEntry("rsh", ritem->rsh());
+            serviceConfig->writeEntry("cvs_server", ritem->server());
             serviceConfig->writeEntry("Compression", ritem->compression());
 
             // write to disk so other services can reparse the configuration

@@ -58,6 +58,14 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString &repo,
     rsh_edit = new KLineEdit(mainWidget);
     rsh_label->setBuddy(rsh_edit);
     layout->addWidget(rsh_edit);
+    
+    QLabel *server_label = new QLabel(i18n("Invoke this program on the server side:"),
+                                      mainWidget);
+    layout->addWidget(server_label);
+    
+    server_edit = new KLineEdit(mainWidget);
+    server_label->setBuddy(server_edit);
+    layout->addWidget(server_edit);
 
     compression_group = new QHButtonGroup(i18n("&Compression Level"), mainWidget);
     layout->addWidget(compression_group);
@@ -97,6 +105,12 @@ void AddRepositoryDialog::setRsh(const QString &rsh)
 }
 
 
+void AddRepositoryDialog::setServer(const QString &server)
+{
+    server_edit->setText(server);
+}
+
+
 void AddRepositoryDialog::setCompression(int compression)
 {
     compression_group->setButton(compression + 1);
@@ -112,6 +126,12 @@ QString AddRepositoryDialog::repository() const
 QString AddRepositoryDialog::rsh() const
 {
     return rsh_edit->text();
+}
+
+
+QString AddRepositoryDialog::server() const
+{
+    return server_edit->text();
 }
 
 
