@@ -24,7 +24,8 @@
     <Separator/>
     <Action name="view_log"/>
     <Action name="view_annotate"/>
-    <Action name="view_diff"/>
+    <Action name="view_diff_base"/>
+    <Action name="view_diff_head"/>
     <Action name="view_last_change"/>
     <Action name="view_history"/>
     <Separator/>
@@ -84,7 +85,7 @@
 </ToolBar>
 <Menu name="context_popup">
   <Action name="file_edit"/>
-  <Action name="view_diff"/>
+  <Action name="view_diff_base"/>
   <Action name="view_last_change"/>
   <Action name="file_resolve"/>
   <Action name="view_log"/>
@@ -108,7 +109,8 @@
     <Action name="file_resolve"/>
     <Action name="view_log"/>
     <Action name="view_annotate"/>
-    <Action name="view_diff"/>
+    <Action name="view_diff_base"/>
+    <Action name="view_diff_head"/>
     <Action name="view_last_change"/>
   </Enable>
 </State>

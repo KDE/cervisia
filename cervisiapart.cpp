@@ -287,10 +287,17 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Difference to Repository..."), CTRL+Key_D,
-                          this, SLOT(slotDiff()),
-                          actionCollection(), "view_diff" );
-    hint = i18n("Shows the differences of the selected file to the BASE version");
+    action = new KAction( i18n("&Difference to Repository (BASE)..."), CTRL+Key_D,
+                          this, SLOT(slotDiffBase()),
+                          actionCollection(), "view_diff_base" );
+    hint = i18n("Shows the differences of the selected file to the checked out version (tag BASE)");
+    action->setToolTip( hint );
+    action->setWhatsThis( hint );
+
+    action = new KAction( i18n("Difference to Repository (HEAD)..."), CTRL+Key_H,
+                          this, SLOT(slotDiffHead()),
+                          actionCollection(), "view_diff_head" );
+    hint = i18n("Shows the differences of the selected file to the newest version in the repository (tag HEAD)");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
@@ -995,20 +1002,15 @@ void CervisiaPart::slotAnnotate()
 }
 
 
-void CervisiaPart::slotDiff()
+void CervisiaPart::slotDiffBase()
 {
-    QString filename;
-    update->getSingleSelection(&filename);
+    showDiff(QString::fromLatin1("BASE"));
+}
 
-    if (filename.isEmpty())
-        return;
 
-    // Non-modal dialog
-    DiffDialog *l = new DiffDialog(*config());
-    if (l->parseCvsDiff(cvsService, filename, QString::fromLatin1("BASE"), QString::null))
-        l->show();
-    else
-        delete l;
+void CervisiaPart::slotDiffHead()
+{
+    showDiff(QString::fromLatin1("HEAD"));
 }
 
 
@@ -1486,6 +1488,23 @@ void CervisiaPart::showJobStart(const QString &cmdline)
 
     emit setStatusBarText( cmdline );
     updateActions();
+}
+
+
+void CervisiaPart::showDiff(const QString& revision)
+{
+    QString fileName;
+    update->getSingleSelection(&fileName);
+
+    if (fileName.isEmpty())
+        return;
+
+    // Non-modal dialog
+    DiffDialog *l = new DiffDialog(*config());
+    if (l->parseCvsDiff(cvsService, fileName, revision, QString::null))
+        l->show();
+    else
+        delete l;
 }
 
 

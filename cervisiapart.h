@@ -101,7 +101,8 @@ public slots:
     void slotBrowseLog();
     //    void slotBrowseMultiLog();
     void slotAnnotate();
-    void slotDiff();
+    void slotDiffBase();
+    void slotDiffHead();
     void slotLastChange();
     void slotHistory();
     void slotCheckout();
@@ -163,6 +164,7 @@ private:
     void importOrCheckout(CheckoutDialog::ActionType action);
     void createOrDeleteTag(TagDialog::ActionType action);
     void showJobStart(const QString &command);
+    void showDiff(const QString& revision);
     void setFilter();
 
     UpdateView *update;

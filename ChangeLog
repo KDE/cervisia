@@ -1,3 +1,10 @@
+2003-05-10  André Wöbbeking  <Woebbeking@web.de>
+
+	* Fix BR 50918: 
+	  o Added possibility to diff a selected file against the
+	    newest version in the repository (cvs diff -r HEAD).
+	  o Now External and internal diff show the same differences.
+
 2003-05-09  Christian Loose  <christian.loose@hamburg.de>
 
 	* Use DCOP service for commit action 
