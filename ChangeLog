@@ -1,3 +1,10 @@
+2004-12-08  Christian Loose  <christian.loose@kdemail.net>
+
+	* Fix BR  #90346:
+          Normalize user-entered CVSROOT specification before adding
+	  a new group to the cvsservicerc configuration file. This
+	  prevents duplicate entries in the repository list.
+
 2004-11-30  Christian Loose  <christian.loose@kdemail.net>
 
 	* Fix BR #94083:

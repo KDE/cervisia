@@ -81,3 +81,12 @@ File=cervisiapartrc
 Group=General
 RemoveKey=CVSPath
 RemoveKey=Compression
+#
+Id=kde3.4/20041112
+File=cvsservicerc
+Script=cervisia-normalize_cvsroot.pl,perl
+#
+Id=kde3.4/20041207
+File=cervisiapartrc
+Group=Repositories
+Script=cervisia-change_repos_list.pl,perl

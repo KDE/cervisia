@@ -22,9 +22,11 @@
 #include <klistview.h>
 #include <klocale.h>
 #include <kmessagebox.h>
+#include <kdebug.h>
 
 #include "addrepositorydlg.h"
 #include "cvsservice_stub.h"
+#include "misc.h"
 #include "progressdlg.h"
 #include "repositories.h"
 
@@ -75,6 +77,7 @@ RepositoryListItem::RepositoryListItem(KListView* parent, const QString& repo,
     : KListViewItem(parent)
     , m_isLoggedIn(loggedin)
 {
+    kdDebug() << "RepositoryListItem::RepositoryListItem(): repo=" << repo << endl;
     setText(0, repo);
     
     changeLoginStatusColumn();
@@ -259,6 +262,10 @@ void RepositoryDialog::readConfigFile()
         // read entries from cvs DCOP service configuration
         m_serviceConfig->setGroup(QString::fromLatin1("Repository-") +
                                   ritem->repository());
+
+        kdDebug() << "(1) RepositoryDialog::readConfigFile(): repository = "
+                  << ritem->repository() << endl;
+
         QString rsh       = m_serviceConfig->readEntry("rsh", QString());
         QString server    = m_serviceConfig->readEntry("cvs_server", QString());
         int compression   = m_serviceConfig->readNumEntry("Compression", -1);
@@ -306,7 +313,7 @@ void RepositoryDialog::slotAddClicked()
     dlg.setCompression(-1);
     if( dlg.exec() )
     {
-        QString repo      = dlg.repository();
+        QString repo      = Cervisia::NormalizeRepository(dlg.repository());
         QString rsh       = dlg.rsh();
         QString server    = dlg.server();
         int compression   = dlg.compression();
@@ -391,6 +398,9 @@ void RepositoryDialog::slotLoginClicked()
     RepositoryListItem* item = (RepositoryListItem*)m_repoList->currentItem();
     if( !item )
         return;
+    
+    kdDebug() << "RepositoryDialog::slotLoginClicked(): repo="
+              << item->repository() << endl;
 
     DCOPRef job = m_cvsService->login(item->repository());
     if( !m_cvsService->ok() )
@@ -465,7 +475,10 @@ void RepositoryDialog::writeRepositoryData(RepositoryListItem* item)
     // write entries to cvs DCOP service configuration
     m_serviceConfig->setGroup(QString::fromLatin1("Repository-") +
                               item->repository());
-    
+
+    kdDebug() << "(1) RepositoryDialog::writeRepositoryData(): repository = "
+              << item->repository() << endl;
+
     m_serviceConfig->writeEntry("rsh", item->rsh());
     m_serviceConfig->writeEntry("cvs_server", item->server());
     m_serviceConfig->writeEntry("Compression", item->compression());

@@ -51,7 +51,7 @@ shellrcdir = $(kde_datadir)/cervisia
 shellrc_DATA = cervisiashellui.rc eventsrc
 
 update_DATA = cervisia.upd
-update_SCRIPTS = move_repositories.pl change_colors.pl cervisia-normalize_cvsroot.pl
+update_SCRIPTS = move_repositories.pl change_colors.pl cervisia-normalize_cvsroot.pl cervisia-change_repos_list.pl
 updatedir = $(kde_datadir)/kconf_update
 
 messages: rc.cpp
