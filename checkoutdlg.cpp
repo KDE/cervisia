@@ -267,6 +267,7 @@ void CheckoutDialog::slotOk()
         }
     }
 
+    KConfigGroupSaver cs(&partConfig, "CheckoutDialog");
     partConfig.writeEntry("Repository", repository());
     partConfig.writeEntry("Module", module());
 #if KDE_IS_VERSION(3,1,3)
