@@ -404,7 +404,7 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
                         }
                     QStringList::ConstIterator itA = linesA.begin();
                     QStringList::ConstIterator itB = linesB.begin();
-                    for (; itA != linesA.end() || itB != linesB.end(); ++itA, ++itB)
+                    while (itA != linesA.end() || itB != linesB.end())
                         {
                             if (itA != linesA.end())
                                 {
@@ -422,6 +422,11 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
                                     diff2->addLine(*itB, DiffView::Insert,
                                                    ++linenoB);
                                 }
+
+                            if (itA != linesA.end())
+                                ++itA;
+                            if (itB != linesB.end())
+                                ++itB;
                         }
                     state = Normal;
                     linesA.clear();
@@ -447,7 +452,7 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
         }
     QStringList::ConstIterator itA = linesA.begin();
     QStringList::ConstIterator itB = linesB.begin();
-    for (; itA != linesA.end() || itB != linesB.end(); ++itA, ++itB)
+    while (itA != linesA.end() || itB != linesB.end())
         {
             if (itA != linesA.end())
                 {
@@ -465,6 +470,11 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
                     diff2->addLine(*itB, DiffView::Insert,
                                    ++linenoB);
                 }
+            
+            if (itA != linesA.end())
+                ++itA;
+            if (itB != linesB.end())
+                ++itB;
         }
 
     updateNofN();
