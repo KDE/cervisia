@@ -38,18 +38,23 @@ static KCmdLineOptions options[] =
 int main(int argc, char** argv)
 {
     KAboutData about("cvsaskpass", I18N_NOOP("cvsaskpass"), "0.1",
-                     I18N_NOOP("ssh-askpass for the CVS DCOP Service"), 
-                     KAboutData::License_LGPL, 
+                     I18N_NOOP("ssh-askpass for the CVS DCOP Service"),
+                     KAboutData::License_LGPL,
                      I18N_NOOP("Copyright (c) 2003 Christian Loose"));
 
     KCmdLineArgs::init(argc, argv, &about);
     KCmdLineArgs::addCmdLineOptions(options);
 
+    // no need to register with the dcop server
+    KApplication::disableAutoDcopRegistration();
     KApplication app;
+
+    // no need for session management
+    app.disableSessionManagement();
 
     if( !KCmdLineArgs::parsedArgs()->count() )
         return 1;
-    
+
     // parse repository name from the passed argument
     QString prompt = KCmdLineArgs::parsedArgs()->arg(0);
     QRegExp rx("(.*@.*)'s password:");
