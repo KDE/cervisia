@@ -67,7 +67,7 @@ CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service,
     edit->setMinimumSize(400, 100);
     layout->addWidget(edit, 10);
 
-    setButtonText(User1, i18n("&Diff"));
+    setButtonGuiItem(User1, KGuiItem(i18n("&Diff"), "vcs_diff"));
     enableButton(User1, false);
     connect( this, SIGNAL(user1Clicked()),
              this, SLOT(diffClicked()) );            
