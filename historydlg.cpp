@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,8 +12,11 @@
  */
 
 
+#include "historydlg.h"
+
 #include <qcheckbox.h>
 #include <qlayout.h>
+#include <qpushbutton.h>
 #include <qregexp.h>
 #include <kapplication.h>
 #include <kbuttonbox.h>
@@ -25,38 +28,20 @@
 #include "listview.h"
 #include "misc.h"
 
-#include "historydlg.h"
-#include <qpushbutton.h>
-#include "historydlg.moc"
-
 
 class HistoryItem : public QListViewItem
 {
 public:
     HistoryItem(QListView *parent, QString idx)
-        : QListViewItem(parent)
-        {
-            index = idx;
-        }
-    HistoryItem(QListView *parent, HistoryDialog::ItemCopy *copy)
-        : QListViewItem(parent)
-        {
-            for (int i = 0; i < 7; ++i)
-                setText(i, copy->text[i]);
-            index = copy->index;
-        }
-    // Argl... will be much simpler with Qt 2.x which has QListView::takeItem()
-    // ... will be even simpler with Qt 3.x which has QListViewitem::setVisible() ;-)
-    HistoryDialog::ItemCopy *itemCopy() const
-        {
-            HistoryDialog::ItemCopy *copy = new HistoryDialog::ItemCopy;
-            for (int i = 0; i < 7; ++i)
-                copy->text[i] = text(i);
-            copy->index = index;
-            return copy;
-        }
+        : QListViewItem(parent), index(idx)
+    {}
 
     virtual QString key(int col, bool) const;
+
+    bool isCommit();
+    bool isCheckout();
+    bool isTag();
+    bool isOther();
 
 private:
     QString index;
@@ -69,27 +54,27 @@ QString HistoryItem::key(int col, bool) const
 }
 
 
-bool HistoryDialog::ItemCopy::isCommit()
+bool HistoryItem::isCommit()
 {
-    return text[1] == i18n("Commit, Modified ")
-        || text[1] == i18n("Commit, Added ")
-        || text[1] == i18n("Commit, Removed ");
+    return text(1) == i18n("Commit, Modified ")
+        || text(1) == i18n("Commit, Added ")
+        || text(1) == i18n("Commit, Removed ");
 }
 
 
-bool HistoryDialog::ItemCopy::isCheckout()
+bool HistoryItem::isCheckout()
 {
-    return text[1] == i18n("Checkout ");
+    return text(1) == i18n("Checkout ");
 }
 
 
-bool HistoryDialog::ItemCopy::isTag()
+bool HistoryItem::isTag()
 {
-    return text[1] == i18n("Tag");
+    return text(1) == i18n("Tag");
 }
 
 
-bool HistoryDialog::ItemCopy::isOther()
+bool HistoryItem::isOther()
 {
     return !isCommit() && !isCheckout() && !isTag();
 }
@@ -103,8 +88,6 @@ HistoryDialog::HistoryDialog(QWidget *parent, const char *name)
 {
     QBoxLayout *layout = new QVBoxLayout(this, 10, 0);
 
-    hiddenitems.setAutoDelete(true);
-    
     listview = new ListView(this);
     listview->setSelectionMode(QListView::NoSelection);
     listview->setAllColumnsShowFocus(true);
@@ -250,21 +233,12 @@ void HistoryDialog::saveOptions(KConfig *config)
 
 void HistoryDialog::choiceChanged()
 {
-    // Collect all items in hidden list
-    QListViewItem *shownitem;
-    while ( (shownitem = listview->firstChild()) != 0)
-        {
-            hiddenitems.append(static_cast<HistoryItem*>(shownitem)->itemCopy());
-            delete shownitem;
-        }
-            
-    // Now move all items which fulfill our criteria
-    // back into the listview.
-    QPtrList<ItemCopy> shownitems;
-    QPtrListIterator<ItemCopy> it(hiddenitems);
+    QListViewItemIterator it(listview);
     for (; it.current(); ++it)
         {
-            ItemCopy *item = it.current();
+            HistoryItem *item = static_cast<HistoryItem*>(it.current());
+            item->setVisible(false);
+            
             if ( !( commit_box->isChecked() && item->isCommit() ) &&
                  !( checkout_box->isChecked() && item->isCheckout() ) &&
                  !( tag_box->isChecked() && item->isTag() ) &&
@@ -272,27 +246,19 @@ void HistoryDialog::choiceChanged()
                 continue;
             if ( onlyuser_box->isChecked() &&
                  !QString(user_edit->text()).isEmpty() &&
-                 user_edit->text() != item->text[2] )
+                 user_edit->text() != item->text(2) )
                 continue;
             if ( onlyfilenames_box->isChecked() &&
                  !QString(filename_edit->text()).isEmpty() &&
-                 QRegExp(filename_edit->text(), true, true).match(item->text[4]) != 0 )
+                 QRegExp(filename_edit->text(), true, true).match(item->text(4)) != 0 )
                 continue;
             if ( onlydirnames_box->isChecked() &&
                  !QString(dirname_edit->text()).isEmpty() &&
-                 QRegExp(dirname_edit->text(), true, true).match(item->text[5]) != 0)
+                 QRegExp(dirname_edit->text(), true, true).match(item->text(5)) != 0)
                 continue;
 
-            (void) new HistoryItem(listview, item);
-            shownitems.append(item);
+            item->setVisible(true);
         }
-
-    // Delete shown items from hidden list
-    QPtrListIterator<ItemCopy> it2(shownitems);
-    for (; it2.current(); ++it2)
-        hiddenitems.remove(it2.current());
-                           
-    listview->triggerUpdate();
 }
 
 
@@ -381,6 +347,8 @@ bool HistoryDialog::parseHistory(const QString &sandbox, const QString &reposito
 
     return true;
 }
+
+#include "historydlg.moc"
 
 
 // Local Variables:
