@@ -59,7 +59,7 @@ k_dcop:
      *         null reference.
      */
     DCOPRef annotate(const QString& fileName, const QString& revision);
-    
+
     /**
      * Checks out a module from the repository into a working copy.
      *
@@ -103,6 +103,15 @@ k_dcop:
                  unsigned contextLines);
 
     /**
+     * Shows a history of activity (like checkouts, commits, etc) in the
+     * repository for all users and all record types.
+     *
+     * @return A DCOP reference to the cvs job or in case of failure a
+     *         null reference.
+     */
+    DCOPRef history();
+
+    /**
      * Shows log messages for a file.
      *
      * @param fileName the name of the file to show log messages for
@@ -136,7 +145,7 @@ k_dcop:
      *         null reference.
      */
     DCOPRef remove(const QStringList& files, bool recursive);
-   
+
     /**
      * Shows a summary of what's been done locally, without changing the
      * working copy. (cvs -n update)
@@ -148,7 +157,7 @@ k_dcop:
      *         null reference.
      */    
     DCOPRef status(const QStringList& files, bool recursive);
-    
+
     /**
      * Shows the status of the files in the working copy.
      *
@@ -160,12 +169,12 @@ k_dcop:
      *         null reference.
      */    
     DCOPRef status(const QStringList& files, bool recursive, bool tagInfo);
-    
+
     /**
      * Merges changes from the repository into the files of the
      * working copy.
      *
-     * @param files
+     * @param files A list of files that should be updated.
      * @param recursive descend into subdirectories.
      * @param createDirs create directories that exist in the repository
      *                   but not yet in the working copy.
@@ -177,7 +186,7 @@ k_dcop:
      */
     DCOPRef update(const QStringList& files, bool recursive, bool createDirs,
                    bool pruneDirs, const QString& extraOpt);
-                   
+
     /**
      * Quits the DCOP service.
      */

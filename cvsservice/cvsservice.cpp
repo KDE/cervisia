@@ -217,6 +217,23 @@ DCOPRef CvsService::diff(const QString& fileName, const QString& revA,
 }
 
 
+DCOPRef CvsService::history()
+{
+    if( !d->hasWorkingCopy() )
+        return DCOPRef();
+
+    // create a cvs job
+    CvsJob* job = d->createCvsJob();
+
+    // assemble the command line
+    // cvs history -e -a
+    *job << d->repository->cvsClient() << "history -e -a";
+
+    // return a DCOP reference to the cvs job
+    return DCOPRef(d->appId, job->objId());
+}
+
+
 DCOPRef CvsService::log(const QString& fileName)
 {
     if( !d->hasWorkingCopy() )

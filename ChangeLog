@@ -1,3 +1,7 @@
+2003-05-14  Christian Loose  <christian.loose@hamburg.de>
+
+	* Added history() method to cvs DCOP service
+
 2003-05-10  André Wöbbeking  <Woebbeking@web.de>
 
 	* Fix BR 50918: 
