@@ -466,7 +466,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("Create &Patch Against Repository"), 0,
+    action = new KAction( i18n("Create &Patch Against Repository..."), 0,
                           this, SLOT(slotMakePatch()),
                           actionCollection(), "make_patch" );
     hint = i18n("Creates a patch from the modifications in your sandbox");
