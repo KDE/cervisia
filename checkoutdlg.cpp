@@ -54,7 +54,7 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
     repo_combo = new QComboBox(true, this);
     repo_combo->setFocus();
     grid->addWidget(repo_combo, 0, 1);
-    
+
     QLabel *repo_label = new QLabel
 	(repo_combo, i18n("&Repository:"), this);
     grid->addWidget(repo_label, 0, 0, AlignLeft | AlignVCenter);
@@ -69,16 +69,16 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
     else
         {
             module_combo = new QComboBox(true, this);
-            
+
             QPushButton *module_button = new QPushButton(i18n("Fetch &List"), this);
             connect( module_button, SIGNAL(clicked()),
                      this, SLOT(moduleButtonClicked()) );
-            
+
             QBoxLayout *module_layout = new QHBoxLayout();
             grid->addLayout(module_layout, 1, 1);
             module_layout->addWidget(module_combo, 10);
             module_layout->addWidget(module_button, 0, AlignVCenter);
- 
+
             QLabel *module_label = new QLabel(module_combo, i18n("&Module:"), this);
             grid->addWidget(module_label, 1, 0, AlignLeft | AlignVCenter);
 
@@ -89,7 +89,7 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
             branch_label->setFixedSize(branch_label->sizeHint());
             grid->addWidget(branch_label, 2, 0, AlignLeft | AlignVCenter);
         }
-    
+
     workdir_edit = new KLineEdit(this);
     workdir_edit->setText(QDir::homeDirPath());
     workdir_edit->setMinimumSize(fm.width("X")*40, workdir_edit->sizeHint().height());
@@ -127,18 +127,18 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
 
             ignore_edit = new KLineEdit(this);
             grid->addWidget(ignore_edit, 5, 1);
-            
+
             QLabel *ignore_label = new QLabel
                 (ignore_edit, i18n("&Ignore files:"), this);
             grid->addWidget(ignore_label, 5, 0, AlignLeft | AlignVCenter);
 
             comment_edit = new KLineEdit(this);
             grid->addWidget(comment_edit, 6, 1);
-            
+
             QLabel *comment_label = new QLabel
                 (comment_edit, i18n("&Comment:"), this);
             grid->addWidget(comment_label, 6, 0, AlignLeft | AlignVCenter);
-            
+
             binary_box = new QCheckBox(i18n("Import as &binaries"), this);
             grid->addMultiCellWidget(binary_box, 7, 7, 0, 1);
         }
@@ -148,7 +148,7 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
     layout->addWidget(frame, 0);
 
     KButtonBox *buttonbox = new KButtonBox(this);
-    QPushButton *helpbutton = buttonbox->addButton("&Help");
+    QPushButton *helpbutton = buttonbox->addButton(i18n("&Help"));
     helpbutton->setAutoDefault(false);
     buttonbox->addStretch();
     QPushButton *okbutton = buttonbox->addButton(i18n("OK"));
@@ -169,15 +169,15 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
     QStringList::ConstIterator it1;
     for (it1 = list1.begin(); it1 != list1.end(); ++it1)
         repo_combo->insertItem(*it1);
-    
+
     QStringList list2 = Repositories::readConfigFile();
     QStringList::ConstIterator it2;
     for (it2 = list2.begin(); it2 != list2.end(); ++it2)
         if (!list1.contains(*it2))
             repo_combo->insertItem(*it2);
-    
+
     act = action;
-    
+
     if (options)
         {
             repo_combo->setEditText(options->repo);
@@ -196,7 +196,7 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
                     branch_edit->setText(options->branch);
                 }
         }
-    
+
 }
 
 
@@ -215,7 +215,7 @@ void CheckoutDialog::done(int r)
                     KMessageBox::information(this, i18n("Please specify a module name."));
                     return;
                 }
-                                                                    
+
             if (act==Import)
                 {
                     if (vendorTag().isEmpty() || releaseTag().isEmpty())
@@ -226,7 +226,7 @@ void CheckoutDialog::done(int r)
                         }
                     if (!isValidTag(vendorTag()) || !isValidTag(releaseTag()))
                         {
-                            KMessageBox::information(this,  
+                            KMessageBox::information(this,
                                                      i18n("Tags must start with a letter and may contain\n"
                                                           "letters, digits and the characters '-' and '_'."));
                             return;
@@ -275,7 +275,7 @@ void CheckoutDialog::saveOptions(KConfig *config)
 {
     if (!options)
         return;
-    
+
     config->writeEntry("Customized", true);
     config->writeEntry("Repository", options->repo);
     config->writeEntry("Module", options->module);
@@ -313,7 +313,7 @@ void CheckoutDialog::moduleButtonClicked()
         {
             if (str.left(12) == "Unknown host")
                 continue;
-            
+
             int pos = str.find(' ');
             if (pos == -1)
                 pos = str.find('\t');

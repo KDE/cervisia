@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -28,6 +28,7 @@
 #include <krun.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
+#include <kglobal.h>
 
 #include "logdlg.h"
 #include "loglist.h"
@@ -56,7 +57,6 @@
 
 K_EXPORT_COMPONENT_FACTORY( libcervisia, CervisiaFactory );
 
-
 CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
                             QObject *parent, const char *name, const QStringList& args )
     : KParts::ReadOnlyPart( parent, name )
@@ -72,6 +72,8 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     , opt_doCVSEdit( false )
     , recent( 0 )
 {
+    KGlobal::locale()->insertCatalogue("cervisia");
+
     hasRunningJob = false;
     setInstance( CervisiaFactory::instance() );
     new CervisiaBrowserExtension( this );
@@ -219,7 +221,7 @@ void CervisiaPart::setupActions()
     hint = i18n("Stops any running sub-processes");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
-    
+
 
     action = new KAction( i18n("Browse &Log..."), CTRL+Key_L,
                           this, SLOT(slotBrowseLog()),
@@ -631,7 +633,7 @@ void CervisiaPart::openFiles(const QStringList &filenames)
             CvsProgressDialog l("Edit", widget() );
             l.setCaption(i18n("CVS Edit"));
             QString cmdline = cvsClient(repository) + " edit ";
-            
+
             bool doit = false;
             for ( QStringList::ConstIterator it = filenames.begin();
                   it != filenames.end(); ++it )
@@ -641,11 +643,11 @@ void CervisiaPart::openFiles(const QStringList &filenames)
                             doit = true;
                             break;
                         }
-                    
+
                     cmdline += " ";
                     cmdline += KShellProcess::quote(*it);
                 }
-            
+
             if (doit)
                 if (!l.execCommand(sandbox, repository, cmdline, "edit"))
                     return;
@@ -1221,14 +1223,14 @@ void CervisiaPart::importOrCheckout(CheckoutDialog::ActionType action)
                         }
                     QString comment = l->comment().stripWhiteSpace();
                     cmdline += " -m ";
-                    cmdline += (QString("\"") + comment + "\" "); 
+                    cmdline += (QString("\"") + comment + "\" ");
                     cmdline += l->module();
                     cmdline += " ";
                     cmdline += l->vendorTag();
                     cmdline += " ";
                     cmdline += l->releaseTag();
                 }
-            
+
             if (protocol->startJob(sandbox, repository, cmdline))
                 {
                     showJobStart(cmdline);
@@ -1236,7 +1238,7 @@ void CervisiaPart::importOrCheckout(CheckoutDialog::ActionType action)
                              this,     SLOT(slotJobFinished(bool)) );
                 }
         }
-    
+
     delete l;
 }
 
@@ -1772,6 +1774,7 @@ void CervisiaPart::saveDialogProperties( KConfig *config )
 CervisiaBrowserExtension::CervisiaBrowserExtension( CervisiaPart *p )
     : KParts::BrowserExtension( p, "CervisiaBrowserExtension" )
 {
+    KGlobal::locale()->insertCatalogue("cervisia");
 }
 
 CervisiaBrowserExtension::~CervisiaBrowserExtension()
