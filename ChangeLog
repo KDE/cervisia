@@ -12,6 +12,12 @@
 	  using QListViewItem::setVisible()
 	* #include cleanup
 	* i18n fixes
+	* Rewritten repository settings dialog; its
+	  functionality now comprises that of the former
+	  dialog and the former add repository dialog
+	* Load .ui, .docbook and .xml files with utf8
+	  encoding. This can be implemented in a cleaner way
+	* Resolved accelerator conflict in resolve dialog
 
 2002-06-22  Bernd Gehrmann  <bernd@mail.berlios.de>
 

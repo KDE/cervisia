@@ -7,20 +7,12 @@ lib_LTLIBRARIES = libcervisia.la
 
 libcervisia_la_SOURCES = updateview.cpp protocolview.cpp watchdlg.cpp \
 		   settingsdlg.cpp changelogdlg.cpp historydlg.cpp repositorydlg.cpp \
-		   repositorysettingsdlg.cpp commitdlg.cpp checkoutdlg.cpp updatedlg.cpp \
+		   commitdlg.cpp checkoutdlg.cpp updatedlg.cpp \
 		   tagdlg.cpp mergedlg.cpp \
 		   logdlg.cpp logtree.cpp loglist.cpp diffdlg.cpp resolvedlg.cpp diffview.cpp \
 		   annotatedlg.cpp annotateview.cpp \
 		   cvsprogressdlg.cpp tiplabel.cpp listview.cpp \
 		   cvsdir.cpp repositories.cpp misc.cpp cervisiapart.cpp qttableview.cpp
-
-noinst_HEADERS = updateview.h protocolview.h watchdlg.h \
-		 settingsdlg.h changelogdlg.h historydlg.h repositorydlg.h  repositorysettingsdlg.h \
-		 commitdlg.h checkoutdlg.h updatedlg.h tagdlg.h mergedlg.h \
-		 logdlg.h logtree.h loglist.h diffdlg.h resolvedlg.h diffview.h \
-		 annotatedlg.h annotateview.h \
-		 cvsprogressdlg.h tiplabel.h listview.h \
-		 cvsdir.h repositories.h misc.h qttableview.h
 
 cervisia_SOURCES = main.cpp cervisiashell.cpp
 cervisia_LDFLAGS = $(all_libraries) $(KDE_RPATH)
