@@ -60,97 +60,19 @@
 </keywordset>
 
 </bookinfo>
-
-<chapter id="introduction">
-<title>Introduction</title>
-
-<para><ulink url="http://www.kde.org/apps/cervisia/">&cervisia;</ulink>is a user friendly version control system front-end. The aim is to support &CVS; and other version control system programs in a unified interface, featuring conflict resolution, difference and history viewers, status for the working folder files, and support for the most used version control functions. You can get &cervisia; by building the kdesdk module or installing the kdesdk package provided by your distribution. Currently, only &CVS; is supported, but other version control systems may be integrated in the future.</para>
-
-<para>A version control system is a tool to record, manage and distribute different versions of files. &CVS; is a version control system. It allows you to share your modifications easily, as each of the contributors can work in his local copy at the same time, without fear of overriding  each other modifications. It allows the recovery of past versions (useful for tracking bugs), the creation of branches (for experimental development or for releases of code) and more.</para>
-
-<para>The main <firstterm>repository</firstterm> usually holds a collaborative project (commercial or not), but you can take advantage of the nice revision control features offered by &CVS; even for a project developed exclusively by you. It is easy to set up a local repository, and you will gain the ability to track changes that caused bugs, revert changes, avoid accidental loss of information, etc.</para>
-
-<para>The repository holds the project files, and every contributor keeps their own local copy, named <firstterm>working folder</firstterm>. One can add his modifications to the main repository (a process called &quot;committing&quot;) and/or update his own copy to reflect recent changes made by other contributors. This document will show you how to use &cervisia; to manage your &CVS; repository and working folder.</para>
-
-</chapter>
    
 <chapter id="getting-started">
 <title>Getting Started</title>
 
 <sect1 id="accessing-repository">
 <title>Accessing The Repository</title>
-    
+      
 <para>
 In this section we assume that you are using &CVS; only on the client
 side. That means, someone (probably the administrator of the &CVS;
-repository) gave you an account on the server machine, or you created
-a local repository, and now you want to checkout modules from the
-repository and work with them.
+repository) gave you an account on the server machine, and it's your
+job to checkout modules from the repository and work with them.
 </para>
-
-<para>There are several methods to access a CVS repository. It may be a local repository, reached via password authentication (:pserver:), secure shell (using :ext:), local (:local:) and others. The format for the repository  location is (optional items appear between square brakets):</para>
-
-<pre style="border: 1pt dashed #D1D1D1; margin-left: 2em; padding: 1em;">
-[:method:][[user][:password]@]hostname[:[port]]/path/to/main/repository
-</pre>
-
-<para>Not all this information (user, password, hostname, port) is always necessary to access the repository. The required information depends on the access method used.</para>
-
-<note>
-<para>If you plan to develop a complex project, it is a good idea to use the &CVS; features, even if you are the only developer. You can make all changes in the working folder, and use &cervisia; (or any other &CVS; tool) to update and commit. This way, you will gain the ability to track changes that caused bugs, revert changes, avoid accidental loss of information, etc. Using &cervisia;, it is simple to create a local repository.
-</para>
-
-<procedure>
-<title>Creating A Local Repository</title>
-<step><para>Open the TODO dialog by choosing
-<menuchoice><guimenu>TODO</guimenu>
-<guimenuitem>TODO...</guimenuitem></menuchoice>.</para></step>
-
-<step><para>Press the <guibutton>TODO...</guibutton>
-button.</para></step>
-
-<step><para>Confirm by pressing the <guibutton>TODO</guibutton>
-button.</para></step>
-
-</procedure>
-
-</note>
-
-<p>Password authentication (:pserver:) has some security issues, but is very simple to use.</p>
-
-<p>KDE and other open source projects typically offer <strong>Anonymous CVS </strong> access to their sources. This means you can easily grab the latest sources without asking for a CVS account. Anonymous CVS uses password authentication. We will use KDE as the example. If you want to work with another project, please visit the project homepage and search for the anonymous cvs location and mirrors.</p>
-
-<p>You don't need a CVS account to improve your favorite project. With Anonymous CVS, you can modify your working folder, <a href="#diff">create diffs</a> against the main repository and send them to the maintainer. But if you start working in a regular way with the project's source, either as an artist, documenter, translator, web master, whatever, it is sensible to ask for a CVS account. For instance, you can find how to get a KDE CVS account in the <a href="http://developer.kde.org/documentation/other/developer-faq.html#q1.8"> KDE developer FAQ.</a></p>
-
-<p>Below you can find the list of repository names for the mirrors of KDE CVS, as of February 2004. Updated information can be found at the <a href="http://developer.kde.org/source/anoncvs.html"> KDE Anonymous CVS Page</a>.</p>
-
-<p>The main server is &quot;:pserver:anonymous@anoncvs.kde.org:/home/kde&quot; in Tuebingen, Germany, maintained by Dirk Mueller  However, a mirror closer to you could be faster than the main server. Current mirrors are, sorted by performance:</p>
-
-<ul>
-<li>&quot;:pserver:anonymous@bluemchen.kde.org:/home/kde&quot; in Cambridge, Massachusetts, USA, maintained by Dirk Mueller.</li>
-<li>&quot;:pserver:anonymous@pandmservices.com:/home2/webcvs/mirror&quot; in Hartford, Connecticut - USA (East Coast), maintained by Christopher Molnar.</li>
-<li>&quot;:pserver:anonymous@kdecvs.student.utwente.nl:/home/kdecvs/kde&quot; in Netherlands, maintained by Tom Jansen.</li>
-<li>&quot;:pserver:anoncvs@apelsin.fruitsalad.org:/cvs/kde&quot; in Sweden, maintained by Mattias Douhan.</li>
-</ul>
-
-<p>We will cover local and password authenticated repositories in  the next section (for the time being). If you want to use another method, additional information can be found in cvs info page.</p>
-
-<h3>Setting The Repository Location And The Retrieval Method</h3>
-
-<p>Below, we use the main KDE Anonymous CVS repository location in the command examples. Replace it with the location you selected in the previous section. If you selected a location using pserver as retrieval method, you will need to login and type a password. If you are using an Anonymous CVS mirror, just hit enter when asked for this password. You will need to do that only once per location, as the CVS passwords are stored in the &quot;.cvspass&quot; file in your home folder. If you are using a local repository, you won't need to login.</p>
-
-<p><strong>Using Cervisia to set the location</strong>: Cervisia has the ability to store different repository locations.</p>
-
-<ul>
-<li>To add a repository location, click the &quot;Repository&quot; menu then the &quot;Repositories...&quot; menu item. .</li>
-<li>The &quot;Configure Access to Repositories&quot; dialog box will pop up.</li>
-<li>Press the &quot;Add...&quot; button. The &quot;Add Repository&quot; dialog should appear.</li>
-<li>Type the repository location in the &quot;Repository&quot; text box. Press &quot;OK&quot;.</li>
-<li>If your repository's retrieval method is pserver, you still have to log in. The &quot;Status&quot; column is probably showing &quot;Not logged in&quot;.</li>
-<li>Press the &quot;Login&quot; button. If you are using an Anonymous CVS mirror just hit enter. Else, type your password. If everything went well, now the &quot;Status&quot; column should show: &quot;Logged in&quot;. .</li>
-<li>If you want, add another location. Cervisia will store as many locations as you like!.</li>
-</ul>
-
 
 <para>
 &CVS; supports several methods of accessing the repository, which can
