@@ -76,7 +76,7 @@ QString LogInfo::createToolTipText(bool showTime) const
     if (!m_comment.isEmpty())
     {
         text += QString::fromLatin1("<pre>");
-        text += m_comment;
+        text += QStyleSheet::escape(m_comment);
         text += QString::fromLatin1("</pre>");
     }
 
