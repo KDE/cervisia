@@ -140,8 +140,8 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
         setWidget(splitter);
     }
     else
-        setWidget(new QLabel(i18n("This KPart is non-functional, because we "
-                                  "couldn't start the cvs DCOP service!"),
+        setWidget(new QLabel(i18n("This KPart is non-functional, because the "
+                                  "cvs DCOP service could not be started."),
                              parentWidget));
 
 #if KDE_IS_VERSION(3,1,90)

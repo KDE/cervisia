@@ -60,7 +60,7 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent, const char*
         warningLayout->addWidget(warningIcon);
 
         QLabel *warningText = new QLabel(i18n("This will also remove the files from "
-                                              "your local working copy!"), mainWidget);
+                                              "your local working copy."), mainWidget);
         warningLayout->addWidget(warningText);
 
         layout->addSpacing(5);
