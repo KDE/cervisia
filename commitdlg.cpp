@@ -185,10 +185,17 @@ void CommitDialog::diffClicked()
 void CommitDialog::showDiffDialog(const QString& fileName)
 {
     DiffDialog *l = new DiffDialog(partConfig, this, "diffdialog");
+    
+    // disable diff button so user doesn't open the same diff several times (#83018)
+    enableButton(User1, false);
+    
     if (l->parseCvsDiff(cvsService, fileName, "", ""))
         l->show();
     else
         delete l;
+    
+    // re-enable diff button
+    enableButton(User1, true);
 }
 
 
