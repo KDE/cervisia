@@ -1606,7 +1606,9 @@ bool CervisiaPart::openSandbox(const QString &dirname)
     // exit_loop() methods. Those methods result in a call to queryExit() in
     // cervisiashell.cpp which then uses the m_url member to save the last used
     // directory.
-    Cervisia::GlobalIgnoreList().retrieveServerIgnoreList(cvsService, repository);
+    if( cvsRepository.retrieveCvsignoreFile() )
+        Cervisia::GlobalIgnoreList().retrieveServerIgnoreList(cvsService,
+                                                              repository);
 
     QDir::setCurrent(sandbox);
     update->openDirectory(sandbox);
