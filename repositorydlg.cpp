@@ -59,6 +59,9 @@ public:
     bool isLoggedIn() const { return m_isLoggedIn; }
 
 private:
+    void changeLoginStatusColumn();
+    
+private:
     QString m_server;
     bool    m_isLoggedIn;
 };
@@ -70,14 +73,8 @@ RepositoryListItem::RepositoryListItem(KListView* parent, const QString& repo,
     , m_isLoggedIn(loggedin)
 {
     setText(0, repo);
-
-    QString status;
-    if( repo.startsWith(":pserver:") )
-        status = loggedin ? i18n("Logged in") : i18n("Not logged in");
-    else
-        status = i18n("No login required");
-
-    setText(3, status);
+    
+    changeLoginStatusColumn();
 }
 
 
@@ -117,14 +114,21 @@ void RepositoryListItem::setCompression(int compression)
 void RepositoryListItem::setIsLoggedIn(bool isLoggedIn)
 {
     m_isLoggedIn = isLoggedIn;
+    
+    changeLoginStatusColumn();
+}
 
-    QString status;
+
+void RepositoryListItem::changeLoginStatusColumn()
+{
+    QString loginStatus;
+    
     if( repository().startsWith(":pserver:") )
-        status = m_isLoggedIn ? i18n("Logged in") : i18n("Not logged in");
+        loginStatus = m_isLoggedIn ? i18n("Logged in") : i18n("Not logged in");
     else
-        status = i18n("No login required");
-
-    setText(3, status);
+        loginStatus = i18n("No login required");
+        
+    setText(3, loginStatus);
 }
 
 
@@ -279,10 +283,7 @@ void RepositoryDialog::slotOk()
         RepositoryListItem* ritem = static_cast<RepositoryListItem*>(item);
         
         // write entries to cvs DCOP service configuration
-        m_serviceConfig->setGroup(QString::fromLatin1("Repository-") + ritem->repository());
-        m_serviceConfig->writeEntry("rsh", ritem->rsh());
-        m_serviceConfig->writeEntry("cvs_server", ritem->server());
-        m_serviceConfig->writeEntry("Compression", ritem->compression());
+        writeRepositoryData(ritem);
     }
 
     // write to disk so other services can reparse the configuration
@@ -318,11 +319,7 @@ void RepositoryDialog::slotAddClicked()
         ritem->setCompression(compression);
 
         // write entries to cvs DCOP service configuration
-        m_serviceConfig->setGroup(QString::fromLatin1("Repository-") +
-                                  ritem->repository());
-        m_serviceConfig->writeEntry("rsh", ritem->rsh());
-        m_serviceConfig->writeEntry("cvs_server", server);
-        m_serviceConfig->writeEntry("Compression", ritem->compression());
+        writeRepositoryData(ritem);
 
         // write to disk so other services can reparse the configuration
         m_serviceConfig->sync();
@@ -370,11 +367,7 @@ void RepositoryDialog::slotDoubleClicked(QListViewItem* item)
         ritem->setCompression(dlg.compression());
 
         // write entries to cvs DCOP service configuration
-        m_serviceConfig->setGroup(QString::fromLatin1("Repository-") +
-                                  ritem->repository());
-        m_serviceConfig->writeEntry("rsh", ritem->rsh());
-        m_serviceConfig->writeEntry("cvs_server", ritem->server());
-        m_serviceConfig->writeEntry("Compression", ritem->compression());
+        writeRepositoryData(ritem);
 
         // write to disk so other services can reparse the configuration
         m_serviceConfig->sync();
@@ -455,6 +448,17 @@ void RepositoryDialog::slotSelectionChanged()
     m_logoutButton->setEnabled(isLoggedIn);
 }
 
+
+void RepositoryDialog::writeRepositoryData(RepositoryListItem* item)
+{
+    // write entries to cvs DCOP service configuration
+    m_serviceConfig->setGroup(QString::fromLatin1("Repository-") +
+                              item->repository());
+    
+    m_serviceConfig->writeEntry("rsh", item->rsh());
+    m_serviceConfig->writeEntry("cvs_server", item->server());
+    m_serviceConfig->writeEntry("Compression", item->compression());
+}
 
 #include "repositorydlg.moc"
 

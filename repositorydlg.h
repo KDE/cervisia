@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2003 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2003-2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -24,6 +24,7 @@ class QPushButton;
 class KConfig;
 class KListView;
 class CvsService_stub;
+class RepositoryListItem;
 
 
 class RepositoryDialog : public KDialogBase
@@ -49,6 +50,9 @@ private slots:
     void slotLoginClicked();
     void slotLogoutClicked();
     void slotSelectionChanged();
+    
+private:
+    void writeRepositoryData(RepositoryListItem* item);
 
 private:
     KConfig&         m_partConfig;
