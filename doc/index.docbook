@@ -14,7 +14,7 @@
 <authorgroup>
 <author>
 <firstname>Bernd</firstname><surname>Gehrmann</surname>
-<affiliation><address><email>bernd@physik.hu-berlin.de</email></address></affiliation>
+<affiliation><address><email>bernd@mail.berlios.de</email></address></affiliation>
 </author> 
 
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
@@ -229,7 +229,7 @@ yet exist, initialize it with the command
 <callout arearefs="co-module">
 <para>The name of the module under which the project will be stored.
 After the import, the project can be checked out under this name.  See
-<xref linkend="checking-out"/> for more information.  This is also the
+<xref linkend="checkingout"/> for more information.  This is also the
 name of the corresponding directory in the repository.</para>
 </callout>
 <callout arearefs="co-vendortag">
@@ -293,7 +293,7 @@ release.</para>
       </formalpara>
    </sect1>
 
-   <sect1 id="checking-out">
+   <sect1 id="checkingout">
       <title>Checkout a module from the repository</title>
       <para>
          Before you work on a project under revision control, you must
@@ -626,7 +626,7 @@ release.</para>
  for binary
          files. For example, merging binary files normally does not make
          sense. Furthermore, by default &CVS; performs keyword expansion
-         string <literal>$Revision: 1.4 $</literal>) when a file is commited. In binary
+         string <literal>$Revision: 1.5 $</literal>) when a file is commited. In binary
          files, such replacements may corrupt the file and make it completely
          unusable. In order to switch this behaviour off, you should commit binary
          files (or other files, like Postscript) with a command line
@@ -1134,7 +1134,7 @@ release.</para>
       <title>Tagging and branching</title>
       <para>
          We discuss here only the technical aspects of tagging and branching. 
-         If you are only a <literal>user</literal>, not the administrator of
+         If you are only a <emphasis>user</emphasis>, not the administrator of
          the repository, you will probably not be confronted with the problem.
          If however you are your own administrator, you should first read about
          the non-technical problems that accompany branching, in order to get
