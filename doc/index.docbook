@@ -18,6 +18,11 @@
 <firstname>Bernd</firstname><surname>Gehrmann</surname>
 <affiliation><address><email>bernd@mail.berlios.de</email></address></affiliation>
 </author> 
+<author>
+<firstname>Carlos</firstname><surname>Woelz</surname>
+<affiliation><address><email>carloswoelz@imap-mail.com</email></address></affiliation>
+</author> 
+
 
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
 
@@ -30,6 +35,13 @@
 <year>2002</year>
 <holder>Bernd Gehrmann</holder>
 </copyright>
+
+<copyright>
+<year>2004</year>
+<holder>Carlos Woelz</holder>
+</copyright>
+
+
 <legalnotice>
  
 <para>This program may be distributed under the terms of the Q Public
@@ -96,9 +108,10 @@ information, &etc;
 
 <para>
 While the repository holds the project files, and every contributor keeps their
-own local copy, named <firstterm>working copy</firstterm>. One can add his
-modifications to the main repository (a process called &quot;committing&quot;)
-and/or update his own copy to reflect recent changes made by other contributors.
+own local copy, named <firstterm>working copy</firstterm> or
+<firstterm>sandbox</firstterm>. One can add his modifications to the main
+repository (a process called &quot;committing&quot;) and / or update his own
+copy to reflect recent changes made by other contributors.
 </para>
 
 </chapter>
@@ -325,7 +338,7 @@ box.
 </para></step>
 
 <step><para>
-Press <guilabel>OK</guilabel>. You will see the repository you just entered
+Press <guibutton>OK</guibutton>. You will see the repository you just entered
 on the repositories list.
 </para></step>
 
@@ -342,7 +355,7 @@ column entry of the pserver repository will change from
 </para></step>
 
 <step><para>
-Press <guilabel>OK</guilabel> to apply your modifications, or add another
+Press <guibutton>OK</guibutton> to apply your modifications, or add another
 location to the list. &cervisia; will store as many locations as you like!.
 </para></step>
 
@@ -388,7 +401,7 @@ readable form, etc... are only performed to text files. This does not mean you
 cannot use CVS to keep binary files, it just means you have to
 <emphasis>explicitly tell CVS if it is a text or binary file</emphasis>. If
 you declare the wrong file type, you will experience problems with the &CVS;
-funcionality for these files, and they may get corrupted.
+functionality for these files, and they may get corrupted.
 </para>
 </important>
 
@@ -516,7 +529,7 @@ interpreted as a whitespace-separated list of file name patterns which are
 ignored. In general, a cleaner and less error-prone way to control which files
 go into the repository is to create a folder with only the files which you
 want to import and start from that. Nevertheless, this entry may be useful if
-the project contains files which are by default ignored by &CVS;, e.g. files
+the project contains files which are by default ignored by &CVS;, &eg; files
 with the name <filename>core</filename>. In such a case, simply enter the
 character <literal>!</literal> in this field. This overrules &CVS;'s scheme of
 ignored files, see <xref linkend="ignoredfiles"/>.
@@ -561,11 +574,22 @@ pressing <guibutton>OK</guibutton>, the following &CVS; command is used:</para>
 <sect1 id="checkingout">
 <title>Checkout a module from the repository</title>
 <para>
-Now that you successfully defined your repository location, and imported the initial files to the repository, it is time to retrieve the module from the &CVS; repository, creating your working copy.
+Now that you successfully defined your repository location, and imported the
+initial files to the repository, it is time to retrieve the module from the
+&CVS; repository, creating your working copy.
 </para>
 
 <para>
-You should also know the name of the <firstterm>branch</firstterm> you want to use. Branches of a module are parallel versions of this module. A good real life example of the use of this feature is the release of a software project. After a major release, there are bugs in the code that should be fixed, but people want to add new features to the application too. It is very hard to do both at the same time because new features usually introduce new bugs, making it hard to track down the old ones. To solve this dilemma, &CVS; lets you create a parallel version, that we will call the &quot;stable release branch&quot;, where you can only add bugfixes, leaving the main branch (HEAD) open for adding new features.
+You should also know the name of the <firstterm>branch</firstterm> you want to
+use. Branches of a module are parallel versions of this module. A good real
+life example of the use of this feature is the release of a software project.
+After a major release, there are bugs in the code that should be fixed, but
+people want to add new features to the application too. It is very hard to do
+both at the same time because new features usually introduce new bugs, making
+it hard to track down the old ones. To solve this dilemma, &CVS; lets you
+create a parallel version, that we will call the &quot;stable release
+branch&quot;, where you can only add bugfixes, leaving the main branch (HEAD)
+open for adding new features.
 </para>
 
 <figure id="screenshot-checkout" float="1">
@@ -661,13 +685,22 @@ source code for a release.
 <title>The main screen</title>
 <para>
 When you start &cervisia;, and open a working copy by choosing
-<menuchoice><guimenu>File</guimenu><guimenuitem>Open
-Sandbox...</guimenuitem></menuchoice> you see a hierarchical view of the
-current folder. According to the settings in your
+<menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Open Sandbox...</guimenuitem>
+</menuchoice>
+you can see two main areas in &cervisia;'s main window: the top one is a 
+hierarchical (tree) view of the current working copy, and the bottom area is
+used to display the &CVS; commands &cervisia; issues to perform its tasks, as
+well as the output generated by these commands.
+</para>
+
+<para>
+According to the settings in your
 <filename>.cvsignore</filename> files, the files you usually do not want to
-include into the repository - like e.g. object files - are not shown. For each
-file, you see its corresponding status. In the default setting, this is
-"Unknown" because &cervisia; delays the fetching of information until you
+include into the repository - like e.g. object files - are not shown in the tree
+view. For each file, you see its corresponding status. In the default setting,
+this is "Unknown" because &cervisia; delays the fetching of information until you
 choose
 <menuchoice>
 <guimenu>File</guimenu>
@@ -693,8 +726,8 @@ connection to the &CVS; server.
 <para>
 The commands in the File menu usually act only on the files which you have
 marked. You may also mark folders. Now choose
-<guimenuitem>Update</guimenuitem> from the <guimenu>File</guimenu>
-menu. &cervisia; issues a</para>
+<guimenuitem>Status</guimenuitem> from the <guimenu>File</guimenu>
+menu, or press <keycap>F5</keycap>. &cervisia; issues a</para>
 
 <para>
 <screen><command>cvs update -n <replaceable>filenames</replaceable></command></screen>
@@ -702,44 +735,62 @@ menu. &cervisia; issues a</para>
 
 <para>
 command to get status information for the marked files. Note that &cervisia;
-goes recursively into subfolders.  only if you have the according option
+goes recursively into subfolders only if you have the according option
 in the <guimenu>Settings</guimenu> menu set. According to the respective
 file's status, you now see an entry in the <guilabel>Status</guilabel> column:
 </para>
 
-<itemizedlist>
+<variablelist>
 
+<varlistentry>
+<term><guilabel>Locally Modified</guilabel></term>
 <listitem><para>
-Locally Modified - This means you have modified the file compared to the
+This means you have modified the file compared to the
 version in the repository.
 </para></listitem>
+</varlistentry>
 
+
+<varlistentry>
+<term><guilabel>Locally Added</guilabel></term>
 <listitem><para>
-Locally Added - This means the file does not exist in the repository, but in
-your working folder and you have scheduled it for addition. The actual
+This means the file does not exist in the repository, but in
+your working copy and you have scheduled it for addition. The actual
 insertion into the repository only happens after a commit.
 </para></listitem>
+</varlistentry>
 
+<varlistentry>
+<term><guilabel>Locally Removed</guilabel></term>
 <listitem><para>
-Locally Removed - This means you have scheduled the file for removal, but it
+This means you have scheduled the file for removal, but it
 still exists in the repository. The actual removal happens only after a
 commit.
 </para></listitem>
+</varlistentry>
 
+<varlistentry>
+<term><guilabel>Needs Update</guilabel></term>
 <listitem><para>
-Needs Update - This is shown if a newer version of the file exists in the
+This is shown if a newer version of the file exists in the
 repository, e.g. because someone committed a modification. Normally, you want
 to update this file so you have an up-to-date version in your folder.
 </para></listitem>
+</varlistentry>
 
+<varlistentry>
+<term><guilabel>Needs Patch</guilabel></term>
 <listitem><para>
-Needs Patch - This is essentially the same as before. The difference is only
+This is essentially the same as before. The difference is only
 the hint that in case of an update, the &CVS; server transfers only a patch
 instead of the whole file to you.
 </para></listitem>
+</varlistentry>
 
+<varlistentry>
+<term><guilabel>Needs Merge</guilabel></term>
 <listitem><para>
-Needs Merge - Indicates that a merge of the revision of this file in your
+Indicates that a merge of the revision of this file in your
 working folder with the version in the repository is necessary. This
 typically happens if you have made modifications to the file file while
 someone else has committed his modifications. If you choose to update, the
@@ -747,25 +798,35 @@ modifications in the repository are merged into your file. In case of a
 conflict (i.e. if someone else has changed some of the same lines like you)
 the new status is then "Conflict".
 </para></listitem>
+</varlistentry>
        
+<varlistentry>
+<term><guilabel>Up to Date</guilabel></term>
 <listitem><para>
-Up to Date - Indicates that the file is identical with the version in the
+Indicates that the file is identical with the version in the
 repository.
 </para></listitem>
+</varlistentry>
 
+<varlistentry>
+<term><guilabel>Conflict</guilabel></term>
 <listitem><para>
-Conflict - This is shown if this file still has conflict markers in it. Maybe
+This is shown if this file still has conflict markers in it. Maybe
 you have previously updated the file and not resolved the conflicts.
 </para></listitem>
+</varlistentry>
 
+<varlistentry>
+<term><guilabel>Not In CVS</guilabel></term>
 <listitem><para>
-Not In CVS - Indicates that the file is not registered in the &CVS;
+Indicates that the file is not registered in the &CVS;
 repository. If you want it to available for others, you should add it to the
 repository. If not, you may consider adding it to your
 <filename>.cvsignore</filename> file. 
 </para></listitem>
+</varlistentry>
 
-</itemizedlist>
+</variablelist>
       
 <para>
 Now that you have got an overview of the current status of the CVS, you may
@@ -778,20 +839,26 @@ Patch" or "Needs Update" are updated. So the following new items are possible
 in the status column:
 </para>
       
-<itemizedlist>
+<variablelist>
 
+<varlistentry>
+<term><guilabel>Updated</guilabel></term>
 <listitem><para>
-Updated - Shown if the file was updated from the repository.
+Shown if the file was updated from the repository.
 </para></listitem>
+</varlistentry>
 
+<varlistentry>
+<term><guilabel>Patched</guilabel></term>
 <listitem><para>
-Patched - Indicates that the &CVS; server has sent a patch for this file and
+Indicates that the &CVS; server has sent a patch for this file and
 the patch has been successfully applied. If the patch was not successful
 because there was a conflict between your modifications and those someone else
-committed to the repository, the status is now "Conflict".
+committed to the repository, the status is now <guilabel>Conflict</guilabel>.
 </para></listitem>
+</varlistentry>
 
-</itemizedlist>
+</variablelist>
       
 <para>
 You may have noticed that according to the status of the file, its row has a
@@ -827,10 +894,43 @@ affected.
 </para>
 
 <para>
-You can simply edit a file by double-clicking on it or pressing
-<keycap>Return</keycap>. This starts the editor configured under
-<menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-Cervisia...</guimenuitem></menuchoice> with the file name as argument.
+By default, &cervisia; does not display the files contained by the sub folders,
+so you will have to click the folders you want to sees. To display all files
+of the working copy, select
+<menuchoice>
+<guimenu>View</guimenu>
+<guimenuitem>Unfold File Tree</guimenuitem>
+</menuchoice>.
+To close back all folders from the working copy, choose
+<menuchoice>
+<guimenu>View</guimenu>
+<guimenuitem>Fold File Tree</guimenuitem>
+</menuchoice>.
+</para>
+
+<figure id="screenshot-popup" float="1">
+<title>A screenshot of &cervisia;'s pop-up menu</title>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="popup.png"/></imageobject>
+</mediaobject>
+</figure>
+
+<para>
+The most used actions are also available by right clicking the files in the tree
+view, through the pop-up menu. <xref linkend="screenshot-popup" /> shows
+&cervisia;'s main window pop-up menu.
+</para>
+
+<para>
+You can simply edit a file by double-clicking on it or selecting it and pressing
+<keycap>Return</keycap>. This starts the default application that handles that
+filetype (the default application for each filetype is KDE wide setting). If
+the default application is not the one you want to use, you can right click the
+file and choose the
+<menuchoice>
+<guisubmenu>Edit With</guisubmenu>
+</menuchoice>
+submenu, and select the one of the other applications that handle that filetype.
 </para>
 
 <sect1 id="addingfiles">
@@ -838,9 +938,25 @@ Cervisia...</guimenuitem></menuchoice> with the file name as argument.
 
 <para>
 Adding files to a project requires two steps: First, the files must be
-registered with &CVS;. To this end, mark all files to be added in &cervisia;'s
+registered with &CVS;, or in other words,
+<emphasis>added to the repository</emphasis>. This is necessary, but not
+sufficient. In order to actually put the files into the repository, you must
+<emphasis>commit</emphasis> them. This procedure has an important advantage:
+You can commit the files together with modifications to other parts of the
+project. When doing this, one can easily see (&eg; in commit emails) that all
+these changes are part of a whole.
+</para>
+
+<para>
+To this end, mark all files to be added in &cervisia;'s
 main view. Then, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Add to
-repository</guimenuitem></menuchoice>. &cervisia; issues a command</para>
+Repository...</guimenuitem></menuchoice>, or right click the marked files and
+choose <guimenuitem>Add to Repository...</guimenuitem>. The
+<guilabel>CVS Add</guilabel> dialog will appear, listing the files you marked, and
+asking for confirmation. Press <guibutton>OK</guibutton>.
+</para>
+
+<para>&cervisia; issues a command</para>
 
 <para>
 <screen><command>cvs add <replaceable>filenames</replaceable></command></screen>
@@ -851,31 +967,29 @@ If the operation was successful, the status column should have "Added to
 repository" for the added files.
 </para>
 
-<para>
-In order to actually put the files into the repository, you must commit
-them. This procedure has an important advantage: You can commit the files
-together with modifications to other parts of the project. When doing this,
-one can easily see (e.g. in commit emails) that all these changes are part of
-a whole.
-</para>
-
-<para>
+<warning><para>
 &CVS; is not designed to provide meaningful revision control for binary
 files. For example, merging binary files normally does not make
 sense. Furthermore, by default &CVS; performs keyword expansion (&eg; on the
 string <literal>&dollar;Revision: 1.6 &dollar;</literal>) when a file is committed. In binary
 files, such replacements may corrupt the file and make it completely
-unusable. In order to switch this behavior off, you should commit binary files
-(or other files, like Postscript) with a command line
+unusable.
+</para></warning>
+
+<para>
+In order to switch the above behavior off, you should commit binary files
+(or other files, like Postscript, or PNG images) choosing
+<menuchoice><guimenu>File</guimenu><guimenuitem>Add binary...</guimenuitem></menuchoice>.
+The <guilabel>CVS Add</guilabel> dialog will appear, listing the binary files
+you marked, and asking for confirmation. Press <guibutton>OK</guibutton>.
+</para>
+
+<para>
+&cervisia; issues a command
 </para>
 
 <para>
 <screen><command>cvs add -kb <replaceable>filenames</replaceable></command></screen>
-</para>
-
-<para>
-In &cervisia;, this is achieved by choosing
-<menuchoice><guimenu>File</guimenu><guimenuitem>Add binary...</guimenuitem></menuchoice> 
 </para>
 
 </sect1>
@@ -887,8 +1001,12 @@ In &cervisia;, this is achieved by choosing
 <para>
 Like adding files, removing files is done in two steps: First, the files have
 to be registered as removed by choosing
-<menuchoice><guimenu>File</guimenu><guimenuitem>Remove from
-repository</guimenuitem></menuchoice> which issues the command
+<menuchoice><guimenu>File</guimenu><guimenuitem>Remove From
+Repository...</guimenuitem></menuchoice> or right clicking the marked files and
+choosing <guimenuitem>Remove From Repository...</guimenuitem> from the pop-up
+menu. The <guilabel>CVS Remove</guilabel> dialog will appear, listing the files
+you marked, and asking for confirmation. Press <guibutton>OK</guibutton>.
+&cervisia; issues the command
 </para>
 <para>
 <screen><command>cvs remove -f <replaceable>filenames</replaceable></command></screen>
@@ -931,18 +1049,17 @@ Folders On Update</guimenuitem></menuchoice>.
 </para>
 
 <para>
-A folder can be added to the repository with the command
+A folder can be added to the repository choosing 
+<menuchoice><guimenu>File</guimenu><guimenuitem>Add to
+Repository...</guimenuitem></menuchoice> or right clicking the marked folder and
+choosing <guimenuitem>Add to Repository...</guimenuitem> from the pop-up menu.
+Note that in contrast to adding files, adding folders does not require a commit
+afterwards. &cervisia; issues the command
 </para>
+
 
 <para>
 <screen><command>cvs add <replaceable>dirname</replaceable></command></screen>
-</para>
-
-<para>
-which is implied by the menu item
-<menuchoice><guimenu>File</guimenu><guimenuitem>Add to
-repository</guimenuitem></menuchoice>. Note that in contrast to adding files,
-adding folders does not require a commit afterwards.
 </para>
 
 </sect1>
@@ -953,16 +1070,18 @@ adding folders does not require a commit afterwards.
 
 <para>
 When you have made a certain amount of changes to your working copy, and you
-want other developers to have access to them, you 'commit' them. With a
-commit, you place your versions of the modified files as new revisions into
-the repository. A subsequent update by another developer will bring your
-modifications into his working copy.
+want other developers to have access to them, you <emphasis>commit</emphasis>
+them. With a commit, you place your versions of the modified files as new
+revisions into the repository. A subsequent update by another developer will
+bring your modifications into his working copy.
 </para>
 
 <para>
 In order to commit a couple of files, select them in &cervisia;'s main view and
 choose
-<menuchoice><guimenu>File</guimenu><guimenuitem>Commit...</guimenuitem></menuchoice>.
+<menuchoice><guimenu>File</guimenu><guimenuitem>Commit...</guimenuitem></menuchoice>
+or right click the marked files and choose
+<guimenuitem>Commit...</guimenuitem> from the pop-up menu.
 </para>
 
 <figure id="screenshot-commit" float="1">
@@ -974,7 +1093,13 @@ choose
 
 <para>
 You get a dialog that shows you on the top a list of the selected files and on
-the bottom a log message for your changes. When you have finished the dialog, the command
+the bottom a log message for your changes. &cervisia; helps you in several ways
+to find a meaningful log message: First, in the file list you can double-click
+a file or press <keycap>Return</keycap> in order to see the changes you have
+made to the file. Second, it gives you a list of log messages you have
+previously used in a combo box. Third, this dialog is integrated with
+&cervisia;'s changelog editor described below. When you have finished the
+dialog, the command
 </para>
 
 <para>
@@ -982,13 +1107,9 @@ the bottom a log message for your changes. When you have finished the dialog, th
 </para>
 
 <para>
-is used. &cervisia; helps you in several ways to find a meaningful log
-message: First, in the file list you can double-click a file or press
-<keycap>Return</keycap> in order to see the changes you have made to the
-file. Second, it gives you a list of log messages you have previously used in
-a combo box. Third, this dialog is integrated with &cervisia;'s changelog
-editor described below.
+is used.
 </para>
+
 
 <note><para>
 A common error you may encounter when committing is <errorname>Up-to-date check
@@ -1053,21 +1174,40 @@ server issues and error message.
 </para>
 
 <para>
-It is your job now to resolve these conflicts before you commit the
-file. &CVS; will refuse to commit any files with conflicts until they have
-been edited. Of course, you have a great amount of freedom when resolving a
+In &cervisia;'s main view, files with conflicts are indicated with "Conflict"
+in the status column and with a red color. It is your job now to resolve these
+conflicts before you commit the file. &CVS; will refuse to commit any files with
+conflicts until they have been edited. From the main view, you can of
+course resolve conflicts the traditional way: just double-click the file in
+question and edit it with your favorite editor.</para>
+
+<para>
+&CVS; marks the conflicting changes by placing marks in the middle
+of the files, in the following manner:</para>
+
+<screen>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+Changes in your working folder
+=======
+Changes in the Repository
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; revision_number
+</screen>
+
+<para>You should replace this whole block with the new merged version. Of
+course, you have a great amount of freedom when resolving a
 set of conflicts: you can for each conflict decide to take one of the two
 alternative versions. You can also decide that both approaches are are broken
 and rewrite a whole routine or the complete file from scratch.
 </para>
 
 <para>
-In &cervisia;'s main view, files with conflicts are indicated with "Conflict"
-in the status column and with a red color. From the main view, you can of
-course resolve conflicts the traditional way: just double-click the file in
-question and edit it with your favorite editor. But you can also choose to
-use the dialog available via
-<menuchoice><guimenu>File</guimenu><guimenuitem>Resolve...</guimenuitem></menuchoice>.
+Fortunately, Cervisia offers a nicer interface for handling these conflicts.
+This does not mean that you will never need to manually edit the files, but
+at least can eliminate the need to do so for the trivial conflict resolution.
+To use &cervisia;'s <guilabel>CVS Resolve</guilabel> dialog choose
+<menuchoice><guimenu>File</guimenu><guimenuitem>Resolve...</guimenuitem></menuchoice>
+or right click the marked file and choose
+<guimenuitem>Resolve...</guimenuitem> from the pop-up menu.
 </para>
 
 <figure id="screenshot-resolve" float="1">
@@ -1079,22 +1219,49 @@ use the dialog available via
 </figure>
 
 <para>
-On the top of the dialog, you see your version the file on the left hand side
-and the version in the repository on the right hand side. The differences
+On the top of the dialog, you see <guilabel>Your version (A)</guilabel> of the
+file on the left hand side and the version in the repository, <guilabel>Other
+version (B)</guilabel>, on the right hand side. The differences
 between them are marked in red color. Below these two versions, you can see
-the merged version which will be saved as soon as you click the
-<guibutton>Save</guibutton> button.
+the <guilabel>Merged version</guilabel>. The merged version reflects what that
+section will be in your working copy if you press the <guibutton>Save</guibutton>
+button.
 </para>
 
 <para>
-You can switch between the differing sections by pressing
+You can go back and forward between the conflicting sections by pressing
 <guibutton>&lt;&lt;</guibutton> and <guibutton>&gt;&gt;</guibutton>. In the
 lower middle of the dialog you can see which section is currently marked. For
-example, <literal>2 of 8</literal> means that you are currently at the second
-differing section of 8 total. Now can can decide section by section which of
-the both versions you want to have in the merged file. By pressing
-<guibutton>A</guibutton>, you take over the version you edited. By pressing
-<guibutton>B</guibutton>, you take over the version from the repository.
+example, <literal>2 of 3</literal> means that you are currently at the second
+differing section of 3 total.
+</para>
+
+<para>
+Now can can decide section by section which version you want to have in the
+merged file. By pressing <guibutton>A</guibutton>, you take over the version you
+edited. By pressing <guibutton>B</guibutton>, you take over the version from the
+repository. By pressing <guibutton>A+B</guibutton>, both versions will be added,
+and your version will come first. <guibutton>B+A</guibutton> yields the same
+result, but the order will be different: first the repository version, then
+yours.
+</para>
+
+<para>
+If you are not happy with any of these versions, press
+<guibutton>Edit</guibutton> to open a simple text editor where you can
+edit the section. When you are finished editing, press <guibutton>OK</guibutton>
+to return to the <guilabel>CVS Resolve</guilabel> dialog and resume solving
+conflicts. You will see the section you just edited in the
+<guilabel>Merged version</guilabel>, with your modifications.
+</para>
+
+<para>
+To save your modifications, overwriting the working copy version, press
+<guibutton>Save</guibutton>. Note that this will save the choices not only the
+section you are currently viewing, bu all sections in the file. If you want to
+save it to another file, press <guibutton>Save As...</guibutton>.
+Press <guibutton>Close</guibutton> to exit the dialog. If you close the dialog
+without saving, the changes you made will be lost.
 </para>
 
 </sect1>
@@ -1103,72 +1270,7 @@ the both versions you want to have in the merged file. By pressing
 
 
 <chapter id="obtaininginformation">
-<title>Obtaining information about files</title>
-
-<sect1 id="browsinglogs">
-<title>Browsing cvs logs</title>
-
-<para>
-When you mark a file in the main view and choose <guimenuitem>Browse
-log</guimenuitem> from the <guimenu>View</guimenu> menu, a
-</para>
-
-<para>
-<screen><command>cvs log <replaceable>filenames</replaceable></command></screen>
-</para>
-
-<para>
-command is issued and a dialog is shown which reflects the version history of
-the marked file.
-</para>
-
-<figure float="1">
-<title>A screenshot of &cervisia;'s browse logs dialog</title>
-<mediaobject>
-<imageobject><imagedata format="PNG" fileref="logtree.png"/></imageobject>
-<textobject><phrase>A screenshot of &cervisia;'s browse logs dialog</phrase></textobject>
-</mediaobject>
-</figure>
-
-<para>
-You can choose to see the history as a tree or in list form. What you prefer
-is of course a matter of taste and it depends on what information you are
-interested in.  The tree is an intuitive representation of what has been done
-on different branches by which authors. As tooltips, you can see the according
-log messages. The list is by its nature linear and therefore does not give an
-immediate view of branches. On the other hand, it concentrates more otherwise
-relevant information on less screen estate, namely the time of each change of
-the file and the first part of the log message.
-</para>
-
-<para>
-To obtain more information about a certain revision, you can click on it
-either in the list or the tree view. The fields in the middle of the dialog
-are then filled with the complete information provided by <command>cvs
-log</command>. You can mark two revisions, called 'A' and 'B', which are
-relevant if you make use of further features provided by the push
-buttons. Revision 'A' can be chosen with the left mouse button, revision 'B'
-with the middle one. In the list view, you can also navigate with with your
-cursor keys. In order to mark revisions 'A' and 'B', use the keybindings
-<keycombo><keycap>Ctrl</keycap><keycap>A</keycap></keycombo>,
-<keycombo><keycap>Ctrl</keycap><keycap>B</keycap></keycombo>, resp.
-</para>
-
-<para>
-If you press the button <guibutton>Annotate</guibutton>, you get a dialog
-showing the text of file belonging to the revision marked as 'A'.  Every line
-is prefixed with the information about who edited this last time, and at which
-revision this happened.
-</para>
-
-<para>
-If you press the button <guibutton>Diff</guibutton>, a <command>cvs diff</command>
-call is issued and you get a dialog in which all the modifications between the
-two marked revisions are shown. To make it easy to see the changes, different
-colors are used to mark lines which have been added, removed or simply changed.
-</para>
-
-</sect1>
+<title>Obtaining information about files and creating patches</title>
 
    
 <sect1 id="browsinghistory">
@@ -1445,8 +1547,118 @@ change.
 
 </sect1>
 
-</chapter>
 
+<sect1 id="browsinglogs">
+<title>Browsing cvs logs</title>
+
+<para>
+When you mark a file in the main view and choose <guimenuitem>Browse
+log...</guimenuitem> from the <guimenu>View</guimenu> menu
+or right click the marked file and choose
+<guimenuitem>Browse log...</guimenuitem> from the pop-up menu, the
+<guilabel>CVS Log</guilabel> dialog is shown. This dialog offers functionality
+that is beyond viewing the file's history, &ie; by using it as a browser
+of the file's history you can:
+</para>
+
+<itemizedlist>
+
+<listitem><para>
+View the revision, author, date, branch, commit message, and tags for each
+version of the marked file.
+</para></listitem>
+
+<listitem><para>
+View a graphical tree representation showing the branching and tagging of the
+marked file.
+</para></listitem>
+
+<listitem><para>
+View any version of the marked file (with the default application).
+</para></listitem>
+
+<listitem><para>
+Watch an annotated view of any version of the marked file
+</para></listitem>
+
+<listitem><para>
+View the differences between any pair of versions of the marked file,
+including pairs with the current working copy version of the marked file.
+</para></listitem>
+
+<listitem><para>
+Create patches between any pair of versions of the marked file,
+including pairs with the current working copy version of the marked file.
+</para></listitem>
+
+</itemizedlist>
+
+<figure float="1">
+<title>A screenshot of &cervisia;'s browse logs dialog</title>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="logtree.png"/></imageobject>
+<textobject><phrase>A screenshot of &cervisia;'s browse logs dialog</phrase></textobject>
+</mediaobject>
+</figure>
+
+<para>
+You can choose to see the history as provided by the <command>cvs
+log</command> command (<guilabel>CVS Output</guilabel>), as a
+<guilabel>Tree</guilabel>, or in <guilabel>List</guilabel> form. What you prefer
+is of course a matter of taste and it depends on what information you are
+interested in.  The tree is an intuitive representation of what has been done
+on different branches by which authors. As tooltips, you can see the according
+log messages. The list is by its nature linear and therefore does not give an
+immediate view of branches. On the other hand, it concentrates more otherwise
+relevant information on less screen estate, namely the time of each change of
+the file and the first part of the log message. The CVS output information is
+complete, but long, verbose and difficult to parse.
+</para>
+
+<para>
+To obtain more information about a certain revision, you can click on it
+either in the list or the tree view. The fields in the middle of the dialog
+are then filled with the complete information provided by <command>cvs
+log</command>. You can mark two revisions, called 'A' and 'B', which are
+relevant if you make use of further features provided by the buttons.
+Revision 'A' can be chosen with the left mouse button, revision 'B'
+with the middle one. In the list view, you can also
+navigate with with your cursor keys. In order to mark revisions 'A' and 'B',
+use the keybindings <keycombo><keycap>Ctrl</keycap><keycap>A</keycap></keycombo>,
+<keycombo><keycap>Ctrl</keycap><keycap>B</keycap></keycombo>, respectively.
+Using the <guilabel>CVS Output</guilabel> view, you can click on the
+<guilabel>Select for revision A</guilabel> and <guilabel>Select for
+revision B</guilabel> to mark the revisions. You have the ability to search the
+whole text as well, by pressing the <guibutton>Find...</guibutton> button. 
+</para>
+
+<para>
+If you press the button <guibutton>Annotate</guibutton>, you get a dialog
+showing the text of file belonging to the revision marked as 'A'.  Every line
+is prefixed with the information about who edited this last time, and at which
+revision this happened.
+</para>
+
+<para>
+If you press the button <guibutton>Diff</guibutton>, a <command>cvs diff</command>
+call is issued and you get a dialog in which all the modifications between the
+two marked revisions are shown. To make it easy to see the changes, different
+colors are used to mark lines which have been added, removed or simply changed.
+</para>
+
+<para>
+To generate the log that is the base for the <guilabel>CVS Log</guilabel>
+dialog, &cervisia; issues the following command:
+</para>
+
+
+<para>
+<screen><command>cvs log <replaceable>filenames</replaceable></command></screen>
+</para>
+
+</sect1>
+
+</chapter>
 
 <chapter id="advancedusage">
 <title>Advanced usage</title>
@@ -1517,7 +1729,7 @@ date</guibutton>. In the field below, you can enter a wide variety of date
 formats. One possible format is <literal>yyyy-mm-dd</literal> where
 <literal>yyyy</literal> is the year, <literal>mm</literal> is the month
 (numerically) and <literal>dd</literal> is the day. Alternatives are some
-english phrases like <literal>yesterday</literal> or <literal>2 weeks
+English phrases like <literal>yesterday</literal> or <literal>2 weeks
 ago</literal>. When you use this option, &cervisia; uses the command
 </para>
 
@@ -2023,7 +2235,7 @@ typing in <userinput>info:/cvs</userinput> into the locationbar of
 <application>kdehelp</application>, <application>khelpcenter</application>
 resp. Alternative, you can just choose
 <menuchoice><guimenu>Help</guimenu><guimenuitem>CVS
-Info</guimenuitem></menuchoice> in &cervisia;. An online HTML version of the
+Info</guimenuitem></menuchoice> in &cervisia;. An on-line HTML version of the
 Cederqvist is available <ulink
 url="http://cvshome.org/docs/manual/cvs.html">on the web</ulink>.
 </para>
@@ -2031,7 +2243,7 @@ url="http://cvshome.org/docs/manual/cvs.html">on the web</ulink>.
 <para>
 As this book is maintained together with &CVS;, it is normally the most
 up-to-date reference. Nevertheless I recommend considering other documentation
-for learning to use &CVS;, in partical the following.
+for learning to use &CVS;, in particular the following.
 </para></listitem>
 
 <listitem><para>
