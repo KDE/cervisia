@@ -35,6 +35,7 @@
 #include <krfcdate.h>
 #include <krun.h>
 #include <kurl.h>
+#include <kdeversion.h>
 
 #include "cvsservice_stub.h"
 #include "annotatedlg.h"
@@ -169,7 +170,12 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     connect( this, SIGNAL(user3Clicked()),
              this, SLOT(findClicked()) );
 
+#if KDE_IS_VERSION(3,2,90)
     setButtonGuiItem(Ok, KGuiItem(i18n("to view something", "&View"),"fileopen","",""));
+#else
+    // @FIXME put the code of setButtonGuiItem here
+#warning put the code of setButtonGuiItem here
+#endif
 
     setHelp("browsinglogs");
 
