@@ -1,0 +1,60 @@
+OVERVIEW
+--------
+
+The cvs DCOP service consists of the following three parts:
+
+1. CvsService - The main interface to the functionality of the cvs command line
+                client. There is one method for each cvs command, e.g. add,
+		checkout, commit, etc... The methods assemble the command line
+		arguments, create a CvsJob and return a DCOPRef object for it
+		to the caller. There is one instance of this service for each
+		application instance.
+
+2. Repository - This DCOPObject manages the configuration data of the current
+                cvs repository. The data is automatically updated when other
+		service instances change it.
+
+3. CvsJob     - This class represents a cvs job. You can execute and cancel it,
+                and you can retrieve the output of the cvs client by either
+		connecting to the proper DCOP signals or by using the output()
+		method. There are two types of jobs. First the non-concurrent
+		job which has to run alone, like cvs update or import. Second
+		the jobs which can run concurrently like cvs log or annotate.
+
+USAGE
+-----
+
+How-to use this service in C++ applications:
+
+    // start DCOP service
+    QString error;
+    QCString appId;
+
+    KApplication::startServiceByDesktopName("cvsservice", QStringList(), &error,
+                                            &appId);
+
+    // create stub for repository
+    Repository_stub repository(appId, "CvsRepository");
+
+    // set directory of working copy
+    repository.setWorkingCopy("/home/user/kde/kdesdk/cervisia");
+
+    // create stub for service
+    CvsService_stub cvsService(appId, "CvsService");
+
+    // call "cvs log" for cervisiapart.h
+    DCOPRef job = cvsService.log("cervisiapart.h");
+
+    // connect to signals to get output
+    connectDCOPSignal(job.app(), job.obj(), "jobExited(bool, int)", [MY SLOT]);
+    connectDCOPSignal(job.app(), job.obj(), "receivedStdout(QString)", 
+                      [MY SLOT]);
+
+    // execute the cvs command
+    job.execute();
+
+
+How-to use this service in a shell script:
+
+*** MISSING ***
+
