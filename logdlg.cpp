@@ -124,6 +124,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
 
             commentbox[i] = new QTextEdit(mainWidget);
 	    commentbox[i]->setReadOnly(true);
+            commentbox[i]->setTextFormat(Qt::PlainText);
             fm = commentbox[i]->fontMetrics();
 	    commentbox[i]->setFixedHeight(2*fm.lineSpacing()+10);
 	    grid->addMultiCellWidget(commentbox[i], 2, 2, 1, 3);
