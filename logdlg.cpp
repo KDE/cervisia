@@ -173,8 +173,11 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
 #if KDE_IS_VERSION(3,2,90)
     setButtonGuiItem(Ok, KGuiItem(i18n("to view something", "&View"),"fileopen","",""));
 #else
-    // @FIXME put the code of setButtonGuiItem here
-#warning put the code of setButtonGuiItem here
+    if( KGlobalSettings::showIconsOnPushButtons() )
+      actionButton(Ok)->setIconSet(SmallIcon(QString::fromLatin1("fileopen")));
+    setButtonText(Ok, i18n("to view something", "&View"));
+    setButtonTip(Ok, QString::null);
+    setButtonWhatsThis(Ok, QString::null);
 #endif
 
     setHelp("browsinglogs");

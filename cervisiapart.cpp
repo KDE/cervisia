@@ -505,9 +505,6 @@ void CervisiaPart::setupActions()
                                 actionCollection(), "settings_hide_files" );
 #if KDE_IS_VERSION(3,2,90)
     toggaction->setCheckedState(i18n("Show All &Files"));
-#else
-    // @FIXME put the code of setCheckedState here
-#warning put the code of setCheckedState here
 #endif
     hint = i18n("Determines whether only folders are shown");
     toggaction->setToolTip( hint );
@@ -518,9 +515,6 @@ void CervisiaPart::setupActions()
                                 actionCollection(), "settings_hide_uptodate" );
 #if KDE_IS_VERSION(3,2,90)
     toggaction->setCheckedState(i18n("Show Unmodified Files"));
-#else
-    // @FIXME put the code of setCheckedState here
-#warning put the code of setCheckedState here
 #endif
     hint = i18n("Determines whether files with status up-to-date or "
                 "unknown are hidden");
@@ -532,9 +526,6 @@ void CervisiaPart::setupActions()
                                 actionCollection(), "settings_hide_removed" );
 #if KDE_IS_VERSION(3,2,90)
     toggaction->setCheckedState(i18n("Show Removed Files"));
-#else
-    // @FIXME put the code of setCheckedState here
-#warning put the code of setCheckedState here
 #endif
     hint = i18n("Determines whether removed files are hidden");
     toggaction->setToolTip( hint );
@@ -545,9 +536,6 @@ void CervisiaPart::setupActions()
                                 actionCollection(), "settings_hide_notincvs" );
 #if KDE_IS_VERSION(3,2,90)
     toggaction->setCheckedState(i18n("Show Non-CVS Files"));
-#else
-    // @FIXME put the code of setCheckedState here
-#warning put the code of setCheckedState here
 #endif
     hint = i18n("Determines whether files not in CVS are hidden");
     toggaction->setToolTip( hint );
@@ -558,9 +546,6 @@ void CervisiaPart::setupActions()
                                     actionCollection(), "settings_hide_empty_directories" );
 #if KDE_IS_VERSION(3,2,90)
     toggaction->setCheckedState(i18n("Show Empty Folders"));
-#else
-    // @FIXME put the code of setCheckedState here
-#warning put the code of setCheckedState here
 #endif
     hint = i18n("Determines whether folders without visible entries are hidden");
     toggaction->setToolTip( hint );
