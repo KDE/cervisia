@@ -731,7 +731,7 @@ void CervisiaPart::slotResolve()
         return;
 
     // Non-modal dialog
-    ResolveDialog *l = new ResolveDialog();
+    ResolveDialog *l = new ResolveDialog(*config());
     if (l->parseFile(filename))
         l->show();
     else
@@ -1819,10 +1819,6 @@ void CervisiaPart::writeSettings()
 
 void CervisiaPart::readDialogProperties( KConfig *config )
 {
-    config->setGroup("Resolve dialog");
-    ResolveDialog::loadOptions(config);
-    config->setGroup("Resolve edit dialog");
-    ResolveEditorDialog::loadOptions(config);
     config->setGroup("Checkout dialog");
     CheckoutDialog::loadOptions(config);
     config->setGroup("Repository dialog");
@@ -1832,10 +1828,6 @@ void CervisiaPart::readDialogProperties( KConfig *config )
 
 void CervisiaPart::saveDialogProperties( KConfig *config )
 {
-    config->setGroup("Resolve dialog");
-    ResolveDialog::saveOptions(config);
-    config->setGroup("Resolve edit dialog");
-    ResolveEditorDialog::saveOptions(config);
     config->setGroup("Checkout dialog");
     CheckoutDialog::saveOptions(config);
     config->setGroup("Repository dialog");

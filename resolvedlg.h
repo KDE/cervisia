@@ -37,15 +37,12 @@ class ResolveDialog : public KDialogBase
 public:
     enum ChooseType { ChA, ChB, ChAB, ChBA, ChEdit };
 
-    explicit ResolveDialog( QWidget *parent=0, const char *name=0 );
+    explicit ResolveDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
 
     virtual ~ResolveDialog();
 
     bool parseFile(const QString &name);
 
-    static void loadOptions(KConfig *config);
-    static void saveOptions(KConfig *config);
-    
 protected:
     virtual void keyPressEvent(QKeyEvent *e);
 
@@ -61,11 +58,6 @@ private slots:
     void saveAsClicked();
     
 private:
-    struct Options {
-        QSize size;
-    };
-    static Options *options;
-
     void updateNofN();
     void updateHighlight(int newitem);
     void choose(ChooseType ch);
@@ -81,6 +73,7 @@ private:
     QString fname;
     QTextCodec *fcodec;
     int markeditem;
+    KConfig& partConfig;
 };
 
 
@@ -88,23 +81,16 @@ class ResolveEditorDialog : public KDialogBase
 {
 public:
 
-    explicit ResolveEditorDialog( QWidget *parent=0, const char *name=0 );
+    explicit ResolveEditorDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
 
     virtual ~ResolveEditorDialog();
 
     void setContent(const QStringList &l);
     QStringList content() const;
 
-    static void loadOptions(KConfig *config);
-    static void saveOptions(KConfig *config);
-
-private:
-    struct Options {
-        QSize size;
-    };
-    static Options *options;
-    
+private:   
     QMultiLineEdit *edit;
+    KConfig& partConfig;
 };  
 
 #endif

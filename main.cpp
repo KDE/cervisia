@@ -46,16 +46,13 @@ int main(int argc, char **argv)
     if (!resolvefile.isEmpty()) {
         KConfig *config = CervisiaFactory::instance()->config();
         config->setGroup("Resolve dialog");
-        ResolveDialog::loadOptions(config);
-        ResolveDialog *l = new ResolveDialog();
+        ResolveDialog *l = new ResolveDialog(*config);
         app.setMainWidget(l);
         if (l->parseFile(resolvefile))
             l->show();
         else
             delete l;
         int res = app.exec();
-        config->setGroup("Resolve dialog");
-        ResolveDialog::saveOptions(config);
         delete CervisiaFactory::instance();
         return res;
     }

@@ -30,15 +30,18 @@
 #include "diffview.h"
 #include "misc.h"
 
+#include <kdeversion.h>
+#if KDE_VERSION < KDE_MAKE_VERSION(3,1,90)
+#include "configutils.h"
+#endif
 
-ResolveDialog::Options *ResolveDialog::options = 0;
 
-
-ResolveDialog::ResolveDialog(QWidget *parent, const char *name)
+ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent, const char *name)
     : KDialogBase(parent, name, false, QString::null,
                   Close | Help | User1 | User2, Close, true,
-                  KStdGuiItem::saveAs(), KStdGuiItem::save()),
-      markeditem(-1)
+                  KStdGuiItem::saveAs(), KStdGuiItem::save())
+    , markeditem(-1)
+    , partConfig(cfg)
 {
     items.setAutoDelete(true);
 
@@ -119,36 +122,22 @@ ResolveDialog::ResolveDialog(QWidget *parent, const char *name)
 
     setWFlags(Qt::WDestructiveClose | getWFlags());
 
-    if (options)
-        resize(options->size);
+#if KDE_IS_VERSION(3,1,90)
+    QSize size = configDialogSize(partConfig, "ResolveDialog");
+#else
+    QSize size = Cervisia::configDialogSize(this, partConfig, "ResolveDialog");
+#endif
+    resize(size);
 }
 
 
 ResolveDialog::~ResolveDialog()
 {
-    if (!options)
-        options = new Options;
-    options->size = size();
-}
-
-
-void ResolveDialog::loadOptions(KConfig *config)
-{
-    if (!config->readEntry("Customized"))
-        return;
-
-    options = new Options;
-    options->size = config->readSizeEntry("Size");
-}
-
-
-void ResolveDialog::saveOptions(KConfig *config)
-{
-    if (!options)
-        return;
-
-    config->writeEntry("Customized", true);
-    config->writeEntry("Size", options->size);
+#if KDE_IS_VERSION(3,1,90)
+    saveDialogSize(partConfig, "ResolveDialog");
+#else
+    Cervisia::saveDialogSize(this, partConfig, "ResolveDialog");
+#endif
 }
 
 
@@ -453,7 +442,7 @@ void ResolveDialog::editClicked()
     for (int i = 0; i < item->linecountTotal; ++i)
         oldContent << merge->stringAtOffset(item->offsetM+i);
 
-    ResolveEditorDialog *dlg = new ResolveEditorDialog(this, "edit");
+    ResolveEditorDialog *dlg = new ResolveEditorDialog(partConfig, this, "edit");
     dlg->setContent(oldContent);
     
     if (dlg->exec())
@@ -515,12 +504,11 @@ void ResolveDialog::keyPressEvent(QKeyEvent *e)
 	}
 }
 
-ResolveEditorDialog::Options *ResolveEditorDialog::options = 0;
 
-
-ResolveEditorDialog::ResolveEditorDialog(QWidget *parent, const char *name)
+ResolveEditorDialog::ResolveEditorDialog(KConfig& cfg, QWidget *parent, const char *name)
     : KDialogBase(parent, name, true, QString::null,
                   Ok | Cancel, Ok, true)
+    , partConfig(cfg)
 {
     edit = new QMultiLineEdit(this);
     edit->setFocus();
@@ -531,36 +519,22 @@ ResolveEditorDialog::ResolveEditorDialog(QWidget *parent, const char *name)
     setMinimumSize(fm.width('0') * 120,
                    fm.lineSpacing() * 40);
 
-    if (options)
-        resize(options->size);
+#if KDE_IS_VERSION(3,1,90)
+    QSize size = configDialogSize(partConfig, "ResolveEditDialog");
+#else
+    QSize size = Cervisia::configDialogSize(this, partConfig, "ResolveEditDialog");
+#endif
+    resize(size);
 }
 
 
 ResolveEditorDialog::~ResolveEditorDialog()
 {
-    if (!options)
-        options = new Options;
-    options->size = size();
-}
-
-
-void ResolveEditorDialog::loadOptions(KConfig *config)
-{
-    if (!config->readEntry("Customized"))
-        return;
-
-    options = new Options;
-    options->size = config->readSizeEntry("Size");
-}
-
-
-void ResolveEditorDialog::saveOptions(KConfig *config)
-{
-    if (!options)
-        return;
-
-    config->writeEntry("Customized", true);
-    config->writeEntry("Size", options->size);
+#if KDE_IS_VERSION(3,1,90)
+    saveDialogSize(partConfig, "ResolveEditDialog");
+#else
+    Cervisia::saveDialogSize(this, partConfig, "ResolveEditDialog");
+#endif
 }
 
 
