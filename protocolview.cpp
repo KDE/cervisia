@@ -16,10 +16,8 @@
 #include "protocolview.h"
 
 #include <qdir.h>
-#include <qpopupmenu.h>
 #include <dcopref.h>
 #include <kconfig.h>
-#include <kglobalsettings.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kprocess.h>
@@ -35,6 +33,7 @@ ProtocolView::ProtocolView(const QCString& appId, QWidget *parent, const char *n
 {
     setReadOnly(true);
     setUndoRedoEnabled(false);
+    setTabChangesFocus(true);
     setTextFormat(Qt::RichText);
  
     KConfig *config = CervisiaPart::config();
@@ -229,41 +228,6 @@ void ProtocolView::appendLine(const QString &line)
            : QString("%1").arg(line));
 }
 
-
-void ProtocolView::execContextMenu(const QPoint &p)
-{
-    QPopupMenu *popup = new QPopupMenu(this);
-    int clearId = popup->insertItem(i18n("Clear"));
-    int selallId = popup->insertItem(i18n("Select All"));
-    
-    int res = popup->exec(p);
-    if (res == clearId)
-        clear();
-    else if (res == selallId)
-        selectAll();
-    
-    delete popup;
-}
-
-
-void ProtocolView::mousePressEvent(QMouseEvent *e)
-{
-    if (e->button() == RightButton)
-        execContextMenu(e->globalPos());
-    else
-        QTextEdit::mousePressEvent(e);
-}
-
-
-void ProtocolView::keyPressEvent(QKeyEvent *e)
-{
-    if (e->key() == KGlobalSettings::contextMenuKey())
-        execContextMenu(mapToGlobal(QPoint(10, 10)));
-    else if (e->key() == Key_Tab)
-        QTextEdit::focusNextPrevChild(true);
-    else
-        QTextEdit::keyPressEvent(e);
-}
 
 #include "protocolview.moc"
 

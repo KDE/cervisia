@@ -44,10 +44,6 @@ signals:
     void receivedLine(QString line);
     void jobFinished(bool normalExit, int exitStatus);
 
-protected:
-    void mousePressEvent(QMouseEvent *e);
-    void keyPressEvent(QKeyEvent *e);
-    
 private slots:
     void receivedOutput(KProcess *proc, char *buffer, int buflen);
     void childExited();
