@@ -119,7 +119,7 @@ void TagDialog::done(int r)
             if (!isValidTag(str))
                 {
                     QMessageBox::information(this, "Cervisia",
-                                             i18n("Tag must start with a letter and may contain"
+                                             i18n("Tag must start with a letter and may contain "
                                                   "letters, digits and the characters '-' and '_'."));
                     return;
                 }

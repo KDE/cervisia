@@ -471,7 +471,7 @@ void CervisiaPart::setupActions()
     action = new KToggleAction( i18n("Do cvs &edit Automatically When Necessary"), 0,
 				this, SLOT(slotDoCVSEdit()),
 				actionCollection(), "settings_do_cvs_edit" );
-    hint = i18n("Determines whether automatical cvs edit is active");
+    hint = i18n("Determines whether automatic cvs editing is active");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
@@ -1285,7 +1285,7 @@ void CervisiaPart::slotLastChange()
         }
     if (lastnumber == 0)
         {
-            QMessageBox::information(widget(), "Cervisia", i18n("The is the first revision on the branch."));
+            QMessageBox::information(widget(), "Cervisia", i18n("The is the first revision of the branch."));
             return;
         }
     revB = revA.left(pos+1);
