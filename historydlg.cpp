@@ -324,7 +324,7 @@ bool HistoryDialog::parseHistory(const QString &sandbox, const QString &reposito
     if (!l.execCommand(sandbox, repository, cmdline, "history"))
         return false;
 
-    QCString line;
+    QString line;
     int index = 0;
     while (l.getOneLine(&line) )
         {

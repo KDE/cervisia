@@ -1,3 +1,7 @@
+2002-06-11  Bernd Gehrmann  <bernd@mail.berlios.de>
+
+	* Interpret all output from cvs in the user's locale
+
 2002-04-28  Bernd Gehrmann  <bernd@mail.berlios.de>
 
 	* Little layout fix in log dialog by Christian Loose

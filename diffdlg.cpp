@@ -259,7 +259,7 @@ public:
 bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
                               const QString &filename, const QString &revA, const QString &revB)
 {
-    QStrList linesA, linesB;
+    QStringList linesA, linesB;
     int linenoA, linenoB;
     enum { Normal, VersionA, VersionB } state;
 
@@ -358,7 +358,7 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
     if (!l.execCommand(sandbox, repository, cmdline, "diff"))
         return false;
 
-    QCString line;
+    QString line;
     while ( l.getOneLine(&line) && line.left(3) != "+++")
         ;
     
@@ -375,7 +375,7 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
                 }
             if (line.length() < 1)
                 continue;
-            char marker = line[0];
+            QChar marker = line[0];
             line.remove(0, 1);
             
             if (marker == '-')
@@ -402,16 +402,16 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
                                                          linenoB+1, linesB.count());
                             itemscombo->insertItem(str);
                         }
-                    QStrListIterator itA(linesA);
-                    QStrListIterator itB(linesB);
-                    for (; itA.current() || itB.current(); ++itA, ++itB)
+                    QStringList::ConstIterator itA = linesA.begin();
+                    QStringList::ConstIterator itB = linesB.begin();
+                    for (; itA != linesA.end() || itB != linesB.end(); ++itA, ++itB)
                         {
-                            if (itA.current())
+                            if (itA != linesA.end())
                                 {
-                                    diff1->addLine(itA.current(), DiffView::Neutral,
+                                    diff1->addLine(*itA, DiffView::Neutral,
                                                    ++linenoA);
-                                    if (itB.current())
-                                        diff2->addLine(itB.current(), DiffView::Change,
+                                    if (itB != linesB.end())
+                                        diff2->addLine(*itB, DiffView::Change,
                                                        ++linenoB);
                                     else
                                         diff2->addLine("", DiffView::Delete);
@@ -419,7 +419,7 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
                             else
                                 {
                                     diff1->addLine("", DiffView::Neutral);
-                                    diff2->addLine(itB.current(), DiffView::Insert,
+                                    diff2->addLine(*itB, DiffView::Insert,
                                                    ++linenoB);
                                 }
                         }
@@ -445,16 +445,16 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
                                          linenoB+1, linesB.count());
             itemscombo->insertItem(str);
         }
-    QStrListIterator itA(linesA);
-    QStrListIterator itB(linesB);
-    for (; itA.current() || itB.current(); ++itA, ++itB)
+    QStringList::ConstIterator itA = linesA.begin();
+    QStringList::ConstIterator itB = linesB.begin();
+    for (; itA != linesA.end() || itB != linesB.end(); ++itA, ++itB)
         {
-            if (itA.current())
+            if (itA != linesA.end())
                 {
-                    diff1->addLine(itA.current(), DiffView::Neutral,
+                    diff1->addLine(*itA, DiffView::Neutral,
                                    ++linenoA);
-                    if (itB.current())
-                        diff2->addLine(itB.current(), DiffView::Change,
+                    if (itB != linesB.end())
+                        diff2->addLine(*itB, DiffView::Change,
                                        ++linenoB);
                     else
                         diff2->addLine("", DiffView::Delete);
@@ -462,7 +462,7 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
             else
                 {
                     diff1->addLine("", DiffView::Neutral);
-                    diff2->addLine(itB.current(), DiffView::Insert,
+                    diff2->addLine(*itB, DiffView::Insert,
                                    ++linenoB);
                 }
         }

@@ -142,7 +142,7 @@ void TagDialog::tagButtonClicked()
         return;
 
     QStrList tags(true);
-    QCString str;
+    QString str;
     while (l.getOneLine(&str))
         {
             int pos1, pos2, pos3;

@@ -1175,7 +1175,7 @@ void CervisiaPart::slotMakePatch()
         return;
     }
     QTextStream t(&f);
-    QCString line;
+    QString line;
     while (l.getOneLine(&line))
         t << line << '\n';
 

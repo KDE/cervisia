@@ -37,7 +37,7 @@ public:
     
     bool execCommand(const QString &sandbox, const QString &repository,
                      const QString &cmdline, const QString &errindicator);
-    bool getOneLine(QCString *str);
+    bool getOneLine(QString *str);
 
 protected:
     virtual void closeEvent(QCloseEvent *e);
@@ -63,7 +63,7 @@ private:
     QPushButton *cancelbutton;
     QTimer *timer;
     QString buf;
-    QStrList output;
+    QStringList output;
     KAnimWidget *gear;
 };
 

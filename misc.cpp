@@ -12,12 +12,13 @@
  */
 
 #include "config.h"
+#include <ctype.h>
 #include <pwd.h>
 #include <sys/types.h>
 #include <unistd.h>
 #include <qfile.h>
 #include <qregexp.h>
-#include <ctype.h>
+#include <qtextcodec.h>
 #include <kapplication.h>
 #include <kconfig.h>
 #include <kprocess.h>
@@ -157,14 +158,7 @@ void cleanupTempFiles()
         {
             QStringList::Iterator it;
             for (it = tempFiles->begin(); it != tempFiles->end(); ++it)
-#if 0
                 QFile::remove(*it);
-#else
-                {
-                    QFile f(*it);
-                    f.remove();
-                }
-#endif
             delete tempFiles;
         }
 }
@@ -178,6 +172,14 @@ QString tempFileName(const QString &suffix)
     KTempFile f(QString::null, suffix);
     tempFiles->append(f.name());
     return f.name();
+}
+
+QTextCodec *detectCodec(const QString &fileName)
+{
+    QFile f(fileName);
+
+    // TODO
+    return QTextCodec::codecForLocale();
 }
 
 // Local Variables:

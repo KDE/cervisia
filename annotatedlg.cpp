@@ -134,7 +134,7 @@ bool AnnotateDialog::parseCvsAnnotate(const QString &sandbox, const QString &rep
     //
 
     state = Begin;
-    QCString line;
+    QString line;
     while (l.getOneLine(&line))
         {
             switch (state)

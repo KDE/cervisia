@@ -1125,7 +1125,7 @@ void UpdateView::updateItem(const QString &name, Status status, bool isdir)
     kdDebug() << "longest match: " << longestmatch->dirPath() << endl;
     kdDebug() << "leaves: " <<  dirpath.mid(longestmatch->dirPath().length()) << endl;
     QStringList leaves = QStringList::split('/', dirpath.mid(longestmatch->dirPath().length()));
-    for (int i=0; i < leaves.count(); ++i)
+    for (int i=0; i < (int)leaves.count(); ++i)
         {
             QString newFileName = longestmatch->dirPath();
             for (int j=0; j < i; ++j)

@@ -15,13 +15,15 @@
 #ifndef _RESOLVEDLG_H_
 #define _RESOLVEDLG_H_
 
+#include <qcheckbox.h>
 #include <qdialog.h>
 #include <qlabel.h>
 #include <qmultilinedit.h>
-#include <qcheckbox.h>
 #include <qptrlist.h>
 #include "diffview.h"
 
+
+class QTextCodec;
 class ResolveItem;
 
 class ResolveDialog : public QDialog
@@ -72,6 +74,7 @@ private:
 
     QPtrList<ResolveItem> items;
     QString fname;
+    QTextCodec *fcodec;
     int markeditem;
 };
 

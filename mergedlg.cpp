@@ -130,7 +130,7 @@ void MergeDialog::buttonClicked(bool branch)
     QString searchedtype = QString::fromLatin1(branch? "branch" : "revision");
 
     QStrList tags(true);
-    QCString str;
+    QString str;
     while (l.getOneLine(&str))
         {
             int pos1, pos2, pos3;

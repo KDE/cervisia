@@ -26,6 +26,7 @@ QString colorAsString(const QColor &color);
 QString userName();
 QString tempFileName(const QString &suffix);
 void cleanupTempFiles();
+QTextCodec *detectCodec(const QString &fileName);
 
 bool isValidTag(const QString &str);
 QString cvsClient(QString sRepository);

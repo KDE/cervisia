@@ -227,7 +227,7 @@ bool LogDialog::parseCvsLog(const QString &sbox, const QString &repo, const QStr
     repository = repo;
     filename = fname;
     
-    setCaption(i18n("CVS Log: ") + filename);
+    setCaption(i18n("CVS Log: %1").arg(filename));
 
     QString cmdline = cvsClient(repository) + " -f log ";
     cmdline += KShellProcess::quote(filename);
@@ -238,9 +238,10 @@ bool LogDialog::parseCvsLog(const QString &sbox, const QString &repo, const QStr
         return false;
 
     state = Begin;
-    QCString line;
+    QString line;
     while ( l.getOneLine(&line) )
         {
+            kdDebug() << "Line:#" << line << "#" << endl;
             switch (state)
                 {
                 case Begin:
@@ -300,7 +301,7 @@ bool LogDialog::parseCvsLog(const QString &sbox, const QString &repo, const QStr
                     state = Branches;
                     break;
                 case Branches:
-                    if (qstrncmp(line, "branches:", 9) != 0)
+                    if (!line.startsWith("branches:"))
                         {
                             comment = line;
                             state = Comment;

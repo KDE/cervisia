@@ -165,13 +165,13 @@ void CvsProgressDialog::timeoutOccured()
 
 
 
-bool CvsProgressDialog::getOneLine(QCString *str)
+bool CvsProgressDialog::getOneLine(QString *str)
 {
     if (output.isEmpty())
         return false;
 
     *str = output.first();
-    output.removeFirst();
+    output.remove(output.begin());
 
     return true;
 }
@@ -194,7 +194,7 @@ bool CvsProgressDialog::processOutput()
             else if (item.left(11) == "cvs server:")
                 resultbox->insertItem(item);
             else
-                output.append(item.latin1());
+                output.append(item);
 	    buf = buf.right(buf.length()-pos-1);
         }
     
@@ -204,7 +204,7 @@ bool CvsProgressDialog::processOutput()
 
 void CvsProgressDialog::receivedOutputNongui(KProcess *, char *buffer, int buflen)
 {
-    buf += QCString(buffer, buflen+1);
+    buf += QString::fromLocal8Bit(buffer, buflen+1);
     if (processOutput())
         {
             stopNonguiPart();
@@ -215,7 +215,7 @@ void CvsProgressDialog::receivedOutputNongui(KProcess *, char *buffer, int bufle
 
 void CvsProgressDialog::receivedOutput(KProcess *, char *buffer, int buflen)
 {
-    buf += QCString(buffer, buflen+1);
+    buf += QString::fromLocal8Bit(buffer, buflen+1);
     (void) processOutput();
 }
  

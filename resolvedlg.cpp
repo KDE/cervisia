@@ -12,11 +12,12 @@
  */
 
 
-#include <qpushbutton.h>
-#include <qlayout.h>
-#include <qkeycode.h>
-#include <qtextstream.h>
 #include <qfile.h>
+#include <qkeycode.h>
+#include <qlayout.h>
+#include <qpushbutton.h>
+#include <qtextcodec.h>
+#include <qtextstream.h>
 #include <kbuttonbox.h>
 #include <kapplication.h>
 #include <kdebug.h>
@@ -183,23 +184,25 @@ bool ResolveDialog::parseFile(const QString &name)
 {
     int lineno1, lineno2;
     int advanced1, advanced2;
-    char buf[512];
     enum { Normal, VersionA, VersionB } state;
     
-    setCaption(i18n("CVS Resolve: ") + name);
+    setCaption(i18n("CVS Resolve: %1").arg(name));
 
     fname = name;
-    
-    FILE *f = fopen(name.latin1(), "r");
-    if (!f)
-	return false;
+
+    QFile f(name);
+    if (!f.open(IO_ReadOnly))
+        return false;
+    QTextStream stream(&f);
+    QTextCodec *fcodec = detectCodec(name);
+    stream.setCodec(fcodec);
 
     state = Normal;
     lineno1 = lineno2 = 0;
     advanced1 = advanced2 = 0;
-    while (fgets(buf, sizeof buf, f))
+    while (!stream.atEnd())
 	{
-	    QString line = buf;
+	    QString line = stream.readLine();
 	    if (line.left(7) == "<<<<<<<")
 		{
 		    state = VersionA;
@@ -249,7 +252,7 @@ bool ResolveDialog::parseFile(const QString &name)
 		    diff2->addLine(line, DiffView::Unchanged, lineno2);
 		}
 	}
-    fclose(f);
+    f.close();
     updateNofN();
     
     return true; // succesful
@@ -266,11 +269,13 @@ void ResolveDialog::saveFile(const QString &name)
 			       "Cervisia");
 	    return;
 	}
-    QTextStream t(&f);
+    QTextStream stream(&f);
+    QTextCodec *fcodec = detectCodec(name);
+    stream.setCodec(fcodec);
         
     int count = merge->count();
     for (int i = 0; i < count; ++i)
-        t << merge->stringAtOffset(i);
+        stream << merge->stringAtOffset(i);
 
     f.close();
 }
