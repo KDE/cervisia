@@ -21,11 +21,12 @@
 class CvsDir : public QDir
 {
 public:
-    CvsDir(const QString &path);
+    explicit CvsDir(const QString &path);
+
     const QFileInfoList *entryInfoList() const;
 
 private:
-    QFileInfoList entrylist;
+    mutable QFileInfoList entrylist;
 };
 
 #endif

@@ -112,19 +112,13 @@ const QFileInfoList *CvsDir::entryInfoList() const
     if (!fulllist)
         return 0;
     
-    QFileInfoList &elist = const_cast<QFileInfoList&>(entrylist);
-    elist.clear();
+    entrylist.clear();
 
     QFileInfoListIterator it(*fulllist);
     for (; it.current(); ++it)
         {
-            if (it.current()->fileName() == ".")
-                continue;
-            if (it.current()->fileName() == "..")
-                continue;
-            if (ignorelist.matches(it.current()))
-                continue;
-            elist.append(it.current());
+            if (!ignorelist.matches(it.current()))
+                entrylist.append(it.current());
         }
 
     return &entrylist;
