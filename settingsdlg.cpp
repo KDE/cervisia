@@ -308,6 +308,8 @@ void SettingsDialog::writeSettings()
             if (w->inherits("DiffView"))
                 w->setFont(difffontbox->font());
         }
+
+    config->sync();
 }
 
 void SettingsDialog::done(int res)

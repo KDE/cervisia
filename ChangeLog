@@ -1,3 +1,8 @@
+2003-06-11  Christian Loose <christian.loose@hamburg.de>
+
+	* Fix BR #45962: Save changed settings in SettingDialog
+	  so that the following checkout can use them.
+
 2003-06-07  André Wöbbeking  <Woebbeking@web.de>
 
 	* Fix BR #57797: Removed the own implementation
