@@ -1,7 +1,9 @@
 CERVISIA_VERSION = 2.0
-INCLUDES = $(all_includes)
+INCLUDES = $(all_includes) -I./cvsservice
 LDFLAGS	= $(all_libraries) $(KDE_RPATH)
 AM_CPPFLAGS = -UQT_NO_COMPAT -D_BSD_SOURCE
+
+SUBDIRS = cvsservice
 
 bin_PROGRAMS = cervisia
 kde_module_LTLIBRARIES = libcervisiapart.la
@@ -16,7 +18,8 @@ libcervisiapart_la_SOURCES = updateview.cpp protocolview.cpp protocolview.skel \
 		   cvsdir.cpp repositories.cpp misc.cpp cervisiapart.cpp qttableview.cpp \
 		   addrepositorydlg.cpp annotatectl.cpp
 libcervisiapart_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
-libcervisiapart_la_LIBADD = $(LIB_KFILE) $(LIB_KPARTS)
+libcervisiapart_la_LIBADD = $(LIB_KFILE) $(LIB_KPARTS) \
+		   cvsservice/libcvsservice.la
 
 cervisia_SOURCES = main.cpp cervisiashell.cpp
 cervisia_LDFLAGS = $(all_libraries) $(KDE_RPATH)
@@ -62,5 +65,3 @@ cervisia.1: $(srcdir)/cervisia.1.in
 cervisia.1.in: cervisia.pod
 	pod2man --center "Cervisia" --release "${CERVISIA_VERSION}" \
 		cervisia.pod > cervisia.1.in
-
-SUBDIRS = cvsservice
