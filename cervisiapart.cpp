@@ -33,6 +33,7 @@
 #include <kmessagebox.h>
 #include <kglobal.h>
 
+#include "progressdlg.h"
 #include "logdlg.h"
 #include "diffdlg.h"
 #include "resolvedlg.h"
