@@ -1,5 +1,7 @@
 2003-06-26  Christian Loose  <christian.loose@hamburg.de>
 
+	* Start/Stop the ssh-agent process and setup the cvs
+	   job environment to use it.
 	* Initial version of our own little ssh-askpass program.
 	* Initial version of the SshAgent class which will later enable
 	   the cvs DCOP service to utilize the ssh-agent program.

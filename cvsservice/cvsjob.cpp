@@ -24,6 +24,8 @@
 #include <kdebug.h>
 #include <kprocess.h>
 
+#include "sshagent.h"
+
 
 struct CvsJob::Private
 {
@@ -147,6 +149,18 @@ QStringList CvsJob::output() const
 
 bool CvsJob::execute()
 {
+    // setup job environment to use the ssh-agent (if it is running)
+    SshAgent ssh;
+    if( !ssh.pid().isEmpty() )
+    {
+        kdDebug(8051) << "PID  = " << ssh.pid() << endl;
+        kdDebug(8051) << "SOCK = " << ssh.authSock() << endl;
+
+        d->childproc->setEnvironment("SSH_AGENT_PID", ssh.pid());
+        d->childproc->setEnvironment("SSH_AUTH_SOCK", ssh.authSock());
+        d->childproc->setEnvironment("SSH_ASKPASS", "cvsaskpass");
+    }
+
     if( !d->rsh.isEmpty() )
         d->childproc->setEnvironment("CVS_RSH", d->rsh);
 

@@ -33,6 +33,7 @@
 #include "cvsjob.h"
 #include "cvsserviceutils.h"
 #include "repository.h"
+#include "sshagent.h"
 
 
 static const char SINGLE_JOB_ID[]   = "NonConcurrentJob";
@@ -79,11 +80,21 @@ CvsService::CvsService()
     d->repository = new Repository();
 
     d->cvsJobs.setAutoDelete(true);
+
+    // use the existing or start a new ssh-agent
+    // TODO CL needs a configuration option.
+    //      CL do we need the return value?
+    SshAgent ssh;
+    bool res = ssh.querySshAgent();
 }
 
 
 CvsService::~CvsService()
 {
+    // kill the ssh-agent (when we started it)
+    SshAgent ssh;
+    ssh.killSshAgent();
+
     d->cvsJobs.clear();
     delete d;
 }
