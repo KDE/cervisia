@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 1999-2002 Bernd Gehrmann <bernd@mail.berlios.de>
- * Copyright (c) 2003 André Wöbbeking <Woebbeking@web.de>
+ * Copyright (c) 2003-2004 André Wöbbeking <Woebbeking@web.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -153,9 +153,7 @@ void UpdateDirItem::updateEntriesItem(const Entry& entry,
     if (entry.m_type == Entry::Dir)
         createDirItem(entry)->maybeScanDir(true);
     else
-    {
         createFileItem(entry);
-    }
 }
 
 
@@ -366,7 +364,18 @@ void UpdateDirItem::accept(Visitor& visitor)
 void UpdateDirItem::setOpen(bool open)
 {
     if ( open )
+    {
+        const bool openFirstTime(!wasScanned());
+
         maybeScanDir(false);
+
+        // if new items were created their visibility must be checked
+        // (not while unfoldTree() as this could be slow and unfoldTree()
+        // calls setFilter() itself)
+        UpdateView* view = updateView();
+        if (openFirstTime && !view->isUnfoldingTree())
+            view->setFilter(view->filter());
+    }
 
     QListViewItem::setOpen(open);
 }
@@ -607,9 +616,8 @@ QString UpdateFileItem::text(int column) const
         result = entry().m_tag;
         break;
     case Timestamp:
-        result = entry().m_dateTime.isValid()
-            ? KGlobal::locale()->formatDateTime(entry().m_dateTime)
-            : QString::null;
+        if (entry().m_dateTime.isValid())
+            result = KGlobal::locale()->formatDateTime(entry().m_dateTime);
         break;
     }
 

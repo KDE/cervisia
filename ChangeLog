@@ -1,3 +1,8 @@
+2004-05-17  André Wöbbeking  <Woebbeking@web.de>
+
+	* Fix BR #58254: honor option "Hide Non-CVS Files" when opening 
+	  a branch in the file tree.
+
 2004-05-16  André Wöbbeking  <Woebbeking@web.de>
 
 	* Fix BR #81498: handle spaces in the working folder name correctly.

@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 1999-2002 Bernd Gehrmann <bernd@mail.berlios.de>
- * Copyright (c) 2003 André Wöbbeking <Woebbeking@web.de>
+ * Copyright (c) 2003-2004 André Wöbbeking <Woebbeking@web.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -32,7 +32,8 @@ using Cervisia::Entry;
 
 UpdateView::UpdateView(KConfig& partConfig, QWidget *parent, const char *name)
     : KListView(parent, name),
-      m_partConfig(partConfig)
+      m_partConfig(partConfig),
+      m_unfoldingTree(false)
 {
     setAllColumnsShowFocus(true);
     setShowSortIndicator(true);
@@ -165,9 +166,17 @@ const QColor& UpdateView::remoteChangeColor() const
 }
 
 
+bool UpdateView::isUnfoldingTree() const
+{
+    return m_unfoldingTree;
+}
+
+
 void UpdateView::unfoldTree()
 {
     QApplication::setOverrideCursor(waitCursor);
+
+    m_unfoldingTree = true;
 
     const bool updatesEnabled(isUpdatesEnabled());
 
@@ -199,13 +208,13 @@ void UpdateView::unfoldTree()
     }
 
     // maybe some UpdateDirItem was opened the first time so check the whole tree
-    // (this is needed for the filter NoEmptyDirectories)
-    if (filter() & NoEmptyDirectories)
-        setFilter(filter());
+    setFilter(filter());
 
     setUpdatesEnabled(updatesEnabled);
 
     triggerUpdate();
+
+    m_unfoldingTree = false;
 
     QApplication::restoreOverrideCursor();
 }
@@ -280,10 +289,9 @@ void UpdateView::finishJob(bool normalExit, int exitStatus)
         markUpdated(true, success);
     syncSelection();
 
-    // visibility of items could be changed so check the whole tree
-    // (this is needed for the filter NoEmptyDirectories)
-    if (filter() & NoEmptyDirectories)
-        setFilter(filter());
+    // maybe some new items were created or
+    // visibility of items changed so check the whole tree
+    setFilter(filter());
 }
 
 

@@ -1,6 +1,6 @@
 /* 
- *  Copyright (C) 1999-2002 Bernd Gehrmann
- *                          bernd@mail.berlios.de
+ * Copyright (C) 1999-2002 Bernd Gehrmann <bernd@mail.berlios.de>
+ * Copyright (c) 2003-2004 André Wöbbeking <Woebbeking@web.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -51,12 +51,16 @@ public:
     QStringList fileSelection() const;
 
     void openDirectory(const QString& dirname);
-    void scanRecursive();
     void prepareJob(bool recursive, Action action);
 
     const QColor& conflictColor() const;
     const QColor& localChangeColor() const;
     const QColor& remoteChangeColor() const;
+
+    /**
+     * @return \c true iff unfoldTree() is active.
+     */
+    bool isUnfoldingTree() const;
 
 signals:
     void fileOpened(QString filename);
@@ -87,6 +91,11 @@ private:
     QColor m_conflictColor;
     QColor m_localChangeColor;
     QColor m_remoteChangeColor;
+
+    /**
+     * \c true iff unfoldTree() is active (is needed by UpdateDirItem::setOpen()).
+     */
+    bool m_unfoldingTree;
 };
 
 #endif
