@@ -64,9 +64,9 @@ signals:
     void filterStatusChanged(QString status);
 
 public slots:
+    // unused because we overwrite the default behaviour of openURL()
     virtual bool openFile() { return true; }
     virtual bool openURL( const KURL & );
-    void openSandbox(const QString &dirname);
 
     void openFile(QString filename);
     void openFiles(const QStringList &filenames);
@@ -74,9 +74,7 @@ public slots:
     void updateActions();
     
     void aboutCervisia();
-    void slotOpenSandbox( const KURL &url );
 
-    void slotOpenSandbox();
     void slotOpen();
     void slotResolve();
     void slotStatus();
@@ -131,9 +129,14 @@ public slots:
 protected slots:
     void slotJobFinished(bool /*success*/);
 
+private slots:
+    // called by menu action "Open Sandbox..."
+    void slotOpenSandbox();
+
 private:    
     void setupActions();
 
+    void openSandbox(const QString &dirname);
     void updateOrStatus(bool noact, const QString &extraopt);
     void commitOrAddOrRemove(CommitDialog::ActionType action);
     void addOrRemoveWatch(WatchDialog::ActionType action);

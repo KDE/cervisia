@@ -25,6 +25,7 @@
 #include <klocale.h>
 #include <kstdaction.h>
 #include <kstatusbar.h>
+#include <kurl.h>
 
 #include "cervisiapart.h"
 
@@ -189,7 +190,7 @@ void CervisiaShell::readProperties(KConfig *config)
 
     QString currentDir = config->readEntry("Current Directory");
     if (!currentDir.isEmpty())
-        part->openSandbox(currentDir);
+        part->openURL( KURL::fromPathOrURL(currentDir) );
 }
 
 void CervisiaShell::saveProperties(KConfig *config)

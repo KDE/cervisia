@@ -117,7 +117,7 @@ KConfig *CervisiaPart::config()
 
 bool CervisiaPart::openURL( const KURL &u )
 {
-    slotOpenSandbox( u );
+    openSandbox( u.path() );
     return true;
 }
 
@@ -139,7 +139,7 @@ void CervisiaPart::setupActions()
     action->setWhatsThis( hint );
 
     recent = new KRecentFilesAction( i18n("Recent Sandboxes"), 0,
-                                     this, SLOT( slotOpenSandbox( const KURL & ) ),
+                                     this, SLOT( openURL( const KURL & ) ),
                                      actionCollection(), "file_open_recent" );
 
     action = new KAction( i18n("&Insert ChangeLog Entry..."), 0,
@@ -595,11 +595,6 @@ void CervisiaPart::slotOpenSandbox()
     openSandbox(dirname);
 }
 
-
-void CervisiaPart::slotOpenSandbox( const KURL &url )
-{
-    openSandbox( url.path() );
-}
 
 void CervisiaPart::slotChangeLog()
 {
