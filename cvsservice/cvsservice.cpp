@@ -34,6 +34,7 @@
 #include <kprocess.h>
 
 #include "cvsjob.h"
+#include "cvsloginjob.h"
 #include "cvsserviceutils.h"
 #include "repository.h"
 #include "sshagent.h"
@@ -338,21 +339,25 @@ DCOPRef CvsService::log(const QString& fileName)
 
 DCOPRef CvsService::login(const QString& repository)
 {
+    if( repository.isEmpty() )
+        return DCOPRef();
+
     std::auto_ptr<Repository> repo(new Repository(repository));
     
     // create a cvs job
     ++(d->lastJobId);
 
-    CvsJob* job = new CvsJob(d->lastJobId);
-    d->cvsJobs.insert(d->lastJobId, job);
+    // TODO: we need to delete this job object
+    CvsLoginJob* job = new CvsLoginJob(d->lastJobId);
 
-    job->setRSH(repo->rsh());
-    job->setServer(repo->server());
-    job->setDirectory(repo->workingCopy());
-
+    // TODO: CVS_RSH and CVS_SERVER don't work ATM
+//    job->setRSH(repo->rsh());
+//    job->setServer(repo->server());
+    
     // assemble the command line
-    // cvs -d [REPOSITORY] checkout -c
-    *job << repo->cvsClient() << "-d" << repository << "login";
+    // cvs -d [REPOSITORY] login
+    job->setCvsClient(repo->clientOnly().local8Bit());
+    job->setRepository(repository.local8Bit());
 
     // return a DCOP reference to the cvs job
     return DCOPRef(d->appId, job->objId());
@@ -361,6 +366,9 @@ DCOPRef CvsService::login(const QString& repository)
 
 DCOPRef CvsService::logout(const QString& repository)
 {
+    if( repository.isEmpty() )
+        return DCOPRef();
+
     std::auto_ptr<Repository> repo(new Repository(repository));
     
     // create a cvs job
@@ -374,7 +382,7 @@ DCOPRef CvsService::logout(const QString& repository)
     job->setDirectory(repo->workingCopy());
 
     // assemble the command line
-    // cvs -d [REPOSITORY] checkout -c
+    // cvs -d [REPOSITORY] logout
     *job << repo->cvsClient() << "-d" << repository << "logout";
 
     // return a DCOP reference to the cvs job

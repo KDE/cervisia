@@ -15,7 +15,7 @@ cvsservice_LDADD = $(LIB_KDEUI) $(LIB_KIO)
 cvsservice_SOURCES = main.cpp cvsservice.cpp cvsjob.cpp \
 	cvsservice.skel cvsservice.stub cvsjob.skel cvsjob.stub \
 	repository.cpp repository.skel repository.stub sshagent.cpp \
-	cvsserviceutils.cpp
+	cvsserviceutils.cpp cvsloginjob.cpp cvsloginjob.skel cvsloginjob.stub
 
 cvsaskpass_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 cvsaskpass_LDADD = $(LIB_KDEUI)
