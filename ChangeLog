@@ -1,3 +1,9 @@
+2003-02-28  Christian Loose  <christian.loose@hamburg.de>
+
+	* Fix BR #54382: Display warning message in remove dialog
+	  to make clear that the action will also remove the local
+	  copy of the selected files.
+
 2003-02-24  Christian Loose  <christian.loose@hamburg.de>
 
 	* Make shortcut keys of actions which are part of CervisiaPart

@@ -18,6 +18,8 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qlistbox.h>
+#include <kapplication.h>
+#include <kiconloader.h>
 #include <klocale.h>
 
 
@@ -44,7 +46,24 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget *parent, const char 
     listbox->setEnabled(false);
     textlabel->setBuddy(listbox);
     layout->addWidget(listbox, 5);
+
+    QBoxLayout *warningLayout = new QHBoxLayout(mainWidget);
+
+    QLabel *warningIcon = new QLabel(mainWidget);
+    KIconLoader *loader = kapp->iconLoader();
+    warningIcon->setPixmap(loader->loadIcon("messagebox_warning", KIcon::NoGroup,
+                                            KIcon::SizeMedium, KIcon::DefaultState,
+                                            0, true));
+    warningLayout->addWidget(warningIcon);
+
+    QLabel *warningText = new QLabel(i18n("This will also remove the files from "
+                                          "your local working copy!"), mainWidget);
+    warningLayout->addWidget(warningText);
     
+    layout->addSpacing(5);
+    layout->addLayout(warningLayout);
+    layout->addSpacing(5);
+        
     if( action == Remove )
         setHelp("removingfiles");
     else
