@@ -18,8 +18,7 @@
 
 #include <qdatetime.h>
 #include <qlistview.h>
-
-#include <map>
+#include <qmap.h>
 
 #include "entry.h"
 #include "updateview.h"
@@ -98,7 +97,7 @@ private:
 
     UpdateItem* findItem(const QString& name) const;
 
-    typedef std::map<const QString, UpdateItem*> TMapItemsByName;
+    typedef QMap<QString, UpdateItem*> TMapItemsByName;
 
     TMapItemsByName m_itemsByName;
 

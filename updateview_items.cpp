@@ -144,7 +144,7 @@ void UpdateDirItem::updateEntriesItem(const Entry& entry,
             }
             fileItem->setRevTag(entry.m_revision, entry.m_tag);
             fileItem->setDate(entry.m_dateTime);
-            fileItem->setPixmap(0, isBinary ? SmallIcon("binary") : 0);
+            fileItem->setPixmap(0, isBinary ? SmallIcon("binary") : QPixmap());
         }
         return;
     }
@@ -195,7 +195,7 @@ UpdateDirItem* UpdateDirItem::createDirItem(const Entry& entry)
 {
     UpdateDirItem* dirItem = new UpdateDirItem(this, entry);
 
-    m_itemsByName.insert(std::make_pair(entry.m_name, dirItem));
+    m_itemsByName.insert(entry.m_name, dirItem);
 
     return dirItem;
 }
@@ -205,7 +205,7 @@ UpdateFileItem* UpdateDirItem::createFileItem(const Entry& entry)
 {
     UpdateFileItem* fileItem = new UpdateFileItem(this, entry);
 
-    m_itemsByName.insert(std::make_pair(entry.m_name, fileItem));
+    m_itemsByName.insert(entry.m_name, fileItem);
 
     return fileItem;
 }
@@ -215,7 +215,7 @@ UpdateItem* UpdateDirItem::findItem(const QString& name) const
 {
     const TMapItemsByName::const_iterator it = m_itemsByName.find(name);
 
-    return (it != m_itemsByName.end()) ? it->second : 0;
+    return (it != m_itemsByName.end()) ? *it : 0;
 }
 
 
@@ -304,12 +304,12 @@ void UpdateDirItem::syncWithDirectory()
          it != itEnd; ++it)
     {
         // only files
-        if (isFileItem(it->second))
+        if (isFileItem(*it))
         {
-            UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(it->second);
+            UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(*it);
 
             // is file removed?
-            if (!dir.exists(it->first))
+            if (!dir.exists(it.key()))
             {
                 fileItem->setStatus(Entry::Removed);
                 fileItem->setRevTag(QString::null, QString::null);
@@ -341,8 +341,8 @@ void UpdateDirItem::maybeScanDir(bool recursive)
                                        itEnd(m_itemsByName.end());
              it != itEnd; ++it)
         {
-            if (isDirItem(it->second))
-                static_cast<UpdateDirItem*>(it->second)->maybeScanDir(true);
+            if (isDirItem(*it))
+                static_cast<UpdateDirItem*>(*it)->maybeScanDir(true);
         }
     }
 }
@@ -356,7 +356,7 @@ void UpdateDirItem::accept(Visitor& visitor)
                                    itEnd(m_itemsByName.end());
          it != itEnd; ++it)
     {
-        it->second->accept(visitor);
+        (*it)->accept(visitor);
     }
 
     visitor.postVisit(this);
