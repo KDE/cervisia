@@ -69,7 +69,7 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
     //
     QVBox *generalPage = addVBoxPage( i18n("&General") );
 
-    QLabel *usernamelabel = new QLabel( i18n("&User Name for the ChangeLog Editor:"), generalPage );
+    QLabel *usernamelabel = new QLabel( i18n("&User name for the change log editor:"), generalPage );
     usernameedit = new KLineEdit(generalPage);
     usernameedit->setFocus();
     usernamelabel->setBuddy(usernameedit);
@@ -140,7 +140,7 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
     timeoutedit->setRange( 0, 50000, 100, false );
     timeoutlabel->setBuddy( timeoutedit );
 
-    QLabel *compressionlabel = new QLabel( i18n("Default Compression &Level:"), advancedPage );
+    QLabel *compressionlabel = new QLabel( i18n("Default compression &level:"), advancedPage );
     compressioncombo = new QComboBox( false, advancedPage );
     compressionlabel->setBuddy( compressioncombo );
 

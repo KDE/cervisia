@@ -109,7 +109,7 @@ AddRepositoryDialog::Options *AddRepositoryDialog::options = 0;
 RepositoryDialog::RepositoryDialog(QWidget *parent, const char *name)
     : QDialog(parent, name, true)
 {
-    setCaption(i18n("Configure access to repositories"));
+    setCaption(i18n("Configure Access to Repositories"));
 
     QBoxLayout *layout = new QVBoxLayout(this, 10);
 
@@ -380,7 +380,7 @@ AddRepositoryDialog::AddRepositoryDialog(const QString &repo, QWidget *parent, c
     rsh_label->setBuddy(rsh_edit);
     layout->addWidget(rsh_edit);
 
-    compression_group = new QHButtonGroup(i18n("&Compression Level:"), this);
+    compression_group = new QHButtonGroup(i18n("&Compression Level"), this);
     layout->addWidget(compression_group);
 
     (void) new QRadioButton(i18n("Default"), compression_group);
@@ -443,7 +443,7 @@ void AddRepositoryDialog::saveOptions(KConfig *config)
 
 void AddRepositoryDialog::setRepository(const QString &repo)
 {
-    setCaption(i18n("Repository settings"));
+    setCaption(i18n("Repository Settings"));
 
     repo_edit->setText(repo);
     repo_edit->setEnabled(false);

@@ -85,7 +85,7 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
             branch_edit = new KLineEdit(this);
             grid->addWidget(branch_edit, 2, 1);
 
-            QLabel *branch_label = new QLabel(branch_edit, i18n("&Branch Tag:"), this);
+            QLabel *branch_label = new QLabel(branch_edit, i18n("&Branch tag:"), this);
             branch_label->setFixedSize(branch_label->sizeHint());
             grid->addWidget(branch_label, 2, 0, AlignLeft | AlignVCenter);
         }
@@ -113,16 +113,16 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
         {
             vendortag_edit = new KLineEdit(this);
             grid->addWidget(vendortag_edit, 3, 1);
-            
+
             QLabel *vendortag_label = new QLabel
-                (vendortag_edit, i18n("&Vendor Tag:"), this);
+                (vendortag_edit, i18n("&Vendor tag:"), this);
             grid->addWidget(vendortag_label, 3, 0, AlignLeft | AlignVCenter);
 
             releasetag_edit = new KLineEdit(this);
             grid->addWidget(releasetag_edit, 4, 1);
-            
+
             QLabel *releasetag_label = new QLabel
-                (releasetag_edit, i18n("&Release Tag:"), this);
+                (releasetag_edit, i18n("&Release tag:"), this);
             grid->addWidget(releasetag_label, 4, 0, AlignLeft | AlignVCenter);
 
             ignore_edit = new KLineEdit(this);
