@@ -16,6 +16,8 @@
 #include <dcopref.h>
 #include <kparts/plugin.h>
 
+#include "entry.h"
+
 
 namespace Cervisia
 {
@@ -23,6 +25,8 @@ namespace Cervisia
 
 class PluginBase : public KParts::Plugin
 {
+    Q_OBJECT
+
 public:
     PluginBase(QObject* parent, const char* name);
     ~PluginBase();
@@ -31,7 +35,10 @@ public:
     virtual QString type() const = 0;
     virtual DCOPRef service() const = 0;
 
-    virtual void syncWithEntries() = 0;
+    virtual void syncWithEntries(const QString& path) = 0;
+
+signals:
+    void updateItem(const Entry& entry);
 };
 
 

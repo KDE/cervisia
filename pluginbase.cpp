@@ -23,3 +23,5 @@ PluginBase::PluginBase(QObject* parent, const char* name)
 PluginBase::~PluginBase()
 {
 }
+
+#include "pluginbase.moc"
