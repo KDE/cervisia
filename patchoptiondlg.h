@@ -46,7 +46,6 @@ private:
     QCheckBox*     m_allSpaceChk;
     QCheckBox*     m_spaceChangeChk;
     QCheckBox*     m_caseChangesChk;
-    QCheckBox*     m_tabExpansionChk;
 };
 
 

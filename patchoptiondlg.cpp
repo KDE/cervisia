@@ -59,8 +59,6 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent, const char* name)
                                      ignoreBtnGroup);
     m_allSpaceChk = new QCheckBox(i18n("Ignore all whitespace"), ignoreBtnGroup);
     m_caseChangesChk = new QCheckBox(i18n("Ignore changes in case"), ignoreBtnGroup);
-    m_tabExpansionChk = new QCheckBox(i18n("Ignore changes due to tab expansion"),
-                                      ignoreBtnGroup);
 }
 
 
@@ -85,9 +83,6 @@ QString PatchOptionDialog::diffOptions() const
     if( m_caseChangesChk->isChecked() )
         options += " -i ";
     
-    if( m_tabExpansionChk->isChecked() )
-        options += " -E ";
-
     return options;
 }
 
