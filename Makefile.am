@@ -42,8 +42,9 @@ rc_DATA = cervisiaui.rc cervisiashellui.rc
 #partdir = $(kde_datadir)/cervisia
 #part_DATA = cervisiaui.rc cervisiashellui.rc
 
-messages:
-	$(XGETTEXT) *.cpp -o $(podir)/po/cervisia.pot
+messages: rc.cpp
+	$(EXTRACTRC) *.rc >> rc.cpp
+	$(XGETTEXT) -C *.cpp *.h -o $(podir)/cervisia.pot
 
 install-data-local:
 	$(mkinstalldirs) $(DESTDIR)/$(kde_icondir)/hicolor/32x32/apps
