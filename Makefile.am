@@ -42,10 +42,10 @@ messages: rc.cpp
 	$(XGETTEXT) -C *.cpp *.h -o $(podir)/cervisia.pot
 
 install-data-local:
-	$(mkinstalldirs) $(DESTDIR)/$(kde_icondir)/hicolor/32x32/apps
-	$(INSTALL_DATA) $(srcdir)/cervisia.png $(DESTDIR)/$(kde_icondir)/hicolor/32x32/apps/cervisia.png
-	$(mkinstalldirs) $(DESTDIR)/$(kde_icondir)/hicolor/16x16/apps
-	$(INSTALL_DATA) $(srcdir)/cervisia-small.png $(DESTDIR)/$(kde_icondir)/hicolor/16x16/apps/cervisia.png
+	$(mkinstalldirs) $(DESTDIR)/$(kde_icondir)/crystalsvg/32x32/apps
+	$(INSTALL_DATA) $(srcdir)/cervisia.png $(DESTDIR)/$(kde_icondir)/crystalsvg/32x32/apps/cervisia.png
+	$(mkinstalldirs) $(DESTDIR)/$(kde_icondir)/crystalsvg/16x16/apps
+	$(INSTALL_DATA) $(srcdir)/cervisia-small.png $(DESTDIR)/$(kde_icondir)/crystalsvg/16x16/apps/cervisia.png
 
 srcdoc:
 	$(kde_bindir)/kdoc -a -p -d classdocs -n 'Cervisia' *.h -lqt -lkdecore -lkdeui -lkparts
