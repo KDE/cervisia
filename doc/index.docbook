@@ -212,8 +212,7 @@ administrator.</para>
  <guibutton>OK</guibutton>, the following &CVS; command is used:
  </para>
 
-<screen><command>cvs</command> -d <co
-id="co-repository"/><replaceable>repository</replaceable> import -m "" <co id="co-module"/><replaceable>module</replaceable> <co id="co-vendortag"/><replaceable>vendortag</replaceable> <co id="co-releasetag"/><replaceable>releasetag</replaceable></screen>
+<screen><command>cvs</command> -d <co id="co-repository"></co><replaceable>repository</replaceable> import -m "" <co id="co-module"></co><replaceable>module</replaceable> <co id="co-vendortag"></co><replaceable>vendortag</replaceable> <co id="co-releasetag"></co><replaceable>releasetag</replaceable></screen>
 
 <calloutlist>
 <callout arearefs="co-repository">
@@ -627,7 +626,7 @@ release.</para>
  for binary
          files. For example, merging binary files normally does not make
          sense. Furthermore, by default &CVS; performs keyword expansion
-         string <literal>$Revision: 1.2 $</literal>) when a file is commited. In binary
+         string <literal>$Revision: 1.3 $</literal>) when a file is commited. In binary
          files, such replacements may corrupt the file and make it completely
          unusable. In order to switch this behaviour off, you should commit binary
          files (or other files, like Postscript) with a command line
