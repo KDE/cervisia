@@ -223,7 +223,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Remove from Repository..."), Key_Minus,
+    action = new KAction( i18n("&Remove From Repository..."), Key_Minus,
                           this, SLOT( slotRemove() ),
                           actionCollection(), "file_remove" );
     hint = i18n("Removes (cvs remove) the selected files from the repository");
@@ -476,7 +476,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KToggleAction( i18n("C&ommit And Remove Recursively"), 0,
+    action = new KToggleAction( i18n("C&ommit and Remove Recursively"), 0,
                                 this, SLOT(slotCommitRecursive()),
                                 actionCollection(), "settings_commit_recursively" );
     hint = i18n("Determines whether commits and removes are recursive");
