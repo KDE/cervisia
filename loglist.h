@@ -30,15 +30,12 @@ class LogListView : public ListView
     Q_OBJECT
     
 public:
-    explicit LogListView( QWidget *parent=0, const char *name=0 );
+    explicit LogListView( KConfig& cfg, QWidget *parent=0, const char *name=0 );
     virtual ~LogListView();
     
     void addRevision(const QString &rev, const QString &author, const QDateTime &date,
                      const QString &comment, const QString &tagcomment);
     void setSelectedPair(const QString &selectionA, const QString &selectionB);
-
-    static void loadOptions(KConfig *config);
-    static void saveOptions(KConfig *config);
 
 signals:
     void revisionClicked(QString rev, bool rmb);
@@ -54,7 +51,7 @@ private slots:
     void hideLabel();
 
 private:
-
+    KConfig& partConfig;
     TipLabel *currentLabel;
     LogListViewItem *currentTipItem;
 };

@@ -58,7 +58,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     connect( tree, SIGNAL(revisionClicked(QString,bool)),
 	     this, SLOT(revisionSelected(QString,bool)) );
 
-    list = new LogListView(mainWidget);
+    list = new LogListView(partConfig, mainWidget);
     connect( list, SIGNAL(revisionClicked(QString,bool)),
 	     this, SLOT(revisionSelected(QString,bool)) );
 

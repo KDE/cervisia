@@ -23,7 +23,6 @@
 #include <kglobal.h>
 #include <klocale.h>
 
-#include "cervisiapart.h"
 #include "tiplabel.h"
 #include "misc.h"
 
@@ -157,11 +156,12 @@ int LogListViewItem::compare(QListViewItem* i, int col, bool ascending) const
 }
 
 
-#define COLS 6
+static const unsigned COLS = 6;
 
 
-LogListView::LogListView(QWidget *parent, const char *name)
+LogListView::LogListView(KConfig& cfg, QWidget *parent, const char *name)
     : ListView(parent, name)
+    , partConfig(cfg)
 {
     setAllColumnsShowFocus(true);
     setShowToolTips(false);
@@ -184,8 +184,7 @@ LogListView::LogListView(QWidget *parent, const char *name)
     for (int i = 0; i < columns(); ++i)
         setColumnWidthMode(i, Manual);
 
-    KConfig* config = CervisiaPart::config();
-    restoreLayout(config, QString::fromLatin1("LogList view"));
+    restoreLayout(&partConfig, QString::fromLatin1("LogList view"));
 }
 
 
@@ -193,8 +192,7 @@ LogListView::~LogListView()
 {
     delete currentLabel;
 
-    KConfig* config = CervisiaPart::config();
-    saveLayout(config, QString::fromLatin1("LogList view"));
+    saveLayout(&partConfig, QString::fromLatin1("LogList view"));
 }
 
 
