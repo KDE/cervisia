@@ -21,30 +21,31 @@
 #include "cvsjob.h"
 
 #include <qstring.h>
+#include <qtextstream.h>
 #include <kprocess.h>
 
 
 struct CvsJob::Private
 {
     KProcess*   childproc;
-    QString     cvsCommand;
+    QString     server;
     QString     rsh;
     QString     directory;
     bool        isRunning;
 };
 
 
-CvsJob::CvsJob(unsigned jobId, const QString& cvsCommand, const QString& rsh,
+CvsJob::CvsJob(unsigned jobId, const QString& rsh, const QString& server,
                const QString& directory)
     : QObject()
     , DCOPObject()
     , d(new Private)
 {
     // initialize private data
-    d->cvsCommand = cvsCommand;
-    d->rsh        = rsh;
-    d->directory  = directory;
-    d->isRunning  = false;
+    d->server    = server;
+    d->rsh       = rsh;
+    d->directory = directory;
+    d->isRunning = false;
 
     QString objId("CvsJob" + QString::number(jobId));
     setObjId(objId.local8Bit());
@@ -61,15 +62,21 @@ CvsJob::~CvsJob()
 }
 
 
-void CvsJob::setCvsCommand(const QString& cvsCommand)
+void CvsJob::clearCvsCommand()
 {
-    d->cvsCommand = cvsCommand;
+    d->childproc->clearArguments();
 }
 
 
 void CvsJob::setRSH(const QString& rsh)
 {
     d->rsh = rsh;
+}
+
+
+void CvsJob::setServer(const QString& server)
+{
+    d->server = server;
 }
 
 
@@ -85,9 +92,44 @@ bool CvsJob::isRunning() const
 }
 
 
+CvsJob& CvsJob::operator<<(const QString& arg)
+{
+    *d->childproc << arg;
+    return *this;
+}
+
+
+CvsJob& CvsJob::operator<<(const char* arg)
+{
+    *d->childproc << arg;
+    return *this;
+}
+
+
+CvsJob& CvsJob::operator<<(const QCString& arg)
+{
+    *d->childproc << arg;
+    return *this;
+}
+
+
+CvsJob& CvsJob::operator<<(const QStringList& args)
+{
+    *d->childproc << args;
+    return *this;
+}
+
+
 QString CvsJob::cvsCommand() const
 {
-    return d->cvsCommand;
+    QString command;
+    QTextOStream stream(&command);
+
+    QValueList<QCString> args = d->childproc->args();
+    qCopy(args.begin(), args.end(),
+            QTextOStreamIterator<QCString>(stream, " "));
+
+    return command;
 }
 
 
@@ -95,12 +137,13 @@ bool CvsJob::execute()
 {
     if( !d->rsh.isEmpty() )
         d->childproc->setEnvironment("CVS_RSH", d->rsh);
+            
+    if( !d->server.isEmpty() )
+        d->childproc->setEnvironment("CVS_SERVER", d->server);
 
     if( !d->directory.isEmpty() )
         d->childproc->setWorkingDirectory(d->directory);
         
-    *d->childproc << d->cvsCommand;
-
     connect(d->childproc, SIGNAL(processExited(KProcess*)),
         SLOT(slotProcessExited()));
     connect(d->childproc, SIGNAL(receivedStdout(KProcess*, char*, int)),

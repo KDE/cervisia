@@ -34,13 +34,20 @@ class CvsJob : public QObject, public DCOPObject
     K_DCOP
 
 public:
-    CvsJob(unsigned jobId, const QString& cvsCommand, const QString& rsh = QString::null,
+    CvsJob(unsigned jobId, const QString& rsh = QString::null,
+           const QString& server = QString::null, 
            const QString& directory = QString::null);
     ~CvsJob();
 
-    void setCvsCommand(const QString& cvsCommand);
+    void clearCvsCommand();
     void setRSH(const QString& rsh);
+    void setServer(const QString& server);
     void setDirectory(const QString& directory);
+    
+    CvsJob& operator<<(const QString& arg);
+    CvsJob& operator<<(const char* arg);
+    CvsJob& operator<<(const QCString& arg);
+    CvsJob& operator<<(const QStringList& args);
 
 k_dcop:
     bool execute();
@@ -72,4 +79,3 @@ private:
 
 
 #endif
-
