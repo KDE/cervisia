@@ -5,21 +5,21 @@ The cvs DCOP service consists of the following three parts:
 
 1. CvsService - The main interface to the functionality of the cvs command line
                 client. There is one method for each cvs command, e.g. add,
-		checkout, commit, etc... The methods assemble the command line
-		arguments, create a CvsJob and return a DCOPRef object for it
-		to the caller. There is one instance of this service for each
-		application instance.
+                checkout, commit, etc... The methods assemble the command line
+                arguments, create a CvsJob and return a DCOPRef object for it
+                to the caller. There is one instance of this service for each
+                application instance.
 
 2. Repository - This DCOPObject manages the configuration data of the current
                 cvs repository. The data is automatically updated when other
-		service instances change it.
+                service instances change it.
 
 3. CvsJob     - This class represents a cvs job. You can execute and cancel it,
                 and you can retrieve the output of the cvs client by either
-		connecting to the proper DCOP signals or by using the output()
-		method. There are two types of jobs. First the non-concurrent
-		job which has to run alone, like cvs update or import. Second
-		the jobs which can run concurrently like cvs log or annotate.
+                connecting to the proper DCOP signals or by using the output()
+                method. There are two types of jobs. First the non-concurrent
+                job which has to run alone, like cvs update or import. Second
+                the jobs which can run concurrently like cvs log or annotate.
 
 USAGE
 -----
@@ -75,3 +75,34 @@ How-to use this service in a shell script:
 
     # stop DCOP service
     dcop $APP CvsService quit
+
+
+How-to use this service in a javascript:
+
+    #!/usr/bin/env kjscmd
+
+    var client = new DCOPClient(this);
+    if ( client.attach() )
+    {
+        // start DCOP service
+        var appID = client.dcopStart("cvsservice");
+
+        // set directory of working copy
+        client.send(appID, "CvsRepository", "setWorkingCopy(QString)", "/home/user/kde/kdesdk/cervisia");
+
+        // call "cvs log" for cervisiapart.h
+        var job = client.call(appID, "CvsService", "log(QString)", "cervisiapart.h");
+
+        // execute the cvs command
+        job.call("execute()");
+
+        // wait for job to finish
+        while( job.call("isRunning()") );
+
+        // print the output on stdout
+        var output = job.call("output()");
+        println(output);
+
+        // stop DCOP service
+        client.send(appID, "CvsService", "quit()");
+    }
