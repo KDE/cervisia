@@ -17,6 +17,7 @@
 #include <qpainter.h>
 #include <qscrollbar.h>
 #include <qpixmap.h>
+#include <qregexp.h>
 #include <qstyle.h>
 
 #include <kapplication.h>
@@ -68,6 +69,9 @@ DiffView::DiffView( bool withlinenos, bool withmarker,
     setCellHeight(fm.lineSpacing());
     setCellWidth(0);
     textwidth = 0;
+
+    config->setGroup("General");
+    m_tabWidth = config->readUnsignedNumEntry("TabWidth", 8);
 
     items.setAutoDelete(true);
     linenos = withlinenos;
@@ -156,8 +160,22 @@ void DiffView::addLine(const QString &line, DiffType type, int no)
 {
     QFont f(font());
     f.setBold(true);
-    QFontMetrics fm(f);
-    textwidth = QMAX(textwidth, fm.width(line));
+    QFontMetrics fmbold(f);
+    QFontMetrics fm(font());
+
+
+    // calculate textwidth based on 'line' where tabs are expanded
+    //
+    // *Please note*
+    // For some fonts, e.g. "Clean", is fm.maxWidth() greater than
+    // fmbold.maxWidth().
+    QString copy(line);
+    int numTabs = copy.contains('\t', false);
+    copy.replace( QRegExp("\t"), "");
+
+    uint tabSize   = m_tabWidth * QMAX(fm.maxWidth(), fmbold.maxWidth());
+    uint copyWidth = QMAX(fm.width(copy), fmbold.width(copy));
+    textwidth = QMAX(textwidth, copyWidth + numTabs * tabSize);
 
     DiffViewItem *item = new DiffViewItem;
     item->line = line;
@@ -281,11 +299,8 @@ QSize DiffView::sizeHint() const
 
 void DiffView::paintCell(QPainter *p, int row, int col)
 {
-    KConfig *config = CervisiaPart::config();
-    config->setGroup("General");
-    uint tabWidth = config->readUnsignedNumEntry("TabWidth", 8);
     QFontMetrics fm(font());
-    p->setTabStops(tabWidth * fm.maxWidth());
+    p->setTabStops(m_tabWidth * fm.maxWidth());
 
     DiffViewItem *item = items.at(row);
 

@@ -1,3 +1,8 @@
+2002-12-12  Christian Loose <christian.loose@hamburg.de>
+
+	* Fix the too small scroll area of diff view when
+	  tabs in source code
+
 2002-12-05  Christian Loose <christian.loose@hamburg.de>
 
 	* Don't add a new line to the end of changelog
