@@ -46,7 +46,7 @@ RepositorySettingsDialog::RepositorySettingsDialog(QWidget* parent,  const char*
     Layout1->setMargin(0);
 
     // set up a group for all the radio buttons
-    groupCompression = new QHButtonGroup(i18n("Compression Level:"), this);
+    groupCompression = new QHButtonGroup(i18n("Compression Level"), this);
     groupCompression->insert(radioCompressionDefault = new QRadioButton(i18n("Default"), groupCompression), -2);		
     groupCompression->insert(radioCompression0 = new QRadioButton("0", groupCompression), 0);		
     groupCompression->insert(radioCompression1 = new QRadioButton("1", groupCompression), 1);
