@@ -356,30 +356,21 @@ void DiffDialog::callExternalDiff(const QString& extdiff, CvsService_stub* servi
                                   const QString& fileName, const QString &revA,
                                   const QString &revB)
 {
-    // FIXME CL hardcoded call to cvs command-line client!!!
-    QString cmdline = "cvs update -p ";
     QString extcmdline = extdiff;
     extcmdline += " ";
 
+    DCOPRef job;
     if (!revA.isEmpty() && !revB.isEmpty())
     {
         // We're comparing two revisions
         QString revAFilename = tempFileName(QString("-")+revA);
         QString revBFilename = tempFileName(QString("-")+revB);
 
-        cmdline += " -r ";
-        cmdline += KProcess::quote(revA);
-        cmdline += " ";
-        cmdline += KProcess::quote(fileName);
-        cmdline += " > ";
-        cmdline += KProcess::quote(revAFilename);
-        cmdline += " ; cvs update -p ";
-        cmdline += " -r ";
-        cmdline += KProcess::quote(revB);
-        cmdline += " ";
-        cmdline += KProcess::quote(fileName);
-        cmdline += " > ";
-        cmdline += KProcess::quote(revBFilename);
+        // download the files for revision A and B
+        job = service->downloadRevision(fileName, revA, revAFilename,
+                                                revB, revBFilename);
+        if( !service->ok() )
+            return;
 
         extcmdline += KProcess::quote(revAFilename);
         extcmdline += " ";
@@ -389,35 +380,25 @@ void DiffDialog::callExternalDiff(const QString& extdiff, CvsService_stub* servi
     {
         // We're comparing to a file, and perhaps one revision
         QString revAFilename = tempFileName(revA);
-        if (!revA.isEmpty())
-        {
-            cmdline += " -r ";
-            cmdline += KProcess::quote(revA);
-        }
-        cmdline += " ";
-        cmdline += KProcess::quote(fileName);
-        cmdline += " > ";
-        cmdline += KProcess::quote(revAFilename);
+        job = service->downloadRevision(fileName, revA, revAFilename);
+        if( !service->ok() )
+            return;
 
         extcmdline += KProcess::quote(revAFilename);
         extcmdline += " ";
         extcmdline += KProcess::quote(QFileInfo(fileName).absFilePath());
     }
 
-    // FIXME: We shouldn't need to use CvsProgressDialog here
-    Repository_stub cvsRepository(service->app(), "CvsRepository");
-    QString sandbox    = cvsRepository.workingCopy();
-    QString repository = cvsRepository.location();
-
-    CvsProgressDialog l("Diff", this);
-    if (l.execCommand(sandbox, repository, cmdline, "diff", &partConfig))
+    ProgressDialog dlg(this, "Diff", job, "diff");
+    if( dlg.execute() )
     {
+        // call external diff application
+        // TODO CL maybe use system()?
         KProcess proc;
         proc.setUseShell(true, "/bin/sh");
         proc << extcmdline;
         proc.start(KProcess::DontCare);
     }
-
 }
 
 
