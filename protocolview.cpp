@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
- *  Copyright (c) 2003 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2003-2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -21,7 +21,6 @@
 #include <kconfig.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kprocess.h>
 
 #include "cervisiapart.h"
 #include "cvsjob_stub.h"
@@ -29,7 +28,6 @@
 
 ProtocolView::ProtocolView(const QCString& appId, QWidget *parent, const char *name)
     : QTextEdit(parent, name)
-    , childproc(0)
     , job(0)
     , m_isUpdateJob(false)
 {
@@ -66,48 +64,6 @@ ProtocolView::ProtocolView(const QCString& appId, QWidget *parent, const char *n
 ProtocolView::~ProtocolView()
 {
     delete job;
-    delete childproc;
-}
-
-
-bool ProtocolView::startJob(const QString &sandbox, const QString &repository,
-                            const QString &cmdline)
-{
-    if (childproc)
-        {
-            KMessageBox::sorry(topLevelWidget(),
-                               i18n("There is already a job running"),
-                               "Cervisia");
-            return false;
-        }
-
-    buf += cmdline;
-    buf += '\n';
-    processOutput();
-
-    KConfig *config = CervisiaPart::config();
-    config->setGroup("Repository-" + repository);
-    QString rsh = config->readPathEntry("rsh");
-
-    childproc = new KShellProcess("/bin/sh");
-    if (!sandbox.isEmpty())
-        QDir::setCurrent(sandbox);
-    if (!rsh.isEmpty())
-        *childproc << QString("export CVS_RSH=" + KShellProcess::quote(rsh) + "; ");
-    *childproc << cmdline;
-
-    connect( childproc, SIGNAL(processExited(KProcess *)),
-	     SLOT(childExited()) );
-    connect( childproc, SIGNAL(receivedStdout(KProcess *, char *, int)),
-	     SLOT(receivedOutput(KProcess *, char *, int)) );
-    connect( childproc, SIGNAL(receivedStderr(KProcess *, char *, int)),
-	     SLOT(receivedOutput(KProcess *, char *, int)) );
-
-    disconnect( SIGNAL(receivedLine(QString)) );
-    disconnect( SIGNAL(jobFinished(bool, int)) );
-
-    return childproc->start(KProcess::NotifyOnExit,
-                            KProcess::Communication(KProcess::Stdout|KProcess::Stderr));
 }
 
 
@@ -139,45 +95,6 @@ QPopupMenu* ProtocolView::createPopupMenu(const QPoint &pos)
         menu->setItemEnabled(id, false);
 
     return menu;
-}
-
-
-void ProtocolView::cancelJob()
-{
-    if( childproc )
-        childproc->kill();
-    else
-        job->cancel();
-}
-
-
-void ProtocolView::receivedOutput(KProcess *, char *buffer, int buflen)
-{
-    buf += QString::fromLocal8Bit(buffer, buflen);
-    processOutput();
-}
-
-
-void ProtocolView::childExited()
-{
-    QString s;
-
-    if (childproc->normalExit())
-        {
-            if (childproc->exitStatus())
-                s = i18n("[Exited with status %1]\n").arg(childproc->exitStatus());
-            else
-                s = i18n("[Finished]\n");
-        }
-    else
-        s = i18n("[Aborted]\n");
-
-    buf += '\n';
-    buf += s;
-    processOutput();
-    emit jobFinished(childproc->normalExit(), childproc->exitStatus());
-    delete childproc;
-    childproc = 0;
 }
 
 

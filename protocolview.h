@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2003 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2003-2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -21,8 +21,6 @@
 
 class QPoint;
 class QPopupMenu;
-class KProcess;
-class KShellProcess;
 class CvsJob_stub;
 
 
@@ -35,7 +33,6 @@ public:
     explicit ProtocolView(const QCString& appId, QWidget *parent=0, const char *name=0);
     ~ProtocolView();
 
-    bool startJob(const QString &sandbox, const QString &repository, const QString &cmdline);
     bool startJob(bool isUpdateJob = false);
 
 protected:
@@ -49,16 +46,10 @@ signals:
     void receivedLine(QString line);
     void jobFinished(bool normalExit, int exitStatus);
 
-private slots:
-    void receivedOutput(KProcess *proc, char *buffer, int buflen);
-    void childExited();
-    void cancelJob();
-
 private:
     void processOutput();
     void appendLine(const QString &line);
 
-    KShellProcess *childproc;
     QString buf;
 
     QColor conflictColor;
