@@ -16,7 +16,7 @@
 #include "logdlg.h"
 
 #include <qcombobox.h>
-#include <qdir.h>
+#include <qfile.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qtabwidget.h>
@@ -34,10 +34,8 @@
 #include <kurl.h>
 
 #include "cvsservice_stub.h"
-#include "repository_stub.h"
 #include "annotatedlg.h"
 #include "annotatectl.h"
-#include "cvsprogressdlg.h"
 #include "diffdlg.h"
 #include "loginfo.h"
 #include "loglist.h"
@@ -400,29 +398,19 @@ void LogDialog::slotOk()
     const QString suffix("-" + revision + "-" + filename);
     KTempFile file(QString::null, suffix);
 
-    // create a command line to retrieve the file revision from
-    // cvs and save it into the temporary file
-    // FIXME CL hardcoded call to cvs command-line client!!!
-    QString cmdline = "cvs update -p -r ";
-    cmdline += KProcess::quote(revision);
-    cmdline += " ";
-    cmdline += KProcess::quote(filename);
-    cmdline += " > ";
-    cmdline += file.name();
+    // retrieve the file with the selected revision from cvs
+    // and save the content into the temporary file
+    DCOPRef job = cvsService->downloadRevision(filename, revision, file.name());
+    if( !cvsService->ok() )
+        return;
 
-    // FIXME: We shouldn't need to use CvsProgressDialog here
-    Repository_stub cvsRepository(cvsService->app(), "CvsRepository");
-    QString sandbox    = cvsRepository.workingCopy();
-    QString repository = cvsRepository.location();
-
-    CvsProgressDialog dlg("View", this);
-    if( dlg.execCommand(sandbox, repository, cmdline, "view", &partConfig) )
+    ProgressDialog dlg(this, "View", job, "view", i18n("View File"));
+    if( dlg.execute() )
     {
         // make file read-only
         chmod(QFile::encodeName(file.name()), 0400);
 
         // open file in preferred editor
-        QDir dir(sandbox);
         KURL url;
         url.setPath(file.name());
         (void) new KRun(url, 0, true, false);
