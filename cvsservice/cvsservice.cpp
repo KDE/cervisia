@@ -440,6 +440,34 @@ DCOPRef CvsService::diff(const QString& fileName, const QString& revA,
 }
 
 
+DCOPRef CvsService::diff(const QString& fileName, const QString& revA,
+                         const QString& revB, const QString& diffOptions,
+                         const QString& format)
+{
+    if( !d->hasWorkingCopy() )
+        return DCOPRef();
+
+    // create a cvs job
+    CvsJob* job = d->createCvsJob();
+
+    // assemble the command line
+    // cvs diff [DIFFOPTIONS] [FORMAT] [-r REVA] {-r REVB] [FILE]
+    *job << d->repository->cvsClient() << "diff" << diffOptions
+         << format;
+
+    if( !revA.isEmpty() )
+        *job << "-r" << KProcess::quote(revA);
+
+    if( !revB.isEmpty() )
+        *job << "-r" << KProcess::quote(revB);
+
+    *job << KProcess::quote(fileName);
+
+    // return a DCOP reference to the cvs job
+    return DCOPRef(d->appId, job->objId());
+}
+
+
 DCOPRef CvsService::edit(const QStringList& files)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
