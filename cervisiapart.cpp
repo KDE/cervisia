@@ -647,11 +647,9 @@ void CervisiaPart::openFiles(const QStringList &filenames)
                     if (!QFileInfo(*it).isWritable())
                         {
                             doit = true;
-                            break;
+                            cmdline += " ";
+                            cmdline += KShellProcess::quote(*it);
                         }
-
-                    cmdline += " ";
-                    cmdline += KShellProcess::quote(*it);
                 }
 
             if (doit)
