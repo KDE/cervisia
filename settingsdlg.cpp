@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2002-2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -108,37 +108,6 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
     //
     addLookAndFeelPage();
 
-#if 0
-    QGridLayout *editorlayout = new QGridLayout(editorgroup, 4, 2, 10, 6);
-
-    editoredit = new KLineEdit(editorgroup);
-    editorlayout->addWidget(editoredit, 0, 1);
-
-    QLabel *editorlabel = new QLabel(editoredit, i18n("&Editor:"), editorgroup);
-    editorlayout->addWidget(editorlabel, 0, 0);
-
-    usedcopbox = new QCheckBox(i18n("Use &DCOP"), editorgroup);
-    editorlayout->addMultiCellWidget(usedcopbox, 1, 1, 0, 1);
-
-    clientedit = new KLineEdit(editorgroup);
-    editorlayout->addWidget(clientedit, 2, 1);
-
-    QLabel *clientlabel = new QLabel(clientedit, i18n("&Client:"), editorgroup);
-    editorlayout->addWidget(clientlabel, 2, 0);
-
-    objectedit = new KLineEdit(editorgroup);
-    editorlayout->addWidget(objectedit, 3, 1);
-
-    QLabel *objectlabel = new QLabel(objectedit, i18n("&Object:"), editorgroup);
-    editorlayout->addWidget(objectlabel, 3, 0);
-
-    connect(usedcopbox, SIGNAL(toggled(bool)),
-            clientedit, SLOT(setEnabled(bool)));
-    connect(usedcopbox, SIGNAL(toggled(bool)),
-            objectedit, SLOT(setEnabled(bool)));
-    editorlayout->activate();
-#endif
-
     readSettings();
 
     setHelp("customization", "cervisia");
@@ -223,11 +192,7 @@ void SettingsDialog::writeSettings()
     config->writeEntry("DiffOptions", diffoptedit->text());
     config->writeEntry("StatusForRemoteRepos", remotestatusbox->isChecked());
     config->writeEntry("StatusForLocalRepos", localstatusbox->isChecked());
-#if 0
-    config->writeEntry("UseDCOP", usedcopbox->isChecked());
-    config->writeEntry("DCOPClient", clientedit->text());
-    config->writeEntry("DCOPObject", objectedit->text());
-#endif
+    
     config->setGroup("LookAndFeel");
     config->writeEntry("ProtocolFont", m_protocolFontBox->font());
     config->writeEntry("AnnotateFont", m_annotateFontBox->font());

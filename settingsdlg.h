@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2002-2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -75,11 +75,6 @@ private:
     KURLRequester *extdiffedit;
     QCheckBox *remotestatusbox;
     QCheckBox *localstatusbox;
-#if 0
-    QCheckBox *usedcopbox;
-    KLineEdit *clientedit;
-    KLineEdit *objectedit;
-#endif
     FontButton*   m_protocolFontBox;
     FontButton*   m_annotateFontBox;
     FontButton*   m_diffFontBox;
