@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui name="cervisiapart" version="10">
+<kpartgui name="cervisiapart" version="11">
 <MenuBar>
   <Menu name="file"><text>&amp;File</text>
     <Action name="file_open"/>
@@ -104,6 +104,8 @@
   <Separator/>
   <Action name="file_add"/>
   <Action name="file_remove"/>
+  <Separator/>
+  <Action name="file_properties"/>
 </Menu>
 <State name="has_sandbox">
   <Enable>
@@ -121,6 +123,7 @@
     <Action name="view_diff_base"/>
     <Action name="view_diff_head"/>
     <Action name="view_last_change"/>
+    <Action name="file_properties"/>
   </Enable>
 </State>
 <State name="item_selected">

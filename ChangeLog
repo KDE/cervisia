@@ -1,28 +1,33 @@
+2004-08-30  Christian Loose  <christian.loose@kdemail.net>
+
+	* Added new item 'Properties' to context menu. It
+	  shows the properties dialog for the selected file.
+
 2004-08-28  Christian Loose  <christian.loose@kdemail.net>
 
- * Implemented wish #74751:
-   Added support for non-recursive checkouts to the
-   checkout dialog. Patch by Sergio Visinoni.
+	* Implemented wish #74751:
+	  Added support for non-recursive checkouts to the
+	  checkout dialog. Patch by Sergio Visinoni.
 
 2004-08-23  Christian Loose  <christian.loose@kdemail.net>
 
- * Implemented bug #74862:
-   In the checkout dialog, it's now possible to fetch 
-   the existing branch/tag names for a module from the 
-   cvs server.
- * Fix bug #87830: 
-   Always read the cvs client option from the configuration
-   file even when there is no sandbox open.
+	* Implemented bug #74862:
+	  In the checkout dialog, it's now possible to fetch 
+	  the existing branch/tag names for a module from the 
+	  cvs server.
+	* Fix bug #87830: 
+	  Always read the cvs client option from the configuration
+	  file even when there is no sandbox open.
 
 2004-07-13  André Wöbbeking  <Woebbeking@web.de>
 
- * Implemented FR #67805, #67806, #67807, #67809:
-   Hooray, icons for Cervisia's (main) actions.
-   Thanks to Marco Martin for the great artwork!
+	* Implemented FR #67805, #67806, #67807, #67809:
+	  Hooray, icons for Cervisia's (main) actions.
+	  Thanks to Marco Martin for the great artwork!
 
 2004-07-11  Christian Loose  <christian.loose@kdemail.net>
 
- * Fix bug #83239:
+	* Fix bug #83239:
 	  Fixed retrieving author from cvs log output.
 
 2004-07-09  Christian Loose  <christian.loose@kdemail.net>

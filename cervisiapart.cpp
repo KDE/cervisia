@@ -26,6 +26,7 @@
 #include <kinstance.h>
 #include <klocale.h>
 #include <kprocess.h>
+#include <kpropertiesdialog.h>
 #include <kstatusbar.h>
 #include <kstdaction.h>
 #include <kxmlguifactory.h>
@@ -297,6 +298,11 @@ void CervisiaPart::setupActions()
     hint = i18n("Reverts (cvs update -C) the selected files (only cvs 1.11)");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
+
+    // context menu only
+    action = new KAction( i18n("&Properties"), 0,
+                          this, SLOT( slotFileProperties() ),
+                          actionCollection(), "file_properties" );
 
     //
     // View Menu
@@ -965,6 +971,24 @@ void CervisiaPart::slotAddBinary()
 void CervisiaPart::slotRemove()
 {
     addOrRemove(AddRemoveDialog::Remove);
+}
+
+
+void CervisiaPart::slotFileProperties()
+{
+    QString filename;
+    update->getSingleSelection(&filename);
+    if( filename.isEmpty() )
+        return;
+
+    // Create URL from selected filename
+    QDir dir(sandbox);
+
+    KURL u;
+    u.setPath(dir.absFilePath(filename));
+
+    // show file properties dialog
+    (void)new KPropertiesDialog(u);
 }
 
 

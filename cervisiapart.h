@@ -98,6 +98,7 @@ public slots:
     void slotAddBinary();
 
     void slotRemove();
+    void slotFileProperties();
     void slotRevert();
     void slotBrowseLog();
     //    void slotBrowseMultiLog();
