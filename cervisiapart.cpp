@@ -1284,7 +1284,7 @@ void CervisiaPart::createOrDeleteTag(TagDialog::ActionType action)
             cmdline += "-b ";
         if (l->forceTag())
             cmdline += "-F ";
-        cmdline += l->tag();
+        cmdline += KProcess::quote(l->tag());
         cmdline += " ";
         cmdline += joinLine(list);
 
@@ -1556,12 +1556,12 @@ void CervisiaPart::parseStatus(QString pathname, QStrList list)
     QString line = joinLine(list);
 
     command = "cd ";
-    command += pathname;
+    command += KProcess::quote(pathname);
     command += " && " + cvsClient(repository) + " status -l ";
     command += line;
     //command += " 2>&1";
 
-    FILE *f = popen(command, "r");
+    FILE *f = popen(QFile::encodeName(command), "r");
     if (!f)
         return;
 
