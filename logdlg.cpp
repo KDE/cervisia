@@ -27,6 +27,7 @@
 #include <kconfig.h>
 #include <kdebug.h>
 #include <kfinddialog.h>
+#include <kglobalsettings.h>
 #include <kiconloader.h>
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -173,7 +174,12 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     connect( this, SIGNAL(user3Clicked()),
              this, SLOT(findClicked()) );
 
-    actionButton(Ok)->setIconSet(::SmallIcon(QString::fromLatin1("fileopen")));
+#if KDE_IS_VERSION(3,1,90)
+    if( KGlobalSettings::showIconsOnPushButtons() )
+      actionButton(Ok)->setIconSet(SmallIcon(QString::fromLatin1("fileopen")));
+#else
+    actionButton(Ok)->setIconSet(SmallIcon(QString::fromLatin1("fileopen")));
+#endif
     setButtonText(Ok, i18n("to view something", "&View"));
     setButtonTip(Ok, QString::null);
     setButtonWhatsThis(Ok, QString::null);
