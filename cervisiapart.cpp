@@ -244,7 +244,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Remove From Repository"), Key_Minus,
+    action = new KAction( i18n("&Remove From Repository..."), Key_Minus,
                           this, SLOT( slotRemove() ),
                           actionCollection(), "file_remove" );
     hint = i18n("Removes (cvs remove) the selected files from the repository");
