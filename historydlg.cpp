@@ -15,12 +15,14 @@
 #include "historydlg.h"
 
 #include <qcheckbox.h>
+#include <qdatetime.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
 #include <qregexp.h>
 #include <kconfig.h>
 #include <klineedit.h>
 #include <klocale.h>
+#include <krfcdate.h>
 
 #include "cvsprogressdlg.h"
 #include "listview.h"
@@ -30,11 +32,16 @@
 class HistoryItem : public QListViewItem
 {
 public:
-    HistoryItem(QListView *parent, QString idx)
-        : QListViewItem(parent), index(idx)
+
+    enum { Date, Event, Author, Revision, File, Path };
+
+    HistoryItem(QListView *parent, QDateTime const& date)
+        : QListViewItem(parent), m_date(date)
     {}
 
-    virtual QString key(int col, bool) const;
+    virtual int compare(QListViewItem* i, int col, bool) const;
+
+    virtual QString text(int col) const;
 
     bool isCommit();
     bool isCheckout();
@@ -42,13 +49,42 @@ public:
     bool isOther();
 
 private:
-    QString index;
+
+    QDateTime const m_date;
 };
 
 
-QString HistoryItem::key(int col, bool) const
+int HistoryItem::compare(QListViewItem* i, int col, bool ascending) const
 {
-    return (col == 0)? index : text(col);
+    HistoryItem const* pItem = static_cast<HistoryItem*>(i);
+
+    int iResult;
+    switch (col)
+    {
+    case Date:
+        iResult = (m_date < pItem->m_date) ? -1 : ((pItem->m_date < m_date) ? 1 : 0);
+        break;
+    default:
+        iResult = QListViewItem::compare(i, col, ascending);
+    }
+
+    return iResult;
+}
+
+
+QString HistoryItem::text(int col) const
+{
+    QString sText;
+    switch (col)
+    {
+    case Date:
+        sText = KGlobal::locale()->formatDateTime(m_date);
+        break;
+    default:
+        sText = QListViewItem::text(col);
+    }
+
+    return sText;
 }
 
 
@@ -93,14 +129,14 @@ HistoryDialog::HistoryDialog(QWidget *parent, const char *name)
     listview->setSelectionMode(QListView::NoSelection);
     listview->setAllColumnsShowFocus(true);
     listview->setShowSortIndicator(true);
-    listview->setSorting(0, false); 
+    listview->setSorting(HistoryItem::Date, false);
     listview->addColumn(i18n("Date"));
     listview->addColumn(i18n("Event"));
     listview->addColumn(i18n("Author"));
     listview->addColumn(i18n("Revision"));
     listview->addColumn(i18n("File"));
     listview->addColumn(i18n("Repo path"));
-    listview->setPreferredColumn(5);
+    listview->setPreferredColumn(HistoryItem::Path);
     listview->setFocus();
     layout->addWidget(listview, 1);
 
@@ -230,15 +266,15 @@ void HistoryDialog::choiceChanged()
                 continue;
             if ( onlyuser_box->isChecked() &&
                  !QString(user_edit->text()).isEmpty() &&
-                 user_edit->text() != item->text(2) )
+                 user_edit->text() != item->text(HistoryItem::Author) )
                 continue;
             if ( onlyfilenames_box->isChecked() &&
                  !QString(filename_edit->text()).isEmpty() &&
-                 QRegExp(filename_edit->text(), true, true).match(item->text(4)) != 0 )
+                 QRegExp(filename_edit->text(), true, true).match(item->text(HistoryItem::File)) != 0 )
                 continue;
             if ( onlydirnames_box->isChecked() &&
                  !QString(dirname_edit->text()).isEmpty() &&
-                 QRegExp(dirname_edit->text(), true, true).match(item->text(5)) != 0)
+                 QRegExp(dirname_edit->text(), true, true).match(item->text(HistoryItem::Path)) != 0)
                 continue;
 
             item->setVisible(true);
@@ -275,7 +311,6 @@ bool HistoryDialog::parseHistory(const QString &sandbox, const QString &reposito
         return false;
 
     QString line;
-    int index = 0;
     while (l.getOneLine(&line) )
         {
             QStringList list = splitLine(line);
@@ -290,6 +325,7 @@ bool HistoryDialog::parseHistory(const QString &sandbox, const QString &reposito
                 case 'O':
                 case 'F':
                 case 'E': ncol = 8;
+                    break;
                 default:  ncol = 10;
                 }
             if (ncol != (int)list.count())
@@ -311,22 +347,22 @@ bool HistoryDialog::parseHistory(const QString &sandbox, const QString &reposito
                 default:  event = i18n("Unknown ");
                 }
 
-            HistoryItem *item = new HistoryItem(listview, QString().sprintf("%5d", index));
-            item->setText(0, list[1] + " " + list[2] + " " + list[3] + "  ");
-            item->setText(1, event);
-            item->setText(2, list[4]);
+            QDateTime date;
+            date.setTime_t(KRFCDate::parseDateISO8601(list[1] + 'T' + list[2] + list[3]));
+
+            HistoryItem *item = new HistoryItem(listview, date);
+            item->setText(HistoryItem::Event, event);
+            item->setText(HistoryItem::Author, list[4]);
             if (ncol == 10)
                 {
-                    item->setText(3, list[5]);
-                    item->setText(4, list[6]);
-                    item->setText(5, list[7]);
+                    item->setText(HistoryItem::Revision, list[5]);
+                    item->setText(HistoryItem::File, list[6]);
+                    item->setText(HistoryItem::Path, list[7]);
                 }
             else
                 {
-                    item->setText(5, list[5]);
+                    item->setText(HistoryItem::Path, list[5]);
                 }
-            
-            ++index;
         }
 
     return true;
