@@ -107,7 +107,7 @@ int main(int argc, char **argv)
         { "+[directory]", I18N_NOOP("The sandbox to be loaded"), 0 },
         { "resolve <file>", I18N_NOOP("Show resolve dialog for the given file"), 0 },
         { "log <file>", I18N_NOOP("Show log dialog for the given file"), 0 },
-        { 0, 0, 0 }
+        KCmdLineLastOption
     };
     KAboutData about("cervisia", I18N_NOOP("Cervisia"), CERVISIA_VERSION,
                      I18N_NOOP("A CVS frontend"), KAboutData::License_QPL,
