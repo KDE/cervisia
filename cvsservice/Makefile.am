@@ -19,7 +19,7 @@ cvsservice_SOURCES = main.cpp cvsservice.cpp cvsjob.cpp \
 
 include_HEADERS = cvsservice_stub.h cvsjob_stub.h repository_stub.h
 noinst_HEADERS = cvsservice.h cvsjob.h repository.h cvsserviceutils.h \
-	vcspluginfactory.h repositoryiface.h
+	vcspluginfactory.h repositoryiface.h versioncontroliface.h
 
 # cvs DCOP service stub library
 lib_LTLIBRARIES = libcvsservice.la
