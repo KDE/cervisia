@@ -198,7 +198,7 @@ DCOPRef CvsService::checkout(const QString& workingDir, const QString& repositor
     // cd [DIRECTORY] && cvs -d [REPOSITORY] checkout [-r tag] [-P] [MODULE]
     d->singleCvsJob->clearCvsCommand();
 
-    *d->singleCvsJob << "cd" << workingDir << "&&"
+    *d->singleCvsJob << "cd" << KProcess::quote(workingDir) << "&&"
                      << repo.cvsClient()
                      << "-d" << repository
                      << "checkout";
