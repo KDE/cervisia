@@ -152,13 +152,13 @@ QString joinLine(const QStringList &list)
     QString line;
     for ( QStringList::ConstIterator it = list.begin();
           it != list.end(); ++it )
-	{
-            line += KShellProcess::quote(*it);
-            line += " ";
-	}
+    {
+        line += KShellProcess::quote(*it);
+        line += " ";
+    }
 
     if (line.length() > 0)
-	line.truncate(line.length()-1);
+        line.truncate(line.length()-1);
 
     return line;
 }
@@ -172,12 +172,12 @@ QStringList splitLine(QString line, char delim)
 
     line = line.simplifyWhiteSpace();
     while ((pos = line.find(delim)) != -1)
-	{
-	    list.append(line.left(pos));
-	    line = line.mid(pos+1, line.length()-pos-1);
-	}
+    {
+        list.append(line.left(pos));
+        line = line.mid(pos+1, line.length()-pos-1);
+    }
     if (!line.isEmpty())
-	list.append(line);
+        list.append(line);
     return list;
 }
 
@@ -197,18 +197,18 @@ QString cvsClient( const QString &sRepository, KConfig* config )
 
     // if we were left to the default value, then see what the default value should be
     if ( compressionlevel < 0 )
-        {
-            config->setGroup("General");
-            compressionlevel = config->readNumEntry("Compression", 0);
-        }
+    {
+        config->setGroup("General");
+        compressionlevel = config->readNumEntry("Compression", 0);
+    }
 
     // we don't need a command line option if there is no compression
     if (compressionlevel > 0)
-        {
-            sReturn += " -z";
-            sReturn += QString::number(compressionlevel);
-            sReturn += " ";
-        }
+    {
+        sReturn += " -z";
+        sReturn += QString::number(compressionlevel);
+        sReturn += " ";
+    }
 
     return sReturn;
 }
@@ -233,12 +233,12 @@ static QStringList *tempFiles = 0;
 void cleanupTempFiles()
 {
     if (tempFiles)
-        {
-            QStringList::Iterator it;
-            for (it = tempFiles->begin(); it != tempFiles->end(); ++it)
-                QFile::remove(*it);
-            delete tempFiles;
-        }
+    {
+        QStringList::Iterator it;
+        for (it = tempFiles->begin(); it != tempFiles->end(); ++it)
+            QFile::remove(*it);
+        delete tempFiles;
+    }
 }
 
 
