@@ -304,7 +304,7 @@ void SettingsDialog::addGeneralPage()
  */
 void SettingsDialog::addDiffPage()
 {
-    QGrid *diffPage = addGridPage(2, QGrid::Horizontal, i18n("Diff"),
+    QGrid *diffPage = addGridPage(2, QGrid::Horizontal, i18n("Diff Viewer"),
                                   QString::null, LoadIcon("diff"));
 
     QLabel *contextlabel = new QLabel( i18n("&Number of context lines in diff dialog:"), diffPage );
