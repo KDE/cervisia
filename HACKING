@@ -74,8 +74,6 @@ Class and Variable Names
   words by uppercasing the words preceded by other words.
 - Class names start with an uppercase letter.
 - Function names start with a lowercase letter.
-- Slot function names start with a 'slot' prefix
-  followed by an uppercase letter.
 - Variable names start with a lowercase letter.
 - Member Variables of a class start with a 'm_' prefix
   followed by an lowercase letter.
