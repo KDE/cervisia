@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
+ *  Copyright (c) 2003-2004 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -41,6 +42,53 @@ static QTextCodec *DetectCodec(const QString &fileName)
         return QTextCodec::codecForName("utf8");
 
     return QTextCodec::codecForLocale();
+}
+
+
+namespace
+{
+
+class LineSeparator
+{
+public:
+    LineSeparator(const QString& text)
+        : m_text(text)
+        , m_startPos(0)
+        , m_endPos(0)
+    {
+    }
+    
+    QString nextLine() const
+    {
+        // already reach end of text on previous call
+        if( m_endPos < 0 )
+        {
+            m_currentLine = QString::null;
+            return m_currentLine;
+        
+        
+        }
+        
+        m_endPos = m_text.find('\n', m_startPos);
+        
+        int length    = m_endPos - m_startPos + 1;
+        m_currentLine = m_text.mid(m_startPos, length);
+        m_startPos    = m_endPos + 1;
+        
+        return m_currentLine;
+    }
+    
+    bool atEnd() const
+    {
+        return (m_endPos < 0 && m_currentLine.isEmpty());
+    }
+    
+private:
+    const QString    m_text;
+    mutable QString  m_currentLine;
+    mutable int      m_startPos, m_endPos;
+};
+
 }
 
 
@@ -263,6 +311,20 @@ void ResolveDialog::saveFile(const QString &name)
         stream << merge->stringAtOffset(i) << endl;
 
     f.close();
+}
+    
+
+QString ResolveDialog::readFile()
+{
+    QFile f(fname);
+    if( !f.open(IO_ReadOnly) )
+        return QString::null;
+
+    QTextStream stream(&f);
+    QTextCodec* codec = DetectCodec(fname);
+    stream.setCodec(codec);
+    
+    return stream.read();
 }
 
 

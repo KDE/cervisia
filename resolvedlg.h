@@ -1,6 +1,7 @@
 /* 
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
+ *  Copyright (c) 2003-2004 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -37,7 +38,6 @@ public:
     enum ChooseType { ChA, ChB, ChAB, ChBA, ChEdit };
 
     explicit ResolveDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
-
     virtual ~ResolveDialog();
 
     bool parseFile(const QString &name);
@@ -62,6 +62,7 @@ private:
     void choose(ChooseType ch);
     void chooseEdit();
     void saveFile(const QString &name);
+    QString readFile();
     
     QLabel *nofnlabel;
     QPushButton *backbutton, *forwbutton;
