@@ -968,8 +968,10 @@ void UpdateView::prepareJob(bool recursive, Action action)
  * Finishes a job. What we do depends a bit on
  * whether the command was successful or not.
  */
-void UpdateView::finishJob(bool success)
+void UpdateView::finishJob(bool normalExit, int exitStatus)
 {
+    // cvs exitStatus == 1 only means that there're conflicts
+    const bool success(normalExit && (exitStatus == 0 || exitStatus == 1));
     if (act != Add)
         markUpdated(true, success);
     syncSelection();

@@ -38,11 +38,11 @@ public:
 
 k_dcop:
     void slotReceivedOutput(QString buffer);
-    void slotJobExited(bool normalExit, int status);   
+    void slotJobExited(bool normalExit, int exitStatus);
 
 signals:
     void receivedLine(QString line);
-    void jobFinished(bool success);
+    void jobFinished(bool normalExit, int exitStatus);
 
 protected:
     void mousePressEvent(QMouseEvent *e);

@@ -127,7 +127,7 @@ public slots:
     void slotCVSInfo();
 
 protected slots:
-    void slotJobFinished(bool /*success*/);
+    void slotJobFinished();
 
 private slots:
     // called by menu action "Open Sandbox..."

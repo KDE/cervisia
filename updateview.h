@@ -66,7 +66,7 @@ signals:
 public slots:
     void unfoldTree();
     void foldTree();
-    void finishJob(bool success);
+    void finishJob(bool normalExit, int exitStatus);
     void processUpdateLine(QString line);
 
 protected:

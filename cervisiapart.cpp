@@ -742,8 +742,8 @@ void CervisiaPart::slotStatus()
     {
         showJobStart(cmdline);
         connect( protocol, SIGNAL(receivedLine(QString)), update, SLOT(processUpdateLine(QString)) );
-        connect( protocol, SIGNAL(jobFinished(bool)), update, SLOT(finishJob(bool)) );
-        connect( protocol, SIGNAL(jobFinished(bool)), this, SLOT(slotJobFinished(bool)) );
+        connect( protocol, SIGNAL(jobFinished(bool, int)), update, SLOT(finishJob(bool, int)) );
+        connect( protocol, SIGNAL(jobFinished(bool, int)), this, SLOT(slotJobFinished()) );
     }
 }
 
@@ -857,8 +857,8 @@ void CervisiaPart::updateSandbox(const QString &extraopt)
     {
         showJobStart(cmdline);
         connect( protocol, SIGNAL(receivedLine(QString)), update, SLOT(processUpdateLine(QString)) );
-        connect( protocol, SIGNAL(jobFinished(bool)), update, SLOT(finishJob(bool)) );
-        connect( protocol, SIGNAL(jobFinished(bool)), this, SLOT(slotJobFinished(bool)) );
+        connect( protocol, SIGNAL(jobFinished(bool, int)), update, SLOT(finishJob(bool, int)) );
+        connect( protocol, SIGNAL(jobFinished(bool, int)), this, SLOT(slotJobFinished()) );
     }
 }
 
@@ -935,10 +935,10 @@ void CervisiaPart::commitOrAddOrRemove(CommitDialog::ActionType action)
         if (protocol->startJob(sandbox, repository, cmdline))
         {
             showJobStart(cmdline);
-            connect( protocol, SIGNAL(jobFinished(bool)),
-                     update, SLOT(finishJob(bool)) );
-            connect( protocol, SIGNAL(jobFinished(bool)),
-                     this, SLOT(slotJobFinished(bool)) );
+            connect( protocol, SIGNAL(jobFinished(bool, int)),
+                     update, SLOT(finishJob(bool, int)) );
+            connect( protocol, SIGNAL(jobFinished(bool, int)),
+                     this, SLOT(slotJobFinished()) );
         }
     }
 
@@ -1055,8 +1055,8 @@ void CervisiaPart::addOrRemoveWatch(WatchDialog::ActionType action)
         if (protocol->startJob(sandbox, repository, cmdline))
         {
             showJobStart(cmdline);
-            connect( protocol, SIGNAL(jobFinished(bool)),
-                     this,     SLOT(slotJobFinished(bool)) );
+            connect( protocol, SIGNAL(jobFinished(bool, int)),
+                     this,     SLOT(slotJobFinished()) );
         }
     }
 
@@ -1077,8 +1077,8 @@ void CervisiaPart::slotShowWatchers()
     if (protocol->startJob(sandbox, repository, cmdline))
     {
         showJobStart(cmdline);
-        connect( protocol, SIGNAL(jobFinished(bool)),
-                 this,     SLOT(slotJobFinished(bool)) );
+        connect( protocol, SIGNAL(jobFinished(bool, int)),
+                 this,     SLOT(slotJobFinished()) );
     }
 }
 
@@ -1096,8 +1096,8 @@ void CervisiaPart::slotEdit()
     if (protocol->startJob(sandbox, repository, cmdline))
     {
         showJobStart(cmdline);
-        connect( protocol, SIGNAL(jobFinished(bool)),
-                 this,     SLOT(slotJobFinished(bool)) );
+        connect( protocol, SIGNAL(jobFinished(bool, int)),
+                 this,     SLOT(slotJobFinished()) );
     }
 }
 
@@ -1116,8 +1116,8 @@ void CervisiaPart::slotUnedit()
     if (protocol->startJob(sandbox, repository, cmdline))
     {
         showJobStart(cmdline);
-        connect( protocol, SIGNAL(jobFinished(bool)),
-                 this,     SLOT(slotJobFinished(bool)) );
+        connect( protocol, SIGNAL(jobFinished(bool, int)),
+                 this,     SLOT(slotJobFinished()) );
     }
 }
 
@@ -1135,8 +1135,8 @@ void CervisiaPart::slotLock()
     if (protocol->startJob(sandbox, repository, cmdline))
     {
         showJobStart(cmdline);
-        connect( protocol, SIGNAL(jobFinished(bool)),
-                 this,     SLOT(slotJobFinished(bool)) );
+        connect( protocol, SIGNAL(jobFinished(bool, int)),
+                 this,     SLOT(slotJobFinished()) );
     }
 }
 
@@ -1154,8 +1154,8 @@ void CervisiaPart::slotUnlock()
     if (protocol->startJob(sandbox, repository, cmdline))
     {
         showJobStart(cmdline);
-        connect( protocol, SIGNAL(jobFinished(bool)),
-                 this,     SLOT(slotJobFinished(bool)) );
+        connect( protocol, SIGNAL(jobFinished(bool, int)),
+                 this,     SLOT(slotJobFinished()) );
     }
 }
 
@@ -1173,8 +1173,8 @@ void CervisiaPart::slotShowEditors()
     if (protocol->startJob(sandbox, repository, cmdline))
     {
         showJobStart(cmdline);
-        connect( protocol, SIGNAL(jobFinished(bool)),
-                 this,     SLOT(slotJobFinished(bool)) );
+        connect( protocol, SIGNAL(jobFinished(bool, int)),
+                 this,     SLOT(slotJobFinished()) );
     }
 }
 
@@ -1270,8 +1270,8 @@ void CervisiaPart::importOrCheckout(CheckoutDialog::ActionType action)
             if (protocol->startJob(sandbox, repository, cmdline))
                 {
                     showJobStart(cmdline);
-                    connect( protocol, SIGNAL(jobFinished(bool)),
-                             this,     SLOT(slotJobFinished(bool)) );
+                    connect( protocol, SIGNAL(jobFinished(bool, int)),
+                             this,     SLOT(slotJobFinished()) );
                 }
         }
 
@@ -1323,8 +1323,8 @@ void CervisiaPart::createOrDeleteTag(TagDialog::ActionType action)
         if (protocol->startJob(sandbox, repository, cmdline))
         {
             showJobStart(cmdline);
-            connect( protocol, SIGNAL(jobFinished(bool)),
-                     this,     SLOT(slotJobFinished(bool)) );
+            connect( protocol, SIGNAL(jobFinished(bool, int)),
+                     this,     SLOT(slotJobFinished()) );
         }
     }
 
@@ -1485,7 +1485,7 @@ void CervisiaPart::showJobStart(const QString &cmdline)
 }
 
 
-void CervisiaPart::slotJobFinished(bool)
+void CervisiaPart::slotJobFinished()
 {
     actionCollection()->action( "stop_job" )->setEnabled( false );
     hasRunningJob = false;

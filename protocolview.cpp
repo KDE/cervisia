@@ -103,7 +103,7 @@ bool ProtocolView::startJob(const QString &sandbox, const QString &repository,
 	     SLOT(receivedOutput(KProcess *, char *, int)) );
 
     disconnect( SIGNAL(receivedLine(QString)) );
-    disconnect( SIGNAL(jobFinished(bool)) );
+    disconnect( SIGNAL(jobFinished(bool, int)) );
 
     return childproc->start(KProcess::NotifyOnExit,
                             KProcess::Communication(KProcess::Stdout|KProcess::Stderr));
@@ -120,8 +120,8 @@ bool ProtocolView::startJob()
     
     // disconnect 3rd party slots from our signals
     disconnect( SIGNAL(receivedLine(QString)) );
-    disconnect( SIGNAL(jobFinished(bool)) );
-    
+    disconnect( SIGNAL(jobFinished(bool, int)) );
+
     return job->execute();
 }
 
@@ -156,7 +156,7 @@ void ProtocolView::childExited()
     buf += '\n';
     buf += s;
     processOutput();
-    emit jobFinished(childproc->normalExit() && !childproc->exitStatus());
+    emit jobFinished(childproc->normalExit(), childproc->exitStatus());
     delete childproc;
     childproc = 0;
 }
@@ -169,14 +169,14 @@ void ProtocolView::slotReceivedOutput(QString buffer)
 }
 
 
-void ProtocolView::slotJobExited(bool normalExit, int status)
+void ProtocolView::slotJobExited(bool normalExit, int exitStatus)
 {
     QString msg;
     
     if( normalExit )
     {
-        if( status )
-            msg = i18n("[Exited with status %1]\n").arg(status);
+        if( exitStatus )
+            msg = i18n("[Exited with status %1]\n").arg(exitStatus);
         else
             msg = i18n("[Finished]\n");
     }
@@ -187,7 +187,7 @@ void ProtocolView::slotJobExited(bool normalExit, int status)
     buf += msg;
     processOutput();
 
-    emit jobFinished(normalExit && !status);
+    emit jobFinished(normalExit, exitStatus);
 }
 
 
