@@ -1,3 +1,11 @@
+2003-06-03  Christian Loose <christian.loose@hamburg.de>
+
+	* Fix BR #59267: Re-added "clear" command to the
+	  RMB context menu of the ProtocolView
+	* Removed non functional methods that were supposed
+	  to handle the RMB context menu from ProtocolView
+	  source.
+
 2003-02-28  Christian Loose <christian.loose@hamburg.de>
 
 	* Fix BR #54382: Display warning message in remove dialog

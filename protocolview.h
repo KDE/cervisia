@@ -18,11 +18,14 @@
 #include <qtextedit.h>
 #include <kprocess.h>
 
+class QPoint;
+class QPopupMenu;
+
 
 class ProtocolView : public QTextEdit
 {
     Q_OBJECT
-    
+
 public:
     ProtocolView( QWidget *parent=0, const char *name=0 );
     ~ProtocolView();
@@ -34,9 +37,8 @@ signals:
     void jobFinished(bool success);
 
 protected:
-    void mousePressEvent(QMouseEvent *e);
-    void keyPressEvent(QKeyEvent *e);
-    
+    virtual QPopupMenu* createPopupMenu(const QPoint &pos);
+
 private slots:
     void receivedOutput(KProcess *proc, char *buffer, int buflen);
     void childExited();
@@ -45,8 +47,7 @@ private slots:
 private:
     void processOutput();
     void appendLine(const QString &line);
-    void execContextMenu(const QPoint &pos);
-    
+
     KShellProcess *childproc;
     QString buf;
     

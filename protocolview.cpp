@@ -61,7 +61,7 @@ bool ProtocolView::startJob(const QString &sandbox, const QString &repository,
 {
     if (childproc)
         {
-            KMessageBox::sorry(topLevelWidget(), 
+            KMessageBox::sorry(topLevelWidget(),
                                i18n("There is already a job running"),
                                "Cervisia");
             return false;
@@ -81,7 +81,7 @@ bool ProtocolView::startJob(const QString &sandbox, const QString &repository,
     if (!rsh.isEmpty())
 	*childproc << QString("CVS_RSH=" + KShellProcess::quote(rsh));
     *childproc << cmdline;
-    
+
     connect( childproc, SIGNAL(processExited(KProcess *)),
 	     SLOT(childExited()) );
     connect( childproc, SIGNAL(receivedStdout(KProcess *, char *, int)),
@@ -94,6 +94,19 @@ bool ProtocolView::startJob(const QString &sandbox, const QString &repository,
 
     return childproc->start(KProcess::NotifyOnExit,
                             KProcess::Communication(KProcess::Stdout|KProcess::Stderr));
+}
+
+
+QPopupMenu* ProtocolView::createPopupMenu(const QPoint &pos)
+{
+    QPopupMenu* menu = QTextEdit::createPopupMenu(pos);
+
+    int id = menu->insertItem(i18n("Clear"), this, SLOT( clear() ), 0, -1, 0);
+
+    if( text().isEmpty() )
+        menu->setItemEnabled(id, false);
+
+    return menu;
 }
 
 
@@ -169,41 +182,6 @@ void ProtocolView::appendLine(const QString &line)
         QString("%1").arg(line));
 }
 
-
-void ProtocolView::execContextMenu(const QPoint &p)
-{
-    QPopupMenu *popup = new QPopupMenu(this);
-    int clearId = popup->insertItem(i18n("Clear"));
-    int selallId = popup->insertItem(i18n("Select All"));
-    
-    int res = popup->exec(p);
-    if (res == clearId)
-        clear();
-    else if (res == selallId)
-        selectAll();
-    
-    delete popup;
-}
-
-
-void ProtocolView::mousePressEvent(QMouseEvent *e)
-{
-    if (e->button() == RightButton)
-        execContextMenu(e->globalPos());
-    else
-        QTextEdit::mousePressEvent(e);
-}
-
-
-void ProtocolView::keyPressEvent(QKeyEvent *e)
-{
-    if (e->key() == KGlobalSettings::contextMenuKey())
-        execContextMenu(mapToGlobal(QPoint(10, 10)));
-    else if (e->key() == Key_Tab)
-        QTextEdit::focusNextPrevChild(true);
-    else
-        QTextEdit::keyPressEvent(e);
-}
 
 #include "protocolview.moc"
 
