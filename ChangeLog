@@ -1,3 +1,8 @@
+2002-06-18  Roland Krause <rokrau@yahoo.com>
+
+	* View Filter is now applied after Fold/Unfold of the
+	  file tree.
+
 2002-06-11  Bernd Gehrmann  <bernd@mail.berlios.de>
 
 	* Interpret all output from cvs in the user's locale

@@ -123,6 +123,10 @@ public slots:
     void slotHideUpToDate();
     void slotHideRemoved();
     void slotHideNotInCVS();
+
+    void slotFoldTree();
+    void slotUnfoldTree();
+
     void slotUpdateRecursive();
     void slotCommitRecursive();
     void slotDoCVSEdit();

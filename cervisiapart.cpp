@@ -296,14 +296,15 @@ void CervisiaPart::setupActions()
     action->setWhatsThis( hint );
 
     action = new KAction( i18n("&Unfold File Tree"), 0,
-                          update, SLOT(unfoldTree()),
+                          this , SLOT(slotUnfoldTree()),
                           actionCollection(), "view_unfold_tree" );
+
     hint = i18n("Opens all branches of the file tree");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action = new KAction( i18n("&Fold File Tree"), 0,
-                          update, SLOT(foldTree()),
+                          this, SLOT(slotFoldTree()),
                           actionCollection(), "view_fold_tree" );
     hint = i18n("Closes all branches of the file tree");
     action->setToolTip( hint );
@@ -1380,6 +1381,17 @@ void CervisiaPart::slotHideNotInCVS()
     setFilter();
 }
 
+void CervisiaPart::slotFoldTree()
+{
+	update->foldTree();
+	setFilter();
+}
+
+void CervisiaPart::slotUnfoldTree()
+{
+	update->unfoldTree();
+	setFilter();
+}
 
 void CervisiaPart::slotCreateDirs()
 {
