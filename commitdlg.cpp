@@ -15,6 +15,7 @@
 #include "commitdlg.h"
 
 #include <qcombobox.h>
+#include <qfileinfo.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qlistbox.h>
@@ -99,6 +100,14 @@ CommitDialog::~CommitDialog()
 void CommitDialog::setFileList(const QStringList &list)
 {
     listbox->insertStringList(list);
+
+    // the dot for the root directory is hard to see, so
+    // we convert it to the absolut path
+    if (const QListBoxItem* item = listbox->findItem(QChar('.'), Qt::ExactMatch))
+    {
+        listbox->changeItem(QFileInfo(QChar('.')).absFilePath(),
+                            listbox->index(item));
+    }
 }
 
 
