@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -45,7 +45,7 @@ void chomp(QCString *line)
 {
     int pos;
     if ( (pos = line->find('\n')) != -1 )
-	line->truncate(pos);  
+	line->truncate(pos);
 }
 
 
@@ -121,11 +121,11 @@ bool isValidTag(const QString &str)
 
 // Gives the name (including path) of the cvs command line client
 // also gives you global commands
-QString cvsClient( QString sRepository )
+QString cvsClient( const QString &sRepository )
 {
     KConfig *config = CervisiaPart::config();
     config->setGroup("General");
-    
+
     // everybody gets the -f option, unconditionally
     QString sReturn = config->readEntry("CVSPath", "cvs") + " -f";
 
@@ -177,30 +177,30 @@ QString userName()
     KEMailSettings settings;
     QString name  = settings.getSetting(KEMailSettings::RealName);
     QString email = settings.getSetting(KEMailSettings::EmailAddress);
-    
+
     if (name.isEmpty() || email.isEmpty())
     {
         // 2. Try to retrieve the information from the system
         struct passwd *pw = getpwuid(getuid());
         if (!pw)
             return QString::null;
-            
+
         char hostname[512];
         hostname[0] = '\0';
-        
+
         if (!gethostname(hostname, sizeof(hostname)))
             hostname[sizeof(hostname)-1] = '0';
-            
+
         name  = QString::fromLocal8Bit(pw->pw_gecos);
         email = QString::fromLocal8Bit(pw->pw_name) + "@" +
                 QString::fromLocal8Bit(hostname);
     }
-    
+
     QString result = name;
     result += "  <";
     result += email;
     result += ">";
-    
+
     return result;
 }
 
@@ -223,7 +223,7 @@ QString tempFileName(const QString &suffix)
 {
     if (!tempFiles)
         tempFiles = new QStringList;
-    
+
     KTempFile f(QString::null, suffix);
     tempFiles->append(f.name());
     return f.name();
@@ -248,11 +248,11 @@ namespace
                                            QWidget*       pParentWidget)
     {
         QStringList listBranchesOrTags;
-        
+
         DCOPRef job = cvsService->status(QStringList(), true, true);
         if( !cvsService->ok() )
             return listBranchesOrTags;
-        
+
         ProgressDialog dlg(pParentWidget, "Status", job, QString::null, i18n("CVS Status"));
 
         if (dlg.execute())

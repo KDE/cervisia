@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -35,7 +35,7 @@ void cleanupTempFiles();
 QTextCodec *detectCodec(const QString &fileName);
 
 bool isValidTag(const QString &str);
-QString cvsClient(QString sRepository);
+QString cvsClient(const QString &sRepository);
 QStringList const fetchBranches(CvsService_stub* cvsService,
                                 QWidget*       pParentWidget);
 QStringList const fetchTags(CvsService_stub* cvsService,
