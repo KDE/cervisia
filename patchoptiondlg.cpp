@@ -56,9 +56,11 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent, const char* name)
     m_blankLineChk = new QCheckBox("Ignore added or removed empty lines",
                                    ignoreBtnGroup);
     m_spaceChangeChk = new QCheckBox("Ignore changes in the amount of whitespace",
-                                  ignoreBtnGroup);
-    m_allSpaceChk = new QCheckBox("Ignore all whitespace",
-                                  ignoreBtnGroup);
+                                     ignoreBtnGroup);
+    m_allSpaceChk = new QCheckBox("Ignore all whitespace", ignoreBtnGroup);
+    m_caseChangesChk = new QCheckBox("Ignore changes in case", ignoreBtnGroup);
+    m_tabExpansionChk = new QCheckBox("Ignore changes due to tab expansion",
+                                      ignoreBtnGroup);
 }
 
 
@@ -79,6 +81,12 @@ QString PatchOptionDialog::diffOptions() const
     
     if( m_allSpaceChk->isChecked() )
         options += " -w ";
+    
+    if( m_caseChangesChk->isChecked() )
+        options += " -i ";
+    
+    if( m_tabExpansionChk->isChecked() )
+        options += " -E ";
 
     return options;
 }
