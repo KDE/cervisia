@@ -602,13 +602,10 @@ void CervisiaPart::setupGlobalConfig()
 
 void CervisiaPart::popupRequested(KListView*, QListViewItem*, const QPoint& p)
 {
-    QPopupMenu *pop = static_cast<QPopupMenu *>( factory()->container("context_popup", this) );
-    if (!pop)
-    {
-        qWarning( "CervisiaPart: Missing XML definition for context_popup\n" );
-        return;
-    }
-    pop->exec(p);
+    if (QPopupMenu* popup = static_cast<QPopupMenu*>(hostContainer("context_popup")))
+        popup->exec(p);
+    else
+        kdDebug(8050) << "CervisiaPart: can't get XML definition for context_popup, factory()=" << factory() << endl;
 }
 
 void CervisiaPart::updateActions()
