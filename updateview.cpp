@@ -16,11 +16,8 @@
 
 #include <set>
 
-#include <sys/stat.h>
-#include <unistd.h>
-#include <locale.h>
-#include <time.h>
 #include <qapplication.h>
+#include <qdatetime.h>
 #include <qdir.h>
 #include <qfileinfo.h>
 #include <qptrstack.h>
@@ -76,7 +73,8 @@ public:
     void syncWithEntries();
     void updateChildItem(const QString& name, UpdateView::Status status, bool isdir);
     void updateEntriesItem(const QString& name, UpdateView::Status status, bool isdir,
-                           bool isbin, const QString& rev, const QString& tagname, time_t timestamp);
+                           bool isbin, const QString& rev, const QString& tagname,
+                           const QDateTime& date);
 
     virtual int compare(QListViewItem* i, int col, bool) const;
     virtual QString text(int col) const;
@@ -119,7 +117,7 @@ public:
 
     void setStatus(UpdateView::Status status);
     void setRevTag(const QString& rev, const QString& tag);
-    void setTimestamp(time_t timestamp);
+    void setDate(const QDateTime& date);
     void setUndefinedState(bool b)
     { m_undefined = b; }
 
@@ -135,7 +133,7 @@ private:
     QString m_tag;
     bool m_undefined;
     UpdateView::Status m_status;
-    time_t m_timestamp;
+    QDateTime m_date;
 };
 
 
@@ -206,7 +204,7 @@ void UpdateDirItem::updateEntriesItem(const QString& name,
                                       bool isbin,
                                       const QString& rev,
                                       const QString& tagname,
-                                      time_t timestamp)
+                                      const QDateTime& date)
 {
     for (QListViewItem *item = firstChild(); item;
 	 item = item->nextSibling() )
@@ -227,7 +225,7 @@ void UpdateDirItem::updateEntriesItem(const QString& name,
                                     fileItem->setStatus(status);
                                 }
                             fileItem->setRevTag(rev, tagname);
-                            fileItem->setTimestamp(timestamp);
+                            fileItem->setDate(date);
                             if (isbin)
                                 fileItem->setPixmap(0, SmallIcon("binary"));
                         }
@@ -269,26 +267,11 @@ void UpdateDirItem::scanDirectory()
 }
 
 
-static QString lastModifiedStr(const QString &fname)
-{
-    struct stat st;
-    if (lstat(fname.local8Bit(), &st) != 0)
-	return QString::null;
-    struct tm *tm_p = gmtime(&st.st_mtime);
-    char *p = asctime(tm_p);
-    p[24] = '\0';
-    return p;
-}
-
-
 // Format of the CVS/Entries file:
-//   /NAME/REVISION/TIMESTAMP[+CONFLICT]/OPTIONS/TAGDATE
+//   /NAME/REVISION/[CONFLICT+]TIMESTAMP/OPTIONS/TAGDATE
 
 void UpdateDirItem::syncWithEntries()
 {
-    QString name, rev, timestamp, options, tagdate;
-    UpdateView::Status status;
-
     QFile f(dirPath() + "CVS/Entries");
     if( f.open(IO_ReadOnly) )
     {
@@ -296,52 +279,62 @@ void UpdateDirItem::syncWithEntries()
         while( !stream.eof() )
         {
             QString line = stream.readLine();
-            
-            bool isDir = (line[0] == 'D');
+
+            const bool isDir(line[0] == 'D');
             if( isDir )
                 line.remove(0, 1);
-                
+
             if( line[0] != '/' )
                 continue;
 
-            name      = line.section('/', 1, 1);
-            rev       = line.section('/', 2, 2);
-            timestamp = line.section('/', 3, 3);
-            options   = line.section('/', 4, 4);
-            tagdate   = line.section('/', 5, 5);
+            const QString name(line.section('/', 1, 1));
 
-            bool isBinary = (options == "-kb");
-            
-            int pos;            
-            if( rev == "0" )
-                status = UpdateView::LocallyAdded;
-            else if( rev.length() > 2 && rev[0] == '-' )
+            if (isDir)
             {
-                status = UpdateView::LocallyRemoved;
-                rev.remove(0, 1);
+                updateEntriesItem(name, UpdateView::Unknown,
+                                  isDir, false,
+                                  QString::null,
+                                  QString::null,
+                                  QDateTime());
             }
-            else if( (pos = timestamp.find('+')) != -1 )
-            {
-                status = UpdateView::Conflict;
-                timestamp.truncate(pos);
-            }
-            else if( timestamp != lastModifiedStr(dirPath() + name) )
-                status = UpdateView::LocallyModified;
             else
-                status = UpdateView::Unknown;
-            
-            // Convert timestamp into a time.
-            char *oldLocale;
-            struct tm tmp;
-            time_t time;
+            {
+                QString rev(line.section('/', 2, 2));
+                const QString& timestamp(line.section('/', 3, 3));
+                const QString& options(line.section('/', 4, 4));
+                const QString& tagdate(line.section('/', 5, 5));
 
-            oldLocale = setlocale(LC_TIME, "C");
-            strptime(timestamp.local8Bit(), "%c" , &tmp);
-            setlocale(LC_TIME, oldLocale);
-            time = mktime(&tmp);
-            updateEntriesItem(name, status, isDir, isBinary, rev, tagdate, time);           
+                const bool isBinary(options == "-kb");
+
+                // file date in local time
+                // GCC 3.2.1 needs extra (), don't know why
+                const QDateTime& fileDate((QFileInfo(dirPath() + name).lastModified()));
+
+                UpdateView::Status status(UpdateView::Unknown);
+                if( rev == "0" )
+                    status = UpdateView::LocallyAdded;
+                else if( rev.length() > 2 && rev[0] == '-' )
+                {
+                    status = UpdateView::LocallyRemoved;
+                    rev.remove(0, 1);
+                }
+                else if (timestamp.find('+') >= 0)
+                {
+                    status = UpdateView::Conflict;
+                }
+                else
+                {
+                    const QDateTime& date(QDateTime::fromString(timestamp)); // UTC Time
+                    QDateTime fileDateUTC;
+                    fileDateUTC.setTime_t(fileDate.toTime_t(), Qt::UTC);
+                    if (date != fileDateUTC)
+                        status = UpdateView::LocallyModified;
+                }
+
+                updateEntriesItem(name, status, isDir, isBinary, rev, tagdate, fileDate);
+            }
         }
-        
+
         f.close();
     }
 }
@@ -530,9 +523,9 @@ void UpdateFileItem::setRevTag(const QString& rev, const QString& tag)
         }
 }
 
-void UpdateFileItem::setTimestamp(time_t timestamp)
+void UpdateFileItem::setDate(const QDateTime& date)
 {
-    m_timestamp = timestamp;
+    m_date = date;
 }
 
 void UpdateFileItem::markUpdated(bool laststage, bool success)
@@ -613,7 +606,7 @@ int UpdateFileItem::compare(QListViewItem* i, int col, bool bAscending) const
         iResult = m_tag.localeAwareCompare(pItem->m_tag);
         break;
     case Timestamp:
-        iResult = ::compare(m_timestamp, pItem->m_timestamp);
+        iResult = ::compare(m_date, pItem->m_date);
         break;
     }
 
@@ -662,9 +655,7 @@ QString UpdateFileItem::text(int col) const
 		return m_tag;
 	case Timestamp:
             {
-                QDateTime timestamp;
-                timestamp.setTime_t(m_timestamp);
-                return KGlobal::locale()->formatDateTime(timestamp);
+                return m_date.isValid() ? KGlobal::locale()->formatDateTime(m_date) : QString::null;
 	    }
 	default:
 	    return QString::null;
