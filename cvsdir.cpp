@@ -15,6 +15,11 @@
 #include <qdir.h>
 #include <stdlib.h>
 
+// For some reason fnmatch is defined as ap_fnmatch
+#define ap_fnmatch fnmatch
+#include <fnmatch.h>
+#include "misc.h"
+
 #include "cvsdir.h"
 
 
@@ -28,7 +33,7 @@ public:
     bool matches(QFileInfo *fi);
 
 private:
-    QStringList ignoreList;
+    QStrList ignoreList;
 };
 
 
@@ -48,7 +53,7 @@ CvsIgnoreList::CvsIgnoreList(const QDir &dir)
 
 void CvsIgnoreList::addEntriesFromString(const QString &str)
 {
-    QStringList tokens = QStringList::split(" ", str.simplifyWhiteSpace());
+    QStringList tokens = splitLine(str);
     
     for ( QStringList::Iterator it = tokens.begin();
           it != tokens.end(); ++it )
@@ -79,7 +84,18 @@ void CvsIgnoreList::addEntriesFromFile(const QString &name)
 
 bool CvsIgnoreList::matches(QFileInfo *fi)
 {
-    return QDir::match(ignoreList, fi->fileName());
+    // Directories e.g. with the name core never match
+    //    if (!fi->isFile())
+    //        return false;
+    
+    QStrListIterator it(ignoreList);
+    for (; it.current(); ++it)
+	{
+	    if (::fnmatch(it.current(), fi->fileName().local8Bit(), FNM_PATHNAME) == 0)
+		return true;
+	}
+    
+    return false;
 }
 
 
