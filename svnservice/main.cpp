@@ -25,7 +25,7 @@
 #include "svnservice.h"
 
 
-int main(int argc, char** argv)
+extern "C" KDE_EXPORT int kdemain(int argc, char** argv)
 {
     KAboutData about("svnservice", I18N_NOOP("Subversion DCOP service"), "0.1",
             I18N_NOOP("DCOP service for Subversion"), KAboutData::License_LGPL,

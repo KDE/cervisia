@@ -8,11 +8,12 @@
 INCLUDES = $(all_includes)
 
 # Subversion DCOP service
-bin_PROGRAMS = svnservice
+bin_PROGRAMS =
+kdeinit_LTLIBRARIES = svnservice.la
 
-svnservice_LDFLAGS = $(all_libraries) $(KDE_RPATH)
-svnservice_LDADD = $(LIB_KIO)
-svnservice_SOURCES = main.cpp svnservice.cpp svnjob.cpp \
+svnservice_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN) -module
+svnservice_la_LIBADD = $(LIB_KIO)
+svnservice_la_SOURCES = main.cpp svnservice.cpp svnjob.cpp \
 	svnservice.skel svnservice.stub svnjob.skel svnjob.stub \
 	repository.cpp repository.skel repository.stub
 
@@ -24,7 +25,10 @@ lib_LTLIBRARIES = libsvnservice.la
 
 libsvnservice_la_LDFLAGS = $(all_libraries) -no-undefined -version-info 0:1
 libsvnservice_la_LIBADD = $(LIB_KDECORE)
-libsvnservice_la_SOURCES = svnservice.stub svnjob.stub repository.stub
+libsvnservice_la_SOURCES = svnservice.stub svnjob.stub repository.stub dummy.cpp
+
+dummy.cpp:
+	echo > dummy.cpp
 
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO
