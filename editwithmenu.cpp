@@ -15,6 +15,7 @@ using namespace Cervisia;
 
 #include <qpopupmenu.h>
 #include <kdebug.h>
+#include <kiconloader.h>
 #include <kmimetype.h>
 #include <krun.h>
 #include <kurl.h>
@@ -41,7 +42,8 @@ EditWithMenu::EditWithMenu(const KURL& url, QWidget* parent)
         KTrader::OfferList::ConstIterator it = m_offers.begin();
         for( int i = 0 ; it != m_offers.end(); ++it, ++i )
         {
-            int id = m_menu->insertItem((*it)->name(), 
+            int id = m_menu->insertItem(SmallIcon((*it)->icon()),
+                                        (*it)->name(),
                                         this, SLOT(itemActivated(int)));
             m_menu->setItemParameter(id, i);
         }
