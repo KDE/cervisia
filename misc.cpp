@@ -237,7 +237,7 @@ namespace
     {
         QStringList listBranchesOrTags;
         
-        DCOPRef job = cvsService->status(QString::null, true, true);
+        DCOPRef job = cvsService->status(QStringList(), true, true);
         if( !cvsService->ok() )
             return listBranchesOrTags;
         
