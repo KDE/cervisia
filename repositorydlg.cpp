@@ -323,8 +323,7 @@ void RepositoryDialog::slotAddClicked()
         for( ; item; item = item->nextSibling() )
             if( item->text(0) == repo )
             {
-                KMessageBox::information(this, "Cervisia",
-                                         i18n("This repository is already known."));
+                KMessageBox::information(this, i18n("This repository is already known."));
                 return;
             }
 
