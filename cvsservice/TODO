@@ -1,0 +1,6 @@
+TODO
+----
+
+* Move handling of recent commit messages from CervisiaPart to
+  DCOP service
+
