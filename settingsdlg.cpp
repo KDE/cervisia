@@ -371,8 +371,8 @@ void SettingsDialog::addAdvancedPage()
     compressioncombo->insertItem("2", 2);
     compressioncombo->insertItem("3", 3);
 
-    // TODO CL Find better description for this option
-    usesshagent = new QCheckBox(i18n("Use ssh-agent"), advancedPage);
+    usesshagent = new QCheckBox(i18n("Utilize a running or start a new ssh-agent process"),
+                                advancedPage);
 
     // dummy widget to fill the right side of the grid
     new QWidget(advancedPage);
