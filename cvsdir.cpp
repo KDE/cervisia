@@ -26,11 +26,12 @@
 class CvsIgnoreList
 {
 public:
-    CvsIgnoreList(const QDir &dir);
+    explicit CvsIgnoreList(const QDir &dir);
 
     void addEntriesFromString(const QString &str);
     void addEntriesFromFile(const QString &name);
-    bool matches(QFileInfo *fi);
+
+    bool matches(const QFileInfo *fi) const;
 
 private:
     QStrList ignoreList;
@@ -82,16 +83,17 @@ void CvsIgnoreList::addEntriesFromFile(const QString &name)
 }
 
 
-bool CvsIgnoreList::matches(QFileInfo *fi)
+bool CvsIgnoreList::matches(const QFileInfo *fi) const
 {
     // Directories e.g. with the name core never match
     //    if (!fi->isFile())
     //        return false;
-    
+
+    const QCString& fileName(fi->fileName().local8Bit());
     QStrListIterator it(ignoreList);
     for (; it.current(); ++it)
 	{
-	    if (::fnmatch(it.current(), fi->fileName().local8Bit(), FNM_PATHNAME) == 0)
+	    if (::fnmatch(it.current(), fileName, FNM_PATHNAME) == 0)
 		return true;
 	}
     
