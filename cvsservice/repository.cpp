@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
+ * Copyright (c) 2002-2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -45,6 +45,7 @@ struct Repository::Private
     QString     rsh;
     QString     server;
     int         compressionLevel;
+    bool        retrieveCvsignoreFile;
 
     void readConfig();
 };
@@ -177,6 +178,12 @@ QString Repository::location() const
 }
 
 
+bool Repository::retrieveCvsignoreFile() const
+{
+    return d->retrieveCvsignoreFile;
+}
+
+
 void Repository::slotConfigDirty(const QString& fileName)
 {
     if( fileName == d->configFileName )
@@ -212,6 +219,9 @@ void Repository::Private::readConfig()
 
     config->setGroup(repositoryGroup);
 
+    // should we retrieve the CVSROOT/cvsignore file from the cvs server?
+    retrieveCvsignoreFile = config->readBoolEntry("RetrieveCvsignore", false);
+    
     // see if there is a specific compression level set for this repository
     compressionLevel = config->readNumEntry("Compression", -1);
 

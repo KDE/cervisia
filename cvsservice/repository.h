@@ -92,6 +92,10 @@ k_dcop:
      * @return The path and method to access the cvs repository.
      */
     QString location() const;
+    
+    /**
+     */
+    bool retrieveCvsignoreFile() const;
 
 private slots:
     void slotConfigDirty(const QString& fileName);
