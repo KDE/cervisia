@@ -512,7 +512,7 @@ DCOPRef CvsService::update(const QStringList& files, bool recursive,
 }
 
 
-DCOPRef CvsService::showWatchers(const QStringList& files)
+DCOPRef CvsService::watchers(const QStringList& files)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
         return DCOPRef();

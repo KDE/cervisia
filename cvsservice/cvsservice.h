@@ -222,7 +222,7 @@ k_dcop:
     /**
      * @param files
      */
-    DCOPRef showWatchers(const QStringList& files);
+    DCOPRef watchers(const QStringList& files);
 
     /**
      * Quits the DCOP service.
