@@ -16,12 +16,9 @@
 
 #include <qfile.h>
 #include <qfileinfo.h>
-#include <qvbox.h>
 #include <qmultilinedit.h>
-#include <qpushbutton.h>
 #include <qtextstream.h>
 #include <kapplication.h>
-#include <kbuttonbox.h>
 #include <kconfig.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
@@ -41,23 +38,17 @@ ChangeLogDialog::Options *ChangeLogDialog::options = 0;
 
 
 ChangeLogDialog::ChangeLogDialog(QWidget *parent, const char *name)
-    : KDialogBase(parent, name, true, QString::null, Ok | Cancel)
+    : KDialogBase(parent, name, true, QString::null, Ok | Cancel, Ok, true)
 {
     setCaption(i18n("Edit ChangeLog"));
 
-    QVBox* box = new QVBox(this);
-    setMainWidget(box);
-    box->setSpacing(10);
-
-    edit = new QMultiLineEdit(box);
+    edit = new QMultiLineEdit(this);
+    setMainWidget(edit);
     QFontMetrics fm(fontMetrics());
     edit->setMinimumSize(fm.width("0123456789")*8,
                          fm.lineSpacing()*20);
     edit->setFont(KGlobalSettings::fixedFont());
     edit->setFocus();
-
-    QFrame *frame = new QFrame(box);
-    frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
 
     resize(sizeHint());
 

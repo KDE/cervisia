@@ -25,8 +25,6 @@ class AnnotateView;
 
 class AnnotateDialog : public KDialogBase
 {
-    Q_OBJECT
-
 public:
 
     AnnotateDialog( QWidget *parent=0, const char *name=0 );

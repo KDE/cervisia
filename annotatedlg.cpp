@@ -27,11 +27,8 @@ AnnotateDialog::Options *AnnotateDialog::options = 0;
 
 
 AnnotateDialog::AnnotateDialog(QWidget *parent, const char *name)
-    : KDialogBase(parent, name, false,
-                  QString::null,
-                  KDialogBase::Close | KDialogBase::Help,
-                  KDialogBase::Close,
-                  true)
+    : KDialogBase(parent, name, false, QString::null,
+                  Close | Help, Close, true)
 {
     annotate = new AnnotateView(this);
     setMainWidget(annotate);
@@ -196,8 +193,6 @@ bool AnnotateDialog::parseCvsAnnotate(const QString &sandbox, const QString &rep
     return true; // successful
 }
 
-
-#include "annotatedlg.moc"
 
 
 // Local Variables:
