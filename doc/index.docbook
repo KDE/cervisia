@@ -1466,9 +1466,9 @@ This runs the command
 <screen><command>cvs admin -l <replaceable>filenames</replaceable></command></screen>
 </para>
 
-The reverse effect is achieved by using
+<para>The reverse effect is achieved by using
 <menuchoice><guimenu>Advanced</guimenu><guimenuitem>Unlock</guimenuitem></menuchoice>.
-This runs the command
+This runs the command</para>
 
 <para>
 <screen><command>cvs admin -u <replaceable>filenames</replaceable></command></screen>
