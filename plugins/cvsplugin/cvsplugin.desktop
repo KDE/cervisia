@@ -1,0 +1,7 @@
+[Desktop Entry]
+Encoding=UTF-8
+X-KDE-Library=cvsplugin
+X-KDE-PluginInfo-EnabledByDefault=true
+Name=Cvs plugin
+Comment=Cvs plugin
+X-KDE-ParentApp=cervisia

@@ -1,7 +1,7 @@
 CERVISIA_VERSION = 2.2.89
 INCLUDES = -I./cvsservice -D_BSD_SOURCE $(all_includes)
 
-SUBDIRS = cvsservice . pics
+SUBDIRS = cvsservice svnservice . plugins pics
 
 bin_PROGRAMS =
 lib_LTLIBRARIES =
@@ -13,7 +13,7 @@ libcervisia_la_SOURCES = annotatedlg.cpp diffdlg.cpp patchoptiondlg.cpp logdlg.c
 		   progressdlg.cpp progressdlg.skel resolvedlg.cpp resolvedlg_p.cpp annotateview.cpp \
 		   diffview.cpp loglist.cpp logplainview.cpp logtree.cpp annotatectl.cpp   \
 		   loginfo.cpp misc.cpp qttableview.cpp tooltip.cpp cervisiasettings.kcfgc \
-		   settingsdlg.cpp settingsdlg_advanced.ui
+		   settingsdlg.cpp settingsdlg_advanced.ui pluginbase.cpp
 libcervisia_la_COMPILE_FIRST = cvsservice/cvsservice_stub.h cervisiasettings.h
 
 libcervisiapart_la_SOURCES = updateview.cpp protocolview.cpp protocolview.skel \
