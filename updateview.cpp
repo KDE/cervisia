@@ -47,6 +47,8 @@ namespace
 
     bool isFileItem(const QListViewItem* item)
     {
+        if( !item )
+            return false;
         return item->rtti() == g_fileItemRtti;
     }
 }
@@ -180,7 +182,7 @@ UpdateDirItem::UpdateDirItem( UpdateDirItem *parent, const QString& dirname )
     setPixmap(0, SmallIcon("folder"));
 }
 
- 
+
 UpdateDirItem::UpdateDirItem( UpdateView *parent, const QString& dirname )
     : UpdateItem(parent, dirname),
       m_opened(false)
@@ -601,7 +603,7 @@ void UpdateFileItem::setDate(const QDateTime& date)
 void UpdateFileItem::markUpdated(bool laststage, bool success)
 {
     UpdateView::Status newstatus = m_status;
-    
+
     if (laststage)
         {
             if (undefinedState() && m_status != UpdateView::NotInCVS)
@@ -696,25 +698,25 @@ QString UpdateFileItem::text(int col) const
 		case UpdateView::LocallyModified:
 		    return i18n("Locally Modified");
 		case UpdateView::LocallyAdded:
-		    return i18n("Locally Added"); 
+		    return i18n("Locally Added");
 		case UpdateView::LocallyRemoved:
-		    return i18n("Locally Removed"); 
+		    return i18n("Locally Removed");
 		case UpdateView::NeedsUpdate:
-		    return i18n("Needs Update"); 
+		    return i18n("Needs Update");
 		case UpdateView::NeedsPatch:
-		    return i18n("Needs Patch"); 
+		    return i18n("Needs Patch");
 		case UpdateView::NeedsMerge:
-		    return i18n("Needs Merge"); 
+		    return i18n("Needs Merge");
 		case UpdateView::UpToDate:
 		    return i18n("Up to date");
 		case UpdateView::Conflict:
 		    return i18n("Conflict");
 		case UpdateView::Updated:
-		    return i18n("Updated"); 
+		    return i18n("Updated");
 		case UpdateView::Patched:
-		    return i18n("Patched"); 
+		    return i18n("Patched");
 		case UpdateView::Removed:
-		    return i18n("Removed"); 
+		    return i18n("Removed");
 		case UpdateView::NotInCVS:
 		    return i18n("Not in CVS");
 		default:  return i18n("Unknown");
@@ -730,7 +732,7 @@ QString UpdateFileItem::text(int col) const
 	default:
 	    return QString::null;
 	}
-}       
+}
 
 
 
@@ -801,7 +803,7 @@ UpdateView::UpdateView(QWidget *parent, const char *name)
     width = QMAX(width, fm.width(i18n("Conflict")));
     width = QMAX(width, fm.width(i18n("Not in CVS")));
     width = QMAX(width, fm.width(i18n("Unknown")));
-    
+
     setColumnWidth(UpdateFileItem::Status, width+5);
     setPreferredColumn(UpdateFileItem::File);
     setFilter(NoFilter);
@@ -1019,7 +1021,7 @@ void UpdateView::prepareJob(bool recursive, Action action)
     // Scan recursively all entries - there's no way around this here
     if (recursive)
         static_cast<UpdateDirItem*>(firstChild())->maybeScanDir(true);
-    
+
     rememberSelection(recursive);
     if (act != Add)
         markUpdated(false, false);
@@ -1234,7 +1236,7 @@ void UpdateView::updateItem(const QString &name, Status status, bool isdir)
 
     if (isdir && name == ".")
         return;
-    
+
     const QFileInfo fi(name);
     QString dirpath(fi.dirPath());
     const QString fileName(fi.fileName());
