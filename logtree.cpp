@@ -16,6 +16,7 @@
 
 #include <qpainter.h>
 #include <kdebug.h>
+#include <kglobal.h>
 #include <kglobalsettings.h>
 
 #include "loginfo.h"
@@ -75,7 +76,6 @@ LogTreeView::LogTreeView(QWidget *parent, const char *name)
     setLeftMargin(0);
     setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
     setBackgroundMode(PaletteBase);
-    viewport()->setMouseTracking(true);
     setFocusPolicy(NoFocus);
 
     currentRow = -1;
@@ -103,7 +103,7 @@ void LogTreeView::addRevision(const Cervisia::LogInfo& logInfo)
         (pos1 = rev.findRev('.', pos2-1)) > 0)
     {
         // e. g. for rev = 1.1.2.3 we have
-        // branch = 1.1.2, rev2 = 1.1
+        // branchrev = 1.1.2, branchpoint = 1.1
         branchrev = rev.left(pos2);
         branchpoint = rev.left(pos1);
     }
@@ -318,12 +318,49 @@ void LogTreeView::paintCell(QPainter *p, int row, int col, const QRect& cr,
 void LogTreeView::paintConnector(QPainter *p,
                                  int row, int col, bool followed, bool branched)
 {
-    int midx = colWidths[col] / 2;
-    int midy = rowHeights[row] / 2;
+    const int midx = columnWidth(col) / 2;
+    const int midy = rowHeight(row) / 2;
 
-    p->drawLine(0, midy, branched ? colWidths[col] : midx, midy);
+    p->drawLine(0, midy, branched ? columnWidth(col) : midx, midy);
     if (followed)
         p->drawLine(midx, midy, midx, 0);
+}
+
+
+QSize LogTreeView::computeSize(const Cervisia::LogInfo& logInfo,
+                               int*                     authorHeight,
+                               int*                     tagsHeight) const
+{
+    const QFontMetrics fm(fontMetrics());
+
+    const QString tags(logInfo.tagsToString(Cervisia::TagInfo::Branch | Cervisia::TagInfo::Tag,
+                                            Cervisia::TagInfo::Branch));
+
+    const QSize r1 = fm.size(AlignCenter, logInfo.m_revision);
+    const QSize r3 = fm.size(AlignCenter, logInfo.m_author);
+
+    if (authorHeight)
+        *authorHeight = r3.height();
+
+    int infoWidth = kMax(static_width - 2 * BORDER, kMax(r1.width(), r3.width()));
+    int infoHeight = r1.height() + r3.height() + 3 * INSPACE;
+
+    if (!tags.isEmpty())
+    {
+        const QSize r2 = fm.size(AlignCenter, tags);
+        infoWidth = kMax(infoWidth, r2.width());
+        infoHeight += r2.height() + INSPACE;
+        if (tagsHeight)
+            *tagsHeight = r2.height();
+    }
+    else
+    {
+        if (tagsHeight)
+            *tagsHeight = 0;
+    }
+    infoWidth += 2 * INSPACE;
+
+    return QSize(infoWidth, infoHeight);
 }
 
 
@@ -332,71 +369,59 @@ void LogTreeView::paintRevisionCell(QPainter *p,
                                     const Cervisia::LogInfo& logInfo,
                                     bool followed, bool branched, bool selected)
 {
-    QFontMetrics fm(p->fontMetrics());
+    int authorHeight;
+    int tagsHeight;
+    const QSize infoSize(computeSize(logInfo, &authorHeight, &tagsHeight));
+    const QSize cellSize(columnWidth(col), rowHeight(row));
 
-    const QString& tags(logInfo.tagsToString(Cervisia::TagInfo::Branch | Cervisia::TagInfo::Tag,
-                                             Cervisia::TagInfo::Branch));
+    const int midx(cellSize.width() / 2);
+    const int midy(cellSize.height() / 2);
 
-    QSize r1 = fm.size(AlignCenter, logInfo.m_author);
-    QSize r2 = fm.size(AlignCenter, tags);
-    QSize r3 = fm.size(AlignCenter, logInfo.m_revision);
-
-    int boxwidth, boxheight;
-    boxwidth = QMAX(static_width-2*BORDER, QMAX(r1.width(), r3.width()));
-    boxheight = r1.height() + r3.height() + 3*INSPACE;
-
-    if (!tags.isEmpty())
-    {
-        boxwidth = QMAX(boxwidth, r2.width());
-        boxheight += r2.height() + INSPACE;
-    }
-    boxwidth += 2*INSPACE;
-
-    int x = (colWidths[col] - boxwidth) / 2;
-    int midx = colWidths[col] / 2;
-    int y = (rowHeights[row] - boxheight) / 2;
-    int midy = rowHeights[row] / 2;
+    QRect rect(QPoint((cellSize.width() - infoSize.width()) / 2,
+                      (cellSize.height() - infoSize.height()) / 2),
+               infoSize);
 
     // Connectors
     if (followed)
-        p->drawLine(midx, 0, midx, y);
+        p->drawLine(midx, 0, midx, rect.y()); // to the top
 
     if (branched)
-        p->drawLine(midx + boxwidth / 2, midy, colWidths[col], midy);
+        p->drawLine(rect.x() + infoSize.width(), midy, cellSize.width(), midy); // to the right
 
-    p->drawLine(midx, y + boxheight, midx, rowHeights[row]);
+    p->drawLine(midx, rect.y() + infoSize.height(), midx, cellSize.height()); // to the bottom
 
     // The box itself
     if (selected)
     {
-        p->fillRect(x, y, boxwidth, boxheight, KGlobalSettings::highlightColor());
+        p->fillRect(rect, KGlobalSettings::highlightColor());
         p->setPen(KGlobalSettings::highlightedTextColor());
     }
     else
     {
-        p->drawRoundRect(x, y, boxwidth, boxheight, 10, 10);
+        p->drawRoundRect(rect, 10, 10);
     }
 
-    x += INSPACE;
-    y += INSPACE;
-    boxwidth -= 2*INSPACE;
+    rect.setY(rect.y() + INSPACE);
 
-    p->drawText(x, y, boxwidth, boxheight, AlignHCenter, logInfo.m_author);
-    y += r1.height() + INSPACE;
+    p->drawText(rect, AlignHCenter, logInfo.m_author);
+    rect.setY(rect.y() + authorHeight + INSPACE);
 
+    const QString tags(logInfo.tagsToString(Cervisia::TagInfo::Branch | Cervisia::TagInfo::Tag,
+                                            Cervisia::TagInfo::Branch));
     if (!tags.isEmpty())
     {
-        QFont font(p->font());
+        const QFont font(p->font());
         QFont underline(font);
-
         underline.setUnderline(true);
+
         p->setFont(underline);
-        p->drawText(x, y, boxwidth, boxheight, AlignHCenter, tags);
+        p->drawText(rect, AlignHCenter, tags);
         p->setFont(font);
-        y += r2.height() + INSPACE;
+
+        rect.setY(rect.y() + tagsHeight + INSPACE);
     }
 
-    p->drawText(x, y, boxwidth, boxheight, AlignHCenter, logInfo.m_revision);
+    p->drawText(rect, AlignHCenter, logInfo.m_revision);
 }
 
 
@@ -430,64 +455,18 @@ void LogTreeView::contentsMousePressEvent(QMouseEvent *e)
 
 void LogTreeView::recomputeCellSizes ()
 {
-    // Fill with default
-    int v = static_width;
-    colWidths.fill(v, numCols());
-    v = static_height;
-    rowHeights.fill(v, numRows());
-
-    QFontMetrics fm(fontMetrics());
-
     // Compute maximum for each column and row
-    QPtrListIterator<LogTreeItem> it(items);
-    for (; it.current(); ++it)
+    for (QPtrListIterator<LogTreeItem> it(items); it.current(); ++it)
     {
-        LogTreeItem *item = it.current();
+        const LogTreeItem *item = it.current();
 
-        const Cervisia::LogInfo& logInfo(item->m_logInfo);
+        const QSize cellSize(computeSize(item->m_logInfo) + QSize(2 * BORDER,  2 * BORDER));
 
-        const QString& tags(logInfo.tagsToString(Cervisia::TagInfo::Branch | Cervisia::TagInfo::Tag,
-                                                 Cervisia::TagInfo::Branch));
-        QSize r1 = fm.size(AlignCenter, logInfo.m_revision);
-        QSize r2 = fm.size(AlignCenter, tags);
-        QSize r3 = fm.size(AlignCenter, logInfo.m_author);
-
-        int boxwidth = QMAX(r1.width(), r3.width());
-        int boxheight = r1.height() + r3.height() + 3*INSPACE;
-
-        if (!tags.isEmpty())
-        {
-            boxwidth = QMAX(boxwidth, r2.width());
-            boxheight += r2.height() + INSPACE;
-        }
-        boxwidth += 2*INSPACE;
-
-        colWidths[item->col] = QMAX(colWidths[item->col], boxwidth + 2*BORDER);
-        rowHeights[item->row] = QMAX(rowHeights[item->row], boxheight + 2*BORDER);
-
-        setRowHeight(item->row, rowHeights[item->row]);
-        setColumnWidth(item->col, colWidths[item->col]);
+        setColumnWidth(item->col, kMax(columnWidth(item->col), cellSize.width()));
+        setRowHeight(item->row, kMax(rowHeight(item->row), cellSize.height()));
     }
 
     viewport()->update();
-}
-
-
-int LogTreeView::columnWidth(int col)
-{
-    if (col < 0 || col >= (int)colWidths.size())
-        return 0;
-
-    return colWidths[col];
-}
-
-
-int LogTreeView::rowHeight(int row)
-{
-    if (row < 0 || row >= (int)rowHeights.size())
-        return 0;
-
-    return rowHeights[row];
 }
 
 

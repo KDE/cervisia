@@ -16,7 +16,7 @@
 #ifndef LOGTREE_H
 #define LOGTREE_H
 
-#include <qmemarray.h>
+
 #include <qptrlist.h>
 
 #include <qtable.h>
@@ -58,14 +58,13 @@ signals:
 
 protected:
     virtual void contentsMousePressEvent(QMouseEvent *e);
-    virtual int columnWidth(int col);
-    virtual int rowHeight(int row);
 
 private slots:
 
     void slotQueryToolTip(const QPoint&, QRect&, QString&);
 
 private:
+    QSize computeSize(const Cervisia::LogInfo&, int* = 0, int* = 0) const;
     void paintRevisionCell(QPainter *p, int row, int col, const Cervisia::LogInfo& logInfo,
                            bool followed, bool branched, bool selected);
     void paintConnector(QPainter *p, int row, int col, bool followed, bool branched);
@@ -73,8 +72,6 @@ private:
     LogTreeItemList items;
     LogTreeConnectionList connections;
     int currentRow, currentCol;
-    QMemArray<int> colWidths;
-    QMemArray<int> rowHeights;
 
     static const int BORDER;
     static const int INSPACE;
