@@ -15,13 +15,13 @@
 #ifndef CHANGELOGDLG_H
 #define CHANGELOGDLG_H
 
-#include <qdialog.h>
+#include <kdialogbase.h>
 
 class QMultiLineEdit;
 class KConfig;
 
 
-class ChangeLogDialog : public QDialog
+class ChangeLogDialog : public KDialogBase
 {
     Q_OBJECT
     
@@ -33,7 +33,7 @@ public:
 
     static void loadOptions(KConfig *config);
     static void saveOptions(KConfig *config);
-    
+
 protected slots:
     virtual void done(int res);
 
