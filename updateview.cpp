@@ -94,6 +94,8 @@ public:
                            bool isbin, const QString& rev, const QString& tagname,
                            const QDateTime& date);
 
+    bool wasScanned() const { return m_opened; }
+
     virtual int compare(QListViewItem* i, int col, bool) const;
     virtual QString text(int col) const;
     virtual void setOpen(bool o);
@@ -907,11 +909,25 @@ void UpdateView::unfoldTree()
     while (QListViewItem* item = it.current())
     {
         if (isDirItem(item))
-            item->setOpen(true);
+        {
+            UpdateDirItem* dirItem(static_cast<UpdateDirItem*>(item));
+
+            // if this dir wasn't scanned already scan it recursive
+            // (this is only a hack to reduce the processEvents() calls,
+            // setOpen() would scan the dir too)
+            if (dirItem->wasScanned() == false)
+            {
+                const bool recursive(true);
+                dirItem->maybeScanDir(recursive);
+
+                // scanning can take some time so keep the gui alive
+                qApp->processEvents();
+            }
+
+            dirItem->setOpen(true);
+        }
 
         ++it;
-
-        qApp->processEvents();
     }
 
     // maybe some UpdateDirItem was opened the first time so check the whole tree
