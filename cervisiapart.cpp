@@ -695,7 +695,7 @@ void CervisiaPart::openFiles(const QStringList &filenames)
                         {
                             doit = true;
                             cmdline += " ";
-                            cmdline += KShellProcess::quote(*it);
+                            cmdline += KProcess::quote(*it);
                         }
                 }
 
@@ -711,11 +711,12 @@ void CervisiaPart::openFiles(const QStringList &filenames)
     QString editor = conf->readEntry("Editor");
 
     if (!editor.isEmpty()) {
-        KShellProcess proc("/bin/sh");
+        KProcess proc;
+        proc.setUseShell(true, "/bin/sh");
         proc << editor;
         for ( QStringList::ConstIterator it = filenames.begin();
               it != filenames.end(); ++it )
-            proc << KShellProcess::quote(*it);
+            proc << KProcess::quote(*it);
         proc.start(KProcess::DontCare);
     } else {
         QDir dir(sandbox);
@@ -793,7 +794,7 @@ void CervisiaPart::slotUpdateToTag()
         else
         {
             tagopt = "-D ";
-            tagopt += KShellProcess::quote(l->date());
+            tagopt += KProcess::quote(l->date());
         }
         tagopt += " ";
         updateSandbox(tagopt);
@@ -816,27 +817,26 @@ void CervisiaPart::slotRevert()
 
 void CervisiaPart::slotMerge()
 {
-    MergeDialog *l = new MergeDialog(cvsService, widget() );
+    MergeDialog dlg(cvsService, widget());
 
-    if (l->exec())
+    if (dlg.exec())
     {
         QString tagopt;
-        if (l->byBranch())
+        if (dlg.byBranch())
         {
             tagopt = "-j ";
-            tagopt += l->branch();
+            tagopt += dlg.branch();
         }
         else
         {
             tagopt = "-j ";
-            tagopt += l->tag1();
+            tagopt += dlg.tag1();
             tagopt += " -j ";
-            tagopt += l->tag2();
+            tagopt += dlg.tag2();
         }
         tagopt += " ";
         updateSandbox(tagopt);
     }
-    delete l;
 }
 
 
@@ -874,7 +874,7 @@ void CervisiaPart::slotCommit()
         else
             cmdline += "-l ";
         cmdline += "-m ";
-        cmdline += KShellProcess::quote(dlg.logMessage());
+        cmdline += KProcess::quote(dlg.logMessage());
         cmdline += " ";
 
         cmdline += joinLine(list);
@@ -1028,8 +1028,8 @@ void CervisiaPart::slotAnnotate()
         return;
 
     // Non-modal dialog
-    AnnotateDialog *l = new AnnotateDialog(*config());
-    AnnotateController ctl(l, cvsService);
+    AnnotateDialog* dlg = new AnnotateDialog(*config(), widget());
+    AnnotateController ctl(dlg, cvsService);
     ctl.showDialog(filename);
 }
 
@@ -1069,9 +1069,9 @@ void CervisiaPart::addOrRemoveWatch(WatchDialog::ActionType action)
     if (list.isEmpty())
         return;
 
-    WatchDialog *l = new WatchDialog(action, widget());
+    WatchDialog dlg(action, widget());
 
-    if (l->exec() && l->events() != WatchDialog::None)
+    if (dlg.exec() && dlg.events() != WatchDialog::None)
     {
         QString cmdline = cvsClient(repository);
         cmdline += " watch ";
@@ -1080,7 +1080,7 @@ void CervisiaPart::addOrRemoveWatch(WatchDialog::ActionType action)
         else
             cmdline += "remove ";
 
-        WatchDialog::Events events = l->events();
+        WatchDialog::Events events = dlg.events();
         if (events != WatchDialog::All)
         {
             if (events & WatchDialog::Commits)
@@ -1100,8 +1100,6 @@ void CervisiaPart::addOrRemoveWatch(WatchDialog::ActionType action)
                      this,     SLOT(slotJobFinished()) );
         }
     }
-
-    delete l;
 }
 
 
@@ -1265,47 +1263,47 @@ void CervisiaPart::slotCheckout()
 
 void CervisiaPart::importOrCheckout(CheckoutDialog::ActionType action)
 {
-    CheckoutDialog *l = new CheckoutDialog(action, widget());
+    CheckoutDialog dlg(action, widget());
 
-    if (l->exec())
+    if (dlg.exec())
         {
             QString cmdline = "cd ";
-            cmdline += l->workingDirectory();
+            cmdline += dlg.workingDirectory();
             cmdline += " && ";
             cmdline += cvsClient(repository);
             cmdline += " -d ";
-            cmdline += l->repository();
+            cmdline += dlg.repository();
             if (action == CheckoutDialog::Checkout)
                 {
                     cmdline += " checkout ";
-                    if (!l->branch().isEmpty())
+                    if (!dlg.branch().isEmpty())
 			{
                             cmdline += " -r ";
-                            cmdline += l->branch();
+                            cmdline += dlg.branch();
 			}
                     if (opt_pruneDirs)
                         cmdline += " -P ";
-                    cmdline += l->module();
+                    cmdline += dlg.module();
                 }
             else
                 {
                     cmdline += " import";
-                    if (l->importBinary())
+                    if (dlg.importBinary())
                         cmdline += " -kb";
-                    QString ignore = l->ignoreFiles().stripWhiteSpace();
+                    QString ignore = dlg.ignoreFiles().stripWhiteSpace();
                     if (!ignore.isEmpty())
                         {
                             cmdline += " -I ";
-                            cmdline += KShellProcess::quote(ignore);
+                            cmdline += KProcess::quote(ignore);
                         }
-                    QString comment = l->comment().stripWhiteSpace();
+                    QString comment = dlg.comment().stripWhiteSpace();
                     cmdline += " -m ";
                     cmdline += (QString("\"") + comment + "\" ");
-                    cmdline += l->module();
+                    cmdline += dlg.module();
                     cmdline += " ";
-                    cmdline += l->vendorTag();
+                    cmdline += dlg.vendorTag();
                     cmdline += " ";
-                    cmdline += l->releaseTag();
+                    cmdline += dlg.releaseTag();
                 }
 
             if (protocol->startJob(sandbox, repository, cmdline))
@@ -1315,8 +1313,6 @@ void CervisiaPart::importOrCheckout(CheckoutDialog::ActionType action)
                              this,     SLOT(slotJobFinished()) );
                 }
         }
-
-    delete l;
 }
 
 
@@ -1345,19 +1341,19 @@ void CervisiaPart::createOrDeleteTag(TagDialog::ActionType action)
     if (list.isEmpty())
         return;
 
-    TagDialog *l = new TagDialog(action, cvsService, widget());
+    TagDialog dlg(action, cvsService, widget());
 
-    if (l->exec())
+    if (dlg.exec())
     {
         QString cmdline = cvsClient(repository);
         cmdline += " tag ";
         if (action == TagDialog::Delete)
             cmdline += "-d ";
-        if (l->branchTag())
+        if (dlg.branchTag())
             cmdline += "-b ";
-        if (l->forceTag())
+        if (dlg.forceTag())
             cmdline += "-F ";
-        cmdline += KProcess::quote(l->tag());
+        cmdline += KProcess::quote(dlg.tag());
         cmdline += " ";
         cmdline += joinLine(list);
 
@@ -1368,8 +1364,6 @@ void CervisiaPart::createOrDeleteTag(TagDialog::ActionType action)
                      this,     SLOT(slotJobFinished()) );
         }
     }
-
-    delete l;
 }
 
 
