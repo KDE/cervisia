@@ -7,10 +7,22 @@
 	* Added new startJob() method to ProtocolView
 	  that uses the new cvs DCOP service
 
+2003-01-02  André Wöbbeking <Woebbeking@web.de>
+
+	* Replaced deprecated Qt classes/methods with actual equivalents.
+
 2002-12-31  Christian Loose <christian.loose@hamburg.de>
 
 	* Separate GUI from functionality for AnnotateDialog
 	* Use DCOP service for log dialog
+
+2002-12-30  André Wöbbeking <Woebbeking@web.de>
+
+	* Use user's settings (locale and timezone) to display dates.
+
+2002-12-29  André Wöbbeking <Woebbeking@web.de>
+
+	* Fixed sorting in list views.
 
 2002-12-29  Christian Loose <christian.loose@hamburg.de>
 
@@ -31,6 +43,12 @@
 	* Save and read cvs client and global compression level configuration
 	  to/from the configuration file of the cvs DCOP service
 	* Added kconf_update script
+
+2002-12-26  André Wöbbeking <Woebbeking@web.de>
+
+	* Fixed parsing of branch and tag names:
+	  o no more trailing spaces
+	  o names with more than 24 chars are identified now
 
 2002-12-23  André Wöbbeking <Woebbeking@web.de>
 
