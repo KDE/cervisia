@@ -43,8 +43,6 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget *parent, const char 
     layout->addWidget(textlabel);
 
     listbox = new QListBox(mainWidget);
-    listbox->setEnabled(false);
-    textlabel->setBuddy(listbox);
     layout->addWidget(listbox, 5);
 
     // Add warning message to dialog when user wants to remove a file
