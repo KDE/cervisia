@@ -108,6 +108,9 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
 
         connect( branchCombo, SIGNAL( textChanged( const QString&)),
                  this, SLOT( branchTextChanged() ));
+
+        recursive_box = new QCheckBox(i18n("Re&cursive checkout"), mainWidget);
+        grid->addMultiCellWidget(recursive_box, 6, 6, 0, 1);
     }
 
     workdir_edit = new KLineEdit(mainWidget);
@@ -270,6 +273,11 @@ bool CheckoutDialog::exportOnly() const
     return false;
 }
 
+bool CheckoutDialog::recursive() const
+{
+    return recursive_box->isChecked();
+}
+
 void CheckoutDialog::slotOk()
 {
     QFileInfo fi(workingDirectory());
@@ -421,6 +429,7 @@ void CheckoutDialog::restoreUserInput()
         branchCombo->setCurrentText(partConfig.readEntry("Branch"));
         alias_edit->setText(partConfig.readEntry("Alias"));
         export_box->setChecked(partConfig.readBoolEntry("ExportOnly"));
+        recursive_box->setChecked(true);
     }
 }
 

@@ -48,6 +48,7 @@ public:
     bool importBinary() const;
     bool useModificationTime() const;
     bool exportOnly() const;
+    bool recursive() const;
 
 protected:
     virtual void slotOk();
@@ -66,7 +67,7 @@ private:
     KLineEdit *module_edit, *workdir_edit;
     KLineEdit *comment_edit;
     KLineEdit *vendortag_edit, *releasetag_edit, *ignore_edit, *alias_edit;
-    QCheckBox *binary_box, *export_box;
+    QCheckBox *binary_box, *export_box, *recursive_box;
     QCheckBox* m_useModificationTimeBox;
     ActionType act;
     KConfig&   partConfig;

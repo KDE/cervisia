@@ -1354,7 +1354,7 @@ void CervisiaPart::slotCheckout()
 
     DCOPRef cvsJob = cvsService->checkout(dlg.workingDirectory(), dlg.repository(),
                                           dlg.module(), dlg.branch(), opt_pruneDirs,
-                                          dlg.alias(), dlg.exportOnly());
+                                          dlg.alias(), dlg.exportOnly(), dlg.recursive());
 
     // get command line from cvs job
     QString cmdline = cvsJob.call("cvsCommand()");
