@@ -61,6 +61,9 @@ RepositoryDialog::RepositoryDialog(QWidget *parent, const char *name)
     connect(repolist,SIGNAL(selectionChanged ()),
             this,SLOT(slotSelectionChanged()));
 
+    connect(repolist,SIGNAL(doubleClicked ( QListViewItem * )),
+            this,SLOT(slotDoubleClicked(QListViewItem *)));
+
     KButtonBox *actionbox = new KButtonBox(this, KButtonBox::Vertical);
     actionbox->addStretch();
     QPushButton *addbutton = actionbox->addButton(i18n("&Add..."));
@@ -115,6 +118,12 @@ RepositoryDialog::RepositoryDialog(QWidget *parent, const char *name)
     if (options)
         resize(options->size);
     slotSelectionChanged();
+}
+
+void RepositoryDialog::slotDoubleClicked(QListViewItem *item)
+{
+    if(item)
+        slotSettingsClicked();
 }
 
 void RepositoryDialog::slotSelectionChanged()

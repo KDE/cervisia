@@ -46,6 +46,7 @@ private slots:
     void slotLoginClicked();
     void slotLogoutClicked();
     void slotSelectionChanged();
+    void slotDoubleClicked(QListViewItem *);
 private:
     struct Options {
         QSize size;
