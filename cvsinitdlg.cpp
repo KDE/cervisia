@@ -27,7 +27,7 @@ using Cervisia::CvsInitDialog;
 
 
 CvsInitDialog::CvsInitDialog(QWidget* parent, const char* name)
-    : KDialogBase(parent, name, true, i18n("Create a New Repository (cvs init)"),
+    : KDialogBase(parent, name, true, i18n("Create New Repository (cvs init)"),
                   Ok | Cancel, Ok, true)
 {
     QFrame* mainWidget = makeMainWidget();
