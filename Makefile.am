@@ -11,7 +11,7 @@ libcervisia_la_SOURCES = updateview.cpp protocolview.cpp watchdlg.cpp \
 		   tagdlg.cpp mergedlg.cpp \
 		   logdlg.cpp logtree.cpp loglist.cpp diffdlg.cpp resolvedlg.cpp diffview.cpp \
 		   annotatedlg.cpp annotateview.cpp \
-		   cvsprogressdlg.cpp tiplabel.cpp listview.cpp multilinelabel.cpp \
+		   cvsprogressdlg.cpp tiplabel.cpp listview.cpp \
 		   cvsdir.cpp repositories.cpp misc.cpp cervisiapart.cpp qttableview.cpp
 
 noinst_HEADERS = updateview.h protocolview.h watchdlg.h \
@@ -19,7 +19,7 @@ noinst_HEADERS = updateview.h protocolview.h watchdlg.h \
 		 commitdlg.h checkoutdlg.h updatedlg.h tagdlg.h mergedlg.h \
 		 logdlg.h logtree.h loglist.h diffdlg.h resolvedlg.h diffview.h \
 		 annotatedlg.h annotateview.h \
-		 cvsprogressdlg.h tiplabel.h listview.h multilinelabel.h \
+		 cvsprogressdlg.h tiplabel.h listview.h \
 		 cvsdir.h repositories.h misc.h qttableview.h
 
 cervisia_SOURCES = main.cpp cervisiashell.cpp
