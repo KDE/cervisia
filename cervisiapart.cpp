@@ -1118,11 +1118,12 @@ void CervisiaPart::slotShowWatchers()
     if (list.isEmpty())
         return;
 
-    QString cmdline = cvsClient(repository);
-    cmdline += " watchers ";
-    cmdline += joinLine(list);
+    DCOPRef cvsJob = cvsService->showWatchers(list);
 
-    if (protocol->startJob(sandbox, repository, cmdline))
+    // get command line from cvs job
+    QString cmdline = cvsJob.call("cvsCommand()");
+
+    if( protocol->startJob() )
     {
         showJobStart(cmdline);
         connect( protocol, SIGNAL(jobFinished(bool, int)),
