@@ -753,6 +753,34 @@ DCOPRef CvsService::removeWatch(const QStringList& files, int events)
 }
 
 
+DCOPRef CvsService::rlog(const QString& repository, const QString& module, 
+                         bool recursive)
+{
+    Repository repo(repository);
+
+    // create a cvs job
+    ++(d->lastJobId);
+
+    CvsJob* job = new CvsJob(d->lastJobId);
+    d->cvsJobs.insert(d->lastJobId, job);
+
+    job->setRSH(repo.rsh());
+    job->setServer(repo.server());
+
+    // assemble the command line
+    // cvs -d [REPOSITORY] rlog [-l] [MODULE]
+    *job << repo.cvsClient() << "-d" << repository << "rlog";
+
+    if( !recursive )
+        *job << "-l";
+
+    *job << module;
+
+    // return a DCOP reference to the cvs job
+    return DCOPRef(d->appId, job->objId());
+}
+
+
 DCOPRef CvsService::simulateUpdate(const QStringList& files, bool recursive,
                                    bool createDirs, bool pruneDirs)
 {

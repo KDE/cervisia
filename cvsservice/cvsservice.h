@@ -279,6 +279,11 @@ k_dcop:
     DCOPRef removeWatch(const QStringList& files, int events);
 
     /**
+     */
+    DCOPRef rlog(const QString& repository, const QString& module, 
+                 bool recursive);
+
+    /**
      * Shows a summary of what's been done locally, without changing the
      * working copy. (cvs -n update)
      *
