@@ -35,8 +35,7 @@ KDE_ICON = AUTO
 EXTRA_DIST = cervisia.desktop cervisia.png cervisia-small.png
 CLEANFILES = cervisia.1
 
-appsdir = $(kde_appsdir)/Development
-apps_DATA = cervisia.desktop
+xdg_apps_DATA = cervisia.desktop
 
 partrcdir = $(kde_datadir)/cervisiapart
 partrc_DATA = cervisiaui.rc
