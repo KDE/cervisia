@@ -112,9 +112,7 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, QWidget *parent, const char *na
 {
     QFrame* mainWidget = makeMainWidget();
 
-    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
-
-    QBoxLayout *hbox = new QHBoxLayout(layout);
+    QBoxLayout* hbox = new QHBoxLayout(mainWidget, 0, spacingHint());
 
     repolist = new KListView(mainWidget);
     hbox->addWidget(repolist, 10);
@@ -127,10 +125,9 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, QWidget *parent, const char *na
     repolist->setFocus();
 
     KButtonBox *actionbox = new KButtonBox(mainWidget, KButtonBox::Vertical);
-    actionbox->addStretch();
     QPushButton *addbutton = actionbox->addButton(i18n("&Add..."));
-    QPushButton *removebutton = actionbox->addButton(i18n("&Remove"));
-    QPushButton *settingsbutton = actionbox->addButton(i18n("&Settings..."));
+    m_modifyButton = actionbox->addButton(i18n("&Modify..."));
+    m_removeButton = actionbox->addButton(i18n("&Remove"));
 #if 0
     actionbox->addStretch();
     QPushButton *loginbutton = actionbox->addButton(i18n("Login..."));
@@ -142,10 +139,10 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, QWidget *parent, const char *na
 
     connect( addbutton, SIGNAL(clicked()),
              this, SLOT(slotAddClicked()) );
-    connect( removebutton, SIGNAL(clicked()),
+    connect( m_modifyButton, SIGNAL(clicked()),
+             this, SLOT(slotModifyClicked()) );
+    connect( m_removeButton, SIGNAL(clicked()),
              this, SLOT(slotRemoveClicked()) );
-    connect( settingsbutton, SIGNAL(clicked()),
-             this, SLOT(slotSettingsClicked()) );
 #if 0
     connect( loginbutton, SIGNAL(clicked()),
              this, SLOT(slotLoginClicked()) );
@@ -153,11 +150,27 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, QWidget *parent, const char *na
              this, SLOT(slotLogoutClicked()) );
 #endif
 
+    connect(repolist, SIGNAL(doubleClicked(QListViewItem*)),
+            this, SLOT(slotDoubleClicked(QListViewItem*)));
+    connect(repolist, SIGNAL(selectionChanged()),
+            this, SLOT(slotSelectionChanged()));
+
     // open cvs DCOP service configuration file
     serviceConfig = new KConfig("cvsservicerc");
     
     readCvsPassFile();
     readConfigFile();
+
+    if (QListViewItem* item = repolist->firstChild())
+    {
+        repolist->setCurrentItem(item);
+        repolist->setSelected(item, true);
+    }
+    else
+    {
+        // we have no item so disable modify and remove button
+        slotSelectionChanged();
+    }
 
     setHelp("accessing-repository");
 
@@ -302,9 +315,15 @@ void RepositoryDialog::slotAddClicked()
 }
 
 
+void RepositoryDialog::slotModifyClicked()
+{
+    slotDoubleClicked(repolist->selectedItem());
+}
+
+
 void RepositoryDialog::slotRemoveClicked()
 {
-    delete repolist->currentItem();
+    delete repolist->selectedItem();
 }
 
 
@@ -348,12 +367,6 @@ void RepositoryDialog::slotDoubleClicked(QListViewItem *item)
 }
 
 
-void RepositoryDialog::slotSettingsClicked()
-{
-    slotDoubleClicked(repolist->currentItem());
-}
-
-
 void RepositoryDialog::slotLoginClicked()
 {
 }
@@ -362,6 +375,15 @@ void RepositoryDialog::slotLoginClicked()
 void RepositoryDialog::slotLogoutClicked()
 {
 }
+
+
+void RepositoryDialog::slotSelectionChanged()
+{
+    const bool itemSelected(repolist->selectedItem());
+    m_modifyButton->setEnabled(itemSelected);
+    m_removeButton->setEnabled(itemSelected);
+}
+
 
 #include "repositorydlg.moc"
 

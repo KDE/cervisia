@@ -20,6 +20,7 @@
 
 
 class QListViewItem;
+class QPushButton;
 class KConfig;
 class KListView;
 
@@ -41,16 +42,20 @@ protected:
 
 private slots:
     void slotAddClicked();
+    void slotModifyClicked();
     void slotRemoveClicked();
     void slotDoubleClicked(QListViewItem *item);
-    void slotSettingsClicked();
     void slotLoginClicked();
     void slotLogoutClicked();
+    void slotSelectionChanged();
 
 private:
     KListView *repolist;
     KConfig* serviceConfig;
     KConfig& partConfig;
+
+    QPushButton* m_modifyButton;
+    QPushButton* m_removeButton;
 };
 
 #endif
