@@ -382,7 +382,7 @@ AddRepositoryDialog::AddRepositoryDialog(const QString &repo, QWidget *parent, c
         }
     layout->addWidget(repo_edit);
     
-    QLabel *rsh_label = new QLabel(i18n("Use remote &shell: (only for :ext: repositories)"), this);
+    QLabel *rsh_label = new QLabel(i18n("Use remote &shell (only for :ext: repositories):"), this);
     layout->addWidget(rsh_label);
     
     rsh_edit = new KLineEdit(this);

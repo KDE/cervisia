@@ -148,9 +148,9 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
     //
     QVBox *lookPage = addVBoxPage( i18n("&Appearance") );
 
-    protocolfontbox = new FontButton(i18n("Font for &Protocol Window"), lookPage);
-    annotatefontbox = new FontButton(i18n("Font for A&nnotate View"), lookPage);
-    difffontbox = new FontButton(i18n("Font for D&iff View"), lookPage);
+    protocolfontbox = new FontButton(i18n("Font for &Protocol Window..."), lookPage);
+    annotatefontbox = new FontButton(i18n("Font for A&nnotate View..."), lookPage);
+    difffontbox = new FontButton(i18n("Font for D&iff View..."), lookPage);
     splitterbox = new QCheckBox(i18n("Split main window &horizontally"), lookPage);
 
     new QWidget(lookPage);
