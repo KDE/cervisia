@@ -134,12 +134,14 @@ LogDialog::LogDialog(QWidget *parent, const char *name)
 
             commentbox[i] = new QTextEdit(this);
 	    commentbox[i]->setReadOnly(true);
-	    commentbox[i]->setMinimumSize(10,10);
+	    commentbox[i]->setMinimumSize(commentbox[i]->sizeHint().width(),
+                commentbox[i]->sizeHint().height()-50);
 	    grid->addMultiCellWidget(commentbox[i], 2, 2, 1, 3);
 
             tagsbox[i] = new QTextEdit(this);
 	    tagsbox[i]->setReadOnly(true);
-	    tagsbox[i]->setMinimumSize(10,10);
+	    tagsbox[i]->setMinimumSize(tagsbox[i]->sizeHint().width(),
+                tagsbox[i]->sizeHint().height()-50);
             grid->addWidget(tagsbox[i], 2, 4);
 	}
 
