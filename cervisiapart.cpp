@@ -501,40 +501,45 @@ void CervisiaPart::setupActions()
     //
     // Settings menu
     //
-    action = new KToggleAction( i18n("Hide All &Files"), 0,
+    KToggleAction* toggaction = new KToggleAction( i18n("Hide All &Files"), 0,
                                 this, SLOT(slotHideFiles()),
                                 actionCollection(), "settings_hide_files" );
+    toggaction->setCheckedState(i18n("Show All &Files"));
     hint = i18n("Determines whether only folders are shown");
-    action->setToolTip( hint );
-    action->setWhatsThis( hint );
+    toggaction->setToolTip( hint );
+    toggaction->setWhatsThis( hint );
 
-    action = new KToggleAction( i18n("Hide Up-&To-Date Files"), 0,
+    toggaction = new KToggleAction( i18n("Hide Up-&To-Date Files"), 0,
                                 this, SLOT(slotHideUpToDate()),
                                 actionCollection(), "settings_hide_uptodate" );
+    toggaction->setCheckedState(i18n("Show Up-&To-Date Files"));
     hint = i18n("Determines whether up-to-date files are hidden");
-    action->setToolTip( hint );
-    action->setWhatsThis( hint );
+    toggaction->setToolTip( hint );
+    toggaction->setWhatsThis( hint );
 
-    action = new KToggleAction( i18n("Hide Removed Files"), 0,
+    toggaction = new KToggleAction( i18n("Hide Removed Files"), 0,
                                 this, SLOT(slotHideRemoved()),
                                 actionCollection(), "settings_hide_removed" );
+    toggaction->setCheckedState(i18n("Show Removed Files"));
     hint = i18n("Determines whether removed files are hidden");
-    action->setToolTip( hint );
-    action->setWhatsThis( hint );
+    toggaction->setToolTip( hint );
+    toggaction->setWhatsThis( hint );
 
-    action = new KToggleAction( i18n("Hide Non-CVS Files"), 0,
+    toggaction = new KToggleAction( i18n("Hide Non-CVS Files"), 0,
                                 this, SLOT(slotHideNotInCVS()),
                                 actionCollection(), "settings_hide_notincvs" );
+    toggaction->setCheckedState(i18n("Show Non-CVS Files"));
     hint = i18n("Determines whether files not in CVS are hidden");
-    action->setToolTip( hint );
-    action->setWhatsThis( hint );
+    toggaction->setToolTip( hint );
+    toggaction->setWhatsThis( hint );
 
     action = new KToggleAction( i18n("Hide Empty Folders"), 0,
                                 this, SLOT(slotHideEmptyDirectories()),
                                 actionCollection(), "settings_hide_empty_directories" );
+    toggaction->setCheckedState(i18n("Show Empty Folders"));
     hint = i18n("Determines whether folders without visible entries are hidden");
-    action->setToolTip( hint );
-    action->setWhatsThis( hint );
+    toggaction->setToolTip( hint );
+    toggaction->setWhatsThis( hint );
 
     action = new KToggleAction( i18n("Create &Folders on Update"), 0,
                                 this, SLOT(slotCreateDirs()),
@@ -1267,7 +1272,7 @@ void CervisiaPart::slotImport()
     DCOPRef cvsJob = cvsService->import(dlg.workingDirectory(), dlg.repository(),
                                         dlg.module(), dlg.ignoreFiles(),
                                         dlg.comment(), dlg.vendorTag(),
-                                        dlg.releaseTag(), dlg.importBinary(), 
+                                        dlg.releaseTag(), dlg.importBinary(),
                                         dlg.useModificationTime());
 
     // get command line from cvs job
@@ -1288,7 +1293,7 @@ void CervisiaPart::slotCreateRepository()
 
     if( !dlg.exec() )
         return;
-    
+
     DCOPRef cvsJob = cvsService->createRepository(dlg.directory());
 
     QString cmdline = cvsJob.call("cvsCommand()");
