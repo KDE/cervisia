@@ -1,6 +1,6 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
- *                          bernd@physik.hu-berlin.de
+ *                          bernd@mail.berlios.de
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -50,9 +50,6 @@ LogDialog::LogDialog(QWidget *parent, const char *name)
 	     this, SLOT(revisionSelected(QString,bool)) );
 
     QWidgetStack *stack = new QWidgetStack(this);
-#if QT_VERSION < 300
-    stack->setPalettePropagation(NoChildren);
-#endif
     tabbar = new QTabBar(this);
     QTab *tab1 = new QTab(i18n("&Tree"));
     stack->addWidget(tree, tabbar->addTab(tab1));
@@ -134,14 +131,13 @@ LogDialog::LogDialog(QWidget *parent, const char *name)
 
             commentbox[i] = new QTextEdit(this);
 	    commentbox[i]->setReadOnly(true);
-	    commentbox[i]->setMinimumSize(commentbox[i]->sizeHint().width(),
-                                          commentbox[i]->sizeHint().height()-50);
+            fm = commentbox[i]->fontMetrics();
+	    commentbox[i]->setFixedHeight(2*fm.lineSpacing()+10);
 	    grid->addMultiCellWidget(commentbox[i], 2, 2, 1, 3);
 
             tagsbox[i] = new QTextEdit(this);
 	    tagsbox[i]->setReadOnly(true);
-	    tagsbox[i]->setMinimumSize(tagsbox[i]->sizeHint().width(),
-                                       tagsbox[i]->sizeHint().height()-50);
+	    tagsbox[i]->setFixedHeight(2*fm.lineSpacing()+10);
             grid->addWidget(tagsbox[i], 2, 4);
 	}
 
