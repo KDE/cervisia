@@ -1467,7 +1467,7 @@ void CervisiaPart::openSandbox(const QString &dirname)
         recent->removeURL( KURL(sandboxpath) );
         KMessageBox::sorry(widget(),
                            i18n("This is not a CVS directory.\n"
-				"If you didn't intend to use cervisia you can switch view modes within konqueror."),
+				"If you did not intend to use Cervisia, you can switch view modes within Konqueror."),
                            "Cervisia");
         return;
     }
