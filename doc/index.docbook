@@ -43,8 +43,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2002-06-30</date>
-<releaseinfo>2.00.00</releaseinfo>
+<date>2004-06-06</date>
+<releaseinfo>2.01.90</releaseinfo>
 
 <abstract>
 <para>&cervisia; provides a graphical view of &CVS;.</para>
@@ -354,6 +354,24 @@ the name as the module under the folder given here.
 </para>
 </formalpara>
 
+<formalpara>
+<title>Check out as</title>
+<para>
+An alternative name to checkout the module under. This results in the 
+files being checked out to an alternative folder under the working 
+folder rather than a folder with the module name.
+</para>
+</formalpara>
+
+<formalpara>
+<title>Export only</title>
+<para>
+If you check this box, the files will be exported rather than checked out. 
+Exporting obtains a copy of the source for the module without the CVS 
+administrative folders. For example export may be used to prepare the
+source code for a release.
+</para>
+</formalpara>
 </sect1>
 
 
