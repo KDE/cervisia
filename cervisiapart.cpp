@@ -1778,7 +1778,7 @@ void CervisiaPart::readSettings()
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_notincvs" )))
     ->setChecked( opt_hideNotInCVS );
 
-    opt_hideEmptyDirectories = config->readBoolEntry("Hide Empty Folders", false);
+    opt_hideEmptyDirectories = config->readBoolEntry("Hide Empty Directories", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_empty_directories" )))
     ->setChecked( opt_hideEmptyDirectories );
 
@@ -1812,7 +1812,7 @@ void CervisiaPart::writeSettings()
     config->writeEntry("Hide UpToDate Files", opt_hideUpToDate);
     config->writeEntry("Hide Removed Files", opt_hideRemoved);
     config->writeEntry("Hide Non CVS Files", opt_hideNotInCVS);
-    config->writeEntry("Hide Empty Folders", opt_hideEmptyDirectories);
+    config->writeEntry("Hide Empty Directories", opt_hideEmptyDirectories);
     QValueList<int> sizes = splitter->sizes();
     config->writeEntry("Splitter Pos 1", sizes[0]);
     config->writeEntry("Splitter Pos 2", sizes[1]);

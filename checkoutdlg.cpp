@@ -164,7 +164,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
 
     KConfigGroupSaver cs(&partConfig, "CheckoutDialog");
     repo_combo->setEditText(partConfig.readEntry("Repository"));
-    workdir_edit->setText(partConfig.readPathEntry("Working folder"));
+    workdir_edit->setText(partConfig.readPathEntry("Working directory"));
 
     if (action == Import)
     {
@@ -270,9 +270,9 @@ void CheckoutDialog::slotOk()
     partConfig.writeEntry("Repository", repository());
     partConfig.writeEntry("Module", module());
 #if KDE_IS_VERSION(3,1,3)
-    partConfig.writePathEntry("Working folder", workingDirectory());
+    partConfig.writePathEntry("Working directory", workingDirectory());
 #else
-    partConfig.writeEntry("Working folder", workingDirectory());
+    partConfig.writeEntry("Working directory", workingDirectory());
 #endif
 
     if (act == Import)
