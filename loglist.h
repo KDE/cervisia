@@ -54,14 +54,7 @@ private slots:
     void hideLabel();
 
 private:
-    struct Options {
-        int sortColumn;
-        bool sortAscending;
-        QMemArray<int> indexToColumn;
-        QMemArray<int> columnSizes;
-    };
-    static Options *options;
-    
+
     TipLabel *currentLabel;
     LogListViewItem *currentTipItem;
 };

@@ -23,6 +23,7 @@
 #include <kglobal.h>
 #include <klocale.h>
 
+#include "cervisiapart.h"
 #include "tiplabel.h"
 #include "misc.h"
 
@@ -156,7 +157,6 @@ int LogListViewItem::compare(QListViewItem* i, int col, bool ascending) const
 }
 
 
-LogListView::Options *LogListView::options = 0;
 #define COLS 6
 
 
@@ -168,7 +168,6 @@ LogListView::LogListView(QWidget *parent, const char *name)
     setShowSortIndicator(true);
     setMultiSelection(true);
     setSorting(LogListViewItem::Revision, false);
-    setSorting(LogListViewItem::Branch, false);
     addColumn(i18n("Revision"));
     addColumn(i18n("Author"));
     addColumn(i18n("Date"));
@@ -180,14 +179,13 @@ LogListView::LogListView(QWidget *parent, const char *name)
 
     currentTipItem = 0;
     currentLabel = 0;
-    
-    if (options)
-        {
-            for (int i=0; i<header()->count(); ++i)
-                setColumnWidthMode(i, Manual);
-            setColumnConfig(options->sortColumn, options->sortAscending,
-                            options->indexToColumn, options->columnSizes);
-        }
+
+    // without this restoreLayout() can't change the column widths
+    for (int i = 0; i < columns(); ++i)
+        setColumnWidthMode(i, Manual);
+
+    KConfig* config = CervisiaPart::config();
+    restoreLayout(config, QString::fromLatin1("LogList view"));
 }
 
 
@@ -195,59 +193,8 @@ LogListView::~LogListView()
 {
     delete currentLabel;
 
-    if (!options)
-        options = new Options;
-    getColumnConfig(&options->sortColumn, &options->sortAscending,
-                    &options->indexToColumn, &options->columnSizes);
-}
-
-
-void LogListView::loadOptions(KConfig *config)
-{
-    if (!config->readEntry("Customized"))
-        return;
-
-    options = new Options;
-    options->sortColumn = config->readNumEntry("SortColumn");
-    options->sortAscending = config->readBoolEntry("SortAscending");
-
-    QValueList<int> list; QValueList<int>::Iterator it;
-    int i, n;
-
-    list = config->readIntListEntry("Columns");
-    n = list.count();
-    options->indexToColumn.resize(n);
-    for (it = list.begin(), i=0;
-         it != list.end() && i<n;
-         ++it, ++i)
-        options->indexToColumn.at(i) = (*it);
-    
-    list = config->readIntListEntry("ColumnSizes");
-    n = list.count();
-    options->columnSizes.resize(n);
-    for (it = list.begin(), i=0;
-         it != list.end() && i<n;
-         ++it, ++i)
-        options->columnSizes.at(i) = (*it);
-}
-
-
-void LogListView::saveOptions(KConfig *config)
-{
-    if (!options)
-        return;
-
-    config->writeEntry("Customized", true);
-    config->writeEntry("SortColumn", options->sortColumn);
-    config->writeEntry("SortAscending", options->sortAscending);
-    QStringList indexList;
-    for (uint i=0; i<options->indexToColumn.count(); ++i)
-        indexList << QString::number(options->indexToColumn.at(i));
-    config->writeEntry("Columns", indexList);
-    QStringList sizeList;
-    for (uint i=0; i<options->columnSizes.count(); ++i)
-        sizeList << QString::number(options->columnSizes.at(i));
-    config->writeEntry("ColumnSizes", sizeList);
+    KConfig* config = CervisiaPart::config();
+    saveLayout(config, QString::fromLatin1("LogList view"));
 }
 
 
