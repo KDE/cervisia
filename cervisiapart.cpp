@@ -56,7 +56,7 @@
 
 #define COMMIT_SPLIT_CHAR '\r'
 
-K_EXPORT_COMPONENT_FACTORY( libcervisia, CervisiaFactory );
+K_EXPORT_COMPONENT_FACTORY( libcervisiapart, CervisiaFactory );
 
 CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
                             QObject *parent, const char *name, const QStringList& /*args*/ )

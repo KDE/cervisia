@@ -4,9 +4,9 @@ LDFLAGS	= $(all_libraries) $(KDE_RPATH)
 AM_CPPFLAGS = -UQT_NO_COMPAT -D_BSD_SOURCE
 
 bin_PROGRAMS = cervisia
-lib_LTLIBRARIES = libcervisia.la
+kde_module_LTLIBRARIES = libcervisiapart.la
 
-libcervisia_la_SOURCES = updateview.cpp protocolview.cpp watchdlg.cpp \
+libcervisiapart_la_SOURCES = updateview.cpp protocolview.cpp watchdlg.cpp \
 		   settingsdlg.cpp changelogdlg.cpp historydlg.cpp repositorydlg.cpp \
 		   commitdlg.cpp checkoutdlg.cpp updatedlg.cpp \
 		   tagdlg.cpp mergedlg.cpp \
@@ -15,12 +15,12 @@ libcervisia_la_SOURCES = updateview.cpp protocolview.cpp watchdlg.cpp \
 		   cvsprogressdlg.cpp tiplabel.cpp listview.cpp \
 		   cvsdir.cpp repositories.cpp misc.cpp cervisiapart.cpp qttableview.cpp \
 		   addrepositorydlg.cpp
-libcervisia_la_LDFLAGS = $(all_libraries) -version-info 1:0:0 -module -no-undefined
-libcervisia_la_LIBADD = $(LIB_KFILE) $(LIB_KPARTS) $(LIB_DCOP)
+libcervisiapart_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
+libcervisiapart_la_LIBADD = $(LIB_KFILE) $(LIB_KPARTS)
 
 cervisia_SOURCES = main.cpp cervisiashell.cpp
 cervisia_LDFLAGS = $(all_libraries) $(KDE_RPATH)
-cervisia_LDADD = libcervisia.la
+cervisia_LDADD = libcervisiapart.la
 
 man_MANS = cervisia.1
 

@@ -54,7 +54,7 @@ Name=Cervisia
 Name[eo]=Versioadministrilo
 Name[th]=เซอร์วิเซีย
 ServiceTypes=KParts/ReadOnlyPart,Browser/View
-X-KDE-Library=libcervisia
+X-KDE-Library=libcervisiapart
 X-KDE-BrowserView-Args=DetailedList
 
 X-DCOP-ServiceType=Multi
