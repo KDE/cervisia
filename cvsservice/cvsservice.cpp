@@ -26,6 +26,7 @@
 #include <dcopref.h>
 #include <dcopclient.h>
 #include <kapplication.h>
+#include <kdebug.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kprocess.h>
@@ -69,7 +70,7 @@ CvsService::CvsService()
     : DCOPObject("CvsService")
     , d(new Private)
 {
-    d->appId        = kapp->dcopClient()->appId();
+    d->appId = kapp->dcopClient()->appId();
     
     // create non-concurrent cvs job
     d->singleCvsJob = new CvsJob(SINGLE_JOB_ID);
@@ -184,6 +185,35 @@ DCOPRef CvsService::commit(const QStringList& files, const QString& commitMessag
                      << CvsServiceUtils::joinFileList(files) << REDIRECT_STDERR;
 
     return d->setupNonConcurrentJob();
+}
+
+
+DCOPRef CvsService::diff(const QString& fileName, const QString& revA,
+                         const QString& revB, const QString& diffOptions,
+                         unsigned contextLines)
+{
+    if( !d->hasWorkingCopy() )
+        return DCOPRef();
+
+    // create a cvs job
+    CvsJob* job = d->createCvsJob();
+
+    // assemble the command line
+    *job << d->repository->cvsClient() << "diff" << diffOptions
+         << "-U" << QString::number(contextLines);
+    
+    if( !revA.isEmpty() )
+        *job << "-r" << KProcess::quote(revA);
+        
+    if( !revB.isEmpty() )
+        *job << "-r" << KProcess::quote(revB);
+     
+    *job << KProcess::quote(fileName);
+
+    kdDebug(8051) << job->cvsCommand() << endl;
+
+    // return a DCOP reference to the cvs job
+    return DCOPRef(d->appId, job->objId());
 }
 
 

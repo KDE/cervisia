@@ -38,6 +38,14 @@ public:
 
 k_dcop:
     /**
+     * Adds new files to an existing project. The files don't actually
+     * appear in the repository until a subsequent commit is performed.
+     *
+     * @param files A list of files that should be added to the repository.
+     * @param isBinary
+     *
+     * @return A DCOP reference to the cvs job or in case of failure a
+     *         null reference.
      */
     DCOPRef add(const QStringList& files, bool isBinary);
 
@@ -68,9 +76,19 @@ k_dcop:
                      const QString& module, const QString& tag, bool pruneDirs);
 
     /**
+     * @return A DCOP reference to the cvs job or in case of failure a
+     *         null reference.
      */
     DCOPRef commit(const QStringList& files, const QString& commitMessage,
                    bool recursive);
+
+    /**
+     * @return A DCOP reference to the cvs job or in case of failure a
+     *         null reference.
+     */
+    DCOPRef diff(const QString& fileName, const QString& revA, 
+                 const QString& revB, const QString& diffOptions,
+                 unsigned contextLines);
 
     /**
      * Shows log messages for a file.
@@ -83,14 +101,22 @@ k_dcop:
     DCOPRef log(const QString& fileName);
 
     /**
+     * @return A DCOP reference to the cvs job or in case of failure a
+     *         null reference.
      */
     DCOPRef login();
 
     /**
+     * @return A DCOP reference to the cvs job or in case of failure a
+     *         null reference.
      */
     DCOPRef logout();
 
     /**
+     * @param files A list of files that should be removed from the repository.
+     *
+     * @return A DCOP reference to the cvs job or in case of failure a
+     *         null reference.
      */
     DCOPRef remove(const QStringList& files, bool recursive);
    
