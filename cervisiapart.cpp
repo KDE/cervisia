@@ -619,7 +619,7 @@ void CervisiaPart::popupRequested(KListView*, QListViewItem* item, const QPoint&
 {
     QString xmlName = "context_popup";
 
-    if( isDirItem(item) )
+    if( isDirItem(item) && update->fileSelection().isEmpty() )
         xmlName = "folder_context_popup";
 
     if( QPopupMenu* popup = static_cast<QPopupMenu*>(hostContainer(xmlName)) )
