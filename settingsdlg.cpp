@@ -24,7 +24,6 @@
 #include <qwidgetlist.h>
 #include <qhbuttongroup.h>
 #include <qradiobutton.h>
-#include <kdeversion.h>
 #include <kbuttonbox.h>
 #include <kcolorbutton.h>
 #include <kconfig.h>

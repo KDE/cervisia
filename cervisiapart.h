@@ -16,7 +16,6 @@
 #ifndef CERVISIAPART_H
 #define CERVISIAPART_H
 
-#include <kdeversion.h>
 #include <kparts/part.h>
 #include <kparts/browserextension.h>
 #include <kparts/genericfactory.h>

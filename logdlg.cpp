@@ -37,7 +37,6 @@
 #include <krfcdate.h>
 #include <krun.h>
 #include <kurl.h>
-#include <kdeversion.h>
 
 #include "cvsservice_stub.h"
 #include "annotatedlg.h"

@@ -33,8 +33,6 @@
 #include "misc.h"
 #include "cvsservice_stub.h"
 
-#include <kdeversion.h>
-
 using Cervisia::IsValidTag;
 
 
