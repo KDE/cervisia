@@ -166,6 +166,8 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
             repo_combo->insertItem(*it2);
 
     setHelp((act == Import) ? "importing" : "checkingout");
+    
+    restoreUserInput();
 }
 
 
@@ -257,7 +259,9 @@ void CheckoutDialog::slotOk()
             return;
         }
     }
-
+    
+    saveUserInput();
+    
     KDialogBase::slotOk();
 }
 
