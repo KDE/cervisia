@@ -15,37 +15,36 @@
 #ifndef COMMITDLG_H
 #define COMMITDLG_H
 
-#include <qdialog.h>
-#include <qlistbox.h>
-#include <qmultilinedit.h>
+
+#include <kdialogbase.h>
+
 #include <qstringlist.h>
 
+
 class QComboBox;
+class QListBox;
+class QMultiLineEdit;
 class KConfig;
 
 
-class CommitDialog : public QDialog
+class CommitDialog : public KDialogBase
 {
     Q_OBJECT
 
 public:
     enum ActionType { Commit, Add, AddBinary, Remove };
     
-    CommitDialog( ActionType action, QWidget *parent=0, const char *name=0 );
-    
-    void setFileList(const QStringList &list)
-        { listbox->insertStringList(list); }
-    void setLogMessage(const QString &msg)
-        { edit->setText(msg); }
-    QString logMessage() const
-        { return edit->text(); }
+    explicit CommitDialog( ActionType action, QWidget *parent=0, const char *name=0 );
+
+    virtual ~CommitDialog();
+
+    void setFileList(const QStringList &list);
+    void setLogMessage(const QString &msg);
+    QString logMessage() const;
     void setLogHistory(const QString &sbox, const QString &repo, const QStringList &list);
 
     static void loadOptions(KConfig *config);
     static void saveOptions(KConfig *config);
-
-protected:
-    virtual void done(int r);
 
 private slots:
     void comboActivated(int);

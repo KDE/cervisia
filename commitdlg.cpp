@@ -13,60 +13,61 @@
 
 #include "commitdlg.h"
 
-#include <qlayout.h>
-#include <qpushbutton.h>
-#include <qlabel.h>
 #include <qcombobox.h>
-#include <kapplication.h>
-#include <kbuttonbox.h>
-#include <klocale.h>
+#include <qlabel.h>
+#include <qlayout.h>
+#include <qlistbox.h>
+#include <qmultilineedit.h>
 #include <kconfig.h>
-#include <kdebug.h>
+#include <klocale.h>
+
 #include "diffdlg.h"
-#include "misc.h"
 
 
 CommitDialog::Options *CommitDialog::options = 0;
 
 
 CommitDialog::CommitDialog(ActionType action, QWidget *parent, const char *name)
-    : QDialog(parent, name, true), edit(0)
+    : KDialogBase(parent, name, true, QString::null,
+                  Ok | Cancel, Ok, true),
+      edit(0)
 {
     setCaption( (action==Add)?       i18n("CVS Add") :
                 (action==AddBinary)? i18n("CVS Add Binary") :
                 (action==Remove)?    i18n("CVS Remove") :
                                      i18n("CVS Commit") );
 
-    QBoxLayout *layout = new QVBoxLayout(this, 10);
-    
+    QFrame* mainWidget = makeMainWidget();
+
+    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
+
     QLabel *textlabel = new QLabel
         ( (action==Add)?       i18n("Add the following files to the repository:") :
           (action==AddBinary)? i18n("Add the following binary files to the repository:") :
           (action==Remove)?    i18n("Remove the following files from the repository:") :
                                i18n("Commit the following &files:"),
-          this );
-    layout->addWidget(textlabel, 0);
+          mainWidget );
+    layout->addWidget(textlabel);
 
-    listbox = new QListBox(this);
+    listbox = new QListBox(mainWidget);
     textlabel->setBuddy(listbox);
     connect( listbox, SIGNAL(selected(int)), this, SLOT(fileSelected(int)));
     layout->addWidget(listbox, 5);
 
     if (action == Commit)
         {
-            QLabel *archivelabel = new QLabel(i18n("Older &messages:"), this);
-            layout->addWidget(archivelabel, 0);
+            QLabel *archivelabel = new QLabel(i18n("Older &messages:"), mainWidget);
+            layout->addWidget(archivelabel);
             
-            combo = new QComboBox(this);
+            combo = new QComboBox(mainWidget);
             archivelabel->setBuddy(combo);
             connect( combo, SIGNAL(activated(int)), this, SLOT(comboActivated(int)) );
-            combo->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
-            layout->addWidget(combo, 0);
+            layout->addWidget(combo);
             
-            QLabel *messagelabel = new QLabel(i18n("&Log message:"), this);
-            layout->addWidget(messagelabel, 0);
+            QLabel *messagelabel = new QLabel(i18n("&Log message:"), mainWidget);
+            layout->addWidget(messagelabel);
 
-            edit = new QMultiLineEdit(this);
+            edit = new QMultiLineEdit(mainWidget);
             messagelabel->setBuddy(edit);
             edit->setFocus();
             edit->setMinimumSize(400, 100);
@@ -74,29 +75,13 @@ CommitDialog::CommitDialog(ActionType action, QWidget *parent, const char *name)
         }
     else
         listbox->setEnabled(false);
-    
-    QFrame *frame = new QFrame(this);
-    frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-    layout->addWidget(frame, 0);
-
-    KButtonBox *buttonbox = new KButtonBox(this);
-    buttonbox->addStretch();
-    QPushButton *ok = buttonbox->addButton(i18n("&OK"));
-    QPushButton *cancel = buttonbox->addButton(i18n("Cancel"));
-    ok->setDefault(true);
-    connect( ok, SIGNAL(clicked()), this, SLOT(accept()) );
-    connect( cancel, SIGNAL(clicked()), this, SLOT(reject()) );
-    buttonbox->layout();
-    layout->addWidget(buttonbox, 0);
-
-    layout->activate();
 
     if (options && edit) // Only for commits
         resize(options->size);
 }
 
 
-void CommitDialog::done(int res)
+CommitDialog::~CommitDialog()
 {
     if (edit) // Only for commits
         {
@@ -104,8 +89,24 @@ void CommitDialog::done(int res)
                 options = new Options;
             options->size = size();
         }
-    
-    QDialog::done(res);
+}
+
+
+void CommitDialog::setFileList(const QStringList &list)
+{
+    listbox->insertStringList(list);
+}
+
+
+void CommitDialog::setLogMessage(const QString &msg)
+{
+    edit->setText(msg);
+}
+
+
+QString CommitDialog::logMessage() const
+{
+    return edit->text();
 }
 
 
