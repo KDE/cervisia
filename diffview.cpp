@@ -72,7 +72,7 @@ DiffView::DiffView( bool withlinenos, bool withmarker,
     textwidth = 0;
 
     config->setGroup("General");
-    m_tabWidth = config->readUnsignedNumEntry("TabWidth", 8);
+    m_tabWidth = config->readNumEntry("TabWidth", 8);
 
     items.setAutoDelete(true);
     linenos = withlinenos;
@@ -171,11 +171,11 @@ void DiffView::addLine(const QString &line, DiffType type, int no)
     // For some fonts, e.g. "Clean", is fm.maxWidth() greater than
     // fmbold.maxWidth().
     QString copy(line);
-    int numTabs = copy.contains('\t', false);
+    const int numTabs = copy.contains('\t', false);
     copy.replace( QRegExp("\t"), "");
 
-    uint tabSize   = m_tabWidth * QMAX(fm.maxWidth(), fmbold.maxWidth());
-    uint copyWidth = QMAX(fm.width(copy), fmbold.width(copy));
+    const int tabSize   = m_tabWidth * QMAX(fm.maxWidth(), fmbold.maxWidth());
+    const int copyWidth = QMAX(fm.width(copy), fmbold.width(copy));
     textwidth = QMAX(textwidth, copyWidth + numTabs * tabSize);
 
     DiffViewItem *item = new DiffViewItem;

@@ -89,7 +89,7 @@ private:
     QColor diffInsertColor;
     QColor diffDeleteColor;
 
-    unsigned int    m_tabWidth;
+    int m_tabWidth;
 };
 
 
