@@ -135,7 +135,6 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     setupActions();
     readSettings();
     connect( update, SIGNAL( selectionChanged() ), this, SLOT( updateActions() ) );
-    updateActions();
     setXMLFile( "cervisiaui.rc" );
     
 }
@@ -559,51 +558,22 @@ void CervisiaPart::popupRequested(KListView*, QListViewItem*, const QPoint& p)
 
 void CervisiaPart::updateActions()
 {
-    bool hassandbox = !sandbox.isNull();
-
-    actionCollection()->action( "insert_changelog_entry" )->setEnabled( hassandbox );
-    actionCollection()->action( "view_unfold_tree" )->setEnabled( hassandbox );
-    actionCollection()->action( "view_fold_tree" )->setEnabled( hassandbox );
+    bool hassandbox = !sandbox.isEmpty();
+    stateChanged("has_sandbox", hassandbox ? StateNoReverse : StateReverse);
 
     bool single = update->hasSingleSelection();
-
-    actionCollection()->action( "file_edit" )->setEnabled( single );
-    actionCollection()->action( "file_resolve" )->setEnabled( single );
-    actionCollection()->action( "view_log" )->setEnabled( single );
-    actionCollection()->action( "view_annotate" )->setEnabled( single );
-    actionCollection()->action( "view_diff" )->setEnabled( single );
-    actionCollection()->action( "view_last_change" )->setEnabled( single );
+    stateChanged("has_single_selection", single ? StateNoReverse 
+                                                : StateReverse);
 
     //    bool nojob = !( actionCollection()->action( "stop_job" )->isEnabled() );
     bool selected = (update->currentItem() != 0);
     bool nojob = !hasRunningJob && selected;
-    actionCollection()->action( "file_update" )->setEnabled( nojob );
-    actionCollection()->action( "file_status" )->setEnabled( nojob );
-    actionCollection()->action( "file_commit" )->setEnabled( nojob );
-    actionCollection()->action( "file_add" )->setEnabled( nojob );
-    actionCollection()->action( "file_add_binary" )->setEnabled( nojob );
-    actionCollection()->action( "file_remove" )->setEnabled( nojob );
-    actionCollection()->action( "file_revert_local_changes" )->setEnabled( nojob );
 
-    actionCollection()->action( "create_tag" )->setEnabled( nojob );
-    actionCollection()->action( "delete_tag" )->setEnabled( nojob );
-    actionCollection()->action( "update_to_tag" )->setEnabled( nojob );
-    actionCollection()->action( "update_to_head" )->setEnabled( nojob );
-    actionCollection()->action( "merge" )->setEnabled( nojob );
-    actionCollection()->action( "add_watch" )->setEnabled( nojob );
-    actionCollection()->action( "remove_watch" )->setEnabled( nojob );
-    actionCollection()->action( "show_watchers" )->setEnabled( nojob );
-    actionCollection()->action( "edit_files" )->setEnabled( nojob );
-    actionCollection()->action( "unedit_files" )->setEnabled( nojob );
-    actionCollection()->action( "show_editors" )->setEnabled( nojob );
-    actionCollection()->action( "lock_files" )->setEnabled( nojob );
-    actionCollection()->action( "unlock_files" )->setEnabled( nojob );
+    stateChanged("item_selected", selected ? StateNoReverse : StateReverse);
+    stateChanged("has_no_job", nojob ? StateNoReverse : StateReverse);
+    stateChanged("has_running_job", hasRunningJob ? StateNoReverse 
+                                                  : StateReverse);
 
-    actionCollection()->action( "repository_checkout" )->setEnabled( !hasRunningJob );
-    actionCollection()->action( "repository_import" )->setEnabled( !hasRunningJob );
-
-    actionCollection()->action( "view_history" )->setEnabled(selected);
-    actionCollection()->action( "make_patch" )->setEnabled(selected);
 }
 
 
@@ -1814,6 +1784,18 @@ void CervisiaPart::writeSettings()
     
     // write to disk
     config->sync();
+}
+
+
+void CervisiaPart::guiActivateEvent(KParts::GUIActivateEvent* event)
+{
+    if( event->activated() )
+    {
+        // initial setup of the menu items' state
+        updateActions();
+    }
+
+    KParts::ReadOnlyPart::guiActivateEvent(event);
 }
 
 

@@ -147,6 +147,9 @@ private slots:
     // called by menu action "Open Sandbox..."
     void slotOpenSandbox();
 
+protected:
+    virtual void guiActivateEvent(KParts::GUIActivateEvent* event);
+
 private:    
     void setupActions();
 

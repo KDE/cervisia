@@ -95,4 +95,57 @@
   <Action name="file_add"/>
   <Action name="file_remove"/>
 </Menu>
+<State name="has_sandbox">
+  <Enable>
+    <Action name="insert_changelog_entry"/>
+    <Action name="view_unfold_tree"/>
+    <Action name="view_fold_tree"/>
+  </Enable>
+</State>
+<State name="has_single_selection">
+  <Enable>
+    <Action name="file_edit"/>
+    <Action name="file_resolve"/>
+    <Action name="view_log"/>
+    <Action name="view_annotate"/>
+    <Action name="view_diff"/>
+    <Action name="view_last_change"/>
+  </Enable>
+</State>
+<State name="item_selected">
+  <Enable>
+    <Action name="view_history"/>
+    <Action name="make_patch"/>
+  </Enable>
+</State>
+<State name="has_no_job">
+  <Enable>
+    <Action name="file_update"/>
+    <Action name="file_status"/>
+    <Action name="file_commit"/>
+    <Action name="file_add"/>
+    <Action name="file_add_binary"/>
+    <Action name="file_remove"/>
+    <Action name="file_revert_local_changes"/>
+    <Action name="create_tag"/>
+    <Action name="delete_tag"/>
+    <Action name="update_to_tag"/>
+    <Action name="update_to_head"/>
+    <Action name="merge"/>
+    <Action name="add_watch"/>
+    <Action name="remove_watch"/>
+    <Action name="show_watchers"/>
+    <Action name="edit_files"/>
+    <Action name="unedit_files"/>
+    <Action name="show_editors"/>
+    <Action name="lock_files"/>
+    <Action name="unlock_files"/>
+  </Enable>
+</State>
+<State name="has_running_job">
+  <Disable>
+    <Action name="repository_checkout"/>
+    <Action name="repository_import"/>
+  </Disable>
+</State>
 </kpartgui>

@@ -1,3 +1,10 @@
+2003-05-09  Christian Loose  <christian.loose@hamburg.de>
+
+	* Convert CervisiaPart::updateActions() from manually
+	  changing the state of the menu items to using
+	  KXMLGUIClient::stateChanged() with the corresponding
+	  setup in the part's rc-file.
+
 2003-04-18  Christian Loose  <christian.loose@hamburg.de>
 
 	* Fix BR 56042: Better default colors for white
