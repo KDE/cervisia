@@ -226,8 +226,7 @@ void UpdateDirItem::updateEntriesItem(const QString& name,
                                 }
                             fileItem->setRevTag(rev, tagname);
                             fileItem->setDate(date);
-                            if (isbin)
-                                fileItem->setPixmap(0, SmallIcon("binary"));
+                            fileItem->setPixmap(0, isbin ? SmallIcon("binary") : 0);
                         }
 		    return;
 		}
