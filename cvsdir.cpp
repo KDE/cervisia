@@ -89,7 +89,7 @@ bool CvsIgnoreList::matches(const QFileInfo *fi) const
     //    if (!fi->isFile())
     //        return false;
 
-    const QCString& fileName(fi->fileName().local8Bit());
+    const QCString& fileName(QFile::encodeName(fi->fileName()));
     QStrListIterator it(ignoreList);
     for (; it.current(); ++it)
 	{
