@@ -54,63 +54,11 @@
 
 #define COMMIT_SPLIT_CHAR '\r'
 
-extern "C"
-{
-    /**
-     * This function is the 'main' function of this part.  It takes
-     * the form 'void *init_lib<library name>()  It always returns a
-     * new factory object
-     */
-    void *init_libcervisia()
-    {
-        return new CervisiaFactory;
-    }
-};
+K_EXPORT_COMPONENT_FACTORY( libcervisia, CervisiaFactory );
 
-KInstance *CervisiaFactory::s_instance = 0L;
-
-CervisiaFactory::CervisiaFactory()
-{
-  // Nothing to do
-}
-
-CervisiaFactory::~CervisiaFactory()
-{
-    if ( s_instance ) {
-      delete s_instance->aboutData();
-      delete s_instance;
-    }
-
-    s_instance = 0;
-}
-
-KParts::Part *CervisiaFactory::createPartObject( QWidget *parentWidget, const char *widgetName,
-                                                 QObject* parent, const char* name,
-                                                 const char * /*classname*/,
-                                                 const QStringList & /*args*/ )
-{
-    KParts::Part *obj = new CervisiaPart( parentWidget, widgetName, parent, name );
-    return obj;
-}
-
-KInstance *CervisiaFactory::instance()
-{
-    if ( !s_instance )
-        s_instance = new KInstance( aboutData() );
-    return s_instance;
-}
-
-KAboutData *CervisiaFactory::aboutData()
-{
-    return new KAboutData( "cervisiapart", I18N_NOOP("Cervisia"),
-                           CERVISIA_VERSION,
-                           I18N_NOOP("A CVS frontend"),
-                           KAboutData::License_QPL,
-                           I18N_NOOP("Copyright (c) 1999-2002 Bernd Gehrmann"));
-}
 
 CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
-                            QObject *parent, const char *name )
+                            QObject *parent, const char *name, const QStringList& args )
     : KParts::ReadOnlyPart( parent, name )
     , hasRunningJob( false )
     , opt_hideFiles( false )
@@ -615,6 +563,16 @@ void CervisiaPart::aboutCervisia()
                           "See the ChangeLog file for a list of contributors."));
     QMessageBox::about(0, i18n("About Cervisia"),
                        aboutstr.arg(CERVISIA_VERSION).arg(KDE_VERSION_STRING));
+}
+
+
+KAboutData* CervisiaPart::createAboutData()
+{
+    return new KAboutData( "cervisiapart", I18N_NOOP("Cervisia"),
+                           CERVISIA_VERSION,
+                           I18N_NOOP("A CVS frontend"),
+                           KAboutData::License_QPL,
+                           I18N_NOOP("Copyright (c) 1999-2002 Bernd Gehrmann"));
 }
 
 

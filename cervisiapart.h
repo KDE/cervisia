@@ -17,7 +17,7 @@
 
 #include <kparts/part.h>
 #include <kparts/browserextension.h>
-#include <kparts/factory.h>
+#include <kparts/genericfactory.h>
 
 #include "commitdlg.h"
 #include "checkoutdlg.h"
@@ -32,29 +32,6 @@ class ProtocolView;
 class KAboutData;
 class KRecentFilesAction;
 
-/**
- * Factory for instantiating CervisiaParts.
- */
-class CervisiaFactory : public KParts::Factory
-{
-    Q_OBJECT
-
-public:
-    CervisiaFactory();
-    virtual ~CervisiaFactory();
-
-    virtual KParts::Part *createPartObject( QWidget *parentWidget, const char *widgetName,
-                                            QObject* parent = 0, const char* name = 0,
-                                            const char* classname = "QObject",
-                                            const QStringList &args = QStringList() );
-    
-    static KInstance *instance();
-    static KAboutData *aboutData();
-    
-private:
-    static KInstance *s_instance;
-};
-
 
 /**
  * An embeddable Cervisia viewer.
@@ -65,7 +42,7 @@ class CervisiaPart : public KParts::ReadOnlyPart
 
 public:
     CervisiaPart( QWidget *parentWidget, const char *widgetName,
-                  QObject *parent, const char *name=0 );
+                  QObject *parent, const char *name=0, const QStringList& args = QStringList());
     virtual ~CervisiaPart();
 
     /**
@@ -80,6 +57,8 @@ public:
 
     void readDialogProperties( KConfig *config );
     void saveDialogProperties( KConfig *config );
+    
+    static KAboutData* createAboutData();
 
 public slots:
     virtual bool openFile() { return true; }
@@ -179,6 +158,8 @@ private:
     //for the Open Recent directories
     KRecentFilesAction *recent;
 };
+
+typedef KParts::GenericFactory<CervisiaPart> CervisiaFactory;
 
 /**
  * A mysterious class, needed to make Konqueror intrgration work.
