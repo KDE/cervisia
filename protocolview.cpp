@@ -36,7 +36,7 @@ ProtocolView::ProtocolView(const QCString& appId, QWidget *parent, const char *n
     setReadOnly(true);
     setUndoRedoEnabled(false);
     setTabChangesFocus(true);
-    setTextFormat(Qt::RichText);
+    setTextFormat(Qt::LogText);
 
     KConfig *config = CervisiaPart::config();
     config->setGroup("LookAndFeel");
