@@ -38,8 +38,8 @@ using Cervisia::IsValidTag;
 
 
 CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
-                               ActionType action, QWidget *parent,
-                               const char *name)
+                               ActionType action, QWidget* parent,
+                               const char* name)
     : KDialogBase(parent, name, true, QString::null,
                   Ok | Cancel | Help, Ok, true)
     , act(action)
@@ -50,109 +50,109 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
 
     QFrame* mainWidget = makeMainWidget();
 
-    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
+    QBoxLayout* layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 
-    QGridLayout *grid = new QGridLayout(layout);
+    QGridLayout* grid = new QGridLayout(layout);
     grid->setColStretch(0, 1);
     grid->setColStretch(1, 20);
-    for (int i = 0; i < ((action==Checkout)? 4 : 10); ++i)
+    for( int i = 0; i < ((action==Checkout)? 4 : 10); ++i )
         grid->setRowStretch(i, 0);
 
     repo_combo = new QComboBox(true, mainWidget);
     repo_combo->setFocus();
     // make sure combobox is smaller than the screen
-    repo_combo->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
+    repo_combo->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     grid->addWidget(repo_combo, 0, 1);
 
-    QLabel *repo_label = new QLabel
-	(repo_combo, i18n("&Repository:"), mainWidget);
+    QLabel* repo_label = new QLabel(repo_combo, i18n("&Repository:"), mainWidget);
     grid->addWidget(repo_label, 0, 0, AlignLeft | AlignVCenter);
 
-    if (action == Import)
-        {
-            module_edit = new KLineEdit(mainWidget);
-            grid->addWidget(module_edit, 1, 1);
-            QLabel *module_label = new QLabel(module_edit, i18n("&Module:"), mainWidget);
-            grid->addWidget(module_label, 1, 0, AlignLeft | AlignVCenter);
-        }
+    if( action == Import )
+    {
+        module_edit = new KLineEdit(mainWidget);
+        grid->addWidget(module_edit, 1, 1);
+        QLabel* module_label = new QLabel(module_edit, i18n("&Module:"), mainWidget);
+        grid->addWidget(module_label, 1, 0, AlignLeft | AlignVCenter);
+    }
     else
-        {
-            module_combo = new QComboBox(true, mainWidget);
+    {
+        module_combo = new QComboBox(true, mainWidget);
 
-            QPushButton *module_button = new QPushButton(i18n("Fetch &List"), mainWidget);
-            connect( module_button, SIGNAL(clicked()),
-                     this, SLOT(moduleButtonClicked()) );
+        QPushButton* module_button = new QPushButton(i18n("Fetch &List"), mainWidget);
+        connect( module_button, SIGNAL(clicked()),
+                 this, SLOT(moduleButtonClicked()) );
 
-            QBoxLayout *module_layout = new QHBoxLayout();
-            grid->addLayout(module_layout, 1, 1);
-            module_layout->addWidget(module_combo, 10);
-            module_layout->addWidget(module_button, 0, AlignVCenter);
+        QBoxLayout* module_layout = new QHBoxLayout();
+        grid->addLayout(module_layout, 1, 1);
+        module_layout->addWidget(module_combo, 10);
+        module_layout->addWidget(module_button, 0, AlignVCenter);
 
-            QLabel *module_label = new QLabel(module_combo, i18n("&Module:"), mainWidget);
-            grid->addWidget(module_label, 1, 0, AlignLeft | AlignVCenter);
+        QLabel* module_label = new QLabel(module_combo, i18n("&Module:"), mainWidget);
+        grid->addWidget(module_label, 1, 0, AlignLeft | AlignVCenter);
 
-            branch_edit = new KLineEdit(mainWidget);
-            grid->addWidget(branch_edit, 2, 1);
+        branch_edit = new KLineEdit(mainWidget);
+        grid->addWidget(branch_edit, 2, 1);
 
-            QLabel *branch_label = new QLabel(branch_edit, i18n("&Branch tag:"), mainWidget);
-            grid->addWidget(branch_label, 2, 0, AlignLeft | AlignVCenter);
-        }
+        QLabel* branch_label = new QLabel(branch_edit, i18n("&Branch tag:"), 
+                                          mainWidget);
+        grid->addWidget(branch_label, 2, 0, AlignLeft | AlignVCenter);
+    }
 
     workdir_edit = new KLineEdit(mainWidget);
     workdir_edit->setText(QDir::homeDirPath());
     workdir_edit->setMinimumWidth(fontMetrics().width('X') * 40);
 
-    QPushButton *dir_button = new QPushButton("...", mainWidget);
+    QPushButton* dir_button = new QPushButton("...", mainWidget);
     connect( dir_button, SIGNAL(clicked()),
-	     this, SLOT(dirButtonClicked()) );
+             this, SLOT(dirButtonClicked()) );
     dir_button->setFixedWidth(30);
 
-    QBoxLayout *workdir_layout = new QHBoxLayout();
+    QBoxLayout* workdir_layout = new QHBoxLayout();
     grid->addLayout(workdir_layout, (action==Import)? 2 : 3, 1);
     workdir_layout->addWidget(workdir_edit, 10);
     workdir_layout->addWidget(dir_button, 0, AlignVCenter);
 
-    QLabel *workdir_label = new QLabel
-	(workdir_edit, i18n("Working &folder:"), mainWidget);
+    QLabel* workdir_label = new QLabel(workdir_edit, i18n("Working &folder:"), 
+                                       mainWidget);
     grid->addWidget(workdir_label, (action==Import)? 2 : 3, 0, AlignLeft | AlignVCenter);
 
-    if (action == Import)
-        {
-            vendortag_edit = new KLineEdit(mainWidget);
-            grid->addWidget(vendortag_edit, 3, 1);
+    if( action == Import )
+    {
+        vendortag_edit = new KLineEdit(mainWidget);
+        grid->addWidget(vendortag_edit, 3, 1);
 
-            QLabel *vendortag_label = new QLabel
-                (vendortag_edit, i18n("&Vendor tag:"), mainWidget);
-            grid->addWidget(vendortag_label, 3, 0, AlignLeft | AlignVCenter);
+        QLabel* vendortag_label = new QLabel(vendortag_edit, i18n("&Vendor tag:"), 
+                                             mainWidget);
+        grid->addWidget(vendortag_label, 3, 0, AlignLeft | AlignVCenter);
 
-            releasetag_edit = new KLineEdit(mainWidget);
-            grid->addWidget(releasetag_edit, 4, 1);
+        releasetag_edit = new KLineEdit(mainWidget);
+        grid->addWidget(releasetag_edit, 4, 1);
 
-            QLabel *releasetag_label = new QLabel
-                (releasetag_edit, i18n("&Release tag:"), mainWidget);
-            grid->addWidget(releasetag_label, 4, 0, AlignLeft | AlignVCenter);
+        QLabel* releasetag_label = new QLabel(releasetag_edit, i18n("&Release tag:"),
+                                              mainWidget);
+        grid->addWidget(releasetag_label, 4, 0, AlignLeft | AlignVCenter);
 
-            ignore_edit = new KLineEdit(mainWidget);
-            grid->addWidget(ignore_edit, 5, 1);
+        ignore_edit = new KLineEdit(mainWidget);
+        grid->addWidget(ignore_edit, 5, 1);
 
-            QLabel *ignore_label = new QLabel
-                (ignore_edit, i18n("&Ignore files:"), mainWidget);
-            grid->addWidget(ignore_label, 5, 0, AlignLeft | AlignVCenter);
+        QLabel* ignore_label = new QLabel(ignore_edit, i18n("&Ignore files:"), 
+                                          mainWidget);
+        grid->addWidget(ignore_label, 5, 0, AlignLeft | AlignVCenter);
 
-            comment_edit = new KLineEdit(mainWidget);
-            grid->addWidget(comment_edit, 6, 1);
+        comment_edit = new KLineEdit(mainWidget);
+        grid->addWidget(comment_edit, 6, 1);
 
-            QLabel *comment_label = new QLabel
-                (comment_edit, i18n("&Comment:"), mainWidget);
-            grid->addWidget(comment_label, 6, 0, AlignLeft | AlignVCenter);
+        QLabel* comment_label = new QLabel(comment_edit, i18n("&Comment:"), 
+                                           mainWidget);
+        grid->addWidget(comment_label, 6, 0, AlignLeft | AlignVCenter);
 
-            binary_box = new QCheckBox(i18n("Import as &binaries"), mainWidget);
-            grid->addMultiCellWidget(binary_box, 7, 7, 0, 1);
-            
-            m_useModificationTimeBox = new QCheckBox(
-                    i18n("Use file's modification time as time of import"), mainWidget);
-            grid->addMultiCellWidget(m_useModificationTimeBox, 8, 8, 0, 1);
-        }
+        binary_box = new QCheckBox(i18n("Import as &binaries"), mainWidget);
+        grid->addMultiCellWidget(binary_box, 7, 7, 0, 1);
+
+        m_useModificationTimeBox = new QCheckBox(
+                i18n("Use file's modification time as time of import"), mainWidget);
+        grid->addMultiCellWidget(m_useModificationTimeBox, 8, 8, 0, 1);
+    }
 
     QStringList list1 = Repositories::readCvsPassFile();
     QStringList::ConstIterator it1;
@@ -283,26 +283,26 @@ void CheckoutDialog::moduleButtonClicked()
     module_combo->clear();
     QString str;
     while (dlg.getLine(str))
-        {
-            if (str.left(12) == "Unknown host")
-                continue;
+    {
+        if (str.left(12) == "Unknown host")
+            continue;
 
-            int pos = str.find(' ');
-            if (pos == -1)
-                pos = str.find('\t');
-            if (pos == -1)
-                pos = str.length();
-            QString module( str.left(pos).stripWhiteSpace() );
-            if ( !module.isEmpty() )
-                module_combo->insertItem(module);
-        }
+        int pos = str.find(' ');
+        if (pos == -1)
+            pos = str.find('\t');
+        if (pos == -1)
+            pos = str.length();
+        QString module( str.left(pos).stripWhiteSpace() );
+        if ( !module.isEmpty() )
+            module_combo->insertItem(module);
+    }
 }
-    
+
 
 void CheckoutDialog::restoreUserInput()
 {
     KConfigGroupSaver cs(&partConfig, "CheckoutDialog");
-    
+
     repo_combo->setEditText(partConfig.readEntry("Repository"));
     workdir_edit->setText(partConfig.readPathEntry("Working directory"));
 
