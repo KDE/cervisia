@@ -1,7 +1,7 @@
 CERVISIA_VERSION = 2.1
 INCLUDES = -I./cvsservice -D_BSD_SOURCE $(all_includes)
 
-SUBDIRS = cvsservice .
+SUBDIRS = cvsservice . pics
 
 bin_PROGRAMS = cervisia
 kde_module_LTLIBRARIES = libcervisiapart.la

@@ -1,3 +1,9 @@
+2004-07-13  André Wöbbeking  <Woebbeking@web.de>
+
+	* Implemented FR #67805, #67806, #67807, #67809:
+	  Hooray, icons for Cervisia's (main) actions.
+	  Thanks to Marco Martin for the great artwork!
+
 2004-07-11  Christian Loose  <christian.loose@kdemail.net>
 
 	* Fix bug #83239:

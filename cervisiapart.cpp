@@ -235,14 +235,14 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Update"), "down", CTRL+Key_U,
+    action = new KAction( i18n("&Update"), "vcs_update", CTRL+Key_U,
                           this, SLOT( slotUpdate() ),
                           actionCollection(), "file_update" );
     hint = i18n("Updates (cvs update) the selected files and folders");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Status"), Key_F5,
+    action = new KAction( i18n("&Status"), "vcs_status", Key_F5,
                           this, SLOT( slotStatus() ),
                           actionCollection(), "file_status" );
     hint = i18n("Updates the status (cvs -n update) of the selected files and folders");
@@ -263,14 +263,14 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Commit..."), "up", Key_NumberSign,
+    action = new KAction( i18n("&Commit..."), "vcs_commit", Key_NumberSign,
                           this, SLOT( slotCommit() ),
                           actionCollection(), "file_commit" );
     hint = i18n("Commits the selected files");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Add to Repository..."), Key_Insert,
+    action = new KAction( i18n("&Add to Repository..."), "vcs_add", Key_Insert,
                           this, SLOT( slotAdd() ),
                           actionCollection(), "file_add" );
     hint = i18n("Adds (cvs add) the selected files to the repository");
@@ -284,7 +284,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Remove From Repository..."), Key_Delete,
+    action = new KAction( i18n("&Remove From Repository..."), "vcs_remove", Key_Delete,
                           this, SLOT( slotRemove() ),
                           actionCollection(), "file_remove" );
     hint = i18n("Removes (cvs remove) the selected files from the repository");
