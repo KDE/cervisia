@@ -82,7 +82,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     KConfig *conf = config();
     conf->setGroup("LookAndFeel");
     bool splitHorz = conf->readBoolEntry("SplitHorizontally",true);
-
+    
     splitter = new QSplitter(splitHorz? QSplitter::Vertical : QSplitter::Horizontal,
                              parentWidget, widgetName);
 
@@ -102,11 +102,15 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     connect( update, SIGNAL( selectionChanged() ), this, SLOT( updateActions() ) );
     updateActions();
     setXMLFile( "cervisiaui.rc" );
+    
+    // read configuration
+    readProperties(0);
 }
 
 CervisiaPart::~CervisiaPart()
 {
-
+    // save configuration
+    saveProperties(0);
 }
 
 KConfig *CervisiaPart::config()
@@ -1660,51 +1664,56 @@ void CervisiaPart::parseStatus(QString pathname, QStrList list)
 
 void CervisiaPart::readProperties(KConfig *config)
 {
-    recent->loadEntries( config );
+    // explicitly read configuration data from CervisiaPart's configuration
+    // file. (Fix for BR #55665)
+    KConfig* partConfig = CervisiaPart::config();
+    KConfigGroupSaver cs(partConfig, "Session");
+    
+    recent->loadEntries( partConfig );
 
     // Unfortunately, the KConfig systems sucks and we have to live
     // with all entries in one group for session management.
 
-    opt_createDirs = config->readBoolEntry("Create Dirs", true);
+    opt_createDirs = partConfig->readBoolEntry("Create Dirs", true);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_create_dirs" )))
     ->setChecked( opt_createDirs );
 
-    opt_pruneDirs = config->readBoolEntry("Prune Dirs", true);
+    opt_pruneDirs = partConfig->readBoolEntry("Prune Dirs", true);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_prune_dirs" )))
     ->setChecked( opt_pruneDirs );
 
-    opt_updateRecursive = config->readBoolEntry("Update Recursive", false);
+    opt_updateRecursive = partConfig->readBoolEntry("Update Recursive", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_update_recursively" )))
     ->setChecked( opt_updateRecursive );
 
-    opt_commitRecursive = config->readBoolEntry("Commit Recursive", false);
+    opt_commitRecursive = partConfig->readBoolEntry("Commit Recursive", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_commit_recursively" )))
     ->setChecked( opt_commitRecursive );
 
-    opt_doCVSEdit = config->readBoolEntry("Do cvs edit", false);
+    opt_doCVSEdit = partConfig->readBoolEntry("Do cvs edit", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_do_cvs_edit" )))
     ->setChecked( opt_doCVSEdit );
 
-    opt_hideFiles = config->readBoolEntry("Hide Files", false);
+    opt_hideFiles = partConfig->readBoolEntry("Hide Files", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_files" )))
     ->setChecked( opt_hideFiles );
 
-    opt_hideUpToDate = config->readBoolEntry("Hide UpToDate Files", false);
+    opt_hideUpToDate = partConfig->readBoolEntry("Hide UpToDate Files", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_uptodate" )))
     ->setChecked( opt_hideUpToDate );
 
-    opt_hideRemoved = config->readBoolEntry("Hide Removed Files", false);
+    opt_hideRemoved = partConfig->readBoolEntry("Hide Removed Files", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_removed" )))
     ->setChecked( opt_hideRemoved );
 
-    opt_hideNotInCVS = config->readBoolEntry("Hide Non CVS Files", false);
+    opt_hideNotInCVS = partConfig->readBoolEntry("Hide Non CVS Files", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_notincvs" )))
     ->setChecked( opt_hideNotInCVS );
 
     setFilter();
 
-    int splitterpos1 = config->readNumEntry("Splitter Pos 1", 0);
-    int splitterpos2 = config->readNumEntry("Splitter Pos 2", 0);
+    int splitterpos1 = partConfig->readNumEntry("Splitter Pos 1", 0);
+    int splitterpos2 = partConfig->readNumEntry("Splitter Pos 2", 0);
     if (splitterpos1)
     {
         QValueList<int> sizes;
@@ -1717,20 +1726,28 @@ void CervisiaPart::readProperties(KConfig *config)
 
 void CervisiaPart::saveProperties( KConfig *config )
 {
-    recent->saveEntries( config );
+    // explicitly save configuration data to CervisiaPart's configuration
+    // file. (Fix for BR #55665)
+    KConfig* partConfig = CervisiaPart::config();
+    KConfigGroupSaver cs(partConfig, "Session");
+    
+    recent->saveEntries( partConfig );
 
-    config->writeEntry("Create Dirs", opt_createDirs);
-    config->writeEntry("Prune Dirs", opt_pruneDirs);
-    config->writeEntry("Update Recursive", opt_updateRecursive);
-    config->writeEntry("Commit Recursive", opt_commitRecursive);
-    config->writeEntry("Do cvs edit", opt_doCVSEdit);
-    config->writeEntry("Hide Files", opt_hideFiles);
-    config->writeEntry("Hide UpToDate Files", opt_hideUpToDate);
-    config->writeEntry("Hide Removed Files", opt_hideRemoved);
-    config->writeEntry("Hide Non CVS Files", opt_hideNotInCVS);
+    partConfig->writeEntry("Create Dirs", opt_createDirs);
+    partConfig->writeEntry("Prune Dirs", opt_pruneDirs);
+    partConfig->writeEntry("Update Recursive", opt_updateRecursive);
+    partConfig->writeEntry("Commit Recursive", opt_commitRecursive);
+    partConfig->writeEntry("Do cvs edit", opt_doCVSEdit);
+    partConfig->writeEntry("Hide Files", opt_hideFiles);
+    partConfig->writeEntry("Hide UpToDate Files", opt_hideUpToDate);
+    partConfig->writeEntry("Hide Removed Files", opt_hideRemoved);
+    partConfig->writeEntry("Hide Non CVS Files", opt_hideNotInCVS);
     QValueList<int> sizes = splitter->sizes();
-    config->writeEntry("Splitter Pos 1", sizes[0]);
-    config->writeEntry("Splitter Pos 2", sizes[1]);
+    partConfig->writeEntry("Splitter Pos 1", sizes[0]);
+    partConfig->writeEntry("Splitter Pos 2", sizes[1]);
+    
+    // write to disk
+    partConfig->sync();
 }
 
 

@@ -164,6 +164,11 @@ bool CervisiaShell::queryExit()
     saveProperties(config);
 
     config->sync();
+    
+    // *HACK* (better fix in HEAD)
+    // make sure part gets deleted
+    deleteLater();
+
     return true;
 }
 
@@ -187,8 +192,6 @@ void CervisiaShell::restorePseudo(const QString &dirname)
 
 void CervisiaShell::readProperties(KConfig *config)
 {
-    part->readProperties( config );
-
     QString currentDir = config->readEntry("Current Directory");
     if (!currentDir.isEmpty())
         part->openSandbox(currentDir);
@@ -196,7 +199,6 @@ void CervisiaShell::readProperties(KConfig *config)
 
 void CervisiaShell::saveProperties(KConfig *config)
 {
-    part->saveProperties(config);
     config->writeEntry("Current Directory", part->sandBox());
 }
 
