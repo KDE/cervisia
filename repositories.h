@@ -1,5 +1,5 @@
-/* 
- *  Copyright (C) 1999-2002 Bernd Gehrmann
+/*
+ *  Copyright (C) 1999-2001 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -15,15 +15,14 @@
 #ifndef REPOSITORIES_H
 #define REPOSITORIES_H
 
-class QStrList;
-
 
 class Repositories
 {
 public:
-    static void readCvsPassFile(QStrList *list);
-    static void readConfigFile(QStrList *list);
+    static QStringList readCvsPassFile();
+    static QStringList readConfigFile();
 };
+
 
 #endif
 

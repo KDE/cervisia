@@ -1,5 +1,5 @@
-/* 
- *  Copyright (C) 1999-2002 Bernd Gehrmann
+/*
+ *  Copyright (C) 1999-2001 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,8 +12,6 @@
  */
 
 
-#include "repositories.h"
-
 #include <stdlib.h>
 #include <qfile.h>
 #include <qdir.h>
@@ -21,11 +19,13 @@
 #include <kapplication.h>
 #include <kconfig.h>
 
-#include "cervisiapart.h"
+#include "repositories.h"
 
 
-void Repositories::readCvsPassFile(QStrList *list)
+QStringList Repositories::readCvsPassFile()
 {
+    QStringList list;
+    
     QFile f(QDir::homeDirPath() + "/.cvspass");
     if (f.open(IO_ReadOnly))
         {
@@ -35,23 +35,29 @@ void Repositories::readCvsPassFile(QStrList *list)
 		    int pos;
 		    QString line = stream.readLine();
 		    if ( (pos = line.find(' ')) != -1)
-                        list->append(line.left(pos).latin1());
+                        list.append(line.left(pos));
 		}
             f.close();
 	}
+
+    return list;
 }
 
 
-void Repositories::readConfigFile(QStrList *list)
+QStringList Repositories::readConfigFile()
 {
-    KConfig *config = CervisiaPart::config();
+    QStringList list;
+    
+    KConfig *config = kapp->config();
     config->setGroup("Repositories");
-    config->readListEntry("Repos", *list);
+    list = config->readListEntry("Repos");
 
     // Some people actually use CVSROOT, so we add it here
     char *env;
-    if ( (env = ::getenv("CVSROOT")) != 0 && !list->contains(env))
-        list->append(env);
+    if ( (env = ::getenv("CVSROOT")) != 0 && !list.contains(env))
+        list.append(env);
+
+    return list;
 }
 
 
