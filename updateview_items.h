@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 1999-2002 Bernd Gehrmann <bernd@mail.berlios.de>
- * Copyright (c) 2003 André Wöbbeking <Woebbeking@web.de>
+ * Copyright (c) 2003-2004 André Wöbbeking <Woebbeking@web.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -72,7 +72,7 @@ public:
 
     void syncWithDirectory();
     void syncWithEntries();
-    void updateChildItem(const QString& name, Cervisia::Entry::Status status, bool isdir);
+    void updateChildItem(const QString& name, Cervisia::EntryStatus status, bool isdir);
     void updateEntriesItem(const Cervisia::Entry& entry, bool isBinary);
 
     bool wasScanned() const { return m_opened; }
@@ -124,7 +124,7 @@ public:
                            int col, int width, int align);
     virtual int rtti() const { return RTTI; }
 
-    void setStatus(Cervisia::Entry::Status status);
+    void setStatus(Cervisia::EntryStatus status);
     void setRevTag(const QString& rev, const QString& tag);
     void setDate(const QDateTime& date);
     void setUndefinedState(bool b)

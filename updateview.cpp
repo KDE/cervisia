@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 1999-2002 Bernd Gehrmann <bernd@mail.berlios.de>
- * Copyright (c) 2003 André Wöbbeking <Woebbeking@web.de>
+ * Copyright (c) 2003-2004 André Wöbbeking <Woebbeking@web.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -28,6 +28,7 @@
 
 
 using Cervisia::Entry;
+using Cervisia::EntryStatus;
 
 
 UpdateView::UpdateView(KConfig& partConfig, QWidget *parent, const char *name)
@@ -439,29 +440,29 @@ void UpdateView::processUpdateLine(QString str)
 {
     if (str.length() > 2 && str[1] == ' ')
     {
-        Entry::Status status(Entry::Unknown);
+        EntryStatus status(Cervisia::Unknown);
         switch (str[0].latin1())
         {
         case 'C':
-            status = Entry::Conflict;
+            status = Cervisia::Conflict;
             break;
         case 'A':
-            status = Entry::LocallyAdded;
+            status = Cervisia::LocallyAdded;
             break;
         case 'R':
-            status = Entry::LocallyRemoved;
+            status = Cervisia::LocallyRemoved;
             break;
         case 'M':
-            status = Entry::LocallyModified;
+            status = Cervisia::LocallyModified;
             break;
         case 'U':
-            status = (act == UpdateNoAct) ? Entry::NeedsUpdate : Entry::Updated;
+            status = (act == UpdateNoAct) ? Cervisia::NeedsUpdate : Cervisia::Updated;
             break;
         case 'P':
-            status = (act == UpdateNoAct) ? Entry::NeedsPatch : Entry::Patched;
+            status = (act == UpdateNoAct) ? Cervisia::NeedsPatch : Cervisia::Patched;
             break;
         case '?':
-            status = Entry::NotInCVS;
+            status = Cervisia::NotInCVS;
             break;
         default:
             return;
@@ -483,7 +484,7 @@ void UpdateView::processUpdateLine(QString str)
 }
 
 
-void UpdateView::updateItem(const QString& filePath, Entry::Status status, bool isdir)
+void UpdateView::updateItem(const QString& filePath, EntryStatus status, bool isdir)
 {
     if (isdir && filePath == QChar('.'))
         return;

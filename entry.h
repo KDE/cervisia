@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 André Wöbbeking <Woebbeking@web.de>
+ * Copyright (c) 2003-2004 André Wöbbeking <Woebbeking@web.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -18,34 +18,18 @@
 #include <qdatetime.h>
 #include <qstring.h>
 
+#include "entry_status.h"
+
 
 namespace Cervisia
 {
 
 
 /**
- * Dumb data struct to store an entry controlled by a version control system
- * plus some convenience methods.
+ * Dumb data struct to store an entry controlled by a version control system.
  */
 struct Entry
 {
-    enum Status
-    {
-        LocallyModified,
-        LocallyAdded,
-        LocallyRemoved,
-        NeedsUpdate,
-        NeedsPatch,
-        NeedsMerge,
-        UpToDate,
-        Conflict,
-        Updated,
-        Patched,
-        Removed,
-        NotInCVS,
-        Unknown
-    };
-
     enum Type
     {
         Dir,
@@ -53,29 +37,24 @@ struct Entry
     };
 
     /**
-     * Sets status to \a Unknown and type to \a File.
+     * Sets status to \a EntryStatus::Unknown and type to \a File.
      */
     Entry();
 
     /**
-     * The status as translated string.
-     */
-    QString statusToString() const;
-
-    /**
-     * The name of this entry.
+     * The name of this entry (including the path inside the repository / working copy).
      */
     QString m_name;
 
     /**
-     * The status of this entry.
+     * The type of this entry.
      */
     Type m_type;
 
     /**
      * The status of this entry.
      */
-    Status m_status;
+    EntryStatus m_status;
 
     /**
      * The revision of this entry.

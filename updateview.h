@@ -1,6 +1,6 @@
 /* 
- *  Copyright (C) 1999-2002 Bernd Gehrmann
- *                          bernd@mail.berlios.de
+ * Copyright (C) 1999-2002 Bernd Gehrmann <bernd@mail.berlios.de>
+ * Copyright (c) 2003-2004 André Wöbbeking <Woebbeking@web.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -71,7 +71,7 @@ private slots:
     void itemExecuted(QListViewItem *item);
     
 private:
-    void updateItem(const QString &filename, Cervisia::Entry::Status status, bool isdir);
+    void updateItem(const QString &filename, Cervisia::EntryStatus status, bool isdir);
     void rememberSelection(bool recursive);
     void syncSelection();
     void markUpdated(bool laststage, bool success);

@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 1999-2002 Bernd Gehrmann <bernd@mail.berlios.de>
- * Copyright (c) 2003 André Wöbbeking <Woebbeking@web.de>
+ * Copyright (c) 2003-2004 André Wöbbeking <Woebbeking@web.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -30,6 +30,7 @@
 
 
 using Cervisia::Entry;
+using Cervisia::EntryStatus;
 
 
 // ------------------------------------------------------------------------------
@@ -93,7 +94,7 @@ UpdateDirItem::UpdateDirItem(UpdateView* parent,
  * Update the status of an item; if it doesn't exist yet, create new one
  */
 void UpdateDirItem::updateChildItem(const QString& name,
-                                    Entry::Status status,
+                                    EntryStatus status,
                                     bool isdir)
 {
     if (UpdateItem* item = findItem(name))
@@ -134,11 +135,11 @@ void UpdateDirItem::updateEntriesItem(const Entry& entry,
         if (isFileItem(item))
         {
             UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(item);
-            if (fileItem->entry().m_status == Entry::NotInCVS ||
-                fileItem->entry().m_status == Entry::LocallyRemoved ||
-                entry.m_status == Entry::LocallyAdded ||
-                entry.m_status == Entry::LocallyRemoved ||
-                entry.m_status == Entry::Conflict)
+            if (fileItem->entry().m_status == Cervisia::NotInCVS ||
+                fileItem->entry().m_status == Cervisia::LocallyRemoved ||
+                entry.m_status == Cervisia::LocallyAdded ||
+                entry.m_status == Cervisia::LocallyRemoved ||
+                entry.m_status == Cervisia::Conflict)
             {
                 fileItem->setStatus(entry.m_status);
             }
@@ -183,7 +184,7 @@ void UpdateDirItem::scanDirectory()
             else
             {
                 entry.m_type = Entry::File;
-                entry.m_status = Entry::NotInCVS;
+                entry.m_status = Cervisia::NotInCVS;
                 createFileItem(entry);
             }
         }
@@ -264,15 +265,15 @@ void UpdateDirItem::syncWithEntries()
                 entry.m_dateTime = QFileInfo(path + entry.m_name).lastModified();
 
                 if( rev == "0" )
-                    entry.m_status = Entry::LocallyAdded;
+                    entry.m_status = Cervisia::LocallyAdded;
                 else if( rev.length() > 2 && rev[0] == '-' )
                 {
-                    entry.m_status = Entry::LocallyRemoved;
+                    entry.m_status = Cervisia::LocallyRemoved;
                     rev.remove(0, 1);
                 }
                 else if (timestamp.find('+') >= 0)
                 {
-                    entry.m_status = Entry::Conflict;
+                    entry.m_status = Cervisia::Conflict;
                 }
                 else
                 {
@@ -280,7 +281,7 @@ void UpdateDirItem::syncWithEntries()
                     QDateTime fileDateUTC;
                     fileDateUTC.setTime_t(entry.m_dateTime.toTime_t(), Qt::UTC);
                     if (date != fileDateUTC)
-                        entry.m_status = Entry::LocallyModified;
+                        entry.m_status = Cervisia::LocallyModified;
                 }
 
                 entry.m_revision = rev;
@@ -311,7 +312,7 @@ void UpdateDirItem::syncWithDirectory()
             // is file removed?
             if (!dir.exists(it.key()))
             {
-                fileItem->setStatus(Entry::Removed);
+                fileItem->setStatus(Cervisia::Removed);
                 fileItem->setRevTag(QString::null, QString::null);
             }
         }
@@ -409,7 +410,7 @@ UpdateFileItem::UpdateFileItem(UpdateDirItem* parent, const Entry& entry)
 }
 
 
-void UpdateFileItem::setStatus(Entry::Status status)
+void UpdateFileItem::setStatus(EntryStatus status)
 {
     if (status != m_entry.m_status)
     {
@@ -433,11 +434,11 @@ bool UpdateFileItem::applyFilter(UpdateView::Filter filter)
     bool visible(true);
     if (filter & UpdateView::OnlyDirectories)
         visible = false;
-    if ((filter & UpdateView::NoUpToDate) && (entry().m_status == Entry::UpToDate))
+    if ((filter & UpdateView::NoUpToDate) && (entry().m_status == Cervisia::UpToDate))
         visible = false;
-    if ((filter & UpdateView::NoRemoved) && (entry().m_status == Entry::Removed))
+    if ((filter & UpdateView::NoRemoved) && (entry().m_status == Cervisia::Removed))
         visible = false;
-    if ((filter & UpdateView::NoNotInCVS) && (entry().m_status == Entry::NotInCVS))
+    if ((filter & UpdateView::NoNotInCVS) && (entry().m_status == Cervisia::NotInCVS))
         visible = false;
 
     setVisible(visible);
@@ -503,12 +504,12 @@ void UpdateFileItem::setDate(const QDateTime& date)
 void UpdateFileItem::markUpdated(bool laststage,
                                  bool success)
 {
-    Entry::Status newstatus = m_entry.m_status;
+    EntryStatus newstatus = m_entry.m_status;
 
     if (laststage)
     {
-        if (undefinedState() && m_entry.m_status != Entry::NotInCVS)
-            newstatus = success? Entry::UpToDate : Entry::Unknown;
+        if (undefinedState() && m_entry.m_status != Cervisia::NotInCVS)
+            newstatus = success? Cervisia::UpToDate : Cervisia::Unknown;
         setStatus(newstatus);
     }
     else
@@ -521,31 +522,31 @@ int UpdateFileItem::statusClass() const
     int iResult(0);
     switch (entry().m_status)
     {
-    case Entry::Conflict:
+    case Cervisia::Conflict:
         iResult = 0;
         break;
-    case Entry::LocallyAdded:
+    case Cervisia::LocallyAdded:
         iResult = 1;
         break;
-    case Entry::LocallyRemoved:
+    case Cervisia::LocallyRemoved:
         iResult = 2;
         break;
-    case Entry::LocallyModified:
+    case Cervisia::LocallyModified:
         iResult = 3;
         break;
-    case Entry::Updated:
-    case Entry::NeedsUpdate:
-    case Entry::Patched:
-    case Entry::Removed:
-    case Entry::NeedsPatch:
-    case Entry::NeedsMerge:
+    case Cervisia::Updated:
+    case Cervisia::NeedsUpdate:
+    case Cervisia::Patched:
+    case Cervisia::Removed:
+    case Cervisia::NeedsPatch:
+    case Cervisia::NeedsMerge:
         iResult = 4;
         break;
-    case Entry::NotInCVS:
+    case Cervisia::NotInCVS:
         iResult = 5;
         break;
-    case Entry::UpToDate:
-    case Entry::Unknown:
+    case Cervisia::UpToDate:
+    case Cervisia::Unknown:
         iResult = 6;
         break;
     }
@@ -598,7 +599,7 @@ QString UpdateFileItem::text(int column) const
         result = entry().m_name;
         break;
     case Status:
-        result = entry().statusToString();
+        result = toString(entry().m_status);
         break;
     case Revision:
         result = entry().m_revision;
@@ -628,25 +629,25 @@ void UpdateFileItem::paintCell(QPainter *p,
     QColor color;
     switch (m_entry.m_status)
     {
-    case Entry::Conflict:
+    case Cervisia::Conflict:
         color = view->conflictColor();
         break;
-    case Entry::LocallyAdded:
-    case Entry::LocallyModified:
-    case Entry::LocallyRemoved:
+    case Cervisia::LocallyAdded:
+    case Cervisia::LocallyModified:
+    case Cervisia::LocallyRemoved:
         color = view->localChangeColor();
         break;
-    case Entry::NeedsMerge:
-    case Entry::NeedsPatch:
-    case Entry::NeedsUpdate:
-    case Entry::Patched:
-    case Entry::Removed:
-    case Entry::Updated:
+    case Cervisia::NeedsMerge:
+    case Cervisia::NeedsPatch:
+    case Cervisia::NeedsUpdate:
+    case Cervisia::Patched:
+    case Cervisia::Removed:
+    case Cervisia::Updated:
         color = view->remoteChangeColor();
         break;
-    case Entry::NotInCVS:
-    case Entry::Unknown:
-    case Entry::UpToDate:
+    case Cervisia::NotInCVS:
+    case Cervisia::Unknown:
+    case Cervisia::UpToDate:
         break;
     }
 
