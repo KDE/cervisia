@@ -1,3 +1,9 @@
+2003-07-16  Christian Loose  <christian.loose@hamburg.de>
+
+	* Added new view variant for cvs' log output to the log dialog.
+	   This view shows the data in a format that is very similar to 
+	   the format of the command-line output of cvs log.
+
 2003-07-09  Christian Loose  <christian.loose@hamburg.de>
 
 	* New watchers dialog: Cervisia now shows the watchers of

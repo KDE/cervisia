@@ -23,6 +23,7 @@
 
 class LogListView;
 class LogTreeView;
+class LogPlainView;
 
 class KConfig;
 
@@ -80,6 +81,7 @@ private:
     QString selectionB;
     LogTreeView *tree;
     LogListView *list;
+    LogPlainView *plain;
     QTabWidget *tabWidget;
     QLabel *revbox[2];
     QLabel *authorbox[2];

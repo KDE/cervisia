@@ -34,6 +34,7 @@
 #include "diffdlg.h"
 #include "loglist.h"
 #include "logtree.h"
+#include "logplainview.h"
 #include "misc.h"
 #include "progressdlg.h"
 
@@ -61,9 +62,14 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     connect( list, SIGNAL(revisionClicked(QString,bool)),
 	     this, SLOT(revisionSelected(QString,bool)) );
 
+    plain = new LogPlainView(mainWidget);
+    connect( plain, SIGNAL(revisionClicked(QString,bool)),
+             this, SLOT(revisionSelected(QString,bool)) );
+    
     tabWidget = new QTabWidget(mainWidget);
     tabWidget->addTab(tree, i18n("&Tree"));
     tabWidget->addTab(list, i18n("&List"));
+    tabWidget->addTab(plain, i18n("&CVS Output"));
     layout->addWidget(tabWidget, 3);
 
     QWhatsThis::add(tree, i18n("Choose revision A by clicking with the left"
@@ -334,6 +340,7 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
                         tagcomment.remove(0, 1);
                     if( !taglist.isEmpty() )
                         taglist.remove(0, 1);
+                    plain->addRevision(rev, author, date, comment, tagcomment);
                     tree->addRevision(rev, author, date, comment, taglist, tagcomment);
                     list->addRevision(rev, author, date, comment, tagcomment);
                     RevisionInfo *item = new RevisionInfo;
