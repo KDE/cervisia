@@ -50,4 +50,7 @@ RemoveGroup=Diff dialog
 Id=kde3.2/20030212
 File=cervisiapartrc
 RemoveGroup=Commit dialog
+RemoveGroup=History dialog
+RemoveGroup=Resolve dialog
+RemoveGroup=Resolve edit dialog
 
