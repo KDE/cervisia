@@ -2,8 +2,8 @@ Ideas in no special order
 
 * Configurable popup menu
 
-* Per-repository settings like compression,
-  enabling of watch/edit/lock features
+* Per-repository settings like enabling of 
+  watch/edit/lock features
 
 * Log dialog option: Show only tagged revisions
 
@@ -23,11 +23,6 @@ Ideas in no special order
 
 * Watch open working copy directory for changes (KDirWatcher)
 
-* Utilize ssh-agent to access :ext: cvs repositories. (#39155)
-
 * Automatic 'cvs -n update' in specified time intervals (QTimer)
 
 * Add commit message to ChangeLog file (checkbox in commit dialog)
-
-* Add new watchers dialog with a KListView instead of just showing
-  the cvs output in the protocol view
