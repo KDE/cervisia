@@ -14,17 +14,19 @@ cvsservice_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 cvsservice_LDADD = $(LIB_KDEUI) $(LIB_KIO)
 cvsservice_SOURCES = main.cpp cvsservice.cpp cvsjob.cpp \
 	cvsservice.skel cvsservice.stub cvsjob.skel cvsjob.stub \
-	repository.cpp
+	repository.cpp repository.skel repository.stub \
+	cvsserviceutils.cpp
 
-include_HEADERS = cvsservice_stub.h cvsjob_stub.h
-noinst_HEADERS = cvsservice.h cvsjob.h repository.h
+include_HEADERS = cvsservice_stub.h cvsjob_stub.h repository_stub.h
+noinst_HEADERS = cvsservice.h cvsjob.h repository.h cvsserviceutils.h
 
 # cvs DCOP service stub library
 lib_LTLIBRARIES = libcvsservice.la
 
 libcvsservice_la_LDFLAGS = $(all_libraries) -no-undefined -version-info 0:1
 libcvsservice_la_LIBADD = $(LIB_KDECORE)
-libcvsservice_la_SOURCES = cvsservice_stub.cpp cvsjob_stub.cpp
+libcvsservice_la_SOURCES = cvsservice_stub.cpp cvsjob_stub.cpp \
+	repository_stub.cpp
 
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO
