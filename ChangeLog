@@ -1,5 +1,9 @@
 2004-08-23  Christian Loose  <christian.loose@kdemail.net>
 
+	* Implemented bug #74862:
+	  In the checkout dialog, it's now possible to fetch 
+	  the existing branch/tag names for a module from the 
+	  cvs server.
 	* Fix bug #87830: 
 	  Always read the cvs client option from the configuration
 	  file even when there is no sandbox open.

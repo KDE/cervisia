@@ -91,12 +91,23 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
         QLabel* module_label = new QLabel(module_combo, i18n("&Module:"), mainWidget);
         grid->addWidget(module_label, 1, 0, AlignLeft | AlignVCenter);
 
-        branch_edit = new KLineEdit(mainWidget);
-        grid->addWidget(branch_edit, 2, 1);
+        branchCombo = new QComboBox(true, mainWidget);
 
-        QLabel* branch_label = new QLabel(branch_edit, i18n("&Branch tag:"), 
+        QPushButton* branchButton = new QPushButton(i18n("Fetch &List"), mainWidget);
+        connect( branchButton, SIGNAL(clicked()),
+                 this, SLOT(branchButtonClicked()) );
+
+        QBoxLayout* branchLayout = new QHBoxLayout();
+        grid->addLayout(branchLayout, 2, 1);
+        branchLayout->addWidget(branchCombo, 10);
+        branchLayout->addWidget(branchButton, 0, AlignVCenter);
+
+        QLabel* branch_label = new QLabel(branchCombo, i18n("&Branch tag:"), 
                                           mainWidget);
         grid->addWidget(branch_label, 2, 0, AlignLeft | AlignVCenter);
+
+        connect( branchCombo, SIGNAL( textChanged( const QString&)),
+                 this, SLOT( branchTextChanged() ));
     }
 
     workdir_edit = new KLineEdit(mainWidget);
@@ -170,9 +181,6 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
 
         export_box = new QCheckBox(i18n("Ex&port only"), mainWidget);
         grid->addMultiCellWidget(export_box, 5, 5, 0, 1);
-
-        connect( branch_edit, SIGNAL( textChanged( const QString&)),
-                 this, SLOT( branchTextChanged() ));
     }
 
     QStringList list1 = Repositories::readCvsPassFile();
@@ -212,7 +220,7 @@ QString CheckoutDialog::module() const
 
 QString CheckoutDialog::branch() const
 {
-    return branch_edit->text();
+    return branchCombo->currentText();
 }
 
 
@@ -345,6 +353,53 @@ void CheckoutDialog::moduleButtonClicked()
 }
 
 
+void CheckoutDialog::branchButtonClicked()
+{
+    QStringList branchTagList;
+
+    if( repository().isEmpty() )
+    {
+        KMessageBox::information(this, i18n("Please specify a repository."));
+        return;
+    }
+
+    if( module().isEmpty() )
+    {
+        KMessageBox::information(this, i18n("Please specify a module name."));
+        return;
+    }
+
+    DCOPRef cvsJob = cvsService->rlog(repository(), module(), 
+                                      false/*recursive*/);
+    if( !cvsService->ok() )
+        return;
+
+    ProgressDialog dlg(this, "Remote Log", cvsJob, QString::null, 
+                       i18n("CVS Remote Log"));
+    if( !dlg.execute() )
+        return;
+
+    QString line;
+    while( dlg.getLine(line) )
+    {
+        int colonPos;
+
+        if( line.isEmpty() || line[0] != '\t' )
+            continue;
+        if( (colonPos = line.find(':', 1)) < 0 )
+           continue;
+
+        const QString tag  = line.mid(1, colonPos - 1);
+        if( !branchTagList.contains(tag) )
+            branchTagList.push_back(tag);
+    }
+
+    branchTagList.sort();
+
+    branchCombo->insertStringList(branchTagList);
+}
+
+
 void CheckoutDialog::restoreUserInput()
 {
     KConfigGroupSaver cs(&partConfig, "CheckoutDialog");
@@ -363,7 +418,7 @@ void CheckoutDialog::restoreUserInput()
     else
     {
         module_combo->setEditText(partConfig.readEntry("Module"));
-        branch_edit->setText(partConfig.readEntry("Branch"));
+        branchCombo->setCurrentText(partConfig.readEntry("Branch"));
         alias_edit->setText(partConfig.readEntry("Alias"));
         export_box->setChecked(partConfig.readBoolEntry("ExportOnly"));
     }

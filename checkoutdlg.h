@@ -55,15 +55,16 @@ protected:
 private slots:
     void dirButtonClicked();
     void moduleButtonClicked();
+    void branchButtonClicked();
     void branchTextChanged();
 
 private:
     void saveUserInput();
     void restoreUserInput();
     
-    QComboBox *repo_combo, *module_combo;
+    QComboBox *repo_combo, *module_combo, *branchCombo;
     KLineEdit *module_edit, *workdir_edit;
-    KLineEdit *branch_edit, *comment_edit;
+    KLineEdit *comment_edit;
     KLineEdit *vendortag_edit, *releasetag_edit, *ignore_edit, *alias_edit;
     QCheckBox *binary_box, *export_box;
     QCheckBox* m_useModificationTimeBox;
