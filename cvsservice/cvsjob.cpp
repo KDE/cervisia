@@ -20,7 +20,6 @@
 
 #include "cvsjob.h"
 
-#include <qstring.h>
 #include <qtextstream.h>
 #include <kdebug.h>
 #include <kprocess.h>
@@ -40,6 +39,7 @@ struct CvsJob::Private
     QString     rsh;
     QString     directory;
     bool        isRunning;
+    QStringList outputLines;
 };
 
 
@@ -139,6 +139,12 @@ QString CvsJob::cvsCommand() const
 }
 
 
+QStringList CvsJob::output() const
+{
+    return d->outputLines;
+}
+
+
 bool CvsJob::execute()
 {
     if( !d->rsh.isEmpty() )
@@ -188,6 +194,9 @@ void CvsJob::slotReceivedStdout(KProcess* proc, char* buffer, int buflen)
 
     QString output = QString::fromLocal8Bit(buffer, buflen);
 
+    // accumulate output
+    d->outputLines.append(output);
+
     emit receivedStdout(output);
 }
 
@@ -197,6 +206,9 @@ void CvsJob::slotReceivedStderr(KProcess* proc, char* buffer, int buflen)
     Q_UNUSED(proc);
 
     QString output = QString::fromLocal8Bit(buffer, buflen);
+
+    // accumulate output
+    d->outputLines.append(output);
 
     emit receivedStderr(output);
 }

@@ -23,6 +23,7 @@
 
 #include <qobject.h>
 #include <qstring.h>
+#include <qstringlist.h>
 #include <dcopobject.h>
 
 class KProcess;
@@ -60,6 +61,8 @@ k_dcop:
      * @return The current cvs command. Can be null if not set.
      */
     QString cvsCommand() const;
+
+    QStringList output() const;
 
 k_dcop_signals:
     void jobExited(bool normalExit, int status);
