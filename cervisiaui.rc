@@ -107,6 +107,13 @@
   <Separator/>
   <Action name="file_properties"/>
 </Menu>
+<Menu name="folder_context_popup">
+  <Action name="file_update"/>
+  <Action name="file_commit"/>
+  <Separator/>
+  <Action name="file_add"/>
+  <Action name="file_remove"/>
+</Menu>
 <State name="has_sandbox">
   <Enable>
     <Action name="insert_changelog_entry"/>

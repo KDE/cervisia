@@ -49,6 +49,7 @@
 #include "mergedlg.h"
 #include "historydlg.h"
 #include "updateview.h"
+#include "updateview_items.h"
 #include "protocolview.h"
 #include "repositorydlg.h"
 #include "settingsdlg.h"
@@ -614,40 +615,48 @@ void CervisiaPart::setupActions()
 }
 
 
-void CervisiaPart::popupRequested(KListView*, QListViewItem*, const QPoint& p)
+void CervisiaPart::popupRequested(KListView*, QListViewItem* item, const QPoint& p)
 {
-    if (QPopupMenu* popup = static_cast<QPopupMenu*>(hostContainer("context_popup")))
+    QString xmlName = "context_popup";
+
+    if( isDirItem(item) )
+        xmlName = "folder_context_popup";
+
+    if( QPopupMenu* popup = static_cast<QPopupMenu*>(hostContainer(xmlName)) )
     {
-        // remove old 'Edit with...' menu
-        if( m_editWithId && popup->findItem(m_editWithId) != 0 )
+        if( isFileItem(item) )
         {
-            popup->removeItem(m_editWithId);
-            delete m_currentEditMenu; 
+            // remove old 'Edit with...' menu
+            if( m_editWithId && popup->findItem(m_editWithId) != 0 )
+            {
+                popup->removeItem(m_editWithId);
+                delete m_currentEditMenu; 
 
-            m_editWithId      = 0;
-            m_currentEditMenu = 0;
-        }
+                m_editWithId      = 0;
+                m_currentEditMenu = 0;
+            }
 
-        // get name of selected file
-        QString selectedFile;
-        update->getSingleSelection(&selectedFile);
+            // get name of selected file
+            QString selectedFile;
+            update->getSingleSelection(&selectedFile);
 
-        if( !selectedFile.isEmpty() )
-        {
-            KURL u;
-            u.setPath(sandbox + "/" + selectedFile);
+            if( !selectedFile.isEmpty() )
+            {
+                KURL u;
+                u.setPath(sandbox + "/" + selectedFile);
 
-            m_currentEditMenu = new Cervisia::EditWithMenu(u, popup);
+                m_currentEditMenu = new Cervisia::EditWithMenu(u, popup);
 
-            if( m_currentEditMenu->menu() )
-                m_editWithId = popup->insertItem(i18n("Edit With"), 
-                                          m_currentEditMenu->menu(), -1, 1);
+                if( m_currentEditMenu->menu() )
+                    m_editWithId = popup->insertItem(i18n("Edit With"), 
+                                              m_currentEditMenu->menu(), -1, 1);
+            }
         }
 
         popup->exec(p);
     }
     else
-        kdDebug(8050) << "CervisiaPart: can't get XML definition for context_popup, factory()=" << factory() << endl;
+        kdDebug(8050) << "CervisiaPart: can't get XML definition for " << xmlName << ", factory()=" << factory() << endl;
 }
 
 void CervisiaPart::updateActions()
