@@ -13,6 +13,7 @@
 
 
 #include <qlayout.h>
+#include <qpushbutton.h>
 #include <qlabel.h>
 #include <qcombobox.h>
 #include <kapp.h>

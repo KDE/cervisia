@@ -12,6 +12,7 @@
  */
 
 
+#include <qpushbutton.h>
 #include <qfileinfo.h>
 #include <qframe.h>
 #include <qlayout.h>

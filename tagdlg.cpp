@@ -12,6 +12,7 @@
  */
 
 
+#include <qpushbutton.h>
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qlayout.h>

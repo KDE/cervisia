@@ -1,4 +1,5 @@
 #include <qmessagebox.h>
+#include <qpushbutton.h>
 #include <qpopupmenu.h>
 #include <qtextstream.h>
 #include <kaboutdata.h>

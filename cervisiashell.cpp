@@ -5,6 +5,7 @@
 #include <kkeydialog.h>
 #include <klocale.h>
 #include <kstdaction.h>
+#include <kstatusbar.h>
 
 #include "cervisiapart.h"
 

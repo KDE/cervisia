@@ -12,6 +12,7 @@
  */
 
 
+#include <qpushbutton.h>
 #include <qbuttongroup.h>
 #include <qlabel.h>
 #include <qlayout.h>

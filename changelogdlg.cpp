@@ -17,6 +17,7 @@
 #include <qlayout.h>
 #include <qmultilinedit.h>
 #include <qmessagebox.h>
+#include <qpushbutton.h>
 #include <qtextstream.h>
 #include <kapp.h>
 #include <kbuttonbox.h>

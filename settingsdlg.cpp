@@ -33,6 +33,7 @@
 #include "misc.h"
 
 #include "settingsdlg.h"
+#include <qgrid.h>
 #include "settingsdlg.moc"
 
 

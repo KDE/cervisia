@@ -13,6 +13,7 @@
 
 
 #include <stdio.h>
+#include <qpushbutton.h>
 #include <qlayout.h>
 #include <qwidgetstack.h>
 #include <qmessagebox.h>

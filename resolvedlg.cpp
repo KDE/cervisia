@@ -12,6 +12,7 @@
  */
 
 
+#include <qpushbutton.h>
 #include <qlayout.h>
 #include <qkeycode.h>
 #include <qmessagebox.h>

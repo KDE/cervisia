@@ -11,7 +11,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-
+#include <qpushbutton.h>
 #include <qdir.h>
 #include <qlayout.h>
 #include <qlabel.h>

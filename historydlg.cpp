@@ -26,6 +26,7 @@
 #include "misc.h"
 
 #include "historydlg.h"
+#include <qpushbutton.h>
 #include "historydlg.moc"
 
 

@@ -16,6 +16,7 @@
 #include <qlabel.h>
 #include <kapp.h>
 #include <kbuttonbox.h>
+#include <qpushbutton.h>
 #include <qbuttongroup.h>
 #include <qradiobutton.h>
 #include <qcheckbox.h>
