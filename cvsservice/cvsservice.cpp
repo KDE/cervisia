@@ -283,6 +283,33 @@ DCOPRef CvsService::downloadRevision(const QString& fileName,
 }
 
 
+DCOPRef CvsService::downloadRevision(const QString& fileName,
+                                     const QString& revA,
+                                     const QString& outputFileA,
+                                     const QString& revB,
+                                     const QString& outputFileB)
+{
+    if( !d->hasWorkingCopy() )
+        return DCOPRef();
+
+    // create a cvs job
+    CvsJob* job = d->createCvsJob();
+
+    // assemble the command line
+    // cvs update -p -r [REVA] [FILE] > [OUTPUTFILEA] ;
+    // cvs update -p -r [REVB] [FILE] > [OUTPUTFILEB]
+    *job << d->repository->cvsClient() << "update -p"
+         << "-r" << KProcess::quote(revA)
+         << KProcess::quote(fileName) << ">" << KProcess::quote(outputFileA)
+         << ";" << d->repository->cvsClient() << "update -p"
+         << "-r" << KProcess::quote(revB)
+         << KProcess::quote(fileName) << ">" << KProcess::quote(outputFileB);
+
+    // return a DCOP reference to the cvs job
+    return DCOPRef(d->appId, job->objId());
+}
+
+
 DCOPRef CvsService::diff(const QString& fileName, const QString& revA,
                          const QString& revB, const QString& diffOptions,
                          unsigned contextLines)

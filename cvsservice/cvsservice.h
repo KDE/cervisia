@@ -104,6 +104,12 @@ k_dcop:
                              const QString& outputFile);
 
     /**
+     */
+    DCOPRef downloadRevision(const QString& fileName, const QString& revA,
+                             const QString& outputFileA, const QString& revB,
+                             const QString& outputFileB);
+
+    /**
      *
      * @param fileName
      * @param revA
