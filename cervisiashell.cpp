@@ -46,25 +46,14 @@ CervisiaShell::~CervisiaShell()
 
 void CervisiaShell::setupActions()
 {
-    KAction *action = new KAction( i18n("O&pen Sandbox..."), "fileopen", 0,
-				   this, SLOT( slotOpenSandbox() ),
-				   actionCollection(), "file_open" );
-    QString hint = i18n("Opens a CVS working directory in the main window");
-    action->setToolTip( hint );
-    action->setWhatsThis( hint );
-
-    recent = new KRecentFilesAction( i18n("Recent Sandboxes"), 0,
-                                     part, SLOT( slotOpenSandbox( const KURL & ) ),
-				     actionCollection(), "file_open_recent" );
-    recent->loadEntries( kapp->config() );
-
-    action = KStdAction::showToolbar( 0, 0, actionCollection() );
-    connect( action, SIGNAL(toggled(bool)), this, SLOT(slotToggleToolbar( bool )) );
+    KAction* action = KStdAction::showToolbar( 0, 0, actionCollection() );
+    connect( action, SIGNAL(toggled(bool)),
+             this,   SLOT(slotToggleToolbar( bool )) );
 
     action = KStdAction::configureToolbars( this, SLOT(slotConfigureToolBars()),
-					    actionCollection() );
+                                            actionCollection() );
     action = KStdAction::keyBindings( this, SLOT(slotConfigureKeys()),
-				      actionCollection() );
+                                      actionCollection() );
 
     (void) KStdAction::quit( this, SLOT( slotExit() ), actionCollection() );
 }
@@ -83,9 +72,9 @@ void CervisiaShell::slotToggleToolbar( bool visible )
 {
     KToolBar *tb = toolBar( "mainToolBar" );
     if ( visible )
-	tb->show();
+        tb->show();
     else
-	tb->hide();
+        tb->hide();
 }
 
 void CervisiaShell::slotConfigureKeys()
@@ -97,7 +86,7 @@ void CervisiaShell::slotConfigureToolBars()
 {
     KEditToolbar dlg( actionCollection() );
     if ( dlg.exec() )
-	createGUI( part );
+        createGUI( part );
 }
 
 void CervisiaShell::slotExit()
@@ -109,8 +98,6 @@ void CervisiaShell::slotExit()
 bool CervisiaShell::queryExit()
 {
     KConfig *config = part->config();
-
-    recent->saveEntries( config );
 
     config->setGroup("Main window");
     config->writeEntry("Customized", true);
@@ -142,8 +129,6 @@ void CervisiaShell::saveProperties(KConfig *config)
 void CervisiaShell::restorePseudo( const QString &dirname )
 {
     KConfig *config = part->config();
-
-    recent->loadEntries( config );
 
     config->setGroup("Main window");
     if (config->readBoolEntry("Customized"))

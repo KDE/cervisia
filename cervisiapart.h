@@ -18,6 +18,7 @@ class QTimer;
 class UpdateView;
 class ProtocolView;
 class KAboutData;
+class KRecentFilesAction;
 
 /**
  * Factory for instantiating CervisiaParts.
@@ -32,8 +33,8 @@ public:
 
     virtual KParts::Part *createPartObject( QWidget *parentWidget, const char *widgetName,
                                             QObject* parent = 0, const char* name = 0,
-		 	                    const char* classname = "QObject",
-			                    const QStringList &args = QStringList() );
+                                            const char* classname = "QObject",
+                                            const QStringList &args = QStringList() );
     
     static KInstance *instance();
     static KAboutData *aboutData();
@@ -158,6 +159,9 @@ private:
     bool opt_hideFiles, opt_hideUpToDate, opt_hideRemoved;
     bool opt_createDirs, opt_pruneDirs;
     bool opt_updateRecursive, opt_commitRecursive, opt_doCVSEdit;
+
+    //for the Open Recent directories
+    KRecentFilesAction *recent;
 };
 
 /**

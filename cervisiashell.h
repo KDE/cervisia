@@ -38,7 +38,7 @@ protected:
 
 private:
     CervisiaPart *part;
-    KRecentFilesAction *recent;
+
 };
 
 #endif // CERVISIASHELL_H
