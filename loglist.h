@@ -51,6 +51,8 @@ private slots:
     void hideLabel();
 
 private:
+    LogListViewItem* selectedItem(QMouseEvent* e);
+
     KConfig& partConfig;
     TipLabel *currentLabel;
     LogListViewItem *currentTipItem;

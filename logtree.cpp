@@ -415,8 +415,13 @@ void LogTreeView::mousePressEvent(QMouseEvent *e)
 		if (it.current()->row == row
 		    && it.current()->col == col)
 		    {
-			emit revisionClicked(it.current()->rev,
-					     e->button() == MidButton);
+			// Change selection for revision B if the middle mouse button or
+			// the left mouse button with the control key was pressed            
+			bool changeRevB = (e->button() == MidButton) ||
+							  (e->button() == LeftButton && 
+							   e->state() & ControlButton);
+
+			emit revisionClicked(it.current()->rev, changeRevB);
 			break;
 		    }
 	}

@@ -1,3 +1,9 @@
+2003-07-04  Christian Loose  <christian.loose@hamburg.de>
+
+	* Implement BR #60604: It's now possible to select 
+	   revision B in Log dialog with Ctrl key + left mouse button in
+	   addition to the middle mouse button.
+
 2003-06-26  Christian Loose  <christian.loose@hamburg.de>
 
 	* Start/Stop the ssh-agent process and setup the cvs

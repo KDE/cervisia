@@ -218,22 +218,24 @@ void LogListView::setSelectedPair(const QString &selectionA, const QString &sele
 
 void LogListView::contentsMousePressEvent(QMouseEvent *e)
 {
+    // Retrieve selected item
+    LogListViewItem* selItem = selectedItem(e);
+    if( !selItem )
+        return;
+        
+    // Retrieve revision
+    const QString revision = selItem->text(LogListViewItem::Revision);   
+    
     if ( e->button() == LeftButton )
-	{
-            QPoint vp = contentsToViewport(e->pos());
-	    LogListViewItem *selItem
-                = static_cast<LogListViewItem*>( itemAt(vp) );
-            if (selItem)
-                emit revisionClicked(selItem->text(LogListViewItem::Revision), false);
-        }
+    {
+        // If the control key was pressed, then we change revision B not A
+        if( e->state() & ControlButton )
+            emit revisionClicked(revision, true);
+        else
+            emit revisionClicked(revision, false);
+    }
     else if ( e->button() == MidButton )
-        {
-            QPoint vp = contentsToViewport(e->pos());
-            LogListViewItem *selItem
-                = static_cast<LogListViewItem*>( itemAt(vp) );
-            if (selItem)
-                emit revisionClicked(selItem->text(LogListViewItem::Revision), true);
-	}
+        emit revisionClicked(revision, true);
 }
 
 
@@ -242,9 +244,7 @@ void LogListView::contentsMouseMoveEvent(QMouseEvent *e)
     if (!isActiveWindow())
         return;
 
-    QPoint vp = contentsToViewport(e->pos());
-    LogListViewItem *item
-        = static_cast<LogListViewItem*>( itemAt(vp) );
+    LogListViewItem* item = selectedItem(e);
 
     if (item != currentTipItem)
         hideLabel();
@@ -334,6 +334,13 @@ void LogListView::keyPressEvent(QKeyEvent *e)
         // Ignore Key_Enter, Key_Return
         e->ignore();
     }
+}
+
+
+LogListViewItem* LogListView::selectedItem(QMouseEvent* e)
+{
+    QPoint vp = contentsToViewport(e->pos());
+    return static_cast<LogListViewItem*>( itemAt(vp) );
 }
 
 #include "loglist.moc"
