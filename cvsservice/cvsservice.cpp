@@ -354,6 +354,22 @@ DCOPRef CvsService::edit(const QStringList& files)
 }
 
 
+DCOPRef CvsService::editors(const QStringList& files)
+{
+    if( !d->hasWorkingCopy() || d->hasRunningJob() )
+        return DCOPRef();
+
+    // assemble the command line
+    // cvs editors [FILES]
+    d->singleCvsJob->clearCvsCommand();
+
+    *d->singleCvsJob << d->repository->cvsClient() << "editors"
+                     << CvsServiceUtils::joinFileList(files);
+
+    return d->setupNonConcurrentJob();
+}
+
+
 DCOPRef CvsService::history()
 {
     if( !d->hasWorkingCopy() )
@@ -368,6 +384,42 @@ DCOPRef CvsService::history()
 
     // return a DCOP reference to the cvs job
     return DCOPRef(d->appId, job->objId());
+}
+
+
+DCOPRef CvsService::import(const QString& workingDir, const QString& repository,
+                           const QString& module, const QString& ignoreList,
+                           const QString& comment, const QString& vendorTag,
+                           const QString& releaseTag, bool importAsBinary)
+{
+    if( d->hasRunningJob() )
+        return DCOPRef();
+
+    std::auto_ptr<Repository> repo(new Repository(repository));
+
+    // assemble the command line
+    d->singleCvsJob->clearCvsCommand();
+
+    *d->singleCvsJob << "cd" << workingDir << "&&"
+                     << repo->cvsClient()
+                     << "-d" << repository
+                     << "import";
+
+    if( importAsBinary )
+        *d->singleCvsJob << "-kb";
+
+    const QString ignore = ignoreList.stripWhiteSpace();
+    if( !ignore.isEmpty() )
+        *d->singleCvsJob << "-I" << KProcess::quote(ignore);
+
+    QString logMessage = comment.stripWhiteSpace();
+    logMessage.prepend("\"");
+    logMessage.append("\"");
+    *d->singleCvsJob << "-m" << logMessage;
+
+    *d->singleCvsJob << module << vendorTag << releaseTag;
+
+    return d->setupNonConcurrentJob();
 }
 
 

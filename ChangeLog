@@ -1,3 +1,7 @@
+2003-08-30  Christian Loose  <christian.loose@hamburg.de>
+
+	* Added editors() and import() methods to cvs DCOP service
+
 2003-08-29  Christian Loose  <christian.loose@hamburg.de>
 
 	* Removed the editor option from the settings dialog. We

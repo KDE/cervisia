@@ -130,6 +130,11 @@ k_dcop:
     DCOPRef edit(const QStringList& files);
 
     /**
+     * @param files
+     */
+    DCOPRef editors(const QStringList& files);
+
+    /**
      * Shows a history of activity (like checkouts, commits, etc) in the
      * repository for all users and all record types.
      *
@@ -137,6 +142,15 @@ k_dcop:
      *         null reference.
      */
     DCOPRef history();
+
+    /**
+     * @return A DCOP reference to the cvs job or in case of failure a
+     *         null reference.
+     */
+    DCOPRef import(const QString& workingDir, const QString& repository,
+                   const QString& module, const QString& ignoreList,
+                   const QString& comment, const QString& vendorTag,
+                   const QString& releaseTag, bool importAsBinary);
 
     /**
      * @param files
