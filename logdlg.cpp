@@ -246,7 +246,7 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
                     }
                     if( rev != "1.1.1" )
                     {
-                        TagInfo *taginfo = new TagInfo;
+                        LogDialogTagInfo *taginfo = new LogDialogTagInfo;
                         taginfo->rev = rev;
                         taginfo->tag = tag;
                         taginfo->branchpoint = branchpoint;
@@ -309,7 +309,7 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
                         branchrev = rev.left(pos2);
 
                     // Build Cervisia::TagInfo for logInfo
-                    QPtrListIterator<TagInfo> it(tags);
+                    QPtrListIterator<LogDialogTagInfo> it(tags);
                     for( ; it.current(); ++it )
                     {
                         if( rev == it.current()->rev )
@@ -348,7 +348,7 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
 
     tagcombo[0]->insertItem(QString::null);
     tagcombo[1]->insertItem(QString::null);
-    QPtrListIterator<TagInfo> it(tags);
+    QPtrListIterator<LogDialogTagInfo> it(tags);
     for( ; it.current(); ++it )
     {
         QString str = it.current()->tag;
@@ -468,7 +468,7 @@ void LogDialog::revisionSelected(QString rev, bool rmb)
 }
 
 
-void LogDialog::tagSelected(TagInfo* tag, bool rmb)
+void LogDialog::tagSelected(LogDialogTagInfo* tag, bool rmb)
 {
     if (tag->branchpoint.isEmpty())
         revisionSelected(tag->rev, rmb);

@@ -34,7 +34,7 @@ class QTabWidget;
 class QTextEdit;
 class CvsService_stub;
 
-class TagInfo
+class LogDialogTagInfo
 {
 public:
     QString rev;
@@ -67,11 +67,11 @@ private slots:
     void tabChanged(QWidget* w);
 
 private:
-    void tagSelected(TagInfo* tag, bool rmb);
+    void tagSelected(LogDialogTagInfo* tag, bool rmb);
 
     QString filename;
     QPtrList<Cervisia::LogInfo> items;
-    QPtrList<TagInfo> tags;
+    QPtrList<LogDialogTagInfo> tags;
     QString selectionA;
     QString selectionB;
     LogTreeView *tree;
