@@ -17,6 +17,7 @@
 
 #include <qcombobox.h>
 #include <qfile.h>
+#include <qfileinfo.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qtabwidget.h>
@@ -30,7 +31,6 @@
 #include <kprocess.h>
 #include <krfcdate.h>
 #include <krun.h>
-#include <ktempfile.h>
 #include <kurl.h>
 
 #include "cvsservice_stub.h"
@@ -395,12 +395,12 @@ void LogDialog::slotOk()
         revision = selectionB;
 
     // create a temporary file
-    const QString suffix("-" + revision + "-" + filename);
-    KTempFile file(QString::null, suffix);
+    const QString suffix("-" + QFileInfo(filename).fileName() + "-" + revision);
+    const QString tempFileName(::tempFileName(suffix));
 
     // retrieve the file with the selected revision from cvs
     // and save the content into the temporary file
-    DCOPRef job = cvsService->downloadRevision(filename, revision, file.name());
+    DCOPRef job = cvsService->downloadRevision(filename, revision, tempFileName);
     if( !cvsService->ok() )
         return;
 
@@ -408,15 +408,13 @@ void LogDialog::slotOk()
     if( dlg.execute() )
     {
         // make file read-only
-        chmod(QFile::encodeName(file.name()), 0400);
+        chmod(QFile::encodeName(tempFileName), 0400);
 
         // open file in preferred editor
         KURL url;
-        url.setPath(file.name());
+        url.setPath(tempFileName);
         (void) new KRun(url, 0, true, false);
     }
-
-    file.close();
 }
 
 
