@@ -154,7 +154,9 @@ void DiffView::setCenterOffset(int offset)
 
 void DiffView::addLine(const QString &line, DiffType type, int no)
 {
-    QFontMetrics fm(font());
+    QFont f(font());
+    f.setBold(true);
+    QFontMetrics fm(f);
     textwidth = QMAX(textwidth, fm.width(line));
 
     DiffViewItem *item = new DiffViewItem;
@@ -338,7 +340,7 @@ void DiffView::paintCell(QPainter *p, int row, int col)
 	    backgroundColor =
 		(item->type==Change)? diffChangeColor
 		: (item->type==Insert)? diffInsertColor
-		: (item->type==Delete)? diffDeleteColor	
+		: (item->type==Delete)? diffDeleteColor
 		: (item->type==Neutral)? KGlobalSettings::alternateBackgroundColor() : KGlobalSettings::baseColor();
             p->setPen(KGlobalSettings::textColor());
             inverted = item->inverted;
