@@ -128,7 +128,10 @@ bool ProtocolView::startJob()
 
 void ProtocolView::cancelJob()
 {
-    childproc->kill();
+    if( childproc )
+        childproc->kill();
+    else
+        job->cancel();
 }
 
 
