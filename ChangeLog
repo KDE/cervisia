@@ -1,3 +1,8 @@
+2004-04-13  Christian Loose  <christian.loose@kdemail.net>
+
+	* Implemented BR #74754:
+	  Added support for 'cvs init' to create a new repository.
+
 2004-04-01  Christian Loose  <christian.loose@hamburg.de>
 
 	* Fix BR #46871:

@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2004 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2002-2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -22,6 +22,7 @@
 #include <kaction.h>
 #include <kapplication.h>
 #include <kfiledialog.h>
+#include <kinputdialog.h>
 #include <kinstance.h>
 #include <klocale.h>
 #include <kprocess.h>
@@ -471,6 +472,10 @@ void CervisiaPart::setupActions()
     //
     // Repository Menu
     //
+    action = new KAction( i18n("&Create..."), 0,
+                          this, SLOT(slotCreateRepository()),
+                          actionCollection(), "repository_create" );
+
     action = new KAction( i18n("&Checkout..."), 0,
                           this, SLOT(slotCheckout()),
                           actionCollection(), "repository_checkout" );
@@ -1265,6 +1270,28 @@ void CervisiaPart::slotImport()
                                         dlg.useModificationTime());
 
     // get command line from cvs job
+    QString cmdline = cvsJob.call("cvsCommand()");
+
+    if( protocol->startJob() )
+    {
+        showJobStart(cmdline);
+        connect( protocol, SIGNAL(jobFinished(bool, int)),
+                 this,     SLOT(slotJobFinished()) );
+    }
+}
+
+
+void CervisiaPart::slotCreateRepository()
+{
+    bool okPressed;
+    QString repository = KInputDialog::getText("Create a New Repository (cvs init)",
+                                               "Repository folder:",
+                                               QString::null, &okPressed);
+    if( !okPressed )
+        return;
+
+    DCOPRef cvsJob = cvsService->createRepository(repository);
+
     QString cmdline = cvsJob.call("cvsCommand()");
 
     if( protocol->startJob() )

@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2004 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2002-2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -105,6 +105,7 @@ public slots:
     void slotDiffHead();
     void slotLastChange();
     void slotHistory();
+    void slotCreateRepository();
     void slotCheckout();
     void slotImport();
     void slotRepositories();

@@ -60,6 +60,7 @@
     <Action name="make_patch"/>
   </Menu>
   <Menu name="repository"><text>&amp;Repository</text>
+    <Action name="repository_create"/>
     <Action name="repository_checkout"/>
     <Action name="repository_import"/>
     <Separator/>
