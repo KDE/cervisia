@@ -27,7 +27,7 @@ public:
     AnnotateController(AnnotateDialog* dialog, CvsService_stub* cvsService);
     ~AnnotateController();
 
-    void showDialog(const QString& fileName, const QString& revision = "");
+    void showDialog(const QString& fileName, const QString& revision = QString::null);
 
 private:
     struct Private;
