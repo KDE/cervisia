@@ -819,6 +819,35 @@ void CervisiaPart::updateOrStatus(bool noact, const QString &extraopt)
     update->prepareJob(opt_updateRecursive,
                        noact? UpdateView::UpdateNoAct : UpdateView::Update);
 
+    // TODO: cleanup when update is also handled by DCOP service                       
+    if( noact )
+    {
+        DCOPRef cvsJob;
+        QString files = joinLine(list);
+        DCOPReply job = cvsService.call("status(QString, bool)", files, opt_updateRecursive);
+        
+        if( job.isValid() )
+            cvsJob = job;
+        else
+            return;
+
+        // get command line from cvs job
+        QString cmdline;
+        DCOPReply reply = cvsJob.call("cvsCommand()");
+        if( reply.isValid() )
+            reply.get<QString>(cmdline);
+            
+        if( protocol->startJob(cvsJob) )
+        {
+            showJobStart(cmdline);
+            connect( protocol, SIGNAL(receivedLine(QString)), update, SLOT(processUpdateLine(QString)) );
+            connect( protocol, SIGNAL(jobFinished(bool)), update, SLOT(finishJob(bool)) );
+            connect( protocol, SIGNAL(jobFinished(bool)), this, SLOT(slotJobFinished(bool)) );
+        }
+        
+        return;
+    }
+                               
     QString cmdline;
     if (noact)
         cmdline = cvsClient(repository) + " -n update ";
