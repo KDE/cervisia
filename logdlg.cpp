@@ -69,7 +69,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     tabWidget = new QTabWidget(mainWidget);
     tabWidget->addTab(tree, i18n("&Tree"));
     tabWidget->addTab(list, i18n("&List"));
-    tabWidget->addTab(plain, i18n("&CVS Output"));
+    tabWidget->addTab(plain, i18n("CVS &Output"));
     layout->addWidget(tabWidget, 3);
 
     QWhatsThis::add(tree, i18n("Choose revision A by clicking with the left"
@@ -172,8 +172,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     resize(size);
 
     KConfigGroupSaver cs(&partConfig, "LogDialog");
-    if (partConfig.readBoolEntry("ShowListTab"))
-        tabWidget->setCurrentPage(1);
+    tabWidget->setCurrentPage(partConfig.readNumEntry("ShowTab", 0));
 }
 
 
@@ -186,8 +185,7 @@ LogDialog::~LogDialog()
 #endif
 
     KConfigGroupSaver cs(&partConfig, "LogDialog");
-    bool showListTab = (tabWidget->currentPageIndex() == 1);
-    partConfig.writeEntry("ShowListTab", showListTab);
+    partConfig.writeEntry("ShowTab", tabWidget->currentPageIndex());
 }
 
 
@@ -368,6 +366,8 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
         tagcombo[0]->insertItem(str);
         tagcombo[1]->insertItem(str);
     }
+
+    plain->scrollToTop();
 
     tree->collectConnections();
     tree->recomputeCellSizes();
