@@ -1,3 +1,7 @@
+2002-12-17  Christian Loose <christian.loose@hamburg.de>
+
+	* Fixed "fetch of branch list hangs in update dialog" (#50824)
+
 2002-12-12  Christian Loose <christian.loose@hamburg.de>
 
 	* Fix the too small scroll area of diff view when
