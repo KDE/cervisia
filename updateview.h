@@ -36,7 +36,7 @@ public:
                   NoRemoved=4, NoNotInCVS=8 , NoEmptyDirectories = 16 };
     enum Action { Add, Remove, Update, UpdateNoAct, Commit };
     
-    UpdateView( QWidget *parent=0, const char *name=0 );
+    explicit UpdateView( QWidget *parent=0, const char *name=0 );
     ~UpdateView();
 
     void setFilter(Filter filter);
@@ -60,7 +60,6 @@ public:
     const QColor& remoteChangeColor() const;
 
 signals:
-    void contextMenu();
     void fileOpened(QString filename);
     
 public slots:
@@ -69,9 +68,6 @@ public slots:
     void finishJob(bool normalExit, int exitStatus);
     void processUpdateLine(QString line);
 
-protected:
-    virtual void keyPressEvent(QKeyEvent *e);
-    
 private slots:
     void itemExecuted(QListViewItem *item);
     
