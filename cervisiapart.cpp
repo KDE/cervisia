@@ -80,7 +80,6 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
 {
     KGlobal::locale()->insertCatalogue("cervisia");
 
-    hasRunningJob = false;
     setInstance( CervisiaFactory::instance() );
     new CervisiaBrowserExtension( this );
 
