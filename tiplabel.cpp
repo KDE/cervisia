@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2001 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
@@ -14,21 +14,20 @@
 
 #include <qapplication.h>
 #include <qsimplerichtext.h>
+#include <qtooltip.h>
 
 #include "tiplabel.h"
 #include "tiplabel.moc"
 
 
 TipLabel::TipLabel(const QString &text)
-    : QLabel(0, "annotate label", WStyle_Customize|WStyle_StaysOnTop|WStyle_NoBorder|WStyle_Tool)
+    : QLabel(0, "annotate label", WStyle_Customize|WStyle_StaysOnTop|WStyle_NoBorder|WStyle_Tool|WX11BypassWM)
 {
     setMargin(2);
     setIndent(0);
     setFrameStyle( QFrame::Plain | QFrame::Box );
     setText(text);
-    QColorGroup cg(Qt::black, QColor(255, 255, 220), QColor(96,96,96),
-                   Qt::black, Qt::black, Qt::black, QColor(255,255,220));
-    setPalette(QPalette(cg, cg, cg));
+    setPalette( QToolTip::palette() );
 
     QSimpleRichText doc(text, font());
     doc.setWidth(QApplication::desktop()->width());
