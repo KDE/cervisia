@@ -434,7 +434,10 @@ bool UpdateFileItem::applyFilter(UpdateView::Filter filter)
     bool visible(true);
     if (filter & UpdateView::OnlyDirectories)
         visible = false;
-    if ((filter & UpdateView::NoUpToDate) && (entry().m_status == Cervisia::UpToDate))
+    
+    bool unmodified = (entry().m_status == Cervisia::UpToDate) || 
+                      (entry().m_status == Cervisia::Unknown);
+    if ((filter & UpdateView::NoUpToDate) && unmodified)
         visible = false;
     if ((filter & UpdateView::NoRemoved) && (entry().m_status == Cervisia::Removed))
         visible = false;

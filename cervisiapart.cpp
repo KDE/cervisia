@@ -509,11 +509,12 @@ void CervisiaPart::setupActions()
     toggaction->setToolTip( hint );
     toggaction->setWhatsThis( hint );
 
-    toggaction = new KToggleAction( i18n("Hide Up-&To-Date Files"), 0,
+    toggaction = new KToggleAction( i18n("Hide Unmodified Files"), 0,
                                 this, SLOT(slotHideUpToDate()),
                                 actionCollection(), "settings_hide_uptodate" );
-    toggaction->setCheckedState(i18n("Show Up-&To-Date Files"));
-    hint = i18n("Determines whether up-to-date files are hidden");
+    toggaction->setCheckedState(i18n("Show Unmodified Files"));
+    hint = i18n("Determines whether files with status up-to-date or "
+                "unknown are hidden");
     toggaction->setToolTip( hint );
     toggaction->setWhatsThis( hint );
 
