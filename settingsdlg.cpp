@@ -58,9 +58,9 @@ void FontButton::chooseFont()
 
 SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name )
     : KDialogBase(KDialogBase::Tabbed, i18n("Configure Cervisia"),
-		  KDialogBase::Ok | KDialogBase::Cancel,
-		  KDialogBase::Ok,
-		  parent, name, true)
+      KDialogBase::Ok | KDialogBase::Cancel,
+      KDialogBase::Ok,
+      parent, name, true)
 {
     config = conf;
 
@@ -77,10 +77,6 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
     QLabel *cvspathlabel = new QLabel( i18n("&Path to cvs:"), generalPage );
     cvspathedit = new KLineEdit(generalPage);
     cvspathlabel->setBuddy(cvspathedit);
-
-    QLabel *editorlabel = new QLabel( i18n("&Editor:"), generalPage );
-    editoredit = new KURLRequester(generalPage);
-    editorlabel->setBuddy(editoredit);
 
     new QWidget(generalPage);
 
@@ -205,7 +201,6 @@ void SettingsDialog::readSettings()
     remotestatusbox->setChecked(config->readBoolEntry("StatusForRemoteRepos", false));
     localstatusbox->setChecked(config->readBoolEntry("StatusForLocalRepos", false));
     config->setGroup("Communication");
-    editoredit->lineEdit()->setText(config->readEntry("Editor", "kwrite"));
 #if 0
     bool usedcop = config->readBoolEntry("UseDCOP", false);
     usedcopbox->setChecked(usedcop);
@@ -236,7 +231,6 @@ void SettingsDialog::writeSettings()
     config->writeEntry("StatusForRemoteRepos", remotestatusbox->isChecked());
     config->writeEntry("StatusForLocalRepos", localstatusbox->isChecked());
     config->setGroup("Communication");
-    config->writeEntry("Editor", editoredit->lineEdit()->text());
 #if 0
     config->writeEntry("UseDCOP", usedcopbox->isChecked());
     config->writeEntry("DCOPClient", clientedit->text());
