@@ -303,7 +303,7 @@ void UpdateDirItem::syncWithEntries()
                 const QString& options(line.section('/', 4, 4));
                 const QString& tagdate(line.section('/', 5, 5));
 
-                const bool isBinary(options == "-kb");
+                const bool isBinary(options.find("-kb") >= 0);
 
                 // file date in local time
                 // GCC 3.2.1 needs extra (), don't know why
