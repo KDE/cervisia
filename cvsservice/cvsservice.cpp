@@ -20,17 +20,23 @@
 
 #include "cvsservice.h"
 
+#include <qdir.h>
 #include <qintdict.h>
 #include <qstring.h>
+
 #include <dcopref.h>
 #include <dcopclient.h>
 #include <kapplication.h>
+#include <kconfig.h>
 #include <kdebug.h>
+#include <kdirwatch.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kprocess.h>
+#include <kstandarddirs.h>
+
 #include "cvsjob.h"
-#include "sandbox.h"
+#include "repository.h"
 
 
 struct CvsService::Private
@@ -38,8 +44,12 @@ struct CvsService::Private
     CvsJob*             singleCvsJob;   // non-concurrent cvs job, like update or commit
     QIntDict<CvsJob>    cvsJobs;        // concurrent cvs jobs, like diff or annotate
     unsigned            lastJobId;
-    Sandbox             sandbox;
+    
     QCString            appId;          // cache the DCOP clients app id
+    QString             configFile;     // name of config file (including path)
+    
+    QString             workingCopy;
+    Repository*         repository;
 };
 
 
@@ -47,14 +57,24 @@ CvsService::CvsService()
     : DCOPObject("CvsService")
     , d(new Private)
 {
-    d->lastJobId = 0;
+    // initialize private data
+    d->lastJobId  = 0;
+    d->repository = 0;
+    d->appId      = kapp->dcopClient()->appId();
 
     ++d->lastJobId;
     d->singleCvsJob = new CvsJob(d->lastJobId, "");
 
     d->cvsJobs.setAutoDelete(true);
 
-    d->appId = kapp->dcopClient()->appId();
+    // other cvsservice instances might change the configuration file
+    // so we watch it for changes
+    d->configFile = locate("config", "cvsservicerc");
+    kdDebug() << d->configFile << endl;
+    KDirWatch* fileWatcher = new KDirWatch(this);
+    connect(fileWatcher, SIGNAL(dirty(const QString&)),
+            this, SLOT(slotConfigDirty(const QString&)));
+    fileWatcher->addFile(d->configFile);
 }
 
 
@@ -62,26 +82,81 @@ CvsService::~CvsService()
 {
     d->cvsJobs.clear();
     delete d->singleCvsJob;
+    delete d->repository;
     delete d;
+}
+
+
+bool CvsService::setWorkingCopy(const QString& dirName)
+{
+    // delete old data
+    d->workingCopy = QString::null;
+    delete d->repository;
+    d->repository = 0;
+    
+    QFileInfo fi(dirName);
+    QString path = fi.absFilePath();
+    
+    // is this really a cvs-controlled directory?
+    QFileInfo cvsDirInfo(path + "/CVS");
+    if( !cvsDirInfo.exists() || !cvsDirInfo.isDir() )
+        return false;
+
+    d->workingCopy = path;
+    d->repository = new Repository(path);
+    
+    QDir::setCurrent(path);
+    
+    return true;
+}
+
+
+QString CvsService::workingCopy() const
+{
+    return d->workingCopy;
+}
+
+
+QString CvsService::repository() const
+{
+    if( d->repository )
+        return d->repository->location();
+    else
+        return QString::null;
 }
 
 
 DCOPRef CvsService::annotate(const QString& fileName, const QString& revision)
 {
+    if( !d->repository )
+    {
+        KMessageBox::sorry(0, i18n("You have to set a local working copy "
+                                   "directory before you can use this function!"));
+        return DCOPRef();
+    }
+
     QString quotedName = KProcess::quote(fileName);
-    QString cmdline = "( " + d->sandbox.client() + " log ";
+    QString cvsClient  = d->repository->cvsClient();
+
+    // Assemble the command line
+    QString cmdline = "( " + cvsClient;
+    cmdline += " log ";
     cmdline += quotedName;
     cmdline += " && ";
-    cmdline += d->sandbox.client() + " annotate ";
+    cmdline += cvsClient;
+    cmdline += " annotate ";
 
     if( !revision.isEmpty() )
         cmdline += " -r " + revision;
 
-    cmdline += " " + quotedName;
-    // Hack because the string ´Annotations for blabla´ is
-    // printed to stderr even with option -Q. Arg!
+    cmdline += " ";
+    cmdline += quotedName;
+    // *Hack*
+    // because the string "Annotations for blabla" is
+    // printed to stderr even with option -Q.
     cmdline += " ) 2>&1";
 
+    // create a cvs job
     ++d->lastJobId;
     CvsJob* job = new CvsJob(d->lastJobId, cmdline);
     d->cvsJobs.insert(d->lastJobId, job);
@@ -90,59 +165,87 @@ DCOPRef CvsService::annotate(const QString& fileName, const QString& revision)
 }
 
 
-DCOPRef CvsService::status(const QString& files, bool recursive, 
-                           bool createDirs, bool pruneDirs)
+DCOPRef CvsService::log(const QString& fileName)
 {
-    if( !d->sandbox.isOpen() ) {
-        KMessageBox::sorry(0, i18n("No open sandbox"), "CvsService");
+    if( !d->repository )
+    {
+        KMessageBox::sorry(0, i18n("You have to set a local working copy "
+                                   "directory before you can use this function!"));
         return DCOPRef();
     }
 
-    if( d->singleCvsJob->isRunning() ) {
-        KMessageBox::sorry(0, i18n("There is already a job running"),
-                           "CvsService");
+    // Assemble the command line
+    QString cmdline = d->repository->cvsClient();
+    cmdline += " log ";
+    cmdline += KProcess::quote(fileName);
+
+    // create a cvs job
+    ++d->lastJobId;
+    CvsJob* job = new CvsJob(d->lastJobId, cmdline);
+    d->cvsJobs.insert(d->lastJobId, job);
+
+    return DCOPRef(d->appId, job->objId());
+}
+
+
+DCOPRef CvsService::status(const QString& files, bool recursive)
+{
+    if( !d->repository )
+    {
+        KMessageBox::sorry(0, i18n("You have to set a local working copy "
+                                   "directory before you can use this function!"));
         return DCOPRef();
     }
 
-    QString cmdline = d->sandbox.client() + " -n update ";
+    if( d->singleCvsJob->isRunning() )
+    {
+        KMessageBox::sorry(0, i18n("There is already a job running"));
+        return DCOPRef();
+    }
 
-    if( recursive )
-        cmdline += "-R ";
-    else
+    // Assemble the command line
+    QString cmdline = d->repository->cvsClient();
+    cmdline += " -n update ";
+
+    if( !recursive )
         cmdline += "-l ";
-
-    if( createDirs )
-        cmdline += "-d ";
-
-    if( pruneDirs )
-        cmdline += "-P ";
 
     cmdline += files;
     cmdline += " 2>&1";
 
+    // create a cvs job
+    ++d->lastJobId;
+    CvsJob* job = new CvsJob(d->lastJobId, cmdline);
+    d->cvsJobs.insert(d->lastJobId, job);
+
+    return DCOPRef(d->appId, job->objId());
+}
+
+
+DCOPRef CvsService::status(const QString& files, bool recursive, bool tagInfo)
+{
+    if( !d->repository )
+    {
+        KMessageBox::sorry(0, i18n("You have to set a local working copy "
+                                   "directory before you can use this function!"));
+        return DCOPRef();
+    }
+
+    // Assemble the command line
+    QString cmdline = d->repository->cvsClient();
+    cmdline += " status ";
+
+    if( !recursive )
+        cmdline += "-l ";
+    
+    if( tagInfo )
+        cmdline += "-v ";
+
+    cmdline += files;
+
     d->singleCvsJob->setCvsCommand(cmdline);
 
-    kdDebug() << cmdline << endl;
-
     return DCOPRef(d->appId, d->singleCvsJob->objId());
-}
-
-
-bool CvsService::openSandbox(const QString& dirName)
-{
-    return d->sandbox.open(dirName);
-}
-
-
-QString CvsService::sandbox() const
-{
-    return d->sandbox.sandboxPath();
-}
-
-
-QString CvsService::repository() const
-{
-    return d->sandbox.repository();
 }
 
 
@@ -150,3 +253,17 @@ void CvsService::quit()
 {
     kapp->quit();
 }
+
+
+void CvsService::slotConfigDirty(const QString& fileName)
+{
+    if( d->repository && fileName == d->configFile )
+    {
+        // reread the configuration data from disk
+        kapp->config()->reparseConfiguration();
+        d->repository->updateConfig();
+    }
+}
+
+
+#include "cvsservice.moc"

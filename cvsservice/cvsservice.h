@@ -21,31 +21,96 @@
 #ifndef CVSSERVICE_H
 #define CVSSERVICE_H
 
+#include <qobject.h>
 #include <dcopref.h>
 #include <dcopobject.h>
 
 class QString;
 
 
-class CvsService : public DCOPObject
+class CvsService : public QObject, public DCOPObject
 {
     K_DCOP
+    Q_OBJECT
 
 public:
     CvsService();
     ~CvsService();
 
 k_dcop:
-    DCOPRef annotate(const QString& fileName, const QString& revision);
-    DCOPRef status(const QString& files, bool recursive, bool createDirs,
-        bool pruneDirs);
+    /**
+     * Changes the working copy and the corresponding cvs repository.
+     *
+     * @param dirName path to the local working copy directory.
+     */
+    bool setWorkingCopy(const QString& dirName);
 
-    bool openSandbox(const QString& dirName);
-
-    QString sandbox() const;
+    /**
+     * Path to the current working copy.
+     *
+     * @return The working copy directory. Can be null if not set.
+     */
+    QString workingCopy() const;
+    
+    /**
+     * Path to the current cvs repository.
+     *
+     * @return The cvs repository. Can be null if not set.
+     */
     QString repository() const;
 
+    /**
+     * Shows information on who last modified each line of a file and when.
+     *
+     * @param fileName the name of the file to show annotations for
+     * @param revision show annotations for this revision (number or tag)
+     *
+     * @return A DCOP reference to the cvs job or in case of failure a
+     *         null reference.
+     */
+    DCOPRef annotate(const QString& fileName, const QString& revision);
+    
+    /**
+     * Shows log messages for a file.
+     *
+     * @param fileName the name of the file to show log messages for
+     *
+     * @return A DCOP reference to the cvs job or in case of failure a
+     *         null reference.
+     */
+    DCOPRef log(const QString& fileName);
+    
+    /**
+     * Shows a summary of what's been done locally, without changing the
+     * working copy. (cvs -n update)
+     *
+     * @param files
+     * @param recursive descends into subdirectories.
+     *
+     * @return A DCOP reference to the cvs job or in case of failure a
+     *         null reference.
+     */    
+    DCOPRef status(const QString& files, bool recursive);
+    
+    /**
+     * Shows the status of the files in the working copy.
+     *
+     * @param files
+     * @param recursive descends into subdirectories.
+     * @param tagInfo show tag information for the file.
+     *
+     * @return A DCOP reference to the cvs job or in case of failure a
+     *         null reference.
+     */    
+    DCOPRef status(const QString& files, bool recursive, bool tagInfo);
+    
+    /**
+     * Quits the DCOP service.
+     */
     void quit();
+
+private slots:
+    void slotConfigDirty(const QString& fileName);
 
 private:
     struct Private;
@@ -54,4 +119,3 @@ private:
 
 
 #endif
-
