@@ -534,9 +534,9 @@ void CervisiaPart::setupActions()
     toggaction->setToolTip( hint );
     toggaction->setWhatsThis( hint );
 
-    action = new KToggleAction( i18n("Hide Empty Folders"), 0,
-                                this, SLOT(slotHideEmptyDirectories()),
-                                actionCollection(), "settings_hide_empty_directories" );
+    toggaction = new KToggleAction( i18n("Hide Empty Folders"), 0,
+                                    this, SLOT(slotHideEmptyDirectories()),
+                                    actionCollection(), "settings_hide_empty_directories" );
     toggaction->setCheckedState(i18n("Show Empty Folders"));
     hint = i18n("Determines whether folders without visible entries are hidden");
     toggaction->setToolTip( hint );
