@@ -1500,6 +1500,9 @@ void CervisiaPart::openSandbox(const QString &dirname)
     update->openDirectory(sandbox);
     setFilter();
 
+    // set m_url member for tabbed window modus of Konqueror
+    m_url = KURL::fromPathOrURL(sandbox);
+
     KConfig *conf = config();
     conf->setGroup("General");
     bool dostatus = conf->readBoolEntry(repository.contains(":")?
