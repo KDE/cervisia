@@ -10,13 +10,13 @@ noinst_LTLIBRARIES = libcervisia.la
 libcervisia_la_SOURCES = annotatedlg.cpp cvsprogressdlg.cpp diffdlg.cpp logdlg.cpp \
 		   progressdlg.cpp progressdlg.skel resolvedlg.cpp annotateview.cpp        \
 		   diffview.cpp loglist.cpp logplainview.cpp logtree.cpp annotatectl.cpp   \
-		   globalconfig.cpp loginfo.cpp misc.cpp qttableview.cpp tiplabel.cpp
+		   globalconfig.cpp loginfo.cpp misc.cpp qttableview.cpp tiplabel.cpp      \
+		   configutils.cpp
 
 libcervisiapart_la_SOURCES = updateview.cpp protocolview.cpp protocolview.skel \
 		   watchdlg.cpp settingsdlg.cpp changelogdlg.cpp historydlg.cpp \
 		   repositorydlg.cpp commitdlg.cpp checkoutdlg.cpp updatedlg.cpp \
-		   tagdlg.cpp mergedlg.cpp configutils.cpp \
-		   cvsdir.cpp repositories.cpp cervisiapart.cpp \
+		   tagdlg.cpp mergedlg.cpp cvsdir.cpp repositories.cpp cervisiapart.cpp \
 		   addrepositorydlg.cpp addremovedlg.cpp watchersdlg.cpp
 libcervisiapart_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
 libcervisiapart_la_LIBADD = $(LIB_KFILE) $(LIB_KPARTS) $(LIB_KUTILS) \
