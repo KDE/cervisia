@@ -32,7 +32,7 @@
 ResolveDialog::Options *ResolveDialog::options = 0;
 
 
-ResolveDialog::ResolveDialog( QWidget *parent, const char *name)
+ResolveDialog::ResolveDialog(QWidget *parent, const char *name)
     : QDialog(parent, name, false,
               WStyle_Customize|WStyle_NormalBorder|WStyle_Title|WStyle_MinMax)
 {
@@ -43,14 +43,14 @@ ResolveDialog::ResolveDialog( QWidget *parent, const char *name)
     QBoxLayout *layout = new QVBoxLayout(this, 10);
 
     QGridLayout *pairlayout = new QGridLayout(2, 2, 10);
+    pairlayout->setRowStretch(0, 0);
+    pairlayout->setRowStretch(1, 1);
     layout->addLayout(pairlayout, 10);
 
     QLabel *revlabel1 = new QLabel(i18n("Your Version (A):"), this);
-    revlabel1->setFixedHeight(revlabel1->sizeHint().height());
     pairlayout->addWidget(revlabel1, 0, 0);
 			      
     QLabel *revlabel2 = new QLabel(i18n("Other Version (B):"), this);
-    revlabel2->setFixedHeight(revlabel2->sizeHint().height());
     pairlayout->addWidget(revlabel2, 0, 1);
 
     diff1 = new DiffView(true, false, this);
@@ -63,7 +63,6 @@ ResolveDialog::ResolveDialog( QWidget *parent, const char *name)
     diff2->setPartner(diff1);
     
     QLabel *mergelabel = new QLabel(i18n("Merged Version:"), this);
-    mergelabel->setFixedHeight(mergelabel->sizeHint().height());
     layout->addSpacing(5);
     layout->addWidget(mergelabel);
     
@@ -109,7 +108,6 @@ ResolveDialog::ResolveDialog( QWidget *parent, const char *name)
     
     QFrame *frame = new QFrame(this);
     frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-    frame->setMinimumHeight(frame->sizeHint().height());
     layout->addWidget(frame, 0);
 
     KButtonBox *buttonbox = new KButtonBox(this);
@@ -131,7 +129,6 @@ ResolveDialog::ResolveDialog( QWidget *parent, const char *name)
 
     setMinimumSize(fm.width("0123456789")*12,
 		   fm.lineSpacing()*40);
-    layout->activate();
 
     if (options)
         resize(options->size);
@@ -556,7 +553,6 @@ ResolveEditorDialog::ResolveEditorDialog(QWidget *parent, const char *name)
   
     QFrame *frame = new QFrame(this);
     frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-    frame->setMinimumHeight(frame->sizeHint().height());
     layout->addWidget(frame, 0);
     
     KButtonBox *buttonbox = new KButtonBox(this);

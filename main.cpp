@@ -15,10 +15,13 @@
 #include <kaboutdata.h>
 #include <kapplication.h>
 #include <kcmdlineargs.h>
+#include <kconfig.h>
 #include <klocale.h>
 
 #include "misc.h"
 #include "cervisiashell.h"
+#include "cervisiapart.h"
+#include "resolvedlg.h"
 #include "version.h"
 
 
@@ -26,6 +29,7 @@ int main(int argc, char **argv)
 {
     static KCmdLineOptions options[] = {
         { "+[directory]", I18N_NOOP("The sandbox to be loaded"), 0 },
+        { "resolve <file>", I18N_NOOP("Show resolve dialog for the given file"), 0 },
         { 0, 0, 0 }
     };
     KAboutData about("cervisia", I18N_NOOP("Cervisia"), 
@@ -36,19 +40,35 @@ int main(int argc, char **argv)
     
     KApplication *app = new KApplication();
 
-    if ( app->isRestored() )
-    {
-        RESTORE(CervisiaShell);
+    QString resolvefile = KCmdLineArgs::parsedArgs()->getOption("resolve");
+    if (!resolvefile.isEmpty()) {
+        KConfig *config = CervisiaFactory::instance()->config();
+        config->setGroup("Resolve dialog");
+        ResolveDialog::loadOptions(config);
+        ResolveDialog *l = new ResolveDialog();
+        app->setMainWidget(l);
+        if (l->parseFile(resolvefile))
+            l->show();
+        else
+            delete l;
+        int res = app->exec();
+        config->setGroup("Resolve dialog");
+        ResolveDialog::saveOptions(config);
+        delete CervisiaFactory::instance();
+        return res;
     }
-    else
-    {
-	CervisiaShell *t = new CervisiaShell();
 
+    if ( app->isRestored() ) {
+        RESTORE(CervisiaShell);
+    } else {
         QString dirname = QString(KCmdLineArgs::parsedArgs()->count()?
                                   KCmdLineArgs::parsedArgs()->arg(0) : "");
+        
+        CervisiaShell *t = new CervisiaShell();
+        
         t->resize(t->sizeHint().width(),
-        KApplication::desktop()->height()*8/10);
-
+                  KApplication::desktop()->height()*8/10);
+        
         t->restorePseudo(dirname);
         t->setIcon(app->icon());
         app->setMainWidget(t);

@@ -41,7 +41,7 @@ CvsIgnoreList::CvsIgnoreList(const QDir &dir)
     addEntriesFromString(ignorestr);
     // TODO?: addEntriesFromFile($CVSROOT/CVSROOT/cvsignore)
     addEntriesFromFile(QDir::homeDirPath() + "/.cvsignore");
-    addEntriesFromString(getenv("CVSIGNORE"));
+    addEntriesFromString(::getenv("CVSIGNORE"));
     addEntriesFromFile(dir.absPath() + "/.cvsignore");
 }
 
@@ -56,7 +56,7 @@ void CvsIgnoreList::addEntriesFromString(const QString &str)
             if ( *it == "!" )
 		clear();
 	    else
-                append((*it).latin1());
+                append((*it).local8Bit());
 	}
 }
 
@@ -65,7 +65,7 @@ void CvsIgnoreList::addEntriesFromFile(const QString &name)
 {
     char buf[512];
     // FIXME: Use QFile
-    FILE *f = fopen(name.latin1(), "r");
+    FILE *f = fopen(name.local8Bit(), "r");
     if (!f)
 	return;
 
@@ -87,7 +87,7 @@ bool CvsIgnoreList::matches(QFileInfo *fi)
     QStrListIterator it(*this);
     for (; it.current(); ++it)
 	{
-	    if (fnmatch(it.current(), fi->fileName().latin1(), FNM_PATHNAME) == 0)
+	    if (::fnmatch(it.current(), fi->fileName().local8Bit(), FNM_PATHNAME) == 0)
 		return true;
 	}
     

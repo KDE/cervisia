@@ -80,7 +80,6 @@ TagDialog::TagDialog(ActionType action, const QString &sbox, const QString &repo
     
     QFrame *frame = new QFrame(this);
     frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-    frame->setMinimumHeight(frame->sizeHint().height());
     layout->addWidget(frame, 0);
 
     KButtonBox *buttonbox = new KButtonBox(this);
@@ -145,7 +144,7 @@ void TagDialog::tagButtonClicked()
     if (!l.execCommand(sandbox, repository, cmdline, ""))
         return;
 
-    QStrList tags(true);
+    QStringList tags;
     QString str;
     while (l.getOneLine(&str))
         {
@@ -161,13 +160,14 @@ void TagDialog::tagButtonClicked()
             
             QString tag = str.mid(1, pos1-1);
             QString type = str.mid(pos2+1, pos3-pos2-1);
-            if (type == QString::fromLatin1("revision") && !tags.contains(tag.latin1()))
-                tags.inSort(tag.latin1());
+            if (type == QString::fromLatin1("revision") && !tags.contains(tag))
+                tags.append(tag);
         }
 
     tag_combo->clear();
-    QStrListIterator it(tags);
-    for (; it.current(); ++it)
+    tags.sort();
+    QStringList::ConstIterator it;
+    for (it = tags.begin(); it != tags.end(); ++it)
         tag_combo->insertItem(*it);
 }
 

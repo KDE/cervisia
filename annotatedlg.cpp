@@ -44,7 +44,6 @@ AnnotateDialog::AnnotateDialog(QWidget *parent, const char *name)
 
     QFrame *frame = new QFrame(this);
     frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-    frame->setMinimumHeight(frame->sizeHint().height());
     layout->addWidget(frame, 0);
 
     KButtonBox *buttonbox = new KButtonBox(this);

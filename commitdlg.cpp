@@ -45,30 +45,24 @@ CommitDialog::CommitDialog(ActionType action, QWidget *parent, const char *name)
           (action==Remove)?    i18n("Remove the following files from the repository:") :
                                i18n("Commit the following &files:"),
           this );
-    textlabel->setMinimumSize(textlabel->sizeHint());
     layout->addWidget(textlabel, 0);
 
     listbox = new QListBox(this);
     textlabel->setBuddy(listbox);
     connect( listbox, SIGNAL(selected(int)), this, SLOT(fileSelected(int)));
-    listbox->adjustSize();
-    listbox->setMinimumSize(listbox->size());
     layout->addWidget(listbox, 5);
 
     if (action == Commit)
         {
             QLabel *archivelabel = new QLabel(i18n("Older &messages:"), this);
-            archivelabel->setMinimumSize(archivelabel->sizeHint());
             layout->addWidget(archivelabel, 0);
             
             combo = new QComboBox(this);
             archivelabel->setBuddy(combo);
-            combo->setMinimumSize(combo->sizeHint());
             connect( combo, SIGNAL(activated(int)), this, SLOT(comboActivated(int)) );
             layout->addWidget(combo, 0);
             
             QLabel *messagelabel = new QLabel(i18n("&Log message:"), this);
-            messagelabel->setMinimumSize(messagelabel->sizeHint());
             layout->addWidget(messagelabel, 0);
 
             edit = new QMultiLineEdit(this);
@@ -82,7 +76,6 @@ CommitDialog::CommitDialog(ActionType action, QWidget *parent, const char *name)
     
     QFrame *frame = new QFrame(this);
     frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-    frame->setMinimumHeight(frame->sizeHint().height());
     layout->addWidget(frame, 0);
 
     KButtonBox *buttonbox = new KButtonBox(this);

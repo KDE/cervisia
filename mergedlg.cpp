@@ -128,7 +128,7 @@ void MergeDialog::buttonClicked(bool branch)
 
     QString searchedtype = QString::fromLatin1(branch? "branch" : "revision");
 
-    QStrList tags(true);
+    QStringList tags;
     QString str;
     while (l.getOneLine(&str))
         {
@@ -144,8 +144,8 @@ void MergeDialog::buttonClicked(bool branch)
             
             QString tag = str.mid(1, pos1-1);
             QString type = str.mid(pos2+1, pos3-pos2-1);
-            if (type == searchedtype && !tags.contains(tag.latin1()))
-                tags.inSort(tag.latin1());
+            if (type == searchedtype && !tags.contains(tag))
+                tags.append(tag);
         }
 
     if (branch)
@@ -155,8 +155,12 @@ void MergeDialog::buttonClicked(bool branch)
             tag1_combo->clear();
             tag2_combo->clear();
         }
-    QStrListIterator it(tags);
-    for (; it.current(); ++it)
+
+    tags.sort();
+
+    
+    QStringList::ConstIterator it;
+    for (it = tags.begin(); it != tags.end(); ++it)
         if (branch)
             branch_combo->insertItem(*it);
         else

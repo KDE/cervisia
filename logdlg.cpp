@@ -59,9 +59,9 @@ LogDialog::LogDialog(QWidget *parent, const char *name)
     QTab *tab2 = new QTab(i18n("&List"));
     stack->addWidget(list, tabbar->addTab(tab2));
 
-    tabbar->adjustSize();
-    tabbar->setMinimumWidth(tabbar->width());
-    tabbar->setFixedHeight(tabbar->height());
+    //    tabbar->adjustSize();
+    //    tabbar->setMinimumWidth(tabbar->width());
+    //    tabbar->setFixedHeight(tabbar->height());
     layout->addWidget(tabbar, 0);
     layout->addWidget(stack, 3);
     
@@ -79,7 +79,7 @@ LogDialog::LogDialog(QWidget *parent, const char *name)
 	{
 	    QFrame *frame = new QFrame(this);
 	    frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-            //	    frame->setMinimumHeight(frame->sizeHint().height());
+
 	    layout->addSpacing(8);
 	    layout->addWidget(frame);
 	    layout->addSpacing(8);
@@ -158,6 +158,7 @@ LogDialog::LogDialog(QWidget *parent, const char *name)
 
     QFrame *frame = new QFrame(this);
     frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
+
     layout->addSpacing(8);
     layout->addWidget(frame, 0);
     layout->addSpacing(8);

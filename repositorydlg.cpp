@@ -162,7 +162,6 @@ RepositoryDialog::RepositoryDialog(QWidget *parent, const char *name)
     
     QFrame *frame = new QFrame(this);
     frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-    frame->setMinimumHeight(frame->sizeHint().height());
     layout->addWidget(frame, 0);
 
     KButtonBox *buttonbox = new KButtonBox(this);
@@ -195,9 +194,9 @@ void RepositoryDialog::done(int r)
         {
             // Make list of repositories
             QListViewItem *item;
-            QStrList list;
+            QStringList list;
             for (item = repolist->firstChild(); item; item = item->nextSibling())
-                list.append(item->text(0).latin1());
+                list.append(item->text(0));
 
             KConfig *config = CervisiaPart::config();
             config->setGroup("Repositories");

@@ -128,7 +128,7 @@ void UpdateDialog::buttonClicked(bool branch)
     QComboBox *combo = branch? branch_combo : tag_combo;
     QString searchedtype = QString::fromLatin1(branch? "branch" : "revision");
 
-    QStrList tags(true);
+    QStringList tags;
     QString str;
     while (l.getOneLine(&str))
         {
@@ -144,13 +144,15 @@ void UpdateDialog::buttonClicked(bool branch)
             
             QString tag = str.mid(1, pos1-1);
             QString type = str.mid(pos2+1, pos3-pos2-1);
-            if (type == searchedtype && !tags.contains(tag.latin1()))
-                tags.inSort(tag.latin1());
+            if (type == searchedtype && !tags.contains(tag))
+                tags.append(tag);
         }
 
     combo->clear();
-    QStrListIterator it(tags);
-    for (; it.current(); ++it)
+    tags.sort();
+
+    QStringList::ConstIterator it;
+    for (it = tags.begin(); it != tags.end(); ++it)
         combo->insertItem(*it);
 }
 

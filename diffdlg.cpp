@@ -76,7 +76,6 @@ DiffDialog::DiffDialog(QWidget *parent, const char *name, bool modal)
     syncbox->setChecked(true);
     connect( syncbox, SIGNAL(toggled(bool)),
 	     this, SLOT(toggleSynchronize(bool)) );
-    syncbox->setMinimumSize(syncbox->sizeHint());
 
     itemscombo = new QComboBox(this);
     itemscombo->insertItem("");
@@ -105,7 +104,6 @@ DiffDialog::DiffDialog(QWidget *parent, const char *name, bool modal)
     
     QFrame *frame = new QFrame(this);
     frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-    frame->setMinimumHeight(frame->sizeHint().height());
     layout->addWidget(frame, 0);
 
     KButtonBox *buttonbox = new KButtonBox(this);
@@ -483,7 +481,6 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
         }
 
     updateNofN();
-    itemscombo->setMinimumSize(itemscombo->sizeHint());
  
     return true;
 }

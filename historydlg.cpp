@@ -106,31 +106,31 @@ HistoryDialog::HistoryDialog(QWidget *parent, const char *name)
 
     commit_box = new QCheckBox(i18n("Show c&ommit events"), this);
     commit_box->setChecked(true);
-    commit_box->setMinimumSize(commit_box->sizeHint());
+    //    commit_box->setMinimumSize(commit_box->sizeHint());
     checkout_box = new QCheckBox(i18n("Show ch&eckout events"), this);
     checkout_box->setChecked(true);
-    checkout_box->setMinimumSize(checkout_box->sizeHint());
+    //    checkout_box->setMinimumSize(checkout_box->sizeHint());
     tag_box = new QCheckBox(i18n("Show &tag events"), this);
     tag_box->setChecked(true);
-    tag_box->setMinimumSize(tag_box->sizeHint());
+    //    tag_box->setMinimumSize(tag_box->sizeHint());
     other_box = new QCheckBox(i18n("Show &other events"), this);
     other_box->setChecked(true);
-    other_box->setMinimumSize(tag_box->sizeHint());
+    //    other_box->setMinimumSize(tag_box->sizeHint());
     onlyuser_box = new QCheckBox(i18n("Only &user:"), this);
-    onlyuser_box->setMinimumSize(onlyuser_box->sizeHint());
+    //    onlyuser_box->setMinimumSize(onlyuser_box->sizeHint());
     onlyfilenames_box = new QCheckBox(i18n("Only &filenames matching:"), this);
-    onlyfilenames_box->setMinimumSize(onlyfilenames_box->sizeHint());
+    //    onlyfilenames_box->setMinimumSize(onlyfilenames_box->sizeHint());
     onlydirnames_box = new QCheckBox(i18n("Only &directories matching:"), this);
-    onlydirnames_box->setMinimumSize(onlydirnames_box->sizeHint());
+    //    onlydirnames_box->setMinimumSize(onlydirnames_box->sizeHint());
     user_edit = new KLineEdit(this);
     user_edit->setEnabled(false);
-    user_edit->setMinimumSize(user_edit->sizeHint());
+    //    user_edit->setMinimumSize(user_edit->sizeHint());
     filename_edit = new KLineEdit(this);
     filename_edit->setEnabled(false);
-    filename_edit->setMinimumSize(filename_edit->sizeHint());
+    //    filename_edit->setMinimumSize(filename_edit->sizeHint());
     dirname_edit = new KLineEdit(this);
     dirname_edit->setEnabled(false);
-    dirname_edit->setMinimumSize(dirname_edit->sizeHint());
+    //    dirname_edit->setMinimumSize(dirname_edit->sizeHint());
 
     connect( onlyuser_box, SIGNAL(toggled(bool)),
              this, SLOT(toggled(bool)) );
@@ -179,7 +179,7 @@ HistoryDialog::HistoryDialog(QWidget *parent, const char *name)
 
     QFrame *frame = new QFrame(this);
     frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-    frame->setMinimumHeight(frame->sizeHint().height());
+
     layout->addSpacing(8);
     layout->addWidget(frame, 0);
     layout->addSpacing(8);
@@ -191,7 +191,7 @@ HistoryDialog::HistoryDialog(QWidget *parent, const char *name)
     QPushButton *closebutton = buttonbox->addButton(i18n("&Close"));
     closebutton->setAutoDefault(false);
     buttonbox->layout();
-    buttonbox->setFixedHeight(buttonbox->height());
+    //    buttonbox->setFixedHeight(buttonbox->height());
     layout->addWidget(buttonbox, 0);
 
     connect( helpbutton, SIGNAL(clicked()), SLOT(helpClicked()) );

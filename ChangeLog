@@ -1,3 +1,10 @@
+2002-06-28  Bernd Gehrmann  <bernd@mail.berlios.de>
+
+	* Removed Qt1-specific layout management stuff
+	* More latin1 conversions removed
+        * Command line option --resolve filename
+	  (Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>)
+
 2002-06-27  Bernd Gehrmann  <bernd@mail.berlios.de>
 
 	* Mark files with option -kb with a binary icon

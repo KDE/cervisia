@@ -37,17 +37,14 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent, const char *name)
     QLabel *textlabel = new QLabel
 	( (action==Add)? i18n("Add watches for the following events:")
           :  i18n("Remove watches for the following events:"), this );
-    textlabel->setMinimumSize(textlabel->sizeHint());
     layout->addWidget(textlabel, 0);
 
     all_button = new QRadioButton(i18n("&All"), this);
     all_button->setFocus();
     all_button->setChecked(true);
-    all_button->setMinimumSize(all_button->sizeHint());
     layout->addWidget(all_button);
     
     only_button = new QRadioButton(i18n("&Only:"), this);
-    only_button->setMinimumSize(only_button->sizeHint());
     layout->addWidget(only_button);
 
     QGridLayout *eventslayout = new QGridLayout(3, 2);
@@ -58,17 +55,14 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent, const char *name)
     
     commitbox = new QCheckBox(i18n("&Commits"), this);
     commitbox->setEnabled(false);
-    commitbox->setMinimumSize(commitbox->sizeHint());
     eventslayout->addWidget(commitbox, 0, 1, AlignLeft);
     
     editbox = new QCheckBox(i18n("&Edits"), this);
     editbox->setEnabled(false);
-    editbox->setMinimumSize(editbox->sizeHint());
     eventslayout->addWidget(editbox, 1, 1, AlignLeft);
 
     uneditbox = new QCheckBox(i18n("&Unedits"), this);
     uneditbox->setEnabled(false);
-    uneditbox->setMinimumSize(uneditbox->sizeHint());
     eventslayout->addWidget(uneditbox, 2, 1, AlignLeft);
 
     group = new QButtonGroup();
@@ -83,7 +77,6 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent, const char *name)
     
     QFrame *frame = new QFrame(this);
     frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-    frame->setMinimumHeight(frame->sizeHint().height());
     layout->addWidget(frame, 0);
 
     KButtonBox *buttonbox = new KButtonBox(this);
