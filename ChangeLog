@@ -35,6 +35,11 @@
 	  KXMLGUIClient::stateChanged() with the corresponding
 	  setup in the part's rc-file.
 
+2003-05-05  André Wöbbeking  <Woebbeking@web.de>
+
+	* Diff between any revision and the sandbox (only select 
+	  revision A in the log dialog).
+
 2003-04-18  Christian Loose  <christian.loose@hamburg.de>
 
 	* Fix BR 56042: Better default colors for white
