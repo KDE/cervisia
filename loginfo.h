@@ -88,18 +88,21 @@ struct LogInfo
     typedef QValueList<TagInfo> TTagInfoSeq;
 
     /**
+     * @param showTime show commit time in tooltip.
+     *
      * @return rich text formatted tooltip text.
      */
-    QString createToolTipText() const;
+    QString createToolTipText(bool showTime = true) const;
 
     /**
      * Calls KLocale::formatDateTime() to create a formatted string.
      *
+     * @param showTime show commit time in tooltip.
      * @param shortFormat using the short date format.
      *
      * @return The date/time formatted to the user's locale's conventions.
      */
-    QString dateTimeToString(bool shortFormat = true) const;
+    QString dateTimeToString(bool showTime = true, bool shortFormat = true) const;
 
     enum
     {

@@ -208,7 +208,7 @@ void AnnotateView::contentsMouseMoveEvent(QMouseEvent *e)
     if (!currentLabel && item && col == AnnotateViewItem::AuthorColumn &&
         !item->m_logInfo.m_author.isNull())
     {
-            QString text = item->m_logInfo.createToolTipText();
+            QString text = item->m_logInfo.createToolTipText(false);
 
             int left = header()->sectionPos(AnnotateViewItem::ContentColumn);
             int top = viewport()->mapTo(this, itemRect(item).topLeft()).y();
