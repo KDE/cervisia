@@ -23,7 +23,6 @@
 #include <qptrstack.h>
 #include <kconfig.h>
 #include <kdebug.h>
-#include <kglobalsettings.h>
 #include <kiconloader.h>
 #include <klocale.h>
 
@@ -31,6 +30,25 @@
 #include "misc.h"
 #include "cervisiapart.h"
 #include "cvsdir.h"
+
+
+namespace
+{
+    const int g_dirItemRtti(10000);
+    const int g_fileItemRtti(10001);
+
+
+    bool isDirItem(const QListViewItem* item)
+    {
+        return item->rtti() == g_dirItemRtti;
+    }
+
+
+    bool isFileItem(const QListViewItem* item)
+    {
+        return item->rtti() == g_fileItemRtti;
+    }
+}
 
 
 class UpdateItem : public QListViewItem
@@ -79,6 +97,7 @@ public:
     virtual int compare(QListViewItem* i, int col, bool) const;
     virtual QString text(int col) const;
     virtual void setOpen(bool o);
+    virtual int rtti() const { return g_dirItemRtti; }
 
     void maybeScanDir(bool recursive);
 
@@ -114,6 +133,7 @@ public:
     virtual QString text(int col) const;
     virtual void paintCell(QPainter *p, const QColorGroup &cg,
 			   int col, int width, int align);
+    virtual int rtti() const { return g_fileItemRtti; }
 
     void setStatus(UpdateView::Status status);
     void setRevTag(const QString& rev, const QString& tag);
@@ -172,9 +192,7 @@ void UpdateDirItem::updateChildItem(const QString& name, UpdateView::Status stat
 	{
 	    if (item->text(UpdateFileItem::File) == name)
 		{
-		    if (UpdateView::isDirItem(item))
-                        ; // ignore
-		    else
+		    if (isFileItem(item))
                         {
                             UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(item);
                             fileItem->setStatus(status);
@@ -211,9 +229,7 @@ void UpdateDirItem::updateEntriesItem(const QString& name,
 	{
 	    if (item->text(UpdateFileItem::File) == name)
 		{
-		    if (UpdateView::isDirItem(item))
-                        ; // ignore
-		    else
+		    if (isFileItem(item))
                         {
                             UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(item);
                             if (fileItem->status() == UpdateView::NotInCVS ||
@@ -361,7 +377,7 @@ void UpdateDirItem::syncWithDirectory()
     for (QListViewItem *item = firstChild(); item; item = item->nextSibling())
     {
         // only files
-        if (UpdateView::isDirItem(item) == false)
+        if (isFileItem(item))
         {
             // is file removed?
             if (setFiles.find(item->text(UpdateFileItem::File)) == setFiles.end())
@@ -395,7 +411,7 @@ void UpdateDirItem::maybeScanDir(bool recursive)
         {
             for ( QListViewItem *item = firstChild(); item;
                   item = item->nextSibling() )
-                if (UpdateView::isDirItem(item))
+                if (isDirItem(item))
                     static_cast<UpdateDirItem*>(item)->maybeScanDir(true);
         }
 }
@@ -445,7 +461,7 @@ void UpdateDirItem::setOpen(bool o)
 int UpdateDirItem::compare(QListViewItem* i, int, bool bAscending) const
 {
     // UpdateDirItems are always lesser than UpdateFileItems
-    if (UpdateView::isDirItem(i) == false)
+    if (isFileItem(i))
         return bAscending ? -1 : 1;
 
     const UpdateDirItem* item(static_cast<UpdateDirItem*>(i));
@@ -606,7 +622,7 @@ int UpdateFileItem::statusClass() const
 int UpdateFileItem::compare(QListViewItem* i, int col, bool bAscending) const
 {
     // UpdateDirItems are always lesser than UpdateFileItems
-    if (UpdateView::isDirItem(i))
+    if (isDirItem(i))
         return bAscending ? 1 : -1;
 
     const UpdateFileItem* pItem = static_cast<UpdateFileItem*>(i);
@@ -769,12 +785,6 @@ UpdateView::~UpdateView()
 {}
 
 
-bool UpdateView::isDirItem(QListViewItem *item)
-{
-    return item->text(UpdateFileItem::Status).isEmpty();
-}
-
-
 void UpdateView::setFilter(Filter filter)
 {
     filt = filter;
@@ -799,7 +809,7 @@ bool UpdateView::hasSingleSelection() const
 {
     const QPtrList<QListViewItem>& listSelectedItems(selectedItems());
 
-    return (listSelectedItems.count() == 1) && !isDirItem(listSelectedItems.getFirst());
+    return (listSelectedItems.count() == 1) && isFileItem(listSelectedItems.getFirst());
 }
 
 
@@ -809,7 +819,7 @@ void UpdateView::getSingleSelection(QString *filename, QString *revision) const
 
     QString tmpFileName;
     QString tmpRevision;
-    if ((listSelectedItems.count() == 1) && !isDirItem(listSelectedItems.getFirst()))
+    if ((listSelectedItems.count() == 1) && isFileItem(listSelectedItems.getFirst()))
     {
         UpdateFileItem* fileItem(static_cast<UpdateFileItem*>(listSelectedItems.getFirst()));
         tmpFileName = fileItem->filePath();
@@ -859,7 +869,7 @@ QStringList UpdateView::fileSelection() const
     {
         QListViewItem* item(*it);
 
-        if (!isDirItem(item))
+        if (isFileItem(item))
             res.append(static_cast<UpdateFileItem*>(item)->filePath());
     }
 
@@ -1004,7 +1014,7 @@ void UpdateView::markUpdated(bool laststage, bool success)
             {
                 for (QListViewItem *item = it.current()->firstChild(); item;
                      item = item->nextSibling() )
-                    if (!isDirItem(item))
+                    if (isFileItem(item))
                         {
                             UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(item);
                             fileItem->markUpdated(laststage, success);
@@ -1194,7 +1204,7 @@ void UpdateView::updateItem(const QString &name, Status status, bool isdir)
     for ( QListViewItem *item = firstChild(); item;
 	  item = item->nextSibling()? item->nextSibling() : s.pop() )
 	{
-	    if (UpdateView::isDirItem(item))
+	    if (isDirItem(item))
 		{
 		    UpdateDirItem *diritem = static_cast<UpdateDirItem*>(item);
                     const QString& diritemPath(diritem->dirPath());
@@ -1240,7 +1250,7 @@ void UpdateView::updateItem(const QString &name, Status status, bool isdir)
 
 void UpdateView::itemExecuted(QListViewItem *item)
 {
-    if (!isDirItem(item))
+    if (isFileItem(item))
         emit fileOpened(static_cast<UpdateFileItem*>(item)->filePath());
 }
 

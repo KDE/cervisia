@@ -41,8 +41,6 @@ public:
 
     void setFilter(Filter filter);
     Filter filter() const;
-    
-    static bool isDirItem(QListViewItem *item);
 
     bool hasSingleSelection() const;
     void getSingleSelection(QString *filename, QString *revision=0) const;
