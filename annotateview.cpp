@@ -15,6 +15,7 @@
 
 #include <qheader.h>
 #include <qpainter.h>
+#include <qstylesheet.h>
 #include <kconfig.h>
 #include <kglobalsettings.h>
 
