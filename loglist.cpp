@@ -14,6 +14,7 @@
 
 #include "loglist.h"
 
+#include <qheader.h>
 #include <qkeycode.h>
 #include <qstrlist.h>
 #include <qstylesheet.h>

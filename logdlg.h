@@ -15,14 +15,21 @@
 #ifndef LOGDLG_H
 #define LOGDLG_H
 
+
 #include <qdialog.h>
-#include <qlabel.h>
-#include <qtextedit.h>
-#include <qlistview.h>
-#include <qcombobox.h>
-#include <qtabbar.h>
-#include "loglist.h"
-#include "logtree.h"
+
+#include <qptrlist.h>
+
+
+class LogListView;
+class LogTreeView;
+
+class KConfig;
+
+class QComboBox;
+class QLabel;
+class QTabBar;
+class QTextEdit;
 
 
 class RevisionInfo

@@ -15,8 +15,12 @@
 #include "logdlg.h"
 
 #include <stdio.h>
+#include <qcombobox.h>
 #include <qpushbutton.h>
+#include <qlabel.h>
 #include <qlayout.h>
+#include <qtabbar.h>
+#include <qtextedit.h>
 #include <qwidgetstack.h>
 #include <qwhatsthis.h>
 #include <kbuttonbox.h>
@@ -30,6 +34,8 @@
 
 #include "annotatedlg.h"
 #include "cvsprogressdlg.h"
+#include "loglist.h"
+#include "logtree.h"
 #include "misc.h"
 
 

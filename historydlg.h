@@ -15,8 +15,9 @@
 #ifndef HISTORYDLG_H
 #define HISTORYDLG_H
 
+
 #include <qdialog.h>
-#include <qlist.h>
+
 
 class QCheckBox;
 class KConfig;

@@ -15,9 +15,10 @@
 #ifndef DIFFVIEW_H
 #define DIFFVIEW_H
 
-#include <qobject.h>
+
 #include <qptrlist.h>
 #include <qttableview.h>
+
 
 class DiffViewItem;
 

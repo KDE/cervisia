@@ -16,7 +16,9 @@
 
 #include <qfile.h>
 #include <qkeycode.h>
+#include <qlabel.h>
 #include <qlayout.h>
+#include <qmultilinedit.h>
 #include <qpushbutton.h>
 #include <qtextcodec.h>
 #include <qtextstream.h>
@@ -26,6 +28,8 @@
 #include <kfiledialog.h>
 #include <klocale.h>
 #include <kmessagebox.h>
+
+#include "diffview.h"
 #include "misc.h"
 
 

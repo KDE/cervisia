@@ -15,13 +15,15 @@
 #ifndef RESOLVEDLG_H
 #define RESOLVEDLG_H
 
-#include <qcheckbox.h>
-#include <qdialog.h>
-#include <qlabel.h>
-#include <qmultilinedit.h>
-#include <qptrlist.h>
-#include "diffview.h"
 
+#include <qdialog.h>
+#include <qptrlist.h>
+
+
+class DiffView;
+
+class QLabel;
+class QMultiLineEdit;
 class QTextCodec;
 class KConfig;
 class ResolveItem;

@@ -15,7 +15,6 @@
 #ifndef LOGTREE_H
 #define LOGTREE_H
 
-#include <qobject.h>
 #include <qarray.h>
 #include <qptrlist.h>
 

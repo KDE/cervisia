@@ -16,7 +16,10 @@
 #define PROTOCOLVIEW_H
 
 #include <qtextedit.h>
-#include <kprocess.h>
+
+
+class KProcess;
+class KShellProcess;
 
 
 class ProtocolView : public QTextEdit
