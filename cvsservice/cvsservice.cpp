@@ -417,7 +417,8 @@ DCOPRef CvsService::history()
 DCOPRef CvsService::import(const QString& workingDir, const QString& repository,
                            const QString& module, const QString& ignoreList,
                            const QString& comment, const QString& vendorTag,
-                           const QString& releaseTag, bool importAsBinary)
+                           const QString& releaseTag, bool importAsBinary,
+                           bool useModificationTime)
 {
     if( d->hasRunningJob() )
         return DCOPRef();
@@ -434,6 +435,9 @@ DCOPRef CvsService::import(const QString& workingDir, const QString& repository,
 
     if( importAsBinary )
         *d->singleCvsJob << "-kb";
+        
+    if( useModificationTime )
+        *d->singleCvsJob << "-d";
 
     const QString ignore = ignoreList.stripWhiteSpace();
     if( !ignore.isEmpty() )

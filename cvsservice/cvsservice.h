@@ -154,7 +154,8 @@ k_dcop:
     DCOPRef import(const QString& workingDir, const QString& repository,
                    const QString& module, const QString& ignoreList,
                    const QString& comment, const QString& vendorTag,
-                   const QString& releaseTag, bool importAsBinary);
+                   const QString& releaseTag, bool importAsBinary,
+                   bool useModificationTime);
 
     /**
      * @param files

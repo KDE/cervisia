@@ -1259,7 +1259,8 @@ void CervisiaPart::slotImport()
     DCOPRef cvsJob = cvsService->import(dlg.workingDirectory(), dlg.repository(),
                                         dlg.module(), dlg.ignoreFiles(),
                                         dlg.comment(), dlg.vendorTag(),
-                                        dlg.releaseTag(), dlg.importBinary());
+                                        dlg.releaseTag(), dlg.importBinary(), 
+                                        dlg.useModificationTime());
 
     // get command line from cvs job
     QString cmdline = cvsJob.call("cvsCommand()");

@@ -45,6 +45,7 @@ public:
     QString ignoreFiles() const;
     QString comment() const;
     bool importBinary() const;
+    bool useModificationTime() const;
 
 protected:
     virtual void slotOk();
@@ -62,6 +63,7 @@ private:
     KLineEdit *branch_edit, *comment_edit;
     KLineEdit *vendortag_edit, *releasetag_edit, *ignore_edit;
     QCheckBox *binary_box;
+    QCheckBox* m_useModificationTimeBox;
     ActionType act;
     KConfig&   partConfig;
 

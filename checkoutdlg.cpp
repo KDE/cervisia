@@ -55,7 +55,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
     QGridLayout *grid = new QGridLayout(layout);
     grid->setColStretch(0, 1);
     grid->setColStretch(1, 20);
-    for (int i = 0; i < ((action==Checkout)? 4 : 9); ++i)
+    for (int i = 0; i < ((action==Checkout)? 4 : 10); ++i)
         grid->setRowStretch(i, 0);
 
     repo_combo = new QComboBox(true, mainWidget);
@@ -148,6 +148,10 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
 
             binary_box = new QCheckBox(i18n("Import as &binaries"), mainWidget);
             grid->addMultiCellWidget(binary_box, 7, 7, 0, 1);
+            
+            m_useModificationTimeBox = new QCheckBox(
+                    i18n("Use file's modification time as time of import"), mainWidget);
+            grid->addMultiCellWidget(m_useModificationTimeBox, 8, 8, 0, 1);
         }
 
     QStringList list1 = Repositories::readCvsPassFile();
@@ -218,6 +222,10 @@ bool CheckoutDialog::importBinary() const
     return binary_box->isChecked();
 }
 
+bool CheckoutDialog::useModificationTime() const
+{
+    return m_useModificationTimeBox->isChecked();
+}
 
 void CheckoutDialog::slotOk()
 {

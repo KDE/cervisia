@@ -1,3 +1,9 @@
+2004-03-01  Christian Loose  <christian.loose@hamburg.de>
+
+	* Implemented BR #72861:
+	   Added support for option "use the file's modification time as the time 
+	   of import" (-d) to the cvs import function.
+
 2004-02-24  André Wöbbeking  <Woebbeking@web.de>
 
 	* Fix BR #75201:
