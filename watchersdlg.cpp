@@ -102,6 +102,10 @@ bool WatchersDialog::parseWatchers(CvsService_stub* cvsService,
         // parse the output line        
         QStringList list = splitLine(line);
 
+        // ignore unknown files
+        if( list[0] == "?" )
+            continue;
+
         table->setText(numRows, 0, list[0]);
         table->setText(numRows, 1, list[1]);
 
