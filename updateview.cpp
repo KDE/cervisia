@@ -76,7 +76,7 @@ public:
     // If it's not QString::null it ends with '/'.
     QString dirPath() const;
 
-    // Returns the file name, including the path (relative to the repository) 
+    // Returns the file name, including the path (relative to the repository)
     QString filePath() const;
 
     virtual void applyFilter(UpdateView::Filter filter) = 0;
@@ -846,11 +846,11 @@ UpdateView::UpdateView(KConfig& partConfig, QWidget *parent, const char *name)
     setShowSortIndicator(true);
     setSelectionModeExt(Extended);
 
-    addColumn(i18n("File Name"));
-    addColumn(i18n("Status"));
-    addColumn(i18n("Revision"));
-    addColumn(i18n("Tag/Date"));
-    addColumn(i18n("Timestamp"));
+    addColumn(i18n("File Name"), 280);
+    addColumn(i18n("Status"), 90);
+    addColumn(i18n("Revision"), 70);
+    addColumn(i18n("Tag/Date"), 90);
+    addColumn(i18n("Timestamp"), 120);
 
     setFilter(NoFilter);
 
