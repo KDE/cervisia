@@ -714,13 +714,35 @@ void CervisiaPart::slotResolve()
 
 void CervisiaPart::slotUpdate()
 {
-    updateOrStatus(false, "");
+    updateSandbox();
 }
 
 
 void CervisiaPart::slotStatus()
 {
-    updateOrStatus(true, "");
+    QStringList list = update->multipleSelection();
+    if (list.isEmpty())
+        return;
+
+    update->prepareJob(opt_updateRecursive, UpdateView::UpdateNoAct);
+    
+    QString files = joinLine(list);
+        
+    DCOPRef cvsJob = cvsService->status(files, opt_updateRecursive);
+
+    // get command line from cvs job
+    QString cmdline;
+    DCOPReply reply = cvsJob.call("cvsCommand()");
+    if( reply.isValid() )
+        reply.get<QString>(cmdline);
+            
+    if( protocol->startJob(cvsJob) )
+    {
+        showJobStart(cmdline);
+        connect( protocol, SIGNAL(receivedLine(QString)), update, SLOT(processUpdateLine(QString)) );
+        connect( protocol, SIGNAL(jobFinished(bool)), update, SLOT(finishJob(bool)) );
+        connect( protocol, SIGNAL(jobFinished(bool)), this, SLOT(slotJobFinished(bool)) );
+    }
 }
 
 
@@ -742,7 +764,7 @@ void CervisiaPart::slotUpdateToTag()
             tagopt += KShellProcess::quote(l->date());
         }
         tagopt += " ";
-        updateOrStatus(false, tagopt);
+        updateSandbox(tagopt);
     }
     delete l;
 }
@@ -750,13 +772,13 @@ void CervisiaPart::slotUpdateToTag()
 
 void CervisiaPart::slotUpdateToHead()
 {
-    updateOrStatus(false, "-A ");
+    updateSandbox("-A");
 }
 
 
 void CervisiaPart::slotRevert()
 {
-    updateOrStatus(false, "-C ");
+    updateSandbox("-C");
 }
 
 
@@ -780,7 +802,7 @@ void CervisiaPart::slotMerge()
             tagopt += l->tag2();
         }
         tagopt += " ";
-        updateOrStatus(false, tagopt);
+        updateSandbox(tagopt);
     }
     delete l;
 }
@@ -810,57 +832,26 @@ void CervisiaPart::slotRemove()
 }
 
 
-void CervisiaPart::updateOrStatus(bool noact, const QString &extraopt)
+void CervisiaPart::updateSandbox(const QString &extraopt)
 {
     QStringList list = update->multipleSelection();
     if (list.isEmpty())
         return;
 
-    update->prepareJob(opt_updateRecursive,
-                       noact? UpdateView::UpdateNoAct : UpdateView::Update);
-
-    // TODO: cleanup when update is also handled by DCOP service                       
-    if( noact )
-    {
-        QString files = joinLine(list);
+    update->prepareJob(opt_updateRecursive, UpdateView::Update);
+   
+    QString files = joinLine(list);
         
-        DCOPRef cvsJob = cvsService->status(files, opt_updateRecursive);
+    DCOPRef cvsJob = cvsService->update(files, opt_updateRecursive,
+                        opt_createDirs, opt_pruneDirs, extraopt);
 
-        // get command line from cvs job
-        QString cmdline;
-        DCOPReply reply = cvsJob.call("cvsCommand()");
-        if( reply.isValid() )
-            reply.get<QString>(cmdline);
-            
-        if( protocol->startJob(cvsJob) )
-        {
-            showJobStart(cmdline);
-            connect( protocol, SIGNAL(receivedLine(QString)), update, SLOT(processUpdateLine(QString)) );
-            connect( protocol, SIGNAL(jobFinished(bool)), update, SLOT(finishJob(bool)) );
-            connect( protocol, SIGNAL(jobFinished(bool)), this, SLOT(slotJobFinished(bool)) );
-        }
-        
-        return;
-    }
-                               
+    // get command line from cvs job
     QString cmdline;
-    if (noact)
-        cmdline = cvsClient(repository) + " -n update ";
-    else
-        cmdline = cvsClient(repository) + " update ";
-    if (opt_updateRecursive)
-        cmdline += "-R ";
-    else
-        cmdline += "-l ";
-    if (opt_createDirs)
-        cmdline += "-d ";
-    if (opt_pruneDirs)
-        cmdline += "-P ";
-    cmdline += extraopt;
-    cmdline += joinLine(list);
-    cmdline += " 2>&1";
-
-    if (protocol->startJob(sandbox, repository, cmdline))
+    DCOPReply reply = cvsJob.call("cvsCommand()");
+    if( reply.isValid() )
+        reply.get<QString>(cmdline);
+            
+    if( protocol->startJob(cvsJob) )
     {
         showJobStart(cmdline);
         connect( protocol, SIGNAL(receivedLine(QString)), update, SLOT(processUpdateLine(QString)) );
@@ -1546,7 +1537,7 @@ void CervisiaPart::openSandbox(const QString &dirname)
     if (dostatus)
     {
         update->setSelected(update->firstChild(), true);
-        updateOrStatus(true, "");
+        slotStatus();
     }
 
     //load the recentCommits for this app from the KConfig app

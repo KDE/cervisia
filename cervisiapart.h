@@ -137,7 +137,7 @@ private:
     void setupActions();
 
     void openSandbox(const QString &dirname);
-    void updateOrStatus(bool noact, const QString &extraopt);
+    void updateSandbox(const QString &extraopt = QString::null);
     void commitOrAddOrRemove(CommitDialog::ActionType action);
     void addOrRemoveWatch(WatchDialog::ActionType action);
     void importOrCheckout(CheckoutDialog::ActionType action);

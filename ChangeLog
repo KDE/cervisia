@@ -6,6 +6,8 @@
 	  build the command line
 	* Make CVS_SERVER configurable in DCOP service
 	  (GUI is missing)
+	* Break up updateOrStatus() method in cervisiapart.cpp
+	* Use DCOP service to update the working copy
 
 2003-01-04  Christian Loose <christian.loose@hamburg.de>
 
