@@ -16,3 +16,8 @@ File=cervisiapartrc
 RemoveGroup=Main window
 File=cervisiarc
 RemoveGroup=Main window
+#
+Id=kde3.2/20030117
+File=cervisiapartrc,cervisiarc
+Group=Session
+Key=Current Directory

@@ -65,9 +65,6 @@ int main(int argc, char **argv)
     } else {
         CervisiaShell* shell = new CervisiaShell();
         
-        QString dirname;                        // TODO: remove later
-        shell->restorePseudo(dirname);          // - dito -
-        
         const KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
         QString dirName = args->count() ? args->arg(0) : QString::null;       
 

@@ -47,12 +47,13 @@ protected slots:
 
 protected:
     void setupActions();
-
+    
     bool queryExit();
-    virtual void readProperties(KConfig *config);
-    virtual void saveProperties(KConfig *config);
 
 private:
+    void readSettings();
+    void writeSettings();
+
     CervisiaPart *part;
     QLabel *filterLabel;
 

@@ -85,6 +85,8 @@ CervisiaShell::CervisiaShell( const char *name )
     // enable auto-save of toolbar/menubar/statusbar and window size settings
     // and apply the previously saved settings
     setAutoSaveSettings("MainWindow", true);
+    
+    readSettings();
 }
 
 CervisiaShell::~CervisiaShell()
@@ -169,45 +171,43 @@ void CervisiaShell::slotChangeFilterStatus(QString status)
 
 bool CervisiaShell::queryExit()
 {
-    KConfig *config = part->config();
-
-    part->saveDialogProperties(config);
-
-    config->setGroup("Session");
-    saveProperties(config);
-
-    config->sync();
+    writeSettings();
     return true;
 }
 
-void CervisiaShell::restorePseudo(const QString &dirname)
-{
-    KConfig *config = part->config();
 
-    part->readDialogProperties(config);
-
+void CervisiaShell::readSettings()
+{   
+    KConfig *config = part->config();       // FIXME: remove later
+    part->readDialogProperties(config);     // -dito-
+    config->setGroup("Session");            // -dito-
+    part->readProperties( config );         // -dito-
+    
+    config = KGlobal::config();
+    
     config->setGroup("Session");
-    // Explicitly override the loaded directory if
-    // a command line argument is given
-    if (!dirname.isEmpty())
-        config->writeEntry("Current Directory", dirname);
-    readProperties(config);
-}
-
-void CervisiaShell::readProperties(KConfig *config)
-{
-    part->readProperties( config );
-
     QString currentDir = config->readEntry("Current Directory");
-    if (!currentDir.isEmpty())
-        part->openURL( KURL::fromPathOrURL(currentDir) );
+    if( !currentDir.isEmpty() )
+        openURL( KURL::fromPathOrURL(currentDir) );    
 }
 
-void CervisiaShell::saveProperties(KConfig *config)
+
+void CervisiaShell::writeSettings()
 {
-    part->saveProperties(config);
+    KConfig *config = part->config();       // FIXME: remove later
+    part->saveDialogProperties(config);     // -dito-
+    config->setGroup("Session");            // -dito-
+    part->saveProperties(config);           // -dito-
+    
+    config = KGlobal::config();
+    
+    config->setGroup("Session");
     config->writeEntry("Current Directory", part->sandBox());
+    
+    // write to disk
+    config->sync();
 }
+
 
 #include "cervisiashell.moc"
 
