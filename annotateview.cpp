@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -96,10 +96,12 @@ void AnnotateViewItem::paintCell(QPainter *p, const QColorGroup &, int col, int 
     switch (col)
     {
     case LineNumberColumn:
-        backgroundColor = QColor(222, 222, 222);
+        backgroundColor = KGlobalSettings::highlightColor();
+        p->setPen(KGlobalSettings::highlightedTextColor());
         break;
     default:
-        backgroundColor = modd? Qt::white : Qt::lightGray;
+        backgroundColor = modd? KGlobalSettings::baseColor() : KGlobalSettings::alternateBackgroundColor();
+        p->setPen(KGlobalSettings::textColor());
         break;
     };
 
