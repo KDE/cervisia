@@ -136,7 +136,7 @@ void ProtocolView::cancelJob()
 
 void ProtocolView::receivedOutput(KProcess *, char *buffer, int buflen)
 {
-    buf += QCString(buffer, buflen+1);
+    buf += QString::fromLocal8Bit(buffer, buflen);
     processOutput();
 }
 
