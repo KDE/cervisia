@@ -89,11 +89,6 @@ CvsService::~CvsService()
 
 bool CvsService::setWorkingCopy(const QString& dirName)
 {
-    // delete old data
-    d->workingCopy = QString::null;
-    delete d->repository;
-    d->repository = 0;
-    
     QFileInfo fi(dirName);
     QString path = fi.absFilePath();
     
@@ -101,6 +96,10 @@ bool CvsService::setWorkingCopy(const QString& dirName)
     QFileInfo cvsDirInfo(path + "/CVS");
     if( !cvsDirInfo.exists() || !cvsDirInfo.isDir() )
         return false;
+
+    // delete old data
+    delete d->repository;
+    d->repository = 0;   
 
     d->workingCopy = path;
     d->repository = new Repository(path);
