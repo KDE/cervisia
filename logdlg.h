@@ -15,7 +15,7 @@
 #ifndef LOGDLG_H
 #define LOGDLG_H
 
-
+#include <dcopref.h>
 #include <kdialogbase.h>
 
 #include <qptrlist.h>
@@ -64,6 +64,8 @@ public:
 
     bool parseCvsLog(const QString &sbox, const QString &repo, const QString &fname);
 
+    bool parseCvsLog(DCOPRef& cvsService, const QString& fileName);
+
     static void loadOptions(KConfig *config);
     static void saveOptions(KConfig *config);
 
@@ -98,6 +100,8 @@ private:
     QTextEdit *commentbox[2];
     QTextEdit *tagsbox[2];
     QComboBox *tagcombo[2];
+
+    DCOPRef mCvsService;
 };
 
 #endif

@@ -4,6 +4,8 @@
 	* Change working copy directory in DCOP service
 	* Use DCOP service for annotate dialog
 	* Several changes to the DCOP service
+	* Added new parseCvsLog() method to LogDialog that 
+          uses the new cvs DCOP service
 
 2002-12-23  André Wöbbeking <Woebbeking@web.de>
 

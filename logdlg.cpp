@@ -33,6 +33,7 @@
 #include "loglist.h"
 #include "logtree.h"
 #include "misc.h"
+#include "progressdlg.h"
 
 
 LogDialog::Options *LogDialog::options = 0;
@@ -371,6 +372,184 @@ bool LogDialog::parseCvsLog(const QString &sbox, const QString &repo, const QStr
 }
 
 
+bool LogDialog::parseCvsLog(DCOPRef& cvsService, const QString& fileName)
+{
+    QString tag, rev, date, author, comment;
+    enum { Begin, Tags, Admin, Revision,
+       Author, Branches, Comment, Finished } state;
+
+    // remember DCOP reference and file name for diff or annotate
+    mCvsService = cvsService;
+    filename = fileName;
+
+    setCaption(i18n("CVS Log: %1").arg(filename));
+
+    DCOPReply job = cvsService.call("log(QString)", filename);
+    if( !job.isValid() )
+        return false;
+
+    ProgressDialog dlg(this, "Logging", job, "log", i18n("CVS Log"));
+    if( !dlg.execute() )
+        return false;
+
+    // process cvs log output
+    state = Begin;
+    QString line;
+    while( dlg.getLine(line) )
+    {
+        switch( state )
+        {
+            case Begin:
+                if( line == "symbolic names:" )
+                    state = Tags;
+                break;
+            case Tags:
+                if( line[0] == '\t' )
+                {
+                    QStringList strlist = splitLine(line, ':');
+                    QString rev = strlist[1].simplifyWhiteSpace();
+                    QString tag = strlist[0].simplifyWhiteSpace();
+                    QString branchpoint = "";
+                    int pos1, pos2;
+                    if( (pos2 = rev.findRev('.')) > 0 &&
+                        (pos1 = rev.findRev('.', pos2-1)) > 0 &&
+                        rev.mid(pos1+1, pos2-pos1-1) == "0" )
+                    {
+                        // For a branch tag 2.10.0.6, we want:
+                        // branchpoint = "2.10"
+                        // rev = "2.10.6"
+                        branchpoint = rev.left(pos1);
+                        rev.remove(pos1+1, pos2-pos1);
+                    }
+                    if( rev != "1.1.1" )
+                    {
+                        TagInfo *taginfo = new TagInfo;
+                        taginfo->rev = rev;
+                        taginfo->tag = tag;
+                        taginfo->branchpoint = branchpoint;
+                        tags.append(taginfo);
+                    }
+                }
+                else
+                {
+                    state = Admin;
+                }
+                break;
+            case Admin:
+                if( line == "----------------------------" )
+                {
+                    state = Revision;
+                }
+                break;
+            case Revision:
+                rev = line.section(' ', 1, 1);
+                state = Author;
+                break;
+            case Author:
+                {
+                    QStringList strlist = splitLine(line);
+                    date = strlist[2];
+                    date = strlist[1] + " " + date.left(date.length()-1);
+                    author = strlist[4];
+                    author = author.left(author.length()-1);
+                    comment = "";
+                    state = Branches;
+                }
+                break;
+            case Branches:
+                if( !line.startsWith("branches:") )
+                {
+                    comment = line;
+                    state = Comment;
+                }
+                break;
+            case Comment:
+                if( line == "----------------------------" )
+                {
+                    state = Revision;
+                }
+                else if( line == "=============================================================================" )
+                {
+                    state = Finished;
+                }
+                if( state == Comment ) // still in message
+                    comment += QString("\n") + line;
+                else
+                {
+                    // Create tagcomment
+                    QString tagcomment, taglist, branchrev;
+                    int pos1, pos2;
+                    // 1.60.x.y => revision belongs to branch 1.60.0.x
+                    if( (pos2 = rev.findRev('.')) > 0 &&
+                        (pos1 = rev.findRev('.', pos2-1)) > 0 )
+                        branchrev = rev.left(pos2);
+
+                    // Build tagcomment and taglist:
+                    // tagcomment contains Tags, Branchpoints and 'On Branch's
+                    // taglist contains tags (without prefix) and Branchpoints
+                    QPtrListIterator<TagInfo> it(tags);
+                    for( ; it.current(); ++it )
+                    {
+                        if( rev == it.current()->rev )
+                        {
+                            // This never matches branch tags...
+                            tagcomment += i18n("\nTag: ");
+                            tagcomment += it.current()->tag;
+                            taglist += "\n";
+                            taglist += it.current()->tag;
+                        }
+                        if( rev == it.current()->branchpoint )
+                        {
+                            tagcomment += i18n("\nBranchpoint: ");
+                            tagcomment += it.current()->tag;
+                            taglist += i18n("\nBranchpoint: ");
+                            taglist += it.current()->tag;
+                        }
+                        if( branchrev == it.current()->rev )
+                        {
+                            // ... and this never matches ordinary tags :-)
+                            tagcomment += i18n("\nOn branch: ");
+                            tagcomment += it.current()->tag;
+                        }
+                    }
+
+                    // remove leading '\n'
+                    if( !tagcomment.isEmpty() )
+                        tagcomment.remove(0, 1);
+                    if( !taglist.isEmpty() )
+                        taglist.remove(0, 1);
+                    tree->addRevision(rev, author, date, comment, taglist, tagcomment);
+                    list->addRevision(rev, author, date, comment, tagcomment);
+                    RevisionInfo *item = new RevisionInfo;
+                    item->rev = rev;
+                    item->author = author;
+                    item->date = date;
+                    item->comment = comment;
+                    item->tagcomment = tagcomment;
+                    items.append(item);
+                }
+                break;
+            case Finished:
+                ;
+        }
+    }
+
+    tagcombo[0]->insertItem("");
+    tagcombo[1]->insertItem("");
+    QPtrListIterator<TagInfo> it(tags);
+    for( ; it.current(); ++it )
+    {
+        QString str = it.current()->tag;
+        if( !it.current()->branchpoint.isEmpty() )
+            str += i18n(" (Branchpoint)");
+        tagcombo[0]->insertItem(str);
+        tagcombo[1]->insertItem(str);
+    }
+
+    return true;    // successful
+}
+
+
 void LogDialog::diffClicked()
 {
     if (selectionA.isEmpty() || selectionB.isEmpty())
@@ -393,10 +572,18 @@ void LogDialog::diffClicked()
 void LogDialog::annotateClicked()
 {
     AnnotateDialog *l = new AnnotateDialog();
-    if (l->parseCvsAnnotate(sandbox, repository, filename, selectionA))
-        l->show();
+    // FIXME: remove true-branch and if-statement when non cvs DCOP service 
+    //        version isn't needed anymore
+    if (mCvsService.isNull())       
+        if (l->parseCvsAnnotate(sandbox, repository, filename, selectionA))
+            l->show();
+        else
+            delete l;
     else
-        delete l;
+        if (l->parseCvsAnnotate(mCvsService, filename, selectionA))
+            l->show();
+        else
+            delete l;
 }
 
 
