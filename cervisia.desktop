@@ -2,6 +2,7 @@
 [KDE Desktop Entry]
 Encoding=UTF-8
 GenericName=CVS Frontend
+GenericName[af]=cvs voorprogram
 GenericName[ar]=واجهة لـ CVS
 GenericName[az]=CVS Ara Üzü
 GenericName[cs]=Rozhraní pro CVS
