@@ -35,6 +35,7 @@ public:
     bool isOpen() const;
 
     QString client() const;
+    QString sandboxPath() const;
     QString repository() const;
 
 private:

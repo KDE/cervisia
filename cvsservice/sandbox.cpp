@@ -94,6 +94,12 @@ QString Sandbox::client() const
 }
 
 
+QString Sandbox::sandboxPath() const
+{
+    return d->path;
+}
+
+
 QString Sandbox::repository() const
 {
     return d->repository;
