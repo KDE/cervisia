@@ -103,7 +103,7 @@ QPopupMenu* ProtocolView::createPopupMenu(const QPoint &pos)
 
     int id = menu->insertItem(i18n("Clear"), this, SLOT( clear() ), 0, -1, 0);
 
-    if( text().isEmpty() )
+    if( length() == 0 )
         menu->setItemEnabled(id, false);
 
     return menu;
