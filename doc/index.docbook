@@ -420,7 +420,7 @@ commit.
 
 <listitem><para>
 Needs Update - This is shown if a newer version of the file exists in the
-repository, e.g. because someone commited a modification. Normally, you want
+repository, e.g. because someone committed a modification. Normally, you want
 to update this file so you have an up-to-date version in your directory.
 </para></listitem>
 
@@ -434,7 +434,7 @@ instead of the whole file to you.
 Needs Merge - Indicates that a merge of the revision of this file in your
 working directory with the version in the repository is necessary. This
 typically happens if you have made modifications to the file file while
-someone else has commited his modifications. If you choose to update, the
+someone else has committed his modifications. If you choose to update, the
 modifications in the repository are merged into your file. In case of a
 conflict (i.e. if someone else has changed some of the same lines like you)
 the new status is then "Conflict".
@@ -478,9 +478,9 @@ Updated - Shown if the file was updated from the repository.
 
 <listitem><para>
 Patched - Indicates that the &CVS; server has sent a patch for this file and
-the patch has been sucessfully applied. If the patch was not successfull
+the patch has been successfully applied. If the patch was not successful
 because there was a conflict between your modifications and those someone else
-commited to the repository, the status is now "Conflict".
+committed to the repository, the status is now "Conflict".
 </para></listitem>
 
 </itemizedlist>
@@ -514,7 +514,7 @@ example, if <menuchoice><guimenu>Settings</guimenu><guimenuitem>Commit and
 remove recursively</guimenuitem></menuchoice> is checked and you choose
 <menuchoice><guimenu>File</guimenu><guimenuitem>Commit...</guimenuitem></menuchoice>
 while a directory is selected, then all files in the tree under that directory
-are commited. Otherwise, only the regular files in the directory itself are
+are committed. Otherwise, only the regular files in the directory itself are
 affected.
 </para>
 
@@ -555,7 +555,7 @@ a whole.
 &CVS; is not designed to provide meaningful revision control for binary
 files. For example, merging binary files normally does not make
 sense. Furthermore, by default &CVS; performs keyword expansion (&eg; on the
-string <literal>&dollar;Revision: 1.6 &dollar;</literal>) when a file is commited. In binary
+string <literal>&dollar;Revision: 1.6 &dollar;</literal>) when a file is committed. In binary
 files, such replacements may corrupt the file and make it completely
 unusable. In order to switch this behavior off, you should commit binary files
 (or other files, like Postscript) with a command line
@@ -587,7 +587,7 @@ repository</guimenuitem></menuchoice> which issues the command
 </para>
 
 <para>
-After that, this modification to the sandbox has to be commited, possibly
+After that, this modification to the sandbox has to be committed, possibly
 together with other modifications to the project.
 </para>
 
@@ -641,7 +641,7 @@ adding directories does not require a commit afterwards.
 
 
 <sect1 id="commitingfiles">
-<title>Commiting files</title>
+<title>Committing files</title>
 
 <para>
 When you have made a certain amount of changes to your working copy, and you
@@ -683,8 +683,8 @@ editor described below.
 </para>
 
 <note><para>
-A common error you may encounter when commiting is <errorname>Up-to-date check
-failed</errorname>. This indicates that someone has commited changes to the
+A common error you may encounter when committing is <errorname>Up-to-date check
+failed</errorname>. This indicates that someone has committed changes to the
 repository since you last updated. Or more technically, that your
 <literal>BASE</literal> revision is not the newest on its branch. In such a
 case, &CVS; refuses to merge your modifications into the repository. The
@@ -716,7 +716,7 @@ update to the branch tag before you do further commits.
 
 <para>
 With &cervisia;, it is quite easy to maintain a ChangeLog file that is
-compliant with the format layed out in the GNU coding guidelines. To use it,
+compliant with the format laid out in the GNU coding guidelines. To use it,
 choose <menuchoice><guimenu>File</guimenu><guimenuitem>Insert ChangeLog
 entry...</guimenuitem></menuchoice>.  If a file with the name
 <filename>ChangeLog</filename> exists in the toplevel directory of your
@@ -738,7 +738,7 @@ log.
 <para>
 Conflicts may occur whenever you have made changes to a file which was also
 modified by another developer. The conflict is detected by &CVS; when you
-update the modified file. &CVS; then tries to merge the modifications commited
+update the modified file. &CVS; then tries to merge the modifications committed
 by the other developer into your working copy. The merge fails if both your
 and his modifications are in overlapping parts of the file, and the &CVS;
 server issues and error message.
@@ -928,15 +928,15 @@ his own modifications was detected.
 </para></listitem>
 
 <listitem><para>
-Commit, Modified - A user commited a modified file.
+Commit, Modified - A user committed a modified file.
 </para></listitem>
 
 <listitem><para>
-Commit, Added - A user added a file and commited it.
+Commit, Added - A user added a file and committed it.
 </para></listitem>
 
 <listitem><para>
-Commit, Removed - A user removed a file and commited it.
+Commit, Removed - A user removed a file and committed it.
 </para></listitem>
 
 </itemizedlist>
@@ -960,7 +960,7 @@ there are various filter options activated by check boxes:
 <listitem><para>Show checkout events - shows checkouts</para></listitem>
 <listitem><para>Show tag events - shows taggings</para></listitem>
 <listitem><para>Show other events - shows events not included in the above</para></listitem>
-<listitem><para>Only user - shows only events caused by a certain usere</para></listitem>
+<listitem><para>Only user - shows only events caused by a certain user</para></listitem>
 <listitem><para>Only filenames matching - filters file names by a regular expression</para></listitem>
 <listitem><para>Only dirnames matching - filters directory names by a regular expression</para></listitem>
 </itemizedlist>
@@ -972,17 +972,17 @@ Special characters recognized by the regular expression matcher are:
 <itemizedlist>
 
 <listitem><para>
-<literal>x*</literal> matches any number of occurences of the character 
+<literal>x*</literal> matches any number of occurrences of the character 
 <literal>x</literal>.
 </para></listitem>
 
 <listitem><para>
-<literal>x+</literal> matches one or more of occurences of the character 
+<literal>x+</literal> matches one or more of occurrences of the character 
 <literal>x</literal>.
 </para></listitem>
 
 <listitem><para>
-<literal>x?</literal> matches zero or one occurences of the character 
+<literal>x?</literal> matches zero or one occurrences of the character 
 <literal>x</literal>.
 </para></listitem>
 
@@ -1163,7 +1163,7 @@ usually given a name consisting of the project name and the version
 number. For example, &cervisia; 1.0 is available under the tag
 <literal>CERVISIA_1_0</literal>. &cervisia; enforces &CVS;'s strict rules
 about what constitutes valid tag name. It must begin with a letter and may
-contain letters, digits, hypens and underscores.
+contain letters, digits, hyphens and underscores.
 </para>
 
 <para> 
@@ -1294,7 +1294,7 @@ In order to add a watch to one or several files, use
 <menuchoice><guimenu>Advanced</guimenu><guimenuitem>Add
 watch...</guimenuitem></menuchoice>. In the dialog you get, you can choose to
 get notified for any of the types of events that &CVS; supports. For example,
-if you only want to get notified when a file is commited, check the boxes
+if you only want to get notified when a file is committed, check the boxes
 <guibutton>Only</guibutton> and <guibutton>Commits</guibutton>. If you want to
 get notified about any event related to the marked files, check the box
 <guibutton>All</guibutton>. The command line used when you accept the dialog
@@ -1341,7 +1341,7 @@ command
 In the normal usage scenario of &CVS;, each developer works separately in his
 checked out sandbox. When he wants to modify some file, he can just open it in
 his editor and start working on it. Nobody else will know about this work
-until the file gets commited.
+until the file gets committed.
 </para>
 
 <para>
@@ -1397,7 +1397,7 @@ command to switch to this model is <command>cvs watch on</command> which we
 will not explain further because it is mostly used by the administrator of the
 repository. However, the important point from the developer's point of view is
 that when the project enforces edits, working copies are checked out
-<emphasis>readony</emphasis>. That means you cannot edit a file by default
+<emphasis>readonly</emphasis>. That means you cannot edit a file by default
 (unless you use tricks like <command>chmod</command>). Only when you use 
 <menuchoice><guimenu>Advanced</guimenu><guimenuitem>Edit</guimenuitem></menuchoice>,
 the file becomes writable. It is made readonly again when you commit the file
@@ -1422,7 +1422,7 @@ In such a case, it is advisable to check the option
 when necessary</guimenuitem></menuchoice>. Now, whenever you edit a file by
 double-clicking it, &cervisia; will run <command>cvs edit</command> before the
 editor is actually executed. Then you can edit your file as usual. When you
-have finished your work, commit your files, and the commited files are
+have finished your work, commit your files, and the committed files are
 readonly again.
 </para>
 
