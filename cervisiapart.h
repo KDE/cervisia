@@ -20,9 +20,7 @@
 #include <kparts/part.h>
 #include <kparts/browserextension.h>
 #include <kparts/genericfactory.h>
-#if KDE_IS_VERSION(3,1,90)
 #include <kparts/statusbarextension.h>
-#endif
 
 #include "addremovedlg.h"
 #include "commitdlg.h"
@@ -43,7 +41,6 @@ class KRecentFilesAction;
 class CvsService_stub;
 
 
-#if KDE_IS_VERSION(3,1,90)
 class CervisiaStatusBarExtension : public KParts::StatusBarExtension
 {
 public:
@@ -52,7 +49,6 @@ public:
     {
     }
 };
-#endif
 
 
 /**
@@ -186,13 +182,12 @@ private:
     //for the Open Recent directories
     KRecentFilesAction *recent;
 
-    CvsService_stub* cvsService;
-#if KDE_IS_VERSION(3,1,90)
+    CvsService_stub*            cvsService;
     CervisiaStatusBarExtension* statusBar;
     QLabel*                     filterLabel;
-#endif
-	int                     m_editWithId;
-	Cervisia::EditWithMenu* m_currentEditMenu;
+
+    int                         m_editWithId;
+    Cervisia::EditWithMenu*     m_currentEditMenu;
 };
 
 typedef KParts::GenericFactory<CervisiaPart> CervisiaFactory;

@@ -87,10 +87,8 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     , opt_doCVSEdit( false )
     , recent( 0 )
     , cvsService( 0 )
-#if KDE_IS_VERSION(3,1,90)
     , statusBar( 0 )
     , filterLabel( 0 )
-#endif
     , m_editWithId(0)
     , m_currentEditMenu(0)
 {
@@ -144,7 +142,6 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
                                   "cvs DCOP service could not be started."),
                              parentWidget));
 
-#if KDE_IS_VERSION(3,1,90)
     statusBar = new CervisiaStatusBarExtension(this);
 
     // create the active filter indicator and add it to the statusbar
@@ -156,7 +153,6 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
                        "N - All up-to-date files are hidden\n"
                        "R - All removed files are hidden"));
     statusBar->addStatusBarItem(filterLabel, 0, true);
-#endif
 
     if( cvsService )
     {
@@ -513,9 +509,7 @@ void CervisiaPart::setupActions()
     KToggleAction* toggaction = new KToggleAction( i18n("Hide All &Files"), 0,
                                 this, SLOT(slotHideFiles()),
                                 actionCollection(), "settings_hide_files" );
-#if KDE_IS_VERSION(3,2,90)
     toggaction->setCheckedState(i18n("Show All &Files"));
-#endif
     hint = i18n("Determines whether only folders are shown");
     toggaction->setToolTip( hint );
     toggaction->setWhatsThis( hint );
@@ -523,9 +517,7 @@ void CervisiaPart::setupActions()
     toggaction = new KToggleAction( i18n("Hide Unmodified Files"), 0,
                                 this, SLOT(slotHideUpToDate()),
                                 actionCollection(), "settings_hide_uptodate" );
-#if KDE_IS_VERSION(3,2,90)
     toggaction->setCheckedState(i18n("Show Unmodified Files"));
-#endif
     hint = i18n("Determines whether files with status up-to-date or "
                 "unknown are hidden");
     toggaction->setToolTip( hint );
@@ -534,9 +526,7 @@ void CervisiaPart::setupActions()
     toggaction = new KToggleAction( i18n("Hide Removed Files"), 0,
                                 this, SLOT(slotHideRemoved()),
                                 actionCollection(), "settings_hide_removed" );
-#if KDE_IS_VERSION(3,2,90)
     toggaction->setCheckedState(i18n("Show Removed Files"));
-#endif
     hint = i18n("Determines whether removed files are hidden");
     toggaction->setToolTip( hint );
     toggaction->setWhatsThis( hint );
@@ -544,9 +534,7 @@ void CervisiaPart::setupActions()
     toggaction = new KToggleAction( i18n("Hide Non-CVS Files"), 0,
                                 this, SLOT(slotHideNotInCVS()),
                                 actionCollection(), "settings_hide_notincvs" );
-#if KDE_IS_VERSION(3,2,90)
     toggaction->setCheckedState(i18n("Show Non-CVS Files"));
-#endif
     hint = i18n("Determines whether files not in CVS are hidden");
     toggaction->setToolTip( hint );
     toggaction->setWhatsThis( hint );
@@ -554,9 +542,7 @@ void CervisiaPart::setupActions()
     toggaction = new KToggleAction( i18n("Hide Empty Folders"), 0,
                                     this, SLOT(slotHideEmptyDirectories()),
                                     actionCollection(), "settings_hide_empty_directories" );
-#if KDE_IS_VERSION(3,2,90)
     toggaction->setCheckedState(i18n("Show Empty Folders"));
-#endif
     hint = i18n("Determines whether folders without visible entries are hidden");
     toggaction->setToolTip( hint );
     toggaction->setWhatsThis( hint );
@@ -1734,108 +1720,8 @@ void CervisiaPart::setFilter()
                 str += "R";
         }
 
-#if KDE_IS_VERSION(3,1,90)
     filterLabel->setText(str);
-#endif
 }
-
-
-#if 0
-void CervisiaPart::parseStatus(QString pathname, QStrList list)
-{
-    char buf[512];
-    QString command;
-    QString dirpath;
-    QString name, statusstr, version;
-    enum { Begin, File, FileSep, WorkRev, FinalSep } state;
-
-    QString line = joinLine(list);
-
-    command = "cd ";
-    command += KProcess::quote(pathname);
-    command += " && " + cvsClient(repository) + " status -l ";
-    command += line;
-    //command += " 2>&1";
-
-    FILE *f = popen(QFile::encodeName(command), "r");
-    if (!f)
-        return;
-
-    state = Begin;
-    while (fgets(buf, sizeof buf, f))
-        {
-            QCString line = buf;
-            chomp(&line);
-            //DEBUGOUT( "Line: " << line );
-            switch (state)
-                {
-                case Begin:
-                    if (line.left(22) == "cvs status: Examining ")
-                        dirpath = line.right(line.length()-22);
-                    state = File;
-                    //DEBUGOUT( "state = file" );
-                    break;
-                case File:
-                    if (line.length() > 32 &&
-                        line.left(6) == "File: " &&
-                        line.mid(24, 8) == "Status: ")
-                    {
-                        name = line.mid(6, 18).stripWhiteSpace();
-                        if (dirpath != ".")
-                            name.prepend("/").prepend(dirpath);
-                        statusstr = line.right(line.length()-32)
-                                        .stripWhiteSpace();
-                        state = FileSep;
-                        //DEBUGOUT( "state = FileSep" );
-                    }
-                    break;
-                case FileSep:
-                    if (!line.isEmpty()) // Error
-                        state = WorkRev;
-                    //DEBUGOUT( "state = WorkRev" );
-                    break;
-                case WorkRev:
-                    if (line.left(21) == "   Working revision:\t")
-                    {
-                        int pos;
-                        version = line.right(line.length()-21);
-                        if ( (pos = version.find(" ")) != -1 )
-                            version.truncate(pos);
-                        state = FinalSep;
-                        //DEBUGOUT( "state = FinalSep" );
-                    }
-                    break;
-                case FinalSep:
-                    if (line == "")
-                    {
-                        //DEBUGOUT( "Adding: " << name <<
-                        //          "Status: " << statusstr << "Version: " << version );
-                        UpdateView::Status status = UpdateView::Unknown;
-                        if (statusstr == "Up-to-date")
-                            status = UpdateView::UpToDate;
-                        else if (statusstr == "Locally Modified")
-                            status = UpdateView::LocallyModified;
-                        else if (statusstr == "Locally Added")
-                            status = UpdateView::LocallyAdded;
-                        else if (statusstr == "Locally Removed")
-                            status = UpdateView::LocallyRemoved;
-                        else if (statusstr == "Needs Checkout")
-                            status = UpdateView::NeedsUpdate;
-                        else if (statusstr == "Needs Patch")
-                            status = UpdateView::NeedsPatch;
-                        else if (statusstr == "Needs Merge")
-                            status = UpdateView::NeedsMerge;
-                        else if (statusstr == "File had conflicts on merge")
-                            status = UpdateView::Conflict;
-                        //update->addEntry(status, name /*, version*/);
-                        state = Begin;
-                        //DEBUGOUT( "state = Begin" );
-                    }
-                }
-        }
-    pclose(f);
-}
-#endif
 
 
 void CervisiaPart::readSettings()
