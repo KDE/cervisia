@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
+ *  Copyright (c) 2004 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -18,7 +19,7 @@
 #include <qmemarray.h>
 #include <qptrlist.h>
 
-#include "qttableview.h"
+#include <qtable.h>
 
 
 class LogTreeItem;
@@ -35,7 +36,7 @@ typedef QPtrList<LogTreeItem> LogTreeItemList;
 typedef QPtrList<LogTreeConnection> LogTreeConnectionList;
 
 
-class LogTreeView : public QtTableView
+class LogTreeView : public QTable
 {
     Q_OBJECT
 
@@ -47,6 +48,8 @@ public:
     void setSelectedPair(QString selectionA, QString selectionB);
     void collectConnections();
     void recomputeCellSizes();
+    virtual void paintCell(QPainter *p, int row, int col, const QRect& cr,
+                           bool selected, const QColorGroup& cg);
 
     virtual QSize sizeHint() const;
 
@@ -54,15 +57,12 @@ signals:
     void revisionClicked(QString rev, bool rmb);
 
 protected:
-    //    virtual bool eventFilter(QObject *o, QEvent *e);
-    virtual void mousePressEvent(QMouseEvent *e);
-    virtual void mouseMoveEvent(QMouseEvent *e);
+    virtual void contentsMousePressEvent(QMouseEvent *e);
+    virtual void contentsMouseMoveEvent(QMouseEvent *e);
     virtual void windowActivationChange(bool oldActive);
     virtual void leaveEvent(QEvent *e);
-    virtual void setupPainter(QPainter *p);
-    virtual void paintCell(QPainter *p, int row, int col);
-    virtual int cellWidth(int col);
-    virtual int cellHeight(int row);
+    virtual int columnWidth(int col);
+    virtual int rowHeight(int row);
 
 private:
     void paintRevisionCell(QPainter *p, int row, int col, const Cervisia::LogInfo& logInfo,

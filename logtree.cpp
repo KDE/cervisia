@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
+ *  Copyright (c) 2003-2004 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -52,7 +53,7 @@ public:
 
 
 LogTreeView::LogTreeView(QWidget *parent, const char *name)
-    : QtTableView(parent, name)
+    : QTable(parent, name)
 {
     if (!static_initialized)
     {
@@ -64,16 +65,18 @@ LogTreeView::LogTreeView(QWidget *parent, const char *name)
 
     setNumCols(0);
     setNumRows(0);
-    setAutoUpdate(false);
-    setTableFlags( Tbl_autoVScrollBar|Tbl_autoHScrollBar|
-                   Tbl_smoothVScrolling | Tbl_smoothHScrolling );
+    setReadOnly(true);
+    setFocusStyle(QTable::FollowStyle);
+    setSelectionMode(QTable::NoSelection);
+    setShowGrid(false);
+    horizontalHeader()->hide();
+    setTopMargin(0);
+    verticalHeader()->hide();
+    setLeftMargin(0);
     setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
     setBackgroundMode(PaletteBase);
-    setMouseTracking(true);
-    setFocusPolicy(ClickFocus);
-
-    setCellWidth(0);
-    setCellHeight(0);
+    viewport()->setMouseTracking(true);
+    setFocusPolicy(NoFocus);
 
     currentRow = -1;
     currentCol = -1;
@@ -255,14 +258,11 @@ QSize LogTreeView::sizeHint() const
 }
 
 
-void LogTreeView::setupPainter(QPainter *p)
+void LogTreeView::paintCell(QPainter *p, int row, int col, const QRect& cr,
+                            bool selected, const QColorGroup& cg)
 {
-    p->setBackgroundColor(colorGroup().base());
-}
-
-
-void LogTreeView::paintCell(QPainter *p, int row, int col)
-{
+    Q_UNUSED(selected)
+    Q_UNUSED(cr)
     bool followed, branched;
     LogTreeItem *item;
 
@@ -290,9 +290,9 @@ void LogTreeView::paintCell(QPainter *p, int row, int col)
             branched = true;
     }
 
-    p->fillRect(0, 0, cellWidth(col), cellHeight(row),
-                colorGroup().base());
-    p->setPen(colorGroup().text());
+    p->fillRect(0, 0, columnWidth(col), rowHeight(row),
+                cg.base());
+    p->setPen(cg.text());
     if (item)
         paintRevisionCell(p, row, col, item->m_logInfo,
                           followed, branched, item->selected);
@@ -386,39 +386,41 @@ void LogTreeView::paintRevisionCell(QPainter *p,
 }
 
 
-void LogTreeView::mousePressEvent(QMouseEvent *e)
+void LogTreeView::contentsMousePressEvent(QMouseEvent *e)
 {
     if ( e->button() == MidButton ||
          e->button() == LeftButton)
     {
-        int row = findRow( e->pos().y() );
-        int col = findCol( e->pos().x() );
+        int row = rowAt( e->pos().y() );
+        int col = columnAt( e->pos().x() );
 
         QPtrListIterator<LogTreeItem> it(items);
         for(; it.current(); ++it)
-        if (it.current()->row == row
-            && it.current()->col == col)
-        {
-            // Change selection for revision B if the middle mouse button or
-            // the left mouse button with the control key was pressed
-            bool changeRevB = (e->button() == MidButton) ||
-                              (e->button() == LeftButton &&
-                               e->state() & ControlButton);
+            if (it.current()->row == row
+                && it.current()->col == col)
+            {
+                // Change selection for revision B if the middle mouse button or
+                // the left mouse button with the control key was pressed
+                bool changeRevB = (e->button() == MidButton) ||
+                                  (e->button() == LeftButton &&
+                                   e->state() & ControlButton);
 
-            emit revisionClicked(it.current()->m_logInfo.m_revision, changeRevB);
-            break;
-        }
+                emit revisionClicked(it.current()->m_logInfo.m_revision, changeRevB);
+                break;
+            }
     }
+
+    viewport()->update();
 }
 
 
-void LogTreeView::mouseMoveEvent(QMouseEvent *e)
+void LogTreeView::contentsMouseMoveEvent(QMouseEvent *e)
 {
     if (!isActiveWindow())
         return;
 
-    int row = findRow(static_cast<QMouseEvent*>(e)->y());
-    int col = findCol(static_cast<QMouseEvent*>(e)->x());
+    int row = rowAt(static_cast<QMouseEvent*>(e)->y());
+    int col = columnAt(static_cast<QMouseEvent*>(e)->x());
     if (row != currentRow || col != currentCol) {
         //        kdDebug(8050) << "hidden because of row/col change" << endl;
         hideLabel();
@@ -439,7 +441,7 @@ void LogTreeView::mouseMoveEvent(QMouseEvent *e)
         if (!item->m_logInfo.m_author.isNull())
         {
             const QString text(item->m_logInfo.createToolTipText());
-            int left; colXPos(col, &left); left += cellWidth(col);
+            int left = columnPos(col) + columnWidth(col);
             int top = static_cast<QMouseEvent*>(e)->y();
             currentLabel = new TipLabel(text);
             currentLabel->showAt(mapToGlobal(QPoint(left, top)));
@@ -454,7 +456,7 @@ void LogTreeView::windowActivationChange(bool oldActive)
 {
     //    kdDebug(8050) << "windowActivationChange" << endl;
     hideLabel();
-    QtTableView::windowActivationChange(oldActive);
+    QTable::windowActivationChange(oldActive);
 }
 
 
@@ -464,7 +466,7 @@ void LogTreeView::leaveEvent(QEvent *e)
     // has strange effects
     // hideLabel();
     hideLabel();
-    QtTableView::leaveEvent(e);
+    QTable::leaveEvent(e);
 }
 
 
@@ -504,15 +506,16 @@ void LogTreeView::recomputeCellSizes ()
 
         colWidths[item->col] = QMAX(colWidths[item->col], boxwidth + 2*BORDER);
         rowHeights[item->row] = QMAX(rowHeights[item->row], boxheight + 2*BORDER);
+
+        setRowHeight(item->row, rowHeights[item->row]);
+        setColumnWidth(item->col, colWidths[item->col]);
     }
 
-    setAutoUpdate(true);
-    updateTableSize();
-    update();
+    viewport()->update();
 }
 
 
-int LogTreeView::cellWidth(int col)
+int LogTreeView::columnWidth(int col)
 {
     if (col < 0 || col >= (int)colWidths.size())
         return 0;
@@ -521,7 +524,7 @@ int LogTreeView::cellWidth(int col)
 }
 
 
-int LogTreeView::cellHeight(int row)
+int LogTreeView::rowHeight(int row)
 {
     if (row < 0 || row >= (int)rowHeights.size())
         return 0;

@@ -1,3 +1,7 @@
+2004-02-01  Christian Loose  <christian.loose@hamburg.de>
+
+	* LogTree now derives from QTable instead of the deprecated QtTableView
+
 2004-01-22  Christian Loose  <christian.loose@hamburg.de>
 
 	* Fix BR #70936:
