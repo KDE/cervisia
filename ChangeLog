@@ -1,3 +1,8 @@
+2004-05-21  Christian Loose  <christian.loose@kdemail.net>
+
+	* Added a new method to download the CVSROOT/cvsignore file
+	  from the cvs server to the DCOP service.
+
 2004-05-17  André Wöbbeking  <Woebbeking@web.de>
 
 	* Fix BR #58254: honor option "Hide Non-CVS Files" when opening 

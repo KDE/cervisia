@@ -111,6 +111,11 @@ k_dcop:
 
     /**
      */
+    DCOPRef downloadCvsIgnoreFile(const QString& repository,
+                                  const QString& outputFile);
+    
+    /**
+     */
     DCOPRef downloadRevision(const QString& fileName, const QString& revision,
                              const QString& outputFile);
 

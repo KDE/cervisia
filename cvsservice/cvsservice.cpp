@@ -305,6 +305,25 @@ DCOPRef CvsService::deleteTag(const QStringList& files, const QString& tag,
 }
 
 
+DCOPRef CvsService::downloadCvsIgnoreFile(const QString& repository,
+                                          const QString& outputFile)
+{
+    Repository repo(repository);
+
+    // create a cvs job
+    CvsJob* job = d->createCvsJob();
+
+    // assemble the command line
+    // cvs -d [REPOSITORY] -q checkout -p CVSROOT/cvsignore > [OUTPUTFILE]
+    *job << repo.cvsClient() << "-d" << repository 
+         << "-q checkout -p CVSROOT/cvsignore >" 
+         << KProcess::quote(outputFile);
+
+    // return a DCOP reference to the cvs job
+    return DCOPRef(d->appId, job->objId());
+}
+
+
 DCOPRef CvsService::downloadRevision(const QString& fileName,
                                      const QString& revision,
                                      const QString& outputFile)
