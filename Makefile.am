@@ -26,6 +26,7 @@ cervisia_LDADD = libcervisiapart.la
 man_MANS = cervisia.1
 
 METASOURCES = AUTO
+KDE_ICON = AUTO
 
 EXTRA_DIST = cervisia.desktop cervisia.png cervisia-small.png
 CLEANFILES = cervisia.1
@@ -45,12 +46,6 @@ updatedir = $(kde_datadir)/kconf_update
 messages: rc.cpp
 	$(EXTRACTRC) *.rc >> rc.cpp
 	$(XGETTEXT) -C *.cpp *.h -o $(podir)/cervisia.pot
-
-install-data-local:
-	$(mkinstalldirs) $(DESTDIR)/$(kde_icondir)/crystalsvg/32x32/apps
-	$(INSTALL_DATA) $(srcdir)/cervisia.png $(DESTDIR)/$(kde_icondir)/crystalsvg/32x32/apps/cervisia.png
-	$(mkinstalldirs) $(DESTDIR)/$(kde_icondir)/crystalsvg/16x16/apps
-	$(INSTALL_DATA) $(srcdir)/cervisia-small.png $(DESTDIR)/$(kde_icondir)/crystalsvg/16x16/apps/cervisia.png
 
 srcdoc:
 	$(kde_bindir)/kdoc -a -p -d classdocs -n 'Cervisia' *.h -lqt -lkdecore -lkdeui -lkparts
