@@ -84,6 +84,7 @@
   <Action name="file_resolve"/>
   <Action name="view_log"/>
   <Separator/>
+  <Action name="file_update"/>
   <Action name="file_commit"/>
   <Separator/>
   <Action name="file_add"/>
