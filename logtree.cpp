@@ -13,9 +13,12 @@
 
 #include "logtree.h"
 
-#include <qtooltip.h>
+#include <qapplication.h>
 #include <qpainter.h>
-#include <qapp.h>
+#include <qstylesheet.h>
+#include <qtooltip.h>
+#include <kdebug.h>
+
 #include "tiplabel.h"
 #include "misc.h"
 
@@ -445,8 +448,10 @@ void LogTreeView::mouseMoveEvent(QMouseEvent *e)
 
     int row = findRow(static_cast<QMouseEvent*>(e)->y());
     int col = findCol(static_cast<QMouseEvent*>(e)->x());
-    if (row != currentRow || col != currentCol)
+    if (row != currentRow || col != currentCol) {
+        //        kdDebug() << "hidden because of row/col change" << endl;
         hideLabel();
+    }
 
     LogTreeItem *item = 0;
 
@@ -463,18 +468,18 @@ void LogTreeView::mouseMoveEvent(QMouseEvent *e)
             if (!item->author.isNull())
                 {
                     QString text = "<qt><b>";
-                    text += item->rev;
+                    text += QStyleSheet::escape(item->rev);
                     text += "</b>&nbsp;&nbsp;";
-                    text += item->author;
+                    text += QStyleSheet::escape(item->author);
                     text += "&nbsp;&nbsp;<b>";
-                    text += item->date;
+                    text += QStyleSheet::escape(item->date);
                     text += "</b>";
                     QStringList list2 = QStringList::split("\n", item->comment);
                     QStringList::Iterator it2;
                     for (it2 = list2.begin(); it2 != list2.end(); ++it2)
                         {
                             text += "<br>";
-                            text += (*it2);
+                            text += QStyleSheet::escape(*it2);
                         }
                     if (!item->tagcomment.isEmpty())
                         {
@@ -484,7 +489,7 @@ void LogTreeView::mouseMoveEvent(QMouseEvent *e)
                             for (it3 = list3.begin(); it3 != list3.end(); ++it3)
                                 {
                                     text += "<br>";
-                                    text += (*it3);
+                                    text += QStyleSheet::escape(*it3);
                                 }
                             text += "</i>";
                         }
@@ -502,6 +507,7 @@ void LogTreeView::mouseMoveEvent(QMouseEvent *e)
 
 void LogTreeView::windowActivationChange(bool oldActive)
 {
+    //    kdDebug() << "windowActivationChange" << endl;
     hideLabel();
     QtTableView::windowActivationChange(oldActive);
 }
@@ -509,6 +515,9 @@ void LogTreeView::windowActivationChange(bool oldActive)
 
 void LogTreeView::leaveEvent(QEvent *e)
 {
+    //    kdDebug() << "leaveEvent" << endl;
+    // has strange effects
+    // hideLabel();
     hideLabel();
     QtTableView::leaveEvent(e);
 }

@@ -16,6 +16,7 @@
 
 #include <qkeycode.h>
 #include <qstrlist.h>
+#include <qstylesheet.h>
 #include <kapplication.h>
 #include <kconfig.h>
 #include <klocale.h>
@@ -316,18 +317,18 @@ void LogListView::contentsMouseMoveEvent(QMouseEvent *e)
     if (!currentLabel && item)
         {
             QString text = "<qt><b>";
-            text += item->mrev;
+            text += QStyleSheet::escape(item->mrev);
             text += "</b>&nbsp;&nbsp;";
-            text += item->mauthor;
+            text += QStyleSheet::escape(item->mauthor);
             text += "&nbsp;&nbsp;<b>";
-            text += item->mdate;
+            text += QStyleSheet::escape(item->mdate);
             text += "</b>";
             QStringList list2 = QStringList::split("\n", item->mcomment);
             QStringList::Iterator it2;
             for (it2 = list2.begin(); it2 != list2.end(); ++it2)
                 {
                     text += "<br>";
-                    text += (*it2);
+                    text += QStyleSheet::escape(*it2);
                 }
             if (!item->mtagcomment.isEmpty())
                 {
@@ -337,7 +338,7 @@ void LogListView::contentsMouseMoveEvent(QMouseEvent *e)
                     for (it3 = list3.begin(); it3 != list3.end(); ++it3)
                         {
                             text += "<br>";
-                            text += (*it3);
+                            text += QStyleSheet::escape(*it3);
                         }
                     text += "</i>";
                 }

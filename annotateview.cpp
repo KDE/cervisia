@@ -202,18 +202,18 @@ void AnnotateView::contentsMouseMoveEvent(QMouseEvent *e)
     if (!currentLabel && item && col == AnnotateViewItem::AuthorColumn && !item->mauthor.isNull())
         {
             QString text = "<qt><b>";
-            text += item->mrev;
+            text += QStyleSheet::escape(item->mrev);
             text += "</b>&nbsp;&nbsp;";
-            text += item->mauthor;
+            text += QStyleSheet::escape(item->mauthor);
             text += "&nbsp;&nbsp;<b>";
-            text += item->mdate;
+            text += QStyleSheet::escape(item->mdate);
             text += "</b>";
             QStringList list = QStringList::split("\n", item->mcomment);
             QStringList::Iterator it;
             for (it = list.begin(); it != list.end(); ++it)
                 {
                     text += "<br>";
-                    text += (*it);
+                    text += QStyleSheet::escape(*it);
                 }
             text += "</qt>";
             
@@ -235,7 +235,8 @@ void AnnotateView::windowActivationChange(bool oldActive)
 
 void AnnotateView::leaveEvent(QEvent *e)
 {
-    hideLabel();
+    // has strange effects
+    // hideLabel();
     QListView::leaveEvent(e);
 }
 
