@@ -165,7 +165,7 @@ void DiffDialog::keyPressEvent(QKeyEvent *e)
             diff2->prior();
             break;
         default:
-            QDialog::keyPressEvent(e);
+            KDialogBase::keyPressEvent(e);
 	}
 }
 
