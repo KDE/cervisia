@@ -15,11 +15,11 @@
 #ifndef _PROTOCOLVIEW_H_
 #define _PROTOCOLVIEW_H_
 
-#include <qmultilinedit.h>
+#include <qtextedit.h>
 #include <kprocess.h>
 
 
-class ProtocolView : public QMultiLineEdit
+class ProtocolView : public QTextEdit
 {
     Q_OBJECT
     

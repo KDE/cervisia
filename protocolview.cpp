@@ -14,9 +14,6 @@
 
 #include <qdir.h>
 #include <qpopupmenu.h>
-#if QT_VERSION < 300
-#include <qtableview.h>
-#endif
 
 #include <kapp.h>
 #include <kconfig.h>
@@ -35,13 +32,12 @@
 
 
 ProtocolView::ProtocolView(QWidget *parent, const char *name)
-    : QMultiLineEdit(parent, name), childproc(0)
+    : QTextEdit(parent, name), childproc(0)
 {
     setReadOnly(true);
-#if QT_VERSION < 300
-    setUndoEnabled(false);
-#endif
-
+    setUndoRedoEnabled(false);
+    //    setTextFormat(Qt::RichText);
+ 
     KConfig *config = CervisiaPart::config();
     config->setGroup("LookAndFeel");
     setFont(config->readFontEntry("ProtocolFont"));
@@ -95,10 +91,8 @@ bool ProtocolView::startJob(const QString &sandbox, const QString &repository,
 }
 
 
-//#include <iostream.h>
 void ProtocolView::cancelJob()
 {
-    //    cout << "Canceled" << endl;
     childproc->kill();
 }
 
@@ -141,12 +135,13 @@ void ProtocolView::processOutput()
 	    QString line = buf.left(pos);
 	    if (!line.isEmpty())
                 {
-		    insertLine(line);
+		    append(line);
                     emit receivedLine(line);
                 }
 	    buf = buf.right(buf.length()-pos-1);
 	}
-    setCursorPosition(numLines(), 0, false);
+
+    scrollToBottom();
 }
 
 
@@ -171,7 +166,7 @@ void ProtocolView::mousePressEvent(QMouseEvent *e)
     if (e->button() == RightButton)
         execContextMenu(e->globalPos());
     else
-        QMultiLineEdit::mousePressEvent(e);
+        QTextEdit::mousePressEvent(e);
 }
 
 
@@ -179,13 +174,10 @@ void ProtocolView::keyPressEvent(QKeyEvent *e)
 {
     if (e->key() == KGlobalSettings::contextMenuKey())
         execContextMenu(mapToGlobal(QPoint(10, 10)));
-    else if (e->key() == Key_Tab) {
-#if QT_VERSION < 300
-        QTableView::focusNextPrevChild(true);
-#endif
-    }
+    else if (e->key() == Key_Tab)
+        QTextEdit::focusNextPrevChild(true);
     else
-        QMultiLineEdit::keyPressEvent(e);
+        QTextEdit::keyPressEvent(e);
 }
 
 // Local Variables:
