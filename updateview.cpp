@@ -796,74 +796,57 @@ UpdateView::Filter UpdateView::filter() const
 }
 
 
+// returns true iff exactly one UpdateFileItem is selected
 bool UpdateView::hasSingleSelection() const
 {
-    bool selfound = false;
-    QPtrStack<QListViewItem> s;
+    const QPtrList<QListViewItem>& listSelectedItems(selectedItems());
 
-    for ( QListViewItem *item = firstChild(); item;
-	  item = item->nextSibling()? item->nextSibling() : s.pop() )
-	{
-	    if (item->firstChild())
-                s.push(item->firstChild());
-
-	    if (item->isSelected())
-		{
-		    if (selfound || item->isExpandable())
-			return false;
-		    selfound = true;
-		}
-	}
-    return selfound;
+    return (listSelectedItems.count() == 1) && !isDirItem(listSelectedItems.getFirst());
 }
 
 
 void UpdateView::getSingleSelection(QString *filename, QString *revision) const
 {
-    QPtrStack<QListViewItem> s;
+    const QPtrList<QListViewItem>& listSelectedItems(selectedItems());
 
-    for ( QListViewItem *item = firstChild(); item;
-	  item = item->nextSibling()? item->nextSibling() : s.pop() )
-	{
-	    if (item->firstChild())
-		s.push(item->firstChild());
-	    else if (item->isSelected())
-                {
-                    UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(item);
-                    *filename = fileItem->filePath();
-                    if (revision)
-                        *revision = fileItem->revision();
-                }
-	}
+    QString tmpFileName;
+    QString tmpRevision;
+    if ((listSelectedItems.count() == 1) && !isDirItem(listSelectedItems.getFirst()))
+    {
+        UpdateFileItem* fileItem(static_cast<UpdateFileItem*>(listSelectedItems.getFirst()));
+        tmpFileName = fileItem->filePath();
+        tmpRevision = fileItem->revision();
+    }
+
+    *filename = tmpFileName;
+    if (revision)
+        *revision = tmpRevision;
 }
 
 
 QStringList UpdateView::multipleSelection() const
 {
     QStringList res;
-    QPtrStack<QListViewItem> s;
 
-    for ( QListViewItem *item = firstChild(); item;
-          item = item->nextSibling()? item->nextSibling() : s.pop() )
+    const QPtrList<QListViewItem>& listSelectedItems(selectedItems());
+    for (QPtrListIterator<QListViewItem> it(listSelectedItems);
+         it.current() != 0; ++it)
+    {
+        QListViewItem* item(*it);
+
+        if (isDirItem(item))
         {
-            if (item->firstChild())
-                s.push(item->firstChild());
-
-            if (item->isSelected())
-                {
-                    if (isDirItem(item))
-                        {
-                            QString dirpath = static_cast<UpdateDirItem*>(item)->dirPath();
-                            if (!dirpath.isEmpty())
-                                dirpath.truncate(dirpath.length()-1);
-                            else
-                                dirpath = '.';
-                            res.append(dirpath);
-                        }
-                    else
-                        res.append( static_cast<UpdateFileItem*>(item)->filePath() );
-                }
+            QString dirPath(static_cast<UpdateDirItem*>(item)->dirPath());
+            if (dirPath.isEmpty())
+                dirPath = '.';
+            else
+                dirPath.truncate(dirPath.length() - 1);
+            res.append(dirPath);
         }
+        else
+            res.append(static_cast<UpdateFileItem*>(item)->filePath());
+    }
+
     return res;
 }
 
@@ -871,17 +854,17 @@ QStringList UpdateView::multipleSelection() const
 QStringList UpdateView::fileSelection() const
 {
     QStringList res;
-    QPtrStack<QListViewItem> s;
 
-    for ( QListViewItem *item = firstChild(); item;
-          item = item->nextSibling()? item->nextSibling() : s.pop() )
-        {
-            if (item->firstChild())
-                s.push(item->firstChild());
+    const QPtrList<QListViewItem>& listSelectedItems(selectedItems());
+    for (QPtrListIterator<QListViewItem> it(listSelectedItems);
+         it.current() != 0; ++it)
+    {
+        QListViewItem* item(*it);
 
-            if (item->isSelected() && !isDirItem(item))
-                res.append( static_cast<UpdateFileItem*>(item)->filePath() );
-        }
+        if (!isDirItem(item))
+            res.append(static_cast<UpdateFileItem*>(item)->filePath());
+    }
+
     return res;
 }
 
