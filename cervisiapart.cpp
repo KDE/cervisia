@@ -1214,11 +1214,12 @@ void CervisiaPart::slotShowEditors()
     if (list.isEmpty())
         return;
 
-    QString cmdline = cvsClient(repository, config());
-    cmdline += " editors ";
-    cmdline += joinLine(list);
+    DCOPRef cvsJob = cvsService->editors(list);
 
-    if (protocol->startJob(sandbox, repository, cmdline))
+    // get command line from cvs job
+    QString cmdline = cvsJob.call("cvsCommand()");
+
+    if( protocol->startJob() )
     {
         showJobStart(cmdline);
         connect( protocol, SIGNAL(jobFinished(bool, int)),
@@ -1260,68 +1261,47 @@ void CervisiaPart::slotMakePatch()
 
 void CervisiaPart::slotImport()
 {
-    importOrCheckout(CheckoutDialog::Import);
+    CheckoutDialog dlg(*config(), cvsService, CheckoutDialog::Import, widget());
+
+    if( !dlg.exec() )
+        return;
+
+    DCOPRef cvsJob = cvsService->import(dlg.workingDirectory(), dlg.repository(),
+                                        dlg.module(), dlg.ignoreFiles(),
+                                        dlg.comment(), dlg.vendorTag(),
+                                        dlg.releaseTag(), dlg.importBinary());
+
+    // get command line from cvs job
+    QString cmdline = cvsJob.call("cvsCommand()");
+
+    if( protocol->startJob() )
+    {
+        showJobStart(cmdline);
+        connect( protocol, SIGNAL(jobFinished(bool, int)),
+                 this,     SLOT(slotJobFinished()) );
+    }
 }
 
 
 void CervisiaPart::slotCheckout()
 {
-    importOrCheckout(CheckoutDialog::Checkout);
-}
+    CheckoutDialog dlg(*config(), cvsService, CheckoutDialog::Checkout, widget());
 
+    if( !dlg.exec() )
+        return;
 
-void CervisiaPart::importOrCheckout(CheckoutDialog::ActionType action)
-{
-    CheckoutDialog dlg(*config(), cvsService, action, widget());
+    DCOPRef cvsJob = cvsService->checkout(dlg.workingDirectory(), dlg.repository(),
+                                          dlg.module(), dlg.branch(), opt_pruneDirs);
 
-    if (dlg.exec())
-        {
-            QString cmdline = "cd ";
-            cmdline += dlg.workingDirectory();
-            cmdline += " && ";
-            cmdline += cvsClient(repository, config());
-            cmdline += " -d ";
-            cmdline += dlg.repository();
-            if (action == CheckoutDialog::Checkout)
-                {
-                    cmdline += " checkout ";
-                    if (!dlg.branch().isEmpty())
-			{
-                            cmdline += " -r ";
-                            cmdline += dlg.branch();
-			}
-                    if (opt_pruneDirs)
-                        cmdline += " -P ";
-                    cmdline += dlg.module();
-                }
-            else
-                {
-                    cmdline += " import";
-                    if (dlg.importBinary())
-                        cmdline += " -kb";
-                    QString ignore = dlg.ignoreFiles().stripWhiteSpace();
-                    if (!ignore.isEmpty())
-                        {
-                            cmdline += " -I ";
-                            cmdline += KProcess::quote(ignore);
-                        }
-                    QString comment = dlg.comment().stripWhiteSpace();
-                    cmdline += " -m ";
-                    cmdline += (QString("\"") + comment + "\" ");
-                    cmdline += dlg.module();
-                    cmdline += " ";
-                    cmdline += dlg.vendorTag();
-                    cmdline += " ";
-                    cmdline += dlg.releaseTag();
-                }
+    // get command line from cvs job
+    QString cmdline = cvsJob.call("cvsCommand()");
 
-            if (protocol->startJob(sandbox, repository, cmdline))
-                {
-                    showJobStart(cmdline);
-                    connect( protocol, SIGNAL(jobFinished(bool, int)),
-                             this,     SLOT(slotJobFinished()) );
-                }
-        }
+    if( protocol->startJob() )
+    {
+        showJobStart(cmdline);
+        connect( protocol, SIGNAL(jobFinished(bool, int)),
+                 this,     SLOT(slotJobFinished()) );
+    }
 }
 
 

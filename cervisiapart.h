@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
@@ -84,7 +84,7 @@ public slots:
     void openFiles(const QStringList &filenames);
     void popupRequested(KListView*, QListViewItem*, const QPoint&);
     void updateActions();
-    
+
     void aboutCervisia();
 
     void slotOpen();
@@ -151,18 +151,17 @@ private slots:
 protected:
     virtual void guiActivateEvent(KParts::GUIActivateEvent* event);
 
-private:    
+private:
     void setupActions();
     void setupGlobalConfig();
 
     void readSettings();
     void writeSettings();
-       
+
     bool openSandbox(const QString &dirname);
     void updateSandbox(const QString &extraopt = QString::null);
     void addOrRemove(AddRemoveDialog::ActionType action);
     void addOrRemoveWatch(WatchDialog::ActionType action);
-    void importOrCheckout(CheckoutDialog::ActionType action);
     void createOrDeleteTag(TagDialog::ActionType action);
     void showJobStart(const QString &command);
     void showDiff(const QString& revision);
