@@ -57,6 +57,7 @@
 #include "cvsservice_stub.h"
 #include "repository_stub.h"
 #include "globalignorelist.h"
+#include "patchoptiondlg.h"
 
 #include "cervisiapart.h"
 #include "version.h"
@@ -1231,7 +1232,14 @@ void CervisiaPart::slotShowEditors()
 
 void CervisiaPart::slotMakePatch()
 {
-    DCOPRef job = cvsService->makePatch();
+    Cervisia::PatchOptionDialog optionDlg;
+    if( optionDlg.exec() == KDialogBase::Rejected )
+        return;
+    
+    QString format      = optionDlg.formatOption();
+    QString diffOptions = optionDlg.diffOptions();
+
+    DCOPRef job = cvsService->makePatch(diffOptions, format);
     if( !cvsService->ok() )
         return;
 
