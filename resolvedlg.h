@@ -20,9 +20,8 @@
 #include <kdialogbase.h>
 
 #include <qptrlist.h>
+#include "diffview.h"
 
-
-class DiffView;
 
 class QLabel;
 class QTextCodec;
@@ -63,8 +62,9 @@ private:
     void chooseEdit();
     void saveFile(const QString &name);
     QString readFile();
-    void addToMergeAndVersionA(const QString& line, int& lineNo);
-    void addToVersionB(const QString& line, int& lineNo);
+    void addToMergeAndVersionA(const QString& line, DiffView::DiffType type, 
+                               int& lineNo);
+    void addToVersionB(const QString& line, DiffView::DiffType type, int& lineNo);
     void updateMergedVersion(ResolveItem* item, ChooseType chosen);
     
     QLabel *nofnlabel;
