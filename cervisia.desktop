@@ -58,4 +58,4 @@ X-KDE-Library=libcervisiapart
 X-KDE-BrowserView-Args=DetailedList
 
 X-DCOP-ServiceType=Multi
-Categories=QT;KDE;Development
+Categories=Qt;KDE;Development
