@@ -29,6 +29,7 @@
 #include <krfcdate.h>
 
 #include "cvsservice_stub.h"
+#include "repository_stub.h"
 #include "annotatedlg.h"
 #include "annotatectl.h"
 #include "diffdlg.h"
@@ -207,8 +208,9 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
 
     // get sandbox and repository from cvs DCOP service for diffClicked()
     // FIXME: get rid when DiffDialog is moved to DCOP service
-    sandbox = cvsService->workingCopy();
-    repository = cvsService->repository();
+    Repository_stub cvsRepository(cvsService->app(), "CvsRepository");
+    sandbox = cvsRepository.workingCopy();
+    repository = cvsRepository.location();
     
     setCaption(i18n("CVS Log: %1").arg(filename));
 
