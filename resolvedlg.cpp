@@ -77,9 +77,9 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent, const char *name)
     QBoxLayout *versionBlayout = new QVBoxLayout(versionBLayoutWidget, 5);
 
     QLabel *revlabel2 = new QLabel(i18n("Other version (B):"), versionBLayoutWidget);
-    versionBlayout->addWidget(revlabel2);       
+    versionBlayout->addWidget(revlabel2);
     diff2 = new DiffView(cfg, true, false, versionBLayoutWidget);
-    versionBlayout->addWidget(diff2, 10);       
+    versionBlayout->addWidget(diff2, 10);
 
     diff1->setPartner(diff2);
     diff2->setPartner(diff1);
@@ -97,7 +97,7 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     abutton = new QPushButton("&A", mainWidget);
     connect( abutton, SIGNAL(clicked()), SLOT(aClicked()) );
-    
+
     bbutton = new QPushButton("&B", mainWidget);
     connect( bbutton, SIGNAL(clicked()), SLOT(bClicked()) );
 
@@ -112,10 +112,10 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     nofnlabel = new QLabel(mainWidget);
     nofnlabel->setAlignment(AlignCenter);
-    
+
     backbutton = new QPushButton("&<<", mainWidget);
     connect( backbutton, SIGNAL(clicked()), SLOT(backClicked()) );
-    
+
     forwbutton = new QPushButton("&>>", mainWidget);
     connect( forwbutton, SIGNAL(clicked()), SLOT(forwClicked()) );
 
@@ -182,7 +182,7 @@ bool ResolveDialog::parseFile(const QString &name)
     int lineno1, lineno2;
     int advanced1, advanced2;
     enum { Normal, VersionA, VersionB } state;
-    
+
     setCaption(i18n("CVS Resolve: %1").arg(name));
 
     fname = name;
@@ -198,60 +198,60 @@ bool ResolveDialog::parseFile(const QString &name)
     lineno1 = lineno2 = 0;
     advanced1 = advanced2 = 0;
     while (!stream.atEnd())
-	{
-	    QString line = stream.readLine();
-	    if (line.left(7) == "<<<<<<<")
-		{
-		    state = VersionA;
-		    advanced1 = 0;
-		}
-	    else if (line.left(7) == "=======" && state == VersionA)
-		{
-		    state = VersionB;
-		    advanced2 = 0;
-		}
-	    else if (line.left(7) == ">>>>>>>")
-		{
-		    ResolveItem *item = new ResolveItem;
-		    item->linenoA = lineno1-advanced1+1;
-		    item->linecountA = advanced1;
-		    item->linenoB = lineno2-advanced2+1;
-		    item->linecountB = advanced2;
-		    item->offsetM = item->linenoA-1;
-		    item->chosen = ChA;
-                    item->linecountTotal = item->linecountA;
-		    items.append(item);
-		    for (; advanced1 < advanced2; advanced1++)
-			diff1->addLine("", DiffView::Neutral);
-		    for (; advanced2 < advanced1; advanced2++)
-			diff2->addLine("", DiffView::Neutral);
-		    state = Normal;
-		}
-	    else if (state == VersionA)
-		{
-		    lineno1++;
-		    advanced1++;
-		    diff1->addLine(line, DiffView::Change, lineno1);
-		    merge->addLine(line, DiffView::Change, lineno1);
-		}
-	    else if (state == VersionB)
-		{
-		    lineno2++;
-		    advanced2++;
-		    diff2->addLine(line, DiffView::Change, lineno2);
-		}
-	    else // state == Normal
-		{
-		    lineno1++;
-		    lineno2++;
-		    diff1->addLine(line, DiffView::Unchanged, lineno1);
-		    merge->addLine(line, DiffView::Unchanged, lineno1);
-		    diff2->addLine(line, DiffView::Unchanged, lineno2);
-		}
-	}
+    {
+        QString line = stream.readLine();
+        if (line.left(7) == "<<<<<<<")
+        {
+            state = VersionA;
+            advanced1 = 0;
+        }
+        else if (line.left(7) == "=======" && state == VersionA)
+        {
+            state = VersionB;
+            advanced2 = 0;
+        }
+        else if (line.left(7) == ">>>>>>>")
+        {
+            ResolveItem *item = new ResolveItem;
+            item->linenoA = lineno1-advanced1+1;
+            item->linecountA = advanced1;
+            item->linenoB = lineno2-advanced2+1;
+            item->linecountB = advanced2;
+            item->offsetM = item->linenoA-1;
+            item->chosen = ChA;
+            item->linecountTotal = item->linecountA;
+            items.append(item);
+            for (; advanced1 < advanced2; advanced1++)
+            diff1->addLine("", DiffView::Neutral);
+            for (; advanced2 < advanced1; advanced2++)
+            diff2->addLine("", DiffView::Neutral);
+            state = Normal;
+        }
+        else if (state == VersionA)
+        {
+            lineno1++;
+            advanced1++;
+            diff1->addLine(line, DiffView::Change, lineno1);
+            merge->addLine(line, DiffView::Change, lineno1);
+        }
+        else if (state == VersionB)
+        {
+            lineno2++;
+            advanced2++;
+            diff2->addLine(line, DiffView::Change, lineno2);
+        }
+        else // state == Normal
+        {
+            lineno1++;
+            lineno2++;
+            diff1->addLine(line, DiffView::Unchanged, lineno1);
+            merge->addLine(line, DiffView::Unchanged, lineno1);
+            diff2->addLine(line, DiffView::Unchanged, lineno2);
+        }
+    }
     f.close();
     updateNofN();
-    
+
     return true; // succesful
 }
 
@@ -260,16 +260,16 @@ void ResolveDialog::saveFile(const QString &name)
 {
     QFile f(name);
     if (!f.open(IO_WriteOnly))
-	{
-	    KMessageBox::sorry(this,
-			       i18n("Could not open file for writing."),
-			       "Cervisia");
-	    return;
-	}
+    {
+        KMessageBox::sorry(this,
+                           i18n("Could not open file for writing."),
+                           "Cervisia");
+        return;
+    }
     QTextStream stream(&f);
     QTextCodec *fcodec = DetectCodec(name);
     stream.setCodec(fcodec);
-        
+
     int count = merge->count();
     for (int i = 0; i < count; ++i)
         stream << merge->stringAtOffset(i) << endl;
@@ -282,9 +282,9 @@ void ResolveDialog::updateNofN()
 {
     QString str;
     if (markeditem >= 0)
-	str = i18n("%1 of %2").arg(markeditem+1).arg(items.count());
+        str = i18n("%1 of %2").arg(markeditem+1).arg(items.count());
     else
-	str = i18n("%1 conflicts").arg(items.count());
+        str = i18n("%1 conflicts").arg(items.count());
     nofnlabel->setText(str);
 
     backbutton->setEnabled(markeditem != -1);
@@ -302,27 +302,27 @@ void ResolveDialog::updateNofN()
 void ResolveDialog::updateHighlight(int newitem)
 {
     if (markeditem >= 0)
-	{
-	    ResolveItem *item = items.at(markeditem);
-	    for (int i = item->linenoA; i < item->linenoA+item->linecountA; ++i)
-		diff1->setInverted(i, false);
-	    for (int i = item->linenoB; i < item->linenoB+item->linecountB; ++i)
-		diff2->setInverted(i, false);
-	}
+    {
+        ResolveItem *item = items.at(markeditem);
+        for (int i = item->linenoA; i < item->linenoA+item->linecountA; ++i)
+            diff1->setInverted(i, false);
+        for (int i = item->linenoB; i < item->linenoB+item->linecountB; ++i)
+            diff2->setInverted(i, false);
+    }
 
     markeditem = newitem;
-    
+
     if (markeditem >= 0)
-	{
-	    ResolveItem *item = items.at(markeditem);
-	    for (int i = item->linenoA; i < item->linenoA+item->linecountA; ++i)
-		diff1->setInverted(i, true);
-	    for (int i = item->linenoB; i < item->linenoB+item->linecountB; ++i)
-		diff2->setInverted(i, true);
-	    diff1->setCenterLine(item->linenoA);
-	    diff2->setCenterLine(item->linenoB);
-            merge->setCenterOffset(item->offsetM);
-	}
+    {
+        ResolveItem *item = items.at(markeditem);
+        for (int i = item->linenoA; i < item->linenoA+item->linecountA; ++i)
+            diff1->setInverted(i, true);
+        for (int i = item->linenoB; i < item->linenoB+item->linecountB; ++i)
+            diff2->setInverted(i, true);
+        diff1->setCenterLine(item->linenoA);
+        diff2->setCenterLine(item->linenoB);
+        merge->setCenterOffset(item->offsetM);
+    }
     diff1->repaint();
     diff2->repaint();
     merge->repaint();
@@ -361,39 +361,39 @@ void ResolveDialog::choose(ChooseType ch)
     DiffView *first=0, *second=0;
     int firstno=0, secondno=0;
     int firstcount=0, secondcount=0;
-  
+
     if (markeditem < 0)
-	return;
+        return;
 
     ResolveItem *item = items.at(markeditem);
     if (item->chosen == ch)
-	return;
+        return;
 
     switch (ch)
         {
         case ChA:
-            first = diff1; 
+            first = diff1;
             firstno = item->linenoA;
             firstcount = item->linecountA;
             break;
         case ChB:
-            first = diff2; 
+            first = diff2;
             firstno = item->linenoB;
             firstcount = item->linecountB;
             break;
         case ChAB:
-            first = diff1; 
+            first = diff1;
             firstno = item->linenoA;
             firstcount = item->linecountA;
-            second = diff2; 
+            second = diff2;
             secondno = item->linenoB;
             secondcount = item->linecountB;
             break;
         case ChBA:
-            first = diff2; 
+            first = diff2;
             firstno  = item->linenoB;
             firstcount = item->linecountB;
-            second = diff1; 
+            second = diff1;
             secondno = item->linenoA;
             secondcount = item->linecountA;
             break;
@@ -403,7 +403,7 @@ void ResolveDialog::choose(ChooseType ch)
 
     int total = firstcount + secondcount;
     int difference = total - item->linecountTotal;
-    
+
     // Remove old variant
     for (int i = 0; i < item->linecountTotal; ++i)
         merge->removeAtOffset(item->offsetM);
@@ -411,20 +411,20 @@ void ResolveDialog::choose(ChooseType ch)
     // Insert new
     for (int i = 0; i < firstcount; ++i)
         merge->insertAtOffset(first->stringAtLine(firstno+i), DiffView::Change, item->offsetM+i);
-    
+
     if (second)
         for (int i = 0; i < secondcount; ++i)
             merge->insertAtOffset(second->stringAtLine(secondno+i), DiffView::Change, item->offsetM+firstcount+i);
-    
+
     item->chosen = ch;
     item->linecountTotal = total;
-    
+
     // Adjust other items
     while ( (item = items.next()) != 0 )
         item->offsetM += difference;
-    
+
     merge->repaint();
-    
+
 }
 
 
@@ -464,31 +464,31 @@ void ResolveDialog::editClicked()
 
     ResolveEditorDialog *dlg = new ResolveEditorDialog(partConfig, this, "edit");
     dlg->setContent(oldContent);
-    
+
     if (dlg->exec())
         {
             QStringList newContent = dlg->content();
             int total = newContent.count();
             int difference = total - item->linecountTotal;
-            
+
             // Remove old variant
             for (int i = 0; i < item->linecountTotal; ++i)
                 merge->removeAtOffset(item->offsetM);
-            
+
             // Insert new
             for (int i = 0; i < total; ++i)
                 merge->insertAtOffset(newContent[i], DiffView::Change, item->offsetM+i);
-            
+
             item->chosen = ChEdit;
             item->linecountTotal = total;
-            
+
             // Adjust other items
             while ( (item = items.next()) != 0 )
                 item->offsetM += difference;
-            
+
             merge->repaint();
         }
-    
+
     delete dlg;
 }
 
@@ -502,7 +502,7 @@ void ResolveDialog::saveClicked()
 void ResolveDialog::saveAsClicked()
 {
     QString filename =
-	KFileDialog::getSaveFileName(0, 0, this, 0);
+        KFileDialog::getSaveFileName(0, 0, this, 0);
 
     if (!filename.isEmpty())
         saveFile(filename);
@@ -512,16 +512,16 @@ void ResolveDialog::saveAsClicked()
 void ResolveDialog::keyPressEvent(QKeyEvent *e)
 {
     switch (e->key())
-	{
-	case Key_A:    aClicked();    break;
-	case Key_B:    bClicked();    break;
-	case Key_Left: backClicked(); break;
-	case Key_Right:forwClicked(); break;
+    {
+        case Key_A:    aClicked();    break;
+        case Key_B:    bClicked();    break;
+        case Key_Left: backClicked(); break;
+        case Key_Right:forwClicked(); break;
         case Key_Up:   diff1->up();   break;
         case Key_Down: diff1->down(); break;
         default:
             KDialogBase::keyPressEvent(e);
-	}
+    }
 }
 
 
