@@ -223,8 +223,6 @@ void ProtocolView::processOutput()
                 }
 	    buf = buf.right(buf.length()-pos-1);
 	}
-
-    scrollToBottom();
 }
 
 
