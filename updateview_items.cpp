@@ -184,6 +184,7 @@ void UpdateDirItem::scanDirectory()
             else
             {
                 entry.m_type = Entry::File;
+                entry.m_status = Entry::NotInCVS;
                 createFileItem(entry);
             }
         }
