@@ -14,6 +14,8 @@
 
 #include "tiplabel.h"
 
+#include <kglobalsettings.h>
+
 #include <qapplication.h>
 #include <qsimplerichtext.h>
 #include <qtooltip.h>
@@ -29,7 +31,7 @@ TipLabel::TipLabel(const QString &text)
     setPalette( QToolTip::palette() );
 
     QSimpleRichText doc(text, font());
-    doc.setWidth(QApplication::desktop()->width());
+    doc.setWidth(KGlobalSettings::desktopGeometry(this).width());
     whint = doc.widthUsed() + 2*frameWidth() + 2*indent();
 }
 
@@ -38,8 +40,9 @@ void TipLabel::showAt(QPoint pos)
 {
     adjustSize();
 
-    QPoint maxpos = QPoint(QMAX(QApplication::desktop()->width()-width(), 0),
-                           QMAX(QApplication::desktop()->height()-height(), 0));
+    QRect desk = KGlobalSettings::desktopGeometry(this);
+    QPoint maxpos = QPoint(QMAX(desk.right()-width(), desk.left()),
+                           QMAX(desk.bottom()-height(), desk.top()));
     pos = QPoint(QMIN(pos.x(), maxpos.x()),
                  QMIN(pos.y(), maxpos.y()));
     move(pos);
