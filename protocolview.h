@@ -30,13 +30,13 @@ class ProtocolView : public QTextEdit, public DCOPObject
 {
     K_DCOP
     Q_OBJECT
-    
+
 public:
     explicit ProtocolView(const QCString& appId, QWidget *parent=0, const char *name=0);
     ~ProtocolView();
 
     bool startJob(const QString &sandbox, const QString &repository, const QString &cmdline);
-    bool startJob();
+    bool startJob(bool isUpdateJob = false);
 
 protected:
     virtual QPopupMenu* createPopupMenu(const QPoint &pos);
@@ -57,15 +57,17 @@ private slots:
 private:
     void processOutput();
     void appendLine(const QString &line);
-    
+
     KShellProcess *childproc;
     QString buf;
-    
+
     QColor conflictColor;
     QColor localChangeColor;
     QColor remoteChangeColor;
-    
+
     CvsJob_stub* job;
+
+    bool   m_isUpdateJob;
 };
 
 #endif

@@ -792,7 +792,7 @@ void CervisiaPart::slotStatus()
     if( reply.isValid() )
         reply.get<QString>(cmdline);
 
-    if( protocol->startJob() )
+    if( protocol->startJob(true) )
     {
         showJobStart(cmdline);
         connect( protocol, SIGNAL(receivedLine(QString)), update, SLOT(processUpdateLine(QString)) );
@@ -942,7 +942,7 @@ void CervisiaPart::updateSandbox(const QString &extraopt)
     if( reply.isValid() )
         reply.get<QString>(cmdline);
 
-    if( protocol->startJob() )
+    if( protocol->startJob(true) )
     {
         showJobStart(cmdline);
         connect( protocol, SIGNAL(receivedLine(QString)), update, SLOT(processUpdateLine(QString)) );

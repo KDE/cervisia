@@ -31,16 +31,17 @@ ProtocolView::ProtocolView(const QCString& appId, QWidget *parent, const char *n
     : QTextEdit(parent, name)
     , childproc(0)
     , job(0)
+    , m_isUpdateJob(false)
 {
     setReadOnly(true);
     setUndoRedoEnabled(false);
     setTabChangesFocus(true);
     setTextFormat(Qt::RichText);
- 
+
     KConfig *config = CervisiaPart::config();
     config->setGroup("LookAndFeel");
     setFont(config->readFontEntry("ProtocolFont"));
-    
+
     config->setGroup("Colors");
     QColor defaultColor = QColor(255, 130, 130);
     conflictColor=config->readColorEntry("Conflict",&defaultColor);
@@ -48,7 +49,7 @@ ProtocolView::ProtocolView(const QCString& appId, QWidget *parent, const char *n
     localChangeColor=config->readColorEntry("LocalChange",&defaultColor);
     defaultColor=QColor(70, 210, 70);
     remoteChangeColor=config->readColorEntry("RemoteChange",&defaultColor);
-    
+
     // create a DCOP stub for the non-concurrent cvs job
     job = new CvsJob_stub(appId, "NonConcurrentJob");
 
@@ -74,7 +75,7 @@ bool ProtocolView::startJob(const QString &sandbox, const QString &repository,
 {
     if (childproc)
         {
-            KMessageBox::sorry(topLevelWidget(), 
+            KMessageBox::sorry(topLevelWidget(),
                                i18n("There is already a job running"),
                                "Cervisia");
             return false;
@@ -94,7 +95,7 @@ bool ProtocolView::startJob(const QString &sandbox, const QString &repository,
     if (!rsh.isEmpty())
 	*childproc << QString("CVS_RSH=" + KShellProcess::quote(rsh));
     *childproc << cmdline;
-    
+
     connect( childproc, SIGNAL(processExited(KProcess *)),
 	     SLOT(childExited()) );
     connect( childproc, SIGNAL(receivedStdout(KProcess *, char *, int)),
@@ -110,14 +111,16 @@ bool ProtocolView::startJob(const QString &sandbox, const QString &repository,
 }
 
 
-bool ProtocolView::startJob()
+bool ProtocolView::startJob(bool isUpdateJob)
 {
+    m_isUpdateJob = isUpdateJob;
+
     // get command line and add it to output buffer
     QString cmdLine = job->cvsCommand();
     buf += cmdLine;
     buf += '\n';
     processOutput();
-    
+
     // disconnect 3rd party slots from our signals
     disconnect( SIGNAL(receivedLine(QString)) );
     disconnect( SIGNAL(jobFinished(bool, int)) );
@@ -158,7 +161,7 @@ void ProtocolView::receivedOutput(KProcess *, char *buffer, int buflen)
 void ProtocolView::childExited()
 {
     QString s;
-    
+
     if (childproc->normalExit())
         {
             if (childproc->exitStatus())
@@ -168,7 +171,7 @@ void ProtocolView::childExited()
         }
     else
         s = i18n("[Aborted]\n");
-    
+
     buf += '\n';
     buf += s;
     processOutput();
@@ -188,7 +191,7 @@ void ProtocolView::slotReceivedOutput(QString buffer)
 void ProtocolView::slotJobExited(bool normalExit, int exitStatus)
 {
     QString msg;
-    
+
     if( normalExit )
     {
         if( exitStatus )
@@ -198,7 +201,7 @@ void ProtocolView::slotJobExited(bool normalExit, int exitStatus)
     }
     else
         msg = i18n("[Aborted]\n");
-    
+
     buf += '\n';
     buf += msg;
     processOutput();
@@ -231,6 +234,14 @@ void ProtocolView::appendLine(const QString &line)
     // messages aren't interpreted
     const QString escapedLine = QStyleSheet::escape(line);
 
+    // When we don't get the output from an update job then
+    // just add it to the text edit.
+    if( !m_isUpdateJob )
+    {
+        append(escapedLine);
+        return;
+    }
+
     QColor color;
     // Colors are the same as in UpdateViewItem::paintCell()
     if (line.startsWith("C "))
@@ -244,7 +255,7 @@ void ProtocolView::appendLine(const QString &line)
     append(color.isValid()
            ? QString("<font color=\"%1\"><b>%2</b></font>").arg(color.name())
                                                            .arg(escapedLine)
-           : QString("%1").arg(escapedLine));
+           : escapedLine);
 }
 
 
@@ -255,4 +266,4 @@ void ProtocolView::appendLine(const QString &line)
 // c-basic-offset: 4
 // End:
 
-    
+
