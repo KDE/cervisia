@@ -3,13 +3,19 @@
  *                          bernd@mail.berlios.de
  *  Copyright (c) 2003-2004 Christian Loose <christian.loose@hamburg.de>
  *
- * This program may be distributed under the terms of the Q Public
- * License as defined by Trolltech AS of Norway and appearing in the
- * file LICENSE.QPL included in the packaging of this file.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
 #include <iostream>
@@ -141,7 +147,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
         KCmdLineLastOption
     };
     KAboutData about("cervisia", I18N_NOOP("Cervisia"), CERVISIA_VERSION,
-                     I18N_NOOP("A CVS frontend"), KAboutData::License_QPL,
+                     I18N_NOOP("A CVS frontend"), KAboutData::License_GPL,
                      I18N_NOOP("Copyright (c) 1999-2002 Bernd Gehrmann\n"
                                "Copyright (c) 2002-2004 the Cervisia authors"), 0,
                      "http://www.kde.org/apps/cervisia");

@@ -3,13 +3,19 @@
  *                          bernd@mail.berlios.de
  *  Copyright (c) 2002-2005 Christian Loose <christian.loose@kdemail.net>
  *
- * This program may be distributed under the terms of the Q Public
- * License as defined by Trolltech AS of Norway and appearing in the
- * file LICENSE.QPL included in the packaging of this file.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
 #include <qlabel.h>
@@ -706,12 +712,14 @@ void CervisiaPart::aboutCervisia()
                           "Copyright (c) 1999-2002\n"
                           "Bernd Gehrmann <bernd@mail.berlios.de>\n"
                           "\n"
-                          "This program may be distributed under the terms of the Q Public\n"
-                          "License as defined by Trolltech AS of Norway and appearing in the\n"
-                          "file LICENSE.QPL included in the packaging of this file.\n\n"
+                          "This program is free software; you can redistribute it and/or modify\n"
+                          "it under the terms of the GNU General Public License as published by\n"
+                          "the Free Software Foundation; either version 2 of the License, or\n"
+                          "(at your option) any later version.\n"
                           "This program is distributed in the hope that it will be useful,\n"
                           "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-                          "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n"
+                          "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+                          "GNU General Public License for more details.\n"
                           "See the ChangeLog file for a list of contributors."));
     QMessageBox::about(0, i18n("About Cervisia"),
                        aboutstr.arg(CERVISIA_VERSION).arg(KDE_VERSION_STRING));
@@ -723,7 +731,7 @@ KAboutData* CervisiaPart::createAboutData()
     KAboutData* about = new KAboutData(
                             "cervisiapart", I18N_NOOP("Cervisia Part"),
                             CERVISIA_VERSION, I18N_NOOP("A CVS frontend"),
-                            KAboutData::License_QPL,
+                            KAboutData::License_GPL,
                             I18N_NOOP("Copyright (c) 1999-2002 Bernd Gehrmann"), 0,
                             "http://www.kde.org/apps/cervisia");
 
