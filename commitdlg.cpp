@@ -19,6 +19,7 @@
 #include <qcombobox.h>
 #include <kapplication.h>
 #include <kbuttonbox.h>
+#include <kiconloader.h>
 #include <klocale.h>
 #include <kconfig.h>
 #include <kdebug.h>
@@ -74,7 +75,27 @@ CommitDialog::CommitDialog(ActionType action, QWidget *parent, const char *name)
         }
     else
         listbox->setEnabled(false);
+
+    if (action == Remove)    
+        {
+            QBoxLayout *warningLayout = new QHBoxLayout(this);
+
+            QLabel *warningIcon = new QLabel(this);
+            KIconLoader *loader = kapp->iconLoader();
+            warningIcon->setPixmap(loader->loadIcon("messagebox_warning", KIcon::NoGroup,
+                                                    KIcon::SizeMedium, KIcon::DefaultState,
+                                                    0, true));
+            warningLayout->addWidget(warningIcon);
+
+            QLabel *warningText = new QLabel(i18n("This will also remove the files from "
+                                                  "your local working copy!"), this);
+            warningLayout->addWidget(warningText);
     
+            layout->addSpacing(5);
+            layout->addLayout(warningLayout);
+            layout->addSpacing(5);
+        }
+        
     QFrame *frame = new QFrame(this);
     frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
     layout->addWidget(frame, 0);
