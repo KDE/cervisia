@@ -115,7 +115,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
                                   : QSplitter::Horizontal;
         splitter = new QSplitter(o, parentWidget, widgetName);
 
-        update = new UpdateView(splitter);
+        update = new UpdateView(*config(), splitter);
         update->setFocusPolicy( QWidget::StrongFocus );
         update->setFocus();
         connect( update, SIGNAL(contextMenu(KListView*, QListViewItem*, const QPoint&)),

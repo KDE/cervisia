@@ -1,3 +1,7 @@
+2003-08-09  André Wöbbeking  <Woebbeking@web.de>
+
+	* Make file view configurable (column order/widths, sorting).
+
 2003-08-02  André Wöbbeking  <Woebbeking@web.de>
 
 	* Fix/Implement FR 56042:

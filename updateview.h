@@ -16,12 +16,15 @@
 #define UPDATEVIEW_H
 
 
-#include "listview.h"
+#include <klistview.h>
 
 #include <qptrlist.h>
 
 
-class UpdateView : public ListView
+class KConfig;
+
+
+class UpdateView : public KListView
 {
     Q_OBJECT
     
@@ -36,8 +39,9 @@ public:
                   NoRemoved=4, NoNotInCVS=8 , NoEmptyDirectories = 16 };
     enum Action { Add, Remove, Update, UpdateNoAct, Commit };
     
-    explicit UpdateView( QWidget *parent=0, const char *name=0 );
-    ~UpdateView();
+    explicit UpdateView(KConfig& partConfig, QWidget *parent=0, const char *name=0);
+
+    virtual ~UpdateView();
 
     void setFilter(Filter filter);
     Filter filter() const;
@@ -76,6 +80,8 @@ private:
     void markUpdated(bool laststage, bool success);
 
     void updateColors();
+
+    KConfig& m_partConfig;
 
     Filter filt;
     Action act;

@@ -29,9 +29,7 @@
 #include <kiconloader.h>
 #include <klocale.h>
 
-#include "config.h"
 #include "misc.h"
-#include "cervisiapart.h"
 #include "cvsdir.h"
 
 
@@ -840,8 +838,9 @@ void UpdateFileItem::paintCell(QPainter *p, const QColorGroup &cg,
 // ------------------------------------------------------------------------------
 
 
-UpdateView::UpdateView(QWidget *parent, const char *name)
-    : ListView(parent, name)
+UpdateView::UpdateView(KConfig& partConfig, QWidget *parent, const char *name)
+    : KListView(parent, name),
+      m_partConfig(partConfig)
 {
     setAllColumnsShowFocus(true);
     setShowSortIndicator(true);
@@ -853,39 +852,25 @@ UpdateView::UpdateView(QWidget *parent, const char *name)
     addColumn(i18n("Tag/Date"));
     addColumn(i18n("Timestamp"));
 
-    QFont myFont(font());
-    myFont.setBold(true);
-
-    const QFontMetrics fm(myFont);
-
-    int width = 0;
-    width = QMAX(width, fm.width(i18n("Updated")));
-    width = QMAX(width, fm.width(i18n("Patched")));
-    width = QMAX(width, fm.width(i18n("Removed")));
-    width = QMAX(width, fm.width(i18n("Needs Update")));
-    width = QMAX(width, fm.width(i18n("Needs Patch")));
-    width = QMAX(width, fm.width(i18n("Needs Merge")));
-    width = QMAX(width, fm.width(i18n("Locally Added")));
-    width = QMAX(width, fm.width(i18n("Locally Removed")));
-    width = QMAX(width, fm.width(i18n("Locally Modified")));
-    width = QMAX(width, fm.width(i18n("Up to date")));
-    width = QMAX(width, fm.width(i18n("Conflict")));
-    width = QMAX(width, fm.width(i18n("Not in CVS")));
-    width = QMAX(width, fm.width(i18n("Unknown")));
-
-    setColumnWidth(UpdateFileItem::Status, width);
-    setPreferredColumn(UpdateFileItem::File);
     setFilter(NoFilter);
 
     connect( this, SIGNAL(doubleClicked(QListViewItem*)),
              this, SLOT(itemExecuted(QListViewItem*)) );
     connect( this, SIGNAL(returnPressed(QListViewItem*)),
              this, SLOT(itemExecuted(QListViewItem*)) );
+
+    // without this restoreLayout() can't change the column widths
+    for (int col = 0; col < columns(); ++col)
+        setColumnWidthMode(col, QListView::Manual);
+
+    restoreLayout(&m_partConfig, QString::fromLatin1("UpdateView"));
 }
 
 
 UpdateView::~UpdateView()
-{}
+{
+    saveLayout(&m_partConfig, QString::fromLatin1("UpdateView"));
+}
 
 
 void UpdateView::setFilter(Filter filter)
@@ -1233,17 +1218,17 @@ void UpdateView::syncSelection()
  */
 void UpdateView::updateColors()
 {
-    KConfig* config(CervisiaPart::config());
-    config->setGroup("Colors");
+    KConfigGroupSaver cs(&m_partConfig, "Colors");
+    m_partConfig.setGroup("Colors");
 
     QColor defaultColor = QColor(255, 130, 130);
-    m_conflictColor = config->readColorEntry("Conflict", &defaultColor);
+    m_conflictColor = m_partConfig.readColorEntry("Conflict", &defaultColor);
 
     defaultColor = QColor(130, 130, 255);
-    m_localChangeColor = config->readColorEntry("LocalChange", &defaultColor);
+    m_localChangeColor = m_partConfig.readColorEntry("LocalChange", &defaultColor);
 
     defaultColor = QColor(70, 210, 70);
-    m_remoteChangeColor = config->readColorEntry("RemoteChange", &defaultColor);
+    m_remoteChangeColor = m_partConfig.readColorEntry("RemoteChange", &defaultColor);
 }
 
 
