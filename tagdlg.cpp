@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -47,13 +47,13 @@ TagDialog::TagDialog(ActionType action, CvsService_stub* service,
             tag_combo = new QComboBox(true, mainWidget);
             tag_combo->setFocus();
             tag_combo->setMinimumWidth(fontMetrics().width('0') * 30);
-            
+
             QLabel *tag_label = new QLabel(tag_combo, i18n("&Name of tag:"), mainWidget);
 
             QPushButton *tag_button = new QPushButton(i18n("Fetch &List"), mainWidget);
             connect( tag_button, SIGNAL(clicked()),
                      this, SLOT(tagButtonClicked()) );
-            
+
             QBoxLayout *tagedit_layout = new QHBoxLayout(layout);
             tagedit_layout->addWidget(tag_label);
             tagedit_layout->addWidget(tag_combo);
@@ -64,7 +64,7 @@ TagDialog::TagDialog(ActionType action, CvsService_stub* service,
             tag_edit = new QLineEdit(mainWidget);
             tag_edit->setFocus();
             tag_edit->setMinimumWidth(fontMetrics().width('0') * 30);
-            
+
             QLabel *tag_label = new QLabel(tag_edit, i18n("&Name of tag:"), mainWidget);
 
             QBoxLayout *tagedit_layout = new QHBoxLayout(layout);
@@ -112,7 +112,7 @@ void TagDialog::slotOk()
         return;
     }
 
-    if (!isValidTag(str))
+    if (!Cervisia::IsValidTag(str))
     {
         KMessageBox::sorry(this,
                            i18n("Tag must start with a letter and may contain "

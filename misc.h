@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
+ *  Copyright (c) 2003 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -23,14 +24,28 @@ class KConfig;
 class CvsService_stub;
 
 
+namespace Cervisia
+{
+
+/**
+ * Verifies that the passed tag name is a valid cvs tag.
+ */
+bool IsValidTag(const QString& tag);
+
+/**
+ * Returns the user name (real name + mail address) for the changelog entry.
+ */
+QString UserName();
+
+}
+
+
 QString joinLine(const QStringList &list);
 QStringList splitLine(QString, char delim=' ');
 
-QString userName();
 QString tempFileName(const QString &suffix);
 void cleanupTempFiles();
 
-bool isValidTag(const QString &str);
 QString cvsClient(const QString &sRepository, KConfig* config);
 
 const QStringList fetchBranches(CvsService_stub* cvsService, QWidget* parent);

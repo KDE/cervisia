@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
@@ -30,7 +30,7 @@
 #endif
 
 
-static QString dateStringISO8601()
+static inline QString DateStringISO8601()
 {
     return QDate::currentDate().toString(Qt::ISODate);
 }
@@ -125,14 +125,14 @@ bool ChangeLogDialog::readFile(const QString &filename)
         }
 
     KConfigGroupSaver cs(&partConfig, "General");
-    const QString username = partConfig.readEntry("Username", userName());
+    const QString username = partConfig.readEntry("Username", Cervisia::UserName());
 
     edit->insertParagraph("", 0);
     edit->insertParagraph("\t* ", 0);
     edit->insertParagraph("", 0);
-    edit->insertParagraph(dateStringISO8601() + "  " + username, 0);
+    edit->insertParagraph(DateStringISO8601() + "  " + username, 0);
     edit->setCursorPosition(2, 10);
-    
+
     return true;
 }
 

@@ -33,6 +33,8 @@
 
 #include <kdeversion.h>
 
+using Cervisia::IsValidTag;
+
 
 CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
                                ActionType action, QWidget *parent,
@@ -163,7 +165,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
     KConfigGroupSaver cs(&partConfig, "CheckoutDialog");
     repo_combo->setEditText(partConfig.readEntry("Repository"));
     workdir_edit->setText(partConfig.readPathEntry("Working directory"));
-            
+
     if (action == Import)
     {
         module_edit->setText(partConfig.readEntry("Module"));
@@ -256,7 +258,7 @@ void CheckoutDialog::slotOk()
                                      i18n("Please specify a vendor tag and a release tag."));
             return;
         }
-        if (!isValidTag(vendorTag()) || !isValidTag(releaseTag()))
+        if (!IsValidTag(vendorTag()) || !IsValidTag(releaseTag()))
         {
             KMessageBox::information(this,
                                      i18n("Tags must start with a letter and may contain\n"
@@ -272,7 +274,7 @@ void CheckoutDialog::slotOk()
 #else
     partConfig.writeEntry("Working directory", workingDirectory());
 #endif
-       
+
     if (act == Import)
     {
         partConfig.writeEntry("Vendor tag", vendorTag());

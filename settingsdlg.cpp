@@ -159,7 +159,7 @@ void SettingsDialog::readSettings()
 
     config->setGroup("General");
     timeoutedit->setValue((int)config->readUnsignedNumEntry("Timeout", 4000));
-    usernameedit->setText(config->readEntry("Username", userName()));
+    usernameedit->setText(config->readEntry("Username", Cervisia::UserName()));
 
     contextedit->setValue((int)config->readUnsignedNumEntry("ContextLines", 65535));
     tabwidthedit->setValue((int)config->readUnsignedNumEntry("TabWidth", 8));

@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
+ *  Copyright (c) 2003 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -95,6 +96,57 @@ static const QStringList FetchBranchesAndTags(const QString& searchedType,
 }
 
 
+bool Cervisia::IsValidTag(const QString& tag)
+{
+    static const QString prohibitedChars("$,.:;@");
+
+    if( !isalpha(tag[0].latin1()) )
+        return false;
+
+    for( uint i = 1; i < tag.length(); ++i )
+    {
+        if( !isgraph(tag[i].latin1()) || prohibitedChars.contains(tag[i]) )
+                return false;
+    }
+
+    return true;
+}
+
+
+QString Cervisia::UserName()
+{
+    // 1. Try to retrieve the information from the control center settings
+    KEMailSettings settings;
+    QString name  = settings.getSetting(KEMailSettings::RealName);
+    QString email = settings.getSetting(KEMailSettings::EmailAddress);
+
+    if( name.isEmpty() || email.isEmpty() )
+    {
+        // 2. Try to retrieve the information from the system
+        struct passwd* pw = getpwuid(getuid());
+        if( !pw )
+            return QString::null;
+
+        char hostname[512];
+        hostname[0] = '\0';
+
+        if( !gethostname(hostname, sizeof(hostname)) )
+            hostname[sizeof(hostname)-1] = '0';
+
+        name  = QString::fromLocal8Bit(pw->pw_gecos);
+        email = QString::fromLocal8Bit(pw->pw_name) + "@" +
+                QString::fromLocal8Bit(hostname);
+    }
+
+    QString result = name;
+    result += "  <";
+    result += email;
+    result += ">";
+
+    return result;
+}
+
+
 QString joinLine(const QStringList &list)
 {
     QString line;
@@ -127,21 +179,6 @@ QStringList splitLine(QString line, char delim)
     if (!line.isEmpty())
 	list.append(line);
     return list;
-}
-
-
-bool isValidTag(const QString &str)
-{
-    if (!isalpha(str[0].latin1()))
-        return false;
-
-    for (int i = 1; i < (int)str.length(); ++i)
-        {
-            if (!isgraph(str[i].latin1()) || QString("$,.:;@").contains(str[i]))
-                return false;
-        }
-
-    return true;
 }
 
 
@@ -188,41 +225,6 @@ const QStringList fetchTags(CvsService_stub* cvsService, QWidget* parent)
 {
     return FetchBranchesAndTags(QString::fromLatin1("revision"), cvsService,
                                 parent);
-}
-
-
-// Gives the user name (real name + mail address) for the changelog entry
-QString userName()
-{
-    // 1. Try to retrieve the information from the control center settings
-    KEMailSettings settings;
-    QString name  = settings.getSetting(KEMailSettings::RealName);
-    QString email = settings.getSetting(KEMailSettings::EmailAddress);
-
-    if (name.isEmpty() || email.isEmpty())
-    {
-        // 2. Try to retrieve the information from the system
-        struct passwd *pw = getpwuid(getuid());
-        if (!pw)
-            return QString::null;
-
-        char hostname[512];
-        hostname[0] = '\0';
-
-        if (!gethostname(hostname, sizeof(hostname)))
-            hostname[sizeof(hostname)-1] = '0';
-
-        name  = QString::fromLocal8Bit(pw->pw_gecos);
-        email = QString::fromLocal8Bit(pw->pw_name) + "@" +
-                QString::fromLocal8Bit(hostname);
-    }
-
-    QString result = name;
-    result += "  <";
-    result += email;
-    result += ">";
-
-    return result;
 }
 
 
