@@ -64,7 +64,7 @@ struct CvsService::Private
     Repository*         repository;
 
     CvsJob* createCvsJob();
-    DCOPRef setupNonConcurrentJob();
+    DCOPRef setupNonConcurrentJob(Repository* repo = 0);
 
     bool hasWorkingCopy();
     bool hasRunningJob();
@@ -210,7 +210,7 @@ DCOPRef CvsService::checkout(const QString& workingDir, const QString& repositor
 
     *d->singleCvsJob << module;
 
-    return d->setupNonConcurrentJob();
+    return d->setupNonConcurrentJob(repo.get());
 }
 
 
@@ -468,7 +468,7 @@ DCOPRef CvsService::import(const QString& workingDir, const QString& repository,
 
     *d->singleCvsJob << module << vendorTag << releaseTag;
 
-    return d->setupNonConcurrentJob();
+    return d->setupNonConcurrentJob(repo.get());
 }
 
 
@@ -796,11 +796,15 @@ CvsJob* CvsService::Private::createCvsJob()
 }
 
 
-DCOPRef CvsService::Private::setupNonConcurrentJob()
+DCOPRef CvsService::Private::setupNonConcurrentJob(Repository* repo)
 {
-    singleCvsJob->setRSH(repository->rsh());
-    singleCvsJob->setServer(repository->server());
-    singleCvsJob->setDirectory(repository->workingCopy());
+    // no explicit repository provided?
+    if( !repo )
+        repo = repository;
+        
+    singleCvsJob->setRSH(repo->rsh());
+    singleCvsJob->setServer(repo->server());
+    singleCvsJob->setDirectory(repo->workingCopy());
 
     return singleJobRef;
 }
