@@ -80,7 +80,7 @@
 <ulink url="http://www.kde.org/apps/cervisia/">&cervisia;</ulink> is a
 user friendly version control system front-end. The aim is to support &CVS; and
 other version control system programs in a unified interface, featuring conflict
-resolution, difference and history viewers, status for the workincopy files,
+resolution, difference and history viewers, status for the working copy files,
 and support for most version control functions. You can get &cervisia;
 by building the kdesdk module or installing the kdesdk package provided by your
 distribution. Currently, only &CVS; is supported, but other version control
@@ -123,7 +123,7 @@ copy to reflect recent changes made by other contributors.
 <title>Accessing The Repository</title>
     
 <para>
-In this section we show how to use the basic version control system
+In this section, we show how to use the basic version control system
 functionality using &cervisia;, basically to checkout modules from the
 repository and work with them. To do that, you must have access to the
 repository as a client, meaning that someone (probably the administrator of
@@ -134,7 +134,7 @@ you can easily create a local repository for your own project.
 <tip><para>
 If you plan to develop a complex project, it is a good idea to use the
 &CVS; features, even if you are the only developer. You can make all changes in
-the workingcopy, and use &cervisia; (or any other &CVS; tool) to update and
+the working copy, and use &cervisia; (or any other &CVS; tool) to update and
 commit. This way, you will gain the ability to track changes that caused bugs,
 revert changes, avoid accidental loss of information, etc. Using &cervisia;, it
 is simple to create a local repository.
@@ -152,7 +152,7 @@ dialog by choosing
 
 <step><para>
 Press the <guilabel>...</guilabel> button to select the folder where you want to
-create the repository, or enter its location in the edit box. For instance, if
+create the repository, or enter its location in the edit box. For instance, if you
 want to place the repository in the <filename>/home/user</filename> folder, and
 to name it <filename>cvsroot</filename>, you should type
 <filename>/home/user/cvsroot</filename> in the edit box, or select the
@@ -176,7 +176,7 @@ folder in the repository to start a new module from scratch.
 
 
 <para>
-&cervisia; offers an integrated front end to manage all your repository
+&cervisia; offers an integrated front-end to manage all your repository
 locations, the <guilabel>Configure Access to Repositories</guilabel> dialog.
 To display it, select the <menuchoice><guimenu>Repository</guimenu>
 <guimenuitem>Repositories...</guimenuitem></menuchoice> menu item.
@@ -215,7 +215,7 @@ used, which can be categorized as follows:
 
 <listitem>
 <para>
-The local access method is the default mathod used by &CVS;. Therefore, it is
+The local access method is the default method used by &CVS;. Therefore, it is
 optional to add the :local: method to the repository location: you can enter
 simply the path to the folder which stores the &CVS;
 repository, and is accessible from your computer, like
@@ -230,7 +230,7 @@ location will be simple the path to it.
 </listitem>
 </varlistentry>
 
-<varlistentry>
+<varlistentry id="rsh">
 <term>rsh</term>
 
 <listitem>
@@ -241,7 +241,7 @@ The repository location is something like
 
 <para>
 This method requires that you have a user account on the server machine (in
-this example, <systemitem class="systemname">host.url.org</systemitem> and
+this example, <systemitem class="systemname">host.url.org</systemitem>) and
 use a remote shell for communication.  By default, &CVS; uses &rsh; for this
 purpose, however, &rsh; is long considered to be insecure, and is widely
 replaced by &ssh;.
@@ -356,7 +356,7 @@ column entry of the pserver repository will change from
 
 <step><para>
 Press <guibutton>OK</guibutton> to apply your modifications, or add another
-location to the list. &cervisia; will store as many locations as you like!.
+location to the list. &cervisia; will store as many locations as you like!
 </para></step>
 
 </procedure>
@@ -426,7 +426,7 @@ the remaining files (as text files). Either way, you will have to
 <link linkend="checkingout">checkout</link> the newly imported module to a
 new working copy, copy the the missing files and folders to it,
 <link linkend="addingfiles">add</link> and
-<link linkend="commitingfiles">commit</link> them to the repository to complete
+<link linkend="committingfiles">commit</link> them to the repository to complete
 the import process.
 </para>
 
@@ -437,7 +437,7 @@ folder in the &CVS; repository root folder. The name of this new folder will be
 the name of the module. <link linkend="checkingout">Checkout</link> the new
 empty module. Then copy the the files and folders to the working copy,
 <link linkend="addingfiles">add</link> and 
-<link linkend="commitingfiles">commit</link> to upload them to the &CVS;
+<link linkend="committingfiles">commit</link> to upload them to the &CVS;
 repository.
 </para>
 
@@ -523,7 +523,7 @@ is the version number of the imported release.
 <varlistentry>
 <term><guilabel>Ignore files:</guilabel></term>
 <listitem><para>
-If you fill out this field, an additional <option>-I <replaceable>filenames</replaceable></option>
+If you fill out this field, an additional <option>-I <replaceable>file names</replaceable></option>
 option is given go the <command>cvs import</command> command. This entry is
 interpreted as a whitespace-separated list of file name patterns which are
 ignored. In general, a cleaner and less error-prone way to control which files
@@ -537,7 +537,7 @@ ignored files, see <xref linkend="ignoredfiles"/>.
 </varlistentry>
 
 <varlistentry>
-<term><guilabel>Comment:</guilabel></term>
+<term><guilabel>Comment:</guilabel> <xref linkend="co-comment" /></term>
 <listitem><para>
 Use this field to record the comments you might have about the origin, use,
 development, &etc;, of the files you are importing.
@@ -566,7 +566,7 @@ instead of the import time.
 <para>After you have filled out this form and confirmed by
 pressing <guibutton>OK</guibutton>, the following &CVS; command is used:</para>
 
-<screen><command>cvs</command> -d <co id="co-repository"></co><replaceable>repository</replaceable> import -m "" <co id="co-module"></co><replaceable>module</replaceable> <co id="co-vendortag"></co><replaceable>vendortag</replaceable> <co id="co-releasetag"></co><replaceable>releasetag</replaceable></screen>
+<screen><command>cvs</command> -d <co id="co-repository"></co><replaceable>repository</replaceable> import -m "<co id="co-comment"></co>" <co id="co-module"></co><replaceable>module</replaceable> <co id="co-vendortag"></co><replaceable>vendortag</replaceable> <co id="co-releasetag"></co><replaceable>releasetag</replaceable></screen>
 
 </sect1>
 
@@ -580,16 +580,29 @@ initial files to the repository, it is time to retrieve the module from the
 </para>
 
 <para>
-You should also know the name of the <firstterm>branch</firstterm> you want to
-use. Branches of a module are parallel versions of this module. A good real
-life example of the use of this feature is the release of a software project.
-After a major release, there are bugs in the code that should be fixed, but
-people want to add new features to the application too. It is very hard to do
-both at the same time because new features usually introduce new bugs, making
-it hard to track down the old ones. To solve this dilemma, &CVS; lets you
-create a parallel version, that we will call the &quot;stable release
-branch&quot;, where you can only add bugfixes, leaving the main branch (HEAD)
-open for adding new features.
+You should also know the name of the <firstterm>branch</firstterm> or
+<firstterm>tag</firstterm> you want to use.
+</para>
+
+<para>
+Branches of a module are parallel versions of this module. A good real life
+example of the use of this feature is the release of a software project. After a
+major release, there are bugs in the code that should be fixed, but people want
+to add new features to the application too. It is very hard to do both at the
+same time because new features usually introduce new bugs, making it hard to
+track down the old ones. To solve this dilemma, &CVS; lets you create a parallel
+version, that we will call the &quot;stable release branch&quot;, where you can
+only add bugfixes, leaving the main branch (HEAD) open for adding new features.
+</para>
+
+<para>
+Tags are used to mark a version of a project. &CVS; stamps one
+version of each file with the tag, so when you checkout or
+update to a specific tag, you will get always the same file versions.
+Therefore, in opposition to branches, tags are not dynamic: you can't develop a
+tag. Tags are useful to mark releases, big changes in the code, &etc;
+Using tags, you can easily return the project to a previous state, to reproduce and
+track bugs, generate the release code again, &etc;
 </para>
 
 <figure id="screenshot-checkout" float="1">
@@ -633,7 +646,7 @@ button.
 <para>
 Note that it is possible to checkout any existing subfolder of the module,
 without retrieving the rest of the module. Just enter the path to the subfolder 
-s well. For instance, if you want to get only the
+as well. For instance, if you want to get only the
 <filename class="directory">doc/cervisia</filename> subfolder of the kdesdk
 module, enter <filename class="directory">kdesdk/doc/cervisia</filename> in this
 field.
@@ -682,7 +695,7 @@ source code for a release.
 
 
 <sect1 id="mainscreen">
-<title>The main screen</title>
+<title>The main screen, viewing file status and updating</title>
 <para>
 When you start &cervisia;, and open a working copy by choosing
 <menuchoice>
@@ -696,12 +709,28 @@ well as the output generated by these commands.
 </para>
 
 <para>
+By default, &cervisia; does not display the files contained by the sub folders,
+so you will have to click the folders you want to see. To display all files
+of the working copy, select
+<menuchoice>
+<guimenu>View</guimenu>
+<guimenuitem>Unfold File Tree</guimenuitem>
+</menuchoice>.
+To close back all folders from the working copy, choose
+<menuchoice>
+<guimenu>View</guimenu>
+<guimenuitem>Fold File Tree</guimenuitem>
+</menuchoice>.
+</para>
+
+<para>
 According to the settings in your
 <filename>.cvsignore</filename> files, the files you usually do not want to
 include into the repository - like e.g. object files - are not shown in the tree
 view. For each file, you see its corresponding status. In the default setting,
-this is "Unknown" because &cervisia; delays the fetching of information until you
-choose
+after opening the sandbox, this is "Unknown" because &cervisia; delays the
+fetching of information until you select the files and folders you want to view
+the status or update and choose
 <menuchoice>
 <guimenu>File</guimenu>
 <guimenuitem>Update</guimenuitem>
@@ -727,10 +756,15 @@ connection to the &CVS; server.
 The commands in the File menu usually act only on the files which you have
 marked. You may also mark folders. Now choose
 <guimenuitem>Status</guimenuitem> from the <guimenu>File</guimenu>
-menu, or press <keycap>F5</keycap>. &cervisia; issues a</para>
+menu, press <keycap>F5</keycap> or right click the marked files
+and choose the
+<menuchoice>
+<guisubmenu>Status</guisubmenu>
+</menuchoice>
+menu item from the pop-up menu. &cervisia; issues a</para>
 
 <para>
-<screen><command>cvs update -n <replaceable>filenames</replaceable></command></screen>
+<screen><command>cvs update -n <replaceable>file names</replaceable></command></screen>
 </para>
 
 <para>
@@ -791,8 +825,8 @@ instead of the whole file to you.
 <term><guilabel>Needs Merge</guilabel></term>
 <listitem><para>
 Indicates that a merge of the revision of this file in your
-working folder with the version in the repository is necessary. This
-typically happens if you have made modifications to the file file while
+working copy with the version in the repository is necessary. This
+typically happens if you have made modifications to the file while
 someone else has committed his modifications. If you choose to update, the
 modifications in the repository are merged into your file. In case of a
 conflict (i.e. if someone else has changed some of the same lines like you)
@@ -832,7 +866,9 @@ repository. If not, you may consider adding it to your
 Now that you have got an overview of the current status of the CVS, you may
 want to do an update. Mark some files (or the root of the folder tree which
 is equivalent to marking all files in this folder). Now choose
-<guimenuitem>Update</guimenuitem> from the <guimenu>File</guimenu> menu. (Of
+<guimenuitem>Update</guimenuitem> from the <guimenu>File</guimenu> menu, or
+right click the marked files and choose the <menuchoice>
+<guisubmenu>Status</guisubmenu></menuchoice> menu item from the pop-up menu. (Of
 course, you could have chosen this at the beginning of the session). For some
 of the files the status may change now. Typically, files which had "Needs
 Patch" or "Needs Update" are updated. So the following new items are possible
@@ -874,6 +910,7 @@ view, click on the header of the <guilabel>File name</guilabel> column.
 </para>
 
 </sect1>
+
 </chapter>
 
    
@@ -886,26 +923,11 @@ main view. Commands usually act on several files at once, namely all which
 currently selected. If the selection includes folders, its interpretation
 depends on the settings made under the <guimenu>Settings</guimenu> menu. For
 example, if <menuchoice><guimenu>Settings</guimenu><guimenuitem>Commit and
-remove recursively</guimenuitem></menuchoice> is checked and you choose
+Remove Recursively</guimenuitem></menuchoice> is checked and you choose
 <menuchoice><guimenu>File</guimenu><guimenuitem>Commit...</guimenuitem></menuchoice>
 while a folder is selected, then all files in the tree under that folder
 are committed. Otherwise, only the regular files in the folder itself are
 affected.
-</para>
-
-<para>
-By default, &cervisia; does not display the files contained by the sub folders,
-so you will have to click the folders you want to sees. To display all files
-of the working copy, select
-<menuchoice>
-<guimenu>View</guimenu>
-<guimenuitem>Unfold File Tree</guimenuitem>
-</menuchoice>.
-To close back all folders from the working copy, choose
-<menuchoice>
-<guimenu>View</guimenu>
-<guimenuitem>Fold File Tree</guimenuitem>
-</menuchoice>.
 </para>
 
 <figure id="screenshot-popup" float="1">
@@ -924,13 +946,13 @@ view, through the pop-up menu. <xref linkend="screenshot-popup" /> shows
 <para>
 You can simply edit a file by double-clicking on it or selecting it and pressing
 <keycap>Return</keycap>. This starts the default application that handles that
-filetype (the default application for each filetype is KDE wide setting). If
+file type (the default application for each file type is a KDE wide setting). If
 the default application is not the one you want to use, you can right click the
 file and choose the
 <menuchoice>
 <guisubmenu>Edit With</guisubmenu>
 </menuchoice>
-submenu, and select the one of the other applications that handle that filetype.
+submenu, and select one of the other applications that handle that file type.
 </para>
 
 <sect1 id="addingfiles">
@@ -959,7 +981,7 @@ asking for confirmation. Press <guibutton>OK</guibutton>.
 <para>&cervisia; issues a command</para>
 
 <para>
-<screen><command>cvs add <replaceable>filenames</replaceable></command></screen>
+<screen><command>cvs add <replaceable>file names</replaceable></command></screen>
 </para>
 
 <para>
@@ -978,8 +1000,8 @@ unusable.
 
 <para>
 In order to switch the above behavior off, you should commit binary files
-(or other files, like Postscript, or PNG images) choosing
-<menuchoice><guimenu>File</guimenu><guimenuitem>Add binary...</guimenuitem></menuchoice>.
+(or other files, like Postscript or PNG images) by choosing
+<menuchoice><guimenu>File</guimenu><guimenuitem>Add Binary...</guimenuitem></menuchoice>.
 The <guilabel>CVS Add</guilabel> dialog will appear, listing the binary files
 you marked, and asking for confirmation. Press <guibutton>OK</guibutton>.
 </para>
@@ -989,7 +1011,7 @@ you marked, and asking for confirmation. Press <guibutton>OK</guibutton>.
 </para>
 
 <para>
-<screen><command>cvs add -kb <replaceable>filenames</replaceable></command></screen>
+<screen><command>cvs add -kb <replaceable>file names</replaceable></command></screen>
 </para>
 
 </sect1>
@@ -1009,7 +1031,7 @@ you marked, and asking for confirmation. Press <guibutton>OK</guibutton>.
 &cervisia; issues the command
 </para>
 <para>
-<screen><command>cvs remove -f <replaceable>filenames</replaceable></command></screen>
+<screen><command>cvs remove -f <replaceable>file names</replaceable></command></screen>
 </para>
 
 <para>
@@ -1041,11 +1063,11 @@ repository).
 
 <para>
 As a substitute, &CVS; follows the convention that a folder is "not
-existent" in a version of the project if is is empty. This convention can be
+existent" in a version of the project if it is empty. This convention can be
 enforced by using the option <option>-P</option> to <command>cvs
 update</command> and <command>cvs checkout</command>. This option can be set
 in the menu <menuchoice><guimenu>Settings</guimenu><guimenuitem>Prune Empty
-Folders On Update</guimenuitem></menuchoice>.
+Folders on Update</guimenuitem></menuchoice>.
 </para>
 
 <para>
@@ -1065,7 +1087,7 @@ afterwards. &cervisia; issues the command
 </sect1>
 
 
-<sect1 id="commitingfiles">
+<sect1 id="committingfiles">
 <title>Committing files</title>
 
 <para>
@@ -1103,7 +1125,7 @@ dialog, the command
 </para>
 
 <para>
-<screen><command>cvs commit -m <replaceable>message</replaceable> <replaceable>filenames</replaceable></command></screen>
+<screen><command>cvs commit -m <replaceable>message</replaceable> <replaceable>file names</replaceable></command></screen>
 </para>
 
 <para>
@@ -1147,7 +1169,7 @@ update to the branch tag before you do further commits.
 With &cervisia;, it is quite easy to maintain a ChangeLog file that is
 compliant with the format laid out in the GNU coding guidelines. To use it,
 choose <menuchoice><guimenu>File</guimenu><guimenuitem>Insert ChangeLog
-entry...</guimenuitem></menuchoice>.  If a file with the name
+Entry...</guimenuitem></menuchoice>.  If a file with the name
 <filename>ChangeLog</filename> exists in the toplevel folder of your
 sandbox, this file will be loaded and you have the possibility to edit it. To
 this end, at the top of the file, an entry with the current date and your user
@@ -1170,7 +1192,7 @@ modified by another developer. The conflict is detected by &CVS; when you
 update the modified file. &CVS; then tries to merge the modifications committed
 by the other developer into your working copy. The merge fails if both your
 and his modifications are in overlapping parts of the file, and the &CVS;
-server issues and error message.
+server issues an error message.
 </para>
 
 <para>
@@ -1187,7 +1209,7 @@ of the files, in the following manner:</para>
 
 <screen>
 &lt;&lt;&lt;&lt;&lt;&lt;&lt;
-Changes in your working folder
+Changes in your working copy
 =======
 Changes in the Repository
 &gt;&gt;&gt;&gt;&gt;&gt;&gt; revision_number
@@ -1201,7 +1223,7 @@ and rewrite a whole routine or the complete file from scratch.
 </para>
 
 <para>
-Fortunately, Cervisia offers a nicer interface for handling these conflicts.
+Fortunately, &cervisia; offers a nicer interface for handling these conflicts.
 This does not mean that you will never need to manually edit the files, but
 at least can eliminate the need to do so for the trivial conflict resolution.
 To use &cervisia;'s <guilabel>CVS Resolve</guilabel> dialog choose
@@ -1258,7 +1280,7 @@ conflicts. You will see the section you just edited in the
 <para>
 To save your modifications, overwriting the working copy version, press
 <guibutton>Save</guibutton>. Note that this will save the choices not only the
-section you are currently viewing, bu all sections in the file. If you want to
+section you are currently viewing, but all sections in the file. If you want to
 save it to another file, press <guibutton>Save As...</guibutton>.
 Press <guibutton>Close</guibutton> to exit the dialog. If you close the dialog
 without saving, the changes you made will be lost.
@@ -1285,7 +1307,7 @@ the differences between revisions of a file:
 <listitem><para>
 In the main view, you can choose
 <menuchoice><guimenu>View</guimenu><guimenuitem>Difference to
-repository... (BASE)</guimenuitem></menuchoice>. This is based on the command
+Repository (BASE)...</guimenuitem></menuchoice>. This is based on the command
 <command>cvs diff</command> and shows you the differences between the version
 in your sandbox and the version to which you last updated (also known as
 <literal>BASE</literal>). This is in particular useful just before you commit
@@ -1296,7 +1318,7 @@ a file, so you can find an appropriate log message.
 You can view the differences between the version in your sandbox and the version
 in the main development branch (also called <literal>HEAD</literal>) choosing
 <menuchoice><guimenu>View</guimenu>
-<guimenuitem>Difference to repository... (HEAD)</guimenuitem></menuchoice>.
+<guimenuitem>Difference to Repository (HEAD)...</guimenuitem></menuchoice>.
 </para></listitem>
 
 <listitem><para>
@@ -1306,8 +1328,8 @@ choosing <menuchoice><guimenu>View</guimenu>
 </para></listitem>
 
 <listitem><para>
-You can access the <guimenuitem>Difference to repository... (BASE)</guimenuitem>,
-<guimenuitem>Difference to repository... (HEAD)</guimenuitem> and 
+You can access the <guimenuitem>Difference to Repository (BASE)...</guimenuitem>,
+<guimenuitem>Difference to Repository (HEAD)...</guimenuitem> and 
 <guimenuitem>Last Change...</guimenuitem> menu items from the main view pop-up
 menu, by right clicking the file you want to view.
 </para></listitem>
@@ -1317,7 +1339,7 @@ In the dialog that is shown when a you commit a set of files, you can request
 a difference window by selecting a file name in the selection list, either by
 double-clicking it or by pressing <keycap>Return</keycap>. This is quite
 similar to using  <menuchoice><guimenu>View</guimenu><guimenuitem>Difference
-to repository... (BASE)</guimenuitem></menuchoice> with the respective file in the
+to Repository (BASE)...</guimenuitem></menuchoice> with the respective file in the
 main view. 
 </para></listitem>
 
@@ -1371,12 +1393,12 @@ the same amount. You can change this by checking the box
 </para>
 
 <para>
-For information about how to customize the diff dialog, see <xref linkend="customize-commands"/>.
+For information about how to customize the diff dialog, see <xref linkend="customize-diff"/>.
 </para>
 
 </sect1>
 
-<sect1 id="patch">
+<sect1 id="creatingpatches">
 <title>Creating patches</title>
 
 <para>
@@ -1408,9 +1430,9 @@ generated.
 
 <para>
 Another possibility is to select one file in the main view and choose
-<guimenuitem>Browse log...</guimenuitem> from the <guimenu>View</guimenu> menu
+<guimenuitem>Browse Log...</guimenuitem> from the <guimenu>View</guimenu> menu
 or right click the marked file and choose
-<guimenuitem>Browse log...</guimenuitem> from the pop-up menu, in order to open
+<guimenuitem>Browse Log...</guimenuitem> from the pop-up menu, in order to open
 the <link linkend="browsinglogs">Browse log dialog</link>. Now, select the
 version you want to create a patch against, as revision &quot;A&quot; and press
 the button <guilabel>Create Patch...</guilabel>. This will generate a patch with
@@ -1436,7 +1458,7 @@ configure the output format.
 <varlistentry>
 <term><guilabel>Output Format</guilabel></term>
 <listitem><para>
-There are output formats available:
+There are three output formats available:
 </para>
 <para>
 <guilabel>Normal</guilabel>: a format that can be used to cause the ed
@@ -1486,7 +1508,7 @@ generating the patch.
 
 <para>
 After setting the output format, &cervisia; generates the patch and diplays the
-<guilabel>Save As</guilabel> dialog. Enter in this dialog the filename
+<guilabel>Save As</guilabel> dialog. Enter in this dialog the file name
 and location of the patch file.
 </para>
 
@@ -1551,13 +1573,13 @@ change.
 
 <para>
 When you mark one file in the main view and choose <guimenuitem>Browse
-log...</guimenuitem> from the <guimenu>View</guimenu> menu
+Log...</guimenuitem> from the <guimenu>View</guimenu> menu
 or right click the marked file and choose
-<guimenuitem>Browse log...</guimenuitem> from the pop-up menu, the
+<guimenuitem>Browse Log...</guimenuitem> from the pop-up menu, the
 <guilabel>CVS Log</guilabel> dialog is shown (if you mark more than one, nothing
 happens, as &cervisia; can only generate and parse the log for one file at a
 time). This dialog offers functionality that is beyond viewing the file's
-history, &ie; using it as a version browser you can:
+history. Using it as a version browser you can:
 </para>
 
 <itemizedlist>
@@ -1664,15 +1686,15 @@ difference file, between your version of the file and any version available in
 &CVS;. After configuring the format of the patch in the dialog, and pressing
 <guibutton>OK</guibutton>, a <command>cvs diff</command> command is issued to
 generate the difference file. A <guilabel>Save As</guilabel> dialog will pop up.
-Enter the filename and location of the patch file &cervisia; generated, in order
+Enter the file name and location of the patch file &cervisia; generated, in order
 to save it. You can get more information about creating patches, and the patch
-format options in <xref linkend="patch" />.
+format options in <xref linkend="creatingpatches" />.
 </para>
 
 <para>
 If you press the <guibutton>View</guibutton> button, &cervisia; will retrieve
 the revision marked as &quot;A&quot; and display it using the default
-application for its filetype.
+application for its file type.
 </para>
 
 <para>
@@ -1688,7 +1710,7 @@ dialog, &cervisia; issues the following command:
 
 
 <para>
-<screen><command>cvs log <replaceable>filename</replaceable></command></screen>
+<screen><command>cvs log <replaceable>file name</replaceable></command></screen>
 </para>
 
 </sect1>
@@ -1744,7 +1766,7 @@ repository. As a consequence, the file was deleted in his working copy.
 
 <listitem><para>
 Update, Copied - A user has made an update on a file. A new version was copied
-into working folder.
+into working copy.
 </para></listitem>
 
 <listitem><para>
@@ -1791,7 +1813,7 @@ there are various filter options activated by check boxes:
 <listitem><para>Show tag events - shows taggings</para></listitem>
 <listitem><para>Show other events - shows events not included in the above</para></listitem>
 <listitem><para>Only user - shows only events caused by a certain user</para></listitem>
-<listitem><para>Only filenames matching - filters file names by a regular expression</para></listitem>
+<listitem><para>Only file names matching - filters file names by a regular expression</para></listitem>
 <listitem><para>Only dirnames matching - filters folder names by a regular expression</para></listitem>
 </itemizedlist>
 
@@ -1839,6 +1861,127 @@ Special characters recognized by the regular expression matcher are:
 <chapter id="advancedusage">
 <title>Advanced usage</title>
 
+<sect1 id="updatingto">
+<title>Updating to tag, branch or date</title>
+
+<para>
+Branches of a module are parallel versions of this module. A good real life
+example of the use of this feature is the release of a software project. After a
+major release, there are bugs in the code that should be fixed, but people want
+to add new features to the application too. It is very hard to do both at the
+same time because new features usually introduce new bugs, making it hard to
+track down the old ones. To solve this dilemma, &CVS; lets you create a parallel
+version, that we will call the &quot;stable release branch&quot;, where you can
+only add bugfixes, leaving the main branch (HEAD) open for adding new features.
+</para>
+
+<para>
+Tags are used to mark a version of a project. &CVS; stamps one
+version of each file with the tag, so when you checkout or
+update to a specific tag, you will get always the same file versions.
+Therefore, in opposition to branches, tags are not dynamic: you can't develop a
+tag. Tags are useful to mark releases, big changes in the code, &etc;
+</para>
+
+<para>
+When you are developing or following the development of a software project,
+you do not necessarily work with the main branch all the time. After a release,
+you may want to stay with the released branch for a while, to enjoy its relative
+stability, fix bugs, translate the sources, &etc; To do all that, you have to
+update to the released branch. All your files will be updated to the latest
+version of the files in that branch. After updating, all your new commits will
+be uploaded to the new branch as well.
+</para>
+
+<para>
+Also, if you want to track a bug that was reported
+against a past tagged release, &CVS; offers you the possibility to retrieve the
+software as it was released, by updating to that tag. Besides, if you want to
+fetch a past version of your project, you can update your working copy to a
+specific date. This may be useful if an error was introduced in the project
+between two releases, and you have an opinion on when that was. When you update
+to a date or tag, the versions of your files will be the same as the versions
+in that specific date or the versions stamped by that tag.
+</para>
+
+<warning><para>
+Before updating to a different branch or tag, make sure you committed all your
+changes to the branch you are working with. If your a not ready to
+commit your changes, but don't want to discard them, do not update to the new
+branch, as you may lose your changes. As an alternative, you can do a new
+<link linkend="checkingout">checkout</link>, to work in parallel with
+both versions.
+</para></warning>
+
+<figure id="screenshot-updatetag" float="1">
+<title>A screenshot of &cervisia;'s update to tag dialog</title>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="updatetag.png"/></imageobject>
+<textobject><phrase>A screenshot of &cervisia;'s update to tag dialog</phrase></textobject>
+</mediaobject>
+</figure>
+
+<variablelist>
+<varlistentry>
+<term><guilabel>Update to branch</guilabel></term>
+<listitem><para>
+Select this option to update to a branch. Enter the name of the branch in the
+drop down edit box (or press the <guilabel>Fetch List</guilabel> button to
+retrieve the list of branches from the &CVS; server, and select the one you want
+in the drop down list).
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Update to tag</guilabel></term>
+<listitem><para>
+Select this option to update to a tag. Enter the name of the tag in the
+drop down edit box (or press the <guilabel>Fetch List</guilabel> button to
+retrieve the list of tags from the &CVS; server, and select the one you want
+in the drop down list).
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Update to date</guilabel></term>
+<listitem><para>
+Select this option to update to a date. In the field below, you can enter a wide
+variety of date formats. One possible format is <literal>yyyy-mm-dd</literal>
+where <literal>yyyy</literal> is the year, <literal>mm</literal> is the month
+(numerically) and <literal>dd</literal> is the day. Alternatives are some
+English phrases like <literal>yesterday</literal> or <literal>2 weeks
+ago</literal>.
+</para></listitem>
+</varlistentry>
+
+</variablelist>
+
+<note><para>
+Updating to a tag or date make them 'sticky', &ie; you can not commit
+further modifications on that files (unless the tag is a branch tag). In order
+to get back to the main branch, use the menu item
+<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Update to
+HEAD</guimenuitem></menuchoice>.
+</para></note>
+
+<para>
+The comand issued to update to a branch or tag is:
+<screen><command>cvs update -r <replaceable>tag</replaceable></command></screen>
+</para>
+
+<para>
+The command issued to update to a date is:
+<screen><command>cvs update -D <replaceable>date</replaceable></command></screen>
+</para>
+
+<para>
+The command issued to update to the main branch (HEAD) is:
+<screen><command>cvs update <option>-A</option></command></screen>
+</para>
+
+</sect1>
+
+
 <sect1 id="taggingbranching">
 <title>Tagging and branching</title>
 
@@ -1875,65 +2018,8 @@ Creating a branch is not significantly more difficult: In the tag dialog,
 check the box <guibutton>Create branch with this tag</guibutton>. You can also
 delete an existing tag: Choose
 <menuchoice><guimenu>Advanced</guimenu><guimenuitem>Delete
-tag</guimenuitem></menuchoice> in the main view.
+Tag</guimenuitem></menuchoice> in the main view.
 </para>
-
-<para>
-There are several ways to update to a certain state of the project:
-</para>
-
-<itemizedlist>
-
-<listitem><para>
-You can update to a certain tag. Use
-<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Update to
-tag/date</guimenuitem></menuchoice> for this. The same procedure is used for
-updating to a branch. The command issued by &cervisia; is
-</para>
-
-<para>
-<screen><command>cvs update -r <replaceable>tag</replaceable></command></screen>
-</para></listitem>
-
-<listitem><para>
-You can update to a certain date. This may be useful if an error was
-introduced in the project between two releases, you know approximately
-between, and have an opinion on when that was. You can go to some date by
-choosing <menuchoice><guimenu>Advanced</guimenu><guimenuitem>Update to
-tag/date</guimenuitem></menuchoice> and checking the box <guibutton>Update to
-date</guibutton>. In the field below, you can enter a wide variety of date
-formats. One possible format is <literal>yyyy-mm-dd</literal> where
-<literal>yyyy</literal> is the year, <literal>mm</literal> is the month
-(numerically) and <literal>dd</literal> is the day. Alternatives are some
-English phrases like <literal>yesterday</literal> or <literal>2 weeks
-ago</literal>. When you use this option, &cervisia; uses the command
-</para>
-
-<para>
-<screen><command>cvs update -D <replaceable>date</replaceable></command></screen>
-</para></listitem>
-
-<listitem><para>
-Both options above make a tag or date 'sticky', i.e. you can not commit
-further modifications on that files (unless the tag is a branch tag). In order
-to get back to the trunk, also known as the branch with the name
-<literal>HEAD</literal>, use the menu item
-<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Update to
-HEAD</guimenuitem></menuchoice>. This results in a command
-</para>
-<para>
-<screen><command>cvs update <option>-A</option></command></screen>
-</para></listitem>
-
-</itemizedlist>
-
-<figure id="screenshot-updatetag" float="1">
-<title>A screenshot of &cervisia;'s update to tag dialog</title>
-<mediaobject>
-<imageobject><imagedata format="PNG" fileref="updatetag.png"/></imageobject>
-<textobject><phrase>A screenshot of &cervisia;'s update to tag dialog</phrase></textobject>
-</mediaobject>
-</figure>
 
 <para>
 Another aspect of branching is the merging of modifications from a branch to
@@ -1988,7 +2074,7 @@ the appendix.
 <para>
 In order to add a watch to one or several files, use
 <menuchoice><guimenu>Advanced</guimenu><guimenuitem>Add
-watch...</guimenuitem></menuchoice>. In the dialog you get, you can choose to
+Watch...</guimenuitem></menuchoice>. In the dialog you get, you can choose to
 get notified for any of the types of events that &CVS; supports. For example,
 if you only want to get notified when a file is committed, check the boxes
 <guibutton>Only</guibutton> and <guibutton>Commits</guibutton>. If you want to
@@ -1998,7 +2084,7 @@ is
 </para>
 
 <para>
-<screen><command>cvs watch add -a commit <replaceable>filenames</replaceable></command></screen>
+<screen><command>cvs watch add -a commit <replaceable>file names</replaceable></command></screen>
 </para>
 
 <para>
@@ -2009,13 +2095,13 @@ or with a similar option, depending on the events you chose to watch.
 If you are not interested in some files anymore, you can remove your watches on
 them. To this end, use
 <menuchoice><guimenu>Advanced</guimenu><guimenuitem>Remove
-watch...</guimenuitem></menuchoice>. In the dialog you get here, the same
+Watch...</guimenuitem></menuchoice>. In the dialog you get here, the same
 options are offered as in the form you filled out when adding the watch. When
 you confirm this dialog, &cervisia; issues the command
 </para>
 
 <para>
-<screen><command>cvs watch remove <replaceable>filenames</replaceable></command></screen>
+<screen><command>cvs watch remove <replaceable>file names</replaceable></command></screen>
 </para>
 
 <para>
@@ -2025,12 +2111,12 @@ possibly with an option <option>-a</option> for the chosen events.
 <para>
 Finally, you can get a list of the people who are watching a couple of
 files. Choose <menuchoice><guimenu>Advanced</guimenu><guimenuitem>Show
-watchers</guimenuitem></menuchoice>. Using this menu item will result in a
+Watchers</guimenuitem></menuchoice>. Using this menu item will result in a
 command
 </para>
 
 <para>
-<screen><command>cvs watchers <replaceable>filenames</replaceable></command></screen>
+<screen><command>cvs watchers <replaceable>file names</replaceable></command></screen>
 </para>
 
 <para>
@@ -2051,7 +2137,7 @@ This will execute the command
 </para>
 
 <para>
-<screen><command>cvs edit <replaceable>filenames</replaceable></command></screen>
+<screen><command>cvs edit <replaceable>file names</replaceable></command></screen>
 </para>
 
 <para>
@@ -2060,12 +2146,12 @@ This will send out a notification to everyone who has set an
 <emphasis>editor</emphasis> of the file. You can obtain a list of all editors
 of a certain file by using
 <menuchoice><guimenu>Advanced</guimenu><guimenuitem>Show
-editors</guimenuitem></menuchoice>. This is equivalent to typing on the
+Editors</guimenuitem></menuchoice>. This is equivalent to typing on the
 command line
 </para>
 
 <para>
-<screen><command>cvs editors <replaceable>filenames</replaceable></command></screen>
+<screen><command>cvs editors <replaceable>file names</replaceable></command></screen>
 </para>
 
 <para>
@@ -2082,7 +2168,7 @@ will get lost. Precisely, &cervisia; uses the command line
 </para>
 
 <para>
-<screen><command>echo y | cvs unedit <replaceable>filenames</replaceable></command></screen>
+<screen><command>echo y | cvs unedit <replaceable>file names</replaceable></command></screen>
 </para>
 
 <para>
@@ -2114,8 +2200,8 @@ that you are working on it.
 
 <para>
 In such a case, it is advisable to check the option
-<menuchoice><guimenu>Settings</guimenu><guimenuitem>Do cvs edit automatically
-when necessary</guimenuitem></menuchoice>. Now, whenever you edit a file by
+<menuchoice><guimenu>Settings</guimenu><guimenuitem>Do cvs edit Automatically
+When Necessary</guimenuitem></menuchoice>. Now, whenever you edit a file by
 double-clicking it, &cervisia; will run <command>cvs edit</command> before the
 editor is actually executed. Then you can edit your file as usual. When you
 have finished your work, commit your files, and the committed files are
@@ -2159,7 +2245,7 @@ This runs the command
 </para>
 
 <para>
-<screen><command>cvs admin -l <replaceable>filenames</replaceable></command></screen>
+<screen><command>cvs admin -l <replaceable>file names</replaceable></command></screen>
 </para>
 
 <para>The reverse effect is achieved by using
@@ -2167,7 +2253,7 @@ This runs the command
 This runs the command</para>
 
 <para>
-<screen><command>cvs admin -u <replaceable>filenames</replaceable></command></screen>
+<screen><command>cvs admin -u <replaceable>file names</replaceable></command></screen>
 </para>
 
 </sect1>
@@ -2190,126 +2276,157 @@ dialog which is available via
 <sect1 id="customize-general">
 <title>General</title>
 
-<formalpara id="customize-username">
-<title>User name for the ChangeLog editor</title>
-<para>
+<variablelist>
+
+<varlistentry id="customize-username">
+<term><guilabel>User name for the ChangeLog editor:</guilabel></term>
+<listitem><para>
 Whenever you use the menu item
 <menuchoice><guimenu>File</guimenu><guimenuitem>Insert ChangeLog
-entry...</guimenuitem></menuchoice>, a new ChangeLog entry is generated with
+Entry...</guimenuitem></menuchoice>, a new ChangeLog entry is generated with
 the current date and your username. Normally, it is considered good style to
 insert your full name and your email address into each of your ChangeLog
-entries. Here you can configure this.
-</para>
-</formalpara>
+entries. &cervisia; adds them automatically the full name and email address
+entered here.
+</para></listitem>
+</varlistentry>
 
-<formalpara id="customize-cvspath">
-<title>Path to cvs</title>
-<para>
+<varlistentry id="customize-cvspath">
+<term><guilabel>Path to cvs executable, or 'cvs':</guilabel></term>
+<listitem><para>
 Here you can set the name (or path) to the <command>cvs</command> command
-line client. By default, the executable found in your <envar>$PATH</envar> is
+line client. By default, the &CVS; executable found in your <envar>$PATH</envar> is
 used by &cervisia;.
-</para>
-</formalpara>
+</para></listitem>
+</varlistentry>
 
-<formalpara id="customize-editor">
-<title>Editor</title>
-<para>
-Here you can configure which editor is called when a file in the main view is
-double-clicked. To execute the editor, the entry made here is concatenated
-with the file name and given to a shell. So it is acceptable to use programs
-like <command>gnuclient</command> here.  You can also enter the string
-<envar>$EDITOR</envar> if your environment variable <envar>$EDITOR</envar>
-points to an editor which opens an X11 window itself.
-</para>
-</formalpara>
+</variablelist>
 
 </sect1>
 
-<sect1 id="customize-commands">
-<title>Various commands</title>
+<sect1 id="customize-diff">
+<title>Diff Viewer</title>
 
-<formalpara id="customize-context">
-<title>Number of context lines in the diff dialog</title>
-<para>
+<variablelist>
+
+<varlistentry id="customize-context">
+<term><guilabel>Number of context lines in the diff dialog:</guilabel></term>
+<listitem><para>
 For the diff dialog, &cervisia; uses the option <option>-U</option> to
 <command>diff</command>. This lets <command>diff</command> show only a limited
-number of lines around each difference region. Here you can set the argument
-to <option>-U</option>.
-</para>
-</formalpara>
+number of lines around each difference region (context lines). Here you can set
+the argument to <option>-U</option>.
+</para></listitem>
+</varlistentry>
 
-<formalpara id="customize-diffopt">
-<title>Additional options for cvs diff</title>
-<para>
+<varlistentry id="customize-diffopt">
+<term><guilabel>Additional options for cvs diff:</guilabel></term>
+<listitem><para>
 Here you can add additional arguments to the <command>diff</command>. A
 popular example is <option>-b</option> which lets <command>diff</command>
 ignore changes in the amount of whitespace.
-</para>
-</formalpara>
+</para></listitem>
+</varlistentry>
 
-<formalpara id="customize-tabwidth">
-<title>Tab width in diff dialog</title>
-<para>
+<varlistentry id="customize-tabwidth">
+<term><guilabel>Tab width in diff dialog:</guilabel></term>
+<listitem><para>
 In the diff dialog, tab characters present in your file or in the output
 of the <command>diff</command> command are expanded into a fixed number of
 space characters. By default, each tab is replaced by eight spaces, but here
 you can setup a different number.
-</para>
-</formalpara>
+</para></listitem>
+</varlistentry>
 
-<formalpara id="customize-difffrontend">
-<title>External diff frontend</title>
-<para>
+<varlistentry id="customize-difffrontend">
+<term><guilabel>External diff frontend:</guilabel></term>
+<listitem><para>
 When you use any of the features which show the diff dialog, like
 <menuchoice><guimenu>View</guimenu><guimenuitem>Difference to
 Repository...</guimenuitem></menuchoice>, &cervisia; invokes its internal diff
 frontend. If you prefer a different one, like
 <application>Kompare</application>, <application>TkDiff</application>, or
-<application>xxdiff</application>, you can configure this here.
-</para>
-</formalpara>
+<application>xxdiff</application>, enter its file name and path here.
+</para></listitem>
+</varlistentry>
 
-<formalpara id="customize-startstatus">
-<title>Start
-<menuchoice><guimenu>File</guimenu><guimenuitem>Status</guimenuitem></menuchoice>
-automatically</title> 
+</variablelist>
 
-<para>
+</sect1>
+
+<sect1 id="customize-status">
+<title>Status</title>
+
+<variablelist>
+
+<varlistentry id="customize-startstatus-remote">
+<term><guilabel>When opening a sandbox from a remote repository, start a
+File-&gt;Status command automatically</guilabel></term>
+<listitem><para>
 When you check this option, the
 <menuchoice><guimenu>File</guimenu><guimenuitem>Status</guimenuitem></menuchoice>
-command is started whenever you open a sandbox. As this command may need some
+command is started whenever you open a remote sandbox. This command may need some
 time and also needs a connection to the server for remote repositories (making
-it unusable for offline usage), you can set this option separately for local
-and remote repositories.
-</para>
-</formalpara>
+it unusable for offline usage).
+</para></listitem>
+</varlistentry>
 
-<formalpara id="customize-timeout">
-<title>Timeout after which a progress dialog appears</title>
-<para>
+<varlistentry id="customize-startstatus-local">
+<term><guilabel>When opening a sandbox from a local repository, start a
+File-&gt;Status command automatically</guilabel></term>
+<listitem><para>
+When you check this option, the
+<menuchoice><guimenu>File</guimenu><guimenuitem>Status</guimenuitem></menuchoice>
+command is started whenever you open a local sandbox.
+</para></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="customize-advanced">
+<title>Advanced</title>
+
+<variablelist>
+
+<varlistentry id="customize-timeout">
+<term><guilabel>Timeout after which a progress dialog appears (in ms):</guilabel></term>
+<listitem><para>
 Practically all &CVS; commands started in a sandbox which belongs to a remote
 repository need a connection to the &CVS; server. This is affected by delays
 from the network connection or a high load on the server. For this reason, for
 commands like <menuchoice><guimenu>View</guimenu><guimenuitem>Difference to
-repository...</guimenuitem></menuchoice> &cervisia; opens a dialog which
+Repository...</guimenuitem></menuchoice> &cervisia; opens a dialog which
 indicates that the command is still running and which allows you to abort
 it. Furthermore, this dialog is used to show you error messages from &CVS;. As
 this dialog may become annoying after some time, it is shown only after a
 certain timeout which is 4 seconds by default. Here you can change this value.
-</para>
-</formalpara>
+</para></listitem>
+</varlistentry>
 
-<formalpara id="customize-compression">
-<title>Default compression level</title>
-<para>
+<varlistentry id="customize-compression">
+<term><guilabel>Default compression level:</guilabel></term>
+<listitem><para>
 The <command>cvs</command> client compresses files and patches when they are
 transferred over a network. With the command line option <option>-z</option>,
 the compression level can be set. You can setup &cervisia; to use this option
 by configuring the level here. The value set here is used only as a default;
 additionally there is a per-repository setting available in
 <menuchoice><guimenu>Repository</guimenu><guimenuitem>Repositories...</guimenuitem></menuchoice>.
-</para>
-</formalpara>
+</para></listitem>
+</varlistentry>
+
+<varlistentry id="customize-sshagent">
+<term><guilabel>Utilize a running or start a new ssh-agent process</guilabel></term>
+<listitem><para>
+Check this box if you use <link linkend="rsh">ext (rsh) repositories</link>,
+the &ssh; remote shell to communicate with the repository and
+<application>ssh-agent</application> to manage your keys.
+</para></listitem>
+</varlistentry>
+
+</variablelist>
 
 </sect1>
 
@@ -2317,36 +2434,54 @@ additionally there is a per-repository setting available in
 <sect1 id="customize-look">
 <title>Look'n'feel</title>
 
-<formalpara id="customize-splitter">
-<title>Split main window horizontally</title>
-<para>
+<variablelist>
+
+<varlistentry id="customize-protocolfont">
+<term><guilabel>Font for protocol window...</guilabel></term>
+<listitem><para>
+Press this button to open the <guilabel>Set Font</guilabel> dialog, to set the
+font used in the protocol window (this is the window showing the
+output of the <command>cvs</command> client).
+</para></listitem>
+</varlistentry>
+
+<varlistentry id="customize-annotatefont">
+<term><guilabel>Font for annotate view...</guilabel></term>
+<listitem><para>
+Press this button to open the <guilabel>Set Font</guilabel> dialog, to set the
+font used in the <link linkend="annotate">annotate view</link>.
+</para></listitem>
+</varlistentry>
+
+<varlistentry id="customize-difffont">
+<term><guilabel>Font for diff view...</guilabel></term>
+<listitem><para>
+Press this button to open the <guilabel>Set Font</guilabel> dialog, to set the
+font used in <link linkend="diff">diff dialogs</link>.
+</para></listitem>
+</varlistentry>
+
+<varlistentry id="customize-colors">
+<term><guilabel>Colors</guilabel></term>
+<listitem><para>
+Press the colored buttons to open the <guilabel>Select Color</guilabel> dialog,
+to set the color used for <guilabel>Conflict</guilabel>, <guilabel>Local
+Change</guilabel>, or <guilabel>Remote Change</guilabel>, in the main view or
+<guilabel>Diff change</guilabel>, <guilabel>Diff insertion</guilabel>, or
+<guilabel>Diff deletion</guilabel>, in &cervisia;'s built-in diff frontend.
+</para></listitem>
+</varlistentry>
+
+<varlistentry id="customize-splitter">
+<term><guilabel>Split main window horizontally</guilabel></term>
+<listitem><para>
 &cervisia;'s main window is normally splitted vertically into a window with
-the file tree and one with the output. Alternatively, you can arrange them
-horizontally.
-</para>
-</formalpara>
+the file tree above and one with the &CVS; output below. Alternatively, you can
+arrange them horizontally.
+</para></listitem>
+</varlistentry>
 
-<formalpara id="customize-protocolfont">
-<title>Font for protocol window</title>
-<para>
-This is the font used in the protocol window. This is the window showing the
-output of the <command>cvs</command> client.
-</para>
-</formalpara>
-
-<formalpara id="customize-annotatefont">
-<title>Font for annotate view</title>
-<para>
-This is the font used in the annotate view.
-</para>
-</formalpara>
-
-<formalpara id="customize-difffont">
-<title>Font for diff view</title>
-<para>
-This is the font used in diff dialogs.
-</para>
-</formalpara>
+</variablelist>
 
 </sect1>
 </chapter>
@@ -2470,7 +2605,7 @@ mailing list</ulink>.
 <guimenu>File</guimenu><guimenuitem>Open Sandbox...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Opens a sandbox in the main window.
+Opens a sandbox in the main window. See <xref linkend="mainscreen" />.
 </para></listitem>
 </varlistentry>
 
@@ -2485,11 +2620,11 @@ Opens one of the sandboxes that were in use recently.
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>File</guimenu><guimenuitem>Insert ChangeLog entry...</guimenuitem>
+<guimenu>File</guimenu><guimenuitem>Insert ChangeLog Entry...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
 Opens the ChangeLog editor, prepared such that you can add a new entry with
-the current date.
+the current date. See <xref linkend="committingfiles" />.
 </para></listitem>
 </varlistentry>
 
@@ -2500,7 +2635,7 @@ the current date.
 </menuchoice></term>
 <listitem><para>
 Runs 'cvs update' on selected files and changes the status and revision
-numbers in the listing accordingly.
+numbers in the listing accordingly. See <xref linkend="mainscreen" />.
 </para></listitem>
 </varlistentry>
 
@@ -2511,7 +2646,7 @@ numbers in the listing accordingly.
 </menuchoice></term>
 <listitem><para>
 Runs 'cvs -n update' on selected files and changes the status and revision
-numbers in the listing accordingly.
+numbers in the listing accordingly. See <xref linkend="mainscreen" />.
 </para></listitem>
 </varlistentry>
 
@@ -2520,7 +2655,7 @@ numbers in the listing accordingly.
 <guimenu>File</guimenu><guimenuitem>Edit</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Opens the selected file in your editor.
+Opens the selected file in KDE's default editor for the selected file's type.
 </para></listitem>
 </varlistentry>
 
@@ -2530,7 +2665,7 @@ Opens the selected file in your editor.
 </menuchoice></term>
 <listitem><para>
 Opens a dialog for the selected file which allows
-you to resolve merge conflicts in it.
+you to resolve merge conflicts in it. See <xref linkend="resolvingconflicts" />.
 </para></listitem>
 </varlistentry>
 
@@ -2540,7 +2675,7 @@ you to resolve merge conflicts in it.
 <guimenu>File</guimenu><guimenuitem>Commit...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Allows you to commit the selected files.
+Allows you to commit the selected files. See <xref linkend="committingfiles" />.
 </para></listitem>
 </varlistentry>
 
@@ -2550,16 +2685,16 @@ Allows you to commit the selected files.
 <guimenu>File</guimenu><guimenuitem>Add to Repository...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Allows you to add the selected files to the repository.
+Allows you to add the selected files to the repository. See <xref linkend="addingfiles" />.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice><guimenu>File</guimenu><guimenuitem>Add binary...</guimenuitem>
+<term><menuchoice><guimenu>File</guimenu><guimenuitem>Add Binary...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
 Allows you to add the selected files to the repository as binaries
-(<command>cvs add<option>-kb</option></command>).
+(<command>cvs add<option>-kb</option></command>). See <xref linkend="addingfiles" />.
 </para></listitem>
 </varlistentry>
 
@@ -2569,9 +2704,11 @@ Allows you to add the selected files to the repository as binaries
 <guimenu>File</guimenu><guimenuitem>Remove from Repository...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Allows you to remove the selected files from the repository.
+Allows you to remove the selected files from the repository. See <xref linkend="removingfiles" />.
 </para></listitem>
 </varlistentry>
+
+<!--TODO: add the revert action to the working with files chapter -->
 
 <varlistentry>
 <term><menuchoice><guimenu>File</guimenu><guimenuitem>Revert</guimenuitem>
@@ -2619,7 +2756,7 @@ Aborts any running subprocesses.
 <guimenu>View</guimenu><guimenuitem>Browse Log...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Shows the revision tree of the selected file.
+Shows the log browser of the selected file versions.  See <xref linkend="browsinglogs" />.
 </para></listitem>
 </varlistentry>
 
@@ -2630,20 +2767,32 @@ Shows the revision tree of the selected file.
 </menuchoice></term>
 <listitem><para>
 Shows an annotated view of the selected file, i.e. a view where you
-can for each line see which author modified it last.
+can for each line see which author modified it last.  See <xref linkend="annotate" />.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><menuchoice>
 <shortcut><keycombo><keycap>&Ctrl;</keycap><keycap>D</keycap></keycombo></shortcut>
-<guimenu>View</guimenu><guimenuitem>Difference to repository...</guimenuitem>
+<guimenu>View</guimenu><guimenuitem>Difference to Repository (BASE)...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
 Shows the differences between the selected file in the sandbox
-and the revision you last updated (BASE).
+and the revision you last updated (BASE). See <xref linkend="diff" />.
 </para></listitem>
 </varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo><keycap>&Ctrl;</keycap><keycap>H</keycap></keycombo></shortcut>
+<guimenu>View</guimenu><guimenuitem>Difference to Repository (HEAD)...</guimenuitem>
+</menuchoice></term>
+<listitem><para>
+Shows the differences between the selected file in the sandbox
+and the revision you last updated (HEAD). See <xref linkend="diff" />.
+</para></listitem>
+</varlistentry>
+
 
 <varlistentry>
 <term><menuchoice>
@@ -2651,7 +2800,7 @@ and the revision you last updated (BASE).
 </menuchoice></term>
 <listitem><para>
 Shows the differences between the revision of the selected
-file you last updated (BASE) and the revision before.
+file you last updated (BASE) and the revision before. See <xref linkend="diff" />.
 </para></listitem>
 </varlistentry>
 
@@ -2660,26 +2809,73 @@ file you last updated (BASE) and the revision before.
 <guimenu>View</guimenu><guimenuitem>History...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Shows the &CVS; history as reported by the server.
+Shows the &CVS; history as reported by the server. See <xref linkend="browsinghistory" />.
+</para></listitem>
+</varlistentry>
+
+<!--TODO: add hide menus to mainscreen section-->
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu><guimenuitem>Hide All Files</guimenuitem>
+</menuchoice></term>
+<listitem><para>
+Determines whether only folders are shown in the main tree view. See <xref linkend="mainscreen" />.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>View</guimenu><guimenuitem>Unfold file tree</guimenuitem>
+<guimenu>View</guimenu><guimenuitem>Hide Unmodified Files</guimenuitem>
+</menuchoice></term>
+<listitem><para>
+Determines whether unknown and up to date files are hidden in the main tree view. See <xref linkend="mainscreen" />.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu><guimenuitem>Hide Removed Files</guimenuitem>
+</menuchoice></term>
+<listitem><para>
+Determines whether removed files are hidden in the main tree view. See <xref linkend="mainscreen" />.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu><guimenuitem>Hide Non-CVS Files</guimenuitem>
+</menuchoice></term>
+<listitem><para>
+Determines whether files not in CVS are hidden in the main tree view. See <xref linkend="mainscreen" />.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu><guimenuitem>Hide Non-CVS Files</guimenuitem>
+</menuchoice></term>
+<listitem><para>
+Determines whether without visible entries are hidden in the main tree view. See <xref linkend="mainscreen" />.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu><guimenuitem>Unfold File Tree</guimenuitem>
 </menuchoice></term>
 <listitem><para>
 Opens all branches in the file tree so that you can
-see all files and folders.
+see all files and folders. See <xref linkend="mainscreen" />.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>View</guimenu><guimenuitem>Fold file tree</guimenuitem>
+<guimenu>View</guimenu><guimenuitem>Fold File Tree</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Closes all branches in the file tree.
+Closes all branches in the file tree. See <xref linkend="mainscreen" />.
 </para></listitem>
 </varlistentry>
 
@@ -2699,16 +2895,16 @@ Closes all branches in the file tree.
 <guimenu>Advanced</guimenu><guimenuitem>Tag/Branch...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Tags or branches the selected files.
+Tags or branches the selected files. See <xref linkend="taggingbranching" />.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Advanced</guimenu><guimenuitem>Delete tag...</guimenuitem>
+<guimenu>Advanced</guimenu><guimenuitem>Delete Tag...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Removes a given tag from the selected files.
+Removes a given tag from the selected files. See <xref linkend="taggingbranching" />.
 </para></listitem>
 </varlistentry>
 
@@ -2718,7 +2914,7 @@ Removes a given tag from the selected files.
 </menuchoice></term>
 <listitem><para>
 Brings the selected files to a given tag or date,
-making it sticky.
+making it sticky. See <xref linkend="updatingto" />.
 </para></listitem>
 </varlistentry>
 
@@ -2727,7 +2923,7 @@ making it sticky.
 <guimenu>Advanced</guimenu><guimenuitem>Update to HEAD...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Brings the selected files to the respective HEAD revision.
+Brings the selected files to the respective HEAD revision. See <xref linkend="updatingto" />.
 </para></listitem>
 </varlistentry>
 
@@ -2737,32 +2933,32 @@ Brings the selected files to the respective HEAD revision.
 </menuchoice></term>
 <listitem><para>
 Merges either a given branch or the modifications
-between two tags into the selected files.
+between two tags into the selected files. See <xref linkend="taggingbranching" />.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Advanced</guimenu><guimenuitem>Add watch...</guimenuitem>
+<guimenu>Advanced</guimenu><guimenuitem>Add Watch...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Adds a watch for a set of events on the selected files.
+Adds a watch for a set of events on the selected files. See <xref linkend="watches" />.
 </para></listitem>
 </varlistentry>
 <varlistentry>
 <term><menuchoice>
-<guimenu>Advanced</guimenu><guimenuitem>Remove watch...</guimenuitem>
+<guimenu>Advanced</guimenu><guimenuitem>Remove Watch...</guimenuitem>
 </menuchoice></term>
-<listitem><para>Removes a watch for a set of events from the selected files.
+<listitem><para>Removes a watch for a set of events from the selected files. See <xref linkend="watches" />.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Advanced</guimenu><guimenuitem>Show watchers</guimenuitem>
+<guimenu>Advanced</guimenu><guimenuitem>Show Watchers</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Lists the watchers of the selected files.
+Lists the watchers of the selected files. See <xref linkend="watches" />.
 </para></listitem>
 </varlistentry>
 
@@ -2771,7 +2967,7 @@ Lists the watchers of the selected files.
 <guimenu>Advanced</guimenu><guimenuitem>Edit</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Runs <command>cvs edit</command> on the selected files.
+Runs <command>cvs edit</command> on the selected files. See <xref linkend="watches" />.
 </para></listitem>
 </varlistentry>
 
@@ -2780,16 +2976,16 @@ Runs <command>cvs edit</command> on the selected files.
 <guimenu>Advanced</guimenu><guimenuitem>Unedit</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Runs <command>cvs unedit</command> on the selected files.
+Runs <command>cvs unedit</command> on the selected files. See <xref linkend="watches" />.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Advanced</guimenu><guimenuitem>Show editors</guimenuitem>
+<guimenu>Advanced</guimenu><guimenuitem>Show Editors</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Runs <command>cvs editors</command> on the selected files.
+Runs <command>cvs editors</command> on the selected files. See <xref linkend="watches" />.
 </para></listitem>
 </varlistentry>
 
@@ -2798,7 +2994,7 @@ Runs <command>cvs editors</command> on the selected files.
 <guimenu>Advanced</guimenu><guimenuitem>Lock</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Locks the selected files.
+Locks the selected files. See <xref linkend="locking" />.
 </para></listitem>
 </varlistentry>
 
@@ -2807,16 +3003,16 @@ Locks the selected files.
 <guimenu>Advanced</guimenu><guimenuitem>Unlock</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Unlocks the selected files.
+Unlocks the selected files. See <xref linkend="locking" />.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Advanced</guimenu><guimenuitem>Create patch against repository...</guimenuitem>
+<guimenu>Advanced</guimenu><guimenuitem>Create Patch Against Repository...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Creates a patch from the modifications in your sandbox.
+Creates a patch from the modifications in your sandbox. See <xref linkend="creatingpatches" />.
 </para></listitem>
 </varlistentry>
 
@@ -2833,11 +3029,20 @@ Creates a patch from the modifications in your sandbox.
 
 <varlistentry>
 <term><menuchoice>
+<guimenu>Repository</guimenu><guimenuitem>Create...</guimenuitem>
+</menuchoice></term>
+<listitem><para>Opens a dialog which allows you to create a new local
+repository.  See <xref linkend="accessing-repository" />.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
 <guimenu>Repository</guimenu><guimenuitem>Checkout...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
 Opens a dialog which allows you to checkout
-a module from a repository.
+a module from a repository. See <xref linkend="checkingout" />.
 </para></listitem>
 </varlistentry>
 
@@ -2847,7 +3052,7 @@ a module from a repository.
 </menuchoice></term>
 <listitem><para>
 Opens a dialog which allows you to import
-a package into the repository.
+a package into the repository. See <xref linkend="importing" />.
 </para></listitem>
 </varlistentry>
 
@@ -2856,7 +3061,7 @@ a package into the repository.
 <guimenu>Repository</guimenu><guimenuitem>Repositories...</guimenuitem>
 </menuchoice></term>
 <listitem><para>Configures a list of repositories you often use
-and how to access them.
+and how to access them.  See <xref linkend="accessing-repository" />.
 </para></listitem>
 </varlistentry>
 
@@ -2872,25 +3077,16 @@ and how to access them.
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Settings</guimenu><guimenuitem>Configure Shortcuts...</guimenuitem>
+<guimenu>Settings</guimenu><guimenuitem>Show Toolbar</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Opens a dialog for configuring keybindings.
+Determines whether the toolbar is displayed.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Settings</guimenu><guimenuitem>Configure Cervisia...</guimenuitem>
-</menuchoice></term>
-<listitem><para>
-Opens a dialog for customizing &cervisia;.
-</para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice>
-<guimenu>Settings</guimenu><guimenuitem>Create folders on update</guimenuitem>
+<guimenu>Settings</guimenu><guimenuitem>Create Folders on Update</guimenuitem>
 </menuchoice></term>
 <listitem><para>
 Determines whether updates create folders in the sandbox which weren't
@@ -2900,7 +3096,7 @@ there before (Option <option>-d</option> to <command>cvs update</command>).
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Settings</guimenu><guimenuitem>Prune empty folders on update</guimenuitem>
+<guimenu>Settings</guimenu><guimenuitem>Prune Empty Folders on Update</guimenuitem>
 </menuchoice></term>
 <listitem><para>
 Determines whether updates remove empty folders in the sandbox. (Option
@@ -2910,7 +3106,7 @@ Determines whether updates remove empty folders in the sandbox. (Option
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Settings</guimenu><guimenuitem>Update recursively</guimenuitem>
+<guimenu>Settings</guimenu><guimenuitem>Update Recursively</guimenuitem>
 </menuchoice></term>
 <listitem><para>
 Determines whether updates are recursive (Option <option>-r</option> to
@@ -2920,7 +3116,7 @@ Determines whether updates are recursive (Option <option>-r</option> to
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Settings</guimenu><guimenuitem>Commit and remove recursively</guimenuitem>
+<guimenu>Settings</guimenu><guimenuitem>Commit and Remove Recursively</guimenuitem>
 </menuchoice></term>
 <listitem><para>Determines whether commits and removes are recursive
 (Option <option>-r</option> to <command>cvs add</command>,
@@ -2930,11 +3126,38 @@ Determines whether updates are recursive (Option <option>-r</option> to
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Settings</guimenu><guimenuitem>Do cvs edit automatically when necessary</guimenuitem>
+<guimenu>Settings</guimenu><guimenuitem>Do cvs edit Automatically When Necessary</guimenuitem>
 </menuchoice></term>
 <listitem><para>
 Determines whether <command>cvs edit</command> is executed automatically
 whenever you edit a file.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu><guimenuitem>Configure Shortcuts...</guimenuitem>
+</menuchoice></term>
+<listitem><para>
+Opens a dialog for configuring keybindings.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu><guimenuitem>Configure Toolbars...</guimenuitem>
+</menuchoice></term>
+<listitem><para>
+Opens a dialog for configuring &cervisia;'s toolbars.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu><guimenuitem>Configure Cervisia...</guimenuitem>
+</menuchoice></term>
+<listitem><para>
+Opens a dialog for customizing &cervisia;.
 </para></listitem>
 </varlistentry>
 
@@ -2951,7 +3174,7 @@ whenever you edit a file.
 <varlistentry>
 <term><menuchoice>
 <shortcut><keycap>F1</keycap></shortcut>
-<guimenu>Help</guimenu><guimenuitem>Cervisia Handbook</guimenuitem>
+<guimenu>Help</guimenu><guimenuitem>Handbook</guimenuitem>
 </menuchoice></term>
 <listitem><para>
 Invokes the KDE Help system starting at the &cervisia; help pages. (this
