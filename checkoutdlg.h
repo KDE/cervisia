@@ -15,52 +15,44 @@
 #ifndef CHECKOUTDLG_H
 #define CHECKOUTDLG_H
 
-#include <qdialog.h>
-#include <qcombobox.h>
-#include <qcheckbox.h>
-#include <klineedit.h>
 
+#include <kdialogbase.h>
+
+
+class QCheckBox;
+class QComboBox;
 class KConfig;
+class KLineEdit;
 
 
-class CheckoutDialog : public QDialog
+class CheckoutDialog : public KDialogBase
 {
     Q_OBJECT
 
 public:
     enum ActionType { Checkout, Import };
     
-    CheckoutDialog( ActionType action, QWidget *parent=0, const char *name=0 );
+    explicit CheckoutDialog( ActionType action, QWidget *parent=0, const char *name=0 );
 
-    QString workingDirectory() const
-        { return workdir_edit->text(); }
-    QString repository() const
-        { return repo_combo->currentText(); }
-    QString module() const
-        { return act==Import? module_edit->text() : module_combo->currentText(); }
-    QString branch() const
-        { return branch_edit->text(); }
-    QString vendorTag() const
-        { return vendortag_edit->text(); }
-    QString releaseTag() const
-        { return releasetag_edit->text(); }
-    QString ignoreFiles() const
-        { return ignore_edit->text(); }
-    QString comment() const
-        { return comment_edit->text(); }
-    bool importBinary() const
-        { return binary_box->isChecked(); }
+    QString workingDirectory() const;
+    QString repository() const;
+    QString module() const;
+    QString branch() const;
+    QString vendorTag() const;
+    QString releaseTag() const;
+    QString ignoreFiles() const;
+    QString comment() const;
+    bool importBinary() const;
 
     static void loadOptions(KConfig *config);
     static void saveOptions(KConfig *config);
     
 protected:
-    virtual void done(int r);
+    virtual void slotOk();
     
 private slots:
     void dirButtonClicked();
     void moduleButtonClicked();
-    void helpClicked();
 
 private:
     struct Options {
@@ -80,7 +72,6 @@ private:
     KLineEdit *branch_edit, *comment_edit;
     KLineEdit *vendortag_edit, *releasetag_edit, *ignore_edit;
     QCheckBox *binary_box;
-    QPushButton *ok_button, *cancel_button;
     ActionType act;
 };
 
