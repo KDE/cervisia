@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -142,7 +142,7 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
     listview->addColumn(i18n("Author"));
     listview->addColumn(i18n("Revision"));
     listview->addColumn(i18n("File"));
-    listview->addColumn(i18n("Repo path"));
+    listview->addColumn(i18n("Repo Path"));
     listview->setFocus();
     layout->addWidget(listview, 1);
 
