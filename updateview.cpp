@@ -1217,18 +1217,14 @@ void UpdateView::updateItem(const QString &name, Status status, bool isdir)
     // the missing leaves. longestmatch is the directory item where we have to attach
     kdDebug() << "longest match: " << longestmatchPath << endl;
     kdDebug() << "leaves: " <<  dirpath.mid(longestmatchPath.length()) << endl;
-    QStringList leaves = QStringList::split('/', dirpath.mid(longestmatchPath.length()));
-    for (int i=0; i < (int)leaves.count(); ++i)
+    const QStringList& leaves(QStringList::split('/', dirpath.mid(longestmatchPath.length())));
+    QString newFileName(longestmatchPath);
+    for (QStringList::ConstIterator it(leaves.begin()); it != leaves.end(); ++it)
         {
-            QString newFileName = longestmatchPath;
-            for (int j=0; j < i; ++j)
-                {
-                    newFileName += leaves[j];
-                    newFileName += '/';
-                }
-            newFileName += leaves[i];
+            newFileName += *it;
             kdDebug() << "add missing " << newFileName << endl;
             updateItem(newFileName, Unknown, true);
+            newFileName += '/';
         }
     // Recursive, but now it should work
     updateItem(name, status, isdir);
