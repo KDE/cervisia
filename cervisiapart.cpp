@@ -56,6 +56,7 @@
 #include "misc.h"
 #include "cvsservice_stub.h"
 #include "repository_stub.h"
+#include "globalignorelist.h"
 
 #include "cervisiapart.h"
 #include "version.h"
@@ -1595,6 +1596,8 @@ bool CervisiaPart::openSandbox(const QString &dirname)
     // get repository for the caption of the window
     repository = cvsRepository.location();
     emit setWindowCaption(sandbox + "(" + repository + ")");
+
+    Cervisia::GlobalIgnoreList().retrieveServerIgnoreList(cvsService, repository);
 
     // set m_url member for tabbed window modus of Konqueror
     m_url = KURL::fromPathOrURL(sandbox);
