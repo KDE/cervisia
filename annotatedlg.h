@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -21,13 +21,14 @@
 
 class AnnotateView;
 class QDate;
+class KConfig;
 
 
 class AnnotateDialog : public KDialogBase
 {
 public:
 
-    explicit AnnotateDialog( QWidget *parent=0, const char *name=0 );
+    explicit AnnotateDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
 
     virtual ~AnnotateDialog();
 
@@ -36,6 +37,7 @@ public:
 
 private:
     AnnotateView *annotate;
+    KConfig&      partConfig;
 };
 
 #endif

@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -14,12 +14,19 @@
 
 #include "annotatedlg.h"
 
+#include <kdeversion.h>
+
 #include "annotateview.h"
 
+#if KDE_VERSION < KDE_MAKE_VERSION(3,1,90)
+#include "configutils.h"
+#endif
 
-AnnotateDialog::AnnotateDialog(QWidget *parent, const char *name)
+
+AnnotateDialog::AnnotateDialog(KConfig& cfg, QWidget *parent, const char *name)
     : KDialogBase(parent, name, false, QString::null,
                   Close | Help, Close, true)
+    , partConfig(cfg)
 {
     annotate = new AnnotateView(this);
     setMainWidget(annotate);
@@ -28,14 +35,22 @@ AnnotateDialog::AnnotateDialog(QWidget *parent, const char *name)
 
     setWFlags(Qt::WDestructiveClose | getWFlags());
 
-    QSize size = configDialogSize("AnnotateDialog");
+#if KDE_IS_VERSION(3,1,90)
+    QSize size = configDialogSize(partConfig, "AnnotateDialog");
+#else
+    QSize size = Cervisia::configDialogSize(this, partConfig, "AnnotateDialog");
+#endif
     resize(size);
 }
 
 
 AnnotateDialog::~AnnotateDialog()
 {
-    saveDialogSize("AnnotateDialog", true);
+#if KDE_IS_VERSION(3,1,90)
+    saveDialogSize(partConfig, "AnnotateDialog");
+#else
+    Cervisia::saveDialogSize(this, partConfig, "AnnotateDialog");
+#endif
 }
 
 

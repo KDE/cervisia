@@ -38,6 +38,8 @@
 #include "misc.h"
 #include "progressdlg.h"
 
+#include "cervisiapart.h"       // FIXME
+
 
 LogDialog::Options *LogDialog::options = 0;
 
@@ -67,7 +69,7 @@ LogDialog::LogDialog(QWidget *parent, const char *name)
     QWhatsThis::add(tree, i18n("Choose revision A by clicking with the left"
 			       "mouse button,\nrevision B by clicking with "
 			       "the middle mouse button."));
-    
+
     items.setAutoDelete(true);
     tags.setAutoDelete(true);
 
@@ -86,7 +88,7 @@ LogDialog::LogDialog(QWidget *parent, const char *name)
 	    grid->setColStretch(2, 0);
 	    grid->setColStretch(3, 1);
 	    grid->setColStretch(4, 2);
-	    
+
 	    QString versionident = (i==0)? i18n("Revision A:") : i18n("Revision B:");
 	    QLabel *versionlabel = new QLabel(versionident, mainWidget);
 	    grid->addWidget(versionlabel, 0, 0);
@@ -94,10 +96,10 @@ LogDialog::LogDialog(QWidget *parent, const char *name)
 	    revbox[i] = new QLabel(mainWidget);
 	    revbox[i]->setFrameStyle(QFrame::Panel | QFrame::Sunken);
 	    grid->addWidget(revbox[i], 0, 1, Qt::AlignVCenter);
-            
+
             QLabel *selectlabel = new QLabel(i18n("Select by tag:"), mainWidget);
             grid->addWidget(selectlabel, 0, 2);
-            
+
             tagcombo[i] = new QComboBox(mainWidget);
             QFontMetrics fm(tagcombo[i]->fontMetrics());
             tagcombo[i]->setMinimumWidth(fm.width("X")*20);
@@ -406,7 +408,7 @@ void LogDialog::diffClicked()
 
 void LogDialog::annotateClicked()
 {
-    AnnotateDialog *l = new AnnotateDialog();
+    AnnotateDialog *l = new AnnotateDialog(*CervisiaPart::config());    // FIXME
     AnnotateController ctl(l, cvsService);
     ctl.showDialog(filename, selectionA);
 }
