@@ -38,7 +38,6 @@ public:
 public slots:
     void slotConfigureKeys();
     void slotConfigureToolBars();
-    void slotExit();
 
 protected slots:
     void slotNewToolbarConfig();

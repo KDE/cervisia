@@ -122,8 +122,6 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
 CervisiaPart::~CervisiaPart()
 {
     // stop the cvs DCOP service
-    // FIXME: It seems as if this destructor isn't always called
-    //        i.e. File->Quit
     cvsService.send("quit");
 }
 

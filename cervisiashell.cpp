@@ -23,6 +23,7 @@
 #include <khelpmenu.h>
 #include <kkeydialog.h>
 #include <klocale.h>
+#include <kmessagebox.h>
 #include <kstdaction.h>
 #include <kstatusbar.h>
 #include <kurl.h>
@@ -35,8 +36,21 @@ CervisiaShell::CervisiaShell( const char *name )
 {
     setXMLFile( "cervisiashellui.rc" );
 
-    part = new CervisiaPart( this, "cervisiaview", this, "cervisiapart" );
-    setCentralWidget( part->widget() );
+    KLibFactory* factory = KLibLoader::self()->factory("libcervisiapart");
+    if( factory )
+    {
+        part = static_cast<CervisiaPart*>(factory->create(this,
+                                            "cervisiaview", "CervisiaPart"));
+        if( part )
+            setCentralWidget(part->widget());
+    }
+    else
+    {
+        KMessageBox::error(this, "Could not find our Part!");
+        kapp->quit();
+        return;
+    }
+    
 
     setupActions();
 
@@ -91,7 +105,7 @@ void CervisiaShell::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = KStdAction::quit( this, SLOT( slotExit() ), actionCollection() );
+    action = KStdAction::quit( kapp, SLOT( quit() ), actionCollection() );
     hint = i18n("Exits Cervisia");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -141,12 +155,6 @@ void CervisiaShell::slotNewToolbarConfig()
 void CervisiaShell::slotChangeFilterStatus(QString status)
 {
     filterLabel->setText(status);
-}
-
-void CervisiaShell::slotExit()
-{
-    (void) queryExit();
-    kapp->quit();
 }
 
 bool CervisiaShell::queryExit()
