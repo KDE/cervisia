@@ -1,3 +1,11 @@
+2002-12-29  Christian Loose <christian.loose@hamburg.de>
+
+	* Extract AddRepositoryDialog from repositorydlg.cpp
+	* Save and read repository configuration to/from the
+	  configuration file of the cvs DCOP service
+	* Added kconf_update script to copy repository configuration
+	  to cvsservicerc
+
 2002-12-28  Christian Loose <christian.loose@hamburg.de>
 
 	* Start and stop cvs DCOP service in CervisiaPart
@@ -5,7 +13,7 @@
 	* Use DCOP service for annotate dialog
 	* Several changes to the DCOP service
 	* Added new parseCvsLog() method to LogDialog that 
-          uses the new cvs DCOP service
+	  uses the new cvs DCOP service
 	* Save and read cvs client and global compression level configuration
 	  to/from the configuration file of the cvs DCOP service
 	* Added kconf_update script

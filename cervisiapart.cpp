@@ -1768,8 +1768,6 @@ void CervisiaPart::readDialogProperties( KConfig *config )
     HistoryDialog::loadOptions(config);
     config->setGroup("Repository dialog");
     RepositoryDialog::loadOptions(config);
-    config->setGroup("AddRepository dialog");
-    AddRepositoryDialog::loadOptions(config);
 }
 
 
@@ -1797,8 +1795,6 @@ void CervisiaPart::saveDialogProperties( KConfig *config )
     HistoryDialog::saveOptions(config);
     config->setGroup("Repository dialog");
     RepositoryDialog::saveOptions(config);
-    config->setGroup("AddRepository dialog");
-    AddRepositoryDialog::saveOptions(config);
 }
 
 CervisiaBrowserExtension::CervisiaBrowserExtension( CervisiaPart *p )

@@ -13,7 +13,8 @@ libcervisia_la_SOURCES = updateview.cpp protocolview.cpp watchdlg.cpp \
 		   logdlg.cpp logtree.cpp loglist.cpp diffdlg.cpp resolvedlg.cpp diffview.cpp \
 		   annotatedlg.cpp annotateview.cpp progressdlg.cpp progressdlg.skel \
 		   cvsprogressdlg.cpp tiplabel.cpp listview.cpp \
-		   cvsdir.cpp repositories.cpp misc.cpp cervisiapart.cpp qttableview.cpp
+		   cvsdir.cpp repositories.cpp misc.cpp cervisiapart.cpp qttableview.cpp \
+		   addrepositorydlg.cpp
 libcervisia_la_LDFLAGS = $(all_libraries) -version-info 1:0:0 -module -no-undefined
 libcervisia_la_LIBADD = $(LIB_KFILE) $(LIB_KPARTS) $(LIB_DCOP)
 
@@ -37,7 +38,7 @@ partrc_DATA = cervisiaui.rc
 shellrcdir = $(kde_datadir)/cervisia
 shellrc_DATA = cervisiashellui.rc
 
-update_DATA = cervisia.upd
+update_DATA = cervisia.upd move_repositories.pl
 updatedir = $(kde_datadir)/kconf_update
 
 messages: rc.cpp
