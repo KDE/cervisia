@@ -17,6 +17,7 @@
 #include <kcmdlineargs.h>
 #include <kconfig.h>
 #include <klocale.h>
+#include <kurl.h>
 
 #include "misc.h"
 #include "cervisiashell.h"
@@ -62,15 +63,20 @@ int main(int argc, char **argv)
     if ( app.isRestored() ) {
         RESTORE(CervisiaShell);
     } else {
-        QString dirname = QString(KCmdLineArgs::parsedArgs()->count()?
-                                  KCmdLineArgs::parsedArgs()->arg(0) : "");
+        CervisiaShell* shell = new CervisiaShell();
         
-        CervisiaShell *t = new CervisiaShell();
-               
-        t->restorePseudo(dirname);
-        t->setIcon(app.icon());
-        app.setMainWidget(t);
-        t->show();
+        QString dirname;                        // TODO: remove later
+        shell->restorePseudo(dirname);          // - dito -
+        
+        const KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
+        QString dirName = args->count() ? args->arg(0) : QString::null;       
+
+        if( !dirName.isEmpty() )
+            shell->openURL(KURL::fromPathOrURL(dirName));
+            
+        shell->setIcon(app.icon());
+        app.setMainWidget(shell);
+        shell->show();
     }
     
     int res = app.exec();

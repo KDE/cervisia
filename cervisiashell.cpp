@@ -137,6 +137,13 @@ void CervisiaShell::setupActions()
     action->setWhatsThis( hint );
 }
 
+
+void CervisiaShell::openURL(const KURL& url)
+{
+    part->openURL(url);
+}
+
+
 void CervisiaShell::slotConfigureKeys()
 {
     KKeyDialog::configureKeys( actionCollection(), xmlFile() );
