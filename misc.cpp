@@ -178,7 +178,7 @@ QString userName()
     QString name  = settings.getSetting(KEMailSettings::RealName);
     QString email = settings.getSetting(KEMailSettings::EmailAddress);
     
-    if (name.isNull() || email.isNull())
+    if (name.isEmpty() || email.isEmpty())
     {
         // 2. Try to retrieve the information from the system
         struct passwd *pw = getpwuid(getuid());
