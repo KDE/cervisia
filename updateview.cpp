@@ -307,7 +307,7 @@ void UpdateDirItem::syncWithEntries()
 	    time_t time;
 
 	    oldLocale = setlocale(LC_TIME, "C");
-	    strptime(timestamp, "%c" , &tmp);
+	    strptime(timestamp.local8Bit(), "%c" , &tmp);
 	    setlocale(LC_TIME, oldLocale);
 	    time = mktime(&tmp);
 	    updateEntriesItem(name, status, isdir, rev, tagdate, time);
