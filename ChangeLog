@@ -1,6 +1,15 @@
+2002-12-18  Christian Loose <christian.loose@hamburg.de>
+
+	* Added a new progress dialog that will replace
+	  CvsProgressDialog in the near future
+
 2002-12-17  Christian Loose <christian.loose@hamburg.de>
 
 	* Fixed "fetch of branch list hangs in update dialog" (#50824)
+
+2002-12-14  Christian Loose <christian.loose@hamburg.de>
+
+	* Added first version of cvs DCOP service
 
 2002-12-12  Christian Loose <christian.loose@hamburg.de>
 
