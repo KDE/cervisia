@@ -78,8 +78,8 @@ bool ProtocolView::startJob(const QString &sandbox, const QString &repository,
     childproc = new KShellProcess("/bin/sh");
     if (!sandbox.isEmpty())
         QDir::setCurrent(sandbox);
-    if (!rsh.isEmpty())
-	*childproc << QString("CVS_RSH=" + KShellProcess::quote(rsh));
+    if (!rsh.isEmpty()) 
+        *childproc << QString("export CVS_RSH=" + KShellProcess::quote(rsh) + "; ");
     *childproc << cmdline;
 
     connect( childproc, SIGNAL(processExited(KProcess *)),
