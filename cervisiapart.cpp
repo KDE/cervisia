@@ -1677,7 +1677,7 @@ void CervisiaPart::parseStatus(QString pathname, QStrList list)
                     }
                     break;
                 case FileSep:
-                    if (!line.isEmpty()) ; // Error
+                    if (!line.isEmpty()) // Error
                         state = WorkRev;
                     //DEBUGOUT( "state = WorkRev" );
                     break;
