@@ -36,7 +36,7 @@ ProtocolView::ProtocolView(QWidget *parent, const char *name)
 {
     setReadOnly(true);
     setUndoRedoEnabled(false);
-    //    setTextFormat(Qt::RichText);
+    setTextFormat(Qt::RichText);
  
     KConfig *config = CervisiaPart::config();
     config->setGroup("LookAndFeel");
@@ -135,13 +135,32 @@ void ProtocolView::processOutput()
 	    QString line = buf.left(pos);
 	    if (!line.isEmpty())
                 {
-		    append(line);
+		    appendLine(line);
                     emit receivedLine(line);
                 }
 	    buf = buf.right(buf.length()-pos-1);
 	}
 
     scrollToBottom();
+}
+
+
+void ProtocolView::appendLine(const QString &line)
+{
+    QColor color;
+    // Colors are the same as in UpdateViewItem::paintCell()
+    if (line.startsWith("C "))
+        color = QColor(255, 100, 100);
+    else if (line.startsWith("M ")
+             || line.startsWith("A ") || line.startsWith("R "))
+        color = QColor(190, 190, 237);
+    else if (line.startsWith("P "))
+        color = QColor(255, 240, 190);
+
+    append(color.isValid()?
+        QString("<FONT COLOR=\"#%1\">%2</FONT><BR>")
+           .arg(colorAsString(color)).arg(line) :
+        QString("%1<BR>").arg(line));
 }
 
 

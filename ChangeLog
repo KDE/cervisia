@@ -1,3 +1,8 @@
+2002-02-04  Bernd Gehrmann  <bernd@mail.berlios.de>
+
+	* Colored ProtocolView output
+	  Based on a patch by Asaf Gery <asaf@telmap.com>
+
 2001-09-04  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
 
 	* Added 'Force tag creation' option to tag dialog

@@ -44,6 +44,7 @@ private slots:
     
 private:
     void processOutput();
+    void appendLine(const QString &line);
     void execContextMenu(const QPoint &pos);
     
     KShellProcess *childproc;

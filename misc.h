@@ -21,11 +21,14 @@
 void chomp(QCString *line);
 QString joinLine(const QStringList &list);
 QStringList splitLine(QString, char delim=' ');
-bool isValidTag(const QString &str);
-QString cvsClient(QString sRepository);
+QString colorAsString(const QColor &color);
+
 QString userName();
 QString tempFileName(const QString &suffix);
 void cleanupTempFiles();
+
+bool isValidTag(const QString &str);
+QString cvsClient(QString sRepository);
 
 #endif
 

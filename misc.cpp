@@ -69,6 +69,14 @@ QStringList splitLine(QString line, char delim)
 }
 
 
+QString colorAsString(const QColor &color)
+{
+    int n = color.blue() + (color.green() << 8) + (color.red() << 16);
+    // Ensure leading zeros
+    return QString::number(n + 0x1000000, 16).mid(1);
+}
+
+
 bool isValidTag(const QString &str)
 {
     if (!isalpha(str[0].latin1()))
