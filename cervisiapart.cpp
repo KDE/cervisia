@@ -520,8 +520,7 @@ void CervisiaPart::updateActions()
     actionCollection()->action( "view_last_change" )->setEnabled( single );
 
     //    bool nojob = !( actionCollection()->action( "stop_job" )->isEnabled() );
-    bool nojob = !hasRunningJob && update->selectedItem();
-
+    bool nojob = !hasRunningJob && (update->currentItem()!=0);
     actionCollection()->action( "file_update" )->setEnabled( nojob );
     actionCollection()->action( "file_status" )->setEnabled( nojob );
     actionCollection()->action( "file_commit" )->setEnabled( nojob );
