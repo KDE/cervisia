@@ -15,7 +15,6 @@
 #include "updateview_items.h"
 
 #include <cassert>
-#include <set>
 
 #include <qdir.h>
 #include <qpainter.h>
@@ -196,7 +195,7 @@ UpdateDirItem* UpdateDirItem::createDirItem(const Entry& entry)
 {
     UpdateDirItem* dirItem = new UpdateDirItem(this, entry);
 
-    mapItemsByName.insert(std::make_pair(entry.m_name, dirItem));
+    m_itemsByName.insert(std::make_pair(entry.m_name, dirItem));
 
     return dirItem;
 }
@@ -206,7 +205,7 @@ UpdateFileItem* UpdateDirItem::createFileItem(const Entry& entry)
 {
     UpdateFileItem* fileItem = new UpdateFileItem(this, entry);
 
-    mapItemsByName.insert(std::make_pair(entry.m_name, fileItem));
+    m_itemsByName.insert(std::make_pair(entry.m_name, fileItem));
 
     return fileItem;
 }
@@ -214,9 +213,9 @@ UpdateFileItem* UpdateDirItem::createFileItem(const Entry& entry)
 
 UpdateItem* UpdateDirItem::findItem(const QString& name) const
 {
-    const TMapItemsByName::const_iterator it = mapItemsByName.find(name);
+    const TMapItemsByName::const_iterator it = m_itemsByName.find(name);
 
-    return (it != mapItemsByName.end()) ? it->second : 0;
+    return (it != m_itemsByName.end()) ? it->second : 0;
 }
 
 
@@ -298,29 +297,19 @@ void UpdateDirItem::syncWithEntries()
  */
 void UpdateDirItem::syncWithDirectory()
 {
-    // Do not use CvsDir here, because CVS/Entries may
-    // contain files which are in .cvsignore (stupid
-    // idea, but that's possible...)
-    const QDir dir( filePath(), QString::null, QDir::Name,
-                    QDir::Files|QDir::Hidden|QDir::NoSymLinks );
-    const QStringList& files(dir.entryList());
+    QDir dir(filePath());
 
-    // copy all files in a set for better performance when we test for existence
-    std::set<QString> setFiles;
-    QStringList::ConstIterator const itFileEnd = files.end();
-    for (QStringList::ConstIterator itFile = files.begin();
-         itFile != itFileEnd; ++itFile)
-        setFiles.insert(setFiles.end(), *itFile);
-
-    for (QListViewItem *item = firstChild(); item; item = item->nextSibling())
+    for (TMapItemsByName::iterator it(m_itemsByName.begin()),
+                                   itEnd(m_itemsByName.end());
+         it != itEnd; ++it)
     {
         // only files
-        if (isFileItem(item))
+        if (isFileItem(it->second))
         {
-            UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(item);
+            UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(it->second);
 
             // is file removed?
-            if (setFiles.find(fileItem->entry().m_name) == setFiles.end())
+            if (!dir.exists(it->first))
             {
                 fileItem->setStatus(Entry::Removed);
                 fileItem->setRevTag(QString::null, QString::null);

@@ -100,7 +100,7 @@ private:
 
     typedef std::map<const QString, UpdateItem*> TMapItemsByName;
 
-    TMapItemsByName mapItemsByName;
+    TMapItemsByName m_itemsByName;
 
     bool m_opened;
 
