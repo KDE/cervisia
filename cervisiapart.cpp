@@ -918,33 +918,33 @@ void CervisiaPart::addOrRemove(AddRemoveDialog::ActionType action)
 
     if (dlg.exec())
     {
-        QString cmdline;
+        DCOPRef cvsJob;
+        
         switch (action)
         {
             case AddRemoveDialog::Add:
                 update->prepareJob(false, UpdateView::Add);
-                cmdline = cvsClient(repository) + " add ";
+                cvsJob = cvsService->add(list, false);
             break;
-
+            
             case AddRemoveDialog::AddBinary:
                 update->prepareJob(false, UpdateView::Add);
-                cmdline = cvsClient(repository) + " add -kb ";
+                cvsJob = cvsService->add(list, true);
             break;
 
             case AddRemoveDialog::Remove:
                 update->prepareJob(opt_commitRecursive, UpdateView::Remove);
-                cmdline = cvsClient(repository) + " remove -f ";
-                if (opt_commitRecursive)
-                    cmdline += "-R ";
-                else
-                    cmdline += "-l ";
+                cvsJob = cvsService->remove(list, opt_commitRecursive);
             break;
         }
 
-        cmdline += joinLine(list);
-        cmdline += " 2>&1";
+        // get command line from cvs job
+        QString cmdline;
+        DCOPReply reply = cvsJob.call("cvsCommand()");
+        if( reply.isValid() )
+            reply.get<QString>(cmdline);
 
-        if (protocol->startJob(sandbox, repository, cmdline))
+        if (protocol->startJob())
         {
             showJobStart(cmdline);
             connect( protocol, SIGNAL(jobFinished(bool, int)),

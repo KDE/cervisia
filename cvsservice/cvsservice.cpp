@@ -204,6 +204,26 @@ DCOPRef CvsService::log(const QString& fileName)
 }
 
 
+DCOPRef CvsService::remove(const QStringList& files, bool recursive)
+{
+    if( !d->hasWorkingCopy() || d->hasRunningJob() )
+        return DCOPRef();
+        
+    // assemble the command line
+    // cvs remove -f [-l] [FILES]
+    d->singleCvsJob->clearCvsCommand();
+    
+    *d->singleCvsJob << d->repository->cvsClient() << "remove -f";
+    
+    if( recursive )
+        *d->singleCvsJob << "-l";
+    
+    *d->singleCvsJob << CvsServiceUtils::joinFileList(files) << REDIRECT_STDERR;
+    
+    return d->setupNonConcurrentJob();
+}
+
+
 DCOPRef CvsService::status(const QStringList& files, bool recursive)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )

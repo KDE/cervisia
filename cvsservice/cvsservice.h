@@ -83,6 +83,10 @@ k_dcop:
     DCOPRef log(const QString& fileName);
     
     /**
+     */
+    DCOPRef remove(const QStringList& files, bool recursive);
+   
+    /**
      * Shows a summary of what's been done locally, without changing the
      * working copy. (cvs -n update)
      *
