@@ -31,29 +31,22 @@ class HistoryDialog : public KDialogBase
 
 public:
 
-    explicit HistoryDialog( QWidget *parent=0, const char *name=0 );
+    explicit HistoryDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
 
     virtual ~HistoryDialog();
 
     bool parseHistory(const QString &sandbox, const QString &repository);
 
-    static void loadOptions(KConfig *config);
-    static void saveOptions(KConfig *config);
-    
 private slots:
     void choiceChanged();
     void toggled(bool b);
 
 private:
-    struct Options {
-        QSize size;
-    };
-    static Options *options;
-
     ListView *listview;
     QCheckBox *commit_box, *checkout_box, *tag_box, *other_box;
     QCheckBox *onlyuser_box, *onlyfilenames_box, *onlydirnames_box;
     KLineEdit *user_edit, *filename_edit, *dirname_edit;
+    KConfig& partConfig;
 };
 
 #endif

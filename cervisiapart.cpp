@@ -1406,7 +1406,7 @@ void CervisiaPart::slotLastChange()
 void CervisiaPart::slotHistory()
 {
     // Non-modal dialog
-    HistoryDialog *l = new HistoryDialog();
+    HistoryDialog *l = new HistoryDialog(*config());
     if (l->parseHistory(sandbox, repository))
         l->show();
     else
@@ -1825,8 +1825,6 @@ void CervisiaPart::readDialogProperties( KConfig *config )
     ResolveEditorDialog::loadOptions(config);
     config->setGroup("Checkout dialog");
     CheckoutDialog::loadOptions(config);
-    config->setGroup("History dialog");
-    HistoryDialog::loadOptions(config);
     config->setGroup("Repository dialog");
     RepositoryDialog::loadOptions(config);
 }
@@ -1840,8 +1838,6 @@ void CervisiaPart::saveDialogProperties( KConfig *config )
     ResolveEditorDialog::saveOptions(config);
     config->setGroup("Checkout dialog");
     CheckoutDialog::saveOptions(config);
-    config->setGroup("History dialog");
-    HistoryDialog::saveOptions(config);
     config->setGroup("Repository dialog");
     RepositoryDialog::saveOptions(config);
 }

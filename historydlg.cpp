@@ -28,6 +28,11 @@
 #include "listview.h"
 #include "misc.h"
 
+#include <kdeversion.h>
+#if KDE_VERSION < KDE_MAKE_VERSION(3,1,90)
+#include "configutils.h"
+#endif
+
 
 class HistoryItem : public QListViewItem
 {
@@ -117,12 +122,10 @@ bool HistoryItem::isOther()
 }
 
 
-HistoryDialog::Options *HistoryDialog::options = 0;
-
-
-HistoryDialog::HistoryDialog(QWidget *parent, const char *name)
+HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
     : KDialogBase(parent, name, false, QString::null,
                   Close | Help, ButtonCode(0), true)
+    , partConfig(cfg)
 {
     QFrame* mainWidget = makeMainWidget();
 
@@ -221,36 +224,22 @@ HistoryDialog::HistoryDialog(QWidget *parent, const char *name)
 
     setWFlags(Qt::WDestructiveClose | getWFlags());
 
-    if (options)
-        resize(options->size);
+#if KDE_IS_VERSION(3,1,90)
+    QSize size = configDialogSize(partConfig, "HistoryDialog");
+#else
+    QSize size = Cervisia::configDialogSize(this, partConfig, "HistoryDialog");
+#endif
+    resize(size);
 }
 
 
 HistoryDialog::~HistoryDialog()
 {
-    if (!options)
-        options = new Options;
-    options->size = size();
-}
-
-
-void HistoryDialog::loadOptions(KConfig *config)
-{
-    if (!config->readEntry("Customized"))
-        return;
-
-    options = new Options;
-    options->size = config->readSizeEntry("Size");
-}
-
-
-void HistoryDialog::saveOptions(KConfig *config)
-{
-    if (!options)
-        return;
-
-    config->writeEntry("Customized", true);
-    config->writeEntry("Size", options->size);
+#if KDE_IS_VERSION(3,1,90)
+    saveDialogSize(partConfig, "HistoryDialog");
+#else
+    Cervisia::saveDialogSize(this, partConfig, "HistoryDialog");
+#endif
 }
 
 
