@@ -41,21 +41,20 @@ public:
 
     enum { Directory };
 
-    UpdateDirItem( UpdateView *parent, QString dirname );
-    UpdateDirItem( UpdateDirItem *parent, QString dirname );
+    UpdateDirItem( UpdateView *parent, const QString& dirname );
+    UpdateDirItem( UpdateDirItem *parent, const QString& dirname );
 
-    QString dirPath();
+    QString dirPath() const;
     void syncWithDirectory();
     void syncWithEntries();
-    void updateChildItem(QString name, UpdateView::Status status, bool isdir);
-    void updateEntriesItem(QString name, UpdateView::Status status, bool isdir,
-                           bool isbin, QString rev, QString tagname, time_t timestamp);
+    void updateChildItem(const QString& name, UpdateView::Status status, bool isdir);
+    void updateEntriesItem(const QString& name, UpdateView::Status status, bool isdir,
+                           bool isbin, const QString& rev, const QString& tagname, time_t timestamp);
 
     virtual int compare(QListViewItem* i, int col, bool) const;
     virtual QString text(int col) const;
     virtual void setOpen(bool o);
-    virtual void setup();
- 
+
     void maybeScanDir(bool recursive);
 
     void applyFilter(UpdateView::Filter filter);
@@ -64,8 +63,8 @@ private:
     UpdateView *updateView() const
         { return static_cast<UpdateView*>(listView()); }
     void scanDirectory();
-    
-    QString m_dirname;
+
+    const QString m_dirname;
     bool m_opened;
 };
 
@@ -76,9 +75,9 @@ public:
 
     enum { File, Status, Revision, TagOrDate, Timestamp };
 
-    UpdateViewItem( QListViewItem *parent, QString filename );
+    UpdateViewItem( QListViewItem *parent, const QString& filename );
 
-    QString filePath();
+    QString filePath() const;
     UpdateView::Status status() const
         { return m_status; }
     QString revision() const
@@ -93,7 +92,7 @@ public:
 
     void setStatus(UpdateView::Status status, UpdateView::Filter filter);
     void applyFilter(UpdateView::Filter filter);
-    void setRevTag(QString rev, QString tag);
+    void setRevTag(const QString& rev, const QString& tag);
     void setTimestamp(time_t timestamp);
     void setUndefinedState(bool b)
     { m_undefined = b; }
@@ -103,7 +102,7 @@ private:
 
     int statusClass() const;
 
-    QString m_filename;
+    const QString m_filename;
     QString m_revision;
     QString m_tag;
     bool m_undefined;
@@ -116,36 +115,37 @@ private:
 };
 
 
-UpdateDirItem::UpdateDirItem( UpdateDirItem *parent, QString dirname )
-    : QListViewItem(parent)
+UpdateDirItem::UpdateDirItem( UpdateDirItem *parent, const QString& dirname )
+    : QListViewItem(parent),
+      m_dirname(dirname),
+      m_opened(false)
 {
+    setExpandable(true);
     setPixmap(0, SmallIcon("folder"));
-    m_dirname = dirname;
-    m_opened = false;
 }
 
  
-UpdateDirItem::UpdateDirItem( UpdateView *parent, QString dirname )
-    : QListViewItem(parent)
+UpdateDirItem::UpdateDirItem( UpdateView *parent, const QString& dirname )
+    : QListViewItem(parent),
+      m_dirname(dirname),
+      m_opened(false)
 {
+    setExpandable(true);
     setPixmap(0, SmallIcon("folder"));
-    m_dirname = dirname;
-    m_opened = false;
 }
 
 
-QString UpdateDirItem::dirPath()
+QString UpdateDirItem::dirPath() const
 {
-    UpdateDirItem *diritem = static_cast<UpdateDirItem*>(parent());
-
-    return parent()? diritem->dirPath() + m_dirname + "/" : QString::null;
-}                      
+    const UpdateDirItem* diritem = static_cast<UpdateDirItem*>(parent());
+    return diritem ? diritem->dirPath() + m_dirname + '/' : QString::null;
+}
 
 
 /**
  * Update the status of an item; if it doesn't exist yet, create new one
  */
-void UpdateDirItem::updateChildItem(QString name, UpdateView::Status status, bool isdir)
+void UpdateDirItem::updateChildItem(const QString& name, UpdateView::Status status, bool isdir)
 {
     for (QListViewItem *item = firstChild(); item;
 	 item = item->nextSibling() )
@@ -180,8 +180,13 @@ void UpdateDirItem::updateChildItem(QString name, UpdateView::Status status, boo
  * Update the revision and tag of an item. Use status only to create
  * new items and for items which were NotInCVS.
  */
-void UpdateDirItem::updateEntriesItem(QString name, UpdateView::Status status, bool isdir,
-                                      bool isbin, QString rev, QString tagname, time_t timestamp)
+void UpdateDirItem::updateEntriesItem(const QString& name,
+                                      UpdateView::Status status,
+                                      bool isdir,
+                                      bool isbin,
+                                      const QString& rev,
+                                      const QString& tagname,
+                                      time_t timestamp)
 {
     for (QListViewItem *item = firstChild(); item;
 	 item = item->nextSibling() )
@@ -225,11 +230,12 @@ void UpdateDirItem::updateEntriesItem(QString name, UpdateView::Status status, b
 
 void UpdateDirItem::scanDirectory()
 {
-    if (!dirPath().isEmpty() && !QFile::exists(dirPath()))
+    const QString& path(dirPath());
+    if (!path.isEmpty() && !QFile::exists(path))
         return;
 
-    CvsDir dir( dirPath() );
-    
+    const CvsDir dir(path);
+
     const QFileInfoList *files = dir.entryInfoList();
     if (files)
 	{
@@ -338,8 +344,8 @@ void UpdateDirItem::syncWithDirectory()
     // Do not use CvsDir here, because CVS/Entries may
     // contain files which are in .cvsignore (stupid
     // idea, but that's possible...)
-    QDir dir( dirPath(), QString::null, QDir::Name,
-              QDir::Files|QDir::Hidden|QDir::NoSymLinks );
+    const QDir dir( dirPath(), QString::null, QDir::Name,
+                    QDir::Files|QDir::Hidden|QDir::NoSymLinks );
 
     const QFileInfoList *files = dir.exists()? dir.entryInfoList() : 0;
 
@@ -445,20 +451,12 @@ QString UpdateDirItem::text(int col) const
 }
 
 
-void UpdateDirItem::setup()
+UpdateViewItem::UpdateViewItem( QListViewItem *parent, const QString& filename )
+    : QListViewItem(parent),
+      m_filename(filename),
+      m_undefined(false),
+      m_status(UpdateView::NotInCVS)
 {
-    setExpandable(true);
-    QListViewItem::setup();
-}
-
-
-UpdateViewItem::UpdateViewItem( QListViewItem *parent, QString filename )
-    : QListViewItem(parent)
-{
-    m_status = UpdateView::NotInCVS;
-    m_filename = filename;
-    m_undefined = false;
-
     KConfig *config = CervisiaPart::config();
     config->setGroup("Colors");
      QColor defaultColor = QColor(255, 100, 100);
@@ -470,11 +468,12 @@ UpdateViewItem::UpdateViewItem( QListViewItem *parent, QString filename )
 }
 
 
-QString UpdateViewItem::filePath()
+QString UpdateViewItem::filePath() const
 {
-    UpdateDirItem *diritem = static_cast<UpdateDirItem*>(parent());
+    // an UpdateViewItem (file) always have a parent (directory)
+    const UpdateDirItem* diritem = static_cast<UpdateDirItem*>(parent());
     return diritem->dirPath() + m_filename;
-}                      
+}
 
 
 void UpdateViewItem::setStatus(UpdateView::Status newstatus, UpdateView::Filter filter)
@@ -505,7 +504,7 @@ void UpdateViewItem::applyFilter(UpdateView::Filter filter)
 }
 
 
-void UpdateViewItem::setRevTag(QString rev, QString tag)
+void UpdateViewItem::setRevTag(const QString& rev, const QString& tag)
 {
     m_revision = rev;
 
@@ -991,7 +990,7 @@ void UpdateView::rememberSelection(bool recursive)
             if (item->firstChild())
                 s.push(item->firstChild());
             if (isSelected(item))
-                shallowItems.append(static_cast<QListViewItem*>(item));
+                shallowItems.append(item);
 	}
 
     // In the recursive case, we add all directories from the hierarchies
@@ -1008,7 +1007,7 @@ void UpdateView::rememberSelection(bool recursive)
                             if (item->firstChild())
                                 s.push(item->firstChild());
                             if (isDirItem(item))
-                                deepItems.append(static_cast<QListViewItem*>(item));
+                                deepItems.append(item);
                         }
         }
 
@@ -1088,7 +1087,7 @@ void UpdateView::processUpdateLine(QString str)
 {
     if (str.length() > 2 && str[1] == ' ')
         {
-            QChar statuschar = str[0];
+            const QChar statuschar = str[0];
             Status status = UpdateView::Unknown;
             if (statuschar == 'C')
                 status = UpdateView::Conflict;
@@ -1126,9 +1125,9 @@ void UpdateView::updateItem(const QString &name, Status status, bool isdir)
     if (isdir && name == ".")
         return;
     
-    QFileInfo fi(name);
+    const QFileInfo fi(name);
     QString dirpath(fi.dirPath());
-    QString fileName(fi.fileName());
+    const QString fileName(fi.fileName());
 
     if (dirpath == ".") 
         dirpath = QString::null;
