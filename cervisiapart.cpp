@@ -550,6 +550,7 @@ void CervisiaPart::updateActions()
     actionCollection()->action( "view_unfold_tree" )->setEnabled( selected );
     actionCollection()->action( "view_fold_tree" )->setEnabled( selected );
     actionCollection()->action( "view_history" )->setEnabled(selected);
+    actionCollection()->action( "make_patch" )->setEnabled(selected);
 }
 
 
