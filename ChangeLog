@@ -1,6 +1,9 @@
 2003-02-12  Christian Loose  <christian.loose@hamburg.de>
 
-	* Improved size handling for Commit dialog
+	* Bug 54106: Display error message when user tries to
+	  access a remote repository
+	* Improved size handling for Commit dialog, History dialog,
+	  Resolve dialog and Resolve edit dialog 
 	* Removed code duplication in Commit dialog when
 	  displaying the Diff dialog
 
@@ -19,8 +22,8 @@
 2003-02-06  Christian Loose  <christian.loose@hamburg.de>
 
 	* Try to get the user name and email address for the
-          changelog from the control center settings (KEMailSettings)
-          before asking the system.
+	  changelog from the control center settings (KEMailSettings)
+	  before asking the system.
 
 2003-02-02  Christian Loose <christian.loose@hamburg.de>
 
