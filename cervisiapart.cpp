@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
+ *  Copyright (c) 2003 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -81,6 +82,19 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     setInstance( CervisiaFactory::instance() );
     new CervisiaBrowserExtension( this );
 
+    // start the cvs DCOP service
+    QString error;
+    QCString appId;
+    if( KApplication::startServiceByName("CvsService", QStringList(), &error, &appId) )
+    {
+        KMessageBox::sorry(0, "Starting cvsservice failed with message: " +
+            error, "Cervisia");
+        return;
+    }
+    
+    // create a reference to the service
+    cvsService = new CvsService_stub(appId, "CvsService");
+
     // Create UI
     KConfig *conf = config();
     conf->setGroup("LookAndFeel");
@@ -97,7 +111,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     connect( update, SIGNAL(fileOpened(QString)),
              this, SLOT(openFile(QString)) );
 
-    protocol = new ProtocolView(splitter);
+    protocol = new ProtocolView(appId, splitter);
     protocol->setFocusPolicy( QWidget::StrongFocus );
 
     setWidget(splitter);
@@ -106,18 +120,6 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     updateActions();
     setXMLFile( "cervisiaui.rc" );
     
-    // start the cvs DCOP service
-    QString error;
-    QCString appId;
-    if( KApplication::startServiceByName("CvsService", QStringList(), &error, &appId) )
-    {
-        KMessageBox::sorry(0, "Starting cvsservice failed with message: " +
-            error, "Cervisia");
-        return;
-    }
-    
-    // create a reference to the service
-    cvsService = new CvsService_stub(appId, "CvsService");
 }
 
 CervisiaPart::~CervisiaPart()
@@ -736,7 +738,7 @@ void CervisiaPart::slotStatus()
     if( reply.isValid() )
         reply.get<QString>(cmdline);
             
-    if( protocol->startJob(cvsJob) )
+    if( protocol->startJob() )
     {
         showJobStart(cmdline);
         connect( protocol, SIGNAL(receivedLine(QString)), update, SLOT(processUpdateLine(QString)) );
@@ -851,7 +853,7 @@ void CervisiaPart::updateSandbox(const QString &extraopt)
     if( reply.isValid() )
         reply.get<QString>(cmdline);
             
-    if( protocol->startJob(cvsJob) )
+    if( protocol->startJob() )
     {
         showJobStart(cmdline);
         connect( protocol, SIGNAL(receivedLine(QString)), update, SLOT(processUpdateLine(QString)) );
