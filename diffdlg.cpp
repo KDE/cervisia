@@ -26,17 +26,19 @@
 #include <kprocess.h>
 
 #include "misc.h"
-#include "cervisiapart.h"
 #include "cvsprogressdlg.h"
 #include "diffview.h"
 
+#include <kdeversion.h>
+#if KDE_VERSION < KDE_MAKE_VERSION(3,1,90)
+#include "configutils.h"
+#endif
 
-DiffDialog::Options *DiffDialog::options = 0;
 
-
-DiffDialog::DiffDialog(QWidget *parent, const char *name, bool modal)
+DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool modal)
     : KDialogBase(parent, name, modal, QString::null,
                   Close | Help, Close, true)
+    , partConfig(cfg)
 {
     items.setAutoDelete(true);
     markeditem = -1;
@@ -105,42 +107,28 @@ DiffDialog::DiffDialog(QWidget *parent, const char *name, bool modal)
 
     setWFlags(Qt::WDestructiveClose | getWFlags());
 
-    if (options)
-        {
-            resize(options->size);
-            syncbox->setChecked(options->sync);
-        }
+#if KDE_IS_VERSION(3,1,90)
+    QSize size = configDialogSize(partConfig, "DiffDialog");
+#else
+    QSize size = Cervisia::configDialogSize(this, partConfig, "DiffDialog");
+#endif
+    resize(size);
+
+    KConfigGroupSaver cs(&partConfig, "DiffDialog");
+    syncbox->setChecked(partConfig.readBoolEntry("Sync"));
 }
 
 
 DiffDialog::~DiffDialog()
 {
-    if (!options)
-        options = new Options;
-    options->size = size();
-    options->sync = syncbox->isChecked();
-}
+#if KDE_IS_VERSION(3,1,90)
+    saveDialogSize(partConfig, "DiffDialog");
+#else
+    Cervisia::saveDialogSize(this, partConfig, "DiffDialog");
+#endif
 
-
-void DiffDialog::loadOptions(KConfig *config)
-{
-    if (!config->readEntry("Customized"))
-        return;
-
-    options = new Options;
-    options->size = config->readSizeEntry("Size");
-    options->sync = config->readBoolEntry("Sync");
-}
-
-
-void DiffDialog::saveOptions(KConfig *config)
-{
-    if (!options)
-        return;
-
-    config->writeEntry("Customized", true);
-    config->writeEntry("Size", options->size);
-    config->writeEntry("Sync", options->sync);
+    KConfigGroupSaver cs(&partConfig, "DiffDialog");
+    partConfig.writeEntry("Sync", syncbox->isChecked());
 }
 
 
@@ -255,8 +243,7 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
                         i18n("Working dir")
                         : i18n("Revision ")+revB );
     
-    KConfig *config = CervisiaPart::config();
-    config->setGroup("General");
+    KConfigGroupSaver cs(&partConfig, "General");
 
     // Ok, this is a hack: When the user wants an external diff
     // front end, it is executed from here. Of course, in that
@@ -264,7 +251,7 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
     // place, but this design at least makes the handling trans-
     // parent for the calling routines
 
-    QString extdiff = config->readEntry("ExternalDiff", "");
+    QString extdiff = partConfig.readEntry("ExternalDiff", "");
     if (!extdiff.isEmpty())
         {
             QString cmdline = "cvs update -p ";
@@ -321,9 +308,9 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
         }
 
     QString cmdline = cvsClient(repository) + " diff ";
-    cmdline += config->readEntry("DiffOptions", "");
+    cmdline += partConfig.readEntry("DiffOptions", "");
     cmdline += " -U ";
-    cmdline += QString().setNum((int)config->readUnsignedNumEntry("ContextLines", 65535));
+    cmdline += QString().setNum((int)partConfig.readUnsignedNumEntry("ContextLines", 65535));
     if (!revA.isEmpty())
 	{
 	    cmdline += " -r ";

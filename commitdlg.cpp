@@ -22,6 +22,7 @@
 #include <klocale.h>
 
 #include "diffdlg.h"
+#include "cervisiapart.h"       //FIXME: remove
 
 
 CommitDialog::Options *CommitDialog::options = 0;
@@ -168,6 +169,7 @@ void CommitDialog::comboActivated(int index)
 }
 
 
+//FIXME: remove code duplication (s. diffClicked())
 void CommitDialog::fileSelected(int index)
 {
     QListBoxItem *item = listbox->item(index);
@@ -175,7 +177,8 @@ void CommitDialog::fileSelected(int index)
         return;
     QString filename = item->text();
 
-    DiffDialog *l = new DiffDialog(this, "diffdialog", true);
+    //FIXME: pass KConfig to CommitDialog instead!
+    DiffDialog *l = new DiffDialog(*CervisiaPart::config(), this, "diffdialog", true);
     if (l->parseCvsDiff(sandbox, repository, filename, "", ""))
         l->show();
     else
@@ -189,6 +192,7 @@ void CommitDialog::fileHighlighted(int index)
     enableButton(User1, true);
 }
 
+//FIXME: remove code duplication (s. fileSelected())
 void CommitDialog::diffClicked()
 {
     QListBoxItem *item = listbox->item(highlightedFile);
@@ -196,7 +200,8 @@ void CommitDialog::diffClicked()
         return;
     QString filename = item->text();
 
-    DiffDialog *l = new DiffDialog(this, "diffdialog", true);
+    //FIXME: pass KConfig to CommitDialog instead!
+    DiffDialog *l = new DiffDialog(*CervisiaPart::config(), this, "diffdialog", true);
     if (l->parseCvsDiff(sandbox, repository, filename, "", ""))
         l->show();
     else

@@ -1036,7 +1036,7 @@ void CervisiaPart::slotDiff()
         return;
 
     // Non-modal dialog
-    DiffDialog *l = new DiffDialog();
+    DiffDialog *l = new DiffDialog(*config());
     if (l->parseCvsDiff(sandbox, repository, filename, "", ""))
         l->show();
     else
@@ -1395,7 +1395,7 @@ void CervisiaPart::slotLastChange()
     revB += QString::number(lastnumber-1);
 
     // Non-modal dialog
-    DiffDialog *l = new DiffDialog();
+    DiffDialog *l = new DiffDialog(*config());
     if (l->parseCvsDiff(sandbox, repository, filename, revB, revA))
         l->show();
     else
@@ -1819,8 +1819,6 @@ void CervisiaPart::writeSettings()
 
 void CervisiaPart::readDialogProperties( KConfig *config )
 {
-    config->setGroup("Diff dialog");
-    DiffDialog::loadOptions(config);
     config->setGroup("Resolve dialog");
     ResolveDialog::loadOptions(config);
     config->setGroup("Resolve edit dialog");
@@ -1838,8 +1836,6 @@ void CervisiaPart::readDialogProperties( KConfig *config )
 
 void CervisiaPart::saveDialogProperties( KConfig *config )
 {
-    config->setGroup("Diff dialog");
-    DiffDialog::saveOptions(config);
     config->setGroup("Resolve dialog");
     ResolveDialog::saveOptions(config);
     config->setGroup("Resolve edit dialog");

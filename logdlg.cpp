@@ -386,7 +386,7 @@ void LogDialog::diffClicked()
 	}
 
     // Non-modal dialog
-    DiffDialog *l = new DiffDialog();
+    DiffDialog *l = new DiffDialog(partConfig);
     if (l->parseCvsDiff(sandbox, repository, filename, selectionA, selectionB))
         l->show();
     else

@@ -1,3 +1,7 @@
+2003-02-11  Christian Loose  <christian.loose@hamburg.de>
+
+	* Improved size handling for Diff dialog
+
 2003-02-10  Christian Loose  <christian.loose@hamburg.de>
 
 	* Remove CervisiaShell's dependency on CervisiaPart

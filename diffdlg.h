@@ -35,15 +35,13 @@ class DiffDialog : public KDialogBase
 
 public:
 
-    explicit DiffDialog( QWidget *parent=0, const char *name=0, bool modal=false );
+    explicit DiffDialog( KConfig& config, QWidget *parent=0, const char *name=0, 
+                         bool modal=false );
 
     virtual ~DiffDialog();
 
     bool parseCvsDiff(const QString &sandbox, const QString &repository,
                       const QString &filename, const QString &revA, const QString &revB);
-
-    static void loadOptions(KConfig *config);
-    static void saveOptions(KConfig *config);
 
 protected:
     virtual void keyPressEvent(QKeyEvent *e);
@@ -55,12 +53,6 @@ private slots:
     void forwClicked();
 
 private:
-    struct Options {
-        QSize size;
-        bool sync;
-    };
-    static Options *options;
-
     void updateNofN();
     void updateHighlight(int newitem);
 
@@ -72,6 +64,7 @@ private:
 
     QPtrList<DiffItem> items;
     int markeditem;
+    KConfig& partConfig;
 };
 
 #endif

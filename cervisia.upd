@@ -40,4 +40,9 @@ RemoveGroup=Log dialog
 Id=kde3.2/20030210
 File=cervisiapartrc
 RemoveGroup=ChangeLog dialog
-
+#
+Id=kde3.2/20030211
+File=cervisiapartrc
+Group=Diff dialog,DiffDialog
+Key=Sync
+RemoveGroup=Diff dialog
