@@ -1,28 +1,30 @@
 CERVISIA_VERSION = 2.1
-INCLUDES = -I./cvsservice -D_BSD_SOURCE $(all_includes) 
+INCLUDES = -I./cvsservice -D_BSD_SOURCE $(all_includes)
 
 SUBDIRS = cvsservice
 
 bin_PROGRAMS = cervisia
 kde_module_LTLIBRARIES = libcervisiapart.la
+noinst_LTLIBRARIES = libcervisia.la
+
+libcervisia_la_SOURCES = annotatedlg.cpp cvsprogressdlg.cpp diffdlg.cpp logdlg.cpp \
+		   progressdlg.cpp progressdlg.skel resolvedlg.cpp annotateview.cpp        \
+		   diffview.cpp loglist.cpp logplainview.cpp logtree.cpp annotatectl.cpp   \
+		   globalconfig.cpp loginfo.cpp misc.cpp qttableview.cpp tiplabel.cpp
 
 libcervisiapart_la_SOURCES = updateview.cpp protocolview.cpp protocolview.skel \
 		   watchdlg.cpp settingsdlg.cpp changelogdlg.cpp historydlg.cpp \
 		   repositorydlg.cpp commitdlg.cpp checkoutdlg.cpp updatedlg.cpp \
 		   tagdlg.cpp mergedlg.cpp configutils.cpp \
-		   logdlg.cpp logtree.cpp loglist.cpp diffdlg.cpp resolvedlg.cpp diffview.cpp \
-		   annotatedlg.cpp annotateview.cpp progressdlg.cpp progressdlg.skel \
-		   cvsprogressdlg.cpp tiplabel.cpp globalconfig.cpp \
-		   cvsdir.cpp repositories.cpp misc.cpp cervisiapart.cpp qttableview.cpp \
-		   addrepositorydlg.cpp annotatectl.cpp addremovedlg.cpp watchersdlg.cpp \
-		   logplainview.cpp loginfo.cpp
+		   cvsdir.cpp repositories.cpp cervisiapart.cpp \
+		   addrepositorydlg.cpp addremovedlg.cpp watchersdlg.cpp
 libcervisiapart_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
-libcervisiapart_la_LIBADD = $(LIB_KFILE) $(LIB_KPARTS) -lkutils \
-		   cvsservice/libcvsservice.la
+libcervisiapart_la_LIBADD = $(LIB_KFILE) $(LIB_KPARTS) $(LIB_KUTILS) \
+		   cvsservice/libcvsservice.la libcervisia.la
 
 cervisia_SOURCES = main.cpp cervisiashell.cpp
 cervisia_LDFLAGS = $(all_libraries) $(KDE_RPATH)
-cervisia_LDADD = libcervisiapart.la
+cervisia_LDADD = $(LIB_KPARTS) $(LIB_KUTILS) cvsservice/libcvsservice.la libcervisia.la
 
 man_MANS = cervisia.1
 

@@ -120,9 +120,8 @@ bool isValidTag(const QString &str)
 
 // Gives the name (including path) of the cvs command line client
 // also gives you global commands
-QString cvsClient( const QString &sRepository )
+QString cvsClient( const QString &sRepository, KConfig* config )
 {
-    KConfig *config = CervisiaPart::config();
     config->setGroup("General");
 
     // everybody gets the -f option, unconditionally

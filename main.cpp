@@ -24,7 +24,6 @@
 
 #include "misc.h"
 #include "cervisiashell.h"
-#include "cervisiapart.h"
 #include "cvsservice_stub.h"
 #include "logdlg.h"
 #include "resolvedlg.h"
@@ -39,7 +38,7 @@ static CvsService_stub* StartDCOPService(const QString& directory)
     if( KApplication::startServiceByDesktopName("cvsservice", QStringList(),
                                                 &error, &appId) )
     {
-        std::cerr << "Starting cvsservice failed with message: " 
+        std::cerr << "Starting cvsservice failed with message: "
                   << error.latin1() << std::endl;
         exit(1);
     }
@@ -55,7 +54,8 @@ static CvsService_stub* StartDCOPService(const QString& directory)
 
 static int ShowResolveDialog(const QString& fileName)
 {
-    KConfig* config = CervisiaFactory::instance()->config();
+    KConfig* config = new KConfig("cervisiapartrc");
+
     ResolveDialog* dlg = new ResolveDialog(*config);
     kapp->setMainWidget(dlg);
     if( dlg->parseFile(fileName) )
@@ -65,7 +65,7 @@ static int ShowResolveDialog(const QString& fileName)
 
     int result = kapp->exec();
 
-    delete CervisiaFactory::instance();
+    delete config;
 
     return result;
 }
@@ -73,7 +73,7 @@ static int ShowResolveDialog(const QString& fileName)
 
 static int ShowLogDialog(const QString& fileName)
 {
-    KConfig* config = CervisiaFactory::instance()->config();
+    KConfig* config = new KConfig("cervisiapartrc");
     LogDialog* dlg = new LogDialog(*config);
     kapp->setMainWidget(dlg);
 
@@ -95,7 +95,7 @@ static int ShowLogDialog(const QString& fileName)
     cvsService->quit();
     delete cvsService;
 
-    delete CervisiaFactory::instance();
+    delete config;
 
     return result;
 }
@@ -109,8 +109,8 @@ int main(int argc, char **argv)
         { "log <file>", I18N_NOOP("Show log dialog for the given file"), 0 },
         { 0, 0, 0 }
     };
-    KAboutData about("cervisia", I18N_NOOP("Cervisia"), CERVISIA_VERSION, 
-                     I18N_NOOP("A CVS frontend"), KAboutData::License_QPL, 
+    KAboutData about("cervisia", I18N_NOOP("Cervisia"), CERVISIA_VERSION,
+                     I18N_NOOP("A CVS frontend"), KAboutData::License_QPL,
                      I18N_NOOP("Copyright (c) 1999-2002 Bernd Gehrmann"), 0,
                      "http://www.kde.org/apps/cervisia");
 
@@ -126,7 +126,7 @@ int main(int argc, char **argv)
 
     KCmdLineArgs::init(argc, argv, &about);
     KCmdLineArgs::addCmdLineOptions(options);
-    
+
     KApplication app;
 
     QString resolvefile = KCmdLineArgs::parsedArgs()->getOption("resolve");
@@ -142,18 +142,18 @@ int main(int argc, char **argv)
         RESTORE(CervisiaShell);
     } else {
         CervisiaShell* shell = new CervisiaShell();
-        
+
         const KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
-        QString dirName = args->count() ? QString(args->arg(0)) : QString::null;       
+        QString dirName = args->count() ? QString(args->arg(0)) : QString::null;
 
         if( !dirName.isEmpty() )
             shell->openURL(KURL::fromPathOrURL(dirName));
-            
+
         shell->setIcon(app.icon());
         app.setMainWidget(shell);
         shell->show();
     }
-    
+
     int res = app.exec();
     cleanupTempFiles();
     return res;

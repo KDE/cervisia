@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -61,7 +61,7 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool mod
 
     revlabel1 = new QLabel(mainWidget);
     pairlayout->addWidget(revlabel1, 0, 0);
-			      
+
     revlabel2 = new QLabel(mainWidget);
     pairlayout->addWidget(revlabel2, 0, 2);
 
@@ -76,7 +76,7 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool mod
 
     diff1->setPartner(diff2);
     diff2->setPartner(diff1);
-    
+
     syncbox = new QCheckBox(i18n("Synchronize scroll bars"), mainWidget);
     syncbox->setChecked(true);
     connect( syncbox, SIGNAL(toggled(bool)),
@@ -86,14 +86,14 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool mod
     itemscombo->insertItem(QString::null);
     connect( itemscombo, SIGNAL(activated(int)),
              this, SLOT(comboActivated(int)) );
-    
+
     nofnlabel = new QLabel(mainWidget);
     // avoids auto resize when the text is changed
     nofnlabel->setMinimumWidth(fontMetrics().width(i18n("%1 differences").arg(10000)));
-    
+
     backbutton = new QPushButton(QString::fromLatin1("&<<"), mainWidget);
     connect( backbutton, SIGNAL(clicked()), SLOT(backClicked()) );
-    
+
     forwbutton = new QPushButton(QString::fromLatin1("&>>"), mainWidget);
     connect( forwbutton, SIGNAL(clicked()), SLOT(forwClicked()) );
 
@@ -176,14 +176,14 @@ void DiffDialog::comboActivated(int index)
 
 
 static void interpretRegion(QString line, int *linenoA, int *linenoB)
-{   
+{
     QRegExp region( "^@@ -([0-9]+),([0-9]+) \\+([0-9]+),([0-9]+) @@.*$" );
-    
+
     if (!region.exactMatch(line))
         return;
 
     *linenoA = region.cap(1).toInt() - 1;
-    *linenoB = region.cap(3).toInt() - 1;   
+    *linenoB = region.cap(3).toInt() - 1;
 }
 
 
@@ -199,7 +199,7 @@ static QString regionAsString(int linenoA, int linecountA, int linenoB, int line
     else if (linenoA == lineendA)
         if (linenoB == lineendB)
             res = QString("%1c%2").arg(linenoA).arg(linenoB);
-        else 
+        else
             res = QString("%1c%2,%3").arg(linenoA).arg(linenoB).arg(lineendB);
     else if (linenoB == lineendB)
         res = QString("%1,%2c%3").arg(linenoA).arg(lineendA).arg(linenoB);
@@ -207,7 +207,7 @@ static QString regionAsString(int linenoA, int linecountA, int linenoB, int line
         res = QString("%1,%2c%3,%4").arg(linenoA).arg(lineendA).arg(linenoB).arg(lineendB);
 
     return res;
-    
+
 }
 
 
@@ -233,7 +233,7 @@ bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
     revlabel2->setText( revB.isEmpty()?
                         i18n("Working dir")
                         : i18n("Revision ")+revB );
-    
+
     KConfigGroupSaver cs(&partConfig, "General");
 
     // Ok, this is a hack: When the user wants an external diff
@@ -251,7 +251,7 @@ bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
 
     const QString diffOptions   = partConfig.readEntry("DiffOptions");
     const unsigned contextLines = partConfig.readUnsignedNumEntry("ContextLines", 65535);
-        
+
     DCOPRef job = service->diff(fileName, revA, revB, diffOptions, contextLines);
     if( !service->ok() )
         return false;
@@ -259,11 +259,11 @@ bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
     ProgressDialog dlg(this, "Diff", job, "diff", i18n("CVS Diff"));
     if( !dlg.execute() )
         return false;
-    
+
     QString line;
     while ( dlg.getLine(line) && !line.startsWith("+++"))
         ;
-    
+
     linenoA = linenoB = 0;
     while ( dlg.getLine(line) )
     {
@@ -275,13 +275,13 @@ bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
             diff2->addLine(line, DiffView::Separator);
             continue;
         }
-            
+
         if (line.length() < 1)
             continue;
-            
+
         QChar marker = line[0];
         line.remove(0, 1);
-        
+
         if (marker == '-')
             linesA.append(line);
         else if (marker == '+')
@@ -291,15 +291,15 @@ bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
             if (!linesA.isEmpty() || !linesB.isEmpty())
             {
                 newDiffHunk(linenoA, linenoB, linesA, linesB);
-                        
+
                 linesA.clear();
                 linesB.clear();
             }
             diff1->addLine(line, DiffView::Unchanged, ++linenoA);
             diff2->addLine(line, DiffView::Unchanged, ++linenoB);
-        }          
+        }
     }
-    
+
     if (!linesA.isEmpty() || !linesB.isEmpty())
         newDiffHunk(linenoA, linenoB, linesA, linesB);
 
@@ -307,12 +307,12 @@ bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
     itemscombo->adjustSize();
 
     updateNofN();
- 
+
     return true;
 }
 
 
-void DiffDialog::newDiffHunk(int& linenoA, int& linenoB, 
+void DiffDialog::newDiffHunk(int& linenoA, int& linenoB,
                              const QStringList& linesA, const QStringList& linesB)
 {
     DiffItem *item = new DiffItem;
@@ -321,11 +321,11 @@ void DiffDialog::newDiffHunk(int& linenoA, int& linenoB,
     item->linecountA = linesA.count();
     item->linecountB = linesB.count();
     items.append(item);
-                        
+
     const QString region = regionAsString(linenoA+1, linesA.count(),
                                           linenoB+1, linesB.count());
     itemscombo->insertItem(region);
-                                    
+
     QStringList::ConstIterator itA = linesA.begin();
     QStringList::ConstIterator itB = linesB.begin();
     while (itA != linesA.end() || itB != linesB.end())
@@ -352,20 +352,20 @@ void DiffDialog::newDiffHunk(int& linenoA, int& linenoB,
 }
 
 
-void DiffDialog::callExternalDiff(const QString& extdiff, CvsService_stub* service, 
+void DiffDialog::callExternalDiff(const QString& extdiff, CvsService_stub* service,
                                   const QString& fileName, const QString &revA,
                                   const QString &revB)
 {
     QString cmdline = "cvs update -p ";
     QString extcmdline = extdiff;
     extcmdline += " ";
-            
+
     if (!revA.isEmpty() && !revB.isEmpty())
     {
         // We're comparing two revisions
         QString revAFilename = tempFileName(QString("-")+revA);
         QString revBFilename = tempFileName(QString("-")+revB);
-                    
+
         cmdline += " -r ";
         cmdline += KProcess::quote(revA);
         cmdline += " ";
@@ -379,12 +379,12 @@ void DiffDialog::callExternalDiff(const QString& extdiff, CvsService_stub* servi
         cmdline += KProcess::quote(fileName);
         cmdline += " > ";
         cmdline += KProcess::quote(revBFilename);
-                    
+
         extcmdline += KProcess::quote(revAFilename);
         extcmdline += " ";
         extcmdline += KProcess::quote(revBFilename);
-    } 
-    else 
+    }
+    else
     {
         // We're comparing to a file, and perhaps one revision
         QString revAFilename = tempFileName(revA);
@@ -397,7 +397,7 @@ void DiffDialog::callExternalDiff(const QString& extdiff, CvsService_stub* servi
         cmdline += KProcess::quote(fileName);
         cmdline += " > ";
         cmdline += KProcess::quote(revAFilename);
-                    
+
         extcmdline += KProcess::quote(revAFilename);
         extcmdline += " ";
         extcmdline += KProcess::quote(QFileInfo(fileName).absFilePath());
@@ -407,16 +407,16 @@ void DiffDialog::callExternalDiff(const QString& extdiff, CvsService_stub* servi
     Repository_stub cvsRepository(service->app(), "CvsRepository");
     QString sandbox    = cvsRepository.workingCopy();
     QString repository = cvsRepository.location();
-    
+
     CvsProgressDialog l("Diff", this);
-    if (l.execCommand(sandbox, repository, cmdline, "diff"))
+    if (l.execCommand(sandbox, repository, cmdline, "diff", &partConfig))
     {
         KProcess proc;
         proc.setUseShell(true, "/bin/sh");
         proc << extcmdline;
         proc.start(KProcess::DontCare);
     }
-            
+
 }
 
 
@@ -430,7 +430,7 @@ void DiffDialog::updateNofN()
     nofnlabel->setText(str);
 
     itemscombo->setCurrentItem(markeditem==-2? 0 : markeditem+1);
-    
+
     backbutton->setEnabled(markeditem != -1);
     forwbutton->setEnabled(markeditem != -2 && items.count());
 }
@@ -448,7 +448,7 @@ void DiffDialog::updateHighlight(int newitem)
 	}
 
     markeditem = newitem;
-    
+
     if (markeditem >= 0)
 	{
 	    DiffItem *item = items.at(markeditem);

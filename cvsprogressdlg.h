@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -24,30 +24,32 @@ class QListBox;
 class QPushButton;
 class QCString;
 class KAnimWidget;
+class KConfig;
 
 
 class CvsProgressDialog : public QDialog
 {
     Q_OBJECT
-    
+
 public:
     CvsProgressDialog( const QString &text, QWidget *parent );
     ~CvsProgressDialog();
-    
+
     bool execCommand(const QString &sandbox, const QString &repository,
-                     const QString &cmdline, const QString &errindicator);
+                     const QString &cmdline, const QString &errindicator,
+                     KConfig* config);
     bool getOneLine(QString *str);
 
 protected:
     virtual void closeEvent(QCloseEvent *e);
-    
+
 private slots:
     void timeoutOccured();
     void cancelClicked();
     void childExited();
     void receivedOutputNongui(KProcess *proc, char *buffer, int buflen);
     void receivedOutput(KProcess *proc, char *buffer, int buflen);
-    
+
 private:
     void stopNonguiPart();
     void startGuiPart();

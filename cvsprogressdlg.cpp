@@ -28,7 +28,6 @@
 #include <kanimwidget.h>
 
 #include "misc.h"
-#include "cervisiapart.h"
 
 
 CvsProgressDialog::CvsProgressDialog(const QString &text, QWidget *parent)
@@ -84,9 +83,9 @@ CvsProgressDialog::~CvsProgressDialog()
 
 
 bool CvsProgressDialog::execCommand(const QString &sandbox, const QString &repository,
-                                    const QString &cmdline, const QString &errindicator)
+                                    const QString &cmdline, const QString &errindicator,
+                                    KConfig* config)
 {
-    KConfig *config = CervisiaPart::config();
     config->setGroup("General");
     int timeout = (int) config->readUnsignedNumEntry("Timeout", 4000);
 

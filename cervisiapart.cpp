@@ -135,12 +135,12 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
 
 #if KDE_IS_VERSION(3,1,90)
     statusBar = new CervisiaStatusBarExtension(this);
-    
+
     // create the active filter indicator and add it to the statusbar
     filterLabel = new QLabel("UR", statusBar->statusBar());
     filterLabel->setFixedSize(filterLabel->sizeHint());
     filterLabel->setText("");
-    QToolTip::add(filterLabel, 
+    QToolTip::add(filterLabel,
                   i18n("F - All files are hidden, the tree shows only directories\n"
                        "N - All up-to-date files are hidden\n"
                        "R - All removed files are hidden"));
@@ -179,7 +179,7 @@ bool CervisiaPart::openURL( const KURL &u )
     // right now, we are unfortunately not network-aware
     // FIXME: find better error message text!
     if (u.protocol() != "file")
-        KMessageBox::sorry(widget(), 
+        KMessageBox::sorry(widget(),
                            i18n("Cervisia does not support remote repositories."),
                            "Cervisia");
 
@@ -602,7 +602,7 @@ void CervisiaPart::updateActions()
     stateChanged("has_sandbox", hassandbox ? StateNoReverse : StateReverse);
 
     bool single = update->hasSingleSelection();
-    stateChanged("has_single_selection", single ? StateNoReverse 
+    stateChanged("has_single_selection", single ? StateNoReverse
                                                 : StateReverse);
 
     //    bool nojob = !( actionCollection()->action( "stop_job" )->isEnabled() );
@@ -611,7 +611,7 @@ void CervisiaPart::updateActions()
 
     stateChanged("item_selected", selected ? StateNoReverse : StateReverse);
     stateChanged("has_no_job", nojob ? StateNoReverse : StateReverse);
-    stateChanged("has_running_job", hasRunningJob ? StateNoReverse 
+    stateChanged("has_running_job", hasRunningJob ? StateNoReverse
                                                   : StateReverse);
 
 }
@@ -640,7 +640,7 @@ void CervisiaPart::aboutCervisia()
 KAboutData* CervisiaPart::createAboutData()
 {
     KAboutData* about = new KAboutData(
-                            "cervisiapart", I18N_NOOP("Cervisia Part"), 
+                            "cervisiapart", I18N_NOOP("Cervisia Part"),
                             CERVISIA_VERSION, I18N_NOOP("A CVS frontend"),
                             KAboutData::License_QPL,
                             I18N_NOOP("Copyright (c) 1999-2002 Bernd Gehrmann"), 0,
@@ -707,7 +707,7 @@ void CervisiaPart::openFiles(const QStringList &filenames)
         {
             CvsProgressDialog l("Edit", widget() );
             l.setCaption(i18n("CVS Edit"));
-            QString cmdline = cvsClient(repository) + " edit ";
+            QString cmdline = cvsClient(repository, config()) + " edit ";
 
             bool doit = false;
             for ( QStringList::ConstIterator it = filenames.begin();
@@ -722,7 +722,7 @@ void CervisiaPart::openFiles(const QStringList &filenames)
                 }
 
             if (doit)
-                if (!l.execCommand(sandbox, repository, cmdline, "edit"))
+                if (!l.execCommand(sandbox, repository, cmdline, "edit", config()))
                     return;
         }
 
@@ -782,7 +782,7 @@ void CervisiaPart::slotStatus()
         return;
 
     update->prepareJob(opt_updateRecursive, UpdateView::UpdateNoAct);
-    
+
     DCOPRef cvsJob = cvsService->simulateUpdate(list, opt_updateRecursive,
                                                 opt_createDirs, opt_pruneDirs);
 
@@ -791,7 +791,7 @@ void CervisiaPart::slotStatus()
     DCOPReply reply = cvsJob.call("cvsCommand()");
     if( reply.isValid() )
         reply.get<QString>(cmdline);
-            
+
     if( protocol->startJob() )
     {
         showJobStart(cmdline);
@@ -890,7 +890,7 @@ void CervisiaPart::slotCommit()
         }
 
         update->prepareJob(opt_commitRecursive, UpdateView::Commit);
-        
+
         DCOPRef cvsJob = cvsService->commit(list, dlg.logMessage(),
                                             opt_commitRecursive);
 
@@ -932,7 +932,7 @@ void CervisiaPart::updateSandbox(const QString &extraopt)
         return;
 
     update->prepareJob(opt_updateRecursive, UpdateView::Update);
-   
+
     DCOPRef cvsJob = cvsService->update(list, opt_updateRecursive,
                         opt_createDirs, opt_pruneDirs, extraopt);
 
@@ -941,7 +941,7 @@ void CervisiaPart::updateSandbox(const QString &extraopt)
     DCOPReply reply = cvsJob.call("cvsCommand()");
     if( reply.isValid() )
         reply.get<QString>(cmdline);
-            
+
     if( protocol->startJob() )
     {
         showJobStart(cmdline);
@@ -965,14 +965,14 @@ void CervisiaPart::addOrRemove(AddRemoveDialog::ActionType action)
     if (dlg.exec())
     {
         DCOPRef cvsJob;
-        
+
         switch (action)
         {
             case AddRemoveDialog::Add:
                 update->prepareJob(false, UpdateView::Add);
                 cvsJob = cvsService->add(list, false);
             break;
-            
+
             case AddRemoveDialog::AddBinary:
                 update->prepareJob(false, UpdateView::Add);
                 cvsJob = cvsService->add(list, true);
@@ -1083,7 +1083,7 @@ void CervisiaPart::addOrRemoveWatch(WatchDialog::ActionType action)
 
     if (dlg.exec() && dlg.events() != WatchDialog::None)
     {
-        QString cmdline = cvsClient(repository);
+        QString cmdline = cvsClient(repository, config());
         cmdline += " watch ";
         if (action == WatchDialog::Add)
             cmdline += "add ";
@@ -1175,10 +1175,10 @@ void CervisiaPart::slotLock()
         return;
 
     DCOPRef cvsJob = cvsService->lock(list);
-    
+
     // get command line from cvs job
     QString cmdline = cvsJob.call("cvsCommand()");
-    
+
     if( protocol->startJob() )
     {
         showJobStart(cmdline);
@@ -1193,12 +1193,12 @@ void CervisiaPart::slotUnlock()
     QStringList list = update->multipleSelection();
     if (list.isEmpty())
         return;
-    
+
     DCOPRef cvsJob = cvsService->unlock(list);
-    
+
     // get command line from cvs job
     QString cmdline = cvsJob.call("cvsCommand()");
-    
+
     if( protocol->startJob() )
     {
         showJobStart(cmdline);
@@ -1214,7 +1214,7 @@ void CervisiaPart::slotShowEditors()
     if (list.isEmpty())
         return;
 
-    QString cmdline = cvsClient(repository);
+    QString cmdline = cvsClient(repository, config());
     cmdline += " editors ";
     cmdline += joinLine(list);
 
@@ -1232,9 +1232,9 @@ void CervisiaPart::slotMakePatch()
     CvsProgressDialog l("Diff", widget());
     l.setCaption(i18n("CVS Diff"));
 
-    QString cmdline = cvsClient(repository);
+    QString cmdline = cvsClient(repository, config());
     cmdline += " diff -uR 2>/dev/null";
-    if (!l.execCommand(sandbox, repository, cmdline, ""))
+    if (!l.execCommand(sandbox, repository, cmdline, "", config()))
         return;
 
     QString filename = KFileDialog::getSaveFileName();
@@ -1279,7 +1279,7 @@ void CervisiaPart::importOrCheckout(CheckoutDialog::ActionType action)
             QString cmdline = "cd ";
             cmdline += dlg.workingDirectory();
             cmdline += " && ";
-            cmdline += cvsClient(repository);
+            cmdline += cvsClient(repository, config());
             cmdline += " -d ";
             cmdline += dlg.repository();
             if (action == CheckoutDialog::Checkout)
@@ -1349,13 +1349,13 @@ void CervisiaPart::createOrDeleteTag(TagDialog::ActionType action)
     QStringList list = update->multipleSelection();
     if (list.isEmpty())
         return;
-    
+
     TagDialog dlg(action, cvsService, widget());
 
     if (dlg.exec())
     {
         DCOPRef cvsJob;
-        
+
         if( action == TagDialog::Create )
             cvsJob = cvsService->createTag(list, dlg.tag(), dlg.branchTag(),
                                            dlg.forceTag());
@@ -1570,10 +1570,10 @@ bool CervisiaPart::openSandbox(const QString &dirname)
         return false;
 
     Repository_stub cvsRepository(cvsService->app(), "CvsRepository");
-    
+
     // change the working copy directory for the cvs DCOP service
     bool opened = cvsRepository.setWorkingCopy(dirname);
-    
+
     if( !cvsRepository.ok() || !opened )
     {
         KMessageBox::sorry(widget(),
@@ -1581,26 +1581,26 @@ bool CervisiaPart::openSandbox(const QString &dirname)
                            "If you did not intend to use Cervisia, you can "
                            "switch view modes within Konqueror."),
                            "Cervisia");
-        
+
         // remove path from recent sandbox menu
         QFileInfo fi(dirname);
         recent->removeURL( KURL::fromPathOrURL(fi.absFilePath()) );
-        
+
         return false;
     }
-    
+
     changelogstr = "";
     sandbox      = "";
     repository   = "";
-    
+
     // get path of sandbox for recent sandbox menu
     sandbox = cvsRepository.workingCopy();
     recent->addURL( KURL::fromPathOrURL(sandbox) );
-    
+
     // get repository for the caption of the window
     repository = cvsRepository.location();
     emit setWindowCaption(sandbox + "(" + repository + ")");
-    
+
     // set m_url member for tabbed window modus of Konqueror
     m_url = KURL::fromPathOrURL(sandbox);
 
@@ -1623,7 +1623,7 @@ bool CervisiaPart::openSandbox(const QString &dirname)
     //load the recentCommits for this app from the KConfig app
     conf->setGroup( "CommitLogs" );
     recentCommits = conf->readListEntry( sandbox, COMMIT_SPLIT_CHAR );
-    
+
     return true;
 }
 
@@ -1842,7 +1842,7 @@ void CervisiaPart::writeSettings()
     QValueList<int> sizes = splitter->sizes();
     config->writeEntry("Splitter Pos 1", sizes[0]);
     config->writeEntry("Splitter Pos 2", sizes[1]);
-    
+
     // write to disk
     config->sync();
 }
