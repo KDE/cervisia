@@ -177,14 +177,14 @@ void Repository::Private::readConfig()
     }
 
     // get remote shell client to access the remote repository
-    rsh = config->readEntry("rsh");
+    rsh = config->readPathEntry("rsh");
 
     // get program to start on the server side
     server = config->readEntry("cvs_server");
 
     // get path to cvs client programm
     config->setGroup("General");
-    client = config->readEntry("CVSPath", "cvs");   
+    client = config->readPathEntry("CVSPath", "cvs");   
 }
 
 

@@ -86,7 +86,7 @@ bool ProtocolView::startJob(const QString &sandbox, const QString &repository,
 
     KConfig *config = CervisiaPart::config();
     config->setGroup("Repository-" + repository);
-    QString rsh = config->readEntry("rsh");
+    QString rsh = config->readPathEntry("rsh");
 
     childproc = new KShellProcess("/bin/sh");
     if (!sandbox.isEmpty())

@@ -95,7 +95,7 @@ bool CvsProgressDialog::execCommand(const QString &sandbox, const QString &repos
     resultbox->insertItem(cmdline);
 
     config->setGroup("Repository-" + repository);
-    QString rsh = config->readEntry("rsh");
+    QString rsh = config->readPathEntry("rsh");
 
     childproc = new KShellProcess("/bin/sh");
     if (!sandbox.isEmpty())

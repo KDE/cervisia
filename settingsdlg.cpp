@@ -26,6 +26,7 @@
 #include <qwidgetlist.h>
 #include <qhbuttongroup.h>
 #include <qradiobutton.h>
+#include <kdeversion.h>
 #include <kbuttonbox.h>
 #include <kcolorbutton.h>
 #include <kconfig.h>
@@ -187,7 +188,7 @@ void SettingsDialog::readSettings()
 {
     // read entries from cvs DCOP service configuration
     serviceConfig->setGroup("General");
-    cvspathedit->setURL(serviceConfig->readEntry("CVSPath", "cvs"));
+    cvspathedit->setURL(serviceConfig->readPathEntry("CVSPath", "cvs"));
     compressioncombo->setCurrentItem(serviceConfig->readNumEntry("Compression", 0));
     usesshagent->setChecked(serviceConfig->readBoolEntry("UseSshAgent", false));
 
@@ -197,12 +198,12 @@ void SettingsDialog::readSettings()
 
     contextedit->setValue((int)config->readUnsignedNumEntry("ContextLines", 65535));
     tabwidthedit->setValue((int)config->readUnsignedNumEntry("TabWidth", 8));
-    diffoptedit->setText(config->readEntry("DiffOptions", ""));
-    extdiffedit->setURL(config->readEntry("ExternalDiff", ""));
+    diffoptedit->setText(config->readEntry("DiffOptions"));
+    extdiffedit->setURL(config->readPathEntry("ExternalDiff"));
     remotestatusbox->setChecked(config->readBoolEntry("StatusForRemoteRepos", false));
     localstatusbox->setChecked(config->readBoolEntry("StatusForLocalRepos", false));
     config->setGroup("Communication");
-    editoredit->setURL(config->readEntry("Editor"));
+    editoredit->setURL(config->readPathEntry("Editor"));
 
     // read configuration for look and feel page
     config->setGroup("LookAndFeel");
@@ -233,7 +234,11 @@ void SettingsDialog::writeSettings()
 {
     // write entries to cvs DCOP service configuration
     serviceConfig->setGroup("General");
+#if KDE_IS_VERSION(3,1,3)
+    serviceConfig->writePathEntry("CVSPath", cvspathedit->url());
+#else
     serviceConfig->writeEntry("CVSPath", cvspathedit->url());
+#endif
     serviceConfig->writeEntry("Compression", compressioncombo->currentItem());
     serviceConfig->writeEntry("UseSshAgent", usesshagent->isChecked());
 
@@ -244,17 +249,26 @@ void SettingsDialog::writeSettings()
     config->writeEntry("Timeout", (unsigned)timeoutedit->value());
     config->writeEntry("Username", usernameedit->text());
     // TODO: remove when move to cvs DCOP service is complete
+#if KDE_IS_VERSION(3,1,3)
+    config->writePathEntry("CVSPath", cvspathedit->url());
+    config->writePathEntry("ExternalDiff", extdiffedit->url());
+#else
     config->writeEntry("CVSPath", cvspathedit->url());
+    config->writeEntry("ExternalDiff", extdiffedit->url());
+#endif
     config->writeEntry("Compression", compressioncombo->currentItem());
     // END TODO
     config->writeEntry("ContextLines", (unsigned)contextedit->value());
     config->writeEntry("TabWidth", tabwidthedit->value());
     config->writeEntry("DiffOptions", diffoptedit->text());
-    config->writeEntry("ExternalDiff", extdiffedit->url());
     config->writeEntry("StatusForRemoteRepos", remotestatusbox->isChecked());
     config->writeEntry("StatusForLocalRepos", localstatusbox->isChecked());
     config->setGroup("Communication");
+#if KDE_IS_VERSION(3,1,3)
+    config->writePathEntry("Editor", editoredit->url());
+#else
     config->writeEntry("Editor", editoredit->url());
+#endif
 #if 0
     config->writeEntry("UseDCOP", usedcopbox->isChecked());
     config->writeEntry("DCOPClient", clientedit->text());

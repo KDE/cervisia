@@ -18,6 +18,7 @@
 #include <kapplication.h>
 #include <kconfig.h>
 #include <kedittoolbar.h>
+#include <kdeversion.h>
 #include <kfiledialog.h>
 #include <khelpmenu.h>
 #include <kkeydialog.h>
@@ -169,7 +170,7 @@ void CervisiaShell::readSettings()
     KConfig* config = KGlobal::config();
     
     config->setGroup("Session");
-    QString currentDir = config->readEntry("Current Directory");
+    QString currentDir = config->readPathEntry("Current Directory");
     if( !currentDir.isEmpty() )
         openURL( KURL::fromPathOrURL(currentDir) );    
 }
@@ -184,7 +185,11 @@ void CervisiaShell::writeSettings()
     // Save current working directory (if part was created)
     if( part )
     {
+#if KDE_IS_VERSION(3,1,3)
+        config->writePathEntry("Current Directory", part->url().path());
+#else
         config->writeEntry("Current Directory", part->url().path());
+#endif
     
         // write to disk
         config->sync();

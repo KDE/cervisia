@@ -242,14 +242,14 @@ bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
     // place, but this design at least makes the handling trans-
     // parent for the calling routines
 
-    QString extdiff = partConfig.readEntry("ExternalDiff", "");
+    QString extdiff = partConfig.readPathEntry("ExternalDiff");
     if (!extdiff.isEmpty())
         {
             callExternalDiff(extdiff, service, fileName, revA, revB);
             return false;
         }
 
-    const QString diffOptions   = partConfig.readEntry("DiffOptions", "");
+    const QString diffOptions   = partConfig.readEntry("DiffOptions");
     const unsigned contextLines = partConfig.readUnsignedNumEntry("ContextLines", 65535);
         
     DCOPRef job = service->diff(fileName, revA, revB, diffOptions, contextLines);
