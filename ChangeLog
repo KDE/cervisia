@@ -1,3 +1,9 @@
+2004-04-29  Christian Loose  <christian.loose@kdemail.net>
+
+	* Implement BR #79957:
+	  Spellchecking in commit dialog.
+	  (patch by theboywho@ruddyperl.com)
+
 2004-04-23  Christian Loose  <christian.loose@kdemail.net>
 
 	* Big cleanup - removed KDE 3.1 support

@@ -21,7 +21,7 @@
 
 class QComboBox;
 class QListBox;
-class QMultiLineEdit;
+class KTextEdit;
 class KConfig;
 class CvsService_stub;
 
@@ -51,7 +51,7 @@ private:
     void showDiffDialog(const QString& fileName);
 
     QListBox *listbox;
-    QMultiLineEdit *edit;
+    KTextEdit *edit;
     QComboBox *combo;
     QStringList commits;
     int current_index;

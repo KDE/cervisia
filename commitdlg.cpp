@@ -19,7 +19,7 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qlistbox.h>
-#include <qmultilineedit.h>
+#include <ktextedit.h>
 #include <kconfig.h>
 #include <klocale.h>
 
@@ -60,8 +60,9 @@ CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service,
     QLabel *messagelabel = new QLabel(i18n("&Log message:"), mainWidget);
     layout->addWidget(messagelabel);
 
-    edit = new QMultiLineEdit(mainWidget);
+    edit = new KTextEdit(mainWidget);
     messagelabel->setBuddy(edit);
+    edit->setCheckSpellingEnabled(true);
     edit->setFocus();
     edit->setMinimumSize(400, 100);
     layout->addWidget(edit, 10);
