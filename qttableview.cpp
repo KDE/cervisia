@@ -16,6 +16,7 @@
 #include "qscrollbar.h"
 #include "qpainter.h"
 #include "qdrawutil.h"
+#include <qapplication.h>
 #include <limits.h>
 
 enum ScrollBarDirtyFlags {
@@ -1417,6 +1418,11 @@ void QtTableView::resizeEvent( QResizeEvent * )
     setOffset( maxX, maxY );
 }
 
+void QtTableView::wheelEvent( QWheelEvent * e )
+{
+    if( e->orientation() == Vertical && vScrollBar && vScrollBar->isVisible() )
+        QApplication::sendEvent( vScrollBar, e );
+}
 
 /*!
   Redraws all visible cells in the table view.

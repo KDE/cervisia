@@ -104,6 +104,7 @@ protected:
 
     void	paintEvent( QPaintEvent * );
     void	resizeEvent( QResizeEvent * );
+    virtual void wheelEvent( QWheelEvent *e );
 
     int		findRow( int yPos ) const;
     int		findCol( int xPos ) const;
