@@ -132,7 +132,10 @@ bool Repository::setWorkingCopy(const QString& dirName)
 
     // is this really a cvs-controlled directory?
     const QFileInfo cvsDirInfo(path + "/CVS");
-    if( !cvsDirInfo.exists() || !cvsDirInfo.isDir() )
+    if( !cvsDirInfo.exists() || !cvsDirInfo.isDir() ||
+        !QFile::exists( cvsDirInfo.filePath() + "/Entries" ) ||
+        !QFile::exists( cvsDirInfo.filePath() + "/Repository" ) ||
+        !QFile::exists( cvsDirInfo.filePath() + "/Root" ) )
         return false;
 
     d->workingCopy = path;
