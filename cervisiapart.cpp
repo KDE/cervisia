@@ -108,21 +108,31 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     conf->setGroup("LookAndFeel");
     bool splitHorz = conf->readBoolEntry("SplitHorizontally",true);
 
-    splitter = new QSplitter(splitHorz? QSplitter::Vertical : QSplitter::Horizontal,
-                             parentWidget, widgetName);
+    // When we couldn't start the DCOP service, we just display a QLabel with
+    // an explaination
+    if( cvsService )
+    {
+        Orientation o = splitHorz ? QSplitter::Vertical
+                                  : QSplitter::Horizontal;
+        splitter = new QSplitter(o, parentWidget, widgetName);
 
-    update = new UpdateView(splitter);
-    update->setFocusPolicy( QWidget::StrongFocus );
-    update->setFocus();
-    connect( update, SIGNAL(contextMenu(KListView*, QListViewItem*, const QPoint&)),
-             this, SLOT(popupRequested(KListView*, QListViewItem*, const QPoint&)) );
-    connect( update, SIGNAL(fileOpened(QString)),
-             this, SLOT(openFile(QString)) );
+        update = new UpdateView(splitter);
+        update->setFocusPolicy( QWidget::StrongFocus );
+        update->setFocus();
+        connect( update, SIGNAL(contextMenu(KListView*, QListViewItem*, const QPoint&)),
+                 this, SLOT(popupRequested(KListView*, QListViewItem*, const QPoint&)) );
+        connect( update, SIGNAL(fileOpened(QString)),
+                 this, SLOT(openFile(QString)) );
 
-    protocol = new ProtocolView(appId, splitter);
-    protocol->setFocusPolicy( QWidget::StrongFocus );
+        protocol = new ProtocolView(appId, splitter);
+        protocol->setFocusPolicy( QWidget::StrongFocus );
 
-    setWidget(splitter);
+        setWidget(splitter);
+    }
+    else
+        setWidget(new QLabel(i18n("This KPart is non-functional, because we "
+                                  "couldn't start the cvs DCOP service!"),
+                             parentWidget));
 
 #if KDE_IS_VERSION(3,1,90)
     statusBar = new CervisiaStatusBarExtension(this);
@@ -138,12 +148,15 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     statusBar->addStatusBarItem(filterLabel, 0, true);
 #endif
 
-    setupActions();
+    if( cvsService )
+    {
+        setupActions();
+        readSettings();
+        connect( update, SIGNAL( selectionChanged() ), this, SLOT( updateActions() ) );
+    }
+
     setupGlobalConfig();
-    readSettings();
-    connect( update, SIGNAL( selectionChanged() ), this, SLOT( updateActions() ) );
     setXMLFile( "cervisiaui.rc" );
-    
 }
 
 CervisiaPart::~CervisiaPart()
@@ -1826,7 +1839,7 @@ void CervisiaPart::writeSettings()
 
 void CervisiaPart::guiActivateEvent(KParts::GUIActivateEvent* event)
 {
-    if( event->activated() )
+    if( event->activated() && cvsService )
     {
         // initial setup of the menu items' state
         updateActions();
