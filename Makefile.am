@@ -1,5 +1,5 @@
 CERVISIA_VERSION = 2.0
-INCLUDES = $(all_includes) -I./cvsservice
+INCLUDES = -I./cvsservice $(all_includes)
 LDFLAGS	= $(all_libraries) $(KDE_RPATH)
 AM_CPPFLAGS = -UQT_NO_COMPAT -D_BSD_SOURCE
 
