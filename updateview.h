@@ -20,6 +20,8 @@
 
 #include <qptrlist.h>
 
+#include "entry.h"
+
 
 class KConfig;
 
@@ -30,11 +32,6 @@ class UpdateView : public KListView
     
 public:
 
-    enum Status { LocallyModified, LocallyAdded, LocallyRemoved,
-                  NeedsUpdate, NeedsPatch, NeedsMerge,
-                  UpToDate, Conflict,
-                  Updated, Patched, Removed,
-                  NotInCVS, Unknown };
     enum Filter { NoFilter=0, OnlyDirectories=1, NoUpToDate=2,
                   NoRemoved=4, NoNotInCVS=8 , NoEmptyDirectories = 16 };
     enum Action { Add, Remove, Update, UpdateNoAct, Commit };
@@ -74,7 +71,7 @@ private slots:
     void itemExecuted(QListViewItem *item);
     
 private:
-    void updateItem(const QString &filename, Status status, bool isdir);
+    void updateItem(const QString &filename, Cervisia::Entry::Status status, bool isdir);
     void rememberSelection(bool recursive);
     void syncSelection();
     void markUpdated(bool laststage, bool success);
