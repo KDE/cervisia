@@ -157,6 +157,13 @@ KConfig *CervisiaPart::config()
 
 bool CervisiaPart::openURL( const KURL &u )
 {
+    // right now, we are unfortunately not network-aware
+    // FIXME: find better error message text!
+    if (u.protocol() != "file")
+        KMessageBox::sorry(widget(), 
+                           i18n("Cervisia does not support remote repositories."),
+                           "Cervisia");
+
     return openSandbox( u.path() );
 }
 
