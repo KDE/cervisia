@@ -98,6 +98,12 @@ QPopupMenu* ProtocolView::createPopupMenu(const QPoint &pos)
 }
 
 
+void ProtocolView::cancelJob()
+{
+    job->cancel();
+}
+
+
 void ProtocolView::slotReceivedOutput(QString buffer)
 {
     buf += buffer;

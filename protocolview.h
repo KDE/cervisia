@@ -46,6 +46,9 @@ signals:
     void receivedLine(QString line);
     void jobFinished(bool normalExit, int exitStatus);
 
+private slots:
+    void cancelJob();
+
 private:
     void processOutput();
     void appendLine(const QString &line);
