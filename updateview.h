@@ -44,16 +44,20 @@ public:
     
     static bool isDirItem(QListViewItem *item);
 
-    bool hasSingleSelection();
-    void getSingleSelection(QString *filename, QString *revision=0);
+    bool hasSingleSelection() const;
+    void getSingleSelection(QString *filename, QString *revision=0) const;
     /* Returns a list of all marked files and directories */
-    QStringList multipleSelection();
+    QStringList multipleSelection() const;
     /* Returns a list of all marked files, excluding directories*/
-    QStringList fileSelection();
+    QStringList fileSelection() const;
 
-    void openDirectory(QString dirname);
+    void openDirectory(const QString& dirname);
     void scanRecursive();
     void prepareJob(bool recursive, Action action);
+
+    const QColor& conflictColor() const;
+    const QColor& localChangeColor() const;
+    const QColor& remoteChangeColor() const;
 
 signals:
     void contextMenu();
@@ -76,10 +80,16 @@ private:
     void rememberSelection(bool recursive);
     void syncSelection();
     void markUpdated(bool laststage, bool success);
-    QString dirname;
+
+    void updateColors();
+
     Filter filt;
     Action act;
     QPtrList<QListViewItem> relevantSelection;
+
+    QColor m_conflictColor;
+    QColor m_localChangeColor;
+    QColor m_remoteChangeColor;
 };
 
 #endif

@@ -108,10 +108,6 @@ private:
     bool m_undefined;
     UpdateView::Status m_status;
     time_t m_timestamp;
-    
-    QColor conflictColor;
-    QColor localChangeColor;
-    QColor remoteChangeColor;
 };
 
 
@@ -457,14 +453,6 @@ UpdateViewItem::UpdateViewItem( QListViewItem *parent, const QString& filename )
       m_undefined(false),
       m_status(UpdateView::NotInCVS)
 {
-    KConfig *config = CervisiaPart::config();
-    config->setGroup("Colors");
-     QColor defaultColor = QColor(255, 100, 100);
-    conflictColor=config->readColorEntry("Conflict",&defaultColor);
-    defaultColor=QColor(190, 190, 237);
-    localChangeColor=config->readColorEntry("LocalChange",&defaultColor);
-    defaultColor=QColor(255, 240, 190);
-    remoteChangeColor=config->readColorEntry("RemoteChange",&defaultColor);
 }
 
 
@@ -682,19 +670,36 @@ QString UpdateViewItem::text(int col) const
 void UpdateViewItem::paintCell(QPainter *p, const QColorGroup &cg,
 			       int col, int width, int align)
 {
-    QColor color =
-	(m_status == UpdateView::Conflict)? conflictColor
-	: (m_status == UpdateView::LocallyModified ||
-	   m_status == UpdateView::LocallyAdded  ||
-	   m_status == UpdateView::LocallyRemoved)? localChangeColor
-	: (m_status == UpdateView::Patched ||
-	   m_status == UpdateView::Updated ||
-           m_status == UpdateView::Removed ||
-	   m_status == UpdateView::NeedsPatch ||
-	   m_status == UpdateView::NeedsUpdate)? remoteChangeColor
-	: cg.base();
+    const UpdateView* view(static_cast<UpdateView*>(listView()));
+
+    QColor color;
+    switch (m_status)
+    {
+    case UpdateView::Conflict:
+        color = view->conflictColor();
+        break;
+    case UpdateView::LocallyAdded:
+    case UpdateView::LocallyModified:
+    case UpdateView::LocallyRemoved:
+        color = view->localChangeColor();
+        break;
+    case UpdateView::NeedsMerge:
+    case UpdateView::NeedsPatch:
+    case UpdateView::NeedsUpdate:
+    case UpdateView::Patched:
+    case UpdateView::Removed:
+    case UpdateView::Updated:
+        color = view->remoteChangeColor();
+        break;
+    case UpdateView::NotInCVS:
+    case UpdateView::Unknown:
+    case UpdateView::UpToDate:
+        break;
+    }
+
     QColorGroup mycg(cg);
-    mycg.setBrush(QColorGroup::Base, color);
+    if (color.isValid())
+        mycg.setColor(QColorGroup::Base, color);
 
     QListViewItem::paintCell(p, mycg, col, width, align);
 }
@@ -772,7 +777,7 @@ UpdateView::Filter UpdateView::filter() const
 }
 
 
-bool UpdateView::hasSingleSelection()
+bool UpdateView::hasSingleSelection() const
 {
     bool selfound = false;
     QPtrStack<QListViewItem> s;
@@ -794,7 +799,7 @@ bool UpdateView::hasSingleSelection()
 }
 
 
-void UpdateView::getSingleSelection(QString *filename, QString *revision)
+void UpdateView::getSingleSelection(QString *filename, QString *revision) const
 {
     QPtrStack<QListViewItem> s;
 
@@ -814,7 +819,7 @@ void UpdateView::getSingleSelection(QString *filename, QString *revision)
 }
 
 
-QStringList UpdateView::multipleSelection()
+QStringList UpdateView::multipleSelection() const
 {
     QStringList res;
     QPtrStack<QListViewItem> s;
@@ -844,7 +849,7 @@ QStringList UpdateView::multipleSelection()
 }
 
 
-QStringList UpdateView::fileSelection()
+QStringList UpdateView::fileSelection() const
 {
     QStringList res;
     QPtrStack<QListViewItem> s;
@@ -859,6 +864,24 @@ QStringList UpdateView::fileSelection()
                 res.append( static_cast<UpdateViewItem*>(item)->filePath() );
         }
     return res;
+}
+
+
+const QColor& UpdateView::conflictColor() const
+{
+    return m_conflictColor;
+}
+
+
+const QColor& UpdateView::localChangeColor() const
+{
+    return m_localChangeColor;
+}
+
+
+const QColor& UpdateView::remoteChangeColor() const
+{
+    return m_remoteChangeColor;
 }
 
 
@@ -902,9 +925,13 @@ void UpdateView::foldTree()
  * Clear the tree view and insert the directory dirname
  * into it as the new root item
  */
-void UpdateView::openDirectory(QString dirname)
+void UpdateView::openDirectory(const QString& dirname)
 {
     clear();
+
+    // do this each time as the configuration could be changed
+    updateColors();
+
     UpdateDirItem *item = new UpdateDirItem(this, dirname);
     item->setOpen(true);
     setCurrentItem(item);
@@ -1079,6 +1106,26 @@ void UpdateView::syncSelection()
 
 
 /**
+ * Get the colors from the configuration each time the list view items
+ * are created.
+ */
+void UpdateView::updateColors()
+{
+    KConfig* config(CervisiaPart::config());
+    config->setGroup("Colors");
+
+    QColor defaultColor = QColor(255, 100, 100);
+    m_conflictColor = config->readColorEntry("Conflict", &defaultColor);
+
+    defaultColor = QColor(190, 190, 237);
+    m_localChangeColor = config->readColorEntry("LocalChange", &defaultColor);
+
+    defaultColor = QColor(255, 240, 190);
+    m_remoteChangeColor = config->readColorEntry("RemoteChange", &defaultColor);
+}
+
+
+/**
  * Process one line from the output of 'cvs update'. If parseAsStatus
  * is true, it is assumed that the output is from a command
  * 'cvs update -n', i.e. cvs actually changes no files.
@@ -1135,6 +1182,7 @@ void UpdateView::updateItem(const QString &name, Status status, bool isdir)
 	dirpath += '/';
 
     UpdateDirItem *longestmatch = 0;
+    QString longestmatchPath;
     QPtrStack<QListViewItem> s;
     for ( QListViewItem *item = firstChild(); item;
 	  item = item->nextSibling()? item->nextSibling() : s.pop() )
@@ -1142,15 +1190,19 @@ void UpdateView::updateItem(const QString &name, Status status, bool isdir)
 	    if (UpdateView::isDirItem(item))
 		{
 		    UpdateDirItem *diritem = static_cast<UpdateDirItem*>(item);
-		    if (diritem->dirPath() == dirpath)
+                    const QString& diritemPath(diritem->dirPath());
+                    if (diritemPath == dirpath)
 			{
 			    diritem->updateChildItem(fileName, status, isdir);
 			    return;
 			}
-                    else if (!diritem->dirPath().isEmpty() && dirpath.startsWith(diritem->dirPath())
-                             && (!longestmatch || diritem->dirPath().length() > longestmatch->dirPath().length()))
+                    else if (!diritemPath.isEmpty() && dirpath.startsWith(diritemPath)
+                             && (!longestmatch || diritemPath.length() > longestmatchPath.length()))
+                    {
                         longestmatch = diritem;
-                    
+                        longestmatchPath = diritemPath;
+                    }
+
                     if (item->firstChild())
                         s.push(item->firstChild());
 		}
@@ -1158,17 +1210,17 @@ void UpdateView::updateItem(const QString &name, Status status, bool isdir)
 
     if (!longestmatch)
         {
-            kdDebug() << "no match: " << dirname << endl;
+            kdDebug() << "no match: " << dirpath << endl;
             return;
         }
     // Item doesn't belong any existing directory in the tree, so we have to create
     // the missing leaves. longestmatch is the directory item where we have to attach
-    kdDebug() << "longest match: " << longestmatch->dirPath() << endl;
-    kdDebug() << "leaves: " <<  dirpath.mid(longestmatch->dirPath().length()) << endl;
-    QStringList leaves = QStringList::split('/', dirpath.mid(longestmatch->dirPath().length()));
+    kdDebug() << "longest match: " << longestmatchPath << endl;
+    kdDebug() << "leaves: " <<  dirpath.mid(longestmatchPath.length()) << endl;
+    QStringList leaves = QStringList::split('/', dirpath.mid(longestmatchPath.length()));
     for (int i=0; i < (int)leaves.count(); ++i)
         {
-            QString newFileName = longestmatch->dirPath();
+            QString newFileName = longestmatchPath;
             for (int j=0; j < i; ++j)
                 {
                     newFileName += leaves[j];
