@@ -268,7 +268,7 @@ void CervisiaPart::setupActions()
                           protocol, SLOT(cancelJob()),
                           actionCollection(), "stop_job" );
     action->setEnabled( false );
-    hint = i18n("Stops any running subprocesses");
+    hint = i18n("Stops any running sub-processes");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
     
