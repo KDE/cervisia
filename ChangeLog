@@ -1,3 +1,10 @@
+2003-02-24  Christian Loose <christian.loose@hamburg.de>
+
+	* Display error message when user tries to access a
+	  remote repository. (#54106)
+	* Don't display the timestamp for files that are not
+	  in cvs. (#55053)
+
 2003-01-25  Christian Loose <christian.loose@hamburg.de>
 
 	* Detect "U" as remote changed file in ProtocolView.
