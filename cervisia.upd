@@ -60,3 +60,8 @@ RemoveGroup=AddRepository dialog
 RemoveGroup=Repository dialog
 Group=Checkout dialog,CheckoutDialog
 AllKeys
+#
+Id=kde3.2/20030725
+File=cervisiapartrc
+Group=LogDialog
+RemoveKey=ShowListTab
