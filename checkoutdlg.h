@@ -54,6 +54,9 @@ private slots:
     void moduleButtonClicked();
 
 private:
+    void saveUserInput();
+    void restoreUserInput();
+    
     QComboBox *repo_combo, *module_combo;
     KLineEdit *module_edit, *workdir_edit;
     KLineEdit *branch_edit, *comment_edit;

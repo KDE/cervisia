@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
+ *  Copyright (c) 2003-2004 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -161,24 +162,6 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
             repo_combo->insertItem(*it2);
 
     setHelp((act == Import) ? "importing" : "checkingout");
-
-    KConfigGroupSaver cs(&partConfig, "CheckoutDialog");
-    repo_combo->setEditText(partConfig.readEntry("Repository"));
-    workdir_edit->setText(partConfig.readPathEntry("Working directory"));
-
-    if (action == Import)
-    {
-        module_edit->setText(partConfig.readEntry("Module"));
-        vendortag_edit->setText(partConfig.readEntry("Vendor tag"));
-        releasetag_edit->setText(partConfig.readEntry("Release tag"));
-        ignore_edit->setText(partConfig.readEntry("Ignore files"));
-        binary_box->setChecked(partConfig.readBoolEntry("Import binary"));
-    }
-    else
-    {
-        module_combo->setEditText(partConfig.readEntry("Module"));
-        branch_edit->setText(partConfig.readEntry("Branch"));
-    }
 }
 
 
@@ -267,27 +250,6 @@ void CheckoutDialog::slotOk()
         }
     }
 
-    KConfigGroupSaver cs(&partConfig, "CheckoutDialog");
-    partConfig.writeEntry("Repository", repository());
-    partConfig.writeEntry("Module", module());
-#if KDE_IS_VERSION(3,1,3)
-    partConfig.writePathEntry("Working directory", workingDirectory());
-#else
-    partConfig.writeEntry("Working directory", workingDirectory());
-#endif
-
-    if (act == Import)
-    {
-        partConfig.writeEntry("Vendor tag", vendorTag());
-        partConfig.writeEntry("Release tag", releaseTag());
-        partConfig.writeEntry("Ignore files", ignoreFiles());
-        partConfig.writeEntry("Import binary", importBinary());
-    }
-    else
-    {
-        partConfig.writeEntry("Branch", branch());
-    }
-
     KDialogBase::slotOk();
 }
 
@@ -326,6 +288,51 @@ void CheckoutDialog::moduleButtonClicked()
             if ( !module.isEmpty() )
                 module_combo->insertItem(module);
         }
+}
+    
+
+void CheckoutDialog::restoreUserInput()
+{
+    KConfigGroupSaver cs(&partConfig, "CheckoutDialog");
+    
+    repo_combo->setEditText(partConfig.readEntry("Repository"));
+    workdir_edit->setText(partConfig.readPathEntry("Working directory"));
+
+    if (act == Import)
+    {
+        module_edit->setText(partConfig.readEntry("Module"));
+        vendortag_edit->setText(partConfig.readEntry("Vendor tag"));
+        releasetag_edit->setText(partConfig.readEntry("Release tag"));
+        ignore_edit->setText(partConfig.readEntry("Ignore files"));
+        binary_box->setChecked(partConfig.readBoolEntry("Import binary"));
+    }
+    else
+    {
+        module_combo->setEditText(partConfig.readEntry("Module"));
+        branch_edit->setText(partConfig.readEntry("Branch"));
+    }
+}
+
+
+void CheckoutDialog::saveUserInput()
+{
+    KConfigGroupSaver cs(&partConfig, "CheckoutDialog");
+
+    partConfig.writeEntry("Repository", repository());
+    partConfig.writeEntry("Module", module());
+    partConfig.writeEntry("Working directory", workingDirectory());
+
+    if (act == Import)
+    {
+        partConfig.writeEntry("Vendor tag", vendorTag());
+        partConfig.writeEntry("Release tag", releaseTag());
+        partConfig.writeEntry("Ignore files", ignoreFiles());
+        partConfig.writeEntry("Import binary", importBinary());
+    }
+    else
+    {
+        partConfig.writeEntry("Branch", branch());
+    }
 }
 
 
