@@ -38,7 +38,7 @@ CvsLoginJob::CvsLoginJob(unsigned jobNum)
 {
     QString objId("CvsLoginJob" + QString::number(jobNum));
     setObjId(objId.local8Bit());
-    
+
     m_Proc = new PtyProcess;
 }
 
@@ -64,7 +64,7 @@ void CvsLoginJob::setServer(const QString& server)
 void CvsLoginJob::setCvsClient(const QCString& cvsClient)
 {
     m_CvsClient = cvsClient;
-    
+
     m_Arguments.clear();
     m_Arguments += "-f";
 }
@@ -81,7 +81,7 @@ void CvsLoginJob::setRepository(const QCString& repository)
 bool CvsLoginJob::execute()
 {
     static QCString repository;
-    
+
     int res = m_Proc->exec(m_CvsClient, m_Arguments);
     if( res < 0 )
     {
@@ -89,7 +89,7 @@ bool CvsLoginJob::execute()
         return false;
     }
 
-    bool result = false;    
+    bool result = false;
     while( true )
     {
         QCString line = m_Proc->readLine();
@@ -97,22 +97,22 @@ bool CvsLoginJob::execute()
         {
             return result;
         }
-        
+
         kdDebug(8051) << "process output = " << line << endl;
-        
+
         // retrieve repository from 'Logging in to'-line
         if( line.contains(LOGIN_PHRASE) )
         {
             repository = line.remove(0, line.find(":pserver:"));
             continue;
         }
-        
+
         // process asks for the password
         if( line.contains(PASS_PHRASE) )
         {
             kdDebug(8051) << "process waits for the password." << endl;
 
-            // show password dialog       
+            // show password dialog
             // TODO: We really should display the repository name. Unfortunately
             //       the dialog doesn't show part of the repository name, because
             //       it's too long. :-(
@@ -124,17 +124,17 @@ bool CvsLoginJob::execute()
                 // send password to process
                 m_Proc->WaitSlave();
                 m_Proc->writeLine(password);
-                
+
                 // wait for the result
                 while( !line.contains(FAILURE_PHRASE) )
                 {
                     line = m_Proc->readLine();
                     if( line.isNull() )
                         return true;
-                    
+
                     kdDebug(8051) << "process output = " << line << endl;
                 }
-                
+
                 result = false;
             }
             else
@@ -145,7 +145,7 @@ bool CvsLoginJob::execute()
                 result = false;
             }
         }
-    }   
-    
+    }
+
     return false;
 }
