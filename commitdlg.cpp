@@ -183,7 +183,7 @@ void CommitDialog::diffClicked()
 
 void CommitDialog::showDiffDialog(const QString& fileName)
 {
-    DiffDialog *l = new DiffDialog(partConfig, this, "diffdialog", true);
+    DiffDialog *l = new DiffDialog(partConfig, this, "diffdialog");
     if (l->parseCvsDiff(cvsService, fileName, "", ""))
         l->show();
     else
