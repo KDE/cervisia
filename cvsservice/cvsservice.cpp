@@ -26,7 +26,6 @@
 #include <dcopref.h>
 #include <dcopclient.h>
 #include <kapplication.h>
-#include <kdebug.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kprocess.h>
@@ -36,8 +35,8 @@
 #include "repository.h"
 
 
-static const char* SINGLE_JOB_ID   = "NonConcurrentJob";
-static const char* REDIRECT_STDERR = "2>&1";
+static const char SINGLE_JOB_ID[]   = "NonConcurrentJob";
+static const char REDIRECT_STDERR[] = "2>&1";
 
 
 struct CvsService::Private
@@ -48,19 +47,19 @@ struct CvsService::Private
         delete repository;
         delete singleCvsJob;
     }
-    
+
     CvsJob*             singleCvsJob;   // non-concurrent cvs job, like update or commit
     DCOPRef             singleJobRef;   // DCOP reference to non-concurrent cvs job
     QIntDict<CvsJob>    cvsJobs;        // concurrent cvs jobs, like diff or annotate
     unsigned            lastJobId;
-    
+
     QCString            appId;          // cache the DCOP clients app id
-    
+
     Repository*         repository;
-    
+
     CvsJob* createCvsJob();
     DCOPRef setupNonConcurrentJob();
-    
+
     bool hasWorkingCopy();
     bool hasRunningJob();
 };
@@ -71,14 +70,14 @@ CvsService::CvsService()
     , d(new Private)
 {
     d->appId = kapp->dcopClient()->appId();
-    
+
     // create non-concurrent cvs job
     d->singleCvsJob = new CvsJob(SINGLE_JOB_ID);
     d->singleJobRef.setRef(d->appId, d->singleCvsJob->objId());
 
     // create repository manager
     d->repository = new Repository();
-    
+
     d->cvsJobs.setAutoDelete(true);
 }
 
@@ -94,18 +93,18 @@ DCOPRef CvsService::add(const QStringList& files, bool isBinary)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
         return DCOPRef();
-        
+
     // assemble the command line
     // cvs add [-kb] [FILES]
     d->singleCvsJob->clearCvsCommand();
-    
+
     *d->singleCvsJob << d->repository->cvsClient() << "add";
-    
+
     if( isBinary )
         *d->singleCvsJob << "-kb";
-    
+
     *d->singleCvsJob << CvsServiceUtils::joinFileList(files) << REDIRECT_STDERR;
-    
+
     return d->setupNonConcurrentJob();
 }
 
@@ -114,10 +113,10 @@ DCOPRef CvsService::annotate(const QString& fileName, const QString& revision)
 {
     if( !d->hasWorkingCopy() )
         return DCOPRef();
-        
+
     // create a cvs job
     CvsJob* job = d->createCvsJob();
-    
+
     // assemble the command line
     // (cvs log [FILE] && cvs annotate [-r rev] [FILE])
     QString quotedName = KProcess::quote(fileName);
@@ -125,7 +124,7 @@ DCOPRef CvsService::annotate(const QString& fileName, const QString& revision)
 
     *job << "(" << cvsClient << "log" << quotedName << "&&"
          << cvsClient << "annotate";
-        
+
     if( !revision.isEmpty() )
         *job << "-r" << revision;
 
@@ -148,7 +147,7 @@ DCOPRef CvsService::checkout(const QString& workingDir, const QString& repositor
     // assemble the command line
     // cd [DIRECTORY] && cvs -d [REPOSITORY] checkout [-r tag] [-P] [MODULE]
     d->singleCvsJob->clearCvsCommand();
-    
+
     *d->singleCvsJob << "cd" << workingDir << "&&"
                      << d->repository->cvsClient()
                      << "-d" << repository
@@ -175,9 +174,9 @@ DCOPRef CvsService::commit(const QStringList& files, const QString& commitMessag
     // assemble the command line
     // cvs commit [-l] [-m MESSAGE] [FILES]
     d->singleCvsJob->clearCvsCommand();
-    
+
     *d->singleCvsJob << d->repository->cvsClient() << "commit";
-                    
+
     if( !recursive )
         *d->singleCvsJob << "-l";
 
@@ -199,18 +198,17 @@ DCOPRef CvsService::diff(const QString& fileName, const QString& revA,
     CvsJob* job = d->createCvsJob();
 
     // assemble the command line
+    // cvs diff [DIFFOPTIONS] -U CONTEXTLINES [-r REVA] {-r REVB] [FILE]
     *job << d->repository->cvsClient() << "diff" << diffOptions
          << "-U" << QString::number(contextLines);
-    
+
     if( !revA.isEmpty() )
         *job << "-r" << KProcess::quote(revA);
-        
+
     if( !revB.isEmpty() )
         *job << "-r" << KProcess::quote(revB);
-     
-    *job << KProcess::quote(fileName);
 
-    kdDebug(8051) << job->cvsCommand() << endl;
+    *job << KProcess::quote(fileName);
 
     // return a DCOP reference to the cvs job
     return DCOPRef(d->appId, job->objId());
@@ -307,18 +305,18 @@ DCOPRef CvsService::remove(const QStringList& files, bool recursive)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
         return DCOPRef();
-        
+
     // assemble the command line
     // cvs remove -f [-l] [FILES]
     d->singleCvsJob->clearCvsCommand();
-    
+
     *d->singleCvsJob << d->repository->cvsClient() << "remove -f";
-    
+
     if( !recursive )
         *d->singleCvsJob << "-l";
-    
+
     *d->singleCvsJob << CvsServiceUtils::joinFileList(files) << REDIRECT_STDERR;
-    
+
     return d->setupNonConcurrentJob();
 }
 
@@ -331,7 +329,7 @@ DCOPRef CvsService::simulateUpdate(const QStringList& files, bool recursive)
     // assemble the command line
     // cvs -n update [-l] [FILES]
     d->singleCvsJob->clearCvsCommand();
-    
+
     *d->singleCvsJob << d->repository->cvsClient() << "-n update";
 
     if( !recursive )
@@ -357,7 +355,7 @@ DCOPRef CvsService::status(const QStringList& files, bool recursive, bool tagInf
 
     if( !recursive )
         *job << "-l";
-    
+
     if( tagInfo )
         *job << "-v";
 
@@ -394,7 +392,7 @@ DCOPRef CvsService::update(const QStringList& files, bool recursive,
     // assemble the command line
     // cvs update [-l] [-d] [-P] [EXTRAOPTIONS] [FILES]
     d->singleCvsJob->clearCvsCommand();
-    
+
     *d->singleCvsJob << d->repository->cvsClient() << "update";
 
     if( !recursive )
@@ -412,7 +410,7 @@ DCOPRef CvsService::update(const QStringList& files, bool recursive,
     return d->setupNonConcurrentJob();
 }
 
-                   
+
 void CvsService::quit()
 {
     kapp->quit();
@@ -440,7 +438,7 @@ DCOPRef CvsService::Private::setupNonConcurrentJob()
     singleCvsJob->setRSH(repository->rsh());
     singleCvsJob->setServer(repository->server());
     singleCvsJob->setDirectory(repository->workingCopy());
-    
+
     return singleJobRef;
 }
 
@@ -453,7 +451,7 @@ bool CvsService::Private::hasWorkingCopy()
                                    "directory before you can use this function!"));
         return false;
     }
-    
+
     return true;
 }
 
@@ -461,9 +459,9 @@ bool CvsService::Private::hasWorkingCopy()
 bool CvsService::Private::hasRunningJob()
 {
     bool result = singleCvsJob->isRunning();
-    
+
     if( result )
         KMessageBox::sorry(0, i18n("There is already a job running"));
-    
+
     return result;
 }

@@ -42,7 +42,7 @@ public:
     void setRSH(const QString& rsh);
     void setServer(const QString& server);
     void setDirectory(const QString& directory);
-    
+
     CvsJob& operator<<(const QString& arg);
     CvsJob& operator<<(const char* arg);
     CvsJob& operator<<(const QCString& arg);
@@ -53,7 +53,7 @@ k_dcop:
     void cancel();
 
     bool isRunning() const;
-    
+
     /**
      * Current cvs command.
      *

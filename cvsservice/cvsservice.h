@@ -77,8 +77,9 @@ k_dcop:
 
     /**
      *
-     * @param files
-     * @param commitMessage
+     * @param files A list of files with changes that should be committed to
+     *              the repository.
+     * @param commitMessage log message describing the changes
      * @param recursive
      *
      * @return A DCOP reference to the cvs job or in case of failure a
@@ -160,7 +161,7 @@ k_dcop:
      *
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
-     */    
+     */
     DCOPRef simulateUpdate(const QStringList& files, bool recursive);
 
     /**
@@ -172,7 +173,7 @@ k_dcop:
      *
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
-     */    
+     */
     DCOPRef status(const QStringList& files, bool recursive, bool tagInfo);
 
     /**

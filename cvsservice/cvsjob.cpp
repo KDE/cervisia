@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002 Christian Loose <christian.loose@hamburg.de>
+ * Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -22,6 +22,7 @@
 
 #include <qstring.h>
 #include <qtextstream.h>
+#include <kdebug.h>
 #include <kprocess.h>
 
 
@@ -31,9 +32,9 @@ struct CvsJob::Private
     {
         childproc = new KProcess;
         childproc->setUseShell(true, "/bin/sh");
-    }   
+    }
     ~Private() { delete childproc; }
-    
+
     KProcess*   childproc;
     QString     server;
     QString     rsh;
@@ -142,19 +143,21 @@ bool CvsJob::execute()
 {
     if( !d->rsh.isEmpty() )
         d->childproc->setEnvironment("CVS_RSH", d->rsh);
-            
+
     if( !d->server.isEmpty() )
         d->childproc->setEnvironment("CVS_SERVER", d->server);
 
     if( !d->directory.isEmpty() )
         d->childproc->setWorkingDirectory(d->directory);
-        
+
     connect(d->childproc, SIGNAL(processExited(KProcess*)),
         SLOT(slotProcessExited()));
     connect(d->childproc, SIGNAL(receivedStdout(KProcess*, char*, int)),
         SLOT(slotReceivedStdout(KProcess*, char*, int)));
     connect(d->childproc, SIGNAL(receivedStderr(KProcess*, char*, int)),
         SLOT(slotReceivedStderr(KProcess*, char*, int)) );
+
+    kdDebug(8051) << "Execute cvs command: " << cvsCommand() << endl;
 
     d->isRunning = true;
     return d->childproc->start(KProcess::NotifyOnExit, KProcess::AllOutput);
