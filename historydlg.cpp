@@ -21,11 +21,11 @@
 #include <qregexp.h>
 #include <kconfig.h>
 #include <klineedit.h>
+#include <klistview.h>
 #include <klocale.h>
 #include <krfcdate.h>
 
 #include "cvsprogressdlg.h"
-#include "listview.h"
 #include "misc.h"
 
 #include <kdeversion.h>
@@ -40,7 +40,7 @@ public:
 
     enum { Date, Event, Author, Revision, File, Path };
 
-    HistoryItem(QListView *parent, QDateTime const& date)
+    HistoryItem(QListView *parent, const QDateTime& date)
         : QListViewItem(parent), m_date(date)
     {}
 
@@ -55,13 +55,13 @@ public:
 
 private:
 
-    QDateTime const m_date;
+    const QDateTime m_date;
 };
 
 
 int HistoryItem::compare(QListViewItem* i, int col, bool ascending) const
 {
-    HistoryItem const* pItem = static_cast<HistoryItem*>(i);
+    const HistoryItem* pItem = static_cast<HistoryItem*>(i);
 
     int iResult;
     switch (col)
@@ -131,7 +131,7 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 
-    listview = new ListView(mainWidget);
+    listview = new KListView(mainWidget);
     listview->setSelectionMode(QListView::NoSelection);
     listview->setAllColumnsShowFocus(true);
     listview->setShowSortIndicator(true);
@@ -142,7 +142,6 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
     listview->addColumn(i18n("Revision"));
     listview->addColumn(i18n("File"));
     listview->addColumn(i18n("Repo path"));
-    listview->setPreferredColumn(HistoryItem::Path);
     listview->setFocus();
     layout->addWidget(listview, 1);
 
@@ -230,6 +229,12 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
     QSize size = Cervisia::configDialogSize(this, partConfig, "HistoryDialog");
 #endif
     resize(size);
+
+    // without this restoreLayout() can't change the column widths
+    for (int i = 0; i < listview->columns(); ++i)
+        listview->setColumnWidthMode(i, QListView::Manual);
+
+    listview->restoreLayout(&partConfig, QString::fromLatin1("HistoryListView"));
 }
 
 
@@ -240,6 +245,8 @@ HistoryDialog::~HistoryDialog()
 #else
     Cervisia::saveDialogSize(this, partConfig, "HistoryDialog");
 #endif
+
+    listview->saveLayout(&partConfig, QString::fromLatin1("HistoryListView"));
 }
 
 

@@ -22,7 +22,7 @@
 class QCheckBox;
 class KConfig;
 class KLineEdit;
-class ListView;
+class KListView;
 
 
 class HistoryDialog : public KDialogBase
@@ -42,7 +42,7 @@ private slots:
     void toggled(bool b);
 
 private:
-    ListView *listview;
+    KListView *listview;
     QCheckBox *commit_box, *checkout_box, *tag_box, *other_box;
     QCheckBox *onlyuser_box, *onlyfilenames_box, *onlydirnames_box;
     KLineEdit *user_edit, *filename_edit, *dirname_edit;
