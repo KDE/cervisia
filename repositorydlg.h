@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
@@ -16,11 +16,11 @@
 #define REPOSITORYDLG_H
 
 #include <qdialog.h>
-#include <kconfig.h>
+#include <qbuttongroup.h>
 #include <klineedit.h>
 
-class QPushButton;
 class QListViewItem;
+class KConfig;
 class ListView;
 
 
@@ -29,7 +29,6 @@ class RepositoryDialog : public QDialog
     Q_OBJECT
 
 public:
-    
     RepositoryDialog( QWidget *parent=0, const char *name=0 );
 
     void readConfigFile();
@@ -44,11 +43,10 @@ protected:
 private slots:
     void slotAddClicked();
     void slotRemoveClicked();
+    void slotDoubleClicked(QListViewItem *item);
     void slotSettingsClicked();
     void slotLoginClicked();
     void slotLogoutClicked();
-    void slotSelectionChanged();
-    void slotDoubleClicked(QListViewItem *);
 
 private:
     struct Options {
@@ -57,7 +55,6 @@ private:
     static Options *options;
 
     ListView *repolist;
-    QPushButton *removebutton,*settingsbutton ;
 };
 
 
@@ -66,13 +63,19 @@ class AddRepositoryDialog : public QDialog
     Q_OBJECT
 
 public:
-    
-    AddRepositoryDialog( QWidget *parent=0, const char *name=0 );
+    AddRepositoryDialog( const QString &repo, QWidget *parent=0, const char *name=0 );
 
+    void setRepository(const QString &repo);
+    void setRsh(const QString &rsh)
+        { rsh_edit->setText(rsh); }
+    void setCompression(int compression)
+        { compression_group->setButton(compression+1); }
     QString repository() const
         { return repo_edit->text(); }
     QString rsh() const
         { return rsh_edit->text(); }
+    int compression() const
+        { return compression_group->id(compression_group->selected())-1; }
     
     static void loadOptions(KConfig *config);
     static void saveOptions(KConfig *config);
@@ -91,7 +94,7 @@ private:
 
     KLineEdit *repo_edit;
     KLineEdit *rsh_edit;
-    QPushButton *ok;
+    QButtonGroup *compression_group;
 };
 
 #endif
