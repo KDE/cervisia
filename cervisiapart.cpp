@@ -18,7 +18,6 @@
 #include <qpopupmenu.h>
 #include <qtextstream.h>
 #include <qtooltip.h>
-#include <qcursor.h>
 #include <kaboutdata.h>
 #include <kaction.h>
 #include <kapplication.h>
@@ -109,8 +108,8 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     update = new UpdateView(splitter);
     update->setFocusPolicy( QWidget::StrongFocus );
     update->setFocus();
-    connect( update, SIGNAL(contextMenu()),
-             this, SLOT(popupRequested()) );
+    connect( update, SIGNAL(contextMenu(KListView*, QListViewItem*, const QPoint&)),
+             this, SLOT(popupRequested(KListView*, QListViewItem*, const QPoint&)) );
     connect( update, SIGNAL(fileOpened(QString)),
              this, SLOT(openFile(QString)) );
 
@@ -547,7 +546,7 @@ void CervisiaPart::setupActions()
     //			   actionCollection(), "help_about_cervisia" );
 }
 
-void CervisiaPart::popupRequested()
+void CervisiaPart::popupRequested(KListView*, QListViewItem*, const QPoint& p)
 {
     QPopupMenu *pop = static_cast<QPopupMenu *>( factory()->container("context_popup", this) );
     if (!pop)
@@ -555,7 +554,7 @@ void CervisiaPart::popupRequested()
         qWarning( "CervisiaPart: Missing XML definition for context_popup\n" );
         return;
     }
-    pop->exec(QCursor::pos());
+    pop->exec(p);
 }
 
 void CervisiaPart::updateActions()

@@ -31,11 +31,13 @@
 #include "tagdlg.h"
 
 class QLabel;
+class QListViewItem;
 class QSplitter;
 class QTimer;
 class UpdateView;
 class ProtocolView;
 class KAboutData;
+class KListView;
 class KRecentFilesAction;
 class CvsService_stub;
 
@@ -80,7 +82,7 @@ public slots:
 
     void openFile(QString filename);
     void openFiles(const QStringList &filenames);
-    void popupRequested();
+    void popupRequested(KListView*, QListViewItem*, const QPoint&);
     void updateActions();
     
     void aboutCervisia();

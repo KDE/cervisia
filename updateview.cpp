@@ -762,8 +762,6 @@ UpdateView::UpdateView(QWidget *parent, const char *name)
              this, SLOT(itemExecuted(QListViewItem*)) );
     connect( this, SIGNAL(returnPressed(QListViewItem*)),
              this, SLOT(itemExecuted(QListViewItem*)) );
-    connect( this, SIGNAL(rightButtonPressed(QListViewItem*, const QPoint&, int)),
-             this, SIGNAL(contextMenu()) );
 }
 
 
@@ -1237,15 +1235,6 @@ void UpdateView::updateItem(const QString &name, Status status, bool isdir)
         }
     // Recursive, but now it should work
     updateItem(name, status, isdir);
-}
-
-
-void UpdateView::keyPressEvent(QKeyEvent *e)
-{
-    if (e->key() == KGlobalSettings::contextMenuKey())
-        emit contextMenu();
-    else
-        ListView::keyPressEvent(e);
 }
 
 
