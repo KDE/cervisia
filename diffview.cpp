@@ -46,7 +46,7 @@ int DiffViewItemList::compareItems(QCollection::Item item1, QCollection::Item it
 }
 
 
-static const int BORDER = 7;
+static const int DIFFBORDER = 7;
 
 
 DiffView::DiffView( bool withlinenos, bool withmarker,
@@ -262,7 +262,7 @@ int DiffView::cellWidth(int col)
             QFontMetrics fm( fontMetrics() );
             return QMAX(QMAX( fm.width("Delete"),
                               fm.width("Insert")),
-                        fm.width("Change"))+2*BORDER;
+                        fm.width("Change"))+2*DIFFBORDER;
         }
     else
 	{
@@ -323,7 +323,7 @@ void DiffView::paintCell(QPainter *p, int row, int col)
 	    backgroundColor = lightGray;
 	    inverted = false;
 	    align = AlignRight;
-	    innerborder = BORDER;
+	    innerborder = DIFFBORDER;
 	    str = (item->type==Change)? "Change"
 		: (item->type==Insert)? "Insert"
 		: (item->type==Delete)? "Delete" : "";

@@ -24,7 +24,7 @@
 #include "annotateview.moc"
 
 
-static const int BORDER = 4;
+static const int ANN_BORDER = 4;
 
 
 class AnnotateViewItem
@@ -137,7 +137,7 @@ void AnnotateView::paintCell(QPainter *p, int row, int col)
     else if (col == 1)
 	{
 	    backgroundColor = item->odd? white : lightGray;
-	    innerborder = BORDER;
+	    innerborder = ANN_BORDER;
             if (!item->author.isNull())
                 {
                     str = item->author;
