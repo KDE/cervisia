@@ -26,6 +26,7 @@
 #include <klineedit.h>
 #include <klocale.h>
 #include <kmessagebox.h>
+#include <kurlcompletion.h>
 
 #include "progressdlg.h"
 #include "repositories.h"
@@ -101,6 +102,12 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
     workdir_edit = new KLineEdit(mainWidget);
     workdir_edit->setText(QDir::homeDirPath());
     workdir_edit->setMinimumWidth(fontMetrics().width('X') * 40);
+    
+    KURLCompletion* comp = new KURLCompletion();
+    workdir_edit->setCompletionObject(comp);
+    workdir_edit->setAutoDeleteCompletionObject(true);
+    connect( workdir_edit, SIGNAL(returnPressed(const QString&)),
+             comp, SLOT(addItem(const QString&)) );
 
     QPushButton* dir_button = new QPushButton("...", mainWidget);
     connect( dir_button, SIGNAL(clicked()),
