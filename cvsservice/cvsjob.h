@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002 Christian Loose <christian.loose@hamburg.de>
+ * Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -36,7 +36,7 @@ class CvsJob : public QObject, public DCOPObject
 public:
     CvsJob(unsigned jobNum);
     CvsJob(const QString& objId);
-    ~CvsJob();
+    virtual ~CvsJob();
 
     void clearCvsCommand();
     void setRSH(const QString& rsh);
