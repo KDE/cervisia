@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2002-2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -32,7 +32,7 @@
 class RepositoryListItem : public KListViewItem
 {
 public:
-    RepositoryListItem(KListView *parent, const QString &repo, bool loggedin);
+    RepositoryListItem(KListView* parent, const QString& repo, bool loggedin);
     void setRsh(const QString &rsh);
     void setServer(const QString &server) { mServer = server; }
     void setCompression(int compression);
@@ -59,17 +59,19 @@ private:
 };
 
 
-RepositoryListItem::RepositoryListItem(KListView *parent, const QString &repo, bool loggedin)
+RepositoryListItem::RepositoryListItem(KListView* parent, const QString& repo, 
+                                       bool loggedin)
     : KListViewItem(parent)
     , m_isLoggedIn(loggedin)
 {
     setText(0, repo);
 
     QString status;
-    if (repo.startsWith(":pserver:"))
-        status = loggedin? i18n("Logged in") : i18n("Not logged in");
+    if( repo.startsWith(":pserver:") )
+        status = loggedin ? i18n("Logged in") : i18n("Not logged in");
     else
         status = i18n("No login required");
+
     setText(3, status);
 }
 
@@ -79,18 +81,18 @@ void RepositoryListItem::setRsh(const QString &rsh)
     QString repo = repository();
     QString method;
 
-    if (repo.startsWith(":pserver:"))
+    if( repo.startsWith(":pserver:") )
         method = "pserver";
-    else if (repo.contains(':'))
+    else if( repo.contains(':') )
+    {
+        method = "ext";
+        if( !rsh.isEmpty() )
         {
-            method = "ext";
-            if (!rsh.isEmpty())
-                {
-                    method += " (";
-                    method += rsh;
-                    method += ")";
-                }
+            method += " (";
+            method += rsh;
+            method += ")";
         }
+    }
     else
         method = "local";
 
@@ -100,8 +102,8 @@ void RepositoryListItem::setRsh(const QString &rsh)
 
 void RepositoryListItem::setCompression(int compression)
 {
-    QString compressionStr = (compression >= 0)?
-        QString::number(compression) : i18n("Default");
+    QString compressionStr = (compression >= 0) ? QString::number(compression)
+                                                : i18n("Default");
 
     setText(2, compressionStr);
 }
@@ -147,8 +149,8 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, CvsService_stub* cvsService,
     connect(m_repoList, SIGNAL(selectionChanged()),
             this,       SLOT(slotSelectionChanged()));
 
-    KButtonBox *actionbox = new KButtonBox(mainWidget, KButtonBox::Vertical);
-    QPushButton *addbutton = actionbox->addButton(i18n("&Add..."));
+    KButtonBox* actionbox = new KButtonBox(mainWidget, KButtonBox::Vertical);
+    QPushButton* addbutton = actionbox->addButton(i18n("&Add..."));
     m_modifyButton = actionbox->addButton(i18n("&Modify..."));
     m_removeButton = actionbox->addButton(i18n("&Remove"));
     actionbox->addStretch();
@@ -228,47 +230,49 @@ void RepositoryDialog::readConfigFile()
     QStringList list = Repositories::readConfigFile();
 
     // Sort out all list elements which are already in the list view
-    QListViewItem *item = m_repoList->firstChild();
-    for ( ; item; item = item->nextSibling())
+    QListViewItem* item = m_repoList->firstChild();
+    for( ; item; item = item->nextSibling() )
         list.remove(item->text(0));
 
     QStringList::ConstIterator it;
-    for (it = list.begin(); it != list.end(); ++it)
+    for( it = list.begin(); it != list.end(); ++it )
         new RepositoryListItem(m_repoList, *it, false);
 
     // Now look for the used methods
     item = m_repoList->firstChild();
-    for (; item; item = item->nextSibling())
-        {
-            RepositoryListItem *ritem = static_cast<RepositoryListItem*>(item);
+    for( ; item; item = item->nextSibling() )
+    {
+        RepositoryListItem* ritem = static_cast<RepositoryListItem*>(item);
 
-            // read entries from cvs DCOP service configuration
-            m_serviceConfig->setGroup(QString::fromLatin1("Repository-") + ritem->repository());
-            QString rsh     = m_serviceConfig->readEntry("rsh", QString());
-            QString server  = m_serviceConfig->readEntry("cvs_server", QString());
-            int compression = m_serviceConfig->readNumEntry("Compression", -1);
+        // read entries from cvs DCOP service configuration
+        m_serviceConfig->setGroup(QString::fromLatin1("Repository-") +
+                                  ritem->repository());
+        QString rsh     = m_serviceConfig->readEntry("rsh", QString());
+        QString server  = m_serviceConfig->readEntry("cvs_server", QString());
+        int compression = m_serviceConfig->readNumEntry("Compression", -1);
 
-            ritem->setRsh(rsh);
-            ritem->setServer(server);
-            ritem->setCompression(compression);
-        }
+        ritem->setRsh(rsh);
+        ritem->setServer(server);
+        ritem->setCompression(compression);
+    }
 }
 
 
 void RepositoryDialog::slotOk()
 {
     // Make list of repositories
-    QListViewItem *item;
+    QListViewItem* item;
     QStringList list;
-    for (item = m_repoList->firstChild(); item; item = item->nextSibling())
+    for( item = m_repoList->firstChild(); item; item = item->nextSibling() )
         list.append(item->text(0));
 
     m_partConfig.setGroup("Repositories");
     m_partConfig.writeEntry("Repos", list);
 
-    for (item = m_repoList->firstChild(); item; item = item->nextSibling())
+    for( item = m_repoList->firstChild(); item; item = item->nextSibling() )
     {
-        RepositoryListItem *ritem = static_cast<RepositoryListItem*>(item);
+        RepositoryListItem* ritem = static_cast<RepositoryListItem*>(item);
+        
         // write entries to cvs DCOP service configuration
         m_serviceConfig->setGroup(QString::fromLatin1("Repository-") + ritem->repository());
         m_serviceConfig->writeEntry("rsh", ritem->rsh());
@@ -288,35 +292,36 @@ void RepositoryDialog::slotAddClicked()
     AddRepositoryDialog dlg(m_partConfig, QString::null, this);
     // default compression level
     dlg.setCompression(-1);
-    if (dlg.exec())
-        {
-            QString repo    = dlg.repository();
-            QString rsh     = dlg.rsh();
-            QString server  = dlg.server();
-            int compression = dlg.compression();
+    if( dlg.exec() )
+    {
+        QString repo    = dlg.repository();
+        QString rsh     = dlg.rsh();
+        QString server  = dlg.server();
+        int compression = dlg.compression();
 
-            QListViewItem *item = m_repoList->firstChild();
-            for ( ; item; item = item->nextSibling())
-                if (item->text(0) == repo)
-                    {
-                        KMessageBox::information(this, "Cervisia",
-                                                 i18n("This repository is already known."));
-                        return;
-                    }
+        QListViewItem* item = m_repoList->firstChild();
+        for( ; item; item = item->nextSibling() )
+            if( item->text(0) == repo )
+            {
+                KMessageBox::information(this, "Cervisia",
+                                         i18n("This repository is already known."));
+                return;
+            }
 
-            RepositoryListItem *ritem = new RepositoryListItem(m_repoList, repo, false);
-            ritem->setRsh(rsh);
-            ritem->setCompression(compression);
+        RepositoryListItem* ritem = new RepositoryListItem(m_repoList, repo, false);
+        ritem->setRsh(rsh);
+        ritem->setCompression(compression);
 
-            // write entries to cvs DCOP service configuration
-            m_serviceConfig->setGroup(QString::fromLatin1("Repository-") + ritem->repository());
-            m_serviceConfig->writeEntry("rsh", ritem->rsh());
-            m_serviceConfig->writeEntry("cvs_server", server);
-            m_serviceConfig->writeEntry("Compression", ritem->compression());
+        // write entries to cvs DCOP service configuration
+        m_serviceConfig->setGroup(QString::fromLatin1("Repository-") +
+                                  ritem->repository());
+        m_serviceConfig->writeEntry("rsh", ritem->rsh());
+        m_serviceConfig->writeEntry("cvs_server", server);
+        m_serviceConfig->writeEntry("Compression", ritem->compression());
 
-            // write to disk so other services can reparse the configuration
-            m_serviceConfig->sync();
-        }
+        // write to disk so other services can reparse the configuration
+        m_serviceConfig->sync();
+    }
 }
 
 
@@ -337,12 +342,12 @@ void RepositoryDialog::slotRemoveClicked()
 }
 
 
-void RepositoryDialog::slotDoubleClicked(QListViewItem *item)
+void RepositoryDialog::slotDoubleClicked(QListViewItem* item)
 {
-    if (!item)
+    if( !item )
         return;
 
-    RepositoryListItem *ritem = static_cast<RepositoryListItem*>(item);
+    RepositoryListItem* ritem = static_cast<RepositoryListItem*>(item);
     QString repo    = ritem->repository();
     QString rsh     = ritem->rsh();
     QString server  = ritem->server();
@@ -353,21 +358,22 @@ void RepositoryDialog::slotDoubleClicked(QListViewItem *item)
     dlg.setRsh(rsh);
     dlg.setServer(server);
     dlg.setCompression(compression);
-    if (dlg.exec())
-        {
-            ritem->setRsh(dlg.rsh());
-            ritem->setServer(dlg.server());
-            ritem->setCompression(dlg.compression());
+    if( dlg.exec() )
+    {
+        ritem->setRsh(dlg.rsh());
+        ritem->setServer(dlg.server());
+        ritem->setCompression(dlg.compression());
 
-            // write entries to cvs DCOP service configuration
-            m_serviceConfig->setGroup(QString::fromLatin1("Repository-") + ritem->repository());
-            m_serviceConfig->writeEntry("rsh", ritem->rsh());
-            m_serviceConfig->writeEntry("cvs_server", ritem->server());
-            m_serviceConfig->writeEntry("Compression", ritem->compression());
+        // write entries to cvs DCOP service configuration
+        m_serviceConfig->setGroup(QString::fromLatin1("Repository-") +
+                                  ritem->repository());
+        m_serviceConfig->writeEntry("rsh", ritem->rsh());
+        m_serviceConfig->writeEntry("cvs_server", ritem->server());
+        m_serviceConfig->writeEntry("Compression", ritem->compression());
 
-            // write to disk so other services can reparse the configuration
-            m_serviceConfig->sync();
-        }
+        // write to disk so other services can reparse the configuration
+        m_serviceConfig->sync();
+    }
 }
 
 
