@@ -18,6 +18,7 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qlistbox.h>
+#include <qstringlist.h>
 #include <kapplication.h>
 #include <kiconloader.h>
 #include <klocale.h>

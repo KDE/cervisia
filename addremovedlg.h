@@ -16,13 +16,12 @@
 #ifndef ADDREMOVEDLG_H
 #define ADDREMOVEDLG_H
 
-#include <qstringlist.h>
 
 #include <kdialogbase.h>
 
 
 class QListBox;
-class KConfig;
+class QStringList;
 
 
 class AddRemoveDialog : public KDialogBase
