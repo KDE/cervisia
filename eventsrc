@@ -4,7 +4,9 @@ Comment=Cervisia
 
 [cvs_commit_done]
 Name=CVS commit job done
+Name[et]=CVS sissekanne tehtud
 Name[sv]=CVS-arkiveringsjobb klart
 Comment=A CVS commit job is done
+Comment[et]=CVS sissekanne tehtud
 Comment[sv]=Ett CVS-arkiveringsjobb är klart
 default_presentation=0
