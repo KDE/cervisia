@@ -36,7 +36,32 @@
 #include "cvsdir.h"
 
 
-class UpdateDirItem : public QListViewItem
+class UpdateItem : public QListViewItem
+{
+public:
+
+    UpdateItem(UpdateView* parent, const QString& name)
+        : QListViewItem(parent), m_name(name) {}
+    UpdateItem(UpdateItem* parent, const QString& name)
+        : QListViewItem(parent), m_name(name) {}
+
+    const QString& name() const { return m_name; }
+
+    virtual QString dirPath() const = 0;
+
+    virtual void applyFilter(UpdateView::Filter filter) = 0;
+
+protected:
+
+    UpdateView* updateView() const { return static_cast<UpdateView*>(listView()); }
+
+private:
+
+    const QString m_name;
+};
+
+
+class UpdateDirItem : public UpdateItem
 {
 public:
 
@@ -45,7 +70,8 @@ public:
     UpdateDirItem( UpdateView *parent, const QString& dirname );
     UpdateDirItem( UpdateDirItem *parent, const QString& dirname );
 
-    QString dirPath() const;
+    virtual QString dirPath() const;
+
     void syncWithDirectory();
     void syncWithEntries();
     void updateChildItem(const QString& name, UpdateView::Status status, bool isdir);
@@ -58,27 +84,27 @@ public:
 
     void maybeScanDir(bool recursive);
 
-    void applyFilter(UpdateView::Filter filter);
+    virtual void applyFilter(UpdateView::Filter filter);
 
 private:
-    UpdateView *updateView() const
-        { return static_cast<UpdateView*>(listView()); }
+
     void scanDirectory();
 
-    const QString m_dirname;
     bool m_opened;
 };
 
 
-class UpdateViewItem : public QListViewItem
+class UpdateViewItem : public UpdateItem
 {
 public:
 
     enum { File, Status, Revision, TagOrDate, Timestamp };
 
-    UpdateViewItem( QListViewItem *parent, const QString& filename );
+    UpdateViewItem( UpdateDirItem* parent, const QString& filename );
 
+    virtual QString dirPath() const;
     QString filePath() const;
+
     UpdateView::Status status() const
         { return m_status; }
     QString revision() const
@@ -103,7 +129,6 @@ private:
 
     int statusClass() const;
 
-    const QString m_filename;
     QString m_revision;
     QString m_tag;
     bool m_undefined;
@@ -113,8 +138,7 @@ private:
 
 
 UpdateDirItem::UpdateDirItem( UpdateDirItem *parent, const QString& dirname )
-    : QListViewItem(parent),
-      m_dirname(dirname),
+    : UpdateItem(parent, dirname),
       m_opened(false)
 {
     setExpandable(true);
@@ -123,8 +147,7 @@ UpdateDirItem::UpdateDirItem( UpdateDirItem *parent, const QString& dirname )
 
  
 UpdateDirItem::UpdateDirItem( UpdateView *parent, const QString& dirname )
-    : QListViewItem(parent),
-      m_dirname(dirname),
+    : UpdateItem(parent, dirname),
       m_opened(false)
 {
     setExpandable(true);
@@ -134,8 +157,8 @@ UpdateDirItem::UpdateDirItem( UpdateView *parent, const QString& dirname )
 
 QString UpdateDirItem::dirPath() const
 {
-    const UpdateDirItem* diritem = static_cast<UpdateDirItem*>(parent());
-    return diritem ? diritem->dirPath() + m_dirname + '/' : QString::null;
+    const UpdateDirItem* dirItem = static_cast<UpdateDirItem*>(parent());
+    return dirItem ? dirItem->dirPath() + name() + '/' : QString::null;
 }
 
 
@@ -393,14 +416,7 @@ void UpdateDirItem::applyFilter(UpdateView::Filter filter)
     for (QListViewItem* childItem(firstChild());
          childItem != 0; childItem = childItem->nextSibling())
     {
-        if (UpdateView::isDirItem(childItem))
-        {
-            static_cast<UpdateDirItem*>(childItem)->applyFilter(filter);
-        }
-        else
-        {
-            static_cast<UpdateViewItem*>(childItem)->applyFilter(filter);
-        }
+        static_cast<UpdateItem*>(childItem)->applyFilter(filter);
     }
 }
 
@@ -420,10 +436,10 @@ int UpdateDirItem::compare(QListViewItem* i, int, bool bAscending) const
     if (UpdateView::isDirItem(i) == false)
         return bAscending ? -1 : 1;
 
-    UpdateDirItem const* pItem = static_cast<UpdateDirItem*>(i);
+    const UpdateDirItem* item(static_cast<UpdateDirItem*>(i));
 
     // for every column just compare the directory name
-    return m_dirname.localeAwareCompare(pItem->m_dirname);
+    return name().localeAwareCompare(item->name());
 }
 
 
@@ -431,26 +447,29 @@ QString UpdateDirItem::text(int col) const
 {
     switch (col)
 	{
-	case Directory:  return m_dirname;
+	case Directory:  return name();
 	default: return QString::null;
 	}
 }
 
 
-UpdateViewItem::UpdateViewItem( QListViewItem *parent, const QString& filename )
-    : QListViewItem(parent),
-      m_filename(filename),
+UpdateViewItem::UpdateViewItem( UpdateDirItem* parent, const QString& filename )
+    : UpdateItem(parent, filename),
       m_undefined(false),
       m_status(UpdateView::NotInCVS)
 {
 }
 
 
+QString UpdateViewItem::dirPath() const
+{
+    return static_cast<UpdateDirItem*>(parent())->dirPath();
+}
+
+
 QString UpdateViewItem::filePath() const
 {
-    // an UpdateViewItem (file) always have a parent (directory)
-    const UpdateDirItem* diritem = static_cast<UpdateDirItem*>(parent());
-    return diritem->dirPath() + m_filename;
+    return dirPath() + name();
 }
 
 
@@ -584,11 +603,11 @@ int UpdateViewItem::compare(QListViewItem* i, int col, bool bAscending) const
     switch (col)
     {
     case File:
-        iResult = m_filename.localeAwareCompare(pItem->m_filename);
+        iResult = name().localeAwareCompare(pItem->name());
         break;
     case Status:
         if ((iResult = ::compare(statusClass(), pItem->statusClass())) == 0)
-            iResult = m_filename.localeAwareCompare(pItem->m_filename);
+            iResult = name().localeAwareCompare(pItem->name());
         break;
     case Revision:
         iResult = ::compareRevisions(m_revision, pItem->m_revision);
@@ -610,7 +629,7 @@ QString UpdateViewItem::text(int col) const
     switch (col)
 	{
 	case File:
-	    return m_filename;
+	    return name();
 	case Status:
 	    switch (m_status)
 		{
@@ -660,7 +679,7 @@ QString UpdateViewItem::text(int col) const
 void UpdateViewItem::paintCell(QPainter *p, const QColorGroup &cg,
 			       int col, int width, int align)
 {
-    const UpdateView* view(static_cast<UpdateView*>(listView()));
+    const UpdateView* view(updateView());
 
     QColor color;
     switch (m_status)
