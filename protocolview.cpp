@@ -213,6 +213,10 @@ void ProtocolView::processOutput()
 
 void ProtocolView::appendLine(const QString &line)
 {
+    // Escape output line, so that html tags in commit
+    // messages aren't interpreted
+    const QString escapedLine = QStyleSheet::escape(line);
+
     QColor color;
     // Colors are the same as in UpdateViewItem::paintCell()
     if (line.startsWith("C "))
@@ -224,8 +228,9 @@ void ProtocolView::appendLine(const QString &line)
         color = remoteChangeColor;
 
     append(color.isValid()
-           ? QString("<font color=\"%1\">%2</font>").arg(color.name()).arg(line)
-           : QString("%1").arg(line));
+           ? QString("<font color=\"%1\">%2</font>").arg(color.name())
+                                                    .arg(escapedLine)
+           : QString("%1").arg(escapedLine));
 }
 
 

@@ -2,6 +2,8 @@
 
 	* Fix BR 56042: Better default colors for white
 	  background
+	* Fix BR 56942: Escape output lines for protocol view
+	  so html tags in commit messages aren't interpreted
 
 2003-02-28  Christian Loose  <christian.loose@hamburg.de>
 
