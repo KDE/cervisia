@@ -57,15 +57,11 @@ class LogDialog : public KDialogBase
     Q_OBJECT
 
 public:
-
-    explicit LogDialog( QWidget *parent=0, const char *name=0 );
+    explicit LogDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
 
     virtual ~LogDialog();
 
     bool parseCvsLog(CvsService_stub* service, const QString& fileName);
-
-    static void loadOptions(KConfig *config);
-    static void saveOptions(KConfig *config);
 
 private slots:
     void diffClicked();
@@ -76,12 +72,6 @@ private slots:
 
 private:
     void tagSelected(TagInfo* tag, bool rmb);
-    
-    struct Options {
-        QSize size;
-        bool showlisttab;
-    };
-    static Options *options;
 
     QString sandbox;
     QString repository;
@@ -101,6 +91,7 @@ private:
     QComboBox *tagcombo[2];
 
     CvsService_stub* cvsService;
+    KConfig&         partConfig;
 };
 
 #endif

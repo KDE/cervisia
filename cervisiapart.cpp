@@ -971,7 +971,7 @@ void CervisiaPart::slotBrowseLog()
         return;
 
     // Non-modal dialog
-    LogDialog *l = new LogDialog();
+    LogDialog *l = new LogDialog(*CervisiaPart::config());
     if (l->parseCvsLog(cvsService, filename))
         l->show();
     else
@@ -1805,8 +1805,6 @@ void CervisiaPart::readDialogProperties( KConfig *config )
 {
     config->setGroup("Diff dialog");
     DiffDialog::loadOptions(config);
-    config->setGroup("Log dialog");
-    LogDialog::loadOptions(config);
     config->setGroup("Resolve dialog");
     ResolveDialog::loadOptions(config);
     config->setGroup("Resolve edit dialog");
@@ -1828,8 +1826,6 @@ void CervisiaPart::saveDialogProperties( KConfig *config )
 {
     config->setGroup("Diff dialog");
     DiffDialog::saveOptions(config);
-    config->setGroup("Log dialog");
-    LogDialog::saveOptions(config);
     config->setGroup("Resolve dialog");
     ResolveDialog::saveOptions(config);
     config->setGroup("Resolve edit dialog");

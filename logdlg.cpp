@@ -38,16 +38,17 @@
 #include "misc.h"
 #include "progressdlg.h"
 
-#include "cervisiapart.h"       // FIXME
+#include <kdeversion.h>
+#if KDE_VERSION < KDE_MAKE_VERSION(3,1,90)
+#include "configutils.h"
+#endif
 
 
-LogDialog::Options *LogDialog::options = 0;
-
-
-LogDialog::LogDialog(QWidget *parent, const char *name)
+LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     : KDialogBase(parent, name, false, QString::null,
                   Close | Help | User1 | User2, Close, true)
     , cvsService(0)
+    , partConfig(cfg)
 {
     QFrame* mainWidget = makeMainWidget();
 
@@ -157,43 +158,30 @@ LogDialog::LogDialog(QWidget *parent, const char *name)
 
     setWFlags(Qt::WDestructiveClose | getWFlags());
 
-    if (options)
-        {
-            resize(options->size);
-            if (options->showlisttab)
-                tabWidget->setCurrentPage(1);
-        }
+#if KDE_IS_VERSION(3,1,90)
+    QSize size = configDialogSize(partConfig, "LogDialog");
+#else
+    QSize size = Cervisia::configDialogSize(this, partConfig, "LogDialog");
+#endif
+    resize(size);
+
+    KConfigGroupSaver cs(&partConfig, "LogDialog");
+    if (partConfig.readBoolEntry("ShowListTab"))
+        tabWidget->setCurrentPage(1);
 }
 
 
 LogDialog::~LogDialog()
 {
-    if (!options)
-        options = new Options;
-    options->size = size();
-    options->showlisttab = (tabWidget->currentPageIndex() == 1);
-}
+#if KDE_IS_VERSION(3,1,90)
+    saveDialogSize(partConfig, "LogDialog");
+#else
+    Cervisia::saveDialogSize(this, partConfig, "LogDialog");
+#endif
 
-
-void LogDialog::loadOptions(KConfig *config)
-{
-    if (!config->readEntry("Customized"))
-        return;
-
-    options = new Options;
-    options->size = config->readSizeEntry("Size");
-    options->showlisttab = config->readBoolEntry("ShowListTab");
-}
-
-
-void LogDialog::saveOptions(KConfig *config)
-{
-    if (!options)
-        return;
-
-    config->writeEntry("Customized", true);
-    config->writeEntry("Size", options->size);
-    config->writeEntry("ShowListTab", options->showlisttab);
+    KConfigGroupSaver cs(&partConfig, "LogDialog");
+    bool showListTab = (tabWidget->currentPageIndex() == 1);
+    partConfig.writeEntry("ShowListTab", showListTab);
 }
 
 
@@ -213,7 +201,7 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
     Repository_stub cvsRepository(cvsService->app(), "CvsRepository");
     sandbox = cvsRepository.workingCopy();
     repository = cvsRepository.location();
-    
+
     setCaption(i18n("CVS Log: %1").arg(filename));
 
     DCOPRef job = cvsService->log(filename);
@@ -408,7 +396,7 @@ void LogDialog::diffClicked()
 
 void LogDialog::annotateClicked()
 {
-    AnnotateDialog *l = new AnnotateDialog(*CervisiaPart::config());    // FIXME
+    AnnotateDialog *l = new AnnotateDialog(partConfig);
     AnnotateController ctl(l, cvsService);
     ctl.showDialog(filename, selectionA);
 }

@@ -30,3 +30,10 @@ Group=LogList view
 Key=Columns,ColumnOrder
 Key=ColumnSizes,ColumnWidths
 RemoveKey=Customized
+#
+Id=kde3.2/20030205
+File=cervisiapartrc
+Group=Log dialog,LogDialog
+Key=ShowListTab
+RemoveGroup=Log dialog
+
