@@ -506,6 +506,12 @@ void CervisiaPart::popupRequested()
 
 void CervisiaPart::updateActions()
 {
+    bool hassandbox = !sandbox.isNull();
+
+    actionCollection()->action( "insert_changelog_entry" )->setEnabled( hassandbox );
+    actionCollection()->action( "view_unfold_tree" )->setEnabled( hassandbox );
+    actionCollection()->action( "view_fold_tree" )->setEnabled( hassandbox );
+
     bool single = update->hasSingleSelection();
 
     actionCollection()->action( "file_edit" )->setEnabled( single );
