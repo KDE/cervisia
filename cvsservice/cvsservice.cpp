@@ -26,6 +26,7 @@
 #include <dcopref.h>
 #include <dcopclient.h>
 #include <kapplication.h>
+#include <kconfig.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kprocess.h>
@@ -81,11 +82,15 @@ CvsService::CvsService()
 
     d->cvsJobs.setAutoDelete(true);
 
-    // use the existing or start a new ssh-agent
-    // TODO CL needs a configuration option.
-    //      CL do we need the return value?
-    SshAgent ssh;
-    bool res = ssh.querySshAgent();
+    KConfig* config = kapp->config();
+    KConfigGroupSaver cs(config, "General");
+    if( config->readBoolEntry("UseSshAgent", false) )
+    {
+        // use the existing or start a new ssh-agent
+        // TODO CL do we need the return value?
+        SshAgent ssh;
+        bool res = ssh.querySshAgent();
+    }
 }
 
 

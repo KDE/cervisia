@@ -29,6 +29,8 @@
 #include <kdirwatch.h>
 #include <kstandarddirs.h>
 
+#include "sshagent.h"
+
 
 struct Repository::Private
 {
@@ -121,6 +123,14 @@ bool Repository::setWorkingCopy(const QString& dirName)
     }
     rootFile.close();
 
+    // add identities (ssh-add) to ssh-agent
+    // TODO CL make sure this is called only once
+    if( d->location.contains(":ext:", false) > 0 )
+    {
+        SshAgent ssh;
+        ssh.addSshIdentities();
+    }
+
     QDir::setCurrent(path);
     d->readConfig();
 
@@ -162,7 +172,7 @@ void Repository::Private::readConfig()
     // use default global compression level instead?
     if( compressionLevel < 0 )
     {
-        config->setGroup("General");
+        KConfigGroupSaver cs(config, "General");
         compressionLevel = config->readNumEntry("Compression", 0);
     }
 
