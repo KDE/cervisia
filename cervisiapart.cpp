@@ -1285,7 +1285,7 @@ void CervisiaPart::slotLastChange()
         }
     if (lastnumber == 0)
         {
-            QMessageBox::information(widget(), "Cervisia", i18n("The is the first revision of the branch."));
+            QMessageBox::information(widget(), "Cervisia", i18n("This is the first revision of the branch."));
             return;
         }
     revB = revA.left(pos+1);
