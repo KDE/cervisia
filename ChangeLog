@@ -11,6 +11,7 @@
 	* Simplified history dialog filtering by
 	  using QListViewItem::setVisible()
 	* #include cleanup
+	* i18n fixes
 
 2002-06-22  Bernd Gehrmann  <bernd@mail.berlios.de>
 
