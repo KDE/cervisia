@@ -101,7 +101,7 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
     dir_button->setFixedWidth(30);
 
     QBoxLayout *workdir_layout = new QHBoxLayout();
-    grid->addLayout(workdir_layout, (action==Import)? 3 : 2, 1);
+    grid->addLayout(workdir_layout, (action==Import)? 2 : 3, 1);
     workdir_layout->addWidget(workdir_edit, 10);
     workdir_layout->addWidget(dir_button, 0, AlignVCenter);
 
