@@ -1307,7 +1307,7 @@ void CervisiaPart::slotCheckout()
 
 void CervisiaPart::slotRepositories()
 {
-    RepositoryDialog *l = new RepositoryDialog(*config(), widget());
+    RepositoryDialog *l = new RepositoryDialog(*config(), cvsService, widget());
     l->show();
 }
 
