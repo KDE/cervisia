@@ -43,6 +43,8 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget *parent, const char 
     layout->addWidget(textlabel);
 
     listbox = new QListBox(mainWidget);
+    listbox->setSelectionMode(QListBox::NoSelection);
+    listbox->setFocusPolicy(QWidget::NoFocus);
     layout->addWidget(listbox, 5);
 
     // Add warning message to dialog when user wants to remove a file
