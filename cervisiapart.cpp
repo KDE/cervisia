@@ -615,7 +615,7 @@ void CervisiaPart::popupRequested(KListView*, QListViewItem*, const QPoint& p)
     if (QPopupMenu* popup = static_cast<QPopupMenu*>(hostContainer("context_popup")))
     {
         // remove old 'Edit with...' menu
-        if( m_editWithId )
+        if( m_editWithId && popup->findItem(m_editWithId) != 0 )
         {
             popup->removeItem(m_editWithId);
             delete m_currentEditMenu; 
