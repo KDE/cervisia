@@ -274,7 +274,7 @@ void ResolveDialog::saveFile(const QString &name)
         
     int count = merge->count();
     for (int i = 0; i < count; ++i)
-        stream << merge->stringAtOffset(i);
+        stream << merge->stringAtOffset(i) << endl;
 
     f.close();
 }
