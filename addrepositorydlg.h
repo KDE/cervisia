@@ -18,8 +18,9 @@
 
 #include <kdialogbase.h>
 
-class QButtonGroup;
+class QCheckBox;
 class KConfig;
+class KIntNumInput;
 class KLineEdit;
 
 
@@ -44,12 +45,14 @@ public:
 
 private slots:
     void repoChanged();
+    void compressionToggled(bool checked);
     
 private:
     KLineEdit*    repo_edit;
     KLineEdit*    rsh_edit;
     KLineEdit*    server_edit;
-    QButtonGroup* compression_group;
+    QCheckBox*    m_useDifferentCompression;
+    KIntNumInput* m_compressionLevel;
     KConfig&      partConfig;
 };
 

@@ -15,13 +15,15 @@
 
 #include "addrepositorydlg.h"
 
-#include <qhbuttongroup.h>
+#include <qcheckbox.h>
+#include <qhbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qradiobutton.h>
+
 #include <kconfig.h>
 #include <klineedit.h>
 #include <klocale.h>
+#include <knuminput.h>
 
 
 AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo, 
@@ -62,17 +64,17 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
     server_label->setBuddy(server_edit);
     layout->addWidget(server_edit);
 
-    compression_group = new QHButtonGroup(i18n("&Compression Level"), mainWidget);
-    layout->addWidget(compression_group);
-
-    (void) new QRadioButton(i18n("Default"), compression_group);
-    (void) new QRadioButton(i18n("0"), compression_group);
-    (void) new QRadioButton(i18n("1"), compression_group);
-    (void) new QRadioButton(i18n("2"), compression_group);
-    (void) new QRadioButton(i18n("3"), compression_group);
+    QHBox* compressionBox = new QHBox(mainWidget);
+    m_useDifferentCompression = new QCheckBox(i18n("Use different &compression level:"), compressionBox);
+    
+    m_compressionLevel = new KIntNumInput(compressionBox);
+    m_compressionLevel->setRange(0, 9, 1, false);
+    layout->addWidget(compressionBox);
 
     connect( repo_edit, SIGNAL(textChanged(const QString&)),
              this, SLOT(repoChanged()) );
+    connect( m_useDifferentCompression, SIGNAL(toggled(bool)),
+             this, SLOT(compressionToggled(bool)) );
     repoChanged();
 
     QSize size = configDialogSize(partConfig, "AddRepositoryDialog");
@@ -100,7 +102,19 @@ void AddRepositoryDialog::setServer(const QString& server)
 
 void AddRepositoryDialog::setCompression(int compression)
 {
-    compression_group->setButton(compression + 1);
+    if( compression < 0 )
+    {
+        // TODO: use KConfigXT to retrieve default compression level
+        m_compressionLevel->setValue(0);
+        m_useDifferentCompression->setChecked(false);
+    }
+    else
+    {
+        m_useDifferentCompression->setChecked(true);
+        m_compressionLevel->setValue(compression);
+    }
+    
+    compressionToggled(m_useDifferentCompression->isChecked());
 }
 
 
@@ -124,7 +138,10 @@ QString AddRepositoryDialog::server() const
 
 int AddRepositoryDialog::compression() const
 {
-    return compression_group->id(compression_group->selected()) - 1;
+    if( m_useDifferentCompression->isChecked() )
+        return m_compressionLevel->value();
+    else
+        return -1;
 }
 
 
@@ -142,7 +159,17 @@ void AddRepositoryDialog::repoChanged()
     QString repo = repository();
     rsh_edit->setEnabled((!repo.startsWith(":pserver:"))
                          && repo.contains(":"));
-    compression_group->setEnabled(repo.contains(":"));
+    m_useDifferentCompression->setEnabled(repo.contains(":"));
+    if( !repo.contains(":") )
+        m_compressionLevel->setEnabled(false);
+    else
+        compressionToggled(m_useDifferentCompression->isChecked());
+}
+
+
+void AddRepositoryDialog::compressionToggled(bool checked)
+{
+    m_compressionLevel->setEnabled(checked);
 }
 
 #include "addrepositorydlg.moc"

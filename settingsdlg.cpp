@@ -17,7 +17,6 @@
 
 #include <qapplication.h>
 #include <qcheckbox.h>
-#include <qcombobox.h>
 #include <qgrid.h>
 #include <qgroupbox.h>
 #include <qlabel.h>
@@ -123,7 +122,7 @@ void SettingsDialog::readSettings()
     // read entries from cvs DCOP service configuration
     serviceConfig->setGroup("General");
     cvspathedit->setURL(serviceConfig->readPathEntry("CVSPath", "cvs"));
-    compressioncombo->setCurrentItem(serviceConfig->readNumEntry("Compression", 0));
+    m_defaultCompression->setValue(serviceConfig->readNumEntry("Compression", 0));
     usesshagent->setChecked(serviceConfig->readBoolEntry("UseSshAgent", false));
 
     config->setGroup("General");
@@ -171,7 +170,7 @@ void SettingsDialog::writeSettings()
 #else
     serviceConfig->writeEntry("CVSPath", cvspathedit->url());
 #endif
-    serviceConfig->writeEntry("Compression", compressioncombo->currentItem());
+    serviceConfig->writeEntry("Compression", m_defaultCompression->value());
     serviceConfig->writeEntry("UseSshAgent", usesshagent->isChecked());
 
     // write to disk so other services can reparse the configuration
@@ -328,13 +327,9 @@ void SettingsDialog::addAdvancedPage()
     timeoutlabel->setBuddy( timeoutedit );
 
     QLabel *compressionlabel = new QLabel( i18n("Default compression &level:"), advancedPage );
-    compressioncombo = new QComboBox( false, advancedPage );
-    compressionlabel->setBuddy( compressioncombo );
-
-    compressioncombo->insertItem("0", 0);
-    compressioncombo->insertItem("1", 1);
-    compressioncombo->insertItem("2", 2);
-    compressioncombo->insertItem("3", 3);
+    m_defaultCompression = new KIntNumInput(advancedPage);
+    m_defaultCompression->setRange(0, 9, 1, false);
+    compressionlabel->setBuddy(m_defaultCompression);
 
     usesshagent = new QCheckBox(i18n("Utilize a running or start a new ssh-agent process"),
                                 advancedPage);

@@ -22,7 +22,6 @@
 
 
 class QCheckBox;
-class QComboBox;
 class KIntNumInput;
 class KLineEdit;
 class KConfig;
@@ -68,7 +67,7 @@ private:
     KIntNumInput *contextedit;
     KIntNumInput *tabwidthedit;
     KURLRequester *cvspathedit;
-    QComboBox *compressioncombo;
+    KIntNumInput* m_defaultCompression;
     QCheckBox *usesshagent;
     KLineEdit *usernameedit;
     KLineEdit *diffoptedit;
