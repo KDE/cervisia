@@ -65,6 +65,7 @@ private:
     QString readFile();
     void addToMergeAndVersionA(const QString& line, int& lineNo);
     void addToVersionB(const QString& line, int& lineNo);
+    void updateMergedVersion(ResolveItem* item, ChooseType chosen);
     
     QLabel *nofnlabel;
     QPushButton *backbutton, *forwbutton;

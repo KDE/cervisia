@@ -18,8 +18,8 @@ public:
     explicit ResolveEditorDialog(KConfig& cfg, QWidget* parent=0, const char* name=0);
     virtual ~ResolveEditorDialog();
 
-    void setContent(const QStringList& l);
-    QStringList content() const;
+    void setContent(const QString& text);
+    QString content() const;
 
 private:   
     QMultiLineEdit* m_edit;

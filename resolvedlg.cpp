@@ -354,10 +354,8 @@ void ResolveDialog::saveFile(const QString &name)
     QTextStream stream(&f);
     QTextCodec *fcodec = DetectCodec(name);
     stream.setCodec(fcodec);
-
-    int count = merge->count();
-    for (int i = 0; i < count; ++i)
-        stream << merge->stringAtOffset(i) << endl;
+       
+    stream << m_contentMergedVersion;
 
     f.close();
 }
@@ -429,6 +427,36 @@ void ResolveDialog::updateHighlight(int newitem)
 }
 
 
+void ResolveDialog::updateMergedVersion(ResolveItem* item, 
+                                        ResolveDialog::ChooseType chosen)
+{
+    // Remove old variant
+    for (int i = 0; i < item->linecountTotal; ++i)
+        merge->removeAtOffset(item->offsetM);
+
+    // Insert new
+    int total = 0;
+    LineSeparator separator(m_contentMergedVersion);
+    QString line = separator.nextLine();
+    while( !separator.atEnd() )
+    {
+        merge->insertAtOffset(line, DiffView::Change, item->offsetM+total);
+        line = separator.nextLine();
+        ++total;
+    }
+
+    item->chosen = chosen;
+    item->linecountTotal = total;
+
+    // Adjust other items
+    int difference = total - item->linecountTotal;
+    while ( (item = items.next()) != 0 )
+        item->offsetM += difference;
+
+    merge->repaint();
+}
+
+
 void ResolveDialog::backClicked()
 {
     int newitem;
@@ -457,10 +485,6 @@ void ResolveDialog::forwClicked()
 
 void ResolveDialog::choose(ChooseType ch)
 {
-    DiffView *first=0, *second=0;
-    int firstno=0, secondno=0;
-    int firstcount=0, secondcount=0;
-
     if (markeditem < 0)
         return;
 
@@ -471,59 +495,22 @@ void ResolveDialog::choose(ChooseType ch)
     switch (ch)
         {
         case ChA:
-            first = diff1;
-            firstno = item->linenoA;
-            firstcount = item->linecountA;
+            m_contentMergedVersion = m_contentVersionA;
             break;
         case ChB:
-            first = diff2;
-            firstno = item->linenoB;
-            firstcount = item->linecountB;
+            m_contentMergedVersion = m_contentVersionB;
             break;
         case ChAB:
-            first = diff1;
-            firstno = item->linenoA;
-            firstcount = item->linecountA;
-            second = diff2;
-            secondno = item->linenoB;
-            secondcount = item->linecountB;
+            m_contentMergedVersion = m_contentVersionA + m_contentVersionB;
             break;
         case ChBA:
-            first = diff2;
-            firstno  = item->linenoB;
-            firstcount = item->linecountB;
-            second = diff1;
-            secondno = item->linenoA;
-            secondcount = item->linecountA;
+            m_contentMergedVersion = m_contentVersionB + m_contentVersionA;
             break;
         default:
             kdDebug(8050) << "Internal error at switch" << endl;
         }
 
-    int total = firstcount + secondcount;
-    int difference = total - item->linecountTotal;
-
-    // Remove old variant
-    for (int i = 0; i < item->linecountTotal; ++i)
-        merge->removeAtOffset(item->offsetM);
-
-    // Insert new
-    for (int i = 0; i < firstcount; ++i)
-        merge->insertAtOffset(first->stringAtLine(firstno+i), DiffView::Change, item->offsetM+i);
-
-    if (second)
-        for (int i = 0; i < secondcount; ++i)
-            merge->insertAtOffset(second->stringAtLine(secondno+i), DiffView::Change, item->offsetM+firstcount+i);
-
-    item->chosen = ch;
-    item->linecountTotal = total;
-
-    // Adjust other items
-    while ( (item = items.next()) != 0 )
-        item->offsetM += difference;
-
-    merge->repaint();
-
+    updateMergedVersion(item, ch);
 }
 
 
@@ -555,38 +542,18 @@ void ResolveDialog::editClicked()
 {
     if (markeditem < 0)
         return;
+    
     ResolveItem *item = items.at(markeditem);
 
-    QStringList oldContent;
-    for (int i = 0; i < item->linecountTotal; ++i)
-        oldContent << merge->stringAtOffset(item->offsetM+i);
-
     ResolveEditorDialog *dlg = new ResolveEditorDialog(partConfig, this, "edit");
-    dlg->setContent(oldContent);
+    dlg->setContent(m_contentMergedVersion);
 
     if (dlg->exec())
-        {
-            QStringList newContent = dlg->content();
-            int total = newContent.count();
-            int difference = total - item->linecountTotal;
+    {
+        m_contentMergedVersion = dlg->content();
 
-            // Remove old variant
-            for (int i = 0; i < item->linecountTotal; ++i)
-                merge->removeAtOffset(item->offsetM);
-
-            // Insert new
-            for (int i = 0; i < total; ++i)
-                merge->insertAtOffset(newContent[i], DiffView::Change, item->offsetM+i);
-
-            item->chosen = ChEdit;
-            item->linecountTotal = total;
-
-            // Adjust other items
-            while ( (item = items.next()) != 0 )
-                item->offsetM += difference;
-
-            merge->repaint();
-        }
+        updateMergedVersion(item, ChEdit);
+    }
 
     delete dlg;
 }

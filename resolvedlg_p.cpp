@@ -29,20 +29,13 @@ ResolveEditorDialog::~ResolveEditorDialog()
 }
 
 
-void ResolveEditorDialog::setContent(const QStringList &l)
+void ResolveEditorDialog::setContent(const QString& text)
 {
-    QStringList::ConstIterator it;
-    for (it = l.begin(); it != l.end(); ++it)
-        m_edit->insertLine((*it).left((*it).length()-1));
+    m_edit->setText(text);
 }
 
 
-QStringList ResolveEditorDialog::content() const
+QString ResolveEditorDialog::content() const
 {
-    QStringList l;
-    for (int i = 0; i < m_edit->numLines(); ++i)
-        l << (m_edit->textLine(i) + '\n');
-
-    return l;
+    return m_edit->text();
 }
-

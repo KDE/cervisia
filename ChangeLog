@@ -1,5 +1,11 @@
 2004-04-01  Christian Loose  <christian.loose@hamburg.de>
 
+	* Fix BR #46871:
+	  Preserve file content in resolve dialog:
+	   - don't remove characters
+	   - don't add or remove new line markers
+           - handle A+B/B+A cases with no new line marker at
+             the end of the first version correctly
 	* Fix BR #74903:
 	  Don't choke on conflict markers that are not on a
 	  separate line in the resolve dialog. This happens 
