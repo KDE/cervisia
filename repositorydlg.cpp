@@ -75,7 +75,7 @@ void RepositoryListItem::setRsh(const QString &rsh)
 {
     QString repo = repository();
     QString method;
-    
+
     if (repo.startsWith(":pserver:"))
         method = "pserver";
     else if (repo.contains(':'))
@@ -99,7 +99,7 @@ void RepositoryListItem::setCompression(int compression)
 {
     QString compressionStr = (compression >= 0)?
         QString::number(compression) : i18n("Default");
-    
+
     setText(2, compressionStr);
 }
 
@@ -157,7 +157,7 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, QWidget *parent, const char *na
 
     // open cvs DCOP service configuration file
     serviceConfig = new KConfig("cvsservicerc");
-    
+
     readCvsPassFile();
     readConfigFile();
 
@@ -192,7 +192,7 @@ RepositoryDialog::~RepositoryDialog()
 #else
     Cervisia::saveDialogSize(this, partConfig, "RepositoryDialog");
 #endif
-    
+
     delete serviceConfig;
 }
 
@@ -209,7 +209,7 @@ void RepositoryDialog::readCvsPassFile()
 void RepositoryDialog::readConfigFile()
 {
     QStringList list = Repositories::readConfigFile();
-    
+
     // Sort out all list elements which are already in the list view
     QListViewItem *item = repolist->firstChild();
     for ( ; item; item = item->nextSibling())
@@ -218,7 +218,7 @@ void RepositoryDialog::readConfigFile()
     QStringList::ConstIterator it;
     for (it = list.begin(); it != list.end(); ++it)
         new RepositoryListItem(repolist, *it, false);
-            
+
     // Now look for the used methods
     item = repolist->firstChild();
     for (; item; item = item->nextSibling())
@@ -283,7 +283,7 @@ void RepositoryDialog::slotAddClicked()
             QString rsh     = dlg.rsh();
             QString server  = dlg.server();
             int compression = dlg.compression();
-            
+
             QListViewItem *item = repolist->firstChild();
             for ( ; item; item = item->nextSibling())
                 if (item->text(0) == repo)
@@ -292,7 +292,7 @@ void RepositoryDialog::slotAddClicked()
                                                  i18n("This repository is already known."));
                         return;
                     }
-            
+
             RepositoryListItem *ritem = new RepositoryListItem(repolist, repo, false);
             ritem->setRsh(rsh);
             ritem->setCompression(compression);
@@ -337,7 +337,7 @@ void RepositoryDialog::slotDoubleClicked(QListViewItem *item)
     QString rsh     = ritem->rsh();
     QString server  = ritem->server();
     int compression = ritem->compression();
-    
+
     AddRepositoryDialog dlg(partConfig, repo, this);
     dlg.setRepository(repo);
     dlg.setRsh(rsh);

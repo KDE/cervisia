@@ -35,7 +35,7 @@ public:
     virtual ~RepositoryDialog();
 
     void readConfigFile();
-    void readCvsPassFile(); 
+    void readCvsPassFile();
 
 protected:
     virtual void slotOk();
