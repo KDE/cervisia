@@ -43,7 +43,7 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2002-06-29</date>
+<date>2002-06-30</date>
 <releaseinfo>2.00.00</releaseinfo>
 
 <abstract>
@@ -723,7 +723,7 @@ entry...</guimenuitem></menuchoice>.  If a file with the name
 sandbox, this file will be loaded and you have the possibility to edit it. To
 this end, at the top of the file, an entry with the current date and your user
 name (which can be configured as described in <xref
-linkend="customize-various"/>) is inserted. When you finish the dialog this
+linkend="customize-general"/>) is inserted. When you finish the dialog this
 dialog by clicking <guibutton>OK</guibutton>, the next commit dialog you open
 will have the log message set to the message you last entered in the change
 log. 
@@ -1082,7 +1082,7 @@ the same amount. You can change this by checking the box
 </para>
 
 <para>
-For information about how to customize the diff dialog, see <xref linkend="customize-various"/>.
+For information about how to customize the diff dialog, see <xref linkend="customize-commands"/>.
 </para>
 
 </sect1>
@@ -1433,6 +1433,45 @@ readonly again.
 <title>Locking</title>
 
 <para>
+The development model usually followed when &CVS; is used is called
+<emphasis>unreserved checkouts</emphasis>. Each developer has his own sandbox
+where he can edit files as he likes. If when the watch features - like
+<command>cvs edit</command> - are used, multiple developers can work on files
+synchronously. Changes done by a different developer are merged into the local
+sandbox when an update is performed.
+</para>
+
+<para>
+Other revision control systems - like <acronym>RCS</acronym> and
+<application>SourceSafe</application> use a different model. When a developer
+wants to a edit a file, he has to <emphasis>lock</emphasis> it. Only one
+developer at a time can a lock a file. When he has finished editing, the lock
+is released. On the one hand, with this model, conflicts can never happen. On
+the other hand, two developers can not work on the same file at the same time,
+even when their changes do not affect each other. This can be a bottleneck.
+We are not going to discuss the organizational benefits of both approaches.
+Nevertheless we mention that although &CVS; has some support for locking, it is
+not the preferred way of working with &CVS;. You should not use these features
+unless you are sure that your project manager allows them.
+</para>
+
+<para>
+With &cervisia;, you lock files as follows. Select the desired files in the
+main view. Then choose
+<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Lock</guimenuitem></menuchoice>.
+This runs the command
+</para>
+
+<para>
+<screen><command>cvs admin -l <replaceable>filenames</replaceable></command></screen>
+</para>
+
+The reverse effect is achieved by using
+<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Unlock</guimenuitem></menuchoice>.
+This runs the command
+
+<para>
+<screen><command>cvs admin -u <replaceable>filenames</replaceable></command></screen>
 </para>
 
 </sect1>
@@ -1452,8 +1491,8 @@ dialog which is available via
 </para>
 
 
-<sect1 id="customize-various">
-<title>Customizing various commands</title>
+<sect1 id="customize-general">
+<title>General</title>
 
 <formalpara id="customize-username">
 <title>User name for the ChangeLog editor</title>
@@ -1487,6 +1526,11 @@ like <command>gnuclient</command> here.  You can also enter the string
 points to an editor which opens an X11 window itself.
 </para>
 </formalpara>
+
+</sect1>
+
+<sect1 id="customize-commands">
+<title>Various commands</title>
 
 <formalpara id="customize-context">
 <title>Number of context lines in the diff dialog</title>
@@ -1575,7 +1619,7 @@ additionally there is a per-repository setting available in
 
 
 <sect1 id="customize-look">
-<title>Customizing &cervisia;'s look'n'feel</title>
+<title>Look'n'feel</title>
 
 <formalpara id="customize-splitter">
 <title>Split main window horizontally</title>
@@ -1721,10 +1765,7 @@ mailing list</ulink>.
 <!-- File Menu -->
 <sect2 id="menufile">
 
-<title><menuchoice>
-<shortcut><keycombo><keycap>&Alt;</keycap><keycap>F</keycap></keycombo></shortcut>
-<guimenu>File</guimenu>
-</menuchoice></title>
+<title>The File Menu</title>
 
 <variablelist>
 
@@ -1862,10 +1903,7 @@ update</command>).
 <!-- View Menu -->
 <sect2 id="menuview">
 
-<title><menuchoice>
-<shortcut><keycombo><keycap>&Alt;</keycap><keycap>V</keycap></keycombo></shortcut>
-<guimenu>View</guimenu>
-</menuchoice></title>
+<title>The View Menu</title>
 
 <variablelist>
 
@@ -1956,10 +1994,7 @@ Closes all branches in the file tree.
 <!-- Advanced Menu -->
 <sect2 id="menuadvanced">
 
-<title><menuchoice>
-<shortcut><keycombo><keycap>&Alt;</keycap><keycap>A</keycap></keycombo></shortcut>
-<guimenu>Advanced</guimenu>
-</menuchoice></title>
+<title>The Advanced Menu</title>
 
 <variablelist>
 
@@ -2096,10 +2131,7 @@ Creates a patch from the modifications in your sandbox.
 <!-- Repository Menu -->
 <sect2 id="menurepository">
 
-<title><menuchoice>
-<shortcut><keycombo><keycap>&Alt;</keycap><keycap>R</keycap></keycombo></shortcut>
-<guimenu>Repository</guimenu>
-</menuchoice></title>
+<title>The Repository Menu</title>
 
 <variablelist>
 
@@ -2138,10 +2170,7 @@ and how to access them.
 
 <!-- Settings Menu -->
 <sect2 id="menuoptions">
-<title><menuchoice>
-<shortcut><keycombo><keycap>&Alt;</keycap><keycap>S</keycap></keycombo></shortcut>
-<guimenu>Settings</guimenu>
-</menuchoice></title>
+<title>The Settings Menu</title>
 
 <variablelist>
 
@@ -2219,10 +2248,7 @@ whenever you edit a file.
 
 <!-- Help -->
 <sect2 id="menuhelp">
-<title><menuchoice>
-<shortcut><keycombo><keycap>&Alt;</keycap><keycap>H</keycap></keycombo></shortcut>
-<guimenu>Help</guimenu>
-</menuchoice></title>
+<title>The Help Menu</title>
 
 <variablelist>
 
@@ -2239,22 +2265,10 @@ document).
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycombo><keycap>&Shift;</keycap><keycap>F1</keycap></keycombo></shortcut>
-<guimenu>Help</guimenu><guimenuitem>What's This?</guimenuitem>
-</menuchoice></term>
-<listitem><para>Changes the mouse cursor to a combination arrow and
-question mark. Clicking on items within &cervisia; will open a help
-window (if one exists for the particular item) explaining the item's function.
-</para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice>
 <guimenu>Help</guimenu><guimenuitem>Report Bug...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Opens the Bug report dialog where you can
-report a bug or request a <quote>wishlist</quote> feature.
+Opens the Bug report dialog.
 </para></listitem>
 </varlistentry>
 
