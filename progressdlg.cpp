@@ -44,7 +44,7 @@ ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,
     d->isCancelled = false;
     d->isShown     = false;
     d->hasError    = false;
-    d->cvsJob      = new CvsJob_stub(job.app(), job.obj());
+    d->cvsJob      = new CvsJob_stub(job);
     d->buffer      = "";
 
     d->errorId1 = "cvs " + errorIndicator + ":";
