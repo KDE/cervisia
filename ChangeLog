@@ -1,3 +1,9 @@
+2002-12-05  Christian Loose <christian.loose@hamburg.de>
+
+	* Don't add a new line to the end of changelog
+	* Use QFile instead of FILE* and remove unneeded
+	  inheritance in cvsdir.cpp
+
 2002-12-02  Christian Loose <christian.loose@hamburg.de>
 
 	* Fixed commit dialog bigger than screen bug (#50735)

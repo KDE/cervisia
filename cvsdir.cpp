@@ -23,7 +23,7 @@
 #include "cvsdir.h"
 
 
-class CvsIgnoreList : public QStrList
+class CvsIgnoreList
 {
 public:
     CvsIgnoreList(const QDir &dir);
@@ -31,11 +31,13 @@ public:
     void addEntriesFromString(const QString &str);
     void addEntriesFromFile(const QString &name);
     bool matches(QFileInfo *fi);
+
+private:
+    QStrList ignoreList;
 };
 
 
 CvsIgnoreList::CvsIgnoreList(const QDir &dir)
-    : QStrList(true) // always make deep copies
 {
     static const char *ignorestr = ". .. core RCSLOG tags TAGS RCS SCCS .make.state\
 .nse_depinfo #* .#* cvslog.* ,* CVS CVS.adm .del-* *.a *.olb *.o *.obj\
@@ -57,27 +59,26 @@ void CvsIgnoreList::addEntriesFromString(const QString &str)
           it != tokens.end(); ++it )
 	{
             if ( *it == "!" )
-		clear();
+		ignoreList.clear();
 	    else
-                append((*it).local8Bit());
+                ignoreList.append((*it).local8Bit());
 	}
 }
 
 
 void CvsIgnoreList::addEntriesFromFile(const QString &name)
 {
-    char buf[512];
-    // FIXME: Use QFile
-    FILE *f = fopen(name.local8Bit(), "r");
-    if (!f)
-	return;
+    QFile file(name);
 
-    while (fgets(buf, sizeof buf, f))
-	{
-	    QString line = buf;
-	    addEntriesFromString(buf);
-	}
-    fclose(f);
+    if( file.open(IO_ReadOnly) )
+    {
+        QString line;
+
+        while( file.readLine(line, 512) != -1 )
+            addEntriesFromString(line);
+
+        file.close();
+    }
 }
 
 
@@ -87,7 +88,7 @@ bool CvsIgnoreList::matches(QFileInfo *fi)
     //    if (!fi->isFile())
     //        return false;
     
-    QStrListIterator it(*this);
+    QStrListIterator it(ignoreList);
     for (; it.current(); ++it)
 	{
 	    if (::fnmatch(it.current(), fi->fileName().local8Bit(), FNM_PATHNAME) == 0)
