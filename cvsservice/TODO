@@ -8,9 +8,5 @@ TODO
   the parsing of cvs' output from Cervisia
 
 * Missing cvs functionality needed for Cervisia:
-    - cvs edit
     - cvs watch (add/remove)
-    - cvs admin (lock/unlock)
-    - cvs editors
     - cvs diff (make patch)
-    - cvs import
