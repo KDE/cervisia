@@ -180,7 +180,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     setButtonTip(Ok, QString::null);
     setButtonWhatsThis(Ok, QString::null);
 #endif
-    setButtonGuiItem(Apply, KGuiItem(i18n("Create Patch"), "", "", ""));
+    setButtonGuiItem(Apply, KGuiItem(i18n("Create Patch..."), "", "", ""));
     setHelp("browsinglogs");
 
     setWFlags(Qt::WDestructiveClose | getWFlags());
