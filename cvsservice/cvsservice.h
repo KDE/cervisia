@@ -42,7 +42,7 @@ k_dcop:
      * appear in the repository until a subsequent commit is performed.
      *
      * @param files A list of files that should be added to the repository.
-     * @param isBinary
+     * @param isBinary Set to true to treat the files as binary files (-kb)
      *
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
@@ -63,7 +63,7 @@ k_dcop:
     /**
      * Checks out a module from the repository into a working copy.
      *
-     * @param workingDir
+     * @param workingDir path to a local working copy directory
      * @param repository
      * @param module
      * @param tag
