@@ -288,7 +288,7 @@ void SettingsDialog::done(int res)
 void SettingsDialog::addGeneralPage()
 {
     QFrame* generalPage = addPage(i18n("General"), QString::null,
-                                  LoadIcon("general"));
+                                  LoadIcon("misc"));
     QVBoxLayout* layout = new QVBoxLayout(generalPage, 0, KDialog::spacingHint());
 
     QLabel *usernamelabel = new QLabel( i18n("&User name for the change log editor:"), generalPage );
@@ -405,7 +405,7 @@ void SettingsDialog::addAdvancedPage()
 void SettingsDialog::addLookAndFeelPage()
 {
     QVBox* lookPage = addVBoxPage(i18n("Appearance"), QString::null,
-                                  LoadIcon("appearance"));
+                                  LoadIcon("looknfeel"));
 
     QGroupBox* fontGroupBox = new QGroupBox(4, Qt::Vertical, i18n("Fonts"),
                                             lookPage);
