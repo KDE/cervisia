@@ -156,11 +156,14 @@ void SshAgent::slotProcessExited(KProcess*)
 
     proc.setEnvironment("SSH_AGENT_PID", m_pid);
     proc.setEnvironment("SSH_AUTH_SOCK", m_authSock);
+    proc.setEnvironment("SSH_ASKPASS", "cvsaskpass");
 
     proc << "ssh-add";
 
     connect(&proc, SIGNAL(receivedStdout(KProcess*, char*, int)),
             SLOT(slotReceivedStdout(KProcess*, char*, int)));
+    connect(&proc, SIGNAL(receivedStderr(KProcess*, char*, int)),
+            SLOT(slotReceivedStderr(KProcess*, char*, int)));
 
     proc.start(KProcess::DontCare, KProcess::AllOutput);
 
