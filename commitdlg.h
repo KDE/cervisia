@@ -15,16 +15,15 @@
 #ifndef COMMITDLG_H
 #define COMMITDLG_H
 
-
-#include <kdialogbase.h>
-
 #include <qstringlist.h>
+#include <kdialogbase.h>
 
 
 class QComboBox;
 class QListBox;
 class QMultiLineEdit;
 class KConfig;
+class CvsService_stub;
 
 
 class CommitDialog : public KDialogBase
@@ -32,14 +31,15 @@ class CommitDialog : public KDialogBase
     Q_OBJECT
 
 public:   
-    explicit CommitDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
+    CommitDialog( KConfig& cfg, CvsService_stub* service, QWidget *parent=0, 
+                  const char *name=0 );
 
     virtual ~CommitDialog();
 
     void setFileList(const QStringList &list);
     void setLogMessage(const QString &msg);
     QString logMessage() const;
-    void setLogHistory(const QString &sbox, const QString &repo, const QStringList &list);
+    void setLogHistory(const QStringList &list);
 
 private slots:
     void comboActivated(int);
@@ -56,10 +56,10 @@ private:
     QStringList commits;
     int current_index;
     QString current_text;
-    QString sandbox;
-    QString repository;
     int highlightedFile;
-    KConfig& partConfig;
+    
+    KConfig&            partConfig;
+    CvsService_stub*    cvsService;     // for diff dialog
 };
 
 #endif

@@ -22,6 +22,7 @@
 #include <kconfig.h>
 #include <klocale.h>
 
+#include "cvsservice_stub.h"
 #include "diffdlg.h"
 
 #include <kdeversion.h>
@@ -30,10 +31,12 @@
 #endif
 
 
-CommitDialog::CommitDialog(KConfig& cfg, QWidget *parent, const char *name)
+CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service, 
+                           QWidget *parent, const char *name)
     : KDialogBase(parent, name, true, i18n("CVS Commit"),
                   Ok | Cancel | Help | User1, Ok, true)
     , partConfig(cfg)
+    , cvsService(service)
 {
     QFrame* mainWidget = makeMainWidget();
 
@@ -111,11 +114,8 @@ QString CommitDialog::logMessage() const
 }
 
 
-void CommitDialog::setLogHistory(const QString &sbox, const QString &repo,
-                                 const QStringList &list)
+void CommitDialog::setLogHistory(const QStringList &list)
 {
-    sandbox = sbox;
-    repository = repo;
     commits = list;
 
     combo->insertItem(i18n("Current"));
@@ -188,7 +188,7 @@ void CommitDialog::diffClicked()
 void CommitDialog::showDiffDialog(const QString& fileName)
 {
     DiffDialog *l = new DiffDialog(partConfig, this, "diffdialog", true);
-    if (l->parseCvsDiff(sandbox, repository, fileName, "", ""))
+    if (l->parseCvsDiff(cvsService, fileName, "", ""))
         l->show();
     else
         delete l;

@@ -847,9 +847,9 @@ void CervisiaPart::slotCommit()
         return;
 
     // modal dialog
-    CommitDialog dlg(*config(), widget());
+    CommitDialog dlg(*config(), cvsService, widget());
     dlg.setLogMessage(changelogstr);
-    dlg.setLogHistory(sandbox, repository, recentCommits);
+    dlg.setLogHistory(recentCommits);
     dlg.setFileList(list);
 
     if (dlg.exec())
@@ -1044,7 +1044,7 @@ void CervisiaPart::slotDiff()
 
     // Non-modal dialog
     DiffDialog *l = new DiffDialog(*config());
-    if (l->parseCvsDiff(sandbox, repository, filename, "", ""))
+    if (l->parseCvsDiff(cvsService, filename, "", ""))
         l->show();
     else
         delete l;
@@ -1397,7 +1397,7 @@ void CervisiaPart::slotLastChange()
 
     // Non-modal dialog
     DiffDialog *l = new DiffDialog(*config());
-    if (l->parseCvsDiff(sandbox, repository, filename, revB, revA))
+    if (l->parseCvsDiff(cvsService, filename, revB, revA))
         l->show();
     else
         delete l;

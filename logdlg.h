@@ -73,8 +73,6 @@ private slots:
 private:
     void tagSelected(TagInfo* tag, bool rmb);
 
-    QString sandbox;
-    QString repository;
     QString filename;
     QPtrList<RevisionInfo> items;
     QPtrList<TagInfo> tags;

@@ -25,8 +25,11 @@
 #include <ktempfile.h>
 #include <kprocess.h>
 
+#include "cvsservice_stub.h"
+#include "repository_stub.h"
 #include "misc.h"
 #include "cvsprogressdlg.h"
+#include "progressdlg.h"
 #include "diffview.h"
 
 #include <kdeversion.h>
@@ -228,14 +231,14 @@ public:
 };
 
 
-bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
-                              const QString &filename, const QString &revA, const QString &revB)
+bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
+                              const QString &revA, const QString &revB)
 {
     QStringList linesA, linesB;
     int linenoA, linenoB;
     enum { Normal, VersionA, VersionB } state;
 
-    setCaption(i18n("CVS Diff: %1").arg(filename));
+    setCaption(i18n("CVS Diff: %1").arg(fileName));
     revlabel1->setText( revA.isEmpty()?
                         i18n("Repository")
                         : i18n("Revision ")+revA );
@@ -254,90 +257,30 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
     QString extdiff = partConfig.readEntry("ExternalDiff", "");
     if (!extdiff.isEmpty())
         {
-            QString cmdline = "cvs update -p ";
-            QString extcmdline = extdiff;
-            extcmdline += " ";
-            
-            if (!revA.isEmpty() && !revB.isEmpty())
-                {
-                    // We're comparing two revisions
-                    QString revAFilename = tempFileName(QString("-")+revA);
-                    QString revBFilename = tempFileName(QString("-")+revB);
-                    cmdline += " -r ";
-                    cmdline += KShellProcess::quote(revA);
-                    cmdline += " ";
-                    cmdline += KShellProcess::quote(filename);
-                    cmdline += " > ";
-                    cmdline += KShellProcess::quote(revAFilename);
-                    cmdline += " ; cvs update -p ";
-                    cmdline += " -r ";
-                    cmdline += KShellProcess::quote(revB);
-                    cmdline += " ";
-                    cmdline += KShellProcess::quote(filename);
-                    cmdline += " > ";
-                    cmdline += KShellProcess::quote(revBFilename);
-                    
-                    extcmdline += KShellProcess::quote(revAFilename);
-                    extcmdline += " ";
-                    extcmdline += KShellProcess::quote(revBFilename);
-                } else {
-                    // We're comparing to a file, and perhaps one revision
-                    QString revAFilename = tempFileName(revA);
-                    if (!revA.isEmpty())
-                        {
-                            cmdline += " -r ";
-                            cmdline += KShellProcess::quote(revA);
-                        }
-                    cmdline += " ";
-                    cmdline += KShellProcess::quote(filename);
-                    cmdline += " > ";
-                    cmdline += KShellProcess::quote(revAFilename);
-                    
-                    extcmdline += KShellProcess::quote(revAFilename);
-                    extcmdline += " ";
-                    extcmdline += KShellProcess::quote(QFileInfo(filename).absFilePath());
-                }
-            CvsProgressDialog l("Diff", this);
-            if (l.execCommand(sandbox, repository, cmdline, "diff"))
-                {
-                    KShellProcess proc("/bin/sh");
-                    proc << extcmdline;
-                    proc.start(KProcess::DontCare);
-                }
+            callExternalDiff(extdiff, service, fileName, revA, revB);
             return false;
         }
 
-    QString cmdline = cvsClient(repository) + " diff ";
-    cmdline += partConfig.readEntry("DiffOptions", "");
-    cmdline += " -U ";
-    cmdline += QString().setNum((int)partConfig.readUnsignedNumEntry("ContextLines", 65535));
-    if (!revA.isEmpty())
-	{
-	    cmdline += " -r ";
-	    cmdline += KShellProcess::quote(revA);
-	}
-    if (!revB.isEmpty())
-	{
-	    cmdline += " -r ";
-	    cmdline += KShellProcess::quote(revB);
-	}
-    cmdline += " ";
-    cmdline += KShellProcess::quote(filename);
-
-    CvsProgressDialog l("Diff", this);
-    l.setCaption(i18n("CVS Diff"));
-    if (!l.execCommand(sandbox, repository, cmdline, "diff"))
+    const QString diffOptions   = partConfig.readEntry("DiffOptions", "");
+    const unsigned contextLines = partConfig.readUnsignedNumEntry("ContextLines", 65535);
+        
+    DCOPRef job = service->diff(fileName, revA, revB, diffOptions, contextLines);
+    if( !service->ok() )
         return false;
 
+    ProgressDialog dlg(this, "Diff", job, "diff", i18n("CVS Diff"));
+    if( !dlg.execute() )
+        return false;
+    
     QString line;
-    while ( l.getOneLine(&line) && line.left(3) != "+++")
+    while ( dlg.getLine(line) && !line.startsWith("+++"))
         ;
     
     state = Normal;
     linenoA = linenoB = 0;
-    while ( l.getOneLine(&line) )
+    while ( dlg.getLine(line) )
         {
-            if (line.left(2) == "@@")
+            if (line.startsWith("@@"))
                 {
                     interpretRegion(line, &linenoA, &linenoB);
                     diff1->addLine(line, DiffView::Separator);
@@ -454,6 +397,74 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
     updateNofN();
  
     return true;
+}
+
+
+void DiffDialog::callExternalDiff(const QString& extdiff, CvsService_stub* service, 
+                                  const QString& fileName, const QString &revA,
+                                  const QString &revB)
+{
+    QString cmdline = "cvs update -p ";
+    QString extcmdline = extdiff;
+    extcmdline += " ";
+            
+    if (!revA.isEmpty() && !revB.isEmpty())
+    {
+        // We're comparing two revisions
+        QString revAFilename = tempFileName(QString("-")+revA);
+        QString revBFilename = tempFileName(QString("-")+revB);
+                    
+        cmdline += " -r ";
+        cmdline += KProcess::quote(revA);
+        cmdline += " ";
+        cmdline += KProcess::quote(fileName);
+        cmdline += " > ";
+        cmdline += KProcess::quote(revAFilename);
+        cmdline += " ; cvs update -p ";
+        cmdline += " -r ";
+        cmdline += KProcess::quote(revB);
+        cmdline += " ";
+        cmdline += KProcess::quote(fileName);
+        cmdline += " > ";
+        cmdline += KProcess::quote(revBFilename);
+                    
+        extcmdline += KProcess::quote(revAFilename);
+        extcmdline += " ";
+        extcmdline += KProcess::quote(revBFilename);
+    } 
+    else 
+    {
+        // We're comparing to a file, and perhaps one revision
+        QString revAFilename = tempFileName(revA);
+        if (!revA.isEmpty())
+        {
+            cmdline += " -r ";
+            cmdline += KProcess::quote(revA);
+        }
+        cmdline += " ";
+        cmdline += KProcess::quote(fileName);
+        cmdline += " > ";
+        cmdline += KProcess::quote(revAFilename);
+                    
+        extcmdline += KProcess::quote(revAFilename);
+        extcmdline += " ";
+        extcmdline += KProcess::quote(QFileInfo(fileName).absFilePath());
+    }
+
+    // FIXME: We shouldn't need to use CvsProgressDialog here
+    Repository_stub cvsRepository(service->app(), "CvsRepository");
+    QString sandbox    = cvsRepository.workingCopy();
+    QString repository = cvsRepository.location();
+    
+    CvsProgressDialog l("Diff", this);
+    if (l.execCommand(sandbox, repository, cmdline, "diff"))
+    {
+        KProcess proc;
+        proc.setUseShell(true, "/bin/sh");
+        proc << extcmdline;
+        proc.start(KProcess::DontCare);
+    }
+            
 }
 
 

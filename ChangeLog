@@ -1,3 +1,9 @@
+2003-02-17  Christian Loose  <christian.loose@hamburg.de>
+
+	* Use DCOP service for diff dialog.
+	* Added private method callExternalDiff() in diff
+	  dialog to make parseCvsDiff() more readable.
+
 2003-02-16  Christian Loose  <christian.loose@hamburg.de>
 
 	* Improved size handling for Repository dialog,

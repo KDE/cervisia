@@ -15,10 +15,8 @@
 #ifndef DIFFDLG_H
 #define DIFFDLG_H
 
-
-#include <kdialogbase.h>
-
 #include <qptrlist.h>
+#include <kdialogbase.h>
 
 
 class QLabel;
@@ -27,6 +25,7 @@ class QComboBox;
 class KConfig;
 class DiffItem;
 class DiffView;
+class CvsService_stub;
 
 
 class DiffDialog : public KDialogBase
@@ -40,8 +39,8 @@ public:
 
     virtual ~DiffDialog();
 
-    bool parseCvsDiff(const QString &sandbox, const QString &repository,
-                      const QString &filename, const QString &revA, const QString &revB);
+    bool parseCvsDiff(CvsService_stub* service, const QString &fileName, 
+                      const QString &revA, const QString &revB);
 
 protected:
     virtual void keyPressEvent(QKeyEvent *e);
@@ -53,6 +52,9 @@ private slots:
     void forwClicked();
 
 private:
+    void callExternalDiff(const QString& extdiff, CvsService_stub* service, 
+                          const QString& fileName, const QString &revA, 
+                          const QString &revB);
     void updateNofN();
     void updateHighlight(int newitem);
 
