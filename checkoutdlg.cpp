@@ -26,19 +26,22 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 
-#include "cvsprogressdlg.h"
+#include "progressdlg.h"
 #include "repositories.h"
 #include "misc.h"
+#include "cvsservice_stub.h"
 
 #include <kdeversion.h>
 
 
-CheckoutDialog::CheckoutDialog(KConfig& cfg, ActionType action, QWidget *parent, 
+CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
+                               ActionType action, QWidget *parent,
                                const char *name)
     : KDialogBase(parent, name, true, QString::null,
                   Ok | Cancel | Help, Ok, true)
     , act(action)
     , partConfig(cfg)
+    , cvsService(service)
 {
     setCaption( (action==Checkout)? i18n("CVS Checkout") : i18n("CVS Import") );
 
@@ -292,19 +295,17 @@ void CheckoutDialog::dirButtonClicked()
 
 void CheckoutDialog::moduleButtonClicked()
 {
-    QString cmdline = cvsClient(repository());
-    cmdline += " -d ";
-    cmdline += repository();
-    cmdline += " checkout -c";
+    DCOPRef cvsJob = cvsService->moduleList(repository());
+    if( !cvsService->ok() )
+        return;
 
-    CvsProgressDialog l("Checkout", this);
-    l.setCaption(i18n("CVS Checkout"));
-    if (!l.execCommand("", repository(), cmdline, "checkout"))
+    ProgressDialog dlg(this, "Checkout", cvsJob, "checkout", i18n("CVS Checkout"));
+    if( !dlg.execute() )
         return;
 
     module_combo->clear();
     QString str;
-    while (l.getOneLine(&str))
+    while (dlg.getLine(str))
         {
             if (str.left(12) == "Unknown host")
                 continue;

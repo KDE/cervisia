@@ -1227,7 +1227,7 @@ void CervisiaPart::slotCheckout()
 
 void CervisiaPart::importOrCheckout(CheckoutDialog::ActionType action)
 {
-    CheckoutDialog dlg(*config(), action, widget());
+    CheckoutDialog dlg(*config(), cvsService, action, widget());
 
     if (dlg.exec())
         {
