@@ -16,24 +16,20 @@
 
 #include <stdio.h>
 #include <qcombobox.h>
-#include <qpushbutton.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qtabbar.h>
+#include <qtabwidget.h>
 #include <qtextedit.h>
-#include <qwidgetstack.h>
 #include <qwhatsthis.h>
-#include <kbuttonbox.h>
 #include <kdebug.h>
-#include <kapplication.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kconfig.h>
 #include <kprocess.h>
-#include <diffdlg.h>
 
 #include "annotatedlg.h"
 #include "cvsprogressdlg.h"
+#include "diffdlg.h"
 #include "loglist.h"
 #include "logtree.h"
 #include "misc.h"
@@ -43,33 +39,25 @@ LogDialog::Options *LogDialog::options = 0;
 
 
 LogDialog::LogDialog(QWidget *parent, const char *name)
-    : QDialog(parent, name, false, WStyle_MinMax)
+    : KDialogBase(parent, name, false, QString::null,
+                  Close | Help | User1 | User2, Close, true)
 {
-    QBoxLayout *layout = new QVBoxLayout(this, 10, 0);
+    QFrame* mainWidget = makeMainWidget();
 
-    tree = new LogTreeView(this);
+    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
+
+    tree = new LogTreeView(mainWidget);
     connect( tree, SIGNAL(revisionClicked(QString,bool)),
 	     this, SLOT(revisionSelected(QString,bool)) );
 
-    list = new LogListView(this);
+    list = new LogListView(mainWidget);
     connect( list, SIGNAL(revisionClicked(QString,bool)),
 	     this, SLOT(revisionSelected(QString,bool)) );
 
-    QWidgetStack *stack = new QWidgetStack(this);
-    tabbar = new QTabBar(this);
-    QTab *tab1 = new QTab(i18n("&Tree"));
-    stack->addWidget(tree, tabbar->addTab(tab1));
-    QTab *tab2 = new QTab(i18n("&List"));
-    stack->addWidget(list, tabbar->addTab(tab2));
-
-    //    tabbar->adjustSize();
-    //    tabbar->setMinimumWidth(tabbar->width());
-    //    tabbar->setFixedHeight(tabbar->height());
-    layout->addWidget(tabbar, 0);
-    layout->addWidget(stack, 3);
-    
-    connect( tabbar, SIGNAL(selected(int)),
-	     stack, SLOT(raiseWidget(int)) );
+    tabWidget = new QTabWidget(mainWidget);
+    tabWidget->addTab(tree, i18n("&Tree"));
+    tabWidget->addTab(list, i18n("&List"));
+    layout->addWidget(tabWidget, 3);
 
     QWhatsThis::add(tree, i18n("Choose revision A by clicking with the left"
 			       "mouse button,\nrevision B by clicking with "
@@ -80,15 +68,11 @@ LogDialog::LogDialog(QWidget *parent, const char *name)
 
     for (int i = 0; i < 2; ++i)
 	{
-	    QFrame *frame = new QFrame(this);
+	    QFrame *frame = new QFrame(mainWidget);
 	    frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-
-	    layout->addSpacing(8);
 	    layout->addWidget(frame);
-	    layout->addSpacing(8);
 
-	    QGridLayout *grid = new QGridLayout(3, 5, 4);
-	    layout->addLayout(grid, 1);
+	    QGridLayout *grid = new QGridLayout(layout);
             grid->setRowStretch(0, 0);
             grid->setRowStretch(1, 0);
             grid->setRowStretch(2, 1);
@@ -99,49 +83,45 @@ LogDialog::LogDialog(QWidget *parent, const char *name)
 	    grid->setColStretch(4, 2);
 	    
 	    QString versionident = (i==0)? i18n("Revision A:") : i18n("Revision B:");
-	    QLabel *versionlabel = new QLabel(versionident, this);
+	    QLabel *versionlabel = new QLabel(versionident, mainWidget);
 	    grid->addWidget(versionlabel, 0, 0);
 
-	    revbox[i] = new QLabel("1.0.1.0.1.0", this);
-            revbox[i]->setMinimumSize(revbox[i]->sizeHint());
+	    revbox[i] = new QLabel(mainWidget);
 	    revbox[i]->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-	    revbox[i]->setText("");
-	    grid->addWidget(revbox[i], 0, 1);
+	    grid->addWidget(revbox[i], 0, 1, Qt::AlignVCenter);
             
-            QLabel *selectlabel = new QLabel(i18n("Select by tag:"), this);
+            QLabel *selectlabel = new QLabel(i18n("Select by tag:"), mainWidget);
             grid->addWidget(selectlabel, 0, 2);
             
-            tagcombo[i] = new QComboBox(this);
+            tagcombo[i] = new QComboBox(mainWidget);
             QFontMetrics fm(tagcombo[i]->fontMetrics());
             tagcombo[i]->setMinimumWidth(fm.width("X")*20);
             grid->addWidget(tagcombo[i], 0, 3);
             
-	    QLabel *authorlabel = new QLabel(i18n("Author:"), this);
+	    QLabel *authorlabel = new QLabel(i18n("Author:"), mainWidget);
 	    grid->addWidget(authorlabel, 1, 0);
 
-	    authorbox[i] = new QLabel("Foo", this);
+	    authorbox[i] = new QLabel(mainWidget);
 	    authorbox[i]->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-	    authorbox[i]->setText("");
 	    grid->addWidget(authorbox[i], 1, 1);
 
-	    QLabel *datelabel = new QLabel(i18n("Date:"), this);
+	    QLabel *datelabel = new QLabel(i18n("Date:"), mainWidget);
 	    grid->addWidget(datelabel, 1, 2);
 
-	    datebox[i] = new QLabel("1999/99/99 00:00:00", this);
+	    datebox[i] = new QLabel(mainWidget);
 	    datebox[i]->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-	    datebox[i]->setText("");
 	    grid->addWidget(datebox[i], 1, 3);
 
-	    QLabel *commentlabel = new QLabel(i18n("Comment/Tags:"), this);
+	    QLabel *commentlabel = new QLabel(i18n("Comment/Tags:"), mainWidget);
 	    grid->addWidget(commentlabel, 2, 0);
 
-            commentbox[i] = new QTextEdit(this);
+            commentbox[i] = new QTextEdit(mainWidget);
 	    commentbox[i]->setReadOnly(true);
             fm = commentbox[i]->fontMetrics();
 	    commentbox[i]->setFixedHeight(2*fm.lineSpacing()+10);
 	    grid->addMultiCellWidget(commentbox[i], 2, 2, 1, 3);
 
-            tagsbox[i] = new QTextEdit(this);
+            tagsbox[i] = new QTextEdit(mainWidget);
 	    tagsbox[i]->setReadOnly(true);
 	    tagsbox[i]->setFixedHeight(2*fm.lineSpacing()+10);
             grid->addWidget(tagsbox[i], 2, 4);
@@ -158,48 +138,33 @@ LogDialog::LogDialog(QWidget *parent, const char *name)
     connect( tagcombo[1], SIGNAL(activated(int)),
              this, SLOT(tagBSelected(int)) );
 
-    QFrame *frame = new QFrame(this);
-    frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
+    setButtonText(User1, i18n("&Annotate"));
+    setButtonText(User2, i18n("&Diff"));
 
-    layout->addSpacing(8);
-    layout->addWidget(frame, 0);
-    layout->addSpacing(8);
+    connect( this, SIGNAL(user1Clicked()),
+             this, SLOT(annotateClicked()) );
+    connect( this, SIGNAL(user2Clicked()),
+             this, SLOT(diffClicked()) );
 
-    KButtonBox *buttonbox = new KButtonBox(this);
-    QPushButton *helpbutton = buttonbox->addButton(i18n("&Help"));
-    helpbutton->setAutoDefault(false);
-    buttonbox->addStretch();
-    QPushButton *diffbutton = buttonbox->addButton(i18n("&Diff"));
-    diffbutton->setAutoDefault(false);
-    QPushButton *annotatebutton = buttonbox->addButton(i18n("&Annotate"));
-    annotatebutton->setAutoDefault(false);
-    connect( buttonbox->addButton(i18n("&Close")), SIGNAL(clicked()),
-	     SLOT(reject()) );
-    buttonbox->layout();
-    layout->addWidget(buttonbox, 0);
+    setHelp("browsinglogs");
 
-    connect( helpbutton, SIGNAL(clicked()), SLOT(helpClicked()) );
-    connect( diffbutton, SIGNAL(clicked()), SLOT(diffClicked()) );
-    connect( annotatebutton, SIGNAL(clicked()), SLOT(annotateClicked()) );
+    setWFlags(Qt::WDestructiveClose | getWFlags());
 
     if (options)
         {
             resize(options->size);
             if (options->showlisttab)
-                tabbar->setCurrentTab(1);
+                tabWidget->setCurrentPage(1);
         }
 }
 
 
-void LogDialog::done(int res)
+LogDialog::~LogDialog()
 {
     if (!options)
         options = new Options;
     options->size = size();
-    options->showlisttab = tabbar->currentTab() == 1;
-    
-    QDialog::done(res);
-    delete this;
+    options->showlisttab = (tabWidget->currentPageIndex() == 1);
 }
 
 
@@ -403,12 +368,6 @@ bool LogDialog::parseCvsLog(const QString &sbox, const QString &repo, const QStr
     layout()->activate();
 
     return true; // successful
-}
-
-
-void LogDialog::helpClicked()
-{
-    kapp->invokeHelp("browsinglogs", "cervisia");
 }
 
 

@@ -16,7 +16,7 @@
 #define LOGDLG_H
 
 
-#include <qdialog.h>
+#include <kdialogbase.h>
 
 #include <qptrlist.h>
 
@@ -28,7 +28,7 @@ class KConfig;
 
 class QComboBox;
 class QLabel;
-class QTabBar;
+class QTabWidget;
 class QTextEdit;
 
 
@@ -52,23 +52,22 @@ public:
 };
 
 
-class LogDialog : public QDialog
+class LogDialog : public KDialogBase
 {
     Q_OBJECT
 
 public:
-    LogDialog( QWidget *parent=0, const char *name=0 );
+
+    explicit LogDialog( QWidget *parent=0, const char *name=0 );
+
+    virtual ~LogDialog();
 
     bool parseCvsLog(const QString &sbox, const QString &repo, const QString &fname);
 
     static void loadOptions(KConfig *config);
     static void saveOptions(KConfig *config);
 
-protected:
-    virtual void done(int res);
-
 private slots:
-    void helpClicked();
     void diffClicked();
     void annotateClicked();
     void revisionSelected(QString rev, bool rmb);
@@ -92,7 +91,7 @@ private:
     QString selectionB;
     LogTreeView *tree;
     LogListView *list;
-    QTabBar *tabbar;
+    QTabWidget *tabWidget;
     QLabel *revbox[2];
     QLabel *authorbox[2];
     QLabel *datebox[2];
