@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2003      Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2003-2004 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -111,15 +111,18 @@ int main(int argc, char **argv)
     };
     KAboutData about("cervisia", I18N_NOOP("Cervisia"), CERVISIA_VERSION,
                      I18N_NOOP("A CVS frontend"), KAboutData::License_QPL,
-                     I18N_NOOP("Copyright (c) 1999-2002 Bernd Gehrmann"), 0,
+                     I18N_NOOP("Copyright (c) 1999-2002 Bernd Gehrmann\n"
+                               "Copyright (c) 2002-2004 the Cervisia authors"), 0,
                      "http://www.kde.org/apps/cervisia");
 
     about.addAuthor("Bernd Gehrmann", I18N_NOOP("Original author and former "
                     "maintainer"), "bernd@mail.berlios.de", 0);
     about.addAuthor("Christian Loose", I18N_NOOP("Maintainer"),
-                    "christian.loose@hamburg.de", 0);
+                    "christian.loose@kdemail.net", 0);
     about.addAuthor("Andr\303\251 W\303\266bbeking", I18N_NOOP("Developer"),
                     "woebbeking@web.de", 0);
+    about.addAuthor("Carlos Woelz", I18N_NOOP("Documentation"),
+                    "carloswoelz@imap-mail.com", 0);
 
     about.addCredit("Richard Moore", I18N_NOOP("Conversion to KPart"),
                     "rich@kde.org", 0);
