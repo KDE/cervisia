@@ -41,17 +41,13 @@ namespace
 
     bool isDirItem(const QListViewItem* item)
     {
-        if( !item )
-            return false;
-        return item->rtti() == g_dirItemRtti;
+        return item && item->rtti() == g_dirItemRtti;
     }
 
 
     bool isFileItem(const QListViewItem* item)
     {
-        if( !item )
-            return false;
-        return item->rtti() == g_fileItemRtti;
+        return item && item->rtti() == g_fileItemRtti;
     }
 }
 
@@ -67,7 +63,13 @@ public:
 
     const QString& name() const { return m_name; }
 
-    virtual QString dirPath() const = 0;
+    // Returns the path (relative to the repository).
+    // QString::null for the root item and its (direct) children.
+    // If it's not QString::null it ends with '/'.
+    QString dirPath() const;
+
+    // Returns the file name, including the path (relative to the repository) 
+    QString filePath() const;
 
     virtual void applyFilter(UpdateView::Filter filter) = 0;
 
@@ -92,8 +94,6 @@ public:
 
     UpdateDirItem( UpdateView *parent, const QString& dirname );
     UpdateDirItem( UpdateDirItem *parent, const QString& dirname );
-
-    virtual QString dirPath() const;
 
     void syncWithDirectory();
     void syncWithEntries();
@@ -138,9 +138,6 @@ public:
 
     UpdateFileItem(UpdateDirItem* parent, const QString& filename);
 
-    virtual QString dirPath() const;
-    QString filePath() const;
-
     UpdateView::Status status() const
         { return m_status; }
     QString revision() const
@@ -176,6 +173,43 @@ private:
 };
 
 
+// ------------------------------------------------------------------------------
+// UpdateItem
+// ------------------------------------------------------------------------------
+
+
+QString UpdateItem::dirPath() const
+{
+    QString path;
+
+    const UpdateItem* item = static_cast<UpdateItem*>(parent());
+    while (item)
+    {
+        const UpdateItem* parentItem = static_cast<UpdateItem*>(item->parent());
+        if (parentItem)
+        {
+            path.prepend(item->name() + QDir::separator());
+        }
+
+        item = parentItem;
+    }
+
+    return path;
+}
+
+
+QString UpdateItem::filePath() const
+{
+    // the filePath of the root item is '.'
+    return parent() ? dirPath() + name() : QString::fromLatin1(".");
+}
+
+
+// ------------------------------------------------------------------------------
+// UpdateDirItem
+// ------------------------------------------------------------------------------
+
+
 UpdateDirItem::UpdateDirItem( UpdateDirItem *parent, const QString& dirname )
     : UpdateItem(parent, dirname),
       m_opened(false)
@@ -191,13 +225,6 @@ UpdateDirItem::UpdateDirItem( UpdateView *parent, const QString& dirname )
 {
     setExpandable(true);
     setPixmap(0, SmallIcon("folder"));
-}
-
-
-QString UpdateDirItem::dirPath() const
-{
-    const UpdateDirItem* dirItem = static_cast<UpdateDirItem*>(parent());
-    return dirItem ? dirItem->dirPath() + name() + '/' : QString::null;
 }
 
 
@@ -269,8 +296,8 @@ void UpdateDirItem::updateEntriesItem(const QString& name,
 
 void UpdateDirItem::scanDirectory()
 {
-    const QString& path(dirPath());
-    if (!path.isEmpty() && !QFile::exists(path))
+    const QString& path(filePath());
+    if (!QFile::exists(path))
         return;
 
     const CvsDir dir(path);
@@ -323,7 +350,9 @@ UpdateItem* UpdateDirItem::findItem(const QString& name) const
 
 void UpdateDirItem::syncWithEntries()
 {
-    QFile f(dirPath() + "CVS/Entries");
+    const QString path(filePath() + QDir::separator());
+
+    QFile f(path + "CVS/Entries");
     if( f.open(IO_ReadOnly) )
     {
         QTextStream stream(&f);
@@ -358,8 +387,7 @@ void UpdateDirItem::syncWithEntries()
                 const bool isBinary(options.find("-kb") >= 0);
 
                 // file date in local time
-                // GCC 3.2.1 needs extra (), don't know why
-                const QDateTime& fileDate((QFileInfo(dirPath() + name).lastModified()));
+                const QDateTime& fileDate(QFileInfo(path + name).lastModified());
 
                 UpdateView::Status status(UpdateView::Unknown);
                 if( rev == "0" )
@@ -399,7 +427,7 @@ void UpdateDirItem::syncWithDirectory()
     // Do not use CvsDir here, because CVS/Entries may
     // contain files which are in .cvsignore (stupid
     // idea, but that's possible...)
-    const QDir dir( dirPath(), QString::null, QDir::Name,
+    const QDir dir( filePath(), QString::null, QDir::Name,
                     QDir::Files|QDir::Hidden|QDir::NoSymLinks );
     const QStringList& files(dir.entryList());
 
@@ -517,23 +545,16 @@ QString UpdateDirItem::text(int col) const
 }
 
 
+// ------------------------------------------------------------------------------
+// UpdateFileItem
+// ------------------------------------------------------------------------------
+
+
 UpdateFileItem::UpdateFileItem(UpdateDirItem* parent, const QString& filename)
     : UpdateItem(parent, filename),
       m_undefined(false),
       m_status(UpdateView::NotInCVS)
 {
-}
-
-
-QString UpdateFileItem::dirPath() const
-{
-    return static_cast<UpdateDirItem*>(parent())->dirPath();
-}
-
-
-QString UpdateFileItem::filePath() const
-{
-    return dirPath() + name();
 }
 
 
@@ -776,6 +797,11 @@ void UpdateFileItem::paintCell(QPainter *p, const QColorGroup &cg,
 }
 
 
+// ------------------------------------------------------------------------------
+// UpdateView
+// ------------------------------------------------------------------------------
+
+
 UpdateView::UpdateView(QWidget *parent, const char *name)
     : ListView(parent, name)
 {
@@ -876,19 +902,7 @@ QStringList UpdateView::multipleSelection() const
     for (QPtrListIterator<QListViewItem> it(listSelectedItems);
          it.current() != 0; ++it)
     {
-        QListViewItem* item(*it);
-
-        if (isDirItem(item))
-        {
-            QString dirPath(static_cast<UpdateDirItem*>(item)->dirPath());
-            if (dirPath.isEmpty())
-                dirPath = '.';
-            else
-                dirPath.truncate(dirPath.length() - 1);
-            res.append(dirPath);
-        }
-        else
-            res.append(static_cast<UpdateFileItem*>(item)->filePath());
+        res.append(static_cast<UpdateItem*>(*it)->filePath());
     }
 
     return res;
@@ -1240,13 +1254,8 @@ void UpdateView::updateItem(const QString &name, Status status, bool isdir)
         return;
 
     const QFileInfo fi(name);
-    QString dirpath(fi.dirPath());
+    const QString dirpath(fi.dirPath());
     const QString fileName(fi.fileName());
-
-    if (dirpath == ".")
-        dirpath = QString::null;
-    else
-	dirpath += '/';
 
     UpdateDirItem *longestmatch = 0;
     QString longestmatchPath;
@@ -1257,7 +1266,7 @@ void UpdateView::updateItem(const QString &name, Status status, bool isdir)
 	    if (isDirItem(item))
 		{
 		    UpdateDirItem *diritem = static_cast<UpdateDirItem*>(item);
-                    const QString& diritemPath(diritem->dirPath());
+                    const QString& diritemPath(diritem->filePath());
                     if (diritemPath == dirpath)
 			{
 			    diritem->updateChildItem(fileName, status, isdir);
