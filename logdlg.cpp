@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
+ *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -62,16 +63,16 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     tree = new LogTreeView(mainWidget);
     connect( tree, SIGNAL(revisionClicked(QString,bool)),
-	     this, SLOT(revisionSelected(QString,bool)) );
+             this, SLOT(revisionSelected(QString,bool)) );
 
     list = new LogListView(partConfig, mainWidget);
     connect( list, SIGNAL(revisionClicked(QString,bool)),
-	     this, SLOT(revisionSelected(QString,bool)) );
+             this, SLOT(revisionSelected(QString,bool)) );
 
     plain = new LogPlainView(mainWidget);
     connect( plain, SIGNAL(revisionClicked(QString,bool)),
              this, SLOT(revisionSelected(QString,bool)) );
-    
+
     tabWidget = new QTabWidget(mainWidget);
     tabWidget->addTab(tree, i18n("&Tree"));
     tabWidget->addTab(list, i18n("&List"));
@@ -79,82 +80,82 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     layout->addWidget(tabWidget, 3);
 
     connect(tabWidget, SIGNAL(currentChanged(QWidget*)),
-           this, SLOT(tabChanged(QWidget*)));
+            this, SLOT(tabChanged(QWidget*)));
 
     QWhatsThis::add(tree, i18n("Choose revision A by clicking with the left"
-			       "mouse button,\nrevision B by clicking with "
-			       "the middle mouse button."));
+                               "mouse button,\nrevision B by clicking with "
+                               "the middle mouse button."));
 
     items.setAutoDelete(true);
     tags.setAutoDelete(true);
 
     for (int i = 0; i < 2; ++i)
-	{
-	    QFrame *frame = new QFrame(mainWidget);
-	    frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-	    layout->addWidget(frame);
+    {
+        QFrame *frame = new QFrame(mainWidget);
+        frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
+        layout->addWidget(frame);
 
-	    QGridLayout *grid = new QGridLayout(layout);
-            grid->setRowStretch(0, 0);
-            grid->setRowStretch(1, 0);
-            grid->setRowStretch(2, 1);
-	    grid->setColStretch(0, 0);
-	    grid->setColStretch(1, 1);
-	    grid->setColStretch(2, 0);
-	    grid->setColStretch(3, 1);
-	    grid->setColStretch(4, 2);
+        QGridLayout *grid = new QGridLayout(layout);
+        grid->setRowStretch(0, 0);
+        grid->setRowStretch(1, 0);
+        grid->setRowStretch(2, 1);
+        grid->setColStretch(0, 0);
+        grid->setColStretch(1, 1);
+        grid->setColStretch(2, 0);
+        grid->setColStretch(3, 1);
+        grid->setColStretch(4, 2);
 
-	    QString versionident = (i==0)? i18n("Revision A:") : i18n("Revision B:");
-	    QLabel *versionlabel = new QLabel(versionident, mainWidget);
-	    grid->addWidget(versionlabel, 0, 0);
+        QString versionident = (i==0)? i18n("Revision A:") : i18n("Revision B:");
+        QLabel *versionlabel = new QLabel(versionident, mainWidget);
+        grid->addWidget(versionlabel, 0, 0);
 
-	    revbox[i] = new QLabel(mainWidget);
-	    revbox[i]->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-	    grid->addWidget(revbox[i], 0, 1, Qt::AlignVCenter);
+        revbox[i] = new QLabel(mainWidget);
+        revbox[i]->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+        grid->addWidget(revbox[i], 0, 1, Qt::AlignVCenter);
 
-            QLabel *selectlabel = new QLabel(i18n("Select by tag:"), mainWidget);
-            grid->addWidget(selectlabel, 0, 2);
+        QLabel *selectlabel = new QLabel(i18n("Select by tag:"), mainWidget);
+        grid->addWidget(selectlabel, 0, 2);
 
-            tagcombo[i] = new QComboBox(mainWidget);
-            QFontMetrics fm(tagcombo[i]->fontMetrics());
-            tagcombo[i]->setMinimumWidth(fm.width("X")*20);
-            grid->addWidget(tagcombo[i], 0, 3);
-            
-	    QLabel *authorlabel = new QLabel(i18n("Author:"), mainWidget);
-	    grid->addWidget(authorlabel, 1, 0);
+        tagcombo[i] = new QComboBox(mainWidget);
+        QFontMetrics fm(tagcombo[i]->fontMetrics());
+        tagcombo[i]->setMinimumWidth(fm.width("X")*20);
+        grid->addWidget(tagcombo[i], 0, 3);
 
-	    authorbox[i] = new QLabel(mainWidget);
-	    authorbox[i]->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-	    grid->addWidget(authorbox[i], 1, 1);
+        QLabel *authorlabel = new QLabel(i18n("Author:"), mainWidget);
+        grid->addWidget(authorlabel, 1, 0);
 
-	    QLabel *datelabel = new QLabel(i18n("Date:"), mainWidget);
-	    grid->addWidget(datelabel, 1, 2);
+        authorbox[i] = new QLabel(mainWidget);
+        authorbox[i]->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+        grid->addWidget(authorbox[i], 1, 1);
 
-	    datebox[i] = new QLabel(mainWidget);
-	    datebox[i]->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-	    grid->addWidget(datebox[i], 1, 3);
+        QLabel *datelabel = new QLabel(i18n("Date:"), mainWidget);
+        grid->addWidget(datelabel, 1, 2);
 
-	    QLabel *commentlabel = new QLabel(i18n("Comment/Tags:"), mainWidget);
-	    grid->addWidget(commentlabel, 2, 0);
+        datebox[i] = new QLabel(mainWidget);
+        datebox[i]->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+        grid->addWidget(datebox[i], 1, 3);
 
-            commentbox[i] = new QTextEdit(mainWidget);
-	    commentbox[i]->setReadOnly(true);
-            commentbox[i]->setTextFormat(Qt::PlainText);
-            fm = commentbox[i]->fontMetrics();
-	    commentbox[i]->setFixedHeight(2*fm.lineSpacing()+10);
-	    grid->addMultiCellWidget(commentbox[i], 2, 2, 1, 3);
+        QLabel *commentlabel = new QLabel(i18n("Comment/Tags:"), mainWidget);
+        grid->addWidget(commentlabel, 2, 0);
 
-            tagsbox[i] = new QTextEdit(mainWidget);
-	    tagsbox[i]->setReadOnly(true);
-	    tagsbox[i]->setFixedHeight(2*fm.lineSpacing()+10);
-            grid->addWidget(tagsbox[i], 2, 4);
-	}
+        commentbox[i] = new QTextEdit(mainWidget);
+        commentbox[i]->setReadOnly(true);
+        commentbox[i]->setTextFormat(Qt::PlainText);
+        fm = commentbox[i]->fontMetrics();
+        commentbox[i]->setFixedHeight(2*fm.lineSpacing()+10);
+        grid->addMultiCellWidget(commentbox[i], 2, 2, 1, 3);
+
+        tagsbox[i] = new QTextEdit(mainWidget);
+        tagsbox[i]->setReadOnly(true);
+        tagsbox[i]->setFixedHeight(2*fm.lineSpacing()+10);
+        grid->addWidget(tagsbox[i], 2, 4);
+    }
 
     QWhatsThis::add(revbox[0], i18n("This revision is used when you click "
-				    "Annotate.\nIt is also used as the first "
-				    "item of a Diff operation."));
+                                    "Annotate.\nIt is also used as the first "
+                                    "item of a Diff operation."));
     QWhatsThis::add(revbox[1], i18n("This revision is used as the second "
-				    "item of a Diff operation."));
+                                    "item of a Diff operation."));
 
     connect( tagcombo[0], SIGNAL(activated(int)),
              this, SLOT(tagASelected(int)) );
@@ -383,12 +384,12 @@ void LogDialog::findClicked()
 void LogDialog::diffClicked()
 {
     if (selectionA.isEmpty())
-	{
-	    KMessageBox::information(this,
-				     i18n("Please select revision A or revisions A and B first."),
-				     "Cervisia");
-	    return;
-	}
+    {
+        KMessageBox::information(this,
+            i18n("Please select revision A or revisions A and B first."),
+            "Cervisia");
+        return;
+    }
 
     // Non-modal dialog
     DiffDialog *l = new DiffDialog(partConfig);
@@ -417,13 +418,13 @@ void LogDialog::revisionSelected(QString rev, bool rmb)
                     selectionB = rev;
                 else
                     selectionA = rev;
-                
+
                 revbox[rmb?1:0]->setText(rev);
                 authorbox[rmb?1:0]->setText(it.current()->m_author);
                 datebox[rmb?1:0]->setText(it.current()->dateTimeToString());
                 commentbox[rmb?1:0]->setText(it.current()->m_comment);
                 tagsbox[rmb?1:0]->setText(it.current()->tagsToString());
-                
+
                 tree->setSelectedPair(selectionA, selectionB);
                 list->setSelectedPair(selectionA, selectionB);
                 return;
