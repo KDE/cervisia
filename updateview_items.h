@@ -54,8 +54,6 @@ public:
 
     virtual void accept(Visitor&) = 0;
 
-    virtual void applyFilter(UpdateView::Filter filter) = 0;
-
 protected:
 
     UpdateView* updateView() const { return static_cast<UpdateView*>(listView()); }
@@ -88,8 +86,6 @@ public:
     void maybeScanDir(bool recursive);
 
     virtual void accept(Visitor&);
-
-    virtual void applyFilter(UpdateView::Filter filter);
 
     enum { RTTI = 10000 };
 
@@ -139,7 +135,7 @@ public:
 
     virtual void accept(Visitor&);
 
-    virtual void applyFilter(UpdateView::Filter filter);
+    bool applyFilter(UpdateView::Filter filter);
 
     enum { RTTI = 10001 };
 

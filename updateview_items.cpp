@@ -358,44 +358,14 @@ void UpdateDirItem::maybeScanDir(bool recursive)
 
 void UpdateDirItem::accept(Visitor& visitor)
 {
-    visitor.visit(this);
+    visitor.preVisit(this);
 
     for (QListViewItem* item = firstChild(); item; item = item->nextSibling())
     {
         static_cast<UpdateItem*>(item)->accept(visitor);
     }
-}
 
-
-void UpdateDirItem::applyFilter(UpdateView::Filter filter)
-{
-    // as QListViewItem::setVisible() is recursive we have to make
-    // this UpdateDirItem visible first and later we can make it invisible
-    setVisible(true);
-
-    bool hasVisibleChild(false);
-    for (QListViewItem* childItem(firstChild());
-         childItem != 0; childItem = childItem->nextSibling())
-    {
-        static_cast<UpdateItem*>(childItem)->applyFilter(filter);
-
-        hasVisibleChild = hasVisibleChild || childItem->isVisible();
-    }
-
-    // a UpdateDirItem is visible if
-    // - it has visible childs
-    // - it is not opened
-    // - empty directories are not hidden
-    // - it has no parent (top level item)
-    const bool visible(hasVisibleChild
-                       || m_opened == false
-                       || (filter & UpdateView::NoEmptyDirectories) == 0
-                       || parent() == 0);
-
-    // only set invisible as QListViewItem::setVisible() is recursive
-    // and so maybe overrides the state applied by the filter
-    if (visible == false)
-        setVisible(false);
+    visitor.postVisit(this);
 }
 
 
@@ -450,8 +420,8 @@ void UpdateFileItem::setStatus(Entry::Status status)
     if (status != m_entry.m_status)
     {
         m_entry.m_status = status;
-        applyFilter(updateView()->filter());
-        if (isVisible())
+        const bool visible(applyFilter(updateView()->filter()));
+        if (visible)
             repaint();
     }
     m_undefined = false;
@@ -464,18 +434,21 @@ void UpdateFileItem::accept(Visitor& visitor)
 }
 
 
-void UpdateFileItem::applyFilter(UpdateView::Filter filter)
+bool UpdateFileItem::applyFilter(UpdateView::Filter filter)
 {
-    bool hide(false);
+    bool visible(true);
     if (filter & UpdateView::OnlyDirectories)
-        hide = true;
+        visible = false;
     if ((filter & UpdateView::NoUpToDate) && (entry().m_status == Entry::UpToDate))
-        hide = true;
+        visible = false;
     if ((filter & UpdateView::NoRemoved) && (entry().m_status == Entry::Removed))
-        hide = true;
+        visible = false;
     if ((filter & UpdateView::NoNotInCVS) && (entry().m_status == Entry::NotInCVS))
-        hide = true;
-    setVisible(!hide);
+        visible = false;
+
+    setVisible(visible);
+
+    return visible;
 }
 
 

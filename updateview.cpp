@@ -24,6 +24,7 @@
 
 #include "entry.h"
 #include "updateview_items.h"
+#include "updateview_visitors.h"
 
 
 using Cervisia::Entry;
@@ -70,7 +71,8 @@ void UpdateView::setFilter(Filter filter)
 
     if (UpdateDirItem* item = static_cast<UpdateDirItem*>(firstChild()))
     {
-        item->applyFilter(filter);
+        ApplyFilterVisitor applyFilterVisitor(filter);
+        item->accept(applyFilterVisitor);
     }
 
     setSorting(columnSorted(), ascendingSort());

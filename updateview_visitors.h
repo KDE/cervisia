@@ -15,6 +15,12 @@
 #define UPDATEVIEW_VISITORS_H
 
 
+#include "updateview.h"
+
+#include <set>
+
+
+class UpdateItem;
 class UpdateDirItem;
 class UpdateFileItem;
 
@@ -25,9 +31,32 @@ public:
 
     virtual ~Visitor() {}
 
-    virtual void visit(UpdateDirItem*) = 0;
+    virtual void preVisit(UpdateDirItem*) = 0;
+    virtual void postVisit(UpdateDirItem*) = 0;
 
     virtual void visit(UpdateFileItem*) = 0;
+};
+
+
+class ApplyFilterVisitor : public Visitor
+{
+public:
+
+    explicit ApplyFilterVisitor(UpdateView::Filter filter);
+
+    virtual void preVisit(UpdateDirItem*);
+    virtual void postVisit(UpdateDirItem*);
+
+    virtual void visit(UpdateFileItem*);
+
+private:
+
+    void markAllParentsAsVisible(UpdateItem*);
+
+    UpdateView::Filter m_filter;
+
+    typedef std::set<UpdateItem*> TItemSet;
+    TItemSet m_invisibleDirItems;
 };
 
 
