@@ -74,16 +74,11 @@ CervisiaShell::~CervisiaShell()
 
 void CervisiaShell::setupActions()
 {
-    KAction *action = KStdAction::showToolbar( 0, 0, actionCollection() );
-    QString hint = i18n("Shows or hides the toolbar");
-    action->setToolTip( hint );
-    action->setWhatsThis( hint );
-    connect( action, SIGNAL(toggled(bool)),
-             this,   SLOT(slotToggleToolbar( bool )) );
+    setStandardToolBarMenuEnabled( true );
 
-    action = KStdAction::configureToolbars( this, SLOT(slotConfigureToolBars()),
+    KAction *action = KStdAction::configureToolbars( this, SLOT(slotConfigureToolBars()),
                                             actionCollection() );
-    hint = i18n("Allows you to configure the toolbar");
+    QString hint = i18n("Allows you to configure the toolbar");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
     
@@ -130,15 +125,6 @@ void CervisiaShell::slotOpenSandbox()
         return;
 
     part->openSandbox(dirname);
-}
-
-void CervisiaShell::slotToggleToolbar( bool visible )
-{
-    KToolBar *tb = toolBar( "mainToolBar" );
-    if ( visible )
-        tb->show();
-    else
-        tb->hide();
 }
 
 void CervisiaShell::slotConfigureKeys()

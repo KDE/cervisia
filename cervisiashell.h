@@ -37,7 +37,6 @@ public:
 
 public slots:
     void slotOpenSandbox();
-    void slotToggleToolbar( bool visible );
     void slotConfigureKeys();
     void slotConfigureToolBars();
     void slotExit();
