@@ -1,3 +1,8 @@
+2003-02-16  Christian Loose  <christian.loose@hamburg.de>
+
+	* Improved size handling for Repository dialog,
+	  Add repository dialog and Checkout dialog.
+
 2003-02-12  Christian Loose  <christian.loose@hamburg.de>
 
 	* Bug 54106: Display error message when user tries to

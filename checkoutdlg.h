@@ -32,7 +32,8 @@ class CheckoutDialog : public KDialogBase
 public:
     enum ActionType { Checkout, Import };
     
-    explicit CheckoutDialog( ActionType action, QWidget *parent=0, const char *name=0 );
+    CheckoutDialog( KConfig& cfg, ActionType action, QWidget *parent=0, 
+                    const char *name=0 );
 
     QString workingDirectory() const;
     QString repository() const;
@@ -44,9 +45,6 @@ public:
     QString comment() const;
     bool importBinary() const;
 
-    static void loadOptions(KConfig *config);
-    static void saveOptions(KConfig *config);
-    
 protected:
     virtual void slotOk();
     
@@ -55,24 +53,13 @@ private slots:
     void moduleButtonClicked();
 
 private:
-    struct Options {
-        QString repo;
-        QString module;
-        QString branch;
-        QString workdir;
-        QString vendortag;
-        QString releasetag;
-        QString ignorefiles;
-        bool binary;
-    };
-    static Options *options;
-
     QComboBox *repo_combo, *module_combo;
     KLineEdit *module_edit, *workdir_edit;
     KLineEdit *branch_edit, *comment_edit;
     KLineEdit *vendortag_edit, *releasetag_edit, *ignore_edit;
     QCheckBox *binary_box;
     ActionType act;
+    KConfig&   partConfig;
 };
 
 #endif

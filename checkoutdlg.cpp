@@ -30,14 +30,15 @@
 #include "repositories.h"
 #include "misc.h"
 
+#include <kdeversion.h>
 
-CheckoutDialog::Options *CheckoutDialog::options = 0;
 
-
-CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *name)
+CheckoutDialog::CheckoutDialog(KConfig& cfg, ActionType action, QWidget *parent, 
+                               const char *name)
     : KDialogBase(parent, name, true, QString::null,
-                  Ok | Cancel | Help, Ok, true),
-      act(action)
+                  Ok | Cancel | Help, Ok, true)
+    , act(action)
+    , partConfig(cfg)
 {
     setCaption( (action==Checkout)? i18n("CVS Checkout") : i18n("CVS Import") );
 
@@ -156,25 +157,23 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
 
     setHelp((act == Import) ? "importing" : "checkingout");
 
-    if (options)
-        {
-            repo_combo->setEditText(options->repo);
-            workdir_edit->setText(options->workdir);
-            if (action == Import)
-                {
-                    module_edit->setText(options->module);
-                    vendortag_edit->setText(options->vendortag);
-                    releasetag_edit->setText(options->releasetag);
-                    ignore_edit->setText(options->ignorefiles);
-                    binary_box->setChecked(options->binary);
-                }
-            else
-                {
-                    module_combo->setEditText(options->module);
-                    branch_edit->setText(options->branch);
-                }
-        }
-
+    KConfigGroupSaver cs(&partConfig, "CheckoutDialog");
+    repo_combo->setEditText(partConfig.readEntry("Repository"));
+    workdir_edit->setText(partConfig.readEntry("Working directory"));
+            
+    if (action == Import)
+    {
+        module_edit->setText(partConfig.readEntry("Module"));
+        vendortag_edit->setText(partConfig.readEntry("Vendor tag"));
+        releasetag_edit->setText(partConfig.readEntry("Release tag"));
+        ignore_edit->setText(partConfig.readEntry("Ignore files"));
+        binary_box->setChecked(partConfig.readBoolEntry("Import binary"));
+    }
+    else
+    {
+        module_combo->setEditText(partConfig.readEntry("Module"));
+        branch_edit->setText(partConfig.readEntry("Branch"));
+    }
 }
 
 
@@ -232,38 +231,6 @@ bool CheckoutDialog::importBinary() const
 }
 
 
-void CheckoutDialog::loadOptions(KConfig *config)
-{
-    if (!config->readEntry("Customized"))
-        return;
-
-    options = new Options;
-    options->repo = config->readEntry("Repository");
-    options->module = config->readEntry("Module");
-    options->workdir = config->readEntry("Working directory");
-    options->vendortag = config->readEntry("Vendor tag");
-    options->releasetag = config->readEntry("Release tag");
-    options->ignorefiles = config->readEntry("Ignore files");
-    options->binary = config->readBoolEntry("Import binary");
-}
-
-
-void CheckoutDialog::saveOptions(KConfig *config)
-{
-    if (!options)
-        return;
-
-    config->writeEntry("Customized", true);
-    config->writeEntry("Repository", options->repo);
-    config->writeEntry("Module", options->module);
-    config->writeEntry("Working directory", options->workdir);
-    config->writeEntry("Vendor tag", options->vendortag);
-    config->writeEntry("Release tag", options->releasetag);
-    config->writeEntry("Ignore files", options->ignorefiles);
-    config->writeEntry("Import binary", options->binary);
-}
-
-
 void CheckoutDialog::slotOk()
 {
     QFileInfo fi(workingDirectory());
@@ -295,21 +262,20 @@ void CheckoutDialog::slotOk()
         }
     }
 
-    if (!options)
-        options = new Options;
-    options->repo = repository();
-    options->module = module();
-    options->workdir = workingDirectory();
+    partConfig.writeEntry("Repository", repository());
+    partConfig.writeEntry("Module", module());
+    partConfig.writeEntry("Working directory", workingDirectory());
+       
     if (act == Import)
     {
-        options->vendortag = vendorTag();
-        options->releasetag = releaseTag();
-        options->ignorefiles = ignoreFiles();
-        options->binary = importBinary();
+        partConfig.writeEntry("Vendor tag", vendorTag());
+        partConfig.writeEntry("Release tag", releaseTag());
+        partConfig.writeEntry("Ignore files", ignoreFiles());
+        partConfig.writeEntry("Import binary", importBinary());
     }
     else
     {
-        options->branch = branch();
+        partConfig.writeEntry("Branch", branch());
     }
 
     KDialogBase::slotOk();

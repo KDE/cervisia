@@ -150,8 +150,6 @@ private:
 
     void readSettings();
     void writeSettings();
-    void readDialogProperties( KConfig *config );
-    void saveDialogProperties( KConfig *config );
        
     bool openSandbox(const QString &dirname);
     void updateSandbox(const QString &extraopt = QString::null);

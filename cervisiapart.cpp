@@ -1263,7 +1263,7 @@ void CervisiaPart::slotCheckout()
 
 void CervisiaPart::importOrCheckout(CheckoutDialog::ActionType action)
 {
-    CheckoutDialog dlg(action, widget());
+    CheckoutDialog dlg(*config(), action, widget());
 
     if (dlg.exec())
         {
@@ -1729,7 +1729,6 @@ void CervisiaPart::parseStatus(QString pathname, QStrList list)
 void CervisiaPart::readSettings()
 {
     KConfig* config = CervisiaFactory::instance()->config();
-    readDialogProperties(config);
 
     config->setGroup("Session");
     recent->loadEntries( config );
@@ -1794,7 +1793,6 @@ void CervisiaPart::readSettings()
 void CervisiaPart::writeSettings()
 {
     KConfig* config = CervisiaFactory::instance()->config();
-    saveDialogProperties(config);
 
     config->setGroup("Session");
     recent->saveEntries( config );
@@ -1817,19 +1815,6 @@ void CervisiaPart::writeSettings()
     config->sync();
 }
 
-
-void CervisiaPart::readDialogProperties( KConfig *config )
-{
-    config->setGroup("Checkout dialog");
-    CheckoutDialog::loadOptions(config);
-}
-
-
-void CervisiaPart::saveDialogProperties( KConfig *config )
-{
-    config->setGroup("Checkout dialog");
-    CheckoutDialog::saveOptions(config);
-}
 
 CervisiaBrowserExtension::CervisiaBrowserExtension( CervisiaPart *p )
     : KParts::BrowserExtension( p, "CervisiaBrowserExtension" )

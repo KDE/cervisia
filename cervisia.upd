@@ -53,4 +53,10 @@ RemoveGroup=Commit dialog
 RemoveGroup=History dialog
 RemoveGroup=Resolve dialog
 RemoveGroup=Resolve edit dialog
-
+#
+Id=kde3.2/20030216
+File=cervisiapartrc
+RemoveGroup=AddRepository dialog
+RemoveGroup=Repository dialog
+Group=Checkout dialog,CheckoutDialog
+AllKeys
