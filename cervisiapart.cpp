@@ -117,6 +117,8 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
         Orientation o = splitHorz ? QSplitter::Vertical
                                   : QSplitter::Horizontal;
         splitter = new QSplitter(o, parentWidget, widgetName);
+        // avoid PartManager's warning that Part's window can't handle focus
+        splitter->setFocusPolicy( QWidget::StrongFocus );
 
         update = new UpdateView(*config(), splitter);
         update->setFocusPolicy( QWidget::StrongFocus );
@@ -1831,7 +1833,10 @@ void CervisiaPart::guiActivateEvent(KParts::GUIActivateEvent* event)
         updateActions();
     }
 
-    KParts::ReadOnlyPart::guiActivateEvent(event);
+    // don't call this as it overwrites Konqueror's caption (if you have a
+    // Konqueror with more than one view and switch back to Cervisia)
+    //
+    // KParts::ReadOnlyPart::guiActivateEvent(event);
 }
 
 
