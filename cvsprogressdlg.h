@@ -56,6 +56,7 @@ private:
 
     bool shown;
     bool cancelled;
+    bool hasError;
     QString indic1, indic2;
     KProcess *childproc;
     QListBox *resultbox;

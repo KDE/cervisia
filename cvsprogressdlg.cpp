@@ -73,6 +73,7 @@ CvsProgressDialog::CvsProgressDialog(const QString &text, QWidget *parent)
 
     shown = false;
     cancelled = false;
+    hasError = false;
 }
 
 
@@ -188,6 +189,7 @@ bool CvsProgressDialog::processOutput()
                 item.left(21) == "cvs [server aborted]:")
                 {
                     err = true;
+                    hasError = true;
                     resultbox->insertItem(item);
                 }
             else if (item.left(11) == "cvs server:")
@@ -234,7 +236,7 @@ void CvsProgressDialog::childExited()
     // Close the dialog automatically if there are no
     // error messages or the process has been aborted
     // 'by hand' (e.g.  by clicking the cancel button)
-    if (resultbox->count() < 2 || !childproc->normalExit())
+    if (!hasError || !childproc->normalExit())
         kapp->exit_loop();
 }
 
