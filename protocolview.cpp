@@ -16,6 +16,7 @@
 
 #include <qdir.h>
 #include <qpopupmenu.h>
+#include <dcopref.h>
 #include <kconfig.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
@@ -93,6 +94,30 @@ bool ProtocolView::startJob(const QString &sandbox, const QString &repository,
 }
 
 
+bool ProtocolView::startJob(DCOPRef& cvsJob)
+{
+    // get command line and add it to output buffer
+    QString cmdLine = cvsJob.call("cvsCommand");
+    buf += cmdLine;
+    buf += '\n';
+    processOutput();
+    
+    // establish connections to the signals of the cvs job
+    connectDCOPSignal(cvsJob.app(), cvsJob.obj(), "jobExited(bool, int)",
+                      "slotJobExited(bool, int)", true);
+    connectDCOPSignal(cvsJob.app(), cvsJob.obj(), "receivedStdout(QString)",
+                      "slotReceivedOutput(QString)", true);
+    connectDCOPSignal(cvsJob.app(), cvsJob.obj(), "receivedStderr(QString)",
+                      "slotReceivedOutput(QString)", true);
+
+    // disconnect 3rd party slots from our signals
+    disconnect( SIGNAL(receivedLine(QString)) );
+    disconnect( SIGNAL(jobFinished(bool)) );
+    
+    return (bool)cvsJob.call("execute");
+}
+
+
 void ProtocolView::cancelJob()
 {
     childproc->kill();
@@ -126,6 +151,35 @@ void ProtocolView::childExited()
     emit jobFinished(childproc->normalExit() && !childproc->exitStatus());
     delete childproc;
     childproc = 0;
+}
+
+
+void ProtocolView::slotReceivedOutput(QString buffer)
+{
+    buf += buffer;
+    processOutput();
+}
+
+
+void ProtocolView::slotJobExited(bool normalExit, int status)
+{
+    QString msg;
+    
+    if( normalExit )
+    {
+        if( status )
+            msg = i18n("[Exited with status %1]\n").arg(status);
+        else
+            msg = i18n("[Finished]\n");
+    }
+    else
+        msg = i18n("[Aborted]\n");
+    
+    buf += '\n';
+    buf += msg;
+    processOutput();
+    
+    emit jobFinished(normalExit && !status);
 }
 
 

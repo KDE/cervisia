@@ -16,14 +16,16 @@
 #define PROTOCOLVIEW_H
 
 #include <qtextedit.h>
+#include <dcopobject.h>
 
-
+class DCOPRef;
 class KProcess;
 class KShellProcess;
 
 
-class ProtocolView : public QTextEdit
+class ProtocolView : public QTextEdit, public DCOPObject
 {
+    K_DCOP
     Q_OBJECT
     
 public:
@@ -31,6 +33,11 @@ public:
     ~ProtocolView();
 
     bool startJob(const QString &sandbox, const QString &repository, const QString &cmdline);
+    bool startJob(DCOPRef& cvsJob);
+
+k_dcop:
+    void slotReceivedOutput(QString buffer);
+    void slotJobExited(bool normalExit, int status);   
 
 signals:
     void receivedLine(QString line);
@@ -44,7 +51,7 @@ private slots:
     void receivedOutput(KProcess *proc, char *buffer, int buflen);
     void childExited();
     void cancelJob();
-    
+
 private:
     void processOutput();
     void appendLine(const QString &line);

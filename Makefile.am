@@ -6,9 +6,9 @@ AM_CPPFLAGS = -UQT_NO_COMPAT -D_BSD_SOURCE
 bin_PROGRAMS = cervisia
 kde_module_LTLIBRARIES = libcervisiapart.la
 
-libcervisiapart_la_SOURCES = updateview.cpp protocolview.cpp watchdlg.cpp \
-		   settingsdlg.cpp changelogdlg.cpp historydlg.cpp repositorydlg.cpp \
-		   commitdlg.cpp checkoutdlg.cpp updatedlg.cpp \
+libcervisiapart_la_SOURCES = updateview.cpp protocolview.cpp protocolview.skel \
+		   watchdlg.cpp settingsdlg.cpp changelogdlg.cpp historydlg.cpp \
+		   repositorydlg.cpp commitdlg.cpp checkoutdlg.cpp updatedlg.cpp \
 		   tagdlg.cpp mergedlg.cpp \
 		   logdlg.cpp logtree.cpp loglist.cpp diffdlg.cpp resolvedlg.cpp diffview.cpp \
 		   annotatedlg.cpp annotateview.cpp progressdlg.cpp progressdlg.skel \
