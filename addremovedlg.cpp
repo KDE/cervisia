@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *  Copyright (c) 2003 Christian Loose <christian.loose@hamburg.de>
@@ -44,7 +44,6 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget *parent, const char 
 
     listbox = new QListBox(mainWidget);
     listbox->setSelectionMode(QListBox::NoSelection);
-    listbox->setFocusPolicy(QWidget::NoFocus);
     layout->addWidget(listbox, 5);
 
     // Add warning message to dialog when user wants to remove a file
@@ -62,12 +61,12 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget *parent, const char 
         QLabel *warningText = new QLabel(i18n("This will also remove the files from "
                                               "your local working copy!"), mainWidget);
         warningLayout->addWidget(warningText);
-    
+
         layout->addSpacing(5);
         layout->addLayout(warningLayout);
         layout->addSpacing(5);
     }
-        
+
     if( action == Remove )
         setHelp("removingfiles");
     else
@@ -78,16 +77,16 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget *parent, const char 
 void AddRemoveDialog::setFileList(const QStringList &list)
 {
     // the dot for the root directory is hard to see, so
-    // we convert it to the absolut path   
+    // we convert it to the absolut path
     if( list.find(".") != list.end() )
     {
         QStringList copy(list);
         int idx = copy.findIndex(".");
         copy[idx] = QFileInfo(".").absFilePath();
-        
+
         listbox->insertStringList(copy);
     }
-    else        
+    else
         listbox->insertStringList(list);
 }
 

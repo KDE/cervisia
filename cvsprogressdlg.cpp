@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -38,7 +38,7 @@ CvsProgressDialog::CvsProgressDialog(const QString &text, QWidget *parent)
 
     QBoxLayout *hbox = new QHBoxLayout();
     layout->addLayout(hbox, 0);
-    
+
     QLabel *textlabel = new QLabel(text, this);
     textlabel->setMinimumWidth(textlabel->sizeHint().width());
     textlabel->setFixedHeight(textlabel->sizeHint().height());
@@ -51,12 +51,11 @@ CvsProgressDialog::CvsProgressDialog(const QString &text, QWidget *parent)
 
     resultbox = new QListBox(this);
     resultbox->setSelectionMode(QListBox::NoSelection);
-    resultbox->setFocusPolicy(QWidget::NoFocus);
     QFontMetrics rb_fm(resultbox->fontMetrics());
     resultbox->setMinimumSize(rb_fm.width("0")*70,
 			      rb_fm.lineSpacing()*8);
     layout->addWidget(resultbox, 5);
-    
+
     QFrame *frame = new QFrame(this);
     frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
     layout->addWidget(frame, 0);
@@ -90,7 +89,7 @@ bool CvsProgressDialog::execCommand(const QString &sandbox, const QString &repos
     KConfig *config = CervisiaPart::config();
     config->setGroup("General");
     int timeout = (int) config->readUnsignedNumEntry("Timeout", 4000);
-    
+
     indic1 = QString("cvs ") + errindicator + ":";
     indic2 = QString("cvs [") + errindicator + " aborted]:";
     resultbox->insertItem(cmdline);
@@ -116,9 +115,9 @@ bool CvsProgressDialog::execCommand(const QString &sandbox, const QString &repos
     timer = new QTimer(this);
     connect( timer, SIGNAL(timeout()),
              this, SLOT(timeoutOccured()) );
-    
+
     timer->start(timeout, true);
-    
+
     if (!childproc->start(KProcess::NotifyOnExit,
                           KProcess::Communication(KProcess::Stdout|KProcess::Stderr)))
         return false;
@@ -199,7 +198,7 @@ bool CvsProgressDialog::processOutput()
                 output.append(item);
 	    buf = buf.right(buf.length()-pos-1);
         }
-    
+
     return err;
 }
 
@@ -220,7 +219,7 @@ void CvsProgressDialog::receivedOutput(KProcess *, char *buffer, int buflen)
     buf += QString::fromLocal8Bit(buffer, buflen);
     (void) processOutput();
 }
- 
+
 
 void CvsProgressDialog::childExited()
 {

@@ -86,7 +86,6 @@ void ProgressDialog::setupGui(const QString& heading)
 
     d->resultbox = new QListBox(vbox);
     d->resultbox->setSelectionMode(QListBox::NoSelection);
-    d->resultbox->setFocusPolicy(QWidget::NoFocus);
     QFontMetrics fm(d->resultbox->fontMetrics());
     d->resultbox->setMinimumSize(fm.width("0")*70, fm.lineSpacing()*8);
 
