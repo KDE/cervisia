@@ -57,9 +57,11 @@ private:
     void readSettings();
     void writeSettings();
 
+    void addGeneralPage();
+    void addDiffPage();
+    void addStatusPage();
     void addAdvancedPage();
     void addLookAndFeelPage();
-    void addColorPage();
 
     KConfig *config;
     KIntNumInput *timeoutedit;
@@ -79,17 +81,19 @@ private:
     KLineEdit *clientedit;
     KLineEdit *objectedit;
 #endif
-    FontButton *protocolfontbox;
-    FontButton *annotatefontbox;
-    FontButton *difffontbox;
-    FontButton *changelogfontbox;
-    QCheckBox *splitterbox;
-    KColorButton *conflictbutton;
-    KColorButton *localchangebutton;
-    KColorButton *remotechangebutton;
-    KColorButton *diffchangebutton;
-    KColorButton *diffinsertbutton;
-    KColorButton *diffdeletebutton;
+    FontButton*   m_protocolFontBox;
+    FontButton*   m_annotateFontBox;
+    FontButton*   m_diffFontBox;
+    FontButton*   m_changelogFontBox;
+
+    KColorButton* m_conflictButton;
+    KColorButton* m_localChangeButton;
+    KColorButton* m_remoteChangeButton;
+    KColorButton* m_diffChangeButton;
+    KColorButton* m_diffInsertButton;
+    KColorButton* m_diffDeleteButton;
+
+    QCheckBox*    m_splitterBox;
 
     KConfig* serviceConfig;
 };
