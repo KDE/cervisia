@@ -18,6 +18,7 @@
 #include <qstylesheet.h>
 #include <qtooltip.h>
 #include <kdebug.h>
+#include <kglobalsettings.h>
 
 #include "tiplabel.h"
 #include "misc.h"
@@ -382,9 +383,8 @@ void LogTreeView::paintRevisionCell(QPainter *p,
                     p->setPen(colorGroup().base());
                 }
 #else
-	    // XXX: This is a hack
-	    p->fillRect(x, y, boxwidth, boxheight, QApplication::winStyleHighlightColor());
-	    p->setPen(white);
+	    p->fillRect(x, y, boxwidth, boxheight, KGlobalSettings::highlightColor());
+	    p->setPen(KGlobalSettings::highlightedTextColor());
 
 #endif
         }
