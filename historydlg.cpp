@@ -256,31 +256,33 @@ void HistoryDialog::saveOptions(KConfig *config)
 
 void HistoryDialog::choiceChanged()
 {
+    const QString author(user_edit->text());
+    const QRegExp fileMatcher(filename_edit->text(), true, true);
+    const QRegExp pathMatcher(dirname_edit->text(), true, true);
+
+    const bool showCommitEvents(commit_box->isChecked());
+    const bool showCheckoutEvents(checkout_box->isChecked());
+    const bool showTagEvents(tag_box->isChecked());
+    const bool showOtherEvents(other_box->isChecked());
+    const bool filterByAuthor(onlyuser_box->isChecked() && !author.isEmpty());
+    const bool filterByFile(onlyfilenames_box->isChecked() && !fileMatcher.isEmpty());
+    const bool filterByPath(onlydirnames_box->isChecked() && !pathMatcher.isEmpty());
+
     QListViewItemIterator it(listview);
     for (; it.current(); ++it)
         {
             HistoryItem *item = static_cast<HistoryItem*>(it.current());
-            item->setVisible(false);
-            
-            if ( !( commit_box->isChecked() && item->isCommit() ) &&
-                 !( checkout_box->isChecked() && item->isCheckout() ) &&
-                 !( tag_box->isChecked() && item->isTag() ) &&
-                 !( other_box->isChecked() && item->isOther() ) )
-                continue;
-            if ( onlyuser_box->isChecked() &&
-                 !QString(user_edit->text()).isEmpty() &&
-                 user_edit->text() != item->text(HistoryItem::Author) )
-                continue;
-            if ( onlyfilenames_box->isChecked() &&
-                 !QString(filename_edit->text()).isEmpty() &&
-                 QRegExp(filename_edit->text(), true, true).search(item->text(HistoryItem::File)) < 0 )
-                continue;
-            if ( onlydirnames_box->isChecked() &&
-                 !QString(dirname_edit->text()).isEmpty() &&
-                 QRegExp(dirname_edit->text(), true, true).search(item->text(HistoryItem::Path)) < 0)
-                continue;
 
-            item->setVisible(true);
+            bool visible(   (showCommitEvents && item->isCommit())
+                         || (showCheckoutEvents && item->isCheckout())
+                         || (showTagEvents && item->isTag())
+                         || (showOtherEvents && item->isOther()));
+            visible = visible
+                && (!filterByAuthor || author == item->text(HistoryItem::Author))
+                && (!filterByFile || fileMatcher.search(item->text(HistoryItem::File)) >= 0)
+                && (!filterByPath || pathMatcher.search(item->text(HistoryItem::Path)) >= 0);
+
+            item->setVisible(visible);
         }
 }
 
