@@ -212,9 +212,16 @@ void Repository::Private::readConfig()
     QString repositoryGroup = QString::fromLatin1("Repository-") + location;
     if( !config->hasGroup(repositoryGroup) )
     {
+        // find the position of the first path separator
+        int insertPos = repositoryGroup.find('/');
+        
         // add port to location
-        int insertPos = repositoryGroup.findRev(':') + 1;
-        repositoryGroup.insert(insertPos, "2401");
+        // (1) :pserver:user@hostname.com:/path
+        if( repositoryGroup.at(insertPos) == ':' )
+            repositoryGroup.insert(insertPos, "2401");
+        // (2) :pserver:user@hostname.com/path
+        else
+            repositoryGroup.insert(insertPos, ":2401");            
     }
 
     config->setGroup(repositoryGroup);
