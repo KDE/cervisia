@@ -1,5 +1,5 @@
 CERVISIA_VERSION = 2.0
-INCLUDES = -I./cvsservice -UQT_NO_COMPAT -D_BSD_SOURCE $(all_includes) 
+INCLUDES = -I./cvsservice -D_BSD_SOURCE $(all_includes) 
 
 SUBDIRS = cvsservice
 
