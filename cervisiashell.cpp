@@ -180,10 +180,15 @@ void CervisiaShell::writeSettings()
     KConfig* config = KGlobal::config();
     
     config->setGroup("Session");
-    config->writeEntry("Current Directory", part->url().path());
+
+    // Save current working directory (if part was created)
+    if( part )
+    {
+        config->writeEntry("Current Directory", part->url().path());
     
-    // write to disk
-    config->sync();
+        // write to disk
+        config->sync();
+    }
 }
 
 

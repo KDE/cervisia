@@ -98,11 +98,10 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
         //        we can't start the cvs DCOP service
         KMessageBox::sorry(0, "Starting cvsservice failed with message: " +
             error, "Cervisia");
-        return;
     }
-    
-    // create a reference to the service
-    cvsService = new CvsService_stub(appId, "CvsService");
+    else
+      // create a reference to the service
+      cvsService = new CvsService_stub(appId, "CvsService");
 
     // Create UI
     KConfig *conf = config();
@@ -150,7 +149,8 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
 CervisiaPart::~CervisiaPart()
 {
     // stop the cvs DCOP service and delete reference
-    cvsService->quit();
+    if( cvsService )
+      cvsService->quit();
     delete cvsService;
     
     writeSettings();
@@ -1540,6 +1540,10 @@ void CervisiaPart::slotJobFinished()
 
 bool CervisiaPart::openSandbox(const QString &dirname)
 {
+    // Do we have a cvs service?
+    if( !cvsService )
+        return false;
+
     Repository_stub cvsRepository(cvsService->app(), "CvsRepository");
     
     // change the working copy directory for the cvs DCOP service
