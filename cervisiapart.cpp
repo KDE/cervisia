@@ -192,7 +192,7 @@ bool CervisiaPart::openURL( const KURL &u )
     if( hasRunningJob )
     {
         KMessageBox::sorry(widget(),
-                           i18n("You can not change to a different folder "
+                           i18n("You cannot change to a different folder "
                                 "while there is a running cvs job."),
                            "Cervisia");
         return false;
@@ -449,7 +449,7 @@ void CervisiaPart::setupActions()
     action = new KAction( i18n("&Lock Files"), 0,
                           this, SLOT(slotLock()),
                           actionCollection(), "lock_files" );
-    hint = i18n("Locks the selected files, so that others can't modify them");
+    hint = i18n("Locks the selected files, so that others cannot modify them");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
