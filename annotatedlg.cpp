@@ -14,14 +14,7 @@
 
 #include "annotatedlg.h"
 
-#include <qpushbutton.h>
-#include <qfileinfo.h>
-#include <qframe.h>
-#include <qlayout.h>
-#include <kapplication.h>
-#include <kbuttonbox.h>
 #include <kconfig.h>
-#include <kdebug.h>
 #include <klocale.h>
 #include <kprocess.h>
 
@@ -34,47 +27,29 @@ AnnotateDialog::Options *AnnotateDialog::options = 0;
 
 
 AnnotateDialog::AnnotateDialog(QWidget *parent, const char *name)
-    : QDialog(parent, name, false,
-              WStyle_Customize|WStyle_NormalBorder|WStyle_Title|WStyle_MinMax)
+    : KDialogBase(parent, name, false,
+                  QString::null,
+                  KDialogBase::Close | KDialogBase::Help,
+                  KDialogBase::Close,
+                  true)
 {
-    QBoxLayout *layout = new QVBoxLayout(this, 10);
-
     annotate = new AnnotateView(this);
-    layout->addWidget(annotate, 10);
+    setMainWidget(annotate);
 
-    QFrame *frame = new QFrame(this);
-    frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-    layout->addWidget(frame, 0);
+    setHelp("annotate");
 
-    KButtonBox *buttonbox = new KButtonBox(this);
-    QPushButton *helpbutton = buttonbox->addButton("&Help");
-    helpbutton->setAutoDefault(false);
-    buttonbox->addStretch();
-    QPushButton *closebutton = buttonbox->addButton(i18n("&Close"));
-    buttonbox->layout();
-    layout->addWidget(buttonbox, 0);
-
-    connect( helpbutton, SIGNAL(clicked()), SLOT(helpClicked()) );
-    connect( closebutton, SIGNAL(clicked()), SLOT(reject()) );
-
-    QFontMetrics fm(fontMetrics());
-    setMinimumSize(fm.width("0123456789")*12,
-		   fm.lineSpacing()*30);
-    layout->activate();
+    setWFlags(Qt::WDestructiveClose | getWFlags());
 
     if (options)
         resize(options->size);
 }
 
 
-void AnnotateDialog::done(int res)
+AnnotateDialog::~AnnotateDialog()
 {
     if (!options)
         options = new Options;
     options->size = size();
-
-    QDialog::done(res);
-    delete this;
 }
 
 
@@ -221,11 +196,6 @@ bool AnnotateDialog::parseCvsAnnotate(const QString &sandbox, const QString &rep
     return true; // successful
 }
 
-
-void AnnotateDialog::helpClicked()
-{
-    kapp->invokeHelp("annotate", "cervisia");
-}
 
 #include "annotatedlg.moc"
 

@@ -15,32 +15,32 @@
 #ifndef ANNOTATEDLG_H
 #define ANNOTATEDLG_H
 
-#include <qdialog.h>
+
+#include <kdialogbase.h>
+
 
 class KConfig;
 class AnnotateView;
 
 
-class AnnotateDialog : public QDialog
+class AnnotateDialog : public KDialogBase
 {
     Q_OBJECT
 
 public:
+
     AnnotateDialog( QWidget *parent=0, const char *name=0 );
+
+    ~AnnotateDialog();
 
     bool parseCvsAnnotate(const QString &sandbox, const QString &repository,
                           const QString &filename, const QString &rev);
 
     static void loadOptions(KConfig *config);
     static void saveOptions(KConfig *config);
-    
-protected:
-    virtual void done(int res);
-
-private slots:
-    void helpClicked();
 
 private:
+
     struct Options {
         QSize size;
     };
