@@ -52,9 +52,11 @@ private slots:
     void forwClicked();
 
 private:
+    void newDiffHunk(int& linenoA, int& linenoB, const QStringList& linesA,
+                     const QStringList& linesB);
     void callExternalDiff(const QString& extdiff, CvsService_stub* service, 
-                          const QString& fileName, const QString &revA, 
-                          const QString &revB);
+                          const QString& fileName, const QString& revA, 
+                          const QString& revB);
     void updateNofN();
     void updateHighlight(int newitem);
 

@@ -266,110 +266,42 @@ bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
     
     linenoA = linenoB = 0;
     while ( dlg.getLine(line) )
+    {
+        // line contains diff region?
+        if (line.startsWith("@@"))
         {
-            if (line.startsWith("@@"))
-                {
-                    interpretRegion(line, &linenoA, &linenoB);
-                    diff1->addLine(line, DiffView::Separator);
-                    diff2->addLine(line, DiffView::Separator);
-                    continue;
-                }
-            if (line.length() < 1)
-                continue;
-            QChar marker = line[0];
-            line.remove(0, 1);
+            interpretRegion(line, &linenoA, &linenoB);
+            diff1->addLine(line, DiffView::Separator);
+            diff2->addLine(line, DiffView::Separator);
+            continue;
+        }
             
-            if (marker == '-')
-                linesA.append(line);
-            else if (marker == '+')
-                linesB.append(line);
-            else
-                {
-                    if (!linesA.isEmpty() || !linesB.isEmpty())
-                        {
-                            DiffItem *item = new DiffItem;
-                            item->linenoA = linenoA+1;
-                            item->linenoB = linenoB+1;
-                            item->linecountA = linesA.count();
-                            item->linecountB = linesB.count();
-                            items.append(item);
-                            QString str = regionAsString(linenoA+1, linesA.count(),
-                                                         linenoB+1, linesB.count());
-                            itemscombo->insertItem(str);
-                        }
-                    QStringList::ConstIterator itA = linesA.begin();
-                    QStringList::ConstIterator itB = linesB.begin();
-                    while (itA != linesA.end() || itB != linesB.end())
-                        {
-                            if (itA != linesA.end())
-                                {
-                                    diff1->addLine(*itA, DiffView::Neutral,
-                                                   ++linenoA);
-                                    if (itB != linesB.end())
-                                        diff2->addLine(*itB, DiffView::Change,
-                                                       ++linenoB);
-                                    else
-                                        diff2->addLine("", DiffView::Delete);
-                                }
-                            else
-                                {
-                                    diff1->addLine("", DiffView::Neutral);
-                                    diff2->addLine(*itB, DiffView::Insert,
-                                                   ++linenoB);
-                                }
-
-                            if (itA != linesA.end())
-                                ++itA;
-                            if (itB != linesB.end())
-                                ++itB;
-                        }
-                    linesA.clear();
-                    linesB.clear();
-                    diff1->addLine(line, DiffView::Unchanged, ++linenoA);
-                    diff2->addLine(line, DiffView::Unchanged, ++linenoB);
-                }
+        if (line.length() < 1)
+            continue;
             
-	}
+        QChar marker = line[0];
+        line.remove(0, 1);
+        
+        if (marker == '-')
+            linesA.append(line);
+        else if (marker == '+')
+            linesB.append(line);
+        else
+        {
+            if (!linesA.isEmpty() || !linesB.isEmpty())
+            {
+                newDiffHunk(linenoA, linenoB, linesA, linesB);
+                        
+                linesA.clear();
+                linesB.clear();
+            }
+            diff1->addLine(line, DiffView::Unchanged, ++linenoA);
+            diff2->addLine(line, DiffView::Unchanged, ++linenoB);
+        }          
+    }
     
-    // Copy & Paste from above
     if (!linesA.isEmpty() || !linesB.isEmpty())
-        {
-            DiffItem *item = new DiffItem;
-            item->linenoA = linenoA+1;
-            item->linenoB = linenoB+1;
-            item->linecountA = linesA.count();
-            item->linecountB = linesB.count();
-            items.append(item);
-            QString str = regionAsString(linenoA+1, linesA.count(),
-                                         linenoB+1, linesB.count());
-            itemscombo->insertItem(str);
-        }
-    QStringList::ConstIterator itA = linesA.begin();
-    QStringList::ConstIterator itB = linesB.begin();
-    while (itA != linesA.end() || itB != linesB.end())
-        {
-            if (itA != linesA.end())
-                {
-                    diff1->addLine(*itA, DiffView::Neutral,
-                                   ++linenoA);
-                    if (itB != linesB.end())
-                        diff2->addLine(*itB, DiffView::Change,
-                                       ++linenoB);
-                    else
-                        diff2->addLine("", DiffView::Delete);
-                }
-            else
-                {
-                    diff1->addLine("", DiffView::Neutral);
-                    diff2->addLine(*itB, DiffView::Insert,
-                                   ++linenoB);
-                }
-            
-            if (itA != linesA.end())
-                ++itA;
-            if (itB != linesB.end())
-                ++itB;
-        }
+        newDiffHunk(linenoA, linenoB, linesA, linesB);
 
     // sets the right size as there is no more auto resize in QComboBox
     itemscombo->adjustSize();
@@ -377,6 +309,46 @@ bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
     updateNofN();
  
     return true;
+}
+
+
+void DiffDialog::newDiffHunk(int& linenoA, int& linenoB, 
+                             const QStringList& linesA, const QStringList& linesB)
+{
+    DiffItem *item = new DiffItem;
+    item->linenoA    = linenoA+1;
+    item->linenoB    = linenoB+1;
+    item->linecountA = linesA.count();
+    item->linecountB = linesB.count();
+    items.append(item);
+                        
+    const QString region = regionAsString(linenoA+1, linesA.count(),
+                                          linenoB+1, linesB.count());
+    itemscombo->insertItem(region);
+                                    
+    QStringList::ConstIterator itA = linesA.begin();
+    QStringList::ConstIterator itB = linesB.begin();
+    while (itA != linesA.end() || itB != linesB.end())
+    {
+        if (itA != linesA.end())
+        {
+            diff1->addLine(*itA, DiffView::Neutral, ++linenoA);
+            if (itB != linesB.end())
+                diff2->addLine(*itB, DiffView::Change, ++linenoB);
+            else
+                diff2->addLine("", DiffView::Delete);
+        }
+        else
+        {
+            diff1->addLine("", DiffView::Neutral);
+            diff2->addLine(*itB, DiffView::Insert, ++linenoB);
+        }
+
+        if (itA != linesA.end())
+            ++itA;
+        if (itB != linesB.end())
+            ++itB;
+    }
 }
 
 

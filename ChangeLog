@@ -1,3 +1,7 @@
+2003-02-18  Christian Loose  <christian.loose@hamburg.de>
+
+	* Big cleanup of parseCvsDiff() in diff dialog
+
 2003-02-17  Christian Loose  <christian.loose@hamburg.de>
 
 	* Use DCOP service for diff dialog.
