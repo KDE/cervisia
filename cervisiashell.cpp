@@ -16,7 +16,7 @@ CervisiaShell::CervisiaShell( const char *name )
 {
     setXMLFile( "cervisiashellui.rc" );
 
-    part = new CervisiaPart( this, "cervisiapart" );
+    part = new CervisiaPart( this, "cervisiaview", this, "cervisiapart" );
     setCentralWidget( part->widget() );
 
     setupActions();

@@ -5,7 +5,7 @@
 
 #include <kparts/part.h>
 #include <kparts/browserextension.h>
-#include <klibloader.h>
+#include <kparts/factory.h>
 
 #include "commitdlg.h"
 #include "checkoutdlg.h"
@@ -22,7 +22,7 @@ class KAboutData;
 /**
  * Factory for instantiating CervisiaParts.
  */
-class CervisiaFactory : public KLibFactory
+class CervisiaFactory : public KParts::Factory
 {
     Q_OBJECT
 
@@ -30,9 +30,10 @@ public:
     CervisiaFactory();
     virtual ~CervisiaFactory();
 
-    virtual QObject* create( QObject* parent = 0, const char* name = 0,
-			     const char* classname = "QObject",
-			     const QStringList &args = QStringList() );
+    virtual KParts::Part *createPartObject( QWidget *parentWidget, const char *widgetName,
+                                            QObject* parent = 0, const char* name = 0,
+		 	                    const char* classname = "QObject",
+			                    const QStringList &args = QStringList() );
     
     static KInstance *instance();
     static KAboutData *aboutData();
@@ -50,7 +51,8 @@ class CervisiaPart : public KParts::ReadOnlyPart
     Q_OBJECT
 
 public:
-    CervisiaPart( QWidget *parent, const char *name=0 );
+    CervisiaPart( QWidget *parentWidget, const char *widgetName,
+                  QObject *parent, const char *name=0 );
     virtual ~CervisiaPart();
 
     /**

@@ -65,12 +65,12 @@ CervisiaFactory::~CervisiaFactory()
     s_instance = 0;
 }
 
-QObject *CervisiaFactory::create( QObject* parent, const char* name,
-				  const char * /*classname*/,
-				  const QStringList & /*args*/ )
+KParts::Part *CervisiaFactory::createPartObject( QWidget *parentWidget, const char *widgetName,
+                                                 QObject* parent, const char* name,
+				                 const char * /*classname*/,
+				                 const QStringList & /*args*/ )
 {
-    QObject *obj = new CervisiaPart( static_cast<QWidget *>(parent), name );
-    emit objectCreated( obj );
+    KParts::Part *obj = new CervisiaPart( parentWidget, widgetName, parent, name );
     return obj;
 }
 
@@ -90,7 +90,8 @@ KAboutData *CervisiaFactory::aboutData()
 			   I18N_NOOP("(c) 1999-2001 Bernd Gehrmann"));
 }
 
-CervisiaPart::CervisiaPart( QWidget *parent, const char *name )
+CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
+                            QObject *parent, const char *name )
     : KParts::ReadOnlyPart( parent, name )
 {
     hasRunningJob = false;
@@ -102,7 +103,8 @@ CervisiaPart::CervisiaPart( QWidget *parent, const char *name )
     conf->setGroup("LookAndFeel");
     bool splitHorz = conf->readBoolEntry("SplitHorizontally",true);
 
-    splitter = new QSplitter(splitHorz? QSplitter::Vertical : QSplitter::Horizontal, parent);
+    splitter = new QSplitter(splitHorz? QSplitter::Vertical : QSplitter::Horizontal, 
+                             parentWidget, widgetName);
 
     update = new UpdateView(splitter);
     update->setFocusPolicy( QWidget::StrongFocus );
