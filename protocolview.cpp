@@ -242,8 +242,8 @@ void ProtocolView::appendLine(const QString &line)
         color = remoteChangeColor;
 
     append(color.isValid()
-           ? QString("<font color=\"%1\">%2</font>").arg(color.name())
-                                                    .arg(escapedLine)
+           ? QString("<font color=\"%1\"><b>%2</b></font>").arg(color.name())
+                                                           .arg(escapedLine)
            : QString("%1").arg(escapedLine));
 }
 

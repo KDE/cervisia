@@ -22,6 +22,7 @@
 #include <qdatetime.h>
 #include <qdir.h>
 #include <qfileinfo.h>
+#include <qpainter.h>
 #include <qptrstack.h>
 #include <kconfig.h>
 #include <kdebug.h>
@@ -801,11 +802,22 @@ void UpdateFileItem::paintCell(QPainter *p, const QColorGroup &cg,
         break;
     }
 
+    const QFont oldFont(p->font());
     QColorGroup mycg(cg);
     if (color.isValid())
-        mycg.setColor(QColorGroup::Base, color);
+    {
+        QFont myFont(oldFont);
+        myFont.setBold(true);
+        p->setFont(myFont);
+        mycg.setColor(QColorGroup::Text, color);
+    }
 
     QListViewItem::paintCell(p, mycg, col, width, align);
+
+    if (color.isValid())
+    {
+        p->setFont(oldFont);
+    }
 }
 
 
@@ -827,7 +839,10 @@ UpdateView::UpdateView(QWidget *parent, const char *name)
     addColumn(i18n("Tag/Date"));
     addColumn(i18n("Timestamp"));
 
-    QFontMetrics fm( fontMetrics() );
+    QFont myFont(font());
+    myFont.setBold(true);
+
+    const QFontMetrics fm(myFont);
 
     int width = 0;
     width = QMAX(width, fm.width(i18n("Updated")));
@@ -844,7 +859,7 @@ UpdateView::UpdateView(QWidget *parent, const char *name)
     width = QMAX(width, fm.width(i18n("Not in CVS")));
     width = QMAX(width, fm.width(i18n("Unknown")));
 
-    setColumnWidth(UpdateFileItem::Status, width+5);
+    setColumnWidth(UpdateFileItem::Status, width);
     setPreferredColumn(UpdateFileItem::File);
     setFilter(NoFilter);
 
