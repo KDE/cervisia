@@ -44,6 +44,7 @@ public:
 
 k_dcop:
     bool execute();
+    QStringList output();
 
 private:
     PtyProcess*    m_Proc;
@@ -51,6 +52,7 @@ private:
     QString        m_Rsh;
     QCString       m_CvsClient;
     QCStringList   m_Arguments;
+    QStringList    m_output;
 };
 
 

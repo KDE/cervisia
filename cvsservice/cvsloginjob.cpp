@@ -98,6 +98,8 @@ bool CvsLoginJob::execute()
             return result;
         }
 
+        // add line to output list
+        m_output << line;
         kdDebug(8051) << "process output = " << line << endl;
 
         // retrieve repository from 'Logging in to'-line
@@ -132,6 +134,8 @@ bool CvsLoginJob::execute()
                     if( line.isNull() )
                         return true;
 
+                    // add line to output list
+                    m_output << line;
                     kdDebug(8051) << "process output = " << line << endl;
                 }
 
@@ -148,4 +152,10 @@ bool CvsLoginJob::execute()
     }
 
     return false;
+}
+
+
+QStringList CvsLoginJob::output()
+{
+    return m_output;
 }
