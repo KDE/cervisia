@@ -109,10 +109,10 @@ int main(int argc, char **argv)
         { "log <file>", I18N_NOOP("Show log dialog for the given file"), 0 },
         { 0, 0, 0 }
     };
-    KAboutData about("cervisia", I18N_NOOP("Cervisia"), 
-		     CERVISIA_VERSION, I18N_NOOP("A CVS frontend"),
-                     KAboutData::License_QPL, 
-                     I18N_NOOP("Copyright (c) 1999-2002 Bernd Gehrmann"));
+    KAboutData about("cervisia", I18N_NOOP("Cervisia"), CERVISIA_VERSION, 
+                     I18N_NOOP("A CVS frontend"), KAboutData::License_QPL, 
+                     I18N_NOOP("Copyright (c) 1999-2002 Bernd Gehrmann"), 0,
+                     "http://www.kde.org/apps/cervisia");
 
     about.addAuthor("Bernd Gehrmann", I18N_NOOP("Original author and former "
                     "maintainer"), "bernd@mail.berlios.de", 0);
