@@ -23,6 +23,12 @@
 #include "cervisiapart.h"
 
 
+// old .cvspass format:
+//    user@host:/path Acleartext_password
+//
+// new .cvspass format (since cvs 1.11.1):
+//    /1 user@host:port/path Aencoded_password
+//
 QStringList Repositories::readCvsPassFile()
 {
     QStringList list;
@@ -36,7 +42,12 @@ QStringList Repositories::readCvsPassFile()
 		    int pos;
 		    QString line = stream.readLine();
 		    if ( (pos = line.find(' ')) != -1)
-                        list.append(line.left(pos));
+		    {
+			if (line[0] != '/')	// old format
+                            list.append(line.left(pos));
+			else			// new format
+			    list.append(line.section(' ', 1, 1));
+		    }
 		}
             f.close();
 	}
