@@ -115,7 +115,7 @@ ResolveDialog::ResolveDialog( QWidget *parent, const char *name)
     KButtonBox *buttonbox = new KButtonBox(this);
     connect( buttonbox->addButton(i18n("&Save")), SIGNAL(clicked()),
 	     SLOT(slotSave()) );
-    connect( buttonbox->addButton(i18n("S&ave As...")), SIGNAL(clicked()),
+    connect( buttonbox->addButton(i18n("Sa&ve As...")), SIGNAL(clicked()),
 	     SLOT(slotSaveAs()) );
     buttonbox->addStretch();
     connect( buttonbox->addButton(i18n("&Close")), SIGNAL(clicked()),
