@@ -11,11 +11,11 @@ libcervisia_la_SOURCES = updateview.cpp protocolview.cpp watchdlg.cpp \
 		   commitdlg.cpp checkoutdlg.cpp updatedlg.cpp \
 		   tagdlg.cpp mergedlg.cpp \
 		   logdlg.cpp logtree.cpp loglist.cpp diffdlg.cpp resolvedlg.cpp diffview.cpp \
-		   annotatedlg.cpp annotateview.cpp \
+		   annotatedlg.cpp annotateview.cpp progressdlg.cpp progressdlg.skel \
 		   cvsprogressdlg.cpp tiplabel.cpp listview.cpp \
 		   cvsdir.cpp repositories.cpp misc.cpp cervisiapart.cpp qttableview.cpp
 libcervisia_la_LDFLAGS = $(all_libraries) -version-info 1:0:0 -module -no-undefined
-libcervisia_la_LIBADD = $(LIB_KFILE) $(LIB_KPARTS)
+libcervisia_la_LIBADD = $(LIB_KFILE) $(LIB_KPARTS) $(LIB_DCOP)
 
 cervisia_SOURCES = main.cpp cervisiashell.cpp
 cervisia_LDFLAGS = $(all_libraries) $(KDE_RPATH)
@@ -58,3 +58,5 @@ cervisia.1: $(srcdir)/cervisia.1.in
 cervisia.1.in: cervisia.pod
 	pod2man --center "Cervisia" --release "${CERVISIA_VERSION}" \
 		cervisia.pod > cervisia.1.in
+
+SUBDIRS = cvsservice
