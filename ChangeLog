@@ -1,6 +1,13 @@
+2004-07-09  Christian Loose  <christian.loose@kdemail.net>
+
+	* Implemented wish #75825:
+	  The context menu for the file view gained an
+	  'Edit With' menu. It's now possible to start a
+	  different application for the selected file.
+
 2004-07-07  Christian Loose  <christian.loose@kdemail.net>
 
-	* Implement wish #75017:
+	* Implemented wish #75017:
 	  Show the patch option dialog when the user called the
 	  'Create patch against repository' action and pass
 	  the selected options to the 'cvs diff' command.
