@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2001 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
@@ -17,7 +17,7 @@
 
 #include <qdialog.h>
 #include <qlabel.h>
-#include <qmultilinedit.h>
+#include <qtextedit.h>
 #include <qlistview.h>
 #include <qcombobox.h>
 #include <qtabbar.h>
@@ -88,8 +88,8 @@ private:
     QLabel *revbox[2];
     QLabel *authorbox[2];
     QLabel *datebox[2];
-    QMultiLineEdit *commentbox[2];
-    QMultiLineEdit *tagsbox[2];
+    QTextEdit *commentbox[2];
+    QTextEdit *tagsbox[2];
     QComboBox *tagcombo[2];
 };
 

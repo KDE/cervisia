@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2001 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
@@ -27,7 +27,6 @@
 #include <diffdlg.h>
 #include <annotatedlg.h>
 #include "cvsprogressdlg.h"
-#include "multilinelabel.h"
 #include "misc.h"
 
 #include "logdlg.h"
@@ -133,10 +132,14 @@ LogDialog::LogDialog(QWidget *parent, const char *name)
 	    QLabel *commentlabel = new QLabel(i18n("Comment/Tags:"), this);
 	    grid->addWidget(commentlabel, 2, 0);
 
-            commentbox[i] = new MultiLineLabel(this);
+            commentbox[i] = new QTextEdit(this);
+	    commentbox[i]->setReadOnly(true);
+	    commentbox[i]->setMinimumSize(10,10);
 	    grid->addMultiCellWidget(commentbox[i], 2, 2, 1, 3);
 
-            tagsbox[i] = new MultiLineLabel(this);
+            tagsbox[i] = new QTextEdit(this);
+	    tagsbox[i]->setReadOnly(true);
+	    tagsbox[i]->setMinimumSize(10,10);
             grid->addWidget(tagsbox[i], 2, 4);
 	}
 
