@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="cervisia" version="2">
+<kpartgui name="cervisia" version="3">
 <MenuBar>
   <Menu name="file"><text>&amp;File</text>
     <Merge/>
@@ -13,7 +13,5 @@
   </Menu>
   <Merge/>
 </MenuBar>
-<ToolBar name="mainToolBar">
-</ToolBar>
 <StatusBar/>
 </kpartgui>
