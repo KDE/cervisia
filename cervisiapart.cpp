@@ -58,7 +58,7 @@
 K_EXPORT_COMPONENT_FACTORY( libcervisia, CervisiaFactory );
 
 CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
-                            QObject *parent, const char *name, const QStringList& args )
+                            QObject *parent, const char *name, const QStringList& /*args*/ )
     : KParts::ReadOnlyPart( parent, name )
     , hasRunningJob( false )
     , opt_hideFiles( false )
