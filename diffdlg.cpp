@@ -356,6 +356,7 @@ void DiffDialog::callExternalDiff(const QString& extdiff, CvsService_stub* servi
                                   const QString& fileName, const QString &revA,
                                   const QString &revB)
 {
+    // FIXME CL hardcoded call to cvs command-line client!!!
     QString cmdline = "cvs update -p ";
     QString extcmdline = extdiff;
     extcmdline += " ";
