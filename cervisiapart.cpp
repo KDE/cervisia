@@ -61,6 +61,7 @@
 #include "globalignorelist.h"
 #include "patchoptiondlg.h"
 #include "editwithmenu.h"
+#include "pluginmanager.h"
 
 #include "cervisiapart.h"
 #include "version.h"
@@ -1839,6 +1840,7 @@ void CervisiaPart::guiActivateEvent(KParts::GUIActivateEvent* event)
     {
         // initial setup of the menu items' state
         updateActions();
+        Cervisia::PluginManager::self()->setPart(this);
     }
 
     // don't call this as it overwrites Konqueror's caption (if you have a
