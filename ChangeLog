@@ -1,3 +1,9 @@
+2003-02-12  Christian Loose  <christian.loose@hamburg.de>
+
+	* Improved size handling for Commit dialog
+	* Removed code duplication in Commit dialog when
+	  displaying the Diff dialog
+
 2003-02-11  Christian Loose  <christian.loose@hamburg.de>
 
 	* Improved size handling for Diff dialog

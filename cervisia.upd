@@ -46,3 +46,8 @@ File=cervisiapartrc
 Group=Diff dialog,DiffDialog
 Key=Sync
 RemoveGroup=Diff dialog
+#
+Id=kde3.2/20030212
+File=cervisiapartrc
+RemoveGroup=Commit dialog
+

@@ -1,6 +1,7 @@
 /* 
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
+ *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -22,15 +23,17 @@
 #include <klocale.h>
 
 #include "diffdlg.h"
-#include "cervisiapart.h"       //FIXME: remove
+
+#include <kdeversion.h>
+#if KDE_VERSION < KDE_MAKE_VERSION(3,1,90)
+#include "configutils.h"
+#endif
 
 
-CommitDialog::Options *CommitDialog::options = 0;
-
-
-CommitDialog::CommitDialog(QWidget *parent, const char *name)
+CommitDialog::CommitDialog(KConfig& cfg, QWidget *parent, const char *name)
     : KDialogBase(parent, name, true, i18n("CVS Commit"),
                   Ok | Cancel | Help | User1, Ok, true)
+    , partConfig(cfg)
 {
     QFrame* mainWidget = makeMainWidget();
 
@@ -71,16 +74,22 @@ CommitDialog::CommitDialog(QWidget *parent, const char *name)
 
     setHelp("commitingfiles");
 
-    if (options)
-        resize(options->size);
+#if KDE_IS_VERSION(3,1,90)
+    QSize size = configDialogSize(partConfig, "CommitDialog");
+#else
+    QSize size = Cervisia::configDialogSize(this, partConfig, "CommitDialog");
+#endif
+    resize(size);
 }
 
 
 CommitDialog::~CommitDialog()
 {
-    if (!options)
-        options = new Options;
-    options->size = size();
+#if KDE_IS_VERSION(3,1,90)
+    saveDialogSize(partConfig, "CommitDialog");
+#else
+    Cervisia::saveDialogSize(this, partConfig, "CommitDialog");
+#endif
 }
 
 
@@ -99,26 +108,6 @@ void CommitDialog::setLogMessage(const QString &msg)
 QString CommitDialog::logMessage() const
 {
     return edit->text();
-}
-
-
-void CommitDialog::loadOptions(KConfig *config)
-{
-    if (!config->readEntry("Customized"))
-        return;
-
-    options = new Options;
-    options->size = config->readSizeEntry("Size");
-}
-
-
-void CommitDialog::saveOptions(KConfig *config)
-{
-    if (!options)
-        return;
-
-    config->writeEntry("Customized", true);
-    config->writeEntry("Size", options->size);
 }
 
 
@@ -169,20 +158,13 @@ void CommitDialog::comboActivated(int index)
 }
 
 
-//FIXME: remove code duplication (s. diffClicked())
 void CommitDialog::fileSelected(int index)
 {
     QListBoxItem *item = listbox->item(index);
     if ( !item )
         return;
-    QString filename = item->text();
 
-    //FIXME: pass KConfig to CommitDialog instead!
-    DiffDialog *l = new DiffDialog(*CervisiaPart::config(), this, "diffdialog", true);
-    if (l->parseCvsDiff(sandbox, repository, filename, "", ""))
-        l->show();
-    else
-        delete l;
+    showDiffDialog(item->text());
 }
 
 
@@ -192,17 +174,21 @@ void CommitDialog::fileHighlighted(int index)
     enableButton(User1, true);
 }
 
-//FIXME: remove code duplication (s. fileSelected())
+
 void CommitDialog::diffClicked()
 {
     QListBoxItem *item = listbox->item(highlightedFile);
     if ( !item )
         return;
-    QString filename = item->text();
 
-    //FIXME: pass KConfig to CommitDialog instead!
-    DiffDialog *l = new DiffDialog(*CervisiaPart::config(), this, "diffdialog", true);
-    if (l->parseCvsDiff(sandbox, repository, filename, "", ""))
+    showDiffDialog(item->text());
+}
+
+
+void CommitDialog::showDiffDialog(const QString& fileName)
+{
+    DiffDialog *l = new DiffDialog(partConfig, this, "diffdialog", true);
+    if (l->parseCvsDiff(sandbox, repository, fileName, "", ""))
         l->show();
     else
         delete l;

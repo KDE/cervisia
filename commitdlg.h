@@ -32,7 +32,7 @@ class CommitDialog : public KDialogBase
     Q_OBJECT
 
 public:   
-    explicit CommitDialog( QWidget *parent=0, const char *name=0 );
+    explicit CommitDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
 
     virtual ~CommitDialog();
 
@@ -41,9 +41,6 @@ public:
     QString logMessage() const;
     void setLogHistory(const QString &sbox, const QString &repo, const QStringList &list);
 
-    static void loadOptions(KConfig *config);
-    static void saveOptions(KConfig *config);
-
 private slots:
     void comboActivated(int);
     void fileSelected(int);
@@ -51,10 +48,7 @@ private slots:
     void diffClicked();
 
 private:
-    struct Options {
-        QSize size;
-    };
-    static Options *options;
+    void showDiffDialog(const QString& fileName);
 
     QListBox *listbox;
     QMultiLineEdit *edit;
@@ -65,6 +59,7 @@ private:
     QString sandbox;
     QString repository;
     int highlightedFile;
+    KConfig& partConfig;
 };
 
 #endif

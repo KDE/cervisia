@@ -840,7 +840,7 @@ void CervisiaPart::slotCommit()
         return;
 
     // modal dialog
-    CommitDialog dlg(widget());
+    CommitDialog dlg(*config(), widget());
     dlg.setLogMessage(changelogstr);
     dlg.setLogHistory(sandbox, repository, recentCommits);
     dlg.setFileList(list);
@@ -1823,8 +1823,6 @@ void CervisiaPart::readDialogProperties( KConfig *config )
     ResolveDialog::loadOptions(config);
     config->setGroup("Resolve edit dialog");
     ResolveEditorDialog::loadOptions(config);
-    config->setGroup("Commmit dialog");
-    CommitDialog::loadOptions(config);
     config->setGroup("Checkout dialog");
     CheckoutDialog::loadOptions(config);
     config->setGroup("History dialog");
@@ -1840,8 +1838,6 @@ void CervisiaPart::saveDialogProperties( KConfig *config )
     ResolveDialog::saveOptions(config);
     config->setGroup("Resolve edit dialog");
     ResolveEditorDialog::saveOptions(config);
-    config->setGroup("Commit dialog");
-    CommitDialog::saveOptions(config);
     config->setGroup("Checkout dialog");
     CheckoutDialog::saveOptions(config);
     config->setGroup("History dialog");
