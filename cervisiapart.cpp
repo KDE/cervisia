@@ -583,7 +583,7 @@ void CervisiaPart::setupActions()
     action->setWhatsThis( hint );
 
     //action = KStdAction::aboutApp( this, SLOT(aboutCervisia()),
-    //			   actionCollection(), "help_about_cervisia" );
+    //               actionCollection(), "help_about_cervisia" );
 }
 
 
@@ -1233,15 +1233,15 @@ void CervisiaPart::slotMakePatch()
     DCOPRef job = cvsService->makePatch();
     if( !cvsService->ok() )
         return;
-    
+
     ProgressDialog dlg(widget(), "Diff", job, "", i18n("CVS Diff"));
     if( !dlg.execute() )
         return;
 
-    QString fileName = KFileDialog::getSaveFileName();    
+    QString fileName = KFileDialog::getSaveFileName();
     if( fileName.isEmpty() )
         return;
-    
+
     QFile f(fileName);
     if( !f.open(IO_WriteOnly) )
     {
@@ -1250,7 +1250,7 @@ void CervisiaPart::slotMakePatch()
                            "Cervisia");
         return;
     }
-    
+
     QTextStream t(&f);
     QString line;
     while( dlg.getLine(line) )
@@ -1442,14 +1442,14 @@ void CervisiaPart::slotHideEmptyDirectories()
 
 void CervisiaPart::slotFoldTree()
 {
-	update->foldTree();
-	setFilter();
+    update->foldTree();
+    setFilter();
 }
 
 void CervisiaPart::slotUnfoldTree()
 {
-	update->unfoldTree();
-	setFilter();
+    update->unfoldTree();
+    setFilter();
 }
 
 void CervisiaPart::slotCreateDirs()
