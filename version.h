@@ -1,2 +1,2 @@
-#define CERVISIA_VERSION "2.1.90"
+#define CERVISIA_VERSION "2.1.92"
 
