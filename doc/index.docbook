@@ -68,7 +68,7 @@
 <ulink url="http://www.kde.org/apps/cervisia/">&cervisia;</ulink> is a
 user friendly version control system front-end. The aim is to support &CVS; and
 other version control system programs in a unified interface, featuring conflict
-resolution, difference and history viewers, status for the working folder files,
+resolution, difference and history viewers, status for the workincopy files,
 and support for most version control functions. You can get &cervisia;
 by building the kdesdk module or installing the kdesdk package provided by your
 distribution. Currently, only &CVS; is supported, but other version control
@@ -96,7 +96,7 @@ information, &etc;
 
 <para>
 While the repository holds the project files, and every contributor keeps their
-own local copy, named <firstterm>working folder</firstterm>. One can add his
+own local copy, named <firstterm>working copy</firstterm>. One can add his
 modifications to the main repository (a process called &quot;committing&quot;)
 and/or update his own copy to reflect recent changes made by other contributors.
 </para>
@@ -121,7 +121,7 @@ you can easily create a local repository for your own project.
 <tip><para>
 If you plan to develop a complex project, it is a good idea to use the
 &CVS; features, even if you are the only developer. You can make all changes in
-the working folder, and use &cervisia; (or any other &CVS; tool) to update and
+the workingcopy, and use &cervisia; (or any other &CVS; tool) to update and
 commit. This way, you will gain the ability to track changes that caused bugs,
 revert changes, avoid accidental loss of information, etc. Using &cervisia;, it
 is simple to create a local repository.
@@ -319,7 +319,7 @@ relevant to the access method you entered.
 </para></step>
 
 <step><para>
-If you using the ext method to access the repository, enter the remote shell
+If you are using the ext method to access the repository, enter the remote shell
 you wish to use (&eg; &ssh;) in the <guilabel>Use remote shell</guilabel> edit
 box.
 </para></step>
@@ -360,6 +360,75 @@ repository. If you just want to work with an existing project which is already
 in a repository, you may skip this section.
 </para>
 
+<para>
+There are two ways to put a project into the &CVS;:
+</para>
+
+<itemizedlist>
+
+<listitem><para>
+Import the files and folders to a new <firstterm>module</firstterm>, using
+&cervisia;'s import dialog. Modules are the top folders in the &CVS; repository
+folder tree, and are used to separate and organize the different software
+projects inside the repository.
+</para></listitem>
+
+<listitem><para>
+Create an empty module and add the new files and folders manually. You will have
+more control, but it will probably take a little more time.
+</para></listitem>
+
+</itemizedlist>
+
+<important>
+<para>
+Keep in mind that &CVS; was initially designed to handle
+text files. Many features, like revision merging, creating differences in a
+readable form, etc... are only performed to text files. This does not mean you
+cannot use CVS to keep binary files, it just means you have to
+<emphasis>explicitly tell CVS if it is a text or binary file</emphasis>. If
+you declare the wrong file type, you will experience problems with the &CVS;
+funcionality for these files, and they may get corrupted.
+</para>
+</important>
+
+
+<para>
+Importing a project (as a new module) has some advantages: you will import all
+files and folders recursively, and the module will automatically be created
+for you. This makes importing large existing projects to the repository
+easier. However, there are some disadvantages: you cannot use &cervisia;'s import
+dialog to add files to existing modules, and you can either import the files
+as text or binary files. You can work around this limitation by creating a
+folder with files of only one of the types, or by informing the patterns
+of the files that should be ignored during the import process.
+</para>
+
+<para>
+For instance, suppose your project contains text files and some PNG images
+(binary files) only. You can tell &CVS; to ignore all files with the pattern
+<filename class="extension">*.png</filename> while importing the other files as
+text, or you can move the images to a separate folder, and then import
+the remaining files (as text files). Either way, you will have to
+<link linkend="checkingout">checkout</link> the newly imported module to a
+new working copy, copy the the missing files and folders to it,
+<link linkend="addingfiles">add</link> and
+<link linkend="commitingfiles">commit</link> them to the repository to complete
+the import process.
+</para>
+
+<para>
+As an alternative, you can add the files and folders manually, creating an empty
+module for them.  To add an empty module to a repository, just create a new
+folder in the &CVS; repository root folder. The name of this new folder will be
+the name of the module. <link linkend="checkingout">Checkout</link> the new
+empty module. Then copy the the files and folders to the working copy,
+<link linkend="addingfiles">add</link> and 
+<link linkend="commitingfiles">commit</link> to upload them to the &CVS;
+repository.
+</para>
+
+
 <figure id="screenshot-import" float="1">
 <title>A screenshot of &cervisia;'s import dialog</title>
 <mediaobject>
@@ -370,69 +439,77 @@ in a repository, you may skip this section.
 
 <para>
 In <xref linkend="screenshot-import"/> you can see the dialog which helps you
-to <emphasis>import</emphasis> a project as a module. After you have filled
-out this form and confirmed by <guibutton>OK</guibutton>, the following &CVS;
-command is used:
+to <emphasis>import</emphasis> a project as a module.  To access &cervisia;'s
+import dialog, choose the <menuchoice><guimenu>Repository</guimenu>
+<guimenuitem>Import...</guimenuitem></menuchoice>
+menu item.
 </para>
 
-<screen><command>cvs</command> -d <co id="co-repository"></co><replaceable>repository</replaceable> import -m "" <co id="co-module"></co><replaceable>module</replaceable> <co id="co-vendortag"></co><replaceable>vendortag</replaceable> <co id="co-releasetag"></co><replaceable>releasetag</replaceable></screen>
+<variablelist>
 
-<calloutlist>
-
-<callout arearefs="co-repository">
-<para>The name of the &CVS; repository, also known as $<envar>CVSROOT</envar>.
-You must have write access to it, and the repository must be properly
-initialized. If the repository does not yet exist, initialize it with the
-command <userinput><command>cvs</command> <option>-d</option>
-<replaceable>repository</replaceable> <command>init</command></userinput>.
+<varlistentry>
+<term><guilabel>Repository:</guilabel> <xref linkend="co-repository" /></term>
+<listitem><para>
+Enter or select on the dropdown list the name of the &CVS; repository, also
+known as $<envar>CVSROOT</envar>. You must have write access to it, and the
+repository must be properly initialized. If the repository does not yet exist,
+you can create one choosing the
+<menuchoice>
+<guimenu>Repository</guimenu>
+<guimenuitem>Create...</guimenuitem>
+</menuchoice>
+menu item.
 </para>
-
 <para>
-If the repository is remote, make sure that authentication works (see 
-<xref linkend="accessing-repository"/>).
-</para>
-</callout>
+The drop down box shows a
+list of the repositories you previously entered using the <guilabel>Configure
+Access to Repositories</guilabel> dialog box. If the repository is remote,
+make sure that authentication works. See <xref
+linkend="accessing-repository"/> for more information.
+</para></listitem>
+</varlistentry>
 
-<callout arearefs="co-module">
-<para>
-The name of the module under which the project will be stored. After the
-import, the project can be checked out under this name.  See 
+<varlistentry>
+<term><guilabel>Module:</guilabel> <xref linkend="co-module" /></term>
+<listitem><para>
+The name of the module under which the project will be stored. After
+the import, the project can be checked out under this name.  See 
 <xref linkend="checkingout"/> for more information.  This is also the name of
 the corresponding folder in the repository.
-</para>
-</callout>
+</para></listitem>
+</varlistentry>
 
-<callout arearefs="co-vendortag">
-<para>
+<varlistentry>
+<term><guilabel>Working Folder:</guilabel></term>
+<listitem><para>
+The toplevel folder of the project you want to import. The import
+starts from this folder and goes down recursively.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Vendor tag:</guilabel> <xref linkend="co-vendortag" /></term>
+<listitem><para>
 The vendor tag is historically used for tracking third-party sources. Just use
 your user name if you have no better idea. It does not matter much what you
 enter here.
-</para>
-</callout>
+</para></listitem>
+</varlistentry>
 
-<callout arearefs="co-releasetag">
-<para>
+<varlistentry>
+<term><guilabel>Release tag:</guilabel> <xref linkend="co-releasetag" /></term>
+<listitem><para>
 This tag is also historically used for importing different versions of
 third-party software. If you are not doing this, use the word
 <literal>start</literal> or a string <literal>FOO_1_0</literal> where
 <literal>FOO</literal> is the name of your project and <literal>1.0</literal>
 is the version number of the imported release.
-</para>
-</callout>
+</para></listitem>
+</varlistentry>
 
-</calloutlist>
-
-<formalpara>
-<title>Working folder</title>
-<para>
-This is the toplevel folder of the project you want to import. The import
-starts from this folder and goes down recursively.
-</para>
-</formalpara>
-
-<formalpara>
-<title>Ignore files</title>
-<para>
+<varlistentry>
+<term><guilabel>Ignore files:</guilabel></term>
+<listitem><para>
 If you fill out this field, an additional <option>-I <replaceable>filenames</replaceable></option>
 option is given go the <command>cvs import</command> command. This entry is
 interpreted as a whitespace-separated list of file name patterns which are
@@ -443,16 +520,40 @@ the project contains files which are by default ignored by &CVS;, e.g. files
 with the name <filename>core</filename>. In such a case, simply enter the
 character <literal>!</literal> in this field. This overrules &CVS;'s scheme of
 ignored files, see <xref linkend="ignoredfiles"/>.
-</para>
-</formalpara>
+</para></listitem>
+</varlistentry>
 
-<formalpara>
-<title>Import as binaries</title>
-<para>
+<varlistentry>
+<term><guilabel>Comment:</guilabel></term>
+<listitem><para>
+Use this field to record the comments you might have about the origin, use,
+development, &etc;, of the files you are importing.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Import as binaries</guilabel></term>
+<listitem><para>
 If you check this box, all files are imported in binary mode, i.e. an argument
 <option>-kb</option> is given to <command>cvs import</command>.
-</para>
-</formalpara>
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Use file's modification as time of import</guilabel></term>
+<listitem><para>
+If you check this box, the time of import will be the file's modification time
+instead of the import time.
+</para></listitem>
+</varlistentry>
+
+</variablelist>
+
+
+<para>After you have filled out this form and confirmed by
+pressing <guibutton>OK</guibutton>, the following &CVS; command is used:</para>
+
+<screen><command>cvs</command> -d <co id="co-repository"></co><replaceable>repository</replaceable> import -m "" <co id="co-module"></co><replaceable>module</replaceable> <co id="co-vendortag"></co><replaceable>vendortag</replaceable> <co id="co-releasetag"></co><replaceable>releasetag</replaceable></screen>
 
 </sect1>
 
@@ -460,8 +561,11 @@ If you check this box, all files are imported in binary mode, i.e. an argument
 <sect1 id="checkingout">
 <title>Checkout a module from the repository</title>
 <para>
-Before you work on a project under revision control, you must check out a
-<emphasis>working copy</emphasis>.
+Now that you successfully defined your repository location, and imported the initial files to the repository, it is time to retrieve the module from the &CVS; repository, creating your working copy.
+</para>
+
+<para>
+You should also know the name of the <firstterm>branch</firstterm> you want to use. Branches of a module are parallel versions of this module. A good real life example of the use of this feature is the release of a software project. After a major release, there are bugs in the code that should be fixed, but people want to add new features to the application too. It is very hard to do both at the same time because new features usually introduce new bugs, making it hard to track down the old ones. To solve this dilemma, &CVS; lets you create a parallel version, that we will call the &quot;stable release branch&quot;, where you can only add bugfixes, leaving the main branch (HEAD) open for adding new features.
 </para>
 
 <figure id="screenshot-checkout" float="1">
@@ -472,55 +576,84 @@ Before you work on a project under revision control, you must check out a
 </mediaobject>
 </figure>
 
-<formalpara>
-<title>Repository</title>
-<para>
-The name of the &CVS; repository, also known as
-<filename><envar>$CVSROOT</envar></filename>.  If the repository is remote,
-make sure that authentication works, see <xref
-linkend="accessing-repository"/>.
-</para>
-</formalpara>
+<variablelist>
 
-<formalpara>
-<title>Module</title>
-<para>
+<varlistentry>
+<term><guilabel>Repository:</guilabel></term>
+<listitem><para>
+The name of the &CVS; repository, also known as
+<filename><envar>$CVSROOT</envar></filename>. The drop down box shows a
+list of the repositories you previously entered using the <guilabel>Configure
+Access to Repositories</guilabel> dialog box. If the repository is remote,
+make sure that authentication works. See <xref
+linkend="accessing-repository"/> for more information.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Module:</guilabel></term>
+<listitem><para>
 The name of the module to be checked out. If you are working with an existing
-repository, you have probably got this name from the
-administrator. Alternatively, if the repository has a
+repository, you can probably get this name from the system administrator,
+or if it is an open source repository, you can get the module names from the
+project web pages. If you want to create a new module from scratch using a local
+repository, just create a new folder in the local repository root folder. The
+name of the folder will be the same as the name of the empty module.
+</para>
+<para>
+Alternatively, if the repository has a
 <filename><envar>$CVSROOT</envar>/modules</filename> file, you can retrieve a
-list of available modules by clicking on the <guibutton>Fetch list</guibutton>
+list of available modules by pressing the <guibutton>Fetch list</guibutton>
 button.
 </para>
-</formalpara>
-
-<formalpara>
-<title>Working folder</title>
 <para>
+Note that it is possible to checkout any existing subfolder of the module,
+without retrieving the rest of the module. Just enter the path to the subfolder 
+s well. For instance, if you want to get only the
+<filename class="directory">doc/cervisia</filename> subfolder of the kdesdk
+module, enter <filename class="directory">kdesdk/doc/cervisia</filename> in this
+field.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Branch tag:</guilabel></term>
+<listitem><para>
+The name of the branch or tag you want to check out. If you leave this field
+empty, &cervisia; will retrieve the main (HEAD) branch.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Working folder:</guilabel></term>
+<listitem><para>
 The folder under which the module should be checked out. Note that the
-toplevel folder of the working copy is always created as a folder with
-the name as the module under the folder given here.
-</para>
-</formalpara>
+the working copy toplevel folder is named after the module you are retrieving,
+unless you give it an alternative name in the <guilabel>Check out as:</guilabel>
+field.
+</para></listitem>
+</varlistentry>
 
-<formalpara>
-<title>Check out as</title>
-<para>
-An alternative name to checkout the module under. This results in the 
-files being checked out to an alternative folder under the working 
-folder rather than a folder with the module name.
-</para>
-</formalpara>
+<varlistentry>
+<term><guilabel>Check out as:</guilabel></term>
+<listitem><para>
+This results in the working copy files being checked out to an alternative
+folder under the working folder rather than a folder named after the module.
+</para></listitem>
+</varlistentry>
 
-<formalpara>
-<title>Export only</title>
-<para>
+<varlistentry>
+<term><guilabel>Export only</guilabel></term>
+<listitem><para>
 If you check this box, the files will be exported rather than checked out. 
 Exporting obtains a copy of the source for the module without the CVS 
 administrative folders. For example export may be used to prepare the
 source code for a release.
-</para>
-</formalpara>
+</para></listitem>
+</varlistentry>
+
+</variablelist>
+
 </sect1>
 
 
@@ -535,8 +668,16 @@ current folder. According to the settings in your
 include into the repository - like e.g. object files - are not shown. For each
 file, you see its corresponding status. In the default setting, this is
 "Unknown" because &cervisia; delays the fetching of information until you
-choose <guimenuitem>Update</guimenuitem> or <guimenuitem>Status</guimenuitem>
-from the <guimenu>File</guimenu> menu. With this approach, you have a minimal
+choose
+<menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Update</guimenuitem>
+</menuchoice>
+or
+<menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Status</guimenuitem>
+</menuchoice>. With this approach, you have a minimal
 amount of functionality available even if you do not have a permanent
 connection to the &CVS; server.
 </para>
