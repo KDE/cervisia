@@ -63,16 +63,15 @@
     <Action name="show_repositories"/>
   </Menu>
   <Menu name="settings"><text>&amp;Settings</text>
-    <Action name="configure_cervisia"/>
-    <Separator/>
-    <Action name="settings_create_dirs"/>
-    <Action name="settings_prune_dirs"/>
-    <Action name="settings_update_recursively"/>
-    <Action name="settings_commit_recursively"/>
-    <Action name="settings_do_cvs_edit"/>
+    <Separator group="save_merge_group"/>
+    <Action name="settings_create_dirs" group="save_merge_group"/>
+    <Action name="settings_prune_dirs" group="save_merge_group"/>
+    <Action name="settings_update_recursively" group="save_merge_group"/>
+    <Action name="settings_commit_recursively" group="save_merge_group"/>
+    <Action name="settings_do_cvs_edit" group="save_merge_group"/>
+    <Action name="configure_cervisia" group="configure_merge_group"/>
   </Menu>
   <Menu name="help"><text>&amp;Help</text>
-    <Separator/>
     <Action name="help_cvs_manual"/>
   </Menu>
 </MenuBar>
