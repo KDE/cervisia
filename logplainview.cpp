@@ -13,6 +13,7 @@
 
 #include "logplainview.h"
 
+#include <qregexp.h>
 #include <qstringlist.h>
 #include <qstylesheet.h>
 #include <kfind.h>
@@ -130,12 +131,25 @@ void LogPlainView::scrollToTop()
 
 void LogPlainView::findNext()
 {   
+    static const QRegExp addNewLineChar("<br[^>]*>");
+    static const QRegExp stripHtmlTags("<[^>]*>");
+    
     KFind::Result res = KFind::NoMatch;
     
     while( res == KFind::NoMatch && m_findPos < paragraphs() && m_findPos >= 0 )
     {
         if( m_find->needData() )
-            m_find->setData(text(m_findPos));
+        {
+            QString richText = text(m_findPos);
+            
+            // replace <br/> with '\n'
+            richText.replace(addNewLineChar, "\n");
+            
+            // remove html tags from text
+            richText.replace(stripHtmlTags, "");
+            
+            m_find->setData(richText);
+        }
    
         res = m_find->find();
         
