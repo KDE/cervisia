@@ -133,3 +133,20 @@ bool CvsService::openSandbox(const QString& dirName)
     return d->sandbox.open(dirName);
 }
 
+
+QString CvsService::sandbox() const
+{
+    return d->sandbox.sandboxPath();
+}
+
+
+QString CvsService::repository() const
+{
+    return d->sandbox.repository();
+}
+
+
+void CvsService::quit()
+{
+    kapp->quit();
+}

@@ -42,6 +42,11 @@ k_dcop:
 
     bool openSandbox(const QString& dirName);
 
+    QString sandbox() const;
+    QString repository() const;
+
+    void quit();
+
 private:
     struct Private;
     Private* d;
