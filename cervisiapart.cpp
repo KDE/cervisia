@@ -78,6 +78,11 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     , opt_commitRecursive( true )
     , opt_doCVSEdit( false )
     , recent( 0 )
+    , cvsService( 0 )
+#if KDE_IS_VERSION(3,1,90)
+    , statusBar( 0 )
+    , filterLabel( 0 )
+#endif
 {
     KGlobal::locale()->insertCatalogue("cervisia");
 
@@ -89,6 +94,8 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     QCString appId;
     if( KApplication::startServiceByDesktopName("cvsservice", QStringList(), &error, &appId) )
     {
+        // FIXME: The container app (Konqueror o. CervisiaShell) crashes when
+        //        we can't start the cvs DCOP service
         KMessageBox::sorry(0, "Starting cvsservice failed with message: " +
             error, "Cervisia");
         return;

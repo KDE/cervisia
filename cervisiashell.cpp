@@ -32,6 +32,7 @@
 
 CervisiaShell::CervisiaShell( const char *name )
   : KParts::MainWindow( name )
+  , part(0)
 {
     setXMLFile( "cervisiashellui.rc" );
 
