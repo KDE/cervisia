@@ -47,19 +47,52 @@ CervisiaShell::~CervisiaShell()
 
 void CervisiaShell::setupActions()
 {
-    setHelpMenuEnabled(false);
-    (void) new KHelpMenu(this, instance()->aboutData(), false, actionCollection());
-
-    KAction* action = KStdAction::showToolbar( 0, 0, actionCollection() );
+    KAction *action = KStdAction::showToolbar( 0, 0, actionCollection() );
+    QString hint = i18n("Shows or hides the toolbar");
+    action->setToolTip( hint );
+    action->setWhatsThis( hint );
     connect( action, SIGNAL(toggled(bool)),
              this,   SLOT(slotToggleToolbar( bool )) );
 
     action = KStdAction::configureToolbars( this, SLOT(slotConfigureToolBars()),
                                             actionCollection() );
+    hint = i18n("Allows you to configure the toolbar");
+    action->setToolTip( hint );
+    action->setWhatsThis( hint );
+    
     action = KStdAction::keyBindings( this, SLOT(slotConfigureKeys()),
                                       actionCollection() );
+    hint = i18n("Allows you to customize the keybindings");
+    action->setToolTip( hint );
+    action->setWhatsThis( hint );
 
-    (void) KStdAction::quit( this, SLOT( slotExit() ), actionCollection() );
+    action = KStdAction::quit( this, SLOT( slotExit() ), actionCollection() );
+    hint = i18n("Exits Cervisia");
+    action->setToolTip( hint );
+    action->setWhatsThis( hint );
+
+    setHelpMenuEnabled(false);
+    (void) new KHelpMenu(this, instance()->aboutData(), false, actionCollection());
+
+    action = actionCollection()->action("help_contents");
+    hint = i18n("Invokes the KDE help system with the Cervisia documentation");
+    action->setToolTip( hint );
+    action->setWhatsThis( hint );
+
+    action = actionCollection()->action("help_report_bug");
+    hint = i18n("Opens the Bug report dialog");
+    action->setToolTip( hint );
+    action->setWhatsThis( hint );
+
+    action = actionCollection()->action("help_about_app");
+    hint = i18n("Displays the version number and copyright information");
+    action->setToolTip( hint );
+    action->setWhatsThis( hint );
+
+    action = actionCollection()->action("help_about_kde");
+    hint = i18n("Displays the information about KDE and its version number");
+    action->setToolTip( hint );
+    action->setWhatsThis( hint );
 }
 
 void CervisiaShell::slotOpenSandbox()
