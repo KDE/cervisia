@@ -33,12 +33,12 @@
 struct Repository::Private
 {
     Private() : compressionLevel(0) {}
-    
+
     QString     configFileName;
-    
+
     QString     workingCopy;
     QString     location;
-    
+
     QString     client;
     QString     rsh;
     QString     server;
@@ -86,7 +86,7 @@ QString Repository::cvsClient() const
     return client;
 }
 
-    
+
 QString Repository::rsh() const
 {
     return d->rsh;
@@ -102,8 +102,8 @@ QString Repository::server() const
 bool Repository::setWorkingCopy(const QString& dirName)
 {
     const QFileInfo fi(dirName);
-    QString path = fi.absFilePath();
-    
+    const QString path = fi.absFilePath();
+
     // is this really a cvs-controlled directory?
     const QFileInfo cvsDirInfo(path + "/CVS");
     if( !cvsDirInfo.exists() || !cvsDirInfo.isDir() )
@@ -111,7 +111,7 @@ bool Repository::setWorkingCopy(const QString& dirName)
 
     d->workingCopy = path;
     d->location    = QString::null;
-    
+
     // determine path to the repository
     QFile rootFile(path + "/CVS/Root");
     if( rootFile.open(IO_ReadOnly) ) 
@@ -123,7 +123,7 @@ bool Repository::setWorkingCopy(const QString& dirName)
 
     QDir::setCurrent(path);
     d->readConfig();
-    
+
     return true;
 }
 
@@ -168,10 +168,10 @@ void Repository::Private::readConfig()
 
     // get remote shell client to access the remote repository
     rsh = config->readEntry("rsh");
-    
+
     // get program to start on the server side
     server = config->readEntry("cvs_server");
-    
+
     // get path to cvs client programm
     config->setGroup("General");
     client = config->readEntry("CVSPath", "cvs");   

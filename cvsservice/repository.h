@@ -35,7 +35,7 @@ class Repository : public QObject, public DCOPObject
 {
     K_DCOP
     Q_OBJECT
-    
+
 public:
     Repository();
     ~Repository();
@@ -79,7 +79,7 @@ k_dcop:
      * @return The working copy directory. Can be null if not set.
      */
     QString workingCopy() const;
-    
+
     /**
      * Path and method to access the current cvs repository.
      * i.e. :pserver:user@cvs.project.org:/home/project
