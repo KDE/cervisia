@@ -43,8 +43,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2001-09-29</date>
-<releaseinfo>1.50.10</releaseinfo>
+<date>2002-06-28</date>
+<releaseinfo>2.00.00</releaseinfo>
 
 <abstract>
 <para>&cervisia; provides a graphical view of &CVS;.</para>
@@ -1255,17 +1255,21 @@ the two relevant tags. This will result in a command
 
 <para>
 A watch is the conventional name for &CVS;'s feature to notify users of the
-repository whenever a file has been changed. The usage of watches requires
-that the file <filename><envar>$CVSROOT</envar>/CVSROOT/notify</filename> has
-been set up properly. This is not discussed here; if you need further
-information on the setup from the administrator's point of view, read one of
-the books listed in the appendix.
+repository whenever a file has been changed or a developer has started editing
+a file. The usage of watches requires that the file
+<filename><envar>$CVSROOT</envar>/CVSROOT/notify</filename> has been set up
+properly. This is not discussed here; if you need further information on the
+setup from the administrator's point of view, read one of the books listed in
+the appendix.
 </para>
 
 <para>
-&cervisia;'s main support of watches are three menu items. In order to add a
-watch to one or several files, use
-<menuchoice><guimenu>Advanved</guimenu><guimenuitem>Add
+&cervisia;'s main support of watches are six menu items.
+</para>
+
+<para>
+In order to add a watch to one or several files, use
+<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Add
 watch...</guimenuitem></menuchoice>. In the dialog you get, you can choose to
 get notified for any of the types of events that &CVS; supports. For example,
 if you only want to get notified when a file is commited, check the boxes
@@ -1284,9 +1288,9 @@ or with a similar option, depending on the events you chose to watch.
 </para>
 
 <para>
-If you not interested into some files anymore, you can remove your watches on
+If you are not interested in some files anymore, you can remove your watches on
 them. To this end, use
-<menuchoice><guimenu>Advanved</guimenu><guimenuitem>Remove
+<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Remove
 watch...</guimenuitem></menuchoice>. In the dialog you get here, the same
 options are offered as in the form you filled out when adding the watch. When
 you confirm this dialog, &cervisia; issues the command
@@ -1302,7 +1306,7 @@ possibly with an option <option>-a</option> for the chosen events.
 
 <para>
 Finally, you can get a list of the people who are watching a couple of
-files. Choose <menuchoice><guimenu>Advanved</guimenu><guimenuitem>Show
+files. Choose <menuchoice><guimenu>Advanced</guimenu><guimenuitem>Show
 watchers</guimenuitem></menuchoice>. Using this menu item will result in a
 command
 </para>
@@ -1312,31 +1316,92 @@ command
 </para>
 
 <para>
-&cervisia;'s editor interface helps you with projects that use watches. In
-such projects, files that are watched are checked out readonly. If you would
-just start an editor with such a readonly file, you cannot save your
-modifications later. This has of course a reason: Whenever you want to change
-a file, you should run <command>cvs  edit</command> before, so that all people
-watching the file get a notification that you are working on it.
+In the normal usage scenario of &CVS;, each developer works separately in his
+checked out sandbox. When he wants to modify some file, he can just open it in
+his editor and start working on it. Nobody else will know about this work
+until the file gets commited.
 </para>
 
 <para>
-If you are working with watched files, it is advisable to check the option
+For some developer groups, this is not the preferred model of
+cooperation. They want to get notified about someone working on a file
+<emphasis>as soon as</emphasis> he starts with it. This can be achieved by some
+further &CVS; commands. Before you start editing a file, select it in
+&cervisia;'s main window and choose 
+<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Edit</guimenuitem></menuchoice>.
+This will execute the command
+</para>
+
+<para>
+<screen><command>cvs edit <replaceable>filenames</replaceable></command></screen>
+</para>
+
+<para>
+This will send out a notification to everyone who has set an
+<literal>edit</literal> watch on this file. It will also register you as an
+<emphasis>editor</emphasis> of the file. You can obtain a list of all editors
+of a certain file by using
+<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Show
+editors</guimenuitem></menuchoice>. This is equivalent to typing on the
+command line
+</para>
+
+<para>
+<screen><command>cvs editors <replaceable>filenames</replaceable></command></screen>
+</para>
+
+<para>
+An editing session is automatically ended when you commit the affected file.
+At that moment, an <literal>unedit</literal> notification gets sent out to all
+people who have registered a respective watch on the file. Of course,
+sometimes you may not want to commit the file, but abort the editing session
+and revert to the previous version of the file. This is done by using
+<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Unedit</guimenuitem></menuchoice>.
+Note that &cervisia; will not ask you for confirmation! That means, if you use
+this menu item, all your work done since you used
+<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Edit</guimenuitem></menuchoice>
+will get lost. Precisely, &cervisia; uses the command line
+</para>
+
+<para>
+<screen><command>echo y | cvs unedit <replaceable>filenames</replaceable></command></screen>
+</para>
+
+<para>
+So far, we have only the discussed the case where edits and unedits are used
+voluntarily be the developers. In addition &CVS; supports a model which
+<emphasis>enforces</emphasis> the usage of these commands. The responsible
+command to switch to this model is <command>cvs watch on</command> which we
+will not explain further because it is mostly used by the administrator of the
+repository. However, the important point from the developer's point of view is
+that when the project enforces edits, working copies are checked out
+<emphasis>readony</emphasis>. That means you cannot edit a file by default
+(unless you use tricks like <command>chmod</command>). Only when you use 
+<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Edit</guimenuitem></menuchoice>,
+the file becomes writable. It is made readonly again when you commit the file
+or use
+<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Unedit</guimenuitem></menuchoice>.
+</para>
+
+<para>
+&cervisia;'s editor interface helps you with projects that enforce watches
+also in a different way. If you just started an editor with a readonly file
+by double-clicking on it or by using
+<menuchoice><guimenu>File</guimenu><guimenuitem>Edit</guimenuitem></menuchoice>,
+you would not be able to save your modifications later. This has of course a
+reason: Whenever you want to change a file, you should run <command>cvs
+edit</command> before, so that all people watching the file get a notification
+that you are working on it.
+</para>
+
+<para>
+In such a case, it is advisable to check the option
 <menuchoice><guimenu>Settings</guimenu><guimenuitem>Do cvs edit automatically
 when necessary</guimenuitem></menuchoice>. Now, whenever you edit a file by
 double-clicking it, &cervisia; will run <command>cvs edit</command> before the
 editor is actually executed. Then you can edit your file as usual. When you
 have finished your work, commit your files, and the commited files are
 readonly again.
-</para>
-
-</sect1>
-
-
-<sect1 id="editunedit">
-<title>Editing and Unediting</title>
-
-<para>
 </para>
 
 </sect1>
@@ -1499,8 +1564,9 @@ i.e. it gets ignore lists from the following sources:
 <itemizedlist>
 
 <listitem><para> 
-A static list of entries which includes things like <filename>*.o</filename>
-and <filename>core</filename>. For details, see the &CVS; documentation.
+A static list of entries which includes things like <literal
+role="extension">*.o</literal> and <filename>core</filename>. For details,
+see the &CVS; documentation.
 </para></listitem>
 <listitem><para> 
 The file <filename><envar>$HOME</envar>/.cvsignore</filename>.
