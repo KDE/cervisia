@@ -510,6 +510,8 @@ void ResolveDialog::keyPressEvent(QKeyEvent *e)
 	case Key_Right:forwClicked(); break;
         case Key_Up:   diff1->up();   break;
         case Key_Down: diff1->down(); break;
+        default:
+            KDialogBase::keyPressEvent(e);
 	}
 }
 
