@@ -52,6 +52,7 @@
 #include "settingsdlg.h"
 #include "changelogdlg.h"
 #include "watchersdlg.h"
+#include "cvsinitdlg.h"
 #include "misc.h"
 #include "cvsservice_stub.h"
 #include "repository_stub.h"
@@ -1283,14 +1284,12 @@ void CervisiaPart::slotImport()
 
 void CervisiaPart::slotCreateRepository()
 {
-    bool okPressed;
-    QString repository = KInputDialog::getText("Create a New Repository (cvs init)",
-                                               "Repository folder:",
-                                               QString::null, &okPressed);
-    if( !okPressed )
-        return;
+    Cervisia::CvsInitDialog dlg(widget());
 
-    DCOPRef cvsJob = cvsService->createRepository(repository);
+    if( !dlg.exec() )
+        return;
+    
+    DCOPRef cvsJob = cvsService->createRepository(dlg.directory());
 
     QString cmdline = cvsJob.call("cvsCommand()");
 
