@@ -1,0 +1,18 @@
+# KDE Config File
+[KDE Desktop Entry]
+Comment=CVS Frontend
+Comment[ko]=CVS 프론트-엔드 프로그램
+Exec=cervisia -caption "%c" %i %m %u
+TerminalOptions=
+Path=
+Icon=cervisia
+DocPath=cervisia/index.html
+Type=Application
+Terminal=0
+MimeType=inode/directory
+Name=Cervisia
+Name[ko]=케르비시아
+ServiceTypes=KParts/ReadOnlyPart,Browser/View
+X-KDE-Library=libcervisia
+X-KDE-BrowserView-Args=DetailedList
+

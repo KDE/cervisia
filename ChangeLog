@@ -1,0 +1,706 @@
+               ======>   TODO Before Importing
+	========================================
+	* Remove stale CVS directories and add to main repository
+	kdesdk/cervisia/CVS
+	kdesdk/po/cervisia/CVS
+	kdesdk/doc/cervisia/CVS
+
+	cd kdesdk
+	cvs add cervisia
+	cd cervisia
+	cvs add -kb *.png
+	cvs add Makefile.am README TODO .cvsignore ChangeLog LICENSE.QPL \
+	        cervisia.lsm *.cpp *.h *.rc
+	========================================
+	
+	
+2001-09-01  Richard Moore  <rich@kde.org>
+
+	* Added support for KDE/Qt 3. At the moment I've just made the
+	minimum set of changes required to make it compile. Qt 2.x is
+	still supported of course.
+	* Moved README, TODO, ChangeLog, cervisia.lsm and LICENSE.QPL to
+	the main source directory.
+	* Moved version string from configure.in.in to version.h
+	* Updated version string
+	* Added a kdoc build target to Makefile.am so we can generate some
+	api documentation
+	* Imported to kdesdk CVS module
+	
+2001-07-05  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Added missing icons to doc/common directory
+
+2001-07-04  Richard Moore  <rich@kde.org>
+
+	* Converted to KParts
+	* Created a standalone shell app that embeds the part
+	* Converted Makefile to use METASOURCES = AUTO 
+
+2001-06-23  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Avoid making NotInCVS files up-to-date 
+	* Don't show attic directories
+	* DEBUGOUT -> kdDebug()
+
+2001-06-20  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Patch by Adrian Schroeter <adrian@suse.de>:
+	  - Some QString -> char* conversion fixes
+	  - fixes for autoconf 2.50
+	* Use Prune Empty Directories settings not only for updates,
+	  but also for checkouts
+
+2001-06-19  Richard Moore  <rich@kde.org>
+
+	* Ported UI implementation to use XMLGUI
+	* Made UI more style guide compliant
+	* Added toolbar configuration
+	* Ported settings dialog to use KDialogBase
+
+2001-06-19  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Again a patch by Colin Macleod <colin.macleod@ivata.com>
+	  Compression argument is now configurable per
+	  repository, with a global default. Also, -f
+	  is given to all commands now.
+
+2001-05-21  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Made compression argument (-z) configurable.
+	  Patch by Colin Macleod <colin.macleod@ivata.com>
+
+2001-05-17  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Fixed crash when closing settings dialog
+	* Fixed first line in annotate dialog disappearing
+	* Remade html documentation from docbook, bringing
+	  it in line with the kde style
+	* Release 1.4.1
+
+2001-05-16  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Cleanup
+	* Release 1.4
+
+2001-05-14  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Patch by Francisco Jose Blasco Abril <francisco.blasco@ds2.es>
+	  Adds to the resolve dialog buttons A and B the additional
+	  choices A+B and B+A. It is also possible to freely edit
+	  items.
+	* Use -f option also for cvs log
+
+2001-04-03  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Support for external diff frontends: Based
+	  on a patch by Scott Moore <scott@netcharge.com>
+
+2001-03-27  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Fixed resolve dialog bug: The merged view was
+	  not scrolled to the relevant position
+
+2001-03-18  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Copied and cleaned up the << and >> button stuff from resolve 
+	  dialog to the diff dialog. Now it is possible to jump between
+	  differences by these buttons. Based on ideas and
+	  code by Francois Biot <francois.biot@sabre.com>.
+	* Zoom widget in diff dialog improved. Ditto.
+	* Added a combo in the diff dialog which allows to jump
+	  directly to a difference region
+	* Release 1.3
+
+2001-03-14  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Ignore symbolic links
+
+2001-03-12  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Hopefully fixed a crash in the listview which
+	  I could not reproduce myself.
+
+2001-03-03  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Patch by Wynn Wilkes: Allow to open the editor
+	  with multiple files
+	* Made tab width in diff view customizable
+	* Fix in doc/Makefile.am for Solaris. 
+	  Thanks to Timo Ruottinen <Timo.Ruottinen@iki.fi>
+	* Some cleanups wrt constness
+
+2001-03-02  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+	* Patch by  Cosmin Smeu <cosmin@cosmin.com>: 
+	  In diff view, replace tabs by spaces
+
+2001-02-17  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Fixed opening files by double clicking
+	* Added small icon to makefile
+	* Show directory items in file tree with folder icon
+	* Implemented Fold tree
+	* Implemented Lock files and Unlock files
+	* Implemented Edit files, Unedit Files, Show editors
+	* Implemented Hide removed files
+	* Added label in the status bar which shows
+	  which items are hidden
+	* Release 1.2
+
+2001-02-09  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Changed behaviour of .cvsignore mechanisms
+	  for directories: now directories are ignored,
+	  _except_ if they appear in CVS/Entries. I'm
+	  now quite sure that it matches the behaviour
+	  of CVS itself :-)
+	* Release 1.1
+
+2001-02-08  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* In main view, allow tabbing by keyboard between
+	  file tree and protocol view
+	* Context menus in main view also by keyboard
+
+2001-02-07  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Apply ignore rules to files instead of directories
+	  - Yet Another Bug introduced between Betas 2 and 3
+	* Ignore CVS directories
+	* Pressing Return now edits the current file, not one
+	  of the selected files, and never a directory...
+	* Quote file name in diff dialog
+	* In Merge dialog, implemented buttons to fetch the
+	  lists of possible tags and branches
+
+2001-02-06  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Finished filtering in main view - the cast orgy ;-)
+
+2001-02-04  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Save column sizes of log list
+	* In main view and history dialog, let the main column
+	  take the remaining space of the list view
+	* Do not read in contents of directory repeatedly
+	  if it is empty
+	* Tooltips for menu items
+	* Options -> Settings, in consistency with other KDE apps
+	* Rewritten some captions
+
+2001-02-03  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Implemented Revert - only for cvs 1.11
+
+2001-02-01  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* In Update to tag dialog, introduced new option
+	  Update to branch; implemented buttons to fetch the
+	  lists of possible tags and branches
+	* In protocol view, added popup with items
+	  Clear and Select All
+
+2001-01-31  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Fixed widgets not appearing in the import dialog
+	* Made several dialogs non-modal again which I
+	  made modal by accident between Beta 2 and Beta 3
+	* Added button for fetching the list of possible tags
+	  in Delete Tag dialog
+
+2001-01-30  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Updated screenshots in documentation
+	* Close CVS/Root file after reading
+	* Don't count diagnostic message from cvs server
+	  as errors when making a patch
+	* Use configured cvs client when making patch
+
+2001-01-29  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Layout fix in Add Watch dialog
+	* Use bigger font in ChangeLog dialog, use
+	  KGlobalSettings::fixedFont() for KDE2
+
+2001-01-28  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Put sort column indicators in all list views
+	* New Bonsai-like blame annotation view
+	* Reduced free space in log tree, cleaned up the calculation 
+	* Tool tips in log tree contain revision, author and date now
+	  and use Qt's richtext engine; improved positioning
+	* Session-save configuration (order and sort direction) of log list
+	* Removed KDE1 related legacy classes
+	* KDE2 conformant command line handling
+	* Updated manpage to KDE2
+	* Updated libtool/autoconf stuff, should support --prefix now,
+          removed support for --enable-final and --enable-fast-perl
+
+2001-01-27  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Removed superfluous line breaks in log tree tool tips
+	* Fixed bug that prevented cvs info from working when kdehelp
+	  was not installed
+	* Layout fixes in settings dialog
+	* Fixed i18n issue in log list
+	* 1.0beta3 branches from here
+
+2001-01-23  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Now directories are now never ignored via the various .cvsignore mechanisms
+
+2001-01-21  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Try to find a nice user name for the change log dialog
+	  automatically
+	* Don't use entry from change log dialog in commit dialog
+	  if the change log dialog was cancelled
+	* Made close button in history dialog non-autodefault
+
+2001-01-20  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Made all dialogs maximizable/minimizable where it makes sense
+	* Layout fix
+	* Fixed doc/Makefile.am for non-Linux systems (hopefully :-)
+	* In the Old Messages combo in the commit dialog, remove
+	  duplicate entries
+
+2001-01-17  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Patch by Florent Pillet <florent.pillet@opteway.com>:
+	  - In the log dialog, use multi line edits instead of labels
+	  - In the linear log list, additional column with branch
+	* Korean translation by Yu-Chan, Park <super@susekorea.net>
+	* Patch by Wynn Wilkes <wynnw@calderasystems.com>: 
+	  Making path to the cvs client configurable
+	* Some cleanup in function argument list order; don't
+	  let dialogs include toplevel.h, instead turned
+	  variable into a function in misc.h... I'm a purist about
+	  this matter ;-)
+
+2001-01-04  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Always use /bin/sh as shell
+	* When the progress dialog is canceled, kill the
+	  underlying process instead of destroying the
+	  KProcess object. This avoids a (superfluous) warning
+	  from KProcCtrl
+	* Removed Ok button from the dialog.
+	  Patch by Guillaume Laurent <glaurent@telegraph-road.org>
+	* Use KAnimWidget for KDE2
+
+2000-12-21  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Release 1.0beta2
+
+2000-12-13  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Bug fixes for broken diff dialog in KDE 1 version:
+	  + Do not create modeless dialogs with parent
+	  + Create combo box in commit dialog with minimal size
+	* Bug fix in log tree: tool tips showed revisions 
+	  appearing on several branches with the same root
+	* Let cvs ignore ~/.cvsrc file when diffing, as that
+	  may lead to conflicting options
+
+2000-11-24  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Layout improvements in watch dialog
+	* Implemented 'Create patch'
+	* More documentation
+	* Release 1.0beta1
+
+2000-11-21  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* In Import dialog, added options for ignoring files
+	  and for binary imports
+
+2000-11-19  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Fixes for srcdir != builddir
+
+2000-11-11  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Made some fonts and the orientation of the main 
+	  window splitter configurable
+	* Fixed log tree for nested branches
+
+2000-11-10  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* History list can be sorted chronologically
+
+2000-11-09  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* In Last Change dialog, show newer version on the right
+	* Session management for commit dialog
+	* Diff options now customizable
+
+2000-11-08  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Again a patch by Jan Borsodi <jb@ez.no>:
+	  - In Commit dialog, diffs against repository
+	    can be created by selecting files from the
+	    list box
+	  - List of 30 latest log messages is stored
+	    and available via a combo box
+	  - Wheel mouse support in diff view
+	  - Shortcut F5 for Status
+          Thanks :-)
+
+2000-10-27  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Disabled dcop support which doesn't make sense
+	  as long as there's no general convention about
+	  an interface for loading files
+
+2000-10-17  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+	
+	* Ignore empty lines in output of cvs checkout -c
+	  Patch by Jan Borsodi <jb@ez.no>
+	* Added /usr/local/include and /usr/local/lib
+	  to autoconf-checked directories
+	
+2000-10-01  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Protect file names with whitespace in them
+	  Based on a patch by Jeff Cody <jcody@logikos.com> 
+	* Allow it to execute a File->Status
+	  automatically when a sandbox is opened. Separate
+	  options for local and remote repositories
+
+2000-09-19  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Fixed wrong #ifdef statement which disabled
+	  Deselect All and made the selection mechanism
+	  almost unusable with KDE1
+	* In diff view, synchronize both horizontal
+	  and vertical scrollbars
+	* Release 0.7.2
+
+2000-09-16  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Added horizontal scrollbars in diff view
+ 	* Made number of context lines configurable
+	* In directory listing, separate directories from files
+	* Display sticky date tags in a more friendly way
+	* Adjust columns widths in main view dynamically
+	* Set focus explicitly in TagDialog, UpdateDialog 
+          and HistoryDialog whenever radio buttons change
+	* Set initial focus in some dialogs
+	* Added more accelerators in CheckoutDialog
+	  and WatchDialog
+	* Fixed recursive removes
+	* Do no try to read non-existent directories
+	* More precise coordinate computation on change bar
+	  avoids stripes in certain circumstances
+	* Fixed highlighted text color
+	* Show newest revisions first in log message list
+	* Release 0.7.1
+
+2000-09-15  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Avoid -no-rtti because some crap code in
+	  kdelibs crashes without rtti
+	* Fixed selection by keyboard in log message list
+	* Avoid exploding status bar width with
+	  long command lines
+	* Fixed "Deselect all" accelerator
+
+2000-09-10  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Fixed dist target
+	* Release 0.7.0
+
+2000-09-09  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Fixed spinning gear for KDE2
+	* Fixed misinterpretation of mouse events in
+	  log list for KDE2
+
+2000-09-08  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Backporting to KDE1. It becomes annoying :-(
+	* Polished log tree and log list
+	* Reduced flicker a lot
+
+2000-09-05  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Implemented change bar in diff frontend
+
+2000-09-03  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* New diff frontend, based on unified diffs instead
+	  of --side-by-side.
+	* Keybindings for arrow keys in diff and resolve
+	  dialogs.
+	* Fixed caption/about data for KDE2
+
+2000-08-29  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Fixed Remove behaviour, which may be recursive or not
+
+2000-07-13  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Fixed problems with latest kdelibs2 and gcc 2.96
+	  (thanks to Stan Bubrouski)
+	* Error messages don't confuse the 'Fetch list'
+	  item in the check out dialog any more
+	* Using QFileDialog instead of completely
+	  broken KFileDialog::getExistingDirectory()
+
+2000-05-28  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Quote file name when calling an editor
+
+2000-05-17  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Improvements in the logdialog/log tree by
+	  Florent Pillet <florent.pillet@opteway.com>
+	* Implemented 'Delete tag'
+
+2000-05-07  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Implemented Add Watch, Remove watch,
+	  Show watchers
+
+2000-04-25  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Added option to automatically call 'cvs edit' whenever
+	  a read-only file is edited. Based on a patch by
+	  Steffen Dettmer <steffen@dett.de>. Thanks!
+
+2000-04-15  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Added documentation for repository access
+	* Release 0.6.0
+
+2000-04-14  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Fixed "Open recent" for Qt 2.x
+	* Fixed caption for KDE 2.x
+
+2000-04-11  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Made repositories dialog usable.
+
+2000-04-09  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* New quoting mechanism which is reliable also when 
+	  log messages/file names contain $ or '
+	  Thanks for the hint, Walter!
+
+2000-03-09  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Put ok and cancel buttons in the progress dialog
+	  to avoid confusion
+
+2000-03-06  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* The combo boxes in the log dialog now indicate
+	  that chosing a branch tag selects the branch point
+	* Repository dialog, unfinished.
+
+2000-03-05  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Replaced all Done's with Close's
+	* Moved Add binary from Advanced to File menu
+	* Enabled tag selectors in log dialog now also for KDE 2
+	* Implemented "Open recent"
+	* Implemented "History"
+
+2000-03-04  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Added a button in the checkout dialog to obtain
+	  a list of modules
+	* Improved error message detection
+	* Show sandbox in caption
+
+2000-03-02  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Much more detailed pseudo session management.
+	  Please delete your cervisiarc file!
+
+2000-02-21  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Fixed Checkout and Import which were not working at all
+	* Check tag names in checkout and import dialog
+	* Fixed accelerators and added some more
+	* Implemented "Merge"
+	* Implemented "Prune empty directories"
+	* Implemented "Select by tag" in log dialog
+	* Release 0.5.0
+
+2000-02-20  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Fixed bug which caused tooltips for revisions
+	  an branches to disappear in the log tree
+	* Tags, branches and branchpoints as tooltips in log tree
+	* Improved log dialog layout
+	* Implemented "Add binary"
+
+2000-02-17  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Handle hidden files correctly
+	* Do not ignore case in files sorting
+	* Implemented "Last change"
+	* Release 0.4.0
+
+2000-02-15  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Implemented "Update to tag" and "Update to HEAD"
+	* Implemented "Tag"
+
+2000-02-14  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Implemented options "Commit recursively" and 
+	  "Create directories"
+	* Ported Checkout/Import dialog to the new scheme
+
+2000-02-13  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Rewritten the whole UpdateView (well, almost :-). Now it allows 
+	  to show and update the revision and tag field. 
+	* Real support for asynchronous operation of Update, Commit, Add
+	  and remove: output goes to new ProtocolView
+	* Fixed "Unfold Tree"
+	* Fixed crash caused by too many open files 
+	  (.cvsignore files were never closed)
+	
+
+2000-02-08  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Ported documentation to docbook, added some
+          more stuff and adjusted automake system accordingly
+
+2000-02-06  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Updated autoconf framework to work correctly
+	  with both KDE 1 and KDE 2
+	
+1999-12-19  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* In Checkout dialog, use $CVSROOT as default repository
+	  (if defined)
+	* Added command line arguments --help and --version
+
+1999-11-23  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Fixed bug which caused files mistakenly marked as up to date
+	* Fixed options menu
+	* Show wait cursor while child process runs in background
+	* Made Ok button in settings dialog the default
+        * Release 0.3.1
+
+1999-11-21  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* ChangeLog editor
+	* Release 0.3.0
+
+1999-11-20  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Solution of the startup problem: pseudo-session management
+        * Simpler handling of command line argument
+	* Tooltips in LogTree show log message
+
+1999-10-31  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* DCOP support for KDE HEAD branch
+	* Settings dialog
+	* Context menu
+	* Doubleclick opens file
+	* 'Open Sandbox' 
+
+1999-09-22  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* KDE2 is really a moving target => more porting: 
+	  replaced KQuickHelp by QWhatsThis,
+	  #defined Icon BarIcon
+	* Made editor configurable
+	
+1999-08-07  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Spinning gear for SubProcDialog and CvsProgressDialog
+	* Reorganized the whole 'mark updated' code. As 
+	  a side effect, there is no more confusion about
+	  bogus 'Up to date' files
+	* Save/load options
+	* Implemented 'Unfold tree'
+	* man page
+	* Release 0.2.1
+
+1999-08-04  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Fixed disappearing revision in log tree view
+	  when branch is longer than trunk
+	* Changed .kdelnk from Applications -> Development
+	* Release 0.2
+
+1999-08-03  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Implemented recursive update
+	
+1999-08-02  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Changed update, diff and annotate to use
+	  the new CvsProgressDialog
+	* Preparations for multi log dialog
+	* Fixed memory leaks in modeless dialogs
+	  which didn't delete themselves on closeEvent()
+
+1999-08-01  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Implemented CvsProgressDialog which will show error 
+	  messages for things like 'update' and allow the user 
+	  to interrupt the operation if cvs hangs.
+	  It's _very_ smart :-)
+
+1999-07-31  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Commit/Add/Remove now show SubProcDialog
+	  to give the user feedback
+	* Preparations for better error handling:
+	  parseXXX routines return bool now
+	* Commented out some of the DEBUGOUT.
+	  It was just _too_ much ;-)
+
+1999-07-20  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Ported to KDE 2
+
+1999-07-19  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Implemented "Import"
+	* Release 0.1
+
+1999-07-17  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Another trial in the "Startup in non-CVS directories" 
+          game
+	* Layout corrections in Checkout dialog
+	* Mark selections in LogTreeView, 
+	  synchronized with LogListView
+	
+1999-07-15  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Gave up on learning docbook. Some documentation
+	  in linuxdoc is now available.
+
+1999-06-01  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Option -askdir 
+	* Update status field for 'up to date' files
+	* Release 0.0.2
+
+1999-05-25  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Set colors in DiffView explicitly
+
+1999-05-17  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Fixed 'cvs commit' command
+	* Preparations for i18n
+	
+1999-05-11  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Release 0.0.1
+

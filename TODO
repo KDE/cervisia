@@ -1,0 +1,30 @@
+Ideas in no special order
+
+* Configurable popup menu
+
+* Per-repository settings like compression,
+  enabling of watch/edit/lock features
+
+* Make change log font configurable
+
+* Log dialog option: Show only tagged revisions
+
+* Log dialog option: Show only your revisions
+
+* Log dialog: Allow to select latest on branch
+
+* Multi Log view
+
+* Diff against HEAD
+
+* Diff between any revision and the sandbox
+
+* Implement "Add to .cvsignore"
+
+* Make colors customizable
+
+* cvs init
+
+* Checkout by tag
+
+* Implement a nice workaround for $CVSROOT/CVSROOT/cvsignore

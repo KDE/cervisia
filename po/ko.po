@@ -1,0 +1,1234 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# -----------------------------------------------------------
+# 만약 약간의 잘못된 번역이나 수정사항이 있다면 
+# super@susekorea.net 나 dbcks@chollian.net 으로 메일을
+# 보내주시기 바랍니다.
+# 
+# If there are missprint or wrong translate it to korean
+# please send mail as follow
+#  super@susekorea.net, dbcks@chollian.net
+#
+#			Yu-Chan, Park.
+# -----------------------------------------------------------
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2001-02-17 14:00+0100\n"
+"PO-Revision-Date: 2001-01-05 15:38+0900\n"
+"Last-Translator: Yu-Chan, Park <super@susekorea.net>\n"
+"Language-Team: korean <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=euckr\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: settingsdlg.cpp:184 toplevel.cpp:108
+msgid "Open File"
+msgstr "파일 열기"
+
+#: toplevel.cpp:110
+msgid "Update Files"
+msgstr "파일 갱신"
+
+#: settingsdlg.cpp:129 toplevel.cpp:112 updateview.cpp:606
+msgid "Status"
+msgstr "상태"
+
+#: toplevel.cpp:114
+msgid "Commit file"
+msgstr "파일에 주석 달기"
+
+#: toplevel.cpp:116
+msgid "Add File to Repository"
+msgstr "저장소에 파일 추가"
+
+#: toplevel.cpp:118
+msgid "Remove File from Repository"
+msgstr "저장소에서 파일 제거"
+
+#: toplevel.cpp:120
+msgid "Browse log file"
+msgstr "로그 파일 찾기"
+
+#: toplevel.cpp:122
+msgid "View Annotate"
+msgstr "주석 보기"
+
+#: toplevel.cpp:124
+msgid "Diff against repository"
+msgstr "저장소와 차이점"
+
+#: toplevel.cpp:126
+msgid "Hide all files"
+msgstr ""
+
+#: toplevel.cpp:128
+#, fuzzy
+msgid "Hide up-to-date files"
+msgstr "파일 갱신"
+
+#: toplevel.cpp:172
+msgid "O&pen Sandbox..."
+msgstr "탐색박스 열기(&p)..."
+
+#: toplevel.cpp:174
+#, fuzzy
+msgid "Op&en recent..."
+msgstr "최근 내용 열기(&p)..."
+
+#: toplevel.cpp:176
+msgid "&Insert ChangeLog entry..."
+msgstr "ChangeLog 항목을 삽입(&I)..."
+
+#: toplevel.cpp:183
+msgid "&Status"
+msgstr "상태(&S)"
+
+#: toplevel.cpp:190 toplevel.cpp:464
+msgid "Reso&lve..."
+msgstr "분석하기(&l)..."
+
+#: toplevel.cpp:195 toplevel.cpp:466
+msgid "&Commit..."
+msgstr "주석(&C)..."
+
+#: toplevel.cpp:197 toplevel.cpp:468
+msgid "&Add to Repository..."
+msgstr "저장소에 추가(&A)..."
+
+#: toplevel.cpp:199
+msgid "Add &binary..."
+msgstr "바이너리 추가(&b)..."
+
+#: toplevel.cpp:201 toplevel.cpp:470
+msgid "&Remove from Repository..."
+msgstr "저장소에서 제거(&R)..."
+
+#: toplevel.cpp:203
+msgid "Rever&t"
+msgstr ""
+
+#: toplevel.cpp:216
+msgid "Browse &Log..."
+msgstr "Log 보기(&L)..."
+
+#: toplevel.cpp:219
+msgid "Browse Multi-File Log..."
+msgstr "여러개의 파일 로그 보기..."
+
+#: toplevel.cpp:222
+msgid "&Annotate..."
+msgstr "주석달기(&A)..."
+
+#: toplevel.cpp:224
+msgid "&Difference to Repository..."
+msgstr "저장소와의 차이점(&D)..."
+
+#: toplevel.cpp:226
+msgid "Last &Change..."
+msgstr "최근 변경사항(&C)..."
+
+#: toplevel.cpp:228
+msgid "&History..."
+msgstr "히스토리(&H)..."
+
+#: toplevel.cpp:234
+msgid "&Unfold file tree"
+msgstr "펼쳐진 파일 트리(&U)"
+
+#: toplevel.cpp:236
+#, fuzzy
+msgid "&Fold file tree"
+msgstr "펼쳐진 파일 트리(&U)"
+
+#: toplevel.cpp:244
+msgid "&Tag/Branch..."
+msgstr "태그(&T)/분기..."
+
+#: toplevel.cpp:246
+msgid "&Delete Tag..."
+msgstr "태그 삭제(&D)..."
+
+#: toplevel.cpp:248
+msgid "&Update to Tag/Date..."
+msgstr "태그/날짜 갱신(&U)..."
+
+#: toplevel.cpp:250
+msgid "Update to &HEAD"
+msgstr "HEAD를 갱신(&H)"
+
+#: toplevel.cpp:252
+msgid "&Merge..."
+msgstr "통합(&M)..."
+
+#: toplevel.cpp:257
+msgid "&Add watch..."
+msgstr "와치(watch) 추가(&A)..."
+
+#: toplevel.cpp:259
+msgid "&Remove watch..."
+msgstr "와치(watch) 제거(&R)..."
+
+#: toplevel.cpp:261
+#, fuzzy
+msgid "Show &watchers"
+msgstr "와치어(watcher) 보기(&S)"
+
+#: toplevel.cpp:266
+#, fuzzy
+msgid "&Lock files"
+msgstr "파일 무시(&I):"
+
+#: toplevel.cpp:268
+#, fuzzy
+msgid "U&nlock files"
+msgstr "파일 무시(&I):"
+
+#: toplevel.cpp:273
+#, fuzzy
+msgid "Create &patch against repository"
+msgstr "저장소와 차이점"
+
+#: toplevel.cpp:281
+msgid "&Checkout..."
+msgstr "체크아웃(&C)..."
+
+#: toplevel.cpp:283
+msgid "&Import..."
+msgstr "가져오기(&I)..."
+
+#: toplevel.cpp:288
+msgid "&Repositories..."
+msgstr "저장소(&R)..."
+
+#: toplevel.cpp:296
+msgid "Hide all &files"
+msgstr ""
+
+#: toplevel.cpp:298
+msgid "Hide up-&to-date files"
+msgstr ""
+
+#: toplevel.cpp:300
+#, fuzzy
+msgid "Hide removed files"
+msgstr "파일 갱신"
+
+#: toplevel.cpp:305
+msgid "Create &directories on update"
+msgstr "갱신할때 디렉토리 생성(&d)"
+
+#: toplevel.cpp:307
+msgid "&Prune empty directories on update"
+msgstr "갱신할때 비어있는 디렉토리 자르기(&P)"
+
+#: toplevel.cpp:309
+msgid "&Update recursively"
+msgstr "되풀이하여 갱신하기(&U)"
+
+#: toplevel.cpp:311
+#, fuzzy
+msgid "C&ommit and remove recursively"
+msgstr "되풀이하여 주석달고 제거하기(C)"
+
+#: toplevel.cpp:313
+msgid "Do cvs &edit automatically when necessary"
+msgstr "필요하면 자동적으로 cvs 편집(&e)"
+
+#: toplevel.cpp:318
+#, fuzzy
+msgid "&Configure Cervisia..."
+msgstr "키바인더 설정(&k)..."
+
+#: toplevel.cpp:320
+msgid "Configure &keybindings..."
+msgstr "키바인더 설정(&k)..."
+
+#: toplevel.cpp:330
+msgid "CVS &Info"
+msgstr "CVS 정보(&I)"
+
+#: toplevel.cpp:332
+msgid "&About Cervisia"
+msgstr "케르비시아에 관하여(&A)"
+
+#: toplevel.cpp:338
+msgid "&Advanced"
+msgstr "고급 설정(&A)"
+
+#: toplevel.cpp:339
+msgid "&Repository"
+msgstr "저장소(&R)"
+
+#: toplevel.cpp:371
+msgid "Commit"
+msgstr "주석"
+
+#: toplevel.cpp:375
+msgid "Update"
+msgstr "갱신"
+
+#: toplevel.cpp:381
+msgid "Open file"
+msgstr "파일 열기"
+
+#: toplevel.cpp:400
+msgid ""
+"F - All files are hidden, the tree shows only directories\n"
+"N - All up-to-date files are hidden\n"
+"R - All removed files are hidden"
+msgstr ""
+
+#: toplevel.cpp:409
+msgid "Opens a CVS working directory in the main window"
+msgstr ""
+
+#: toplevel.cpp:410
+msgid "Opens a recently used CVS working directory"
+msgstr ""
+
+#: toplevel.cpp:411
+msgid "Opens the ChangeLog file in the sandbox for editing"
+msgstr ""
+
+#: toplevel.cpp:412
+msgid "Updates (cvs update) the selected files and directories"
+msgstr ""
+
+#: toplevel.cpp:413
+msgid ""
+"Updates the status (cvs -n update) of the selected files and directories"
+msgstr ""
+
+#: toplevel.cpp:414
+msgid "Opens the marked file for editing"
+msgstr ""
+
+#: toplevel.cpp:415
+msgid "Opens the resolve dialog with the selected file"
+msgstr ""
+
+#: toplevel.cpp:416
+#, fuzzy
+msgid "Commits the selected files"
+msgstr "다음 파일을 수용:"
+
+#: toplevel.cpp:417
+#, fuzzy
+msgid "Adds (cvs add) the selected files to the repository"
+msgstr "저장소에 다음 파일을 추가:"
+
+#: toplevel.cpp:418
+#, fuzzy
+msgid "Adds (cvs -kb add) the selected files as binaries to the repository"
+msgstr "저장소에 다음 바이너리 파일을 추가:"
+
+#: toplevel.cpp:419
+#, fuzzy
+msgid "Removes (cvs remove) the selected files from the repository"
+msgstr "저장소에서 다음 파일을 제거:"
+
+#: toplevel.cpp:420
+msgid "Reverts (cvs update -C) the selected files (only cvs 1.11)"
+msgstr ""
+
+#: toplevel.cpp:421
+#, fuzzy
+msgid "Quits Cervisia"
+msgstr "케르비시아에 관하여(&A)"
+
+#: toplevel.cpp:422
+msgid "Shows the revision tree of the selected file"
+msgstr ""
+
+#: toplevel.cpp:423
+msgid "Shows a blame-annotated view of the selected file"
+msgstr ""
+
+#: toplevel.cpp:424
+msgid "Shows the differences of the selected file to the BASE version"
+msgstr ""
+
+#: toplevel.cpp:425
+msgid ""
+"Shows the differences between the last two revisions of the selected file"
+msgstr ""
+
+#: toplevel.cpp:426
+msgid "Shows the CVS history as reported by the server"
+msgstr ""
+
+#: toplevel.cpp:427
+msgid "Opens all branches of the file tree"
+msgstr ""
+
+#: toplevel.cpp:428
+msgid "Closes all branches of the file tree"
+msgstr ""
+
+#: toplevel.cpp:429
+msgid "Creates a tag or branch for the selected files"
+msgstr ""
+
+#: toplevel.cpp:430
+msgid "Deletes a tag from the selected files"
+msgstr ""
+
+#: toplevel.cpp:431
+msgid "Updates the selected files to a given tag, branch or date"
+msgstr ""
+
+#: toplevel.cpp:432
+msgid "Updates the selected files to the HEAD revision"
+msgstr ""
+
+#: toplevel.cpp:433
+msgid "Merges a branch or a set of modifications into the selected files"
+msgstr ""
+
+#: toplevel.cpp:434
+#, fuzzy
+msgid "Adds a watch for the selected files"
+msgstr "이벤트에 따라 와치 추가:"
+
+#: toplevel.cpp:435
+#, fuzzy
+msgid "Removes a watch from the selected files"
+msgstr "이벤트에 따라 와치 제거:"
+
+#: toplevel.cpp:436
+msgid "Shows the watchers of the selected files"
+msgstr ""
+
+#: toplevel.cpp:437
+msgid "Locks the selected files, so that others can't modify them"
+msgstr ""
+
+#: toplevel.cpp:438
+#, fuzzy
+msgid "Unlocks the selected files"
+msgstr "다음 파일을 수용:"
+
+#: toplevel.cpp:439
+msgid "Creates a patch from the modifications in your sandbox"
+msgstr ""
+
+#: toplevel.cpp:440
+msgid "Allows you to checkout a module from a repository"
+msgstr ""
+
+#: toplevel.cpp:441
+msgid "Allows you to import a module into a repository"
+msgstr ""
+
+#: toplevel.cpp:442
+#, fuzzy
+msgid "Configures a list of repositories you regularly use"
+msgstr "저장소 접근 설정"
+
+#: toplevel.cpp:443
+msgid "Determines whether only directories are shown"
+msgstr ""
+
+#: toplevel.cpp:444
+#, fuzzy
+msgid "Determines whether up-to-date files are hidden"
+msgstr "되풀이하여 주석달고 제거하기(C)"
+
+#: toplevel.cpp:445
+#, fuzzy
+msgid "Determines whether removed files are hidden"
+msgstr "되풀이하여 주석달고 제거하기(C)"
+
+#: toplevel.cpp:446
+msgid "Determines whether updates create directories"
+msgstr ""
+
+#: toplevel.cpp:447
+msgid "Determines whether updates remove empty directories"
+msgstr ""
+
+#: toplevel.cpp:448
+msgid "Determines whether updates are recursive"
+msgstr ""
+
+#: toplevel.cpp:449
+#, fuzzy
+msgid "Determines whether commits and removes are recursive"
+msgstr "되풀이하여 주석달고 제거하기(C)"
+
+#: toplevel.cpp:450
+msgid "Determines whether automatical cvs edit is active"
+msgstr ""
+
+#: toplevel.cpp:451
+#, fuzzy
+msgid "Configures Cervisia"
+msgstr "케르비시아에 관하여(&A)"
+
+#: toplevel.cpp:452
+#, fuzzy
+msgid "Configures key bindings"
+msgstr "키바인더 설정(&k)..."
+
+#: toplevel.cpp:453
+msgid "Opens the help browser with Cervisia's documentation"
+msgstr ""
+
+#: toplevel.cpp:454
+msgid "Opens the help browser with the CVS documentation"
+msgstr ""
+
+#: toplevel.cpp:455 toplevel.cpp:531
+#, fuzzy
+msgid "About Cervisia"
+msgstr "케르비시아에 관하여(&A)"
+
+#: toplevel.cpp:519
+#, fuzzy, ycp-format
+msgid ""
+"Cervisia %1\n"
+"(Using KDE %2)\n"
+"\n"
+"Copyright (C) 1999-2001\n"
+"Bernd Gehrmann <bernd@physik.hu-berlin.de>\n"
+"\n"
+"This program may be distributed under the terms of the Q Public\n"
+"License as defined by Trolltech AS of Norway and appearing in the\n"
+"file LICENSE.QPL included in the packaging of this file.\n"
+"\n"
+"This program is distributed in the hope that it will be useful,\n"
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+msgstr ""
+"Bernd Gehrmann <bernd@physik.hu-berlin.de>\n"
+"\n"
+"이 프로그램은 노르웨이의 트롤테크(Trolltech)사에서 정의한 QPL\n"
+"라이센스하에서 배포되며 이 라이센스는 이 파일의 꾸러미에 포함되어있는 \n"
+"LICENSE.QPL 파일에서 나타나있습니다.\n"
+"\n"
+"이 프로그램은 매우 유용할 것이라 생각하였기에 배포하는 것이지만\n"
+"어떠한 책임 즉, 암시적으로 상용이나 특정 목적에 일치하는 내용이\n"
+"없습니다."
+
+#: toplevel.cpp:538
+msgid "Open Sandbox"
+msgstr "스캔박스 열기"
+
+#: resolvedlg.cpp:257 toplevel.cpp:1049
+msgid "Could not open file for writing."
+msgstr "기록하기 위해 파일을 열 수 없습니다."
+
+#: toplevel.cpp:1184
+msgid "The revision looks invalid."
+msgstr "수정 번호이 유효하지 않습니다."
+
+#: toplevel.cpp:1189
+msgid "The is the first revision on the branch."
+msgstr "분기에서 처음으로 수정된것입니다."
+
+#: toplevel.cpp:1292
+msgid "Invoking help on Cervisia"
+msgstr "케르비시아에 대한 도움말 보여주기"
+
+#: toplevel.cpp:1299
+msgid "Invoking help on CVS"
+msgstr "CVS에 대한 도움말 보여주기"
+
+#: toplevel.cpp:1315
+msgid "Done"
+msgstr "완료"
+
+#: toplevel.cpp:1331
+msgid "This is not a CVS directory."
+msgstr "CVS 디렉토리가 아닙니다."
+
+#: updateview.cpp:541 updateview.cpp:621
+msgid "Locally Modified"
+msgstr "로칼에서 수정됨"
+
+#: updateview.cpp:543 updateview.cpp:619
+msgid "Locally Added"
+msgstr "로칼에서 추가됨"
+
+#: updateview.cpp:545 updateview.cpp:620
+msgid "Locally Removed"
+msgstr "로칼에서 제거됨"
+
+#: updateview.cpp:547 updateview.cpp:616
+msgid "Needs Update"
+msgstr "갱신이 필요함"
+
+#: updateview.cpp:549 updateview.cpp:617
+msgid "Needs Patch"
+msgstr "패치가 필요함"
+
+#: updateview.cpp:551 updateview.cpp:618
+msgid "Needs Merge"
+msgstr "통합이 필요함"
+
+#: updateview.cpp:553 updateview.cpp:622
+msgid "Up to date"
+msgstr "날짜까지"
+
+#: updateview.cpp:555 updateview.cpp:623
+msgid "Conflict"
+msgstr "충돌"
+
+#: updateview.cpp:557 updateview.cpp:613
+msgid "Updated"
+msgstr "갱신됨"
+
+#: updateview.cpp:559 updateview.cpp:614
+msgid "Patched"
+msgstr "패치됨"
+
+#: updateview.cpp:561 updateview.cpp:615
+msgid "Removed"
+msgstr "제거됨"
+
+#: updateview.cpp:563 updateview.cpp:624
+msgid "Not in CVS"
+msgstr "CVS에 있지 않음"
+
+#: updateview.cpp:564 updateview.cpp:625
+msgid "Unknown"
+msgstr "알 수 없음"
+
+#: updateview.cpp:605
+msgid "File name"
+msgstr "파일 이름"
+
+#: historydlg.cpp:115 loglist.cpp:140 updateview.cpp:607
+msgid "Revision"
+msgstr "수정 번호"
+
+#: updateview.cpp:608
+msgid "Tag/Date"
+msgstr "태그/날짜"
+
+#: protocolview.cpp:110
+#, ycp-format
+msgid "[Exited with status %1]\n"
+msgstr "[상태 %1 로 종료됨]\n"
+
+#: protocolview.cpp:112
+msgid "[Finished]\n"
+msgstr "[종료됨]\n"
+
+#: protocolview.cpp:115
+msgid "[Aborted]\n"
+msgstr "[취소됨]\n"
+
+#: protocolview.cpp:147
+#, fuzzy
+msgid "Select All"
+msgstr "모두 선택 해제(&s)"
+
+#: watchdlg.cpp:32
+msgid "CVS Watch Add"
+msgstr "CVS 와치 추가"
+
+#: watchdlg.cpp:32
+msgid "CVS Watch Remove"
+msgstr "CVS 와치 제거"
+
+#: watchdlg.cpp:37
+msgid "Add watches for the following events:"
+msgstr "이벤트에 따라 와치 추가:"
+
+#: watchdlg.cpp:38
+msgid "Remove watches for the following events:"
+msgstr "이벤트에 따라 와치 제거:"
+
+#: watchdlg.cpp:42
+msgid "&All"
+msgstr "모두(&A)"
+
+#: watchdlg.cpp:48
+msgid "&Only:"
+msgstr "다음만(&O):"
+
+#: watchdlg.cpp:58
+msgid "&Commits"
+msgstr "수용(&C)"
+
+#: watchdlg.cpp:63
+msgid "&Edits"
+msgstr "편집(&E)"
+
+#: watchdlg.cpp:68
+msgid "&Unedits"
+msgstr "편집하지 않음(&U)"
+
+#: settingsdlg.cpp:56
+#, fuzzy
+msgid "Configure Cervisia"
+msgstr "케르비시아에 관하여(&A)"
+
+#: settingsdlg.cpp:64
+msgid "General"
+msgstr "일반 설정"
+
+#: settingsdlg.cpp:69
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr "진행 대화창의 표시 기간 초과(&T) (초 단위):"
+
+#: settingsdlg.cpp:81
+msgid "&User name for the ChangeLog editor:"
+msgstr "ChangeLog 편집자에 대한 사용자 이름(&U):"
+
+#: settingsdlg.cpp:91
+msgid "&Path to cvs:"
+msgstr ""
+
+#: settingsdlg.cpp:102
+msgid "Diff"
+msgstr "Diff"
+
+#: settingsdlg.cpp:107
+msgid "&Number of context lines in diff dialog:"
+msgstr "diff에 대한 대화창에서 목록 줄 수(&N):"
+
+#: settingsdlg.cpp:118
+msgid "Additional options for cvs &diff:"
+msgstr "CVS 차이점의 추가적인 옵션(&d):"
+
+#: settingsdlg.cpp:134
+msgid ""
+"When opening a sandbox from a &remote repository,\n"
+"start a File->Status command automatically"
+msgstr ""
+"원격 저장소(&r)에서 스캔박스를 열때는 \n"
+"파일->상태 명령을 자동으로 시작합니다."
+
+#: settingsdlg.cpp:139
+msgid ""
+"When opening a sandbox from a &local repository,\n"
+"start a File->Status command automatically"
+msgstr ""
+"로칼 저장소(&l)에서 스캔박스를 열때는 \n"
+"파일->상태 명령을 자동으로 시작합니다."
+
+#: settingsdlg.cpp:153 settingsdlg.cpp:190
+msgid "&Editor:"
+msgstr "편집자(&E):"
+
+#: settingsdlg.cpp:157
+msgid "Use &DCOP"
+msgstr "DCOP 사용(&D)"
+
+#: settingsdlg.cpp:165
+msgid "&Client:"
+msgstr "클라이언트(&C):"
+
+#: settingsdlg.cpp:173
+msgid "&Object:"
+msgstr "객체(&O):"
+
+#: settingsdlg.cpp:199
+msgid "Look & Feel"
+msgstr "속성 및 동작"
+
+#: settingsdlg.cpp:204
+msgid "Font for protocol window"
+msgstr "프로토콜창에 대한 글꼴"
+
+#: settingsdlg.cpp:208
+msgid "Font for annotate view"
+msgstr "주석 달기에 대한 글꼴"
+
+#: settingsdlg.cpp:212
+msgid "Font for diff view"
+msgstr "diff 보기에 대한 글꼴"
+
+#: settingsdlg.cpp:216
+msgid "Split main window &horizontally"
+msgstr "주 창을 수평으로 분할(&h)"
+
+#: changelogdlg.cpp:49
+msgid "Edit ChangeLog"
+msgstr "ChangeLog 편집"
+
+#: changelogdlg.cpp:92
+msgid "The ChangeLog file could not be written."
+msgstr "ChangeLog 파일을 기록할 수 없음."
+
+#: changelogdlg.cpp:138
+msgid "A ChangeLog file does not exist. Create one?"
+msgstr "ChangeLog 파일이 존재하지 않습니다. 생성하시겠습니까?"
+
+#: changelogdlg.cpp:148
+msgid "The ChangeLog file could not be read."
+msgstr "ChangeLog 파일을 읽을 수 없습니다."
+
+#: historydlg.cpp:73 historydlg.cpp:355
+#, fuzzy
+msgid "Commit, Modified "
+msgstr "승인, 수정됨"
+
+#: historydlg.cpp:74 historydlg.cpp:356
+#, fuzzy
+msgid "Commit, Added "
+msgstr "승인, 추가됨"
+
+#: historydlg.cpp:75 historydlg.cpp:357
+#, fuzzy
+msgid "Commit, Removed "
+msgstr "승인, 제거됨"
+
+#: historydlg.cpp:81 historydlg.cpp:348
+#, fuzzy
+msgid "Checkout "
+msgstr "체크아웃"
+
+#: historydlg.cpp:87
+msgid "Tag"
+msgstr "태그"
+
+#: historydlg.cpp:112 loglist.cpp:142
+msgid "Date"
+msgstr "날짜"
+
+#: historydlg.cpp:113
+msgid "Event"
+msgstr "이벤트"
+
+#: historydlg.cpp:114 loglist.cpp:141
+msgid "Author"
+msgstr "저자"
+
+#: historydlg.cpp:117
+msgid "Repo path"
+msgstr "저장소 경로"
+
+#: historydlg.cpp:123
+msgid "Show &commit events"
+msgstr "승인 이벤트 보여주기(&c)"
+
+#: historydlg.cpp:126
+msgid "Show c&heckout events"
+msgstr "체크아웃 이벤트 보여주기(&h)"
+
+#: historydlg.cpp:129
+msgid "Show &tag events"
+msgstr "태그 이벤트 보여주기(&t)"
+
+#: historydlg.cpp:132
+msgid "Show &other events"
+msgstr "다른 이벤트 보여주기(&o)"
+
+#: historydlg.cpp:135
+msgid "Only &user:"
+msgstr "사용자만(&u):"
+
+#: historydlg.cpp:137
+msgid "Only &filenames matching:"
+msgstr "일치하는 파일 이름만(&f):"
+
+#: historydlg.cpp:139
+msgid "Only &directories matching:"
+msgstr "일치하는 디렉토리만(&d):"
+
+#: historydlg.cpp:349
+#, fuzzy
+msgid "Tag "
+msgstr "태그"
+
+#: historydlg.cpp:350
+#, fuzzy
+msgid "Release "
+msgstr "릴리즈"
+
+#: historydlg.cpp:351
+#, fuzzy
+msgid "Update, Deleted "
+msgstr "갱신, 삭제됨"
+
+#: historydlg.cpp:352
+#, fuzzy
+msgid "Update, Copied "
+msgstr "갱신, 복사됨"
+
+#: historydlg.cpp:353
+#, fuzzy
+msgid "Update, Merged "
+msgstr "갱신, 통합됨"
+
+#: historydlg.cpp:354
+#, fuzzy
+msgid "Update, Conflict "
+msgstr "갱신, 충돌함"
+
+#: historydlg.cpp:358
+#, fuzzy
+msgid "Unknown "
+msgstr "알 수 없음"
+
+#: repositorydlg.cpp:40
+msgid "Configure access to repositories"
+msgstr "저장소 접근 설정"
+
+#: repositorydlg.cpp:61
+msgid "&Add..."
+msgstr "추가(&A)..."
+
+#: repositorydlg.cpp:65
+msgid "Login..."
+msgstr "로그인..."
+
+#: repositorydlg.cpp:66
+msgid "Logout..."
+msgstr "로그아웃..."
+
+#: repositorydlg.cpp:170
+msgid "Logged in"
+msgstr "로그인함"
+
+#: repositorydlg.cpp:193 repositorydlg.cpp:241
+msgid "Not logged in"
+msgstr "로그인하지 못함"
+
+#: repositorydlg.cpp:198 repositorydlg.cpp:246
+msgid "No login required"
+msgstr "로그인이 필요없음"
+
+#: repositorydlg.cpp:233
+msgid "This repository is already known."
+msgstr "이 저장소는 이미 알고 있습니다."
+
+#: repositorydlg.cpp:286
+msgid "Add Repository"
+msgstr "저장소 추가"
+
+#: checkoutdlg.cpp:62 repositorydlg.cpp:290
+msgid "&Repository:"
+msgstr "저장소(&R);"
+
+#: repositorydlg.cpp:300
+msgid "Use remote &shell: (only for :ext: repositories)"
+msgstr "원격 쉘을 이용(&s): (단지 :ext: 저장소 에 대해서만)"
+
+#: commitdlg.cpp:44
+msgid "CVS Add"
+msgstr "CVS 추가"
+
+#: commitdlg.cpp:45
+msgid "CVS Add Binary"
+msgstr "CVS에 바이너리 추가"
+
+#: commitdlg.cpp:46
+msgid "CVS Remove"
+msgstr "CVS 제거"
+
+#: commitdlg.cpp:47
+msgid "CVS Commit"
+msgstr "CVS 승인"
+
+#: commitdlg.cpp:52
+msgid "Add the following files to the repository:"
+msgstr "저장소에 다음 파일을 추가:"
+
+#: commitdlg.cpp:53
+msgid "Add the following binary files to the repository:"
+msgstr "저장소에 다음 바이너리 파일을 추가:"
+
+#: commitdlg.cpp:54
+msgid "Remove the following files from the repository:"
+msgstr "저장소에서 다음 파일을 제거:"
+
+#: commitdlg.cpp:55
+msgid "Commit the following &files:"
+msgstr "다음 파일을 수용:"
+
+#: commitdlg.cpp:69
+msgid "Older &messages:"
+msgstr "오래된 메시지:"
+
+#: commitdlg.cpp:79
+msgid "&Log message:"
+msgstr "로그 메시지:"
+
+#: commitdlg.cpp:154
+msgid "Current"
+msgstr "현재"
+
+#: commitdlg.cpp:170
+msgid "(Empty)"
+msgstr "(비어있음)"
+
+#: checkoutdlg.cpp:43
+msgid "CVS Checkout"
+msgstr "CVS 체크아웃"
+
+#: checkoutdlg.cpp:43
+msgid "CVS Import"
+msgstr "CVS 가져오기"
+
+#: checkoutdlg.cpp:71 checkoutdlg.cpp:90
+msgid "&Module:"
+msgstr "모듈(&M):"
+
+#: checkoutdlg.cpp:113
+msgid "Working &directory:"
+msgstr "작업 디렉토리(&d):"
+
+#: checkoutdlg.cpp:124
+msgid "&Vendor Tag:"
+msgstr "벤더 태그(&V):"
+
+#: checkoutdlg.cpp:133
+msgid "&Release Tag:"
+msgstr "릴리즈 태그(&R):"
+
+#: checkoutdlg.cpp:142
+msgid "&Ignore files:"
+msgstr "파일 무시(&I):"
+
+#: checkoutdlg.cpp:146
+msgid "Import as &binaries"
+msgstr "바이너리로 가져오기(&b)"
+
+#: checkoutdlg.cpp:213
+msgid "Please choose an existing working directory."
+msgstr "현재 존재하는 작업 디렉토리를 선택하십시오."
+
+#: checkoutdlg.cpp:219
+msgid "Please specify a module name."
+msgstr "모듈 이름을 명시해주십시오."
+
+#: checkoutdlg.cpp:228
+msgid "Please specify a vendor tag and a release tag."
+msgstr "벤더 태그와 릴리즈 태그를 명시해주십시오."
+
+#: checkoutdlg.cpp:234
+msgid ""
+"Tags must start with a letter and may contain\n"
+"letters, digits and the characters '-' and '_'."
+msgstr ""
+"태그는 반드시 문자로 시작해야 하고 \n"
+"다른 많은 문자와 숫자 그리고 '-'나 '_'를 이용할 수 있습니다."
+
+#: updatedlg.cpp:32
+msgid "CVS Update"
+msgstr "CVS 갱신"
+
+#: updatedlg.cpp:37
+#, fuzzy
+msgid "Update to &branch: "
+msgstr "태그(&t)를 갱신: "
+
+#: updatedlg.cpp:54
+msgid "Update to &tag: "
+msgstr "태그(&t)를 갱신: "
+
+#: updatedlg.cpp:70
+msgid ""
+"Update to &date:\n"
+"(Possible format: 'yyyy-mm-dd')"
+msgstr ""
+"날짜 갱신(&d):\n"
+"(이용 가능한 형식: '년도-월-일')"
+
+#: tagdlg.cpp:36
+msgid "CVS Delete Tag"
+msgstr "CVS 삭제 태그"
+
+#: tagdlg.cpp:36
+msgid "CVS Tag"
+msgstr "CVS 태그"
+
+#: tagdlg.cpp:47 tagdlg.cpp:67
+msgid "&Name of tag:"
+msgstr "태그 이름(&N):"
+
+#: tagdlg.cpp:74
+msgid "Create &branch with this tag"
+msgstr "이 태그를 이용하여 분기를 생성(&b)"
+
+#: tagdlg.cpp:111
+msgid "You must define a tag name."
+msgstr "태그 이름을 반드시 정의해야 합니다."
+
+#: tagdlg.cpp:118
+msgid ""
+"Tag must start with a letter and may containletters, digits and the "
+"characters '-' and '_'."
+msgstr ""
+"태그는 반드시 문자로 시작하고 여러개의 다른 문자나 숫자 그리고 '-'와 '_'를 "
+"포함할 수 있습니다."
+
+#: mergedlg.cpp:33
+msgid "CVS Merge"
+msgstr "CVS 통합"
+
+#: mergedlg.cpp:38
+msgid "Merge from &branch:"
+msgstr "분기를 통합(&b):"
+
+#: mergedlg.cpp:56
+msgid "Merge &modifications:"
+msgstr "수정사항 통합(&m):"
+
+#: mergedlg.cpp:59
+msgid "between tag: "
+msgstr "태그와 : "
+
+#: mergedlg.cpp:64
+msgid "and tag: "
+msgstr "태그 사이: "
+
+#: logdlg.cpp:53
+msgid "&Tree"
+msgstr "트리(&T)"
+
+#: logdlg.cpp:55
+msgid "&List"
+msgstr "목록(&L)"
+
+#: logdlg.cpp:67
+msgid ""
+"Choose revision A by clicking with the leftmouse button,\n"
+"revision B by clicking with the middle mouse button."
+msgstr ""
+"수정 번호 A를 오른쪽 마우스 버튼을 클릭하여 선택하시고, \n"
+"수정 번호 B를 가운데 마우스 버튼을 클릭하여 선택하십시오."
+
+#: logdlg.cpp:94
+msgid "Revision A:"
+msgstr "수정번호 A:"
+
+#: logdlg.cpp:94
+msgid "Revision B:"
+msgstr "수정번호 B:"
+
+#: logdlg.cpp:104
+msgid "Select by tag:"
+msgstr "태그 선택:"
+
+#: logdlg.cpp:112
+msgid "Author:"
+msgstr "저자:"
+
+#: logdlg.cpp:120
+msgid "Date:"
+msgstr "날짜:"
+
+#: logdlg.cpp:128
+msgid "Comment/Tags:"
+msgstr "주석/태그:"
+
+#: logdlg.cpp:138
+msgid ""
+"This revision is used when you click Annotate.\n"
+"It is also used as the first item of a Diff operation."
+msgstr ""
+"이 수정번호는 주석 달기를 클릭할때 이용됩니다.\n"
+"또한 Diff 동작에 대한 처음 항목으로 이용됩니다."
+
+#: logdlg.cpp:141
+msgid "This revision is used as the second item of a Diff operation."
+msgstr "이 수정번호는 Diff 동작에 대한 두번째 항목으로 이용됩니다."
+
+#: logdlg.cpp:156
+msgid "&Diff"
+msgstr ""
+
+#: logdlg.cpp:158
+msgid "&Annotate"
+msgstr "주석달기(&A)"
+
+#: logdlg.cpp:330 loglist.cpp:70
+msgid ""
+"\n"
+"Tag: "
+msgstr ""
+"\n"
+"태그: "
+
+#: logdlg.cpp:337 logdlg.cpp:339
+msgid ""
+"\n"
+"Branchpoint: "
+msgstr ""
+"\n"
+"분기점: "
+
+#: logdlg.cpp:345 loglist.cpp:92
+msgid ""
+"\n"
+"On branch: "
+msgstr ""
+"\n"
+"분기: "
+
+#: logdlg.cpp:378
+msgid " (Branchpoint)"
+msgstr " (분기점)"
+
+#: logdlg.cpp:396
+msgid "Please select revisions A and B first."
+msgstr "수정번호 A와 B를 먼저 선택하십시오."
+
+#: loglist.cpp:143
+#, fuzzy
+msgid "Branch"
+msgstr "태그(&T)/분기..."
+
+#: loglist.cpp:144
+msgid "Comment"
+msgstr "주석"
+
+#: loglist.cpp:145
+msgid "Tags"
+msgstr "태그"
+
+#: diffdlg.cpp:64
+#, fuzzy
+msgid "Synchronize scroll bars"
+msgstr "동기화된 스크롤바"
+
+#: diffdlg.cpp:203 diffdlg.cpp:335
+msgid "Repository"
+msgstr "저장소"
+
+#: diffdlg.cpp:204 diffdlg.cpp:207 diffdlg.cpp:336 diffdlg.cpp:339
+msgid "Revision "
+msgstr "수정 번호 "
+
+#: diffdlg.cpp:206 diffdlg.cpp:338
+msgid "Working dir"
+msgstr "작업 디렉토리"
+
+#: resolvedlg.cpp:46
+msgid "Your Version (A):"
+msgstr "버전 (A):"
+
+#: resolvedlg.cpp:50
+msgid "Other Version (B):"
+msgstr "다른 버전(B):"
+
+#~ msgid "&Settings..."
+#~ msgstr "설정(&S)..."
+
+#~ msgid ""
+#~ "Cervisia %s\n"
+#~ "\n"
+#~ "Copyright (C) 1999-2001\n"
+#~ msgstr ""
+#~ "케르비시아 %s\n"
+#~ "\n"
+#~ "Copyright (C) 1999-2000\n"
+
+#~ msgid "[Exited with error]\n"
+#~ msgstr "[오류로 종료됨]\n"
+
+#~ msgid "Tag:"
+#~ msgstr "태그:"
+
+#~ msgid "Ok"
+#~ msgstr "예"
