@@ -1,3 +1,12 @@
+2002-11-29  Christian Loose <christian.loose@hamburg.de>
+
+	* Fixed automatic cvs edit option which called cvs edit
+	  for more files than necessary
+	* Added support for new .cvspass format introduced with
+	  cvs 1.11.1
+	* Fixed checkout dialog bigger than screen bug
+	* Fixed sort order of the revision numbers in log view
+
 2002-07-25  Christian Loose  <christian.loose@hamburg.de>
 
 	* Use KGenericFactory
@@ -804,5 +813,6 @@
 1999-05-11  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
 
 	* Release 0.0.1
+
 
 
