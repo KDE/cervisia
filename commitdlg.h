@@ -20,6 +20,7 @@
 
 
 class QComboBox;
+class QCheckBox;
 class QListBox;
 class KTextEdit;
 class KConfig;
@@ -46,9 +47,13 @@ private slots:
     void fileSelected(int);
     void fileHighlighted(int);
     void diffClicked();
+    void useTemplateClicked();
 
 private:
     void showDiffDialog(const QString& fileName);
+    void checkForTemplateFile();
+    void addTemplateText();
+    void removeTemplateText();
 
     QListBox *listbox;
     KTextEdit *edit;
@@ -57,6 +62,9 @@ private:
     int current_index;
     QString current_text;
     int highlightedFile;
+
+    QCheckBox* m_useTemplateChk;
+    QString    m_templateText;
     
     KConfig&            partConfig;
     CvsService_stub*    cvsService;     // for diff dialog
