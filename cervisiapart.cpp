@@ -1536,6 +1536,9 @@ void CervisiaPart::openSandbox(const QString &dirname)
     repository = cvsRepository.location();
     emit setWindowCaption(sandbox + "(" + repository + ")");
     
+    // set m_url member for tabbed window modus of Konqueror
+    m_url = KURL::fromPathOrURL(sandbox);
+
     QDir::setCurrent(sandbox);
     update->openDirectory(sandbox);
     setFilter();
