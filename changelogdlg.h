@@ -1,6 +1,7 @@
 /* 
  *  Copyright (C) 1999-2001 Bernd Gehrmann
  *                          bernd@mail.berlios.de
+ *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -24,15 +25,12 @@ class KConfig;
 class ChangeLogDialog : public KDialogBase
 {
 public:
-    explicit ChangeLogDialog( QWidget *parent=0, const char *name=0 );
+    explicit ChangeLogDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
 
     virtual ~ChangeLogDialog();
 
     bool readFile(const QString &fileName);
     QString message();
-
-    static void loadOptions(KConfig *config);
-    static void saveOptions(KConfig *config);
 
 protected:
     virtual void slotOk();
@@ -45,6 +43,7 @@ private:
 
     QString fname;
     KTextEdit *edit;
+    KConfig&   partConfig;
 };
 
 #endif

@@ -645,7 +645,7 @@ void CervisiaPart::slotOpenSandbox()
 void CervisiaPart::slotChangeLog()
 {
     // Modal dialog
-    ChangeLogDialog dlg(widget());
+    ChangeLogDialog dlg(*config(), widget());
     if (dlg.readFile(sandbox + "/ChangeLog"))
     {
         if (dlg.exec())
@@ -1827,8 +1827,6 @@ void CervisiaPart::readDialogProperties( KConfig *config )
     ResolveEditorDialog::loadOptions(config);
     config->setGroup("Commmit dialog");
     CommitDialog::loadOptions(config);
-    config->setGroup("ChangeLog dialog");
-    ChangeLogDialog::loadOptions(config);
     config->setGroup("Checkout dialog");
     CheckoutDialog::loadOptions(config);
     config->setGroup("History dialog");
@@ -1848,8 +1846,6 @@ void CervisiaPart::saveDialogProperties( KConfig *config )
     ResolveEditorDialog::saveOptions(config);
     config->setGroup("Commit dialog");
     CommitDialog::saveOptions(config);
-    config->setGroup("ChangeLog dialog");
-    ChangeLogDialog::saveOptions(config);
     config->setGroup("Checkout dialog");
     CheckoutDialog::saveOptions(config);
     config->setGroup("History dialog");

@@ -36,4 +36,8 @@ File=cervisiapartrc
 Group=Log dialog,LogDialog
 Key=ShowListTab
 RemoveGroup=Log dialog
+#
+Id=kde3.2/20030210
+File=cervisiapartrc
+RemoveGroup=ChangeLog dialog
 

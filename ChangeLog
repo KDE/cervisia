@@ -2,6 +2,9 @@
 
 	* Remove CervisiaShell's dependency on CervisiaPart
 	* Moved filter status indicator to CervisiaPart
+	* Improve dialog size handling for ChangeLog dialog
+	  (use new KDialogBase methods to save the size into 
+	  CervisiaPart's configuration file)
 
 2003-02-06  Christian Loose  <christian.loose@hamburg.de>
 

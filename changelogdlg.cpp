@@ -1,6 +1,7 @@
 /* 
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
+ *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -17,12 +18,16 @@
 #include <qfile.h>
 #include <qtextstream.h>
 #include <kconfig.h>
+#include <kdeversion.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <ktextedit.h>
 #include "misc.h"
-#include "cervisiapart.h"
+
+#if KDE_VERSION < KDE_MAKE_VERSION(3,1,90)
+#include "configutils.h"
+#endif
 
 
 static QString dateStringISO8601()
@@ -34,9 +39,10 @@ static QString dateStringISO8601()
 ChangeLogDialog::Options *ChangeLogDialog::options = 0;
 
 
-ChangeLogDialog::ChangeLogDialog(QWidget *parent, const char *name)
+ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent, const char *name)
     : KDialogBase(parent, name, true, i18n("Edit ChangeLog"),
                   Ok | Cancel, Ok, true)
+    , partConfig(cfg)
 {
     edit = new KTextEdit(this);
     edit->setFont(KGlobalSettings::fixedFont());
@@ -49,16 +55,22 @@ ChangeLogDialog::ChangeLogDialog(QWidget *parent, const char *name)
 
     setMainWidget(edit);
 
-    if (options)
-        resize(options->size);
+#if KDE_IS_VERSION(3,1,90)
+    QSize size = configDialogSize(partConfig, "ChangeLogDialog");
+#else
+    QSize size = Cervisia::configDialogSize(this, partConfig, "ChangeLogDialog");
+#endif
+    resize(size);
 }
 
 
 ChangeLogDialog::~ChangeLogDialog()
 {
-    if (!options)
-        options = new Options;
-    options->size = size();
+#if KDE_IS_VERSION(3,1,90)
+    saveDialogSize(partConfig, "ChangeLogDialog");
+#else
+    Cervisia::saveDialogSize(this, partConfig, "ChangeLogDialog");
+#endif
 }
 
 
@@ -79,26 +91,6 @@ void ChangeLogDialog::slotOk()
     f.close();
 
     KDialogBase::slotOk();
-}
-
-
-void ChangeLogDialog::loadOptions(KConfig *config)
-{
-    if (!config->readEntry("Customized"))
-        return;
-
-    options = new Options;
-    options->size = config->readSizeEntry("Size");
-}
-
-
-void ChangeLogDialog::saveOptions(KConfig *config)
-{
-    if (!options)
-        return;
-
-    config->writeEntry("Customized", true);
-    config->writeEntry("Size", options->size);
 }
 
 
@@ -129,12 +121,13 @@ bool ChangeLogDialog::readFile(const QString &filename)
             f.close();
         }
 
-    KConfig *config = CervisiaPart::config();
-    config->setGroup("General");
+    KConfigGroupSaver cs(&partConfig, "General");
+    const QString username = partConfig.readEntry("Username", userName());
+
     edit->insertParagraph("", 0);
     edit->insertParagraph("\t* ", 0);
     edit->insertParagraph("", 0);
-    edit->insertParagraph(dateStringISO8601() + "  " + config->readEntry("Username", userName()), 0);
+    edit->insertParagraph(dateStringISO8601() + "  " + username, 0);
     edit->setCursorPosition(2, 10);
     
     return true;
