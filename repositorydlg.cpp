@@ -170,7 +170,7 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, CvsService_stub* cvsService,
     m_removeButton = actionbox->addButton(i18n("&Remove"));
     actionbox->addStretch();
     m_loginButton  = actionbox->addButton(i18n("Login..."));
-    m_logoutButton = actionbox->addButton(i18n("Logout..."));
+    m_logoutButton = actionbox->addButton(i18n("Logout"));
     actionbox->addStretch();
     actionbox->layout();
     hbox->addWidget(actionbox, 0);
