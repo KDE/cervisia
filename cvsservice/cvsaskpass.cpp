@@ -48,7 +48,7 @@ int main(int argc, char** argv)
     KApplication app;
 
     if( !KCmdLineArgs::parsedArgs()->count() )
-        return false;
+        return 1;
     
     // parse repository name from the passed argument
     QString prompt = KCmdLineArgs::parsedArgs()->arg(0);
