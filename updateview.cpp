@@ -1121,13 +1121,13 @@ void UpdateView::updateColors()
     KConfig* config(CervisiaPart::config());
     config->setGroup("Colors");
 
-    QColor defaultColor = QColor(255, 100, 100);
+    QColor defaultColor = QColor(255, 130, 130);
     m_conflictColor = config->readColorEntry("Conflict", &defaultColor);
 
-    defaultColor = QColor(190, 190, 237);
+    defaultColor = QColor(130, 130, 255);
     m_localChangeColor = config->readColorEntry("LocalChange", &defaultColor);
 
-    defaultColor = QColor(255, 240, 190);
+    defaultColor = QColor(70, 210, 70);
     m_remoteChangeColor = config->readColorEntry("RemoteChange", &defaultColor);
 }
 

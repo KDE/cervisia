@@ -41,11 +41,11 @@ ProtocolView::ProtocolView(const QCString& appId, QWidget *parent, const char *n
     setFont(config->readFontEntry("ProtocolFont"));
     
     config->setGroup("Colors");
-    QColor defaultColor = QColor(255, 100, 100);
+    QColor defaultColor = QColor(255, 130, 130);
     conflictColor=config->readColorEntry("Conflict",&defaultColor);
-    defaultColor=QColor(190, 190, 237);
+    defaultColor=QColor(130, 130, 255);
     localChangeColor=config->readColorEntry("LocalChange",&defaultColor);
-    defaultColor=QColor(255, 240, 190);
+    defaultColor=QColor(70, 210, 70);
     remoteChangeColor=config->readColorEntry("RemoteChange",&defaultColor);
     
     // create a DCOP stub for the non-concurrent cvs job

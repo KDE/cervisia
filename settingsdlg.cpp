@@ -256,11 +256,11 @@ void SettingsDialog::readSettings()
     splitterbox->setChecked(config->readBoolEntry("SplitHorizontally",true));
 
     config->setGroup("Colors");
-    QColor defaultColor = QColor(255, 100, 100);
+    QColor defaultColor = QColor(255, 130, 130);
     conflictbutton->setColor(config->readColorEntry("Conflict",&defaultColor));
-    defaultColor=QColor(190, 190, 237);
+    defaultColor=QColor(130, 130, 255);
     localchangebutton->setColor(config->readColorEntry("LocalChange",&defaultColor));
-    defaultColor=QColor(255, 240, 190);
+    defaultColor=QColor(70, 210, 70);
     remotechangebutton->setColor(config->readColorEntry("RemoteChange",&defaultColor));
 
     defaultColor=QColor(237, 190, 190);
