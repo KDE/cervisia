@@ -154,6 +154,11 @@ bool ChangeLogDialog::readFile(const QString &filename)
             while (!stream.eof())
                 {
                     QString str = stream.readLine();
+
+                    // preserve empty lines
+                    if (str.isEmpty())
+                        str = "\n";
+
                     edit->append(str);
                 }
             f.close();
