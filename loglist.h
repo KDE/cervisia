@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,8 +12,8 @@
  */
 
 
-#ifndef _LOGLIST_H_
-#define _LOGLIST_H_
+#ifndef LOGLIST_H
+#define LOGLIST_H
 
 #include <qarray.h>
 #include <qlistview.h>
@@ -21,28 +21,10 @@
 
 #include "listview.h"
 
+
+class KConfig;
 class TipLabel;
-
-
-class LogListViewItem : public QListViewItem
-{
-public:
-    
-    LogListViewItem(QListView *list,
-                    const QString &rev, const QString &author, const QString &date,
-                    const QString &comment, const QString &tagcomment);
-
-    virtual QString key(int column, bool) const;
-
-private:
-    static QString truncateLine(const QString &s);
-    static QString extractOrdinaryTags(const QString &s);
-    static QString extractBranchName(const QString &s);
-
-    QString mrev, mauthor, mdate;
-    QString mcomment, mtagcomment;
-    friend class LogListView;
-};
+class LogListViewItem;
 
 
 class LogListView : public ListView
@@ -65,12 +47,12 @@ signals:
 
 protected:
     virtual void contentsMousePressEvent(QMouseEvent *e);
-//    virtual void contentsMouseMoveEvent(QMouseEvent *e);
+    virtual void contentsMouseMoveEvent(QMouseEvent *e);
     virtual void leaveEvent(QEvent *);
     virtual void keyPressEvent(QKeyEvent *e);
 
 private slots:
-//    void headerClicked(int column);
+    void hideLabel();
 
 private:
     struct Options {
@@ -81,8 +63,6 @@ private:
     };
     static Options *options;
     
-    //    int sortColumn;
-    //    bool sortAscending;
     TipLabel *currentLabel;
     LogListViewItem *currentTipItem;
 };
