@@ -122,6 +122,7 @@ public slots:
 
     void slotFoldTree();
     void slotUnfoldTree();
+    void slotUnfoldFolder();
 
     void slotUpdateRecursive();
     void slotCommitRecursive();

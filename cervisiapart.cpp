@@ -610,6 +610,14 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
+    //
+    // Folder context menu
+    //
+    toggaction = new KToggleAction( i18n("Unfold Folder"), 0,
+                                    this, SLOT( slotUnfoldFolder() ),
+                                    actionCollection(), "unfold_folder" );
+    toggaction->setCheckedState(i18n("Fold Folder"));
+
     //action = KStdAction::aboutApp( this, SLOT(aboutCervisia()),
     //               actionCollection(), "help_about_cervisia" );
 }
@@ -620,7 +628,11 @@ void CervisiaPart::popupRequested(KListView*, QListViewItem* item, const QPoint&
     QString xmlName = "context_popup";
 
     if( isDirItem(item) && update->fileSelection().isEmpty() )
+    {
         xmlName = "folder_context_popup";
+        KToggleAction* action = static_cast<KToggleAction*>(actionCollection()->action("unfold_folder"));
+        action->setChecked(item->isOpen());
+    }
 
     if( QPopupMenu* popup = static_cast<QPopupMenu*>(hostContainer(xmlName)) )
     {
@@ -667,6 +679,10 @@ void CervisiaPart::updateActions()
     bool single = update->hasSingleSelection();
     stateChanged("has_single_selection", single ? StateNoReverse
                                                 : StateReverse);
+
+    bool singleFolder = (update->multipleSelection().count() == 1);
+    stateChanged("has_single_folder", singleFolder ? StateNoReverse
+                                                   : StateReverse);
 
     m_browserExt->setPropertiesActionEnabled(single);
 
@@ -1542,6 +1558,14 @@ void CervisiaPart::slotUnfoldTree()
     update->unfoldTree();
     setFilter();
 }
+
+
+void CervisiaPart::slotUnfoldFolder()
+{
+    update->unfoldSelectedFolders();
+    setFilter();
+}
+
 
 void CervisiaPart::slotCreateDirs()
 {

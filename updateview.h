@@ -67,6 +67,7 @@ signals:
     void fileOpened(QString filename);
     
 public slots:
+    void unfoldSelectedFolders();
     void unfoldTree();
     void foldTree();
     void finishJob(bool normalExit, int exitStatus);
