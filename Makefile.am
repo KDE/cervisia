@@ -3,7 +3,9 @@ INCLUDES = -I./cvsservice -D_BSD_SOURCE $(all_includes)
 
 SUBDIRS = cvsservice . pics
 
-bin_PROGRAMS = cervisia
+bin_PROGRAMS =
+lib_LTLIBRARIES =
+kdeinit_LTLIBRARIES = cervisia.la
 kde_module_LTLIBRARIES = libcervisiapart.la
 noinst_LTLIBRARIES = libcervisia.la
 
@@ -27,10 +29,10 @@ libcervisiapart_la_LIBADD = $(LIB_KFILE) $(LIB_KPARTS) $(LIB_KUTILS) \
 		   cvsservice/libcvsservice.la libcervisia.la
 libcervisiapart_la_COMPILE_FIRST = cvsservice/cvsservice_stub.h cervisiasettings.h
 
-cervisia_SOURCES = main.cpp cervisiashell.cpp
-cervisia_LDFLAGS = $(all_libraries) $(KDE_RPATH)
-cervisia_LDADD = $(LIB_KPARTS) $(LIB_KUTILS) cvsservice/libcvsservice.la libcervisia.la
-cervisia_COMPILE_FIRST = cvsservice/cvsservice_stub.h cervisiasettings.h
+cervisia_la_SOURCES = main.cpp cervisiashell.cpp
+cervisia_la_LDFLAGS = $(all_libraries) $(KDE_RPATH) -module $(KDE_PLUGIN)
+cervisia_la_LIBADD = $(LIB_KPARTS) $(LIB_KUTILS) cvsservice/libcvsservice.la libcervisia.la
+cervisia_la_COMPILE_FIRST = cvsservice/cvsservice_stub.h cervisiasettings.h
 
 man_MANS = cervisia.1
 
