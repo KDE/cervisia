@@ -63,9 +63,7 @@ public:
 
     virtual ~LogDialog();
 
-    bool parseCvsLog(const QString &sbox, const QString &repo, const QString &fname);
-
-    bool parseCvsLog(DCOPRef& cvsService, const QString& fileName);
+    bool parseCvsLog(DCOPRef& service, const QString& fileName);
 
     static void loadOptions(KConfig *config);
     static void saveOptions(KConfig *config);
@@ -102,7 +100,7 @@ private:
     QTextEdit *tagsbox[2];
     QComboBox *tagcombo[2];
 
-    DCOPRef mCvsService;
+    DCOPRef cvsService;
 };
 
 #endif

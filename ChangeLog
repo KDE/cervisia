@@ -1,6 +1,7 @@
 2002-12-31  Christian Loose <christian.loose@hamburg.de>
 
 	* Separate GUI from functionality for AnnotateDialog
+	* Use DCOP service for log dialog
 
 2002-12-29  Christian Loose <christian.loose@hamburg.de>
 

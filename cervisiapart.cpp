@@ -36,6 +36,7 @@
 #include "diffdlg.h"
 #include "resolvedlg.h"
 #include "annotatedlg.h"
+#include "annotatectl.h"
 #include "commitdlg.h"
 #include "updatedlg.h"
 #include "checkoutdlg.h"
@@ -936,7 +937,7 @@ void CervisiaPart::slotBrowseLog()
 
     // Non-modal dialog
     LogDialog *l = new LogDialog();
-    if (l->parseCvsLog(sandbox, repository, filename))
+    if (l->parseCvsLog(cvsService, filename))
         l->show();
     else
         delete l;
@@ -970,10 +971,8 @@ void CervisiaPart::slotAnnotate()
 
     // Non-modal dialog
     AnnotateDialog *l = new AnnotateDialog();
-    if (l->parseCvsAnnotate(cvsService, filename, ""))
-        l->show();
-    else
-        delete l;
+    AnnotateController ctl(l, &cvsService);
+    ctl.showDialog(filename);
 }
 
 
