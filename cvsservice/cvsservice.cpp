@@ -209,7 +209,7 @@ DCOPRef CvsService::checkout(const QString& workingDir, const QString& repositor
     if( !tag.isEmpty() )
         *d->singleCvsJob << "-r" << tag;
 
-    if( pruneDirs )
+    if( pruneDirs && !exportOnly )
         *d->singleCvsJob << "-P";
 
     if( !alias.isEmpty() )
