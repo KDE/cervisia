@@ -41,6 +41,8 @@ namespace
 
     bool isDirItem(const QListViewItem* item)
     {
+        if( !item )
+            return false;
         return item->rtti() == g_dirItemRtti;
     }
 
