@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -38,7 +38,7 @@ CervisiaShell::CervisiaShell( const char *name )
     setCentralWidget( part->widget() );
 
     setupActions();
-    
+
     // create the active filter indicator and add it to the statusbar
     filterLabel = new QLabel("UR", statusBar());
     filterLabel->setFixedSize(filterLabel->sizeHint());
@@ -65,6 +65,8 @@ CervisiaShell::CervisiaShell( const char *name )
              statusBar(), SLOT( clear() ) );
 
     createGUI( part );
+
+    setAutoSaveSettings();
 }
 
 CervisiaShell::~CervisiaShell()
@@ -81,7 +83,7 @@ void CervisiaShell::setupActions()
     QString hint = i18n("Allows you to configure the toolbar");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
-    
+
     action = KStdAction::keyBindings( this, SLOT(slotConfigureKeys()),
                                       actionCollection() );
     hint = i18n("Allows you to customize the keybindings");
@@ -134,9 +136,15 @@ void CervisiaShell::slotConfigureKeys()
 
 void CervisiaShell::slotConfigureToolBars()
 {
-    KEditToolbar dlg( actionCollection() );
-    if ( dlg.exec() )
-        createGUI( part );
+    saveMainWindowSettings( KGlobal::config(), autoSaveGroup() );
+    KEditToolbar dlg( factory() );
+    connect(&dlg,SIGNAL(newToolbarConfig()),this,SLOT(slotNewToolbarConfig()));
+    dlg.exec();
+}
+
+void CervisiaShell::slotNewToolbarConfig()
+{
+    applyMainWindowSettings( KGlobal::config(), autoSaveGroup() );
 }
 
 void CervisiaShell::slotChangeFilterStatus(QString status)

@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -40,8 +40,9 @@ public slots:
     void slotConfigureKeys();
     void slotConfigureToolBars();
     void slotExit();
-    
+
 protected slots:
+    void slotNewToolbarConfig();
     void slotChangeFilterStatus(QString status);
 
 protected:
