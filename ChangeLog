@@ -1,3 +1,9 @@
+2003-07-09  Christian Loose  <christian.loose@hamburg.de>
+
+	* New watchers dialog: Cervisia now shows the watchers of
+	   the selected files in a nice dialog instead of just showing cvs'
+	   output in the protocol view.
+
 2003-07-07  Christian Loose  <christian.loose@hamburg.de>
 
 	* Added createTag() and deleteTag() methods to the DCOP

@@ -50,6 +50,7 @@
 #include "repositorydlg.h"
 #include "settingsdlg.h"
 #include "changelogdlg.h"
+#include "watchersdlg.h"
 #include "misc.h"
 #include "cvsservice_stub.h"
 #include "repository_stub.h"
@@ -1117,17 +1118,12 @@ void CervisiaPart::slotShowWatchers()
     if (list.isEmpty())
         return;
 
-    DCOPRef cvsJob = cvsService->showWatchers(list);
-
-    // get command line from cvs job
-    QString cmdline = cvsJob.call("cvsCommand()");
-
-    if( protocol->startJob() )
-    {
-        showJobStart(cmdline);
-        connect( protocol, SIGNAL(jobFinished(bool, int)),
-                 this,     SLOT(slotJobFinished()) );
-    }
+    // Non-modal dialog
+    WatchersDialog* dlg = new WatchersDialog(*config());
+    if( dlg->parseWatchers(cvsService, list) )
+        dlg->show();
+    else
+        delete dlg;
 }
 
 
