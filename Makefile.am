@@ -11,7 +11,7 @@ libcervisia_la_SOURCES = annotatedlg.cpp cvsprogressdlg.cpp diffdlg.cpp logdlg.c
 		   progressdlg.cpp progressdlg.skel resolvedlg.cpp annotateview.cpp        \
 		   diffview.cpp loglist.cpp logplainview.cpp logtree.cpp annotatectl.cpp   \
 		   globalconfig.cpp loginfo.cpp misc.cpp qttableview.cpp tiplabel.cpp      \
-		   configutils.cpp
+		   configutils.cpp logtreetooltip.cpp
 
 libcervisiapart_la_SOURCES = updateview.cpp protocolview.cpp protocolview.skel \
 		   watchdlg.cpp settingsdlg.cpp changelogdlg.cpp historydlg.cpp \

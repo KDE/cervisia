@@ -19,7 +19,7 @@
 #include <kglobalsettings.h>
 
 #include "loginfo.h"
-#include "tiplabel.h"
+#include "logtreetooltip.h"
 
 
 const int LogTreeView::BORDER = 8;
@@ -54,6 +54,7 @@ public:
 
 LogTreeView::LogTreeView(QWidget *parent, const char *name)
     : QTable(parent, name)
+    , m_cellTip(0)
 {
     if (!static_initialized)
     {
@@ -80,23 +81,17 @@ LogTreeView::LogTreeView(QWidget *parent, const char *name)
 
     currentRow = -1;
     currentCol = -1;
-    currentLabel = 0;
 
     items.setAutoDelete(true);
     connections.setAutoDelete(true);
+    
+    m_cellTip = new Cervisia::LogTreeToolTip(this);
 }
 
 
 LogTreeView::~LogTreeView()
 {
-    delete currentLabel;
-}
-
-
-void LogTreeView::hideLabel()
-{
-    delete currentLabel;
-    currentLabel = 0;
+    delete m_cellTip;
 }
 
 
@@ -258,6 +253,29 @@ QSize LogTreeView::sizeHint() const
 }
 
 
+QString LogTreeView::text(int row, int col) const
+{
+    LogTreeItem* item = 0;
+    
+    QPtrListIterator<LogTreeItem> it(items);
+    for( ; it.current(); ++it )
+    {
+        if( it.current()->col == col && it.current()->row == row )
+        {
+            item = it.current();
+            break;
+        }
+    }
+    
+    QString text;
+    
+    if( item && !item->m_logInfo.m_author.isNull() )
+        text = item->m_logInfo.createToolTipText();
+        
+    return text;
+}
+
+
 void LogTreeView::paintCell(QPainter *p, int row, int col, const QRect& cr,
                             bool selected, const QColorGroup& cg)
 {
@@ -411,62 +429,6 @@ void LogTreeView::contentsMousePressEvent(QMouseEvent *e)
     }
 
     viewport()->update();
-}
-
-
-void LogTreeView::contentsMouseMoveEvent(QMouseEvent *e)
-{
-    if (!isActiveWindow())
-        return;
-
-    int row = rowAt(static_cast<QMouseEvent*>(e)->y());
-    int col = columnAt(static_cast<QMouseEvent*>(e)->x());
-    if (row != currentRow || col != currentCol) {
-        //        kdDebug(8050) << "hidden because of row/col change" << endl;
-        hideLabel();
-    }
-
-    LogTreeItem *item = 0;
-
-    QPtrListIterator<LogTreeItem> it(items);
-    for(; it.current(); ++it)
-        if (it.current()->row == row && it.current()->col == col)
-        {
-            item = static_cast<LogTreeItem*>(it.current());
-            break;
-        }
-
-    if (!currentLabel && item)
-    {
-        if (!item->m_logInfo.m_author.isNull())
-        {
-            const QString text(item->m_logInfo.createToolTipText());
-            int left = columnPos(col) + columnWidth(col);
-            int top = static_cast<QMouseEvent*>(e)->y();
-            currentLabel = new TipLabel(text);
-            currentLabel->showAt(mapToGlobal(QPoint(left, top)));
-            currentRow = row;
-            currentCol = col;
-        }
-    }
-}
-
-
-void LogTreeView::windowActivationChange(bool oldActive)
-{
-    //    kdDebug(8050) << "windowActivationChange" << endl;
-    hideLabel();
-    QTable::windowActivationChange(oldActive);
-}
-
-
-void LogTreeView::leaveEvent(QEvent *e)
-{
-    //    kdDebug(8050) << "leaveEvent" << endl;
-    // has strange effects
-    // hideLabel();
-    hideLabel();
-    QTable::leaveEvent(e);
 }
 
 

@@ -24,11 +24,11 @@
 
 class LogTreeItem;
 class LogTreeConnection;
-class TipLabel;
 
 namespace Cervisia
 {
 struct LogInfo;
+class LogTreeToolTip;
 }
 
 
@@ -52,15 +52,14 @@ public:
                            bool selected, const QColorGroup& cg);
 
     virtual QSize sizeHint() const;
+    
+    virtual QString text(int row, int col) const;
 
 signals:
     void revisionClicked(QString rev, bool rmb);
 
 protected:
     virtual void contentsMousePressEvent(QMouseEvent *e);
-    virtual void contentsMouseMoveEvent(QMouseEvent *e);
-    virtual void windowActivationChange(bool oldActive);
-    virtual void leaveEvent(QEvent *e);
     virtual int columnWidth(int col);
     virtual int rowHeight(int row);
 
@@ -68,12 +67,11 @@ private:
     void paintRevisionCell(QPainter *p, int row, int col, const Cervisia::LogInfo& logInfo,
                            bool followed, bool branched, bool selected);
     void paintConnector(QPainter *p, int row, int col, bool followed, bool branched);
-    void hideLabel();
 
     LogTreeItemList items;
     LogTreeConnectionList connections;
     int currentRow, currentCol;
-    TipLabel *currentLabel;
+    Cervisia::LogTreeToolTip* m_cellTip;
     QMemArray<int> colWidths;
     QMemArray<int> rowHeights;
 
