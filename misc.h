@@ -21,7 +21,6 @@
 void chomp(QCString *line);
 QString joinLine(const QStringList &list);
 QStringList splitLine(QString, char delim=' ');
-QString colorAsString(const QColor &color);
 
 QString userName();
 QString tempFileName(const QString &suffix);

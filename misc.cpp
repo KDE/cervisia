@@ -16,9 +16,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <qfile.h>
-#include <qregexp.h>
 #include <qtextcodec.h>
-#include <kapplication.h>
 #include <kconfig.h>
 #include <kprocess.h>
 #include <ktempfile.h>
@@ -68,14 +66,6 @@ QStringList splitLine(QString line, char delim)
     if (!line.isEmpty())
 	list.append(line);
     return list;
-}
-
-
-QString colorAsString(const QColor &color)
-{
-    int n = color.blue() + (color.green() << 8) + (color.red() << 16);
-    // Ensure leading zeros
-    return QString::number(n + 0x1000000, 16).mid(1);
 }
 
 
