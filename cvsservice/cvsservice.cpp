@@ -259,6 +259,27 @@ DCOPRef CvsService::deleteTag(const QStringList& files, const QString& tag,
 }
 
 
+DCOPRef CvsService::downloadRevision(const QString& fileName,
+                                     const QString& revision,
+                                     const QString& outputFile)
+{
+    if( !d->hasWorkingCopy() )
+        return DCOPRef();
+
+    // create a cvs job
+    CvsJob* job = d->createCvsJob();
+
+    // assemble the command line
+    // cvs update -p -r [REV] [FILE] > [OUTPUTFILE]
+    *job << d->repository->cvsClient() << "update -p"
+         << "-r" << KProcess::quote(revision)
+         << KProcess::quote(fileName) << ">" << KProcess::quote(outputFile);
+
+    // return a DCOP reference to the cvs job
+    return DCOPRef(d->appId, job->objId());
+}
+
+
 DCOPRef CvsService::diff(const QString& fileName, const QString& revA,
                          const QString& revB, const QString& diffOptions,
                          unsigned contextLines)

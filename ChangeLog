@@ -2,6 +2,8 @@
 
 	* Added a new button (View) to the log dialog to view
 	  the selected revision of a file in the preferred editor.
+	* Added method downloadRevision() to the cvs DCOP service
+	  to download a specific revision of a file.
 
 2003-08-27  Christian Loose  <christian.loose@hamburg.de>
 

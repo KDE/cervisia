@@ -99,6 +99,11 @@ k_dcop:
                       bool branch, bool force);
 
     /**
+     */
+    DCOPRef downloadRevision(const QString& fileName, const QString& revision,
+                             const QString& outputFile);
+
+    /**
      *
      * @param fileName
      * @param revA
