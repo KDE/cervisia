@@ -63,6 +63,8 @@ private:
     void chooseEdit();
     void saveFile(const QString &name);
     QString readFile();
+    void addToMergeAndVersionA(const QString& line, int& lineNo);
+    void addToVersionB(const QString& line, int& lineNo);
     
     QLabel *nofnlabel;
     QPushButton *backbutton, *forwbutton;
@@ -74,6 +76,10 @@ private:
     QTextCodec *fcodec;
     int markeditem;
     KConfig& partConfig;
+    
+    QString    m_contentVersionA,
+               m_contentVersionB,
+               m_contentMergedVersion;
 };
 
 

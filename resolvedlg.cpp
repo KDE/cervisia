@@ -65,8 +65,6 @@ public:
         {
             m_currentLine = QString::null;
             return m_currentLine;
-        
-        
         }
         
         m_endPos = m_text.find('\n', m_startPos);
@@ -222,73 +220,124 @@ bool ResolveDialog::parseFile(const QString &name)
     setCaption(i18n("CVS Resolve: %1").arg(name));
 
     fname = name;
-
-    QFile f(name);
-    if (!f.open(IO_ReadOnly))
+  
+    QString fileContent = readFile();
+    if( fileContent.isNull() )
         return false;
-    QTextStream stream(&f);
-    QTextCodec *fcodec = DetectCodec(name);
-    stream.setCodec(fcodec);
+        
+    LineSeparator separator(fileContent);
 
     state = Normal;
     lineno1 = lineno2 = 0;
     advanced1 = advanced2 = 0;
-    while (!stream.atEnd())
+    do
     {
-        QString line = stream.readLine();
-        if (line.left(7) == "<<<<<<<")
+        QString line = separator.nextLine();
+        
+        // reached end of file?
+        if( separator.atEnd() )
+            break;
+            
+        switch( state )
         {
-            state = VersionA;
-            advanced1 = 0;
+            case Normal:
+                // check for start of conflict block
+                if( line.startsWith("<<<<<<<") )
+                {
+                    state     = VersionA;
+                    advanced1 = 0;
+                }
+                else
+                {
+                    addToMergeAndVersionA(line, lineno1);
+                    addToVersionB(line, lineno2);
+                }
+                break;
+            case VersionA:
+                {
+                    int separatorPos = line.findRev("=======");
+                    if( separatorPos < 0 )    // still in version A
+                    {
+                        advanced1++;
+                        addToMergeAndVersionA(line, lineno1);
+                    }
+                    else
+                    {
+                        if( separatorPos > 0 )    // content and conflict marker on same line
+                        {
+                            line.truncate(separatorPos);
+                            advanced1++;
+                            addToMergeAndVersionA(line, lineno1);
+                        }
+                        state     = VersionB;
+                        advanced2 = 0;
+                    }
+                }
+                break;
+            case VersionB:
+                {
+                    int separatorPos = line.findRev(">>>>>>>");
+                    if( separatorPos < 0 )    // still in version B
+                    {
+                        advanced2++;
+                        addToVersionB(line, lineno2);
+                    }
+                    else
+                    {
+                        if( separatorPos > 0 )    // content and conflict marker on same line
+                        {
+                            line.truncate(separatorPos);
+                            advanced2++;
+                            addToVersionB(line, lineno2);
+                        }
+                        
+                        // create an resolve item
+                        ResolveItem *item = new ResolveItem;
+                        item->linenoA        = lineno1-advanced1+1;
+                        item->linecountA     = advanced1;
+                        item->linenoB        = lineno2-advanced2+1;
+                        item->linecountB     = advanced2;
+                        item->offsetM        = item->linenoA-1;
+                        item->chosen         = ChA;
+                        item->linecountTotal = item->linecountA;
+                        items.append(item);
+                        
+                        for (; advanced1 < advanced2; advanced1++)
+                            diff1->addLine("", DiffView::Neutral);
+                        for (; advanced2 < advanced1; advanced2++)
+                            diff2->addLine("", DiffView::Neutral);
+                            
+                        state = Normal;
+                    }
+                }
+                break;
         }
-        else if (line.left(7) == "=======" && state == VersionA)
-        {
-            state = VersionB;
-            advanced2 = 0;
-        }
-        else if (line.left(7) == ">>>>>>>")
-        {
-            ResolveItem *item = new ResolveItem;
-            item->linenoA = lineno1-advanced1+1;
-            item->linecountA = advanced1;
-            item->linenoB = lineno2-advanced2+1;
-            item->linecountB = advanced2;
-            item->offsetM = item->linenoA-1;
-            item->chosen = ChA;
-            item->linecountTotal = item->linecountA;
-            items.append(item);
-            for (; advanced1 < advanced2; advanced1++)
-                diff1->addLine("", DiffView::Neutral);
-            for (; advanced2 < advanced1; advanced2++)
-                diff2->addLine("", DiffView::Neutral);
-            state = Normal;
-        }
-        else if (state == VersionA)
-        {
-            lineno1++;
-            advanced1++;
-            diff1->addLine(line, DiffView::Change, lineno1);
-            merge->addLine(line, DiffView::Change, lineno1);
-        }
-        else if (state == VersionB)
-        {
-            lineno2++;
-            advanced2++;
-            diff2->addLine(line, DiffView::Change, lineno2);
-        }
-        else // state == Normal
-        {
-            lineno1++;
-            lineno2++;
-            diff1->addLine(line, DiffView::Unchanged, lineno1);
-            merge->addLine(line, DiffView::Unchanged, lineno1);
-            diff2->addLine(line, DiffView::Unchanged, lineno2);
-        }
-    }
-    f.close();
+    } 
+    while( !separator.atEnd() );
+    
     updateNofN();
 
     return true; // succesful
+}
+
+
+void ResolveDialog::addToMergeAndVersionA(const QString& line, int& lineNo)
+{
+    lineNo++;
+    diff1->addLine(line, DiffView::Change, lineNo);
+    merge->addLine(line, DiffView::Change, lineNo);
+    
+    m_contentVersionA      += line;
+    m_contentMergedVersion += line;
+}
+
+
+void ResolveDialog::addToVersionB(const QString& line, int& lineNo)
+{
+    lineNo++;
+    diff2->addLine(line, DiffView::Change, lineNo);
+    
+    m_contentVersionB += line;
 }
 
 

@@ -1,5 +1,10 @@
 2004-04-01  Christian Loose  <christian.loose@hamburg.de>
 
+	* Fix BR #74903:
+	  Don't choke on conflict markers that are not on a
+	  separate line in the resolve dialog. This happens 
+	  when the file didn't end with a new line marker 
+	  before CVS encountered the conflict.
 	* Fix BR #78800:
 	  Lock harder whether a directory really is under CVS control.
 	  Fix by Frerich Raabe.
@@ -7,7 +12,7 @@
 2004-03-17  Christian Loose  <christian.loose@hamburg.de>
 
 	* Don't execute shell scripts or .desktop files when the user used
-	  the edit file function.
+	  the edit file function. (BR #77440)
 
 2004-03-02  André Wöbbeking  <Woebbeking@web.de>
 
