@@ -32,6 +32,7 @@
     <Action name="settings_hide_uptodate"/>
     <Action name="settings_hide_removed"/>
     <Action name="settings_hide_notincvs"/>
+    <Action name="settings_hide_empty_directories"/>
     <Separator/>
     <Action name="view_unfold_tree"/>
     <Action name="view_fold_tree"/>

@@ -110,6 +110,7 @@ public slots:
     void slotHideUpToDate();
     void slotHideRemoved();
     void slotHideNotInCVS();
+    void slotHideEmptyDirectories();
 
     void slotFoldTree();
     void slotUnfoldTree();
@@ -157,7 +158,7 @@ private:
 
     QString changelogstr;
     QStringList recentCommits;
-    bool opt_hideFiles, opt_hideUpToDate, opt_hideRemoved, opt_hideNotInCVS;
+    bool opt_hideFiles, opt_hideUpToDate, opt_hideRemoved, opt_hideNotInCVS, opt_hideEmptyDirectories;
     bool opt_createDirs, opt_pruneDirs;
     bool opt_updateRecursive, opt_commitRecursive, opt_doCVSEdit;
 

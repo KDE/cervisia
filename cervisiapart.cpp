@@ -69,6 +69,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     , opt_hideUpToDate( false )
     , opt_hideRemoved( false )
     , opt_hideNotInCVS( false )
+    , opt_hideEmptyDirectories( false )
     , opt_createDirs( false )
     , opt_pruneDirs( false )
     , opt_updateRecursive( true )
@@ -454,6 +455,13 @@ void CervisiaPart::setupActions()
                                 this, SLOT(slotHideNotInCVS()),
                                 actionCollection(), "settings_hide_notincvs" );
     hint = i18n("Determines whether files not in CVS are hidden");
+    action->setToolTip( hint );
+    action->setWhatsThis( hint );
+
+    action = new KToggleAction( i18n("Hide Empty Directories"), 0,
+                                this, SLOT(slotHideEmptyDirectories()),
+                                actionCollection(), "settings_hide_empty_directories" );
+    hint = i18n("Determines whether directories without visible entries are hidden");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
@@ -1417,6 +1425,14 @@ void CervisiaPart::slotHideNotInCVS()
     setFilter();
 }
 
+
+void CervisiaPart::slotHideEmptyDirectories()
+{
+    opt_hideEmptyDirectories = !opt_hideEmptyDirectories;
+    setFilter();
+}
+
+
 void CervisiaPart::slotFoldTree()
 {
 	update->foldTree();
@@ -1574,6 +1590,8 @@ void CervisiaPart::setFilter()
         filter = UpdateView::Filter(filter | UpdateView::NoRemoved);
     if (opt_hideNotInCVS)
         filter = UpdateView::Filter(filter | UpdateView::NoNotInCVS);
+    if (opt_hideEmptyDirectories)
+        filter = UpdateView::Filter(filter | UpdateView::NoEmptyDirectories);
     update->setFilter(filter);
 
     QString str;
@@ -1738,6 +1756,10 @@ void CervisiaPart::readSettings()
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_notincvs" )))
     ->setChecked( opt_hideNotInCVS );
 
+    opt_hideEmptyDirectories = config->readBoolEntry("Hide Empty Directories", false);
+    (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_empty_directories" )))
+    ->setChecked( opt_hideEmptyDirectories );
+
     setFilter();
 
     int splitterpos1 = config->readNumEntry("Splitter Pos 1", 0);
@@ -1769,6 +1791,7 @@ void CervisiaPart::writeSettings()
     config->writeEntry("Hide UpToDate Files", opt_hideUpToDate);
     config->writeEntry("Hide Removed Files", opt_hideRemoved);
     config->writeEntry("Hide Non CVS Files", opt_hideNotInCVS);
+    config->writeEntry("Hide Empty Directories", opt_hideEmptyDirectories);
     QValueList<int> sizes = splitter->sizes();
     config->writeEntry("Splitter Pos 1", sizes[0]);
     config->writeEntry("Splitter Pos 2", sizes[1]);

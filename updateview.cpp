@@ -400,13 +400,33 @@ void UpdateDirItem::maybeScanDir(bool recursive)
 
 void UpdateDirItem::applyFilter(UpdateView::Filter filter)
 {
+    // as QListViewItem::setVisible() is recursive we have to make
+    // this UpdateDirItem visible first and later we can make it invisible
     setVisible(true);
 
+    bool hasVisibleChild(false);
     for (QListViewItem* childItem(firstChild());
          childItem != 0; childItem = childItem->nextSibling())
     {
         static_cast<UpdateItem*>(childItem)->applyFilter(filter);
+
+        hasVisibleChild = hasVisibleChild || childItem->isVisible();
     }
+
+    // a UpdateDirItem is visible if
+    // - it has visible childs
+    // - it is not opened
+    // - empty directories are not hidden
+    // - it has no parent (top level item)
+    const bool visible(hasVisibleChild
+                       || m_opened == false
+                       || (filter & UpdateView::NoEmptyDirectories) == false
+                       || parent() == 0);
+
+    // only set invisible as QListViewItem::setVisible() is recursive
+    // and so maybe overrides the state applied by the filter
+    if (visible == false)
+        setVisible(false);
 }
 
 
@@ -972,6 +992,10 @@ void UpdateView::finishJob(bool normalExit, int exitStatus)
     if (act != Add)
         markUpdated(true, success);
     syncSelection();
+
+    // visibility of items could be changed so check the whole tree
+    // (this is needed for the filter NoEmptyDirectories)
+    setFilter(filter());
 }
 
 

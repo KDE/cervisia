@@ -1,3 +1,7 @@
+2003-01-26  André Wöbbeking <Woebbeking@web.de>
+
+	* Implemented new option "Hide Empty Directories"
+
 2003-01-23  Christian Loose <christian.loose@hamburg.de>
 
 	* Implemented wish #41468: Remember last open directory
