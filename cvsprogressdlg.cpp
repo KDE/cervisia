@@ -62,7 +62,7 @@ CvsProgressDialog::CvsProgressDialog(const QString &text, QWidget *parent)
     KButtonBox *buttonbox = new KButtonBox(this);
     layout->addWidget(buttonbox, 0);
     buttonbox->addStretch();
-    cancelbutton = buttonbox->addButton(i18n("Cancel"));
+    cancelbutton = buttonbox->addButton(KStdGuiItem::cancel());
     connect( cancelbutton, SIGNAL(clicked()), SLOT(cancelClicked()) );
     buttonbox->addStretch();
     buttonbox->layout();
