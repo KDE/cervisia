@@ -432,57 +432,69 @@ bool DiffZoomWidget::eventFilter(QObject *o, QEvent *e)
 
 void DiffZoomWidget::paintEvent(QPaintEvent *)
 {
-    const QScrollBar *bar = diffview->scrollBar();
-    if (!bar)
+    const QScrollBar* scrollBar = diffview->scrollBar();
+    if (!scrollBar)
         return;
 
-    int sliderMin, sliderMax, sliderLength;
-    if (bar->isVisible())
-        {
-            sliderMin = style().pixelMetric(QStyle::PM_ScrollBarSliderMin, bar);
-            sliderLength = style().pixelMetric(QStyle::PM_SliderLength, bar);
-            sliderMax = style().pixelMetric(QStyle::PM_SliderSpaceAvailable, bar);
-        }
-    else
-        {
-            sliderMin = 0;
-            sliderMax = height();
-            sliderLength = 0;
-        }
+    // only y and height are important
+    const QRect scrollBarGroove(scrollBar->isVisible()
+                                ? style().querySubControlMetrics(QStyle::CC_ScrollBar,
+                                                                 scrollBar,
+                                                                 QStyle::SC_ScrollBarGroove)
+                                : rect());
 
-    QByteArray str = diffview->compressedContent();
+    // draw rectangles at the positions of the differences
 
-    QPixmap pixbuf(size());
+    const QByteArray& lineTypes(diffview->compressedContent());
+
+    QPixmap pixbuf(width(), scrollBarGroove.height());
+    pixbuf.fill(KGlobalSettings::baseColor());
+
     QPainter p(&pixbuf, this);
-    p.fillRect(0, 0, pixbuf.width(), pixbuf.height(), colorGroup().background());
-    if (str.size())
+    if (const unsigned int numberOfLines = lineTypes.size())
+    {
+        const double scale(((double) scrollBarGroove.height()) / numberOfLines);
+        for (unsigned int index(0); index < numberOfLines;)
         {
-            double scale = ((double)(sliderMax-sliderMin+sliderLength)) / str.size();
-            int y0, y1;
-            y0 = y1 = 0;
-            for (int i=0; i < (int)str.size(); ++i)
-                {
-                    char c = str[i];
-                    int y1 = (int)(i*scale);
-                    int y2 = (int)((i+1)*scale);
-                    if (y1 != y0 || c != 'U')
-                        {
-                            QColor color =
-                              (c==' ')? KGlobalSettings::alternateBackgroundColor()
-                              : (c=='C')? diffChangeColor
-                              : (c=='I')? diffInsertColor
-                              : (c=='D')? diffDeleteColor
-                              : (c=='N')? KGlobalSettings::alternateBackgroundColor() : KGlobalSettings::baseColor();
+            const char lineType(lineTypes[index]);
 
-                            if (y2 == y1)
-                                y2++;
-                            p.fillRect(0, sliderMin+y1, pixbuf.width(), y2-y1, QBrush(color));
-                            y0 = y1;
-                        }
-                }
+            // don't use qRound() to avoid painting outside of the pixmap
+            // (yPos1 must be lesser than scrollBarGroove.height())
+            const int yPos1(static_cast<int>(index * scale));
+
+            // search next line with different lineType
+            for (++index; index < numberOfLines && lineType == lineTypes[index]; ++index)
+                ;
+
+            QColor color;
+            switch (lineType)
+            {
+            case 'C':
+                color = diffChangeColor;
+                break;
+            case 'I':
+                color = diffInsertColor;
+                break;
+            case 'D':
+                color = diffDeleteColor;
+                break;
+            case ' ':
+            case 'N':
+                color = KGlobalSettings::alternateBackgroundColor();
+                break;
+            }
+
+            if (color.isValid())
+            {
+                const int yPos2(qRound(index * scale));
+                const int areaHeight((yPos2 != yPos1) ? yPos2 - yPos1 : 1);
+
+                p.fillRect(0, yPos1, pixbuf.width(), areaHeight, QBrush(color));
+            }
         }
+    }
     p.flush();
-    bitBlt(this, 0, 0, &pixbuf);
+    bitBlt(this, 0, scrollBarGroove.y(), &pixbuf);
 }
 
 #include "diffview.moc"

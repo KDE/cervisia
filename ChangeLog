@@ -1,3 +1,10 @@
+2003-06-19  André Wöbbeking  <Woebbeking@web.de>
+
+	* Fix BR 59275 (DiffZoomWidget): 
+	  o Use QStyle::querySubControlMetrics() to get the exact 
+	    geometry of the scroll bar groove.
+	  o Better performance for big files.
+
 2003-06-11  Christian Loose <christian.loose@hamburg.de>
 
 	* Fix BR #45962: Save changed settings in SettingDialog
