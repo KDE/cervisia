@@ -33,7 +33,9 @@ public:
                QWidget *parent=0, const char *name=0 );
     
     bool branchTag() const
-        { return branchtag_button->isChecked(); }
+        { return branchtag_button && branchtag_button->isChecked(); } 
+    bool forceTag() const
+        { return forcetag_button && forcetag_button->isChecked(); }
     QString tag() const
         { return act==Delete? tag_combo->currentText() : tag_edit->text(); }
 
@@ -48,6 +50,7 @@ private:
     QString sandbox, repository;
     
     QCheckBox *branchtag_button;
+    QCheckBox *forcetag_button;
     QLineEdit *tag_edit;
     QComboBox *tag_combo;
 };

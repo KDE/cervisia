@@ -31,7 +31,7 @@
 
 TagDialog::TagDialog(ActionType action, const QString &sbox, const QString &repo,
                      QWidget *parent, const char *name)
-    : QDialog(parent, name, true)
+    : QDialog(parent, name, true), branchtag_button(0), forcetag_button(0)
 {
     setCaption( (action==Delete)? i18n("CVS Delete Tag") : i18n("CVS Tag") );
 
@@ -73,6 +73,9 @@ TagDialog::TagDialog(ActionType action, const QString &sbox, const QString &repo
 
             branchtag_button = new QCheckBox(i18n("Create &branch with this tag"), this);
             layout->addWidget(branchtag_button);
+
+            forcetag_button = new QCheckBox(i18n("&Force tag creation even if tag already exists"), this);
+            layout->addWidget(forcetag_button);
 	}
     
     QFrame *frame = new QFrame(this);

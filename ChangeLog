@@ -1,3 +1,8 @@
+2001-09-04  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
+
+	* Added 'Force tag creation' option to tag dialog
+	  Patch by Alessandro Praduroux <pradu@thekompany.com>
+
                ======>   TODO Before Importing
 	========================================
 	* Remove stale CVS directories and add to main repository

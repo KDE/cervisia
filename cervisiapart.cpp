@@ -1240,8 +1240,10 @@ void CervisiaPart::createOrDeleteTag(TagDialog::ActionType action)
             cmdline += " tag ";
             if (action == TagDialog::Delete)
                 cmdline += "-d ";
-            else if (l->branchTag())
+            if (l->branchTag())
                 cmdline += "-b ";
+	    if (l->forceTag())
+		cmdline += "-F ";
             cmdline += l->tag();
             cmdline += " ";
             cmdline += joinLine(list);
