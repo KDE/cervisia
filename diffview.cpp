@@ -148,7 +148,9 @@ void DiffView::setCenterOffset(int offset)
 
 void DiffView::addLine(const QString &line, DiffType type, int no)
 {
-    QFontMetrics fm(font());
+    QFont f(font());
+    f.setBold(true);
+    QFontMetrics fm(f);
     textwidth = QMAX(textwidth, fm.width(line));
 
     DiffViewItem *item = new DiffViewItem;
