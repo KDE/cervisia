@@ -31,7 +31,7 @@
 #include "cervisiapart.h"
 
 
-CvsProgressDialog::CvsProgressDialog(const char *text, QWidget *parent)
+CvsProgressDialog::CvsProgressDialog(const QString &text, QWidget *parent)
     : QSemiModal(parent, "", true), childproc(0)
 {
     QBoxLayout *layout = new QVBoxLayout(this, 10);

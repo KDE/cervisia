@@ -31,7 +31,7 @@ class CvsProgressDialog : public QSemiModal
     Q_OBJECT
     
 public:
-    CvsProgressDialog( const char *text, QWidget *parent );
+    CvsProgressDialog( const QString &text, QWidget *parent );
     ~CvsProgressDialog();
     
     bool execCommand(const QString &sandbox, const QString &repository,
