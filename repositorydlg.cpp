@@ -16,16 +16,15 @@
 
 #include <stdlib.h>
 #include <qhbuttongroup.h>
-#include <qdir.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qmessagebox.h>
 #include <qpushbutton.h>
 #include <qradiobutton.h>
 #include <qtextstream.h>
-#include <kapplication.h>
 #include <kbuttonbox.h>
 #include <kconfig.h>
+#include <klineedit.h>
 #include <klocale.h>
 
 #include "repositories.h"
@@ -107,20 +106,18 @@ AddRepositoryDialog::Options *AddRepositoryDialog::options = 0;
 
 
 RepositoryDialog::RepositoryDialog(QWidget *parent, const char *name)
-    : QDialog(parent, name, true)
+    : KDialogBase(parent, name, true, i18n("Configure Access to Repositories"),
+                  Ok | Cancel | Help, Ok, true)
 {
-    setCaption(i18n("Configure Access to Repositories"));
+    QFrame* mainWidget = makeMainWidget();
 
-    QBoxLayout *layout = new QVBoxLayout(this, 10);
+    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 
-    QBoxLayout *hbox = new QHBoxLayout(10);
-    layout->addLayout(hbox, 10);
+    QBoxLayout *hbox = new QHBoxLayout(layout);
 
-    repolist = new ListView(this);
+    repolist = new ListView(mainWidget);
     hbox->addWidget(repolist, 10);
-    QFontMetrics fm(repolist->fontMetrics());
-    repolist->setMinimumWidth(fm.width("X")*60);
-    repolist->setMinimumHeight(repolist->sizeHint().height());
+    repolist->setMinimumWidth(fontMetrics().width('0') * 60);
     repolist->setAllColumnsShowFocus(true);
     repolist->setPreferredColumn(0);
     repolist->addColumn(i18n("Repository"));
@@ -129,7 +126,7 @@ RepositoryDialog::RepositoryDialog(QWidget *parent, const char *name)
     repolist->addColumn(i18n("Status"));
     repolist->setFocus();
 
-    KButtonBox *actionbox = new KButtonBox(this, KButtonBox::Vertical);
+    KButtonBox *actionbox = new KButtonBox(mainWidget, KButtonBox::Vertical);
     actionbox->addStretch();
     QPushButton *addbutton = actionbox->addButton(i18n("&Add..."));
     QPushButton *removebutton = actionbox->addButton(i18n("&Remove"));
@@ -142,7 +139,6 @@ RepositoryDialog::RepositoryDialog(QWidget *parent, const char *name)
     actionbox->addStretch();
     actionbox->layout();
     hbox->addWidget(actionbox, 0);
-
 
     connect( addbutton, SIGNAL(clicked()),
              this, SLOT(slotAddClicked()) );
@@ -159,62 +155,19 @@ RepositoryDialog::RepositoryDialog(QWidget *parent, const char *name)
 
     readCvsPassFile();
     readConfigFile();
-    
-    QFrame *frame = new QFrame(this);
-    frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-    layout->addWidget(frame, 0);
 
-    KButtonBox *buttonbox = new KButtonBox(this);
-    QPushButton *helpbutton = buttonbox->addButton(i18n("&Help"));
-    helpbutton->setAutoDefault(false);
-    buttonbox->addStretch();
-    QPushButton *okbutton = buttonbox->addButton(i18n("OK"));
-    QPushButton *cancelbutton = buttonbox->addButton(i18n("Cancel"));
-    okbutton->setDefault(true);
-    buttonbox->layout();
-    buttonbox->setFixedHeight(buttonbox->height());
-    layout->addWidget(buttonbox, 0);
+    setHelp("accessing-repository");
 
-    connect( helpbutton, SIGNAL(clicked()), SLOT(helpClicked()) );
-    connect( okbutton, SIGNAL(clicked()), SLOT(accept()) );
-    connect( cancelbutton, SIGNAL(clicked()), SLOT(reject()) );
-
-    layout->activate();
-    resize(sizeHint());
-
-    
     if (options)
         resize(options->size);
 }
 
 
-void RepositoryDialog::done(int r)
+RepositoryDialog::~RepositoryDialog()
 {
-    if (r == Accepted)
-        {
-            // Make list of repositories
-            QListViewItem *item;
-            QStringList list;
-            for (item = repolist->firstChild(); item; item = item->nextSibling())
-                list.append(item->text(0));
-
-            KConfig *config = CervisiaPart::config();
-            config->setGroup("Repositories");
-            config->writeEntry("Repos", list);
-
-            for (item = repolist->firstChild(); item; item = item->nextSibling())
-                {
-                    RepositoryListItem *ritem = static_cast<RepositoryListItem*>(item);
-                    config->setGroup(QString("Repository-") + ritem->repository());
-                    config->writeEntry("rsh", ritem->rsh());
-                    config->writeEntry("Compression", ritem->compression());
-                }
-        }
-    
     if (!options)
         options = new Options;
     options->size = size();
-    QDialog::done(r);
 }
 
 
@@ -274,6 +227,30 @@ void RepositoryDialog::readConfigFile()
             ritem->setRsh(rsh);
             ritem->setCompression(compression);
         }
+}
+
+
+void RepositoryDialog::slotOk()
+{
+    // Make list of repositories
+    QListViewItem *item;
+    QStringList list;
+    for (item = repolist->firstChild(); item; item = item->nextSibling())
+        list.append(item->text(0));
+
+    KConfig *config = CervisiaPart::config();
+    config->setGroup("Repositories");
+    config->writeEntry("Repos", list);
+
+    for (item = repolist->firstChild(); item; item = item->nextSibling())
+    {
+        RepositoryListItem *ritem = static_cast<RepositoryListItem*>(item);
+        config->setGroup(QString("Repository-") + ritem->repository());
+        config->writeEntry("rsh", ritem->rsh());
+        config->writeEntry("Compression", ritem->compression());
+    }
+
+    KDialogBase::slotOk();
 }
 
 
@@ -356,23 +333,18 @@ void RepositoryDialog::slotLogoutClicked()
 }
 
 
-void RepositoryDialog::helpClicked()
-{
-    kapp->invokeHelp("accessing-repository", "cervisia");
-}
-
-
 AddRepositoryDialog::AddRepositoryDialog(const QString &repo, QWidget *parent, const char *name)
-    : QDialog(parent, name, true)
+    : KDialogBase(parent, name, true, i18n("Add Repository"),
+                  Ok | Cancel, Ok, true)
 {
-    setCaption(i18n("Add Repository"));
+    QFrame* mainWidget = makeMainWidget();
 
-    QBoxLayout *layout = new QVBoxLayout(this, 10);
+    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 
-    QLabel *repo_label = new QLabel(i18n("&Repository:"), this);
+    QLabel *repo_label = new QLabel(i18n("&Repository:"), mainWidget);
     layout->addWidget(repo_label);
     
-    repo_edit = new KLineEdit(this);
+    repo_edit = new KLineEdit(mainWidget);
     repo_edit->setFocus();
     repo_label->setBuddy(repo_edit);
     if (!repo.isNull())
@@ -382,14 +354,14 @@ AddRepositoryDialog::AddRepositoryDialog(const QString &repo, QWidget *parent, c
         }
     layout->addWidget(repo_edit);
     
-    QLabel *rsh_label = new QLabel(i18n("Use remote &shell (only for :ext: repositories):"), this);
+    QLabel *rsh_label = new QLabel(i18n("Use remote &shell (only for :ext: repositories):"), mainWidget);
     layout->addWidget(rsh_label);
     
-    rsh_edit = new KLineEdit(this);
+    rsh_edit = new KLineEdit(mainWidget);
     rsh_label->setBuddy(rsh_edit);
     layout->addWidget(rsh_edit);
 
-    compression_group = new QHButtonGroup(i18n("&Compression Level"), this);
+    compression_group = new QHButtonGroup(i18n("&Compression Level"), mainWidget);
     layout->addWidget(compression_group);
 
     (void) new QRadioButton(i18n("Default"), compression_group);
@@ -398,35 +370,50 @@ AddRepositoryDialog::AddRepositoryDialog(const QString &repo, QWidget *parent, c
     (void) new QRadioButton(i18n("2"), compression_group);
     (void) new QRadioButton(i18n("3"), compression_group);
 
-    KButtonBox *buttonbox = new KButtonBox(this);
-    buttonbox->addStretch();
-    QPushButton *ok = buttonbox->addButton(i18n("OK"));
-    QPushButton *cancel = buttonbox->addButton(i18n("Cancel"));
-    ok->setDefault(true);
-    connect( ok, SIGNAL(clicked()), this, SLOT(accept()) );
-    connect( cancel, SIGNAL(clicked()), this, SLOT(reject()) );
-    buttonbox->layout();
-    buttonbox->setFixedHeight(buttonbox->height());
-    layout->addWidget(buttonbox, 0);
-
     connect( repo_edit, SIGNAL(textChanged(const QString&)),
              this, SLOT(repoChanged()) );
     repoChanged();
-
-    layout->activate();
-    resize(sizeHint());
 
     if (options)
         resize(options->size);
 }
 
 
-void AddRepositoryDialog::done(int r)
+AddRepositoryDialog::~AddRepositoryDialog()
 {
     if (!options)
         options = new Options;
     options->size = size();
-    QDialog::done(r);
+}
+
+
+void AddRepositoryDialog::setRsh(const QString &rsh)
+{
+    rsh_edit->setText(rsh);
+}
+
+
+void AddRepositoryDialog::setCompression(int compression)
+{
+    compression_group->setButton(compression + 1);
+}
+
+
+QString AddRepositoryDialog::repository() const
+{
+    return repo_edit->text();
+}
+
+
+QString AddRepositoryDialog::rsh() const
+{
+    return rsh_edit->text();
+}
+
+
+int AddRepositoryDialog::compression() const
+{
+    return compression_group->id(compression_group->selected()) - 1;
 }
 
 

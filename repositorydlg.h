@@ -15,21 +15,26 @@
 #ifndef REPOSITORYDLG_H
 #define REPOSITORYDLG_H
 
-#include <qdialog.h>
-#include <qbuttongroup.h>
-#include <klineedit.h>
 
+#include <kdialogbase.h>
+
+
+class QButtonGroup;
 class QListViewItem;
 class KConfig;
+class KLineEdit;
+
 class ListView;
 
 
-class RepositoryDialog : public QDialog
+class RepositoryDialog : public KDialogBase
 {
     Q_OBJECT
 
 public:
-    RepositoryDialog( QWidget *parent=0, const char *name=0 );
+    explicit RepositoryDialog( QWidget *parent=0, const char *name=0 );
+
+    virtual ~RepositoryDialog();
 
     void readConfigFile();
     void readCvsPassFile(); 
@@ -38,8 +43,8 @@ public:
     static void saveOptions(KConfig *config);
 
 protected:
-    virtual void done(int r);
-    
+    virtual void slotOk();
+
 private slots:
     void slotAddClicked();
     void slotRemoveClicked();
@@ -47,7 +52,6 @@ private slots:
     void slotSettingsClicked();
     void slotLoginClicked();
     void slotLogoutClicked();
-    void helpClicked();
 
 private:
     struct Options {
@@ -59,31 +63,25 @@ private:
 };
 
 
-class AddRepositoryDialog : public QDialog
+class AddRepositoryDialog : public KDialogBase
 {
     Q_OBJECT
 
 public:
-    AddRepositoryDialog( const QString &repo, QWidget *parent=0, const char *name=0 );
+    explicit AddRepositoryDialog( const QString &repo, QWidget *parent=0, const char *name=0 );
+
+    virtual ~AddRepositoryDialog();
 
     void setRepository(const QString &repo);
-    void setRsh(const QString &rsh)
-        { rsh_edit->setText(rsh); }
-    void setCompression(int compression)
-        { compression_group->setButton(compression+1); }
-    QString repository() const
-        { return repo_edit->text(); }
-    QString rsh() const
-        { return rsh_edit->text(); }
-    int compression() const
-        { return compression_group->id(compression_group->selected())-1; }
-    
+    void setRsh(const QString &rsh);
+    void setCompression(int compression);
+    QString repository() const;
+    QString rsh() const;
+    int compression() const;
+
     static void loadOptions(KConfig *config);
     static void saveOptions(KConfig *config);
 
-protected:
-    virtual void done(int r);
-    
 private slots:
     void repoChanged();
     
