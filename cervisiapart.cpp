@@ -1043,7 +1043,7 @@ void CervisiaPart::slotDiff()
 
     // Non-modal dialog
     DiffDialog *l = new DiffDialog(*config());
-    if (l->parseCvsDiff(cvsService, filename, "", ""))
+    if (l->parseCvsDiff(cvsService, filename, QString::fromLatin1("BASE"), QString::null))
         l->show();
     else
         delete l;
