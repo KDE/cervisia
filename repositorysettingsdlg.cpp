@@ -21,7 +21,7 @@
 #include <qtooltip.h>
 #include <qwhatsthis.h>
 
-#include <kapp.h>
+#include <kapplication.h>
 #include <kconfig.h>
 #include <klocale.h>
 #include <kbuttonbox.h>

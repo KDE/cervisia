@@ -20,7 +20,7 @@
 #include <qmultilinedit.h>
 #include <qfiledialog.h>
 #include <qdir.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kprocess.h>
 #include <kbuttonbox.h>
 #include <kfiledialog.h>

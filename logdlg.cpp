@@ -19,7 +19,7 @@
 #include <qwhatsthis.h>
 #include <kbuttonbox.h>
 #include <kdebug.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kconfig.h>

@@ -18,7 +18,7 @@
 #include <qtextstream.h>
 #include <qfile.h>
 #include <kbuttonbox.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kdebug.h>
 #include <kfiledialog.h>
 #include <klocale.h>

@@ -18,7 +18,7 @@
 #include <qmultilinedit.h>
 #include <qpushbutton.h>
 #include <qtextstream.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kbuttonbox.h>
 #include <kconfig.h>
 #include <kglobalsettings.h>

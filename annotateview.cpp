@@ -13,7 +13,7 @@
 
 
 #include <qpainter.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kconfig.h>
 
 #include "tiplabel.h"

@@ -17,7 +17,7 @@
 #include <qlabel.h>
 #include <qtimer.h>
 #include <qlistbox.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kbuttonbox.h>
 #include <kprocess.h>
 #include <klocale.h>

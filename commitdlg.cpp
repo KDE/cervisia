@@ -16,7 +16,7 @@
 #include <qpushbutton.h>
 #include <qlabel.h>
 #include <qcombobox.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kbuttonbox.h>
 #include <klocale.h>
 #include <kconfig.h>

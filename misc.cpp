@@ -18,7 +18,7 @@
 #include <qfile.h>
 #include <qregexp.h>
 #include <ctype.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kconfig.h>
 #include <kprocess.h>
 #include <ktempfile.h>

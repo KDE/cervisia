@@ -5,7 +5,7 @@
 #include <qcursor.h>
 #include <kaboutdata.h>
 #include <kaction.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kfiledialog.h>
 #include <kinstance.h>
 #include <klocale.h>

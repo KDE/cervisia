@@ -16,7 +16,7 @@
 #include <qfileinfo.h>
 #include <qframe.h>
 #include <qlayout.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kbuttonbox.h>
 #include <kconfig.h>
 #include <klocale.h>

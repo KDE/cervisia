@@ -15,7 +15,7 @@
 #include <qdir.h>
 #include <qpopupmenu.h>
 
-#include <kapp.h>
+#include <kapplication.h>
 #include <kconfig.h>
 #include <kglobal.h>
 #include <kglobalsettings.h>

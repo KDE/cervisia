@@ -16,7 +16,7 @@
 #include <qfile.h>
 #include <qdir.h>
 #include <qtextstream.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kconfig.h>
 
 #include "cervisiapart.h"

@@ -14,7 +14,7 @@
 
 #include <qstrlist.h>
 #include <qkeycode.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kconfig.h>
 #include <klocale.h>
 #include "tiplabel.h"

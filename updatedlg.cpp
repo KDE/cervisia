@@ -15,7 +15,7 @@
 #include <qpushbutton.h>
 #include <qbuttongroup.h>
 #include <qlayout.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kbuttonbox.h>
 #include <klocale.h>
 

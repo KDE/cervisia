@@ -17,7 +17,7 @@
 #include <qcombobox.h>
 #include <qlayout.h>
 #include <qlabel.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kbuttonbox.h>
 #include <klineedit.h>
 #include <klocale.h>

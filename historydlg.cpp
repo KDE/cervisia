@@ -15,7 +15,7 @@
 #include <qcheckbox.h>
 #include <qlayout.h>
 #include <qregexp.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kbuttonbox.h>
 #include <kconfig.h>
 #include <klineedit.h>

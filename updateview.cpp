@@ -17,7 +17,7 @@
 #include <qfileinfo.h>
 #include <qheader.h>
 #include <qstack.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kdebug.h>
 #include <kfileview.h>
 #include <kglobalsettings.h>
