@@ -27,7 +27,6 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 
-#include "diffview.h"
 #include "misc.h"
 #include "resolvedlg_p.h"
 using Cervisia::ResolveEditorDialog;
@@ -249,8 +248,8 @@ bool ResolveDialog::parseFile(const QString &name)
                 }
                 else
                 {
-                    addToMergeAndVersionA(line, lineno1);
-                    addToVersionB(line, lineno2);
+                    addToMergeAndVersionA(line, DiffView::Unchanged, lineno1);
+                    addToVersionB(line, DiffView::Unchanged, lineno2);
                 }
                 break;
             case VersionA:
@@ -259,7 +258,7 @@ bool ResolveDialog::parseFile(const QString &name)
                     if( separatorPos < 0 )    // still in version A
                     {
                         advanced1++;
-                        addToMergeAndVersionA(line, lineno1);
+                        addToMergeAndVersionA(line, DiffView::Change, lineno1);
                     }
                     else
                     {
@@ -267,7 +266,7 @@ bool ResolveDialog::parseFile(const QString &name)
                         {
                             line.truncate(separatorPos);
                             advanced1++;
-                            addToMergeAndVersionA(line, lineno1);
+                            addToMergeAndVersionA(line, DiffView::Change, lineno1);
                         }
                         state     = VersionB;
                         advanced2 = 0;
@@ -280,7 +279,7 @@ bool ResolveDialog::parseFile(const QString &name)
                     if( separatorPos < 0 )    // still in version B
                     {
                         advanced2++;
-                        addToVersionB(line, lineno2);
+                        addToVersionB(line, DiffView::Change, lineno2);
                     }
                     else
                     {
@@ -288,7 +287,7 @@ bool ResolveDialog::parseFile(const QString &name)
                         {
                             line.truncate(separatorPos);
                             advanced2++;
-                            addToVersionB(line, lineno2);
+                            addToVersionB(line, DiffView::Change, lineno2);
                         }
                         
                         // create an resolve item
@@ -321,21 +320,23 @@ bool ResolveDialog::parseFile(const QString &name)
 }
 
 
-void ResolveDialog::addToMergeAndVersionA(const QString& line, int& lineNo)
+void ResolveDialog::addToMergeAndVersionA(const QString& line, 
+                                          DiffView::DiffType type, int& lineNo)
 {
     lineNo++;
-    diff1->addLine(line, DiffView::Change, lineNo);
-    merge->addLine(line, DiffView::Change, lineNo);
+    diff1->addLine(line, type, lineNo);
+    merge->addLine(line, type, lineNo);
     
     m_contentVersionA      += line;
     m_contentMergedVersion += line;
 }
 
 
-void ResolveDialog::addToVersionB(const QString& line, int& lineNo)
+void ResolveDialog::addToVersionB(const QString& line, DiffView::DiffType type, 
+                                  int& lineNo)
 {
     lineNo++;
-    diff2->addLine(line, DiffView::Change, lineNo);
+    diff2->addLine(line, type, lineNo);
     
     m_contentVersionB += line;
 }
