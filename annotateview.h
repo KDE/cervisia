@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -12,49 +12,36 @@
  */
 
 
-#ifndef _ANNOTATEVIEW_H_
-#define _ANNOTATEVIEW_H_
+#ifndef ANNOTATEVIEW_H
+#define ANNOTATEVIEW_H
 
-#include <qlabel.h>
-#if QT_VERSION < 300
-#include <qlist.h>
-#include <qtableview.h>
-#else
-#include <qptrlist.h>
-#include <qttableview.h>
-#endif
+#include <qlistview.h>
 
-class AnnotateViewItem;
 class TipLabel;
+class AnnotateViewItem;
 
-#if QT_VERSION < 300
-typedef QList<AnnotateViewItem> AnnotateViewItemList;
-#else
-typedef QtTableView QTableView; // XXX: This is a hack
-typedef QPtrList<AnnotateViewItem> AnnotateViewItemList;
-#endif
 
-class AnnotateView : public QTableView
+class AnnotateView : public QListView
 {
     Q_OBJECT
-    
+
 public:
     AnnotateView( QWidget *parent=0, const char *name=0 );
     ~AnnotateView();
 
     void addLine(const QString &rev, const QString &author, const QString &date,
                  const QString &content, const QString &comment, bool odd);
-
-    virtual void setFont(const QFont &font);
-    virtual int cellWidth(int col);
+    
     virtual QSize sizeHint() const;
-    virtual void paintCell(QPainter *p, int row, int col);
-    virtual void mouseMoveEvent(QMouseEvent *e);
+    virtual void contentsMouseMoveEvent(QMouseEvent *e);
+    virtual void leaveEvent(QEvent *);
+
+private slots:
+    void hideLabel();
 
 private:
-    AnnotateViewItemList items;
-    int currentRow;
     TipLabel *currentLabel;
+    AnnotateViewItem *currentTipItem;
 };
 
 #endif
