@@ -49,31 +49,39 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 
-    QGridLayout *pairlayout = new QGridLayout;
-    pairlayout->setRowStretch(0, 0);
-    pairlayout->setRowStretch(1, 1);
-    layout->addLayout(pairlayout, 10);
+    QSplitter *vertSplitter = new QSplitter(QSplitter::Vertical, mainWidget);
 
-    QLabel *revlabel1 = new QLabel(i18n("Your version (A):"), mainWidget);
-    pairlayout->addWidget(revlabel1, 0, 0);
+    QSplitter *splitter = new QSplitter(QSplitter::Horizontal, vertSplitter);
 
-    QLabel *revlabel2 = new QLabel(i18n("Other version (B):"), mainWidget);
-    pairlayout->addWidget(revlabel2, 0, 1);
+    QWidget *versionALayoutWidget = new QWidget(splitter);
+    QBoxLayout *versionAlayout = new QVBoxLayout(versionALayoutWidget, 5);
 
-    diff1 = new DiffView(true, false, mainWidget);
-    pairlayout->addWidget(diff1, 1, 0);
+    QLabel *revlabel1 = new QLabel(i18n("Your version (A):"), versionALayoutWidget);
+    versionAlayout->addWidget(revlabel1);
+    diff1 = new DiffView(true, false, versionALayoutWidget);
+    versionAlayout->addWidget(diff1, 10);
 
-    diff2 = new DiffView(true, false, mainWidget);
-    pairlayout->addWidget(diff2, 1, 1);
+    QWidget* versionBLayoutWidget = new QWidget(splitter);
+    QBoxLayout *versionBlayout = new QVBoxLayout(versionBLayoutWidget, 5);
+
+    QLabel *revlabel2 = new QLabel(i18n("Other version (B):"), versionBLayoutWidget);
+    versionBlayout->addWidget(revlabel2);       
+    diff2 = new DiffView(true, false, versionBLayoutWidget);
+    versionBlayout->addWidget(diff2, 10);       
 
     diff1->setPartner(diff2);
     diff2->setPartner(diff1);
 
-    QLabel *mergelabel = new QLabel(i18n("Merged version:"), mainWidget);
-    layout->addWidget(mergelabel);
+    QWidget* mergeLayoutWidget = new QWidget(vertSplitter);
+    QBoxLayout *mergeLayout = new QVBoxLayout(mergeLayoutWidget, 5);
 
-    merge = new DiffView(false, false, mainWidget);
-    layout->addWidget(merge, 10);
+    QLabel *mergelabel = new QLabel(i18n("Merged version:"), mergeLayoutWidget);
+    mergeLayout->addWidget(mergelabel);
+
+    merge = new DiffView(false, false, mergeLayoutWidget);
+    mergeLayout->addWidget(merge, 10);
+
+    layout->addWidget(vertSplitter);
 
     abutton = new QPushButton("&A", mainWidget);
     connect( abutton, SIGNAL(clicked()), SLOT(aClicked()) );
