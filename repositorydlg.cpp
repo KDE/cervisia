@@ -204,6 +204,12 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, CvsService_stub* cvsService,
     QSize size = Cervisia::configDialogSize(this, m_partConfig, "RepositoryDialog");
 #endif
     resize(size);
+
+    // without this restoreLayout() can't change the column widths
+    for (int i = 0; i < m_repoList->columns(); ++i)
+        m_repoList->setColumnWidthMode(i, QListView::Manual);
+
+    m_repoList->restoreLayout(&m_partConfig, QString::fromLatin1("RepositoryListView"));
 }
 
 
@@ -214,6 +220,8 @@ RepositoryDialog::~RepositoryDialog()
 #else
     Cervisia::saveDialogSize(this, m_partConfig, "RepositoryDialog");
 #endif
+
+    m_repoList->saveLayout(&m_partConfig, QString::fromLatin1("RepositoryListView"));
 
     delete m_serviceConfig;
 }
