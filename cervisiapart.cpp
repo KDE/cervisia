@@ -757,7 +757,8 @@ void CervisiaPart::slotStatus()
 
     update->prepareJob(opt_updateRecursive, UpdateView::UpdateNoAct);
     
-    DCOPRef cvsJob = cvsService->simulateUpdate(list, opt_updateRecursive);
+    DCOPRef cvsJob = cvsService->simulateUpdate(list, opt_updateRecursive,
+                                                opt_createDirs, opt_pruneDirs);
 
     // get command line from cvs job
     QString cmdline;

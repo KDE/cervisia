@@ -338,19 +338,26 @@ DCOPRef CvsService::remove(const QStringList& files, bool recursive)
 }
 
 
-DCOPRef CvsService::simulateUpdate(const QStringList& files, bool recursive)
+DCOPRef CvsService::simulateUpdate(const QStringList& files, bool recursive,
+                                   bool createDirs, bool pruneDirs)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
         return DCOPRef();
 
     // assemble the command line
-    // cvs -n update [-l] [FILES]
+    // cvs -n update [-l] [-d] [-P] [FILES]
     d->singleCvsJob->clearCvsCommand();
 
     *d->singleCvsJob << d->repository->cvsClient() << "-n update";
 
     if( !recursive )
         *d->singleCvsJob << "-l";
+
+    if( createDirs )
+        *d->singleCvsJob << "-d";
+
+    if( pruneDirs )
+        *d->singleCvsJob << "-P";
 
     *d->singleCvsJob << CvsServiceUtils::joinFileList(files) << REDIRECT_STDERR;
 

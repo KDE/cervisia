@@ -166,11 +166,14 @@ k_dcop:
      *
      * @param files
      * @param recursive descend into subdirectories.
+     * @param createDirs
+     * @param pruneDirs
      *
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef simulateUpdate(const QStringList& files, bool recursive);
+    DCOPRef simulateUpdate(const QStringList& files, bool recursive, 
+                           bool createDirs, bool pruneDirs);
 
     /**
      * Shows the status of the files in the working copy.
