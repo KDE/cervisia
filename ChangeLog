@@ -1,3 +1,9 @@
+2005-01-31  Christian Loose  <christian.loose@kdemail.net>
+
+	* Implemented wish #95257:
+	  Added new setting for a color. It is used to highlight files in
+	  the update view with status "Not in CVS".
+
 2005-01-09  André Wöbbeking  <Woebbeking@web.de>
 
 	* Added an icon for "Diff". Thanks to Jonathan Riddell.

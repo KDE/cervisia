@@ -150,6 +150,7 @@ void SettingsDialog::readSettings()
     m_conflictButton->setColor(CervisiaSettings::conflictColor());
     m_localChangeButton->setColor(CervisiaSettings::localChangeColor());  
     m_remoteChangeButton->setColor(CervisiaSettings::remoteChangeColor());
+    m_notInCvsButton->setColor(CervisiaSettings::notInCvsColor());
 
     m_diffChangeButton->setColor(CervisiaSettings::diffChangeColor());
     m_diffInsertButton->setColor(CervisiaSettings::diffInsertColor());
@@ -192,6 +193,7 @@ void SettingsDialog::writeSettings()
     CervisiaSettings::setConflictColor(m_conflictButton->color());
     CervisiaSettings::setLocalChangeColor(m_localChangeButton->color());
     CervisiaSettings::setRemoteChangeColor(m_remoteChangeButton->color());
+    CervisiaSettings::setNotInCvsColor(m_notInCvsButton->color());
     CervisiaSettings::setDiffChangeColor(m_diffChangeButton->color());
     CervisiaSettings::setDiffInsertColor(m_diffInsertButton->color());
     CervisiaSettings::setDiffDeleteColor(m_diffDeleteButton->color());
@@ -334,7 +336,7 @@ void SettingsDialog::addLookAndFeelPage()
     m_changelogFontBox = new FontButton(i18n("Font for ChangeLog View..."),
                                         fontGroupBox);
 
-    QGroupBox* colorGroupBox = new QGroupBox(3, Qt::Horizontal,
+    QGroupBox* colorGroupBox = new QGroupBox(4, Qt::Horizontal,
                                              i18n("Colors"), lookPage);
     colorGroupBox->setColumns(4);
     colorGroupBox->setInsideSpacing(KDialog::spacingHint());
@@ -362,6 +364,10 @@ void SettingsDialog::addLookAndFeelPage()
     QLabel* diffDeleteLabel = new QLabel(i18n("Diff deletion:"), colorGroupBox);
     m_diffDeleteButton      = new KColorButton(colorGroupBox);
     diffDeleteLabel->setBuddy(m_diffDeleteButton);
+
+    QLabel* notInCvsLabel = new QLabel(i18n("Not in cvs:"), colorGroupBox);
+    m_notInCvsButton      = new KColorButton(colorGroupBox);
+    notInCvsLabel->setBuddy(m_notInCvsButton);
 
     m_splitterBox = new QCheckBox(i18n("Split main window &horizontally"), lookPage);
 }

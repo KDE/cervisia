@@ -22,6 +22,7 @@
 #include <kconfig.h>
 #include <klocale.h>
 
+#include "cervisiasettings.h"
 #include "entry.h"
 #include "updateview_items.h"
 #include "updateview_visitors.h"
@@ -164,6 +165,12 @@ const QColor& UpdateView::localChangeColor() const
 const QColor& UpdateView::remoteChangeColor() const
 {
     return m_remoteChangeColor;
+}
+
+
+const QColor& UpdateView::notInCvsColor() const
+{
+    return m_notInCvsColor;
 }
 
 
@@ -436,6 +443,8 @@ void UpdateView::updateColors()
 
     defaultColor = QColor(70, 210, 70);
     m_remoteChangeColor = m_partConfig.readColorEntry("RemoteChange", &defaultColor);
+
+    m_notInCvsColor = CervisiaSettings::notInCvsColor();
 }
 
 

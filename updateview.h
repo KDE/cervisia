@@ -56,6 +56,7 @@ public:
     const QColor& conflictColor() const;
     const QColor& localChangeColor() const;
     const QColor& remoteChangeColor() const;
+    const QColor& notInCvsColor() const;
 
     /**
      * @return \c true iff unfoldTree() is active.
@@ -91,6 +92,7 @@ private:
     QColor m_conflictColor;
     QColor m_localChangeColor;
     QColor m_remoteChangeColor;
+    QColor m_notInCvsColor;
 
     /**
      * \c true iff unfoldTree() is active (is needed by UpdateDirItem::setOpen()).

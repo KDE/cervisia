@@ -79,6 +79,7 @@ private:
     KColorButton* m_conflictButton;
     KColorButton* m_localChangeButton;
     KColorButton* m_remoteChangeButton;
+    KColorButton* m_notInCvsButton;
     KColorButton* m_diffChangeButton;
     KColorButton* m_diffInsertButton;
     KColorButton* m_diffDeleteButton;

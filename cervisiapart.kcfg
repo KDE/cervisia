@@ -24,6 +24,9 @@
       <label>The foreground color used to highlight files with a conflict in the file view.</label>
       <default>#ff8282</default>
     </entry>
+    <entry name="NotInCvsColor" key="NotInCvsColor" type="Color">
+      <default code="true">KGlobalSettings::textColor()</default>
+    </entry>
   </group>
   <group name="General" >
     <entry key="Timeout" type="UInt">

@@ -20,6 +20,7 @@
 #include <qpainter.h>
 
 #include <kdebug.h>
+#include <kglobalsettings.h>
 #include <kiconloader.h>
 #include <klocale.h>
 
@@ -678,6 +679,8 @@ void UpdateFileItem::paintCell(QPainter *p,
         color = view->remoteChangeColor();
         break;
     case Cervisia::NotInCVS:
+        color = view->notInCvsColor();
+        break;
     case Cervisia::Unknown:
     case Cervisia::UpToDate:
         break;
@@ -685,7 +688,7 @@ void UpdateFileItem::paintCell(QPainter *p,
 
     const QFont oldFont(p->font());
     QColorGroup mycg(cg);
-    if (color.isValid())
+    if (color.isValid() && color != KGlobalSettings::textColor())
     {
         QFont myFont(oldFont);
         myFont.setBold(true);
