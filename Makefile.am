@@ -11,7 +11,7 @@ kde_module_LTLIBRARIES = libcervisiapart.la
 libcervisiapart_la_SOURCES = updateview.cpp protocolview.cpp protocolview.skel \
 		   watchdlg.cpp settingsdlg.cpp changelogdlg.cpp historydlg.cpp \
 		   repositorydlg.cpp commitdlg.cpp checkoutdlg.cpp updatedlg.cpp \
-		   tagdlg.cpp mergedlg.cpp \
+		   tagdlg.cpp mergedlg.cpp configutils.cpp \
 		   logdlg.cpp logtree.cpp loglist.cpp diffdlg.cpp resolvedlg.cpp diffview.cpp \
 		   annotatedlg.cpp annotateview.cpp progressdlg.cpp progressdlg.skel \
 		   cvsprogressdlg.cpp tiplabel.cpp listview.cpp \
@@ -36,7 +36,7 @@ appsdir = $(kde_appsdir)/Development
 apps_DATA = cervisia.desktop
 
 partrcdir = $(kde_datadir)/cervisiapart
-partrc_DATA = cervisiaui.rc 
+partrc_DATA = cervisiaui.rc
 
 shellrcdir = $(kde_datadir)/cervisia
 shellrc_DATA = cervisiashellui.rc
