@@ -65,7 +65,7 @@ signals:
 
 protected:
     virtual void contentsMousePressEvent(QMouseEvent *e);
-    virtual void contentsMouseMoveEvent(QMouseEvent *e);
+//    virtual void contentsMouseMoveEvent(QMouseEvent *e);
     virtual void leaveEvent(QEvent *);
     virtual void keyPressEvent(QKeyEvent *e);
 

@@ -28,8 +28,11 @@ LogListViewItem::LogListViewItem( QListView *list,
                                   const QString &rev, const QString &author, const QString &date,
                                   const QString &comment, const QString &tagcomment )
     : QListViewItem(list, rev, author, date+" ",
-                    extractBranchName(tagcomment), truncateLine(comment), extractOrdinaryTags(tagcomment)),
-    mrev(rev), mauthor(author), mdate(date), mcomment(comment), mtagcomment(tagcomment)
+                    extractBranchName(tagcomment),
+                    truncateLine(comment),
+                    extractOrdinaryTags(tagcomment)),
+      mrev(rev), mauthor(author), mdate(date),
+      mcomment(comment), mtagcomment(tagcomment)
 {
 }
 
@@ -120,11 +123,11 @@ QString LogListViewItem::key(int column, bool) const
     res = "";
     for (QStringList::Iterator it = strlist.begin();
          it != strlist.end(); ++it)
-	{
-	    tmp.sprintf("%5d", (*it).toInt());
-	    res += tmp;
-	    res += ".";
-	}
+    {
+        tmp.sprintf("%5d", (*it).toInt());
+        res += tmp;
+        res += ".";
+    }
     res.truncate(res.length()-1);
     return res;
 }
@@ -252,24 +255,24 @@ void LogListView::headerClicked(int column)
 void LogListView::contentsMousePressEvent(QMouseEvent *e)
 {
     if ( e->button() == LeftButton )
-	{
-            QPoint vp = contentsToViewport(e->pos());
-	    LogListViewItem *selItem
-                = static_cast<LogListViewItem*>( itemAt(vp) );
-            if (selItem)
-                emit revisionClicked(selItem->text(0), false);
-        }
+    {
+        QPoint vp = contentsToViewport(e->pos());
+        LogListViewItem *selItem
+            = static_cast<LogListViewItem*>( itemAt(vp) );
+        if (selItem)
+            emit revisionClicked(selItem->text(0), false);
+    }
     else if ( e->button() == MidButton )
-        {
-            QPoint vp = contentsToViewport(e->pos());
-            LogListViewItem *selItem
-                = static_cast<LogListViewItem*>( itemAt(vp) );
-            if (selItem)
-                emit revisionClicked(selItem->text(0), true);
-	}
+    {
+        QPoint vp = contentsToViewport(e->pos());
+        LogListViewItem *selItem
+            = static_cast<LogListViewItem*>( itemAt(vp) );
+        if (selItem)
+            emit revisionClicked(selItem->text(0), true);
+    }
 }
 
-
+/*
 void LogListView::contentsMouseMoveEvent(QMouseEvent *e)
 {
     QPoint vp = contentsToViewport(e->pos());
@@ -277,55 +280,56 @@ void LogListView::contentsMouseMoveEvent(QMouseEvent *e)
         = static_cast<LogListViewItem*>( itemAt(vp) );
 
     if (item != currentTipItem)
-        {
-            if (currentLabel)
-                currentLabel->hide();
-            delete currentLabel;
-            currentLabel = 0;
-        }
+    {
+        if (currentLabel)
+            currentLabel->hide();
+        delete currentLabel;
+        currentLabel = 0;
+    }
 
     if (!currentLabel && item)
+    {
+        QString text = "<qt><b>";
+        text += item->mrev;
+        text += "</b>&nbsp;&nbsp;";
+        text += item->mauthor;
+        text += "&nbsp;&nbsp;<b>";
+        text += item->mdate;
+        text += "</b>";
+        QStringList list2 = QStringList::split("\n", item->mcomment);
+        QStringList::Iterator it2;
+        for (it2 = list2.begin(); it2 != list2.end(); ++it2)
         {
-            QString text = "<qt><b>";
-            text += item->mrev;
-            text += "</b>&nbsp;&nbsp;";
-            text += item->mauthor;
-            text += "&nbsp;&nbsp;<b>";
-            text += item->mdate;
-            text += "</b>";
-            QStringList list2 = QStringList::split("\n", item->mcomment);
-            QStringList::Iterator it2;
-            for (it2 = list2.begin(); it2 != list2.end(); ++it2)
+            text += "<br>";
+            text += (*it2);
+        }
+        if (!item->mtagcomment.isEmpty())
+        {
+            text += "<i>";
+            QStringList list3 = QStringList::split("\n", item->mtagcomment);
+            QStringList::Iterator it3;
+            for (it3 = list3.begin(); it3 != list3.end(); ++it3)
                 {
                     text += "<br>";
-                    text += (*it2);
+                    text += (*it3);
                 }
-            if (!item->mtagcomment.isEmpty())
-                {
-                    text += "<i>";
-                    QStringList list3 = QStringList::split("\n", item->mtagcomment);
-                    QStringList::Iterator it3;
-                    for (it3 = list3.begin(); it3 != list3.end(); ++it3)
-                        {
-                            text += "<br>";
-                            text += (*it3);
-                        }
-                    text += "</i>";
-                }
-            text += "</qt>";
-            int left = static_cast<QMouseEvent*>(e)->pos().x() + 20;
-            int top = viewport()->mapTo(this, itemRect(item).bottomLeft()).y();
-#if 0
-            int vpx = contentsToViewport(static_cast<QMouseEvent*>(e)->pos()).x();
-            int index = header()->mapToIndex(header()->sectionAt(vpx));
-            if (index < columns()-1)
-                left = header()->sectionPos(header()->mapToSection(index+1));
-#endif
-            currentLabel = new TipLabel(text);
-            currentLabel->showAt(mapToGlobal(QPoint(left, top)));
-            currentTipItem = item;
+            text += "</i>";
         }
+        text += "</qt>";
+        int left = static_cast<QMouseEvent*>(e)->pos().x() + 20;
+        int top = viewport()->mapTo(this, itemRect(item).bottomLeft()).y();
+#if 0
+        int vpx = contentsToViewport(static_cast<QMouseEvent*>(e)->pos()).x();
+        int index = header()->mapToIndex(header()->sectionAt(vpx));
+        if (index < columns()-1)
+            left = header()->sectionPos(header()->mapToSection(index+1));
+#endif
+        currentLabel = new TipLabel(text);
+        currentLabel->showAt(mapToGlobal(QPoint(left, top)));
+        currentTipItem = item;
+    }
 }
+*/
 
 
 void LogListView::leaveEvent(QEvent *)
@@ -344,32 +348,33 @@ void LogListView::keyPressEvent(QKeyEvent *e)
     delete currentLabel;
     currentLabel = 0;
 
-    switch (e->key()) {
-    case Key_A:
-        if (currentItem())
-            emit revisionClicked(currentItem()->text(0), false);
-        break;
-        break;
-    case Key_B:
-        if (currentItem())
-            emit revisionClicked(currentItem()->text(0), true);
-        break;
-    case Key_Backspace:
-    case Key_Delete:
-    case Key_Down:
-    case Key_Up:
-    case Key_Home:
-    case Key_End:
-    case Key_Next:
-    case Key_Prior:
-        if (e->state() == 0)
-            QListView::keyPressEvent(e);
-        else
-            kapp->postEvent(this, new QKeyEvent(QEvent::KeyPress, e->key(), e->ascii(), 0));
-        break;
-    default:
-        // Ignore Key_Enter, Key_Return
-        e->ignore();
+    switch (e->key())
+    {
+        case Key_A:
+            if (currentItem())
+                emit revisionClicked(currentItem()->text(0), false);
+            break;
+            break;
+        case Key_B:
+            if (currentItem())
+                emit revisionClicked(currentItem()->text(0), true);
+            break;
+        case Key_Backspace:
+        case Key_Delete:
+        case Key_Down:
+        case Key_Up:
+        case Key_Home:
+        case Key_End:
+        case Key_Next:
+        case Key_Prior:
+            if (e->state() == 0)
+                QListView::keyPressEvent(e);
+            else
+                kapp->postEvent(this, new QKeyEvent(QEvent::KeyPress, e->key(), e->ascii(), 0));
+            break;
+        default:
+            // Ignore Key_Enter, Key_Return
+            e->ignore();
     }
 }
 
