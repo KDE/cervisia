@@ -34,7 +34,8 @@ public:
     
     virtual QSize sizeHint() const;
     virtual void contentsMouseMoveEvent(QMouseEvent *e);
-    virtual void leaveEvent(QEvent *);
+    virtual void windowActivationChange(bool oldActive);
+    virtual void leaveEvent(QEvent *e);
 
 private slots:
     void hideLabel();

@@ -188,6 +188,9 @@ QSize AnnotateView::sizeHint() const
 
 void AnnotateView::contentsMouseMoveEvent(QMouseEvent *e)
 {
+    if (!isActiveWindow())
+        return;
+
     QPoint vp = contentsToViewport(e->pos());
     AnnotateViewItem *item
         = static_cast<AnnotateViewItem*>( itemAt(vp) );
@@ -223,9 +226,17 @@ void AnnotateView::contentsMouseMoveEvent(QMouseEvent *e)
 }
 
 
-void AnnotateView::leaveEvent(QEvent *)
+void AnnotateView::windowActivationChange(bool oldActive)
 {
     hideLabel();
+    QListView::windowActivationChange(oldActive);
+}
+
+
+void AnnotateView::leaveEvent(QEvent *e)
+{
+    hideLabel();
+    QListView::leaveEvent(e);
 }
 
 #include "annotateview.moc"

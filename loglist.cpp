@@ -303,6 +303,9 @@ void LogListView::contentsMousePressEvent(QMouseEvent *e)
 
 void LogListView::contentsMouseMoveEvent(QMouseEvent *e)
 {
+    if (!isActiveWindow())
+        return;
+
     QPoint vp = contentsToViewport(e->pos());
     LogListViewItem *item
         = static_cast<LogListViewItem*>( itemAt(vp) );
@@ -355,9 +358,17 @@ void LogListView::contentsMouseMoveEvent(QMouseEvent *e)
 }
 
 
-void LogListView::leaveEvent(QEvent *)
+void LogListView::windowActivationChange(bool oldActive)
 {
     hideLabel();
+    QListView::windowActivationChange(oldActive);
+}
+
+
+void LogListView::leaveEvent(QEvent *e)
+{
+    hideLabel();
+    QListView::leaveEvent(e);
 }
 
 

@@ -48,7 +48,8 @@ signals:
 protected:
     virtual void contentsMousePressEvent(QMouseEvent *e);
     virtual void contentsMouseMoveEvent(QMouseEvent *e);
-    virtual void leaveEvent(QEvent *);
+    virtual void windowActivationChange(bool oldActive);
+    virtual void leaveEvent(QEvent *e);
     virtual void keyPressEvent(QKeyEvent *e);
 
 private slots:
