@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002 Christian Loose <christian.loose@hamburg.de>
+ * Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -21,17 +21,16 @@
 #ifndef CVSSERVICE_H
 #define CVSSERVICE_H
 
-#include <qobject.h>
+#include <qstringlist.h>
 #include <dcopref.h>
 #include <dcopobject.h>
 
 class QString;
 
 
-class CvsService : public QObject, public DCOPObject
+class CvsService : public DCOPObject
 {
     K_DCOP
-    Q_OBJECT
 
 public:
     CvsService();
@@ -39,25 +38,8 @@ public:
 
 k_dcop:
     /**
-     * Changes the working copy and the corresponding cvs repository.
-     *
-     * @param dirName path to the local working copy directory.
      */
-    bool setWorkingCopy(const QString& dirName);
-
-    /**
-     * Path to the current working copy.
-     *
-     * @return The working copy directory. Can be null if not set.
-     */
-    QString workingCopy() const;
-    
-    /**
-     * Path to the current cvs repository.
-     *
-     * @return The cvs repository. Can be null if not set.
-     */
-    QString repository() const;
+    DCOPRef add(const QStringList& files, bool isBinary);
 
     /**
      * Shows information on who last modified each line of a file and when.
@@ -70,6 +52,26 @@ k_dcop:
      */
     DCOPRef annotate(const QString& fileName, const QString& revision);
     
+    /**
+     * Checks out a module from the repository into a working copy.
+     *
+     * @param workingDir
+     * @param repository
+     * @param module
+     * @param tag
+     * @param pruneDirs remove empty directories from the working copy.
+     *
+     * @return A DCOP reference to the cvs job or in case of failure a
+     *         null reference.
+     */
+    DCOPRef checkout(const QString& workingDir, const QString& repository,
+                     const QString& module, const QString& tag, bool pruneDirs);
+
+    /**
+     */
+    DCOPRef commit(const QStringList& files, const QString& commitMessage,
+                   bool recursive);
+
     /**
      * Shows log messages for a file.
      *
@@ -90,7 +92,7 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */    
-    DCOPRef status(const QString& files, bool recursive);
+    DCOPRef status(const QStringList& files, bool recursive);
     
     /**
      * Shows the status of the files in the working copy.
@@ -102,7 +104,7 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */    
-    DCOPRef status(const QString& files, bool recursive, bool tagInfo);
+    DCOPRef status(const QStringList& files, bool recursive, bool tagInfo);
     
     /**
      * Merges changes from the repository into the files of the
@@ -118,31 +120,13 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef update(const QString& files, bool recursive, bool createDirs,
+    DCOPRef update(const QStringList& files, bool recursive, bool createDirs,
                    bool pruneDirs, const QString& extraOpt);
                    
-    /**
-     * Checks out a module from the repository into a working copy.
-     *
-     * @param workingDir
-     * @param repository
-     * @param module
-     * @param tag
-     * @param pruneDirs remove empty directories from the working copy.
-     *
-     * @return A DCOP reference to the cvs job or in case of failure a
-     *         null reference.
-     */
-    DCOPRef checkout(const QString& workingDir, const QString& repository,
-                     const QString& module, const QString& tag, bool pruneDirs);
-
     /**
      * Quits the DCOP service.
      */
     void quit();
-
-private slots:
-    void slotConfigDirty(const QString& fileName);
 
 private:
     struct Private;

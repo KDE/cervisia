@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002 Christian Loose <christian.loose@hamburg.de>
+ * Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -20,22 +20,135 @@
 
 #include "repository.h"
 
+#include <qdir.h>
 #include <qfile.h>
 #include <qstring.h>
+
 #include <kapplication.h>
 #include <kconfig.h>
+#include <kdirwatch.h>
+#include <kstandarddirs.h>
 
 
 struct Repository::Private
 {
-    QString client;
-    QString location;
-    QString rsh;
-    QString server;
-    int     compressionLevel;
+    Private() : compressionLevel(0) {}
+    
+    QString     configFileName;
+    
+    QString     workingCopy;
+    QString     location;
+    
+    QString     client;
+    QString     rsh;
+    QString     server;
+    int         compressionLevel;
 
     void readConfig();
 };
+
+
+
+Repository::Repository()
+    : QObject()
+    , DCOPObject("CvsRepository")
+    , d(new Private)
+{
+    // other cvsservice instances might change the configuration file
+    // so we watch it for changes
+    d->configFileName = locate("config", "cvsservicerc");
+    KDirWatch* fileWatcher = new KDirWatch(this);
+    connect(fileWatcher, SIGNAL(dirty(QString)),
+            this, SLOT(slotConfigDirty(QString)));
+    fileWatcher->addFile(d->configFileName);
+}
+
+
+Repository::~Repository()
+{
+    delete d;
+}
+
+
+QString Repository::cvsClient() const
+{
+    QString client(d->client);
+
+    // suppress reading of the '.cvsrc' file
+    client += " -f";
+
+    // we don't need the command line option if there is no compression level set
+    if( d->compressionLevel > 0 )
+    {
+        client += " -z" + QString::number(d->compressionLevel) + " ";
+    }
+
+    return client;
+}
+
+    
+QString Repository::rsh() const
+{
+    return d->rsh;
+}
+
+
+QString Repository::server() const
+{
+    return d->server;
+}
+
+
+bool Repository::setWorkingCopy(const QString& dirName)
+{
+    const QFileInfo fi(dirName);
+    QString path = fi.absFilePath();
+    
+    // is this really a cvs-controlled directory?
+    const QFileInfo cvsDirInfo(path + "/CVS");
+    if( !cvsDirInfo.exists() || !cvsDirInfo.isDir() )
+        return false;
+
+    d->workingCopy = path;
+    d->location    = QString::null;
+    
+    // determine path to the repository
+    QFile rootFile(path + "/CVS/Root");
+    if( rootFile.open(IO_ReadOnly) ) 
+    {
+        QTextStream stream(&rootFile);
+        d->location = stream.readLine();
+    }
+    rootFile.close();
+
+    QDir::setCurrent(path);
+    d->readConfig();
+    
+    return true;
+}
+
+
+QString Repository::workingCopy() const
+{
+    return d->workingCopy;
+}
+
+
+QString Repository::location() const
+{
+    return d->location;
+}
+
+
+void Repository::slotConfigDirty(const QString& fileName)
+{
+    if( fileName == d->configFileName )
+    {
+        // reread the configuration data from disk
+        kapp->config()->reparseConfiguration();
+        d->readConfig();
+    }
+}
 
 
 void Repository::Private::readConfig()
@@ -65,68 +178,4 @@ void Repository::Private::readConfig()
 }
 
 
-
-Repository::Repository(const QString& workingCopyDir)
-    : d(new Private)
-{
-    // initialize private data
-    d->compressionLevel = 0;
-
-    // determine path to the repository
-    QFile rootFile(workingCopyDir + "/CVS/Root");
-    if( rootFile.open(IO_ReadOnly) ) 
-    {
-        QTextStream stream(&rootFile);
-        d->location = stream.readLine();
-    }
-    rootFile.close();
-
-    d->readConfig();
-}
-
-
-Repository::~Repository()
-{
-    delete d;
-}
-
-
-QString Repository::cvsClient() const
-{
-    QString client(d->client);
-
-    // suppress reading of the '.cvsrc' file
-    client += " -f";
-
-    // we don't need the command line option if there is no compression level set
-    if( d->compressionLevel > 0 )
-    {
-        client += " -z" + QString::number(d->compressionLevel) + " ";
-    }
-
-    return client;
-}
-
-
-void Repository::updateConfig()
-{
-    d->readConfig();
-}
-
-
-QString Repository::location() const
-{
-    return d->location;
-}
-
-    
-QString Repository::rsh() const
-{
-    return d->rsh;
-}
-
-
-QString Repository::server() const
-{
-    return d->server;
-}
+#include "repository.moc"
