@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2002 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -143,9 +143,10 @@ void AnnotateController::Private::parseCvsLogOutput()
             break;
     }
 
-    // skip 2 lines
-    for( int i = 0; i < 2; ++i )
-        progress->getLine(line);
+    // skip header part of cvs annotate output
+    bool notEof = true;
+    while( notEof && !line.startsWith("*****") )
+        notEof = progress->getLine(line);
 }
 
 
