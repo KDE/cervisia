@@ -88,6 +88,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     , recent( 0 )
     , cvsService( 0 )
     , statusBar( 0 )
+    , m_browserExt( 0 )
     , filterLabel( 0 )
     , m_editWithId(0)
     , m_currentEditMenu(0)
@@ -95,7 +96,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     KGlobal::locale()->insertCatalogue("cervisia");
 
     setInstance( CervisiaFactory::instance() );
-    new CervisiaBrowserExtension( this );
+    m_browserExt = new CervisiaBrowserExtension( this );
 
     // start the cvs DCOP service
     QString error;
@@ -651,6 +652,8 @@ void CervisiaPart::updateActions()
     bool single = update->hasSingleSelection();
     stateChanged("has_single_selection", single ? StateNoReverse
                                                 : StateReverse);
+
+    m_browserExt->setPropertiesActionEnabled(single);
 
     //    bool nojob = !( actionCollection()->action( "stop_job" )->isEnabled() );
     bool selected = (update->currentItem() != 0);
@@ -1838,6 +1841,18 @@ CervisiaBrowserExtension::CervisiaBrowserExtension( CervisiaPart *p )
 CervisiaBrowserExtension::~CervisiaBrowserExtension()
 {
 
+}
+
+
+void CervisiaBrowserExtension::setPropertiesActionEnabled(bool enabled)
+{
+    emit enableAction("properties", enabled);
+}
+
+
+void CervisiaBrowserExtension::properties()
+{
+    static_cast<CervisiaPart*>(parent())->slotFileProperties();
 }
 
 // Local Variables:

@@ -39,6 +39,7 @@ class KAboutData;
 class KListView;
 class KRecentFilesAction;
 class CvsService_stub;
+class CervisiaBrowserExtension;
 
 
 class CervisiaStatusBarExtension : public KParts::StatusBarExtension
@@ -184,6 +185,7 @@ private:
 
     CvsService_stub*            cvsService;
     CervisiaStatusBarExtension* statusBar;
+    CervisiaBrowserExtension*   m_browserExt;
     QLabel*                     filterLabel;
 
     int                         m_editWithId;
@@ -202,6 +204,11 @@ class CervisiaBrowserExtension : public KParts::BrowserExtension
 public:
     CervisiaBrowserExtension( CervisiaPart * );
     ~CervisiaBrowserExtension();
+
+    void setPropertiesActionEnabled(bool enabled);
+
+public slots:
+    void properties();
 };
 
 #endif // CERVISIAPART_H
