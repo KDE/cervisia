@@ -33,7 +33,6 @@
 #include <kglobal.h>
 
 #include "logdlg.h"
-#include "loglist.h"
 #include "diffdlg.h"
 #include "resolvedlg.h"
 #include "annotatedlg.h"
@@ -1785,8 +1784,6 @@ void CervisiaPart::readDialogProperties( KConfig *config )
     DiffDialog::loadOptions(config);
     config->setGroup("Log dialog");
     LogDialog::loadOptions(config);
-    config->setGroup("LogList view");
-    LogListView::loadOptions(config);
     config->setGroup("Resolve dialog");
     ResolveDialog::loadOptions(config);
     config->setGroup("Resolve edit dialog");
@@ -1812,8 +1809,6 @@ void CervisiaPart::saveDialogProperties( KConfig *config )
     DiffDialog::saveOptions(config);
     config->setGroup("Log dialog");
     LogDialog::saveOptions(config);
-    config->setGroup("LogList view");
-    LogListView::saveOptions(config);
     config->setGroup("Resolve dialog");
     ResolveDialog::saveOptions(config);
     config->setGroup("Resolve edit dialog");
