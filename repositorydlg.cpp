@@ -33,10 +33,12 @@ class RepositoryListItem : public KListViewItem
 {
 public:
     RepositoryListItem(KListView* parent, const QString& repo, bool loggedin);
-    void setRsh(const QString &rsh);
-    void setServer(const QString &server) { mServer = server; }
+    
+    void setRsh(const QString& rsh);
+    void setServer(const QString& server) { m_server = server; }
     void setCompression(int compression);
     void setIsLoggedIn(bool isLoggedIn);
+    
     QString repository() const
     {
         return text(0);
@@ -44,18 +46,21 @@ public:
     QString rsh() const
     {
         QString str = text(1);
-        return (str.startsWith("ext (")? str.mid(5, str.length()-6) : QString::null);
+        return (str.startsWith("ext (") ? str.mid(5, str.length()-6) 
+                                        : QString::null);
     }
-    QString server() const { return mServer; }
+    QString server() const { return m_server; }
     int compression() const
     {
-        bool ok; int n = text(2).toInt(&ok); return ok? n : -1;
+        bool ok; 
+        int n = text(2).toInt(&ok); 
+        return ok ? n : -1;
     }
     bool isLoggedIn() const { return m_isLoggedIn; }
 
 private:
-    QString mServer;
-    bool m_isLoggedIn;
+    QString m_server;
+    bool    m_isLoggedIn;
 };
 
 
@@ -76,7 +81,7 @@ RepositoryListItem::RepositoryListItem(KListView* parent, const QString& repo,
 }
 
 
-void RepositoryListItem::setRsh(const QString &rsh)
+void RepositoryListItem::setRsh(const QString& rsh)
 {
     QString repo = repository();
     QString method;
