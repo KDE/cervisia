@@ -1174,11 +1174,12 @@ void CervisiaPart::slotLock()
     if (list.isEmpty())
         return;
 
-    QString cmdline = cvsClient(repository);
-    cmdline += " admin -l ";
-    cmdline += joinLine(list);
-
-    if (protocol->startJob(sandbox, repository, cmdline))
+    DCOPRef cvsJob = cvsService->lock(list);
+    
+    // get command line from cvs job
+    QString cmdline = cvsJob.call("cvsCommand()");
+    
+    if( protocol->startJob() )
     {
         showJobStart(cmdline);
         connect( protocol, SIGNAL(jobFinished(bool, int)),
@@ -1192,12 +1193,13 @@ void CervisiaPart::slotUnlock()
     QStringList list = update->multipleSelection();
     if (list.isEmpty())
         return;
-
-    QString cmdline = cvsClient(repository);
-    cmdline += " admin -u ";
-    cmdline += joinLine(list);
-
-    if (protocol->startJob(sandbox, repository, cmdline))
+    
+    DCOPRef cvsJob = cvsService->unlock(list);
+    
+    // get command line from cvs job
+    QString cmdline = cvsJob.call("cvsCommand()");
+    
+    if( protocol->startJob() )
     {
         showJobStart(cmdline);
         connect( protocol, SIGNAL(jobFinished(bool, int)),

@@ -1,3 +1,9 @@
+2003-07-30  Christian Loose  <christian.loose@hamburg.de>
+
+	* Added lock() and unlock() methods to the DCOP service.
+	* Replace the lock and unlock implementation in CervisiaPart
+	   by calls to the new methods in the DCOP service.
+
 2003-07-28  Christian Loose  <christian.loose@hamburg.de>
 
 	* Add search functionality to the plain log view. Now you
