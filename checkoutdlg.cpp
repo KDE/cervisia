@@ -45,11 +45,11 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
 
     QBoxLayout *layout = new QVBoxLayout(this, 10);
 
-    QGridLayout *grid = new QGridLayout((action==Checkout)? 4 : 8, 2, 10);
+    QGridLayout *grid = new QGridLayout((action==Checkout)? 4 : 9, 2, 10);
     layout->addLayout(grid);
     grid->setColStretch(0, 1);
     grid->setColStretch(1, 20);
-    for (int i = 0; i < ((action==Checkout)? 4 : 8); ++i)
+    for (int i = 0; i < ((action==Checkout)? 4 : 9); ++i)
         grid->setRowStretch(i, 0);
 
     repo_combo = new QComboBox(true, this);
@@ -154,10 +154,19 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
                   (ignore_edit, i18n("&Ignore files:"), this);
               ignore_label->setFixedSize(ignore_label->sizeHint());
               grid->addWidget(ignore_label, resume_row + 3, 0, AlignLeft | AlignVCenter);
+
+              comment_edit = new QLineEdit(this);
+              comment_edit->setMinimumSize(comment_edit->sizeHint());
+              grid->addWidget(comment_edit, resume_row + 4, 1);
+
+              QLabel *comment_label = new QLabel
+                  (comment_edit, i18n("&Comment:"), this);
+              comment_label->setFixedSize(comment_label->sizeHint());
+              grid->addWidget(comment_label, resume_row + 4, 0, AlignLeft | AlignVCenter);
   
               binary_box = new QCheckBox(i18n("Import as &binaries"), this);
               binary_box->setMinimumSize(binary_box->sizeHint());
-              grid->addMultiCellWidget(binary_box, resume_row + 4, 6, 0, 1);
+              grid->addMultiCellWidget(binary_box, resume_row + 5, 7, 0, 1);
               
           }
 

@@ -36,14 +36,16 @@ public:
         { return repo_combo->currentText(); }
     QString module() const
         { return act==Import? module_edit->text() : module_combo->currentText(); }
-	QString branch() const
-		{ return branch_edit->text(); }
+    QString branch() const
+        { return branch_edit->text(); }
     QString vendorTag() const
         { return vendortag_edit->text(); }
     QString releaseTag() const
         { return releasetag_edit->text(); }
     QString ignoreFiles() const
         { return ignore_edit->text(); }
+    QString comment() const
+        { return comment_edit->text(); }
     bool importBinary() const
         { return binary_box->isChecked(); }
 
@@ -61,7 +63,7 @@ private:
     struct Options {
         QString repo;
         QString module;
-		QString branch;
+        QString branch;
         QString workdir;
         QString vendortag;
         QString releasetag;
@@ -73,6 +75,7 @@ private:
     QComboBox *repo_combo, *module_combo;
     QLineEdit *module_edit, *workdir_edit;
     QLineEdit *branch_edit;
+    QLineEdit *comment_edit;
     QLineEdit *vendortag_edit, *releasetag_edit, *ignore_edit;
     QCheckBox *binary_box;
     QPushButton *ok_button, *cancel_button;

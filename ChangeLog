@@ -1,3 +1,10 @@
+2002-04-22  Bernd Gehrmann  <bernd@mail.berlios.de>
+
+	* Patch by Christian Loose <christian.loose@hamburg.de>:
+	  - Allow to specify a comment when importing a module
+	  - Enable checkout/import when no item is selected
+	* Always enable folding and unfolding the tree
+
 2002-04-17  Bernd Gehrmann  <bernd@mail.berlios.de>
 
 	* Patch by Gregory Green <gregory.p.green@boeing.com>:

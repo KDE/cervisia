@@ -561,11 +561,9 @@ void CervisiaPart::updateActions()
     actionCollection()->action( "lock_files" )->setEnabled( nojob );
     actionCollection()->action( "unlock_files" )->setEnabled( nojob );
 
-    actionCollection()->action( "repository_checkout" )->setEnabled( nojob );
-    actionCollection()->action( "repository_import" )->setEnabled( nojob );
+    actionCollection()->action( "repository_checkout" )->setEnabled( !hasRunningJob );
+    actionCollection()->action( "repository_import" )->setEnabled( !hasRunningJob );
 
-    actionCollection()->action( "view_unfold_tree" )->setEnabled( selected );
-    actionCollection()->action( "view_fold_tree" )->setEnabled( selected );
     actionCollection()->action( "view_history" )->setEnabled(selected);
     actionCollection()->action( "make_patch" )->setEnabled(selected);
 }
@@ -576,7 +574,7 @@ void CervisiaPart::aboutCervisia()
     QString aboutstr(i18n("Cervisia %1\n"
                           "(Using KDE %2)\n"
                           "\n"
-                          "Copyright (C) 1999-2001\n"
+                          "Copyright (C) 1999-2002\n"
                           "Bernd Gehrmann <bernd@physik.hu-berlin.de>\n"
                           "\n"
                           "This program may be distributed under the terms of the Q Public\n"
@@ -584,7 +582,8 @@ void CervisiaPart::aboutCervisia()
                           "file LICENSE.QPL included in the packaging of this file.\n\n"
                           "This program is distributed in the hope that it will be useful,\n"
                           "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-                          "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."));
+                          "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n"
+                          "See the ChangeLog file for a list of contributors."));
     QMessageBox::about(0, i18n("About Cervisia"),
                        aboutstr.arg(CERVISIA_VERSION).arg(KDE_VERSION_STRING));
 }
@@ -1221,8 +1220,9 @@ void CervisiaPart::importOrCheckout(CheckoutDialog::ActionType action)
                 cmdline += " -I ";
                 cmdline += KShellProcess::quote(ignore);
             }
+            QString comment = l->comment().stripWhiteSpace();
             cmdline += " -m ";
-            cmdline += (QString("\"") + "" + "\" "); // log message?
+            cmdline += (QString("\"") + comment + "\" "); 
             cmdline += l->module();
             cmdline += " ";
             cmdline += l->vendorTag();
