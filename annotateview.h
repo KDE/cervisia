@@ -15,8 +15,10 @@
 #ifndef ANNOTATEVIEW_H
 #define ANNOTATEVIEW_H
 
+
 #include <qlistview.h>
 
+class QDate;
 class TipLabel;
 class AnnotateViewItem;
 
@@ -29,7 +31,7 @@ public:
     AnnotateView( QWidget *parent=0, const char *name=0 );
     ~AnnotateView();
 
-    void addLine(const QString &rev, const QString &author, const QString &date,
+    void addLine(const QString &rev, const QString &author, const QDate &date,
                  const QString &content, const QString &comment, bool odd);
     
     virtual QSize sizeHint() const;

@@ -20,6 +20,8 @@
 
 #include "qttableview.h"
 
+
+class QDateTime;
 class LogTreeItem;
 class LogTreeConnection;
 class TipLabel;
@@ -33,10 +35,10 @@ class LogTreeView : public QtTableView
     Q_OBJECT
 
 public:
-    LogTreeView( QWidget *parent=0, const char *name=0 );
-    ~LogTreeView();
+    explicit LogTreeView( QWidget *parent=0, const char *name=0 );
+    virtual ~LogTreeView();
     
-    void addRevision(const QString &rev, const QString &author, const QString &date,
+    void addRevision(const QString &rev, const QString &author, const QDateTime &date,
                      const QString &comment, const QString &taglist, const QString &tagcomment);
     void setSelectedPair(QString selectionA, QString selectionB);
     void collectConnections();

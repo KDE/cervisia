@@ -26,6 +26,7 @@
 #include <kmessagebox.h>
 #include <kconfig.h>
 #include <kprocess.h>
+#include <krfcdate.h>
 
 #include "annotatedlg.h"
 #include "cvsprogressdlg.h"
@@ -194,7 +195,8 @@ void LogDialog::saveOptions(KConfig *config)
 bool LogDialog::parseCvsLog(const QString &sbox, const QString &repo, const QString &fname)
 {
     QStringList strlist;
-    QString tag, rev, date, author, comment;
+    QString tag, rev, author, comment;
+    QDateTime date;
     enum { Begin, Tags, Admin, Revision,
 	   Author, Branches, Comment, Finished } state;
 
@@ -267,8 +269,10 @@ bool LogDialog::parseCvsLog(const QString &sbox, const QString &repo, const QStr
                     break;
                 case Author:
                     strlist = splitLine(line);
-                    date = strlist[2];
-                    date = strlist[1] + " " + date.left(date.length()-1);
+                    // convert date in ISO format (YYYY-MM-DDTHH:MM:SS)
+                    strlist[1].replace('/', '-');
+                    strlist[2].truncate(8); // Time foramt is HH:MM:SS
+                    date.setTime_t(KRFCDate::parseDateISO8601(strlist[1] + 'T' + strlist[2]));
                     author = strlist[4];
                     author = author.left(author.length()-1);
                     comment = "";
@@ -374,7 +378,8 @@ bool LogDialog::parseCvsLog(const QString &sbox, const QString &repo, const QStr
 
 bool LogDialog::parseCvsLog(DCOPRef& cvsService, const QString& fileName)
 {
-    QString tag, rev, date, author, comment;
+    QString tag, rev, author, comment;
+    QDateTime date;
     enum { Begin, Tags, Admin, Revision,
        Author, Branches, Comment, Finished } state;
 
@@ -448,8 +453,10 @@ bool LogDialog::parseCvsLog(DCOPRef& cvsService, const QString& fileName)
             case Author:
                 {
                     QStringList strlist = splitLine(line);
-                    date = strlist[2];
-                    date = strlist[1] + " " + date.left(date.length()-1);
+                    // convert date in ISO format (YYYY-MM-DDTHH:MM:SS)
+                    strlist[1].replace('/', '-');
+                    strlist[2].truncate(8); // Time foramt is HH:MM:SS
+                    date.setTime_t(KRFCDate::parseDateISO8601(strlist[1] + 'T' + strlist[2]));
                     author = strlist[4];
                     author = author.left(author.length()-1);
                     comment = "";
@@ -600,7 +607,7 @@ void LogDialog::revisionSelected(QString rev, bool rmb)
                 
                 revbox[rmb?1:0]->setText(rev);
                 authorbox[rmb?1:0]->setText(it.current()->author);
-                datebox[rmb?1:0]->setText(it.current()->date);
+                datebox[rmb?1:0]->setText(KGlobal::locale()->formatDateTime(it.current()->date));
                 commentbox[rmb?1:0]->setText(it.current()->comment);
                 tagsbox[rmb?1:0]->setText(it.current()->tagcomment);
                 

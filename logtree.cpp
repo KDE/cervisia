@@ -14,11 +14,14 @@
 #include "logtree.h"
 
 #include <qapplication.h>
+#include <qdatetime.h>
 #include <qpainter.h>
 #include <qstylesheet.h>
 #include <qtooltip.h>
 #include <kdebug.h>
+#include <kglobal.h>
 #include <kglobalsettings.h>
+#include <klocale.h>
 
 #include "tiplabel.h"
 #include "misc.h"
@@ -37,7 +40,7 @@ class LogTreeItem
 public:
     QString rev;
     QString author;
-    QString date;
+    QDateTime date;
     QString comment;
     QString tagcomment;
     QString taglist;
@@ -104,7 +107,7 @@ void LogTreeView::hideLabel()
 }
 
 
-void LogTreeView::addRevision(const QString &rev, const QString &author, const QString &date,
+void LogTreeView::addRevision(const QString &rev, const QString &author, const QDateTime &date,
                               const QString &comment, const QString &taglist,
                               const QString &tagcomment)
 {
@@ -472,7 +475,7 @@ void LogTreeView::mouseMoveEvent(QMouseEvent *e)
                     text += "</b>&nbsp;&nbsp;";
                     text += QStyleSheet::escape(item->author);
                     text += "&nbsp;&nbsp;<b>";
-                    text += QStyleSheet::escape(item->date);
+                    text += QStyleSheet::escape(KGlobal::locale()->formatDateTime(item->date));
                     text += "</b>";
                     QStringList list2 = QStringList::split("\n", item->comment);
                     QStringList::Iterator it2;

@@ -18,6 +18,7 @@
 #include <kconfig.h>
 #include <klocale.h>
 #include <kprocess.h>
+#include <krfcdate.h>
 
 #include "annotateview.h"
 #include "cvsprogressdlg.h"
@@ -76,7 +77,8 @@ bool AnnotateDialog::parseCvsAnnotate(const QString &sandbox, const QString &rep
                                       const QString &filename, const QString &annorev)
 {
     QStringList strlist;
-    QString rev, date, author, comment, content;
+    QString rev, author, comment, content;
+    QDate date;
     QMap<QString, QString> logmap;
     enum { Begin, Tags, Admin, Revision,
 	   Author, Branches, Comment, Finished } state;
@@ -175,7 +177,9 @@ bool AnnotateDialog::parseCvsAnnotate(const QString &sandbox, const QString &rep
 	    rev = line.left(13).stripWhiteSpace();
             comment = logmap[rev];
 	    author = line.mid(14, 8).stripWhiteSpace();
-	    date = line.mid(23, 9);
+            QDateTime d;
+            d.setTime_t(KRFCDate::parseDate(line.mid(23, 9)), Qt::UTC);
+            date = d.date();
 	    content = line.mid(35, line.length()-35);
             if (comment.isNull())
                 comment = "";
@@ -271,7 +275,8 @@ bool AnnotateDialog::parseCvsAnnotate(DCOPRef& cvsService, const QString& fileNa
 
 
     // process cvs annotate output
-    QString date, author, content;
+    QString author, content;
+    QDate date;
     bool odd = false;
     QString oldRevision = "";
     while( dlg. getLine(line) )
@@ -279,7 +284,9 @@ bool AnnotateDialog::parseCvsAnnotate(DCOPRef& cvsService, const QString& fileNa
         rev = line.left(13).stripWhiteSpace();
         comment = logmap[rev];
         author = line.mid(14, 8).stripWhiteSpace();
-        date = line.mid(23, 9);
+        QDateTime d;
+        d.setTime_t(KRFCDate::parseDate(line.mid(23, 9)), Qt::UTC);
+        date = d.date();
         content = line.mid(35, line.length()-35);
         if( comment.isNull() )
             comment = "";

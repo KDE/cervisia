@@ -14,12 +14,13 @@
 
 #include "loglist.h"
 
+#include <qdatetime.h>
 #include <qheader.h>
 #include <qkeycode.h>
-#include <qstrlist.h>
 #include <qstylesheet.h>
 #include <kapplication.h>
 #include <kconfig.h>
+#include <kglobal.h>
 #include <klocale.h>
 
 #include "tiplabel.h"
@@ -33,7 +34,7 @@ public:
     enum { Revision, Author, Date, Branch, Comment, Tags };
 
     LogListViewItem(QListView *list,
-                    const QString &rev, const QString &author, const QString &date,
+                    const QString &rev, const QString &author, const QDateTime &date,
                     const QString &comment, const QString &tagcomment);
 
     virtual int compare(QListViewItem* i, int col, bool) const;
@@ -43,16 +44,17 @@ private:
     static QString extractOrdinaryTags(const QString &s);
     static QString extractBranchName(const QString &s);
 
-    QString mrev, mauthor, mdate;
+    QString mrev, mauthor;
+    QDateTime mdate;
     QString mcomment, mtagcomment;
     friend class LogListView;
 };
 
 
 LogListViewItem::LogListViewItem( QListView *list,
-                                  const QString &rev, const QString &author, const QString &date,
+                                  const QString &rev, const QString &author, const QDateTime &date,
                                   const QString &comment, const QString &tagcomment )
-    : QListViewItem(list, rev, author, date+" ",
+    : QListViewItem(list, rev, author, KGlobal::locale()->formatDateTime(date),
                     extractBranchName(tagcomment), truncateLine(comment), extractOrdinaryTags(tagcomment)),
     mrev(rev), mauthor(author), mdate(date), mcomment(comment), mtagcomment(tagcomment)
 {
@@ -142,6 +144,9 @@ int LogListViewItem::compare(QListViewItem* i, int col, bool ascending) const
     {
     case Revision:
         iResult = ::compareRevisions(mrev, pItem->mrev);
+        break;
+    case Date:
+        iResult = ::compare(mdate, pItem->mdate);
         break;
     default:
         iResult = QListViewItem::compare(i, col, ascending);
@@ -253,7 +258,7 @@ void LogListView::hideLabel()
 }
 
 
-void LogListView::addRevision(const QString &rev, const QString &author, const QString &date,
+void LogListView::addRevision(const QString &rev, const QString &author, const QDateTime &date,
                               const QString &comment, const QString &tagcomment)
 {
     (void) new LogListViewItem(this, rev, author, date, comment, tagcomment);
@@ -311,7 +316,7 @@ void LogListView::contentsMouseMoveEvent(QMouseEvent *e)
             text += "</b>&nbsp;&nbsp;";
             text += QStyleSheet::escape(item->mauthor);
             text += "&nbsp;&nbsp;<b>";
-            text += QStyleSheet::escape(item->mdate);
+            text += QStyleSheet::escape(KGlobal::locale()->formatDateTime(item->mdate));
             text += "</b>";
             QStringList list2 = QStringList::split("\n", item->mcomment);
             QStringList::Iterator it2;

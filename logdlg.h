@@ -18,6 +18,7 @@
 #include <dcopref.h>
 #include <kdialogbase.h>
 
+#include <qdatetime.h>
 #include <qptrlist.h>
 
 
@@ -37,7 +38,7 @@ class RevisionInfo
 public:
     QString rev;
     QString author;
-    QString date;
+    QDateTime date;
     QString comment;
     QString tagcomment;
 };

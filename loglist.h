@@ -19,6 +19,7 @@
 #include "listview.h"
 
 
+class QDateTime;
 class KConfig;
 class TipLabel;
 class LogListViewItem;
@@ -29,10 +30,10 @@ class LogListView : public ListView
     Q_OBJECT
     
 public:
-    LogListView( QWidget *parent=0, const char *name=0 );
-    ~LogListView();
+    explicit LogListView( QWidget *parent=0, const char *name=0 );
+    virtual ~LogListView();
     
-    void addRevision(const QString &rev, const QString &author, const QString &date,
+    void addRevision(const QString &rev, const QString &author, const QDateTime &date,
                      const QString &comment, const QString &tagcomment);
     void setSelectedPair(const QString &selectionA, const QString &selectionB);
 

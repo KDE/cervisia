@@ -13,11 +13,14 @@
 
 #include "annotateview.h"
 
+#include <qdatetime.h>
 #include <qheader.h>
 #include <qpainter.h>
 #include <qstylesheet.h>
 #include <kconfig.h>
+#include <kglobal.h>
 #include <kglobalsettings.h>
+#include <klocale.h>
 
 #include "cervisiapart.h"
 #include "tiplabel.h"
@@ -30,7 +33,7 @@ public:
     enum { LineNumberColumn, AuthorColumn, ContentColumn };
 
     AnnotateViewItem(AnnotateView *parent, const QString &rev, const QString &author,
-                     const QString &date, const QString &content, const QString &comment,
+                     const QDate &date, const QString &content, const QString &comment,
                      bool odd, int linenumber);
         
     virtual int compare(QListViewItem *item, int col, bool ascending) const;
@@ -41,7 +44,7 @@ public:
 private:
     QString mrev;
     QString mauthor;
-    QString mdate;
+    QDate mdate;
     QString mcontent;
     QString mcomment;
     bool modd;
@@ -56,7 +59,7 @@ const int AnnotateViewItem::BORDER = 4;
 
  
 AnnotateViewItem::AnnotateViewItem(AnnotateView *parent, const QString &rev, const QString &author,
-                                   const QString &date, const QString &content, const QString &comment,
+                                   const QDate &date, const QString &content, const QString &comment,
                                    bool odd, int linenumber)
     : QListViewItem(parent),
       mrev(rev), mauthor(author), mdate(date), mcontent(content),
@@ -174,7 +177,7 @@ void AnnotateView::hideLabel()
 }
 
 
-void AnnotateView::addLine(const QString &rev, const QString &author, const QString &date,
+void AnnotateView::addLine(const QString &rev, const QString &author, const QDate &date,
                            const QString &content, const QString &comment, bool odd)
 {
     (void) new AnnotateViewItem(this, rev, author, date, content, comment, odd, childCount()+1);
@@ -210,7 +213,8 @@ void AnnotateView::contentsMouseMoveEvent(QMouseEvent *e)
             text += "</b>&nbsp;&nbsp;";
             text += QStyleSheet::escape(item->mauthor);
             text += "&nbsp;&nbsp;<b>";
-            text += QStyleSheet::escape(item->mdate);
+            const bool shortFormat(true);
+            text += QStyleSheet::escape(KGlobal::locale()->formatDate(item->mdate, shortFormat));
             text += "</b>";
             QStringList list = QStringList::split("\n", item->mcomment);
             QStringList::Iterator it;
