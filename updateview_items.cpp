@@ -631,7 +631,6 @@ QString UpdateFileItem::text(int column) const
         break;
     case Status:
         result = entry().statusToString();
-        kdDebug(8050) << result << endl;
         break;
     case Revision:
         result = entry().m_revision;
@@ -646,7 +645,6 @@ QString UpdateFileItem::text(int column) const
         break;
     }
 
-    kdDebug(8050) << column << " " << result << endl;
     return result;
 }
 
