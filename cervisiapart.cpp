@@ -551,7 +551,7 @@ void CervisiaPart::aboutCervisia()
     QString aboutstr(i18n("Cervisia %1\n"
                           "(Using KDE %2)\n"
                           "\n"
-                          "Copyright (C) 1999-2002\n"
+                          "Copyright (c) 1999-2002\n"
                           "Bernd Gehrmann <bernd@mail.berlios.de>\n"
                           "\n"
                           "This program may be distributed under the terms of the Q Public\n"
