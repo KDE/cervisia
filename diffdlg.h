@@ -15,8 +15,11 @@
 #ifndef DIFFDLG_H
 #define DIFFDLG_H
 
-#include <qdialog.h>
+
+#include <kdialogbase.h>
+
 #include <qptrlist.h>
+
 
 class QLabel;
 class QCheckBox;
@@ -26,21 +29,21 @@ class DiffItem;
 class DiffView;
 
 
-class DiffDialog : public QDialog
+class DiffDialog : public KDialogBase
 {
     Q_OBJECT
 
 public:
-    DiffDialog( QWidget *parent=0, const char *name=0, bool modal=false );
+
+    explicit DiffDialog( QWidget *parent=0, const char *name=0, bool modal=false );
+
+    virtual ~DiffDialog();
 
     bool parseCvsDiff(const QString &sandbox, const QString &repository,
                       const QString &filename, const QString &revA, const QString &revB);
 
     static void loadOptions(KConfig *config);
     static void saveOptions(KConfig *config);
-
-protected slots:
-    virtual void done(int r);
 
 protected:
     virtual void keyPressEvent(QKeyEvent *e);
@@ -50,8 +53,7 @@ private slots:
     void comboActivated(int index);
     void backClicked();
     void forwClicked();
-    void helpClicked();
-    
+
 private:
     struct Options {
         QSize size;

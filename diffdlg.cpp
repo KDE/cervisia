@@ -16,13 +16,10 @@
 #include <qpushbutton.h>
 #include <qcheckbox.h>
 #include <qcombobox.h>
-#include <qpainter.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qkeycode.h>
 #include <qfileinfo.h>
-#include <kbuttonbox.h>
-#include <kapplication.h>
 #include <kconfig.h>
 #include <klocale.h>
 #include <ktempfile.h>
@@ -38,15 +35,17 @@ DiffDialog::Options *DiffDialog::options = 0;
 
 
 DiffDialog::DiffDialog(QWidget *parent, const char *name, bool modal)
-    : QDialog(parent, name, modal, WStyle_MinMax)
+    : KDialogBase(parent, name, modal, QString::null,
+                  Close | Help, Close, true)
 {
     items.setAutoDelete(true);
     markeditem = -1;
 
-    QBoxLayout *layout = new QVBoxLayout(this, 10);
+    QFrame* mainWidget = makeMainWidget();
 
-    QGridLayout *pairlayout = new QGridLayout(2, 3, 10);
-    layout->addLayout(pairlayout, 10);
+    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
+
+    QGridLayout *pairlayout = new QGridLayout(layout);
     pairlayout->setRowStretch(0, 0);
     pairlayout->setRowStretch(1, 1);
     pairlayout->setColStretch(1, 0);
@@ -54,15 +53,15 @@ DiffDialog::DiffDialog(QWidget *parent, const char *name, bool modal)
     pairlayout->setColStretch(0, 10);
     pairlayout->setColStretch(2, 10);
 
-    revlabel1 = new QLabel("Rev A", this);
+    revlabel1 = new QLabel(mainWidget);
     pairlayout->addWidget(revlabel1, 0, 0);
 			      
-    revlabel2 = new QLabel("Rev A", this);
+    revlabel2 = new QLabel(mainWidget);
     pairlayout->addWidget(revlabel2, 0, 2);
 
-    diff1 = new DiffView(true, false, this);
-    diff2 = new DiffView(true, true, this);
-    DiffZoomWidget *zoom = new DiffZoomWidget(this);
+    diff1 = new DiffView(true, false, mainWidget);
+    diff2 = new DiffView(true, true, mainWidget);
+    DiffZoomWidget *zoom = new DiffZoomWidget(mainWidget);
     zoom->setDiffView(diff2);
 
     pairlayout->addWidget(diff1, 1, 0);
@@ -72,27 +71,27 @@ DiffDialog::DiffDialog(QWidget *parent, const char *name, bool modal)
     diff1->setPartner(diff2);
     diff2->setPartner(diff1);
     
-    syncbox = new QCheckBox(i18n("Synchronize scroll bars"), this);
+    syncbox = new QCheckBox(i18n("Synchronize scroll bars"), mainWidget);
     syncbox->setChecked(true);
     connect( syncbox, SIGNAL(toggled(bool)),
 	     this, SLOT(toggleSynchronize(bool)) );
 
-    itemscombo = new QComboBox(this);
-    itemscombo->insertItem("");
+    itemscombo = new QComboBox(mainWidget);
+    itemscombo->insertItem(QString::null);
     connect( itemscombo, SIGNAL(activated(int)),
              this, SLOT(comboActivated(int)) );
     
-    nofnlabel = new QLabel(this);
-    nofnlabel->setAlignment(AlignCenter);
+    nofnlabel = new QLabel(mainWidget);
+    // avoids auto resize when the text is changed
+    nofnlabel->setMinimumWidth(fontMetrics().width(i18n("%1 differences").arg(10000)));
     
-    backbutton = new QPushButton("&<<", this);
+    backbutton = new QPushButton(QString::fromLatin1("&<<"), mainWidget);
     connect( backbutton, SIGNAL(clicked()), SLOT(backClicked()) );
     
-    forwbutton = new QPushButton("&>>", this);
+    forwbutton = new QPushButton(QString::fromLatin1("&>>"), mainWidget);
     connect( forwbutton, SIGNAL(clicked()), SLOT(forwClicked()) );
 
-    QBoxLayout *buttonlayout = new QHBoxLayout();
-    layout->addLayout(buttonlayout);
+    QBoxLayout *buttonlayout = new QHBoxLayout(layout);
     buttonlayout->addWidget(syncbox, 0);
     buttonlayout->addStretch(4);
     buttonlayout->addWidget(itemscombo);
@@ -101,26 +100,11 @@ DiffDialog::DiffDialog(QWidget *parent, const char *name, bool modal)
     buttonlayout->addStretch(1);
     buttonlayout->addWidget(backbutton);
     buttonlayout->addWidget(forwbutton);
-    
-    QFrame *frame = new QFrame(this);
-    frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-    layout->addWidget(frame, 0);
 
-    KButtonBox *buttonbox = new KButtonBox(this);
-    QPushButton *helpbutton = buttonbox->addButton(i18n("&Help"));
-    helpbutton->setAutoDefault(false);
-    buttonbox->addStretch();
-    QPushButton *closebutton = buttonbox->addButton(i18n("&Close"));
-    buttonbox->layout();
-    layout->addWidget(buttonbox, 0);
+    setHelp("diff");
 
-    QFontMetrics fm(fontMetrics());
-    setMinimumSize(fm.width("0123456789")*12,
-		   fm.lineSpacing()*30);
+    setWFlags(Qt::WDestructiveClose | getWFlags());
 
-    connect( helpbutton, SIGNAL(clicked()), SLOT(helpClicked()) );
-    connect( closebutton, SIGNAL(clicked()), SLOT(reject()) );
-    
     if (options)
         {
             resize(options->size);
@@ -129,15 +113,12 @@ DiffDialog::DiffDialog(QWidget *parent, const char *name, bool modal)
 }
 
 
-void DiffDialog::done(int res)
+DiffDialog::~DiffDialog()
 {
     if (!options)
         options = new Options;
     options->size = size();
     options->sync = syncbox->isChecked();
-    
-    QDialog::done(res);
-    delete this;
 }
 
 
@@ -480,6 +461,9 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
                 ++itB;
         }
 
+    // sets the right size as there is no more auto resize in QComboBox
+    itemscombo->adjustSize();
+
     updateNofN();
  
     return true;
@@ -556,11 +540,6 @@ void DiffDialog::forwClicked()
     updateHighlight(newitem);
 }
 
-
-void DiffDialog::helpClicked()
-{
-    kapp->invokeHelp("diff", "cervisia");
-}
 
 #include "diffdlg.moc"
 
