@@ -189,7 +189,7 @@ QString DiffView::stringAtOffset(int offset)
 {
     if (offset >= (int)items.count())
 	{
-	    kdDebug() << "Internal error: lineAtOffset" << endl;
+	    kdDebug(8050) << "Internal error: lineAtOffset" << endl;
 	}
     return items.at(offset)->line;
 }
@@ -208,7 +208,7 @@ int DiffView::findLine(int lineno)
     tmp.no = lineno;
     if ( (offset = items.find(&tmp)) == -1)
 	{
-	    kdDebug() << "Internal Error: Line " << lineno << " not found" << endl;
+	    kdDebug(8050) << "Internal Error: Line " << lineno << " not found" << endl;
 	    return -1;
 	}
     return offset;

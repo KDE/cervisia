@@ -418,7 +418,7 @@ void LogTreeView::mouseMoveEvent(QMouseEvent *e)
     int row = findRow(static_cast<QMouseEvent*>(e)->y());
     int col = findCol(static_cast<QMouseEvent*>(e)->x());
     if (row != currentRow || col != currentCol) {
-        //        kdDebug() << "hidden because of row/col change" << endl;
+        //        kdDebug(8050) << "hidden because of row/col change" << endl;
         hideLabel();
     }
 
@@ -450,7 +450,7 @@ void LogTreeView::mouseMoveEvent(QMouseEvent *e)
 
 void LogTreeView::windowActivationChange(bool oldActive)
 {
-    //    kdDebug() << "windowActivationChange" << endl;
+    //    kdDebug(8050) << "windowActivationChange" << endl;
     hideLabel();
     QtTableView::windowActivationChange(oldActive);
 }
@@ -458,7 +458,7 @@ void LogTreeView::windowActivationChange(bool oldActive)
 
 void LogTreeView::leaveEvent(QEvent *e)
 {
-    //    kdDebug() << "leaveEvent" << endl;
+    //    kdDebug(8050) << "leaveEvent" << endl;
     // has strange effects
     // hideLabel();
     hideLabel();

@@ -398,7 +398,7 @@ void ResolveDialog::choose(ChooseType ch)
             secondcount = item->linecountA;
             break;
         default:
-            kdDebug() << "Internal error at switch" << endl;
+            kdDebug(8050) << "Internal error at switch" << endl;
         }
 
     int total = firstcount + secondcount;

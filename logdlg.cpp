@@ -429,7 +429,7 @@ void LogDialog::revisionSelected(QString rev, bool rmb)
                 list->setSelectedPair(selectionA, selectionB);
                 return;
             }
-    kdDebug() << "Internal error: Revision not found " << rev << "." << endl;
+    kdDebug(8050) << "Internal error: Revision not found " << rev << "." << endl;
 }
 
 

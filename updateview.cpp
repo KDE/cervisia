@@ -1331,14 +1331,14 @@ UpdateDirItem* findOrCreateDirItem(const QString& dirPath,
             UpdateItem* item = dirItem->findItem(dirName);
             if (isFileItem(item))
             {
-                kdDebug() << "findOrCreateDirItem(): file changed to dir " << dirName << endl;
+                kdDebug(8050) << "findOrCreateDirItem(): file changed to dir " << dirName << endl;
                 delete item;
                 item = 0;
             }
 
             if (!item)
             {
-                kdDebug() << "findOrCreateDirItem(): create dir item " << dirName << endl;
+                kdDebug(8050) << "findOrCreateDirItem(): create dir item " << dirName << endl;
                 item = dirItem->createDirItem(dirName);
             }
 
