@@ -21,7 +21,6 @@
 #include "cvsjob.h"
 
 #include <qfile.h>
-#include <qtextstream.h>
 #include <kdebug.h>
 #include <kprocess.h>
 
@@ -134,7 +133,7 @@ QString CvsJob::cvsCommand() const
     QString command;
 
     const QValueList<QCString>& args(d->childproc->args());
-    for (QValueList<QCString>::const_iterator it(args.begin()), itEnd(args.end());
+    for (QValueList<QCString>::const_iterator it = args.begin(), itEnd = args.end();
          it != itEnd; ++it)
     {
         if (!command.isEmpty())
