@@ -126,7 +126,7 @@ ResolveDialog::ResolveDialog( QWidget *parent, const char *name)
 
     connect( helpbutton, SIGNAL(clicked()), SLOT(helpClicked()) );
     connect( savebutton, SIGNAL(clicked()), SLOT(saveClicked()) );
-    connect( saveasbutton, SIGNAL(clicked()), SLOT(slotSaveAs()) );
+    connect( saveasbutton, SIGNAL(clicked()), SLOT(saveAsClicked()) );
     connect( closebutton, SIGNAL(clicked()), SLOT(accept()) );
 
     setMinimumSize(fm.width("0123456789")*12,
