@@ -2,6 +2,8 @@
 
 	* Mark files with option -kb with a binary icon
 	* Fixed restoration of the last loaded sandbox
+	* Use different instance names for part and shell,
+	  otherwise KConfig get messed up
 
 2002-06-26  Bernd Gehrmann  <bernd@mail.berlios.de>
 
