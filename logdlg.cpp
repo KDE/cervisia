@@ -30,6 +30,7 @@
 #include <kfinddialog.h>
 #include <kglobalsettings.h>
 #include <kiconloader.h>
+#include <klistviewsearchline.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kprocess.h>
@@ -68,7 +69,20 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     connect( tree, SIGNAL(revisionClicked(QString,bool)),
              this, SLOT(revisionSelected(QString,bool)) );
 
-    list = new LogListView(partConfig, mainWidget);
+    QWidget* listWidget = new QWidget(mainWidget);
+    QVBoxLayout* listLayout = new QVBoxLayout(listWidget);
+    QHBoxLayout* searchLayout = new QHBoxLayout(listLayout);
+    searchLayout->setMargin(KDialog::spacingHint());
+    searchLayout->setSpacing(KDialog::spacingHint());
+
+    list = new LogListView(partConfig, listWidget);
+    listLayout->addWidget(list, 1);
+
+    KListViewSearchLine* searchLine = new KListViewSearchLine(listWidget, list);
+    QLabel* searchLabel = new QLabel(searchLine, i18n("S&earch:"), listWidget);
+    searchLayout->addWidget(searchLabel);
+    searchLayout->addWidget(searchLine, 1);
+
     connect( list, SIGNAL(revisionClicked(QString,bool)),
              this, SLOT(revisionSelected(QString,bool)) );
 
@@ -78,7 +92,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     tabWidget = new QTabWidget(mainWidget);
     tabWidget->addTab(tree, i18n("&Tree"));
-    tabWidget->addTab(list, i18n("&List"));
+    tabWidget->addTab(listWidget, i18n("&List"));
     tabWidget->addTab(plain, i18n("CVS &Output"));
     layout->addWidget(tabWidget, 3);
 
