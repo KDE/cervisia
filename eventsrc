@@ -1,7 +1,6 @@
 [!Global!]
 IconName=cervisia
 Comment=Cervisia
-Comment[xx]=xxCervisiaxx
 
 [cvs_commit_done]
 Name=CVS commit job done
@@ -23,7 +22,6 @@ Name[pt_BR]=Trabalho de envio para o CVS feito
 Name[ru]=CVS Commit выполнен
 Name[sv]=CVS-arkiveringsjobb klart
 Name[uk]=Завдання передачі CVS виконане
-Name[xx]=xxCVS commit job donexx
 Comment=A CVS commit job is done
 Comment[bg]=Предаването в CVS е готово
 Comment[cs]=CVS commit úloha je dokončena
@@ -43,5 +41,4 @@ Comment[pt_BR]=Um trabalho de envio para o CVS foi feito
 Comment[ru]=CVS Commit выполнен
 Comment[sv]=Ett CVS-arkiveringsjobb är klart
 Comment[uk]=Завдання передачі CVS виконане
-Comment[xx]=xxA CVS commit job is donexx
 default_presentation=0
