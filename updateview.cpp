@@ -263,74 +263,64 @@ static QString lastModifiedStr(const QString &fname)
 
 void UpdateDirItem::syncWithEntries()
 {
-    char buf[512];
     QString name, rev, timestamp, options, tagdate;
     UpdateView::Status status;
 
-    FILE *f = fopen(QString(dirPath() + QString("CVS/Entries")).local8Bit(), "r");
-    if (!f)
-	return;
+    QFile f(dirPath() + "CVS/Entries");
+    if( f.open(IO_ReadOnly) )
+    {
+        QTextStream stream(&f);
+        while( !stream.eof() )
+        {
+            QString line = stream.readLine();
+            
+            bool isDir = (line[0] == 'D');
+            if( isDir )
+                line.remove(0, 1);
+                
+            if( line[0] != '/' )
+                continue;
 
-    while (fgets(buf, sizeof buf, f))
-	{
-            char *nextp, *p = buf;
-            bool isdir = (*p == 'D');
-            if (isdir)
-                ++p;
-	    if (*p != '/')
-		continue;
-            ++p;
-	    if ( (nextp = strchr(p, '/')) == 0)
-		continue;
-	    *nextp = '\0';
-	    name = QString(p); p = nextp+1;
-	    if ( (nextp = strchr(p, '/')) == 0)
-		continue;
-	    *nextp = '\0';
-	    rev = QString(p); p = nextp+1;
-	    if ( (nextp = strchr(p, '/')) == 0)
-		continue;
-	    *nextp = '\0';
-	    timestamp = QString(p); p = nextp+1;
-	    if ( (nextp = strchr(p, '/')) == 0)
-		continue;
-	    *nextp = '\0';
-	    options = QString(p); p = nextp+1;
-            bool isbin = (options == "-kb");
-	    if ( (nextp = strchr(p, '\n')) == 0)
-		continue;
-	    *nextp = '\0';
-	    tagdate = QString(p); p = nextp+1;
+            name      = line.section('/', 1, 1);
+            rev       = line.section('/', 2, 2);
+            timestamp = line.section('/', 3, 3);
+            options   = line.section('/', 4, 4);
+            tagdate   = line.section('/', 5, 5);
 
-	    if (rev == "0")
-		status = UpdateView::LocallyAdded;
-	    else if (rev.length() > 2 && rev[0] == '-')
-                {
-                    status = UpdateView::LocallyRemoved;
-                    rev.remove(0, 1);
-                }
-	    else if (timestamp.find('+') != -1)
-                {
-		    status = UpdateView::Conflict;
-		    timestamp.truncate(timestamp.find('+'));
-                }
-	    else if (timestamp != lastModifiedStr(dirPath() + name))
-		status = UpdateView::LocallyModified;
-	    else
-		status = UpdateView::Unknown;
+            bool isBinary = (options == "-kb");
+            
+            int pos;            
+            if( rev == "0" )
+                status = UpdateView::LocallyAdded;
+            else if( rev.length() > 2 && rev[0] == '-' )
+            {
+                status = UpdateView::LocallyRemoved;
+                rev.remove(0, 1);
+            }
+            else if( (pos = timestamp.find('+')) != -1 )
+            {
+                status = UpdateView::Conflict;
+                timestamp.truncate(pos);
+            }
+            else if( timestamp != lastModifiedStr(dirPath() + name) )
+                status = UpdateView::LocallyModified;
+            else
+                status = UpdateView::Unknown;
+            
+            // Convert timestamp into a time.
+            char *oldLocale;
+            struct tm tmp;
+            time_t time;
 
-	    // Convert timestamp into a time.
-	    char *oldLocale;
-	    struct tm tmp;
-	    time_t time;
-
-	    oldLocale = setlocale(LC_TIME, "C");
-	    strptime(timestamp.local8Bit(), "%c" , &tmp);
-	    setlocale(LC_TIME, oldLocale);
-	    time = mktime(&tmp);
-	    updateEntriesItem(name, status, isdir, isbin, rev, tagdate, time);
-	}
-    fclose(f);
+            oldLocale = setlocale(LC_TIME, "C");
+            strptime(timestamp.local8Bit(), "%c" , &tmp);
+            setlocale(LC_TIME, oldLocale);
+            time = mktime(&tmp);
+            updateEntriesItem(name, status, isDir, isBinary, rev, tagdate, time);           
+        }
+        
+        f.close();
+    }
 }
 
 
