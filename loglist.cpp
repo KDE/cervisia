@@ -143,7 +143,7 @@ QString LogListViewItem::key(int column, bool) const
     for (QStringList::Iterator it = strlist.begin();
          it != strlist.end(); ++it)
 	{
-	    tmp.sprintf("%5d", (*it).toInt());
+	    tmp.sprintf("%05d", (*it).toInt());
 	    res += tmp;
 	    res += ".";
 	}
