@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -63,7 +63,7 @@ int main(int argc, char **argv)
         CervisiaShell* shell = new CervisiaShell();
         
         const KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
-        QString dirName = args->count() ? args->arg(0) : QString::null;       
+        QString dirName = args->count() ? QString(args->arg(0)) : QString::null;       
 
         if( !dirName.isEmpty() )
             shell->openURL(KURL::fromPathOrURL(dirName));

@@ -83,7 +83,7 @@ QString AnnotateViewItem::text(int col) const
     case LineNumberColumn:
         return QString::number(mlinenumber);
     case AuthorColumn:
-        return mauthor.isNull()? "" : (mauthor + QChar(' ') + mrev);
+        return mauthor.isNull()? QString::null : (mauthor + QChar(' ') + mrev);
     case ContentColumn:
         return mcontent;
     default:
