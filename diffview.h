@@ -41,7 +41,7 @@ public:
     enum DiffType { Change, Insert, Delete, Neutral, Unchanged, Separator };
 
     DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
-	      QWidget *parent=0, const char *name=0 );
+              QWidget *parent=0, const char *name=0 );
 
     void setPartner(DiffView *other);
 
@@ -76,7 +76,7 @@ public:
 protected slots:
     void vertPositionChanged(int val);
     void horzPositionChanged(int val);
-  
+
 private:
     int findLine(int lineno);
     DiffViewItemList items;
@@ -112,7 +112,7 @@ protected:
 
 private:
     DiffView *diffview;
-    
+
     QColor diffChangeColor;
     QColor diffInsertColor;
     QColor diffDeleteColor;

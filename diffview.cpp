@@ -40,7 +40,7 @@ public:
 int DiffViewItemList::compareItems(QPtrCollection::Item item1, QPtrCollection::Item item2)
 {
     return (static_cast<DiffViewItem*>(item1)->no
-	    == static_cast<DiffViewItem*>(item2)->no)? 0 : 1;
+            == static_cast<DiffViewItem*>(item2)->no)? 0 : 1;
 }
 
 
@@ -48,15 +48,14 @@ const int DiffView::BORDER = 7;
 
 
 DiffView::DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
-		    QWidget *parent, const char *name )
+                    QWidget *parent, const char *name )
     : QtTableView(parent, name, WRepaintNoErase)
     , partConfig(cfg)
 {
     setNumRows(0);
     setNumCols( 1 + (withlinenos?1:0) + (withmarker?1:0) );
     setTableFlags( Tbl_autoVScrollBar|Tbl_autoHScrollBar|
-		   Tbl_smoothVScrolling
-		   );
+                   Tbl_smoothVScrolling );
     setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
     setBackgroundMode( PaletteBase );
     setWFlags( WResizeNoErase );
@@ -97,30 +96,30 @@ void DiffView::setPartner(DiffView *other)
 {
     partner = other;
     if (partner)
-	{
-	    connect( verticalScrollBar(), SIGNAL(valueChanged(int)),
-		     SLOT(vertPositionChanged(int)) );
-	    connect( verticalScrollBar(), SIGNAL(sliderMoved(int)),
-		     SLOT(vertPositionChanged(int)) );
-	    connect( horizontalScrollBar(), SIGNAL(valueChanged(int)),
-		     SLOT(horzPositionChanged(int)) );
-	    connect( horizontalScrollBar(), SIGNAL(sliderMoved(int)),
-		     SLOT(horzPositionChanged(int)) );
-	}
+    {
+        connect( verticalScrollBar(), SIGNAL(valueChanged(int)),
+                 SLOT(vertPositionChanged(int)) );
+        connect( verticalScrollBar(), SIGNAL(sliderMoved(int)),
+                 SLOT(vertPositionChanged(int)) );
+        connect( horizontalScrollBar(), SIGNAL(valueChanged(int)),
+                 SLOT(horzPositionChanged(int)) );
+        connect( horizontalScrollBar(), SIGNAL(sliderMoved(int)),
+                 SLOT(horzPositionChanged(int)) );
+    }
 }
 
 
 void DiffView::vertPositionChanged(int val)
 {
     if (partner)
-	partner->setYOffset(QMIN(val,partner->maxYOffset()));
+        partner->setYOffset(QMIN(val,partner->maxYOffset()));
 }
 
 
 void DiffView::horzPositionChanged(int val)
 {
     if (partner)
-	partner->setXOffset(QMIN(val,partner->maxXOffset()));
+        partner->setXOffset(QMIN(val,partner->maxXOffset()));
 }
 
 
@@ -147,10 +146,10 @@ void DiffView::insertAtOffset(const QString &line, DiffType type, int offset)
 void DiffView::setCenterOffset(int offset)
 {
     if (!rowIsVisible(offset))
-	{
-	    int visiblerows = viewHeight()/cellHeight(0);
-	    setTopCell( QMAX(0, offset - visiblerows/2) );
-	}
+    {
+        int visiblerows = viewHeight()/cellHeight(0);
+        setTopCell( QMAX(0, offset - visiblerows/2) );
+    }
 }
 
 
@@ -188,9 +187,9 @@ void DiffView::addLine(const QString &line, DiffType type, int no)
 QString DiffView::stringAtOffset(int offset)
 {
     if (offset >= (int)items.count())
-	{
-	    kdDebug(8050) << "Internal error: lineAtOffset" << endl;
-	}
+    {
+        kdDebug(8050) << "Internal error: lineAtOffset" << endl;
+    }
     return items.at(offset)->line;
 }
 
@@ -207,10 +206,10 @@ int DiffView::findLine(int lineno)
     DiffViewItem tmp;
     tmp.no = lineno;
     if ( (offset = items.find(&tmp)) == -1)
-	{
-	    kdDebug(8050) << "Internal Error: Line " << lineno << " not found" << endl;
-	    return -1;
-	}
+    {
+        kdDebug(8050) << "Internal Error: Line " << lineno << " not found" << endl;
+        return -1;
+    }
     return offset;
 }
 
@@ -219,7 +218,7 @@ void DiffView::setInverted(int lineno, bool inverted)
 {
     int offset;
     if ( (offset = findLine(lineno)) != -1)
-	items.at(offset)->inverted = inverted;
+        items.at(offset)->inverted = inverted;
 }
 
 
@@ -227,7 +226,7 @@ void DiffView::setCenterLine(int lineno)
 {
     int offset;
     if ( (offset = findLine(lineno)) != -1)
-	setCenterOffset(offset);
+        setCenterOffset(offset);
 }
 
 
@@ -248,18 +247,18 @@ QByteArray DiffView::compressedContent()
     QPtrListIterator<DiffViewItem> it(items);
     int i=0;
     for (; it.current(); ++it)
+    {
+        switch (it.current()->type)
         {
-            switch (it.current()->type)
-                {
-                case Change:   res[i] = 'C'; break;
-                case Insert:   res[i] = 'I'; break;
-                case Delete:   res[i] = 'D'; break;
-                case Neutral:  res[i] = 'N'; break;
-                case Unchanged:res[i] = 'U'; break;
-                default:       res[i] = ' ';
-                }
-            ++i;
+            case Change:   res[i] = 'C'; break;
+            case Insert:   res[i] = 'I'; break;
+            case Delete:   res[i] = 'D'; break;
+            case Neutral:  res[i] = 'N'; break;
+            case Unchanged:res[i] = 'U'; break;
+            default:       res[i] = ' ';
         }
+        ++i;
+    }
     return res;
 }
 
@@ -267,24 +266,24 @@ QByteArray DiffView::compressedContent()
 int DiffView::cellWidth(int col)
 {
     if (col == 0 && linenos)
-	{
-	    QFontMetrics fm(font());
-	    return fm.width("10000");
-	}
+    {
+        QFontMetrics fm(font());
+        return fm.width("10000");
+    }
     else if (marker && (col == 0 || col == 1))
-        {
-            QFontMetrics fm( fontMetrics() );
-            return QMAX(QMAX( fm.width(i18n("Delete")),
-                              fm.width(i18n("Insert"))),
-                        fm.width(i18n("Change")))+2*BORDER;
-        }
+    {
+        QFontMetrics fm( fontMetrics() );
+        return QMAX(QMAX( fm.width(i18n("Delete")),
+                          fm.width(i18n("Insert"))),
+                    fm.width(i18n("Change")))+2*BORDER;
+    }
     else
-	{
-	    int rest = (linenos || marker)? cellWidth(0) : 0;
-	    if (linenos && marker)
-		rest += cellWidth(1);
-	    return QMAX(textwidth, viewWidth()-rest);
-	}
+    {
+        int rest = (linenos || marker)? cellWidth(0) : 0;
+        if (linenos && marker)
+            rest += cellWidth(1);
+        return QMAX(textwidth, viewWidth()-rest);
+    }
 }
 
 
@@ -313,63 +312,63 @@ void DiffView::paintCell(QPainter *p, int row, int col)
 
     QFont oldFont(p->font());
     if (item->type==Separator)
-        {
-            backgroundColor = KGlobalSettings::highlightColor();
-            p->setPen(KGlobalSettings::highlightedTextColor());
-            inverted = false;
-            align = AlignLeft;
-            innerborder = 0;
-	    if (col == (linenos?1:0) + (marker?1:0))
-                str = item->line;
-            QFont f(oldFont);
-            f.setBold(true);
-            p->setFont(f);
-        }
+    {
+        backgroundColor = KGlobalSettings::highlightColor();
+        p->setPen(KGlobalSettings::highlightedTextColor());
+        inverted = false;
+        align = AlignLeft;
+        innerborder = 0;
+        if (col == (linenos?1:0) + (marker?1:0))
+            str = item->line;
+        QFont f(oldFont);
+        f.setBold(true);
+        p->setFont(f);
+    }
     else if (col == 0 && linenos)
-	{
-	    backgroundColor = KGlobalSettings::highlightColor();
-	    p->setPen(KGlobalSettings::highlightedTextColor());
-	    inverted = false;
-	    align = AlignLeft;
-	    innerborder = 0;
-	    if (item->no == -1)
-		str = "+++++";
-	    else
-		str.setNum(item->no);
-	}
+    {
+        backgroundColor = KGlobalSettings::highlightColor();
+        p->setPen(KGlobalSettings::highlightedTextColor());
+        inverted = false;
+        align = AlignLeft;
+        innerborder = 0;
+        if (item->no == -1)
+            str = "+++++";
+        else
+            str.setNum(item->no);
+    }
     else if (marker && (col == 0 || col == 1))
-	{
-	    backgroundColor = KGlobalSettings::alternateBackgroundColor();
-            p->setPen(KGlobalSettings::textColor());
-	    inverted = false;
-	    align = AlignRight;
-	    innerborder = BORDER;
-	    str = (item->type==Change)? i18n("Change")
-		: (item->type==Insert)? i18n("Insert")
-		: (item->type==Delete)? i18n("Delete") : QString::null;
-	}
+    {
+        backgroundColor = KGlobalSettings::alternateBackgroundColor();
+        p->setPen(KGlobalSettings::textColor());
+        inverted = false;
+        align = AlignRight;
+        innerborder = BORDER;
+        str = (item->type==Change)? i18n("Change")
+            : (item->type==Insert)? i18n("Insert")
+            : (item->type==Delete)? i18n("Delete") : QString::null;
+    }
     else
-	{
-	    backgroundColor =
-		(item->type==Change)? diffChangeColor
-		: (item->type==Insert)? diffInsertColor
-		: (item->type==Delete)? diffDeleteColor
-		: (item->type==Neutral)? KGlobalSettings::alternateBackgroundColor() : KGlobalSettings::baseColor();
-            p->setPen(KGlobalSettings::textColor());
-            inverted = item->inverted;
-	    align = AlignLeft;
-	    innerborder = 0;
-	    str = item->line;
-	}
+    {
+        backgroundColor =
+            (item->type==Change)? diffChangeColor
+            : (item->type==Insert)? diffInsertColor
+            : (item->type==Delete)? diffDeleteColor
+            : (item->type==Neutral)? KGlobalSettings::alternateBackgroundColor() : KGlobalSettings::baseColor();
+        p->setPen(KGlobalSettings::textColor());
+        inverted = item->inverted;
+        align = AlignLeft;
+        innerborder = 0;
+        str = item->line;
+    }
 
     if (inverted)
-	{
-	    p->setPen(backgroundColor);
-	    backgroundColor = KGlobalSettings::textColor();
-            QFont f(oldFont);
-            f.setBold(true);
-            p->setFont(f);
-	}
+    {
+        p->setPen(backgroundColor);
+        backgroundColor = KGlobalSettings::textColor();
+        QFont f(oldFont);
+        f.setBold(true);
+        p->setFont(f);
+    }
 
     p->fillRect(0, 0, width, height, backgroundColor);
     p->drawText(innerborder, 0, width-2*innerborder, height, align|ExpandTabs, str);
