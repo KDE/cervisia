@@ -42,7 +42,7 @@ class LogTreeView : public QtTableView
 public:
     explicit LogTreeView( QWidget *parent=0, const char *name=0 );
     virtual ~LogTreeView();
-    
+
     void addRevision(const Cervisia::LogInfo& logInfo);
     void setSelectedPair(QString selectionA, QString selectionB);
     void collectConnections();
@@ -66,7 +66,7 @@ protected:
 
 private:
     void paintRevisionCell(QPainter *p, int row, int col, const Cervisia::LogInfo& logInfo,
-			   bool followed, bool branched, bool selected);
+                           bool followed, bool branched, bool selected);
     void paintConnector(QPainter *p, int row, int col, bool followed, bool branched);
     void hideLabel();
 
