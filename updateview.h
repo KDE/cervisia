@@ -25,11 +25,12 @@ class UpdateView : public ListView
 public:
 
     enum Status { LocallyModified, LocallyAdded, LocallyRemoved,
-		  NeedsUpdate, NeedsPatch, NeedsMerge,
-		  UpToDate, Conflict, 
-		  Updated, Patched, Removed,
+                  NeedsUpdate, NeedsPatch, NeedsMerge,
+                  UpToDate, Conflict,
+                  Updated, Patched, Removed,
                   NotInCVS, Unknown };
-    enum Filter { NoFilter=0, OnlyDirectories=1, NoUpToDate=2, NoRemoved=4 };
+    enum Filter { NoFilter=0, OnlyDirectories=1, NoUpToDate=2,
+                  NoRemoved=4, NoNotInCVS=8 };
     enum Action { Add, Remove, Update, UpdateNoAct, Commit };
     
     UpdateView( QWidget *parent=0, const char *name=0 );

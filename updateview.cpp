@@ -454,7 +454,9 @@ void UpdateViewItem::applyFilter(UpdateView::Filter filter)
     if ((filter & UpdateView::NoUpToDate) && (m_status == UpdateView::UpToDate))
         hide = true;
     if ((filter & UpdateView::NoRemoved) && (m_status == UpdateView::Removed))
-	hide = true;
+        hide = true;
+    if ((filter & UpdateView::NoNotInCVS) && (m_status == UpdateView::NotInCVS))
+        hide = true;
     setVisible(!hide);
 }
 

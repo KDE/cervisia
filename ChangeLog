@@ -1,3 +1,12 @@
+2002-04-17  Bernd Gehrmann  <bernd@mail.berlios.de>
+
+	* Patch by Gregory Green <gregory.p.green@boeing.com>:
+	  - Checkout of branches
+	* Patch by Roland Krause <rokrau@yahoo.com>:
+	  - Added "Last change" to context menu
+	  - Added filter for files which are not in cvs
+	* Ignore stderr in Make Patch
+
 2002-02-04  Bernd Gehrmann  <bernd@mail.berlios.de>
 
 	* Colored ProtocolView output

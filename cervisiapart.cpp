@@ -115,7 +115,6 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     update = new UpdateView(splitter);
     update->setFocusPolicy( QWidget::StrongFocus );
     update->setFocus();
-
     connect( update, SIGNAL(contextMenu()),
              this, SLOT(popupRequested()) );
     connect( update, SIGNAL(fileOpened(QString)),
@@ -446,6 +445,13 @@ void CervisiaPart::setupActions()
                                 this, SLOT(slotHideRemoved()),
                                 actionCollection(), "settings_hide_removed" );
     hint = i18n("Determines whether removed files are hidden");
+    action->setToolTip( hint );
+    action->setWhatsThis( hint );
+
+    action = new KToggleAction( i18n("Hide Non CVS Files"), 0,
+                                this, SLOT(slotHideNotInCVS()),
+                                actionCollection(), "settings_hide_notincvs" );
+    hint = i18n("Determines whether files not in CVS are hidden");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
@@ -1143,7 +1149,7 @@ void CervisiaPart::slotMakePatch()
     l.setCaption(i18n("CVS Diff"));
 
     QString cmdline = cvsClient(repository);
-    cmdline += " diff -uR";
+    cmdline += " diff -uR 2>/dev/null";
     if (!l.execCommand(sandbox, repository, cmdline, ""))
         return;
 
@@ -1195,8 +1201,13 @@ void CervisiaPart::importOrCheckout(CheckoutDialog::ActionType action)
         if (action == CheckoutDialog::Checkout)
         {
             cmdline += " checkout ";
+			if (!l->branch().isEmpty())
+			{
+				cmdline += " -r ";
+				cmdline += l->branch();
+			}
             if (opt_pruneDirs)
-                cmdline += "-P ";
+                cmdline += " -P ";
             cmdline += l->module();
         }
         else
@@ -1353,6 +1364,13 @@ void CervisiaPart::slotHideRemoved()
 }
 
 
+void CervisiaPart::slotHideNotInCVS()
+{
+    opt_hideNotInCVS = !opt_hideNotInCVS;
+    setFilter();
+}
+
+
 void CervisiaPart::slotCreateDirs()
 {
     opt_createDirs = !opt_createDirs;
@@ -1460,6 +1478,7 @@ void CervisiaPart::openSandbox(const QString &dirname)
     emit setWindowCaption(sandbox + "(" + repository + ")");
     QDir::setCurrent(sandbox);
     update->openDirectory(sandbox);
+    setFilter();
 
     KConfig *conf = config();
     conf->setGroup("General");
@@ -1488,6 +1507,8 @@ void CervisiaPart::setFilter()
         filter = UpdateView::Filter(filter | UpdateView::NoUpToDate);
     if (opt_hideRemoved)
         filter = UpdateView::Filter(filter | UpdateView::NoRemoved);
+    if (opt_hideNotInCVS)
+        filter = UpdateView::Filter(filter | UpdateView::NoNotInCVS);
     update->setFilter(filter);
 
     QString str;
@@ -1643,6 +1664,10 @@ void CervisiaPart::readProperties(KConfig *config)
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_removed" )))
     ->setChecked( opt_hideRemoved );
 
+    opt_hideNotInCVS = config->readBoolEntry("Hide Non CVS Files", false);
+    (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_notincvs" )))
+    ->setChecked( opt_hideNotInCVS );
+
     setFilter();
 
     int splitterpos1 = config->readNumEntry("Splitter Pos 1", 0);
@@ -1669,6 +1694,7 @@ void CervisiaPart::saveProperties( KConfig *config )
     config->writeEntry("Hide Files", opt_hideFiles);
     config->writeEntry("Hide UpToDate Files", opt_hideUpToDate);
     config->writeEntry("Hide Removed Files", opt_hideRemoved);
+    config->writeEntry("Hide Non CVS Files", opt_hideNotInCVS);
     QValueList<int> sizes = splitter->sizes();
     config->writeEntry("Splitter Pos 1", sizes[0]);
     config->writeEntry("Splitter Pos 2", sizes[1]);

@@ -36,6 +36,8 @@ public:
         { return repo_combo->currentText(); }
     QString module() const
         { return act==Import? module_edit->text() : module_combo->currentText(); }
+	QString branch() const
+		{ return branch_edit->text(); }
     QString vendorTag() const
         { return vendortag_edit->text(); }
     QString releaseTag() const
@@ -59,6 +61,7 @@ private:
     struct Options {
         QString repo;
         QString module;
+		QString branch;
         QString workdir;
         QString vendortag;
         QString releasetag;
@@ -68,8 +71,9 @@ private:
     static Options *options;
 
     QComboBox *repo_combo, *module_combo;
-    KLineEdit *module_edit, *workdir_edit;
-    KLineEdit *vendortag_edit, *releasetag_edit, *ignore_edit;
+    QLineEdit *module_edit, *workdir_edit;
+    QLineEdit *branch_edit;
+    QLineEdit *vendortag_edit, *releasetag_edit, *ignore_edit;
     QCheckBox *binary_box;
     QPushButton *ok_button, *cancel_button;
     ActionType act;

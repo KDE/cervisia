@@ -45,11 +45,11 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
 
     QBoxLayout *layout = new QVBoxLayout(this, 10);
 
-    QGridLayout *grid = new QGridLayout((action==Checkout)? 3 : 7, 2, 10);
+    QGridLayout *grid = new QGridLayout((action==Checkout)? 4 : 8, 2, 10);
     layout->addLayout(grid);
     grid->setColStretch(0, 1);
     grid->setColStretch(1, 20);
-    for (int i = 0; i < ((action==Checkout)? 3 : 7); ++i)
+    for (int i = 0; i < ((action==Checkout)? 4 : 8); ++i)
         grid->setRowStretch(i, 0);
 
     repo_combo = new QComboBox(true, this);
@@ -64,6 +64,7 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
     repo_label->setFixedSize(repo_label->sizeHint());
     grid->addWidget(repo_label, 0, 0, AlignLeft | AlignVCenter);
 
+	int resume_row = 2;
     if (action == Import)
         {
             module_edit = new KLineEdit(this);
@@ -72,6 +73,7 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
             QLabel *module_label = new QLabel(module_edit, i18n("&Module:"), this);
             module_label->setFixedSize(module_label->sizeHint());
             grid->addWidget(module_label, 1, 0, AlignLeft | AlignVCenter);
+
         }
     else
         {
@@ -90,7 +92,16 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
  
             QLabel *module_label = new QLabel(module_combo, i18n("&Module:"), this);
             module_label->setFixedSize(module_label->sizeHint());
+
             grid->addWidget(module_label, 1, 0, AlignLeft | AlignVCenter);
+
+			branch_edit = new QLineEdit(this);
+			branch_edit->setMinimumSize(branch_edit->sizeHint());
+			grid->addWidget(branch_edit, 2, 1);
+			QLabel *branch_label = new QLabel(branch_edit, i18n("&Branch Tag:"), this);
+			branch_label->setFixedSize(branch_label->sizeHint());
+			grid->addWidget(branch_label, 2, 0, AlignLeft | AlignVCenter);
+			resume_row = 3;
         }
     
     workdir_edit = new KLineEdit(this);
@@ -102,53 +113,53 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
     QPushButton *dir_button = new QPushButton("...", this);
     connect( dir_button, SIGNAL(clicked()),
 	     this, SLOT(dirButtonClicked()) );
-    dir_button->setFixedHeight(workdir_edit->sizeHint().height());
-    dir_button->setFixedWidth(30);
-
-    QBoxLayout *workdir_layout = new QHBoxLayout();
-    grid->addLayout(workdir_layout, 2, 1);
-    workdir_layout->addWidget(workdir_edit, 10);
-    workdir_layout->addWidget(dir_button, 0, AlignVCenter);
-
-    QLabel *workdir_label = new QLabel
-	(workdir_edit, i18n("Working &directory:"), this);
-    workdir_label->setFixedSize(workdir_label->sizeHint());
-    grid->addWidget(workdir_label, 2, 0, AlignLeft | AlignVCenter);
-
-    if (action == Import)
-        {
-            vendortag_edit = new KLineEdit(this);
-            vendortag_edit->setMinimumSize(vendortag_edit->sizeHint());
-            grid->addWidget(vendortag_edit, 3, 1);
-            
-            QLabel *vendortag_label = new QLabel
-                (vendortag_edit, i18n("&Vendor Tag:"), this);
-            vendortag_label->setFixedSize(vendortag_label->sizeHint());
-            grid->addWidget(vendortag_label, 3, 0, AlignLeft | AlignVCenter);
-
-            releasetag_edit = new KLineEdit(this);
-            releasetag_edit->setMinimumSize(releasetag_edit->sizeHint());
-            grid->addWidget(releasetag_edit, 4, 1);
-            
-            QLabel *releasetag_label = new QLabel
-                (releasetag_edit, i18n("&Release Tag:"), this);
-            releasetag_label->setFixedSize(releasetag_label->sizeHint());
-            grid->addWidget(releasetag_label, 4, 0, AlignLeft | AlignVCenter);
-
-            ignore_edit = new KLineEdit(this);
-            ignore_edit->setMinimumSize(ignore_edit->sizeHint());
-            grid->addWidget(ignore_edit, 5, 1);
-            
-            QLabel *ignore_label = new QLabel
-                (ignore_edit, i18n("&Ignore files:"), this);
-            ignore_label->setFixedSize(ignore_label->sizeHint());
-            grid->addWidget(ignore_label, 5, 0, AlignLeft | AlignVCenter);
-
-            binary_box = new QCheckBox(i18n("Import as &binaries"), this);
-            binary_box->setMinimumSize(binary_box->sizeHint());
-            grid->addMultiCellWidget(binary_box, 6, 6, 0, 1);
-            
-        }
+     dir_button->setFixedHeight(workdir_edit->sizeHint().height());
+      dir_button->setFixedWidth(30);
+  
+      QBoxLayout *workdir_layout = new QHBoxLayout();
+      grid->addLayout(workdir_layout, resume_row, 1);
+      workdir_layout->addWidget(workdir_edit, 10);
+      workdir_layout->addWidget(dir_button, 0, AlignVCenter);
+  
+      QLabel *workdir_label = new QLabel
+  	  (workdir_edit, i18n("Working &directory:"), this);
+      workdir_label->setFixedSize(workdir_label->sizeHint());
+      grid->addWidget(workdir_label, resume_row, 0, AlignLeft | AlignVCenter);
+  
+      if (action == Import)
+          {
+              vendortag_edit = new QLineEdit(this);
+              vendortag_edit->setMinimumSize(vendortag_edit->sizeHint());
+              grid->addWidget(vendortag_edit, resume_row + 1, 1);
+              
+              QLabel *vendortag_label = new QLabel
+                  (vendortag_edit, i18n("&Vendor Tag:"), this);
+              vendortag_label->setFixedSize(vendortag_label->sizeHint());
+              grid->addWidget(vendortag_label, resume_row + 1, 0, AlignLeft | AlignVCenter);
+  
+              releasetag_edit = new QLineEdit(this);
+              releasetag_edit->setMinimumSize(releasetag_edit->sizeHint());
+              grid->addWidget(releasetag_edit, resume_row + 2, 1);
+              
+              QLabel *releasetag_label = new QLabel
+                  (releasetag_edit, i18n("&Release Tag:"), this);
+              releasetag_label->setFixedSize(releasetag_label->sizeHint());
+              grid->addWidget(releasetag_label, resume_row + 2, 0, AlignLeft | AlignVCenter);
+  
+              ignore_edit = new QLineEdit(this);
+              ignore_edit->setMinimumSize(ignore_edit->sizeHint());
+              grid->addWidget(ignore_edit, resume_row + 3, 1);
+              
+              QLabel *ignore_label = new QLabel
+                  (ignore_edit, i18n("&Ignore files:"), this);
+              ignore_label->setFixedSize(ignore_label->sizeHint());
+              grid->addWidget(ignore_label, resume_row + 3, 0, AlignLeft | AlignVCenter);
+  
+              binary_box = new QCheckBox(i18n("Import as &binaries"), this);
+              binary_box->setMinimumSize(binary_box->sizeHint());
+              grid->addMultiCellWidget(binary_box, resume_row + 4, 6, 0, 1);
+              
+          }
 
     QFrame *frame = new QFrame(this);
     frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);

@@ -31,6 +31,7 @@
     <Action name="settings_hide_files"/>
     <Action name="settings_hide_uptodate"/>
     <Action name="settings_hide_removed"/>
+    <Action name="settings_hide_notincvs"/>
     <Separator/>
     <Action name="view_unfold_tree"/>
     <Action name="view_fold_tree"/>
@@ -82,6 +83,7 @@
 <Menu name="context_popup">
   <Action name="file_edit"/>
   <Action name="view_diff"/>
+  <Action name="view_last_change"/>
   <Action name="file_resolve"/>
   <Action name="view_log"/>
   <Separator/>
