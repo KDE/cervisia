@@ -637,7 +637,7 @@ void CervisiaPart::openFiles(const QStringList &filenames)
     if (opt_doCVSEdit)
     {
         CvsProgressDialog l("Edit", widget() );
-        l.setCaption("CVS Edit");
+        l.setCaption(i18n("CVS Edit"));
         QString cmdline = cvsClient(repository) + " edit ";
 
         bool doit = false;
@@ -1140,7 +1140,7 @@ void CervisiaPart::slotShowEditors()
 void CervisiaPart::slotMakePatch()
 {
     CvsProgressDialog l("Diff", widget());
-    l.setCaption("CVS Diff");
+    l.setCaption(i18n("CVS Diff"));
 
     QString cmdline = cvsClient(repository);
     cmdline += " diff -uR";

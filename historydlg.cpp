@@ -315,12 +315,12 @@ void HistoryDialog::toggled(bool b)
 
 bool HistoryDialog::parseHistory(const QString &sandbox, const QString &repository)
 {
-    setCaption("CVS History");
+    setCaption(i18n("CVS History"));
 
     QString cmdline = cvsClient( repository ) + " history -e -a";
     
     CvsProgressDialog l("History", this);
-    l.setCaption("CVS History");
+    l.setCaption(i18n("CVS History"));
     if (!l.execCommand(sandbox, repository, cmdline, "history"))
         return false;
 

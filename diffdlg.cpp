@@ -263,7 +263,7 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
     int linenoA, linenoB;
     enum { Normal, VersionA, VersionB } state;
 
-    setCaption("CVS Diff: " + filename);
+    setCaption(i18n("CVS Diff: ") + filename);
     revlabel1->setText( revA.isEmpty()?
                         QString(i18n("Repository"))
                         : i18n("Revision ")+revA );
@@ -354,7 +354,7 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
     cmdline += KShellProcess::quote(filename);
 
     CvsProgressDialog l("Diff", this);
-    l.setCaption("CVS Diff");
+    l.setCaption(i18n("CVS Diff"));
     if (!l.execCommand(sandbox, repository, cmdline, "diff"))
         return false;
 
@@ -478,9 +478,9 @@ void DiffDialog::updateNofN()
 {
     QString str;
     if (markeditem >= 0)
-	str = QString("%1 of %2").arg(markeditem+1).arg(items.count());
+	str = i18n("%1 of %2").arg(markeditem+1).arg(items.count());
     else
-	str = QString("%1 differences").arg(items.count());
+	str = i18n("%1 differences").arg(items.count());
     nofnlabel->setText(str);
 
     itemscombo->setCurrentItem(markeditem==-2? 0 : markeditem+1);

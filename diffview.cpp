@@ -22,6 +22,7 @@
 #include <kapp.h>
 #include <kconfig.h>
 #include <kdebug.h>
+#include <klocale.h>
 #include "misc.h"
 #include "cervisiapart.h"
 
@@ -249,9 +250,9 @@ int DiffView::cellWidth(int col)
     else if (marker && (col == 0 || col == 1))
         {
             QFontMetrics fm( fontMetrics() );
-            return QMAX(QMAX( fm.width("Delete"),
-                              fm.width("Insert")),
-                        fm.width("Change"))+2*DIFFBORDER;
+            return QMAX(QMAX( fm.width(i18n("Delete")),
+                              fm.width(i18n("Insert"))),
+                        fm.width(i18n("Change")))+2*DIFFBORDER;
         }
     else
 	{
@@ -319,9 +320,9 @@ void DiffView::paintCell(QPainter *p, int row, int col)
 	    inverted = false;
 	    align = AlignRight;
 	    innerborder = DIFFBORDER;
-	    str = (item->type==Change)? "Change"
-		: (item->type==Insert)? "Insert"
-		: (item->type==Delete)? "Delete" : "";
+	    str = (item->type==Change)? i18n("Change")
+		: (item->type==Insert)? i18n("Insert")
+		: (item->type==Delete)? i18n("Delete") : "";
 	}
     else
 	{

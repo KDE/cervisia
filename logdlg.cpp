@@ -225,13 +225,13 @@ bool LogDialog::parseCvsLog(const QString &sbox, const QString &repo, const QStr
     repository = repo;
     filename = fname;
     
-    setCaption("CVS Log: " + filename);
+    setCaption(i18n("CVS Log: ") + filename);
 
     QString cmdline = cvsClient(repository) + " -f log ";
     cmdline += KShellProcess::quote(filename);
     
     CvsProgressDialog l("Logging", this);
-    l.setCaption("CVS Log");
+    l.setCaption(i18n("CVS Log"));
     if (!l.execCommand(sandbox, repository, cmdline, "log"))
         return false;
 

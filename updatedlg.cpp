@@ -42,7 +42,7 @@ UpdateDialog::UpdateDialog(const QString &sbox, const QString &repo,
     branch_combo = new QComboBox(true, this);
     branch_combo->setMinimumSize(fm.width("0")*30, branch_combo->sizeHint().height());
     
-    branch_button = new QPushButton("Fetch &List", this);
+    branch_button = new QPushButton(i18n("Fetch &List"), this);
     connect( branch_button, SIGNAL(clicked()),
              this, SLOT(branchButtonClicked()) );
             
@@ -58,7 +58,7 @@ UpdateDialog::UpdateDialog(const QString &sbox, const QString &repo,
     tag_combo = new QComboBox(true, this);
     tag_combo->setMinimumSize(fm.width("0")*30, tag_combo->sizeHint().height());
     
-    tag_button = new QPushButton("Fetch l&ist", this);
+    tag_button = new QPushButton(i18n("Fetch L&ist"), this);
     connect( tag_button, SIGNAL(clicked()),
              this, SLOT(tagButtonClicked()) );
             
@@ -122,7 +122,7 @@ void UpdateDialog::buttonClicked(bool branch)
     cmdline += " status -v";
 
     CvsProgressDialog l("Status", this);
-    l.setCaption("CVS Status");
+    l.setCaption(i18n("CVS Status"));
     if (!l.execCommand(sandbox, repository, cmdline, ""))
         return;
 

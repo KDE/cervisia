@@ -47,7 +47,7 @@ TagDialog::TagDialog(ActionType action, const QString &sbox, const QString &repo
             
             QLabel *tag_label = new QLabel(tag_combo, i18n("&Name of tag:"), this);
 
-            QPushButton *tag_button = new QPushButton("Fetch &List", this);
+            QPushButton *tag_button = new QPushButton(i18n("Fetch &List"), this);
             tag_button->setMinimumWidth(tag_button->sizeHint().width());
             connect( tag_button, SIGNAL(clicked()),
                      this, SLOT(tagButtonClicked()) );
@@ -137,7 +137,7 @@ void TagDialog::tagButtonClicked()
     cmdline += " status -v";
 
     CvsProgressDialog l("Status", this);
-    l.setCaption("CVS Status");
+    l.setCaption(i18n("CVS Status"));
     if (!l.execCommand(sandbox, repository, cmdline, ""))
         return;
 

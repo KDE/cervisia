@@ -44,7 +44,7 @@ MergeDialog::MergeDialog(const QString &sbox, const QString &repo,
     branch_combo->setMinimumSize(fm.width("0")*30, branch_combo->sizeHint().height());
     //    branch_combo->setFocus();
 
-    branch_button = new QPushButton("Fetch &List", this);
+    branch_button = new QPushButton(i18n("Fetch &List"), this);
     connect( branch_button, SIGNAL(clicked()),
              this, SLOT(branchButtonClicked()) );
             
@@ -67,7 +67,7 @@ MergeDialog::MergeDialog(const QString &sbox, const QString &repo,
     tag2_combo->setMinimumSize(fm.width("0")*30, tag2_combo->sizeHint().height());
     tag2_combo->setEnabled(false);
 
-    tag_button = new QPushButton("Fetch l&ist", this);
+    tag_button = new QPushButton(i18n("Fetch L&ist"), this);
     connect( tag_button, SIGNAL(clicked()),
              this, SLOT(tagButtonClicked()) );
 
@@ -123,7 +123,7 @@ void MergeDialog::buttonClicked(bool branch)
     cmdline += " status -v";
 
     CvsProgressDialog l("Status", this);
-    l.setCaption("CVS Status");
+    l.setCaption(i18n("CVS Status"));
     if (!l.execCommand(sandbox, repository, cmdline, ""))
         return;
 

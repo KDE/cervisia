@@ -104,7 +104,7 @@ bool AnnotateDialog::parseCvsAnnotate(const QString &sandbox, const QString &rep
     enum { Begin, Tags, Admin, Revision,
 	   Author, Branches, Comment, Finished } state;
 
-    setCaption("CVS Annotate: " + filename);
+    setCaption(i18n("CVS Annotate: ") + filename);
 
     QString cmdline = cvsClient(repository);
     cmdline += " log ";
@@ -125,7 +125,7 @@ bool AnnotateDialog::parseCvsAnnotate(const QString &sandbox, const QString &rep
     cmdline += " 2>&1";
 
     CvsProgressDialog l("Annotate", this);
-    l.setCaption("CVS Annotate");
+    l.setCaption(i18n("CVS Annotate"));
     if (!l.execCommand(sandbox, repository, cmdline, "annotate"))
         return false;
 

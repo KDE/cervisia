@@ -62,7 +62,7 @@ ResolveDialog::ResolveDialog( QWidget *parent, const char *name)
     diff1->setPartner(diff2);
     diff2->setPartner(diff1);
     
-    QLabel *mergelabel = new QLabel("Merged Version:", this);
+    QLabel *mergelabel = new QLabel(i18n("Merged Version:"), this);
     mergelabel->setFixedHeight(mergelabel->sizeHint().height());
     layout->addSpacing(5);
     layout->addWidget(mergelabel);
@@ -186,7 +186,7 @@ bool ResolveDialog::parseFile(const QString &name)
     char buf[512];
     enum { Normal, VersionA, VersionB } state;
     
-    setCaption("CVS Resolve: " + name);
+    setCaption(i18n("CVS Resolve: ") + name);
 
     fname = name;
     
@@ -280,9 +280,9 @@ void ResolveDialog::updateNofN()
 {
     QString str;
     if (markeditem >= 0)
-	str = QString("%1 of %2").arg(markeditem+1).arg(items.count());
+	str = i18n("%1 of %2").arg(markeditem+1).arg(items.count());
     else
-	str = QString("%1 conflicts").arg(items.count());
+	str = i18n("%1 conflicts").arg(items.count());
     nofnlabel->setText(str);
 
     backbutton->setEnabled(markeditem != -1);
