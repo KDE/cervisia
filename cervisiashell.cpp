@@ -178,12 +178,7 @@ bool CervisiaShell::queryExit()
 
 void CervisiaShell::readSettings()
 {   
-    KConfig *config = part->config();       // FIXME: remove later
-    part->readDialogProperties(config);     // -dito-
-    config->setGroup("Session");            // -dito-
-    part->readProperties( config );         // -dito-
-    
-    config = KGlobal::config();
+    KConfig* config = KGlobal::config();
     
     config->setGroup("Session");
     QString currentDir = config->readEntry("Current Directory");
@@ -194,12 +189,7 @@ void CervisiaShell::readSettings()
 
 void CervisiaShell::writeSettings()
 {
-    KConfig *config = part->config();       // FIXME: remove later
-    part->saveDialogProperties(config);     // -dito-
-    config->setGroup("Session");            // -dito-
-    part->saveProperties(config);           // -dito-
-    
-    config = KGlobal::config();
+    KConfig* config = KGlobal::config();
     
     config->setGroup("Session");
     config->writeEntry("Current Directory", part->sandBox());

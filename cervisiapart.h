@@ -53,12 +53,6 @@ public:
 
     QString sandBox() const { return sandbox; }
 
-    virtual void readProperties(KConfig *config);
-    virtual void saveProperties(KConfig *config);
-
-    void readDialogProperties( KConfig *config );
-    void saveDialogProperties( KConfig *config );
-    
     static KAboutData* createAboutData();
 
 signals:
@@ -137,6 +131,11 @@ private slots:
 private:    
     void setupActions();
 
+    void readSettings();
+    void writeSettings();
+    void readDialogProperties( KConfig *config );
+    void saveDialogProperties( KConfig *config );
+       
     void openSandbox(const QString &dirname);
     void updateSandbox(const QString &extraopt = QString::null);
     void addOrRemove(AddRemoveDialog::ActionType action);

@@ -117,6 +117,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
 
     setWidget(splitter);
     setupActions();
+    readSettings();
     connect( update, SIGNAL( selectionChanged() ), this, SLOT( updateActions() ) );
     updateActions();
     setXMLFile( "cervisiaui.rc" );
@@ -128,6 +129,8 @@ CervisiaPart::~CervisiaPart()
     // stop the cvs DCOP service and delete reference
     cvsService->quit();
     delete cvsService;
+    
+    writeSettings();
 }
 
 KConfig *CervisiaPart::config()
@@ -1689,8 +1692,12 @@ void CervisiaPart::parseStatus(QString pathname, QStrList list)
 #endif
 
 
-void CervisiaPart::readProperties(KConfig *config)
+void CervisiaPart::readSettings()
 {
+    KConfig* config = CervisiaFactory::instance()->config();
+    readDialogProperties(config);
+
+    config->setGroup("Session");
     recent->loadEntries( config );
 
     // Unfortunately, the KConfig systems sucks and we have to live
@@ -1746,8 +1753,12 @@ void CervisiaPart::readProperties(KConfig *config)
 }
 
 
-void CervisiaPart::saveProperties( KConfig *config )
+void CervisiaPart::writeSettings()
 {
+    KConfig* config = CervisiaFactory::instance()->config();
+    saveDialogProperties(config);
+
+    config->setGroup("Session");
     recent->saveEntries( config );
 
     config->writeEntry("Create Dirs", opt_createDirs);
@@ -1762,6 +1773,9 @@ void CervisiaPart::saveProperties( KConfig *config )
     QValueList<int> sizes = splitter->sizes();
     config->writeEntry("Splitter Pos 1", sizes[0]);
     config->writeEntry("Splitter Pos 2", sizes[1]);
+    
+    // write to disk
+    config->sync();
 }
 
 

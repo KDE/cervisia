@@ -3,6 +3,8 @@
 	* Remove restorePseudo() hack
 	* We always want to save "Current Directory". So move out
 	  of the session management methods.
+	* Settings for the part are now handle by the part. This
+	  fixes partly the bug #38235.
 
 2003-01-16  Christian Loose <christian.loose@hamburg.de>
 
