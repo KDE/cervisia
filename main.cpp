@@ -1,6 +1,6 @@
 /* 
  *  Copyright (C) 1999-2002 Bernd Gehrmann
- *                          bernd@physik.hu-berlin.de
+ *                          bernd@mail.berlios.de
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -34,7 +34,8 @@ int main(int argc, char **argv)
     };
     KAboutData about("cervisia", I18N_NOOP("Cervisia"), 
 		     CERVISIA_VERSION, I18N_NOOP("A CVS frontend"),
-                     KAboutData::License_QPL, I18N_NOOP("(c) 1999-2002 Bernd Gehrmann"));
+                     KAboutData::License_QPL, 
+                     I18N_NOOP("Copyright (c) 1999-2002 Bernd Gehrmann"));
     KCmdLineArgs::init(argc, argv, &about);
     KCmdLineArgs::addCmdLineOptions(options);
     

@@ -1,6 +1,6 @@
 /* 
  *  Copyright (C) 1999-2001 Bernd Gehrmann
- *                          bernd@physik.hu-berlin.de
+ *                          bernd@mail.berlios.de
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
