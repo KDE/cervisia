@@ -16,7 +16,8 @@
 #define RESOLVEDLG_H
 
 
-#include <qdialog.h>
+#include <kdialogbase.h>
+
 #include <qptrlist.h>
 
 
@@ -29,14 +30,16 @@ class KConfig;
 class ResolveItem;
 
 
-class ResolveDialog : public QDialog
+class ResolveDialog : public KDialogBase
 {
     Q_OBJECT
 
 public:
     enum ChooseType { ChA, ChB, ChAB, ChBA, ChEdit };
 
-    ResolveDialog( QWidget *parent=0, const char *name=0 );
+    explicit ResolveDialog( QWidget *parent=0, const char *name=0 );
+
+    virtual ~ResolveDialog();
 
     bool parseFile(const QString &name);
 
@@ -45,7 +48,6 @@ public:
     
 protected:
     virtual void keyPressEvent(QKeyEvent *e);
-    virtual void done(int res);
 
 private slots:
     void backClicked();
@@ -55,7 +57,6 @@ private slots:
     void abClicked();
     void baClicked();
     void editClicked();
-    void helpClicked();
     void saveClicked();
     void saveAsClicked();
     
@@ -83,21 +84,19 @@ private:
 };
 
 
-class ResolveEditorDialog : public QDialog
+class ResolveEditorDialog : public KDialogBase
 {
-    Q_OBJECT
-  
 public:
-    ResolveEditorDialog( QWidget *parent=0, const char *name=0 );
+
+    explicit ResolveEditorDialog( QWidget *parent=0, const char *name=0 );
+
+    virtual ~ResolveEditorDialog();
 
     void setContent(const QStringList &l);
     QStringList content() const;
 
     static void loadOptions(KConfig *config);
     static void saveOptions(KConfig *config);
-    
-protected:
-    virtual void done(int r);
 
 private:
     struct Options {

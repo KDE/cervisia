@@ -22,8 +22,6 @@
 #include <qpushbutton.h>
 #include <qtextcodec.h>
 #include <qtextstream.h>
-#include <kbuttonbox.h>
-#include <kapplication.h>
 #include <kdebug.h>
 #include <kfiledialog.h>
 #include <klocale.h>
@@ -37,68 +35,68 @@ ResolveDialog::Options *ResolveDialog::options = 0;
 
 
 ResolveDialog::ResolveDialog(QWidget *parent, const char *name)
-    : QDialog(parent, name, false,
-              WStyle_Customize|WStyle_NormalBorder|WStyle_Title|WStyle_MinMax)
+    : KDialogBase(parent, name, false, QString::null,
+                  Close | Help | User1 | User2, Close, true,
+                  KStdGuiItem::saveAs(), KStdGuiItem::save()),
+      markeditem(-1)
 {
     items.setAutoDelete(true);
-    markeditem = -1;
-    QFontMetrics fm(fontMetrics());
 
-    QBoxLayout *layout = new QVBoxLayout(this, 10);
+    QFrame* mainWidget = makeMainWidget();
 
-    QGridLayout *pairlayout = new QGridLayout(2, 2, 10);
+    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
+
+    QGridLayout *pairlayout = new QGridLayout;
     pairlayout->setRowStretch(0, 0);
     pairlayout->setRowStretch(1, 1);
     layout->addLayout(pairlayout, 10);
 
-    QLabel *revlabel1 = new QLabel(i18n("Your version (A):"), this);
+    QLabel *revlabel1 = new QLabel(i18n("Your version (A):"), mainWidget);
     pairlayout->addWidget(revlabel1, 0, 0);
-			      
-    QLabel *revlabel2 = new QLabel(i18n("Other version (B):"), this);
+
+    QLabel *revlabel2 = new QLabel(i18n("Other version (B):"), mainWidget);
     pairlayout->addWidget(revlabel2, 0, 1);
 
-    diff1 = new DiffView(true, false, this);
+    diff1 = new DiffView(true, false, mainWidget);
     pairlayout->addWidget(diff1, 1, 0);
 
-    diff2 = new DiffView(true, false, this);
+    diff2 = new DiffView(true, false, mainWidget);
     pairlayout->addWidget(diff2, 1, 1);
 
     diff1->setPartner(diff2);
     diff2->setPartner(diff1);
-    
-    QLabel *mergelabel = new QLabel(i18n("Merged version:"), this);
-    layout->addSpacing(5);
+
+    QLabel *mergelabel = new QLabel(i18n("Merged version:"), mainWidget);
     layout->addWidget(mergelabel);
-    
-    merge = new DiffView(false, false, this);
+
+    merge = new DiffView(false, false, mainWidget);
     layout->addWidget(merge, 10);
 
-    abutton = new QPushButton("&A", this);
+    abutton = new QPushButton("&A", mainWidget);
     connect( abutton, SIGNAL(clicked()), SLOT(aClicked()) );
     
-    bbutton = new QPushButton("&B", this);
+    bbutton = new QPushButton("&B", mainWidget);
     connect( bbutton, SIGNAL(clicked()), SLOT(bClicked()) );
 
-    abbutton = new QPushButton("A+B", this);
+    abbutton = new QPushButton("A+B", mainWidget);
     connect( abbutton, SIGNAL(clicked()), SLOT(abClicked()) );
 
-    babutton = new QPushButton("B+A", this);
+    babutton = new QPushButton("B+A", mainWidget);
     connect( babutton, SIGNAL(clicked()), SLOT(baClicked()) );
 
-    editbutton = new QPushButton("&Edit", this);
+    editbutton = new QPushButton("&Edit", mainWidget);
     connect( editbutton, SIGNAL(clicked()), SLOT(editClicked()) );
 
-    nofnlabel = new QLabel(this);
+    nofnlabel = new QLabel(mainWidget);
     nofnlabel->setAlignment(AlignCenter);
     
-    backbutton = new QPushButton("&<<", this);
+    backbutton = new QPushButton("&<<", mainWidget);
     connect( backbutton, SIGNAL(clicked()), SLOT(backClicked()) );
     
-    forwbutton = new QPushButton("&>>", this);
+    forwbutton = new QPushButton("&>>", mainWidget);
     connect( forwbutton, SIGNAL(clicked()), SLOT(forwClicked()) );
 
-    QBoxLayout *buttonlayout = new QHBoxLayout();
-    layout->addLayout(buttonlayout);
+    QBoxLayout *buttonlayout = new QHBoxLayout(layout);
     buttonlayout->addWidget(abutton, 1);
     buttonlayout->addWidget(bbutton, 1);
     buttonlayout->addWidget(abbutton, 1);
@@ -109,46 +107,30 @@ ResolveDialog::ResolveDialog(QWidget *parent, const char *name)
     buttonlayout->addStretch(1);
     buttonlayout->addWidget(backbutton, 1);
     buttonlayout->addWidget(forwbutton, 1);
-    
-    QFrame *frame = new QFrame(this);
-    frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-    layout->addWidget(frame, 0);
 
-    KButtonBox *buttonbox = new KButtonBox(this);
-    QPushButton *helpbutton = buttonbox->addButton(i18n("&Help"));
-    helpbutton->setAutoDefault(false);
-    buttonbox->addStretch();
-    QPushButton *savebutton = buttonbox->addButton(i18n("&Save"));
-    savebutton->setAutoDefault(false);
-    QPushButton *saveasbutton = buttonbox->addButton(i18n("Sa&ve As..."));
-    saveasbutton->setAutoDefault(false);
-    QPushButton *closebutton = buttonbox->addButton(i18n("&Close"));
-    buttonbox->layout();
-    layout->addWidget(buttonbox, 0);
+    connect( this, SIGNAL(user2Clicked()), SLOT(saveClicked()) );
+    connect( this, SIGNAL(user1Clicked()), SLOT(saveAsClicked()) );
 
-    connect( helpbutton, SIGNAL(clicked()), SLOT(helpClicked()) );
-    connect( savebutton, SIGNAL(clicked()), SLOT(saveClicked()) );
-    connect( saveasbutton, SIGNAL(clicked()), SLOT(saveAsClicked()) );
-    connect( closebutton, SIGNAL(clicked()), SLOT(accept()) );
+    QFontMetrics const fm(fontMetrics());
+    setMinimumSize(fm.width('0') * 120,
+                   fm.lineSpacing() * 40);
 
-    setMinimumSize(fm.width("0123456789")*12,
-		   fm.lineSpacing()*40);
+    setHelp("resolvingconflicts");
+
+    setWFlags(Qt::WDestructiveClose | getWFlags());
 
     if (options)
         resize(options->size);
 }
 
 
-void ResolveDialog::done(int res)
+ResolveDialog::~ResolveDialog()
 {
     if (!options)
         options = new Options;
     options->size = size();
-    
-    QDialog::done(res);
-    delete this;
 }
-	    
+
 
 void ResolveDialog::loadOptions(KConfig *config)
 {
@@ -502,12 +484,6 @@ void ResolveDialog::editClicked()
 }
 
 
-void ResolveDialog::helpClicked()
-{
-    kapp->invokeHelp("resolvingconflicts", "cervisia");
-}
-
-
 void ResolveDialog::saveClicked()
 {
     saveFile(fname);
@@ -541,46 +517,28 @@ ResolveEditorDialog::Options *ResolveEditorDialog::options = 0;
 
 
 ResolveEditorDialog::ResolveEditorDialog(QWidget *parent, const char *name)
-    : QDialog(parent, name, true,
-              WStyle_Customize|WStyle_NormalBorder|WStyle_Title|WStyle_MinMax)
+    : KDialogBase(parent, name, true, QString::null,
+                  Ok | Cancel, Ok, true)
 {
-    QFontMetrics fm(fontMetrics());
-
-    QBoxLayout *layout = new QVBoxLayout(this, 10);
-
-    setMinimumSize(fm.width("0123456789")*120,
-		   fm.lineSpacing()*120);
-
     edit = new QMultiLineEdit(this);
     edit->setFocus();
-    layout->addWidget(edit, 10);
-  
-    QFrame *frame = new QFrame(this);
-    frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-    layout->addWidget(frame, 0);
-    
-    KButtonBox *buttonbox = new KButtonBox(this);
-    buttonbox->addStretch();
-    QPushButton *ok = buttonbox->addButton(i18n("&OK"));
-    QPushButton *cancel = buttonbox->addButton(i18n("Cancel"));
-    ok->setDefault(true);
-    connect( ok, SIGNAL(clicked()), this, SLOT(accept()) );
-    connect( cancel, SIGNAL(clicked()), this, SLOT(reject()) );
-    buttonbox->layout();
-    layout->addWidget(buttonbox, 0);
-    layout->activate();
+
+    setMainWidget(edit);
+
+    QFontMetrics const fm(fontMetrics());
+    setMinimumSize(fm.width('0') * 120,
+                   fm.lineSpacing() * 40);
 
     if (options)
         resize(options->size);
 }
 
 
-void ResolveEditorDialog::done(int r)
+ResolveEditorDialog::~ResolveEditorDialog()
 {
     if (!options)
         options = new Options;
     options->size = size();
-    QDialog::done(r);
 }
 
 
