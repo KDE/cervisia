@@ -320,6 +320,22 @@ DCOPRef CvsService::history()
 }
 
 
+DCOPRef CvsService::lock(const QStringList& files)
+{
+    if( !d->hasWorkingCopy() || d->hasRunningJob() )
+        return DCOPRef();
+
+    // assemble the command line
+    // cvs admin -l [FILES]
+    d->singleCvsJob->clearCvsCommand();
+
+    *d->singleCvsJob << d->repository->cvsClient() << "admin -l"
+                     << CvsServiceUtils::joinFileList(files);
+
+    return d->setupNonConcurrentJob();
+}
+
+
 DCOPRef CvsService::log(const QString& fileName)
 {
     if( !d->hasWorkingCopy() )
@@ -496,6 +512,22 @@ DCOPRef CvsService::unedit(const QStringList& files)
 
     *d->singleCvsJob << "echo y |"
                      << d->repository->cvsClient() << "unedit"
+                     << CvsServiceUtils::joinFileList(files);
+
+    return d->setupNonConcurrentJob();
+}
+
+
+DCOPRef CvsService::unlock(const QStringList& files)
+{
+    if( !d->hasWorkingCopy() || d->hasRunningJob() )
+        return DCOPRef();
+
+    // assemble the command line
+    // cvs admin -u [FILES]
+    d->singleCvsJob->clearCvsCommand();
+
+    *d->singleCvsJob << d->repository->cvsClient() << "admin -u"
                      << CvsServiceUtils::joinFileList(files);
 
     return d->setupNonConcurrentJob();

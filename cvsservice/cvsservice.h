@@ -128,6 +128,11 @@ k_dcop:
     DCOPRef history();
 
     /**
+     * @param files
+     */
+    DCOPRef lock(const QStringList& files);
+
+    /**
      * Shows log messages for a file.
      *
      * @param fileName the name of the file to show log messages for
@@ -205,6 +210,11 @@ k_dcop:
      * @param files
      */
     DCOPRef unedit(const QStringList& files);
+
+    /**
+     * @param files
+     */
+    DCOPRef unlock(const QStringList& files);
 
     /**
      * Merges changes from the repository into the files of the
