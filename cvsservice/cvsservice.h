@@ -247,6 +247,11 @@ k_dcop:
     /**
      */
     DCOPRef makePatch();
+    
+    /**
+     */
+    //### KDE4: merge with above makePatch() method
+    DCOPRef makePatch(const QString& diffOptions, const QString& format);
 
     /**
      * @param repository

@@ -416,27 +416,9 @@ DCOPRef CvsService::diff(const QString& fileName, const QString& revA,
                          const QString& revB, const QString& diffOptions,
                          unsigned contextLines)
 {
-    if( !d->hasWorkingCopy() )
-        return DCOPRef();
-
-    // create a cvs job
-    CvsJob* job = d->createCvsJob();
-
-    // assemble the command line
     // cvs diff [DIFFOPTIONS] -U CONTEXTLINES [-r REVA] {-r REVB] [FILE]
-    *job << d->repository->cvsClient() << "diff" << diffOptions
-         << "-U" << QString::number(contextLines);
-
-    if( !revA.isEmpty() )
-        *job << "-r" << KProcess::quote(revA);
-
-    if( !revB.isEmpty() )
-        *job << "-r" << KProcess::quote(revB);
-
-    *job << KProcess::quote(fileName);
-
-    // return a DCOP reference to the cvs job
-    return DCOPRef(d->appId, job->objId());
+    QString format = "-U" + QString::number(contextLines);
+    return diff(fileName, revA, revB, diffOptions, format);
 }
 
 
@@ -680,6 +662,12 @@ DCOPRef CvsService::logout(const QString& repository)
 
 DCOPRef CvsService::makePatch()
 {
+    return makePatch("", "-u");
+}
+
+
+DCOPRef CvsService::makePatch(const QString& diffOptions, const QString& format)
+{
     if( !d->hasWorkingCopy() )
         return DCOPRef();
 
@@ -687,8 +675,8 @@ DCOPRef CvsService::makePatch()
     CvsJob* job = d->createCvsJob();
 
     // assemble the command line
-    // cvs diff -uR 2>/dev/null
-    *job << d->repository->cvsClient() << "diff" << "-uR"
+    // cvs diff [DIFFOPTIONS] [FORMAT] -R 2>/dev/null
+    *job << d->repository->cvsClient() << "diff" << diffOptions << format << "-R"
          << "2>/dev/null";
 
     // return a DCOP reference to the cvs job
