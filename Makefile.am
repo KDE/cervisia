@@ -10,10 +10,11 @@ noinst_LTLIBRARIES = libcervisia.la
 libcervisia_la_SOURCES = annotatedlg.cpp diffdlg.cpp logdlg.cpp \
 		   progressdlg.cpp progressdlg.skel resolvedlg.cpp resolvedlg_p.cpp annotateview.cpp \
 		   diffview.cpp loglist.cpp logplainview.cpp logtree.cpp annotatectl.cpp   \
-		   loginfo.cpp misc.cpp qttableview.cpp tooltip.cpp cervisiasettings.kcfgc
+		   loginfo.cpp misc.cpp qttableview.cpp tooltip.cpp cervisiasettings.kcfgc \
+		   settingsdlg.cpp
 
 libcervisiapart_la_SOURCES = updateview.cpp protocolview.cpp protocolview.skel \
-		   watchdlg.cpp settingsdlg.cpp changelogdlg.cpp historydlg.cpp \
+		   watchdlg.cpp changelogdlg.cpp historydlg.cpp \
 		   repositorydlg.cpp commitdlg.cpp checkoutdlg.cpp updatedlg.cpp \
 		   tagdlg.cpp mergedlg.cpp cvsdir.cpp repositories.cpp cervisiapart.cpp \
 		   addrepositorydlg.cpp addremovedlg.cpp watchersdlg.cpp \
