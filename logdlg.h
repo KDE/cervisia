@@ -71,11 +71,12 @@ private slots:
     void diffClicked();
     void annotateClicked();
     void revisionSelected(QString rev, bool rmb);
-    void tagSelected(QString rev, bool rmb);
     void tagASelected(int n);
     void tagBSelected(int n);
 
 private:
+    void tagSelected(TagInfo* tag, bool rmb);
+    
     struct Options {
         QSize size;
         bool showlisttab;

@@ -435,32 +435,26 @@ void LogDialog::revisionSelected(QString rev, bool rmb)
 }
 
 
-void LogDialog::tagSelected(QString tag, bool rmb)
+void LogDialog::tagSelected(TagInfo* tag, bool rmb)
 {
-    QPtrListIterator<TagInfo> it(tags);
-    for (; it.current(); ++it)
-        if (tag == it.current()->tag)
-            {
-                if (it.current()->branchpoint.isEmpty())
-                    revisionSelected(it.current()->rev, rmb);
-                else
-                    revisionSelected(it.current()->branchpoint, rmb);
-                return;
-            }
+    if (tag->branchpoint.isEmpty())
+        revisionSelected(tag->rev, rmb);
+    else
+        revisionSelected(tag->branchpoint, rmb);
 }
 
 
 void LogDialog::tagASelected(int n)
 {
     if (n)
-        tagSelected(tags.at(n-1)->tag, false);
+        tagSelected(tags.at(n-1), false);
 }
 
 
 void LogDialog::tagBSelected(int n)
 {
     if (n)
-        tagSelected(tags.at(n-1)->tag, true);
+        tagSelected(tags.at(n-1), true);
 }
 
 #include "logdlg.moc"
