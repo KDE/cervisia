@@ -14,6 +14,9 @@
 #include <qstringlist.h>
 #include <qdir.h>
 #include <stdlib.h>
+
+// For some reason fnmatch is defined as ap_fnmatch
+#define ap_fnmatch fnmatch
 #include <fnmatch.h>
 #include "misc.h"
 
