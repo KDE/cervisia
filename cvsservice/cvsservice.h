@@ -99,6 +99,25 @@ k_dcop:
                      const QString& alias, bool exportOnly);
 
     /**
+     * Checks out a module from the repository into a working copy.
+     *
+     * @param workingDir path to a local working copy directory
+     * @param repository
+     * @param module the name of the module
+     * @param tag
+     * @param pruneDirs remove empty directories from the working copy.
+     * @param alias alternative directory to check out to
+     * @param exportOnly flag to show we want a cvs export rather than a checkout
+     * @param recursive check out dirs recursively
+     *
+     * @return A DCOP reference to the cvs job or in case of failure a
+     *         null reference.
+     */
+    DCOPRef checkout(const QString& workingDir, const QString& repository,
+                     const QString& module, const QString& tag, bool pruneDirs, 
+                     const QString& alias, bool exportOnly, bool recursive);
+
+    /**
      *
      * @param files A list of files with changes that should be committed to
      *              the repository.

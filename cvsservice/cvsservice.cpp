@@ -251,6 +251,44 @@ DCOPRef CvsService::checkout(const QString& workingDir, const QString& repositor
     return d->setupNonConcurrentJob(&repo);
 }
 
+DCOPRef CvsService::checkout(const QString& workingDir, const QString& repository,
+                             const QString& module, const QString& tag, 
+                             bool pruneDirs, const QString& alias, bool exportOnly,
+                             bool recursive)
+{
+    if( d->hasRunningJob() )
+        return DCOPRef();
+
+    Repository repo(repository);
+
+    // assemble the command line
+    // cd [DIRECTORY] && cvs -d [REPOSITORY] co [-r tag] [-P] [-d alias] [MODULE]
+    d->singleCvsJob->clearCvsCommand();
+
+    *d->singleCvsJob << "cd" << KProcess::quote(workingDir) << "&&"
+                     << repo.cvsClient()
+                     << "-d" << repository;
+    if( exportOnly)
+      *d->singleCvsJob << "export";
+    else
+      *d->singleCvsJob << "checkout";
+
+    if( !tag.isEmpty() )
+        *d->singleCvsJob << "-r" << tag;
+
+    if( pruneDirs && !exportOnly )
+        *d->singleCvsJob << "-P";
+
+    if( !alias.isEmpty() )
+      *d->singleCvsJob << "-d" << alias;
+
+    if( ! recursive )
+        *d->singleCvsJob << "-l";
+
+    *d->singleCvsJob << module;
+
+    return d->setupNonConcurrentJob(&repo);
+}
 
 DCOPRef CvsService::commit(const QStringList& files, const QString& commitMessage,
                            bool recursive)
