@@ -21,3 +21,12 @@ Id=kde3.2/20030117
 File=cervisiapartrc,cervisiarc
 Group=Session
 Key=Current Directory
+#
+Id=kde3.2/20030118
+File=cervisiapartrc
+RemoveGroup=Annotate dialog
+File=cervisiapartrc
+Group=LogList view
+Key=Columns,ColumnOrder
+Key=ColumnSizes,ColumnWidths
+RemoveKey=Customized

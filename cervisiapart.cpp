@@ -1792,8 +1792,6 @@ void CervisiaPart::readDialogProperties( KConfig *config )
     CommitDialog::loadOptions(config);
     config->setGroup("ChangeLog dialog");
     ChangeLogDialog::loadOptions(config);
-    config->setGroup("Annotate dialog");
-    AnnotateDialog::loadOptions(config);
     config->setGroup("Checkout dialog");
     CheckoutDialog::loadOptions(config);
     config->setGroup("History dialog");
@@ -1817,8 +1815,6 @@ void CervisiaPart::saveDialogProperties( KConfig *config )
     CommitDialog::saveOptions(config);
     config->setGroup("ChangeLog dialog");
     ChangeLogDialog::saveOptions(config);
-    config->setGroup("Annotate dialog");
-    AnnotateDialog::saveOptions(config);
     config->setGroup("Checkout dialog");
     CheckoutDialog::saveOptions(config);
     config->setGroup("History dialog");

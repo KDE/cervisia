@@ -19,7 +19,6 @@
 #include <kdialogbase.h>
 
 
-class KConfig;
 class AnnotateView;
 class QDate;
 
@@ -35,16 +34,7 @@ public:
     void addLine(const QString &rev, const QString &author, const QDate &date,
                  const QString &content, const QString &comment, bool odd);
 
-    static void loadOptions(KConfig *config);
-    static void saveOptions(KConfig *config);
-
 private:
-
-    struct Options {
-        QSize size;
-    };
-    static Options *options;
-
     AnnotateView *annotate;
 };
 

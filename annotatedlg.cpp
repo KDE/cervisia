@@ -14,12 +14,7 @@
 
 #include "annotatedlg.h"
 
-#include <kconfig.h>
-
 #include "annotateview.h"
-
-
-AnnotateDialog::Options *AnnotateDialog::options = 0;
 
 
 AnnotateDialog::AnnotateDialog(QWidget *parent, const char *name)
@@ -33,36 +28,14 @@ AnnotateDialog::AnnotateDialog(QWidget *parent, const char *name)
 
     setWFlags(Qt::WDestructiveClose | getWFlags());
 
-    if (options)
-        resize(options->size);
+    QSize size = configDialogSize("AnnotateDialog");
+    resize(size);
 }
 
 
 AnnotateDialog::~AnnotateDialog()
 {
-    if (!options)
-        options = new Options;
-    options->size = size();
-}
-
-
-void AnnotateDialog::loadOptions(KConfig *config)
-{
-    if (!config->readEntry("Customized"))
-        return;
-
-    options = new Options;
-    options->size = config->readSizeEntry("Size");
-}
-
-
-void AnnotateDialog::saveOptions(KConfig *config)
-{
-    if (!options)
-        return;
-
-    config->writeEntry("Customized", true);
-    config->writeEntry("Size", options->size);
+    saveDialogSize("AnnotateDialog", true);
 }
 
 
