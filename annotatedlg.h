@@ -23,6 +23,11 @@ class AnnotateView;
 class QDate;
 class KConfig;
 
+namespace Cervisia
+{
+struct LogInfo;
+}
+
 
 class AnnotateDialog : public KDialogBase
 {
@@ -32,8 +37,8 @@ public:
 
     virtual ~AnnotateDialog();
 
-    void addLine(const QString &rev, const QString &author, const QDate &date,
-                 const QString &content, const QString &comment, bool odd);
+    void addLine(const Cervisia::LogInfo& logInfo, const QString& content,
+                 bool odd);
 
 private:
     AnnotateView *annotate;

@@ -21,9 +21,12 @@
 #include <krfcdate.h>
 
 #include "annotatedlg.h"
+#include "loginfo.h"
 #include "progressdlg.h"
 #include "cvsservice_stub.h"
 #include "cvsjob_stub.h"
+
+using namespace Cervisia;
 
 struct AnnotateController::Private
 {
@@ -152,31 +155,28 @@ void AnnotateController::Private::parseCvsLogOutput()
 
 void AnnotateController::Private::parseCvsAnnotateOutput()
 {
-    QDate date;
-    QString rev, author, content, comment, line;
+    LogInfo logInfo;
+    QString rev, content, line;
     QString oldRevision = "";
     bool odd = false;
 
     while( progress->getLine(line) )
     {
-        QDateTime dt;
         QString dateString = line.mid(23, 9);
         if( !dateString.isEmpty() )
-        {
-            dt.setTime_t(KRFCDate::parseDate(dateString), Qt::UTC);
-            date    = dt.date();
-        }
-        rev     = line.left(13).stripWhiteSpace();
-        author  = line.mid(14, 8).stripWhiteSpace();
-        content = line.mid(35, line.length()-35);
+            logInfo.m_dateTime.setTime_t(KRFCDate::parseDate(dateString), Qt::UTC);
 
-        comment = comments[rev];
-        if( comment.isNull() )
-            comment = "";
+        rev               = line.left(13).stripWhiteSpace();
+        logInfo.m_author  = line.mid(14, 8).stripWhiteSpace();
+        content           = line.mid(35, line.length()-35);
+
+        logInfo.m_comment = comments[rev];
+        if( logInfo.m_comment.isNull() )
+            logInfo.m_comment = "";
 
         if( rev == oldRevision )
         {
-            author = QString::null;
+            logInfo.m_author = QString::null;
             rev = QString::null;
         }
         else
@@ -185,6 +185,8 @@ void AnnotateController::Private::parseCvsAnnotateOutput()
             odd = !odd;
         }
 
-        dialog->addLine(rev, author, date, content, comment, odd);
+        logInfo.m_revision = rev;
+
+        dialog->addLine(logInfo, content, odd);
     }
 }

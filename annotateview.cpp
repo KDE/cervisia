@@ -22,54 +22,52 @@
 #include <kglobalsettings.h>
 #include <klocale.h>
 
+#include "loginfo.h"
 #include "tiplabel.h"
 
-
+using namespace Cervisia;
 
 class AnnotateViewItem : public QListViewItem
 {
 public:
     enum { LineNumberColumn, AuthorColumn, ContentColumn };
 
-    AnnotateViewItem(AnnotateView *parent, const QString &rev, const QString &author,
-                     const QDate &date, const QString &content, const QString &comment,
-                     bool odd, int linenumber);
-        
+    AnnotateViewItem(AnnotateView *parent, const LogInfo& logInfo,
+                     const QString &content, bool odd, int linenumber);
+
     virtual int compare(QListViewItem *item, int col, bool ascending) const;
     virtual int width(const QFontMetrics &, const QListView *, int col) const;
     virtual QString text(int col) const;
     virtual void paintCell(QPainter *, const QColorGroup &, int, int, int);
 
 private:
-    QString mrev;
-    QString mauthor;
-    QDate mdate;
-    QString mcontent;
-    QString mcomment;
-    bool modd;
-    int mlinenumber;
+    LogInfo m_logInfo;
+    QString m_content;
+    bool    m_odd;
+    int     m_lineNumber;
     friend class AnnotateView;
-    
+
     static const int BORDER;
 };
 
 
 const int AnnotateViewItem::BORDER = 4;
 
- 
-AnnotateViewItem::AnnotateViewItem(AnnotateView *parent, const QString &rev, const QString &author,
-                                   const QDate &date, const QString &content, const QString &comment,
-                                   bool odd, int linenumber)
-    : QListViewItem(parent),
-      mrev(rev), mauthor(author), mdate(date), mcontent(content),
-      mcomment(comment), modd(odd), mlinenumber(linenumber)
+
+AnnotateViewItem::AnnotateViewItem(AnnotateView *parent, const LogInfo& logInfo,
+                                   const QString &content, bool odd, int linenumber)
+    : QListViewItem(parent)
+    , m_logInfo(logInfo)
+    , m_content(content)
+    , m_odd(odd)
+    , m_lineNumber(linenumber)
 {}
 
 
 int AnnotateViewItem::compare(QListViewItem *item, int, bool) const
 {
-    int linenum1 = mlinenumber;
-    int linenum2 = static_cast<AnnotateViewItem*>(item)->mlinenumber;
+    int linenum1 = m_lineNumber;
+    int linenum2 = static_cast<AnnotateViewItem*>(item)->m_lineNumber;
 
     return (linenum2 > linenum1)? -1 : (linenum2 < linenum1)? 1 : 0;
 }
@@ -80,11 +78,14 @@ QString AnnotateViewItem::text(int col) const
     switch (col)
     {
     case LineNumberColumn:
-        return QString::number(mlinenumber);
+        return QString::number(m_lineNumber);
     case AuthorColumn:
-        return mauthor.isNull()? QString::null : (mauthor + QChar(' ') + mrev);
+        if( m_logInfo.m_author.isNull() )
+            return QString::null;
+        else
+            return (m_logInfo.m_author + QChar(' ') + m_logInfo.m_revision);
     case ContentColumn:
-        return mcontent;
+        return m_content;
     default:
         ;
     };
@@ -104,7 +105,8 @@ void AnnotateViewItem::paintCell(QPainter *p, const QColorGroup &, int col, int 
         p->setPen(KGlobalSettings::highlightedTextColor());
         break;
     default:
-        backgroundColor = modd? KGlobalSettings::baseColor() : KGlobalSettings::alternateBackgroundColor();
+        backgroundColor = m_odd ? KGlobalSettings::baseColor()
+                                : KGlobalSettings::alternateBackgroundColor();
         p->setPen(KGlobalSettings::textColor());
         break;
     };
@@ -175,12 +177,11 @@ void AnnotateView::hideLabel()
 }
 
 
-void AnnotateView::addLine(const QString &rev, const QString &author, const QDate &date,
-                           const QString &content, const QString &comment, bool odd)
+void AnnotateView::addLine(const LogInfo& logInfo, const QString& content,
+                           bool odd)
 {
-    (void) new AnnotateViewItem(this, rev, author, date, content, comment, odd, childCount()+1);
+    new AnnotateViewItem(this, logInfo, content, odd, childCount()+1);
 }
-
 
 
 QSize AnnotateView::sizeHint() const
@@ -204,31 +205,17 @@ void AnnotateView::contentsMouseMoveEvent(QMouseEvent *e)
     if (item != currentTipItem || col != AnnotateViewItem::AuthorColumn)
         hideLabel();
 
-    if (!currentLabel && item && col == AnnotateViewItem::AuthorColumn && !item->mauthor.isNull())
-        {
-            QString text = "<qt><b>";
-            text += QStyleSheet::escape(item->mrev);
-            text += "</b>&nbsp;&nbsp;";
-            text += QStyleSheet::escape(item->mauthor);
-            text += "&nbsp;&nbsp;<b>";
-            const bool shortFormat(true);
-            text += QStyleSheet::escape(KGlobal::locale()->formatDate(item->mdate, shortFormat));
-            text += "</b>";
-            QStringList list = QStringList::split("\n", item->mcomment);
-            QStringList::Iterator it;
-            for (it = list.begin(); it != list.end(); ++it)
-                {
-                    text += "<br>";
-                    text += QStyleSheet::escape(*it);
-                }
-            text += "</qt>";
-            
+    if (!currentLabel && item && col == AnnotateViewItem::AuthorColumn &&
+        !item->m_logInfo.m_author.isNull())
+    {
+            QString text = item->m_logInfo.createToolTipText();
+
             int left = header()->sectionPos(AnnotateViewItem::ContentColumn);
             int top = viewport()->mapTo(this, itemRect(item).topLeft()).y();
             currentLabel = new TipLabel(text);
             currentLabel->showAt(mapToGlobal(QPoint(left, top)));
             currentTipItem = item;
-        }
+    }
 }
 
 

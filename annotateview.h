@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -23,6 +23,11 @@ class KConfig;
 class TipLabel;
 class AnnotateViewItem;
 
+namespace Cervisia
+{
+struct LogInfo;
+}
+
 
 class AnnotateView : public QListView
 {
@@ -32,9 +37,9 @@ public:
     AnnotateView( KConfig &cfg, QWidget *parent=0, const char *name=0 );
     ~AnnotateView();
 
-    void addLine(const QString &rev, const QString &author, const QDate &date,
-                 const QString &content, const QString &comment, bool odd);
-    
+    void addLine(const Cervisia::LogInfo& logInfo, const QString& content,
+                 bool odd);
+
     virtual QSize sizeHint() const;
     virtual void contentsMouseMoveEvent(QMouseEvent *e);
     virtual void windowActivationChange(bool oldActive);

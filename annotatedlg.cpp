@@ -54,10 +54,10 @@ AnnotateDialog::~AnnotateDialog()
 }
 
 
-void AnnotateDialog::addLine(const QString &rev, const QString &author, const QDate &date,
-                             const QString &content, const QString &comment, bool odd)
+void AnnotateDialog::addLine(const Cervisia::LogInfo& logInfo,
+                             const QString& content, bool odd)
 {
-    annotate->addLine(rev, author, date, content, comment, odd);
+    annotate->addLine(logInfo, content, odd);
 }
 
 
