@@ -20,7 +20,6 @@
 #include <unistd.h>
 #include <qfile.h>
 #include <qstringlist.h>
-#include <qtextcodec.h>
 #include <kconfig.h>
 #include <kemailsettings.h>
 #include <kprocess.h>
@@ -227,17 +226,6 @@ QString tempFileName(const QString &suffix)
     KTempFile f(QString::null, suffix);
     tempFiles->append(f.name());
     return f.name();
-}
-
-QTextCodec *detectCodec(const QString &fileName)
-{
-    // TODO, the following conditions are a rough hack
-
-    if (fileName.endsWith(".ui") || fileName.endsWith(".docbook")
-        || fileName.endsWith(".xml"))
-        return QTextCodec::codecForName("utf8");
-
-    return QTextCodec::codecForLocale();
 }
 
 

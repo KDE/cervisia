@@ -36,6 +36,18 @@
 #endif
 
 
+// *UGLY HACK*
+// The following conditions are a rough hack
+static QTextCodec *DetectCodec(const QString &fileName)
+{
+    if (fileName.endsWith(".ui") || fileName.endsWith(".docbook")
+        || fileName.endsWith(".xml"))
+        return QTextCodec::codecForName("utf8");
+
+    return QTextCodec::codecForLocale();
+}
+
+
 ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent, const char *name)
     : KDialogBase(parent, name, false, QString::null,
                   Close | Help | User1 | User2, Close, true,
@@ -179,7 +191,7 @@ bool ResolveDialog::parseFile(const QString &name)
     if (!f.open(IO_ReadOnly))
         return false;
     QTextStream stream(&f);
-    QTextCodec *fcodec = detectCodec(name);
+    QTextCodec *fcodec = DetectCodec(name);
     stream.setCodec(fcodec);
 
     state = Normal;
@@ -255,7 +267,7 @@ void ResolveDialog::saveFile(const QString &name)
 	    return;
 	}
     QTextStream stream(&f);
-    QTextCodec *fcodec = detectCodec(name);
+    QTextCodec *fcodec = DetectCodec(name);
     stream.setCodec(fcodec);
         
     int count = merge->count();

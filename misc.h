@@ -19,7 +19,6 @@
 class QCString;
 class QString;
 class QStringList;
-class QTextCodec;
 class QWidget;
 class CvsService_stub;
 
@@ -32,7 +31,6 @@ int findWhiteSpace(QString const& rsString, int iStartIndex = 0);
 QString userName();
 QString tempFileName(const QString &suffix);
 void cleanupTempFiles();
-QTextCodec *detectCodec(const QString &fileName);
 
 bool isValidTag(const QString &str);
 QString cvsClient(const QString &sRepository);
