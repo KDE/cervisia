@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
@@ -75,10 +75,9 @@ private:
     static Options *options;
 
     QComboBox *repo_combo, *module_combo;
-    QLineEdit *module_edit, *workdir_edit;
-    QLineEdit *branch_edit;
-    QLineEdit *comment_edit;
-    QLineEdit *vendortag_edit, *releasetag_edit, *ignore_edit;
+    KLineEdit *module_edit, *workdir_edit;
+    KLineEdit *branch_edit, *comment_edit;
+    KLineEdit *vendortag_edit, *releasetag_edit, *ignore_edit;
     QCheckBox *binary_box;
     QPushButton *ok_button, *cancel_button;
     ActionType act;

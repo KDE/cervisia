@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
@@ -14,14 +14,13 @@
 
 #include "checkoutdlg.h"
 
-#include <qlayout.h>
-#include <qpushbutton.h>
-#include <qlabel.h>
 #include <qcombobox.h>
+#include <qdir.h>
+#include <qlayout.h>
+#include <qlabel.h>
 #include <qlineedit.h>
 #include <qmultilinedit.h>
-#include <qfiledialog.h>
-#include <qdir.h>
+#include <qpushbutton.h>
 #include <kapplication.h>
 #include <kprocess.h>
 #include <kbuttonbox.h>
@@ -43,6 +42,7 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
     setCaption( (action==Checkout)? i18n("CVS Checkout") : i18n("CVS Import") );
 
     QBoxLayout *layout = new QVBoxLayout(this, 10);
+    QFontMetrics fm(fontMetrics());
 
     QGridLayout *grid = new QGridLayout((action==Checkout)? 4 : 9, 2, 10);
     layout->addLayout(grid);
@@ -52,35 +52,25 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
         grid->setRowStretch(i, 0);
 
     repo_combo = new QComboBox(true, this);
-    repo_combo->adjustSize();
-    repo_combo->setMinimumWidth(repo_combo->size().width());
-    repo_combo->setFixedHeight(repo_combo->height());
     repo_combo->setFocus();
     grid->addWidget(repo_combo, 0, 1);
     
     QLabel *repo_label = new QLabel
 	(repo_combo, i18n("&Repository:"), this);
-    repo_label->setFixedSize(repo_label->sizeHint());
     grid->addWidget(repo_label, 0, 0, AlignLeft | AlignVCenter);
 
-	int resume_row = 2;
     if (action == Import)
         {
             module_edit = new KLineEdit(this);
-            module_edit->setMinimumSize(module_edit->sizeHint());
             grid->addWidget(module_edit, 1, 1);
             QLabel *module_label = new QLabel(module_edit, i18n("&Module:"), this);
-            module_label->setFixedSize(module_label->sizeHint());
             grid->addWidget(module_label, 1, 0, AlignLeft | AlignVCenter);
-
         }
     else
         {
             module_combo = new QComboBox(true, this);
-            module_combo->setMinimumSize(module_combo->sizeHint());
             
             QPushButton *module_button = new QPushButton(i18n("Fetch &List"), this);
-            module_button->setMinimumWidth(module_button->sizeHint().width());
             connect( module_button, SIGNAL(clicked()),
                      this, SLOT(moduleButtonClicked()) );
             
@@ -90,84 +80,68 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
             module_layout->addWidget(module_button, 0, AlignVCenter);
  
             QLabel *module_label = new QLabel(module_combo, i18n("&Module:"), this);
-            module_label->setFixedSize(module_label->sizeHint());
-
             grid->addWidget(module_label, 1, 0, AlignLeft | AlignVCenter);
 
-			branch_edit = new QLineEdit(this);
-			branch_edit->setMinimumSize(branch_edit->sizeHint());
-			grid->addWidget(branch_edit, 2, 1);
-			QLabel *branch_label = new QLabel(branch_edit, i18n("&Branch Tag:"), this);
-			branch_label->setFixedSize(branch_label->sizeHint());
-			grid->addWidget(branch_label, 2, 0, AlignLeft | AlignVCenter);
-			resume_row = 3;
+            branch_edit = new KLineEdit(this);
+            grid->addWidget(branch_edit, 2, 1);
+
+            QLabel *branch_label = new QLabel(branch_edit, i18n("&Branch Tag:"), this);
+            branch_label->setFixedSize(branch_label->sizeHint());
+            grid->addWidget(branch_label, 2, 0, AlignLeft | AlignVCenter);
         }
     
     workdir_edit = new KLineEdit(this);
     workdir_edit->setText(QDir::homeDirPath());
-    QFontMetrics fm(workdir_edit->fontMetrics());
-    workdir_edit->setMinimumSize(fm.width("X")*30,
-				 workdir_edit->sizeHint().height());
+    workdir_edit->setMinimumSize(fm.width("X")*40, workdir_edit->sizeHint().height());
 
     QPushButton *dir_button = new QPushButton("...", this);
     connect( dir_button, SIGNAL(clicked()),
 	     this, SLOT(dirButtonClicked()) );
-     dir_button->setFixedHeight(workdir_edit->sizeHint().height());
-      dir_button->setFixedWidth(30);
-  
-      QBoxLayout *workdir_layout = new QHBoxLayout();
-      grid->addLayout(workdir_layout, resume_row, 1);
-      workdir_layout->addWidget(workdir_edit, 10);
-      workdir_layout->addWidget(dir_button, 0, AlignVCenter);
-  
-      QLabel *workdir_label = new QLabel
-  	  (workdir_edit, i18n("Working &directory:"), this);
-      workdir_label->setFixedSize(workdir_label->sizeHint());
-      grid->addWidget(workdir_label, resume_row, 0, AlignLeft | AlignVCenter);
-  
-      if (action == Import)
-          {
-              vendortag_edit = new QLineEdit(this);
-              vendortag_edit->setMinimumSize(vendortag_edit->sizeHint());
-              grid->addWidget(vendortag_edit, resume_row + 1, 1);
-              
-              QLabel *vendortag_label = new QLabel
-                  (vendortag_edit, i18n("&Vendor Tag:"), this);
-              vendortag_label->setFixedSize(vendortag_label->sizeHint());
-              grid->addWidget(vendortag_label, resume_row + 1, 0, AlignLeft | AlignVCenter);
-  
-              releasetag_edit = new QLineEdit(this);
-              releasetag_edit->setMinimumSize(releasetag_edit->sizeHint());
-              grid->addWidget(releasetag_edit, resume_row + 2, 1);
-              
-              QLabel *releasetag_label = new QLabel
-                  (releasetag_edit, i18n("&Release Tag:"), this);
-              releasetag_label->setFixedSize(releasetag_label->sizeHint());
-              grid->addWidget(releasetag_label, resume_row + 2, 0, AlignLeft | AlignVCenter);
-  
-              ignore_edit = new QLineEdit(this);
-              ignore_edit->setMinimumSize(ignore_edit->sizeHint());
-              grid->addWidget(ignore_edit, resume_row + 3, 1);
-              
-              QLabel *ignore_label = new QLabel
-                  (ignore_edit, i18n("&Ignore files:"), this);
-              ignore_label->setFixedSize(ignore_label->sizeHint());
-              grid->addWidget(ignore_label, resume_row + 3, 0, AlignLeft | AlignVCenter);
+    dir_button->setFixedHeight(workdir_edit->sizeHint().height());
+    dir_button->setFixedWidth(30);
 
-              comment_edit = new QLineEdit(this);
-              comment_edit->setMinimumSize(comment_edit->sizeHint());
-              grid->addWidget(comment_edit, resume_row + 4, 1);
+    QBoxLayout *workdir_layout = new QHBoxLayout();
+    grid->addLayout(workdir_layout, (action==Import)? 3 : 2, 1);
+    workdir_layout->addWidget(workdir_edit, 10);
+    workdir_layout->addWidget(dir_button, 0, AlignVCenter);
 
-              QLabel *comment_label = new QLabel
-                  (comment_edit, i18n("&Comment:"), this);
-              comment_label->setFixedSize(comment_label->sizeHint());
-              grid->addWidget(comment_label, resume_row + 4, 0, AlignLeft | AlignVCenter);
-  
-              binary_box = new QCheckBox(i18n("Import as &binaries"), this);
-              binary_box->setMinimumSize(binary_box->sizeHint());
-              grid->addMultiCellWidget(binary_box, resume_row + 5, 7, 0, 1);
-              
-          }
+    QLabel *workdir_label = new QLabel
+	(workdir_edit, i18n("Working &directory:"), this);
+    grid->addWidget(workdir_label, (action==Import)? 2 : 3, 0, AlignLeft | AlignVCenter);
+
+    if (action == Import)
+        {
+            vendortag_edit = new KLineEdit(this);
+            grid->addWidget(vendortag_edit, 3, 1);
+            
+            QLabel *vendortag_label = new QLabel
+                (vendortag_edit, i18n("&Vendor Tag:"), this);
+            grid->addWidget(vendortag_label, 3, 0, AlignLeft | AlignVCenter);
+
+            releasetag_edit = new KLineEdit(this);
+            grid->addWidget(releasetag_edit, 4, 1);
+            
+            QLabel *releasetag_label = new QLabel
+                (releasetag_edit, i18n("&Release Tag:"), this);
+            grid->addWidget(releasetag_label, 4, 0, AlignLeft | AlignVCenter);
+
+            ignore_edit = new KLineEdit(this);
+            grid->addWidget(ignore_edit, 5, 1);
+            
+            QLabel *ignore_label = new QLabel
+                (ignore_edit, i18n("&Ignore files:"), this);
+            grid->addWidget(ignore_label, 5, 0, AlignLeft | AlignVCenter);
+
+            comment_edit = new KLineEdit(this);
+            grid->addWidget(comment_edit, 6, 1);
+            
+            QLabel *comment_label = new QLabel
+                (comment_edit, i18n("&Comment:"), this);
+            grid->addWidget(comment_label, 6, 0, AlignLeft | AlignVCenter);
+            
+            binary_box = new QCheckBox(i18n("Import as &binaries"), this);
+            grid->addMultiCellWidget(binary_box, 7, 7, 0, 1);
+        }
 
     QFrame *frame = new QFrame(this);
     frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
@@ -188,18 +162,16 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
     layout->activate();
     resize(sizeHint());
 
-    QStrList list1;
-    Repositories::readCvsPassFile(&list1);
-    QStrListIterator it1(list1);
-    for (; it1.current(); ++it1)
-        repo_combo->insertItem(it1.current());
+    QStringList list1 = Repositories::readCvsPassFile();
+    QStringList::ConstIterator it1;
+    for (it1 = list1.begin(); it1 != list1.end(); ++it1)
+        repo_combo->insertItem(*it1);
     
-    QStrList list2;
-    Repositories::readConfigFile(&list2);
-    QStrListIterator it2(list2);
-    for (; it2.current(); ++it2)
-        if (!list1.contains(it2.current()))
-            repo_combo->insertItem(it2.current());
+    QStringList list2 = Repositories::readConfigFile();
+    QStringList::ConstIterator it2;
+    for (it2 = list2.begin(); it2 != list2.end(); ++it2)
+        if (!list1.contains(*it2))
+            repo_combo->insertItem(*it2);
     
     act = action;
     
@@ -216,7 +188,10 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
                     binary_box->setChecked(options->binary);
                 }
             else
-                module_combo->setEditText(options->module);
+                {
+                    module_combo->setEditText(options->module);
+                    branch_edit->setText(options->branch);
+                }
         }
     
 }
@@ -229,16 +204,12 @@ void CheckoutDialog::done(int r)
             QFileInfo fi(workingDirectory());
             if (!fi.exists() || !fi.isDir())
                 {
-                    KMessageBox::sorry(this,
-                                       i18n("Please choose an existing working directory."),
-                                       "Cervisia");
+                    KMessageBox::information(this, i18n("Please choose an existing working directory."));
                     return;
                 }
             if (module().isEmpty())
                 {
-                    KMessageBox::sorry(this,
-                                       i18n("Please specify a module name."),
-                                       "Cervisia");
+                    KMessageBox::information(this, i18n("Please specify a module name."));
                     return;
                 }
                                                                     
@@ -246,17 +217,15 @@ void CheckoutDialog::done(int r)
                 {
                     if (vendorTag().isEmpty() || releaseTag().isEmpty())
                         {
-                            KMessageBox::sorry(this,
-                                               i18n("Please specify a vendor tag and a release tag."),
-                                               "Cervisia");
+                            KMessageBox::information(this,
+                                                     i18n("Please specify a vendor tag and a release tag."));
                             return;
                         }
                     if (!isValidTag(vendorTag()) || !isValidTag(releaseTag()))
                         {
-                            KMessageBox::sorry(this,
-                                               i18n("Tags must start with a letter and may contain "
-                                                    "letters, digits and the characters '-' and '_'."),
-                                               "Cervisia");
+                            KMessageBox::information(this,  
+                                                     i18n("Tags must start with a letter and may contain\n"
+                                                          "letters, digits and the characters '-' and '_'."));
                             return;
                         }
                 }
@@ -272,6 +241,10 @@ void CheckoutDialog::done(int r)
                     options->releasetag = releaseTag();
                     options->ignorefiles = ignoreFiles();
                     options->binary = importBinary();
+                }
+            else
+                {
+                    options->branch = branch();
                 }
         }
 
@@ -313,15 +286,15 @@ void CheckoutDialog::saveOptions(KConfig *config)
 
 void CheckoutDialog::dirButtonClicked()
 {
-    QString path=KFileDialog::getExistingDirectory(workdir_edit->text());
-    if(!path.isEmpty())
-	workdir_edit->setText(path);    
+    QString dir = KFileDialog::getExistingDirectory(workdir_edit->text());
+    if (!dir.isEmpty())
+        workdir_edit->setText(dir);
 }
 
 
 void CheckoutDialog::moduleButtonClicked()
 {
-    QString cmdline = cvsClient( options->repo );
+    QString cmdline = cvsClient(repository());
     cmdline += " -d ";
     cmdline += repository();
     cmdline += " checkout -c";
@@ -350,6 +323,7 @@ void CheckoutDialog::moduleButtonClicked()
 }
 
 #include "checkoutdlg.moc"
+
 
 // Local Variables:
 // c-basic-offset: 4
