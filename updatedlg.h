@@ -15,30 +15,27 @@
 #ifndef UPDATEDLG_H
 #define UPDATEDLG_H
 
-#include <qcombobox.h>
-#include <qdialog.h>
-#include <qradiobutton.h>
-#include <klineedit.h>
 
-class QButtonGroup;
+#include <kdialogbase.h>
 
 
-class UpdateDialog : public QDialog
+class QComboBox;
+class QPushButton;
+class QRadioButton;
+class KLineEdit;
+
+
+class UpdateDialog : public KDialogBase
 {
     Q_OBJECT
 
 public:
     UpdateDialog( const QString &sbox, const QString &repo,
                   QWidget *parent=0, const char *name=0 );
-    ~UpdateDialog();
-    
-    bool byTag() const
-        { return bybranch_button->isChecked() || bytag_button->isChecked(); }
-    QString tag() const
-        { return bybranch_button->isChecked()?
-              branch_combo->currentText() : tag_combo->currentText(); }
-    QString date() const
-        { return date_edit->text(); }
+
+    bool byTag() const;
+    QString tag() const;
+    QString date() const;
 
 private slots:
     void toggled();
@@ -54,7 +51,6 @@ private:
     QComboBox *tag_combo, *branch_combo;
     QPushButton *tag_button, *branch_button;
     KLineEdit *date_edit;
-    QButtonGroup *group;
 };
 
 #endif

@@ -15,10 +15,12 @@
 #include "updatedlg.h"
 
 #include <qbuttongroup.h>
+#include <qcombobox.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
-#include <kapplication.h>
-#include <kbuttonbox.h>
+#include <qradiobutton.h>
+#include <qstyle.h>
+#include <klineedit.h>
 #include <klocale.h>
 
 #include "cvsprogressdlg.h"
@@ -27,91 +29,89 @@
 
 UpdateDialog::UpdateDialog(const QString &sbox, const QString &repo,
                            QWidget *parent, const char *name)
-    : QDialog(parent, name, true)
+    : KDialogBase(parent, name, true, i18n("CVS Update"),
+                  Ok | Cancel, Ok, true),
+      sandbox(sbox),
+      repository(repo)
 {
-    setCaption(i18n("CVS Update"));
+    int const iComboBoxMinWidth(40 * fontMetrics().width('0'));
+    int const iWidgetIndent(style().pixelMetric(QStyle::PM_ExclusiveIndicatorWidth, 0) + 6);
 
-    QBoxLayout *layout = new QVBoxLayout(this, 10, 4);
-    QFontMetrics fm(fontMetrics());
+    QFrame* mainWidget = makeMainWidget();
 
-    bybranch_button = new QRadioButton(i18n("Update to &branch: "), this);
+    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
+
+    bybranch_button = new QRadioButton(i18n("Update to &branch: "), mainWidget);
     bybranch_button->setChecked(true);
     layout->addWidget(bybranch_button);
 
-    branch_combo = new QComboBox(true, this);
-    branch_combo->setMinimumSize(fm.width("0")*40, branch_combo->sizeHint().height());
+    branch_combo = new QComboBox(true, mainWidget);
+    branch_combo->setMinimumWidth(iComboBoxMinWidth);
     
-    branch_button = new QPushButton(i18n("Fetch &List"), this);
+    branch_button = new QPushButton(i18n("Fetch &List"), mainWidget);
     connect( branch_button, SIGNAL(clicked()),
              this, SLOT(branchButtonClicked()) );
             
-    QBoxLayout *branchedit_layout = new QHBoxLayout();
-    layout->addLayout(branchedit_layout);
-    branchedit_layout->addSpacing(15);
+    QBoxLayout *branchedit_layout = new QHBoxLayout(layout);
+    branchedit_layout->addSpacing(iWidgetIndent);
     branchedit_layout->addWidget(branch_combo);
     branchedit_layout->addWidget(branch_button);
     
-    bytag_button = new QRadioButton(i18n("Update to &tag: "), this);
+    bytag_button = new QRadioButton(i18n("Update to &tag: "), mainWidget);
     layout->addWidget(bytag_button);
 
-    tag_combo = new QComboBox(true, this);
-    tag_combo->setMinimumSize(fm.width("0")*40, tag_combo->sizeHint().height());
+    tag_combo = new QComboBox(true, mainWidget);
+    tag_combo->setMinimumWidth(iComboBoxMinWidth);
     
-    tag_button = new QPushButton(i18n("Fetch L&ist"), this);
+    tag_button = new QPushButton(i18n("Fetch L&ist"), mainWidget);
     connect( tag_button, SIGNAL(clicked()),
              this, SLOT(tagButtonClicked()) );
             
-    QBoxLayout *tagedit_layout = new QHBoxLayout();
-    layout->addLayout(tagedit_layout);
-    tagedit_layout->addSpacing(15);
+    QBoxLayout *tagedit_layout = new QHBoxLayout(layout);
+    tagedit_layout->addSpacing(iWidgetIndent);
     tagedit_layout->addWidget(tag_combo);
     tagedit_layout->addWidget(tag_button);
     
     bydate_button = new QRadioButton(i18n("Update to &date:\n"
-                                          "(Possible format: 'yyyy-mm-dd')"), this);
-    bydate_button->setMinimumSize(bydate_button->sizeHint());
+                                          "(Possible format: 'yyyy-mm-dd')"), mainWidget);
     layout->addWidget(bydate_button);
 
-    QBoxLayout *dateedit_layout = new QHBoxLayout();
-    layout->addLayout(dateedit_layout);
-    date_edit = new KLineEdit(this);
-    date_edit->setEnabled(false);
-    dateedit_layout->addSpacing(15);
+    date_edit = new KLineEdit(mainWidget);
+
+    QBoxLayout *dateedit_layout = new QHBoxLayout(layout);
+    dateedit_layout->addSpacing(iWidgetIndent);
     dateedit_layout->addWidget(date_edit);
 
-    group = new QButtonGroup();
+    QButtonGroup* group = new QButtonGroup(mainWidget);
+    group->hide();
     group->insert(bytag_button);
     group->insert(bybranch_button);
     group->insert(bydate_button);
-    connect( bytag_button, SIGNAL(toggled(bool)),
+    connect( group, SIGNAL(clicked(int)),
              this, SLOT(toggled()) );
-    connect( bybranch_button, SIGNAL(toggled(bool)),
-             this, SLOT(toggled()) );
+
+    // dis-/enable the widgets
     toggled();
-
-    QFrame *frame = new QFrame(this);
-    frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-    layout->addSpacing(10);
-    layout->addWidget(frame, 0);
-
-    KButtonBox *buttonbox = new KButtonBox(this);
-    buttonbox->addStretch();
-    QPushButton *ok = buttonbox->addButton(i18n("OK"));
-    QPushButton *cancel = buttonbox->addButton(i18n("Cancel"));
-    ok->setDefault(true);
-    connect( ok, SIGNAL(clicked()), this, SLOT(accept()) );
-    connect( cancel, SIGNAL(clicked()), this, SLOT(reject()) );
-    buttonbox->layout();
-    layout->addWidget(buttonbox, 0);
-
-    sandbox = sbox;
-    repository = repo;
 }
 
 
-UpdateDialog::~UpdateDialog()
+bool UpdateDialog::byTag() const
 {
-    delete group;
+    return bybranch_button->isChecked() || bytag_button->isChecked();
+}
+
+
+QString UpdateDialog::tag() const
+{
+    return bybranch_button->isChecked()
+        ? branch_combo->currentText()
+        : tag_combo->currentText();
+}
+
+
+QString UpdateDialog::date() const
+{
+    return date_edit->text();
 }
 
 
