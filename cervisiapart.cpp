@@ -747,7 +747,8 @@ void CervisiaPart::openFiles(const QStringList &filenames)
     {
         KURL u;
         u.setPath(dir.absFilePath(*it));
-        (void) new KRun(u, 0, true, false);
+        KRun* run = new KRun(u, 0, true, false);
+	run->setRunExecutables(false);
     }
 }
 

@@ -1,8 +1,13 @@
+2004-03-29  Christian Loose  <christian.loose@hamburg.de>
+
+	* Don't execute shell scripts or .desktop files when the user used 
+	   the edit file function.
+
 2004-02-25  André Wöbbeking  <Woebbeking@web.de>
 
 	* Fix BR #75201:
 	  Prevent crash when you activate a CervisiaPart view with RMB in 
-	  a Koqueror with more than one view.
+	  a Konqueror with more than one view.
 
 2004-02-20  Christian Loose  <christian.loose@hamburg.de>
 
