@@ -44,7 +44,8 @@ CervisiaShell::CervisiaShell( const char *name )
     }
     else
     {
-        KMessageBox::error(this, "Could not find our Part!");
+        KMessageBox::detailedError(this, i18n("The Cervisia library could not be loaded."), 
+                                   KLibLoader::self()->lastErrorMessage());
         kapp->quit();
         return;
     }
