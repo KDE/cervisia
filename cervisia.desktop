@@ -1,5 +1,4 @@
-# KDE Config File
-[KDE Desktop Entry]
+[Desktop Entry]
 Encoding=UTF-8
 GenericName=CVS Frontend
 GenericName[af]=Cvs Voorprogram
@@ -41,6 +40,7 @@ GenericName[sr]=Графички интерфејс за CVS
 GenericName[sr@Latn]=Grafički interfejs za CVS
 GenericName[sv]=CVS-gränssnitt
 GenericName[ta]=CVS முன்பகுதி
+GenericName[tg]=Интерфейс ба CVS 
 GenericName[th]=ฟร้อนต์เอนด์ CVS
 GenericName[tr]=CVS Önyüzü
 GenericName[uk]=Інтерфейс до CVS
