@@ -614,15 +614,14 @@ QString UpdateViewItem::text(int col) const
 		default:  return i18n("Unknown");
 		}
 	case 2:
-	    return m_revision;
-        case 3:
-            return m_tag;
-        case 4:
-	    {
-		QDateTime timestamp;
-
-		timestamp.setTime_t(m_timestamp);
-                return timestamp.toString(Qt::LocalDate);
+		return m_revision;
+	case 3:
+		return m_tag;
+	case 4:
+		{
+			QDateTime timestamp;
+			timestamp.setTime_t(m_timestamp);
+			return KGlobal::locale()->formatDateTime(timestamp);
 	    }
 	default:
 	    return "";
