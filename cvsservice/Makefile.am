@@ -8,18 +8,19 @@
 INCLUDES = $(all_includes)
 
 # cvs DCOP service
-bin_PROGRAMS = cvsservice cvsaskpass
+bin_PROGRAMS =
+kdeinit_LTLIBRARIES = cvsservice.la cvsaskpass.la
 
-cvsservice_LDFLAGS = $(all_libraries) $(KDE_RPATH)
-cvsservice_LDADD = $(LIB_KIO)
-cvsservice_SOURCES = main.cpp cvsservice.cpp cvsjob.cpp \
+cvsservice_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN) -module
+cvsservice_la_LIBADD = $(LIB_KIO)
+cvsservice_la_SOURCES = main.cpp cvsservice.cpp cvsjob.cpp \
 	cvsservice.skel cvsservice.stub cvsjob.skel cvsjob.stub \
 	repository.cpp repository.skel repository.stub sshagent.cpp \
 	cvsserviceutils.cpp cvsloginjob.cpp cvsloginjob.skel cvsloginjob.stub
 
-cvsaskpass_LDFLAGS = $(all_libraries) $(KDE_RPATH)
-cvsaskpass_LDADD = $(LIB_KDEUI)
-cvsaskpass_SOURCES = cvsaskpass.cpp
+cvsaskpass_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN) -module
+cvsaskpass_la_LIBADD = $(LIB_KDEUI)
+cvsaskpass_la_SOURCES = cvsaskpass.cpp
 
 include_HEADERS = cvsservice_stub.h cvsjob_stub.h repository_stub.h
 noinst_HEADERS = cvsservice.h cvsjob.h repository.h cvsserviceutils.h \
@@ -30,7 +31,10 @@ lib_LTLIBRARIES = libcvsservice.la
 
 libcvsservice_la_LDFLAGS = $(all_libraries) -no-undefined -version-info 0:1
 libcvsservice_la_LIBADD = $(LIB_KDECORE)
-libcvsservice_la_SOURCES = cvsservice.stub cvsjob.stub repository.stub
+libcvsservice_la_SOURCES = cvsservice.stub cvsjob.stub repository.stub dummy.cpp
+
+dummy.cpp:
+	echo > dummy.cpp
 
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO

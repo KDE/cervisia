@@ -35,7 +35,7 @@ static KCmdLineOptions options[] =
 };
 
 
-int main(int argc, char** argv)
+extern "C" int kdemain(int argc, char** argv)
 {
     KAboutData about("cvsaskpass", I18N_NOOP("cvsaskpass"), "0.1",
                      I18N_NOOP("ssh-askpass for the CVS DCOP Service"),
