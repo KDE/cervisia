@@ -87,7 +87,7 @@ bool SshAgent::addSshIdentities()
     kdDebug(8051) << "SshAgent::addSshIdentities(): ENTER" << endl;
 
     if( !m_isRunning || !m_isOurAgent )
-        return;
+        return false;
 
     // add identities to ssh-agent
     KProcess proc;
