@@ -32,19 +32,66 @@
 #include "progressdlg.h"
 
 
-namespace
+static int FindWhiteSpace(const QString& str, int index)
 {
-    QStringList const fetchBranchesAndTags(QString const& rsSearchedType,
-                                           CvsService_stub* cvsService,
-                                           QWidget*       pParentWidget);
+    const int length = str.length();
+
+    if( index < 0 )
+        index += length;
+
+    if( index < 0 || index >= length )
+        return -1;
+
+    const QChar* const startPos = str.unicode();
+    const QChar* const endPos   = startPos + length;
+
+    const QChar* pos = startPos + index;
+    while( pos < endPos && !pos->isSpace() )
+        ++pos;
+
+    const int foundIndex = pos - startPos;
+    return (foundIndex < length ? foundIndex : -1);
 }
 
 
-void chomp(QCString *line)
+static const QStringList FetchBranchesAndTags(const QString& searchedType,
+                                              CvsService_stub* cvsService,
+                                              QWidget* parent)
 {
-    int pos;
-    if ( (pos = line->find('\n')) != -1 )
-	line->truncate(pos);
+    QStringList branchOrTagList;
+
+    DCOPRef job = cvsService->status(QStringList(), true, true);
+    if( !cvsService->ok() )
+        return branchOrTagList;
+
+    ProgressDialog dlg(parent, "Status", job, QString::null, i18n("CVS Status"));
+
+    if( dlg.execute() )
+    {
+        QString line;
+        while( dlg.getLine(line) )
+        {
+            int wsPos, bracketPos, colonPos;
+
+            if( line.isEmpty() || line[0] != '\t' )
+                continue;
+            if( (wsPos = FindWhiteSpace(line, 2)) < 0 )
+                continue;
+            if( (bracketPos = line.find('(', wsPos + 1)) < 0 )
+                continue;
+            if( (colonPos = line.find(':', bracketPos + 1)) < 0 )
+                continue;
+
+            const QString tag  = line.mid(1, wsPos - 1);
+            const QString type = line.mid(bracketPos + 1, colonPos - bracketPos - 1);
+            if( type == searchedType && !branchOrTagList.contains(tag) )
+                branchOrTagList.push_back(tag);
+        }
+
+        branchOrTagList.sort();
+    }
+
+    return branchOrTagList;
 }
 
 
@@ -80,26 +127,6 @@ QStringList splitLine(QString line, char delim)
     if (!line.isEmpty())
 	list.append(line);
     return list;
-}
-
-
-int findWhiteSpace(QString const& rsString, int iStartIndex)
-{
-    int const length(rsString.length());
-    if (iStartIndex < 0)
-        iStartIndex += length;
-    if (iStartIndex < 0 || iStartIndex >= length)
-        return -1;
-
-    QChar const* const startPos = rsString.unicode();
-    QChar const* const endPos   = startPos + length;
-
-    QChar const* pos = startPos + iStartIndex;
-    while (pos < endPos && pos->isSpace() == false)
-        ++pos;
-
-    int const foundIndex(pos - startPos);
-    return foundIndex < length ? foundIndex : -1;
 }
 
 
@@ -150,21 +177,17 @@ QString cvsClient( const QString &sRepository, KConfig* config )
 }
 
 
-QStringList const fetchBranches(CvsService_stub* cvsService,
-                                QWidget*       pParentWidget)
+const QStringList fetchBranches(CvsService_stub* cvsService, QWidget* parent)
 {
-    return fetchBranchesAndTags(QString::fromLatin1("branch"),
-                                cvsService,
-                                pParentWidget);
+    return FetchBranchesAndTags(QString::fromLatin1("branch"), cvsService,
+                                parent);
 }
 
 
-QStringList const fetchTags(CvsService_stub* cvsService,
-                            QWidget*       pParentWidget)
+const QStringList fetchTags(CvsService_stub* cvsService, QWidget* parent)
 {
-    return fetchBranchesAndTags(QString::fromLatin1("revision"),
-                                cvsService,
-                                pParentWidget);
+    return FetchBranchesAndTags(QString::fromLatin1("revision"), cvsService,
+                                parent);
 }
 
 
@@ -225,49 +248,6 @@ QString tempFileName(const QString &suffix)
     KTempFile f(QString::null, suffix);
     tempFiles->append(f.name());
     return f.name();
-}
-
-
-namespace
-{
-    QStringList const fetchBranchesAndTags(QString const& rsSearchedType,
-                                           CvsService_stub* cvsService,
-                                           QWidget*       pParentWidget)
-    {
-        QStringList listBranchesOrTags;
-
-        DCOPRef job = cvsService->status(QStringList(), true, true);
-        if( !cvsService->ok() )
-            return listBranchesOrTags;
-
-        ProgressDialog dlg(pParentWidget, "Status", job, QString::null, i18n("CVS Status"));
-
-        if (dlg.execute())
-        {
-            QString sLine;
-            while (dlg.getLine(sLine))
-            {
-                int pos1, pos2, pos3;
-                if (sLine.isEmpty() || sLine[0] != '\t')
-                    continue;
-                if ((pos1 = ::findWhiteSpace(sLine, 2)) < 0)
-                    continue;
-                if ((pos2 = sLine.find('(', pos1 + 1)) < 0)
-                    continue;
-                if ((pos3 = sLine.find(':', pos2 + 1)) < 0)
-                    continue;
-
-                QString const tag(sLine.mid(1, pos1 - 1));
-                QString const type(sLine.mid(pos2 + 1, pos3 - pos2 - 1));
-                if (type == rsSearchedType && !listBranchesOrTags.contains(tag))
-                    listBranchesOrTags.push_back(tag);
-            }
-
-            listBranchesOrTags.sort();
-        }
-
-        return listBranchesOrTags;
-    }
 }
 
 

@@ -16,7 +16,6 @@
 #define MISC_H
 
 
-class QCString;
 class QString;
 class QStringList;
 class QWidget;
@@ -24,10 +23,8 @@ class KConfig;
 class CvsService_stub;
 
 
-void chomp(QCString *line);
 QString joinLine(const QStringList &list);
 QStringList splitLine(QString, char delim=' ');
-int findWhiteSpace(QString const& rsString, int iStartIndex = 0);
 
 QString userName();
 QString tempFileName(const QString &suffix);
@@ -35,11 +32,9 @@ void cleanupTempFiles();
 
 bool isValidTag(const QString &str);
 QString cvsClient(const QString &sRepository, KConfig* config);
-QStringList const fetchBranches(CvsService_stub* cvsService,
-                                QWidget*       pParentWidget);
-QStringList const fetchTags(CvsService_stub* cvsService,
-                            QWidget*       pParentWidget);
 
+const QStringList fetchBranches(CvsService_stub* cvsService, QWidget* parent);
+const QStringList fetchTags(CvsService_stub* cvsService, QWidget* parent);
 
 /**
  * Compares two revision numbers.
