@@ -15,6 +15,7 @@
 #ifndef CERVISIAPART_H
 #define CERVISIAPART_H
 
+#include <dcopref.h>
 #include <kparts/part.h>
 #include <kparts/browserextension.h>
 #include <kparts/genericfactory.h>
@@ -163,6 +164,8 @@ private:
 
     //for the Open Recent directories
     KRecentFilesAction *recent;
+    
+    DCOPRef cvsService;
 };
 
 typedef KParts::GenericFactory<CervisiaPart> CervisiaFactory;

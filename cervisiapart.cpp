@@ -103,11 +103,27 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     connect( update, SIGNAL( selectionChanged() ), this, SLOT( updateActions() ) );
     updateActions();
     setXMLFile( "cervisiaui.rc" );
+    
+    // start the cvs DCOP service
+    QString error;
+    QCString appId;
+    if( KApplication::startServiceByName("CvsService", QStringList(), &error, &appId) )
+    {
+        KMessageBox::sorry(0, "Starting cvsservice failed with message: " +
+            error, "Cervisia");
+        return;
+    }
+    
+    // create a reference to the service
+    cvsService.setRef(appId, "CvsService");
 }
 
 CervisiaPart::~CervisiaPart()
 {
-
+    // stop the cvs DCOP service
+    // FIXME: It seems as if this destructor isn't always called
+    //        i.e. File->Quit
+    cvsService.send("quit");
 }
 
 KConfig *CervisiaPart::config()
