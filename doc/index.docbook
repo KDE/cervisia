@@ -141,7 +141,7 @@ is simple to create a local repository.
 </para>
 
 <procedure>
-<title>Creating A Local Repository</title>
+<title>Creating a Local Repository</title>
 
 <step><para>
 Open the <guilabel>Create New Repository (cvs init)</guilabel>
@@ -365,7 +365,7 @@ location to the list. &cervisia; will store as many locations as you like!
 
 
 <sect1 id="importing">
-<title>Importing a module into the repository</title>
+<title>Importing a Module Into the Repository</title>
 
 <para>
 In this section, we discuss how you put a new project into the &CVS;
@@ -572,7 +572,7 @@ pressing <guibutton>OK</guibutton>, the following &CVS; command is used:</para>
 
 
 <sect1 id="checkingout">
-<title>Checkout a module from the repository</title>
+<title>Checkout a Module From the Repository</title>
 <para>
 Now that you successfully defined your repository location, and imported the
 initial files to the repository, it is time to retrieve the module from the
@@ -695,7 +695,7 @@ source code for a release.
 
 
 <sect1 id="mainscreen">
-<title>The main screen, viewing file status and updating</title>
+<title>The Main Screen, Viewing File Status and Updating</title>
 <para>
 When you start &cervisia;, and open a working copy by choosing
 <menuchoice>
@@ -915,7 +915,7 @@ view, click on the header of the <guilabel>File name</guilabel> column.
 
    
 <chapter id="workingwithfiles">
-<title>Working with files</title>
+<title>Working With Files</title>
 
 <para>
 All commonly used &CVS; functionality is directly available in &cervisia;'s
@@ -956,7 +956,7 @@ submenu, and select one of the other applications that handle that file type.
 </para>
 
 <sect1 id="addingfiles">
-<title>Adding files</title>
+<title>Adding Files</title>
 
 <para>
 Adding files to a project requires two steps: First, the files must be
@@ -964,7 +964,7 @@ registered with &CVS;, or in other words,
 <emphasis>added to the repository</emphasis>. This is necessary, but not
 sufficient. In order to actually put the files into the repository, you must
 <emphasis>commit</emphasis> them. This procedure has an important advantage:
-You can commit the files together with modifications to other parts of the
+you can commit the files together with modifications to other parts of the
 project. When doing this, one can easily see (&eg; in commit emails) that all
 these changes are part of a whole.
 </para>
@@ -1018,7 +1018,7 @@ you marked, and asking for confirmation. Press <guibutton>OK</guibutton>.
 
 
 <sect1 id="removingfiles">
-<title>Removing files</title>
+<title>Removing Files</title>
 
 <para>
 Like adding files, removing files is done in two steps: First, the files have
@@ -1051,7 +1051,7 @@ them.
    
    
 <sect1 id="addingremovingdirs">
-<title>Adding and removing folders</title>
+<title>Adding and Removing Folders</title>
 
 <para>
 Folders are handled fundamentally different from ordinary files by
@@ -1088,7 +1088,7 @@ afterwards. &cervisia; issues the command
 
 
 <sect1 id="committingfiles">
-<title>Committing files</title>
+<title>Committing Files</title>
 
 <para>
 When you have made a certain amount of changes to your working copy, and you
@@ -1114,9 +1114,9 @@ or right click the marked files and choose
 </figure>
 
 <para>
-You get a dialog that shows you on the top a list of the selected files and on
-the bottom a log message for your changes. &cervisia; helps you in several ways
-to find a meaningful log message: First, in the file list you can double-click
+You get a dialog that shows you a list of the selected files on the top section
+and a log message for your changes below. &cervisia; helps you in several ways
+to find a meaningful log message: first, in the file list you can double-click
 a file or press <keycap>Return</keycap> in order to see the changes you have
 made to the file. Second, it gives you a list of log messages you have
 previously used in a combo box. Third, this dialog is integrated with
@@ -1184,7 +1184,7 @@ log.
 
 
 <sect1 id="resolvingconflicts">
-<title>Resolving conflicts</title>
+<title>Resolving Conflicts</title>
 
 <para>
 Conflicts may occur whenever you have made changes to a file which was also
@@ -1211,7 +1211,7 @@ of the files, in the following manner:</para>
 &lt;&lt;&lt;&lt;&lt;&lt;&lt;
 Changes in your working copy
 =======
-Changes in the Repository
+Changes in the repository
 &gt;&gt;&gt;&gt;&gt;&gt;&gt; revision_number
 </screen>
 
@@ -1292,10 +1292,10 @@ without saving, the changes you made will be lost.
 
 
 <chapter id="obtaininginformation">
-<title>Obtaining information about files and creating patches</title>
+<title>Obtaining Information About Files and Creating Patches</title>
 
 <sect1 id="diff">
-<title>Watching differences between revisions</title>
+<title>Watching Differences Between Revisions</title>
 
 <para>
 There are several places in &cervisia; where you can ask for a window showing
@@ -1399,7 +1399,7 @@ For information about how to customize the diff dialog, see <xref linkend="custo
 </sect1>
 
 <sect1 id="creatingpatches">
-<title>Creating patches</title>
+<title>Creating Patches</title>
 
 <para>
 Sometimes you want to offer your modifications for review, before committing them,
@@ -1461,8 +1461,8 @@ configure the output format.
 There are three output formats available:
 </para>
 <para>
-<guilabel>Normal</guilabel>: a format that can be used to cause the ed
-editor to automatically another copy of the old file to match the new file. In
+<guilabel>Normal</guilabel>: a format that can be used to cause the ed editor
+to automatically make another copy of the old file match the new file. In
 the normal output format, the characters &lt; and &gt; mark the changes, and
 there is no context information.
 </para>
@@ -1473,13 +1473,13 @@ numbers to record the differences. This makes the process of
 applying patches more robust. This format displays the
 differences in a compact and readable form, with a header for each file
 involved, and separate sections (chunks) for each difference. The context lines
-available for each difference makes reading the modifications easier. In
+available for each difference make reading the modifications easier. In
 the unified output format, the characters + and - mark the changes.
 </para>
 <para>
 <guilabel>Context</guilabel>, which presents the same information as the unified
 format, but in a less compact way. In the context output format, the character !
-mark the changes.
+marks the changes.
 </para></listitem>
 </varlistentry>
 
@@ -1490,7 +1490,7 @@ Set here the number of context lines for the unified or context output formats.
 This option is not available for the normal output format, as in this format
 no context information is recorded. More context information makes reading the
 raw output easier, and applying the patch more precise, but increases the patch
-size. It is recommended to use at least two contest lines for proper patch
+size. It is recommended to use at least two context lines for proper patch
 operation.
 </para></listitem>
 </varlistentry>
@@ -1516,7 +1516,7 @@ and location of the patch file.
 </sect1>
 
 <sect1 id="annotate">
-<title>Watching an annotated view of a file</title>
+<title>Watching an Annotated View of a File</title>
 
 <para>
 With the command <command>cvs annotate</command>, &CVS; offers the possibility
@@ -1547,7 +1547,7 @@ dialog.
 
 <para>
 In the annotate dialog, you see in a window the latest version  of the selected
-file (or the revision &quot;A &quot; version, in case you launched the annotate
+file (or the revision &quot;A&quot; version, in case you launched the annotate
 dialog from the the <link linkend="browsinglogs">Browse log dialog</link>). In
 the columns before the text, you get some information related to the
 latest change in each line. In the first column the line number is
@@ -1569,7 +1569,7 @@ change.
 
 
 <sect1 id="browsinglogs">
-<title>Browsing cvs logs</title>
+<title>Browsing &CVS; Logs</title>
 
 <para>
 When you mark one file in the main view and choose <guimenuitem>Browse
@@ -1659,7 +1659,7 @@ If you press the <guibutton>Annotate</guibutton> button, you get a dialog
 showing the text of file belonging to the revision marked as &quot;A&quot;.
 Every line is prefixed with the information about who edited this last time,
 and at which revision this happened. You can get more information about viewing
-annotated versions in <xref linkend="annotate" />
+annotated versions in <xref linkend="annotate" />.
 </para>
 
 <para>
@@ -1716,7 +1716,7 @@ dialog, &cervisia; issues the following command:
 </sect1>
 
 <sect1 id="browsinghistory">
-<title>Browsing the history</title>
+<title>Browsing the History</title>
 
 <para>
 If the used repository has logging enabled, &cervisia; can present you a
@@ -1859,10 +1859,10 @@ Special characters recognized by the regular expression matcher are:
 </chapter>
 
 <chapter id="advancedusage">
-<title>Advanced usage</title>
+<title>Advanced Usage</title>
 
 <sect1 id="updatingto">
-<title>Updating to tag, branch or date</title>
+<title>Updating to Tag, Branch or Date</title>
 
 <para>
 Branches of a module are parallel versions of this module. A good real life
@@ -1983,7 +1983,7 @@ The command issued to update to the main branch (HEAD) is:
 
 
 <sect1 id="taggingbranching">
-<title>Tagging and branching</title>
+<title>Tagging and Branching</title>
 
 <para>
 We discuss here only the technical aspects of tagging and branching.  If you
@@ -2055,7 +2055,7 @@ the two relevant tags. This will result in a command
 
 
 <sect1 id="watches">
-<title>Using watches</title>
+<title>Using Watches</title>
 
 <para>
 A watch is the conventional name for &CVS;'s feature to notify users of the
@@ -2491,7 +2491,7 @@ arrange them horizontally.
 <title>Appendix</title>
 
 <sect1 id="ignoredfiles">
-<title>Ignored files</title>
+<title>Ignored Files</title>
 
 <para>
 In its main file tree, &cervisia; does not display all files which are
@@ -2535,7 +2535,7 @@ folder.
    
 
 <sect1 id="information">
-<title>Further information and support</title>
+<title>Further Information and Support</title>
 
 <itemizedlist>
 
@@ -2853,7 +2853,7 @@ Determines whether files not in CVS are hidden in the main tree view. See <xref 
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>View</guimenu><guimenuitem>Hide Non-CVS Files</guimenuitem>
+<guimenu>View</guimenu><guimenuitem>Hide Empty Folders</guimenuitem>
 </menuchoice></term>
 <listitem><para>
 Determines whether without visible entries are hidden in the main tree view. See <xref linkend="mainscreen" />.
