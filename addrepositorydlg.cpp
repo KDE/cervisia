@@ -70,6 +70,10 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
     m_compressionLevel = new KIntNumInput(compressionBox);
     m_compressionLevel->setRange(0, 9, 1, false);
     layout->addWidget(compressionBox);
+    
+    m_retrieveCvsignoreFile = new QCheckBox(i18n("Download cvsignore file from "
+                                            "server"), mainWidget);
+    layout->addWidget(m_retrieveCvsignoreFile);
 
     connect( repo_edit, SIGNAL(textChanged(const QString&)),
              this, SLOT(repoChanged()) );
@@ -118,6 +122,12 @@ void AddRepositoryDialog::setCompression(int compression)
 }
 
 
+void AddRepositoryDialog::setRetrieveCvsignoreFile(bool enabled)
+{
+    m_retrieveCvsignoreFile->setChecked(enabled);
+}
+
+
 QString AddRepositoryDialog::repository() const
 {
     return repo_edit->text();
@@ -142,6 +152,12 @@ int AddRepositoryDialog::compression() const
         return m_compressionLevel->value();
     else
         return -1;
+}
+
+
+bool AddRepositoryDialog::retrieveCvsignoreFile() const
+{
+    return m_retrieveCvsignoreFile->isChecked();
 }
 
 

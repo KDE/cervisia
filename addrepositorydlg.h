@@ -37,11 +37,13 @@ public:
     void setRsh(const QString& rsh);
     void setServer(const QString& server);
     void setCompression(int compression);
+    void setRetrieveCvsignoreFile(bool enabled);
     
     QString repository() const;
     QString rsh() const;
     QString server() const;
     int compression() const;
+    bool retrieveCvsignoreFile() const;
 
 private slots:
     void repoChanged();
@@ -52,6 +54,7 @@ private:
     KLineEdit*    rsh_edit;
     KLineEdit*    server_edit;
     QCheckBox*    m_useDifferentCompression;
+    QCheckBox*    m_retrieveCvsignoreFile;
     KIntNumInput* m_compressionLevel;
     KConfig&      partConfig;
 };

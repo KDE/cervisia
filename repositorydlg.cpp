@@ -38,6 +38,7 @@ public:
     void setServer(const QString& server) { m_server = server; }
     void setCompression(int compression);
     void setIsLoggedIn(bool isLoggedIn);
+    void setRetrieveCvsignore(bool retrieve) { m_retrieveCvsignore = retrieve; }
     
     QString repository() const
     {
@@ -57,6 +58,7 @@ public:
         return ok ? n : -1;
     }
     bool isLoggedIn() const { return m_isLoggedIn; }
+    bool retrieveCvsignore() const { return m_retrieveCvsignore; }
 
 private:
     void changeLoginStatusColumn();
@@ -64,6 +66,7 @@ private:
 private:
     QString m_server;
     bool    m_isLoggedIn;
+    bool    m_retrieveCvsignore;
 };
 
 
@@ -229,7 +232,7 @@ void RepositoryDialog::readCvsPassFile()
 {
     QStringList list = Repositories::readCvsPassFile();
     QStringList::ConstIterator it;
-    for (it = list.begin(); it != list.end(); ++it)
+    for( it = list.begin(); it != list.end(); ++it )
         (void) new RepositoryListItem(m_repoList, (*it), true);
 }
 
@@ -256,13 +259,16 @@ void RepositoryDialog::readConfigFile()
         // read entries from cvs DCOP service configuration
         m_serviceConfig->setGroup(QString::fromLatin1("Repository-") +
                                   ritem->repository());
-        QString rsh     = m_serviceConfig->readEntry("rsh", QString());
-        QString server  = m_serviceConfig->readEntry("cvs_server", QString());
-        int compression = m_serviceConfig->readNumEntry("Compression", -1);
+        QString rsh       = m_serviceConfig->readEntry("rsh", QString());
+        QString server    = m_serviceConfig->readEntry("cvs_server", QString());
+        int compression   = m_serviceConfig->readNumEntry("Compression", -1);
+        bool retrieveFile = m_serviceConfig->readBoolEntry("RetrieveCvsignore",
+                                                           false);
 
         ritem->setRsh(rsh);
         ritem->setServer(server);
         ritem->setCompression(compression);
+        ritem->setRetrieveCvsignore(retrieveFile);
     }
 }
 
@@ -300,10 +306,11 @@ void RepositoryDialog::slotAddClicked()
     dlg.setCompression(-1);
     if( dlg.exec() )
     {
-        QString repo    = dlg.repository();
-        QString rsh     = dlg.rsh();
-        QString server  = dlg.server();
-        int compression = dlg.compression();
+        QString repo      = dlg.repository();
+        QString rsh       = dlg.rsh();
+        QString server    = dlg.server();
+        int compression   = dlg.compression();
+        bool retrieveFile = dlg.retrieveCvsignoreFile();
 
         QListViewItem* item = m_repoList->firstChild();
         for( ; item; item = item->nextSibling() )
@@ -317,6 +324,7 @@ void RepositoryDialog::slotAddClicked()
         RepositoryListItem* ritem = new RepositoryListItem(m_repoList, repo, false);
         ritem->setRsh(rsh);
         ritem->setCompression(compression);
+        ritem->setRetrieveCvsignore(retrieveFile);
 
         // write entries to cvs DCOP service configuration
         writeRepositoryData(ritem);
@@ -350,21 +358,24 @@ void RepositoryDialog::slotDoubleClicked(QListViewItem* item)
         return;
 
     RepositoryListItem* ritem = static_cast<RepositoryListItem*>(item);
-    QString repo    = ritem->repository();
-    QString rsh     = ritem->rsh();
-    QString server  = ritem->server();
-    int compression = ritem->compression();
+    QString repo      = ritem->repository();
+    QString rsh       = ritem->rsh();
+    QString server    = ritem->server();
+    int compression   = ritem->compression();
+    bool retrieveFile = ritem->retrieveCvsignore();
 
     AddRepositoryDialog dlg(m_partConfig, repo, this);
     dlg.setRepository(repo);
     dlg.setRsh(rsh);
     dlg.setServer(server);
     dlg.setCompression(compression);
+    dlg.setRetrieveCvsignoreFile(retrieveFile);
     if( dlg.exec() )
     {
         ritem->setRsh(dlg.rsh());
         ritem->setServer(dlg.server());
         ritem->setCompression(dlg.compression());
+        ritem->setRetrieveCvsignore(dlg.retrieveCvsignoreFile());
 
         // write entries to cvs DCOP service configuration
         writeRepositoryData(ritem);
@@ -458,6 +469,7 @@ void RepositoryDialog::writeRepositoryData(RepositoryListItem* item)
     m_serviceConfig->writeEntry("rsh", item->rsh());
     m_serviceConfig->writeEntry("cvs_server", item->server());
     m_serviceConfig->writeEntry("Compression", item->compression());
+    m_serviceConfig->writeEntry("RetrieveCvsignore", item->retrieveCvsignore());
 }
 
 #include "repositorydlg.moc"
