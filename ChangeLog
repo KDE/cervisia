@@ -1,3 +1,8 @@
+2004-03-17  Christian Loose  <christian.loose@hamburg.de>
+
+	* Don't execute shell scripts or .desktop files when the user used
+	  the edit file function.
+
 2004-03-02  André Wöbbeking  <Woebbeking@web.de>
 
 	* Fix BR #55871:
