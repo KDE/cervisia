@@ -22,11 +22,13 @@
 #include <qtextedit.h>
 #include <qwhatsthis.h>
 #include <kdebug.h>
+#include <kfinddialog.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kconfig.h>
 #include <kprocess.h>
 #include <krfcdate.h>
+#include <kwin.h>
 
 #include "cvsservice_stub.h"
 #include "annotatedlg.h"
@@ -46,7 +48,7 @@
 
 LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     : KDialogBase(parent, name, false, QString::null,
-                  Close | Help | User1 | User2, Close, true)
+                  Close | Help | User1 | User2 | User3, Close, true)
     , cvsService(0)
     , partConfig(cfg)
 {
@@ -71,6 +73,9 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     tabWidget->addTab(list, i18n("&List"));
     tabWidget->addTab(plain, i18n("CVS &Output"));
     layout->addWidget(tabWidget, 3);
+
+    connect(tabWidget, SIGNAL(currentChanged(QWidget*)),
+           this, SLOT(tabChanged(QWidget*)));
 
     QWhatsThis::add(tree, i18n("Choose revision A by clicking with the left"
 			       "mouse button,\nrevision B by clicking with "
@@ -154,11 +159,14 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     setButtonText(User1, i18n("&Annotate"));
     setButtonText(User2, i18n("&Diff"));
+    setButtonText(User3, i18n("&Find"));
 
     connect( this, SIGNAL(user1Clicked()),
              this, SLOT(annotateClicked()) );
     connect( this, SIGNAL(user2Clicked()),
              this, SLOT(diffClicked()) );
+    connect( this, SIGNAL(user3Clicked()),
+             this, SLOT(findClicked()) );
 
     setHelp("browsinglogs");
 
@@ -376,6 +384,14 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
 }
 
 
+void LogDialog::findClicked()
+{
+    KFindDialog dlg(this);
+    if( dlg.exec() == KDialogBase::Accepted )
+        plain->searchText(dlg.options(), dlg.pattern());
+}
+
+
 void LogDialog::diffClicked()
 {
     if (selectionA.isEmpty())
@@ -448,6 +464,13 @@ void LogDialog::tagBSelected(int n)
 {
     if (n)
         tagSelected(tags.at(n-1), true);
+}
+
+
+void LogDialog::tabChanged(QWidget* w)
+{
+    bool isPlainView = (w == plain);
+    showButton(User3, isPlainView);
 }
 
 #include "logdlg.moc"

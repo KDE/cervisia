@@ -18,6 +18,7 @@
 
 class QDateTime;
 class KConfig;
+class KFind;
 
 
 class LogPlainView : public KTextBrowser
@@ -26,19 +27,28 @@ class LogPlainView : public KTextBrowser
 
 public:
     explicit LogPlainView(QWidget* parent = 0, const char* name = 0);
+    ~LogPlainView();
 
     void addRevision(const QString& rev, const QString& author, 
                      const QDateTime& date, const QString& comment, 
                      const QString& tagcomment);            
+
+    void searchText(int options, const QString& pattern);
 
 signals:
     void revisionClicked(QString rev, bool rmb);
 
 public slots:
     void scrollToTop();
+    void findNext();
+    void searchHighlight(const QString& text, int index, int length);
 
 protected:                     
-    virtual void setSource(const QString& name);        
+    virtual void setSource(const QString& name);
+    
+private:
+    KFind* m_find;
+    int    m_findPos;
 };
 
 #endif

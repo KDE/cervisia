@@ -65,11 +65,13 @@ public:
     bool parseCvsLog(CvsService_stub* service, const QString& fileName);
 
 private slots:
+    void findClicked();
     void diffClicked();
     void annotateClicked();
     void revisionSelected(QString rev, bool rmb);
     void tagASelected(int n);
     void tagBSelected(int n);
+    void tabChanged(QWidget* w);
 
 private:
     void tagSelected(TagInfo* tag, bool rmb);

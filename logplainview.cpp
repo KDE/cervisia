@@ -15,14 +15,24 @@
 
 #include <qstringlist.h>
 #include <qstylesheet.h>
+#include <kfind.h>
+#include <kfinddialog.h>
 #include <kglobal.h>
 #include <klocale.h>
 
 
 LogPlainView::LogPlainView(QWidget* parent, const char* name)
     : KTextBrowser(parent, name)
+    , m_find(0)
+    , m_findPos(0)
 {
     setNotifyClick(false);
+}
+
+
+LogPlainView::~LogPlainView()
+{
+    delete m_find; m_find = 0;
 }
 
 
@@ -40,7 +50,7 @@ void LogPlainView::addRevision(const QString& rev, const QString& author,
     
     logEntry += "<b>" + i18n("revision %1").arg(QStyleSheet::escape(rev)) + 
                 "</b>";
-    logEntry += " [<a href=\"revA#" + QStyleSheet::escape(rev) + "\">" + 
+    logEntry += " &nbsp;[<a href=\"revA#" + QStyleSheet::escape(rev) + "\">" + 
                 i18n("Select for revision A") +
                 "</a>]";
     logEntry += " [<a href=\"revB#" + QStyleSheet::escape(rev) + "\">" + 
@@ -92,9 +102,72 @@ void LogPlainView::addRevision(const QString& rev, const QString& author,
 }
 
 
+void LogPlainView::searchText(int options, const QString& pattern)
+{
+    m_find = new KFind(pattern, options, this);
+    
+    connect(m_find, SIGNAL(highlight(const QString&, int, int)),
+            this, SLOT(searchHighlight(const QString&, int, int)));
+    connect(m_find, SIGNAL(findNext()),
+           this, SLOT(findNext()));
+    
+    m_findPos = 0;
+    if( options & KFindDialog::FromCursor )
+    {
+        const QPoint pos(contentsX(), contentsY());
+        m_findPos = paragraphAt(pos);
+    }
+
+    findNext();
+}
+
+
 void LogPlainView::scrollToTop()
 {
     setContentsPos(0, 0);
+}
+
+
+void LogPlainView::findNext()
+{   
+    KFind::Result res = KFind::NoMatch;
+    
+    while( res == KFind::NoMatch && m_findPos < paragraphs() && m_findPos >= 0 )
+    {
+        if( m_find->needData() )
+            m_find->setData(text(m_findPos));
+   
+        res = m_find->find();
+        
+        if( res == KFind::NoMatch )
+        {
+            if( m_find->options() & KFindDialog::FindBackwards )
+                --m_findPos;
+            else
+                ++m_findPos;
+        }
+    }
+       
+    // reached the end?
+    if( res == KFind::NoMatch )
+    {
+        if( m_find->shouldRestart() )
+        {
+            m_findPos = 0;
+            findNext();
+        }
+        else
+        {
+            delete m_find;  
+            m_find = 0;
+        }
+    }
+}
+
+
+void LogPlainView::searchHighlight(const QString& text, int index, int length)
+{
+    setSelection(m_findPos, index, m_findPos, index + length);
 }
 
 
