@@ -289,7 +289,9 @@ void CheckoutDialog::saveOptions(KConfig *config)
 
 void CheckoutDialog::dirButtonClicked()
 {
-    workdir_edit->setText(KFileDialog::getExistingDirectory(workdir_edit->text()));    
+    QString path=KFileDialog::getExistingDirectory(workdir_edit->text());
+    if(!path.isEmpty())
+	workdir_edit->setText(path);    
 }
 
 
@@ -301,7 +303,7 @@ void CheckoutDialog::moduleButtonClicked()
     cmdline += " checkout -c";
 
     CvsProgressDialog l("Checkout", this);
-    l.setCaption("CVS Checkout");
+    l.setCaption(i18n("CVS Checkout"));
     if (!l.execCommand("", repository(), cmdline, "checkout"))
         return;
 
