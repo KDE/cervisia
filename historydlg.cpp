@@ -155,7 +155,7 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     onlyuser_box = new QCheckBox(i18n("Only &user:"), mainWidget);
 
-    onlyfilenames_box = new QCheckBox(i18n("Only &file names matching:"), mainWidget);
+    onlyfilenames_box = new QCheckBox(i18n("Only &filenames matching:"), mainWidget);
 
     onlydirnames_box = new QCheckBox(i18n("Only &folders matching:"), mainWidget);
 
