@@ -612,13 +612,27 @@ void UpdateFileItem::setRevTag(const QString& rev, const QString& tag)
         const QTime tagTime(tag.mid(12, 2).toInt(),
                             tag.mid(15, 2).toInt(),
                             tag.mid(18, 2).toInt());
-        const QDateTime tagDateTime(tagDate, tagTime);
+        const QDateTime tagDateTimeUtc(tagDate, tagTime);
 
-        // TODO: this is in UTC and should be converted to local time
-        m_tag = tagDateTime.isValid()
-            ? KGlobal::locale()->formatDateTime(tagDateTime)
-            : tag;
+        if (tagDateTimeUtc.isValid())
+        {
+            // This is in UTC and must be converted to local time.
+            //
+            // A bit strange but I didn't find anything easier which is portable.
+            // Compute the difference between UTC and local timezone for this
+            // tag date.
+            const unsigned int dateTimeInSeconds(tagDateTimeUtc.toTime_t());
+            QDateTime dateTime;
+            dateTime.setTime_t(dateTimeInSeconds, Qt::UTC);
+            const int localUtcOffset(dateTime.secsTo(tagDateTimeUtc));
+
+            const QDateTime tagDateTimeLocal(tagDateTimeUtc.addSecs(localUtcOffset));
+
+            m_tag = KGlobal::locale()->formatDateTime(tagDateTimeLocal);
         }
+        else
+            m_tag = tag;
+    }
     else if (tag.length() > 1 && tag[0] == 'T')
         m_tag = tag.mid(1);
     else
