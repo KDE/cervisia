@@ -14,6 +14,7 @@
 
 #include "annotatedlg.h"
 
+#include <dcopref.h>
 #include <kconfig.h>
 #include <klocale.h>
 #include <kprocess.h>
@@ -21,6 +22,7 @@
 #include "annotateview.h"
 #include "cvsprogressdlg.h"
 #include "misc.h"
+#include "progressdlg.h"
 
 
 AnnotateDialog::Options *AnnotateDialog::options = 0;
@@ -193,6 +195,111 @@ bool AnnotateDialog::parseCvsAnnotate(const QString &sandbox, const QString &rep
     return true; // successful
 }
 
+
+bool AnnotateDialog::parseCvsAnnotate(DCOPRef& cvsService, const QString& fileName,
+                                      const QString& revision)
+{
+    QMap<QString, QString> logmap;                      // maps comment to a revision
+    enum { Begin, Tags, Admin, Revision,
+        Author, Branches, Comment, Finished } state;
+
+    setCaption(i18n("CVS Annotate: %1").arg(fileName));
+
+    DCOPReply job = cvsService.call("annotate(QString, QString)", fileName,
+                                    revision);
+    if( !job.isValid() )
+        return false;
+
+    ProgressDialog dlg(this, "Annotate", job, "annotate", i18n("CVS Annotate"));
+    if( !dlg.execute() )
+        return false;
+
+    // process cvs log output
+    state = Begin;
+    QString line, comment, rev;
+    while( dlg.getLine(line) )
+    {
+        switch( state )
+        {
+            case Begin:
+                if( line == "symbolic names:" )
+                    state = Tags;
+                break;
+            case Tags:
+                if( line[0] != '\t' )
+                    state = Admin;
+                break;
+            case Admin:
+                if( line == "----------------------------" )
+                    state = Revision;
+                break;
+            case Revision:
+                rev = line.section(' ', 1, 1);
+                state = Author;
+                break;
+            case Author:
+                state = Branches;
+                break;
+            case Branches:
+                if( !line.startsWith("branches:") )
+                {
+                    state = Comment;
+                    comment = line;
+                }
+                break;
+            case Comment:
+                if( line == "----------------------------" )
+                    state = Revision;
+                else if( line == "=============================================================================" )
+                    state = Finished;
+                if( state == Comment )
+                    comment += QString("\n") + line;
+                else
+                    logmap[rev] = comment;
+                break;
+            case Finished:
+                    ;
+        }
+
+        if (state == Finished)
+            break;
+    }
+
+    // skip 2 lines
+    for( int i = 0; i < 2; ++i )
+        dlg.getLine(line);
+
+
+    // process cvs annotate output
+    QString date, author, content;
+    bool odd = false;
+    QString oldRevision = "";
+    while( dlg. getLine(line) )
+    {
+        rev = line.left(13).stripWhiteSpace();
+        comment = logmap[rev];
+        author = line.mid(14, 8).stripWhiteSpace();
+        date = line.mid(23, 9);
+        content = line.mid(35, line.length()-35);
+        if( comment.isNull() )
+            comment = "";
+
+        if( rev == oldRevision )
+        {
+            author = QString::null;
+            rev = QString::null;
+        }
+        else
+        {
+            oldRevision = rev;
+            odd = !odd;
+        }
+
+        annotate->addLine(rev, author, date, content, comment, odd);
+    }
+
+    return true;
+}
 
 
 // Local Variables:

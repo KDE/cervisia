@@ -2,6 +2,8 @@
 
 	* Replace deprecated QMultiLineEdit with KTextEdit in
 	  ChangeLog dialog
+	* Added new parseCvsAnnotate() method to AnnotateDialog
+	  that uses the new cvs DCOP service
 
 2002-12-18  Christian Loose <christian.loose@hamburg.de>
 
