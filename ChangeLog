@@ -1,3 +1,7 @@
+2003-10-03  Christian Loose  <christian.loose@hamburg.de>
+
+	* Added support to add or remove watches to the cvs DCOP service. 
+
 2003-09-14  Christian Loose  <christian.loose@hamburg.de>
 
 	* Added new function makePatch() to the cvs DCOP service
