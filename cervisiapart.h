@@ -137,7 +137,7 @@ private:
     void readDialogProperties( KConfig *config );
     void saveDialogProperties( KConfig *config );
        
-    void openSandbox(const QString &dirname);
+    bool openSandbox(const QString &dirname);
     void updateSandbox(const QString &extraopt = QString::null);
     void addOrRemove(AddRemoveDialog::ActionType action);
     void addOrRemoveWatch(WatchDialog::ActionType action);

@@ -140,8 +140,7 @@ KConfig *CervisiaPart::config()
 
 bool CervisiaPart::openURL( const KURL &u )
 {
-    openSandbox( u.path() );
-    return true;
+    return openSandbox( u.path() );
 }
 
 void CervisiaPart::setupActions()
@@ -1520,7 +1519,7 @@ void CervisiaPart::slotJobFinished()
 }
 
 
-void CervisiaPart::openSandbox(const QString &dirname)
+bool CervisiaPart::openSandbox(const QString &dirname)
 {
     Repository_stub cvsRepository(cvsService->app(), "CvsRepository");
     
@@ -1539,7 +1538,7 @@ void CervisiaPart::openSandbox(const QString &dirname)
         QFileInfo fi(dirname);
         recent->removeURL( KURL::fromPathOrURL(fi.absFilePath()) );
         
-        return;
+        return false;
     }
     
     changelogstr = "";
@@ -1576,6 +1575,8 @@ void CervisiaPart::openSandbox(const QString &dirname)
     //load the recentCommits for this app from the KConfig app
     conf->setGroup( "CommitLogs" );
     recentCommits = conf->readListEntry( sandbox, COMMIT_SPLIT_CHAR );
+    
+    return true;
 }
 
 
