@@ -62,7 +62,8 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent, const char *name)
     uneditbox->setEnabled(false);
     eventslayout->addWidget(uneditbox, 2, 1);
 
-    QButtonGroup* group = new QButtonGroup;
+    QButtonGroup* group = new QButtonGroup(mainWidget);
+    group->hide();
     group->insert(all_button);
     group->insert(only_button);
 
