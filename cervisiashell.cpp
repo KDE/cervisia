@@ -17,18 +17,16 @@
 
 #include <kapplication.h>
 #include <kconfig.h>
-#include <kedittoolbar.h>
 #include <kdeversion.h>
-#include <kfiledialog.h>
+#include <kedittoolbar.h>
 #include <khelpmenu.h>
 #include <kkeydialog.h>
 #include <klibloader.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kstdaction.h>
 #include <kstatusbar.h>
+#include <kstdaction.h>
 #include <kurl.h>
-
 
 
 CervisiaShell::CervisiaShell( const char *name )
