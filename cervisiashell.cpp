@@ -111,7 +111,7 @@ void CervisiaShell::setupActions()
     action->setWhatsThis( hint );
 
     action = actionCollection()->action("help_report_bug");
-    hint = i18n("Opens the Bug report dialog");
+    hint = i18n("Opens the bug report dialog");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 

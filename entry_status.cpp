@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004 André Wöbbeking <Woebbeking@web.de>
+ * Copyright (c) 2004 Andrï¿½Wï¿½beking <Woebbeking@web.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -46,7 +46,7 @@ QString toString(EntryStatus entryStatus)
         result = i18n("Needs Merge");
         break;
     case UpToDate:
-        result = i18n("Up to date");
+        result = i18n("Up to Date");
         break;
     case Conflict:
         result = i18n("Conflict");
