@@ -31,6 +31,7 @@ struct Repository::Private
     QString client;
     QString location;
     QString rsh;
+    QString server;
     int     compressionLevel;
 
     void readConfig();
@@ -52,8 +53,11 @@ void Repository::Private::readConfig()
         compressionLevel = config->readNumEntry("Compression", 0);
     }
 
-    // get shell command to access the remote repository
-    rsh = config->readEntry("rsh", QString());
+    // get remote shell client to access the remote repository
+    rsh = config->readEntry("rsh");
+    
+    // get program to start on the server side
+    server = config->readEntry("cvs_server");
     
     // get path to cvs client programm
     config->setGroup("General");
@@ -119,4 +123,10 @@ QString Repository::location() const
 QString Repository::rsh() const
 {
     return d->rsh;
+}
+
+
+QString Repository::server() const
+{
+    return d->server;
 }

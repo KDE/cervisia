@@ -33,7 +33,7 @@ class Repository
 public:
     explicit Repository(const QString& workingCopyDir);
     ~Repository();
-    
+
     void updateConfig();
 
     /**
@@ -52,7 +52,22 @@ public:
      */
     QString location() const;
 
+    /**
+     * Remote shell command line client which should be used to
+     * access the remote cvs repository, when :ext: access method
+     * is specified. ($CVS_RSH)
+     *
+     * @return The remote shell client. Can be null if not set.
+     */
     QString rsh() const;
+
+    /**
+     * Program to start on the server side when accessing a remote
+     * repository using :ext: access method. ($CVS_SERVER)
+     *
+     * @return The server program. Can be null if not set.
+     */
+    QString server() const;
 
 private:
     struct Private;
