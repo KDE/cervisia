@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Service
+Name=CvsService
+Exec=cvsservice
+X-DCOP-ServiceType=Multi
+X-KDE-StartupNotify=false
+comment=A DCOP service that provides an interface to cvs
