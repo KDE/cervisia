@@ -1,5 +1,6 @@
 2004-04-29  Christian Loose  <christian.loose@kdemail.net>
 
+	* Activated spellchecking in changelog dialog.
 	* Implement BR #79957:
 	  Spellchecking in commit dialog.
 	  (patch by theboywho@ruddyperl.com)
