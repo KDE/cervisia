@@ -31,7 +31,6 @@
 #include <kfontdialog.h>
 #include <kglobal.h>
 #include <klineedit.h>
-#include <kurlrequester.h>
 #include <klocale.h>
 #include <knuminput.h>
 

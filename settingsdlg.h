@@ -26,7 +26,6 @@ class KIntegerLine;
 class KIntNumInput;
 class KLineEdit;
 class KConfig;
-class KURLRequester;
 class KColorButton;
 
 

@@ -439,7 +439,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KToggleAction( i18n("&Prune Empty Directories On Update"), 0,
+    action = new KToggleAction( i18n("&Prune Empty Directories on Update"), 0,
                                 this, SLOT(slotPruneDirs()),
                                 actionCollection(), "settings_prune_dirs" );
     hint = i18n("Determines whether updates remove empty directories");
@@ -453,7 +453,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KToggleAction( i18n("C&ommit and Remove Recursively"), 0,
+    action = new KToggleAction( i18n("C&ommit && Remove Recursively"), 0,
                                 this, SLOT(slotCommitRecursive()),
                                 actionCollection(), "settings_commit_recursively" );
     hint = i18n("Determines whether commits and removes are recursive");
