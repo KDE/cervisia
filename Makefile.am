@@ -39,8 +39,8 @@ appsdir = $(kde_appsdir)/Development
 rcdir = $(kde_datadir)/cervisia
 rc_DATA = cervisiaui.rc cervisiashellui.rc
 
-partdir = $(kde_datadir)/cervisia
-part_DATA = cervisiaui.rc cervisiashellui.rc
+#partdir = $(kde_datadir)/cervisia
+#part_DATA = cervisiaui.rc cervisiashellui.rc
 
 messages:
 	$(XGETTEXT) -C -ki18n -x $(kde_includes)/kde.pot $(cervisia_SOURCES) \

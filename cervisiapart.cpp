@@ -492,8 +492,8 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = KStdAction::aboutApp( this, SLOT(aboutCervisia()),
-				   actionCollection(), "help_about_cervisia" );
+    //action = KStdAction::aboutApp( this, SLOT(aboutCervisia()),
+    //			   actionCollection(), "help_about_cervisia" );
 }
 
 void CervisiaPart::popupRequested()
