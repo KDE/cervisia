@@ -14,6 +14,7 @@
 
 #include "updateview.h"
 
+#include <cassert>
 #include <map>
 #include <set>
 
@@ -33,6 +34,9 @@
 #include "cvsdir.h"
 
 
+class UpdateDirItem;
+
+
 namespace
 {
     const int g_dirItemRtti(10000);
@@ -50,6 +54,11 @@ namespace
         return item && item->rtti() == g_fileItemRtti;
     }
 }
+
+
+// don't know how to put this function in the unnamed namespace and make
+// it a friend of UpdateDirItem
+static UpdateDirItem* findOrCreateDirItem(const QString& dirPath, UpdateDirItem* rootItem);
 
 
 class UpdateItem : public QListViewItem
@@ -127,6 +136,8 @@ private:
     TMapItemsByName mapItemsByName;
 
     bool m_opened;
+
+    friend UpdateDirItem* findOrCreateDirItem(const QString&, UpdateDirItem*);
 };
 
 
@@ -1245,65 +1256,17 @@ void UpdateView::processUpdateLine(QString str)
 }
 
 
-void UpdateView::updateItem(const QString &name, Status status, bool isdir)
+void UpdateView::updateItem(const QString& filePath, Status status, bool isdir)
 {
-    // bla -> dirpath = "", filename = "bla"
-    // bla/foo -> dirpath = "bla/", filename = "foo"
-
-    if (isdir && name == ".")
+    if (isdir && filePath == QChar('.'))
         return;
 
-    const QFileInfo fi(name);
-    const QString dirpath(fi.dirPath());
-    const QString fileName(fi.fileName());
+    const QFileInfo fileInfo(filePath);
 
-    UpdateDirItem *longestmatch = 0;
-    QString longestmatchPath;
-    QPtrStack<QListViewItem> s;
-    for ( QListViewItem *item = firstChild(); item;
-	  item = item->nextSibling()? item->nextSibling() : s.pop() )
-	{
-	    if (isDirItem(item))
-		{
-		    UpdateDirItem *diritem = static_cast<UpdateDirItem*>(item);
-                    const QString& diritemPath(diritem->filePath());
-                    if (diritemPath == dirpath)
-			{
-			    diritem->updateChildItem(fileName, status, isdir);
-			    return;
-			}
-                    else if (!diritemPath.isEmpty() && dirpath.startsWith(diritemPath)
-                             && (!longestmatch || diritemPath.length() > longestmatchPath.length()))
-                    {
-                        longestmatch = diritem;
-                        longestmatchPath = diritemPath;
-                    }
+    UpdateDirItem* rootItem = static_cast<UpdateDirItem*>(firstChild());
+    UpdateDirItem* dirItem = findOrCreateDirItem(fileInfo.dirPath(), rootItem);
 
-                    if (item->firstChild())
-                        s.push(item->firstChild());
-		}
-	}
-
-    if (!longestmatch)
-        {
-            kdDebug() << "no match: " << dirpath << endl;
-            return;
-        }
-    // Item doesn't belong any existing directory in the tree, so we have to create
-    // the missing leaves. longestmatch is the directory item where we have to attach
-    kdDebug() << "longest match: " << longestmatchPath << endl;
-    kdDebug() << "leaves: " <<  dirpath.mid(longestmatchPath.length()) << endl;
-    const QStringList& leaves(QStringList::split('/', dirpath.mid(longestmatchPath.length())));
-    QString newFileName(longestmatchPath);
-    for (QStringList::ConstIterator it(leaves.begin()); it != leaves.end(); ++it)
-        {
-            newFileName += *it;
-            kdDebug() << "add missing " << newFileName << endl;
-            updateItem(newFileName, Unknown, true);
-            newFileName += '/';
-        }
-    // Recursive, but now it should work
-    updateItem(name, status, isdir);
+    dirItem->updateChildItem(fileInfo.fileName(), status, isdir);
 }
 
 
@@ -1312,6 +1275,52 @@ void UpdateView::itemExecuted(QListViewItem *item)
     if (isFileItem(item))
         emit fileOpened(static_cast<UpdateFileItem*>(item)->filePath());
 }
+
+
+/**
+ * Finds or creates the UpdateDirItem with path \a dirPath. If \a dirPath
+ * is "." \a rootItem is returned.
+ */
+UpdateDirItem* findOrCreateDirItem(const QString& dirPath,
+                                   UpdateDirItem* rootItem)
+{
+    assert(!dirPath.isEmpty());
+    assert(rootItem);
+
+    UpdateDirItem* dirItem(rootItem);
+
+    if (dirPath != QChar('.'))
+    {
+        const QStringList& dirNames(QStringList::split('/', dirPath));
+        const QStringList::const_iterator itDirNameEnd(dirNames.end());
+        for (QStringList::const_iterator itDirName(dirNames.begin());
+             itDirName != itDirNameEnd; ++itDirName)
+        {
+            const QString& dirName(*itDirName);
+
+            UpdateItem* item = dirItem->findItem(dirName);
+            if (isFileItem(item))
+            {
+                kdDebug() << "findOrCreateDirItem(): file changed to dir " << dirName << endl;
+                delete item;
+                item = 0;
+            }
+
+            if (!item)
+            {
+                kdDebug() << "findOrCreateDirItem(): create dir item " << dirName << endl;
+                item = dirItem->createDirItem(dirName);
+            }
+
+            assert(isDirItem(item));
+
+            dirItem = static_cast<UpdateDirItem*>(item);
+        }
+    }
+
+    return dirItem;
+}
+
 
 #include "updateview.moc"
 
