@@ -29,12 +29,14 @@
 class LogListViewItem : public QListViewItem
 {
 public:
-    
+
+    enum { Revision, Author, Date, Branch, Comment, Tags };
+
     LogListViewItem(QListView *list,
                     const QString &rev, const QString &author, const QString &date,
                     const QString &comment, const QString &tagcomment);
 
-    virtual QString key(int column, bool) const;
+    virtual int compare(QListViewItem* i, int col, bool) const;
 
 private:
     static QString truncateLine(const QString &s);
@@ -131,25 +133,21 @@ QString LogListViewItem::extractBranchName(const QString &s)
 }
 
 
-QString LogListViewItem::key(int column, bool) const
+int LogListViewItem::compare(QListViewItem* i, int col, bool ascending) const
 {
-    static QString tmp, res;
+    LogListViewItem const* pItem = static_cast<LogListViewItem*>(i);
 
-    if (column != 0)
-        return text(column);
+    int iResult;
+    switch (col)
+    {
+    case Revision:
+        iResult = ::compareRevisions(mrev, pItem->mrev);
+        break;
+    default:
+        iResult = QListViewItem::compare(i, col, ascending);
+    }
 
-    QStringList strlist = splitLine(text(column), '.');
-
-    res = "";
-    for (QStringList::Iterator it = strlist.begin();
-         it != strlist.end(); ++it)
-	{
-	    tmp.sprintf("%05d", (*it).toInt());
-	    res += tmp;
-	    res += ".";
-	}
-    res.truncate(res.length()-1);
-    return res;
+    return iResult;
 }
 
 
@@ -164,8 +162,8 @@ LogListView::LogListView(QWidget *parent, const char *name)
     setShowToolTips(false);
     setShowSortIndicator(true);
     setMultiSelection(true);
-    setSorting(0, false);
-    setSorting(3, false);
+    setSorting(LogListViewItem::Revision, false);
+    setSorting(LogListViewItem::Branch, false);
     addColumn(i18n("Revision"));
     addColumn(i18n("Author"));
     addColumn(i18n("Date"));
@@ -273,15 +271,6 @@ void LogListView::setSelectedPair(const QString &selectionA, const QString &sele
         }
 }
 
-#if 0
-void LogListView::headerClicked(int column)
-{
-    sortAscending = (column == sortColumn)? !sortAscending : true;
-    sortColumn = column;
-}
-#endif
-
-
 void LogListView::contentsMousePressEvent(QMouseEvent *e)
 {
     if ( e->button() == LeftButton )
@@ -290,7 +279,7 @@ void LogListView::contentsMousePressEvent(QMouseEvent *e)
 	    LogListViewItem *selItem
                 = static_cast<LogListViewItem*>( itemAt(vp) );
             if (selItem)
-                emit revisionClicked(selItem->text(0), false);
+                emit revisionClicked(selItem->text(LogListViewItem::Revision), false);
         }
     else if ( e->button() == MidButton )
         {
@@ -298,7 +287,7 @@ void LogListView::contentsMousePressEvent(QMouseEvent *e)
             LogListViewItem *selItem
                 = static_cast<LogListViewItem*>( itemAt(vp) );
             if (selItem)
-                emit revisionClicked(selItem->text(0), true);
+                emit revisionClicked(selItem->text(LogListViewItem::Revision), true);
 	}
 }
 
@@ -381,12 +370,12 @@ void LogListView::keyPressEvent(QKeyEvent *e)
     switch (e->key()) {
     case Key_A:
         if (currentItem())
-            emit revisionClicked(currentItem()->text(0), false);
+            emit revisionClicked(currentItem()->text(LogListViewItem::Revision), false);
         break;
         break;
     case Key_B:
         if (currentItem())
-            emit revisionClicked(currentItem()->text(0), true);
+            emit revisionClicked(currentItem()->text(LogListViewItem::Revision), true);
         break;
     case Key_Backspace:
     case Key_Delete:

@@ -62,7 +62,10 @@ int HistoryItem::compare(QListViewItem* i, int col, bool ascending) const
     switch (col)
     {
     case Date:
-        iResult = (m_date < pItem->m_date) ? -1 : ((pItem->m_date < m_date) ? 1 : 0);
+        iResult = ::compare(m_date, pItem->m_date);
+        break;
+    case Revision:
+        iResult = ::compareRevisions(text(Revision), pItem->text(Revision));
         break;
     default:
         iResult = QListViewItem::compare(i, col, ascending);
