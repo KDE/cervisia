@@ -46,20 +46,15 @@ signals:
 
 protected:
     virtual void contentsMousePressEvent(QMouseEvent *e);
-    virtual void contentsMouseMoveEvent(QMouseEvent *e);
-    virtual void windowActivationChange(bool oldActive);
-    virtual void leaveEvent(QEvent *e);
     virtual void keyPressEvent(QKeyEvent *e);
 
 private slots:
-    void hideLabel();
+
+    void slotQueryToolTip(const QPoint&, QRect&, QString&);
 
 private:
-    LogListViewItem* selectedItem(QMouseEvent* e);
 
     KConfig& partConfig;
-    TipLabel *currentLabel;
-    LogListViewItem *currentTipItem;
 };
 
 #endif

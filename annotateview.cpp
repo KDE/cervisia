@@ -1,6 +1,6 @@
 /*
- *  Copyright (C) 1999-2002 Bernd Gehrmann
- *                          bernd@mail.berlios.de
+ * Copyright (C) 1999-2002 Bernd Gehrmann <bernd@mail.berlios.de>
+ * Copyright (c) 2003-2004 André Wöbbeking <Woebbeking@web.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -13,19 +13,17 @@
 
 #include "annotateview.h"
 
-#include <qdatetime.h>
 #include <qheader.h>
 #include <qpainter.h>
-#include <qstylesheet.h>
 #include <kconfig.h>
-#include <kglobal.h>
 #include <kglobalsettings.h>
-#include <klocale.h>
 
 #include "loginfo.h"
-#include "tiplabel.h"
+#include "tooltip.h"
+
 
 using namespace Cervisia;
+
 
 class AnnotateViewItem : public QListViewItem
 {
@@ -90,7 +88,7 @@ QString AnnotateViewItem::text(int col) const
         ;
     };
 
-    return "";
+    return QString::null;
 }
 
 
@@ -153,28 +151,15 @@ AnnotateView::AnnotateView(KConfig &cfg, QWidget *parent, const char *name)
     setSorting(AnnotateViewItem::LineNumberColumn);
     setColumnAlignment(AnnotateViewItem::LineNumberColumn, Qt::AlignRight);
 
-    connect( this, SIGNAL(contentsMoving(int, int)), this, SLOT(hideLabel()) );
+    ToolTip* toolTip = new ToolTip(viewport());
 
-    currentTipItem = 0;
-    currentLabel = 0;
+    connect(toolTip, SIGNAL(queryToolTip(const QPoint&, QRect&, QString&)),
+            this, SLOT(slotQueryToolTip(const QPoint&, QRect&, QString&)));
 
     KConfigGroupSaver cs(&cfg, "LookAndFeel");
     setFont(cfg.readFontEntry("AnnotateFont"));
 }
 
-
-
-AnnotateView::~AnnotateView()
-{
-    delete currentLabel;
-}
-
-
-void AnnotateView::hideLabel()
-{
-    delete currentLabel;
-    currentLabel = 0;
-}
 
 
 void AnnotateView::addLine(const LogInfo& logInfo, const QString& content,
@@ -191,47 +176,21 @@ QSize AnnotateView::sizeHint() const
 }
 
 
-
-void AnnotateView::contentsMouseMoveEvent(QMouseEvent *e)
+void AnnotateView::slotQueryToolTip(const QPoint& viewportPos,
+                                    QRect&        viewportRect,
+                                    QString&      text)
 {
-    if (!isActiveWindow())
-        return;
-
-    QPoint vp = contentsToViewport(e->pos());
-    AnnotateViewItem *item
-        = static_cast<AnnotateViewItem*>( itemAt(vp) );
-    int col = header()->sectionAt(vp.x());
-
-    if (item != currentTipItem || col != AnnotateViewItem::AuthorColumn)
-        hideLabel();
-
-    if (!currentLabel && item && col == AnnotateViewItem::AuthorColumn &&
-        !item->m_logInfo.m_author.isNull())
+    if (const AnnotateViewItem* item = static_cast<AnnotateViewItem*>(itemAt(viewportPos)))
     {
-            QString text = item->m_logInfo.createToolTipText(false);
-
-            int left = header()->sectionPos(AnnotateViewItem::ContentColumn);
-            int top = viewport()->mapTo(this, itemRect(item).topLeft()).y();
-            currentLabel = new TipLabel(text);
-            currentLabel->showAt(mapToGlobal(QPoint(left, top)));
-            currentTipItem = item;
+        const int column(header()->sectionAt(viewportPos.x()));
+        if ((column == AnnotateViewItem::AuthorColumn) && !item->m_logInfo.m_author.isNull())
+        {
+            viewportRect = itemRect(item);
+            text = item->m_logInfo.createToolTipText(false);
+        }
     }
 }
 
-
-void AnnotateView::windowActivationChange(bool oldActive)
-{
-    hideLabel();
-    QListView::windowActivationChange(oldActive);
-}
-
-
-void AnnotateView::leaveEvent(QEvent *e)
-{
-    // has strange effects
-    // hideLabel();
-    QListView::leaveEvent(e);
-}
 
 #include "annotateview.moc"
 

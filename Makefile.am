@@ -10,8 +10,8 @@ noinst_LTLIBRARIES = libcervisia.la
 libcervisia_la_SOURCES = annotatedlg.cpp cvsprogressdlg.cpp diffdlg.cpp logdlg.cpp \
 		   progressdlg.cpp progressdlg.skel resolvedlg.cpp annotateview.cpp        \
 		   diffview.cpp loglist.cpp logplainview.cpp logtree.cpp annotatectl.cpp   \
-		   globalconfig.cpp loginfo.cpp misc.cpp qttableview.cpp tiplabel.cpp      \
-		   configutils.cpp logtreetooltip.cpp
+		   globalconfig.cpp loginfo.cpp misc.cpp qttableview.cpp \
+		   configutils.cpp tooltip.cpp
 
 libcervisiapart_la_SOURCES = updateview.cpp protocolview.cpp protocolview.skel \
 		   watchdlg.cpp settingsdlg.cpp changelogdlg.cpp historydlg.cpp \

@@ -1,3 +1,9 @@
+2004-03-02  André Wöbbeking  <Woebbeking@web.de>
+
+	* Fix BR #55871:
+	  - truncate the tooltip text if necessary
+	  - use a subclassed QToolTip instead of the own TipLabel.
+
 2004-03-01  Christian Loose  <christian.loose@hamburg.de>
 
 	* Implemented BR #72861:

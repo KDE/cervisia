@@ -1,6 +1,6 @@
 /*
- *  Copyright (C) 1999-2002 Bernd Gehrmann
- *                          bernd@mail.berlios.de
+ * Copyright (C) 1999-2002 Bernd Gehrmann <bernd@mail.berlios.de>
+ * Copyright (c) 2003-2004 André Wöbbeking <Woebbeking@web.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -18,10 +18,9 @@
 
 #include <qlistview.h>
 
-class QDate;
+
 class KConfig;
-class TipLabel;
-class AnnotateViewItem;
+
 
 namespace Cervisia
 {
@@ -34,23 +33,18 @@ class AnnotateView : public QListView
     Q_OBJECT
 
 public:
-    AnnotateView( KConfig &cfg, QWidget *parent=0, const char *name=0 );
-    ~AnnotateView();
+
+    explicit AnnotateView( KConfig &cfg, QWidget *parent=0, const char *name=0 );
 
     void addLine(const Cervisia::LogInfo& logInfo, const QString& content,
                  bool odd);
 
     virtual QSize sizeHint() const;
-    virtual void contentsMouseMoveEvent(QMouseEvent *e);
-    virtual void windowActivationChange(bool oldActive);
-    virtual void leaveEvent(QEvent *e);
 
 private slots:
-    void hideLabel();
 
-private:
-    TipLabel *currentLabel;
-    AnnotateViewItem *currentTipItem;
+    void slotQueryToolTip(const QPoint&, QRect&, QString&);
 };
+
 
 #endif

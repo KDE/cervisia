@@ -19,7 +19,7 @@
 #include <kglobalsettings.h>
 
 #include "loginfo.h"
-#include "logtreetooltip.h"
+#include "tooltip.h"
 
 
 const int LogTreeView::BORDER = 8;
@@ -54,7 +54,6 @@ public:
 
 LogTreeView::LogTreeView(QWidget *parent, const char *name)
     : QTable(parent, name)
-    , m_cellTip(0)
 {
     if (!static_initialized)
     {
@@ -84,14 +83,11 @@ LogTreeView::LogTreeView(QWidget *parent, const char *name)
 
     items.setAutoDelete(true);
     connections.setAutoDelete(true);
-    
-    m_cellTip = new Cervisia::LogTreeToolTip(this);
-}
 
+    Cervisia::ToolTip* toolTip = new Cervisia::ToolTip(viewport());
 
-LogTreeView::~LogTreeView()
-{
-    delete m_cellTip;
+    connect(toolTip, SIGNAL(queryToolTip(const QPoint&, QRect&, QString&)),
+            this, SLOT(slotQueryToolTip(const QPoint&, QRect&, QString&)));
 }
 
 
@@ -493,6 +489,24 @@ int LogTreeView::rowHeight(int row)
 
     return rowHeights[row];
 }
+
+
+void LogTreeView::slotQueryToolTip(const QPoint& viewportPos,
+                                   QRect&        viewportRect,
+                                   QString&      tipText)
+{
+    const QPoint contentsPos(viewportToContents(viewportPos));
+    const int column(columnAt(contentsPos.x()));
+    const int row(rowAt(contentsPos.y()));
+
+    tipText = text(row, column);
+    if (tipText.isEmpty())
+        return;
+
+    viewportRect = cellGeometry(row, column);
+    viewportRect.moveTopLeft(contentsToViewport(viewportRect.topLeft()));
+}
+
 
 #include "logtree.moc"
 

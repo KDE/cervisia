@@ -28,7 +28,6 @@ class LogTreeConnection;
 namespace Cervisia
 {
 struct LogInfo;
-class LogTreeToolTip;
 }
 
 
@@ -42,7 +41,6 @@ class LogTreeView : public QTable
 
 public:
     explicit LogTreeView( QWidget *parent=0, const char *name=0 );
-    virtual ~LogTreeView();
 
     void addRevision(const Cervisia::LogInfo& logInfo);
     void setSelectedPair(QString selectionA, QString selectionB);
@@ -63,6 +61,10 @@ protected:
     virtual int columnWidth(int col);
     virtual int rowHeight(int row);
 
+private slots:
+
+    void slotQueryToolTip(const QPoint&, QRect&, QString&);
+
 private:
     void paintRevisionCell(QPainter *p, int row, int col, const Cervisia::LogInfo& logInfo,
                            bool followed, bool branched, bool selected);
@@ -71,7 +73,6 @@ private:
     LogTreeItemList items;
     LogTreeConnectionList connections;
     int currentRow, currentCol;
-    Cervisia::LogTreeToolTip* m_cellTip;
     QMemArray<int> colWidths;
     QMemArray<int> rowHeights;
 

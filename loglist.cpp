@@ -20,7 +20,7 @@
 
 #include "loginfo.h"
 #include "misc.h"
-#include "tiplabel.h"
+#include "tooltip.h"
 
 
 class LogListViewItem : public KListViewItem
@@ -116,10 +116,10 @@ LogListView::LogListView(KConfig& cfg, QWidget *parent, const char *name)
     addColumn(i18n("Comment"));
     addColumn(i18n("Tags"));
 
-    connect( this, SIGNAL(contentsMoving(int, int)), this, SLOT(hideLabel()) );
+    Cervisia::ToolTip* toolTip = new Cervisia::ToolTip(viewport());
 
-    currentTipItem = 0;
-    currentLabel = 0;
+    connect(toolTip, SIGNAL(queryToolTip(const QPoint&, QRect&, QString&)),
+            this, SLOT(slotQueryToolTip(const QPoint&, QRect&, QString&)));
 
     // without this restoreLayout() can't change the column widths
     for (int i = 0; i < columns(); ++i)
@@ -131,16 +131,7 @@ LogListView::LogListView(KConfig& cfg, QWidget *parent, const char *name)
 
 LogListView::~LogListView()
 {
-    delete currentLabel;
-
     saveLayout(&partConfig, QString::fromLatin1("LogList view"));
-}
-
-
-void LogListView::hideLabel()
-{
-    delete currentLabel;
-    currentLabel = 0;
 }
 
 
@@ -164,7 +155,8 @@ void LogListView::setSelectedPair(const QString &selectionA, const QString &sele
 void LogListView::contentsMousePressEvent(QMouseEvent *e)
 {
     // Retrieve selected item
-    LogListViewItem* selItem = selectedItem(e);
+    const LogListViewItem* selItem
+        = static_cast<LogListViewItem*>(itemAt(contentsToViewport(e->pos())));
     if( !selItem )
         return;
         
@@ -184,48 +176,8 @@ void LogListView::contentsMousePressEvent(QMouseEvent *e)
 }
 
 
-void LogListView::contentsMouseMoveEvent(QMouseEvent *e)
-{
-    if (!isActiveWindow())
-        return;
-
-    LogListViewItem* item = selectedItem(e);
-
-    if (item != currentTipItem)
-        hideLabel();
-
-    if (!currentLabel && item)
-        {
-            const QString text(item->m_logInfo.createToolTipText());
-
-            int left = e->pos().x() + 20;
-            int top = viewport()->mapTo(this, itemRect(item).bottomLeft()).y();
-
-            currentLabel = new TipLabel(text);
-            currentLabel->showAt(mapToGlobal(QPoint(left, top)));
-            currentTipItem = item;
-        }
-}
-
-
-void LogListView::windowActivationChange(bool oldActive)
-{
-    hideLabel();
-    QListView::windowActivationChange(oldActive);
-}
-
-
-void LogListView::leaveEvent(QEvent *e)
-{
-    hideLabel();
-    QListView::leaveEvent(e);
-}
-
-
 void LogListView::keyPressEvent(QKeyEvent *e)
 {
-    hideLabel();
-
     switch (e->key()) {
     case Key_A:
         if (currentItem())
@@ -256,11 +208,17 @@ void LogListView::keyPressEvent(QKeyEvent *e)
 }
 
 
-LogListViewItem* LogListView::selectedItem(QMouseEvent* e)
+void LogListView::slotQueryToolTip(const QPoint& viewportPos,
+                                   QRect&        viewportRect,
+                                   QString&      text)
 {
-    QPoint vp = contentsToViewport(e->pos());
-    return static_cast<LogListViewItem*>( itemAt(vp) );
+    if (const LogListViewItem* item = static_cast<LogListViewItem*>(itemAt(viewportPos)))
+    {
+        viewportRect = itemRect(item);
+        text = item->m_logInfo.createToolTipText();
+    }
 }
+
 
 #include "loglist.moc"
 
