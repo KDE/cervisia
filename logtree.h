@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2001 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
@@ -58,6 +58,7 @@ signals:
     void revisionClicked(QString rev, bool rmb);
 
 protected:
+    virtual void windowActivationChange( bool oldActive );
     virtual bool eventFilter(QObject * o, QEvent *e);
     virtual void mousePressEvent(QMouseEvent *e);
     virtual void setupPainter(QPainter *p);
@@ -69,6 +70,7 @@ private:
     void paintRevisionCell(QPainter *p, int row, int col, QString line1, QString line2, QString line3,
 			   bool followed, bool branched, bool selected);
     void paintConnector(QPainter *p, int row, int col, bool followed, bool branched);
+    void hideLabel();
 
     LogTreeItemList items;
     LogTreeConnectionList connections;

@@ -428,31 +428,30 @@ void LogTreeView::mousePressEvent(QMouseEvent *e)
 	}
 }
 
+void LogTreeView::hideLabel()
+{
+    if (currentLabel)
+        currentLabel->hide();
+    delete currentLabel;
+    currentLabel = 0;
+}
+
+void LogTreeView::windowActivationChange( bool )
+{
+    hideLabel();
+}
 
 bool LogTreeView::eventFilter(QObject *o, QEvent *e)
 {
-    if ( !(e->type() == QEvent::MouseMove ||
-           e->type() == QEvent::FocusOut) )
+    if (o != this || e->type() != QEvent::MouseMove || !isActiveWindow())
         return QTableView::eventFilter(o, e);
 
-    int row = currentRow;
-    int col = currentCol;
-    if( e->type() == QEvent::MouseMove && isActiveWindow() ) {
-        row = findRow(static_cast<QMouseEvent*>(e)->y());
-        col = findCol(static_cast<QMouseEvent*>(e)->x());
-    }
-
-    if( e->type() == QEvent::FocusOut ||
-        row != currentRow ||
-        col != currentCol ) {
-        if (currentLabel)
-            currentLabel->hide();
-        delete currentLabel;
-        currentLabel = 0;
-    }
-
-    if( e->type() == QEvent::FocusOut || !isActiveWindow() )
-        return QTableView::eventFilter(o, e);
+    int row = findRow(static_cast<QMouseEvent*>(e)->y());
+    int col = findCol(static_cast<QMouseEvent*>(e)->x());
+    if (row != currentRow || col != currentCol)
+        {
+            hideLabel();
+        }
 
     LogTreeItem *item = 0;
 
