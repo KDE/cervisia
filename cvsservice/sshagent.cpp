@@ -82,6 +82,39 @@ bool SshAgent::querySshAgent()
 }
 
 
+bool SshAgent::addSshIdentities()
+{
+    kdDebug(8051) << "SshAgent::addSshIdentities(): ENTER" << endl;
+
+    if( !m_isRunning || !m_isOurAgent )
+        return;
+
+    // add identities to ssh-agent
+    KProcess proc;
+
+    proc.setEnvironment("SSH_AGENT_PID", m_pid);
+    proc.setEnvironment("SSH_AUTH_SOCK", m_authSock);
+    proc.setEnvironment("SSH_ASKPASS", "cvsaskpass");
+
+    proc << "ssh-add";
+
+    connect(&proc, SIGNAL(receivedStdout(KProcess*, char*, int)),
+            SLOT(slotReceivedStdout(KProcess*, char*, int)));
+    connect(&proc, SIGNAL(receivedStderr(KProcess*, char*, int)),
+            SLOT(slotReceivedStderr(KProcess*, char*, int)));
+
+    proc.start(KProcess::DontCare, KProcess::AllOutput);
+
+    // wait for process to finish
+    while( proc.isRunning() )
+        kapp->processEvents();
+
+    kdDebug(8051) << "SshAgent::slotProcessExited(): added identities" << endl;
+
+    return (proc.normalExit() && proc.exitStatus() == 0);
+}
+
+
 void SshAgent::killSshAgent()
 {
     kdDebug(8051) << "SshAgent::killSshAgent(): ENTER" << endl;
@@ -150,28 +183,6 @@ void SshAgent::slotProcessExited(KProcess*)
 
     kdDebug(8051) << "SshAgent::slotProcessExited(): pid = " << m_pid 
                   << ", socket = " << m_authSock << endl;
-
-    // add identities to ssh-agent
-    KProcess proc;
-
-    proc.setEnvironment("SSH_AGENT_PID", m_pid);
-    proc.setEnvironment("SSH_AUTH_SOCK", m_authSock);
-    proc.setEnvironment("SSH_ASKPASS", "cvsaskpass");
-
-    proc << "ssh-add";
-
-    connect(&proc, SIGNAL(receivedStdout(KProcess*, char*, int)),
-            SLOT(slotReceivedStdout(KProcess*, char*, int)));
-    connect(&proc, SIGNAL(receivedStderr(KProcess*, char*, int)),
-            SLOT(slotReceivedStderr(KProcess*, char*, int)));
-
-    proc.start(KProcess::DontCare, KProcess::AllOutput);
-
-    // wait for process to finish
-    while( proc.isRunning() )
-        kapp->processEvents();
-
-    kdDebug(8051) << "SshAgent::slotProcessExited(): added identities" << endl;
 }
 
 

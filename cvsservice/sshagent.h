@@ -37,8 +37,10 @@ public:
     ~SshAgent();
 
     bool querySshAgent();
+    bool addSshIdentities();
     void killSshAgent();
 
+    bool isRunning() const { return m_isRunning; }
     QString pid() const { return m_pid; }
     QString authSock() const { return m_authSock; }
 
