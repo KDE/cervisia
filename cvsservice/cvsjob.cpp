@@ -153,13 +153,14 @@ bool CvsJob::execute()
     SshAgent ssh;
     if( !ssh.pid().isEmpty() )
     {
-        kdDebug(8051) << "PID  = " << ssh.pid() << endl;
-        kdDebug(8051) << "SOCK = " << ssh.authSock() << endl;
+        // kdDebug(8051) << "PID  = " << ssh.pid() << endl;
+        // kdDebug(8051) << "SOCK = " << ssh.authSock() << endl;
 
         d->childproc->setEnvironment("SSH_AGENT_PID", ssh.pid());
         d->childproc->setEnvironment("SSH_AUTH_SOCK", ssh.authSock());
-        d->childproc->setEnvironment("SSH_ASKPASS", "cvsaskpass");
     }
+    
+    d->childproc->setEnvironment("SSH_ASKPASS", "cvsaskpass");
 
     if( !d->rsh.isEmpty() )
         d->childproc->setEnvironment("CVS_RSH", d->rsh);
