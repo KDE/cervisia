@@ -24,10 +24,12 @@
 const int LogTreeView::BORDER = 8;
 const int LogTreeView::INSPACE = 3;
 
-static bool static_initialized = false;
-static int static_width;
-static int static_height;
-
+namespace
+{
+    bool static_initialized = false;
+    int static_width;
+    int static_height;
+}
 
 class LogTreeItem
 {
