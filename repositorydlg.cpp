@@ -345,6 +345,11 @@ void RepositoryDialog::slotModifyClicked()
 
 void RepositoryDialog::slotRemoveClicked()
 {
+    // logout from pserver accounts so that they don't
+    // get re-added because of the .cvspass file. (BR #51129)
+    if( m_logoutButton->isEnabled() )
+        slotLogoutClicked();
+
     delete m_repoList->currentItem();
 }
 

@@ -1,3 +1,8 @@
+2003-10-04  Christian Loose  <christian.loose@hamburg.de>
+
+	* Do a cvs logout when a user removes a pserver repository item. 
+	  This way the repository isn't re-added because of the .cvspass file.
+
 2003-10-03  Christian Loose  <christian.loose@hamburg.de>
 
 	* Added support to add or remove watches to the cvs DCOP service. 
