@@ -64,9 +64,6 @@ AddRepositoryDialog::AddRepositoryDialog(const QString &repo, QWidget *parent, c
     (void) new QRadioButton(i18n("2"), compression_group);
     (void) new QRadioButton(i18n("3"), compression_group);
 
-    // open cvs DCOP service configuration file
-    serviceConfig = new KConfig("cvsservicerc");
-
     connect( repo_edit, SIGNAL(textChanged(const QString&)),
              this, SLOT(repoChanged()) );
     repoChanged();
@@ -81,8 +78,6 @@ AddRepositoryDialog::~AddRepositoryDialog()
     if (!options)
         options = new Options;
     options->size = size();
-    
-    delete serviceConfig;
 }
 
 
@@ -151,12 +146,6 @@ void AddRepositoryDialog::repoChanged()
     rsh_edit->setEnabled((!repo.startsWith(":pserver:"))
                          && repo.contains(":"));
     compression_group->setEnabled(repo.contains(":"));
-
-    // read compression level from cvs DCOP service configuration
-    serviceConfig->setGroup(QString::fromLatin1("Repository-") + repo);
-    int n = serviceConfig->readNumEntry("Compression", -1);
-    
-    compression_group->setButton(n+1);
 }
 
 #include "addrepositorydlg.moc"

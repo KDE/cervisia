@@ -54,8 +54,6 @@ private:
     KLineEdit *repo_edit;
     KLineEdit *rsh_edit;
     QButtonGroup *compression_group;
-    
-    KConfig* serviceConfig;
 };
 
 #endif
