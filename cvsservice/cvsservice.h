@@ -184,6 +184,10 @@ k_dcop:
     DCOPRef logout(const QString& repository);
 
     /**
+     */
+    DCOPRef makePatch();
+    
+    /**
      * @param repository
      *
      * @return A DCOP reference to the cvs job or in case of failure a

@@ -1230,29 +1230,30 @@ void CervisiaPart::slotShowEditors()
 
 void CervisiaPart::slotMakePatch()
 {
-    CvsProgressDialog l("Diff", widget());
-    l.setCaption(i18n("CVS Diff"));
-
-    QString cmdline = cvsClient(repository, config());
-    cmdline += " diff -uR 2>/dev/null";
-    if (!l.execCommand(sandbox, repository, cmdline, "", config()))
+    DCOPRef job = cvsService->makePatch();
+    if( !cvsService->ok() )
+        return;
+    
+    ProgressDialog dlg(widget(), "Diff", job, "", i18n("CVS Diff"));
+    if( !dlg.execute() )
         return;
 
-    QString filename = KFileDialog::getSaveFileName();
-    if (filename.isEmpty())
+    QString fileName = KFileDialog::getSaveFileName();    
+    if( fileName.isEmpty() )
         return;
-
-    QFile f(filename);
-    if (!f.open(IO_WriteOnly))
+    
+    QFile f(fileName);
+    if( !f.open(IO_WriteOnly) )
     {
         KMessageBox::sorry(widget(),
                            i18n("Could not open file for writing."),
                            "Cervisia");
         return;
     }
+    
     QTextStream t(&f);
     QString line;
-    while (l.getOneLine(&line))
+    while( dlg.getLine(line) )
         t << line << '\n';
 
     f.close();

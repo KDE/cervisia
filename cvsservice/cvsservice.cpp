@@ -509,6 +509,24 @@ DCOPRef CvsService::logout(const QString& repository)
 }
 
 
+DCOPRef CvsService::makePatch()
+{
+    if( !d->hasWorkingCopy() )
+        return DCOPRef();
+
+    // create a cvs job
+    CvsJob* job = d->createCvsJob();
+
+    // assemble the command line
+    // cvs diff -uR 2>/dev/null
+    *job << d->repository->cvsClient() << "diff" << "-uR"
+         << "2>/dev/null";
+
+    // return a DCOP reference to the cvs job
+    return DCOPRef(d->appId, job->objId());
+}
+
+
 DCOPRef CvsService::moduleList(const QString& repository)
 {
     std::auto_ptr<Repository> repo(new Repository(repository));
