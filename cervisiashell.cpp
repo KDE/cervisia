@@ -49,7 +49,6 @@ CervisiaShell::CervisiaShell( const char *name )
         return;
     }
     
-
     setupActions();
     
     //
@@ -72,7 +71,9 @@ CervisiaShell::CervisiaShell( const char *name )
     // and apply the previously saved settings
     setAutoSaveSettings("MainWindow", true);
     
-    readSettings();
+    // if the session is restoring, we already read the settings
+    if( !kapp->isRestored() )
+        readSettings();
 }
 
 CervisiaShell::~CervisiaShell()
@@ -169,21 +170,19 @@ bool CervisiaShell::queryExit()
 }
 
 
-void CervisiaShell::readSettings()
+void CervisiaShell::readProperties(KConfig* config)
 {   
-    KConfig* config = KGlobal::config();
-    
-    config->setGroup("Session");
     m_lastOpenDir = config->readPathEntry("Current Directory");
+    
+    // if the session is restoring, make sure we open the URL 
+    // since it's not handled by main()
+    if( kapp->isRestored() )
+        openURL();
 }
 
 
-void CervisiaShell::writeSettings()
+void CervisiaShell::saveProperties(KConfig* config)
 {
-    KConfig* config = KGlobal::config();
-    
-    config->setGroup("Session");
-
     // Save current working directory (if part was created)
     if( m_part )
     {
@@ -192,6 +191,24 @@ void CervisiaShell::writeSettings()
         // write to disk
         config->sync();
     }
+}
+
+
+void CervisiaShell::readSettings()
+{
+    KConfig* config = KGlobal::config(); 
+    config->setGroup("Session");
+    
+    readProperties(config);
+}
+
+
+void CervisiaShell::writeSettings()
+{
+    KConfig* config = KGlobal::config();  
+    config->setGroup("Session");
+    
+    saveProperties(config);
 }
 
 

@@ -46,6 +46,8 @@ protected:
     void setupActions();
     
     bool queryExit();
+    virtual void readProperties(KConfig* config);
+    virtual void saveProperties(KConfig* config);
 
 private:
     void readSettings();
