@@ -12,11 +12,12 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-
+#include <qlabel.h>
 #include <qmessagebox.h>
 #include <qpushbutton.h>
 #include <qpopupmenu.h>
 #include <qtextstream.h>
+#include <qtooltip.h>
 #include <qcursor.h>
 #include <kaboutdata.h>
 #include <kaction.h>
@@ -25,6 +26,7 @@
 #include <kinstance.h>
 #include <klocale.h>
 #include <kprocess.h>
+#include <kstatusbar.h>
 #include <kstdaction.h>
 #include <kxmlguifactory.h>
 #include <krun.h>
@@ -116,6 +118,21 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     protocol->setFocusPolicy( QWidget::StrongFocus );
 
     setWidget(splitter);
+
+#if KDE_IS_VERSION(3,1,90)
+    statusBar = new CervisiaStatusBarExtension(this);
+    
+    // create the active filter indicator and add it to the statusbar
+    filterLabel = new QLabel("UR", statusBar->statusBar());
+    filterLabel->setFixedSize(filterLabel->sizeHint());
+    filterLabel->setText("");
+    QToolTip::add(filterLabel, 
+                  i18n("F - All files are hidden, the tree shows only directories\n"
+                       "N - All up-to-date files are hidden\n"
+                       "R - All removed files are hidden"));
+    statusBar->addStatusBarItem(filterLabel, 0, true);
+#endif
+
     setupActions();
     readSettings();
     connect( update, SIGNAL( selectionChanged() ), this, SLOT( updateActions() ) );
@@ -1606,9 +1623,7 @@ void CervisiaPart::setFilter()
                 str += "R";
         }
 
-    // TODO: Find a new way to handle the status items as you can't do this with KParts yet
-    //filterLabel->setText(str);
-    emit filterStatusChanged(str);
+    filterLabel->setText(str);
 }
 
 

@@ -15,9 +15,13 @@
 #ifndef CERVISIAPART_H
 #define CERVISIAPART_H
 
+#include <kdeversion.h>
 #include <kparts/part.h>
 #include <kparts/browserextension.h>
 #include <kparts/genericfactory.h>
+#if KDE_IS_VERSION(3,1,90)
+#include <kparts/statusbarextension.h>
+#endif
 
 #include "addremovedlg.h"
 #include "commitdlg.h"
@@ -33,6 +37,19 @@ class ProtocolView;
 class KAboutData;
 class KRecentFilesAction;
 class CvsService_stub;
+
+
+#if KDE_IS_VERSION(3,1,90)
+class CervisiaStatusBarExtension : public KParts::StatusBarExtension
+{
+public:
+    CervisiaStatusBarExtension(KParts::ReadOnlyPart* parent)
+        : KParts::StatusBarExtension(parent, "CervisiaStatusBarExtension")
+    {
+    }
+};
+#endif
+
 
 /**
  * An embeddable Cervisia viewer.
@@ -54,9 +71,6 @@ public:
     QString sandBox() const { return sandbox; }
 
     static KAboutData* createAboutData();
-
-signals:
-    void filterStatusChanged(QString status);
 
 public slots:
     // unused because we overwrite the default behaviour of openURL()
@@ -109,6 +123,7 @@ public slots:
     void slotHideFiles();
     void slotHideUpToDate();
     void slotHideRemoved();
+
     void slotHideNotInCVS();
     void slotHideEmptyDirectories();
 
@@ -151,8 +166,6 @@ private:
     bool hasRunningJob;
     QSplitter *splitter;
 
-    // TODO: Find a new way to handle the status items as you can't do this with KParts yet
-    //    QLabel *filterLabel;
     QString sandbox;
     QString repository;
 
@@ -166,6 +179,10 @@ private:
     KRecentFilesAction *recent;
 
     CvsService_stub* cvsService;
+#if KDE_IS_VERSION(3,1,90)
+    CervisiaStatusBarExtension* statusBar;
+    QLabel*                     filterLabel;
+#endif
 };
 
 typedef KParts::GenericFactory<CervisiaPart> CervisiaFactory;

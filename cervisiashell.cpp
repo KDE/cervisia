@@ -15,21 +15,19 @@
 
 #include "cervisiashell.h"
 
-#include <qlabel.h>
-#include <qtooltip.h>
 #include <kapplication.h>
 #include <kconfig.h>
 #include <kedittoolbar.h>
 #include <kfiledialog.h>
 #include <khelpmenu.h>
 #include <kkeydialog.h>
+#include <klibloader.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kstdaction.h>
 #include <kstatusbar.h>
 #include <kurl.h>
 
-#include "cervisiapart.h"
 
 
 CervisiaShell::CervisiaShell( const char *name )
@@ -40,8 +38,8 @@ CervisiaShell::CervisiaShell( const char *name )
     KLibFactory* factory = KLibLoader::self()->factory("libcervisiapart");
     if( factory )
     {
-        part = static_cast<CervisiaPart*>(factory->create(this,
-                                            "cervisiaview", "CervisiaPart"));
+        part = static_cast<KParts::ReadOnlyPart*>(factory->create(this,
+                                      "cervisiaview", "KParts::ReadOnlyPart"));
         if( part )
             setCentralWidget(part->widget());
     }
@@ -54,18 +52,7 @@ CervisiaShell::CervisiaShell( const char *name )
     
 
     setupActions();
-
-    // create the active filter indicator and add it to the statusbar
-    filterLabel = new QLabel("UR", statusBar());
-    filterLabel->setFixedSize(filterLabel->sizeHint());
-    filterLabel->setText("");
-    QToolTip::add(filterLabel, i18n("F - All files are hidden, the tree shows only directories\n"
-                                    "N - All up-to-date files are hidden\n"
-                                    "R - All removed files are hidden"));
-    statusBar()->addWidget(filterLabel, 0, true);
-    connect( part, SIGNAL( filterStatusChanged(QString) ),
-             this, SLOT( slotChangeFilterStatus(QString) ) );
-
+    
     //
     // Magic needed for status texts
     //
@@ -164,11 +151,6 @@ void CervisiaShell::slotNewToolbarConfig()
     applyMainWindowSettings( KGlobal::config(), autoSaveGroup() );
 }
 
-void CervisiaShell::slotChangeFilterStatus(QString status)
-{
-    filterLabel->setText(status);
-}
-
 bool CervisiaShell::queryExit()
 {
     writeSettings();
@@ -192,7 +174,7 @@ void CervisiaShell::writeSettings()
     KConfig* config = KGlobal::config();
     
     config->setGroup("Session");
-    config->writeEntry("Current Directory", part->sandBox());
+    config->writeEntry("Current Directory", part->url().path());
     
     // write to disk
     config->sync();

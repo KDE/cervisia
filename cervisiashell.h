@@ -18,8 +18,6 @@
 
 #include <kparts/mainwindow.h>
 
-class QLabel;
-class CervisiaPart;
 class KRecentFilesAction;
 
 /**
@@ -43,7 +41,6 @@ public slots:
 
 protected slots:
     void slotNewToolbarConfig();
-    void slotChangeFilterStatus(QString status);
 
 protected:
     void setupActions();
@@ -54,9 +51,7 @@ private:
     void readSettings();
     void writeSettings();
 
-    CervisiaPart *part;
-    QLabel *filterLabel;
-
+    KParts::ReadOnlyPart *part;
 };
 
 #endif // CERVISIASHELL_H

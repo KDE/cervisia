@@ -1,3 +1,8 @@
+2003-02-10  Christian Loose  <christian.loose@hamburg.de>
+
+	* Remove CervisiaShell's dependency on CervisiaPart
+	* Moved filter status indicator to CervisiaPart
+
 2003-02-06  Christian Loose  <christian.loose@hamburg.de>
 
 	* Try to get the user name and email address for the
