@@ -94,8 +94,6 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     QCString appId;
     if( KApplication::startServiceByDesktopName("cvsservice", QStringList(), &error, &appId) )
     {
-        // FIXME: The container app (Konqueror o. CervisiaShell) crashes when
-        //        we can't start the cvs DCOP service
         KMessageBox::sorry(0, "Starting cvsservice failed with message: " +
             error, "Cervisia");
     }
@@ -163,10 +161,11 @@ CervisiaPart::~CervisiaPart()
 {
     // stop the cvs DCOP service and delete reference
     if( cvsService )
-      cvsService->quit();
+        cvsService->quit();
     delete cvsService;
-    
-    writeSettings();
+
+    if( cvsService )
+        writeSettings();
 }
 
 KConfig *CervisiaPart::config()
