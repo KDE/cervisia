@@ -56,7 +56,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     : KDialogBase(parent, name, false, QString::null,
                   Ok | Apply | Close | Help | User1 | User2 | User3, Close, true,
                   KGuiItem(i18n("&Annotate")),
-                  KGuiItem(i18n("&Diff")),
+                  KGuiItem(i18n("&Diff"), "vcs_diff"),
                   KGuiItem(i18n("&Find..."), "find"))
     , cvsService(0)
     , partConfig(cfg)

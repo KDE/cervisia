@@ -334,14 +334,14 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Difference to Repository (BASE)..."), CTRL+Key_D,
+    action = new KAction( i18n("&Difference to Repository (BASE)..."), "vcs_diff", CTRL+Key_D,
                           this, SLOT(slotDiffBase()),
                           actionCollection(), "view_diff_base" );
     hint = i18n("Shows the differences of the selected file to the checked out version (tag BASE)");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("Difference to Repository (HEAD)..."), CTRL+Key_H,
+    action = new KAction( i18n("Difference to Repository (HEAD)..."), "vcs_diff", CTRL+Key_H,
                           this, SLOT(slotDiffHead()),
                           actionCollection(), "view_diff_head" );
     hint = i18n("Shows the differences of the selected file to the newest version in the repository (tag HEAD)");
