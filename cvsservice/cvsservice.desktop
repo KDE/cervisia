@@ -1,7 +1,16 @@
 [Desktop Entry]
 Type=Service
 Name=CvsService
+Name[ca]=Servei de CVS
+Name[cs]=CVS služba
+Name[cy]=GwasanaethCVS
+Name[es]=Servicio CVS
+Name[hu]=CVS szolgáltatás
+Name[pt_BR]=ServiçoCVS
+Name[sv]=CVS-tjänst
+Name[tr]=CvsHizmeti
+Name[xx]=xxCvsServicexx
 Exec=cvsservice
 X-DCOP-ServiceType=Multi
 X-KDE-StartupNotify=false
-comment=A DCOP service that provides an interface to cvs
+Comment=A DCOP service that provides an interface to cvs
