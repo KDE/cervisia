@@ -72,6 +72,14 @@ DiffView::DiffView( bool withlinenos, bool withmarker,
     items.setAutoDelete(true);
     linenos = withlinenos;
     marker = withmarker;
+
+    config->setGroup("Colors");
+    QColor defaultColor=QColor(237, 190, 190);
+    diffChangeColor=config->readColorEntry("DiffChange",&defaultColor);
+    defaultColor=QColor(190, 190, 237);
+    diffInsertColor=config->readColorEntry("DiffInsert",&defaultColor);
+    defaultColor=QColor(190, 237, 190);
+    diffDeleteColor=config->readColorEntry("DiffDelete",&defaultColor);
 }
 
 
@@ -328,9 +336,9 @@ void DiffView::paintCell(QPainter *p, int row, int col)
     else
 	{
 	    backgroundColor =
-		(item->type==Change)? QColor(237, 190, 190)
-		: (item->type==Insert)? QColor(190, 190, 237)
-		: (item->type==Delete)? QColor(190, 237, 190)
+		(item->type==Change)? diffChangeColor
+		: (item->type==Insert)? diffInsertColor
+		: (item->type==Delete)? diffDeleteColor	
 		: (item->type==Neutral)? KGlobalSettings::alternateBackgroundColor() : KGlobalSettings::baseColor();
             p->setPen(KGlobalSettings::textColor());
             inverted = item->inverted;
@@ -364,6 +372,15 @@ DiffZoomWidget::DiffZoomWidget(QWidget *parent, const char *name)
     : QFrame(parent, name)
 {
     setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Minimum ) );
+
+    KConfig *config = CervisiaPart::config();
+    config->setGroup("Colors");
+    QColor defaultColor=QColor(237, 190, 190);
+    diffChangeColor=config->readColorEntry("DiffChange",&defaultColor);
+    defaultColor=QColor(190, 190, 237);
+    diffInsertColor=config->readColorEntry("DiffInsert",&defaultColor);
+    defaultColor=QColor(190, 237, 190);
+    diffDeleteColor=config->readColorEntry("DiffDelete",&defaultColor);
 }
 
 
@@ -435,9 +452,9 @@ void DiffZoomWidget::paintEvent(QPaintEvent *)
                         {
                             QColor color =
                               (c==' ')? KGlobalSettings::alternateBackgroundColor()
-                              : (c=='C')? QColor(237, 190, 190)
-                              : (c=='I')? QColor(190, 190, 237)
-                              : (c=='D')? QColor(190, 237, 190)
+                              : (c=='C')? diffChangeColor
+                              : (c=='I')? diffInsertColor
+                              : (c=='D')? diffDeleteColor
                               : (c=='N')? KGlobalSettings::alternateBackgroundColor() : KGlobalSettings::baseColor();
 
                             if (y2 == y1)

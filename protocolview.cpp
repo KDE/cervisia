@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
@@ -39,6 +39,14 @@ ProtocolView::ProtocolView(QWidget *parent, const char *name)
     KConfig *config = CervisiaPart::config();
     config->setGroup("LookAndFeel");
     setFont(config->readFontEntry("ProtocolFont"));
+    
+    config->setGroup("Colors");
+    QColor defaultColor = QColor(255, 100, 100);
+    conflictColor=config->readColorEntry("Conflict",&defaultColor);
+    defaultColor=QColor(190, 190, 237);
+    localChangeColor=config->readColorEntry("LocalChange",&defaultColor);
+    defaultColor=QColor(255, 240, 190);
+    remoteChangeColor=config->readColorEntry("RemoteChange",&defaultColor);
 }
 
 
@@ -148,12 +156,12 @@ void ProtocolView::appendLine(const QString &line)
     QColor color;
     // Colors are the same as in UpdateViewItem::paintCell()
     if (line.startsWith("C "))
-        color = QColor(255, 100, 100);
+        color = conflictColor;
     else if (line.startsWith("M ")
              || line.startsWith("A ") || line.startsWith("R "))
-        color = QColor(190, 190, 237);
+        color = localChangeColor;
     else if (line.startsWith("P "))
-        color = QColor(255, 240, 190);
+        color = remoteChangeColor;
 
     append(color.isValid()?
         QString("<FONT COLOR=\"#%1\">%2</FONT><BR>")

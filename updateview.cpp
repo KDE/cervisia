@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -34,13 +34,14 @@
 #include "misc.h"
 #include "cvsdir.h"
 
+#include "cervisiapart.h"
 
 class UpdateDirItem : public ListViewItem
 {
 public:
     UpdateDirItem( UpdateView *parent, QString dirname );
     UpdateDirItem( UpdateDirItem *parent, QString dirname );
- 
+
     QString dirPath();
     void syncWithDirectory();
     void syncWithEntries();
@@ -76,7 +77,7 @@ public:
         { return m_revision; }
     bool undefinedState() const
     { return m_undefined; }
-    
+
     virtual QString key(int col, bool) const;
     virtual QString text(int col) const;
     virtual void paintCell(QPainter *p, const QColorGroup &cg,
@@ -89,7 +90,7 @@ public:
     void setUndefinedState(bool b)
     { m_undefined = b; }
     void markUpdated(bool laststage, bool success, UpdateView::Filter filter);
-    
+
 private:
     QString m_filename;
     QString m_revision;
@@ -97,6 +98,10 @@ private:
     bool m_undefined;
     UpdateView::Status m_status;
     time_t m_timestamp;
+    
+    QColor conflictColor;
+    QColor localChangeColor;
+    QColor remoteChangeColor;
 };
 
 
@@ -107,7 +112,7 @@ UpdateDirItem::UpdateDirItem( UpdateDirItem *parent, QString dirname )
     m_dirname = dirname;
     m_opened = false;
 }
- 
+
  
 UpdateDirItem::UpdateDirItem( UpdateView *parent, QString dirname )
     : ListViewItem(parent)
@@ -382,10 +387,10 @@ void UpdateDirItem::setOpen(bool o)
 {
     if ( o )
         maybeScanDir(false);
-    
+
     QListViewItem::setOpen( o );
 }
- 
+
 
 QString UpdateDirItem::key(int col, bool) const
 {
@@ -406,7 +411,7 @@ QString UpdateDirItem::text(int col) const
 	case 0:  return m_dirname;
 	default: return "";
 	}
-}       
+}
 
 
 void UpdateDirItem::setup()
@@ -414,16 +419,25 @@ void UpdateDirItem::setup()
     setExpandable(true);
     QListViewItem::setup();
 }
- 
+
 
 UpdateViewItem::UpdateViewItem( ListViewItem *parent, QString filename )
-    : ListViewItem(parent) 
+    : ListViewItem(parent)
 {
     m_status = UpdateView::NotInCVS;
     m_filename = filename;
     m_revision = "";
     m_tag = "";
     m_undefined = false;
+
+    KConfig *config = CervisiaPart::config();
+    config->setGroup("Colors");
+     QColor defaultColor = QColor(255, 100, 100);
+    conflictColor=config->readColorEntry("Conflict",&defaultColor);
+    defaultColor=QColor(190, 190, 237);
+    localChangeColor=config->readColorEntry("LocalChange",&defaultColor);
+    defaultColor=QColor(255, 240, 190);
+    remoteChangeColor=config->readColorEntry("RemoteChange",&defaultColor);
 }
 
 
@@ -574,7 +588,7 @@ QString UpdateViewItem::text(int col) const
 	    switch (m_status)
 		{
 		case UpdateView::LocallyModified:
-		    return i18n("Locally Modified"); 
+		    return i18n("Locally Modified");
 		case UpdateView::LocallyAdded:
 		    return i18n("Locally Added"); 
 		case UpdateView::LocallyRemoved:
@@ -621,15 +635,15 @@ void UpdateViewItem::paintCell(QPainter *p, const QColorGroup &cg,
 			       int col, int width, int align)
 {
     QColor color =
-	(m_status == UpdateView::Conflict)? QColor(255, 100, 100)
+	(m_status == UpdateView::Conflict)? conflictColor
 	: (m_status == UpdateView::LocallyModified ||
 	   m_status == UpdateView::LocallyAdded  ||
-	   m_status == UpdateView::LocallyRemoved)? QColor(190, 190, 237)
+	   m_status == UpdateView::LocallyRemoved)? localChangeColor
 	: (m_status == UpdateView::Patched ||
 	   m_status == UpdateView::Updated ||
            m_status == UpdateView::Removed ||
 	   m_status == UpdateView::NeedsPatch ||
-	   m_status == UpdateView::NeedsUpdate)? QColor(255, 240, 190)
+	   m_status == UpdateView::NeedsUpdate)? remoteChangeColor
 	: cg.base();
     QColorGroup mycg(cg);
     mycg.setBrush(QColorGroup::Base, color);
@@ -712,7 +726,7 @@ void UpdateView::setFilter(Filter filter)
                 {
                     if (childItem2->myFirstChild())
                         s.push(childItem2);
-                    
+
                     if (!isDirItem(childItem2))
                         {
                             static_cast<UpdateViewItem*>(childItem2)->applyFilter(filt);

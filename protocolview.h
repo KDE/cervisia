@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -49,6 +49,10 @@ private:
     
     KShellProcess *childproc;
     QString buf;
+    
+    QColor conflictColor;
+    QColor localChangeColor;
+    QColor remoteChangeColor;
 };
 
 #endif

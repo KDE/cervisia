@@ -26,6 +26,7 @@
 #include <qhbuttongroup.h>
 #include <qradiobutton.h>
 #include <kbuttonbox.h>
+#include <kcolorbutton.h>
 #include <kconfig.h>
 #include <kfontdialog.h>
 #include <kglobal.h>
@@ -155,9 +156,36 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
 
     new QWidget(lookPage);
 
-    readSettings();
+    //
+    // Color Options
+    //
+    QGrid *colorsPage = addGridPage( 4, QGrid::Horizontal, i18n("Co&lors") );
 
-    setHelp("customization", "cervisia");
+    QLabel *conflictlabel = new QLabel( i18n("Conflict:"), colorsPage );
+    conflictbutton = new KColorButton( colorsPage);
+    conflictlabel->setBuddy( conflictbutton );
+
+    QLabel *diffchangelabel = new QLabel( i18n("Diff change:"), colorsPage );
+    diffchangebutton = new KColorButton( colorsPage);
+    diffchangelabel->setBuddy( diffchangebutton );
+
+    QLabel *localchangelabel = new QLabel( i18n("Local change:"), colorsPage );
+    localchangebutton = new KColorButton( colorsPage);
+    localchangelabel->setBuddy( localchangebutton );
+
+    QLabel *diffinsertlabel = new QLabel( i18n("Diff insertion:"), colorsPage );
+    diffinsertbutton = new KColorButton( colorsPage);
+    diffinsertlabel->setBuddy( diffinsertbutton );
+
+    QLabel *remotechangelabel = new QLabel( i18n("Remote change:"), colorsPage );
+    remotechangebutton = new KColorButton( colorsPage);
+    remotechangelabel->setBuddy( remotechangebutton );
+
+    QLabel *diffdeletelabel = new QLabel( i18n("Diff deletion:"), colorsPage );
+    diffdeletebutton = new KColorButton( colorsPage);
+    diffdeletelabel->setBuddy( diffdeletebutton );
+
+    new QWidget(colorsPage);
 
 #if 0
     QGridLayout *editorlayout = new QGridLayout(editorgroup, 4, 2, 10, 6);
@@ -189,6 +217,10 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
             objectedit, SLOT(setEnabled(bool)));
     editorlayout->activate();
 #endif
+
+    readSettings();
+
+    setHelp("customization", "cervisia");
 }
 
 
@@ -213,6 +245,21 @@ void SettingsDialog::readSettings()
     annotatefontbox->setFont(config->readFontEntry("AnnotateFont"));
     difffontbox->setFont(config->readFontEntry("DiffFont"));
     splitterbox->setChecked(config->readBoolEntry("SplitHorizontally",true));
+
+    config->setGroup("Colors");
+    QColor defaultColor = QColor(255, 100, 100);
+    conflictbutton->setColor(config->readColorEntry("Conflict",&defaultColor));
+    defaultColor=QColor(190, 190, 237);
+    localchangebutton->setColor(config->readColorEntry("LocalChange",&defaultColor));
+    defaultColor=QColor(255, 240, 190);
+    remotechangebutton->setColor(config->readColorEntry("RemoteChange",&defaultColor));
+
+    defaultColor=QColor(237, 190, 190);
+    diffchangebutton->setColor(config->readColorEntry("DiffChange",&defaultColor));
+    defaultColor=QColor(190, 190, 237);
+    diffinsertbutton->setColor(config->readColorEntry("DiffInsert",&defaultColor));
+    defaultColor=QColor(190, 237, 190);
+    diffdeletebutton->setColor(config->readColorEntry("DiffDelete",&defaultColor));
 }
 
 
@@ -241,6 +288,14 @@ void SettingsDialog::writeSettings()
     config->writeEntry("AnnotateFont", annotatefontbox->font());
     config->writeEntry("DiffFont", difffontbox->font());
     config->writeEntry("SplitHorizontally", splitterbox->isChecked());
+
+    config->setGroup("Colors");
+    config->writeEntry("Conflict",conflictbutton->color());
+    config->writeEntry("LocalChange",localchangebutton->color());
+    config->writeEntry("RemoteChange",remotechangebutton->color());
+    config->writeEntry("DiffChange",diffchangebutton->color());
+    config->writeEntry("DiffInsert",diffinsertbutton->color());
+    config->writeEntry("DiffDelete",diffdeletebutton->color());
 
     // I'm not yet sure whether this is a hack or not :-)
     QWidgetListIt it(*QApplication::allWidgets());

@@ -27,6 +27,7 @@ class KIntNumInput;
 class KLineEdit;
 class KConfig;
 class KURLRequester;
+class KColorButton;
 
 
 class FontButton : public QPushButton
@@ -76,6 +77,12 @@ private:
     FontButton *annotatefontbox;
     FontButton *difffontbox;
     QCheckBox *splitterbox;
+    KColorButton *conflictbutton;
+    KColorButton *localchangebutton;
+    KColorButton *remotechangebutton;
+    KColorButton *diffchangebutton;
+    KColorButton *diffinsertbutton;
+    KColorButton *diffdeletebutton;
 };
 
 #endif

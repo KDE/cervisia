@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -32,7 +32,7 @@ protected:
 class DiffView : public QtTableView
 {
     Q_OBJECT
-    
+
 public:
     enum DiffType { Change, Insert, Delete, Neutral, Unchanged, Separator };
 
@@ -81,13 +81,17 @@ private:
     int textwidth;
     DiffView *partner;
     static const int BORDER;
+
+    QColor diffChangeColor;
+    QColor diffInsertColor;
+    QColor diffDeleteColor;
 };
 
 
 class DiffZoomWidget : public QFrame
 {
     Q_OBJECT
-    
+
 public:
     DiffZoomWidget(QWidget *parent=0, const char *name=0);
     ~DiffZoomWidget();
@@ -98,9 +102,13 @@ public:
 protected:
     void paintEvent(QPaintEvent *);
     bool eventFilter(QObject *, QEvent *e);
-        
+
 private:
     DiffView *diffview;
+    
+    QColor diffChangeColor;
+    QColor diffInsertColor;
+    QColor diffDeleteColor;
 };
 
 #endif
