@@ -73,7 +73,7 @@ Repository::Repository(const QString& repository)
 {
     d->location = repository;
     d->readConfig();
-    
+
     // other cvsservice instances might change the configuration file
     // so we watch it for changes
     d->configFileName = locate("config", "cvsservicerc");
@@ -140,7 +140,7 @@ bool Repository::setWorkingCopy(const QString& dirName)
 
     // determine path to the repository
     QFile rootFile(path + "/CVS/Root");
-    if( rootFile.open(IO_ReadOnly) ) 
+    if( rootFile.open(IO_ReadOnly) )
     {
         QTextStream stream(&rootFile);
         d->location = stream.readLine();
@@ -188,16 +188,26 @@ void Repository::slotConfigDirty(const QString& fileName)
 void Repository::Private::readConfig()
 {
     KConfig* config = kapp->config();
-    
-    // FIXME: This doesn't work when $workingCopy/CVS/Root contains
-    //        :pserver:user@cvs.kde.org:/home/kde
-    //        but the configuration was saved in group
-    //        :pserver:user@cvs.kde.org:2401/home/kde
+
+    // Sometimes the location can be unequal to the entry in the CVS/Root.
     //
-    // This can happen when the repository was added to list
-    // because of an entry in the .cvspass file (see repository.dlg:159)
+    // This can happen when the checkout was done with a repository name
+    // like :pserver:user@cvs.kde.org:/home/kde. When cvs then saves the
+    // name into the .cvspass file, it adds the default cvs port to it like
+    // this :pserver:user@cvs.kde.org:2401/home/kde. This name is then also
+    // used for the configuration group.
     //
-    config->setGroup(QString::fromLatin1("Repository-") + location);
+    // In order to be able to read this group, we then have to manually add
+    // the port number to it.
+    QString repositoryGroup = QString::fromLatin1("Repository-") + location;
+    if( !config->hasGroup(repositoryGroup) )
+    {
+        // add port to location
+        int insertPos = repositoryGroup.findRev(':') + 1;
+        repositoryGroup.insert(insertPos, "2401");
+    }
+
+    config->setGroup(repositoryGroup);
 
     // see if there is a specific compression level set for this repository
     compressionLevel = config->readNumEntry("Compression", -1);
@@ -217,7 +227,7 @@ void Repository::Private::readConfig()
 
     // get path to cvs client programm
     config->setGroup("General");
-    client = config->readPathEntry("CVSPath", "cvs");   
+    client = config->readPathEntry("CVSPath", "cvs");
 }
 
 
