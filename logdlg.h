@@ -56,6 +56,7 @@ public:
 
 protected slots:
     void slotOk();
+    void slotApply();
 
 private slots:
     void findClicked();

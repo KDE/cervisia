@@ -26,6 +26,7 @@
 #include <qwhatsthis.h>
 #include <kconfig.h>
 #include <kdebug.h>
+#include <kfiledialog.h>
 #include <kfinddialog.h>
 #include <kglobalsettings.h>
 #include <kiconloader.h>
@@ -51,7 +52,7 @@
 
 LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     : KDialogBase(parent, name, false, QString::null,
-                  Ok | Close | Help | User1 | User2 | User3, Close, true,
+                  Ok | Apply | Close | Help | User1 | User2 | User3, Close, true,
                   KGuiItem(i18n("&Annotate")),
                   KGuiItem(i18n("&Diff")),
                   KGuiItem(i18n("&Find..."), "find"))
@@ -179,7 +180,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     setButtonTip(Ok, QString::null);
     setButtonWhatsThis(Ok, QString::null);
 #endif
-
+    setButtonGuiItem(Apply, KGuiItem(i18n("Create Patch"), "", "", ""));
     setHelp("browsinglogs");
 
     setWFlags(Qt::WDestructiveClose | getWFlags());
@@ -414,6 +415,46 @@ void LogDialog::slotOk()
         url.setPath(tempFileName);
         (void) new KRun(url, 0, true, false);
     }
+}
+
+
+void LogDialog::slotApply()
+{
+    if( selectionA.isEmpty() )
+    {
+        KMessageBox::information(this,
+            i18n("Please select revision A or revisions A and B first."),
+            "Cervisia");
+        return;
+    }
+    
+    DCOPRef job = cvsService->diff(filename, selectionA, selectionB, "-uR", 3);
+    if( !cvsService->ok() )
+        return;
+
+    ProgressDialog dlg(this, "Diff", job, "", i18n("CVS Diff"));
+    if( !dlg.execute() )
+        return;
+
+    QString fileName = KFileDialog::getSaveFileName();
+    if( fileName.isEmpty() )
+        return;
+
+    QFile f(fileName);
+    if( !f.open(IO_WriteOnly) )
+    {
+        KMessageBox::sorry(this,
+                           i18n("Could not open file for writing."),
+                           "Cervisia");
+        return;
+    }
+
+    QTextStream t(&f);
+    QString line;
+    while( dlg.getLine(line) )
+        t << line << '\n';
+
+    f.close();    
 }
 
 

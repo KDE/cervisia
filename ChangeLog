@@ -1,3 +1,10 @@
+2004-06-21  Christian Loose  <christian.loose@kdemail.net>
+
+	* Implemented wish #66231:
+	  Added new 'Create Patch' button to the log dialog. This
+	  feature makes it possible to create a patch between 
+	  arbitrary CVS revisions.
+
 2004-06-02  Christian Loose  <christian.loose@kdemail.net>
 
 	* Implemented wish #77894:
