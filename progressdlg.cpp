@@ -6,10 +6,13 @@
 #include <qstringlist.h>
 #include <qtimer.h>
 #include <qvbox.h>
+
+#include <cvsjob_stub.h>
 #include <dcopref.h>
 #include <kanimwidget.h>
 #include <kapplication.h>
 #include <kconfig.h>
+
 #include "cervisiapart.h"
 
 
@@ -19,7 +22,7 @@ struct ProgressDialog::Private
     bool            isShown;
     bool            hasError;
 
-    DCOPRef         job;
+    CvsJob_stub*    cvsJob;
     QString         buffer;
     QString         errorId1, errorId2;
     QStringList     output;
@@ -41,7 +44,7 @@ ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,
     d->isCancelled = false;
     d->isShown     = false;
     d->hasError    = false;
-    d->job         = job;
+    d->cvsJob      = new CvsJob_stub(job.app(), job.obj());
     d->buffer      = "";
 
     d->errorId1 = "cvs " + errorIndicator + ":";
@@ -53,6 +56,7 @@ ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,
 
 ProgressDialog::~ProgressDialog()
 {
+    delete d->cvsJob;
     delete d;
 }
 
@@ -91,15 +95,15 @@ bool ProgressDialog::execute()
     unsigned timeout = cfg->readUnsignedNumEntry("Timeout", 4000);
 
     // get command line and display it
-    QString cmdLine = d->job.call("cvsCommand");
+    QString cmdLine = d->cvsJob->cvsCommand();
     d->resultbox->insertItem(cmdLine);
 
     // establish connections to the signals of the cvs job
-    connectDCOPSignal(d->job.app(), d->job.obj(), "jobExited(bool, int)",
+    connectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "jobExited(bool, int)",
                       "slotJobExited(bool, int)", true);
-    connectDCOPSignal(d->job.app(), d->job.obj(), "receivedStdout(QString)",
+    connectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "receivedStdout(QString)",
                       "slotReceivedOutputNonGui(QString)", true);
-    connectDCOPSignal(d->job.app(), d->job.obj(), "receivedStderr(QString)",
+    connectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "receivedStderr(QString)",
                       "slotReceivedOutputNonGui(QString)", true);
 
     // we wait for 4 seconds (or the timeout set by the user) before we
@@ -108,7 +112,7 @@ bool ProgressDialog::execute()
     connect(d->timer, SIGNAL(timeout()), this, SLOT(slotTimeoutOccurred()));
     d->timer->start(timeout, true);
 
-    bool started = d->job.call("execute");
+    bool started = d->cvsJob->execute();
     if( !started )
         return false;
 
@@ -179,9 +183,9 @@ void ProgressDialog::slotCancel()
 {
     d->isCancelled = true;
 
-    bool isRunning = d->job.call("isRunning");
+    bool isRunning = d->cvsJob->isRunning();
     if( isRunning )
-        d->job.send("cancel");
+        d->cvsJob->cancel();
     else
         kapp->exit_loop();
 }
@@ -198,9 +202,9 @@ void ProgressDialog::stopNonGuiPart()
 {
     d->timer->stop();
 
-    disconnectDCOPSignal(d->job.app(), d->job.obj(), "receivedStdout(QString)",
+    disconnectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "receivedStdout(QString)",
                       "slotReceivedOutputNonGui(QString)");
-    disconnectDCOPSignal(d->job.app(), d->job.obj(), "receivedStderr(QString)",
+    disconnectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "receivedStderr(QString)",
                       "slotReceivedOutputNonGui(QString)");
 
     kapp->exit_loop();
@@ -209,9 +213,9 @@ void ProgressDialog::stopNonGuiPart()
 
 void ProgressDialog::startGuiPart()
 {
-    connectDCOPSignal(d->job.app(), d->job.obj(), "receivedStdout(QString)",
+    connectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "receivedStdout(QString)",
                       "slotReceivedOutput(QString)", true);
-    connectDCOPSignal(d->job.app(), d->job.obj(), "receivedStderr(QString)",
+    connectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "receivedStderr(QString)",
                       "slotReceivedOutput(QString)", true);
 
     show();
