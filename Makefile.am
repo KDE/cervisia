@@ -1,6 +1,6 @@
 INCLUDES = $(all_includes)
 LDFLAGS	= $(all_libraries) $(KDE_RPATH)
-CXXFLAGS = -g -fpermissive -UQT_NO_COMPAT -D_XOPEN_SOURCE=500 -D_BSD_SOURCE
+AM_CPPFLAGS = -UQT_NO_COMPAT -D_XOPEN_SOURCE=500 -D_BSD_SOURCE
 
 bin_PROGRAMS = cervisia
 lib_LTLIBRARIES = libcervisia.la
