@@ -44,7 +44,12 @@ ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,
     d->isCancelled = false;
     d->isShown     = false;
     d->hasError    = false;
+
+#if KDE_IS_VERSION(3,2,0)
     d->cvsJob      = new CvsJob_stub(job);
+#else
+    d->cvsJob      = new CvsJob_stub(job.app(), job.obj());
+#endif
     d->buffer      = "";
 
     d->errorId1 = "cvs " + errorIndicator + ":";
