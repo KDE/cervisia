@@ -25,7 +25,7 @@
 #include "cvsservice.h"
 
 
-int main(int argc, char** argv)
+extern "C" int kdemain(int argc, char** argv)
 {
     KAboutData about("cvsservice", I18N_NOOP("CVS DCOP service"), "0.1",
             I18N_NOOP("DCOP service for CVS"), KAboutData::License_LGPL,
