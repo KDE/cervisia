@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -71,8 +71,7 @@ UpdateDialog::UpdateDialog(CvsService_stub* service,
     tagedit_layout->addWidget(tag_combo);
     tagedit_layout->addWidget(tag_button);
     
-    bydate_button = new QRadioButton(i18n("Update to &date:\n"
-                                          "(Possible format: 'yyyy-mm-dd')"), mainWidget);
+    bydate_button = new QRadioButton(i18n("Update to &date ('yyyy-mm-dd'):"), mainWidget);
     layout->addWidget(bydate_button);
 
     date_edit = new KLineEdit(mainWidget);

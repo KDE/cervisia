@@ -228,11 +228,11 @@ bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
 
     setCaption(i18n("CVS Diff: %1").arg(fileName));
     revlabel1->setText( revA.isEmpty()?
-                        i18n("Repository")
-                        : i18n("Revision ")+revA );
+                        i18n("Repository:")
+                        : i18n("Revision ")+revA+":" );
     revlabel2->setText( revB.isEmpty()?
-                        i18n("Working dir")
-                        : i18n("Revision ")+revB );
+                        i18n("Working dir:")
+                        : i18n("Revision ")+revB+":" );
 
     KConfigGroupSaver cs(&partConfig, "General");
 
