@@ -1,3 +1,8 @@
+2004-07-11  Christian Loose  <christian.loose@kdemail.net>
+
+	* Fix bug #83239:
+	  Fixed retrieving author from cvs log output.
+
 2004-07-09  Christian Loose  <christian.loose@kdemail.net>
 
 	* Implemented wish #75825:

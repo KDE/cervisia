@@ -281,13 +281,19 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
                 break;
             case Author:
                 {
-                    QStringList strlist = splitLine(line);
-                    // convert date in ISO format (YYYY-MM-DDTHH:MM:SS)
-                    strlist[1].replace('/', '-');
-                    strlist[2].truncate(8); // Time foramt is HH:MM:SS
-                    logInfo.m_dateTime.setTime_t(KRFCDate::parseDateISO8601(strlist[1] + 'T' + strlist[2]));
-                    logInfo.m_author = strlist[4];
-                    logInfo.m_author.truncate(logInfo.m_author.length() - 1); // remove trailing ';'
+                    QStringList strList = QStringList::split(";", line);
+
+                    // convert date into ISO format (YYYY-MM-DDTHH:MM:SS)
+                    int len = strList[0].length();
+                    QString dateTimeStr = strList[0].right(len-6); // remove 'date: '
+                    dateTimeStr.replace('/', '-');
+
+                    QString date = dateTimeStr.section(' ', 0, 0);
+                    QString time = dateTimeStr.section(' ', 1, 1);
+                    logInfo.m_dateTime.setTime_t(KRFCDate::parseDateISO8601(date + 'T' + time));
+
+                    logInfo.m_author = strList[1].section(':', 1, 1).stripWhiteSpace();
+
                     state = Branches;
                 }
                 break;
