@@ -1597,10 +1597,16 @@ bool CervisiaPart::openSandbox(const QString &dirname)
     repository = cvsRepository.location();
     emit setWindowCaption(sandbox + "(" + repository + ")");
 
-    Cervisia::GlobalIgnoreList().retrieveServerIgnoreList(cvsService, repository);
-
     // set m_url member for tabbed window modus of Konqueror
     m_url = KURL::fromPathOrURL(sandbox);
+
+    // *NOTICE*
+    // The order is important here. We have to set the m_url member before
+    // calling this function because the progress dialog uses the enter_loop()/
+    // exit_loop() methods. Those methods result in a call to queryExit() in
+    // cervisiashell.cpp which then uses the m_url member to save the last used
+    // directory.
+    Cervisia::GlobalIgnoreList().retrieveServerIgnoreList(cvsService, repository);
 
     QDir::setCurrent(sandbox);
     update->openDirectory(sandbox);
