@@ -60,71 +60,175 @@
 </keywordset>
 
 </bookinfo>
+
+<chapter id="introduction">
+<title>Introduction</title>
+
+<para>
+<ulink url="http://www.kde.org/apps/cervisia/">&cervisia;</ulink> is a
+user friendly version control system front-end. The aim is to support &CVS; and
+other version control system programs in a unified interface, featuring conflict
+resolution, difference and history viewers, status for the working folder files,
+and support for most version control functions. You can get &cervisia;
+by building the kdesdk module or installing the kdesdk package provided by your
+distribution. Currently, only &CVS; is supported, but other version control
+systems may be integrated in the future.
+</para>
+
+<para>
+A version control system is a tool to record, manage and distribute
+different versions of files. &CVS; is a version control system. It allows you
+to share your modifications easily, as each of the contributors can work in his
+local copy at the same time, without fear of overriding  each other
+modifications. It allows the recovery of past versions (useful for tracking
+bugs), the creation of branches (for experimental development or for releases
+of code) and more.
+</para>
+
+<para>
+The main <firstterm>repository</firstterm> usually holds a collaborative
+project (commercial or not), but you can take advantage of the nice revision
+control features offered by &CVS; even for a project developed exclusively by
+you. It is easy to set up a local repository, and you will gain the ability to
+track changes that caused bugs, revert changes, avoid accidental loss of
+information, &etc;
+</para>
+
+<para>
+While the repository holds the project files, and every contributor keeps their
+own local copy, named <firstterm>working folder</firstterm>. One can add his
+modifications to the main repository (a process called &quot;committing&quot;)
+and/or update his own copy to reflect recent changes made by other contributors.
+</para>
+
+</chapter>
    
 <chapter id="getting-started">
 <title>Getting Started</title>
 
 <sect1 id="accessing-repository">
 <title>Accessing The Repository</title>
-      
+    
 <para>
-In this section we assume that you are using &CVS; only on the client
-side. That means, someone (probably the administrator of the &CVS;
-repository) gave you an account on the server machine, and it's your
-job to checkout modules from the repository and work with them.
+In this section we show how to use the basic version control system
+functionality using &cervisia;, basically to checkout modules from the
+repository and work with them. To do that, you must have access to the
+repository as a client, meaning that someone (probably the administrator of
+the &CVS; repository) gave you an account on the server machine. Alternatively,
+you can easily create a local repository for your own project.
 </para>
 
-<para>
-&CVS; supports several methods of accessing the repository, which can
-be categorized as follows:
-</para>
-
-<variablelist>
-<varlistentry>
-<term>Local</term>
-<listitem>
-<para>
-The repository is something like <filename
-class="directory">/home/cvs</filename> and is simply stored in  a folder
-which is accessible from your computer.  It may physically be on a disk which
-is mounted via <acronym>NFS</acronym>, but this is an irrelevant detail.  If
-you often use a certain local repository, you will want to tell &cervisia;
-about it.
+<tip><para>
+If you plan to develop a complex project, it is a good idea to use the
+&CVS; features, even if you are the only developer. You can make all changes in
+the working folder, and use &cervisia; (or any other &CVS; tool) to update and
+commit. This way, you will gain the ability to track changes that caused bugs,
+revert changes, avoid accidental loss of information, etc. Using &cervisia;, it
+is simple to create a local repository.
 </para>
 
 <procedure>
-<title>Adding A Local Repository</title>
-<step><para>Open the Repositories dialog by choosing
+<title>Creating A Local Repository</title>
+
+<step><para>
+Open the <guilabel>Create New Repository (cvs init)</guilabel>
+dialog by choosing
 <menuchoice><guimenu>Repository</guimenu>
-<guimenuitem>Repositories...</guimenuitem></menuchoice>.</para></step>
+<guimenuitem>Create...</guimenuitem></menuchoice>.
+</para></step>
 
-<step><para>Press the <guibutton>Add...</guibutton>
-button.</para></step>
+<step><para>
+Press the <guilabel>...</guilabel> button to select the folder where you want to
+create the repository, or enter its location in the edit box. For instance, if
+want to place the repository in the <filename>/home/user</filename> folder, and
+to name it <filename>cvsroot</filename>, you should type
+<filename>/home/user/cvsroot</filename> in the edit box, or select the
+<filename>/home/user</filename> folder using the file picker, and add
+<filename>cvsroot</filename>.
+</para></step>
 
-<step><para>Enter the details of the repository in the dialog box that
-displays.</para></step>
+<step><para>
+Confirm by pressing the <guibutton>OK</guibutton>
+button. &cervisia; will create and initialize the new repository folder.
+</para></step>
 
-<step><para>Confirm by pressing the <guibutton>OK</guibutton>
-button.</para></step>
+<step><para>
+Now you can import your current work to the repository, or simply create a
+folder in the repository to start a new module from scratch.
+</para></step>
 
 </procedure>
 
-<para>In the future, whenever you use &cervisia; to check out a new
-module, &cervisia; will present you the repositories you have added
-here.</para>
+</tip>
 
+
+<para>
+&cervisia; offers an integrated front end to manage all your repository
+locations, the <guilabel>Configure Access to Repositories</guilabel> dialog.
+To display it, select the <menuchoice><guimenu>Repository</guimenu>
+<guimenuitem>Repositories...</guimenuitem></menuchoice> menu item.
+</para>
+
+<figure id="screenshot-repositories" float="1">
+<title>A screenshot of &cervisia;'s Configure Access to Repositories dialog</title>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="repositories.png"/></imageobject>
+<textobject><phrase>A screenshot of &cervisia;'s Configure Access to
+Repositories dialog</phrase></textobject>
+</mediaobject>
+</figure>
+
+<para>
+There are several methods to access a CVS repository. It may be reached via
+password authentication (:pserver:), secure shell (using :ext:), local
+repository (:local:), &etc;. The format for the repository  location is
+(optional items appear between square brackets):
+</para>
+
+<para>
+<filename>[:method:][[user][:password]@]hostname[:[port]]/path/to/repository</filename>
+</para>
+
+<para>
+Not all these items (user, password, hostname, port) are always necessary
+to access the repository. The required information depends on the access method
+used, which can be categorized as follows:
+</para>
+
+<variablelist>
+
+<varlistentry>
+<term>Local</term>
+
+<listitem>
+<para>
+The local access method is the default mathod used by &CVS;. Therefore, it is
+optional to add the :local: method to the repository location: you can enter
+simply the path to the folder which stores the &CVS;
+repository, and is accessible from your computer, like
+<filename class="directory">/path/to/repository</filename> or to give a real
+life example, <filename class="directory">/home/cvs</filename>.</para>
+
+<para>
+It may physically be on a disk which is mounted via <acronym>NFS</acronym>,
+but this is an irrelevant detail. If you created a local repository, the
+location will be simple the path to it.
+</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>rsh</term>
+
 <listitem>
-<para>The repository name is something like
-<literal>:ext:bernd@cvs.cervisia.sourceforge.net:/cvsroot/cervisia</literal>.</para>
+<para>
+The repository location is something like
+<filename>:ext:username@host.url.org:/path/to/repository</filename>.
+</para>
 
 <para>
 This method requires that you have a user account on the server machine (in
-this case, <systemitem class="systemname">cvs.sourceforge.net</systemitem> and
+this example, <systemitem class="systemname">host.url.org</systemitem> and
 use a remote shell for communication.  By default, &CVS; uses &rsh; for this
 purpose, however, &rsh; is long considered to be insecure, and is widely
 replaced by &ssh;.
@@ -136,27 +240,22 @@ $<envar>CVS_RSH</envar> to &ssh; when using the <command>cvs</command>
 client. &cervisia; supports this easily.
 </para>
 
-<para>
-Open the repositories dialog again, and press the
-<guibutton>Add...</guibutton> button. Now enter the name of the repository in
-the first line and the remote shell (&eg; &ssh;) in the second line. If you
-now confirm with the <guibutton>OK</guibutton> button, &cervisia; memorizes
-these settings.
-</para>
+<!-- TODO: verify if the above still apply -->
 
 <para>
 Note that &cervisia; can not answer possible password requests from the
 server machine. You must make sure that a remote login works without requiring
 you to enter the password. With plain vanilla &rsh;, this can be achieved for
-example by  creating a <filename>$<envar>HOME</envar>/.rhosts</filename> file
+example by  creating a <filename>.rhosts</filename> file in your home folder
 with a list of trusted hosts (see the &rsh; manpage).
 </para>
 
 <para> 
-With &ssh;, it can be achieved by copying your public key
-<filename>$<envar>HOME</envar>/.ssh/identity.pub</filename> to the server. In
-this case, the key must not be encrypted with a passphrase (see the &ssh;>
-manpage and the &CVS;/<acronym>SSH</acronym> <acronym>FAQ</acronym> on
+With &ssh;, it can be achieved by copying your public key located in the file
+<filename>identity.pub</filename>, located in the
+<filename>$<envar>HOME</envar>/.ssh/</filename> folder to the server. In this
+case, the key must not be encrypted with a passphrase see the &ssh;> manpage and
+the &CVS;/<acronym>SSH</acronym> <acronym>FAQ</acronym> on
 SourceForge). If you are unsure about these issues, ask your system
 administrator.
 </para>
@@ -166,38 +265,88 @@ administrator.
 
 <varlistentry>
 <term>pserver</term>
-<listitem>
 
+<listitem>
 <para>
-The repository name looks like
-<filename>:pserver:gehrmab@cvs.kde.org:/home/kde</filename>
+The repository location looks like
+<filename>:pserver:username@host.url.org:/path/to/repository</filename>
 </para>
 
 <para>
 This method accesses the server via a special protocol with a relatively weak
 authentication (<literal>pserver</literal> stands for password
-authentication). Before you can use such a server, you have to login. As this
-is not directly supported by &cervisia;, enter on the command line
+authentication). Before you can use such a server, you need a user name and
+password given by the &CVS; server administrator, and you have to login. Note
+that your &CVS; password authentication user name does not necessarily matches
+system's user name. Before accessing the &CVS; server, you will need to login.
 </para>
 
-<screen><prompt>%</prompt><userinput><command>cvs</command> <option>-d</option> <parameter>:pserver:joe@cvs.kde.org:/home/kde login</parameter></userinput></screen>
-
 <para>
-(of course, with your repository substituted). &CVS; will prompt you for your
-password and check with the server. If the password is ok, the repository
-name, together with the (slightly scrambled) password, will be appended to the
-file <filename>$<envar>HOME</envar>/.cvspass</filename>.  Whenever &CVS;
-accesses the repository, it will silently send the password to the server, so
-you do not have to take care of that once you have logged in. As everybody who
-knows your password can work with the repository in your name (and even do
-major damage to it), you should keep the
-<filename>$<envar>HOME</envar>/.cvspass</filename> secret and non-readable for
-others.
+Open source projects typically offer Anonymous CVS access to their
+sources. This means you can easily grab the latest sources, modify, and create
+patches (differences) against the repository without asking for a CVS account.
+As a general rule, Anonymous CVS uses password authentication (:pserver:), and
+is a read only repository, not allowing you to upload your changes directly.
 </para>
 
 </listitem>
 </varlistentry>
 </variablelist>
+
+<para>
+Knowing the access method and location to the repository, you can add it
+to &cervisia;'s repositories list:
+</para>
+
+<procedure>
+<title>Adding a New Repository</title>
+
+<step><para>
+Open the <guilabel>Configure Access to Repositories</guilabel> dialog by
+choosing the <menuchoice><guimenu>Repository</guimenu> 
+<guimenuitem>Repositories...</guimenuitem> </menuchoice>menu item.
+</para></step>
+
+<step><para>
+Press the <guilabel>Add...</guilabel> button to open the
+<guilabel>Add Repository</guilabel> dialog.
+</para></step>
+
+<step><para>
+Enter the repository location in the <guilabel>Repository:</guilabel> edit box.
+&cervisia; will automatically disable the areas of the dialog that are not
+relevant to the access method you entered.
+</para></step>
+
+<step><para>
+If you using the ext method to access the repository, enter the remote shell
+you wish to use (&eg; &ssh;) in the <guilabel>Use remote shell</guilabel> edit
+box.
+</para></step>
+
+<step><para>
+Press <guilabel>OK</guilabel>. You will see the repository you just entered
+on the repositories list.
+</para></step>
+
+<step><para>
+If the access method to the repository you just entered is password
+authentication (pserver), you will need to login before connecting the server.
+Click the repository on the list to select it, and press the
+<guilabel>Login...</guilabel> button. Enter your password in the pop-up dialog.
+</para>
+<para>
+If you successfully enter your password, the <guilabel>Status</guilabel>
+column entry of the pserver repository will change from 
+<guilabel>Not logged in</guilabel> to <guilabel>Logged in</guilabel>.
+</para></step>
+
+<step><para>
+Press <guilabel>OK</guilabel> to apply your modifications, or add another
+location to the list. &cervisia; will store as many locations as you like!.
+</para></step>
+
+</procedure>
 
 </sect1>
 
