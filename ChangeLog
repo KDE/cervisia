@@ -1,3 +1,9 @@
+2004-10-26  Christian Loose  <christian.loose@kdemail.net>
+
+	* Implemented wish #78696:
+	  Added possibility to get a notification, when a cvs commit job
+	  has finished.
+
 2004-10-14  André Wöbbeking  <Woebbeking@web.de>
 
 	* Added a search line (ala JuK and KMail) to the CVS log list view.

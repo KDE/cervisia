@@ -25,6 +25,7 @@
 #include <kinputdialog.h>
 #include <kinstance.h>
 #include <klocale.h>
+#include <knotifyclient.h>
 #include <kprocess.h>
 #include <kpropertiesdialog.h>
 #include <kstatusbar.h>
@@ -92,6 +93,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     , filterLabel( 0 )
     , m_editWithId(0)
     , m_currentEditMenu(0)
+    , m_jobType(Unknown)
 {
     KGlobal::locale()->insertCatalogue("cervisia");
 
@@ -937,6 +939,7 @@ void CervisiaPart::slotCommit()
 
         if( protocol->startJob() )
         {
+            m_jobType = Commit;
             showJobStart(cmdline);
             connect( protocol, SIGNAL(jobFinished(bool, int)), update, SLOT(finishJob(bool, int)) );
             connect( protocol, SIGNAL(jobFinished(bool, int)), this, SLOT(slotJobFinished()) );
@@ -1619,6 +1622,14 @@ void CervisiaPart::slotJobFinished()
 
     disconnect( protocol, SIGNAL(receivedLine(QString)),
                 update,   SLOT(processUpdateLine(QString)) );
+
+    if( m_jobType == Commit )
+    {
+        KNotifyClient::event(widget()->parentWidget()->winId(), "cvs_commit_done",
+                             i18n("A CVS commit to repository %1 is done")
+                             .arg(repository));
+        m_jobType = Unknown;
+    }
 }
 
 

@@ -1,0 +1,8 @@
+[!Global!]
+IconName=cervisia
+Comment=Cervisia
+
+[cvs_commit_done]
+Name=CVS commit job done
+Comment=A CVS commit job is done
+default_presentation=0

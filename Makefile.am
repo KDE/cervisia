@@ -48,7 +48,7 @@ partrcdir = $(kde_datadir)/cervisiapart
 partrc_DATA = cervisiaui.rc
 
 shellrcdir = $(kde_datadir)/cervisia
-shellrc_DATA = cervisiashellui.rc
+shellrc_DATA = cervisiashellui.rc eventsrc
 
 update_DATA = cervisia.upd
 update_SCRIPTS = move_repositories.pl change_colors.pl

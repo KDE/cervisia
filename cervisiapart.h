@@ -152,6 +152,8 @@ protected:
     virtual void guiActivateEvent(KParts::GUIActivateEvent* event);
 
 private:
+    enum JobType { Unknown, Commit };
+
     void setupActions();
 
     void readSettings();
@@ -190,6 +192,7 @@ private:
 
     int                         m_editWithId;
     Cervisia::EditWithMenu*     m_currentEditMenu;
+    JobType                     m_jobType;
 };
 
 typedef KParts::GenericFactory<CervisiaPart> CervisiaFactory;
