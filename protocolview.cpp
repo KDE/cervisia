@@ -160,13 +160,13 @@ void ProtocolView::appendLine(const QString &line)
     else if (line.startsWith("M ")
              || line.startsWith("A ") || line.startsWith("R "))
         color = localChangeColor;
-    else if (line.startsWith("P "))
+    else if (line.startsWith("P ") || line.startsWith("U "))
         color = remoteChangeColor;
 
     append(color.isValid()?
         QString("<FONT COLOR=\"#%1\">%2</FONT><BR>")
            .arg(colorAsString(color)).arg(line) :
-        QString("%1<BR>").arg(line));
+        QString("%1").arg(line));
 }
 
 
