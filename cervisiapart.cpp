@@ -970,7 +970,7 @@ void CervisiaPart::slotAnnotate()
 
     // Non-modal dialog
     AnnotateDialog *l = new AnnotateDialog();
-    if (l->parseCvsAnnotate(sandbox, repository, filename, ""))
+    if (l->parseCvsAnnotate(cvsService, filename, ""))
         l->show();
     else
         delete l;
