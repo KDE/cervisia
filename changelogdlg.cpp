@@ -15,13 +15,12 @@
 #include "changelogdlg.h"
 
 #include <qfile.h>
-#include <qmultilinedit.h>
 #include <qtextstream.h>
 #include <kconfig.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-
+#include <ktextedit.h>
 #include "misc.h"
 #include "cervisiapart.h"
 
@@ -40,13 +39,15 @@ ChangeLogDialog::ChangeLogDialog(QWidget *parent, const char *name)
 {
     setCaption(i18n("Edit ChangeLog"));
 
-    edit = new QMultiLineEdit(this);
+    edit = new KTextEdit(this);
     setMainWidget(edit);
     QFontMetrics fm(fontMetrics());
     edit->setMinimumSize(fm.width("0123456789")*8,
                          fm.lineSpacing()*20);
     edit->setFont(KGlobalSettings::fixedFont());
     edit->setFocus();
+    edit->setWordWrap(QTextEdit::NoWrap);
+    edit->setTextFormat(QTextEdit::PlainText);
 
     resize(sizeHint());
 
@@ -70,8 +71,7 @@ void ChangeLogDialog::done(int res)
                 }
             
             QTextStream stream(&f);
-            for(int i = 0 ; i < edit->numLines(); ++i)
-                stream << edit->textLine(i) << '\n';
+            stream << edit->text();
             f.close();
         }
     if (!options)
@@ -125,25 +125,16 @@ bool ChangeLogDialog::readFile(const QString &filename)
                     return false;
                 }
             QTextStream stream(&f);
-            while (!stream.eof())
-                {
-                    QString str = stream.readLine();
-
-                    // preserve empty lines
-                    if (str.isEmpty() && !stream.eof())
-                        str = "\n";
-
-                    edit->append(str);
-                }
+            edit->setText(stream.read());
             f.close();
         }
 
     KConfig *config = CervisiaPart::config();
     config->setGroup("General");
-    edit->insertLine("", 0);
-    edit->insertLine("\t* ", 0);
-    edit->insertLine("", 0);
-    edit->insertLine(dateStringISO8601() + "  " + config->readEntry("Username", userName()), 0);
+    edit->insertParagraph("", 0);
+    edit->insertParagraph("\t* ", 0);
+    edit->insertParagraph("", 0);
+    edit->insertParagraph(dateStringISO8601() + "  " + config->readEntry("Username", userName()), 0);
     edit->setCursorPosition(2, 10);
     
     return true;
@@ -154,27 +145,28 @@ QString ChangeLogDialog::message()
 {
     int no = 0;
     // Find first line which begins with non-whitespace
-    while (no < edit->numLines())
+    while (no < edit->lines())
         {
-            QString str = edit->textLine(no);
+            QString str = edit->text(no);
             if (!str.isEmpty() && !str[0].isSpace())
                 break;
             ++no;
         }
     ++no;
     // Skip empty lines
-    while (no < edit->numLines())
+    while (no < edit->lines())
         {
-            if (edit->textLine(no).isEmpty())
+            QString str = edit->text(no);
+            if( str.isEmpty() || str == " " )
                 break;
             ++no;
         }
     QString res;
     // Use all lines until one which begins with non-whitespace
     // Remove tabs or 8 whitespace at beginning of each line
-    while (no < edit->numLines())
+    while (no < edit->lines())
         {
-            QString str = edit->textLine(no);
+            QString str = edit->text(no);
             if (!str.isEmpty() && !str[0].isSpace())
                 break;
             if (!str.isEmpty() && str[0] == '\t')

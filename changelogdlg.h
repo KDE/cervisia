@@ -17,7 +17,7 @@
 
 #include <kdialogbase.h>
 
-class QMultiLineEdit;
+class KTextEdit;
 class KConfig;
 
 
@@ -44,7 +44,7 @@ private:
     static Options *options;
 
     QString fname;
-    QMultiLineEdit *edit;
+    KTextEdit *edit;
 };
 
 #endif

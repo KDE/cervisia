@@ -1,3 +1,8 @@
+2002-12-19  Christian Loose <christian.loose@hamburg.de>
+
+	* Replace deprecated QMultiLineEdit with KTextEdit in
+	  ChangeLog dialog
+
 2002-12-18  Christian Loose <christian.loose@hamburg.de>
 
 	* Added a new progress dialog that will replace
