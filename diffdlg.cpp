@@ -20,6 +20,7 @@
 #include <qlayout.h>
 #include <qkeycode.h>
 #include <qfileinfo.h>
+#include <qregexp.h>
 #include <kconfig.h>
 #include <klocale.h>
 #include <ktempfile.h>
@@ -175,26 +176,14 @@ void DiffDialog::comboActivated(int index)
 
 
 static void interpretRegion(QString line, int *linenoA, int *linenoB)
-{
-    //  No KRegExp in KDE1 :-(
-    line.remove(0, 2);
-    int pos1, pos2;
-    if ( (pos1 = line.find('-')) == -1)
+{   
+    QRegExp region( "^@@ -([0-9]+),([0-9]+) \\+([0-9]+),([0-9]+) @@.*$" );
+    
+    if (!region.exactMatch(line))
         return;
-    pos1++;
-    if ( (pos2 = line.find(',', pos1)) == -1)
-        return;
-    pos2++;
-    *linenoA = line.mid(pos1, pos2-pos1-1).toInt()-1;
-    if ( (pos1 = line.find('+'), pos2) == -1)
-        return;
-    pos1++;
-    if ( (pos2 = line.find(',', pos1)) == -1)
-        return;
-    pos2++;
-    *linenoB = line.mid(pos1, pos2-pos1-1).toInt()-1;
-    if ( (pos1 = line.find('@'), pos2) == -1)
-        return;
+
+    *linenoA = region.cap(1).toInt() - 1;
+    *linenoB = region.cap(3).toInt() - 1;   
 }
 
 
