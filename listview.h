@@ -18,27 +18,7 @@
 #include <qlistview.h>
 #include <qarray.h>
 
-class ListView;
 class QTimer;
-
-
-class ListViewItem : public QListViewItem
-{
-public:
-    ListViewItem(ListView *parent);
-    ListViewItem(ListViewItem *parent);
-
-    void setVisible(bool b);
-    bool visible() const;
-
-    ListViewItem *myFirstChild() const;
-    ListViewItem *myNextSibling() const;
-    
-private:
-    ListViewItem *hiddenChild;
-    ListViewItem *hiddenSibling;
-    ListViewItem *formerParent;
-};
 
 
 class ListView : public QListView
@@ -75,7 +55,6 @@ private:
     bool m_sortAscending;
     int m_preferredColumn;
     QTimer *timer;
-    friend class ListViewItem;
 };
 
 #endif

@@ -36,7 +36,7 @@
 
 #include "cervisiapart.h"
 
-class UpdateDirItem : public ListViewItem
+class UpdateDirItem : public QListViewItem
 {
 public:
     UpdateDirItem( UpdateView *parent, QString dirname );
@@ -55,6 +55,8 @@ public:
  
     void maybeScanDir(bool recursive);
 
+    void applyFilter(UpdateView::Filter filter);
+
 private:
     UpdateView *updateView() const
         { return static_cast<UpdateView*>(listView()); }
@@ -65,10 +67,10 @@ private:
 };
 
 
-class UpdateViewItem : public ListViewItem
+class UpdateViewItem : public QListViewItem
 {
 public:
-    UpdateViewItem( ListViewItem *parent, QString filename );
+    UpdateViewItem( QListViewItem *parent, QString filename );
 
     QString filePath();
     UpdateView::Status status() const
@@ -106,7 +108,7 @@ private:
 
 
 UpdateDirItem::UpdateDirItem( UpdateDirItem *parent, QString dirname )
-    : ListViewItem(parent)
+    : QListViewItem(parent)
 {
     setPixmap(0, SmallIcon("folder"));
     m_dirname = dirname;
@@ -115,7 +117,7 @@ UpdateDirItem::UpdateDirItem( UpdateDirItem *parent, QString dirname )
 
  
 UpdateDirItem::UpdateDirItem( UpdateView *parent, QString dirname )
-    : ListViewItem(parent)
+    : QListViewItem(parent)
 {
     setPixmap(0, SmallIcon("folder"));
     m_dirname = dirname;
@@ -136,8 +138,8 @@ QString UpdateDirItem::dirPath()
  */
 void UpdateDirItem::updateChildItem(QString name, UpdateView::Status status, bool isdir)
 {
-    for (ListViewItem *item = myFirstChild(); item;
-	 item = item->myNextSibling() )
+    for (QListViewItem *item = firstChild(); item;
+	 item = item->nextSibling() )
 	{
 	    if (item->text(0) == name)
 		{
@@ -172,8 +174,8 @@ void UpdateDirItem::updateChildItem(QString name, UpdateView::Status status, boo
 void UpdateDirItem::updateEntriesItem(QString name, UpdateView::Status status, bool isdir,
                                       bool isbin, QString rev, QString tagname, time_t timestamp)
 {
-    for (ListViewItem *item = myFirstChild(); item;
-	 item = item->myNextSibling() )
+    for (QListViewItem *item = firstChild(); item;
+	 item = item->nextSibling() )
 	{
 	    if (item->text(0) == name)
 		{
@@ -332,8 +334,8 @@ void UpdateDirItem::syncWithDirectory()
 
     const QFileInfoList *files = dir.exists()? dir.entryInfoList() : 0;
 
-    for (ListViewItem *item = myFirstChild(); item;
-         item = item->myNextSibling() )
+    for (QListViewItem *item = firstChild(); item;
+         item = item->nextSibling() )
         {
             // Look if file still exists. We never remove directories!
             bool exists = false;
@@ -375,11 +377,30 @@ void UpdateDirItem::maybeScanDir(bool recursive)
 
     if (recursive)
         {
-            for ( ListViewItem *item = myFirstChild(); item;
-                  item = item->myNextSibling() )
+            for ( QListViewItem *item = firstChild(); item;
+                  item = item->nextSibling() )
                 if (UpdateView::isDirItem(item))
                     static_cast<UpdateDirItem*>(item)->maybeScanDir(true);
         }
+}
+
+
+void UpdateDirItem::applyFilter(UpdateView::Filter filter)
+{
+    setVisible(true);
+
+    for (QListViewItem* childItem(firstChild());
+         childItem != 0; childItem = childItem->nextSibling())
+    {
+        if (UpdateView::isDirItem(childItem))
+        {
+            static_cast<UpdateDirItem*>(childItem)->applyFilter(filter);
+        }
+        else
+        {
+            static_cast<UpdateViewItem*>(childItem)->applyFilter(filter);
+        }
+    }
 }
 
 
@@ -421,8 +442,8 @@ void UpdateDirItem::setup()
 }
 
 
-UpdateViewItem::UpdateViewItem( ListViewItem *parent, QString filename )
-    : ListViewItem(parent)
+UpdateViewItem::UpdateViewItem( QListViewItem *parent, QString filename )
+    : QListViewItem(parent)
 {
     m_status = UpdateView::NotInCVS;
     m_filename = filename;
@@ -454,7 +475,7 @@ void UpdateViewItem::setStatus(UpdateView::Status newstatus, UpdateView::Filter 
         {
             m_status = newstatus;
             applyFilter(filter);
-            if (visible())
+            if (isVisible())
                 repaint();
         }
     m_undefined = false;
@@ -501,7 +522,7 @@ void UpdateViewItem::setRevTag(QString rev, QString tag)
     else
         m_tag = tag;
 
-    if (visible())
+    if (isVisible())
         {
             widthChanged();
             repaint();
@@ -707,34 +728,12 @@ bool UpdateView::isDirItem(QListViewItem *item)
 void UpdateView::setFilter(Filter filter)
 {
     filt = filter;
-    QStack<ListViewItem> s;
-    QPtrList<ListViewItem> l;
 
-    ListViewItem *item = static_cast<ListViewItem*>(firstChild());
-    // Hack: Since applyFilter() changes the whole child structure, we have
-    // to collect all children of one item in a list first, and then
-    // iterator though the list
-    while (item)
-        {
-            for (ListViewItem *childItem1 = item->myFirstChild();
-                 childItem1; childItem1 = childItem1->myNextSibling())
-                l.append(childItem1);
+    if (UpdateDirItem* item = static_cast<UpdateDirItem*>(firstChild()))
+    {
+        item->applyFilter(filter);
+    }
 
-            for (ListViewItem *childItem2 = l.first();
-                 childItem2; childItem2 = l.next())
-                {
-                    if (childItem2->myFirstChild())
-                        s.push(childItem2);
-
-                    if (!isDirItem(childItem2))
-                        {
-                            static_cast<UpdateViewItem*>(childItem2)->applyFilter(filt);
-                        }
-                }
-
-            l.clear();
-            item = s.pop();
-        }
     setSorting(sortColumn(), sortAscending());
 }
 
@@ -927,12 +926,12 @@ void UpdateView::finishJob(bool success)
  */
 void UpdateView::markUpdated(bool laststage, bool success)
 {
-    QPtrListIterator<ListViewItem> it(relevantSelection);
+    QPtrListIterator<QListViewItem> it(relevantSelection);
     for ( ; it.current(); ++it)
         if (isDirItem(it.current()))
             {
-                for (ListViewItem *item = it.current()->myFirstChild(); item;
-                     item = item->myNextSibling() )
+                for (QListViewItem *item = it.current()->firstChild(); item;
+                     item = item->nextSibling() )
                     if (!isDirItem(item))
                         {
                             UpdateViewItem *viewitem = static_cast<UpdateViewItem*>(item);
@@ -954,7 +953,7 @@ void UpdateView::rememberSelection(bool recursive)
 {
     // Collect all selected dir and file items into relevantSelection
 
-    QPtrList<ListViewItem> shallowItems, deepItems;
+    QPtrList<QListViewItem> shallowItems, deepItems;
 
     QStack<QListViewItem> s;
     for ( QListViewItem *item = firstChild(); item;
@@ -963,7 +962,7 @@ void UpdateView::rememberSelection(bool recursive)
             if (item->firstChild())
                 s.push(item->firstChild());
             if (isSelected(item))
-                shallowItems.append(static_cast<ListViewItem*>(item));
+                shallowItems.append(static_cast<QListViewItem*>(item));
 	}
 
     // In the recursive case, we add all directories from the hierarchies
@@ -971,7 +970,7 @@ void UpdateView::rememberSelection(bool recursive)
     
     if (recursive)
         {
-            QPtrListIterator<ListViewItem> it(shallowItems);
+            QPtrListIterator<QListViewItem> it(shallowItems);
             for ( ; it.current(); ++it)
                 if (isDirItem(it.current()))
                     for ( QListViewItem *item = it.current()->firstChild(); item;
@@ -980,17 +979,17 @@ void UpdateView::rememberSelection(bool recursive)
                             if (item->firstChild())
                                 s.push(item->firstChild());
                             if (isDirItem(item))
-                                deepItems.append(static_cast<ListViewItem*>(item));
+                                deepItems.append(static_cast<QListViewItem*>(item));
                         }
         }
 
 #if 0
     DEBUGOUT("Deep:");
-    QPtrListIterator<ListViewItem> it42(deepItems);
+    QPtrListIterator<QListViewItem> it42(deepItems);
     for (; it42.current(); ++it42)
         DEBUGOUT("  " << (*it42)->text(0));
     DEBUGOUT("Shallow:");
-    QPtrListIterator<ListViewItem> it43(shallowItems);
+    QPtrListIterator<QListViewItem> it43(shallowItems);
     for (; it43.current(); ++it43)
         DEBUGOUT("  " << (*it43)->text(0));
 #endif
@@ -998,18 +997,18 @@ void UpdateView::rememberSelection(bool recursive)
     // Collect everything together, and avoid duplicates:
     
     relevantSelection.clear();
-    QPtrListIterator<ListViewItem> it1(shallowItems);
+    QPtrListIterator<QListViewItem> it1(shallowItems);
     for ( ; it1.current(); ++it1)
         if (!relevantSelection.contains(it1.current()))
             relevantSelection.append(it1.current());
-    QPtrListIterator<ListViewItem> it2(deepItems);
+    QPtrListIterator<QListViewItem> it2(deepItems);
     for ( ; it2.current(); ++it2)
         if (!relevantSelection.contains(it2.current()))
             relevantSelection.append(it2.current());
 
 #if 0
     DEBUGOUT("Relevant:");
-    QPtrListIterator<ListViewItem> it44(relevantSelection);
+    QPtrListIterator<QListViewItem> it44(relevantSelection);
     for (; it44.current(); ++it44)
         DEBUGOUT("  " << (*it44)->text(0));
     DEBUGOUT("End");
@@ -1025,7 +1024,7 @@ void UpdateView::syncSelection()
 {
     QPtrList<UpdateDirItem> dirs;
     
-    QPtrListIterator<ListViewItem> it1(relevantSelection);
+    QPtrListIterator<QListViewItem> it1(relevantSelection);
     for ( ; it1.current(); ++it1)
 	{
             UpdateDirItem *diritem = 0;
@@ -1109,8 +1108,8 @@ void UpdateView::updateItem(const QString &name, Status status, bool isdir)
 
     UpdateDirItem *longestmatch = 0;
     QStack<QListViewItem> s;
-    for ( ListViewItem *item = static_cast<ListViewItem*>(firstChild()); item;
-	  item = item->myNextSibling()? item->myNextSibling() : static_cast<ListViewItem*>(s.pop()) )
+    for ( QListViewItem *item = firstChild(); item;
+	  item = item->nextSibling()? item->nextSibling() : s.pop() )
 	{
 	    if (UpdateView::isDirItem(item))
 		{
@@ -1124,8 +1123,8 @@ void UpdateView::updateItem(const QString &name, Status status, bool isdir)
                              && (!longestmatch || diritem->dirPath().length() > longestmatch->dirPath().length()))
                         longestmatch = diritem;
                     
-                    if (item->myFirstChild())
-                        s.push(item->myFirstChild());
+                    if (item->firstChild())
+                        s.push(item->firstChild());
 		}
 	}
 
