@@ -1,3 +1,9 @@
+2004-01-27  Christian Loose  <christian.loose@hamburg.de>
+
+	* Fix BR #70936:
+	  Prevent crash while embedded into Quanta because of
+	  a name conflict between the TagDialog classes.
+
 2004-01-16  André Wöbbeking  <Woebbeking@web.de>
 
 	* Fix BR 72519 (file view):

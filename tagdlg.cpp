@@ -26,6 +26,7 @@
 #include "misc.h"
 #include "cvsservice_stub.h"
 
+using Cervisia::TagDialog;
 
 TagDialog::TagDialog(ActionType action, CvsService_stub* service,
                      QWidget *parent, const char *name)

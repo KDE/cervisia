@@ -24,6 +24,8 @@ class QComboBox;
 class QLineEdit;
 class CvsService_stub;
 
+namespace Cervisia
+{
 
 class TagDialog : public KDialogBase
 {
@@ -54,6 +56,9 @@ private:
     QLineEdit *tag_edit;
     QComboBox *tag_combo;
 };
+
+}
+
 
 #endif
 
