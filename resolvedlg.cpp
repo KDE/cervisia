@@ -15,7 +15,6 @@
 #include <qpushbutton.h>
 #include <qlayout.h>
 #include <qkeycode.h>
-#include <qmessagebox.h>
 #include <qtextstream.h>
 #include <qfile.h>
 #include <kbuttonbox.h>
@@ -23,6 +22,7 @@
 #include <kdebug.h>
 #include <kfiledialog.h>
 #include <klocale.h>
+#include <kmessagebox.h>
 #include "misc.h"
 
 #include "resolvedlg.h"
@@ -261,8 +261,9 @@ void ResolveDialog::saveFile(const QString &name)
     QFile f(name);
     if (!f.open(IO_WriteOnly))
 	{
-	    QMessageBox::information(this, "Cervisia",
-				     i18n("Could not open file for writing."));
+	    KMessageBox::sorry(this,
+			       i18n("Could not open file for writing."),
+			       "Cervisia");
 	    return;
 	}
     QTextStream t(&f);

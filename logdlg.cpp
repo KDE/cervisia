@@ -16,12 +16,12 @@
 #include <qpushbutton.h>
 #include <qlayout.h>
 #include <qwidgetstack.h>
-#include <qmessagebox.h>
 #include <qwhatsthis.h>
 #include <kbuttonbox.h>
 #include <kdebug.h>
 #include <kapp.h>
 #include <klocale.h>
+#include <kmessagebox.h>
 #include <kconfig.h>
 #include <kprocess.h>
 #include <diffdlg.h>
@@ -399,8 +399,9 @@ void LogDialog::diffClicked()
 {
     if (selectionA.isEmpty() || selectionB.isEmpty())
 	{
-	    QMessageBox::information(this, "Cervisia",
-				     i18n("Please select revisions A and B first."));
+	    KMessageBox::information(this,
+				     i18n("Please select revisions A and B first."),
+				     "Cervisia");
 	    return;
 	}
 

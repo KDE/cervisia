@@ -13,6 +13,7 @@
 #include <kxmlgui.h>
 #include <krun.h>
 #include <kdebug.h>
+#include <kmessagebox.h>
 
 #include "logdlg.h"
 #include "loglist.h"
@@ -1153,8 +1154,9 @@ void CervisiaPart::slotMakePatch()
     QFile f(filename);
     if (!f.open(IO_WriteOnly))
     {
-        QMessageBox::information(widget(), "Cervisia",
-                                 i18n("Could not open file for writing."));
+        KMessageBox::sorry(widget(),
+                           i18n("Could not open file for writing."),
+                           "Cervisia");
         return;
     }
     QTextStream t(&f);
@@ -1295,14 +1297,16 @@ void CervisiaPart::slotLastChange()
     if ( (pos = revA.findRev('.')) == -1
          || (lastnumber=revA.right(revA.length()-pos-1).toUInt(&ok), !ok) )
     {
-        QMessageBox::information(widget(), "Cervisia",
-                                 i18n("The revision looks invalid."));
+        KMessageBox::sorry(widget(),
+                           i18n("The revision looks invalid."),
+                           "Cervisia");
         return;
     }
     if (lastnumber == 0)
     {
-        QMessageBox::information(widget(), "Cervisia",
-                                 i18n("This is the first revision of the branch."));
+        KMessageBox::sorry(widget(),
+                           i18n("This is the first revision of the branch."),
+                           "Cervisia");
         return;
     }
     revB = revA.left(pos+1);
@@ -1434,8 +1438,9 @@ void CervisiaPart::openSandbox(const QString &dirname)
     if (!fi2.exists() || !fi2.isDir())
     {
         recent->removeURL( KURL(sandboxpath) );
-        QMessageBox::information(widget(), "Cervisia",
-                                 i18n("This is not a CVS directory."));
+        KMessageBox::sorry(widget(),
+                           i18n("This is not a CVS directory."),
+                           "Cervisia");
         return;
     }
     recent->addURL( KURL(sandboxpath) );

@@ -13,7 +13,6 @@
 
 
 #include <qdir.h>
-#include <qmessagebox.h>
 #include <qpopupmenu.h>
 #if QT_VERSION < 300
 #include <qtableview.h>
@@ -24,6 +23,7 @@
 #include <kglobal.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
+#include <kmessagebox.h>
 #include <kprocess.h>
 
 #include "repositories.h"
@@ -59,7 +59,9 @@ bool ProtocolView::startJob(const QString &sandbox, const QString &repository,
 {
     if (childproc)
         {
-            QMessageBox::information(topLevelWidget(), "Cervisia", "There is already a job running");
+            KMessageBox::sorry(topLevelWidget(), 
+                               i18n("There is already a job running"),
+                               "Cervisia");
             return false;
         }
 

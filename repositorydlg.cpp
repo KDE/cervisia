@@ -16,12 +16,12 @@
 #include <qdir.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qmessagebox.h>
 #include <qpushbutton.h>
 #include <qtextstream.h>
 #include <kapp.h>
 #include <kbuttonbox.h>
 #include <klocale.h>
+#include <kmessagebox.h>
 
 #include "repositories.h"
 #include "listview.h"
@@ -253,8 +253,9 @@ void RepositoryDialog::slotAddClicked()
             for ( ; item; item = item->nextSibling())
                 if (item->text(0) == repo)
                     {
-                        QMessageBox::information(this, "Cervisia",
-                                                 i18n("This repository is already known."));
+                        KMessageBox::information(this,
+                                                 i18n("This repository is already known."),
+                                                 "Cervisia");
                         return;
                     }
 

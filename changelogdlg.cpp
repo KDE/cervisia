@@ -16,7 +16,6 @@
 #include <qfileinfo.h>
 #include <qlayout.h>
 #include <qmultilinedit.h>
-#include <qmessagebox.h>
 #include <qpushbutton.h>
 #include <qtextstream.h>
 #include <kapp.h>
@@ -24,6 +23,7 @@
 #include <kconfig.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
+#include <kmessagebox.h>
 
 #include "misc.h"
 #include "cervisiapart.h"
@@ -90,9 +90,9 @@ void ChangeLogDialog::done(int res)
             QFile f(fname);
             if (!f.open(IO_ReadWrite))
                 {
-                    QMessageBox::information(this, "Cervisia",
-                                             i18n("The ChangeLog file could not be written."),
-                                             i18n("OK"));
+                    KMessageBox::sorry(this,
+                                       i18n("The ChangeLog file could not be written."),
+                                       "Cervisia");
                     return;
                 }
             
@@ -136,9 +136,10 @@ bool ChangeLogDialog::readFile(const QString &filename)
     bool exists = QFileInfo(filename).exists();
     if (!exists)
         {
-            if (QMessageBox::information(this, "Cervisia",
+            if (KMessageBox::warningContinueCancel(this,
                                          i18n("A ChangeLog file does not exist. Create one?"),
-                                         i18n("OK"), i18n("Cancel"), 0, 1) == 1)
+                                         "Cervisia",
+                                         i18n("Create")) != KMessageBox::Continue)
                 return false;
         }
     else
@@ -146,9 +147,9 @@ bool ChangeLogDialog::readFile(const QString &filename)
             QFile f(filename);
             if (!f.open(IO_ReadWrite))
                 {
-                    QMessageBox::information(this, "Cervisia",
-                                             i18n("The ChangeLog file could not be read."),
-                                             i18n("OK"));
+                    KMessageBox::sorry(this,
+                                       i18n("The ChangeLog file could not be read."),
+                                       "Cervisia");
                     return false;
                 }
             QTextStream stream(&f);

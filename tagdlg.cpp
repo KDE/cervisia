@@ -17,11 +17,11 @@
 #include <qcombobox.h>
 #include <qlayout.h>
 #include <qlabel.h>
-#include <qmessagebox.h>
 #include <kapp.h>
 #include <kbuttonbox.h>
 #include <klineedit.h>
 #include <klocale.h>
+#include <kmessagebox.h>
 
 #include "cvsprogressdlg.h"
 #include "misc.h"
@@ -111,16 +111,18 @@ void TagDialog::done(int r)
             
             if (str.length() == 0)
                 {
-                    QMessageBox::information(this, "Cervisia",
-                                             i18n("You must define a tag name."));
+                    KMessageBox::sorry(this,
+                                       i18n("You must define a tag name."),
+                                       "Cervisia");
                     return;
                 }
 
             if (!isValidTag(str))
                 {
-                    QMessageBox::information(this, "Cervisia",
-                                             i18n("Tag must start with a letter and may contain "
-                                                  "letters, digits and the characters '-' and '_'."));
+                    KMessageBox::sorry(this,
+                                      i18n("Tag must start with a letter and may contain "
+                                           "letters, digits and the characters '-' and '_'."),
+                                      "Cervisia");
                     return;
                 }
         }

@@ -18,7 +18,6 @@
 #include <qcombobox.h>
 #include <qlineedit.h>
 #include <qmultilinedit.h>
-#include <qmessagebox.h>
 #include <qfiledialog.h>
 #include <qdir.h>
 #include <kapp.h>
@@ -26,6 +25,7 @@
 #include <kbuttonbox.h>
 #include <kfiledialog.h>
 #include <klocale.h>
+#include <kmessagebox.h>
 
 #include "cvsprogressdlg.h"
 #include "repositories.h"
@@ -210,14 +210,16 @@ void CheckoutDialog::done(int r)
             QFileInfo fi(workingDirectory());
             if (!fi.exists() || !fi.isDir())
                 {
-                    QMessageBox::information(this, "Cervisia", i18n
-                                             ("Please choose an existing working directory."));
+                    KMessageBox::sorry(this,
+                                       i18n("Please choose an existing working directory."),
+                                       "Cervisia");
                     return;
                 }
             if (module().isEmpty())
                 {
-                    QMessageBox::information(this, "Cervisia", i18n
-                                             ("Please specify a module name."));
+                    KMessageBox::sorry(this,
+                                       i18n("Please specify a module name."),
+                                       "Cervisia");
                     return;
                 }
                                                                     
@@ -225,15 +227,17 @@ void CheckoutDialog::done(int r)
                 {
                     if (vendorTag().isEmpty() || releaseTag().isEmpty())
                         {
-                            QMessageBox::information(this, "Cervisia", i18n
-                                                     ("Please specify a vendor tag and a release tag."));
+                            KMessageBox::sorry(this,
+                                               i18n("Please specify a vendor tag and a release tag."),
+                                               "Cervisia");
                             return;
                         }
                     if (!isValidTag(vendorTag()) || !isValidTag(releaseTag()))
                         {
-                            QMessageBox::information(this, "Cervisia", 
-                                                     i18n("Tags must start with a letter and may contain\n"
-                                                          "letters, digits and the characters '-' and '_'."));
+                            KMessageBox::sorry(this,
+                                               i18n("Tags must start with a letter and may contain "
+                                                    "letters, digits and the characters '-' and '_'."),
+                                               "Cervisia");
                             return;
                         }
                 }
