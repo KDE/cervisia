@@ -42,7 +42,7 @@ struct Entry
     Entry();
 
     /**
-     * The name of this entry (including the path inside the repository / working copy).
+     * The name of this entry (without path).
      */
     QString m_name;
 
@@ -62,7 +62,7 @@ struct Entry
     QString m_revision;
 
     /**
-     * The modification date/time of this entry.
+     * The modification date/time of this entry (in user's local time).
      */
     QDateTime m_dateTime;
 
