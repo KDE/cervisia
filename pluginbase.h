@@ -30,6 +30,8 @@ public:
     virtual bool canHandle(const KURL& workingCopy) = 0;
     virtual QString type() const = 0;
     virtual DCOPRef service() const = 0;
+
+    virtual void syncWithEntries() = 0;
 };
 
 

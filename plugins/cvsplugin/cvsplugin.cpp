@@ -82,6 +82,11 @@ DCOPRef CvsPlugin::service() const
 }
 
 
+void CvsPlugin::syncWithEntries()
+{
+}
+
+
 void CvsPlugin::startService()
 {
     // start the cvs DCOP service

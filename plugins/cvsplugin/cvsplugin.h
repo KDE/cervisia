@@ -31,6 +31,8 @@ public:
     virtual QString type() const;
     virtual DCOPRef service() const;
 
+    virtual void syncWithEntries();
+
 private:
     void startService();
 
