@@ -16,16 +16,12 @@
 
 #include <qdir.h>
 #include <qpopupmenu.h>
-#include <kapplication.h>
 #include <kconfig.h>
-#include <kglobal.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kprocess.h>
 
-#include "repositories.h"
-#include "misc.h"
 #include "cervisiapart.h"
 
 
@@ -160,13 +156,12 @@ void ProtocolView::appendLine(const QString &line)
     else if (line.startsWith("M ")
              || line.startsWith("A ") || line.startsWith("R "))
         color = localChangeColor;
-    else if (line.startsWith("P "))
+    else if (line.startsWith("P ") || line.startsWith("U "))
         color = remoteChangeColor;
 
-    append(color.isValid()?
-        QString("<FONT COLOR=\"#%1\">%2</FONT><BR>")
-           .arg(colorAsString(color)).arg(line) :
-        QString("%1<BR>").arg(line));
+    append(color.isValid()
+           ? QString("<font color=\"%1\">%2</font>").arg(color.name()).arg(line)
+           : QString("%1").arg(line));
 }
 
 
