@@ -26,14 +26,16 @@ class LogPlainView : public KTextBrowser
 
 public:
     explicit LogPlainView(QWidget* parent = 0, const char* name = 0);
-    virtual ~LogPlainView();
-    
+
     void addRevision(const QString& rev, const QString& author, 
                      const QDateTime& date, const QString& comment, 
                      const QString& tagcomment);            
 
 signals:
     void revisionClicked(QString rev, bool rmb);
+
+public slots:
+    void scrollToTop();
 
 protected:                     
     virtual void setSource(const QString& name);        

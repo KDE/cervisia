@@ -18,17 +18,11 @@
 #include <kglobal.h>
 #include <klocale.h>
 
-#include <kdebug.h>
 
 LogPlainView::LogPlainView(QWidget* parent, const char* name)
     : KTextBrowser(parent, name)
 {
     setNotifyClick(false);
-}
-
-
-LogPlainView::~LogPlainView()
-{
 }
 
 
@@ -95,6 +89,12 @@ void LogPlainView::addRevision(const QString& rev, const QString& author,
     // add horizontal line    
     setTextFormat(QStyleSheet::RichText);
     append("<hr>");   
+}
+
+
+void LogPlainView::scrollToTop()
+{
+    setContentsPos(0, 0);
 }
 
 
