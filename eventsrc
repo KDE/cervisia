@@ -4,11 +4,13 @@ Comment=Cervisia
 
 [cvs_commit_done]
 Name=CVS commit job done
+Name[bg]=Предаването в CVS е готово
 Name[et]=CVS sissekanne tehtud
 Name[fr]=Commit CVS effectué
 Name[pt_BR]=Trabalho de envio para o CVS feito
 Name[sv]=CVS-arkiveringsjobb klart
 Comment=A CVS commit job is done
+Comment[bg]=Предаването в CVS е готово
 Comment[et]=CVS sissekanne tehtud
 Comment[fr]=Un commit CVS a été effectué
 Comment[pt_BR]=Um trabalho de envio para o CVS foi feito
