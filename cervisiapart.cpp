@@ -609,7 +609,7 @@ KAboutData* CervisiaPart::createAboutData()
 
 void CervisiaPart::slotOpenSandbox()
 {
-    QString dirname = KFileDialog::getExistingDirectory(QDir::homeDirPath(), widget(),
+    QString dirname = KFileDialog::getExistingDirectory(":CervisiaPart", widget(),
                                                         i18n("Open Sandbox"));
     if (dirname.isEmpty())
         return;

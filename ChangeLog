@@ -1,3 +1,8 @@
+2003-01-23  Christian Loose <christian.loose@hamburg.de>
+
+	* Implemented wish #41468: Remember last open directory
+	  in KDirSelect dialog
+
 2003-01-21  Christian Loose <christian.loose@hamburg.de>
 
 	* Added remove() method to cvs DCOP service
