@@ -82,6 +82,7 @@
 <Menu name="context_popup">
   <Action name="file_edit"/>
   <Action name="file_resolve"/>
+  <Action name="view_log"/>
   <Separator/>
   <Action name="file_commit"/>
   <Separator/>
