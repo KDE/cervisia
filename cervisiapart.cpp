@@ -726,29 +726,14 @@ void CervisiaPart::openFiles(const QStringList &filenames)
                     return;
         }
 
-    // Now open the files by either by running the configured external
-    // editor, or (if it is not explicitly set) by using KRun
-    KConfig *conf = config();
-    conf->setGroup("Communication");
-    QString editor = conf->readEntry("Editor");
-
-    if (!editor.isEmpty()) {
-        KProcess proc;
-        proc.setUseShell(true, "/bin/sh");
-        proc << editor;
-        for ( QStringList::ConstIterator it = filenames.begin();
-              it != filenames.end(); ++it )
-            proc << KProcess::quote(*it);
-        proc.start(KProcess::DontCare);
-    } else {
-        QDir dir(sandbox);
-        for ( QStringList::ConstIterator it = filenames.begin();
-              it != filenames.end(); ++it )
-        {
-            KURL u;
-            u.setPath(dir.absFilePath(*it));
-            (void) new KRun(u, 0, true, false);
-        }
+    // Now open the files by using KRun
+    QDir dir(sandbox);
+    for ( QStringList::ConstIterator it = filenames.begin();
+          it != filenames.end(); ++it )
+    {
+        KURL u;
+        u.setPath(dir.absFilePath(*it));
+        (void) new KRun(u, 0, true, false);
     }
 }
 

@@ -167,8 +167,6 @@ void SettingsDialog::readSettings()
     extdiffedit->setURL(config->readPathEntry("ExternalDiff"));
     remotestatusbox->setChecked(config->readBoolEntry("StatusForRemoteRepos", false));
     localstatusbox->setChecked(config->readBoolEntry("StatusForLocalRepos", false));
-    config->setGroup("Communication");
-    editoredit->setURL(config->readPathEntry("Editor"));
 
     // read configuration for look and feel page
     config->setGroup("LookAndFeel");
@@ -228,12 +226,6 @@ void SettingsDialog::writeSettings()
     config->writeEntry("DiffOptions", diffoptedit->text());
     config->writeEntry("StatusForRemoteRepos", remotestatusbox->isChecked());
     config->writeEntry("StatusForLocalRepos", localstatusbox->isChecked());
-    config->setGroup("Communication");
-#if KDE_IS_VERSION(3,1,3)
-    config->writePathEntry("Editor", editoredit->url());
-#else
-    config->writeEntry("Editor", editoredit->url());
-#endif
 #if 0
     config->writeEntry("UseDCOP", usedcopbox->isChecked());
     config->writeEntry("DCOPClient", clientedit->text());
@@ -306,12 +298,6 @@ void SettingsDialog::addGeneralPage()
     layout->addWidget(cvspathlabel);
     layout->addWidget(cvspathedit);
 
-    QLabel *editorlabel = new QLabel( i18n("&Editor:"), generalPage );
-    editoredit = new KURLRequester(generalPage);
-    editorlabel->setBuddy(editoredit);
-
-    layout->addWidget(editorlabel);
-    layout->addWidget(editoredit);
     layout->addStretch();
 }
 

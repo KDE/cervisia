@@ -71,7 +71,6 @@ private:
     QComboBox *compressioncombo;
     QCheckBox *usesshagent;
     KLineEdit *usernameedit;
-    KURLRequester *editoredit;
     KLineEdit *diffoptedit;
     KURLRequester *extdiffedit;
     QCheckBox *remotestatusbox;

@@ -1,3 +1,9 @@
+2003-08-29  Christian Loose  <christian.loose@hamburg.de>
+
+	* Removed the editor option from the settings dialog. We
+	  use KRun now to start the preferred editor for the given
+	  mime-type.
+
 2003-08-28  Christian Loose  <christian.loose@hamburg.de>
 
 	* Added a new button (View) to the log dialog to view
