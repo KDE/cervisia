@@ -17,8 +17,8 @@
 
 #include <qtextedit.h>
 #include <dcopobject.h>
+#include <dcopref.h>
 
-class DCOPRef;
 class KProcess;
 class KShellProcess;
 
@@ -63,6 +63,8 @@ private:
     QColor conflictColor;
     QColor localChangeColor;
     QColor remoteChangeColor;
+    
+    DCOPRef job;
 };
 
 #endif

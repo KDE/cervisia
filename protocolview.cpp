@@ -110,6 +110,10 @@ bool ProtocolView::startJob(DCOPRef& cvsJob)
     connectDCOPSignal(cvsJob.app(), cvsJob.obj(), "receivedStderr(QString)",
                       "slotReceivedOutput(QString)", true);
 
+    // remember reference to cvs job in order to disconnect
+    // from it in slotJobExited()
+    job = cvsJob;
+
     // disconnect 3rd party slots from our signals
     disconnect( SIGNAL(receivedLine(QString)) );
     disconnect( SIGNAL(jobFinished(bool)) );
@@ -178,7 +182,15 @@ void ProtocolView::slotJobExited(bool normalExit, int status)
     buf += '\n';
     buf += msg;
     processOutput();
-    
+
+    // disconnect the signals of the cvs job
+    disconnectDCOPSignal(job.app(), job.obj(), "jobExited(bool, int)",
+                      "slotJobExited(bool, int)");
+    disconnectDCOPSignal(job.app(), job.obj(), "receivedStdout(QString)",
+                      "slotReceivedOutput(QString)");
+    disconnectDCOPSignal(job.app(), job.obj(), "receivedStderr(QString)",
+                      "slotReceivedOutput(QString)");
+        
     emit jobFinished(normalExit && !status);
 }
 
