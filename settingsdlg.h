@@ -57,6 +57,7 @@ private:
     void readSettings();
     void writeSettings();
 
+    void addAdvancedPage();
     void addLookAndFeelPage();
     void addColorPage();
 
@@ -66,6 +67,7 @@ private:
     KIntNumInput *tabwidthedit;
     KURLRequester *cvspathedit;
     QComboBox *compressioncombo;
+    QCheckBox *usesshagent;
     KLineEdit *usernameedit;
     KURLRequester *editoredit;
     KLineEdit *diffoptedit;

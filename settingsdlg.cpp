@@ -130,24 +130,7 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
     //
     // Advanced Options
     //
-    QGrid *advancedPage = addGridPage( 2, QGrid::Horizontal, i18n("Ad&vanced") );
-
-    QLabel *timeoutlabel = new QLabel( i18n("&Timeout after which a progress dialog appears (in ms):"),
-                                       advancedPage );
-    timeoutedit = new KIntNumInput( 0, advancedPage );
-    timeoutedit->setRange( 0, 50000, 100, false );
-    timeoutlabel->setBuddy( timeoutedit );
-
-    QLabel *compressionlabel = new QLabel( i18n("Default compression &level:"), advancedPage );
-    compressioncombo = new QComboBox( false, advancedPage );
-    compressionlabel->setBuddy( compressioncombo );
-
-    compressioncombo->insertItem("0", 0);
-    compressioncombo->insertItem("1", 1);
-    compressioncombo->insertItem("2", 2);
-    compressioncombo->insertItem("3", 3);
-
-    new QWidget(advancedPage);
+    addAdvancedPage();
 
     //
     // Look and Feel Options
@@ -206,6 +189,7 @@ void SettingsDialog::readSettings()
     serviceConfig->setGroup("General");
     cvspathedit->setURL(serviceConfig->readEntry("CVSPath", "cvs"));
     compressioncombo->setCurrentItem(serviceConfig->readNumEntry("Compression", 0));
+    usesshagent->setChecked(serviceConfig->readBoolEntry("UseSshAgent", false));
 
     config->setGroup("General");
     timeoutedit->setValue((int)config->readUnsignedNumEntry("Timeout", 4000));
@@ -251,6 +235,7 @@ void SettingsDialog::writeSettings()
     serviceConfig->setGroup("General");
     serviceConfig->writeEntry("CVSPath", cvspathedit->url());
     serviceConfig->writeEntry("Compression", compressioncombo->currentItem());
+    serviceConfig->writeEntry("UseSshAgent", usesshagent->isChecked());
 
     // write to disk so other services can reparse the configuration
     serviceConfig->sync();
@@ -315,6 +300,35 @@ void SettingsDialog::done(int res)
         writeSettings();
     KDialogBase::done(res);
     delete this;
+}
+
+
+/*
+ * Create a page for the advanced options
+ */
+void SettingsDialog::addAdvancedPage()
+{
+    QGrid *advancedPage = addGridPage( 2, QGrid::Horizontal, i18n("Ad&vanced") );
+
+    QLabel *timeoutlabel = new QLabel( i18n("&Timeout after which a progress dialog appears (in ms):"),
+                                       advancedPage );
+    timeoutedit = new KIntNumInput( 0, advancedPage );
+    timeoutedit->setRange( 0, 50000, 100, false );
+    timeoutlabel->setBuddy( timeoutedit );
+
+    QLabel *compressionlabel = new QLabel( i18n("Default compression &level:"), advancedPage );
+    compressioncombo = new QComboBox( false, advancedPage );
+    compressionlabel->setBuddy( compressioncombo );
+
+    compressioncombo->insertItem("0", 0);
+    compressioncombo->insertItem("1", 1);
+    compressioncombo->insertItem("2", 2);
+    compressioncombo->insertItem("3", 3);
+
+    // TODO CL Find better description for this option
+    usesshagent = new QCheckBox(i18n("Use ssh-agent"), advancedPage);
+
+    new QWidget(advancedPage);
 }
 
 
