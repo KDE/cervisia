@@ -30,6 +30,7 @@
 #include "watchdlg.h"
 #include "tagdlg.h"
 
+namespace Cervisia { class EditWithMenu; }
 class QLabel;
 class QListViewItem;
 class QSplitter;
@@ -189,6 +190,8 @@ private:
     CervisiaStatusBarExtension* statusBar;
     QLabel*                     filterLabel;
 #endif
+	int                     m_editWithId;
+	Cervisia::EditWithMenu* m_currentEditMenu;
 };
 
 typedef KParts::GenericFactory<CervisiaPart> CervisiaFactory;

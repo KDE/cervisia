@@ -58,6 +58,7 @@
 #include "repository_stub.h"
 #include "globalignorelist.h"
 #include "patchoptiondlg.h"
+#include "editwithmenu.h"
 
 #include "cervisiapart.h"
 #include "version.h"
@@ -89,6 +90,8 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     , statusBar( 0 )
     , filterLabel( 0 )
 #endif
+    , m_editWithId(0)
+    , m_currentEditMenu(0)
 {
     KGlobal::locale()->insertCatalogue("cervisia");
 
@@ -615,7 +618,35 @@ void CervisiaPart::setupActions()
 void CervisiaPart::popupRequested(KListView*, QListViewItem*, const QPoint& p)
 {
     if (QPopupMenu* popup = static_cast<QPopupMenu*>(hostContainer("context_popup")))
+    {
+        // remove old 'Edit with...' menu
+        if( m_editWithId )
+        {
+            popup->removeItem(m_editWithId);
+            delete m_currentEditMenu; 
+
+            m_editWithId      = 0;
+            m_currentEditMenu = 0;
+        }
+
+        // get name of selected file
+        QString selectedFile;
+        update->getSingleSelection(&selectedFile);
+
+        if( !selectedFile.isEmpty() )
+        {
+            KURL u;
+            u.setPath(sandbox + "/" + selectedFile);
+
+            m_currentEditMenu = new Cervisia::EditWithMenu(u, popup);
+
+            if( m_currentEditMenu->menu() )
+                m_editWithId = popup->insertItem(i18n("Edit With"), 
+                                          m_currentEditMenu->menu(), -1, 1);
+        }
+
         popup->exec(p);
+    }
     else
         kdDebug(8050) << "CervisiaPart: can't get XML definition for context_popup, factory()=" << factory() << endl;
 }
