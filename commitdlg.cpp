@@ -26,11 +26,6 @@
 #include "cvsservice_stub.h"
 #include "diffdlg.h"
 
-#include <kdeversion.h>
-#if KDE_VERSION < KDE_MAKE_VERSION(3,1,90)
-#include "configutils.h"
-#endif
-
 
 CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service, 
                            QWidget *parent, const char *name)
@@ -78,22 +73,14 @@ CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service,
 
     setHelp("commitingfiles");
 
-#if KDE_IS_VERSION(3,1,90)
     QSize size = configDialogSize(partConfig, "CommitDialog");
-#else
-    QSize size = Cervisia::configDialogSize(this, partConfig, "CommitDialog");
-#endif
     resize(size);
 }
 
 
 CommitDialog::~CommitDialog()
 {
-#if KDE_IS_VERSION(3,1,90)
     saveDialogSize(partConfig, "CommitDialog");
-#else
-    Cervisia::saveDialogSize(this, partConfig, "CommitDialog");
-#endif
 }
 
 

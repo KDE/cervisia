@@ -47,11 +47,6 @@
 #include "misc.h"
 #include "progressdlg.h"
 
-#include <kdeversion.h>
-#if KDE_VERSION < KDE_MAKE_VERSION(3,1,90)
-#include "configutils.h"
-#endif
-
 
 LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     : KDialogBase(parent, name, false, QString::null,
@@ -174,12 +169,8 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     connect( this, SIGNAL(user3Clicked()),
              this, SLOT(findClicked()) );
 
-#if KDE_IS_VERSION(3,1,90)
     if( KGlobalSettings::showIconsOnPushButtons() )
       actionButton(Ok)->setIconSet(SmallIcon(QString::fromLatin1("fileopen")));
-#else
-    actionButton(Ok)->setIconSet(SmallIcon(QString::fromLatin1("fileopen")));
-#endif
     setButtonText(Ok, i18n("to view something", "&View"));
     setButtonTip(Ok, QString::null);
     setButtonWhatsThis(Ok, QString::null);
@@ -188,11 +179,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     setWFlags(Qt::WDestructiveClose | getWFlags());
 
-#if KDE_IS_VERSION(3,1,90)
     QSize size = configDialogSize(partConfig, "LogDialog");
-#else
-    QSize size = Cervisia::configDialogSize(this, partConfig, "LogDialog");
-#endif
     resize(size);
 
     KConfigGroupSaver cs(&partConfig, "LogDialog");
@@ -202,11 +189,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
 
 LogDialog::~LogDialog()
 {
-#if KDE_IS_VERSION(3,1,90)
     saveDialogSize(partConfig, "LogDialog");
-#else
-    Cervisia::saveDialogSize(this, partConfig, "LogDialog");
-#endif
 
     KConfigGroupSaver cs(&partConfig, "LogDialog");
     partConfig.writeEntry("ShowTab", tabWidget->currentPageIndex());

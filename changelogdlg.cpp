@@ -18,16 +18,11 @@
 #include <qfile.h>
 #include <qtextstream.h>
 #include <kconfig.h>
-#include <kdeversion.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <ktextedit.h>
 #include "misc.h"
-
-#if KDE_VERSION < KDE_MAKE_VERSION(3,1,90)
-#include "configutils.h"
-#endif
 
 
 static inline QString DateStringISO8601()
@@ -58,22 +53,14 @@ ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent, const char *name
 
     setMainWidget(edit);
 
-#if KDE_IS_VERSION(3,1,90)
     QSize size = configDialogSize(partConfig, "ChangeLogDialog");
-#else
-    QSize size = Cervisia::configDialogSize(this, partConfig, "ChangeLogDialog");
-#endif
     resize(size);
 }
 
 
 ChangeLogDialog::~ChangeLogDialog()
 {
-#if KDE_IS_VERSION(3,1,90)
     saveDialogSize(partConfig, "ChangeLogDialog");
-#else
-    Cervisia::saveDialogSize(this, partConfig, "ChangeLogDialog");
-#endif
 }
 
 

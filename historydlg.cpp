@@ -29,11 +29,6 @@
 #include "cvsservice_stub.h"
 #include "progressdlg.h"
 
-#include <kdeversion.h>
-#if KDE_VERSION < KDE_MAKE_VERSION(3,1,90)
-#include "configutils.h"
-#endif
-
 
 class HistoryItem : public QListViewItem
 {
@@ -224,11 +219,7 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     setWFlags(Qt::WDestructiveClose | getWFlags());
 
-#if KDE_IS_VERSION(3,1,90)
     QSize size = configDialogSize(partConfig, "HistoryDialog");
-#else
-    QSize size = Cervisia::configDialogSize(this, partConfig, "HistoryDialog");
-#endif
     resize(size);
 
     // without this restoreLayout() can't change the column widths
@@ -241,11 +232,7 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
 
 HistoryDialog::~HistoryDialog()
 {
-#if KDE_IS_VERSION(3,1,90)
     saveDialogSize(partConfig, "HistoryDialog");
-#else
-    Cervisia::saveDialogSize(this, partConfig, "HistoryDialog");
-#endif
 
     listview->saveLayout(&partConfig, QString::fromLatin1("HistoryListView"));
 }

@@ -23,11 +23,6 @@
 #include <klineedit.h>
 #include <klocale.h>
 
-#include <kdeversion.h>
-#if KDE_VERSION < KDE_MAKE_VERSION(3,1,90)
-#include "configutils.h"
-#endif
-
 
 AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString &repo, 
                                          QWidget *parent, const char *name)
@@ -80,22 +75,14 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString &repo,
              this, SLOT(repoChanged()) );
     repoChanged();
 
-#if KDE_IS_VERSION(3,1,90)
     QSize size = configDialogSize(partConfig, "AddRepositoryDialog");
-#else
-    QSize size = Cervisia::configDialogSize(this, partConfig, "AddRepositoryDialog");
-#endif
     resize(size);
 }
 
 
 AddRepositoryDialog::~AddRepositoryDialog()
 {
-#if KDE_IS_VERSION(3,1,90)
     saveDialogSize(partConfig, "AddRepositoryDialog");
-#else
-    Cervisia::saveDialogSize(this, partConfig, "AddRepositoryDialog");
-#endif
 }
 
 

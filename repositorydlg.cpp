@@ -28,11 +28,6 @@
 #include "progressdlg.h"
 #include "repositories.h"
 
-#include <kdeversion.h>
-#if KDE_VERSION < KDE_MAKE_VERSION(3,1,90)
-#include "configutils.h"
-#endif
-
 
 class RepositoryListItem : public KListViewItem
 {
@@ -198,11 +193,7 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, CvsService_stub* cvsService,
 
     setWFlags(Qt::WDestructiveClose | getWFlags());
 
-#if KDE_IS_VERSION(3,1,90)
     QSize size = configDialogSize(m_partConfig, "RepositoryDialog");
-#else
-    QSize size = Cervisia::configDialogSize(this, m_partConfig, "RepositoryDialog");
-#endif
     resize(size);
 
     // without this restoreLayout() can't change the column widths
@@ -215,11 +206,7 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, CvsService_stub* cvsService,
 
 RepositoryDialog::~RepositoryDialog()
 {
-#if KDE_IS_VERSION(3,1,90)
     saveDialogSize(m_partConfig, "RepositoryDialog");
-#else
-    Cervisia::saveDialogSize(this, m_partConfig, "RepositoryDialog");
-#endif
 
     m_repoList->saveLayout(&m_partConfig, QString::fromLatin1("RepositoryListView"));
 

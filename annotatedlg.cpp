@@ -14,13 +14,7 @@
 
 #include "annotatedlg.h"
 
-#include <kdeversion.h>
-
 #include "annotateview.h"
-
-#if KDE_VERSION < KDE_MAKE_VERSION(3,1,90)
-#include "configutils.h"
-#endif
 
 
 AnnotateDialog::AnnotateDialog(KConfig& cfg, QWidget *parent, const char *name)
@@ -35,22 +29,14 @@ AnnotateDialog::AnnotateDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     setWFlags(Qt::WDestructiveClose | getWFlags());
 
-#if KDE_IS_VERSION(3,1,90)
     QSize size = configDialogSize(partConfig, "AnnotateDialog");
-#else
-    QSize size = Cervisia::configDialogSize(this, partConfig, "AnnotateDialog");
-#endif
     resize(size);
 }
 
 
 AnnotateDialog::~AnnotateDialog()
 {
-#if KDE_IS_VERSION(3,1,90)
     saveDialogSize(partConfig, "AnnotateDialog");
-#else
-    Cervisia::saveDialogSize(this, partConfig, "AnnotateDialog");
-#endif
 }
 
 
