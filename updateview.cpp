@@ -21,7 +21,6 @@
 #include <qapplication.h>
 #include <qdir.h>
 #include <qfileinfo.h>
-#include <qheader.h>
 #include <qptrstack.h>
 #include <kconfig.h>
 #include <kdebug.h>
@@ -888,36 +887,41 @@ const QColor& UpdateView::remoteChangeColor() const
 void UpdateView::unfoldTree()
 {
     QApplication::setOverrideCursor(waitCursor);
-    
-    QPtrStack<QListViewItem> s;
-    for ( QListViewItem *item = firstChild(); item;
-	  item = item->nextSibling()? item->nextSibling() : s.pop() )
-	{
-	    if (isDirItem(item))
-                item->setOpen(true);
-            if (item->firstChild())
-		s.push(item->firstChild());
-            qApp->processEvents();
-	}
 
-    triggerUpdate();    
+    const bool updatesEnabled(isUpdatesEnabled());
+
+    setUpdatesEnabled(false);
+
+    QListViewItemIterator it(this);
+    while (QListViewItem* item = it.current())
+    {
+        if (isDirItem(item))
+            item->setOpen(true);
+
+        ++it;
+
+        qApp->processEvents();
+    }
+
+    setUpdatesEnabled(updatesEnabled);
+
+    triggerUpdate();
+
     QApplication::restoreOverrideCursor();
 }
 
 
 void UpdateView::foldTree()
 {
-    QPtrStack<QListViewItem> s;
-    for ( QListViewItem *item = firstChild(); item;
-	  item = item->nextSibling()? item->nextSibling() : s.pop() )
-	{
-	    if (isDirItem(item) && item != firstChild())
-                item->setOpen(false);
-            if (item->firstChild())
-		s.push(item->firstChild());
-	}
+    QListViewItemIterator it(this);
+    while (QListViewItem* item = it.current())
+    {
+        // don't close the top level directory
+        if (isDirItem(item) && item->parent())
+            item->setOpen(false);
 
-    triggerUpdate();    
+        ++it;
+    }
 }
 
 
