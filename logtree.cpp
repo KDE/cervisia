@@ -13,18 +13,16 @@
 
 #include "logtree.h"
 
-#include <qapplication.h>
 #include <qdatetime.h>
 #include <qpainter.h>
+#include <qstringlist.h>
 #include <qstylesheet.h>
-#include <qtooltip.h>
 #include <kdebug.h>
 #include <kglobal.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
 
 #include "tiplabel.h"
-#include "misc.h"
 
 
 const int LogTreeView::BORDER = 8;
@@ -84,7 +82,6 @@ LogTreeView::LogTreeView(QWidget *parent, const char *name)
     setCellWidth(0);
     setCellHeight(0);
 
-    qApp->installEventFilter(this);
     currentRow = -1;
     currentCol = -1;
     currentLabel = 0;
@@ -374,22 +371,8 @@ void LogTreeView::paintRevisionCell(QPainter *p,
     // The box itself
     if (selected)
         {
-#if QT_VERSION < 300
-            if (style().guiStyle() == WindowsStyle)
-                {
-                    p->fillRect(x, y, boxwidth, boxheight, QApplication::winStyleHighlightColor());
-                    p->setPen(white);
-                }
-            else
-                {
-                    p->fillRect(x, y, boxwidth, boxheight, colorGroup().text());
-                    p->setPen(colorGroup().base());
-                }
-#else
-	    p->fillRect(x, y, boxwidth, boxheight, KGlobalSettings::highlightColor());
-	    p->setPen(KGlobalSettings::highlightedTextColor());
-
-#endif
+            p->fillRect(x, y, boxwidth, boxheight, KGlobalSettings::highlightColor());
+            p->setPen(KGlobalSettings::highlightedTextColor());
         }
     else
         {
@@ -442,10 +425,6 @@ void LogTreeView::mousePressEvent(QMouseEvent *e)
 
 void LogTreeView::mouseMoveEvent(QMouseEvent *e)
 {
-#if 0
-    if (o != this || e->type() != QEvent::MouseMove || !isActiveWindow())
-        return QtTableView::eventFilter(o, e);
-#endif
     if (!isActiveWindow())
         return;
 
