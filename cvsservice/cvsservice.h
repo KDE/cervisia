@@ -103,6 +103,11 @@ k_dcop:
                  unsigned contextLines);
 
     /**
+     * @param files
+     */
+    DCOPRef edit(const QStringList& files);
+
+    /**
      * Shows a history of activity (like checkouts, commits, etc) in the
      * repository for all users and all record types.
      *
@@ -156,7 +161,7 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */    
-    DCOPRef status(const QStringList& files, bool recursive);
+    DCOPRef simulateUpdate(const QStringList& files, bool recursive);
 
     /**
      * Shows the status of the files in the working copy.
@@ -169,6 +174,11 @@ k_dcop:
      *         null reference.
      */    
     DCOPRef status(const QStringList& files, bool recursive, bool tagInfo);
+
+    /**
+     * @param files
+     */
+    DCOPRef unedit(const QStringList& files);
 
     /**
      * Merges changes from the repository into the files of the

@@ -217,6 +217,22 @@ DCOPRef CvsService::diff(const QString& fileName, const QString& revA,
 }
 
 
+DCOPRef CvsService::edit(const QStringList& files)
+{
+    if( !d->hasWorkingCopy() || d->hasRunningJob() )
+        return DCOPRef();
+
+    // assemble the command line
+    // cvs edit [FILES]
+    d->singleCvsJob->clearCvsCommand();
+
+    *d->singleCvsJob << d->repository->cvsClient() << "edit"
+                     << CvsServiceUtils::joinFileList(files);
+
+    return d->setupNonConcurrentJob();
+}
+
+
 DCOPRef CvsService::history()
 {
     if( !d->hasWorkingCopy() )
@@ -307,7 +323,7 @@ DCOPRef CvsService::remove(const QStringList& files, bool recursive)
 }
 
 
-DCOPRef CvsService::status(const QStringList& files, bool recursive)
+DCOPRef CvsService::simulateUpdate(const QStringList& files, bool recursive)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
         return DCOPRef();
@@ -349,6 +365,23 @@ DCOPRef CvsService::status(const QStringList& files, bool recursive, bool tagInf
 
     // return a DCOP reference to the cvs job
     return DCOPRef(d->appId, job->objId());
+}
+
+
+DCOPRef CvsService::unedit(const QStringList& files)
+{
+    if( !d->hasWorkingCopy() || d->hasRunningJob() )
+        return DCOPRef();
+
+    // assemble the command line
+    // echo y | cvs unedit [FILES]
+    d->singleCvsJob->clearCvsCommand();
+
+    *d->singleCvsJob << "echo y |"
+                     << d->repository->cvsClient() << "unedit"
+                     << CvsServiceUtils::joinFileList(files);
+
+    return d->setupNonConcurrentJob();
 }
 
 

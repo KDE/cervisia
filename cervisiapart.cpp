@@ -737,7 +737,7 @@ void CervisiaPart::slotStatus()
 
     update->prepareJob(opt_updateRecursive, UpdateView::UpdateNoAct);
     
-    DCOPRef cvsJob = cvsService->status(list, opt_updateRecursive);
+    DCOPRef cvsJob = cvsService->simulateUpdate(list, opt_updateRecursive);
 
     // get command line from cvs job
     QString cmdline;
@@ -1091,11 +1091,12 @@ void CervisiaPart::slotEdit()
     if (list.isEmpty())
         return;
 
-    QString cmdline = cvsClient(repository);
-    cmdline += " edit ";
-    cmdline += joinLine(list);
+    DCOPRef cvsJob = cvsService->edit(list);
 
-    if (protocol->startJob(sandbox, repository, cmdline))
+    // get command line from cvs job
+    QString cmdline = cvsJob.call("cvsCommand()");
+
+    if( protocol->startJob() )
     {
         showJobStart(cmdline);
         connect( protocol, SIGNAL(jobFinished(bool, int)),
@@ -1110,12 +1111,12 @@ void CervisiaPart::slotUnedit()
     if (list.isEmpty())
         return;
 
-    QString cmdline = "echo y | ";
-    cmdline += cvsClient(repository);
-    cmdline += " unedit ";
-    cmdline += joinLine(list);
+    DCOPRef cvsJob = cvsService->unedit(list);
 
-    if (protocol->startJob(sandbox, repository, cmdline))
+    // get command line from cvs job
+    QString cmdline = cvsJob.call("cvsCommand()");
+
+    if( protocol->startJob() )
     {
         showJobStart(cmdline);
         connect( protocol, SIGNAL(jobFinished(bool, int)),

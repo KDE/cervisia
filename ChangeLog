@@ -1,3 +1,9 @@
+2003-05-22  Christian Loose  <christian.loose@hamburg.de>
+
+	* Added edit() and unedit() method to cvs DCOP service
+	  and used them for the corresponding actions in
+	  Cervisia.
+
 2003-05-14  Christian Loose  <christian.loose@hamburg.de>
 
 	* Use DCOP service for history action
