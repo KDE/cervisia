@@ -88,10 +88,10 @@ systems may be integrated in the future.
 </para>
 
 <para>
-A version control system is a tool to record, manage and distribute
+A version control system is a tool to record, manage, and distribute
 different versions of files. &CVS; is a version control system. It allows you
-to share your modifications easily, as each of the contributors can work in his
-local copy at the same time, without fear of overriding  each other
+to share your modifications easily, as each of the contributors can work on their
+local copy at the same time, without fear of overwriting each others'
 modifications. It allows the recovery of past versions (useful for tracking
 bugs), the creation of branches (for experimental development or for releases
 of code) and more.
@@ -103,14 +103,14 @@ project (commercial or not), but you can take advantage of the nice revision
 control features offered by &CVS; even for a project developed exclusively by
 you. It is easy to set up a local repository, and you will gain the ability to
 track changes that caused bugs, revert changes, avoid accidental loss of
-information, &etc;
+information, &etc;.
 </para>
 
 <para>
-While the repository holds the project files, and every contributor keeps their
+The repository holds the project files, and every contributor keeps their
 own local copy, named <firstterm>working copy</firstterm> or
-<firstterm>sandbox</firstterm>. One can add his modifications to the main
-repository (a process called &quot;committing&quot;) and / or update his own
+<firstterm>sandbox</firstterm>; one can then add their modifications to the main
+repository (a process called &quot;committing&quot;) and/or update their own
 copy to reflect recent changes made by other contributors.
 </para>
 
@@ -124,7 +124,7 @@ copy to reflect recent changes made by other contributors.
     
 <para>
 In this section, we show how to use the basic version control system
-functionality using &cervisia;, basically to checkout modules from the
+functionality using &cervisia; to checkout modules from the
 repository and work with them. To do that, you must have access to the
 repository as a client, meaning that someone (probably the administrator of
 the &CVS; repository) gave you an account on the server machine. Alternatively,
@@ -136,7 +136,7 @@ If you plan to develop a complex project, it is a good idea to use the
 &CVS; features, even if you are the only developer. You can make all changes in
 the working copy, and use &cervisia; (or any other &CVS; tool) to update and
 commit. This way, you will gain the ability to track changes that caused bugs,
-revert changes, avoid accidental loss of information, etc. Using &cervisia;, it
+revert changes, avoid accidental loss of information, &etc;. Using &cervisia;, it
 is simple to create a local repository.
 </para>
 
@@ -194,7 +194,7 @@ Repositories dialog</phrase></textobject>
 <para>
 There are several methods to access a CVS repository. It may be reached via
 password authentication (:pserver:), secure shell (using :ext:), local
-repository (:local:), &etc;. The format for the repository  location is
+repository (:local:), &etc;. The format for the repository location is
 (optional items appear between square brackets):
 </para>
 
@@ -243,12 +243,12 @@ The repository location is something like
 This method requires that you have a user account on the server machine (in
 this example, <systemitem class="systemname">host.url.org</systemitem>) and
 use a remote shell for communication.  By default, &CVS; uses &rsh; for this
-purpose, however, &rsh; is long considered to be insecure, and is widely
+purpose; however, &rsh; has long considered to be insecure, and is widely
 replaced by &ssh;.
 </para>
 
 <para>
-If you must use &ssh;, you must set the environment variable
+If you wish to use &ssh;, you must set the environment variable
 $<envar>CVS_RSH</envar> to &ssh; when using the <command>cvs</command>
 client. &cervisia; supports this easily.
 </para>
@@ -256,7 +256,7 @@ client. &cervisia; supports this easily.
 <!-- TODO: verify if the above still apply -->
 
 <para>
-Note that &cervisia; can not answer possible password requests from the
+Note that &cervisia; cannot answer possible password requests from the
 server machine. You must make sure that a remote login works without requiring
 you to enter the password. With plain vanilla &rsh;, this can be achieved for
 example by  creating a <filename>.rhosts</filename> file in your home folder
@@ -267,7 +267,7 @@ with a list of trusted hosts (see the &rsh; manpage).
 With &ssh;, it can be achieved by copying your public key located in the file
 <filename>identity.pub</filename>, located in the
 <filename>$<envar>HOME</envar>/.ssh/</filename> folder to the server. In this
-case, the key must not be encrypted with a passphrase see the &ssh;> manpage and
+case, the key must not be encrypted with a passphrase see the &ssh; manpage and
 the &CVS;/<acronym>SSH</acronym> <acronym>FAQ</acronym> on
 SourceForge). If you are unsure about these issues, ask your system
 administrator.
@@ -288,18 +288,18 @@ The repository location looks like
 <para>
 This method accesses the server via a special protocol with a relatively weak
 authentication (<literal>pserver</literal> stands for password
-authentication). Before you can use such a server, you need a user name and
+authentication). Before you can use such a server, you need a username and
 password given by the &CVS; server administrator, and you have to login. Note
-that your &CVS; password authentication user name does not necessarily matches
-system's user name. Before accessing the &CVS; server, you will need to login.
+that your &CVS; password authentication username does not necessarily match the
+system's username. Before accessing the &CVS; server, you will need to login.
 </para>
 
 <para>
-Open source projects typically offer Anonymous CVS access to their
+Open-source projects typically offer Anonymous CVS access to their
 sources. This means you can easily grab the latest sources, modify, and create
 patches (differences) against the repository without asking for a CVS account.
 As a general rule, Anonymous CVS uses password authentication (:pserver:), and
-is a read only repository, not allowing you to upload your changes directly.
+is a read-only repository, not allowing you to upload your changes directly.
 </para>
 
 </listitem>
@@ -356,7 +356,7 @@ column entry of the pserver repository will change from
 
 <step><para>
 Press <guibutton>OK</guibutton> to apply your modifications, or add another
-location to the list. &cervisia; will store as many locations as you like!
+location to the list. &cervisia; will store as many locations as you like.
 </para></step>
 
 </procedure>
@@ -368,7 +368,7 @@ location to the list. &cervisia; will store as many locations as you like!
 <title>Importing a Module Into the Repository</title>
 
 <para>
-In this section, we discuss how you put a new project into the &CVS;
+In this section, we discuss how you can put a new project into the &CVS;
 repository. If you just want to work with an existing project which is already
 in a repository, you may skip this section.
 </para>
@@ -397,7 +397,7 @@ more control, but it will probably take a little more time.
 <para>
 Keep in mind that &CVS; was initially designed to handle
 text files. Many features, like revision merging, creating differences in a
-readable form, etc... are only performed to text files. This does not mean you
+readable form, &etc; are only performed to text files. This does not mean you
 cannot use CVS to keep binary files, it just means you have to
 <emphasis>explicitly tell CVS if it is a text or binary file</emphasis>. If
 you declare the wrong file type, you will experience problems with the &CVS;
@@ -531,7 +531,7 @@ go into the repository is to create a folder with only the files which you
 want to import and start from that. Nevertheless, this entry may be useful if
 the project contains files which are by default ignored by &CVS;, &eg; files
 with the name <filename>core</filename>. In such a case, simply enter the
-character <literal>!</literal> in this field. This overrules &CVS;'s scheme of
+character <literal>!</literal> in this field: this overrules &CVS;'s scheme of
 ignored files, see <xref linkend="ignoredfiles"/>.
 </para></listitem>
 </varlistentry>
@@ -540,7 +540,7 @@ ignored files, see <xref linkend="ignoredfiles"/>.
 <term><guilabel>Comment:</guilabel> <xref linkend="co-comment" /></term>
 <listitem><para>
 Use this field to record the comments you might have about the origin, use,
-development, &etc;, of the files you are importing.
+development, &etc; of the files you are importing.
 </para></listitem>
 </varlistentry>
 
@@ -585,7 +585,7 @@ You should also know the name of the <firstterm>branch</firstterm> or
 </para>
 
 <para>
-Branches of a module are parallel versions of this module. A good real life
+Branches of a module are parallel versions of this module. A good real-life
 example of the use of this feature is the release of a software project. After a
 major release, there are bugs in the code that should be fixed, but people want
 to add new features to the application too. It is very hard to do both at the
@@ -599,10 +599,10 @@ only add bugfixes, leaving the main branch (HEAD) open for adding new features.
 Tags are used to mark a version of a project. &CVS; stamps one
 version of each file with the tag, so when you checkout or
 update to a specific tag, you will get always the same file versions.
-Therefore, in opposition to branches, tags are not dynamic: you can't develop a
-tag. Tags are useful to mark releases, big changes in the code, &etc;
+Therefore, in opposition to branches, tags are not dynamic: you cannot develop a
+tag. Tags are useful to mark releases, big changes in the code, &etc;.
 Using tags, you can easily return the project to a previous state, to reproduce and
-track bugs, generate the release code again, &etc;
+track bugs, generate the release code again, &etc;.
 </para>
 
 <figure id="screenshot-checkout" float="1">
@@ -619,7 +619,7 @@ track bugs, generate the release code again, &etc;
 <term><guilabel>Repository:</guilabel></term>
 <listitem><para>
 The name of the &CVS; repository, also known as
-<filename><envar>$CVSROOT</envar></filename>. The drop down box shows a
+<filename><envar>$CVSROOT</envar></filename>. The drop-down box shows a
 list of the repositories you previously entered using the <guilabel>Configure
 Access to Repositories</guilabel> dialog box. If the repository is remote,
 make sure that authentication works. See <xref
@@ -631,8 +631,8 @@ linkend="accessing-repository"/> for more information.
 <term><guilabel>Module:</guilabel></term>
 <listitem><para>
 The name of the module to be checked out. If you are working with an existing
-repository, you can probably get this name from the system administrator,
-or if it is an open source repository, you can get the module names from the
+repository, you can probably get this name from the system administrator;
+or, if it is an open-source repository, you can get the module names from the
 project web pages. If you want to create a new module from scratch using a local
 repository, just create a new folder in the local repository root folder. The
 name of the folder will be the same as the name of the empty module.
@@ -684,7 +684,7 @@ folder under the working folder rather than a folder named after the module.
 <listitem><para>
 If you check this box, the files will be exported rather than checked out. 
 Exporting obtains a copy of the source for the module without the CVS 
-administrative folders. For example export may be used to prepare the
+administrative folders. For example, export may be used to prepare the
 source code for a release.
 </para></listitem>
 </varlistentry>
@@ -701,15 +701,15 @@ When you start &cervisia;, and open a working copy by choosing
 <menuchoice>
 <guimenu>File</guimenu>
 <guimenuitem>Open Sandbox...</guimenuitem>
-</menuchoice>
+</menuchoice>,
 you can see two main areas in &cervisia;'s main window: the top one is a 
-hierarchical (tree) view of the current working copy, and the bottom area is
+hierarchical (tree) view of the current working copy; the bottom area is
 used to display the &CVS; commands &cervisia; issues to perform its tasks, as
 well as the output generated by these commands.
 </para>
 
 <para>
-By default, &cervisia; does not display the files contained by the sub folders,
+By default, &cervisia; does not display the files contained by the sub-folders,
 so you will have to click the folders you want to see. To display all files
 of the working copy, select
 <menuchoice>
@@ -726,11 +726,11 @@ To close back all folders from the working copy, choose
 <para>
 According to the settings in your
 <filename>.cvsignore</filename> files, the files you usually do not want to
-include into the repository - like e.g. object files - are not shown in the tree
+include into the repository - such as object files - are not shown in the tree
 view. For each file, you see its corresponding status. In the default setting,
 after opening the sandbox, this is "Unknown" because &cervisia; delays the
-fetching of information until you select the files and folders you want to view
-the status or update and choose
+fetching of information until you select the files and folders whose status you
+want to update or view and choose
 <menuchoice>
 <guimenu>File</guimenu>
 <guimenuitem>Update</guimenuitem>
@@ -815,8 +815,8 @@ to update this file so you have an up-to-date version in your folder.
 <varlistentry>
 <term><guilabel>Needs Patch</guilabel></term>
 <listitem><para>
-This is essentially the same as before. The difference is only
-the hint that in case of an update, the &CVS; server transfers only a patch
+This is essentially the same as before; the difference is 
+that in case of an update, the &CVS; server transfers only a patch
 instead of the whole file to you.
 </para></listitem>
 </varlistentry>
@@ -867,7 +867,7 @@ Now that you have got an overview of the current status of the CVS, you may
 want to do an update. Mark some files (or the root of the folder tree which
 is equivalent to marking all files in this folder). Now choose
 <guimenuitem>Update</guimenuitem> from the <guimenu>File</guimenu> menu, or
-right click the marked files and choose the <menuchoice>
+right-click the marked files and choose the <menuchoice>
 <guisubmenu>Status</guisubmenu></menuchoice> menu item from the pop-up menu. (Of
 course, you could have chosen this at the beginning of the session). For some
 of the files the status may change now. Typically, files which had "Needs
@@ -959,7 +959,7 @@ submenu, and select one of the other applications that handle that file type.
 <title>Adding Files</title>
 
 <para>
-Adding files to a project requires two steps: First, the files must be
+Adding files to a project requires two steps: first, the files must be
 registered with &CVS;, or in other words,
 <emphasis>added to the repository</emphasis>. This is necessary, but not
 sufficient. In order to actually put the files into the repository, you must
@@ -975,7 +975,7 @@ main view. Then, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Add to
 Repository...</guimenuitem></menuchoice>, or right click the marked files and
 choose <guimenuitem>Add to Repository...</guimenuitem>. The
 <guilabel>CVS Add</guilabel> dialog will appear, listing the files you marked, and
-asking for confirmation. Press <guibutton>OK</guibutton>.
+asks for confirmation. Press <guibutton>OK</guibutton>.
 </para>
 
 <para>&cervisia; issues a command</para>
@@ -1003,7 +1003,7 @@ In order to switch the above behavior off, you should commit binary files
 (or other files, like Postscript or PNG images) by choosing
 <menuchoice><guimenu>File</guimenu><guimenuitem>Add Binary...</guimenuitem></menuchoice>.
 The <guilabel>CVS Add</guilabel> dialog will appear, listing the binary files
-you marked, and asking for confirmation. Press <guibutton>OK</guibutton>.
+you marked, and asks for confirmation. Press <guibutton>OK</guibutton>.
 </para>
 
 <para>
@@ -1062,8 +1062,8 @@ repository).
 </para>
 
 <para>
-As a substitute, &CVS; follows the convention that a folder is "not
-existent" in a version of the project if it is empty. This convention can be
+As a substitute, &CVS; follows the convention that a folder is "non-existent"
+in a version of the project if it is empty. This convention can be
 enforced by using the option <option>-P</option> to <command>cvs
 update</command> and <command>cvs checkout</command>. This option can be set
 in the menu <menuchoice><guimenu>Settings</guimenu><guimenuitem>Prune Empty
@@ -1091,11 +1091,11 @@ afterwards. &cervisia; issues the command
 <title>Committing Files</title>
 
 <para>
-When you have made a certain amount of changes to your working copy, and you
+When you have made a certain number of changes to your working copy, and you
 want other developers to have access to them, you <emphasis>commit</emphasis>
 them. With a commit, you place your versions of the modified files as new
 revisions into the repository. A subsequent update by another developer will
-bring your modifications into his working copy.
+bring your modifications into their working copy.
 </para>
 
 <para>
@@ -1136,7 +1136,7 @@ is used.
 <note><para>
 A common error you may encounter when committing is <errorname>Up-to-date check
 failed</errorname>. This indicates that someone has committed changes to the
-repository since you last updated. Or more technically, that your
+repository since you last updated; or, more technically, that your
 <literal>BASE</literal> revision is not the newest on its branch. In such a
 case, &CVS; refuses to merge your modifications into the repository. The
 solution is to update, resolve any conflicts and commit again. Of course, if
@@ -1176,8 +1176,7 @@ this end, at the top of the file, an entry with the current date and your user
 name (which can be configured as described in <xref
 linkend="customize-general"/>) is inserted. When you finish the dialog this
 dialog by clicking <guibutton>OK</guibutton>, the next commit dialog you open
-will have the log message set to the message you last entered in the change
-log. 
+will have the log message set to the message you last entered in the ChangeLog. 
 </para>
 
 </sect1>
@@ -1189,7 +1188,7 @@ log.
 <para>
 Conflicts may occur whenever you have made changes to a file which was also
 modified by another developer. The conflict is detected by &CVS; when you
-update the modified file. &CVS; then tries to merge the modifications committed
+update the modified file; &CVS; then tries to merge the modifications committed
 by the other developer into your working copy. The merge fails if both your
 and his modifications are in overlapping parts of the file, and the &CVS;
 server issues an error message.
@@ -1316,7 +1315,7 @@ a file, so you can find an appropriate log message.
 
 <listitem><para>
 You can view the differences between the version in your sandbox and the version
-in the main development branch (also called <literal>HEAD</literal>) choosing
+in the main development branch (also called <literal>HEAD</literal>) by choosing
 <menuchoice><guimenu>View</guimenu>
 <guimenuitem>Difference to Repository (HEAD)...</guimenuitem></menuchoice>.
 </para></listitem>
@@ -1331,7 +1330,7 @@ choosing <menuchoice><guimenu>View</guimenu>
 You can access the <guimenuitem>Difference to Repository (BASE)...</guimenuitem>,
 <guimenuitem>Difference to Repository (HEAD)...</guimenuitem> and 
 <guimenuitem>Last Change...</guimenuitem> menu items from the main view pop-up
-menu, by right clicking the file you want to view.
+menu, by right-clicking the file you want to view.
 </para></listitem>
 
 <listitem><para>
@@ -1344,7 +1343,7 @@ main view.
 </para></listitem>
 
 <listitem><para>
-In the Browse logs dialog, you can mark two revisions of a file and request a
+In the Browse Logs dialog, you can mark two revisions of a file and request a
 dialog showing the differences between them (see <xref linkend="browsinglogs"/>).
 </para></listitem>
 
@@ -1507,7 +1506,7 @@ generating the patch.
 
 
 <para>
-After setting the output format, &cervisia; generates the patch and diplays the
+After setting the output format, &cervisia; generates the patch and displays the
 <guilabel>Save As</guilabel> dialog. Enter in this dialog the file name
 and location of the patch file.
 </para>
@@ -1628,9 +1627,9 @@ log</command> command (<guilabel>CVS Output</guilabel>), as a
 <guilabel>Tree</guilabel>, or in <guilabel>List</guilabel> form. What you prefer
 is of course a matter of taste and it depends on what information you are
 interested in.  The tree is an intuitive representation of what has been done
-on different branches by which authors. As tooltips, you can see the according
-log messages. The list is by its nature linear and therefore does not give an
-immediate view of branches. On the other hand, it concentrates more otherwise
+on different branches by which authors. As tooltips, you can see the corresponding
+log messages. The list is by its nature linear and, therefore, does not give an
+immediate view of branches; on the other hand, it concentrates more otherwise
 relevant information on less screen estate, namely the time of each change of
 the file and the first part of the log message. The CVS output information is
 complete, but long, and difficult to read. To alleviate these problems, you
@@ -1731,7 +1730,7 @@ releases. Choose <guimenuitem>History</guimenuitem> from the
 
 <note><para>
 This fetches the complete logging file from the server, i.e. a list of
-the events for all users and all modules. This can be a huge amount of data!
+the events for all users and all modules. This can be a huge amount of data.
 </para></note>
 
 <para>
@@ -1878,8 +1877,8 @@ only add bugfixes, leaving the main branch (HEAD) open for adding new features.
 <para>
 Tags are used to mark a version of a project. &CVS; stamps one
 version of each file with the tag, so when you checkout or
-update to a specific tag, you will get always the same file versions.
-Therefore, in opposition to branches, tags are not dynamic: you can't develop a
+update to a specific tag, you will get always the same file versions;
+therefore, as opposed to branches, tags are not dynamic: you cannot develop a
 tag. Tags are useful to mark releases, big changes in the code, &etc;
 </para>
 
@@ -1906,8 +1905,8 @@ in that specific date or the versions stamped by that tag.
 
 <warning><para>
 Before updating to a different branch or tag, make sure you committed all your
-changes to the branch you are working with. If your a not ready to
-commit your changes, but don't want to discard them, do not update to the new
+changes to the branch you are working with. If your are not ready to
+commit your changes, but do not want to discard them, do not update to the new
 branch, as you may lose your changes. As an alternative, you can do a new
 <link linkend="checkingout">checkout</link>, to work in parallel with
 both versions.
@@ -2010,7 +2009,7 @@ Normally, you will want to tag the whole project (although &CVS; of course
 allows you to tag only a subset). To this end, mark the toplevel folder in
 the view and choose
 <menuchoice><guimenu>Advanced</guimenu><guimenuitem>Tag/Branch</guimenuitem></menuchoice>.
-Now enter the name of the tag, press <keycap>Return</keycap> and you are done!
+Now enter the name of the tag, press <keycap>Return</keycap> and you are done.
 </para>
 
 <para>
@@ -2161,10 +2160,10 @@ people who have registered a respective watch on the file. Of course,
 sometimes you may not want to commit the file, but abort the editing session
 and revert to the previous version of the file. This is done by using
 <menuchoice><guimenu>Advanced</guimenu><guimenuitem>Unedit</guimenuitem></menuchoice>.
-Note that &cervisia; will not ask you for confirmation! That means, if you use
+Note that &cervisia; will not ask you for confirmation; that means if you use
 this menu item, all your work done since you used
 <menuchoice><guimenu>Advanced</guimenu><guimenuitem>Edit</guimenuitem></menuchoice>
-will get lost. Precisely, &cervisia; uses the command line
+will be lost. Precisely, &cervisia; uses the command line
 </para>
 
 <para>
@@ -2182,7 +2181,7 @@ that when the project enforces edits, working copies are checked out
 <emphasis>readonly</emphasis>. That means you cannot edit a file by default
 (unless you use tricks like <command>chmod</command>). Only when you use 
 <menuchoice><guimenu>Advanced</guimenu><guimenuitem>Edit</guimenuitem></menuchoice>,
-the file becomes writable. It is made readonly again when you commit the file
+the file becomes writable. It is made read-only again when you commit the file
 or use
 <menuchoice><guimenu>Advanced</guimenu><guimenuitem>Unedit</guimenuitem></menuchoice>.
 </para>
@@ -2205,7 +2204,7 @@ When Necessary</guimenuitem></menuchoice>. Now, whenever you edit a file by
 double-clicking it, &cervisia; will run <command>cvs edit</command> before the
 editor is actually executed. Then you can edit your file as usual. When you
 have finished your work, commit your files, and the committed files are
-readonly again.
+read-only again.
 </para>
 
 </sect1>
@@ -2286,7 +2285,7 @@ Whenever you use the menu item
 Entry...</guimenuitem></menuchoice>, a new ChangeLog entry is generated with
 the current date and your username. Normally, it is considered good style to
 insert your full name and your email address into each of your ChangeLog
-entries. &cervisia; adds them automatically the full name and email address
+entries. &cervisia; add automatically the full name and email address
 entered here.
 </para></listitem>
 </varlistentry>
@@ -2475,8 +2474,8 @@ Change</guilabel>, or <guilabel>Remote Change</guilabel>, in the main view or
 <varlistentry id="customize-splitter">
 <term><guilabel>Split main window horizontally</guilabel></term>
 <listitem><para>
-&cervisia;'s main window is normally splitted vertically into a window with
-the file tree above and one with the &CVS; output below. Alternatively, you can
+&cervisia;'s main window is normally split vertically into a window with
+the file tree above and one with the &CVS; output below; alternatively, you can
 arrange them horizontally.
 </para></listitem>
 </varlistentry>
@@ -2553,8 +2552,8 @@ url="http://cvshome.org/docs/manual/cvs.html">on the web</ulink>.
 
 <para>
 As this book is maintained together with &CVS;, it is normally the most
-up-to-date reference. Nevertheless I recommend considering other documentation
-for learning to use &CVS;, in particular the following.
+up-to-date reference; nevertheless, considering other documentation
+for learning to use &CVS; is recommended, in particular the following.
 </para></listitem>
 
 <listitem><para>
@@ -3089,7 +3088,7 @@ Determines whether the toolbar is displayed.
 <guimenu>Settings</guimenu><guimenuitem>Create Folders on Update</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Determines whether updates create folders in the sandbox which weren't
+Determines whether updates create folders in the sandbox which were not
 there before (Option <option>-d</option> to <command>cvs update</command>).
 </para></listitem>
 </varlistentry>
