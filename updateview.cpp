@@ -604,29 +604,30 @@ void UpdateFileItem::setRevTag(const QString& rev, const QString& tag)
     if (tag.length() == 20 && tag[0] == 'D' && tag[5] == '.'
         && tag[8] == '.' && tag[11] == '.' && tag[14] == '.'
         && tag[17] == '.')
-        {
-            m_tag = tag.mid(1, 4);
-            m_tag += '/';
-            m_tag += tag.mid(6, 2);
-            m_tag += '/';
-            m_tag += tag.mid(9, 2);
-            m_tag += ' ';
-            m_tag += tag.mid(12, 2);
-            m_tag += ':';
-            m_tag += tag.mid(15, 2);
-            m_tag += ':';
-            m_tag += tag.mid(18, 2);
+    {
+        const QDate tagDate(tag.mid(1, 4).toInt(),
+                            tag.mid(6, 2).toInt(),
+                            tag.mid(9, 2).toInt());
+        const QTime tagTime(tag.mid(12, 2).toInt(),
+                            tag.mid(15, 2).toInt(),
+                            tag.mid(18, 2).toInt());
+        const QDateTime tagDateTime(tagDate, tagTime);
+
+        // TODO: this is in UTC and should be converted to local time
+        m_tag = tagDateTime.isValid()
+            ? KGlobal::locale()->formatDateTime(tagDateTime)
+            : tag;
         }
     else if (tag.length() > 1 && tag[0] == 'T')
-        m_tag = tag.mid(1, tag.length()-1);
+        m_tag = tag.mid(1);
     else
         m_tag = tag;
 
     if (isVisible())
-        {
-            widthChanged();
-            repaint();
-        }
+    {
+        widthChanged();
+        repaint();
+    }
 }
 
 void UpdateFileItem::setDate(const QDateTime& date)
