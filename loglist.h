@@ -57,8 +57,8 @@ private:
     struct Options {
         int sortColumn;
         bool sortAscending;
-        QArray<int> indexToColumn;
-        QArray<int> columnSizes;
+        QMemArray<int> indexToColumn;
+        QMemArray<int> columnSizes;
     };
     static Options *options;
     

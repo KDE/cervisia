@@ -15,7 +15,7 @@
 #ifndef LOGTREE_H
 #define LOGTREE_H
 
-#include <qarray.h>
+#include <qmemarray.h>
 #include <qptrlist.h>
 
 #include "qttableview.h"
@@ -70,8 +70,8 @@ private:
     LogTreeConnectionList connections;
     int currentRow, currentCol;
     TipLabel *currentLabel;
-    QArray<int> colWidths;
-    QArray<int> rowHeights;
+    QMemArray<int> colWidths;
+    QMemArray<int> rowHeights;
 
     static const int BORDER;
     static const int INSPACE;

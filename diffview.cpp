@@ -40,7 +40,7 @@ public:
 };
 
 
-int DiffViewItemList::compareItems(QCollection::Item item1, QCollection::Item item2)
+int DiffViewItemList::compareItems(QPtrCollection::Item item1, QPtrCollection::Item item2)
 {
     return (static_cast<DiffViewItem*>(item1)->no
 	    == static_cast<DiffViewItem*>(item2)->no)? 0 : 1;
@@ -52,7 +52,7 @@ const int DiffView::BORDER = 7;
 
 DiffView::DiffView( bool withlinenos, bool withmarker,
 		    QWidget *parent, const char *name )
-    : QtTableView(parent, name, WNorthWestGravity | WRepaintNoErase)
+    : QtTableView(parent, name, WRepaintNoErase)
 {
     setNumRows(0);
     setNumCols( 1 + (withlinenos?1:0) + (withmarker?1:0) );

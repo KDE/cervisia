@@ -16,7 +16,7 @@
 #define _LISTVIEW_H_
 
 #include <qlistview.h>
-#include <qarray.h>
+#include <qmemarray.h>
 
 class QTimer;
 
@@ -30,9 +30,9 @@ public:
     ~ListView();
 
     void setColumnConfig(int sortColumn, bool sortAscending,
-                         QArray<int> indexToColumn, QArray<int> columnSizes);
+                         QMemArray<int> indexToColumn, QMemArray<int> columnSizes);
     void getColumnConfig(int *sortColumn, bool *sortAscending,
-                         QArray<int> *indexToColumn, QArray<int> *columnSizes) const;
+                         QMemArray<int> *indexToColumn, QMemArray<int> *columnSizes) const;
 
     void setPreferredColumn(int i);
     int preferredColumn() const;

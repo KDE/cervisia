@@ -16,8 +16,10 @@
 #define DIFFVIEW_H
 
 
+#include "qttableview.h"
+
+#include <qptrcollection.h>
 #include <qptrlist.h>
-#include <qttableview.h>
 
 
 class DiffViewItem;
@@ -26,7 +28,7 @@ class DiffViewItem;
 class DiffViewItemList : public QPtrList<DiffViewItem>
 {
 protected:
-    virtual int compareItems(QCollection::Item item1, QCollection::Item item2);
+    virtual int compareItems(QPtrCollection::Item item1, QPtrCollection::Item item2);
 };
 
 

@@ -15,7 +15,7 @@
 #ifndef CVSPROGRESSDLG_H
 #define CVSPROGRESSDLG_H
 
-#include <qsemimodal.h>
+#include <qdialog.h>
 #include <qstringlist.h>
 
 
@@ -26,7 +26,7 @@ class QCString;
 class KAnimWidget;
 
 
-class CvsProgressDialog : public QSemiModal
+class CvsProgressDialog : public QDialog
 {
     Q_OBJECT
     

@@ -32,7 +32,7 @@
 
 
 CvsProgressDialog::CvsProgressDialog(const QString &text, QWidget *parent)
-    : QSemiModal(parent, "", true), childproc(0)
+    : QDialog(parent, "", true), childproc(0)
 {
     QBoxLayout *layout = new QVBoxLayout(this, 10);
 
@@ -255,7 +255,7 @@ void CvsProgressDialog::cancelClicked()
 void CvsProgressDialog::closeEvent(QCloseEvent *e)
 {
     cancelClicked();
-    QSemiModal::closeEvent(e);
+    QDialog::closeEvent(e);
 }
 
 #include "cvsprogressdlg.moc"

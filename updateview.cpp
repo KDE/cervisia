@@ -22,7 +22,7 @@
 #include <qdir.h>
 #include <qfileinfo.h>
 #include <qheader.h>
-#include <qstack.h>
+#include <qptrstack.h>
 #include <kconfig.h>
 #include <kdebug.h>
 #include <kglobalsettings.h>
@@ -776,7 +776,7 @@ UpdateView::Filter UpdateView::filter() const
 bool UpdateView::hasSingleSelection()
 {
     bool selfound = false;
-    QStack<QListViewItem> s;
+    QPtrStack<QListViewItem> s;
 
     for ( QListViewItem *item = firstChild(); item;
 	  item = item->nextSibling()? item->nextSibling() : s.pop() )
@@ -797,7 +797,7 @@ bool UpdateView::hasSingleSelection()
 
 void UpdateView::getSingleSelection(QString *filename, QString *revision)
 {
-    QStack<QListViewItem> s;
+    QPtrStack<QListViewItem> s;
 
     for ( QListViewItem *item = firstChild(); item;
 	  item = item->nextSibling()? item->nextSibling() : s.pop() )
@@ -818,7 +818,7 @@ void UpdateView::getSingleSelection(QString *filename, QString *revision)
 QStringList UpdateView::multipleSelection()
 {
     QStringList res;
-    QStack<QListViewItem> s;
+    QPtrStack<QListViewItem> s;
 
     for ( QListViewItem *item = firstChild(); item;
           item = item->nextSibling()? item->nextSibling() : s.pop() )
@@ -848,7 +848,7 @@ QStringList UpdateView::multipleSelection()
 QStringList UpdateView::fileSelection()
 {
     QStringList res;
-    QStack<QListViewItem> s;
+    QPtrStack<QListViewItem> s;
 
     for ( QListViewItem *item = firstChild(); item;
           item = item->nextSibling()? item->nextSibling() : s.pop() )
@@ -867,7 +867,7 @@ void UpdateView::unfoldTree()
 {
     QApplication::setOverrideCursor(waitCursor);
     
-    QStack<QListViewItem> s;
+    QPtrStack<QListViewItem> s;
     for ( QListViewItem *item = firstChild(); item;
 	  item = item->nextSibling()? item->nextSibling() : s.pop() )
 	{
@@ -885,7 +885,7 @@ void UpdateView::unfoldTree()
 
 void UpdateView::foldTree()
 {
-    QStack<QListViewItem> s;
+    QPtrStack<QListViewItem> s;
     for ( QListViewItem *item = firstChild(); item;
 	  item = item->nextSibling()? item->nextSibling() : s.pop() )
 	{
@@ -984,7 +984,7 @@ void UpdateView::rememberSelection(bool recursive)
 
     QPtrList<QListViewItem> shallowItems, deepItems;
 
-    QStack<QListViewItem> s;
+    QPtrStack<QListViewItem> s;
     for ( QListViewItem *item = firstChild(); item;
 	  item = item->nextSibling()? item->nextSibling() : s.pop() )
 	{
@@ -1136,7 +1136,7 @@ void UpdateView::updateItem(const QString &name, Status status, bool isdir)
 	dirpath += '/';
 
     UpdateDirItem *longestmatch = 0;
-    QStack<QListViewItem> s;
+    QPtrStack<QListViewItem> s;
     for ( QListViewItem *item = firstChild(); item;
 	  item = item->nextSibling()? item->nextSibling() : s.pop() )
 	{

@@ -15,8 +15,10 @@
 #ifndef UPDATEVIEW_H
 #define UPDATEVIEW_H
 
-#include <qlist.h>
+
 #include "listview.h"
+
+#include <qptrlist.h>
 
 
 class UpdateView : public ListView

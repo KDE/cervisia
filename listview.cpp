@@ -39,7 +39,7 @@ ListView::~ListView()
 
 
 void ListView::setColumnConfig(int sortColumn, bool sortAscending,
-                               QArray<int> indexToColumn, QArray<int> columnSizes)
+                               QMemArray<int> indexToColumn, QMemArray<int> columnSizes)
 {
     m_sortColumn = sortColumn;
     m_sortAscending = sortAscending;
@@ -56,7 +56,7 @@ void ListView::setColumnConfig(int sortColumn, bool sortAscending,
 
 
 void ListView::getColumnConfig(int *sortColumn, bool *sortAscending,
-                               QArray<int> *indexToColumn, QArray<int> *columnSizes) const
+                               QMemArray<int> *indexToColumn, QMemArray<int> *columnSizes) const
 {
     *sortColumn = m_sortColumn;
     *sortAscending = m_sortAscending;

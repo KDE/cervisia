@@ -273,11 +273,11 @@ void HistoryDialog::choiceChanged()
                 continue;
             if ( onlyfilenames_box->isChecked() &&
                  !QString(filename_edit->text()).isEmpty() &&
-                 QRegExp(filename_edit->text(), true, true).match(item->text(HistoryItem::File)) != 0 )
+                 QRegExp(filename_edit->text(), true, true).search(item->text(HistoryItem::File)) < 0 )
                 continue;
             if ( onlydirnames_box->isChecked() &&
                  !QString(dirname_edit->text()).isEmpty() &&
-                 QRegExp(dirname_edit->text(), true, true).match(item->text(HistoryItem::Path)) != 0)
+                 QRegExp(dirname_edit->text(), true, true).search(item->text(HistoryItem::Path)) < 0)
                 continue;
 
             item->setVisible(true);
