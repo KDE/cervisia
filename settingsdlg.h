@@ -84,7 +84,7 @@ private:
     KColorButton *diffinsertbutton;
     KColorButton *diffdeletebutton;
 
-    KConfig* mServiceConfig;
+    KConfig* serviceConfig;
 };
 
 #endif

@@ -65,7 +65,7 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
     config = conf;
 
     // open cvs DCOP service configuration file
-    mServiceConfig = new KConfig("cvsservicerc");
+    serviceConfig = new KConfig("cvsservicerc");
 
     //
     // General Options
@@ -227,15 +227,15 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
 
 SettingsDialog::~SettingsDialog()
 {
-    delete mServiceConfig;
+    delete serviceConfig;
 }
 
 void SettingsDialog::readSettings()
 {
     // read entries from cvs DCOP service configuration
-    mServiceConfig->setGroup("General");
-    cvspathedit->setText(mServiceConfig->readEntry("CVSPath", "cvs"));
-    compressioncombo->setCurrentItem(mServiceConfig->readNumEntry("Compression", 0));
+    serviceConfig->setGroup("General");
+    cvspathedit->setText(serviceConfig->readEntry("CVSPath", "cvs"));
+    compressioncombo->setCurrentItem(serviceConfig->readNumEntry("Compression", 0));
     
     config->setGroup("General");
     timeoutedit->setValue((int)config->readUnsignedNumEntry("Timeout", 4000));
@@ -275,12 +275,12 @@ void SettingsDialog::readSettings()
 void SettingsDialog::writeSettings()
 {
     // write entries to cvs DCOP service configuration
-    mServiceConfig->setGroup("General");
-    mServiceConfig->writeEntry("CVSPath", cvspathedit->text());
-    mServiceConfig->writeEntry("Compression", compressioncombo->currentItem());
+    serviceConfig->setGroup("General");
+    serviceConfig->writeEntry("CVSPath", cvspathedit->text());
+    serviceConfig->writeEntry("Compression", compressioncombo->currentItem());
 
     // write to disk so other services can reparse the configuration
-    mServiceConfig->sync();
+    serviceConfig->sync();
 
     config->setGroup("General");
     config->writeEntry("Timeout", (unsigned)timeoutedit->value());
