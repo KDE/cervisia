@@ -23,6 +23,16 @@
 	* Make functionality to view diff in CommitDialog more visible
 	  by adding diff button.
 
+2003-01-11  André Wöbbeking <Woebbeking@web.de>
+
+	* unfoldTree(): reduced flicker and improved perfomance by disabling updates.
+
+2003-01-11  André Wöbbeking <Woebbeking@web.de>
+
+	* Moved colors from UpdateViewItem to UpdateView:
+	  o it's faster as you don't need KConfig in UpdateViewItem ctor
+	  o it needs less memory (3 colors per item)
+
 2003-01-09  Christian Loose <christian.loose@hamburg.de>
 
 	* Use DCOP stubs to access the methods of the cvs DCOP service
