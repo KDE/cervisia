@@ -1,3 +1,17 @@
+2004-07-07  Christian Loose  <christian.loose@kdemail.net>
+
+	* Implement wish #75017:
+	  Show the patch option dialog when the user called the
+	  'Create patch against repository' action and pass
+	  the selected options to the 'cvs diff' command.
+
+2004-07-05  Christian Loose  <christian.loose@kdemail.net>
+
+	* Added a new patch option dialog. This lets you choose
+	  the options passed to the diff command when creating
+	  a patch with the 'Create Patch' button in the log
+	  dialog.
+
 2004-06-21  Christian Loose  <christian.loose@kdemail.net>
 
 	* Implemented wish #66231:
