@@ -341,7 +341,7 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
             return false;
         }
 
-    QString cmdline = cvsClient(repository) + " -f diff ";
+    QString cmdline = cvsClient(repository) + " diff ";
     cmdline += config->readEntry("DiffOptions", "");
     cmdline += " -U ";
     cmdline += QString().setNum((int)config->readUnsignedNumEntry("ContextLines", 65535));
