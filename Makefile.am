@@ -38,8 +38,7 @@ shellrcdir = $(kde_datadir)/cervisia
 shellrc_DATA = cervisiashellui.rc
 
 messages: rc.cpp
-	$(EXTRACTRC) *.rc >> rc.cpp
-	$(XGETTEXT) -C *.cpp *.h -o $(podir)/cervisia.pot
+	$(XGETTEXT) *.cpp *.h -o $(podir)/cervisia.pot
 
 install-data-local:
 	$(mkinstalldirs) $(DESTDIR)/$(kde_icondir)/crystalsvg/32x32/apps

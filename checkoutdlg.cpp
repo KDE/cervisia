@@ -300,7 +300,7 @@ void CheckoutDialog::moduleButtonClicked()
 {
     QString cmdline = cvsClient(repository());
     cmdline += " -d ";
-    cmdline += repository();
+    cmdline += KProcess::quote(repository());
     cmdline += " checkout -c";
 
     CvsProgressDialog l("Checkout", this);
