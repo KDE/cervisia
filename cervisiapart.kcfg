@@ -4,8 +4,8 @@
   <kcfgfile name="cervisiapartrc" />
   <group name="General" >
     <entry key="Timeout" type="UInt">
-      <default>4000</default>
       <label>Delay (ms) until the progress dialog appears.</label>
+      <default>4000</default>
     </entry>
   </group>
 </kcfg>
