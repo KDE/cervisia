@@ -85,7 +85,7 @@ k_dcop:
      * working copy. (cvs -n update)
      *
      * @param files
-     * @param recursive descends into subdirectories.
+     * @param recursive descend into subdirectories.
      *
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
@@ -96,7 +96,7 @@ k_dcop:
      * Shows the status of the files in the working copy.
      *
      * @param files
-     * @param recursive descends into subdirectories.
+     * @param recursive descend into subdirectories.
      * @param tagInfo show tag information for the file.
      *
      * @return A DCOP reference to the cvs job or in case of failure a
@@ -104,6 +104,38 @@ k_dcop:
      */    
     DCOPRef status(const QString& files, bool recursive, bool tagInfo);
     
+    /**
+     * Merges changes from the repository into the files of the
+     * working copy.
+     *
+     * @param files
+     * @param recursive descend into subdirectories.
+     * @param createDirs create directories that exist in the repository
+     *                   but not yet in the working copy.
+     * @param pruneDirs remove empty directories from the working copy.
+     * @param extraOpt
+     *
+     * @return A DCOP reference to the cvs job or in case of failure a
+     *         null reference.
+     */
+    DCOPRef update(const QString& files, bool recursive, bool createDirs,
+                   bool pruneDirs, const QString& extraOpt);
+                   
+    /**
+     * Checks out a module from the repository into a working copy.
+     *
+     * @param workingDir
+     * @param repository
+     * @param module
+     * @param tag
+     * @param pruneDirs remove empty directories from the working copy.
+     *
+     * @return A DCOP reference to the cvs job or in case of failure a
+     *         null reference.
+     */
+    DCOPRef checkout(const QString& workingDir, const QString& repository,
+                     const QString& module, const QString& tag, bool pruneDirs);
+
     /**
      * Quits the DCOP service.
      */

@@ -51,7 +51,7 @@ struct CvsService::Private
     QString             workingCopy;
     Repository*         repository;
     
-    DCOPRef createCvsJob(const QString& cmdline);
+    CvsJob* createCvsJob();
 };
 
 
@@ -65,7 +65,7 @@ CvsService::CvsService()
     d->appId      = kapp->dcopClient()->appId();
 
     ++d->lastJobId;
-    d->singleCvsJob = new CvsJob(d->lastJobId, "");
+    d->singleCvsJob = new CvsJob(d->lastJobId);
 
     d->cvsJobs.setAutoDelete(true);
 
@@ -136,29 +136,26 @@ DCOPRef CvsService::annotate(const QString& fileName, const QString& revision)
         return DCOPRef();
     }
 
+    // create a cvs job
+    CvsJob* job = d->createCvsJob();
+    
+    // Assemble the command line
     QString quotedName = KProcess::quote(fileName);
     QString cvsClient  = d->repository->cvsClient();
 
-    // Assemble the command line
-    QString cmdline = "( " + cvsClient;
-    cmdline += " log ";
-    cmdline += quotedName;
-    cmdline += " && ";
-    cmdline += cvsClient;
-    cmdline += " annotate ";
-
+    *job << "(" << cvsClient << "log" << quotedName << "&&"
+        << cvsClient << "annotate";
+        
     if( !revision.isEmpty() )
-        cmdline += " -r " + revision;
+        *job << "-r" << revision;
 
-    cmdline += " ";
-    cmdline += quotedName;
     // *Hack*
     // because the string "Annotations for blabla" is
     // printed to stderr even with option -Q.
-    cmdline += " ) 2>&1";
+    *job << quotedName << ") 2>&1";
 
-    // create a cvs job
-    return d->createCvsJob(cmdline);
+    // return a DCOP reference to the cvs job
+    return DCOPRef(d->appId, job->objId());
 }
 
 
@@ -171,13 +168,14 @@ DCOPRef CvsService::log(const QString& fileName)
         return DCOPRef();
     }
 
-    // Assemble the command line
-    QString cmdline = d->repository->cvsClient();
-    cmdline += " log ";
-    cmdline += KProcess::quote(fileName);
-
     // create a cvs job
-    return d->createCvsJob(cmdline);
+    CvsJob* job = d->createCvsJob();
+    
+    // Assemble the command line
+    *job << d->repository->cvsClient() << "log" << KProcess::quote(fileName);
+
+    // return a DCOP reference to the cvs job
+    return DCOPRef(d->appId, job->objId());
 }
 
 
@@ -197,17 +195,20 @@ DCOPRef CvsService::status(const QString& files, bool recursive)
     }
 
     // Assemble the command line
-    QString cmdline = d->repository->cvsClient();
-    cmdline += " -n update ";
+    d->singleCvsJob->clearCvsCommand();
+    
+    *d->singleCvsJob << d->repository->cvsClient() << "-n update";
 
     if( !recursive )
-        cmdline += "-l ";
+        *d->singleCvsJob << "-l";
 
-    cmdline += files;
-    cmdline += " 2>&1";
+    *d->singleCvsJob << files << "2>&1";
 
-    // create a cvs job
-    return d->createCvsJob(cmdline);
+    d->singleCvsJob->setRSH(d->repository->rsh());
+    d->singleCvsJob->setServer(d->repository->server());
+    d->singleCvsJob->setDirectory(d->workingCopy);
+
+    return DCOPRef(d->appId, d->singleCvsJob->objId());
 }
 
 
@@ -220,20 +221,99 @@ DCOPRef CvsService::status(const QString& files, bool recursive, bool tagInfo)
         return DCOPRef();
     }
 
+    // create a cvs job
+    CvsJob* job = d->createCvsJob();
+
     // Assemble the command line
-    QString cmdline = d->repository->cvsClient();
-    cmdline += " status ";
+    *job << d->repository->cvsClient() << "status";
 
     if( !recursive )
-        cmdline += "-l ";
+        *job << "-l";
     
     if( tagInfo )
-        cmdline += "-v ";
+        *job << "-v";
 
-    cmdline += files;
+    *job << files;
 
-    d->singleCvsJob->setCvsCommand(cmdline);
+    // return a DCOP reference to the cvs job
+    return DCOPRef(d->appId, job->objId());
+}
+
+
+DCOPRef CvsService::update(const QString& files, bool recursive, 
+                           bool createDirs, bool pruneDirs, const QString& extraOpt)
+{
+    if( !d->repository )
+    {
+        KMessageBox::sorry(0, i18n("You have to set a local working copy "
+                                   "directory before you can use this function!"));
+        return DCOPRef();
+    }
+
+    if( d->singleCvsJob->isRunning() )
+    {
+        KMessageBox::sorry(0, i18n("There is already a job running"));
+        return DCOPRef();
+    }
+
+    // Assemble the command line
+    d->singleCvsJob->clearCvsCommand();
+    
+    *d->singleCvsJob << d->repository->cvsClient() << "update";
+
+    if( !recursive )
+        *d->singleCvsJob << "-l";
+
+    if( createDirs )
+        *d->singleCvsJob << "-d";
+
+    if( pruneDirs )
+        *d->singleCvsJob << "-P";
+
+    *d->singleCvsJob << extraOpt << files << "2>&1";
+
     d->singleCvsJob->setRSH(d->repository->rsh());
+    d->singleCvsJob->setServer(d->repository->server());
+    d->singleCvsJob->setDirectory(d->workingCopy);
+
+    return DCOPRef(d->appId, d->singleCvsJob->objId());
+}
+
+                   
+DCOPRef CvsService::checkout(const QString& workingDir, const QString& repository,
+                             const QString& module, const QString& tag, bool pruneDirs)
+{
+    if( !d->repository )
+    {
+        KMessageBox::sorry(0, i18n("You have to set a local working copy "
+                                   "directory before you can use this function!"));
+        return DCOPRef();
+    }
+
+    if( d->singleCvsJob->isRunning() )
+    {
+        KMessageBox::sorry(0, i18n("There is already a job running"));
+        return DCOPRef();
+    }
+
+    // Assemble the command line
+    d->singleCvsJob->clearCvsCommand();
+    
+    *d->singleCvsJob << "cd" << workingDir << "&&"
+                    << d->repository->cvsClient()
+                    << "-d" << repository
+                    << "checkout";
+                    
+    if( !tag.isEmpty() )
+        *d->singleCvsJob << "-r" << tag;
+
+    if( pruneDirs )
+        *d->singleCvsJob << "-P";
+
+    *d->singleCvsJob << module;
+
+    d->singleCvsJob->setRSH(d->repository->rsh());
+    d->singleCvsJob->setServer(d->repository->server());
     d->singleCvsJob->setDirectory(d->workingCopy);
 
     return DCOPRef(d->appId, d->singleCvsJob->objId());
@@ -257,16 +337,16 @@ void CvsService::slotConfigDirty(const QString& fileName)
 }
 
 
-DCOPRef CvsService::Private::createCvsJob(const QString& cmdline)
+CvsJob* CvsService::Private::createCvsJob()
 {
     ++lastJobId;
 
     // create a cvs job
-    CvsJob* job = new CvsJob(lastJobId, cmdline, repository->rsh(),
+    CvsJob* job = new CvsJob(lastJobId, repository->rsh(), repository->server(),
                              workingCopy);
     cvsJobs.insert(lastJobId, job);
 
-    return DCOPRef(appId, job->objId());
+    return job;
 }
 
 #include "cvsservice.moc"
