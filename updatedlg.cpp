@@ -40,7 +40,7 @@ UpdateDialog::UpdateDialog(const QString &sbox, const QString &repo,
     layout->addWidget(bybranch_button);
 
     branch_combo = new QComboBox(true, this);
-    branch_combo->setMinimumSize(fm.width("0")*30, branch_combo->sizeHint().height());
+    branch_combo->setMinimumSize(fm.width("0")*40, branch_combo->sizeHint().height());
     
     branch_button = new QPushButton(i18n("Fetch &List"), this);
     connect( branch_button, SIGNAL(clicked()),
@@ -56,7 +56,7 @@ UpdateDialog::UpdateDialog(const QString &sbox, const QString &repo,
     layout->addWidget(bytag_button);
 
     tag_combo = new QComboBox(true, this);
-    tag_combo->setMinimumSize(fm.width("0")*30, tag_combo->sizeHint().height());
+    tag_combo->setMinimumSize(fm.width("0")*40, tag_combo->sizeHint().height());
     
     tag_button = new QPushButton(i18n("Fetch L&ist"), this);
     connect( tag_button, SIGNAL(clicked()),
@@ -136,10 +136,10 @@ void UpdateDialog::buttonClicked(bool branch)
             int pos1, pos2, pos3;
             if (str.length() < 1 || str[0] != '\t')
                 continue;
-            if ((pos1 = str.find(' ', 2)) == -1)
-                continue;
+            if (((pos1 = str.find(' ', 2)) == -1) || ((pos1 = str.find('\t', 2)) == -1))
+               continue;
             if ((pos2 = str.find('(', pos1+1)) == -1)
-                continue;
+               continue;
             if ((pos3 = str.find(':', pos2+1)) == -1)
                 continue;
             

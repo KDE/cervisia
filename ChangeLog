@@ -1,6 +1,9 @@
 2002-04-28  Bernd Gehrmann  <bernd@mail.berlios.de>
 
 	* Little layout fix in log dialog by Christian Loose
+	* Patch by Andrew Speer <andrew.speer@isolutions.com.au>:
+	  in tags list (produced by cvs status -v) accept tabs
+	  as delimiter
 
 2002-04-22  Bernd Gehrmann  <bernd@mail.berlios.de>
 
