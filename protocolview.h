@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
+ *  Copyright (c) 2003 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -17,10 +18,10 @@
 
 #include <qtextedit.h>
 #include <dcopobject.h>
-#include <dcopref.h>
 
 class KProcess;
 class KShellProcess;
+class CvsJob_stub;
 
 
 class ProtocolView : public QTextEdit, public DCOPObject
@@ -29,11 +30,11 @@ class ProtocolView : public QTextEdit, public DCOPObject
     Q_OBJECT
     
 public:
-    ProtocolView( QWidget *parent=0, const char *name=0 );
+    explicit ProtocolView(const QCString& appId, QWidget *parent=0, const char *name=0);
     ~ProtocolView();
 
     bool startJob(const QString &sandbox, const QString &repository, const QString &cmdline);
-    bool startJob(DCOPRef& cvsJob);
+    bool startJob();
 
 k_dcop:
     void slotReceivedOutput(QString buffer);
@@ -64,7 +65,7 @@ private:
     QColor localChangeColor;
     QColor remoteChangeColor;
     
-    DCOPRef job;
+    CvsJob_stub* job;
 };
 
 #endif

@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
+ *  Copyright (c) 2003 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -24,10 +25,13 @@
 #include <kprocess.h>
 
 #include "cervisiapart.h"
+#include "cvsjob_stub.h"
 
 
-ProtocolView::ProtocolView(QWidget *parent, const char *name)
-    : QTextEdit(parent, name), childproc(0)
+ProtocolView::ProtocolView(const QCString& appId, QWidget *parent, const char *name)
+    : QTextEdit(parent, name)
+    , childproc(0)
+    , job(0)
 {
     setReadOnly(true);
     setUndoRedoEnabled(false);
@@ -44,11 +48,23 @@ ProtocolView::ProtocolView(QWidget *parent, const char *name)
     localChangeColor=config->readColorEntry("LocalChange",&defaultColor);
     defaultColor=QColor(255, 240, 190);
     remoteChangeColor=config->readColorEntry("RemoteChange",&defaultColor);
+    
+    // create a DCOP stub for the non-concurrent cvs job
+    job = new CvsJob_stub(appId, "NonConcurrentJob");
+
+    // establish connections to the signals of the cvs job
+    connectDCOPSignal(job->app(), job->obj(), "jobExited(bool, int)",
+                      "slotJobExited(bool, int)", true);
+    connectDCOPSignal(job->app(), job->obj(), "receivedStdout(QString)",
+                      "slotReceivedOutput(QString)", true);
+    connectDCOPSignal(job->app(), job->obj(), "receivedStderr(QString)",
+                      "slotReceivedOutput(QString)", true);
 }
 
 
 ProtocolView::~ProtocolView()
 {
+    delete job;
     delete childproc;
 }
 
@@ -94,31 +110,19 @@ bool ProtocolView::startJob(const QString &sandbox, const QString &repository,
 }
 
 
-bool ProtocolView::startJob(DCOPRef& cvsJob)
+bool ProtocolView::startJob()
 {
     // get command line and add it to output buffer
-    QString cmdLine = cvsJob.call("cvsCommand");
+    QString cmdLine = job->cvsCommand();
     buf += cmdLine;
     buf += '\n';
     processOutput();
     
-    // establish connections to the signals of the cvs job
-    connectDCOPSignal(cvsJob.app(), cvsJob.obj(), "jobExited(bool, int)",
-                      "slotJobExited(bool, int)", true);
-    connectDCOPSignal(cvsJob.app(), cvsJob.obj(), "receivedStdout(QString)",
-                      "slotReceivedOutput(QString)", true);
-    connectDCOPSignal(cvsJob.app(), cvsJob.obj(), "receivedStderr(QString)",
-                      "slotReceivedOutput(QString)", true);
-
-    // remember reference to cvs job in order to disconnect
-    // from it in slotJobExited()
-    job = cvsJob;
-
     // disconnect 3rd party slots from our signals
     disconnect( SIGNAL(receivedLine(QString)) );
     disconnect( SIGNAL(jobFinished(bool)) );
     
-    return (bool)cvsJob.call("execute");
+    return job->execute();
 }
 
 
@@ -183,14 +187,6 @@ void ProtocolView::slotJobExited(bool normalExit, int status)
     buf += msg;
     processOutput();
 
-    // disconnect the signals of the cvs job
-    disconnectDCOPSignal(job.app(), job.obj(), "jobExited(bool, int)",
-                      "slotJobExited(bool, int)");
-    disconnectDCOPSignal(job.app(), job.obj(), "receivedStdout(QString)",
-                      "slotReceivedOutput(QString)");
-    disconnectDCOPSignal(job.app(), job.obj(), "receivedStderr(QString)",
-                      "slotReceivedOutput(QString)");
-        
     emit jobFinished(normalExit && !status);
 }
 
