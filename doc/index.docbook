@@ -757,7 +757,7 @@ and rewrite a whole routine or the complete file from scratch.
 In &cervisia;'s main view, files with conflicts are indicated with "Conflict"
 in the status column and with a red color. From the main view, you can of
 course resolve conflicts the traditional way: just double-click the file in
-question and edit it with your favourite editor. But you can also choose to
+question and edit it with your favorite editor. But you can also choose to
 use the dialog available via
 <menuchoice><guimenu>File</guimenu><guimenuitem>Resolve...</guimenuitem></menuchoice>.
 </para>
@@ -1664,9 +1664,9 @@ This is the font used in diff dialogs.
 
 <para>
 In its main file tree, &cervisia; does not display all files which are
-actually there. This is analogue to <command>cvs</command> itself and helps to
+actually there. This is analog to <command>cvs</command> itself and helps to
 avoid clutter caused by uninteresting stuff like object files. &cervisia;
-tries to mimic <command>cvs</command>'s behaviour as close as possible,
+tries to mimic <command>cvs</command>'s behavior as close as possible,
 i.e. it gets ignore lists from the following sources:
 </para>
 
