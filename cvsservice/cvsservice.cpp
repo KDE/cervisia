@@ -165,7 +165,7 @@ DCOPRef CvsService::checkout(const QString& workingDir, const QString& repositor
         return DCOPRef();
 
     std::auto_ptr<Repository> repo(new Repository(repository));
-    
+
     // assemble the command line
     // cd [DIRECTORY] && cvs -d [REPOSITORY] checkout [-r tag] [-P] [MODULE]
     d->singleCvsJob->clearCvsCommand();
@@ -223,10 +223,10 @@ DCOPRef CvsService::createTag(const QStringList& files, const QString& tag,
 
     if( branch )
         *d->singleCvsJob << "-b";
-        
+
     if( force )
         *d->singleCvsJob << "-F";
-        
+
     *d->singleCvsJob << KProcess::quote(tag)
                      << CvsServiceUtils::joinFileList(files);
 
@@ -248,10 +248,10 @@ DCOPRef CvsService::deleteTag(const QStringList& files, const QString& tag,
 
     if( branch )
         *d->singleCvsJob << "-b";
-        
+
     if( force )
         *d->singleCvsJob << "-F";
-        
+
     *d->singleCvsJob << KProcess::quote(tag)
                      << CvsServiceUtils::joinFileList(files);
 
@@ -359,7 +359,7 @@ DCOPRef CvsService::login(const QString& repository)
         return DCOPRef();
 
     std::auto_ptr<Repository> repo(new Repository(repository));
-    
+
     // create a cvs job
     ++(d->lastJobId);
 
@@ -369,7 +369,7 @@ DCOPRef CvsService::login(const QString& repository)
     // TODO: CVS_RSH and CVS_SERVER don't work ATM
 //    job->setRSH(repo->rsh());
 //    job->setServer(repo->server());
-    
+
     // assemble the command line
     // cvs -d [REPOSITORY] login
     job->setCvsClient(repo->clientOnly().local8Bit());
@@ -386,7 +386,7 @@ DCOPRef CvsService::logout(const QString& repository)
         return DCOPRef();
 
     std::auto_ptr<Repository> repo(new Repository(repository));
-    
+
     // create a cvs job
     ++(d->lastJobId);
 
@@ -409,7 +409,7 @@ DCOPRef CvsService::logout(const QString& repository)
 DCOPRef CvsService::moduleList(const QString& repository)
 {
     std::auto_ptr<Repository> repo(new Repository(repository));
-    
+
     // create a cvs job
     ++(d->lastJobId);
 
@@ -534,7 +534,7 @@ DCOPRef CvsService::unlock(const QStringList& files)
 }
 
 
-DCOPRef CvsService::update(const QStringList& files, bool recursive, 
+DCOPRef CvsService::update(const QStringList& files, bool recursive,
                            bool createDirs, bool pruneDirs, const QString& extraOpt)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )

@@ -92,12 +92,12 @@ k_dcop:
      */
     DCOPRef createTag(const QStringList& files, const QString& tag,
                       bool branch, bool force);
-                      
+
     /**
      */
     DCOPRef deleteTag(const QStringList& files, const QString& tag,
                       bool branch, bool force);
-    
+
     /**
      *
      * @param fileName
@@ -109,7 +109,7 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef diff(const QString& fileName, const QString& revA, 
+    DCOPRef diff(const QString& fileName, const QString& revA,
                  const QString& revB, const QString& diffOptions,
                  unsigned contextLines);
 
@@ -191,7 +191,7 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef simulateUpdate(const QStringList& files, bool recursive, 
+    DCOPRef simulateUpdate(const QStringList& files, bool recursive,
                            bool createDirs, bool pruneDirs);
 
     /**

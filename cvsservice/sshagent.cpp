@@ -187,7 +187,7 @@ void SshAgent::slotProcessExited(KProcess*)
         }
     }
 
-    kdDebug(8051) << "SshAgent::slotProcessExited(): pid = " << m_pid 
+    kdDebug(8051) << "SshAgent::slotProcessExited(): pid = " << m_pid
                   << ", socket = " << m_authSock << endl;
 }
 
