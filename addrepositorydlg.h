@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2002-2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -28,13 +28,13 @@ class AddRepositoryDialog : public KDialogBase
     Q_OBJECT
 
 public:
-    AddRepositoryDialog( KConfig& cfg, const QString &repo, QWidget *parent=0, 
-                         const char *name=0 );
+    AddRepositoryDialog(KConfig& cfg, const QString& repo, QWidget* parent = 0,
+                         const char* name = 0);
     virtual ~AddRepositoryDialog();
 
-    void setRepository(const QString &repo);
-    void setRsh(const QString &rsh);
-    void setServer(const QString &server);
+    void setRepository(const QString& repo);
+    void setRsh(const QString& rsh);
+    void setServer(const QString& server);
     void setCompression(int compression);
     
     QString repository() const;
@@ -46,11 +46,11 @@ private slots:
     void repoChanged();
     
 private:
-    KLineEdit *repo_edit;
-    KLineEdit *rsh_edit;
-    KLineEdit *server_edit;
-    QButtonGroup *compression_group;
-    KConfig& partConfig;
+    KLineEdit*    repo_edit;
+    KLineEdit*    rsh_edit;
+    KLineEdit*    server_edit;
+    QButtonGroup* compression_group;
+    KConfig&      partConfig;
 };
 
 #endif

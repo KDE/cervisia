@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2002-2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -24,37 +24,37 @@
 #include <klocale.h>
 
 
-AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString &repo, 
-                                         QWidget *parent, const char *name)
+AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo, 
+                                         QWidget* parent, const char* name)
     : KDialogBase(parent, name, true, i18n("Add Repository"),
                   Ok | Cancel, Ok, true)
     , partConfig(cfg)
 {
     QFrame* mainWidget = makeMainWidget();
 
-    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
+    QBoxLayout* layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 
-    QLabel *repo_label = new QLabel(i18n("&Repository:"), mainWidget);
+    QLabel* repo_label = new QLabel(i18n("&Repository:"), mainWidget);
     layout->addWidget(repo_label);
     
     repo_edit = new KLineEdit(mainWidget);
     repo_edit->setFocus();
     repo_label->setBuddy(repo_edit);
-    if (!repo.isNull())
-        {
-            repo_edit->setText(repo);
-            repo_edit->setEnabled(false);
-        }
+    if( !repo.isNull() )
+    {
+        repo_edit->setText(repo);
+        repo_edit->setEnabled(false);
+    }
     layout->addWidget(repo_edit);
     
-    QLabel *rsh_label = new QLabel(i18n("Use remote &shell (only for :ext: repositories):"), mainWidget);
+    QLabel* rsh_label = new QLabel(i18n("Use remote &shell (only for :ext: repositories):"), mainWidget);
     layout->addWidget(rsh_label);
     
     rsh_edit = new KLineEdit(mainWidget);
     rsh_label->setBuddy(rsh_edit);
     layout->addWidget(rsh_edit);
     
-    QLabel *server_label = new QLabel(i18n("Invoke this program on the server side:"),
+    QLabel* server_label = new QLabel(i18n("Invoke this program on the server side:"),
                                       mainWidget);
     layout->addWidget(server_label);
     
@@ -86,13 +86,13 @@ AddRepositoryDialog::~AddRepositoryDialog()
 }
 
 
-void AddRepositoryDialog::setRsh(const QString &rsh)
+void AddRepositoryDialog::setRsh(const QString& rsh)
 {
     rsh_edit->setText(rsh);
 }
 
 
-void AddRepositoryDialog::setServer(const QString &server)
+void AddRepositoryDialog::setServer(const QString& server)
 {
     server_edit->setText(server);
 }
@@ -128,7 +128,7 @@ int AddRepositoryDialog::compression() const
 }
 
 
-void AddRepositoryDialog::setRepository(const QString &repo)
+void AddRepositoryDialog::setRepository(const QString& repo)
 {
     setCaption(i18n("Repository Settings"));
 
