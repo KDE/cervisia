@@ -1,3 +1,11 @@
+2003-01-25  Christian Loose <christian.loose@hamburg.de>
+
+	* Detect "U" as remote changed file in ProtocolView.
+	* Remove trailing line-break in ProtocolView since
+	  QTextEdit::append() already adds a new paragraph.
+	* Set url member in CervisiaPart for tabbed window
+	  title in Konqueror.
+
 2002-12-17  Christian Loose <christian.loose@hamburg.de>
 
 	* Fixed "fetch of branch list hangs in update dialog" (#50824)
