@@ -246,9 +246,9 @@ DCOPRef CvsService::createRepository(const QString& repository)
     // cvs -d [REPOSITORY] init
     d->singleCvsJob->clearCvsCommand();
     
-    *d->singleCvsJob << "mkdir -p" << repository << "&&"
+    *d->singleCvsJob << "mkdir -p" << KProcess::quote(repository) << "&&"
                      << d->repository->cvsClient() 
-                     << "-d" << repository
+                     << "-d" << KProcess::quote(repository)
                      << "init";
 
     return d->setupNonConcurrentJob();
@@ -447,7 +447,7 @@ DCOPRef CvsService::import(const QString& workingDir, const QString& repository,
     // assemble the command line
     d->singleCvsJob->clearCvsCommand();
 
-    *d->singleCvsJob << "cd" << workingDir << "&&"
+    *d->singleCvsJob << "cd" << KProcess::quote(workingDir) << "&&"
                      << repo.cvsClient()
                      << "-d" << repository
                      << "import";
