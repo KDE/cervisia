@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *  Copyright (c) 2003 Christian Loose <christian.loose@hamburg.de>
@@ -28,18 +28,16 @@ class AddRemoveDialog : public KDialogBase
 {
 public:
     enum ActionType { Add, AddBinary, Remove };
-    
-    explicit AddRemoveDialog( ActionType action, QWidget *parent=0, const char *name=0 );
 
-    void setFileList(const QStringList &list);
+    explicit AddRemoveDialog(ActionType action, QWidget* parent=0, const char* name=0);
+
+    void setFileList(const QStringList& files);
 
 private:
-    QListBox *listbox;
+    QListBox* m_listBox;
 };
 
 #endif
 
 
-// Local Variables:
-// c-basic-offset: 4
-// End:
+// kate: space-indent on; indent-width 4; replace-tabs on;

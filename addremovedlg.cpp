@@ -24,7 +24,7 @@
 #include <klocale.h>
 
 
-AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget *parent, const char *name)
+AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent, const char* name)
     : KDialogBase(parent, name, true, QString::null,
                   Ok | Cancel | Help, Ok, true)
 {
@@ -43,9 +43,9 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget *parent, const char 
           mainWidget );
     layout->addWidget(textlabel);
 
-    listbox = new QListBox(mainWidget);
-    listbox->setSelectionMode(QListBox::NoSelection);
-    layout->addWidget(listbox, 5);
+    m_listBox = new QListBox(mainWidget);
+    m_listBox->setSelectionMode(QListBox::NoSelection);
+    layout->addWidget(m_listBox, 5);
 
     // Add warning message to dialog when user wants to remove a file
     if (action==Remove)
@@ -75,23 +75,21 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget *parent, const char 
 }
 
 
-void AddRemoveDialog::setFileList(const QStringList &list)
+void AddRemoveDialog::setFileList(const QStringList& files)
 {
     // the dot for the root directory is hard to see, so
     // we convert it to the absolut path
-    if( list.find(".") != list.end() )
+    if( files.find(".") != files.end() )
     {
-        QStringList copy(list);
+        QStringList copy(files);
         int idx = copy.findIndex(".");
         copy[idx] = QFileInfo(".").absFilePath();
 
-        listbox->insertStringList(copy);
+        m_listBox->insertStringList(copy);
     }
     else
-        listbox->insertStringList(list);
+        m_listBox->insertStringList(files);
 }
 
 
-// Local Variables:
-// c-basic-offset: 4
-// End:
+// kate: space-indent on; indent-width 4; replace-tabs on;
