@@ -43,7 +43,7 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2002-06-28</date>
+<date>2002-06-29</date>
 <releaseinfo>2.00.00</releaseinfo>
 
 <abstract>
@@ -56,6 +56,7 @@
 <keyword>Cervisia</keyword>
 <keyword>CVS</keyword>
 <keyword>version control</keyword>
+<keyword>revision control</keyword>
 </keywordset>
 
 </bookinfo>
@@ -75,7 +76,7 @@ job to checkout modules from the repository and work with them.
 
 <para>
 &CVS; supports several methods of accessing the repository, which can
- be categorized as follows:
+be categorized as follows:
 </para>
 
 <variablelist>
@@ -213,7 +214,6 @@ in a repository, you may skip this section.
 <figure id="screenshot-import" float="1">
 <title>A screenshot of &cervisia;'s import dialog</title>
 <mediaobject>
-<imageobject><imagedata format="EPS" fileref="import.eps" scale="85"/></imageobject>
 <imageobject><imagedata format="PNG" fileref="import.png"/></imageobject>
 <textobject><phrase>A screenshot of &cervisia;'s import dialog</phrase></textobject>
 </mediaobject>
@@ -318,7 +318,6 @@ Before you work on a project under revision control, you must check out a
 <figure id="screenshot-checkout" float="1">
 <title>A screenshot of &cervisia;'s checkout dialog</title>
 <mediaobject>
-<imageobject><imagedata format="EPS" fileref="checkout.eps" scale="89"/></imageobject>
 <imageobject><imagedata format="PNG" fileref="checkout.png"/></imageobject>
 <textobject><phrase>A screenshot of &cervisia;'s checkout dialog</phrase></textobject>
 </mediaobject>
@@ -378,7 +377,6 @@ connection to the &CVS; server.
 <figure id="screenshot-mainview" float="1">
 <title>A screenshot of &cervisia;'s main view</title>
 <mediaobject>
-<imageobject><imagedata format="EPS" fileref="mainview.eps" scale="65"/></imageobject>
 <imageobject><imagedata format="PNG" fileref="mainview.png"/></imageobject>
 <textobject><phrase>A screenshot of &cervisia;'s main view</phrase></textobject>
 </mediaobject>
@@ -662,7 +660,6 @@ choose
 <figure id="screenshot-commit" float="1">
 <title>A screenshot of &cervisia;'s commit dialog</title>
 <mediaobject>
-<imageobject><imagedata format="EPS" fileref="commit.eps" scale="93"/></imageobject>
 <imageobject><imagedata format="PNG" fileref="commit.png"/></imageobject>
 </mediaobject>
 </figure>
@@ -768,7 +765,6 @@ use the dialog available via
 <figure id="screenshot-resolve" float="1">
 <title>A screenshot of &cervisia;'s resolve dialog</title>
 <mediaobject>
-<imageobject><imagedata format="EPS" fileref="resolve.eps" scale="68"/></imageobject>
 <imageobject><imagedata format="PNG" fileref="resolve.png"/></imageobject>
 <textobject><phrase>A screenshot of &cervisia;'s resolve dialog</phrase></textobject>
 </mediaobject>
@@ -821,7 +817,6 @@ the marked file.
 <figure float="1">
 <title>A screenshot of &cervisia;'s browse logs dialog</title>
 <mediaobject>
-<imageobject><imagedata format="EPS" fileref="logtree.eps" scale="52"/></imageobject>
 <imageobject><imagedata format="PNG" fileref="logtree.png"/></imageobject>
 <textobject><phrase>A screenshot of &cervisia;'s browse logs dialog</phrase></textobject>
 </mediaobject>
@@ -949,7 +944,6 @@ Commit, Removed - A user removed a file and commited it.
 <figure id="screenshot-history" float="1">
 <title>A screenshot of &cervisia;'s history dialog</title>
 <mediaobject>
-<imageobject><imagedata format="EPS" fileref="history.eps" scale="65"/></imageobject>
 <imageobject><imagedata format="PNG" fileref="history.png"/></imageobject>
 <textobject><phrase>A screenshot of &cervisia;'s history dialog</phrase></textobject>
 </mediaobject>
@@ -1055,7 +1049,6 @@ view as seen in <xref linkend="screenshot-log"/>.
 <figure id="screenshot-log" float="1">
 <title>A screenshot of &cervisia;'s diff dialog</title>
 <mediaobject>
-<imageobject><imagedata format="EPS" fileref="diff.eps" scale="51"/></imageobject>
 <imageobject><imagedata format="PNG" fileref="diff.png"/></imageobject>
 <textobject><phrase>A screenshot of &cervisia;'s diff dialog</phrase></textobject>
 </mediaobject>
@@ -1095,26 +1088,56 @@ For information about how to customize the diff dialog, see <xref linkend="custo
 </sect1>
 
 
-   <sect1 id="annotate">
-      <title>Watching an annotated view of a file</title>
-         <para>
-            &cervisia;'s annotate view is currently is simple frontend to the
-            respective &CVS; command. It will be improved beyond these capabilities
-            after the 1.0 release. For a preview, look at the script
-            <filename>kdesdk/scripts/cvsblame</filename> in the KDE repository.
-         </para>
-         <para>
-            You can get to the annotate view either by choosing
-            <menuchoice><guimenu>View</guimenu><guimenuitem>Annotate</guimenuitem></menuchoice>
-            from the main view or from the Browse logs dialog. Then you see in a
-            window the latest version of the selected file. In the columns before the
-            text, you get some information related to the latest change in each
-            line. In the first column the revision number is displayed. In the second
-            column you see the name of the author of that revision. Finally, in the
-            third column you see the date of the latest change in the line.
-         </para>
-   </sect1>
-   </chapter>
+<sect1 id="annotate">
+<title>Watching an annotated view of a file</title>
+
+<para>
+With the command <command>cvs annotate</command>, &CVS; offers the possibility
+to see - for each line in a file - who has modified a line the most recently.
+This view may be helpful in order to find out who has introduced a change in
+the behavior of a program or who should be asked about some change or bug in
+the code.
+</para>
+
+<para>
+&cervisia; gives you to access to this feature, but it further enriches the
+information in an interactive way. You obtain an annotate view by choosing
+<menuchoice><guimenu>View</guimenu><guimenuitem>Annotate...</guimenuitem></menuchoice>.
+Another possibility is to press the button <guilabel>Annotate</guilabel> in
+the Browse log dialog.
+In <xref linkend="screenshot-annotate"/> you can see a screenshot of the
+dialog.
+</para>
+
+<figure id="screenshot-annotate" float="1">
+<title>A screenshot of &cervisia;'s annotate dialog</title>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="annotate.png"/></imageobject>
+<textobject><phrase>A screenshot of &cervisia;'s update to tag dialog</phrase></textobject>
+</mediaobject>
+</figure>
+
+<para>
+In the annotate dialog, you see in a window the latest version of the selected
+file. In the columns before the text, you get some information related to the
+latest change in each line. In the first column the revision number is
+displayed. In the second column you see the name of the author of that
+revision. Finally, in the third column you see the date of the latest change
+in the line. 
+</para>
+
+<para>
+Consequently, when a certain line appears strange to you or you assume a bug
+there, you can immediately see who is responsible for that line. But not only
+that, you can also find out <emphasis>why</emphasis> that line was
+changed. To this end, move the mouse cursor over the respective revision
+number. Then a tooltip appears that shows the log message and the date of the
+change.
+</para>
+
+</sect1>
+
+</chapter>
 
 
 <chapter id="advancedusage">
@@ -1211,7 +1234,6 @@ HEAD</guimenuitem></menuchoice>. This results in a command
 <figure id="screenshot-updatetag" float="1">
 <title>A screenshot of &cervisia;'s update to tag dialog</title>
 <mediaobject>
-<imageobject><imagedata format="EPS" fileref="updatetag.eps" scale="63"/></imageobject>
 <imageobject><imagedata format="PNG" fileref="updatetag.png"/></imageobject>
 <textobject><phrase>A screenshot of &cervisia;'s update to tag dialog</phrase></textobject>
 </mediaobject>
@@ -1433,21 +1455,6 @@ dialog which is available via
 <sect1 id="customize-various">
 <title>Customizing various commands</title>
 
-<formalpara id="customize-timeout">
-<title>Timeout after which a progress dialog appears</title>
-<para>
-Practically all &CVS; commands started in a sandbox which belongs to a remote
-repository need a connection to the &CVS; server. This is affected by delays
-from the network connection or a high load on the server. For this reason, for
-commands like <menuchoice><guimenu>View</guimenu><guimenuitem>Difference to
-repository...</guimenuitem></menuchoice> &cervisia; opens a dialog which
-indicates that the command is still running and which allows you to abort
-it. Furthermore, this dialog is used to show you error messages from &CVS;. As
-this dialog may become annoying after some time, it is shown only after a
-certain timeout which is 4 seconds by default. Here you can change this value.
-</para>
-</formalpara>
-
 <formalpara id="customize-username">
 <title>User name for the ChangeLog editor</title>
 <para>
@@ -1457,6 +1464,27 @@ entry...</guimenuitem></menuchoice>, a new ChangeLog entry is generated with
 the current date and your username. Normally, it is considered good style to
 insert your full name and your email address into each of your ChangeLog
 entries. Here you can configure this.
+</para>
+</formalpara>
+
+<formalpara id="customize-cvspath">
+<title>Path to cvs</title>
+<para>
+Here you can set the name (or path) to the <command>cvs</command> command
+line client. By default, the executable found in your <envar>$PATH</envar> is
+used by &cervisia;.
+</para>
+</formalpara>
+
+<formalpara id="customize-editor">
+<title>Editor</title>
+<para>
+Here you can configure which editor is called when a file in the main view is
+double-clicked. To execute the editor, the entry made here is concatenated
+with the file name and given to a shell. So it is acceptable to use programs
+like <command>gnuclient</command> here.  You can also enter the string
+<envar>$EDITOR</envar> if your environment variable <envar>$EDITOR</envar>
+points to an editor which opens an X11 window itself.
 </para>
 </formalpara>
 
@@ -1479,6 +1507,28 @@ ignore changes in the amount of whitespace.
 </para>
 </formalpara>
 
+<formalpara id="customize-tabwidth">
+<title>Tab width in diff dialog</title>
+<para>
+In the diff dialog, tab characters present in your file or in the output
+of the <command>diff</command> command are expanded into a fixed number of
+space characters. By default, each tab is replaced by eight spaces, but here
+you can setup a different number.
+</para>
+</formalpara>
+
+<formalpara id="customize-difffrontend">
+<title>External diff frontend</title>
+<para>
+When you use any of the features which show the diff dialog, like
+<menuchoice><guimenu>View</guimenu><guimenuitem>Difference to
+Repository...</guimenuitem></menuchoice>, &cervisia; invokes its internal diff
+frontend. If you prefer a different one, like
+<application>Kompare</application>, <application>TkDiff</application>, or
+<application>xxdiff</application>, you can configure this here.
+</para>
+</formalpara>
+
 <formalpara id="customize-startstatus">
 <title>Start
 <menuchoice><guimenu>File</guimenu><guimenuitem>Status</guimenuitem></menuchoice>
@@ -1494,15 +1544,30 @@ and remote repositories.
 </para>
 </formalpara>
 
-<formalpara id="customize-editor">
-<title>Editor</title>
+<formalpara id="customize-timeout">
+<title>Timeout after which a progress dialog appears</title>
 <para>
-Here you can configure which editor is called when a file in the main view is
-double-clicked. To execute the editor, the entry made here is concatenated
-with the file name and given to a shell. So it is acceptable to use programs
-like <command>gnuclient</command> here.  You can also enter the string
-<envar>$EDITOR</envar> if your environment variable <envar>$EDITOR</envar>
-points to an editor which opens an X11 window itself.
+Practically all &CVS; commands started in a sandbox which belongs to a remote
+repository need a connection to the &CVS; server. This is affected by delays
+from the network connection or a high load on the server. For this reason, for
+commands like <menuchoice><guimenu>View</guimenu><guimenuitem>Difference to
+repository...</guimenuitem></menuchoice> &cervisia; opens a dialog which
+indicates that the command is still running and which allows you to abort
+it. Furthermore, this dialog is used to show you error messages from &CVS;. As
+this dialog may become annoying after some time, it is shown only after a
+certain timeout which is 4 seconds by default. Here you can change this value.
+</para>
+</formalpara>
+
+<formalpara id="customize-compression">
+<title>Default compression level</title>
+<para>
+The <command>cvs</command> client compresses files and patches when they are
+transferred over a network. With the command line option <option>-z</option>,
+the compression level can be set. You can setup &cervisia; to use this option
+by configuring the level here. The value set here is used only as a default;
+additionally there is a per-repository setting available in
+<menuchoice><guimenu>Repository</guimenu><guimenuitem>Repositories...</guimenuitem></menuchoice>.
 </para>
 </formalpara>
 
