@@ -1,0 +1,81 @@
+Coding Style
+============
+
+Formatting
+----------
+
+- No tabs.
+- Indent is 4 spaces.
+- A line should not exceed 80 chars.
+- Brackets are always on separate lines.
+- Put spaces between brackets of if, while and
+  similar statements.
+  
+  
+Example:
+
+void MyClass::myFunction(const QString& arg)
+{
+    if( blah == "halb" )
+    {
+        doSometing();
+    }
+    else
+    {
+        varA = varB;
+    }
+}
+
+
+
+Header Formatting
+-----------------
+
+- Access modifiers are not indented.
+- Double inclusion guard defines are all upper case
+  letters and are composed of the namespace (if available),
+  the classname and a H suffix separated by underscores.
+- Inside a namespace there is no indentation.
+
+  
+Example:
+
+#ifndef NAMESPACE_MYCLASS_H
+#define NAMESPACE_MYCLASS_H
+
+namespace Namespace 
+{
+
+class MyClass
+{
+public:
+    MyClass();
+    
+private:
+    int       m_intVar;
+    KProcess* m_proc;
+};
+
+}
+
+#endif
+
+
+
+Class and File Names
+--------------------
+
+
+
+Class and Variable Names
+------------------------
+
+- For class, variable and function names separate multiple
+  words by uppercasing the words preceded by other words.
+- Class names start with an uppercase letter.
+- Function names start with a lowercase letter.
+- Slot function names start with a 'slot' prefix
+  followed by an uppercase letter.
+- Variable names start with a lowercase letter.
+- Member Variables of a class start with a 'm_' prefix
+  followed by an lowercase letter.
