@@ -1,3 +1,9 @@
+2003-06-26  Christian Loose  <christian.loose@hamburg.de>
+
+	* Initial version of our own little ssh-askpass program.
+	* Initial version of the SshAgent class which will later enable
+	   the cvs DCOP service to utilize the ssh-agent program.
+
 2003-06-19  Christian Loose  <christian.loose@hamburg.de>
 
 	* Added showWatchers() method to the DCOP service.
