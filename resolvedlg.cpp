@@ -26,7 +26,7 @@
 #include <kfiledialog.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-
+#include <qregexp.h>
 #include "misc.h"
 #include "resolvedlg_p.h"
 using Cervisia::ResolveEditorDialog;
@@ -240,21 +240,30 @@ bool ResolveDialog::parseFile(const QString &name)
         switch( state )
         {
             case Normal:
-                // check for start of conflict block
-                if( line.startsWith("<<<<<<<") )
                 {
-                    state     = VersionA;
-                    advanced1 = 0;
-                }
-                else
-                {
-                    addToMergeAndVersionA(line, DiffView::Unchanged, lineno1);
-                    addToVersionB(line, DiffView::Unchanged, lineno2);
+                    // check for start of conflict block
+                    // Set to look for <<<<<<< at begining of line with exaclty one
+                    // space after then anything after that.
+                    QRegExp rx( "^<{7}\\s.*$" ); 
+                    int separatorPos = rx.search(line);
+                    if( separatorPos >= 0 )
+                    {
+                        state     = VersionA;
+                        advanced1 = 0;
+                    }
+                    else
+                    {
+                        addToMergeAndVersionA(line, DiffView::Unchanged, lineno1);
+                        addToVersionB(line, DiffView::Unchanged, lineno2);
+                    }
                 }
                 break;
             case VersionA:
                 {
-                    int separatorPos = line.findRev("=======");
+                    // Set to look for ======= at begining of line which may have one
+                    // or more spaces after then nothing else.
+                    QRegExp rx( "^={7}\\s*$" );
+                    int separatorPos = rx.search(line);
                     if( separatorPos < 0 )    // still in version A
                     {
                         advanced1++;
@@ -262,12 +271,6 @@ bool ResolveDialog::parseFile(const QString &name)
                     }
                     else
                     {
-                        if( separatorPos > 0 )    // content and conflict marker on same line
-                        {
-                            line.truncate(separatorPos);
-                            advanced1++;
-                            addToMergeAndVersionA(line, DiffView::Change, lineno1);
-                        }
                         state     = VersionB;
                         advanced2 = 0;
                     }
@@ -275,7 +278,10 @@ bool ResolveDialog::parseFile(const QString &name)
                 break;
             case VersionB:
                 {
-                    int separatorPos = line.findRev(">>>>>>>");
+                    // Set to look for >>>>>>> at begining of line with exaclty one
+                    // space after then anything after that.
+                    QRegExp rx( "^>{7}\\s.*$" );
+                    int separatorPos = rx.search(line);
                     if( separatorPos < 0 )    // still in version B
                     {
                         advanced2++;
@@ -283,13 +289,6 @@ bool ResolveDialog::parseFile(const QString &name)
                     }
                     else
                     {
-                        if( separatorPos > 0 )    // content and conflict marker on same line
-                        {
-                            line.truncate(separatorPos);
-                            advanced2++;
-                            addToVersionB(line, DiffView::Change, lineno2);
-                        }
-                        
                         // create an resolve item
                         ResolveItem *item = new ResolveItem;
                         item->linenoA        = lineno1-advanced1+1;
@@ -326,9 +325,6 @@ void ResolveDialog::addToMergeAndVersionA(const QString& line,
     lineNo++;
     diff1->addLine(line, type, lineNo);
     merge->addLine(line, type, lineNo);
-    
-    m_contentVersionA      += line;
-    m_contentMergedVersion += line;
 }
 
 
@@ -337,8 +333,6 @@ void ResolveDialog::addToVersionB(const QString& line, DiffView::DiffType type,
 {
     lineNo++;
     diff2->addLine(line, type, lineNo);
-    
-    m_contentVersionB += line;
 }
 
 
@@ -355,9 +349,12 @@ void ResolveDialog::saveFile(const QString &name)
     QTextStream stream(&f);
     QTextCodec *fcodec = DetectCodec(name);
     stream.setCodec(fcodec);
-       
-    stream << m_contentMergedVersion;
-
+    
+    QString output;
+    for( int i = 0; i < merge->count(); i++ )
+       output +=merge->stringAtOffset(i);
+    stream << output;
+    
     f.close();
 }
     
@@ -446,11 +443,10 @@ void ResolveDialog::updateMergedVersion(ResolveItem* item,
         ++total;
     }
 
-    item->chosen = chosen;
-    item->linecountTotal = total;
-
     // Adjust other items
     int difference = total - item->linecountTotal;
+    item->chosen = chosen;
+    item->linecountTotal = total;
     while ( (item = items.next()) != 0 )
         item->offsetM += difference;
 
@@ -490,22 +486,20 @@ void ResolveDialog::choose(ChooseType ch)
         return;
 
     ResolveItem *item = items.at(markeditem);
-    if (item->chosen == ch)
-        return;
 
     switch (ch)
         {
         case ChA:
-            m_contentMergedVersion = m_contentVersionA;
+            m_contentMergedVersion = contentVersionA(item);
             break;
         case ChB:
-            m_contentMergedVersion = m_contentVersionB;
+            m_contentMergedVersion = contentVersionB(item);
             break;
         case ChAB:
-            m_contentMergedVersion = m_contentVersionA + m_contentVersionB;
+            m_contentMergedVersion = contentVersionA(item) + contentVersionB(item);
             break;
         case ChBA:
-            m_contentMergedVersion = m_contentVersionB + m_contentVersionA;
+            m_contentMergedVersion = contentVersionB(item) + contentVersionA(item);
             break;
         default:
             kdDebug(8050) << "Internal error at switch" << endl;
@@ -545,18 +539,26 @@ void ResolveDialog::editClicked()
         return;
     
     ResolveItem *item = items.at(markeditem);
+    
+    QString mergedPart;
+    int total  = item->linecountTotal;
+    int offset = item->offsetM;
+    for( int i = 0; i < total; ++i )
+        mergedPart += merge->stringAtOffset(offset+i);
 
     ResolveEditorDialog *dlg = new ResolveEditorDialog(partConfig, this, "edit");
-    dlg->setContent(m_contentMergedVersion);
+    dlg->setContent(mergedPart);
 
     if (dlg->exec())
     {
         m_contentMergedVersion = dlg->content();
-
         updateMergedVersion(item, ChEdit);
     }
 
     delete dlg;
+    diff1->repaint();
+    diff2->repaint();
+    merge->repaint();
 }
 
 
@@ -591,6 +593,32 @@ void ResolveDialog::keyPressEvent(QKeyEvent *e)
     }
 }
 
+
+
+/* This will return the A side of the diff in a QString. */
+QString ResolveDialog::contentVersionA(const ResolveItem *item)
+{
+    QString result;
+    for( int i = item->linenoA; i < item->linenoA+item->linecountA; ++i )
+    {
+        result += diff1->stringAtLine(i);
+    }
+    
+    return result;  
+}
+
+
+/* This will return the B side of the diff item in a QString. */
+QString ResolveDialog::contentVersionB(const ResolveItem *item)
+{
+    QString result;
+    for( int i = item->linenoB; i < item->linenoB+item->linecountB; ++i )
+    {
+        result += diff2->stringAtLine(i);
+    }
+
+    return result;
+}
 
 #include "resolvedlg.moc"
 

@@ -66,6 +66,8 @@ private:
                                int& lineNo);
     void addToVersionB(const QString& line, DiffView::DiffType type, int& lineNo);
     void updateMergedVersion(ResolveItem* item, ChooseType chosen);
+    QString contentVersionA(const ResolveItem *item);
+    QString contentVersionB(const ResolveItem *item);
     
     QLabel *nofnlabel;
     QPushButton *backbutton, *forwbutton;
@@ -78,9 +80,7 @@ private:
     int markeditem;
     KConfig& partConfig;
     
-    QString    m_contentVersionA,
-               m_contentVersionB,
-               m_contentMergedVersion;
+    QString    m_contentMergedVersion;
 };
 
 
