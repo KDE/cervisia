@@ -71,6 +71,11 @@ void GlobalIgnoreList::addEntry(const QString& entry)
     else
     {
         m_stringMatcher.clear();
+
+        // Bug #89215:
+        // Make sure '.' and '..' are always in the ignore list, so
+        // UpdateDirItem::maybeScanDir() doesn't loop endlessly.
+        addEntriesFromString(QString::fromLatin1(". .."));
     }
 }
 
