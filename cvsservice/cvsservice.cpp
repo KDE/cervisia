@@ -271,9 +271,12 @@ DCOPRef CvsService::downloadRevision(const QString& fileName,
 
     // assemble the command line
     // cvs update -p -r [REV] [FILE] > [OUTPUTFILE]
-    *job << d->repository->cvsClient() << "update -p"
-         << "-r" << KProcess::quote(revision)
-         << KProcess::quote(fileName) << ">" << KProcess::quote(outputFile);
+    *job << d->repository->cvsClient() << "update -p";
+
+    if( !revision.isEmpty() )
+        *job << "-r" << KProcess::quote(revision);
+
+    *job << KProcess::quote(fileName) << ">" << KProcess::quote(outputFile);
 
     // return a DCOP reference to the cvs job
     return DCOPRef(d->appId, job->objId());
