@@ -74,10 +74,7 @@ CommitDialog::CommitDialog(ActionType action, QWidget *parent, const char *name)
             layout->addWidget(edit, 10);
         }
     else
-        {
-            listbox->setSelectionMode(QListBox::NoSelection);
-            listbox->setFocusPolicy(QWidget::NoFocus);
-        }
+        listbox->setSelectionMode(QListBox::NoSelection);
 
     if (action == Remove)    
         {

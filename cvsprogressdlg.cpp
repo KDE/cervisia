@@ -51,7 +51,6 @@ CvsProgressDialog::CvsProgressDialog(const QString &text, QWidget *parent)
 
     resultbox = new QListBox(this);
     resultbox->setSelectionMode(QListBox::NoSelection);
-    resultbox->setFocusPolicy(QWidget::NoFocus);
     QFontMetrics rb_fm(resultbox->fontMetrics());
     resultbox->setMinimumSize(rb_fm.width("0")*70,
 			      rb_fm.lineSpacing()*8);
