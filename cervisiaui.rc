@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui name="cervisiapart" version="11">
+<kpartgui name="cervisiapart" version="12">
 <MenuBar>
   <Menu name="file"><text>&amp;File</text>
     <Action name="file_open"/>
@@ -107,11 +107,25 @@
   <Separator/>
   <Action name="file_properties"/>
 </Menu>
+<Menu name="folder_context_popup">
+  <Action name="unfold_folder"/>
+  <Separator/>
+  <Action name="file_update"/>
+  <Action name="file_commit"/>
+  <Separator/>
+  <Action name="file_add"/>
+  <Action name="file_remove"/>
+</Menu>
 <State name="has_sandbox">
   <Enable>
     <Action name="insert_changelog_entry"/>
     <Action name="view_unfold_tree"/>
     <Action name="view_fold_tree"/>
+  </Enable>
+</State>
+<State name="has_single_folder">
+  <Enable>
+    <Action name="unfold_folder"/> 
   </Enable>
 </State>
 <State name="has_single_selection">
