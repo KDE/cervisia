@@ -135,7 +135,12 @@ void CervisiaShell::openURL(const KURL& url)
 
 void CervisiaShell::slotConfigureKeys()
 {
-    KKeyDialog::configureKeys( actionCollection(), xmlFile() );
+    KKeyDialog dlg;
+    dlg.insert(actionCollection());
+    if( part )
+        dlg.insert(part->actionCollection());
+        
+    dlg.configure();
 }
 
 void CervisiaShell::slotConfigureToolBars()

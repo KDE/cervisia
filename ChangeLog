@@ -1,3 +1,8 @@
+2003-02-24  Christian Loose  <christian.loose@hamburg.de>
+
+	* Make shortcut keys of actions which are part of CervisiaPart
+	  configurable (#55125).
+
 2003-02-21  Christian Loose  <christian.loose@hamburg.de>
 
 	* Implemented BR #41263: Added splitters to resolve

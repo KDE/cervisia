@@ -630,7 +630,7 @@ void CervisiaPart::aboutCervisia()
 
 KAboutData* CervisiaPart::createAboutData()
 {
-    return new KAboutData( "cervisiapart", I18N_NOOP("Cervisia"),
+    return new KAboutData( "cervisiapart", I18N_NOOP("Cervisia Part"),
                            CERVISIA_VERSION,
                            I18N_NOOP("A CVS frontend"),
                            KAboutData::License_QPL,
