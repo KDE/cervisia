@@ -51,7 +51,6 @@ public:
     QStringList fileSelection() const;
 
     void openDirectory(const QString& dirname);
-    void scanRecursive();
     void prepareJob(bool recursive, Action action);
 
     const QColor& conflictColor() const;
