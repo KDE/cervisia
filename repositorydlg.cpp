@@ -287,12 +287,6 @@ void RepositoryDialog::slotOk()
         m_serviceConfig->writeEntry("rsh", ritem->rsh());
         m_serviceConfig->writeEntry("cvs_server", ritem->server());
         m_serviceConfig->writeEntry("Compression", ritem->compression());
-
-        // TODO: remove when move to cvs DCOP service is complete
-        m_partConfig.setGroup(QString("Repository-") + ritem->repository());
-        m_partConfig.writeEntry("rsh", ritem->rsh());
-        m_partConfig.writeEntry("Compression", ritem->compression());
-        // END TODO
     }
 
     // write to disk so other services can reparse the configuration
@@ -335,12 +329,6 @@ void RepositoryDialog::slotAddClicked()
 
             // write to disk so other services can reparse the configuration
             m_serviceConfig->sync();
-
-            // TODO: remove when move to cvs DCOP service is complete
-            m_partConfig.setGroup(QString("Repository-") + repo);
-            m_partConfig.writeEntry("rsh", rsh);
-            m_partConfig.writeEntry("Compression", compression);
-            // END TODO
         }
 }
 
@@ -392,12 +380,6 @@ void RepositoryDialog::slotDoubleClicked(QListViewItem *item)
 
             // write to disk so other services can reparse the configuration
             m_serviceConfig->sync();
-
-            // TODO: remove when move to cvs DCOP service is complete
-            m_partConfig.setGroup(QString("Repository-") + repo);
-            m_partConfig.writeEntry("rsh", dlg.rsh());
-            m_partConfig.writeEntry("Compression", dlg.compression());
-            // END TODO
         }
 }
 
