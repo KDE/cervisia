@@ -15,13 +15,16 @@
 #ifndef TAGDLG_H
 #define TAGDLG_H
 
-#include <qcheckbox.h>
-#include <qcombobox.h>
-#include <qdialog.h>
-#include <klineedit.h>
+
+#include <kdialogbase.h>
 
 
-class TagDialog : public QDialog
+class QCheckBox;
+class QComboBox;
+class QLineEdit;
+
+
+class TagDialog : public KDialogBase
 {
     Q_OBJECT
 
@@ -30,21 +33,17 @@ public:
     
     TagDialog( ActionType action, const QString &sbox, const QString &repo,
                QWidget *parent=0, const char *name=0 );
-    
-    bool branchTag() const
-        { return branchtag_button && branchtag_button->isChecked(); } 
-    bool forceTag() const
-        { return forcetag_button && forcetag_button->isChecked(); }
-    QString tag() const
-        { return act==Delete? tag_combo->currentText() : tag_edit->text(); }
+
+    bool branchTag() const;
+    bool forceTag() const;
+    QString tag() const;
 
 protected:
-    virtual void done(int r);
+    virtual void slotOk();
 
 private slots:
     void tagButtonClicked();
-    void helpClicked();
-    
+
 private:
     ActionType act;
     QString sandbox, repository;
