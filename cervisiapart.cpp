@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2004 Christian Loose <christian.loose@kdemail.net>
+ *  Copyright (c) 2002-2005 Christian Loose <christian.loose@kdemail.net>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -88,7 +88,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     , opt_doCVSEdit( false )
     , recent( 0 )
     , cvsService( 0 )
-    , statusBar( 0 )
+    , m_statusBar(new KParts::StatusBarExtension(this))
     , m_browserExt( 0 )
     , filterLabel( 0 )
     , m_editWithId(0)
@@ -145,18 +145,6 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
                                   "cvs DCOP service could not be started."),
                              parentWidget));
 
-    statusBar = new CervisiaStatusBarExtension(this);
-
-    // create the active filter indicator and add it to the statusbar
-    filterLabel = new QLabel("UR", statusBar->statusBar());
-    filterLabel->setFixedSize(filterLabel->sizeHint());
-    filterLabel->setText("");
-    QToolTip::add(filterLabel,
-                  i18n("F - All files are hidden, the tree shows only folders\n"
-                       "N - All up-to-date files are hidden\n"
-                       "R - All removed files are hidden"));
-    statusBar->addStatusBarItem(filterLabel, 0, true);
-
     if( cvsService )
     {
         setupActions();
@@ -165,6 +153,8 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     }
 
     setXMLFile( "cervisiaui.rc" );
+
+    QTimer::singleShot(0, this, SLOT(slotSetupStatusBar()));
 }
 
 CervisiaPart::~CervisiaPart()
@@ -205,6 +195,20 @@ bool CervisiaPart::openURL( const KURL &u )
     }
 
     return openSandbox( u.path() );
+}
+
+
+void CervisiaPart::slotSetupStatusBar()
+{
+    // create the active filter indicator and add it to the statusbar
+    filterLabel = new QLabel("UR", m_statusBar->statusBar());
+    filterLabel->setFixedSize(filterLabel->sizeHint());
+    filterLabel->setText("");
+    QToolTip::add(filterLabel,
+                  i18n("F - All files are hidden, the tree shows only folders\n"
+                       "N - All up-to-date files are hidden\n"
+                       "R - All removed files are hidden"));
+    m_statusBar->addStatusBarItem(filterLabel, 0, true);
 }
 
 void CervisiaPart::setupActions()
@@ -1734,7 +1738,8 @@ void CervisiaPart::setFilter()
                 str += "R";
         }
 
-    filterLabel->setText(str);
+    if( filterLabel )
+        filterLabel->setText(str);
 }
 
 

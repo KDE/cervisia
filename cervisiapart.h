@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2004 Christian Loose <christian.loose@kdemail.net>
+ *  Copyright (c) 2002-2005 Christian Loose <christian.loose@kdemail.net>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -39,16 +39,6 @@ class KListView;
 class KRecentFilesAction;
 class CvsService_stub;
 class CervisiaBrowserExtension;
-
-
-class CervisiaStatusBarExtension : public KParts::StatusBarExtension
-{
-public:
-    CervisiaStatusBarExtension(KParts::ReadOnlyPart* parent)
-        : KParts::StatusBarExtension(parent, "CervisiaStatusBarExtension")
-    {
-    }
-};
 
 
 /**
@@ -146,6 +136,7 @@ protected slots:
 private slots:
     // called by menu action "Open Sandbox..."
     void slotOpenSandbox();
+    void slotSetupStatusBar();
 
 protected:
     virtual void guiActivateEvent(KParts::GUIActivateEvent* event);
@@ -185,7 +176,7 @@ private:
     KRecentFilesAction *recent;
 
     CvsService_stub*            cvsService;
-    CervisiaStatusBarExtension* statusBar;
+    KParts::StatusBarExtension* m_statusBar;
     CervisiaBrowserExtension*   m_browserExt;
     QLabel*                     filterLabel;
 

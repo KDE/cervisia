@@ -1,3 +1,8 @@
+2005-03-04  Christian Loose <christian.loose@kdemail.net>
+
+	* Fix BR #97664:
+          Fix statusbar when embedded in Konqueror.
+
 2005-01-31  Christian Loose  <christian.loose@kdemail.net>
 
 	* Implemented wish #95257:
