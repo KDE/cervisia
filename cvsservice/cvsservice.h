@@ -140,6 +140,14 @@ k_dcop:
     DCOPRef logout();
 
     /**
+     * @param repository
+     *
+     * @return A DCOP reference to the cvs job or in case of failure a
+     *         null reference.
+     */
+    DCOPRef moduleList(const QString& repository);
+
+    /**
      * Deletes files from the local working copy and schedules them to be
      * removed from the repository. The files don't actually disappear from
      * the repository until a subsequent commit is performed.

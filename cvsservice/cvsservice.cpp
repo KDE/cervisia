@@ -301,6 +301,23 @@ DCOPRef CvsService::logout()
 }
 
 
+DCOPRef CvsService::moduleList(const QString& repository)
+{
+    if( !d->hasWorkingCopy() )
+        return DCOPRef();
+
+    // create a cvs job
+    CvsJob* job = d->createCvsJob();
+
+    // assemble the command line
+    // cvs -d [REPOSITORY] checkout -c
+    *job << d->repository->cvsClient() << "-d" << repository << "checkout -c";
+
+    // return a DCOP reference to the cvs job
+    return DCOPRef(d->appId, job->objId());
+}
+
+
 DCOPRef CvsService::remove(const QStringList& files, bool recursive)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
