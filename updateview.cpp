@@ -386,6 +386,9 @@ void UpdateDirItem::maybeScanDir(bool recursive)
             m_opened = true;
             scanDirectory();
             syncWithEntries();
+
+            // sort the created items
+            sort();
         }
 
     if (recursive)
