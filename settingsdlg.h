@@ -62,6 +62,7 @@ private:
     KLineEdit *cvspathedit;
     QComboBox *compressioncombo;
     KLineEdit *usernameedit;
+    KLineEdit *editoredit;
     KLineEdit *diffoptedit;
     KLineEdit *extdiffedit;
     QCheckBox *remotestatusbox;

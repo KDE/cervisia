@@ -651,36 +651,48 @@ void CervisiaPart::openFiles(const QStringList &filenames)
 {
     // First check the cvs edit stuff
     if (opt_doCVSEdit)
-    {
-        CvsProgressDialog l("Edit", widget() );
-        l.setCaption(i18n("CVS Edit"));
-        QString cmdline = cvsClient(repository) + " edit ";
-
-        bool doit = false;
-        for ( QStringList::ConstIterator it = filenames.begin();
-              it != filenames.end(); ++it )
         {
-            if (!QFileInfo(*it).isWritable())
-            {
-                doit = true;
-                break;
-            }
-
-            cmdline += " ";
-            cmdline += KShellProcess::quote(*it);
+            CvsProgressDialog l("Edit", widget() );
+            l.setCaption(i18n("CVS Edit"));
+            QString cmdline = cvsClient(repository) + " edit ";
+            
+            bool doit = false;
+            for ( QStringList::ConstIterator it = filenames.begin();
+                  it != filenames.end(); ++it )
+                {
+                    if (!QFileInfo(*it).isWritable())
+                        {
+                            doit = true;
+                            break;
+                        }
+                    
+                    cmdline += " ";
+                    cmdline += KShellProcess::quote(*it);
+                }
+            
+            if (doit)
+                if (!l.execCommand(sandbox, repository, cmdline, "edit"))
+                    return;
         }
 
-        if (doit)
-            if (!l.execCommand(sandbox, repository, cmdline, "edit"))
-                return;
-    }
+    // Now open the files by either by running the configured external
+    // editor, or (if it is not explicitly set) by using KRun
+    KConfig *conf = config();
+    conf->setGroup("Communication");
+    QString editor = conf->readEntry("Editor");
 
-    // Now open the files by using KRun to use system mimetype associations
-    QDir dir( sandbox );
-    for ( QStringList::ConstIterator it = filenames.begin();
-          it != filenames.end(); ++it )
-    {
-        new KRun( KURL(dir.absFilePath(*it)), 0, true, false );
+    if (!editor.isEmpty()) {
+        KShellProcess proc("/bin/sh");
+        proc << editor;
+        for ( QStringList::ConstIterator it = filenames.begin();
+              it != filenames.end(); ++it )
+            proc << KShellProcess::quote(*it);
+        proc.start(KProcess::DontCare);
+    } else {
+        QDir dir(sandbox);
+        for ( QStringList::ConstIterator it = filenames.begin();
+              it != filenames.end(); ++it )
+            (void) new KRun(KURL(dir.absFilePath(*it)), 0, true, false);
     }
 }
 
@@ -1201,54 +1213,54 @@ void CervisiaPart::importOrCheckout(CheckoutDialog::ActionType action)
     CheckoutDialog *l = new CheckoutDialog(action, widget());
 
     if (l->exec())
-    {
-        QString cmdline = "cd ";
-        cmdline += l->workingDirectory();
-        cmdline += " && ";
-        cmdline += cvsClient(repository);
-        cmdline += " -d ";
-        cmdline += l->repository();
-        if (action == CheckoutDialog::Checkout)
         {
-            cmdline += " checkout ";
-			if (!l->branch().isEmpty())
+            QString cmdline = "cd ";
+            cmdline += l->workingDirectory();
+            cmdline += " && ";
+            cmdline += cvsClient(repository);
+            cmdline += " -d ";
+            cmdline += l->repository();
+            if (action == CheckoutDialog::Checkout)
+                {
+                    cmdline += " checkout ";
+                    if (!l->branch().isEmpty())
 			{
-				cmdline += " -r ";
-				cmdline += l->branch();
+                            cmdline += " -r ";
+                            cmdline += l->branch();
 			}
-            if (opt_pruneDirs)
-                cmdline += " -P ";
-            cmdline += l->module();
+                    if (opt_pruneDirs)
+                        cmdline += " -P ";
+                    cmdline += l->module();
+                }
+            else
+                {
+                    cmdline += " import";
+                    if (l->importBinary())
+                        cmdline += " -kb";
+                    QString ignore = l->ignoreFiles().stripWhiteSpace();
+                    if (!ignore.isEmpty())
+                        {
+                            cmdline += " -I ";
+                            cmdline += KShellProcess::quote(ignore);
+                        }
+                    QString comment = l->comment().stripWhiteSpace();
+                    cmdline += " -m ";
+                    cmdline += (QString("\"") + comment + "\" "); 
+                    cmdline += l->module();
+                    cmdline += " ";
+                    cmdline += l->vendorTag();
+                    cmdline += " ";
+                    cmdline += l->releaseTag();
+                }
+            
+            if (protocol->startJob(sandbox, repository, cmdline))
+                {
+                    showJobStart(cmdline);
+                    connect( protocol, SIGNAL(jobFinished(bool)),
+                             this,     SLOT(slotJobFinished(bool)) );
+                }
         }
-        else
-        {
-            cmdline += " import";
-            if (l->importBinary())
-                cmdline += " -kb";
-            QString ignore = l->ignoreFiles().stripWhiteSpace();
-            if (!ignore.isEmpty())
-            {
-                cmdline += " -I ";
-                cmdline += KShellProcess::quote(ignore);
-            }
-            QString comment = l->comment().stripWhiteSpace();
-            cmdline += " -m ";
-            cmdline += (QString("\"") + comment + "\" "); 
-            cmdline += l->module();
-            cmdline += " ";
-            cmdline += l->vendorTag();
-            cmdline += " ";
-            cmdline += l->releaseTag();
-        }
-
-        if (protocol->startJob(sandbox, repository, cmdline))
-        {
-            showJobStart(cmdline);
-            connect( protocol, SIGNAL(jobFinished(bool)),
-                     this,     SLOT(slotJobFinished(bool)) );
-        }
-    }
-
+    
     delete l;
 }
 
@@ -1438,8 +1450,7 @@ void CervisiaPart::slotConfigure()
 void CervisiaPart::slotHelp()
 {
     emit setStatusBarText( i18n("Invoking help on Cervisia") );
-    // TODO: invokes the wrong help
-    kapp->invokeHelp();
+    KApplication::startServiceByDesktopName("khelpcenter", QString("help:/cervisia/index.html"));
 }
 
 

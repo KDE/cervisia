@@ -1,3 +1,7 @@
+2002-06-26  Bernd Gehrmann  <bernd@mail.berlios.de>
+
+	* Made editor configurable again
+
 2002-06-25  Bernd Gehrmann  <bernd@mail.berlios.de>
 
 	* Fixed char buffer to QString conversion in
@@ -54,8 +58,13 @@
 	* Patch by Roland Krause <rokrau@yahoo.com>:
 	  - Added "Last change" to context menu
 	  - Added filter for files which are not in cvs
-	* Ignore stderr in Make Patch
+	* Ignore stderr in Make Patch (it would produce
+	  invalid patches previously)
 
+2002-04-03  Bernd Gehrmann  <bernd@mail.berlios.de>
+
+	* Release 1.5rich
+	
 2002-02-04  Bernd Gehrmann  <bernd@mail.berlios.de>
 
 	* Colored ProtocolView output
