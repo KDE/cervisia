@@ -658,7 +658,7 @@ void UpdateView::setFilter(Filter filter)
 {
     filt = filter;
     QStack<ListViewItem> s;
-    QList<ListViewItem> l;
+    QPtrList<ListViewItem> l;
 
     ListViewItem *item = static_cast<ListViewItem*>(firstChild());
     // Hack: Since applyFilter() changes the whole child structure, we have
@@ -877,7 +877,7 @@ void UpdateView::finishJob(bool success)
  */
 void UpdateView::markUpdated(bool laststage, bool success)
 {
-    QListIterator<ListViewItem> it(relevantSelection);
+    QPtrListIterator<ListViewItem> it(relevantSelection);
     for ( ; it.current(); ++it)
         if (isDirItem(it.current()))
             {
@@ -904,7 +904,7 @@ void UpdateView::rememberSelection(bool recursive)
 {
     // Collect all selected dir and file items into relevantSelection
 
-    QList<ListViewItem> shallowItems, deepItems;
+    QPtrList<ListViewItem> shallowItems, deepItems;
 
     QStack<QListViewItem> s;
     for ( QListViewItem *item = firstChild(); item;
@@ -921,7 +921,7 @@ void UpdateView::rememberSelection(bool recursive)
     
     if (recursive)
         {
-            QListIterator<ListViewItem> it(shallowItems);
+            QPtrListIterator<ListViewItem> it(shallowItems);
             for ( ; it.current(); ++it)
                 if (isDirItem(it.current()))
                     for ( QListViewItem *item = it.current()->firstChild(); item;
@@ -936,11 +936,11 @@ void UpdateView::rememberSelection(bool recursive)
 
 #if 0
     DEBUGOUT("Deep:");
-    QListIterator<ListViewItem> it42(deepItems);
+    QPtrListIterator<ListViewItem> it42(deepItems);
     for (; it42.current(); ++it42)
         DEBUGOUT("  " << (*it42)->text(0));
     DEBUGOUT("Shallow:");
-    QListIterator<ListViewItem> it43(shallowItems);
+    QPtrListIterator<ListViewItem> it43(shallowItems);
     for (; it43.current(); ++it43)
         DEBUGOUT("  " << (*it43)->text(0));
 #endif
@@ -948,18 +948,18 @@ void UpdateView::rememberSelection(bool recursive)
     // Collect everything together, and avoid duplicates:
     
     relevantSelection.clear();
-    QListIterator<ListViewItem> it1(shallowItems);
+    QPtrListIterator<ListViewItem> it1(shallowItems);
     for ( ; it1.current(); ++it1)
         if (!relevantSelection.contains(it1.current()))
             relevantSelection.append(it1.current());
-    QListIterator<ListViewItem> it2(deepItems);
+    QPtrListIterator<ListViewItem> it2(deepItems);
     for ( ; it2.current(); ++it2)
         if (!relevantSelection.contains(it2.current()))
             relevantSelection.append(it2.current());
 
 #if 0
     DEBUGOUT("Relevant:");
-    QListIterator<ListViewItem> it44(relevantSelection);
+    QPtrListIterator<ListViewItem> it44(relevantSelection);
     for (; it44.current(); ++it44)
         DEBUGOUT("  " << (*it44)->text(0));
     DEBUGOUT("End");
@@ -973,9 +973,9 @@ void UpdateView::rememberSelection(bool recursive)
  */
 void UpdateView::syncSelection()
 {
-    QList<UpdateDirItem> dirs;
+    QPtrList<UpdateDirItem> dirs;
     
-    QListIterator<ListViewItem> it1(relevantSelection);
+    QPtrListIterator<ListViewItem> it1(relevantSelection);
     for ( ; it1.current(); ++it1)
 	{
             UpdateDirItem *diritem = 0;
@@ -989,7 +989,7 @@ void UpdateView::syncSelection()
 
     QApplication::setOverrideCursor(waitCursor);
     
-    QListIterator<UpdateDirItem> it2(dirs);
+    QPtrListIterator<UpdateDirItem> it2(dirs);
     for ( ; it2.current(); ++it2)
 	{
             it2.current()->syncWithDirectory();

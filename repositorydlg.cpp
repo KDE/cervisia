@@ -331,7 +331,7 @@ AddRepositoryDialog::AddRepositoryDialog(QWidget *parent, const char *name)
 
     KButtonBox *buttonbox = new KButtonBox(this);
     buttonbox->addStretch();
-    QPushButton *ok = buttonbox->addButton(i18n("OK"));
+    ok = buttonbox->addButton(i18n("OK"));
     QPushButton *cancel = buttonbox->addButton(i18n("Cancel"));
     ok->setDefault(true);
     connect( ok, SIGNAL(clicked()), this, SLOT(accept()) );
@@ -349,6 +349,7 @@ AddRepositoryDialog::AddRepositoryDialog(QWidget *parent, const char *name)
 
     if (options)
         resize(options->size);
+    ok->setEnabled(!repo_edit->text().isEmpty());
 }
 
 
@@ -386,6 +387,7 @@ void AddRepositoryDialog::repoChanged()
     QString repo = repository();
     rsh_edit->setEnabled(repo.left(9) != ":pserver:"
                          && repo.contains(":"));
+    ok->setEnabled(!repo.isEmpty());
 }
 
 

@@ -19,7 +19,7 @@
 #include <qlabel.h>
 #include <qmultilinedit.h>
 #include <qcheckbox.h>
-#include <qlist.h>
+#include <qptrlist.h>
 #include "diffview.h"
 
 class ResolveItem;
@@ -70,7 +70,7 @@ private:
     QPushButton *abutton, *bbutton, *abbutton, *babutton, *editbutton;
     DiffView *diff1, *diff2, *merge;
 
-    QList<ResolveItem> items;
+    QPtrList<ResolveItem> items;
     QString fname;
     int markeditem;
 };

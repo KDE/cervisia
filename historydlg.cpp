@@ -259,8 +259,8 @@ void HistoryDialog::choiceChanged()
             
     // Now move all items which fulfill our criteria
     // back into the listview.
-    QList<ItemCopy> shownitems;
-    QListIterator<ItemCopy> it(hiddenitems);
+    QPtrList<ItemCopy> shownitems;
+    QPtrListIterator<ItemCopy> it(hiddenitems);
     for (; it.current(); ++it)
         {
             ItemCopy *item = it.current();
@@ -287,7 +287,7 @@ void HistoryDialog::choiceChanged()
         }
 
     // Delete shown items from hidden list
-    QListIterator<ItemCopy> it2(shownitems);
+    QPtrListIterator<ItemCopy> it2(shownitems);
     for (; it2.current(); ++it2)
         hiddenitems.remove(it2.current());
                            

@@ -78,8 +78,8 @@ private:
     QString sandbox;
     QString repository;
     QString filename;
-    QList<RevisionInfo> items;
-    QList<TagInfo> tags;
+    QPtrList<RevisionInfo> items;
+    QPtrList<TagInfo> tags;
     QString selectionA;
     QString selectionB;
     LogTreeView *tree;

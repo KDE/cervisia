@@ -20,7 +20,7 @@
 #include <klineedit.h>
 
 class ListView;
-
+class QPushButton;
 
 class RepositoryDialog : public QDialog
 {
@@ -86,6 +86,7 @@ private:
 
     KLineEdit *repo_edit;
     KLineEdit *rsh_edit;
+    QPushButton *ok;
 };
 
 #endif

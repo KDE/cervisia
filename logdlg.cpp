@@ -324,7 +324,7 @@ bool LogDialog::parseCvsLog(const QString &sbox, const QString &repo, const QStr
                             // Build tagcomment and taglist:
                             // tagcomment contains Tags, Branchpoints and 'On Branch's
                             // taglist contains tags (without prefix) and Branchpoints
-                            QListIterator<TagInfo> it(tags);
+                            QPtrListIterator<TagInfo> it(tags);
                             for (; it.current(); ++it)
                                 {
                                     if (rev == it.current()->rev)
@@ -373,7 +373,7 @@ bool LogDialog::parseCvsLog(const QString &sbox, const QString &repo, const QStr
 
     tagcombo[0]->insertItem("");
     tagcombo[1]->insertItem("");
-    QListIterator<TagInfo> it(tags);
+    QPtrListIterator<TagInfo> it(tags);
     for (; it.current(); ++it)
         {
 	    QString str = it.current()->tag;
@@ -421,7 +421,7 @@ void LogDialog::annotateClicked()
 
 void LogDialog::revisionSelected(QString rev, bool rmb)
 {
-    QListIterator<RevisionInfo> it(items);
+    QPtrListIterator<RevisionInfo> it(items);
     for (; it.current(); ++it)
         if (it.current()->rev == rev)
             {
@@ -446,7 +446,7 @@ void LogDialog::revisionSelected(QString rev, bool rmb)
 
 void LogDialog::tagSelected(QString tag, bool rmb)
 {
-    QListIterator<TagInfo> it(tags);
+    QPtrListIterator<TagInfo> it(tags);
     for (; it.current(); ++it)
         if (tag == it.current()->tag)
             {
