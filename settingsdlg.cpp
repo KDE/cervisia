@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
+ *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -150,45 +151,12 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
     //
     // Look and Feel Options
     //
-    QVBox *lookPage = addVBoxPage( i18n("&Appearance") );
-
-    protocolfontbox = new FontButton(i18n("Font for &Protocol Window..."), lookPage);
-    annotatefontbox = new FontButton(i18n("Font for A&nnotate View..."), lookPage);
-    difffontbox = new FontButton(i18n("Font for D&iff View..."), lookPage);
-    splitterbox = new QCheckBox(i18n("Split main window &horizontally"), lookPage);
-
-    new QWidget(lookPage);
+    addLookAndFeelPage();
 
     //
     // Color Options
     //
-    QGrid *colorsPage = addGridPage( 4, QGrid::Horizontal, i18n("Co&lors") );
-
-    QLabel *conflictlabel = new QLabel( i18n("Conflict:"), colorsPage );
-    conflictbutton = new KColorButton( colorsPage);
-    conflictlabel->setBuddy( conflictbutton );
-
-    QLabel *diffchangelabel = new QLabel( i18n("Diff change:"), colorsPage );
-    diffchangebutton = new KColorButton( colorsPage);
-    diffchangelabel->setBuddy( diffchangebutton );
-
-    QLabel *localchangelabel = new QLabel( i18n("Local change:"), colorsPage );
-    localchangebutton = new KColorButton( colorsPage);
-    localchangelabel->setBuddy( localchangebutton );
-
-    QLabel *diffinsertlabel = new QLabel( i18n("Diff insertion:"), colorsPage );
-    diffinsertbutton = new KColorButton( colorsPage);
-    diffinsertlabel->setBuddy( diffinsertbutton );
-
-    QLabel *remotechangelabel = new QLabel( i18n("Remote change:"), colorsPage );
-    remotechangebutton = new KColorButton( colorsPage);
-    remotechangelabel->setBuddy( remotechangebutton );
-
-    QLabel *diffdeletelabel = new QLabel( i18n("Diff deletion:"), colorsPage );
-    diffdeletebutton = new KColorButton( colorsPage);
-    diffdeletelabel->setBuddy( diffdeletebutton );
-
-    new QWidget(colorsPage);
+    addColorPage();
 
 #if 0
     QGridLayout *editorlayout = new QGridLayout(editorgroup, 4, 2, 10, 6);
@@ -250,10 +218,13 @@ void SettingsDialog::readSettings()
     localstatusbox->setChecked(config->readBoolEntry("StatusForLocalRepos", false));
     config->setGroup("Communication");
     editoredit->setURL(config->readEntry("Editor"));
+
+    // read configuration for look and feel page
     config->setGroup("LookAndFeel");
     protocolfontbox->setFont(config->readFontEntry("ProtocolFont"));
     annotatefontbox->setFont(config->readFontEntry("AnnotateFont"));
     difffontbox->setFont(config->readFontEntry("DiffFont"));
+    changelogfontbox->setFont(config->readFontEntry("ChangeLogFont"));
     splitterbox->setChecked(config->readBoolEntry("SplitHorizontally",true));
 
     config->setGroup("Colors");
@@ -307,6 +278,7 @@ void SettingsDialog::writeSettings()
     config->writeEntry("ProtocolFont", protocolfontbox->font());
     config->writeEntry("AnnotateFont", annotatefontbox->font());
     config->writeEntry("DiffFont", difffontbox->font());
+    config->writeEntry("ChangeLogFont", changelogfontbox->font());
     config->writeEntry("SplitHorizontally", splitterbox->isChecked());
 
     config->setGroup("Colors");
@@ -339,6 +311,60 @@ void SettingsDialog::done(int res)
         writeSettings();
     KDialogBase::done(res);
     delete this;
+}
+
+
+/*
+ * Create a page for the look & feel options
+ */
+void SettingsDialog::addLookAndFeelPage()
+{
+    QVBox *lookPage = addVBoxPage( i18n("&Appearance") );
+
+    protocolfontbox  = new FontButton(i18n("Font for &Protocol Window..."), lookPage);
+    annotatefontbox  = new FontButton(i18n("Font for A&nnotate View..."), lookPage);
+    difffontbox      = new FontButton(i18n("Font for D&iff View..."), lookPage);
+    changelogfontbox = new FontButton(i18n("Font for ChangeLog View..."), lookPage);
+
+    splitterbox = new QCheckBox(i18n("Split main window &horizontally"), lookPage);
+
+    new QWidget(lookPage);
+
+}
+
+
+/*
+ * Create a page for the color options
+ */
+void SettingsDialog::addColorPage()
+{
+    QGrid *colorsPage = addGridPage( 4, QGrid::Horizontal, i18n("Co&lors") );
+
+    QLabel *conflictlabel = new QLabel( i18n("Conflict:"), colorsPage );
+    conflictbutton = new KColorButton( colorsPage);
+    conflictlabel->setBuddy( conflictbutton );
+
+    QLabel *diffchangelabel = new QLabel( i18n("Diff change:"), colorsPage );
+    diffchangebutton = new KColorButton( colorsPage);
+    diffchangelabel->setBuddy( diffchangebutton );
+
+    QLabel *localchangelabel = new QLabel( i18n("Local change:"), colorsPage );
+    localchangebutton = new KColorButton( colorsPage);
+    localchangelabel->setBuddy( localchangebutton );
+
+    QLabel *diffinsertlabel = new QLabel( i18n("Diff insertion:"), colorsPage );
+    diffinsertbutton = new KColorButton( colorsPage);
+    diffinsertlabel->setBuddy( diffinsertbutton );
+
+    QLabel *remotechangelabel = new QLabel( i18n("Remote change:"), colorsPage );
+    remotechangebutton = new KColorButton( colorsPage);
+    remotechangelabel->setBuddy( remotechangebutton );
+
+    QLabel *diffdeletelabel = new QLabel( i18n("Diff deletion:"), colorsPage );
+    diffdeletebutton = new KColorButton( colorsPage);
+    diffdeletelabel->setBuddy( diffdeletebutton );
+
+    new QWidget(colorsPage);
 }
 
 #include "settingsdlg.moc"

@@ -1,3 +1,7 @@
+2003-05-29  Christian Loose  <christian.loose@hamburg.de>
+
+	* Font of ChangeLog dialog now configurable.
+
 2003-05-25  Christian Loose  <christian.loose@hamburg.de>
 
 	* Added a method to retrieve a list of modules in the repository

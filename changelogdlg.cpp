@@ -45,7 +45,10 @@ ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent, const char *name
     , partConfig(cfg)
 {
     edit = new KTextEdit(this);
-    edit->setFont(KGlobalSettings::fixedFont());
+
+    cfg.setGroup("LookAndFeel");
+    edit->setFont(cfg.readFontEntry("ChangeLogFont"));
+
     edit->setFocus();
     edit->setWordWrap(QTextEdit::NoWrap);
     edit->setTextFormat(QTextEdit::PlainText);
