@@ -92,7 +92,7 @@ KAboutData *CervisiaFactory::aboutData()
                            CERVISIA_VERSION,
                            I18N_NOOP("A CVS frontend"),
                            KAboutData::License_QPL,
-                           I18N_NOOP("(c) 1999-2002 Bernd Gehrmann"));
+                           I18N_NOOP("Copyright (c) 1999-2002 Bernd Gehrmann"));
 }
 
 CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,

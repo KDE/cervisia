@@ -1,3 +1,8 @@
+2002-06-27  Bernd Gehrmann  <bernd@mail.berlios.de>
+
+	* Mark files with option -kb with a binary icon
+	* Fixed restoration of the last loaded sandbox
+
 2002-06-26  Bernd Gehrmann  <bernd@mail.berlios.de>
 
 	* Made editor configurable again

@@ -42,7 +42,7 @@ CervisiaShell::CervisiaShell( const char *name )
 
 CervisiaShell::~CervisiaShell()
 {
-
+    delete part;
 }
 
 void CervisiaShell::setupActions()
@@ -140,12 +140,31 @@ bool CervisiaShell::queryExit()
     config->writeEntry("Customized", true);
     config->writeEntry("Size", size());
 
-    part->saveDialogProperties( config );
-    config->setGroup( "Session" );
-    part->saveProperties( config );
+    part->saveDialogProperties(config);
+
+    config->setGroup("Session");
+    saveProperties(config);
 
     config->sync();
     return true;
+}
+
+void CervisiaShell::restorePseudo(const QString &dirname)
+{
+    KConfig *config = part->config();
+
+    config->setGroup("Main window");
+    if (config->readBoolEntry("Customized"))
+        resize(config->readSizeEntry("Size"));
+
+    part->readDialogProperties(config);
+
+    config->setGroup("Session");
+    // Explicitly override the loaded directory if
+    // a command line argument is given
+    if (!dirname.isEmpty())
+        config->writeEntry("Current Directory", dirname);
+    readProperties(config);
 }
 
 void CervisiaShell::readProperties(KConfig *config)
@@ -159,24 +178,8 @@ void CervisiaShell::readProperties(KConfig *config)
 
 void CervisiaShell::saveProperties(KConfig *config)
 {
-    part->saveProperties( config );
-    config->writeEntry( "Current Directory", part->sandBox() );
-}
-
-void CervisiaShell::restorePseudo( const QString &dirname )
-{
-    KConfig *config = part->config();
-
-    config->setGroup("Main window");
-    if (config->readBoolEntry("Customized"))
-        resize(config->readSizeEntry("Size"));
-
-    part->readDialogProperties( config );
-
-    config->setGroup("Session");
-    if (!dirname.isEmpty())
-        config->writeEntry("Current Directory", dirname);
-    readProperties(config);
+    part->saveProperties(config);
+    config->writeEntry("Current Directory", part->sandBox());
 }
 
 #include "cervisiashell.moc"

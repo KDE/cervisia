@@ -46,7 +46,7 @@ public:
     void syncWithEntries();
     void updateChildItem(QString name, UpdateView::Status status, bool isdir);
     void updateEntriesItem(QString name, UpdateView::Status status, bool isdir,
-                           QString rev, QString tagname, time_t timestamp);
+                           bool isbin, QString rev, QString tagname, time_t timestamp);
     virtual QString key(int col, bool) const;
     virtual QString text(int col) const;
     virtual void setOpen(bool o);
@@ -131,7 +131,6 @@ QString UpdateDirItem::dirPath()
  */
 void UpdateDirItem::updateChildItem(QString name, UpdateView::Status status, bool isdir)
 {
-    kdDebug() << "Updating " << name << " in " << dirPath() << endl;
     for (ListViewItem *item = myFirstChild(); item;
 	 item = item->myNextSibling() )
 	{
@@ -166,7 +165,7 @@ void UpdateDirItem::updateChildItem(QString name, UpdateView::Status status, boo
  * new items and for items which were NotInCVS.
  */
 void UpdateDirItem::updateEntriesItem(QString name, UpdateView::Status status, bool isdir,
-                                      QString rev, QString tagname, time_t timestamp)
+                                      bool isbin, QString rev, QString tagname, time_t timestamp)
 {
     for (ListViewItem *item = myFirstChild(); item;
 	 item = item->myNextSibling() )
@@ -189,12 +188,13 @@ void UpdateDirItem::updateEntriesItem(QString name, UpdateView::Status status, b
                                 }
                             viewitem->setRevTag(rev, tagname);
                             viewitem->setTimestamp(timestamp);
+                            if (isbin)
+                                viewitem->setPixmap(0, SmallIcon("binary"));
                         }
 		    return;
 		}
 	}
 
-    kdDebug() << "new entries item for " << name << endl;
     // Not found, make new entry
     if (isdir)
         ( new UpdateDirItem(this, name) )->maybeScanDir(true);
@@ -229,10 +229,10 @@ void UpdateDirItem::scanDirectory()
 }
 
 
-static const char *lastModifiedStr(const char *fname)
+static QString lastModifiedStr(const QString &fname)
 {
     struct stat st;
-    if (lstat(fname, &st) != 0)
+    if (lstat(fname.local8Bit(), &st) != 0)
 	return "";
     struct tm *tm_p = gmtime(&st.st_mtime);
     char *p = asctime(tm_p);
@@ -250,7 +250,7 @@ void UpdateDirItem::syncWithEntries()
     QString name, rev, timestamp, options, tagdate;
     UpdateView::Status status;
 
-    FILE *f = fopen(QString(dirPath() + QString("CVS/Entries")).latin1(), "r");
+    FILE *f = fopen(QString(dirPath() + QString("CVS/Entries")).local8Bit(), "r");
     if (!f)
 	return;
 
@@ -279,6 +279,7 @@ void UpdateDirItem::syncWithEntries()
 		continue;
 	    *nextp = '\0';
 	    options = QString(p); p = nextp+1;
+            bool isbin = (options == "-kb");
 	    if ( (nextp = strchr(p, '\n')) == 0)
 		continue;
 	    *nextp = '\0';
@@ -296,7 +297,7 @@ void UpdateDirItem::syncWithEntries()
 		    status = UpdateView::Conflict;
 		    timestamp.truncate(timestamp.find('+'));
                 }
-	    else if (timestamp != lastModifiedStr(QString(dirPath() + name).latin1()))
+	    else if (timestamp != lastModifiedStr(dirPath() + name))
 		status = UpdateView::LocallyModified;
 	    else
 		status = UpdateView::Unknown;
@@ -310,7 +311,7 @@ void UpdateDirItem::syncWithEntries()
 	    strptime(timestamp.local8Bit(), "%c" , &tmp);
 	    setlocale(LC_TIME, oldLocale);
 	    time = mktime(&tmp);
-	    updateEntriesItem(name, status, isdir, rev, tagdate, time);
+	    updateEntriesItem(name, status, isdir, isbin, rev, tagdate, time);
 	}
     fclose(f);
 }
@@ -686,7 +687,7 @@ UpdateView::~UpdateView()
 
 bool UpdateView::isDirItem(QListViewItem *item)
 {
-    return qstrcmp(item->text(1).latin1(), "") == 0;
+    return item->text(1).isEmpty();
 }
 
 
