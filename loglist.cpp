@@ -14,12 +14,10 @@
 
 #include "loglist.h"
 
+#include <qapplication.h>
 #include <qdatetime.h>
-#include <qheader.h>
 #include <qkeycode.h>
 #include <qstylesheet.h>
-#include <kapplication.h>
-#include <kconfig.h>
 #include <kglobal.h>
 #include <klocale.h>
 
@@ -27,7 +25,7 @@
 #include "misc.h"
 
 
-class LogListViewItem : public QListViewItem
+class LogListViewItem : public KListViewItem
 {
 public:
 
@@ -54,7 +52,7 @@ private:
 LogListViewItem::LogListViewItem( QListView *list,
                                   const QString &rev, const QString &author, const QDateTime &date,
                                   const QString &comment, const QString &tagcomment )
-    : QListViewItem(list, rev, author, KGlobal::locale()->formatDateTime(date),
+    : KListViewItem(list, rev, author, KGlobal::locale()->formatDateTime(date),
                     extractBranchName(tagcomment), truncateLine(comment), extractOrdinaryTags(tagcomment)),
     mrev(rev), mauthor(author), mdate(date), mcomment(comment), mtagcomment(tagcomment)
 {
@@ -137,7 +135,7 @@ QString LogListViewItem::extractBranchName(const QString &s)
 
 int LogListViewItem::compare(QListViewItem* i, int col, bool ascending) const
 {
-    LogListViewItem const* pItem = static_cast<LogListViewItem*>(i);
+    const LogListViewItem* pItem = static_cast<LogListViewItem*>(i);
 
     int iResult;
     switch (col)
@@ -156,11 +154,8 @@ int LogListViewItem::compare(QListViewItem* i, int col, bool ascending) const
 }
 
 
-static const unsigned COLS = 6;
-
-
 LogListView::LogListView(KConfig& cfg, QWidget *parent, const char *name)
-    : ListView(parent, name)
+    : KListView(parent, name)
     , partConfig(cfg)
 {
     setAllColumnsShowFocus(true);
@@ -284,14 +279,9 @@ void LogListView::contentsMouseMoveEvent(QMouseEvent *e)
                 }
             text += "</qt>";
 
-            int left = static_cast<QMouseEvent*>(e)->pos().x() + 20;
+            int left = e->pos().x() + 20;
             int top = viewport()->mapTo(this, itemRect(item).bottomLeft()).y();
-#if 0
-            int vpx = contentsToViewport(static_cast<QMouseEvent*>(e)->pos()).x();
-            int index = header()->mapToIndex(header()->sectionAt(vpx));
-            if (index < columns()-1)
-                left = header()->sectionPos(header()->mapToSection(index+1));
-#endif
+
             currentLabel = new TipLabel(text);
             currentLabel->showAt(mapToGlobal(QPoint(left, top)));
             currentTipItem = item;
@@ -338,7 +328,7 @@ void LogListView::keyPressEvent(QKeyEvent *e)
         if (e->state() == 0)
              QListView::keyPressEvent(e);
         else
-            kapp->postEvent(this, new QKeyEvent(QEvent::KeyPress, e->key(), e->ascii(), 0));
+            QApplication::postEvent(this, new QKeyEvent(QEvent::KeyPress, e->key(), e->ascii(), 0));
         break;
     default:
         // Ignore Key_Enter, Key_Return

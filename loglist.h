@@ -16,7 +16,7 @@
 #define LOGLIST_H
 
 
-#include "listview.h"
+#include <klistview.h>
 
 
 class QDateTime;
@@ -25,7 +25,7 @@ class TipLabel;
 class LogListViewItem;
 
 
-class LogListView : public ListView
+class LogListView : public KListView
 {
     Q_OBJECT
     
