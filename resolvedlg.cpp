@@ -18,7 +18,6 @@
 #include <qkeycode.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qmultilineedit.h>
 #include <qpushbutton.h>
 #include <qtextcodec.h>
 #include <qtextstream.h>
@@ -29,11 +28,8 @@
 
 #include "diffview.h"
 #include "misc.h"
-
-#include <kdeversion.h>
-#if KDE_VERSION < KDE_MAKE_VERSION(3,1,90)
-#include "configutils.h"
-#endif
+#include "resolvedlg_p.h"
+using Cervisia::ResolveEditorDialog;
 
 
 // *UGLY HACK*
@@ -142,22 +138,14 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     setWFlags(Qt::WDestructiveClose | getWFlags());
 
-#if KDE_IS_VERSION(3,1,90)
     QSize size = configDialogSize(partConfig, "ResolveDialog");
-#else
-    QSize size = Cervisia::configDialogSize(this, partConfig, "ResolveDialog");
-#endif
     resize(size);
 }
 
 
 ResolveDialog::~ResolveDialog()
 {
-#if KDE_IS_VERSION(3,1,90)
     saveDialogSize(partConfig, "ResolveDialog");
-#else
-    Cervisia::saveDialogSize(this, partConfig, "ResolveDialog");
-#endif
 }
 
 
@@ -222,9 +210,9 @@ bool ResolveDialog::parseFile(const QString &name)
             item->linecountTotal = item->linecountA;
             items.append(item);
             for (; advanced1 < advanced2; advanced1++)
-            diff1->addLine("", DiffView::Neutral);
+                diff1->addLine("", DiffView::Neutral);
             for (; advanced2 < advanced1; advanced2++)
-            diff2->addLine("", DiffView::Neutral);
+                diff2->addLine("", DiffView::Neutral);
             state = Normal;
         }
         else if (state == VersionA)
@@ -524,56 +512,6 @@ void ResolveDialog::keyPressEvent(QKeyEvent *e)
     }
 }
 
-
-ResolveEditorDialog::ResolveEditorDialog(KConfig& cfg, QWidget *parent, const char *name)
-    : KDialogBase(parent, name, true, QString::null,
-                  Ok | Cancel, Ok, true)
-    , partConfig(cfg)
-{
-    edit = new QMultiLineEdit(this);
-    edit->setFocus();
-
-    setMainWidget(edit);
-
-    QFontMetrics const fm(fontMetrics());
-    setMinimumSize(fm.width('0') * 120,
-                   fm.lineSpacing() * 40);
-
-#if KDE_IS_VERSION(3,1,90)
-    QSize size = configDialogSize(partConfig, "ResolveEditDialog");
-#else
-    QSize size = Cervisia::configDialogSize(this, partConfig, "ResolveEditDialog");
-#endif
-    resize(size);
-}
-
-
-ResolveEditorDialog::~ResolveEditorDialog()
-{
-#if KDE_IS_VERSION(3,1,90)
-    saveDialogSize(partConfig, "ResolveEditDialog");
-#else
-    Cervisia::saveDialogSize(this, partConfig, "ResolveEditDialog");
-#endif
-}
-
-
-void ResolveEditorDialog::setContent(const QStringList &l)
-{
-    QStringList::ConstIterator it;
-    for (it = l.begin(); it != l.end(); ++it)
-        edit->insertLine((*it).left((*it).length()-1));
-}
-
-
-QStringList ResolveEditorDialog::content() const
-{
-    QStringList l;
-    for (int i = 0; i < edit->numLines(); ++i)
-        l << (edit->textLine(i) + '\n');
-
-    return l;
-}
 
 #include "resolvedlg.moc"
 

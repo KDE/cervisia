@@ -8,7 +8,7 @@ kde_module_LTLIBRARIES = libcervisiapart.la
 noinst_LTLIBRARIES = libcervisia.la
 
 libcervisia_la_SOURCES = annotatedlg.cpp cvsprogressdlg.cpp diffdlg.cpp logdlg.cpp \
-		   progressdlg.cpp progressdlg.skel resolvedlg.cpp annotateview.cpp        \
+		   progressdlg.cpp progressdlg.skel resolvedlg.cpp resolvedlg_p.cpp annotateview.cpp \
 		   diffview.cpp loglist.cpp logplainview.cpp logtree.cpp annotatectl.cpp   \
 		   globalconfig.cpp loginfo.cpp misc.cpp qttableview.cpp \
 		   configutils.cpp tooltip.cpp

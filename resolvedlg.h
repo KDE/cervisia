@@ -24,7 +24,6 @@
 class DiffView;
 
 class QLabel;
-class QMultiLineEdit;
 class QTextCodec;
 class KConfig;
 class ResolveItem;
@@ -76,22 +75,6 @@ private:
     KConfig& partConfig;
 };
 
-
-class ResolveEditorDialog : public KDialogBase
-{
-public:
-
-    explicit ResolveEditorDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
-
-    virtual ~ResolveEditorDialog();
-
-    void setContent(const QStringList &l);
-    QStringList content() const;
-
-private:   
-    QMultiLineEdit *edit;
-    KConfig& partConfig;
-};  
 
 #endif
 
