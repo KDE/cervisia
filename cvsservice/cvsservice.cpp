@@ -435,6 +435,22 @@ DCOPRef CvsService::update(const QStringList& files, bool recursive,
 }
 
 
+DCOPRef CvsService::showWatchers(const QStringList& files)
+{
+    if( !d->hasWorkingCopy() || d->hasRunningJob() )
+        return DCOPRef();
+
+    // assemble the command line
+    // cvs watchers [FILES]
+    d->singleCvsJob->clearCvsCommand();
+
+    *d->singleCvsJob << d->repository->cvsClient() << "watchers"
+                     << CvsServiceUtils::joinFileList(files);
+
+    return d->setupNonConcurrentJob();
+}
+
+
 void CvsService::quit()
 {
     kapp->quit();

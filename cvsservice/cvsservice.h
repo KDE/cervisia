@@ -210,6 +210,11 @@ k_dcop:
                    bool pruneDirs, const QString& extraOpt);
 
     /**
+     * @param files
+     */
+    DCOPRef showWatchers(const QStringList& files);
+
+    /**
      * Quits the DCOP service.
      */
     void quit();
