@@ -1,268 +1,335 @@
-<!DOCTYPE book PUBLIC  "-//KDE//DTD DocBook XML V4.1-Based Variant V1.0//EN" "dtd/kdex.dtd"[
-<!ENTITY cvs "<application>CVS</application>">
-<!ENTITY cervisia "<application>Cervisia</application>">
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.1-Based Variant V1.0//EN" "dtd/kdex.dtd" [
+  <!ENTITY kappname "&cervisia;">
+  <!ENTITY package "kdesdk">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % English "INCLUDE"> <!-- Change language only here -->
+  <!ENTITY CVS "<application>CVS</application>">
 ]>
 
-<book id="index" lang="en">
-      
-   <bookinfo>
-      <title>&cervisia; Manual</title>
-      <authorgroup>
-         <author>
-            <firstname>Bernd</firstname><surname>Gehrmann</surname>
-            <affiliation><address><email>bernd@physik.hu-berlin.de</email></address></affiliation>
-         </author> 
-      </authorgroup>
-      <copyright>
-         <year>1999</year>
-         <year>2000</year>
-         <year>2001</year>
-         <holder>Bernd Gehrmann</holder>
-      </copyright>
-      <legalnotice>
-         <para>
-            This program may be distributed under the terms of the Q Public
-            License as defined by Trolltech AS of Norway and appearing in the
-            file LICENSE.QPL included in the packaging of this file.
-         </para>
-         <para>
-            This program is distributed in the hope that it will be useful,
-            but WITHOUT ANY WARRANTY; without even the implied warranty of
-            MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-         </para>
-      </legalnotice>
-   </bookinfo>
+<book lang="&language;">
+
+<bookinfo>
+<title>&cervisia; Manual</title>
+<authorgroup>
+<author>
+<firstname>Bernd</firstname><surname>Gehrmann</surname>
+<affiliation><address><email>bernd@physik.hu-berlin.de</email></address></affiliation>
+</author> 
+
+<!-- TRANS:ROLES_OF_TRANSLATORS -->
+
+</authorgroup>
+
+<copyright>
+<year>1999</year>
+<year>2000</year>
+<year>2001</year>
+<holder>Bernd Gehrmann</holder>
+</copyright>
+<legalnotice>
+ 
+<para>This program may be distributed under the terms of the Q Public
+ License as defined by Trolltech AS of Norway and appearing in the
+ file LICENSE.QPL included in the packaging of this file.</para>
+
+<para> This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</para>
+</legalnotice>
+
+<legalnotice>&FDLNotice;</legalnotice>
+
+<date>2001-09-29</date>
+<releaseinfo>1.50.10</releaseinfo>
+
+<abstract>
+<para>&cervisia; provides a graphical view of &CVS;.</para>
+</abstract>
+
+<keywordset>
+<keyword>KDE</keyword>
+<keyword>kdesdk</keyword>
+<keyword>Cervisia</keyword>
+<keyword>CVS</keyword>
+<keyword>version control</keyword>
+</keywordset>
+
+</bookinfo>
    
-   
-   <chapter id="gettingstarted">
-      <title>Getting started</title>
+<chapter id="getting-started">
+<title>Getting Started</title>
 
-   <sect1 id="accessingrepository">
-      <title>Accessing the repository</title>
+<sect1 id="accessing-repository">
+<title>Accessing The Repository</title>
       
-      <para>
-         In this section we assume that you are using &cvs; only on the client
-         side. That means, someone (probably the administrator of the &cvs; repository)
-         gave you an account on the server machine, and it's your job to checkout
-         modules from the repository and work with them.
-      </para>
-      <para>
-         &cvs; supports several methods of accessing the repository, which can be
-         categorized as follows:
-      </para>
-      <para>
-         <itemizedlist>
-            <listitem>
-               <para>
-                  Local - The repository name is something like
-               </para>
-               <screen><filename>/home/cvs/</filename></screen> 
-               <para>
-                  and is simply stored in a directory which is accessible from your
-                  computer. It may physically be on a disk which is mounted via NFS,
-                  but this an irrelevant detail.  If you often use a certain local
-                  repository, you will want to tell &cervisia; about it: First, open
-                  the Repositories dialog by chosing
-                  <menuchoice><guimenu>Repository</guimenu>
-                  <guimenuitem>Repositories...</guimenuitem></menuchoice>. Now press
-                  the <guibutton>Add...</guibutton> button, enter the name of the
-                  repository and confirm by pressing <guibutton>OK</guibutton>.  In
-                  the future, whenever you use the Checkout dialog, &cervisia; will
-                  present you repositories you have inserted here in a combo box.
-               </para>
-            </listitem>
-            <listitem>
-               <para>
-                  rsh - The repository name is something like
-               </para>
-               <screen><filename>:ext:bernd@cvs.cervisia.sourceforge.net:/cvsroot/cervisia</filename></screen> 
-               <para>
-                  This method requires that you have a user account on the server
-                  machine (<literal>cvs.sourceforge.net</literal> in this case) and
-                  uses a remote shell for communication. By default, &cvs; uses
-                  <application>rsh</application> for this purpose. However,
-                  <application>rsh</application> is known to be unsecure for a long
-                  time and is meanwhile replaced by <application>ssh</application> on
-                  many sites. If you are forced to use
-                  <application>ssh</application>, you have to set the environment
-                  variable <envar>$CVS_RSH</envar> accordingly when using the
-                  <command>cvs</command> client. &cervisia; supports this in an easy
-                  way: Open the Repositories dialog and press the
-                  <guibutton>Add...</guibutton> button. Now enter the name of the
-                  repository in the first line and the remote shell
-                  (e.g. <command>ssh</command>) in the second line. If you now
-                  confirm with the <guibutton>OK</guibutton> button, &cervisia;
-                  memorizes these settings.
-               </para>
-               <para>
-                  Note that &cervisia; can not answer possible password requests from
-                  the server machine. You must make sure that a remote login works
-                  without requiring you to enter the password. With plain vanilla
-                  <application>rsh</application>, this can be achieved e.g. by
-                  creating a <filename><envar>$HOME</envar>/.rhosts</filename> file with a list of
-                  trusted hosts (see the <command>rsh</command> manpage). With
-                  <application>ssh</application>, it can be achieved by copying your
-                  public key <filename><envar>$HOME</envar>/.ssh/identity.pub</filename> to the
-                  server. In this case, the key must not be encrypted with a
-                  passphrase (see the <application>ssh</application> manpage and the
-                  CVS/SSH FAQ on SourceForge). If you are unsure about these issues, ask your system
-                  administrator.
-               </para>
-            </listitem>
-            <listitem>
-               <para>
-                  pserver - The repository name looks like
-               </para>
-               <screen><filename>:pserver:gehrmab@cvs.kde.org:/home/kde</filename></screen> 
-               <para>
-                  This method accesses the server via a special protocol with a
-                  relatively weak authentification (<literal>pserver</literal> stands
-                  for password authentification). Before you can use such a server,
-                  you have to login. As this isn't directly supported by &cervisia;,
-                  enter on the command line </para><para>
-                  <screen><prompt>%</prompt><userinput>cvs -d :pserver:joe@cvs.kde.org:/home/kde login</userinput></screen>
-                  </para><para> (of course, with your repository substituted). &cvs;
-                  will prompt you for your password and check with the server. If the
-                  password is ok, the repository name, together with the (slightly
-                  scrambled) password, will be appended to the file
-                  <filename><envar>$HOME</envar>/.cvspass</filename>. Whenever &cvs; accesses the
-                  repository, it will silently send the password to the server, so
-                  you do not have to take care of that once you have logged in. As
-                  everybody who knows your password can work with the repository in
-                  your name (and even do major damage to it), you should keep the
-                  <filename><envar>$HOME</envar>/.cvspass</filename> secret and non-readable for
-                  others.
-               </para>
-            </listitem>
-         </itemizedlist>
-      </para>
-   </sect1>
+<para>
+In this section we assume that you are using &CVS; only on the client
+side. That means, someone (probably the administrator of the &CVS;
+repository) gave you an account on the server machine, and it's your
+job to checkout modules from the repository and work with them.
+</para>
 
+<para>
+&CVS; supports several methods of accessing the repository, which can
+ be categorized as follows:
+</para>
 
-   <sect1 id="importing">
-      <title>Importing a module into the repository</title>
-      <para>
-         In this section, we discuss how you put a new project into the &cvs;
-         repository. If you just want to work with an existing project which is
-         already in a repository, you may skip this section.
-      </para>
-      <figure id="screenshot-import" float="1">
-         <title>A screenshot of &cervisia;'s import dialog</title>
-         <mediaobject>
-            <imageobject><imagedata format="eps" fileref="import.eps" scale="85"/></imageobject>
-            <imageobject><imagedata format="gif" fileref="import.png"/></imageobject>
-         </mediaobject>
-      </figure>
-      <para>
-         In <xref linkend="screenshot-import"/> you can see the dialog which helps you to
-         <emphasis>import</emphasis> a project as a module. After you have filled out
-         this form and confirmed by <guibutton>OK</guibutton>, the following &cvs; command
-         is used:
-      </para><para>
-         <screen><command>cvs -d <replaceable>repository</replaceable> import -m "" <replaceable>module</replaceable> <replaceable>vendortag</replaceable> <replaceable>releasetag</replaceable></command></screen>
-      </para><para>
-      </para>
-      <formalpara>
-         <title>Repository</title>
-         <para>
-            The name of the &cvs; repository, also known as
-            <filename><envar>$CVSROOT</envar></filename>. You must have write access
-            to it and the repository must be properly initialized. If the repository
-            does not yet exist, initialize it with the command
-            <userinput><prompt>%</prompt><command>cvs -d <replaceable>repository</replaceable> init</command></userinput>.  
-            If the repository is remote, make sure that authentication works, see <xref
-            linkend="accessingrepository"/>.
-         </para>
-      </formalpara>
-      <formalpara>
-         <title>Module</title>
-         <para>
-            The name of the module under which the project will be stored. After the
-            import, the project can be checked out (see <xref linkend="checkingout"/>)
-            under this name. It is also the name of the corresponding directory in
-            the repository.
-         </para>
-      </formalpara>
+<variablelist>
+<varlistentry>
+<term>Local</term>
+<listitem>
+<para>The repository is something like <filename
+class="directory">/home/cvs/</filename> and is simply stored in a
+directory which is accessible from your computer.  It may physically
+be on a disk which is mounted via <acronym>NFS</acronym>, but this is
+an irrelevant detail.  If you often use a certain local repository,
+you will want to tell &cervisia; about it.</para>
+
+<procedure>
+<title>Adding A Local Repository</title>
+<step><para>Open the Repositories dialog by choosing
+<menuchoice><guimenu>Repository</guimenu>
+<guimenuitem>Repositories...</guimenuitem></menuchoice>.</para></step>
+
+<step><para>Press the <guibutton>Add...</guibutton>
+button.</para></step>
+
+<step><para>Enter the details of the repository in the dialog box that
+displays.</para></step>
+
+<step><para>Confirm by pressing the <guibutton>OK</guibutton>
+button.</para></step>
+
+</procedure>
+
+<para>In the future, whenever you use &cervisia; to check out a new
+module, &cervisia; will present you the repositories you have added
+here.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><command>RSH</command></term>
+<listitem>
+<para>The repository name is something like
+<literal>:ext:bernd@cvs.cervisia.sourceforge.net:/cvsroot/cervisia</literal>.</para>
+
+<para>This method requires that you have a user account on the server
+machine (in this case, <systemitem
+class="systemname">cvs.sourceforge.net</systemitem> and use a remote
+shell for communication.  By default, &CVS; uses
+<command>rsh</command> for this purpose, however,
+<command>rsh</command> is long considered to be insecure, and is
+widely replaced by <command>ssh</command>.</para>
+
+<para>If you must use <command>ssh</command>, you must set the
+environment variable $<envar>CVS_RSH</envar> to
+<returnvalue>ssh</returnvalue> when using the &CVS; client.  &cervisia;
+supports this easily.</para>
+
+<para>Open the repositories dialog again, and press the
+<guibutton>Add...</guibutton> button.  Now enter the name of the
+repository in the first line and the remote shell (&eg;
+<command>ssh</command>) in the second line. If you now confirm with
+the <guibutton>OK</guibutton> button, &cervisia; memorizes these
+settings.</para>
+
+<para>Note that &cervisia; can not answer possible password requests
+ from the server machine. You must make sure that a remote login works
+ without requiring you to enter the password. With plain vanilla
+ <application>rsh</application>, this can be achieved for example by
+ creating a <filename>$<envar>HOME</envar>/.rhosts</filename> file
+ with a list of trusted hosts (see the <command>rsh</command>
+ manpage).</para>
+
+<para> With <application>ssh</application>, it can be achieved by
+copying your public key
+<filename>$<envar>HOME</envar>/.ssh/identity.pub</filename> to the
+server. In this case, the key must not be encrypted with a passphrase
+(see the <command>ssh</command> manpage and the
+&CVS;/<acronym>SSH</acronym> <acronym>FAQ</acronym> on
+SourceForge). If you are unsure about these issues, ask your system
+administrator.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>pserver</term>
+<listitem>
+
+<para> pserver - The repository name looks like
+<filename>:pserver:gehrmab@cvs.kde.org:/home/kde</filename></para>
+
+<para>This method accesses the server via a special protocol with a
+ relatively weak authentification (<literal>pserver</literal> stands
+ for password authentification). Before you can use such a server, you
+ have to login. As this isn't directly supported by &cervisia;, enter
+ on the command line </para>
+
+<screen><prompt>%</prompt><userinput><command>cvs</command> <option>-d</option> <parameter>:pserver:joe@cvs.kde.org:/home/kde login</parameter></userinput></screen>
+
+<para> (of course, with your repository substituted). &CVS; will
+ prompt you for your password and check with the server. If the
+ password is ok, the repository name, together with the (slightly
+ scrambled) password, will be appended to the file
+ <filename>$<envar>HOME</envar>/.cvspass</filename>.  Whenever &CVS;
+ accesses the repository, it will silently send the password to the
+ server, so you do not have to take care of that once you have logged
+ in. As everybody who knows your password can work with the repository
+ in your name (and even do major damage to it), you should keep the
+ <filename>$<envar>HOME</envar>/.cvspass</filename> secret and
+ non-readable for others.  </para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="importing">
+<title>Importing a module into the repository</title>
+
+<para>In this section, we discuss how you put a new project into the
+ &CVS; repository. If you just want to work with an existing project
+ which is already in a repository, you may skip this section.</para>
+
+<figure id="screenshot-import" float="1">
+<title>A screenshot of &cervisia;'s import dialog</title>
+<mediaobject>
+<imageobject><imagedata format="EPS" fileref="import.eps"
+	     scale="85"/></imageobject>
+<imageobject><imagedata format="PNG"
+	     fileref="import.png"/></imageobject>
+<textobject><phrase>>A screenshot of &cervisia;'s import
+	     dialog</phrase></textobject>
+</mediaobject>
+</figure>
+
+<para>In <xref linkend="screenshot-import"/> you can see the dialog
+ which helps you to <emphasis>import</emphasis> a project as a
+ module. After you have filled out this form and confirmed by
+ <guibutton>OK</guibutton>, the following &CVS; command is used:
+ </para>
+
+<screen><command>cvs</command> -d <co
+id="co-repository"/><replaceable>repository</replaceable> import -m "" <co id="co-module"/><replaceable>module</replaceable> <co id="co-vendortag"/><replaceable>vendortag</replaceable> <co id="co-releasetag"/><replaceable>releasetag</replaceable></screen>
+
+<calloutlist>
+<callout arearefs="co-repository">
+<para>The name of the $CVS; repository, also known as
+$<envar>CVSROOT</envar>.  You must have write access to it, and the
+repository must be properly initialized.  If the repository does not
+yet exist, initialize it with the command
+<userinput><command>cvs</command> <option>-d</option>
+<replaceable>repository</replaceable>
+<command>init</command></userinput>.</para>
+<para>If the repository is remote, make sure that authentication works
+(see <xref linkend="accessing-repository"/></para>
+</callout>
+<callout arearefs="co-module">
+<para>The name of the module under which the project will be stored.
+After the import, the project can be checked out under this name.  See
+<xref linkend="checking-out"/> for more information.  This is also the
+name of the corresponding directory in the repository.</para>
+</callout>
+<callout arearefs="co-vendortag">
+<para>The vendor tag is historically used for tracking third-party
+ sources. Just use your user name if you have no better idea. It does
+ not matter much what you enter here.</para>
+</callout>
+<callout arearefs="co-releasetag">
+<para>This tag is also historically used for importing different
+versions of third-party software. If you are not doing this, use the
+word <literal>start</literal> or a string <literal>FOO_1_0</literal>
+where <literal>FOO</literal> is the name of your project and
+<literal>1.0</literal> is the version number of the imported
+release.</para>
+</callout>
+</calloutlist>
+
       <formalpara>
          <title>Working directory</title>
          <para>
-            This is the toplevel directory of the project you want to import. The
+            This is the toplevel directory of the project you want to
+ import. The
             import starts from this directory and goes down recursively.
          </para>
       </formalpara>
-      <formalpara>
-         <title>Vendor tag</title>
-         <para>
-            The vendor tag is historically used for tracking third-party
-            sources. Just use your user name if you have no better idea. It does not
-            matter much what you enter here.
-         </para>
-      </formalpara>
-      <formalpara>
-         <title>Release tag</title>
-         <para>
-            This tag is also historically used for importing different versions of
-            third-party software. If you are not doing this, use the word
-            <literal>start</literal> or a string <literal>FOO_1_0</literal> where
-            <literal>FOO</literal> is the name of your project and
-            <literal>1.0</literal> is the version number of the imported release.
-         </para>
-      </formalpara>
+
       <formalpara>
          <title>Ignore files</title>
          <para>
             If you fill out this field, an additional <option>-I
-            <replaceable>filenames</replaceable></option> option is given go the
-            <command>cvs import</command> command. This entry is interpreted as a
-            whitespace-separated list of file name patterns which are ignored. In
-            general, a cleaner and less error-prone way to control which files go
-            into the repository is to create a directory with only the files which
-            you want to import and start from that. Nevertheless, this entry may be
-            useful if the project contains files which are by default ignored by
-            &cvs;, e.g. files with the name <filename>core</filename>. In such a
-            case, simply enter the character <literal>!</literal> in this field.
-            This overrules &cvs;'s scheme of ignored files, see <xref
+            <replaceable>filenames</replaceable></option> option is
+ given go the
+            <command>cvs import</command> command. This entry is
+ interpreted as a
+            whitespace-separated list of file name patterns which are
+ ignored. In
+            general, a cleaner and less error-prone way to control which
+ files go
+            into the repository is to create a directory with only the
+ files which
+            you want to import and start from that. Nevertheless, this
+ entry may be
+            useful if the project contains files which are by default
+ ignored by
+            &CVS;, e.g. files with the name <filename>core</filename>.
+ In such a
+            case, simply enter the character <literal>!</literal> in
+ this field.
+            This overrules &CVS;'s scheme of ignored files, see <xref
             linkend="ignoredfiles"/>.
          </para>
       </formalpara>
       <formalpara>
          <title>Import as binaries</title>
          <para>
-            If you check this box, all files are imported in binary mode, i.e.
-            an argument <option>-kb</option> is given to <command>cvs import</command>.
+            If you check this box, all files are imported in binary
+ mode, i.e.
+            an argument <option>-kb</option> is given to <command>cvs
+ import</command>.
          </para>
       </formalpara>
    </sect1>
 
-
-   <sect1 id="checkingout">
+   <sect1 id="checking-out">
       <title>Checkout a module from the repository</title>
       <para>
-         Before you work on a project under revision control, you must check out a
+         Before you work on a project under revision control, you must
+ check out a
          <emphasis>working copy</emphasis>.
       </para>
       <figure float="1">
          <title>A screenshot of &cervisia;'s checkout dialog</title>
          <mediaobject>
-            <imageobject><imagedata format="eps" fileref="checkout.eps" scale="89"/></imageobject>
-            <imageobject><imagedata format="gif" fileref="checkout.png"/></imageobject>
+            <imageobject><imagedata format="EPS" fileref="checkout.eps"
+ scale="89"/></imageobject>
+            <imageobject><imagedata format="PNG"
+ fileref="checkout.png"/></imageobject>
          </mediaobject>
       </figure>
       <formalpara>
          <title>Repository</title>
          <para>
-            The name of the &cvs; repository, also known as
-            <filename><envar>$CVSROOT</envar></filename>.  If the repository is remote, make sure
-            that authentication works, see <xref linkend="accessingrepository"/>.
+            The name of the &CVS; repository, also known as
+            <filename><envar>$CVSROOT</envar></filename>.  If the
+ repository is remote, make sure
+            that authentication works, see <xref
+ linkend="accessing-repository"/>.
          </para>
       </formalpara>
       <formalpara>
          <title>Module</title>
          <para>
-            The name of the module to be checked out. If you are working with an
-            existing repository, you have probably got this name from the
+            The name of the module to be checked out. If you are working
+ with an
+            existing repository, you have probably got this name from
+ the
             administrator. Alternatively, if the repository has a
-            <filename><envar>$CVSROOT</envar>/modules</filename> file, you can
+            <filename><envar>$CVSROOT</envar>/modules</filename> file,
+ you can
             retrieve a list of available modules by clicking on the
             <guibutton>Fetch list</guibutton> button.
          </para>
@@ -270,121 +337,162 @@
       <formalpara>
          <title>Working directory</title>
          <para>
-            The directory under which the module should be checked out. Note that the
-            toplevel directory of the working copy is always created as a directory with
+            The directory under which the module should be checked out.
+ Note that the
+            toplevel directory of the working copy is always created as
+ a directory with
             the name as the module under the directory given here.
          </para>
       </formalpara>
    </sect1>
-
 
    <sect1 id="mainscreen">
       <title>The main screen</title>
       
       <para>
          When you start &cervisia;, and open a working copy by choosing 
-         <menuchoice><guimenu>File</guimenu><guimenuitem>Open Sandbox...</guimenuitem></menuchoice>
+         <menuchoice><guimenu>File</guimenu><guimenuitem>Open
+ Sandbox...</guimenuitem></menuchoice>
          you see a hierarchical view of the current
          directory. According to the settings in your
-         <filename>.cvsignore</filename> files, the files you usually do not want
-         to include into the repository - like e.g. object files - are not
-         shown. For each file, you see its corresponding status. In the default
-         setting, this is "Unknown" because &cervisia; delays the fetching of
-         information until you choose <guimenuitem>Update</guimenuitem> or
-         <guimenuitem>Status</guimenuitem> from the <guimenu>File</guimenu> menu.
-         With this approach, you have a minimal amount of functionality available
-         even if you do not have a permanent connection to the &cvs; server.
+         <filename>.cvsignore</filename> files, the files you usually do
+ not want
+         to include into the repository - like e.g. object files - are
+ not
+         shown. For each file, you see its corresponding status. In the
+ default
+         setting, this is "Unknown" because &cervisia; delays the
+ fetching of
+         information until you choose <guimenuitem>Update</guimenuitem>
+ or
+         <guimenuitem>Status</guimenuitem> from the
+ <guimenu>File</guimenu> menu.
+         With this approach, you have a minimal amount of functionality
+ available
+         even if you do not have a permanent connection to the &CVS;
+ server.
       </para>
       <figure float="1">
          <title>A screenshot of &cervisia;'s main view</title>
          <mediaobject>
-            <imageobject><imagedata format="eps" fileref="mainview.eps" scale="65"/></imageobject>
-            <imageobject><imagedata format="gif" fileref="mainview.png"/></imageobject>
+            <imageobject><imagedata format="EPS" fileref="mainview.eps"
+ scale="65"/></imageobject>
+            <imageobject><imagedata format="PNG"
+ fileref="mainview.png"/></imageobject>
          </mediaobject>
       </figure>
       <para>
-         The commands in the File menu usually act only on the files which you
+         The commands in the File menu usually act only on the files
+ which you
          have marked. You may also mark directories. Now choose
-         <guimenuitem>Update</guimenuitem> from the <guimenu>File</guimenu>
+         <guimenuitem>Update</guimenuitem> from the
+ <guimenu>File</guimenu>
          menu. &cervisia; issues a 
       </para><para>
-         <screen><command>cvs update -n <replaceable>filenames</replaceable></command></screen>
+         <screen><command>cvs update -n
+ <replaceable>filenames</replaceable></command></screen>
       </para><para>
-         command to get status information for the marked files. Note that
-         &cervisia; goes recursively into subdirectories.  only if you have the
-         according option in the <guimenu>Settings</guimenu> menu set. According to the respective
-         file's status, you now see an entry in the <guilabel>Status</guilabel> column:
+         command to get status information for the marked files. Note
+ that
+         &cervisia; goes recursively into subdirectories.  only if you
+ have the
+         according option in the <guimenu>Settings</guimenu> menu set.
+ According to the respective
+         file's status, you now see an entry in the
+ <guilabel>Status</guilabel> column:
       </para>
       <para>
          <itemizedlist>
             <listitem>
                <para>
-                  Locally Modified - This means you have modified the file
+                  Locally Modified - This means you have modified the
+ file
                   compared to the version in the repository.
                </para>
             </listitem>
             <listitem>
                <para>
-                  Locally Added - This means the file does not exist in the
+                  Locally Added - This means the file does not exist in
+ the
                   repository, but in your working directory and you have
-                  scheduled it for addition. The actual insertion into the
+                  scheduled it for addition. The actual insertion into
+ the
                   repository only happens after a commit.
                </para>
             </listitem>
             <listitem>
                <para>
-                  Locally Removed - This means you have scheduled the file for
-                  removal, but it still exists in the repository. The actual
+                  Locally Removed - This means you have scheduled the
+ file for
+                  removal, but it still exists in the repository. The
+ actual
                   removal happens only after a commit.
                </para>
             </listitem>
             <listitem>
                <para>
-                  Needs Update - This is shown if a newer version of the file
-                  exists in the repository, e.g. because someone commited a
-                  modification. Normally, you want to update this file so you
+                  Needs Update - This is shown if a newer version of the
+ file
+                  exists in the repository, e.g. because someone
+ commited a
+                  modification. Normally, you want to update this file
+ so you
                   have an up-to-date version in your directory.
                </para>
             </listitem>
             <listitem>
                <para>
-                  Needs Patch - This is essentially the same as before. The
-                  difference is only the hint that in case of an update, the
-                  cvs server transfers only a patch instead of the whole file
+                  Needs Patch - This is essentially the same as before.
+ The
+                  difference is only the hint that in case of an update,
+ the
+                  cvs server transfers only a patch instead of the whole
+ file
                   to you.
                </para>
             </listitem>
             <listitem>
                <para>
-                  Needs Merge - Indicates that a merge of the revision of this
+                  Needs Merge - Indicates that a merge of the revision
+ of this
                   file in your working directory with the version in the
-                  repository is necessary. This typically happens if you have
-                  made modifications to the file file while someone else has
-                  commited his modifications. If you choose to update, the
+                  repository is necessary. This typically happens if you
+ have
+                  made modifications to the file file while someone else
+ has
+                  commited his modifications. If you choose to update,
+ the
                   modifications in the repository are merged into your
                   file. In case of a conflict (i.e. if someone else has
-                  changed some of the same lines like you) the new status is
+                  changed some of the same lines like you) the new
+ status is
                   then "Conflict".
                </para>
             </listitem>
             <listitem>
                <para>
-                  Up to Date - Indicates that the file is identical with the
+                  Up to Date - Indicates that the file is identical with
+ the
                   version in the repository.
                </para>
             </listitem>
             <listitem>
                <para>
-                  Conflict - This is shown if this file still has conflict
-                  markers in it. Maybe you have previously updated the file
+                  Conflict - This is shown if this file still has
+ conflict
+                  markers in it. Maybe you have previously updated the
+ file
                   and not resolved the conflicts.
                </para>
             </listitem>
             <listitem>
                <para>
-                  Not In CVS - Indicates that the file is not registered in
-                  the CVS.  If you want it to available for others, you should
-                  add it to the repository. If not, you may consider adding it
+                  Not In CVS - Indicates that the file is not registered
+ in
+                  the CVS.  If you want it to available for others, you
+ should
+                  add it to the repository. If not, you may consider
+ adding it
                   to your <filename>.cvsignore</filename> file.
                </para>
             </listitem>
@@ -393,13 +501,18 @@
       
       <para>
          Now that you have got an overview of the current status of the
-         CVS, you may want to do an update. Mark some files (or the root of
+         CVS, you may want to do an update. Mark some files (or the root
+ of
          the directory tree which is equivalent to marking all files in
-         this directory). Now choose <guimenuitem>Update</guimenuitem> from 
+         this directory). Now choose <guimenuitem>Update</guimenuitem>
+ from 
          the <guimenu>File</guimenu> menu. (Of course, you
-         could have chosen this at the beginning of the session). For some
-         of the files the status may change now. Typically, files which had
-         "Needs Patch" or "Needs Update" are updated. So the following new
+         could have chosen this at the beginning of the session). For
+ some
+         of the files the status may change now. Typically, files which
+ had
+         "Needs Patch" or "Needs Update" are updated. So the following
+ new
          items are possible in the status column:
       </para>
       
@@ -407,15 +520,19 @@
          <itemizedlist>
             <listitem>
                <para>
-                  Updated - Shown if the file was updated from the repository.
+                  Updated - Shown if the file was updated from the
+ repository.
                </para>
             </listitem>
             <listitem>
                <para>
-                  Patched - Indicates that the cvs server has sent a patch for
-                  this file and the patch has been sucessfully applied. If the
+                  Patched - Indicates that the cvs server has sent a
+ patch for
+                  this file and the patch has been sucessfully applied.
+ If the
                   patch was not successfull because there was a conflict
-                  between your modifications and those someone else commited
+                  between your modifications and those someone else
+ commited
                   to the repository, the status is now "Conflict".
                </para>
             </listitem>
@@ -423,7 +540,8 @@
       </para>
       
       <para>
-         You may have noticed that according to the status of the file, its
+         You may have noticed that according to the status of the file,
+ its
          row has a different color. The colors are chosen to somehow
          reflect the priority of the status. For example, a file with a
          conflict is marked red to show you that you have to resolve a
@@ -431,61 +549,85 @@
          directory contains a high number of files, you may nevertheless
          lose the overview. To get more concise information about which
          files have an unusual status, simply click on the header of the
-         <guilabel>Status</guilabel> column. The file list is then sorted by 
-         priority, so you have all important information at the top of the list. 
-         To get back to the alphabetically sorted view, click on the header of 
+         <guilabel>Status</guilabel> column. The file list is then
+ sorted by 
+         priority, so you have all important information at the top of
+ the list. 
+         To get back to the alphabetically sorted view, click on the
+ header of 
          the <guilabel>File name</guilabel> column.
       </para>
    </sect1>
    </chapter>
    
-
    <chapter id="workingwithfiles">
       <title>Working with files</title>
 
    <para>
-      All commonly used &cvs; functionality is directly available in &cervisia;'s
-      main view. Commands usually act on several files at once, namely all which
-      currently selected. If the selection includes directories, its interpretation
-      depends on the settings made under the <guimenu>Settings</guimenu> menu. For
-      example, if <menuchoice><guimenu>Settings</guimenu><guimenuitem>Commit and remove recursively</guimenuitem></menuchoice> is checked and you choose
-      <menuchoice><guimenu>File</guimenu><guimenuitem>Commit...</guimenuitem></menuchoice> while a
-      directory is selected, then all files in the tree under that directory are
-      commited. Otherwise, only the regular files in the directory itself are
+      All commonly used &CVS; functionality is directly available in
+ &cervisia;'s
+      main view. Commands usually act on several files at once, namely
+ all which
+      currently selected. If the selection includes directories, its
+ interpretation
+      depends on the settings made under the <guimenu>Settings</guimenu>
+ menu. For
+      example, if
+ <menuchoice><guimenu>Settings</guimenu><guimenuitem>Commit and remove
+ recursively</guimenuitem></menuchoice> is checked and you choose
+     
+ <menuchoice><guimenu>File</guimenu><guimenuitem>Commit...</guimenuitem></menuchoice> while a
+
+      directory is selected, then all files in the tree under that
+ directory are
+      commited. Otherwise, only the regular files in the directory
+ itself are
       affected.
    </para>
 
    <para>
       You can simply edit a file by doubleclicking on it or pressing
       <keycap>Return</keycap>. This starts the editor configured under 
-      <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Cervisia...</guimenuitem></menuchoice> with the file name as argument. 
+      <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
+ Cervisia...</guimenuitem></menuchoice> with the file name as argument. 
    </para>
 
    <sect1 id="addingfiles">
       <title>Adding files</title>
       <para>
-         Adding files to a project requires two steps: First, the files must be
-         registered with CVS. To this end, mark all files to be added in &cervisia;'s
-         main view. Then, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Add
-         to repository</guimenuitem></menuchoice>. &cervisia; issues a command
+         Adding files to a project requires two steps: First, the files
+ must be
+         registered with CVS. To this end, mark all files to be added in
+ &cervisia;'s
+         main view. Then, choose
+ <menuchoice><guimenu>File</guimenu><guimenuitem>Add
+         to repository</guimenuitem></menuchoice>. &cervisia; issues a
+ command
       </para><para>
-         <screen><command>cvs add <replaceable>filenames</replaceable></command></screen>
+         <screen><command>cvs add
+ <replaceable>filenames</replaceable></command></screen>
       </para><para>
          If the operation was successful, the
-         status column should have "Added to repository" for the added files.
+         status column should have "Added to repository" for the added
+ files.
       </para>
       <para>
-         In order to actually put the files into the repository, you must commit
-         them. This procedure has an important advantage: You can commit the files
-         together with modifications to other parts of the project. When doing this,
-         one can easily see (e.g. in commit emails) that all these changes are part
+         In order to actually put the files into the repository, you
+ must commit
+         them. This procedure has an important advantage: You can commit
+ the files
+         together with modifications to other parts of the project. When
+ doing this,
+         one can easily see (e.g. in commit emails) that all these
+ changes are part
          of a whole.
       </para>
       <para>
-         &cvs; is not designed to provide meaningful revision control for binary
+         &CVS; is not designed to provide meaningful revision control
+ for binary
          files. For example, merging binary files normally does not make
-         sense. Furthermore, by default &cvs; performs keyword expansion (e.g. on the
-         string <literal>$Revision: 1.15 $</literal>) when a file is commited. In binary
+         sense. Furthermore, by default &CVS; performs keyword expansion
+         string <literal>$Revision: 1.1 $</literal>) when a file is commited. In binary
          files, such replacements may corrupt the file and make it completely
          unusable. In order to switch this behaviour off, you should commit binary
          files (or other files, like Postscript) with a command line
@@ -524,13 +666,13 @@
       <title>Adding and removing directories</title>
       <para>
          Directories are handled fundamentally different from ordinary files by
-         &cvs;. They are not under revision control, i.e. you cannot tell which
+         &CVS;. They are not under revision control, i.e. you cannot tell which
          directories existed in the project at a certain time. Furthermore,
          directories can never be explicitly removed (expect by removing them
          directly in the repository).
       </para>
       <para>
-         As a substitute, &cvs; follows the convention that a directory is "not
+         As a substitute, &CVS; follows the convention that a directory is "not
          existent" in a version of the project if is is empty. This convention can
          be enforced by using the option <option>-P</option> to <command>cvs
             update</command> and <command>cvs checkout</command>. This option
@@ -566,8 +708,8 @@
       <figure float="1">
          <title>A screenshot of &cervisia;'s commit dialog</title>
          <mediaobject>
-            <imageobject><imagedata format="eps" fileref="commit.eps" scale="93"/></imageobject>
-            <imageobject><imagedata format="gif" fileref="commit.png"/></imageobject>
+            <imageobject><imagedata format="EPS" fileref="commit.eps" scale="93"/></imageobject>
+            <imageobject><imagedata format="PNG" fileref="commit.png"/></imageobject>
          </mediaobject>
       </figure>
       <para>
@@ -587,7 +729,7 @@
          <errorname>Up-to-date check failed</errorname>. This indicates that someone
          has commited changes to the repository since you last updated. Or more
          technically, that your BASE revision is not the newest on its branch.
-         In such a case, &cvs; refuses to merge your modifications into the
+         In such a case, &CVS; refuses to merge your modifications into the
          repository. The solution is to update, resolve any conflicts and commit
          again. Of course, if you are working on a software project, it is normally
          good style to check if the program still works after you have updated -
@@ -631,16 +773,16 @@
       <title>Resolving conflicts</title>
       <para>
          Conflicts may occur whenever you have made changes to a file which was also
-         modified by another developer. The conflict is detected by &cvs; when you
+         modified by another developer. The conflict is detected by &CVS; when you
          update the modified file.
-         &cvs; then tries to merge the modifications commited by the other developer
+         &CVS; then tries to merge the modifications commited by the other developer
          into your working copy. The merge fails if both your and his modifications
-         are in overlapping parts of the file, and the &cvs; server issues and error
+         are in overlapping parts of the file, and the &CVS; server issues and error
          message.
       </para>
       <para>
          It is your job now to resolve these conflicts before you commit the file.
-         &cvs; will refuse to commit any files with conflicts until they have been
+         &CVS; will refuse to commit any files with conflicts until they have been
          edited. Of course, you have a great amount of freedom when resolving a
          set of conflicts: you can for each conflict decide to take one of the
          two alternative versions. You can also decide that both approaches are
@@ -657,8 +799,8 @@
       <figure float="1">
          <title>A screenshot of &cervisia;'s resolve dialog</title>
          <mediaobject>
-            <imageobject><imagedata format="eps" fileref="resolve.eps" scale="68"/></imageobject>
-            <imageobject><imagedata format="gif" fileref="resolve.png"/></imageobject>
+            <imageobject><imagedata format="EPS" fileref="resolve.eps" scale="68"/></imageobject>
+            <imageobject><imagedata format="PNG" fileref="resolve.png"/></imageobject>
          </mediaobject>
       </figure>
       <para>
@@ -680,7 +822,6 @@
    </sect1>
    </chapter>
 
-   
    <chapter id="obtaininginformation">
       <title>Obtaining information about files</title>
    <sect1 id="browsinglogs">
@@ -697,8 +838,8 @@
       <figure float="1">
          <title>A screenshot of &cervisia;'s browse logs dialog</title>
          <mediaobject>
-            <imageobject><imagedata format="eps" fileref="logtree.eps" scale="52"/></imageobject>
-            <imageobject><imagedata format="gif" fileref="logtree.png"/></imageobject>
+            <imageobject><imagedata format="EPS" fileref="logtree.eps" scale="52"/></imageobject>
+            <imageobject><imagedata format="PNG" fileref="logtree.png"/></imageobject>
          </mediaobject>
       </figure>
       <para>
@@ -828,8 +969,8 @@
       <figure id="screenshot-history" float="1">
          <title>A screenshot of &cervisia;'s history dialog</title>
          <mediaobject>
-            <imageobject><imagedata format="eps" fileref="history.eps" scale="65"/></imageobject>
-            <imageobject><imagedata format="gif" fileref="history.png"/></imageobject>
+            <imageobject><imagedata format="EPS" fileref="history.eps" scale="65"/></imageobject>
+            <imageobject><imagedata format="PNG" fileref="history.png"/></imageobject>
          </mediaobject>
       </figure>
       <para>
@@ -931,8 +1072,8 @@
          <figure id="browsinglogspic" float="1">
             <title>A screenshot of &cervisia;'s diff dialog</title>
             <mediaobject>
-               <imageobject><imagedata format="eps" fileref="diff.eps" scale="51"/></imageobject>
-               <imageobject><imagedata format="gif" fileref="diff.png"/></imageobject>
+               <imageobject><imagedata format="EPS" fileref="diff.eps" scale="51"/></imageobject>
+               <imageobject><imagedata format="PNG" fileref="diff.png"/></imageobject>
             </mediaobject>
          </figure>
          <para>
@@ -971,7 +1112,7 @@
       <title>Watching an annotated view of a file</title>
          <para>
             &cervisia;'s annotate view is currently is simple frontend to the
-            respective &cvs; command. It will be improved beyond these capabilities
+            respective &CVS; command. It will be improved beyond these capabilities
             after the 1.0 release. For a preview, look at the script
             <filename>kdesdk/scripts/cvsblame</filename> in the KDE repository.
          </para>
@@ -987,7 +1128,6 @@
          </para>
    </sect1>
    </chapter>
-
 
    <chapter id="advancedusage">
       <title>Advanced usage</title>
@@ -1008,12 +1148,12 @@
          you can at any time easily get back to the project state at that time.
          Tags are usually given a name consisting of the project name and the
          version number. For example, &cervisia; 1.0 is available under the
-         tag <literal>CERVISIA_1_0</literal>. &cervisia; enforces &cvs;'s strict
+         tag <literal>CERVISIA_1_0</literal>. &cervisia; enforces &CVS;'s strict
          rules about what constitutes valid tag name. It must begin with a letter
          and may contain letters, digits, hypens and underscores. 
       </para>
       <para> 
-         Normally, you will want to tag the whole project (although &cvs; of course
+         Normally, you will want to tag the whole project (although &CVS; of course
          allows you to tag only a subset). To this end, mark the toplevel directory
          in the view and choose <menuchoice><guimenu>Advanced</guimenu>
          <guimenuitem>Tag/Branch</guimenuitem></menuchoice>. Now enter the name
@@ -1074,8 +1214,8 @@
       <figure id="screenshot-updatetag" float="1">
          <title>A screenshot of &cervisia;'s update to tag dialog</title>
          <mediaobject>
-            <imageobject><imagedata format="eps" fileref="updatetag.eps" scale="63"/></imageobject>
-            <imageobject><imagedata format="gif" fileref="updatetag.png"/></imageobject>
+            <imageobject><imagedata format="EPS" fileref="updatetag.eps" scale="63"/></imageobject>
+            <imageobject><imagedata format="PNG" fileref="updatetag.png"/></imageobject>
          </mediaobject>
       </figure>
       <para>
@@ -1107,7 +1247,7 @@
    <sect1 id="watches">
       <title>Using watches</title>
          <para>
-            A watch is the conventional name for &cvs;'s feature to notify users of
+            A watch is the conventional name for &CVS;'s feature to notify users of
             the repository whenever a file has been changed. The usage of watches
             requires that the file <filename><envar>$CVSROOT</envar>/CVSROOT/notify</filename>
             has been set up properly. This is not discussed here; if you need further
@@ -1118,7 +1258,7 @@
             &cervisia;'s main support of watches are three menu items. In order to
             add a watch to one or several files, use <menuchoice><guimenu>Advanved</guimenu>
             <guimenuitem>Add watch...</guimenuitem></menuchoice>. In the dialog you get, you can
-            choose to get notified for any of the types of events that &cvs; supports.
+            choose to get notified for any of the types of events that &CVS; supports.
             For example, if you only want to get notified when a file is commited,
             check the boxes <guibutton>Only</guibutton> and <guibutton>Commits</guibutton>.
             If you want to get notified about any event related to the marked files,
@@ -1168,7 +1308,6 @@
    </sect1>
    </chapter>
 
-
    <chapter id="customization">
       <title>Customizing &cervisia;</title>
       <para>
@@ -1185,14 +1324,14 @@
       <formalpara id="customize-timeout">
          <title>Timeout after which a progress dialog appears</title>
          <para>
-            Practically all &cvs; commands started in a sandbox which belongs to a
-            remote repository need a connection to the &cvs; server. This is
+            Practically all &CVS; commands started in a sandbox which belongs to a
+            remote repository need a connection to the &CVS; server. This is
             affected by delays from the network connection or a high load on the
             server. For this reason, for commands like 
             <menuchoice><guimenu>View</guimenu><guimenuitem>Difference to repository...</guimenuitem></menuchoice>
             &cervisia; opens a dialog which indicates that the command is still running and
             which allows you to abort it. Furthermore, this dialog is used to show you
-            error messages from &cvs;. As this dialog may become annoying
+            error messages from &CVS;. As this dialog may become annoying
             after some time, it is shown only after a certain timeout
             which is 4 seconds by default. Here you can change this value.
          </para>
@@ -1280,7 +1419,6 @@
    </sect1>
    </chapter>
 
-
    <chapter id="appendix">
       <title>Appendix</title>
 
@@ -1299,7 +1437,7 @@
                <para> 
                   A static list of entries which includes things like
                   <filename>*.o</filename> and <filename>core</filename>.  For details,
-                  see the &cvs; documentation.
+                  see the &CVS; documentation.
                </para>
             </listitem>
             <listitem>
@@ -1335,7 +1473,7 @@
          <itemizedlist>
             <listitem>
                <para>
-                  &cvs; comes with a complete set of documentation
+                  &CVS; comes with a complete set of documentation
                   in the form of info pages, known as "The Cederqvist". If it is properly 
                   installed, you get browse it by typing in <userinput>info:/cvs</userinput> 
                   into the locationbar of <application>kdehelp</application>, 
@@ -1345,9 +1483,9 @@
                   <ulink url="http://cvshome.org/docs/manual/cvs.html">on the web</ulink>.
                </para>
                <para>
-                  As this book is maintained together with &cvs;,
+                  As this book is maintained together with &CVS;,
                   it is normally the most up-to-date reference. Nevertheless I recommend
-                  considering other documentation for learning to use &cvs;, in partical
+                  considering other documentation for learning to use &CVS;, in partical
                   the following.
                </para>
             </listitem>
@@ -1357,7 +1495,7 @@
                   <ulink url="http://cvsbook.red-bean.com/index.html">Open Source 
                   Development with CVS</ulink>. About half of this book is about the
                   development process of Open Source software. The other half is a
-                  technical documentation of &cvs;. Thankfully, the technical part of
+                  technical documentation of &CVS;. Thankfully, the technical part of
                   the book has been made freely redistributable under the GPL, so that 
                   you can download a HTML version of it. A list of errata is available on the
                   webpage mentioned above.
@@ -1365,16 +1503,16 @@
             </listitem>
             <listitem>
                <para>
-                  &cvs; issues are discussed on a dedicated 
+                  &CVS; issues are discussed on a dedicated 
                   <ulink url="http://mail.gnu.org/mailman/listinfo/info-cvs">mailing list</ulink>.
                </para>
             </listitem>
             <listitem>
                <para>
                   There is USENET group comp.software.config-mgmt dedicated to configuration
-                  management in general. &cvs; is only marginally a topic in this group,
+                  management in general. &CVS; is only marginally a topic in this group,
                   but nevertheless it may be interesting for discussing merits of various
-                  revision control systems compared to &cvs;.
+                  revision control systems compared to &CVS;.
                </para>
             </listitem>
             <listitem>
@@ -1548,7 +1686,7 @@
                <term><menuchoice>
                      <guimenu>View</guimenu><guimenuitem>History...</guimenuitem>
                   </menuchoice></term>
-               <listitem><para><action>Shows the &cvs; history as reported by the server.</action></para></listitem>
+               <listitem><para><action>Shows the &CVS; history as reported by the server.</action></para></listitem>
             </varlistentry>
             <varlistentry>
                <term><menuchoice>
@@ -1680,49 +1818,49 @@
                      <guimenu>Settings</guimenu><guimenuitem>Create directories on update</guimenuitem>
                   </menuchoice></term>
                <listitem><para><action>Determines whether updates create directories in
-                           the sandbox which weren't there before 
+                           the sandbox which weren't there before </action>
                            (Option <option>-d</option> to <command>cvs update</command>).
-               </action></para></listitem>
+               </para></listitem>
             </varlistentry>
             <varlistentry>
                <term><menuchoice>
                      <guimenu>Settings</guimenu><guimenuitem>Prune empty directories on update</guimenuitem>
                   </menuchoice></term>
                <listitem><para><action>Determines whether updates remove empty
-                           directories in the sandbox.
+                           directories in the sandbox.</action>
                            (Option <option>-P</option> to <command>cvs update</command>).
-               </action></para></listitem>
+               </para></listitem>
             </varlistentry>
             <varlistentry>
                <term><menuchoice>
                      <guimenu>Settings</guimenu><guimenuitem>Update recursively</guimenuitem>
                   </menuchoice></term>
-               <listitem><para><action>Determines whether updates are recursive
+               <listitem><para><action>Determines whether updates are recursive</action>
                            (Option <option>-r</option> to <command>cvs update</command>).
-               </action></para></listitem>
+               </para></listitem>
             </varlistentry>
             <varlistentry>
                <term><menuchoice>
                      <guimenu>Settings</guimenu><guimenuitem>Commit and remove recursively</guimenuitem>
                   </menuchoice></term>
-               <listitem><para><action>Determines whether commits and removes are recursive
+               <listitem><para><action>Determines whether commits and removes are recursive</action>
                            (Option <option>-r</option> to <command>cvs add</command>,
                            <command>cvs remove</command> resp.).
-               </action></para></listitem>
+               </para></listitem>
             </varlistentry>
             <varlistentry>
                <term><menuchoice>
                      <guimenu>Settings</guimenu><guimenuitem>Do cvs edit automatically when necessary</guimenuitem>
                   </menuchoice></term>
-               <listitem><para><action>Determines whether <command>cvs edit</command>
-                           is executed automatically whenever you edit a file.
-               </action></para></listitem>
+               <listitem><para>Determines whether <command>cvs edit</command>
+                           is<action> executed automatically whenever you edit a file.</action>
+               </para></listitem>
             </varlistentry>
             <varlistentry>
                <term><menuchoice>
                      <guimenu>Settings</guimenu><guimenuitem>Configure Cervisia...</guimenuitem>
                   </menuchoice></term>
-               <listitem><para><action>Opens a dialog for customizing &cervisia;.</action></para></listitem>
+               <listitem><para><action>Opens a dialog for customizing</action> &cervisia;.</para></listitem>
             </varlistentry>
             <varlistentry>
                <term><menuchoice>
@@ -1741,32 +1879,19 @@
                </shortcut>
                <guimenu>Help</guimenu>
             </menuchoice></title>
-         <variablelist>
-            <varlistentry>
-               <term><menuchoice>
-                     <guimenu>Help</guimenu><guimenuitem>Contents</guimenuitem>
-                  </menuchoice></term>
-               <listitem><para><action>Launches <application>kdehelp</application> 
-                        in order to show the full &cervisia; documentation.</action></para></listitem>
-            </varlistentry>
-            <varlistentry>
-               <term><menuchoice>
-                     <guimenu>Help</guimenu><guimenuitem>CVS Info</guimenuitem>
-                  </menuchoice></term>
-               <listitem><para><action>Launches <application>kdehelp</application> 
-                        in order to show the original &cvs; documentation.</action></para></listitem>
-            </varlistentry>
-            <varlistentry>
-               <term><menuchoice>
-                     <guimenu>Help</guimenu><guimenuitem>About Cervisia</guimenuitem>
-                  </menuchoice></term>
-               <listitem><para><action>Shows &cervisia;'s version number and license.</action></para></listitem>
-            </varlistentry>
-         </variablelist>
+
+&help.menu.documentation;
+
       </sect2>
    </sect1>
    </chapter>
 
+<chapter id="credits-and-licenses">
+<title>Credits And Licenses</title>
+
+&underFDL;
+
+</chapter>
 </book>
    
    
@@ -1787,3 +1912,4 @@ compile-command:"make HTML"
 fill-column:85
 End:
 -->
+
