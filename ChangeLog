@@ -1,3 +1,8 @@
+2003-02-21  Christian Loose  <christian.loose@hamburg.de>
+
+	* Implemented BR #41263: Added splitters to resolve
+	  dialog.
+
 2003-02-18  Christian Loose  <christian.loose@hamburg.de>
 
 	* Big cleanup of parseCvsDiff() in diff dialog
