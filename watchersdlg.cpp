@@ -96,15 +96,15 @@ bool WatchersDialog::parseWatchers(CvsService_stub* cvsService,
     int numRows = 0;
     while( dlg.getLine(line) )
     {
-        // add a new row to the table
-        table->setNumRows(numRows + 1);
-
         // parse the output line        
         QStringList list = splitLine(line);
 
-        // ignore unknown files
-        if( list[0] == "?" )
+        // ignore empty lines and unknown files
+        if( list.isEmpty() || list[0] == "?" )
             continue;
+
+        // add a new row to the table
+        table->setNumRows(numRows + 1);
 
         table->setText(numRows, 0, list[0]);
         table->setText(numRows, 1, list[1]);
