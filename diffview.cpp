@@ -411,7 +411,9 @@ void DiffZoomWidget::paintEvent(QPaintEvent *)
 #if QT_VERSION < 300
             style().scrollBarMetrics(bar, sliderMin, sliderMax, sliderLength, dummy);
 #else
-#warning "// XXX: How do I do this with Qt 3? Help!"
+            sliderMin = style().pixelMetric(QStyle::PM_ScrollBarSliderMin, bar);
+            sliderLength = style().pixelMetric(QStyle::PM_SliderLength, bar);
+            sliderMax = style().pixelMetric(QStyle::PM_SliderSpaceAvailable, bar);
 #endif
         }
     else
