@@ -103,15 +103,10 @@ void LogPlainView::setSource(const QString& name)
     if( name.isEmpty() )
         return;
 
-    if( name.contains("revA") )
+    const bool selectedRevisionB(name.startsWith("revB#"));
+    if( selectedRevisionB || name.startsWith("revA#") )
     {
-        QString rev(name);
-        emit revisionClicked(rev.remove("revA#"), false);
-    }
-    else if( name.contains("revB") )
-    {
-        QString rev(name);
-        emit revisionClicked(rev.remove("revB#"), true);
+        emit revisionClicked(name.mid(5), selectedRevisionB);
     }
 }
 
