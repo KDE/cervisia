@@ -177,9 +177,12 @@ QString tempFileName(const QString &suffix)
 
 QTextCodec *detectCodec(const QString &fileName)
 {
-    QFile f(fileName);
+    // TODO, the following conditions are a rough hack
 
-    // TODO
+    if (fileName.endsWith(".ui") || fileName.endsWith(".docbook")
+        || fileName.endsWith(".xml"))
+        return QTextCodec::codecForName("utf8");
+
     return QTextCodec::codecForLocale();
 }
 
