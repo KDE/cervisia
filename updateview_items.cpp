@@ -337,10 +337,13 @@ void UpdateDirItem::maybeScanDir(bool recursive)
 
     if (recursive)
     {
-        for ( QListViewItem *item = firstChild(); item;
-              item = item->nextSibling() )
-            if (isDirItem(item))
-                static_cast<UpdateDirItem*>(item)->maybeScanDir(true);
+        for (TMapItemsByName::iterator it(m_itemsByName.begin()),
+                                       itEnd(m_itemsByName.end());
+             it != itEnd; ++it)
+        {
+            if (isDirItem(it->second))
+                static_cast<UpdateDirItem*>(it->second)->maybeScanDir(true);
+        }
     }
 }
 
@@ -349,9 +352,11 @@ void UpdateDirItem::accept(Visitor& visitor)
 {
     visitor.preVisit(this);
 
-    for (QListViewItem* item = firstChild(); item; item = item->nextSibling())
+    for (TMapItemsByName::iterator it(m_itemsByName.begin()),
+                                   itEnd(m_itemsByName.end());
+         it != itEnd; ++it)
     {
-        static_cast<UpdateItem*>(item)->accept(visitor);
+        it->second->accept(visitor);
     }
 
     visitor.postVisit(this);
