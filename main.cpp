@@ -149,6 +149,8 @@ int main(int argc, char **argv)
             KURL directory = args->url(0);
             shell->openURL(directory);
         }
+        else
+            shell->openURL();
 
         shell->setIcon(app.icon());
         app.setMainWidget(shell);

@@ -127,6 +127,13 @@ void CervisiaShell::setupActions()
 }
 
 
+void CervisiaShell::openURL()
+{
+    if( !m_lastOpenDir.isEmpty() )
+        part->openURL(KURL::fromPathOrURL(m_lastOpenDir));
+}
+
+
 void CervisiaShell::openURL(const KURL& url)
 {
     part->openURL(url);
@@ -168,9 +175,7 @@ void CervisiaShell::readSettings()
     KConfig* config = KGlobal::config();
     
     config->setGroup("Session");
-    QString currentDir = config->readPathEntry("Current Directory");
-    if( !currentDir.isEmpty() )
-        openURL( KURL::fromPathOrURL(currentDir) );    
+    m_lastOpenDir = config->readPathEntry("Current Directory");
 }
 
 

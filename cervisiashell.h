@@ -35,6 +35,7 @@ public:
     void restorePseudo(const QString &dirname);
 
 public slots:
+    void openURL();
     void openURL(const KURL& url);
     void slotConfigureKeys();
     void slotConfigureToolBars();
@@ -52,6 +53,7 @@ private:
     void writeSettings();
 
     KParts::ReadOnlyPart *part;
+    QString               m_lastOpenDir;
 };
 
 #endif // CERVISIASHELL_H
