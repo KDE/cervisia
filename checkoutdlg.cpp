@@ -53,6 +53,8 @@ CheckoutDialog::CheckoutDialog(ActionType action, QWidget *parent, const char *n
 
     repo_combo = new QComboBox(true, mainWidget);
     repo_combo->setFocus();
+    // make sure combobox is smaller than the screen
+    repo_combo->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
     grid->addWidget(repo_combo, 0, 1);
 
     QLabel *repo_label = new QLabel
