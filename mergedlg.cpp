@@ -15,11 +15,12 @@
 #include "mergedlg.h"
 
 #include <qbuttongroup.h>
+#include <qcombobox.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
-#include <kapplication.h>
-#include <kbuttonbox.h>
+#include <qradiobutton.h>
+#include <qstyle.h>
 #include <klocale.h>
 
 #include "cvsprogressdlg.h"
@@ -28,51 +29,51 @@
 
 MergeDialog::MergeDialog(const QString &sbox, const QString &repo,
                          QWidget *parent, const char *name)
-    : QDialog(parent, name, true)
+    : KDialogBase(parent, name, true, i18n("CVS Merge"),
+                  Ok | Cancel, Ok, true),
+      sandbox(sbox),
+      repository(repo)
 {
-    setCaption(i18n("CVS Merge"));
+    int const iComboBoxMinWidth(30 * fontMetrics().width('0'));
+    int const iWidgetIndent(style().pixelMetric(QStyle::PM_ExclusiveIndicatorWidth, 0) + 6);
 
-    QBoxLayout *layout = new QVBoxLayout(this, 10);
-    QFontMetrics fm(fontMetrics());
+    QFrame* mainWidget = makeMainWidget();
 
-    bybranch_button = new QRadioButton(i18n("Merge from &branch:"), this);
+    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
+
+    bybranch_button = new QRadioButton(i18n("Merge from &branch:"), mainWidget);
     bybranch_button->setChecked(true);
     layout->addWidget(bybranch_button);
 
-    branch_combo = new QComboBox(true, this);
-    branch_combo->setMinimumSize(fm.width("0")*30, branch_combo->sizeHint().height());
-    //    branch_combo->setFocus();
+    branch_combo = new QComboBox(true, mainWidget);
+    branch_combo->setMinimumWidth(iComboBoxMinWidth);
 
-    branch_button = new QPushButton(i18n("Fetch &List"), this);
+    branch_button = new QPushButton(i18n("Fetch &List"), mainWidget);
     connect( branch_button, SIGNAL(clicked()),
              this, SLOT(branchButtonClicked()) );
             
-    QBoxLayout *branchedit_layout = new QHBoxLayout();
-    layout->addLayout(branchedit_layout);
-    branchedit_layout->addSpacing(15);
+    QBoxLayout *branchedit_layout = new QHBoxLayout(layout);
+    branchedit_layout->addSpacing(iWidgetIndent);
     branchedit_layout->addWidget(branch_combo, 2);
     branchedit_layout->addWidget(branch_button, 0);
     
-    bytags_button = new QRadioButton(i18n("Merge &modifications:"), this);
+    bytags_button = new QRadioButton(i18n("Merge &modifications:"), mainWidget);
     layout->addWidget(bytags_button);
 
-    QLabel *tag1_label = new QLabel(i18n("between tag: "), this);
-    tag1_combo = new QComboBox(true, this);
-    tag1_combo->setMinimumSize(fm.width("0")*30, tag1_combo->sizeHint().height());
-    tag1_combo->setEnabled(false);
+    QLabel *tag1_label = new QLabel(i18n("between tag: "), mainWidget);
+    tag1_combo = new QComboBox(true, mainWidget);
+    tag1_combo->setMinimumWidth(iComboBoxMinWidth);
     
-    QLabel *tag2_label = new QLabel(i18n("and tag: "), this);
-    tag2_combo = new QComboBox(true, this);
-    tag2_combo->setMinimumSize(fm.width("0")*30, tag2_combo->sizeHint().height());
-    tag2_combo->setEnabled(false);
+    QLabel *tag2_label = new QLabel(i18n("and tag: "), mainWidget);
+    tag2_combo = new QComboBox(true, mainWidget);
+    tag2_combo->setMinimumWidth(iComboBoxMinWidth);
 
-    tag_button = new QPushButton(i18n("Fetch L&ist"), this);
+    tag_button = new QPushButton(i18n("Fetch L&ist"), mainWidget);
     connect( tag_button, SIGNAL(clicked()),
              this, SLOT(tagButtonClicked()) );
 
-    QGridLayout *tagsedit_layout = new QGridLayout(2, 4);
-    layout->addLayout(tagsedit_layout);
-    tagsedit_layout->addColSpacing(0, 15);
+    QGridLayout *tagsedit_layout = new QGridLayout(layout);
+    tagsedit_layout->addColSpacing(0, iWidgetIndent);
     tagsedit_layout->setColStretch(0, 0);
     tagsedit_layout->setColStretch(1, 1);
     tagsedit_layout->setColStretch(2, 2);
@@ -83,35 +84,39 @@ MergeDialog::MergeDialog(const QString &sbox, const QString &repo,
     tagsedit_layout->addWidget(tag2_combo, 1, 2);
     tagsedit_layout->addMultiCellWidget(tag_button, 0, 1, 3, 3);
     
-    group = new QButtonGroup();
+    QButtonGroup* group = new QButtonGroup(mainWidget);
+    group->hide();
     group->insert(bybranch_button);
     group->insert(bytags_button);
-    connect( bybranch_button, SIGNAL(toggled(bool)),
+    connect( group, SIGNAL(clicked(int)),
              this, SLOT(toggled()) );
+
+    // dis-/enable the widgets
     toggled();
-
-    QFrame *frame = new QFrame(this);
-    frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-    layout->addWidget(frame, 0);
-
-    KButtonBox *buttonbox = new KButtonBox(this);
-    buttonbox->addStretch();
-    QPushButton *ok = buttonbox->addButton(i18n("OK"));
-    QPushButton *cancel = buttonbox->addButton(i18n("Cancel"));
-    ok->setDefault(true);
-    connect( ok, SIGNAL(clicked()), this, SLOT(accept()) );
-    connect( cancel, SIGNAL(clicked()), this, SLOT(reject()) );
-    buttonbox->layout();
-    layout->addWidget(buttonbox, 0);
-
-    sandbox = sbox;
-    repository = repo;
 }
 
 
-MergeDialog::~MergeDialog()
+bool MergeDialog::byBranch() const
 {
-    delete group;
+    return bybranch_button->isChecked();
+}
+
+
+QString MergeDialog::branch() const
+{
+    return branch_combo->currentText();
+}
+
+
+QString MergeDialog::tag1() const
+{
+    return tag1_combo->currentText();
+}
+
+
+QString MergeDialog::tag2() const
+{
+    return tag2_combo->currentText();
 }
 
 

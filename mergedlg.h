@@ -15,30 +15,27 @@
 #ifndef MERGEDLG_H
 #define MERGEDLG_H
 
-#include <qdialog.h>
-#include <qradiobutton.h>
-#include <qcombobox.h>
 
-class QButtonGroup;
+#include <kdialogbase.h>
 
 
-class MergeDialog : public QDialog
+class QComboBox;
+class QPushButton;
+class QRadioButton;
+
+
+class MergeDialog : public KDialogBase
 {
     Q_OBJECT
 
 public:
     MergeDialog( const QString &sbox, const QString &repo,
                  QWidget *parent=0, const char *name=0 );
-    ~MergeDialog();
-    
-    bool byBranch() const
-        { return bybranch_button->isChecked(); }
-    QString branch() const
-        { return branch_combo->currentText(); }
-    QString tag1() const
-        { return tag1_combo->currentText(); }
-    QString tag2() const
-        { return tag2_combo->currentText(); }
+
+    bool byBranch() const;
+    QString branch() const;
+    QString tag1() const;
+    QString tag2() const;
 
 private slots:
     void toggled();
@@ -53,7 +50,6 @@ private:
     QRadioButton *bybranch_button, *bytags_button;
     QComboBox *branch_combo, *tag1_combo, *tag2_combo;
     QPushButton *tag_button, *branch_button;
-    QButtonGroup *group;
 };
 
 #endif
