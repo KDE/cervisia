@@ -23,12 +23,11 @@
 #include <qstringlist.h>
 #include <kconfig.h>
 #include <kemailsettings.h>
+#include <klocale.h>
 #include <kprocess.h>
 #include <ktempfile.h>
 
 #include "config.h"
-#include "cervisiapart.h"
-#include "cvsprogressdlg.h"
 #include "cvsservice_stub.h"
 #include "progressdlg.h"
 

@@ -47,7 +47,6 @@
 #include "historydlg.h"
 #include "updateview.h"
 #include "protocolview.h"
-#include "cvsprogressdlg.h"
 #include "repositorydlg.h"
 #include "settingsdlg.h"
 #include "changelogdlg.h"

@@ -29,14 +29,8 @@
 #include "cvsservice_stub.h"
 #include "repository_stub.h"
 #include "misc.h"
-#include "cvsprogressdlg.h"
 #include "progressdlg.h"
 #include "diffview.h"
-
-#include <kdeversion.h>
-#if KDE_VERSION < KDE_MAKE_VERSION(3,1,90)
-#include "configutils.h"
-#endif
 
 
 DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool modal)
@@ -111,11 +105,7 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool mod
 
     setWFlags(Qt::WDestructiveClose | getWFlags());
 
-#if KDE_IS_VERSION(3,1,90)
     QSize size = configDialogSize(partConfig, "DiffDialog");
-#else
-    QSize size = Cervisia::configDialogSize(this, partConfig, "DiffDialog");
-#endif
     resize(size);
 
     KConfigGroupSaver cs(&partConfig, "DiffDialog");
@@ -125,11 +115,7 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool mod
 
 DiffDialog::~DiffDialog()
 {
-#if KDE_IS_VERSION(3,1,90)
     saveDialogSize(partConfig, "DiffDialog");
-#else
-    Cervisia::saveDialogSize(this, partConfig, "DiffDialog");
-#endif
 
     KConfigGroupSaver cs(&partConfig, "DiffDialog");
     partConfig.writeEntry("Sync", syncbox->isChecked());
