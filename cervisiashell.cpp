@@ -1,7 +1,10 @@
+#include "cervisiashell.h"
+
 #include <kapplication.h>
 #include <kconfig.h>
 #include <kedittoolbar.h>
 #include <kfiledialog.h>
+#include <khelpmenu.h>
 #include <kkeydialog.h>
 #include <klocale.h>
 #include <kstdaction.h>
@@ -9,8 +12,6 @@
 
 #include "cervisiapart.h"
 
-#include "cervisiashell.h"
-#include "cervisiashell.moc"
 
 CervisiaShell::CervisiaShell( const char *name )
   : KParts::MainWindow( name )
@@ -46,6 +47,9 @@ CervisiaShell::~CervisiaShell()
 
 void CervisiaShell::setupActions()
 {
+    setHelpMenuEnabled(false);
+    (void) new KHelpMenu(this, instance()->aboutData(), false, actionCollection());
+
     KAction* action = KStdAction::showToolbar( 0, 0, actionCollection() );
     connect( action, SIGNAL(toggled(bool)),
              this,   SLOT(slotToggleToolbar( bool )) );
@@ -141,6 +145,9 @@ void CervisiaShell::restorePseudo( const QString &dirname )
         config->writeEntry("Current Directory", dirname);
     readProperties(config);
 }
+
+#include "cervisiashell.moc"
+
 
 // Local Variables:
 // c-basic-offset: 4
