@@ -65,9 +65,9 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool mod
     revlabel2 = new QLabel(mainWidget);
     pairlayout->addWidget(revlabel2, 0, 2);
 
-    diff1 = new DiffView(true, false, mainWidget);
-    diff2 = new DiffView(true, true, mainWidget);
-    DiffZoomWidget *zoom = new DiffZoomWidget(mainWidget);
+    diff1 = new DiffView(cfg, true, false, mainWidget);
+    diff2 = new DiffView(cfg, true, true, mainWidget);
+    DiffZoomWidget *zoom = new DiffZoomWidget(cfg, mainWidget);
     zoom->setDiffView(diff2);
 
     pairlayout->addWidget(diff1, 1, 0);
