@@ -19,6 +19,7 @@
 #include <qstack.h>
 #include <kapp.h>
 #include <kdebug.h>
+#include <kfileview.h>
 #include <kglobalsettings.h>
 #include <kiconloader.h>
 #include <klocale.h>
@@ -27,6 +28,7 @@
 
 #include <sys/stat.h>
 #include <unistd.h>
+#include <locale.h>
 #include <time.h>
 
 #include "updateview.h"
@@ -44,7 +46,7 @@ public:
     void syncWithEntries();
     void updateChildItem(QString name, UpdateView::Status status, bool isdir);
     void updateEntriesItem(QString name, UpdateView::Status status, bool isdir,
-                           QString rev, QString tagname);
+                           QString rev, QString tagname, time_t timestamp);
     virtual QString key(int col, bool) const;
     virtual QString text(int col) const;
     virtual void setOpen(bool o);
@@ -83,6 +85,7 @@ public:
     void setStatus(UpdateView::Status status, UpdateView::Filter filter);
     void applyFilter(UpdateView::Filter filter);
     void setRevTag(QString rev, QString tag);
+    void setTimestamp(time_t timestamp);
     void setUndefinedState(bool b)
     { m_undefined = b; }
     void markUpdated(bool laststage, bool success, UpdateView::Filter filter);
@@ -93,6 +96,7 @@ private:
     QString m_tag;
     bool m_undefined;
     UpdateView::Status m_status;
+    time_t m_timestamp;
 };
 
 
@@ -162,7 +166,7 @@ void UpdateDirItem::updateChildItem(QString name, UpdateView::Status status, boo
  * new items and for items which were NotInCVS.
  */
 void UpdateDirItem::updateEntriesItem(QString name, UpdateView::Status status, bool isdir,
-                                      QString rev, QString tagname)
+                                      QString rev, QString tagname, time_t timestamp)
 {
     for (ListViewItem *item = myFirstChild(); item;
 	 item = item->myNextSibling() )
@@ -184,6 +188,7 @@ void UpdateDirItem::updateEntriesItem(QString name, UpdateView::Status status, b
                                     viewitem->setStatus(status, filter);
                                 }
                             viewitem->setRevTag(rev, tagname);
+                            viewitem->setTimestamp(timestamp);
                         }
 		    return;
 		}
@@ -287,13 +292,25 @@ void UpdateDirItem::syncWithEntries()
                     rev.remove(0, 1);
                 }
 	    else if (timestamp.find('+') != -1)
-		status = UpdateView::Conflict;
+                {
+		    status = UpdateView::Conflict;
+		    timestamp.truncate(timestamp.find('+'));
+                }
 	    else if (timestamp != lastModifiedStr(QString(dirPath() + name).latin1()))
 		status = UpdateView::LocallyModified;
 	    else
 		status = UpdateView::Unknown;
 
-	    updateEntriesItem(name, status, isdir, rev, tagdate);
+	    // Convert timestamp into a time.
+	    char *oldLocale;
+	    struct tm tmp;
+	    time_t time;
+
+	    oldLocale = setlocale(LC_TIME, "C");
+	    strptime(timestamp, "%c" , &tmp);
+	    setlocale(LC_TIME, oldLocale);
+	    time = mktime(&tmp);
+	    updateEntriesItem(name, status, isdir, rev, tagdate, time);
 	}
     fclose(f);
 }
@@ -474,6 +491,10 @@ void UpdateViewItem::setRevTag(QString rev, QString tag)
         }
 }
 
+void UpdateViewItem::setTimestamp(time_t timestamp)
+{
+    m_timestamp = timestamp;
+}
 
 void UpdateViewItem::markUpdated(bool laststage, bool success, UpdateView::Filter filter)
 {
@@ -529,6 +550,11 @@ QString UpdateViewItem::key(int col, bool) const
             return m_revision; // First approximation...
         case 3:
             return m_tag;
+        case 4:
+    //static QString sortingKey( const QString& value, bool isDir, int sortSpec);
+    //static QString sortingKey( KIO::filesize_t value, bool isDir,int sortSpec);
+            //return m_timestamp.toString();
+	    return KFileView::sortingKey(m_timestamp, false, QDir::Time);
 	default:
 	    return "";
 	}
@@ -574,6 +600,13 @@ QString UpdateViewItem::text(int col) const
 	    return m_revision;
         case 3:
             return m_tag;
+        case 4:
+	    {
+		QDateTime timestamp;
+
+		timestamp.setTime_t(m_timestamp);
+                return timestamp.toString(Qt::LocalDate);
+	    }
 	default:
 	    return "";
 	}
@@ -613,6 +646,7 @@ UpdateView::UpdateView(QWidget *parent, const char *name)
     addColumn(i18n("Status"));
     addColumn(i18n("Revision"));
     addColumn(i18n("Tag/Date"));
+    addColumn(i18n("Timestamp"));
 
     QFontMetrics fm( fontMetrics() );
 

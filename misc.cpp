@@ -128,7 +128,7 @@ QString userName()
         return QString();
 
     // I guess we don't have to support users with longer host names ;-)
-    (void) ::gethostname(hostname, sizeof hostname);
+    gethostname(hostname, sizeof hostname);
 
     QString res = pw->pw_gecos;
     res += "  <";
