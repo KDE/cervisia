@@ -1371,7 +1371,7 @@ void CervisiaPart::slotHistory()
 {
     // Non-modal dialog
     HistoryDialog *l = new HistoryDialog(*config());
-    if (l->parseHistory(sandbox, repository))
+    if (l->parseHistory(cvsService))
         l->show();
     else
         delete l;

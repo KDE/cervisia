@@ -25,8 +25,9 @@
 #include <klocale.h>
 #include <krfcdate.h>
 
-#include "cvsprogressdlg.h"
 #include "misc.h"
+#include "cvsservice_stub.h"
+#include "progressdlg.h"
 
 #include <kdeversion.h>
 #if KDE_VERSION < KDE_MAKE_VERSION(3,1,90)
@@ -300,71 +301,76 @@ void HistoryDialog::toggled(bool b)
 }
 
 
-bool HistoryDialog::parseHistory(const QString &sandbox, const QString &repository)
+bool HistoryDialog::parseHistory(CvsService_stub* cvsService)
 {
     setCaption(i18n("CVS History"));
 
-    QString cmdline = cvsClient( repository ) + " history -e -a";
-    
-    CvsProgressDialog l("History", this);
-    l.setCaption(i18n("CVS History"));
-    if (!l.execCommand(sandbox, repository, cmdline, "history"))
+    DCOPRef job = cvsService->history();
+    if( !cvsService->ok() )
+        return false;
+
+    ProgressDialog dlg(this, "History", job, "history", i18n("CVS History"));
+    if( !dlg.execute() )
         return false;
 
     QString line;
-    while (l.getOneLine(&line) )
+    while( dlg.getLine(line) )
+    {
+        QStringList list = splitLine(line);
+        QString cmd = list[0];
+        if( cmd.length() != 1 )
+            continue;
+
+        int ncol;
+        int cmd_code = cmd[0].latin1();
+        switch (cmd_code)
         {
-            QStringList list = splitLine(line);
-            QString cmd = list[0];
-            if (cmd.length() != 1)
-                continue;
-
-            int ncol;
-            int cmd_code = cmd[0].latin1();
-            switch (cmd_code)
-                {
-                case 'O':
-                case 'F':
-                case 'E': ncol = 8;
-                    break;
-                default:  ncol = 10;
-                }
-            if (ncol != (int)list.count())
-                continue;
-
-            QString event;
-            switch (cmd_code)
-                {
-                case 'O': event = i18n("Checkout ");         break;
-                case 'T': event = i18n("Tag ");              break;
-                case 'F': event = i18n("Release ");          break;
-                case 'W': event = i18n("Update, Deleted ");  break;
-                case 'U': event = i18n("Update, Copied ");   break;
-                case 'G': event = i18n("Update, Merged ");   break;
-                case 'C': event = i18n("Update, Conflict "); break;
-                case 'M': event = i18n("Commit, Modified "); break;
-                case 'A': event = i18n("Commit, Added ");    break;
-                case 'R': event = i18n("Commit, Removed ");  break;
-                default:  event = i18n("Unknown ");
-                }
-
-            QDateTime date;
-            date.setTime_t(KRFCDate::parseDateISO8601(list[1] + 'T' + list[2] + list[3]));
-
-            HistoryItem *item = new HistoryItem(listview, date);
-            item->setText(HistoryItem::Event, event);
-            item->setText(HistoryItem::Author, list[4]);
-            if (ncol == 10)
-                {
-                    item->setText(HistoryItem::Revision, list[5]);
-                    item->setText(HistoryItem::File, list[6]);
-                    item->setText(HistoryItem::Path, list[7]);
-                }
-            else
-                {
-                    item->setText(HistoryItem::Path, list[5]);
-                }
+            case 'O':
+            case 'F':
+            case 'E':
+                ncol = 8;
+                break;
+            default:
+                ncol = 10;
+                break;
         }
+
+        if( ncol != (int)list.count() )
+            continue;
+
+        QString event;
+        switch( cmd_code )
+        {
+            case 'O': event = i18n("Checkout ");         break;
+            case 'T': event = i18n("Tag ");              break;
+            case 'F': event = i18n("Release ");          break;
+            case 'W': event = i18n("Update, Deleted ");  break;
+            case 'U': event = i18n("Update, Copied ");   break;
+            case 'G': event = i18n("Update, Merged ");   break;
+            case 'C': event = i18n("Update, Conflict "); break;
+            case 'M': event = i18n("Commit, Modified "); break;
+            case 'A': event = i18n("Commit, Added ");    break;
+            case 'R': event = i18n("Commit, Removed ");  break;
+            default:  event = i18n("Unknown ");
+        }
+
+        QDateTime date;
+        date.setTime_t(KRFCDate::parseDateISO8601(list[1] + 'T' + list[2] + list[3]));
+
+        HistoryItem *item = new HistoryItem(listview, date);
+        item->setText(HistoryItem::Event, event);
+        item->setText(HistoryItem::Author, list[4]);
+        if( ncol == 10 )
+        {
+            item->setText(HistoryItem::Revision, list[5]);
+            item->setText(HistoryItem::File, list[6]);
+            item->setText(HistoryItem::Path, list[7]);
+        }
+        else
+        {
+            item->setText(HistoryItem::Path, list[5]);
+        }
+    }
 
     return true;
 }

@@ -1,5 +1,6 @@
 2003-05-14  Christian Loose  <christian.loose@hamburg.de>
 
+	* Use DCOP service for history action
 	* Added history() method to cvs DCOP service
 
 2003-05-10  André Wöbbeking  <Woebbeking@web.de>

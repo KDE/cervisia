@@ -23,6 +23,7 @@ class QCheckBox;
 class KConfig;
 class KLineEdit;
 class KListView;
+class CvsService_stub;
 
 
 class HistoryDialog : public KDialogBase
@@ -30,12 +31,10 @@ class HistoryDialog : public KDialogBase
     Q_OBJECT
 
 public:
-
     explicit HistoryDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
-
     virtual ~HistoryDialog();
 
-    bool parseHistory(const QString &sandbox, const QString &repository);
+    bool parseHistory(CvsService_stub* cvsService);
 
 private slots:
     void choiceChanged();
