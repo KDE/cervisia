@@ -30,7 +30,7 @@
 #include <kprocess.h>
 
 #include "svnjob.h"
-#include "repository.h"
+#include "svnrepository.h"
 
 
 static const char SINGLE_JOB_ID[]   = "NonConcurrentJob";
@@ -53,10 +53,10 @@ struct SvnService::Private
 
     QCString              appId;          // cache the DCOP clients app id
 
-    Repository*           repository;
+    SvnRepository*        repository;
 
     SvnJob* createSvnJob();
-    DCOPRef setupNonConcurrentJob(Repository* repo = 0);
+    DCOPRef setupNonConcurrentJob(SvnRepository* repo = 0);
 
     bool hasWorkingCopy();
     bool hasRunningJob();
@@ -94,7 +94,7 @@ SvnService::SvnService()
     d->singleJobRef.setRef(d->appId, d->singleSvnJob->objId());
 
     // create repository manager
-    d->repository = new Repository();
+    d->repository = new SvnRepository();
 
     d->svnJobs.setAutoDelete(true);
 }
@@ -181,7 +181,7 @@ SvnJob* SvnService::Private::createSvnJob()
 }
 
 
-DCOPRef SvnService::Private::setupNonConcurrentJob(Repository* repo)
+DCOPRef SvnService::Private::setupNonConcurrentJob(SvnRepository* repo)
 {
     // no explicit repository provided?
     if( !repo )

@@ -15,17 +15,17 @@ svnservice_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN) -module
 svnservice_la_LIBADD = $(LIB_KIO)
 svnservice_la_SOURCES = main.cpp svnservice.cpp svnjob.cpp \
 	svnservice.skel svnservice.stub svnjob.skel svnjob.stub \
-	repository.cpp repository.skel repository.stub
+	svnrepository.cpp svnrepository.skel svnrepository.stub
 
-include_HEADERS = svnservice_stub.h svnjob_stub.h repository_stub.h
-noinst_HEADERS = svnservice.h svnjob.h repository.h
+include_HEADERS = svnservice_stub.h svnjob_stub.h svnrepository_stub.h
+noinst_HEADERS = svnservice.h svnjob.h svnrepository.h
 
 # Subversion DCOP service stub library
 lib_LTLIBRARIES = libsvnservice.la
 
 libsvnservice_la_LDFLAGS = $(all_libraries) -no-undefined -version-info 0:1
 libsvnservice_la_LIBADD = $(LIB_KDECORE)
-libsvnservice_la_SOURCES = svnservice.stub svnjob.stub repository.stub dummy.cpp
+libsvnservice_la_SOURCES = svnservice.stub svnjob.stub svnrepository.stub dummy.cpp
 
 dummy.cpp:
 	echo > dummy.cpp
