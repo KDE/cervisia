@@ -49,12 +49,6 @@ CvsLoginJob::~CvsLoginJob()
 }
 
 
-void CvsLoginJob::setRSH(const QString& rsh)
-{
-    m_Rsh = rsh;
-}
-
-
 void CvsLoginJob::setServer(const QString& server)
 {
     m_Server = server;

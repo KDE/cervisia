@@ -36,7 +36,6 @@ public:
     explicit CvsLoginJob(unsigned jobNum);
     virtual ~CvsLoginJob();
 
-    void setRSH(const QString& rsh);
     void setServer(const QString& server);
 
     void setCvsClient(const QCString& cvsClient);

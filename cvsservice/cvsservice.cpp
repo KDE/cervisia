@@ -20,8 +20,6 @@
 
 #include "cvsservice.h"
 
-#include <memory>
-
 #include <qintdict.h>
 #include <qstring.h>
 
@@ -54,14 +52,15 @@ struct CvsService::Private
         delete singleCvsJob;
     }
 
-    CvsJob*             singleCvsJob;   // non-concurrent cvs job, like update or commit
-    DCOPRef             singleJobRef;   // DCOP reference to non-concurrent cvs job
-    QIntDict<CvsJob>    cvsJobs;        // concurrent cvs jobs, like diff or annotate
-    unsigned            lastJobId;
+    CvsJob*               singleCvsJob;   // non-concurrent cvs job, like update or commit
+    DCOPRef               singleJobRef;   // DCOP reference to non-concurrent cvs job
+    QIntDict<CvsJob>      cvsJobs;        // concurrent cvs jobs, like diff or annotate
+    QIntDict<CvsLoginJob> loginJobs;
+    unsigned              lastJobId;
 
-    QCString            appId;          // cache the DCOP clients app id
+    QCString              appId;          // cache the DCOP clients app id
 
-    Repository*         repository;
+    Repository*           repository;
 
     CvsJob* createCvsJob();
     DCOPRef setupNonConcurrentJob(Repository* repo = 0);
@@ -85,6 +84,7 @@ CvsService::CvsService()
     d->repository = new Repository();
 
     d->cvsJobs.setAutoDelete(true);
+    d->loginJobs.setAutoDelete(true);
 
     KConfig* config = kapp->config();
     KConfigGroupSaver cs(config, "General");
@@ -106,6 +106,7 @@ CvsService::~CvsService()
     ssh.killSshAgent();
 
     d->cvsJobs.clear();
+    d->loginJobs.clear();
     delete d;
 }
 
@@ -191,14 +192,14 @@ DCOPRef CvsService::checkout(const QString& workingDir, const QString& repositor
     if( d->hasRunningJob() )
         return DCOPRef();
 
-    std::auto_ptr<Repository> repo(new Repository(repository));
+    Repository repo(repository);
 
     // assemble the command line
     // cd [DIRECTORY] && cvs -d [REPOSITORY] checkout [-r tag] [-P] [MODULE]
     d->singleCvsJob->clearCvsCommand();
 
     *d->singleCvsJob << "cd" << workingDir << "&&"
-                     << repo->cvsClient()
+                     << repo.cvsClient()
                      << "-d" << repository
                      << "checkout";
 
@@ -210,7 +211,7 @@ DCOPRef CvsService::checkout(const QString& workingDir, const QString& repositor
 
     *d->singleCvsJob << module;
 
-    return d->setupNonConcurrentJob(repo.get());
+    return d->setupNonConcurrentJob(&repo);
 }
 
 
@@ -441,13 +442,13 @@ DCOPRef CvsService::import(const QString& workingDir, const QString& repository,
     if( d->hasRunningJob() )
         return DCOPRef();
 
-    std::auto_ptr<Repository> repo(new Repository(repository));
+    Repository repo(repository);
 
     // assemble the command line
     d->singleCvsJob->clearCvsCommand();
 
     *d->singleCvsJob << "cd" << workingDir << "&&"
-                     << repo->cvsClient()
+                     << repo.cvsClient()
                      << "-d" << repository
                      << "import";
 
@@ -468,7 +469,7 @@ DCOPRef CvsService::import(const QString& workingDir, const QString& repository,
 
     *d->singleCvsJob << module << vendorTag << releaseTag;
 
-    return d->setupNonConcurrentJob(repo.get());
+    return d->setupNonConcurrentJob(&repo);
 }
 
 
@@ -510,21 +511,20 @@ DCOPRef CvsService::login(const QString& repository)
     if( repository.isEmpty() )
         return DCOPRef();
 
-    std::auto_ptr<Repository> repo(new Repository(repository));
+    Repository repo(repository);
 
     // create a cvs job
     ++(d->lastJobId);
 
-    // TODO: we need to delete this job object
     CvsLoginJob* job = new CvsLoginJob(d->lastJobId);
+    d->loginJobs.insert(d->lastJobId, job);
 
-    // TODO: CVS_RSH and CVS_SERVER don't work ATM
-//    job->setRSH(repo->rsh());
-//    job->setServer(repo->server());
+    // TODO: CVS_SERVER doesn't work ATM
+//    job->setServer(repo.server());
 
     // assemble the command line
     // cvs -d [REPOSITORY] login
-    job->setCvsClient(repo->clientOnly().local8Bit());
+    job->setCvsClient(repo.clientOnly().local8Bit());
     job->setRepository(repository.local8Bit());
 
     // return a DCOP reference to the cvs job
@@ -537,7 +537,7 @@ DCOPRef CvsService::logout(const QString& repository)
     if( repository.isEmpty() )
         return DCOPRef();
 
-    std::auto_ptr<Repository> repo(new Repository(repository));
+    Repository repo(repository);
 
     // create a cvs job
     ++(d->lastJobId);
@@ -545,13 +545,13 @@ DCOPRef CvsService::logout(const QString& repository)
     CvsJob* job = new CvsJob(d->lastJobId);
     d->cvsJobs.insert(d->lastJobId, job);
 
-    job->setRSH(repo->rsh());
-    job->setServer(repo->server());
-    job->setDirectory(repo->workingCopy());
+    job->setRSH(repo.rsh());
+    job->setServer(repo.server());
+    job->setDirectory(repo.workingCopy());
 
     // assemble the command line
     // cvs -d [REPOSITORY] logout
-    *job << repo->cvsClient() << "-d" << repository << "logout";
+    *job << repo.cvsClient() << "-d" << repository << "logout";
 
     // return a DCOP reference to the cvs job
     return DCOPRef(d->appId, job->objId());
@@ -578,7 +578,7 @@ DCOPRef CvsService::makePatch()
 
 DCOPRef CvsService::moduleList(const QString& repository)
 {
-    std::auto_ptr<Repository> repo(new Repository(repository));
+    Repository repo(repository);
 
     // create a cvs job
     ++(d->lastJobId);
@@ -586,13 +586,13 @@ DCOPRef CvsService::moduleList(const QString& repository)
     CvsJob* job = new CvsJob(d->lastJobId);
     d->cvsJobs.insert(d->lastJobId, job);
 
-    job->setRSH(repo->rsh());
-    job->setServer(repo->server());
-    job->setDirectory(repo->workingCopy());
+    job->setRSH(repo.rsh());
+    job->setServer(repo.server());
+    job->setDirectory(repo.workingCopy());
 
     // assemble the command line
     // cvs -d [REPOSITORY] checkout -c
-    *job << repo->cvsClient() << "-d" << repository << "checkout -c";
+    *job << repo.cvsClient() << "-d" << repository << "checkout -c";
 
     // return a DCOP reference to the cvs job
     return DCOPRef(d->appId, job->objId());
