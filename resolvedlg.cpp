@@ -47,10 +47,10 @@ ResolveDialog::ResolveDialog(QWidget *parent, const char *name)
     pairlayout->setRowStretch(1, 1);
     layout->addLayout(pairlayout, 10);
 
-    QLabel *revlabel1 = new QLabel(i18n("Your Version (A):"), this);
+    QLabel *revlabel1 = new QLabel(i18n("Your version (A):"), this);
     pairlayout->addWidget(revlabel1, 0, 0);
 			      
-    QLabel *revlabel2 = new QLabel(i18n("Other Version (B):"), this);
+    QLabel *revlabel2 = new QLabel(i18n("Other version (B):"), this);
     pairlayout->addWidget(revlabel2, 0, 1);
 
     diff1 = new DiffView(true, false, this);
@@ -62,7 +62,7 @@ ResolveDialog::ResolveDialog(QWidget *parent, const char *name)
     diff1->setPartner(diff2);
     diff2->setPartner(diff1);
     
-    QLabel *mergelabel = new QLabel(i18n("Merged Version:"), this);
+    QLabel *mergelabel = new QLabel(i18n("Merged version:"), this);
     layout->addSpacing(5);
     layout->addWidget(mergelabel);
     
