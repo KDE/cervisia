@@ -38,8 +38,10 @@ void TipLabel::showAt(QPoint pos)
 {
     adjustSize();
 
-    pos = QPoint(QMIN(pos.x(), QApplication::desktop()->width()-width()),
-                 QMIN(pos.y(), QApplication::desktop()->height()-height()));
+    QPoint maxpos = QPoint(QMAX(QApplication::desktop()->width()-width(), 0),
+                           QMAX(QApplication::desktop()->height()-height(), 0));
+    pos = QPoint(QMIN(pos.x(), maxpos.x()),
+                 QMIN(pos.y(), maxpos.y()));
     move(pos);
     show();
 }
@@ -57,6 +59,7 @@ QSize TipLabel::sizeHint() const
 }
 
 #include "tiplabel.moc"
+
 
 // Local Variables:
 // c-basic-offset: 4
