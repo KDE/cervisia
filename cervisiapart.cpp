@@ -249,7 +249,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Add to Repository..."), Key_Plus,
+    action = new KAction( i18n("&Add to Repository..."), Key_Insert,
                           this, SLOT( slotAdd() ),
                           actionCollection(), "file_add" );
     hint = i18n("Adds (cvs add) the selected files to the repository");
@@ -263,7 +263,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Remove From Repository..."), Key_Minus,
+    action = new KAction( i18n("&Remove From Repository..."), Key_Delete,
                           this, SLOT( slotRemove() ),
                           actionCollection(), "file_remove" );
     hint = i18n("Removes (cvs remove) the selected files from the repository");
