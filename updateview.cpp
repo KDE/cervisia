@@ -117,13 +117,15 @@ public:
     virtual void paintCell(QPainter *p, const QColorGroup &cg,
 			   int col, int width, int align);
 
-    void setStatus(UpdateView::Status status, UpdateView::Filter filter);
-    void applyFilter(UpdateView::Filter filter);
+    void setStatus(UpdateView::Status status);
     void setRevTag(const QString& rev, const QString& tag);
     void setTimestamp(time_t timestamp);
     void setUndefinedState(bool b)
     { m_undefined = b; }
-    void markUpdated(bool laststage, bool success, UpdateView::Filter filter);
+
+    void markUpdated(bool laststage, bool success);
+
+    virtual void applyFilter(UpdateView::Filter filter);
 
 private:
 
@@ -177,8 +179,7 @@ void UpdateDirItem::updateChildItem(const QString& name, UpdateView::Status stat
 		    else
                         {
                             UpdateViewItem *viewitem = static_cast<UpdateViewItem*>(item);
-                            UpdateView::Filter filter = updateView()->filter();
-                            viewitem->setStatus(status, filter);
+                            viewitem->setStatus(status);
                         }
 		    return;
 		}
@@ -190,8 +191,7 @@ void UpdateDirItem::updateChildItem(const QString& name, UpdateView::Status stat
     else
         {
             UpdateViewItem *viewitem = new UpdateViewItem(this, name);
-            UpdateView::Filter filter = updateView()->filter();
-            viewitem->setStatus(status, filter);
+            viewitem->setStatus(status);
         }
 }
 
@@ -224,8 +224,7 @@ void UpdateDirItem::updateEntriesItem(const QString& name,
                                 status == UpdateView::LocallyRemoved ||
                                 status == UpdateView::Conflict)
                                 {
-                                    UpdateView::Filter filter = updateView()->filter();
-                                    viewitem->setStatus(status, filter);
+                                    viewitem->setStatus(status);
                                 }
                             viewitem->setRevTag(rev, tagname);
                             viewitem->setTimestamp(timestamp);
@@ -242,8 +241,7 @@ void UpdateDirItem::updateEntriesItem(const QString& name,
     else
         {
             UpdateViewItem *viewitem = new UpdateViewItem(this, name);
-            UpdateView::Filter filter = updateView()->filter();
-            viewitem->setStatus(status, filter);
+            viewitem->setStatus(status);
         }
 }
 
@@ -377,8 +375,7 @@ void UpdateDirItem::syncWithDirectory()
             if (setFiles.find(item->text(UpdateViewItem::File)) == setFiles.end())
             {
                 UpdateViewItem *viewitem = static_cast<UpdateViewItem*>(item);
-                UpdateView::Filter filter = updateView()->filter();
-                viewitem->setStatus(UpdateView::Removed, filter);
+                viewitem->setStatus(UpdateView::Removed);
                 viewitem->setRevTag(QString::null, QString::null);
             }
         }
@@ -473,12 +470,12 @@ QString UpdateViewItem::filePath() const
 }
 
 
-void UpdateViewItem::setStatus(UpdateView::Status newstatus, UpdateView::Filter filter)
+void UpdateViewItem::setStatus(UpdateView::Status newstatus)
 {
     if (newstatus != m_status)
         {
             m_status = newstatus;
-            applyFilter(filter);
+            applyFilter(updateView()->filter());
             if (isVisible())
                 repaint();
         }
@@ -538,7 +535,7 @@ void UpdateViewItem::setTimestamp(time_t timestamp)
     m_timestamp = timestamp;
 }
 
-void UpdateViewItem::markUpdated(bool laststage, bool success, UpdateView::Filter filter)
+void UpdateViewItem::markUpdated(bool laststage, bool success)
 {
     UpdateView::Status newstatus = m_status;
     
@@ -546,7 +543,7 @@ void UpdateViewItem::markUpdated(bool laststage, bool success, UpdateView::Filte
         {
             if (undefinedState() && m_status != UpdateView::NotInCVS)
                 newstatus = success? UpdateView::UpToDate : UpdateView::Unknown;
-            setStatus(newstatus, filter);
+            setStatus(newstatus);
         }
     else
         setUndefinedState(true);
@@ -1006,13 +1003,13 @@ void UpdateView::markUpdated(bool laststage, bool success)
                     if (!isDirItem(item))
                         {
                             UpdateViewItem *viewitem = static_cast<UpdateViewItem*>(item);
-                            viewitem->markUpdated(laststage, success, filter());
+                            viewitem->markUpdated(laststage, success);
                         }
             }
         else
             {
                 UpdateViewItem *viewitem = static_cast<UpdateViewItem*>(it.current());
-                viewitem->markUpdated(laststage, success, filter());
+                viewitem->markUpdated(laststage, success);
             }
 }
 
