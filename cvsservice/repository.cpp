@@ -182,6 +182,15 @@ void Repository::slotConfigDirty(const QString& fileName)
 void Repository::Private::readConfig()
 {
     KConfig* config = kapp->config();
+    
+    // FIXME: This doesn't work when $workingCopy/CVS/Root contains
+    //        :pserver:user@cvs.kde.org:/home/kde
+    //        but the configuration was saved in group
+    //        :pserver:user@cvs.kde.org:2401/home/kde
+    //
+    // This can happen when the repository was added to list
+    // because of an entry in the .cvspass file (see repository.dlg:159)
+    //
     config->setGroup(QString::fromLatin1("Repository-") + location);
 
     // see if there is a specific compression level set for this repository
