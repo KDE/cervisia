@@ -22,14 +22,15 @@
 
 #include "annotatedlg.h"
 #include "progressdlg.h"
-
+#include "cvsservice_stub.h"
+#include "cvsjob_stub.h"
 
 struct AnnotateController::Private
 {
     typedef QMap<QString, QString>  RevisionCommentMap;
-    RevisionCommentMap  comments;                           // maps comment to a revision
+    RevisionCommentMap  comments;                  // maps comment to a revision
 
-    DCOPRef*            cvsService;
+    CvsService_stub*    cvsService;
     AnnotateDialog*     dialog;
     ProgressDialog*     progress;
 
@@ -39,7 +40,7 @@ struct AnnotateController::Private
 };
 
 
-AnnotateController::AnnotateController(AnnotateDialog* dialog, DCOPRef* cvsService)
+AnnotateController::AnnotateController(AnnotateDialog* dialog, CvsService_stub* cvsService)
     : d(new Private)
 {
     // initialize private data
@@ -76,11 +77,10 @@ void AnnotateController::showDialog(const QString& fileName, const QString& revi
 
 bool AnnotateController::Private::execute(const QString& fileName, const QString& revision)
 {
-    DCOPReply job = cvsService->call("annotate(QString, QString)", fileName, revision);
-
-    if( !job.isValid() )
+    DCOPRef job = cvsService->annotate(fileName, revision);
+    if( !cvsService->ok() )
         return false;
-
+        
     progress = new ProgressDialog(dialog, "Annotate", job, "annotate", i18n("CVS Annotate"));
 
     return progress->execute();

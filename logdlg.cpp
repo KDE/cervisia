@@ -28,6 +28,7 @@
 #include <kprocess.h>
 #include <krfcdate.h>
 
+#include "cvsservice_stub.h"
 #include "annotatedlg.h"
 #include "annotatectl.h"
 #include "diffdlg.h"
@@ -43,6 +44,7 @@ LogDialog::Options *LogDialog::options = 0;
 LogDialog::LogDialog(QWidget *parent, const char *name)
     : KDialogBase(parent, name, false, QString::null,
                   Close | Help | User1 | User2, Close, true)
+    , cvsService(0)
 {
     QFrame* mainWidget = makeMainWidget();
 
@@ -192,7 +194,7 @@ void LogDialog::saveOptions(KConfig *config)
 }
 
 
-bool LogDialog::parseCvsLog(DCOPRef& service, const QString& fileName)
+bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
 {
     QString tag, rev, author, comment;
     QDateTime date;
@@ -205,15 +207,13 @@ bool LogDialog::parseCvsLog(DCOPRef& service, const QString& fileName)
 
     // get sandbox and repository from cvs DCOP service for diffClicked()
     // FIXME: get rid when DiffDialog is moved to DCOP service
-    DCOPReply sandboxPath = cvsService.call("workingCopy()");
-    sandboxPath.get<QString>(sandbox);
-    DCOPReply repositoryLocation = cvsService.call("repository()");
-    repositoryLocation.get<QString>(repository);
+    sandbox = cvsService->workingCopy();
+    repository = cvsService->repository();
     
     setCaption(i18n("CVS Log: %1").arg(filename));
 
-    DCOPReply job = cvsService.call("log(QString)", filename);
-    if( !job.isValid() )
+    DCOPRef job = cvsService->log(filename);
+    if( !cvsService->ok() )
         return false;
 
     ProgressDialog dlg(this, "Logging", job, "log", i18n("CVS Log"));
@@ -405,7 +405,7 @@ void LogDialog::diffClicked()
 void LogDialog::annotateClicked()
 {
     AnnotateDialog *l = new AnnotateDialog();
-    AnnotateController ctl(l, &cvsService);
+    AnnotateController ctl(l, cvsService);
     ctl.showDialog(filename, selectionA);
 }
 

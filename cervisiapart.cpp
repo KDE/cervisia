@@ -50,6 +50,7 @@
 #include "settingsdlg.h"
 #include "changelogdlg.h"
 #include "misc.h"
+#include "cvsservice_stub.h"
 
 #include "cervisiapart.h"
 #include "version.h"
@@ -116,13 +117,14 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     }
     
     // create a reference to the service
-    cvsService.setRef(appId, "CvsService");
+    cvsService = new CvsService_stub(appId, "CvsService");
 }
 
 CervisiaPart::~CervisiaPart()
 {
-    // stop the cvs DCOP service
-    cvsService.send("quit");
+    // stop the cvs DCOP service and delete reference
+    cvsService->quit();
+    delete cvsService;
 }
 
 KConfig *CervisiaPart::config()
@@ -820,14 +822,9 @@ void CervisiaPart::updateOrStatus(bool noact, const QString &extraopt)
     // TODO: cleanup when update is also handled by DCOP service                       
     if( noact )
     {
-        DCOPRef cvsJob;
         QString files = joinLine(list);
-        DCOPReply job = cvsService.call("status(QString, bool)", files, opt_updateRecursive);
         
-        if( job.isValid() )
-            cvsJob = job;
-        else
-            return;
+        DCOPRef cvsJob = cvsService->status(files, opt_updateRecursive);
 
         // get command line from cvs job
         QString cmdline;
@@ -998,7 +995,7 @@ void CervisiaPart::slotAnnotate()
 
     // Non-modal dialog
     AnnotateDialog *l = new AnnotateDialog();
-    AnnotateController ctl(l, &cvsService);
+    AnnotateController ctl(l, cvsService);
     ctl.showDialog(filename);
 }
 
@@ -1507,9 +1504,9 @@ void CervisiaPart::slotJobFinished(bool)
 void CervisiaPart::openSandbox(const QString &dirname)
 {
     // change the working copy directory for the cvs DCOP service
-    DCOPReply opened = cvsService.call("setWorkingCopy(QString)", dirname);
+    bool opened = cvsService->setWorkingCopy(dirname);
     
-    if( !opened.isValid() || !opened )
+    if( !cvsService->ok() || !opened )
     {
         KMessageBox::sorry(widget(),
                            i18n("This is not a CVS directory.\n"
@@ -1529,19 +1526,11 @@ void CervisiaPart::openSandbox(const QString &dirname)
     repository   = "";
     
     // get path of sandbox for recent sandbox menu
-    DCOPReply sandboxPath = cvsService.call("workingCopy()");
-    if( !sandboxPath.isValid() )
-        return;
-    else
-        sandboxPath.get<QString>(sandbox);
+    sandbox = cvsService->workingCopy();
     recent->addURL( KURL::fromPathOrURL(sandbox) );
     
     // get repository for the caption of the window
-    DCOPReply repositoryLocation = cvsService.call("repository()");
-    if( !repositoryLocation.isValid() )
-        return;
-    else
-        repositoryLocation.get<QString>(repository);
+    repository = cvsService->repository();
     emit setWindowCaption(sandbox + "(" + repository + ")");
     
     QDir::setCurrent(sandbox);

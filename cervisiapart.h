@@ -15,7 +15,6 @@
 #ifndef CERVISIAPART_H
 #define CERVISIAPART_H
 
-#include <dcopref.h>
 #include <kparts/part.h>
 #include <kparts/browserextension.h>
 #include <kparts/genericfactory.h>
@@ -32,7 +31,7 @@ class UpdateView;
 class ProtocolView;
 class KAboutData;
 class KRecentFilesAction;
-
+class CvsService_stub;
 
 /**
  * An embeddable Cervisia viewer.
@@ -164,8 +163,8 @@ private:
 
     //for the Open Recent directories
     KRecentFilesAction *recent;
-    
-    DCOPRef cvsService;
+
+    CvsService_stub* cvsService;
 };
 
 typedef KParts::GenericFactory<CervisiaPart> CervisiaFactory;

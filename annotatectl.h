@@ -17,14 +17,14 @@
 #include <qstring.h>
 
 class AnnotateDialog;
-class DCOPRef;
+class CvsService_stub;
 class QWidget;
 
 
 class AnnotateController
 {
 public:
-    AnnotateController(AnnotateDialog* dialog, DCOPRef* cvsService);
+    AnnotateController(AnnotateDialog* dialog, CvsService_stub* cvsService);
     ~AnnotateController();
 
     void showDialog(const QString& fileName, const QString& revision = "");

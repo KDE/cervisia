@@ -15,7 +15,6 @@
 #ifndef LOGDLG_H
 #define LOGDLG_H
 
-#include <dcopref.h>
 #include <kdialogbase.h>
 
 #include <qdatetime.h>
@@ -31,7 +30,7 @@ class QComboBox;
 class QLabel;
 class QTabWidget;
 class QTextEdit;
-
+class CvsService_stub;
 
 class RevisionInfo
 {
@@ -63,7 +62,7 @@ public:
 
     virtual ~LogDialog();
 
-    bool parseCvsLog(DCOPRef& service, const QString& fileName);
+    bool parseCvsLog(CvsService_stub* service, const QString& fileName);
 
     static void loadOptions(KConfig *config);
     static void saveOptions(KConfig *config);
@@ -100,7 +99,7 @@ private:
     QTextEdit *tagsbox[2];
     QComboBox *tagcombo[2];
 
-    DCOPRef cvsService;
+    CvsService_stub* cvsService;
 };
 
 #endif
