@@ -18,12 +18,12 @@
 #include <qpushbutton.h>
 #include <kbuttonbox.h>
 #include <kconfig.h>
+#include <klistview.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 
 #include "addrepositorydlg.h"
 #include "repositories.h"
-#include "listview.h"
 
 #include <kdeversion.h>
 #if KDE_VERSION < KDE_MAKE_VERSION(3,1,90)
@@ -31,10 +31,10 @@
 #endif
 
 
-class RepositoryListItem : public QListViewItem
+class RepositoryListItem : public KListViewItem
 {
 public:
-    RepositoryListItem(QListView *parent, const QString &repo, bool loggedin);
+    RepositoryListItem(KListView *parent, const QString &repo, bool loggedin);
     void setRsh(const QString &rsh);
     void setCompression(int compression);
     QString repository() const
@@ -53,8 +53,8 @@ public:
 };
 
 
-RepositoryListItem::RepositoryListItem(QListView *parent, const QString &repo, bool loggedin)
-    : QListViewItem(parent)
+RepositoryListItem::RepositoryListItem(KListView *parent, const QString &repo, bool loggedin)
+    : KListViewItem(parent)
 {
     setText(0, repo);
 
@@ -112,11 +112,10 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, QWidget *parent, const char *na
 
     QBoxLayout *hbox = new QHBoxLayout(layout);
 
-    repolist = new ListView(mainWidget);
+    repolist = new KListView(mainWidget);
     hbox->addWidget(repolist, 10);
     repolist->setMinimumWidth(fontMetrics().width('0') * 60);
     repolist->setAllColumnsShowFocus(true);
-    repolist->setPreferredColumn(0);
     repolist->addColumn(i18n("Repository"));
     repolist->addColumn(i18n("Method"));
     repolist->addColumn(i18n("Compression"));

@@ -21,8 +21,7 @@
 
 class QListViewItem;
 class KConfig;
-
-class ListView;
+class KListView;
 
 
 class RepositoryDialog : public KDialogBase
@@ -49,7 +48,7 @@ private slots:
     void slotLogoutClicked();
 
 private:
-    ListView *repolist;
+    KListView *repolist;
     KConfig* serviceConfig;
     KConfig& partConfig;
 };
