@@ -1,3 +1,7 @@
+2004-02-20  Christian Loose  <christian.loose@hamburg.de>
+
+	* Fix remembering the last input values in checkout dialog.
+
 2004-01-27  Christian Loose  <christian.loose@hamburg.de>
 
 	* Fix BR #70936:
