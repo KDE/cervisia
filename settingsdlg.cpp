@@ -26,6 +26,7 @@
 #include <kfontdialog.h>
 #include <kglobal.h>
 #include <klineedit.h>
+#include <kurlrequester.h>
 #include <klocale.h>
 #include <knuminput.h>
 
@@ -77,7 +78,7 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
     cvspathlabel->setBuddy(cvspathedit);
 
     QLabel *editorlabel = new QLabel( i18n("&Editor:"), generalPage );
-    editoredit = new KLineEdit(generalPage);
+    editoredit = new KURLRequester(generalPage);
     editorlabel->setBuddy(editoredit);
 
     new QWidget(generalPage);
@@ -203,7 +204,7 @@ void SettingsDialog::readSettings()
     remotestatusbox->setChecked(config->readBoolEntry("StatusForRemoteRepos", false));
     localstatusbox->setChecked(config->readBoolEntry("StatusForLocalRepos", false));
     config->setGroup("Communication");
-    editoredit->setText(config->readEntry("Editor", "kwrite"));
+    editoredit->lineEdit()->setText(config->readEntry("Editor", "kwrite"));
 #if 0
     bool usedcop = config->readBoolEntry("UseDCOP", false);
     usedcopbox->setChecked(usedcop);
@@ -234,7 +235,7 @@ void SettingsDialog::writeSettings()
     config->writeEntry("StatusForRemoteRepos", remotestatusbox->isChecked());
     config->writeEntry("StatusForLocalRepos", localstatusbox->isChecked());
     config->setGroup("Communication");
-    config->writeEntry("Editor", editoredit->text());
+    config->writeEntry("Editor", editoredit->lineEdit()->text());
 #if 0
     config->writeEntry("UseDCOP", usedcopbox->isChecked());
     config->writeEntry("DCOPClient", clientedit->text());

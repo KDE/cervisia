@@ -25,6 +25,7 @@ class KIntegerLine;
 class KIntNumInput;
 class KLineEdit;
 class KConfig;
+class KURLRequester;
 
 class FontButton : public QPushButton
 {
@@ -58,7 +59,7 @@ private:
     KLineEdit *cvspathedit;
     QComboBox *compressioncombo;
     KLineEdit *usernameedit;
-    KLineEdit *editoredit;
+    KURLRequester *editoredit;
     KLineEdit *diffoptedit;
     KLineEdit *extdiffedit;
     QCheckBox *remotestatusbox;
