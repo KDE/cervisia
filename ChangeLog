@@ -1,3 +1,8 @@
+2005-03-07  Christian Loose <christian.loose@kdemail.net>
+
+	* Added support for commit template message (CVS/Template) in
+	  the commit dialog. Patch by Darrell Esau.
+
 2005-03-04  Christian Loose <christian.loose@kdemail.net>
 
 	* Fix BR #97664:

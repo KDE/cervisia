@@ -15,6 +15,8 @@
 #include "commitdlg.h"
 
 #include <qcombobox.h>
+#include <qcheckbox.h>
+#include <qdir.h>
 #include <qfileinfo.h>
 #include <qlabel.h>
 #include <qlayout.h>
@@ -67,6 +69,12 @@ CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service,
     edit->setMinimumSize(400, 100);
     layout->addWidget(edit, 10);
 
+    m_useTemplateChk = new QCheckBox(i18n("Use log message &template"), mainWidget);
+    layout->addWidget(m_useTemplateChk);
+    connect( m_useTemplateChk, SIGNAL(clicked()), this, SLOT(useTemplateClicked()) );
+
+    checkForTemplateFile();
+
     setButtonGuiItem(User1, KGuiItem(i18n("&Diff"), "vcs_diff"));
     enableButton(User1, false);
     connect( this, SIGNAL(user1Clicked()),
@@ -82,6 +90,9 @@ CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service,
 CommitDialog::~CommitDialog()
 {
     saveDialogSize(partConfig, "CommitDialog");
+
+    KConfigGroupSaver cs(&partConfig, "CommitDialog");
+    partConfig.writeEntry("UseTemplate", m_useTemplateChk->isChecked());
 }
 
 
@@ -102,6 +113,9 @@ void CommitDialog::setFileList(const QStringList &list)
 void CommitDialog::setLogMessage(const QString &msg)
 {
     edit->setText(msg);
+
+    if( m_useTemplateChk->isChecked() )
+        addTemplateText();
 }
 
 
@@ -196,6 +210,64 @@ void CommitDialog::showDiffDialog(const QString& fileName)
     
     // re-enable diff button
     enableButton(User1, true);
+}
+
+
+void CommitDialog::useTemplateClicked()
+{
+    if( m_useTemplateChk->isChecked() )
+    {
+        addTemplateText();
+    }
+    else
+    {
+        removeTemplateText();
+    }
+}
+
+
+void CommitDialog::checkForTemplateFile()
+{
+    QString filename = QDir::current().absPath() + "/CVS/Template";
+    if( QFile::exists(filename) )
+    {
+        QFile f(filename);
+        if( f.open(IO_ReadOnly) )
+        {
+            QTextStream stream(&f);
+            m_templateText = stream.read();
+            f.close();
+
+            m_useTemplateChk->setEnabled(true);
+            KConfigGroupSaver cs(&partConfig, "CommitDialog");
+            bool check = partConfig.readBoolEntry("UseTemplate", true);
+            m_useTemplateChk->setChecked(check);
+
+            addTemplateText();
+        }
+        else
+        {
+            m_useTemplateChk->setEnabled(false);
+        }
+    }
+    else
+    {
+        m_useTemplateChk->setEnabled(false);
+    }
+}
+
+
+void CommitDialog::addTemplateText()
+{
+    edit->append(m_templateText);
+    edit->moveCursor(QTextEdit::MoveHome, false);
+    edit->ensureCursorVisible();
+}
+
+
+void CommitDialog::removeTemplateText()
+{
+    edit->setText(edit->text().remove(m_templateText));
 }
 
 
