@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2001 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
@@ -81,7 +81,7 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
     editorlabel->setBuddy(editoredit);
 
     new QWidget(generalPage);
-    
+
     //
     // Look and Feel Options
     //
@@ -169,7 +169,7 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
 
     clientedit = new KLineEdit(editorgroup);
     editorlayout->addWidget(clientedit, 2, 1);
-    
+
     QLabel *clientlabel = new QLabel(clientedit, i18n("&Client:"), editorgroup);
     editorlayout->addWidget(clientlabel, 2, 0);
 
@@ -216,7 +216,7 @@ void SettingsDialog::readSettings()
     protocolfontbox->setFont(config->readFontEntry("ProtocolFont"));
     annotatefontbox->setFont(config->readFontEntry("AnnotateFont"));
     difffontbox->setFont(config->readFontEntry("DiffFont"));
-    splitterbox->setChecked(config->readBoolEntry("SplitHorizontally"));
+    splitterbox->setChecked(config->readBoolEntry("SplitHorizontally",true));
 }
 
 
@@ -262,6 +262,7 @@ void SettingsDialog::writeSettings()
 
 void SettingsDialog::done(int res)
 {
+
     if (res == Accepted)
         writeSettings();
     QDialog::done(res);

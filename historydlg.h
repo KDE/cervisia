@@ -58,7 +58,7 @@ private:
         QString text[7];
         QString index;
     };
-    QList<ItemCopy> hiddenitems;
+    QPtrList<ItemCopy> hiddenitems;
     
     ListView *listview;
     QCheckBox *commit_box, *checkout_box, *tag_box, *other_box;

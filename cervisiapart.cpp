@@ -100,10 +100,10 @@ CervisiaPart::CervisiaPart( QWidget *parent, const char *name )
     // Create UI
     KConfig *conf = config();
     conf->setGroup("LookAndFeel");
-    bool splitHorz = conf->readBoolEntry("SplitHorizontally");
+    bool splitHorz = conf->readBoolEntry("SplitHorizontally",true);
 
-    splitter = new QSplitter(splitHorz? QSplitter::Horizontal : QSplitter::Vertical, parent);
- 
+    splitter = new QSplitter(splitHorz? QSplitter::Vertical : QSplitter::Horizontal, parent);
+
     update = new UpdateView(splitter);
     update->setFocusPolicy( QWidget::StrongFocus );
     update->setFocus();
@@ -150,7 +150,7 @@ void CervisiaPart::setupActions()
     // File Menu
     //
     action = new KAction( i18n("O&pen Sandbox..."), "fileopen", 0,
-			  this, SLOT( slotOpenSandbox() ), 
+			  this, SLOT( slotOpenSandbox() ),
 			  actionCollection(), "file_open" );
     hint = i18n("Opens a CVS working directory in the main window");
     action->setToolTip( hint );
@@ -164,63 +164,63 @@ void CervisiaPart::setupActions()
     action->setWhatsThis( hint );
 
     action = new KAction( i18n("&Update"), "down", CTRL+Key_U,
-			  this, SLOT( slotUpdate() ), 
+			  this, SLOT( slotUpdate() ),
 			  actionCollection(), "file_update" );
     hint = i18n("Updates (cvs update) the selected files and directories");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action = new KAction( i18n("&Status"), Key_F5,
-			  this, SLOT( slotStatus() ), 
+			  this, SLOT( slotStatus() ),
 			  actionCollection(), "file_status" );
     hint = i18n("Updates the status (cvs -n update) of the selected files and directories");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action = new KAction( i18n("&Edit"), 0,
-			  this, SLOT( slotOpen() ), 
+			  this, SLOT( slotOpen() ),
 			  actionCollection(), "file_edit" );
     hint = i18n("Opens the marked file for editing");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action = new KAction( i18n("Reso&lve"), 0,
-			  this, SLOT( slotResolve() ), 
+			  this, SLOT( slotResolve() ),
 			  actionCollection(), "file_resolve" );
     hint = i18n("Opens the resolve dialog with the selected file");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action = new KAction( i18n("&Commit..."), "up", Key_NumberSign,
-			  this, SLOT( slotCommit() ), 
+			  this, SLOT( slotCommit() ),
 			  actionCollection(), "file_commit" );
     hint = i18n("Commits the selected files");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action = new KAction( i18n("&Add To Repository..."), Key_Plus,
-			  this, SLOT( slotAdd() ), 
+			  this, SLOT( slotAdd() ),
 			  actionCollection(), "file_add" );
     hint = i18n("Adds (cvs add) the selected files to the repository");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action = new KAction( i18n("Add &Binary..."), 0,
-			  this, SLOT( slotAddBinary() ), 
+			  this, SLOT( slotAddBinary() ),
 			  actionCollection(), "file_add_binary" );
     hint = i18n("Adds (cvs -kb add) the selected files as binaries to the repository");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action = new KAction( i18n("&Remove From Repository..."), Key_Minus,
-			  this, SLOT( slotRemove() ), 
+			  this, SLOT( slotRemove() ),
 			  actionCollection(), "file_remove" );
     hint = i18n("Removes (cvs remove) the selected files from the repository");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action = new KAction( i18n("Rever&t"), 0,
-			  this, SLOT( slotRevert() ), 
+			  this, SLOT( slotRevert() ),
 			  actionCollection(), "file_revert_local_changes" );
     hint = i18n("Reverts (cvs update -C) the selected files (only cvs 1.11)");
     action->setToolTip( hint );
@@ -230,12 +230,12 @@ void CervisiaPart::setupActions()
     // View Menu
     //
     action = new KAction( i18n("Stop"), "stop", Key_Escape,
-			  protocol, SLOT(cancelJob()), 
+			  protocol, SLOT(cancelJob()),
 			  actionCollection(), "stop_job" );
     action->setEnabled( false );
 
     action = new KAction( i18n("Browse &Log..."), CTRL+Key_L,
-			  this, SLOT(slotBrowseLog()), 
+			  this, SLOT(slotBrowseLog()),
 			  actionCollection(), "view_log" );
     hint = i18n("Shows the revision tree of the selected file");
     action->setToolTip( hint );
@@ -243,7 +243,7 @@ void CervisiaPart::setupActions()
 
 #if 0
     action = new KAction( i18n("Browse Multi-File Log..."), 0,
-			  this, SLOT(slotBrowseMultiLog()), 
+			  this, SLOT(slotBrowseMultiLog()),
 			  actionCollection() );
 #endif
     action = new KAction( i18n("&Annotate..."), CTRL+Key_A,
@@ -254,35 +254,35 @@ void CervisiaPart::setupActions()
     action->setWhatsThis( hint );
 
     action = new KAction( i18n("&Difference To Repository..."), CTRL+Key_D,
-			  this, SLOT(slotDiff()), 
+			  this, SLOT(slotDiff()),
 			  actionCollection(), "view_diff" );
     hint = i18n("Shows the differences of the selected file to the BASE version");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action = new KAction( i18n("Last &Change..."), 0,
-			  this, SLOT(slotLastChange()), 
+			  this, SLOT(slotLastChange()),
 			  actionCollection(), "view_last_change" );
     hint = i18n("Shows the differences between the last two revisions of the selected file");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action = new KAction( i18n("&History..."), 0,
-			  this, SLOT(slotHistory()), 
+			  this, SLOT(slotHistory()),
 			  actionCollection(), "view_history" );
     hint = i18n("Shows the CVS history as reported by the server");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action = new KAction( i18n("&Unfold File Tree"), 0,
-			  update, SLOT(unfoldTree()), 
+			  update, SLOT(unfoldTree()),
 			  actionCollection(), "view_unfold_tree" );
     hint = i18n("Opens all branches of the file tree");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action = new KAction( i18n("&Fold File Tree"), 0,
-			  update, SLOT(foldTree()), 
+			  update, SLOT(foldTree()),
 			  actionCollection(), "view_fold_tree" );
     hint = i18n("Closes all branches of the file tree");
     action->setToolTip( hint );
@@ -367,7 +367,7 @@ void CervisiaPart::setupActions()
     hint = i18n("Shows the editors of the selected files");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
-    
+
     action = new KAction( i18n("&Lock Files"), 0,
 			  this, SLOT(slotLock()),
 			  actionCollection(), "lock_files" );
@@ -381,7 +381,7 @@ void CervisiaPart::setupActions()
     hint = i18n("Unlocks the selected files");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
-    	  
+
     action = new KAction( i18n("Create &Patch Against Repository"), 0,
 			  this, SLOT(slotMakePatch()),
 			  actionCollection(), "make_patch" );
@@ -424,7 +424,7 @@ void CervisiaPart::setupActions()
     action->setWhatsThis( hint );
 
     action = new KToggleAction( i18n("Hide Up-&To-Date Files"), 0,
-				this, SLOT(slotHideUpToDate()), 
+				this, SLOT(slotHideUpToDate()),
 				actionCollection(), "settings_hide_uptodate" );
     hint = i18n("Determines whether up-to-date files are hidden");
     action->setToolTip( hint );
@@ -561,7 +561,7 @@ void CervisiaPart::aboutCervisia()
                           "This program is distributed in the hope that it will be useful,\n"
                           "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
                           "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."));
-    QMessageBox::about(0, i18n("About Cervisia"), 
+    QMessageBox::about(0, i18n("About Cervisia"),
 		       aboutstr.arg(CERVISIA_VERSION).arg(KDE_VERSION_STRING));
 }
 
@@ -569,7 +569,7 @@ void CervisiaPart::aboutCervisia()
 void CervisiaPart::slotOpenSandbox()
 {
     QString dirname = KFileDialog::getExistingDirectory(QDir::homeDirPath(), widget(),
-                                                        i18n("Open Sandbox")); 
+                                                        i18n("Open Sandbox"));
     if (dirname.isEmpty())
         return;
 
@@ -591,7 +591,7 @@ void CervisiaPart::slotChangeLog()
             if (l->exec())
                 changelogstr = l->message();
         }
-    
+
     delete l;
 }
 
@@ -631,16 +631,16 @@ void CervisiaPart::openFiles(const QStringList &filenames)
                             doit = true;
                             break;
                         }
-                    
+
                     cmdline += " ";
                     cmdline += KShellProcess::quote(*it);
                 }
-            
+
             if (doit)
                 if (!l.execCommand(sandbox, repository, cmdline, "edit"))
                     return;
         }
-    
+
     // Now open the files by starting a new instance of kwrite...
     KConfig *conf = config();
     conf->setGroup("Communication");
@@ -685,7 +685,7 @@ void CervisiaPart::slotStatus()
 void CervisiaPart::slotUpdateToTag()
 {
     UpdateDialog *l = new UpdateDialog(sandbox, repository, widget() );
-    
+
     if (l->exec())
         {
             QString tagopt;
@@ -773,7 +773,7 @@ void CervisiaPart::updateOrStatus(bool noact, const QString &extraopt)
     QStringList list = update->multipleSelection();
     if (list.isEmpty())
         return;
-    
+
     update->prepareJob(opt_updateRecursive,
                        noact? UpdateView::UpdateNoAct : UpdateView::Update);
 
@@ -793,7 +793,7 @@ void CervisiaPart::updateOrStatus(bool noact, const QString &extraopt)
     cmdline += extraopt;
     cmdline += joinLine(list);
     cmdline += " 2>&1";
-    
+
     if (protocol->startJob(sandbox, repository, cmdline))
         {
             showJobStart(cmdline);
@@ -809,7 +809,7 @@ void CervisiaPart::commitOrAddOrRemove(CommitDialog::ActionType action)
     QStringList list = update->multipleSelection();
     if (list.isEmpty())
         return;
-    
+
     // modal dialog
     CommitDialog *l = new CommitDialog(action, widget());
     if (action == CommitDialog::Commit)
@@ -818,7 +818,7 @@ void CervisiaPart::commitOrAddOrRemove(CommitDialog::ActionType action)
         l->setLogHistory(sandbox, repository, recentCommits);
     }
     l->setFileList(list);
-    
+
     if (l->exec())
     {
         QString cmdline;
@@ -872,7 +872,7 @@ void CervisiaPart::commitOrAddOrRemove(CommitDialog::ActionType action)
 
         cmdline += joinLine(list);
         cmdline += " 2>&1";
-            
+
         if (protocol->startJob(sandbox, repository, cmdline))
         {
             showJobStart(cmdline);
@@ -882,7 +882,7 @@ void CervisiaPart::commitOrAddOrRemove(CommitDialog::ActionType action)
                      this, SLOT(slotJobFinished(bool)) );
         }
     }
-    
+
     delete l;
 }
 
@@ -923,7 +923,7 @@ void CervisiaPart::slotAnnotate()
 {
     QString filename;
     update->getSingleSelection(&filename);
-    
+
     if (filename.isEmpty())
         return;
 
@@ -940,7 +940,7 @@ void CervisiaPart::slotDiff()
 {
     QString filename;
     update->getSingleSelection(&filename);
-    
+
     if (filename.isEmpty())
         return;
 
@@ -981,7 +981,7 @@ void CervisiaPart::addOrRemoveWatch(WatchDialog::ActionType action)
                 cmdline += "add ";
             else
                 cmdline += "remove ";
-            
+
             WatchDialog::Events events = l->events();
             if (events != WatchDialog::All)
                 {
@@ -992,16 +992,16 @@ void CervisiaPart::addOrRemoveWatch(WatchDialog::ActionType action)
                     if (events & WatchDialog::Unedits)
                         cmdline += "-a unedit ";
                 }
-            
+
             cmdline += joinLine(list);
-                    
+
             if (protocol->startJob(sandbox, repository, cmdline))
                 {
                     showJobStart(cmdline);
                     connect( protocol, SIGNAL(jobFinished(bool)), this, SLOT(slotJobFinished(bool)) );
                 }
         }
-        
+
     delete l;
 }
 
@@ -1015,7 +1015,7 @@ void CervisiaPart::slotShowWatchers()
     QString cmdline = cvsClient(repository);
     cmdline += " watchers ";
     cmdline += joinLine(list);
-                    
+
     if (protocol->startJob(sandbox, repository, cmdline))
         {
             showJobStart(cmdline);
@@ -1033,7 +1033,7 @@ void CervisiaPart::slotEdit()
     QString cmdline = cvsClient(repository);
     cmdline += " edit ";
     cmdline += joinLine(list);
-                    
+
     if (protocol->startJob(sandbox, repository, cmdline))
         {
             showJobStart(cmdline);
@@ -1052,7 +1052,7 @@ void CervisiaPart::slotUnedit()
     cmdline += cvsClient(repository);
     cmdline += " unedit ";
     cmdline += joinLine(list);
-                    
+
     if (protocol->startJob(sandbox, repository, cmdline))
         {
             showJobStart(cmdline);
@@ -1070,7 +1070,7 @@ void CervisiaPart::slotLock()
     QString cmdline = cvsClient(repository);
     cmdline += " admin -l ";
     cmdline += joinLine(list);
-                    
+
     if (protocol->startJob(sandbox, repository, cmdline))
         {
             showJobStart(cmdline);
@@ -1088,7 +1088,7 @@ void CervisiaPart::slotUnlock()
     QString cmdline = cvsClient(repository);
     cmdline += " admin -u ";
     cmdline += joinLine(list);
-                    
+
     if (protocol->startJob(sandbox, repository, cmdline))
         {
             showJobStart(cmdline);
@@ -1106,7 +1106,7 @@ void CervisiaPart::slotShowEditors()
     QString cmdline = cvsClient(repository);
     cmdline += " editors ";
     cmdline += joinLine(list);
-                    
+
     if (protocol->startJob(sandbox, repository, cmdline))
         {
             showJobStart(cmdline);
@@ -1195,14 +1195,14 @@ void CervisiaPart::importOrCheckout(CheckoutDialog::ActionType action)
                     cmdline += " ";
                     cmdline += l->releaseTag();
                 }
-            
+
             if (protocol->startJob(sandbox, repository, cmdline))
                 {
                     showJobStart(cmdline);
                     connect( protocol, SIGNAL(jobFinished(bool)), this, SLOT(slotJobFinished(bool)) );
                 }
         }
-        
+
     delete l;
 }
 
@@ -1247,14 +1247,14 @@ void CervisiaPart::createOrDeleteTag(TagDialog::ActionType action)
             cmdline += l->tag();
             cmdline += " ";
             cmdline += joinLine(list);
-                    
+
             if (protocol->startJob(sandbox, repository, cmdline))
                 {
                     showJobStart(cmdline);
                     connect( protocol, SIGNAL(jobFinished(bool)), this, SLOT(slotJobFinished(bool)) );
                 }
         }
-        
+
     delete l;
 }
 
@@ -1266,7 +1266,7 @@ void CervisiaPart::slotLastChange()
     update->getSingleSelection(&filename, &revA);
     if (filename.isEmpty())
         return;
-    
+
     int pos, lastnumber;
     bool ok;
     if ( (pos = revA.findRev('.')) == -1
@@ -1360,8 +1360,8 @@ void CervisiaPart::slotConfigure()
     l->exec();
 
     conf->setGroup("LookAndFeel");
-    bool splitHorz = conf->readBoolEntry("SplitHorizontally");
-    splitter->setOrientation(splitHorz? QSplitter::Horizontal : QSplitter::Vertical);
+    bool splitHorz = conf->readBoolEntry("SplitHorizontally",true);
+    splitter->setOrientation(splitHorz? QSplitter::Vertical :QSplitter::Horizontal);
 }
 
 void CervisiaPart::slotHelp()
@@ -1420,13 +1420,13 @@ void CervisiaPart::openSandbox(const QString &dirname)
     repository = "";
 
     QFile f(sandbox + "/CVS/Root");
-    if (f.open(IO_ReadOnly)) 
+    if (f.open(IO_ReadOnly))
     {
         QTextStream t(&f);
         repository = t.readLine();
     }
     f.close();
-    
+
 
     emit setWindowCaption(sandbox + "(" + repository + ")");
     QDir::setCurrent(sandbox);
@@ -1459,7 +1459,7 @@ void CervisiaPart::setFilter()
     if (opt_hideRemoved)
         filter = UpdateView::Filter(filter | UpdateView::NoRemoved);
     update->setFilter(filter);
-   
+
     QString str;
     if (opt_hideFiles)
         str = "F";
@@ -1470,7 +1470,7 @@ void CervisiaPart::setFilter()
             if (opt_hideRemoved)
                 str += "R";
         }
-    
+
     // TODO: Find a new way to handle the status items as you can't do this with KParts yet
     //    filterLabel->setText(str);
 }
@@ -1486,7 +1486,7 @@ void CervisiaPart::parseStatus(QString pathname, QStrList list)
     enum { Begin, File, FileSep, WorkRev, FinalSep } state;
 
     QString line = joinLine(list);
-    
+
     command = "cd ";
     command += pathname;
     command += " && " + cvsClient(repository) + " status -l ";

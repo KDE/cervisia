@@ -46,7 +46,7 @@ CervisiaShell::~CervisiaShell()
 void CervisiaShell::setupActions()
 {
     KAction *action = new KAction( i18n("O&pen Sandbox..."), "fileopen", 0,
-				   this, SLOT( slotOpenSandbox() ), 
+				   this, SLOT( slotOpenSandbox() ),
 				   actionCollection(), "file_open" );
     QString hint = i18n("Opens a CVS working directory in the main window");
     action->setToolTip( hint );
@@ -71,7 +71,7 @@ void CervisiaShell::setupActions()
 void CervisiaShell::slotOpenSandbox()
 {
     QString dirname = KFileDialog::getExistingDirectory(QDir::homeDirPath(), this,
-                                                        i18n("Open Sandbox")); 
+                                                        i18n("Open Sandbox"));
     if (dirname.isEmpty())
         return;
 
@@ -107,8 +107,8 @@ void CervisiaShell::slotExit()
 
 bool CervisiaShell::queryExit()
 {
-    KConfig *config = kapp->config();
-    
+    KConfig *config = part->config();
+
     recent->saveEntries( config );
 
     config->setGroup("Main window");
@@ -140,7 +140,7 @@ void CervisiaShell::saveProperties(KConfig *config)
 
 void CervisiaShell::restorePseudo( const QString &dirname )
 {
-    KConfig *config = kapp->config();
+    KConfig *config = part->config();
 
     recent->loadEntries( config );
 

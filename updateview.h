@@ -76,7 +76,7 @@ private:
     QString dirname;
     Filter filt;
     Action act;
-    QList<ListViewItem> relevantSelection;
+    QPtrList<ListViewItem> relevantSelection;
 };
 
 #endif

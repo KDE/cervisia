@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2001 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
@@ -37,7 +37,7 @@ public:
     bool inverted;
     int no;
 };
-    
+
 
 int DiffViewItemList::compareItems(QCollection::Item item1, QCollection::Item item2)
 {
@@ -132,7 +132,7 @@ void DiffView::insertAtOffset(const QString &line, DiffType type, int offset)
     item->inverted = false;
     items.insert(offset, item);
     setNumRows(numRows()+1);
-}    
+}
 
 
 void DiffView::setCenterOffset(int offset)
@@ -156,10 +156,10 @@ void DiffView::addLine(const QString &line, DiffType type, int no)
     QString str = line;
     while ((pos = str.find('\t')) != -1)
         str.replace((uint)pos, 1, spaces);
-    
+
     QFontMetrics fm(font());
     textwidth = QMAX(textwidth, fm.width(line));
-    
+
     DiffViewItem *item = new DiffViewItem;
     item->line = str;
     item->type = type;
@@ -230,8 +230,8 @@ QString DiffView::stringAtLine(int lineno)
 QByteArray DiffView::compressedContent()
 {
     QByteArray res(items.count());
-    
-    QListIterator<DiffViewItem> it(items);
+
+    QPtrListIterator<DiffViewItem> it(items);
     int i=0;
     for (; it.current(); ++it)
         {
@@ -264,7 +264,7 @@ int DiffView::cellWidth(int col)
                               fm.width("Insert")),
                         fm.width("Change"))+2*BORDER;
         }
-    else 
+    else
 	{
 	    int rest = (linenos || marker)? cellWidth(0) : 0;
 	    if (linenos && marker)
@@ -325,7 +325,7 @@ void DiffView::paintCell(QPainter *p, int row, int col)
 	    align = AlignRight;
 	    innerborder = BORDER;
 	    str = (item->type==Change)? "Change"
-		: (item->type==Insert)? "Insert" 
+		: (item->type==Insert)? "Insert"
 		: (item->type==Delete)? "Delete" : "";
 	}
     else
@@ -354,7 +354,7 @@ void DiffView::paintCell(QPainter *p, int row, int col)
     p->fillRect(0, 0, width, height, backgroundColor);
     p->drawText(innerborder, 0, width-2*innerborder, height, align, str);
     p->setFont(oldFont);
-}    
+}
 
 
 void DiffView::wheelEvent(QWheelEvent *e)
@@ -404,14 +404,14 @@ void DiffZoomWidget::paintEvent(QPaintEvent *)
     const QScrollBar *bar = diffview->scrollBar();
     if (!bar)
         return;
-    
+
     int sliderMin, sliderMax, sliderLength, dummy;
     if (bar->isVisible())
         {
 #if QT_VERSION < 300
             style().scrollBarMetrics(bar, sliderMin, sliderMax, sliderLength, dummy);
 #else
-#warning "// XXX: How do I do this with Qt 3? Help!"	    
+#warning "// XXX: How do I do this with Qt 3? Help!"
 #endif
         }
     else
@@ -420,9 +420,9 @@ void DiffZoomWidget::paintEvent(QPaintEvent *)
             sliderMax = height();
             sliderLength = 0;
         }
-    
+
     QByteArray str = diffview->compressedContent();
-    
+
     QPixmap pixbuf(size());
     QPainter p(&pixbuf, this);
     p.fillRect(0, 0, pixbuf.width(), pixbuf.height(), colorGroup().background());
@@ -444,7 +444,7 @@ void DiffZoomWidget::paintEvent(QPaintEvent *)
                               : (c=='I')? QColor(190, 190, 237)
                               : (c=='D')? QColor(190, 237, 190)
                               : (c=='N')? gray : white;
-			    
+
                             if (y2 == y1)
                                 y2++;
                             p.fillRect(0, sliderMin+y1, pixbuf.width(), y2-y1, QBrush(color));

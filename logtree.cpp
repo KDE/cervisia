@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2001 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
@@ -75,7 +75,7 @@ LogTreeView::LogTreeView(QWidget *parent, const char *name)
     setBackgroundMode(PaletteBase);
     setMouseTracking(true);
     setFocusPolicy(ClickFocus);
-    
+
     setCellWidth(0);
     setCellHeight(0);
 
@@ -135,11 +135,11 @@ void LogTreeView::addRevision(const QString &rev, const QString &author, const Q
             items.append(item);
             return;
         }
-    
+
     // look whether we have revisions on this branch
     // shift them up
     int row=-1, col=-1;
-    QListIterator<LogTreeItem> it(items);
+    QPtrListIterator<LogTreeItem> it(items);
     for (; it.current(); ++it)
         {
             if (branchrev == (it.current()->rev).left(branchrev.length()))
@@ -151,7 +151,7 @@ void LogTreeView::addRevision(const QString &rev, const QString &author, const Q
                     // Are we at the top of the widget?
                     if (row == 0)
                         {
-                            QListIterator<LogTreeItem> it2(items);
+                            QPtrListIterator<LogTreeItem> it2(items);
                             for (; it2.current(); ++it2)
                                 it2.current()->row++;
                             setNumRows(numRows()+1);
@@ -164,13 +164,13 @@ void LogTreeView::addRevision(const QString &rev, const QString &author, const Q
         {
             // Ok, so we must open a new branch
             // Let's find the branch point
-            QListIterator<LogTreeItem> it3(items);
+            QPtrListIterator<LogTreeItem> it3(items);
             for (it3.toLast(); it3.current(); --it3)
                 {
                     if (branchpoint == it3.current()->rev)
                         {
                             // Move existing branches to the right
-                            QListIterator<LogTreeItem> it4(items);
+                            QPtrListIterator<LogTreeItem> it4(items);
                             for (; it4.current(); ++it4)
                                 if (it4.current()->col > it3.current()->col)
                                     {
@@ -181,7 +181,7 @@ void LogTreeView::addRevision(const QString &rev, const QString &author, const Q
                             col = it3.current()->col+1;
                             if (row == -1)
                                 {
-                                    QListIterator<LogTreeItem> it5(items);
+                                    QPtrListIterator<LogTreeItem> it5(items);
                                     for (; it5.current(); ++it5)
                                         it5.current()->row++;
                                     setNumRows(numRows()+1);
@@ -209,7 +209,7 @@ void LogTreeView::addRevision(const QString &rev, const QString &author, const Q
 #if 0
     cout << "Dump: " << endl;
     cout << "Rows: " << numRows() << "Cols: " << numCols() << endl;
-    QListIterator<LogTreeItem> it5(items);
+    QPtrListIterator<LogTreeItem> it5(items);
     for (; it5.current(); ++it5)
 	{
 	    cout << "Rev: "<< it5.current()->rev << endl;
@@ -218,18 +218,18 @@ void LogTreeView::addRevision(const QString &rev, const QString &author, const Q
 	}
     cout << "End Dump" << endl;
 #endif
-    
+
 }
 
 
 void LogTreeView::collectConnections()
 {
-    QListIterator<LogTreeItem> it(items);
+    QPtrListIterator<LogTreeItem> it(items);
     for (; it.current(); ++it)
 	{
             QString rev = it.current()->rev;
-            
-            QListIterator<LogTreeItem> it2(items);
+
+            QPtrListIterator<LogTreeItem> it2(items);
             for (it2=it,++it2; it2.current(); ++it2)
                 if (it2.current()->branchpoint == rev &&
                     it2.current()->firstonbranch)
@@ -245,7 +245,7 @@ void LogTreeView::collectConnections()
 
 void LogTreeView::setSelectedPair(QString selectionA, QString selectionB)
 {
-    QListIterator<LogTreeItem> it(items);
+    QPtrListIterator<LogTreeItem> it(items);
     for(; it.current(); ++it)
 	{
             bool oldstate = it.current()->selected;
@@ -280,8 +280,8 @@ void LogTreeView::paintCell(QPainter *p, int row, int col)
     branched = false;
     followed = false;
     item = 0;
-    
-    QListIterator<LogTreeItem> it(items);
+
+    QPtrListIterator<LogTreeItem> it(items);
     for(; it.current(); ++it)
         {
             int itcol = it.current()->col;
@@ -291,7 +291,7 @@ void LogTreeView::paintCell(QPainter *p, int row, int col)
             if (itrow == row && itcol == col)
                 item = it.current();
         }
-    QListIterator<LogTreeConnection> it2(connections);
+    QPtrListIterator<LogTreeConnection> it2(connections);
     for (; it2.current(); ++it2)
         {
             int itcol1 = it2.current()->start->col;
@@ -323,42 +323,42 @@ void LogTreeView::paintConnector(QPainter *p,
 }
 
 
-void LogTreeView::paintRevisionCell(QPainter *p, 
+void LogTreeView::paintRevisionCell(QPainter *p,
                                     int row, int col,
                                     QString line1, QString line2, QString line3,
                                     bool followed, bool branched, bool selected)
 {
     QFontMetrics fm(p->fontMetrics());
-    
+
     QSize r1 = fm.size(AlignCenter, line1);
     QSize r2 = fm.size(AlignCenter, line2);
     QSize r3 = fm.size(AlignCenter, line3);
-    
+
     int boxwidth, boxheight;
     boxwidth = QMAX(static_width-2*BORDER, QMAX(r1.width(), r3.width()));
     boxheight = r1.height() + r3.height() + 3*INSPACE;
-    
+
     if (!line2.isEmpty())
         {
             boxwidth = QMAX(boxwidth, r2.width());
             boxheight += r2.height() + INSPACE;
         }
     boxwidth += 2*INSPACE;
-    
+
     int x = (colWidths[col] - boxwidth) / 2;
     int midx = colWidths[col] / 2;
     int y = (rowHeights[row] - boxheight) / 2;
     int midy = rowHeights[row] / 2;
-    
+
     // Connectors
     if (followed)
         p->drawLine(midx, 0, midx, y);
-    
+
     if (branched)
         p->drawLine(midx + boxwidth / 2, midy, colWidths[col], midy);
-    
+
     p->drawLine(midx, y + boxheight, midx, rowHeights[row]);
-    
+
     // The box itself
     if (selected)
         {
@@ -384,26 +384,26 @@ void LogTreeView::paintRevisionCell(QPainter *p,
         {
             p->drawRoundRect(x, y, boxwidth, boxheight, 10, 10);
         }
-    
+
     x += INSPACE;
     y += INSPACE;
     boxwidth -= 2*INSPACE;
-    
+
     p->drawText(x, y, boxwidth, boxheight, AlignHCenter, line1);
     y += r1.height() + INSPACE;
-    
+
     if (!line2.isEmpty())
         {
             QFont font(p->font());
             QFont underline(font);
-            
+
             underline.setUnderline(true);
             p->setFont(underline);
             p->drawText(x, y, boxwidth, boxheight, AlignHCenter, line2);
             p->setFont(font);
             y += r2.height() + INSPACE;
         }
-    
+
     p->drawText(x, y, boxwidth, boxheight, AlignHCenter, line3);
 }
 
@@ -415,8 +415,8 @@ void LogTreeView::mousePressEvent(QMouseEvent *e)
 	{
 	    int row = findRow( e->pos().y() );
 	    int col = findCol( e->pos().x() );
-            
-	    QListIterator<LogTreeItem> it(items);
+
+	    QPtrListIterator<LogTreeItem> it(items);
 	    for(; it.current(); ++it)
 		if (it.current()->row == row
 		    && it.current()->col == col)
@@ -446,14 +446,14 @@ bool LogTreeView::eventFilter(QObject *o, QEvent *e)
 
     LogTreeItem *item = 0;
 
-    QListIterator<LogTreeItem> it(items);
+    QPtrListIterator<LogTreeItem> it(items);
     for(; it.current(); ++it)
         if (it.current()->row == row && it.current()->col == col)
             {
                 item = static_cast<LogTreeItem*>(it.current());
                 break;
             }
-    
+
     if (!currentLabel && item)
         {
             if (true)
@@ -494,7 +494,7 @@ bool LogTreeView::eventFilter(QObject *o, QEvent *e)
                     currentCol = col;
                 }
         }
-    
+
     return QTableView::eventFilter(o, e);
 }
 
@@ -506,11 +506,11 @@ void LogTreeView::recomputeCellSizes ()
     colWidths.fill(v, numCols());
     v = static_height;
     rowHeights.fill(v, numRows());
-    
+
     QFontMetrics fm(fontMetrics());
 
     // Compute maximum for each column and row
-    QListIterator<LogTreeItem> it(items);
+    QPtrListIterator<LogTreeItem> it(items);
     for (; it.current(); ++it)
         {
             LogTreeItem *item = it.current();
@@ -518,21 +518,21 @@ void LogTreeView::recomputeCellSizes ()
             QSize r1 = fm.size(AlignCenter, item->rev);
             QSize r2 = fm.size(AlignCenter, item->taglist);
             QSize r3 = fm.size(AlignCenter, item->author);
-            
+
             int boxwidth = QMAX(r1.width(), r3.width());
             int boxheight = r1.height() + r3.height() + 3*INSPACE;
-            
+
             if (!item->taglist.isEmpty())
                 {
                     boxwidth = QMAX(boxwidth, r2.width());
                     boxheight += r2.height() + INSPACE;
                 }
             boxwidth += 2*INSPACE;
-            
+
             colWidths[item->col] = QMAX(colWidths[item->col], boxwidth + 2*BORDER);
             rowHeights[item->row] = QMAX(rowHeights[item->row], boxheight + 2*BORDER);
 	}
-    
+
     setAutoUpdate(true);
     updateTableSize();
     update();
@@ -543,7 +543,7 @@ int LogTreeView::cellWidth(int col)
 {
     if (col < 0 || col >= (int)colWidths.size())
         return 0;
-    
+
     return colWidths[col];
 }
 
@@ -552,7 +552,7 @@ int LogTreeView::cellHeight(int row)
 {
     if (row < 0 || row >= (int)rowHeights.size())
         return 0;
-    
+
     return rowHeights[row];
 }
 
