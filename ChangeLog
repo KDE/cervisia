@@ -3,6 +3,9 @@
 	* Removed the editor option from the settings dialog. We
 	  use KRun now to start the preferred editor for the given
 	  mime-type.
+	* Fix BR #53815: Prevent the user from changing the directory
+	  with konqueror's tree view while there is a job running
+	  in the protocol view.
 
 2003-08-28  Christian Loose  <christian.loose@hamburg.de>
 
@@ -26,7 +29,7 @@
 
 	* Fix/Implement FR 56042:
 
-	  Use the configured colors as foreground colors in the file AND 
+	  Use the configured colors as foreground colors in the file AND
 	  protocol view and a bold font to improve readability of the text
 	  for modified, added and removed files.
 
@@ -44,7 +47,7 @@
 2003-07-16  Christian Loose  <christian.loose@hamburg.de>
 
 	* Added new view variant for cvs' log output to the log dialog.
-	   This view shows the data in a format that is very similar to 
+	   This view shows the data in a format that is very similar to
 	   the format of the command-line output of cvs log.
 
 2003-07-09  Christian Loose  <christian.loose@hamburg.de>
@@ -60,7 +63,7 @@
 
 2003-07-04  Christian Loose  <christian.loose@hamburg.de>
 
-	* Implement BR #60604: It's now possible to select 
+	* Implement BR #60604: It's now possible to select
 	   revision B in Log dialog with Ctrl key + left mouse button in
 	   addition to the middle mouse button.
 
@@ -78,8 +81,8 @@
 
 2003-06-19  André Wöbbeking  <Woebbeking@web.de>
 
-	* Fix BR 59275 (DiffZoomWidget): 
-	  o Use QStyle::querySubControlMetrics() to get the exact 
+	* Fix BR 59275 (DiffZoomWidget):
+	  o Use QStyle::querySubControlMetrics() to get the exact
 	    geometry of the scroll bar groove.
 	  o Better performance for big files.
 
@@ -128,14 +131,14 @@
 
 2003-05-10  André Wöbbeking  <Woebbeking@web.de>
 
-	* Fix BR 50918: 
+	* Fix BR 50918:
 	  o Added possibility to diff a selected file against the
 	    newest version in the repository (cvs diff -r HEAD).
 	  o Now External and internal diff show the same differences.
 
 2003-05-09  Christian Loose  <christian.loose@hamburg.de>
 
-	* Use DCOP service for commit action 
+	* Use DCOP service for commit action
 	  (CervisiaPart::slotCommit())
 	* Convert CervisiaPart::updateActions() from manually
 	  changing the state of the menu items to using
@@ -144,7 +147,7 @@
 
 2003-05-05  André Wöbbeking  <Woebbeking@web.de>
 
-	* Diff between any revision and the sandbox (only select 
+	* Diff between any revision and the sandbox (only select
 	  revision A in the log dialog).
 
 2003-04-18  Christian Loose  <christian.loose@hamburg.de>
@@ -190,7 +193,7 @@
 	* Bug 54106: Display error message when user tries to
 	  access a remote repository
 	* Improved size handling for Commit dialog, History dialog,
-	  Resolve dialog and Resolve edit dialog 
+	  Resolve dialog and Resolve edit dialog
 	* Removed code duplication in Commit dialog when
 	  displaying the Diff dialog
 
@@ -203,7 +206,7 @@
 	* Remove CervisiaShell's dependency on CervisiaPart
 	* Moved filter status indicator to CervisiaPart
 	* Improve dialog size handling for ChangeLog dialog
-	  (use new KDialogBase methods to save the size into 
+	  (use new KDialogBase methods to save the size into
 	  CervisiaPart's configuration file)
 
 2003-02-06  Christian Loose  <christian.loose@hamburg.de>
@@ -322,7 +325,7 @@
 	* Change working copy directory in DCOP service
 	* Use DCOP service for annotate dialog
 	* Several changes to the DCOP service
-	* Added new parseCvsLog() method to LogDialog that 
+	* Added new parseCvsLog() method to LogDialog that
 	  uses the new cvs DCOP service
 	* Save and read cvs client and global compression level configuration
 	  to/from the configuration file of the cvs DCOP service
@@ -368,8 +371,8 @@
 
 2002-12-14  André Wöbbeking <Woebbeking@web.de>
 
-	* ProtocolView::appendLine(): removed trailing <br> 
-	  as QTextEdit::append() already adds a new paragraph. 
+	* ProtocolView::appendLine(): removed trailing <br>
+	  as QTextEdit::append() already adds a new paragraph.
 	  Detect "U " as remote changed file.
 
 2002-12-12  Christian Loose <christian.loose@hamburg.de>
@@ -491,7 +494,7 @@
 2002-04-03  Bernd Gehrmann  <bernd@mail.berlios.de>
 
 	* Release 1.5rich
-	
+
 2002-02-04  Bernd Gehrmann  <bernd@mail.berlios.de>
 
 	* Colored ProtocolView output
@@ -516,8 +519,8 @@
 	cvs add Makefile.am README TODO .cvsignore ChangeLog LICENSE.QPL \
 	        cervisia.lsm *.cpp *.h *.rc
 	========================================
-	
-	
+
+
 2001-09-01  Richard Moore  <rich@kde.org>
 
 	* Added support for KDE/Qt 3. At the moment I've just made the
@@ -530,7 +533,7 @@
 	* Added a kdoc build target to Makefile.am so we can generate some
 	api documentation
 	* Imported to kdesdk CVS module
-	
+
 2001-07-05  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
 
 	* Added missing icons to doc/common directory
@@ -539,11 +542,11 @@
 
 	* Converted to KParts
 	* Created a standalone shell app that embeds the part
-	* Converted Makefile to use METASOURCES = AUTO 
+	* Converted Makefile to use METASOURCES = AUTO
 
 2001-06-23  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
 
-	* Avoid making NotInCVS files up-to-date 
+	* Avoid making NotInCVS files up-to-date
 	* Don't show attic directories
 	* DEBUGOUT -> kdDebug()
 
@@ -607,7 +610,7 @@
 
 2001-03-18  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
 
-	* Copied and cleaned up the << and >> button stuff from resolve 
+	* Copied and cleaned up the << and >> button stuff from resolve
 	  dialog to the diff dialog. Now it is possible to jump between
 	  differences by these buttons. Based on ideas and
 	  code by Francois Biot <francois.biot@sabre.com>.
@@ -630,12 +633,12 @@
 	* Patch by Wynn Wilkes: Allow to open the editor
 	  with multiple files
 	* Made tab width in diff view customizable
-	* Fix in doc/Makefile.am for Solaris. 
+	* Fix in doc/Makefile.am for Solaris.
 	  Thanks to Timo Ruottinen <Timo.Ruottinen@iki.fi>
 	* Some cleanups wrt constness
 
 2001-03-02  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
-	* Patch by  Cosmin Smeu <cosmin@cosmin.com>: 
+	* Patch by  Cosmin Smeu <cosmin@cosmin.com>:
 	  In diff view, replace tabs by spaces
 
 2001-02-17  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
@@ -730,7 +733,7 @@
 
 	* Put sort column indicators in all list views
 	* New Bonsai-like blame annotation view
-	* Reduced free space in log tree, cleaned up the calculation 
+	* Reduced free space in log tree, cleaned up the calculation
 	* Tool tips in log tree contain revision, author and date now
 	  and use Qt's richtext engine; improved positioning
 	* Session-save configuration (order and sort direction) of log list
@@ -775,7 +778,7 @@
 	  - In the log dialog, use multi line edits instead of labels
 	  - In the linear log list, additional column with branch
 	* Korean translation by Yu-Chan, Park <super@susekorea.net>
-	* Patch by Wynn Wilkes <wynnw@calderasystems.com>: 
+	* Patch by Wynn Wilkes <wynnw@calderasystems.com>:
 	  Making path to the cvs client configurable
 	* Some cleanup in function argument list order; don't
 	  let dialogs include toplevel.h, instead turned
@@ -802,7 +805,7 @@
 	* Bug fixes for broken diff dialog in KDE 1 version:
 	  + Do not create modeless dialogs with parent
 	  + Create combo box in commit dialog with minimal size
-	* Bug fix in log tree: tool tips showed revisions 
+	* Bug fix in log tree: tool tips showed revisions
 	  appearing on several branches with the same root
 	* Let cvs ignore ~/.cvsrc file when diffing, as that
 	  may lead to conflicting options
@@ -825,7 +828,7 @@
 
 2000-11-11  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
 
-	* Made some fonts and the orientation of the main 
+	* Made some fonts and the orientation of the main
 	  window splitter configurable
 	* Fixed log tree for nested branches
 
@@ -858,16 +861,16 @@
 	  an interface for loading files
 
 2000-10-17  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
-	
+
 	* Ignore empty lines in output of cvs checkout -c
 	  Patch by Jan Borsodi <jb@ez.no>
 	* Added /usr/local/include and /usr/local/lib
 	  to autoconf-checked directories
-	
+
 2000-10-01  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
 
 	* Protect file names with whitespace in them
-	  Based on a patch by Jeff Cody <jcody@logikos.com> 
+	  Based on a patch by Jeff Cody <jcody@logikos.com>
 	* Allow it to execute a File->Status
 	  automatically when a sandbox is opened. Separate
 	  options for local and remote repositories
@@ -888,7 +891,7 @@
 	* In directory listing, separate directories from files
 	* Display sticky date tags in a more friendly way
 	* Adjust columns widths in main view dynamically
-	* Set focus explicitly in TagDialog, UpdateDialog 
+	* Set focus explicitly in TagDialog, UpdateDialog
           and HistoryDialog whenever radio buttons change
 	* Set initial focus in some dialogs
 	* Added more accelerators in CheckoutDialog
@@ -989,7 +992,7 @@
 
 2000-04-09  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
 
-	* New quoting mechanism which is reliable also when 
+	* New quoting mechanism which is reliable also when
 	  log messages/file names contain $ or '
 	  Thanks for the hint, Walter!
 
@@ -1056,20 +1059,20 @@
 
 2000-02-14  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
 
-	* Implemented options "Commit recursively" and 
+	* Implemented options "Commit recursively" and
 	  "Create directories"
 	* Ported Checkout/Import dialog to the new scheme
 
 2000-02-13  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
 
-	* Rewritten the whole UpdateView (well, almost :-). Now it allows 
-	  to show and update the revision and tag field. 
+	* Rewritten the whole UpdateView (well, almost :-). Now it allows
+	  to show and update the revision and tag field.
 	* Real support for asynchronous operation of Update, Commit, Add
 	  and remove: output goes to new ProtocolView
 	* Fixed "Unfold Tree"
-	* Fixed crash caused by too many open files 
+	* Fixed crash caused by too many open files
 	  (.cvsignore files were never closed)
-	
+
 
 2000-02-08  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
 
@@ -1080,7 +1083,7 @@
 
 	* Updated autoconf framework to work correctly
 	  with both KDE 1 and KDE 2
-	
+
 1999-12-19  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
 
 	* In Checkout dialog, use $CVSROOT as default repository
@@ -1112,19 +1115,19 @@
 	* Settings dialog
 	* Context menu
 	* Doubleclick opens file
-	* 'Open Sandbox' 
+	* 'Open Sandbox'
 
 1999-09-22  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
 
-	* KDE2 is really a moving target => more porting: 
+	* KDE2 is really a moving target => more porting:
 	  replaced KQuickHelp by QWhatsThis,
 	  #defined Icon BarIcon
 	* Made editor configurable
-	
+
 1999-08-07  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
 
 	* Spinning gear for SubProcDialog and CvsProgressDialog
-	* Reorganized the whole 'mark updated' code. As 
+	* Reorganized the whole 'mark updated' code. As
 	  a side effect, there is no more confusion about
 	  bogus 'Up to date' files
 	* Save/load options
@@ -1142,7 +1145,7 @@
 1999-08-03  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
 
 	* Implemented recursive update
-	
+
 1999-08-02  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
 
 	* Changed update, diff and annotate to use
@@ -1153,8 +1156,8 @@
 
 1999-08-01  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
 
-	* Implemented CvsProgressDialog which will show error 
-	  messages for things like 'update' and allow the user 
+	* Implemented CvsProgressDialog which will show error
+	  messages for things like 'update' and allow the user
 	  to interrupt the operation if cvs hangs.
 	  It's _very_ smart :-)
 
@@ -1178,12 +1181,12 @@
 
 1999-07-17  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
 
-	* Another trial in the "Startup in non-CVS directories" 
+	* Another trial in the "Startup in non-CVS directories"
           game
 	* Layout corrections in Checkout dialog
-	* Mark selections in LogTreeView, 
+	* Mark selections in LogTreeView,
 	  synchronized with LogListView
-	
+
 1999-07-15  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
 
 	* Gave up on learning docbook. Some documentation
@@ -1191,7 +1194,7 @@
 
 1999-06-01  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
 
-	* Option -askdir 
+	* Option -askdir
 	* Update status field for 'up to date' files
 	* Release 0.0.2
 
@@ -1203,7 +1206,7 @@
 
 	* Fixed 'cvs commit' command
 	* Preparations for i18n
-	
+
 1999-05-11  Bernd Gehrmann  <bernd@physik.hu-berlin.de>
 
 	* Release 0.0.1

@@ -177,11 +177,23 @@ KConfig *CervisiaPart::config()
 bool CervisiaPart::openURL( const KURL &u )
 {
     // right now, we are unfortunately not network-aware
-    // FIXME: find better error message text!
-    if (u.protocol() != "file")
+    if( !u.isLocalFile() )
+    {
         KMessageBox::sorry(widget(),
-                           i18n("Cervisia does not support remote repositories."),
+                           i18n("Remote CVS working directories are not "
+                                "supported."),
                            "Cervisia");
+        return false;
+    }
+
+    if( hasRunningJob )
+    {
+        KMessageBox::sorry(widget(),
+                           i18n("You can not change to a different directory "
+                                "while there is a running cvs job."),
+                           "Cervisia");
+        return false;
+    }
 
     return openSandbox( u.path() );
 }
