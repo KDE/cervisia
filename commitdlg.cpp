@@ -78,7 +78,7 @@ CommitDialog::CommitDialog(ActionType action, QWidget *parent, const char *name)
 
     if (action == Remove)    
         {
-            QBoxLayout *warningLayout = new QHBoxLayout(this);
+            QBoxLayout *warningLayout = new QHBoxLayout;
 
             QLabel *warningIcon = new QLabel(this);
             KIconLoader *loader = kapp->iconLoader();
