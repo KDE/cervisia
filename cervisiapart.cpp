@@ -142,7 +142,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     filterLabel->setFixedSize(filterLabel->sizeHint());
     filterLabel->setText("");
     QToolTip::add(filterLabel,
-                  i18n("F - All files are hidden, the tree shows only directories\n"
+                  i18n("F - All files are hidden, the tree shows only folders\n"
                        "N - All up-to-date files are hidden\n"
                        "R - All removed files are hidden"));
     statusBar->addStatusBarItem(filterLabel, 0, true);
@@ -181,7 +181,7 @@ bool CervisiaPart::openURL( const KURL &u )
     if( !u.isLocalFile() )
     {
         KMessageBox::sorry(widget(),
-                           i18n("Remote CVS working directories are not "
+                           i18n("Remote CVS working folders are not "
                                 "supported."),
                            "Cervisia");
         return false;
@@ -190,7 +190,7 @@ bool CervisiaPart::openURL( const KURL &u )
     if( hasRunningJob )
     {
         KMessageBox::sorry(widget(),
-                           i18n("You can not change to a different directory "
+                           i18n("You can not change to a different folder "
                                 "while there is a running cvs job."),
                            "Cervisia");
         return false;
@@ -212,7 +212,7 @@ void CervisiaPart::setupActions()
     action = new KAction( i18n("O&pen Sandbox..."), "fileopen", 0,
                           this, SLOT( slotOpenSandbox() ),
                           actionCollection(), "file_open" );
-    hint = i18n("Opens a CVS working directory in the main window");
+    hint = i18n("Opens a CVS working folder in the main window");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
@@ -223,21 +223,21 @@ void CervisiaPart::setupActions()
     action = new KAction( i18n("&Insert ChangeLog Entry..."), 0,
                           this, SLOT( slotChangeLog() ),
                           actionCollection(), "insert_changelog_entry" );
-    hint = i18n("Inserts a new intro into the file ChangeLog in the toplevel directory");
+    hint = i18n("Inserts a new intro into the file ChangeLog in the toplevel folder");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action = new KAction( i18n("&Update"), "down", CTRL+Key_U,
                           this, SLOT( slotUpdate() ),
                           actionCollection(), "file_update" );
-    hint = i18n("Updates (cvs update) the selected files and directories");
+    hint = i18n("Updates (cvs update) the selected files and folders");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action = new KAction( i18n("&Status"), Key_F5,
                           this, SLOT( slotStatus() ),
                           actionCollection(), "file_status" );
-    hint = i18n("Updates the status (cvs -n update) of the selected files and directories");
+    hint = i18n("Updates the status (cvs -n update) of the selected files and folders");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
@@ -495,7 +495,7 @@ void CervisiaPart::setupActions()
     action = new KToggleAction( i18n("Hide All &Files"), 0,
                                 this, SLOT(slotHideFiles()),
                                 actionCollection(), "settings_hide_files" );
-    hint = i18n("Determines whether only directories are shown");
+    hint = i18n("Determines whether only folders are shown");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
@@ -520,24 +520,24 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KToggleAction( i18n("Hide Empty Directories"), 0,
+    action = new KToggleAction( i18n("Hide Empty Folders"), 0,
                                 this, SLOT(slotHideEmptyDirectories()),
                                 actionCollection(), "settings_hide_empty_directories" );
-    hint = i18n("Determines whether directories without visible entries are hidden");
+    hint = i18n("Determines whether folders without visible entries are hidden");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KToggleAction( i18n("Create &Directories on Update"), 0,
+    action = new KToggleAction( i18n("Create &Folders on Update"), 0,
                                 this, SLOT(slotCreateDirs()),
                                 actionCollection(), "settings_create_dirs" );
-    hint = i18n("Determines whether updates create directories");
+    hint = i18n("Determines whether updates create folders");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KToggleAction( i18n("&Prune Empty Directories on Update"), 0,
+    action = new KToggleAction( i18n("&Prune Empty Folders on Update"), 0,
                                 this, SLOT(slotPruneDirs()),
                                 actionCollection(), "settings_prune_dirs" );
-    hint = i18n("Determines whether updates remove empty directories");
+    hint = i18n("Determines whether updates remove empty folders");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
@@ -1551,7 +1551,7 @@ bool CervisiaPart::openSandbox(const QString &dirname)
     if( !cvsRepository.ok() || !opened )
     {
         KMessageBox::sorry(widget(),
-                           i18n("This is not a CVS directory.\n"
+                           i18n("This is not a CVS folder.\n"
                            "If you did not intend to use Cervisia, you can "
                            "switch view modes within Konqueror."),
                            "Cervisia");
@@ -1778,7 +1778,7 @@ void CervisiaPart::readSettings()
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_notincvs" )))
     ->setChecked( opt_hideNotInCVS );
 
-    opt_hideEmptyDirectories = config->readBoolEntry("Hide Empty Directories", false);
+    opt_hideEmptyDirectories = config->readBoolEntry("Hide Empty Folders", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_empty_directories" )))
     ->setChecked( opt_hideEmptyDirectories );
 
@@ -1812,7 +1812,7 @@ void CervisiaPart::writeSettings()
     config->writeEntry("Hide UpToDate Files", opt_hideUpToDate);
     config->writeEntry("Hide Removed Files", opt_hideRemoved);
     config->writeEntry("Hide Non CVS Files", opt_hideNotInCVS);
-    config->writeEntry("Hide Empty Directories", opt_hideEmptyDirectories);
+    config->writeEntry("Hide Empty Folders", opt_hideEmptyDirectories);
     QValueList<int> sizes = splitter->sizes();
     config->writeEntry("Splitter Pos 1", sizes[0]);
     config->writeEntry("Splitter Pos 2", sizes[1]);

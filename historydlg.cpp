@@ -162,7 +162,7 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     onlyfilenames_box = new QCheckBox(i18n("Only &filenames matching:"), mainWidget);
 
-    onlydirnames_box = new QCheckBox(i18n("Only &directories matching:"), mainWidget);
+    onlydirnames_box = new QCheckBox(i18n("Only &folders matching:"), mainWidget);
 
     user_edit = new KLineEdit(mainWidget);
     user_edit->setEnabled(false);

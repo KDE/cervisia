@@ -112,7 +112,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
     workdir_layout->addWidget(dir_button, 0, AlignVCenter);
 
     QLabel *workdir_label = new QLabel
-	(workdir_edit, i18n("Working &directory:"), mainWidget);
+	(workdir_edit, i18n("Working &folder:"), mainWidget);
     grid->addWidget(workdir_label, (action==Import)? 2 : 3, 0, AlignLeft | AlignVCenter);
 
     if (action == Import)
@@ -164,7 +164,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
 
     KConfigGroupSaver cs(&partConfig, "CheckoutDialog");
     repo_combo->setEditText(partConfig.readEntry("Repository"));
-    workdir_edit->setText(partConfig.readPathEntry("Working directory"));
+    workdir_edit->setText(partConfig.readPathEntry("Working folder"));
 
     if (action == Import)
     {
@@ -241,7 +241,7 @@ void CheckoutDialog::slotOk()
     QFileInfo fi(workingDirectory());
     if (!fi.exists() || !fi.isDir())
     {
-        KMessageBox::information(this, i18n("Please choose an existing working directory."));
+        KMessageBox::information(this, i18n("Please choose an existing working folder."));
         return;
     }
     if (module().isEmpty())
@@ -270,9 +270,9 @@ void CheckoutDialog::slotOk()
     partConfig.writeEntry("Repository", repository());
     partConfig.writeEntry("Module", module());
 #if KDE_IS_VERSION(3,1,3)
-    partConfig.writePathEntry("Working directory", workingDirectory());
+    partConfig.writePathEntry("Working folder", workingDirectory());
 #else
-    partConfig.writeEntry("Working directory", workingDirectory());
+    partConfig.writeEntry("Working folder", workingDirectory());
 #endif
 
     if (act == Import)
