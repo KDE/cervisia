@@ -14,6 +14,7 @@
 
 #include "tiplabel.h"
 
+#include <kdeversion.h>
 #include <kglobalsettings.h>
 
 #include <qapplication.h>
@@ -31,7 +32,11 @@ TipLabel::TipLabel(const QString &text)
     setPalette( QToolTip::palette() );
 
     QSimpleRichText doc(text, font());
+#if KDE_IS_VERSION(3,1,90)
     doc.setWidth(KGlobalSettings::desktopGeometry(this).width());
+#else
+    doc.setWidth(QApplication::desktop()->width());
+#endif
     whint = doc.widthUsed() + 2*frameWidth() + 2*indent();
 }
 
@@ -40,9 +45,14 @@ void TipLabel::showAt(QPoint pos)
 {
     adjustSize();
 
+#if KDE_IS_VERSION(3,1,90)
     QRect desk = KGlobalSettings::desktopGeometry(this);
     QPoint maxpos = QPoint(QMAX(desk.right()-width(), desk.left()),
                            QMAX(desk.bottom()-height(), desk.top()));
+#else
+    QPoint maxpos = QPoint(QMAX(QApplication::desktop()->width()-width(), 0),
+                           QMAX(QApplication::desktop()->height()-height(), 0));
+#endif
     pos = QPoint(QMIN(pos.x(), maxpos.x()),
                  QMIN(pos.y(), maxpos.y()));
     move(pos);

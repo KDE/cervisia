@@ -1623,7 +1623,9 @@ void CervisiaPart::setFilter()
                 str += "R";
         }
 
+#if KDE_IS_VERSION(3,1,90)
     filterLabel->setText(str);
+#endif
 }
 
 
