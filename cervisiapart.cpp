@@ -714,34 +714,36 @@ void CervisiaPart::openFile(QString filename)
 
 void CervisiaPart::openFiles(const QStringList &filenames)
 {
-    // First check the cvs edit stuff
-    if (opt_doCVSEdit)
+    // call cvs edit automatically?
+    if( opt_doCVSEdit )
+    {
+        QStringList files;
+
+        // only edit read-only files
+        QStringList::ConstIterator it  = filenames.begin();
+        QStringList::ConstIterator end = filenames.end();
+        for( ; it != end; ++it )
         {
-            CvsProgressDialog l("Edit", widget() );
-            l.setCaption(i18n("CVS Edit"));
-            QString cmdline = cvsClient(repository, config()) + " edit ";
-
-            bool doit = false;
-            for ( QStringList::ConstIterator it = filenames.begin();
-                  it != filenames.end(); ++it )
-                {
-                    if (!QFileInfo(*it).isWritable())
-                        {
-                            doit = true;
-                            cmdline += " ";
-                            cmdline += KProcess::quote(*it);
-                        }
-                }
-
-            if (doit)
-                if (!l.execCommand(sandbox, repository, cmdline, "edit", config()))
-                    return;
+            if( !QFileInfo(*it).isWritable() )
+                files << *it;
         }
+
+        if( files.count() )
+        {
+            DCOPRef job = cvsService->edit(files);
+
+            ProgressDialog dlg(widget(), "Edit", job, "edit", i18n("CVS Edit"));
+            if( !dlg.execute() )
+                return;
+        }
+    }
 
     // Now open the files by using KRun
     QDir dir(sandbox);
-    for ( QStringList::ConstIterator it = filenames.begin();
-          it != filenames.end(); ++it )
+
+    QStringList::ConstIterator it  = filenames.begin();
+    QStringList::ConstIterator end = filenames.end();
+    for( ; it != end; ++it )
     {
         KURL u;
         u.setPath(dir.absFilePath(*it));
