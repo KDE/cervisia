@@ -22,7 +22,6 @@
 #include <kglobalsettings.h>
 #include <klocale.h>
 
-#include "cervisiapart.h"
 #include "tiplabel.h"
 
 
@@ -135,7 +134,7 @@ int AnnotateViewItem::width(const QFontMetrics &fm, const QListView *, int col) 
   caused by a bug in QHeader::adjustHeaderSize() in Qt <= 3.0.4.
 */
 
-AnnotateView::AnnotateView(QWidget *parent, const char *name)
+AnnotateView::AnnotateView(KConfig &cfg, QWidget *parent, const char *name)
     : QListView(parent, name, WRepaintNoErase | WResizeNoErase)
 {
     setFrameStyle(QFrame::WinPanel | QFrame::Sunken);
@@ -157,9 +156,8 @@ AnnotateView::AnnotateView(QWidget *parent, const char *name)
     currentTipItem = 0;
     currentLabel = 0;
 
-    KConfig *config = CervisiaPart::config();
-    config->setGroup("LookAndFeel");
-    setFont(config->readFontEntry("AnnotateFont"));
+    KConfigGroupSaver cs(&cfg, "LookAndFeel");
+    setFont(cfg.readFontEntry("AnnotateFont"));
 }
 
 

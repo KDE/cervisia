@@ -19,6 +19,7 @@
 #include <qlistview.h>
 
 class QDate;
+class KConfig;
 class TipLabel;
 class AnnotateViewItem;
 
@@ -28,7 +29,7 @@ class AnnotateView : public QListView
     Q_OBJECT
 
 public:
-    AnnotateView( QWidget *parent=0, const char *name=0 );
+    AnnotateView( KConfig &cfg, QWidget *parent=0, const char *name=0 );
     ~AnnotateView();
 
     void addLine(const QString &rev, const QString &author, const QDate &date,
