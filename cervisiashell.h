@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2002-2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -20,6 +20,7 @@
 
 class KRecentFilesAction;
 
+
 /**
  * A basic shell that embeds the Cervisia part directly to make a standalone
  * GUI available.
@@ -29,10 +30,8 @@ class CervisiaShell : public KParts::MainWindow
     Q_OBJECT
 
 public:
-    CervisiaShell( const char *name=0 );
+    CervisiaShell(const char* name=0);
     virtual ~CervisiaShell();
-
-    void restorePseudo(const QString &dirname);
 
 public slots:
     void openURL();
@@ -52,9 +51,10 @@ private:
     void readSettings();
     void writeSettings();
 
-    KParts::ReadOnlyPart *part;
+    KParts::ReadOnlyPart* m_part;
     QString               m_lastOpenDir;
 };
+
 
 #endif // CERVISIASHELL_H
 

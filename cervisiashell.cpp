@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2002-2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -17,7 +17,6 @@
 
 #include <kapplication.h>
 #include <kconfig.h>
-#include <kdeversion.h>
 #include <kedittoolbar.h>
 #include <khelpmenu.h>
 #include <kkeydialog.h>
@@ -31,17 +30,17 @@
 
 CervisiaShell::CervisiaShell( const char *name )
   : KParts::MainWindow( name )
-  , part(0)
+  , m_part(0)
 {
     setXMLFile( "cervisiashellui.rc" );
 
     KLibFactory* factory = KLibLoader::self()->factory("libcervisiapart");
     if( factory )
     {
-        part = static_cast<KParts::ReadOnlyPart*>(factory->create(this,
+        m_part = static_cast<KParts::ReadOnlyPart*>(factory->create(this,
                                       "cervisiaview", "KParts::ReadOnlyPart"));
-        if( part )
-            setCentralWidget(part->widget());
+        if( m_part )
+            setCentralWidget(m_part->widget());
     }
     else
     {
@@ -61,13 +60,13 @@ CervisiaShell::CervisiaShell( const char *name )
              statusBar(), SLOT( message(const QString &) ) );
     connect( actionCollection(), SIGNAL( clearStatusText() ),
              statusBar(), SLOT( clear() ) );
-    part->actionCollection()->setHighlightingEnabled(true);
-    connect( part->actionCollection(), SIGNAL( actionStatusText(const QString &) ),
+    m_part->actionCollection()->setHighlightingEnabled(true);
+    connect( m_part->actionCollection(), SIGNAL( actionStatusText(const QString &) ),
              statusBar(), SLOT( message(const QString &) ) );
-    connect( part->actionCollection(), SIGNAL( clearStatusText() ),
+    connect( m_part->actionCollection(), SIGNAL( clearStatusText() ),
              statusBar(), SLOT( clear() ) );
 
-    createGUI( part );
+    createGUI( m_part );
 
     // enable auto-save of toolbar/menubar/statusbar and window size settings
     // and apply the previously saved settings
@@ -78,7 +77,7 @@ CervisiaShell::CervisiaShell( const char *name )
 
 CervisiaShell::~CervisiaShell()
 {
-    delete part;
+    delete m_part;
 }
 
 void CervisiaShell::setupActions()
@@ -130,13 +129,13 @@ void CervisiaShell::setupActions()
 void CervisiaShell::openURL()
 {
     if( !m_lastOpenDir.isEmpty() )
-        part->openURL(KURL::fromPathOrURL(m_lastOpenDir));
+        m_part->openURL(KURL::fromPathOrURL(m_lastOpenDir));
 }
 
 
 void CervisiaShell::openURL(const KURL& url)
 {
-    part->openURL(url);
+    m_part->openURL(url);
 }
 
 
@@ -144,8 +143,8 @@ void CervisiaShell::slotConfigureKeys()
 {
     KKeyDialog dlg;
     dlg.insert(actionCollection());
-    if( part )
-        dlg.insert(part->actionCollection());
+    if( m_part )
+        dlg.insert(m_part->actionCollection());
         
     dlg.configure();
 }
@@ -186,13 +185,9 @@ void CervisiaShell::writeSettings()
     config->setGroup("Session");
 
     // Save current working directory (if part was created)
-    if( part )
+    if( m_part )
     {
-#if KDE_IS_VERSION(3,1,3)
-        config->writePathEntry("Current Directory", part->url().path());
-#else
-        config->writeEntry("Current Directory", part->url().path());
-#endif
+        config->writePathEntry("Current Directory", m_part->url().path());
     
         // write to disk
         config->sync();
