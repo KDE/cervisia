@@ -20,6 +20,8 @@
 #include <kfiledialog.h>
 #include <klineedit.h>
 #include <klocale.h>
+#include <kurlcompletion.h>
+
 
 using Cervisia::CvsInitDialog;
 
@@ -38,6 +40,11 @@ CvsInitDialog::CvsInitDialog(QWidget* parent, const char* name)
      
     m_directoryEdit = new KLineEdit(mainWidget);
     m_directoryEdit->setFocus();
+        
+    KURLCompletion* comp = new KURLCompletion();
+    m_directoryEdit->setCompletionObject(comp);
+    m_directoryEdit->setAutoDeleteCompletionObject(true);
+
     dirLabel->setBuddy(m_directoryEdit);
     dirLayout->addWidget(m_directoryEdit); 
     
