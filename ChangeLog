@@ -1,6 +1,7 @@
 2002-06-26  Bernd Gehrmann  <bernd@mail.berlios.de>
 
 	* Made editor configurable again
+	* Readded manpage
 
 2002-06-25  Bernd Gehrmann  <bernd@mail.berlios.de>
 
@@ -8,7 +9,7 @@
 	  CvsProgressDialog, resulting in random garbage
 	  inserted in the annotate view. Also a bug
 	  introduced in 2002-06-11
-	* Change annotate view to QListView. Based
+	* Changed annotate view to QListView. Based
 	  on a patch by  André Wöbbeking <Woebbeking@web.de>
 	* Hide custom tooltips in list views when contents
 	  are scrolled

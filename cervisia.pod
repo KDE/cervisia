@@ -1,0 +1,73 @@
+=head1 NAME
+
+Cervisia - Graphical CVS frontend
+
+=head1 SYNOPSIS
+
+B<cervisia>
+         S<[ B<--display> I<display> ]>
+         S<[ B<--caption> I<caption> ]>
+         S<[ B<--geometry> I<geometry> ]>
+         S<[ B<--icon> I<icon> ]>
+         S<[ B<--miniicon> I<miniicon> ]>
+         S<[ B<--dcopserver> I<server> ]>
+         S<[ I<directory> ]>
+
+=head1 DESCRIPTION
+
+Cervisia is a graphical user interface for the Concurrent Versions
+System. It is based on the KDE libraries and therefore shares 
+their Look'n'Feel, configuration and help system.
+
+=head1 OPTIONS
+
+Cervisia accepts the following options:
+
+=over
+
+=item I<directory>
+
+Tells Cervisia to open the sandbox in I<directory> at startup
+
+=item B<--display> I<display> 
+
+Specifies the X11 display
+
+=item B<--caption> I<caption>
+
+Sets the caption, i. e. what is shown in the title bar
+
+=item B<--geometry> I<geometry>
+
+Sets the geometry of the main window
+
+=item B<--icon> I<icon>
+
+Sets the program's icon (used by window managers and panels)
+
+=item B<--miniicon> I<miniicon>
+
+Sets the program's mini icon (used by window managers and panels)
+
+=item B<--dcopserver> I<server>
+
+Sets the dcopserver the program should use
+
+=head1 FILES
+
+F<_KDECONFDIR_/cervisiarc> - global configuration file
+
+F<$HOME/.kde/share/config/cervisiarc> - user-specific configuration file
+
+
+=head1 SEE ALSO
+
+F<_KDEHTMLDIR_/en/cervisia/index.html>
+
+L<cvs(1)>
+
+F<http://cervisia.sourceforge.net>
+
+=head1 AUTHOR
+
+Bernd Gehrmann <bernd@mail.berlios.de>
