@@ -37,6 +37,13 @@ bool IsValidTag(const QString& tag);
  */
 QString UserName();
 
+/**
+ * This method makes sure that the cvsroot specification for a pserver repository has
+ * always the form:
+ *  :pserver:[user]@[host]:[port][path]
+ */
+QString NormalizeRepository(const QString& repository);
+
 }
 
 
