@@ -16,6 +16,7 @@
 #include <qheader.h>
 #include <qpainter.h>
 #include <kconfig.h>
+#include <kglobalsettings.h>
 
 #include "cervisiapart.h"
 #include "tiplabel.h"
