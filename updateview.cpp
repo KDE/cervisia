@@ -14,6 +14,7 @@
 
 #include "updateview.h"
 
+#include <map>
 #include <set>
 
 #include <qapplication.h>
@@ -76,6 +77,9 @@ private:
 };
 
 
+class UpdateFileItem;
+
+
 class UpdateDirItem : public UpdateItem
 {
 public:
@@ -108,6 +112,15 @@ public:
 private:
 
     void scanDirectory();
+
+    UpdateDirItem* createDirItem(const QString& name);
+    UpdateFileItem* createFileItem(const QString& name);
+
+    UpdateItem* findItem(const QString& name) const;
+
+    typedef std::map<const QString, UpdateItem*> TMapItemsByName;
+
+    TMapItemsByName mapItemsByName;
 
     bool m_opened;
 };
@@ -189,28 +202,21 @@ QString UpdateDirItem::dirPath() const
  */
 void UpdateDirItem::updateChildItem(const QString& name, UpdateView::Status status, bool isdir)
 {
-    for (QListViewItem *item = firstChild(); item;
-	 item = item->nextSibling() )
-	{
-	    if (item->text(UpdateFileItem::File) == name)
-		{
-		    if (isFileItem(item))
-                        {
-                            UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(item);
-                            fileItem->setStatus(status);
-                        }
-		    return;
-		}
-	}
+    if (UpdateItem* item = findItem(name))
+    {
+        if (isFileItem(item))
+        {
+            UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(item);
+            fileItem->setStatus(status);
+        }
+        return;
+    }
 
     // Not found, make new entry
     if (isdir)
-        ( new UpdateDirItem(this, name) )->maybeScanDir(true);
+        createDirItem(name)->maybeScanDir(true);
     else
-        {
-            UpdateFileItem* fileItem = new UpdateFileItem(this, name);
-            fileItem->setStatus(status);
-        }
+        createFileItem(name)->setStatus(status);
 }
 
 
@@ -226,38 +232,34 @@ void UpdateDirItem::updateEntriesItem(const QString& name,
                                       const QString& tagname,
                                       const QDateTime& date)
 {
-    for (QListViewItem *item = firstChild(); item;
-	 item = item->nextSibling() )
-	{
-	    if (item->text(UpdateFileItem::File) == name)
-		{
-		    if (isFileItem(item))
-                        {
-                            UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(item);
-                            if (fileItem->status() == UpdateView::NotInCVS ||
-                                fileItem->status() == UpdateView::LocallyRemoved ||
-                                status == UpdateView::LocallyAdded ||
-                                status == UpdateView::LocallyRemoved ||
-                                status == UpdateView::Conflict)
-                                {
-                                    fileItem->setStatus(status);
-                                }
-                            fileItem->setRevTag(rev, tagname);
-                            fileItem->setDate(date);
-                            fileItem->setPixmap(0, isbin ? SmallIcon("binary") : 0);
-                        }
-		    return;
-		}
-	}
+    if (UpdateItem* item = findItem(name))
+    {
+        if (isFileItem(item))
+        {
+            UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(item);
+            if (fileItem->status() == UpdateView::NotInCVS ||
+                fileItem->status() == UpdateView::LocallyRemoved ||
+                status == UpdateView::LocallyAdded ||
+                status == UpdateView::LocallyRemoved ||
+                status == UpdateView::Conflict)
+            {
+                fileItem->setStatus(status);
+            }
+            fileItem->setRevTag(rev, tagname);
+            fileItem->setDate(date);
+            fileItem->setPixmap(0, isbin ? SmallIcon("binary") : 0);
+        }
+        return;
+    }
 
     // Not found, make new entry
     if (isdir)
-        ( new UpdateDirItem(this, name) )->maybeScanDir(true);
+        createDirItem(name)->maybeScanDir(true);
     else
-        {
-            UpdateFileItem* fileItem = new UpdateFileItem(this, name);
-            fileItem->setStatus(status);
-        }
+    {
+        UpdateFileItem* fileItem = createFileItem(name);
+        fileItem->setStatus(status);
+    }
 }
 
 
@@ -276,11 +278,39 @@ void UpdateDirItem::scanDirectory()
 	    for (; it.current(); ++it)
 		{
 		    if ( it.current()->isDir() )
-			(void) new UpdateDirItem(this, it.current()->fileName());
+			createDirItem(it.current()->fileName());
 		    else
-			(void) new UpdateFileItem(this, it.current()->fileName());
+			createFileItem(it.current()->fileName());
 		}
 	}
+}
+
+
+UpdateDirItem* UpdateDirItem::createDirItem(const QString& name)
+{
+    UpdateDirItem* dirItem = new UpdateDirItem(this, name);
+
+    mapItemsByName.insert(std::make_pair(name, dirItem));
+
+    return dirItem;
+}
+
+
+UpdateFileItem* UpdateDirItem::createFileItem(const QString& name)
+{
+    UpdateFileItem* fileItem = new UpdateFileItem(this, name);
+
+    mapItemsByName.insert(std::make_pair(name, fileItem));
+
+    return fileItem;
+}
+
+
+UpdateItem* UpdateDirItem::findItem(const QString& name) const
+{
+    const TMapItemsByName::const_iterator it = mapItemsByName.find(name);
+
+    return (it != mapItemsByName.end()) ? it->second : 0;
 }
 
 
