@@ -81,7 +81,7 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
     usernameedit->setFocus();
     usernamelabel->setBuddy(usernameedit);
 
-    QLabel *cvspathlabel = new QLabel( i18n("&Path to cvs:"), generalPage );
+    QLabel *cvspathlabel = new QLabel( i18n("&Path to CVS executable, or 'cvs':"), generalPage );
     cvspathedit = new KURLRequester(generalPage);
     cvspathlabel->setBuddy(cvspathedit);
 
