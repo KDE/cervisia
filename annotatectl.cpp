@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
@@ -63,13 +63,13 @@ void AnnotateController::showDialog(const QString& fileName, const QString& revi
         delete d->dialog;
         return;
     }
-   
+
     d->parseCvsLogOutput();
     d->parseCvsAnnotateOutput();
 
     // hide progress dialog
     delete d->progress; d->progress = 0;
-    
+
     d->dialog->setCaption(i18n("CVS Annotate: %1").arg(fileName));
     d->dialog->show();
 }
@@ -80,7 +80,7 @@ bool AnnotateController::Private::execute(const QString& fileName, const QString
     DCOPRef job = cvsService->annotate(fileName, revision);
     if( !cvsService->ok() )
         return false;
-        
+
     progress = new ProgressDialog(dialog, "Annotate", job, "annotate", i18n("CVS Annotate"));
 
     return progress->execute();
@@ -91,7 +91,7 @@ void AnnotateController::Private::parseCvsLogOutput()
 {
     QString line, comment, rev;
 
-    enum { Begin, Tags, Admin, Revision, 
+    enum { Begin, Tags, Admin, Revision,
            Author, Branches, Comment, Finished } state;
 
     state = Begin;
