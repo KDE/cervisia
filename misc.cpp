@@ -11,7 +11,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-
+#include "config.h"
 #include <pwd.h>
 #include <sys/types.h>
 #include <unistd.h>

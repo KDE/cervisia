@@ -11,7 +11,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-
+#include "config.h"
 #include <qstrlist.h>
 #include <qdir.h>
 #include <qfileinfo.h>

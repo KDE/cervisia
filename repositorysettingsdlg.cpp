@@ -29,9 +29,6 @@
 #include "cervisiapart.h"
 #include "repositorysettingsdlg.moc"
 
-#include <iostream.h>
-
-
 RepositorySettingsDialog::RepositorySettingsDialog(QWidget* parent,  const char* name)
     : QDialog(parent, name, true)
 {
