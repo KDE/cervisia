@@ -205,7 +205,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("Reso&lve"), 0,
+    action = new KAction( i18n("Reso&lve..."), 0,
                           this, SLOT( slotResolve() ),
                           actionCollection(), "file_resolve" );
     hint = i18n("Opens the resolve dialog with the selected file");
@@ -254,6 +254,10 @@ void CervisiaPart::setupActions()
                           protocol, SLOT(cancelJob()),
                           actionCollection(), "stop_job" );
     action->setEnabled( false );
+    hint = i18n("Stops any running subprocesses");
+    action->setToolTip( hint );
+    action->setWhatsThis( hint );
+    
 
     action = new KAction( i18n("Browse &Log..."), CTRL+Key_L,
                           this, SLOT(slotBrowseLog()),
