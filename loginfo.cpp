@@ -65,13 +65,13 @@ QString TagInfo::typeToString() const
 
 QString LogInfo::createToolTipText(bool showTime) const
 {
-    QString text(QString::fromLatin1("<b>"));
+    QString text(QString::fromLatin1("<nobr><b>"));
     text += QStyleSheet::escape(m_revision);
     text += QString::fromLatin1("</b>&nbsp;&nbsp;");
     text += QStyleSheet::escape(m_author);
     text += QString::fromLatin1("&nbsp;&nbsp;<b>");
     text += QStyleSheet::escape(dateTimeToString(showTime));
-    text += QString::fromLatin1("</b>");
+    text += QString::fromLatin1("</b></nobr>");
 
     if (!m_comment.isEmpty())
     {
