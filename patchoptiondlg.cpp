@@ -29,7 +29,7 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent, const char* name)
     QFrame* mainWidget = makeMainWidget();
     QBoxLayout* topLayout = new QVBoxLayout(mainWidget, 0, spacingHint());
     
-    m_formatBtnGroup = new QVButtonGroup("Output Format", mainWidget, "");
+    m_formatBtnGroup = new QVButtonGroup(i18n("Output Format"), mainWidget, "");
     topLayout->addWidget(m_formatBtnGroup);
  
     connect(m_formatBtnGroup, SIGNAL(clicked(int)),
@@ -50,16 +50,16 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent, const char* name)
     contextLinesLayout->addWidget(contextLinesLbl);
     contextLinesLayout->addWidget(m_contextLines);
     
-    QVButtonGroup* ignoreBtnGroup = new QVButtonGroup("Ignore Options", mainWidget);
+    QVButtonGroup* ignoreBtnGroup = new QVButtonGroup(i18n("Ignore Options"), mainWidget);
     topLayout->addWidget(ignoreBtnGroup);
     
-    m_blankLineChk = new QCheckBox("Ignore added or removed empty lines",
+    m_blankLineChk = new QCheckBox(i18n("Ignore added or removed empty lines"),
                                    ignoreBtnGroup);
-    m_spaceChangeChk = new QCheckBox("Ignore changes in the amount of whitespace",
+    m_spaceChangeChk = new QCheckBox(i18n("Ignore changes in the amount of whitespace"),
                                      ignoreBtnGroup);
-    m_allSpaceChk = new QCheckBox("Ignore all whitespace", ignoreBtnGroup);
-    m_caseChangesChk = new QCheckBox("Ignore changes in case", ignoreBtnGroup);
-    m_tabExpansionChk = new QCheckBox("Ignore changes due to tab expansion",
+    m_allSpaceChk = new QCheckBox(i18n("Ignore all whitespace"), ignoreBtnGroup);
+    m_caseChangesChk = new QCheckBox(i18n("Ignore changes in case"), ignoreBtnGroup);
+    m_tabExpansionChk = new QCheckBox(i18n("Ignore changes due to tab expansion"),
                                       ignoreBtnGroup);
 }
 
