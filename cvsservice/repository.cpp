@@ -48,6 +48,7 @@ struct Repository::Private
     bool        retrieveCvsignoreFile;
 
     void readConfig();
+    void readGeneralConfig();
 };
 
 
@@ -57,6 +58,8 @@ Repository::Repository()
     , DCOPObject("CvsRepository")
     , d(new Private)
 {
+    d->readGeneralConfig();
+
     // other cvsservice instances might change the configuration file
     // so we watch it for changes
     d->configFileName = locate("config", "cvsservicerc");
@@ -73,6 +76,7 @@ Repository::Repository(const QString& repository)
     , d(new Private)
 {
     d->location = repository;
+    d->readGeneralConfig();
     d->readConfig();
 
     // other cvsservice instances might change the configuration file
@@ -195,6 +199,16 @@ void Repository::slotConfigDirty(const QString& fileName)
 }
 
 
+void Repository::Private::readGeneralConfig()
+{
+    KConfig* config = kapp->config();
+
+    // get path to cvs client programm
+    config->setGroup("General");
+    client = config->readPathEntry("CVSPath", "cvs");
+}
+
+
 void Repository::Private::readConfig()
 {
     KConfig* config = kapp->config();
@@ -244,10 +258,6 @@ void Repository::Private::readConfig()
 
     // get program to start on the server side
     server = config->readEntry("cvs_server");
-
-    // get path to cvs client programm
-    config->setGroup("General");
-    client = config->readPathEntry("CVSPath", "cvs");
 }
 
 

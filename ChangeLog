@@ -1,3 +1,9 @@
+2004-08-23  Christian Loose  <christian.loose@kdemail.net>
+
+	* Fix bug #87830: 
+	  Always read the cvs client option from the configuration
+	  file even when there is no sandbox open.
+
 2004-07-13  André Wöbbeking  <Woebbeking@web.de>
 
 	* Implemented FR #67805, #67806, #67807, #67809:
