@@ -10,7 +10,7 @@
 #include <kinstance.h>
 #include <klocale.h>
 #include <kstdaction.h>
-#include <kxmlgui.h>
+#include <kxmlguifactory.h>
 #include <krun.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
