@@ -420,7 +420,7 @@ void UpdateDirItem::applyFilter(UpdateView::Filter filter)
     // - it has no parent (top level item)
     const bool visible(hasVisibleChild
                        || m_opened == false
-                       || (filter & UpdateView::NoEmptyDirectories) == false
+                       || (filter & UpdateView::NoEmptyDirectories) == 0
                        || parent() == 0);
 
     // only set invisible as QListViewItem::setVisible() is recursive
@@ -920,6 +920,11 @@ void UpdateView::unfoldTree()
         qApp->processEvents();
     }
 
+    // maybe some UpdateDirItem was opened the first time so check the whole tree
+    // (this is needed for the filter NoEmptyDirectories)
+    if (filter() & NoEmptyDirectories)
+        setFilter(filter());
+
     setUpdatesEnabled(updatesEnabled);
 
     triggerUpdate();
@@ -995,7 +1000,8 @@ void UpdateView::finishJob(bool normalExit, int exitStatus)
 
     // visibility of items could be changed so check the whole tree
     // (this is needed for the filter NoEmptyDirectories)
-    setFilter(filter());
+    if (filter() & NoEmptyDirectories)
+        setFilter(filter());
 }
 
 
