@@ -431,7 +431,7 @@ int UpdateDirItem::compare(QListViewItem* i, int, bool bAscending) const
     UpdateDirItem const* pItem = static_cast<UpdateDirItem*>(i);
 
     // for every column just compare the directory name
-    return ::compare(m_dirname, pItem->m_dirname);
+    return m_dirname.localeAwareCompare(pItem->m_dirname);
 }
 
 
@@ -607,17 +607,17 @@ int UpdateViewItem::compare(QListViewItem* i, int col, bool bAscending) const
     switch (col)
     {
     case File:
-        iResult = ::compare(m_filename, pItem->m_filename);
+        iResult = m_filename.localeAwareCompare(pItem->m_filename);
         break;
     case Status:
         if ((iResult = ::compare(statusClass(), pItem->statusClass())) == 0)
-            iResult = ::compare(m_filename, pItem->m_filename);
+            iResult = m_filename.localeAwareCompare(pItem->m_filename);
         break;
     case Revision:
         iResult = ::compareRevisions(m_revision, pItem->m_revision);
         break;
     case TagOrDate:
-        iResult = ::compare(m_tag, pItem->m_tag);
+        iResult = m_tag.localeAwareCompare(pItem->m_tag);
         break;
     case Timestamp:
         iResult = ::compare(m_timestamp, pItem->m_timestamp);
