@@ -225,11 +225,15 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
 
 void SettingsDialog::readSettings()
 {
+    // read entries from cvs DCOP service configuration
+    KConfig* serviceConf = new KConfig("cvsservicerc");
+    serviceConf->setGroup("General");
+    cvspathedit->setText(serviceConf->readEntry("CVSPath", "cvs"));
+    compressioncombo->setCurrentItem(serviceConf->readNumEntry("Compression", 0));
+    
     config->setGroup("General");
     timeoutedit->setValue((int)config->readUnsignedNumEntry("Timeout", 4000));
     usernameedit->setText(config->readEntry("Username", userName()));
-    cvspathedit->setText(config->readEntry("CVSPath", "cvs"));
-    compressioncombo->setCurrentItem(config->readNumEntry("Compression", 0));
 
     contextedit->setValue((int)config->readUnsignedNumEntry("ContextLines", 65535));
     tabwidthedit->setValue((int)config->readUnsignedNumEntry("TabWidth", 8));
@@ -264,11 +268,22 @@ void SettingsDialog::readSettings()
 
 void SettingsDialog::writeSettings()
 {
+    // write entries to cvs DCOP service configuration
+    KConfig* serviceConf = new KConfig("cvsservicerc");
+    serviceConf->setGroup("General");
+    serviceConf->writeEntry("CVSPath", cvspathedit->text());
+    serviceConf->writeEntry("Compression", compressioncombo->currentItem());
+
+    // write to disk so other services can reparse the configuration
+    serviceConf->sync();
+
     config->setGroup("General");
     config->writeEntry("Timeout", (unsigned)timeoutedit->value());
     config->writeEntry("Username", usernameedit->text());
+    // TODO: remove when move to cvs DCOP service is complete
     config->writeEntry("CVSPath", cvspathedit->text());
     config->writeEntry("Compression", compressioncombo->currentItem());
+    // END TODO
     config->writeEntry("ContextLines", (unsigned)contextedit->value());
     config->writeEntry("TabWidth", tabwidthedit->value());
     config->writeEntry("DiffOptions", diffoptedit->text());

@@ -37,6 +37,9 @@ partrc_DATA = cervisiaui.rc
 shellrcdir = $(kde_datadir)/cervisia
 shellrc_DATA = cervisiashellui.rc
 
+update_DATA = cervisia.upd
+updatedir = $(kde_datadir)/kconf_update
+
 messages: rc.cpp
 	$(EXTRACTRC) *.rc >> rc.cpp
 	$(XGETTEXT) -C *.cpp *.h -o $(podir)/cervisia.pot

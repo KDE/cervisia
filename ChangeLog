@@ -6,6 +6,9 @@
 	* Several changes to the DCOP service
 	* Added new parseCvsLog() method to LogDialog that 
           uses the new cvs DCOP service
+	* Save and read cvs client and global compression level configuration
+	  to/from the configuration file of the cvs DCOP service
+	* Added kconf_update script
 
 2002-12-23  André Wöbbeking <Woebbeking@web.de>
 

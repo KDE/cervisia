@@ -1,0 +1,12 @@
+#
+Id=kde3.2/20021228
+File=cervisiapartrc,cvsservicerc
+Group=General
+Options=copy
+Key=CVSPath
+Options=copy
+Key=Compression
+#
+#Id=kde3.2/2
+#File=cervisiapartrc,cvsservicerc
+#Script=move_repositories.pl,perl
