@@ -1083,27 +1083,17 @@ void CervisiaPart::addOrRemoveWatch(WatchDialog::ActionType action)
 
     if (dlg.exec() && dlg.events() != WatchDialog::None)
     {
-        QString cmdline = cvsClient(repository, config());
-        cmdline += " watch ";
+        DCOPRef cvsJob;
+
         if (action == WatchDialog::Add)
-            cmdline += "add ";
+            cvsJob = cvsService->addWatch(list, dlg.events());
         else
-            cmdline += "remove ";
+            cvsJob = cvsService->removeWatch(list, dlg.events());
 
-        WatchDialog::Events events = dlg.events();
-        if (events != WatchDialog::All)
-        {
-            if (events & WatchDialog::Commits)
-                cmdline += "-a commit ";
-            if (events & WatchDialog::Edits)
-                cmdline += "-a edit ";
-            if (events & WatchDialog::Unedits)
-                cmdline += "-a unedit ";
-        }
+        // get command line from cvs job
+        QString cmdline = cvsJob.call("cvsCommand()");
 
-        cmdline += joinLine(list);
-
-        if (protocol->startJob(sandbox, repository, cmdline))
+        if( protocol->startJob() )
         {
             showJobStart(cmdline);
             connect( protocol, SIGNAL(jobFinished(bool, int)),
