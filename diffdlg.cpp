@@ -225,7 +225,6 @@ bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
 {
     QStringList linesA, linesB;
     int linenoA, linenoB;
-    enum { Normal, VersionA, VersionB } state;
 
     setCaption(i18n("CVS Diff: %1").arg(fileName));
     revlabel1->setText( revA.isEmpty()?
@@ -265,7 +264,6 @@ bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
     while ( dlg.getLine(line) && !line.startsWith("+++"))
         ;
     
-    state = Normal;
     linenoA = linenoB = 0;
     while ( dlg.getLine(line) )
         {
@@ -282,15 +280,9 @@ bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
             line.remove(0, 1);
             
             if (marker == '-')
-                {
-                    state = VersionA;
-                    linesA.append(line);
-                }
+                linesA.append(line);
             else if (marker == '+')
-                {
-                    state = VersionB;
-                    linesB.append(line);
-                }
+                linesB.append(line);
             else
                 {
                     if (!linesA.isEmpty() || !linesB.isEmpty())
@@ -331,7 +323,6 @@ bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
                             if (itB != linesB.end())
                                 ++itB;
                         }
-                    state = Normal;
                     linesA.clear();
                     linesB.clear();
                     diff1->addLine(line, DiffView::Unchanged, ++linenoA);
