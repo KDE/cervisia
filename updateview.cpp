@@ -619,9 +619,14 @@ QString UpdateViewItem::text(int col) const
 		return m_tag;
 	case 4:
 		{
-			QDateTime timestamp;
-			timestamp.setTime_t(m_timestamp);
-			return KGlobal::locale()->formatDateTime(timestamp);
+			if (m_status != UpdateView::NotInCVS)            
+				{
+					QDateTime timestamp;
+					timestamp.setTime_t(m_timestamp);
+					return KGlobal::locale()->formatDateTime(timestamp);
+				} else {
+					return "";
+				}
 	    }
 	default:
 	    return "";
