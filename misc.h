@@ -46,8 +46,6 @@ QStringList splitLine(QString, char delim=' ');
 QString tempFileName(const QString &suffix);
 void cleanupTempFiles();
 
-QString cvsClient(const QString &sRepository, KConfig* config);
-
 const QStringList fetchBranches(CvsService_stub* cvsService, QWidget* parent);
 const QStringList fetchTags(CvsService_stub* cvsService, QWidget* parent);
 

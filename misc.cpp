@@ -182,38 +182,6 @@ QStringList splitLine(QString line, char delim)
 }
 
 
-// Gives the name (including path) of the cvs command line client
-// also gives you global commands
-QString cvsClient( const QString &sRepository, KConfig* config )
-{
-    config->setGroup("General");
-
-    // everybody gets the -f option, unconditionally
-    QString sReturn = config->readEntry("CVSPath", "cvs") + " -f";
-
-    // see if there is a specific level set for this repository
-    config->setGroup( QString("Repository-") + sRepository );
-    int compressionlevel = config->readNumEntry("Compression", -1);
-
-    // if we were left to the default value, then see what the default value should be
-    if ( compressionlevel < 0 )
-    {
-        config->setGroup("General");
-        compressionlevel = config->readNumEntry("Compression", 0);
-    }
-
-    // we don't need a command line option if there is no compression
-    if (compressionlevel > 0)
-    {
-        sReturn += " -z";
-        sReturn += QString::number(compressionlevel);
-        sReturn += " ";
-    }
-
-    return sReturn;
-}
-
-
 const QStringList fetchBranches(CvsService_stub* cvsService, QWidget* parent)
 {
     return FetchBranchesAndTags(QString::fromLatin1("branch"), cvsService,
