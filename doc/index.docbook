@@ -231,7 +231,7 @@ command is used:
 <calloutlist>
 
 <callout arearefs="co-repository">
-<para>The name of the $CVS; repository, also known as $<envar>CVSROOT</envar>.
+<para>The name of the &CVS; repository, also known as $<envar>CVSROOT</envar>.
 You must have write access to it, and the repository must be properly
 initialized. If the repository does not yet exist, initialize it with the
 command <userinput><command>cvs</command> <option>-d</option>
@@ -240,7 +240,7 @@ command <userinput><command>cvs</command> <option>-d</option>
 
 <para>
 If the repository is remote, make sure that authentication works (see 
-<xref linkend="accessing-repository"/>
+<xref linkend="accessing-repository"/>).
 </para>
 </callout>
 
