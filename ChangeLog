@@ -1,3 +1,11 @@
+2002-12-23  André Wöbbeking <Woebbeking@web.de>
+
+	* All dialogs:
+	  - Inherit from KDialogBase instead of QDialog
+	    -> less code and more KDE standard compliant.
+	  - removed layout leftovers from old Qt versions.
+	  - reduced header dependences.
+
 2002-12-19  Christian Loose <christian.loose@hamburg.de>
 
 	* Replace deprecated QMultiLineEdit with KTextEdit in
@@ -17,6 +25,16 @@
 2002-12-14  Christian Loose <christian.loose@hamburg.de>
 
 	* Added first version of cvs DCOP service
+
+2002-12-14  André Wöbbeking <Woebbeking@web.de>
+
+	* Removed ListViewItem. Use Q/KListViewItem instead.
+
+2002-12-14  André Wöbbeking <Woebbeking@web.de>
+
+	* ProtocolView::appendLine(): removed trailing <br> 
+	  as QTextEdit::append() already adds a new paragraph. 
+	  Detect "U " as remote changed file.
 
 2002-12-12  Christian Loose <christian.loose@hamburg.de>
 
