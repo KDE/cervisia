@@ -16,6 +16,7 @@
 #include "protocolview.h"
 
 #include <qdir.h>
+#include <qpopupmenu.h>
 #include <dcopref.h>
 #include <kconfig.h>
 #include <klocale.h>
@@ -122,6 +123,19 @@ bool ProtocolView::startJob()
     disconnect( SIGNAL(jobFinished(bool, int)) );
 
     return job->execute();
+}
+
+
+QPopupMenu* ProtocolView::createPopupMenu(const QPoint &pos)
+{
+    QPopupMenu* menu = QTextEdit::createPopupMenu(pos);
+
+    int id = menu->insertItem(i18n("Clear"), this, SLOT( clear() ), 0, -1, 0);
+
+    if( text().isEmpty() )
+        menu->setItemEnabled(id, false);
+
+    return menu;
 }
 
 

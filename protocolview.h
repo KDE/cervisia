@@ -19,6 +19,8 @@
 #include <qtextedit.h>
 #include <dcopobject.h>
 
+class QPoint;
+class QPopupMenu;
 class KProcess;
 class KShellProcess;
 class CvsJob_stub;
@@ -36,6 +38,9 @@ public:
     bool startJob(const QString &sandbox, const QString &repository, const QString &cmdline);
     bool startJob();
 
+protected:
+    virtual QPopupMenu* createPopupMenu(const QPoint &pos);
+
 k_dcop:
     void slotReceivedOutput(QString buffer);
     void slotJobExited(bool normalExit, int exitStatus);
@@ -52,7 +57,6 @@ private slots:
 private:
     void processOutput();
     void appendLine(const QString &line);
-    void execContextMenu(const QPoint &pos);
     
     KShellProcess *childproc;
     QString buf;
