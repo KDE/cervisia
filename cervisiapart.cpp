@@ -837,25 +837,17 @@ void CervisiaPart::slotCommit()
 
         update->prepareJob(opt_commitRecursive, UpdateView::Commit);
         
-        QString cmdline = cvsClient(repository) + " commit ";
-        if (opt_commitRecursive)
-            cmdline += "-R ";
-        else
-            cmdline += "-l ";
-        cmdline += "-m ";
-        cmdline += KProcess::quote(dlg.logMessage());
-        cmdline += " ";
+        DCOPRef cvsJob = cvsService->commit(list, dlg.logMessage(),
+                                            opt_commitRecursive);
 
-        cmdline += joinLine(list);
-        cmdline += " 2>&1";
+        // get command line from cvs job
+        QString cmdline = cvsJob.call("cvsCommand()");
 
-        if (protocol->startJob(sandbox, repository, cmdline))
+        if( protocol->startJob() )
         {
             showJobStart(cmdline);
-            connect( protocol, SIGNAL(jobFinished(bool, int)),
-                     update, SLOT(finishJob(bool, int)) );
-            connect( protocol, SIGNAL(jobFinished(bool, int)),
-                     this, SLOT(slotJobFinished()) );
+            connect( protocol, SIGNAL(jobFinished(bool, int)), update, SLOT(finishJob(bool, int)) );
+            connect( protocol, SIGNAL(jobFinished(bool, int)), this, SLOT(slotJobFinished()) );
         }
     }
 }

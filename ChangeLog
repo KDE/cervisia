@@ -1,5 +1,7 @@
 2003-05-09  Christian Loose  <christian.loose@hamburg.de>
 
+	* Use DCOP service for commit action 
+	  (CervisiaPart::slotCommit())
 	* Convert CervisiaPart::updateActions() from manually
 	  changing the state of the menu items to using
 	  KXMLGUIClient::stateChanged() with the corresponding
