@@ -22,9 +22,9 @@
 #define CVSJOB_H
 
 #include <qobject.h>
+#include <qstring.h>
 #include <dcopobject.h>
 
-class QString;
 class KProcess;
 
 
@@ -34,17 +34,25 @@ class CvsJob : public QObject, public DCOPObject
     K_DCOP
 
 public:
-    CvsJob(unsigned jobId, const QString& cvsCommand);
+    CvsJob(unsigned jobId, const QString& cvsCommand, const QString& rsh = QString::null,
+           const QString& directory = QString::null);
     ~CvsJob();
 
     void setCvsCommand(const QString& cvsCommand);
+    void setRSH(const QString& rsh);
+    void setDirectory(const QString& directory);
 
 k_dcop:
     bool execute();
     void cancel();
 
     bool isRunning() const;
-
+    
+    /**
+     * Current cvs command.
+     *
+     * @return The current cvs command. Can be null if not set.
+     */
     QString cvsCommand() const;
 
 k_dcop_signals:

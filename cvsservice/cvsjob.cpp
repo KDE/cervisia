@@ -28,23 +28,29 @@ struct CvsJob::Private
 {
     KProcess*   childproc;
     QString     cvsCommand;
+    QString     rsh;
+    QString     directory;
     bool        isRunning;
 };
 
 
-CvsJob::CvsJob(unsigned jobId, const QString& cvsCommand)
+CvsJob::CvsJob(unsigned jobId, const QString& cvsCommand, const QString& rsh,
+               const QString& directory)
     : QObject()
     , DCOPObject()
     , d(new Private)
 {
+    // initialize private data
+    d->cvsCommand = cvsCommand;
+    d->rsh        = rsh;
+    d->directory  = directory;
+    d->isRunning  = false;
+
     QString objId("CvsJob" + QString::number(jobId));
     setObjId(objId.local8Bit());
 
     d->childproc = new KProcess;
     d->childproc->setUseShell(true, "/bin/sh");
-
-    d->cvsCommand = cvsCommand;
-    d->isRunning  = false;
 }
 
 
@@ -58,6 +64,18 @@ CvsJob::~CvsJob()
 void CvsJob::setCvsCommand(const QString& cvsCommand)
 {
     d->cvsCommand = cvsCommand;
+}
+
+
+void CvsJob::setRSH(const QString& rsh)
+{
+    d->rsh = rsh;
+}
+
+
+void CvsJob::setDirectory(const QString& directory)
+{
+    d->directory = directory;
 }
 
 
@@ -75,6 +93,12 @@ QString CvsJob::cvsCommand() const
 
 bool CvsJob::execute()
 {
+    if( !d->rsh.isEmpty() )
+        d->childproc->setEnvironment("CVS_RSH", d->rsh);
+
+    if( !d->directory.isEmpty() )
+        d->childproc->setWorkingDirectory(d->directory);
+        
     *d->childproc << d->cvsCommand;
 
     connect(d->childproc, SIGNAL(processExited(KProcess*)),

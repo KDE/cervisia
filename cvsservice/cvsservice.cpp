@@ -50,6 +50,8 @@ struct CvsService::Private
     
     QString             workingCopy;
     Repository*         repository;
+    
+    DCOPRef createCvsJob(const QString& cmdline);
 };
 
 
@@ -156,11 +158,7 @@ DCOPRef CvsService::annotate(const QString& fileName, const QString& revision)
     cmdline += " ) 2>&1";
 
     // create a cvs job
-    ++d->lastJobId;
-    CvsJob* job = new CvsJob(d->lastJobId, cmdline);
-    d->cvsJobs.insert(d->lastJobId, job);
-
-    return DCOPRef(d->appId, job->objId());
+    return d->createCvsJob(cmdline);
 }
 
 
@@ -179,11 +177,7 @@ DCOPRef CvsService::log(const QString& fileName)
     cmdline += KProcess::quote(fileName);
 
     // create a cvs job
-    ++d->lastJobId;
-    CvsJob* job = new CvsJob(d->lastJobId, cmdline);
-    d->cvsJobs.insert(d->lastJobId, job);
-
-    return DCOPRef(d->appId, job->objId());
+    return d->createCvsJob(cmdline);
 }
 
 
@@ -213,11 +207,7 @@ DCOPRef CvsService::status(const QString& files, bool recursive)
     cmdline += " 2>&1";
 
     // create a cvs job
-    ++d->lastJobId;
-    CvsJob* job = new CvsJob(d->lastJobId, cmdline);
-    d->cvsJobs.insert(d->lastJobId, job);
-
-    return DCOPRef(d->appId, job->objId());
+    return d->createCvsJob(cmdline);
 }
 
 
@@ -243,6 +233,8 @@ DCOPRef CvsService::status(const QString& files, bool recursive, bool tagInfo)
     cmdline += files;
 
     d->singleCvsJob->setCvsCommand(cmdline);
+    d->singleCvsJob->setRSH(d->repository->rsh());
+    d->singleCvsJob->setDirectory(d->workingCopy);
 
     return DCOPRef(d->appId, d->singleCvsJob->objId());
 }
@@ -264,5 +256,17 @@ void CvsService::slotConfigDirty(const QString& fileName)
     }
 }
 
+
+DCOPRef CvsService::Private::createCvsJob(const QString& cmdline)
+{
+    ++lastJobId;
+
+    // create a cvs job
+    CvsJob* job = new CvsJob(lastJobId, cmdline, repository->rsh(),
+                             workingCopy);
+    cvsJobs.insert(lastJobId, job);
+
+    return DCOPRef(appId, job->objId());
+}
 
 #include "cvsservice.moc"
