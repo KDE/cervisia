@@ -706,7 +706,7 @@ UpdateView::UpdateView(QWidget *parent, const char *name)
 {
     setAllColumnsShowFocus(true);
     setShowSortIndicator(true);
-    setSelectionMode(Extended);
+    setSelectionModeExt(Extended);
 
     addColumn(i18n("File Name"));
     addColumn(i18n("Status"));
@@ -763,7 +763,7 @@ void UpdateView::setFilter(Filter filter)
         item->applyFilter(filter);
     }
 
-    setSorting(sortColumn(), sortAscending());
+    setSorting(columnSorted(), ascendingSort());
 }
 
 

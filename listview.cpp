@@ -20,55 +20,14 @@
 
 
 ListView::ListView(QWidget *parent, const char *name)
-    : QListView(parent, name)
+    : KListView(parent, name)
 {
     m_preferredColumn = -1;
-    m_sortColumn = 0;
-    m_sortAscending = true;
 
     timer = new QTimer(this);
     connect( timer, SIGNAL(timeout()), this, SLOT(headerSizeChange()) );
     
-    connect( header(), SIGNAL(clicked(int)), this, SLOT(headerClicked(int)) );
     connect( header(), SIGNAL(sizeChange(int,int,int)), this, SLOT(headerSizeChange()) );
-}
-
-
-ListView::~ListView()
-{}
-
-
-void ListView::setColumnConfig(int sortColumn, bool sortAscending,
-                               QMemArray<int> indexToColumn, QMemArray<int> columnSizes)
-{
-    m_sortColumn = sortColumn;
-    m_sortAscending = sortAscending;
-    setSorting(sortColumn, sortAscending);
-    int n = QMIN(QMIN((int)indexToColumn.count(),
-                      (int)columnSizes.count()),
-                 header()->count());
-    for (int i=0; i<n; ++i)
-        {
-            header()->moveSection(indexToColumn.at(i), i);
-            header()->resizeSection(i, columnSizes.at(i));
-        }
-}
-
-
-void ListView::getColumnConfig(int *sortColumn, bool *sortAscending,
-                               QMemArray<int> *indexToColumn, QMemArray<int> *columnSizes) const
-{
-    *sortColumn = m_sortColumn;
-    *sortAscending = m_sortAscending;
-
-    int n = header()->count();
-    indexToColumn->resize(n);
-    columnSizes->resize(n);
-    for (int i=0; i<n; ++i)
-        {
-            indexToColumn->at(i) = header()->mapToSection(i);
-            columnSizes->at(i) = header()->sectionSize(i);
-        }
 }
 
 
@@ -118,13 +77,6 @@ void ListView::headerSizeChange()
                     //                    viewport()->repaint(false);
                 }
         }
-}
-
-
-void ListView::headerClicked(int column)
-{
-    m_sortAscending = (column == m_sortColumn)? !m_sortAscending : true;
-    m_sortColumn = column;
 }
 
 
