@@ -1,7 +1,12 @@
 # KDE Config File
 [KDE Desktop Entry]
 Comment=CVS Frontend
-Comment[ko]=CVS 프론트-엔드 프로그램
+Comment[da]=CVS Forende
+Comment[he]=ממשק CVS
+Comment[hu]=Grafikus felületű CVS-előtétprogram
+Comment[nl]=grafische schil voor CVS
+Comment[xxx]=xx
+Comment[zh_TW.Big5]=CVS 前端
 Exec=cervisia -caption "%c" %i %m %u
 TerminalOptions=
 Path=
@@ -11,8 +16,10 @@ Type=Application
 Terminal=0
 MimeType=inode/directory
 Name=Cervisia
-Name[ko]=케르비시아
+Name[hu]=Cervisia CVS-kliens
+Name[xxx]=xx
 ServiceTypes=KParts/ReadOnlyPart,Browser/View
 X-KDE-Library=libcervisia
 X-KDE-BrowserView-Args=DetailedList
 
+X-DCOP-ServiceType=Multi
