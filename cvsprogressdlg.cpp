@@ -1,5 +1,5 @@
 /* 
- *  Copyright (C) 1999-2001 Bernd Gehrmann
+ *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
  * This program may be distributed under the terms of the Q Public
@@ -10,6 +10,9 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
+
+
+#include "cvsprogressdlg.h"
 
 #include <qpushbutton.h>
 #include <qdir.h>
@@ -26,9 +29,6 @@
 
 #include "misc.h"
 #include "cervisiapart.h"
-
-#include "cvsprogressdlg.h"
-#include "cvsprogressdlg.moc"
 
 
 CvsProgressDialog::CvsProgressDialog(const char *text, QWidget *parent)
@@ -204,7 +204,7 @@ bool CvsProgressDialog::processOutput()
 
 void CvsProgressDialog::receivedOutputNongui(KProcess *, char *buffer, int buflen)
 {
-    buf += QString::fromLocal8Bit(buffer, buflen+1);
+    buf += QString::fromLocal8Bit(buffer, buflen);
     if (processOutput())
         {
             stopNonguiPart();
@@ -215,7 +215,7 @@ void CvsProgressDialog::receivedOutputNongui(KProcess *, char *buffer, int bufle
 
 void CvsProgressDialog::receivedOutput(KProcess *, char *buffer, int buflen)
 {
-    buf += QString::fromLocal8Bit(buffer, buflen+1);
+    buf += QString::fromLocal8Bit(buffer, buflen);
     (void) processOutput();
 }
  
@@ -256,6 +256,8 @@ void CvsProgressDialog::closeEvent(QCloseEvent *e)
     cancelClicked();
     QSemiModal::closeEvent(e);
 }
+
+#include "cvsprogressdlg.moc"
 
 // Local Variables:
 // c-basic-offset: 4
