@@ -1560,6 +1560,9 @@ void CervisiaPart::slotJobFinished()
     hasRunningJob = false;
     emit setStatusBarText( i18n("Done") );
     updateActions();
+
+    disconnect( protocol, SIGNAL(receivedLine(QString)),
+                update,   SLOT(processUpdateLine(QString)) );
 }
 
 
