@@ -274,6 +274,53 @@ namespace
 }
 
 
+int compareRevisions(const QString& rev1, const QString& rev2)
+{
+    const int length1(rev1.length());
+    const int length2(rev2.length());
+
+    // compare all parts of the revision
+
+    int startPos1(0);
+    int startPos2(0);
+    while (startPos1 < length1 && startPos2 < length2)
+    {
+        int pos1(rev1.find('.', startPos1));
+        if (pos1 < 0)
+            pos1 = length1;
+        const int partLength1(pos1 - startPos1);
+
+        int pos2(rev2.find('.', startPos2));
+        if (pos2 < 0)
+            pos2 = length2;
+        const int partLength2(pos2 - startPos2);
+
+        // if the number of digits in both parts is not equal we are ready
+        if (const int comp = ::compare(partLength1, partLength2))
+            return comp;
+
+        // if the parts are not equal we are ready
+        if (const int comp = ::compare(rev1.mid(startPos1, partLength1),
+                                       rev2.mid(startPos2, partLength2)))
+            return comp;
+
+        // continue with next part
+        startPos1 = pos1 + 1;
+        startPos2 = pos2 + 1;
+    }
+
+    // rev1 has more parts than rev2: rev2 < rev1
+    if (startPos1 < length1)
+        return 1;
+    // rev2 has more parts than rev1: rev1 < rev2
+    else if (startPos2 < length2)
+        return -1;
+    // all parts of rev1 and rev2 were compared (the number of parts is equal): rev1 == rev2
+    else
+        return 0;
+}
+
+
 // Local Variables:
 // c-basic-offset: 4
 // End:

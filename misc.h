@@ -43,6 +43,32 @@ QStringList const fetchTags(QString const& rsSandbox,
                             QWidget*       pParentWidget);
 
 
+/**
+ * Compares two revision numbers.
+ *
+ * @return -1 / 0 / 1 if rev1 is < / == / > rev2
+ */
+int compareRevisions(const QString& rev1, const QString& rev2);
+
+
+/**
+ * Generic compare for two objects of the same class. operator<() must
+ * be defined for this class.
+ *
+ * @return -1 / 0 / 1 if lhs is < / == / > rhs
+ */
+template<class C>
+int compare(const C& lhs, const C& rhs)
+{
+    if (lhs < rhs)
+        return -1;
+    else if (rhs < lhs)
+        return 1;
+    else
+        return 0;
+}
+
+
 #endif
 
 
