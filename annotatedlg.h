@@ -21,7 +21,7 @@
 
 class KConfig;
 class AnnotateView;
-class DCOPRef;
+class QDate;
 
 
 class AnnotateDialog : public KDialogBase
@@ -32,11 +32,8 @@ public:
 
     virtual ~AnnotateDialog();
 
-    bool parseCvsAnnotate(const QString &sandbox, const QString &repository,
-                          const QString &filename, const QString &rev);
-
-    bool parseCvsAnnotate(DCOPRef& cvsService, const QString& fileName,
-                          const QString& revision = "");
+    void addLine(const QString &rev, const QString &author, const QDate &date,
+                 const QString &content, const QString &comment, bool odd);
 
     static void loadOptions(KConfig *config);
     static void saveOptions(KConfig *config);

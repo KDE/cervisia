@@ -14,7 +14,7 @@ libcervisiapart_la_SOURCES = updateview.cpp protocolview.cpp watchdlg.cpp \
 		   annotatedlg.cpp annotateview.cpp progressdlg.cpp progressdlg.skel \
 		   cvsprogressdlg.cpp tiplabel.cpp listview.cpp \
 		   cvsdir.cpp repositories.cpp misc.cpp cervisiapart.cpp qttableview.cpp \
-		   addrepositorydlg.cpp
+		   addrepositorydlg.cpp annotatectl.cpp
 libcervisiapart_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
 libcervisiapart_la_LIBADD = $(LIB_KFILE) $(LIB_KPARTS)
 
