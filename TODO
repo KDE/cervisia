@@ -28,3 +28,6 @@ Ideas in no special order
 * Automatic 'cvs -n update' in specified time intervals (QTimer)
 
 * Add commit message to ChangeLog file (checkbox in commit dialog)
+
+* Add new watchers dialog with a KListView instead of just showing
+  the cvs output in the protocol view
