@@ -1,13 +1,19 @@
 /*
  * Copyright (c) 2005 Christian Loose <christian.loose@kdemail.net>
  *
- * This program may be distributed under the terms of the Q Public
- * License as defined by Trolltech AS of Norway and appearing in the
- * file LICENSE.QPL included in the packaging of this file.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
 #include "pluginmanager.h"
@@ -48,10 +54,14 @@ PluginManager::~PluginManager()
 
 void PluginManager::setPart(KParts::Part* part)
 {
+    kdDebug() << "PluginManager::setPart()" << endl;
+
     m_part = part;
 
     // get the list of all KPart plugins
     m_pluginList = KParts::Plugin::pluginObjects(m_part);
+
+    kdDebug() << "PluginManager::setPart(): plugins count = " << m_pluginList.count() << endl;
 
     // remove all plugins from main menu
     if( m_part->factory() )
@@ -74,6 +84,7 @@ bool PluginManager::activatePluginForUrl(const KURL& url)
     Cervisia::PluginBase* plugin = static_cast<Cervisia::PluginBase*>(m_pluginList.first());
     for( ; plugin; plugin = static_cast<Cervisia::PluginBase*>(m_pluginList.next()) )
     {
+        kdDebug() << "PluginManager::activatePluginForUrl(): type = " << plugin->type() << endl;
         if( plugin->canHandle(url) )
         {
             activated = true;
