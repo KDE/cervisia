@@ -11,7 +11,7 @@ INCLUDES = $(all_includes)
 bin_PROGRAMS = cvsservice cvsaskpass
 
 cvsservice_LDFLAGS = $(all_libraries) $(KDE_RPATH)
-cvsservice_LDADD = $(LIB_KDEUI) $(LIB_KIO)
+cvsservice_LDADD = $(LIB_KIO)
 cvsservice_SOURCES = main.cpp cvsservice.cpp cvsjob.cpp \
 	cvsservice.skel cvsservice.stub cvsjob.skel cvsjob.stub \
 	repository.cpp repository.skel repository.stub sshagent.cpp \
