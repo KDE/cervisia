@@ -28,31 +28,31 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent, const char* name)
 {
     QFrame* mainWidget = makeMainWidget();
     QBoxLayout* topLayout = new QVBoxLayout(mainWidget, 0, spacingHint());
-    
+
     m_formatBtnGroup = new QVButtonGroup(i18n("Output Format"), mainWidget, "");
     topLayout->addWidget(m_formatBtnGroup);
- 
+
     connect(m_formatBtnGroup, SIGNAL(clicked(int)),
-            this,             SLOT(formatChanged(int)));   
-            
-    QRadioButton* contextFormatBtn = new QRadioButton("Context", m_formatBtnGroup);
-    QRadioButton* normalFormatBtn  = new QRadioButton("Normal", m_formatBtnGroup);
-    QRadioButton* unifiedFormatBtn = new QRadioButton("Unified", m_formatBtnGroup);
+            this,             SLOT(formatChanged(int)));
+
+    QRadioButton* contextFormatBtn = new QRadioButton(i18n( "Context" ), m_formatBtnGroup);
+    QRadioButton* normalFormatBtn  = new QRadioButton(i18n( "Normal" ), m_formatBtnGroup);
+    QRadioButton* unifiedFormatBtn = new QRadioButton(i18n( "Unified" ), m_formatBtnGroup);
     unifiedFormatBtn->setChecked(true);
-                                               
+
     QLabel* contextLinesLbl = new QLabel(i18n("&Number of context lines:"),
                                          mainWidget);
     m_contextLines = new KIntNumInput(3, mainWidget);
     m_contextLines->setRange(2, 65535, 1, false);
-    contextLinesLbl->setBuddy(m_contextLines); 
-    
+    contextLinesLbl->setBuddy(m_contextLines);
+
     QBoxLayout* contextLinesLayout = new QHBoxLayout(topLayout);
     contextLinesLayout->addWidget(contextLinesLbl);
     contextLinesLayout->addWidget(m_contextLines);
-    
+
     QVButtonGroup* ignoreBtnGroup = new QVButtonGroup(i18n("Ignore Options"), mainWidget);
     topLayout->addWidget(ignoreBtnGroup);
-    
+
     m_blankLineChk = new QCheckBox(i18n("Ignore added or removed empty lines"),
                                    ignoreBtnGroup);
     m_spaceChangeChk = new QCheckBox(i18n("Ignore changes in the amount of whitespace"),
@@ -70,19 +70,19 @@ PatchOptionDialog::~PatchOptionDialog()
 QString PatchOptionDialog::diffOptions() const
 {
     QString options;
-    
+
     if( m_blankLineChk->isChecked() )
         options += " -B ";
 
     if( m_spaceChangeChk->isChecked() )
         options += " -b ";
-    
+
     if( m_allSpaceChk->isChecked() )
         options += " -w ";
-    
+
     if( m_caseChangesChk->isChecked() )
         options += " -i ";
-    
+
     return options;
 }
 
@@ -95,7 +95,7 @@ QString PatchOptionDialog::formatOption() const
         case 1: return "";
         case 2: return "-U " + QString::number(m_contextLines->value());
     }
-    
+
     return "";
 }
 
