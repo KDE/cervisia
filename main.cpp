@@ -25,6 +25,8 @@
 #include "misc.h"
 #include "cervisiashell.h"
 #include "cvsservice_stub.h"
+#include "annotatedlg.h"
+#include "annotatectl.h"
 #include "logdlg.h"
 #include "resolvedlg.h"
 #include "version.h"
@@ -101,12 +103,41 @@ static int ShowLogDialog(const QString& fileName)
 }
 
 
+static int ShowAnnotateDialog(const QString& fileName)
+{
+    KConfig* config = new KConfig("cervisiapartrc");
+    AnnotateDialog* dlg = new AnnotateDialog(*config);
+    kapp->setMainWidget(dlg);
+
+    // get directory for file
+    const QFileInfo fi(fileName);
+    QString directory = fi.dirPath(true);
+
+    // start the cvs DCOP service
+    CvsService_stub* cvsService = StartDCOPService(directory);
+
+    AnnotateController ctl(dlg, cvsService);
+    ctl.showDialog(fi.fileName());
+
+    int result = kapp->exec();
+
+    // stop the cvs DCOP service
+    cvsService->quit();
+    delete cvsService;
+
+    delete config;
+
+    return result;
+}
+
+
 int main(int argc, char **argv)
 {
     static KCmdLineOptions options[] = {
         { "+[directory]", I18N_NOOP("The sandbox to be loaded"), 0 },
         { "resolve <file>", I18N_NOOP("Show resolve dialog for the given file"), 0 },
         { "log <file>", I18N_NOOP("Show log dialog for the given file"), 0 },
+        { "annotate <file>", I18N_NOOP("Show annotation dialog for the given file"), 0 },
         KCmdLineLastOption
     };
     KAboutData about("cervisia", I18N_NOOP("Cervisia"), CERVISIA_VERSION,
@@ -140,6 +171,11 @@ int main(int argc, char **argv)
     QString logFile = KCmdLineArgs::parsedArgs()->getOption("log");
     if( !logFile.isEmpty() )
         return ShowLogDialog(logFile);
+
+    // is command line option 'show annotation dialog' specified?
+    QString annotateFile = KCmdLineArgs::parsedArgs()->getOption("annotate");
+    if( !annotateFile.isEmpty() )
+        return ShowAnnotateDialog(annotateFile);
 
     if ( app.isRestored() ) {
         RESTORE(CervisiaShell);
