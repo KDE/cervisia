@@ -1,3 +1,7 @@
+2003-01-11  Christian Loose <christian.loose@hamburg.de>
+
+	* Added help button to CommitDialog
+
 2003-01-09  Christian Loose <christian.loose@hamburg.de>
 
 	* Use DCOP stubs to access the methods of the cvs DCOP service

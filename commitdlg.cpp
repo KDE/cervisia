@@ -29,7 +29,7 @@ CommitDialog::Options *CommitDialog::options = 0;
 
 CommitDialog::CommitDialog(ActionType action, QWidget *parent, const char *name)
     : KDialogBase(parent, name, true, QString::null,
-                  Ok | Cancel, Ok, true),
+                  Ok | Cancel | Help, Ok, true),
       edit(0)
 {
     setCaption( (action==Add)?       i18n("CVS Add") :
@@ -77,6 +77,8 @@ CommitDialog::CommitDialog(ActionType action, QWidget *parent, const char *name)
         }
     else
         listbox->setEnabled(false);
+
+    setHelp("commitingfiles");
 
     if (options && edit) // Only for commits
         resize(options->size);
