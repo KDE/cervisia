@@ -34,8 +34,8 @@ class CvsJob : public QObject, public DCOPObject
     K_DCOP
 
 public:
-    CvsJob(unsigned jobNum);
-    CvsJob(const QString& objId);
+    explicit CvsJob(unsigned jobNum);
+    explicit CvsJob(const QString& objId);
     virtual ~CvsJob();
 
     void clearCvsCommand();
@@ -63,8 +63,8 @@ k_dcop:
 
 k_dcop_signals:
     void jobExited(bool normalExit, int status);
-    void receivedStdout(QString buffer);
-    void receivedStderr(QString buffer);
+    void receivedStdout(const QString& buffer);
+    void receivedStderr(const QString& buffer);
 
 private slots:
     void slotProcessExited();
