@@ -27,9 +27,9 @@ class AnnotateDialog : public KDialogBase
 {
 public:
 
-    AnnotateDialog( QWidget *parent=0, const char *name=0 );
+    explicit AnnotateDialog( QWidget *parent=0, const char *name=0 );
 
-    ~AnnotateDialog();
+    virtual ~AnnotateDialog();
 
     bool parseCvsAnnotate(const QString &sandbox, const QString &repository,
                           const QString &filename, const QString &rev);
