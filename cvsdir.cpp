@@ -14,6 +14,8 @@
 
 #include "cvsdir.h"
 
+#include <qtextstream.h>
+
 #include <stdlib.h>
 
 #include "stringmatcher.h"
@@ -73,9 +75,11 @@ void CvsIgnoreList::addEntriesFromFile(const QString &name)
 
     if( file.open(IO_ReadOnly) )
     {
-        QString line;
-        while( file.readLine(line, 512) != -1 )
-            addEntriesFromString(line);
+        QTextStream stream(&file);
+        while( !stream.eof() )
+        {
+            addEntriesFromString(stream.readLine());
+        }
     }
 }
 
