@@ -38,7 +38,7 @@ QSize Cervisia::configDialogSize(QDialog* dialog, KConfig& config, const QString
 
 
 
-void saveDialogSize(QDialog* dialog, KConfig& config, const QString& groupName)
+void Cervisia::saveDialogSize(QDialog* dialog, KConfig& config, const QString& groupName)
 {
    int scnum  = QApplication::desktop()->screenNumber(dialog);
    QRect desk = QApplication::desktop()->screenGeometry(scnum);
