@@ -49,7 +49,10 @@
 
 LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     : KDialogBase(parent, name, false, QString::null,
-                  Close | Help | User1 | User2 | User3, Close, true)
+                  Close | Help | User1 | User2 | User3, Close, true,
+                  KGuiItem(i18n("&Annotate")),
+                  KGuiItem(i18n("&Diff")),
+                  KGuiItem(i18n("&Find"), "find"))
     , cvsService(0)
     , partConfig(cfg)
 {
@@ -157,10 +160,6 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
              this, SLOT(tagASelected(int)) );
     connect( tagcombo[1], SIGNAL(activated(int)),
              this, SLOT(tagBSelected(int)) );
-
-    setButtonText(User1, i18n("&Annotate"));
-    setButtonText(User2, i18n("&Diff"));
-    setButtonText(User3, i18n("&Find"));
 
     connect( this, SIGNAL(user1Clicked()),
              this, SLOT(annotateClicked()) );
