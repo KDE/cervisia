@@ -12,7 +12,7 @@ libcervisia_la_SOURCES = annotatedlg.cpp diffdlg.cpp patchoptiondlg.cpp logdlg.c
 		   diffview.cpp loglist.cpp logplainview.cpp logtree.cpp annotatectl.cpp   \
 		   loginfo.cpp misc.cpp qttableview.cpp tooltip.cpp cervisiasettings.kcfgc \
 		   settingsdlg.cpp settingsdlg_advanced.ui
-libcervisia_la_COMPILE_FIRST = cvsservice/cvsservice_stub.h
+libcervisia_la_COMPILE_FIRST = cvsservice/cvsservice_stub.h cervisiasettings.h
 
 libcervisiapart_la_SOURCES = updateview.cpp protocolview.cpp protocolview.skel \
 		   watchdlg.cpp changelogdlg.cpp historydlg.cpp \
@@ -25,12 +25,12 @@ libcervisiapart_la_SOURCES = updateview.cpp protocolview.cpp protocolview.skel \
 libcervisiapart_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
 libcervisiapart_la_LIBADD = $(LIB_KFILE) $(LIB_KPARTS) $(LIB_KUTILS) \
 		   cvsservice/libcvsservice.la libcervisia.la
-libcervisiapart_la_COMPILE_FIRST = cvsservice/cvsservice_stub.h
+libcervisiapart_la_COMPILE_FIRST = cvsservice/cvsservice_stub.h cervisiasettings.h
 
 cervisia_SOURCES = main.cpp cervisiashell.cpp
 cervisia_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 cervisia_LDADD = $(LIB_KPARTS) $(LIB_KUTILS) cvsservice/libcvsservice.la libcervisia.la
-cervisia_COMPILE_FIRST = cvsservice/cvsservice_stub.h
+cervisia_COMPILE_FIRST = cvsservice/cvsservice_stub.h cervisiasettings.h
 
 man_MANS = cervisia.1
 
