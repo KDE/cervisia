@@ -1480,34 +1480,44 @@ void CervisiaPart::slotJobFinished(bool)
 
 void CervisiaPart::openSandbox(const QString &dirname)
 {
-    QFileInfo fi1(dirname);
-    QString sandboxpath = fi1.absFilePath();
-
-    QFileInfo fi2(sandboxpath + "/CVS");
-    if (!fi2.exists() || !fi2.isDir())
+    // change the working copy directory for the cvs DCOP service
+    DCOPReply opened = cvsService.call("setWorkingCopy(QString)", dirname);
+    
+    if( !opened.isValid() || !opened )
     {
-        recent->removeURL( KURL(sandboxpath) );
         KMessageBox::sorry(widget(),
                            i18n("This is not a CVS directory.\n"
-				"If you did not intend to use Cervisia, you can switch view modes within Konqueror."),
+                           "If you did not intend to use Cervisia, you can "
+                           "switch view modes within Konqueror."),
                            "Cervisia");
+        
+        // remove path from recent sandbox menu
+        QFileInfo fi(dirname);
+        recent->removeURL( KURL::fromPathOrURL(fi.absFilePath()) );
+        
         return;
     }
-    recent->addURL( KURL(sandboxpath) );
-
+    
     changelogstr = "";
-    sandbox = sandboxpath;
-    repository = "";
-
-    QFile f(sandbox + "/CVS/Root");
-    if (f.open(IO_ReadOnly))
-    {
-        QTextStream t(&f);
-        repository = t.readLine();
-    }
-    f.close();
-
+    sandbox      = "";
+    repository   = "";
+    
+    // get path of sandbox for recent sandbox menu
+    DCOPReply sandboxPath = cvsService.call("workingCopy()");
+    if( !sandboxPath.isValid() )
+        return;
+    else
+        sandboxPath.get<QString>(sandbox);
+    recent->addURL( KURL::fromPathOrURL(sandbox) );
+    
+    // get repository for the caption of the window
+    DCOPReply repositoryLocation = cvsService.call("repository()");
+    if( !repositoryLocation.isValid() )
+        return;
+    else
+        repositoryLocation.get<QString>(repository);
     emit setWindowCaption(sandbox + "(" + repository + ")");
+    
     QDir::setCurrent(sandbox);
     update->openDirectory(sandbox);
     setFilter();
