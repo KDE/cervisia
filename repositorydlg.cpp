@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2001 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
  *
@@ -58,11 +58,14 @@ RepositoryDialog::RepositoryDialog(QWidget *parent, const char *name)
     repolist->addColumn("Status");
     repolist->setFocus();
 
+    connect(repolist,SIGNAL(selectionChanged ()),
+            this,SLOT(slotSelectionChanged()));
+
     KButtonBox *actionbox = new KButtonBox(this, KButtonBox::Vertical);
     actionbox->addStretch();
     QPushButton *addbutton = actionbox->addButton(i18n("&Add..."));
-    QPushButton *removebutton = actionbox->addButton(i18n("&Remove"));
-    QPushButton *settingsbutton = actionbox->addButton(i18n("&Settings..."));
+    removebutton = actionbox->addButton(i18n("&Remove"));
+    settingsbutton = actionbox->addButton(i18n("&Settings..."));
 #if 0
     actionbox->addStretch();
     QPushButton *loginbutton = actionbox->addButton(i18n("Login..."));
@@ -88,7 +91,7 @@ RepositoryDialog::RepositoryDialog(QWidget *parent, const char *name)
 
     readCvsPassFile();
     readConfigFile();
-    
+
     QFrame *frame = new QFrame(this);
     frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
     frame->setMinimumHeight(frame->sizeHint().height());
@@ -108,11 +111,18 @@ RepositoryDialog::RepositoryDialog(QWidget *parent, const char *name)
     layout->activate();
     resize(sizeHint());
 
-    
+
     if (options)
         resize(options->size);
+    slotSelectionChanged();
 }
 
+void RepositoryDialog::slotSelectionChanged()
+{
+    bool state=(repolist->currentItem()!=0);
+    removebutton->setEnabled(state);
+    settingsbutton->setEnabled(state);
+}
 
 void RepositoryDialog::done(int r)
 {
@@ -133,12 +143,12 @@ void RepositoryDialog::done(int r)
                     QString str = item->text(1);
                     if (str.left(5) != "ext (")
                         continue;
-                    
+
                     config->setGroup(QString("Repository-") + item->text(0));
                     config->writeEntry("rsh", str.mid(5,str.length()-6));
                 }
         }
-    
+
     if (!options)
         options = new Options;
     options->size = size();
@@ -160,7 +170,7 @@ void RepositoryDialog::saveOptions(KConfig *config)
 {
     if (!options)
         return;
-    
+
     config->writeEntry("Customized", true);
     config->writeEntry("Size", options->size);
 }
@@ -180,7 +190,7 @@ void RepositoryDialog::readConfigFile()
 {
     QStrList list;
     Repositories::readConfigFile(&list);
-    
+
     // Sort out all list elements which are already in the list view
     QListViewItem *item = repolist->firstChild();
     for ( ; item; item = item->nextSibling())
@@ -217,7 +227,7 @@ void RepositoryDialog::readConfigFile()
                     else
                         method = "local";
                 }
-            
+
             new QListViewItem(repolist, repo, method, status);
         }
 }
@@ -229,7 +239,7 @@ void RepositoryDialog::slotAddClicked()
     if (dlg.exec() == QDialog::Accepted)
         {
             QString repo = dlg.repository();
-            
+
             QListViewItem *item = repolist->firstChild();
             for ( ; item; item = item->nextSibling())
                 if (item->text(0) == repo)
@@ -238,7 +248,7 @@ void RepositoryDialog::slotAddClicked()
                                                  i18n("This repository is already known."));
                         return;
                     }
-            
+
             QString method;
             QString status;
             if (repo.left(9) == ":pserver:")
@@ -262,9 +272,9 @@ void RepositoryDialog::slotAddClicked()
                     else
                         method = "local";
                 }
-            
+
             new QListViewItem(repolist, repo, method, status);
-            
+
         }
 }
 
@@ -272,13 +282,14 @@ void RepositoryDialog::slotAddClicked()
 void RepositoryDialog::slotRemoveClicked()
 {
     delete repolist->currentItem();
+    slotSelectionChanged();
 }
 
 
 void RepositoryDialog::slotSettingsClicked()
 {
     QListViewItem* item = repolist->currentItem();
-    
+
     if (item)
         {
             // create a repository settings dialog for the chosen repository
@@ -308,22 +319,22 @@ AddRepositoryDialog::AddRepositoryDialog(QWidget *parent, const char *name)
     QLabel *repo_label = new QLabel(i18n("&Repository:"), this);
     repo_label->setMinimumSize(repo_label->sizeHint());
     layout->addWidget(repo_label);
-    
+
     repo_edit = new KLineEdit(this);
     repo_edit->setFocus();
     repo_label->setBuddy(repo_edit);
     repo_edit->setMinimumSize(repo_edit->sizeHint());
     layout->addWidget(repo_edit);
-    
+
     QLabel *rsh_label = new QLabel(i18n("Use remote &shell: (only for :ext: repositories)"), this);
     rsh_label->setMinimumSize(rsh_label->sizeHint());
     layout->addWidget(rsh_label);
-    
+
     rsh_edit = new KLineEdit(this);
     rsh_label->setBuddy(rsh_edit);
     rsh_edit->setMinimumSize(rsh_edit->sizeHint());
     layout->addWidget(rsh_edit);
-    
+
     QFrame *frame = new QFrame(this);
     frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
     frame->setMinimumHeight(frame->sizeHint().height());
@@ -376,7 +387,7 @@ void AddRepositoryDialog::saveOptions(KConfig *config)
 {
     if (!options)
         return;
-    
+
     config->writeEntry("Customized", true);
     config->writeEntry("Size", options->size);
 }
@@ -395,4 +406,4 @@ void AddRepositoryDialog::repoChanged()
 // c-basic-offset: 4
 // End:
 
-    
+

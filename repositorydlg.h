@@ -45,7 +45,7 @@ private slots:
     void slotSettingsClicked();
     void slotLoginClicked();
     void slotLogoutClicked();
-
+    void slotSelectionChanged();
 private:
     struct Options {
         QSize size;
@@ -53,6 +53,7 @@ private:
     static Options *options;
 
     ListView *repolist;
+    QPushButton *removebutton,*settingsbutton ;
 };
 
 
