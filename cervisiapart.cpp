@@ -618,14 +618,12 @@ void CervisiaPart::slotOpenSandbox()
 void CervisiaPart::slotChangeLog()
 {
     // Modal dialog
-    ChangeLogDialog *l = new ChangeLogDialog();
-    if (l->readFile(sandbox + "/ChangeLog"))
+    ChangeLogDialog dlg(widget());
+    if (dlg.readFile(sandbox + "/ChangeLog"))
     {
-        if (l->exec())
-            changelogstr = l->message();
+        if (dlg.exec())
+            changelogstr = dlg.message();
     }
-
-    delete l;
 }
 
 
