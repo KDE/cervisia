@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2002-2004 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -162,7 +162,7 @@ private:
     void updateSandbox(const QString &extraopt = QString::null);
     void addOrRemove(AddRemoveDialog::ActionType action);
     void addOrRemoveWatch(WatchDialog::ActionType action);
-    void createOrDeleteTag(TagDialog::ActionType action);
+    void createOrDeleteTag(Cervisia::TagDialog::ActionType action);
     void showJobStart(const QString &command);
     void showDiff(const QString& revision);
     void setFilter();

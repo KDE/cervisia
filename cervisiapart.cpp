@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2002-2004 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -60,6 +60,8 @@
 #include "cervisiapart.h"
 #include "version.h"
 #include "cervisiapart.moc"
+
+using Cervisia::TagDialog;
 
 #define COMMIT_SPLIT_CHAR '\r'
 
