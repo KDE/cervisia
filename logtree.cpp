@@ -434,16 +434,14 @@ void LogTreeView::mousePressEvent(QMouseEvent *e)
 }
 
 
-void LogTreeView::windowActivationChange( bool )
+void LogTreeView::mouseMoveEvent(QMouseEvent *e)
 {
-    hideLabel();
-}
-
-
-bool LogTreeView::eventFilter(QObject *o, QEvent *e)
-{
+#if 0
     if (o != this || e->type() != QEvent::MouseMove || !isActiveWindow())
         return QtTableView::eventFilter(o, e);
+#endif
+    if (!isActiveWindow())
+        return;
 
     int row = findRow(static_cast<QMouseEvent*>(e)->y());
     int col = findCol(static_cast<QMouseEvent*>(e)->x());
@@ -499,8 +497,20 @@ bool LogTreeView::eventFilter(QObject *o, QEvent *e)
                     currentCol = col;
                 }
         }
+}
 
-    return QtTableView::eventFilter(o, e);
+
+void LogTreeView::windowActivationChange(bool oldActive)
+{
+    hideLabel();
+    QtTableView::windowActivationChange(oldActive);
+}
+
+
+void LogTreeView::leaveEvent(QEvent *e)
+{
+    hideLabel();
+    QtTableView::leaveEvent(e);
 }
 
 

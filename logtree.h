@@ -49,9 +49,11 @@ signals:
     void revisionClicked(QString rev, bool rmb);
 
 protected:
-    virtual void windowActivationChange(bool oldActive);
-    virtual bool eventFilter(QObject *o, QEvent *e);
+    //    virtual bool eventFilter(QObject *o, QEvent *e);
     virtual void mousePressEvent(QMouseEvent *e);
+    virtual void mouseMoveEvent(QMouseEvent *e);
+    virtual void windowActivationChange(bool oldActive);
+    virtual void leaveEvent(QEvent *e);
     virtual void setupPainter(QPainter *p);
     virtual void paintCell(QPainter *p, int row, int col);
     virtual int cellWidth(int col);
