@@ -159,8 +159,12 @@ void AnnotateController::Private::parseCvsAnnotateOutput()
     while( progress->getLine(line) )
     {
         QDateTime dt;
-        dt.setTime_t(KRFCDate::parseDate(line.mid(23, 9)), Qt::UTC);
-        date    = dt.date();
+        QString dateString = line.mid(23, 9);
+        if( !dateString.isEmpty() )
+        {
+            dt.setTime_t(KRFCDate::parseDate(dateString), Qt::UTC);
+            date    = dt.date();
+        }
         rev     = line.left(13).stripWhiteSpace();
         author  = line.mid(14, 8).stripWhiteSpace();
         content = line.mid(35, line.length()-35);
