@@ -249,10 +249,10 @@ bool DiffDialog::parseCvsDiff(const QString &sandbox, const QString &repository,
 
     setCaption(i18n("CVS Diff: %1").arg(filename));
     revlabel1->setText( revA.isEmpty()?
-                        QString(i18n("Repository"))
+                        i18n("Repository")
                         : i18n("Revision ")+revA );
     revlabel2->setText( revB.isEmpty()?
-                        QString(i18n("Working dir"))
+                        i18n("Working dir")
                         : i18n("Revision ")+revB );
     
     KConfig *config = CervisiaPart::config();
