@@ -103,7 +103,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     conf->setGroup("LookAndFeel");
     bool splitHorz = conf->readBoolEntry("SplitHorizontally",true);
 
-    splitter = new QSplitter(splitHorz? QSplitter::Vertical : QSplitter::Horizontal, 
+    splitter = new QSplitter(splitHorz? QSplitter::Vertical : QSplitter::Horizontal,
                              parentWidget, widgetName);
 
     update = new UpdateView(splitter);
@@ -121,7 +121,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     setWidget(splitter);
     setupActions();
     connect( update, SIGNAL( selectionChanged() ), this, SLOT( updateActions() ) );
-
+    updateActions();
     setXMLFile( "cervisiaui.rc" );
 }
 
@@ -520,7 +520,7 @@ void CervisiaPart::updateActions()
     actionCollection()->action( "view_last_change" )->setEnabled( single );
 
     //    bool nojob = !( actionCollection()->action( "stop_job" )->isEnabled() );
-    bool nojob = !hasRunningJob;
+    bool nojob = !hasRunningJob && update->selectedItem();
 
     actionCollection()->action( "file_update" )->setEnabled( nojob );
     actionCollection()->action( "file_status" )->setEnabled( nojob );
