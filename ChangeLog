@@ -1,3 +1,7 @@
+2003-02-02  Christian Loose <christian.loose@hamburg.de>
+
+	* Added login() and logout() methods to DCOP service.
+
 2003-01-26  André Wöbbeking <Woebbeking@web.de>
 
 	* Implemented new option "Hide Empty Directories"
