@@ -222,7 +222,7 @@ void CervisiaPart::setupActions()
     //
     // File Menu
     //
-    action = new KAction( i18n("O&pen Sandbox..."), "fileopen", 0,
+    action = new KAction( i18n("O&pen Sandbox..."), "fileopen", CTRL+Key_O,
                           this, SLOT( slotOpenSandbox() ),
                           actionCollection(), "file_open" );
     hint = i18n("Opens a CVS working folder in the main window");
