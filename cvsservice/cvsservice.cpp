@@ -510,7 +510,7 @@ DCOPRef CvsService::simulateUpdate(const QStringList& files, bool recursive,
     // cvs -n update [-l] [-d] [-P] [FILES]
     d->singleCvsJob->clearCvsCommand();
 
-    *d->singleCvsJob << d->repository->cvsClient() << "-n update";
+    *d->singleCvsJob << d->repository->cvsClient() << "-n -q update";
 
     if( !recursive )
         *d->singleCvsJob << "-l";
@@ -595,7 +595,7 @@ DCOPRef CvsService::update(const QStringList& files, bool recursive,
     // cvs update [-l] [-d] [-P] [EXTRAOPTIONS] [FILES]
     d->singleCvsJob->clearCvsCommand();
 
-    *d->singleCvsJob << d->repository->cvsClient() << "update";
+    *d->singleCvsJob << d->repository->cvsClient() << "-q update";
 
     if( !recursive )
         *d->singleCvsJob << "-l";
