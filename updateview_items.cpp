@@ -367,7 +367,18 @@ void UpdateDirItem::accept(Visitor& visitor)
 void UpdateDirItem::setOpen(bool open)
 {
     if ( open )
+    {
+        const bool openFirstTime(!wasScanned());
+
         maybeScanDir(false);
+
+        // if new items were created their visibility must be checked
+        // (not while unfoldTree() as this could be slow and unfoldTree()
+        // calls setFilter() itself)
+        UpdateView* view = updateView();
+        if (openFirstTime && !view->isUnfoldingTree())
+            view->setFilter(view->filter());
+    }
 
     QListViewItem::setOpen(open);
 }

@@ -33,7 +33,8 @@ using Cervisia::EntryStatus;
 
 UpdateView::UpdateView(KConfig& partConfig, QWidget *parent, const char *name)
     : KListView(parent, name),
-      m_partConfig(partConfig)
+      m_partConfig(partConfig),
+      m_unfoldingTree(false)
 {
     setAllColumnsShowFocus(true);
     setShowSortIndicator(true);
@@ -166,9 +167,17 @@ const QColor& UpdateView::remoteChangeColor() const
 }
 
 
+bool UpdateView::isUnfoldingTree() const
+{
+    return m_unfoldingTree;
+}
+
+
 void UpdateView::unfoldTree()
 {
     QApplication::setOverrideCursor(waitCursor);
+
+    m_unfoldingTree = true;
 
     const bool updatesEnabled(isUpdatesEnabled());
 
@@ -200,13 +209,13 @@ void UpdateView::unfoldTree()
     }
 
     // maybe some UpdateDirItem was opened the first time so check the whole tree
-    // (this is needed for the filter NoEmptyDirectories)
-    if (filter() & NoEmptyDirectories)
-        setFilter(filter());
+    setFilter(filter());
 
     setUpdatesEnabled(updatesEnabled);
 
     triggerUpdate();
+
+    m_unfoldingTree = false;
 
     QApplication::restoreOverrideCursor();
 }
@@ -281,10 +290,9 @@ void UpdateView::finishJob(bool normalExit, int exitStatus)
         markUpdated(true, success);
     syncSelection();
 
-    // visibility of items could be changed so check the whole tree
-    // (this is needed for the filter NoEmptyDirectories)
-    if (filter() & NoEmptyDirectories)
-        setFilter(filter());
+    // maybe some new items were created or
+    // visibility of items changed so check the whole tree
+    setFilter(filter());
 }
 
 

@@ -58,6 +58,11 @@ public:
     const QColor& localChangeColor() const;
     const QColor& remoteChangeColor() const;
 
+    /**
+     * @return \c true iff unfoldTree() is active.
+     */
+    bool isUnfoldingTree() const;
+
 signals:
     void fileOpened(QString filename);
     
@@ -87,6 +92,11 @@ private:
     QColor m_conflictColor;
     QColor m_localChangeColor;
     QColor m_remoteChangeColor;
+
+    /**
+     * \c true iff unfoldTree() is active (is needed by UpdateDirItem::setOpen()).
+     */
+    bool m_unfoldingTree;
 };
 
 #endif
