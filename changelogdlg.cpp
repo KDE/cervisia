@@ -15,10 +15,8 @@
 #include "changelogdlg.h"
 
 #include <qfile.h>
-#include <qfileinfo.h>
 #include <qmultilinedit.h>
 #include <qtextstream.h>
-#include <kapplication.h>
 #include <kconfig.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
@@ -107,9 +105,8 @@ void ChangeLogDialog::saveOptions(KConfig *config)
 bool ChangeLogDialog::readFile(const QString &filename)
 {
     fname = filename;
-    QFileInfo fi(filename);
-    bool exists = QFileInfo(filename).exists();
-    if (!exists)
+
+    if (!QFile::exists(filename))
         {
             if (KMessageBox::warningContinueCancel(this,
                                          i18n("A ChangeLog file does not exist. Create one?"),
