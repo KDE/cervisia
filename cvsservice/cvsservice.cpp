@@ -152,7 +152,7 @@ DCOPRef CvsService::checkout(const QString& workingDir, const QString& repositor
                      << d->repository->cvsClient()
                      << "-d" << repository
                      << "checkout";
-                    
+
     if( !tag.isEmpty() )
         *d->singleCvsJob << "-r" << tag;
 
@@ -194,10 +194,46 @@ DCOPRef CvsService::log(const QString& fileName)
 
     // create a cvs job
     CvsJob* job = d->createCvsJob();
-    
+
     // assemble the command line
     // cvs log [FILE]
     *job << d->repository->cvsClient() << "log" << KProcess::quote(fileName);
+
+    // return a DCOP reference to the cvs job
+    return DCOPRef(d->appId, job->objId());
+}
+
+
+DCOPRef CvsService::login()
+{
+    if( !d->hasWorkingCopy() )
+        return DCOPRef();
+
+    // create a cvs job
+    CvsJob* job = d->createCvsJob();
+
+    // assemble the command line
+    // cvs -d [REPOSITORY] login
+    *job << d->repository->cvsClient() << "-d" << d->repository->location()
+         << "login";
+
+    // return a DCOP reference to the cvs job
+    return DCOPRef(d->appId, job->objId());
+}
+
+
+DCOPRef CvsService::logout()
+{
+    if( !d->hasWorkingCopy() )
+        return DCOPRef();
+
+    // create a cvs job
+    CvsJob* job = d->createCvsJob();
+
+    // assemble the command line
+    // cvs -d [REPOSITORY] logout
+    *job << d->repository->cvsClient() << "-d" << d->repository->location()
+         << "logout";
 
     // return a DCOP reference to the cvs job
     return DCOPRef(d->appId, job->objId());

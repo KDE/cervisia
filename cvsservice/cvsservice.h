@@ -81,7 +81,15 @@ k_dcop:
      *         null reference.
      */
     DCOPRef log(const QString& fileName);
-    
+
+    /**
+     */
+    DCOPRef login();
+
+    /**
+     */
+    DCOPRef logout();
+
     /**
      */
     DCOPRef remove(const QStringList& files, bool recursive);
