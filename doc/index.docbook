@@ -85,7 +85,7 @@ be categorized as follows:
 <listitem>
 <para>
 The repository is something like <filename
-class="directory">/home/cvs</filename> and is simply stored in  a directory
+class="directory">/home/cvs</filename> and is simply stored in  a folder
 which is accessible from your computer.  It may physically be on a disk which
 is mounted via <acronym>NFS</acronym>, but this is an irrelevant detail.  If
 you often use a certain local repository, you will want to tell &cervisia;
@@ -249,7 +249,7 @@ If the repository is remote, make sure that authentication works (see
 The name of the module under which the project will be stored. After the
 import, the project can be checked out under this name.  See 
 <xref linkend="checkingout"/> for more information.  This is also the name of
-the corresponding directory in the repository.
+the corresponding folder in the repository.
 </para>
 </callout>
 
@@ -274,10 +274,10 @@ is the version number of the imported release.
 </calloutlist>
 
 <formalpara>
-<title>Working directory</title>
+<title>Working folder</title>
 <para>
-This is the toplevel directory of the project you want to import. The import
-starts from this directory and goes down recursively.
+This is the toplevel folder of the project you want to import. The import
+starts from this folder and goes down recursively.
 </para>
 </formalpara>
 
@@ -288,7 +288,7 @@ If you fill out this field, an additional <option>-I <replaceable>filenames</rep
 option is given go the <command>cvs import</command> command. This entry is
 interpreted as a whitespace-separated list of file name patterns which are
 ignored. In general, a cleaner and less error-prone way to control which files
-go into the repository is to create a directory with only the files which you
+go into the repository is to create a folder with only the files which you
 want to import and start from that. Nevertheless, this entry may be useful if
 the project contains files which are by default ignored by &CVS;, e.g. files
 with the name <filename>core</filename>. In such a case, simply enter the
@@ -346,11 +346,11 @@ button.
 </formalpara>
 
 <formalpara>
-<title>Working directory</title>
+<title>Working folder</title>
 <para>
-The directory under which the module should be checked out. Note that the
-toplevel directory of the working copy is always created as a directory with
-the name as the module under the directory given here.
+The folder under which the module should be checked out. Note that the
+toplevel folder of the working copy is always created as a folder with
+the name as the module under the folder given here.
 </para>
 </formalpara>
 
@@ -363,7 +363,7 @@ the name as the module under the directory given here.
 When you start &cervisia;, and open a working copy by choosing
 <menuchoice><guimenu>File</guimenu><guimenuitem>Open
 Sandbox...</guimenuitem></menuchoice> you see a hierarchical view of the
-current directory. According to the settings in your
+current folder. According to the settings in your
 <filename>.cvsignore</filename> files, the files you usually do not want to
 include into the repository - like e.g. object files - are not shown. For each
 file, you see its corresponding status. In the default setting, this is
@@ -384,7 +384,7 @@ connection to the &CVS; server.
 
 <para>
 The commands in the File menu usually act only on the files which you have
-marked. You may also mark directories. Now choose
+marked. You may also mark folders. Now choose
 <guimenuitem>Update</guimenuitem> from the <guimenu>File</guimenu>
 menu. &cervisia; issues a</para>
 
@@ -394,7 +394,7 @@ menu. &cervisia; issues a</para>
 
 <para>
 command to get status information for the marked files. Note that &cervisia;
-goes recursively into subdirectories.  only if you have the according option
+goes recursively into subfolders.  only if you have the according option
 in the <guimenu>Settings</guimenu> menu set. According to the respective
 file's status, you now see an entry in the <guilabel>Status</guilabel> column:
 </para>
@@ -408,7 +408,7 @@ version in the repository.
 
 <listitem><para>
 Locally Added - This means the file does not exist in the repository, but in
-your working directory and you have scheduled it for addition. The actual
+your working folder and you have scheduled it for addition. The actual
 insertion into the repository only happens after a commit.
 </para></listitem>
 
@@ -421,7 +421,7 @@ commit.
 <listitem><para>
 Needs Update - This is shown if a newer version of the file exists in the
 repository, e.g. because someone committed a modification. Normally, you want
-to update this file so you have an up-to-date version in your directory.
+to update this file so you have an up-to-date version in your folder.
 </para></listitem>
 
 <listitem><para>
@@ -432,7 +432,7 @@ instead of the whole file to you.
 
 <listitem><para>
 Needs Merge - Indicates that a merge of the revision of this file in your
-working directory with the version in the repository is necessary. This
+working folder with the version in the repository is necessary. This
 typically happens if you have made modifications to the file file while
 someone else has committed his modifications. If you choose to update, the
 modifications in the repository are merged into your file. In case of a
@@ -461,8 +461,8 @@ repository. If not, you may consider adding it to your
       
 <para>
 Now that you have got an overview of the current status of the CVS, you may
-want to do an update. Mark some files (or the root of the directory tree which
-is equivalent to marking all files in this directory). Now choose
+want to do an update. Mark some files (or the root of the folder tree which
+is equivalent to marking all files in this folder). Now choose
 <guimenuitem>Update</guimenuitem> from the <guimenu>File</guimenu> menu. (Of
 course, you could have chosen this at the beginning of the session). For some
 of the files the status may change now. Typically, files which had "Needs
@@ -490,7 +490,7 @@ You may have noticed that according to the status of the file, its row has a
 different color. The colors are chosen to somehow reflect the priority of the
 status. For example, a file with a conflict is marked red to show you that you
 have to resolve a conflict before you can continue working with the file. If
-your directory contains a high number of files, you may nevertheless lose the
+your folder contains a high number of files, you may nevertheless lose the
 overview. To get more concise information about which files have an unusual
 status, simply click on the header of the <guilabel>Status</guilabel>
 column. The file list is then sorted by priority, so you have all important
@@ -508,13 +508,13 @@ view, click on the header of the <guilabel>File name</guilabel> column.
 <para>
 All commonly used &CVS; functionality is directly available in &cervisia;'s
 main view. Commands usually act on several files at once, namely all which
-currently selected. If the selection includes directories, its interpretation
+currently selected. If the selection includes folders, its interpretation
 depends on the settings made under the <guimenu>Settings</guimenu> menu. For
 example, if <menuchoice><guimenu>Settings</guimenu><guimenuitem>Commit and
 remove recursively</guimenuitem></menuchoice> is checked and you choose
 <menuchoice><guimenu>File</guimenu><guimenuitem>Commit...</guimenuitem></menuchoice>
-while a directory is selected, then all files in the tree under that directory
-are committed. Otherwise, only the regular files in the directory itself are
+while a folder is selected, then all files in the tree under that folder
+are committed. Otherwise, only the regular files in the folder itself are
 affected.
 </para>
 
@@ -603,27 +603,27 @@ them.
    
    
 <sect1 id="addingremovingdirs">
-<title>Adding and removing directories</title>
+<title>Adding and removing folders</title>
 
 <para>
-Directories are handled fundamentally different from ordinary files by
+Folders are handled fundamentally different from ordinary files by
 &CVS;. They are not under revision control, i.e. you cannot tell which
-directories existed in the project at a certain time. Furthermore, directories
+folders existed in the project at a certain time. Furthermore, folders
 can never be explicitly removed (expect by removing them directly in the
 repository).
 </para>
 
 <para>
-As a substitute, &CVS; follows the convention that a directory is "not
+As a substitute, &CVS; follows the convention that a folder is "not
 existent" in a version of the project if is is empty. This convention can be
 enforced by using the option <option>-P</option> to <command>cvs
 update</command> and <command>cvs checkout</command>. This option can be set
 in the menu <menuchoice><guimenu>Settings</guimenu><guimenuitem>Prune Empty
-Directories On Update</guimenuitem></menuchoice>.
+Folders On Update</guimenuitem></menuchoice>.
 </para>
 
 <para>
-A directory can be added to the repository with the command
+A folder can be added to the repository with the command
 </para>
 
 <para>
@@ -634,7 +634,7 @@ A directory can be added to the repository with the command
 which is implied by the menu item
 <menuchoice><guimenu>File</guimenu><guimenuitem>Add to
 repository</guimenuitem></menuchoice>. Note that in contrast to adding files,
-adding directories does not require a commit afterwards.
+adding folders does not require a commit afterwards.
 </para>
 
 </sect1>
@@ -719,7 +719,7 @@ With &cervisia;, it is quite easy to maintain a ChangeLog file that is
 compliant with the format laid out in the GNU coding guidelines. To use it,
 choose <menuchoice><guimenu>File</guimenu><guimenuitem>Insert ChangeLog
 entry...</guimenuitem></menuchoice>.  If a file with the name
-<filename>ChangeLog</filename> exists in the toplevel directory of your
+<filename>ChangeLog</filename> exists in the toplevel folder of your
 sandbox, this file will be loaded and you have the possibility to edit it. To
 this end, at the top of the file, an entry with the current date and your user
 name (which can be configured as described in <xref
@@ -914,7 +914,7 @@ repository. As a consequence, the file was deleted in his working copy.
 
 <listitem><para>
 Update, Copied - A user has made an update on a file. A new version was copied
-into working directory.
+into working folder.
 </para></listitem>
 
 <listitem><para>
@@ -962,7 +962,7 @@ there are various filter options activated by check boxes:
 <listitem><para>Show other events - shows events not included in the above</para></listitem>
 <listitem><para>Only user - shows only events caused by a certain user</para></listitem>
 <listitem><para>Only filenames matching - filters file names by a regular expression</para></listitem>
-<listitem><para>Only dirnames matching - filters directory names by a regular expression</para></listitem>
+<listitem><para>Only dirnames matching - filters folder names by a regular expression</para></listitem>
 </itemizedlist>
 
 <para>
@@ -1168,7 +1168,7 @@ contain letters, digits, hyphens and underscores.
 
 <para> 
 Normally, you will want to tag the whole project (although &CVS; of course
-allows you to tag only a subset). To this end, mark the toplevel directory in
+allows you to tag only a subset). To this end, mark the toplevel folder in
 the view and choose
 <menuchoice><guimenu>Advanced</guimenu><guimenuitem>Tag/Branch</guimenuitem></menuchoice>.
 Now enter the name of the tag, press <keycap>Return</keycap> and you are done!
@@ -1685,7 +1685,7 @@ The file <filename><envar>$HOME</envar>/.cvsignore</filename>.
 The environment variable <envar>$CVSIGNORE</envar>.
 </para></listitem>
 <listitem><para> 
-The <filename>.cvsignore</filename> file in the respective directory.
+The <filename>.cvsignore</filename> file in the respective folder.
 </para></listitem>
 
 </itemizedlist>
@@ -1697,7 +1697,7 @@ file on the server, and &cervisia; should be able to start up offline. If you
 are working with a group that prefers to use an ignore list on the server,
 it's probably a good idea to take a look which patterns are listed there and
 to put them into the <filename>.cvsignore</filename> file in your home
-directory.
+folder.
 </para>
 
 </sect1>
@@ -1974,7 +1974,7 @@ Shows the &CVS; history as reported by the server.
 </menuchoice></term>
 <listitem><para>
 Opens all branches in the file tree so that you can
-see all files and directories.
+see all files and folders.
 </para></listitem>
 </varlistentry>
 
@@ -2194,20 +2194,20 @@ Opens a dialog for customizing &cervisia;.
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Settings</guimenu><guimenuitem>Create directories on update</guimenuitem>
+<guimenu>Settings</guimenu><guimenuitem>Create folders on update</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Determines whether updates create directories in the sandbox which weren't
+Determines whether updates create folders in the sandbox which weren't
 there before (Option <option>-d</option> to <command>cvs update</command>).
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Settings</guimenu><guimenuitem>Prune empty directories on update</guimenuitem>
+<guimenu>Settings</guimenu><guimenuitem>Prune empty folders on update</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Determines whether updates remove empty directories in the sandbox. (Option
+Determines whether updates remove empty folders in the sandbox. (Option
 <option>-P</option> to <command>cvs update</command>).
 </para></listitem>
 </varlistentry>
