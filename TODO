@@ -18,3 +18,5 @@ Ideas in no special order
 * cvs init
 
 * Implement a nice workaround for $CVSROOT/CVSROOT/cvsignore
+
+* Maybe use ui files for dialogs
