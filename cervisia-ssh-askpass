@@ -1,0 +1,2 @@
+#!/bin/sh
+kdialog --password "Please enter the password for the cvs repository:"
