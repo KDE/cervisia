@@ -18,8 +18,6 @@
 #include <qlayout.h>
 #include <qpushbutton.h>
 #include <qregexp.h>
-#include <kapplication.h>
-#include <kbuttonbox.h>
 #include <kconfig.h>
 #include <klineedit.h>
 #include <klocale.h>
@@ -84,11 +82,14 @@ HistoryDialog::Options *HistoryDialog::options = 0;
 
 
 HistoryDialog::HistoryDialog(QWidget *parent, const char *name)
-    : QDialog(parent, name, false, WStyle_MinMax)
+    : KDialogBase(parent, name, false, QString::null,
+                  Close | Help, ButtonCode(0), true)
 {
-    QBoxLayout *layout = new QVBoxLayout(this, 10, 0);
+    QFrame* mainWidget = makeMainWidget();
 
-    listview = new ListView(this);
+    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
+
+    listview = new ListView(mainWidget);
     listview->setSelectionMode(QListView::NoSelection);
     listview->setAllColumnsShowFocus(true);
     listview->setShowSortIndicator(true);
@@ -102,35 +103,33 @@ HistoryDialog::HistoryDialog(QWidget *parent, const char *name)
     listview->setPreferredColumn(5);
     listview->setFocus();
     layout->addWidget(listview, 1);
-    layout->addSpacing(10);
 
-    commit_box = new QCheckBox(i18n("Show c&ommit events"), this);
+    commit_box = new QCheckBox(i18n("Show c&ommit events"), mainWidget);
     commit_box->setChecked(true);
-    //    commit_box->setMinimumSize(commit_box->sizeHint());
-    checkout_box = new QCheckBox(i18n("Show ch&eckout events"), this);
+
+    checkout_box = new QCheckBox(i18n("Show ch&eckout events"), mainWidget);
     checkout_box->setChecked(true);
-    //    checkout_box->setMinimumSize(checkout_box->sizeHint());
-    tag_box = new QCheckBox(i18n("Show &tag events"), this);
+
+    tag_box = new QCheckBox(i18n("Show &tag events"), mainWidget);
     tag_box->setChecked(true);
-    //    tag_box->setMinimumSize(tag_box->sizeHint());
-    other_box = new QCheckBox(i18n("Show &other events"), this);
+
+    other_box = new QCheckBox(i18n("Show &other events"), mainWidget);
     other_box->setChecked(true);
-    //    other_box->setMinimumSize(tag_box->sizeHint());
-    onlyuser_box = new QCheckBox(i18n("Only &user:"), this);
-    //    onlyuser_box->setMinimumSize(onlyuser_box->sizeHint());
-    onlyfilenames_box = new QCheckBox(i18n("Only &filenames matching:"), this);
-    //    onlyfilenames_box->setMinimumSize(onlyfilenames_box->sizeHint());
-    onlydirnames_box = new QCheckBox(i18n("Only &directories matching:"), this);
-    //    onlydirnames_box->setMinimumSize(onlydirnames_box->sizeHint());
-    user_edit = new KLineEdit(this);
+
+    onlyuser_box = new QCheckBox(i18n("Only &user:"), mainWidget);
+
+    onlyfilenames_box = new QCheckBox(i18n("Only &filenames matching:"), mainWidget);
+
+    onlydirnames_box = new QCheckBox(i18n("Only &directories matching:"), mainWidget);
+
+    user_edit = new KLineEdit(mainWidget);
     user_edit->setEnabled(false);
-    //    user_edit->setMinimumSize(user_edit->sizeHint());
-    filename_edit = new KLineEdit(this);
+
+    filename_edit = new KLineEdit(mainWidget);
     filename_edit->setEnabled(false);
-    //    filename_edit->setMinimumSize(filename_edit->sizeHint());
-    dirname_edit = new KLineEdit(this);
+
+    dirname_edit = new KLineEdit(mainWidget);
     dirname_edit->setEnabled(false);
-    //    dirname_edit->setMinimumSize(dirname_edit->sizeHint());
 
     connect( onlyuser_box, SIGNAL(toggled(bool)),
              this, SLOT(toggled(bool)) );
@@ -138,7 +137,6 @@ HistoryDialog::HistoryDialog(QWidget *parent, const char *name)
              this,  SLOT(toggled(bool)) );
     connect( onlydirnames_box, SIGNAL(toggled(bool)),
              this, SLOT(toggled(bool)) );
-    
     connect( commit_box, SIGNAL(toggled(bool)),
              this, SLOT(choiceChanged()) );
     connect( checkout_box, SIGNAL(toggled(bool)),
@@ -159,9 +157,8 @@ HistoryDialog::HistoryDialog(QWidget *parent, const char *name)
              this, SLOT(choiceChanged()) );
     connect( dirname_edit, SIGNAL(returnPressed()),
              this, SLOT(choiceChanged()) );
-            
-    QGridLayout *grid = new QGridLayout(4, 4, 10);
-    layout->addLayout(grid);
+
+    QGridLayout *grid = new QGridLayout(layout);
     grid->setColStretch(0, 1);
     grid->setColStretch(1, 0);
     grid->setColStretch(2, 4);
@@ -177,41 +174,24 @@ HistoryDialog::HistoryDialog(QWidget *parent, const char *name)
     grid->addWidget(onlydirnames_box,  2, 1);
     grid->addWidget(dirname_edit,      2, 2);
 
-    QFrame *frame = new QFrame(this);
-    frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
+    // no default button because "return" is needed to activate the filters (line edits)
+    actionButton(Help)->setAutoDefault(false);
+    actionButton(Close)->setAutoDefault(false);
 
-    layout->addSpacing(8);
-    layout->addWidget(frame, 0);
-    layout->addSpacing(8);
+    setHelp("browsinghistory");
 
-    KButtonBox *buttonbox = new KButtonBox(this);
-    QPushButton *helpbutton = buttonbox->addButton(i18n("&Help"));
-    helpbutton->setAutoDefault(false);
-    buttonbox->addStretch();
-    QPushButton *closebutton = buttonbox->addButton(i18n("&Close"));
-    closebutton->setAutoDefault(false);
-    buttonbox->layout();
-    //    buttonbox->setFixedHeight(buttonbox->height());
-    layout->addWidget(buttonbox, 0);
-
-    connect( helpbutton, SIGNAL(clicked()), SLOT(helpClicked()) );
-    connect( closebutton, SIGNAL(clicked()), SLOT(reject()) );
+    setWFlags(Qt::WDestructiveClose | getWFlags());
 
     if (options)
-        {
-            resize(options->size);
-        }
+        resize(options->size);
 }
 
 
-void HistoryDialog::done(int res)
+HistoryDialog::~HistoryDialog()
 {
     if (!options)
         options = new Options;
     options->size = size();
-    
-    QDialog::done(res);
-    delete this;
 }
 
 
@@ -280,12 +260,6 @@ void HistoryDialog::toggled(bool b)
     edit->setEnabled(b);
     if (b)
         edit->setFocus();
-}
-
-
-void HistoryDialog::helpClicked()
-{
-    kapp->invokeHelp("browsinghistory", "cervisia");
 }
 
 

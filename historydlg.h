@@ -16,7 +16,7 @@
 #define HISTORYDLG_H
 
 
-#include <qdialog.h>
+#include <kdialogbase.h>
 
 
 class QCheckBox;
@@ -25,12 +25,15 @@ class KLineEdit;
 class ListView;
 
 
-class HistoryDialog : public QDialog
+class HistoryDialog : public KDialogBase
 {
     Q_OBJECT
 
 public:
-    HistoryDialog( QWidget *parent=0, const char *name=0 );
+
+    explicit HistoryDialog( QWidget *parent=0, const char *name=0 );
+
+    virtual ~HistoryDialog();
 
     bool parseHistory(const QString &sandbox, const QString &repository);
 
@@ -38,11 +41,9 @@ public:
     static void saveOptions(KConfig *config);
     
 private slots:
-    virtual void done(int r);
     void choiceChanged();
     void toggled(bool b);
-    void helpClicked();
-    
+
 private:
     struct Options {
         QSize size;
