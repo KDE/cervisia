@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 André Wöbbeking <Woebbeking@web.de>
+ * Copyright (c) 2003-2004 André Wöbbeking <Woebbeking@web.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -63,12 +63,12 @@ struct Entry
     QString statusToString() const;
 
     /**
-     * The name of this entry.
+     * The name of this entry (without path).
      */
     QString m_name;
 
     /**
-     * The status of this entry.
+     * The type of this entry.
      */
     Type m_type;
 
@@ -83,7 +83,7 @@ struct Entry
     QString m_revision;
 
     /**
-     * The modification date/time of this entry.
+     * The modification date/time of this entry (in user's local time).
      */
     QDateTime m_dateTime;
 
