@@ -1,3 +1,9 @@
+2004-02-25  André Wöbbeking  <Woebbeking@web.de>
+
+	* Fix BR #75201:
+	  Prevent crash when you activate a CervisiaPart view with RMB in 
+	  a Koqueror with more than one view.
+
 2004-02-20  Christian Loose  <christian.loose@hamburg.de>
 
 	* Fix remembering the last input values in checkout dialog.
