@@ -45,7 +45,7 @@ public:
     QString rsh() const
     {
         QString str = text(1);
-        return (str.left(5) == "ext (")? str.mid(5, str.length()-6) : QString::null;
+        return (str.startsWith("ext (")? str.mid(5, str.length()-6) : QString::null);
     }
     int compression() const
     {
@@ -60,7 +60,7 @@ RepositoryListItem::RepositoryListItem(QListView *parent, const QString &repo, b
     setText(0, repo);
 
     QString status;
-    if (repo.left(9) == ":pserver:")
+    if (repo.startsWith(":pserver:"))
         status = loggedin? i18n("Logged in") : i18n("Not logged in");
     else
         status = i18n("No login required");
@@ -73,7 +73,7 @@ void RepositoryListItem::setRsh(const QString &rsh)
     QString repo = repository();
     QString method;
     
-    if (repo.left(9) == ":pserver:")
+    if (repo.startsWith(":pserver:"))
         method = "pserver";
     else if (repo.contains(':'))
         {
@@ -449,7 +449,7 @@ void AddRepositoryDialog::setRepository(const QString &repo)
 void AddRepositoryDialog::repoChanged()
 {
     QString repo = repository();
-    rsh_edit->setEnabled(repo.left(9) != ":pserver:"
+    rsh_edit->setEnabled((!repo.startsWith(":pserver:"))
                          && repo.contains(":"));
     compression_group->setEnabled(repo.contains(":"));
 
