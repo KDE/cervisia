@@ -10,3 +10,9 @@ Key=Compression
 Id=kde3.2/20021229
 File=cervisiapartrc,cvsservicerc
 Script=move_repositories.pl,perl
+#
+Id=kde3.2/20030116
+File=cervisiapartrc
+RemoveGroup=Main window
+File=cervisiarc
+RemoveGroup=Main window

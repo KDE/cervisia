@@ -1,3 +1,8 @@
+2003-01-16  Christian Loose <christian.loose@hamburg.de>
+
+	* Changed main window size handling. The window size is now
+          handled by KMainWindow.
+
 2003-01-11  Christian Loose <christian.loose@hamburg.de>
 
 	* Added help button to CommitDialog

@@ -66,10 +66,7 @@ int main(int argc, char **argv)
                                   KCmdLineArgs::parsedArgs()->arg(0) : "");
         
         CervisiaShell *t = new CervisiaShell();
-        
-        t->resize(t->sizeHint().width(),
-                  KApplication::desktop()->height()*8/10);
-        
+               
         t->restorePseudo(dirname);
         t->setIcon(app.icon());
         app.setMainWidget(t);

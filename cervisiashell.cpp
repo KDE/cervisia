@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
+ *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
  *
  * This program may be distributed under the terms of the Q Public
  * License as defined by Trolltech AS of Norway and appearing in the
@@ -81,7 +82,9 @@ CervisiaShell::CervisiaShell( const char *name )
 
     createGUI( part );
 
-    setAutoSaveSettings();
+    // enable auto-save of toolbar/menubar/statusbar and window size settings
+    // and apply the previously saved settings
+    setAutoSaveSettings("MainWindow", true);
 }
 
 CervisiaShell::~CervisiaShell()
@@ -161,10 +164,6 @@ bool CervisiaShell::queryExit()
 {
     KConfig *config = part->config();
 
-    config->setGroup("Main window");
-    config->writeEntry("Customized", true);
-    config->writeEntry("Size", size());
-
     part->saveDialogProperties(config);
 
     config->setGroup("Session");
@@ -177,10 +176,6 @@ bool CervisiaShell::queryExit()
 void CervisiaShell::restorePseudo(const QString &dirname)
 {
     KConfig *config = part->config();
-
-    config->setGroup("Main window");
-    if (config->readBoolEntry("Customized"))
-        resize(config->readSizeEntry("Size"));
 
     part->readDialogProperties(config);
 
