@@ -17,7 +17,7 @@
 
 #include <qdialog.h>
 #include <qlistbox.h>
-#include <qmultilinedit.h>
+#include <qmultilineedit.h>
 #include <qstringlist.h>
 
 class QComboBox;

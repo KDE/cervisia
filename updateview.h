@@ -15,7 +15,7 @@
 #ifndef UPDATEVIEW_H
 #define UPDATEVIEW_H
 
-#include <qlist.h>
+#include <qptrlist.h>
 #include "listview.h"
 
 

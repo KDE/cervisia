@@ -16,7 +16,7 @@
 #define _LISTVIEW_H_
 
 #include <qlistview.h>
-#include <qarray.h>
+#include <qmemarray.h>
 
 class ListView;
 class QTimer;

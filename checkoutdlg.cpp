@@ -19,7 +19,7 @@
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qlineedit.h>
-#include <qmultilinedit.h>
+#include <qmultilineedit.h>
 #include <qpushbutton.h>
 #include <kapplication.h>
 #include <kprocess.h>

@@ -18,7 +18,7 @@
 #include <qcheckbox.h>
 #include <qdialog.h>
 #include <qlabel.h>
-#include <qmultilinedit.h>
+#include <qmultilineedit.h>
 #include <qptrlist.h>
 #include "diffview.h"
 

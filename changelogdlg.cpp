@@ -17,7 +17,7 @@
 #include <qfile.h>
 #include <qfileinfo.h>
 #include <qlayout.h>
-#include <qmultilinedit.h>
+#include <qmultilineedit.h>
 #include <qpushbutton.h>
 #include <qtextstream.h>
 #include <kapplication.h>

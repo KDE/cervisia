@@ -15,7 +15,7 @@
 #ifndef LOGLIST_H
 #define LOGLIST_H
 
-#include <qarray.h>
+#include <qmemarray.h>
 #include <qlistview.h>
 #include <qheader.h>
 

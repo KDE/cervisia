@@ -16,7 +16,7 @@
 #define LOGTREE_H
 
 #include <qobject.h>
-#include <qarray.h>
+#include <qmemarray.h>
 #include <qptrlist.h>
 
 #include "qttableview.h"
