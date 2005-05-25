@@ -41,18 +41,6 @@
 <holder>Carlos Woelz</holder>
 </copyright>
 
-
-<legalnotice>
- 
-<para>This program may be distributed under the terms of the Q Public
- License as defined by Trolltech AS of Norway and appearing in the
- file LICENSE.QPL included in the packaging of this file.</para>
-
-<para> This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</para>
-</legalnotice>
-
 <legalnotice>&FDLNotice;</legalnotice>
 
 <date>2004-06-06</date>
@@ -3231,6 +3219,7 @@ Opens the &CVS; info pages in the KDE help system.
 <title>Credits And Licenses</title>
 
 &underFDL;
+&underGPL;
 
 </chapter>
 </book>
