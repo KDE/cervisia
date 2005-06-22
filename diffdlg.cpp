@@ -351,12 +351,15 @@ void DiffDialog::callExternalDiff(const QString& extdiff, CvsService_stub* servi
     QString extcmdline = extdiff;
     extcmdline += " ";
 
+    // create suffix for temporary file (used QFileInfo to remove path from file name)
+    const QString suffix = "-" + QFileInfo(fileName).fileName();
+
     DCOPRef job;
     if (!revA.isEmpty() && !revB.isEmpty())
     {
         // We're comparing two revisions
-        QString revAFilename = tempFileName(QString("-")+fileName+QString("-")+revA);
-        QString revBFilename = tempFileName(QString("-")+fileName+QString("-")+revB);
+        QString revAFilename = tempFileName(suffix+QString("-")+revA);
+        QString revBFilename = tempFileName(suffix+QString("-")+revB);
 
         // download the files for revision A and B
         job = service->downloadRevision(fileName, revA, revAFilename,
@@ -371,7 +374,7 @@ void DiffDialog::callExternalDiff(const QString& extdiff, CvsService_stub* servi
     else
     {
         // We're comparing to a file, and perhaps one revision
-        QString revAFilename = tempFileName(fileName+QString("-")+revA);
+        QString revAFilename = tempFileName(suffix+QString("-")+revA);
         job = service->downloadRevision(fileName, revA, revAFilename);
         if( !service->ok() )
             return;
