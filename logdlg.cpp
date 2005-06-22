@@ -414,7 +414,7 @@ void LogDialog::slotOk()
 
     // create a temporary file
     const QString suffix("-" + revision + "-" + QFileInfo(filename).fileName());
-    const QString tempFileName(::tempFileName(QString::null, suffix));
+    const QString tempFileName(::tempFileName(suffix));
 
     // retrieve the file with the selected revision from cvs
     // and save the content into the temporary file

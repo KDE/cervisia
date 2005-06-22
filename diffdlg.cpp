@@ -355,8 +355,8 @@ void DiffDialog::callExternalDiff(const QString& extdiff, CvsService_stub* servi
     if (!revA.isEmpty() && !revB.isEmpty())
     {
         // We're comparing two revisions
-        QString revAFilename = tempFileName(fileName+QString("-"), QString("-")+revA);
-        QString revBFilename = tempFileName(fileName+QString("-"), QString("-")+revB);
+        QString revAFilename = tempFileName(QString("-")+fileName+QString("-")+revA);
+        QString revBFilename = tempFileName(QString("-")+fileName+QString("-")+revB);
 
         // download the files for revision A and B
         job = service->downloadRevision(fileName, revA, revAFilename,
@@ -371,7 +371,7 @@ void DiffDialog::callExternalDiff(const QString& extdiff, CvsService_stub* servi
     else
     {
         // We're comparing to a file, and perhaps one revision
-        QString revAFilename = tempFileName(fileName+QString("-"), revA);
+        QString revAFilename = tempFileName(fileName+QString("-")+revA);
         job = service->downloadRevision(fileName, revA, revAFilename);
         if( !service->ok() )
             return;

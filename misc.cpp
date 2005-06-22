@@ -267,12 +267,12 @@ void cleanupTempFiles()
 }
 
 
-QString tempFileName(const QString& prefix, const QString& suffix)
+QString tempFileName(const QString& suffix)
 {
     if (!tempFiles)
         tempFiles = new QStringList;
 
-    KTempFile f(prefix, suffix);
+    KTempFile f(QString::null, suffix);
     tempFiles->append(f.name());
     return f.name();
 }

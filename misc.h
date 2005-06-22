@@ -56,7 +56,7 @@ QString NormalizeRepository(const QString& repository);
 QString joinLine(const QStringList &list);
 QStringList splitLine(QString, char delim=' ');
 
-QString tempFileName(const QString& prefix, const QString& suffix);
+QString tempFileName(const QString& suffix);
 void cleanupTempFiles();
 
 const QStringList fetchBranches(CvsService_stub* cvsService, QWidget* parent);
