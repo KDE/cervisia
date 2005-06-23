@@ -50,6 +50,8 @@ QString UserName();
  */
 QString NormalizeRepository(const QString& repository);
 
+bool CheckOverwrite(const QString& fileName);
+
 }
 
 

@@ -26,11 +26,13 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <qfile.h>
+#include <qfileinfo.h>
 #include <qregexp.h>
 #include <qstringlist.h>
 #include <kconfig.h>
 #include <kemailsettings.h>
 #include <klocale.h>
+#include <kmessagebox.h>
 #include <kprocess.h>
 #include <ktempfile.h>
 #include <kuser.h>
@@ -201,6 +203,26 @@ QString Cervisia::NormalizeRepository(const QString& repository)
     }
     else
         return repository;
+}
+
+
+bool Cervisia::CheckOverwrite(const QString& fileName)
+{
+    bool result = true;
+
+    QFileInfo fi(fileName);
+
+    // does the file already exist?
+    if( fi.exists() )
+    {
+        result = (KMessageBox::warningYesNo(0,
+                  i18n("A file named \"%1\" already exists. Are you sure you want to overwrite it?").arg(fileName),
+                  i18n("Overwrite File?"),
+                  KGuiItem(i18n("&Overwrite"), "filesave", i18n("Overwrite the file")),
+                  KStdGuiItem::cancel()) == KMessageBox::Yes);
+    }
+
+    return result;
 }
 
 

@@ -466,6 +466,9 @@ void LogDialog::slotApply()
     if( fileName.isEmpty() )
         return;
 
+    if( !Cervisia::CheckOverwrite(fileName) )
+        return;
+
     QFile f(fileName);
     if( !f.open(IO_WriteOnly) )
     {

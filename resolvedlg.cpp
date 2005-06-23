@@ -579,7 +579,7 @@ void ResolveDialog::saveAsClicked()
     QString filename =
         KFileDialog::getSaveFileName(0, 0, this, 0);
 
-    if (!filename.isEmpty())
+    if( !filename.isEmpty() && Cervisia::CheckOverwrite(filename) )
         saveFile(filename);
 }
 
