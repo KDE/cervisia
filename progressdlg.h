@@ -40,6 +40,7 @@ public:
 
     bool execute();
     bool getLine(QString& line);
+    QStringList getOutput() const;
 
 k_dcop:
     void slotReceivedOutputNonGui(QString buffer);

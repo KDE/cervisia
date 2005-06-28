@@ -56,6 +56,7 @@ private slots:
     void comboActivated(int index);
     void backClicked();
     void forwClicked();
+    void saveAsClicked();
 
 private:
     void newDiffHunk(int& linenoA, int& linenoB, const QStringList& linesA,
@@ -75,6 +76,7 @@ private:
     QPtrList<DiffItem> items;
     int markeditem;
     KConfig& partConfig;
+    QStringList m_diffOutput;
 };
 
 #endif

@@ -28,7 +28,9 @@
 #include <qfileinfo.h>
 #include <qregexp.h>
 #include <kconfig.h>
+#include <kfiledialog.h>
 #include <klocale.h>
+#include <kmessagebox.h>
 #include <ktempfile.h>
 #include <kprocess.h>
 
@@ -41,7 +43,7 @@
 
 DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool modal)
     : KDialogBase(parent, name, modal, QString::null,
-                  Close | Help, Close, true)
+                  Close | Help | User1, Close, true, KStdGuiItem::saveAs())
     , partConfig(cfg)
 {
     items.setAutoDelete(true);
@@ -96,6 +98,8 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool mod
 
     forwbutton = new QPushButton(QString::fromLatin1("&>>"), mainWidget);
     connect( forwbutton, SIGNAL(clicked()), SLOT(forwClicked()) );
+
+    connect( this, SIGNAL(user1Clicked()), SLOT(saveAsClicked()) );
 
     QBoxLayout *buttonlayout = new QHBoxLayout(layout);
     buttonlayout->addWidget(syncbox, 0);
@@ -251,6 +255,9 @@ bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
     ProgressDialog dlg(this, "Diff", job, "diff", i18n("CVS Diff"));
     if( !dlg.execute() )
         return false;
+
+    // remember diff output for "save as" action
+    m_diffOutput = dlg.getOutput();
 
     QString line;
     while ( dlg.getLine(line) && !line.startsWith("+++"))
@@ -467,6 +474,32 @@ void DiffDialog::forwClicked()
     updateHighlight(newitem);
 }
 
+
+void DiffDialog::saveAsClicked()
+{
+    QString fileName = KFileDialog::getSaveFileName(QString::null, QString::null, this);
+    if( fileName.isEmpty() )
+        return;
+
+    if( !Cervisia::CheckOverwrite(fileName, this) )
+        return;
+
+    QFile f(fileName);
+    if( !f.open(IO_WriteOnly) )
+    {
+        KMessageBox::sorry(this,
+                           i18n("Could not open file for writing."),
+                           "Cervisia");
+        return;
+    }
+
+    QTextStream ts(&f);
+    QStringList::Iterator it = m_diffOutput.begin();
+    for( ; it != m_diffOutput.end(); ++it )
+        ts << *it << "\n";
+
+    f.close();
+}
 
 #include "diffdlg.moc"
 

@@ -153,6 +153,12 @@ bool ProgressDialog::getLine(QString& line)
 }
 
 
+QStringList ProgressDialog::getOutput() const
+{
+    return d->output;
+}
+
+
 void ProgressDialog::slotReceivedOutputNonGui(QString buffer)
 {
     d->buffer += buffer;
