@@ -66,7 +66,7 @@ QString truncateLines(const QString&      text,
     const QChar newLine('\n');
 
     const int lineSpacing(fm.lineSpacing());
-    const int numberOfLines(text.contains(newLine) + 1);
+    const int numberOfLines(text.count(newLine) + 1);
     const int maxNumberOfLines(size.height() / lineSpacing);
 
     if (numberOfLines <= maxNumberOfLines)

@@ -173,7 +173,7 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, CvsService_stub* cvsService,
     connect(m_repoList, SIGNAL(selectionChanged()),
             this,       SLOT(slotSelectionChanged()));
 
-    KButtonBox* actionbox = new KButtonBox(mainWidget, KButtonBox::Vertical);
+    KButtonBox* actionbox = new KButtonBox(mainWidget, Qt::Vertical);
     QPushButton* addbutton = actionbox->addButton(i18n("&Add..."));
     m_modifyButton = actionbox->addButton(i18n("&Modify..."));
     m_removeButton = actionbox->addButton(i18n("&Remove"));

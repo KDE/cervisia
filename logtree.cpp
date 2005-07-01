@@ -84,8 +84,8 @@ LogTreeView::LogTreeView(QWidget *parent, const char *name)
     verticalHeader()->hide();
     setLeftMargin(0);
     setFrameStyle( Q3Frame::WinPanel | Q3Frame::Sunken );
-    setBackgroundMode(PaletteBase);
-    setFocusPolicy(NoFocus);
+    setBackgroundMode(Qt::PaletteBase);
+    setFocusPolicy(Qt::NoFocus);
 
     currentRow = -1;
     currentCol = -1;
@@ -449,9 +449,9 @@ void LogTreeView::contentsMousePressEvent(QMouseEvent *e)
             {
                 // Change selection for revision B if the middle mouse button or
                 // the left mouse button with the control key was pressed
-                bool changeRevB = (e->button() == MidButton) ||
-                                  (e->button() == LeftButton &&
-                                   e->modifier() & Qt::ControlModifier);
+                bool changeRevB = (e->button() == Qt::MidButton) ||
+                                  (e->button() == Qt::LeftButton &&
+                                   e->modifiers() & Qt::ControlModifier);
 
                 emit revisionClicked(it.current()->m_logInfo.m_revision, changeRevB);
                 break;

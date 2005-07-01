@@ -1455,7 +1455,7 @@ QScrollBar *QtTableView::verticalScrollBar() const
         sb->resize( sb->sizeHint() ); // height is irrelevant
 	Q_CHECK_PTR(sb);
 	sb->setTracking( FALSE );
-	sb->setFocusPolicy( NoFocus );
+	sb->setFocusPolicy( Qt::NoFocus );
 	connect( sb, SIGNAL(valueChanged(int)),
 		 SLOT(verSbValue(int)));
 	connect( sb, SIGNAL(sliderMoved(int)),
@@ -1484,7 +1484,7 @@ QScrollBar *QtTableView::horizontalScrollBar() const
 	sb->setCursor( Qt::ArrowCursor );
 #endif
 	sb->resize( sb->sizeHint() ); // width is irrelevant
-	sb->setFocusPolicy( NoFocus );
+	sb->setFocusPolicy( Qt::NoFocus );
 	Q_CHECK_PTR(sb);
 	sb->setTracking( FALSE );
 	connect( sb, SIGNAL(valueChanged(int)),

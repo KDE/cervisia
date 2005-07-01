@@ -19,7 +19,6 @@
 #include "patchoptiondlg.h"
 //Added by qt3to4:
 #include <QVBoxLayout>
-#include <Q3Frame>
 #include <QHBoxLayout>
 #include <QBoxLayout>
 using Cervisia::PatchOptionDialog;
@@ -37,7 +36,7 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent, const char* name)
     : KDialogBase(parent, name, true/*modal*/, QString::null,
                   Ok | Cancel | Help, Ok, true/*separator*/)
 {
-    Q3Frame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = makeMainWidget();
     QBoxLayout* topLayout = new QVBoxLayout(mainWidget, 0, spacingHint());
 
     m_formatBtnGroup = new Q3VButtonGroup(i18n("Output Format"), mainWidget, "");

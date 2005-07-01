@@ -70,7 +70,7 @@ void LogPlainView::addRevision(const LogInfo& logInfo)
 
     setTextFormat(Qt::PlainText);
 
-    const QChar newline('\n');
+    const QLatin1String newline("\n");
 
     // split comment in separate lines
     QStringList lines = QStringList::split(newline, logInfo.m_comment, true);

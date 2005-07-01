@@ -593,7 +593,7 @@ void UpdateView::processUpdateLine(QString str)
 
 void UpdateView::updateItem(const QString& filePath, EntryStatus status, bool isdir)
 {
-    if (isdir && filePath == QChar('.'))
+    if (isdir && filePath == QLatin1String("."))
         return;
 
     const QFileInfo fileInfo(filePath);

@@ -260,7 +260,7 @@ void UpdateDirItem::syncWithEntries()
     if( f.open(QIODevice::ReadOnly) )
     {
         QTextStream stream(&f);
-        while( !stream.eof() )
+        while( !stream.atEnd() )
         {
             QString line = stream.readLine();
 
@@ -726,7 +726,7 @@ UpdateDirItem* findOrCreateDirItem(const QString& dirPath,
 
     UpdateDirItem* dirItem(rootItem);
 
-    if (dirPath != QChar('.'))
+    if (dirPath != QLatin1String("."))
     {
         const QStringList& dirNames(QStringList::split('/', dirPath));
         const QStringList::const_iterator itDirNameEnd(dirNames.end());
