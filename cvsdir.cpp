@@ -34,18 +34,17 @@ CvsDir::CvsDir(const QString &path)
 const QFileInfoList *CvsDir::entryInfoList() const
 {
     DirIgnoreList ignorelist(absPath());
-    const QFileInfoList *fulllist = QDir::entryInfoList();
-    if (!fulllist)
+    const QFileInfoList& fulllist = QDir::entryInfoList();
+    if (fulllist.empty())
         return 0;
-    
+
     entrylist.clear();
 
-    QFileInfoListIterator it(*fulllist);
-    for (; it.current(); ++it)
-        {
-            if (!ignorelist.matches(it.current()) && !GlobalIgnoreList().matches(it.current()))
-                entrylist.append(it.current());
-        }
+    Q_FOREACH (QFileInfo info, fulllist)
+    {
+        if (!ignorelist.matches(&info) && !GlobalIgnoreList().matches(&info))
+            entrylist.append(info);
+    }
 
     return &entrylist;
 }

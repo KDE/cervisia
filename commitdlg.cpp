@@ -112,7 +112,7 @@ void CommitDialog::setFileList(const QStringList &list)
 
     // the dot for the root directory is hard to see, so
     // we convert it to the absolut path
-    if (const Q3ListBoxItem* item = listbox->findItem(QChar('.'), Qt::ExactMatch))
+    if (const Q3ListBoxItem* item = listbox->findItem(QLatin1String("."), Q3ListBox::ExactMatch))
     {
         listbox->changeItem(QFileInfo(QLatin1String(".")).absFilePath(),
                             listbox->index(item));

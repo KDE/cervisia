@@ -135,14 +135,13 @@ QString CvsJob::cvsCommand() const
 {
     QString command;
 
-    const Q3ValueList<Q3CString>& args(d->childproc->args());
-    for (Q3ValueList<Q3CString>::const_iterator it = args.begin(), itEnd = args.end();
-         it != itEnd; ++it)
+    const QList<QByteArray>& args(d->childproc->args());
+    Q_FOREACH (QByteArray arg, args)
     {
         if (!command.isEmpty())
             command += ' ';
 
-        command += QFile::decodeName(*it);
+        command += QFile::decodeName(arg);
     }
 
     return command;

@@ -71,7 +71,7 @@ QString UpdateItem::dirPath() const
 QString UpdateItem::filePath() const
 {
     // the filePath of the root item is '.'
-    return parent() ? dirPath() + m_entry.m_name : QChar('.');
+    return parent() ? dirPath() + m_entry.m_name : QLatin1String(".");
 }
 
 
@@ -179,12 +179,11 @@ void UpdateDirItem::scanDirectory()
     const QFileInfoList *files = dir.entryInfoList();
     if (files)
     {
-        QFileInfoListIterator it(*files);
-        for (; it.current(); ++it)
+        Q_FOREACH (QFileInfo info, *files)
         {
             Entry entry;
-            entry.m_name = it.current()->fileName();
-            if (it.current()->isDir())
+            entry.m_name = info.fileName();
+            if (info.isDir())
             {
                 entry.m_type = Entry::Dir;
                 createDirItem(entry);
