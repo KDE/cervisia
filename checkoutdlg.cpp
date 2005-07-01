@@ -29,7 +29,6 @@
 #include <qpushbutton.h>
 //Added by qt3to4:
 #include <QVBoxLayout>
-#include <Q3Frame>
 #include <QHBoxLayout>
 #include <QGridLayout>
 #include <QBoxLayout>
@@ -59,7 +58,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
 {
     setCaption( (action==Checkout)? i18n("CVS Checkout") : i18n("CVS Import") );
 
-    Q3Frame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = makeMainWidget();
 
     QBoxLayout* layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 
@@ -76,14 +75,14 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
     grid->addWidget(repo_combo, 0, 1);
 
     QLabel* repo_label = new QLabel(repo_combo, i18n("&Repository:"), mainWidget);
-    grid->addWidget(repo_label, 0, 0, AlignLeft | AlignVCenter);
+    grid->addWidget(repo_label, 0, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
     if( action == Import )
     {
         module_edit = new KLineEdit(mainWidget);
         grid->addWidget(module_edit, 1, 1);
         QLabel* module_label = new QLabel(module_edit, i18n("&Module:"), mainWidget);
-        grid->addWidget(module_label, 1, 0, AlignLeft | AlignVCenter);
+        grid->addWidget(module_label, 1, 0, Qt::AlignLeft | Qt::AlignVCenter);
     }
     else
     {
@@ -96,10 +95,10 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
         QBoxLayout* module_layout = new QHBoxLayout();
         grid->addLayout(module_layout, 1, 1);
         module_layout->addWidget(module_combo, 10);
-        module_layout->addWidget(module_button, 0, AlignVCenter);
+        module_layout->addWidget(module_button, 0, Qt::AlignVCenter);
 
         QLabel* module_label = new QLabel(module_combo, i18n("&Module:"), mainWidget);
-        grid->addWidget(module_label, 1, 0, AlignLeft | AlignVCenter);
+        grid->addWidget(module_label, 1, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
         branchCombo = new QComboBox(true, mainWidget);
 
@@ -110,11 +109,11 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
         QBoxLayout* branchLayout = new QHBoxLayout();
         grid->addLayout(branchLayout, 2, 1);
         branchLayout->addWidget(branchCombo, 10);
-        branchLayout->addWidget(branchButton, 0, AlignVCenter);
+        branchLayout->addWidget(branchButton, 0, Qt::AlignVCenter);
 
         QLabel* branch_label = new QLabel(branchCombo, i18n("&Branch tag:"), 
                                           mainWidget);
-        grid->addWidget(branch_label, 2, 0, AlignLeft | AlignVCenter);
+        grid->addWidget(branch_label, 2, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
         connect( branchCombo, SIGNAL( textChanged( const QString&)),
                  this, SLOT( branchTextChanged() ));
@@ -141,11 +140,11 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
     QBoxLayout* workdir_layout = new QHBoxLayout();
     grid->addLayout(workdir_layout, (action==Import)? 2 : 3, 1);
     workdir_layout->addWidget(workdir_edit, 10);
-    workdir_layout->addWidget(dir_button, 0, AlignVCenter);
+    workdir_layout->addWidget(dir_button, 0, Qt::AlignVCenter);
 
     QLabel* workdir_label = new QLabel(workdir_edit, i18n("Working &folder:"), 
                                        mainWidget);
-    grid->addWidget(workdir_label, (action==Import)? 2 : 3, 0, AlignLeft | AlignVCenter);
+    grid->addWidget(workdir_label, (action==Import)? 2 : 3, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
     if( action == Import )
     {
@@ -154,28 +153,28 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
 
         QLabel* vendortag_label = new QLabel(vendortag_edit, i18n("&Vendor tag:"), 
                                              mainWidget);
-        grid->addWidget(vendortag_label, 3, 0, AlignLeft | AlignVCenter);
+        grid->addWidget(vendortag_label, 3, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
         releasetag_edit = new KLineEdit(mainWidget);
         grid->addWidget(releasetag_edit, 4, 1);
 
         QLabel* releasetag_label = new QLabel(releasetag_edit, i18n("&Release tag:"),
                                               mainWidget);
-        grid->addWidget(releasetag_label, 4, 0, AlignLeft | AlignVCenter);
+        grid->addWidget(releasetag_label, 4, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
         ignore_edit = new KLineEdit(mainWidget);
         grid->addWidget(ignore_edit, 5, 1);
 
         QLabel* ignore_label = new QLabel(ignore_edit, i18n("&Ignore files:"), 
                                           mainWidget);
-        grid->addWidget(ignore_label, 5, 0, AlignLeft | AlignVCenter);
+        grid->addWidget(ignore_label, 5, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
         comment_edit = new KLineEdit(mainWidget);
         grid->addWidget(comment_edit, 6, 1);
 
         QLabel* comment_label = new QLabel(comment_edit, i18n("&Comment:"), 
                                            mainWidget);
-        grid->addWidget(comment_label, 6, 0, AlignLeft | AlignVCenter);
+        grid->addWidget(comment_label, 6, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
         binary_box = new QCheckBox(i18n("Import as &binaries"), mainWidget);
         grid->addMultiCellWidget(binary_box, 7, 7, 0, 1);
@@ -190,7 +189,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
         grid->addWidget(alias_edit, 4, 1);
 
         QLabel* alias_label = new QLabel(alias_edit, i18n("Chec&k out as:"), mainWidget);
-        grid->addWidget(alias_label, 4, 0, AlignLeft | AlignVCenter);
+        grid->addWidget(alias_label, 4, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
         export_box = new QCheckBox(i18n("Ex&port only"), mainWidget);
         grid->addMultiCellWidget(export_box, 5, 5, 0, 1);

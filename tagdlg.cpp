@@ -28,7 +28,6 @@
 #include <qpushbutton.h>
 //Added by qt3to4:
 #include <QVBoxLayout>
-#include <Q3Frame>
 #include <QHBoxLayout>
 #include <QBoxLayout>
 #include <klocale.h>
@@ -50,7 +49,7 @@ TagDialog::TagDialog(ActionType action, CvsService_stub* service,
 {
     setCaption( (action==Delete)? i18n("CVS Delete Tag") : i18n("CVS Tag") );
 
-    Q3Frame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = makeMainWidget();
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 

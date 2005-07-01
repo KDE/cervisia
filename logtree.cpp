@@ -345,8 +345,8 @@ QSize LogTreeView::computeSize(const Cervisia::LogInfo& logInfo,
     const QString tags(logInfo.tagsToString(Cervisia::TagInfo::Branch | Cervisia::TagInfo::Tag,
                                             Cervisia::TagInfo::Branch));
 
-    const QSize r1 = fm.size(AlignCenter, logInfo.m_revision);
-    const QSize r3 = fm.size(AlignCenter, logInfo.m_author);
+    const QSize r1 = fm.size(Qt::AlignCenter, logInfo.m_revision);
+    const QSize r3 = fm.size(Qt::AlignCenter, logInfo.m_author);
 
     if (authorHeight)
         *authorHeight = r3.height();
@@ -356,7 +356,7 @@ QSize LogTreeView::computeSize(const Cervisia::LogInfo& logInfo,
 
     if (!tags.isEmpty())
     {
-        const QSize r2 = fm.size(AlignCenter, tags);
+        const QSize r2 = fm.size(Qt::AlignCenter, tags);
         infoWidth = kMax(infoWidth, r2.width());
         infoHeight += r2.height() + INSPACE;
         if (tagsHeight)
@@ -412,7 +412,7 @@ void LogTreeView::paintRevisionCell(QPainter *p,
 
     rect.setY(rect.y() + INSPACE);
 
-    p->drawText(rect, AlignHCenter, logInfo.m_author);
+    p->drawText(rect, Qt::AlignHCenter, logInfo.m_author);
     rect.setY(rect.y() + authorHeight + INSPACE);
 
     const QString tags(logInfo.tagsToString(Cervisia::TagInfo::Branch | Cervisia::TagInfo::Tag,
@@ -424,20 +424,20 @@ void LogTreeView::paintRevisionCell(QPainter *p,
         underline.setUnderline(true);
 
         p->setFont(underline);
-        p->drawText(rect, AlignHCenter, tags);
+        p->drawText(rect, Qt::AlignHCenter, tags);
         p->setFont(font);
 
         rect.setY(rect.y() + tagsHeight + INSPACE);
     }
 
-    p->drawText(rect, AlignHCenter, logInfo.m_revision);
+    p->drawText(rect, Qt::AlignHCenter, logInfo.m_revision);
 }
 
 
 void LogTreeView::contentsMousePressEvent(QMouseEvent *e)
 {
-    if ( e->button() == MidButton ||
-         e->button() == LeftButton)
+    if ( e->button() == Qt::MidButton ||
+         e->button() == Qt::LeftButton)
     {
         int row = rowAt( e->pos().y() );
         int col = columnAt( e->pos().x() );
@@ -451,7 +451,7 @@ void LogTreeView::contentsMousePressEvent(QMouseEvent *e)
                 // the left mouse button with the control key was pressed
                 bool changeRevB = (e->button() == MidButton) ||
                                   (e->button() == LeftButton &&
-                                   e->state() & ControlButton);
+                                   e->modifier() & Qt::ControlModifier);
 
                 emit revisionClicked(it.current()->m_logInfo.m_revision, changeRevB);
                 break;

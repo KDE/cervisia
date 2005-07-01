@@ -27,7 +27,6 @@
 #include <qlayout.h>
 //Added by qt3to4:
 #include <QVBoxLayout>
-#include <Q3Frame>
 #include <QBoxLayout>
 
 #include <kconfig.h>
@@ -42,7 +41,7 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
                   Ok | Cancel, Ok, true)
     , partConfig(cfg)
 {
-    Q3Frame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = makeMainWidget();
 
     QBoxLayout* layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 

@@ -30,7 +30,6 @@
 #include <qtextstream.h>
 //Added by qt3to4:
 #include <QKeyEvent>
-#include <Q3Frame>
 #include <QHBoxLayout>
 #include <QBoxLayout>
 #include <QVBoxLayout>
@@ -110,13 +109,13 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent, const char *name)
 {
     items.setAutoDelete(true);
 
-    Q3Frame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = makeMainWidget();
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 
-    QSplitter *vertSplitter = new QSplitter(QSplitter::Vertical, mainWidget);
+    QSplitter *vertSplitter = new QSplitter(Qt::Vertical, mainWidget);
 
-    QSplitter *splitter = new QSplitter(QSplitter::Horizontal, vertSplitter);
+    QSplitter *splitter = new QSplitter(Qt::Horizontal, vertSplitter);
 
     QWidget *versionALayoutWidget = new QWidget(splitter);
     QBoxLayout *versionAlayout = new QVBoxLayout(versionALayoutWidget, 5);
@@ -164,7 +163,7 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent, const char *name)
     connect( editbutton, SIGNAL(clicked()), SLOT(editClicked()) );
 
     nofnlabel = new QLabel(mainWidget);
-    nofnlabel->setAlignment(AlignCenter);
+    nofnlabel->setAlignment(Qt::AlignCenter);
 
     backbutton = new QPushButton("&<<", mainWidget);
     connect( backbutton, SIGNAL(clicked()), SLOT(backClicked()) );

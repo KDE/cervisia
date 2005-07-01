@@ -28,7 +28,6 @@
 #include <qstyle.h>
 //Added by qt3to4:
 #include <QVBoxLayout>
-#include <Q3Frame>
 #include <QHBoxLayout>
 #include <QBoxLayout>
 #include <klineedit.h>
@@ -47,7 +46,7 @@ UpdateDialog::UpdateDialog(CvsService_stub* service,
     int const iComboBoxMinWidth(40 * fontMetrics().width('0'));
     int const iWidgetIndent(style().pixelMetric(QStyle::PM_ExclusiveIndicatorWidth, 0) + 6);
 
-    Q3Frame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = makeMainWidget();
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 

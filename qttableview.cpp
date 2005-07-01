@@ -1425,7 +1425,7 @@ void QtTableView::resizeEvent( QResizeEvent * )
 
 void QtTableView::wheelEvent( QWheelEvent * e )
 {
-    if( e->orientation() == Vertical && vScrollBar && vScrollBar->isVisible() )
+    if( e->orientation() == Qt::Vertical && vScrollBar && vScrollBar->isVisible() )
         QApplication::sendEvent( vScrollBar, e );
 }
 
@@ -1448,9 +1448,9 @@ QScrollBar *QtTableView::verticalScrollBar() const
 {
     QtTableView *that = (QtTableView*)this; // semantic const
     if ( !vScrollBar ) {
-	QScrollBar *sb = new QScrollBar( QScrollBar::Vertical, that );
+	QScrollBar *sb = new QScrollBar( Qt::Vertical, that );
 #ifndef QT_NO_CURSOR
-	sb->setCursor( arrowCursor );
+	sb->setCursor( Qt::ArrowCursor );
 #endif
         sb->resize( sb->sizeHint() ); // height is irrelevant
 	Q_CHECK_PTR(sb);
@@ -1479,9 +1479,9 @@ QScrollBar *QtTableView::horizontalScrollBar() const
 {
     QtTableView *that = (QtTableView*)this; // semantic const
     if ( !hScrollBar ) {
-	QScrollBar *sb = new QScrollBar( QScrollBar::Horizontal, that );
+	QScrollBar *sb = new QScrollBar( Qt::Horizontal, that );
 #ifndef QT_NO_CURSOR
-	sb->setCursor( arrowCursor );
+	sb->setCursor( Qt::ArrowCursor );
 #endif
 	sb->resize( sb->sizeHint() ); // width is irrelevant
 	sb->setFocusPolicy( NoFocus );

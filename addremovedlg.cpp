@@ -27,7 +27,6 @@
 #include <qstringlist.h>
 //Added by qt3to4:
 #include <QVBoxLayout>
-#include <Q3Frame>
 #include <QHBoxLayout>
 #include <QBoxLayout>
 #include <kapplication.h>
@@ -43,7 +42,7 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent, const char*
                 (action==AddBinary)? i18n("CVS Add Binary") :
                                      i18n("CVS Remove") );
 
-    Q3Frame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = makeMainWidget();
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 

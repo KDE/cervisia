@@ -33,7 +33,6 @@
 //Added by qt3to4:
 #include <QPixmap>
 #include <QVBoxLayout>
-#include <Q3Frame>
 #include <kbuttonbox.h>
 #include <kcolorbutton.h>
 #include <kconfig.h>
@@ -238,7 +237,7 @@ void SettingsDialog::done(int res)
  */
 void SettingsDialog::addGeneralPage()
 {
-    Q3Frame* generalPage = addPage(i18n("General"), QString::null,
+    QFrame* generalPage = addPage(i18n("General"), QString::null,
                                   LoadIcon("misc"));
     QVBoxLayout* layout = new QVBoxLayout(generalPage, 0, KDialog::spacingHint());
 

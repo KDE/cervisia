@@ -73,7 +73,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     , cvsService(0)
     , partConfig(cfg)
 {
-    Q3Frame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = makeMainWidget();
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 

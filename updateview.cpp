@@ -190,7 +190,7 @@ bool UpdateView::isUnfoldingTree() const
 
 void UpdateView::unfoldSelectedFolders()
 {
-    QApplication::setOverrideCursor(waitCursor);
+    QApplication::setOverrideCursor(Qt::WaitCursor);
 
     int previousDepth = 0;
     bool isUnfolded = false;
@@ -272,7 +272,7 @@ void UpdateView::unfoldSelectedFolders()
 
 void UpdateView::unfoldTree()
 {
-    QApplication::setOverrideCursor(waitCursor);
+    QApplication::setOverrideCursor(Qt::WaitCursor);
 
     m_unfoldingTree = true;
 
@@ -498,7 +498,7 @@ void UpdateView::syncSelection()
             setDirItems.insert(dirItem);
     }
 
-    QApplication::setOverrideCursor(waitCursor);
+    QApplication::setOverrideCursor(Qt::WaitCursor);
 
     std::set<UpdateDirItem*>::const_iterator const itDirItemEnd = setDirItems.end();
     for (std::set<UpdateDirItem*>::const_iterator itDirItem = setDirItems.begin();

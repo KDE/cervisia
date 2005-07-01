@@ -29,7 +29,6 @@
 #include <q3listbox.h>
 //Added by qt3to4:
 #include <QTextStream>
-#include <Q3Frame>
 #include <QBoxLayout>
 #include <QVBoxLayout>
 #include <ktextedit.h>
@@ -47,7 +46,7 @@ CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service,
     , partConfig(cfg)
     , cvsService(service)
 {
-    Q3Frame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = makeMainWidget();
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 

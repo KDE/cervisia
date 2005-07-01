@@ -23,7 +23,6 @@
 #include <q3table.h>
 //Added by qt3to4:
 #include <QVBoxLayout>
-#include <Q3Frame>
 #include <QBoxLayout>
 #include <kconfig.h>
 #include <klineedit.h>
@@ -39,7 +38,7 @@ WatchersDialog::WatchersDialog(KConfig& cfg, QWidget* parent, const char* name)
                   Close, ButtonCode(0), true)
     , partConfig(cfg)
 {
-    Q3Frame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = makeMainWidget();
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 

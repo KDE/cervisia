@@ -27,7 +27,6 @@
 #include <qradiobutton.h>
 //Added by qt3to4:
 #include <QVBoxLayout>
-#include <Q3Frame>
 #include <QGridLayout>
 #include <QBoxLayout>
 #include <klocale.h>
@@ -39,7 +38,7 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent, const char *name)
 {
     setCaption( (action==Add)? i18n("CVS Watch Add") : i18n("CVS Watch Remove") );
 
-    Q3Frame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = makeMainWidget();
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 

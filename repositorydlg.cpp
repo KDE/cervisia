@@ -24,7 +24,6 @@
 #include <qlayout.h>
 #include <qpushbutton.h>
 //Added by qt3to4:
-#include <Q3Frame>
 #include <QHBoxLayout>
 #include <QBoxLayout>
 #include <kbuttonbox.h>
@@ -155,7 +154,7 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, CvsService_stub* cvsService,
     , m_partConfig(cfg)
     , m_cvsService(cvsService)
 {
-    Q3Frame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = makeMainWidget();
 
     QBoxLayout* hbox = new QHBoxLayout(mainWidget, 0, spacingHint());
 

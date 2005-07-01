@@ -232,7 +232,7 @@ void CervisiaPart::setupActions()
     //
     // File Menu
     //
-    action = new KAction( i18n("O&pen Sandbox..."), "fileopen", CTRL+Key_O,
+    action = new KAction( i18n("O&pen Sandbox..."), "fileopen", Qt::CTRL + Qt::Key_O,
                           this, SLOT( slotOpenSandbox() ),
                           actionCollection(), "file_open" );
     hint = i18n("Opens a CVS working folder in the main window");
@@ -250,14 +250,14 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Update"), "vcs_update", CTRL+Key_U,
+    action = new KAction( i18n("&Update"), "vcs_update", Qt::CTRL + Qt::Key_U,
                           this, SLOT( slotUpdate() ),
                           actionCollection(), "file_update" );
     hint = i18n("Updates (cvs update) the selected files and folders");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Status"), "vcs_status", Key_F5,
+    action = new KAction( i18n("&Status"), "vcs_status", Qt::Key_F5,
                           this, SLOT( slotStatus() ),
                           actionCollection(), "file_status" );
     hint = i18n("Updates the status (cvs -n update) of the selected files and folders");
@@ -278,14 +278,14 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Commit..."), "vcs_commit", Key_NumberSign,
+    action = new KAction( i18n("&Commit..."), "vcs_commit", Qt::Key_NumberSign,
                           this, SLOT( slotCommit() ),
                           actionCollection(), "file_commit" );
     hint = i18n("Commits the selected files");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Add to Repository..."), "vcs_add", Key_Insert,
+    action = new KAction( i18n("&Add to Repository..."), "vcs_add", Qt::Key_Insert,
                           this, SLOT( slotAdd() ),
                           actionCollection(), "file_add" );
     hint = i18n("Adds (cvs add) the selected files to the repository");
@@ -299,7 +299,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Remove From Repository..."), "vcs_remove", Key_Delete,
+    action = new KAction( i18n("&Remove From Repository..."), "vcs_remove", Qt::Key_Delete,
                           this, SLOT( slotRemove() ),
                           actionCollection(), "file_remove" );
     hint = i18n("Removes (cvs remove) the selected files from the repository");
@@ -321,7 +321,7 @@ void CervisiaPart::setupActions()
     //
     // View Menu
     //
-    action = new KAction( i18n("Stop"), "stop", Key_Escape,
+    action = new KAction( i18n("Stop"), "stop", Qt::Key_Escape,
                           protocol, SLOT(cancelJob()),
                           actionCollection(), "stop_job" );
     action->setEnabled( false );
@@ -330,7 +330,7 @@ void CervisiaPart::setupActions()
     action->setWhatsThis( hint );
 
 
-    action = new KAction( i18n("Browse &Log..."), CTRL+Key_L,
+    action = new KAction( i18n("Browse &Log..."), Qt::CTRL + Qt::Key_L,
                           this, SLOT(slotBrowseLog()),
                           actionCollection(), "view_log" );
     hint = i18n("Shows the revision tree of the selected file");
@@ -342,21 +342,21 @@ void CervisiaPart::setupActions()
                           this, SLOT(slotBrowseMultiLog()),
                           actionCollection() );
 #endif
-    action = new KAction( i18n("&Annotate..."), CTRL+Key_A,
+    action = new KAction( i18n("&Annotate..."), Qt::CTRL + Qt::Key_A,
                           this, SLOT(slotAnnotate()),
                           actionCollection(), "view_annotate" );
     hint = i18n("Shows a blame-annotated view of the selected file");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Difference to Repository (BASE)..."), "vcs_diff", CTRL+Key_D,
+    action = new KAction( i18n("&Difference to Repository (BASE)..."), "vcs_diff", Qt::CTRL + Qt::Key_D,
                           this, SLOT(slotDiffBase()),
                           actionCollection(), "view_diff_base" );
     hint = i18n("Shows the differences of the selected file to the checked out version (tag BASE)");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("Difference to Repository (HEAD)..."), "vcs_diff", CTRL+Key_H,
+    action = new KAction( i18n("Difference to Repository (HEAD)..."), "vcs_diff", Qt::CTRL + Qt::Key_H,
                           this, SLOT(slotDiffHead()),
                           actionCollection(), "view_diff_head" );
     hint = i18n("Shows the differences of the selected file to the newest version in the repository (tag HEAD)");
@@ -1620,8 +1620,8 @@ void CervisiaPart::slotConfigure()
     conf->setGroup("LookAndFeel");
     bool splitHorz = conf->readBoolEntry("SplitHorizontally",true);
     splitter->setOrientation( splitHorz ?
-                              QSplitter::Vertical :
-                              QSplitter::Horizontal);
+                              Qt::Vertical :
+                              Qt::Horizontal);
 }
 
 void CervisiaPart::slotHelp()

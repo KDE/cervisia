@@ -134,7 +134,7 @@ bool ProgressDialog::execute()
     if( !started )
         return false;
 
-    QApplication::setOverrideCursor(waitCursor);
+    QApplication::setOverrideCursor(Qt::WaitCursor);
     kapp->enter_loop();
     if (QApplication::overrideCursor())
         QApplication::restoreOverrideCursor();

@@ -69,7 +69,6 @@ DiffView::DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
                    Tbl_smoothVScrolling );
     setFrameStyle( Q3Frame::WinPanel | Q3Frame::Sunken );
     setBackgroundMode( PaletteBase );
-    setWFlags( WResizeNoErase );
 
     partConfig.setGroup("LookAndFeel");
     setFont(partConfig.readFontEntry("DiffFont"));
@@ -327,7 +326,7 @@ void DiffView::paintCell(QPainter *p, int row, int col)
         backgroundColor = KGlobalSettings::highlightColor();
         p->setPen(KGlobalSettings::highlightedTextColor());
         inverted = false;
-        align = AlignLeft;
+        align = Qt::AlignLeft;
         innerborder = 0;
         if (col == (linenos?1:0) + (marker?1:0))
             str = item->line;
@@ -340,7 +339,7 @@ void DiffView::paintCell(QPainter *p, int row, int col)
         backgroundColor = KGlobalSettings::highlightColor();
         p->setPen(KGlobalSettings::highlightedTextColor());
         inverted = false;
-        align = AlignLeft;
+        align = Qt::AlignLeft;
         innerborder = 0;
         if (item->no == -1)
             str = "+++++";
@@ -352,7 +351,7 @@ void DiffView::paintCell(QPainter *p, int row, int col)
         backgroundColor = KGlobalSettings::alternateBackgroundColor();
         p->setPen(KGlobalSettings::textColor());
         inverted = false;
-        align = AlignRight;
+        align = Qt::AlignRight;
         innerborder = BORDER;
         str = (item->type==Change)? i18n("Change")
             : (item->type==Insert)? i18n("Insert")
@@ -367,7 +366,7 @@ void DiffView::paintCell(QPainter *p, int row, int col)
             : (item->type==Neutral)? KGlobalSettings::alternateBackgroundColor() : KGlobalSettings::baseColor();
         p->setPen(KGlobalSettings::textColor());
         inverted = item->inverted;
-        align = AlignLeft;
+        align = Qt::AlignLeft;
         innerborder = 0;
         str = item->line;
     }
@@ -382,7 +381,7 @@ void DiffView::paintCell(QPainter *p, int row, int col)
     }
 
     p->fillRect(0, 0, width, height, backgroundColor);
-    p->drawText(innerborder, 0, width-2*innerborder, height, align|ExpandTabs, str);
+    p->drawText(innerborder, 0, width-2*innerborder, height, align|Qt::TextExpandTabs, str);
     p->setFont(oldFont);
 }
 

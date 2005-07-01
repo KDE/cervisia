@@ -43,7 +43,7 @@ QStringList Repositories::readCvsPassFile()
     if (f.open(QIODevice::ReadOnly))
         {
             QTextStream stream(&f);
-	    while (!stream.eof())
+	    while (!stream.atEnd())
 		{
 		    int pos;
 		    QString line = stream.readLine();
