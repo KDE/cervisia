@@ -218,7 +218,7 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, CvsService_stub* cvsService,
 
     setHelp("accessing-repository");
 
-    setWFlags(Qt::WDestructiveClose | getWFlags());
+    setAttribute(Qt::WA_DeleteOnClose, true);
 
     QSize size = configDialogSize(m_partConfig, "RepositoryDialog");
     resize(size);

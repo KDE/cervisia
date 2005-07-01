@@ -121,7 +121,7 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool mod
 
     setHelp("diff");
 
-    setWFlags(Qt::WDestructiveClose | getWFlags());
+    setAttribute(Qt::WA_DeleteOnClose, true);
 
     QSize size = configDialogSize(partConfig, "DiffDialog");
     resize(size);

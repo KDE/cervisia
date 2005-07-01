@@ -228,7 +228,7 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     setHelp("browsinghistory");
 
-    setWFlags(Qt::WDestructiveClose | getWFlags());
+    setAttribute(Qt::WA_DeleteOnClose, true);
 
     QSize size = configDialogSize(partConfig, "HistoryDialog");
     resize(size);

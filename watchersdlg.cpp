@@ -63,7 +63,7 @@ WatchersDialog::WatchersDialog(KConfig& cfg, QWidget* parent, const char* name)
     
     layout->addWidget(table, 1);
 
-    setWFlags(Qt::WDestructiveClose | getWFlags());
+    setAttribute(Qt::WA_DeleteOnClose, true);
 
     QSize size = configDialogSize(partConfig, "WatchersDialog");
     resize(size);

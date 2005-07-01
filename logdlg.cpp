@@ -202,7 +202,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     setButtonGuiItem(Apply, KGuiItem(i18n("Create Patch...")));
     setHelp("browsinglogs");
 
-    setWFlags(Qt::WDestructiveClose | getWFlags());
+    setAttribute(Qt::WA_DeleteOnClose, true);
 
     QSize size = configDialogSize(partConfig, "LogDialog");
     resize(size);
