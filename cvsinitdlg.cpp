@@ -22,6 +22,10 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
+//Added by qt3to4:
+#include <QVBoxLayout>
+#include <Q3Frame>
+#include <QHBoxLayout>
 
 #include <kfiledialog.h>
 #include <klineedit.h>
@@ -36,7 +40,7 @@ CvsInitDialog::CvsInitDialog(QWidget* parent, const char* name)
     : KDialogBase(parent, name, true, i18n("Create New Repository (cvs init)"),
                   Ok | Cancel, Ok, true)
 {
-    QFrame* mainWidget = makeMainWidget();
+    Q3Frame* mainWidget = makeMainWidget();
     QVBoxLayout* mainLayout = new QVBoxLayout(mainWidget, 0, spacingHint());
 
     QLabel* dirLabel = new QLabel(i18n("Repository folder:"), mainWidget);

@@ -23,9 +23,11 @@
 #define LOGTREE_H
 
 
-#include <qptrlist.h>
+#include <q3ptrlist.h>
 
-#include <qtable.h>
+#include <q3table.h>
+//Added by qt3to4:
+#include <QMouseEvent>
 
 
 class LogTreeItem;
@@ -37,11 +39,11 @@ struct LogInfo;
 }
 
 
-typedef QPtrList<LogTreeItem> LogTreeItemList;
-typedef QPtrList<LogTreeConnection> LogTreeConnectionList;
+typedef Q3PtrList<LogTreeItem> LogTreeItemList;
+typedef Q3PtrList<LogTreeConnection> LogTreeConnectionList;
 
 
-class LogTreeView : public QTable
+class LogTreeView : public Q3Table
 {
     Q_OBJECT
 

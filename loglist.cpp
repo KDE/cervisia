@@ -21,7 +21,11 @@
 #include "loglist.h"
 
 #include <qapplication.h>
-#include <qkeycode.h>
+#include <qnamespace.h>
+//Added by qt3to4:
+#include <QMouseEvent>
+#include <QKeyEvent>
+#include <QEvent>
 #include <klocale.h>
 
 #include "loginfo.h"
@@ -35,9 +39,9 @@ public:
 
     enum { Revision, Author, Date, Branch, Comment, Tags };
 
-    LogListViewItem(QListView* list, const Cervisia::LogInfo& logInfo);
+    LogListViewItem(Q3ListView* list, const Cervisia::LogInfo& logInfo);
 
-    virtual int compare(QListViewItem* i, int col, bool) const;
+    virtual int compare(Q3ListViewItem* i, int col, bool) const;
 
 private:
     static QString truncateLine(const QString &s);
@@ -47,7 +51,7 @@ private:
 };
 
 
-LogListViewItem::LogListViewItem(QListView* list, const Cervisia::LogInfo& logInfo)
+LogListViewItem::LogListViewItem(Q3ListView* list, const Cervisia::LogInfo& logInfo)
     : KListViewItem(list),
       m_logInfo(logInfo)
 {
@@ -85,7 +89,7 @@ QString LogListViewItem::truncateLine(const QString &s)
 }
 
 
-int LogListViewItem::compare(QListViewItem* i, int col, bool ascending) const
+int LogListViewItem::compare(Q3ListViewItem* i, int col, bool ascending) const
 {
     const LogListViewItem* item = static_cast<LogListViewItem*>(i);
 
@@ -99,7 +103,7 @@ int LogListViewItem::compare(QListViewItem* i, int col, bool ascending) const
         iResult = ::compare(m_logInfo.m_dateTime, item->m_logInfo.m_dateTime);
         break;
     default:
-        iResult = QListViewItem::compare(i, col, ascending);
+        iResult = Q3ListViewItem::compare(i, col, ascending);
     }
 
     return iResult;
@@ -149,7 +153,7 @@ void LogListView::addRevision(const Cervisia::LogInfo& logInfo)
 
 void LogListView::setSelectedPair(const QString &selectionA, const QString &selectionB)
 {
-    for ( QListViewItem *item = firstChild(); item;
+    for ( Q3ListViewItem *item = firstChild(); item;
 	  item = item->nextSibling() )
 	{
             LogListViewItem *i = static_cast<LogListViewItem*>(item);
@@ -169,15 +173,15 @@ void LogListView::contentsMousePressEvent(QMouseEvent *e)
     // Retrieve revision
     const QString revision = selItem->text(LogListViewItem::Revision);   
     
-    if ( e->button() == LeftButton )
+    if ( e->button() == Qt::LeftButton )
     {
         // If the control key was pressed, then we change revision B not A
-        if( e->state() & ControlButton )
+        if( e->state() & Qt::ControlModifier )
             emit revisionClicked(revision, true);
         else
             emit revisionClicked(revision, false);
     }
-    else if ( e->button() == MidButton )
+    else if ( e->button() == Qt::MidButton )
         emit revisionClicked(revision, true);
 }
 
@@ -185,25 +189,25 @@ void LogListView::contentsMousePressEvent(QMouseEvent *e)
 void LogListView::keyPressEvent(QKeyEvent *e)
 {
     switch (e->key()) {
-    case Key_A:
+    case Qt::Key_A:
         if (currentItem())
             emit revisionClicked(currentItem()->text(LogListViewItem::Revision), false);
         break;
         break;
-    case Key_B:
+    case Qt::Key_B:
         if (currentItem())
             emit revisionClicked(currentItem()->text(LogListViewItem::Revision), true);
         break;
-    case Key_Backspace:
-    case Key_Delete:
-    case Key_Down:
-    case Key_Up:
-    case Key_Home:
-    case Key_End:
-    case Key_Next:
-    case Key_Prior:
+    case Qt::Key_Backspace:
+    case Qt::Key_Delete:
+    case Qt::Key_Down:
+    case Qt::Key_Up:
+    case Qt::Key_Home:
+    case Qt::Key_End:
+    case Qt::Key_PageDown:
+    case Qt::Key_PageUp:
         if (e->state() == 0)
-             QListView::keyPressEvent(e);
+             Q3ListView::keyPressEvent(e);
         else
             QApplication::postEvent(this, new QKeyEvent(QEvent::KeyPress, e->key(), e->ascii(), 0));
         break;

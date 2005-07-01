@@ -24,6 +24,9 @@
 
 #include <qdir.h>
 #include <qpainter.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <QTextStream>
 
 #include <kdebug.h>
 #include <kglobalsettings.h>
@@ -254,7 +257,7 @@ void UpdateDirItem::syncWithEntries()
     const QString path(filePath() + QDir::separator());
 
     QFile f(path + "CVS/Entries");
-    if( f.open(IO_ReadOnly) )
+    if( f.open(QIODevice::ReadOnly) )
     {
         QTextStream stream(&f);
         while( !stream.eof() )
@@ -406,11 +409,11 @@ void UpdateDirItem::setOpen(bool open)
             view->setFilter(view->filter());
     }
 
-    QListViewItem::setOpen(open);
+    Q3ListViewItem::setOpen(open);
 }
 
 
-int UpdateDirItem::compare(QListViewItem* i,
+int UpdateDirItem::compare(Q3ListViewItem* i,
                            int /*column*/,
                            bool bAscending) const
 {
@@ -595,7 +598,7 @@ int UpdateFileItem::statusClass() const
 }
 
 
-int UpdateFileItem::compare(QListViewItem* i,
+int UpdateFileItem::compare(Q3ListViewItem* i,
                             int column,
                             bool bAscending) const
 {
@@ -702,7 +705,7 @@ void UpdateFileItem::paintCell(QPainter *p,
         mycg.setColor(QColorGroup::Text, color);
     }
 
-    QListViewItem::paintCell(p, mycg, col, width, align);
+    Q3ListViewItem::paintCell(p, mycg, col, width, align);
 
     if (color.isValid())
     {

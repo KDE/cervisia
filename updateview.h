@@ -24,7 +24,7 @@
 
 #include <klistview.h>
 
-#include <qptrlist.h>
+#include <q3ptrlist.h>
 
 #include "entry.h"
 
@@ -80,7 +80,7 @@ public slots:
     void processUpdateLine(QString line);
 
 private slots:
-    void itemExecuted(QListViewItem *item);
+    void itemExecuted(Q3ListViewItem *item);
     
 private:
     void updateItem(const QString &filename, Cervisia::EntryStatus status, bool isdir);
@@ -94,7 +94,7 @@ private:
 
     Filter filt;
     Action act;
-    QPtrList<QListViewItem> relevantSelection;
+    Q3PtrList<Q3ListViewItem> relevantSelection;
 
     QColor m_conflictColor;
     QColor m_localChangeColor;

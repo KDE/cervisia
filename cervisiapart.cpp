@@ -21,9 +21,13 @@
 #include <qlabel.h>
 #include <qmessagebox.h>
 #include <qpushbutton.h>
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
 #include <qtextstream.h>
 #include <qtooltip.h>
+//Added by qt3to4:
+#include <Q3CString>
+#include <Q3StrList>
+#include <Q3ValueList>
 #include <kaboutdata.h>
 #include <kaction.h>
 #include <kapplication.h>
@@ -109,7 +113,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
 
     // start the cvs DCOP service
     QString error;
-    QCString appId;
+    Q3CString appId;
     if( KApplication::startServiceByDesktopName("cvsservice", QStringList(), &error, &appId) )
     {
         KMessageBox::sorry(0, i18n("Starting cvsservice failed with message: ") +
@@ -128,22 +132,22 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     // an explaination
     if( cvsService )
     {
-        Orientation o = splitHorz ? QSplitter::Vertical
-                                  : QSplitter::Horizontal;
+        Qt::Orientation o = splitHorz ? Qt::Vertical
+                                  : Qt::Horizontal;
         splitter = new QSplitter(o, parentWidget, widgetName);
         // avoid PartManager's warning that Part's window can't handle focus
-        splitter->setFocusPolicy( QWidget::StrongFocus );
+        splitter->setFocusPolicy( Qt::StrongFocus );
 
         update = new UpdateView(*config(), splitter);
-        update->setFocusPolicy( QWidget::StrongFocus );
+        update->setFocusPolicy( Qt::StrongFocus );
         update->setFocus();
-        connect( update, SIGNAL(contextMenu(KListView*, QListViewItem*, const QPoint&)),
-                 this, SLOT(popupRequested(KListView*, QListViewItem*, const QPoint&)) );
+        connect( update, SIGNAL(contextMenu(KListView*, Q3ListViewItem*, const QPoint&)),
+                 this, SLOT(popupRequested(KListView*, Q3ListViewItem*, const QPoint&)) );
         connect( update, SIGNAL(fileOpened(QString)),
                  this, SLOT(openFile(QString)) );
 
         protocol = new ProtocolView(appId, splitter);
-        protocol->setFocusPolicy( QWidget::StrongFocus );
+        protocol->setFocusPolicy( Qt::StrongFocus );
 
         setWidget(splitter);
     }
@@ -629,7 +633,7 @@ void CervisiaPart::setupActions()
 }
 
 
-void CervisiaPart::popupRequested(KListView*, QListViewItem* item, const QPoint& p)
+void CervisiaPart::popupRequested(KListView*, Q3ListViewItem* item, const QPoint& p)
 {
     QString xmlName = "context_popup";
 
@@ -640,7 +644,7 @@ void CervisiaPart::popupRequested(KListView*, QListViewItem* item, const QPoint&
         action->setChecked(item->isOpen());
     }
 
-    if( QPopupMenu* popup = static_cast<QPopupMenu*>(hostContainer(xmlName)) )
+    if( Q3PopupMenu* popup = static_cast<Q3PopupMenu*>(hostContainer(xmlName)) )
     {
         if( isFileItem(item) )
         {
@@ -1116,7 +1120,7 @@ void CervisiaPart::slotBrowseLog()
 #if 0
 void CervisiaPart::slotBrowseMultiLog()
 {
-    QStrList list = update->multipleSelection();
+    Q3StrList list = update->multipleSelection();
     if (!list.isEmpty())
     {
         // Non-modal dialog
@@ -1339,7 +1343,7 @@ void CervisiaPart::slotMakePatch()
         return;
 
     QFile f(fileName);
-    if( !f.open(IO_WriteOnly) )
+    if( !f.open(QIODevice::WriteOnly) )
     {
         KMessageBox::sorry(widget(),
                            i18n("Could not open file for writing."),
@@ -1843,7 +1847,7 @@ void CervisiaPart::readSettings()
     int splitterpos2 = config->readNumEntry("Splitter Pos 2", 0);
     if (splitterpos1)
     {
-        QValueList<int> sizes;
+        Q3ValueList<int> sizes;
         sizes << splitterpos1;
         sizes << splitterpos2;
         splitter->setSizes(sizes);
@@ -1868,7 +1872,7 @@ void CervisiaPart::writeSettings()
     config->writeEntry("Hide Removed Files", opt_hideRemoved);
     config->writeEntry("Hide Non CVS Files", opt_hideNotInCVS);
     config->writeEntry("Hide Empty Directories", opt_hideEmptyDirectories);
-    QValueList<int> sizes = splitter->sizes();
+    Q3ValueList<int> sizes = splitter->sizes();
     config->writeEntry("Splitter Pos 1", sizes[0]);
     config->writeEntry("Splitter Pos 2", sizes[1]);
 

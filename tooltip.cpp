@@ -22,7 +22,7 @@
 #include <kglobal.h>
 #include <kglobalsettings.h>
 
-#include <qsimplerichtext.h>
+#include <q3simplerichtext.h>
 
 
 namespace Cervisia
@@ -94,7 +94,7 @@ QString truncateLines(const QString& text,
                        - desktopGeometry.top() - 10);
 
     // calculate the tooltip's size
-    const QSimpleRichText layoutedText(text, font);
+    const Q3SimpleRichText layoutedText(text, font);
 
     // only if the tooltip's size is bigger in x- and y-direction the text must
     // be truncated otherwise the tip is moved to a position where it fits

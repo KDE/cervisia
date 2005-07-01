@@ -28,8 +28,15 @@
 #include <qlayout.h>
 #include <qpushbutton.h>
 #include <qtabwidget.h>
-#include <qtextedit.h>
-#include <qwhatsthis.h>
+#include <q3textedit.h>
+#include <q3whatsthis.h>
+//Added by qt3to4:
+#include <QTextStream>
+#include <QGridLayout>
+#include <Q3Frame>
+#include <QHBoxLayout>
+#include <QBoxLayout>
+#include <QVBoxLayout>
 #include <kconfig.h>
 #include <kdebug.h>
 #include <kfiledialog.h>
@@ -66,7 +73,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     , cvsService(0)
     , partConfig(cfg)
 {
-    QFrame* mainWidget = makeMainWidget();
+    Q3Frame* mainWidget = makeMainWidget();
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 
@@ -104,7 +111,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     connect(tabWidget, SIGNAL(currentChanged(QWidget*)),
             this, SLOT(tabChanged(QWidget*)));
 
-    QWhatsThis::add(tree, i18n("Choose revision A by clicking with the left "
+    Q3WhatsThis::add(tree, i18n("Choose revision A by clicking with the left "
                                "mouse button,\nrevision B by clicking with "
                                "the middle mouse button."));
 
@@ -113,8 +120,8 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     for (int i = 0; i < 2; ++i)
     {
-        QFrame *frame = new QFrame(mainWidget);
-        frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
+        Q3Frame *frame = new Q3Frame(mainWidget);
+        frame->setFrameStyle(Q3Frame::HLine | Q3Frame::Sunken);
         layout->addWidget(frame);
 
         QGridLayout *grid = new QGridLayout(layout);
@@ -132,7 +139,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
         grid->addWidget(versionlabel, 0, 0);
 
         revbox[i] = new QLabel(mainWidget);
-        revbox[i]->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+        revbox[i]->setFrameStyle(Q3Frame::Panel | Q3Frame::Sunken);
         grid->addWidget(revbox[i], 0, 1, Qt::AlignVCenter);
 
         QLabel *selectlabel = new QLabel(i18n("Select by tag:"), mainWidget);
@@ -147,36 +154,36 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
         grid->addWidget(authorlabel, 1, 0);
 
         authorbox[i] = new QLabel(mainWidget);
-        authorbox[i]->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+        authorbox[i]->setFrameStyle(Q3Frame::Panel | Q3Frame::Sunken);
         grid->addWidget(authorbox[i], 1, 1);
 
         QLabel *datelabel = new QLabel(i18n("Date:"), mainWidget);
         grid->addWidget(datelabel, 1, 2);
 
         datebox[i] = new QLabel(mainWidget);
-        datebox[i]->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+        datebox[i]->setFrameStyle(Q3Frame::Panel | Q3Frame::Sunken);
         grid->addWidget(datebox[i], 1, 3);
 
         QLabel *commentlabel = new QLabel(i18n("Comment/Tags:"), mainWidget);
         grid->addWidget(commentlabel, 2, 0);
 
-        commentbox[i] = new QTextEdit(mainWidget);
+        commentbox[i] = new Q3TextEdit(mainWidget);
         commentbox[i]->setReadOnly(true);
         commentbox[i]->setTextFormat(Qt::PlainText);
         fm = commentbox[i]->fontMetrics();
         commentbox[i]->setFixedHeight(2*fm.lineSpacing()+10);
         grid->addMultiCellWidget(commentbox[i], 2, 2, 1, 3);
 
-        tagsbox[i] = new QTextEdit(mainWidget);
+        tagsbox[i] = new Q3TextEdit(mainWidget);
         tagsbox[i]->setReadOnly(true);
         tagsbox[i]->setFixedHeight(2*fm.lineSpacing()+10);
         grid->addWidget(tagsbox[i], 2, 4);
     }
 
-    QWhatsThis::add(revbox[0], i18n("This revision is used when you click "
+    Q3WhatsThis::add(revbox[0], i18n("This revision is used when you click "
                                     "Annotate.\nIt is also used as the first "
                                     "item of a Diff operation."));
-    QWhatsThis::add(revbox[1], i18n("This revision is used as the second "
+    Q3WhatsThis::add(revbox[1], i18n("This revision is used as the second "
                                     "item of a Diff operation."));
 
     connect( tagcombo[0], SIGNAL(activated(int)),
@@ -337,7 +344,7 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
                         branchrev = rev.left(pos2);
 
                     // Build Cervisia::TagInfo for logInfo
-                    QPtrListIterator<LogDialogTagInfo> it(tags);
+                    Q3PtrListIterator<LogDialogTagInfo> it(tags);
                     for( ; it.current(); ++it )
                     {
                         if( rev == it.current()->rev )
@@ -376,7 +383,7 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
 
     tagcombo[0]->insertItem(QString::null);
     tagcombo[1]->insertItem(QString::null);
-    QPtrListIterator<LogDialogTagInfo> it(tags);
+    Q3PtrListIterator<LogDialogTagInfo> it(tags);
     for( ; it.current(); ++it )
     {
         QString str = it.current()->tag;
@@ -470,7 +477,7 @@ void LogDialog::slotApply()
         return;
 
     QFile f(fileName);
-    if( !f.open(IO_WriteOnly) )
+    if( !f.open(QIODevice::WriteOnly) )
     {
         KMessageBox::sorry(this,
                            i18n("Could not open file for writing."),
@@ -524,7 +531,7 @@ void LogDialog::annotateClicked()
 
 void LogDialog::revisionSelected(QString rev, bool rmb)
 {
-    QPtrListIterator<Cervisia::LogInfo> it(items);
+    Q3PtrListIterator<Cervisia::LogInfo> it(items);
     for (; it.current(); ++it)
         if (it.current()->m_revision == rev)
             {

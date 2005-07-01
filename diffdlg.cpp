@@ -24,9 +24,17 @@
 #include <qcombobox.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qkeycode.h>
+#include <qnamespace.h>
 #include <qfileinfo.h>
 #include <qregexp.h>
+//Added by qt3to4:
+#include <QTextStream>
+#include <QGridLayout>
+#include <QKeyEvent>
+#include <Q3Frame>
+#include <QHBoxLayout>
+#include <QBoxLayout>
+#include <QVBoxLayout>
 #include <kconfig.h>
 #include <kfiledialog.h>
 #include <klocale.h>
@@ -49,7 +57,7 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool mod
     items.setAutoDelete(true);
     markeditem = -1;
 
-    QFrame* mainWidget = makeMainWidget();
+    Q3Frame* mainWidget = makeMainWidget();
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 
@@ -136,19 +144,19 @@ void DiffDialog::keyPressEvent(QKeyEvent *e)
 {
     switch (e->key())
 	{
-	case Key_Up:
+	case Qt::Key_Up:
             diff1->up();
             diff2->up();
             break;
-	case Key_Down:
+	case Qt::Key_Down:
             diff1->down();
             diff2->down();
             break;
-	case Key_Next:
+	case Qt::Key_PageDown:
             diff1->next();
             diff2->next();
             break;
-	case Key_Prior:
+	case Qt::Key_PageUp:
             diff1->prior();
             diff2->prior();
             break;
@@ -485,7 +493,7 @@ void DiffDialog::saveAsClicked()
         return;
 
     QFile f(fileName);
-    if( !f.open(IO_WriteOnly) )
+    if( !f.open(QIODevice::WriteOnly) )
     {
         KMessageBox::sorry(this,
                            i18n("Could not open file for writing."),

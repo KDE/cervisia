@@ -21,7 +21,10 @@
 #ifndef DIFFDLG_H
 #define DIFFDLG_H
 
-#include <qptrlist.h>
+#include <q3ptrlist.h>
+//Added by qt3to4:
+#include <QLabel>
+#include <QKeyEvent>
 #include <kdialogbase.h>
 
 
@@ -73,7 +76,7 @@ private:
     QPushButton *backbutton, *forwbutton;
     DiffView *diff1, *diff2;
 
-    QPtrList<DiffItem> items;
+    Q3PtrList<DiffItem> items;
     int markeditem;
     KConfig& partConfig;
     QStringList m_diffOutput;

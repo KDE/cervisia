@@ -23,7 +23,7 @@
 #include <kdialogbase.h>
 
 class QCheckBox;
-class QVButtonGroup;
+class Q3VButtonGroup;
 class KIntNumInput;
 
 
@@ -46,7 +46,7 @@ private slots:
     void formatChanged(int buttonId);
        
 private:
-    QVButtonGroup* m_formatBtnGroup;
+    Q3VButtonGroup* m_formatBtnGroup;
     KIntNumInput*  m_contextLines;
     QCheckBox*     m_blankLineChk;
     QCheckBox*     m_allSpaceChk;

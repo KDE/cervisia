@@ -27,6 +27,12 @@
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qpushbutton.h>
+//Added by qt3to4:
+#include <QVBoxLayout>
+#include <Q3Frame>
+#include <QHBoxLayout>
+#include <QGridLayout>
+#include <QBoxLayout>
 #include <kprocess.h>
 #include <kfiledialog.h>
 #include <klineedit.h>
@@ -53,7 +59,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
 {
     setCaption( (action==Checkout)? i18n("CVS Checkout") : i18n("CVS Import") );
 
-    QFrame* mainWidget = makeMainWidget();
+    Q3Frame* mainWidget = makeMainWidget();
 
     QBoxLayout* layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 

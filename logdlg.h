@@ -25,7 +25,9 @@
 
 #include "loginfo.h"
 
-#include <qptrlist.h>
+#include <q3ptrlist.h>
+//Added by qt3to4:
+#include <QLabel>
 
 
 class LogListView;
@@ -37,7 +39,7 @@ class KConfig;
 class QComboBox;
 class QLabel;
 class QTabWidget;
-class QTextEdit;
+class Q3TextEdit;
 class CvsService_stub;
 
 class LogDialogTagInfo
@@ -77,8 +79,8 @@ private:
     void tagSelected(LogDialogTagInfo* tag, bool rmb);
 
     QString filename;
-    QPtrList<Cervisia::LogInfo> items;
-    QPtrList<LogDialogTagInfo> tags;
+    Q3PtrList<Cervisia::LogInfo> items;
+    Q3PtrList<LogDialogTagInfo> tags;
     QString selectionA;
     QString selectionB;
     LogTreeView *tree;
@@ -88,8 +90,8 @@ private:
     QLabel *revbox[2];
     QLabel *authorbox[2];
     QLabel *datebox[2];
-    QTextEdit *commentbox[2];
-    QTextEdit *tagsbox[2];
+    Q3TextEdit *commentbox[2];
+    Q3TextEdit *tagsbox[2];
     QComboBox *tagcombo[2];
 
     CvsService_stub* cvsService;

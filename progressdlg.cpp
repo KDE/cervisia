@@ -24,7 +24,9 @@
 #include <qstring.h>
 #include <qstringlist.h>
 #include <qtimer.h>
-#include <qvbox.h>
+#include <q3vbox.h>
+//Added by qt3to4:
+#include <QHBoxLayout>
 
 #include <cvsjob_stub.h>
 #include <dcopref.h>
@@ -48,7 +50,7 @@ struct ProgressDialog::Private
 
     QTimer*         timer;
     KAnimWidget*    gear;
-    QListBox*       resultbox;
+    Q3ListBox*       resultbox;
 };
 
 
@@ -83,7 +85,7 @@ ProgressDialog::~ProgressDialog()
 
 void ProgressDialog::setupGui(const QString& heading)
 {
-    QVBox* vbox = makeVBoxMainWidget();
+    Q3VBox* vbox = makeVBoxMainWidget();
     vbox->setSpacing(10);
 
     QWidget* headingBox = new QWidget(vbox);
@@ -99,8 +101,8 @@ void ProgressDialog::setupGui(const QString& heading)
     d->gear->setFixedSize(32, 32);
     hboxLayout->addWidget(d->gear);
 
-    d->resultbox = new QListBox(vbox);
-    d->resultbox->setSelectionMode(QListBox::NoSelection);
+    d->resultbox = new Q3ListBox(vbox);
+    d->resultbox->setSelectionMode(Q3ListBox::NoSelection);
     QFontMetrics fm(d->resultbox->fontMetrics());
     d->resultbox->setMinimumSize(fm.width("0")*70, fm.lineSpacing()*8);
 

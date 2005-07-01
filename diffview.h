@@ -24,18 +24,23 @@
 
 #include "qttableview.h"
 
-#include <qptrcollection.h>
-#include <qptrlist.h>
+#include <q3ptrcollection.h>
+#include <q3ptrlist.h>
+//Added by qt3to4:
+#include <QWheelEvent>
+#include <QPaintEvent>
+#include <QEvent>
+#include <Q3Frame>
 
 
 class KConfig;
 class DiffViewItem;
 
 
-class DiffViewItemList : public QPtrList<DiffViewItem>
+class DiffViewItemList : public Q3PtrList<DiffViewItem>
 {
 protected:
-    virtual int compareItems(QPtrCollection::Item item1, QPtrCollection::Item item2);
+    virtual int compareItems(Q3PtrCollection::Item item1, Q3PtrCollection::Item item2);
 };
 
 
@@ -101,7 +106,7 @@ private:
 };
 
 
-class DiffZoomWidget : public QFrame
+class DiffZoomWidget : public Q3Frame
 {
     Q_OBJECT
 

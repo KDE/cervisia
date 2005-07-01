@@ -25,6 +25,11 @@
 #include <qpixmap.h>
 #include <qregexp.h>
 #include <qstyle.h>
+//Added by qt3to4:
+#include <QWheelEvent>
+#include <QPaintEvent>
+#include <QEvent>
+#include <Q3Frame>
 
 #include <kapplication.h>
 #include <kconfig.h>
@@ -43,7 +48,7 @@ public:
 };
 
 
-int DiffViewItemList::compareItems(QPtrCollection::Item item1, QPtrCollection::Item item2)
+int DiffViewItemList::compareItems(Q3PtrCollection::Item item1, Q3PtrCollection::Item item2)
 {
     return (static_cast<DiffViewItem*>(item1)->no
             == static_cast<DiffViewItem*>(item2)->no)? 0 : 1;
@@ -55,14 +60,14 @@ const int DiffView::BORDER = 7;
 
 DiffView::DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
                     QWidget *parent, const char *name )
-    : QtTableView(parent, name, WRepaintNoErase)
+    : QtTableView(parent, name, Qt::WNoAutoErase)
     , partConfig(cfg)
 {
     setNumRows(0);
     setNumCols( 1 + (withlinenos?1:0) + (withmarker?1:0) );
     setTableFlags( Tbl_autoVScrollBar|Tbl_autoHScrollBar|
                    Tbl_smoothVScrolling );
-    setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
+    setFrameStyle( Q3Frame::WinPanel | Q3Frame::Sunken );
     setBackgroundMode( PaletteBase );
     setWFlags( WResizeNoErase );
 
@@ -250,7 +255,7 @@ QByteArray DiffView::compressedContent()
 {
     QByteArray res(items.count());
 
-    QPtrListIterator<DiffViewItem> it(items);
+    Q3PtrListIterator<DiffViewItem> it(items);
     int i=0;
     for (; it.current(); ++it)
     {
@@ -389,7 +394,7 @@ void DiffView::wheelEvent(QWheelEvent *e)
 
 
 DiffZoomWidget::DiffZoomWidget(KConfig& cfg, QWidget *parent, const char *name)
-    : QFrame(parent, name)
+    : Q3Frame(parent, name)
 {
     setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Minimum ) );
 
@@ -428,7 +433,7 @@ bool DiffZoomWidget::eventFilter(QObject *o, QEvent *e)
         || e->type() == QEvent::Resize)
         repaint();
 
-    return QFrame::eventFilter(o, e);
+    return Q3Frame::eventFilter(o, e);
 }
 
 

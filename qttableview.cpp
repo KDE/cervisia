@@ -17,6 +17,11 @@
 #include "qpainter.h"
 #include "qdrawutil.h"
 #include <qapplication.h>
+//Added by qt3to4:
+#include <QWheelEvent>
+#include <QPaintEvent>
+#include <Q3Frame>
+#include <QResizeEvent>
 #include <limits.h>
 
 enum ScrollBarDirtyFlags {
@@ -143,8 +148,8 @@ void QCornerSquare::paintEvent( QPaintEvent * )
 
 */
 
-QtTableView::QtTableView( QWidget *parent, const char *name, WFlags f )
-    : QFrame( parent, name, f )
+QtTableView::QtTableView( QWidget *parent, const char *name, Qt::WFlags f )
+    : Q3Frame( parent, name, f )
 {
     nRows		 = nCols      = 0;	// zero rows/cols
     xCellOffs		 = yCellOffs  = 0;	// zero offset
@@ -241,7 +246,7 @@ void QtTableView::repaint( int x, int y, int w, int h, bool erase )
     if ( r.isEmpty() )
 	return; // nothing to do
     QPaintEvent e( r );
-    if ( erase && backgroundMode() != NoBackground )
+    if ( erase && backgroundMode() != Qt::NoBackground )
 	eraseInPaint = TRUE;			// erase when painting
     paintEvent( &e );
     eraseInPaint = FALSE;
@@ -1315,7 +1320,7 @@ void QtTableView::paintEvent( QPaintEvent *e )
     QRect cellR;
     QRect cellUR;
 #ifndef QT_NO_TRANSFORMATIONS
-    QWMatrix matrix;
+    QMatrix matrix;
 #endif
 
     while ( yPos <= maxY && row < nRows ) {

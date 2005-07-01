@@ -22,9 +22,13 @@
 #include "addrepositorydlg.h"
 
 #include <qcheckbox.h>
-#include <qhbox.h>
+#include <q3hbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
+//Added by qt3to4:
+#include <QVBoxLayout>
+#include <Q3Frame>
+#include <QBoxLayout>
 
 #include <kconfig.h>
 #include <klineedit.h>
@@ -38,7 +42,7 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
                   Ok | Cancel, Ok, true)
     , partConfig(cfg)
 {
-    QFrame* mainWidget = makeMainWidget();
+    Q3Frame* mainWidget = makeMainWidget();
 
     QBoxLayout* layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 
@@ -70,7 +74,7 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
     server_label->setBuddy(server_edit);
     layout->addWidget(server_edit);
 
-    QHBox* compressionBox = new QHBox(mainWidget);
+    Q3HBox* compressionBox = new Q3HBox(mainWidget);
     m_useDifferentCompression = new QCheckBox(i18n("Use different &compression level:"), compressionBox);
     
     m_compressionLevel = new KIntNumInput(compressionBox);

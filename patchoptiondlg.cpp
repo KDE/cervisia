@@ -17,6 +17,11 @@
  */
 
 #include "patchoptiondlg.h"
+//Added by qt3to4:
+#include <QVBoxLayout>
+#include <Q3Frame>
+#include <QHBoxLayout>
+#include <QBoxLayout>
 using Cervisia::PatchOptionDialog;
 
 #include <qcheckbox.h>
@@ -32,10 +37,10 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent, const char* name)
     : KDialogBase(parent, name, true/*modal*/, QString::null,
                   Ok | Cancel | Help, Ok, true/*separator*/)
 {
-    QFrame* mainWidget = makeMainWidget();
+    Q3Frame* mainWidget = makeMainWidget();
     QBoxLayout* topLayout = new QVBoxLayout(mainWidget, 0, spacingHint());
 
-    m_formatBtnGroup = new QVButtonGroup(i18n("Output Format"), mainWidget, "");
+    m_formatBtnGroup = new Q3VButtonGroup(i18n("Output Format"), mainWidget, "");
     topLayout->addWidget(m_formatBtnGroup);
 
     connect(m_formatBtnGroup, SIGNAL(clicked(int)),
@@ -56,7 +61,7 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent, const char* name)
     contextLinesLayout->addWidget(contextLinesLbl);
     contextLinesLayout->addWidget(m_contextLines);
 
-    QVButtonGroup* ignoreBtnGroup = new QVButtonGroup(i18n("Ignore Options"), mainWidget);
+    Q3VButtonGroup* ignoreBtnGroup = new Q3VButtonGroup(i18n("Ignore Options"), mainWidget);
     topLayout->addWidget(ignoreBtnGroup);
 
     m_blankLineChk = new QCheckBox(i18n("Ignore added or removed empty lines"),

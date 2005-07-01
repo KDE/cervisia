@@ -25,6 +25,11 @@
 #include <qlayout.h>
 #include <qpushbutton.h>
 #include <qregexp.h>
+//Added by qt3to4:
+#include <QVBoxLayout>
+#include <Q3Frame>
+#include <QGridLayout>
+#include <QBoxLayout>
 #include <kconfig.h>
 #include <klineedit.h>
 #include <klistview.h>
@@ -36,17 +41,17 @@
 #include "progressdlg.h"
 
 
-class HistoryItem : public QListViewItem
+class HistoryItem : public Q3ListViewItem
 {
 public:
 
     enum { Date, Event, Author, Revision, File, Path };
 
-    HistoryItem(QListView *parent, const QDateTime& date)
-        : QListViewItem(parent), m_date(date)
+    HistoryItem(Q3ListView *parent, const QDateTime& date)
+        : Q3ListViewItem(parent), m_date(date)
     {}
 
-    virtual int compare(QListViewItem* i, int col, bool) const;
+    virtual int compare(Q3ListViewItem* i, int col, bool) const;
 
     virtual QString text(int col) const;
 
@@ -61,7 +66,7 @@ private:
 };
 
 
-int HistoryItem::compare(QListViewItem* i, int col, bool ascending) const
+int HistoryItem::compare(Q3ListViewItem* i, int col, bool ascending) const
 {
     const HistoryItem* pItem = static_cast<HistoryItem*>(i);
 
@@ -75,7 +80,7 @@ int HistoryItem::compare(QListViewItem* i, int col, bool ascending) const
         iResult = ::compareRevisions(text(Revision), pItem->text(Revision));
         break;
     default:
-        iResult = QListViewItem::compare(i, col, ascending);
+        iResult = Q3ListViewItem::compare(i, col, ascending);
     }
 
     return iResult;
@@ -91,7 +96,7 @@ QString HistoryItem::text(int col) const
         sText = KGlobal::locale()->formatDateTime(m_date);
         break;
     default:
-        sText = QListViewItem::text(col);
+        sText = Q3ListViewItem::text(col);
     }
 
     return sText;
@@ -129,12 +134,12 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
                   Close | Help, ButtonCode(0), true)
     , partConfig(cfg)
 {
-    QFrame* mainWidget = makeMainWidget();
+    Q3Frame* mainWidget = makeMainWidget();
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 
     listview = new KListView(mainWidget);
-    listview->setSelectionMode(QListView::NoSelection);
+    listview->setSelectionMode(Q3ListView::NoSelection);
     listview->setAllColumnsShowFocus(true);
     listview->setShowSortIndicator(true);
     listview->setSorting(HistoryItem::Date, false);
@@ -230,7 +235,7 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     // without this restoreLayout() can't change the column widths
     for (int i = 0; i < listview->columns(); ++i)
-        listview->setColumnWidthMode(i, QListView::Manual);
+        listview->setColumnWidthMode(i, Q3ListView::Manual);
 
     listview->restoreLayout(&partConfig, QString::fromLatin1("HistoryListView"));
 }
@@ -258,7 +263,7 @@ void HistoryDialog::choiceChanged()
     const bool filterByFile(onlyfilenames_box->isChecked() && !fileMatcher.isEmpty());
     const bool filterByPath(onlydirnames_box->isChecked() && !pathMatcher.isEmpty());
 
-    QListViewItemIterator it(listview);
+    Q3ListViewItemIterator it(listview);
     for (; it.current(); ++it)
         {
             HistoryItem *item = static_cast<HistoryItem*>(it.current());

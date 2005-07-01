@@ -19,7 +19,7 @@
 
 #include "loginfo.h"
 
-#include <qstylesheet.h>
+#include <q3stylesheet.h>
 
 #include <kglobal.h>
 #include <klocale.h>
@@ -72,17 +72,17 @@ QString TagInfo::typeToString() const
 QString LogInfo::createToolTipText(bool showTime) const
 {
     QString text(QString::fromLatin1("<nobr><b>"));
-    text += QStyleSheet::escape(m_revision);
+    text += Q3StyleSheet::escape(m_revision);
     text += QString::fromLatin1("</b>&nbsp;&nbsp;");
-    text += QStyleSheet::escape(m_author);
+    text += Q3StyleSheet::escape(m_author);
     text += QString::fromLatin1("&nbsp;&nbsp;<b>");
-    text += QStyleSheet::escape(dateTimeToString(showTime));
+    text += Q3StyleSheet::escape(dateTimeToString(showTime));
     text += QString::fromLatin1("</b></nobr>");
 
     if (!m_comment.isEmpty())
     {
         text += QString::fromLatin1("<pre>");
-        text += QStyleSheet::escape(m_comment);
+        text += Q3StyleSheet::escape(m_comment);
         text += QString::fromLatin1("</pre>");
     }
 
@@ -94,7 +94,7 @@ QString LogInfo::createToolTipText(bool showTime) const
         {
             if (it != m_tags.begin() || m_comment.isEmpty())
                 text += QString::fromLatin1("<br>");
-            text += QStyleSheet::escape((*it).toString());
+            text += Q3StyleSheet::escape((*it).toString());
         }
         text += QString::fromLatin1("</i>");
     }

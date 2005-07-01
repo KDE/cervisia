@@ -21,6 +21,9 @@
 #include "cvsjob.h"
 
 #include <qfile.h>
+//Added by qt3to4:
+#include <Q3ValueList>
+#include <Q3CString>
 #include <kdebug.h>
 #include <kprocess.h>
 
@@ -114,7 +117,7 @@ CvsJob& CvsJob::operator<<(const char* arg)
 }
 
 
-CvsJob& CvsJob::operator<<(const QCString& arg)
+CvsJob& CvsJob::operator<<(const Q3CString& arg)
 {
     *d->childproc << arg;
     return *this;
@@ -132,8 +135,8 @@ QString CvsJob::cvsCommand() const
 {
     QString command;
 
-    const QValueList<QCString>& args(d->childproc->args());
-    for (QValueList<QCString>::const_iterator it = args.begin(), itEnd = args.end();
+    const Q3ValueList<Q3CString>& args(d->childproc->args());
+    for (Q3ValueList<Q3CString>::const_iterator it = args.begin(), itEnd = args.end();
          it != itEnd; ++it)
     {
         if (!command.isEmpty())

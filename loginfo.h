@@ -23,7 +23,7 @@
 
 #include <qdatetime.h>
 #include <qstring.h>
-#include <qvaluelist.h>
+#include <q3valuelist.h>
 
 
 namespace Cervisia
@@ -91,7 +91,7 @@ struct TagInfo
  */
 struct LogInfo
 {
-    typedef QValueList<TagInfo> TTagInfoSeq;
+    typedef Q3ValueList<TagInfo> TTagInfoSeq;
 
     /**
      * @param showTime show commit time in tooltip.

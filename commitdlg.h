@@ -27,7 +27,7 @@
 
 class QComboBox;
 class QCheckBox;
-class QListBox;
+class Q3ListBox;
 class KTextEdit;
 class KConfig;
 class CvsService_stub;
@@ -61,7 +61,7 @@ private:
     void addTemplateText();
     void removeTemplateText();
 
-    QListBox *listbox;
+    Q3ListBox *listbox;
     KTextEdit *edit;
     QComboBox *combo;
     QStringList commits;

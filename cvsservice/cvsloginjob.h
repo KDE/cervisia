@@ -23,6 +23,8 @@
 
 #include <qstring.h>
 #include <qstringlist.h>
+//Added by qt3to4:
+#include <Q3CString>
 #include <dcopobject.h>
 
 #include <kdesu/process.h>
@@ -38,8 +40,8 @@ public:
 
     void setServer(const QString& server);
 
-    void setCvsClient(const QCString& cvsClient);
-    void setRepository(const QCString& repository);
+    void setCvsClient(const Q3CString& cvsClient);
+    void setRepository(const Q3CString& repository);
 
 k_dcop:
     bool execute();
@@ -49,7 +51,7 @@ private:
     PtyProcess*    m_Proc;
     QString        m_Server;
     QString        m_Rsh;
-    QCString       m_CvsClient;
+    Q3CString       m_CvsClient;
     QCStringList   m_Arguments;
     QStringList    m_output;
 };

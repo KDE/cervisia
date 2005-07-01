@@ -24,7 +24,9 @@
 
 #include <qapplication.h>
 #include <qfileinfo.h>
-#include <qptrstack.h>
+#include <q3ptrstack.h>
+//Added by qt3to4:
+#include <Q3PtrList>
 #include <kconfig.h>
 #include <klocale.h>
 
@@ -55,14 +57,14 @@ UpdateView::UpdateView(KConfig& partConfig, QWidget *parent, const char *name)
 
     setFilter(NoFilter);
 
-    connect( this, SIGNAL(doubleClicked(QListViewItem*)),
-             this, SLOT(itemExecuted(QListViewItem*)) );
-    connect( this, SIGNAL(returnPressed(QListViewItem*)),
-             this, SLOT(itemExecuted(QListViewItem*)) );
+    connect( this, SIGNAL(doubleClicked(Q3ListViewItem*)),
+             this, SLOT(itemExecuted(Q3ListViewItem*)) );
+    connect( this, SIGNAL(returnPressed(Q3ListViewItem*)),
+             this, SLOT(itemExecuted(Q3ListViewItem*)) );
 
     // without this restoreLayout() can't change the column widths
     for (int col = 0; col < columns(); ++col)
-        setColumnWidthMode(col, QListView::Manual);
+        setColumnWidthMode(col, Q3ListView::Manual);
 
     restoreLayout(&m_partConfig, QString::fromLatin1("UpdateView"));
 }
@@ -97,7 +99,7 @@ UpdateView::Filter UpdateView::filter() const
 // returns true iff exactly one UpdateFileItem is selected
 bool UpdateView::hasSingleSelection() const
 {
-    const QPtrList<QListViewItem>& listSelectedItems(selectedItems());
+    const Q3PtrList<Q3ListViewItem>& listSelectedItems(selectedItems());
 
     return (listSelectedItems.count() == 1) && isFileItem(listSelectedItems.getFirst());
 }
@@ -105,7 +107,7 @@ bool UpdateView::hasSingleSelection() const
 
 void UpdateView::getSingleSelection(QString *filename, QString *revision) const
 {
-    const QPtrList<QListViewItem>& listSelectedItems(selectedItems());
+    const Q3PtrList<Q3ListViewItem>& listSelectedItems(selectedItems());
 
     QString tmpFileName;
     QString tmpRevision;
@@ -126,8 +128,8 @@ QStringList UpdateView::multipleSelection() const
 {
     QStringList res;
 
-    const QPtrList<QListViewItem>& listSelectedItems(selectedItems());
-    for (QPtrListIterator<QListViewItem> it(listSelectedItems);
+    const Q3PtrList<Q3ListViewItem>& listSelectedItems(selectedItems());
+    for (Q3PtrListIterator<Q3ListViewItem> it(listSelectedItems);
          it.current() != 0; ++it)
     {
         if ((*it)->isVisible())
@@ -142,11 +144,11 @@ QStringList UpdateView::fileSelection() const
 {
     QStringList res;
 
-    const QPtrList<QListViewItem>& listSelectedItems(selectedItems());
-    for (QPtrListIterator<QListViewItem> it(listSelectedItems);
+    const Q3PtrList<Q3ListViewItem>& listSelectedItems(selectedItems());
+    for (Q3PtrListIterator<Q3ListViewItem> it(listSelectedItems);
          it.current() != 0; ++it)
     {
-        QListViewItem* item(*it);
+        Q3ListViewItem* item(*it);
 
         if (isFileItem(item) && item->isVisible())
             res.append(static_cast<UpdateFileItem*>(item)->filePath());
@@ -204,8 +206,8 @@ void UpdateView::unfoldSelectedFolders()
     const bool updatesEnabled = isUpdatesEnabled();
     setUpdatesEnabled(false);
 
-    QListViewItemIterator it(this);
-    while( QListViewItem* item = it.current() )
+    Q3ListViewItemIterator it(this);
+    while( Q3ListViewItem* item = it.current() )
     {
         if( isDirItem(item) )
         {
@@ -278,8 +280,8 @@ void UpdateView::unfoldTree()
 
     setUpdatesEnabled(false);
 
-    QListViewItemIterator it(this);
-    while (QListViewItem* item = it.current())
+    Q3ListViewItemIterator it(this);
+    while (Q3ListViewItem* item = it.current())
     {
         if (isDirItem(item))
         {
@@ -318,8 +320,8 @@ void UpdateView::unfoldTree()
 
 void UpdateView::foldTree()
 {
-    QListViewItemIterator it(this);
-    while (QListViewItem* item = it.current())
+    Q3ListViewItemIterator it(this);
+    while (Q3ListViewItem* item = it.current())
     {
         // don't close the top level directory
         if (isDirItem(item) && item->parent())
@@ -400,11 +402,11 @@ void UpdateView::finishJob(bool normalExit, int exitStatus)
  */
 void UpdateView::markUpdated(bool laststage, bool success)
 {
-    QPtrListIterator<QListViewItem> it(relevantSelection);
+    Q3PtrListIterator<Q3ListViewItem> it(relevantSelection);
     for ( ; it.current(); ++it)
         if (isDirItem(it.current()))
             {
-                for (QListViewItem *item = it.current()->firstChild(); item;
+                for (Q3ListViewItem *item = it.current()->firstChild(); item;
                      item = item->nextSibling() )
                     if (isFileItem(item))
                         {
@@ -425,10 +427,10 @@ void UpdateView::markUpdated(bool laststage, bool success)
  */
 void UpdateView::rememberSelection(bool recursive)
 {
-    std::set<QListViewItem*> setItems;
-    for (QListViewItemIterator it(this); it.current(); ++it)
+    std::set<Q3ListViewItem*> setItems;
+    for (Q3ListViewItemIterator it(this); it.current(); ++it)
     {
-        QListViewItem* item(it.current());
+        Q3ListViewItem* item(it.current());
 
         // if this item is selected and if it was not inserted already
         // and if we work recursive and if it is a dir item then insert
@@ -439,8 +441,8 @@ void UpdateView::rememberSelection(bool recursive)
             && recursive
             && isDirItem(item))
         {
-            QPtrStack<QListViewItem> s;
-            for (QListViewItem* childItem = item->firstChild(); childItem;
+            Q3PtrStack<Q3ListViewItem> s;
+            for (Q3ListViewItem* childItem = item->firstChild(); childItem;
                  childItem = childItem->nextSibling() ? childItem->nextSibling() : s.pop())
             {
                 // if this item is a dir item and if it is was not
@@ -448,7 +450,7 @@ void UpdateView::rememberSelection(bool recursive)
                 // DON'T CHANGE TESTING ORDER
                 if (isDirItem(childItem) && setItems.insert(childItem).second)
                 {
-                    if (QListViewItem* childChildItem = childItem->firstChild())
+                    if (Q3ListViewItem* childChildItem = childItem->firstChild())
                         s.push(childChildItem);
                 }
             }
@@ -457,14 +459,14 @@ void UpdateView::rememberSelection(bool recursive)
 
     // Copy the set to the list
     relevantSelection.clear();
-    std::set<QListViewItem*>::const_iterator const itItemEnd = setItems.end();
-    for (std::set<QListViewItem*>::const_iterator itItem = setItems.begin();
+    std::set<Q3ListViewItem*>::const_iterator const itItemEnd = setItems.end();
+    for (std::set<Q3ListViewItem*>::const_iterator itItem = setItems.begin();
          itItem != itItemEnd; ++itItem)
         relevantSelection.append(*itItem);
 
 #if 0
     DEBUGOUT("Relevant:");
-    QPtrListIterator<QListViewItem> it44(relevantSelection);
+    Q3PtrListIterator<Q3ListViewItem> it44(relevantSelection);
     for (; it44.current(); ++it44)
         DEBUGOUT("  " << (*it44)->text(UpdateFileItem::File));
     DEBUGOUT("End");
@@ -481,15 +483,15 @@ void UpdateView::syncSelection()
     // compute all directories which are selected or contain a selected file
     // (in recursive mode this includes all sub directories)
     std::set<UpdateDirItem*> setDirItems;
-    for (QPtrListIterator<QListViewItem> itItem(relevantSelection);
+    for (Q3PtrListIterator<Q3ListViewItem> itItem(relevantSelection);
          itItem.current(); ++itItem)
     {
-        QListViewItem* item(itItem.current());
+        Q3ListViewItem* item(itItem.current());
 
         UpdateDirItem* dirItem(0);
         if (isDirItem(item))
             dirItem = static_cast<UpdateDirItem*>(item);
-        else if (QListViewItem* parentItem = item->parent())
+        else if (Q3ListViewItem* parentItem = item->parent())
             dirItem = static_cast<UpdateDirItem*>(parentItem);
 
         if (dirItem)
@@ -603,7 +605,7 @@ void UpdateView::updateItem(const QString& filePath, EntryStatus status, bool is
 }
 
 
-void UpdateView::itemExecuted(QListViewItem *item)
+void UpdateView::itemExecuted(Q3ListViewItem *item)
 {
     if (isFileItem(item))
         emit fileOpened(static_cast<UpdateFileItem*>(item)->filePath());

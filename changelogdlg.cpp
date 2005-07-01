@@ -51,8 +51,8 @@ ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent, const char *name
     edit->setFont(cfg.readFontEntry("ChangeLogFont"));
 
     edit->setFocus();
-    edit->setWordWrap(QTextEdit::NoWrap);
-    edit->setTextFormat(QTextEdit::PlainText);
+    edit->setWordWrap(Q3TextEdit::NoWrap);
+    edit->setTextFormat(Q3TextEdit::PlainText);
     edit->setCheckSpellingEnabled(true);
     QFontMetrics const fm(edit->fontMetrics());
     edit->setMinimumSize(fm.width('0') * 80,
@@ -75,7 +75,7 @@ void ChangeLogDialog::slotOk()
 {
     // Write changelog
     QFile f(fname);
-    if (!f.open(IO_ReadWrite))
+    if (!f.open(QIODevice::ReadWrite))
     {
         KMessageBox::sorry(this,
                            i18n("The ChangeLog file could not be written."),
@@ -106,7 +106,7 @@ bool ChangeLogDialog::readFile(const QString &filename)
     else
         {
             QFile f(filename);
-            if (!f.open(IO_ReadWrite))
+            if (!f.open(QIODevice::ReadWrite))
                 {
                     KMessageBox::sorry(this,
                                        i18n("The ChangeLog file could not be read."),
