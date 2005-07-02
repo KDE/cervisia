@@ -26,8 +26,6 @@
 
 #include <sys/types.h>
 #include <signal.h>
-//Added by qt3to4:
-#include <Q3CString>
 
 static const char LOGIN_PHRASE[]   = "Logging in to";
 static const char FAILURE_PHRASE[] = "authorization failed:";
@@ -57,7 +55,7 @@ void CvsLoginJob::setServer(const QString& server)
 }
 
 
-void CvsLoginJob::setCvsClient(const Q3CString& cvsClient)
+void CvsLoginJob::setCvsClient(const QByteArray& cvsClient)
 {
     m_CvsClient = cvsClient;
 
@@ -66,7 +64,7 @@ void CvsLoginJob::setCvsClient(const Q3CString& cvsClient)
 }
 
 
-void CvsLoginJob::setRepository(const Q3CString& repository)
+void CvsLoginJob::setRepository(const QByteArray& repository)
 {
     m_Arguments += "-d";
     m_Arguments += repository;
