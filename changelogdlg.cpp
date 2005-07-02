@@ -52,7 +52,7 @@ ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent, const char *name
 
     edit->setFocus();
     edit->setWordWrap(Q3TextEdit::NoWrap);
-    edit->setTextFormat(Q3TextEdit::PlainText);
+    edit->setTextFormat(Qt::PlainText);
     edit->setCheckSpellingEnabled(true);
     QFontMetrics const fm(edit->fontMetrics());
     edit->setMinimumSize(fm.width('0') * 80,
