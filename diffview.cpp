@@ -23,9 +23,9 @@
 #include <qpainter.h>
 #include <qscrollbar.h>
 #include <qpixmap.h>
-#include <qregexp.h>
 #include <qstyle.h>
 //Added by qt3to4:
+#include <QStyleOption>
 #include <QWheelEvent>
 #include <QPaintEvent>
 #include <QEvent>
@@ -177,8 +177,8 @@ void DiffView::addLine(const QString &line, DiffType type, int no)
     // For some fonts, e.g. "Clean", is fm.maxWidth() greater than
     // fmbold.maxWidth().
     QString copy(line);
-    const int numTabs = copy.contains('\t', false);
-    copy.replace( QRegExp("\t"), "");
+    const int numTabs = copy.count(QLatin1Char('\t'));
+    copy.remove(QLatin1Char('\t'));
 
     const int tabSize   = m_tabWidth * QMAX(fm.maxWidth(), fmbold.maxWidth());
     const int copyWidth = QMAX(fm.width(copy), fmbold.width(copy));
@@ -421,7 +421,7 @@ void DiffZoomWidget::setDiffView(DiffView *view)
 
 QSize DiffZoomWidget::sizeHint() const
 {
-    return QSize(25, style().pixelMetric(QStyle::PM_ScrollBarExtent, this));
+    return QSize(25, style()->pixelMetric(QStyle::PM_ScrollBarExtent, 0, this));
 }
 
 
@@ -443,10 +443,12 @@ void DiffZoomWidget::paintEvent(QPaintEvent *)
         return;
 
     // only y and height are important
+    const QStyleOptionSlider option;
     const QRect scrollBarGroove(scrollBar->isVisible()
-                                ? style().querySubControlMetrics(QStyle::CC_ScrollBar,
-                                                                 scrollBar,
-                                                                 QStyle::SC_ScrollBarGroove)
+                                ? style()->subControlRect(QStyle::CC_ScrollBar,
+                                                          &option,
+                                                          QStyle::SC_ScrollBarGroove,
+                                                          scrollBar)
                                 : rect());
 
     // draw rectangles at the positions of the differences

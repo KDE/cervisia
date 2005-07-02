@@ -44,7 +44,7 @@ UpdateDialog::UpdateDialog(CvsService_stub* service,
       cvsService(service)
 {
     int const iComboBoxMinWidth(40 * fontMetrics().width('0'));
-    int const iWidgetIndent(style().pixelMetric(QStyle::PM_ExclusiveIndicatorWidth, 0) + 6);
+    int const iWidgetIndent(style()->pixelMetric(QStyle::PM_ExclusiveIndicatorWidth) + 6);
 
     QFrame* mainWidget = makeMainWidget();
 
