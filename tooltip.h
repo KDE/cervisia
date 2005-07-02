@@ -22,7 +22,10 @@
 
 
 #include <qobject.h>
-#include <qtooltip.h>
+
+
+class QPoint;
+class QRect;
 
 
 namespace Cervisia
@@ -34,7 +37,7 @@ namespace Cervisia
  * - no more need to subclass just connect to the signal queryToolTip()
  * - truncate too large tooltip texts.
  */
-class ToolTip : public QObject, public QToolTip
+class ToolTip : public QObject
 {
     Q_OBJECT
 
@@ -65,7 +68,7 @@ signals:
 
 protected:
 
-    virtual void maybeTip(const QPoint&);
+    virtual bool eventFilter(QObject*, QEvent*);
 };
 
 

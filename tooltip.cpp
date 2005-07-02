@@ -22,7 +22,10 @@
 #include <kglobal.h>
 #include <kglobalsettings.h>
 
+#include <qapplication.h>
+#include <qevent.h>
 #include <q3simplerichtext.h>
+#include <qtooltip.h>
 
 
 namespace Cervisia
@@ -34,25 +37,38 @@ static QString truncateLines(const QString&, const QFont&, const QPoint&, const 
 
 
 ToolTip::ToolTip(QWidget* widget)
-    : QObject(widget), QToolTip(widget)
+    : QObject(widget)
 {
+    widget->installEventFilter(this);
 }
 
 
-void ToolTip::maybeTip(const QPoint& pos)
+bool ToolTip::eventFilter(QObject* watched, QEvent* event)
 {
-    QRect rect;
-    QString text;
-    emit queryToolTip(pos, rect, text);
-
-    if (rect.isValid() && !text.isEmpty())
+    if ((watched == parent()) && (event->type() == QEvent::ToolTip))
     {
-        text = truncateLines(text,
-                             font(),
-                             parentWidget()->mapToGlobal(pos),
-                             KGlobalSettings::desktopGeometry(parentWidget()));
-        tip(rect, text);
+        const QHelpEvent* helpEvent = static_cast<QHelpEvent*>(event);
+
+#warning remove rect, not needed with Qt4
+        QRect rect;
+        QString text;
+        emit queryToolTip(helpEvent->pos(), rect, text);
+
+        if (rect.isValid() && !text.isEmpty())
+        {
+            QWidget* parentWidget = static_cast<QWidget*>(parent());
+#warning which font should I use
+            text = truncateLines(text,
+                                 QApplication::font(),
+                                 helpEvent->globalPos(),
+                                 KGlobalSettings::desktopGeometry(parentWidget));
+            QToolTip::showText(helpEvent->globalPos(), text);
+        }
+
+        return true;
     }
+
+    return QObject::eventFilter(watched, event);
 }
 
 
