@@ -28,7 +28,7 @@
 #include <qlayout.h>
 #include <q3vbox.h>
 #include <qwidget.h>
-#include <qhbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qradiobutton.h>
 //Added by qt3to4:
 #include <QPixmap>

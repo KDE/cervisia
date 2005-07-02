@@ -27,7 +27,7 @@ using Cervisia::PatchOptionDialog;
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qradiobutton.h>
-#include <qvbuttongroup.h>
+#include <q3buttongroup.h>
 #include <knuminput.h>
 #include <klocale.h>
 
