@@ -112,7 +112,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
 
     // start the cvs DCOP service
     QString error;
-    DCOPCString appId;
+    QByteArray appId;
     if( KApplication::startServiceByDesktopName("cvsservice", QStringList(), &error, &appId) )
     {
         KMessageBox::sorry(0, i18n("Starting cvsservice failed with message: ") +
