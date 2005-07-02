@@ -217,13 +217,12 @@ UpdateFileItem* UpdateDirItem::createFileItem(const Entry& entry)
 
 UpdateItem* UpdateDirItem::insertItem(UpdateItem* item)
 {
-    QPair<TMapItemsByName::iterator, bool> result
-        = m_itemsByName.insert(TMapItemsByName::value_type(item->entry().m_name, item));
-    if (!result.second)
+    const TMapItemsByName::iterator it = m_itemsByName.find(item->entry().m_name);
+    if (it != m_itemsByName.end())
     {
         // OK, an item with that name already exists. If the item type is the
         // same then keep the old one to preserve it's status information
-        UpdateItem* existingItem = *result.first;
+        UpdateItem* existingItem = *it;
         if (existingItem->rtti() == item->rtti())
         {
             delete item;
@@ -232,8 +231,12 @@ UpdateItem* UpdateDirItem::insertItem(UpdateItem* item)
         else
         {
             delete existingItem;
-            *result.first = item;
+            *it = item;
         }
+    }
+    else
+    {
+        m_itemsByName.insert(item->entry().m_name, item);
     }
 
     return item;
