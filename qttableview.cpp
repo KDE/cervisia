@@ -236,7 +236,7 @@ void QtTableView::show()
 
 void QtTableView::repaint( int x, int y, int w, int h, bool erase )
 {
-    if ( !isVisible() || testWState(WState_BlockUpdates) )
+    if ( !isVisible() )
 	return;
     if ( w < 0 )
 	w = width()  - x;
@@ -2004,7 +2004,7 @@ void QtTableView::updateScrollBars( uint f )
 
 	if ( sbDirty & horSteps ) {
 	    if ( cellW )
-		hScrollBar->setSteps( QMIN(cellW,viewWidth()/2), viewWidth() );
+		hScrollBar->setSteps( qMin((int)cellW,viewWidth()/2), viewWidth() );
 	    else
 		hScrollBar->setSteps( 16, viewWidth() );
 	}
@@ -2028,7 +2028,7 @@ void QtTableView::updateScrollBars( uint f )
 
 	if ( sbDirty & verSteps ) {
 	    if ( cellH )
-		vScrollBar->setSteps( QMIN(cellH,viewHeight()/2), viewHeight() );
+		vScrollBar->setSteps( qMin((int)cellH,viewHeight()/2), viewHeight() );
 	    else
 		vScrollBar->setSteps( 16, viewHeight() );  // fttb! ###
 	}
