@@ -207,17 +207,17 @@ void SettingsDialog::writeSettings()
     CervisiaSettings::setDiffDeleteColor(m_diffDeleteButton->color());
 
     // I'm not yet sure whether this is a hack or not :-)
-    QWidgetListIt it(*QApplication::allWidgets());
-    for (; it.current(); ++it)
-        {
-            QWidget *w = it.current();
-            if (w->inherits("ProtocolView"))
-                w->setFont(m_protocolFontBox->font());
-            if (w->inherits("AnnotateView"))
-                w->setFont(m_annotateFontBox->font());
-            if (w->inherits("DiffView"))
-                w->setFont(m_diffFontBox->font());
-        }
+#warning would QApplication::topLevelWidgets be sufficient?
+    const QWidgetList& widgets = QApplication::allWidgets();
+    Q_FOREACH (QWidget* w, widgets)
+    {
+        if (w->inherits("ProtocolView"))
+            w->setFont(m_protocolFontBox->font());
+        if (w->inherits("AnnotateView"))
+            w->setFont(m_annotateFontBox->font());
+        if (w->inherits("DiffView"))
+            w->setFont(m_diffFontBox->font());
+    }
     config->sync();
 
     CervisiaSettings::writeConfig();
@@ -265,7 +265,7 @@ void SettingsDialog::addGeneralPage()
  */
 void SettingsDialog::addDiffPage()
 {
-    Q3Grid *diffPage = addGridPage(2, Q3Grid::Horizontal, i18n("Diff Viewer"),
+    Q3Grid *diffPage = addGridPage(2, Qt::Horizontal, i18n("Diff Viewer"),
                                   QString::null, LoadIcon("vcs_diff"));
 
     QLabel *contextlabel = new QLabel( i18n("&Number of context lines in diff dialog:"), diffPage );
