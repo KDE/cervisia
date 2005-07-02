@@ -22,8 +22,6 @@
 
 #include <q3intdict.h>
 #include <qstring.h>
-//Added by qt3to4:
-#include <Q3CString>
 
 #include <dcopref.h>
 #include <dcopclient.h>
@@ -60,7 +58,7 @@ struct CvsService::Private
     Q3IntDict<CvsLoginJob> loginJobs;
     unsigned              lastJobId;
 
-    Q3CString              appId;          // cache the DCOP clients app id
+    DCOPCString           appId;          // cache the DCOP clients app id
 
     Repository*           repository;
 

@@ -23,8 +23,6 @@
 
 #include <qdir.h>
 #include <q3popupmenu.h>
-//Added by qt3to4:
-#include <Q3CString>
 #include <dcopref.h>
 #include <kconfig.h>
 #include <klocale.h>
@@ -34,7 +32,7 @@
 #include "cvsjob_stub.h"
 
 
-ProtocolView::ProtocolView(const Q3CString& appId, QWidget *parent, const char *name)
+ProtocolView::ProtocolView(const DCOPCString& appId, QWidget *parent, const char *name)
     : Q3TextEdit(parent, name)
     , job(0)
     , m_isUpdateJob(false)

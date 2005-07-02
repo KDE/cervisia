@@ -21,8 +21,6 @@
 #include <iostream>
 
 #include <qfileinfo.h>
-//Added by qt3to4:
-#include <Q3CString>
 #include <kaboutdata.h>
 #include <kapplication.h>
 #include <kcmdlineargs.h>
@@ -44,7 +42,7 @@ static CvsService_stub* StartDCOPService(const QString& directory)
 {
     // start the cvs DCOP service
     QString error;
-    Q3CString appId;
+    DCOPCString appId;
     if( KApplication::startServiceByDesktopName("cvsservice", QStringList(),
                                                 &error, &appId) )
     {

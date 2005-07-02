@@ -25,7 +25,6 @@
 #include <q3textedit.h>
 //Added by qt3to4:
 #include <Q3PopupMenu>
-#include <Q3CString>
 #include <dcopobject.h>
 
 class QPoint;
@@ -39,7 +38,7 @@ class ProtocolView : public Q3TextEdit, public DCOPObject
     Q_OBJECT
 
 public:
-    explicit ProtocolView(const Q3CString& appId, QWidget *parent=0, const char *name=0);
+    explicit ProtocolView(const DCOPCString& appId, QWidget *parent=0, const char *name=0);
     ~ProtocolView();
 
     bool startJob(bool isUpdateJob = false);

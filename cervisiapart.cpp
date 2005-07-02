@@ -25,7 +25,6 @@
 #include <qtextstream.h>
 #include <qtooltip.h>
 //Added by qt3to4:
-#include <Q3CString>
 #include <Q3StrList>
 #include <Q3ValueList>
 #include <kaboutdata.h>
@@ -113,7 +112,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
 
     // start the cvs DCOP service
     QString error;
-    Q3CString appId;
+    DCOPCString appId;
     if( KApplication::startServiceByDesktopName("cvsservice", QStringList(), &error, &appId) )
     {
         KMessageBox::sorry(0, i18n("Starting cvsservice failed with message: ") +
