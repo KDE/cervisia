@@ -308,9 +308,9 @@ void UpdateDirItem::syncWithEntries()
                 }
                 else
                 {
-                    const QDateTime date(QDateTime::fromString(timestamp)); // UTC Time
-                    QDateTime fileDateUTC;
-                    fileDateUTC.setTime_t(entry.m_dateTime.toTime_t(), Qt::UTC);
+                    QDateTime date(QDateTime::fromString(timestamp)); // UTC Time
+                    date.setTimeSpec(Qt::UTC);
+                    const QDateTime fileDateUTC(entry.m_dateTime.toUTC());
                     if (date != fileDateUTC)
                         entry.m_status = Cervisia::LocallyModified;
                 }
