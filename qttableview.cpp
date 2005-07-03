@@ -1348,7 +1348,7 @@ void QtTableView::paintEvent( QPaintEvent *e )
 		paint.setWorldMatrix( matrix );
 		if ( testTableFlags(Tbl_clipCellPainting) ||
 		     frameWidth() > 0 && !winR.contains( cellR ) ) { //##arnt
-		    paint.setClipRect( cellUR );
+		    paint.setClipRect( cellUpdateR );
 		    paintCell( &paint, row, col );
 		    paint.setClipping( FALSE );
 		} else {
@@ -1360,7 +1360,7 @@ void QtTableView::paintEvent( QPaintEvent *e )
 		paint.translate( xPos, yPos );
 		if ( testTableFlags(Tbl_clipCellPainting) ||
 		     frameWidth() > 0 && !winR.contains( cellR ) ) { //##arnt
-		    paint.setClipRect( cellUR );
+		    paint.setClipRect( cellUpdateR );
 		    paintCell( &paint, row, col );
 		    paint.setClipping( FALSE );
 		} else {
