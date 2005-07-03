@@ -444,7 +444,8 @@ void DiffZoomWidget::paintEvent(QPaintEvent *)
         return;
 
     // only y and height are important
-    const QStyleOptionSlider option;
+    QStyleOptionSlider option;
+    option.init(scrollBar);
     const QRect scrollBarGroove(scrollBar->isVisible()
                                 ? style()->subControlRect(QStyle::CC_ScrollBar,
                                                           &option,
@@ -457,7 +458,8 @@ void DiffZoomWidget::paintEvent(QPaintEvent *)
     const QByteArray& lineTypes(diffview->compressedContent());
 
     QPainter p(this);
-    p.fillRect(rect(), KGlobalSettings::baseColor());
+    p.fillRect(0, scrollBarGroove.y(), width(), scrollBarGroove.height(),
+               KGlobalSettings::baseColor());
     if (const unsigned int numberOfLines = lineTypes.size())
     {
         const double scale(((double) scrollBarGroove.height()) / numberOfLines);
@@ -496,7 +498,7 @@ void DiffZoomWidget::paintEvent(QPaintEvent *)
                 const int yPos2(qRound(index * scale));
                 const int areaHeight((yPos2 != yPos1) ? yPos2 - yPos1 : 1);
 
-                p.fillRect(0, yPos1, width(), areaHeight, QBrush(color));
+                p.fillRect(0, yPos1 + scrollBarGroove.y(), width(), areaHeight, QBrush(color));
             }
         }
     }
