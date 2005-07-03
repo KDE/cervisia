@@ -167,6 +167,8 @@ QtTableView::QtTableView( QWidget *parent, const char *name, Qt::WFlags f )
     horSnappingOff	 = FALSE;
     coveringCornerSquare = FALSE;
     inSbUpdate		 = FALSE;
+
+    setAttribute(Qt::WA_NoBackground, true);
 }
 
 /*!
@@ -245,10 +247,9 @@ void QtTableView::repaint( int x, int y, int w, int h, bool erase )
     QRect r( x, y, w, h );
     if ( r.isEmpty() )
 	return; // nothing to do
-    QPaintEvent e( r );
     if ( erase && backgroundMode() != Qt::NoBackground )
 	eraseInPaint = TRUE;			// erase when painting
-    paintEvent( &e );
+    QWidget::repaint( r );
     eraseInPaint = FALSE;
 }
 
