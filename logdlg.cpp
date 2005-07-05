@@ -29,7 +29,7 @@
 #include <qpushbutton.h>
 #include <qtabwidget.h>
 #include <q3textedit.h>
-#include <q3whatsthis.h>
+
 //Added by qt3to4:
 #include <QTextStream>
 #include <QGridLayout>
@@ -111,7 +111,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     connect(tabWidget, SIGNAL(currentChanged(QWidget*)),
             this, SLOT(tabChanged(QWidget*)));
 
-    Q3WhatsThis::add(tree, i18n("Choose revision A by clicking with the left "
+    tree->setWhatsThis( i18n("Choose revision A by clicking with the left "
                                "mouse button,\nrevision B by clicking with "
                                "the middle mouse button."));
 
@@ -180,10 +180,10 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
         grid->addWidget(tagsbox[i], 2, 4);
     }
 
-    Q3WhatsThis::add(revbox[0], i18n("This revision is used when you click "
+    revbox[0]->setWhatsThis( i18n("This revision is used when you click "
                                     "Annotate.\nIt is also used as the first "
                                     "item of a Diff operation."));
-    Q3WhatsThis::add(revbox[1], i18n("This revision is used as the second "
+    revbox[1]->setWhatsThis( i18n("This revision is used as the second "
                                     "item of a Diff operation."));
 
     connect( tagcombo[0], SIGNAL(activated(int)),
