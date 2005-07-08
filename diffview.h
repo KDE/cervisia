@@ -26,11 +26,6 @@
 
 #include <q3ptrcollection.h>
 #include <q3ptrlist.h>
-//Added by qt3to4:
-#include <QWheelEvent>
-#include <QPaintEvent>
-#include <QEvent>
-#include <Q3Frame>
 
 
 class KConfig;
@@ -106,7 +101,7 @@ private:
 };
 
 
-class DiffZoomWidget : public Q3Frame
+class DiffZoomWidget : public QFrame
 {
     Q_OBJECT
 

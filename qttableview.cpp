@@ -13,15 +13,11 @@
 **********************************************************************/
 
 #include "qttableview.h"
-#include "qscrollbar.h"
-#include "qpainter.h"
-#include "qdrawutil.h"
 #include <qapplication.h>
-//Added by qt3to4:
-#include <QWheelEvent>
-#include <QPaintEvent>
-#include <Q3Frame>
-#include <QResizeEvent>
+#include <qdrawutil.h>
+#include <qevent.h>
+#include <qpainter.h>
+#include <qscrollbar.h>
 #include <limits.h>
 
 enum ScrollBarDirtyFlags {
@@ -149,7 +145,7 @@ void QCornerSquare::paintEvent( QPaintEvent * )
 */
 
 QtTableView::QtTableView( QWidget *parent, const char *name, Qt::WFlags f )
-    : Q3Frame( parent, name, f )
+    : QFrame( parent, name, f )
 {
     nRows		 = nCols      = 0;	// zero rows/cols
     xCellOffs		 = yCellOffs  = 0;	// zero offset

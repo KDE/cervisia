@@ -21,8 +21,6 @@
 
 #include <q3header.h>
 #include <qpainter.h>
-//Added by qt3to4:
-#include <Q3Frame>
 #include <kconfig.h>
 #include <kglobalsettings.h>
 
@@ -145,7 +143,7 @@ int AnnotateViewItem::width(const QFontMetrics &fm, const Q3ListView *, int col)
 AnnotateView::AnnotateView(KConfig &cfg, QWidget *parent, const char *name)
     : Q3ListView(parent, name, Qt::WNoAutoErase | Qt::WResizeNoErase)
 {
-    setFrameStyle(Q3Frame::WinPanel | Q3Frame::Sunken);
+    setFrameStyle(QFrame::WinPanel | QFrame::Sunken);
     setAllColumnsShowFocus(true);
     setShowToolTips(false);
     setSelectionMode(NoSelection);

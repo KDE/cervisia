@@ -1,7 +1,3 @@
-//Added by qt3to4:
-#include <QWheelEvent>
-#include <QResizeEvent>
-#include <QPaintEvent>
 /**********************************************************************
 ** $Id$
 **
@@ -20,7 +16,7 @@
 #define QTTABLEVIEW_H
 
 #ifndef QT_H
-#include "q3frame.h"
+#include "qframe.h"
 #endif // QT_H
 
 #ifndef QT_NO_QTTABLEVIEW
@@ -29,7 +25,7 @@ class QScrollBar;
 class QCornerSquare;
 
 
-class QtTableView : public Q3Frame
+class QtTableView : public QFrame
 {
     Q_OBJECT
 public:

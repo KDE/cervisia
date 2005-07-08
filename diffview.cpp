@@ -20,16 +20,12 @@
 
 #include "diffview.h"
 
+#include <qevent.h>
 #include <qpainter.h>
-#include <qscrollbar.h>
 #include <qpixmap.h>
+#include <qscrollbar.h>
 #include <qstyle.h>
-//Added by qt3to4:
-#include <QStyleOption>
-#include <QWheelEvent>
-#include <QPaintEvent>
-#include <QEvent>
-#include <Q3Frame>
+#include <qstyleoption.h>
 
 #include <kapplication.h>
 #include <kconfig.h>
@@ -67,7 +63,7 @@ DiffView::DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
     setNumCols( 1 + (withlinenos?1:0) + (withmarker?1:0) );
     setTableFlags( Tbl_autoVScrollBar|Tbl_autoHScrollBar|
                    Tbl_smoothVScrolling );
-    setFrameStyle( Q3Frame::WinPanel | Q3Frame::Sunken );
+    setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
     setBackgroundMode( Qt::PaletteBase );
 
     partConfig.setGroup("LookAndFeel");
@@ -394,7 +390,7 @@ void DiffView::wheelEvent(QWheelEvent *e)
 
 
 DiffZoomWidget::DiffZoomWidget(KConfig& cfg, QWidget *parent, const char *name)
-    : Q3Frame(parent, name)
+    : QFrame(parent, name)
 {
     setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Minimum ) );
 
@@ -433,7 +429,7 @@ bool DiffZoomWidget::eventFilter(QObject *o, QEvent *e)
         || e->type() == QEvent::Resize)
         repaint();
 
-    return Q3Frame::eventFilter(o, e);
+    return QFrame::eventFilter(o, e);
 }
 
 

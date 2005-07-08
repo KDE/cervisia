@@ -20,10 +20,8 @@
 
 #include "logtree.h"
 
+#include <qevent.h>
 #include <qpainter.h>
-//Added by qt3to4:
-#include <QMouseEvent>
-#include <Q3Frame>
 #include <kdebug.h>
 #include <kglobal.h>
 #include <kglobalsettings.h>
@@ -83,7 +81,7 @@ LogTreeView::LogTreeView(QWidget *parent, const char *name)
     setTopMargin(0);
     verticalHeader()->hide();
     setLeftMargin(0);
-    setFrameStyle( Q3Frame::WinPanel | Q3Frame::Sunken );
+    setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
     setBackgroundMode(Qt::PaletteBase);
     setFocusPolicy(Qt::NoFocus);
 

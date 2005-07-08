@@ -29,14 +29,8 @@
 #include <qpushbutton.h>
 #include <qtabwidget.h>
 #include <q3textedit.h>
+#include <qtextstream.h>
 
-//Added by qt3to4:
-#include <QTextStream>
-#include <QGridLayout>
-#include <Q3Frame>
-#include <QHBoxLayout>
-#include <QBoxLayout>
-#include <QVBoxLayout>
 #include <kconfig.h>
 #include <kdebug.h>
 #include <kfiledialog.h>
@@ -120,8 +114,8 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     for (int i = 0; i < 2; ++i)
     {
-        Q3Frame *frame = new Q3Frame(mainWidget);
-        frame->setFrameStyle(Q3Frame::HLine | Q3Frame::Sunken);
+        QFrame *frame = new QFrame(mainWidget);
+        frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
         layout->addWidget(frame);
 
         QGridLayout *grid = new QGridLayout(layout);
@@ -139,7 +133,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
         grid->addWidget(versionlabel, 0, 0);
 
         revbox[i] = new QLabel(mainWidget);
-        revbox[i]->setFrameStyle(Q3Frame::Panel | Q3Frame::Sunken);
+        revbox[i]->setFrameStyle(QFrame::Panel | QFrame::Sunken);
         grid->addWidget(revbox[i], 0, 1, Qt::AlignVCenter);
 
         QLabel *selectlabel = new QLabel(i18n("Select by tag:"), mainWidget);
@@ -154,14 +148,14 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
         grid->addWidget(authorlabel, 1, 0);
 
         authorbox[i] = new QLabel(mainWidget);
-        authorbox[i]->setFrameStyle(Q3Frame::Panel | Q3Frame::Sunken);
+        authorbox[i]->setFrameStyle(QFrame::Panel | QFrame::Sunken);
         grid->addWidget(authorbox[i], 1, 1);
 
         QLabel *datelabel = new QLabel(i18n("Date:"), mainWidget);
         grid->addWidget(datelabel, 1, 2);
 
         datebox[i] = new QLabel(mainWidget);
-        datebox[i]->setFrameStyle(Q3Frame::Panel | Q3Frame::Sunken);
+        datebox[i]->setFrameStyle(QFrame::Panel | QFrame::Sunken);
         grid->addWidget(datebox[i], 1, 3);
 
         QLabel *commentlabel = new QLabel(i18n("Comment/Tags:"), mainWidget);
