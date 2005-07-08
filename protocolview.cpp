@@ -23,6 +23,7 @@
 
 #include <qdir.h>
 #include <q3popupmenu.h>
+#include <qtextdocument.h>
 #include <dcopref.h>
 #include <kconfig.h>
 #include <klocale.h>
@@ -159,7 +160,7 @@ void ProtocolView::appendLine(const QString &line)
 {
     // Escape output line, so that html tags in commit
     // messages aren't interpreted
-    const QString escapedLine = Q3StyleSheet::escape(line);
+    const QString escapedLine = Qt::escape(line);
 
     // When we don't get the output from an update job then
     // just add it to the text edit.

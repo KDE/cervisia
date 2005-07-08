@@ -21,7 +21,7 @@
 
 #include <qregexp.h>
 #include <qstringlist.h>
-#include <q3stylesheet.h>
+#include <qtextdocument.h>
 #include <kfind.h>
 #include <kfinddialog.h>
 #include <klocale.h>
@@ -53,17 +53,17 @@ void LogPlainView::addRevision(const LogInfo& logInfo)
     // assemble revision information lines
     QString logEntry;
 
-    logEntry += "<b>" + i18n("revision %1").arg(Q3StyleSheet::escape(logInfo.m_revision)) +
+    logEntry += "<b>" + i18n("revision %1").arg(Qt::escape(logInfo.m_revision)) +
                 "</b>";
-    logEntry += " &nbsp;[<a href=\"revA#" + Q3StyleSheet::escape(logInfo.m_revision) + "\">" +
+    logEntry += " &nbsp;[<a href=\"revA#" + Qt::escape(logInfo.m_revision) + "\">" +
                 i18n("Select for revision A") +
                 "</a>]";
-    logEntry += " [<a href=\"revB#" + Q3StyleSheet::escape(logInfo.m_revision) + "\">" +
+    logEntry += " [<a href=\"revB#" + Qt::escape(logInfo.m_revision) + "\">" +
                 i18n("Select for revision B") +
                 "</a>]<br>";
     logEntry += "<i>" +
-                i18n("date: %1; author: %2").arg(Q3StyleSheet::escape(logInfo.dateTimeToString()))
-                                            .arg(Q3StyleSheet::escape(logInfo.m_author)) +
+                i18n("date: %1; author: %2").arg(Qt::escape(logInfo.dateTimeToString()))
+                                            .arg(Qt::escape(logInfo.m_author)) +
                 "</i>";
 
     append(logEntry);
@@ -89,7 +89,7 @@ void LogPlainView::addRevision(const LogInfo& logInfo)
     for( LogInfo::TTagInfoSeq::const_iterator it = logInfo.m_tags.begin();
          it != logInfo.m_tags.end(); ++it )
     {
-        append("<i>" + Q3StyleSheet::escape((*it).toString()) + "</i>");
+        append("<i>" + Qt::escape((*it).toString()) + "</i>");
     }
 
     // add an empty line when we had tags or branches
