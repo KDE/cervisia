@@ -1,6 +1,7 @@
 [!Global!]
 IconName=cervisia
 Comment=Cervisia
+Comment[hi]=सर्विसिया
 
 [cvs_commit_done]
 Name=CVS commit job done
@@ -12,6 +13,7 @@ Name[es]=Entrega al CVS completada
 Name[et]=CVS sissekanne tehtud
 Name[eu]=CVS aldaketak egin dira
 Name[fr]=Commit CVS effectué
+Name[hi]=सीवीएस कमिट कार्य पूरा हुआ
 Name[hu]=CVS commit művelet kész
 Name[is]=CVS innsetningu lokið
 Name[it]=Processo di consegna a CVS eseguito
@@ -35,6 +37,7 @@ Comment[es]=Se ha completado una entrega al CVS
 Comment[et]=CVS sissekanne tehtud
 Comment[eu]=CVS aldaketa egin da
 Comment[fr]=Un commit CVS a été effectué
+Comment[hi]= एक सीवीएस कमिट कार्य पूरा हुआ
 Comment[hu]=Egy CVS commit művelet sikeresen befejeződött
 Comment[is]=CVS innsetningu lokið
 Comment[it]=Un processo di deposito su CVS è stato eseguito
