@@ -77,6 +77,7 @@ private slots:
 
 private:
     void tagSelected(LogDialogTagInfo* tag, bool rmb);
+    void updateButtons();
 
     QString filename;
     Q3PtrList<Cervisia::LogInfo> items;

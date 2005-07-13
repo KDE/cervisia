@@ -203,6 +203,8 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     KConfigGroupSaver cs(&partConfig, "LogDialog");
     tabWidget->setCurrentPage(partConfig.readNumEntry("ShowTab", 0));
+
+    updateButtons();
 }
 
 
@@ -542,6 +544,8 @@ void LogDialog::revisionSelected(QString rev, bool rmb)
 
                 tree->setSelectedPair(selectionA, selectionB);
                 list->setSelectedPair(selectionA, selectionB);
+
+                updateButtons();
                 return;
             }
     kdDebug(8050) << "Internal error: Revision not found " << rev << "." << endl;
@@ -554,6 +558,35 @@ void LogDialog::tagSelected(LogDialogTagInfo* tag, bool rmb)
         revisionSelected(tag->rev, rmb);
     else
         revisionSelected(tag->branchpoint, rmb);
+}
+
+
+void LogDialog::updateButtons()
+{
+    // no versions selected?
+    if( selectionA.isEmpty() && selectionB.isEmpty() )
+    {
+        enableButton(User1, true);  // annotate
+        enableButton(User2, false); // diff
+        enableButtonOK(false);      // view
+        enableButtonApply(false);   // create patch
+    }
+    // both versions selected?
+    else if( !selectionA.isEmpty() && !selectionB.isEmpty() )
+    {
+        enableButton(User1, false); // annotate
+        enableButton(User2, true);  // diff
+        enableButtonOK(false);      // view
+        enableButtonApply(true);    // create patch
+    }
+    // only single version selected?
+    else
+    {
+        enableButton(User1, true);  // annotate
+        enableButton(User2, true);  // diff
+        enableButtonOK(true);       // view
+        enableButtonApply(true);    // create patch
+    }
 }
 
 
