@@ -121,7 +121,7 @@ bool Cervisia::IsValidTag(const QString& tag)
     if( !isalpha(tag[0].latin1()) )
         return false;
 
-    for( uint i = 1; i < tag.length(); ++i )
+    for( int i = 1; i < tag.length(); ++i )
     {
         if( !isgraph(tag[i].latin1()) || prohibitedChars.contains(tag[i]) )
                 return false;
