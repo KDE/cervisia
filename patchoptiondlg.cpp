@@ -41,8 +41,8 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent, const char* name)
     connect(m_formatBtnGroup, SIGNAL(clicked(int)),
             this,             SLOT(formatChanged(int)));
 
-    QRadioButton* contextFormatBtn = new QRadioButton(i18n( "Context" ), m_formatBtnGroup);
-    QRadioButton* normalFormatBtn  = new QRadioButton(i18n( "Normal" ), m_formatBtnGroup);
+    new QRadioButton(i18n( "Context" ), m_formatBtnGroup);
+    new QRadioButton(i18n( "Normal" ), m_formatBtnGroup);
     QRadioButton* unifiedFormatBtn = new QRadioButton(i18n( "Unified" ), m_formatBtnGroup);
     unifiedFormatBtn->setChecked(true);
 
