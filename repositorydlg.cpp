@@ -78,6 +78,13 @@ private:
 };
 
 
+static bool LoginNeeded(const QString& repository)
+{
+    return repository.startsWith(":pserver:") ||
+           repository.startsWith(":sspi:");
+}
+
+
 RepositoryListItem::RepositoryListItem(KListView* parent, const QString& repo, 
                                        bool loggedin)
     : KListViewItem(parent)
@@ -97,6 +104,8 @@ void RepositoryListItem::setRsh(const QString& rsh)
 
     if( repo.startsWith(":pserver:") )
         method = "pserver";
+    else if( repo.startsWith(":sspi:") )
+        method = "sspi";
     else if( repo.contains(':') )
     {
         method = "ext";
@@ -135,7 +144,7 @@ void RepositoryListItem::changeLoginStatusColumn()
 {
     QString loginStatus;
     
-    if( repository().startsWith(":pserver:") )
+    if( LoginNeeded(repository()) )
         loginStatus = m_isLoggedIn ? i18n("Logged in") : i18n("Not logged in");
     else
         loginStatus = i18n("No login required");
@@ -403,7 +412,7 @@ void RepositoryDialog::slotLoginClicked()
     RepositoryListItem* item = (RepositoryListItem*)m_repoList->currentItem();
     if( !item )
         return;
-    
+
     kdDebug() << "RepositoryDialog::slotLoginClicked(): repo="
               << item->repository() << endl;
 
@@ -461,7 +470,7 @@ void RepositoryDialog::slotSelectionChanged()
         return;
 
     // is this a pserver repository?
-    if( !item->repository().startsWith(":pserver:") )
+    if( !LoginNeeded(item->repository()) )
     {
         m_loginButton->setEnabled(false);
         m_logoutButton->setEnabled(false);
