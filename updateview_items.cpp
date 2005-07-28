@@ -24,6 +24,9 @@
 
 #include <qdir.h>
 #include <qpainter.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <QTextStream>
 
 #include <kdebug.h>
 #include <kglobalsettings.h>
@@ -68,7 +71,7 @@ QString UpdateItem::dirPath() const
 QString UpdateItem::filePath() const
 {
     // the filePath of the root item is '.'
-    return parent() ? dirPath() + m_entry.m_name : QChar('.');
+    return parent() ? dirPath() + m_entry.m_name : QLatin1String(".");
 }
 
 
@@ -176,12 +179,11 @@ void UpdateDirItem::scanDirectory()
     const QFileInfoList *files = dir.entryInfoList();
     if (files)
     {
-        QFileInfoListIterator it(*files);
-        for (; it.current(); ++it)
+        Q_FOREACH (QFileInfo info, *files)
         {
             Entry entry;
-            entry.m_name = it.current()->fileName();
-            if (it.current()->isDir())
+            entry.m_name = info.fileName();
+            if (info.isDir())
             {
                 entry.m_type = Entry::Dir;
                 createDirItem(entry);
@@ -215,13 +217,12 @@ UpdateFileItem* UpdateDirItem::createFileItem(const Entry& entry)
 
 UpdateItem* UpdateDirItem::insertItem(UpdateItem* item)
 {
-    QPair<TMapItemsByName::iterator, bool> result
-        = m_itemsByName.insert(TMapItemsByName::value_type(item->entry().m_name, item));
-    if (!result.second)
+    const TMapItemsByName::iterator it = m_itemsByName.find(item->entry().m_name);
+    if (it != m_itemsByName.end())
     {
         // OK, an item with that name already exists. If the item type is the
         // same then keep the old one to preserve it's status information
-        UpdateItem* existingItem = *result.first;
+        UpdateItem* existingItem = *it;
         if (existingItem->rtti() == item->rtti())
         {
             delete item;
@@ -230,8 +231,12 @@ UpdateItem* UpdateDirItem::insertItem(UpdateItem* item)
         else
         {
             delete existingItem;
-            *result.first = item;
+            *it = item;
         }
+    }
+    else
+    {
+        m_itemsByName.insert(item->entry().m_name, item);
     }
 
     return item;
@@ -254,10 +259,10 @@ void UpdateDirItem::syncWithEntries()
     const QString path(filePath() + QDir::separator());
 
     QFile f(path + "CVS/Entries");
-    if( f.open(IO_ReadOnly) )
+    if( f.open(QIODevice::ReadOnly) )
     {
         QTextStream stream(&f);
-        while( !stream.eof() )
+        while( !stream.atEnd() )
         {
             QString line = stream.readLine();
 
@@ -303,9 +308,9 @@ void UpdateDirItem::syncWithEntries()
                 }
                 else
                 {
-                    const QDateTime date(QDateTime::fromString(timestamp)); // UTC Time
-                    QDateTime fileDateUTC;
-                    fileDateUTC.setTime_t(entry.m_dateTime.toTime_t(), Qt::UTC);
+                    QDateTime date(QDateTime::fromString(timestamp)); // UTC Time
+                    date.setTimeSpec(Qt::UTC);
+                    const QDateTime fileDateUTC(entry.m_dateTime.toUTC());
                     if (date != fileDateUTC)
                         entry.m_status = Cervisia::LocallyModified;
                 }
@@ -406,11 +411,11 @@ void UpdateDirItem::setOpen(bool open)
             view->setFilter(view->filter());
     }
 
-    QListViewItem::setOpen(open);
+    Q3ListViewItem::setOpen(open);
 }
 
 
-int UpdateDirItem::compare(QListViewItem* i,
+int UpdateDirItem::compare(Q3ListViewItem* i,
                            int /*column*/,
                            bool bAscending) const
 {
@@ -595,7 +600,7 @@ int UpdateFileItem::statusClass() const
 }
 
 
-int UpdateFileItem::compare(QListViewItem* i,
+int UpdateFileItem::compare(Q3ListViewItem* i,
                             int column,
                             bool bAscending) const
 {
@@ -702,7 +707,7 @@ void UpdateFileItem::paintCell(QPainter *p,
         mycg.setColor(QColorGroup::Text, color);
     }
 
-    QListViewItem::paintCell(p, mycg, col, width, align);
+    Q3ListViewItem::paintCell(p, mycg, col, width, align);
 
     if (color.isValid())
     {
@@ -723,7 +728,7 @@ UpdateDirItem* findOrCreateDirItem(const QString& dirPath,
 
     UpdateDirItem* dirItem(rootItem);
 
-    if (dirPath != QChar('.'))
+    if (dirPath != QLatin1String("."))
     {
         const QStringList& dirNames(QStringList::split('/', dirPath));
         const QStringList::const_iterator itDirNameEnd(dirNames.end());

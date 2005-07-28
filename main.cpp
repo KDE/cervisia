@@ -42,7 +42,7 @@ static CvsService_stub* StartDCOPService(const QString& directory)
 {
     // start the cvs DCOP service
     QString error;
-    QCString appId;
+    QByteArray appId;
     if( KApplication::startServiceByDesktopName("cvsservice", QStringList(),
                                                 &error, &appId) )
     {

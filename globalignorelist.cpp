@@ -70,7 +70,7 @@ void GlobalIgnoreList::retrieveServerIgnoreList(CvsService_stub* cvsService,
 
 void GlobalIgnoreList::addEntry(const QString& entry)
 {
-    if (entry != QChar('!'))
+    if (entry != QLatin1String("!"))
     {
         m_stringMatcher.add(entry);
     }

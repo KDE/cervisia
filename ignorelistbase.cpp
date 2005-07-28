@@ -38,10 +38,10 @@ void IgnoreListBase::addEntriesFromFile(const QString& name)
 {
     QFile file(name);
 
-    if( file.open(IO_ReadOnly) )
+    if( file.open(QIODevice::ReadOnly) )
     {
         QTextStream stream(&file);
-        while( !stream.eof() )
+        while( !stream.atEnd() )
         {
             addEntriesFromString(stream.readLine());
         }

@@ -26,7 +26,11 @@
 #include <qfileinfo.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qlistbox.h>
+#include <q3listbox.h>
+//Added by qt3to4:
+#include <QTextStream>
+#include <QBoxLayout>
+#include <QVBoxLayout>
 #include <ktextedit.h>
 #include <kconfig.h>
 #include <klocale.h>
@@ -49,7 +53,7 @@ CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service,
     QLabel *textlabel = new QLabel( i18n("Commit the following &files:"), mainWidget );
     layout->addWidget(textlabel);
 
-    listbox = new QListBox(mainWidget);
+    listbox = new Q3ListBox(mainWidget);
     textlabel->setBuddy(listbox);
     connect( listbox, SIGNAL(selected(int)), this, SLOT(fileSelected(int)));
     connect( listbox, SIGNAL(highlighted(int)), this, SLOT(fileHighlighted(int)));
@@ -108,9 +112,9 @@ void CommitDialog::setFileList(const QStringList &list)
 
     // the dot for the root directory is hard to see, so
     // we convert it to the absolut path
-    if (const QListBoxItem* item = listbox->findItem(QChar('.'), Qt::ExactMatch))
+    if (const Q3ListBoxItem* item = listbox->findItem(QLatin1String("."), Q3ListBox::ExactMatch))
     {
-        listbox->changeItem(QFileInfo(QChar('.')).absFilePath(),
+        listbox->changeItem(QFileInfo(QLatin1String(".")).absFilePath(),
                             listbox->index(item));
     }
 }
@@ -177,7 +181,7 @@ void CommitDialog::comboActivated(int index)
 
 void CommitDialog::fileSelected(int index)
 {
-    QListBoxItem *item = listbox->item(index);
+    Q3ListBoxItem *item = listbox->item(index);
     if ( !item )
         return;
 
@@ -194,7 +198,7 @@ void CommitDialog::fileHighlighted(int index)
 
 void CommitDialog::diffClicked()
 {
-    QListBoxItem *item = listbox->item(highlightedFile);
+    Q3ListBoxItem *item = listbox->item(highlightedFile);
     if ( !item )
         return;
 
@@ -238,7 +242,7 @@ void CommitDialog::checkForTemplateFile()
     if( QFile::exists(filename) )
     {
         QFile f(filename);
-        if( f.open(IO_ReadOnly) )
+        if( f.open(QIODevice::ReadOnly) )
         {
             QTextStream stream(&f);
             m_templateText = stream.read();
@@ -266,7 +270,7 @@ void CommitDialog::checkForTemplateFile()
 void CommitDialog::addTemplateText()
 {
     edit->append(m_templateText);
-    edit->moveCursor(QTextEdit::MoveHome, false);
+    edit->moveCursor(Q3TextEdit::MoveHome, false);
     edit->ensureCursorVisible();
 }
 

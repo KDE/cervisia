@@ -22,12 +22,17 @@
 #include "resolvedlg.h"
 
 #include <qfile.h>
-#include <qkeycode.h>
+#include <qnamespace.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
 #include <qtextcodec.h>
 #include <qtextstream.h>
+//Added by qt3to4:
+#include <QKeyEvent>
+#include <QHBoxLayout>
+#include <QBoxLayout>
+#include <QVBoxLayout>
 #include <kdebug.h>
 #include <kfiledialog.h>
 #include <klocale.h>
@@ -108,9 +113,9 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 
-    QSplitter *vertSplitter = new QSplitter(QSplitter::Vertical, mainWidget);
+    QSplitter *vertSplitter = new QSplitter(Qt::Vertical, mainWidget);
 
-    QSplitter *splitter = new QSplitter(QSplitter::Horizontal, vertSplitter);
+    QSplitter *splitter = new QSplitter(Qt::Horizontal, vertSplitter);
 
     QWidget *versionALayoutWidget = new QWidget(splitter);
     QBoxLayout *versionAlayout = new QVBoxLayout(versionALayoutWidget, 5);
@@ -158,7 +163,7 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent, const char *name)
     connect( editbutton, SIGNAL(clicked()), SLOT(editClicked()) );
 
     nofnlabel = new QLabel(mainWidget);
-    nofnlabel->setAlignment(AlignCenter);
+    nofnlabel->setAlignment(Qt::AlignCenter);
 
     backbutton = new QPushButton("&<<", mainWidget);
     connect( backbutton, SIGNAL(clicked()), SLOT(backClicked()) );
@@ -187,7 +192,7 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     setHelp("resolvingconflicts");
 
-    setWFlags(Qt::WDestructiveClose | getWFlags());
+    setAttribute(Qt::WA_DeleteOnClose, true);
 
     QSize size = configDialogSize(partConfig, "ResolveDialog");
     resize(size);
@@ -345,7 +350,7 @@ void ResolveDialog::addToVersionB(const QString& line, DiffView::DiffType type,
 void ResolveDialog::saveFile(const QString &name)
 {
     QFile f(name);
-    if (!f.open(IO_WriteOnly))
+    if (!f.open(QIODevice::WriteOnly))
     {
         KMessageBox::sorry(this,
                            i18n("Could not open file for writing."),
@@ -368,7 +373,7 @@ void ResolveDialog::saveFile(const QString &name)
 QString ResolveDialog::readFile()
 {
     QFile f(fname);
-    if( !f.open(IO_ReadOnly) )
+    if( !f.open(QIODevice::ReadOnly) )
         return QString::null;
 
     QTextStream stream(&f);
@@ -588,12 +593,12 @@ void ResolveDialog::keyPressEvent(QKeyEvent *e)
 {
     switch (e->key())
     {
-        case Key_A:    aClicked();    break;
-        case Key_B:    bClicked();    break;
-        case Key_Left: backClicked(); break;
-        case Key_Right:forwClicked(); break;
-        case Key_Up:   diff1->up();   break;
-        case Key_Down: diff1->down(); break;
+        case Qt::Key_A:    aClicked();    break;
+        case Qt::Key_B:    bClicked();    break;
+        case Qt::Key_Left: backClicked(); break;
+        case Qt::Key_Right:forwClicked(); break;
+        case Qt::Key_Up:   diff1->up();   break;
+        case Qt::Key_Down: diff1->down(); break;
         default:
             KDialogBase::keyPressEvent(e);
     }

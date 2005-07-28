@@ -24,6 +24,8 @@
 #include <qobject.h>
 #include <qstring.h>
 #include <qstringlist.h>
+//Added by qt3to4:
+#include <Q3CString>
 #include <dcopobject.h>
 
 class KProcess;
@@ -46,7 +48,7 @@ public:
 
     CvsJob& operator<<(const QString& arg);
     CvsJob& operator<<(const char* arg);
-    CvsJob& operator<<(const QCString& arg);
+    CvsJob& operator<<(const Q3CString& arg);
     CvsJob& operator<<(const QStringList& args);
 
 k_dcop:

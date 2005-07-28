@@ -13,10 +13,11 @@
 **********************************************************************/
 
 #include "qttableview.h"
-#include "qscrollbar.h"
-#include "qpainter.h"
-#include "qdrawutil.h"
 #include <qapplication.h>
+#include <qdrawutil.h>
+#include <qevent.h>
+#include <qpainter.h>
+#include <qscrollbar.h>
 #include <limits.h>
 
 enum ScrollBarDirtyFlags {
@@ -143,7 +144,7 @@ void QCornerSquare::paintEvent( QPaintEvent * )
 
 */
 
-QtTableView::QtTableView( QWidget *parent, const char *name, WFlags f )
+QtTableView::QtTableView( QWidget *parent, const char *name, Qt::WFlags f )
     : QFrame( parent, name, f )
 {
     nRows		 = nCols      = 0;	// zero rows/cols
@@ -162,6 +163,8 @@ QtTableView::QtTableView( QWidget *parent, const char *name, WFlags f )
     horSnappingOff	 = FALSE;
     coveringCornerSquare = FALSE;
     inSbUpdate		 = FALSE;
+
+    setAttribute(Qt::WA_NoBackground, true);
 }
 
 /*!
@@ -231,7 +234,7 @@ void QtTableView::show()
 
 void QtTableView::repaint( int x, int y, int w, int h, bool erase )
 {
-    if ( !isVisible() || testWState(WState_BlockUpdates) )
+    if ( !isVisible() )
 	return;
     if ( w < 0 )
 	w = width()  - x;
@@ -240,10 +243,9 @@ void QtTableView::repaint( int x, int y, int w, int h, bool erase )
     QRect r( x, y, w, h );
     if ( r.isEmpty() )
 	return; // nothing to do
-    QPaintEvent e( r );
-    if ( erase && backgroundMode() != NoBackground )
+    if ( erase && backgroundMode() != Qt::NoBackground )
 	eraseInPaint = TRUE;			// erase when painting
-    paintEvent( &e );
+    QWidget::repaint( r );
     eraseInPaint = FALSE;
 }
 
@@ -1315,7 +1317,7 @@ void QtTableView::paintEvent( QPaintEvent *e )
     QRect cellR;
     QRect cellUR;
 #ifndef QT_NO_TRANSFORMATIONS
-    QWMatrix matrix;
+    QMatrix matrix;
 #endif
 
     while ( yPos <= maxY && row < nRows ) {
@@ -1343,9 +1345,10 @@ void QtTableView::paintEvent( QPaintEvent *e )
 		paint.setWorldMatrix( matrix );
 		if ( testTableFlags(Tbl_clipCellPainting) ||
 		     frameWidth() > 0 && !winR.contains( cellR ) ) { //##arnt
-		    paint.setClipRect( cellUR );
+#warning disable clipping for now as it interferes with drawText() in DiffView::paintCell()
+// 		    paint.setClipRect( cellUpdateR );
 		    paintCell( &paint, row, col );
-		    paint.setClipping( FALSE );
+// 		    paint.setClipping( FALSE );
 		} else {
 		    paintCell( &paint, row, col );
 		}
@@ -1355,7 +1358,7 @@ void QtTableView::paintEvent( QPaintEvent *e )
 		paint.translate( xPos, yPos );
 		if ( testTableFlags(Tbl_clipCellPainting) ||
 		     frameWidth() > 0 && !winR.contains( cellR ) ) { //##arnt
-		    paint.setClipRect( cellUR );
+		    paint.setClipRect( cellUpdateR );
 		    paintCell( &paint, row, col );
 		    paint.setClipping( FALSE );
 		} else {
@@ -1420,7 +1423,7 @@ void QtTableView::resizeEvent( QResizeEvent * )
 
 void QtTableView::wheelEvent( QWheelEvent * e )
 {
-    if( e->orientation() == Vertical && vScrollBar && vScrollBar->isVisible() )
+    if( e->orientation() == Qt::Vertical && vScrollBar && vScrollBar->isVisible() )
         QApplication::sendEvent( vScrollBar, e );
 }
 
@@ -1443,14 +1446,14 @@ QScrollBar *QtTableView::verticalScrollBar() const
 {
     QtTableView *that = (QtTableView*)this; // semantic const
     if ( !vScrollBar ) {
-	QScrollBar *sb = new QScrollBar( QScrollBar::Vertical, that );
+	QScrollBar *sb = new QScrollBar( Qt::Vertical, that );
 #ifndef QT_NO_CURSOR
-	sb->setCursor( arrowCursor );
+	sb->setCursor( Qt::ArrowCursor );
 #endif
         sb->resize( sb->sizeHint() ); // height is irrelevant
 	Q_CHECK_PTR(sb);
 	sb->setTracking( FALSE );
-	sb->setFocusPolicy( NoFocus );
+	sb->setFocusPolicy( Qt::NoFocus );
 	connect( sb, SIGNAL(valueChanged(int)),
 		 SLOT(verSbValue(int)));
 	connect( sb, SIGNAL(sliderMoved(int)),
@@ -1474,12 +1477,12 @@ QScrollBar *QtTableView::horizontalScrollBar() const
 {
     QtTableView *that = (QtTableView*)this; // semantic const
     if ( !hScrollBar ) {
-	QScrollBar *sb = new QScrollBar( QScrollBar::Horizontal, that );
+	QScrollBar *sb = new QScrollBar( Qt::Horizontal, that );
 #ifndef QT_NO_CURSOR
-	sb->setCursor( arrowCursor );
+	sb->setCursor( Qt::ArrowCursor );
 #endif
 	sb->resize( sb->sizeHint() ); // width is irrelevant
-	sb->setFocusPolicy( NoFocus );
+	sb->setFocusPolicy( Qt::NoFocus );
 	Q_CHECK_PTR(sb);
 	sb->setTracking( FALSE );
 	connect( sb, SIGNAL(valueChanged(int)),
@@ -1999,7 +2002,7 @@ void QtTableView::updateScrollBars( uint f )
 
 	if ( sbDirty & horSteps ) {
 	    if ( cellW )
-		hScrollBar->setSteps( QMIN(cellW,viewWidth()/2), viewWidth() );
+		hScrollBar->setSteps( qMin((int)cellW,viewWidth()/2), viewWidth() );
 	    else
 		hScrollBar->setSteps( 16, viewWidth() );
 	}
@@ -2023,7 +2026,7 @@ void QtTableView::updateScrollBars( uint f )
 
 	if ( sbDirty & verSteps ) {
 	    if ( cellH )
-		vScrollBar->setSteps( QMIN(cellH,viewHeight()/2), viewHeight() );
+		vScrollBar->setSteps( qMin((int)cellH,viewHeight()/2), viewHeight() );
 	    else
 		vScrollBar->setSteps( 16, viewHeight() );  // fttb! ###
 	}

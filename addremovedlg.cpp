@@ -23,8 +23,12 @@
 #include <qfileinfo.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qlistbox.h>
+#include <q3listbox.h>
 #include <qstringlist.h>
+//Added by qt3to4:
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QBoxLayout>
 #include <kapplication.h>
 #include <kiconloader.h>
 #include <klocale.h>
@@ -49,8 +53,8 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent, const char*
           mainWidget );
     layout->addWidget(textlabel);
 
-    m_listBox = new QListBox(mainWidget);
-    m_listBox->setSelectionMode(QListBox::NoSelection);
+    m_listBox = new Q3ListBox(mainWidget);
+    m_listBox->setSelectionMode(Q3ListBox::NoSelection);
     layout->addWidget(m_listBox, 5);
 
     // Add warning message to dialog when user wants to remove a file

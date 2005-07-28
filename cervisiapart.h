@@ -32,10 +32,12 @@
 #include "checkoutdlg.h"
 #include "watchdlg.h"
 #include "tagdlg.h"
+//Added by qt3to4:
+#include <QLabel>
 
 namespace Cervisia { class EditWithMenu; }
 class QLabel;
-class QListViewItem;
+class Q3ListViewItem;
 class QSplitter;
 class QTimer;
 class UpdateView;
@@ -75,7 +77,7 @@ public slots:
 
     void openFile(QString filename);
     void openFiles(const QStringList &filenames);
-    void popupRequested(KListView*, QListViewItem*, const QPoint&);
+    void popupRequested(KListView*, Q3ListViewItem*, const QPoint&);
     void updateActions();
 
     void aboutCervisia();

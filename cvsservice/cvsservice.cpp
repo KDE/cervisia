@@ -20,7 +20,7 @@
 
 #include "cvsservice.h"
 
-#include <qintdict.h>
+#include <q3intdict.h>
 #include <qstring.h>
 
 #include <dcopref.h>
@@ -54,11 +54,11 @@ struct CvsService::Private
 
     CvsJob*               singleCvsJob;   // non-concurrent cvs job, like update or commit
     DCOPRef               singleJobRef;   // DCOP reference to non-concurrent cvs job
-    QIntDict<CvsJob>      cvsJobs;        // concurrent cvs jobs, like diff or annotate
-    QIntDict<CvsLoginJob> loginJobs;
+    Q3IntDict<CvsJob>      cvsJobs;        // concurrent cvs jobs, like diff or annotate
+    Q3IntDict<CvsLoginJob> loginJobs;
     unsigned              lastJobId;
 
-    QCString              appId;          // cache the DCOP clients app id
+    DCOPCString           appId;          // cache the DCOP clients app id
 
     Repository*           repository;
 

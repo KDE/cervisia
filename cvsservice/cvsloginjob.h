@@ -21,8 +21,10 @@
 #ifndef CVSLOGINJOB_H
 #define CVSLOGINJOB_H
 
+#include <qbytearray.h>
 #include <qstring.h>
 #include <qstringlist.h>
+
 #include <dcopobject.h>
 
 #include <kdesu/process.h>
@@ -38,8 +40,8 @@ public:
 
     void setServer(const QString& server);
 
-    void setCvsClient(const QCString& cvsClient);
-    void setRepository(const QCString& repository);
+    void setCvsClient(const QByteArray& cvsClient);
+    void setRepository(const QByteArray& repository);
 
 k_dcop:
     bool execute();
@@ -49,8 +51,8 @@ private:
     PtyProcess*    m_Proc;
     QString        m_Server;
     QString        m_Rsh;
-    QCString       m_CvsClient;
-    QCStringList   m_Arguments;
+    QByteArray     m_CvsClient;
+    QList<QByteArray> m_Arguments;
     QStringList    m_output;
 };
 

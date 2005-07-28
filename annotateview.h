@@ -22,7 +22,7 @@
 #define ANNOTATEVIEW_H
 
 
-#include <qlistview.h>
+#include <q3listview.h>
 
 
 class KConfig;
@@ -34,7 +34,7 @@ struct LogInfo;
 }
 
 
-class AnnotateView : public QListView
+class AnnotateView : public Q3ListView
 {
     Q_OBJECT
 

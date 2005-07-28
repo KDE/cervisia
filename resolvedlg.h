@@ -25,7 +25,10 @@
 
 #include <kdialogbase.h>
 
-#include <qptrlist.h>
+#include <q3ptrlist.h>
+//Added by qt3to4:
+#include <QLabel>
+#include <QKeyEvent>
 #include "diffview.h"
 
 
@@ -80,7 +83,7 @@ private:
     QPushButton *abutton, *bbutton, *abbutton, *babutton, *editbutton;
     DiffView *diff1, *diff2, *merge;
 
-    QPtrList<ResolveItem> items;
+    Q3PtrList<ResolveItem> items;
     QString fname;
     QTextCodec *fcodec;
     int markeditem;

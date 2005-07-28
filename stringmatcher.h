@@ -22,6 +22,9 @@
 
 
 #include <qstringlist.h>
+//Added by qt3to4:
+#include <Q3ValueList>
+#include <Q3CString>
 
 
 namespace Cervisia
@@ -67,7 +70,7 @@ private:
     /**
      * The patterns which are tested in match().
      */
-    QValueList<QCString> m_generalPatterns;
+    Q3ValueList<Q3CString> m_generalPatterns;
 };
 
 

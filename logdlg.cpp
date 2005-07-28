@@ -28,8 +28,9 @@
 #include <qlayout.h>
 #include <qpushbutton.h>
 #include <qtabwidget.h>
-#include <qtextedit.h>
-#include <qwhatsthis.h>
+#include <q3textedit.h>
+#include <qtextstream.h>
+
 #include <kconfig.h>
 #include <kdebug.h>
 #include <kfiledialog.h>
@@ -104,7 +105,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     connect(tabWidget, SIGNAL(currentChanged(QWidget*)),
             this, SLOT(tabChanged(QWidget*)));
 
-    QWhatsThis::add(tree, i18n("Choose revision A by clicking with the left "
+    tree->setWhatsThis( i18n("Choose revision A by clicking with the left "
                                "mouse button,\nrevision B by clicking with "
                                "the middle mouse button."));
 
@@ -160,23 +161,23 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
         QLabel *commentlabel = new QLabel(i18n("Comment/Tags:"), mainWidget);
         grid->addWidget(commentlabel, 2, 0);
 
-        commentbox[i] = new QTextEdit(mainWidget);
+        commentbox[i] = new Q3TextEdit(mainWidget);
         commentbox[i]->setReadOnly(true);
         commentbox[i]->setTextFormat(Qt::PlainText);
         fm = commentbox[i]->fontMetrics();
         commentbox[i]->setFixedHeight(2*fm.lineSpacing()+10);
         grid->addMultiCellWidget(commentbox[i], 2, 2, 1, 3);
 
-        tagsbox[i] = new QTextEdit(mainWidget);
+        tagsbox[i] = new Q3TextEdit(mainWidget);
         tagsbox[i]->setReadOnly(true);
         tagsbox[i]->setFixedHeight(2*fm.lineSpacing()+10);
         grid->addWidget(tagsbox[i], 2, 4);
     }
 
-    QWhatsThis::add(revbox[0], i18n("This revision is used when you click "
+    revbox[0]->setWhatsThis( i18n("This revision is used when you click "
                                     "Annotate.\nIt is also used as the first "
                                     "item of a Diff operation."));
-    QWhatsThis::add(revbox[1], i18n("This revision is used as the second "
+    revbox[1]->setWhatsThis( i18n("This revision is used as the second "
                                     "item of a Diff operation."));
 
     connect( tagcombo[0], SIGNAL(activated(int)),
@@ -195,7 +196,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     setButtonGuiItem(Apply, KGuiItem(i18n("Create Patch...")));
     setHelp("browsinglogs");
 
-    setWFlags(Qt::WDestructiveClose | getWFlags());
+    setAttribute(Qt::WA_DeleteOnClose, true);
 
     QSize size = configDialogSize(partConfig, "LogDialog");
     resize(size);
@@ -339,7 +340,7 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
                         branchrev = rev.left(pos2);
 
                     // Build Cervisia::TagInfo for logInfo
-                    QPtrListIterator<LogDialogTagInfo> it(tags);
+                    Q3PtrListIterator<LogDialogTagInfo> it(tags);
                     for( ; it.current(); ++it )
                     {
                         if( rev == it.current()->rev )
@@ -378,7 +379,7 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
 
     tagcombo[0]->insertItem(QString::null);
     tagcombo[1]->insertItem(QString::null);
-    QPtrListIterator<LogDialogTagInfo> it(tags);
+    Q3PtrListIterator<LogDialogTagInfo> it(tags);
     for( ; it.current(); ++it )
     {
         QString str = it.current()->tag;
@@ -472,7 +473,7 @@ void LogDialog::slotApply()
         return;
 
     QFile f(fileName);
-    if( !f.open(IO_WriteOnly) )
+    if( !f.open(QIODevice::WriteOnly) )
     {
         KMessageBox::sorry(this,
                            i18n("Could not open file for writing."),
@@ -526,7 +527,7 @@ void LogDialog::annotateClicked()
 
 void LogDialog::revisionSelected(QString rev, bool rmb)
 {
-    QPtrListIterator<Cervisia::LogInfo> it(items);
+    Q3PtrListIterator<Cervisia::LogInfo> it(items);
     for (; it.current(); ++it)
         if (it.current()->m_revision == rev)
             {

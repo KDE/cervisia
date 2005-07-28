@@ -21,7 +21,7 @@
 
 #include <qregexp.h>
 #include <qstringlist.h>
-#include <qstylesheet.h>
+#include <qtextdocument.h>
 #include <kfind.h>
 #include <kfinddialog.h>
 #include <klocale.h>
@@ -48,29 +48,29 @@ LogPlainView::~LogPlainView()
 
 void LogPlainView::addRevision(const LogInfo& logInfo)
 {
-    setTextFormat(QStyleSheet::RichText);
+    setTextFormat(Qt::RichText);
 
     // assemble revision information lines
     QString logEntry;
 
-    logEntry += "<b>" + i18n("revision %1").arg(QStyleSheet::escape(logInfo.m_revision)) +
+    logEntry += "<b>" + i18n("revision %1").arg(Qt::escape(logInfo.m_revision)) +
                 "</b>";
-    logEntry += " &nbsp;[<a href=\"revA#" + QStyleSheet::escape(logInfo.m_revision) + "\">" +
+    logEntry += " &nbsp;[<a href=\"revA#" + Qt::escape(logInfo.m_revision) + "\">" +
                 i18n("Select for revision A") +
                 "</a>]";
-    logEntry += " [<a href=\"revB#" + QStyleSheet::escape(logInfo.m_revision) + "\">" +
+    logEntry += " [<a href=\"revB#" + Qt::escape(logInfo.m_revision) + "\">" +
                 i18n("Select for revision B") +
                 "</a>]<br>";
     logEntry += "<i>" +
-                i18n("date: %1; author: %2").arg(QStyleSheet::escape(logInfo.dateTimeToString()))
-                                            .arg(QStyleSheet::escape(logInfo.m_author)) +
+                i18n("date: %1; author: %2").arg(Qt::escape(logInfo.dateTimeToString()))
+                                            .arg(Qt::escape(logInfo.m_author)) +
                 "</i>";
 
     append(logEntry);
 
-    setTextFormat(QStyleSheet::PlainText);
+    setTextFormat(Qt::PlainText);
 
-    const QChar newline('\n');
+    const QLatin1String newline("\n");
 
     // split comment in separate lines
     QStringList lines = QStringList::split(newline, logInfo.m_comment, true);
@@ -84,23 +84,23 @@ void LogPlainView::addRevision(const LogInfo& logInfo)
     }
     append(newline);
 
-    setTextFormat(QStyleSheet::RichText);
+    setTextFormat(Qt::RichText);
 
     for( LogInfo::TTagInfoSeq::const_iterator it = logInfo.m_tags.begin();
          it != logInfo.m_tags.end(); ++it )
     {
-        append("<i>" + QStyleSheet::escape((*it).toString()) + "</i>");
+        append("<i>" + Qt::escape((*it).toString()) + "</i>");
     }
 
     // add an empty line when we had tags or branches
     if( !logInfo.m_tags.empty() )
     {
-        setTextFormat(QStyleSheet::PlainText);
+        setTextFormat(Qt::PlainText);
         append(newline);
     }
 
     // add horizontal line
-    setTextFormat(QStyleSheet::RichText);
+    setTextFormat(Qt::RichText);
     append("<hr>");
 }
 

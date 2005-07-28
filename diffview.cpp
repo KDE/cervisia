@@ -20,11 +20,12 @@
 
 #include "diffview.h"
 
+#include <qevent.h>
 #include <qpainter.h>
-#include <qscrollbar.h>
 #include <qpixmap.h>
-#include <qregexp.h>
+#include <qscrollbar.h>
 #include <qstyle.h>
+#include <qstyleoption.h>
 
 #include <kapplication.h>
 #include <kconfig.h>
@@ -43,7 +44,7 @@ public:
 };
 
 
-int DiffViewItemList::compareItems(QPtrCollection::Item item1, QPtrCollection::Item item2)
+int DiffViewItemList::compareItems(Q3PtrCollection::Item item1, Q3PtrCollection::Item item2)
 {
     return (static_cast<DiffViewItem*>(item1)->no
             == static_cast<DiffViewItem*>(item2)->no)? 0 : 1;
@@ -55,7 +56,7 @@ const int DiffView::BORDER = 7;
 
 DiffView::DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
                     QWidget *parent, const char *name )
-    : QtTableView(parent, name, WRepaintNoErase)
+    : QtTableView(parent, name, Qt::WNoAutoErase)
     , partConfig(cfg)
 {
     setNumRows(0);
@@ -63,8 +64,7 @@ DiffView::DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
     setTableFlags( Tbl_autoVScrollBar|Tbl_autoHScrollBar|
                    Tbl_smoothVScrolling );
     setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
-    setBackgroundMode( PaletteBase );
-    setWFlags( WResizeNoErase );
+    setBackgroundMode( Qt::PaletteBase );
 
     partConfig.setGroup("LookAndFeel");
     setFont(partConfig.readFontEntry("DiffFont"));
@@ -173,8 +173,8 @@ void DiffView::addLine(const QString &line, DiffType type, int no)
     // For some fonts, e.g. "Clean", is fm.maxWidth() greater than
     // fmbold.maxWidth().
     QString copy(line);
-    const int numTabs = copy.contains('\t', false);
-    copy.replace( QRegExp("\t"), "");
+    const int numTabs = copy.count(QLatin1Char('\t'));
+    copy.remove(QLatin1Char('\t'));
 
     const int tabSize   = m_tabWidth * QMAX(fm.maxWidth(), fmbold.maxWidth());
     const int copyWidth = QMAX(fm.width(copy), fmbold.width(copy));
@@ -250,7 +250,7 @@ QByteArray DiffView::compressedContent()
 {
     QByteArray res(items.count());
 
-    QPtrListIterator<DiffViewItem> it(items);
+    Q3PtrListIterator<DiffViewItem> it(items);
     int i=0;
     for (; it.current(); ++it)
     {
@@ -303,7 +303,8 @@ QSize DiffView::sizeHint() const
 void DiffView::paintCell(QPainter *p, int row, int col)
 {
     QFontMetrics fm(font());
-    p->setTabStops(m_tabWidth * fm.maxWidth());
+#warning what can I use in Qt4
+//    p->setTabStops(m_tabWidth * fm.maxWidth());
 
     DiffViewItem *item = items.at(row);
 
@@ -322,7 +323,7 @@ void DiffView::paintCell(QPainter *p, int row, int col)
         backgroundColor = KGlobalSettings::highlightColor();
         p->setPen(KGlobalSettings::highlightedTextColor());
         inverted = false;
-        align = AlignLeft;
+        align = Qt::AlignLeft;
         innerborder = 0;
         if (col == (linenos?1:0) + (marker?1:0))
             str = item->line;
@@ -335,7 +336,7 @@ void DiffView::paintCell(QPainter *p, int row, int col)
         backgroundColor = KGlobalSettings::highlightColor();
         p->setPen(KGlobalSettings::highlightedTextColor());
         inverted = false;
-        align = AlignLeft;
+        align = Qt::AlignLeft;
         innerborder = 0;
         if (item->no == -1)
             str = "+++++";
@@ -347,7 +348,7 @@ void DiffView::paintCell(QPainter *p, int row, int col)
         backgroundColor = KGlobalSettings::alternateBackgroundColor();
         p->setPen(KGlobalSettings::textColor());
         inverted = false;
-        align = AlignRight;
+        align = Qt::AlignRight;
         innerborder = BORDER;
         str = (item->type==Change)? i18n("Change")
             : (item->type==Insert)? i18n("Insert")
@@ -362,7 +363,7 @@ void DiffView::paintCell(QPainter *p, int row, int col)
             : (item->type==Neutral)? KGlobalSettings::alternateBackgroundColor() : KGlobalSettings::baseColor();
         p->setPen(KGlobalSettings::textColor());
         inverted = item->inverted;
-        align = AlignLeft;
+        align = Qt::AlignLeft;
         innerborder = 0;
         str = item->line;
     }
@@ -377,7 +378,7 @@ void DiffView::paintCell(QPainter *p, int row, int col)
     }
 
     p->fillRect(0, 0, width, height, backgroundColor);
-    p->drawText(innerborder, 0, width-2*innerborder, height, align|ExpandTabs, str);
+    p->drawText(innerborder, 0, width-2*innerborder, height, align|Qt::TextExpandTabs, str);
     p->setFont(oldFont);
 }
 
@@ -417,7 +418,7 @@ void DiffZoomWidget::setDiffView(DiffView *view)
 
 QSize DiffZoomWidget::sizeHint() const
 {
-    return QSize(25, style().pixelMetric(QStyle::PM_ScrollBarExtent, this));
+    return QSize(25, style()->pixelMetric(QStyle::PM_ScrollBarExtent, 0, this));
 }
 
 
@@ -439,20 +440,22 @@ void DiffZoomWidget::paintEvent(QPaintEvent *)
         return;
 
     // only y and height are important
+    QStyleOptionSlider option;
+    option.init(scrollBar);
     const QRect scrollBarGroove(scrollBar->isVisible()
-                                ? style().querySubControlMetrics(QStyle::CC_ScrollBar,
-                                                                 scrollBar,
-                                                                 QStyle::SC_ScrollBarGroove)
+                                ? style()->subControlRect(QStyle::CC_ScrollBar,
+                                                          &option,
+                                                          QStyle::SC_ScrollBarGroove,
+                                                          scrollBar)
                                 : rect());
 
     // draw rectangles at the positions of the differences
 
     const QByteArray& lineTypes(diffview->compressedContent());
 
-    QPixmap pixbuf(width(), scrollBarGroove.height());
-    pixbuf.fill(KGlobalSettings::baseColor());
-
-    QPainter p(&pixbuf, this);
+    QPainter p(this);
+    p.fillRect(0, scrollBarGroove.y(), width(), scrollBarGroove.height(),
+               KGlobalSettings::baseColor());
     if (const unsigned int numberOfLines = lineTypes.size())
     {
         const double scale(((double) scrollBarGroove.height()) / numberOfLines);
@@ -491,12 +494,10 @@ void DiffZoomWidget::paintEvent(QPaintEvent *)
                 const int yPos2(qRound(index * scale));
                 const int areaHeight((yPos2 != yPos1) ? yPos2 - yPos1 : 1);
 
-                p.fillRect(0, yPos1, pixbuf.width(), areaHeight, QBrush(color));
+                p.fillRect(0, yPos1 + scrollBarGroove.y(), width(), areaHeight, QBrush(color));
             }
         }
     }
-    p.flush();
-    bitBlt(this, 0, scrollBarGroove.y(), &pixbuf);
 }
 
 #include "diffview.moc"

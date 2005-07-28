@@ -20,12 +20,16 @@
 
 #include "updatedlg.h"
 
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qcombobox.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
 #include <qradiobutton.h>
 #include <qstyle.h>
+//Added by qt3to4:
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QBoxLayout>
 #include <klineedit.h>
 #include <klocale.h>
 
@@ -40,7 +44,7 @@ UpdateDialog::UpdateDialog(CvsService_stub* service,
       cvsService(service)
 {
     int const iComboBoxMinWidth(40 * fontMetrics().width('0'));
-    int const iWidgetIndent(style().pixelMetric(QStyle::PM_ExclusiveIndicatorWidth, 0) + 6);
+    int const iWidgetIndent(style()->pixelMetric(QStyle::PM_ExclusiveIndicatorWidth) + 6);
 
     QFrame* mainWidget = makeMainWidget();
 
@@ -86,7 +90,7 @@ UpdateDialog::UpdateDialog(CvsService_stub* service,
     dateedit_layout->addSpacing(iWidgetIndent);
     dateedit_layout->addWidget(date_edit);
 
-    QButtonGroup* group = new QButtonGroup(mainWidget);
+    Q3ButtonGroup* group = new Q3ButtonGroup(mainWidget);
     group->hide();
     group->insert(bytag_button);
     group->insert(bybranch_button);

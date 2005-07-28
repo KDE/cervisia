@@ -20,6 +20,7 @@
 
 #include "logtree.h"
 
+#include <qevent.h>
 #include <qpainter.h>
 #include <kdebug.h>
 #include <kglobal.h>
@@ -60,7 +61,7 @@ public:
 
 
 LogTreeView::LogTreeView(QWidget *parent, const char *name)
-    : QTable(parent, name)
+    : Q3Table(parent, name)
 {
     if (!static_initialized)
     {
@@ -73,16 +74,16 @@ LogTreeView::LogTreeView(QWidget *parent, const char *name)
     setNumCols(0);
     setNumRows(0);
     setReadOnly(true);
-    setFocusStyle(QTable::FollowStyle);
-    setSelectionMode(QTable::NoSelection);
+    setFocusStyle(Q3Table::FollowStyle);
+    setSelectionMode(Q3Table::NoSelection);
     setShowGrid(false);
     horizontalHeader()->hide();
     setTopMargin(0);
     verticalHeader()->hide();
     setLeftMargin(0);
     setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
-    setBackgroundMode(PaletteBase);
-    setFocusPolicy(NoFocus);
+    setBackgroundMode(Qt::PaletteBase);
+    setFocusPolicy(Qt::NoFocus);
 
     currentRow = -1;
     currentCol = -1;
@@ -133,7 +134,7 @@ void LogTreeView::addRevision(const Cervisia::LogInfo& logInfo)
     // look whether we have revisions on this branch
     // shift them up
     int row=-1, col=-1;
-    QPtrListIterator<LogTreeItem> it(items);
+    Q3PtrListIterator<LogTreeItem> it(items);
     for (; it.current(); ++it)
     {
         if (branchrev == (it.current()->m_logInfo.m_revision).left(branchrev.length()))
@@ -145,7 +146,7 @@ void LogTreeView::addRevision(const Cervisia::LogInfo& logInfo)
             // Are we at the top of the widget?
             if (row == 0)
             {
-                QPtrListIterator<LogTreeItem> it2(items);
+                Q3PtrListIterator<LogTreeItem> it2(items);
                 for (; it2.current(); ++it2)
                     it2.current()->row++;
                 setNumRows(numRows()+1);
@@ -158,13 +159,13 @@ void LogTreeView::addRevision(const Cervisia::LogInfo& logInfo)
     {
         // Ok, so we must open a new branch
         // Let's find the branch point
-        QPtrListIterator<LogTreeItem> it3(items);
+        Q3PtrListIterator<LogTreeItem> it3(items);
         for (it3.toLast(); it3.current(); --it3)
         {
             if (branchpoint == it3.current()->m_logInfo.m_revision)
             {
                 // Move existing branches to the right
-                QPtrListIterator<LogTreeItem> it4(items);
+                Q3PtrListIterator<LogTreeItem> it4(items);
                 for (; it4.current(); ++it4)
                     if (it4.current()->col > it3.current()->col)
                     {
@@ -175,7 +176,7 @@ void LogTreeView::addRevision(const Cervisia::LogInfo& logInfo)
                 col = it3.current()->col+1;
                 if (row == -1)
                 {
-                    QPtrListIterator<LogTreeItem> it5(items);
+                    Q3PtrListIterator<LogTreeItem> it5(items);
                     for (; it5.current(); ++it5)
                         it5.current()->row++;
                     setNumRows(numRows()+1);
@@ -198,7 +199,7 @@ void LogTreeView::addRevision(const Cervisia::LogInfo& logInfo)
 #if 0
     cout << "Dump: " << endl;
     cout << "Rows: " << numRows() << "Cols: " << numCols() << endl;
-    QPtrListIterator<LogTreeItem> it5(items);
+    Q3PtrListIterator<LogTreeItem> it5(items);
     for (; it5.current(); ++it5)
     {
         cout << "Rev: "<< it5.current()->rev << endl;
@@ -213,12 +214,12 @@ void LogTreeView::addRevision(const Cervisia::LogInfo& logInfo)
 
 void LogTreeView::collectConnections()
 {
-    QPtrListIterator<LogTreeItem> it(items);
+    Q3PtrListIterator<LogTreeItem> it(items);
     for (; it.current(); ++it)
     {
         QString rev = it.current()->m_logInfo.m_revision;
 
-        QPtrListIterator<LogTreeItem> it2(items);
+        Q3PtrListIterator<LogTreeItem> it2(items);
         for (it2=it,++it2; it2.current(); ++it2)
             if (it2.current()->branchpoint == rev &&
                 it2.current()->firstonbranch)
@@ -234,7 +235,7 @@ void LogTreeView::collectConnections()
 
 void LogTreeView::setSelectedPair(QString selectionA, QString selectionB)
 {
-    QPtrListIterator<LogTreeItem> it(items);
+    Q3PtrListIterator<LogTreeItem> it(items);
     for(; it.current(); ++it)
     {
         bool oldstate = it.current()->selected;
@@ -259,7 +260,7 @@ QString LogTreeView::text(int row, int col) const
 {
     LogTreeItem* item = 0;
     
-    QPtrListIterator<LogTreeItem> it(items);
+    Q3PtrListIterator<LogTreeItem> it(items);
     for( ; it.current(); ++it )
     {
         if( it.current()->col == col && it.current()->row == row )
@@ -290,7 +291,7 @@ void LogTreeView::paintCell(QPainter *p, int row, int col, const QRect& cr,
     followed = false;
     item = 0;
 
-    QPtrListIterator<LogTreeItem> it(items);
+    Q3PtrListIterator<LogTreeItem> it(items);
     for(; it.current(); ++it)
     {
         int itcol = it.current()->col;
@@ -300,7 +301,7 @@ void LogTreeView::paintCell(QPainter *p, int row, int col, const QRect& cr,
         if (itrow == row && itcol == col)
             item = it.current();
     }
-    QPtrListIterator<LogTreeConnection> it2(connections);
+    Q3PtrListIterator<LogTreeConnection> it2(connections);
     for (; it2.current(); ++it2)
     {
         int itcol1 = it2.current()->start->col;
@@ -342,8 +343,8 @@ QSize LogTreeView::computeSize(const Cervisia::LogInfo& logInfo,
     const QString tags(logInfo.tagsToString(Cervisia::TagInfo::Branch | Cervisia::TagInfo::Tag,
                                             Cervisia::TagInfo::Branch));
 
-    const QSize r1 = fm.size(AlignCenter, logInfo.m_revision);
-    const QSize r3 = fm.size(AlignCenter, logInfo.m_author);
+    const QSize r1 = fm.size(Qt::AlignCenter, logInfo.m_revision);
+    const QSize r3 = fm.size(Qt::AlignCenter, logInfo.m_author);
 
     if (authorHeight)
         *authorHeight = r3.height();
@@ -353,7 +354,7 @@ QSize LogTreeView::computeSize(const Cervisia::LogInfo& logInfo,
 
     if (!tags.isEmpty())
     {
-        const QSize r2 = fm.size(AlignCenter, tags);
+        const QSize r2 = fm.size(Qt::AlignCenter, tags);
         infoWidth = kMax(infoWidth, r2.width());
         infoHeight += r2.height() + INSPACE;
         if (tagsHeight)
@@ -409,7 +410,7 @@ void LogTreeView::paintRevisionCell(QPainter *p,
 
     rect.setY(rect.y() + INSPACE);
 
-    p->drawText(rect, AlignHCenter, logInfo.m_author);
+    p->drawText(rect, Qt::AlignHCenter, logInfo.m_author);
     rect.setY(rect.y() + authorHeight + INSPACE);
 
     const QString tags(logInfo.tagsToString(Cervisia::TagInfo::Branch | Cervisia::TagInfo::Tag,
@@ -421,34 +422,34 @@ void LogTreeView::paintRevisionCell(QPainter *p,
         underline.setUnderline(true);
 
         p->setFont(underline);
-        p->drawText(rect, AlignHCenter, tags);
+        p->drawText(rect, Qt::AlignHCenter, tags);
         p->setFont(font);
 
         rect.setY(rect.y() + tagsHeight + INSPACE);
     }
 
-    p->drawText(rect, AlignHCenter, logInfo.m_revision);
+    p->drawText(rect, Qt::AlignHCenter, logInfo.m_revision);
 }
 
 
 void LogTreeView::contentsMousePressEvent(QMouseEvent *e)
 {
-    if ( e->button() == MidButton ||
-         e->button() == LeftButton)
+    if ( e->button() == Qt::MidButton ||
+         e->button() == Qt::LeftButton)
     {
         int row = rowAt( e->pos().y() );
         int col = columnAt( e->pos().x() );
 
-        QPtrListIterator<LogTreeItem> it(items);
+        Q3PtrListIterator<LogTreeItem> it(items);
         for(; it.current(); ++it)
             if (it.current()->row == row
                 && it.current()->col == col)
             {
                 // Change selection for revision B if the middle mouse button or
                 // the left mouse button with the control key was pressed
-                bool changeRevB = (e->button() == MidButton) ||
-                                  (e->button() == LeftButton &&
-                                   e->state() & ControlButton);
+                bool changeRevB = (e->button() == Qt::MidButton) ||
+                                  (e->button() == Qt::LeftButton &&
+                                   e->modifiers() & Qt::ControlModifier);
 
                 emit revisionClicked(it.current()->m_logInfo.m_revision, changeRevB);
                 break;
@@ -462,7 +463,7 @@ void LogTreeView::contentsMousePressEvent(QMouseEvent *e)
 void LogTreeView::recomputeCellSizes ()
 {
     // Compute maximum for each column and row
-    for (QPtrListIterator<LogTreeItem> it(items); it.current(); ++it)
+    for (Q3PtrListIterator<LogTreeItem> it(items); it.current(); ++it)
     {
         const LogTreeItem *item = it.current();
 

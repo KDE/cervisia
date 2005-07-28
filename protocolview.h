@@ -22,27 +22,29 @@
 #ifndef PROTOCOLVIEW_H
 #define PROTOCOLVIEW_H
 
-#include <qtextedit.h>
+#include <q3textedit.h>
+//Added by qt3to4:
+#include <Q3PopupMenu>
 #include <dcopobject.h>
 
 class QPoint;
-class QPopupMenu;
+class Q3PopupMenu;
 class CvsJob_stub;
 
 
-class ProtocolView : public QTextEdit, public DCOPObject
+class ProtocolView : public Q3TextEdit, public DCOPObject
 {
     K_DCOP
     Q_OBJECT
 
 public:
-    explicit ProtocolView(const QCString& appId, QWidget *parent=0, const char *name=0);
+    explicit ProtocolView(const DCOPCString& appId, QWidget *parent=0, const char *name=0);
     ~ProtocolView();
 
     bool startJob(bool isUpdateJob = false);
 
 protected:
-    virtual QPopupMenu* createPopupMenu(const QPoint &pos);
+    virtual Q3PopupMenu* createPopupMenu(const QPoint &pos);
 
 k_dcop:
     void slotReceivedOutput(QString buffer);

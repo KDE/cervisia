@@ -23,7 +23,7 @@
 
 #include <kdialogbase.h>
 
-class QTable;
+class Q3Table;
 class KConfig;
 class CvsService_stub;
 
@@ -38,7 +38,7 @@ public:
     bool parseWatchers(CvsService_stub* cvsService, const QStringList& files);
 
 private:
-    QTable*  table;
+    Q3Table*  table;
     KConfig& partConfig;
 };
 

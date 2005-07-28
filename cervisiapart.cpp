@@ -21,9 +21,12 @@
 #include <qlabel.h>
 #include <qmessagebox.h>
 #include <qpushbutton.h>
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
 #include <qtextstream.h>
 #include <qtooltip.h>
+//Added by qt3to4:
+#include <Q3StrList>
+#include <Q3ValueList>
 #include <kaboutdata.h>
 #include <kaction.h>
 #include <kapplication.h>
@@ -109,7 +112,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
 
     // start the cvs DCOP service
     QString error;
-    QCString appId;
+    QByteArray appId;
     if( KApplication::startServiceByDesktopName("cvsservice", QStringList(), &error, &appId) )
     {
         KMessageBox::sorry(0, i18n("Starting cvsservice failed with message: ") +
@@ -128,22 +131,22 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     // an explaination
     if( cvsService )
     {
-        Orientation o = splitHorz ? QSplitter::Vertical
-                                  : QSplitter::Horizontal;
+        Qt::Orientation o = splitHorz ? Qt::Vertical
+                                  : Qt::Horizontal;
         splitter = new QSplitter(o, parentWidget, widgetName);
         // avoid PartManager's warning that Part's window can't handle focus
-        splitter->setFocusPolicy( QWidget::StrongFocus );
+        splitter->setFocusPolicy( Qt::StrongFocus );
 
         update = new UpdateView(*config(), splitter);
-        update->setFocusPolicy( QWidget::StrongFocus );
+        update->setFocusPolicy( Qt::StrongFocus );
         update->setFocus();
-        connect( update, SIGNAL(contextMenu(KListView*, QListViewItem*, const QPoint&)),
-                 this, SLOT(popupRequested(KListView*, QListViewItem*, const QPoint&)) );
+        connect( update, SIGNAL(contextMenu(KListView*, Q3ListViewItem*, const QPoint&)),
+                 this, SLOT(popupRequested(KListView*, Q3ListViewItem*, const QPoint&)) );
         connect( update, SIGNAL(fileOpened(QString)),
                  this, SLOT(openFile(QString)) );
 
         protocol = new ProtocolView(appId, splitter);
-        protocol->setFocusPolicy( QWidget::StrongFocus );
+        protocol->setFocusPolicy( Qt::StrongFocus );
 
         setWidget(splitter);
     }
@@ -228,7 +231,7 @@ void CervisiaPart::setupActions()
     //
     // File Menu
     //
-    action = new KAction( i18n("O&pen Sandbox..."), "fileopen", CTRL+Key_O,
+    action = new KAction( i18n("O&pen Sandbox..."), "fileopen", Qt::CTRL + Qt::Key_O,
                           this, SLOT( slotOpenSandbox() ),
                           actionCollection(), "file_open" );
     hint = i18n("Opens a CVS working folder in the main window");
@@ -246,14 +249,14 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Update"), "vcs_update", CTRL+Key_U,
+    action = new KAction( i18n("&Update"), "vcs_update", Qt::CTRL + Qt::Key_U,
                           this, SLOT( slotUpdate() ),
                           actionCollection(), "file_update" );
     hint = i18n("Updates (cvs update) the selected files and folders");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Status"), "vcs_status", Key_F5,
+    action = new KAction( i18n("&Status"), "vcs_status", Qt::Key_F5,
                           this, SLOT( slotStatus() ),
                           actionCollection(), "file_status" );
     hint = i18n("Updates the status (cvs -n update) of the selected files and folders");
@@ -274,14 +277,14 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Commit..."), "vcs_commit", Key_NumberSign,
+    action = new KAction( i18n("&Commit..."), "vcs_commit", Qt::Key_NumberSign,
                           this, SLOT( slotCommit() ),
                           actionCollection(), "file_commit" );
     hint = i18n("Commits the selected files");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Add to Repository..."), "vcs_add", Key_Insert,
+    action = new KAction( i18n("&Add to Repository..."), "vcs_add", Qt::Key_Insert,
                           this, SLOT( slotAdd() ),
                           actionCollection(), "file_add" );
     hint = i18n("Adds (cvs add) the selected files to the repository");
@@ -295,7 +298,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Remove From Repository..."), "vcs_remove", Key_Delete,
+    action = new KAction( i18n("&Remove From Repository..."), "vcs_remove", Qt::Key_Delete,
                           this, SLOT( slotRemove() ),
                           actionCollection(), "file_remove" );
     hint = i18n("Removes (cvs remove) the selected files from the repository");
@@ -317,7 +320,7 @@ void CervisiaPart::setupActions()
     //
     // View Menu
     //
-    action = new KAction( i18n("Stop"), "stop", Key_Escape,
+    action = new KAction( i18n("Stop"), "stop", Qt::Key_Escape,
                           protocol, SLOT(cancelJob()),
                           actionCollection(), "stop_job" );
     action->setEnabled( false );
@@ -326,7 +329,7 @@ void CervisiaPart::setupActions()
     action->setWhatsThis( hint );
 
 
-    action = new KAction( i18n("Browse &Log..."), CTRL+Key_L,
+    action = new KAction( i18n("Browse &Log..."), Qt::CTRL + Qt::Key_L,
                           this, SLOT(slotBrowseLog()),
                           actionCollection(), "view_log" );
     hint = i18n("Shows the revision tree of the selected file");
@@ -338,21 +341,21 @@ void CervisiaPart::setupActions()
                           this, SLOT(slotBrowseMultiLog()),
                           actionCollection() );
 #endif
-    action = new KAction( i18n("&Annotate..."), CTRL+Key_A,
+    action = new KAction( i18n("&Annotate..."), Qt::CTRL + Qt::Key_A,
                           this, SLOT(slotAnnotate()),
                           actionCollection(), "view_annotate" );
     hint = i18n("Shows a blame-annotated view of the selected file");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Difference to Repository (BASE)..."), "vcs_diff", CTRL+Key_D,
+    action = new KAction( i18n("&Difference to Repository (BASE)..."), "vcs_diff", Qt::CTRL + Qt::Key_D,
                           this, SLOT(slotDiffBase()),
                           actionCollection(), "view_diff_base" );
     hint = i18n("Shows the differences of the selected file to the checked out version (tag BASE)");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("Difference to Repository (HEAD)..."), "vcs_diff", CTRL+Key_H,
+    action = new KAction( i18n("Difference to Repository (HEAD)..."), "vcs_diff", Qt::CTRL + Qt::Key_H,
                           this, SLOT(slotDiffHead()),
                           actionCollection(), "view_diff_head" );
     hint = i18n("Shows the differences of the selected file to the newest version in the repository (tag HEAD)");
@@ -629,7 +632,7 @@ void CervisiaPart::setupActions()
 }
 
 
-void CervisiaPart::popupRequested(KListView*, QListViewItem* item, const QPoint& p)
+void CervisiaPart::popupRequested(KListView*, Q3ListViewItem* item, const QPoint& p)
 {
     QString xmlName = "context_popup";
 
@@ -640,7 +643,7 @@ void CervisiaPart::popupRequested(KListView*, QListViewItem* item, const QPoint&
         action->setChecked(item->isOpen());
     }
 
-    if( QPopupMenu* popup = static_cast<QPopupMenu*>(hostContainer(xmlName)) )
+    if( Q3PopupMenu* popup = static_cast<Q3PopupMenu*>(hostContainer(xmlName)) )
     {
         if( isFileItem(item) )
         {
@@ -1116,7 +1119,7 @@ void CervisiaPart::slotBrowseLog()
 #if 0
 void CervisiaPart::slotBrowseMultiLog()
 {
-    QStrList list = update->multipleSelection();
+    Q3StrList list = update->multipleSelection();
     if (!list.isEmpty())
     {
         // Non-modal dialog
@@ -1339,7 +1342,7 @@ void CervisiaPart::slotMakePatch()
         return;
 
     QFile f(fileName);
-    if( !f.open(IO_WriteOnly) )
+    if( !f.open(QIODevice::WriteOnly) )
     {
         KMessageBox::sorry(widget(),
                            i18n("Could not open file for writing."),
@@ -1616,8 +1619,8 @@ void CervisiaPart::slotConfigure()
     conf->setGroup("LookAndFeel");
     bool splitHorz = conf->readBoolEntry("SplitHorizontally",true);
     splitter->setOrientation( splitHorz ?
-                              QSplitter::Vertical :
-                              QSplitter::Horizontal);
+                              Qt::Vertical :
+                              Qt::Horizontal);
 }
 
 void CervisiaPart::slotHelp()
@@ -1843,7 +1846,7 @@ void CervisiaPart::readSettings()
     int splitterpos2 = config->readNumEntry("Splitter Pos 2", 0);
     if (splitterpos1)
     {
-        QValueList<int> sizes;
+        Q3ValueList<int> sizes;
         sizes << splitterpos1;
         sizes << splitterpos2;
         splitter->setSizes(sizes);
@@ -1868,7 +1871,7 @@ void CervisiaPart::writeSettings()
     config->writeEntry("Hide Removed Files", opt_hideRemoved);
     config->writeEntry("Hide Non CVS Files", opt_hideNotInCVS);
     config->writeEntry("Hide Empty Directories", opt_hideEmptyDirectories);
-    QValueList<int> sizes = splitter->sizes();
+    Q3ValueList<int> sizes = splitter->sizes();
     config->writeEntry("Splitter Pos 1", sizes[0]);
     config->writeEntry("Splitter Pos 2", sizes[1]);
 

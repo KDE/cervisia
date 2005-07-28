@@ -23,6 +23,8 @@
 #include <qdir.h>
 #include <qfile.h>
 #include <qstring.h>
+//Added by qt3to4:
+#include <QTextStream>
 
 #include <kapplication.h>
 #include <kconfig.h>
@@ -148,7 +150,7 @@ bool Repository::setWorkingCopy(const QString& dirName)
 
     // determine path to the repository
     QFile rootFile(path + "/CVS/Root");
-    if( rootFile.open(IO_ReadOnly) )
+    if( rootFile.open(QIODevice::ReadOnly) )
     {
         QTextStream stream(&rootFile);
         d->location = stream.readLine();

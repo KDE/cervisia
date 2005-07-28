@@ -23,6 +23,9 @@
 
 #include <qlayout.h>
 #include <qpushbutton.h>
+//Added by qt3to4:
+#include <QHBoxLayout>
+#include <QBoxLayout>
 #include <kbuttonbox.h>
 #include <kconfig.h>
 #include <klistview.h>
@@ -174,12 +177,12 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, CvsService_stub* cvsService,
     m_repoList->addColumn(i18n("Status"));
     m_repoList->setFocus();
 
-    connect(m_repoList, SIGNAL(doubleClicked(QListViewItem*)),
-            this, SLOT(slotDoubleClicked(QListViewItem*)));
+    connect(m_repoList, SIGNAL(doubleClicked(Q3ListViewItem*)),
+            this, SLOT(slotDoubleClicked(Q3ListViewItem*)));
     connect(m_repoList, SIGNAL(selectionChanged()),
             this,       SLOT(slotSelectionChanged()));
 
-    KButtonBox* actionbox = new KButtonBox(mainWidget, KButtonBox::Vertical);
+    KButtonBox* actionbox = new KButtonBox(mainWidget, Qt::Vertical);
     QPushButton* addbutton = actionbox->addButton(i18n("&Add..."));
     m_modifyButton = actionbox->addButton(i18n("&Modify..."));
     m_removeButton = actionbox->addButton(i18n("&Remove"));
@@ -210,7 +213,7 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, CvsService_stub* cvsService,
     readCvsPassFile();
     readConfigFile();
 
-    if (QListViewItem* item = m_repoList->firstChild())
+    if (Q3ListViewItem* item = m_repoList->firstChild())
     {
         m_repoList->setCurrentItem(item);
         m_repoList->setSelected(item, true);
@@ -223,14 +226,14 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, CvsService_stub* cvsService,
 
     setHelp("accessing-repository");
 
-    setWFlags(Qt::WDestructiveClose | getWFlags());
+    setAttribute(Qt::WA_DeleteOnClose, true);
 
     QSize size = configDialogSize(m_partConfig, "RepositoryDialog");
     resize(size);
 
     // without this restoreLayout() can't change the column widths
     for (int i = 0; i < m_repoList->columns(); ++i)
-        m_repoList->setColumnWidthMode(i, QListView::Manual);
+        m_repoList->setColumnWidthMode(i, Q3ListView::Manual);
 
     m_repoList->restoreLayout(&m_partConfig, QString::fromLatin1("RepositoryListView"));
 }
@@ -260,7 +263,7 @@ void RepositoryDialog::readConfigFile()
     QStringList list = Repositories::readConfigFile();
 
     // Sort out all list elements which are already in the list view
-    QListViewItem* item = m_repoList->firstChild();
+    Q3ListViewItem* item = m_repoList->firstChild();
     for( ; item; item = item->nextSibling() )
         list.remove(item->text(0));
 
@@ -298,7 +301,7 @@ void RepositoryDialog::readConfigFile()
 void RepositoryDialog::slotOk()
 {
     // Make list of repositories
-    QListViewItem* item;
+    Q3ListViewItem* item;
     QStringList list;
     for( item = m_repoList->firstChild(); item; item = item->nextSibling() )
         list.append(item->text(0));
@@ -334,7 +337,7 @@ void RepositoryDialog::slotAddClicked()
         int compression   = dlg.compression();
         bool retrieveFile = dlg.retrieveCvsignoreFile();
 
-        QListViewItem* item = m_repoList->firstChild();
+        Q3ListViewItem* item = m_repoList->firstChild();
         for( ; item; item = item->nextSibling() )
             if( item->text(0) == repo )
             {
@@ -373,7 +376,7 @@ void RepositoryDialog::slotRemoveClicked()
 }
 
 
-void RepositoryDialog::slotDoubleClicked(QListViewItem* item)
+void RepositoryDialog::slotDoubleClicked(Q3ListViewItem* item)
 {
     if( !item )
         return;

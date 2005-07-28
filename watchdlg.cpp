@@ -20,11 +20,15 @@
 
 #include "watchdlg.h"
 
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qradiobutton.h>
+//Added by qt3to4:
+#include <QVBoxLayout>
+#include <QGridLayout>
+#include <QBoxLayout>
 #include <klocale.h>
 
 
@@ -68,7 +72,7 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent, const char *name)
     uneditbox->setEnabled(false);
     eventslayout->addWidget(uneditbox, 2, 1);
 
-    QButtonGroup* group = new QButtonGroup(mainWidget);
+    Q3ButtonGroup* group = new Q3ButtonGroup(mainWidget);
     group->hide();
     group->insert(all_button);
     group->insert(only_button);

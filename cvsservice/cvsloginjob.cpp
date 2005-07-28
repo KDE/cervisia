@@ -55,7 +55,7 @@ void CvsLoginJob::setServer(const QString& server)
 }
 
 
-void CvsLoginJob::setCvsClient(const QCString& cvsClient)
+void CvsLoginJob::setCvsClient(const QByteArray& cvsClient)
 {
     m_CvsClient = cvsClient;
 
@@ -64,7 +64,7 @@ void CvsLoginJob::setCvsClient(const QCString& cvsClient)
 }
 
 
-void CvsLoginJob::setRepository(const QCString& repository)
+void CvsLoginJob::setRepository(const QByteArray& repository)
 {
     m_Arguments += "-d";
     m_Arguments += repository;
@@ -74,7 +74,7 @@ void CvsLoginJob::setRepository(const QCString& repository)
 
 bool CvsLoginJob::execute()
 {
-    static QCString repository;
+    static Q3CString repository;
 
     int res = m_Proc->exec(m_CvsClient, m_Arguments);
     if( res < 0 )
@@ -86,7 +86,7 @@ bool CvsLoginJob::execute()
     bool result = false;
     while( true )
     {
-        QCString line = m_Proc->readLine();
+        Q3CString line = m_Proc->readLine();
         if( line.isNull() )
         {
             return result;
@@ -112,9 +112,10 @@ bool CvsLoginJob::execute()
             // TODO: We really should display the repository name. Unfortunately
             //       the dialog doesn't show part of the repository name, because
             //       it's too long. :-(
-            QCString password;
-            int res = KPasswordDialog::getPassword(password, i18n("Please type "
-                        "in your password for the repository below."));
+#warning fix me
+            Q3CString password;
+            int res = 0; //KPasswordDialog::getPassword(password, i18n("Please type "
+                         //"in your password for the repository below."));
             if( res == KPasswordDialog::Accepted )
             {
                 // send password to process

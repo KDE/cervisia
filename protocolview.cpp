@@ -22,7 +22,8 @@
 #include "protocolview.h"
 
 #include <qdir.h>
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
+#include <qtextdocument.h>
 #include <dcopref.h>
 #include <kconfig.h>
 #include <klocale.h>
@@ -32,8 +33,8 @@
 #include "cvsjob_stub.h"
 
 
-ProtocolView::ProtocolView(const QCString& appId, QWidget *parent, const char *name)
-    : QTextEdit(parent, name)
+ProtocolView::ProtocolView(const DCOPCString& appId, QWidget *parent, const char *name)
+    : Q3TextEdit(parent, name)
     , job(0)
     , m_isUpdateJob(false)
 {
@@ -91,9 +92,9 @@ bool ProtocolView::startJob(bool isUpdateJob)
 }
 
 
-QPopupMenu* ProtocolView::createPopupMenu(const QPoint &pos)
+Q3PopupMenu* ProtocolView::createPopupMenu(const QPoint &pos)
 {
-    QPopupMenu* menu = QTextEdit::createPopupMenu(pos);
+    Q3PopupMenu* menu = Q3TextEdit::createPopupMenu(pos);
 
     int id = menu->insertItem(i18n("Clear"), this, SLOT( clear() ), 0, -1, 0);
 
@@ -159,7 +160,7 @@ void ProtocolView::appendLine(const QString &line)
 {
     // Escape output line, so that html tags in commit
     // messages aren't interpreted
-    const QString escapedLine = QStyleSheet::escape(line);
+    const QString escapedLine = Qt::escape(line);
 
     // When we don't get the output from an update job then
     // just add it to the text edit.

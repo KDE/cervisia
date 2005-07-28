@@ -40,10 +40,10 @@ QStringList Repositories::readCvsPassFile()
     QStringList list;
     
     QFile f(QDir::homeDirPath() + "/.cvspass");
-    if (f.open(IO_ReadOnly))
+    if (f.open(QIODevice::ReadOnly))
         {
             QTextStream stream(&f);
-	    while (!stream.eof())
+	    while (!stream.atEnd())
 		{
 		    int pos;
 		    QString line = stream.readLine();

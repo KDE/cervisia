@@ -23,7 +23,7 @@
 
 
 #include <qdatetime.h>
-#include <qlistview.h>
+#include <q3listview.h>
 #include <qmap.h>
 
 #include "entry.h"
@@ -38,14 +38,14 @@ class Visitor;
 UpdateDirItem* findOrCreateDirItem(const QString&, UpdateDirItem*);
 
 
-class UpdateItem : public QListViewItem
+class UpdateItem : public Q3ListViewItem
 {
 public:
 
     UpdateItem(UpdateView* parent, const Cervisia::Entry& entry)
-        : QListViewItem(parent), m_entry(entry) {}
+        : Q3ListViewItem(parent), m_entry(entry) {}
     UpdateItem(UpdateItem* parent, const Cervisia::Entry& entry)
-        : QListViewItem(parent), m_entry(entry) {}
+        : Q3ListViewItem(parent), m_entry(entry) {}
 
     const Cervisia::Entry& entry() const { return m_entry; }
 
@@ -83,7 +83,7 @@ public:
 
     bool wasScanned() const { return m_opened; }
 
-    virtual int compare(QListViewItem* i, int col, bool) const;
+    virtual int compare(Q3ListViewItem* i, int col, bool) const;
     virtual QString text(int col) const;
     virtual void setOpen(bool o);
     virtual int rtti() const { return RTTI; }
@@ -126,7 +126,7 @@ public:
     bool undefinedState() const
     { return m_undefined; }
 
-    virtual int compare(QListViewItem* i, int col, bool) const;
+    virtual int compare(Q3ListViewItem* i, int col, bool) const;
     virtual QString text(int col) const;
     virtual void paintCell(QPainter *p, const QColorGroup &cg,
                            int col, int width, int align);
@@ -154,13 +154,13 @@ private:
 };
 
 
-inline bool isDirItem(const QListViewItem* item)
+inline bool isDirItem(const Q3ListViewItem* item)
 {
     return item && item->rtti() == UpdateDirItem::RTTI;
 }
 
 
-inline bool isFileItem(const QListViewItem* item)
+inline bool isFileItem(const Q3ListViewItem* item)
 {
     return item && item->rtti() == UpdateFileItem::RTTI;
 }

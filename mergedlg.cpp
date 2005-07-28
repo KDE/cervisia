@@ -20,13 +20,18 @@
 
 #include "mergedlg.h"
 
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qcombobox.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
 #include <qradiobutton.h>
 #include <qstyle.h>
+//Added by qt3to4:
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QGridLayout>
+#include <QBoxLayout>
 #include <klocale.h>
 
 #include "misc.h"
@@ -40,7 +45,7 @@ MergeDialog::MergeDialog(CvsService_stub* service,
       cvsService(service)
 {
     int const iComboBoxMinWidth(30 * fontMetrics().width('0'));
-    int const iWidgetIndent(style().pixelMetric(QStyle::PM_ExclusiveIndicatorWidth, 0) + 6);
+    int const iWidgetIndent(style()->pixelMetric(QStyle::PM_ExclusiveIndicatorWidth) + 6);
 
     QFrame* mainWidget = makeMainWidget();
 
@@ -89,7 +94,7 @@ MergeDialog::MergeDialog(CvsService_stub* service,
     tagsedit_layout->addWidget(tag2_combo, 1, 2);
     tagsedit_layout->addMultiCellWidget(tag_button, 0, 1, 3, 3);
     
-    QButtonGroup* group = new QButtonGroup(mainWidget);
+    Q3ButtonGroup* group = new Q3ButtonGroup(mainWidget);
     group->hide();
     group->insert(bybranch_button);
     group->insert(bytags_button);

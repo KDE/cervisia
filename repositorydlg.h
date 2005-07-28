@@ -25,7 +25,7 @@
 #include <kdialogbase.h>
 
 
-class QListViewItem;
+class Q3ListViewItem;
 class QPushButton;
 class KConfig;
 class KListView;
@@ -52,7 +52,7 @@ private slots:
     void slotAddClicked();
     void slotModifyClicked();
     void slotRemoveClicked();
-    void slotDoubleClicked(QListViewItem *item);
+    void slotDoubleClicked(Q3ListViewItem *item);
     void slotLoginClicked();
     void slotLogoutClicked();
     void slotSelectionChanged();

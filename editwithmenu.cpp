@@ -19,7 +19,7 @@
 #include "editwithmenu.h"
 using namespace Cervisia;
 
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
 #include <kdebug.h>
 #include <kiconloader.h>
 #include <kmimetype.h>
@@ -43,7 +43,7 @@ EditWithMenu::EditWithMenu(const KURL& url, QWidget* parent)
 
     if( !m_offers.isEmpty() )
     {
-        m_menu = new QPopupMenu();
+        m_menu = new Q3PopupMenu();
 
         KTrader::OfferList::ConstIterator it = m_offers.begin();
         for( int i = 0 ; it != m_offers.end(); ++it, ++i )
@@ -57,7 +57,7 @@ EditWithMenu::EditWithMenu(const KURL& url, QWidget* parent)
 }
 
 
-QPopupMenu* EditWithMenu::menu()
+Q3PopupMenu* EditWithMenu::menu()
 {
     return m_menu;
 }

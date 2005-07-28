@@ -22,14 +22,17 @@
 
 #include <qapplication.h>
 #include <qcheckbox.h>
-#include <qgrid.h>
-#include <qgroupbox.h>
+#include <q3grid.h>
+#include <q3groupbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qvbox.h>
-#include <qwidgetlist.h>
-#include <qhbuttongroup.h>
+#include <q3vbox.h>
+#include <qwidget.h>
+#include <q3buttongroup.h>
 #include <qradiobutton.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <QVBoxLayout>
 #include <kbuttonbox.h>
 #include <kcolorbutton.h>
 #include <kconfig.h>
@@ -204,17 +207,17 @@ void SettingsDialog::writeSettings()
     CervisiaSettings::setDiffDeleteColor(m_diffDeleteButton->color());
 
     // I'm not yet sure whether this is a hack or not :-)
-    QWidgetListIt it(*QApplication::allWidgets());
-    for (; it.current(); ++it)
-        {
-            QWidget *w = it.current();
-            if (w->inherits("ProtocolView"))
-                w->setFont(m_protocolFontBox->font());
-            if (w->inherits("AnnotateView"))
-                w->setFont(m_annotateFontBox->font());
-            if (w->inherits("DiffView"))
-                w->setFont(m_diffFontBox->font());
-        }
+#warning would QApplication::topLevelWidgets be sufficient?
+    const QWidgetList& widgets = QApplication::allWidgets();
+    Q_FOREACH (QWidget* w, widgets)
+    {
+        if (w->inherits("ProtocolView"))
+            w->setFont(m_protocolFontBox->font());
+        if (w->inherits("AnnotateView"))
+            w->setFont(m_annotateFontBox->font());
+        if (w->inherits("DiffView"))
+            w->setFont(m_diffFontBox->font());
+    }
     config->sync();
 
     CervisiaSettings::writeConfig();
@@ -262,7 +265,7 @@ void SettingsDialog::addGeneralPage()
  */
 void SettingsDialog::addDiffPage()
 {
-    QGrid *diffPage = addGridPage(2, QGrid::Horizontal, i18n("Diff Viewer"),
+    Q3Grid *diffPage = addGridPage(2, Qt::Horizontal, i18n("Diff Viewer"),
                                   QString::null, LoadIcon("vcs_diff"));
 
     QLabel *contextlabel = new QLabel( i18n("&Number of context lines in diff dialog:"), diffPage );
@@ -293,7 +296,7 @@ void SettingsDialog::addDiffPage()
  */
 void SettingsDialog::addStatusPage()
 {
-    QVBox* statusPage = addVBoxPage(i18n("Status"), QString::null,
+    Q3VBox* statusPage = addVBoxPage(i18n("Status"), QString::null,
                                     LoadIcon("fork"));
 
     remotestatusbox = new QCheckBox(i18n("When opening a sandbox from a &remote repository,\n"
@@ -311,7 +314,7 @@ void SettingsDialog::addStatusPage()
  */
 void SettingsDialog::addAdvancedPage()
 {
-    QVBox* frame = addVBoxPage(i18n("Advanced"), QString::null,
+    Q3VBox* frame = addVBoxPage(i18n("Advanced"), QString::null,
                                LoadIcon("configure"));
 
     m_advancedPage = new AdvancedPage(frame);
@@ -325,10 +328,10 @@ void SettingsDialog::addAdvancedPage()
  */
 void SettingsDialog::addLookAndFeelPage()
 {
-    QVBox* lookPage = addVBoxPage(i18n("Appearance"), QString::null,
+    Q3VBox* lookPage = addVBoxPage(i18n("Appearance"), QString::null,
                                   LoadIcon("looknfeel"));
 
-    QGroupBox* fontGroupBox = new QGroupBox(4, Qt::Vertical, i18n("Fonts"),
+    Q3GroupBox* fontGroupBox = new Q3GroupBox(4, Qt::Vertical, i18n("Fonts"),
                                             lookPage);
     fontGroupBox->setInsideSpacing(KDialog::spacingHint());
 
@@ -341,7 +344,7 @@ void SettingsDialog::addLookAndFeelPage()
     m_changelogFontBox = new FontButton(i18n("Font for ChangeLog View..."),
                                         fontGroupBox);
 
-    QGroupBox* colorGroupBox = new QGroupBox(4, Qt::Horizontal,
+    Q3GroupBox* colorGroupBox = new Q3GroupBox(4, Qt::Horizontal,
                                              i18n("Colors"), lookPage);
     colorGroupBox->setColumns(4);
     colorGroupBox->setInsideSpacing(KDialog::spacingHint());

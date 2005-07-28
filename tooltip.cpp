@@ -22,7 +22,10 @@
 #include <kglobal.h>
 #include <kglobalsettings.h>
 
-#include <qsimplerichtext.h>
+#include <qapplication.h>
+#include <qevent.h>
+#include <q3simplerichtext.h>
+#include <qtooltip.h>
 
 
 namespace Cervisia
@@ -34,25 +37,38 @@ static QString truncateLines(const QString&, const QFont&, const QPoint&, const 
 
 
 ToolTip::ToolTip(QWidget* widget)
-    : QObject(widget), QToolTip(widget)
+    : QObject(widget)
 {
+    widget->installEventFilter(this);
 }
 
 
-void ToolTip::maybeTip(const QPoint& pos)
+bool ToolTip::eventFilter(QObject* watched, QEvent* event)
 {
-    QRect rect;
-    QString text;
-    emit queryToolTip(pos, rect, text);
-
-    if (rect.isValid() && !text.isEmpty())
+    if ((watched == parent()) && (event->type() == QEvent::ToolTip))
     {
-        text = truncateLines(text,
-                             font(),
-                             parentWidget()->mapToGlobal(pos),
-                             KGlobalSettings::desktopGeometry(parentWidget()));
-        tip(rect, text);
+        const QHelpEvent* helpEvent = static_cast<QHelpEvent*>(event);
+
+#warning remove rect, not needed with Qt4
+        QRect rect;
+        QString text;
+        emit queryToolTip(helpEvent->pos(), rect, text);
+
+        if (rect.isValid() && !text.isEmpty())
+        {
+            QWidget* parentWidget = static_cast<QWidget*>(parent());
+#warning which font should I use
+            text = truncateLines(text,
+                                 QApplication::font(),
+                                 helpEvent->globalPos(),
+                                 KGlobalSettings::desktopGeometry(parentWidget));
+            QToolTip::showText(helpEvent->globalPos(), text);
+        }
+
+        return true;
     }
+
+    return QObject::eventFilter(watched, event);
 }
 
 
@@ -66,7 +82,7 @@ QString truncateLines(const QString&      text,
     const QChar newLine('\n');
 
     const int lineSpacing(fm.lineSpacing());
-    const int numberOfLines(text.contains(newLine) + 1);
+    const int numberOfLines(text.count(newLine) + 1);
     const int maxNumberOfLines(size.height() / lineSpacing);
 
     if (numberOfLines <= maxNumberOfLines)
@@ -94,7 +110,7 @@ QString truncateLines(const QString& text,
                        - desktopGeometry.top() - 10);
 
     // calculate the tooltip's size
-    const QSimpleRichText layoutedText(text, font);
+    const Q3SimpleRichText layoutedText(text, font);
 
     // only if the tooltip's size is bigger in x- and y-direction the text must
     // be truncated otherwise the tip is moved to a position where it fits

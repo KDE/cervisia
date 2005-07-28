@@ -30,7 +30,7 @@ DirIgnoreList::DirIgnoreList(const QString& path)
 
 void DirIgnoreList::addEntry(const QString& entry)
 {
-    if (entry != QChar('!'))
+    if (entry != QLatin1String("!"))
     {
         m_stringMatcher.add(entry);
     }
