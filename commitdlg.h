@@ -1,6 +1,7 @@
 /* 
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
+ *  Copyright (c) 2003-2005 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +28,7 @@
 
 class QComboBox;
 class QCheckBox;
-class QListBox;
+class KListView;
 class KTextEdit;
 class KConfig;
 class CvsService_stub;
@@ -44,14 +45,15 @@ public:
     virtual ~CommitDialog();
 
     void setFileList(const QStringList &list);
+    QStringList fileList() const;
     void setLogMessage(const QString &msg);
     QString logMessage() const;
     void setLogHistory(const QStringList &list);
 
 private slots:
     void comboActivated(int);
-    void fileSelected(int);
-    void fileHighlighted(int);
+    void fileSelected(QListViewItem* item);
+    void fileHighlighted();
     void diffClicked();
     void useTemplateClicked();
 
@@ -61,7 +63,7 @@ private:
     void addTemplateText();
     void removeTemplateText();
 
-    QListBox *listbox;
+    KListView* m_fileList;
     KTextEdit *edit;
     QComboBox *combo;
     QStringList commits;

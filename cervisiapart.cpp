@@ -954,6 +954,11 @@ void CervisiaPart::slotCommit()
 
     if (dlg.exec())
     {
+        // get new list of files
+        list = dlg.fileList();
+        if( list.isEmpty() )
+            return;
+
         QString msg = dlg.logMessage();
         if( !recentCommits.contains( msg ) )
         {

@@ -1,7 +1,7 @@
 /* 
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2002-2005 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,8 @@
 #include <qfileinfo.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qlistbox.h>
+#include <qheader.h>
+#include <klistview.h>
 #include <ktextedit.h>
 #include <kconfig.h>
 #include <klocale.h>
@@ -49,11 +50,16 @@ CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service,
     QLabel *textlabel = new QLabel( i18n("Commit the following &files:"), mainWidget );
     layout->addWidget(textlabel);
 
-    listbox = new QListBox(mainWidget);
-    textlabel->setBuddy(listbox);
-    connect( listbox, SIGNAL(selected(int)), this, SLOT(fileSelected(int)));
-    connect( listbox, SIGNAL(highlighted(int)), this, SLOT(fileHighlighted(int)));
-    layout->addWidget(listbox, 5);
+    m_fileList = new KListView(mainWidget);
+    m_fileList->addColumn("");
+    m_fileList->setFullWidth(true);
+    m_fileList->header()->hide();
+    textlabel->setBuddy(m_fileList);
+    connect( m_fileList, SIGNAL(doubleClicked(QListViewItem*)),
+             this, SLOT(fileSelected(QListViewItem*)));
+    connect( m_fileList, SIGNAL(selectionChanged()),
+             this, SLOT(fileHighlighted()) );
+    layout->addWidget(m_fileList, 5);
 
     QLabel *archivelabel = new QLabel(i18n("Older &messages:"), mainWidget);
     layout->addWidget(archivelabel);
@@ -104,15 +110,32 @@ CommitDialog::~CommitDialog()
 
 void CommitDialog::setFileList(const QStringList &list)
 {
-    listbox->insertStringList(list);
+    QString currentDirName = QFileInfo(QChar('.')).absFilePath();
 
-    // the dot for the root directory is hard to see, so
-    // we convert it to the absolut path
-    if (const QListBoxItem* item = listbox->findItem(QChar('.'), Qt::ExactMatch))
+    QStringList::ConstIterator it = list.begin();
+    for( ; it != list.end(); ++it )
     {
-        listbox->changeItem(QFileInfo(QChar('.')).absFilePath(),
-                            listbox->index(item));
+        // the dot for the root directory is hard to see, so
+        // we convert it to the absolut path
+        QString text = (*it != "." ? *it : currentDirName);
+
+        QCheckListItem* item = new QCheckListItem(m_fileList, text, QCheckListItem::CheckBox);
+        item->setOn(true);
     }
+}
+
+
+QStringList CommitDialog::fileList() const
+{
+    QStringList files;
+
+    QListViewItemIterator it(m_fileList, QListViewItemIterator::Checked);
+    for( ; it.current(); ++it )
+    {
+        files.append(it.current()->text(0));
+    }
+
+    return files;
 }
 
 
@@ -175,30 +198,30 @@ void CommitDialog::comboActivated(int index)
 }
 
 
-void CommitDialog::fileSelected(int index)
+void CommitDialog::fileSelected(QListViewItem* item)
 {
-    QListBoxItem *item = listbox->item(index);
-    if ( !item )
+    // double click on empty space?
+    if( !item )
         return;
 
-    showDiffDialog(item->text());
+    showDiffDialog(item->text(0));
 }
 
 
-void CommitDialog::fileHighlighted(int index)
+void CommitDialog::fileHighlighted()
 {
-    highlightedFile = index;
-    enableButton(User1, true);
+    bool isItemSelected = (m_fileList->selectedItem() != 0);
+    enableButton(User1, isItemSelected);
 }
 
 
 void CommitDialog::diffClicked()
 {
-    QListBoxItem *item = listbox->item(highlightedFile);
-    if ( !item )
+    QListViewItem* item = m_fileList->selectedItem();
+    if( !item )
         return;
 
-    showDiffDialog(item->text());
+    showDiffDialog(item->text(0));
 }
 
 
