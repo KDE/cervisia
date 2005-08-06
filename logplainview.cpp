@@ -19,9 +19,6 @@
 
 #include "logplainview.h"
 
-#include <qregexp.h>
-#include <qstringlist.h>
-#include <qtextdocument.h>
 #include <kfind.h>
 #include <kfinddialog.h>
 #include <klocale.h>
@@ -32,11 +29,9 @@ using namespace Cervisia;
 
 
 LogPlainView::LogPlainView(QWidget* parent, const char* name)
-    : KTextBrowser(parent, name)
+    : QTextBrowser(parent, name)
     , m_find(0)
-    , m_findPos(0)
 {
-    setNotifyClick(false);
 }
 
 
@@ -48,8 +43,6 @@ LogPlainView::~LogPlainView()
 
 void LogPlainView::addRevision(const LogInfo& logInfo)
 {
-    setTextFormat(Qt::RichText);
-
     // assemble revision information lines
     QString logEntry;
 
@@ -64,44 +57,28 @@ void LogPlainView::addRevision(const LogInfo& logInfo)
     logEntry += "<i>" +
                 i18n("date: %1; author: %2").arg(Qt::escape(logInfo.dateTimeToString()))
                                             .arg(Qt::escape(logInfo.m_author)) +
-                "</i>";
+                "</i><br><br>";
 
-    append(logEntry);
+    insertHtml(logEntry);
 
-    setTextFormat(Qt::PlainText);
+    const QLatin1String lineBreak("<br>");
 
-    const QLatin1String newline("\n");
-
-    // split comment in separate lines
-    QStringList lines = QStringList::split(newline, logInfo.m_comment, true);
-
-    append(newline);
-    QStringList::Iterator it  = lines.begin();
-    QStringList::Iterator end = lines.end();
-    for( ; it != end; ++it )
-    {
-        append((*it).isEmpty() ? QString(newline) : *it);
-    }
-    append(newline);
-
-    setTextFormat(Qt::RichText);
+    insertPlainText(logInfo.m_comment);
+    insertHtml(lineBreak);
 
     for( LogInfo::TTagInfoSeq::const_iterator it = logInfo.m_tags.begin();
          it != logInfo.m_tags.end(); ++it )
     {
-        append("<i>" + Qt::escape((*it).toString()) + "</i>");
+        insertHtml("<br><i>" + Qt::escape((*it).toString()) + "</i>");
     }
 
     // add an empty line when we had tags or branches
     if( !logInfo.m_tags.empty() )
-    {
-        setTextFormat(Qt::PlainText);
-        append(newline);
-    }
+        insertHtml(lineBreak);
+    insertHtml(lineBreak);
 
     // add horizontal line
-    setTextFormat(Qt::RichText);
-    append("<hr>");
+    insertHtml(QLatin1String("<hr><br>"));
 }
 
 
@@ -114,11 +91,16 @@ void LogPlainView::searchText(int options, const QString& pattern)
     connect(m_find, SIGNAL(findNext()),
            this, SLOT(findNext()));
 
-    m_findPos = 0;
+    m_currentBlock = (m_find->options() & KFindDialog::FindBackwards)
+        ? document()->end().previous()
+        : document()->begin();
     if( options & KFindDialog::FromCursor )
     {
-        const QPoint pos(contentsX(), contentsY());
-        m_findPos = paragraphAt(pos);
+#warning maybe this can be improved
+        const QPoint pos(horizontalScrollBar()->value(), 0);
+        const QTextCursor cursor(cursorForPosition(pos));
+        if (!cursor.isNull())
+            m_currentBlock = cursor.block();
     }
 
     findNext();
@@ -127,40 +109,29 @@ void LogPlainView::searchText(int options, const QString& pattern)
 
 void LogPlainView::scrollToTop()
 {
-    setContentsPos(0, 0);
+    QTextCursor cursor(document());
+    cursor.movePosition(QTextCursor::Start);
+    setTextCursor(cursor);
 }
 
 
 void LogPlainView::findNext()
 {
-    static const QRegExp breakLineTag("<br[^>]*>");
-    static const QRegExp htmlTags("<[^>]*>");
-
     KFind::Result res = KFind::NoMatch;
 
-    while( res == KFind::NoMatch && m_findPos < paragraphs() && m_findPos >= 0 )
+    while( (res == KFind::NoMatch) && m_currentBlock.isValid() )
     {
         if( m_find->needData() )
-        {
-            QString richText = text(m_findPos);
-
-            // replace <br/> with '\n'
-            richText.replace(breakLineTag, "\n");
-
-            // remove html tags from text
-            richText.replace(htmlTags, "");
-
-            m_find->setData(richText);
-        }
+            m_find->setData(m_currentBlock.text());
 
         res = m_find->find();
 
         if( res == KFind::NoMatch )
         {
             if( m_find->options() & KFindDialog::FindBackwards )
-                --m_findPos;
+                m_currentBlock = m_currentBlock.previous();
             else
-                ++m_findPos;
+                m_currentBlock = m_currentBlock.next();
         }
     }
 
@@ -169,7 +140,9 @@ void LogPlainView::findNext()
     {
         if( m_find->shouldRestart() )
         {
-            m_findPos = 0;
+            m_currentBlock = (m_find->options() & KFindDialog::FindBackwards)
+                ? document()->end().previous()
+                : document()->begin();
             findNext();
         }
         else
@@ -184,12 +157,19 @@ void LogPlainView::findNext()
 void LogPlainView::searchHighlight(const QString& text, int index, int length)
 {
     Q_UNUSED(text);
-    setSelection(m_findPos, index, m_findPos, index + length);
+
+    const int position(m_currentBlock.position() + index);
+
+    QTextCursor cursor(document());
+    cursor.setPosition(position);
+    cursor.setPosition(position + length, QTextCursor::KeepAnchor);
+    setTextCursor(cursor);
 }
 
 
-void LogPlainView::setSource(const QString& name)
+void LogPlainView::setSource(const QUrl& url)
 {
+    const QString name(url.toString());
     if( name.isEmpty() )
         return;
 

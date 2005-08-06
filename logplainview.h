@@ -20,7 +20,7 @@
 #ifndef LOGPLAINVIEW_H
 #define LOGPLAINVIEW_H
 
-#include <ktextbrowser.h>
+#include <qtextbrowser.h>
 
 class KConfig;
 class KFind;
@@ -31,7 +31,7 @@ struct LogInfo;
 }
 
 
-class LogPlainView : public KTextBrowser
+class LogPlainView : public QTextBrowser
 {   
     Q_OBJECT
 
@@ -52,11 +52,11 @@ public slots:
     void searchHighlight(const QString& text, int index, int length);
 
 protected:                     
-    virtual void setSource(const QString& name);
+    virtual void setSource(const QUrl& url);
     
 private:
     KFind* m_find;
-    int    m_findPos;
+    QTextBlock m_currentBlock;
 };
 
 #endif
