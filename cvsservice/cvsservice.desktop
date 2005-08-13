@@ -59,6 +59,5 @@ Comment[sv]=DCOP-tjänst som tillhandahåller ett gränssnitt till CVS
 Comment[ta]=ஒரு cvsக்கு ஒரு இடைமுகத்தினை அளிக்கக்கூடிய DCOPசேவை
 Comment[tg]=Хизмати DCOP барои интерфейс бо cvs
 Comment[tr]= CVS'ye arayüz sağlayan bir DCOP Servisi
-Comment[uk]=Служба DCOP, яка надає інтерфейс до cvs
 Comment[xx]=xxA DCOP service that provides an interface to cvsxx
 Comment[zh_CN]=提供 CVS 接口的 DCOP 服务
