@@ -48,6 +48,7 @@ UpdateView::UpdateView(KConfig& partConfig, QWidget *parent, const char *name)
     setSelectionModeExt(Extended);
 
     addColumn(i18n("File Name"), 280);
+    addColumn(i18n("File Type"), 180);
     addColumn(i18n("Status"), 90);
     addColumn(i18n("Revision"), 70);
     addColumn(i18n("Tag/Date"), 90);
