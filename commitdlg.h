@@ -25,12 +25,11 @@
 #include <qstringlist.h>
 #include <kdialogbase.h>
 
-namespace Cervisia { class LogMessageEdit; }
 
 class QComboBox;
 class QCheckBox;
 class KListView;
-// class KTextEdit;
+class KTextEdit;
 class KConfig;
 class CvsService_stub;
 
@@ -65,8 +64,7 @@ private:
     void removeTemplateText();
 
     KListView* m_fileList;
-    Cervisia::LogMessageEdit* edit;
-//     KTextEdit *edit;
+    KTextEdit *edit;
     QComboBox *combo;
     QStringList commits;
     int current_index;

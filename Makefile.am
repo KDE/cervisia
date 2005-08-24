@@ -23,7 +23,7 @@ libcervisiapart_la_SOURCES = updateview.cpp protocolview.cpp protocolview.skel \
 		   addrepositorydlg.cpp addremovedlg.cpp watchersdlg.cpp \
 		   updateview_items.cpp updateview_visitors.cpp entry.cpp \
 		   entry_status.cpp stringmatcher.cpp cvsinitdlg.cpp ignorelistbase.cpp dirignorelist.cpp \
-		   globalignorelist.cpp editwithmenu.cpp logmessageedit.cpp
+		   globalignorelist.cpp editwithmenu.cpp
 libcervisiapart_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
 libcervisiapart_la_LIBADD = $(LIB_KFILE) $(LIB_KPARTS) $(LIB_KUTILS) \
 		   cvsservice/libcvsservice.la libcervisia.la
