@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *  Copyright (c) 2002-2005 Christian Loose <christian.loose@kdemail.net>
@@ -28,11 +28,11 @@
 #include <qlayout.h>
 #include <qheader.h>
 #include <klistview.h>
-#include <ktextedit.h>
 #include <kconfig.h>
 #include <klocale.h>
 
 #include "cvsservice_stub.h"
+#include "logmessageedit.h"
 #include "diffdlg.h"
 
 
@@ -74,7 +74,7 @@ CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service,
     QLabel *messagelabel = new QLabel(i18n("&Log message:"), mainWidget);
     layout->addWidget(messagelabel);
 
-    edit = new KTextEdit(mainWidget);
+    edit = new Cervisia::LogMessageEdit(mainWidget);
     messagelabel->setBuddy(edit);
     edit->setCheckSpellingEnabled(true);
     edit->setFocus();
@@ -119,6 +119,7 @@ void CommitDialog::setFileList(const QStringList &list)
         // we convert it to the absolut path
         QString text = (*it != "." ? *it : currentDirName);
 
+        edit->compObj()->addItem(text);
         QCheckListItem* item = new QCheckListItem(m_fileList, text, QCheckListItem::CheckBox);
         item->setOn(true);
     }
@@ -183,14 +184,14 @@ void CommitDialog::comboActivated(int index)
 {
     if (index == current_index)
         return;
-    
+
     if (index == 0) // Handle current text
         edit->setText(current_text);
     else
         {
             if (current_index == 0) // Store current text
                 current_text = edit->text();
-            
+
             // Show archived text
             edit->setText(commits[index-1]);
         }
