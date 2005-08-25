@@ -2,6 +2,7 @@
 Type=Service
 Encoding=UTF-8
 Name=CvsService
+Name[br]=Servij Cvs
 Name[bs]=CvsServis
 Name[ca]=Servei de CVS
 Name[cs]=CVS služba
