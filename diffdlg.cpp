@@ -100,10 +100,10 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool mod
     // avoids auto resize when the text is changed
     nofnlabel->setMinimumWidth(fontMetrics().width(i18n("%1 differences").arg(10000)));
 
-    backbutton = new QPushButton(QString::fromLatin1("&<<"), mainWidget);
+    backbutton = new QPushButton(QLatin1String("&<<"), mainWidget);
     connect( backbutton, SIGNAL(clicked()), SLOT(backClicked()) );
 
-    forwbutton = new QPushButton(QString::fromLatin1("&>>"), mainWidget);
+    forwbutton = new QPushButton(QLatin1String("&>>"), mainWidget);
     connect( forwbutton, SIGNAL(clicked()), SLOT(forwClicked()) );
 
     connect( this, SIGNAL(user1Clicked()), SLOT(saveAsClicked()) );

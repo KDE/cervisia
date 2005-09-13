@@ -262,14 +262,14 @@ QStringList splitLine(QString line, char delim)
 
 const QStringList fetchBranches(CvsService_stub* cvsService, QWidget* parent)
 {
-    return FetchBranchesAndTags(QString::fromLatin1("branch"), cvsService,
+    return FetchBranchesAndTags(QLatin1String("branch"), cvsService,
                                 parent);
 }
 
 
 const QStringList fetchTags(CvsService_stub* cvsService, QWidget* parent)
 {
-    return FetchBranchesAndTags(QString::fromLatin1("revision"), cvsService,
+    return FetchBranchesAndTags(QLatin1String("revision"), cvsService,
                                 parent);
 }
 

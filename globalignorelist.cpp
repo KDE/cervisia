@@ -81,7 +81,7 @@ void GlobalIgnoreList::addEntry(const QString& entry)
         // Bug #89215:
         // Make sure '.' and '..' are always in the ignore list, so
         // UpdateDirItem::maybeScanDir() doesn't loop endlessly.
-        addEntriesFromString(QString::fromLatin1(". .."));
+        addEntriesFromString(QLatin1String(". .."));
     }
 }
 
@@ -92,7 +92,7 @@ void GlobalIgnoreList::setup()
 .nse_depinfo #* .#* cvslog.* ,* CVS CVS.adm .del-* *.a *.olb *.o *.obj\
 *.so *.Z *~ *.old *.elc *.ln *.bak *.BAK *.orig *.rej *.exe _$* *$";
     
-    addEntriesFromString(QString::fromLatin1(ignorestr));
+    addEntriesFromString(QLatin1String(ignorestr));
     addEntriesFromString(QString::fromLocal8Bit(::getenv("CVSIGNORE")));
     addEntriesFromFile(QDir::homeDirPath() + "/.cvsignore");  
     

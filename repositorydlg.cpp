@@ -235,7 +235,7 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, CvsService_stub* cvsService,
     for (int i = 0; i < m_repoList->columns(); ++i)
         m_repoList->setColumnWidthMode(i, Q3ListView::Manual);
 
-    m_repoList->restoreLayout(&m_partConfig, QString::fromLatin1("RepositoryListView"));
+    m_repoList->restoreLayout(&m_partConfig, QLatin1String("RepositoryListView"));
 }
 
 
@@ -243,7 +243,7 @@ RepositoryDialog::~RepositoryDialog()
 {
     saveDialogSize(m_partConfig, "RepositoryDialog");
 
-    m_repoList->saveLayout(&m_partConfig, QString::fromLatin1("RepositoryListView"));
+    m_repoList->saveLayout(&m_partConfig, QLatin1String("RepositoryListView"));
 
     delete m_serviceConfig;
 }
@@ -278,7 +278,7 @@ void RepositoryDialog::readConfigFile()
         RepositoryListItem* ritem = static_cast<RepositoryListItem*>(item);
 
         // read entries from cvs DCOP service configuration
-        m_serviceConfig->setGroup(QString::fromLatin1("Repository-") +
+        m_serviceConfig->setGroup(QLatin1String("Repository-") +
                                   ritem->repository());
 
         kdDebug() << "(1) RepositoryDialog::readConfigFile(): repository = "
@@ -490,7 +490,7 @@ void RepositoryDialog::slotSelectionChanged()
 void RepositoryDialog::writeRepositoryData(RepositoryListItem* item)
 {
     // write entries to cvs DCOP service configuration
-    m_serviceConfig->setGroup(QString::fromLatin1("Repository-") +
+    m_serviceConfig->setGroup(QLatin1String("Repository-") +
                               item->repository());
 
     kdDebug() << "(1) RepositoryDialog::writeRepositoryData(): repository = "

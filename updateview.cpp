@@ -66,13 +66,13 @@ UpdateView::UpdateView(KConfig& partConfig, QWidget *parent, const char *name)
     for (int col = 0; col < columns(); ++col)
         setColumnWidthMode(col, Q3ListView::Manual);
 
-    restoreLayout(&m_partConfig, QString::fromLatin1("UpdateView"));
+    restoreLayout(&m_partConfig, QLatin1String("UpdateView"));
 }
 
 
 UpdateView::~UpdateView()
 {
-    saveLayout(&m_partConfig, QString::fromLatin1("UpdateView"));
+    saveLayout(&m_partConfig, QLatin1String("UpdateView"));
 }
 
 
@@ -577,8 +577,8 @@ void UpdateView::processUpdateLine(QString str)
         updateItem(str.mid(2), status, false);
     }
 
-    const QString removedFileStart(QString::fromLatin1("cvs server: "));
-    const QString removedFileEnd(QString::fromLatin1(" is no longer in the repository"));
+    const QString removedFileStart(QLatin1String("cvs server: "));
+    const QString removedFileEnd(QLatin1String(" is no longer in the repository"));
     if (str.startsWith(removedFileStart) && str.endsWith(removedFileEnd))
     {
     }

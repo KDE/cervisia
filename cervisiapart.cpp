@@ -1150,13 +1150,13 @@ void CervisiaPart::slotAnnotate()
 
 void CervisiaPart::slotDiffBase()
 {
-    showDiff(QString::fromLatin1("BASE"));
+    showDiff(QLatin1String("BASE"));
 }
 
 
 void CervisiaPart::slotDiffHead()
 {
-    showDiff(QString::fromLatin1("HEAD"));
+    showDiff(QLatin1String("HEAD"));
 }
 
 

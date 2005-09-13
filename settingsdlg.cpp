@@ -55,7 +55,7 @@ namespace
     inline QPixmap LoadIcon(const char* iconName)
     {
         KIconLoader* loader = KGlobal::instance()->iconLoader();
-        return loader->loadIcon(QString::fromLatin1(iconName), KIcon::NoGroup,
+        return loader->loadIcon(QLatin1String(iconName), KIcon::NoGroup,
                                  KIcon::SizeMedium);
     }
 }

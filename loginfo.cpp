@@ -41,7 +41,7 @@ QString TagInfo::toString(bool prefixWithType) const
     QString text;
     if (prefixWithType)
     {
-        text += typeToString() + QString::fromLatin1(": ");
+        text += typeToString() + QLatin1String(": ");
     }
     text += m_name;
 
@@ -71,32 +71,32 @@ QString TagInfo::typeToString() const
 
 QString LogInfo::createToolTipText(bool showTime) const
 {
-    QString text(QString::fromLatin1("<nobr><b>"));
+    QString text(QLatin1String("<nobr><b>"));
     text += Qt::escape(m_revision);
-    text += QString::fromLatin1("</b>&nbsp;&nbsp;");
+    text += QLatin1String("</b>&nbsp;&nbsp;");
     text += Qt::escape(m_author);
-    text += QString::fromLatin1("&nbsp;&nbsp;<b>");
+    text += QLatin1String("&nbsp;&nbsp;<b>");
     text += Qt::escape(dateTimeToString(showTime));
-    text += QString::fromLatin1("</b></nobr>");
+    text += QLatin1String("</b></nobr>");
 
     if (!m_comment.isEmpty())
     {
-        text += QString::fromLatin1("<pre>");
+        text += QLatin1String("<pre>");
         text += Qt::escape(m_comment);
-        text += QString::fromLatin1("</pre>");
+        text += QLatin1String("</pre>");
     }
 
     if (!m_tags.isEmpty())
     {
-        text += QString::fromLatin1("<i>");
+        text += QLatin1String("<i>");
         for (TTagInfoSeq::const_iterator it = m_tags.begin();
              it != m_tags.end(); ++it)
         {
             if (it != m_tags.begin() || m_comment.isEmpty())
-                text += QString::fromLatin1("<br>");
+                text += QLatin1String("<br>");
             text += Qt::escape((*it).toString());
         }
-        text += QString::fromLatin1("</i>");
+        text += QLatin1String("</i>");
     }
 
     return text;

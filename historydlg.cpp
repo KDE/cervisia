@@ -25,6 +25,7 @@
 #include <qlayout.h>
 #include <qpushbutton.h>
 #include <qregexp.h>
+#include <kpushbutton.h>
 //Added by qt3to4:
 #include <QVBoxLayout>
 #include <QGridLayout>
@@ -236,7 +237,7 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
     for (int i = 0; i < listview->columns(); ++i)
         listview->setColumnWidthMode(i, Q3ListView::Manual);
 
-    listview->restoreLayout(&partConfig, QString::fromLatin1("HistoryListView"));
+    listview->restoreLayout(&partConfig, QLatin1String("HistoryListView"));
 }
 
 
@@ -244,7 +245,7 @@ HistoryDialog::~HistoryDialog()
 {
     saveDialogSize(partConfig, "HistoryDialog");
 
-    listview->saveLayout(&partConfig, QString::fromLatin1("HistoryListView"));
+    listview->saveLayout(&partConfig, QLatin1String("HistoryListView"));
 }
 
 

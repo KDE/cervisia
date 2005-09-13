@@ -73,7 +73,7 @@ LogListViewItem::LogListViewItem(Q3ListView* list, const Cervisia::LogInfo& logI
 
     setText(Tags, logInfo.tagsToString(Cervisia::TagInfo::Tag,
                                        Cervisia::LogInfo::NoTagType,
-                                       QString::fromLatin1(", ")));
+                                       QLatin1String(", ")));
 }
 
 
@@ -135,13 +135,13 @@ LogListView::LogListView(KConfig& cfg, QWidget *parent, const char *name)
     for (int i = 0; i < columns(); ++i)
         setColumnWidthMode(i, Manual);
 
-    restoreLayout(&partConfig, QString::fromLatin1("LogList view"));
+    restoreLayout(&partConfig, QLatin1String("LogList view"));
 }
 
 
 LogListView::~LogListView()
 {
-    saveLayout(&partConfig, QString::fromLatin1("LogList view"));
+    saveLayout(&partConfig, QLatin1String("LogList view"));
 }
 
 

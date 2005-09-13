@@ -225,7 +225,7 @@ void Repository::Private::readConfig()
     //
     // In order to be able to read this group, we then have to manually add
     // the port number to it.
-    QString repositoryGroup = QString::fromLatin1("Repository-") + location;
+    QString repositoryGroup = QLatin1String("Repository-") + location;
     if( !config->hasGroup(repositoryGroup) )
     {
         // find the position of the first path separator
