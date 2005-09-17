@@ -23,7 +23,7 @@
 
 #include <qstringlist.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 #include <Q3CString>
 
 
@@ -70,7 +70,7 @@ private:
     /**
      * The patterns which are tested in match().
      */
-    Q3ValueList<Q3CString> m_generalPatterns;
+    QList<Q3CString> m_generalPatterns;
 };
 
 

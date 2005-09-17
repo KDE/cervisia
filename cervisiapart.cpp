@@ -26,7 +26,7 @@
 #include <qtooltip.h>
 //Added by qt3to4:
 #include <Q3StrList>
-#include <Q3ValueList>
+#include <QList>
 #include <kaboutdata.h>
 #include <kaction.h>
 #include <kapplication.h>
@@ -1846,7 +1846,7 @@ void CervisiaPart::readSettings()
     int splitterpos2 = config->readNumEntry("Splitter Pos 2", 0);
     if (splitterpos1)
     {
-        Q3ValueList<int> sizes;
+        QList<int> sizes;
         sizes << splitterpos1;
         sizes << splitterpos2;
         splitter->setSizes(sizes);
@@ -1871,7 +1871,7 @@ void CervisiaPart::writeSettings()
     config->writeEntry("Hide Removed Files", opt_hideRemoved);
     config->writeEntry("Hide Non CVS Files", opt_hideNotInCVS);
     config->writeEntry("Hide Empty Directories", opt_hideEmptyDirectories);
-    Q3ValueList<int> sizes = splitter->sizes();
+    QList<int> sizes = splitter->sizes();
     config->writeEntry("Splitter Pos 1", sizes[0]);
     config->writeEntry("Splitter Pos 2", sizes[1]);
 

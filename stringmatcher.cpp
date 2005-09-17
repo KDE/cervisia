@@ -23,7 +23,7 @@
 #define ap_fnmatch fnmatch
 #include <fnmatch.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 #include <Q3CString>
 
 
@@ -71,7 +71,7 @@ bool StringMatcher::match(const QString& text) const
         }
     }
 
-    for (Q3ValueList<Q3CString>::const_iterator it(m_generalPatterns.begin()),
+    for (QList<Q3CString>::const_iterator it(m_generalPatterns.begin()),
                                               itEnd(m_generalPatterns.end());
          it != itEnd; ++it)
     {
