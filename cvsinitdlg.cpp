@@ -88,7 +88,7 @@ void CvsInitDialog::dirButtonClicked()
 
 void CvsInitDialog::lineEditTextChanged(const QString& text)
 {
-    enableButton(Ok, !text.stripWhiteSpace().isEmpty());
+    enableButton(Ok, !text.trimmed().isEmpty());
 }
     
 #include "cvsinitdlg.moc"

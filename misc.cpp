@@ -248,7 +248,7 @@ QStringList splitLine(QString line, char delim)
     int pos;
     QStringList list;
 
-    line = line.simplifyWhiteSpace();
+    line = line.simplified();
     while ((pos = line.find(delim)) != -1)
     {
         list.append(line.left(pos));

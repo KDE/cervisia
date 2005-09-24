@@ -200,7 +200,7 @@ void UpdateView::unfoldSelectedFolders()
     // setup name of selected folder
     QString selectedItem = selection.first();
     if( selectedItem.contains('/') )
-        selectedItem.remove(0, selectedItem.findRev('/')+1);
+        selectedItem.remove(0, selectedItem.lastIndexOf('/')+1);
 
     // avoid flicker
     const bool updatesEnabled = isUpdatesEnabled();

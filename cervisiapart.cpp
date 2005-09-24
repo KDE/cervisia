@@ -1488,7 +1488,7 @@ void CervisiaPart::slotLastChange()
 
     int pos, lastnumber;
     bool ok;
-    if ( (pos = revA.findRev('.')) == -1
+    if ( (pos = revA.lastIndexOf('.')) == -1
          || (lastnumber=revA.right(revA.length()-pos-1).toUInt(&ok), !ok) )
     {
         KMessageBox::sorry(widget(),

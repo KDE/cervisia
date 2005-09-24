@@ -75,7 +75,7 @@ bool StringMatcher::match(const QString& text) const
                                               itEnd(m_generalPatterns.end());
          it != itEnd; ++it)
     {
-        if (::fnmatch(*it, text.local8Bit(), FNM_PATHNAME) == 0)
+        if (::fnmatch(*it, text.toLocal8Bit(), FNM_PATHNAME) == 0)
         {
             return true;
         }
@@ -100,22 +100,22 @@ void StringMatcher::add(const QString& pattern)
         break;
 
     case 1:
-        if (pattern.constref(0) == asterix)
+        if (pattern.at(0) == asterix)
         {
             m_endPatterns.push_back(pattern.right(lengthMinusOne));
         }
-        else if (pattern.constref(lengthMinusOne) == asterix)
+        else if (pattern.at(lengthMinusOne) == asterix)
         {
             m_startPatterns.push_back(pattern.left(lengthMinusOne));
         }
         else
         {
-            m_generalPatterns.push_back(pattern.local8Bit());
+            m_generalPatterns.push_back(pattern.toLocal8Bit());
         }
         break;
 
     default:
-        m_generalPatterns.push_back(pattern.local8Bit());
+        m_generalPatterns.push_back(pattern.toLocal8Bit());
         break;
     }
 }

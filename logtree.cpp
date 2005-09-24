@@ -106,8 +106,8 @@ void LogTreeView::addRevision(const Cervisia::LogInfo& logInfo)
 
     // find branch
     int pos1, pos2;
-    if ((pos2 = rev.findRev('.')) > 0 &&
-        (pos1 = rev.findRev('.', pos2-1)) > 0)
+    if ((pos2 = rev.lastIndexOf('.')) > 0 &&
+        (pos1 = rev.lastIndexOf('.', pos2-1)) > 0)
     {
         // e. g. for rev = 1.1.2.3 we have
         // branchrev = 1.1.2, branchpoint = 1.1

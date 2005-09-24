@@ -255,12 +255,12 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
                 if( line[0] == '\t' )
                 {
                     const QStringList strlist(splitLine(line, ':'));
-                    rev = strlist[1].simplifyWhiteSpace();
-                    const QString tag(strlist[0].simplifyWhiteSpace());
+                    rev = strlist[1].simplified();
+                    const QString tag(strlist[0].simplified());
                     QString branchpoint;
                     int pos1, pos2;
-                    if( (pos2 = rev.findRev('.')) > 0 &&
-                        (pos1 = rev.findRev('.', pos2-1)) > 0 &&
+                    if( (pos2 = rev.lastIndexOf('.')) > 0 &&
+                        (pos1 = rev.lastIndexOf('.', pos2-1)) > 0 &&
                         rev.mid(pos1+1, pos2-pos1-1) == "0" )
                     {
                         // For a branch tag 2.10.0.6, we want:
@@ -306,7 +306,7 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
                     QString time = dateTimeStr.section(' ', 1, 1);
                     logInfo.m_dateTime.setTime_t(KRFCDate::parseDateISO8601(date + 'T' + time));
 
-                    logInfo.m_author = strList[1].section(':', 1, 1).stripWhiteSpace();
+                    logInfo.m_author = strList[1].section(':', 1, 1).trimmed();
 
                     state = Branches;
                 }
@@ -335,8 +335,8 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
                     QString branchrev;
                     int pos1, pos2;
                     // 1.60.x.y => revision belongs to branch 1.60.0.x
-                    if( (pos2 = rev.findRev('.')) > 0 &&
-                        (pos1 = rev.findRev('.', pos2-1)) > 0 )
+                    if( (pos2 = rev.lastIndexOf('.')) > 0 &&
+                        (pos1 = rev.lastIndexOf('.', pos2-1)) > 0 )
                         branchrev = rev.left(pos2);
 
                     // Build Cervisia::TagInfo for logInfo

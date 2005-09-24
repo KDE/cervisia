@@ -54,7 +54,7 @@ CvsJob::CvsJob(unsigned jobNum)
     , d(new Private)
 {
     QString objId("CvsJob" + QString::number(jobNum));
-    setObjId(objId.local8Bit());
+    setObjId(objId.toLocal8Bit());
 }
 
 
@@ -63,7 +63,7 @@ CvsJob::CvsJob(const QString& objId)
     , DCOPObject()
     , d(new Private)
 {
-    setObjId(objId.local8Bit());
+    setObjId(objId.toLocal8Bit());
 }
 
 

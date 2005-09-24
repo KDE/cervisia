@@ -558,11 +558,11 @@ DCOPRef CvsService::import(const QString& workingDir, const QString& repository,
     if( importAsBinary )
         *d->singleCvsJob << "-kb";
         
-    const QString ignore = ignoreList.stripWhiteSpace();
+    const QString ignore = ignoreList.trimmed();
     if( !ignore.isEmpty() )
         *d->singleCvsJob << "-I" << KProcess::quote(ignore);
 
-    QString logMessage = comment.stripWhiteSpace();
+    QString logMessage = comment.trimmed();
     logMessage.prepend("\"");
     logMessage.append("\"");
     *d->singleCvsJob << "-m" << logMessage;
@@ -598,11 +598,11 @@ DCOPRef CvsService::import(const QString& workingDir, const QString& repository,
     if( useModificationTime )
         *d->singleCvsJob << "-d";
 
-    const QString ignore = ignoreList.stripWhiteSpace();
+    const QString ignore = ignoreList.trimmed();
     if( !ignore.isEmpty() )
         *d->singleCvsJob << "-I" << KProcess::quote(ignore);
 
-    QString logMessage = comment.stripWhiteSpace();
+    QString logMessage = comment.trimmed();
     logMessage.prepend("\"");
     logMessage.append("\"");
     *d->singleCvsJob << "-m" << logMessage;
@@ -664,8 +664,8 @@ DCOPRef CvsService::login(const QString& repository)
 
     // assemble the command line
     // cvs -d [REPOSITORY] login
-    job->setCvsClient(repo.clientOnly().local8Bit());
-    job->setRepository(repository.local8Bit());
+    job->setCvsClient(repo.clientOnly().toLocal8Bit());
+    job->setRepository(repository.toLocal8Bit());
 
     // return a DCOP reference to the cvs job
     return DCOPRef(d->appId, job->objId());

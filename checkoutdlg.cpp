@@ -363,7 +363,7 @@ void CheckoutDialog::moduleButtonClicked()
             pos = str.find('\t');
         if (pos == -1)
             pos = str.length();
-        QString module( str.left(pos).stripWhiteSpace() );
+        QString module( str.left(pos).trimmed() );
         if ( !module.isEmpty() )
             module_combo->insertItem(module);
     }

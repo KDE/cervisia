@@ -81,7 +81,7 @@ QString LogListViewItem::truncateLine(const QString &s)
 {
     int pos;
 
-    QString res = s.simplifyWhiteSpace();
+    QString res = s.simplified();
     if ( (pos = res.find('\n')) != -1 )
         res = res.left(pos) + "...";
 

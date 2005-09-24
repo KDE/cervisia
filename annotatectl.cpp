@@ -172,8 +172,8 @@ void AnnotateController::Private::parseCvsAnnotateOutput()
         if( !dateString.isEmpty() )
             logInfo.m_dateTime.setTime_t(KRFCDate::parseDate(dateString), Qt::UTC);
 
-        rev               = line.left(13).stripWhiteSpace();
-        logInfo.m_author  = line.mid(14, 8).stripWhiteSpace();
+        rev               = line.left(13).trimmed();
+        logInfo.m_author  = line.mid(14, 8).trimmed();
         content           = line.mid(35, line.length()-35);
 
         logInfo.m_comment = comments[rev];

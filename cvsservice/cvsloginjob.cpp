@@ -37,7 +37,7 @@ CvsLoginJob::CvsLoginJob(unsigned jobNum)
     , m_Proc(0)
 {
     QString objId("CvsLoginJob" + QString::number(jobNum));
-    setObjId(objId.local8Bit());
+    setObjId(objId.toLocal8Bit());
 
     m_Proc = new PtyProcess;
 }
