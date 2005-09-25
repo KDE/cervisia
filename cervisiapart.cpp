@@ -826,7 +826,7 @@ void CervisiaPart::openFiles(const QStringList &filenames)
     for( ; it != end; ++it )
     {
         KURL u;
-        u.setPath(dir.absFilePath(*it));
+        u.setPath(dir.absoluteFilePath(*it));
         KRun* run = new KRun(u, 0, true, false);
         run->setRunExecutables(false);
     }
@@ -1017,7 +1017,7 @@ void CervisiaPart::slotFileProperties()
     QDir dir(sandbox);
 
     KURL u;
-    u.setPath(dir.absFilePath(filename));
+    u.setPath(dir.absoluteFilePath(filename));
 
     // show file properties dialog
     (void)new KPropertiesDialog(u);
@@ -1705,7 +1705,7 @@ bool CervisiaPart::openSandbox(const QString &dirname)
 
         // remove path from recent sandbox menu
         QFileInfo fi(dirname);
-        recent->removeURL( KURL::fromPathOrURL(fi.absFilePath()) );
+        recent->removeURL( KURL::fromPathOrURL(fi.absoluteFilePath()) );
 
         return false;
     }

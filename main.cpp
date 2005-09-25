@@ -87,7 +87,7 @@ static int ShowLogDialog(const QString& fileName)
 
     // get directory for file
     const QFileInfo fi(fileName);
-    QString directory = fi.dirPath(true);
+    QString directory = fi.absolutePath();
 
     // start the cvs DCOP service
     CvsService_stub* cvsService = StartDCOPService(directory);
@@ -117,7 +117,7 @@ static int ShowAnnotateDialog(const QString& fileName)
 
     // get directory for file
     const QFileInfo fi(fileName);
-    QString directory = fi.dirPath(true);
+    QString directory = fi.absolutePath();
 
     // start the cvs DCOP service
     CvsService_stub* cvsService = StartDCOPService(directory);

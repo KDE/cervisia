@@ -395,7 +395,7 @@ void DiffDialog::callExternalDiff(const QString& extdiff, CvsService_stub* servi
 
         extcmdline += KProcess::quote(revAFilename);
         extcmdline += " ";
-        extcmdline += KProcess::quote(QFileInfo(fileName).absFilePath());
+        extcmdline += KProcess::quote(QFileInfo(fileName).absoluteFilePath());
     }
 
     ProgressDialog dlg(this, "Diff", job, "diff");

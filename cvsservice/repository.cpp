@@ -135,7 +135,7 @@ QString Repository::server() const
 bool Repository::setWorkingCopy(const QString& dirName)
 {
     const QFileInfo fi(dirName);
-    const QString path = fi.absFilePath();
+    const QString path = fi.absoluteFilePath();
 
     // is this really a cvs-controlled directory?
     const QFileInfo cvsDirInfo(path + "/CVS");

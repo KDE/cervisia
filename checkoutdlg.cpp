@@ -123,7 +123,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
     }
 
     workdir_edit = new KLineEdit(mainWidget);
-    workdir_edit->setText(QDir::homeDirPath());
+    workdir_edit->setText(QDir::homePath());
     workdir_edit->setMinimumWidth(fontMetrics().width('X') * 40);
     
     KURLCompletion* comp = new KURLCompletion();

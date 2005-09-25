@@ -93,7 +93,7 @@ void AddRemoveDialog::setFileList(const QStringList& files)
     {
         QStringList copy(files);
         int idx = copy.findIndex(".");
-        copy[idx] = QFileInfo(".").absFilePath();
+        copy[idx] = QFileInfo(".").absoluteFilePath();
 
         m_listBox->insertStringList(copy);
     }

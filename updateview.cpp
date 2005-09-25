@@ -599,7 +599,7 @@ void UpdateView::updateItem(const QString& filePath, EntryStatus status, bool is
     const QFileInfo fileInfo(filePath);
 
     UpdateDirItem* rootItem = static_cast<UpdateDirItem*>(firstChild());
-    UpdateDirItem* dirItem = findOrCreateDirItem(fileInfo.dirPath(), rootItem);
+    UpdateDirItem* dirItem = findOrCreateDirItem(fileInfo.path(), rootItem);
 
     dirItem->updateChildItem(fileInfo.fileName(), status, isdir);
 }

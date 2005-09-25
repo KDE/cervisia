@@ -39,7 +39,7 @@ QStringList Repositories::readCvsPassFile()
 {
     QStringList list;
     
-    QFile f(QDir::homeDirPath() + "/.cvspass");
+    QFile f(QDir::homePath() + "/.cvspass");
     if (f.open(QIODevice::ReadOnly))
         {
             QTextStream stream(&f);

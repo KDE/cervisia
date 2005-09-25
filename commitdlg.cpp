@@ -114,7 +114,7 @@ void CommitDialog::setFileList(const QStringList &list)
     // we convert it to the absolut path
     if (const Q3ListBoxItem* item = listbox->findItem(QLatin1String("."), Q3ListBox::ExactMatch))
     {
-        listbox->changeItem(QFileInfo(QLatin1String(".")).absFilePath(),
+        listbox->changeItem(QFileInfo(QLatin1String(".")).absoluteFilePath(),
                             listbox->index(item));
     }
 }
@@ -238,7 +238,7 @@ void CommitDialog::useTemplateClicked()
 
 void CommitDialog::checkForTemplateFile()
 {
-    QString filename = QDir::current().absPath() + "/CVS/Template";
+    QString filename = QDir::current().absolutePath() + "/CVS/Template";
     if( QFile::exists(filename) )
     {
         QFile f(filename);

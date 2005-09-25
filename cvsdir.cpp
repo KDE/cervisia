@@ -27,13 +27,13 @@ using namespace Cervisia;
 
 CvsDir::CvsDir(const QString &path)
     : QDir( path, 0, QDir::Name,
-            QDir::All | QDir::Hidden | QDir::NoSymLinks )
+            QDir::TypeMask | QDir::Hidden | QDir::NoSymLinks )
 {}
 
 
 const QFileInfoList *CvsDir::entryInfoList() const
 {
-    DirIgnoreList ignorelist(absPath());
+    DirIgnoreList ignorelist(absolutePath());
     const QFileInfoList& fulllist = QDir::entryInfoList();
     if (fulllist.empty())
         return 0;

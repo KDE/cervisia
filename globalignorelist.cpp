@@ -94,7 +94,7 @@ void GlobalIgnoreList::setup()
     
     addEntriesFromString(QLatin1String(ignorestr));
     addEntriesFromString(QString::fromLocal8Bit(::getenv("CVSIGNORE")));
-    addEntriesFromFile(QDir::homeDirPath() + "/.cvsignore");  
+    addEntriesFromFile(QDir::homePath() + "/.cvsignore");  
     
     m_isInitialized = true;
 }
