@@ -33,6 +33,7 @@
 #include <QHBoxLayout>
 #include <QBoxLayout>
 #include <QVBoxLayout>
+#include <QSplitter>
 #include <kdebug.h>
 #include <kfiledialog.h>
 #include <klocale.h>

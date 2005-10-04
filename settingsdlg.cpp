@@ -43,7 +43,7 @@
 #include <klocale.h>
 #include <knuminput.h>
 #include <kurlrequester.h>
-
+#include <kinstance.h>
 #include "misc.h"
 #include "cervisiasettings.h"
 #include "settingsdlg_advanced.h"
@@ -296,7 +296,7 @@ void SettingsDialog::addDiffPage()
  */
 void SettingsDialog::addStatusPage()
 {
-    Q3VBox* statusPage = addVBoxPage(i18n("Status"), QString::null,
+    KVBox* statusPage = addVBoxPage(i18n("Status"), QString::null,
                                     LoadIcon("fork"));
 
     remotestatusbox = new QCheckBox(i18n("When opening a sandbox from a &remote repository,\n"
@@ -314,7 +314,7 @@ void SettingsDialog::addStatusPage()
  */
 void SettingsDialog::addAdvancedPage()
 {
-    Q3VBox* frame = addVBoxPage(i18n("Advanced"), QString::null,
+    KVBox* frame = addVBoxPage(i18n("Advanced"), QString::null,
                                LoadIcon("configure"));
 
     m_advancedPage = new AdvancedPage(frame);
@@ -328,7 +328,7 @@ void SettingsDialog::addAdvancedPage()
  */
 void SettingsDialog::addLookAndFeelPage()
 {
-    Q3VBox* lookPage = addVBoxPage(i18n("Appearance"), QString::null,
+    KVBox* lookPage = addVBoxPage(i18n("Appearance"), QString::null,
                                   LoadIcon("looknfeel"));
 
     Q3GroupBox* fontGroupBox = new Q3GroupBox(4, Qt::Vertical, i18n("Fonts"),

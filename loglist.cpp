@@ -111,9 +111,10 @@ int LogListViewItem::compare(Q3ListViewItem* i, int col, bool ascending) const
 
 
 LogListView::LogListView(KConfig& cfg, QWidget *parent, const char *name)
-    : KListView(parent, name)
+    : KListView(parent)
     , partConfig(cfg)
 {
+	setObjectName(name);
     setAllColumnsShowFocus(true);
     setShowToolTips(false);
     setShowSortIndicator(true);

@@ -41,10 +41,11 @@ using Cervisia::EntryStatus;
 
 
 UpdateView::UpdateView(KConfig& partConfig, QWidget *parent, const char *name)
-    : KListView(parent, name),
+    : KListView(parent),
       m_partConfig(partConfig),
       m_unfoldingTree(false)
 {
+	setObjectName(name);
     setAllColumnsShowFocus(true);
     setShowSortIndicator(true);
     setSelectionModeExt(Extended);
