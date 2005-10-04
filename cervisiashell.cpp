@@ -79,7 +79,7 @@ CervisiaShell::CervisiaShell( const char *name )
     setAutoSaveSettings("MainWindow", true);
     
     // if the session is restoring, we already read the settings
-    if( !kapp->isRestored() )
+    if( !kapp->isSessionRestored() )
         readSettings();
 }
 
@@ -183,7 +183,7 @@ void CervisiaShell::readProperties(KConfig* config)
     
     // if the session is restoring, make sure we open the URL 
     // since it's not handled by main()
-    if( kapp->isRestored() )
+    if( kapp->isSessionRestored() )
         openURL();
 }
 

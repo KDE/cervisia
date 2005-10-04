@@ -91,10 +91,10 @@ void LogPlainView::searchText(int options, const QString& pattern)
     connect(m_find, SIGNAL(findNext()),
            this, SLOT(findNext()));
 
-    m_currentBlock = (m_find->options() & KFindDialog::FindBackwards)
+    m_currentBlock = (m_find->options() & KFind::FindBackwards)
         ? document()->end().previous()
         : document()->begin();
-    if( options & KFindDialog::FromCursor )
+    if( options & KFind::FromCursor )
     {
 #warning maybe this can be improved
         const QPoint pos(horizontalScrollBar()->value(), 0);
@@ -128,7 +128,7 @@ void LogPlainView::findNext()
 
         if( res == KFind::NoMatch )
         {
-            if( m_find->options() & KFindDialog::FindBackwards )
+            if( m_find->options() & KFind::FindBackwards )
                 m_currentBlock = m_currentBlock.previous();
             else
                 m_currentBlock = m_currentBlock.next();
@@ -140,7 +140,7 @@ void LogPlainView::findNext()
     {
         if( m_find->shouldRestart() )
         {
-            m_currentBlock = (m_find->options() & KFindDialog::FindBackwards)
+            m_currentBlock = (m_find->options() & KFind::FindBackwards)
                 ? document()->end().previous()
                 : document()->begin();
             findNext();

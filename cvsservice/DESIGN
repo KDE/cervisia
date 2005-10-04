@@ -30,7 +30,7 @@ How-to use this service in C++ applications:
     QString error;
     QCString appId;
 
-    KApplication::startServiceByDesktopName("cvsservice", QStringList(), &error,
+    KToolInvocation::startServiceByDesktopName("cvsservice", QStringList(), &error,
                                             &appId);
 
     // create stub for repository

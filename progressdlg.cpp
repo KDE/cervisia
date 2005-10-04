@@ -85,7 +85,7 @@ ProgressDialog::~ProgressDialog()
 
 void ProgressDialog::setupGui(const QString& heading)
 {
-    Q3VBox* vbox = makeVBoxMainWidget();
+    KVBox* vbox = makeVBoxMainWidget();
     vbox->setSpacing(10);
 
     QWidget* headingBox = new QWidget(vbox);

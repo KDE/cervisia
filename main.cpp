@@ -27,6 +27,7 @@
 #include <kconfig.h>
 #include <klocale.h>
 #include <kurl.h>
+#include <ktoolinvocation.h>
 
 #include "misc.h"
 #include "cervisiashell.h"
@@ -43,7 +44,7 @@ static CvsService_stub* StartDCOPService(const QString& directory)
     // start the cvs DCOP service
     QString error;
     QByteArray appId;
-    if( KApplication::startServiceByDesktopName("cvsservice", QStringList(),
+    if( KToolInvocation::startServiceByDesktopName("cvsservice", QStringList(),
                                                 &error, &appId) )
     {
         std::cerr << "Starting cvsservice failed with message: "

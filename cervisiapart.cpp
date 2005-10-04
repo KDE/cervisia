@@ -44,6 +44,7 @@
 #include <kdebug.h>
 #include <kmessagebox.h>
 #include <kglobal.h>
+#include <ktoolinvocation.h>
 
 #include "progressdlg.h"
 #include "logdlg.h"
@@ -105,7 +106,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     , m_currentEditMenu(0)
     , m_jobType(Unknown)
 {
-    KGlobal::locale()->insertCatalogue("cervisia");
+    KGlobal::locale()->insertCatalog("cervisia");
 
     setInstance( CervisiaFactory::instance() );
     m_browserExt = new CervisiaBrowserExtension( this );
@@ -113,7 +114,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     // start the cvs DCOP service
     QString error;
     QByteArray appId;
-    if( KApplication::startServiceByDesktopName("cvsservice", QStringList(), &error, &appId) )
+    if( KToolInvocation::startServiceByDesktopName("cvsservice", QStringList(), &error, &appId) )
     {
         KMessageBox::sorry(0, i18n("Starting cvsservice failed with message: ") +
             error, "Cervisia");
@@ -1626,14 +1627,14 @@ void CervisiaPart::slotConfigure()
 void CervisiaPart::slotHelp()
 {
     emit setStatusBarText( i18n("Invoking help on Cervisia") );
-    KApplication::startServiceByDesktopName("khelpcenter", QString("help:/cervisia/index.html"));
+    KToolInvocation::startServiceByDesktopName("khelpcenter", QString("help:/cervisia/index.html"));
 }
 
 
 void CervisiaPart::slotCVSInfo()
 {
     emit setStatusBarText( i18n("Invoking help on CVS") );
-    KApplication::startServiceByDesktopName("khelpcenter", QString("info:/cvs/Top"));
+    KToolInvocation::startServiceByDesktopName("khelpcenter", QString("info:/cvs/Top"));
 }
 
 
@@ -1898,7 +1899,7 @@ void CervisiaPart::guiActivateEvent(KParts::GUIActivateEvent* event)
 CervisiaBrowserExtension::CervisiaBrowserExtension( CervisiaPart *p )
     : KParts::BrowserExtension( p, "CervisiaBrowserExtension" )
 {
-    KGlobal::locale()->insertCatalogue("cervisia");
+    KGlobal::locale()->insertCatalog("cervisia");
 }
 
 CervisiaBrowserExtension::~CervisiaBrowserExtension()
