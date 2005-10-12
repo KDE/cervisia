@@ -33,6 +33,8 @@ libcvsservice_la_LDFLAGS = $(all_libraries) -no-undefined -version-info 0:1
 libcvsservice_la_LIBADD = $(LIB_KDECORE)
 libcvsservice_la_SOURCES = cvsservice.stub cvsjob.stub repository.stub dummy.cpp
 
+DISTCLEANFILES = dummy.cpp
+
 dummy.cpp:
 	echo > dummy.cpp
 
