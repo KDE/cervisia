@@ -349,13 +349,13 @@ QSize LogTreeView::computeSize(const Cervisia::LogInfo& logInfo,
     if (authorHeight)
         *authorHeight = r3.height();
 
-    int infoWidth = kMax(static_width - 2 * BORDER, kMax(r1.width(), r3.width()));
+    int infoWidth = qMax(static_width - 2 * BORDER, qMax(r1.width(), r3.width()));
     int infoHeight = r1.height() + r3.height() + 3 * INSPACE;
 
     if (!tags.isEmpty())
     {
         const QSize r2 = fm.size(Qt::AlignCenter, tags);
-        infoWidth = kMax(infoWidth, r2.width());
+        infoWidth = qMax(infoWidth, r2.width());
         infoHeight += r2.height() + INSPACE;
         if (tagsHeight)
             *tagsHeight = r2.height();
@@ -469,8 +469,8 @@ void LogTreeView::recomputeCellSizes ()
 
         const QSize cellSize(computeSize(item->m_logInfo) + QSize(2 * BORDER,  2 * BORDER));
 
-        setColumnWidth(item->col, kMax(columnWidth(item->col), cellSize.width()));
-        setRowHeight(item->row, kMax(rowHeight(item->row), cellSize.height()));
+        setColumnWidth(item->col, qMax(columnWidth(item->col), cellSize.width()));
+        setRowHeight(item->row, qMax(rowHeight(item->row), cellSize.height()));
     }
 
     viewport()->update();

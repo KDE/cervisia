@@ -104,9 +104,9 @@ QString truncateLines(const QString& text,
                       const QRect&   desktopGeometry)
 {
     // maximum size of the tooltip, - 10 just to be safe
-    const int maxWidth(kMax(desktopGeometry.width() - globalPos.x(), globalPos.x())
+    const int maxWidth(qMax(desktopGeometry.width() - globalPos.x(), globalPos.x())
                        - desktopGeometry.left() - 10);
-    const int maxHeight(kMax(desktopGeometry.height() - globalPos.y(), globalPos.y())
+    const int maxHeight(qMax(desktopGeometry.height() - globalPos.y(), globalPos.y())
                        - desktopGeometry.top() - 10);
 
     // calculate the tooltip's size
