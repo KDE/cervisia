@@ -162,8 +162,8 @@ AnnotateView::AnnotateView(KConfig &cfg, QWidget *parent, const char *name)
     connect(toolTip, SIGNAL(queryToolTip(const QPoint&, QRect&, QString&)),
             this, SLOT(slotQueryToolTip(const QPoint&, QRect&, QString&)));
 
-    KConfigGroupSaver cs(&cfg, "LookAndFeel");
-    setFont(cfg.readFontEntry("AnnotateFont"));
+    KConfigGroup cs(&cfg, "LookAndFeel");
+    setFont(cs.readFontEntry("AnnotateFont"));
 }
 
 

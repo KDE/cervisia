@@ -30,6 +30,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kprocess.h>
+#include <kglobal.h>
 
 #include "cvsjob.h"
 #include "cvsloginjob.h"
@@ -86,9 +87,9 @@ CvsService::CvsService()
     d->cvsJobs.setAutoDelete(true);
     d->loginJobs.setAutoDelete(true);
 
-    KConfig* config = kapp->config();
-    KConfigGroupSaver cs(config, "General");
-    if( config->readBoolEntry("UseSshAgent", false) )
+    KConfig* config = KGlobal::config();
+    KConfigGroup cs(config, "General");
+    if( cs.readBoolEntry("UseSshAgent", false) )
     {
         // use the existing or start a new ssh-agent
         SshAgent ssh;

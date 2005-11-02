@@ -523,17 +523,17 @@ void UpdateView::syncSelection()
  */
 void UpdateView::updateColors()
 {
-    KConfigGroupSaver cs(&m_partConfig, "Colors");
+    KConfigGroup cs(&m_partConfig, "Colors");
     m_partConfig.setGroup("Colors");
 
     QColor defaultColor = QColor(255, 130, 130);
-    m_conflictColor = m_partConfig.readColorEntry("Conflict", &defaultColor);
+    m_conflictColor = cs.readColorEntry("Conflict", &defaultColor);
 
     defaultColor = QColor(130, 130, 255);
-    m_localChangeColor = m_partConfig.readColorEntry("LocalChange", &defaultColor);
+    m_localChangeColor = cs.readColorEntry("LocalChange", &defaultColor);
 
     defaultColor = QColor(70, 210, 70);
-    m_remoteChangeColor = m_partConfig.readColorEntry("RemoteChange", &defaultColor);
+    m_remoteChangeColor = cs.readColorEntry("RemoteChange", &defaultColor);
 
     m_notInCvsColor = CervisiaSettings::notInCvsColor();
 }

@@ -28,6 +28,7 @@
 #include <klocale.h>
 #include <kurl.h>
 #include <ktoolinvocation.h>
+#include <kiconloader.h>
 
 #include "misc.h"
 #include "cervisiashell.h"
@@ -184,7 +185,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
     if( !annotateFile.isEmpty() )
         return ShowAnnotateDialog(annotateFile);
 
-    if ( app.isRestored() ) {
+    if ( app.isSessionRestored() ) {
         RESTORE(CervisiaShell);
     } else {
         CervisiaShell* shell = new CervisiaShell();
@@ -198,7 +199,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
         else
             shell->openURL();
 
-        shell->setIcon(app.icon());
+        shell->setIcon(qApp->windowIcon().pixmap(IconSize(KIcon::Desktop),IconSize(KIcon::Desktop)));
         app.setMainWidget(shell);
         shell->show();
     }

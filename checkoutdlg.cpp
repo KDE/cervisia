@@ -419,25 +419,25 @@ void CheckoutDialog::branchButtonClicked()
 
 void CheckoutDialog::restoreUserInput()
 {
-    KConfigGroupSaver cs(&partConfig, "CheckoutDialog");
+    KConfigGroup cs(&partConfig, "CheckoutDialog");
 
-    repo_combo->setEditText(partConfig.readEntry("Repository"));
-    workdir_edit->setText(partConfig.readPathEntry("Working directory"));
+    repo_combo->setEditText(cs.readEntry("Repository"));
+    workdir_edit->setText(cs.readPathEntry("Working directory"));
 
     if (act == Import)
     {
-        module_edit->setText(partConfig.readEntry("Module"));
-        vendortag_edit->setText(partConfig.readEntry("Vendor tag"));
-        releasetag_edit->setText(partConfig.readEntry("Release tag"));
-        ignore_edit->setText(partConfig.readEntry("Ignore files"));
-        binary_box->setChecked(partConfig.readBoolEntry("Import binary"));
+        module_edit->setText(cs.readEntry("Module"));
+        vendortag_edit->setText(cs.readEntry("Vendor tag"));
+        releasetag_edit->setText(cs.readEntry("Release tag"));
+        ignore_edit->setText(cs.readEntry("Ignore files"));
+        binary_box->setChecked(cs.readBoolEntry("Import binary"));
     }
     else
     {
-        module_combo->setEditText(partConfig.readEntry("Module"));
-        branchCombo->setCurrentText(partConfig.readEntry("Branch"));
-        alias_edit->setText(partConfig.readEntry("Alias"));
-        export_box->setChecked(partConfig.readBoolEntry("ExportOnly"));
+        module_combo->setEditText(cs.readEntry("Module"));
+        branchCombo->setCurrentText(cs.readEntry("Branch"));
+        alias_edit->setText(cs.readEntry("Alias"));
+        export_box->setChecked(cs.readBoolEntry("ExportOnly"));
         recursive_box->setChecked(true);
     }
 }
@@ -445,24 +445,24 @@ void CheckoutDialog::restoreUserInput()
 
 void CheckoutDialog::saveUserInput()
 {
-    KConfigGroupSaver cs(&partConfig, "CheckoutDialog");
+    KConfigGroup cs(&partConfig, "CheckoutDialog");
 
-    partConfig.writeEntry("Repository", repository());
-    partConfig.writeEntry("Module", module());
-    partConfig.writeEntry("Working directory", workingDirectory());
+    cs.writeEntry("Repository", repository());
+    cs.writeEntry("Module", module());
+    cs.writeEntry("Working directory", workingDirectory());
 
     if (act == Import)
     {
-        partConfig.writeEntry("Vendor tag", vendorTag());
-        partConfig.writeEntry("Release tag", releaseTag());
-        partConfig.writeEntry("Ignore files", ignoreFiles());
-        partConfig.writeEntry("Import binary", importBinary());
+        cs.writeEntry("Vendor tag", vendorTag());
+        cs.writeEntry("Release tag", releaseTag());
+        cs.writeEntry("Ignore files", ignoreFiles());
+        cs.writeEntry("Import binary", importBinary());
     }
     else
     {
-        partConfig.writeEntry("Branch", branch());
-        partConfig.writeEntry("Alias", alias());
-        partConfig.writeEntry("ExportOnly", exportOnly());
+        cs.writeEntry("Branch", branch());
+        cs.writeEntry("Alias", alias());
+        cs.writeEntry("ExportOnly", exportOnly());
     }
 }
 

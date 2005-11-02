@@ -30,6 +30,7 @@
 #include <kconfig.h>
 #include <kdirwatch.h>
 #include <kstandarddirs.h>
+#include <kglobal.h>
 
 #include "sshagent.h"
 
@@ -195,7 +196,7 @@ void Repository::slotConfigDirty(const QString& fileName)
     if( fileName == d->configFileName )
     {
         // reread the configuration data from disk
-        kapp->config()->reparseConfiguration();
+        KGlobal::config()->reparseConfiguration();
         d->readConfig();
     }
 }
@@ -203,7 +204,7 @@ void Repository::slotConfigDirty(const QString& fileName)
 
 void Repository::Private::readGeneralConfig()
 {
-    KConfig* config = kapp->config();
+    KConfig* config = KGlobal::config();
 
     // get path to cvs client programm
     config->setGroup("General");
@@ -213,7 +214,7 @@ void Repository::Private::readGeneralConfig()
 
 void Repository::Private::readConfig()
 {
-    KConfig* config = kapp->config();
+    KConfig* config = KGlobal::config();
 
     // Sometimes the location can be unequal to the entry in the CVS/Root.
     //
@@ -251,8 +252,8 @@ void Repository::Private::readConfig()
     // use default global compression level instead?
     if( compressionLevel < 0 )
     {
-        KConfigGroupSaver cs(config, "General");
-        compressionLevel = config->readNumEntry("Compression", 0);
+        KConfigGroup cs(config, "General");
+        compressionLevel = cs.readNumEntry("Compression", 0);
     }
 
     // get remote shell client to access the remote repository

@@ -125,8 +125,8 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool mod
     QSize size = configDialogSize(partConfig, "DiffDialog");
     resize(size);
 
-    KConfigGroupSaver cs(&partConfig, "DiffDialog");
-    syncbox->setChecked(partConfig.readBoolEntry("Sync"));
+    KConfigGroup cs(&partConfig, "DiffDialog");
+    syncbox->setChecked(cs.readBoolEntry("Sync"));
 }
 
 
@@ -134,8 +134,8 @@ DiffDialog::~DiffDialog()
 {
     saveDialogSize(partConfig, "DiffDialog");
 
-    KConfigGroupSaver cs(&partConfig, "DiffDialog");
-    partConfig.writeEntry("Sync", syncbox->isChecked());
+    KConfigGroup cs(&partConfig, "DiffDialog");
+    cs.writeEntry("Sync", syncbox->isChecked());
 }
 
 
@@ -237,7 +237,7 @@ bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
                         i18n("Working dir:")
                         : i18n("Revision ")+revB+":" );
 
-    KConfigGroupSaver cs(&partConfig, "General");
+    KConfigGroup cs(&partConfig, "General");
 
     // Ok, this is a hack: When the user wants an external diff
     // front end, it is executed from here. Of course, in that
@@ -245,15 +245,15 @@ bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
     // place, but this design at least makes the handling trans-
     // parent for the calling routines
 
-    QString extdiff = partConfig.readPathEntry("ExternalDiff");
+    QString extdiff = cs.readPathEntry("ExternalDiff");
     if (!extdiff.isEmpty())
         {
             callExternalDiff(extdiff, service, fileName, revA, revB);
             return false;
         }
 
-    const QString diffOptions   = partConfig.readEntry("DiffOptions");
-    const unsigned contextLines = partConfig.readUnsignedNumEntry("ContextLines", 65535);
+    const QString diffOptions   = cs.readEntry("DiffOptions");
+    const unsigned contextLines = cs.readUnsignedNumEntry("ContextLines", 65535);
 
     DCOPRef job = service->diff(fileName, revA, revB, diffOptions, contextLines);
     if( !service->ok() )

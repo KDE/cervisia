@@ -101,8 +101,8 @@ CommitDialog::~CommitDialog()
 {
     saveDialogSize(partConfig, "CommitDialog");
 
-    KConfigGroupSaver cs(&partConfig, "CommitDialog");
-    partConfig.writeEntry("UseTemplate", m_useTemplateChk->isChecked());
+    KConfigGroup cs(&partConfig, "CommitDialog");
+    cs.writeEntry("UseTemplate", m_useTemplateChk->isChecked());
 }
 
 
@@ -249,8 +249,8 @@ void CommitDialog::checkForTemplateFile()
             f.close();
 
             m_useTemplateChk->setEnabled(true);
-            KConfigGroupSaver cs(&partConfig, "CommitDialog");
-            bool check = partConfig.readBoolEntry("UseTemplate", true);
+            KConfigGroup cs(&partConfig, "CommitDialog");
+            bool check = cs.readBoolEntry("UseTemplate", true);
             m_useTemplateChk->setChecked(check);
 
             addTemplateText();

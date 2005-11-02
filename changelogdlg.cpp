@@ -118,8 +118,8 @@ bool ChangeLogDialog::readFile(const QString &filename)
             f.close();
         }
 
-    KConfigGroupSaver cs(&partConfig, "General");
-    const QString username = partConfig.readEntry("Username", Cervisia::UserName());
+    KConfigGroup cs(&partConfig, "General");
+    const QString username = cs.readEntry("Username", Cervisia::UserName());
 
     edit->insertParagraph("", 0);
     edit->insertParagraph("\t* ", 0);
