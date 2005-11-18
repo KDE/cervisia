@@ -27,7 +27,7 @@
 #include <kvbox.h>
 //Added by qt3to4:
 #include <QHBoxLayout>
-
+#include <Q3ListBox>
 #include <cvsjob_stub.h>
 #include <dcopref.h>
 #include <kanimwidget.h>

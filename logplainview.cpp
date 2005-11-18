@@ -22,7 +22,7 @@
 #include <kfind.h>
 #include <kfinddialog.h>
 #include <klocale.h>
-
+#include <QScrollBar>
 #include "loginfo.h"
 
 using namespace Cervisia;
