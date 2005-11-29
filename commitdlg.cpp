@@ -36,7 +36,23 @@
 #include "diffdlg.h"
 
 
-CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service, 
+class CommitListItem : public QCheckListItem
+{
+public:
+    CommitListItem(QListView* parent, const QString& text, const QString fileName)
+        : QCheckListItem(parent, text, QCheckListItem::CheckBox)
+        , m_fileName(fileName)
+    {
+    }
+
+    QString fileName() const { return m_fileName; }
+
+private:
+    QString m_fileName;
+};
+
+
+CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service,
                            QWidget *parent, const char *name)
     : KDialogBase(parent, name, true, i18n("CVS Commit"),
                   Ok | Cancel | Help | User1, Ok, true)
@@ -63,14 +79,14 @@ CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service,
 
     QLabel *archivelabel = new QLabel(i18n("Older &messages:"), mainWidget);
     layout->addWidget(archivelabel);
-            
+
     combo = new QComboBox(mainWidget);
     archivelabel->setBuddy(combo);
     connect( combo, SIGNAL(activated(int)), this, SLOT(comboActivated(int)) );
     // make sure that combobox is smaller than the screen
     combo->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
     layout->addWidget(combo);
-            
+
     QLabel *messagelabel = new QLabel(i18n("&Log message:"), mainWidget);
     layout->addWidget(messagelabel);
 
@@ -90,7 +106,7 @@ CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service,
     setButtonGuiItem(User1, KGuiItem(i18n("&Diff"), "vcs_diff"));
     enableButton(User1, false);
     connect( this, SIGNAL(user1Clicked()),
-             this, SLOT(diffClicked()) );            
+             this, SLOT(diffClicked()) );
 
     setHelp("commitingfiles");
 
@@ -120,7 +136,7 @@ void CommitDialog::setFileList(const QStringList &list)
         QString text = (*it != "." ? *it : currentDirName);
 
         edit->compObj()->addItem(text);
-        QCheckListItem* item = new QCheckListItem(m_fileList, text, QCheckListItem::CheckBox);
+        CommitListItem* item = new CommitListItem(m_fileList, text, *it);
         item->setOn(true);
     }
 }
@@ -133,7 +149,8 @@ QStringList CommitDialog::fileList() const
     QListViewItemIterator it(m_fileList, QListViewItemIterator::Checked);
     for( ; it.current(); ++it )
     {
-        files.append(it.current()->text(0));
+        CommitListItem* item = static_cast<CommitListItem*>(it.current());
+        files.append(item->fileName());
     }
 
     return files;
@@ -229,15 +246,15 @@ void CommitDialog::diffClicked()
 void CommitDialog::showDiffDialog(const QString& fileName)
 {
     DiffDialog *l = new DiffDialog(partConfig, this, "diffdialog");
-    
+
     // disable diff button so user doesn't open the same diff several times (#83018)
     enableButton(User1, false);
-    
+
     if (l->parseCvsDiff(cvsService, fileName, "", ""))
         l->show();
     else
         delete l;
-    
+
     // re-enable diff button
     enableButton(User1, true);
 }
