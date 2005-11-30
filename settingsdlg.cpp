@@ -265,29 +265,43 @@ void SettingsDialog::addGeneralPage()
  */
 void SettingsDialog::addDiffPage()
 {
-    Q3Grid *diffPage = addGridPage(2, Qt::Horizontal, i18n("Diff Viewer"),
-                                  QString::null, LoadIcon("vcs_diff"));
+    QFrame* diffPage = addPage(i18n("Diff Viewer"), QString::null, LoadIcon("vcs_diff"));
+
+    QGridLayout* layout = new QGridLayout(diffPage);
 
     QLabel *contextlabel = new QLabel( i18n("&Number of context lines in diff dialog:"), diffPage );
     contextedit = new KIntNumInput( 0, diffPage );
     contextedit->setRange(0, 65535, 1, false);
     contextlabel->setBuddy(contextedit);
 
+    layout->addWidget(contextlabel, 0, 0);
+    layout->addWidget(contextedit, 0, 1);
+
     QLabel *diffoptlabel = new QLabel(i18n("Additional &options for cvs diff:"), diffPage);
     diffoptedit = new KLineEdit(diffPage);
     diffoptlabel->setBuddy(diffoptedit);
+
+    layout->addWidget(diffoptlabel, 1, 0);
+    layout->addWidget(diffoptedit, 1, 1);
 
     QLabel *tabwidthlabel = new QLabel(i18n("Tab &width in diff dialog:"), diffPage);
     tabwidthedit = new KIntNumInput(0, diffPage);
     tabwidthedit->setRange(1, 16, 1, false);
     tabwidthlabel->setBuddy(tabwidthedit);
 
+    layout->addWidget(tabwidthlabel, 2, 0);
+    layout->addWidget(tabwidthedit, 2, 1);
+
     QLabel *extdifflabel = new QLabel(i18n("External diff &frontend:"), diffPage);
     extdiffedit = new KURLRequester(diffPage);
     extdifflabel->setBuddy(extdiffedit);
 
-    // dummy widget to take up the vertical space
-    new QWidget(diffPage);
+    layout->addWidget(extdifflabel, 3, 0);
+    layout->addWidget(extdiffedit, 3, 1);
+
+    // add dummy row to take up the vertical space
+    layout->addWidget(0, 4, 0, 0, 1);
+    layout->setRowStretch(4, 10);
 }
 
 
