@@ -100,21 +100,21 @@ UpdateView::Filter UpdateView::filter() const
 // returns true iff exactly one UpdateFileItem is selected
 bool UpdateView::hasSingleSelection() const
 {
-    const Q3PtrList<Q3ListViewItem>& listSelectedItems(selectedItems());
+    const QList<Q3ListViewItem*>& listSelectedItems(selectedItems());
 
-    return (listSelectedItems.count() == 1) && isFileItem(listSelectedItems.getFirst());
+    return (listSelectedItems.count() == 1) && isFileItem(listSelectedItems.first());
 }
 
 
 void UpdateView::getSingleSelection(QString *filename, QString *revision) const
 {
-    const Q3PtrList<Q3ListViewItem>& listSelectedItems(selectedItems());
+    const QList<Q3ListViewItem*>& listSelectedItems(selectedItems());
 
     QString tmpFileName;
     QString tmpRevision;
-    if ((listSelectedItems.count() == 1) && isFileItem(listSelectedItems.getFirst()))
+    if ((listSelectedItems.count() == 1) && isFileItem(listSelectedItems.first()))
     {
-        UpdateFileItem* fileItem(static_cast<UpdateFileItem*>(listSelectedItems.getFirst()));
+        UpdateFileItem* fileItem(static_cast<UpdateFileItem*>(listSelectedItems.first()));
         tmpFileName = fileItem->filePath();
         tmpRevision = fileItem->entry().m_revision;
     }
@@ -129,12 +129,11 @@ QStringList UpdateView::multipleSelection() const
 {
     QStringList res;
 
-    const Q3PtrList<Q3ListViewItem>& listSelectedItems(selectedItems());
-    for (Q3PtrListIterator<Q3ListViewItem> it(listSelectedItems);
-         it.current() != 0; ++it)
+    const QList<Q3ListViewItem*>& listSelectedItems(selectedItems());
+    foreach (Q3ListViewItem* item, listSelectedItems)
     {
-        if ((*it)->isVisible())
-            res.append(static_cast<UpdateItem*>(*it)->filePath());
+        if (item->isVisible())
+            res.append(static_cast<UpdateItem*>(item)->filePath());
     }
 
     return res;
@@ -145,12 +144,9 @@ QStringList UpdateView::fileSelection() const
 {
     QStringList res;
 
-    const Q3PtrList<Q3ListViewItem>& listSelectedItems(selectedItems());
-    for (Q3PtrListIterator<Q3ListViewItem> it(listSelectedItems);
-         it.current() != 0; ++it)
+    const QList<Q3ListViewItem*>& listSelectedItems(selectedItems());
+    foreach (Q3ListViewItem* item, listSelectedItems)
     {
-        Q3ListViewItem* item(*it);
-
         if (isFileItem(item) && item->isVisible())
             res.append(static_cast<UpdateFileItem*>(item)->filePath());
     }
