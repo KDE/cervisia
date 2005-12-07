@@ -24,7 +24,7 @@
 	  Added new setting for a color. It is used to highlight files in
 	  the update view with status "Not in CVS".
 
-2005-01-09  André Wöbbeking  <Woebbeking@web.de>
+2005-01-09  AndrÃ© WÃ¶bbeking  <Woebbeking@web.de>
 
 	* Added an icon for "Diff". Thanks to Jonathan Riddell.
 
@@ -42,7 +42,7 @@
 	  from the context menu. This can happen after the user 
 	  switched tabs in Konqueror.
 
-2004-11-11  André Wöbbeking  <Woebbeking@web.de>
+2004-11-11  AndrÃ© WÃ¶bbeking  <Woebbeking@web.de>
 
 	* Fix BR #92576:
 	  Use correct encoding for status messages.
@@ -53,7 +53,7 @@
 	  Added possibility to get a notification, when a cvs commit job
 	  has finished.
 
-2004-10-14  André Wöbbeking  <Woebbeking@web.de>
+2004-10-14  AndrÃ© WÃ¶bbeking  <Woebbeking@web.de>
 
 	* Added a search line (ala JuK and KMail) to the CVS log list view.
 
@@ -89,7 +89,7 @@
 	  Always read the cvs client option from the configuration
 	  file even when there is no sandbox open.
 
-2004-07-13  André Wöbbeking  <Woebbeking@web.de>
+2004-07-13  AndrÃ© WÃ¶bbeking  <Woebbeking@web.de>
 
 	* Implemented FR #67805, #67806, #67807, #67809:
 	  Hooray, icons for Cervisia's (main) actions.
@@ -146,7 +146,7 @@
 	  Honor the CVSROOT/cvsignore file by downloading it from the
 	  cvs server and adding it to the global ignore list.
 
-2004-05-29  André Wöbbeking  <Woebbeking@web.de>
+2004-05-29  AndrÃ© WÃ¶bbeking  <Woebbeking@web.de>
 
 	* Fix BR #81665: don't show duplicated files in the file view (did 
 	  only occur when the option "Update Recursively" wasn't active).
@@ -156,7 +156,7 @@
 	* Added a new method to download the CVSROOT/cvsignore file
 	  from the cvs server to the DCOP service.
 
-2004-05-17  André Wöbbeking  <Woebbeking@web.de>
+2004-05-17  AndrÃ© WÃ¶bbeking  <Woebbeking@web.de>
 
 	* Fix BR #58254: honor option "Hide Non-CVS Files" when opening 
 	  a branch in the file tree.
@@ -168,7 +168,7 @@
 	  extending the current option "Hide Up-To-Date Files". This option
 	  is now called "Hide Unmodified Files". 
 
-2004-05-16  André Wöbbeking  <Woebbeking@web.de>
+2004-05-16  AndrÃ© WÃ¶bbeking  <Woebbeking@web.de>
 
 	* Fix BR #81498: handle spaces in the working folder name correctly.
 
@@ -223,7 +223,7 @@
 	* Don't execute shell scripts or .desktop files when the user used
 	  the edit file function. (BR #77440)
 
-2004-03-02  André Wöbbeking  <Woebbeking@web.de>
+2004-03-02  AndrÃ© WÃ¶bbeking  <Woebbeking@web.de>
 
 	* Fix BR #55871:
 	  - truncate the tooltip text if necessary
@@ -235,7 +235,7 @@
 	   Added support for option "use the file's modification time as the time 
 	   of import" (-d) to the cvs import function.
 
-2004-02-24  André Wöbbeking  <Woebbeking@web.de>
+2004-02-24  AndrÃ© WÃ¶bbeking  <Woebbeking@web.de>
 
 	* Fix BR #75201:
 	  Prevent crash when you activate a CervisiaPart view with RMB in 
@@ -255,7 +255,7 @@
 	  Prevent crash while embedded into Quanta because of
 	  a name conflict between the TagDialog classes.
 
-2004-01-16  André Wöbbeking  <Woebbeking@web.de>
+2004-01-16  AndrÃ© WÃ¶bbeking  <Woebbeking@web.de>
 
 	* Fix BR 72519 (file view):
 	  Don't select hidden files when you select a range of files 
@@ -309,11 +309,11 @@
 	  - Merged 'Appearance' and 'Colors' page
 	  - Moved creation of option pages in separate methods
 
-2003-08-09  André Wöbbeking  <Woebbeking@web.de>
+2003-08-09  AndrÃ© WÃ¶bbeking  <Woebbeking@web.de>
 
 	* Make file view configurable (column order/widths, sorting).
 
-2003-08-02  André Wöbbeking  <Woebbeking@web.de>
+2003-08-02  AndrÃ© WÃ¶bbeking  <Woebbeking@web.de>
 
 	* Fix/Implement FR 56042:
 	  Use the configured colors as foreground colors in the file AND
@@ -366,7 +366,7 @@
 
 	* Added showWatchers() method to the DCOP service.
 
-2003-06-19  André Wöbbeking  <Woebbeking@web.de>
+2003-06-19  AndrÃ© WÃ¶bbeking  <Woebbeking@web.de>
 
 	* Fix BR 59275 (DiffZoomWidget):
 	  o Use QStyle::querySubControlMetrics() to get the exact
@@ -416,7 +416,7 @@
 	* Use DCOP service for history action
 	* Added history() method to cvs DCOP service
 
-2003-05-10  André Wöbbeking  <Woebbeking@web.de>
+2003-05-10  AndrÃ© WÃ¶bbeking  <Woebbeking@web.de>
 
 	* Fix BR 50918:
 	  o Added possibility to diff a selected file against the
@@ -432,7 +432,7 @@
 	  KXMLGUIClient::stateChanged() with the corresponding
 	  setup in the part's rc-file.
 
-2003-05-05  André Wöbbeking  <Woebbeking@web.de>
+2003-05-05  AndrÃ© WÃ¶bbeking  <Woebbeking@web.de>
 
 	* Diff between any revision and the sandbox (only select
 	  revision A in the log dialog).
@@ -506,7 +506,7 @@
 
 	* Added login() and logout() methods to DCOP service.
 
-2003-01-26  André Wöbbeking <Woebbeking@web.de>
+2003-01-26  AndrÃ© WÃ¶bbeking <Woebbeking@web.de>
 
 	* Implemented new option "Hide Empty Directories"
 
@@ -551,11 +551,11 @@
 	* Make functionality to view diff in CommitDialog more visible
 	  by adding diff button.
 
-2003-01-11  André Wöbbeking <Woebbeking@web.de>
+2003-01-11  AndrÃ© WÃ¶bbeking <Woebbeking@web.de>
 
 	* unfoldTree(): reduced flicker and improved perfomance by disabling updates.
 
-2003-01-11  André Wöbbeking <Woebbeking@web.de>
+2003-01-11  AndrÃ© WÃ¶bbeking <Woebbeking@web.de>
 
 	* Moved colors from UpdateViewItem to UpdateView:
 	  o it's faster as you don't need KConfig in UpdateViewItem ctor
@@ -581,7 +581,7 @@
 	* Added new startJob() method to ProtocolView
 	  that uses the new cvs DCOP service
 
-2003-01-02  André Wöbbeking <Woebbeking@web.de>
+2003-01-02  AndrÃ© WÃ¶bbeking <Woebbeking@web.de>
 
 	* Replaced deprecated Qt classes/methods with actual equivalents.
 
@@ -590,11 +590,11 @@
 	* Separate GUI from functionality for AnnotateDialog
 	* Use DCOP service for log dialog
 
-2002-12-30  André Wöbbeking <Woebbeking@web.de>
+2002-12-30  AndrÃ© WÃ¶bbeking <Woebbeking@web.de>
 
 	* Use user's settings (locale and timezone) to display dates.
 
-2002-12-29  André Wöbbeking <Woebbeking@web.de>
+2002-12-29  AndrÃ© WÃ¶bbeking <Woebbeking@web.de>
 
 	* Fixed sorting in list views.
 
@@ -618,13 +618,13 @@
 	  to/from the configuration file of the cvs DCOP service
 	* Added kconf_update script
 
-2002-12-26  André Wöbbeking <Woebbeking@web.de>
+2002-12-26  AndrÃ© WÃ¶bbeking <Woebbeking@web.de>
 
 	* Fixed parsing of branch and tag names:
 	  o no more trailing spaces
 	  o names with more than 24 chars are identified now
 
-2002-12-23  André Wöbbeking <Woebbeking@web.de>
+2002-12-23  AndrÃ© WÃ¶bbeking <Woebbeking@web.de>
 
 	* All dialogs:
 	  - Inherit from KDialogBase instead of QDialog
@@ -652,11 +652,11 @@
 
 	* Added first version of cvs DCOP service
 
-2002-12-14  André Wöbbeking <Woebbeking@web.de>
+2002-12-14  AndrÃ© WÃ¶bbeking <Woebbeking@web.de>
 
 	* Removed ListViewItem. Use Q/KListViewItem instead.
 
-2002-12-14  André Wöbbeking <Woebbeking@web.de>
+2002-12-14  AndrÃ© WÃ¶bbeking <Woebbeking@web.de>
 
 	* ProtocolView::appendLine(): removed trailing <br>
 	  as QTextEdit::append() already adds a new paragraph.
@@ -726,7 +726,7 @@
 	  inserted in the annotate view. Also a bug
 	  introduced in 2002-06-11
 	* Changed annotate view to QListView. Based
-	  on a patch by  André Wöbbeking <Woebbeking@web.de>
+	  on a patch by  AndrÃ© WÃ¶bbeking <Woebbeking@web.de>
 	* Hide custom tooltips in list views when contents
 	  are scrolled
 	* Simplified history dialog filtering by

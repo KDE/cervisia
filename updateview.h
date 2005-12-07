@@ -1,6 +1,6 @@
 /* 
  * Copyright (C) 1999-2002 Bernd Gehrmann <bernd@mail.berlios.de>
- * Copyright (c) 2003-2005 André Wöbbeking <Woebbeking@web.de>
+ * Copyright (c) 2003-2005 AndrÃ© WÃ¶bbeking <Woebbeking@web.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
