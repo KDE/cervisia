@@ -21,6 +21,8 @@
 
 #include "changelogdlg.h"
 
+#include <QDate>
+
 #include <qfile.h>
 #include <qtextstream.h>
 #include <kconfig.h>
@@ -51,7 +53,7 @@ ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent, const char *name
     edit->setFont(cfg.readFontEntry("ChangeLogFont"));
 
     edit->setFocus();
-    edit->setWordWrap(Q3TextEdit::NoWrap);
+    edit->setLineWrapMode(QTextEdit::NoWrap);
     edit->setTextFormat(Qt::PlainText);
     edit->setCheckSpellingEnabled(true);
     QFontMetrics const fm(edit->fontMetrics());
@@ -114,18 +116,15 @@ bool ChangeLogDialog::readFile(const QString &filename)
                     return false;
                 }
             QTextStream stream(&f);
-            edit->setText(stream.read());
+            edit->setPlainText(stream.read());
             f.close();
         }
 
     KConfigGroup cs(&partConfig, "General");
     const QString username = cs.readEntry("Username", Cervisia::UserName());
 
-    edit->insertParagraph("", 0);
-    edit->insertParagraph("\t* ", 0);
-    edit->insertParagraph("", 0);
-    edit->insertParagraph(DateStringISO8601() + "  " + username, 0);
-    edit->setCursorPosition(2, 10);
+    edit->insertPlainText(DateStringISO8601() + "  " + username + "\n\n\t* \n\n");
+    edit->textCursor().movePosition(QTextCursor::Right, QTextCursor::MoveAnchor, 2);
 
     return true;
 }
@@ -133,53 +132,56 @@ bool ChangeLogDialog::readFile(const QString &filename)
 
 QString ChangeLogDialog::message()
 {
-    int no = 0;
-    // Find first line which begins with non-whitespace
-    while (no < edit->lines())
-        {
-            QString str = edit->text(no);
-            if (!str.isEmpty() && !str[0].isSpace())
-                break;
-            ++no;
-        }
-    ++no;
-    // Skip empty lines
-    while (no < edit->lines())
-        {
-            QString str = edit->text(no);
-            if( str.isEmpty() || str == " " )
-                break;
-            ++no;
-        }
-    QString res;
-    // Use all lines until one which begins with non-whitespace
-    // Remove tabs or 8 whitespace at beginning of each line
-    while (no < edit->lines())
-        {
-            QString str = edit->text(no);
-            if (!str.isEmpty() && !str[0].isSpace())
-                break;
-            if (!str.isEmpty() && str[0] == '\t')
-                str.remove(0, 1);
-            else
-                {
-                    int j;
-                    for (j = 0; j < (int)str.length(); ++j)
-                        if (!str[j].isSpace())
-                            break;
-                    str.remove(0, QMIN(j, 8));
-                }
-            res += str;
-            res += '\n';
-            ++no;
-        }
-    // Remove newlines at end
-    int l;
-    for (l = res.length()-1; l > 0; --l)
-        if (res[l] != '\n')
-            break;
-    res.truncate(l+1);
-    return res;
+#warning disabled to make it compile
+//     int no = 0;
+//     // Find first line which begins with non-whitespace
+//     while (no < edit->lines())
+//         {
+//             QString str = edit->text(no);
+//             if (!str.isEmpty() && !str[0].isSpace())
+//                 break;
+//             ++no;
+//         }
+//     ++no;
+//     // Skip empty lines
+//     while (no < edit->lines())
+//         {
+//             QString str = edit->text(no);
+//             if( str.isEmpty() || str == " " )
+//                 break;
+//             ++no;
+//         }
+//     QString res;
+//     // Use all lines until one which begins with non-whitespace
+//     // Remove tabs or 8 whitespace at beginning of each line
+//     while (no < edit->lines())
+//         {
+//             QString str = edit->text(no);
+//             if (!str.isEmpty() && !str[0].isSpace())
+//                 break;
+//             if (!str.isEmpty() && str[0] == '\t')
+//                 str.remove(0, 1);
+//             else
+//                 {
+//                     int j;
+//                     for (j = 0; j < (int)str.length(); ++j)
+//                         if (!str[j].isSpace())
+//                             break;
+//                     str.remove(0, QMIN(j, 8));
+//                 }
+//             res += str;
+//             res += '\n';
+//             ++no;
+//         }
+//     // Remove newlines at end
+//     int l;
+//     for (l = res.length()-1; l > 0; --l)
+//         if (res[l] != '\n')
+//             break;
+//     res.truncate(l+1);
+//     return res;
+
+    return "";
 }
 
 
