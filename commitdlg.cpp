@@ -27,6 +27,7 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <q3listbox.h>
+#include <q3textedit.h>
 //Added by qt3to4:
 #include <QTextStream>
 #include <QBoxLayout>
@@ -270,7 +271,7 @@ void CommitDialog::checkForTemplateFile()
 void CommitDialog::addTemplateText()
 {
     edit->append(m_templateText);
-    edit->moveCursor(Q3TextEdit::MoveHome, false);
+    edit->textCursor().movePosition(QTextCursor::Start);
     edit->ensureCursorVisible();
 }
 
