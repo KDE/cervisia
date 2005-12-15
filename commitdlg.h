@@ -1,6 +1,7 @@
 /* 
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
+ *  Copyright (c) 2003-2005 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,11 +25,12 @@
 #include <qstringlist.h>
 #include <kdialogbase.h>
 
+namespace Cervisia { class LogMessageEdit; }
 
 class QComboBox;
 class QCheckBox;
-class Q3ListBox;
-class KTextEdit;
+class Q3ListViewItem;
+class KListView;
 class KConfig;
 class CvsService_stub;
 
@@ -37,21 +39,22 @@ class CommitDialog : public KDialogBase
 {
     Q_OBJECT
 
-public:   
+public:
     CommitDialog( KConfig& cfg, CvsService_stub* service, QWidget *parent=0, 
                   const char *name=0 );
 
     virtual ~CommitDialog();
 
     void setFileList(const QStringList &list);
+    QStringList fileList() const;
     void setLogMessage(const QString &msg);
     QString logMessage() const;
     void setLogHistory(const QStringList &list);
 
 private slots:
     void comboActivated(int);
-    void fileSelected(int);
-    void fileHighlighted(int);
+    void fileSelected(Q3ListViewItem* item);
+    void fileHighlighted();
     void diffClicked();
     void useTemplateClicked();
 
@@ -61,8 +64,8 @@ private:
     void addTemplateText();
     void removeTemplateText();
 
-    Q3ListBox *listbox;
-    KTextEdit *edit;
+    KListView* m_fileList;
+    Cervisia::LogMessageEdit* edit;
     QComboBox *combo;
     QStringList commits;
     int current_index;
@@ -71,7 +74,7 @@ private:
 
     QCheckBox* m_useTemplateChk;
     QString    m_templateText;
-    
+
     KConfig&            partConfig;
     CvsService_stub*    cvsService;     // for diff dialog
 };

@@ -1,7 +1,7 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2002-2005 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,21 +26,37 @@
 #include <qfileinfo.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <q3listbox.h>
-#include <q3textedit.h>
+#include <q3header.h>
+#include <klistview.h>
 //Added by qt3to4:
 #include <QTextStream>
 #include <QBoxLayout>
 #include <QVBoxLayout>
-#include <ktextedit.h>
 #include <kconfig.h>
 #include <klocale.h>
 
 #include "cvsservice_stub.h"
+#include "logmessageedit.h"
 #include "diffdlg.h"
 
 
-CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service, 
+class CommitListItem : public Q3CheckListItem
+{
+public:
+    CommitListItem(Q3ListView* parent, const QString& text, const QString fileName)
+        : Q3CheckListItem(parent, text, Q3CheckListItem::CheckBox)
+        , m_fileName(fileName)
+    {
+    }
+
+    QString fileName() const { return m_fileName; }
+
+private:
+    QString m_fileName;
+};
+
+
+CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service,
                            QWidget *parent, const char *name)
     : KDialogBase(parent, name, true, i18n("CVS Commit"),
                   Ok | Cancel | Help | User1, Ok, true)
@@ -54,26 +70,31 @@ CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service,
     QLabel *textlabel = new QLabel( i18n("Commit the following &files:"), mainWidget );
     layout->addWidget(textlabel);
 
-    listbox = new Q3ListBox(mainWidget);
-    textlabel->setBuddy(listbox);
-    connect( listbox, SIGNAL(selected(int)), this, SLOT(fileSelected(int)));
-    connect( listbox, SIGNAL(highlighted(int)), this, SLOT(fileHighlighted(int)));
-    layout->addWidget(listbox, 5);
+    m_fileList = new KListView(mainWidget);
+    m_fileList->addColumn("");
+    m_fileList->setFullWidth(true);
+    m_fileList->header()->hide();
+    textlabel->setBuddy(m_fileList);
+    connect( m_fileList, SIGNAL(doubleClicked(QListViewItem*)),
+             this, SLOT(fileSelected(QListViewItem*)));
+    connect( m_fileList, SIGNAL(selectionChanged()),
+             this, SLOT(fileHighlighted()) );
+    layout->addWidget(m_fileList, 5);
 
     QLabel *archivelabel = new QLabel(i18n("Older &messages:"), mainWidget);
     layout->addWidget(archivelabel);
-            
+
     combo = new QComboBox(mainWidget);
     archivelabel->setBuddy(combo);
     connect( combo, SIGNAL(activated(int)), this, SLOT(comboActivated(int)) );
     // make sure that combobox is smaller than the screen
     combo->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
     layout->addWidget(combo);
-            
+
     QLabel *messagelabel = new QLabel(i18n("&Log message:"), mainWidget);
     layout->addWidget(messagelabel);
 
-    edit = new KTextEdit(mainWidget);
+    edit = new Cervisia::LogMessageEdit(mainWidget);
     messagelabel->setBuddy(edit);
     edit->setCheckSpellingEnabled(true);
     edit->setFocus();
@@ -89,7 +110,7 @@ CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service,
     setButtonGuiItem(User1, KGuiItem(i18n("&Diff"), "vcs_diff"));
     enableButton(User1, false);
     connect( this, SIGNAL(user1Clicked()),
-             this, SLOT(diffClicked()) );            
+             this, SLOT(diffClicked()) );
 
     setHelp("commitingfiles");
 
@@ -109,15 +130,34 @@ CommitDialog::~CommitDialog()
 
 void CommitDialog::setFileList(const QStringList &list)
 {
-    listbox->insertStringList(list);
+    QString currentDirName = QFileInfo(QLatin1String(".")).absFilePath();
 
-    // the dot for the root directory is hard to see, so
-    // we convert it to the absolut path
-    if (const Q3ListBoxItem* item = listbox->findItem(QLatin1String("."), Q3ListBox::ExactMatch))
+    QStringList::ConstIterator it = list.begin();
+    for( ; it != list.end(); ++it )
     {
-        listbox->changeItem(QFileInfo(QLatin1String(".")).absoluteFilePath(),
-                            listbox->index(item));
+        // the dot for the root directory is hard to see, so
+        // we convert it to the absolut path
+        QString text = (*it != QLatin1String(".") ? *it : currentDirName);
+
+        edit->compObj()->addItem(text);
+        CommitListItem* item = new CommitListItem(m_fileList, text, *it);
+        item->setOn(true);
     }
+}
+
+
+QStringList CommitDialog::fileList() const
+{
+    QStringList files;
+
+    Q3ListViewItemIterator it(m_fileList, Q3ListViewItemIterator::Checked);
+    for( ; it.current(); ++it )
+    {
+        CommitListItem* item = static_cast<CommitListItem*>(it.current());
+        files.append(item->fileName());
+    }
+
+    return files;
 }
 
 
@@ -165,14 +205,14 @@ void CommitDialog::comboActivated(int index)
 {
     if (index == current_index)
         return;
-    
+
     if (index == 0) // Handle current text
         edit->setText(current_text);
     else
         {
             if (current_index == 0) // Store current text
                 current_text = edit->text();
-            
+
             // Show archived text
             edit->setText(commits[index-1]);
         }
@@ -180,45 +220,45 @@ void CommitDialog::comboActivated(int index)
 }
 
 
-void CommitDialog::fileSelected(int index)
+void CommitDialog::fileSelected(Q3ListViewItem* item)
 {
-    Q3ListBoxItem *item = listbox->item(index);
-    if ( !item )
+    // double click on empty space?
+    if( !item )
         return;
 
-    showDiffDialog(item->text());
+    showDiffDialog(item->text(0));
 }
 
 
-void CommitDialog::fileHighlighted(int index)
+void CommitDialog::fileHighlighted()
 {
-    highlightedFile = index;
-    enableButton(User1, true);
+    bool isItemSelected = (m_fileList->selectedItem() != 0);
+    enableButton(User1, isItemSelected);
 }
 
 
 void CommitDialog::diffClicked()
 {
-    Q3ListBoxItem *item = listbox->item(highlightedFile);
-    if ( !item )
+    Q3ListViewItem* item = m_fileList->selectedItem();
+    if( !item )
         return;
 
-    showDiffDialog(item->text());
+    showDiffDialog(item->text(0));
 }
 
 
 void CommitDialog::showDiffDialog(const QString& fileName)
 {
     DiffDialog *l = new DiffDialog(partConfig, this, "diffdialog");
-    
+
     // disable diff button so user doesn't open the same diff several times (#83018)
     enableButton(User1, false);
-    
+
     if (l->parseCvsDiff(cvsService, fileName, "", ""))
         l->show();
     else
         delete l;
-    
+
     // re-enable diff button
     enableButton(User1, true);
 }
