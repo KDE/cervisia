@@ -65,7 +65,7 @@ void LogMessageEdit::setCompletedText(const QString& /*match*/)
 }
 
 
-void LogMessageEdit::setCompletedItems(const QStringList&)
+void LogMessageEdit::setCompletedItems(const QStringList&, bool autoSuggest)
 {
 }
 

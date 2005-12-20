@@ -26,6 +26,7 @@
 
 #include <sys/types.h>
 #include <signal.h>
+#include <q3cstring.h>
 
 static const char LOGIN_PHRASE[]   = "Logging in to";
 static const char FAILURE_PHRASE[] = "authorization failed:";

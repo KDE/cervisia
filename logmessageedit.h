@@ -38,7 +38,7 @@ public:
     explicit LogMessageEdit(QWidget* parent);
 
     virtual void setCompletedText(const QString& match);
-    virtual void setCompletedItems(const QStringList& items);
+    virtual void setCompletedItems(const QStringList& items, bool autoSuggest =true);
 
 protected:
     void keyPressEvent(QKeyEvent* event);

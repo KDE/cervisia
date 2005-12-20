@@ -1,5 +1,6 @@
 CERVISIA_VERSION = 2.2.89
 INCLUDES = -I./cvsservice -D_BSD_SOURCE $(all_includes)
+AM_CPPFLAGS = -DKDE3_SUPPORT
 
 SUBDIRS = cvsservice . pics
 
