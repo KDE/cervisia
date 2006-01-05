@@ -17,6 +17,7 @@ B<cervisia>
          S<[ B<--geometry> I<geometry> ]>
          S<[ B<--resolve> I<filename> ]>
          S<[ B<--log> I<filename> ]>
+         S<[ B<--annotate> I<filename> ]>
          S<[ I<directory> ]>
 
 =head1 DESCRIPTION
@@ -42,6 +43,10 @@ Shows a resolve dialog for the given file
 =item B<--log> I<filename> 
 
 Shows a log dialog for the given file
+
+=item B<--annotate> I<filename>
+
+Shows a annotation dialog for the given file
 
 =item B<--caption> I<caption>
 
@@ -92,12 +97,12 @@ F<_KDEHTMLDIR_/en/cervisia/index.html>
 
 L<cvs(1)>
 
-F<http://www.kde.org/apps/cervisia>
+F<http://cervisia.kde.org/>
 
 =head1 AUTHOR
 
 Cervisia was originally developed by Bernd Gehrmann and is now maintained by
-Christian Loose <christian.loose@hamburg.de>.
+Christian Loose <christian.loose@kdemail.net>.
 
 =head1 REPORTING BUGS
 
