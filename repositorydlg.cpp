@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2004 Christian Loose <christian.loose@kdemail.net>
+ *  Copyright (c) 2002-2006 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -90,9 +90,8 @@ RepositoryListItem::RepositoryListItem(KListView* parent, const QString& repo,
     : KListViewItem(parent)
     , m_isLoggedIn(loggedin)
 {
-    kdDebug() << "RepositoryListItem::RepositoryListItem(): repo=" << repo << endl;
     setText(0, repo);
-    
+
     changeLoginStatusColumn();
 }
 
@@ -278,9 +277,6 @@ void RepositoryDialog::readConfigFile()
         m_serviceConfig->setGroup(QString::fromLatin1("Repository-") +
                                   ritem->repository());
 
-        kdDebug() << "(1) RepositoryDialog::readConfigFile(): repository = "
-                  << ritem->repository() << endl;
-
         QString rsh       = m_serviceConfig->readEntry("rsh", QString());
         QString server    = m_serviceConfig->readEntry("cvs_server", QString());
         int compression   = m_serviceConfig->readNumEntry("Compression", -1);
@@ -413,13 +409,15 @@ void RepositoryDialog::slotLoginClicked()
     if( !item )
         return;
 
-    kdDebug() << "RepositoryDialog::slotLoginClicked(): repo="
-              << item->repository() << endl;
+    kdDebug(8050) << k_funcinfo << "repository = " << item->repository() << endl;
 
     DCOPRef job = m_cvsService->login(item->repository());
     if( !m_cvsService->ok() )
-        // TODO: error handling
+    {
+        kdError(8050) << "Failed to call login() method of the cvs DCOP service "
+                      << "(" << m_cvsService->app() << ")" << endl;
         return;
+    }
 
     bool success = job.call("execute()");
     if( !success )
@@ -440,10 +438,15 @@ void RepositoryDialog::slotLogoutClicked()
     if( !item )
         return;
 
+    kdDebug(8050) << k_funcinfo << "repository = " << item->repository() << endl;
+
     DCOPRef job = m_cvsService->logout(item->repository());
     if( !m_cvsService->ok() )
-        // TODO: error handling
+    {
+        kdError(8050) << "Failed to call logout() method of the cvs DCOP service "
+                      << "(" << m_cvsService->app() << ")" << endl;
         return;
+    }
 
     ProgressDialog dlg(this, "Logout", job, "logout", i18n("CVS Logout"));
     if( !dlg.execute() )
@@ -489,9 +492,6 @@ void RepositoryDialog::writeRepositoryData(RepositoryListItem* item)
     // write entries to cvs DCOP service configuration
     m_serviceConfig->setGroup(QString::fromLatin1("Repository-") +
                               item->repository());
-
-    kdDebug() << "(1) RepositoryDialog::writeRepositoryData(): repository = "
-              << item->repository() << endl;
 
     m_serviceConfig->writeEntry("rsh", item->rsh());
     m_serviceConfig->writeEntry("cvs_server", item->server());
