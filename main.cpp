@@ -149,7 +149,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
     KAboutData about("cervisia", I18N_NOOP("Cervisia"), CERVISIA_VERSION,
                      I18N_NOOP("A CVS frontend"), KAboutData::License_GPL,
                      I18N_NOOP("Copyright (c) 1999-2002 Bernd Gehrmann\n"
-                               "Copyright (c) 2002-2004 the Cervisia authors"), 0,
+                               "Copyright (c) 2002-2006 the Cervisia authors"), 0,
                      "http://www.kde.org/apps/cervisia");
 
     about.addAuthor("Bernd Gehrmann", I18N_NOOP("Original author and former "
