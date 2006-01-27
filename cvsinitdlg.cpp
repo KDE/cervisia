@@ -50,7 +50,7 @@ CvsInitDialog::CvsInitDialog(QWidget* parent, const char* name)
     m_directoryEdit = new KLineEdit(mainWidget);
     m_directoryEdit->setFocus();
         
-    KURLCompletion* comp = new KURLCompletion();
+    KUrlCompletion* comp = new KUrlCompletion();
     m_directoryEdit->setCompletionObject(comp);
     m_directoryEdit->setAutoDeleteCompletionObject(true);
 

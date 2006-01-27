@@ -73,7 +73,7 @@ public:
 public slots:
     // unused because we overwrite the default behaviour of openURL()
     virtual bool openFile() { return true; }
-    virtual bool openURL( const KURL & );
+    virtual bool openURL( const KUrl & );
 
     void openFile(QString filename);
     void openFiles(const QStringList &filenames);

@@ -137,11 +137,11 @@ void CervisiaShell::setupActions()
 void CervisiaShell::openURL()
 {
     if( !m_lastOpenDir.isEmpty() )
-        m_part->openURL(KURL::fromPathOrURL(m_lastOpenDir));
+        m_part->openURL(KUrl::fromPathOrURL(m_lastOpenDir));
 }
 
 
-void CervisiaShell::openURL(const KURL& url)
+void CervisiaShell::openURL(const KUrl& url)
 {
     m_part->openURL(url);
 }

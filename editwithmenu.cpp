@@ -27,7 +27,7 @@ using namespace Cervisia;
 #include <kurl.h>
 
 
-EditWithMenu::EditWithMenu(const KURL& url, QWidget* parent)
+EditWithMenu::EditWithMenu(const KUrl& url, QWidget* parent)
     : QObject(parent)
     , m_menu(0)
     , m_url(url)
@@ -67,7 +67,7 @@ void EditWithMenu::itemActivated(int item)
 {
     KService::Ptr service = m_offers[item];
 
-    KURL::List list;
+    KUrl::List list;
     list.append(m_url);
 
     KRun::run(*service, list);

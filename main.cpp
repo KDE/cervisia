@@ -193,7 +193,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
         const KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
         if( args->count() )
         {
-            KURL directory = args->url(0);
+            KUrl directory = args->url(0);
             shell->openURL(directory);
         }
         else

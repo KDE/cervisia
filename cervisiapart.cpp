@@ -186,7 +186,7 @@ KConfig *CervisiaPart::config()
     return CervisiaFactory::instance()->config();
 }
 
-bool CervisiaPart::openURL( const KURL &u )
+bool CervisiaPart::openURL( const KUrl &u )
 {
     // right now, we are unfortunately not network-aware
     if( !u.isLocalFile() )
@@ -242,7 +242,7 @@ void CervisiaPart::setupActions()
     action->setWhatsThis( hint );
 
     recent = new KRecentFilesAction( i18n("Recent Sandboxes"), 0,
-                                     this, SLOT( openURL( const KURL & ) ),
+                                     this, SLOT( openURL( const KUrl & ) ),
                                      actionCollection(), "file_open_recent" );
 
     action = new KAction( i18n("&Insert ChangeLog Entry..."), 0,
@@ -666,7 +666,7 @@ void CervisiaPart::popupRequested(KListView*, Q3ListViewItem* item, const QPoint
 
             if( !selectedFile.isEmpty() )
             {
-                KURL u;
+                KUrl u;
                 u.setPath(sandbox + "/" + selectedFile);
 
                 m_currentEditMenu = new Cervisia::EditWithMenu(u, popup);
@@ -828,7 +828,7 @@ void CervisiaPart::openFiles(const QStringList &filenames)
     QStringList::ConstIterator end = filenames.end();
     for( ; it != end; ++it )
     {
-        KURL u;
+        KUrl u;
         u.setPath(dir.absoluteFilePath(*it));
         KRun* run = new KRun(u, 0, true, false);
         run->setRunExecutables(false);
@@ -1024,7 +1024,7 @@ void CervisiaPart::slotFileProperties()
     // Create URL from selected filename
     QDir dir(sandbox);
 
-    KURL u;
+    KUrl u;
     u.setPath(dir.absoluteFilePath(filename));
 
     // show file properties dialog
@@ -1713,7 +1713,7 @@ bool CervisiaPart::openSandbox(const QString &dirname)
 
         // remove path from recent sandbox menu
         QFileInfo fi(dirname);
-        recent->removeURL( KURL::fromPathOrURL(fi.absoluteFilePath()) );
+        recent->removeURL( KUrl::fromPathOrURL(fi.absoluteFilePath()) );
 
         return false;
     }
@@ -1724,14 +1724,14 @@ bool CervisiaPart::openSandbox(const QString &dirname)
 
     // get path of sandbox for recent sandbox menu
     sandbox = cvsRepository.workingCopy();
-    recent->addURL( KURL::fromPathOrURL(sandbox) );
+    recent->addURL( KUrl::fromPathOrURL(sandbox) );
 
     // get repository for the caption of the window
     repository = cvsRepository.location();
     emit setWindowCaption(sandbox + "(" + repository + ")");
 
     // set m_url member for tabbed window modus of Konqueror
-    m_url = KURL::fromPathOrURL(sandbox);
+    m_url = KUrl::fromPathOrURL(sandbox);
 
     // *NOTICE*
     // The order is important here. We have to set the m_url member before

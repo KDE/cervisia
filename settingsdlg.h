@@ -31,7 +31,7 @@ class KIntNumInput;
 class KLineEdit;
 class KConfig;
 class KColorButton;
-class KURLRequester;
+class KUrlRequester;
 class AdvancedPage;
 
 
@@ -71,10 +71,10 @@ private:
     KConfig *config;
     KIntNumInput *contextedit;
     KIntNumInput *tabwidthedit;
-    KURLRequester *cvspathedit;
+    KUrlRequester *cvspathedit;
     KLineEdit *usernameedit;
     KLineEdit *diffoptedit;
-    KURLRequester *extdiffedit;
+    KUrlRequester *extdiffedit;
     QCheckBox *remotestatusbox;
     QCheckBox *localstatusbox;
     FontButton*   m_protocolFontBox;

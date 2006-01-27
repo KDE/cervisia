@@ -432,7 +432,7 @@ void LogDialog::slotOk()
         chmod(QFile::encodeName(tempFileName), 0400);
 
         // open file in preferred editor
-        KURL url;
+        KUrl url;
         url.setPath(tempFileName);
         (void) new KRun(url, 0, true, false);
     }

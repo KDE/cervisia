@@ -126,7 +126,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
     workdir_edit->setText(QDir::homePath());
     workdir_edit->setMinimumWidth(fontMetrics().width('X') * 40);
     
-    KURLCompletion* comp = new KURLCompletion();
+    KUrlCompletion* comp = new KUrlCompletion();
     workdir_edit->setCompletionObject(comp);
     workdir_edit->setAutoDeleteCompletionObject(true);
     connect( workdir_edit, SIGNAL(returnPressed(const QString&)),

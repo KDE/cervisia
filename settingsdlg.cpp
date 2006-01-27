@@ -250,7 +250,7 @@ void SettingsDialog::addGeneralPage()
     layout->addWidget(usernameedit);
 
     QLabel *cvspathlabel = new QLabel( i18n("&Path to CVS executable, or 'cvs':"), generalPage );
-    cvspathedit = new KURLRequester(generalPage);
+    cvspathedit = new KUrlRequester(generalPage);
     cvspathlabel->setBuddy(cvspathedit);
 
     layout->addWidget(cvspathlabel);
@@ -293,7 +293,7 @@ void SettingsDialog::addDiffPage()
     layout->addWidget(tabwidthedit, 2, 1);
 
     QLabel *extdifflabel = new QLabel(i18n("External diff &frontend:"), diffPage);
-    extdiffedit = new KURLRequester(diffPage);
+    extdiffedit = new KUrlRequester(diffPage);
     extdifflabel->setBuddy(extdiffedit);
 
     layout->addWidget(extdifflabel, 3, 0);

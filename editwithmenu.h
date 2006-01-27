@@ -37,7 +37,7 @@ class EditWithMenu : public QObject
     Q_OBJECT
 
 public:
-    EditWithMenu(const KURL& url, QWidget* parent);
+    EditWithMenu(const KUrl& url, QWidget* parent);
     Q3PopupMenu* menu();
 
 private slots:
@@ -46,7 +46,7 @@ private slots:
 private:
     KTrader::OfferList m_offers;
     Q3PopupMenu*        m_menu;
-    KURL               m_url;
+    KUrl               m_url;
 };
 
 

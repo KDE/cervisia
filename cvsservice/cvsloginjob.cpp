@@ -22,7 +22,7 @@
 
 #include <kdebug.h>
 #include <klocale.h>
-#include <kpassdlg.h>
+#include <kpassworddialog.h>
 
 #include <sys/types.h>
 #include <signal.h>

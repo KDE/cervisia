@@ -41,7 +41,7 @@ public:
 
 public slots:
     void openURL();
-    void openURL(const KURL& url);
+    void openURL(const KUrl& url);
     void slotConfigureKeys();
     void slotConfigureToolBars();
 
