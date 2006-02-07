@@ -80,7 +80,7 @@ bool CvsLoginJob::execute()
     int res = m_Proc->exec(m_CvsClient, m_Arguments);
     if( res < 0 )
     {
-        kdDebug(8051) << "Couldn't start 'cvs login' process!" << endl;
+        kDebug(8051) << "Couldn't start 'cvs login' process!" << endl;
         return false;
     }
 
@@ -95,7 +95,7 @@ bool CvsLoginJob::execute()
 
         // add line to output list
         m_output << line;
-        kdDebug(8051) << "process output = " << line << endl;
+        kDebug(8051) << "process output = " << line << endl;
 
         // retrieve repository from 'Logging in to'-line
         if( line.contains(LOGIN_PHRASE) )
@@ -107,7 +107,7 @@ bool CvsLoginJob::execute()
         // process asks for the password
         if( line.contains(PASS_PHRASE) )
         {
-            kdDebug(8051) << "process waits for the password." << endl;
+            kDebug(8051) << "process waits for the password." << endl;
 
             // show password dialog
             // TODO: We really should display the repository name. Unfortunately
@@ -132,7 +132,7 @@ bool CvsLoginJob::execute()
 
                     // add line to output list
                     m_output << line;
-                    kdDebug(8051) << "process output = " << line << endl;
+                    kDebug(8051) << "process output = " << line << endl;
                 }
 
                 result = false;

@@ -160,8 +160,8 @@ bool CvsJob::execute()
     SshAgent ssh;
     if( !ssh.pid().isEmpty() )
     {
-        // kdDebug(8051) << "PID  = " << ssh.pid() << endl;
-        // kdDebug(8051) << "SOCK = " << ssh.authSock() << endl;
+        // kDebug(8051) << "PID  = " << ssh.pid() << endl;
+        // kDebug(8051) << "SOCK = " << ssh.authSock() << endl;
 
         d->childproc->setEnvironment("SSH_AGENT_PID", ssh.pid());
         d->childproc->setEnvironment("SSH_AUTH_SOCK", ssh.authSock());
@@ -185,7 +185,7 @@ bool CvsJob::execute()
     connect(d->childproc, SIGNAL(receivedStderr(KProcess*, char*, int)),
         SLOT(slotReceivedStderr(KProcess*, char*, int)) );
 
-    kdDebug(8051) << "Execute cvs command: " << cvsCommand() << endl;
+    kDebug(8051) << "Execute cvs command: " << cvsCommand() << endl;
 
     d->isRunning = true;
     return d->childproc->start(KProcess::NotifyOnExit, KProcess::AllOutput);

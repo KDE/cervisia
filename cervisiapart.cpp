@@ -680,7 +680,7 @@ void CervisiaPart::popupRequested(KListView*, Q3ListViewItem* item, const QPoint
         popup->exec(p);
     }
     else
-        kdDebug(8050) << "CervisiaPart: can't get XML definition for " << xmlName << ", factory()=" << factory() << endl;
+        kDebug(8050) << "CervisiaPart: can't get XML definition for " << xmlName << ", factory()=" << factory() << endl;
 }
 
 void CervisiaPart::updateActions()

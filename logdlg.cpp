@@ -548,7 +548,7 @@ void LogDialog::revisionSelected(QString rev, bool rmb)
                 updateButtons();
                 return;
             }
-    kdDebug(8050) << "Internal error: Revision not found " << rev << "." << endl;
+    kDebug(8050) << "Internal error: Revision not found " << rev << "." << endl;
 }
 
 

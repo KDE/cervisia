@@ -514,7 +514,7 @@ void ResolveDialog::choose(ChooseType ch)
             m_contentMergedVersion = contentVersionB(item) + contentVersionA(item);
             break;
         default:
-            kdDebug(8050) << "Internal error at switch" << endl;
+            kDebug(8050) << "Internal error at switch" << endl;
         }
 
     updateMergedVersion(item, ch);

@@ -93,7 +93,7 @@ RepositoryListItem::RepositoryListItem(KListView* parent, const QString& repo,
     : KListViewItem(parent)
     , m_isLoggedIn(loggedin)
 {
-    kdDebug() << "RepositoryListItem::RepositoryListItem(): repo=" << repo << endl;
+    kDebug() << "RepositoryListItem::RepositoryListItem(): repo=" << repo << endl;
     setText(0, repo);
     
     changeLoginStatusColumn();
@@ -281,7 +281,7 @@ void RepositoryDialog::readConfigFile()
         m_serviceConfig->setGroup(QLatin1String("Repository-") +
                                   ritem->repository());
 
-        kdDebug() << "(1) RepositoryDialog::readConfigFile(): repository = "
+        kDebug() << "(1) RepositoryDialog::readConfigFile(): repository = "
                   << ritem->repository() << endl;
 
         QString rsh       = m_serviceConfig->readEntry("rsh", QString());
@@ -416,7 +416,7 @@ void RepositoryDialog::slotLoginClicked()
     if( !item )
         return;
 
-    kdDebug() << "RepositoryDialog::slotLoginClicked(): repo="
+    kDebug() << "RepositoryDialog::slotLoginClicked(): repo="
               << item->repository() << endl;
 
     DCOPRef job = m_cvsService->login(item->repository());
@@ -493,7 +493,7 @@ void RepositoryDialog::writeRepositoryData(RepositoryListItem* item)
     m_serviceConfig->setGroup(QLatin1String("Repository-") +
                               item->repository());
 
-    kdDebug() << "(1) RepositoryDialog::writeRepositoryData(): repository = "
+    kDebug() << "(1) RepositoryDialog::writeRepositoryData(): repository = "
               << item->repository() << endl;
 
     m_serviceConfig->writeEntry("rsh", item->rsh());
