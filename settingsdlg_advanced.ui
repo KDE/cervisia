@@ -67,10 +67,10 @@
             <property name="name">
                 <cstring>kcfg_Compression</cstring>
             </property>
-            <property name="minValue">
+            <property name="minimum">
                 <number>0</number>
             </property>
-            <property name="maxValue">
+            <property name="maximum">
                 <number>9</number>
             </property>
         </widget>
@@ -78,10 +78,10 @@
             <property name="name">
                 <cstring>kcfg_Timeout</cstring>
             </property>
-            <property name="minValue">
+            <property name="minimum">
                 <number>0</number>
             </property>
-            <property name="maxValue">
+            <property name="maximum">
                 <number>50000</number>
             </property>
         </widget>
