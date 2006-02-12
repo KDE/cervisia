@@ -74,7 +74,7 @@ DiffView::DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
     textwidth = 0;
 
     partConfig.setGroup("General");
-    m_tabWidth = partConfig.readNumEntry("TabWidth", 8);
+    m_tabWidth = partConfig.readEntry("TabWidth", 8);
 
     items.setAutoDelete(true);
     linenos = withlinenos;

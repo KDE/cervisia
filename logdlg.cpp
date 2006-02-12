@@ -202,7 +202,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     resize(size);
 
     KConfigGroup cs(&partConfig, "LogDialog");
-    tabWidget->setCurrentPage(cs.readNumEntry("ShowTab", 0));
+    tabWidget->setCurrentPage(cs.readEntry("ShowTab", 0));
 
     updateButtons();
 }

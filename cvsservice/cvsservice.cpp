@@ -89,7 +89,7 @@ CvsService::CvsService()
 
     KConfig* config = KGlobal::config();
     KConfigGroup cs(config, "General");
-    if( cs.readBoolEntry("UseSshAgent", false) )
+    if( cs.readEntry("UseSshAgent", false) )
     {
         // use the existing or start a new ssh-agent
         SshAgent ssh;

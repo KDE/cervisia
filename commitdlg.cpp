@@ -291,7 +291,7 @@ void CommitDialog::checkForTemplateFile()
 
             m_useTemplateChk->setEnabled(true);
             KConfigGroup cs(&partConfig, "CommitDialog");
-            bool check = cs.readBoolEntry("UseTemplate", true);
+            bool check = cs.readEntry("UseTemplate", true);
             m_useTemplateChk->setChecked(check);
 
             addTemplateText();

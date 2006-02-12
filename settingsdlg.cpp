@@ -131,9 +131,9 @@ void SettingsDialog::readSettings()
     // read entries from cvs DCOP service configuration
     serviceConfig->setGroup("General");
     cvspathedit->setURL(serviceConfig->readPathEntry("CVSPath", "cvs"));
-    m_advancedPage->kcfg_Compression->setValue(serviceConfig->readNumEntry(
+    m_advancedPage->kcfg_Compression->setValue(serviceConfig->readEntry(
                                                    "Compression", 0));
-    m_advancedPage->kcfg_UseSshAgent->setChecked(serviceConfig->readBoolEntry(
+    m_advancedPage->kcfg_UseSshAgent->setChecked(serviceConfig->readEntry(
                                                    "UseSshAgent", false));
 
     config->setGroup("General");
@@ -144,8 +144,8 @@ void SettingsDialog::readSettings()
     tabwidthedit->setValue((int)config->readUnsignedNumEntry("TabWidth", 8));
     diffoptedit->setText(config->readEntry("DiffOptions"));
     extdiffedit->setURL(config->readPathEntry("ExternalDiff"));
-    remotestatusbox->setChecked(config->readBoolEntry("StatusForRemoteRepos", false));
-    localstatusbox->setChecked(config->readBoolEntry("StatusForLocalRepos", false));
+    remotestatusbox->setChecked(config->readEntry("StatusForRemoteRepos", false));
+    localstatusbox->setChecked(config->readEntry("StatusForLocalRepos", false));
 
     // read configuration for look and feel page
     config->setGroup("LookAndFeel");
@@ -153,7 +153,7 @@ void SettingsDialog::readSettings()
     m_annotateFontBox->setFont(config->readFontEntry("AnnotateFont"));
     m_diffFontBox->setFont(config->readFontEntry("DiffFont"));
     m_changelogFontBox->setFont(config->readFontEntry("ChangeLogFont"));
-    m_splitterBox->setChecked(config->readBoolEntry("SplitHorizontally",true));
+    m_splitterBox->setChecked(config->readEntry("SplitHorizontally",true));
 
     m_conflictButton->setColor(CervisiaSettings::conflictColor());
     m_localChangeButton->setColor(CervisiaSettings::localChangeColor());  

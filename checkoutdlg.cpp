@@ -430,14 +430,14 @@ void CheckoutDialog::restoreUserInput()
         vendortag_edit->setText(cs.readEntry("Vendor tag"));
         releasetag_edit->setText(cs.readEntry("Release tag"));
         ignore_edit->setText(cs.readEntry("Ignore files"));
-        binary_box->setChecked(cs.readBoolEntry("Import binary"));
+        binary_box->setChecked(cs.readEntry("Import binary",false));
     }
     else
     {
         module_combo->setEditText(cs.readEntry("Module"));
         branchCombo->setCurrentText(cs.readEntry("Branch"));
         alias_edit->setText(cs.readEntry("Alias"));
-        export_box->setChecked(cs.readBoolEntry("ExportOnly"));
+        export_box->setChecked(cs.readEntry("ExportOnly", false));
         recursive_box->setChecked(true);
     }
 }

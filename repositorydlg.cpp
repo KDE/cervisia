@@ -286,8 +286,8 @@ void RepositoryDialog::readConfigFile()
 
         QString rsh       = m_serviceConfig->readEntry("rsh", QString());
         QString server    = m_serviceConfig->readEntry("cvs_server", QString());
-        int compression   = m_serviceConfig->readNumEntry("Compression", -1);
-        bool retrieveFile = m_serviceConfig->readBoolEntry("RetrieveCvsignore",
+        int compression   = m_serviceConfig->readEntry("Compression", -1);
+        bool retrieveFile = m_serviceConfig->readEntry("RetrieveCvsignore",
                                                            false);
 
         ritem->setRsh(rsh);

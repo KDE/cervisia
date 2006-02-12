@@ -128,7 +128,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     // Create UI
     KConfig *conf = config();
     conf->setGroup("LookAndFeel");
-    bool splitHorz = conf->readBoolEntry("SplitHorizontally",true);
+    bool splitHorz = conf->readEntry("SplitHorizontally",true);
 
     // When we couldn't start the DCOP service, we just display a QLabel with
     // an explaination
@@ -1625,7 +1625,7 @@ void CervisiaPart::slotConfigure()
     l->exec();
 
     conf->setGroup("LookAndFeel");
-    bool splitHorz = conf->readBoolEntry("SplitHorizontally",true);
+    bool splitHorz = conf->readEntry("SplitHorizontally",true);
     splitter->setOrientation( splitHorz ?
                               Qt::Vertical :
                               Qt::Horizontal);
@@ -1749,7 +1749,7 @@ bool CervisiaPart::openSandbox(const QString &dirname)
 
     KConfig *conf = config();
     conf->setGroup("General");
-    bool dostatus = conf->readBoolEntry(repository.contains(":")?
+    bool dostatus = conf->readEntry(repository.contains(":")?
                                         "StatusForRemoteRepos" :
                                         "StatusForLocalRepos",
                                         false);
@@ -1761,7 +1761,7 @@ bool CervisiaPart::openSandbox(const QString &dirname)
 
     //load the recentCommits for this app from the KConfig app
     conf->setGroup( "CommitLogs" );
-    recentCommits = conf->readListEntry( sandbox, COMMIT_SPLIT_CHAR );
+    recentCommits = conf->readEntry( sandbox,QStringList(), COMMIT_SPLIT_CHAR );
 
     return true;
 }
@@ -1808,50 +1808,50 @@ void CervisiaPart::readSettings()
     // Unfortunately, the KConfig systems sucks and we have to live
     // with all entries in one group for session management.
 
-    opt_createDirs = config->readBoolEntry("Create Dirs", true);
+    opt_createDirs = config->readEntry("Create Dirs", true);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_create_dirs" )))
     ->setChecked( opt_createDirs );
 
-    opt_pruneDirs = config->readBoolEntry("Prune Dirs", true);
+    opt_pruneDirs = config->readEntry("Prune Dirs", true);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_prune_dirs" )))
     ->setChecked( opt_pruneDirs );
 
-    opt_updateRecursive = config->readBoolEntry("Update Recursive", false);
+    opt_updateRecursive = config->readEntry("Update Recursive", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_update_recursively" )))
     ->setChecked( opt_updateRecursive );
 
-    opt_commitRecursive = config->readBoolEntry("Commit Recursive", false);
+    opt_commitRecursive = config->readEntry("Commit Recursive", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_commit_recursively" )))
     ->setChecked( opt_commitRecursive );
 
-    opt_doCVSEdit = config->readBoolEntry("Do cvs edit", false);
+    opt_doCVSEdit = config->readEntry("Do cvs edit", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_do_cvs_edit" )))
     ->setChecked( opt_doCVSEdit );
 
-    opt_hideFiles = config->readBoolEntry("Hide Files", false);
+    opt_hideFiles = config->readEntry("Hide Files", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_files" )))
     ->setChecked( opt_hideFiles );
 
-    opt_hideUpToDate = config->readBoolEntry("Hide UpToDate Files", false);
+    opt_hideUpToDate = config->readEntry("Hide UpToDate Files", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_uptodate" )))
     ->setChecked( opt_hideUpToDate );
 
-    opt_hideRemoved = config->readBoolEntry("Hide Removed Files", false);
+    opt_hideRemoved = config->readEntry("Hide Removed Files", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_removed" )))
     ->setChecked( opt_hideRemoved );
 
-    opt_hideNotInCVS = config->readBoolEntry("Hide Non CVS Files", false);
+    opt_hideNotInCVS = config->readEntry("Hide Non CVS Files", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_notincvs" )))
     ->setChecked( opt_hideNotInCVS );
 
-    opt_hideEmptyDirectories = config->readBoolEntry("Hide Empty Directories", false);
+    opt_hideEmptyDirectories = config->readEntry("Hide Empty Directories", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_empty_directories" )))
     ->setChecked( opt_hideEmptyDirectories );
 
     setFilter();
 
-    int splitterpos1 = config->readNumEntry("Splitter Pos 1", 0);
-    int splitterpos2 = config->readNumEntry("Splitter Pos 2", 0);
+    int splitterpos1 = config->readEntry("Splitter Pos 1", 0);
+    int splitterpos2 = config->readEntry("Splitter Pos 2", 0);
     if (splitterpos1)
     {
         QList<int> sizes;
