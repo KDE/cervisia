@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2005 Christian Loose <christian.loose@kdemail.net>
+ *  Copyright (c) 2002-2006 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -858,6 +858,11 @@ void CervisiaPart::slotStatus()
     if (list.isEmpty())
         return;
 
+    // Bug #105097: Embedded in Konqueror, all Cervisia tabs share
+    // a common current directory. This confuses UpdateView. That's
+    // why we always change the current directory here.
+    QDir::setCurrent(sandbox);
+
     update->prepareJob(opt_updateRecursive, UpdateView::UpdateNoAct);
 
     DCOPRef cvsJob = cvsService->simulateUpdate(list, opt_updateRecursive,
@@ -1031,6 +1036,11 @@ void CervisiaPart::updateSandbox(const QString &extraopt)
     QStringList list = update->multipleSelection();
     if (list.isEmpty())
         return;
+
+    // Bug #105097: Embedded in Konqueror, all Cervisia tabs share
+    // a common current directory. This confuses UpdateView. That's
+    // why we always change the current directory here.
+    QDir::setCurrent(sandbox);
 
     update->prepareJob(opt_updateRecursive, UpdateView::Update);
 
