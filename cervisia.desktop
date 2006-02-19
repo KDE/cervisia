@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 GenericName=CVS Frontend
+GenericName[fr]=Interface graphique pour CVS
 GenericName[x-test]=xxCVS Frontendxx
 Exec=cervisia -caption "%c" %i %m %u
 Path=

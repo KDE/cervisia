@@ -7,4 +7,5 @@ Exec=cvsservice
 X-DCOP-ServiceType=Multi
 X-KDE-StartupNotify=false
 Comment=A DCOP service that provides an interface to cvs
+Comment[fr]=Un service DCOP qui fournit une interface à CVS
 Comment[x-test]=xxA DCOP service that provides an interface to cvsxx
