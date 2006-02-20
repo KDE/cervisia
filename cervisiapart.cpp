@@ -41,6 +41,7 @@
 #include <kdebug.h>
 #include <kmessagebox.h>
 #include <kglobal.h>
+#include <kio/netaccess.h>
 
 #include "progressdlg.h"
 #include "logdlg.h"
@@ -182,8 +183,11 @@ KConfig *CervisiaPart::config()
 
 bool CervisiaPart::openURL( const KURL &u )
 {
+    // support url protocols like system:// or home://
+    KURL url = KIO::NetAccess::mostLocalURL(u, widget());
+
     // right now, we are unfortunately not network-aware
-    if( !u.isLocalFile() )
+    if( !url.isLocalFile() )
     {
         KMessageBox::sorry(widget(),
                            i18n("Remote CVS working folders are not "
@@ -201,7 +205,7 @@ bool CervisiaPart::openURL( const KURL &u )
         return false;
     }
 
-    return openSandbox( u.path() );
+    return openSandbox( url.path() );
 }
 
 
