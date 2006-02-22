@@ -149,10 +149,10 @@ void SettingsDialog::readSettings()
 
     // read configuration for look and feel page
     config->setGroup("LookAndFeel");
-    m_protocolFontBox->setFont(config->readFontEntry("ProtocolFont"));
-    m_annotateFontBox->setFont(config->readFontEntry("AnnotateFont"));
-    m_diffFontBox->setFont(config->readFontEntry("DiffFont"));
-    m_changelogFontBox->setFont(config->readFontEntry("ChangeLogFont"));
+    m_protocolFontBox->setFont(config->readEntry("ProtocolFont",QFont()));
+    m_annotateFontBox->setFont(config->readEntry("AnnotateFont",QFont()));
+    m_diffFontBox->setFont(config->readEntry("DiffFont",QFont()));
+    m_changelogFontBox->setFont(config->readEntry("ChangeLogFont",QFont()));
     m_splitterBox->setChecked(config->readEntry("SplitHorizontally",true));
 
     m_conflictButton->setColor(CervisiaSettings::conflictColor());

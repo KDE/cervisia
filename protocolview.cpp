@@ -45,7 +45,7 @@ ProtocolView::ProtocolView(const DCOPCString& appId, QWidget *parent, const char
 
     KConfig *config = CervisiaPart::config();
     config->setGroup("LookAndFeel");
-    setFont(config->readFontEntry("ProtocolFont"));
+    setFont(config->readEntry("ProtocolFont",QFont()));
 
     config->setGroup("Colors");
     QColor defaultColor = QColor(255, 130, 130);

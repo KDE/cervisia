@@ -67,7 +67,7 @@ DiffView::DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
     setBackgroundMode( Qt::PaletteBase );
 
     partConfig.setGroup("LookAndFeel");
-    setFont(partConfig.readFontEntry("DiffFont"));
+    setFont(partConfig.readEntry("DiffFont",QFont()));
     QFontMetrics fm(font());
     setCellHeight(fm.lineSpacing());
     setCellWidth(0);
