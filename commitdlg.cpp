@@ -27,7 +27,7 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <q3header.h>
-#include <klistview.h>
+#include <k3listview.h>
 //Added by qt3to4:
 #include <QTextStream>
 #include <QBoxLayout>
@@ -70,7 +70,7 @@ CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service,
     QLabel *textlabel = new QLabel( i18n("Commit the following &files:"), mainWidget );
     layout->addWidget(textlabel);
 
-    m_fileList = new KListView(mainWidget);
+    m_fileList = new K3ListView(mainWidget);
     m_fileList->addColumn("");
     m_fileList->setFullWidth(true);
     m_fileList->header()->hide();

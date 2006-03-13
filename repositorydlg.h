@@ -28,7 +28,7 @@
 class Q3ListViewItem;
 class QPushButton;
 class KConfig;
-class KListView;
+class K3ListView;
 class CvsService_stub;
 class RepositoryListItem;
 
@@ -64,7 +64,7 @@ private:
     KConfig&         m_partConfig;
     CvsService_stub* m_cvsService;
     KConfig*         m_serviceConfig;
-    KListView*       m_repoList;
+    K3ListView*       m_repoList;
     QPushButton*     m_modifyButton;
     QPushButton*     m_removeButton;
     QPushButton*     m_loginButton;

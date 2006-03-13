@@ -22,7 +22,7 @@
 #define UPDATEVIEW_H
 
 
-#include <klistview.h>
+#include <k3listview.h>
 
 #include <q3ptrlist.h>
 
@@ -32,7 +32,7 @@
 class KConfig;
 
 
-class UpdateView : public KListView
+class UpdateView : public K3ListView
 {
     Q_OBJECT
     

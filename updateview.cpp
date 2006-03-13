@@ -41,7 +41,7 @@ using Cervisia::EntryStatus;
 
 
 UpdateView::UpdateView(KConfig& partConfig, QWidget *parent, const char *name)
-    : KListView(parent),
+    : K3ListView(parent),
       m_partConfig(partConfig),
       m_unfoldingTree(false)
 {

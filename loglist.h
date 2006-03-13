@@ -22,7 +22,7 @@
 #define LOGLIST_H
 
 
-#include <klistview.h>
+#include <k3listview.h>
 //Added by qt3to4:
 #include <QMouseEvent>
 #include <QKeyEvent>
@@ -39,7 +39,7 @@ struct LogInfo;
 }
 
 
-class LogListView : public KListView
+class LogListView : public K3ListView
 {
     Q_OBJECT
     

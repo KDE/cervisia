@@ -143,8 +143,8 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
         update = new UpdateView(*config(), splitter);
         update->setFocusPolicy( Qt::StrongFocus );
         update->setFocus();
-        connect( update, SIGNAL(contextMenu(KListView*, Q3ListViewItem*, const QPoint&)),
-                 this, SLOT(popupRequested(KListView*, Q3ListViewItem*, const QPoint&)) );
+        connect( update, SIGNAL(contextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)),
+                 this, SLOT(popupRequested(K3ListView*, Q3ListViewItem*, const QPoint&)) );
         connect( update, SIGNAL(fileOpened(QString)),
                  this, SLOT(openFile(QString)) );
 
@@ -635,7 +635,7 @@ void CervisiaPart::setupActions()
 }
 
 
-void CervisiaPart::popupRequested(KListView*, Q3ListViewItem* item, const QPoint& p)
+void CervisiaPart::popupRequested(K3ListView*, Q3ListViewItem* item, const QPoint& p)
 {
     QString xmlName = "context_popup";
 

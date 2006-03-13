@@ -30,7 +30,7 @@ namespace Cervisia { class LogMessageEdit; }
 class QComboBox;
 class QCheckBox;
 class Q3ListViewItem;
-class KListView;
+class K3ListView;
 class KConfig;
 class CvsService_stub;
 
@@ -64,7 +64,7 @@ private:
     void addTemplateText();
     void removeTemplateText();
 
-    KListView* m_fileList;
+    K3ListView* m_fileList;
     Cervisia::LogMessageEdit* edit;
     QComboBox *combo;
     QStringList commits;

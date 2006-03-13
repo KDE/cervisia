@@ -32,7 +32,7 @@
 #include <QBoxLayout>
 #include <kconfig.h>
 #include <klineedit.h>
-#include <klistview.h>
+#include <k3listview.h>
 #include <klocale.h>
 #include <krfcdate.h>
 
@@ -138,7 +138,7 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 
-    listview = new KListView(mainWidget);
+    listview = new K3ListView(mainWidget);
     listview->setSelectionMode(Q3ListView::NoSelection);
     listview->setAllColumnsShowFocus(true);
     listview->setShowSortIndicator(true);

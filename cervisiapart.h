@@ -43,7 +43,7 @@ class QTimer;
 class UpdateView;
 class ProtocolView;
 class KAboutData;
-class KListView;
+class K3ListView;
 class KRecentFilesAction;
 class CvsService_stub;
 class CervisiaBrowserExtension;
@@ -77,7 +77,7 @@ public slots:
 
     void openFile(QString filename);
     void openFiles(const QStringList &filenames);
-    void popupRequested(KListView*, Q3ListViewItem*, const QPoint&);
+    void popupRequested(K3ListView*, Q3ListViewItem*, const QPoint&);
     void updateActions();
 
     void aboutCervisia();

@@ -33,7 +33,7 @@
 #include "tooltip.h"
 
 
-class LogListViewItem : public KListViewItem
+class LogListViewItem : public K3ListViewItem
 {
 public:
 
@@ -52,7 +52,7 @@ private:
 
 
 LogListViewItem::LogListViewItem(Q3ListView* list, const Cervisia::LogInfo& logInfo)
-    : KListViewItem(list),
+    : K3ListViewItem(list),
       m_logInfo(logInfo)
 {
     setText(Revision, logInfo.m_revision);
@@ -111,7 +111,7 @@ int LogListViewItem::compare(Q3ListViewItem* i, int col, bool ascending) const
 
 
 LogListView::LogListView(KConfig& cfg, QWidget *parent, const char *name)
-    : KListView(parent)
+    : K3ListView(parent)
     , partConfig(cfg)
 {
 	setObjectName(name);

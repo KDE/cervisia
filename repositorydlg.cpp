@@ -28,7 +28,7 @@
 #include <QBoxLayout>
 #include <kbuttonbox.h>
 #include <kconfig.h>
-#include <klistview.h>
+#include <k3listview.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kdebug.h>
@@ -40,10 +40,10 @@
 #include "repositories.h"
 
 
-class RepositoryListItem : public KListViewItem
+class RepositoryListItem : public K3ListViewItem
 {
 public:
-    RepositoryListItem(KListView* parent, const QString& repo, bool loggedin);
+    RepositoryListItem(K3ListView* parent, const QString& repo, bool loggedin);
     
     void setRsh(const QString& rsh);
     void setServer(const QString& server) { m_server = server; }
@@ -88,9 +88,9 @@ static bool LoginNeeded(const QString& repository)
 }
 
 
-RepositoryListItem::RepositoryListItem(KListView* parent, const QString& repo, 
+RepositoryListItem::RepositoryListItem(K3ListView* parent, const QString& repo, 
                                        bool loggedin)
-    : KListViewItem(parent)
+    : K3ListViewItem(parent)
     , m_isLoggedIn(loggedin)
 {
     kDebug() << "RepositoryListItem::RepositoryListItem(): repo=" << repo << endl;
@@ -167,7 +167,7 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, CvsService_stub* cvsService,
 
     QBoxLayout* hbox = new QHBoxLayout(mainWidget, 0, spacingHint());
 
-    m_repoList = new KListView(mainWidget);
+    m_repoList = new K3ListView(mainWidget);
     hbox->addWidget(m_repoList, 10);
     m_repoList->setMinimumWidth(fontMetrics().width('0') * 60);
     m_repoList->setAllColumnsShowFocus(true);
