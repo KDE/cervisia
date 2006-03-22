@@ -35,7 +35,7 @@ kde4_add_dcop_stubs(cvsservice_KDEINIT_SRCS
 
 kde4_add_kdeinit_executable( cvsservice ${cvsservice_KDEINIT_SRCS})
 
-target_link_libraries(kdeinit_cvsservice  ${KDE4_KDE3SUPPORT_LIBRARIES} kdesu )
+target_link_libraries(kdeinit_cvsservice  ${KDE4_KDE3SUPPORT_LIBS} kdesu )
 
 install_targets(${LIB_INSTALL_DIR} kdeinit_cvsservice )
 
@@ -50,7 +50,7 @@ kde4_automoc(${cvsaskpass_KDEINIT_SRCS})
 
 kde4_add_kdeinit_executable( cvsaskpass ${cvsaskpass_KDEINIT_SRCS})
 
-target_link_libraries(kdeinit_cvsaskpass  ${KDE4_KDEUI_LIBRARIES} )
+target_link_libraries(kdeinit_cvsaskpass  ${KDE4_KDEUI_LIBS} )
 
 install_targets(${LIB_INSTALL_DIR} kdeinit_cvsaskpass )
 

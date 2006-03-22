@@ -40,7 +40,7 @@ kde4_add_kcfg_files(cervisia_KDEINIT_SRCS cervisiasettings.kcfgc )
 
 kde4_add_kdeinit_executable( cervisia ${cervisia_KDEINIT_SRCS})
 
-target_link_libraries(kdeinit_cervisia  ${KDE4_KPARTS_LIBRARIES} kutils cvsservice cervisia )
+target_link_libraries(kdeinit_cervisia  ${KDE4_KPARTS_LIBS} kutils cvsservice cervisia )
 
 install_targets(${LIB_INSTALL_DIR} kdeinit_cervisia )
 
@@ -87,7 +87,7 @@ kde4_add_plugin(cervisiapart WITH_PREFIX ${cervisiapart_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} cervisiapart )
 
-target_link_libraries(cervisiapart  ${KDE4_KPARTS_LIBRARIES}  kutils cvsservice cervisia )
+target_link_libraries(cervisiapart  ${KDE4_KPARTS_LIBS}  kutils cvsservice cervisia )
 
 install_targets(${LIB_INSTALL_DIR}/kde4 cervisiapart )
 
