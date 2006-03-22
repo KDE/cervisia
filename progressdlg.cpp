@@ -49,7 +49,7 @@ struct ProgressDialog::Private
     QStringList     output;
 
     QTimer*         timer;
-    KAnimWidget*    gear;
+    KAnimatedButton*    gear;
     Q3ListBox*       resultbox;
 };
 
@@ -97,7 +97,7 @@ void ProgressDialog::setupGui(const QString& heading)
     hboxLayout->addWidget(textLabel);
     hboxLayout->addStretch();
 
-    d->gear = new KAnimWidget(QString("kde"), 32, headingBox);
+    d->gear = new KAnimatedButton(QString("kde"), 32, headingBox);
     d->gear->setFixedSize(32, 32);
     hboxLayout->addWidget(d->gear);
 
