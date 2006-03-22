@@ -64,8 +64,8 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent, const char*
 
         QLabel *warningIcon = new QLabel(mainWidget);
         KIconLoader *loader = kapp->iconLoader();
-        warningIcon->setPixmap(loader->loadIcon("messagebox_warning", KIcon::NoGroup,
-                                                KIcon::SizeMedium, KIcon::DefaultState,
+        warningIcon->setPixmap(loader->loadIcon("messagebox_warning", K3Icon::NoGroup,
+                                                K3Icon::SizeMedium, K3Icon::DefaultState,
                                                 0, true));
         warningLayout->addWidget(warningIcon);
 

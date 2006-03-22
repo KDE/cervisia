@@ -1713,7 +1713,7 @@ bool CervisiaPart::openSandbox(const QString &dirname)
 
         // remove path from recent sandbox menu
         QFileInfo fi(dirname);
-        recent->removeURL( KUrl::fromPathOrURL(fi.absoluteFilePath()) );
+        recent->removeUrl( KUrl::fromPathOrURL(fi.absoluteFilePath()) );
 
         return false;
     }
@@ -1724,7 +1724,7 @@ bool CervisiaPart::openSandbox(const QString &dirname)
 
     // get path of sandbox for recent sandbox menu
     sandbox = cvsRepository.workingCopy();
-    recent->addURL( KUrl::fromPathOrURL(sandbox) );
+    recent->addUrl( KUrl::fromPathOrURL(sandbox) );
 
     // get repository for the caption of the window
     repository = cvsRepository.location();
