@@ -97,7 +97,8 @@ void ProgressDialog::setupGui(const QString& heading)
     hboxLayout->addWidget(textLabel);
     hboxLayout->addStretch();
 
-    d->gear = new KAnimatedButton(QString("kde"), 32, headingBox);
+    d->gear = new KAnimatedButton(headingBox);
+	d->gear->setIcons("kde");
     d->gear->setFixedSize(32, 32);
     hboxLayout->addWidget(d->gear);
 

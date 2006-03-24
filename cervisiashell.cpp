@@ -61,12 +61,14 @@ CervisiaShell::CervisiaShell( const char *name )
     //
     // Magic needed for status texts
     //
-    actionCollection()->setHighlightingEnabled(true);
+#warning "kde4: port it actionCollection()->setHighlightingEnabled(true);";
+    //actionCollection()->setHighlightingEnabled(true);
     connect( actionCollection(), SIGNAL( actionStatusText(const QString &) ),
              statusBar(), SLOT( message(const QString &) ) );
     connect( actionCollection(), SIGNAL( clearStatusText() ),
              statusBar(), SLOT( clear() ) );
-    m_part->actionCollection()->setHighlightingEnabled(true);
+#warning "kde4: port it m_part->actionCollection()->setHighlightingEnabled(true);";
+    //m_part->actionCollection()->setHighlightingEnabled(true);
     connect( m_part->actionCollection(), SIGNAL( actionStatusText(const QString &) ),
              statusBar(), SLOT( message(const QString &) ) );
     connect( m_part->actionCollection(), SIGNAL( clearStatusText() ),

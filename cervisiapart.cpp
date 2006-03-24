@@ -228,8 +228,8 @@ void CervisiaPart::setupActions()
 {
     KAction *action;
     QString hint;
-
-    actionCollection()->setHighlightingEnabled(true);
+#warning "kde4: port it actionCollection()->setHighlightingEnabled(true);";
+    //actionCollection()->setHighlightingEnabled(true);
 
     //
     // File Menu
