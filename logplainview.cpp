@@ -46,7 +46,7 @@ void LogPlainView::addRevision(const LogInfo& logInfo)
     // assemble revision information lines
     QString logEntry;
 
-    logEntry += "<b>" + i18n("revision %1").arg(Qt::escape(logInfo.m_revision)) +
+    logEntry += "<b>" + i18n("revision %1", Qt::escape(logInfo.m_revision)) +
                 "</b>";
     logEntry += " &nbsp;[<a href=\"revA#" + Qt::escape(logInfo.m_revision) + "\">" +
                 i18n("Select for revision A") +
@@ -55,8 +55,8 @@ void LogPlainView::addRevision(const LogInfo& logInfo)
                 i18n("Select for revision B") +
                 "</a>]<br>";
     logEntry += "<i>" +
-                i18n("date: %1; author: %2").arg(Qt::escape(logInfo.dateTimeToString()))
-                                            .arg(Qt::escape(logInfo.m_author)) +
+                i18n("date: %1; author: %2", Qt::escape(logInfo.dateTimeToString()),
+                                             Qt::escape(logInfo.m_author)) +
                 "</i><br><br>";
 
     insertHtml(logEntry);

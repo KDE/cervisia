@@ -228,7 +228,7 @@ bool ResolveDialog::parseFile(const QString &name)
     int advanced1, advanced2;
     enum { Normal, VersionA, VersionB } state;
 
-    setCaption(i18n("CVS Resolve: %1").arg(name));
+    setCaption(i18n("CVS Resolve: %1", name));
 
     fname = name;
   
@@ -389,9 +389,9 @@ void ResolveDialog::updateNofN()
 {
     QString str;
     if (markeditem >= 0)
-        str = i18n("%1 of %2").arg(markeditem+1).arg(items.count());
+        str = i18n("%1 of %2", markeditem+1, items.count());
     else
-        str = i18n("%1 conflicts").arg(items.count());
+        str = i18n("%1 conflicts", items.count());
     nofnlabel->setText(str);
 
     backbutton->setEnabled(markeditem != -1);

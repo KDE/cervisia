@@ -192,7 +192,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     connect( this, SIGNAL(user3Clicked()),
              this, SLOT(findClicked()) );
 
-    setButtonGuiItem(Ok, KGuiItem(i18n("to view something", "&View"),"fileopen"));
+    setButtonGuiItem(Ok, KGuiItem(i18nc("to view something", "&View"),"fileopen"));
     setButtonGuiItem(Apply, KGuiItem(i18n("Create Patch...")));
     setHelp("browsinglogs");
 
@@ -230,7 +230,7 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
     cvsService = service;
     filename = fileName;
 
-    setCaption(i18n("CVS Log: %1").arg(filename));
+    setCaption(i18n("CVS Log: %1", filename));
 
     DCOPRef job = cvsService->log(filename);
     if( !cvsService->ok() )

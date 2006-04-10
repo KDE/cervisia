@@ -216,7 +216,7 @@ bool Cervisia::CheckOverwrite(const QString& fileName, QWidget* parent)
     if( fi.exists() )
     {
         result = (KMessageBox::warningContinueCancel(parent,
-                  i18n("A file named \"%1\" already exists. Are you sure you want to overwrite it?").arg(fileName),
+                  i18n("A file named \"%1\" already exists. Are you sure you want to overwrite it?", fileName),
                   i18n("Overwrite File?"),
                   KGuiItem(i18n("&Overwrite"), "filesave", i18n("Overwrite the file"))) == KMessageBox::Continue);
     }

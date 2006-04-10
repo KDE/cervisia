@@ -79,7 +79,7 @@ void AnnotateController::showDialog(const QString& fileName, const QString& revi
     // hide progress dialog
     delete d->progress; d->progress = 0;
 
-    d->dialog->setCaption(i18n("CVS Annotate: %1").arg(fileName));
+    d->dialog->setCaption(i18n("CVS Annotate: %1", fileName));
     d->dialog->show();
 }
 

@@ -125,7 +125,7 @@ void ProtocolView::slotJobExited(bool normalExit, int exitStatus)
     if( normalExit )
     {
         if( exitStatus )
-            msg = i18n("[Exited with status %1]\n").arg(exitStatus);
+            msg = i18n("[Exited with status %1]\n", exitStatus);
         else
             msg = i18n("[Finished]\n");
     }

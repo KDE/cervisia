@@ -98,7 +98,7 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool mod
 
     nofnlabel = new QLabel(mainWidget);
     // avoids auto resize when the text is changed
-    nofnlabel->setMinimumWidth(fontMetrics().width(i18n("%1 differences").arg(10000)));
+    nofnlabel->setMinimumWidth(fontMetrics().width(i18n("%1 differences", 10000)));
 
     backbutton = new QPushButton(QLatin1String("&<<"), mainWidget);
     connect( backbutton, SIGNAL(clicked()), SLOT(backClicked()) );
@@ -229,7 +229,7 @@ bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
     QStringList linesA, linesB;
     int linenoA, linenoB;
 
-    setCaption(i18n("CVS Diff: %1").arg(fileName));
+    setCaption(i18n("CVS Diff: %1", fileName));
     revlabel1->setText( revA.isEmpty()?
                         i18n("Repository:")
                         : i18n("Revision ")+revA+":" );
@@ -415,9 +415,9 @@ void DiffDialog::updateNofN()
 {
     QString str;
     if (markeditem >= 0)
-	str = i18n("%1 of %2").arg(markeditem+1).arg(items.count());
+	str = i18n("%1 of %2", markeditem+1, items.count());
     else
-	str = i18n("%1 differences").arg(items.count());
+	str = i18n("%1 differences", items.count());
     nofnlabel->setText(str);
 
     itemscombo->setCurrentItem(markeditem==-2? 0 : markeditem+1);

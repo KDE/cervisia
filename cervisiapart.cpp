@@ -726,9 +726,9 @@ void CervisiaPart::aboutCervisia()
                           "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
                           "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
                           "GNU General Public License for more details.\n"
-                          "See the ChangeLog file for a list of contributors."));
-    QMessageBox::about(0, i18n("About Cervisia"),
-                       aboutstr.arg(CERVISIA_VERSION).arg(KDE_VERSION_STRING));
+                          "See the ChangeLog file for a list of contributors.",
+                          QString(CERVISIA_VERSION), QString(KDE_VERSION_STRING)));
+    QMessageBox::about(0, i18n("About Cervisia"), aboutstr);
 }
 
 
@@ -1685,8 +1685,8 @@ void CervisiaPart::slotJobFinished()
     if( m_jobType == Commit )
     {
         KNotifyClient::event(widget()->parentWidget()->winId(), "cvs_commit_done",
-                             i18n("A CVS commit to repository %1 is done")
-                             .arg(repository));
+                             i18n("A CVS commit to repository %1 is done",
+                              repository));
         m_jobType = Unknown;
     }
 }
