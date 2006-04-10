@@ -23,7 +23,7 @@
 using Cervisia::LogMessageEdit;
 
 #include <qtextstream.h>
-#include <kaccel.h>
+
 
 
 LogMessageEdit::LogMessageEdit(QWidget* parent)
