@@ -16,7 +16,7 @@
 <authorgroup>
 <author>
 <firstname>Bernd</firstname><surname>Gehrmann</surname>
-<affiliation><address><email>bernd@mail.berlios.de</email></address></affiliation>
+<affiliation><address>&Bernd.Gehrmann.mail;</address></affiliation>
 </author> 
 <author>
 <firstname>Carlos</firstname><surname>Woelz</surname>
@@ -33,7 +33,7 @@
 <year>2000</year>
 <year>2001</year>
 <year>2002</year>
-<holder>Bernd Gehrmann</holder>
+<holder>&Bernd.Gehrmann;</holder>
 </copyright>
 
 <copyright>
@@ -180,7 +180,7 @@ Repositories dialog</phrase></textobject>
 </figure>
 
 <para>
-There are several methods to access a CVS repository. It may be reached via
+There are several methods to access a &CVS; repository. It may be reached via
 password authentication (:pserver:), secure shell (using :ext:), local
 repository (:local:), &etc;. The format for the repository location is
 (optional items appear between square brackets):
@@ -219,7 +219,7 @@ location will be simple the path to it.
 </varlistentry>
 
 <varlistentry id="rsh">
-<term>rsh</term>
+<term>&rsh;</term>
 
 <listitem>
 <para>
@@ -283,10 +283,10 @@ system's username. Before accessing the &CVS; server, you will need to login.
 </para>
 
 <para>
-Open-source projects typically offer Anonymous CVS access to their
+Open-source projects typically offer Anonymous &CVS; access to their
 sources. This means you can easily grab the latest sources, modify, and create
-patches (differences) against the repository without asking for a CVS account.
-As a general rule, Anonymous CVS uses password authentication (:pserver:), and
+patches (differences) against the repository without asking for a &CVS; account.
+As a general rule, Anonymous &CVS; uses password authentication (:pserver:), and
 is a read-only repository, not allowing you to upload your changes directly.
 </para>
 
@@ -386,8 +386,8 @@ more control, but it will probably take a little more time.
 Keep in mind that &CVS; was initially designed to handle
 text files. Many features, like revision merging, creating differences in a
 readable form, &etc; are only performed to text files. This does not mean you
-cannot use CVS to keep binary files, it just means you have to
-<emphasis>explicitly tell CVS if it is a text or binary file</emphasis>. If
+cannot use &CVS; to keep binary files, it just means you have to
+<emphasis>explicitly tell &CVS; if it is a text or binary file</emphasis>. If
 you declare the wrong file type, you will experience problems with the &CVS;
 functionality for these files, and they may get corrupted.
 </para>
@@ -451,7 +451,7 @@ menu item.
 <varlistentry>
 <term><guilabel>Repository:</guilabel> <xref linkend="co-repository" /></term>
 <listitem><para>
-Enter or select on the dropdown list the name of the &CVS; repository, also
+Enter or select from the drop down box the name of the &CVS; repository, also
 known as $<envar>CVSROOT</envar>. You must have write access to it, and the
 repository must be properly initialized. If the repository does not yet exist,
 you can create one choosing the
@@ -535,7 +535,7 @@ development, &etc; of the files you are importing.
 <varlistentry>
 <term><guilabel>Import as binaries</guilabel></term>
 <listitem><para>
-If you check this box, all files are imported in binary mode, i.e. an argument
+If you check this box, all files are imported in binary mode, &ie; an argument
 <option>-kb</option> is given to <command>cvs import</command>.
 </para></listitem>
 </varlistentry>
@@ -607,7 +607,7 @@ track bugs, generate the release code again, &etc;.
 <term><guilabel>Repository:</guilabel></term>
 <listitem><para>
 The name of the &CVS; repository, also known as
-<filename><envar>$CVSROOT</envar></filename>. The drop-down box shows a
+<filename><envar>$CVSROOT</envar></filename>. The drop down box shows a
 list of the repositories you previously entered using the <guilabel>Configure
 Access to Repositories</guilabel> dialog box. If the repository is remote,
 make sure that authentication works. See <xref
@@ -671,7 +671,7 @@ folder under the working folder rather than a folder named after the module.
 <term><guilabel>Export only</guilabel></term>
 <listitem><para>
 If you check this box, the files will be exported rather than checked out. 
-Exporting obtains a copy of the source for the module without the CVS 
+Exporting obtains a copy of the source for the module without the &CVS; 
 administrative folders. For example, export may be used to prepare the
 source code for a release.
 </para></listitem>
@@ -795,7 +795,7 @@ commit.
 <term><guilabel>Needs Update</guilabel></term>
 <listitem><para>
 This is shown if a newer version of the file exists in the
-repository, e.g. because someone committed a modification. Normally, you want
+repository, &eg; because someone committed a modification. Normally, you want
 to update this file so you have an up-to-date version in your folder.
 </para></listitem>
 </varlistentry>
@@ -817,7 +817,7 @@ working copy with the version in the repository is necessary. This
 typically happens if you have made modifications to the file while
 someone else has committed his modifications. If you choose to update, the
 modifications in the repository are merged into your file. In case of a
-conflict (i.e. if someone else has changed some of the same lines like you)
+conflict (&ie; if someone else has changed some of the same lines like you)
 the new status is then "Conflict".
 </para></listitem>
 </varlistentry>
@@ -851,7 +851,7 @@ repository. If not, you may consider adding it to your
 </variablelist>
       
 <para>
-Now that you have got an overview of the current status of the CVS, you may
+Now that you have got an overview of the current status of the &CVS;, you may
 want to do an update. Mark some files (or the root of the folder tree which
 is equivalent to marking all files in this folder). Now choose
 <guimenuitem>Update</guimenuitem> from the <guimenu>File</guimenu> menu, or
@@ -934,7 +934,7 @@ view, through the pop-up menu. <xref linkend="screenshot-popup" /> shows
 <para>
 You can simply edit a file by double-clicking on it or selecting it and pressing
 <keycap>Return</keycap>. This starts the default application that handles that
-file type (the default application for each file type is a KDE wide setting). If
+file type (the default application for each file type is a &kde; wide setting). If
 the default application is not the one you want to use, you can right click the
 file and choose the
 <menuchoice>
@@ -1043,7 +1043,7 @@ them.
 
 <para>
 Folders are handled fundamentally different from ordinary files by
-&CVS;. They are not under revision control, i.e. you cannot tell which
+&CVS;. They are not under revision control, &ie; you cannot tell which
 folders existed in the project at a certain time. Furthermore, folders
 can never be explicitly removed (expect by removing them directly in the
 repository).
@@ -1147,7 +1147,7 @@ file which you have previously brought to a certain revision or tag with the com
 (which is &eg; used by the menu item
 <menuchoice><guimenu>Advanced</guimenu><guimenuitem>Update to
 Tag/Date...</guimenuitem></menuchoice>). In such a case, the tag on the file
-gets sticky, i.e. further updates do not bring you to the newest revision on
+gets sticky, &ie; further updates do not bring you to the newest revision on
 the branch. If you want to commit further revisions to the branch, you have to
 update to the branch tag before you do further commits.
 </para>
@@ -1155,7 +1155,7 @@ update to the branch tag before you do further commits.
 
 <para>
 With &cervisia;, it is quite easy to maintain a ChangeLog file that is
-compliant with the format laid out in the GNU coding guidelines. To use it,
+compliant with the format laid out in the &GNU; coding guidelines. To use it,
 choose <menuchoice><guimenu>File</guimenu><guimenuitem>Insert ChangeLog
 Entry...</guimenuitem></menuchoice>.  If a file with the name
 <filename>ChangeLog</filename> exists in the toplevel folder of your
@@ -1374,7 +1374,7 @@ you using the scroll bars.
 
 <para>
 Normally, the scrollbars at the left and the right window are synchronized,
-i.e. if you scroll on the left hand side, the right hand side is scrolled by
+&ie; if you scroll on the left hand side, the right hand side is scrolled by
 the same amount. You can change this by checking the box
 <guibutton>Synchronize scroll bars</guibutton>.
 </para>
@@ -1619,9 +1619,9 @@ on different branches by which authors. As tooltips, you can see the correspondi
 log messages. The list is by its nature linear and, therefore, does not give an
 immediate view of branches; on the other hand, it concentrates more otherwise
 relevant information on less screen estate, namely the time of each change of
-the file and the first part of the log message. The CVS output information is
+the file and the first part of the log message. The &CVS; output information is
 complete, but long, and difficult to read. To alleviate these problems, you
-have the ability to search the text of the CVS output, by pressing the
+have the ability to search the text of the &CVS; output, by pressing the
 <guibutton>Find...</guibutton> button. 
 </para>
 
@@ -1634,7 +1634,7 @@ relevant if you make use of further features provided by the buttons.
 Revision &quot;A&quot; can be chosen with the left mouse button, revision &quot;B&quot;
 with the middle one. In the list view, you can also
 navigate with with your cursor keys. In order to mark revisions &quot;A&quot; and &quot;B&quot;,
-use the keybindings <keycombo><keycap>Ctrl</keycap><keycap>A</keycap></keycombo>,
+use the shortcuts <keycombo><keycap>Ctrl</keycap><keycap>A</keycap></keycombo>,
 <keycombo><keycap>Ctrl</keycap><keycap>B</keycap></keycombo>, respectively.
 Using the <guilabel>CVS Output</guilabel> view, you can click on the
 <guilabel>Select for revision A</guilabel> and <guilabel>Select for
@@ -1717,7 +1717,7 @@ releases. Choose <guimenuitem>History</guimenuitem> from the
 </para>
 
 <note><para>
-This fetches the complete logging file from the server, i.e. a list of
+This fetches the complete logging file from the server, &ie; a list of
 the events for all users and all modules. This can be a huge amount of data.
 </para></note>
 
@@ -1944,7 +1944,7 @@ ago</literal>.
 </variablelist>
 
 <note><para>
-Updating to a tag or date make them 'sticky', &ie; you can not commit
+Updating to a tag or date make them 'sticky', &ie; you cannot commit
 further modifications on that files (unless the tag is a branch tag). In order
 to get back to the main branch, use the menu item
 <menuchoice><guimenu>Advanced</guimenu><guimenuitem>Update to
@@ -2216,7 +2216,7 @@ Other revision control systems - like <acronym>RCS</acronym> and
 wants to a edit a file, he has to <emphasis>lock</emphasis> it. Only one
 developer at a time can a lock a file. When he has finished editing, the lock
 is released. On the one hand, with this model, conflicts can never happen. On
-the other hand, two developers can not work on the same file at the same time,
+the other hand, two developers cannot work on the same file at the same time,
 even when their changes do not affect each other. This can be a bottleneck.
 We are not going to discuss the organizational benefits of both approaches.
 Nevertheless we mention that although &CVS; has some support for locking, it is
@@ -2332,7 +2332,7 @@ When you use any of the features which show the diff dialog, like
 <menuchoice><guimenu>View</guimenu><guimenuitem>Difference to
 Repository...</guimenuitem></menuchoice>, &cervisia; invokes its internal diff
 frontend. If you prefer a different one, like
-<application>Kompare</application>, <application>TkDiff</application>, or
+&kompare;, <application>TkDiff</application>, or
 <application>xxdiff</application>, enter its file name and path here.
 </para></listitem>
 </varlistentry>
@@ -2407,7 +2407,7 @@ additionally there is a per-repository setting available in
 <varlistentry id="customize-sshagent">
 <term><guilabel>Utilize a running or start a new ssh-agent process</guilabel></term>
 <listitem><para>
-Check this box if you use <link linkend="rsh">ext (rsh) repositories</link>,
+Check this box if you use <link linkend="rsh">ext (&rsh;) repositories</link>,
 the &ssh; remote shell to communicate with the repository and
 <application>ssh-agent</application> to manage your keys.
 </para></listitem>
@@ -2485,7 +2485,7 @@ In its main file tree, &cervisia; does not display all files which are
 actually there. This is analog to <command>cvs</command> itself and helps to
 avoid clutter caused by uninteresting stuff like object files. &cervisia;
 tries to mimic <command>cvs</command>'s behavior as close as possible,
-i.e. it gets ignore lists from the following sources:
+&ie; it gets ignore lists from the following sources:
 </para>
 
 <itemizedlist>
@@ -2533,7 +2533,7 @@ typing in <userinput>info:/cvs</userinput> into the locationbar of
 <application>kdehelp</application>, <application>khelpcenter</application>
 resp. Alternative, you can just choose
 <menuchoice><guimenu>Help</guimenu><guimenuitem>CVS
-Info</guimenuitem></menuchoice> in &cervisia;. An on-line HTML version of the
+Info</guimenuitem></menuchoice> in &cervisia;. An on-line &HTML; version of the
 Cederqvist is available <ulink
 url="http://cvshome.org/docs/manual/cvs.html">on the web</ulink>.
 </para>
@@ -2550,8 +2550,8 @@ url="http://cvsbook.red-bean.com/index.html">Open Source Development with
 CVS</ulink>. About half of this book is about the development process of Open
 Source software. The other half is a technical documentation of
 &CVS;. Thankfully, the technical part of the book has been made freely
-redistributable under the GPL, so that you can download a HTML version of
-it. A list of errata is available on the webpage mentioned above.
+redistributable under the GPL, so that you can download a &HTML; version of
+it. A list of errata is available on the web page mentioned above.
 </para></listitem>
 
 <listitem><para>
@@ -2642,7 +2642,7 @@ numbers in the listing accordingly. See <xref linkend="mainscreen" />.
 <guimenu>File</guimenu><guimenuitem>Edit</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Opens the selected file in KDE's default editor for the selected file's type.
+Opens the selected file in &kde;'s default editor for the selected file's type.
 </para></listitem>
 </varlistentry>
 
@@ -2753,7 +2753,7 @@ Shows the log browser of the selected file versions.  See <xref linkend="browsin
 <guimenu>View</guimenu><guimenuitem>Annotate...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Shows an annotated view of the selected file, i.e. a view where you
+Shows an annotated view of the selected file, &ie; a view where you
 can for each line see which author modified it last.  See <xref linkend="annotate" />.
 </para></listitem>
 </varlistentry>
@@ -2834,7 +2834,7 @@ Determines whether removed files are hidden in the main tree view. See <xref lin
 <guimenu>View</guimenu><guimenuitem>Hide Non-CVS Files</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Determines whether files not in CVS are hidden in the main tree view. See <xref linkend="mainscreen" />.
+Determines whether files not in &CVS; are hidden in the main tree view. See <xref linkend="mainscreen" />.
 </para></listitem>
 </varlistentry>
 
@@ -3126,7 +3126,7 @@ whenever you edit a file.
 <guimenu>Settings</guimenu><guimenuitem>Configure Shortcuts...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Opens a dialog for configuring keybindings.
+Opens a dialog for configuring shortcuts.
 </para></listitem>
 </varlistentry>
 
@@ -3164,7 +3164,7 @@ Opens a dialog for customizing &cervisia;.
 <guimenu>Help</guimenu><guimenuitem>Handbook</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Invokes the KDE Help system starting at the &cervisia; help pages. (this
+Invokes the &kde;'s Help system starting at the &cervisia; help pages. (this
 document).
 </para></listitem>
 </varlistentry>
@@ -3193,7 +3193,7 @@ This will display version and author information.
 <guimenu>Help</guimenu><guimenuitem>About KDE</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-This displays the KDE version and other basic information.
+This displays the &kde; version and other basic information.
 </para></listitem>
 </varlistentry>
 
@@ -3202,7 +3202,7 @@ This displays the KDE version and other basic information.
 <guimenu>Help</guimenu><guimenuitem>CVS Manual</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Opens the &CVS; info pages in the KDE help system.
+Opens the &CVS; info pages in the &kde; help system.
 </para></listitem>
 </varlistentry>
 
@@ -3218,6 +3218,7 @@ Opens the &CVS; info pages in the KDE help system.
 <chapter id="credits-and-licenses">
 <title>Credits And Licenses</title>
 
+<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
 &underFDL;
 &underGPL;
 
