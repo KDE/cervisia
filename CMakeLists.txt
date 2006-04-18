@@ -89,7 +89,7 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} cervisiapart )
 
 target_link_libraries(cervisiapart  ${KDE4_KPARTS_LIBS}  kutils cvsservice cervisia )
 
-install_targets(${LIB_INSTALL_DIR}/kde4 cervisiapart )
+install_targets(${PLUGIN_INSTALL_DIR} cervisiapart )
 
 
 ########### next target ###############
