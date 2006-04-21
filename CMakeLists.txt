@@ -30,6 +30,11 @@ set(libcervisia_SRCS
 
 kde4_add_ui3_files(libcervisia_SRCS settingsdlg_advanced.ui )
 
+kde4_add_dcop_skels(libcervisia_SRCS progressdlg.h )
+
+kde4_add_kcfg_files(libcervisia_SRCS cervisiasettings.kcfgc )
+
+
 set(cervisia_KDEINIT_SRCS ${libcervisia_SRCS} 
    main.cpp 
    cervisiashell.cpp )
@@ -39,14 +44,7 @@ kde4_add_dcop_stubs(cervisia_KDEINIT_SRCS
    ${CMAKE_SOURCE_DIR}/cervisia/cvsservice/cvsjob.h
    ${CMAKE_SOURCE_DIR}/cervisia/cvsservice/repository.h )
 
-
-
 kde4_automoc(${cervisia_KDEINIT_SRCS})
-
-
-kde4_add_dcop_skels(cervisia_KDEINIT_SRCS progressdlg.h )
-
-kde4_add_kcfg_files(cervisia_KDEINIT_SRCS cervisiasettings.kcfgc )
 
 kde4_add_kdeinit_executable( cervisia ${cervisia_KDEINIT_SRCS})
 
