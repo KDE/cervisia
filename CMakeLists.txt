@@ -5,34 +5,44 @@ add_subdirectory( pics )
 
 include_directories( ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}  )
 
-
 ########### next target ###############
 
-set(cervisia_KDEINIT_SRCS 
-   annotatedlg.cpp 
-   diffdlg.cpp 
-   patchoptiondlg.cpp 
-   logdlg.cpp 
-   progressdlg.cpp 
-   resolvedlg.cpp 
-   resolvedlg_p.cpp 
-   annotateview.cpp 
-   diffview.cpp 
-   loglist.cpp 
-   logplainview.cpp 
-   logtree.cpp 
-   annotatectl.cpp 
-   loginfo.cpp 
-   misc.cpp 
-   qttableview.cpp 
-   tooltip.cpp 
-   settingsdlg.cpp 
+set(libcervisia_SRCS
+   annotatedlg.cpp
+   diffdlg.cpp
+   patchoptiondlg.cpp
+   logdlg.cpp
+   progressdlg.cpp
+   resolvedlg.cpp
+   resolvedlg_p.cpp
+   annotateview.cpp
+   diffview.cpp
+   loglist.cpp
+   logplainview.cpp
+   logtree.cpp
+   annotatectl.cpp
+   loginfo.cpp
+   misc.cpp
+   qttableview.cpp
+   tooltip.cpp
+   settingsdlg.cpp
+	)	
+
+kde4_add_ui3_files(libcervisia_SRCS settingsdlg_advanced.ui )
+
+set(cervisia_KDEINIT_SRCS ${libcervisia_SRCS} 
    main.cpp 
    cervisiashell.cpp )
 
+kde4_add_dcop_stubs(cervisia_KDEINIT_SRCS
+   ${CMAKE_SOURCE_DIR}/cervisia/cvsservice/cvsservice.h
+   ${CMAKE_SOURCE_DIR}/cervisia/cvsservice/cvsjob.h
+   ${CMAKE_SOURCE_DIR}/cervisia/cvsservice/repository.h )
+
+
+
 kde4_automoc(${cervisia_KDEINIT_SRCS})
 
-kde4_add_ui_files(cervisia_KDEINIT_SRCS settingsdlg_advanced.ui )
 
 kde4_add_dcop_skels(cervisia_KDEINIT_SRCS progressdlg.h )
 
@@ -40,7 +50,7 @@ kde4_add_kcfg_files(cervisia_KDEINIT_SRCS cervisiasettings.kcfgc )
 
 kde4_add_kdeinit_executable( cervisia ${cervisia_KDEINIT_SRCS})
 
-target_link_libraries(kdeinit_cervisia  ${KDE4_KPARTS_LIBS} kutils cvsservice cervisia )
+target_link_libraries(kdeinit_cervisia  ${KDE4_KPARTS_LIBS} kutils cvsservice )
 
 install_targets(${LIB_INSTALL_DIR} kdeinit_cervisia )
 
@@ -49,7 +59,7 @@ install_targets(/bin cervisia )
 
 ########### next target ###############
 
-set(cervisiapart_PART_SRCS 
+set(cervisiapart_PART_SRCS ${libcervisia_SRCS}
    updateview.cpp 
    protocolview.cpp 
    watchdlg.cpp 
@@ -87,7 +97,7 @@ kde4_add_plugin(cervisiapart WITH_PREFIX ${cervisiapart_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} cervisiapart )
 
-target_link_libraries(cervisiapart  ${KDE4_KPARTS_LIBS}  kutils cvsservice cervisia )
+target_link_libraries(cervisiapart  ${KDE4_KPARTS_LIBS}  kutils cvsservice  )
 
 install_targets(${PLUGIN_INSTALL_DIR} cervisiapart )
 
