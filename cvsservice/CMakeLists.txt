@@ -4,7 +4,7 @@ include_directories( ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_D
 
 ########### next target ###############
 
-set(cvsservice_KDEINIT_SRCS 
+set(cvsservice_bin_KDEINIT_SRCS 
    main.cpp 
    cvsservice.cpp 
    cvsjob.cpp 
@@ -13,27 +13,30 @@ set(cvsservice_KDEINIT_SRCS
    cvsserviceutils.cpp 
    cvsloginjob.cpp) 
 
-kde4_automoc(${cvsservice_KDEINIT_SRCS})
+kde4_automoc(${cvsservice_bin_KDEINIT_SRCS})
 
-kde4_add_dcop_skels(cvsservice_KDEINIT_SRCS 
+kde4_add_dcop_skels(cvsservice_bin_KDEINIT_SRCS 
    cvsservice.h 
    cvsjob.h 
    repository.h 
    cvsloginjob.h )
 
-kde4_add_dcop_stubs(cvsservice_KDEINIT_SRCS 
+kde4_add_dcop_stubs(cvsservice_bin_KDEINIT_SRCS 
    cvsservice.h 
    cvsjob.h 
    repository.h )
 
-kde4_add_kdeinit_executable( cvsservice ${cvsservice_KDEINIT_SRCS})
+kde4_add_kdeinit_executable( cvsservice_bin ${cvsservice_bin_KDEINIT_SRCS})
+set_target_properties(cvsservice_bin PROPERTIES OUTPUT_NAME cvsservice)
 
-target_link_libraries(kdeinit_cvsservice  ${KDE4_KDECORE_LIBS} ${KDE4_KIO_LIBS} )
 
-install_targets(${LIB_INSTALL_DIR} kdeinit_cvsservice )
+target_link_libraries(kdeinit_cvsservice_bin  ${KDE4_KDECORE_LIBS} ${KDE4_KIO_LIBS} )
+set_target_properties(kdeinit_cvsservice_bin PROPERTIES OUTPUT_NAME kdeinit_cvsservice)
 
-target_link_libraries( cvsservice kdeinit_cvsservice )
-install_targets(/bin cvsservice )
+install_targets(${LIB_INSTALL_DIR} kdeinit_cvsservice_bin )
+
+target_link_libraries( cvsservice_bin kdeinit_cvsservice_bin )
+install_targets(/bin cvsservice_bin )
 
 ########### next target ###############
 
