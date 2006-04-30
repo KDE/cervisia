@@ -82,7 +82,7 @@ LogTreeView::LogTreeView(QWidget *parent, const char *name)
     verticalHeader()->hide();
     setLeftMargin(0);
     setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
-    setBackgroundMode(Qt::PaletteBase);
+    setBackgroundRole( QPalette::Base );
     setFocusPolicy(Qt::NoFocus);
 
     currentRow = -1;
@@ -259,7 +259,7 @@ QSize LogTreeView::sizeHint() const
 QString LogTreeView::text(int row, int col) const
 {
     LogTreeItem* item = 0;
-    
+
     Q3PtrListIterator<LogTreeItem> it(items);
     for( ; it.current(); ++it )
     {
@@ -269,12 +269,12 @@ QString LogTreeView::text(int row, int col) const
             break;
         }
     }
-    
+
     QString text;
-    
+
     if( item && !item->m_logInfo.m_author.isNull() )
         text = item->m_logInfo.createToolTipText();
-        
+
     return text;
 }
 

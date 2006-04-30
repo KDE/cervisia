@@ -64,7 +64,7 @@ DiffView::DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
     setTableFlags( Tbl_autoVScrollBar|Tbl_autoHScrollBar|
                    Tbl_smoothVScrolling );
     setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
-    setBackgroundMode( Qt::PaletteBase );
+    setBackgroundRole( QPalette::Base );
 
     partConfig.setGroup("LookAndFeel");
     setFont(partConfig.readEntry("DiffFont",QFont()));
