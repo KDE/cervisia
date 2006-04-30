@@ -704,7 +704,7 @@ void UpdateFileItem::paintCell(QPainter *p,
         QFont myFont(oldFont);
         myFont.setBold(true);
         p->setFont(myFont);
-        mycg.setColor(QColorGroup::Text, color);
+        mycg.setColor(QPalette::Text, color);
     }
 
     Q3ListViewItem::paintCell(p, mycg, col, width, align);
