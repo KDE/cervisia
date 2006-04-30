@@ -116,7 +116,7 @@ bool ChangeLogDialog::readFile(const QString &filename)
                     return false;
                 }
             QTextStream stream(&f);
-            edit->setPlainText(stream.read());
+            edit->setPlainText(stream.readAll());
             f.close();
         }
 

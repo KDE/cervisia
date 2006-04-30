@@ -68,7 +68,7 @@ public:
         , m_endPos(0)
     {
     }
-    
+
     QString nextLine() const
     {
         // already reach end of text on previous call
@@ -77,21 +77,21 @@ public:
             m_currentLine = QString::null;
             return m_currentLine;
         }
-        
+
         m_endPos = m_text.find('\n', m_startPos);
-        
+
         int length    = m_endPos - m_startPos + 1;
         m_currentLine = m_text.mid(m_startPos, length);
         m_startPos    = m_endPos + 1;
-        
+
         return m_currentLine;
     }
-    
+
     bool atEnd() const
     {
         return (m_endPos < 0 && m_currentLine.isEmpty());
     }
-    
+
 private:
     const QString    m_text;
     mutable QString  m_currentLine;
@@ -231,11 +231,11 @@ bool ResolveDialog::parseFile(const QString &name)
     setCaption(i18n("CVS Resolve: %1", name));
 
     fname = name;
-  
+
     QString fileContent = readFile();
     if( fileContent.isNull() )
         return false;
-        
+
     LineSeparator separator(fileContent);
 
     state = Normal;
@@ -244,11 +244,11 @@ bool ResolveDialog::parseFile(const QString &name)
     do
     {
         QString line = separator.nextLine();
-        
+
         // reached end of file?
         if( separator.atEnd() )
             break;
-            
+
         switch( state )
         {
             case Normal:
@@ -256,7 +256,7 @@ bool ResolveDialog::parseFile(const QString &name)
                     // check for start of conflict block
                     // Set to look for <<<<<<< at begining of line with exaclty one
                     // space after then anything after that.
-                    QRegExp rx( "^<{7}\\s.*$" ); 
+                    QRegExp rx( "^<{7}\\s.*$" );
                     int separatorPos = rx.search(line);
                     if( separatorPos >= 0 )
                     {
@@ -311,27 +311,27 @@ bool ResolveDialog::parseFile(const QString &name)
                         item->chosen         = ChA;
                         item->linecountTotal = item->linecountA;
                         items.append(item);
-                        
+
                         for (; advanced1 < advanced2; advanced1++)
                             diff1->addLine("", DiffView::Neutral);
                         for (; advanced2 < advanced1; advanced2++)
                             diff2->addLine("", DiffView::Neutral);
-                            
+
                         state = Normal;
                     }
                 }
                 break;
         }
-    } 
+    }
     while( !separator.atEnd() );
-    
+
     updateNofN();
 
     return true; // succesful
 }
 
 
-void ResolveDialog::addToMergeAndVersionA(const QString& line, 
+void ResolveDialog::addToMergeAndVersionA(const QString& line,
                                           DiffView::DiffType type, int& lineNo)
 {
     lineNo++;
@@ -340,7 +340,7 @@ void ResolveDialog::addToMergeAndVersionA(const QString& line,
 }
 
 
-void ResolveDialog::addToVersionB(const QString& line, DiffView::DiffType type, 
+void ResolveDialog::addToVersionB(const QString& line, DiffView::DiffType type,
                                   int& lineNo)
 {
     lineNo++;
@@ -361,15 +361,15 @@ void ResolveDialog::saveFile(const QString &name)
     QTextStream stream(&f);
     QTextCodec *fcodec = DetectCodec(name);
     stream.setCodec(fcodec);
-    
+
     QString output;
     for( int i = 0; i < merge->count(); i++ )
        output +=merge->stringAtOffset(i);
     stream << output;
-    
+
     f.close();
 }
-    
+
 
 QString ResolveDialog::readFile()
 {
@@ -380,8 +380,8 @@ QString ResolveDialog::readFile()
     QTextStream stream(&f);
     QTextCodec* codec = DetectCodec(fname);
     stream.setCodec(codec);
-    
-    return stream.read();
+
+    return stream.readAll();
 }
 
 
@@ -437,7 +437,7 @@ void ResolveDialog::updateHighlight(int newitem)
 }
 
 
-void ResolveDialog::updateMergedVersion(ResolveItem* item, 
+void ResolveDialog::updateMergedVersion(ResolveItem* item,
                                         ResolveDialog::ChooseType chosen)
 {
     // Remove old variant
@@ -549,9 +549,9 @@ void ResolveDialog::editClicked()
 {
     if (markeditem < 0)
         return;
-    
+
     ResolveItem *item = items.at(markeditem);
-    
+
     QString mergedPart;
     int total  = item->linecountTotal;
     int offset = item->offsetM;
@@ -615,8 +615,8 @@ QString ResolveDialog::contentVersionA(const ResolveItem *item)
     {
         result += diff1->stringAtLine(i);
     }
-    
-    return result;  
+
+    return result;
 }
 
 

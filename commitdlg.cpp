@@ -286,7 +286,7 @@ void CommitDialog::checkForTemplateFile()
         if( f.open(QIODevice::ReadOnly) )
         {
             QTextStream stream(&f);
-            m_templateText = stream.read();
+            m_templateText = stream.readAll();
             f.close();
 
             m_useTemplateChk->setEnabled(true);
