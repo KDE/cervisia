@@ -230,22 +230,22 @@ void Repository::Private::readConfig()
     if( !config->hasGroup(repositoryGroup) )
     {
         // find the position of the first path separator
-        int insertPos = repositoryGroup.find('/');
-        
+        int insertPos = repositoryGroup.indexOf('/');
+
         // add port to location
         // (1) :pserver:user@hostname.com:/path
         if( repositoryGroup.at(insertPos) == ':' )
             repositoryGroup.insert(insertPos, "2401");
         // (2) :pserver:user@hostname.com/path
         else
-            repositoryGroup.insert(insertPos, ":2401");            
+            repositoryGroup.insert(insertPos, ":2401");
     }
 
     config->setGroup(repositoryGroup);
 
     // should we retrieve the CVSROOT/cvsignore file from the cvs server?
     retrieveCvsignoreFile = config->readEntry("RetrieveCvsignore", false);
-    
+
     // see if there is a specific compression level set for this repository
     compressionLevel = config->readEntry("Compression", -1);
 

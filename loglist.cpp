@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -82,7 +82,7 @@ QString LogListViewItem::truncateLine(const QString &s)
     int pos;
 
     QString res = s.simplified();
-    if ( (pos = res.find('\n')) != -1 )
+    if ( (pos = res.indexOf('\n')) != -1 )
         res = res.left(pos) + "...";
 
     return res;
@@ -170,10 +170,10 @@ void LogListView::contentsMousePressEvent(QMouseEvent *e)
         = static_cast<LogListViewItem*>(itemAt(contentsToViewport(e->pos())));
     if( !selItem )
         return;
-        
+
     // Retrieve revision
-    const QString revision = selItem->text(LogListViewItem::Revision);   
-    
+    const QString revision = selItem->text(LogListViewItem::Revision);
+
     if ( e->button() == Qt::LeftButton )
     {
         // If the control key was pressed, then we change revision B not A

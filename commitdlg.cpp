@@ -189,7 +189,7 @@ void CommitDialog::setLogHistory(const QStringList &list)
                 continue;
 
             QString txt = *it;
-            int index = txt.find('\n', 0);
+            int index = txt.indexOf('\n', 0);
             if ( index != -1 ) // Fetch first line
             {
                 txt = txt.mid(0, index);

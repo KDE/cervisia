@@ -255,7 +255,7 @@ void ProgressDialog::startGuiPart()
 void ProgressDialog::processOutput()
 {
     int pos;
-    while( (pos = d->buffer.find('\n')) != -1 )
+    while( (pos = d->buffer.indexOf('\n')) != -1 )
     {
         QString item = d->buffer.left(pos);
         if( item.startsWith(d->errorId1) ||

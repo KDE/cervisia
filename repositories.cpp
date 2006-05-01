@@ -38,7 +38,7 @@
 QStringList Repositories::readCvsPassFile()
 {
     QStringList list;
-    
+
     QFile f(QDir::homePath() + "/.cvspass");
     if (f.open(QIODevice::ReadOnly))
         {
@@ -47,7 +47,7 @@ QStringList Repositories::readCvsPassFile()
 		{
 		    int pos;
 		    QString line = stream.readLine();
-		    if ( (pos = line.find(' ')) != -1)
+		    if ( (pos = line.indexOf(' ')) != -1)
 		    {
 			if (line[0] != '/')	// old format
                             list.append(line.left(pos));
@@ -65,7 +65,7 @@ QStringList Repositories::readCvsPassFile()
 QStringList Repositories::readConfigFile()
 {
     QStringList list;
-    
+
     KConfig *config = CervisiaPart::config();
     config->setGroup("Repositories");
     list = config->readEntry("Repos",QStringList());

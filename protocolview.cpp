@@ -143,7 +143,7 @@ void ProtocolView::slotJobExited(bool normalExit, int exitStatus)
 void ProtocolView::processOutput()
 {
     int pos;
-    while ( (pos = buf.find('\n')) != -1)
+    while ( (pos = buf.indexOf('\n')) != -1)
 	{
 	    QString line = buf.left(pos);
 	    if (!line.isEmpty())

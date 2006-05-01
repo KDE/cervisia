@@ -96,9 +96,9 @@ static const QStringList FetchBranchesAndTags(const QString& searchedType,
                 continue;
             if( (wsPos = FindWhiteSpace(line, 2)) < 0 )
                 continue;
-            if( (bracketPos = line.find('(', wsPos + 1)) < 0 )
+            if( (bracketPos = line.indexOf('(', wsPos + 1)) < 0 )
                 continue;
-            if( (colonPos = line.find(':', bracketPos + 1)) < 0 )
+            if( (colonPos = line.indexOf(':', bracketPos + 1)) < 0 )
                 continue;
 
             const QString tag  = line.mid(1, wsPos - 1);
@@ -249,7 +249,7 @@ QStringList splitLine(QString line, char delim)
     QStringList list;
 
     line = line.simplified();
-    while ((pos = line.find(delim)) != -1)
+    while ((pos = line.indexOf(delim)) != -1)
     {
         list.append(line.left(pos));
         line = line.mid(pos+1, line.length()-pos-1);
@@ -310,12 +310,12 @@ int compareRevisions(const QString& rev1, const QString& rev2)
     int startPos2(0);
     while (startPos1 < length1 && startPos2 < length2)
     {
-        int pos1(rev1.find('.', startPos1));
+        int pos1(rev1.indexOf('.', startPos1));
         if (pos1 < 0)
             pos1 = length1;
         const int partLength1(pos1 - startPos1);
 
-        int pos2(rev2.find('.', startPos2));
+        int pos2(rev2.indexOf('.', startPos2));
         if (pos2 < 0)
             pos2 = length2;
         const int partLength2(pos2 - startPos2);

@@ -290,7 +290,7 @@ void UpdateDirItem::syncWithEntries()
                 const QString options(line.section('/', 4, 4));
                 entry.m_tag = line.section('/', 5, 5);
 
-                const bool isBinary(options.find("-kb") >= 0);
+                const bool isBinary = options.contains("-kb");
 
                 // file date in local time
                 entry.m_dateTime = QFileInfo(path + entry.m_name).lastModified();
@@ -302,7 +302,7 @@ void UpdateDirItem::syncWithEntries()
                     entry.m_status = Cervisia::LocallyRemoved;
                     rev.remove(0, 1);
                 }
-                else if (timestamp.find('+') >= 0)
+                else if (timestamp.contains('+'))
                 {
                     entry.m_status = Cervisia::Conflict;
                 }
@@ -476,8 +476,8 @@ bool UpdateFileItem::applyFilter(UpdateView::Filter filter)
     bool visible(true);
     if (filter & UpdateView::OnlyDirectories)
         visible = false;
-    
-    bool unmodified = (entry().m_status == Cervisia::UpToDate) || 
+
+    bool unmodified = (entry().m_status == Cervisia::UpToDate) ||
                       (entry().m_status == Cervisia::Unknown);
     if ((filter & UpdateView::NoUpToDate) && unmodified)
         visible = false;

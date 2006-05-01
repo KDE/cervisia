@@ -365,9 +365,9 @@ void CheckoutDialog::moduleButtonClicked()
         if (str.left(12) == "Unknown host")
             continue;
 
-        int pos = str.find(' ');
+        int pos = str.indexOf(' ');
         if (pos == -1)
-            pos = str.find('\t');
+            pos = str.indexOf('\t');
         if (pos == -1)
             pos = str.length();
         QString module( str.left(pos).trimmed() );
@@ -410,7 +410,7 @@ void CheckoutDialog::branchButtonClicked()
 
         if( line.isEmpty() || line[0] != '\t' )
             continue;
-        if( (colonPos = line.find(':', 1)) < 0 )
+        if( (colonPos = line.indexOf(':', 1)) < 0 )
            continue;
 
         const QString tag  = line.mid(1, colonPos - 1);

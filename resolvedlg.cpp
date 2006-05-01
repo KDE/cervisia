@@ -78,7 +78,7 @@ public:
             return m_currentLine;
         }
 
-        m_endPos = m_text.find('\n', m_startPos);
+        m_endPos = m_text.indexOf('\n', m_startPos);
 
         int length    = m_endPos - m_startPos + 1;
         m_currentLine = m_text.mid(m_startPos, length);
