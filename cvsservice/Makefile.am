@@ -43,10 +43,6 @@ METASOURCES = AUTO
 service_DATA = cvsservice.desktop
 servicedir = $(kde_servicesdir)
 
-# i18n
-messages:
-	$(XGETTEXT) *.cpp *.h -o $(podir)/cvsservice.pot
-
 # API documentation
 # Not activated because KDE_INIT_DOXYGEN is missing in
 # kdesdk's configure.in.in

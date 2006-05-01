@@ -57,9 +57,6 @@ update_DATA = cervisia.upd
 update_SCRIPTS = move_repositories.pl change_colors.pl cervisia-normalize_cvsroot.pl cervisia-change_repos_list.pl
 updatedir = $(kde_datadir)/kconf_update
 
-messages: rc.cpp
-	$(EXTRACTRC) *.rc >> rc.cpp
-	$(XGETTEXT) -C *.cpp *.h -o $(podir)/cervisia.pot
 
 srcdoc:
 	$(kde_bindir)/kdoc -a -p -d classdocs -n 'Cervisia' *.h -lqt -lkdecore -lkdeui -lkparts
