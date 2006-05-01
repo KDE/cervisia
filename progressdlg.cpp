@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (c) 1999-2002 Bernd Gehrmann <bernd@mail.berlios.de>
  *  Copyright (c) 2002-2004 Christian Loose <christian.loose@kdemail.net>
  *

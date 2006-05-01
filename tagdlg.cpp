@@ -59,7 +59,8 @@ TagDialog::TagDialog(ActionType action, CvsService_stub* service,
             tag_combo->setFocus();
             tag_combo->setMinimumWidth(fontMetrics().width('0') * 30);
 
-            QLabel *tag_label = new QLabel(tag_combo, i18n("&Name of tag:"), mainWidget);
+            QLabel *tag_label = new QLabel(i18n("&Name of tag:"), mainWidget);
+            tag_label->setBuddy( tag_combo );
 
             QPushButton *tag_button = new QPushButton(i18n("Fetch &List"), mainWidget);
             connect( tag_button, SIGNAL(clicked()),
@@ -76,7 +77,8 @@ TagDialog::TagDialog(ActionType action, CvsService_stub* service,
             tag_edit->setFocus();
             tag_edit->setMinimumWidth(fontMetrics().width('0') * 30);
 
-            QLabel *tag_label = new QLabel(tag_edit, i18n("&Name of tag:"), mainWidget);
+            QLabel *tag_label = new QLabel(i18n("&Name of tag:"), mainWidget);
+            tag_label->setBuddy( tag_edit );
 
             QBoxLayout *tagedit_layout = new QHBoxLayout(layout);
             tagedit_layout->addWidget(tag_label);

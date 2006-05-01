@@ -85,7 +85,8 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     listLayout->addWidget(list, 1);
 
     K3ListViewSearchLine* searchLine = new K3ListViewSearchLine(listWidget, list);
-    QLabel* searchLabel = new QLabel(searchLine, i18n("S&earch:"), listWidget);
+    QLabel* searchLabel = new QLabel(i18n("S&earch:"),listWidget);
+    searchLabel->setBuddy(searchLine);
     searchLayout->addWidget(searchLabel);
     searchLayout->addWidget(searchLine, 1);
 
@@ -118,7 +119,8 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
         frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
         layout->addWidget(frame);
 
-        QGridLayout *grid = new QGridLayout(layout);
+        QGridLayout *grid = new QGridLayout();
+        layout->addItem( grid );
         grid->setRowStretch(0, 0);
         grid->setRowStretch(1, 0);
         grid->setRowStretch(2, 1);
@@ -448,14 +450,14 @@ void LogDialog::slotApply()
             "Cervisia");
         return;
     }
-    
+
     Cervisia::PatchOptionDialog optionDlg;
     if( optionDlg.exec() == KDialogBase::Rejected )
         return;
-    
+
     QString format      = optionDlg.formatOption();
     QString diffOptions = optionDlg.diffOptions();
-    
+
     DCOPRef job = cvsService->diff(filename, selectionA, selectionB, diffOptions,
                                    format);
     if( !cvsService->ok() )
@@ -486,7 +488,7 @@ void LogDialog::slotApply()
     while( dlg.getLine(line) )
         t << line << '\n';
 
-    f.close();    
+    f.close();
 }
 
 

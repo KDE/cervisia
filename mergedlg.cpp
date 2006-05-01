@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -61,19 +61,19 @@ MergeDialog::MergeDialog(CvsService_stub* service,
     branch_button = new QPushButton(i18n("Fetch &List"), mainWidget);
     connect( branch_button, SIGNAL(clicked()),
              this, SLOT(branchButtonClicked()) );
-            
+
     QBoxLayout *branchedit_layout = new QHBoxLayout(layout);
     branchedit_layout->addSpacing(iWidgetIndent);
     branchedit_layout->addWidget(branch_combo, 2);
     branchedit_layout->addWidget(branch_button, 0);
-    
+
     bytags_button = new QRadioButton(i18n("Merge &modifications:"), mainWidget);
     layout->addWidget(bytags_button);
 
     QLabel *tag1_label = new QLabel(i18n("between tag: "), mainWidget);
     tag1_combo = new QComboBox(true, mainWidget);
     tag1_combo->setMinimumWidth(iComboBoxMinWidth);
-    
+
     QLabel *tag2_label = new QLabel(i18n("and tag: "), mainWidget);
     tag2_combo = new QComboBox(true, mainWidget);
     tag2_combo->setMinimumWidth(iComboBoxMinWidth);
@@ -82,7 +82,8 @@ MergeDialog::MergeDialog(CvsService_stub* service,
     connect( tag_button, SIGNAL(clicked()),
              this, SLOT(tagButtonClicked()) );
 
-    QGridLayout *tagsedit_layout = new QGridLayout(layout);
+    QGridLayout *tagsedit_layout = new QGridLayout();
+    layout->addItem( tagsedit_layout );
     tagsedit_layout->addColSpacing(0, iWidgetIndent);
     tagsedit_layout->setColStretch(0, 0);
     tagsedit_layout->setColStretch(1, 1);
@@ -93,7 +94,7 @@ MergeDialog::MergeDialog(CvsService_stub* service,
     tagsedit_layout->addWidget(tag2_label, 1, 1);
     tagsedit_layout->addWidget(tag2_combo, 1, 2);
     tagsedit_layout->addMultiCellWidget(tag_button, 0, 1, 3, 3);
-    
+
     Q3ButtonGroup* group = new Q3ButtonGroup(mainWidget);
     group->hide();
     group->insert(bybranch_button);

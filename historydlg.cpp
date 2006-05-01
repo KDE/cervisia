@@ -206,7 +206,8 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
     connect( dirname_edit, SIGNAL(returnPressed()),
              this, SLOT(choiceChanged()) );
 
-    QGridLayout *grid = new QGridLayout(layout);
+    QGridLayout *grid = new QGridLayout();
+    layout->addItem( grid );
     grid->setColStretch(0, 1);
     grid->setColStretch(1, 0);
     grid->setColStretch(2, 4);

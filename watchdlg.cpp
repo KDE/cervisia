@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -51,19 +51,20 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent, const char *name)
     all_button->setFocus();
     all_button->setChecked(true);
     layout->addWidget(all_button);
-    
+
     only_button = new QRadioButton(i18n("&Only:"), mainWidget);
     layout->addWidget(only_button);
 
-    QGridLayout *eventslayout = new QGridLayout(layout);
+    QGridLayout *eventslayout = new QGridLayout();
+    layout->addItem( eventslayout );
     eventslayout->addColSpacing(0, 20);
     eventslayout->setColStretch(0, 0);
     eventslayout->setColStretch(1, 1);
-    
+
     commitbox = new QCheckBox(i18n("&Commits"), mainWidget);
     commitbox->setEnabled(false);
     eventslayout->addWidget(commitbox, 0, 1);
-    
+
     editbox = new QCheckBox(i18n("&Edits"), mainWidget);
     editbox->setEnabled(false);
     eventslayout->addWidget(editbox, 1, 1);

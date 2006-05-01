@@ -60,7 +60,8 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool mod
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
 
-    QGridLayout *pairlayout = new QGridLayout(layout);
+    QGridLayout *pairlayout = new QGridLayout();
+    layout->addItem( pairlayout );
     pairlayout->setRowStretch(0, 0);
     pairlayout->setRowStretch(1, 1);
     pairlayout->setColStretch(1, 0);

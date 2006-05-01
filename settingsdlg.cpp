@@ -156,13 +156,13 @@ void SettingsDialog::readSettings()
     m_splitterBox->setChecked(config->readEntry("SplitHorizontally",true));
 
     m_conflictButton->setColor(CervisiaSettings::conflictColor());
-    m_localChangeButton->setColor(CervisiaSettings::localChangeColor());  
+    m_localChangeButton->setColor(CervisiaSettings::localChangeColor());
     m_remoteChangeButton->setColor(CervisiaSettings::remoteChangeColor());
     m_notInCvsButton->setColor(CervisiaSettings::notInCvsColor());
 
     m_diffChangeButton->setColor(CervisiaSettings::diffChangeColor());
     m_diffInsertButton->setColor(CervisiaSettings::diffInsertColor());
-    m_diffDeleteButton->setColor(CervisiaSettings::diffDeleteColor());    
+    m_diffDeleteButton->setColor(CervisiaSettings::diffDeleteColor());
 }
 
 
@@ -173,7 +173,7 @@ void SettingsDialog::writeSettings()
     serviceConfig->writePathEntry("CVSPath", cvspathedit->url());
     serviceConfig->writeEntry("Compression",
         m_advancedPage->kcfg_Compression->value());
-    serviceConfig->writeEntry("UseSshAgent", 
+    serviceConfig->writeEntry("UseSshAgent",
         m_advancedPage->kcfg_UseSshAgent->isChecked());
 
     // write to disk so other services can reparse the configuration
