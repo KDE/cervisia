@@ -160,7 +160,7 @@ bool Repository::setWorkingCopy(const QString& dirName)
 
     // add identities (ssh-add) to ssh-agent
     // TODO CL make sure this is called only once
-    if( d->location.contains(":ext:", false) > 0 )
+    if( d->location.contains(":ext:", Qt::CaseInsensitive) )
     {
         SshAgent ssh;
         ssh.addSshIdentities();
