@@ -113,10 +113,9 @@ bool CvsLoginJob::execute()
             // TODO: We really should display the repository name. Unfortunately
             //       the dialog doesn't show part of the repository name, because
             //       it's too long. :-(
-#warning fix me
             Q3CString password;
-            int res = 0; //KPasswordDialog::getPassword(password, i18n("Please type "
-                         //"in your password for the repository below."));
+            int res = KPasswordDialog::getPassword(0, password, i18n("Please type "
+                      "in your password for the repository below."));
             if( res == KPasswordDialog::Accepted )
             {
                 // send password to process
