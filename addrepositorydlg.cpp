@@ -43,7 +43,9 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
 {
     QFrame* mainWidget = makeMainWidget();
 
-    QBoxLayout* layout = new QVBoxLayout(mainWidget, 0, spacingHint());
+    QBoxLayout* layout = new QVBoxLayout(mainWidget);
+    layout->setSpacing(spacingHint());
+    layout->setMargin(0);
 
     QLabel* repo_label = new QLabel(i18n("&Repository:"), mainWidget);
     layout->addWidget(repo_label);

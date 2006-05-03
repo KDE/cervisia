@@ -58,7 +58,9 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool mod
 
     QFrame* mainWidget = makeMainWidget();
 
-    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
+    QBoxLayout *layout = new QVBoxLayout(mainWidget);
+    layout->setSpacing(spacingHint());
+    layout->setMargin(0);
 
     QGridLayout *pairlayout = new QGridLayout();
     layout->addItem( pairlayout );

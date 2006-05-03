@@ -40,7 +40,9 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent, const char *name)
 
     QFrame* mainWidget = makeMainWidget();
 
-    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
+    QBoxLayout *layout = new QVBoxLayout(mainWidget);
+    layout->setSpacing(spacingHint());
+    layout->setMargin(0);
 
     QLabel *textlabel = new QLabel
 	( (action==Add)? i18n("Add watches for the following events:")

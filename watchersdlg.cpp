@@ -40,7 +40,9 @@ WatchersDialog::WatchersDialog(KConfig& cfg, QWidget* parent, const char* name)
 {
     QFrame* mainWidget = makeMainWidget();
 
-    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
+    QBoxLayout *layout = new QVBoxLayout(mainWidget);
+    layout->setSpacing(spacingHint());
+    layout->setMargin(0);
 
     table = new Q3Table(mainWidget, "watchersTable");
     table->setNumCols(5);

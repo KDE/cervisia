@@ -37,7 +37,9 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent, const char* name)
                   Ok | Cancel | Help, Ok, true/*separator*/)
 {
     QFrame* mainWidget = makeMainWidget();
-    QBoxLayout* topLayout = new QVBoxLayout(mainWidget, 0, spacingHint());
+    QBoxLayout* topLayout = new QVBoxLayout(mainWidget);
+    topLayout->setSpacing(spacingHint());
+    topLayout->setMargin(0);
 
     m_formatBtnGroup = new Q3VButtonGroup(i18n("Output Format"), mainWidget, "");
     topLayout->addWidget(m_formatBtnGroup);

@@ -60,7 +60,9 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
 
     QFrame* mainWidget = makeMainWidget();
 
-    QBoxLayout* layout = new QVBoxLayout(mainWidget, 0, spacingHint());
+    QBoxLayout* layout = new QVBoxLayout(mainWidget);
+    layout->setSpacing(spacingHint());
+    layout->setMargin(0);
 
     QGridLayout* grid = new QGridLayout();
     layout->addItem( grid );

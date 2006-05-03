@@ -136,7 +136,9 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
 {
     QFrame* mainWidget = makeMainWidget();
 
-    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
+    QBoxLayout *layout = new QVBoxLayout(mainWidget);
+    layout->setSpacing(spacingHint());
+    layout->setMargin(0);
 
     listview = new K3ListView(mainWidget);
     listview->setSelectionMode(Q3ListView::NoSelection);

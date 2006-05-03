@@ -44,7 +44,9 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent, const char*
 
     QFrame* mainWidget = makeMainWidget();
 
-    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
+    QBoxLayout *layout = new QVBoxLayout(mainWidget);
+    layout->setSpacing(spacingHint());
+    layout->setMargin(0);
 
     QLabel *textlabel = new QLabel
         ( (action==Add)?       i18n("Add the following files to the repository:") :

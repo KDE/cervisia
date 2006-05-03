@@ -165,7 +165,9 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, CvsService_stub* cvsService,
 {
     QFrame* mainWidget = makeMainWidget();
 
-    QBoxLayout* hbox = new QHBoxLayout(mainWidget, 0, spacingHint());
+    QBoxLayout* hbox = new QHBoxLayout(mainWidget);
+    hbox->setSpacing(spacingHint());
+    hbox->setMargin(0);
 
     m_repoList = new K3ListView(mainWidget);
     hbox->addWidget(m_repoList, 10);

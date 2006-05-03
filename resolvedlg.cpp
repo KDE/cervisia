@@ -112,14 +112,17 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     QFrame* mainWidget = makeMainWidget();
 
-    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
+    QBoxLayout *layout = new QVBoxLayout(mainWidget);
+    layout->setSpacing(spacingHint());
+    layout->setMargin(0);
 
     QSplitter *vertSplitter = new QSplitter(Qt::Vertical, mainWidget);
 
     QSplitter *splitter = new QSplitter(Qt::Horizontal, vertSplitter);
 
     QWidget *versionALayoutWidget = new QWidget(splitter);
-    QBoxLayout *versionAlayout = new QVBoxLayout(versionALayoutWidget, 5);
+    QBoxLayout *versionAlayout = new QVBoxLayout(versionALayoutWidget);
+    versionAlayout->setSpacing(5);
 
     QLabel *revlabel1 = new QLabel(i18n("Your version (A):"), versionALayoutWidget);
     versionAlayout->addWidget(revlabel1);
@@ -127,7 +130,8 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent, const char *name)
     versionAlayout->addWidget(diff1, 10);
 
     QWidget* versionBLayoutWidget = new QWidget(splitter);
-    QBoxLayout *versionBlayout = new QVBoxLayout(versionBLayoutWidget, 5);
+    QBoxLayout *versionBlayout = new QVBoxLayout(versionBLayoutWidget);
+    versionBlayout->setSpacing(5);
 
     QLabel *revlabel2 = new QLabel(i18n("Other version (B):"), versionBLayoutWidget);
     versionBlayout->addWidget(revlabel2);
@@ -138,7 +142,8 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent, const char *name)
     diff2->setPartner(diff1);
 
     QWidget* mergeLayoutWidget = new QWidget(vertSplitter);
-    QBoxLayout *mergeLayout = new QVBoxLayout(mergeLayoutWidget, 5);
+    QBoxLayout *mergeLayout = new QVBoxLayout(mergeLayoutWidget);
+    mergeLayout->setSpacing(5);
 
     QLabel *mergelabel = new QLabel(i18n("Merged version:"), mergeLayoutWidget);
     mergeLayout->addWidget(mergelabel);

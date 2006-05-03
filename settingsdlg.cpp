@@ -239,7 +239,9 @@ void SettingsDialog::addGeneralPage()
 {
     QFrame* generalPage = addPage(i18n("General"), QString::null,
                                   LoadIcon("misc"));
-    QVBoxLayout* layout = new QVBoxLayout(generalPage, 0, KDialog::spacingHint());
+    QVBoxLayout* layout = new QVBoxLayout(generalPage);
+    layout->setSpacing(KDialog::spacingHint());
+    layout->setMargin(0);
 
     QLabel *usernamelabel = new QLabel( i18n("&User name for the change log editor:"), generalPage );
     usernameedit = new KLineEdit(generalPage);

@@ -69,7 +69,9 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
 {
     QFrame* mainWidget = makeMainWidget();
 
-    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
+    QBoxLayout *layout = new QVBoxLayout(mainWidget);
+    layout->setSpacing(spacingHint());
+    layout->setMargin(0);
 
     tree = new LogTreeView(mainWidget);
     connect( tree, SIGNAL(revisionClicked(QString,bool)),

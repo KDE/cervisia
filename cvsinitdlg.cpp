@@ -40,7 +40,9 @@ CvsInitDialog::CvsInitDialog(QWidget* parent, const char* name)
                   Ok | Cancel, Ok, true)
 {
     QFrame* mainWidget = makeMainWidget();
-    QVBoxLayout* mainLayout = new QVBoxLayout(mainWidget, 0, spacingHint());
+    QVBoxLayout* mainLayout = new QVBoxLayout(mainWidget);
+    mainLayout->setSpacing(spacingHint());
+    mainLayout->setMargin(0);
 
     QLabel* dirLabel = new QLabel(i18n("Repository folder:"), mainWidget);
     mainLayout->addWidget(dirLabel);

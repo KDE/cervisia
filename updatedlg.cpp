@@ -48,7 +48,9 @@ UpdateDialog::UpdateDialog(CvsService_stub* service,
 
     QFrame* mainWidget = makeMainWidget();
 
-    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
+    QBoxLayout *layout = new QVBoxLayout(mainWidget);
+    layout->setSpacing(spacingHint());
+    layout->setMargin(0);
 
     bybranch_button = new QRadioButton(i18n("Update to &branch: "), mainWidget);
     bybranch_button->setChecked(true);
