@@ -294,6 +294,9 @@ void HistoryDialog::toggled(bool b)
     else if (sender() == onlydirnames_box)
         edit = dirname_edit;
 
+    if (!edit)
+	return;
+
     edit->setEnabled(b);
     if (b)
         edit->setFocus();
