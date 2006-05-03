@@ -76,7 +76,7 @@ void FontButton::chooseFont()
         return;
 
     setFont(newFont);
-    repaint(false);
+    repaint();
 }
 
 
@@ -140,8 +140,8 @@ void SettingsDialog::readSettings()
     m_advancedPage->kcfg_Timeout->setValue(CervisiaSettings::timeout());
     usernameedit->setText(config->readEntry("Username", Cervisia::UserName()));
 
-    contextedit->setValue((int)config->readUnsignedNumEntry("ContextLines", 65535));
-    tabwidthedit->setValue((int)config->readUnsignedNumEntry("TabWidth", 8));
+    contextedit->setValue(config->readEntry("ContextLines", 65535));
+    tabwidthedit->setValue(config->readEntry("TabWidth", 8));
     diffoptedit->setText(config->readEntry("DiffOptions"));
     extdiffedit->setURL(config->readPathEntry("ExternalDiff"));
     remotestatusbox->setChecked(config->readEntry("StatusForRemoteRepos", false));

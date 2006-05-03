@@ -244,7 +244,7 @@ void LogTreeView::setSelectedPair(QString selectionA, QString selectionB)
         if (oldstate != newstate)
         {
             it.current()->selected = newstate;
-            repaint(false);
+            repaint();
         }
     }
 }

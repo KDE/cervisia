@@ -41,12 +41,12 @@ enum ScrollBarDirtyFlags {
 class QCornerSquare : public QWidget		// internal class
 {
 public:
-    QCornerSquare( QWidget *, const char* = 0 );
+    QCornerSquare( QWidget * );
     void paintEvent( QPaintEvent * );
 };
 
-QCornerSquare::QCornerSquare( QWidget *parent, const char *name )
-	: QWidget( parent, name )
+QCornerSquare::QCornerSquare( QWidget *parent )
+	: QWidget( parent )
 {
 }
 
@@ -935,7 +935,7 @@ void QtTableView::clearTableFlags( uint f )
 
 void QtTableView::setAutoUpdate( bool enable )
 {
-    if ( isUpdatesEnabled() == enable )
+    if ( updatesEnabled() == enable )
 	return;
     setUpdatesEnabled( enable );
     if ( enable ) {

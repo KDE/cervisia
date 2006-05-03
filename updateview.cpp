@@ -200,7 +200,7 @@ void UpdateView::unfoldSelectedFolders()
         selectedItem.remove(0, selectedItem.lastIndexOf('/')+1);
 
     // avoid flicker
-    const bool updatesEnabled = isUpdatesEnabled();
+    const bool _updatesEnabled = updatesEnabled();
     setUpdatesEnabled(false);
 
     Q3ListViewItemIterator it(this);
@@ -260,7 +260,7 @@ void UpdateView::unfoldSelectedFolders()
     // maybe some UpdateDirItem was opened the first time so check the whole tree
     setFilter(filter());
 
-    setUpdatesEnabled(updatesEnabled);
+    setUpdatesEnabled(_updatesEnabled);
     triggerUpdate();
 
     QApplication::restoreOverrideCursor();
@@ -273,7 +273,7 @@ void UpdateView::unfoldTree()
 
     m_unfoldingTree = true;
 
-    const bool updatesEnabled(isUpdatesEnabled());
+    const bool _updatesEnabled = updatesEnabled();
 
     setUpdatesEnabled(false);
 
@@ -305,7 +305,7 @@ void UpdateView::unfoldTree()
     // maybe some UpdateDirItem was opened the first time so check the whole tree
     setFilter(filter());
 
-    setUpdatesEnabled(updatesEnabled);
+    setUpdatesEnabled(_updatesEnabled);
 
     triggerUpdate();
 
@@ -522,14 +522,9 @@ void UpdateView::updateColors()
     KConfigGroup cs(&m_partConfig, "Colors");
     m_partConfig.setGroup("Colors");
 
-    QColor defaultColor = QColor(255, 130, 130);
-    m_conflictColor = cs.readColorEntry("Conflict", &defaultColor);
-
-    defaultColor = QColor(130, 130, 255);
-    m_localChangeColor = cs.readColorEntry("LocalChange", &defaultColor);
-
-    defaultColor = QColor(70, 210, 70);
-    m_remoteChangeColor = cs.readColorEntry("RemoteChange", &defaultColor);
+    m_conflictColor = cs.readEntry("Conflict", QColor(255, 130, 130) );
+    m_localChangeColor = cs.readEntry("LocalChange", QColor(130, 130, 255));
+    m_remoteChangeColor = cs.readEntry("RemoteChange", QColor(70, 210, 70) );
 
     m_notInCvsColor = CervisiaSettings::notInCvsColor();
 }

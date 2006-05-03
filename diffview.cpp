@@ -81,12 +81,9 @@ DiffView::DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
     marker = withmarker;
 
     partConfig.setGroup("Colors");
-    QColor defaultColor=QColor(237, 190, 190);
-    diffChangeColor=partConfig.readColorEntry("DiffChange",&defaultColor);
-    defaultColor=QColor(190, 190, 237);
-    diffInsertColor=partConfig.readColorEntry("DiffInsert",&defaultColor);
-    defaultColor=QColor(190, 237, 190);
-    diffDeleteColor=partConfig.readColorEntry("DiffDelete",&defaultColor);
+    diffChangeColor=partConfig.readEntry("DiffChange",QColor(237, 190, 190));
+    diffInsertColor=partConfig.readEntry("DiffInsert",QColor(190, 190, 237));
+    diffDeleteColor=partConfig.readEntry("DiffDelete",QColor(190, 237, 190));
 }
 
 
@@ -395,12 +392,9 @@ DiffZoomWidget::DiffZoomWidget(KConfig& cfg, QWidget *parent, const char *name)
     setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Minimum ) );
 
     cfg.setGroup("Colors");
-    QColor defaultColor=QColor(237, 190, 190);
-    diffChangeColor=cfg.readColorEntry("DiffChange",&defaultColor);
-    defaultColor=QColor(190, 190, 237);
-    diffInsertColor=cfg.readColorEntry("DiffInsert",&defaultColor);
-    defaultColor=QColor(190, 237, 190);
-    diffDeleteColor=cfg.readColorEntry("DiffDelete",&defaultColor);
+    diffChangeColor=cfg.readEntry("DiffChange",QColor(237, 190, 190));
+    diffInsertColor=cfg.readEntry("DiffInsert",QColor(190, 190, 237));
+    diffDeleteColor=cfg.readEntry("DiffDelete",QColor(190, 237, 190));
 }
 
 

@@ -235,7 +235,7 @@ inline QRect QtTableView::cellUpdateRect() const
 { return cellUpdateR; }
 
 inline bool QtTableView::autoUpdate() const
-{ return isUpdatesEnabled(); }
+{ return updatesEnabled(); }
 
 inline void QtTableView::repaint( bool erase )
 { repaint( 0, 0, width(), height(), erase ); }
