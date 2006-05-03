@@ -63,7 +63,8 @@ UpdateDialog::UpdateDialog(CvsService_stub* service,
     connect( branch_button, SIGNAL(clicked()),
              this, SLOT(branchButtonClicked()) );
             
-    QBoxLayout *branchedit_layout = new QHBoxLayout(layout);
+    QBoxLayout *branchedit_layout = new QHBoxLayout();
+    layout->addItem(branchedit_layout);
     branchedit_layout->addSpacing(iWidgetIndent);
     branchedit_layout->addWidget(branch_combo);
     branchedit_layout->addWidget(branch_button);
@@ -78,7 +79,8 @@ UpdateDialog::UpdateDialog(CvsService_stub* service,
     connect( tag_button, SIGNAL(clicked()),
              this, SLOT(tagButtonClicked()) );
             
-    QBoxLayout *tagedit_layout = new QHBoxLayout(layout);
+    QBoxLayout *tagedit_layout = new QHBoxLayout();
+    layout->addItem(tagedit_layout);
     tagedit_layout->addSpacing(iWidgetIndent);
     tagedit_layout->addWidget(tag_combo);
     tagedit_layout->addWidget(tag_button);
@@ -88,7 +90,8 @@ UpdateDialog::UpdateDialog(CvsService_stub* service,
 
     date_edit = new KLineEdit(mainWidget);
 
-    QBoxLayout *dateedit_layout = new QHBoxLayout(layout);
+    QBoxLayout *dateedit_layout = new QHBoxLayout();
+    layout->addItem(dateedit_layout);
     dateedit_layout->addSpacing(iWidgetIndent);
     dateedit_layout->addWidget(date_edit);
 

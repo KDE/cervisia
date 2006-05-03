@@ -177,7 +177,8 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent, const char *name)
     forwbutton = new QPushButton("&>>", mainWidget);
     connect( forwbutton, SIGNAL(clicked()), SLOT(forwClicked()) );
 
-    QBoxLayout *buttonlayout = new QHBoxLayout(layout);
+    QBoxLayout *buttonlayout = new QHBoxLayout();
+    layout->addItem(buttonlayout);
     buttonlayout->addWidget(abutton, 1);
     buttonlayout->addWidget(bbutton, 1);
     buttonlayout->addWidget(abbutton, 1);

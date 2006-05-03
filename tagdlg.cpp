@@ -68,7 +68,8 @@ TagDialog::TagDialog(ActionType action, CvsService_stub* service,
             connect( tag_button, SIGNAL(clicked()),
                      this, SLOT(tagButtonClicked()) );
 
-            QBoxLayout *tagedit_layout = new QHBoxLayout(layout);
+            QBoxLayout *tagedit_layout = new QHBoxLayout();
+	    layout->addItem(tagedit_layout);
             tagedit_layout->addWidget(tag_label);
             tagedit_layout->addWidget(tag_combo);
             tagedit_layout->addWidget(tag_button);
@@ -82,7 +83,8 @@ TagDialog::TagDialog(ActionType action, CvsService_stub* service,
             QLabel *tag_label = new QLabel(i18n("&Name of tag:"), mainWidget);
             tag_label->setBuddy( tag_edit );
 
-            QBoxLayout *tagedit_layout = new QHBoxLayout(layout);
+            QBoxLayout *tagedit_layout = new QHBoxLayout();
+	    layout->addItem(tagedit_layout);
             tagedit_layout->addWidget(tag_label);
             tagedit_layout->addWidget(tag_edit);
 

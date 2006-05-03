@@ -79,7 +79,8 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     QWidget* listWidget = new QWidget(mainWidget);
     QVBoxLayout* listLayout = new QVBoxLayout(listWidget);
-    QHBoxLayout* searchLayout = new QHBoxLayout(listLayout);
+    QHBoxLayout* searchLayout = new QHBoxLayout();
+    listLayout->addItem(searchLayout);
     searchLayout->setMargin(KDialog::spacingHint());
     searchLayout->setSpacing(KDialog::spacingHint());
 

@@ -111,7 +111,8 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool mod
 
     connect( this, SIGNAL(user1Clicked()), SLOT(saveAsClicked()) );
 
-    QBoxLayout *buttonlayout = new QHBoxLayout(layout);
+    QBoxLayout *buttonlayout = new QHBoxLayout();
+    layout->addItem(buttonlayout);
     buttonlayout->addWidget(syncbox, 0);
     buttonlayout->addStretch(4);
     buttonlayout->addWidget(itemscombo);

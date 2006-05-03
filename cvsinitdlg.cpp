@@ -47,7 +47,8 @@ CvsInitDialog::CvsInitDialog(QWidget* parent, const char* name)
     QLabel* dirLabel = new QLabel(i18n("Repository folder:"), mainWidget);
     mainLayout->addWidget(dirLabel);
 
-    QHBoxLayout* dirLayout = new QHBoxLayout(mainLayout);
+    QHBoxLayout* dirLayout = new QHBoxLayout();
+    mainLayout->addItem(dirLayout);
      
     m_directoryEdit = new KLineEdit(mainWidget);
     m_directoryEdit->setFocus();

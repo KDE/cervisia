@@ -58,7 +58,8 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent, const char* name)
     m_contextLines->setRange(2, 65535, 1, false);
     contextLinesLbl->setBuddy(m_contextLines);
 
-    QBoxLayout* contextLinesLayout = new QHBoxLayout(topLayout);
+    QBoxLayout* contextLinesLayout = new QHBoxLayout();
+    topLayout->addItem(contextLinesLayout);
     contextLinesLayout->addWidget(contextLinesLbl);
     contextLinesLayout->addWidget(m_contextLines);
 

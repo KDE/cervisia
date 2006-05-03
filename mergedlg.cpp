@@ -64,7 +64,8 @@ MergeDialog::MergeDialog(CvsService_stub* service,
     connect( branch_button, SIGNAL(clicked()),
              this, SLOT(branchButtonClicked()) );
 
-    QBoxLayout *branchedit_layout = new QHBoxLayout(layout);
+    QBoxLayout *branchedit_layout = new QHBoxLayout();
+    layout->addItem(branchedit_layout);
     branchedit_layout->addSpacing(iWidgetIndent);
     branchedit_layout->addWidget(branch_combo, 2);
     branchedit_layout->addWidget(branch_button, 0);
