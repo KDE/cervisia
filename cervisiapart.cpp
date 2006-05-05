@@ -265,8 +265,8 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Edit"), 0,
-                          this, SLOT( slotOpen() ), actionCollection(), "file_edit" );
+    action = new KAction( i18n("&Edit"), actionCollection(), "file_edit" );
+    connect(action, SIGNAL(triggered(bool) ), SLOT( slotOpen() ));
     hint = i18n("Opens the marked file for editing");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -403,8 +403,8 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("Update to &HEAD"), 0,
-                          this, SLOT(slotUpdateToHead()), actionCollection(), "update_to_head" );
+    action = new KAction( i18n("Update to &HEAD"), actionCollection(), "update_to_head" );
+    connect(action, SIGNAL(triggered(bool) ), SLOT(slotUpdateToHead()));
     hint = i18n("Updates the selected files to the HEAD revision");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -445,8 +445,8 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("Show &Editors"), 0,
-                          this, SLOT(slotShowEditors()), actionCollection(), "show_editors" );
+    action = new KAction( i18n("Show &Editors"), actionCollection(), "show_editors" );
+    connect(action, SIGNAL(triggered(bool) ), SLOT(slotShowEditors()));
     hint = i18n("Shows the editors of the selected files");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -487,8 +487,8 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Repositories..."), 0,
-                          this, SLOT(slotRepositories()), actionCollection(), "show_repositories" );
+    action = new KAction( i18n("&Repositories..."), actionCollection(), "show_repositories" );
+    connect(action, SIGNAL(triggered(bool) ), SLOT(slotRepositories()));
     hint = i18n("Configures a list of repositories you regularly use");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
