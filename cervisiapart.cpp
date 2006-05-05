@@ -234,9 +234,9 @@ void CervisiaPart::setupActions()
     //
     // File Menu
     //
-    action = new KAction( i18n("O&pen Sandbox..."), "fileopen", Qt::CTRL + Qt::Key_O,
-                          this, SLOT( slotOpenSandbox() ),
-                          actionCollection(), "file_open" );
+    action = new KAction(KIcon("fileopen"),  i18n("O&pen Sandbox..."), actionCollection(), "file_open" );
+    connect(action, SIGNAL(triggered(bool) ), SLOT( slotOpenSandbox() ));
+    action->setShortcut(Qt::CTRL + Qt::Key_O);
     hint = i18n("Opens a CVS working folder in the main window");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -251,16 +251,16 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Update"), "vcs_update", Qt::CTRL + Qt::Key_U,
-                          this, SLOT( slotUpdate() ),
-                          actionCollection(), "file_update" );
+    action = new KAction(KIcon("vcs_update"),  i18n("&Update"), actionCollection(), "file_update" );
+    connect(action, SIGNAL(triggered(bool) ), SLOT( slotUpdate() ));
+    action->setShortcut(Qt::CTRL + Qt::Key_U);
     hint = i18n("Updates (cvs update) the selected files and folders");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Status"), "vcs_status", Qt::Key_F5,
-                          this, SLOT( slotStatus() ),
-                          actionCollection(), "file_status" );
+    action = new KAction(KIcon("vcs_status"),  i18n("&Status"), actionCollection(), "file_status" );
+    connect(action, SIGNAL(triggered(bool) ), SLOT( slotStatus() ));
+    action->setShortcut(Qt::Key_F5);
     hint = i18n("Updates the status (cvs -n update) of the selected files and folders");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -277,16 +277,16 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Commit..."), "vcs_commit", Qt::Key_NumberSign,
-                          this, SLOT( slotCommit() ),
-                          actionCollection(), "file_commit" );
+    action = new KAction(KIcon("vcs_commit"),  i18n("&Commit..."), actionCollection(), "file_commit" );
+    connect(action, SIGNAL(triggered(bool) ), SLOT( slotCommit() ));
+    action->setShortcut(Qt::Key_NumberSign);
     hint = i18n("Commits the selected files");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Add to Repository..."), "vcs_add", Qt::Key_Insert,
-                          this, SLOT( slotAdd() ),
-                          actionCollection(), "file_add" );
+    action = new KAction(KIcon("vcs_add"),  i18n("&Add to Repository..."), actionCollection(), "file_add" );
+    connect(action, SIGNAL(triggered(bool) ), SLOT( slotAdd() ));
+    action->setShortcut(Qt::Key_Insert);
     hint = i18n("Adds (cvs add) the selected files to the repository");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -297,9 +297,9 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Remove From Repository..."), "vcs_remove", Qt::Key_Delete,
-                          this, SLOT( slotRemove() ),
-                          actionCollection(), "file_remove" );
+    action = new KAction(KIcon("vcs_remove"),  i18n("&Remove From Repository..."), actionCollection(), "file_remove" );
+    connect(action, SIGNAL(triggered(bool) ), SLOT( slotRemove() ));
+    action->setShortcut(Qt::Key_Delete);
     hint = i18n("Removes (cvs remove) the selected files from the repository");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -317,9 +317,9 @@ void CervisiaPart::setupActions()
     //
     // View Menu
     //
-    action = new KAction( i18n("Stop"), "stop", Qt::Key_Escape,
-                          protocol, SLOT(cancelJob()),
-                          actionCollection(), "stop_job" );
+    action = new KAction(KIcon("stop"),  i18n("Stop"), actionCollection(), "stop_job" );
+    connect(action, SIGNAL(triggered(bool) ), protocol, SLOT(cancelJob()));
+    action->setShortcut(Qt::Key_Escape);
     action->setEnabled( false );
     hint = i18n("Stops any running sub-processes");
     action->setToolTip( hint );
@@ -343,16 +343,16 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("&Difference to Repository (BASE)..."), "vcs_diff", Qt::CTRL + Qt::Key_D,
-                          this, SLOT(slotDiffBase()),
-                          actionCollection(), "view_diff_base" );
+    action = new KAction(KIcon("vcs_diff"),  i18n("&Difference to Repository (BASE)..."), actionCollection(), "view_diff_base" );
+    connect(action, SIGNAL(triggered(bool) ), SLOT(slotDiffBase()));
+    action->setShortcut(Qt::CTRL + Qt::Key_D);
     hint = i18n("Shows the differences of the selected file to the checked out version (tag BASE)");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("Difference to Repository (HEAD)..."), "vcs_diff", Qt::CTRL + Qt::Key_H,
-                          this, SLOT(slotDiffHead()),
-                          actionCollection(), "view_diff_head" );
+    action = new KAction(KIcon("vcs_diff"),  i18n("Difference to Repository (HEAD)..."), actionCollection(), "view_diff_head" );
+    connect(action, SIGNAL(triggered(bool) ), SLOT(slotDiffHead()));
+    action->setShortcut(Qt::CTRL + Qt::Key_H);
     hint = i18n("Shows the differences of the selected file to the newest version in the repository (tag HEAD)");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -572,9 +572,8 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KAction( i18n("Configure Cervisia..."), "configure", 0,
-                          this, SLOT(slotConfigure()),
-                          actionCollection(), "configure_cervisia" );
+    action = new KAction(KIcon("configure"),  i18n("Configure Cervisia..."), actionCollection(), "configure_cervisia" );
+    connect(action, SIGNAL(triggered(bool) ), SLOT(slotConfigure()));
     hint = i18n("Allows you to configure the Cervisia KPart");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
