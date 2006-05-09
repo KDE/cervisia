@@ -46,6 +46,9 @@
 #include <kmessagebox.h>
 #include <kglobal.h>
 #include <ktoolinvocation.h>
+#include <kactioncollection.h>
+#include <ktoggleaction.h>
+#include <krecentfilesaction.h>
 
 #include "progressdlg.h"
 #include "logdlg.h"
@@ -84,8 +87,8 @@ using Cervisia::TagDialog;
 
 K_EXPORT_COMPONENT_FACTORY( libcervisiapart, CervisiaFactory )
 
-CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
-                            QObject *parent, const char *name, const QStringList& /*args*/ )
+CervisiaPart::CervisiaPart( QWidget *parentWidget,
+                            QObject *parent, const QStringList& /*args*/ )
     : KParts::ReadOnlyPart( parent )
     , hasRunningJob( false )
     , opt_hideFiles( false )
@@ -107,7 +110,6 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     , m_currentEditMenu(0)
     , m_jobType(Unknown)
 {
-	setObjectName(name);
     KGlobal::locale()->insertCatalog("cervisia");
 
     setInstance( CervisiaFactory::instance() );
@@ -136,7 +138,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget, const char *widgetName,
     {
         Qt::Orientation o = splitHorz ? Qt::Vertical
                                   : Qt::Horizontal;
-        splitter = new QSplitter(o, parentWidget, widgetName);
+        splitter = new QSplitter(o, parentWidget);
         // avoid PartManager's warning that Part's window can't handle focus
         splitter->setFocusPolicy( Qt::StrongFocus );
 

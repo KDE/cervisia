@@ -57,8 +57,7 @@ class CervisiaPart : public KParts::ReadOnlyPart
     Q_OBJECT
 
 public:
-    CervisiaPart( QWidget *parentWidget, const char *widgetName,
-                  QObject *parent, const char *name=0, const QStringList& args = QStringList());
+    CervisiaPart( QWidget *parentWidget, QObject *parent, const QStringList& args = QStringList());
     virtual ~CervisiaPart();
 
     /**

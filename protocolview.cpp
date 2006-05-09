@@ -48,12 +48,9 @@ ProtocolView::ProtocolView(const DCOPCString& appId, QWidget *parent, const char
     setFont(config->readEntry("ProtocolFont",QFont()));
 
     config->setGroup("Colors");
-    QColor defaultColor = QColor(255, 130, 130);
-    conflictColor=config->readColorEntry("Conflict",&defaultColor);
-    defaultColor=QColor(130, 130, 255);
-    localChangeColor=config->readColorEntry("LocalChange",&defaultColor);
-    defaultColor=QColor(70, 210, 70);
-    remoteChangeColor=config->readColorEntry("RemoteChange",&defaultColor);
+    conflictColor=config->readEntry("Conflict", QColor(255, 130, 130));
+    localChangeColor=config->readEntry("LocalChange", QColor(130, 130, 255));
+    remoteChangeColor=config->readEntry("RemoteChange", QColor(70, 210, 70));
 
     // create a DCOP stub for the non-concurrent cvs job
     job = new CvsJob_stub(appId, "NonConcurrentJob");

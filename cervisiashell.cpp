@@ -32,6 +32,7 @@
 #include <kstatusbar.h>
 #include <kstdaction.h>
 #include <kurl.h>
+#include <kactioncollection.h>
 
 
 CervisiaShell::CervisiaShell( const char *name )
@@ -44,9 +45,11 @@ CervisiaShell::CervisiaShell( const char *name )
     if( factory )
     {
         m_part = static_cast<KParts::ReadOnlyPart*>(factory->create(this,
-                                      "cervisiaview", "KParts::ReadOnlyPart"));
-        if( m_part )
+                                      "KParts::ReadOnlyPart"));
+        if( m_part ) {
+	    m_part->setObjectName( "cervisiaview" );
             setCentralWidget(m_part->widget());
+	}
     }
     else
     {
