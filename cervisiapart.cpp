@@ -500,78 +500,68 @@ void CervisiaPart::setupActions()
     //
     // Settings menu
     //
-    KToggleAction* toggaction = new KToggleAction( i18n("Hide All &Files"), 0,
-                                this, SLOT(slotHideFiles()),
-                                actionCollection(), "settings_hide_files" );
+    KToggleAction *toggaction = new KToggleAction( i18n("Hide All &Files"), actionCollection(), "settings_hide_files" );
+    connect(toggaction, SIGNAL(triggered(bool) ), SLOT(slotHideFiles()));
     toggaction->setCheckedState(i18n("Show All &Files"));
     hint = i18n("Determines whether only folders are shown");
     toggaction->setToolTip( hint );
     toggaction->setWhatsThis( hint );
 
-    toggaction = new KToggleAction( i18n("Hide Unmodified Files"), 0,
-                                this, SLOT(slotHideUpToDate()),
-                                actionCollection(), "settings_hide_uptodate" );
+    toggaction = new KToggleAction( i18n("Hide Unmodified Files"), actionCollection(), "settings_hide_uptodate" );
+    connect(toggaction, SIGNAL(triggered(bool) ), SLOT(slotHideUpToDate()));
     toggaction->setCheckedState(i18n("Show Unmodified Files"));
     hint = i18n("Determines whether files with status up-to-date or "
                 "unknown are hidden");
     toggaction->setToolTip( hint );
     toggaction->setWhatsThis( hint );
 
-    toggaction = new KToggleAction( i18n("Hide Removed Files"), 0,
-                                this, SLOT(slotHideRemoved()),
-                                actionCollection(), "settings_hide_removed" );
+    toggaction = new KToggleAction( i18n("Hide Removed Files"), actionCollection(), "settings_hide_removed" );
+    connect(toggaction, SIGNAL(triggered(bool) ), SLOT(slotHideRemoved()));
     toggaction->setCheckedState(i18n("Show Removed Files"));
     hint = i18n("Determines whether removed files are hidden");
     toggaction->setToolTip( hint );
     toggaction->setWhatsThis( hint );
 
-    toggaction = new KToggleAction( i18n("Hide Non-CVS Files"), 0,
-                                this, SLOT(slotHideNotInCVS()),
-                                actionCollection(), "settings_hide_notincvs" );
+    toggaction = new KToggleAction( i18n("Hide Non-CVS Files"), actionCollection(), "settings_hide_notincvs" );
+    connect(toggaction, SIGNAL(triggered(bool) ), SLOT(slotHideNotInCVS()));
     toggaction->setCheckedState(i18n("Show Non-CVS Files"));
     hint = i18n("Determines whether files not in CVS are hidden");
     toggaction->setToolTip( hint );
     toggaction->setWhatsThis( hint );
 
-    toggaction = new KToggleAction( i18n("Hide Empty Folders"), 0,
-                                    this, SLOT(slotHideEmptyDirectories()),
-                                    actionCollection(), "settings_hide_empty_directories" );
+    toggaction = new KToggleAction( i18n("Hide Empty Folders"), actionCollection(), "settings_hide_empty_directories" );
+    connect(toggaction, SIGNAL(triggered(bool) ), SLOT(slotHideEmptyDirectories()));
     toggaction->setCheckedState(i18n("Show Empty Folders"));
     hint = i18n("Determines whether folders without visible entries are hidden");
     toggaction->setToolTip( hint );
     toggaction->setWhatsThis( hint );
 
-    action = new KToggleAction( i18n("Create &Folders on Update"), 0,
-                                this, SLOT(slotCreateDirs()),
-                                actionCollection(), "settings_create_dirs" );
+    action = new KToggleAction( i18n("Create &Folders on Update"), actionCollection(), "settings_create_dirs" );
+    connect(action, SIGNAL(triggered(bool) ), SLOT(slotCreateDirs()));
     hint = i18n("Determines whether updates create folders");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KToggleAction( i18n("&Prune Empty Folders on Update"), 0,
-                                this, SLOT(slotPruneDirs()),
-                                actionCollection(), "settings_prune_dirs" );
+    action = new KToggleAction( i18n("&Prune Empty Folders on Update"), actionCollection(), "settings_prune_dirs" );
+    connect(action, SIGNAL(triggered(bool) ), SLOT(slotPruneDirs()));
     hint = i18n("Determines whether updates remove empty folders");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KToggleAction( i18n("&Update Recursively"), 0,
-                                this, SLOT(slotUpdateRecursive()),
-                                actionCollection(), "settings_update_recursively" );
+    action = new KToggleAction( i18n("&Update Recursively"), actionCollection(), "settings_update_recursively" );
+    connect(action, SIGNAL(triggered(bool) ), SLOT(slotUpdateRecursive()));
     hint = i18n("Determines whether updates are recursive");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KToggleAction( i18n("C&ommit && Remove Recursively"), 0,
-                                this, SLOT(slotCommitRecursive()),
-                                actionCollection(), "settings_commit_recursively" );
+    action = new KToggleAction( i18n("C&ommit && Remove Recursively"), actionCollection(), "settings_commit_recursively" );
+    connect(action, SIGNAL(triggered(bool) ), SLOT(slotCommitRecursive()));
     hint = i18n("Determines whether commits and removes are recursive");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = new KToggleAction( i18n("Do cvs &edit Automatically When Necessary"), 0,
-                                this, SLOT(slotDoCVSEdit()),
-                                actionCollection(), "settings_do_cvs_edit" );
+    action = new KToggleAction( i18n("Do cvs &edit Automatically When Necessary"), actionCollection(), "settings_do_cvs_edit" );
+    connect(action, SIGNAL(triggered(bool) ), SLOT(slotDoCVSEdit()));
     hint = i18n("Determines whether automatic cvs editing is active");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -597,9 +587,8 @@ void CervisiaPart::setupActions()
     //
     // Folder context menu
     //
-    toggaction = new KToggleAction( i18n("Unfold Folder"), 0,
-                                    this, SLOT( slotUnfoldFolder() ),
-                                    actionCollection(), "unfold_folder" );
+    toggaction = new KToggleAction( i18n("Unfold Folder"), actionCollection(), "unfold_folder" );
+    connect(toggaction, SIGNAL(triggered(bool) ), SLOT( slotUnfoldFolder() ));
     toggaction->setCheckedState(i18n("Fold Folder"));
 
     //action = KStdAction::aboutApp( this, SLOT(aboutCervisia()),
