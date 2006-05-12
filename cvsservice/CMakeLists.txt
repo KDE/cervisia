@@ -1,4 +1,3 @@
-kde4_header()
 
 
 
@@ -78,7 +77,6 @@ install_targets(${LIB_INSTALL_DIR} cvsservice )
 install_files( ${SERVICES_INSTALL_DIR} FILES  cvsservice.desktop )
 install_files( /include FILES  cvsservice_stub.h cvsjob_stub.h repository_stub.h )
 
-kde4_footer()
 
 
 

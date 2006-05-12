@@ -1,4 +1,3 @@
-kde4_header()
 
 add_subdirectory( cvsservice ) 
 add_subdirectory( pics ) 
@@ -114,7 +113,6 @@ install_files( ${KCONF_UPDATE_INSTALL_DIR} FILES change_colors.pl cervisia-norma
 
 kde4_install_icons( ${ICON_INSTALL_DIR}  hicolor )
 
-kde4_footer()
 
 
 
