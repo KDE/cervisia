@@ -109,7 +109,7 @@ install_files( ${KCFG_INSTALL_DIR} FILES cervisiapart.kcfg )
 install_files( ${DATA_INSTALL_DIR}/cervisiapart FILES cervisiaui.rc )
 install_files( ${DATA_INSTALL_DIR}/cervisia FILES cervisiashellui.rc eventsrc )
 install_files( ${KCONF_UPDATE_INSTALL_DIR} FILES cervisia.upd )
-install_files( ${KCONF_UPDATE_INSTALL_DIR} FILES change_colors.pl cervisia-normalize_cvsroot.pl cervisia-change_repos_list.pl)
+install_programs( ${KCONF_UPDATE_INSTALL_DIR} FILES change_colors.pl cervisia-normalize_cvsroot.pl cervisia-change_repos_list.pl)
 
 kde4_install_icons( ${ICON_INSTALL_DIR}  hicolor )
 
