@@ -39,13 +39,13 @@ EditWithMenu::EditWithMenu(const KUrl& url, QWidget* parent)
         return;
     }
 
-    m_offers = KTrader::self()->query(type->name(), "Type == 'Application'");
+    m_offers = KServiceTypeTrader::self()->query(type->name(), "Type == 'Application'");
 
     if( !m_offers.isEmpty() )
     {
         m_menu = new Q3PopupMenu();
 
-        KTrader::OfferList::ConstIterator it = m_offers.begin();
+		KService::List::ConstIterator it = m_offers.begin();
         for( int i = 0 ; it != m_offers.end(); ++it, ++i )
         {
             int id = m_menu->insertItem(SmallIcon((*it)->icon()),
@@ -65,12 +65,12 @@ Q3PopupMenu* EditWithMenu::menu()
 
 void EditWithMenu::itemActivated(int item)
 {
-    KService::Ptr service = m_offers[item];
+    const KService::Ptr service = m_offers[item];
 
     KUrl::List list;
     list.append(m_url);
 
-    KRun::run(*service, list);
+    KRun::run(*service, list,0L);
 }
 
 

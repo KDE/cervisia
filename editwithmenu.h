@@ -22,9 +22,8 @@
 #include <qobject.h>
 //Added by qt3to4:
 #include <Q3PopupMenu>
-#include <ktrader.h>
 #include <kurl.h>
-
+#include <kservicetypetrader.h>
 class Q3PopupMenu;
 
 
@@ -44,7 +43,7 @@ private slots:
     void itemActivated(int);
 
 private:
-    KTrader::OfferList m_offers;
+	KService::List m_offers;
     Q3PopupMenu*        m_menu;
     KUrl               m_url;
 };

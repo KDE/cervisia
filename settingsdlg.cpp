@@ -130,7 +130,7 @@ void SettingsDialog::readSettings()
 {
     // read entries from cvs DCOP service configuration
     serviceConfig->setGroup("General");
-    cvspathedit->setURL(serviceConfig->readPathEntry("CVSPath", "cvs"));
+    cvspathedit->setUrl(serviceConfig->readPathEntry("CVSPath", "cvs"));
     m_advancedPage->kcfg_Compression->setValue(serviceConfig->readEntry(
                                                    "Compression", 0));
     m_advancedPage->kcfg_UseSshAgent->setChecked(serviceConfig->readEntry(
@@ -143,7 +143,7 @@ void SettingsDialog::readSettings()
     contextedit->setValue(config->readEntry("ContextLines", 65535));
     tabwidthedit->setValue(config->readEntry("TabWidth", 8));
     diffoptedit->setText(config->readEntry("DiffOptions"));
-    extdiffedit->setURL(config->readPathEntry("ExternalDiff"));
+    extdiffedit->setUrl(config->readPathEntry("ExternalDiff"));
     remotestatusbox->setChecked(config->readEntry("StatusForRemoteRepos", false));
     localstatusbox->setChecked(config->readEntry("StatusForLocalRepos", false));
 
