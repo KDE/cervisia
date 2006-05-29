@@ -408,6 +408,7 @@ void CheckoutDialog::branchButtonClicked()
 
     branchTagList.sort();
 
+    branchCombo->clear();
     branchCombo->insertStringList(branchTagList);
 }
 
