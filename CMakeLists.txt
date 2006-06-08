@@ -1,3 +1,4 @@
+project(cervisia)
 
 add_subdirectory( cvsservice ) 
 add_subdirectory( pics ) 
