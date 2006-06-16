@@ -46,7 +46,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char** argv)
     KCmdLineArgs::addCmdLineOptions(options);
 
     // no need to register with the dcop server
-    KApplication::disableAutoDcopRegistration();
+    //KApplication::disableAutoDcopRegistration();
     KApplication app;
 
     // no need for session management

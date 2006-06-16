@@ -30,8 +30,6 @@ set(libcervisia_SRCS
 
 kde4_add_ui3_files(libcervisia_SRCS settingsdlg_advanced.ui )
 
-kde4_add_dcop_skels(libcervisia_SRCS progressdlg.h )
-
 kde4_add_kcfg_files(libcervisia_SRCS cervisiasettings.kcfgc )
 
 

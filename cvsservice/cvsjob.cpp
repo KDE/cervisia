@@ -26,6 +26,7 @@
 #include <Q3CString>
 #include <kdebug.h>
 #include <kprocess.h>
+#include <dbus/qdbus.h>
 
 #include "sshagent.h"
 
@@ -50,20 +51,20 @@ struct CvsJob::Private
 
 CvsJob::CvsJob(unsigned jobNum)
     : QObject()
-    , DCOPObject()
     , d(new Private)
 {
-    QString objId("CvsJob" + QString::number(jobNum));
-    setObjId(objId.toLocal8Bit());
+	QDBus::sessionBus().registerObject("/CvsJob"+QString::number(jobNum), this, QDBusConnection::ExportSlots);
+	//QString objId("CvsJob" + QString::number(jobNum));
+    //setObjId(objId.toLocal8Bit());
 }
 
 
 CvsJob::CvsJob(const QString& objId)
     : QObject()
-    , DCOPObject()
     , d(new Private)
 {
-    setObjId(objId.toLocal8Bit());
+	QDBus::sessionBus().registerObject("/"+objId, this, QDBusConnection::ExportSlots);
+    //setObjId(objId.toLocal8Bit());
 }
 
 

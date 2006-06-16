@@ -14,16 +14,6 @@ set(cvsservice_bin_KDEINIT_SRCS
 
 kde4_automoc(${cvsservice_bin_KDEINIT_SRCS})
 
-kde4_add_dcop_skels(cvsservice_bin_KDEINIT_SRCS 
-   cvsservice.h 
-   cvsjob.h 
-   repository.h 
-   cvsloginjob.h )
-
-kde4_add_dcop_stubs(cvsservice_bin_KDEINIT_SRCS 
-   cvsservice.h 
-   cvsjob.h 
-   repository.h )
 
 kde4_add_kdeinit_executable( cvsservice_bin ${cvsservice_bin_KDEINIT_SRCS})
 set_target_properties(cvsservice_bin PROPERTIES OUTPUT_NAME cvsservice)

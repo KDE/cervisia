@@ -31,10 +31,10 @@
 class KProcess;
 
 
-class KDE_EXPORT CvsJob : public QObject, public DCOPObject
+class KDE_EXPORT CvsJob : public QObject
 {
     Q_OBJECT
-    K_DCOP
+    Q_CLASSINFO("D-Bus Interface", "org.kde.cervisia.cvsservice.cvsjob")
 
 public:
     explicit CvsJob(unsigned jobNum);
@@ -51,22 +51,22 @@ public:
     CvsJob& operator<<(const Q3CString& arg);
     CvsJob& operator<<(const QStringList& args);
 
-k_dcop:
-    bool execute();
-    void cancel();
+public Q_SLOTS: //dbus function
+    Q_SCRIPTABLE bool execute();
+    Q_SCRIPTABLE void cancel();
 
-    bool isRunning() const;
+    Q_SCRIPTABLE bool isRunning() const;
 
     /**
      * Current cvs command.
      *
      * @return The current cvs command. Can be null if not set.
      */
-    QString cvsCommand() const;
+    Q_SCRIPTABLE QString cvsCommand() const;
 
-    QStringList output() const;
+    Q_SCRIPTABLE QStringList output() const;
 
-k_dcop_signals:
+signals: //dbus signal
     void jobExited(bool normalExit, int status);
     void receivedStdout(const QString& buffer);
     void receivedStderr(const QString& buffer);
