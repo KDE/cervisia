@@ -573,7 +573,7 @@ void LogDialog::updateButtons()
     {
         enableButton(User1, true);  // annotate
         enableButton(User2, false); // diff
-        enableButtonOK(false);      // view
+        enableButtonOk(false);      // view
         enableButtonApply(false);   // create patch
     }
     // both versions selected?
@@ -581,7 +581,7 @@ void LogDialog::updateButtons()
     {
         enableButton(User1, false); // annotate
         enableButton(User2, true);  // diff
-        enableButtonOK(false);      // view
+        enableButtonOk(false);      // view
         enableButtonApply(true);    // create patch
     }
     // only single version selected?
@@ -589,7 +589,7 @@ void LogDialog::updateButtons()
     {
         enableButton(User1, true);  // annotate
         enableButton(User2, true);  // diff
-        enableButtonOK(true);       // view
+        enableButtonOk(true);       // view
         enableButtonApply(true);    // create patch
     }
 }
