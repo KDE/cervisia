@@ -33,10 +33,14 @@ using Cervisia::PatchOptionDialog;
 
 
 PatchOptionDialog::PatchOptionDialog(QWidget* parent, const char* name)
-    : KDialogBase(parent, name, true/*modal*/, QString::null,
-                  Ok | Cancel | Help, Ok, true/*separator*/)
+    : KDialog(parent)
 {
-    QFrame* mainWidget = makeMainWidget();
+	setButtons(Ok | Cancel | Help);
+	setDefaultButton(Ok);
+	setModal(false);
+	enableButtonSeparator(true);
+    QFrame* mainWidget = new QFrame(this);
+	setMainWidget(mainWidget);
     QBoxLayout* topLayout = new QVBoxLayout(mainWidget);
     topLayout->setSpacing(spacingHint());
     topLayout->setMargin(0);

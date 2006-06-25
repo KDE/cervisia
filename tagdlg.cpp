@@ -40,16 +40,20 @@ using Cervisia::TagDialog;
 
 TagDialog::TagDialog(ActionType action, CvsService_stub* service,
                      QWidget *parent, const char *name)
-    : KDialogBase(parent, name, true, QString::null,
-                  Ok | Cancel | Help, Ok, true),
+    : KDialog(parent), 
       act(action),
       cvsService(service),
       branchtag_button(0),
       forcetag_button(0)
 {
+	setButtons(Ok | Cancel | Help);
+	setDefaultButton(Ok);
+	setModal(true);
+	enableButtonSeparator(true);
     setCaption( (action==Delete)? i18n("CVS Delete Tag") : i18n("CVS Tag") );
 
-    QFrame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = new QFrame(this);
+	setMainWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
     layout->setSpacing(spacingHint());

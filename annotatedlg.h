@@ -22,7 +22,7 @@
 #define ANNOTATEDLG_H
 
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 
 class AnnotateView;
@@ -35,7 +35,7 @@ struct LogInfo;
 }
 
 
-class AnnotateDialog : public KDialogBase
+class AnnotateDialog : public KDialog
 {
 public:
 

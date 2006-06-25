@@ -22,7 +22,7 @@
 #define TAGDLG_H
 
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 
 class QCheckBox;
@@ -33,7 +33,7 @@ class CvsService_stub;
 namespace Cervisia
 {
 
-class TagDialog : public KDialogBase
+class TagDialog : public KDialog
 {
     Q_OBJECT
 

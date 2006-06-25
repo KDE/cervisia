@@ -24,10 +24,13 @@
 
 
 AnnotateDialog::AnnotateDialog(KConfig& cfg, QWidget *parent, const char *name)
-    : KDialogBase(parent, name, false, QString::null,
-                  Close | Help, Close, true)
+    : KDialog(parent)
     , partConfig(cfg)
 {
+	setButtons(Close | Help);
+	setDefaultButton(Close);
+	setModal(false);
+	enableButtonSeparator(true);
     annotate = new AnnotateView(partConfig, this);
     setMainWidget(annotate);
 

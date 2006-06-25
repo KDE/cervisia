@@ -20,7 +20,7 @@
 #ifndef PATCHOPTIONDLG_H
 #define PATCHOPTIONDLG_H
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 class QCheckBox;
 class Q3VButtonGroup;
@@ -31,7 +31,7 @@ namespace Cervisia
 {
 
 
-class PatchOptionDialog : public KDialogBase
+class PatchOptionDialog : public KDialog
 {
     Q_OBJECT
     
