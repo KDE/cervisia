@@ -38,7 +38,7 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent, const char* name)
 	setButtons(Ok | Cancel | Help);
 	setDefaultButton(Ok);
 	setModal(false);
-	enableButtonSeparator(true);
+	showButtonSeparator(true);
     QFrame* mainWidget = new QFrame(this);
 	setMainWidget(mainWidget);
     QBoxLayout* topLayout = new QVBoxLayout(mainWidget);

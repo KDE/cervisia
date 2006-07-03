@@ -49,7 +49,7 @@ TagDialog::TagDialog(ActionType action, CvsService_stub* service,
 	setButtons(Ok | Cancel | Help);
 	setDefaultButton(Ok);
 	setModal(true);
-	enableButtonSeparator(true);
+	showButtonSeparator(true);
     setCaption( (action==Delete)? i18n("CVS Delete Tag") : i18n("CVS Tag") );
 
     QFrame* mainWidget = new QFrame(this);
