@@ -22,21 +22,22 @@
 #define CVSSERVICE_H
 
 #include <qstringlist.h>
-#include <dcopref.h>
-#include <dcopobject.h>
+#include <qobject.h>
+
+#include <kdemacros.h>
 
 class QString;
 
 
-class KDE_EXPORT CvsService : public DCOPObject
+class KDE_EXPORT CvsService : public QObject
 {
-    K_DCOP
+    Q_OBJECT
 
 public:
     CvsService();
     ~CvsService();
 
-k_dcop:
+public Q_SLOTS:
     /**
      * Adds new files to an existing project. The files don't actually
      * appear in the repository until a subsequent commit is performed.
@@ -47,11 +48,11 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef add(const QStringList& files, bool isBinary);
+    void add(const QStringList& files, bool isBinary);
 
     /**
      */
-    DCOPRef addWatch(const QStringList& files, int events);
+    void addWatch(const QStringList& files, int events);
 
     /**
      * Shows information on who last modified each line of a file and when.
@@ -62,7 +63,7 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef annotate(const QString& fileName, const QString& revision);
+    void annotate(const QString& fileName, const QString& revision);
 
     /**
      * Checks out a module from the repository into a working copy.
@@ -76,7 +77,7 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef checkout(const QString& workingDir, const QString& repository,
+    void checkout(const QString& workingDir, const QString& repository,
                      const QString& module, const QString& tag, bool pruneDirs);
     
     /**
@@ -94,7 +95,7 @@ k_dcop:
      *         null reference.
      */
     //### KDE4: merge with above checkout() method
-    DCOPRef checkout(const QString& workingDir, const QString& repository,
+    void checkout(const QString& workingDir, const QString& repository,
                      const QString& module, const QString& tag, bool pruneDirs, 
                      const QString& alias, bool exportOnly);
 
@@ -113,7 +114,7 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef checkout(const QString& workingDir, const QString& repository,
+    void checkout(const QString& workingDir, const QString& repository,
                      const QString& module, const QString& tag, bool pruneDirs, 
                      const QString& alias, bool exportOnly, bool recursive);
 
@@ -127,7 +128,7 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef commit(const QStringList& files, const QString& commitMessage,
+    void commit(const QStringList& files, const QString& commitMessage,
                    bool recursive);
 
     /**
@@ -135,31 +136,31 @@ k_dcop:
      *
      * @param repository
      */
-    DCOPRef createRepository(const QString& repository);
+    void createRepository(const QString& repository);
     
     /**
      */
-    DCOPRef createTag(const QStringList& files, const QString& tag,
+    void createTag(const QStringList& files, const QString& tag,
                       bool branch, bool force);
 
     /**
      */
-    DCOPRef deleteTag(const QStringList& files, const QString& tag,
+    void deleteTag(const QStringList& files, const QString& tag,
                       bool branch, bool force);
 
     /**
      */
-    DCOPRef downloadCvsIgnoreFile(const QString& repository,
+    void downloadCvsIgnoreFile(const QString& repository,
                                   const QString& outputFile);
     
     /**
      */
-    DCOPRef downloadRevision(const QString& fileName, const QString& revision,
+    void downloadRevision(const QString& fileName, const QString& revision,
                              const QString& outputFile);
 
     /**
      */
-    DCOPRef downloadRevision(const QString& fileName, const QString& revA,
+    void downloadRevision(const QString& fileName, const QString& revA,
                              const QString& outputFileA, const QString& revB,
                              const QString& outputFileB);
 
@@ -174,7 +175,7 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef diff(const QString& fileName, const QString& revA,
+    void diff(const QString& fileName, const QString& revA,
                  const QString& revB, const QString& diffOptions,
                  unsigned contextLines);
     
@@ -189,19 +190,19 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef diff(const QString& fileName, const QString& revA,
+    void diff(const QString& fileName, const QString& revA,
                  const QString& revB, const QString& diffOptions,
                  const QString& format);
 
     /**
      * @param files
      */
-    DCOPRef edit(const QStringList& files);
+    void edit(const QStringList& files);
 
     /**
      * @param files
      */
-    DCOPRef editors(const QStringList& files);
+    void editors(const QStringList& files);
 
     /**
      * Shows a history of activity (like checkouts, commits, etc) in the
@@ -210,13 +211,13 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef history();
+    void history();
 
     /**
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef import(const QString& workingDir, const QString& repository,
+    void import(const QString& workingDir, const QString& repository,
                    const QString& module, const QString& ignoreList,
                    const QString& comment, const QString& vendorTag,
                    const QString& releaseTag, bool importAsBinary);
@@ -226,7 +227,7 @@ k_dcop:
      *         null reference.
      */
     //### KDE4: merge with above import() method
-    DCOPRef import(const QString& workingDir, const QString& repository,
+    void import(const QString& workingDir, const QString& repository,
                    const QString& module, const QString& ignoreList,
                    const QString& comment, const QString& vendorTag,
                    const QString& releaseTag, bool importAsBinary,
@@ -235,7 +236,7 @@ k_dcop:
     /**
      * @param files
      */
-    DCOPRef lock(const QStringList& files);
+    void lock(const QStringList& files);
 
     /**
      * Shows log messages for a file.
@@ -245,7 +246,7 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef log(const QString& fileName);
+    void log(const QString& fileName);
 
     /**
      * @param repository
@@ -253,7 +254,7 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef login(const QString& repository);
+    void login(const QString& repository);
 
     /**
      * @param repository
@@ -261,16 +262,16 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef logout(const QString& repository);
+    void logout(const QString& repository);
 
     /**
      */
-    DCOPRef makePatch();
+    void makePatch();
     
     /**
      */
     //### KDE4: merge with above makePatch() method
-    DCOPRef makePatch(const QString& diffOptions, const QString& format);
+    void makePatch(const QString& diffOptions, const QString& format);
 
     /**
      * @param repository
@@ -278,7 +279,7 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef moduleList(const QString& repository);
+    void moduleList(const QString& repository);
 
     /**
      * Deletes files from the local working copy and schedules them to be
@@ -291,15 +292,15 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef remove(const QStringList& files, bool recursive);
+    void remove(const QStringList& files, bool recursive);
 
     /**
      */
-    DCOPRef removeWatch(const QStringList& files, int events);
+    void removeWatch(const QStringList& files, int events);
 
     /**
      */
-    DCOPRef rlog(const QString& repository, const QString& module, 
+    void rlog(const QString& repository, const QString& module, 
                  bool recursive);
 
     /**
@@ -314,7 +315,7 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef simulateUpdate(const QStringList& files, bool recursive,
+    void simulateUpdate(const QStringList& files, bool recursive,
                            bool createDirs, bool pruneDirs);
 
     /**
@@ -327,17 +328,17 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef status(const QStringList& files, bool recursive, bool tagInfo);
+    void status(const QStringList& files, bool recursive, bool tagInfo);
 
     /**
      * @param files
      */
-    DCOPRef unedit(const QStringList& files);
+    void unedit(const QStringList& files);
 
     /**
      * @param files
      */
-    DCOPRef unlock(const QStringList& files);
+    void unlock(const QStringList& files);
 
     /**
      * Merges changes from the repository into the files of the
@@ -353,13 +354,13 @@ k_dcop:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    DCOPRef update(const QStringList& files, bool recursive, bool createDirs,
+    void update(const QStringList& files, bool recursive, bool createDirs,
                    bool pruneDirs, const QString& extraOpt);
 
     /**
      * @param files
      */
-    DCOPRef watchers(const QStringList& files);
+    void watchers(const QStringList& files);
 
     /**
      * Quits the DCOP service.

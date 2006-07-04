@@ -26,7 +26,8 @@
 #include <qstringlist.h>
 //Added by qt3to4:
 #include <Q3CString>
-#include <dcopobject.h>
+
+#include <kdemacros.h>
 
 class KProcess;
 

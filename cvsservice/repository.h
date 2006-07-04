@@ -22,7 +22,8 @@
 #define REPOSITORY_H
 
 #include <qobject.h>
-#include <dcopobject.h>
+
+#include <kdemacros.h>
 
 class QString;
 
@@ -31,27 +32,28 @@ class QString;
  * Represents a local or remote cvs repository with
  * its repository-specific configuration data.
  */
-class KDE_EXPORT Repository : public QObject, public DCOPObject
+class KDE_EXPORT Repository : public QObject
 {
-    K_DCOP
     Q_OBJECT
+    Q_CLASSINFO("D-Bus Interface", "org.kde.cervisia.repository")
 
 public:
     Repository();
     explicit Repository(const QString& repository);
     ~Repository();
 
+public Q_SLOTS:
     /**
      * cvs command (including the user-specified path) with the options
      * for this repository.
      *
      * @return A cvs command (including path).
      */
-    QString cvsClient() const;
+    Q_SCRIPTABLE QString cvsClient() const;
 
     /**
      */
-    QString clientOnly() const;
+    Q_SCRIPTABLE QString clientOnly() const;
     
     /**
      * Remote shell command line client which should be used to
@@ -60,7 +62,7 @@ public:
      *
      * @return The remote shell client. Can be null if not set.
      */
-    QString rsh() const;
+    Q_SCRIPTABLE QString rsh() const;
 
     /**
      * Program to start on the server side when accessing a remote
@@ -68,22 +70,21 @@ public:
      *
      * @return The server program. Can be null if not set.
      */
-    QString server() const;
+    Q_SCRIPTABLE QString server() const;
 
-k_dcop:
     /**
      * Changes the working copy and the corresponding cvs repository.
      *
      * @param dirName path to the local working copy directory.
      */
-    bool setWorkingCopy(const QString& dirName);
+    Q_SCRIPTABLE bool setWorkingCopy(const QString& dirName);
 
     /**
      * Path to the current working copy.
      *
      * @return The working copy directory. Can be null if not set.
      */
-    QString workingCopy() const;
+    Q_SCRIPTABLE QString workingCopy() const;
 
     /**
      * Path and method to access the current cvs repository.
@@ -91,11 +92,11 @@ k_dcop:
      *
      * @return The path and method to access the cvs repository.
      */
-    QString location() const;
+    Q_SCRIPTABLE QString location() const;
     
     /**
      */
-    bool retrieveCvsignoreFile() const;
+    Q_SCRIPTABLE bool retrieveCvsignoreFile() const;
 
 private slots:
     void slotConfigDirty(const QString& fileName);

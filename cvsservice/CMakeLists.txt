@@ -46,9 +46,9 @@ install_targets(/bin cvsaskpass )
 
 set(cvsservice_LIB_SRCS  )
 
-qt4_add_dbus_adaptor(cvsservice_LIB_SRCS org.kde.cervisia.cvsservice.xml cvsservice.h CvsService)
-qt4_add_dbus_adaptor(cvsservice_LIB_SRCS org.kde.cervisia.cvsjob.xml cvsjob.h CvsJob)
-qt4_add_dbus_adaptor(cvsservice_LIB_SRCS org.kde.cervisia.repository.xml repository.h Repository)
+qt4_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.cvsservice.xml cvsservice.h CvsService)
+qt4_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.cvsjob.xml cvsjob.h CvsJob)
+qt4_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.repository.xml repository.h Repository)
 
 kde4_automoc(${cvsservice_LIB_SRCS})
 
