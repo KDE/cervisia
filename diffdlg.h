@@ -25,7 +25,7 @@
 //Added by qt3to4:
 #include <QLabel>
 #include <QKeyEvent>
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 
 class QLabel;
@@ -37,7 +37,7 @@ class DiffView;
 class CvsService_stub;
 
 
-class DiffDialog : public KDialogBase
+class DiffDialog : public KDialog
 {
     Q_OBJECT
 

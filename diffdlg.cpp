@@ -41,22 +41,26 @@
 #include <ktempfile.h>
 #include <kprocess.h>
 
-#include "cvsservice_stub.h"
-#include "repository_stub.h"
+//#include "cvsservice_stub.h"
+//#include "repository_stub.h"
 #include "misc.h"
 #include "progressdlg.h"
 #include "diffview.h"
 
 
 DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool modal)
-    : KDialogBase(parent, name, modal, QString::null,
-                  Close | Help | User1, Close, true, KStdGuiItem::saveAs())
+    : KDialog(parent)
     , partConfig(cfg)
 {
     items.setAutoDelete(true);
     markeditem = -1;
-
-    QFrame* mainWidget = makeMainWidget();
+    setModal(modal);
+	setButtons(Close | Help | User1);
+	setDefaultButton(Close);
+	showButtonSeparator(true);
+	setButtonGuiItem(Close,KStdGuiItem::saveAs());
+    QFrame* mainWidget = new QFrame(this);
+	setMainWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
     layout->setSpacing(spacingHint());

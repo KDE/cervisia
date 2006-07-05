@@ -20,15 +20,14 @@
 #ifndef PROGRESSDLG_H
 #define PROGRESSDLG_H
 
-#include <dcopobject.h>
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 class QString;
 class QWidget;
 class DCOPRef;
 
 
-class ProgressDialog : public KDialogBase, public DCOPObject
+class ProgressDialog : public KDialog, public DCOPObject
 {
     K_DCOP
     Q_OBJECT

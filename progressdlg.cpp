@@ -57,11 +57,16 @@ struct ProgressDialog::Private
 ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,
                                const DCOPRef& job, const QString& errorIndicator,
                                const QString& caption)
-    : KDialogBase(parent, 0, true, caption, Cancel, Cancel, true)
+    : KDialog(parent)
     , DCOPObject()
     , d(new Private)
 {
     // initialize private data
+	setCaption(caption);
+	setButtons(Cancel);
+	setDefaultButton(Cancel);
+	setModal(true);
+	showButtonSeparator(true);
     d->isCancelled = false;
     d->isShown     = false;
     d->hasError    = false;
