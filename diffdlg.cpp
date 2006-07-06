@@ -130,8 +130,7 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool mod
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 
-    QSize size = configDialogSize(partConfig, "DiffDialog");
-    resize(size);
+    restoreDialogSize(&partConfig);
 
     KConfigGroup cs(&partConfig, "DiffDialog");
     syncbox->setChecked(cs.readEntry("Sync",false));
@@ -140,7 +139,7 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool mod
 
 DiffDialog::~DiffDialog()
 {
-    saveDialogSize(partConfig, "DiffDialog");
+    saveDialogSize(&partConfig);
 
     KConfigGroup cs(&partConfig, "DiffDialog");
     cs.writeEntry("Sync", syncbox->isChecked());
@@ -168,7 +167,7 @@ void DiffDialog::keyPressEvent(QKeyEvent *e)
             diff2->prior();
             break;
         default:
-            KDialogBase::keyPressEvent(e);
+            KDialog::keyPressEvent(e);
 	}
 }
 
@@ -492,7 +491,7 @@ void DiffDialog::forwClicked()
 
 void DiffDialog::saveAsClicked()
 {
-    QString fileName = KFileDialog::getSaveFileName(QString::null, QString::null, this);
+    QString fileName = KFileDialog::getSaveFileName(KUrl(), QString::null, this);
     if( fileName.isEmpty() )
         return;
 

@@ -27,9 +27,8 @@ class QWidget;
 class DCOPRef;
 
 
-class ProgressDialog : public KDialog, public DCOPObject
+class ProgressDialog : public KDialog
 {
-    K_DCOP
     Q_OBJECT
 
 public:
@@ -41,10 +40,10 @@ public:
     bool getLine(QString& line);
     QStringList getOutput() const;
 
-k_dcop:
-    void slotReceivedOutputNonGui(QString buffer);
-    void slotReceivedOutput(QString buffer);
-    void slotJobExited(bool normalExit, int status);
+public Q_SLOTS:
+    Q_SCRIPTABLE void slotReceivedOutputNonGui(QString buffer);
+    Q_SCRIPTABLE void slotReceivedOutput(QString buffer);
+    Q_SCRIPTABLE void slotJobExited(bool normalExit, int status);
 
 protected slots:
     virtual void slotCancel();
