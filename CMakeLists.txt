@@ -47,10 +47,10 @@ kde4_add_kdeinit_executable( cervisia ${cervisia_KDEINIT_SRCS})
 
 target_link_libraries(kdeinit_cervisia  ${KDE4_KPARTS_LIBS} kutils cvsservice )
 
-install_targets(${LIB_INSTALL_DIR} kdeinit_cervisia )
+install(TARGETS kdeinit_cervisia  DESTINATION ${LIB_INSTALL_DIR} )
 
 target_link_libraries( cervisia kdeinit_cervisia )
-install_targets(/bin cervisia )
+install(TARGETS cervisia  DESTINATION ${BIN_INSTALL_DIR} )
 
 ########### next target ###############
 
@@ -94,7 +94,7 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} cervisiapart )
 
 target_link_libraries(cervisiapart  ${KDE4_KPARTS_LIBS}  kutils cvsservice  )
 
-install_targets(${PLUGIN_INSTALL_DIR} cervisiapart )
+install(TARGETS cervisiapart  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 
 ########### next target ###############
@@ -102,12 +102,12 @@ install_targets(${PLUGIN_INSTALL_DIR} cervisiapart )
 
 ########### install files ###############
 
-install_files( ${XDG_APPS_DIR} FILES cervisia.desktop )
-install_files( ${KCFG_INSTALL_DIR} FILES cervisiapart.kcfg )
-install_files( ${DATA_INSTALL_DIR}/cervisiapart FILES cervisiaui.rc )
-install_files( ${DATA_INSTALL_DIR}/cervisia FILES cervisiashellui.rc eventsrc )
-install_files( ${KCONF_UPDATE_INSTALL_DIR} FILES cervisia.upd )
-install_programs( ${KCONF_UPDATE_INSTALL_DIR} FILES change_colors.pl cervisia-normalize_cvsroot.pl cervisia-change_repos_list.pl)
+install( FILES cervisia.desktop  DESTINATION  ${XDG_APPS_DIR} )
+install( FILES cervisiapart.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
+install( FILES cervisiaui.rc  DESTINATION  ${DATA_INSTALL_DIR}/cervisiapart )
+install( FILES cervisiashellui.rc eventsrc  DESTINATION  ${DATA_INSTALL_DIR}/cervisia )
+install( FILES cervisia.upd  DESTINATION  ${KCONF_UPDATE_INSTALL_DIR} )
+install(PROGRAMS FILES change_colors.pl cervisia-normalize_cvsroot.pl cervisia-change_repos_list.pl DESTINATION  ${KCONF_UPDATE_INSTALL_DIR} )
 
 kde4_install_icons( ${ICON_INSTALL_DIR}  hicolor )
 

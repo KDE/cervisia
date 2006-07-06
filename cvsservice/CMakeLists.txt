@@ -22,10 +22,10 @@ set_target_properties(cvsservice_bin PROPERTIES OUTPUT_NAME cvsservice)
 target_link_libraries(kdeinit_cvsservice_bin  ${KDE4_KDECORE_LIBS} ${KDE4_KIO_LIBS} )
 set_target_properties(kdeinit_cvsservice_bin PROPERTIES OUTPUT_NAME kdeinit_cvsservice)
 
-install_targets(${LIB_INSTALL_DIR} kdeinit_cvsservice_bin )
+install(TARGETS kdeinit_cvsservice_bin  DESTINATION ${LIB_INSTALL_DIR} )
 
 target_link_libraries( cvsservice_bin kdeinit_cvsservice_bin )
-install_targets(/bin cvsservice_bin )
+install(TARGETS cvsservice_bin  DESTINATION ${BIN_INSTALL_DIR} )
 
 ########### next target ###############
 
@@ -37,10 +37,10 @@ kde4_add_kdeinit_executable( cvsaskpass ${cvsaskpass_KDEINIT_SRCS})
 
 target_link_libraries(kdeinit_cvsaskpass  ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} kdesu )
 
-install_targets(${LIB_INSTALL_DIR} kdeinit_cvsaskpass )
+install(TARGETS kdeinit_cvsaskpass  DESTINATION ${LIB_INSTALL_DIR} )
 
 target_link_libraries( cvsaskpass kdeinit_cvsaskpass )
-install_targets(/bin cvsaskpass )
+install(TARGETS cvsaskpass  DESTINATION ${BIN_INSTALL_DIR} )
 
 ########### next target ###############
 
@@ -50,5 +50,5 @@ qt4_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.repository.xml
 
 ########### install files ###############
 
-install_files( ${SERVICES_INSTALL_DIR} FILES  cvsservice.desktop )
+install( FILES  cvsservice.desktop  DESTINATION  ${SERVICES_INSTALL_DIR} )
 install_files( /include FILES  cvsservice_stub.h cvsjob_stub.h repository_stub.h )
