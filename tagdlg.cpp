@@ -142,7 +142,7 @@ void TagDialog::slotOk()
         return;
     }
 
-    KDialogBase::slotOk();
+    KDialog::slotOk();
 }
 
 

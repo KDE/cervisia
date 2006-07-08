@@ -65,7 +65,7 @@ Repository::Repository()
 
     // other cvsservice instances might change the configuration file
     // so we watch it for changes
-    d->configFileName = locate("config", "cvsservicerc");
+    d->configFileName = KStandardDirs::locate("config", "cvsservicerc");
     KDirWatch* fileWatcher = new KDirWatch(this);
     connect(fileWatcher, SIGNAL(dirty(const QString&)),
             this, SLOT(slotConfigDirty(const QString&)));
@@ -84,7 +84,7 @@ Repository::Repository(const QString& repository)
 
     // other cvsservice instances might change the configuration file
     // so we watch it for changes
-    d->configFileName = locate("config", "cvsservicerc");
+    d->configFileName = KStandardDirs::locate("config", "cvsservicerc");
     KDirWatch* fileWatcher = new KDirWatch(this);
     connect(fileWatcher, SIGNAL(dirty(const QString&)),
             this, SLOT(slotConfigDirty(const QString&)));
