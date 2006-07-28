@@ -35,7 +35,7 @@ kde4_automoc(${cvsaskpass_KDEINIT_SRCS})
 
 kde4_add_kdeinit_executable( cvsaskpass ${cvsaskpass_KDEINIT_SRCS})
 
-target_link_libraries(kdeinit_cvsaskpass  ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} kdesu )
+target_link_libraries(kdeinit_cvsaskpass  ${KDE4_KDEUI_LIBS} ${KDE4_KDESU_LIBS} )
 
 install(TARGETS kdeinit_cvsaskpass  DESTINATION ${LIB_INSTALL_DIR} )
 
@@ -51,4 +51,4 @@ qt4_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.repository.xml
 ########### install files ###############
 
 install( FILES  cvsservice.desktop  DESTINATION  ${SERVICES_INSTALL_DIR} )
-install_files( /include FILES  cvsservice_stub.h cvsjob_stub.h repository_stub.h )
+install( FILES  cvsservice_stub.h cvsjob_stub.h repository_stub.h DESTINATION ${INCLUDE_INSTALL_DIR} )
