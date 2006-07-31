@@ -1,13 +1,13 @@
-[!Global!]
+[Global]
 IconName=cervisia
 Comment=Cervisia
 Comment[x-test]=xxCervisiaxx
 
-[cvs_commit_done]
+[Event/cvs_commit_done]
 Name=CVS commit job done
 Name[fr]=Validation CVS effectuée
 Name[x-test]=xxCVS commit job donexx
 Comment=A CVS commit job is done
 Comment[fr]=Une validation CVS a été effectué
 Comment[x-test]=xxA CVS commit job is donexx
-default_presentation=0
+Action=None

@@ -35,7 +35,7 @@
 #include <kinputdialog.h>
 #include <kinstance.h>
 #include <klocale.h>
-#include <knotifyclient.h>
+#include <knotification.h>
 #include <kprocess.h>
 #include <kpropertiesdialog.h>
 #include <kstatusbar.h>
@@ -1645,9 +1645,9 @@ void CervisiaPart::slotJobFinished()
 
     if( m_jobType == Commit )
     {
-        KNotifyClient::event(widget()->parentWidget()->winId(), "cvs_commit_done",
+        KNotification::event("cvs_commit_done",
                              i18n("A CVS commit to repository %1 is done",
-                              repository));
+                              repository), QPixmap(),widget()->parentWidget());
         m_jobType = Unknown;
     }
 }
