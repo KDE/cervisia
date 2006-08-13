@@ -1,3 +1,8 @@
+2006-08-12  André Wöbbeking  <Woebbeking@web.de>
+
+	* Fix BR #131695:
+	  Broken repository locations don't crash cvsservice anymore.
+
 2005-03-30  Christian Loose <christian.loose@kdemail.net>
 
 	* Change License to GPL.
