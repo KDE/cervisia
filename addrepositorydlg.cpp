@@ -22,7 +22,7 @@
 #include "addrepositorydlg.h"
 
 #include <qcheckbox.h>
-#include <q3hbox.h>
+#include <khbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
 //Added by qt3to4:
@@ -75,7 +75,7 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
     server_label->setBuddy(server_edit);
     layout->addWidget(server_edit);
 
-    Q3HBox* compressionBox = new Q3HBox(mainWidget);
+    KHBox* compressionBox = new KHBox(mainWidget);
     m_useDifferentCompression = new QCheckBox(i18n("Use different &compression level:"), compressionBox);
     
     m_compressionLevel = new KIntNumInput(compressionBox);
