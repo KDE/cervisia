@@ -36,6 +36,20 @@
 #include "progressdlg.h"
 
 
+static QDateTime parseDate(const QString& date, const QString& _time, const QString& offset)
+{
+    // cvs history only prints hh:mm but parseDateISO8601 needs hh:mm:ss
+    QString time(_time);
+    if( time.contains(':') == 1 )
+        time += ":00";
+
+    QDateTime dateTime;
+    dateTime.setTime_t(KRFCDate::parseDateISO8601(date + 'T' + time + offset));
+
+    return dateTime;
+}
+
+
 class HistoryItem : public QListViewItem
 {
 public:
@@ -309,7 +323,11 @@ bool HistoryDialog::parseHistory(CvsService_stub* cvsService)
     QString line;
     while( dlg.getLine(line) )
     {
-        QStringList list = splitLine(line);
+        const QStringList list(splitLine(line));
+        const int listSize(list.size());
+        if( listSize < 6)
+            continue;
+
         QString cmd = list[0];
         if( cmd.length() != 1 )
             continue;
@@ -341,14 +359,14 @@ bool HistoryDialog::parseHistory(CvsService_stub* cvsService)
             case 'U': event = i18n("Update, Copied ");   break;
             case 'G': event = i18n("Update, Merged ");   break;
             case 'C': event = i18n("Update, Conflict "); break;
+            case 'P': event = i18n("Update, Patched ");  break;
             case 'M': event = i18n("Commit, Modified "); break;
             case 'A': event = i18n("Commit, Added ");    break;
             case 'R': event = i18n("Commit, Removed ");  break;
             default:  event = i18n("Unknown ");
         }
 
-        QDateTime date;
-        date.setTime_t(KRFCDate::parseDateISO8601(list[1] + 'T' + list[2] + list[3]));
+        const QDateTime date(parseDate(list[1], list[2], list[3]));
 
         HistoryItem *item = new HistoryItem(listview, date);
         item->setText(HistoryItem::Event, event);
@@ -356,8 +374,11 @@ bool HistoryDialog::parseHistory(CvsService_stub* cvsService)
         if( ncol == 10 )
         {
             item->setText(HistoryItem::Revision, list[5]);
-            item->setText(HistoryItem::File, list[6]);
-            item->setText(HistoryItem::Path, list[7]);
+            if( listSize >= 8 )
+            {
+                item->setText(HistoryItem::File, list[6]);
+                item->setText(HistoryItem::Path, list[7]);
+            }
         }
         else
         {
