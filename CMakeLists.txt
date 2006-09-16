@@ -1,6 +1,9 @@
 project(cervisia)
 
-add_subdirectory( cvsservice ) 
+if ( UNIX )
+ add_subdirectory( cvsservice ) 
+endif(UNIX)
+
 add_subdirectory( pics ) 
 
 
