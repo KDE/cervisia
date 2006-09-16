@@ -19,7 +19,7 @@ kde4_add_kdeinit_executable( cvsservice_bin ${cvsservice_bin_KDEINIT_SRCS})
 set_target_properties(cvsservice_bin PROPERTIES OUTPUT_NAME cvsservice)
 
 
-target_link_libraries(kdeinit_cvsservice_bin  ${KDE4_KDECORE_LIBS} ${KDE4_KIO_LIBS} )
+target_link_libraries(kdeinit_cvsservice_bin  ${KDE4_KIO_LIBS} )
 set_target_properties(kdeinit_cvsservice_bin PROPERTIES OUTPUT_NAME kdeinit_cvsservice)
 
 install(TARGETS kdeinit_cvsservice_bin  DESTINATION ${LIB_INSTALL_DIR} )
