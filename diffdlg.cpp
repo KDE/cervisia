@@ -239,10 +239,10 @@ bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
     setCaption(i18n("CVS Diff: %1", fileName));
     revlabel1->setText( revA.isEmpty()?
                         i18n("Repository:")
-                        : i18n("Revision ")+revA+":" );
+                        : i18n("Revision ")+revA+':' );
     revlabel2->setText( revB.isEmpty()?
                         i18n("Working dir:")
-                        : i18n("Revision ")+revB+":" );
+                        : i18n("Revision ")+revB+':' );
 
     KConfigGroup cs(&partConfig, "General");
 
@@ -370,10 +370,10 @@ void DiffDialog::callExternalDiff(const QString& extdiff, CvsService_stub* servi
                                   const QString &revB)
 {
     QString extcmdline = extdiff;
-    extcmdline += " ";
+    extcmdline += ' ';
 
     // create suffix for temporary file (used QFileInfo to remove path from file name)
-    const QString suffix = "-" + QFileInfo(fileName).fileName();
+    const QString suffix = '-' + QFileInfo(fileName).fileName();
 
     DCOPRef job;
     if (!revA.isEmpty() && !revB.isEmpty())
@@ -389,7 +389,7 @@ void DiffDialog::callExternalDiff(const QString& extdiff, CvsService_stub* servi
             return;
 
         extcmdline += KProcess::quote(revAFilename);
-        extcmdline += " ";
+        extcmdline += ' ';
         extcmdline += KProcess::quote(revBFilename);
     }
     else
@@ -401,7 +401,7 @@ void DiffDialog::callExternalDiff(const QString& extdiff, CvsService_stub* servi
             return;
 
         extcmdline += KProcess::quote(revAFilename);
-        extcmdline += " ";
+        extcmdline += ' ';
         extcmdline += KProcess::quote(QFileInfo(fileName).absoluteFilePath());
     }
 

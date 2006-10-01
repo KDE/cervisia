@@ -63,7 +63,7 @@ CvsJob::CvsJob(const QString& objId)
     : QObject()
     , d(new Private)
 {
-	QDBus::sessionBus().registerObject("/"+objId, this, QDBusConnection::ExportSlots);
+	QDBus::sessionBus().registerObject('/'+objId, this, QDBusConnection::ExportSlots);
     //setObjId(objId.toLocal8Bit());
 }
 

@@ -116,7 +116,7 @@ void RepositoryListItem::setRsh(const QString& rsh)
         {
             method += " (";
             method += rsh;
-            method += ")";
+            method += ')';
         }
     }
     else

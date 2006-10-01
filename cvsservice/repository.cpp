@@ -108,7 +108,7 @@ QString Repository::cvsClient() const
     // we don't need the command line option if there is no compression level set
     if( d->compressionLevel > 0 )
     {
-        client += " -z" + QString::number(d->compressionLevel) + " ";
+        client += " -z" + QString::number(d->compressionLevel) + ' ';
     }
 
     return client;

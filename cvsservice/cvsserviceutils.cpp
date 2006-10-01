@@ -35,7 +35,7 @@ QString CvsServiceUtils::joinFileList(const QStringList& files)
     for( ; it != end; ++it )
     {
         result += KProcess::quote(*it);
-        result += " ";
+        result += ' ';
     }
     
     if( result.length() > 0 )

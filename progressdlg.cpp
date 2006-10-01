@@ -74,7 +74,7 @@ ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,
     d->cvsJob      = new CvsJob_stub(job);
     d->buffer      = "";
 
-    d->errorId1 = "cvs " + errorIndicator + ":";
+    d->errorId1 = "cvs " + errorIndicator + ':';
     d->errorId2 = "cvs [" + errorIndicator + " aborted]:";
 
     setupGui(heading);

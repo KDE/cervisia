@@ -152,14 +152,14 @@ QString Cervisia::UserName()
             hostname[sizeof(hostname)-1] = '0';
 
         name  = QString::fromLocal8Bit(pw->pw_gecos);
-        email = QString::fromLocal8Bit(pw->pw_name) + "@" +
+        email = QString::fromLocal8Bit(pw->pw_name) + '@' +
                 QString::fromLocal8Bit(hostname);
     }
 
     QString result = name;
     result += "  <";
     result += email;
-    result += ">";
+    result += '>';
 
     return result;
 }
@@ -194,8 +194,8 @@ QString Cervisia::NormalizeRepository(const QString& repository)
         if( userName.isEmpty() )
             userName = KUser().loginName();
 
-        QString canonicalForm = ":pserver:" + userName + "@" + hostName +
-                                ":" + port + path;
+        QString canonicalForm = ":pserver:" + userName + '@' + hostName +
+                                ':' + port + path;
 
         kDebug() << "NormalizeRepository(): canonicalForm=" << canonicalForm
                   << endl;
@@ -232,7 +232,7 @@ QString joinLine(const QStringList &list)
           it != list.end(); ++it )
     {
         line += KShellProcess::quote(*it);
-        line += " ";
+        line += ' ';
     }
 
     if (line.length() > 0)

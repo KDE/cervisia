@@ -628,7 +628,7 @@ void CervisiaPart::popupRequested(K3ListView*, Q3ListViewItem* item, const QPoin
             if( !selectedFile.isEmpty() )
             {
                 KUrl u;
-                u.setPath(sandbox + "/" + selectedFile);
+                u.setPath(sandbox + '/' + selectedFile);
 
                 m_currentEditMenu = new Cervisia::EditWithMenu(u, popup);
 
@@ -863,7 +863,7 @@ void CervisiaPart::slotUpdateToTag()
             tagopt = "-D ";
             tagopt += KProcess::quote(l->date());
         }
-        tagopt += " ";
+        tagopt += ' ';
         updateSandbox(tagopt);
     }
     delete l;
@@ -901,7 +901,7 @@ void CervisiaPart::slotMerge()
             tagopt += " -j ";
             tagopt += dlg.tag2();
         }
-        tagopt += " ";
+        tagopt += ' ';
         updateSandbox(tagopt);
     }
 }
@@ -1689,7 +1689,7 @@ bool CervisiaPart::openSandbox(const QString &dirname)
 
     // get repository for the caption of the window
     repository = cvsRepository.location();
-    emit setWindowCaption(sandbox + "(" + repository + ")");
+    emit setWindowCaption(sandbox + '(' + repository + ')');
 
     // set m_url member for tabbed window modus of Konqueror
     m_url = KUrl::fromPathOrUrl(sandbox);
@@ -1749,9 +1749,9 @@ void CervisiaPart::setFilter()
     else
         {
             if (opt_hideUpToDate)
-                str += "N";
+                str += 'N';
             if (opt_hideRemoved)
-                str += "R";
+                str += 'R';
         }
 
     if( filterLabel )
