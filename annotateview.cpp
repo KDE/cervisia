@@ -85,7 +85,7 @@ QString AnnotateViewItem::text(int col) const
         return QString::number(m_lineNumber);
     case AuthorColumn:
         if( m_logInfo.m_author.isNull() )
-            return QString::null;
+            return QString();
         else
             return (m_logInfo.m_author + QChar(' ') + m_logInfo.m_revision);
     case ContentColumn:
@@ -94,7 +94,7 @@ QString AnnotateViewItem::text(int col) const
         ;
     };
 
-    return QString::null;
+    return QString();
 }
 
 

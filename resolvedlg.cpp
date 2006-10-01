@@ -381,7 +381,7 @@ QString ResolveDialog::readFile()
 {
     QFile f(fname);
     if( !f.open(QIODevice::ReadOnly) )
-        return QString::null;
+        return QString();
 
     QTextStream stream(&f);
     QTextCodec* codec = DetectCodec(fname);

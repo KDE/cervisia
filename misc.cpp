@@ -143,7 +143,7 @@ QString Cervisia::UserName()
         // 2. Try to retrieve the information from the system
         struct passwd* pw = getpwuid(getuid());
         if( !pw )
-            return QString::null;
+            return QString();
 
         char hostname[512];
         hostname[0] = '\0';
