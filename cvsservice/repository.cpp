@@ -206,7 +206,7 @@ void Repository::Private::readGeneralConfig()
 {
     KConfig* config = KGlobal::config();
 
-    // get path to cvs client programm
+    // get path to cvs client program
     config->setGroup("General");
     client = config->readPathEntry("CVSPath", "cvs");
 }

@@ -260,7 +260,7 @@ bool ResolveDialog::parseFile(const QString &name)
             case Normal:
                 {
                     // check for start of conflict block
-                    // Set to look for <<<<<<< at begining of line with exaclty one
+                    // Set to look for <<<<<<< at beginning of line with exactly one
                     // space after then anything after that.
                     QRegExp rx( "^<{7}\\s.*$" );
                     int separatorPos = rx.search(line);
@@ -278,7 +278,7 @@ bool ResolveDialog::parseFile(const QString &name)
                 break;
             case VersionA:
                 {
-                    // Set to look for ======= at begining of line which may have one
+                    // Set to look for ======= at beginning of line which may have one
                     // or more spaces after then nothing else.
                     QRegExp rx( "^={7}\\s*$" );
                     int separatorPos = rx.search(line);
@@ -296,7 +296,7 @@ bool ResolveDialog::parseFile(const QString &name)
                 break;
             case VersionB:
                 {
-                    // Set to look for >>>>>>> at begining of line with exaclty one
+                    // Set to look for >>>>>>> at beginning of line with exactly one
                     // space after then anything after that.
                     QRegExp rx( "^>{7}\\s.*$" );
                     int separatorPos = rx.search(line);
@@ -333,7 +333,7 @@ bool ResolveDialog::parseFile(const QString &name)
 
     updateNofN();
 
-    return true; // succesful
+    return true; // successful
 }
 
 
