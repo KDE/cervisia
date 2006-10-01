@@ -167,7 +167,7 @@ QString ChangeLogDialog::message()
 //                     for (j = 0; j < (int)str.length(); ++j)
 //                         if (!str[j].isSpace())
 //                             break;
-//                     str.remove(0, QMIN(j, 8));
+//                     str.remove(0, qMin(j, 8));
 //                 }
 //             res += str;
 //             res += '\n';

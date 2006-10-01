@@ -115,14 +115,14 @@ void DiffView::setPartner(DiffView *other)
 void DiffView::vertPositionChanged(int val)
 {
     if (partner)
-        partner->setYOffset(QMIN(val,partner->maxYOffset()));
+        partner->setYOffset(qMin(val,partner->maxYOffset()));
 }
 
 
 void DiffView::horzPositionChanged(int val)
 {
     if (partner)
-        partner->setXOffset(QMIN(val,partner->maxXOffset()));
+        partner->setXOffset(qMin(val,partner->maxXOffset()));
 }
 
 
@@ -151,7 +151,7 @@ void DiffView::setCenterOffset(int offset)
     if (!rowIsVisible(offset))
     {
         int visiblerows = viewHeight()/cellHeight(0);
-        setTopCell( QMAX(0, offset - visiblerows/2) );
+        setTopCell( qMax(0, offset - visiblerows/2) );
     }
 }
 
@@ -173,9 +173,9 @@ void DiffView::addLine(const QString &line, DiffType type, int no)
     const int numTabs = copy.count(QLatin1Char('\t'));
     copy.remove(QLatin1Char('\t'));
 
-    const int tabSize   = m_tabWidth * QMAX(fm.maxWidth(), fmbold.maxWidth());
-    const int copyWidth = QMAX(fm.width(copy), fmbold.width(copy));
-    textwidth = QMAX(textwidth, copyWidth + numTabs * tabSize);
+    const int tabSize   = m_tabWidth * qMax(fm.maxWidth(), fmbold.maxWidth());
+    const int copyWidth = qMax(fm.width(copy), fmbold.width(copy));
+    textwidth = qMax(textwidth, copyWidth + numTabs * tabSize);
 
     DiffViewItem *item = new DiffViewItem;
     item->line = line;
@@ -276,7 +276,7 @@ int DiffView::cellWidth(int col)
     else if (marker && (col == 0 || col == 1))
     {
         QFontMetrics fm( fontMetrics() );
-        return QMAX(QMAX( fm.width(i18n("Delete")),
+        return qMax(qMax( fm.width(i18n("Delete")),
                           fm.width(i18n("Insert"))),
                     fm.width(i18n("Change")))+2*BORDER;
     }
@@ -285,7 +285,7 @@ int DiffView::cellWidth(int col)
         int rest = (linenos || marker)? cellWidth(0) : 0;
         if (linenos && marker)
             rest += cellWidth(1);
-        return QMAX(textwidth, viewWidth()-rest);
+        return qMax(textwidth, viewWidth()-rest);
     }
 }
 
