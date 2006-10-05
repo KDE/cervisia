@@ -34,7 +34,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kprocess.h>
-#include <ktempfile.h>
+#include <ktemporaryfile.h>
 #include <kuser.h>
 #include <kdebug.h>
 
@@ -293,9 +293,12 @@ QString tempFileName(const QString& suffix)
     if (!tempFiles)
         tempFiles = new QStringList;
 
-    KTempFile f(QString::null, suffix);
-    tempFiles->append(f.name());
-    return f.name();
+    KTemporaryFile f;
+    f.setSuffix(suffix);
+    f.setAutoRemove(false);
+    f.open();
+    tempFiles->append(f.fileName());
+    return f.fileName();
 }
 
 

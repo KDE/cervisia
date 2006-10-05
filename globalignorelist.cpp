@@ -21,7 +21,7 @@ using namespace Cervisia;
 
 #include <qdir.h>
 #include <kdebug.h>
-#include <ktempfile.h>
+#include <ktemporaryfile.h>
 #include <stdlib.h> // for getenv()
 
 #include "cvsservice_stub.h"
@@ -48,9 +48,9 @@ bool GlobalIgnoreList::matches(const QFileInfo* fi) const
 void GlobalIgnoreList::retrieveServerIgnoreList(CvsService_stub* cvsService,
                                                 const QString& repository)
 {
-    KTempFile tmpFile;
-    tmpFile.setAutoDelete(true);
-       
+    KTemporaryFile tmpFile;
+    tmpFile.open();
+
     // clear old ignore list
     m_stringMatcher.clear();
     
@@ -58,13 +58,13 @@ void GlobalIgnoreList::retrieveServerIgnoreList(CvsService_stub* cvsService,
     setup();
     
     DCOPRef ref = cvsService->downloadCvsIgnoreFile(repository, 
-                                                    tmpFile.name());
+                                                    tmpFile.fileName());
       
     ProgressDialog dlg(0, "Edit", ref, "checkout", "CVS Edit");
     if( !dlg.execute() )
         return;
     
-    addEntriesFromFile(tmpFile.name());
+    addEntriesFromFile(tmpFile.fileName());
 }
 
 
