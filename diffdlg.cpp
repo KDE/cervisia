@@ -38,7 +38,7 @@
 #include <kfiledialog.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <ktempfile.h>
+#include <ktemporaryfile.h>
 #include <kprocess.h>
 
 //#include "cvsservice_stub.h"
