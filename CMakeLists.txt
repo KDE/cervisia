@@ -33,7 +33,7 @@ set(libcervisia_SRCS
 
 kde4_add_ui3_files(libcervisia_SRCS settingsdlg_advanced.ui )
 
-kde4_add_kcfg_files(libcervisia_SRCS cervisiasettings.kcfgc )
+kde4_add_kcfg_files(libcervisia libcervisia_SRCS cervisiasettings.kcfgc )
 
 
 set(cervisia_KDEINIT_SRCS ${libcervisia_SRCS} 
