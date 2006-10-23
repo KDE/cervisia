@@ -12,7 +12,7 @@ set(cvsservice_bin_KDEINIT_SRCS
    cvsserviceutils.cpp 
    cvsloginjob.cpp) 
 
-kde4_automoc(cvsservice_bin ${cvsservice_bin_KDEINIT_SRCS})
+kde4_automoc(${cvsservice_bin_KDEINIT_SRCS})
 
 
 kde4_add_kdeinit_executable( cvsservice_bin ${cvsservice_bin_KDEINIT_SRCS})
@@ -31,7 +31,7 @@ install(TARGETS cvsservice_bin  DESTINATION ${BIN_INSTALL_DIR} )
 
 set(cvsaskpass_KDEINIT_SRCS cvsaskpass.cpp )
 
-kde4_automoc(cvsaskpass ${cvsaskpass_KDEINIT_SRCS})
+kde4_automoc(${cvsaskpass_KDEINIT_SRCS})
 
 kde4_add_kdeinit_executable( cvsaskpass ${cvsaskpass_KDEINIT_SRCS})
 

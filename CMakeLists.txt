@@ -33,7 +33,7 @@ set(libcervisia_SRCS
 
 kde4_add_ui3_files(libcervisia_SRCS settingsdlg_advanced.ui )
 
-kde4_add_kcfg_files(libcervisia libcervisia_SRCS cervisiasettings.kcfgc )
+kde4_add_kcfg_files(libcervisia_SRCS cervisiasettings.kcfgc )
 
 
 set(cervisia_KDEINIT_SRCS ${libcervisia_SRCS} 
@@ -44,7 +44,7 @@ qt4_add_dbus_adaptor(cvsservice_LIB_SRCS org.kde.cervisia.cvsservice.xml cvsserv
 qt4_add_dbus_adaptor(cvsservice_LIB_SRCS org.kde.cervisia.cvsjob.xml cvsjob.h CvsJob)
 qt4_add_dbus_adaptor(cvsservice_LIB_SRCS org.kde.cervisia.repository.xml repository.h Repository)
 
-kde4_automoc(cervisia ${cervisia_KDEINIT_SRCS})
+kde4_automoc(${cervisia_KDEINIT_SRCS})
 
 kde4_add_kdeinit_executable( cervisia ${cervisia_KDEINIT_SRCS})
 
@@ -87,7 +87,7 @@ set(cervisiapart_PART_SRCS ${libcervisia_SRCS}
    editwithmenu.cpp 
    logmessageedit.cpp )
 
-kde4_automoc(cervisiapart ${cervisiapart_PART_SRCS})
+kde4_automoc(${cervisiapart_PART_SRCS})
 
 qt4_add_dbus_adaptor(cervisiapart_PART_SRCS org.kde.cervisia.protocolview.xml protocolview.h ProtocolView)
 
