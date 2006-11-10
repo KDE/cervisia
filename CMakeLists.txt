@@ -93,7 +93,7 @@ qt4_add_dbus_adaptor(cervisiapart_PART_SRCS org.kde.cervisia.protocolview.xml pr
 
 kde4_add_plugin(cervisiapart WITH_PREFIX ${cervisiapart_PART_SRCS})
 
-kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} cervisiapart )
+
 
 target_link_libraries(cervisiapart  ${KDE4_KPARTS_LIBS}  ${KDE4_KUTILS_LIBS} cvsservice  )
 
