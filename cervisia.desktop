@@ -16,5 +16,5 @@ ServiceTypes=KParts/ReadOnlyPart,Browser/View
 X-KDE-Library=libcervisiapart
 X-KDE-BrowserView-Args=DetailedList
 
-X-DCOP-ServiceType=Multi
+X-DBUS-StartupType=Multi
 Categories=Qt;KDE;Development;
