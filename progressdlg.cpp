@@ -30,7 +30,7 @@
 #include <Q3ListBox>
 #include <cvsjob_stub.h>
 #include <dcopref.h>
-#include <kanimwidget.h>
+#include <kanimatedbutton.h>
 #include <kapplication.h>
 #include <kconfig.h>
 
