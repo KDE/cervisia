@@ -30,7 +30,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kstatusbar.h>
-#include <kstdaction.h>
+#include <kstandardaction.h>
 #include <kurl.h>
 #include <kactioncollection.h>
 
@@ -97,19 +97,19 @@ void CervisiaShell::setupActions()
 {
     setStandardToolBarMenuEnabled( true );
 
-    KAction *action = KStdAction::configureToolbars( this, SLOT(slotConfigureToolBars()),
+    KAction *action = KStandardAction::configureToolbars( this, SLOT(slotConfigureToolBars()),
                                             actionCollection() );
     QString hint = i18n("Allows you to configure the toolbar");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = KStdAction::keyBindings( this, SLOT(slotConfigureKeys()),
+    action = KStandardAction::keyBindings( this, SLOT(slotConfigureKeys()),
                                       actionCollection() );
     hint = i18n("Allows you to customize the keybindings");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = KStdAction::quit( kapp, SLOT( quit() ), actionCollection() );
+    action = KStandardAction::quit( kapp, SLOT( quit() ), actionCollection() );
     hint = i18n("Exits Cervisia");
     action->setToolTip( hint );
     action->setWhatsThis( hint );

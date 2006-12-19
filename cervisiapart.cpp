@@ -39,7 +39,7 @@
 #include <kprocess.h>
 #include <kpropertiesdialog.h>
 #include <kstatusbar.h>
-#include <kstdaction.h>
+#include <kstandardaction.h>
 #include <kxmlguifactory.h>
 #include <krun.h>
 #include <kdebug.h>
@@ -575,7 +575,7 @@ void CervisiaPart::setupActions()
     //
     // Help Menu
     //
-    action = KStdAction::help( this, SLOT(slotHelp()),
+    action = KStandardAction::help( this, SLOT(slotHelp()),
                                actionCollection() );
 
     action = new KAction( i18n("CVS &Manual"), actionCollection(), "help_cvs_manual" );
@@ -591,7 +591,7 @@ void CervisiaPart::setupActions()
     connect(toggaction, SIGNAL(triggered(bool) ), SLOT( slotUnfoldFolder() ));
     toggaction->setCheckedState(i18n("Fold Folder"));
 
-    //action = KStdAction::aboutApp( this, SLOT(aboutCervisia()),
+    //action = KStandardAction::aboutApp( this, SLOT(aboutCervisia()),
     //               actionCollection(), "help_about_cervisia" );
 }
 
