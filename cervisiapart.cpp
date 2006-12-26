@@ -985,11 +985,11 @@ void CervisiaPart::slotFileProperties()
     // Create URL from selected filename
     QDir dir(sandbox);
 
-    KUrl u;
-    u.setPath(dir.absoluteFilePath(filename));
+    KUrl u(dir.absoluteFilePath(filename));
 
     // show file properties dialog
-    (void)new KPropertiesDialog(u);
+    KPropertiesDialog dlg(u, widget());
+    dlg.exec();
 }
 
 
