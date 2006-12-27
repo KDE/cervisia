@@ -58,7 +58,7 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool mod
 	setButtons(Close | Help | User1);
 	setDefaultButton(Close);
 	showButtonSeparator(true);
-	setButtonGuiItem(Close,KStdGuiItem::saveAs());
+	setButtonGuiItem(Close,KStandardGuiItem::saveAs());
     QFrame* mainWidget = new QFrame(this);
 	setMainWidget(mainWidget);
 

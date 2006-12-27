@@ -1342,7 +1342,7 @@ void QtTableView::paintEvent( QPaintEvent *e )
 
 #ifndef QT_NO_TRANSFORMATIONS
 		matrix.translate( xPos, yPos );
-		paint.setWorldMatrix( matrix );
+		paint.setMatrix( matrix );
 		if ( testTableFlags(Tbl_clipCellPainting) ||
 		     frameWidth() > 0 && !winR.contains( cellR ) ) { //##arnt
 #warning disable clipping for now as it interferes with drawText() in DiffView::paintCell()
@@ -1353,7 +1353,7 @@ void QtTableView::paintEvent( QPaintEvent *e )
 		    paintCell( &paint, row, col );
 		}
 		matrix.reset();
-		paint.setWorldMatrix( matrix );
+		paint.setMatrix( matrix );
 #else
 		paint.translate( xPos, yPos );
 		if ( testTableFlags(Tbl_clipCellPainting) ||

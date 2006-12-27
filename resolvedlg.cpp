@@ -104,7 +104,7 @@ private:
 ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent, const char *name)
     : KDialogBase(parent, name, false, QString::null,
                   Close | Help | User1 | User2, Close, true,
-                  KStdGuiItem::saveAs(), KStdGuiItem::save())
+                  KStandardGuiItem::saveAs(), KStandardGuiItem::save())
     , markeditem(-1)
     , partConfig(cfg)
 {

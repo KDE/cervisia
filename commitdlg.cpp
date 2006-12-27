@@ -132,7 +132,7 @@ CommitDialog::~CommitDialog()
 
 void CommitDialog::setFileList(const QStringList &list)
 {
-    QString currentDirName = QFileInfo(QLatin1String(".")).absFilePath();
+    QString currentDirName = QFileInfo(QLatin1String(".")).absoluteFilePath();
 
     QStringList::ConstIterator it = list.begin();
     for( ; it != list.end(); ++it )

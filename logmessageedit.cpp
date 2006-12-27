@@ -95,7 +95,7 @@ void LogMessageEdit::keyPressEvent(QKeyEvent* event)
     // handle text completion key
     KShortcut shortcut = keys[TextCompletion];
     if( shortcut.isNull() )
-        shortcut = KStdAccel::shortcut(KStdAccel::TextCompletion);
+        shortcut = KStandardShortcut::shortcut(KStandardShortcut::TextCompletion);
 
     KKey key(event);
 
@@ -117,7 +117,7 @@ void LogMessageEdit::keyPressEvent(QKeyEvent* event)
     // handle previous match key
     shortcut = keys[PrevCompletionMatch];
     if( shortcut.isNull() )
-        shortcut = KStdAccel::shortcut(KStdAccel::PrevCompletion);
+        shortcut = KStandardShortcut::shortcut(KStandardShortcut::PrevCompletion);
 
     if( shortcut.contains(key) )
     {
@@ -128,7 +128,7 @@ void LogMessageEdit::keyPressEvent(QKeyEvent* event)
     // handle next match key
     shortcut = keys[NextCompletionMatch];
     if( shortcut.isNull() )
-        shortcut = KStdAccel::shortcut(KStdAccel::NextCompletion);
+        shortcut = KStandardShortcut::shortcut(KStandardShortcut::NextCompletion);
 
     if( shortcut.contains(key) )
     {
