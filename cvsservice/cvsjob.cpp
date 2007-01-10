@@ -26,8 +26,7 @@
 #include <Q3CString>
 #include <kdebug.h>
 #include <kprocess.h>
-#include <dbus/qdbus.h>
-
+#include <cvsjobadaptor.h>
 #include "sshagent.h"
 
 
@@ -53,8 +52,9 @@ CvsJob::CvsJob(unsigned jobNum)
     : QObject()
     , d(new Private)
 {
-    (void) new CvsJobAdaptor();
-    QDBus::sessionBus().registerObject("/CvsJob"+QString::number(jobNum), this, QDBusConnection::ExportSlots);
+    (void)new CvsjobAdaptor(this);
+    QDBusConnection dbus = QDBusConnection::sessionBus();
+    dbus.registerObject( "/CvsJob"+QString::number(jobNum), this, QDBusConnection::ExportNonScriptableSlots );
 }
 
 
@@ -62,9 +62,9 @@ CvsJob::CvsJob(const QString& objId)
     : QObject()
     , d(new Private)
 {
-    (void) new CvsJobAdaptor();
+    (void)new CvsjobAdaptor(this);
     //TODO register it with good name
-    QDBus::sessionBus().registerObject('/'+objId, this, QDBusConnection::ExportSlots);
+    QDBusConnection::sessionBus().registerObject( "/"+objId, this, QDBusConnection::ExportNonScriptableSlots );
 }
 
 

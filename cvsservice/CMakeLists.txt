@@ -18,6 +18,7 @@ qt4_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.cvsloginjob.xm
 
 qt4_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.repository.xml repository.h Repository)
 
+qt4_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.cvsjob.xml cvsjob.h CvsJob)
 
 kde4_automoc(${cvsservice_bin_KDEINIT_SRCS})
 
@@ -49,9 +50,6 @@ install(TARGETS kdeinit_cvsaskpass  DESTINATION ${LIB_INSTALL_DIR} )
 target_link_libraries( cvsaskpass kdeinit_cvsaskpass )
 install(TARGETS cvsaskpass  DESTINATION ${BIN_INSTALL_DIR} )
 
-########### next target ###############
-
-qt4_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.cvsjob.xml cvsjob.h CvsJob)
 
 ########### install files ###############
 

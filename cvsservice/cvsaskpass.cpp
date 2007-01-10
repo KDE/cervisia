@@ -59,7 +59,8 @@ extern "C" KDE_EXPORT int kdemain(int argc, char** argv)
     QString prompt = KCmdLineArgs::parsedArgs()->arg(0);
     QRegExp rx("(.*@.*)'s password:");
     int pos = rx.search(prompt);
-
+#warning "kde4 port it"
+#if 0
     KPasswordDialog dlg(KPasswordDialog::Password, false, 0);
     dlg.setPrompt(i18n("Please type in your password below."));
 
@@ -72,6 +73,6 @@ extern "C" KDE_EXPORT int kdemain(int argc, char** argv)
         std::cout << dlg.password() << std::endl;
         return 0;
     }
-
+#endif
     return 1;
 }

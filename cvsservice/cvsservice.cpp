@@ -23,8 +23,6 @@
 #include <q3intdict.h>
 #include <qstring.h>
 
-#include <dcopref.h>
-#include <dcopclient.h>
 #include <kapplication.h>
 #include <kconfig.h>
 #include <klocale.h>
@@ -37,7 +35,7 @@
 #include "cvsserviceutils.h"
 #include "repository.h"
 #include "sshagent.h"
-#include "CvsServiceadaptor.h"
+#include "cvsserviceadaptor.h"
 
 static const char SINGLE_JOB_ID[]   = "NonConcurrentJob";
 static const char REDIRECT_STDERR[] = "2>&1";
@@ -54,7 +52,7 @@ struct CvsService::Private
     }
 
     CvsJob*               singleCvsJob;   // non-concurrent cvs job, like update or commit
-    DCOPRef               singleJobRef;   // DCOP reference to non-concurrent cvs job
+    QDBusObjectPath               singleJobRef;   // DCOP reference to non-concurrent cvs job
     Q3IntDict<CvsJob>      cvsJobs;        // concurrent cvs jobs, like diff or annotate
     Q3IntDict<CvsLoginJob> loginJobs;
     unsigned              lastJobId;
@@ -64,7 +62,7 @@ struct CvsService::Private
     Repository*           repository;
 
     CvsJob* createCvsJob();
-    DCOPRef setupNonConcurrentJob(Repository* repo = 0);
+    QDBusObjectPath setupNonConcurrentJob(Repository* repo = 0);
 
     bool hasWorkingCopy();
     bool hasRunningJob();
@@ -81,7 +79,8 @@ CvsService::CvsService()
  
     // create non-concurrent cvs job
     d->singleCvsJob = new CvsJob(SINGLE_JOB_ID);
-    d->singleJobRef.setRef(d->appId, d->singleCvsJob->objId());
+#warning "kde4 define singleJobRef"    
+    //d->singleJobRef.setRef(d->appId, d->singleCvsJob->objId());
 
     // create repository manager
     d->repository = new Repository();
@@ -114,10 +113,10 @@ CvsService::~CvsService()
 }
 
 
-DCOPRef CvsService::add(const QStringList& files, bool isBinary)
+QDBusObjectPath CvsService::add(const QStringList& files, bool isBinary)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // assemble the command line
     // cvs add [-kb] [FILES]
@@ -134,10 +133,10 @@ DCOPRef CvsService::add(const QStringList& files, bool isBinary)
 }
 
 
-DCOPRef CvsService::addWatch(const QStringList& files, int events)
+QDBusObjectPath CvsService::addWatch(const QStringList& files, int events)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // assemble the command line
     d->singleCvsJob->clearCvsCommand();
@@ -160,10 +159,10 @@ DCOPRef CvsService::addWatch(const QStringList& files, int events)
 }
 
 
-DCOPRef CvsService::annotate(const QString& fileName, const QString& revision)
+QDBusObjectPath CvsService::annotate(const QString& fileName, const QString& revision)
 {
     if( !d->hasWorkingCopy() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // create a cvs job
     CvsJob* job = d->createCvsJob();
@@ -183,18 +182,18 @@ DCOPRef CvsService::annotate(const QString& fileName, const QString& revision)
     // because the string "Annotations for blabla" is
     // printed to stderr even with option -Q.
     *job << quotedName << ")" << REDIRECT_STDERR;
-
+#warning "kde4 port it"
     // return a DCOP reference to the cvs job
-    return DCOPRef(d->appId, job->objId());
+    return QDBusObjectPath(/*d->appId, job->objId()*/);
 }
 
 
-DCOPRef CvsService::checkout(const QString& workingDir, const QString& repository,
+QDBusObjectPath CvsService::checkout(const QString& workingDir, const QString& repository,
                              const QString& module, const QString& tag, 
                              bool pruneDirs)
 {
     if( d->hasRunningJob() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     Repository repo(repository);
 
@@ -219,12 +218,12 @@ DCOPRef CvsService::checkout(const QString& workingDir, const QString& repositor
 }
 
 
-DCOPRef CvsService::checkout(const QString& workingDir, const QString& repository,
+QDBusObjectPath CvsService::checkout(const QString& workingDir, const QString& repository,
                              const QString& module, const QString& tag, 
                              bool pruneDirs, const QString& alias, bool exportOnly)
 {
     if( d->hasRunningJob() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     Repository repo(repository);
 
@@ -254,13 +253,13 @@ DCOPRef CvsService::checkout(const QString& workingDir, const QString& repositor
     return d->setupNonConcurrentJob(&repo);
 }
 
-DCOPRef CvsService::checkout(const QString& workingDir, const QString& repository,
+QDBusObjectPath CvsService::checkout(const QString& workingDir, const QString& repository,
                              const QString& module, const QString& tag, 
                              bool pruneDirs, const QString& alias, bool exportOnly,
                              bool recursive)
 {
     if( d->hasRunningJob() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     Repository repo(repository);
 
@@ -293,11 +292,11 @@ DCOPRef CvsService::checkout(const QString& workingDir, const QString& repositor
     return d->setupNonConcurrentJob(&repo);
 }
 
-DCOPRef CvsService::commit(const QStringList& files, const QString& commitMessage,
+QDBusObjectPath CvsService::commit(const QStringList& files, const QString& commitMessage,
                            bool recursive)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // assemble the command line
     // cvs commit [-l] [-m MESSAGE] [FILES]
@@ -315,10 +314,10 @@ DCOPRef CvsService::commit(const QStringList& files, const QString& commitMessag
 }
 
 
-DCOPRef CvsService::createRepository(const QString& repository)
+QDBusObjectPath CvsService::createRepository(const QString& repository)
 {
     if( d->hasRunningJob() )
-        return DCOPRef();
+        return QDBusObjectPath();
         
     // assemble the command line
     // cvs -d [REPOSITORY] init
@@ -333,11 +332,11 @@ DCOPRef CvsService::createRepository(const QString& repository)
 }
 
 
-DCOPRef CvsService::createTag(const QStringList& files, const QString& tag,
+QDBusObjectPath CvsService::createTag(const QStringList& files, const QString& tag,
                               bool branch, bool force)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // assemble the command line
     // cvs tag [-b] [-F] [TAG] [FILES]
@@ -358,11 +357,11 @@ DCOPRef CvsService::createTag(const QStringList& files, const QString& tag,
 }
 
 
-DCOPRef CvsService::deleteTag(const QStringList& files, const QString& tag,
+QDBusObjectPath CvsService::deleteTag(const QStringList& files, const QString& tag,
                               bool branch, bool force)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // assemble the command line
     // cvs tag -d [-b] [-F] [TAG] [FILES]
@@ -383,7 +382,7 @@ DCOPRef CvsService::deleteTag(const QStringList& files, const QString& tag,
 }
 
 
-DCOPRef CvsService::downloadCvsIgnoreFile(const QString& repository,
+QDBusObjectPath CvsService::downloadCvsIgnoreFile(const QString& repository,
                                           const QString& outputFile)
 {
     Repository repo(repository);
@@ -398,16 +397,16 @@ DCOPRef CvsService::downloadCvsIgnoreFile(const QString& repository,
          << KProcess::quote(outputFile);
 
     // return a DCOP reference to the cvs job
-    return DCOPRef(d->appId, job->objId());
+    return QDBusObjectPath(d->appId, job->objId());
 }
 
 
-DCOPRef CvsService::downloadRevision(const QString& fileName,
+QDBusObjectPath CvsService::downloadRevision(const QString& fileName,
                                      const QString& revision,
                                      const QString& outputFile)
 {
     if( !d->hasWorkingCopy() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // create a cvs job
     CvsJob* job = d->createCvsJob();
@@ -422,18 +421,18 @@ DCOPRef CvsService::downloadRevision(const QString& fileName,
     *job << KProcess::quote(fileName) << ">" << KProcess::quote(outputFile);
 
     // return a DCOP reference to the cvs job
-    return DCOPRef(d->appId, job->objId());
+    return QDBusObjectPath(d->appId, job->objId());
 }
 
 
-DCOPRef CvsService::downloadRevision(const QString& fileName,
+QDBusObjectPath CvsService::downloadRevision(const QString& fileName,
                                      const QString& revA,
                                      const QString& outputFileA,
                                      const QString& revB,
                                      const QString& outputFileB)
 {
     if( !d->hasWorkingCopy() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // create a cvs job
     CvsJob* job = d->createCvsJob();
@@ -449,11 +448,11 @@ DCOPRef CvsService::downloadRevision(const QString& fileName,
          << KProcess::quote(fileName) << ">" << KProcess::quote(outputFileB);
 
     // return a DCOP reference to the cvs job
-    return DCOPRef(d->appId, job->objId());
+    return QDBusObjectPath(d->appId, job->objId());
 }
 
 
-DCOPRef CvsService::diff(const QString& fileName, const QString& revA,
+QDBusObjectPath CvsService::diff(const QString& fileName, const QString& revA,
                          const QString& revB, const QString& diffOptions,
                          unsigned contextLines)
 {
@@ -463,12 +462,12 @@ DCOPRef CvsService::diff(const QString& fileName, const QString& revA,
 }
 
 
-DCOPRef CvsService::diff(const QString& fileName, const QString& revA,
+QDBusObjectPath CvsService::diff(const QString& fileName, const QString& revA,
                          const QString& revB, const QString& diffOptions,
                          const QString& format)
 {
     if( !d->hasWorkingCopy() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // create a cvs job
     CvsJob* job = d->createCvsJob();
@@ -487,14 +486,14 @@ DCOPRef CvsService::diff(const QString& fileName, const QString& revA,
     *job << KProcess::quote(fileName);
 
     // return a DCOP reference to the cvs job
-    return DCOPRef(d->appId, job->objId());
+    return QDBusObjectPath(d->appId, job->objId());
 }
 
 
-DCOPRef CvsService::edit(const QStringList& files)
+QDBusObjectPath CvsService::edit(const QStringList& files)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // assemble the command line
     // cvs edit [FILES]
@@ -507,10 +506,10 @@ DCOPRef CvsService::edit(const QStringList& files)
 }
 
 
-DCOPRef CvsService::editors(const QStringList& files)
+QDBusObjectPath CvsService::editors(const QStringList& files)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // assemble the command line
     // cvs editors [FILES]
@@ -523,10 +522,10 @@ DCOPRef CvsService::editors(const QStringList& files)
 }
 
 
-DCOPRef CvsService::history()
+QDBusObjectPath CvsService::history()
 {
     if( !d->hasWorkingCopy() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // create a cvs job
     CvsJob* job = d->createCvsJob();
@@ -536,17 +535,17 @@ DCOPRef CvsService::history()
     *job << d->repository->cvsClient() << "history -e -a";
 
     // return a DCOP reference to the cvs job
-    return DCOPRef(d->appId, job->objId());
+    return QDBusObjectPath(d->appId, job->objId());
 }
 
 
-DCOPRef CvsService::import(const QString& workingDir, const QString& repository,
+QDBusObjectPath CvsService::import(const QString& workingDir, const QString& repository,
                            const QString& module, const QString& ignoreList,
                            const QString& comment, const QString& vendorTag,
                            const QString& releaseTag, bool importAsBinary)
 {
     if( d->hasRunningJob() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     Repository repo(repository);
 
@@ -576,14 +575,14 @@ DCOPRef CvsService::import(const QString& workingDir, const QString& repository,
 }
 
 
-DCOPRef CvsService::import(const QString& workingDir, const QString& repository,
+QDBusObjectPath CvsService::import(const QString& workingDir, const QString& repository,
                            const QString& module, const QString& ignoreList,
                            const QString& comment, const QString& vendorTag,
                            const QString& releaseTag, bool importAsBinary,
                            bool useModificationTime)
 {
     if( d->hasRunningJob() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     Repository repo(repository);
 
@@ -616,10 +615,10 @@ DCOPRef CvsService::import(const QString& workingDir, const QString& repository,
 }
 
 
-DCOPRef CvsService::lock(const QStringList& files)
+QDBusObjectPath CvsService::lock(const QStringList& files)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // assemble the command line
     // cvs admin -l [FILES]
@@ -632,10 +631,10 @@ DCOPRef CvsService::lock(const QStringList& files)
 }
 
 
-DCOPRef CvsService::log(const QString& fileName)
+QDBusObjectPath CvsService::log(const QString& fileName)
 {
     if( !d->hasWorkingCopy() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // create a cvs job
     CvsJob* job = d->createCvsJob();
@@ -645,14 +644,14 @@ DCOPRef CvsService::log(const QString& fileName)
     *job << d->repository->cvsClient() << "log" << KProcess::quote(fileName);
 
     // return a DCOP reference to the cvs job
-    return DCOPRef(d->appId, job->objId());
+    return QDBusObjectPath(d->appId, job->objId());
 }
 
 
-DCOPRef CvsService::login(const QString& repository)
+QDBusObjectPath CvsService::login(const QString& repository)
 {
     if( repository.isEmpty() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     Repository repo(repository);
 
@@ -671,14 +670,14 @@ DCOPRef CvsService::login(const QString& repository)
     job->setRepository(repository.toLocal8Bit());
 
     // return a DCOP reference to the cvs job
-    return DCOPRef(d->appId, job->objId());
+    return QDBusObjectPath(d->appId, job->objId());
 }
 
 
-DCOPRef CvsService::logout(const QString& repository)
+QDBusObjectPath CvsService::logout(const QString& repository)
 {
     if( repository.isEmpty() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     Repository repo(repository);
 
@@ -697,20 +696,20 @@ DCOPRef CvsService::logout(const QString& repository)
     *job << repo.cvsClient() << "-d" << repository << "logout";
 
     // return a DCOP reference to the cvs job
-    return DCOPRef(d->appId, job->objId());
+    return QDBusObjectPath(d->appId, job->objId());
 }
 
 
-DCOPRef CvsService::makePatch()
+QDBusObjectPath CvsService::makePatch()
 {
     return makePatch("", "-u");
 }
 
 
-DCOPRef CvsService::makePatch(const QString& diffOptions, const QString& format)
+QDBusObjectPath CvsService::makePatch(const QString& diffOptions, const QString& format)
 {
     if( !d->hasWorkingCopy() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // create a cvs job
     CvsJob* job = d->createCvsJob();
@@ -721,11 +720,11 @@ DCOPRef CvsService::makePatch(const QString& diffOptions, const QString& format)
          << "2>/dev/null";
 
     // return a DCOP reference to the cvs job
-    return DCOPRef(d->appId, job->objId());
+    return QDBusObjectPath(d->appId, job->objId());
 }
 
 
-DCOPRef CvsService::moduleList(const QString& repository)
+QDBusObjectPath CvsService::moduleList(const QString& repository)
 {
     Repository repo(repository);
 
@@ -744,14 +743,14 @@ DCOPRef CvsService::moduleList(const QString& repository)
     *job << repo.cvsClient() << "-d" << repository << "checkout -c";
 
     // return a DCOP reference to the cvs job
-    return DCOPRef(d->appId, job->objId());
+    return QDBusObjectPath(d->appId, job->objId());
 }
 
 
-DCOPRef CvsService::remove(const QStringList& files, bool recursive)
+QDBusObjectPath CvsService::remove(const QStringList& files, bool recursive)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // assemble the command line
     // cvs remove -f [-l] [FILES]
@@ -768,10 +767,10 @@ DCOPRef CvsService::remove(const QStringList& files, bool recursive)
 }
 
 
-DCOPRef CvsService::removeWatch(const QStringList& files, int events)
+QDBusObjectPath CvsService::removeWatch(const QStringList& files, int events)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // assemble the command line
     d->singleCvsJob->clearCvsCommand();
@@ -794,7 +793,7 @@ DCOPRef CvsService::removeWatch(const QStringList& files, int events)
 }
 
 
-DCOPRef CvsService::rlog(const QString& repository, const QString& module, 
+QDBusObjectPath CvsService::rlog(const QString& repository, const QString& module, 
                          bool recursive)
 {
     Repository repo(repository);
@@ -818,15 +817,15 @@ DCOPRef CvsService::rlog(const QString& repository, const QString& module,
     *job << module;
 
     // return a DCOP reference to the cvs job
-    return DCOPRef(d->appId, job->objId());
+    return QDBusObjectPath(d->appId, job->objId());
 }
 
 
-DCOPRef CvsService::simulateUpdate(const QStringList& files, bool recursive,
+QDBusObjectPath CvsService::simulateUpdate(const QStringList& files, bool recursive,
                                    bool createDirs, bool pruneDirs)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // assemble the command line
     // cvs -n update [-l] [-d] [-P] [FILES]
@@ -849,10 +848,10 @@ DCOPRef CvsService::simulateUpdate(const QStringList& files, bool recursive,
 }
 
 
-DCOPRef CvsService::status(const QStringList& files, bool recursive, bool tagInfo)
+QDBusObjectPath CvsService::status(const QStringList& files, bool recursive, bool tagInfo)
 {
     if( !d->hasWorkingCopy() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // create a cvs job
     CvsJob* job = d->createCvsJob();
@@ -870,14 +869,14 @@ DCOPRef CvsService::status(const QStringList& files, bool recursive, bool tagInf
     *job << CvsServiceUtils::joinFileList(files);
 
     // return a DCOP reference to the cvs job
-    return DCOPRef(d->appId, job->objId());
+    return QDBusObjectPath(d->appId, job->objId());
 }
 
 
-DCOPRef CvsService::unedit(const QStringList& files)
+QDBusObjectPath CvsService::unedit(const QStringList& files)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // assemble the command line
     // echo y | cvs unedit [FILES]
@@ -891,10 +890,10 @@ DCOPRef CvsService::unedit(const QStringList& files)
 }
 
 
-DCOPRef CvsService::unlock(const QStringList& files)
+QDBusObjectPath CvsService::unlock(const QStringList& files)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // assemble the command line
     // cvs admin -u [FILES]
@@ -907,11 +906,11 @@ DCOPRef CvsService::unlock(const QStringList& files)
 }
 
 
-DCOPRef CvsService::update(const QStringList& files, bool recursive,
+QDBusObjectPath CvsService::update(const QStringList& files, bool recursive,
                            bool createDirs, bool pruneDirs, const QString& extraOpt)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // assemble the command line
     // cvs update [-l] [-d] [-P] [EXTRAOPTIONS] [FILES]
@@ -935,10 +934,10 @@ DCOPRef CvsService::update(const QStringList& files, bool recursive,
 }
 
 
-DCOPRef CvsService::watchers(const QStringList& files)
+QDBusObjectPath CvsService::watchers(const QStringList& files)
 {
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
-        return DCOPRef();
+        return QDBusObjectPath();
 
     // assemble the command line
     // cvs watchers [FILES]
@@ -973,7 +972,7 @@ CvsJob* CvsService::Private::createCvsJob()
 }
 
 
-DCOPRef CvsService::Private::setupNonConcurrentJob(Repository* repo)
+QDBusObjectPath CvsService::Private::setupNonConcurrentJob(Repository* repo)
 {
     // no explicit repository provided?
     if( !repo )

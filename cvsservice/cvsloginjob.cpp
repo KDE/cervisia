@@ -27,6 +27,7 @@
 #include <sys/types.h>
 #include <signal.h>
 #include <q3cstring.h>
+#include <cvsloginjobadaptor.h>
 
 static const char LOGIN_PHRASE[]   = "Logging in to";
 static const char FAILURE_PHRASE[] = "authorization failed:";
@@ -36,7 +37,7 @@ static const char PASS_PHRASE[]    = "CVS password: ";
 CvsLoginJob::CvsLoginJob(unsigned jobNum)
     : m_Proc(0)
 {
-    (void) new CvsLoginJobAdaptor(); 
+    new CvsloginjobAdaptor(this); 
     QString objId("/CvsLoginJob" + QString::number(jobNum));
     QDBusConnection::sessionBus().registerObject(objId, this);
     m_Proc = new PtyProcess;
@@ -106,6 +107,8 @@ bool CvsLoginJob::execute()
         // process asks for the password
         if( line.contains(PASS_PHRASE) )
         {
+#warning "kde4 port it"		
+#if 0		
             kDebug(8051) << "process waits for the password." << endl;
 
             // show password dialog
@@ -142,9 +145,9 @@ bool CvsLoginJob::execute()
                 m_Proc->waitForChild();
                 result = false;
             }
+#endif	    
         }
     }
-
     return false;
 }
 

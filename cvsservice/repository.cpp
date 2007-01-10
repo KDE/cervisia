@@ -33,8 +33,8 @@
 #include <kglobal.h>
 
 #include "sshagent.h"
-
-
+#include <QDBusConnection>
+#include <repositoryadaptor.h>
 struct Repository::Private
 {
     Private() : compressionLevel(0) {}
@@ -61,7 +61,7 @@ Repository::Repository()
     , d(new Private)
 {
     d->readGeneralConfig();
-    (void) new RepositoryAdaptor(this );
+    new RepositoryAdaptor(this );
     QDBusConnection::sessionBus().registerObject("/CvsRepository", this);
 
 
@@ -83,7 +83,7 @@ Repository::Repository(const QString& repository)
     d->readGeneralConfig();
     d->readConfig();
     //TODO verify it before : DCOPObject()
-    (void) new RepositoryAdaptor(this );
+    new RepositoryAdaptor(this );
     QDBusConnection::sessionBus().registerObject("/CvsRepository", this);
 
     // other cvsservice instances might change the configuration file
