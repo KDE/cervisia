@@ -25,7 +25,7 @@
 #include <kdialog.h>
 
 class QCheckBox;
-class KConfig;
+class KConfigBase;
 class KIntNumInput;
 class KLineEdit;
 
@@ -35,7 +35,7 @@ class AddRepositoryDialog : public KDialog
     Q_OBJECT
 
 public:
-    AddRepositoryDialog(KConfig& cfg, const QString& repo, QWidget* parent = 0,
+    AddRepositoryDialog(KConfigBase& cfg, const QString& repo, QWidget* parent = 0,
                          const char* name = 0);
     virtual ~AddRepositoryDialog();
 
@@ -62,7 +62,7 @@ private:
     QCheckBox*    m_useDifferentCompression;
     QCheckBox*    m_retrieveCvsignoreFile;
     KIntNumInput* m_compressionLevel;
-    KConfig&      partConfig;
+    KConfigBase&  partConfig;
 };
 
 #endif

@@ -22,7 +22,6 @@
 
 #include <qtextbrowser.h>
 
-class KConfig;
 class KFind;
 
 namespace Cervisia

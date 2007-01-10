@@ -24,7 +24,6 @@
 //Added by qt3to4:
 #include <QVBoxLayout>
 #include <QBoxLayout>
-#include <kconfig.h>
 #include <klineedit.h>
 #include <klocale.h>
 
@@ -33,7 +32,7 @@
 #include "progressdlg.h"
 
 
-WatchersDialog::WatchersDialog(KConfig& cfg, QWidget* parent, const char* name)
+WatchersDialog::WatchersDialog(KConfigBase& cfg, QWidget* parent, const char* name)
     : KDialog(parent)
     , partConfig(cfg)
 {

@@ -25,7 +25,7 @@
 #include <q3popupmenu.h>
 #include <qtextdocument.h>
 #include <dcopref.h>
-#include <kconfig.h>
+#include <kconfigbase.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 
@@ -43,7 +43,7 @@ ProtocolView::ProtocolView(const DCOPCString& appId, QWidget *parent, const char
     setTabChangesFocus(true);
     setTextFormat(Qt::LogText);
 
-    KConfig *config = CervisiaPart::config();
+    KConfigBase *config = CervisiaPart::config();
     config->setGroup("LookAndFeel");
     setFont(config->readEntry("ProtocolFont",QFont()));
 

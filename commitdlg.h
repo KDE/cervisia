@@ -31,7 +31,6 @@ class QComboBox;
 class QCheckBox;
 class Q3ListViewItem;
 class K3ListView;
-class KConfig;
 class CvsService_stub;
 
 
@@ -40,7 +39,7 @@ class CommitDialog : public KDialog
     Q_OBJECT
 
 public:
-    CommitDialog( KConfig& cfg, CvsService_stub* service, QWidget *parent=0, 
+    CommitDialog( KConfigBase& cfg, CvsService_stub* service, QWidget *parent=0, 
                   const char *name=0 );
 
     virtual ~CommitDialog();
@@ -75,7 +74,7 @@ private:
     QCheckBox* m_useTemplateChk;
     QString    m_templateText;
 
-    KConfig&            partConfig;
+    KConfigBase&        partConfig;
     CvsService_stub*    cvsService;     // for diff dialog
 };
 

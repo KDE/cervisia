@@ -29,7 +29,6 @@
 #include <qfileinfo.h>
 #include <qregexp.h>
 #include <qstringlist.h>
-#include <kconfig.h>
 #include <kemailsettings.h>
 #include <klocale.h>
 #include <kmessagebox.h>

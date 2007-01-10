@@ -31,7 +31,7 @@
 class QLabel;
 class QCheckBox;
 class QComboBox;
-class KConfig;
+class KConfigBase;
 class DiffItem;
 class DiffView;
 class CvsService_stub;
@@ -43,7 +43,7 @@ class DiffDialog : public KDialog
 
 public:
 
-    explicit DiffDialog( KConfig& config, QWidget *parent=0, const char *name=0, 
+    explicit DiffDialog( KConfigBase& config, QWidget *parent=0, const char *name=0,
                          bool modal=false );
 
     virtual ~DiffDialog();
@@ -78,7 +78,7 @@ private:
 
     Q3PtrList<DiffItem> items;
     int markeditem;
-    KConfig& partConfig;
+    KConfigBase& partConfig;
     QStringList m_diffOutput;
 };
 

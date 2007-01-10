@@ -34,7 +34,6 @@
 #include <QHBoxLayout>
 #include <QBoxLayout>
 #include <QVBoxLayout>
-#include <kconfig.h>
 #include <kfiledialog.h>
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -48,7 +47,7 @@
 #include "diffview.h"
 
 
-DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool modal)
+DiffDialog::DiffDialog(KConfigBase& cfg, QWidget *parent, const char *name, bool modal)
     : KDialog(parent)
     , partConfig(cfg)
 {

@@ -31,7 +31,6 @@
 #include <q3textedit.h>
 #include <qtextstream.h>
 
-#include <kconfig.h>
 #include <kdebug.h>
 #include <kfiledialog.h>
 #include <kfinddialog.h>
@@ -58,7 +57,7 @@
 #include "patchoptiondlg.h"
 
 
-LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
+LogDialog::LogDialog(KConfigBase& cfg, QWidget *parent, const char *name)
     : KDialog(parent)
     , cvsService(0)
     , partConfig(cfg)

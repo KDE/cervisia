@@ -26,7 +26,6 @@
 class QString;
 class QStringList;
 class QWidget;
-class KConfig;
 class CvsService_stub;
 
 

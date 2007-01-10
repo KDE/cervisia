@@ -27,7 +27,7 @@
 
 class QCheckBox;
 class QComboBox;
-class KConfig;
+class KConfigBase;
 class KLineEdit;
 class CvsService_stub;
 
@@ -39,7 +39,7 @@ class CheckoutDialog : public KDialog
 public:
     enum ActionType { Checkout, Import };
     
-    CheckoutDialog( KConfig& cfg, CvsService_stub* service, ActionType action,
+    CheckoutDialog( KConfigBase& cfg, CvsService_stub* service, ActionType action,
                     QWidget *parent=0, const char *name=0 );
 
     QString workingDirectory() const;
@@ -76,7 +76,7 @@ private:
     QCheckBox *binary_box, *export_box, *recursive_box;
     QCheckBox* m_useModificationTimeBox;
     ActionType act;
-    KConfig&   partConfig;
+    KConfigBase& partConfig;
 
     CvsService_stub *cvsService;
 };

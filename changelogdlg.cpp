@@ -25,7 +25,6 @@
 
 #include <qfile.h>
 #include <qtextstream.h>
-#include <kconfig.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -42,7 +41,7 @@ static inline QString DateStringISO8601()
 ChangeLogDialog::Options *ChangeLogDialog::options = 0;
 
 
-ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent, const char *name)
+ChangeLogDialog::ChangeLogDialog(KConfigBase& cfg, QWidget *parent, const char *name)
     : KDialog(parent)
     , partConfig(cfg)
 {

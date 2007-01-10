@@ -27,7 +27,7 @@
 
 class AnnotateView;
 class QDate;
-class KConfig;
+class KConfigBase;
 
 namespace Cervisia
 {
@@ -39,7 +39,7 @@ class AnnotateDialog : public KDialog
 {
 public:
 
-    explicit AnnotateDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
+    explicit AnnotateDialog( KConfigBase& cfg, QWidget *parent=0, const char *name=0 );
 
     virtual ~AnnotateDialog();
 
@@ -48,7 +48,7 @@ public:
 
 private:
     AnnotateView *annotate;
-    KConfig&      partConfig;
+    KConfigBase&  partConfig;
 };
 
 #endif

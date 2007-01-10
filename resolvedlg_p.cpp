@@ -17,12 +17,13 @@
  */
 
 #include "resolvedlg_p.h"
-using namespace Cervisia;
 
 #include <ktextedit.h>
 
+using namespace Cervisia;
 
-ResolveEditorDialog::ResolveEditorDialog(KConfig& cfg, QWidget *parent, const char *name)
+
+ResolveEditorDialog::ResolveEditorDialog(KConfigBase& cfg, QWidget *parent, const char *name)
     : KDialog(parent)
     , m_partConfig(cfg)
 {

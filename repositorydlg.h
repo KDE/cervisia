@@ -27,7 +27,6 @@
 
 class Q3ListViewItem;
 class QPushButton;
-class KConfig;
 class K3ListView;
 class CvsService_stub;
 class RepositoryListItem;
@@ -38,7 +37,7 @@ class RepositoryDialog : public KDialog
     Q_OBJECT
 
 public:
-    RepositoryDialog(KConfig& cfg, CvsService_stub* cvsService,
+    RepositoryDialog(KConfigBase& cfg, CvsService_stub* cvsService,
                      QWidget* parent = 0, const char* name = 0);
     virtual ~RepositoryDialog();
 
@@ -61,9 +60,9 @@ private:
     void writeRepositoryData(RepositoryListItem* item);
 
 private:
-    KConfig&         m_partConfig;
+    KConfigBase&     m_partConfig;
     CvsService_stub* m_cvsService;
-    KConfig*         m_serviceConfig;
+    KConfigBase*     m_serviceConfig;
     K3ListView*       m_repoList;
     QPushButton*     m_modifyButton;
     QPushButton*     m_removeButton;

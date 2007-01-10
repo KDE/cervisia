@@ -30,7 +30,6 @@
 #include <QVBoxLayout>
 #include <QGridLayout>
 #include <QBoxLayout>
-#include <kconfig.h>
 #include <klineedit.h>
 #include <k3listview.h>
 #include <klocale.h>
@@ -129,7 +128,7 @@ bool HistoryItem::isOther()
 }
 
 
-HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
+HistoryDialog::HistoryDialog(KConfigBase& cfg, QWidget *parent, const char *name)
     : KDialog(parent)
     , partConfig(cfg)
 {

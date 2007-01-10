@@ -32,7 +32,6 @@
 #include <dcopref.h>
 #include <kanimatedbutton.h>
 #include <kapplication.h>
-#include <kconfig.h>
 
 #include "cervisiasettings.h"
 

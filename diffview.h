@@ -28,7 +28,7 @@
 #include <q3ptrlist.h>
 
 
-class KConfig;
+class KConfigBase;
 class DiffViewItem;
 
 
@@ -46,7 +46,7 @@ class DiffView : public QtTableView
 public:
     enum DiffType { Change, Insert, Delete, Neutral, Unchanged, Separator };
 
-    DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
+    DiffView( KConfigBase& cfg, bool withlinenos, bool withmarker,
               QWidget *parent=0, const char *name=0 );
 
     void setPartner(DiffView *other);
@@ -97,7 +97,7 @@ private:
     QColor diffDeleteColor;
 
     int m_tabWidth;
-    KConfig& partConfig;
+    KConfigBase& partConfig;
 };
 
 
@@ -106,7 +106,7 @@ class DiffZoomWidget : public QFrame
     Q_OBJECT
 
 public:
-    DiffZoomWidget(KConfig& cfg, QWidget *parent=0, const char *name=0);
+    DiffZoomWidget(KConfigBase& cfg, QWidget *parent=0, const char *name=0);
     ~DiffZoomWidget();
 
     void setDiffView(DiffView *view);

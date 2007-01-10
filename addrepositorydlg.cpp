@@ -29,13 +29,12 @@
 #include <QVBoxLayout>
 #include <QBoxLayout>
 
-#include <kconfig.h>
 #include <klineedit.h>
 #include <klocale.h>
 #include <knuminput.h>
 
 
-AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo, 
+AddRepositoryDialog::AddRepositoryDialog(KConfigBase& cfg, const QString& repo,
                                          QWidget* parent, const char* name)
     : KDialog(parent)
     , partConfig(cfg)

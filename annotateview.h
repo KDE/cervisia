@@ -25,7 +25,7 @@
 #include <q3listview.h>
 
 
-class KConfig;
+class KConfigBase;
 
 
 namespace Cervisia
@@ -40,7 +40,7 @@ class AnnotateView : public Q3ListView
 
 public:
 
-    explicit AnnotateView( KConfig &cfg, QWidget *parent=0, const char *name=0 );
+    explicit AnnotateView( KConfigBase &cfg, QWidget *parent=0, const char *name=0 );
 
     void addLine(const Cervisia::LogInfo& logInfo, const QString& content,
                  bool odd);

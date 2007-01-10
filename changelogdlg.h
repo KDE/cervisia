@@ -25,13 +25,13 @@
 #include <kdialog.h>
 
 class KTextEdit;
-class KConfig;
+class KConfigBase;
 
 
 class ChangeLogDialog : public KDialog
 {
 public:
-    explicit ChangeLogDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
+    explicit ChangeLogDialog( KConfigBase& cfg, QWidget *parent=0, const char *name=0 );
 
     virtual ~ChangeLogDialog();
 
@@ -49,7 +49,7 @@ private:
 
     QString fname;
     KTextEdit *edit;
-    KConfig&   partConfig;
+    KConfigBase& partConfig;
 };
 
 #endif

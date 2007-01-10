@@ -23,7 +23,7 @@
 
 class KTextEdit;
 class QStringList;
-class KConfig;
+class KConfigBase;
 
 
 namespace Cervisia
@@ -33,7 +33,7 @@ namespace Cervisia
 class ResolveEditorDialog : public KDialog
 {
 public:
-    explicit ResolveEditorDialog(KConfig& cfg, QWidget* parent=0, const char* name=0);
+    explicit ResolveEditorDialog(KConfigBase& cfg, QWidget* parent=0, const char* name=0);
     virtual ~ResolveEditorDialog();
 
     void setContent(const QString& text);
@@ -41,7 +41,7 @@ public:
 
 private:   
     KTextEdit* m_edit;
-    KConfig&   m_partConfig;
+    KConfigBase& m_partConfig;
 };  
 
 

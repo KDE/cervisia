@@ -34,8 +34,6 @@ class LogListView;
 class LogTreeView;
 class LogPlainView;
 
-class KConfig;
-
 class QComboBox;
 class QLabel;
 class QTabWidget;
@@ -56,7 +54,7 @@ class LogDialog : public KDialog
     Q_OBJECT
 
 public:
-    explicit LogDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
+    explicit LogDialog( KConfigBase& cfg, QWidget *parent=0, const char *name=0 );
 
     virtual ~LogDialog();
 
@@ -96,7 +94,7 @@ private:
     QComboBox *tagcombo[2];
 
     CvsService_stub* cvsService;
-    KConfig&         partConfig;
+    KConfigBase&     partConfig;
 };
 
 #endif
