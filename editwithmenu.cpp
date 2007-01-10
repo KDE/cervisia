@@ -32,7 +32,7 @@ EditWithMenu::EditWithMenu(const KUrl& url, QWidget* parent)
     , m_menu(0)
     , m_url(url)
 {
-    KMimeType::Ptr type = KMimeType::findByURL(url, 0, true);
+    KMimeType::Ptr type = KMimeType::findByUrl(url, 0, true);
     if( type->name() == KMimeType::defaultMimeType() )
     {
         kDebug() << "Couldn't find mime type!" << endl;
