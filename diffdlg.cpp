@@ -130,19 +130,17 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool mod
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 
-    restoreDialogSize(&partConfig);
-
-    KConfigGroup cs(&partConfig, "DiffDialog");
-    syncbox->setChecked(cs.readEntry("Sync",false));
+    KConfigGroup cg(&partConfig, "DiffDialog");
+    syncbox->setChecked(cg.readEntry("Sync",false));
+    restoreDialogSize(&cg);
 }
 
 
 DiffDialog::~DiffDialog()
 {
-    saveDialogSize(&partConfig);
-
-    KConfigGroup cs(&partConfig, "DiffDialog");
-    cs.writeEntry("Sync", syncbox->isChecked());
+    KConfigGroup cg(&partConfig, "DiffDialog");
+    cg.writeEntry("Sync", syncbox->isChecked());
+    saveDialogSize(&cg);
 }
 
 

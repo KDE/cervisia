@@ -40,14 +40,15 @@ ResolveEditorDialog::ResolveEditorDialog(KConfig& cfg, QWidget *parent, const ch
     setMinimumSize(fm.width('0') * 120,
                    fm.lineSpacing() * 40);
 
-    QSize size = configDialogSize(m_partConfig, "ResolveEditDialog");
-    resize(size);
+    KConfigGroup cg(&m_partConfig, "ResolveEditorDialog");
+    restoreDialogSize(&cg);
 }
 
 
 ResolveEditorDialog::~ResolveEditorDialog()
 {
-    saveDialogSize(m_partConfig, "ResolveEditDialog");
+    KConfigGroup cg(&m_partConfig, "ResolveEditorDialog");
+    saveDialogSize(&cg);
 }
 
 

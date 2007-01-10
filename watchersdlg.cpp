@@ -68,14 +68,15 @@ WatchersDialog::WatchersDialog(KConfig& cfg, QWidget* parent, const char* name)
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 
-    QSize size = configDialogSize(partConfig, "WatchersDialog");
-    resize(size);
+    KConfigGroup cg(&partConfig, "WatchersDialog");
+    restoreDialogSize(&cg);
 }
 
 
 WatchersDialog::~WatchersDialog()
 {
-    saveDialogSize(partConfig, "WatchersDialog");
+    KConfigGroup cg(&partConfig, "WatchersDialog");
+    saveDialogSize(&cg);
 }
 
 

@@ -235,8 +235,8 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, CvsService_stub* cvsService,
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 
-    QSize size = configDialogSize(m_partConfig, "RepositoryDialog");
-    resize(size);
+    KConfigGroup cg(&m_partConfig, "RepositoryDialog");
+    restoreDialogSize(&cg);
 
     // without this restoreLayout() can't change the column widths
     for (int i = 0; i < m_repoList->columns(); ++i)
@@ -248,7 +248,8 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, CvsService_stub* cvsService,
 
 RepositoryDialog::~RepositoryDialog()
 {
-    saveDialogSize(m_partConfig, "RepositoryDialog");
+    KConfigGroup cg(&m_partConfig, "RepositoryDialog");
+    saveDialogSize(&cg);
 
     m_repoList->saveLayout(&m_partConfig, QLatin1String("RepositoryListView"));
 

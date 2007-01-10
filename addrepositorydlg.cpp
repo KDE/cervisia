@@ -97,14 +97,15 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
              this, SLOT(compressionToggled(bool)) );
     repoChanged();
 
-    QSize size = configDialogSize(partConfig, "AddRepositoryDialog");
-    resize(size);
+    KConfigGroup cg(&partConfig, "AddRepositoryDialog");
+    restoreDialogSize(&cg);
 }
 
 
 AddRepositoryDialog::~AddRepositoryDialog()
 {
-    saveDialogSize(partConfig, "AddRepositoryDialog");
+    KConfigGroup cg(&partConfig, "AddRepositoryDialog");
+    saveDialogSize(&cg);
 }
 
 

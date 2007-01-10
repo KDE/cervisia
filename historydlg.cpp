@@ -235,8 +235,8 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 
-    QSize size = configDialogSize(partConfig, "HistoryDialog");
-    resize(size);
+    KConfigGroup cg(&partConfig, "HistoryDialog");
+    restoreDialogSize(&cg);
 
     // without this restoreLayout() can't change the column widths
     for (int i = 0; i < listview->columns(); ++i)
@@ -248,7 +248,8 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
 
 HistoryDialog::~HistoryDialog()
 {
-    saveDialogSize(partConfig, "HistoryDialog");
+    KConfigGroup cg(&partConfig, "HistoryDialog");
+    saveDialogSize(&cg);
 
     listview->saveLayout(&partConfig, QLatin1String("HistoryListView"));
 }

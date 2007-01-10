@@ -121,17 +121,16 @@ CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service,
 
     setHelp("commitingfiles");
 
-    QSize size = configDialogSize(partConfig, "CommitDialog");
-    resize(size);
+    KConfigGroup cg(&partConfig, "CommitDialog");
+    restoreDialogSize(&cg);
 }
 
 
 CommitDialog::~CommitDialog()
 {
-    saveDialogSize(partConfig, "CommitDialog");
-
-    KConfigGroup cs(&partConfig, "CommitDialog");
-    cs.writeEntry("UseTemplate", m_useTemplateChk->isChecked());
+    KConfigGroup cg(&partConfig, "CommitDialog");
+    cg.writeEntry("UseTemplate", m_useTemplateChk->isChecked());
+    saveDialogSize(&cg);
 }
 
 

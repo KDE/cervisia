@@ -27,10 +27,10 @@ AnnotateDialog::AnnotateDialog(KConfig& cfg, QWidget *parent, const char *name)
     : KDialog(parent)
     , partConfig(cfg)
 {
-	setButtons(Close | Help);
-	setDefaultButton(Close);
-	setModal(false);
-	showButtonSeparator(true);
+    setButtons(Close | Help);
+    setDefaultButton(Close);
+    showButtonSeparator(true);
+
     annotate = new AnnotateView(partConfig, this);
     setMainWidget(annotate);
 
@@ -38,14 +38,15 @@ AnnotateDialog::AnnotateDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 
-    //QSize size = configDialogSize(partConfig, "AnnotateDialog");
-    //resize(size);
+    KConfigGroup cg(&partConfig, "AnnotateDialog");
+    restoreDialogSize(&cg);
 }
 
 
 AnnotateDialog::~AnnotateDialog()
 {
-    //saveDialogSize(partConfig, "AnnotateDialog");
+    KConfigGroup cg(&partConfig, "AnnotateDialog");
+    saveDialogSize(&cg);
 }
 
 

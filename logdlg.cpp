@@ -206,11 +206,9 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 
-    QSize size = configDialogSize(partConfig, "LogDialog");
-    resize(size);
-
-    KConfigGroup cs(&partConfig, "LogDialog");
-    tabWidget->setCurrentPage(cs.readEntry("ShowTab", 0));
+    KConfigGroup cg(&partConfig, "LogDialog");
+    tabWidget->setCurrentPage(cg.readEntry("ShowTab", 0));
+    restoreDialogSize(&cg);
 
     updateButtons();
 }
@@ -218,10 +216,9 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
 
 LogDialog::~LogDialog()
 {
-    saveDialogSize(partConfig, "LogDialog");
-
-    KConfigGroup cs(&partConfig, "LogDialog");
-    cs.writeEntry("ShowTab", tabWidget->currentPageIndex());
+    KConfigGroup cg(&partConfig, "LogDialog");
+    cg.writeEntry("ShowTab", tabWidget->currentPageIndex());
+    saveDialogSize(&cg);
 }
 
 

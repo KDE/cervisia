@@ -67,14 +67,15 @@ ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent, const char *name
 
     setMainWidget(edit);
 
-    QSize size = configDialogSize(partConfig, "ChangeLogDialog");
-    resize(size);
+    KConfigGroup cg(&partConfig, "ChangeLogDialog");
+    restoreDialogSize(&cg);
 }
 
 
 ChangeLogDialog::~ChangeLogDialog()
 {
-    saveDialogSize(partConfig, "ChangeLogDialog");
+    KConfigGroup cg(&partConfig, "ChangeLogDialog");
+    saveDialogSize(&cg);
 }
 
 
