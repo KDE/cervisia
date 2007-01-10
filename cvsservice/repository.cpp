@@ -58,10 +58,12 @@ struct Repository::Private
 
 Repository::Repository()
     : QObject()
-    , DCOPObject("CvsRepository")
     , d(new Private)
 {
     d->readGeneralConfig();
+    (void) new RepositoryAdaptor(this );
+    QDBusConnection::sessionBus().registerObject("/CvsRepository", this);
+
 
     // other cvsservice instances might change the configuration file
     // so we watch it for changes
@@ -75,12 +77,14 @@ Repository::Repository()
 
 Repository::Repository(const QString& repository)
     : QObject()
-    , DCOPObject()
     , d(new Private)
 {
     d->location = repository;
     d->readGeneralConfig();
     d->readConfig();
+    //TODO verify it before : DCOPObject()
+    (void) new RepositoryAdaptor(this );
+    QDBusConnection::sessionBus().registerObject("/CvsRepository", this);
 
     // other cvsservice instances might change the configuration file
     // so we watch it for changes

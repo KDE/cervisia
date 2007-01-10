@@ -37,7 +37,7 @@
 #include "cvsserviceutils.h"
 #include "repository.h"
 #include "sshagent.h"
-
+#include "CvsServiceadaptor.h"
 
 static const char SINGLE_JOB_ID[]   = "NonConcurrentJob";
 static const char REDIRECT_STDERR[] = "2>&1";
@@ -59,7 +59,7 @@ struct CvsService::Private
     Q3IntDict<CvsLoginJob> loginJobs;
     unsigned              lastJobId;
 
-    DCOPCString           appId;          // cache the DCOP clients app id
+    //DCOPCString           appId;          // cache the DCOP clients app id
 
     Repository*           repository;
 
@@ -72,11 +72,13 @@ struct CvsService::Private
 
 
 CvsService::CvsService()
-    : DCOPObject("CvsService")
-    , d(new Private)
+    : d(new Private)
 {
-    d->appId = kapp->dcopClient()->appId();
+    //d->appId = kapp->dcopClient()->appId();
 
+    (void) new CvsServiceAdaptor(this );
+    QDBusConnection::sessionBus().registerObject("/CvsService", this);
+ 
     // create non-concurrent cvs job
     d->singleCvsJob = new CvsJob(SINGLE_JOB_ID);
     d->singleJobRef.setRef(d->appId, d->singleCvsJob->objId());

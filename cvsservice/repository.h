@@ -35,8 +35,6 @@ class QString;
 class KDE_EXPORT Repository : public QObject
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.cervisia.repository")
-
 public:
     Repository();
     explicit Repository(const QString& repository);

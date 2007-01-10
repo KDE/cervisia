@@ -53,9 +53,8 @@ CvsJob::CvsJob(unsigned jobNum)
     : QObject()
     , d(new Private)
 {
-	QDBus::sessionBus().registerObject("/CvsJob"+QString::number(jobNum), this, QDBusConnection::ExportSlots);
-	//QString objId("CvsJob" + QString::number(jobNum));
-    //setObjId(objId.toLocal8Bit());
+    (void) new CvsJobAdaptor();
+    QDBus::sessionBus().registerObject("/CvsJob"+QString::number(jobNum), this, QDBusConnection::ExportSlots);
 }
 
 
@@ -63,8 +62,9 @@ CvsJob::CvsJob(const QString& objId)
     : QObject()
     , d(new Private)
 {
-	QDBus::sessionBus().registerObject('/'+objId, this, QDBusConnection::ExportSlots);
-    //setObjId(objId.toLocal8Bit());
+    (void) new CvsJobAdaptor();
+    //TODO register it with good name
+    QDBus::sessionBus().registerObject('/'+objId, this, QDBusConnection::ExportSlots);
 }
 
 

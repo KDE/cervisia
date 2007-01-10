@@ -35,8 +35,6 @@ class KProcess;
 class KDE_EXPORT CvsJob : public QObject
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.cervisia.cvsservice.cvsjob")
-
 public:
     explicit CvsJob(unsigned jobNum);
     explicit CvsJob(const QString& objId);

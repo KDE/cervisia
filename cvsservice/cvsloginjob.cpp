@@ -34,12 +34,11 @@ static const char PASS_PHRASE[]    = "CVS password: ";
 
 
 CvsLoginJob::CvsLoginJob(unsigned jobNum)
-    : DCOPObject()
-    , m_Proc(0)
+    : m_Proc(0)
 {
-    QString objId("CvsLoginJob" + QString::number(jobNum));
-    setObjId(objId.toLocal8Bit());
-
+    (void) new CvsLoginJobAdaptor(); 
+    QString objId("/CvsLoginJob" + QString::number(jobNum));
+    QDBusConnection::sessionBus().registerObject(objId, this);
     m_Proc = new PtyProcess;
 }
 
