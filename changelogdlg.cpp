@@ -43,10 +43,15 @@ ChangeLogDialog::Options *ChangeLogDialog::options = 0;
 
 
 ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent, const char *name)
-    : KDialogBase(parent, name, true, i18n("Edit ChangeLog"),
-                  Ok | Cancel, Ok, true)
+    : KDialog(parent)
     , partConfig(cfg)
 {
+    setCaption(i18n("Edit ChangeLog"));
+    setModal(true);
+    setButtons(Ok | Cancel);
+    setDefaultButton(Ok);
+    showButtonSeparator(true);
+
     edit = new KTextEdit(this);
 
     cfg.setGroup("LookAndFeel");
@@ -89,7 +94,7 @@ void ChangeLogDialog::slotOk()
     stream << edit->text();
     f.close();
 
-    KDialogBase::slotOk();
+    KDialog::slotOk();
 }
 
 

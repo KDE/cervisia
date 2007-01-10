@@ -39,10 +39,15 @@
 
 UpdateDialog::UpdateDialog(CvsService_stub* service,
                            QWidget *parent, const char *name)
-    : KDialogBase(parent, name, true, i18n("CVS Update"),
-                  Ok | Cancel, Ok, true),
+    : KDialog(parent),
       cvsService(service)
 {
+    setCaption(i18n("CVS Update"));
+    setModal(true);
+    setButtons(Ok | Cancel);
+    setDefaultButton(Ok);
+    showButtonSeparator(true);
+
     int const iComboBoxMinWidth(40 * fontMetrics().width('0'));
     int const iWidgetIndent(style()->pixelMetric(QStyle::PM_ExclusiveIndicatorWidth) + 6);
 

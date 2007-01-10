@@ -58,11 +58,17 @@ private:
 
 CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service,
                            QWidget *parent, const char *name)
-    : KDialogBase(parent, name, true, i18n("CVS Commit"),
-                  Ok | Cancel | Help | User1, Ok, true)
+    : KDialog(parent)
     , partConfig(cfg)
     , cvsService(service)
 {
+    setCaption(i18n("CVS Commit"));
+    setModal(true);
+    setButtons(Ok | Cancel | Help | User1);
+    setButtonGuiItem(User1, KGuiItem(i18n("&Diff"), "vcs_diff"));
+    setDefaultButton(Ok);
+    showButtonSeparator(true);
+
     QFrame* mainWidget = makeMainWidget();
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
@@ -109,7 +115,6 @@ CommitDialog::CommitDialog(KConfig& cfg, CvsService_stub* service,
 
     checkForTemplateFile();
 
-    setButtonGuiItem(User1, KGuiItem(i18n("&Diff"), "vcs_diff"));
     enableButton(User1, false);
     connect( this, SIGNAL(user1Clicked()),
              this, SLOT(diffClicked()) );

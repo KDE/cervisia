@@ -22,14 +22,14 @@
 #define WATCHDLG_H
 
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 
 class QRadioButton;
 class QCheckBox;
 
 
-class WatchDialog : public KDialogBase
+class WatchDialog : public KDialog
 {
 public:
     enum ActionType { Add, Remove };

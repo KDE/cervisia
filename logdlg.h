@@ -21,7 +21,7 @@
 #ifndef LOGDLG_H
 #define LOGDLG_H
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 #include "loginfo.h"
 
@@ -51,7 +51,7 @@ public:
 };
 
 
-class LogDialog : public KDialogBase
+class LogDialog : public KDialog
 {
     Q_OBJECT
 

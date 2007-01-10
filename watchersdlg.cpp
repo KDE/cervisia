@@ -34,10 +34,12 @@
 
 
 WatchersDialog::WatchersDialog(KConfig& cfg, QWidget* parent, const char* name)
-    : KDialogBase(parent, name, false, QString::null,
-                  Close, ButtonCode(0), true)
+    : KDialog(parent)
     , partConfig(cfg)
 {
+    setButtons(Close);
+    showButtonSeparator(true);
+
     QFrame* mainWidget = makeMainWidget();
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);

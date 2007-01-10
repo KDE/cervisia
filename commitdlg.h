@@ -23,7 +23,7 @@
 #define COMMITDLG_H
 
 #include <qstringlist.h>
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 namespace Cervisia { class LogMessageEdit; }
 
@@ -35,7 +35,7 @@ class KConfig;
 class CvsService_stub;
 
 
-class CommitDialog : public KDialogBase
+class CommitDialog : public KDialog
 {
     Q_OBJECT
 

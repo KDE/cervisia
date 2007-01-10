@@ -22,7 +22,7 @@
 #define UPDATEDLG_H
 
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 
 class QComboBox;
@@ -32,7 +32,7 @@ class KLineEdit;
 class CvsService_stub;
 
 
-class UpdateDialog : public KDialogBase
+class UpdateDialog : public KDialog
 {
     Q_OBJECT
 

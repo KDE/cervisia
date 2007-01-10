@@ -158,11 +158,16 @@ void RepositoryListItem::changeLoginStatusColumn()
 
 RepositoryDialog::RepositoryDialog(KConfig& cfg, CvsService_stub* cvsService,
                                    QWidget* parent, const char* name)
-    : KDialogBase(parent, name, true, i18n("Configure Access to Repositories"),
-                  Ok | Cancel | Help, Ok, true)
+    : KDialog(parent)
     , m_partConfig(cfg)
     , m_cvsService(cvsService)
 {
+    setCaption(i18n("Configure Access to Repositories"));
+    setModal(true);
+    setButtons(Ok | Cancel | Help);
+    setDefaultButton(Ok);
+    showButtonSeparator(true);
+
     QFrame* mainWidget = makeMainWidget();
 
     QBoxLayout* hbox = new QHBoxLayout(mainWidget);
@@ -322,7 +327,7 @@ void RepositoryDialog::slotOk()
     // write to disk so other services can reparse the configuration
     m_serviceConfig->sync();
 
-    KDialogBase::slotOk();
+    KDialog::slotOk();
 }
 
 

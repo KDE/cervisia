@@ -23,7 +23,7 @@
 #define RESOLVEDLG_H
 
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 #include <q3ptrlist.h>
 //Added by qt3to4:
@@ -38,7 +38,7 @@ class KConfig;
 class ResolveItem;
 
 
-class ResolveDialog : public KDialogBase
+class ResolveDialog : public KDialog
 {
     Q_OBJECT
 

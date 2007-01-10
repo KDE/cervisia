@@ -50,13 +50,16 @@ using Cervisia::IsValidTag;
 CheckoutDialog::CheckoutDialog(KConfig& cfg, CvsService_stub* service,
                                ActionType action, QWidget* parent,
                                const char* name)
-    : KDialogBase(parent, name, true, QString::null,
-                  Ok | Cancel | Help, Ok, true)
+    : KDialog(parent)
     , act(action)
     , partConfig(cfg)
     , cvsService(service)
 {
     setCaption( (action==Checkout)? i18n("CVS Checkout") : i18n("CVS Import") );
+    setModal(true);
+    setButtons(Ok | Cancel | Help);
+    setDefaultButton(Ok);
+    showButtonSeparator(true);
 
     QFrame* mainWidget = makeMainWidget();
 
@@ -338,7 +341,7 @@ void CheckoutDialog::slotOk()
 
     saveUserInput();
 
-    KDialogBase::slotOk();
+    KDialog::slotOk();
 }
 
 

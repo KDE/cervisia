@@ -20,7 +20,7 @@
 #ifndef CERVISIA_CVSINITDLG_H
 #define CERVISIA_CVSINITDLG_H
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 class KLineEdit;
 
@@ -29,7 +29,7 @@ namespace Cervisia
 {
 
 
-class CvsInitDialog : public KDialogBase
+class CvsInitDialog : public KDialog
 {
     Q_OBJECT
 

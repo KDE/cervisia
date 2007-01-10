@@ -59,14 +59,17 @@
 
 
 LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
-    : KDialogBase(parent, name, false, QString::null,
-                  Ok | Apply | Close | Help | User1 | User2 | User3, Close, true,
-                  KGuiItem(i18n("&Annotate")),
-                  KGuiItem(i18n("&Diff"), "vcs_diff"),
-                  KGuiItem(i18n("&Find..."), "find"))
+    : KDialog(parent)
     , cvsService(0)
     , partConfig(cfg)
 {
+    setButtons(Ok | Apply | Close | Help | User1 | User2 | User3);
+    setButtonGuiItem(User1, KGuiItem(i18n("&Annotate")));
+    setButtonGuiItem(User2, KGuiItem(i18n("&Diff"), "vcs_diff"));
+    setButtonGuiItem(User3, KGuiItem(i18n("&Find"), "find"));
+    setDefaultButton(Close);
+    showButtonSeparator(true);
+
     QFrame* mainWidget = makeMainWidget();
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
@@ -455,7 +458,7 @@ void LogDialog::slotApply()
     }
 
     Cervisia::PatchOptionDialog optionDlg;
-    if( optionDlg.exec() == KDialogBase::Rejected )
+    if( optionDlg.exec() == KDialog::Rejected )
         return;
 
     QString format      = optionDlg.formatOption();
@@ -498,7 +501,7 @@ void LogDialog::slotApply()
 void LogDialog::findClicked()
 {
     KFindDialog dlg(this);
-    if( dlg.exec() == KDialogBase::Accepted )
+    if( dlg.exec() == KDialog::Accepted )
         plain->searchText(dlg.options(), dlg.pattern());
 }
 

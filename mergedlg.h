@@ -22,7 +22,7 @@
 #define MERGEDLG_H
 
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 
 class QComboBox;
@@ -31,7 +31,7 @@ class QRadioButton;
 class CvsService_stub;
 
 
-class MergeDialog : public KDialogBase
+class MergeDialog : public KDialog
 {
     Q_OBJECT
 

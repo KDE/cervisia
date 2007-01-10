@@ -1289,7 +1289,7 @@ void CervisiaPart::slotShowEditors()
 void CervisiaPart::slotMakePatch()
 {
     Cervisia::PatchOptionDialog optionDlg;
-    if( optionDlg.exec() == KDialogBase::Rejected )
+    if( optionDlg.exec() == KDialog::Rejected )
         return;
     
     QString format      = optionDlg.formatOption();

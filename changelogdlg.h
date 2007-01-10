@@ -22,13 +22,13 @@
 #ifndef CHANGELOGDLG_H
 #define CHANGELOGDLG_H
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 class KTextEdit;
 class KConfig;
 
 
-class ChangeLogDialog : public KDialogBase
+class ChangeLogDialog : public KDialog
 {
 public:
     explicit ChangeLogDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );

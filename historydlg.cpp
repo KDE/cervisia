@@ -130,10 +130,12 @@ bool HistoryItem::isOther()
 
 
 HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
-    : KDialogBase(parent, name, false, QString::null,
-                  Close | Help, ButtonCode(0), true)
+    : KDialog(parent)
     , partConfig(cfg)
 {
+    setButtons(Close | Help);
+    showButtonSeparator(true);
+
     QFrame* mainWidget = makeMainWidget();
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);

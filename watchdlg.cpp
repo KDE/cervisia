@@ -33,10 +33,13 @@
 
 
 WatchDialog::WatchDialog(ActionType action, QWidget *parent, const char *name)
-    : KDialogBase(parent, name, true, QString::null,
-                  Ok | Cancel | Help, Ok, true)
+    : KDialog(parent)
 {
     setCaption( (action==Add)? i18n("CVS Watch Add") : i18n("CVS Watch Remove") );
+    setModal(true);
+    setButtons(Ok | Cancel | Help);
+    setDefaultButton(Ok);
+    showButtonSeparator(true);
 
     QFrame* mainWidget = makeMainWidget();
 

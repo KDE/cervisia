@@ -22,7 +22,7 @@
 #define CHECKOUTDLG_H
 
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 
 class QCheckBox;
@@ -32,7 +32,7 @@ class KLineEdit;
 class CvsService_stub;
 
 
-class CheckoutDialog : public KDialogBase
+class CheckoutDialog : public KDialog
 {
     Q_OBJECT
 

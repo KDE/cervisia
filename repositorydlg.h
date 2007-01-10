@@ -22,7 +22,7 @@
 #ifndef REPOSITORYDLG_H
 #define REPOSITORYDLG_H
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 
 class Q3ListViewItem;
@@ -33,7 +33,7 @@ class CvsService_stub;
 class RepositoryListItem;
 
 
-class RepositoryDialog : public KDialogBase
+class RepositoryDialog : public KDialog
 {
     Q_OBJECT
 

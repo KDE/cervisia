@@ -40,10 +40,15 @@
 
 MergeDialog::MergeDialog(CvsService_stub* service,
                          QWidget *parent, const char *name)
-    : KDialogBase(parent, name, true, i18n("CVS Merge"),
-                  Ok | Cancel, Ok, true),
+    : KDialog(parent),
       cvsService(service)
 {
+    setCaption(i18n("CVS Merge"));
+    setModal(true);
+    setButtons(Ok | Cancel);
+    setDefaultButton(Ok);
+    showButtonSeparator(true);
+
     int const iComboBoxMinWidth(30 * fontMetrics().width('0'));
     int const iWidgetIndent(style()->pixelMetric(QStyle::PM_ExclusiveIndicatorWidth) + 6);
 

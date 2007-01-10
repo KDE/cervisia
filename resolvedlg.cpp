@@ -102,12 +102,16 @@ private:
 
 
 ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent, const char *name)
-    : KDialogBase(parent, name, false, QString::null,
-                  Close | Help | User1 | User2, Close, true,
-                  KStandardGuiItem::saveAs(), KStandardGuiItem::save())
+    : KDialog(parent)
     , markeditem(-1)
     , partConfig(cfg)
 {
+    setButtons(Close | Help | User1 | User2);
+    setButtonGuiItem(User1, KStandardGuiItem::saveAs());
+    setButtonGuiItem(User2, KStandardGuiItem::save());
+    setDefaultButton(Close);
+    showButtonSeparator(true);
+
     items.setAutoDelete(true);
 
     QFrame* mainWidget = makeMainWidget();
@@ -607,7 +611,7 @@ void ResolveDialog::keyPressEvent(QKeyEvent *e)
         case Qt::Key_Up:   diff1->up();   break;
         case Qt::Key_Down: diff1->down(); break;
         default:
-            KDialogBase::keyPressEvent(e);
+            KDialog::keyPressEvent(e);
     }
 }
 

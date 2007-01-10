@@ -22,7 +22,7 @@
 #ifndef ADDREPOSITORYDLG_H
 #define ADDREPOSITORYDLG_H
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 class QCheckBox;
 class KConfig;
@@ -30,7 +30,7 @@ class KIntNumInput;
 class KLineEdit;
 
 
-class AddRepositoryDialog : public KDialogBase
+class AddRepositoryDialog : public KDialog
 {
     Q_OBJECT
 

@@ -23,10 +23,14 @@ using namespace Cervisia;
 
 
 ResolveEditorDialog::ResolveEditorDialog(KConfig& cfg, QWidget *parent, const char *name)
-    : KDialogBase(parent, name, true, QString::null,
-                  Ok | Cancel, Ok, true)
+    : KDialog(parent)
     , m_partConfig(cfg)
 {
+    setModal(true);
+    setButtons(Ok | Cancel);
+    setDefaultButton(Ok);
+    showButtonSeparator(true);
+
     m_edit = new KTextEdit(this);
     m_edit->setFocus();
 

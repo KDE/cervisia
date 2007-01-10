@@ -81,11 +81,13 @@ void FontButton::chooseFont()
 
 
 SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name )
-    : KDialogBase(KDialogBase::IconList, i18n("Configure Cervisia"),
-      KDialogBase::Ok | KDialogBase::Cancel | KDialogBase::Help,
-      KDialogBase::Ok,
-      parent, name, true)
+    : KDialog(IconList, parent)
 {
+    setCaption(i18n("Configure Cervisia"));
+    setButtons(Ok | Cancel | Help);
+    setDefaultButton(Ok);
+    showButtonSeparator(true);
+
     config = conf;
 
     // open cvs DCOP service configuration file
@@ -227,7 +229,7 @@ void SettingsDialog::done(int res)
 {
     if (res == Accepted)
         writeSettings();
-    KDialogBase::done(res);
+    KDialog::done(res);
     delete this;
 }
 

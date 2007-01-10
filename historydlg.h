@@ -22,7 +22,7 @@
 #define HISTORYDLG_H
 
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 
 class QCheckBox;
@@ -32,7 +32,7 @@ class K3ListView;
 class CvsService_stub;
 
 
-class HistoryDialog : public KDialogBase
+class HistoryDialog : public KDialog
 {
     Q_OBJECT
 

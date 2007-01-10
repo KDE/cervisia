@@ -21,14 +21,14 @@
 #define WATCHERSDLG_H
 
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 class Q3Table;
 class KConfig;
 class CvsService_stub;
 
 
-class WatchersDialog : public KDialogBase
+class WatchersDialog : public KDialog
 {
 public:
     explicit WatchersDialog(KConfig& cfg, QWidget* parent = 0,

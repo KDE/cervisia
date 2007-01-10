@@ -37,10 +37,15 @@
 
 AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo, 
                                          QWidget* parent, const char* name)
-    : KDialogBase(parent, name, true, i18n("Add Repository"),
-                  Ok | Cancel, Ok, true)
+    : KDialog(parent)
     , partConfig(cfg)
 {
+    setCaption(i18n("Add Repository"));
+    setModal(true);
+    setButtons(Ok | Cancel);
+    setDefaultButton(Ok);
+    showButtonSeparator(true);
+
     QFrame* mainWidget = makeMainWidget();
 
     QBoxLayout* layout = new QVBoxLayout(mainWidget);

@@ -19,7 +19,7 @@
 #ifndef CERVISIA_RESOLVEEDITORDIALOG_H
 #define CERVISIA_RESOLVEEDITORDIALOG_H
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 class KTextEdit;
 class QStringList;
@@ -30,7 +30,7 @@ namespace Cervisia
 {
 
 
-class ResolveEditorDialog : public KDialogBase
+class ResolveEditorDialog : public KDialog
 {
 public:
     explicit ResolveEditorDialog(KConfig& cfg, QWidget* parent=0, const char* name=0);

@@ -36,9 +36,14 @@ using Cervisia::CvsInitDialog;
 
 
 CvsInitDialog::CvsInitDialog(QWidget* parent, const char* name)
-    : KDialogBase(parent, name, true, i18n("Create New Repository (cvs init)"),
-                  Ok | Cancel, Ok, true)
+    : KDialog(parent)
 {
+    setCaption(i18n("Create New Repository (cvs init)"));
+    setModal(true);
+    setButtons(Ok | Cancel);
+    setDefaultButton(Ok);
+    showButtonSeparator(true);
+
     QFrame* mainWidget = makeMainWidget();
     QVBoxLayout* mainLayout = new QVBoxLayout(mainWidget);
     mainLayout->setSpacing(spacingHint());

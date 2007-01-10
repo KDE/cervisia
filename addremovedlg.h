@@ -23,14 +23,14 @@
 #define ADDREMOVEDLG_H
 
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 
 class Q3ListBox;
 class QStringList;
 
 
-class AddRemoveDialog : public KDialogBase
+class AddRemoveDialog : public KDialog
 {
 public:
     enum ActionType { Add, AddBinary, Remove };
