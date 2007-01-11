@@ -66,14 +66,15 @@ UpdateView::UpdateView(KConfigBase& partConfig, QWidget *parent, const char *nam
     // without this restoreLayout() can't change the column widths
     for (int col = 0; col < columns(); ++col)
         setColumnWidthMode(col, Q3ListView::Manual);
-
-    restoreLayout(&m_partConfig, QLatin1String("UpdateView"));
+#warning "kde4: reactivate it"
+    //restoreLayout(&m_partConfig, QLatin1String("UpdateView"));
 }
 
 
 UpdateView::~UpdateView()
 {
-    saveLayout(&m_partConfig, QLatin1String("UpdateView"));
+#warning "kde4: reactivate it"	
+    //saveLayout(&m_partConfig, QLatin1String("UpdateView"));
 }
 
 

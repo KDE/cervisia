@@ -36,7 +36,7 @@
 
 
 CervisiaShell::CervisiaShell( const char *name )
-  : KParts::MainWindow( name )
+  : KParts::MainWindow( 0L,name )
   , m_part(0)
 {
     setXMLFile( "cervisiashellui.rc" );
@@ -97,7 +97,7 @@ void CervisiaShell::setupActions()
 {
     setStandardToolBarMenuEnabled( true );
 
-    KAction *action = KStandardAction::configureToolbars( this, SLOT(slotConfigureToolBars()),
+    QAction *action = KStandardAction::configureToolbars( this, SLOT(slotConfigureToolBars()),
                                             actionCollection() );
     QString hint = i18n("Allows you to configure the toolbar");
     action->setToolTip( hint );
@@ -142,13 +142,13 @@ void CervisiaShell::setupActions()
 void CervisiaShell::openURL()
 {
     if( !m_lastOpenDir.isEmpty() )
-        m_part->openURL(KUrl::fromPathOrUrl(m_lastOpenDir));
+        m_part->openUrl(KUrl::fromPathOrUrl(m_lastOpenDir));
 }
 
 
 void CervisiaShell::openURL(const KUrl& url)
 {
-    m_part->openURL(url);
+    m_part->openUrl(url);
 }
 
 

@@ -44,21 +44,21 @@ static OrgKdeCervisiaCvsserviceCvsserviceInterface* StartDCOPService(const QStri
 {
     // start the cvs DCOP service
     QString error;
-    QByteArray appId;
     if( KToolInvocation::startServiceByDesktopName("cvsservice", QStringList(),
-                                                &error, &appId) )
+                                                &error)  )
     {
         std::cerr << "Starting cvsservice failed with message: "
                   << error.latin1() << std::endl;
         exit(1);
     }
-
+#if 0
     QDBusReply<QDBusObjectPath> repository(appId, "CvsRepository");
 
     repository.call("setWorkingCopy(QString)", directory);
 
     // create a reference to the service
     return new OrgKdeCervisiaCvsserviceCvsserviceInterface(appId, "CvsService");
+#endif
 }
 
 

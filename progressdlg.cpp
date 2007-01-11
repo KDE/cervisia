@@ -68,8 +68,8 @@ ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,
     d->isShown     = false;
     d->hasError    = false;
 
-    QDBusObjectPath path = jobPath.path();
-    d->cvsJob      = new OrgKdeCervisiaCvsserviceCvsjobInterface("org.kde.cervisia",path,QDBusConnection::sessionBus(), this);
+    QDBusObjectPath path = jobPath;
+    d->cvsJob      = new OrgKdeCervisiaCvsserviceCvsjobInterface("org.kde.cervisia",path.path(),QDBusConnection::sessionBus(), this);
     d->buffer      = "";
 
     d->errorId1 = "cvs " + errorIndicator + ':';
@@ -88,7 +88,8 @@ ProgressDialog::~ProgressDialog()
 
 void ProgressDialog::setupGui(const QString& heading)
 {
-    KVBox* vbox = makeVBoxMainWidget();
+    KVBox* vbox = new KVBox(this);
+    setMainWidget(vbox);
     vbox->setSpacing(10);
 
     QWidget* headingBox = new QWidget(vbox);
@@ -119,7 +120,7 @@ bool ProgressDialog::execute()
     // get command line and display it
     QString cmdLine = d->cvsJob->cvsCommand();
     d->resultbox->insertItem(cmdLine);
-
+#if 0
     // establish connections to the signals of the cvs job
     connectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "jobExited(bool, int)",
                       "slotJobExited(bool, int)", true);
@@ -127,7 +128,7 @@ bool ProgressDialog::execute()
                       "slotReceivedOutputNonGui(QString)", true);
     connectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "receivedStderr(QString)",
                       "slotReceivedOutputNonGui(QString)", true);
-
+#endif
     // we wait for 4 seconds (or the timeout set by the user) before we
     // force the dialog to show up
     d->timer = new QTimer(this);
@@ -229,12 +230,12 @@ void ProgressDialog::slotTimeoutOccurred()
 void ProgressDialog::stopNonGuiPart()
 {
     d->timer->stop();
-
+#if 0
     disconnectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "receivedStdout(QString)",
                       "slotReceivedOutputNonGui(QString)");
     disconnectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "receivedStderr(QString)",
                       "slotReceivedOutputNonGui(QString)");
-
+#endif
     kapp->exit_loop();
 }
 
