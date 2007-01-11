@@ -64,8 +64,8 @@ set(cervisiapart_PART_SRCS ${libcervisia_SRCS}
    protocolview.cpp 
    watchdlg.cpp 
    changelogdlg.cpp 
-   historydlg.cpp 
-   repositorydlg.cpp 
+   #historydlg.cpp 
+   #repositorydlg.cpp 
    commitdlg.cpp 
    checkoutdlg.cpp 
    updatedlg.cpp 

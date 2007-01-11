@@ -135,7 +135,8 @@ HistoryDialog::HistoryDialog(KConfigBase& cfg, QWidget *parent, const char *name
     setButtons(Close | Help);
     showButtonSeparator(true);
 
-    QFrame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = new QFrame(this);
+    setMainWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
     layout->setSpacing(spacingHint());

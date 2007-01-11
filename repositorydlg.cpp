@@ -168,7 +168,8 @@ RepositoryDialog::RepositoryDialog(KConfigBase& cfg, OrgKdeCervisiaCvsserviceCvs
     setDefaultButton(Ok);
     showButtonSeparator(true);
 
-    QFrame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = new QFrame(this);
+    setMainWidget(mainWidget);
 
     QBoxLayout* hbox = new QHBoxLayout(mainWidget);
     hbox->setSpacing(spacingHint());
@@ -243,6 +244,7 @@ RepositoryDialog::RepositoryDialog(KConfigBase& cfg, OrgKdeCervisiaCvsserviceCvs
         m_repoList->setColumnWidthMode(i, Q3ListView::Manual);
 
     m_repoList->restoreLayout(&m_partConfig, QLatin1String("RepositoryListView"));
+    connect(this,SIGNAL(okClicked()),this,SLOT(slotOk()));
 }
 
 
@@ -328,7 +330,7 @@ void RepositoryDialog::slotOk()
     // write to disk so other services can reparse the configuration
     m_serviceConfig->sync();
 
-    KDialog::slotOk();
+    KDialog::accept();
 }
 
 

@@ -41,7 +41,8 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent, const char *name)
     setDefaultButton(Ok);
     showButtonSeparator(true);
 
-    QFrame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = new QFrame(this);
+    setMainWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
     layout->setSpacing(spacingHint());

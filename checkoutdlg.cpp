@@ -61,7 +61,8 @@ CheckoutDialog::CheckoutDialog(KConfigBase& cfg, OrgKdeCervisiaCvsserviceCvsserv
     setDefaultButton(Ok);
     showButtonSeparator(true);
 
-    QFrame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = new QFrame(this);
+    setMainWidget(mainWidget);
 
     QBoxLayout* layout = new QVBoxLayout(mainWidget);
     layout->setSpacing(spacingHint());
@@ -221,6 +222,7 @@ CheckoutDialog::CheckoutDialog(KConfigBase& cfg, OrgKdeCervisiaCvsserviceCvsserv
     setHelp((act == Import) ? "importing" : "checkingout");
 
     restoreUserInput();
+    connect(this,SIGNAL(okClicked()),this,SLOT(slotOk()));
 }
 
 
@@ -341,7 +343,7 @@ void CheckoutDialog::slotOk()
 
     saveUserInput();
 
-    KDialog::slotOk();
+    KDialog::accept();
 }
 
 

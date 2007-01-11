@@ -32,7 +32,7 @@
 #include "cvsjobinterface.h"
 
 
-ProtocolView::ProtocolView(const DCOPCString& appId, QWidget *parent, const char *name)
+ProtocolView::ProtocolView(/*const DCOPCString& appId,*/ QWidget *parent, const char *name)
     : Q3TextEdit(parent, name)
     , job(0)
     , m_isUpdateJob(false)
@@ -50,10 +50,10 @@ ProtocolView::ProtocolView(const DCOPCString& appId, QWidget *parent, const char
     conflictColor=config->readEntry("Conflict", QColor(255, 130, 130));
     localChangeColor=config->readEntry("LocalChange", QColor(130, 130, 255));
     remoteChangeColor=config->readEntry("RemoteChange", QColor(70, 210, 70));
-
+#warning "kde4: port it"
+#if 0
     // create a DCOP stub for the non-concurrent cvs job
     job = new OrgKdeCervisiaCvsserviceCvsjobInterface(appId, "NonConcurrentJob");
-
     // establish connections to the signals of the cvs job
     connectDCOPSignal(job->app(), job->obj(), "jobExited(bool, int)",
                       "slotJobExited(bool, int)", true);
@@ -61,6 +61,7 @@ ProtocolView::ProtocolView(const DCOPCString& appId, QWidget *parent, const char
                       "slotReceivedOutput(QString)", true);
     connectDCOPSignal(job->app(), job->obj(), "receivedStderr(QString)",
                       "slotReceivedOutput(QString)", true);
+#endif
 }
 
 

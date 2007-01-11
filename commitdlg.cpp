@@ -68,7 +68,8 @@ CommitDialog::CommitDialog(KConfigBase& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
     setDefaultButton(Ok);
     showButtonSeparator(true);
 
-    QFrame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = new QFrame(this);
+    setMainWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
     layout->setSpacing(spacingHint());

@@ -200,6 +200,8 @@ LogDialog::LogDialog(KConfigBase& cfg, QWidget *parent, const char *name)
     connect( this, SIGNAL(user3Clicked()),
              this, SLOT(findClicked()) );
 
+    connect(this,SIGNAL(okClicked()),
+		    this, SLOT(okClicked()));
     setButtonGuiItem(Ok, KGuiItem(i18nc("to view something", "&View"),"fileopen"));
     setButtonGuiItem(Apply, KGuiItem(i18n("Create Patch...")));
     setHelp("browsinglogs");

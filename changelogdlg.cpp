@@ -68,6 +68,7 @@ ChangeLogDialog::ChangeLogDialog(KConfigBase& cfg, QWidget *parent, const char *
 
     KConfigGroup cg(&partConfig, "ChangeLogDialog");
     restoreDialogSize(&cg);
+    connect(this,SIGNAL(okClicked()),this,SLOT(slotOk()));
 }
 
 
@@ -94,7 +95,7 @@ void ChangeLogDialog::slotOk()
     stream << edit->text();
     f.close();
 
-    KDialog::slotOk();
+    KDialog::accept();
 }
 
 
@@ -106,7 +107,6 @@ bool ChangeLogDialog::readFile(const QString &filename)
         {
             if (KMessageBox::warningContinueCancel(this,
                                          i18n("A ChangeLog file does not exist. Create one?"),
-                                         "Cervisia",
                                          i18n("Create")) != KMessageBox::Continue)
                 return false;
         }
