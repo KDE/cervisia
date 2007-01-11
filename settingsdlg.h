@@ -29,6 +29,7 @@
 class QCheckBox;
 class KIntNumInput;
 class KLineEdit;
+class KConfig;
 class KColorButton;
 class KUrlRequester;
 class AdvancedPage;
@@ -51,7 +52,7 @@ class SettingsDialog : public KDialog
     Q_OBJECT
 
 public:
-    explicit SettingsDialog( KConfigBase *conf, QWidget *parent=0, const char *name=0 );
+    SettingsDialog( KConfig *conf, QWidget *parent=0, const char *name=0 );
     virtual ~SettingsDialog();
 
 protected slots:
@@ -67,7 +68,7 @@ private:
     void addAdvancedPage();
     void addLookAndFeelPage();
 
-    KConfigBase *config;
+    KConfig *config;
     KIntNumInput *contextedit;
     KIntNumInput *tabwidthedit;
     KUrlRequester *cvspathedit;
@@ -92,7 +93,7 @@ private:
     QCheckBox*    m_splitterBox;
     AdvancedPage* m_advancedPage;
 
-    KConfigBase* serviceConfig;
+    KConfig* serviceConfig;
 };
 
 #endif

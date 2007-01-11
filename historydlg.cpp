@@ -27,6 +27,7 @@
 #include <qregexp.h>
 #include <kglobal.h>
 #include <kpushbutton.h>
+#include <kconfig.h>
 #include <klineedit.h>
 #include <k3listview.h>
 #include <klocale.h>
@@ -125,7 +126,7 @@ bool HistoryItem::isOther()
 }
 
 
-HistoryDialog::HistoryDialog(KConfigBase& cfg, QWidget *parent, const char *name)
+HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
     : KDialog(parent)
     , partConfig(cfg)
 {

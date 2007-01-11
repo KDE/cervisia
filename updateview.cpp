@@ -27,7 +27,7 @@
 #include <q3ptrstack.h>
 //Added by qt3to4:
 #include <Q3PtrList>
-#include <kconfigbase.h>
+#include <kconfig.h>
 #include <klocale.h>
 
 #include "cervisiasettings.h"
@@ -40,7 +40,7 @@ using Cervisia::Entry;
 using Cervisia::EntryStatus;
 
 
-UpdateView::UpdateView(KConfigBase& partConfig, QWidget *parent, const char *name)
+UpdateView::UpdateView(KConfig& partConfig, QWidget *parent, const char *name)
     : K3ListView(parent),
       m_partConfig(partConfig),
       m_unfoldingTree(false)

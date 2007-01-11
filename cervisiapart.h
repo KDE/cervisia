@@ -63,7 +63,7 @@ public:
     /**
      * Get the config object for the part's instance.
      */
-    static KConfigBase *config();
+    static KConfig *config();
 
     QString sandBox() const { return sandbox; }
 

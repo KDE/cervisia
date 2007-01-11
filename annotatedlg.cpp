@@ -22,8 +22,10 @@
 
 #include "annotateview.h"
 
+#include <kconfig.h>
 
-AnnotateDialog::AnnotateDialog(KConfigBase& cfg, QWidget *parent, const char *name)
+
+AnnotateDialog::AnnotateDialog(KConfig& cfg, QWidget *parent, const char *name)
     : KDialog(parent)
     , partConfig(cfg)
 {

@@ -28,7 +28,8 @@
 #include <qstyle.h>
 #include <qstyleoption.h>
 
-#include <kconfigbase.h>
+#include <kapplication.h>
+#include <kconfig.h>
 #include <kdebug.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
@@ -54,7 +55,7 @@ int DiffViewItemList::compareItems(Q3PtrCollection::Item item1, Q3PtrCollection:
 const int DiffView::BORDER = 7;
 
 
-DiffView::DiffView( KConfigBase& cfg, bool withlinenos, bool withmarker,
+DiffView::DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
                     QWidget *parent, const char *name )
     : QtTableView(parent, name, Qt::WNoAutoErase)
     , partConfig(cfg)
@@ -386,7 +387,7 @@ void DiffView::wheelEvent(QWheelEvent *e)
 }
 
 
-DiffZoomWidget::DiffZoomWidget(KConfigBase& cfg, QWidget *parent, const char *name)
+DiffZoomWidget::DiffZoomWidget(KConfig& cfg, QWidget *parent, const char *name)
     : QFrame(parent, name)
 {
     setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Minimum ) );

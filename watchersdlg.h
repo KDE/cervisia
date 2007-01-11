@@ -24,14 +24,14 @@
 #include <kdialog.h>
 
 class Q3Table;
-class KConfigBase;
+class KConfig;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 
 
 class WatchersDialog : public KDialog
 {
 public:
-    explicit WatchersDialog(KConfigBase& cfg, QWidget* parent = 0,
+    explicit WatchersDialog(KConfig& cfg, QWidget* parent = 0,
                             const char* name = 0);
     virtual ~WatchersDialog();
 
@@ -39,7 +39,7 @@ public:
 
 private:
     Q3Table*  table;
-    KConfigBase& partConfig;
+    KConfig& partConfig;
 };
 
 #endif

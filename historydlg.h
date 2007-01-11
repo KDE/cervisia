@@ -26,6 +26,7 @@
 
 
 class QCheckBox;
+class KConfig;
 class KLineEdit;
 class K3ListView;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
@@ -36,7 +37,7 @@ class HistoryDialog : public KDialog
     Q_OBJECT
 
 public:
-    explicit HistoryDialog( KConfigBase& cfg, QWidget *parent=0, const char *name=0 );
+    explicit HistoryDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
     virtual ~HistoryDialog();
 
     bool parseHistory(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService);
@@ -50,7 +51,7 @@ private:
     QCheckBox *commit_box, *checkout_box, *tag_box, *other_box;
     QCheckBox *onlyuser_box, *onlyfilenames_box, *onlydirnames_box;
     KLineEdit *user_edit, *filename_edit, *dirname_edit;
-    KConfigBase& partConfig;
+    KConfig& partConfig;
 };
 
 #endif

@@ -28,7 +28,7 @@
 #include <QKeyEvent>
 
 
-class KConfigBase;
+class KConfig;
 
 class TipLabel;
 class LogListViewItem;
@@ -44,7 +44,7 @@ class LogListView : public K3ListView
     Q_OBJECT
     
 public:
-    explicit LogListView( KConfigBase& cfg, QWidget *parent=0, const char *name=0 );
+    explicit LogListView( KConfig& cfg, QWidget *parent=0, const char *name=0 );
     virtual ~LogListView();
     
     void addRevision(const Cervisia::LogInfo& logInfo);
@@ -63,7 +63,7 @@ private slots:
 
 private:
 
-    KConfigBase& partConfig;
+    KConfig& partConfig;
 };
 
 #endif

@@ -110,7 +110,7 @@ int LogListViewItem::compare(Q3ListViewItem* i, int col, bool ascending) const
 }
 
 
-LogListView::LogListView(KConfigBase& cfg, QWidget *parent, const char *name)
+LogListView::LogListView(KConfig& cfg, QWidget *parent, const char *name)
     : K3ListView(parent)
     , partConfig(cfg)
 {

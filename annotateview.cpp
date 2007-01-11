@@ -21,7 +21,7 @@
 
 #include <q3header.h>
 #include <qpainter.h>
-#include <kconfigbase.h>
+#include <kconfig.h>
 #include <kglobalsettings.h>
 
 #include "loginfo.h"
@@ -140,7 +140,7 @@ int AnnotateViewItem::width(const QFontMetrics &fm, const Q3ListView *, int col)
   caused by a bug in QHeader::adjustHeaderSize() in Qt <= 3.0.4.
 */
 
-AnnotateView::AnnotateView(KConfigBase &cfg, QWidget *parent, const char *name)
+AnnotateView::AnnotateView(KConfig &cfg, QWidget *parent, const char *name)
     : Q3ListView(parent, name, Qt::WNoAutoErase | Qt::WResizeNoErase)
 {
     setFrameStyle(QFrame::WinPanel | QFrame::Sunken);

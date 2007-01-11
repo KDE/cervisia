@@ -127,7 +127,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
       cvsService = new OrgKdeCervisiaCvsserviceCvsserviceInterface(appId, "CvsService");
 
     // Create UI
-    KConfigBase *conf = config();
+    KConfig *conf = config();
     conf->setGroup("LookAndFeel");
     bool splitHorz = conf->readEntry("SplitHorizontally",true);
 
@@ -182,7 +182,7 @@ CervisiaPart::~CervisiaPart()
         writeSettings();
 }
 
-KConfigBase *CervisiaPart::config()
+KConfig *CervisiaPart::config()
 {
     return CervisiaFactory::instance()->config();
 }
@@ -959,7 +959,7 @@ void CervisiaPart::slotCommit()
             while (recentCommits.count() > 50)
                 recentCommits.remove( recentCommits.last() );
 
-            KConfigBase* conf = config();
+            KConfig* conf = config();
             conf->setGroup( "CommitLogs" );
             conf->writeEntry( sandbox, recentCommits, COMMIT_SPLIT_CHAR );
         }
@@ -1607,7 +1607,7 @@ void CervisiaPart::slotDoCVSEdit()
 
 void CervisiaPart::slotConfigure()
 {
-    KConfigBase *conf = config();
+    KConfig *conf = config();
     SettingsDialog *l = new SettingsDialog( conf, widget() );
     l->exec();
 
@@ -1734,7 +1734,7 @@ bool CervisiaPart::openSandbox(const QString &dirname)
     update->openDirectory(sandbox);
     setFilter();
 
-    KConfigBase *conf = config();
+    KConfig *conf = config();
     conf->setGroup("General");
     bool dostatus = conf->readEntry(repository.contains(":")?
                                         "StatusForRemoteRepos" :

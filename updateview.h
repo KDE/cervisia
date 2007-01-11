@@ -29,7 +29,7 @@
 #include "entry.h"
 
 
-class KConfigBase;
+class KConfig;
 
 
 class UpdateView : public K3ListView
@@ -42,7 +42,7 @@ public:
                   NoRemoved=4, NoNotInCVS=8 , NoEmptyDirectories = 16 };
     enum Action { Add, Remove, Update, UpdateNoAct, Commit };
     
-    explicit UpdateView(KConfigBase& partConfig, QWidget *parent=0, const char *name=0);
+    explicit UpdateView(KConfig& partConfig, QWidget *parent=0, const char *name=0);
 
     virtual ~UpdateView();
 
@@ -90,7 +90,7 @@ private:
 
     void updateColors();
 
-    KConfigBase& m_partConfig;
+    KConfig& m_partConfig;
 
     Filter filt;
     Action act;

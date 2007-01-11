@@ -35,6 +35,7 @@
 #include <QVBoxLayout>
 #include <kbuttonbox.h>
 #include <kcolorbutton.h>
+#include <kconfig.h>
 #include <kfontdialog.h>
 #include <kglobal.h>
 #include <kiconloader.h>
@@ -79,7 +80,7 @@ void FontButton::chooseFont()
 }
 
 
-SettingsDialog::SettingsDialog( KConfigBase *conf, QWidget *parent, const char *name )
+SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name )
     : KDialog(IconList, parent)
 {
     setCaption(i18n("Configure Cervisia"));

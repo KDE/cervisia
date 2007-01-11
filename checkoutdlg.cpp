@@ -47,7 +47,7 @@
 using Cervisia::IsValidTag;
 
 
-CheckoutDialog::CheckoutDialog(KConfigBase& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
+CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
                                ActionType action, QWidget* parent,
                                const char* name)
     : KDialog(parent)

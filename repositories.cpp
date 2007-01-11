@@ -22,7 +22,7 @@
 #include <qfile.h>
 #include <qdir.h>
 #include <qtextstream.h>
-#include <kconfigbase.h>
+#include <kconfig.h>
 
 #include "repositories.h"
 #include "cervisiapart.h"
@@ -63,8 +63,11 @@ QStringList Repositories::readCvsPassFile()
 
 QStringList Repositories::readConfigFile()
 {
-    KConfigGroup cg(CervisiaPart::config(), "Repositories");
-    QStringList list = cg.readEntry("Repos",QStringList());
+    QStringList list;
+
+    KConfig *config = CervisiaPart::config();
+    config->setGroup("Repositories");
+    list = config->readEntry("Repos",QStringList());
 
     // Some people actually use CVSROOT, so we add it here
     char *env;

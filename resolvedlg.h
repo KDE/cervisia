@@ -26,14 +26,12 @@
 #include <kdialog.h>
 
 #include <q3ptrlist.h>
-//Added by qt3to4:
-#include <QLabel>
-#include <QKeyEvent>
 #include "diffview.h"
 
 
 class QLabel;
 class QTextCodec;
+class KConfig;
 class ResolveItem;
 
 
@@ -44,7 +42,7 @@ class ResolveDialog : public KDialog
 public:
     enum ChooseType { ChA, ChB, ChAB, ChBA, ChEdit };
 
-    explicit ResolveDialog( KConfigBase& cfg, QWidget *parent=0, const char *name=0 );
+    explicit ResolveDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
     virtual ~ResolveDialog();
 
     bool parseFile(const QString &name);
@@ -86,7 +84,7 @@ private:
     QString fname;
     QTextCodec *fcodec;
     int markeditem;
-    KConfigBase& partConfig;
+    KConfig& partConfig;
     
     QString    m_contentMergedVersion;
 };

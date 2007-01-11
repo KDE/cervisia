@@ -54,7 +54,7 @@ class LogDialog : public KDialog
     Q_OBJECT
 
 public:
-    explicit LogDialog( KConfigBase& cfg, QWidget *parent=0, const char *name=0 );
+    explicit LogDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
 
     virtual ~LogDialog();
 
@@ -94,7 +94,7 @@ private:
     QComboBox *tagcombo[2];
 
     OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService;
-    KConfigBase&     partConfig;
+    KConfig&         partConfig;
 };
 
 #endif

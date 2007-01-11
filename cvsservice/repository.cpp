@@ -215,7 +215,7 @@ void Repository::Private::readGeneralConfig()
 
 void Repository::Private::readConfig()
 {
-    KConfigBase* config = KGlobal::config();
+    KConfig* config = KGlobal::config();
 
     // Sometimes the location can be unequal to the entry in the CVS/Root.
     //
