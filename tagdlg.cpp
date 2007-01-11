@@ -38,7 +38,7 @@
 
 using Cervisia::TagDialog;
 
-TagDialog::TagDialog(ActionType action, CvsService_stub* service,
+TagDialog::TagDialog(ActionType action, LocalCvsServiceInterface* service,
                      QWidget *parent, const char *name)
     : KDialog(parent), 
       act(action),

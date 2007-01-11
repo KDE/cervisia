@@ -23,7 +23,7 @@
 #include "stringmatcher.h"
 
 class QFileInfo;
-class CvsService_stub;
+class LocalCvsServiceInterface;
 
 
 namespace Cervisia
@@ -37,7 +37,7 @@ public:
 
     virtual bool matches(const QFileInfo* fi) const;
     
-    void retrieveServerIgnoreList(CvsService_stub* cvsService,
+    void retrieveServerIgnoreList(LocalCvsServiceInterface* cvsService,
                                   const QString& repository);
 
 private:

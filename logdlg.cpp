@@ -221,7 +221,7 @@ LogDialog::~LogDialog()
 }
 
 
-bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
+bool LogDialog::parseCvsLog(LocalCvsServiceInterface* service, const QString& fileName)
 {
     QString rev;
 
@@ -236,7 +236,7 @@ bool LogDialog::parseCvsLog(CvsService_stub* service, const QString& fileName)
 
     setCaption(i18n("CVS Log: %1", filename));
 
-    DCOPRef job = cvsService->log(filename);
+    QDBusReply<QDBusObjectPath> job = cvsService->log(filename);
     if( !cvsService->ok() )
         return false;
 
@@ -425,7 +425,7 @@ void LogDialog::slotOk()
 
     // retrieve the file with the selected revision from cvs
     // and save the content into the temporary file
-    DCOPRef job = cvsService->downloadRevision(filename, revision, tempFileName);
+    QDBusReply<QDBusObjectPath> job = cvsService->downloadRevision(filename, revision, tempFileName);
     if( !cvsService->ok() )
         return;
 
@@ -460,7 +460,7 @@ void LogDialog::slotApply()
     QString format      = optionDlg.formatOption();
     QString diffOptions = optionDlg.diffOptions();
 
-    DCOPRef job = cvsService->diff(filename, selectionA, selectionB, diffOptions,
+    QDBusReply<QDBusObjectPath> job = cvsService->diff(filename, selectionA, selectionB, diffOptions,
                                    format);
     if( !cvsService->ok() )
         return;

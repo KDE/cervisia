@@ -39,7 +39,7 @@ struct AnnotateController::Private
     typedef QMap<QString, QString>  RevisionCommentMap;
     RevisionCommentMap  comments;                  // maps comment to a revision
 
-    CvsService_stub*    cvsService;
+    LocalCvsServiceInterface*    cvsService;
     AnnotateDialog*     dialog;
     ProgressDialog*     progress;
 
@@ -49,7 +49,7 @@ struct AnnotateController::Private
 };
 
 
-AnnotateController::AnnotateController(AnnotateDialog* dialog, CvsService_stub* cvsService)
+AnnotateController::AnnotateController(AnnotateDialog* dialog, LocalCvsServiceInterface* cvsService)
     : d(new Private)
 {
     // initialize private data
@@ -86,7 +86,7 @@ void AnnotateController::showDialog(const QString& fileName, const QString& revi
 
 bool AnnotateController::Private::execute(const QString& fileName, const QString& revision)
 {
-    DCOPRef job = cvsService->annotate(fileName, revision);
+    QDBusReply<QDBusObjectPath> job = cvsService->annotate(fileName, revision);
     if( !cvsService->ok() )
         return false;
 

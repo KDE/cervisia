@@ -38,7 +38,7 @@
 #include "cvsservice_stub.h"
 
 
-MergeDialog::MergeDialog(CvsService_stub* service,
+MergeDialog::MergeDialog(LocalCvsServiceInterface* service,
                          QWidget *parent, const char *name)
     : KDialog(parent),
       cvsService(service)

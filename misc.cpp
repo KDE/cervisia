@@ -73,12 +73,12 @@ static int FindWhiteSpace(const QString& str, int index)
 
 
 static const QStringList FetchBranchesAndTags(const QString& searchedType,
-                                              CvsService_stub* cvsService,
+                                              LocalCvsServiceInterface* cvsService,
                                               QWidget* parent)
 {
     QStringList branchOrTagList;
 
-    DCOPRef job = cvsService->status(QStringList(), true, true);
+    QDBusReply<QDBusObjectPath> job = cvsService->status(QStringList(), true, true);
     if( !cvsService->ok() )
         return branchOrTagList;
 
@@ -259,14 +259,14 @@ QStringList splitLine(QString line, char delim)
 }
 
 
-const QStringList fetchBranches(CvsService_stub* cvsService, QWidget* parent)
+const QStringList fetchBranches(LocalCvsServiceInterface* cvsService, QWidget* parent)
 {
     return FetchBranchesAndTags(QLatin1String("branch"), cvsService,
                                 parent);
 }
 
 
-const QStringList fetchTags(CvsService_stub* cvsService, QWidget* parent)
+const QStringList fetchTags(LocalCvsServiceInterface* cvsService, QWidget* parent)
 {
     return FetchBranchesAndTags(QLatin1String("revision"), cvsService,
                                 parent);

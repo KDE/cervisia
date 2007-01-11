@@ -23,14 +23,14 @@
 #include <qstring.h>
 
 class AnnotateDialog;
-class CvsService_stub;
+class LocalCvsServiceInterface;
 class QWidget;
 
 
 class AnnotateController
 {
 public:
-    AnnotateController(AnnotateDialog* dialog, CvsService_stub* cvsService);
+    AnnotateController(AnnotateDialog* dialog, LocalCvsServiceInterface* cvsService);
     ~AnnotateController();
 
     void showDialog(const QString& fileName, const QString& revision = QString::null);

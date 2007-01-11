@@ -125,7 +125,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
     }
     else
       // create a reference to the service
-      cvsService = new CvsService_stub(appId, "CvsService");
+      cvsService = new LocalCvsServiceInterface(appId, "CvsService");
 
     // Create UI
     KConfigBase *conf = config();
@@ -774,7 +774,7 @@ void CervisiaPart::openFiles(const QStringList &filenames)
 
         if( files.count() )
         {
-            DCOPRef job = cvsService->edit(files);
+            QDBusReply<QDBusObjectPath> job = cvsService->edit(files);
 
             ProgressDialog dlg(widget(), "Edit", job, "edit", i18n("CVS Edit"));
             if( !dlg.execute() )
@@ -827,7 +827,7 @@ void CervisiaPart::slotStatus()
 
     update->prepareJob(opt_updateRecursive, UpdateView::UpdateNoAct);
 
-    DCOPRef cvsJob = cvsService->simulateUpdate(list, opt_updateRecursive,
+    QDBusReply<QDBusObjectPath> cvsJob = cvsService->simulateUpdate(list, opt_updateRecursive,
                                                 opt_createDirs, opt_pruneDirs);
 
     // get command line from cvs job
@@ -940,7 +940,7 @@ void CervisiaPart::slotCommit()
 
         update->prepareJob(opt_commitRecursive, UpdateView::Commit);
 
-        DCOPRef cvsJob = cvsService->commit(list, dlg.logMessage(),
+        QDBusReply<QDBusObjectPath> cvsJob = cvsService->commit(list, dlg.logMessage(),
                                             opt_commitRecursive);
 
         // get command line from cvs job
@@ -1001,7 +1001,7 @@ void CervisiaPart::updateSandbox(const QString &extraopt)
 
     update->prepareJob(opt_updateRecursive, UpdateView::Update);
 
-    DCOPRef cvsJob = cvsService->update(list, opt_updateRecursive,
+    QDBusReply<QDBusObjectPath> cvsJob = cvsService->update(list, opt_updateRecursive,
                         opt_createDirs, opt_pruneDirs, extraopt);
 
     // get command line from cvs job
@@ -1032,7 +1032,7 @@ void CervisiaPart::addOrRemove(AddRemoveDialog::ActionType action)
 
     if (dlg.exec())
     {
-        DCOPRef cvsJob;
+        QDBusReply<QDBusObjectPath> cvsJob;
 
         switch (action)
         {
@@ -1151,7 +1151,7 @@ void CervisiaPart::addOrRemoveWatch(WatchDialog::ActionType action)
 
     if (dlg.exec() && dlg.events() != WatchDialog::None)
     {
-        DCOPRef cvsJob;
+        QDBusReply<QDBusObjectPath> cvsJob;
 
         if (action == WatchDialog::Add)
             cvsJob = cvsService->addWatch(list, dlg.events());
@@ -1192,7 +1192,7 @@ void CervisiaPart::slotEdit()
     if (list.isEmpty())
         return;
 
-    DCOPRef cvsJob = cvsService->edit(list);
+    QDBusReply<QDBusObjectPath> cvsJob = cvsService->edit(list);
 
     // get command line from cvs job
     QString cmdline = cvsJob.call("cvsCommand()");
@@ -1212,7 +1212,7 @@ void CervisiaPart::slotUnedit()
     if (list.isEmpty())
         return;
 
-    DCOPRef cvsJob = cvsService->unedit(list);
+    QDBusReply<QDBusObjectPath> cvsJob = cvsService->unedit(list);
 
     // get command line from cvs job
     QString cmdline = cvsJob.call("cvsCommand()");
@@ -1232,7 +1232,7 @@ void CervisiaPart::slotLock()
     if (list.isEmpty())
         return;
 
-    DCOPRef cvsJob = cvsService->lock(list);
+    QDBusReply<QDBusObjectPath> cvsJob = cvsService->lock(list);
 
     // get command line from cvs job
     QString cmdline = cvsJob.call("cvsCommand()");
@@ -1252,7 +1252,7 @@ void CervisiaPart::slotUnlock()
     if (list.isEmpty())
         return;
 
-    DCOPRef cvsJob = cvsService->unlock(list);
+    QDBusReply<QDBusObjectPath> cvsJob = cvsService->unlock(list);
 
     // get command line from cvs job
     QString cmdline = cvsJob.call("cvsCommand()");
@@ -1272,7 +1272,7 @@ void CervisiaPart::slotShowEditors()
     if (list.isEmpty())
         return;
 
-    DCOPRef cvsJob = cvsService->editors(list);
+    QDBusReply<QDBusObjectPath> cvsJob = cvsService->editors(list);
 
     // get command line from cvs job
     QString cmdline = cvsJob.call("cvsCommand()");
@@ -1295,7 +1295,7 @@ void CervisiaPart::slotMakePatch()
     QString format      = optionDlg.formatOption();
     QString diffOptions = optionDlg.diffOptions();
 
-    DCOPRef job = cvsService->makePatch(diffOptions, format);
+    QDBusReply<QDBusObjectPath> job = cvsService->makePatch(diffOptions, format);
     if( !cvsService->ok() )
         return;
 
@@ -1335,7 +1335,7 @@ void CervisiaPart::slotImport()
     if( !dlg.exec() )
         return;
 
-    DCOPRef cvsJob = cvsService->import(dlg.workingDirectory(), dlg.repository(),
+    QDBusReply<QDBusObjectPath> cvsJob = cvsService->import(dlg.workingDirectory(), dlg.repository(),
                                         dlg.module(), dlg.ignoreFiles(),
                                         dlg.comment(), dlg.vendorTag(),
                                         dlg.releaseTag(), dlg.importBinary(),
@@ -1360,7 +1360,7 @@ void CervisiaPart::slotCreateRepository()
     if( !dlg.exec() )
         return;
 
-    DCOPRef cvsJob = cvsService->createRepository(dlg.directory());
+    QDBusReply<QDBusObjectPath> cvsJob = cvsService->createRepository(dlg.directory());
 
     QString cmdline = cvsJob.call("cvsCommand()");
 
@@ -1380,7 +1380,7 @@ void CervisiaPart::slotCheckout()
     if( !dlg.exec() )
         return;
 
-    DCOPRef cvsJob = cvsService->checkout(dlg.workingDirectory(), dlg.repository(),
+    QDBusReply<QDBusObjectPath> cvsJob = cvsService->checkout(dlg.workingDirectory(), dlg.repository(),
                                           dlg.module(), dlg.branch(), opt_pruneDirs,
                                           dlg.alias(), dlg.exportOnly(), dlg.recursive());
 
@@ -1425,7 +1425,7 @@ void CervisiaPart::createOrDeleteTag(TagDialog::ActionType action)
 
     if (dlg.exec())
     {
-        DCOPRef cvsJob;
+        QDBusReply<QDBusObjectPath> cvsJob;
 
         if( action == TagDialog::Create )
             cvsJob = cvsService->createTag(list, dlg.tag(), dlg.branchTag(),

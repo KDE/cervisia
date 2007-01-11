@@ -257,8 +257,8 @@ bool DiffDialog::parseCvsDiff(LocalCvsServiceInterface* service, const QString& 
     const QString diffOptions   = cs.readEntry("DiffOptions");
     const unsigned contextLines = cs.readEntry("ContextLines", 65535);
 
-    QDBusObjectPath job = service->diff(fileName, revA, revB, diffOptions, contextLines);
-    if( !service->ok() )
+    QDBusReply<QDBusObjectPath> job = service->diff(fileName, revA, revB, diffOptions, contextLines);
+    if( !job.isValid() )
         return false;
 
     ProgressDialog dlg(this, "Diff", job, "diff", i18n("CVS Diff"));

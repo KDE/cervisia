@@ -156,7 +156,7 @@ void RepositoryListItem::changeLoginStatusColumn()
 }
 
 
-RepositoryDialog::RepositoryDialog(KConfigBase& cfg, CvsService_stub* cvsService,
+RepositoryDialog::RepositoryDialog(KConfigBase& cfg, LocalCvsServiceInterface* cvsService,
                                    QWidget* parent, const char* name)
     : KDialog(parent)
     , m_partConfig(cfg)
@@ -427,7 +427,7 @@ void RepositoryDialog::slotLoginClicked()
     kDebug() << "RepositoryDialog::slotLoginClicked(): repo="
               << item->repository() << endl;
 
-    DCOPRef job = m_cvsService->login(item->repository());
+    QDBusReply<QDBusObjectPath> job = m_cvsService->login(item->repository());
     if( !m_cvsService->ok() )
         // TODO: error handling
         return;
@@ -451,7 +451,7 @@ void RepositoryDialog::slotLogoutClicked()
     if( !item )
         return;
 
-    DCOPRef job = m_cvsService->logout(item->repository());
+    QDBusReply<QDBusObjectPath> job = m_cvsService->logout(item->repository());
     if( !m_cvsService->ok() )
         // TODO: error handling
         return;

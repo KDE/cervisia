@@ -45,7 +45,7 @@ bool GlobalIgnoreList::matches(const QFileInfo* fi) const
 }
 
 
-void GlobalIgnoreList::retrieveServerIgnoreList(CvsService_stub* cvsService,
+void GlobalIgnoreList::retrieveServerIgnoreList(LocalCvsServiceInterface* cvsService,
                                                 const QString& repository)
 {
     KTemporaryFile tmpFile;
@@ -57,7 +57,7 @@ void GlobalIgnoreList::retrieveServerIgnoreList(CvsService_stub* cvsService,
     // now set it up again
     setup();
     
-    DCOPRef ref = cvsService->downloadCvsIgnoreFile(repository, 
+    QDBusReply<QDBusObjectPath> ref = cvsService->downloadCvsIgnoreFile(repository, 
                                                     tmpFile.fileName());
       
     ProgressDialog dlg(0, "Edit", ref, "checkout", "CVS Edit");

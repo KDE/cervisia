@@ -55,7 +55,7 @@ private:
 };
 
 
-CommitDialog::CommitDialog(KConfigBase& cfg, CvsService_stub* service,
+CommitDialog::CommitDialog(KConfigBase& cfg, LocalCvsServiceInterface* service,
                            QWidget *parent, const char *name)
     : KDialog(parent)
     , partConfig(cfg)

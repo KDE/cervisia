@@ -54,7 +54,7 @@ struct ProgressDialog::Private
 
 
 ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,
-                               const DCOPRef& job, const QString& errorIndicator,
+                               const QDBusReply<QDBusObjectPath>& job, const QString& errorIndicator,
                                const QString& caption)
     : KDialog(parent)
     , DCOPObject()

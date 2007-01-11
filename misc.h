@@ -26,7 +26,7 @@
 class QString;
 class QStringList;
 class QWidget;
-class CvsService_stub;
+class LocalCvsServiceInterface;
 
 
 namespace Cervisia
@@ -60,8 +60,8 @@ QStringList splitLine(QString, char delim=' ');
 QString tempFileName(const QString& suffix);
 void cleanupTempFiles();
 
-const QStringList fetchBranches(CvsService_stub* cvsService, QWidget* parent);
-const QStringList fetchTags(CvsService_stub* cvsService, QWidget* parent);
+const QStringList fetchBranches(LocalCvsServiceInterface* cvsService, QWidget* parent);
+const QStringList fetchTags(LocalCvsServiceInterface* cvsService, QWidget* parent);
 
 /**
  * Compares two revision numbers.

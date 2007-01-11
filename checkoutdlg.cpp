@@ -47,7 +47,7 @@
 using Cervisia::IsValidTag;
 
 
-CheckoutDialog::CheckoutDialog(KConfigBase& cfg, CvsService_stub* service,
+CheckoutDialog::CheckoutDialog(KConfigBase& cfg, LocalCvsServiceInterface* service,
                                ActionType action, QWidget* parent,
                                const char* name)
     : KDialog(parent)
@@ -355,7 +355,7 @@ void CheckoutDialog::dirButtonClicked()
 
 void CheckoutDialog::moduleButtonClicked()
 {
-    DCOPRef cvsJob = cvsService->moduleList(repository());
+    QDBusReply<QDBusObjectPath> cvsJob = cvsService->moduleList(repository());
     if( !cvsService->ok() )
         return;
 
@@ -398,7 +398,7 @@ void CheckoutDialog::branchButtonClicked()
         return;
     }
 
-    DCOPRef cvsJob = cvsService->rlog(repository(), module(),
+    QDBusReply<QDBusObjectPath> cvsJob = cvsService->rlog(repository(), module(),
                                       false/*recursive*/);
     if( !cvsService->ok() )
         return;

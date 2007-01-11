@@ -307,11 +307,11 @@ void HistoryDialog::toggled(bool b)
 }
 
 
-bool HistoryDialog::parseHistory(CvsService_stub* cvsService)
+bool HistoryDialog::parseHistory(LocalCvsServiceInterface* cvsService)
 {
     setCaption(i18n("CVS History"));
 
-    DCOPRef job = cvsService->history();
+    QDBusReply<QDBusObjectPath> job = cvsService->history();
     if( !cvsService->ok() )
         return false;
 

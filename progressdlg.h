@@ -24,7 +24,7 @@
 
 class QString;
 class QWidget;
-class DCOPRef;
+class QDBusReply<QDBusObjectPath>;
 
 
 class ProgressDialog : public KDialog
@@ -32,7 +32,7 @@ class ProgressDialog : public KDialog
     Q_OBJECT
 
 public:
-    ProgressDialog(QWidget* parent, const QString& heading, const DCOPRef& job,
+    ProgressDialog(QWidget* parent, const QString& heading, const QDBusReply<QDBusObjectPath>& job,
                    const QString& errorIndicator, const QString& caption = "");
     ~ProgressDialog();
 

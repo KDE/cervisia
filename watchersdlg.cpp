@@ -79,12 +79,12 @@ WatchersDialog::~WatchersDialog()
 }
 
 
-bool WatchersDialog::parseWatchers(CvsService_stub* cvsService, 
+bool WatchersDialog::parseWatchers(LocalCvsServiceInterface* cvsService, 
                                    const QStringList& files)
 {
     setCaption(i18n("CVS Watchers"));
 
-    DCOPRef job = cvsService->watchers(files);
+    QDBusReply<QDBusObjectPath> job = cvsService->watchers(files);
     if( !cvsService->ok() )
         return false;
 
