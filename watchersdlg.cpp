@@ -28,7 +28,7 @@
 #include <klocale.h>
 
 #include "misc.h"
-#include "cvsservice_stub.h"
+#include "cvsserviceinterface.h"
 #include "progressdlg.h"
 
 
@@ -85,7 +85,7 @@ bool WatchersDialog::parseWatchers(LocalCvsServiceInterface* cvsService,
     setCaption(i18n("CVS Watchers"));
 
     QDBusReply<QDBusObjectPath> job = cvsService->watchers(files);
-    if( !cvsService->ok() )
+    if( !job.isValid() )
         return false;
 
     ProgressDialog dlg(this, "Watchers", job, "watchers", i18n("CVS Watchers"));

@@ -71,7 +71,7 @@
 #include "watchersdlg.h"
 #include "cvsinitdlg.h"
 #include "misc.h"
-#include "cvsservice_stub.h"
+#include "cvsserviceinterface.h"
 #include "repository_stub.h"
 #include "globalignorelist.h"
 #include "patchoptiondlg.h"
@@ -1296,7 +1296,7 @@ void CervisiaPart::slotMakePatch()
     QString diffOptions = optionDlg.diffOptions();
 
     QDBusReply<QDBusObjectPath> job = cvsService->makePatch(diffOptions, format);
-    if( !cvsService->ok() )
+    if( !job.isValid() )
         return;
 
     ProgressDialog dlg(widget(), "Diff", job, "", i18n("CVS Diff"));

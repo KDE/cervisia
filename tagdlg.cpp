@@ -34,7 +34,7 @@
 #include <kmessagebox.h>
 
 #include "misc.h"
-#include "cvsservice_stub.h"
+#include "cvsserviceinterface.h"
 
 using Cervisia::TagDialog;
 

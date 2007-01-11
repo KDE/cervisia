@@ -380,7 +380,7 @@ void DiffDialog::callExternalDiff(const QString& extdiff, LocalCvsServiceInterfa
         // download the files for revision A and B
         job = service->downloadRevision(fileName, revA, revAFilename,
                                                 revB, revBFilename);
-        if( !service->ok() )
+        if( !job->isValid() )
             return;
 
         extcmdline += KProcess::quote(revAFilename);
@@ -392,7 +392,7 @@ void DiffDialog::callExternalDiff(const QString& extdiff, LocalCvsServiceInterfa
         // We're comparing to a file, and perhaps one revision
         QString revAFilename = tempFileName(suffix+QString("-")+revA);
         job = service->downloadRevision(fileName, revA, revAFilename);
-        if( !service->ok() )
+        if( !job->isValid() )
             return;
 
         extcmdline += KProcess::quote(revAFilename);

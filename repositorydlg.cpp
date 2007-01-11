@@ -34,7 +34,7 @@
 #include <kdebug.h>
 
 #include "addrepositorydlg.h"
-#include "cvsservice_stub.h"
+#include "cvsserviceinterface.h"
 #include "misc.h"
 #include "progressdlg.h"
 #include "repositories.h"
@@ -428,7 +428,7 @@ void RepositoryDialog::slotLoginClicked()
               << item->repository() << endl;
 
     QDBusReply<QDBusObjectPath> job = m_cvsService->login(item->repository());
-    if( !m_cvsService->ok() )
+    if( !m_job.isValid() )
         // TODO: error handling
         return;
 
@@ -452,7 +452,7 @@ void RepositoryDialog::slotLogoutClicked()
         return;
 
     QDBusReply<QDBusObjectPath> job = m_cvsService->logout(item->repository());
-    if( !m_cvsService->ok() )
+    if( !m_job.isValid() )
         // TODO: error handling
         return;
 

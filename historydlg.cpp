@@ -36,7 +36,7 @@
 #include <krfcdate.h>
 
 #include "misc.h"
-#include "cvsservice_stub.h"
+#include "cvsserviceinterface.h"
 #include "progressdlg.h"
 
 
@@ -312,7 +312,7 @@ bool HistoryDialog::parseHistory(LocalCvsServiceInterface* cvsService)
     setCaption(i18n("CVS History"));
 
     QDBusReply<QDBusObjectPath> job = cvsService->history();
-    if( !cvsService->ok() )
+    if( !job.isValid() )
         return false;
 
     ProgressDialog dlg(this, "History", job, "history", i18n("CVS History"));

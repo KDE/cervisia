@@ -35,7 +35,7 @@
 #include <klocale.h>
 
 #include "misc.h"
-#include "cvsservice_stub.h"
+#include "cvsserviceinterface.h"
 
 
 MergeDialog::MergeDialog(LocalCvsServiceInterface* service,

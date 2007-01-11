@@ -24,7 +24,7 @@ using namespace Cervisia;
 #include <ktemporaryfile.h>
 #include <stdlib.h> // for getenv()
 
-#include "cvsservice_stub.h"
+#include "cvsserviceinterface.h"
 #include "progressdlg.h"
 
 

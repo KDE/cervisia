@@ -34,7 +34,7 @@
 #include <QVBoxLayout>
 #include <klocale.h>
 
-#include "cvsservice_stub.h"
+#include "cvsserviceinterface.h"
 #include "logmessageedit.h"
 #include "diffdlg.h"
 

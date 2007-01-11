@@ -44,7 +44,7 @@
 #include <krun.h>
 #include <kurl.h>
 
-#include "cvsservice_stub.h"
+#include "cvsserviceinterface.h"
 #include "annotatedlg.h"
 #include "annotatectl.h"
 #include "diffdlg.h"
@@ -237,7 +237,7 @@ bool LogDialog::parseCvsLog(LocalCvsServiceInterface* service, const QString& fi
     setCaption(i18n("CVS Log: %1", filename));
 
     QDBusReply<QDBusObjectPath> job = cvsService->log(filename);
-    if( !cvsService->ok() )
+    if( !job.isValid() )
         return false;
 
     ProgressDialog dlg(this, "Logging", job, "log", i18n("CVS Log"));
@@ -426,7 +426,7 @@ void LogDialog::slotOk()
     // retrieve the file with the selected revision from cvs
     // and save the content into the temporary file
     QDBusReply<QDBusObjectPath> job = cvsService->downloadRevision(filename, revision, tempFileName);
-    if( !cvsService->ok() )
+    if( !job.isValid() )
         return;
 
     ProgressDialog dlg(this, "View", job, "view", i18n("View File"));
@@ -462,7 +462,7 @@ void LogDialog::slotApply()
 
     QDBusReply<QDBusObjectPath> job = cvsService->diff(filename, selectionA, selectionB, diffOptions,
                                    format);
-    if( !cvsService->ok() )
+    if( !job.isValid() )
         return;
 
     ProgressDialog dlg(this, "Diff", job, "", i18n("CVS Diff"));

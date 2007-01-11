@@ -24,8 +24,6 @@
 
 class QString;
 class QWidget;
-class QDBusReply<QDBusObjectPath>;
-
 
 class ProgressDialog : public KDialog
 {

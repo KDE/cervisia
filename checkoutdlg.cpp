@@ -42,7 +42,7 @@
 #include "progressdlg.h"
 #include "repositories.h"
 #include "misc.h"
-#include "cvsservice_stub.h"
+#include "cvsserviceinterface.h"
 
 using Cervisia::IsValidTag;
 
@@ -356,7 +356,7 @@ void CheckoutDialog::dirButtonClicked()
 void CheckoutDialog::moduleButtonClicked()
 {
     QDBusReply<QDBusObjectPath> cvsJob = cvsService->moduleList(repository());
-    if( !cvsService->ok() )
+    if( !job.isValid() )
         return;
 
     ProgressDialog dlg(this, "Checkout", cvsJob, "checkout", i18n("CVS Checkout"));
@@ -400,7 +400,7 @@ void CheckoutDialog::branchButtonClicked()
 
     QDBusReply<QDBusObjectPath> cvsJob = cvsService->rlog(repository(), module(),
                                       false/*recursive*/);
-    if( !cvsService->ok() )
+    if( !job.isValid() )
         return;
 
     ProgressDialog dlg(this, "Remote Log", cvsJob, QString::null,

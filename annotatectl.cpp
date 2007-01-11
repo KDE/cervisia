@@ -29,7 +29,7 @@
 #include "annotatedlg.h"
 #include "loginfo.h"
 #include "progressdlg.h"
-#include "cvsservice_stub.h"
+#include "cvsserviceinterface.h"
 #include "cvsjob_stub.h"
 
 using namespace Cervisia;
@@ -87,7 +87,7 @@ void AnnotateController::showDialog(const QString& fileName, const QString& revi
 bool AnnotateController::Private::execute(const QString& fileName, const QString& revision)
 {
     QDBusReply<QDBusObjectPath> job = cvsService->annotate(fileName, revision);
-    if( !cvsService->ok() )
+    if( !job.isValid() )
         return false;
 
     progress = new ProgressDialog(dialog, "Annotate", job, "annotate", i18n("CVS Annotate"));

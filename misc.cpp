@@ -38,7 +38,7 @@
 #include <kdebug.h>
 
 #include "config.h"
-#include "cvsservice_stub.h"
+#include "cvsserviceinterface.h"
 #include "progressdlg.h"
 
 // These regular expression parts aren't useful to check the validity of the
@@ -79,7 +79,7 @@ static const QStringList FetchBranchesAndTags(const QString& searchedType,
     QStringList branchOrTagList;
 
     QDBusReply<QDBusObjectPath> job = cvsService->status(QStringList(), true, true);
-    if( !cvsService->ok() )
+    if( !job.isValid() )
         return branchOrTagList;
 
     ProgressDialog dlg(parent, "Status", job, QString::null, i18n("CVS Status"));

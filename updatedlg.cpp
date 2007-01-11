@@ -34,7 +34,7 @@
 #include <klocale.h>
 
 #include "misc.h"
-#include "cvsservice_stub.h"
+#include "cvsserviceinterface.h"
 
 
 UpdateDialog::UpdateDialog(LocalCvsServiceInterface* service,
