@@ -45,7 +45,8 @@ AddRepositoryDialog::AddRepositoryDialog(KConfigBase& cfg, const QString& repo,
     setDefaultButton(Ok);
     showButtonSeparator(true);
 
-    QFrame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = new QFrame(this);
+    setMainWidget(mainWidget);
 
     QBoxLayout* layout = new QVBoxLayout(mainWidget);
     layout->setSpacing(spacingHint());

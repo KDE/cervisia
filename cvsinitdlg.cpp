@@ -44,7 +44,8 @@ CvsInitDialog::CvsInitDialog(QWidget* parent, const char* name)
     setDefaultButton(Ok);
     showButtonSeparator(true);
 
-    QFrame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = new QFrame(this);
+    setMainWidget(mainWidget);
     QVBoxLayout* mainLayout = new QVBoxLayout(mainWidget);
     mainLayout->setSpacing(spacingHint());
     mainLayout->setMargin(0);

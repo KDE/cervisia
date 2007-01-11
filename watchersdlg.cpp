@@ -39,7 +39,8 @@ WatchersDialog::WatchersDialog(KConfigBase& cfg, QWidget* parent, const char* na
     setButtons(Close);
     showButtonSeparator(true);
 
-    QFrame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = new QFrame(this);
+    setMainWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
     layout->setSpacing(spacingHint());

@@ -51,7 +51,8 @@ UpdateDialog::UpdateDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
     int const iComboBoxMinWidth(40 * fontMetrics().width('0'));
     int const iWidgetIndent(style()->pixelMetric(QStyle::PM_ExclusiveIndicatorWidth) + 6);
 
-    QFrame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = new QFrame(this);
+    setMainWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
     layout->setSpacing(spacingHint());
