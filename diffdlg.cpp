@@ -39,9 +39,7 @@
 #include <kmessagebox.h>
 #include <ktemporaryfile.h>
 #include <kprocess.h>
-
-//#include "cvsservice_stub.h"
-//#include "repository_stub.h"
+#include "cvsserviceinterface.h"
 #include "misc.h"
 #include "progressdlg.h"
 #include "diffview.h"
@@ -227,7 +225,7 @@ public:
 };
 
 
-bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
+bool DiffDialog::parseCvsDiff(LocalCvsServiceInterface* service, const QString& fileName,
                               const QString &revA, const QString &revB)
 {
     QStringList linesA, linesB;
@@ -257,9 +255,9 @@ bool DiffDialog::parseCvsDiff(CvsService_stub* service, const QString& fileName,
         }
 
     const QString diffOptions   = cs.readEntry("DiffOptions");
-    const unsigned contextLines = cs.readUnsignedNumEntry("ContextLines", 65535);
+    const unsigned contextLines = cs.readEntry("ContextLines", 65535);
 
-    DCOPRef job = service->diff(fileName, revA, revB, diffOptions, contextLines);
+    QDBusObjectPath job = service->diff(fileName, revA, revB, diffOptions, contextLines);
     if( !service->ok() )
         return false;
 
@@ -362,7 +360,7 @@ void DiffDialog::newDiffHunk(int& linenoA, int& linenoB,
 }
 
 
-void DiffDialog::callExternalDiff(const QString& extdiff, CvsService_stub* service,
+void DiffDialog::callExternalDiff(const QString& extdiff, LocalCvsServiceInterface* service,
                                   const QString& fileName, const QString &revA,
                                   const QString &revB)
 {
@@ -372,7 +370,7 @@ void DiffDialog::callExternalDiff(const QString& extdiff, CvsService_stub* servi
     // create suffix for temporary file (used QFileInfo to remove path from file name)
     const QString suffix = '-' + QFileInfo(fileName).fileName();
 
-    DCOPRef job;
+    QDBusObjectPath job;
     if (!revA.isEmpty() && !revB.isEmpty())
     {
         // We're comparing two revisions

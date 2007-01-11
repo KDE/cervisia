@@ -31,6 +31,11 @@ set(libcervisia_SRCS
    settingsdlg.cpp
 	)	
 
+qt4_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia.cvsservice.xml )
+qt4_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia.cvsjob.xml )
+qt4_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia.repository.xml )
+
+
 kde4_add_ui3_files(libcervisia_SRCS settingsdlg_advanced.ui )
 
 kde4_add_kcfg_files(libcervisia_SRCS cervisiasettings.kcfgc )
@@ -39,10 +44,6 @@ kde4_add_kcfg_files(libcervisia_SRCS cervisiasettings.kcfgc )
 set(cervisia_KDEINIT_SRCS ${libcervisia_SRCS} 
    main.cpp 
    cervisiashell.cpp )
-
-qt4_add_dbus_interfaces( cvsservice_LIB_SRCS ${CMAKE_SOURCE_DIR}/cervisia/cvsservice/org.kde.cervisia.cvsservice.xml )
-qt4_add_dbus_interfaces( cvsservice_LIB_SRCS ${CMAKE_SOURCE_DIR}/cervisia/cvsservice/org.kde.cervisia.cvsjob.xml )
-qt4_add_dbus_interfaces( cvsservice_LIB_SRCS ${CMAKE_SOURCE_DIR}/cervisia/cvsservice/org.kde.cervisia.repository.xml )
 
 
 kde4_automoc(${cervisia_KDEINIT_SRCS})
