@@ -28,7 +28,7 @@
 //Added by qt3to4:
 #include <QHBoxLayout>
 #include <Q3ListBox>
-#include <cvsjob_stub.h>
+#include <cvsjobinterface.h>
 #include <dcopref.h>
 #include <kanimatedbutton.h>
 #include <kapplication.h>
@@ -42,7 +42,7 @@ struct ProgressDialog::Private
     bool            isShown;
     bool            hasError;
 
-    CvsJob_stub*    cvsJob;
+    OrgKdeCervisiaCvsserviceCvsjobInterface*    cvsJob;
     QString         buffer;
     QString         errorId1, errorId2;
     QStringList     output;
@@ -70,7 +70,7 @@ ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,
     d->isShown     = false;
     d->hasError    = false;
 
-    d->cvsJob      = new CvsJob_stub(job);
+    d->cvsJob      = new OrgKdeCervisiaCvsserviceCvsjobInterface(job);
     d->buffer      = "";
 
     d->errorId1 = "cvs " + errorIndicator + ':';

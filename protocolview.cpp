@@ -30,7 +30,7 @@
 #include <kmessagebox.h>
 
 #include "cervisiapart.h"
-#include "cvsjob_stub.h"
+#include "cvsjobinterface.h"
 
 
 ProtocolView::ProtocolView(const DCOPCString& appId, QWidget *parent, const char *name)
@@ -53,7 +53,7 @@ ProtocolView::ProtocolView(const DCOPCString& appId, QWidget *parent, const char
     remoteChangeColor=config->readEntry("RemoteChange", QColor(70, 210, 70));
 
     // create a DCOP stub for the non-concurrent cvs job
-    job = new CvsJob_stub(appId, "NonConcurrentJob");
+    job = new OrgKdeCervisiaCvsserviceCvsjobInterface(appId, "NonConcurrentJob");
 
     // establish connections to the signals of the cvs job
     connectDCOPSignal(job->app(), job->obj(), "jobExited(bool, int)",

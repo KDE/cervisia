@@ -30,7 +30,7 @@
 
 class QPoint;
 class Q3PopupMenu;
-class CvsJob_stub;
+class OrgKdeCervisiaCvsserviceCvsjobInterface;
 
 
 class ProtocolView : public Q3TextEdit
@@ -68,7 +68,7 @@ private:
     QColor localChangeColor;
     QColor remoteChangeColor;
 
-    CvsJob_stub* job;
+    OrgKdeCervisiaCvsserviceCvsjobInterface* job;
 
     bool   m_isUpdateJob;
 };

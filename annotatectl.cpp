@@ -30,7 +30,7 @@
 #include "loginfo.h"
 #include "progressdlg.h"
 #include "cvsserviceinterface.h"
-#include "cvsjob_stub.h"
+#include "cvsjobinterface.h"
 
 using namespace Cervisia;
 
