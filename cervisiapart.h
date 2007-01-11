@@ -79,8 +79,6 @@ public slots:
     void popupRequested(K3ListView*, Q3ListViewItem*, const QPoint&);
     void updateActions();
 
-    void aboutCervisia();
-
     void slotOpen();
     void slotResolve();
     void slotStatus();

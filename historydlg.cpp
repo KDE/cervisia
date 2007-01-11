@@ -25,11 +25,8 @@
 #include <qlayout.h>
 #include <qpushbutton.h>
 #include <qregexp.h>
+#include <kglobal.h>
 #include <kpushbutton.h>
-//Added by qt3to4:
-#include <QVBoxLayout>
-#include <QGridLayout>
-#include <QBoxLayout>
 #include <klineedit.h>
 #include <k3listview.h>
 #include <klocale.h>
@@ -228,8 +225,8 @@ HistoryDialog::HistoryDialog(KConfigBase& cfg, QWidget *parent, const char *name
     grid->addWidget(dirname_edit,      2, 2);
 
     // no default button because "return" is needed to activate the filters (line edits)
-    actionButton(Help)->setAutoDefault(false);
-    actionButton(Close)->setAutoDefault(false);
+    button(Help)->setAutoDefault(false);
+    button(Close)->setAutoDefault(false);
 
     setHelp("browsinghistory");
 

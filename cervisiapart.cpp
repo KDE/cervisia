@@ -116,7 +116,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
 
     // start the cvs DCOP service
     QString error;
-    QByteArray appId;
+    QString appId;
     if( KToolInvocation::startServiceByDesktopName("cvsservice", QStringList(), &error, &appId) )
     {
         KMessageBox::sorry(0, i18n("Starting cvsservice failed with message: ") +
@@ -243,9 +243,9 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    recent = new KRecentFilesAction( i18n("Recent Sandboxes"), 0,
-                                     this, SLOT( openURL( const KUrl & ) ),
-                                     actionCollection(), "file_open_recent" );
+    recent = new KRecentFilesAction( i18n("Recent Sandboxes"), this );
+    actionCollection()->addAction("file_open_recent", recent);
+    connect(recent, SIGNAL(triggered(bool)), SLOT(openURL(const KUrl&))),
 
     action  = new KAction(i18n("&Insert ChangeLog Entry..."), this);
     actionCollection()->addAction("insert_changelog_entry", action );
@@ -541,7 +541,7 @@ void CervisiaPart::setupActions()
     KToggleAction *toggaction  = new KToggleAction(i18n("Hide All &Files"), this);
     actionCollection()->addAction("settings_hide_files", toggaction );
     connect(toggaction, SIGNAL(triggered(bool) ), SLOT(slotHideFiles()));
-    toggaction->setCheckedState(i18n("Show All &Files"));
+    toggaction->setCheckedState(KGuiItem(i18n("Show All &Files")));
     hint = i18n("Determines whether only folders are shown");
     toggaction->setToolTip( hint );
     toggaction->setWhatsThis( hint );
@@ -549,7 +549,7 @@ void CervisiaPart::setupActions()
     toggaction  = new KToggleAction(i18n("Hide Unmodified Files"), this);
     actionCollection()->addAction("settings_hide_uptodate", toggaction );
     connect(toggaction, SIGNAL(triggered(bool) ), SLOT(slotHideUpToDate()));
-    toggaction->setCheckedState(i18n("Show Unmodified Files"));
+    toggaction->setCheckedState(KGuiItem(i18n("Show Unmodified Files")));
     hint = i18n("Determines whether files with status up-to-date or "
                 "unknown are hidden");
     toggaction->setToolTip( hint );
@@ -558,7 +558,7 @@ void CervisiaPart::setupActions()
     toggaction  = new KToggleAction(i18n("Hide Removed Files"), this);
     actionCollection()->addAction("settings_hide_removed", toggaction );
     connect(toggaction, SIGNAL(triggered(bool) ), SLOT(slotHideRemoved()));
-    toggaction->setCheckedState(i18n("Show Removed Files"));
+    toggaction->setCheckedState(KGuiItem(i18n("Show Removed Files")));
     hint = i18n("Determines whether removed files are hidden");
     toggaction->setToolTip( hint );
     toggaction->setWhatsThis( hint );
@@ -566,7 +566,7 @@ void CervisiaPart::setupActions()
     toggaction  = new KToggleAction(i18n("Hide Non-CVS Files"), this);
     actionCollection()->addAction("settings_hide_notincvs", toggaction );
     connect(toggaction, SIGNAL(triggered(bool) ), SLOT(slotHideNotInCVS()));
-    toggaction->setCheckedState(i18n("Show Non-CVS Files"));
+    toggaction->setCheckedState(KGuiItem(i18n("Show Non-CVS Files")));
     hint = i18n("Determines whether files not in CVS are hidden");
     toggaction->setToolTip( hint );
     toggaction->setWhatsThis( hint );
@@ -574,7 +574,7 @@ void CervisiaPart::setupActions()
     toggaction  = new KToggleAction(i18n("Hide Empty Folders"), this);
     actionCollection()->addAction("settings_hide_empty_directories", toggaction );
     connect(toggaction, SIGNAL(triggered(bool) ), SLOT(slotHideEmptyDirectories()));
-    toggaction->setCheckedState(i18n("Show Empty Folders"));
+    toggaction->setCheckedState(KGuiItem(i18n("Show Empty Folders")));
     hint = i18n("Determines whether folders without visible entries are hidden");
     toggaction->setToolTip( hint );
     toggaction->setWhatsThis( hint );
@@ -640,10 +640,7 @@ void CervisiaPart::setupActions()
     toggaction  = new KToggleAction(i18n("Unfold Folder"), this);
     actionCollection()->addAction("unfold_folder", toggaction );
     connect(toggaction, SIGNAL(triggered(bool) ), SLOT( slotUnfoldFolder() ));
-    toggaction->setCheckedState(i18n("Fold Folder"));
-
-    //action = KStandardAction::aboutApp( this, SLOT(aboutCervisia()),
-    //               actionCollection(), "help_about_cervisia" );
+    toggaction->setCheckedState(KGuiItem(i18n("Fold Folder")));
 }
 
 
@@ -719,28 +716,6 @@ void CervisiaPart::updateActions()
     stateChanged("has_running_job", hasRunningJob ? StateNoReverse
                                                   : StateReverse);
 
-}
-
-
-void CervisiaPart::aboutCervisia()
-{
-    QString aboutstr(i18n("Cervisia %1\n"
-                          "(Using KDE %2)\n"
-                          "\n"
-                          "Copyright (c) 1999-2002\n"
-                          "Bernd Gehrmann <bernd@mail.berlios.de>\n"
-                          "\n"
-                          "This program is free software; you can redistribute it and/or modify\n"
-                          "it under the terms of the GNU General Public License as published by\n"
-                          "the Free Software Foundation; either version 2 of the License, or\n"
-                          "(at your option) any later version.\n"
-                          "This program is distributed in the hope that it will be useful,\n"
-                          "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-                          "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-                          "GNU General Public License for more details.\n"
-                          "See the ChangeLog file for a list of contributors.",
-                          QString(CERVISIA_VERSION), QString(KDE_VERSION_STRING)));
-    QMessageBox::about(0, i18n("About Cervisia"), aboutstr);
 }
 
 
