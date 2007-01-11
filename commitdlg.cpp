@@ -32,6 +32,7 @@
 #include <QTextStream>
 #include <QBoxLayout>
 #include <QVBoxLayout>
+#include <kconfig.h>
 #include <klocale.h>
 
 #include "cvsserviceinterface.h"
@@ -55,7 +56,7 @@ private:
 };
 
 
-CommitDialog::CommitDialog(KConfigBase& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
+CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
                            QWidget *parent, const char *name)
     : KDialog(parent)
     , partConfig(cfg)

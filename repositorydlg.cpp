@@ -156,7 +156,7 @@ void RepositoryListItem::changeLoginStatusColumn()
 }
 
 
-RepositoryDialog::RepositoryDialog(KConfigBase& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService,
+RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService,
                                    QWidget* parent, const char* name)
     : KDialog(parent)
     , m_partConfig(cfg)

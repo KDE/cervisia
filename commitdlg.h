@@ -39,7 +39,7 @@ class CommitDialog : public KDialog
     Q_OBJECT
 
 public:
-    CommitDialog( KConfigBase& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* service, QWidget *parent=0, 
+    CommitDialog( KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* service, QWidget *parent=0, 
                   const char *name=0 );
 
     virtual ~CommitDialog();
@@ -74,7 +74,7 @@ private:
     QCheckBox* m_useTemplateChk;
     QString    m_templateText;
 
-    KConfigBase&        partConfig;
+    KConfig&            partConfig;
     OrgKdeCervisiaCvsserviceCvsserviceInterface*    cvsService;     // for diff dialog
 };
 
