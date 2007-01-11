@@ -307,7 +307,7 @@ void HistoryDialog::toggled(bool b)
 }
 
 
-bool HistoryDialog::parseHistory(LocalCvsServiceInterface* cvsService)
+bool HistoryDialog::parseHistory(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService)
 {
     setCaption(i18n("CVS History"));
 

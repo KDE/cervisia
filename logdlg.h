@@ -38,7 +38,7 @@ class QComboBox;
 class QLabel;
 class QTabWidget;
 class Q3TextEdit;
-class LocalCvsServiceInterface;
+class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 
 class LogDialogTagInfo
 {
@@ -58,7 +58,7 @@ public:
 
     virtual ~LogDialog();
 
-    bool parseCvsLog(LocalCvsServiceInterface* service, const QString& fileName);
+    bool parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service, const QString& fileName);
 
 protected slots:
     void slotOk();
@@ -93,7 +93,7 @@ private:
     Q3TextEdit *tagsbox[2];
     QComboBox *tagcombo[2];
 
-    LocalCvsServiceInterface* cvsService;
+    OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService;
     KConfigBase&     partConfig;
 };
 

@@ -45,7 +45,7 @@ class ProtocolView;
 class KAboutData;
 class K3ListView;
 class KRecentFilesAction;
-class LocalCvsServiceInterface;
+class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 class CervisiaBrowserExtension;
 
 
@@ -183,7 +183,7 @@ private:
     //for the Open Recent directories
     KRecentFilesAction *recent;
 
-    LocalCvsServiceInterface*            cvsService;
+    OrgKdeCervisiaCvsserviceCvsserviceInterface*            cvsService;
     KParts::StatusBarExtension* m_statusBar;
     CervisiaBrowserExtension*   m_browserExt;
     QLabel*                     filterLabel;

@@ -40,7 +40,7 @@
 #include "version.h"
 
 
-static LocalCvsServiceInterface* StartDCOPService(const QString& directory)
+static OrgKdeCervisiaCvsserviceCvsserviceInterface* StartDCOPService(const QString& directory)
 {
     // start the cvs DCOP service
     QString error;
@@ -58,7 +58,7 @@ static LocalCvsServiceInterface* StartDCOPService(const QString& directory)
     repository.call("setWorkingCopy(QString)", directory);
 
     // create a reference to the service
-    return new LocalCvsServiceInterface(appId, "CvsService");
+    return new OrgKdeCervisiaCvsserviceCvsserviceInterface(appId, "CvsService");
 }
 
 
@@ -92,7 +92,7 @@ static int ShowLogDialog(const QString& fileName)
     QString directory = fi.absolutePath();
 
     // start the cvs DCOP service
-    LocalCvsServiceInterface* cvsService = StartDCOPService(directory);
+    OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService = StartDCOPService(directory);
 
     if( dlg->parseCvsLog(cvsService, fi.fileName()) )
         dlg->show();
@@ -122,7 +122,7 @@ static int ShowAnnotateDialog(const QString& fileName)
     QString directory = fi.absolutePath();
 
     // start the cvs DCOP service
-    LocalCvsServiceInterface* cvsService = StartDCOPService(directory);
+    OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService = StartDCOPService(directory);
 
     AnnotateController ctl(dlg, cvsService);
     ctl.showDialog(fi.fileName());

@@ -25,7 +25,7 @@
 
 class Q3Table;
 class KConfigBase;
-class LocalCvsServiceInterface;
+class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 
 
 class WatchersDialog : public KDialog
@@ -35,7 +35,7 @@ public:
                             const char* name = 0);
     virtual ~WatchersDialog();
 
-    bool parseWatchers(LocalCvsServiceInterface* cvsService, const QStringList& files);
+    bool parseWatchers(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService, const QStringList& files);
 
 private:
     Q3Table*  table;

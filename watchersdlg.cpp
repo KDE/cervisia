@@ -79,7 +79,7 @@ WatchersDialog::~WatchersDialog()
 }
 
 
-bool WatchersDialog::parseWatchers(LocalCvsServiceInterface* cvsService, 
+bool WatchersDialog::parseWatchers(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService, 
                                    const QStringList& files)
 {
     setCaption(i18n("CVS Watchers"));

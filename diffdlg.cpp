@@ -225,7 +225,7 @@ public:
 };
 
 
-bool DiffDialog::parseCvsDiff(LocalCvsServiceInterface* service, const QString& fileName,
+bool DiffDialog::parseCvsDiff(OrgKdeCervisiaCvsserviceCvsserviceInterface* service, const QString& fileName,
                               const QString &revA, const QString &revB)
 {
     QStringList linesA, linesB;
@@ -360,7 +360,7 @@ void DiffDialog::newDiffHunk(int& linenoA, int& linenoB,
 }
 
 
-void DiffDialog::callExternalDiff(const QString& extdiff, LocalCvsServiceInterface* service,
+void DiffDialog::callExternalDiff(const QString& extdiff, OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
                                   const QString& fileName, const QString &revA,
                                   const QString &revB)
 {

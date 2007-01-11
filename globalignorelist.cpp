@@ -45,7 +45,7 @@ bool GlobalIgnoreList::matches(const QFileInfo* fi) const
 }
 
 
-void GlobalIgnoreList::retrieveServerIgnoreList(LocalCvsServiceInterface* cvsService,
+void GlobalIgnoreList::retrieveServerIgnoreList(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService,
                                                 const QString& repository)
 {
     KTemporaryFile tmpFile;

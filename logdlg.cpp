@@ -221,7 +221,7 @@ LogDialog::~LogDialog()
 }
 
 
-bool LogDialog::parseCvsLog(LocalCvsServiceInterface* service, const QString& fileName)
+bool LogDialog::parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service, const QString& fileName)
 {
     QString rev;
 

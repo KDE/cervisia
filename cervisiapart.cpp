@@ -125,7 +125,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
     }
     else
       // create a reference to the service
-      cvsService = new LocalCvsServiceInterface(appId, "CvsService");
+      cvsService = new OrgKdeCervisiaCvsserviceCvsserviceInterface(appId, "CvsService");
 
     // Create UI
     KConfigBase *conf = config();

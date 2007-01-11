@@ -39,7 +39,7 @@ struct AnnotateController::Private
     typedef QMap<QString, QString>  RevisionCommentMap;
     RevisionCommentMap  comments;                  // maps comment to a revision
 
-    LocalCvsServiceInterface*    cvsService;
+    OrgKdeCervisiaCvsserviceCvsserviceInterface*    cvsService;
     AnnotateDialog*     dialog;
     ProgressDialog*     progress;
 
@@ -49,7 +49,7 @@ struct AnnotateController::Private
 };
 
 
-AnnotateController::AnnotateController(AnnotateDialog* dialog, LocalCvsServiceInterface* cvsService)
+AnnotateController::AnnotateController(AnnotateDialog* dialog, OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService)
     : d(new Private)
 {
     // initialize private data

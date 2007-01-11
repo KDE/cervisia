@@ -1,6 +1,6 @@
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
 <node>
-  <interface name="local.CvsService">
+  <interface name="org.kde.cervisia.cvsservice.cvsservice">
     <method name="add">
       <arg name="files" type="as" direction="in"/>
       <arg name="isBinary" type="b" direction="in"/>

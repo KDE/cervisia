@@ -37,7 +37,7 @@
 #include "cvsserviceinterface.h"
 
 
-UpdateDialog::UpdateDialog(LocalCvsServiceInterface* service,
+UpdateDialog::UpdateDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
                            QWidget *parent, const char *name)
     : KDialog(parent),
       cvsService(service)
