@@ -49,7 +49,8 @@ public:
     CvsJob& operator<<(const char* arg);
     CvsJob& operator<<(const Q3CString& arg);
     CvsJob& operator<<(const QStringList& args);
-
+    
+    QString dbusObjectPath() const;
 public Q_SLOTS: //dbus function
     Q_SCRIPTABLE bool execute();
     Q_SCRIPTABLE void cancel();

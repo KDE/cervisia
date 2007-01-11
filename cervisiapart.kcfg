@@ -4,6 +4,7 @@
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile name="cervisiapartrc" />
+  <include>kglobalsettings.h</include>
   <group name="Colors" >
     <entry name="DiffChangeColor" key="DiffChange" type="Color">
       <default>#edbebe</default>

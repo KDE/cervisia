@@ -45,6 +45,7 @@ struct CvsJob::Private
     QString     directory;
     bool        isRunning;
     QStringList outputLines;
+    QString     dbusObjectPath;
 };
 
 
@@ -54,7 +55,8 @@ CvsJob::CvsJob(unsigned jobNum)
 {
     (void)new CvsjobAdaptor(this);
     QDBusConnection dbus = QDBusConnection::sessionBus();
-    dbus.registerObject( "/CvsJob"+QString::number(jobNum), this, QDBusConnection::ExportNonScriptableSlots );
+    d->dbusObjectPath = "/CvsJob"+QString::number(jobNum);
+    dbus.registerObject( d->dbusObjectPath, this, QDBusConnection::ExportNonScriptableSlots );
 }
 
 
@@ -64,7 +66,8 @@ CvsJob::CvsJob(const QString& objId)
 {
     (void)new CvsjobAdaptor(this);
     //TODO register it with good name
-    QDBusConnection::sessionBus().registerObject( "/"+objId, this, QDBusConnection::ExportNonScriptableSlots );
+    d->dbusObjectPath = "/"+objId;
+    QDBusConnection::sessionBus().registerObject( d->dbusObjectPath, this, QDBusConnection::ExportNonScriptableSlots );
 }
 
 
@@ -73,6 +76,10 @@ CvsJob::~CvsJob()
     delete d;
 }
 
+QString CvsJob::dbusObjectPath() const
+{
+   return d->dbusObjectPath;
+}
 
 void CvsJob::clearCvsCommand()
 {
