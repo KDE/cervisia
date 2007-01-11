@@ -180,7 +180,7 @@ QDBusObjectPath CvsService::annotate(const QString& fileName, const QString& rev
     // because the string "Annotations for blabla" is
     // printed to stderr even with option -Q.
     *job << quotedName << ")" << REDIRECT_STDERR;
-    return QDBusObjectPath(job->dbusObjectPath);
+    return QDBusObjectPath(job->dbusObjectPath());
 }
 
 

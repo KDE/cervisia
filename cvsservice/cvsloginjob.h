@@ -41,6 +41,7 @@ public:
     void setCvsClient(const QByteArray& cvsClient);
     void setRepository(const QByteArray& repository);
 
+    QString dbusObjectPath() const;
 public slots:
     bool execute();
     QStringList output();
@@ -52,6 +53,7 @@ private:
     QByteArray     m_CvsClient;
     QList<QByteArray> m_Arguments;
     QStringList    m_output;
+    QString        m_dbusObjectPath;
 };
 
 

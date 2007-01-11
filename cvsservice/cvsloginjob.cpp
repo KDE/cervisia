@@ -37,9 +37,10 @@ static const char PASS_PHRASE[]    = "CVS password: ";
 CvsLoginJob::CvsLoginJob(unsigned jobNum)
     : m_Proc(0)
 {
-    new CvsloginjobAdaptor(this); 
-    QString objId("/CvsLoginJob" + QString::number(jobNum));
-    QDBusConnection::sessionBus().registerObject(objId, this);
+    new CvsloginjobAdaptor(this);
+    m_dbusObjectPath = "/CvsLoginJob" + QString::number(jobNum); 
+    QDBusConnection::sessionBus().registerObject(m_dbusObjectPath, this);
+
     m_Proc = new PtyProcess;
 }
 
@@ -49,6 +50,11 @@ CvsLoginJob::~CvsLoginJob()
     delete m_Proc;
 }
 
+
+QString CvsLoginJob::dbusObjectPath() const
+{
+  return m_dbusObjectPath;
+}
 
 void CvsLoginJob::setServer(const QString& server)
 {
