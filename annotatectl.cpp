@@ -22,7 +22,6 @@
 #include <qdatetime.h>
 #include <qmap.h>
 
-#include <dcopref.h>
 #include <klocale.h>
 #include <krfcdate.h>
 

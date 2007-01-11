@@ -114,7 +114,8 @@ ResolveDialog::ResolveDialog(KConfigBase& cfg, QWidget *parent, const char *name
 
     items.setAutoDelete(true);
 
-    QFrame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = new QFrame(this);
+    setMainWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
     layout->setSpacing(spacingHint());
@@ -594,7 +595,7 @@ void ResolveDialog::saveClicked()
 void ResolveDialog::saveAsClicked()
 {
     QString filename =
-        KFileDialog::getSaveFileName(0, 0, this, 0);
+        KFileDialog::getSaveFileName(KUrl(), QString(), this, QString());
 
     if( !filename.isEmpty() && Cervisia::CheckOverwrite(filename) )
         saveFile(filename);

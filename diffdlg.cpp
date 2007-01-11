@@ -370,7 +370,7 @@ void DiffDialog::callExternalDiff(const QString& extdiff, OrgKdeCervisiaCvsservi
     // create suffix for temporary file (used QFileInfo to remove path from file name)
     const QString suffix = '-' + QFileInfo(fileName).fileName();
 
-    QDBusObjectPath job;
+    QDBusReply<QDBusObjectPath> job;
     if (!revA.isEmpty() && !revB.isEmpty())
     {
         // We're comparing two revisions
@@ -380,7 +380,7 @@ void DiffDialog::callExternalDiff(const QString& extdiff, OrgKdeCervisiaCvsservi
         // download the files for revision A and B
         job = service->downloadRevision(fileName, revA, revAFilename,
                                                 revB, revBFilename);
-        if( !job->isValid() )
+        if( !job.isValid() )
             return;
 
         extcmdline += KProcess::quote(revAFilename);
@@ -392,7 +392,7 @@ void DiffDialog::callExternalDiff(const QString& extdiff, OrgKdeCervisiaCvsservi
         // We're comparing to a file, and perhaps one revision
         QString revAFilename = tempFileName(suffix+QString("-")+revA);
         job = service->downloadRevision(fileName, revA, revAFilename);
-        if( !job->isValid() )
+        if( !job.isValid() )
             return;
 
         extcmdline += KProcess::quote(revAFilename);

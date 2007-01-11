@@ -24,7 +24,6 @@
 #include <qdir.h>
 #include <q3popupmenu.h>
 #include <qtextdocument.h>
-#include <dcopref.h>
 #include <kconfigbase.h>
 #include <klocale.h>
 #include <kmessagebox.h>

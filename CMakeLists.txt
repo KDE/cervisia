@@ -15,7 +15,7 @@ set(libcervisia_SRCS
    diffdlg.cpp
    patchoptiondlg.cpp
    logdlg.cpp
-   progressdlg.cpp
+   #progressdlg.cpp
    resolvedlg.cpp
    resolvedlg_p.cpp
    annotateview.cpp

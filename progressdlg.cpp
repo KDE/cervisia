@@ -29,7 +29,6 @@
 #include <QHBoxLayout>
 #include <Q3ListBox>
 #include <cvsjobinterface.h>
-#include <dcopref.h>
 #include <kanimatedbutton.h>
 #include <kapplication.h>
 
@@ -54,10 +53,9 @@ struct ProgressDialog::Private
 
 
 ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,
-                               const QDBusReply<QDBusObjectPath>& job, const QString& errorIndicator,
+                               const QDBusReply<QDBusObjectPath>& jobPath, const QString& errorIndicator,
                                const QString& caption)
     : KDialog(parent)
-    , DCOPObject()
     , d(new Private)
 {
     // initialize private data
@@ -70,7 +68,8 @@ ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,
     d->isShown     = false;
     d->hasError    = false;
 
-    d->cvsJob      = new OrgKdeCervisiaCvsserviceCvsjobInterface(job);
+    QDBusObjectPath path = jobPath.path();
+    d->cvsJob      = new OrgKdeCervisiaCvsserviceCvsjobInterface("org.kde.cervisia",path,QDBusConnection::sessionBus(), this);
     d->buffer      = "";
 
     d->errorId1 = "cvs " + errorIndicator + ':';
@@ -242,11 +241,13 @@ void ProgressDialog::stopNonGuiPart()
 
 void ProgressDialog::startGuiPart()
 {
+#warning "KDE4 port D-Bus";	
+#if 0	
     connectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "receivedStdout(QString)",
                       "slotReceivedOutput(QString)", true);
     connectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "receivedStderr(QString)",
                       "slotReceivedOutput(QString)", true);
-
+#endif
     show();
     d->isShown = true;
 

@@ -21,10 +21,10 @@
 #define PROGRESSDLG_H
 
 #include <kdialog.h>
-
+#include <QDBusReply>
 class QString;
 class QWidget;
-
+class QDBusObjectPath;
 class ProgressDialog : public KDialog
 {
     Q_OBJECT

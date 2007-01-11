@@ -93,9 +93,17 @@
       <arg name="revA" type="s" direction="in"/>
       <arg name="revB" type="s" direction="in"/>
       <arg name="diffOptions" type="s" direction="in"/>
+      <arg name="context" type="u" direction="in"/>
+      <arg type="o" direction="out"/>
+   </method>
+    <method name="diff">
+      <arg name="fileName" type="s" direction="in"/>
+      <arg name="revA" type="s" direction="in"/>
+      <arg name="revB" type="s" direction="in"/>
+      <arg name="diffOptions" type="s" direction="in"/>
       <arg name="format" type="s" direction="in"/>
       <arg type="o" direction="out"/>
-    </method>
+   </method>
     <method name="edit">
       <arg name="files" type="as" direction="in"/>
       <arg type="o" direction="out"/>

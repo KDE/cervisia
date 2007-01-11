@@ -69,7 +69,8 @@ LogDialog::LogDialog(KConfigBase& cfg, QWidget *parent, const char *name)
     setDefaultButton(Close);
     showButtonSeparator(true);
 
-    QFrame* mainWidget = makeMainWidget();
+    QFrame* mainWidget = new QFrame(this);
+    setMainWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
     layout->setSpacing(spacingHint());
