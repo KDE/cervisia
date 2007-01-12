@@ -162,3 +162,6 @@ QStringList CvsLoginJob::output()
 {
     return m_output;
 }
+
+
+#include "cvsloginjob.moc"

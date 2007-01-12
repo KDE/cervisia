@@ -1004,3 +1004,6 @@ bool CvsService::Private::hasRunningJob()
 
     return result;
 }
+
+
+#include "cvsservice.moc"
