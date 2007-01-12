@@ -180,6 +180,7 @@
       <arg name="repository" type="s" direction="in"/>
       <arg name="module" type="s" direction="in"/>
       <arg name="recursive" type="b" direction="in"/>
+      <arg type="o" direction="out"/>
     </method>
     <method name="simulateUpdate">
       <arg name="files" type="as" direction="in"/>

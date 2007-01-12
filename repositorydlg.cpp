@@ -430,10 +430,11 @@ void RepositoryDialog::slotLoginClicked()
               << item->repository() << endl;
 
     QDBusReply<QDBusObjectPath> job = m_cvsService->login(item->repository());
-    if( !m_job.isValid() )
+    if( !job.isValid() )
         // TODO: error handling
         return;
-
+#warning "kde4 port to dbus"
+#if 0
     bool success = job.call("execute()");
     if( !success )
     {
@@ -444,6 +445,7 @@ void RepositoryDialog::slotLoginClicked()
 
     item->setIsLoggedIn(true);
     slotSelectionChanged();
+#endif    
 }
 
 
@@ -454,7 +456,7 @@ void RepositoryDialog::slotLogoutClicked()
         return;
 
     QDBusReply<QDBusObjectPath> job = m_cvsService->logout(item->repository());
-    if( !m_job.isValid() )
+    if( !job.isValid() )
         // TODO: error handling
         return;
 

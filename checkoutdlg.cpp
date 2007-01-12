@@ -358,7 +358,7 @@ void CheckoutDialog::dirButtonClicked()
 void CheckoutDialog::moduleButtonClicked()
 {
     QDBusReply<QDBusObjectPath> cvsJob = cvsService->moduleList(repository());
-    if( !job.isValid() )
+    if( !cvsJob.isValid() )
         return;
 
     ProgressDialog dlg(this, "Checkout", cvsJob, "checkout", i18n("CVS Checkout"));
@@ -402,7 +402,7 @@ void CheckoutDialog::branchButtonClicked()
 
     QDBusReply<QDBusObjectPath> cvsJob = cvsService->rlog(repository(), module(),
                                       false/*recursive*/);
-    if( !job.isValid() )
+    if( !cvsJob.isValid() )
         return;
 
     ProgressDialog dlg(this, "Remote Log", cvsJob, QString::null,
