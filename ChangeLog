@@ -1,3 +1,8 @@
+2007-01-13  André Wöbbeking  <Woebbeking@web.de>
+
+	* Fix:
+	  Handle '.' in user name when adding a repository.
+
 2006-09-02  André Wöbbeking  <Woebbeking@web.de>
 
 	* Fix BR #133129:
