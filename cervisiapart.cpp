@@ -50,6 +50,7 @@
 #include <ktoggleaction.h>
 #include <krecentfilesaction.h>
 
+#include <repositoryinterface.h>
 #include "progressdlg.h"
 #include "logdlg.h"
 #include "diffdlg.h"
@@ -1685,7 +1686,7 @@ bool CervisiaPart::openSandbox(const QString &dirname)
     if( !cvsService )
         return false;
 
-    Repository_stub cvsRepository(cvsService->app(), "CvsRepository");
+    OrgKdeCervisiaRepositoryInterface cvsRepository(cvsService->app(), "CvsRepository");
 
     // change the working copy directory for the cvs DCOP service
     bool opened = cvsRepository.setWorkingCopy(dirname);
