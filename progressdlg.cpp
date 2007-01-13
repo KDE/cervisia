@@ -76,6 +76,7 @@ ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,
     d->errorId2 = "cvs [" + errorIndicator + " aborted]:";
 
     setupGui(heading);
+    connect(this,SIGNAL(cancelClicked()),this,SLOT(slotCancel()));
 }
 
 
