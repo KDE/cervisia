@@ -1,4 +1,4 @@
-CERVISIA_VERSION = 2.4.5
+CERVISIA_VERSION = 2.4.6
 INCLUDES = -I./cvsservice -D_BSD_SOURCE $(all_includes)
 
 SUBDIRS = cvsservice . pics
