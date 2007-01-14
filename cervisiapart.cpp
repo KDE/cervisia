@@ -189,7 +189,7 @@ KConfig *CervisiaPart::config()
     return CervisiaFactory::instance()->config();
 }
 
-bool CervisiaPart::openURL( const KUrl &u )
+bool CervisiaPart::openUrl( const KUrl &u )
 {
     // right now, we are unfortunately not network-aware
     if( !u.isLocalFile() )
