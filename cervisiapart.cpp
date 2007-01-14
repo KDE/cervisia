@@ -1758,7 +1758,7 @@ bool CervisiaPart::openSandbox(const QString &dirname)
 
         // remove path from recent sandbox menu
         QFileInfo fi(dirname);
-        recent->removeUrl( KUrl::fromPathOrUrl(fi.absoluteFilePath()) );
+        recent->removeUrl( KUrl(fi.absoluteFilePath()) );
 
         return false;
     }
@@ -1769,14 +1769,14 @@ bool CervisiaPart::openSandbox(const QString &dirname)
 
     // get path of sandbox for recent sandbox menu
     sandbox = cvsRepository.workingCopy();
-    recent->addUrl( KUrl::fromPathOrUrl(sandbox) );
+    recent->addUrl( KUrl(sandbox) );
 
     // get repository for the caption of the window
     repository = cvsRepository.location();
     emit setWindowCaption(sandbox + '(' + repository + ')');
 
     // set m_url member for tabbed window modus of Konqueror
-    m_url = KUrl::fromPathOrUrl(sandbox);
+    m_url = KUrl(sandbox);
 
     // *NOTICE*
     // The order is important here. We have to set the m_url member before

@@ -36,9 +36,9 @@
 
 
 CervisiaShell::CervisiaShell( const char *name )
-  : KParts::MainWindow( 0L,name )
-  , m_part(0)
+  : m_part(0)
 {
+    setObjectName( name );
     setXMLFile( "cervisiashellui.rc" );
 
     KLibFactory* factory = KLibLoader::self()->factory("libcervisiapart");
@@ -142,7 +142,7 @@ void CervisiaShell::setupActions()
 void CervisiaShell::openURL()
 {
     if( !m_lastOpenDir.isEmpty() )
-        m_part->openUrl(KUrl::fromPathOrUrl(m_lastOpenDir));
+        m_part->openUrl( KUrl( m_lastOpenDir ) );
 }
 
 
