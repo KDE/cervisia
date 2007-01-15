@@ -232,7 +232,6 @@ void SettingsDialog::done(int res)
     if (res == Accepted)
         writeSettings();
     KDialog::done(res);
-    delete this;
 }
 
 

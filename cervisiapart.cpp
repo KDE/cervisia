@@ -1707,6 +1707,7 @@ void CervisiaPart::slotConfigure()
     splitter->setOrientation( splitHorz ?
                               Qt::Vertical :
                               Qt::Horizontal);
+    delete l;
 }
 
 void CervisiaPart::slotHelp()
