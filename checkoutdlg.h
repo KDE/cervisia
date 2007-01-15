@@ -56,8 +56,8 @@ public:
     bool exportOnly() const;
     bool recursive() const;
 
-protected:
-    virtual void slotOk();
+protected slots:
+    void slotOk();
     
 private slots:
     void dirButtonClicked();

@@ -44,8 +44,8 @@ public:
     void readConfigFile();
     void readCvsPassFile();
 
-protected:
-    virtual void slotOk();
+protected slots:
+    void slotOk();
 
 private slots:
     void slotAddClicked();

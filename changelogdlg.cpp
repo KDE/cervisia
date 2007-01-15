@@ -20,7 +20,7 @@
 
 
 #include "changelogdlg.h"
-
+#include "changelogdlg.moc"
 #include <QDate>
 
 #include <qfile.h>

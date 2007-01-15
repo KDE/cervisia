@@ -35,6 +35,7 @@
 
 #include "addrepositorydlg.h"
 #include "cvsserviceinterface.h"
+#include "cvsjobinterface.h"
 #include "misc.h"
 #include "progressdlg.h"
 #include "repositories.h"
@@ -433,21 +434,23 @@ void RepositoryDialog::slotLoginClicked()
     if( !job.isValid() )
         // TODO: error handling
         return;
-#ifdef __GNUC__
-#warning "kde4 port to dbus"
-#endif
-#if 0
-    bool success = job.call("execute()");
+    QDBusObjectPath jobPath = job;
+    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface("org.kde.cervisia",jobPath.path(),QDBusConnection::sessionBus(), this);
+    QDBusReply<bool> reply = cvsjobinterface.execute();
+    bool success = false;
+    if(reply.isValid()) 
+	 success = reply;
     if( !success )
     {
-        QStringList output = job.call("output()");
+	QDBusReply<QStringList> ret = cvsjobinterface.output();
+	
+        QStringList output = ret;
         KMessageBox::detailedError(this, i18n("Login failed."), output.join("\n"));
         return;
     }
 
     item->setIsLoggedIn(true);
     slotSelectionChanged();
-#endif    
 }
 
 

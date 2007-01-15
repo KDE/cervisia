@@ -47,8 +47,8 @@ public:
     bool forceTag() const;
     QString tag() const;
 
-protected:
-    virtual void slotOk();
+protected slots:
+    void slotOk();
 
 private slots:
     void tagButtonClicked();
