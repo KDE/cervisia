@@ -59,6 +59,7 @@ static OrgKdeCervisiaCvsserviceCvsserviceInterface* StartDCOPService(const QStri
     // create a reference to the service
     return new OrgKdeCervisiaCvsserviceCvsserviceInterface(appId, "CvsService");
 #endif
+    return NULL;
 }
 
 
