@@ -37,8 +37,7 @@ class RepositoryDialog : public KDialog
     Q_OBJECT
 
 public:
-    RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService,
-                     QWidget* parent = 0, const char* name = 0);
+    RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService, const QString& cvsServiceInterfaceName, QWidget* parent = 0, const char* name = 0);
     virtual ~RepositoryDialog();
 
     void readConfigFile();
@@ -68,6 +67,7 @@ private:
     QPushButton*     m_removeButton;
     QPushButton*     m_loginButton;
     QPushButton*     m_logoutButton;
+    QString          m_cvsServiceInterfaceName;
 };
 
 #endif

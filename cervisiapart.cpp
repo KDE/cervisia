@@ -118,15 +118,15 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
 
     // start the cvs DCOP service
     QString error;
-    QString appId;
-    if( KToolInvocation::startServiceByDesktopName("cvsservice", QStringList(), &error, &appId) )
+    if( KToolInvocation::startServiceByDesktopName("cvsservice", QStringList(), &error, &m_cvsServiceInterfaceName) )
     {
         KMessageBox::sorry(0, i18n("Starting cvsservice failed with message: ") +
             error, "Cervisia");
     }
     else
       // create a reference to the service
-      cvsService = new OrgKdeCervisiaCvsserviceCvsserviceInterface(appId, "/CvsService",QDBusConnection::sessionBus(), this);
+      cvsService = new OrgKdeCervisiaCvsserviceCvsserviceInterface(m_cvsServiceInterfaceName, "/CvsService",QDBusConnection::sessionBus(), this);
+    kDebug()<<" m_cvsServiceInterfaceName :"<<m_cvsServiceInterfaceName<<endl;
     // Create UI
     KConfig *conf = config();
     conf->setGroup("LookAndFeel");
@@ -149,14 +149,14 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
                  this, SLOT(popupRequested(K3ListView*, Q3ListViewItem*, const QPoint&)) );
         connect( update, SIGNAL(fileOpened(QString)),
                  this, SLOT(openFile(QString)) );
-        protocol = new ProtocolView(appId, splitter);
+        protocol = new ProtocolView(m_cvsServiceInterfaceName, splitter);
         protocol->setFocusPolicy( Qt::StrongFocus );
 
         setWidget(splitter);
     }
     else
         setWidget(new QLabel(i18n("This KPart is non-functional, because the "
-                                  "cvs DCOP service could not be started."),
+                                  "cvs D-Bus service could not be started."),
                              parentWidget));
 
     if( cvsService )
@@ -864,7 +864,7 @@ void CervisiaPart::slotStatus()
     if(cvsJob.path().isEmpty())
        return;
 
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface("org.kde.cvsservice",cvsJob.path(),QDBusConnection::sessionBus(), this);
+    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
     if( reply.isValid() )
 	cmdline = reply;
@@ -980,7 +980,7 @@ void CervisiaPart::slotCommit()
         if(cvsJob.path().isEmpty())
            return;
 	
-        OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface("org.kde.cvsservice",cvsJob.path(),QDBusConnection::sessionBus(), this);
+        OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
         QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
         if( reply.isValid() )
             cmdline = reply;
@@ -1049,7 +1049,7 @@ void CervisiaPart::updateSandbox(const QString &extraopt)
     QDBusObjectPath cvsJob = cvsJobPath;
     if(cvsJob.path().isEmpty())
         return;
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface("org.kde.cvsservice",cvsJob.path(),QDBusConnection::sessionBus(), this);
+    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
     
     if( reply.isValid() )
@@ -1103,7 +1103,7 @@ void CervisiaPart::addOrRemove(AddRemoveDialog::ActionType action)
         if(cvsJobPath.path().isEmpty())
            return;
 	
-        OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface("org.kde.cvsservice",cvsJobPath.path(),QDBusConnection::sessionBus(), this);
+        OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJobPath.path(),QDBusConnection::sessionBus(), this);
         QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
         
 	if( reply.isValid() )
@@ -1214,7 +1214,7 @@ void CervisiaPart::addOrRemoveWatch(WatchDialog::ActionType action)
         if(cvsJobPath.path().isEmpty())
            return;
 
-        OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface("org.kde.cvsservice",cvsJobPath.path(),QDBusConnection::sessionBus(), this);
+        OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJobPath.path(),QDBusConnection::sessionBus(), this);
         QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
 
         if( reply.isValid() )
@@ -1258,7 +1258,7 @@ void CervisiaPart::slotEdit()
     if(cvsJob.path().isEmpty())
        return;
 
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface("org.kde.cvsservice",cvsJob.path(),QDBusConnection::sessionBus(), this);
+    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
     
     if( reply.isValid() )
@@ -1286,7 +1286,7 @@ void CervisiaPart::slotUnedit()
     if(cvsJobPath.path().isEmpty())
         return;
 
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface("org.kde.cvsservice",cvsJobPath.path(),QDBusConnection::sessionBus(), this);
+    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJobPath.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
 
     if( reply.isValid() )
@@ -1312,7 +1312,7 @@ void CervisiaPart::slotLock()
     if(cvsJob.path().isEmpty())
       return;    
     QString cmdline;
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface("org.kde.cvsservice",cvsJob.path(),QDBusConnection::sessionBus(), this);
+    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
 
     if( reply.isValid() )
@@ -1339,7 +1339,7 @@ void CervisiaPart::slotUnlock()
       return;
 
     QString cmdline;
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface("org.kde.cvsservice",cvsJob.path(),QDBusConnection::sessionBus(), this);
+    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
 
     if( reply.isValid() )
@@ -1366,7 +1366,7 @@ void CervisiaPart::slotShowEditors()
        return;
 
     QString cmdline;
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface("org.kde.cvsservice",cvsJob.path(),QDBusConnection::sessionBus(), this);
+    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
 
     if( reply.isValid() )
@@ -1442,7 +1442,7 @@ void CervisiaPart::slotImport()
     kdDebug()<<" cvsJob.path() :"<<cvsJob.path()<<endl;
     if(cvsJob.path().isEmpty())
 	return;
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface("org.kde.cvsservice",cvsJob.path(),QDBusConnection::sessionBus(), this);
+    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
 
     if( reply.isValid() )
@@ -1467,7 +1467,9 @@ void CervisiaPart::slotCreateRepository()
     QDBusReply<QDBusObjectPath> cvsJobPath = cvsService->createRepository(dlg.directory());
     QDBusObjectPath cvsJob = cvsJobPath;
     QString cmdline;
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface("org.kde.cvsservice",cvsJob.path(),QDBusConnection::sessionBus(), this);
+    if(cvsJob.path().isEmpty())
+	    return;
+    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
 
     if( reply.isValid() )
@@ -1494,7 +1496,7 @@ void CervisiaPart::slotCheckout()
                                           dlg.alias(), dlg.exportOnly(), dlg.recursive());
     QDBusObjectPath cvsJob = cvsJobPath;
     QString cmdline;
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface("org.kde.cvsservice",cvsJob.path(),QDBusConnection::sessionBus(), this);
+    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
 
     if( reply.isValid() )
@@ -1511,7 +1513,7 @@ void CervisiaPart::slotCheckout()
 
 void CervisiaPart::slotRepositories()
 {
-    RepositoryDialog *l = new RepositoryDialog(*config(), cvsService, widget());
+    RepositoryDialog *l = new RepositoryDialog(*config(), cvsService, m_cvsServiceInterfaceName, widget());
     l->show();
 }
 
@@ -1548,7 +1550,7 @@ void CervisiaPart::createOrDeleteTag(TagDialog::ActionType action)
                                            dlg.forceTag());
     QDBusObjectPath cvsJobPath = cvsJob;
         QString cmdline;
-        OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface("org.kde.cvsservice",cvsJobPath.path(),QDBusConnection::sessionBus(), this);
+        OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJobPath.path(),QDBusConnection::sessionBus(), this);
         QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
 
         if( reply.isValid() )

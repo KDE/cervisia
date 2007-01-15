@@ -157,11 +157,11 @@ void RepositoryListItem::changeLoginStatusColumn()
 }
 
 
-RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService,
-                                   QWidget* parent, const char* name)
+RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService, const QString& cvsServiceInterfaceName, QWidget* parent, const char* name)
     : KDialog(parent)
     , m_partConfig(cfg)
     , m_cvsService(cvsService)
+    , m_cvsServiceInterfaceName(cvsServiceInterfaceName)			      
 {
     setCaption(i18n("Configure Access to Repositories"));
     setModal(true);
@@ -435,7 +435,7 @@ void RepositoryDialog::slotLoginClicked()
         // TODO: error handling
         return;
     QDBusObjectPath jobPath = job;
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface("org.kde.cervisia",jobPath.path(),QDBusConnection::sessionBus(), this);
+    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,jobPath.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<bool> reply = cvsjobinterface.execute();
     bool success = false;
     if(reply.isValid()) 

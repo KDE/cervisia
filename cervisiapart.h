@@ -189,6 +189,7 @@ private:
     int                         m_editWithId;
     Cervisia::EditWithMenu*     m_currentEditMenu;
     JobType                     m_jobType;
+    QString 			m_cvsServiceInterfaceName;
 };
 
 typedef KParts::GenericFactory<CervisiaPart> CervisiaFactory;
