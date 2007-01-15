@@ -39,9 +39,9 @@ public:
     QStringList getOutput() const;
 
 public Q_SLOTS:
-    Q_SCRIPTABLE void slotReceivedOutputNonGui(QString buffer);
-    Q_SCRIPTABLE void slotReceivedOutput(QString buffer);
-    Q_SCRIPTABLE void slotJobExited(bool normalExit, int status);
+    void slotReceivedOutputNonGui(QString buffer);
+    void slotReceivedOutput(QString buffer);
+    void slotJobExited(bool normalExit, int status);
 
 protected slots:
     virtual void slotCancel();

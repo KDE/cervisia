@@ -47,11 +47,11 @@ public Q_SLOTS:
      *
      * @return A cvs command (including path).
      */
-    Q_SCRIPTABLE QString cvsClient() const;
+    QString cvsClient() const;
 
     /**
      */
-    Q_SCRIPTABLE QString clientOnly() const;
+    QString clientOnly() const;
     
     /**
      * Remote shell command line client which should be used to
@@ -60,29 +60,29 @@ public Q_SLOTS:
      *
      * @return The remote shell client. Can be null if not set.
      */
-    Q_SCRIPTABLE QString rsh() const;
+    QString rsh() const;
 
     /**
      * Program to start on the server side when accessing a remote
      * repository using :ext: access method. ($CVS_SERVER)
      *
      * @return The server program. Can be null if not set.
-     */
-    Q_SCRIPTABLE QString server() const;
+    */
+    QString server() const;
 
     /**
      * Changes the working copy and the corresponding cvs repository.
      *
      * @param dirName path to the local working copy directory.
      */
-    Q_SCRIPTABLE bool setWorkingCopy(const QString& dirName);
+    bool setWorkingCopy(const QString& dirName);
 
     /**
      * Path to the current working copy.
      *
      * @return The working copy directory. Can be null if not set.
      */
-    Q_SCRIPTABLE QString workingCopy() const;
+    QString workingCopy() const;
 
     /**
      * Path and method to access the current cvs repository.
@@ -90,11 +90,11 @@ public Q_SLOTS:
      *
      * @return The path and method to access the cvs repository.
      */
-    Q_SCRIPTABLE QString location() const;
+    QString location() const;
     
     /**
      */
-    Q_SCRIPTABLE bool retrieveCvsignoreFile() const;
+    bool retrieveCvsignoreFile() const;
 
 private slots:
     void slotConfigDirty(const QString& fileName);
