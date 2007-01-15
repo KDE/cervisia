@@ -124,14 +124,9 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
         KMessageBox::sorry(0, i18n("Starting cvsservice failed with message: ") +
             error, "Cervisia");
     }
-#ifdef __GNUC__
-#warning "DBUS kde4: port it"
-#endif
-#if 0    
     else
       // create a reference to the service
-      cvsService = new OrgKdeCervisiaCvsserviceCvsserviceInterface(appId, "CvsService");
-#endif
+      cvsService = new OrgKdeCervisiaCvsserviceCvsserviceInterface(appId, "/CvsService",QDBusConnection::sessionBus(), this);
     // Create UI
     KConfig *conf = config();
     conf->setGroup("LookAndFeel");
