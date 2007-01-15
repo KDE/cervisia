@@ -27,8 +27,8 @@
 
 extern "C" KDE_EXPORT int kdemain(int argc, char** argv)
 {
-    KAboutData about("cvsservice", I18N_NOOP("CVS DCOP service"), "0.1",
-            I18N_NOOP("DCOP service for CVS"), KAboutData::License_LGPL,
+    KAboutData about("cvsservice", I18N_NOOP("CVS D-Bus service"), "0.1",
+            I18N_NOOP("D-Bus service for CVS"), KAboutData::License_LGPL,
             "Copyright (c) 2002-2003 Christian Loose");
     about.addAuthor("Christian Loose", I18N_NOOP("Developer"),
             "christian.loose@hamburg.de");
@@ -44,3 +44,4 @@ extern "C" KDE_EXPORT int kdemain(int argc, char** argv)
 
     return app.exec();
 }
+

@@ -84,7 +84,7 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInter
     m_fileList->setFullWidth(true);
     m_fileList->header()->hide();
     textlabel->setBuddy(m_fileList);
-    connect( m_fileList, SIGNAL(doubleClicked(QListViewItem*)),
+    connect( m_fileList, SIGNAL(doubleClicked(Q3ListViewItem*)),
              this, SLOT(fileSelected(QListViewItem*)));
     connect( m_fileList, SIGNAL(selectionChanged()),
              this, SLOT(fileHighlighted()) );
