@@ -247,7 +247,7 @@ void CervisiaPart::setupActions()
 
     recent = new KRecentFilesAction( i18n("Recent Sandboxes"), this );
     actionCollection()->addAction("file_open_recent", recent);
-    connect(recent, SIGNAL(triggered(bool)), SLOT(openURL(const KUrl&))),
+    connect(recent, SIGNAL(urlSelected(const KUrl&)), SLOT(openUrl(const KUrl&))),
 
     action  = new KAction(i18n("&Insert ChangeLog Entry..."), this);
     actionCollection()->addAction("insert_changelog_entry", action );
