@@ -1778,16 +1778,12 @@ bool CervisiaPart::openSandbox(const QString &dirname)
     // Do we have a cvs service?
     if( !cvsService )
         return false;
-#ifdef __GNUC__
-#warning "kde4: port it"
-#endif
-#if 0
-    OrgKdeCervisiaRepositoryInterface cvsRepository(cvsService->app(), "CvsRepository");
+    OrgKdeCervisiaRepositoryInterface cvsRepository( m_cvsServiceInterfaceName, "/CvsRepository",QDBusConnection::sessionBus());
 
-    // change the working copy directory for the cvs DCOP service
-    bool opened = cvsRepository.setWorkingCopy(dirname);
+    // change the working copy directory for the cvs D-Bus service
+    QDBusReply<bool> reply = cvsRepository.setWorkingCopy(dirname);
 
-    if( !cvsRepository.ok() || !opened )
+    if( !reply.isValid() || !reply.value() )
     {
         KMessageBox::sorry(widget(),
                            i18n("This is not a CVS folder.\n"
@@ -1826,7 +1822,6 @@ bool CervisiaPart::openSandbox(const QString &dirname)
     if( cvsRepository.retrieveCvsignoreFile() )
         Cervisia::GlobalIgnoreList().retrieveServerIgnoreList(cvsService,
                                                               repository);
-#endif
     QDir::setCurrent(sandbox);
     update->openDirectory(sandbox);
     setFilter();
