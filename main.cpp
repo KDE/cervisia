@@ -166,6 +166,8 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
 
     about.addCredit("Richard Moore", I18N_NOOP("Conversion to KPart"),
                     "rich@kde.org", 0);
+    about.addCredit("Laurent Montel", I18N_NOOP("Conversion to D-Bus"),
+                    "montel@kde.org", 0);
 
     KCmdLineArgs::init(argc, argv, &about);
     KCmdLineArgs::addCmdLineOptions(options);
