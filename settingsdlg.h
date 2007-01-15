@@ -23,7 +23,7 @@
 
 
 #include <qpushbutton.h>
-#include <kdialog.h>
+#include <kpagedialog.h>
 
 
 class QCheckBox;
@@ -47,7 +47,7 @@ private slots:
 };
 
 
-class SettingsDialog : public KDialog
+class SettingsDialog : public KPageDialog
 {
     Q_OBJECT
 
