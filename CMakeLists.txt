@@ -112,7 +112,7 @@ install( FILES cervisiapart.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
 install( FILES cervisiaui.rc  DESTINATION  ${DATA_INSTALL_DIR}/cervisiapart )
 install( FILES cervisiashellui.rc cervisia.notifyrc  DESTINATION  ${DATA_INSTALL_DIR}/cervisia )
 install( FILES cervisia.upd  DESTINATION  ${KCONF_UPDATE_INSTALL_DIR} )
-install(PROGRAMS FILES change_colors.pl cervisia-normalize_cvsroot.pl cervisia-change_repos_list.pl DESTINATION  ${KCONF_UPDATE_INSTALL_DIR} )
+install(PROGRAMS change_colors.pl cervisia-normalize_cvsroot.pl cervisia-change_repos_list.pl DESTINATION  ${KCONF_UPDATE_INSTALL_DIR} )
 
 kde4_install_icons( ${ICON_INSTALL_DIR}   )
 
