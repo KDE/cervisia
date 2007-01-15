@@ -56,6 +56,7 @@ CvsJob::CvsJob(unsigned jobNum)
     (void)new CvsjobAdaptor(this);
     QDBusConnection dbus = QDBusConnection::sessionBus();
     d->dbusObjectPath = "/CvsJob"+QString::number(jobNum);
+    kDebug()<<" vsJob::CvsJob(unsigned jobNum) :"<<d->dbusObjectPath<<endl;
     dbus.registerObject( d->dbusObjectPath, this, QDBusConnection::ExportNonScriptableSlots );
 }
 
@@ -67,6 +68,7 @@ CvsJob::CvsJob(const QString& objId)
     (void)new CvsjobAdaptor(this);
     //TODO register it with good name
     d->dbusObjectPath = "/"+objId;
+    kDebug()<<" CvsJob::CvsJob(const QString& objId) :"<<d->dbusObjectPath<<endl;
     QDBusConnection::sessionBus().registerObject( d->dbusObjectPath, this, QDBusConnection::ExportNonScriptableSlots );
 }
 

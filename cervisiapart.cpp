@@ -149,10 +149,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
                  this, SLOT(popupRequested(K3ListView*, Q3ListViewItem*, const QPoint&)) );
         connect( update, SIGNAL(fileOpened(QString)),
                  this, SLOT(openFile(QString)) );
-#ifdef __GNUC__
-#warning "kde4: port it"
-#endif
-        protocol = new ProtocolView(splitter /*appId, splitter*/);
+        protocol = new ProtocolView(appId, splitter);
         protocol->setFocusPolicy( Qt::StrongFocus );
 
         setWidget(splitter);

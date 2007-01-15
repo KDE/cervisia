@@ -39,7 +39,7 @@ class ProtocolView : public Q3TextEdit
     Q_CLASSINFO("D-Bus Interface", "org.kde.cervisia.protocolview")
 
 public:
-    explicit ProtocolView(/*const DCOPCString& appId,*/ QWidget *parent=0, const char *name=0);
+    explicit ProtocolView(const QString& appId, QWidget *parent=0, const char *name=0);
     ~ProtocolView();
 
     bool startJob(bool isUpdateJob = false);
