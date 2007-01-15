@@ -38,27 +38,28 @@
 #include "logdlg.h"
 #include "resolvedlg.h"
 #include "version.h"
+#include "repositoryinterface.h"
 
-
-static OrgKdeCervisiaCvsserviceCvsserviceInterface* StartDCOPService(const QString& directory)
+static OrgKdeCervisiaCvsserviceCvsserviceInterface* StartDBusService(const QString& directory)
 {
     // start the cvs DCOP service
     QString error;
+    QString appId;
     if( KToolInvocation::startServiceByDesktopName("cvsservice", QStringList(),
-                                                &error)  )
+                                                &error,&appId)  )
     {
         std::cerr << "Starting cvsservice failed with message: "
                   << error.latin1() << std::endl;
         exit(1);
     }
-#if 0
-    QDBusReply<QDBusObjectPath> repository(appId, "CvsRepository");
 
-    repository.call("setWorkingCopy(QString)", directory);
+    OrgKdeCervisiaRepositoryInterface repository(appId, "/CvsRepository",QDBusConnection::sessionBus());
+    
+
+    repository.setWorkingCopy(directory);
 
     // create a reference to the service
-    return new OrgKdeCervisiaCvsserviceCvsserviceInterface(appId, "CvsService");
-#endif
+    return new OrgKdeCervisiaCvsserviceCvsserviceInterface(appId, "/CvsService",QDBusConnection::sessionBus());
     return NULL;
 }
 
@@ -93,7 +94,7 @@ static int ShowLogDialog(const QString& fileName)
     QString directory = fi.absolutePath();
 
     // start the cvs DCOP service
-    OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService = StartDCOPService(directory);
+    OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService = StartDBusService(directory);
 
     if( dlg->parseCvsLog(cvsService, fi.fileName()) )
         dlg->show();
@@ -123,7 +124,7 @@ static int ShowAnnotateDialog(const QString& fileName)
     QString directory = fi.absolutePath();
 
     // start the cvs DCOP service
-    OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService = StartDCOPService(directory);
+    OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService = StartDBusService(directory);
 
     AnnotateController ctl(dlg, cvsService);
     ctl.showDialog(fi.fileName());
