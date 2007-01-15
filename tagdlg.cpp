@@ -98,7 +98,7 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisiaCvsserviceCvsserviceInterf
             forcetag_button = new QCheckBox(i18n("&Force tag creation even if tag already exists"), mainWidget);
             layout->addWidget(forcetag_button);
 	}
-    connect(this, SIGNAL(okClicked()), this, SLOT(okClicked()));
+    connect(this, SIGNAL(okClicked()), this, SLOT(slotOk()));
     setHelp("taggingbranching");
 }
 
