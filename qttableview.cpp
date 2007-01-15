@@ -1345,7 +1345,9 @@ void QtTableView::paintEvent( QPaintEvent *e )
 		paint.setMatrix( matrix );
 		if ( testTableFlags(Tbl_clipCellPainting) ||
 		     frameWidth() > 0 && !winR.contains( cellR ) ) { //##arnt
+#ifdef __GNUC__
 #warning disable clipping for now as it interferes with drawText() in DiffView::paintCell()
+#endif
 // 		    paint.setClipRect( cellUpdateR );
 		    paintCell( &paint, row, col );
 // 		    paint.setClipping( FALSE );

@@ -96,7 +96,9 @@ void LogPlainView::searchText(int options, const QString& pattern)
         : document()->begin();
     if( options & KFind::FromCursor )
     {
+#ifdef __GNUC__
 #warning maybe this can be improved
+#endif
         const QPoint pos(horizontalScrollBar()->value(), 0);
         const QTextCursor cursor(cursorForPosition(pos));
         if (!cursor.isNull())

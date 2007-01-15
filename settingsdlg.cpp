@@ -209,7 +209,9 @@ void SettingsDialog::writeSettings()
     CervisiaSettings::setDiffDeleteColor(m_diffDeleteButton->color());
 
     // I'm not yet sure whether this is a hack or not :-)
+#ifdef __GNUC__
 #warning would QApplication::topLevelWidgets be sufficient?
+#endif
     const QWidgetList& widgets = QApplication::allWidgets();
     Q_FOREACH (QWidget* w, widgets)
     {

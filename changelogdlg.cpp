@@ -138,7 +138,9 @@ bool ChangeLogDialog::readFile(const QString &filename)
 
 QString ChangeLogDialog::message()
 {
+#ifdef __GNUC__
 #warning disabled to make it compile
+#endif
 //     int no = 0;
 //     // Find first line which begins with non-whitespace
 //     while (no < edit->lines())

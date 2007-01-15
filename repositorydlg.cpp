@@ -433,7 +433,9 @@ void RepositoryDialog::slotLoginClicked()
     if( !job.isValid() )
         // TODO: error handling
         return;
+#ifdef __GNUC__
 #warning "kde4 port to dbus"
+#endif
 #if 0
     bool success = job.call("execute()");
     if( !success )

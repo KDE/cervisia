@@ -77,7 +77,9 @@ CvsService::CvsService()
  
     // create non-concurrent cvs job
     d->singleCvsJob = new CvsJob(SINGLE_JOB_ID);
+#ifdef __GNUC__
 #warning "kde4 define singleJobRef"    
+#endif
     //d->singleJobRef.setRef(d->appId, d->singleCvsJob->objId());
 
     // create repository manager

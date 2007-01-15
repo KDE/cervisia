@@ -135,14 +135,18 @@ LogListView::LogListView(KConfig& cfg, QWidget *parent, const char *name)
     // without this restoreLayout() can't change the column widths
     for (int i = 0; i < columns(); ++i)
         setColumnWidthMode(i, Manual);
+#ifdef __GNUC__
 #warning "kde4 readd it "
+#endif
     //restoreLayout(&partConfig, QLatin1String("LogList view"));
 }
 
 
 LogListView::~LogListView()
 {
+#ifdef __GNUC__
 #warning "kde4: readd it"	
+#endif
     //saveLayout(&partConfig, QLatin1String("LogList view"));
 }
 

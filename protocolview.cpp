@@ -50,7 +50,9 @@ ProtocolView::ProtocolView(/*const DCOPCString& appId,*/ QWidget *parent, const 
     conflictColor=config->readEntry("Conflict", QColor(255, 130, 130));
     localChangeColor=config->readEntry("LocalChange", QColor(130, 130, 255));
     remoteChangeColor=config->readEntry("RemoteChange", QColor(70, 210, 70));
+#ifdef __GNUC__
 #warning "kde4: port it"
+#endif
 #if 0
     // create a DCOP stub for the non-concurrent cvs job
     job = new OrgKdeCervisiaCvsserviceCvsjobInterface(appId, "NonConcurrentJob");

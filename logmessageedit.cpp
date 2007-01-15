@@ -42,7 +42,9 @@ LogMessageEdit::LogMessageEdit(QWidget* parent)
 
 void LogMessageEdit::setCompletedText(const QString& /*match*/)
 {
+#ifdef __GNUC__
 #warning XXX: port to Qt4
+#endif
 #if 0
     int para, index;
     getCursorPosition(&para, &index);
@@ -72,7 +74,9 @@ void LogMessageEdit::setCompletedItems(const QStringList&, bool autoSuggest)
 
 void LogMessageEdit::keyPressEvent(QKeyEvent* event)
 {
+#ifdef __GNUC__
 #warning XXX: port to Qt4
+#endif
 #if 0
     bool noModifier = (event->state() == NoButton ||
                        event->state() == ShiftButton ||
@@ -158,7 +162,9 @@ void LogMessageEdit::stopCompletion()
 
 void LogMessageEdit::tryCompletion()
 {
+#ifdef __GNUC__
 #warning XXX: port to Qt4
+#endif
 #if 0
     int para, index;
     getCursorPosition(&para, &index);
@@ -189,7 +195,9 @@ void LogMessageEdit::tryCompletion()
 
 void LogMessageEdit::rotateMatches(KeyBindingType type)
 {
+#ifdef __GNUC__
 #warning XXX: port to Qt4
+#endif
 #if 0
     KCompletion* completionObj = compObj();
     if( completionObj && m_completing &&

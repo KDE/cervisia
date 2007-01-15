@@ -64,13 +64,17 @@ CervisiaShell::CervisiaShell( const char *name )
     //
     // Magic needed for status texts
     //
+#ifdef __GNUC__
 #warning "kde4: port it actionCollection()->setHighlightingEnabled(true);";
+#endif
     //actionCollection()->setHighlightingEnabled(true);
     connect( actionCollection(), SIGNAL( actionStatusText(const QString &) ),
              statusBar(), SLOT( message(const QString &) ) );
     connect( actionCollection(), SIGNAL( clearStatusText() ),
              statusBar(), SLOT( clear() ) );
+#ifdef __GNUC__
 #warning "kde4: port it m_part->actionCollection()->setHighlightingEnabled(true);";
+#endif
     //m_part->actionCollection()->setHighlightingEnabled(true);
     connect( m_part->actionCollection(), SIGNAL( actionStatusText(const QString &) ),
              statusBar(), SLOT( message(const QString &) ) );

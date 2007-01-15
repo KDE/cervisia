@@ -243,7 +243,9 @@ void ProgressDialog::stopNonGuiPart()
 
 void ProgressDialog::startGuiPart()
 {
+#ifdef __GNUC__
 #warning "KDE4 port D-Bus";	
+#endif
 #if 0	
     connectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "receivedStdout(QString)",
                       "slotReceivedOutput(QString)", true);

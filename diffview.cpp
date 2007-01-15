@@ -301,7 +301,9 @@ QSize DiffView::sizeHint() const
 void DiffView::paintCell(QPainter *p, int row, int col)
 {
     QFontMetrics fm(font());
+#ifdef __GNUC__
 #warning what can I use in Qt4
+#endif
 //    p->setTabStops(m_tabWidth * fm.maxWidth());
 
     DiffViewItem *item = items.at(row);

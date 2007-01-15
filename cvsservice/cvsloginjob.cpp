@@ -113,7 +113,9 @@ bool CvsLoginJob::execute()
         // process asks for the password
         if( line.contains(PASS_PHRASE) )
         {
+#ifdef __GNUC__
 #warning "kde4 port it"		
+#endif
 #if 0		
             kDebug(8051) << "process waits for the password." << endl;
 

@@ -124,10 +124,14 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
         KMessageBox::sorry(0, i18n("Starting cvsservice failed with message: ") +
             error, "Cervisia");
     }
+#ifdef __GNUC__
+#warning "DBUS kde4: port it"
+#endif
+#if 0    
     else
       // create a reference to the service
       cvsService = new OrgKdeCervisiaCvsserviceCvsserviceInterface(appId, "CvsService");
-
+#endif
     // Create UI
     KConfig *conf = config();
     conf->setGroup("LookAndFeel");
@@ -150,8 +154,10 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
                  this, SLOT(popupRequested(K3ListView*, Q3ListViewItem*, const QPoint&)) );
         connect( update, SIGNAL(fileOpened(QString)),
                  this, SLOT(openFile(QString)) );
-
-        protocol = new ProtocolView(appId, splitter);
+#ifdef __GNUC__
+#warning "kde4: port it"
+#endif
+        protocol = new ProtocolView(splitter /*appId, splitter*/);
         protocol->setFocusPolicy( Qt::StrongFocus );
 
         setWidget(splitter);
@@ -231,7 +237,9 @@ void CervisiaPart::setupActions()
 {
     QAction *action;
     QString hint;
+#ifdef __GNUC__
 #warning "kde4: port it actionCollection()->setHighlightingEnabled(true);";
+#endif
     //actionCollection()->setHighlightingEnabled(true);
 
     //
@@ -1742,7 +1750,10 @@ bool CervisiaPart::openSandbox(const QString &dirname)
     // Do we have a cvs service?
     if( !cvsService )
         return false;
-
+#ifdef __GNUC__
+#warning "kde4: port it"
+#endif
+#if 0
     OrgKdeCervisiaRepositoryInterface cvsRepository(cvsService->app(), "CvsRepository");
 
     // change the working copy directory for the cvs DCOP service
@@ -1787,7 +1798,7 @@ bool CervisiaPart::openSandbox(const QString &dirname)
     if( cvsRepository.retrieveCvsignoreFile() )
         Cervisia::GlobalIgnoreList().retrieveServerIgnoreList(cvsService,
                                                               repository);
-
+#endif
     QDir::setCurrent(sandbox);
     update->openDirectory(sandbox);
     setFilter();
