@@ -44,6 +44,7 @@
 #include <knuminput.h>
 #include <kurlrequester.h>
 #include <kinstance.h>
+#include <kvbox.h>
 #include "misc.h"
 #include "cervisiasettings.h"
 #include "settingsdlg_advanced.h"
