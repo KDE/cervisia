@@ -55,6 +55,10 @@ ProtocolView::ProtocolView(const QString& appId, QWidget *parent, const char *na
 #ifdef __GNUC__
 #warning "kde4: port it"
 #endif
+    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "jobExited(bool,int)", this, SLOT(slotJobExited(bool,int)));
+   QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "receivedStdout(QString)", this, SLOT(slotReceivedOutputNonGui(QString)));
+   QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "receivedStderr(QString)", this, SLOT(slotReceivedOutputNonGui(QString)));
+
 #if 0
     // establish connections to the signals of the cvs job
     connectDCOPSignal(job->app(), job->obj(), "jobExited(bool, int)",

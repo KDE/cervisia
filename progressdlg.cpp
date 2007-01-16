@@ -121,7 +121,12 @@ bool ProgressDialog::execute()
     // get command line and display it
     QString cmdLine = d->cvsJob->cvsCommand();
     d->resultbox->insertItem(cmdLine);
-    kDebug()<<" cmdLine :"<<cmdLine<<endl;
+    kDebug()<<" ProgressDialog::execute cmdLine :"<<cmdLine<<endl;
+
+    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "jobExited(bool,int)", this, SLOT(slotJobExited(bool,int)));
+    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "receivedStdout(QString)", this, SLOT(slotReceivedOutputNonGui(QString)));
+    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "receivedStderr(QString)", this, SLOT(slotReceivedOutputNonGui(QString)));
+
 #if 0
     // establish connections to the signals of the cvs job
     connectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "jobExited(bool, int)",
@@ -170,6 +175,8 @@ QStringList ProgressDialog::getOutput() const
 
 void ProgressDialog::slotReceivedOutputNonGui(QString buffer)
 {
+    kdDebug()<<" ProgressDialog::slotReceivedOutputNonGui(QString buffer) :"<<buffer<<endl;
+
     d->buffer += buffer;
 
     processOutput();
@@ -183,6 +190,7 @@ void ProgressDialog::slotReceivedOutputNonGui(QString buffer)
 
 void ProgressDialog::slotReceivedOutput(QString buffer)
 {
+    kdDebug()<<" ProgressDialog::slotReceivedOutput(QString buffer)\n";
     d->buffer += buffer;
     processOutput();
 }
@@ -253,6 +261,9 @@ void ProgressDialog::startGuiPart()
     connectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "receivedStderr(QString)",
                       "slotReceivedOutput(QString)", true);
 #endif
+    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "receivedStdout(QString)", this, SLOT(slotReceivedOutputNonGui(QString)));
+    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "receivedStderr(QString)", this, SLOT(slotReceivedOutputNonGui(QString)));
+
     show();
     d->isShown = true;
 
