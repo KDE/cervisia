@@ -2,10 +2,12 @@
 Type=Service
 Encoding=UTF-8
 Name=CvsService
+Name[el]=Cvs υπηρεσία
 Name[x-test]=xxCvsServicexx
 Exec=cvsservice
 X-DBUS-StartupType=Multi
 X-KDE-StartupNotify=false
 Comment=A DCOP service that provides an interface to cvs
+Comment[el]=Μια υπηρεσία DCOP που προσφέρει ένα περιβάλλον χρήσης για το cvs
 Comment[fr]=Un service DCOP qui fournit une interface à CVS
 Comment[x-test]=xxA DCOP service that provides an interface to cvsxx
