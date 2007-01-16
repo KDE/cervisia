@@ -228,7 +228,8 @@ void CvsJob::slotReceivedStdout(KProcess* proc, char* buffer, int buflen)
 
     // accumulate output
     d->outputLines += QStringList::split("\n", output);
-
+    kDebug()<<" CvsJob::slotReceivedStdout(KProcess* proc, char* buffer, int buflen)\n";
+    kDebug()<<" output :"<<output<<endl;
     emit receivedStdout(output);
 }
 
@@ -242,6 +243,8 @@ void CvsJob::slotReceivedStderr(KProcess* proc, char* buffer, int buflen)
     // accumulate output
     d->outputLines += QStringList::split("\n", output);
 
+    kDebug()<<"CvsJob::slotReceivedStderr(KProcess* proc, char* buffer, int buflen)\n";
+    kDebug()<<" output "<<output<<endl;
     emit receivedStderr(output);
 }
 

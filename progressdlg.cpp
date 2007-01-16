@@ -121,6 +121,7 @@ bool ProgressDialog::execute()
     // get command line and display it
     QString cmdLine = d->cvsJob->cvsCommand();
     d->resultbox->insertItem(cmdLine);
+    kDebug()<<" cmdLine :"<<cmdLine<<endl;
 #if 0
     // establish connections to the signals of the cvs job
     connectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "jobExited(bool, int)",

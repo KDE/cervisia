@@ -977,6 +977,8 @@ void CervisiaPart::slotCommit()
                                              opt_commitRecursive);
         QString cmdline;
 	QDBusObjectPath cvsJob = cvsJobPath;
+	kDebug()<<" commit : cvsJob.path() :"<<cvsJob.path()<<endl;
+	kDebug()<<" list :"<<list<< "dlg.logMessage() :"<<dlg.logMessage()<<" opt_commitRecursive "<<opt_commitRecursive<<endl;
         if(cvsJob.path().isEmpty())
            return;
 	

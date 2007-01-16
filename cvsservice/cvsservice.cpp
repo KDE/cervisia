@@ -52,7 +52,6 @@ struct CvsService::Private
     }
 
     CvsJob*               singleCvsJob;   // non-concurrent cvs job, like update or commit
-    QDBusObjectPath               singleJobRef;   // DCOP reference to non-concurrent cvs job
     Q3IntDict<CvsJob>      cvsJobs;        // concurrent cvs jobs, like diff or annotate
     Q3IntDict<CvsLoginJob> loginJobs;
     unsigned              lastJobId;
@@ -77,10 +76,6 @@ CvsService::CvsService()
  
     // create non-concurrent cvs job
     d->singleCvsJob = new CvsJob(SINGLE_JOB_ID);
-#ifdef __GNUC__
-#warning "kde4 define singleJobRef"    
-#endif
-    //d->singleJobRef.setRef(d->appId, d->singleCvsJob->objId());
 
     // create repository manager
     d->repository = new Repository();
@@ -293,6 +288,8 @@ QDBusObjectPath CvsService::checkout(const QString& workingDir, const QString& r
 QDBusObjectPath CvsService::commit(const QStringList& files, const QString& commitMessage,
                            bool recursive)
 {
+    kDebug()<<" QDBusObjectPath CvsService::commit(const QStringList& files, const QString& commitMessage, bool recursive) \n";
+    kdDebug()<<" d->hasWorkingCopy :"<<d->hasWorkingCopy()<<" d->hasRunningJob :"<<d->hasRunningJob()<<endl;
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
         return QDBusObjectPath();
 
@@ -308,6 +305,7 @@ QDBusObjectPath CvsService::commit(const QStringList& files, const QString& comm
     *d->singleCvsJob << "-m" << KProcess::quote(commitMessage)
                      << CvsServiceUtils::joinFileList(files) << REDIRECT_STDERR;
 
+    kDebug()<<"end of CvsService::commit \n";
     return d->setupNonConcurrentJob();
 }
 
@@ -980,7 +978,7 @@ QDBusObjectPath CvsService::Private::setupNonConcurrentJob(Repository* repo)
     singleCvsJob->setServer(repo->server());
     singleCvsJob->setDirectory(repo->workingCopy());
 
-    return singleJobRef;
+    return QDBusObjectPath(singleCvsJob->dbusObjectPath());
 }
 
 

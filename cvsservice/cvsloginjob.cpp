@@ -113,24 +113,21 @@ bool CvsLoginJob::execute()
         // process asks for the password
         if( line.contains(PASS_PHRASE) )
         {
-#ifdef __GNUC__
-#warning "kde4 port it"		
-#endif
-#if 0		
-            kDebug(8051) << "process waits for the password." << endl;
 
             // show password dialog
             // TODO: We really should display the repository name. Unfortunately
             //       the dialog doesn't show part of the repository name, because
             //       it's too long. :-(
-            Q3CString password;
-            int res = KPasswordDialog::getPassword(0, password, i18n("Please type "
+	    QString password;
+            KPasswordDialog dlg( 0 , KPasswordDialog::ShowUsernameLine );
+            dlg.setPrompt( i18n("Please type "
                       "in your password for the repository below."));
-            if( res == KPasswordDialog::Accepted )
-            {
+            if( dlg.exec() )
+	    {
+                password = dlg.password();
                 // send password to process
                 m_Proc->WaitSlave();
-                m_Proc->writeLine(password);
+                m_Proc->writeLine(password.toLocal8Bit());
 
                 // wait for the result
                 while( !line.contains(FAILURE_PHRASE) )
@@ -153,7 +150,6 @@ bool CvsLoginJob::execute()
                 m_Proc->waitForChild();
                 result = false;
             }
-#endif	    
         }
     }
     return false;
