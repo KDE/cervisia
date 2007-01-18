@@ -60,7 +60,7 @@ void GlobalIgnoreList::retrieveServerIgnoreList(OrgKdeCervisiaCvsserviceCvsservi
     QDBusReply<QDBusObjectPath> ref = cvsService->downloadCvsIgnoreFile(repository, 
                                                     tmpFile.fileName());
       
-    ProgressDialog dlg(0, "Edit", ref, "checkout", "CVS Edit");
+    ProgressDialog dlg(0, "Edit", cvsService->service(),ref, "checkout", "CVS Edit");
     if( !dlg.execute() )
         return;
     

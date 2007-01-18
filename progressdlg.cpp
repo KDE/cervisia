@@ -52,7 +52,7 @@ struct ProgressDialog::Private
 };
 
 
-ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,
+ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,const QString &cvsServiceNameService,
                                const QDBusReply<QDBusObjectPath>& jobPath, const QString& errorIndicator,
                                const QString& caption)
     : KDialog(parent)
@@ -69,11 +69,11 @@ ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,
     d->hasError    = false;
 
     QDBusObjectPath path = jobPath;
-    d->cvsJob      = new OrgKdeCervisiaCvsserviceCvsjobInterface("org.kde.cervisia",path.path(),QDBusConnection::sessionBus(), this);
+    d->cvsJob      = new OrgKdeCervisiaCvsserviceCvsjobInterface(cvsServiceNameService ,path.path(),QDBusConnection::sessionBus(), this);
     d->buffer      = "";
 
-    kDebug() << k_funcinfo << "CvsjobInterface " << path.path() << " valid: " << d->cvsJob->isValid() << endl;
-
+    kDebug() << k_funcinfo << "cvsServiceNameService : "<<cvsServiceNameService << "CvsjobInterface " << path.path() << " valid: " << d->cvsJob->isValid() << endl;
+  
     d->errorId1 = "cvs " + errorIndicator + ':';
     d->errorId2 = "cvs [" + errorIndicator + " aborted]:";
 

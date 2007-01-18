@@ -127,6 +127,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
       // create a reference to the service
       cvsService = new OrgKdeCervisiaCvsserviceCvsserviceInterface(m_cvsServiceInterfaceName, "/CvsService",QDBusConnection::sessionBus(), this);
     kDebug()<<" m_cvsServiceInterfaceName :"<<m_cvsServiceInterfaceName<<endl;
+    kdDebug()<<" cvsService->service() :"<<cvsService->service()<<endl;
     // Create UI
     KConfig *conf = config();
     conf->setGroup("LookAndFeel");
@@ -804,7 +805,7 @@ void CervisiaPart::openFiles(const QStringList &filenames)
         {
             QDBusReply<QDBusObjectPath> job = cvsService->edit(files);
 
-            ProgressDialog dlg(widget(), "Edit", job, "edit", i18n("CVS Edit"));
+            ProgressDialog dlg(widget(), "Edit", cvsService->service(),job, "edit", i18n("CVS Edit"));
             if( !dlg.execute() )
                 return;
         }
@@ -1396,7 +1397,7 @@ void CervisiaPart::slotMakePatch()
     if( !job.isValid() )
         return;
 
-    ProgressDialog dlg(widget(), "Diff", job, "", i18n("CVS Diff"));
+    ProgressDialog dlg(widget(), "Diff", cvsService->service(),job, "", i18n("CVS Diff"));
     if( !dlg.execute() )
         return;
 

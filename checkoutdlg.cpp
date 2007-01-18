@@ -361,7 +361,7 @@ void CheckoutDialog::moduleButtonClicked()
     if( !cvsJob.isValid() )
         return;
 
-    ProgressDialog dlg(this, "Checkout", cvsJob, "checkout", i18n("CVS Checkout"));
+    ProgressDialog dlg(this, "Checkout", cvsService->service(),cvsJob, "checkout", i18n("CVS Checkout"));
     if( !dlg.execute() )
         return;
 
@@ -405,7 +405,7 @@ void CheckoutDialog::branchButtonClicked()
     if( !cvsJob.isValid() )
         return;
 
-    ProgressDialog dlg(this, "Remote Log", cvsJob, QString::null,
+    ProgressDialog dlg(this, "Remote Log", cvsService->service(),cvsJob, QString::null,
                        i18n("CVS Remote Log"));
     if( !dlg.execute() )
         return;

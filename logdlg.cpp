@@ -245,7 +245,7 @@ bool LogDialog::parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service
     if( !job.isValid() )
         return false;
 
-    ProgressDialog dlg(this, "Logging", job, "log", i18n("CVS Log"));
+    ProgressDialog dlg(this, "Logging", cvsService->service(),job, "log", i18n("CVS Log"));
     if( !dlg.execute() )
         return false;
 
@@ -434,7 +434,7 @@ void LogDialog::slotOk()
     if( !job.isValid() )
         return;
 
-    ProgressDialog dlg(this, "View", job, "view", i18n("View File"));
+    ProgressDialog dlg(this, "View",cvsService->service(), job, "view", i18n("View File"));
     if( dlg.execute() )
     {
         // make file read-only
@@ -470,7 +470,7 @@ void LogDialog::slotApply()
     if( !job.isValid() )
         return;
 
-    ProgressDialog dlg(this, "Diff", job, "", i18n("CVS Diff"));
+    ProgressDialog dlg(this, "Diff",cvsService->service(), job, "", i18n("CVS Diff"));
     if( !dlg.execute() )
         return;
 

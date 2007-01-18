@@ -90,7 +90,7 @@ bool WatchersDialog::parseWatchers(OrgKdeCervisiaCvsserviceCvsserviceInterface* 
     if( !job.isValid() )
         return false;
 
-    ProgressDialog dlg(this, "Watchers", job, "watchers", i18n("CVS Watchers"));
+    ProgressDialog dlg(this, "Watchers",cvsService->service(), job, "watchers", i18n("CVS Watchers"));
     if( !dlg.execute() )
         return false;
 

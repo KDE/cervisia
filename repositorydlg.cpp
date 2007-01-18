@@ -465,7 +465,7 @@ void RepositoryDialog::slotLogoutClicked()
         // TODO: error handling
         return;
 
-    ProgressDialog dlg(this, "Logout", job, "logout", i18n("CVS Logout"));
+    ProgressDialog dlg(this, "Logout", m_cvsService->service(),job, "logout", i18n("CVS Logout"));
     if( !dlg.execute() )
         return;
 

@@ -89,7 +89,7 @@ bool AnnotateController::Private::execute(const QString& fileName, const QString
     if( !job.isValid() )
         return false;
 
-    progress = new ProgressDialog(dialog, "Annotate", job, "annotate", i18n("CVS Annotate"));
+    progress = new ProgressDialog(dialog, "Annotate", cvsService->service(),job, "annotate", i18n("CVS Annotate"));
 
     return progress->execute();
 }

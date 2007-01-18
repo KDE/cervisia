@@ -314,7 +314,7 @@ bool HistoryDialog::parseHistory(OrgKdeCervisiaCvsserviceCvsserviceInterface* cv
     if( !job.isValid() )
         return false;
 
-    ProgressDialog dlg(this, "History", job, "history", i18n("CVS History"));
+    ProgressDialog dlg(this, "History",cvsService->service(), job, "history", i18n("CVS History"));
     if( !dlg.execute() )
         return false;
 

@@ -30,7 +30,7 @@ class ProgressDialog : public KDialog
     Q_OBJECT
 
 public:
-    ProgressDialog(QWidget* parent, const QString& heading, const QDBusReply<QDBusObjectPath>& job,
+    ProgressDialog(QWidget* parent, const QString& heading, const QString &cvsServiceNameService,const QDBusReply<QDBusObjectPath>& job,
                    const QString& errorIndicator, const QString& caption = "");
     ~ProgressDialog();
 
