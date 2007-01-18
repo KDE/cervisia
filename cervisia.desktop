@@ -2,7 +2,6 @@
 Encoding=UTF-8
 GenericName=CVS Frontend
 GenericName[af]=Cvs Voorprogram
-GenericName[ar]=واجهة لـ CVS
 GenericName[az]=CVS Ara Üzü
 GenericName[bg]=Програма за CVS
 GenericName[ca]=Programa de CVS
@@ -63,7 +62,7 @@ MimeType=inode/directory
 Name=Cervisia
 Name[eo]=Versioadministrilo
 Name[hi]=सर्विसिया
-Name[pa]=ਸਰਵੀਸੀਆ(Cervisia)
+Name[pa]=ਸਰਵੀਸੀਆ
 Name[ta]= செர்வியா
 Name[th]=เซอร์วิเซีย
 ServiceTypes=KParts/ReadOnlyPart,Browser/View
