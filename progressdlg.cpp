@@ -42,6 +42,7 @@ struct ProgressDialog::Private
     bool            hasError;
 
     OrgKdeCervisiaCvsserviceCvsjobInterface*    cvsJob;
+    QString         jobPath;
     QString         buffer;
     QString         errorId1, errorId2;
     QStringList     output;
@@ -69,6 +70,7 @@ ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,const QSt
     d->hasError    = false;
 
     QDBusObjectPath path = jobPath;
+    d->jobPath=path.path();
     d->cvsJob      = new OrgKdeCervisiaCvsserviceCvsjobInterface(cvsServiceNameService ,path.path(),QDBusConnection::sessionBus(), this);
     d->buffer      = "";
 
@@ -125,19 +127,10 @@ bool ProgressDialog::execute()
     d->resultbox->insertItem(cmdLine);
     kDebug() << k_funcinfo << " cmdLine: " << cmdLine << endl;
 
-    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "jobExited(bool,int)", this, SLOT(slotJobExited(bool,int)));
-    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "receivedStdout(QString)", this, SLOT(slotReceivedOutputNonGui(QString)));
-    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "receivedStderr(QString)", this, SLOT(slotReceivedOutputNonGui(QString)));
+    QDBusConnection::sessionBus().connect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob", "jobExited", this, SLOT(slotJobExited(bool,int)));
+    QDBusConnection::sessionBus().connect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob", "receivedStdout", this, SLOT(slotReceivedOutputNonGui(QString)));
+    QDBusConnection::sessionBus().connect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob", "receivedStderr", this, SLOT(slotReceivedOutputNonGui(QString)));
 
-#if 0
-    // establish connections to the signals of the cvs job
-    connectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "jobExited(bool, int)",
-                      "slotJobExited(bool, int)", true);
-    connectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "receivedStdout(QString)",
-                      "slotReceivedOutputNonGui(QString)", true);
-    connectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "receivedStderr(QString)",
-                      "slotReceivedOutputNonGui(QString)", true);
-#endif
     // we wait for 4 seconds (or the timeout set by the user) before we
     // force the dialog to show up
     d->timer = new QTimer(this);
@@ -242,29 +235,17 @@ void ProgressDialog::slotTimeoutOccurred()
 void ProgressDialog::stopNonGuiPart()
 {
     d->timer->stop();
-#if 0
-    disconnectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "receivedStdout(QString)",
-                      "slotReceivedOutputNonGui(QString)");
-    disconnectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "receivedStderr(QString)",
-                      "slotReceivedOutputNonGui(QString)");
-#endif
+    QDBusConnection::sessionBus().disconnect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob", "receivedStdout", this, SLOT(slotReceivedOutputNonGui(QString)));
+    QDBusConnection::sessionBus().disconnect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob", "receivedStderr", this, SLOT(slotReceivedOutputNonGui(QString)));
+
     kapp->exit_loop();
 }
 
 
 void ProgressDialog::startGuiPart()
 {
-#ifdef __GNUC__
-#warning "KDE4 port D-Bus";	
-#endif
-#if 0	
-    connectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "receivedStdout(QString)",
-                      "slotReceivedOutput(QString)", true);
-    connectDCOPSignal(d->cvsJob->app(), d->cvsJob->obj(), "receivedStderr(QString)",
-                      "slotReceivedOutput(QString)", true);
-#endif
-    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "receivedStdout(QString)", this, SLOT(slotReceivedOutputNonGui(QString)));
-    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "receivedStderr(QString)", this, SLOT(slotReceivedOutputNonGui(QString)));
+    QDBusConnection::sessionBus().connect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob", "receivedStdout", this, SLOT(slotReceivedOutput(QString)));
+    QDBusConnection::sessionBus().connect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob", "receivedStderr", this, SLOT(slotReceivedOutput(QString)));
 
     show();
     d->isShown = true;

@@ -38,7 +38,7 @@ ProtocolView::ProtocolView(const QString& appId, QWidget *parent, const char *na
     , m_isUpdateJob(false)
 {
     new ProtocolviewAdaptor(this);
-    QDBusConnection::sessionBus().registerObject( "/ProtocolView", this, QDBusConnection::ExportNonScriptableSlots );
+    QDBusConnection::sessionBus().registerObject( "/ProtocolView", this );
 
     setReadOnly(true);
     setUndoRedoEnabled(false);
@@ -58,10 +58,9 @@ ProtocolView::ProtocolView(const QString& appId, QWidget *parent, const char *na
 #ifdef __GNUC__
 #warning "kde4: port it"
 #endif
-    if(!QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "jobExited", this, SLOT(slotJobExited(bool,int))))
-	    kDebug()<<" signal jobExited not connected!!!!!!!!!\n";
-   QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "receivedStdout", this, SLOT(slotReceivedOutput(QString)));
-   QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "receivedStderr", this, SLOT(slotReceivedOutput(QString)));
+    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia.cvsservice.cvsjob", "jobExited", this, SLOT(slotJobExited(bool,int)));
+   QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia.cvsservice.cvsjob", "receivedStdout", this, SLOT(slotReceivedOutput(QString)));
+   QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia.cvsservice.cvsjob", "receivedStderr", this, SLOT(slotReceivedOutput(QString)));
 
 #if 0
     // establish connections to the signals of the cvs job
