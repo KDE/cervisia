@@ -54,7 +54,6 @@ public:
 public Q_SLOTS: //dbus function
     bool execute();
     void cancel();
-
     bool isRunning() const;
 
     /**

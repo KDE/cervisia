@@ -2,20 +2,19 @@
 <node>
   <interface name="org.kde.cervisia.cvsservice.cvsjob">
     <signal name="jobExited">
-      <arg name="normalExit" type="b" direction="out"/>
-      <arg name="status" type="i" direction="out"/>
+      <arg type="b" direction="out"/>
+      <arg type="i" direction="out"/>
     </signal>
     <signal name="receivedStdout">
-      <arg name="buffer" type="s" direction="out"/>
+      <arg type="s" direction="out"/>
     </signal>
     <signal name="receivedStderr">
-      <arg name="buffer" type="s" direction="out"/>
+      <arg type="s" direction="out"/>
     </signal>
     <method name="execute">
       <arg type="b" direction="out"/>
     </method>
-    <method name="cancel">
-    </method>
+    <method name="cancel"/>
     <method name="isRunning">
       <arg type="b" direction="out"/>
     </method>

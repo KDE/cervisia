@@ -58,9 +58,10 @@ ProtocolView::ProtocolView(const QString& appId, QWidget *parent, const char *na
 #ifdef __GNUC__
 #warning "kde4: port it"
 #endif
-    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "jobExited(bool,int)", this, SLOT(slotJobExited(bool,int)));
-   QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "receivedStdout(QString)", this, SLOT(slotReceivedOutputNonGui(QString)));
-   QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "receivedStderr(QString)", this, SLOT(slotReceivedOutputNonGui(QString)));
+    if(!QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "jobExited", this, SLOT(slotJobExited(bool,int))))
+	    kDebug()<<" signal jobExited not connected!!!!!!!!!\n";
+   QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "receivedStdout", this, SLOT(slotReceivedOutput(QString)));
+   QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cvsservice.CvsJob", "receivedStderr", this, SLOT(slotReceivedOutput(QString)));
 
 #if 0
     // establish connections to the signals of the cvs job
@@ -113,6 +114,7 @@ Q3PopupMenu* ProtocolView::createPopupMenu(const QPoint &pos)
 
 void ProtocolView::cancelJob()
 {
+    kDebug()<< k_funcinfo <<endl;
     job->cancel();
 }
 
@@ -126,6 +128,7 @@ void ProtocolView::slotReceivedOutput(QString buffer)
 
 void ProtocolView::slotJobExited(bool normalExit, int exitStatus)
 {
+    kDebug()<< k_funcinfo<<endl;
     QString msg;
 
     if( normalExit )
