@@ -20,7 +20,7 @@
 
 
 #include "protocolview.h"
-
+#include "protocolviewadaptor.h"
 #include <qdir.h>
 #include <q3popupmenu.h>
 #include <qtextdocument.h>
@@ -37,6 +37,9 @@ ProtocolView::ProtocolView(const QString& appId, QWidget *parent, const char *na
     , job(0)
     , m_isUpdateJob(false)
 {
+    new ProtocolviewAdaptor(this);
+    QDBusConnection::sessionBus().registerObject( "/ProtocolView", this, QDBusConnection::ExportNonScriptableSlots );
+
     setReadOnly(true);
     setUndoRedoEnabled(false);
     setTabChangesFocus(true);

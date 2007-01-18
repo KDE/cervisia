@@ -36,8 +36,6 @@ class OrgKdeCervisiaCvsserviceCvsjobInterface;
 class ProtocolView : public Q3TextEdit
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.cervisia.protocolview")
-
 public:
     explicit ProtocolView(const QString& appId, QWidget *parent=0, const char *name=0);
     ~ProtocolView();
@@ -48,8 +46,8 @@ protected:
     virtual Q3PopupMenu* createPopupMenu(const QPoint &pos);
 
 public Q_SLOTS:
-    Q_SCRIPTABLE void slotReceivedOutput(QString buffer);
-    Q_SCRIPTABLE void slotJobExited(bool normalExit, int exitStatus);
+    void slotReceivedOutput(QString buffer);
+    void slotJobExited(bool normalExit, int exitStatus);
 
 signals:
     void receivedLine(QString line);
