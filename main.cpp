@@ -42,7 +42,7 @@
 
 static OrgKdeCervisiaCvsserviceCvsserviceInterface* StartDBusService(const QString& directory)
 {
-    // start the cvs DCOP service
+    // start the cvs D-Bus service
     QString error;
     QString appId;
     if( KToolInvocation::startServiceByDesktopName("cvsservice", QStringList(),
@@ -122,7 +122,7 @@ static int ShowAnnotateDialog(const QString& fileName)
     const QFileInfo fi(fileName);
     QString directory = fi.absolutePath();
 
-    // start the cvs DCOP service
+    // start the cvs D-Bus service
     OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService = StartDBusService(directory);
 
     AnnotateController ctl(dlg, cvsService);
@@ -130,7 +130,7 @@ static int ShowAnnotateDialog(const QString& fileName)
 
     int result = kapp->exec();
 
-    // stop the cvs DCOP service
+    // stop the cvs D-Bus service
     cvsService->quit();
     delete cvsService;
 

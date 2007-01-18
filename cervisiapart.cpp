@@ -116,7 +116,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
     setInstance( CervisiaFactory::instance() );
     m_browserExt = new CervisiaBrowserExtension( this );
 
-    // start the cvs DCOP service
+    // start the cvs D-Bus service
     QString error;
     if( KToolInvocation::startServiceByDesktopName("cvsservice", QStringList(), &error, &m_cvsServiceInterfaceName) )
     {
@@ -132,7 +132,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
     conf->setGroup("LookAndFeel");
     bool splitHorz = conf->readEntry("SplitHorizontally",true);
 
-    // When we couldn't start the DCOP service, we just display a QLabel with
+    // When we couldn't start the D-Bus service, we just display a QLabel with
     // an explaination
     if( cvsService )
     {
