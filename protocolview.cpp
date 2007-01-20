@@ -53,24 +53,15 @@ ProtocolView::ProtocolView(const QString& appId, QWidget *parent, const char *na
     conflictColor=config->readEntry("Conflict", QColor(255, 130, 130));
     localChangeColor=config->readEntry("LocalChange", QColor(130, 130, 255));
     remoteChangeColor=config->readEntry("RemoteChange", QColor(70, 210, 70));
-    kDebug()<<"protocol view appId : "<<appId<<endl;
+    
+    //kDebug()<<"protocol view appId : "<<appId<<endl;
+    
     job = new OrgKdeCervisiaCvsserviceCvsjobInterface(appId, "/NonConcurrentJob",QDBusConnection::sessionBus(), this);
-#ifdef __GNUC__
-#warning "kde4: port it"
-#endif
+    
     QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia.cvsservice.cvsjob", "jobExited", this, SLOT(slotJobExited(bool,int)));
    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia.cvsservice.cvsjob", "receivedStdout", this, SLOT(slotReceivedOutput(QString)));
    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia.cvsservice.cvsjob", "receivedStderr", this, SLOT(slotReceivedOutput(QString)));
 
-#if 0
-    // establish connections to the signals of the cvs job
-    connectDCOPSignal(job->app(), job->obj(), "jobExited(bool, int)",
-                      "slotJobExited(bool, int)", true);
-    connectDCOPSignal(job->app(), job->obj(), "receivedStdout(QString)",
-                      "slotReceivedOutput(QString)", true);
-    connectDCOPSignal(job->app(), job->obj(), "receivedStderr(QString)",
-                      "slotReceivedOutput(QString)", true);
-#endif
 }
 
 

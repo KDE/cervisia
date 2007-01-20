@@ -126,8 +126,8 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
     else
       // create a reference to the service
       cvsService = new OrgKdeCervisiaCvsserviceCvsserviceInterface(m_cvsServiceInterfaceName, "/CvsService",QDBusConnection::sessionBus(), this);
-    kDebug()<<" m_cvsServiceInterfaceName :"<<m_cvsServiceInterfaceName<<endl;
-    kdDebug()<<" cvsService->service() :"<<cvsService->service()<<endl;
+    //kDebug()<<" m_cvsServiceInterfaceName :"<<m_cvsServiceInterfaceName<<endl;
+    //kdDebug()<<" cvsService->service() :"<<cvsService->service()<<endl;
     // Create UI
     KConfig *conf = config();
     conf->setGroup("LookAndFeel");
@@ -1442,7 +1442,7 @@ void CervisiaPart::slotImport()
 
     QDBusObjectPath cvsJob = cvsJobPath;
     QString cmdline;
-    kdDebug()<<" cvsJob.path() :"<<cvsJob.path()<<endl;
+    //kdDebug()<<" cvsJob.path() :"<<cvsJob.path()<<endl;
     if(cvsJob.path().isEmpty())
 	return;
     OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
