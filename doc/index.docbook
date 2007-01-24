@@ -255,7 +255,7 @@ with a list of trusted hosts (see the &rsh; manpage).
 With &ssh;, it can be achieved by copying your public key located in the file
 <filename>identity.pub</filename>, located in the
 <filename>$<envar>HOME</envar>/.ssh/</filename> folder to the server. In this
-case, the key must not be encrypted with a passphrase see the &ssh; manpage and
+case, the key must not be encrypted with a passphrase (see the &ssh; manpage and
 the &CVS;/<acronym>SSH</acronym> <acronym>FAQ</acronym> on
 SourceForge). If you are unsure about these issues, ask your system
 administrator.
