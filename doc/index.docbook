@@ -103,13 +103,13 @@ copy to reflect recent changes made by other contributors.
 </para>
 
 </chapter>
-   
+
 <chapter id="getting-started">
 <title>Getting Started</title>
 
 <sect1 id="accessing-repository">
 <title>Accessing The Repository</title>
-    
+
 <para>
 In this section, we show how to use the basic version control system
 functionality using &cervisia; to checkout modules from the
@@ -140,10 +140,10 @@ dialog by choosing
 
 <step><para>
 Press the <guilabel>...</guilabel> button to select the folder where you want to
-create the repository, or enter its location in the edit box. For instance, if you
+create the repository, or enter its location in the test box. For instance, if you
 want to place the repository in the <filename>/home/user</filename> folder, and
 to name it <filename>cvsroot</filename>, you should type
-<filename>/home/user/cvsroot</filename> in the edit box, or select the
+<filename>/home/user/cvsroot</filename> in the text box, or select the
 <filename>/home/user</filename> folder using the file picker, and add
 <filename>cvsroot</filename>.
 </para></step>
@@ -230,7 +230,7 @@ The repository location is something like
 <para>
 This method requires that you have a user account on the server machine (in
 this example, <systemitem class="systemname">host.url.org</systemitem>) and
-use a remote shell for communication.  By default, &CVS; uses &rsh; for this
+use a remote shell for communication. By default, &CVS; uses &rsh; for this
 purpose; however, &rsh; has long considered to be insecure, and is widely
 replaced by &ssh;.
 </para>
@@ -247,7 +247,7 @@ client. &cervisia; supports this easily.
 Note that &cervisia; cannot answer possible password requests from the
 server machine. You must make sure that a remote login works without requiring
 you to enter the password. With plain vanilla &rsh;, this can be achieved for
-example by  creating a <filename>.rhosts</filename> file in your home folder
+example by creating a <filename>.rhosts</filename> file in your home folder
 with a list of trusted hosts (see the &rsh; manpage).
 </para>
 
@@ -305,7 +305,7 @@ to &cervisia;'s repositories list:
 <step><para>
 Open the <guilabel>Configure Access to Repositories</guilabel> dialog by
 choosing the <menuchoice><guimenu>Repository</guimenu> 
-<guimenuitem>Repositories...</guimenuitem> </menuchoice>menu item.
+<guimenuitem>Repositories...</guimenuitem></menuchoice> menu item.
 </para></step>
 
 <step><para>
@@ -314,15 +314,15 @@ Press the <guilabel>Add...</guilabel> button to open the
 </para></step>
 
 <step><para>
-Enter the repository location in the <guilabel>Repository:</guilabel> edit box.
+Enter the repository location in the <guilabel>Repository:</guilabel> text box.
 &cervisia; will automatically disable the areas of the dialog that are not
 relevant to the access method you entered.
 </para></step>
 
 <step><para>
 If you are using the ext method to access the repository, enter the remote shell
-you wish to use (&eg; &ssh;) in the <guilabel>Use remote shell</guilabel> edit
-box.
+you wish to use (&eg; &ssh;) in the <guilabel>Use remote shell (only for :ext:
+repositories):</guilabel> text box.
 </para></step>
 
 <step><para>
@@ -420,7 +420,7 @@ the import process.
 
 <para>
 As an alternative, you can add the files and folders manually, creating an empty
-module for them.  To add an empty module to a repository, just create a new
+module for them. To add an empty module to a repository, just create a new
 folder in the &CVS; repository root folder. The name of this new folder will be
 the name of the module. <link linkend="checkingout">Checkout</link> the new
 empty module. Then copy the the files and folders to the working copy,
@@ -440,7 +440,7 @@ repository.
 
 <para>
 In <xref linkend="screenshot-import"/> you can see the dialog which helps you
-to <emphasis>import</emphasis> a project as a module.  To access &cervisia;'s
+to <emphasis>import</emphasis> a project as a module. To access &cervisia;'s
 import dialog, choose the <menuchoice><guimenu>Repository</guimenu>
 <guimenuitem>Import...</guimenuitem></menuchoice>
 menu item.
@@ -474,8 +474,8 @@ linkend="accessing-repository"/> for more information.
 <term><guilabel>Module:</guilabel> <xref linkend="co-module" /></term>
 <listitem><para>
 The name of the module under which the project will be stored. After
-the import, the project can be checked out under this name.  See 
-<xref linkend="checkingout"/> for more information.  This is also the name of
+the import, the project can be checked out under this name. See 
+<xref linkend="checkingout"/> for more information. This is also the name of
 the corresponding folder in the repository.
 </para></listitem>
 </varlistentry>
@@ -821,7 +821,7 @@ conflict (&ie; if someone else has changed some of the same lines like you)
 the new status is then "Conflict".
 </para></listitem>
 </varlistentry>
-       
+
 <varlistentry>
 <term><guilabel>Up to Date</guilabel></term>
 <listitem><para>
@@ -849,7 +849,7 @@ repository. If not, you may consider adding it to your
 </varlistentry>
 
 </variablelist>
-      
+
 <para>
 Now that you have got an overview of the current status of the &CVS;, you may
 want to do an update. Mark some files (or the root of the folder tree which
@@ -862,7 +862,7 @@ of the files the status may change now. Typically, files which had "Needs
 Patch" or "Needs Update" are updated. So the following new items are possible
 in the status column:
 </para>
-      
+
 <variablelist>
 
 <varlistentry>
@@ -883,7 +883,7 @@ committed to the repository, the status is now <guilabel>Conflict</guilabel>.
 </varlistentry>
 
 </variablelist>
-      
+
 <para>
 You may have noticed that according to the status of the file, its row has a
 different color. The colors are chosen to somehow reflect the priority of the
@@ -901,7 +901,7 @@ view, click on the header of the <guilabel>File name</guilabel> column.
 
 </chapter>
 
-   
+
 <chapter id="workingwithfiles">
 <title>Working With Files</title>
 
@@ -1036,8 +1036,8 @@ them.
 </para></note>
 
 </sect1>
-   
-   
+
+
 <sect1 id="addingremovingdirs">
 <title>Adding and Removing Folders</title>
 
@@ -1157,7 +1157,7 @@ update to the branch tag before you do further commits.
 With &cervisia;, it is quite easy to maintain a ChangeLog file that is
 compliant with the format laid out in the &GNU; coding guidelines. To use it,
 choose <menuchoice><guimenu>File</guimenu><guimenuitem>Insert ChangeLog
-Entry...</guimenuitem></menuchoice>.  If a file with the name
+Entry...</guimenuitem></menuchoice>. If a file with the name
 <filename>ChangeLog</filename> exists in the toplevel folder of your
 sandbox, this file will be loaded and you have the possibility to edit it. To
 this end, at the top of the file, an entry with the current date and your user
@@ -1325,7 +1325,7 @@ menu, by right-clicking the file you want to view.
 In the dialog that is shown when a you commit a set of files, you can request
 a difference window by selecting a file name in the selection list, either by
 double-clicking it or by pressing <keycap>Return</keycap>. This is quite
-similar to using  <menuchoice><guimenu>View</guimenu><guimenuitem>Difference
+similar to using <menuchoice><guimenu>View</guimenu><guimenuitem>Difference
 to Repository (BASE)...</guimenuitem></menuchoice> with the respective file in the
 main view. 
 </para></listitem>
@@ -1355,7 +1355,7 @@ view as seen in <xref linkend="screenshot-log"/>.
 The text in the dialog is an improved variant of the text given by the diff
 command with the <option>-u</option> option. You can see the differing
 versions in two windows, with lines arranged such that you can do a
-side-by-side comparison.  That means, where text has been added or deleted,
+side-by-side comparison. That means, where text has been added or deleted,
 the respective window shows empty lines with the marker
 <literal>+++++</literal> at the left hand side. Elsewhere, you can see the
 running number of each line in the left column.
@@ -1533,7 +1533,7 @@ dialog.
 </figure>
 
 <para>
-In the annotate dialog, you see in a window the latest version  of the selected
+In the annotate dialog, you see in a window the latest version of the selected
 file (or the revision &quot;A&quot; version, in case you launched the annotate
 dialog from the the <link linkend="browsinglogs">Browse log dialog</link>). In
 the columns before the text, you get some information related to the
@@ -1614,7 +1614,7 @@ You can choose to see the history as provided by the <command>cvs
 log</command> command (<guilabel>CVS Output</guilabel>), as a
 <guilabel>Tree</guilabel>, or in <guilabel>List</guilabel> form. What you prefer
 is of course a matter of taste and it depends on what information you are
-interested in.  The tree is an intuitive representation of what has been done
+interested in. The tree is an intuitive representation of what has been done
 on different branches by which authors. As tooltips, you can see the corresponding
 log messages. The list is by its nature linear and, therefore, does not give an
 immediate view of branches; on the other hand, it concentrates more otherwise
@@ -1913,7 +1913,7 @@ both versions.
 <term><guilabel>Update to branch</guilabel></term>
 <listitem><para>
 Select this option to update to a branch. Enter the name of the branch in the
-drop down edit box (or press the <guilabel>Fetch List</guilabel> button to
+drop down text box (or press the <guilabel>Fetch List</guilabel> button to
 retrieve the list of branches from the &CVS; server, and select the one you want
 in the drop down list).
 </para></listitem>
@@ -1923,7 +1923,7 @@ in the drop down list).
 <term><guilabel>Update to tag</guilabel></term>
 <listitem><para>
 Select this option to update to a tag. Enter the name of the tag in the
-drop down edit box (or press the <guilabel>Fetch List</guilabel> button to
+drop down text box (or press the <guilabel>Fetch List</guilabel> button to
 retrieve the list of tags from the &CVS; server, and select the one you want
 in the drop down list).
 </para></listitem>
@@ -1973,7 +1973,7 @@ The command issued to update to the main branch (HEAD) is:
 <title>Tagging and Branching</title>
 
 <para>
-We discuss here only the technical aspects of tagging and branching.  If you
+We discuss here only the technical aspects of tagging and branching. If you
 are only a <emphasis>user</emphasis>, not the administrator of the repository,
 you will probably not be confronted with the problem. If however you are your
 own administrator, you should first read about the non-technical problems that
@@ -2519,7 +2519,7 @@ folder.
 </para>
 
 </sect1>
-   
+
 
 <sect1 id="information">
 <title>Further Information and Support</title>
@@ -2545,7 +2545,7 @@ for learning to use &CVS; is recommended, in particular the following.
 </para></listitem>
 
 <listitem><para>
-Karl Fogel has written the excellent book  <ulink
+Karl Fogel has written the excellent book <ulink
 url="http://cvsbook.red-bean.com/index.html">Open Source Development with
 CVS</ulink>. About half of this book is about the development process of Open
 Source software. The other half is a technical documentation of
@@ -2562,7 +2562,7 @@ url="http://mail.gnu.org/mailman/listinfo/info-cvs">mailing list</ulink>.
 <listitem><para>
 There is USENET group <literal>comp.software.config-mgmt</literal> dedicated
 to configuration management in general. &CVS; is only marginally a topic in
-this group,  but nevertheless it may be interesting for discussing merits of
+this group, but nevertheless it may be interesting for discussing merits of
 various revision control systems compared to &CVS;.
 </para></listitem>
 
@@ -2575,11 +2575,11 @@ mailing list</ulink>.
 </itemizedlist>
 
 </sect1>
-   
+
 
 <sect1 id="commandreference">
 <title>Command Reference</title>
-      
+
 <!-- File Menu -->
 <sect2 id="menufile">
 
@@ -2743,7 +2743,7 @@ Aborts any running subprocesses.
 <guimenu>View</guimenu><guimenuitem>Browse Log...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Shows the log browser of the selected file versions.  See <xref linkend="browsinglogs" />.
+Shows the log browser of the selected file versions. See <xref linkend="browsinglogs" />.
 </para></listitem>
 </varlistentry>
 
@@ -2754,7 +2754,7 @@ Shows the log browser of the selected file versions.  See <xref linkend="browsin
 </menuchoice></term>
 <listitem><para>
 Shows an annotated view of the selected file, &ie; a view where you
-can for each line see which author modified it last.  See <xref linkend="annotate" />.
+can for each line see which author modified it last. See <xref linkend="annotate" />.
 </para></listitem>
 </varlistentry>
 
@@ -3019,7 +3019,7 @@ Creates a patch from the modifications in your sandbox. See <xref linkend="creat
 <guimenu>Repository</guimenu><guimenuitem>Create...</guimenuitem>
 </menuchoice></term>
 <listitem><para>Opens a dialog which allows you to create a new local
-repository.  See <xref linkend="accessing-repository" />.
+repository. See <xref linkend="accessing-repository" />.
 </para></listitem>
 </varlistentry>
 
@@ -3048,7 +3048,7 @@ a package into the repository. See <xref linkend="importing" />.
 <guimenu>Repository</guimenu><guimenuitem>Repositories...</guimenuitem>
 </menuchoice></term>
 <listitem><para>Configures a list of repositories you often use
-and how to access them.  See <xref linkend="accessing-repository" />.
+and how to access them. See <xref linkend="accessing-repository" />.
 </para></listitem>
 </varlistentry>
 
