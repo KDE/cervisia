@@ -30,6 +30,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <ktextedit.h>
+#include <kconfiggroup.h>
 #include "misc.h"
 
 

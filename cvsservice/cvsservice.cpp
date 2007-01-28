@@ -37,6 +37,7 @@
 #include "sshagent.h"
 #include "cvsserviceadaptor.h"
 #include <cvsjobadaptor.h>
+#include <kconfiggroup.h>
 static const char SINGLE_JOB_ID[]   = "NonConcurrentJob";
 static const char REDIRECT_STDERR[] = "2>&1";
 
@@ -83,7 +84,7 @@ CvsService::CvsService()
     d->cvsJobs.setAutoDelete(true);
     d->loginJobs.setAutoDelete(true);
 
-    KConfig* config = KGlobal::config();
+    KSharedConfig::Ptr config = KGlobal::config();
     KConfigGroup cs(config, "General");
     if( cs.readEntry("UseSshAgent", false) )
     {

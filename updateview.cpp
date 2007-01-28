@@ -29,6 +29,7 @@
 #include <Q3PtrList>
 #include <kconfig.h>
 #include <klocale.h>
+#include <kconfiggroup.h>
 
 #include "cervisiasettings.h"
 #include "entry.h"

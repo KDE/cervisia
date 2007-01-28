@@ -34,6 +34,7 @@
 #include "sshagent.h"
 #include <QDBusConnection>
 #include <repositoryadaptor.h>
+#include <kconfiggroup.h>
 struct Repository::Private
 {
     Private() : compressionLevel(0) {}
@@ -215,7 +216,7 @@ void Repository::Private::readGeneralConfig()
 
 void Repository::Private::readConfig()
 {
-    KConfig* config = KGlobal::config();
+    KSharedConfig::Ptr config = KGlobal::config();
 
     // Sometimes the location can be unequal to the entry in the CVS/Root.
     //

@@ -32,6 +32,7 @@
 #include <k3listview.h>
 #include <klocale.h>
 #include <krfcdate.h>
+#include <kconfiggroup.h>
 
 #include "misc.h"
 #include "cvsserviceinterface.h"

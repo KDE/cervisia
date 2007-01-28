@@ -38,6 +38,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kurlcompletion.h>
+#include <kconfiggroup.h>
 
 #include "progressdlg.h"
 #include "repositories.h"

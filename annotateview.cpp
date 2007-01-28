@@ -23,6 +23,7 @@
 #include <qpainter.h>
 #include <kconfig.h>
 #include <kglobalsettings.h>
+#include <kconfiggroup.h>
 
 #include "loginfo.h"
 #include "tooltip.h"

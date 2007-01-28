@@ -40,6 +40,7 @@
 #include <kmessagebox.h>
 #include <ktemporaryfile.h>
 #include <kprocess.h>
+#include <kconfiggroup.h>
 #include "cvsserviceinterface.h"
 #include "misc.h"
 #include "progressdlg.h"

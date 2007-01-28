@@ -43,7 +43,7 @@
 #include <klocale.h>
 #include <knuminput.h>
 #include <kurlrequester.h>
-#include <kinstance.h>
+#include <kcomponentdata.h>
 #include <kvbox.h>
 #include "misc.h"
 #include "cervisiasettings.h"

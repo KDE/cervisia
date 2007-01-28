@@ -39,6 +39,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <qregexp.h>
+#include <kconfiggroup.h>
 #include "misc.h"
 #include "resolvedlg_p.h"
 using Cervisia::ResolveEditorDialog;

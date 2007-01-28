@@ -20,6 +20,7 @@
 
 #include <kconfig.h>
 #include <ktextedit.h>
+#include <kconfiggroup.h>
 
 using namespace Cervisia;
 

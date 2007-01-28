@@ -119,7 +119,7 @@ void CervisiaShell::setupActions()
     action->setWhatsThis( hint );
 
     setHelpMenuEnabled(false);
-    (void) new KHelpMenu(this, instance()->aboutData(), false, actionCollection());
+    (void) new KHelpMenu(this, componentData().aboutData(), false, actionCollection());
 
     action = actionCollection()->action("help_contents");
     hint = i18n("Invokes the KDE help system with the Cervisia documentation");
@@ -168,7 +168,7 @@ void CervisiaShell::slotConfigureKeys()
 
 void CervisiaShell::slotConfigureToolBars()
 {
-    saveMainWindowSettings( KGlobal::config(), autoSaveGroup() );
+    saveMainWindowSettings( KGlobal::config().data(), autoSaveGroup() );
     KEditToolbar dlg( factory() );
     connect(&dlg,SIGNAL(newToolbarConfig()),this,SLOT(slotNewToolbarConfig()));
     dlg.exec();
@@ -176,7 +176,7 @@ void CervisiaShell::slotConfigureToolBars()
 
 void CervisiaShell::slotNewToolbarConfig()
 {
-    applyMainWindowSettings( KGlobal::config(), autoSaveGroup() );
+    applyMainWindowSettings( KGlobal::config().data(), autoSaveGroup() );
 }
 
 bool CervisiaShell::queryExit()
@@ -212,19 +212,19 @@ void CervisiaShell::saveProperties(KConfig* config)
 
 void CervisiaShell::readSettings()
 {
-    KConfig* config = KGlobal::config(); 
+    KSharedConfig::Ptr config = KGlobal::config(); 
     config->setGroup("Session");
     
-    readProperties(config);
+    readProperties(config.data());
 }
 
 
 void CervisiaShell::writeSettings()
 {
-    KConfig* config = KGlobal::config();  
+    KSharedConfig::Ptr config = KGlobal::config();  
     config->setGroup("Session");
     
-    saveProperties(config);
+    saveProperties(config.data());
 }
 
 

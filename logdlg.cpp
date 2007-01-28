@@ -44,6 +44,7 @@
 #include <krfcdate.h>
 #include <krun.h>
 #include <kurl.h>
+#include <kconfiggroup.h>
 
 #include "cvsserviceinterface.h"
 #include "annotatedlg.h"
