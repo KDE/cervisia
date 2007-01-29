@@ -27,6 +27,7 @@
 #include <kconfig.h>
 #include <klineedit.h>
 #include <klocale.h>
+#include <kconfiggroup.h>
 
 #include "misc.h"
 #include "cvsserviceinterface.h"

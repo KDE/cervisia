@@ -23,6 +23,7 @@
 #include "annotateview.h"
 
 #include <kconfig.h>
+#include <kconfiggroup.h>
 
 
 AnnotateDialog::AnnotateDialog(KConfig& cfg, QWidget *parent, const char *name)

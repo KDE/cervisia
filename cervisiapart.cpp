@@ -33,7 +33,7 @@
 #include <kapplication.h>
 #include <kfiledialog.h>
 #include <kinputdialog.h>
-#include <kinstance.h>
+#include <kcomponentdata.h>
 #include <klocale.h>
 #include <knotification.h>
 #include <kprocess.h>
@@ -113,7 +113,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
 {
     KGlobal::locale()->insertCatalog("cervisia");
 
-    setInstance( CervisiaFactory::instance() );
+    setComponentData( CervisiaFactory::componentData() );
     m_browserExt = new CervisiaBrowserExtension( this );
 
     // start the cvs D-Bus service
@@ -185,7 +185,9 @@ CervisiaPart::~CervisiaPart()
 
 KConfig *CervisiaPart::config()
 {
-    return CervisiaFactory::instance()->config();
+    KSharedConfigPtr tmp = CervisiaFactory::componentData().config();
+    return tmp.data(); // the pointer won't get invalid even if the temporary tmp object is
+                       // destroyed
 }
 
 bool CervisiaPart::openUrl( const KUrl &u )
@@ -1882,7 +1884,7 @@ void CervisiaPart::setFilter()
 
 void CervisiaPart::readSettings()
 {
-    KConfig* config = CervisiaFactory::instance()->config();
+    KConfig* config = this->config();
 
     config->setGroup("Session");
     recent->loadEntries( config );
@@ -1946,7 +1948,7 @@ void CervisiaPart::readSettings()
 
 void CervisiaPart::writeSettings()
 {
-    KConfig* config = CervisiaFactory::instance()->config();
+    KConfig* config = this->config();
 
     config->setGroup("Session");
     recent->saveEntries( config );

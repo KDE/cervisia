@@ -32,6 +32,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kdebug.h>
+#include <kconfiggroup.h>
 
 #include "addrepositorydlg.h"
 #include "cvsserviceinterface.h"

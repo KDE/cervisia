@@ -33,6 +33,7 @@
 #include <klineedit.h>
 #include <klocale.h>
 #include <knuminput.h>
+#include <kconfiggroup.h>
 
 
 AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo, 
