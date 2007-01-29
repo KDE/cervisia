@@ -194,12 +194,12 @@ Sets the application \s-1GUI\s0 style
 Sets the geometry of the main window
 .SH "FILES"
 .IX Header "FILES"
-\&\fI_KDECONFDIR_/cervisiarc\fR \- global configuration file
+\&\fI@_KDECONFDIR_@/cervisiarc\fR \- global configuration file
 .Sp
 \&\fI$HOME/.kde/share/config/cervisiarc\fR \- user-specific configuration file
 .SH "SEE ALSO"
 .IX Header "SEE ALSO"
-\&\fI_KDEHTMLDIR_/en/cervisia/index.html\fR
+\&\fI@_KDEHTMLDIR_@/en/cervisia/index.html\fR
 .Sp
 \&\fIcvs\fR\|(1)
 .Sp
