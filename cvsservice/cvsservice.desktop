@@ -8,3 +8,4 @@ Exec=cvsservice
 X-DBUS-StartupType=Multi
 X-KDE-StartupNotify=false
 Comment=A D-Bus service that provides an interface to cvs
+Comment[el]=Μια υπηρεσία D-Bus  που προσφέρει ένα περιβάλλον χρήσης για το cvs
