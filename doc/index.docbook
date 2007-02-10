@@ -1,6 +1,5 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
-  <!ENTITY kappname "&cervisia;">
   <!ENTITY package "kdesdk">
   <!ENTITY ssh "<command>ssh</command>">
   <!ENTITY rsh "<command>rsh</command>">
@@ -412,7 +411,7 @@ For instance, suppose your project contains text files and some PNG images
 text, or you can move the images to a separate folder, and then import
 the remaining files (as text files). Either way, you will have to
 <link linkend="checkingout">checkout</link> the newly imported module to a
-new working copy, copy the the missing files and folders to it,
+new working copy, copy the missing files and folders to it,
 <link linkend="addingfiles">add</link> and
 <link linkend="committingfiles">commit</link> them to the repository to complete
 the import process.
@@ -423,7 +422,7 @@ As an alternative, you can add the files and folders manually, creating an empty
 module for them. To add an empty module to a repository, just create a new
 folder in the &CVS; repository root folder. The name of this new folder will be
 the name of the module. <link linkend="checkingout">Checkout</link> the new
-empty module. Then copy the the files and folders to the working copy,
+empty module. Then copy the files and folders to the working copy,
 <link linkend="addingfiles">add</link> and 
 <link linkend="committingfiles">commit</link> to upload them to the &CVS;
 repository.
