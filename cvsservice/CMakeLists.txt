@@ -23,7 +23,7 @@ qt4_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.cvsjob.xml cvs
 kde4_automoc(${cvsservice_bin_KDEINIT_SRCS})
 
 
-kde4_add_kdeinit_executable( cvsservice_bin ${cvsservice_bin_KDEINIT_SRCS})
+kde4_add_kdeinit_executable( cvsservice_bin NOGUI ${cvsservice_bin_KDEINIT_SRCS})
 set_target_properties(cvsservice_bin PROPERTIES OUTPUT_NAME cvsservice)
 
 
