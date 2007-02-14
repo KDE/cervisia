@@ -50,10 +50,10 @@ protected slots:
 
 protected:
     void setupActions();
-    
+
     bool queryExit();
-    virtual void readProperties(KConfig* config);
-    virtual void saveProperties(KConfig* config);
+    virtual void readProperties(const KConfigGroup& config);
+    virtual void saveProperties(KConfigGroup& config);
 
 private:
     void readSettings();

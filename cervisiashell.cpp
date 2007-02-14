@@ -53,14 +53,14 @@ CervisiaShell::CervisiaShell( const char *name )
     }
     else
     {
-        KMessageBox::detailedError(this, i18n("The Cervisia library could not be loaded."), 
+        KMessageBox::detailedError(this, i18n("The Cervisia library could not be loaded."),
                                    KLibLoader::self()->lastErrorMessage());
         kapp->quit();
         return;
     }
-    
+
     setupActions();
-    
+
     //
     // Magic needed for status texts
     //
@@ -69,7 +69,7 @@ CervisiaShell::CervisiaShell( const char *name )
     // enable auto-save of toolbar/menubar/statusbar and window size settings
     // and apply the previously saved settings
     setAutoSaveSettings("MainWindow", true);
-    
+
     // if the session is restoring, we already read the settings
     if( !kapp->isSessionRestored() )
         readSettings();
@@ -145,13 +145,13 @@ void CervisiaShell::slotConfigureKeys()
     dlg.insert(actionCollection());
     if( m_part )
         dlg.insert(m_part->actionCollection());
-        
+
     dlg.configure();
 }
 
 void CervisiaShell::slotConfigureToolBars()
 {
-    saveMainWindowSettings( KGlobal::config().data(), autoSaveGroup() );
+    saveMainWindowSettings( KGlobal::config()->group( autoSaveGroup() ) );
     KEditToolbar dlg( factory() );
     connect(&dlg,SIGNAL(newToolbarConfig()),this,SLOT(slotNewToolbarConfig()));
     dlg.exec();
@@ -159,7 +159,7 @@ void CervisiaShell::slotConfigureToolBars()
 
 void CervisiaShell::slotNewToolbarConfig()
 {
-    applyMainWindowSettings( KGlobal::config().data(), autoSaveGroup() );
+    applyMainWindowSettings( KGlobal::config()->group( autoSaveGroup() ) );
 }
 
 bool CervisiaShell::queryExit()
@@ -169,45 +169,42 @@ bool CervisiaShell::queryExit()
 }
 
 
-void CervisiaShell::readProperties(KConfig* config)
-{   
-    m_lastOpenDir = config->readPathEntry("Current Directory");
-    
-    // if the session is restoring, make sure we open the URL 
+void CervisiaShell::readProperties(const KConfigGroup& config)
+{
+    m_lastOpenDir = config.readPathEntry("Current Directory");
+
+    // if the session is restoring, make sure we open the URL
     // since it's not handled by main()
     if( kapp->isSessionRestored() )
         openURL();
 }
 
 
-void CervisiaShell::saveProperties(KConfig* config)
+void CervisiaShell::saveProperties(KConfigGroup & config)
 {
     // Save current working directory (if part was created)
     if( m_part )
     {
-        config->writePathEntry("Current Directory", m_part->url().path());
-    
+        config.writePathEntry("Current Directory", m_part->url().path());
+
         // write to disk
-        config->sync();
+        config.sync();
     }
 }
 
 
 void CervisiaShell::readSettings()
 {
-    KSharedConfig::Ptr config = KGlobal::config(); 
-    config->setGroup("Session");
-    
-    readProperties(config.data());
+    KConfigGroup cg( KGlobal::config(), "Session");
+
+    readProperties(cg);
 }
 
 
 void CervisiaShell::writeSettings()
 {
-    KSharedConfig::Ptr config = KGlobal::config();  
-    config->setGroup("Session");
-    
-    saveProperties(config.data());
+    KConfigGroup cg( KGlobal::config(), "Session");
+    saveProperties(cg);
 }
 
 
