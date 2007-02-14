@@ -1707,8 +1707,7 @@ void CervisiaPart::slotConfigure()
     SettingsDialog *l = new SettingsDialog( conf, widget() );
     l->exec();
 
-    conf->setGroup("LookAndFeel");
-    bool splitHorz = conf->readEntry("SplitHorizontally",true);
+    bool splitHorz = conf->group( "LookAndFeel" ).readEntry("SplitHorizontally",true);
     splitter->setOrientation( splitHorz ?
                               Qt::Vertical :
                               Qt::Horizontal);
@@ -1830,11 +1829,10 @@ bool CervisiaPart::openSandbox(const QString &dirname)
     setFilter();
 
     KConfig *conf = config();
-    conf->setGroup("General");
-    bool dostatus = conf->readEntry(repository.contains(":")?
-                                        "StatusForRemoteRepos" :
-                                        "StatusForLocalRepos",
-                                        false);
+    bool dostatus = conf->group( "General" ).readEntry(repository.contains(":")?
+                                                       "StatusForRemoteRepos" :
+                                                       "StatusForLocalRepos",
+                                                       false);
     if (dostatus)
     {
         update->setSelected(update->firstChild(), true);
@@ -1842,8 +1840,7 @@ bool CervisiaPart::openSandbox(const QString &dirname)
     }
 
     //load the recentCommits for this app from the KConfig app
-    conf->setGroup( "CommitLogs" );
-    recentCommits = conf->readEntry( sandbox,QStringList(), COMMIT_SPLIT_CHAR );
+    recentCommits = conf->group( "CommitLogs" ).readEntry( sandbox,QStringList(), COMMIT_SPLIT_CHAR );
 
     return true;
 }
