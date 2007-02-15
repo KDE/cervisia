@@ -46,13 +46,13 @@ class RepositoryListItem : public K3ListViewItem
 {
 public:
     RepositoryListItem(K3ListView* parent, const QString& repo, bool loggedin);
-    
+
     void setRsh(const QString& rsh);
     void setServer(const QString& server) { m_server = server; }
     void setCompression(int compression);
     void setIsLoggedIn(bool isLoggedIn);
     void setRetrieveCvsignore(bool retrieve) { m_retrieveCvsignore = retrieve; }
-    
+
     QString repository() const
     {
         return text(0);
@@ -60,14 +60,14 @@ public:
     QString rsh() const
     {
         QString str = text(1);
-        return (str.startsWith("ext (") ? str.mid(5, str.length()-6) 
+        return (str.startsWith("ext (") ? str.mid(5, str.length()-6)
                                         : QString::null);
     }
     QString server() const { return m_server; }
     int compression() const
     {
-        bool ok; 
-        int n = text(2).toInt(&ok); 
+        bool ok;
+        int n = text(2).toInt(&ok);
         return ok ? n : -1;
     }
     bool isLoggedIn() const { return m_isLoggedIn; }
@@ -75,7 +75,7 @@ public:
 
 private:
     void changeLoginStatusColumn();
-    
+
 private:
     QString m_server;
     bool    m_isLoggedIn;
@@ -90,14 +90,14 @@ static bool LoginNeeded(const QString& repository)
 }
 
 
-RepositoryListItem::RepositoryListItem(K3ListView* parent, const QString& repo, 
+RepositoryListItem::RepositoryListItem(K3ListView* parent, const QString& repo,
                                        bool loggedin)
     : K3ListViewItem(parent)
     , m_isLoggedIn(loggedin)
 {
     kDebug() << "RepositoryListItem::RepositoryListItem(): repo=" << repo << endl;
     setText(0, repo);
-    
+
     changeLoginStatusColumn();
 }
 
@@ -140,7 +140,7 @@ void RepositoryListItem::setCompression(int compression)
 void RepositoryListItem::setIsLoggedIn(bool isLoggedIn)
 {
     m_isLoggedIn = isLoggedIn;
-    
+
     changeLoginStatusColumn();
 }
 
@@ -148,12 +148,12 @@ void RepositoryListItem::setIsLoggedIn(bool isLoggedIn)
 void RepositoryListItem::changeLoginStatusColumn()
 {
     QString loginStatus;
-    
+
     if( LoginNeeded(repository()) )
         loginStatus = m_isLoggedIn ? i18n("Logged in") : i18n("Not logged in");
     else
         loginStatus = i18n("No login required");
-        
+
     setText(3, loginStatus);
 }
 
@@ -162,7 +162,7 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserv
     : KDialog(parent)
     , m_partConfig(cfg)
     , m_cvsService(cvsService)
-    , m_cvsServiceInterfaceName(cvsServiceInterfaceName)			      
+    , m_cvsServiceInterfaceName(cvsServiceInterfaceName)
 {
     setCaption(i18n("Configure Access to Repositories"));
     setModal(true);
@@ -239,7 +239,7 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserv
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     KConfigGroup cg(&m_partConfig, "RepositoryDialog");
-    restoreDialogSize(&cg);
+    restoreDialogSize(cg);
 
     // without this restoreLayout() can't change the column widths
     for (int i = 0; i < m_repoList->columns(); ++i)
@@ -253,7 +253,7 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserv
 RepositoryDialog::~RepositoryDialog()
 {
     KConfigGroup cg(&m_partConfig, "RepositoryDialog");
-    saveDialogSize(&cg);
+    saveDialogSize(cg);
 
     m_repoList->saveLayout(&m_partConfig, QLatin1String("RepositoryListView"));
 
@@ -324,7 +324,7 @@ void RepositoryDialog::slotOk()
     for( item = m_repoList->firstChild(); item; item = item->nextSibling() )
     {
         RepositoryListItem* ritem = static_cast<RepositoryListItem*>(item);
-        
+
         // write entries to cvs DCOP service configuration
         writeRepositoryData(ritem);
     }
@@ -439,12 +439,12 @@ void RepositoryDialog::slotLoginClicked()
     OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,jobPath.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<bool> reply = cvsjobinterface.execute();
     bool success = false;
-    if(reply.isValid()) 
+    if(reply.isValid())
 	 success = reply;
     if( !success )
     {
 	QDBusReply<QStringList> ret = cvsjobinterface.output();
-	
+
         QStringList output = ret;
         KMessageBox::detailedError(this, i18n("Login failed."), output.join("\n"));
         return;

@@ -42,14 +42,14 @@ AnnotateDialog::AnnotateDialog(KConfig& cfg, QWidget *parent, const char *name)
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     KConfigGroup cg(&partConfig, "AnnotateDialog");
-    restoreDialogSize(&cg);
+    restoreDialogSize(cg);
 }
 
 
 AnnotateDialog::~AnnotateDialog()
 {
     KConfigGroup cg(&partConfig, "AnnotateDialog");
-    saveDialogSize(&cg);
+    saveDialogSize(cg);
 }
 
 

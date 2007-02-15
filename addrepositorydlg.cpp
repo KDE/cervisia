@@ -36,7 +36,7 @@
 #include <kconfiggroup.h>
 
 
-AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo, 
+AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
                                          QWidget* parent, const char* name)
     : KDialog(parent)
     , partConfig(cfg)
@@ -56,7 +56,7 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
 
     QLabel* repo_label = new QLabel(i18n("&Repository:"), mainWidget);
     layout->addWidget(repo_label);
-    
+
     repo_edit = new KLineEdit(mainWidget);
     repo_edit->setFocus();
     repo_label->setBuddy(repo_edit);
@@ -66,29 +66,29 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
         repo_edit->setEnabled(false);
     }
     layout->addWidget(repo_edit);
-    
+
     QLabel* rsh_label = new QLabel(i18n("Use remote &shell (only for :ext: repositories):"), mainWidget);
     layout->addWidget(rsh_label);
-    
+
     rsh_edit = new KLineEdit(mainWidget);
     rsh_label->setBuddy(rsh_edit);
     layout->addWidget(rsh_edit);
-    
+
     QLabel* server_label = new QLabel(i18n("Invoke this program on the server side:"),
                                       mainWidget);
     layout->addWidget(server_label);
-    
+
     server_edit = new KLineEdit(mainWidget);
     server_label->setBuddy(server_edit);
     layout->addWidget(server_edit);
 
     KHBox* compressionBox = new KHBox(mainWidget);
     m_useDifferentCompression = new QCheckBox(i18n("Use different &compression level:"), compressionBox);
-    
+
     m_compressionLevel = new KIntNumInput(compressionBox);
     m_compressionLevel->setRange(0, 9, 1, false);
     layout->addWidget(compressionBox);
-    
+
     m_retrieveCvsignoreFile = new QCheckBox(i18n("Download cvsignore file from "
                                             "server"), mainWidget);
     layout->addWidget(m_retrieveCvsignoreFile);
@@ -100,14 +100,14 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
     repoChanged();
 
     KConfigGroup cg(&partConfig, "AddRepositoryDialog");
-    restoreDialogSize(&cg);
+    restoreDialogSize(cg);
 }
 
 
 AddRepositoryDialog::~AddRepositoryDialog()
 {
     KConfigGroup cg(&partConfig, "AddRepositoryDialog");
-    saveDialogSize(&cg);
+    saveDialogSize(cg);
 }
 
 
@@ -136,7 +136,7 @@ void AddRepositoryDialog::setCompression(int compression)
         m_useDifferentCompression->setChecked(true);
         m_compressionLevel->setValue(compression);
     }
-    
+
     compressionToggled(m_useDifferentCompression->isChecked());
 }
 

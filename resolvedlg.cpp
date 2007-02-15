@@ -208,14 +208,14 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent, const char *name)
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     KConfigGroup cg(&partConfig, "ResolveDialog");
-    restoreDialogSize(&cg);
+    restoreDialogSize(cg);
 }
 
 
 ResolveDialog::~ResolveDialog()
 {
     KConfigGroup cg(&partConfig, "ResolveDialog");
-    saveDialogSize(&cg);
+    saveDialogSize(cg);
 }
 
 

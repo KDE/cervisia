@@ -131,7 +131,7 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool mod
 
     KConfigGroup cg(&partConfig, "DiffDialog");
     syncbox->setChecked(cg.readEntry("Sync",false));
-    restoreDialogSize(&cg);
+    restoreDialogSize(cg);
 }
 
 
@@ -139,7 +139,7 @@ DiffDialog::~DiffDialog()
 {
     KConfigGroup cg(&partConfig, "DiffDialog");
     cg.writeEntry("Sync", syncbox->isChecked());
-    saveDialogSize(&cg);
+    saveDialogSize(cg);
 }
 
 
