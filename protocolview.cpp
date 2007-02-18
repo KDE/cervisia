@@ -45,14 +45,13 @@ ProtocolView::ProtocolView(const QString& appId, QWidget *parent, const char *na
     setTabChangesFocus(true);
     setTextFormat(Qt::LogText);
 
-    KConfig *config = CervisiaPart::config();
-    config->setGroup("LookAndFeel");
-    setFont(config->readEntry("ProtocolFont",QFont()));
+    KConfigGroup config(CervisiaPart::config(), "LookAndFeel");
+    setFont(config.readEntry("ProtocolFont",QFont()));
 
-    config->setGroup("Colors");
-    conflictColor=config->readEntry("Conflict", QColor(255, 130, 130));
-    localChangeColor=config->readEntry("LocalChange", QColor(130, 130, 255));
-    remoteChangeColor=config->readEntry("RemoteChange", QColor(70, 210, 70));
+    config.changeGroup("Colors");
+    conflictColor=config.readEntry("Conflict", QColor(255, 130, 130));
+    localChangeColor=config.readEntry("LocalChange", QColor(130, 130, 255));
+    remoteChangeColor=config.readEntry("RemoteChange", QColor(70, 210, 70));
     
     //kDebug()<<"protocol view appId : "<<appId<<endl;
     

@@ -65,9 +65,8 @@ QStringList Repositories::readConfigFile()
 {
     QStringList list;
 
-    KConfig *config = CervisiaPart::config();
-    config->setGroup("Repositories");
-    list = config->readEntry("Repos",QStringList());
+    KConfigGroup config(CervisiaPart::config(), "Repositories");
+    list = config.readEntry("Repos",QStringList());
 
     // Some people actually use CVSROOT, so we add it here
     char *env;
