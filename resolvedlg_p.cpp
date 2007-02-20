@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (c) 2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -44,14 +44,14 @@ ResolveEditorDialog::ResolveEditorDialog(KConfig& cfg, QWidget *parent, const ch
                    fm.lineSpacing() * 40);
 
     KConfigGroup cg(&m_partConfig, "ResolveEditorDialog");
-    restoreDialogSize(&cg);
+    restoreDialogSize(cg);
 }
 
 
 ResolveEditorDialog::~ResolveEditorDialog()
 {
     KConfigGroup cg(&m_partConfig, "ResolveEditorDialog");
-    saveDialogSize(&cg);
+    saveDialogSize(cg);
 }
 
 

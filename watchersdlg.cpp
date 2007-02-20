@@ -58,31 +58,31 @@ WatchersDialog::WatchersDialog(KConfig& cfg, QWidget* parent, const char* name)
     table->setSorting(true);
     table->verticalHeader()->hide();
     table->setLeftMargin(0);
-    
+
     Q3Header* header = table->horizontalHeader();
     header->setLabel(0, i18n("File"));
     header->setLabel(1, i18n("Watcher"));
     header->setLabel(2, i18n("Edit"));
     header->setLabel(3, i18n("Unedit"));
     header->setLabel(4, i18n("Commit"));
-    
+
     layout->addWidget(table, 1);
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     KConfigGroup cg(&partConfig, "WatchersDialog");
-    restoreDialogSize(&cg);
+    restoreDialogSize(cg);
 }
 
 
 WatchersDialog::~WatchersDialog()
 {
     KConfigGroup cg(&partConfig, "WatchersDialog");
-    saveDialogSize(&cg);
+    saveDialogSize(cg);
 }
 
 
-bool WatchersDialog::parseWatchers(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService, 
+bool WatchersDialog::parseWatchers(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService,
                                    const QStringList& files)
 {
     setCaption(i18n("CVS Watchers"));
@@ -99,7 +99,7 @@ bool WatchersDialog::parseWatchers(OrgKdeCervisiaCvsserviceCvsserviceInterface* 
     int numRows = 0;
     while( dlg.getLine(line) )
     {
-        // parse the output line        
+        // parse the output line
         QStringList list = splitLine(line);
 
         // ignore empty lines and unknown files

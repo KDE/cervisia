@@ -129,9 +129,8 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
     //kDebug()<<" m_cvsServiceInterfaceName :"<<m_cvsServiceInterfaceName<<endl;
     //kdDebug()<<" cvsService->service() :"<<cvsService->service()<<endl;
     // Create UI
-    KConfig *conf = config();
-    conf->setGroup("LookAndFeel");
-    bool splitHorz = conf->readEntry("SplitHorizontally",true);
+    KConfigGroup conf( config(), "LookAndFeel");
+    bool splitHorz = conf.readEntry("SplitHorizontally",true);
 
     // When we couldn't start the D-Bus service, we just display a QLabel with
     // an explaination
@@ -668,7 +667,7 @@ void CervisiaPart::popupRequested(K3ListView*, Q3ListViewItem* item, const QPoin
             if( m_editWithId && popup->findItem(m_editWithId) != 0 )
             {
                 popup->removeItem(m_editWithId);
-                delete m_currentEditMenu; 
+                delete m_currentEditMenu;
 
                 m_editWithId      = 0;
                 m_currentEditMenu = 0;
@@ -686,7 +685,7 @@ void CervisiaPart::popupRequested(K3ListView*, Q3ListViewItem* item, const QPoin
                 m_currentEditMenu = new Cervisia::EditWithMenu(u, popup);
 
                 if( m_currentEditMenu->menu() )
-                    m_editWithId = popup->insertItem(i18n("Edit With"), 
+                    m_editWithId = popup->insertItem(i18n("Edit With"),
                                               m_currentEditMenu->menu(), -1, 1);
             }
         }
@@ -969,9 +968,8 @@ void CervisiaPart::slotCommit()
             while (recentCommits.count() > 50)
                 recentCommits.remove( recentCommits.last() );
 
-            KConfig* conf = config();
-            conf->setGroup( "CommitLogs" );
-            conf->writeEntry( sandbox, recentCommits, COMMIT_SPLIT_CHAR );
+            KConfigGroup conf( config(), "CommitLogs" );
+            conf.writeEntry( sandbox, recentCommits, COMMIT_SPLIT_CHAR );
         }
 
         update->prepareJob(opt_commitRecursive, UpdateView::Commit);
@@ -984,7 +982,7 @@ void CervisiaPart::slotCommit()
 	kDebug()<<" list :"<<list<< "dlg.logMessage() :"<<dlg.logMessage()<<" opt_commitRecursive "<<opt_commitRecursive<<endl;
         if(cvsJob.path().isEmpty())
            return;
-	
+
         OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
         QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
         if( reply.isValid() )
@@ -1056,7 +1054,7 @@ void CervisiaPart::updateSandbox(const QString &extraopt)
         return;
     OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
-    
+
     if( reply.isValid() )
         cmdline = reply;
 
@@ -1107,10 +1105,10 @@ void CervisiaPart::addOrRemove(AddRemoveDialog::ActionType action)
 	QDBusObjectPath cvsJobPath = cvsJob;
         if(cvsJobPath.path().isEmpty())
            return;
-	
+
         OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJobPath.path(),QDBusConnection::sessionBus(), this);
         QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
-        
+
 	if( reply.isValid() )
             cmdline = reply;
 
@@ -1265,7 +1263,7 @@ void CervisiaPart::slotEdit()
 
     OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
-    
+
     if( reply.isValid() )
         cmdline = reply;
 
@@ -1315,7 +1313,7 @@ void CervisiaPart::slotLock()
     QDBusReply<QDBusObjectPath> cvsJobPath = cvsService->lock(list);
     QDBusObjectPath cvsJob = cvsJobPath;
     if(cvsJob.path().isEmpty())
-      return;    
+      return;
     QString cmdline;
     OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
@@ -1391,7 +1389,7 @@ void CervisiaPart::slotMakePatch()
     Cervisia::PatchOptionDialog optionDlg;
     if( optionDlg.exec() == KDialog::Rejected )
         return;
-    
+
     QString format      = optionDlg.formatOption();
     QString diffOptions = optionDlg.diffOptions();
 
@@ -1709,8 +1707,7 @@ void CervisiaPart::slotConfigure()
     SettingsDialog *l = new SettingsDialog( conf, widget() );
     l->exec();
 
-    conf->setGroup("LookAndFeel");
-    bool splitHorz = conf->readEntry("SplitHorizontally",true);
+    bool splitHorz = conf->group( "LookAndFeel" ).readEntry("SplitHorizontally",true);
     splitter->setOrientation( splitHorz ?
                               Qt::Vertical :
                               Qt::Horizontal);
@@ -1832,11 +1829,10 @@ bool CervisiaPart::openSandbox(const QString &dirname)
     setFilter();
 
     KConfig *conf = config();
-    conf->setGroup("General");
-    bool dostatus = conf->readEntry(repository.contains(":")?
-                                        "StatusForRemoteRepos" :
-                                        "StatusForLocalRepos",
-                                        false);
+    bool dostatus = conf->group( "General" ).readEntry(repository.contains(":")?
+                                                       "StatusForRemoteRepos" :
+                                                       "StatusForLocalRepos",
+                                                       false);
     if (dostatus)
     {
         update->setSelected(update->firstChild(), true);
@@ -1844,8 +1840,7 @@ bool CervisiaPart::openSandbox(const QString &dirname)
     }
 
     //load the recentCommits for this app from the KConfig app
-    conf->setGroup( "CommitLogs" );
-    recentCommits = conf->readEntry( sandbox,QStringList(), COMMIT_SPLIT_CHAR );
+    recentCommits = conf->group( "CommitLogs" ).readEntry( sandbox,QStringList(), COMMIT_SPLIT_CHAR );
 
     return true;
 }
@@ -1884,58 +1879,56 @@ void CervisiaPart::setFilter()
 
 void CervisiaPart::readSettings()
 {
-    KConfig* config = this->config();
-
-    config->setGroup("Session");
+    KConfigGroup config( this->config(), "Session");
     recent->loadEntries( config );
 
     // Unfortunately, the KConfig systems sucks and we have to live
     // with all entries in one group for session management.
 
-    opt_createDirs = config->readEntry("Create Dirs", true);
+    opt_createDirs = config.readEntry("Create Dirs", true);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_create_dirs" )))
     ->setChecked( opt_createDirs );
 
-    opt_pruneDirs = config->readEntry("Prune Dirs", true);
+    opt_pruneDirs = config.readEntry("Prune Dirs", true);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_prune_dirs" )))
     ->setChecked( opt_pruneDirs );
 
-    opt_updateRecursive = config->readEntry("Update Recursive", false);
+    opt_updateRecursive = config.readEntry("Update Recursive", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_update_recursively" )))
     ->setChecked( opt_updateRecursive );
 
-    opt_commitRecursive = config->readEntry("Commit Recursive", false);
+    opt_commitRecursive = config.readEntry("Commit Recursive", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_commit_recursively" )))
     ->setChecked( opt_commitRecursive );
 
-    opt_doCVSEdit = config->readEntry("Do cvs edit", false);
+    opt_doCVSEdit = config.readEntry("Do cvs edit", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_do_cvs_edit" )))
     ->setChecked( opt_doCVSEdit );
 
-    opt_hideFiles = config->readEntry("Hide Files", false);
+    opt_hideFiles = config.readEntry("Hide Files", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_files" )))
     ->setChecked( opt_hideFiles );
 
-    opt_hideUpToDate = config->readEntry("Hide UpToDate Files", false);
+    opt_hideUpToDate = config.readEntry("Hide UpToDate Files", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_uptodate" )))
     ->setChecked( opt_hideUpToDate );
 
-    opt_hideRemoved = config->readEntry("Hide Removed Files", false);
+    opt_hideRemoved = config.readEntry("Hide Removed Files", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_removed" )))
     ->setChecked( opt_hideRemoved );
 
-    opt_hideNotInCVS = config->readEntry("Hide Non CVS Files", false);
+    opt_hideNotInCVS = config.readEntry("Hide Non CVS Files", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_notincvs" )))
     ->setChecked( opt_hideNotInCVS );
 
-    opt_hideEmptyDirectories = config->readEntry("Hide Empty Directories", false);
+    opt_hideEmptyDirectories = config.readEntry("Hide Empty Directories", false);
     (static_cast<KToggleAction *> (actionCollection()->action( "settings_hide_empty_directories" )))
     ->setChecked( opt_hideEmptyDirectories );
 
     setFilter();
 
-    int splitterpos1 = config->readEntry("Splitter Pos 1", 0);
-    int splitterpos2 = config->readEntry("Splitter Pos 2", 0);
+    int splitterpos1 = config.readEntry("Splitter Pos 1", 0);
+    int splitterpos2 = config.readEntry("Splitter Pos 2", 0);
     if (splitterpos1)
     {
         QList<int> sizes;
@@ -1948,27 +1941,25 @@ void CervisiaPart::readSettings()
 
 void CervisiaPart::writeSettings()
 {
-    KConfig* config = this->config();
-
-    config->setGroup("Session");
+    KConfigGroup config( this->config(), "Session");
     recent->saveEntries( config );
 
-    config->writeEntry("Create Dirs", opt_createDirs);
-    config->writeEntry("Prune Dirs", opt_pruneDirs);
-    config->writeEntry("Update Recursive", opt_updateRecursive);
-    config->writeEntry("Commit Recursive", opt_commitRecursive);
-    config->writeEntry("Do cvs edit", opt_doCVSEdit);
-    config->writeEntry("Hide Files", opt_hideFiles);
-    config->writeEntry("Hide UpToDate Files", opt_hideUpToDate);
-    config->writeEntry("Hide Removed Files", opt_hideRemoved);
-    config->writeEntry("Hide Non CVS Files", opt_hideNotInCVS);
-    config->writeEntry("Hide Empty Directories", opt_hideEmptyDirectories);
+    config.writeEntry("Create Dirs", opt_createDirs);
+    config.writeEntry("Prune Dirs", opt_pruneDirs);
+    config.writeEntry("Update Recursive", opt_updateRecursive);
+    config.writeEntry("Commit Recursive", opt_commitRecursive);
+    config.writeEntry("Do cvs edit", opt_doCVSEdit);
+    config.writeEntry("Hide Files", opt_hideFiles);
+    config.writeEntry("Hide UpToDate Files", opt_hideUpToDate);
+    config.writeEntry("Hide Removed Files", opt_hideRemoved);
+    config.writeEntry("Hide Non CVS Files", opt_hideNotInCVS);
+    config.writeEntry("Hide Empty Directories", opt_hideEmptyDirectories);
     QList<int> sizes = splitter->sizes();
-    config->writeEntry("Splitter Pos 1", sizes[0]);
-    config->writeEntry("Splitter Pos 2", sizes[1]);
+    config.writeEntry("Splitter Pos 1", sizes[0]);
+    config.writeEntry("Splitter Pos 2", sizes[1]);
 
     // write to disk
-    config->sync();
+    config.sync();
 }
 
 

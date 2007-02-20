@@ -26,7 +26,7 @@
 //Added by qt3to4:
 #include <QTextStream>
 
-#include <kconfig.h>
+#include <ksharedconfig.h>
 #include <kdirwatch.h>
 #include <kstandarddirs.h>
 #include <kglobal.h>

@@ -69,7 +69,7 @@ ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent, const char *name
     setMainWidget(edit);
 
     KConfigGroup cg(&partConfig, "ChangeLogDialog");
-    restoreDialogSize(&cg);
+    restoreDialogSize(cg);
     connect(this,SIGNAL(okClicked()),this,SLOT(slotOk()));
 }
 
@@ -77,7 +77,7 @@ ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent, const char *name
 ChangeLogDialog::~ChangeLogDialog()
 {
     KConfigGroup cg(&partConfig, "ChangeLogDialog");
-    saveDialogSize(&cg);
+    saveDialogSize(cg);
 }
 
 

@@ -520,7 +520,6 @@ void UpdateView::syncSelection()
 void UpdateView::updateColors()
 {
     KConfigGroup cs(&m_partConfig, "Colors");
-    m_partConfig.setGroup("Colors");
 
     m_conflictColor = cs.readEntry("Conflict", QColor(255, 130, 130) );
     m_localChangeColor = cs.readEntry("LocalChange", QColor(130, 130, 255));

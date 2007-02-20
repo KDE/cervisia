@@ -124,7 +124,7 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInter
     setHelp("commitingfiles");
 
     KConfigGroup cg(&partConfig, "CommitDialog");
-    restoreDialogSize(&cg);
+    restoreDialogSize(cg);
 }
 
 
@@ -132,7 +132,7 @@ CommitDialog::~CommitDialog()
 {
     KConfigGroup cg(&partConfig, "CommitDialog");
     cg.writeEntry("UseTemplate", m_useTemplateChk->isChecked());
-    saveDialogSize(&cg);
+    saveDialogSize(cg);
 }
 
 
