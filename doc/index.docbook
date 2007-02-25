@@ -1401,7 +1401,7 @@ file containing all the differences from many source files.
 </para>
 
 <para>
-&cervisia; gives you to access to this feature by choosing
+&cervisia; gives you access to this feature by choosing
 <menuchoice><guimenu>Advanced</guimenu>
 <guimenuitem>Create Patch Against Repository</guimenuitem></menuchoice>.
 </para>
