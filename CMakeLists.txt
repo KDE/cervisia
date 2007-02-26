@@ -1,9 +1,6 @@
 project(cervisia)
 
-if ( UNIX )
- add_subdirectory( cvsservice ) 
-endif(UNIX)
-
+add_subdirectory( cvsservice ) 
 add_subdirectory( pics ) 
 
 set(_KDECONFDIR_ ${CONFIG_INSTALL_DIR})
