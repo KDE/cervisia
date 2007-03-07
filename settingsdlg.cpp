@@ -91,7 +91,7 @@ SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name
 
     config = conf;
 
-    // open cvs DCOP service configuration file
+    // open cvs D-Bus service configuration file
     serviceConfig = new KConfig("cvsservicerc");
 
     //
@@ -131,7 +131,7 @@ SettingsDialog::~SettingsDialog()
 
 void SettingsDialog::readSettings()
 {
-    // read entries from cvs DCOP service configuration
+    // read entries from cvs D-Bus service configuration
     serviceConfig->setGroup("General");
     cvspathedit->setUrl(serviceConfig->readPathEntry("CVSPath", "cvs"));
     m_advancedPage->kcfg_Compression->setValue(serviceConfig->readEntry(
@@ -171,7 +171,7 @@ void SettingsDialog::readSettings()
 
 void SettingsDialog::writeSettings()
 {
-    // write entries to cvs DCOP service configuration
+    // write entries to cvs D-Bus service configuration
     serviceConfig->setGroup("General");
     serviceConfig->writePathEntry("CVSPath", cvspathedit->url().path());
     serviceConfig->writeEntry("Compression",
