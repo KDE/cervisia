@@ -239,7 +239,7 @@ void CervisiaPart::setupActions()
     //
     // File Menu
     //
-    action  = new KAction(KIcon("fileopen"), i18n("O&pen Sandbox..."), this);
+    action  = new KAction(KIcon("document-open"), i18n("O&pen Sandbox..."), this);
     actionCollection()->addAction("file_open", action );
     connect(action, SIGNAL(triggered(bool) ), SLOT( slotOpenSandbox() ));
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
@@ -334,7 +334,7 @@ void CervisiaPart::setupActions()
     //
     // View Menu
     //
-    action  = new KAction(KIcon("stop"), i18n("Stop"), this);
+    action  = new KAction(KIcon("process-stop"), i18n("Stop"), this);
     actionCollection()->addAction("stop_job", action );
     connect(action, SIGNAL(triggered(bool) ), protocol, SLOT(cancelJob()));
     action->setShortcut(QKeySequence(Qt::Key_Escape));

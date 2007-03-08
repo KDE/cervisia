@@ -67,7 +67,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     setButtons(Ok | Apply | Close | Help | User1 | User2 | User3);
     setButtonGuiItem(User1, KGuiItem(i18n("&Annotate")));
     setButtonGuiItem(User2, KGuiItem(i18n("&Diff"), "vcs_diff"));
-    setButtonGuiItem(User3, KGuiItem(i18n("&Find"), "find"));
+    setButtonGuiItem(User3, KGuiItem(i18n("&Find"), "edit-find"));
     setDefaultButton(Close);
     showButtonSeparator(true);
 
@@ -205,7 +205,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     connect(this,SIGNAL(okClicked()),
 		    this, SLOT(slotOk()));
     connect(this,SIGNAL(applyClicked()),this,SLOT(slotApply()));
-    setButtonGuiItem(Ok, KGuiItem(i18nc("to view something", "&View"),"fileopen"));
+    setButtonGuiItem(Ok, KGuiItem(i18nc("to view something", "&View"),"document-open"));
     setButtonGuiItem(Apply, KGuiItem(i18n("Create Patch...")));
     setHelp("browsinglogs");
 
