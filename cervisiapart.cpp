@@ -231,11 +231,6 @@ void CervisiaPart::setupActions()
 {
     QAction *action;
     QString hint;
-#ifdef __GNUC__
-#warning "kde4: port it actionCollection()->setHighlightingEnabled(true);";
-#endif
-    //actionCollection()->setHighlightingEnabled(true);
-
     //
     // File Menu
     //

@@ -67,24 +67,24 @@ DiffView::DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
     setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
     setBackgroundRole( QPalette::Base );
 
-    partConfig.setGroup("LookAndFeel");
-    setFont(partConfig.readEntry("DiffFont",QFont()));
+    KConfigGroup group = partConfig.group("LookAndFeel");
+    setFont(group.readEntry("DiffFont",QFont()));
     QFontMetrics fm(font());
     setCellHeight(fm.lineSpacing());
     setCellWidth(0);
     textwidth = 0;
 
-    partConfig.setGroup("General");
-    m_tabWidth = partConfig.readEntry("TabWidth", 8);
+    group = partConfig.group("General");
+    m_tabWidth = group.readEntry("TabWidth", 8);
 
     items.setAutoDelete(true);
     linenos = withlinenos;
     marker = withmarker;
 
-    partConfig.setGroup("Colors");
-    diffChangeColor=partConfig.readEntry("DiffChange",QColor(237, 190, 190));
-    diffInsertColor=partConfig.readEntry("DiffInsert",QColor(190, 190, 237));
-    diffDeleteColor=partConfig.readEntry("DiffDelete",QColor(190, 237, 190));
+    group = partConfig.group("Colors");
+    diffChangeColor=group.readEntry("DiffChange",QColor(237, 190, 190));
+    diffInsertColor=group.readEntry("DiffInsert",QColor(190, 190, 237));
+    diffDeleteColor=group.readEntry("DiffDelete",QColor(190, 237, 190));
 }
 
 
@@ -394,10 +394,10 @@ DiffZoomWidget::DiffZoomWidget(KConfig& cfg, QWidget *parent, const char *name)
 {
     setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Minimum ) );
 
-    cfg.setGroup("Colors");
-    diffChangeColor=cfg.readEntry("DiffChange",QColor(237, 190, 190));
-    diffInsertColor=cfg.readEntry("DiffInsert",QColor(190, 190, 237));
-    diffDeleteColor=cfg.readEntry("DiffDelete",QColor(190, 237, 190));
+    KConfigGroup group = cfg.group("Colors");
+    diffChangeColor=group.readEntry("DiffChange",QColor(237, 190, 190));
+    diffInsertColor=group.readEntry("DiffInsert",QColor(190, 190, 237));
+    diffDeleteColor=group.readEntry("DiffDelete",QColor(190, 237, 190));
 }
 
 

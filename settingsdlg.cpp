@@ -132,31 +132,31 @@ SettingsDialog::~SettingsDialog()
 void SettingsDialog::readSettings()
 {
     // read entries from cvs D-Bus service configuration
-    serviceConfig->setGroup("General");
-    cvspathedit->setUrl(serviceConfig->readPathEntry("CVSPath", "cvs"));
-    m_advancedPage->kcfg_Compression->setValue(serviceConfig->readEntry(
+    KConfigGroup group = serviceConfig->group("General");
+    cvspathedit->setUrl(group.readPathEntry("CVSPath", "cvs"));
+    m_advancedPage->kcfg_Compression->setValue(group.readEntry(
                                                    "Compression", 0));
-    m_advancedPage->kcfg_UseSshAgent->setChecked(serviceConfig->readEntry(
+    m_advancedPage->kcfg_UseSshAgent->setChecked(group.readEntry(
                                                    "UseSshAgent", false));
 
-    config->setGroup("General");
+    group = config->group("General");
     m_advancedPage->kcfg_Timeout->setValue(CervisiaSettings::timeout());
-    usernameedit->setText(config->readEntry("Username", Cervisia::UserName()));
+    usernameedit->setText(group.readEntry("Username", Cervisia::UserName()));
 
-    contextedit->setValue(config->readEntry("ContextLines", 65535));
-    tabwidthedit->setValue(config->readEntry("TabWidth", 8));
-    diffoptedit->setText(config->readEntry("DiffOptions"));
-    extdiffedit->setUrl(config->readPathEntry("ExternalDiff"));
-    remotestatusbox->setChecked(config->readEntry("StatusForRemoteRepos", false));
-    localstatusbox->setChecked(config->readEntry("StatusForLocalRepos", false));
+    contextedit->setValue(group.readEntry("ContextLines", 65535));
+    tabwidthedit->setValue(group.readEntry("TabWidth", 8));
+    diffoptedit->setText(group.readEntry("DiffOptions"));
+    extdiffedit->setUrl(group.readPathEntry("ExternalDiff"));
+    remotestatusbox->setChecked(group.readEntry("StatusForRemoteRepos", false));
+    localstatusbox->setChecked(group.readEntry("StatusForLocalRepos", false));
 
     // read configuration for look and feel page
-    config->setGroup("LookAndFeel");
-    m_protocolFontBox->setFont(config->readEntry("ProtocolFont",QFont()));
-    m_annotateFontBox->setFont(config->readEntry("AnnotateFont",QFont()));
-    m_diffFontBox->setFont(config->readEntry("DiffFont",QFont()));
-    m_changelogFontBox->setFont(config->readEntry("ChangeLogFont",QFont()));
-    m_splitterBox->setChecked(config->readEntry("SplitHorizontally",true));
+    group = config->group("LookAndFeel");
+    m_protocolFontBox->setFont(group.readEntry("ProtocolFont",QFont()));
+    m_annotateFontBox->setFont(group.readEntry("AnnotateFont",QFont()));
+    m_diffFontBox->setFont(group.readEntry("DiffFont",QFont()));
+    m_changelogFontBox->setFont(group.readEntry("ChangeLogFont",QFont()));
+    m_splitterBox->setChecked(group.readEntry("SplitHorizontally",true));
 
     m_conflictButton->setColor(CervisiaSettings::conflictColor());
     m_localChangeButton->setColor(CervisiaSettings::localChangeColor());
@@ -172,34 +172,34 @@ void SettingsDialog::readSettings()
 void SettingsDialog::writeSettings()
 {
     // write entries to cvs D-Bus service configuration
-    serviceConfig->setGroup("General");
-    serviceConfig->writePathEntry("CVSPath", cvspathedit->url().path());
-    serviceConfig->writeEntry("Compression",
+    KConfigGroup group = serviceConfig->group("General");
+    group.writePathEntry("CVSPath", cvspathedit->url().path());
+    group.writeEntry("Compression",
         m_advancedPage->kcfg_Compression->value());
-    serviceConfig->writeEntry("UseSshAgent",
+    group.writeEntry("UseSshAgent",
         m_advancedPage->kcfg_UseSshAgent->isChecked());
 
     // write to disk so other services can reparse the configuration
     serviceConfig->sync();
 
-    config->setGroup("General");
+    group = config->group("General");
     CervisiaSettings::setTimeout(m_advancedPage->kcfg_Timeout->value());
-    config->writeEntry("Username", usernameedit->text());
+    group.writeEntry("Username", usernameedit->text());
 
-    config->writePathEntry("ExternalDiff", extdiffedit->url().path());
+    group.writePathEntry("ExternalDiff", extdiffedit->url().path());
 
-    config->writeEntry("ContextLines", (unsigned)contextedit->value());
-    config->writeEntry("TabWidth", tabwidthedit->value());
-    config->writeEntry("DiffOptions", diffoptedit->text());
-    config->writeEntry("StatusForRemoteRepos", remotestatusbox->isChecked());
-    config->writeEntry("StatusForLocalRepos", localstatusbox->isChecked());
+    group.writeEntry("ContextLines", (unsigned)contextedit->value());
+    group.writeEntry("TabWidth", tabwidthedit->value());
+    group.writeEntry("DiffOptions", diffoptedit->text());
+    group.writeEntry("StatusForRemoteRepos", remotestatusbox->isChecked());
+    group.writeEntry("StatusForLocalRepos", localstatusbox->isChecked());
 
-    config->setGroup("LookAndFeel");
-    config->writeEntry("ProtocolFont", m_protocolFontBox->font());
-    config->writeEntry("AnnotateFont", m_annotateFontBox->font());
-    config->writeEntry("DiffFont", m_diffFontBox->font());
-    config->writeEntry("ChangeLogFont", m_changelogFontBox->font());
-    config->writeEntry("SplitHorizontally", m_splitterBox->isChecked());
+    group = config->group("LookAndFeel");
+    group.writeEntry("ProtocolFont", m_protocolFontBox->font());
+    group.writeEntry("AnnotateFont", m_annotateFontBox->font());
+    group.writeEntry("DiffFont", m_diffFontBox->font());
+    group.writeEntry("ChangeLogFont", m_changelogFontBox->font());
+    group.writeEntry("SplitHorizontally", m_splitterBox->isChecked());
 
     CervisiaSettings::setConflictColor(m_conflictButton->color());
     CervisiaSettings::setLocalChangeColor(m_localChangeButton->color());
