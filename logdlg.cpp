@@ -41,7 +41,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kprocess.h>
-#include <krfcdate.h>
+#include <kdatetime.h>
 #include <krun.h>
 #include <kurl.h>
 #include <kconfiggroup.h>
@@ -314,7 +314,7 @@ bool LogDialog::parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service
 
                     QString date = dateTimeStr.section(' ', 0, 0);
                     QString time = dateTimeStr.section(' ', 1, 1);
-                    logInfo.m_dateTime.setTime_t(KRFCDate::parseDateISO8601(date + 'T' + time));
+                    logInfo.m_dateTime.setTime_t(KDateTime::fromString(date + 'T' + time).toTime_t());
 
                     logInfo.m_author = strList[1].section(':', 1, 1).trimmed();
 

@@ -31,7 +31,7 @@
 #include <klineedit.h>
 #include <k3listview.h>
 #include <klocale.h>
-#include <krfcdate.h>
+#include <kdatetime.h>
 #include <kconfiggroup.h>
 
 #include "misc.h"
@@ -361,7 +361,7 @@ bool HistoryDialog::parseHistory(OrgKdeCervisiaCvsserviceCvsserviceInterface* cv
         }
 
         QDateTime date;
-        date.setTime_t(KRFCDate::parseDateISO8601(list[1] + 'T' + list[2] + list[3]));
+        date.setTime_t(KDateTime::fromString(list[1] + 'T' + list[2] + list[3]).toTime_t());
 
         HistoryItem *item = new HistoryItem(listview, date);
         item->setText(HistoryItem::Event, event);
