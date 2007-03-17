@@ -333,7 +333,7 @@ on the repositories list.
 If the access method to the repository you just entered is password
 authentication (pserver), you will need to login before connecting the server.
 Click the repository on the list to select it, and press the
-<guilabel>Login...</guilabel> button. Enter your password in the pop-up dialog.
+<guilabel>Login...</guilabel> button. Enter your password in the upcoming dialog.
 </para>
 <para>
 If you successfully enter your password, the <guilabel>Status</guilabel>
@@ -851,10 +851,11 @@ repository. If not, you may consider adding it to your
 Now that you have got an overview of the current status of the &CVS;, you may
 want to do an update. Mark some files (or the root of the folder tree which
 is equivalent to marking all files in this folder). Now choose
-<guimenuitem>Update</guimenuitem> from the <guimenu>File</guimenu> menu, or
-right-click the marked files and choose the <menuchoice>
-<guisubmenu>Status</guisubmenu></menuchoice> menu item from the pop-up menu. (Of
-course, you could have chosen this at the beginning of the session). For some
+<menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Update</guimenuitem>
+</menuchoice> (Of course, you could have chosen this at the beginning of
+the session). For some
 of the files the status may change now. Typically, files which had "Needs
 Patch" or "Needs Update" are updated. So the following new items are possible
 in the status column:
@@ -916,7 +917,7 @@ affected.
 </para>
 
 <figure id="screenshot-popup" float="1">
-<title>A screenshot of &cervisia;'s pop-up menu</title>
+<title>A screenshot of &cervisia;'s context menu</title>
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="popup.png"/></imageobject>
 </mediaobject>
@@ -924,13 +925,13 @@ affected.
 
 <para>
 The most used actions are also available by right clicking the files in the tree
-view, through the pop-up menu. <xref linkend="screenshot-popup" /> shows
-&cervisia;'s main window pop-up menu.
+view, through the context menu. <xref linkend="screenshot-popup" /> shows
+&cervisia;'s main window context menu.
 </para>
 
 <para>
 You can simply edit a file by double-clicking on it or selecting it and pressing
-<keycap>Return</keycap>. This starts the default application that handles that
+&Enter;. This starts the default application that handles that
 file type (the default application for each file type is a &kde; wide setting). If
 the default application is not the one you want to use, you can right click the
 file and choose the
@@ -1010,7 +1011,7 @@ Like adding files, removing files is done in two steps: First, the files have
 to be registered as removed by choosing
 <menuchoice><guimenu>File</guimenu><guimenuitem>Remove From
 Repository...</guimenuitem></menuchoice> or right clicking the marked files and
-choosing <guimenuitem>Remove From Repository...</guimenuitem> from the pop-up
+choosing <guimenuitem>Remove From Repository...</guimenuitem> from the context
 menu. The <guilabel>CVS Remove</guilabel> dialog will appear, listing the files
 you marked, and asking for confirmation. Press <guibutton>OK</guibutton>.
 &cervisia; issues the command
@@ -1059,7 +1060,7 @@ Folders on Update</guimenuitem></menuchoice>.
 A folder can be added to the repository choosing 
 <menuchoice><guimenu>File</guimenu><guimenuitem>Add to
 Repository...</guimenuitem></menuchoice> or right clicking the marked folder and
-choosing <guimenuitem>Add to Repository...</guimenuitem> from the pop-up menu.
+choosing <guimenuitem>Add to Repository...</guimenuitem> from the context menu.
 Note that in contrast to adding files, adding folders does not require a commit
 afterwards. &cervisia; issues the command
 </para>
@@ -1088,7 +1089,7 @@ In order to commit a couple of files, select them in &cervisia;'s main view and
 choose
 <menuchoice><guimenu>File</guimenu><guimenuitem>Commit...</guimenuitem></menuchoice>
 or right click the marked files and choose
-<guimenuitem>Commit...</guimenuitem> from the pop-up menu.
+<guimenuitem>Commit...</guimenuitem> from the context menu.
 </para>
 
 <figure id="screenshot-commit" float="1">
@@ -1213,7 +1214,7 @@ at least can eliminate the need to do so for the trivial conflict resolution.
 To use &cervisia;'s <guilabel>CVS Resolve</guilabel> dialog choose
 <menuchoice><guimenu>File</guimenu><guimenuitem>Resolve...</guimenuitem></menuchoice>
 or right click the marked file and choose
-<guimenuitem>Resolve...</guimenuitem> from the pop-up menu.
+<guimenuitem>Resolve...</guimenuitem> from the context menu.
 </para>
 
 <figure id="screenshot-resolve" float="1">
@@ -1314,7 +1315,7 @@ choosing <menuchoice><guimenu>View</guimenu>
 <listitem><para>
 You can access the <guimenuitem>Difference to Repository (BASE)...</guimenuitem>,
 <guimenuitem>Difference to Repository (HEAD)...</guimenuitem> and 
-<guimenuitem>Last Change...</guimenuitem> menu items from the main view pop-up
+<guimenuitem>Last Change...</guimenuitem> menu items from the main view context
 menu, by right-clicking the file you want to view.
 </para></listitem>
 
@@ -1416,7 +1417,7 @@ generated.
 Another possibility is to select one file in the main view and choose
 <guimenuitem>Browse Log...</guimenuitem> from the <guimenu>View</guimenu> menu
 or right click the marked file and choose
-<guimenuitem>Browse Log...</guimenuitem> from the pop-up menu, in order to open
+<guimenuitem>Browse Log...</guimenuitem> from the context menu, in order to open
 the <link linkend="browsinglogs">Browse log dialog</link>. Now, select the
 version you want to create a patch against, as revision &quot;A&quot; and press
 the button <guilabel>Create Patch...</guilabel>. This will generate a patch with
@@ -1559,7 +1560,7 @@ change.
 When you mark one file in the main view and choose <guimenuitem>Browse
 Log...</guimenuitem> from the <guimenu>View</guimenu> menu
 or right click the marked file and choose
-<guimenuitem>Browse Log...</guimenuitem> from the pop-up menu, the
+<guimenuitem>Browse Log...</guimenuitem> from the context menu, the
 <guilabel>CVS Log</guilabel> dialog is shown (if you mark more than one, nothing
 happens, as &cervisia; can only generate and parse the log for one file at a
 time). This dialog offers functionality that is beyond viewing the file's
