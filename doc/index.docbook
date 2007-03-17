@@ -742,13 +742,11 @@ connection to the &CVS; server.
 <para>
 The commands in the File menu usually act only on the files which you have
 marked. You may also mark folders. Now choose
-<guimenuitem>Status</guimenuitem> from the <guimenu>File</guimenu>
-menu, press <keycap>F5</keycap> or right click the marked files
-and choose the
 <menuchoice>
-<guisubmenu>Status</guisubmenu>
-</menuchoice>
-menu item from the pop-up menu. &cervisia; issues a</para>
+<guimenu>File</guimenu>
+<guimenuitem>Status</guimenuitem>
+</menuchoice> or press <keycap>F5</keycap>. &cervisia; issues a
+</para>
 
 <para>
 <screen><command>cvs update -n <replaceable>file names</replaceable></command></screen>
