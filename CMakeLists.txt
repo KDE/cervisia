@@ -50,11 +50,13 @@ kde4_automoc(${cervisia_KDEINIT_SRCS})
 
 kde4_add_kdeinit_executable( cervisia ${cervisia_KDEINIT_SRCS})
 
-target_link_libraries(kdeinit_cervisia  ${KDE4_KPARTS_LIBS} ${KDE4_KUTILS_LIBS} )
+# kde3support still needed for K3ListView and friends
+target_link_libraries(kdeinit_cervisia  ${KDE4_KPARTS_LIBS} ${KDE4_KUTILS_LIBS} ${KDE4_KDE3SUPPORT_LIBS})
 
 install(TARGETS kdeinit_cervisia  DESTINATION ${LIB_INSTALL_DIR} )
 
-target_link_libraries( cervisia kdeinit_cervisia )
+# kde3support still needed for K3ListView and friends
+target_link_libraries( cervisia kdeinit_cervisia ${KDE4_KDE3SUPPORT_LIBS})
 install(TARGETS cervisia  DESTINATION ${BIN_INSTALL_DIR} )
 
 ########### next target ###############
@@ -97,7 +99,7 @@ kde4_add_plugin(cervisiapart WITH_PREFIX ${cervisiapart_PART_SRCS})
 
 
 
-target_link_libraries(cervisiapart  ${KDE4_KPARTS_LIBS}  ${KDE4_KUTILS_LIBS} )
+target_link_libraries(cervisiapart  ${KDE4_KPARTS_LIBS}  ${KDE4_KUTILS_LIBS} ${KDE4_KDE3SUPPORT_LIBS} )
 
 install(TARGETS cervisiapart  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
