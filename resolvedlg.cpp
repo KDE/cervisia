@@ -171,7 +171,7 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent, const char *name)
     babutton = new QPushButton("B+A", mainWidget);
     connect( babutton, SIGNAL(clicked()), SLOT(baClicked()) );
 
-    editbutton = new QPushButton("&Edit", mainWidget);
+    editbutton = new QPushButton(i18n("&Edit"), mainWidget);
     connect( editbutton, SIGNAL(clicked()), SLOT(editClicked()) );
 
     nofnlabel = new QLabel(mainWidget);
