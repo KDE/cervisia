@@ -1043,7 +1043,7 @@ them.
 Folders are handled fundamentally different from ordinary files by
 &CVS;. They are not under revision control, &ie; you cannot tell which
 folders existed in the project at a certain time. Furthermore, folders
-can never be explicitly removed (expect by removing them directly in the
+can never be explicitly removed (except by removing them directly in the
 repository).
 </para>
 
