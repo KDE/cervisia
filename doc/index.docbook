@@ -1202,8 +1202,8 @@ Changes in the repository
 
 <para>You should replace this whole block with the new merged version. Of
 course, you have a great amount of freedom when resolving a
-set of conflicts: you can for each conflict decide to take one of the two
-alternative versions. You can also decide that both approaches are are broken
+set of conflicts: for each conflict you can decide to take one of the two
+alternative versions. You can also decide that both approaches are broken
 and rewrite a whole routine or the complete file from scratch.
 </para>
 
