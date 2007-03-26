@@ -1406,7 +1406,7 @@ file containing all the differences from many source files.
 </para>
 
 <important><para>
-The <guimenuitem>Create Patch Against Repository</guimenuitem> action
+The <guimenuitem>Create Patch Against Repository...</guimenuitem> action
 creates a patch with all modifications in all files in your working copy
 (sandbox) against the <literal>BASE</literal> repository. Therefore, the
 selection of files in the main view does not affect the patch that will be
