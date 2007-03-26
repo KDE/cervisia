@@ -40,7 +40,7 @@
 #include <k3listviewsearchline.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kprocess.h>
+#include <k3process.h>
 #include <kdatetime.h>
 #include <krun.h>
 #include <kurl.h>

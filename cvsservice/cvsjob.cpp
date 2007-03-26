@@ -25,7 +25,7 @@
 #include <QList>
 #include <Q3CString>
 #include <kdebug.h>
-#include <kprocess.h>
+#include <k3process.h>
 #include <cvsjobadaptor.h>
 #include "sshagent.h"
 
@@ -34,12 +34,12 @@ struct CvsJob::Private
 {
     Private() : isRunning(false)
     {
-        childproc = new KProcess;
+        childproc = new K3Process;
         childproc->setUseShell(true, "/bin/sh");
     }
     ~Private() { delete childproc; }
 
-    KProcess*   childproc;
+    K3Process*   childproc;
     QString     server;
     QString     rsh;
     QString     directory;
@@ -188,17 +188,17 @@ bool CvsJob::execute()
     if( !d->directory.isEmpty() )
         d->childproc->setWorkingDirectory(d->directory);
 
-    connect(d->childproc, SIGNAL(processExited(KProcess*)),
+    connect(d->childproc, SIGNAL(processExited(K3Process*)),
         SLOT(slotProcessExited()));
-    connect(d->childproc, SIGNAL(receivedStdout(KProcess*, char*, int)),
-        SLOT(slotReceivedStdout(KProcess*, char*, int)));
-    connect(d->childproc, SIGNAL(receivedStderr(KProcess*, char*, int)),
-        SLOT(slotReceivedStderr(KProcess*, char*, int)) );
+    connect(d->childproc, SIGNAL(receivedStdout(K3Process*, char*, int)),
+        SLOT(slotReceivedStdout(K3Process*, char*, int)));
+    connect(d->childproc, SIGNAL(receivedStderr(K3Process*, char*, int)),
+        SLOT(slotReceivedStderr(K3Process*, char*, int)) );
 
     kDebug(8051) << "Execute cvs command: " << cvsCommand() << endl;
 
     d->isRunning = true;
-    return d->childproc->start(KProcess::NotifyOnExit, KProcess::AllOutput);
+    return d->childproc->start(K3Process::NotifyOnExit, K3Process::AllOutput);
 }
 
 
@@ -220,7 +220,7 @@ void CvsJob::slotProcessExited()
 }
 
 
-void CvsJob::slotReceivedStdout(KProcess* proc, char* buffer, int buflen)
+void CvsJob::slotReceivedStdout(K3Process* proc, char* buffer, int buflen)
 {
     Q_UNUSED(proc);
 
@@ -228,13 +228,13 @@ void CvsJob::slotReceivedStdout(KProcess* proc, char* buffer, int buflen)
 
     // accumulate output
     d->outputLines += QStringList::split("\n", output);
-    kDebug()<<" CvsJob::slotReceivedStdout(KProcess* proc, char* buffer, int buflen)\n";
+    kDebug()<<" CvsJob::slotReceivedStdout(K3Process* proc, char* buffer, int buflen)\n";
     kDebug()<<" output :"<<output<<endl;
     emit receivedStdout(output);
 }
 
 
-void CvsJob::slotReceivedStderr(KProcess* proc, char* buffer, int buflen)
+void CvsJob::slotReceivedStderr(K3Process* proc, char* buffer, int buflen)
 {
     Q_UNUSED(proc);
 
@@ -243,7 +243,7 @@ void CvsJob::slotReceivedStderr(KProcess* proc, char* buffer, int buflen)
     // accumulate output
     d->outputLines += QStringList::split("\n", output);
 
-    kDebug()<<"CvsJob::slotReceivedStderr(KProcess* proc, char* buffer, int buflen)\n";
+    kDebug()<<"CvsJob::slotReceivedStderr(K3Process* proc, char* buffer, int buflen)\n";
     kDebug()<<" output "<<output<<endl;
     emit receivedStderr(output);
 }

@@ -36,7 +36,7 @@
 #include <kcomponentdata.h>
 #include <klocale.h>
 #include <knotification.h>
-#include <kprocess.h>
+#include <k3process.h>
 #include <kpropertiesdialog.h>
 #include <kstatusbar.h>
 #include <kstandardaction.h>
@@ -891,7 +891,7 @@ void CervisiaPart::slotUpdateToTag()
         else
         {
             tagopt = "-D ";
-            tagopt += KProcess::quote(l->date());
+            tagopt += K3Process::quote(l->date());
         }
         tagopt += ' ';
         updateSandbox(tagopt);

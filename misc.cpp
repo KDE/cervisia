@@ -32,7 +32,7 @@
 #include <kemailsettings.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kprocess.h>
+#include <k3process.h>
 #include <ktemporaryfile.h>
 #include <kuser.h>
 #include <kdebug.h>
@@ -230,7 +230,7 @@ QString joinLine(const QStringList &list)
     for ( QStringList::ConstIterator it = list.begin();
           it != list.end(); ++it )
     {
-        line += KShellProcess::quote(*it);
+        line += K3ShellProcess::quote(*it);
         line += ' ';
     }
 

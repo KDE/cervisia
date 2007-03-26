@@ -570,7 +570,7 @@
 
 	* Use DCOP stubs to access the methods of the cvs DCOP service
 	* Added new method update() and checkout() to DCOP service
-	* Use KProcess::operator<< instead of QString::operator+= to
+	* Use K3Process::operator<< instead of QString::operator+= to
 	  build the command line
 	* Make CVS_SERVER configurable in DCOP service
 	  (GUI is missing)
@@ -1082,7 +1082,7 @@
 	* Always use /bin/sh as shell
 	* When the progress dialog is canceled, kill the
 	  underlying process instead of destroying the
-	  KProcess object. This avoids a (superfluous) warning
+	  K3Process object. This avoids a (superfluous) warning
 	  from KProcCtrl
 	* Removed Ok button from the dialog.
 	  Patch by Guillaume Laurent <glaurent@telegraph-road.org>

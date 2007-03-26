@@ -29,7 +29,7 @@
 
 #include <kdemacros.h>
 
-class KProcess;
+class K3Process;
 
 
 class KDE_EXPORT CvsJob : public QObject
@@ -72,8 +72,8 @@ signals: //dbus signal
 
 private slots:
     void slotProcessExited();
-    void slotReceivedStdout(KProcess* proc, char* buffer, int buflen);
-    void slotReceivedStderr(KProcess* proc, char* buffer, int buflen);
+    void slotReceivedStdout(K3Process* proc, char* buffer, int buflen);
+    void slotReceivedStderr(K3Process* proc, char* buffer, int buflen);
 
 private:
     struct Private;

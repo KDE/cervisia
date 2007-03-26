@@ -39,7 +39,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <ktemporaryfile.h>
-#include <kprocess.h>
+#include <k3process.h>
 #include <kconfiggroup.h>
 #include "cvsserviceinterface.h"
 #include "misc.h"
@@ -385,9 +385,9 @@ void DiffDialog::callExternalDiff(const QString& extdiff, OrgKdeCervisiaCvsservi
         if( !job.isValid() )
             return;
 
-        extcmdline += KProcess::quote(revAFilename);
+        extcmdline += K3Process::quote(revAFilename);
         extcmdline += ' ';
-        extcmdline += KProcess::quote(revBFilename);
+        extcmdline += K3Process::quote(revBFilename);
     }
     else
     {
@@ -397,9 +397,9 @@ void DiffDialog::callExternalDiff(const QString& extdiff, OrgKdeCervisiaCvsservi
         if( !job.isValid() )
             return;
 
-        extcmdline += KProcess::quote(revAFilename);
+        extcmdline += K3Process::quote(revAFilename);
         extcmdline += ' ';
-        extcmdline += KProcess::quote(QFileInfo(fileName).absoluteFilePath());
+        extcmdline += K3Process::quote(QFileInfo(fileName).absoluteFilePath());
     }
 
     ProgressDialog dlg(this, "Diff", service->service(),job, "diff");
@@ -407,10 +407,10 @@ void DiffDialog::callExternalDiff(const QString& extdiff, OrgKdeCervisiaCvsservi
     {
         // call external diff application
         // TODO CL maybe use system()?
-        KProcess proc;
+        K3Process proc;
         proc.setUseShell(true, "/bin/sh");
         proc << extcmdline;
-        proc.start(KProcess::DontCare);
+        proc.start(K3Process::DontCare);
     }
 }
 

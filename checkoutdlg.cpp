@@ -32,7 +32,7 @@
 #include <QHBoxLayout>
 #include <QGridLayout>
 #include <QBoxLayout>
-#include <kprocess.h>
+#include <k3process.h>
 #include <kfiledialog.h>
 #include <klineedit.h>
 #include <klocale.h>
