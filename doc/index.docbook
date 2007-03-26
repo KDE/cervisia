@@ -1512,7 +1512,7 @@ the code.
 </para>
 
 <para>
-&cervisia; gives you to access to this feature, but it further enriches the
+&cervisia; gives you access to this feature, but it further enriches the
 information in an interactive way. You obtain an annotate view by choosing
 <menuchoice><guimenu>View</guimenu><guimenuitem>Annotate...</guimenuitem></menuchoice>.
 Another possibility is to press the button <guilabel>Annotate</guilabel> in
