@@ -1158,7 +1158,7 @@ void CervisiaPart::slotAnnotate()
         return;
 
     // Non-modal dialog
-    AnnotateDialog* dlg = new AnnotateDialog(*config(), widget());
+    AnnotateDialog* dlg = new AnnotateDialog(*config());
     AnnotateController ctl(dlg, cvsService);
     ctl.showDialog(filename);
 }
