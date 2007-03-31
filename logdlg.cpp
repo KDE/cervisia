@@ -66,15 +66,14 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     , cvsService(0)
     , partConfig(cfg)
 {
-    QFrame* mainWidget = makeMainWidget();
+    QSplitter *splitter = new QSplitter(Qt::Vertical, this);
+    setMainWidget(splitter);
 
-    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
-
-    tree = new LogTreeView(mainWidget);
+    tree = new LogTreeView(this);
     connect( tree, SIGNAL(revisionClicked(QString,bool)),
              this, SLOT(revisionSelected(QString,bool)) );
 
-    QWidget* listWidget = new QWidget(mainWidget);
+    QWidget* listWidget = new QWidget(this);
     QVBoxLayout* listLayout = new QVBoxLayout(listWidget);
     QHBoxLayout* searchLayout = new QHBoxLayout(listLayout);
     searchLayout->setMargin(KDialog::spacingHint());
@@ -91,15 +90,14 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     connect( list, SIGNAL(revisionClicked(QString,bool)),
              this, SLOT(revisionSelected(QString,bool)) );
 
-    plain = new LogPlainView(mainWidget);
+    plain = new LogPlainView(this);
     connect( plain, SIGNAL(revisionClicked(QString,bool)),
              this, SLOT(revisionSelected(QString,bool)) );
 
-    tabWidget = new QTabWidget(mainWidget);
+    tabWidget = new QTabWidget(splitter);
     tabWidget->addTab(tree, i18n("&Tree"));
     tabWidget->addTab(listWidget, i18n("&List"));
     tabWidget->addTab(plain, i18n("CVS &Output"));
-    layout->addWidget(tabWidget, 3);
 
     connect(tabWidget, SIGNAL(currentChanged(QWidget*)),
             this, SLOT(tabChanged(QWidget*)));
@@ -111,11 +109,17 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     items.setAutoDelete(true);
     tags.setAutoDelete(true);
 
+    QWidget *mainWidget = new QWidget(splitter);
+    QBoxLayout *layout = new QVBoxLayout(mainWidget, 0, spacingHint());
+
     for (int i = 0; i < 2; ++i)
     {
-        QFrame *frame = new QFrame(mainWidget);
-        frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-        layout->addWidget(frame);
+        if ( i == 1 )
+        {
+            QFrame *frame = new QFrame(mainWidget);
+            frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
+            layout->addWidget(frame);
+        }
 
         QGridLayout *grid = new QGridLayout(layout);
         grid->setRowStretch(0, 0);
@@ -164,12 +168,12 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
         commentbox[i]->setReadOnly(true);
         commentbox[i]->setTextFormat(Qt::PlainText);
         fm = commentbox[i]->fontMetrics();
-        commentbox[i]->setFixedHeight(2*fm.lineSpacing()+10);
+        commentbox[i]->setMinimumHeight(2*fm.lineSpacing()+10);
         grid->addMultiCellWidget(commentbox[i], 2, 2, 1, 3);
 
         tagsbox[i] = new QTextEdit(mainWidget);
         tagsbox[i]->setReadOnly(true);
-        tagsbox[i]->setFixedHeight(2*fm.lineSpacing()+10);
+        tagsbox[i]->setMinimumHeight(2*fm.lineSpacing()+10);
         grid->addWidget(tagsbox[i], 2, 4);
     }
 
