@@ -25,7 +25,7 @@
 #include <kconfig.h>
 #include <kedittoolbar.h>
 #include <khelpmenu.h>
-#include <kkeydialog.h>
+#include <kshortcutsdialog.h>
 #include <klibloader.h>
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -141,7 +141,7 @@ void CervisiaShell::openURL(const KUrl& url)
 
 void CervisiaShell::slotConfigureKeys()
 {
-    KKeyDialog dlg;
+    KShortcutsDialog dlg;
     dlg.addCollection(actionCollection());
     if( m_part )
         dlg.addCollection(m_part->actionCollection());
