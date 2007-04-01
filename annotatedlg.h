@@ -39,7 +39,7 @@ class AnnotateDialog : public KDialog
 {
 public:
 
-    explicit AnnotateDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
+    explicit AnnotateDialog( KConfig& cfg, QWidget *parent=0);
 
     virtual ~AnnotateDialog();
 

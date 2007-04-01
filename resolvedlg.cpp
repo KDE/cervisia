@@ -102,7 +102,7 @@ private:
 }
 
 
-ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent, const char *name)
+ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
     : KDialog(parent)
     , markeditem(-1)
     , partConfig(cfg)

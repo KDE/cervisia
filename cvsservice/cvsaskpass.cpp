@@ -59,22 +59,20 @@ extern "C" KDE_EXPORT int kdemain(int argc, char** argv)
     QString prompt = KCmdLineArgs::parsedArgs()->arg(0);
     QRegExp rx("(.*@.*)'s password:");
     int pos = rx.search(prompt);
-#ifdef __GNUC__
-#warning "kde4 port it"
-#endif
-#if 0
-    KPasswordDialog dlg(KPasswordDialog::Password, false, 0);
+
+    KPasswordDialog dlg;
     dlg.setPrompt(i18n("Please type in your password below."));
+    //dlg.setWindowTitle(i18n("Enter Password"));
 
     if( pos > -1 )
-        dlg.addLine(i18n("Repository:"), rx.cap(1));
+        dlg.addCommentLine(i18n("Repository:"), rx.cap(1));
 
     int res = dlg.exec();
     if( res == KPasswordDialog::Accepted )
     {
-        std::cout << dlg.password() << std::endl;
+        std::cout << dlg.password().ascii() << std::endl;
         return 0;
     }
-#endif
+
     return 1;
 }

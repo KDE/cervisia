@@ -26,8 +26,6 @@
 #include "loginfo.h"
 
 #include <q3ptrlist.h>
-//Added by qt3to4:
-#include <QLabel>
 
 
 class LogListView;
@@ -54,7 +52,7 @@ class LogDialog : public KDialog
     Q_OBJECT
 
 public:
-    explicit LogDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
+    explicit LogDialog( KConfig& cfg, QWidget *parent=0);
 
     virtual ~LogDialog();
 

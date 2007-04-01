@@ -36,7 +36,7 @@ class PatchOptionDialog : public KDialog
     Q_OBJECT
     
 public:
-    explicit PatchOptionDialog(QWidget* parent = 0, const char* name = 0);
+    explicit PatchOptionDialog(QWidget* parent = 0);
     virtual ~PatchOptionDialog();
     
     QString diffOptions() const;

@@ -127,7 +127,7 @@ bool HistoryItem::isOther()
 }
 
 
-HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent, const char *name)
+HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent)
     : KDialog(parent)
     , partConfig(cfg)
 {

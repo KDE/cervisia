@@ -32,7 +32,7 @@
 #include <klocale.h>
 
 
-WatchDialog::WatchDialog(ActionType action, QWidget *parent, const char *name)
+WatchDialog::WatchDialog(ActionType action, QWidget *parent)
     : KDialog(parent)
 {
     setCaption( (action==Add)? i18n("CVS Watch Add") : i18n("CVS Watch Remove") );

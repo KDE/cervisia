@@ -35,7 +35,7 @@ public:
     enum ActionType { Add, Remove };
     enum Events { None=0, All=1, Commits=2, Edits=4, Unedits=8 };
 
-    explicit WatchDialog( ActionType action, QWidget *parent=0, const char *name=0 );
+    explicit WatchDialog(ActionType action, QWidget *parent=0);
 
     Events events() const;
 

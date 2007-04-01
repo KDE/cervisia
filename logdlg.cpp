@@ -30,6 +30,7 @@
 #include <qtabwidget.h>
 #include <q3textedit.h>
 #include <qtextstream.h>
+#include <qsplitter.h>
 
 #include <kconfig.h>
 #include <kdebug.h>
@@ -59,7 +60,7 @@
 #include "patchoptiondlg.h"
 
 
-LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
+LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     : KDialog(parent)
     , cvsService(0)
     , partConfig(cfg)
@@ -71,18 +72,14 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     setDefaultButton(Close);
     showButtonSeparator(true);
 
-    QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
+    QSplitter *splitter = new QSplitter(Qt::Vertical, this);
+    setMainWidget(splitter);
 
-    QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    layout->setSpacing(spacingHint());
-    layout->setMargin(0);
-
-    tree = new LogTreeView(mainWidget);
+    tree = new LogTreeView(this);
     connect( tree, SIGNAL(revisionClicked(QString,bool)),
              this, SLOT(revisionSelected(QString,bool)) );
 
-    QWidget* listWidget = new QWidget(mainWidget);
+    QWidget* listWidget = new QWidget(this);
     QVBoxLayout* listLayout = new QVBoxLayout(listWidget);
     QHBoxLayout* searchLayout = new QHBoxLayout();
     listLayout->addItem(searchLayout);
@@ -101,15 +98,14 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     connect( list, SIGNAL(revisionClicked(QString,bool)),
              this, SLOT(revisionSelected(QString,bool)) );
 
-    plain = new LogPlainView(mainWidget);
+    plain = new LogPlainView(this);
     connect( plain, SIGNAL(revisionClicked(QString,bool)),
              this, SLOT(revisionSelected(QString,bool)) );
 
-    tabWidget = new QTabWidget(mainWidget);
+    tabWidget = new QTabWidget(splitter);
     tabWidget->addTab(tree, i18n("&Tree"));
     tabWidget->addTab(listWidget, i18n("&List"));
     tabWidget->addTab(plain, i18n("CVS &Output"));
-    layout->addWidget(tabWidget, 3);
 
     connect(tabWidget, SIGNAL(currentChanged(QWidget*)),
             this, SLOT(tabChanged(QWidget*)));
@@ -121,11 +117,19 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
     items.setAutoDelete(true);
     tags.setAutoDelete(true);
 
+    QWidget *mainWidget = new QWidget(splitter);
+    QBoxLayout *layout = new QVBoxLayout(mainWidget);
+    layout->setSpacing(spacingHint());
+    layout->setMargin(0);
+
     for (int i = 0; i < 2; ++i)
     {
-        QFrame *frame = new QFrame(mainWidget);
-        frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-        layout->addWidget(frame);
+        if ( i == 1 )
+        {
+            QFrame *frame = new QFrame(mainWidget);
+            frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
+            layout->addWidget(frame);
+        }
 
         QGridLayout *grid = new QGridLayout();
         layout->addItem( grid );
@@ -175,12 +179,12 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent, const char *name)
         commentbox[i]->setReadOnly(true);
         commentbox[i]->setTextFormat(Qt::PlainText);
         fm = commentbox[i]->fontMetrics();
-        commentbox[i]->setFixedHeight(2*fm.lineSpacing()+10);
+        commentbox[i]->setMinimumHeight(2*fm.lineSpacing()+10);
         grid->addMultiCellWidget(commentbox[i], 2, 2, 1, 3);
 
         tagsbox[i] = new Q3TextEdit(mainWidget);
         tagsbox[i]->setReadOnly(true);
-        tagsbox[i]->setFixedHeight(2*fm.lineSpacing()+10);
+        tagsbox[i]->setMinimumHeight(2*fm.lineSpacing()+10);
         grid->addWidget(tagsbox[i], 2, 4);
     }
 

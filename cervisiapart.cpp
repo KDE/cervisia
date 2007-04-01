@@ -1572,7 +1572,7 @@ void CervisiaPart::slotLastChange()
     if (filename.isEmpty())
         return;
 
-    int pos, lastnumber;
+    int pos, lastnumber = 0;
     bool ok;
     if ( (pos = revA.lastIndexOf('.')) == -1
          || (lastnumber=revA.right(revA.length()-pos-1).toUInt(&ok), !ok) )

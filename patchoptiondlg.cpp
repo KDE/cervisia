@@ -32,7 +32,7 @@ using Cervisia::PatchOptionDialog;
 #include <klocale.h>
 
 
-PatchOptionDialog::PatchOptionDialog(QWidget* parent, const char* name)
+PatchOptionDialog::PatchOptionDialog(QWidget* parent)
     : KDialog(parent)
 {
 	setButtons(Ok | Cancel | Help);

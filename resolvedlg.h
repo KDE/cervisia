@@ -42,7 +42,7 @@ class ResolveDialog : public KDialog
 public:
     enum ChooseType { ChA, ChB, ChAB, ChBA, ChEdit };
 
-    explicit ResolveDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
+    explicit ResolveDialog(KConfig& cfg, QWidget *parent=0);
     virtual ~ResolveDialog();
 
     bool parseFile(const QString &name);

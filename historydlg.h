@@ -37,7 +37,7 @@ class HistoryDialog : public KDialog
     Q_OBJECT
 
 public:
-    explicit HistoryDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
+    explicit HistoryDialog(KConfig& cfg, QWidget *parent=0);
     virtual ~HistoryDialog();
 
     bool parseHistory(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService);
