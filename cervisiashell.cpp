@@ -152,7 +152,7 @@ void CervisiaShell::slotConfigureKeys()
 void CervisiaShell::slotConfigureToolBars()
 {
     saveMainWindowSettings( KGlobal::config()->group( autoSaveGroup() ) );
-    KEditToolbar dlg( factory() );
+    KEditToolBar dlg( factory() );
     connect(&dlg,SIGNAL(newToolbarConfig()),this,SLOT(slotNewToolbarConfig()));
     dlg.exec();
 }
