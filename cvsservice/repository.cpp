@@ -245,13 +245,13 @@ void Repository::Private::readConfig()
         }
     }
 
-    config->setGroup(repositoryGroup);
+    KConfigGroup group = config->group(repositoryGroup);
 
     // should we retrieve the CVSROOT/cvsignore file from the cvs server?
-    retrieveCvsignoreFile = config->readEntry("RetrieveCvsignore", false);
+    retrieveCvsignoreFile = group.readEntry("RetrieveCvsignore", false);
 
     // see if there is a specific compression level set for this repository
-    compressionLevel = config->readEntry("Compression", -1);
+    compressionLevel = group.readEntry("Compression", -1);
 
     // use default global compression level instead?
     if( compressionLevel < 0 )
@@ -261,10 +261,10 @@ void Repository::Private::readConfig()
     }
 
     // get remote shell client to access the remote repository
-    rsh = config->readPathEntry("rsh");
+    rsh = group.readPathEntry("rsh");
 
     // get program to start on the server side
-    server = config->readEntry("cvs_server");
+    server = group.readEntry("cvs_server");
 }
 
 

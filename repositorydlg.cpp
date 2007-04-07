@@ -290,16 +290,16 @@ void RepositoryDialog::readConfigFile()
         RepositoryListItem* ritem = static_cast<RepositoryListItem*>(item);
 
         // read entries from cvs DCOP service configuration
-        m_serviceConfig->setGroup(QLatin1String("Repository-") +
+		KConfigGroup repoGroup = m_serviceConfig->group(QLatin1String("Repository-") +
                                   ritem->repository());
 
         kDebug() << "(1) RepositoryDialog::readConfigFile(): repository = "
                   << ritem->repository() << endl;
 
-        QString rsh       = m_serviceConfig->readEntry("rsh", QString());
-        QString server    = m_serviceConfig->readEntry("cvs_server", QString());
-        int compression   = m_serviceConfig->readEntry("Compression", -1);
-        bool retrieveFile = m_serviceConfig->readEntry("RetrieveCvsignore",
+        QString rsh       = repoGroup.readEntry("rsh", QString());
+        QString server    = repoGroup.readEntry("cvs_server", QString());
+        int compression   = repoGroup.readEntry("Compression", -1);
+        bool retrieveFile = repoGroup.readEntry("RetrieveCvsignore",
                                                            false);
 
         ritem->setRsh(rsh);
@@ -318,8 +318,8 @@ void RepositoryDialog::slotOk()
     for( item = m_repoList->firstChild(); item; item = item->nextSibling() )
         list.append(item->text(0));
 
-    m_partConfig.setGroup("Repositories");
-    m_partConfig.writeEntry("Repos", list);
+    KConfigGroup reposGroup = m_partConfig.group("Repositories");
+    reposGroup.writeEntry("Repos", list);
 
     for( item = m_repoList->firstChild(); item; item = item->nextSibling() )
     {
@@ -508,16 +508,16 @@ void RepositoryDialog::slotSelectionChanged()
 void RepositoryDialog::writeRepositoryData(RepositoryListItem* item)
 {
     // write entries to cvs DCOP service configuration
-    m_serviceConfig->setGroup(QLatin1String("Repository-") +
+    KConfigGroup repoGroup = m_serviceConfig->group(QLatin1String("Repository-") +
                               item->repository());
 
     kDebug() << "(1) RepositoryDialog::writeRepositoryData(): repository = "
               << item->repository() << endl;
 
-    m_serviceConfig->writeEntry("rsh", item->rsh());
-    m_serviceConfig->writeEntry("cvs_server", item->server());
-    m_serviceConfig->writeEntry("Compression", item->compression());
-    m_serviceConfig->writeEntry("RetrieveCvsignore", item->retrieveCvsignore());
+    repoGroup.writeEntry("rsh", item->rsh());
+    repoGroup.writeEntry("cvs_server", item->server());
+    repoGroup.writeEntry("Compression", item->compression());
+    repoGroup.writeEntry("RetrieveCvsignore", item->retrieveCvsignore());
 }
 
 #include "repositorydlg.moc"
