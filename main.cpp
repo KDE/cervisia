@@ -20,7 +20,8 @@
 
 #include <iostream>
 
-#include <qfileinfo.h>
+#include <QFileInfo>
+
 #include <kaboutdata.h>
 #include <kapplication.h>
 #include <kcmdlineargs.h>
@@ -68,13 +69,12 @@ static int ShowResolveDialog(const QString& fileName)
     KConfig* config = new KConfig("cervisiapartrc");
 
     ResolveDialog* dlg = new ResolveDialog(*config);
-    kapp->setMainWidget(dlg);
     if( dlg->parseFile(fileName) )
         dlg->show();
     else
         delete dlg;
 
-    int result = kapp->exec();
+    int result = qApp->exec();
 
     delete config;
 
@@ -86,7 +86,6 @@ static int ShowLogDialog(const QString& fileName)
 {
     KConfig* config = new KConfig("cervisiapartrc");
     LogDialog* dlg = new LogDialog(*config);
-    kapp->setMainWidget(dlg);
 
     // get directory for file
     const QFileInfo fi(fileName);
@@ -100,7 +99,7 @@ static int ShowLogDialog(const QString& fileName)
     else
         delete dlg;
 
-    int result = kapp->exec();
+    int result = qApp->exec();
 
     // stop the cvs DCOP service
     cvsService->quit();
@@ -116,7 +115,6 @@ static int ShowAnnotateDialog(const QString& fileName)
 {
     KConfig* config = new KConfig("cervisiapartrc");
     AnnotateDialog* dlg = new AnnotateDialog(*config);
-    kapp->setMainWidget(dlg);
 
     // get directory for file
     const QFileInfo fi(fileName);
@@ -128,7 +126,7 @@ static int ShowAnnotateDialog(const QString& fileName)
     AnnotateController ctl(dlg, cvsService);
     ctl.showDialog(fi.fileName());
 
-    int result = kapp->exec();
+    int result = qApp->exec();
 
     // stop the cvs D-Bus service
     cvsService->quit();
@@ -203,7 +201,6 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
             shell->openURL();
 
         shell->setIcon(qApp->windowIcon().pixmap(IconSize(K3Icon::Desktop),IconSize(K3Icon::Desktop)));
-        app.setMainWidget(shell);
         shell->show();
     }
 
