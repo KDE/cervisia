@@ -105,10 +105,11 @@ QString LogInfo::createToolTipText(bool showTime) const
 
 QString LogInfo::dateTimeToString(bool showTime, bool shortFormat) const
 {
+    KLocale::DateFormat format = shortFormat ? KLocale::ShortDate : KLocale::LongDate;
     if( showTime )
-        return KGlobal::locale()->formatDateTime(m_dateTime, shortFormat);
+        return KGlobal::locale()->formatDateTime(m_dateTime, format);
     else
-        return KGlobal::locale()->formatDate(m_dateTime.date(), shortFormat);
+        return KGlobal::locale()->formatDate(m_dateTime.date(), format);
 }
 
 
