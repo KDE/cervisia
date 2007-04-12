@@ -37,7 +37,6 @@
 #include <kuser.h>
 #include <kdebug.h>
 
-#include "config.h"
 #include "cvsserviceinterface.h"
 #include "progressdlg.h"
 
