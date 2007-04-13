@@ -140,7 +140,7 @@ dialog by choosing
 
 <step><para>
 Press the <guilabel>...</guilabel> button to select the folder where you want to
-create the repository, or enter its location in the test box. For instance, if you
+create the repository, or enter its location in the text box. For instance, if you
 want to place the repository in the <filename>/home/user</filename> folder, and
 to name it <filename>cvsroot</filename>, you should type
 <filename>/home/user/cvsroot</filename> in the text box, or select the
