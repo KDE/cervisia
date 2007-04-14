@@ -140,10 +140,10 @@ dialog by choosing
 
 <step><para>
 Press the <guilabel>...</guilabel> button to select the folder where you want to
-create the repository, or enter its location in the edit box. For instance, if you
+create the repository, or enter its location in the text box. For instance, if you
 want to place the repository in the <filename>/home/user</filename> folder, and
 to name it <filename>cvsroot</filename>, you should type
-<filename>/home/user/cvsroot</filename> in the edit box, or select the
+<filename>/home/user/cvsroot</filename> in the text box, or select the
 <filename>/home/user</filename> folder using the file picker, and add
 <filename>cvsroot</filename>.
 </para></step>
@@ -255,7 +255,7 @@ with a list of trusted hosts (see the &rsh; manpage).
 With &ssh;, it can be achieved by copying your public key located in the file
 <filename>identity.pub</filename>, located in the
 <filename>$<envar>HOME</envar>/.ssh/</filename> folder to the server. In this
-case, the key must not be encrypted with a passphrase see the &ssh; manpage and
+case, the key must not be encrypted with a passphrase (see the &ssh; manpage and
 the &CVS;/<acronym>SSH</acronym> <acronym>FAQ</acronym> on
 SourceForge). If you are unsure about these issues, ask your system
 administrator.
@@ -305,7 +305,7 @@ to &cervisia;'s repositories list:
 <step><para>
 Open the <guilabel>Configure Access to Repositories</guilabel> dialog by
 choosing the <menuchoice><guimenu>Repository</guimenu> 
-<guimenuitem>Repositories...</guimenuitem> </menuchoice>menu item.
+<guimenuitem>Repositories...</guimenuitem></menuchoice> menu item.
 </para></step>
 
 <step><para>
@@ -314,15 +314,15 @@ Press the <guilabel>Add...</guilabel> button to open the
 </para></step>
 
 <step><para>
-Enter the repository location in the <guilabel>Repository:</guilabel> edit box.
+Enter the repository location in the <guilabel>Repository:</guilabel> text box.
 &cervisia; will automatically disable the areas of the dialog that are not
 relevant to the access method you entered.
 </para></step>
 
 <step><para>
 If you are using the ext method to access the repository, enter the remote shell
-you wish to use (&eg; &ssh;) in the <guilabel>Use remote shell</guilabel> edit
-box.
+you wish to use (&eg; &ssh;) in the <guilabel>Use remote shell (only for :ext:
+repositories):</guilabel> text box.
 </para></step>
 
 <step><para>
@@ -334,7 +334,7 @@ on the repositories list.
 If the access method to the repository you just entered is password
 authentication (pserver), you will need to login before connecting the server.
 Click the repository on the list to select it, and press the
-<guilabel>Login...</guilabel> button. Enter your password in the pop-up dialog.
+<guilabel>Login...</guilabel> button. Enter your password in the upcoming dialog.
 </para>
 <para>
 If you successfully enter your password, the <guilabel>Status</guilabel>
@@ -412,7 +412,7 @@ For instance, suppose your project contains text files and some PNG images
 text, or you can move the images to a separate folder, and then import
 the remaining files (as text files). Either way, you will have to
 <link linkend="checkingout">checkout</link> the newly imported module to a
-new working copy, copy the the missing files and folders to it,
+new working copy, copy the missing files and folders to it,
 <link linkend="addingfiles">add</link> and
 <link linkend="committingfiles">commit</link> them to the repository to complete
 the import process.
@@ -423,7 +423,7 @@ As an alternative, you can add the files and folders manually, creating an empty
 module for them.  To add an empty module to a repository, just create a new
 folder in the &CVS; repository root folder. The name of this new folder will be
 the name of the module. <link linkend="checkingout">Checkout</link> the new
-empty module. Then copy the the files and folders to the working copy,
+empty module. Then copy the files and folders to the working copy,
 <link linkend="addingfiles">add</link> and 
 <link linkend="committingfiles">commit</link> to upload them to the &CVS;
 repository.
@@ -743,13 +743,11 @@ connection to the &CVS; server.
 <para>
 The commands in the File menu usually act only on the files which you have
 marked. You may also mark folders. Now choose
-<guimenuitem>Status</guimenuitem> from the <guimenu>File</guimenu>
-menu, press <keycap>F5</keycap> or right click the marked files
-and choose the
 <menuchoice>
-<guisubmenu>Status</guisubmenu>
-</menuchoice>
-menu item from the pop-up menu. &cervisia; issues a</para>
+<guimenu>File</guimenu>
+<guimenuitem>Status</guimenuitem>
+</menuchoice> or press <keycap>F5</keycap>. &cervisia; issues a
+</para>
 
 <para>
 <screen><command>cvs update -n <replaceable>file names</replaceable></command></screen>
@@ -854,10 +852,11 @@ repository. If not, you may consider adding it to your
 Now that you have got an overview of the current status of the CVS, you may
 want to do an update. Mark some files (or the root of the folder tree which
 is equivalent to marking all files in this folder). Now choose
-<guimenuitem>Update</guimenuitem> from the <guimenu>File</guimenu> menu, or
-right-click the marked files and choose the <menuchoice>
-<guisubmenu>Status</guisubmenu></menuchoice> menu item from the pop-up menu. (Of
-course, you could have chosen this at the beginning of the session). For some
+<menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Update</guimenuitem>
+</menuchoice> (Of course, you could have chosen this at the beginning of
+the session). For some
 of the files the status may change now. Typically, files which had "Needs
 Patch" or "Needs Update" are updated. So the following new items are possible
 in the status column:
@@ -919,7 +918,7 @@ affected.
 </para>
 
 <figure id="screenshot-popup" float="1">
-<title>A screenshot of &cervisia;'s pop-up menu</title>
+<title>A screenshot of &cervisia;'s context menu</title>
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="popup.png"/></imageobject>
 </mediaobject>
@@ -927,13 +926,13 @@ affected.
 
 <para>
 The most used actions are also available by right clicking the files in the tree
-view, through the pop-up menu. <xref linkend="screenshot-popup" /> shows
+view, through the context menu. <xref linkend="screenshot-popup" /> shows
 &cervisia;'s main window pop-up menu.
 </para>
 
 <para>
 You can simply edit a file by double-clicking on it or selecting it and pressing
-<keycap>Return</keycap>. This starts the default application that handles that
+&Enter;. This starts the default application that handles that
 file type (the default application for each file type is a KDE wide setting). If
 the default application is not the one you want to use, you can right click the
 file and choose the
@@ -1013,7 +1012,7 @@ Like adding files, removing files is done in two steps: First, the files have
 to be registered as removed by choosing
 <menuchoice><guimenu>File</guimenu><guimenuitem>Remove From
 Repository...</guimenuitem></menuchoice> or right clicking the marked files and
-choosing <guimenuitem>Remove From Repository...</guimenuitem> from the pop-up
+choosing <guimenuitem>Remove From Repository...</guimenuitem> from the context
 menu. The <guilabel>CVS Remove</guilabel> dialog will appear, listing the files
 you marked, and asking for confirmation. Press <guibutton>OK</guibutton>.
 &cervisia; issues the command
@@ -1045,7 +1044,7 @@ them.
 Folders are handled fundamentally different from ordinary files by
 &CVS;. They are not under revision control, i.e. you cannot tell which
 folders existed in the project at a certain time. Furthermore, folders
-can never be explicitly removed (expect by removing them directly in the
+can never be explicitly removed (except by removing them directly in the
 repository).
 </para>
 
@@ -1062,7 +1061,7 @@ Folders on Update</guimenuitem></menuchoice>.
 A folder can be added to the repository choosing 
 <menuchoice><guimenu>File</guimenu><guimenuitem>Add to
 Repository...</guimenuitem></menuchoice> or right clicking the marked folder and
-choosing <guimenuitem>Add to Repository...</guimenuitem> from the pop-up menu.
+choosing <guimenuitem>Add to Repository...</guimenuitem> from the context menu.
 Note that in contrast to adding files, adding folders does not require a commit
 afterwards. &cervisia; issues the command
 </para>
@@ -1091,7 +1090,7 @@ In order to commit a couple of files, select them in &cervisia;'s main view and
 choose
 <menuchoice><guimenu>File</guimenu><guimenuitem>Commit...</guimenuitem></menuchoice>
 or right click the marked files and choose
-<guimenuitem>Commit...</guimenuitem> from the pop-up menu.
+<guimenuitem>Commit...</guimenuitem> from the context menu.
 </para>
 
 <figure id="screenshot-commit" float="1">
@@ -1204,8 +1203,8 @@ Changes in the repository
 
 <para>You should replace this whole block with the new merged version. Of
 course, you have a great amount of freedom when resolving a
-set of conflicts: you can for each conflict decide to take one of the two
-alternative versions. You can also decide that both approaches are are broken
+set of conflicts: for each conflict you can decide to take one of the two
+alternative versions. You can also decide that both approaches are broken
 and rewrite a whole routine or the complete file from scratch.
 </para>
 
@@ -1216,7 +1215,7 @@ at least can eliminate the need to do so for the trivial conflict resolution.
 To use &cervisia;'s <guilabel>CVS Resolve</guilabel> dialog choose
 <menuchoice><guimenu>File</guimenu><guimenuitem>Resolve...</guimenuitem></menuchoice>
 or right click the marked file and choose
-<guimenuitem>Resolve...</guimenuitem> from the pop-up menu.
+<guimenuitem>Resolve...</guimenuitem> from the context menu.
 </para>
 
 <figure id="screenshot-resolve" float="1">
@@ -1317,7 +1316,7 @@ choosing <menuchoice><guimenu>View</guimenu>
 <listitem><para>
 You can access the <guimenuitem>Difference to Repository (BASE)...</guimenuitem>,
 <guimenuitem>Difference to Repository (HEAD)...</guimenuitem> and 
-<guimenuitem>Last Change...</guimenuitem> menu items from the main view pop-up
+<guimenuitem>Last Change...</guimenuitem> menu items from the main view context
 menu, by right-clicking the file you want to view.
 </para></listitem>
 
@@ -1402,13 +1401,13 @@ file containing all the differences from many source files.
 </para>
 
 <para>
-&cervisia; gives you to access to this feature by choosing
+&cervisia; gives you access to this feature by choosing
 <menuchoice><guimenu>Advanced</guimenu>
-<guimenuitem>Create Patch Against Repository</guimenuitem></menuchoice>.
+<guimenuitem>Create Patch Against Repository...</guimenuitem></menuchoice>.
 </para>
 
 <important><para>
-The <guimenuitem>Create Patch Against Repository</guimenuitem> action
+The <guimenuitem>Create Patch Against Repository...</guimenuitem> action
 creates a patch with all modifications in all files in your working copy
 (sandbox) against the <literal>BASE</literal> repository. Therefore, the
 selection of files in the main view does not affect the patch that will be
@@ -1419,7 +1418,7 @@ generated.
 Another possibility is to select one file in the main view and choose
 <guimenuitem>Browse Log...</guimenuitem> from the <guimenu>View</guimenu> menu
 or right click the marked file and choose
-<guimenuitem>Browse Log...</guimenuitem> from the pop-up menu, in order to open
+<guimenuitem>Browse Log...</guimenuitem> from the context menu, in order to open
 the <link linkend="browsinglogs">Browse log dialog</link>. Now, select the
 version you want to create a patch against, as revision &quot;A&quot; and press
 the button <guilabel>Create Patch...</guilabel>. This will generate a patch with
@@ -1514,7 +1513,7 @@ the code.
 </para>
 
 <para>
-&cervisia; gives you to access to this feature, but it further enriches the
+&cervisia; gives you access to this feature, but it further enriches the
 information in an interactive way. You obtain an annotate view by choosing
 <menuchoice><guimenu>View</guimenu><guimenuitem>Annotate...</guimenuitem></menuchoice>.
 Another possibility is to press the button <guilabel>Annotate</guilabel> in
@@ -1562,7 +1561,7 @@ change.
 When you mark one file in the main view and choose <guimenuitem>Browse
 Log...</guimenuitem> from the <guimenu>View</guimenu> menu
 or right click the marked file and choose
-<guimenuitem>Browse Log...</guimenuitem> from the pop-up menu, the
+<guimenuitem>Browse Log...</guimenuitem> from the context menu, the
 <guilabel>CVS Log</guilabel> dialog is shown (if you mark more than one, nothing
 happens, as &cervisia; can only generate and parse the log for one file at a
 time). This dialog offers functionality that is beyond viewing the file's
@@ -1913,7 +1912,7 @@ both versions.
 <term><guilabel>Update to branch</guilabel></term>
 <listitem><para>
 Select this option to update to a branch. Enter the name of the branch in the
-drop down edit box (or press the <guilabel>Fetch List</guilabel> button to
+drop down text box (or press the <guilabel>Fetch List</guilabel> button to
 retrieve the list of branches from the &CVS; server, and select the one you want
 in the drop down list).
 </para></listitem>
@@ -1923,7 +1922,7 @@ in the drop down list).
 <term><guilabel>Update to tag</guilabel></term>
 <listitem><para>
 Select this option to update to a tag. Enter the name of the tag in the
-drop down edit box (or press the <guilabel>Fetch List</guilabel> button to
+drop down text box (or press the <guilabel>Fetch List</guilabel> button to
 retrieve the list of tags from the &CVS; server, and select the one you want
 in the drop down list).
 </para></listitem>
