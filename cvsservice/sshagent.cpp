@@ -21,7 +21,6 @@
 #include "sshagent.h"
 
 #include <qregexp.h>
-#include <kapplication.h>
 #include <kdebug.h>
 #include <kdeversion.h>
 #include <k3process.h>

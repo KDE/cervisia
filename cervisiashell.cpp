@@ -21,10 +21,10 @@
 
 #include "cervisiashell.h"
 
-#include <kapplication.h>
 #include <kconfig.h>
 #include <kedittoolbar.h>
 #include <khelpmenu.h>
+#include <kapplication.h>
 #include <kshortcutsdialog.h>
 #include <klibloader.h>
 #include <klocale.h>
@@ -55,7 +55,7 @@ CervisiaShell::CervisiaShell( const char *name )
     {
         KMessageBox::detailedError(this, i18n("The Cervisia library could not be loaded."),
                                    KLibLoader::self()->lastErrorMessage());
-        kapp->quit();
+        qApp->quit();
         return;
     }
 

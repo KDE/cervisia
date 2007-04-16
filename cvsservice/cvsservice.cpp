@@ -22,8 +22,8 @@
 
 #include <q3intdict.h>
 #include <qstring.h>
+#include <QApplication>
 
-#include <kapplication.h>
 #include <kconfig.h>
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -949,7 +949,7 @@ QDBusObjectPath CvsService::watchers(const QStringList& files)
 
 void CvsService::quit()
 {
-    kapp->quit();
+    qApp->quit();
 }
 
 

@@ -30,7 +30,6 @@
 #include <QList>
 #include <kaboutdata.h>
 #include <kaction.h>
-#include <kapplication.h>
 #include <kfiledialog.h>
 #include <kinputdialog.h>
 #include <kcomponentdata.h>
