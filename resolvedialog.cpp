@@ -19,7 +19,7 @@
  */
 
 
-#include "resolvedlg.h"
+#include "resolvedialog.h"
 
 #include <qfile.h>
 #include <qnamespace.h>
@@ -41,7 +41,7 @@
 #include <qregexp.h>
 #include <kconfiggroup.h>
 #include "misc.h"
-#include "resolvedlg_p.h"
+#include "resolvedialog_p.h"
 using Cervisia::ResolveEditorDialog;
 
 
@@ -645,7 +645,7 @@ QString ResolveDialog::contentVersionB(const ResolveItem *item)
     return result;
 }
 
-#include "resolvedlg.moc"
+#include "resolvedialog.moc"
 
 
 // Local Variables:

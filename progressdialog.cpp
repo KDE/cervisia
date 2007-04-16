@@ -17,7 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "progressdlg.h"
+#include "progressdialog.h"
 
 #include <qlabel.h>
 #include <qlayout.h>
@@ -280,4 +280,4 @@ void ProgressDialog::processOutput()
 }
 
 
-#include "progressdlg.moc"
+#include "progressdialog.moc"

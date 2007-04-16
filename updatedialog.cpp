@@ -18,7 +18,7 @@
  */
 
 
-#include "updatedlg.h"
+#include "updatedialog.h"
 
 #include <q3buttongroup.h>
 #include <qcombobox.h>
@@ -168,7 +168,7 @@ void UpdateDialog::toggled()
         date_edit->setFocus();
 }
 
-#include "updatedlg.moc"
+#include "updatedialog.moc"
 
 
 // Local Variables:

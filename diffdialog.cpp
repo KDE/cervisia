@@ -17,7 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "diffdlg.h"
+#include "diffdialog.h"
 
 #include <qpushbutton.h>
 #include <qcheckbox.h>
@@ -43,7 +43,7 @@
 #include <kconfiggroup.h>
 #include "cvsserviceinterface.h"
 #include "misc.h"
-#include "progressdlg.h"
+#include "progressdialog.h"
 #include "diffview.h"
 
 
@@ -512,7 +512,7 @@ void DiffDialog::saveAsClicked()
     f.close();
 }
 
-#include "diffdlg.moc"
+#include "diffdialog.moc"
 
 
 // Local Variables:

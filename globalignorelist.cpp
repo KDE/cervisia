@@ -25,7 +25,7 @@ using namespace Cervisia;
 #include <stdlib.h> // for getenv()
 
 #include "cvsserviceinterface.h"
-#include "progressdlg.h"
+#include "progressdialog.h"
 
 
 StringMatcher GlobalIgnoreList::m_stringMatcher;

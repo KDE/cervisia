@@ -18,7 +18,7 @@
  */
 
 
-#include "annotatedlg.h"
+#include "annotatedialog.h"
 
 #include "annotateview.h"
 

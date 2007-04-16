@@ -38,7 +38,7 @@
 #include <kdebug.h>
 
 #include "cvsserviceinterface.h"
-#include "progressdlg.h"
+#include "progressdialog.h"
 
 // These regular expression parts aren't useful to check the validity of the
 // CVSROOT specification. They are just used to extract the different parts of it.

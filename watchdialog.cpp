@@ -18,7 +18,7 @@
  */
 
 
-#include "watchdlg.h"
+#include "watchdialog.h"
 
 #include <q3buttongroup.h>
 #include <qcheckbox.h>

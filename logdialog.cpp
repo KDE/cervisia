@@ -19,7 +19,7 @@
  */
 
 
-#include "logdlg.h"
+#include "logdialog.h"
 
 #include <qcombobox.h>
 #include <qfile.h>
@@ -48,16 +48,16 @@
 #include <kconfiggroup.h>
 
 #include "cvsserviceinterface.h"
-#include "annotatedlg.h"
+#include "annotatedialog.h"
 #include "annotatectl.h"
-#include "diffdlg.h"
+#include "diffdialog.h"
 #include "loginfo.h"
 #include "loglist.h"
 #include "logplainview.h"
 #include "logtree.h"
 #include "misc.h"
-#include "progressdlg.h"
-#include "patchoptiondlg.h"
+#include "progressdialog.h"
+#include "patchoptiondialog.h"
 
 
 LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
@@ -624,7 +624,7 @@ void LogDialog::tabChanged(QWidget* w)
     showButton(User3, isPlainView);
 }
 
-#include "logdlg.moc"
+#include "logdialog.moc"
 
 // Local Variables:
 // c-basic-offset: 4

@@ -18,7 +18,7 @@
  */
 
 
-#include "mergedlg.h"
+#include "mergedialog.h"
 
 #include <q3buttongroup.h>
 #include <qcombobox.h>
@@ -171,7 +171,7 @@ void MergeDialog::toggled()
         tag1_combo->setFocus();
 }
 
-#include "mergedlg.moc"
+#include "mergedialog.moc"
 
 
 // Local Variables:

@@ -78,7 +78,7 @@ public:
     FooDialog( QWidget* parent );
 };
 
-has files foodialog.h and foodialog.cpp instead of foodlg.h and foodlg.cpp
+has files foodialog.h and foodialog.cpp instead of foodialog.h and foodlg.cpp
 
 
 Class and Variable Names

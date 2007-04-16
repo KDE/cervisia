@@ -19,7 +19,7 @@
  */
 
 
-#include "repositorydlg.h"
+#include "repositorydialog.h"
 
 #include <qlayout.h>
 #include <qpushbutton.h>
@@ -34,11 +34,11 @@
 #include <kdebug.h>
 #include <kconfiggroup.h>
 
-#include "addrepositorydlg.h"
+#include "addrepositorydialog.h"
 #include "cvsserviceinterface.h"
 #include "cvsjobinterface.h"
 #include "misc.h"
-#include "progressdlg.h"
+#include "progressdialog.h"
 #include "repositories.h"
 
 
@@ -520,6 +520,6 @@ void RepositoryDialog::writeRepositoryData(RepositoryListItem* item)
     repoGroup.writeEntry("RetrieveCvsignore", item->retrieveCvsignore());
 }
 
-#include "repositorydlg.moc"
+#include "repositorydialog.moc"
 
 // kate: space-indent on; indent-width 4; replace-tabs on;

@@ -19,7 +19,7 @@
  */
 
 
-#include "addrepositorydlg.h"
+#include "addrepositorydialog.h"
 
 #include <qcheckbox.h>
 #include <khbox.h>
@@ -207,7 +207,7 @@ void AddRepositoryDialog::compressionToggled(bool checked)
     m_compressionLevel->setEnabled(checked);
 }
 
-#include "addrepositorydlg.moc"
+#include "addrepositorydialog.moc"
 
 
 // Local Variables:

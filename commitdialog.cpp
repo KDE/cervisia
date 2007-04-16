@@ -18,7 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "commitdlg.h"
+#include "commitdialog.h"
 
 #include <qcombobox.h>
 #include <qcheckbox.h>
@@ -38,7 +38,7 @@
 
 #include "cvsserviceinterface.h"
 #include "logmessageedit.h"
-#include "diffdlg.h"
+#include "diffdialog.h"
 
 
 class CommitListItem : public Q3CheckListItem
@@ -330,7 +330,7 @@ void CommitDialog::removeTemplateText()
 }
 
 
-#include "commitdlg.moc"
+#include "commitdialog.moc"
 
 
 // Local Variables:

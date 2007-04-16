@@ -17,7 +17,7 @@
  */
 
 
-#include "cvsinitdlg.h"
+#include "cvsinitdialog.h"
 
 #include <qlabel.h>
 #include <qlayout.h>
@@ -100,4 +100,4 @@ void CvsInitDialog::lineEditTextChanged(const QString& text)
     enableButton(Ok, !text.trimmed().isEmpty());
 }
     
-#include "cvsinitdlg.moc"
+#include "cvsinitdialog.moc"

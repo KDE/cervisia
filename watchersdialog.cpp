@@ -17,7 +17,7 @@
  */
 
 
-#include "watchersdlg.h"
+#include "watchersdialog.h"
 
 #include <qlayout.h>
 #include <q3table.h>
@@ -31,7 +31,7 @@
 
 #include "misc.h"
 #include "cvsserviceinterface.h"
-#include "progressdlg.h"
+#include "progressdialog.h"
 
 
 WatchersDialog::WatchersDialog(KConfig& cfg, QWidget* parent, const char* name)

@@ -18,7 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "settingsdlg.h"
+#include "settingsdialog.h"
 
 #include <qapplication.h>
 #include <qcheckbox.h>
@@ -416,7 +416,7 @@ void SettingsDialog::addLookAndFeelPage()
     m_splitterBox = new QCheckBox(i18n("Split main window &horizontally"), lookPage);
 }
 
-#include "settingsdlg.moc"
+#include "settingsdialog.moc"
 
 
 // Local Variables:

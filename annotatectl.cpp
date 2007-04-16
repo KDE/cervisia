@@ -25,9 +25,9 @@
 #include <klocale.h>
 #include <kdatetime.h>
 
-#include "annotatedlg.h"
+#include "annotatedialog.h"
 #include "loginfo.h"
-#include "progressdlg.h"
+#include "progressdialog.h"
 #include "cvsserviceinterface.h"
 #include "cvsjobinterface.h"
 

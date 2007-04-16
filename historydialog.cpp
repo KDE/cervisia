@@ -18,7 +18,7 @@
  */
 
 
-#include "historydlg.h"
+#include "historydialog.h"
 
 #include <qcheckbox.h>
 #include <qdatetime.h>
@@ -36,7 +36,7 @@
 
 #include "misc.h"
 #include "cvsserviceinterface.h"
-#include "progressdlg.h"
+#include "progressdialog.h"
 
 
 class HistoryItem : public Q3ListViewItem
@@ -381,7 +381,7 @@ bool HistoryDialog::parseHistory(OrgKdeCervisiaCvsserviceCvsserviceInterface* cv
     return true;
 }
 
-#include "historydlg.moc"
+#include "historydialog.moc"
 
 
 // Local Variables:

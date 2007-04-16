@@ -18,7 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "addremovedlg.h"
+#include "addremovedialog.h"
 
 #include <qfileinfo.h>
 #include <qlabel.h>

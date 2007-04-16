@@ -34,10 +34,10 @@
 #include "misc.h"
 #include "cervisiashell.h"
 #include "cvsserviceinterface.h"
-#include "annotatedlg.h"
+#include "annotatedialog.h"
 #include "annotatectl.h"
-#include "logdlg.h"
-#include "resolvedlg.h"
+#include "logdialog.h"
+#include "resolvedialog.h"
 #include "version.h"
 #include "repositoryinterface.h"
 

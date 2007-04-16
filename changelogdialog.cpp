@@ -19,8 +19,8 @@
  */
 
 
-#include "changelogdlg.h"
-#include "changelogdlg.moc"
+#include "changelogdialog.h"
+#include "changelogdialog.moc"
 #include <QDate>
 
 #include <qfile.h>

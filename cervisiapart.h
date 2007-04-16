@@ -27,11 +27,11 @@
 #include <kparts/genericfactory.h>
 #include <kparts/statusbarextension.h>
 
-#include "addremovedlg.h"
-#include "commitdlg.h"
-#include "checkoutdlg.h"
-#include "watchdlg.h"
-#include "tagdlg.h"
+#include "addremovedialog.h"
+#include "commitdialog.h"
+#include "checkoutdialog.h"
+#include "watchdialog.h"
+#include "tagdialog.h"
 //Added by qt3to4:
 #include <QLabel>
 

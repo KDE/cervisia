@@ -19,7 +19,7 @@
  */
 
 
-#include "checkoutdlg.h"
+#include "checkoutdialog.h"
 
 #include <qcheckbox.h>
 #include <qcombobox.h>
@@ -40,7 +40,7 @@
 #include <kurlcompletion.h>
 #include <kconfiggroup.h>
 
-#include "progressdlg.h"
+#include "progressdialog.h"
 #include "repositories.h"
 #include "misc.h"
 #include "cvsserviceinterface.h"
@@ -495,7 +495,7 @@ void CheckoutDialog::branchTextChanged()
 }
 
 
-#include "checkoutdlg.moc"
+#include "checkoutdialog.moc"
 
 
 // Local Variables:

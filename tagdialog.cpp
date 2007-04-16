@@ -18,7 +18,7 @@
  */
 
 
-#include "tagdlg.h"
+#include "tagdialog.h"
 
 #include <qcheckbox.h>
 #include <qcombobox.h>
@@ -153,7 +153,7 @@ void TagDialog::tagButtonClicked()
 }
 
 
-#include "tagdlg.moc"
+#include "tagdialog.moc"
 
 
 // Local Variables:
