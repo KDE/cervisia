@@ -47,7 +47,7 @@
 #include <kvbox.h>
 #include "misc.h"
 #include "cervisiasettings.h"
-#include "settingsdlg_advanced.h"
+#include "settingsdialog_advanced.h"
 
 
 namespace
