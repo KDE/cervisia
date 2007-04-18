@@ -2597,7 +2597,7 @@ Opens a sandbox in the main window. See <xref linkend="mainscreen" />.
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>File</guimenu><guimenuitem>Recent sandboxes</guimenuitem>
+<guimenu>File</guimenu><guisubmenu>Recent sandboxes</guisubmenu>
 </menuchoice></term>
 <listitem><para>
 Opens one of the sandboxes that were in use recently.
