@@ -2842,7 +2842,7 @@ Determines whether files not in CVS are hidden in the main tree view. See <xref 
 <guimenu>View</guimenu><guimenuitem>Hide Empty Folders</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Determines whether without visible entries are hidden in the main tree view. See <xref linkend="mainscreen" />.
+Determines whether folders without visible entries are hidden in the main tree view. See <xref linkend="mainscreen" />.
 </para></listitem>
 </varlistentry>
 
