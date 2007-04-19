@@ -2158,7 +2158,7 @@ will be lost. Precisely, &cervisia; uses the command line
 </para>
 
 <para>
-So far, we have only the discussed the case where edits and unedits are used
+So far, we have only discussed the case where edits and unedits are used
 voluntarily be the developers. In addition &CVS; supports a model which
 <emphasis>enforces</emphasis> the usage of these commands. The responsible
 command to switch to this model is <command>cvs watch on</command> which we
@@ -2272,7 +2272,7 @@ Whenever you use the menu item
 Entry...</guimenuitem></menuchoice>, a new ChangeLog entry is generated with
 the current date and your username. Normally, it is considered good style to
 insert your full name and your email address into each of your ChangeLog
-entries. &cervisia; add automatically the full name and email address
+entries. &cervisia; automatically adds the full name and email address
 entered here.
 </para></listitem>
 </varlistentry>
@@ -2527,7 +2527,7 @@ folder.
 
 <listitem><para>
 &CVS; comes with a complete set of documentation in the form of info pages,
-known as "The Cederqvist". If it is properly installed, you get browse it by
+known as "The Cederqvist". If it is properly installed, you can browse it by
 typing in <userinput>info:/cvs</userinput> into the locationbar of
 <application>kdehelp</application>, <application>khelpcenter</application>
 resp. Alternative, you can just choose
