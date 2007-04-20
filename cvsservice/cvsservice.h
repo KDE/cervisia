@@ -220,16 +220,6 @@ public Q_SLOTS:
     QDBusObjectPath import(const QString& workingDir, const QString& repository,
                    const QString& module, const QString& ignoreList,
                    const QString& comment, const QString& vendorTag,
-                   const QString& releaseTag, bool importAsBinary);
-
-    /**
-     * @return A DCOP reference to the cvs job or in case of failure a
-     *         null reference.
-     */
-    //### KDE4: merge with above import() method
-    QDBusObjectPath import(const QString& workingDir, const QString& repository,
-                   const QString& module, const QString& ignoreList,
-                   const QString& comment, const QString& vendorTag,
                    const QString& releaseTag, bool importAsBinary,
                    bool useModificationTime);
 

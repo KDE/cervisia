@@ -124,17 +124,6 @@
       <arg name="vendorTag" type="s" direction="in"/>
       <arg name="releaseTag" type="s" direction="in"/>
       <arg name="importAsBinary" type="b" direction="in"/>
-      <arg type="o" direction="out"/>
-    </method>
-    <method name="import">
-      <arg name="workingDir" type="s" direction="in"/>
-      <arg name="repository" type="s" direction="in"/>
-      <arg name="module" type="s" direction="in"/>
-      <arg name="ignoreList" type="s" direction="in"/>
-      <arg name="comment" type="s" direction="in"/>
-      <arg name="vendorTag" type="s" direction="in"/>
-      <arg name="releaseTag" type="s" direction="in"/>
-      <arg name="importAsBinary" type="b" direction="in"/>
       <arg name="useModificationTime" type="b" direction="in"/>
       <arg type="o" direction="out"/>
     </method>

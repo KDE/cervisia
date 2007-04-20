@@ -539,42 +539,6 @@ QDBusObjectPath CvsService::history()
 QDBusObjectPath CvsService::import(const QString& workingDir, const QString& repository,
                            const QString& module, const QString& ignoreList,
                            const QString& comment, const QString& vendorTag,
-                           const QString& releaseTag, bool importAsBinary)
-{
-    if( d->hasRunningJob() )
-        return QDBusObjectPath();
-
-    Repository repo(repository);
-
-    // assemble the command line
-    d->singleCvsJob->clearCvsCommand();
-
-    *d->singleCvsJob << "cd" << K3Process::quote(workingDir) << "&&"
-                     << repo.cvsClient()
-                     << "-d" << repository
-                     << "import";
-
-    if( importAsBinary )
-        *d->singleCvsJob << "-kb";
-        
-    const QString ignore = ignoreList.trimmed();
-    if( !ignore.isEmpty() )
-        *d->singleCvsJob << "-I" << K3Process::quote(ignore);
-
-    QString logMessage = comment.trimmed();
-    logMessage.prepend("\"");
-    logMessage.append("\"");
-    *d->singleCvsJob << "-m" << logMessage;
-
-    *d->singleCvsJob << module << vendorTag << releaseTag;
-
-    return d->setupNonConcurrentJob(&repo);
-}
-
-
-QDBusObjectPath CvsService::import(const QString& workingDir, const QString& repository,
-                           const QString& module, const QString& ignoreList,
-                           const QString& comment, const QString& vendorTag,
                            const QString& releaseTag, bool importAsBinary,
                            bool useModificationTime)
 {
