@@ -23,6 +23,7 @@
 #include <q3intdict.h>
 #include <qstring.h>
 #include <QApplication>
+#include <QHash>
 
 #include <kconfig.h>
 #include <klocale.h>
@@ -52,13 +53,13 @@ struct CvsService::Private
         delete singleCvsJob;
     }
 
-    CvsJob*               singleCvsJob;   // non-concurrent cvs job, like update or commit
-    Q3IntDict<CvsJob>      cvsJobs;        // concurrent cvs jobs, like diff or annotate
-    Q3IntDict<CvsLoginJob> loginJobs;
-    unsigned              lastJobId;
+    CvsJob*                  singleCvsJob;   // non-concurrent cvs job, like update or commit
+    QHash<int, CvsJob*>      cvsJobs;       // concurrent cvs jobs, like diff or annotate
+    QHash<int, CvsLoginJob*> loginJobs;
+    unsigned                 lastJobId;
 
 
-    Repository*           repository;
+    Repository*              repository;
 
     CvsJob* createCvsJob();
     QDBusObjectPath setupNonConcurrentJob(Repository* repo = 0);
@@ -81,9 +82,6 @@ CvsService::CvsService()
     // create repository manager
     d->repository = new Repository();
 
-    d->cvsJobs.setAutoDelete(true);
-    d->loginJobs.setAutoDelete(true);
-
     KSharedConfig::Ptr config = KGlobal::config();
     KConfigGroup cs(config, "General");
     if( cs.readEntry("UseSshAgent", false) )
@@ -103,8 +101,12 @@ CvsService::~CvsService()
     SshAgent ssh;
     ssh.killSshAgent();
 
+    qDeleteAll(d->cvsJobs);
     d->cvsJobs.clear();
+
+    qDeleteAll(d->loginJobs);
     d->loginJobs.clear();
+
     delete d;
 }
 
