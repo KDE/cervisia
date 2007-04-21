@@ -23,7 +23,6 @@
 #include <qpushbutton.h>
 #include <q3popupmenu.h>
 #include <qtextstream.h>
-#include <qtooltip.h>
 //Added by qt3to4:
 #include <Q3StrList>
 #include <QSplitter>
@@ -219,7 +218,7 @@ void CervisiaPart::slotSetupStatusBar()
     filterLabel = new QLabel("UR", m_statusBar->statusBar());
     filterLabel->setFixedSize(filterLabel->sizeHint());
     filterLabel->setText("");
-    QToolTip::add(filterLabel,
+    filterLabel->setToolTip(
                   i18n("F - All files are hidden, the tree shows only folders\n"
                        "N - All up-to-date files are hidden\n"
                        "R - All removed files are hidden"));
