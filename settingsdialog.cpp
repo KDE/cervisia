@@ -33,7 +33,6 @@
 //Added by qt3to4:
 #include <QPixmap>
 #include <QVBoxLayout>
-#include <kbuttonbox.h>
 #include <kcolorbutton.h>
 #include <kconfig.h>
 #include <kfontdialog.h>

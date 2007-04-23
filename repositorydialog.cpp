@@ -26,7 +26,7 @@
 //Added by qt3to4:
 #include <QHBoxLayout>
 #include <QBoxLayout>
-#include <kbuttonbox.h>
+#include <k3buttonbox.h>
 #include <kconfig.h>
 #include <k3listview.h>
 #include <klocale.h>
@@ -192,7 +192,7 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserv
     connect(m_repoList, SIGNAL(selectionChanged()),
             this,       SLOT(slotSelectionChanged()));
 
-    KButtonBox* actionbox = new KButtonBox(mainWidget, Qt::Vertical);
+    K3ButtonBox* actionbox = new K3ButtonBox(mainWidget, Qt::Vertical);
     QPushButton* addbutton = actionbox->addButton(i18n("&Add..."));
     m_modifyButton = actionbox->addButton(i18n("&Modify..."));
     m_removeButton = actionbox->addButton(i18n("&Remove"));
