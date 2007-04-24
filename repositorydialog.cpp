@@ -26,7 +26,7 @@
 //Added by qt3to4:
 #include <QHBoxLayout>
 #include <QBoxLayout>
-#include <k3buttonbox.h>
+#include <KDialogButtonBox>
 #include <kconfig.h>
 #include <k3listview.h>
 #include <klocale.h>
@@ -192,14 +192,14 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserv
     connect(m_repoList, SIGNAL(selectionChanged()),
             this,       SLOT(slotSelectionChanged()));
 
-    K3ButtonBox* actionbox = new K3ButtonBox(mainWidget, Qt::Vertical);
-    QPushButton* addbutton = actionbox->addButton(i18n("&Add..."));
-    m_modifyButton = actionbox->addButton(i18n("&Modify..."));
-    m_removeButton = actionbox->addButton(i18n("&Remove"));
-    actionbox->addStretch();
-    m_loginButton  = actionbox->addButton(i18n("Login..."));
-    m_logoutButton = actionbox->addButton(i18n("Logout"));
-    actionbox->addStretch();
+    KDialogButtonBox* actionbox = new KDialogButtonBox(mainWidget, Qt::Vertical);
+    QPushButton* addbutton = actionbox->addButton(i18n("&Add..."), QDialogButtonBox::ActionRole);
+    m_modifyButton = actionbox->addButton(i18n("&Modify..."), QDialogButtonBox::ActionRole);
+    m_removeButton = actionbox->addButton(i18n("&Remove"), QDialogButtonBox::ActionRole);
+    //actionbox->addStretch();
+    m_loginButton  = actionbox->addButton(i18n("Login..."), QDialogButtonBox::ActionRole);
+    m_logoutButton = actionbox->addButton(i18n("Logout"), QDialogButtonBox::ActionRole);
+    //actionbox->addStretch();
     actionbox->layout();
     hbox->addWidget(actionbox, 0);
 
