@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2003 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2003-2007 Christian Loose <christian.loose@hamburg.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ class AddRemoveDialog : public KDialog
 public:
     enum ActionType { Add, AddBinary, Remove };
 
-    explicit AddRemoveDialog(ActionType action, QWidget* parent=0, const char* name=0);
+    explicit AddRemoveDialog(ActionType action, QWidget* parent=0);
 
     void setFileList(const QStringList& files);
 

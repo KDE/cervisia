@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2003-2004 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2003-2007 Christian Loose <christian.loose@hamburg.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -49,8 +49,7 @@ using Cervisia::IsValidTag;
 
 
 CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
-                               ActionType action, QWidget* parent,
-                               const char* name)
+                               ActionType action, QWidget* parent)
     : KDialog(parent)
     , act(action)
     , partConfig(cfg)

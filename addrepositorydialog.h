@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2004 Christian Loose <christian.loose@kdemail.net>
+ *  Copyright (c) 2002-2007 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,8 +35,7 @@ class AddRepositoryDialog : public KDialog
     Q_OBJECT
 
 public:
-    AddRepositoryDialog(KConfig& cfg, const QString& repo, QWidget* parent = 0,
-                         const char* name = 0);
+    AddRepositoryDialog(KConfig& cfg, const QString& repo, QWidget* parent = 0);
     virtual ~AddRepositoryDialog();
 
     void setRepository(const QString& repo);

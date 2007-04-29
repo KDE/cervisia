@@ -40,7 +40,7 @@ public:
     enum ActionType { Checkout, Import };
     
     CheckoutDialog( KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* service, ActionType action,
-                    QWidget *parent=0, const char *name=0 );
+                    QWidget *parent=0);
 
     QString workingDirectory() const;
     QString repository() const;
