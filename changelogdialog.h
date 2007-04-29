@@ -1,7 +1,7 @@
 /* 
  *  Copyright (C) 1999-2001 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2002-2007 Christian Loose <christian.loose@hamburg.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ class ChangeLogDialog : public KDialog
 {
     Q_OBJECT
 public:
-    explicit ChangeLogDialog( KConfig& cfg, QWidget *parent=0, const char *name=0 );
+    explicit ChangeLogDialog( KConfig& cfg, QWidget *parent=0 );
 
     virtual ~ChangeLogDialog();
 

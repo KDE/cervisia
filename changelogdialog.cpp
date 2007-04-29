@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2003 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2002-2007 Christian Loose <christian.loose@hamburg.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ static inline QString DateStringISO8601()
 ChangeLogDialog::Options *ChangeLogDialog::options = 0;
 
 
-ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent, const char *name)
+ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent)
     : KDialog(parent)
     , partConfig(cfg)
 {
