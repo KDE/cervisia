@@ -17,7 +17,7 @@
  */
 
 
-#include "annotatectl.h"
+#include "annotatecontroller.h"
 
 #include <qdatetime.h>
 #include <qmap.h>

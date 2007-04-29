@@ -54,7 +54,7 @@
 #include "diffdialog.h"
 #include "resolvedialog.h"
 #include "annotatedialog.h"
-#include "annotatectl.h"
+#include "annotatecontroller.h"
 #include "commitdialog.h"
 #include "updatedialog.h"
 #include "checkoutdialog.h"

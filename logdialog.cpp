@@ -49,7 +49,7 @@
 
 #include "cvsserviceinterface.h"
 #include "annotatedialog.h"
-#include "annotatectl.h"
+#include "annotatecontroller.h"
 #include "diffdialog.h"
 #include "loginfo.h"
 #include "loglist.h"

@@ -23,7 +23,7 @@ set(libcervisia_SRCS
    loglist.cpp
    logplainview.cpp
    logtree.cpp
-   annotatectl.cpp
+   annotatecontroller.cpp
    loginfo.cpp
    misc.cpp
    qttableview.cpp

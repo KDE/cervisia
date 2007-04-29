@@ -35,7 +35,7 @@
 #include "cervisiashell.h"
 #include "cvsserviceinterface.h"
 #include "annotatedialog.h"
-#include "annotatectl.h"
+#include "annotatecontroller.h"
 #include "logdialog.h"
 #include "resolvedialog.h"
 #include "version.h"
