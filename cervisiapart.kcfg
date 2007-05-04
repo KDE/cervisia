@@ -29,6 +29,16 @@
       <default code="true">KGlobalSettings::textColor()</default>
     </entry>
   </group>
+  <group name="LookAndFeel">
+    <entry name="ProtocolFont" type="Font">
+    </entry>
+    <entry name="AnnotateFont" type="Font">
+    </entry>
+    <entry name="DiffFont" type="Font">
+    </entry>
+    <entry name="ChangeLogFont" type="Font">
+    </entry>
+  </group>
   <group name="General" >
     <entry key="Timeout" type="UInt">
       <label>Delay (ms) until the progress dialog appears.</label>

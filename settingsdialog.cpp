@@ -151,10 +151,10 @@ void SettingsDialog::readSettings()
 
     // read configuration for look and feel page
     group = config->group("LookAndFeel");
-    m_protocolFontBox->setFont(group.readEntry("ProtocolFont",QFont()));
-    m_annotateFontBox->setFont(group.readEntry("AnnotateFont",QFont()));
-    m_diffFontBox->setFont(group.readEntry("DiffFont",QFont()));
-    m_changelogFontBox->setFont(group.readEntry("ChangeLogFont",QFont()));
+    m_protocolFontBox->setFont(CervisiaSettings::protocolFont());
+    m_annotateFontBox->setFont(CervisiaSettings::annotateFont());
+    m_diffFontBox->setFont(CervisiaSettings::diffFont());
+    m_changelogFontBox->setFont(CervisiaSettings::changeLogFont());
     m_splitterBox->setChecked(group.readEntry("SplitHorizontally",true));
 
     m_conflictButton->setColor(CervisiaSettings::conflictColor());
@@ -194,10 +194,10 @@ void SettingsDialog::writeSettings()
     group.writeEntry("StatusForLocalRepos", localstatusbox->isChecked());
 
     group = config->group("LookAndFeel");
-    group.writeEntry("ProtocolFont", m_protocolFontBox->font());
-    group.writeEntry("AnnotateFont", m_annotateFontBox->font());
-    group.writeEntry("DiffFont", m_diffFontBox->font());
-    group.writeEntry("ChangeLogFont", m_changelogFontBox->font());
+    CervisiaSettings::setProtocolFont(m_protocolFontBox->font());
+    CervisiaSettings::setAnnotateFont(m_annotateFontBox->font());
+    CervisiaSettings::setDiffFont(m_diffFontBox->font());
+    CervisiaSettings::setChangeLogFont(m_changelogFontBox->font());
     group.writeEntry("SplitHorizontally", m_splitterBox->isChecked());
 
     CervisiaSettings::setConflictColor(m_conflictButton->color());
