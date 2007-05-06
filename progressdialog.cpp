@@ -127,9 +127,18 @@ bool ProgressDialog::execute()
     d->resultbox->insertItem(cmdLine);
     kDebug() << k_funcinfo << " cmdLine: " << cmdLine << endl;
 
-    QDBusConnection::sessionBus().connect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob", "jobExited", this, SLOT(slotJobExited(bool,int)));
-    QDBusConnection::sessionBus().connect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob", "receivedStdout", this, SLOT(slotReceivedOutputNonGui(QString)));
-    QDBusConnection::sessionBus().connect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob", "receivedStderr", this, SLOT(slotReceivedOutputNonGui(QString)));
+    QDBusConnection::sessionBus().connect(QString(), d->jobPath,
+                                          "org.kde.cervisia.cvsservice.cvsjob",
+                                          "jobExited", this,
+                                          SLOT(slotJobExited(bool,int)));
+    QDBusConnection::sessionBus().connect(QString(), d->jobPath,
+                                          "org.kde.cervisia.cvsservice.cvsjob",
+                                          "receivedStdout", this,
+                                          SLOT(slotReceivedOutputNonGui(QString)));
+    QDBusConnection::sessionBus().connect(QString(), d->jobPath,
+                                          "org.kde.cervisia.cvsservice.cvsjob",
+                                          "receivedStderr", this,
+                                          SLOT(slotReceivedOutputNonGui(QString)));
 
     // we wait for 4 seconds (or the timeout set by the user) before we
     // force the dialog to show up
