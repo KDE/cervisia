@@ -1,7 +1,26 @@
+2007-01-13  André Wöbbeking  <Woebbeking@web.de>
+
+	* Fix:
+	  Handle '.' in user name when adding a repository.
+
+2006-09-02  André Wöbbeking  <Woebbeking@web.de>
+
+	* Fix BR #133129:
+	  Dates from cvs history are parsed correctly.
+
+	  While at it also made parsing more robust and added event 'P'
+	  "Update, Patched".
+
 2006-08-12  André Wöbbeking  <Woebbeking@web.de>
 
 	* Fix BR #131695:
 	  Broken repository locations don't crash cvsservice anymore.
+
+2005-08-03  Christian Loose <christian.loose@kdemail.net>
+
+	* Implemented wish #92938:
+	  Added ability to exclude files in the commit dialog from
+	  the subsequent commit.
 
 2005-03-30  Christian Loose <christian.loose@kdemail.net>
 

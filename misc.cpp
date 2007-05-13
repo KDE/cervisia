@@ -42,9 +42,9 @@
 
 // These regular expression parts aren't useful to check the validity of the
 // CVSROOT specification. They are just used to extract the different parts of it.
-static const QString userNameRegExp("([a-z0-9_][a-z0-9_-]*)?");
+static const QString userNameRegExp("([a-z0-9_][a-z0-9_-.]*)?");
 static const QString passwordRegExp("(:[^@]+)?");
-static const QString hostNameRegExp("([^:/]+)");
+static const QString hostNameRegExp("([^:/@]+)");
 static const QString portRegExp("(:(\\d*))?");
 static const QString pathRegExp("(/.*)");
 

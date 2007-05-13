@@ -39,6 +39,24 @@
 #include "progressdialog.h"
 
 
+static QDateTime parseDate(const QString& date, const QString& time, const QString& _offset)
+{
+    // cvs history only prints hhmm but fromString() needs hh:mm
+    QString offset( _offset );
+    if( !offset.contains(':') && offset.size() == 5 )
+        offset.insert( 3, ':' );
+
+    const KDateTime dt( KDateTime::fromString( date + 'T' + time + offset ) );
+    if ( !dt.isValid() )
+        return QDateTime();
+
+    QDateTime dateTime;
+    dateTime.setTime_t( dt.toTime_t() );
+
+    return dateTime;
+}
+
+
 class HistoryItem : public Q3ListViewItem
 {
 public:
@@ -322,7 +340,11 @@ bool HistoryDialog::parseHistory(OrgKdeCervisiaCvsserviceCvsserviceInterface* cv
     QString line;
     while( dlg.getLine(line) )
     {
-        QStringList list = splitLine(line);
+        const QStringList list(splitLine(line));
+        const int listSize(list.size());
+        if( listSize < 6)
+            continue;
+
         QString cmd = list[0];
         if( cmd.length() != 1 )
             continue;
@@ -354,14 +376,14 @@ bool HistoryDialog::parseHistory(OrgKdeCervisiaCvsserviceCvsserviceInterface* cv
             case 'U': event = i18n("Update, Copied ");   break;
             case 'G': event = i18n("Update, Merged ");   break;
             case 'C': event = i18n("Update, Conflict "); break;
+            case 'P': event = i18n("Update, Patched ");  break;
             case 'M': event = i18n("Commit, Modified "); break;
             case 'A': event = i18n("Commit, Added ");    break;
             case 'R': event = i18n("Commit, Removed ");  break;
             default:  event = i18n("Unknown ");
         }
 
-        QDateTime date;
-        date.setTime_t(KDateTime::fromString(list[1] + 'T' + list[2] + list[3]).toTime_t());
+        const QDateTime date(parseDate(list[1], list[2], list[3]));
 
         HistoryItem *item = new HistoryItem(listview, date);
         item->setText(HistoryItem::Event, event);
@@ -369,8 +391,11 @@ bool HistoryDialog::parseHistory(OrgKdeCervisiaCvsserviceCvsserviceInterface* cv
         if( ncol == 10 )
         {
             item->setText(HistoryItem::Revision, list[5]);
-            item->setText(HistoryItem::File, list[6]);
-            item->setText(HistoryItem::Path, list[7]);
+            if( listSize >= 8 )
+            {
+                item->setText(HistoryItem::File, list[6]);
+                item->setText(HistoryItem::Path, list[7]);
+            }
         }
         else
         {
