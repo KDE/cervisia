@@ -28,7 +28,7 @@ set_target_properties(cvsservice_bin PROPERTIES OUTPUT_NAME cvsservice)
 
 
 target_link_libraries(kdeinit_cvsservice_bin  ${KDE4_KIO_LIBS} )
-set_target_properties(kdeinit_cvsservice_bin PROPERTIES OUTPUT_NAME kdeinit_cvsservice)
+set_target_properties(kdeinit_cvsservice_bin PROPERTIES OUTPUT_NAME kdeinit4_cvsservice)
 
 install(TARGETS kdeinit_cvsservice_bin  DESTINATION ${LIB_INSTALL_DIR} )
 
