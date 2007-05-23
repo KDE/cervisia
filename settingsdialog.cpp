@@ -224,7 +224,7 @@ void SettingsDialog::writeSettings()
     }
     config->sync();
 
-    CervisiaSettings::writeConfig();
+    CervisiaSettings::self()->writeConfig();
 }
 
 void SettingsDialog::done(int res)
