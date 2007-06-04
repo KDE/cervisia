@@ -37,6 +37,7 @@ class QLabel;
 class QTabWidget;
 class Q3TextEdit;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
+class KConfig;
 
 class LogDialogTagInfo
 {

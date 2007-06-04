@@ -30,7 +30,7 @@ class QPushButton;
 class K3ListView;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 class RepositoryListItem;
-
+class KConfig;
 
 class RepositoryDialog : public KDialog
 {

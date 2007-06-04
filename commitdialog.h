@@ -32,7 +32,7 @@ class QCheckBox;
 class Q3ListViewItem;
 class K3ListView;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
-
+class KConfig;
 
 class CommitDialog : public KDialog
 {
