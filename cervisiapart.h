@@ -39,7 +39,6 @@ namespace Cervisia { class EditWithMenu; }
 class QLabel;
 class Q3ListViewItem;
 class QSplitter;
-class QTimer;
 class UpdateView;
 class ProtocolView;
 class KAboutData;

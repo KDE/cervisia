@@ -30,8 +30,6 @@
 
 class KConfig;
 
-class TipLabel;
-class LogListViewItem;
 
 namespace Cervisia
 {

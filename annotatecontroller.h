@@ -24,7 +24,6 @@
 
 class AnnotateDialog;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
-class QWidget;
 
 
 class AnnotateController

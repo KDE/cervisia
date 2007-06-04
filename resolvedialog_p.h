@@ -22,7 +22,6 @@
 #include <kdialog.h>
 
 class KTextEdit;
-class QStringList;
 class KConfig;
 
 

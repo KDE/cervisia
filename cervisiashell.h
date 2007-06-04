@@ -24,7 +24,6 @@
 
 #include <kparts/mainwindow.h>
 
-class KRecentFilesAction;
 
 
 /**
