@@ -38,7 +38,7 @@ static KCmdLineOptions options[] =
 extern "C" KDE_EXPORT int kdemain(int argc, char** argv)
 {
     KAboutData about("cvsaskpass", I18N_NOOP("cvsaskpass"), "0.1",
-                     I18N_NOOP("ssh-askpass for the CVS DCOP Service"),
+                     I18N_NOOP("ssh-askpass for the CVS D-Bus Service"),
                      KAboutData::License_LGPL,
                      I18N_NOOP("Copyright (c) 2003 Christian Loose"));
 
