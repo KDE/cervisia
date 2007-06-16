@@ -28,7 +28,7 @@
 #include <kconfig.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <k3process.h>
+#include <kshell.h>
 #include <kglobal.h>
 
 #include "cvsjob.h"
@@ -167,7 +167,7 @@ QDBusObjectPath CvsService::annotate(const QString& fileName, const QString& rev
 
     // assemble the command line
     // (cvs log [FILE] && cvs annotate [-r rev] [FILE])
-    QString quotedName = K3Process::quote(fileName);
+    QString quotedName = KShell::quoteArg(fileName);
     QString cvsClient  = d->repository->cvsClient();
 
     *job << "(" << cvsClient << "log" << quotedName << "&&"
@@ -197,7 +197,7 @@ QDBusObjectPath CvsService::checkout(const QString& workingDir, const QString& r
     // cd [DIRECTORY] && cvs -d [REPOSITORY] checkout [-r tag] [-P] [MODULE]
     d->singleCvsJob->clearCvsCommand();
 
-    *d->singleCvsJob << "cd" << K3Process::quote(workingDir) << "&&"
+    *d->singleCvsJob << "cd" << KShell::quoteArg(workingDir) << "&&"
                      << repo.cvsClient()
                      << "-d" << repository
                      << "checkout";
@@ -227,7 +227,7 @@ QDBusObjectPath CvsService::checkout(const QString& workingDir, const QString& r
     // cd [DIRECTORY] && cvs -d [REPOSITORY] co [-r tag] [-P] [-d alias] [MODULE]
     d->singleCvsJob->clearCvsCommand();
 
-    *d->singleCvsJob << "cd" << K3Process::quote(workingDir) << "&&"
+    *d->singleCvsJob << "cd" << KShell::quoteArg(workingDir) << "&&"
                      << repo.cvsClient()
                      << "-d" << repository;
     if( exportOnly)
@@ -263,7 +263,7 @@ QDBusObjectPath CvsService::checkout(const QString& workingDir, const QString& r
     // cd [DIRECTORY] && cvs -d [REPOSITORY] co [-r tag] [-P] [-d alias] [MODULE]
     d->singleCvsJob->clearCvsCommand();
 
-    *d->singleCvsJob << "cd" << K3Process::quote(workingDir) << "&&"
+    *d->singleCvsJob << "cd" << KShell::quoteArg(workingDir) << "&&"
                      << repo.cvsClient()
                      << "-d" << repository;
     if( exportOnly)
@@ -305,7 +305,7 @@ QDBusObjectPath CvsService::commit(const QStringList& files, const QString& comm
     if( !recursive )
         *d->singleCvsJob << "-l";
 
-    *d->singleCvsJob << "-m" << K3Process::quote(commitMessage)
+    *d->singleCvsJob << "-m" << KShell::quoteArg(commitMessage)
                      << CvsServiceUtils::joinFileList(files) << REDIRECT_STDERR;
 
     kDebug()<<"end of CvsService::commit \n";
@@ -322,9 +322,9 @@ QDBusObjectPath CvsService::createRepository(const QString& repository)
     // cvs -d [REPOSITORY] init
     d->singleCvsJob->clearCvsCommand();
     
-    *d->singleCvsJob << "mkdir -p" << K3Process::quote(repository) << "&&"
+    *d->singleCvsJob << "mkdir -p" << KShell::quoteArg(repository) << "&&"
                      << d->repository->cvsClient() 
-                     << "-d" << K3Process::quote(repository)
+                     << "-d" << KShell::quoteArg(repository)
                      << "init";
 
     return d->setupNonConcurrentJob();
@@ -349,7 +349,7 @@ QDBusObjectPath CvsService::createTag(const QStringList& files, const QString& t
     if( force )
         *d->singleCvsJob << "-F";
 
-    *d->singleCvsJob << K3Process::quote(tag)
+    *d->singleCvsJob << KShell::quoteArg(tag)
                      << CvsServiceUtils::joinFileList(files);
 
     return d->setupNonConcurrentJob();
@@ -374,7 +374,7 @@ QDBusObjectPath CvsService::deleteTag(const QStringList& files, const QString& t
     if( force )
         *d->singleCvsJob << "-F";
 
-    *d->singleCvsJob << K3Process::quote(tag)
+    *d->singleCvsJob << KShell::quoteArg(tag)
                      << CvsServiceUtils::joinFileList(files);
 
     return d->setupNonConcurrentJob();
@@ -393,7 +393,7 @@ QDBusObjectPath CvsService::downloadCvsIgnoreFile(const QString& repository,
     // cvs -d [REPOSITORY] -q checkout -p CVSROOT/cvsignore > [OUTPUTFILE]
     *job << repo.cvsClient() << "-d" << repository 
          << "-q checkout -p CVSROOT/cvsignore >" 
-         << K3Process::quote(outputFile);
+         << KShell::quoteArg(outputFile);
 
     // return a DCOP reference to the cvs job
     return QDBusObjectPath(job->dbusObjectPath());
@@ -415,9 +415,9 @@ QDBusObjectPath CvsService::downloadRevision(const QString& fileName,
     *job << d->repository->cvsClient() << "update -p";
 
     if( !revision.isEmpty() )
-        *job << "-r" << K3Process::quote(revision);
+        *job << "-r" << KShell::quoteArg(revision);
 
-    *job << K3Process::quote(fileName) << ">" << K3Process::quote(outputFile);
+    *job << KShell::quoteArg(fileName) << ">" << KShell::quoteArg(outputFile);
 
     // return a DCOP reference to the cvs job
     return QDBusObjectPath(job->dbusObjectPath());
@@ -440,11 +440,11 @@ QDBusObjectPath CvsService::downloadRevision(const QString& fileName,
     // cvs update -p -r [REVA] [FILE] > [OUTPUTFILEA] ;
     // cvs update -p -r [REVB] [FILE] > [OUTPUTFILEB]
     *job << d->repository->cvsClient() << "update -p"
-         << "-r" << K3Process::quote(revA)
-         << K3Process::quote(fileName) << ">" << K3Process::quote(outputFileA)
+         << "-r" << KShell::quoteArg(revA)
+         << KShell::quoteArg(fileName) << ">" << KShell::quoteArg(outputFileA)
          << ";" << d->repository->cvsClient() << "update -p"
-         << "-r" << K3Process::quote(revB)
-         << K3Process::quote(fileName) << ">" << K3Process::quote(outputFileB);
+         << "-r" << KShell::quoteArg(revB)
+         << KShell::quoteArg(fileName) << ">" << KShell::quoteArg(outputFileB);
 
     // return a DCOP reference to the cvs job
     return QDBusObjectPath(job->dbusObjectPath());
@@ -477,12 +477,12 @@ QDBusObjectPath CvsService::diff(const QString& fileName, const QString& revA,
          << format;
 
     if( !revA.isEmpty() )
-        *job << "-r" << K3Process::quote(revA);
+        *job << "-r" << KShell::quoteArg(revA);
 
     if( !revB.isEmpty() )
-        *job << "-r" << K3Process::quote(revB);
+        *job << "-r" << KShell::quoteArg(revB);
 
-    *job << K3Process::quote(fileName);
+    *job << KShell::quoteArg(fileName);
 
     // return a DCOP reference to the cvs job
     return QDBusObjectPath(job->dbusObjectPath());
@@ -552,7 +552,7 @@ QDBusObjectPath CvsService::import(const QString& workingDir, const QString& rep
     // assemble the command line
     d->singleCvsJob->clearCvsCommand();
 
-    *d->singleCvsJob << "cd" << K3Process::quote(workingDir) << "&&"
+    *d->singleCvsJob << "cd" << KShell::quoteArg(workingDir) << "&&"
                      << repo.cvsClient()
                      << "-d" << repository
                      << "import";
@@ -565,7 +565,7 @@ QDBusObjectPath CvsService::import(const QString& workingDir, const QString& rep
 
     const QString ignore = ignoreList.trimmed();
     if( !ignore.isEmpty() )
-        *d->singleCvsJob << "-I" << K3Process::quote(ignore);
+        *d->singleCvsJob << "-I" << KShell::quoteArg(ignore);
 
     QString logMessage = comment.trimmed();
     logMessage.prepend("\"");
@@ -604,7 +604,7 @@ QDBusObjectPath CvsService::log(const QString& fileName)
 
     // assemble the command line
     // cvs log [FILE]
-    *job << d->repository->cvsClient() << "log" << K3Process::quote(fileName);
+    *job << d->repository->cvsClient() << "log" << KShell::quoteArg(fileName);
 
     // return a DCOP reference to the cvs job
     return QDBusObjectPath(job->dbusObjectPath());

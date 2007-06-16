@@ -45,7 +45,7 @@
 #include "misc.h"
 #include "progressdialog.h"
 #include "diffview.h"
-
+#include <kshell.h>
 
 DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool modal)
     : KDialog(parent)
@@ -385,9 +385,9 @@ void DiffDialog::callExternalDiff(const QString& extdiff, OrgKdeCervisiaCvsservi
         if( !job.isValid() )
             return;
 
-        extcmdline += K3Process::quote(revAFilename);
+        extcmdline += KShell::quoteArg(revAFilename);
         extcmdline += ' ';
-        extcmdline += K3Process::quote(revBFilename);
+        extcmdline += KShell::quoteArg(revBFilename);
     }
     else
     {
@@ -397,9 +397,9 @@ void DiffDialog::callExternalDiff(const QString& extdiff, OrgKdeCervisiaCvsservi
         if( !job.isValid() )
             return;
 
-        extcmdline += K3Process::quote(revAFilename);
+        extcmdline += KShell::quoteArg(revAFilename);
         extcmdline += ' ';
-        extcmdline += K3Process::quote(QFileInfo(fileName).absoluteFilePath());
+        extcmdline += KShell::quoteArg(QFileInfo(fileName).absoluteFilePath());
     }
 
     ProgressDialog dlg(this, "Diff", service->service(),job, "diff");

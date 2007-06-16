@@ -22,7 +22,7 @@
 
 #include <qstring.h>
 #include <qstringlist.h>
-#include <k3process.h>
+#include <kshell.h>
 
 
 QString CvsServiceUtils::joinFileList(const QStringList& files)
@@ -34,7 +34,7 @@ QString CvsServiceUtils::joinFileList(const QStringList& files)
     
     for( ; it != end; ++it )
     {
-        result += K3Process::quote(*it);
+        result += KShell::quoteArg(*it);
         result += ' ';
     }
     
