@@ -116,12 +116,12 @@ bool Cervisia::IsValidTag(const QString& tag)
 {
     static const QString prohibitedChars("$,.:;@");
 
-    if( !isalpha(tag[0].latin1()) )
+    if( !isalpha(tag[0].toLatin1()) )
         return false;
 
     for( int i = 1; i < tag.length(); ++i )
     {
-        if( !isgraph(tag[i].latin1()) || prohibitedChars.contains(tag[i]) )
+        if( !isgraph(tag[i].toLatin1()) || prohibitedChars.contains(tag[i]) )
                 return false;
     }
 

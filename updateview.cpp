@@ -539,7 +539,7 @@ void UpdateView::processUpdateLine(QString str)
     if (str.length() > 2 && str[1] == ' ')
     {
         EntryStatus status(Cervisia::Unknown);
-        switch (str[0].latin1())
+        switch (str[0].toLatin1())
         {
         case 'C':
             status = Cervisia::Conflict;

@@ -350,7 +350,7 @@ bool HistoryDialog::parseHistory(OrgKdeCervisiaCvsserviceCvsserviceInterface* cv
             continue;
 
         int ncol;
-        int cmd_code = cmd[0].latin1();
+        int cmd_code = cmd[0].toLatin1();
         switch (cmd_code)
         {
             case 'O':
