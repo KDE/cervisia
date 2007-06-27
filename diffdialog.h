@@ -1,6 +1,7 @@
 /* 
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
+ *  Copyright (c) 2003-2007 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,9 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-#ifndef DIFFDLG_H
-#define DIFFDLG_H
+#ifndef DIFFDIALOG_H
+#define DIFFDIALOG_H
 
 #include <q3ptrlist.h>
 //Added by qt3to4:
@@ -41,10 +41,7 @@ class DiffDialog : public KDialog
     Q_OBJECT
 
 public:
-
-    explicit DiffDialog( KConfig& config, QWidget *parent=0, const char *name=0, 
-                         bool modal=false );
-
+    explicit DiffDialog(KConfig& config, QWidget *parent=0, bool modal=false);
     virtual ~DiffDialog();
 
     bool parseCvsDiff(OrgKdeCervisiaCvsserviceCvsserviceInterface* service, const QString &fileName, 

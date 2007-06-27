@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2004 Christian Loose <christian.loose@kdemail.net>
+ *  Copyright (c) 2002-2007 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,9 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef SETTINGSDLG_H
-#define SETTINGSDLG_H
-
+#ifndef SETTINGSDIALOG_H
+#define SETTINGSDIALOG_H
 
 #include <qpushbutton.h>
 #include <kpagedialog.h>
@@ -52,7 +51,7 @@ class SettingsDialog : public KPageDialog
     Q_OBJECT
 
 public:
-    SettingsDialog( KConfig *conf, QWidget *parent=0, const char *name=0 );
+    explicit SettingsDialog(KConfig *conf, QWidget *parent=0);
     virtual ~SettingsDialog();
 
 protected slots:

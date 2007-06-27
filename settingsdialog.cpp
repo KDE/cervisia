@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2004 Christian Loose <christian.loose@kdemail.net>
+ *  Copyright (c) 2002-2007 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -79,7 +79,7 @@ void FontButton::chooseFont()
 }
 
 
-SettingsDialog::SettingsDialog( KConfig *conf, QWidget *parent, const char *name )
+SettingsDialog::SettingsDialog(KConfig *conf, QWidget *parent)
     : KPageDialog(parent)
 {
     setFaceType( List );

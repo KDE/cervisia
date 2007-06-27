@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
+ *  Copyright (c) 2003-2007 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,7 +48,7 @@
 #include "diffview.h"
 #include <kshell.h>
 
-DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, const char *name, bool modal)
+DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
     : KDialog(parent)
     , partConfig(cfg)
 {
