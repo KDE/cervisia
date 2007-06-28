@@ -30,6 +30,7 @@ Comment=A D-Bus service that provides an interface to cvs
 Comment[de]=Ein D-Bus-Dienst, der eine Schnittstelle zu CVS bereitstellt
 Comment[el]=Μια υπηρεσία D-Bus που προσφέρει ένα περιβάλλον χρήσης για το cvs
 Comment[it]=Un servizio D-Bus che fornisce un'interfaccia a cvs
+Comment[ja]=CVS インターフェースを提供する D-Bus サービス
 Comment[sv]=En DBus-tjänst som tillhandahåller ett gränssnitt till CVS
 Comment[x-test]=xxA D-Bus service that provides an interface to cvsxx
 Comment[zh_TW]=提供 cvs 介面的 D-Bus 服務
