@@ -719,21 +719,21 @@ void CervisiaPart::updateActions()
 KAboutData* CervisiaPart::createAboutData()
 {
     KAboutData* about = new KAboutData(
-                            "cervisiapart", I18N_NOOP("Cervisia Part"),
-                            CERVISIA_VERSION, I18N_NOOP("A CVS frontend"),
+                            "cervisiapart", 0, ki18n("Cervisia Part"),
+                            CERVISIA_VERSION, ki18n("A CVS frontend"),
                             KAboutData::License_GPL,
-                            I18N_NOOP("Copyright (c) 1999-2002 Bernd Gehrmann"), 0,
+                            ki18n("Copyright (c) 1999-2002 Bernd Gehrmann"), KLocalizedString(),
                             "http://www.kde.org/apps/cervisia");
 
-    about->addAuthor("Bernd Gehrmann", I18N_NOOP("Original author and former "
-                    "maintainer"), "bernd@mail.berlios.de", 0);
-    about->addAuthor("Christian Loose", I18N_NOOP("Maintainer"),
-                    "christian.loose@hamburg.de", 0);
-    about->addAuthor("Andr\303\251 W\303\266bbeking", I18N_NOOP("Developer"),
-                    "woebbeking@web.de", 0);
+    about->addAuthor(ki18n("Bernd Gehrmann"), ki18n("Original author and former "
+                    "maintainer"), "bernd@mail.berlios.de");
+    about->addAuthor(ki18n("Christian Loose"), ki18n("Maintainer"),
+                    "christian.loose@hamburg.de");
+    about->addAuthor(ki18n("Andr\303\251 W\303\266bbeking"), ki18n("Developer"),
+                    "woebbeking@web.de");
 
-    about->addCredit("Richard Moore", I18N_NOOP("Conversion to KPart"),
-                    "rich@kde.org", 0);
+    about->addCredit(ki18n("Richard Moore"), ki18n("Conversion to KPart"),
+                    "rich@kde.org");
 
     return about;
 }

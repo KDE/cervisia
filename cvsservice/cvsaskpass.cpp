@@ -28,21 +28,18 @@
 #include <iostream>
 
 
-static KCmdLineOptions options[] =
-{
-    { "+[prompt]", I18N_NOOP("prompt"), 0 },
-    KCmdLineLastOption
-};
-
 
 extern "C" KDE_EXPORT int kdemain(int argc, char** argv)
 {
-    KAboutData about("cvsaskpass", I18N_NOOP("cvsaskpass"), "0.1",
-                     I18N_NOOP("ssh-askpass for the CVS D-Bus Service"),
+    KAboutData about("cvsaskpass", 0, ki18n("cvsaskpass"), "0.1",
+                     ki18n("ssh-askpass for the CVS D-Bus Service"),
                      KAboutData::License_LGPL,
-                     I18N_NOOP("Copyright (c) 2003 Christian Loose"));
+                     ki18n("Copyright (c) 2003 Christian Loose"));
 
     KCmdLineArgs::init(argc, argv, &about);
+
+    KCmdLineOptions options;
+    options.add("+[prompt]", ki18n("prompt"));
     KCmdLineArgs::addCmdLineOptions(options);
 
     // no need to register with the dcop server

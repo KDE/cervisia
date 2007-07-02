@@ -140,34 +140,33 @@ static int ShowAnnotateDialog(const QString& fileName)
 
 extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
 {
-    static KCmdLineOptions options[] = {
-        { "+[directory]", I18N_NOOP("The sandbox to be loaded"), 0 },
-        { "resolve <file>", I18N_NOOP("Show resolve dialog for the given file"), 0 },
-        { "log <file>", I18N_NOOP("Show log dialog for the given file"), 0 },
-        { "annotate <file>", I18N_NOOP("Show annotation dialog for the given file"), 0 },
-        KCmdLineLastOption
-    };
-    KAboutData about("cervisia", I18N_NOOP("Cervisia"), CERVISIA_VERSION,
-                     I18N_NOOP("A CVS frontend"), KAboutData::License_GPL,
-                     I18N_NOOP("Copyright (c) 1999-2002 Bernd Gehrmann\n"
-                               "Copyright (c) 2002-2004 the Cervisia authors"), 0,
+    KAboutData about("cervisia", 0, ki18n("Cervisia"), CERVISIA_VERSION,
+                     ki18n("A CVS frontend"), KAboutData::License_GPL,
+                     ki18n("Copyright (c) 1999-2002 Bernd Gehrmann\n"
+                               "Copyright (c) 2002-2004 the Cervisia authors"), KLocalizedString(),
                      "http://www.kde.org/apps/cervisia");
 
-    about.addAuthor("Bernd Gehrmann", I18N_NOOP("Original author and former "
-                    "maintainer"), "bernd@mail.berlios.de", 0);
-    about.addAuthor("Christian Loose", I18N_NOOP("Maintainer"),
-                    "christian.loose@kdemail.net", 0);
-    about.addAuthor("Andr\303\251 W\303\266bbeking", I18N_NOOP("Developer"),
-                    "woebbeking@web.de", 0);
-    about.addAuthor("Carlos Woelz", I18N_NOOP("Documentation"),
-                    "carloswoelz@imap-mail.com", 0);
+    about.addAuthor(ki18n("Bernd Gehrmann"), ki18n("Original author and former "
+                    "maintainer"), "bernd@mail.berlios.de");
+    about.addAuthor(ki18n("Christian Loose"), ki18n("Maintainer"),
+                    "christian.loose@kdemail.net");
+    about.addAuthor(ki18n("Andr\303\251 W\303\266bbeking"), ki18n("Developer"),
+                    "woebbeking@web.de");
+    about.addAuthor(ki18n("Carlos Woelz"), ki18n("Documentation"),
+                    "carloswoelz@imap-mail.com");
 
-    about.addCredit("Richard Moore", I18N_NOOP("Conversion to KPart"),
-                    "rich@kde.org", 0);
-    about.addCredit("Laurent Montel", I18N_NOOP("Conversion to D-Bus"),
-                    "montel@kde.org", 0);
+    about.addCredit(ki18n("Richard Moore"), ki18n("Conversion to KPart"),
+                    "rich@kde.org");
+    about.addCredit(ki18n("Laurent Montel"), ki18n("Conversion to D-Bus"),
+                    "montel@kde.org");
 
     KCmdLineArgs::init(argc, argv, &about);
+
+    KCmdLineOptions options;
+    options.add("+[directory]", ki18n("The sandbox to be loaded"));
+    options.add("resolve <file>", ki18n("Show resolve dialog for the given file"));
+    options.add("log <file>", ki18n("Show log dialog for the given file"));
+    options.add("annotate <file>", ki18n("Show annotation dialog for the given file"));
     KCmdLineArgs::addCmdLineOptions(options);
 
     KApplication app;

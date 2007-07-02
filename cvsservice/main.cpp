@@ -27,10 +27,10 @@
 
 extern "C" KDE_EXPORT int kdemain(int argc, char** argv)
 {
-    KAboutData about("cvsservice", I18N_NOOP("CVS D-Bus service"), "0.1",
-            I18N_NOOP("D-Bus service for CVS"), KAboutData::License_LGPL,
-            "Copyright (c) 2002-2003 Christian Loose");
-    about.addAuthor("Christian Loose", I18N_NOOP("Developer"),
+    KAboutData about("cvsservice", 0, ki18n("CVS D-Bus service"), "0.1",
+            ki18n("D-Bus service for CVS"), KAboutData::License_LGPL,
+            ki18n("Copyright (c) 2002-2003 Christian Loose"));
+    about.addAuthor(ki18n("Christian Loose"), ki18n("Developer"),
             "christian.loose@hamburg.de");
 
     KCmdLineArgs::init(argc, argv, &about);
