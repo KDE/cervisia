@@ -26,7 +26,7 @@
 #include <kdialog.h>
 
 
-class Q3ListBox;
+class QListWidget;
 class QStringList;
 
 
@@ -40,7 +40,7 @@ public:
     void setFileList(const QStringList& files);
 
 private:
-    Q3ListBox* m_listBox;
+    QListWidget* m_listBox;
 };
 
 #endif

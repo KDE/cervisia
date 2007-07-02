@@ -20,11 +20,12 @@
 #define EDITWITHMENU_H
 
 #include <qobject.h>
-//Added by qt3to4:
-#include <Q3PopupMenu>
+
 #include <kurl.h>
 #include <kservicetypetrader.h>
-class Q3PopupMenu;
+
+class QAction;
+class QMenu;
 
 
 namespace Cervisia
@@ -37,14 +38,14 @@ class EditWithMenu : public QObject
 
 public:
     EditWithMenu(const KUrl& url, QWidget* parent);
-    Q3PopupMenu* menu();
+    QMenu* menu();
 
 private slots:
-    void itemActivated(int);
+    void actionTriggered(QAction*);
 
 private:
-	KService::List m_offers;
-    Q3PopupMenu*        m_menu;
+    KService::List m_offers;
+    QMenu* m_menu;
     KUrl               m_url;
 };
 

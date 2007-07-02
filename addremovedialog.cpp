@@ -20,17 +20,14 @@
 
 #include "addremovedialog.h"
 
-#include <qfileinfo.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <q3listbox.h>
-#include <qstringlist.h>
-//Added by qt3to4:
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QBoxLayout>
 #include <kiconloader.h>
 #include <klocale.h>
+
+#include <QBoxLayout>
+#include <QFileInfo>
+#include <QLabel>
+#include <QListWidget>
+#include <QStringList>
 
 
 AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent)
@@ -58,8 +55,8 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent)
           mainWidget );
     layout->addWidget(textlabel);
 
-    m_listBox = new Q3ListBox(mainWidget);
-    m_listBox->setSelectionMode(Q3ListBox::NoSelection);
+    m_listBox = new QListWidget(mainWidget);
+    m_listBox->setSelectionMode(QAbstractItemView::NoSelection);
     layout->addWidget(m_listBox, 5);
 
     // Add warning message to dialog when user wants to remove a file
@@ -94,16 +91,16 @@ void AddRemoveDialog::setFileList(const QStringList& files)
 {
     // the dot for the root directory is hard to see, so
     // we convert it to the absolut path
-    if( files.find(".") != files.end() )
+    if( files.contains(".") )
     {
         QStringList copy(files);
         int idx = copy.findIndex(".");
         copy[idx] = QFileInfo(".").absoluteFilePath();
 
-        m_listBox->insertStringList(copy);
+        m_listBox->addItems(copy);
     }
     else
-        m_listBox->insertStringList(files);
+        m_listBox->addItems(files);
 }
 
 

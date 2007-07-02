@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003-2005 André Wöbbeking <Woebbeking@web.de>
+ * Copyright (c) 2003-2007 André Wöbbeking <Woebbeking@web.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,10 +21,8 @@
 #define CERVISIA_STRINGMATCHER_H
 
 
-#include <qstringlist.h>
-//Added by qt3to4:
-#include <QList>
-#include <Q3CString>
+#include <QStringList>
+
 
 
 namespace Cervisia
@@ -70,7 +68,7 @@ private:
     /**
      * The patterns which are tested in match().
      */
-    QList<Q3CString> m_generalPatterns;
+    QList<QByteArray> m_generalPatterns;
 };
 
 

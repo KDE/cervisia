@@ -35,7 +35,7 @@ class LogPlainView;
 class QComboBox;
 class QLabel;
 class QTabWidget;
-class Q3TextEdit;
+class QTextEdit;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 class KConfig;
 
@@ -88,8 +88,8 @@ private:
     QLabel *revbox[2];
     QLabel *authorbox[2];
     QLabel *datebox[2];
-    Q3TextEdit *commentbox[2];
-    Q3TextEdit *tagsbox[2];
+    QTextEdit *commentbox[2];
+    QTextEdit *tagsbox[2];
     QComboBox *tagcombo[2];
 
     OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService;

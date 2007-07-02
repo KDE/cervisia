@@ -19,7 +19,7 @@
 #include "editwithmenu.h"
 using namespace Cervisia;
 
-#include <q3popupmenu.h>
+#include <QMenu>
 #include <kdebug.h>
 #include <kiconloader.h>
 #include <kmimetype.h>
@@ -43,34 +43,36 @@ EditWithMenu::EditWithMenu(const KUrl& url, QWidget* parent)
 
     if( !m_offers.isEmpty() )
     {
-        m_menu = new Q3PopupMenu();
+        m_menu = new QMenu;
 
-		KService::List::ConstIterator it = m_offers.begin();
+        KService::List::ConstIterator it = m_offers.begin();
         for( int i = 0 ; it != m_offers.end(); ++it, ++i )
         {
-            int id = m_menu->insertItem(SmallIcon((*it)->icon()),
-                                        (*it)->name(),
-                                        this, SLOT(itemActivated(int)));
-            m_menu->setItemParameter(id, i);
+            QAction* pAction = m_menu->addAction(SmallIcon((*it)->icon()),
+                                                 (*it)->name());
+            pAction->setData(i);
         }
+
+        connect(m_menu, SIGNAL(triggered(QAction*)),
+                this, SLOT(actionTriggered(QAction*)));
     }
 }
 
 
-Q3PopupMenu* EditWithMenu::menu()
+QMenu* EditWithMenu::menu()
 {
     return m_menu;
 }
 
 
-void EditWithMenu::itemActivated(int item)
+void EditWithMenu::actionTriggered(QAction* action)
 {
-    const KService::Ptr service = m_offers[item];
+    const KService::Ptr service = m_offers[action->data().toInt()];
 
     KUrl::List list;
     list.append(m_url);
 
-    KRun::run(*service, list,0L);
+    KRun::run(*service, list, 0L);
 }
 
 

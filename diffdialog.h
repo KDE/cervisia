@@ -22,9 +22,7 @@
 #define DIFFDIALOG_H
 
 #include <q3ptrlist.h>
-//Added by qt3to4:
-#include <QLabel>
-#include <QKeyEvent>
+
 #include <kdialog.h>
 
 

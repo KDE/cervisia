@@ -24,7 +24,6 @@
 #include <q3popupmenu.h>
 #include <qtextstream.h>
 //Added by qt3to4:
-#include <Q3StrList>
 #include <QSplitter>
 #include <QList>
 #include <kaboutdata.h>
@@ -1130,23 +1129,6 @@ void CervisiaPart::slotBrowseLog()
     else
         delete l;
 }
-
-
-#if 0
-void CervisiaPart::slotBrowseMultiLog()
-{
-    Q3StrList list = update->multipleSelection();
-    if (!list.isEmpty())
-    {
-        // Non-modal dialog
-        MultiLogDialog *l = new MultiLogDialog();
-        if (l->parseCvsLog(".", list))
-            l->show();
-        else
-            delete l;
-    }
-}
-#endif
 
 
 void CervisiaPart::slotAnnotate()

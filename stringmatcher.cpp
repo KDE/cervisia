@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003-2005 André Wöbbeking <Woebbeking@web.de>
+ * Copyright (c) 2003-2007 André Wöbbeking <Woebbeking@web.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,9 +22,8 @@
 // For some reason fnmatch is defined as ap_fnmatch
 #define ap_fnmatch fnmatch
 #include <fnmatch.h>
-//Added by qt3to4:
-#include <QList>
-#include <Q3CString>
+
+#include <QByteArray>
 
 
 namespace Cervisia
@@ -71,8 +70,8 @@ bool StringMatcher::match(const QString& text) const
         }
     }
 
-    for (QList<Q3CString>::const_iterator it(m_generalPatterns.begin()),
-                                              itEnd(m_generalPatterns.end());
+    for (QList<QByteArray>::const_iterator it(m_generalPatterns.begin()),
+                                           itEnd(m_generalPatterns.end());
          it != itEnd; ++it)
     {
         if (::fnmatch(*it, text.toLocal8Bit(), FNM_PATHNAME) == 0)
