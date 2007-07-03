@@ -20,14 +20,12 @@
 #include "progressdialog.h"
 
 #include <qlabel.h>
-#include <qlayout.h>
 #include <qstring.h>
 #include <qstringlist.h>
 #include <qtimer.h>
-#include <kvbox.h>
-//Added by qt3to4:
-#include <QHBoxLayout>
-#include <Q3ListBox>
+#include <QGridLayout>
+#include <QTextEdit>
+
 #include <cvsjobinterface.h>
 #include <kanimatedbutton.h>
 #include <kapplication.h>
@@ -49,7 +47,7 @@ struct ProgressDialog::Private
 
     QTimer*         timer;
     KAnimatedButton*    gear;
-    Q3ListBox*       resultbox;
+    QTextEdit*      resultbox;
 };
 
 
@@ -93,30 +91,25 @@ ProgressDialog::~ProgressDialog()
 
 void ProgressDialog::setupGui(const QString& heading)
 {
-    KVBox* vbox = new KVBox(this);
-    setMainWidget(vbox);
-    vbox->setSpacing(10);
+    QWidget* dummy = new QWidget(this);
 
-    QWidget* headingBox = new QWidget(vbox);
-    QHBoxLayout* hboxLayout = new QHBoxLayout(headingBox);
+    setMainWidget(dummy);
 
-    QLabel* textLabel = new QLabel(heading, headingBox);
-    textLabel->setMinimumWidth(textLabel->sizeHint().width());
-    textLabel->setFixedHeight(textLabel->sizeHint().height());
-    hboxLayout->addWidget(textLabel);
-    hboxLayout->addStretch();
+    QGridLayout* layout = new QGridLayout(dummy);
 
-    d->gear = new KAnimatedButton(headingBox);
-	d->gear->setIcons("kde");
-    d->gear->setFixedSize(32, 32);
-    hboxLayout->addWidget(d->gear);
+    QLabel* textLabel = new QLabel(heading, dummy);
+    layout->addWidget(textLabel, 0, 0);
 
-    d->resultbox = new Q3ListBox(vbox);
-    d->resultbox->setSelectionMode(Q3ListBox::NoSelection);
+    d->gear = new KAnimatedButton(dummy);
+    d->gear->setIconSize(QSize(32, 32));
+    d->gear->setIcons("kde");
+    layout->addWidget(d->gear, 0, 1);
+
+    d->resultbox = new QTextEdit(dummy);
+    d->resultbox->setReadOnly(true);
     QFontMetrics fm(d->resultbox->fontMetrics());
     d->resultbox->setMinimumSize(fm.width("0")*70, fm.lineSpacing()*8);
-
-    resize(sizeHint());
+    layout->addWidget(d->resultbox, 1, 0, 1, 2);
 }
 
 
@@ -124,7 +117,7 @@ bool ProgressDialog::execute()
 {
     // get command line and display it
     QString cmdLine = d->cvsJob->cvsCommand();
-    d->resultbox->insertItem(cmdLine);
+    d->resultbox->insertPlainText(cmdLine);
     kDebug() << k_funcinfo << " cmdLine: " << cmdLine << endl;
 
     QDBusConnection::sessionBus().connect(QString(), d->jobPath,
@@ -276,10 +269,10 @@ void ProgressDialog::processOutput()
             item.startsWith("cvs [server aborted]:") )
         {
             d->hasError = true;
-            d->resultbox->insertItem(item);
+            d->resultbox->insertPlainText(item);
         }
         else if( item.startsWith("cvs server:") )
-            d->resultbox->insertItem(item);
+            d->resultbox->insertPlainText(item);
         else
             d->output.append(item);
 
