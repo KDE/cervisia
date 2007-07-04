@@ -43,7 +43,7 @@ kde4_automoc(${cvsaskpass_KDEINIT_SRCS})
 
 kde4_add_kdeinit_executable( cvsaskpass ${cvsaskpass_KDEINIT_SRCS})
 
-target_link_libraries(kdeinit_cvsaskpass  ${KDE4_KDEUI_LIBS} ${KDE4_KDESU_LIBS} )
+target_link_libraries(kdeinit_cvsaskpass   ${KDE4_KDESU_LIBS} )
 
 install(TARGETS kdeinit_cvsaskpass  DESTINATION ${LIB_INSTALL_DIR} )
 
