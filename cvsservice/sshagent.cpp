@@ -26,6 +26,7 @@
 #include <k3process.h>
 
 #include <stdlib.h>
+#include <signal.h>
 
 
 // initialize static member variables
@@ -122,11 +123,7 @@ void SshAgent::killSshAgent()
     if( !m_isRunning || !m_isOurAgent )
         return;
 
-    K3Process proc;
-
-    proc << "kill" << m_pid;
-
-    proc.start(K3Process::DontCare, K3Process::NoCommunication);
+    kill(m_pid.toInt(), SIGTERM);
 
     kDebug(8051) << "SshAgent::killSshAgent(): killed pid = " << m_pid << endl;
 }

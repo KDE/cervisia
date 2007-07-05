@@ -40,7 +40,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <ktemporaryfile.h>
-#include <k3process.h>
+#include <kprocess.h>
 #include <kconfiggroup.h>
 #include "cvsserviceinterface.h"
 #include "misc.h"
@@ -408,10 +408,9 @@ void DiffDialog::callExternalDiff(const QString& extdiff, OrgKdeCervisiaCvsservi
     {
         // call external diff application
         // TODO CL maybe use system()?
-        K3Process proc;
-        proc.setUseShell(true, "/bin/sh");
-        proc << extcmdline;
-        proc.start(K3Process::DontCare);
+        KProcess proc;
+        proc.setShellCommand(extcmdline);
+        proc.startDetached();
     }
 }
 
