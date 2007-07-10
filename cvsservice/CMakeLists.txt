@@ -20,7 +20,6 @@ qt4_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.repository.xml
 
 qt4_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.cvsjob.xml cvsjob.h CvsJob)
 
-kde4_automoc(${cvsservice_bin_KDEINIT_SRCS})
 
 
 kde4_add_kdeinit_executable( cvsservice_bin NOGUI ${cvsservice_bin_KDEINIT_SRCS})
@@ -39,7 +38,6 @@ install(TARGETS cvsservice_bin  DESTINATION ${BIN_INSTALL_DIR} )
 
 set(cvsaskpass_KDEINIT_SRCS cvsaskpass.cpp )
 
-kde4_automoc(${cvsaskpass_KDEINIT_SRCS})
 
 kde4_add_kdeinit_executable( cvsaskpass ${cvsaskpass_KDEINIT_SRCS})
 

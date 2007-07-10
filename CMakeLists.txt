@@ -46,7 +46,6 @@ set(cervisia_KDEINIT_SRCS ${libcervisia_SRCS}
    cervisiashell.cpp )
 
 
-kde4_automoc(${cervisia_KDEINIT_SRCS})
 
 kde4_add_kdeinit_executable( cervisia ${cervisia_KDEINIT_SRCS})
 
@@ -91,7 +90,6 @@ set(cervisiapart_PART_SRCS ${libcervisia_SRCS}
    editwithmenu.cpp 
    logmessageedit.cpp )
 
-kde4_automoc(${cervisiapart_PART_SRCS})
 
 qt4_add_dbus_adaptor(cervisiapart_PART_SRCS org.kde.cervisia.protocolview.xml protocolview.h ProtocolView)
 
