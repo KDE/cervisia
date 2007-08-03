@@ -72,7 +72,7 @@ ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,const QSt
     d->cvsJob      = new OrgKdeCervisiaCvsserviceCvsjobInterface(cvsServiceNameService ,path.path(),QDBusConnection::sessionBus(), this);
     d->buffer      = "";
 
-    kDebug() << k_funcinfo << "cvsServiceNameService : "<<cvsServiceNameService << "CvsjobInterface " << path.path() << " valid: " << d->cvsJob->isValid() << endl;
+    kDebug() << k_funcinfo << "cvsServiceNameService : "<<cvsServiceNameService << "CvsjobInterface " << path.path() << " valid: " << d->cvsJob->isValid();
   
     d->errorId1 = "cvs " + errorIndicator + ':';
     d->errorId2 = "cvs [" + errorIndicator + " aborted]:";
@@ -118,7 +118,7 @@ bool ProgressDialog::execute()
     // get command line and display it
     QString cmdLine = d->cvsJob->cvsCommand();
     d->resultbox->insertPlainText(cmdLine);
-    kDebug() << k_funcinfo << " cmdLine: " << cmdLine << endl;
+    kDebug() << k_funcinfo << " cmdLine: " << cmdLine;
 
     QDBusConnection::sessionBus().connect(QString(), d->jobPath,
                                           "org.kde.cervisia.cvsservice.cvsjob",
@@ -172,7 +172,7 @@ QStringList ProgressDialog::getOutput() const
 
 void ProgressDialog::slotReceivedOutputNonGui(QString buffer)
 {
-    kDebug() << k_funcinfo << buffer << endl;
+    kDebug() << k_funcinfo << buffer;
 
     d->buffer += buffer;
 
@@ -187,7 +187,7 @@ void ProgressDialog::slotReceivedOutputNonGui(QString buffer)
 
 void ProgressDialog::slotReceivedOutput(QString buffer)
 {
-    kDebug() << k_funcinfo << endl;
+    kDebug() << k_funcinfo;
     d->buffer += buffer;
     processOutput();
 }

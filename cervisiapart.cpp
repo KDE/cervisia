@@ -123,7 +123,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
     else
       // create a reference to the service
       cvsService = new OrgKdeCervisiaCvsserviceCvsserviceInterface(m_cvsServiceInterfaceName, "/CvsService",QDBusConnection::sessionBus(), this);
-    //kDebug()<<" m_cvsServiceInterfaceName :"<<m_cvsServiceInterfaceName<<endl;
+    //kDebug()<<" m_cvsServiceInterfaceName :"<<m_cvsServiceInterfaceName;
     //kdDebug()<<" cvsService->service() :"<<cvsService->service()<<endl;
     // Create UI
     KConfigGroup conf( config(), "LookAndFeel");
@@ -685,7 +685,7 @@ void CervisiaPart::popupRequested(K3ListView*, Q3ListViewItem* item, const QPoin
         popup->exec(p);
     }
     else
-        kDebug(8050) << "CervisiaPart: can't get XML definition for " << xmlName << ", factory()=" << factory() << endl;
+        kDebug(8050) << "CervisiaPart: can't get XML definition for " << xmlName << ", factory()=" << factory();
 }
 
 void CervisiaPart::updateActions()
@@ -970,8 +970,8 @@ void CervisiaPart::slotCommit()
                                              opt_commitRecursive);
         QString cmdline;
 	QDBusObjectPath cvsJob = cvsJobPath;
-	kDebug()<<" commit : cvsJob.path() :"<<cvsJob.path()<<endl;
-	kDebug()<<" list :"<<list<< "dlg.logMessage() :"<<dlg.logMessage()<<" opt_commitRecursive "<<opt_commitRecursive<<endl;
+	kDebug()<<" commit : cvsJob.path() :"<<cvsJob.path();
+	kDebug()<<" list :"<<list<< "dlg.logMessage() :"<<dlg.logMessage()<<" opt_commitRecursive "<<opt_commitRecursive;
         if(cvsJob.path().isEmpty())
            return;
 

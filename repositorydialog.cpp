@@ -95,7 +95,7 @@ RepositoryListItem::RepositoryListItem(K3ListView* parent, const QString& repo,
     : K3ListViewItem(parent)
     , m_isLoggedIn(loggedin)
 {
-    kDebug() << "RepositoryListItem::RepositoryListItem(): repo=" << repo << endl;
+    kDebug() << "RepositoryListItem::RepositoryListItem(): repo=" << repo;
     setText(0, repo);
 
     changeLoginStatusColumn();

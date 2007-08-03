@@ -292,7 +292,7 @@ QDBusObjectPath CvsService::commit(const QStringList& files, const QString& comm
                            bool recursive)
 {
     kDebug()<<" QDBusObjectPath CvsService::commit(const QStringList& files, const QString& commitMessage, bool recursive) \n";
-    kDebug()<<" d->hasWorkingCopy :"<<d->hasWorkingCopy()<<" d->hasRunningJob :"<<d->hasRunningJob()<<endl;
+    kDebug()<<" d->hasWorkingCopy :"<<d->hasWorkingCopy()<<" d->hasRunningJob :"<<d->hasRunningJob();
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
         return QDBusObjectPath();
 

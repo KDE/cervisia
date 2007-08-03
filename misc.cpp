@@ -181,10 +181,10 @@ QString Cervisia::NormalizeRepository(const QString& repository)
         port     = rx.cap(6);
         path     = rx.cap(7);
 
-        kDebug() << "NormalizeRepository(): username=" << userName << endl;
-        kDebug() << "NormalizeRepository(): hostname=" << hostName << endl;
-        kDebug() << "NormalizeRepository(): port    =" << port << endl;
-        kDebug() << "NormalizeRepository(): path    =" << path << endl;
+        kDebug() << "NormalizeRepository(): username=" << userName;
+        kDebug() << "NormalizeRepository(): hostname=" << hostName;
+        kDebug() << "NormalizeRepository(): port    =" << port;
+        kDebug() << "NormalizeRepository(): path    =" << path;
 
         if( port.isEmpty() )
             port = "2401";

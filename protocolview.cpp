@@ -53,7 +53,7 @@ ProtocolView::ProtocolView(const QString& appId, QWidget *parent, const char *na
     localChangeColor=config.readEntry("LocalChange", QColor(130, 130, 255));
     remoteChangeColor=config.readEntry("RemoteChange", QColor(70, 210, 70));
     
-    //kDebug()<<"protocol view appId : "<<appId<<endl;
+    //kDebug()<<"protocol view appId : "<<appId;
     
     job = new OrgKdeCervisiaCvsserviceCvsjobInterface(appId, "/NonConcurrentJob",QDBusConnection::sessionBus(), this);
     
@@ -103,7 +103,7 @@ Q3PopupMenu* ProtocolView::createPopupMenu(const QPoint &pos)
 
 void ProtocolView::cancelJob()
 {
-    kDebug()<< k_funcinfo <<endl;
+    kDebug()<< k_funcinfo;
     job->cancel();
 }
 
@@ -117,7 +117,7 @@ void ProtocolView::slotReceivedOutput(QString buffer)
 
 void ProtocolView::slotJobExited(bool normalExit, int exitStatus)
 {
-    kDebug()<< k_funcinfo<<endl;
+    kDebug()<< k_funcinfo;
     QString msg;
 
     if( normalExit )
