@@ -1,2 +1,2 @@
 #! /bin/sh
-$XGETTEXT -C *.cpp *.h -o $podir/cervisia.pot
+$XGETTEXT -C *.cpp -o $podir/cervisia.pot

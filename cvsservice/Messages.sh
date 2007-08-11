@@ -1,3 +1,2 @@
 #! /bin/sh
-# i18n
-$XGETTEXT *.cpp *.h -o $podir/cvsservice.pot
+$XGETTEXT *.cpp -o $podir/cvsservice.pot
