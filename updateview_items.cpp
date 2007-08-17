@@ -344,7 +344,7 @@ void UpdateDirItem::syncWithDirectory()
             if (!dir.exists(it.key()))
             {
                 fileItem->setStatus(Cervisia::Removed);
-                fileItem->setRevTag(QString::null, QString::null);
+                fileItem->setRevTag(QString(), QString());
             }
         }
     }

@@ -155,7 +155,7 @@ private:
     void writeSettings();
 
     bool openSandbox(const QString &dirname);
-    void updateSandbox(const QString &extraopt = QString::null);	//krazy:exclude=nullstrassign for old broken gcc
+    void updateSandbox(const QString &extraopt = QString());
     void addOrRemove(AddRemoveDialog::ActionType action);
     void addOrRemoveWatch(WatchDialog::ActionType action);
     void createOrDeleteTag(Cervisia::TagDialog::ActionType action);

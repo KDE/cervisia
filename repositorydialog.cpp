@@ -61,7 +61,7 @@ public:
     {
         QString str = text(1);
         return (str.startsWith("ext (") ? str.mid(5, str.length()-6)
-                                        : QString::null);	//krazy:exclude=nullstrassign for old broken gcc
+                                        : QString());
     }
     QString server() const { return m_server; }
     int compression() const
@@ -338,7 +338,7 @@ void RepositoryDialog::slotOk()
 
 void RepositoryDialog::slotAddClicked()
 {
-    AddRepositoryDialog dlg(m_partConfig, QString::null, this);	//krazy:exclude=nullstrassign for old broken gcc
+    AddRepositoryDialog dlg(m_partConfig, QString(), this);
     // default compression level
     dlg.setCompression(-1);
     if( dlg.exec() )

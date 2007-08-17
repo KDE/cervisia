@@ -405,7 +405,7 @@ void CheckoutDialog::branchButtonClicked()
     if( !cvsJob.isValid() )
         return;
 
-    ProgressDialog dlg(this, "Remote Log", cvsService->service(),cvsJob, QString::null,	//krazy:exclude=nullstrassign for old broken gcc
+    ProgressDialog dlg(this, "Remote Log", cvsService->service(),cvsJob, QString(),
                        i18n("CVS Remote Log"));
     if( !dlg.execute() )
         return;

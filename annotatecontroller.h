@@ -32,7 +32,7 @@ public:
     AnnotateController(AnnotateDialog* dialog, OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService);
     ~AnnotateController();
 
-    void showDialog(const QString& fileName, const QString& revision = QString::null);
+    void showDialog(const QString& fileName, const QString& revision = QString());
 
 private:
     struct Private;

@@ -391,8 +391,8 @@ bool LogDialog::parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service
         }
     }
 
-    tagcombo[0]->insertItem(QString::null);	//krazy:exclude=nullstrassign for old broken gcc
-    tagcombo[1]->insertItem(QString::null);	//krazy:exclude=nullstrassign for old broken gcc
+    tagcombo[0]->insertItem(QString());
+    tagcombo[1]->insertItem(QString());
     Q3PtrListIterator<LogDialogTagInfo> it(tags);
     for( ; it.current(); ++it )
     {

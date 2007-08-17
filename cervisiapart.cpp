@@ -1723,7 +1723,7 @@ void CervisiaPart::showDiff(const QString& revision)
 
     // Non-modal dialog
     DiffDialog *l = new DiffDialog(*config());
-    if (l->parseCvsDiff(cvsService, fileName, revision, QString::null))	//krazy:exclude=nullstrassign for old broken gcc
+    if (l->parseCvsDiff(cvsService, fileName, revision, QString()))
         l->show();
     else
         delete l;
