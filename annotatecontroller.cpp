@@ -181,8 +181,8 @@ void AnnotateController::Private::parseCvsAnnotateOutput()
 
         if( rev == oldRevision )
         {
-            logInfo.m_author = QString::null;
-            rev = QString::null;
+            logInfo.m_author = QString();
+            rev = QString();
         }
         else
         {

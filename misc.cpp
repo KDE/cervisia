@@ -81,7 +81,7 @@ static const QStringList FetchBranchesAndTags(const QString& searchedType,
     if( !job.isValid() )
         return branchOrTagList;
 
-    ProgressDialog dlg(parent, "Status", cvsService->service(),job, QString::null, i18n("CVS Status"));
+    ProgressDialog dlg(parent, "Status", cvsService->service(),job, QString::null, i18n("CVS Status"));	//krazy:exclude=nullstrassign for old broken gcc
 
     if( dlg.execute() )
     {

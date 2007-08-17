@@ -151,9 +151,9 @@ AnnotateView::AnnotateView(KConfig &cfg, QWidget *parent, const char *name)
     header()->hide();
     //    setResizeMode(LastColumn);
 
-    addColumn(QString::null);
-    addColumn(QString::null);
-    addColumn(QString::null);
+    addColumn(QString::null);	//krazy:exclude=nullstrassign for old broken gcc
+    addColumn(QString::null);	//krazy:exclude=nullstrassign for old broken gcc
+    addColumn(QString::null);	//krazy:exclude=nullstrassign for old broken gcc
 
     setSorting(AnnotateViewItem::LineNumberColumn);
     setColumnAlignment(AnnotateViewItem::LineNumberColumn, Qt::AlignRight);

@@ -59,7 +59,7 @@ struct TagInfo
         Tag      = 1 << 2
     };
 
-    explicit TagInfo(const QString& name = QString::null, Type type = Tag);
+    explicit TagInfo(const QString& name = QString::null, Type type = Tag);	//krazy:exclude=nullstrassign for old broken gcc
 
     /**
      * @param prefixWithType prefix the string with the type of the tag

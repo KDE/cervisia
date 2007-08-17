@@ -75,7 +75,7 @@ public:
         // already reach end of text on previous call
         if( m_endPos < 0 )
         {
-            m_currentLine = QString::null;
+            m_currentLine = QString();
             return m_currentLine;
         }
 

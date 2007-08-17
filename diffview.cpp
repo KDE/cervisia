@@ -351,7 +351,7 @@ void DiffView::paintCell(QPainter *p, int row, int col)
         innerborder = BORDER;
         str = (item->type==Change)? i18n("Change")
             : (item->type==Insert)? i18n("Insert")
-            : (item->type==Delete)? i18n("Delete") : QString::null;
+            : (item->type==Delete)? i18n("Delete") : QString();
     }
     else
     {

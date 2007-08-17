@@ -99,7 +99,7 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
 	     this, SLOT(toggleSynchronize(bool)) );
 
     itemscombo = new QComboBox(mainWidget);
-    itemscombo->insertItem(QString::null);
+    itemscombo->insertItem(QString::null);	//krazy:exclude=nullstrassign for old broken gcc
     connect( itemscombo, SIGNAL(activated(int)),
              this, SLOT(comboActivated(int)) );
 
@@ -488,7 +488,7 @@ void DiffDialog::forwClicked()
 
 void DiffDialog::saveAsClicked()
 {
-    QString fileName = KFileDialog::getSaveFileName(KUrl(), QString::null, this);
+    QString fileName = KFileDialog::getSaveFileName(KUrl(), QString::null, this);	//krazy:exclude=nullstrassign for old broken gcc
     if( fileName.isEmpty() )
         return;
 

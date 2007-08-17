@@ -50,8 +50,8 @@ public:
     const Cervisia::Entry& entry() const { return m_entry; }
 
     // Returns the path (relative to the repository).
-    // QString::null for the root item and its (direct) children.
-    // If it's not QString::null it ends with '/'.
+    // QString() for the root item and its (direct) children.
+    // If it's not QString() it ends with '/'.
     QString dirPath() const;
 
     // Returns the file name, including the path (relative to the repository)
