@@ -103,7 +103,7 @@ Q3PopupMenu* ProtocolView::createPopupMenu(const QPoint &pos)
 
 void ProtocolView::cancelJob()
 {
-    kDebug()<< k_funcinfo;
+    kDebug();
     job->cancel();
 }
 
@@ -117,7 +117,7 @@ void ProtocolView::slotReceivedOutput(QString buffer)
 
 void ProtocolView::slotJobExited(bool normalExit, int exitStatus)
 {
-    kDebug()<< k_funcinfo;
+    kDebug();
     QString msg;
 
     if( normalExit )

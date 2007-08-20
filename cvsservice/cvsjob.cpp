@@ -209,7 +209,7 @@ void CvsJob::cancel()
 
 void CvsJob::slotProcessExited()
 {
-    kDebug()<<  k_funcinfo;
+    kDebug();
     // disconnect all connections to childproc's signals
     d->childproc->disconnect();
     d->childproc->clearArguments();
