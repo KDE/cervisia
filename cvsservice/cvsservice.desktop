@@ -32,6 +32,7 @@ Comment[es]=Un servicio D-Bus que proporciona una interfaz para cvs
 Comment[fa]=خدمت D-Bus که واسطی را برای cvs فراهم می‌کند
 Comment[it]=Un servizio D-Bus che fornisce un'interfaccia a cvs
 Comment[ja]=CVS インターフェースを提供する D-Bus サービス
+Comment[ne]=cvs मा एउटा इन्टरफेस उपलब्ध गराउने डी-बस सेवा
 Comment[pt]=Um serviço de D-Bus que oferece uma interface para o CVS
 Comment[pt_BR]=Um serviço de D-Bus que oferece uma interface para o CVS
 Comment[sv]=En DBus-tjänst som tillhandahåller ett gränssnitt till CVS
