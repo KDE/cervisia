@@ -18,22 +18,18 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-#ifndef RESOLVEDLG_H
-#define RESOLVEDLG_H
-
+#ifndef RESOLVEDIALOG_H
+#define RESOLVEDIALOG_H
 
 #include <kdialog.h>
 
 #include <q3ptrlist.h>
 #include "diffview.h"
 
-
 class QLabel;
 class QTextCodec;
 class KConfig;
 class ResolveItem;
-
 
 class ResolveDialog : public KDialog
 {
@@ -90,8 +86,7 @@ private:
 };
 
 
-#endif
-
+#endif // RESOLVEDIALOG_H
 
 // Local Variables:
 // c-basic-offset: 4

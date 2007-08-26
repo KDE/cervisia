@@ -17,20 +17,16 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-#ifndef HISTORYDLG_H
-#define HISTORYDLG_H
-
+#ifndef HISTORYDIALOG_H
+#define HISTORYDIALOG_H
 
 #include <kdialog.h>
-
 
 class QCheckBox;
 class KConfig;
 class KLineEdit;
 class K3ListView;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
-
 
 class HistoryDialog : public KDialog
 {
@@ -54,8 +50,7 @@ private:
     KConfig& partConfig;
 };
 
-#endif
-
+#endif // HISTORYDIALOG_H
 
 // Local Variables:
 // c-basic-offset: 4

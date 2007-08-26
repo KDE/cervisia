@@ -16,9 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-#ifndef CERVISIA_CVSINITDLG_H
-#define CERVISIA_CVSINITDLG_H
+#ifndef CVSINITDIALOG_H
+#define CVSINITDIALOG_H
 
 #include <kdialog.h>
 
@@ -49,4 +48,4 @@ private:
 
 }
 
-#endif
+#endif // CVSINITDIALOG_H

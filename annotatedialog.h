@@ -17,13 +17,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-#ifndef ANNOTATEDLG_H
-#define ANNOTATEDLG_H
-
+#ifndef ANNOTATEDIALOG_H
+#define ANNOTATEDIALOG_H
 
 #include <kdialog.h>
-
 
 class AnnotateView;
 class KConfig;
@@ -50,8 +47,7 @@ private:
     KConfig&      partConfig;
 };
 
-#endif
-
+#endif // ANNOTATEDIALOG_H
 
 // Local Variables:
 // c-basic-offset: 4

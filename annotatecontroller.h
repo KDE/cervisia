@@ -16,15 +16,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-#ifndef ANNOTATECTL_H
-#define ANNOTATECTL_H
+#ifndef ANNOTATECONTROLLER_H
+#define ANNOTATECONTROLLER_H
 
 #include <qstring.h>
 
 class AnnotateDialog;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
-
 
 class AnnotateController
 {
@@ -39,5 +37,4 @@ private:
     Private* d;
 };
 
-
-#endif
+#endif // ANNOTATECONTROLLER_H

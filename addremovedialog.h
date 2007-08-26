@@ -18,17 +18,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-#ifndef ADDREMOVEDLG_H
-#define ADDREMOVEDLG_H
-
+#ifndef ADDREMOVEDIALOG_H
+#define ADDREMOVEDIALOG_H
 
 #include <kdialog.h>
 
-
 class QListWidget;
 class QStringList;
-
 
 class AddRemoveDialog : public KDialog
 {
@@ -43,7 +39,6 @@ private:
     QListWidget* m_listBox;
 };
 
-#endif
-
+#endif // ADDREMOVEDIALOG_H
 
 // kate: space-indent on; indent-width 4; replace-tabs on;

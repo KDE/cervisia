@@ -16,18 +16,16 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef CERVISIA_RESOLVEEDITORDIALOG_H
-#define CERVISIA_RESOLVEEDITORDIALOG_H
+#ifndef RESOLVEDIALOG_P_H
+#define RESOLVEDIALOG_P_H
 
 #include <kdialog.h>
 
 class KTextEdit;
 class KConfig;
 
-
 namespace Cervisia
 {
-
 
 class ResolveEditorDialog : public KDialog
 {
@@ -43,8 +41,6 @@ private:
     KConfig&   m_partConfig;
 };  
 
-
 }
 
-
-#endif
+#endif // RESOLVEDIALOG_P_H

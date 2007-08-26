@@ -17,19 +17,15 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-#ifndef MERGEDLG_H
-#define MERGEDLG_H
-
+#ifndef MERGEDIALOG_H
+#define MERGEDIALOG_H
 
 #include <kdialog.h>
-
 
 class QComboBox;
 class QPushButton;
 class QRadioButton;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
-
 
 class MergeDialog : public KDialog
 {
@@ -57,8 +53,7 @@ private:
     QPushButton *tag_button, *branch_button;
 };
 
-#endif
-
+#endif // MERGEDIALOG_H
 
 // Local Variables:
 // c-basic-offset: 4

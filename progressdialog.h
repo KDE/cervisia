@@ -17,11 +17,12 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef PROGRESSDLG_H
-#define PROGRESSDLG_H
+#ifndef PROGRESSDIALOG_H
+#define PROGRESSDIALOG_H
 
 #include <kdialog.h>
 #include <QDBusReply>
+
 class QString;
 class QWidget;
 class QDBusObjectPath;
@@ -59,6 +60,4 @@ private:
     Private* d;
 };
 
-
-#endif
-
+#endif // PROGRESSDIALOG_H

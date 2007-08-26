@@ -17,20 +17,16 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-#ifndef UPDATEDLG_H
-#define UPDATEDLG_H
-
+#ifndef UPDATEDIALOG_H
+#define UPDATEDIALOG_H
 
 #include <kdialog.h>
-
 
 class QComboBox;
 class QPushButton;
 class QRadioButton;
 class KLineEdit;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
-
 
 class UpdateDialog : public KDialog
 {
@@ -58,8 +54,7 @@ private:
     KLineEdit *date_edit;
 };
 
-#endif
-
+#endif // UPDATEDIALOG_H
 
 // Local Variables:
 // c-basic-offset: 4

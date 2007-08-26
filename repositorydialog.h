@@ -18,12 +18,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-#ifndef REPOSITORYDLG_H
-#define REPOSITORYDLG_H
+#ifndef REPOSITORYDIALOG_H
+#define REPOSITORYDIALOG_H
 
 #include <kdialog.h>
-
 
 class Q3ListViewItem;
 class QPushButton;
@@ -70,7 +68,6 @@ private:
     QString          m_cvsServiceInterfaceName;
 };
 
-#endif
-
+#endif // REPOSITORYDIALOG_H
 
 // kate: space-indent on; indent-width 4; replace-tabs on;

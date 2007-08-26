@@ -16,17 +16,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-#ifndef WATCHERSDLG_H
-#define WATCHERSDLG_H
-
+#ifndef WATCHERSDIALOG_H
+#define WATCHERSDIALOG_H
 
 #include <kdialog.h>
 
 class Q3Table;
 class KConfig;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
-
 
 class WatchersDialog : public KDialog
 {
@@ -42,4 +39,4 @@ private:
     KConfig& partConfig;
 };
 
-#endif
+#endif // WATCHERSDIALOG_H

@@ -18,15 +18,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-#ifndef CHANGELOGDLG_H
-#define CHANGELOGDLG_H
+#ifndef CHANGELOGDIALOG_H
+#define CHANGELOGDIALOG_H
 
 #include <kdialog.h>
 
 class KTextEdit;
 class KConfig;
-
 
 class ChangeLogDialog : public KDialog
 {
@@ -53,8 +51,7 @@ private:
     KConfig&   partConfig;
 };
 
-#endif
-
+#endif // CHANGELOGDIALOG_H
 
 // Local Variables:
 // c-basic-offset: 4

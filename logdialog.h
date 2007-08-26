@@ -17,16 +17,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-#ifndef LOGDLG_H
-#define LOGDLG_H
+#ifndef LOGDIALOG_H
+#define LOGDIALOG_H
 
 #include <kdialog.h>
 
 #include "loginfo.h"
 
 #include <q3ptrlist.h>
-
 
 class LogListView;
 class LogTreeView;
@@ -96,8 +94,7 @@ private:
     KConfig&         partConfig;
 };
 
-#endif
-
+#endif // LOGDIALOG_H
 
 // Local Variables:
 // c-basic-offset: 4

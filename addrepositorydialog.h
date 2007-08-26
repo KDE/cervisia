@@ -18,9 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-#ifndef ADDREPOSITORYDLG_H
-#define ADDREPOSITORYDLG_H
+#ifndef ADDREPOSITORYDIALOG_H
+#define ADDREPOSITORYDIALOG_H
 
 #include <kdialog.h>
 
@@ -28,7 +27,6 @@ class QCheckBox;
 class KConfig;
 class KIntNumInput;
 class KLineEdit;
-
 
 class AddRepositoryDialog : public KDialog
 {
@@ -64,8 +62,7 @@ private:
     KConfig&      partConfig;
 };
 
-#endif
-
+#endif // ADDREPOSITORYDIALOG_H
 
 // Local Variables:
 // c-basic-offset: 4

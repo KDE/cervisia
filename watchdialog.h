@@ -17,17 +17,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-#ifndef WATCHDLG_H
-#define WATCHDLG_H
-
+#ifndef WATCHDIALOG_H
+#define WATCHDIALOG_H
 
 #include <kdialog.h>
 
-
 class QRadioButton;
 class QCheckBox;
-
 
 class WatchDialog : public KDialog
 {
@@ -44,8 +40,7 @@ private:
     QCheckBox *commitbox, *editbox, *uneditbox;
 };
 
-#endif
-
+#endif // WATCHDIALOG_H
 
 // Local Variables:
 // c-basic-offset: 4

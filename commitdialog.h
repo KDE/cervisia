@@ -18,9 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-#ifndef COMMITDLG_H
-#define COMMITDLG_H
+#ifndef COMMITDIALOG_H
+#define COMMITDIALOG_H
 
 #include <qstringlist.h>
 #include <kdialog.h>
@@ -76,8 +75,7 @@ private:
     OrgKdeCervisiaCvsserviceCvsserviceInterface*    cvsService;     // for diff dialog
 };
 
-#endif
-
+#endif // COMMITDIALOG_H
 
 // Local Variables:
 // c-basic-offset: 4

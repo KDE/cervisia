@@ -16,9 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-#ifndef PATCHOPTIONDLG_H
-#define PATCHOPTIONDLG_H
+#ifndef PATCHOPTIONDIALOG_H
+#define PATCHOPTIONDIALOG_H
 
 #include <kdialog.h>
 
@@ -26,10 +25,8 @@ class QCheckBox;
 class Q3VButtonGroup;
 class KIntNumInput;
 
-
 namespace Cervisia
 {
-
 
 class PatchOptionDialog : public KDialog
 {
@@ -54,7 +51,6 @@ private:
     QCheckBox*     m_caseChangesChk;
 };
 
-
 }
 
-#endif
+#endif // PATCHOPTIONDIALOG_H
