@@ -33,7 +33,7 @@ class UpdateDialog : public KDialog
     Q_OBJECT
 
 public:
-    UpdateDialog( OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
+    explicit UpdateDialog( OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
                   QWidget *parent=0, const char *name=0 );
 
     bool byTag() const;

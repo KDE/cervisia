@@ -33,7 +33,7 @@ class CvsInitDialog : public KDialog
     Q_OBJECT
 
 public:
-    CvsInitDialog(QWidget* parent = 0, const char* name = 0);
+    explicit CvsInitDialog(QWidget* parent = 0, const char* name = 0);
 
     QString directory() const;
    

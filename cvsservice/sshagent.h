@@ -33,7 +33,7 @@ class SshAgent : public QObject
     Q_OBJECT
 
 public:
-    SshAgent(QObject* parent = 0, const char* name = 0);
+    explicit SshAgent(QObject* parent = 0, const char* name = 0);
     ~SshAgent();
 
     bool querySshAgent();
