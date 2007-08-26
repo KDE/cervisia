@@ -32,7 +32,7 @@ namespace Cervisia
 
 
 /**
- * Dumb data struct to store informations of a tag plus some
+ * Dumb data struct to store information of the tags plus some
  * convenience methods. The struct is used by the LogInfo struct.
  */
 struct TagInfo

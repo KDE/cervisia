@@ -375,7 +375,7 @@ void QtTableView::setLeftCell( int col )
 }
 
 /*!
-  Scrolls the table so that the cell at row \a row and colum \a
+  Scrolls the table so that the cell at row \a row and column \a
   col becomes the top-left cell in the view.  The cell at the extreme
   top left of the table is at position (0,0).
   \sa setLeftCell(), setTopCell(), setOffset()
