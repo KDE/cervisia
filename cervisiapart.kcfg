@@ -4,7 +4,7 @@
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile name="cervisiapartrc" />
-  <include>kglobalsettings.h</include>
+  <include>kcolorscheme.h</include>
   <group name="Colors" >
     <entry name="DiffChangeColor" key="DiffChange" type="Color">
       <default>#edbebe</default>
@@ -26,7 +26,7 @@
       <default>#ff8282</default>
     </entry>
     <entry name="NotInCvsColor" key="NotInCvsColor" type="Color">
-      <default code="true">KGlobalSettings::textColor()</default>
+      <default code="true">KColorScheme(QPalette::Active, KColorScheme::View).foreground().color()</default>
     </entry>
   </group>
   <group name="LookAndFeel">

@@ -29,7 +29,7 @@
 #include <QTextStream>
 
 #include <kdebug.h>
-#include <kglobalsettings.h>
+#include <kcolorscheme.h>
 #include <kiconloader.h>
 #include <klocale.h>
 
@@ -699,7 +699,7 @@ void UpdateFileItem::paintCell(QPainter *p,
 
     const QFont oldFont(p->font());
     QColorGroup mycg(cg);
-    if (color.isValid() && color != KGlobalSettings::textColor())
+    if (color.isValid() && color != KColorScheme(QPalette::Active, KColorScheme::View).foreground().color())
     {
         QFont myFont(oldFont);
         myFont.setBold(true);

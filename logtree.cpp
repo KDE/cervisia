@@ -24,7 +24,7 @@
 #include <qpainter.h>
 #include <kdebug.h>
 #include <kglobal.h>
-#include <kglobalsettings.h>
+#include <kcolorscheme.h>
 
 #include "loginfo.h"
 #include "tooltip.h"
@@ -400,8 +400,8 @@ void LogTreeView::paintRevisionCell(QPainter *p,
     // The box itself
     if (selected)
     {
-        p->fillRect(rect, KGlobalSettings::highlightColor());
-        p->setPen(KGlobalSettings::highlightedTextColor());
+        p->fillRect(rect, KColorScheme(QPalette::Active, KColorScheme::Selection).background().color());
+        p->setPen(KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color());
     }
     else
     {

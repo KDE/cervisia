@@ -17,7 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #include "diffview.h"
 
 #include <qapplication.h>
@@ -30,9 +29,8 @@
 
 #include <kconfig.h>
 #include <kdebug.h>
-#include <kglobalsettings.h>
+#include <kcolorscheme.h>
 #include <klocale.h>
-
 
 class DiffViewItem
 {
@@ -319,8 +317,8 @@ void DiffView::paintCell(QPainter *p, int row, int col)
     QFont oldFont(p->font());
     if (item->type==Separator)
     {
-        backgroundColor = KGlobalSettings::highlightColor();
-        p->setPen(KGlobalSettings::highlightedTextColor());
+        backgroundColor = KColorScheme(QPalette::Active, KColorScheme::Selection).background().color();
+        p->setPen(KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color());
         inverted = false;
         align = Qt::AlignLeft;
         innerborder = 0;
@@ -332,8 +330,8 @@ void DiffView::paintCell(QPainter *p, int row, int col)
     }
     else if (col == 0 && linenos)
     {
-        backgroundColor = KGlobalSettings::highlightColor();
-        p->setPen(KGlobalSettings::highlightedTextColor());
+        backgroundColor = KColorScheme(QPalette::Active, KColorScheme::Selection).background().color();
+        p->setPen(KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color());
         inverted = false;
         align = Qt::AlignLeft;
         innerborder = 0;
@@ -344,8 +342,8 @@ void DiffView::paintCell(QPainter *p, int row, int col)
     }
     else if (marker && (col == 0 || col == 1))
     {
-        backgroundColor = KGlobalSettings::alternateBackgroundColor();
-        p->setPen(KGlobalSettings::textColor());
+        backgroundColor = KColorScheme(QPalette::Active, KColorScheme::View).background(KColorScheme::AlternateBackground).color();
+        p->setPen(KColorScheme(QPalette::Active, KColorScheme::View).foreground().color());
         inverted = false;
         align = Qt::AlignRight;
         innerborder = BORDER;
@@ -359,8 +357,8 @@ void DiffView::paintCell(QPainter *p, int row, int col)
             (item->type==Change)? diffChangeColor
             : (item->type==Insert)? diffInsertColor
             : (item->type==Delete)? diffDeleteColor
-            : (item->type==Neutral)? KGlobalSettings::alternateBackgroundColor() : KGlobalSettings::baseColor();
-        p->setPen(KGlobalSettings::textColor());
+            : (item->type==Neutral)? KColorScheme(QPalette::Active, KColorScheme::View).background(KColorScheme::AlternateBackground).color() : KColorScheme(QPalette::Active, KColorScheme::View).background().color();
+        p->setPen(KColorScheme(QPalette::Active, KColorScheme::View).foreground().color());
         inverted = item->inverted;
         align = Qt::AlignLeft;
         innerborder = 0;
@@ -370,7 +368,7 @@ void DiffView::paintCell(QPainter *p, int row, int col)
     if (inverted)
     {
         p->setPen(backgroundColor);
-        backgroundColor = KGlobalSettings::textColor();
+        backgroundColor = KColorScheme(QPalette::Active, KColorScheme::View).foreground().color();
         QFont f(oldFont);
         f.setBold(true);
         p->setFont(f);
@@ -451,7 +449,7 @@ void DiffZoomWidget::paintEvent(QPaintEvent *)
 
     QPainter p(this);
     p.fillRect(0, scrollBarGroove.y(), width(), scrollBarGroove.height(),
-               KGlobalSettings::baseColor());
+               KColorScheme(QPalette::Active, KColorScheme::View).background().color());
     if (const unsigned int numberOfLines = lineTypes.size())
     {
         const double scale(((double) scrollBarGroove.height()) / numberOfLines);
@@ -481,7 +479,7 @@ void DiffZoomWidget::paintEvent(QPaintEvent *)
                 break;
             case ' ':
             case 'N':
-                color = KGlobalSettings::alternateBackgroundColor();
+                color = KColorScheme(QPalette::Active, KColorScheme::View).background(KColorScheme::AlternateBackground).color();
                 break;
             }
 

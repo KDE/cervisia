@@ -22,7 +22,7 @@
 #include <q3header.h>
 #include <qpainter.h>
 #include <kconfig.h>
-#include <kglobalsettings.h>
+#include <kcolorscheme.h>
 #include <kconfiggroup.h>
 
 #include "loginfo.h"
@@ -106,13 +106,13 @@ void AnnotateViewItem::paintCell(QPainter *p, const QColorGroup &, int col, int 
     switch (col)
     {
     case LineNumberColumn:
-        backgroundColor = KGlobalSettings::highlightColor();
-        p->setPen(KGlobalSettings::highlightedTextColor());
+        backgroundColor = KColorScheme(QPalette::Active, KColorScheme::Selection).background().color();
+        p->setPen(KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color());
         break;
     default:
-        backgroundColor = m_odd ? KGlobalSettings::baseColor()
-                                : KGlobalSettings::alternateBackgroundColor();
-        p->setPen(KGlobalSettings::textColor());
+        backgroundColor = m_odd ? KColorScheme(QPalette::Active, KColorScheme::View).background().color()
+                                : KColorScheme(QPalette::Active, KColorScheme::View).background(KColorScheme::AlternateBackground).color();
+        p->setPen(KColorScheme(QPalette::Active, KColorScheme::View).foreground().color());
         break;
     };
 
