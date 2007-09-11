@@ -24,6 +24,7 @@
 
 #include <qdir.h>
 #include <qpainter.h>
+#include <qregexp.h>
 
 #include <kdebug.h>
 #include <kglobalsettings.h>
@@ -246,6 +247,53 @@ UpdateItem* UpdateDirItem::findItem(const QString& name) const
     return (it != m_itemsByName.end()) ? *it : 0;
 }
 
+// Qt-3.3.8 changed the parsing in QDateTime::fromString() but introduced
+// a bug which leads to the problem that days with 1 digit will incorrectly being
+// parsed as day 0 - which is invalid.
+// workaround with the implementation from Qt-3.3.6
+QDateTime parseDateTime(const QString &s)
+{
+        static const char * const qt_shortMonthNames[] = {
+	"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+	"Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+
+	QString monthName( s.mid( 4, 3 ) );
+	int month = -1;
+	// Assume that English monthnames are the default
+	for ( int i = 0; i < 12; ++i ) {
+	    if ( monthName == qt_shortMonthNames[i] ) {
+		month = i + 1;
+		break;
+	    }
+	}
+	// If English names can't be found, search the localized ones
+	if ( month == -1 ) {
+	    for ( int i = 1; i <= 12; ++i ) {
+		if ( monthName == QDate::shortMonthName( i ) ) {
+		    month = i;
+		    break;
+		}
+	    }
+	}
+	if ( month < 1 || month > 12 ) {
+	    qWarning( "QDateTime::fromString: Parameter out of range" );
+	    QDateTime dt;
+	    return dt;
+	}
+	int day = s.mid( 8, 2 ).simplifyWhiteSpace().toInt();
+	int year = s.right( 4 ).toInt();
+	QDate date( year, month, day );
+	QTime time;
+	int hour, minute, second;
+	int pivot = s.find( QRegExp(QString::fromLatin1("[0-9][0-9]:[0-9][0-9]:[0-9][0-9]")) );
+	if ( pivot != -1 ) {
+	    hour = s.mid( pivot, 2 ).toInt();
+	    minute = s.mid( pivot+3, 2 ).toInt();
+	    second = s.mid( pivot+6, 2 ).toInt();
+	    time.setHMS( hour, minute, second );
+	}
+	return QDateTime( date, time );
+}
 
 // Format of the CVS/Entries file:
 //   /NAME/REVISION/[CONFLICT+]TIMESTAMP/OPTIONS/TAGDATE
@@ -304,7 +352,9 @@ void UpdateDirItem::syncWithEntries()
                 }
                 else
                 {
-                    const QDateTime date(QDateTime::fromString(timestamp)); // UTC Time
+                    // workaround Qt-3.3.8 bug with our own function (see function above)
+                    // const QDateTime date(QDateTime::fromString(timestamp)); // UTC Time
+                    const QDateTime date(parseDateTime(timestamp)); // UTC Time
                     QDateTime fileDateUTC;
                     fileDateUTC.setTime_t(entry.m_dateTime.toTime_t(), Qt::UTC);
                     if (date != fileDateUTC)
