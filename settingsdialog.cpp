@@ -243,7 +243,6 @@ void SettingsDialog::addGeneralPage()
     QFrame* generalPage = new QFrame;
     KPageWidgetItem *page = new KPageWidgetItem( generalPage, i18n("General") );
     page->setIcon( KIcon(LoadIcon("misc")) );
-    addPage(page);
     
     QVBoxLayout* layout = new QVBoxLayout(generalPage);
     layout->setSpacing(KDialog::spacingHint());
@@ -265,6 +264,8 @@ void SettingsDialog::addGeneralPage()
     layout->addWidget(cvspathedit);
 
     layout->addStretch();
+
+    addPage(page);
 }
 
 
@@ -276,9 +277,6 @@ void SettingsDialog::addDiffPage()
     QFrame* diffPage = new QFrame;
     KPageWidgetItem *page = new KPageWidgetItem( diffPage, i18n("Diff Viewer") );
     page->setIcon( KIcon(LoadIcon("vcs_diff")) );
-    addPage(page);
-
-
 
     QGridLayout* layout = new QGridLayout(diffPage);
 
@@ -315,6 +313,8 @@ void SettingsDialog::addDiffPage()
     // add dummy row to take up the vertical space
     layout->addWidget(0, 4, 0, 0, 1);
     layout->setRowStretch(4, 10);
+
+    addPage(page);
 }
 
 
@@ -326,8 +326,6 @@ void SettingsDialog::addStatusPage()
     KVBox* statusPage = new KVBox;
     KPageWidgetItem *page = new KPageWidgetItem( statusPage, i18n("Status") );
     page->setIcon( KIcon(LoadIcon("fork")) );
-    addPage(page);
-
 
     remotestatusbox = new QCheckBox(i18n("When opening a sandbox from a &remote repository,\n"
                                          "start a File->Status command automatically"), statusPage);
@@ -336,6 +334,8 @@ void SettingsDialog::addStatusPage()
 
     // dummy widget to take up the vertical space
     new QWidget(statusPage);
+
+    addPage(page);
 }
 
 
@@ -347,11 +347,12 @@ void SettingsDialog::addAdvancedPage()
     KVBox* frame = new KVBox;
     KPageWidgetItem *page = new KPageWidgetItem( frame, i18n("Advanced") );
     page->setIcon( KIcon(LoadIcon("configure")) );
-    addPage(page);
 
     m_advancedPage = new AdvancedPage(frame);
     m_advancedPage->kcfg_Timeout->setRange(0, 50000, 100, false);
     m_advancedPage->kcfg_Compression->setRange(0, 9, 1, false);
+
+    addPage(page);
 }
 
 
@@ -363,8 +364,6 @@ void SettingsDialog::addLookAndFeelPage()
     KVBox* lookPage = new KVBox;
     KPageWidgetItem *page = new KPageWidgetItem( lookPage, i18n("Appearance") );
     page->setIcon( KIcon(LoadIcon("looknfeel")) );
-    addPage(page);
-
 
     Q3GroupBox* fontGroupBox = new Q3GroupBox(4, Qt::Vertical, i18n("Fonts"),
                                             lookPage);
@@ -413,6 +412,8 @@ void SettingsDialog::addLookAndFeelPage()
     notInCvsLabel->setBuddy(m_notInCvsButton);
 
     m_splitterBox = new QCheckBox(i18n("Split main window &horizontally"), lookPage);
+
+    addPage(page);
 }
 
 #include "settingsdialog.moc"
