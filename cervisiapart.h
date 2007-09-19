@@ -56,7 +56,7 @@ class CervisiaPart : public KParts::ReadOnlyPart
     Q_OBJECT
 
 public:
-    CervisiaPart( QWidget *parentWidget, QObject *parent, const QStringList& args = QStringList());
+    CervisiaPart( QWidget *parentWidget, QObject *parent, const QVariantList& args = QVariantList());
     virtual ~CervisiaPart();
 
     /**
@@ -190,8 +190,6 @@ private:
     JobType                     m_jobType;
     QString 			m_cvsServiceInterfaceName;
 };
-
-typedef KParts::GenericFactory<CervisiaPart> CervisiaFactory;
 
 /**
  * A mysterious class, needed to make Konqueror intrgration work.

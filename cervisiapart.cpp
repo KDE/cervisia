@@ -83,10 +83,12 @@ using Cervisia::TagDialog;
 
 #define COMMIT_SPLIT_CHAR '\r'
 
-K_EXPORT_COMPONENT_FACTORY( libcervisiapart, CervisiaFactory )
+K_PLUGIN_FACTORY( CervisiaFactory, registerPlugin<CervisiaPart>(); )
+K_EXPORT_PLUGIN( CervisiaFactory( "cervisiapart" ) )
+
 
 CervisiaPart::CervisiaPart( QWidget *parentWidget,
-                            QObject *parent, const QStringList& /*args*/ )
+                            QObject *parent, const QVariantList& /*args*/ )
     : KParts::ReadOnlyPart( parent )
     , hasRunningJob( false )
     , opt_hideFiles( false )

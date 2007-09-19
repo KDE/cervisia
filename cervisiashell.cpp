@@ -41,11 +41,10 @@ CervisiaShell::CervisiaShell( const char *name )
     setObjectName( name );
     setXMLFile( "cervisiashellui.rc" );
 
-    KLibFactory* factory = KLibLoader::self()->factory("libcervisiapart");
+    KPluginFactory *factory = KPluginLoader("libcervisiapart").factory();
     if( factory )
     {
-        m_part = static_cast<KParts::ReadOnlyPart*>(factory->create(this,
-                                      "KParts::ReadOnlyPart"));
+        m_part = factory->create< KParts::ReadOnlyPart >(this);
         if( m_part ) {
 	    m_part->setObjectName( "cervisiaview" );
             setCentralWidget(m_part->widget());
