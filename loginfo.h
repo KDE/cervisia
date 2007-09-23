@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003-2005 André Wöbbeking <Woebbeking@web.de>
+ * Copyright (c) 2003-2007 AndrÃ© WÃ¶bbeking <Woebbeking@kde.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
