@@ -54,8 +54,8 @@ namespace
     // helper method to load icons for configuration pages
     inline QPixmap LoadIcon(const char* iconName)
     {
-        return KIconLoader::global()->loadIcon(QLatin1String(iconName), K3Icon::NoGroup,
-                                 K3Icon::SizeMedium);
+        return KIconLoader::global()->loadIcon(QLatin1String(iconName), KIconLoader::NoGroup,
+                                 KIconLoader::SizeMedium);
     }
 }
 

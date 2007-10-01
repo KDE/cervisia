@@ -199,7 +199,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
         else
             shell->openURL();
 
-        shell->setIcon(qApp->windowIcon().pixmap(IconSize(K3Icon::Desktop),IconSize(K3Icon::Desktop)));
+        shell->setIcon(qApp->windowIcon().pixmap(IconSize(KIconLoader::Desktop),IconSize(KIconLoader::Desktop)));
         shell->show();
     }
 
