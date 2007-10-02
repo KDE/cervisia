@@ -41,7 +41,7 @@ CvsLoginJob::CvsLoginJob(unsigned jobNum)
     m_dbusObjectPath = "/CvsLoginJob" + QString::number(jobNum); 
     QDBusConnection::sessionBus().registerObject(m_dbusObjectPath, this);
 
-    m_Proc = new PtyProcess;
+    m_Proc = new KDESu::PtyProcess;
 }
 
 

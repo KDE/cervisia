@@ -47,7 +47,7 @@ public slots:
     QStringList output();
 
 private:
-    PtyProcess*    m_Proc;
+    KDESu::PtyProcess*    m_Proc;
     QString        m_Server;
     QString        m_Rsh;
     QByteArray     m_CvsClient;
