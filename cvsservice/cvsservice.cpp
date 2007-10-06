@@ -30,6 +30,7 @@
 #include <kmessagebox.h>
 #include <kshell.h>
 #include <kglobal.h>
+#include <kdebug.h>
 
 #include "cvsjob.h"
 #include "cvsloginjob.h"

@@ -28,6 +28,7 @@
 #include <qstyleoption.h>
 
 #include <kconfig.h>
+#include <kconfiggroup.h>
 #include <kdebug.h>
 #include <kcolorscheme.h>
 #include <klocale.h>
