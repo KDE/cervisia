@@ -437,7 +437,7 @@ void CheckoutDialog::restoreUserInput()
     KConfigGroup cs(&partConfig, "CheckoutDialog");
 
     repo_combo->setEditText(cs.readEntry("Repository"));
-    workdir_edit->setText(cs.readPathEntry("Working directory"));
+    workdir_edit->setText(cs.readPathEntry("Working directory", QString()));
 
     if (act == Import)
     {

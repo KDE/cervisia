@@ -250,7 +250,7 @@ bool DiffDialog::parseCvsDiff(OrgKdeCervisiaCvsserviceCvsserviceInterface* servi
     // place, but this design at least makes the handling trans-
     // parent for the calling routines
 
-    QString extdiff = cs.readPathEntry("ExternalDiff");
+    QString extdiff = cs.readPathEntry("ExternalDiff", QString());
     if (!extdiff.isEmpty())
         {
             callExternalDiff(extdiff, service, fileName, revA, revB);
