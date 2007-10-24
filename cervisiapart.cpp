@@ -81,7 +81,7 @@
 
 using Cervisia::TagDialog;
 
-#define COMMIT_SPLIT_CHAR '\r'
+#define COMMIT_SPLIT_CHAR '\r' // XXX this is ignored. need to handle list config entries yourself if you insist.
 
 K_PLUGIN_FACTORY( CervisiaFactory, registerPlugin<CervisiaPart>(); )
 K_EXPORT_PLUGIN( CervisiaFactory( "cervisiapart" ) )
@@ -963,7 +963,7 @@ void CervisiaPart::slotCommit()
                 recentCommits.remove( recentCommits.last() );
 
             KConfigGroup conf( config(), "CommitLogs" );
-            conf.writeEntry( sandbox, recentCommits, COMMIT_SPLIT_CHAR );
+            conf.writeEntry( sandbox, recentCommits );
         }
 
         update->prepareJob(opt_commitRecursive, UpdateView::Commit);
@@ -1817,7 +1817,7 @@ bool CervisiaPart::openSandbox(const QString &dirname)
     }
 
     //load the recentCommits for this app from the KConfig app
-    recentCommits = conf->group( "CommitLogs" ).readEntry( sandbox,QStringList(), COMMIT_SPLIT_CHAR );
+    recentCommits = conf->group( "CommitLogs" ).readEntry( sandbox,QStringList() );
 
     return true;
 }
