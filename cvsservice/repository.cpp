@@ -261,7 +261,7 @@ void Repository::Private::readConfig()
     }
 
     // get remote shell client to access the remote repository
-    rsh = group.readPathEntry("rsh");
+    rsh = group.readPathEntry("rsh", QString());
 
     // get program to start on the server side
     server = group.readEntry("cvs_server");

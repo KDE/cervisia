@@ -170,7 +170,7 @@ bool CervisiaShell::queryExit()
 
 void CervisiaShell::readProperties(const KConfigGroup& config)
 {
-    m_lastOpenDir = config.readPathEntry("Current Directory");
+    m_lastOpenDir = config.readPathEntry("Current Directory", QString());
 
     // if the session is restoring, make sure we open the URL
     // since it's not handled by main()

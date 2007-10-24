@@ -145,7 +145,7 @@ void SettingsDialog::readSettings()
     contextedit->setValue(group.readEntry("ContextLines", 65535));
     tabwidthedit->setValue(group.readEntry("TabWidth", 8));
     diffoptedit->setText(group.readEntry("DiffOptions"));
-    extdiffedit->setUrl(group.readPathEntry("ExternalDiff"));
+    extdiffedit->setUrl(group.readPathEntry("ExternalDiff", QString()));
     remotestatusbox->setChecked(group.readEntry("StatusForRemoteRepos", false));
     localstatusbox->setChecked(group.readEntry("StatusForLocalRepos", false));
 
