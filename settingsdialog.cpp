@@ -282,7 +282,8 @@ void SettingsDialog::addDiffPage()
 
     QLabel *contextlabel = new QLabel( i18n("&Number of context lines in diff dialog:"), diffPage );
     contextedit = new KIntNumInput( 0, diffPage );
-    contextedit->setRange(0, 65535, 1, false);
+    contextedit->setRange(0, 65535);
+    contextedit->setSliderEnabled(false);
     contextlabel->setBuddy(contextedit);
 
     layout->addWidget(contextlabel, 0, 0);
@@ -297,7 +298,8 @@ void SettingsDialog::addDiffPage()
 
     QLabel *tabwidthlabel = new QLabel(i18n("Tab &width in diff dialog:"), diffPage);
     tabwidthedit = new KIntNumInput(0, diffPage);
-    tabwidthedit->setRange(1, 16, 1, false);
+    tabwidthedit->setRange(1, 16);
+    tabwidthedit->setSliderEnabled(false);
     tabwidthlabel->setBuddy(tabwidthedit);
 
     layout->addWidget(tabwidthlabel, 2, 0);
@@ -349,8 +351,10 @@ void SettingsDialog::addAdvancedPage()
     page->setIcon( KIcon(LoadIcon("configure")) );
 
     m_advancedPage = new AdvancedPage(frame);
-    m_advancedPage->kcfg_Timeout->setRange(0, 50000, 100, false);
-    m_advancedPage->kcfg_Compression->setRange(0, 9, 1, false);
+    m_advancedPage->kcfg_Timeout->setRange(0, 50000, 100);
+    m_advancedPage->kcfg_Timeout->setSliderEnabled(false);
+    m_advancedPage->kcfg_Compression->setRange(0, 9);
+    m_advancedPage->kcfg_Compression->setSliderEnabled(false);
 
     addPage(page);
 }
