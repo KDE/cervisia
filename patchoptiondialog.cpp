@@ -59,7 +59,8 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent)
     QLabel* contextLinesLbl = new QLabel(i18n("&Number of context lines:"),
                                          mainWidget);
     m_contextLines = new KIntNumInput(3, mainWidget);
-    m_contextLines->setRange(2, 65535, 1, false);
+    m_contextLines->setRange(2, 65535, 1);
+    m_contextLines->setSliderEnabled(false);
     contextLinesLbl->setBuddy(m_contextLines);
 
     QBoxLayout* contextLinesLayout = new QHBoxLayout();

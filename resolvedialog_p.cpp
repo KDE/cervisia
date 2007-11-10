@@ -25,7 +25,7 @@
 using namespace Cervisia;
 
 
-ResolveEditorDialog::ResolveEditorDialog(KConfig& cfg, QWidget *parent, const char *name)
+ResolveEditorDialog::ResolveEditorDialog(KConfig& cfg, QWidget *parent)
     : KDialog(parent)
     , m_partConfig(cfg)
 {

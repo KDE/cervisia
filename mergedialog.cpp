@@ -39,7 +39,7 @@
 
 
 MergeDialog::MergeDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
-                         QWidget *parent, const char *name)
+                         QWidget *parent)
     : KDialog(parent),
       cvsService(service)
 {

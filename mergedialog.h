@@ -33,7 +33,7 @@ class MergeDialog : public KDialog
 
 public:
     explicit MergeDialog( OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
-                 QWidget *parent=0, const char *name=0 );
+                          QWidget *parent=0 );
 
     bool byBranch() const;
     QString branch() const;

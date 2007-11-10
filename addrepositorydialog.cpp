@@ -86,7 +86,8 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
     m_useDifferentCompression = new QCheckBox(i18n("Use different &compression level:"), compressionBox);
 
     m_compressionLevel = new KIntNumInput(compressionBox);
-    m_compressionLevel->setRange(0, 9, 1, false);
+    m_compressionLevel->setRange(0, 9, 1);
+    m_compressionLevel->setSliderEnabled(false);
     layout->addWidget(compressionBox);
 
     m_retrieveCvsignoreFile = new QCheckBox(i18n("Download cvsignore file from "

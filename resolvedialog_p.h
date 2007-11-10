@@ -30,7 +30,7 @@ namespace Cervisia
 class ResolveEditorDialog : public KDialog
 {
 public:
-    explicit ResolveEditorDialog(KConfig& cfg, QWidget* parent=0, const char* name=0);
+    explicit ResolveEditorDialog(KConfig& cfg, QWidget* parent=0);
     virtual ~ResolveEditorDialog();
 
     void setContent(const QString& text);

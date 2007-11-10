@@ -48,18 +48,18 @@ ProtocolView::ProtocolView(const QString& appId, QWidget *parent, const char *na
     KConfigGroup config(CervisiaPart::config(), "LookAndFeel");
     setFont(config.readEntry("ProtocolFont",QFont()));
 
-    config.changeGroup("Colors");
-    conflictColor=config.readEntry("Conflict", QColor(255, 130, 130));
-    localChangeColor=config.readEntry("LocalChange", QColor(130, 130, 255));
-    remoteChangeColor=config.readEntry("RemoteChange", QColor(70, 210, 70));
-    
+    const KConfigGroup colorConfig(CervisiaPart::config(), "Colors");
+    conflictColor=colorConfig.readEntry("Conflict", QColor(255, 130, 130));
+    localChangeColor=colorConfig.readEntry("LocalChange", QColor(130, 130, 255));
+    remoteChangeColor=colorConfig.readEntry("RemoteChange", QColor(70, 210, 70));
+
     //kDebug()<<"protocol view appId : "<<appId;
-    
+
     job = new OrgKdeCervisiaCvsserviceCvsjobInterface(appId, "/NonConcurrentJob",QDBusConnection::sessionBus(), this);
-    
+
     QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia.cvsservice.cvsjob", "jobExited", this, SLOT(slotJobExited(bool,int)));
-   QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia.cvsservice.cvsjob", "receivedStdout", this, SLOT(slotReceivedOutput(QString)));
-   QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia.cvsservice.cvsjob", "receivedStderr", this, SLOT(slotReceivedOutput(QString)));
+    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia.cvsservice.cvsjob", "receivedStdout", this, SLOT(slotReceivedOutput(QString)));
+    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia.cvsservice.cvsjob", "receivedStderr", this, SLOT(slotReceivedOutput(QString)));
 
 }
 

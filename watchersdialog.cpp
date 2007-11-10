@@ -34,7 +34,7 @@
 #include "progressdialog.h"
 
 
-WatchersDialog::WatchersDialog(KConfig& cfg, QWidget* parent, const char* name)
+WatchersDialog::WatchersDialog(KConfig& cfg, QWidget* parent)
     : KDialog(parent)
     , partConfig(cfg)
 {

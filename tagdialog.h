@@ -38,7 +38,7 @@ public:
     enum ActionType { Create, Delete };
     
     TagDialog( ActionType action, OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
-               QWidget *parent=0, const char *name=0 );
+               QWidget *parent=0 );
 
     bool branchTag() const;
     bool forceTag() const;

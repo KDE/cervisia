@@ -571,7 +571,8 @@ void ResolveDialog::editClicked()
     for( int i = 0; i < total; ++i )
         mergedPart += merge->stringAtOffset(offset+i);
 
-    ResolveEditorDialog *dlg = new ResolveEditorDialog(partConfig, this, "edit");
+    ResolveEditorDialog *dlg = new ResolveEditorDialog(partConfig, this);
+    dlg->setObjectName("edit");
     dlg->setContent(mergedPart);
 
     if (dlg->exec())

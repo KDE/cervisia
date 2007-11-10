@@ -35,7 +35,7 @@
 using Cervisia::CvsInitDialog;
 
 
-CvsInitDialog::CvsInitDialog(QWidget* parent, const char* name)
+CvsInitDialog::CvsInitDialog(QWidget* parent)
     : KDialog(parent)
 {
     setCaption(i18n("Create New Repository (cvs init)"));

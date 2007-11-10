@@ -28,8 +28,7 @@ class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 class WatchersDialog : public KDialog
 {
 public:
-    explicit WatchersDialog(KConfig& cfg, QWidget* parent = 0,
-                            const char* name = 0);
+    explicit WatchersDialog(KConfig& cfg, QWidget* parent = 0);
     virtual ~WatchersDialog();
 
     bool parseWatchers(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService, const QStringList& files);

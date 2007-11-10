@@ -39,21 +39,21 @@
 using Cervisia::TagDialog;
 
 TagDialog::TagDialog(ActionType action, OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
-                     QWidget *parent, const char *name)
+                     QWidget *parent)
     : KDialog(parent), 
       act(action),
       cvsService(service),
       branchtag_button(0),
       forcetag_button(0)
 {
-	setButtons(Ok | Cancel | Help);
-	setDefaultButton(Ok);
-	setModal(true);
-	showButtonSeparator(true);
+    setButtons(Ok | Cancel | Help);
+    setDefaultButton(Ok);
+    setModal(true);
+    showButtonSeparator(true);
     setCaption( (action==Delete)? i18n("CVS Delete Tag") : i18n("CVS Tag") );
 
     QFrame* mainWidget = new QFrame(this);
-	setMainWidget(mainWidget);
+    setMainWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
     layout->setSpacing(spacingHint());
@@ -73,7 +73,7 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisiaCvsserviceCvsserviceInterf
                      this, SLOT(tagButtonClicked()) );
 
             QBoxLayout *tagedit_layout = new QHBoxLayout();
-	    layout->addItem(tagedit_layout);
+            layout->addItem(tagedit_layout);
             tagedit_layout->addWidget(tag_label);
             tagedit_layout->addWidget(tag_combo);
             tagedit_layout->addWidget(tag_button);
@@ -88,7 +88,7 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisiaCvsserviceCvsserviceInterf
             tag_label->setBuddy( tag_edit );
 
             QBoxLayout *tagedit_layout = new QHBoxLayout();
-	    layout->addItem(tagedit_layout);
+            layout->addItem(tagedit_layout);
             tagedit_layout->addWidget(tag_label);
             tagedit_layout->addWidget(tag_edit);
 
@@ -97,7 +97,7 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisiaCvsserviceCvsserviceInterf
 
             forcetag_button = new QCheckBox(i18n("&Force tag creation even if tag already exists"), mainWidget);
             layout->addWidget(forcetag_button);
-	}
+        }
     connect(this, SIGNAL(okClicked()), this, SLOT(slotOk()));
     setHelp("taggingbranching");
 }
