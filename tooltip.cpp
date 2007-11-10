@@ -22,7 +22,6 @@
 #include <kglobal.h>
 #include <kglobalsettings.h>
 
-#include <qapplication.h>
 #include <qevent.h>
 #include <q3simplerichtext.h>
 #include <qtooltip.h>
@@ -49,9 +48,6 @@ bool ToolTip::eventFilter(QObject* watched, QEvent* event)
     {
         const QHelpEvent* helpEvent = static_cast<QHelpEvent*>(event);
 
-#ifdef __GNUC__
-#warning remove rect, not needed with Qt4
-#endif
         QRect rect;
         QString text;
         emit queryToolTip(helpEvent->pos(), rect, text);
@@ -59,14 +55,11 @@ bool ToolTip::eventFilter(QObject* watched, QEvent* event)
         if (rect.isValid() && !text.isEmpty())
         {
             QWidget* parentWidget = static_cast<QWidget*>(parent());
-#ifdef __GNUC__
-#warning which font should I use
-#endif
             text = truncateLines(text,
-                                 QApplication::font(),
+                                 QToolTip::font(),
                                  helpEvent->globalPos(),
                                  KGlobalSettings::desktopGeometry(parentWidget));
-            QToolTip::showText(helpEvent->globalPos(), text);
+            QToolTip::showText(helpEvent->globalPos(), text, parentWidget, rect);
         }
 
         return true;
