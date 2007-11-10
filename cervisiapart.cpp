@@ -84,7 +84,7 @@ using Cervisia::TagDialog;
 #define COMMIT_SPLIT_CHAR '\r' // XXX this is ignored. need to handle list config entries yourself if you insist.
 
 K_PLUGIN_FACTORY( CervisiaFactory, registerPlugin<CervisiaPart>(); )
-K_EXPORT_PLUGIN( CervisiaFactory( "cervisiapart" ) )
+    K_EXPORT_PLUGIN( CervisiaFactory( "cervisiapart", "cervisia" ) )
 
 
 CervisiaPart::CervisiaPart( QWidget *parentWidget,
@@ -110,9 +110,8 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
     , m_currentEditMenu(0)
     , m_jobType(Unknown)
 {
-    KGlobal::locale()->insertCatalog("cervisia");
-
     setComponentData( CervisiaFactory::componentData() );
+
     m_browserExt = new CervisiaBrowserExtension( this );
 
     // start the cvs D-Bus service
@@ -174,11 +173,11 @@ CervisiaPart::~CervisiaPart()
 {
     // stop the cvs DCOP service and delete reference
     if( cvsService )
-        cvsService->quit();
-    delete cvsService;
-
-    if( cvsService )
+    {
         writeSettings();
+        cvsService->quit();
+        delete cvsService;
+    }
 }
 
 KConfig *CervisiaPart::config()
@@ -1856,7 +1855,7 @@ void CervisiaPart::setFilter()
 
 void CervisiaPart::readSettings()
 {
-    KConfigGroup config( this->config(), "Session");
+    const KConfigGroup config( this->config(), "Session");
     recent->loadEntries( config );
 
     // Unfortunately, the KConfig systems sucks and we have to live
