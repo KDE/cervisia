@@ -21,18 +21,19 @@
 
 #include "cervisiashell.h"
 
+#include <kactioncollection.h>
+#include <kapplication.h>
 #include <kconfig.h>
 #include <kedittoolbar.h>
 #include <khelpmenu.h>
-#include <kapplication.h>
-#include <kshortcutsdialog.h>
-#include <klibloader.h>
 #include <klocale.h>
+#include <kpluginfactory.h>
+#include <kpluginloader.h>
 #include <kmessagebox.h>
-#include <kstatusbar.h>
+#include <kshortcutsdialog.h>
 #include <kstandardaction.h>
+#include <kstatusbar.h>
 #include <kurl.h>
-#include <kactioncollection.h>
 
 
 CervisiaShell::CervisiaShell( const char *name )
@@ -41,19 +42,20 @@ CervisiaShell::CervisiaShell( const char *name )
     setObjectName( name );
     setXMLFile( "cervisiashellui.rc" );
 
-    KPluginFactory *factory = KPluginLoader("libcervisiapart").factory();
-    if( factory )
+    KPluginLoader loader("libcervisiapart");
+    if( KPluginFactory *factory = loader.factory() )
     {
         m_part = factory->create< KParts::ReadOnlyPart >(this);
-        if( m_part ) {
-	    m_part->setObjectName( "cervisiaview" );
+        if( m_part )
+        {
+            m_part->setObjectName( "cervisiaview" );
             setCentralWidget(m_part->widget());
-	}
+        }
     }
     else
     {
         KMessageBox::detailedError(this, i18n("The Cervisia library could not be loaded."),
-                                   KLibLoader::self()->lastErrorMessage());
+                                   loader.errorString());
         qApp->quit();
         return;
     }
