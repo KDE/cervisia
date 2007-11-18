@@ -144,7 +144,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
                      ki18n("A CVS frontend"), KAboutData::License_GPL,
                      ki18n("Copyright (c) 1999-2002 Bernd Gehrmann\n"
                                "Copyright (c) 2002-2004 the Cervisia authors"), KLocalizedString(),
-                     "http://www.kde.org/apps/cervisia");
+                     "http://cervisia.kde.org");
 
     about.addAuthor(ki18n("Bernd Gehrmann"), ki18n("Original author and former "
                     "maintainer"), "bernd@mail.berlios.de");
