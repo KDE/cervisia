@@ -83,7 +83,7 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
 
     diff1 = new DiffView(cfg, true, false, mainWidget);
     diff2 = new DiffView(cfg, true, true, mainWidget);
-    DiffZoomWidget *zoom = new DiffZoomWidget(cfg, mainWidget);
+    DiffZoomWidget *zoom = new DiffZoomWidget(mainWidget);
     zoom->setDiffView(diff2);
 
     pairlayout->addWidget(diff1, 1, 0);

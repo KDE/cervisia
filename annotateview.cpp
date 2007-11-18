@@ -21,10 +21,9 @@
 
 #include <q3header.h>
 #include <qpainter.h>
-#include <kconfig.h>
 #include <kcolorscheme.h>
-#include <kconfiggroup.h>
 
+#include "cervisiasettings.h"
 #include "loginfo.h"
 #include "tooltip.h"
 
@@ -141,7 +140,7 @@ int AnnotateViewItem::width(const QFontMetrics &fm, const Q3ListView *, int col)
   caused by a bug in QHeader::adjustHeaderSize() in Qt <= 3.0.4.
 */
 
-AnnotateView::AnnotateView(KConfig &cfg, QWidget *parent, const char *name)
+AnnotateView::AnnotateView(QWidget *parent, const char *name)
     : Q3ListView(parent, name, Qt::WNoAutoErase | Qt::WResizeNoErase)
 {
     setFrameStyle(QFrame::WinPanel | QFrame::Sunken);
@@ -163,8 +162,10 @@ AnnotateView::AnnotateView(KConfig &cfg, QWidget *parent, const char *name)
     connect(toolTip, SIGNAL(queryToolTip(const QPoint&, QRect&, QString&)),
             this, SLOT(slotQueryToolTip(const QPoint&, QRect&, QString&)));
 
-    KConfigGroup cs(&cfg, "LookAndFeel");
-    setFont(cs.readEntry("AnnotateFont",QFont()));
+    configChanged();
+
+    connect(CervisiaSettings::self(), SIGNAL(configChanged()),
+            this, SLOT(configChanged()));
 }
 
 
@@ -180,6 +181,12 @@ QSize AnnotateView::sizeHint() const
 {
     QFontMetrics fm(fontMetrics());
     return QSize(100 * fm.width("0"), 10 * fm.lineSpacing());
+}
+
+
+void AnnotateView::configChanged()
+{
+    setFont(CervisiaSettings::annotateFont());
 }
 
 

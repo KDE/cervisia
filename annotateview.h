@@ -25,9 +25,6 @@
 #include <q3listview.h>
 
 
-class KConfig;
-
-
 namespace Cervisia
 {
 struct LogInfo;
@@ -40,7 +37,7 @@ class AnnotateView : public Q3ListView
 
 public:
 
-    explicit AnnotateView( KConfig &cfg, QWidget *parent=0, const char *name=0 );
+    explicit AnnotateView( QWidget *parent=0, const char *name=0 );
 
     void addLine(const Cervisia::LogInfo& logInfo, const QString& content,
                  bool odd);
@@ -48,6 +45,8 @@ public:
     virtual QSize sizeHint() const;
 
 private slots:
+
+    void configChanged();
 
     void slotQueryToolTip(const QPoint&, QRect&, QString&);
 };

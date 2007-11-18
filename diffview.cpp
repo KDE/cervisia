@@ -33,6 +33,8 @@
 #include <kcolorscheme.h>
 #include <klocale.h>
 
+#include "cervisiasettings.h"
+
 class DiffViewItem
 {
 public:
@@ -65,24 +67,22 @@ DiffView::DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
     setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
     setBackgroundRole( QPalette::Base );
 
-    KConfigGroup group = partConfig.group("LookAndFeel");
-    setFont(group.readEntry("DiffFont",QFont()));
+    configChanged();
+
     QFontMetrics fm(font());
     setCellHeight(fm.lineSpacing());
     setCellWidth(0);
     textwidth = 0;
 
-    group = partConfig.group("General");
+    const KConfigGroup group(&partConfig, "General");
     m_tabWidth = group.readEntry("TabWidth", 8);
 
     items.setAutoDelete(true);
     linenos = withlinenos;
     marker = withmarker;
 
-    group = partConfig.group("Colors");
-    diffChangeColor=group.readEntry("DiffChange",QColor(237, 190, 190));
-    diffInsertColor=group.readEntry("DiffInsert",QColor(190, 190, 237));
-    diffDeleteColor=group.readEntry("DiffDelete",QColor(190, 237, 190));
+    connect(CervisiaSettings::self(), SIGNAL(configChanged()),
+            this, SLOT(configChanged()));
 }
 
 
@@ -122,6 +122,16 @@ void DiffView::horzPositionChanged(int val)
 {
     if (partner)
         partner->setXOffset(qMin(val,partner->maxXOffset()));
+}
+
+
+void DiffView::configChanged()
+{
+    diffChangeColor = CervisiaSettings::diffChangeColor();
+    diffInsertColor = CervisiaSettings::diffInsertColor();
+    diffDeleteColor = CervisiaSettings::diffDeleteColor();
+
+    setFont(CervisiaSettings::diffFont());
 }
 
 
@@ -387,15 +397,10 @@ void DiffView::wheelEvent(QWheelEvent *e)
 }
 
 
-DiffZoomWidget::DiffZoomWidget(KConfig& cfg, QWidget *parent, const char *name)
+DiffZoomWidget::DiffZoomWidget(QWidget *parent, const char *name)
     : QFrame(parent, name)
 {
     setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Minimum ) );
-
-    KConfigGroup group = cfg.group("Colors");
-    diffChangeColor=group.readEntry("DiffChange",QColor(237, 190, 190));
-    diffInsertColor=group.readEntry("DiffInsert",QColor(190, 190, 237));
-    diffDeleteColor=group.readEntry("DiffDelete",QColor(190, 237, 190));
 }
 
 
@@ -433,6 +438,10 @@ void DiffZoomWidget::paintEvent(QPaintEvent *)
     const QScrollBar* scrollBar = diffview->scrollBar();
     if (!scrollBar)
         return;
+
+    const QColor diffChangeColor(CervisiaSettings::diffChangeColor());
+    const QColor diffInsertColor(CervisiaSettings::diffInsertColor());
+    const QColor diffDeleteColor(CervisiaSettings::diffDeleteColor());
 
     // only y and height are important
     QStyleOptionSlider option;

@@ -34,7 +34,7 @@ AnnotateDialog::AnnotateDialog(KConfig& cfg, QWidget *parent)
     setDefaultButton(Close);
     showButtonSeparator(true);
 
-    annotate = new AnnotateView(partConfig, this);
+    annotate = new AnnotateView(this);
     setMainWidget(annotate);
 
     setHelp("annotate");

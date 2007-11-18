@@ -20,15 +20,11 @@
 
 #include "settingsdialog.h"
 
-#include <qapplication.h>
 #include <qcheckbox.h>
-#include <q3grid.h>
 #include <q3groupbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <q3vbox.h>
 #include <qwidget.h>
-#include <q3buttongroup.h>
 #include <qradiobutton.h>
 //Added by qt3to4:
 #include <QPixmap>
@@ -208,20 +204,6 @@ void SettingsDialog::writeSettings()
     CervisiaSettings::setDiffInsertColor(m_diffInsertButton->color());
     CervisiaSettings::setDiffDeleteColor(m_diffDeleteButton->color());
 
-    // I'm not yet sure whether this is a hack or not :-)
-#ifdef __GNUC__
-#warning would QApplication::topLevelWidgets be sufficient?
-#endif
-    const QWidgetList& widgets = QApplication::allWidgets();
-    Q_FOREACH (QWidget* w, widgets)
-    {
-        if (w->inherits("ProtocolView"))
-            w->setFont(m_protocolFontBox->font());
-        if (w->inherits("AnnotateView"))
-            w->setFont(m_annotateFontBox->font());
-        if (w->inherits("DiffView"))
-            w->setFont(m_diffFontBox->font());
-    }
     config->sync();
 
     CervisiaSettings::self()->writeConfig();

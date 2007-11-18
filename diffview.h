@@ -79,12 +79,16 @@ public:
     const QScrollBar *scrollBar() const
         { return verticalScrollBar(); }
 
-protected slots:
+protected Q_SLOTS:
     void vertPositionChanged(int val);
     void horzPositionChanged(int val);
 
+private Q_SLOTS:
+    void configChanged();
+
 private:
     int findLine(int lineno);
+
     DiffViewItemList items;
     bool linenos;
     bool marker;
@@ -106,7 +110,7 @@ class DiffZoomWidget : public QFrame
     Q_OBJECT
 
 public:
-    explicit DiffZoomWidget(KConfig& cfg, QWidget *parent=0, const char *name=0);
+    explicit DiffZoomWidget(QWidget *parent=0, const char *name=0);
     ~DiffZoomWidget();
 
     void setDiffView(DiffView *view);

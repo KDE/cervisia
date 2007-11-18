@@ -53,8 +53,9 @@ signals:
     void receivedLine(QString line);
     void jobFinished(bool normalExit, int exitStatus);
 
-private slots:
+private Q_SLOTS:
     void cancelJob();
+    void configChanged();
 
 private:
     void processOutput();

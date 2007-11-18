@@ -24,11 +24,11 @@
 #include <qdir.h>
 #include <q3popupmenu.h>
 #include <qtextdocument.h>
-#include <kconfig.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 
 #include "cervisiapart.h"
+#include "cervisiasettings.h"
 #include "cvsjobinterface.h"
 
 
@@ -45,14 +45,6 @@ ProtocolView::ProtocolView(const QString& appId, QWidget *parent, const char *na
     setTabChangesFocus(true);
     setTextFormat(Qt::LogText);
 
-    KConfigGroup config(CervisiaPart::config(), "LookAndFeel");
-    setFont(config.readEntry("ProtocolFont",QFont()));
-
-    const KConfigGroup colorConfig(CervisiaPart::config(), "Colors");
-    conflictColor=colorConfig.readEntry("Conflict", QColor(255, 130, 130));
-    localChangeColor=colorConfig.readEntry("LocalChange", QColor(130, 130, 255));
-    remoteChangeColor=colorConfig.readEntry("RemoteChange", QColor(70, 210, 70));
-
     //kDebug()<<"protocol view appId : "<<appId;
 
     job = new OrgKdeCervisiaCvsserviceCvsjobInterface(appId, "/NonConcurrentJob",QDBusConnection::sessionBus(), this);
@@ -61,6 +53,10 @@ ProtocolView::ProtocolView(const QString& appId, QWidget *parent, const char *na
     QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia.cvsservice.cvsjob", "receivedStdout", this, SLOT(slotReceivedOutput(QString)));
     QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia.cvsservice.cvsjob", "receivedStderr", this, SLOT(slotReceivedOutput(QString)));
 
+    configChanged();
+
+    connect(CervisiaSettings::self(), SIGNAL(configChanged()),
+            this, SLOT(configChanged()));
 }
 
 
@@ -105,6 +101,16 @@ void ProtocolView::cancelJob()
 {
     kDebug();
     job->cancel();
+}
+
+
+void ProtocolView::configChanged()
+{
+    conflictColor = CervisiaSettings::conflictColor();
+    localChangeColor = CervisiaSettings::localChangeColor();
+    remoteChangeColor = CervisiaSettings::remoteChangeColor();
+
+    setFont(CervisiaSettings::protocolFont());
 }
 
 
