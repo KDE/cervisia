@@ -294,8 +294,6 @@ void SettingsDialog::addDiffPage()
     layout->addWidget(extdifflabel, 3, 0);
     layout->addWidget(extdiffedit, 3, 1);
 
-    // add dummy row to take up the vertical space
-    layout->addWidget(0, 4, 0, 0, 1);
     layout->setRowStretch(4, 10);
 
     addPage(page);
