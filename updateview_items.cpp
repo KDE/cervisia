@@ -740,14 +740,14 @@ UpdateDirItem* findOrCreateDirItem(const QString& dirPath,
             UpdateItem* item = dirItem->findItem(dirName);
             if (isFileItem(item))
             {
-                kDebug(8050) << "findOrCreateDirItem(): file changed to dir " << dirName;
+                kDebug(8050) << "file changed to dir " << dirName;
                 delete item;
                 item = 0;
             }
 
             if (!item)
             {
-                kDebug(8050) << "findOrCreateDirItem(): create dir item " << dirName;
+                kDebug(8050) << "create dir item " << dirName;
                 Entry entry;
                 entry.m_name = dirName;
                 entry.m_type = Entry::Dir;

@@ -95,7 +95,7 @@ RepositoryListItem::RepositoryListItem(K3ListView* parent, const QString& repo,
     : K3ListViewItem(parent)
     , m_isLoggedIn(loggedin)
 {
-    kDebug() << "RepositoryListItem::RepositoryListItem(): repo=" << repo;
+    kDebug(8050) << "repo=" << repo;
     setText(0, repo);
 
     changeLoginStatusColumn();
@@ -290,11 +290,10 @@ void RepositoryDialog::readConfigFile()
         RepositoryListItem* ritem = static_cast<RepositoryListItem*>(item);
 
         // read entries from cvs DCOP service configuration
-		KConfigGroup repoGroup = m_serviceConfig->group(QLatin1String("Repository-") +
-                                  ritem->repository());
+        const KConfigGroup repoGroup = m_serviceConfig->group(QLatin1String("Repository-") +
+                                                              ritem->repository());
 
-        kDebug() << "(1) RepositoryDialog::readConfigFile(): repository = "
-                  << ritem->repository() << endl;
+        kDebug(8050) << "repository=" << ritem->repository();
 
         QString rsh       = repoGroup.readEntry("rsh", QString());
         QString server    = repoGroup.readEntry("cvs_server", QString());
@@ -428,8 +427,7 @@ void RepositoryDialog::slotLoginClicked()
     if( !item )
         return;
 
-    kDebug() << "RepositoryDialog::slotLoginClicked(): repo="
-              << item->repository() << endl;
+    kDebug(8050) << "repo=" << item->repository();
 
     QDBusReply<QDBusObjectPath> job = m_cvsService->login(item->repository());
     if( !job.isValid() )
@@ -511,8 +509,7 @@ void RepositoryDialog::writeRepositoryData(RepositoryListItem* item)
     KConfigGroup repoGroup = m_serviceConfig->group(QLatin1String("Repository-") +
                               item->repository());
 
-    kDebug() << "(1) RepositoryDialog::writeRepositoryData(): repository = "
-              << item->repository() << endl;
+    kDebug(8050) << "repository=" << item->repository();
 
     repoGroup.writeEntry("rsh", item->rsh());
     repoGroup.writeEntry("cvs_server", item->server());

@@ -55,8 +55,8 @@ CvsJob::CvsJob(unsigned jobNum)
 {
     (void)new CvsjobAdaptor(this);
     QDBusConnection dbus = QDBusConnection::sessionBus();
-    d->dbusObjectPath = "/CvsJob"+QString::number(jobNum);
-    kDebug()<<" vsJob::CvsJob(unsigned jobNum) :"<<d->dbusObjectPath;
+    d->dbusObjectPath = "/CvsJob" + QString::number(jobNum);
+    kDebug(8051) << "dbusObjectPath:" << d->dbusObjectPath;
     dbus.registerObject( d->dbusObjectPath, this );
 }
 
@@ -67,8 +67,8 @@ CvsJob::CvsJob(const QString& objId)
 {
     (void)new CvsjobAdaptor(this);
     //TODO register it with good name
-    d->dbusObjectPath = "/"+objId;
-    kDebug()<<" CvsJob::CvsJob(const QString& objId) :"<<d->dbusObjectPath;
+    d->dbusObjectPath = "/" + objId;
+    kDebug(8051) << "dbusObjectPath:" << d->dbusObjectPath;
     QDBusConnection::sessionBus().registerObject( d->dbusObjectPath, this );
 }
 
@@ -195,7 +195,7 @@ bool CvsJob::execute()
     connect(d->childproc, SIGNAL(receivedStderr(K3Process*, char*, int)),
         SLOT(slotReceivedStderr(K3Process*, char*, int)) );
 
-    kDebug(8051) << "Execute cvs command: " << cvsCommand();
+    kDebug(8051) << "Execute cvs command:" << cvsCommand();
 
     d->isRunning = true;
     return d->childproc->start(K3Process::NotifyOnExit, K3Process::AllOutput);
@@ -209,7 +209,7 @@ void CvsJob::cancel()
 
 void CvsJob::slotProcessExited()
 {
-    kDebug();
+    kDebug(8051);
     // disconnect all connections to childproc's signals
     d->childproc->disconnect();
     d->childproc->clearArguments();
@@ -228,8 +228,7 @@ void CvsJob::slotReceivedStdout(K3Process* proc, char* buffer, int buflen)
 
     // accumulate output
     d->outputLines += QStringList::split("\n", output);
-    kDebug()<<" CvsJob::slotReceivedStdout(K3Process* proc, char* buffer, int buflen)\n";
-    kDebug()<<" output :"<<output;
+    kDebug(8051) << "output:" << output;
     emit receivedStdout(output);
 }
 
@@ -243,8 +242,7 @@ void CvsJob::slotReceivedStderr(K3Process* proc, char* buffer, int buflen)
     // accumulate output
     d->outputLines += QStringList::split("\n", output);
 
-    kDebug()<<"CvsJob::slotReceivedStderr(K3Process* proc, char* buffer, int buflen)\n";
-    kDebug()<<" output "<<output;
+    kDebug(8051) << "output:" << output;
     emit receivedStderr(output);
 }
 

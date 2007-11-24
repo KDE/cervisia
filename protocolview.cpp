@@ -45,7 +45,7 @@ ProtocolView::ProtocolView(const QString& appId, QWidget *parent, const char *na
     setTabChangesFocus(true);
     setTextFormat(Qt::LogText);
 
-    //kDebug()<<"protocol view appId : "<<appId;
+    //kDebug(8050) << "protocol view appId :" << appId;
 
     job = new OrgKdeCervisiaCvsserviceCvsjobInterface(appId, "/NonConcurrentJob",QDBusConnection::sessionBus(), this);
 
@@ -99,7 +99,7 @@ Q3PopupMenu* ProtocolView::createPopupMenu(const QPoint &pos)
 
 void ProtocolView::cancelJob()
 {
-    kDebug();
+    kDebug(8050);
     job->cancel();
 }
 
@@ -123,7 +123,7 @@ void ProtocolView::slotReceivedOutput(QString buffer)
 
 void ProtocolView::slotJobExited(bool normalExit, int exitStatus)
 {
-    kDebug();
+    kDebug(8050);
     QString msg;
 
     if( normalExit )

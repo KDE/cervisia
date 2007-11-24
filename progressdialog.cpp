@@ -58,11 +58,11 @@ ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,const QSt
     , d(new Private)
 {
     // initialize private data
-	setCaption(caption);
-	setButtons(Cancel);
-	setDefaultButton(Cancel);
-	setModal(true);
-	showButtonSeparator(true);
+    setCaption(caption);
+    setButtons(Cancel);
+    setDefaultButton(Cancel);
+    setModal(true);
+    showButtonSeparator(true);
     d->isCancelled = false;
     d->isShown     = false;
     d->hasError    = false;
@@ -72,7 +72,8 @@ ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,const QSt
     d->cvsJob      = new OrgKdeCervisiaCvsserviceCvsjobInterface(cvsServiceNameService ,path.path(),QDBusConnection::sessionBus(), this);
     d->buffer      = "";
 
-    kDebug() << "cvsServiceNameService : "<<cvsServiceNameService << "CvsjobInterface " << path.path() << " valid: " << d->cvsJob->isValid();
+    kDebug(8050) << "cvsServiceNameService:" << cvsServiceNameService
+                 << "CvsjobInterface" << path.path() << "valid:" << d->cvsJob->isValid();
   
     d->errorId1 = "cvs " + errorIndicator + ':';
     d->errorId2 = "cvs [" + errorIndicator + " aborted]:";
@@ -118,7 +119,7 @@ bool ProgressDialog::execute()
     // get command line and display it
     QString cmdLine = d->cvsJob->cvsCommand();
     d->resultbox->insertPlainText(cmdLine);
-    kDebug() << " cmdLine: " << cmdLine;
+    kDebug(8050) << "cmdLine:" << cmdLine;
 
     QDBusConnection::sessionBus().connect(QString(), d->jobPath,
                                           "org.kde.cervisia.cvsservice.cvsjob",
@@ -172,7 +173,7 @@ QStringList ProgressDialog::getOutput() const
 
 void ProgressDialog::slotReceivedOutputNonGui(QString buffer)
 {
-    kDebug() << buffer;
+    kDebug(8050) << buffer;
 
     d->buffer += buffer;
 
@@ -187,7 +188,7 @@ void ProgressDialog::slotReceivedOutputNonGui(QString buffer)
 
 void ProgressDialog::slotReceivedOutput(QString buffer)
 {
-    kDebug() ;
+    kDebug(8050) << buffer;
     d->buffer += buffer;
     processOutput();
 }

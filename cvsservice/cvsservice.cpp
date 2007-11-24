@@ -292,8 +292,8 @@ QDBusObjectPath CvsService::checkout(const QString& workingDir, const QString& r
 QDBusObjectPath CvsService::commit(const QStringList& files, const QString& commitMessage,
                            bool recursive)
 {
-    kDebug()<<" QDBusObjectPath CvsService::commit(const QStringList& files, const QString& commitMessage, bool recursive) \n";
-    kDebug()<<" d->hasWorkingCopy :"<<d->hasWorkingCopy()<<" d->hasRunningJob :"<<d->hasRunningJob();
+    kDebug(8051) << "d->hasWorkingCopy:" << d->hasWorkingCopy()
+                 << "d->hasRunningJob:" << d->hasRunningJob();
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
         return QDBusObjectPath();
 
@@ -309,7 +309,7 @@ QDBusObjectPath CvsService::commit(const QStringList& files, const QString& comm
     *d->singleCvsJob << "-m" << KShell::quoteArg(commitMessage)
                      << CvsServiceUtils::joinFileList(files) << REDIRECT_STDERR;
 
-    kDebug()<<"end of CvsService::commit \n";
+    kDebug(8051) << "end";
     return d->setupNonConcurrentJob();
 }
 

@@ -219,7 +219,7 @@ int DiffView::findLine(int lineno)
     tmp.no = lineno;
     if ( (offset = items.find(&tmp)) == -1)
     {
-        kDebug(8050) << "Internal Error: Line " << lineno << " not found";
+        kDebug(8050) << "Internal Error: Line" << lineno << "not found";
         return -1;
     }
     return offset;
