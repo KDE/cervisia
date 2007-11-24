@@ -59,6 +59,10 @@ DiffView::DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
                     QWidget *parent, const char *name )
     : QtTableView(parent, name, Qt::WNoAutoErase)
     , partConfig(cfg)
+    , linenos(withlinenos)
+    , marker(withmarker)
+    , textwidth(0)
+    , partner(0)
 {
     setNumRows(0);
     setNumCols( 1 + (withlinenos?1:0) + (withmarker?1:0) );
@@ -72,14 +76,11 @@ DiffView::DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
     QFontMetrics fm(font());
     setCellHeight(fm.lineSpacing());
     setCellWidth(0);
-    textwidth = 0;
 
     const KConfigGroup group(&partConfig, "General");
     m_tabWidth = group.readEntry("TabWidth", 8);
 
     items.setAutoDelete(true);
-    linenos = withlinenos;
-    marker = withmarker;
 
     connect(CervisiaSettings::self(), SIGNAL(configChanged()),
             this, SLOT(configChanged()));
@@ -391,12 +392,6 @@ void DiffView::paintCell(QPainter *p, int row, int col)
 }
 
 
-void DiffView::wheelEvent(QWheelEvent *e)
-{
-    QApplication::sendEvent(verticalScrollBar(), e);
-}
-
-
 DiffZoomWidget::DiffZoomWidget(QWidget *parent, const char *name)
     : QFrame(parent, name)
 {
@@ -427,7 +422,7 @@ bool DiffZoomWidget::eventFilter(QObject *o, QEvent *e)
     if (e->type() == QEvent::Show
         || e->type() == QEvent::Hide
         || e->type() == QEvent::Resize)
-        repaint();
+        update();
 
     return QFrame::eventFilter(o, e);
 }

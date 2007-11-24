@@ -75,7 +75,6 @@ public:
     virtual int cellWidth(int col);
     virtual QSize sizeHint() const;
     virtual void paintCell(QPainter *p, int row, int col);
-    virtual void wheelEvent(QWheelEvent *);
     const QScrollBar *scrollBar() const
         { return verticalScrollBar(); }
 
