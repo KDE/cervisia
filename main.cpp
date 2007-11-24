@@ -143,7 +143,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
     KAboutData about("cervisia", 0, ki18n("Cervisia"), CERVISIA_VERSION,
                      ki18n("A CVS frontend"), KAboutData::License_GPL,
                      ki18n("Copyright (c) 1999-2002 Bernd Gehrmann\n"
-                               "Copyright (c) 2002-2004 the Cervisia authors"), KLocalizedString(),
+                               "Copyright (c) 2002-2007 the Cervisia authors"), KLocalizedString(),
                      "http://cervisia.kde.org");
 
     about.addAuthor(ki18n("Bernd Gehrmann"), ki18n("Original author and former "
@@ -151,7 +151,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
     about.addAuthor(ki18n("Christian Loose"), ki18n("Maintainer"),
                     "christian.loose@kdemail.net");
     about.addAuthor(ki18n("Andr\303\251 W\303\266bbeking"), ki18n("Developer"),
-                    "woebbeking@web.de");
+                    "woebbeking@kde.org");
     about.addAuthor(ki18n("Carlos Woelz"), ki18n("Documentation"),
                     "carloswoelz@imap-mail.com");
 
