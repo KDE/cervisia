@@ -29,10 +29,6 @@ class QtTableView : public QFrame
 {
     Q_OBJECT
 public:
-    virtual void setBackgroundColor( const QColor & );
-    virtual void setPalette( const QPalette & );
-    void	show();
-
     void	repaint( bool erase=true );
     void	repaint( int x, int y, int w, int h, bool erase=true );
     void	repaint( const QRect &, bool erase=true );
@@ -104,6 +100,7 @@ protected:
 
     void	paintEvent( QPaintEvent * );
     void	resizeEvent( QResizeEvent * );
+    virtual void showEvent( QShowEvent * );
     virtual void wheelEvent( QWheelEvent *e );
 
     int		findRow( int yPos ) const;

@@ -42,16 +42,12 @@ class QCornerSquare : public QWidget		// internal class
 {
 public:
     QCornerSquare( QWidget * );
-    void paintEvent( QPaintEvent * );
 };
 
 QCornerSquare::QCornerSquare( QWidget *parent )
 	: QWidget( parent )
 {
-}
-
-void QCornerSquare::paintEvent( QPaintEvent * )
-{
+    setAutoFillBackground( true );
 }
 
 
@@ -176,35 +172,6 @@ QtTableView::~QtTableView()
     delete vScrollBar;
     delete hScrollBar;
     delete cornerSquare;
-}
-
-
-/*!
-  \internal
-  Reimplements QWidget::setBackgroundColor() for binary compatibility.
-  \sa setPalette()
-*/
-
-void QtTableView::setBackgroundColor( const QColor &c )
-{
-    QWidget::setBackgroundColor( c );
-}
-
-/*!\reimp
-*/
-
-void QtTableView::setPalette( const QPalette &p )
-{
-    QWidget::setPalette( p );
-}
-
-/*!\reimp
-*/
-
-void QtTableView::show()
-{
-    showOrHideScrollBars();
-    QWidget::show();
 }
 
 
@@ -1423,6 +1390,12 @@ void QtTableView::resizeEvent( QResizeEvent * )
     setOffset( maxX, maxY );
 }
 
+void QtTableView::showEvent( QShowEvent * e )
+{
+    showOrHideScrollBars();
+    QFrame::showEvent( e );
+}
+
 void QtTableView::wheelEvent( QWheelEvent * e )
 {
     if( e->orientation() == Qt::Vertical && vScrollBar && vScrollBar->isVisible() )
@@ -1449,6 +1422,8 @@ QScrollBar *QtTableView::verticalScrollBar() const
     QtTableView *that = (QtTableView*)this; // semantic const
     if ( !vScrollBar ) {
 	QScrollBar *sb = new QScrollBar( Qt::Vertical, that );
+	sb->setAttribute(Qt::WA_NoMousePropagation);
+	sb->setAutoFillBackground(true);
 #ifndef QT_NO_CURSOR
 	sb->setCursor( Qt::ArrowCursor );
 #endif
@@ -1480,6 +1455,7 @@ QScrollBar *QtTableView::horizontalScrollBar() const
     QtTableView *that = (QtTableView*)this; // semantic const
     if ( !hScrollBar ) {
 	QScrollBar *sb = new QScrollBar( Qt::Horizontal, that );
+	sb->setAutoFillBackground(true);
 #ifndef QT_NO_CURSOR
 	sb->setCursor( Qt::ArrowCursor );
 #endif
