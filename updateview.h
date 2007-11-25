@@ -24,7 +24,7 @@
 
 #include <k3listview.h>
 
-#include <q3ptrlist.h>
+#include <qlist.h>
 
 #include "entry.h"
 
@@ -94,7 +94,7 @@ private:
 
     Filter filt;
     Action act;
-    Q3PtrList<Q3ListViewItem> relevantSelection;
+    QList<Q3ListViewItem*> relevantSelection;
 
     QColor m_conflictColor;
     QColor m_localChangeColor;

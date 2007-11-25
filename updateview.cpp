@@ -24,15 +24,11 @@
 
 #include <qapplication.h>
 #include <qfileinfo.h>
-#include <q3ptrstack.h>
-//Added by qt3to4:
-#include <Q3PtrList>
-#include <kconfig.h>
+#include <qstack.h>
 #include <klocale.h>
 #include <kconfiggroup.h>
 
 #include "cervisiasettings.h"
-#include "entry.h"
 #include "updateview_items.h"
 #include "updateview_visitors.h"
 
@@ -399,11 +395,10 @@ void UpdateView::finishJob(bool normalExit, int exitStatus)
  */
 void UpdateView::markUpdated(bool laststage, bool success)
 {
-    Q3PtrListIterator<Q3ListViewItem> it(relevantSelection);
-    for ( ; it.current(); ++it)
-        if (isDirItem(it.current()))
+    foreach (Q3ListViewItem* it, relevantSelection)
+        if (isDirItem(it))
             {
-                for (Q3ListViewItem *item = it.current()->firstChild(); item;
+                for (Q3ListViewItem *item = it->firstChild(); item;
                      item = item->nextSibling() )
                     if (isFileItem(item))
                         {
@@ -413,7 +408,7 @@ void UpdateView::markUpdated(bool laststage, bool success)
             }
         else
             {
-                UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(it.current());
+                UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(it);
                 fileItem->markUpdated(laststage, success);
             }
 }
@@ -438,9 +433,11 @@ void UpdateView::rememberSelection(bool recursive)
             && recursive
             && isDirItem(item))
         {
-            Q3PtrStack<Q3ListViewItem> s;
+            QStack<Q3ListViewItem*> s;
             for (Q3ListViewItem* childItem = item->firstChild(); childItem;
-                 childItem = childItem->nextSibling() ? childItem->nextSibling() : s.pop())
+                 childItem = childItem->nextSibling()
+                     ? childItem->nextSibling()
+                     : (s.isEmpty() ? 0 : s.pop()))
             {
                 // if this item is a dir item and if it is was not
                 // inserted already then insert all sub dirs
@@ -463,9 +460,8 @@ void UpdateView::rememberSelection(bool recursive)
 
 #if 0
     DEBUGOUT("Relevant:");
-    Q3PtrListIterator<Q3ListViewItem> it44(relevantSelection);
-    for (; it44.current(); ++it44)
-        DEBUGOUT("  " << (*it44)->text(UpdateFileItem::File));
+    foreach (Q3ListViewItem* item, relevantSelection)
+        DEBUGOUT("  " << item->text(UpdateFileItem::File));
     DEBUGOUT("End");
 #endif
 }
@@ -480,11 +476,8 @@ void UpdateView::syncSelection()
     // compute all directories which are selected or contain a selected file
     // (in recursive mode this includes all sub directories)
     std::set<UpdateDirItem*> setDirItems;
-    for (Q3PtrListIterator<Q3ListViewItem> itItem(relevantSelection);
-         itItem.current(); ++itItem)
+    foreach (Q3ListViewItem* item, relevantSelection)
     {
-        Q3ListViewItem* item(itItem.current());
-
         UpdateDirItem* dirItem(0);
         if (isDirItem(item))
             dirItem = static_cast<UpdateDirItem*>(item);
