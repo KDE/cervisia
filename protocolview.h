@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2003-2004 Christian Loose <christian.loose@kdemail.net>
+ *  Copyright (c) 2003-2007 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,28 +22,25 @@
 #ifndef PROTOCOLVIEW_H
 #define PROTOCOLVIEW_H
 
-#include <q3textedit.h>
-//Added by qt3to4:
-#include <Q3PopupMenu>
+#include <QTextEdit>
 
 #include <kdemacros.h>
 
 class QPoint;
-class Q3PopupMenu;
 class OrgKdeCervisiaCvsserviceCvsjobInterface;
 
 
-class ProtocolView : public Q3TextEdit
+class ProtocolView : public QTextEdit
 {
     Q_OBJECT
 public:
-    explicit ProtocolView(const QString& appId, QWidget *parent=0, const char *name=0);
+    explicit ProtocolView(const QString& appId, QWidget *parent=0);
     ~ProtocolView();
 
     bool startJob(bool isUpdateJob = false);
 
 protected:
-    virtual Q3PopupMenu* createPopupMenu(const QPoint &pos);
+    void contextMenuEvent(QContextMenuEvent* event);
 
 public Q_SLOTS:
     void slotReceivedOutput(QString buffer);
@@ -60,6 +57,7 @@ private Q_SLOTS:
 private:
     void processOutput();
     void appendLine(const QString &line);
+    void appendHtml(const QString& html);
 
     QString buf;
 

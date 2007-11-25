@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@physik.hu-berlin.de
- *  Copyright (c) 2003-2004 Christian Loose <christian.loose@kdemail.net>
+ *  Copyright (c) 2003-2007 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,9 +21,10 @@
 
 #include "protocolview.h"
 #include "protocolviewadaptor.h"
-#include <qdir.h>
-#include <q3popupmenu.h>
-#include <qtextdocument.h>
+
+#include <QAction>
+#include <QMenu>
+
 #include <klocale.h>
 #include <kmessagebox.h>
 
@@ -32,8 +33,8 @@
 #include "cvsjobinterface.h"
 
 
-ProtocolView::ProtocolView(const QString& appId, QWidget *parent, const char *name)
-    : Q3TextEdit(parent, name)
+ProtocolView::ProtocolView(const QString& appId, QWidget *parent)
+    : QTextEdit(parent)
     , job(0)
     , m_isUpdateJob(false)
 {
@@ -84,16 +85,17 @@ bool ProtocolView::startJob(bool isUpdateJob)
 }
 
 
-Q3PopupMenu* ProtocolView::createPopupMenu(const QPoint &pos)
+void ProtocolView::contextMenuEvent(QContextMenuEvent* event)
 {
-    Q3PopupMenu* menu = Q3TextEdit::createPopupMenu(pos);
+    QMenu *menu = QTextEdit::createStandardContextMenu();
 
-    int id = menu->insertItem(i18n("Clear"), this, SLOT( clear() ), 0, -1, 0);
+    QAction* clearAction = menu->addAction(i18n("Clear"), this, SLOT( clear() ));
 
-    if( length() == 0 )
-        menu->setItemEnabled(id, false);
+    if( toPlainText().length() == 0 )
+        clearAction->setEnabled(false);
 
-    return menu;
+    menu->exec(event->globalPos());
+    delete menu;
 }
 
 
@@ -151,10 +153,10 @@ void ProtocolView::processOutput()
 	{
 	    QString line = buf.left(pos);
 	    if (!line.isEmpty())
-                {
+        {
 		    appendLine(line);
-                    emit receivedLine(line);
-                }
+            emit receivedLine(line);
+        }
 	    buf = buf.right(buf.length()-pos-1);
 	}
 }
@@ -170,7 +172,7 @@ void ProtocolView::appendLine(const QString &line)
     // just add it to the text edit.
     if( !m_isUpdateJob )
     {
-        append(escapedLine);
+        appendHtml(escapedLine);
         return;
     }
 
@@ -184,10 +186,19 @@ void ProtocolView::appendLine(const QString &line)
     else if (line.startsWith("P ") || line.startsWith("U "))
         color = remoteChangeColor;
 
-    append(color.isValid()
+    appendHtml(color.isValid()
            ? QString("<font color=\"%1\"><b>%2</b></font>").arg(color.name())
                                                            .arg(escapedLine)
            : escapedLine);
+}
+
+
+void ProtocolView::appendHtml(const QString& html)
+{
+    QTextCursor cursor(textCursor());
+    cursor.insertHtml(html);
+    cursor.insertBlock();
+    ensureCursorVisible();
 }
 
 
@@ -197,5 +208,3 @@ void ProtocolView::appendLine(const QString &line)
 // Local Variables:
 // c-basic-offset: 4
 // End:
-
-
