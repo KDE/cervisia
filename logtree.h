@@ -23,7 +23,7 @@
 #define LOGTREE_H
 
 
-#include <q3ptrlist.h>
+#include <qlist.h>
 
 #include <q3table.h>
 
@@ -37,8 +37,8 @@ struct LogInfo;
 }
 
 
-typedef Q3PtrList<LogTreeItem> LogTreeItemList;
-typedef Q3PtrList<LogTreeConnection> LogTreeConnectionList;
+typedef QList<LogTreeItem*> LogTreeItemList;
+typedef QList<LogTreeConnection*> LogTreeConnectionList;
 
 
 class LogTreeView : public Q3Table
@@ -47,6 +47,8 @@ class LogTreeView : public Q3Table
 
 public:
     explicit LogTreeView( QWidget *parent=0, const char *name=0 );
+
+    virtual ~LogTreeView();
 
     void addRevision(const Cervisia::LogInfo& logInfo);
     void setSelectedPair(QString selectionA, QString selectionB);
