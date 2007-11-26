@@ -114,9 +114,6 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
                                "mouse button,\nrevision B by clicking with "
                                "the middle mouse button."));
 
-    items.setAutoDelete(true);
-    tags.setAutoDelete(true);
-
     QWidget *mainWidget = new QWidget(splitter);
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
     layout->setSpacing(spacingHint());
@@ -207,7 +204,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
              this, SLOT(findClicked()) );
 
     connect(this,SIGNAL(okClicked()),
-		    this, SLOT(slotOk()));
+            this, SLOT(slotOk()));
     connect(this,SIGNAL(applyClicked()),this,SLOT(slotApply()));
     setButtonGuiItem(Ok, KGuiItem(i18nc("to view something", "&View"),"document-open"));
     setButtonGuiItem(Apply, KGuiItem(i18n("Create Patch...")));
@@ -225,6 +222,9 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
 
 LogDialog::~LogDialog()
 {
+    qDeleteAll(items);
+    qDeleteAll(tags);
+
     KConfigGroup cg(&partConfig, "LogDialog");
     cg.writeEntry("ShowTab", tabWidget->currentPageIndex());
     saveDialogSize(cg);
@@ -354,24 +354,23 @@ bool LogDialog::parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service
                         branchrev = rev.left(pos2);
 
                     // Build Cervisia::TagInfo for logInfo
-                    Q3PtrListIterator<LogDialogTagInfo> it(tags);
-                    for( ; it.current(); ++it )
+                    foreach (LogDialogTagInfo* tagInfo, tags)
                     {
-                        if( rev == it.current()->rev )
+                        if( rev == tagInfo->rev )
                         {
                             // This never matches branch tags...
-                            logInfo.m_tags.push_back(Cervisia::TagInfo(it.current()->tag,
+                            logInfo.m_tags.push_back(Cervisia::TagInfo(tagInfo->tag,
                                                                        Cervisia::TagInfo::Tag));
                         }
-                        if( rev == it.current()->branchpoint )
+                        if( rev == tagInfo->branchpoint )
                         {
-                            logInfo.m_tags.push_back(Cervisia::TagInfo(it.current()->tag,
+                            logInfo.m_tags.push_back(Cervisia::TagInfo(tagInfo->tag,
                                                                        Cervisia::TagInfo::Branch));
                         }
-                        if( branchrev == it.current()->rev )
+                        if( branchrev == tagInfo->rev )
                         {
                             // ... and this never matches ordinary tags :-)
-                            logInfo.m_tags.push_back(Cervisia::TagInfo(it.current()->tag,
+                            logInfo.m_tags.push_back(Cervisia::TagInfo(tagInfo->tag,
                                                                        Cervisia::TagInfo::OnBranch));
                         }
                     }
@@ -393,11 +392,10 @@ bool LogDialog::parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service
 
     tagcombo[0]->insertItem(QString());
     tagcombo[1]->insertItem(QString());
-    Q3PtrListIterator<LogDialogTagInfo> it(tags);
-    for( ; it.current(); ++it )
+    foreach (LogDialogTagInfo* tagInfo, tags)
     {
-        QString str = it.current()->tag;
-        if( !it.current()->branchpoint.isEmpty() )
+        QString str = tagInfo->tag;
+        if( !tagInfo->branchpoint.isEmpty() )
             str += i18n(" (Branchpoint)");
         tagcombo[0]->insertItem(str);
         tagcombo[1]->insertItem(str);
@@ -541,9 +539,8 @@ void LogDialog::annotateClicked()
 
 void LogDialog::revisionSelected(QString rev, bool rmb)
 {
-    Q3PtrListIterator<Cervisia::LogInfo> it(items);
-    for (; it.current(); ++it)
-        if (it.current()->m_revision == rev)
+    foreach (Cervisia::LogInfo* logInfo, items)
+        if (logInfo->m_revision == rev)
             {
                 if (rmb)
                     selectionB = rev;
@@ -551,10 +548,10 @@ void LogDialog::revisionSelected(QString rev, bool rmb)
                     selectionA = rev;
 
                 revbox[rmb?1:0]->setText(rev);
-                authorbox[rmb?1:0]->setText(it.current()->m_author);
-                datebox[rmb?1:0]->setText(it.current()->dateTimeToString());
-                commentbox[rmb?1:0]->setText(it.current()->m_comment);
-                tagsbox[rmb?1:0]->setText(it.current()->tagsToString());
+                authorbox[rmb?1:0]->setText(logInfo->m_author);
+                datebox[rmb?1:0]->setText(logInfo->dateTimeToString());
+                commentbox[rmb?1:0]->setText(logInfo->m_comment);
+                tagsbox[rmb?1:0]->setText(logInfo->tagsToString());
 
                 tree->setSelectedPair(selectionA, selectionB);
                 list->setSelectedPair(selectionA, selectionB);

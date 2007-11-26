@@ -24,7 +24,7 @@
 
 #include "loginfo.h"
 
-#include <q3ptrlist.h>
+#include <qlist.h>
 
 class LogListView;
 class LogTreeView;
@@ -75,8 +75,8 @@ private:
     void updateButtons();
 
     QString filename;
-    Q3PtrList<Cervisia::LogInfo> items;
-    Q3PtrList<LogDialogTagInfo> tags;
+    QList<Cervisia::LogInfo*> items;
+    QList<LogDialogTagInfo*> tags;
     QString selectionA;
     QString selectionB;
     LogTreeView *tree;
