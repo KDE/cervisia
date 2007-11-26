@@ -197,18 +197,16 @@ void LogTreeView::addRevision(const Cervisia::LogInfo& logInfo)
     items.append(item);
 
 #if 0
-    cout << "Dump: " << endl;
-    cout << "Rows: " << numRows() << "Cols: " << numCols() << endl;
-    Q3PtrListIterator<LogTreeItem> it5(items);
-    for (; it5.current(); ++it5)
+    kDebug(8050) << "Dump:";
+    kDebug(8050) << "Rows:" << numRows() << "Cols:" << numCols();
+    foreach (LogTreeItem* treeItem, items)
     {
-        cout << "Rev: "<< it5.current()->rev << endl;
-        cout << "row: "<< it5.current()->row << ", col: " << it5.current()->col << endl;
-        cout << "fob: "<< it5.current()->firstonbranch << endl;
+        kDebug(8050) << "Rev:" << treeItem->m_logInfo.m_revision;
+        kDebug(8050) << "row:" << treeItem->row << ", col:" << treeItem->col;
+        kDebug(8050) << "fob:" << treeItem->firstonbranch;
     }
-    cout << "End Dump" << endl;
+    kDebug(8050) << "End Dump";
 #endif
-
 }
 
 
