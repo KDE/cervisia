@@ -24,6 +24,7 @@
 
 #include <QAction>
 #include <QMenu>
+//#include <QTextDocument>
 
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -91,7 +92,7 @@ void ProtocolView::contextMenuEvent(QContextMenuEvent* event)
 
     QAction* clearAction = menu->addAction(i18n("Clear"), this, SLOT( clear() ));
 
-    if( toPlainText().length() == 0 )
+    if( document()->isEmpty() )
         clearAction->setEnabled(false);
 
     menu->exec(event->globalPos());
