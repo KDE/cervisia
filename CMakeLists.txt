@@ -78,6 +78,7 @@ set(cervisiapart_PART_SRCS ${libcervisia_SRCS}
    addrepositorydialog.cpp 
    addremovedialog.cpp 
    watchersdialog.cpp 
+   watchersmodel.cpp 
    updateview_items.cpp 
    updateview_visitors.cpp 
    entry.cpp 

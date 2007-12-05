@@ -21,7 +21,8 @@
 
 #include <kdialog.h>
 
-class Q3Table;
+//class Q3Table;
+class QTableView;
 class KConfig;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 
@@ -34,7 +35,8 @@ public:
     bool parseWatchers(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService, const QStringList& files);
 
 private:
-    Q3Table*  table;
+//    Q3Table*  table;
+    QTableView* m_tableView;
     KConfig& partConfig;
 };
 

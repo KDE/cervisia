@@ -19,8 +19,10 @@
 
 #include "watchersdialog.h"
 
+#include <QHeaderView>
+#include <QTableView>
+
 #include <qlayout.h>
-#include <q3table.h>
 //Added by qt3to4:
 #include <QVBoxLayout>
 #include <QBoxLayout>
@@ -29,9 +31,10 @@
 #include <klocale.h>
 #include <kconfiggroup.h>
 
-#include "misc.h"
+// #include "misc.h"
 #include "cvsserviceinterface.h"
 #include "progressdialog.h"
+#include "watchersmodel.h"
 
 
 WatchersDialog::WatchersDialog(KConfig& cfg, QWidget* parent)
@@ -48,25 +51,12 @@ WatchersDialog::WatchersDialog(KConfig& cfg, QWidget* parent)
     layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
-    table = new Q3Table(mainWidget, "watchersTable");
-    table->setNumCols(5);
-    table->setSelectionMode(Q3Table::NoSelection);
-    table->setColumnMovingEnabled(false);
-    table->setRowMovingEnabled(false);
-    table->setReadOnly(true);
-    table->setDragEnabled(false);
-    table->setSorting(true);
-    table->verticalHeader()->hide();
-    table->setLeftMargin(0);
+    m_tableView = new QTableView(mainWidget);
+    m_tableView->setSelectionMode(QAbstractItemView::NoSelection);
+    m_tableView->setSortingEnabled(true);
+    m_tableView->verticalHeader()->setVisible(false);
 
-    Q3Header* header = table->horizontalHeader();
-    header->setLabel(0, i18n("File"));
-    header->setLabel(1, i18n("Watcher"));
-    header->setLabel(2, i18n("Edit"));
-    header->setLabel(3, i18n("Unedit"));
-    header->setLabel(4, i18n("Commit"));
-
-    layout->addWidget(table, 1);
+    layout->addWidget(m_tableView, 1);
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 
@@ -95,37 +85,10 @@ bool WatchersDialog::parseWatchers(OrgKdeCervisiaCvsserviceCvsserviceInterface* 
     if( !dlg.execute() )
         return false;
 
-    QString line;
-    int numRows = 0;
-    while( dlg.getLine(line) )
-    {
-        // parse the output line
-        QStringList list = splitLine(line);
-
-        // ignore empty lines and unknown files
-        if( list.isEmpty() || list[0] == "?" )
-            continue;
-
-        // add a new row to the table
-        table->setNumRows(numRows + 1);
-
-        table->setText(numRows, 0, list[0]);
-        table->setText(numRows, 1, list[1]);
-
-        Q3CheckTableItem* item = new Q3CheckTableItem(table, "");
-        item->setChecked(list.contains("edit"));
-        table->setItem(numRows, 2, item);
-
-        item = new Q3CheckTableItem(table, "");
-        item->setChecked(list.contains("unedit"));
-        table->setItem(numRows, 3, item);
-
-        item = new Q3CheckTableItem(table, "");
-        item->setChecked(list.contains("commit"));
-        table->setItem(numRows, 4, item);
-
-        ++numRows;
-    }
+    WatchersSortModel* proxyModel = new WatchersSortModel(this);
+    proxyModel->setSourceModel(new WatchersModel(dlg.getOutput()));
+    m_tableView->setModel(proxyModel);
+    m_tableView->sortByColumn(0, Qt::AscendingOrder);
 
     return true;
 }
