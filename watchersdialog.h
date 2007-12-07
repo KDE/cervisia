@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2003 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2003-2007 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,6 @@
 
 #include <kdialog.h>
 
-//class Q3Table;
 class QTableView;
 class KConfig;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
@@ -35,7 +34,6 @@ public:
     bool parseWatchers(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService, const QStringList& files);
 
 private:
-//    Q3Table*  table;
     QTableView* m_tableView;
     KConfig& partConfig;
 };

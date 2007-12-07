@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2003 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2003-2007 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,7 +31,6 @@
 #include <klocale.h>
 #include <kconfiggroup.h>
 
-// #include "misc.h"
 #include "cvsserviceinterface.h"
 #include "progressdialog.h"
 #include "watchersmodel.h"
