@@ -49,8 +49,6 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation,
                         int role = Qt::DisplayRole) const;
 
-    void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
-
 private:
     void parseData(const QStringList& data);
 
@@ -68,4 +66,4 @@ protected:
 };
 
 
-#endif // WATCHERSMODEL_H
+#endif

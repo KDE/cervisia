@@ -112,11 +112,6 @@ QVariant WatchersModel::headerData(int section, Qt::Orientation orientation,
 }
 
 
-void WatchersModel::sort(int column, Qt::SortOrder order)
-{
-}
-
-
 void WatchersModel::parseData(const QStringList& data)
 {
     foreach( QString line, data )
@@ -156,3 +151,6 @@ bool WatchersSortModel::lessThan(const QModelIndex& left, const QModelIndex& rig
 
     return leftData.toInt() < rightData.toInt();
 }
+
+
+#include "watchersmodel.moc"
