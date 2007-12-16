@@ -212,7 +212,7 @@ void SettingsDialog::addGeneralPage()
 {
     QFrame* generalPage = new QFrame;
     KPageWidgetItem *page = new KPageWidgetItem( generalPage, i18n("General") );
-    page->setIcon( KIcon("misc") );
+    page->setIcon( KIcon("applications-system") );
     
     QVBoxLayout* layout = new QVBoxLayout(generalPage);
     layout->setSpacing(KDialog::spacingHint());
