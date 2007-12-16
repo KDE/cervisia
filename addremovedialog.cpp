@@ -20,7 +20,6 @@
 
 #include "addremovedialog.h"
 
-#include <kiconloader.h>
 #include <klocale.h>
 
 #include <QBoxLayout>
@@ -65,10 +64,7 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent)
         QBoxLayout *warningLayout = new QHBoxLayout;
 
         QLabel *warningIcon = new QLabel(mainWidget);
-        KIconLoader *loader = KIconLoader::global();
-        warningIcon->setPixmap(loader->loadIcon("dialog-warning", KIconLoader::NoGroup,
-                                                KIconLoader::SizeMedium, KIconLoader::DefaultState,
-                                                QStringList(),0, true));
+        warningIcon->setPixmap(KIcon("dialog-warning").pixmap(32));
         warningLayout->addWidget(warningIcon);
 
         QLabel *warningText = new QLabel(i18n("This will also remove the files from "
