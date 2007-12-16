@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2004 Jason Kivlighn <mizunoami44@users.sourceforge.net>
- * Copyright (c) 2005 Christian Loose <christian.loose@kdemail.net>
+ * Copyright (c) 2005-2007 Christian Loose <christian.loose@kdemail.net>
  *
  * based on work by Jason Kivlighn (krecipes/src/widgets/kretextedit.h)
  *

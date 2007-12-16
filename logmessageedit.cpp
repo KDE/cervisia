@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2004 Jason Kivlighn <mizunoami44@users.sourceforge.net>
- * Copyright (c) 2005 Christian Loose <christian.loose@kdemail.net>
+ * Copyright (c) 2005-2007 Christian Loose <christian.loose@kdemail.net>
  *
  * based on work by Jason Kivlighn (krecipes/src/widgets/kretextedit.cpp)
  *
@@ -22,8 +22,10 @@
 #include "logmessageedit.h"
 using Cervisia::LogMessageEdit;
 
-#include <qtextstream.h>
+#include <QTextStream>
 
+#include <KShortcut>
+#include <KStandardShortcut>
 
 
 LogMessageEdit::LogMessageEdit(QWidget* parent)
@@ -35,29 +37,33 @@ LogMessageEdit::LogMessageEdit(QWidget* parent)
     // create the completion object
     completionObject();
 
-    // a mouse click stops the completion process
-    connect( this, SIGNAL(clicked(int, int)), SLOT(stopCompletion()) );
-}
-
-
-void LogMessageEdit::setCompletedText(const QString& /*match*/)
-{
 #ifdef __GNUC__
 #warning XXX: port to Qt4
 #endif
 #if 0
-    int para, index;
-    getCursorPosition(&para, &index);
+    // a mouse click stops the completion process
+    connect( this, SIGNAL(clicked(int, int)), SLOT(stopCompletion()) );
+#endif
+}
 
-    QString paragraphText = text(para);
-    int length = index - m_completionStartPos;
+
+void LogMessageEdit::setCompletedText(const QString& match)
+{
+    QTextCursor cursor = this->textCursor();
+
+    int pos = cursor.position();
+    QString text = toPlainText();
+
+    // retrieve the part of the match that's missing
+    int length = pos - m_completionStartPos;
     QString word = match.right(match.length() - length);
 
-    insert(word);
+    // insert the match
+    cursor.insertText(word);
 
-    setSelection(para, index, para, m_completionStartPos + match.length());
-    setCursorPosition(para, index);
-#endif
+    // move cursor back and select the match
+    cursor.setPosition(pos, QTextCursor::KeepAnchor);
+    setTextCursor(cursor);
 
     m_completing = true;
 
@@ -67,25 +73,22 @@ void LogMessageEdit::setCompletedText(const QString& /*match*/)
 }
 
 
-void LogMessageEdit::setCompletedItems(const QStringList&, bool autoSuggest)
+void LogMessageEdit::setCompletedItems(const QStringList&, bool)
 {
 }
 
 
 void LogMessageEdit::keyPressEvent(QKeyEvent* event)
 {
-#ifdef __GNUC__
-#warning XXX: port to Qt4
-#endif
-#if 0
-    bool noModifier = (event->state() == NoButton ||
-                       event->state() == ShiftButton ||
-                       event->state() == Keypad);
+    // handle normal key
+    bool noModifier = (event->state() == Qt::NoButton ||
+                       event->state() == Qt::ShiftButton ||
+                       event->state() == Qt::Keypad);
 
     if( noModifier )
     {
-        QString keycode = event->text();
-        if( !keycode.isEmpty() && keycode.unicode()->isPrint() )
+        QString keyCode = event->text();
+        if( !keyCode.isEmpty() && keyCode.unicode()->isPrint() )
         {
             KTextEdit::keyPressEvent(event);
             tryCompletion();
@@ -94,33 +97,29 @@ void LogMessageEdit::keyPressEvent(QKeyEvent* event)
         }
     }
 
-    KeyBindingMap keys = getKeyBindings();
-
-    // handle text completion key
-    KShortcut shortcut = keys[TextCompletion];
-    if( shortcut.isNull() )
+    // get shortcut for text completion key
+    KShortcut shortcut = getKeyBinding(TextCompletion);
+    if( shortcut.isEmpty() )
         shortcut = KStandardShortcut::shortcut(KStandardShortcut::TextCompletion);
 
-    KKey key(event);
+    int key = event->key() | event->modifiers();
 
-    // accept the suggested completion?
+    // handle text completion key
     if( m_completing && shortcut.contains(key) )
     {
-        int paraFrom, indexFrom, paraTo, indexTo;
-        getSelection(&paraFrom, &indexFrom, &paraTo, &indexTo);
+        // accept the suggested completion
+        QTextCursor cursor = this->textCursor();
+        cursor.setPosition(cursor.selectionEnd());
+        setTextCursor(cursor);
 
-        removeSelection();
-        setCursorPosition(paraTo, indexTo);
-
-        m_completing = false;
-        setCheckSpellingEnabled(true);
+        stopCompletion();
 
         return;
     }
 
     // handle previous match key
-    shortcut = keys[PrevCompletionMatch];
-    if( shortcut.isNull() )
+    shortcut = getKeyBinding(PrevCompletionMatch);
+    if( shortcut.isEmpty() )
         shortcut = KStandardShortcut::shortcut(KStandardShortcut::PrevCompletion);
 
     if( shortcut.contains(key) )
@@ -130,8 +129,8 @@ void LogMessageEdit::keyPressEvent(QKeyEvent* event)
     }
 
     // handle next match key
-    shortcut = keys[NextCompletionMatch];
-    if( shortcut.isNull() )
+    shortcut = getKeyBinding(NextCompletionMatch);
+    if( shortcut.isEmpty() )
         shortcut = KStandardShortcut::shortcut(KStandardShortcut::NextCompletion);
 
     if( shortcut.contains(key) )
@@ -144,10 +143,8 @@ void LogMessageEdit::keyPressEvent(QKeyEvent* event)
     if( event->key() != Qt::Key_Shift && event->key() != Qt::Key_Control &&
         event->key() != Qt::Key_Alt   && event->key() != Qt::Key_Meta )
     {
-        m_completing = false;
-        setCheckSpellingEnabled(true);
+        stopCompletion();
     }
-#endif
 
     KTextEdit::keyPressEvent(event);
 }
@@ -162,43 +159,40 @@ void LogMessageEdit::stopCompletion()
 
 void LogMessageEdit::tryCompletion()
 {
-#ifdef __GNUC__
-#warning XXX: port to Qt4
-#endif
-#if 0
-    int para, index;
-    getCursorPosition(&para, &index);
+    int pos = textCursor().position();
+    QString text = toPlainText();
 
-    QString paragraphText = text(para);
-    if( paragraphText.at(index).isSpace() )
+    if( text.at(pos-1).isSpace() )
     {
         if( !m_completing )
-            m_completionStartPos = paragraphText.findRev(' ', index-1) + 1;
-
-        int length = index - m_completionStartPos;
-        QString word = paragraphText.mid(m_completionStartPos, length);
-
-        QString match = compObj()->makeCompletion(word);
-        if( !match.isNull() && match != word )
         {
-            setCompletedText(match);
+            m_completionStartPos = text.findRev(' ', pos-2) + 1;
+        }
+
+        // retrieve current word
+        int length = pos - m_completionStartPos - 1;
+        QString word = text.mid(m_completionStartPos, length);
+
+        // try to complete the word
+        QString match = compObj()->makeCompletion(word);
+        if( !match.isEmpty() && match != word )
+        {
+            QTextCursor cursor = this->textCursor();
+            cursor.movePosition(QTextCursor::Left);
+            setTextCursor(cursor);
+
+			setCompletedText(match);
         }
         else
         {
-            m_completing = false;
-            setCheckSpellingEnabled(true);
+            stopCompletion();
         }
     }
-#endif
 }
 
 
 void LogMessageEdit::rotateMatches(KeyBindingType type)
 {
-#ifdef __GNUC__
-#warning XXX: port to Qt4
-#endif
-#if 0
     KCompletion* completionObj = compObj();
     if( completionObj && m_completing &&
         (type == PrevCompletionMatch || type == NextCompletionMatch) )
@@ -206,19 +200,16 @@ void LogMessageEdit::rotateMatches(KeyBindingType type)
         QString match = (type == PrevCompletionMatch) ? completionObj->previousMatch()
                                                       : completionObj->nextMatch();
 
-        int para, index;
-        getCursorPosition(&para, &index);
+        int pos = textCursor().position();
+        QString text = toPlainText();
 
-        QString paragraphText = text(para);
+        QString word = text.mid(m_completionStartPos, pos - m_completionStartPos);
 
-        QString word = paragraphText.mid(m_completionStartPos, index - m_completionStartPos);
-
-        if( match.isNull() || match == word )
+        if( match.isEmpty() || match == word )
             return;
 
         setCompletedText(match);
     }
-#endif
 }
 
 #include "logmessageedit.moc"
