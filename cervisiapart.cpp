@@ -81,7 +81,6 @@
 
 using Cervisia::TagDialog;
 
-#define COMMIT_SPLIT_CHAR '\r' // XXX this is ignored. need to handle list config entries yourself if you insist.
 
 K_PLUGIN_FACTORY( CervisiaFactory, registerPlugin<CervisiaPart>(); )
     K_EXPORT_PLUGIN( CervisiaFactory( "cervisiapart", "cervisia" ) )
