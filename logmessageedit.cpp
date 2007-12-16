@@ -22,8 +22,6 @@
 #include "logmessageedit.h"
 using Cervisia::LogMessageEdit;
 
-#include <QTextStream>
-
 #include <KShortcut>
 #include <KStandardShortcut>
 
