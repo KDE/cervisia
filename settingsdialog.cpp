@@ -33,7 +33,6 @@
 #include <kconfig.h>
 #include <kfontdialog.h>
 #include <kglobal.h>
-#include <kiconloader.h>
 #include <klineedit.h>
 #include <klocale.h>
 #include <knuminput.h>
@@ -43,17 +42,6 @@
 #include "misc.h"
 #include "cervisiasettings.h"
 #include "settingsdialog_advanced.h"
-
-
-namespace
-{
-    // helper method to load icons for configuration pages
-    inline QPixmap LoadIcon(const char* iconName)
-    {
-        return KIconLoader::global()->loadIcon(QLatin1String(iconName), KIconLoader::NoGroup,
-                                 KIconLoader::SizeMedium);
-    }
-}
 
 
 FontButton::FontButton( const QString &text, QWidget *parent, const char *name )
@@ -224,7 +212,7 @@ void SettingsDialog::addGeneralPage()
 {
     QFrame* generalPage = new QFrame;
     KPageWidgetItem *page = new KPageWidgetItem( generalPage, i18n("General") );
-    page->setIcon( KIcon(LoadIcon("misc")) );
+    page->setIcon( KIcon("misc") );
     
     QVBoxLayout* layout = new QVBoxLayout(generalPage);
     layout->setSpacing(KDialog::spacingHint());
@@ -258,7 +246,7 @@ void SettingsDialog::addDiffPage()
 {
     QFrame* diffPage = new QFrame;
     KPageWidgetItem *page = new KPageWidgetItem( diffPage, i18n("Diff Viewer") );
-    page->setIcon( KIcon(LoadIcon("vcs_diff")) );
+    page->setIcon( KIcon("vcs_diff") );
 
     QGridLayout* layout = new QGridLayout(diffPage);
 
@@ -307,7 +295,7 @@ void SettingsDialog::addStatusPage()
 {
     KVBox* statusPage = new KVBox;
     KPageWidgetItem *page = new KPageWidgetItem( statusPage, i18n("Status") );
-    page->setIcon( KIcon(LoadIcon("fork")) );
+    page->setIcon( KIcon("fork") );
 
     remotestatusbox = new QCheckBox(i18n("When opening a sandbox from a &remote repository,\n"
                                          "start a File->Status command automatically"), statusPage);
@@ -328,7 +316,7 @@ void SettingsDialog::addAdvancedPage()
 {
     KVBox* frame = new KVBox;
     KPageWidgetItem *page = new KPageWidgetItem( frame, i18n("Advanced") );
-    page->setIcon( KIcon(LoadIcon("configure")) );
+    page->setIcon( KIcon("configure") );
 
     m_advancedPage = new AdvancedPage(frame);
     m_advancedPage->kcfg_Timeout->setRange(0, 50000, 100);
@@ -347,7 +335,7 @@ void SettingsDialog::addLookAndFeelPage()
 {
     KVBox* lookPage = new KVBox;
     KPageWidgetItem *page = new KPageWidgetItem( lookPage, i18n("Appearance") );
-    page->setIcon( KIcon(LoadIcon("looknfeel")) );
+    page->setIcon( KIcon("preferences-desktop-theme") );
 
     Q3GroupBox* fontGroupBox = new Q3GroupBox(4, Qt::Vertical, i18n("Fonts"),
                                             lookPage);
