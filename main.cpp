@@ -29,7 +29,6 @@
 #include <klocale.h>
 #include <kurl.h>
 #include <ktoolinvocation.h>
-#include <kiconloader.h>
 
 #include "misc.h"
 #include "cervisiashell.h"
@@ -199,7 +198,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
         else
             shell->openURL();
 
-        shell->setIcon(qApp->windowIcon().pixmap(IconSize(KIconLoader::Desktop),IconSize(KIconLoader::Desktop)));
+        shell->setWindowIcon(qApp->windowIcon());
         shell->show();
     }
 
