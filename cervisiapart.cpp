@@ -534,46 +534,41 @@ void CervisiaPart::setupActions()
     //
     // Settings menu
     //
-    KToggleAction *toggaction  = new KToggleAction(i18n("Hide All &Files"), this);
-    actionCollection()->addAction("settings_hide_files", toggaction );
-    connect(toggaction, SIGNAL(triggered(bool) ), SLOT(slotHideFiles()));
-    toggaction->setCheckedState(KGuiItem(i18n("Show All &Files")));
+    action  = new KToggleAction(i18n("Hide All &Files"), this);
+    actionCollection()->addAction("settings_hide_files", action );
+    connect(action, SIGNAL(triggered(bool) ), SLOT(slotHideFiles()));
     hint = i18n("Determines whether only folders are shown");
-    toggaction->setToolTip( hint );
-    toggaction->setWhatsThis( hint );
+    action->setToolTip( hint );
+    action->setWhatsThis( hint );
 
-    toggaction  = new KToggleAction(i18n("Hide Unmodified Files"), this);
-    actionCollection()->addAction("settings_hide_uptodate", toggaction );
-    connect(toggaction, SIGNAL(triggered(bool) ), SLOT(slotHideUpToDate()));
-    toggaction->setCheckedState(KGuiItem(i18n("Show Unmodified Files")));
+    action  = new KToggleAction(i18n("Hide Unmodified Files"), this);
+    actionCollection()->addAction("settings_hide_uptodate", action );
+    connect(action, SIGNAL(triggered(bool) ), SLOT(slotHideUpToDate()));
     hint = i18n("Determines whether files with status up-to-date or "
                 "unknown are hidden");
-    toggaction->setToolTip( hint );
-    toggaction->setWhatsThis( hint );
+    action->setToolTip( hint );
+    action->setWhatsThis( hint );
 
-    toggaction  = new KToggleAction(i18n("Hide Removed Files"), this);
-    actionCollection()->addAction("settings_hide_removed", toggaction );
-    connect(toggaction, SIGNAL(triggered(bool) ), SLOT(slotHideRemoved()));
-    toggaction->setCheckedState(KGuiItem(i18n("Show Removed Files")));
+    action  = new KToggleAction(i18n("Hide Removed Files"), this);
+    actionCollection()->addAction("settings_hide_removed", action );
+    connect(action, SIGNAL(triggered(bool) ), SLOT(slotHideRemoved()));
     hint = i18n("Determines whether removed files are hidden");
-    toggaction->setToolTip( hint );
-    toggaction->setWhatsThis( hint );
+    action->setToolTip( hint );
+    action->setWhatsThis( hint );
 
-    toggaction  = new KToggleAction(i18n("Hide Non-CVS Files"), this);
-    actionCollection()->addAction("settings_hide_notincvs", toggaction );
-    connect(toggaction, SIGNAL(triggered(bool) ), SLOT(slotHideNotInCVS()));
-    toggaction->setCheckedState(KGuiItem(i18n("Show Non-CVS Files")));
+    action  = new KToggleAction(i18n("Hide Non-CVS Files"), this);
+    actionCollection()->addAction("settings_hide_notincvs", action );
+    connect(action, SIGNAL(triggered(bool) ), SLOT(slotHideNotInCVS()));
     hint = i18n("Determines whether files not in CVS are hidden");
-    toggaction->setToolTip( hint );
-    toggaction->setWhatsThis( hint );
+    action->setToolTip( hint );
+    action->setWhatsThis( hint );
 
-    toggaction  = new KToggleAction(i18n("Hide Empty Folders"), this);
-    actionCollection()->addAction("settings_hide_empty_directories", toggaction );
-    connect(toggaction, SIGNAL(triggered(bool) ), SLOT(slotHideEmptyDirectories()));
-    toggaction->setCheckedState(KGuiItem(i18n("Show Empty Folders")));
+    action  = new KToggleAction(i18n("Hide Empty Folders"), this);
+    actionCollection()->addAction("settings_hide_empty_directories", action );
+    connect(action, SIGNAL(triggered(bool) ), SLOT(slotHideEmptyDirectories()));
     hint = i18n("Determines whether folders without visible entries are hidden");
-    toggaction->setToolTip( hint );
-    toggaction->setWhatsThis( hint );
+    action->setToolTip( hint );
+    action->setWhatsThis( hint );
 
     action  = new KToggleAction(i18n("Create &Folders on Update"), this);
     actionCollection()->addAction("settings_create_dirs", action );
@@ -633,10 +628,9 @@ void CervisiaPart::setupActions()
     //
     // Folder context menu
     //
-    toggaction  = new KToggleAction(i18n("Unfold Folder"), this);
-    actionCollection()->addAction("unfold_folder", toggaction );
-    connect(toggaction, SIGNAL(triggered(bool) ), SLOT( slotUnfoldFolder() ));
-    toggaction->setCheckedState(KGuiItem(i18n("Fold Folder")));
+    action  = new KToggleAction(i18n("Unfold Folder"), this);
+    actionCollection()->addAction("unfold_folder", action );
+    connect(action, SIGNAL(triggered(bool) ), SLOT( slotUnfoldFolder() ));
 }
 
 
