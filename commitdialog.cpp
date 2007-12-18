@@ -86,7 +86,7 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInter
     m_fileList->header()->hide();
     textlabel->setBuddy(m_fileList);
     connect( m_fileList, SIGNAL(doubleClicked(Q3ListViewItem*)),
-             this, SLOT(fileSelected(QListViewItem*)));
+             this, SLOT(fileSelected(Q3ListViewItem*)));
     connect( m_fileList, SIGNAL(selectionChanged()),
              this, SLOT(fileHighlighted()) );
     layout->addWidget(m_fileList, 5);
