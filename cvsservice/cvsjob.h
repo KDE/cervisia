@@ -22,14 +22,11 @@
 #define CVSJOB_H
 
 #include <qobject.h>
-#include <qstring.h>
-#include <qstringlist.h>
-//Added by qt3to4:
-#include <Q3CString>
 
 #include <kdemacros.h>
 
-class K3Process;
+class QString;
+class QStringList;
 
 
 class KDE_EXPORT CvsJob : public QObject
@@ -41,15 +38,15 @@ public:
     virtual ~CvsJob();
 
     void clearCvsCommand();
+
     void setRSH(const QString& rsh);
     void setServer(const QString& server);
     void setDirectory(const QString& directory);
 
     CvsJob& operator<<(const QString& arg);
     CvsJob& operator<<(const char* arg);
-    CvsJob& operator<<(const Q3CString& arg);
     CvsJob& operator<<(const QStringList& args);
-    
+
     QString dbusObjectPath() const;
 public Q_SLOTS: //dbus function
     bool execute();
@@ -71,9 +68,9 @@ signals: //dbus signal
     void receivedStderr(const QString& buffer);
 
 private slots:
-    void slotProcessExited();
-    void slotReceivedStdout(K3Process* proc, char* buffer, int buflen);
-    void slotReceivedStderr(K3Process* proc, char* buffer, int buflen);
+    void slotProcessFinished();
+    void slotReceivedStdout();
+    void slotReceivedStderr();
 
 private:
     struct Private;

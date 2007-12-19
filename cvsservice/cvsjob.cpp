@@ -20,26 +20,23 @@
 
 #include "cvsjob.h"
 
-#include <qfile.h>
-//Added by qt3to4:
-#include <QList>
-#include <Q3CString>
-#include <kdebug.h>
-#include <k3process.h>
-#include <cvsjobadaptor.h>
 #include "sshagent.h"
+
+#include <kdebug.h>
+#include <kprocess.h>
+
+#include <cvsjobadaptor.h>
 
 
 struct CvsJob::Private
 {
     Private() : isRunning(false)
     {
-        childproc = new K3Process;
-        childproc->setUseShell(true, "/bin/sh");
+        childproc = new KProcess;
     }
     ~Private() { delete childproc; }
 
-    K3Process*   childproc;
+    KProcess*   childproc;
     QString     server;
     QString     rsh;
     QString     directory;
@@ -85,7 +82,7 @@ QString CvsJob::dbusObjectPath() const
 
 void CvsJob::clearCvsCommand()
 {
-    d->childproc->clearArguments();
+    d->childproc->clearProgram();
 }
 
 
@@ -127,13 +124,6 @@ CvsJob& CvsJob::operator<<(const char* arg)
 }
 
 
-CvsJob& CvsJob::operator<<(const Q3CString& arg)
-{
-    *d->childproc << arg;
-    return *this;
-}
-
-
 CvsJob& CvsJob::operator<<(const QStringList& args)
 {
     *d->childproc << args;
@@ -143,18 +133,7 @@ CvsJob& CvsJob::operator<<(const QStringList& args)
 
 QString CvsJob::cvsCommand() const
 {
-    QString command;
-
-    const QList<QByteArray>& args(d->childproc->args());
-    Q_FOREACH (QByteArray arg, args)
-    {
-        if (!command.isEmpty())
-            command += ' ';
-
-        command += QFile::decodeName(arg);
-    }
-
-    return command;
+    return d->childproc->program().join(QLatin1String(" "));
 }
 
 
@@ -173,32 +152,35 @@ bool CvsJob::execute()
         // kDebug(8051) << "PID  = " << ssh.pid();
         // kDebug(8051) << "SOCK = " << ssh.authSock();
 
-        d->childproc->setEnvironment("SSH_AGENT_PID", ssh.pid());
-        d->childproc->setEnvironment("SSH_AUTH_SOCK", ssh.authSock());
+        d->childproc->setEnv("SSH_AGENT_PID", ssh.pid());
+        d->childproc->setEnv("SSH_AUTH_SOCK", ssh.authSock());
     }
-    
-    d->childproc->setEnvironment("SSH_ASKPASS", "cvsaskpass");
+
+    d->childproc->setEnv("SSH_ASKPASS", "cvsaskpass");
 
     if( !d->rsh.isEmpty() )
-        d->childproc->setEnvironment("CVS_RSH", d->rsh);
+        d->childproc->setEnv("CVS_RSH", d->rsh);
 
     if( !d->server.isEmpty() )
-        d->childproc->setEnvironment("CVS_SERVER", d->server);
+        d->childproc->setEnv("CVS_SERVER", d->server);
 
     if( !d->directory.isEmpty() )
         d->childproc->setWorkingDirectory(d->directory);
 
-    connect(d->childproc, SIGNAL(processExited(K3Process*)),
-        SLOT(slotProcessExited()));
-    connect(d->childproc, SIGNAL(receivedStdout(K3Process*, char*, int)),
-        SLOT(slotReceivedStdout(K3Process*, char*, int)));
-    connect(d->childproc, SIGNAL(receivedStderr(K3Process*, char*, int)),
-        SLOT(slotReceivedStderr(K3Process*, char*, int)) );
+    connect(d->childproc, SIGNAL(finished(int, QProcess::ExitStatus)),
+        SLOT(slotProcessFinished()));
+    connect(d->childproc, SIGNAL(readyReadStandardOutput()),
+        SLOT(slotReceivedStdout()));
+    connect(d->childproc, SIGNAL(readyReadStandardError()),
+        SLOT(slotReceivedStderr()));
 
     kDebug(8051) << "Execute cvs command:" << cvsCommand();
 
     d->isRunning = true;
-    return d->childproc->start(K3Process::NotifyOnExit, K3Process::AllOutput);
+    d->childproc->setOutputChannelMode(KProcess::SeparateChannels);
+    d->childproc->setShellCommand(cvsCommand());
+    d->childproc->start();
+    return d->childproc->waitForStarted();
 }
 
 
@@ -207,40 +189,37 @@ void CvsJob::cancel()
     d->childproc->kill();
 }
 
-void CvsJob::slotProcessExited()
+void CvsJob::slotProcessFinished()
 {
     kDebug(8051);
     // disconnect all connections to childproc's signals
     d->childproc->disconnect();
-    d->childproc->clearArguments();
+    d->childproc->clearProgram();
 
     d->isRunning = false;
 
-    emit jobExited(d->childproc->normalExit(), d->childproc->exitStatus());
+    emit jobExited(d->childproc->exitStatus() == QProcess::NormalExit, d->childproc->exitCode());
 }
 
 
-void CvsJob::slotReceivedStdout(K3Process* proc, char* buffer, int buflen)
+void CvsJob::slotReceivedStdout()
 {
-    Q_UNUSED(proc);
-
-    QString output = QString::fromLocal8Bit(buffer, buflen);
+    const QString output(QString::fromLocal8Bit(d->childproc->readAllStandardOutput()));
 
     // accumulate output
-    d->outputLines += QStringList::split("\n", output);
+    d->outputLines += output.split('\n');
+
     kDebug(8051) << "output:" << output;
     emit receivedStdout(output);
 }
 
 
-void CvsJob::slotReceivedStderr(K3Process* proc, char* buffer, int buflen)
+void CvsJob::slotReceivedStderr()
 {
-    Q_UNUSED(proc);
-
-    QString output = QString::fromLocal8Bit(buffer, buflen);
+    const QString output(QString::fromLocal8Bit(d->childproc->readAllStandardError()));
 
     // accumulate output
-    d->outputLines += QStringList::split("\n", output);
+    d->outputLines += output.split('\n');
 
     kDebug(8051) << "output:" << output;
     emit receivedStderr(output);
