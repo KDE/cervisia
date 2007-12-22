@@ -21,11 +21,11 @@
 #include <qlabel.h>
 #include <qmessagebox.h>
 #include <qpushbutton.h>
-#include <q3popupmenu.h>
+#include <qmenu.h>
 #include <qtextstream.h>
-//Added by qt3to4:
 #include <QSplitter>
 #include <QList>
+
 #include <kaboutdata.h>
 #include <kaction.h>
 #include <kfiledialog.h>
@@ -83,7 +83,7 @@ using Cervisia::TagDialog;
 
 
 K_PLUGIN_FACTORY( CervisiaFactory, registerPlugin<CervisiaPart>(); )
-    K_EXPORT_PLUGIN( CervisiaFactory( "cervisiapart", "cervisia" ) )
+K_EXPORT_PLUGIN( CervisiaFactory( "cervisiapart", "cervisia" ) )
 
 
 CervisiaPart::CervisiaPart( QWidget *parentWidget,
@@ -645,7 +645,7 @@ void CervisiaPart::popupRequested(K3ListView*, Q3ListViewItem* item, const QPoin
         action->setChecked(item->isOpen());
     }
 
-    if( Q3PopupMenu* popup = static_cast<Q3PopupMenu*>(hostContainer(xmlName)) )
+    if( QMenu* popup = static_cast<QMenu*>(hostContainer(xmlName)) )
     {
         if( isFileItem(item) )
         {
