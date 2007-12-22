@@ -291,6 +291,7 @@ void CervisiaPart::setupActions()
     action  = new KAction(KIcon("vcs_add"), i18n("&Add to Repository..."), this);
     actionCollection()->addAction("file_add", action );
     connect(action, SIGNAL(triggered(bool) ), SLOT( slotAdd() ));
+    action->setIconText(i18n("Add"));
     action->setShortcut(QKeySequence(Qt::Key_Insert));
     hint = i18n("Adds (cvs add) the selected files to the repository");
     action->setToolTip( hint );
@@ -306,6 +307,7 @@ void CervisiaPart::setupActions()
     action  = new KAction(KIcon("vcs_remove"), i18n("&Remove From Repository..."), this);
     actionCollection()->addAction("file_remove", action );
     connect(action, SIGNAL(triggered(bool) ), SLOT( slotRemove() ));
+    action->setIconText(i18n("Remove"));
     action->setShortcut(QKeySequence(Qt::Key_Delete));
     hint = i18n("Removes (cvs remove) the selected files from the repository");
     action->setToolTip( hint );
