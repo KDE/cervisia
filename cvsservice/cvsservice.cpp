@@ -20,7 +20,6 @@
 
 #include "cvsservice.h"
 
-#include <q3intdict.h>
 #include <qstring.h>
 #include <QApplication>
 #include <QHash>
