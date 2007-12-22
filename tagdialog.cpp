@@ -73,7 +73,7 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisiaCvsserviceCvsserviceInterf
                      this, SLOT(tagButtonClicked()) );
 
             QBoxLayout *tagedit_layout = new QHBoxLayout();
-            layout->addItem(tagedit_layout);
+            layout->addLayout(tagedit_layout);
             tagedit_layout->addWidget(tag_label);
             tagedit_layout->addWidget(tag_combo);
             tagedit_layout->addWidget(tag_button);
@@ -88,7 +88,7 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisiaCvsserviceCvsserviceInterf
             tag_label->setBuddy( tag_edit );
 
             QBoxLayout *tagedit_layout = new QHBoxLayout();
-            layout->addItem(tagedit_layout);
+            layout->addLayout(tagedit_layout);
             tagedit_layout->addWidget(tag_label);
             tagedit_layout->addWidget(tag_edit);
 

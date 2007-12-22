@@ -20,15 +20,13 @@
 
 #include "watchdialog.h"
 
-#include <q3buttongroup.h>
+#include <qbuttongroup.h>
 #include <qcheckbox.h>
 #include <qlabel.h>
-#include <qlayout.h>
 #include <qradiobutton.h>
-//Added by qt3to4:
-#include <QVBoxLayout>
 #include <QGridLayout>
 #include <QBoxLayout>
+
 #include <klocale.h>
 
 
@@ -62,7 +60,7 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent)
     layout->addWidget(only_button);
 
     QGridLayout *eventslayout = new QGridLayout();
-    layout->addItem( eventslayout );
+    layout->addLayout( eventslayout );
     eventslayout->addColSpacing(0, 20);
     eventslayout->setColStretch(0, 0);
     eventslayout->setColStretch(1, 1);
@@ -79,10 +77,9 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent)
     uneditbox->setEnabled(false);
     eventslayout->addWidget(uneditbox, 2, 1);
 
-    Q3ButtonGroup* group = new Q3ButtonGroup(mainWidget);
-    group->hide();
-    group->insert(all_button);
-    group->insert(only_button);
+    QButtonGroup* group = new QButtonGroup(mainWidget);
+    group->addButton(all_button);
+    group->addButton(only_button);
 
     connect( only_button, SIGNAL(toggled(bool)),
              commitbox, SLOT(setEnabled(bool)) );

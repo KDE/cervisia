@@ -54,7 +54,7 @@ CvsInitDialog::CvsInitDialog(QWidget* parent)
     mainLayout->addWidget(dirLabel);
 
     QHBoxLayout* dirLayout = new QHBoxLayout();
-    mainLayout->addItem(dirLayout);
+    mainLayout->addLayout(dirLayout);
      
     m_directoryEdit = new KLineEdit(mainWidget);
     m_directoryEdit->setFocus();

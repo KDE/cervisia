@@ -82,7 +82,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     QWidget* listWidget = new QWidget(this);
     QVBoxLayout* listLayout = new QVBoxLayout(listWidget);
     QHBoxLayout* searchLayout = new QHBoxLayout();
-    listLayout->addItem(searchLayout);
+    listLayout->addLayout(searchLayout);
     searchLayout->setMargin(KDialog::spacingHint());
     searchLayout->setSpacing(KDialog::spacingHint());
 
@@ -129,7 +129,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
         }
 
         QGridLayout *grid = new QGridLayout();
-        layout->addItem( grid );
+        layout->addLayout( grid );
         grid->setRowStretch(0, 0);
         grid->setRowStretch(1, 0);
         grid->setRowStretch(2, 1);

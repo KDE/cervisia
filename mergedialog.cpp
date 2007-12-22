@@ -20,18 +20,15 @@
 
 #include "mergedialog.h"
 
-#include <q3buttongroup.h>
+#include <qbuttongroup.h>
 #include <qcombobox.h>
 #include <qlabel.h>
-#include <qlayout.h>
 #include <qpushbutton.h>
 #include <qradiobutton.h>
 #include <qstyle.h>
-//Added by qt3to4:
-#include <QVBoxLayout>
-#include <QHBoxLayout>
 #include <QGridLayout>
 #include <QBoxLayout>
+
 #include <klocale.h>
 
 #include "misc.h"
@@ -71,7 +68,7 @@ MergeDialog::MergeDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
              this, SLOT(branchButtonClicked()) );
 
     QBoxLayout *branchedit_layout = new QHBoxLayout();
-    layout->addItem(branchedit_layout);
+    layout->addLayout(branchedit_layout);
     branchedit_layout->addSpacing(iWidgetIndent);
     branchedit_layout->addWidget(branch_combo, 2);
     branchedit_layout->addWidget(branch_button, 0);
@@ -92,7 +89,7 @@ MergeDialog::MergeDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
              this, SLOT(tagButtonClicked()) );
 
     QGridLayout *tagsedit_layout = new QGridLayout();
-    layout->addItem( tagsedit_layout );
+    layout->addLayout( tagsedit_layout );
     tagsedit_layout->addColSpacing(0, iWidgetIndent);
     tagsedit_layout->setColStretch(0, 0);
     tagsedit_layout->setColStretch(1, 1);
@@ -104,11 +101,10 @@ MergeDialog::MergeDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
     tagsedit_layout->addWidget(tag2_combo, 1, 2);
     tagsedit_layout->addMultiCellWidget(tag_button, 0, 1, 3, 3);
 
-    Q3ButtonGroup* group = new Q3ButtonGroup(mainWidget);
-    group->hide();
+    QButtonGroup* group = new QButtonGroup(mainWidget);
     group->insert(bybranch_button);
     group->insert(bytags_button);
-    connect( group, SIGNAL(clicked(int)),
+    connect( group, SIGNAL(buttonClicked(int)),
              this, SLOT(toggled()) );
 
     // dis-/enable the widgets

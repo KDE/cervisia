@@ -69,7 +69,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
     layout->setMargin(0);
 
     QGridLayout* grid = new QGridLayout();
-    layout->addItem( grid );
+    layout->addLayout( grid );
     grid->setColStretch(0, 1);
     grid->setColStretch(1, 20);
     for( int i = 0; i < ((action==Checkout)? 4 : 10); ++i )

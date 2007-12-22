@@ -184,7 +184,7 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
     connect( forwbutton, SIGNAL(clicked()), SLOT(forwClicked()) );
 
     QBoxLayout *buttonlayout = new QHBoxLayout();
-    layout->addItem(buttonlayout);
+    layout->addLayout(buttonlayout);
     buttonlayout->addWidget(abutton, 1);
     buttonlayout->addWidget(bbutton, 1);
     buttonlayout->addWidget(abbutton, 1);

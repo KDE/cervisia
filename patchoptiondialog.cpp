@@ -35,12 +35,14 @@ using Cervisia::PatchOptionDialog;
 PatchOptionDialog::PatchOptionDialog(QWidget* parent)
     : KDialog(parent)
 {
-	setButtons(Ok | Cancel | Help);
-	setDefaultButton(Ok);
-	setModal(false);
-	showButtonSeparator(true);
+    setButtons(Ok | Cancel | Help);
+    setDefaultButton(Ok);
+    setModal(false);
+    showButtonSeparator(true);
+
     QFrame* mainWidget = new QFrame(this);
-	setMainWidget(mainWidget);
+    setMainWidget(mainWidget);
+
     QBoxLayout* topLayout = new QVBoxLayout(mainWidget);
     topLayout->setSpacing(spacingHint());
     topLayout->setMargin(0);
@@ -64,7 +66,7 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent)
     contextLinesLbl->setBuddy(m_contextLines);
 
     QBoxLayout* contextLinesLayout = new QHBoxLayout();
-    topLayout->addItem(contextLinesLayout);
+    topLayout->addLayout(contextLinesLayout);
     contextLinesLayout->addWidget(contextLinesLbl);
     contextLinesLayout->addWidget(m_contextLines);
 

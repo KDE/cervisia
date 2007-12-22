@@ -228,7 +228,7 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent)
              this, SLOT(choiceChanged()) );
 
     QGridLayout *grid = new QGridLayout();
-    layout->addItem( grid );
+    layout->addLayout( grid );
     grid->setColStretch(0, 1);
     grid->setColStretch(1, 0);
     grid->setColStretch(2, 4);

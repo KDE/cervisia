@@ -20,16 +20,13 @@
 
 #include "updatedialog.h"
 
-#include <q3buttongroup.h>
+#include <qbuttongroup.h>
 #include <qcombobox.h>
-#include <qlayout.h>
 #include <qpushbutton.h>
 #include <qradiobutton.h>
 #include <qstyle.h>
-//Added by qt3to4:
-#include <QVBoxLayout>
-#include <QHBoxLayout>
 #include <QBoxLayout>
+
 #include <klineedit.h>
 #include <klocale.h>
 
@@ -70,7 +67,7 @@ UpdateDialog::UpdateDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
              this, SLOT(branchButtonClicked()) );
             
     QBoxLayout *branchedit_layout = new QHBoxLayout();
-    layout->addItem(branchedit_layout);
+    layout->addLayout(branchedit_layout);
     branchedit_layout->addSpacing(iWidgetIndent);
     branchedit_layout->addWidget(branch_combo);
     branchedit_layout->addWidget(branch_button);
@@ -86,7 +83,7 @@ UpdateDialog::UpdateDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
              this, SLOT(tagButtonClicked()) );
             
     QBoxLayout *tagedit_layout = new QHBoxLayout();
-    layout->addItem(tagedit_layout);
+    layout->addLayout(tagedit_layout);
     tagedit_layout->addSpacing(iWidgetIndent);
     tagedit_layout->addWidget(tag_combo);
     tagedit_layout->addWidget(tag_button);
@@ -97,16 +94,15 @@ UpdateDialog::UpdateDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
     date_edit = new KLineEdit(mainWidget);
 
     QBoxLayout *dateedit_layout = new QHBoxLayout();
-    layout->addItem(dateedit_layout);
+    layout->addLayout(dateedit_layout);
     dateedit_layout->addSpacing(iWidgetIndent);
     dateedit_layout->addWidget(date_edit);
 
-    Q3ButtonGroup* group = new Q3ButtonGroup(mainWidget);
-    group->hide();
-    group->insert(bytag_button);
-    group->insert(bybranch_button);
-    group->insert(bydate_button);
-    connect( group, SIGNAL(clicked(int)),
+    QButtonGroup* group = new QButtonGroup(mainWidget);
+    group->addButton(bytag_button);
+    group->addButton(bybranch_button);
+    group->addButton(bydate_button);
+    connect( group, SIGNAL(buttonClicked(int)),
              this, SLOT(toggled()) );
 
     // dis-/enable the widgets

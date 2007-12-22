@@ -21,14 +21,14 @@
 #include "settingsdialog.h"
 
 #include <qcheckbox.h>
-#include <q3groupbox.h>
+#include <qgroupbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qwidget.h>
 #include <qradiobutton.h>
-//Added by qt3to4:
 #include <QPixmap>
 #include <QVBoxLayout>
+
 #include <kcolorbutton.h>
 #include <kconfig.h>
 #include <kfontdialog.h>
@@ -39,6 +39,7 @@
 #include <kurlrequester.h>
 #include <kcomponentdata.h>
 #include <kvbox.h>
+
 #include "misc.h"
 #include "cervisiasettings.h"
 #include "settingsdialog_advanced.h"
@@ -337,9 +338,7 @@ void SettingsDialog::addLookAndFeelPage()
     KPageWidgetItem *page = new KPageWidgetItem( lookPage, i18n("Appearance") );
     page->setIcon( KIcon("preferences-desktop-theme") );
 
-    Q3GroupBox* fontGroupBox = new Q3GroupBox(4, Qt::Vertical, i18n("Fonts"),
-                                            lookPage);
-    fontGroupBox->setInsideSpacing(KDialog::spacingHint());
+    QGroupBox* fontGroupBox = new QGroupBox(i18n("Fonts"), lookPage);
 
     m_protocolFontBox  = new FontButton(i18n("Font for &Protocol Window..."),
                                         fontGroupBox);
@@ -350,10 +349,13 @@ void SettingsDialog::addLookAndFeelPage()
     m_changelogFontBox = new FontButton(i18n("Font for ChangeLog View..."),
                                         fontGroupBox);
 
-    Q3GroupBox* colorGroupBox = new Q3GroupBox(4, Qt::Horizontal,
-                                             i18n("Colors"), lookPage);
-    colorGroupBox->setColumns(4);
-    colorGroupBox->setInsideSpacing(KDialog::spacingHint());
+    QVBoxLayout* fontLayout( new QVBoxLayout( fontGroupBox ) );
+    fontLayout->addWidget( m_protocolFontBox );
+    fontLayout->addWidget( m_annotateFontBox );
+    fontLayout->addWidget( m_diffFontBox );
+    fontLayout->addWidget( m_changelogFontBox );
+
+    QGroupBox* colorGroupBox = new QGroupBox(i18n("Colors"), lookPage);
 
     QLabel* conflictLabel = new QLabel(i18n("Conflict:"), colorGroupBox);
     m_conflictButton      = new KColorButton(colorGroupBox);
@@ -382,6 +384,23 @@ void SettingsDialog::addLookAndFeelPage()
     QLabel* notInCvsLabel = new QLabel(i18n("Not in cvs:"), colorGroupBox);
     m_notInCvsButton      = new KColorButton(colorGroupBox);
     notInCvsLabel->setBuddy(m_notInCvsButton);
+
+    QGridLayout* colorLayout( new QGridLayout( colorGroupBox ) );
+    colorLayout->addWidget( conflictLabel, 0, 0 );
+    colorLayout->addWidget( m_conflictButton, 0, 1 );
+    colorLayout->addWidget( localChangeLabel, 1, 0 );
+    colorLayout->addWidget( m_localChangeButton, 1, 1 );
+    colorLayout->addWidget( remoteChangeLabel, 2, 0 );
+    colorLayout->addWidget( m_remoteChangeButton, 2, 1 );
+    colorLayout->addWidget( notInCvsLabel, 3, 0 );
+    colorLayout->addWidget( m_notInCvsButton, 3, 1 );
+
+    colorLayout->addWidget( diffChangeLabel, 0, 3 );
+    colorLayout->addWidget( m_diffChangeButton, 0, 4 );
+    colorLayout->addWidget( diffInsertLabel, 1, 3 );
+    colorLayout->addWidget( m_diffInsertButton, 1, 4 );
+    colorLayout->addWidget( diffDeleteLabel, 2, 3 );
+    colorLayout->addWidget( m_diffDeleteButton, 2, 4 );
 
     m_splitterBox = new QCheckBox(i18n("Split main window &horizontally"), lookPage);
 

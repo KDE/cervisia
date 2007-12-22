@@ -35,6 +35,7 @@
 #include <QHBoxLayout>
 #include <QBoxLayout>
 #include <QVBoxLayout>
+
 #include <kconfig.h>
 #include <kfiledialog.h>
 #include <klocale.h>
@@ -55,19 +56,20 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
     items.setAutoDelete(true);
     markeditem = -1;
     setModal(modal);
-	setButtons(Close | Help | User1);
-	setDefaultButton(Close);
-	showButtonSeparator(true);
-	setButtonGuiItem(User1,KStandardGuiItem::saveAs());
+    setButtons(Close | Help | User1);
+    setDefaultButton(Close);
+    showButtonSeparator(true);
+    setButtonGuiItem(User1,KStandardGuiItem::saveAs());
+
     QFrame* mainWidget = new QFrame(this);
-	setMainWidget(mainWidget);
+    setMainWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
     layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
     QGridLayout *pairlayout = new QGridLayout();
-    layout->addItem( pairlayout );
+    layout->addLayout( pairlayout );
     pairlayout->setRowStretch(0, 0);
     pairlayout->setRowStretch(1, 1);
     pairlayout->setColStretch(1, 0);
@@ -116,7 +118,7 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
     connect( this, SIGNAL(user1Clicked()), SLOT(saveAsClicked()) );
 
     QBoxLayout *buttonlayout = new QHBoxLayout();
-    layout->addItem(buttonlayout);
+    layout->addLayout(buttonlayout);
     buttonlayout->addWidget(syncbox, 0);
     buttonlayout->addStretch(4);
     buttonlayout->addWidget(itemscombo);
