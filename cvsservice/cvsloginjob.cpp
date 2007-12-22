@@ -24,9 +24,10 @@
 #include <klocale.h>
 #include <kpassworddialog.h>
 
+#include <qbytearray.h>
+
 #include <sys/types.h>
 #include <signal.h>
-#include <q3cstring.h>
 #include <cvsloginjobadaptor.h>
 
 static const char LOGIN_PHRASE[]   = "Logging in to";
@@ -81,7 +82,7 @@ void CvsLoginJob::setRepository(const QByteArray& repository)
 
 bool CvsLoginJob::execute()
 {
-    static Q3CString repository;
+    static QByteArray repository;
 
     int res = m_Proc->exec(m_CvsClient, m_Arguments);
     if( res < 0 )
@@ -93,7 +94,7 @@ bool CvsLoginJob::execute()
     bool result = false;
     while( true )
     {
-        Q3CString line = m_Proc->readLine();
+        QByteArray line = m_Proc->readLine();
         if( line.isNull() )
         {
             return result;
@@ -106,7 +107,7 @@ bool CvsLoginJob::execute()
         // retrieve repository from 'Logging in to'-line
         if( line.contains(LOGIN_PHRASE) )
         {
-            repository = line.remove(0, line.find(":pserver:"));
+            repository = line.remove(0, line.indexOf(":pserver:"));
             continue;
         }
 
@@ -118,12 +119,12 @@ bool CvsLoginJob::execute()
             // TODO: We really should display the repository name. Unfortunately
             //       the dialog doesn't show part of the repository name, because
             //       it's too long. :-(
-	    QString password;
+            QString password;
             KPasswordDialog dlg( 0 , KPasswordDialog::ShowUsernameLine );
             dlg.setPrompt( i18n("Please type "
                       "in your password for the repository below."));
             if( dlg.exec() )
-	    {
+            {
                 password = dlg.password();
                 // send password to process
                 m_Proc->WaitSlave();
