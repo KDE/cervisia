@@ -8,9 +8,7 @@ B<cervisia>
          S<[ B<--display> I<display> ]>
          S<[ B<--caption> I<caption> ]>
          S<[ B<--icon> I<icon> ]>
-         S<[ B<--miniicon> I<miniicon> ]>
          S<[ B<--config> I<filename> ]>
-         S<[ B<--dcopserver> I<server> ]>
          S<[ B<--nocrashhandler> ]>
          S<[ B<--waitforwm> ]>
          S<[ B<--style> I<style> ]>
@@ -56,17 +54,9 @@ Sets the caption, i. e. what is shown in the title bar
 
 Sets the program's icon (used by window managers and panels)
 
-=item B<--miniicon> I<miniicon>
-
-Sets the program's mini icon (used by window managers and panels)
-
 =item B<--config> I<filename>
 
 Uses the given file for the configuration
-
-=item B<--dcopserver> I<server>
-
-Sets the dcopserver the program should use
 
 =item B<--nocrashhandler>
 
