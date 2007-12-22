@@ -70,8 +70,8 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
 
     QGridLayout* grid = new QGridLayout();
     layout->addLayout( grid );
-    grid->setColStretch(0, 1);
-    grid->setColStretch(1, 20);
+    grid->setColumnStretch(0, 1);
+    grid->setColumnStretch(1, 20);
     for( int i = 0; i < ((action==Checkout)? 4 : 10); ++i )
         grid->setRowStretch(i, 0);
 
@@ -211,13 +211,13 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
     QStringList list1 = Repositories::readCvsPassFile();
     QStringList::ConstIterator it1;
     for (it1 = list1.begin(); it1 != list1.end(); ++it1)
-        repo_combo->insertItem(*it1);
+        repo_combo->addItem(*it1);
 
     QStringList list2 = Repositories::readConfigFile();
     QStringList::ConstIterator it2;
     for (it2 = list2.begin(); it2 != list2.end(); ++it2)
         if (!list1.contains(*it2))
-            repo_combo->insertItem(*it2);
+            repo_combo->addItem(*it2);
 
     setHelp((act == Import) ? "importing" : "checkingout");
 
@@ -379,7 +379,7 @@ void CheckoutDialog::moduleButtonClicked()
             pos = str.length();
         QString module( str.left(pos).trimmed() );
         if ( !module.isEmpty() )
-            module_combo->insertItem(module);
+            module_combo->addItem(module);
     }
 }
 
@@ -428,7 +428,7 @@ void CheckoutDialog::branchButtonClicked()
     branchTagList.sort();
 
     branchCombo->clear();
-    branchCombo->insertStringList(branchTagList);
+    branchCombo->addItems(branchTagList);
 }
 
 

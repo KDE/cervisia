@@ -94,7 +94,7 @@ void ChangeLogDialog::slotOk()
     }
 
     QTextStream stream(&f);
-    stream << edit->text();
+    stream << edit->toPlainText();
     f.close();
 
     KDialog::accept();

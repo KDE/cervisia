@@ -149,7 +149,7 @@ void TagDialog::slotOk()
 void TagDialog::tagButtonClicked()
 {
     tag_combo->clear();
-    tag_combo->insertStringList(::fetchTags(cvsService, this));
+    tag_combo->addItems(::fetchTags(cvsService, this));
 }
 
 

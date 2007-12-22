@@ -159,7 +159,7 @@ bool ProgressDialog::getLine(QString& line)
         return false;
 
     line = d->output.first();
-    d->output.remove(d->output.begin());
+    d->output.removeFirst();
 
     return true;
 }

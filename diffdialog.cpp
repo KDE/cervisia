@@ -72,10 +72,10 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
     layout->addLayout( pairlayout );
     pairlayout->setRowStretch(0, 0);
     pairlayout->setRowStretch(1, 1);
-    pairlayout->setColStretch(1, 0);
+    pairlayout->setColumnStretch(1, 0);
     pairlayout->addColSpacing(1, 16);
-    pairlayout->setColStretch(0, 10);
-    pairlayout->setColStretch(2, 10);
+    pairlayout->setColumnStretch(0, 10);
+    pairlayout->setColumnStretch(2, 10);
 
     revlabel1 = new QLabel(mainWidget);
     pairlayout->addWidget(revlabel1, 0, 0);
@@ -101,7 +101,7 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
 	     this, SLOT(toggleSynchronize(bool)) );
 
     itemscombo = new QComboBox(mainWidget);
-    itemscombo->insertItem(QString());
+    itemscombo->addItem(QString());
     connect( itemscombo, SIGNAL(activated(int)),
              this, SLOT(comboActivated(int)) );
 
@@ -337,7 +337,7 @@ void DiffDialog::newDiffHunk(int& linenoA, int& linenoB,
 
     const QString region = regionAsString(linenoA+1, linesA.count(),
                                           linenoB+1, linesB.count());
-    itemscombo->insertItem(region);
+    itemscombo->addItem(region);
 
     QStringList::ConstIterator itA = linesA.begin();
     QStringList::ConstIterator itB = linesB.begin();
@@ -421,12 +421,12 @@ void DiffDialog::updateNofN()
 {
     QString str;
     if (markeditem >= 0)
-	str = i18n("%1 of %2", markeditem+1, items.count());
+        str = i18n("%1 of %2", markeditem+1, items.count());
     else
-	str = i18n("%1 differences", items.count());
+        str = i18n("%1 differences", items.count());
     nofnlabel->setText(str);
 
-    itemscombo->setCurrentItem(markeditem==-2? 0 : markeditem+1);
+    itemscombo->setCurrentIndex(markeditem==-2? 0 : markeditem+1);
 
     backbutton->setEnabled(markeditem != -1);
     forwbutton->setEnabled(markeditem != -2 && items.count());

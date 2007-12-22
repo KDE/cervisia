@@ -229,10 +229,10 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent)
 
     QGridLayout *grid = new QGridLayout();
     layout->addLayout( grid );
-    grid->setColStretch(0, 1);
-    grid->setColStretch(1, 0);
-    grid->setColStretch(2, 4);
-    grid->setColStretch(3, 1);
+    grid->setColumnStretch(0, 1);
+    grid->setColumnStretch(1, 0);
+    grid->setColumnStretch(2, 4);
+    grid->setColumnStretch(3, 1);
     grid->addWidget(commit_box,        0, 0);
     grid->addWidget(checkout_box,      1, 0);
     grid->addWidget(tag_box,           2, 0);

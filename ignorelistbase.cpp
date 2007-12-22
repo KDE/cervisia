@@ -26,7 +26,7 @@ using namespace Cervisia;
 
 void IgnoreListBase::addEntriesFromString(const QString& str)
 {
-    QStringList entries = QStringList::split(' ', str);
+    QStringList entries = str.split(' ');
     for( QStringList::iterator it = entries.begin(); it != entries.end(); ++it )
     {
         addEntry(*it);

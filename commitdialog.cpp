@@ -188,7 +188,7 @@ void CommitDialog::setLogHistory(const QStringList &list)
 {
     commits = list;
 
-    combo->insertItem(i18n("Current"));
+    combo->addItem(i18n("Current"));
 
     for ( QStringList::ConstIterator it = list.begin();
           it != list.end(); ++it )
@@ -204,7 +204,7 @@ void CommitDialog::setLogHistory(const QStringList &list)
                 txt += "...";
             }
 
-            combo->insertItem(txt);
+            combo->addItem(txt);
         }
 }
 

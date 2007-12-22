@@ -277,7 +277,7 @@ void RepositoryDialog::readConfigFile()
     // Sort out all list elements which are already in the list view
     Q3ListViewItem* item = m_repoList->firstChild();
     for( ; item; item = item->nextSibling() )
-        list.remove(item->text(0));
+        list.removeAll(item->text(0));
 
     QStringList::ConstIterator it;
     for( it = list.begin(); it != list.end(); ++it )

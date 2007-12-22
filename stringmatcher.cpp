@@ -45,7 +45,7 @@ namespace
 
 bool StringMatcher::match(const QString& text) const
 {
-    if (m_exactPatterns.find(text) != m_exactPatterns.end())
+    if (m_exactPatterns.contains(text))
     {
         return true;
     }

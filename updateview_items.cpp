@@ -730,7 +730,7 @@ UpdateDirItem* findOrCreateDirItem(const QString& dirPath,
 
     if (dirPath != QLatin1String("."))
     {
-        const QStringList& dirNames(QStringList::split('/', dirPath));
+        const QStringList& dirNames(dirPath.split('/'));
         const QStringList::const_iterator itDirNameEnd(dirNames.end());
         for (QStringList::const_iterator itDirName(dirNames.begin());
              itDirName != itDirNameEnd; ++itDirName)

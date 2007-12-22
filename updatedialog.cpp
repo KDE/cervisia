@@ -133,14 +133,14 @@ QString UpdateDialog::date() const
 void UpdateDialog::tagButtonClicked()
 {
     tag_combo->clear();
-    tag_combo->insertStringList(::fetchTags(cvsService, this));
+    tag_combo->addItems(::fetchTags(cvsService, this));
 }
 
 
 void UpdateDialog::branchButtonClicked()
 {
     branch_combo->clear();
-    branch_combo->insertStringList(::fetchBranches(cvsService, this));
+    branch_combo->addItems(::fetchBranches(cvsService, this));
 }
 
 

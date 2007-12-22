@@ -22,6 +22,8 @@
 
 #include <qtextbrowser.h>
 
+#include <QTextBlock>
+
 class KFind;
 
 namespace Cervisia
@@ -35,7 +37,7 @@ class LogPlainView : public QTextBrowser
     Q_OBJECT
 
 public:
-    explicit LogPlainView(QWidget* parent = 0, const char* name = 0);
+    explicit LogPlainView(QWidget* parent = 0);
     ~LogPlainView();
 
     void addRevision(const Cervisia::LogInfo& logInfo);

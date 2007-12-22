@@ -62,8 +62,8 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent)
     QGridLayout *eventslayout = new QGridLayout();
     layout->addLayout( eventslayout );
     eventslayout->addColSpacing(0, 20);
-    eventslayout->setColStretch(0, 0);
-    eventslayout->setColStretch(1, 1);
+    eventslayout->setColumnStretch(0, 0);
+    eventslayout->setColumnStretch(1, 1);
 
     commitbox = new QCheckBox(i18n("&Commits"), mainWidget);
     commitbox->setEnabled(false);

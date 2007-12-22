@@ -22,6 +22,8 @@
 #include "logmessageedit.h"
 using Cervisia::LogMessageEdit;
 
+#include <QKeyEvent>
+
 #include <KShortcut>
 #include <KStandardShortcut>
 

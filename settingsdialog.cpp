@@ -45,8 +45,8 @@
 #include "settingsdialog_advanced.h"
 
 
-FontButton::FontButton( const QString &text, QWidget *parent, const char *name )
-    : QPushButton(text, parent, name)
+FontButton::FontButton( const QString &text, QWidget *parent )
+    : QPushButton(text, parent)
 {
     connect( this, SIGNAL(clicked()), this, SLOT(chooseFont()) );
 }

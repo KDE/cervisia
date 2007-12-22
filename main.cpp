@@ -49,7 +49,7 @@ static OrgKdeCervisiaCvsserviceCvsserviceInterface* StartDBusService(const QStri
                                                 &error,&appId)  )
     {
         std::cerr << "Starting cvsservice failed with message: "
-                  << error.latin1() << std::endl;
+                  << error.toLatin1().constData() << std::endl;
         exit(1);
     }
 

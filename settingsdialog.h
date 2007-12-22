@@ -39,7 +39,7 @@ class FontButton : public QPushButton
     Q_OBJECT
 
 public:
-    explicit FontButton( const QString &text, QWidget *parent=0, const char *name=0 );
+    explicit FontButton( const QString &text, QWidget *parent=0 );
 
 private slots:
     void chooseFont();

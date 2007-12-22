@@ -255,7 +255,7 @@ QString DiffView::stringAtLine(int lineno)
 
 QByteArray DiffView::compressedContent()
 {
-    QByteArray res(items.count());
+    QByteArray res(items.count(), '\0');
 
     Q3PtrListIterator<DiffViewItem> it(items);
     int i=0;
@@ -392,8 +392,8 @@ void DiffView::paintCell(QPainter *p, int row, int col)
 }
 
 
-DiffZoomWidget::DiffZoomWidget(QWidget *parent, const char *name)
-    : QFrame(parent, name)
+DiffZoomWidget::DiffZoomWidget(QWidget *parent)
+    : QFrame(parent)
 {
     setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Minimum ) );
 }

@@ -954,7 +954,7 @@ void CervisiaPart::slotCommit()
         {
             recentCommits.prepend( msg );
             while (recentCommits.count() > 50)
-                recentCommits.remove( recentCommits.last() );
+                recentCommits.removeLast();
 
             KConfigGroup conf( config(), "CommitLogs" );
             conf.writeEntry( sandbox, recentCommits );

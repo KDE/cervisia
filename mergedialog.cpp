@@ -91,10 +91,10 @@ MergeDialog::MergeDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
     QGridLayout *tagsedit_layout = new QGridLayout();
     layout->addLayout( tagsedit_layout );
     tagsedit_layout->addColSpacing(0, iWidgetIndent);
-    tagsedit_layout->setColStretch(0, 0);
-    tagsedit_layout->setColStretch(1, 1);
-    tagsedit_layout->setColStretch(2, 2);
-    tagsedit_layout->setColStretch(3, 0);
+    tagsedit_layout->setColumnStretch(0, 0);
+    tagsedit_layout->setColumnStretch(1, 1);
+    tagsedit_layout->setColumnStretch(2, 2);
+    tagsedit_layout->setColumnStretch(3, 0);
     tagsedit_layout->addWidget(tag1_label, 0, 1);
     tagsedit_layout->addWidget(tag1_combo, 0, 2);
     tagsedit_layout->addWidget(tag2_label, 1, 1);
@@ -102,8 +102,8 @@ MergeDialog::MergeDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
     tagsedit_layout->addMultiCellWidget(tag_button, 0, 1, 3, 3);
 
     QButtonGroup* group = new QButtonGroup(mainWidget);
-    group->insert(bybranch_button);
-    group->insert(bytags_button);
+    group->addButton(bybranch_button);
+    group->addButton(bytags_button);
     connect( group, SIGNAL(buttonClicked(int)),
              this, SLOT(toggled()) );
 
@@ -140,16 +140,16 @@ void MergeDialog::tagButtonClicked()
 {
     QStringList const listTags(::fetchTags(cvsService, this));
     tag1_combo->clear();
-    tag1_combo->insertStringList(listTags);
+    tag1_combo->addItems(listTags);
     tag2_combo->clear();
-    tag2_combo->insertStringList(listTags);
+    tag2_combo->addItems(listTags);
 }
 
 
 void MergeDialog::branchButtonClicked()
 {
     branch_combo->clear();
-    branch_combo->insertStringList(::fetchBranches(cvsService, this));
+    branch_combo->addItems(::fetchBranches(cvsService, this));
 }
 
 

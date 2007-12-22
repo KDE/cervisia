@@ -28,8 +28,8 @@
 using namespace Cervisia;
 
 
-LogPlainView::LogPlainView(QWidget* parent, const char* name)
-    : QTextBrowser(parent, name)
+LogPlainView::LogPlainView(QWidget* parent)
+    : QTextBrowser(parent)
     , m_find(0)
 {
 }

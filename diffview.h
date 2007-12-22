@@ -109,7 +109,7 @@ class DiffZoomWidget : public QFrame
     Q_OBJECT
 
 public:
-    explicit DiffZoomWidget(QWidget *parent=0, const char *name=0);
+    explicit DiffZoomWidget(QWidget *parent=0);
     ~DiffZoomWidget();
 
     void setDiffView(DiffView *view);

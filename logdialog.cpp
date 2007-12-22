@@ -133,11 +133,11 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
         grid->setRowStretch(0, 0);
         grid->setRowStretch(1, 0);
         grid->setRowStretch(2, 1);
-        grid->setColStretch(0, 0);
-        grid->setColStretch(1, 1);
-        grid->setColStretch(2, 0);
-        grid->setColStretch(3, 1);
-        grid->setColStretch(4, 2);
+        grid->setColumnStretch(0, 0);
+        grid->setColumnStretch(1, 1);
+        grid->setColumnStretch(2, 0);
+        grid->setColumnStretch(3, 1);
+        grid->setColumnStretch(4, 2);
 
         QString versionident = (i==0)? i18n("Revision A:") : i18n("Revision B:");
         QLabel *versionlabel = new QLabel(versionident, mainWidget);
@@ -213,7 +213,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     KConfigGroup cg(&partConfig, "LogDialog");
-    tabWidget->setCurrentPage(cg.readEntry("ShowTab", 0));
+    tabWidget->setCurrentIndex(cg.readEntry("ShowTab", 0));
     restoreDialogSize(cg);
 
     updateButtons();
@@ -226,7 +226,7 @@ LogDialog::~LogDialog()
     qDeleteAll(tags);
 
     KConfigGroup cg(&partConfig, "LogDialog");
-    cg.writeEntry("ShowTab", tabWidget->currentPageIndex());
+    cg.writeEntry("ShowTab", tabWidget->currentIndex());
     saveDialogSize(cg);
 }
 
@@ -309,7 +309,7 @@ bool LogDialog::parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service
                 break;
             case Author:
                 {
-                    QStringList strList = QStringList::split(";", line);
+                    QStringList strList = line.split(';');
 
                     // convert date into ISO format (YYYY-MM-DDTHH:MM:SS)
                     int len = strList[0].length();
@@ -390,15 +390,15 @@ bool LogDialog::parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service
         }
     }
 
-    tagcombo[0]->insertItem(QString());
-    tagcombo[1]->insertItem(QString());
+    tagcombo[0]->addItem(QString());
+    tagcombo[1]->addItem(QString());
     foreach (LogDialogTagInfo* tagInfo, tags)
     {
         QString str = tagInfo->tag;
         if( !tagInfo->branchpoint.isEmpty() )
             str += i18n(" (Branchpoint)");
-        tagcombo[0]->insertItem(str);
-        tagcombo[1]->insertItem(str);
+        tagcombo[0]->addItem(str);
+        tagcombo[1]->addItem(str);
     }
 
     plain->scrollToTop();

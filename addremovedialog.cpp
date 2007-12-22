@@ -90,7 +90,7 @@ void AddRemoveDialog::setFileList(const QStringList& files)
     if( files.contains(".") )
     {
         QStringList copy(files);
-        int idx = copy.findIndex(".");
+        int idx = copy.indexOf(".");
         copy[idx] = QFileInfo(".").absoluteFilePath();
 
         m_listBox->addItems(copy);
