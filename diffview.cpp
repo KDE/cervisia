@@ -58,11 +58,11 @@ const int DiffView::BORDER = 7;
 DiffView::DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
                     QWidget *parent, const char *name )
     : QtTableView(parent, name, Qt::WNoAutoErase)
-    , partConfig(cfg)
     , linenos(withlinenos)
     , marker(withmarker)
     , textwidth(0)
     , partner(0)
+    , partConfig(cfg)
 {
     setNumRows(0);
     setNumCols( 1 + (withlinenos?1:0) + (withmarker?1:0) );
