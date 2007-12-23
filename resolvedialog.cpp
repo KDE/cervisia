@@ -270,8 +270,7 @@ bool ResolveDialog::parseFile(const QString &name)
                     // Set to look for <<<<<<< at beginning of line with exactly one
                     // space after then anything after that.
                     QRegExp rx( "^<{7}\\s.*$" );
-                    int separatorPos = rx.search(line);
-                    if( separatorPos >= 0 )
+                    if( line.contains( rx ) )
                     {
                         state     = VersionA;
                         advanced1 = 0;
@@ -288,8 +287,7 @@ bool ResolveDialog::parseFile(const QString &name)
                     // Set to look for ======= at beginning of line which may have one
                     // or more spaces after then nothing else.
                     QRegExp rx( "^={7}\\s*$" );
-                    int separatorPos = rx.search(line);
-                    if( separatorPos < 0 )    // still in version A
+                    if( !line.contains( rx ) ) // still in version A
                     {
                         advanced1++;
                         addToMergeAndVersionA(line, DiffView::Change, lineno1);
@@ -306,8 +304,7 @@ bool ResolveDialog::parseFile(const QString &name)
                     // Set to look for >>>>>>> at beginning of line with exactly one
                     // space after then anything after that.
                     QRegExp rx( "^>{7}\\s.*$" );
-                    int separatorPos = rx.search(line);
-                    if( separatorPos < 0 )    // still in version B
+                    if( !line.contains( rx ) ) // still in version B
                     {
                         advanced2++;
                         addToVersionB(line, DiffView::Change, lineno2);

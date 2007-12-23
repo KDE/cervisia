@@ -59,7 +59,8 @@ UpdateDialog::UpdateDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
     bybranch_button->setChecked(true);
     layout->addWidget(bybranch_button);
 
-    branch_combo = new QComboBox(true, mainWidget);
+    branch_combo = new QComboBox(mainWidget);
+    branch_combo->setEditable(true);
     branch_combo->setMinimumWidth(iComboBoxMinWidth);
     
     branch_button = new QPushButton(i18n("Fetch &List"), mainWidget);
@@ -75,7 +76,8 @@ UpdateDialog::UpdateDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
     bytag_button = new QRadioButton(i18n("Update to &tag: "), mainWidget);
     layout->addWidget(bytag_button);
 
-    tag_combo = new QComboBox(true, mainWidget);
+    tag_combo = new QComboBox(mainWidget);
+    tag_combo->setEditable(true);
     tag_combo->setMinimumWidth(iComboBoxMinWidth);
     
     tag_button = new QPushButton(i18n("Fetch L&ist"), mainWidget);

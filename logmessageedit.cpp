@@ -166,7 +166,7 @@ void LogMessageEdit::tryCompletion()
     {
         if( !m_completing )
         {
-            m_completionStartPos = text.findRev(' ', pos-2) + 1;
+            m_completionStartPos = text.lastIndexOf(' ', pos-2) + 1;
         }
 
         // retrieve current word

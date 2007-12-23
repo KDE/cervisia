@@ -174,7 +174,7 @@ QString Cervisia::NormalizeRepository(const QString& repository)
 
     // extract username, hostname, port and path from CVSROOT
     QString userName, hostName, port, path;
-    if( rx.search(repository) != -1 )
+    if( repository.contains( rx ) )
     {
         userName = rx.cap(2);
         hostName = rx.cap(4);

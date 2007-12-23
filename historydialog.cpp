@@ -275,8 +275,8 @@ HistoryDialog::~HistoryDialog()
 void HistoryDialog::choiceChanged()
 {
     const QString author(user_edit->text());
-    const QRegExp fileMatcher(filename_edit->text(), true, true);
-    const QRegExp pathMatcher(dirname_edit->text(), true, true);
+    const QRegExp fileMatcher(filename_edit->text(), Qt::CaseSensitive, QRegExp::Wildcard);
+    const QRegExp pathMatcher(dirname_edit->text(), Qt::CaseSensitive, QRegExp::Wildcard);
 
     const bool showCommitEvents(commit_box->isChecked());
     const bool showCheckoutEvents(checkout_box->isChecked());
@@ -297,8 +297,8 @@ void HistoryDialog::choiceChanged()
                          || (showOtherEvents && item->isOther()));
             visible = visible
                 && (!filterByAuthor || author == item->text(HistoryItem::Author))
-                && (!filterByFile || fileMatcher.search(item->text(HistoryItem::File)) >= 0)
-                && (!filterByPath || pathMatcher.search(item->text(HistoryItem::Path)) >= 0);
+                && (!filterByFile || item->text(HistoryItem::File).contains(fileMatcher))
+                && (!filterByPath || item->text(HistoryItem::Path).contains(pathMatcher));
 
             item->setVisible(visible);
         }

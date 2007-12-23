@@ -61,7 +61,8 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisiaCvsserviceCvsserviceInterf
 
     if (action == Delete)
         {
-            tag_combo = new QComboBox(true, mainWidget);
+            tag_combo = new QComboBox(mainWidget);
+            tag_combo->setEditable(true);
             tag_combo->setFocus();
             tag_combo->setMinimumWidth(fontMetrics().width('0') * 30);
 

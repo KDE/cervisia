@@ -75,7 +75,8 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
     for( int i = 0; i < ((action==Checkout)? 4 : 10); ++i )
         grid->setRowStretch(i, 0);
 
-    repo_combo = new QComboBox(true, mainWidget);
+    repo_combo = new QComboBox(mainWidget);
+    repo_combo->setEditable(true);
     repo_combo->setFocus();
     // make sure combobox is smaller than the screen
     repo_combo->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
@@ -95,7 +96,8 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
     }
     else
     {
-        module_combo = new QComboBox(true, mainWidget);
+        module_combo = new QComboBox(mainWidget);
+        module_combo->setEditable(true);
 
         QPushButton* module_button = new QPushButton(i18n("Fetch &List"), mainWidget);
         connect( module_button, SIGNAL(clicked()),
@@ -110,7 +112,8 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
         module_label->setBuddy(module_combo);
         grid->addWidget(module_label, 1, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
-        branchCombo = new QComboBox(true, mainWidget);
+        branchCombo = new QComboBox(mainWidget);
+        branchCombo->setEditable(true);
 
         QPushButton* branchButton = new QPushButton(i18n("Fetch &List"), mainWidget);
         connect( branchButton, SIGNAL(clicked()),

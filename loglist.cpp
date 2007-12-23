@@ -176,7 +176,7 @@ void LogListView::contentsMousePressEvent(QMouseEvent *e)
     if ( e->button() == Qt::LeftButton )
     {
         // If the control key was pressed, then we change revision B not A
-        if( e->state() & Qt::ControlModifier )
+        if( e->modifiers() & Qt::ControlModifier )
             emit revisionClicked(revision, true);
         else
             emit revisionClicked(revision, false);
@@ -206,7 +206,7 @@ void LogListView::keyPressEvent(QKeyEvent *e)
     case Qt::Key_End:
     case Qt::Key_PageDown:
     case Qt::Key_PageUp:
-        if (e->state() == 0)
+        if (e->modifiers() == Qt::NoModifier)
              Q3ListView::keyPressEvent(e);
         else
             QApplication::postEvent(this, new QKeyEvent(QEvent::KeyPress, e->key(), e->ascii(), 0));
