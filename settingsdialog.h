@@ -31,7 +31,10 @@ class KLineEdit;
 class KConfig;
 class KColorButton;
 class KUrlRequester;
-class AdvancedPage;
+
+namespace Ui {
+    class AdvancedPage;
+}
 
 
 class FontButton : public QPushButton
@@ -90,7 +93,7 @@ private:
     KColorButton* m_diffDeleteButton;
 
     QCheckBox*    m_splitterBox;
-    AdvancedPage* m_advancedPage;
+    Ui::AdvancedPage* m_advancedPage;
 
     KConfig* serviceConfig;
 };

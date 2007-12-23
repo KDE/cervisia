@@ -36,7 +36,7 @@ qt4_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia.cvsjob.xml
 qt4_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia.repository.xml )
 
 
-kde4_add_ui3_files(libcervisia_SRCS settingsdialog_advanced.ui )
+kde4_add_ui_files(libcervisia_SRCS settingsdialog_advanced.ui )
 
 kde4_add_kcfg_files(libcervisia_SRCS cervisiasettings.kcfgc )
 

@@ -42,7 +42,7 @@
 
 #include "misc.h"
 #include "cervisiasettings.h"
-#include "settingsdialog_advanced.h"
+#include "ui_settingsdialog_advanced.h"
 
 
 FontButton::FontButton( const QString &text, QWidget *parent )
@@ -315,11 +315,12 @@ void SettingsDialog::addStatusPage()
  */
 void SettingsDialog::addAdvancedPage()
 {
-    KVBox* frame = new KVBox;
+    QWidget* frame = new QWidget;
     KPageWidgetItem *page = new KPageWidgetItem( frame, i18n("Advanced") );
     page->setIcon( KIcon("configure") );
 
-    m_advancedPage = new AdvancedPage(frame);
+    m_advancedPage = new Ui::AdvancedPage;
+    m_advancedPage->setupUi(frame);
     m_advancedPage->kcfg_Timeout->setRange(0, 50000, 100);
     m_advancedPage->kcfg_Timeout->setSliderEnabled(false);
     m_advancedPage->kcfg_Compression->setRange(0, 9);
