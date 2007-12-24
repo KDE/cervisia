@@ -201,11 +201,6 @@ class CervisiaBrowserExtension : public KParts::BrowserExtension
 public:
     CervisiaBrowserExtension( CervisiaPart * );
     ~CervisiaBrowserExtension();
-
-    void setPropertiesActionEnabled(bool enabled);
-
-public slots:
-    void properties();
 };
 
 #endif // CERVISIAPART_H

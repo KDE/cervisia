@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui name="cervisiapart" version="12">
+<kpartgui name="cervisiapart" version="13">
 <MenuBar>
   <Menu name="file"><text>&amp;File</text>
     <Action name="file_open"/>
@@ -19,6 +19,7 @@
     <Action name="file_remove"/>
     <Action name="file_revert_local_changes"/>
     <Separator/>
+    <Action name="file_properties"/>
   </Menu>
   <Menu name="view"><text>&amp;View</text>
     <Action name="stop_job"/>

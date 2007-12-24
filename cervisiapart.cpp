@@ -320,10 +320,9 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    // context menu only
     action  = new KAction(i18n("&Properties"), this);
     actionCollection()->addAction("file_properties", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT( slotFileProperties() ));
+    connect(action, SIGNAL(triggered() ), SLOT( slotFileProperties() ));
 
     //
     // View Menu
@@ -696,8 +695,6 @@ void CervisiaPart::updateActions()
     bool singleFolder = (update->multipleSelection().count() == 1);
     stateChanged("has_single_folder", singleFolder ? StateNoReverse
                                                    : StateReverse);
-
-    m_browserExt->setPropertiesActionEnabled(single);
 
     //    bool nojob = !( actionCollection()->action( "stop_job" )->isEnabled() );
     bool selected = (update->currentItem() != 0);
@@ -1953,25 +1950,12 @@ void CervisiaPart::guiActivateEvent(KParts::GUIActivateEvent* event)
 CervisiaBrowserExtension::CervisiaBrowserExtension( CervisiaPart *p )
     : KParts::BrowserExtension( p )
 {
-	setObjectName("CervisiaBrowserExtension" );
     KGlobal::locale()->insertCatalog("cervisia");
 }
 
 CervisiaBrowserExtension::~CervisiaBrowserExtension()
 {
 
-}
-
-
-void CervisiaBrowserExtension::setPropertiesActionEnabled(bool enabled)
-{
-    emit enableAction("properties", enabled);
-}
-
-
-void CervisiaBrowserExtension::properties()
-{
-    static_cast<CervisiaPart*>(parent())->slotFileProperties();
 }
 
 // Local Variables:
