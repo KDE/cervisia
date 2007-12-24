@@ -26,7 +26,6 @@
 #include <qlayout.h>
 #include <qwidget.h>
 #include <qradiobutton.h>
-#include <QPixmap>
 #include <QVBoxLayout>
 
 #include <kcolorbutton.h>
