@@ -55,19 +55,18 @@ extern "C" KDE_EXPORT int kdemain(int argc, char** argv)
     // parse repository name from the passed argument
     QString prompt = KCmdLineArgs::parsedArgs()->arg(0);
     QRegExp rx("(.*@.*)'s password:");
-    int pos = rx.search(prompt);
 
     KPasswordDialog dlg;
     dlg.setPrompt(i18n("Please type in your password below."));
     //dlg.setWindowTitle(i18n("Enter Password"));
 
-    if( pos > -1 )
+    if( prompt.contains( rx ) )
         dlg.addCommentLine(i18n("Repository:"), rx.cap(1));
 
     int res = dlg.exec();
     if( res == KPasswordDialog::Accepted )
     {
-        std::cout << dlg.password().ascii() << std::endl;
+        std::cout << dlg.password().toAscii().constData() << std::endl;
         return 0;
     }
 

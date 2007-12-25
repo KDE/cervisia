@@ -36,8 +36,8 @@ QString SshAgent::m_authSock   = QString();
 QString SshAgent::m_pid        = QString();
 
 
-SshAgent::SshAgent(QObject* parent, const char* name)
-    : QObject(parent, name)
+SshAgent::SshAgent(QObject* parent)
+    : QObject(parent)
 {
 }
 
@@ -138,21 +138,17 @@ void SshAgent::slotProcessExited(K3Process*)
     QRegExp bashPidRx("SSH_AGENT_PID=(\\d*).*");
     QRegExp bashSockRx("SSH_AUTH_SOCK=(.*\\.\\d*);.*");
 
-    QStringList::Iterator it  = m_outputLines.begin();
-    QStringList::Iterator end = m_outputLines.end();
-    for( ; it != end; ++it )
+    foreach( const QString line, m_outputLines )
     {
         if( m_pid.isEmpty() )
         {
-            int pos = cshPidRx.search(*it);
-            if( pos > -1 )
+            if( line.contains(cshPidRx) )
             {
                 m_pid = cshPidRx.cap(1);
                 continue;
             }
 
-            pos = bashPidRx.search(*it);
-            if( pos > -1 )
+            if( line.contains(bashPidRx) )
             {
                 m_pid = bashPidRx.cap(1);
                 continue;
@@ -161,15 +157,13 @@ void SshAgent::slotProcessExited(K3Process*)
 
         if( m_authSock.isEmpty() )
         {
-            int pos = cshSockRx.search(*it);
-            if( pos > -1 )
+            if( line.contains(cshSockRx) )
             {
                 m_authSock = cshSockRx.cap(1);
                 continue;
             }
 
-            pos = bashSockRx.search(*it);
-            if( pos > -1 )
+            if( line.contains(bashSockRx) )
             {
                 m_authSock = bashSockRx.cap(1);
                 continue;
@@ -186,7 +180,7 @@ void SshAgent::slotReceivedStdout(K3Process* proc, char* buffer, int buflen)
     Q_UNUSED(proc);
 
     QString output = QString::fromLocal8Bit(buffer, buflen);
-    m_outputLines += QStringList::split("\n", output);
+    m_outputLines += output.split('\n');
 
     kDebug(8051) << "output=" << output;
 }
@@ -197,7 +191,7 @@ void SshAgent::slotReceivedStderr(K3Process* proc, char* buffer, int buflen)
     Q_UNUSED(proc);
 
     QString output = QString::fromLocal8Bit(buffer, buflen);
-    m_outputLines += QStringList::split("\n", output);
+    m_outputLines += output.split('\n');
 
     kDebug(8051) << "output=" << output;
 }
