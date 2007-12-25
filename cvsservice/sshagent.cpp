@@ -23,7 +23,7 @@
 #include <qregexp.h>
 #include <kdebug.h>
 #include <kdeversion.h>
-#include <k3process.h>
+#include <kprocess.h>
 
 #include <stdlib.h>
 #include <signal.h>
@@ -38,6 +38,7 @@ QString SshAgent::m_pid        = QString();
 
 SshAgent::SshAgent(QObject* parent)
     : QObject(parent)
+    , m_agentProcess(0)
 {
 }
 
@@ -90,28 +91,24 @@ bool SshAgent::addSshIdentities()
         return false;
 
     // add identities to ssh-agent
-    K3Process proc;
+    KProcess proc;
 
-    proc.setEnvironment("SSH_AGENT_PID", m_pid);
-    proc.setEnvironment("SSH_AUTH_SOCK", m_authSock);
-    proc.setEnvironment("SSH_ASKPASS", "cvsaskpass");
+    proc.setEnv("SSH_AGENT_PID", m_pid);
+    proc.setEnv("SSH_AUTH_SOCK", m_authSock);
+    proc.setEnv("SSH_ASKPASS", "cvsaskpass");
 
     proc << "ssh-add";
 
-    connect(&proc, SIGNAL(receivedStdout(K3Process*, char*, int)),
-            SLOT(slotReceivedStdout(K3Process*, char*, int)));
-    connect(&proc, SIGNAL(receivedStderr(K3Process*, char*, int)),
-            SLOT(slotReceivedStderr(K3Process*, char*, int)));
-
-    proc.start(K3Process::DontCare, K3Process::AllOutput);
+    proc.start();
 
     // wait for process to finish
     // TODO CL use timeout?
-    proc.wait();
+    proc.waitForFinished();
 
     kDebug(8051) << "added identities";
 
-    return (proc.normalExit() && proc.exitStatus() == 0);
+    return (proc.exitStatus() == QProcess::NormalExit
+            && proc.exitCode() == 0);
 }
 
 
@@ -128,7 +125,7 @@ void SshAgent::killSshAgent()
 }
 
 
-void SshAgent::slotProcessExited(K3Process*)
+void SshAgent::slotProcessFinished()
 {
     kDebug(8051) << "ENTER";
 
@@ -175,22 +172,10 @@ void SshAgent::slotProcessExited(K3Process*)
 }
 
 
-void SshAgent::slotReceivedStdout(K3Process* proc, char* buffer, int buflen)
+void SshAgent::slotReceivedOutput()
 {
-    Q_UNUSED(proc);
+    const QString output(QString::fromLocal8Bit(m_agentProcess->readAllStandardOutput()));
 
-    QString output = QString::fromLocal8Bit(buffer, buflen);
-    m_outputLines += output.split('\n');
-
-    kDebug(8051) << "output=" << output;
-}
-
-
-void SshAgent::slotReceivedStderr(K3Process* proc, char* buffer, int buflen)
-{
-    Q_UNUSED(proc);
-
-    QString output = QString::fromLocal8Bit(buffer, buflen);
     m_outputLines += output.split('\n');
 
     kDebug(8051) << "output=" << output;
@@ -201,24 +186,23 @@ bool SshAgent::startSshAgent()
 {
     kDebug(8051) << "ENTER";
 
-    K3Process proc;
+    m_agentProcess = new KProcess(this);
 
-    proc << "ssh-agent";
+    connect(m_agentProcess, SIGNAL(finished(int, QProcess::ExitStatus)),
+            SLOT(slotProcessFinished()));
+    connect(m_agentProcess, SIGNAL(readyReadStandardOutput()),
+            SLOT(slotReceivedOutput()));
 
-    connect(&proc, SIGNAL(processExited(K3Process*)),
-            SLOT(slotProcessExited(K3Process*)));
-    connect(&proc, SIGNAL(receivedStdout(K3Process*, char*, int)),
-            SLOT(slotReceivedStdout(K3Process*, char*, int)));
-    connect(&proc, SIGNAL(receivedStderr(K3Process*, char*, int)),
-            SLOT(slotReceivedStderr(K3Process*, char*, int)) );
-
-    proc.start(K3Process::NotifyOnExit, K3Process::All);
+    m_agentProcess->setOutputChannelMode(KProcess::MergedChannels);
+    m_agentProcess->setProgram(QLatin1String("ssh-agent"));
+    m_agentProcess->start();
 
     // wait for process to finish
     // TODO CL use timeout?
-    proc.wait();
+    m_agentProcess->waitForFinished();
 
-    return (proc.normalExit() && proc.exitStatus() == 0);
+    return (m_agentProcess->exitStatus() == QProcess::NormalExit
+            && m_agentProcess->exitCode() == 0);
 }
 
 
