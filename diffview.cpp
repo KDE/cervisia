@@ -310,10 +310,6 @@ QSize DiffView::sizeHint() const
 void DiffView::paintCell(QPainter *p, int row, int col)
 {
     QFontMetrics fm(font());
-#ifdef __GNUC__
-#warning what can I use in Qt4
-#endif
-//    p->setTabStops(m_tabWidth * fm.maxWidth());
 
     DiffViewItem *item = items.at(row);
 
@@ -322,7 +318,7 @@ void DiffView::paintCell(QPainter *p, int row, int col)
 
     QColor backgroundColor;
     bool inverted;
-    int align;
+    Qt::Alignment align;
     int innerborder;
     QString str;
 
@@ -387,7 +383,9 @@ void DiffView::paintCell(QPainter *p, int row, int col)
     }
 
     p->fillRect(0, 0, width, height, backgroundColor);
-    p->drawText(innerborder, 0, width-2*innerborder, height, align|Qt::TextExpandTabs, str);
+    QTextOption textOption(align);
+    textOption.setTabStop(m_tabWidth * fm.width(' '));
+    p->drawText(QRectF(innerborder, 0, width-2*innerborder, height), str, textOption);
     p->setFont(oldFont);
 }
 
