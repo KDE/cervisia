@@ -174,7 +174,6 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
 
         commentbox[i] = new QTextEdit(mainWidget);
         commentbox[i]->setReadOnly(true);
-        commentbox[i]->setTextFormat(Qt::PlainText);
         fm = commentbox[i]->fontMetrics();
         commentbox[i]->setMinimumHeight(2*fm.lineSpacing()+10);
         grid->addMultiCellWidget(commentbox[i], 2, 2, 1, 3);
@@ -550,8 +549,8 @@ void LogDialog::revisionSelected(QString rev, bool rmb)
                 revbox[rmb?1:0]->setText(rev);
                 authorbox[rmb?1:0]->setText(logInfo->m_author);
                 datebox[rmb?1:0]->setText(logInfo->dateTimeToString());
-                commentbox[rmb?1:0]->setText(logInfo->m_comment);
-                tagsbox[rmb?1:0]->setText(logInfo->tagsToString());
+                commentbox[rmb?1:0]->setPlainText(logInfo->m_comment);
+                tagsbox[rmb?1:0]->setPlainText(logInfo->tagsToString());
 
                 tree->setSelectedPair(selectionA, selectionB);
                 list->setSelectedPair(selectionA, selectionB);

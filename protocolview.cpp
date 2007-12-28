@@ -45,7 +45,6 @@ ProtocolView::ProtocolView(const QString& appId, QWidget *parent)
     setReadOnly(true);
     setUndoRedoEnabled(false);
     setTabChangesFocus(true);
-    setTextFormat(Qt::LogText);
 
     //kDebug(8050) << "protocol view appId :" << appId;
 
@@ -151,15 +150,15 @@ void ProtocolView::processOutput()
 {
     int pos;
     while ( (pos = buf.indexOf('\n')) != -1)
-	{
-	    QString line = buf.left(pos);
-	    if (!line.isEmpty())
+    {
+        QString line = buf.left(pos);
+        if (!line.isEmpty())
         {
-		    appendLine(line);
+            appendLine(line);
             emit receivedLine(line);
         }
-	    buf = buf.right(buf.length()-pos-1);
-	}
+        buf = buf.right(buf.length()-pos-1);
+    }
 }
 
 
