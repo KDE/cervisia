@@ -21,16 +21,18 @@
 
 #include "changelogdialog.h"
 #include "changelogdialog.moc"
-#include <QDate>
 
+#include <QDate>
 #include <qfile.h>
 #include <qtextstream.h>
+
 #include <kconfig.h>
-#include <kglobalsettings.h>
+#include <kconfiggroup.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <ktextedit.h>
-#include <kconfiggroup.h>
+
+#include "cervisiasettings.h"
 #include "misc.h"
 
 
@@ -54,13 +56,10 @@ ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent)
     showButtonSeparator(true);
 
     edit = new KTextEdit(this);
-
-    KConfigGroup group = cfg.group("LookAndFeel");
-    edit->setFont(group.readEntry("ChangeLogFont",QFont()));
-
+    edit->setAcceptRichText(false);
+    edit->setFont(CervisiaSettings::changeLogFont());
     edit->setFocus();
     edit->setLineWrapMode(QTextEdit::NoWrap);
-    edit->setTextFormat(Qt::PlainText);
     edit->setCheckSpellingEnabled(true);
     QFontMetrics const fm(edit->fontMetrics());
     edit->setMinimumSize(fm.width('0') * 80,
