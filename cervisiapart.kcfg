@@ -4,7 +4,6 @@
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile name="cervisiapartrc" />
-  <include>kcolorscheme.h</include>
   <group name="Colors" >
     <entry name="DiffChangeColor" key="DiffChange" type="Color">
       <default>#edbebe</default>
@@ -33,10 +32,13 @@
     <entry name="ProtocolFont" type="Font">
     </entry>
     <entry name="AnnotateFont" type="Font">
+      <default code="true">KGlobalSettings::fixedFont()</default>
     </entry>
     <entry name="DiffFont" type="Font">
+      <default code="true">KGlobalSettings::fixedFont()</default>
     </entry>
     <entry name="ChangeLogFont" type="Font">
+      <default code="true">KGlobalSettings::fixedFont()</default>
     </entry>
   </group>
   <group name="General" >
