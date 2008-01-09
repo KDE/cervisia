@@ -1,6 +1,7 @@
 [Global]
 IconName=cervisia
 Comment=Cervisia
+Comment[pa]=ਸਰਵੀਸੀਆ
 Comment[x-test]=xxCervisiaxx
 
 [Event/cvs_commit_done]
