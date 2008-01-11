@@ -215,13 +215,13 @@ void CommitDialog::comboActivated(int index)
     if (index == 0) // Handle current text
         edit->setText(current_text);
     else
-        {
-            if (current_index == 0) // Store current text
-                current_text = edit->text();
+    {
+        if (current_index == 0) // Store current text
+            current_text = edit->text();
 
-            // Show archived text
-            edit->setText(commits[index-1]);
-        }
+        // Show archived text
+        edit->setText(commits[index-1]);
+    }
     current_index = index;
 }
 
