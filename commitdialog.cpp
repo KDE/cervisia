@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2002-2007 Christian Loose <christian.loose@kdemail.net>
+ *  Copyright (c) 2002-2008 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,18 +20,17 @@
 
 #include "commitdialog.h"
 
-#include <qcombobox.h>
-#include <qcheckbox.h>
-#include <qdir.h>
-#include <qfileinfo.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <q3header.h>
-#include <k3listview.h>
-//Added by qt3to4:
-#include <QTextStream>
 #include <QBoxLayout>
+#include <QCheckBox>
+#include <QComboBox>
+#include <QDir>
+#include <QFileInfo>
+#include <QLabel>
+#include <QLayout>
+#include <QListWidget>
+#include <QTextStream>
 #include <QVBoxLayout>
+
 #include <kconfig.h>
 #include <klocale.h>
 #include <kconfiggroup.h>
@@ -41,11 +40,11 @@
 #include "diffdialog.h"
 
 
-class CommitListItem : public Q3CheckListItem
+class CommitListItem : public QListWidgetItem
 {
 public:
-    CommitListItem(Q3ListView* parent, const QString& text, const QString fileName)
-        : Q3CheckListItem(parent, text, Q3CheckListItem::CheckBox)
+    CommitListItem(const QString& text, const QString& fileName, QListWidget* parent = 0)
+        : QListWidgetItem(text, parent)
         , m_fileName(fileName)
     {
     }
@@ -80,14 +79,12 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInter
     QLabel *textlabel = new QLabel( i18n("Commit the following &files:"), mainWidget );
     layout->addWidget(textlabel);
 
-    m_fileList = new K3ListView(mainWidget);
-    m_fileList->addColumn("");
-    m_fileList->setFullWidth(true);
-    m_fileList->header()->hide();
+    m_fileList = new QListWidget(mainWidget);
+    m_fileList->setEditTriggers(QAbstractItemView::NoEditTriggers);
     textlabel->setBuddy(m_fileList);
-    connect( m_fileList, SIGNAL(doubleClicked(Q3ListViewItem*)),
-             this, SLOT(fileSelected(Q3ListViewItem*)));
-    connect( m_fileList, SIGNAL(selectionChanged()),
+    connect( m_fileList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
+             this, SLOT(fileSelected(QListWidgetItem*)));
+    connect( m_fileList, SIGNAL(itemSelectionChanged()),
              this, SLOT(fileHighlighted()) );
     layout->addWidget(m_fileList, 5);
 
@@ -148,8 +145,9 @@ void CommitDialog::setFileList(const QStringList &list)
         QString text = (*it != QLatin1String(".") ? *it : currentDirName);
 
         edit->compObj()->addItem(text);
-        CommitListItem* item = new CommitListItem(m_fileList, text, *it);
-        item->setOn(true);
+
+        CommitListItem* item = new CommitListItem(text, *it, m_fileList);
+        item->setCheckState(Qt::Checked);
     }
 }
 
@@ -158,11 +156,11 @@ QStringList CommitDialog::fileList() const
 {
     QStringList files;
 
-    Q3ListViewItemIterator it(m_fileList, Q3ListViewItemIterator::Checked);
-    for( ; it.current(); ++it )
+    for( int i = 0; i < m_fileList->count(); ++i )
     {
-        CommitListItem* item = static_cast<CommitListItem*>(it.current());
-        files.append(item->fileName());
+        CommitListItem* item = static_cast<CommitListItem*>(m_fileList->item(i));
+        if( item->checkState() & Qt::Checked )
+            files.append(item->fileName());
     }
 
     return files;
@@ -228,30 +226,26 @@ void CommitDialog::comboActivated(int index)
 }
 
 
-void CommitDialog::fileSelected(Q3ListViewItem* item)
+void CommitDialog::fileSelected(QListWidgetItem* item)
 {
-    // double click on empty space?
-    if( !item )
-        return;
-
-    showDiffDialog(item->text(0));
+    showDiffDialog(item->text());
 }
 
 
 void CommitDialog::fileHighlighted()
 {
-    bool isItemSelected = (m_fileList->selectedItem() != 0);
+    bool isItemSelected = !m_fileList->selectedItems().isEmpty();
     enableButton(User1, isItemSelected);
 }
 
 
 void CommitDialog::diffClicked()
 {
-    Q3ListViewItem* item = m_fileList->selectedItem();
+    QListWidgetItem* item = m_fileList->selectedItems().first();
     if( !item )
         return;
 
-    showDiffDialog(item->text(0));
+    showDiffDialog(item->text());
 }
 
 
