@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
- *  Copyright (c) 2003-2004 Christian Loose <christian.loose@hamburg.de>
+ *  Copyright (c) 2003-2008 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -142,7 +142,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
     KAboutData about("cervisia", 0, ki18n("Cervisia"), CERVISIA_VERSION,
                      ki18n("A CVS frontend"), KAboutData::License_GPL,
                      ki18n("Copyright (c) 1999-2002 Bernd Gehrmann\n"
-                               "Copyright (c) 2002-2007 the Cervisia authors"), KLocalizedString(),
+                           "Copyright (c) 2002-2008 the Cervisia authors"), KLocalizedString(),
                      "http://cervisia.kde.org");
 
     about.addAuthor(ki18n("Bernd Gehrmann"), ki18n("Original author and former "
