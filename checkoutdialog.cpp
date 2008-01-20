@@ -21,17 +21,19 @@
 
 #include "checkoutdialog.h"
 
-#include <qcheckbox.h>
-#include <qcombobox.h>
-#include <qdir.h>
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
-//Added by qt3to4:
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QGridLayout>
+// Qt
 #include <QBoxLayout>
+#include <QCheckBox>
+#include <QComboBox>
+#include <QDir>
+#include <QGridLayout>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QLayout>
+#include <QPushButton>
+#include <QVBoxLayout>
+
+// KDE
 #include <k3process.h>
 #include <kfiledialog.h>
 #include <klineedit.h>
