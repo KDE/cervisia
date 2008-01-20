@@ -714,18 +714,23 @@ KAboutData* CervisiaPart::createAboutData()
                             "cervisiapart", "cervisia", ki18n("Cervisia Part"),
                             CERVISIA_VERSION, ki18n("A CVS frontend"),
                             KAboutData::License_GPL,
-                            ki18n("Copyright (c) 1999-2002 Bernd Gehrmann"), KLocalizedString(),
-                            "http://www.kde.org/apps/cervisia");
+                            ki18n("Copyright (c) 1999-2002 Bernd Gehrmann\n"
+                                  "Copyright (c) 2002-2008 the Cervisia authors"), 
+                            KLocalizedString(), "http://cervisia.kde.org");
 
     about->addAuthor(ki18n("Bernd Gehrmann"), ki18n("Original author and former "
-                    "maintainer"), "bernd@mail.berlios.de");
+                     "maintainer"), "bernd@mail.berlios.de");
     about->addAuthor(ki18n("Christian Loose"), ki18n("Maintainer"),
-                    "christian.loose@hamburg.de");
+                     "christian.loose@kdemail.net");
     about->addAuthor(ki18n("Andr\303\251 W\303\266bbeking"), ki18n("Developer"),
-                    "woebbeking@kde.org");
+                     "woebbeking@kde.org");
+    about->addAuthor(ki18n("Carlos Woelz"), ki18n("Documentation"),
+                     "carloswoelz@imap-mail.com");
 
     about->addCredit(ki18n("Richard Moore"), ki18n("Conversion to KPart"),
-                    "rich@kde.org");
+                     "rich@kde.org");
+    about->addCredit(ki18n("Laurent Montel"), ki18n("Conversion to D-Bus"),
+                     "montel@kde.org");
 
     return about;
 }
