@@ -639,6 +639,15 @@ void CervisiaPart::popupRequested(K3ListView*, Q3ListViewItem* item, const QPoin
 {
     QString xmlName = "context_popup";
 
+    // context menu for non-cvs files
+    if( isFileItem(item) )
+    {
+        UpdateItem* fileItem = static_cast<UpdateItem*>(item);
+        if( fileItem->entry().m_status == Cervisia::NotInCVS )
+            xmlName = "noncvs_context_popup";
+    }
+
+    // context menu for folders
     if( isDirItem(item) && update->fileSelection().isEmpty() )
     {
         xmlName = "folder_context_popup";

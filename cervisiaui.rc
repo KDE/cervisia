@@ -108,6 +108,13 @@
   <Separator/>
   <Action name="file_properties"/>
 </Menu>
+<Menu name="noncvs_context_popup">
+  <Action name="file_edit"/>
+  <Separator/>
+  <Action name="file_add"/>
+  <Separator/>
+  <Action name="file_properties"/>
+</Menu>
 <Menu name="folder_context_popup">
   <Action name="unfold_folder"/>
   <Separator/>
