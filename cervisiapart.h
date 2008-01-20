@@ -185,7 +185,7 @@ private:
     CervisiaBrowserExtension*   m_browserExt;
     QLabel*                     filterLabel;
 
-    int                         m_editWithId;
+    QAction*                    m_editWithAction;
     Cervisia::EditWithMenu*     m_currentEditMenu;
     JobType                     m_jobType;
     QString 			m_cvsServiceInterfaceName;

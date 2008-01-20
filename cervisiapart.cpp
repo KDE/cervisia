@@ -105,7 +105,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
     , m_statusBar(new KParts::StatusBarExtension(this))
     , m_browserExt( 0 )
     , filterLabel( 0 )
-    , m_editWithId(0)
+    , m_editWithAction(0)
     , m_currentEditMenu(0)
     , m_jobType(Unknown)
 {
@@ -660,12 +660,12 @@ void CervisiaPart::popupRequested(K3ListView*, Q3ListViewItem* item, const QPoin
         if( isFileItem(item) )
         {
             // remove old 'Edit with...' menu
-            if( m_editWithId && popup->findItem(m_editWithId) != 0 )
+            if( m_editWithAction && popup->actions().contains(m_editWithAction) )
             {
-                popup->removeItem(m_editWithId);
+                popup->removeAction(m_editWithAction);
                 delete m_currentEditMenu;
 
-                m_editWithId      = 0;
+                m_editWithAction  = 0;
                 m_currentEditMenu = 0;
             }
 
@@ -681,8 +681,8 @@ void CervisiaPart::popupRequested(K3ListView*, Q3ListViewItem* item, const QPoin
                 m_currentEditMenu = new Cervisia::EditWithMenu(u, popup);
 
                 if( m_currentEditMenu->menu() )
-                    m_editWithId = popup->insertItem(i18n("Edit With"),
-                                              m_currentEditMenu->menu(), -1, 1);
+                    m_editWithAction = popup->insertMenu(popup->actions().at(1),
+                                                         m_currentEditMenu->menu());
             }
         }
 

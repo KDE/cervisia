@@ -20,9 +20,11 @@
 using namespace Cervisia;
 
 #include <QMenu>
+
 #include <kdebug.h>
 #include <kiconloader.h>
 #include <kmimetype.h>
+#include <KMimeTypeTrader>
 #include <krun.h>
 #include <kurl.h>
 
@@ -39,11 +41,11 @@ EditWithMenu::EditWithMenu(const KUrl& url, QWidget* parent)
         return;
     }
 
-    m_offers = KServiceTypeTrader::self()->query(type->name(), "Type == 'Application'");
+    m_offers = KMimeTypeTrader::self()->query(type->name());
 
     if( !m_offers.isEmpty() )
     {
-        m_menu = new QMenu;
+        m_menu = new QMenu(i18n("Edit With"));
 
         KService::List::ConstIterator it = m_offers.begin();
         for( int i = 0 ; it != m_offers.end(); ++it, ++i )
