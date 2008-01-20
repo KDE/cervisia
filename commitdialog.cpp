@@ -27,11 +27,11 @@
 #include <QFileInfo>
 #include <QLabel>
 #include <QLayout>
-#include <QListWidget>
 #include <QTextStream>
 #include <QVBoxLayout>
 
 #include <kconfig.h>
+#include <klistwidget.h>
 #include <klocale.h>
 #include <kconfiggroup.h>
 
@@ -79,7 +79,7 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInter
     QLabel *textlabel = new QLabel( i18n("Commit the following &files:"), mainWidget );
     layout->addWidget(textlabel);
 
-    m_fileList = new QListWidget(mainWidget);
+    m_fileList = new KListWidget(mainWidget);
     m_fileList->setEditTriggers(QAbstractItemView::NoEditTriggers);
     textlabel->setBuddy(m_fileList);
     connect( m_fileList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),

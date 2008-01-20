@@ -23,7 +23,7 @@
 
 #include <kdialog.h>
 
-class QListWidget;
+class KListWidget;
 class QStringList;
 
 class AddRemoveDialog : public KDialog
@@ -36,7 +36,7 @@ public:
     void setFileList(const QStringList& files);
 
 private:
-    QListWidget* m_listBox;
+    KListWidget* m_listBox;
 };
 
 #endif // ADDREMOVEDIALOG_H

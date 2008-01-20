@@ -20,13 +20,15 @@
 
 #include "addremovedialog.h"
 
-#include <klocale.h>
-
+// Qt
 #include <QBoxLayout>
 #include <QFileInfo>
 #include <QLabel>
-#include <QListWidget>
 #include <QStringList>
+
+// KDE
+#include <KListWidget>
+#include <KLocale>
 
 
 AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent)
@@ -54,7 +56,7 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent)
           mainWidget );
     layout->addWidget(textlabel);
 
-    m_listBox = new QListWidget(mainWidget);
+    m_listBox = new KListWidget(mainWidget);
     m_listBox->setSelectionMode(QAbstractItemView::NoSelection);
     layout->addWidget(m_listBox, 5);
 
