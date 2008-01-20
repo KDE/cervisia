@@ -47,4 +47,9 @@
       <default>4000</default>
     </entry>
   </group>
+  <group name="CheckoutDialog">
+    <entry name="Repository" type="String"></entry>
+    <entry name="Module" type="String"></entry>
+    <entry name="WorkingFolder" key="Working directory" type="Path"></entry>
+  </group>
 </kcfg>

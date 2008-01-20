@@ -45,6 +45,7 @@
 #include "progressdialog.h"
 #include "repositories.h"
 #include "misc.h"
+#include "cervisiasettings.h"
 #include "cvsserviceinterface.h"
 
 using Cervisia::IsValidTag;
@@ -441,12 +442,12 @@ void CheckoutDialog::restoreUserInput()
 {
     KConfigGroup cs(&partConfig, "CheckoutDialog");
 
-    repo_combo->setEditText(cs.readEntry("Repository"));
-    workdir_edit->setText(cs.readPathEntry("Working directory", QString()));
+    repo_combo->setEditText(CervisiaSettings::repository());
+    workdir_edit->setText(CervisiaSettings::workingFolder());
 
     if (act == Import)
     {
-        module_edit->setText(cs.readEntry("Module"));
+        module_edit->setText(CervisiaSettings::module());
         vendortag_edit->setText(cs.readEntry("Vendor tag"));
         releasetag_edit->setText(cs.readEntry("Release tag"));
         ignore_edit->setText(cs.readEntry("Ignore files"));
@@ -454,7 +455,7 @@ void CheckoutDialog::restoreUserInput()
     }
     else
     {
-        module_combo->setEditText(cs.readEntry("Module"));
+        module_combo->setEditText(CervisiaSettings::module());
         branchCombo->setCurrentText(cs.readEntry("Branch"));
         alias_edit->setText(cs.readEntry("Alias"));
         export_box->setChecked(cs.readEntry("ExportOnly", false));
@@ -467,9 +468,11 @@ void CheckoutDialog::saveUserInput()
 {
     KConfigGroup cs(&partConfig, "CheckoutDialog");
 
-    cs.writeEntry("Repository", repository());
-    cs.writeEntry("Module", module());
-    cs.writeEntry("Working directory", workingDirectory());
+    CervisiaSettings::setRepository(repository());
+    CervisiaSettings::setModule(module());
+    CervisiaSettings::setWorkingFolder(workingDirectory());
+
+    CervisiaSettings::self()->writeConfig();
 
     if (act == Import)
     {
