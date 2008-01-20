@@ -154,7 +154,7 @@ private:
     void readSettings();
     void writeSettings();
 
-    bool openSandbox(const QString &dirname);
+    bool openSandbox(const KUrl& url);
     void updateSandbox(const QString &extraopt = QString());
     void addOrRemove(AddRemoveDialog::ActionType action);
     void addOrRemoveWatch(WatchDialog::ActionType action);

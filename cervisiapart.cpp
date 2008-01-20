@@ -207,7 +207,7 @@ bool CervisiaPart::openUrl( const KUrl &u )
         return false;
     }
 
-    return openSandbox( u.path() );
+    return openSandbox(u);
 }
 
 
@@ -752,7 +752,7 @@ void CervisiaPart::slotOpenSandbox()
     if (dirname.isEmpty())
         return;
 
-    openSandbox(dirname);
+    openSandbox(KUrl(dirname));
 }
 
 
@@ -1758,7 +1758,7 @@ void CervisiaPart::slotJobFinished()
 }
 
 
-bool CervisiaPart::openSandbox(const QString &dirname)
+bool CervisiaPart::openSandbox(const KUrl& url)
 {
     // Do we have a cvs service?
     if( !cvsService )
@@ -1766,7 +1766,7 @@ bool CervisiaPart::openSandbox(const QString &dirname)
     OrgKdeCervisiaRepositoryInterface cvsRepository( m_cvsServiceInterfaceName, "/CvsRepository",QDBusConnection::sessionBus());
 
     // change the working copy directory for the cvs D-Bus service
-    QDBusReply<bool> reply = cvsRepository.setWorkingCopy(dirname);
+    QDBusReply<bool> reply = cvsRepository.setWorkingCopy(url.path());
 
     if( !reply.isValid() || !reply.value() )
     {
@@ -1777,8 +1777,7 @@ bool CervisiaPart::openSandbox(const QString &dirname)
                            "Cervisia");
 
         // remove path from recent sandbox menu
-        QFileInfo fi(dirname);
-        recent->removeUrl( KUrl(fi.absoluteFilePath()) );
+        recent->removeUrl( url );
 
         return false;
     }
@@ -1789,14 +1788,14 @@ bool CervisiaPart::openSandbox(const QString &dirname)
 
     // get path of sandbox for recent sandbox menu
     sandbox = cvsRepository.workingCopy();
-    recent->addUrl( KUrl(sandbox) );
+    recent->addUrl( url );
 
     // get repository for the caption of the window
     repository = cvsRepository.location();
     emit setWindowCaption(sandbox + '(' + repository + ')');
 
     // set m_url member for tabbed window modus of Konqueror
-    setUrl(KUrl(sandbox));
+    setUrl(url);
 
     // *NOTICE*
     // The order is important here. We have to set the url member before
