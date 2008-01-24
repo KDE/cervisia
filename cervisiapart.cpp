@@ -18,6 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include "cervisiapart.h"
+
 #include <qlabel.h>
 #include <qmessagebox.h>
 #include <qpushbutton.h>
@@ -75,7 +77,6 @@
 #include "editwithmenu.h"
 
 #include "cvsjobinterface.h"
-#include "cervisiapart.h"
 #include "version.h"
 #include "cervisiapart.moc"
 

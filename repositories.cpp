@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include "repositories.h"
 
 #include <stdlib.h>
 #include <qfile.h>
@@ -24,7 +25,6 @@
 #include <qtextstream.h>
 #include <kconfig.h>
 
-#include "repositories.h"
 #include "cervisiapart.h"
 
 

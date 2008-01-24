@@ -21,6 +21,8 @@
 #ifndef REPOSITORIES_H
 #define REPOSITORIES_H
 
+class QStringList;
+
 
 class Repositories
 {
