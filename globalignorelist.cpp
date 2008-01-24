@@ -22,7 +22,6 @@ using namespace Cervisia;
 #include <qdir.h>
 #include <kdebug.h>
 #include <ktemporaryfile.h>
-#include <stdlib.h> // for getenv()
 
 #include "cvsserviceinterface.h"
 #include "progressdialog.h"
@@ -93,7 +92,7 @@ void GlobalIgnoreList::setup()
 *.so *.Z *~ *.old *.elc *.ln *.bak *.BAK *.orig *.rej *.exe _$* *$";
     
     addEntriesFromString(QLatin1String(ignorestr));
-    addEntriesFromString(QString::fromLocal8Bit(::getenv("CVSIGNORE")));
+    addEntriesFromString(QString::fromLocal8Bit(qgetenv("CVSIGNORE")));
     addEntriesFromFile(QDir::homePath() + "/.cvsignore");  
     
     m_isInitialized = true;

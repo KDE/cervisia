@@ -19,7 +19,6 @@
 
 #include "repositories.h"
 
-#include <stdlib.h>
 #include <qfile.h>
 #include <qdir.h>
 #include <qtextstream.h>
@@ -69,8 +68,8 @@ QStringList Repositories::readConfigFile()
     list = config.readEntry("Repos",QStringList());
 
     // Some people actually use CVSROOT, so we add it here
-    char *env;
-    if ( (env = ::getenv("CVSROOT")) != 0 && !list.contains(env))
+    QString env = QString::fromLocal8Bit(qgetenv("CVSROOT"));
+    if ( !env.isEmpty() && !list.contains(env) )
         list.append(env);
 
     return list;
