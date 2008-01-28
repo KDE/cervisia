@@ -50,6 +50,7 @@ Comment[pt_BR]=Um serviço D-Bus que oferece uma interface para o CVS
 Comment[sr]=Д‑бус сервис који даје сучеље ка ЦВС‑у
 Comment[sr@latin]=D‑Bus servis koji daje sučelje ka CVS‑u
 Comment[sv]=En DBus-tjänst som tillhandahåller ett gränssnitt till CVS
+Comment[tr]=CVS için arayüz sağlayan bir D-BUS servisi
 Comment[uk]=Служба D-Bus для надання інтерфейсу до cvs
 Comment[x-test]=xxA D-Bus service that provides an interface to cvsxx
 Comment[zh_CN]=提供 CVS 接口的 D-Bus 服务
