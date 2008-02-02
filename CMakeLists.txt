@@ -88,6 +88,7 @@ set(cervisiapart_PART_SRCS ${libcervisia_SRCS}
    ignorelistbase.cpp 
    dirignorelist.cpp 
    globalignorelist.cpp 
+   addignoremenu.cpp
    editwithmenu.cpp 
    logmessageedit.cpp )
 

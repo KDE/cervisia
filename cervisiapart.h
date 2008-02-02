@@ -35,7 +35,10 @@
 //Added by qt3to4:
 #include <QLabel>
 
-namespace Cervisia { class EditWithMenu; }
+namespace Cervisia { 
+class AddIgnoreMenu;
+class EditWithMenu; 
+}
 class QLabel;
 class Q3ListViewItem;
 class QSplitter;
@@ -187,6 +190,8 @@ private:
 
     QAction*                    m_editWithAction;
     Cervisia::EditWithMenu*     m_currentEditMenu;
+    QAction*                    m_addIgnoreAction;
+    Cervisia::AddIgnoreMenu*    m_currentIgnoreMenu;
     JobType                     m_jobType;
     QString 			m_cvsServiceInterfaceName;
 };

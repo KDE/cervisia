@@ -74,6 +74,7 @@
 #include "cvsserviceinterface.h"
 #include "globalignorelist.h"
 #include "patchoptiondialog.h"
+#include "addignoremenu.h"
 #include "editwithmenu.h"
 
 #include "cvsjobinterface.h"
@@ -108,6 +109,8 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
     , filterLabel( 0 )
     , m_editWithAction(0)
     , m_currentEditMenu(0)
+    , m_addIgnoreAction(0)
+    , m_currentIgnoreMenu(0)
     , m_jobType(Unknown)
 {
     setComponentData( CervisiaFactory::componentData() );
@@ -685,6 +688,26 @@ void CervisiaPart::popupRequested(K3ListView*, Q3ListViewItem* item, const QPoin
                     m_editWithAction = popup->insertMenu(popup->actions().at(1),
                                                          m_currentEditMenu->menu());
             }
+        }
+
+        // Add to Ignore List Menu
+        if( xmlName == "noncvs_context_popup" )
+        {
+            // remove old 'Add to Ignore List' menu
+            if( m_addIgnoreAction && popup->actions().contains(m_addIgnoreAction) )
+            {
+                popup->removeAction(m_addIgnoreAction);
+                delete m_currentIgnoreMenu;
+
+                m_addIgnoreAction   = 0;
+                m_currentIgnoreMenu = 0;
+            }
+
+            QStringList list = update->multipleSelection();
+            m_currentIgnoreMenu = new Cervisia::AddIgnoreMenu(sandbox, list, popup);
+            if( m_currentIgnoreMenu->menu() )
+                m_addIgnoreAction = popup->insertMenu(actionCollection()->action("file_add"), 
+		                                      m_currentIgnoreMenu->menu());
         }
 
         popup->exec(p);
