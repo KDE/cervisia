@@ -74,7 +74,7 @@ void AddIgnoreMenu::addActions()
 {
     if( m_fileList.count() > 1 )
     {
-        QAction* action = m_menu->addAction(i18np("", "Ignore %1 Files", m_fileList.count()));
+        QAction* action = m_menu->addAction(i18np("Ignore File", "Ignore %1 Files", m_fileList.count()));
         action->setData(false);
     }
     else
