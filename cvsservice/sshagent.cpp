@@ -135,7 +135,7 @@ void SshAgent::slotProcessFinished()
     QRegExp bashPidRx("SSH_AGENT_PID=(\\d*).*");
     QRegExp bashSockRx("SSH_AUTH_SOCK=(.*\\.\\d*);.*");
 
-    foreach( const QString line, m_outputLines )
+    foreach( const QString &line, m_outputLines )
     {
         if( m_pid.isEmpty() )
         {

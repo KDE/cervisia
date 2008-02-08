@@ -114,7 +114,7 @@ QVariant WatchersModel::headerData(int section, Qt::Orientation orientation,
 
 void WatchersModel::parseData(const QStringList& data)
 {
-    foreach( QString line, data )
+    foreach( const QString &line, data )
     {
         // parse the output line
         QStringList list = splitLine(line);
