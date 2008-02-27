@@ -75,14 +75,15 @@ void LogPlainView::addRevision(const LogInfo& logInfo)
     // add an empty line when we had tags or branches
     if( !logInfo.m_tags.empty() )
         insertHtml(lineBreak);
-    // seems to be superfluous with Qt 4.4
+    // seems to be superfluous with Qt 4.3
     // insertHtml(lineBreak);
 
     // workaround Qt bug (TT ID 166111) 
     const QTextBlockFormat blockFmt(textCursor().blockFormat());
 
     // add horizontal line
-    insertHtml(QLatin1String("<hr><br>"));
+    // looks strange but without pre the workaroud omits the line completely
+    insertHtml(QLatin1String("<hr><pre></pre><br>"));
 
     textCursor().setBlockFormat(blockFmt);
 }
