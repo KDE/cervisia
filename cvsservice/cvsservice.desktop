@@ -30,6 +30,7 @@ X-DBUS-StartupType=Multi
 X-KDE-StartupNotify=false
 Comment=A D-Bus service that provides an interface to cvs
 Comment[ca]=Un servei D-Bus que proporciona una interfície per al cvs
+Comment[da]=En D-Bus-tjeneste der sørger for en CVS-grænseflade
 Comment[de]=Ein D-Bus-Dienst, der eine Schnittstelle zu CVS bereitstellt
 Comment[el]=Μια υπηρεσία D-Bus που προσφέρει ένα περιβάλλον χρήσης για το cvs
 Comment[es]=Un servicio D-Bus que proporciona una interfaz para cvs
