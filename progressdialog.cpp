@@ -138,7 +138,8 @@ bool ProgressDialog::execute()
     // force the dialog to show up
     d->timer = new QTimer(this);
     connect(d->timer, SIGNAL(timeout()), this, SLOT(slotTimeoutOccurred()));
-    d->timer->start(CervisiaSettings::timeout(), true);
+    d->timer->setSingleShot(true);
+    d->timer->start(CervisiaSettings::timeout());
 
     bool started = d->cvsJob->execute();
     if( !started )
