@@ -176,7 +176,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
         commentbox[i]->setReadOnly(true);
         fm = commentbox[i]->fontMetrics();
         commentbox[i]->setMinimumHeight(2*fm.lineSpacing()+10);
-        grid->addMultiCellWidget(commentbox[i], 2, 2, 1, 3);
+        grid->addWidget(commentbox[i], 2, 1, 1, 3);
 
         tagsbox[i] = new QTextEdit(mainWidget);
         tagsbox[i]->setReadOnly(true);
