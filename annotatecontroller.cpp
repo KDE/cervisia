@@ -162,7 +162,7 @@ void AnnotateController::Private::parseCvsAnnotateOutput()
 {
     LogInfo logInfo;
     QString rev, content, line;
-    QString oldRevision = "";
+    QString oldRevision;
     bool odd = false;
 
     while( progress->getLine(line) )
@@ -176,8 +176,6 @@ void AnnotateController::Private::parseCvsAnnotateOutput()
         content           = line.mid(35, line.length()-35);
 
         logInfo.m_comment = comments[rev];
-        if( logInfo.m_comment.isNull() )
-            logInfo.m_comment = "";
 
         if( rev == oldRevision )
         {
