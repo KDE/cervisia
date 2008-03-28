@@ -23,7 +23,7 @@
 #include <qmap.h>
 
 #include <klocale.h>
-#include <kdatetime.h>
+#include <k3rfcdate.h>
 
 #include "annotatedialog.h"
 #include "loginfo.h"
@@ -169,7 +169,7 @@ void AnnotateController::Private::parseCvsAnnotateOutput()
     {
         QString dateString = line.mid(23, 9);
         if( !dateString.isEmpty() )
-            logInfo.m_dateTime = KDateTime::fromString(dateString, KDateTime::RFCDate).dateTime();
+            logInfo.m_dateTime.setTime_t(K3RFCDate::parseDate(dateString), Qt::UTC);
 
         rev               = line.left(13).trimmed();
         logInfo.m_author  = line.mid(14, 8).trimmed();
