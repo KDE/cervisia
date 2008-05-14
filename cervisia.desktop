@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 GenericName=CVS Frontend
 GenericName[af]=Cvs Voorprogram
 GenericName[be]=Інтэрфейс да CVS
@@ -72,4 +71,4 @@ X-KDE-Library=libcervisiapart
 X-KDE-BrowserView-Args=DetailedList
 
 X-DBUS-StartupType=Multi
-Categories=Qt;KDE;Development;
+Categories=Qt;KDE;Development;RevisionControl;
