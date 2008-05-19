@@ -49,6 +49,7 @@ Comment[hu]=DCOP-alapú szolgáltatás a CVS eléréséhez
 Comment[is]=DCOP þjónusta sem veitir viðmót á cvs
 Comment[it]=Un servizio DCOP che fornisce un'interfaccia a cvs
 Comment[ja]=CVS インターフェースを提供する DCOP サービス
+Comment[ka]=DCOP სერვისი, რომელიც cvs-ს ინტერფეისს შეიცავს
 Comment[kk]=CVS интерфейсін қамтамасыз ететін DCOP қызметі
 Comment[lt]=DCOP tarnyba, pateikianti cvs sąsają
 Comment[nb]=En DCOP-tjeneste som tilbyr et grensesnitt mot cvs
