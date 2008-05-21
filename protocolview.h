@@ -26,7 +26,6 @@
 
 #include <kdemacros.h>
 
-class QPoint;
 class OrgKdeCervisiaCvsserviceCvsjobInterface;
 
 
