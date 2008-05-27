@@ -56,7 +56,7 @@ install(TARGETS kdeinit_cervisia ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 # kde3support still needed for K3ListView and friends
 target_link_libraries( cervisia kdeinit_cervisia ${KDE4_KDE3SUPPORT_LIBS})
-install(TARGETS cervisia  DESTINATION ${BIN_INSTALL_DIR} )
+install(TARGETS cervisia  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### next target ###############
 

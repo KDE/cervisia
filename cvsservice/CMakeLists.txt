@@ -32,7 +32,7 @@ set_target_properties(kdeinit_cvsservice_bin PROPERTIES OUTPUT_NAME kdeinit4_cvs
 install(TARGETS kdeinit_cvsservice_bin ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 target_link_libraries( cvsservice_bin kdeinit_cvsservice_bin )
-install(TARGETS cvsservice_bin  DESTINATION ${BIN_INSTALL_DIR} )
+install(TARGETS cvsservice_bin  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### next target ###############
 
@@ -46,7 +46,7 @@ target_link_libraries(kdeinit_cvsaskpass  ${KDE4_KDEUI_LIBS} ${KDE4_KDESU_LIBS} 
 install(TARGETS kdeinit_cvsaskpass ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 target_link_libraries( cvsaskpass kdeinit_cvsaskpass )
-install(TARGETS cvsaskpass  DESTINATION ${BIN_INSTALL_DIR} )
+install(TARGETS cvsaskpass  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 
 ########### install files ###############
