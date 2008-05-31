@@ -2,6 +2,7 @@
 IconName=cervisia
 Comment=Cervisia
 Comment[pa]=ਸਰਵੀਸੀਆ
+Comment[sr]=Цервисија
 Comment[x-test]=xxCervisiaxx
 
 [Event/cvs_commit_done]
@@ -34,8 +35,8 @@ Name[pt_BR]=Trabalho de envio para o CVS feito
 Name[ru]=CVS Commit выполнен
 Name[sk]=CVS potvrdzujúca úloha ukončená
 Name[sl]=Opravilo udejanjanja v CVS končano
-Name[sr]=CVS predaja završena
-Name[sr@latin]=CVS predaja završena
+Name[sr]=Завршена ЦВС предаја
+Name[sr@latin]=Završena CVS predaja
 Name[sv]=CVS-arkiveringsjobb klart
 Name[tr]=CVS teslim etme işi tamamlandı
 Name[uk]=Завдання передачі CVS виконане
@@ -70,8 +71,8 @@ Comment[pt_BR]=Um trabalho de envio para o CVS foi feito
 Comment[ru]=CVS Commit выполнен
 Comment[sk]=CVS potvrdzujúca úloha ukončená
 Comment[sl]=Opravilo udejanjanja v CVS je končano
-Comment[sr]=Posao CVS predaje je završen
-Comment[sr@latin]=Posao CVS predaje je završen
+Comment[sr]=Посао ЦВС предаје је окончан
+Comment[sr@latin]=Posao CVS predaje je okončan
 Comment[sv]=Ett CVS-arkiveringsjobb är klart
 Comment[tr]=Bir CVS teslim etme işi tamamlandı
 Comment[uk]=Завдання передачі CVS виконане
