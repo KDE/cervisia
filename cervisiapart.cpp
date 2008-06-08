@@ -211,7 +211,11 @@ bool CervisiaPart::openUrl( const KUrl &u )
         return false;
     }
 
-    return openSandbox(u);
+    // make a deep copy as if we're called via KRecentFilesAction::urlSelected()
+    // KRecentFilesAction::addUrl() makes the URL invalid
+    const KUrl deepCopy(u);
+
+    return openSandbox(deepCopy);
 }
 
 
