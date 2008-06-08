@@ -36,7 +36,7 @@
 
 #include "addrepositorydialog.h"
 #include "cvsserviceinterface.h"
-#include "cvsjobinterface.h"
+#include "cvsloginjobinterface.h"
 #include "misc.h"
 #include "progressdialog.h"
 #include "repositories.h"
@@ -434,14 +434,14 @@ void RepositoryDialog::slotLoginClicked()
         // TODO: error handling
         return;
     QDBusObjectPath jobPath = job;
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,jobPath.path(),QDBusConnection::sessionBus(), this);
-    QDBusReply<bool> reply = cvsjobinterface.execute();
+    OrgKdeCervisiaCvsserviceCvsloginjobInterface cvsloginjobinterface(m_cvsServiceInterfaceName,jobPath.path(),QDBusConnection::sessionBus(), this);
+    QDBusReply<bool> reply = cvsloginjobinterface.execute();
     bool success = false;
     if(reply.isValid())
-	 success = reply;
+        success = reply;
     if( !success )
     {
-	QDBusReply<QStringList> ret = cvsjobinterface.output();
+        QDBusReply<QStringList> ret = cvsloginjobinterface.output();
 
         QStringList output = ret;
         KMessageBox::detailedError(this, i18n("Login failed."), output.join("\n"));

@@ -120,7 +120,7 @@ bool CvsLoginJob::execute()
             //       the dialog doesn't show part of the repository name, because
             //       it's too long. :-(
             QString password;
-            KPasswordDialog dlg( 0 , KPasswordDialog::ShowUsernameLine );
+            KPasswordDialog dlg;
             dlg.setPrompt( i18n("Please type "
                       "in your password for the repository below."));
             if( dlg.exec() )
