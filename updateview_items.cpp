@@ -155,7 +155,7 @@ void UpdateDirItem::updateEntriesItem(const Entry& entry,
             }
             fileItem->setRevTag(entry.m_revision, entry.m_tag);
             fileItem->setDate(entry.m_dateTime);
-            fileItem->setPixmap(0, isBinary ? SmallIcon("binary") : QPixmap());
+            fileItem->setPixmap(0, isBinary ? SmallIcon("application-octet-stream") : QPixmap());
         }
         return;
     }
