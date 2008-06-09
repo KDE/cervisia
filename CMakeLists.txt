@@ -33,6 +33,7 @@ set(libcervisia_SRCS
 
 qt4_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia.cvsservice.xml )
 qt4_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia.cvsjob.xml )
+qt4_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia.cvsloginjob.xml )
 qt4_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia.repository.xml )
 
 
