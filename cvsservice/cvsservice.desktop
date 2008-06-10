@@ -42,6 +42,7 @@ Comment[gl]=Un servizo de D-Bus que fornece unha interface para CVS
 Comment[hu]=D-Bus-alapú szolgáltatás CVS adattárak eléréséhez
 Comment[it]=Un servizio D-Bus che fornisce un'interfaccia a cvs
 Comment[ja]=CVS インターフェースを提供する D-Bus サービス
+Comment[km]=សេវា D-Bus ដែល​ផ្ដល់​ចំណុច​ប្រទាក់​ទៅ cvs
 Comment[lv]=D-bus serviss CVS piekļuvei
 Comment[nb]=En D-Bus tjeneste som tilbyr et grensesnitt mot cvs
 Comment[nds]=En D-Bus-Deenst, wat en Koppelsteed na CVS praatstellt
