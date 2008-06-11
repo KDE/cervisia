@@ -1,5 +1,10 @@
 2008-06-08  André Wöbbeking  <Woebbeking@kde.org>
 
+	* Fix BR #163265:
+	  Fixed login to remote cvs pserver.
+
+2008-06-08  André Wöbbeking  <Woebbeking@kde.org>
+
 	* Fix BR #163259:
 	  Don't crash when changing recent sandboxes.
 

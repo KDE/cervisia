@@ -36,7 +36,10 @@ extern "C" KDE_EXPORT int kdemain(int argc, char** argv)
     KCmdLineArgs::init(argc, argv, &about);
 
     KApplication app;
-    
+
+    // Don't quit if password dialog for login is closed
+    app.setQuitOnLastWindowClosed(false);
+
     // This app is started automatically, no need for session management
     app.disableSessionManagement();
 
