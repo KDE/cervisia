@@ -40,7 +40,7 @@ const QFileInfoList *CvsDir::entryInfoList() const
 
     entrylist.clear();
 
-    Q_FOREACH (QFileInfo info, fulllist)
+    Q_FOREACH (const QFileInfo &info, fulllist)
     {
         if (!ignorelist.matches(&info) && !GlobalIgnoreList().matches(&info))
             entrylist.append(info);
