@@ -101,6 +101,8 @@ private:
     UpdateDirItem* createDirItem(const Cervisia::Entry& entry);
     UpdateFileItem* createFileItem(const Cervisia::Entry& entry);
 
+    void deleteItem(const QString& name);
+
     UpdateItem* insertItem(UpdateItem* item);
 
     UpdateItem* findItem(const QString& name) const;
