@@ -187,6 +187,16 @@ bool UpdateView::isUnfoldingTree() const
 }
 
 
+// updates internal data
+void UpdateView::replaceItem(QListViewItem* oldItem,
+                             QListViewItem* newItem)
+{
+    const int index(relevantSelection.find(oldItem));
+    if (index >= 0)
+        relevantSelection.replace(index, newItem);
+}
+
+
 void UpdateView::unfoldSelectedFolders()
 {
     QApplication::setOverrideCursor(waitCursor);

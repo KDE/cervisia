@@ -1,3 +1,8 @@
+2008-06-18  André Wöbbeking  <Woebbeking@kde.org>
+
+	* Fix BR #164216:
+	  Fixed crash when updating the status after adding a directory to a repository.
+
 2007-09-11  André Wöbbeking  <Woebbeking@kde.org>
 
 	* Fix BR #148162:

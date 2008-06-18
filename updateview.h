@@ -69,6 +69,8 @@ public:
      */
     bool isUnfoldingTree() const;
 
+    void replaceItem(QListViewItem*, QListViewItem*);
+
 signals:
     void fileOpened(QString filename);
     

@@ -231,6 +231,9 @@ UpdateItem* UpdateDirItem::insertItem(UpdateItem* item)
         }
         else
         {
+            // avoid dangling pointers in the view
+            updateView()->replaceItem(existingItem, item);
+
             delete existingItem;
             *result.first = item;
         }
@@ -792,8 +795,15 @@ UpdateDirItem* findOrCreateDirItem(const QString& dirPath,
             UpdateItem* item = dirItem->findItem(dirName);
             if (isFileItem(item))
             {
+                // this happens if you
+                // - add a directory outside of Cervisia
+                // - update status (a file item is created for the directory)
+                // - add new directory in Cervisia
+                // - update status
                 kdDebug(8050) << "findOrCreateDirItem(): file changed to dir " << dirName << endl;
-                delete item;
+
+                // just create a new dir item, createDirItem() will delete the
+                // file item and update the m_itemsByName map
                 item = 0;
             }
 
