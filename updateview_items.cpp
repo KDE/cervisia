@@ -230,6 +230,9 @@ UpdateItem* UpdateDirItem::insertItem(UpdateItem* item)
         }
         else
         {
+            // avoid dangling pointers in the view
+            updateView()->replaceItem(existingItem, item);
+
             delete existingItem;
             *it = item;
         }
