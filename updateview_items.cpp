@@ -216,19 +216,6 @@ UpdateFileItem* UpdateDirItem::createFileItem(const Entry& entry)
 }
 
 
-// delete the item with name itemName and remove it from m_itemsByName
-void UpdateDirItem::deleteItem(const QString& name)
-{
-    const TMapItemsByName::iterator it = m_itemsByName.find(name);
-    if (it != m_itemsByName.end())
-    {
-        UpdateItem* item = *it;
-        m_itemsByName.erase(it);
-        delete item;
-    }
-}
-
-
 UpdateItem* UpdateDirItem::insertItem(UpdateItem* item)
 {
     const TMapItemsByName::iterator it = m_itemsByName.find(item->entry().m_name);
@@ -244,6 +231,9 @@ UpdateItem* UpdateDirItem::insertItem(UpdateItem* item)
         }
         else
         {
+            // avoid dangling pointers in the view
+            updateView()->replaceItem(existingItem, item);
+
             delete existingItem;
             *it = item;
         }
@@ -760,7 +750,9 @@ UpdateDirItem* findOrCreateDirItem(const QString& dirPath,
                 // - add new directory in Cervisia
                 // - update status
                 kDebug(8050) << "file changed to dir " << dirName;
-                dirItem->deleteItem(dirName);
+
+                // just create a new dir item, createDirItem() will delete the
+                // file item and update the m_itemsByName map
                 item = 0;
             }
 

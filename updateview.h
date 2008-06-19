@@ -69,6 +69,8 @@ public:
      */
     bool isUnfoldingTree() const;
 
+    void replaceItem(Q3ListViewItem*, Q3ListViewItem*);
+
 signals:
     void fileOpened(QString filename);
     
