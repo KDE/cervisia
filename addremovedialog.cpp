@@ -40,6 +40,9 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent)
     setModal(true);
     setButtons(Ok | Cancel | Help);
     setDefaultButton(Ok);
+    // Also give the focus to the OK button, otherwise the Help button gets focus
+    // and is activated by Key_Return
+    setButtonFocus(Ok);
     showButtonSeparator(true);
 
     QFrame* mainWidget = new QFrame(this);
