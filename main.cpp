@@ -100,7 +100,7 @@ static int ShowLogDialog(const QString& fileName)
 
     int result = qApp->exec();
 
-    // stop the cvs DCOP service
+    // stop the cvs D-Bus service
     cvsService->quit();
     delete cvsService;
 
