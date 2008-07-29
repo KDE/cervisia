@@ -121,7 +121,7 @@ void AnnotateViewItem::paintCell(QPainter *p, const QColorGroup &, int col, int 
     if (str.isEmpty())
         return;
 
-    if (align & (Qt::AlignTop || Qt::AlignBottom) == 0)
+    if ((align & (Qt::AlignTop | Qt::AlignBottom)) == 0)
             align |= Qt::AlignVCenter;
 
     p->drawText(BORDER, 0, width - 2*BORDER, height(), align, str);
