@@ -26,7 +26,7 @@ kde4_add_kdeinit_executable( cvsservice_bin NOGUI ${cvsservice_bin_KDEINIT_SRCS}
 set_target_properties(cvsservice_bin PROPERTIES OUTPUT_NAME cvsservice)
 
 
-target_link_libraries(kdeinit_cvsservice_bin  ${KDE4_KFILE_LIBS} ${KDE4_KDESU_LIBS} )
+target_link_libraries(kdeinit_cvsservice_bin  ${KDE4_KIO_LIBS} ${KDE4_KDESU_LIBS} )
 set_target_properties(kdeinit_cvsservice_bin PROPERTIES OUTPUT_NAME kdeinit4_cvsservice)
 
 install(TARGETS kdeinit_cvsservice_bin ${INSTALL_TARGETS_DEFAULT_ARGS} )
