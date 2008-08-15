@@ -42,7 +42,7 @@ CervisiaShell::CervisiaShell( const char *name )
     setObjectName( name );
     setXMLFile( "cervisiashellui.rc" );
 
-    KPluginLoader loader("libcervisiapart");
+    KPluginLoader loader("cervisiapart");
     if( KPluginFactory *factory = loader.factory() )
     {
         m_part = factory->create< KParts::ReadOnlyPart >(this);

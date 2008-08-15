@@ -68,7 +68,7 @@ Name[sr]=Цервисија
 Name[ta]= செர்வியா
 Name[x-test]=xxCervisiaxx
 ServiceTypes=KParts/ReadOnlyPart,Browser/View
-X-KDE-Library=libcervisiapart
+X-KDE-Library=cervisiapart
 X-KDE-BrowserView-Args=DetailedList
 
 X-DBUS-StartupType=Multi

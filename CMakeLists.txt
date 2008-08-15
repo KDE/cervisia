@@ -96,7 +96,7 @@ set(cervisiapart_PART_SRCS ${libcervisia_SRCS}
 
 qt4_add_dbus_adaptor(cervisiapart_PART_SRCS org.kde.cervisia.protocolview.xml protocolview.h ProtocolView)
 
-kde4_add_plugin(cervisiapart WITH_PREFIX ${cervisiapart_PART_SRCS})
+kde4_add_plugin(cervisiapart ${cervisiapart_PART_SRCS})
 
 
 
