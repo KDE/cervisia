@@ -29,17 +29,29 @@
 #include "cervisiapart.h"
 
 
+static QString fileNameCvs()
+{
+    return QDir::homeDirPath() + "/.cvspass";
+}
+
+
+static QString fileNameCvsnt()
+{
+    return QDir::homeDirPath() + "/.cvs/cvspass";
+}
+
+
 // old .cvspass format:
 //    user@host:/path Acleartext_password
 //
 // new .cvspass format (since cvs 1.11.1):
 //    /1 user@host:port/path Aencoded_password
 //
-QStringList Repositories::readCvsPassFile()
+static QStringList readCvsPassFile()
 {
     QStringList list;
-    
-    QFile f(QDir::homeDirPath() + "/.cvspass");
+
+    QFile f(fileNameCvs());
     if (f.open(IO_ReadOnly))
         {
             QTextStream stream(&f);
@@ -55,10 +67,43 @@ QStringList Repositories::readCvsPassFile()
 			    list.append(line.section(' ', 1, 1));
 		    }
 		}
-            f.close();
 	}
 
     return list;
+}
+
+
+// .cvs/cvspass format
+//    user@host:port/path=Aencoded_password
+//
+static QStringList readCvsntPassFile()
+{
+    QStringList list;
+
+    QFile file(fileNameCvsnt());
+    if (file.open(IO_ReadOnly))
+    {
+        QTextStream stream(&file);
+        while (!stream.atEnd())
+        {
+            const QString line(stream.readLine());
+
+            const int pos(line.find("=A"));
+            if (pos >= 0)
+                list.append(line.left(pos));
+        }
+    }
+
+    return list;
+}
+
+
+QStringList Repositories::readCvsPassFile()
+{
+    return (QFileInfo(fileNameCvs()).lastModified()
+            < QFileInfo(fileNameCvsnt()).lastModified())
+        ? readCvsntPassFile()
+        : ::readCvsPassFile();
 }
 
 

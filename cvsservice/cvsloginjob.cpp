@@ -104,7 +104,8 @@ bool CvsLoginJob::execute()
         }
 
         // process asks for the password
-        if( line.contains(PASS_PHRASE) )
+        // search case insensitive as cvs and cvsnt use different capitalization
+        if( line.contains(PASS_PHRASE, false) )
         {
             kdDebug(8051) << "process waits for the password." << endl;
 

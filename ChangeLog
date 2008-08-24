@@ -1,3 +1,8 @@
+2008-08-15  André Wöbbeking  <Woebbeking@kde.org>
+
+	* Fix BR #162523:
+	  Allow cvsnt users to login to repositories.
+
 2008-06-18  André Wöbbeking  <Woebbeking@kde.org>
 
 	* Fix BR #164216:
