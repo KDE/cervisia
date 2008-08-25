@@ -32,7 +32,7 @@
 
 static const char LOGIN_PHRASE[]   = "Logging in to";
 static const char FAILURE_PHRASE[] = "authorization failed:";
-static const char PASS_PHRASE[]    = "CVS password: ";
+static const char PASS_PHRASE[]    = "CVS PASSWORD: ";
 
 
 CvsLoginJob::CvsLoginJob(unsigned jobNum)
@@ -112,7 +112,8 @@ bool CvsLoginJob::execute()
         }
 
         // process asks for the password
-        if( line.contains(PASS_PHRASE) )
+        // search case insensitive as cvs and cvsnt use different capitalization
+        if( line.toUpper().contains(PASS_PHRASE) )
         {
 
             // show password dialog
