@@ -125,19 +125,19 @@
   <Action name="file_remove"/>
 </Menu>
 <State name="has_sandbox">
-  <Enable>
+  <enable>
     <Action name="insert_changelog_entry"/>
     <Action name="view_unfold_tree"/>
     <Action name="view_fold_tree"/>
-  </Enable>
+  </enable>
 </State>
 <State name="has_single_folder">
-  <Enable>
+  <enable>
     <Action name="unfold_folder"/> 
-  </Enable>
+  </enable>
 </State>
 <State name="has_single_selection">
-  <Enable>
+  <enable>
     <Action name="file_edit"/>
     <Action name="file_resolve"/>
     <Action name="view_log"/>
@@ -146,16 +146,16 @@
     <Action name="view_diff_head"/>
     <Action name="view_last_change"/>
     <Action name="file_properties"/>
-  </Enable>
+  </enable>
 </State>
 <State name="item_selected">
-  <Enable>
+  <enable>
     <Action name="view_history"/>
     <Action name="make_patch"/>
-  </Enable>
+  </enable>
 </State>
 <State name="has_no_job">
-  <Enable>
+  <enable>
     <Action name="file_update"/>
     <Action name="file_status"/>
     <Action name="file_commit"/>
@@ -176,12 +176,12 @@
     <Action name="show_editors"/>
     <Action name="lock_files"/>
     <Action name="unlock_files"/>
-  </Enable>
+  </enable>
 </State>
 <State name="has_running_job">
-  <Disable>
+  <disable>
     <Action name="repository_checkout"/>
     <Action name="repository_import"/>
-  </Disable>
+  </disable>
 </State>
 </kpartgui>
