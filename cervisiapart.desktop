@@ -1,5 +1,4 @@
 [Desktop Entry]
-Exec=cervisia -caption "%c" %i %u
 Icon=cervisia
 Type=Service
 MimeType=inode/directory;
