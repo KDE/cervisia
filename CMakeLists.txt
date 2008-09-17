@@ -111,6 +111,7 @@ install(TARGETS cervisiapart  DESTINATION ${PLUGIN_INSTALL_DIR} )
 ########### install files ###############
 
 install( FILES cervisia.desktop  DESTINATION  ${XDG_APPS_INSTALL_DIR} )
+install( FILES cervisiapart.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 install( FILES cervisiapart.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
 install( FILES cervisiaui.rc  DESTINATION  ${DATA_INSTALL_DIR}/cervisiapart )
 install( FILES cervisiashellui.rc cervisia.notifyrc  DESTINATION  ${DATA_INSTALL_DIR}/cervisia )

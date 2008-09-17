@@ -1,0 +1,14 @@
+[Desktop Entry]
+Exec=cervisia -caption "%c" %i %u
+Icon=cervisia
+Type=Service
+MimeType=inode/directory;
+Name=Cervisia
+Name[eo]=Versioadministrilo
+Name[ne]=सर्भिसिया
+Name[pa]=ਸਰਵੀਸੀਆ
+Name[sr]=Цервисија
+Name[ta]= செர்வியா
+Name[x-test]=xxCervisiaxx
+ServiceTypes=KParts/ReadOnlyPart,Browser/View
+X-KDE-Library=cervisiapart
