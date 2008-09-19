@@ -507,8 +507,8 @@ void DiffDialog::saveAsClicked()
     }
 
     QTextStream ts(&f);
-    QStringList::Iterator it = m_diffOutput.begin();
-    for( ; it != m_diffOutput.end(); ++it )
+    QStringList::const_iterator it = m_diffOutput.constBegin();
+    for( ; it != m_diffOutput.constEnd(); ++it )
         ts << *it << "\n";
 
     f.close();
