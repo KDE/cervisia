@@ -34,7 +34,6 @@
 #include <QVBoxLayout>
 
 // KDE
-#include <k3process.h>
 #include <kfiledialog.h>
 #include <klineedit.h>
 #include <klocale.h>
