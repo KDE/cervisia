@@ -1540,7 +1540,7 @@ dialog.
 <para>
 In the annotate dialog, you see in a window the latest version of the selected
 file (or the revision &quot;A&quot; version, in case you launched the annotate
-dialog from the the <link linkend="browsinglogs">Browse log dialog</link>). In
+dialog from the <link linkend="browsinglogs">Browse log dialog</link>). In
 the columns before the text, you get some information related to the
 latest change in each line. In the first column the line number is
 displayed. In the second column you see the name of the author and
