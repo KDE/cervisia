@@ -43,8 +43,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2004-06-06</date>
-<releaseinfo>2.01.90</releaseinfo>
+<date>2008-09-08</date>
+<releaseinfo>3.1.1</releaseinfo>
 
 <abstract>
 <para>&cervisia; provides a graphical view of &CVS;.</para>
@@ -628,7 +628,7 @@ name of the folder will be the same as the name of the empty module.
 <para>
 Alternatively, if the repository has a
 <filename><envar>$CVSROOT</envar>/modules</filename> file, you can retrieve a
-list of available modules by pressing the <guibutton>Fetch list</guibutton>
+list of available modules by pressing the <guibutton>Fetch List</guibutton>
 button.
 </para>
 <para>
@@ -675,6 +675,12 @@ Exporting obtains a copy of the source for the module without the &CVS;
 administrative folders. For example, export may be used to prepare the
 source code for a release.
 </para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Recursive checkout</guilabel></term>
+<listitem><para>
+Checkout all files and folders recursively.</para></listitem>
 </varlistentry>
 
 </variablelist>
@@ -909,7 +915,7 @@ All commonly used &CVS; functionality is directly available in &cervisia;'s
 main view. Commands usually act on several files at once, namely all which
 currently selected. If the selection includes folders, its interpretation
 depends on the settings made under the <guimenu>Settings</guimenu> menu. For
-example, if <menuchoice><guimenu>Settings</guimenu><guimenuitem>Commit and
+example, if <menuchoice><guimenu>Settings</guimenu><guimenuitem>Commit &amp;
 Remove Recursively</guimenuitem></menuchoice> is checked and you choose
 <menuchoice><guimenu>File</guimenu><guimenuitem>Commit...</guimenuitem></menuchoice>
 while a folder is selected, then all files in the tree under that folder
@@ -1534,7 +1540,7 @@ dialog.
 <para>
 In the annotate dialog, you see in a window the latest version of the selected
 file (or the revision &quot;A&quot; version, in case you launched the annotate
-dialog from the the <link linkend="browsinglogs">Browse log dialog</link>). In
+dialog from the <link linkend="browsinglogs">Browse log dialog</link>). In
 the columns before the text, you get some information related to the
 latest change in each line. In the first column the line number is
 displayed. In the second column you see the name of the author and
@@ -1633,8 +1639,8 @@ relevant if you make use of further features provided by the buttons.
 Revision &quot;A&quot; can be chosen with the left mouse button, revision &quot;B&quot;
 with the middle one. In the list view, you can also
 navigate with with your cursor keys. In order to mark revisions &quot;A&quot; and &quot;B&quot;,
-use the shortcuts <keycombo><keycap>Ctrl</keycap><keycap>A</keycap></keycombo>,
-<keycombo><keycap>Ctrl</keycap><keycap>B</keycap></keycombo>, respectively.
+use the shortcuts <keycombo action="simul">&Ctrl;<keycap>A</keycap></keycombo>,
+<keycombo action="simul">&Ctrl;<keycap>B</keycap></keycombo>, respectively.
 Using the <guilabel>CVS Output</guilabel> view, you can click on the
 <guilabel>Select for revision A</guilabel> and <guilabel>Select for
 revision B</guilabel> to mark the revisions.
@@ -2118,7 +2124,7 @@ cooperation. They want to get notified about someone working on a file
 <emphasis>as soon as</emphasis> he starts with it. This can be achieved by some
 further &CVS; commands. Before you start editing a file, select it in
 &cervisia;'s main window and choose 
-<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Edit</guimenuitem></menuchoice>.
+<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Edit Files</guimenuitem></menuchoice>.
 This will execute the command
 </para>
 
@@ -2146,10 +2152,10 @@ At that moment, an <literal>unedit</literal> notification gets sent out to all
 people who have registered a respective watch on the file. Of course,
 sometimes you may not want to commit the file, but abort the editing session
 and revert to the previous version of the file. This is done by using
-<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Unedit</guimenuitem></menuchoice>.
+<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Unedit Files</guimenuitem></menuchoice>.
 Note that &cervisia; will not ask you for confirmation; that means if you use
 this menu item, all your work done since you used
-<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Edit</guimenuitem></menuchoice>
+<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Edit Files</guimenuitem></menuchoice>
 will be lost. Precisely, &cervisia; uses the command line
 </para>
 
@@ -2167,10 +2173,10 @@ repository. However, the important point from the developer's point of view is
 that when the project enforces edits, working copies are checked out
 <emphasis>readonly</emphasis>. That means you cannot edit a file by default
 (unless you use tricks like <command>chmod</command>). Only when you use 
-<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Edit</guimenuitem></menuchoice>,
+<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Edit Files</guimenuitem></menuchoice>,
 the file becomes writable. It is made read-only again when you commit the file
 or use
-<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Unedit</guimenuitem></menuchoice>.
+<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Unedit Files</guimenuitem></menuchoice>.
 </para>
 
 <para>
@@ -2226,7 +2232,7 @@ unless you are sure that your project manager allows them.
 <para>
 With &cervisia;, you lock files as follows. Select the desired files in the
 main view. Then choose
-<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Lock</guimenuitem></menuchoice>.
+<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Lock Files</guimenuitem></menuchoice>.
 This runs the command
 </para>
 
@@ -2235,7 +2241,7 @@ This runs the command
 </para>
 
 <para>The reverse effect is achieved by using
-<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Unlock</guimenuitem></menuchoice>.
+<menuchoice><guimenu>Advanced</guimenu><guimenuitem>Unlock Files</guimenuitem></menuchoice>.
 This runs the command</para>
 
 <para>
@@ -2253,9 +2259,10 @@ This runs the command</para>
 <para>
 &cervisia; can be customized in various ways to your needs and
 preferences. Some options which you may want to change regularly are directly
-available in the <guimenu>Settings</guimenu> menu. Others are united in a common
+available in the <guimenu>Settings</guimenu> menu. 
+<!-- not in 4.1 Others are united in a common
 dialog which is available via
-<menuchoice><guimenu>Option</guimenu><guimenuitem>Settings...</guimenuitem></menuchoice>.
+<menuchoice><guimenu>Option</guimenu><guimenuitem>Settings...</guimenuitem></menuchoice-->.
 </para>
 
 
@@ -2265,7 +2272,7 @@ dialog which is available via
 <variablelist>
 
 <varlistentry id="customize-username">
-<term><guilabel>User name for the ChangeLog editor:</guilabel></term>
+<term><guilabel>User name for the change log editor:</guilabel></term>
 <listitem><para>
 Whenever you use the menu item
 <menuchoice><guimenu>File</guimenu><guimenuitem>Insert ChangeLog
@@ -2278,7 +2285,7 @@ entered here.
 </varlistentry>
 
 <varlistentry id="customize-cvspath">
-<term><guilabel>Path to cvs executable, or 'cvs':</guilabel></term>
+<term><guilabel>Path to CVS executable, or 'cvs':</guilabel></term>
 <listitem><para>
 Here you can set the name (or path) to the <command>cvs</command> command
 line client. By default, the &CVS; executable found in your <envar>$PATH</envar> is
@@ -2418,31 +2425,31 @@ the &ssh; remote shell to communicate with the repository and
 
 
 <sect1 id="customize-look">
-<title>Look'n'feel</title>
+<title>Appearance</title>
 
 <variablelist>
 
 <varlistentry id="customize-protocolfont">
-<term><guilabel>Font for protocol window...</guilabel></term>
+<term><guilabel>Font for Protocol Window...</guilabel></term>
 <listitem><para>
-Press this button to open the <guilabel>Set Font</guilabel> dialog, to set the
+Press this button to open the <guilabel>Select Font</guilabel> dialog, to set the
 font used in the protocol window (this is the window showing the
 output of the <command>cvs</command> client).
 </para></listitem>
 </varlistentry>
 
 <varlistentry id="customize-annotatefont">
-<term><guilabel>Font for annotate view...</guilabel></term>
+<term><guilabel>Font for Annotate View...</guilabel></term>
 <listitem><para>
-Press this button to open the <guilabel>Set Font</guilabel> dialog, to set the
+Press this button to open the <guilabel>Select Font</guilabel> dialog, to set the
 font used in the <link linkend="annotate">annotate view</link>.
 </para></listitem>
 </varlistentry>
 
 <varlistentry id="customize-difffont">
-<term><guilabel>Font for diff view...</guilabel></term>
+<term><guilabel>Font for Diff View...</guilabel></term>
 <listitem><para>
-Press this button to open the <guilabel>Set Font</guilabel> dialog, to set the
+Press this button to open the <guilabel>Select Font</guilabel> dialog, to set the
 font used in <link linkend="diff">diff dialogs</link>.
 </para></listitem>
 </varlistentry>
@@ -2452,7 +2459,7 @@ font used in <link linkend="diff">diff dialogs</link>.
 <listitem><para>
 Press the colored buttons to open the <guilabel>Select Color</guilabel> dialog,
 to set the color used for <guilabel>Conflict</guilabel>, <guilabel>Local
-Change</guilabel>, or <guilabel>Remote Change</guilabel>, in the main view or
+change</guilabel>, or <guilabel>Remote change</guilabel>, in the main view or
 <guilabel>Diff change</guilabel>, <guilabel>Diff insertion</guilabel>, or
 <guilabel>Diff deletion</guilabel>, in &cervisia;'s built-in diff frontend.
 </para></listitem>
@@ -2529,12 +2536,11 @@ folder.
 &CVS; comes with a complete set of documentation in the form of info pages,
 known as "The Cederqvist". If it is properly installed, you can browse it by
 typing in <userinput>info:/cvs</userinput> into the locationbar of
-<application>kdehelp</application>, <application>khelpcenter</application>
-resp. Alternative, you can just choose
+&konqueror;, or you can just choose
 <menuchoice><guimenu>Help</guimenu><guimenuitem>CVS
-Info</guimenuitem></menuchoice> in &cervisia;. An on-line &HTML; version of the
+Manual</guimenuitem></menuchoice> in &cervisia;. An on-line &HTML; version of the
 Cederqvist is available <ulink
-url="http://cvshome.org/docs/manual/cvs.html">on the web</ulink>.
+url="http://ximbiot.com/cvs/manual/">on the web</ulink>.
 </para>
 
 <para>
@@ -2546,7 +2552,7 @@ for learning to use &CVS; is recommended, in particular the following.
 <listitem><para>
 Karl Fogel has written the excellent book <ulink
 url="http://cvsbook.red-bean.com/index.html">Open Source Development with
-CVS</ulink>. About half of this book is about the development process of Open
+&CVS;</ulink>. About half of this book is about the development process of Open
 Source software. The other half is a technical documentation of
 &CVS;. Thankfully, the technical part of the book has been made freely
 redistributable under the GPL, so that you can download a &HTML; version of
@@ -2597,7 +2603,7 @@ Opens a sandbox in the main window. See <xref linkend="mainscreen" />.
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>File</guimenu><guisubmenu>Recent sandboxes</guisubmenu>
+<guimenu>File</guimenu><guisubmenu>Recent Sandboxes</guisubmenu>
 </menuchoice></term>
 <listitem><para>
 Opens one of the sandboxes that were in use recently.
@@ -2616,7 +2622,7 @@ the current date. See <xref linkend="committingfiles" />.
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycombo><keycap>&Ctrl;</keycap><keycap>U</keycap></keycombo></shortcut>
+<shortcut><keycombo action="simul">&Ctrl;<keycap>U</keycap></keycombo></shortcut>
 <guimenu>File</guimenu><guimenuitem>Update</guimenuitem>
 </menuchoice></term>
 <listitem><para>
@@ -2667,7 +2673,7 @@ Allows you to commit the selected files. See <xref linkend="committingfiles" />.
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycap>+</keycap></shortcut>
+<shortcut><keycap>Ins</keycap></shortcut>
 <guimenu>File</guimenu><guimenuitem>Add to Repository...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
@@ -2686,7 +2692,7 @@ Allows you to add the selected files to the repository as binaries
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycap>-</keycap></shortcut>
+<shortcut><keycap>Del</keycap></shortcut>
 <guimenu>File</guimenu><guimenuitem>Remove from Repository...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
@@ -2708,8 +2714,8 @@ update</command>).
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycombo><keycap>&Ctrl;</keycap><keycap>Q</keycap></keycombo></shortcut>
-<guimenu>File</guimenu><guimenuitem>Exit</guimenuitem>
+<shortcut><keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo></shortcut>
+<guimenu>File</guimenu><guimenuitem>Quit</guimenuitem>
 </menuchoice></term>
 <listitem><para>Quits &cervisia;.
 </para></listitem>
@@ -2738,7 +2744,7 @@ Aborts any running subprocesses.
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycombo><keycap>&Ctrl;</keycap><keycap>L</keycap></keycombo></shortcut>
+<shortcut><keycombo action="simul">&Ctrl;<keycap>L</keycap></keycombo></shortcut>
 <guimenu>View</guimenu><guimenuitem>Browse Log...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
@@ -2748,7 +2754,7 @@ Shows the log browser of the selected file versions. See <xref linkend="browsing
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycombo><keycap>&Ctrl;</keycap><keycap>A</keycap></keycombo></shortcut>
+<shortcut><keycombo action="simul">&Ctrl;<keycap>A</keycap></keycombo></shortcut>
 <guimenu>View</guimenu><guimenuitem>Annotate...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
@@ -2759,7 +2765,7 @@ can for each line see which author modified it last. See <xref linkend="annotate
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycombo><keycap>&Ctrl;</keycap><keycap>D</keycap></keycombo></shortcut>
+<shortcut><keycombo action="simul">&Ctrl;<keycap>D</keycap></keycombo></shortcut>
 <guimenu>View</guimenu><guimenuitem>Difference to Repository (BASE)...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
@@ -2770,7 +2776,7 @@ and the revision you last updated (BASE). See <xref linkend="diff" />.
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycombo><keycap>&Ctrl;</keycap><keycap>H</keycap></keycombo></shortcut>
+<shortcut><keycombo action="simul">&Ctrl;<keycap>H</keycap></keycombo></shortcut>
 <guimenu>View</guimenu><guimenuitem>Difference to Repository (HEAD)...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
@@ -2950,7 +2956,7 @@ Lists the watchers of the selected files. See <xref linkend="watches" />.
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Advanced</guimenu><guimenuitem>Edit</guimenuitem>
+<guimenu>Advanced</guimenu><guimenuitem>Edit Files</guimenuitem>
 </menuchoice></term>
 <listitem><para>
 Runs <command>cvs edit</command> on the selected files. See <xref linkend="watches" />.
@@ -2959,7 +2965,7 @@ Runs <command>cvs edit</command> on the selected files. See <xref linkend="watch
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Advanced</guimenu><guimenuitem>Unedit</guimenuitem>
+<guimenu>Advanced</guimenu><guimenuitem>Unedit Files</guimenuitem>
 </menuchoice></term>
 <listitem><para>
 Runs <command>cvs unedit</command> on the selected files. See <xref linkend="watches" />.
@@ -2977,7 +2983,7 @@ Runs <command>cvs editors</command> on the selected files. See <xref linkend="wa
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Advanced</guimenu><guimenuitem>Lock</guimenuitem>
+<guimenu>Advanced</guimenu><guimenuitem>Lock Files</guimenuitem>
 </menuchoice></term>
 <listitem><para>
 Locks the selected files. See <xref linkend="locking" />.
@@ -2986,7 +2992,7 @@ Locks the selected files. See <xref linkend="locking" />.
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Advanced</guimenu><guimenuitem>Unlock</guimenuitem>
+<guimenu>Advanced</guimenu><guimenuitem>Unlock Files</guimenuitem>
 </menuchoice></term>
 <listitem><para>
 Unlocks the selected files. See <xref linkend="locking" />.
@@ -3102,7 +3108,7 @@ Determines whether updates are recursive (Option <option>-r</option> to
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Settings</guimenu><guimenuitem>Commit and Remove Recursively</guimenuitem>
+<guimenu>Settings</guimenu><guimenuitem>Commit &amp; Remove Recursively</guimenuitem>
 </menuchoice></term>
 <listitem><para>Determines whether commits and removes are recursive
 (Option <option>-r</option> to <command>cvs add</command>,
@@ -3140,7 +3146,7 @@ Opens a dialog for configuring &cervisia;'s toolbars.
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Settings</guimenu><guimenuitem>Configure Cervisia...</guimenuitem>
+<guimenu>Settings</guimenu><guimenuitem>Configure &cervisia;...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
 Opens a dialog for customizing &cervisia;.
@@ -3155,47 +3161,12 @@ Opens a dialog for customizing &cervisia;.
 <sect2 id="menuhelp">
 <title>The Help Menu</title>
 
+&help.menu.documentation;
+
+<para>Apart from the standard &kde; <guimenu>Help</guimenu> menu items
+described above you will have this additional menu entry:</para>
+
 <variablelist>
-
-<varlistentry>
-<term><menuchoice>
-<shortcut><keycap>F1</keycap></shortcut>
-<guimenu>Help</guimenu><guimenuitem>Handbook</guimenuitem>
-</menuchoice></term>
-<listitem><para>
-Invokes the &kde;'s Help system starting at the &cervisia; help pages. (this
-document).
-</para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice>
-<guimenu>Help</guimenu><guimenuitem>Report Bug...</guimenuitem>
-</menuchoice></term>
-<listitem><para>
-Opens the Bug report dialog.
-</para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice>
-<guimenu>Help</guimenu>
-<guimenuitem>About &cervisia;</guimenuitem>
-</menuchoice></term>
-<listitem><para>
-This will display version and author information.
-</para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice>
-<guimenu>Help</guimenu><guimenuitem>About KDE</guimenuitem>
-</menuchoice></term>
-<listitem><para>
-This displays the &kde; version and other basic information.
-</para></listitem>
-</varlistentry>
-
 <varlistentry>
 <term><menuchoice>
 <guimenu>Help</guimenu><guimenuitem>CVS Manual</guimenuitem>
@@ -3204,7 +3175,6 @@ This displays the &kde; version and other basic information.
 Opens the &CVS; info pages in the &kde; help system.
 </para></listitem>
 </varlistentry>
-
 </variablelist>
 
 </sect2>
@@ -3216,6 +3186,14 @@ Opens the &CVS; info pages in the &kde; help system.
 
 <chapter id="credits-and-licenses">
 <title>Credits And Licenses</title>
+<para>Program copyright</para>
+<itemizedlist>
+<listitem><para>1999-2002 &Bernd.Gehrmann; &Bernd.Gehrmann.mail;</para></listitem>
+<listitem><para>2002-2008 the &cervisia; authors</para></listitem>
+</itemizedlist>
+
+<para>Documentation Copyright 1999-2002 &Bernd.Gehrmann; &Bernd.Gehrmann.mail; and 2004 Carlos Woelz
+carloswoelz@imap-mail.com</para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
 &underFDL;
