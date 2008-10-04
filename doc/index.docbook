@@ -112,7 +112,7 @@ copy to reflect recent changes made by other contributors.
 
 <para>
 In this section, we show how to use the basic version control system
-functionality using &cervisia; to checkout modules from the
+	functionality using &cervisia; to checkout modules from the
 repository and work with them. To do that, you must have access to the
 repository as a client, meaning that someone (probably the administrator of
 the &CVS; repository) gave you an account on the server machine. Alternatively,
@@ -2262,7 +2262,7 @@ preferences. Some options which you may want to change regularly are directly
 available in the <guimenu>Settings</guimenu> menu. 
 <!-- not in 4.1 Others are united in a common
 dialog which is available via
-<menuchoice><guimenu>Option</guimenu><guimenuitem>Settings...</guimenuitem></menuchoice-->.
+<menuchoice><guimenu>Option</guimenu><guimenuitem>Settings...</guimenuitem></menuchoice-->
 </para>
 
 
