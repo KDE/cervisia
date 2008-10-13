@@ -51,6 +51,7 @@ Comment[nl]=Een DBUS-dienst die een interface naar cvs biedt
 Comment[pl]=Usługa D-Bus pozwalająca na dostęp do CVS
 Comment[pt]=Um serviço de D-Bus que oferece uma interface para o CVS
 Comment[pt_BR]=Um serviço D-Bus que oferece uma interface para o CVS
+Comment[ru]=Служба D-Bus, предоставляющая интерфейс к cvs
 Comment[sr]=Д‑бус сервис који даје сучеље ка ЦВС‑у
 Comment[sr@latin]=D‑Bus servis koji daje sučelje ka CVS‑u
 Comment[sv]=En DBus-tjänst som tillhandahåller ett gränssnitt till CVS
