@@ -234,7 +234,7 @@ void CervisiaPart::slotSetupStatusBar()
 
 void CervisiaPart::setupActions()
 {
-    QAction *action;
+    KAction *action;
     QString hint;
     //
     // File Menu
