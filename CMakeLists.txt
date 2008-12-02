@@ -29,7 +29,7 @@ set(libcervisia_SRCS
    qttableview.cpp
    tooltip.cpp
    settingsdialog.cpp
-	)	
+   )
 
 qt4_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia.cvsservice.xml )
 qt4_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia.cvsjob.xml )

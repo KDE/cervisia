@@ -1,6 +1,3 @@
-
-
-
 ########### next target ###############
 
 set(cvsservice_bin_KDEINIT_SRCS 
