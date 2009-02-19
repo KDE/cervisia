@@ -1957,7 +1957,7 @@ HEAD</guimenuitem></menuchoice>.
 </para></note>
 
 <para>
-The comand issued to update to a branch or tag is:
+The command issued to update to a branch or tag is:
 <screen><command>cvs update -r <replaceable>tag</replaceable></command></screen>
 </para>
 
