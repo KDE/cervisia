@@ -107,7 +107,7 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
 
     nofnlabel = new QLabel(mainWidget);
     // avoids auto resize when the text is changed
-    nofnlabel->setMinimumWidth(fontMetrics().width(i18n("%1 differences", 10000)));
+    nofnlabel->setMinimumWidth(fontMetrics().width(i18np("%1 difference", "%1 differences", 10000)));
 
     backbutton = new QPushButton(QLatin1String("&<<"), mainWidget);
     connect( backbutton, SIGNAL(clicked()), SLOT(backClicked()) );
@@ -423,7 +423,7 @@ void DiffDialog::updateNofN()
     if (markeditem >= 0)
         str = i18n("%1 of %2", markeditem+1, items.count());
     else
-        str = i18n("%1 differences", items.count());
+        str = i18np("%1 difference", "%1 differences", items.count());
     nofnlabel->setText(str);
 
     itemscombo->setCurrentIndex(markeditem==-2? 0 : markeditem+1);
