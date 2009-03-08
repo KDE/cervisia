@@ -652,7 +652,7 @@ empty, &cervisia; will retrieve the main (HEAD) branch.
 <varlistentry>
 <term><guilabel>Working folder:</guilabel></term>
 <listitem><para>
-The folder under which the module should be checked out. Note that the
+The folder under which the module should be checked out. Note that
 the working copy toplevel folder is named after the module you are retrieving,
 unless you give it an alternative name in the <guilabel>Check out as:</guilabel>
 field.
@@ -1806,7 +1806,7 @@ there are various filter options activated by check boxes:
 <listitem><para>Show other events - shows events not included in the above</para></listitem>
 <listitem><para>Only user - shows only events caused by a certain user</para></listitem>
 <listitem><para>Only file names matching - filters file names by a regular expression</para></listitem>
-<listitem><para>Only dirnames matching - filters folder names by a regular expression</para></listitem>
+<listitem><para>Only folders matching - filters folder names by a regular expression</para></listitem>
 </itemizedlist>
 
 <para>
