@@ -85,8 +85,7 @@
     </layout>
   </widget>
   <layoutdefault spacing="6" margin="0" />
-  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
-  <customwidgets>
+    <customwidgets>
     <customwidget>
       <class>KIntNumInput</class>
       <extends>QWidget</extends>
