@@ -1167,8 +1167,8 @@ Entry...</guimenuitem></menuchoice>. If a file with the name
 sandbox, this file will be loaded and you have the possibility to edit it. To
 this end, at the top of the file, an entry with the current date and your user
 name (which can be configured as described in <xref
-linkend="customize-general"/>) is inserted. When you finish the dialog this
-dialog by clicking <guibutton>OK</guibutton>, the next commit dialog you open
+linkend="customize-general"/>) is inserted. When you are finished the dialog can 
+be closed by clicking <guibutton>OK</guibutton>, the next commit dialog you open
 will have the log message set to the message you last entered in the ChangeLog. 
 </para>
 
@@ -1712,7 +1712,7 @@ dialog, &cervisia; issues the following command:
 
 <para>
 If the used repository has logging enabled, &cervisia; can present you a
-history of certain events like checkouts, commits, rtags, updates and
+history of certain events like checkouts, commits, tags, updates and
 releases. Choose <guimenuitem>History</guimenuitem> from the
 <guimenu>View</guimenu> menu, and &cervisia; will issue the command
 </para>
