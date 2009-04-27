@@ -7,7 +7,7 @@ Comment[x-test]=xxCervisiaxx
 
 [Event/cvs_commit_done]
 Name=CVS commit job done
-Name[ca]=Entrega al CVS completada
+Name[ca]=S'ha completat l'entrega al CVS
 Name[cs]=CVS commit úloha dokončena
 Name[da]=CVS-indsending udført
 Name[de]=CVS-Einspielvorgang ausgeführt
