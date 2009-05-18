@@ -47,8 +47,8 @@ EditWithMenu::EditWithMenu(const KUrl& url, QWidget* parent)
     {
         m_menu = new QMenu(i18n("Edit With"));
 
-        KService::List::ConstIterator it = m_offers.begin();
-        for( int i = 0 ; it != m_offers.end(); ++it, ++i )
+        KService::List::ConstIterator it = m_offers.constBegin();
+        for( int i = 0 ; it != m_offers.constEnd(); ++it, ++i )
         {
             QAction* pAction = m_menu->addAction(SmallIcon((*it)->icon()),
                                                  (*it)->name());

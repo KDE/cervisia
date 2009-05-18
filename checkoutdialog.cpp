@@ -215,12 +215,12 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
 
     QStringList list1 = Repositories::readCvsPassFile();
     QStringList::ConstIterator it1;
-    for (it1 = list1.begin(); it1 != list1.end(); ++it1)
+    for (it1 = list1.constBegin(); it1 != list1.constEnd(); ++it1)
         repo_combo->addItem(*it1);
 
     QStringList list2 = Repositories::readConfigFile();
     QStringList::ConstIterator it2;
-    for (it2 = list2.begin(); it2 != list2.end(); ++it2)
+    for (it2 = list2.constBegin(); it2 != list2.constEnd(); ++it2)
         if (!list1.contains(*it2))
             repo_combo->addItem(*it2);
 

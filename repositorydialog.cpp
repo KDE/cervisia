@@ -264,9 +264,8 @@ RepositoryDialog::~RepositoryDialog()
 void RepositoryDialog::readCvsPassFile()
 {
     QStringList list = Repositories::readCvsPassFile();
-    QStringList::ConstIterator it;
-    for( it = list.begin(); it != list.end(); ++it )
-        (void) new RepositoryListItem(m_repoList, (*it), true);
+    Q_FOREACH(const QString& it, list)
+        (void) new RepositoryListItem(m_repoList, it, true);
 }
 
 
@@ -279,9 +278,8 @@ void RepositoryDialog::readConfigFile()
     for( ; item; item = item->nextSibling() )
         list.removeAll(item->text(0));
 
-    QStringList::ConstIterator it;
-    for( it = list.begin(); it != list.end(); ++it )
-        new RepositoryListItem(m_repoList, *it, false);
+    Q_FOREACH(const QString& it, list)
+        new RepositoryListItem(m_repoList, it, false);
 
     // Now look for the used methods
     item = m_repoList->firstChild();
