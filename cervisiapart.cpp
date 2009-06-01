@@ -1873,7 +1873,7 @@ void CervisiaPart::setFilter()
 
     QString str;
     if (opt_hideFiles)
-        str = "F";
+        str = 'F';
     else
         {
             if (opt_hideUpToDate)

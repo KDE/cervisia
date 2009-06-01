@@ -64,7 +64,7 @@ CvsJob::CvsJob(const QString& objId)
 {
     (void)new CvsjobAdaptor(this);
     //TODO register it with good name
-    d->dbusObjectPath = "/" + objId;
+    d->dbusObjectPath = '/' + objId;
     kDebug(8051) << "dbusObjectPath:" << d->dbusObjectPath;
     QDBusConnection::sessionBus().registerObject( d->dbusObjectPath, this );
 }
