@@ -178,12 +178,12 @@ void ProtocolView::appendLine(const QString &line)
 
     QColor color;
     // Colors are the same as in UpdateViewItem::paintCell()
-    if (line.startsWith("C "))
+    if (line.startsWith(QLatin1String("C ")))
         color = conflictColor;
-    else if (line.startsWith("M ")
-             || line.startsWith("A ") || line.startsWith("R "))
+    else if (line.startsWith(QLatin1String("M "))
+             || line.startsWith(QLatin1String("A ")) || line.startsWith(QLatin1String("R ")))
         color = localChangeColor;
-    else if (line.startsWith("P ") || line.startsWith("U "))
+    else if (line.startsWith(QLatin1String("P ")) || line.startsWith(QLatin1String("U ")))
         color = remoteChangeColor;
 
     appendHtml(color.isValid()

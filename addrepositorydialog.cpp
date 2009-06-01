@@ -193,7 +193,7 @@ void AddRepositoryDialog::setRepository(const QString& repo)
 void AddRepositoryDialog::repoChanged()
 {
     QString repo = repository();
-    rsh_edit->setEnabled((!repo.startsWith(":pserver:"))
+    rsh_edit->setEnabled((!repo.startsWith(QLatin1String(":pserver:")))
                          && repo.contains(":"));
     m_useDifferentCompression->setEnabled(repo.contains(":"));
     if( !repo.contains(":") )

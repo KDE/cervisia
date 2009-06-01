@@ -281,7 +281,7 @@ bool DiffDialog::parseCvsDiff(OrgKdeCervisiaCvsserviceCvsserviceInterface* servi
     while ( dlg.getLine(line) )
     {
         // line contains diff region?
-        if (line.startsWith("@@"))
+        if (line.startsWith(QLatin1String("@@")))
         {
             interpretRegion(line, &linenoA, &linenoB);
             diff1->addLine(line, DiffView::Separator);

@@ -166,7 +166,7 @@ QString Cervisia::UserName()
 QString Cervisia::NormalizeRepository(const QString& repository)
 {
     // only :pserver: repositories
-    if( !repository.startsWith(":pserver:") )
+    if( !repository.startsWith(QLatin1String(":pserver:")) )
         return repository;
 
     QRegExp rx(":pserver:(" + userNameRegExp + passwordRegExp + "@)?" +

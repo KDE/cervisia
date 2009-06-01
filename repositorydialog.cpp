@@ -60,8 +60,9 @@ public:
     QString rsh() const
     {
         QString str = text(1);
-        return (str.startsWith("ext (") ? str.mid(5, str.length()-6)
-                                        : QString());
+        return (str.startsWith(QLatin1String("ext ("))
+                ? str.mid(5, str.length() - 6)
+                : QString());
     }
     QString server() const { return m_server; }
     int compression() const
@@ -85,8 +86,8 @@ private:
 
 static bool LoginNeeded(const QString& repository)
 {
-    return repository.startsWith(":pserver:") ||
-           repository.startsWith(":sspi:");
+    return repository.startsWith(QLatin1String(":pserver:")) ||
+           repository.startsWith(QLatin1String(":sspi:"));
 }
 
 
@@ -107,9 +108,9 @@ void RepositoryListItem::setRsh(const QString& rsh)
     QString repo = repository();
     QString method;
 
-    if( repo.startsWith(":pserver:") )
+    if( repo.startsWith(QLatin1String(":pserver:")) )
         method = "pserver";
-    else if( repo.startsWith(":sspi:") )
+    else if( repo.startsWith(QLatin1String(":sspi:")) )
         method = "sspi";
     else if( repo.contains(':') )
     {

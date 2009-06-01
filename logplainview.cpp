@@ -181,8 +181,8 @@ void LogPlainView::setSource(const QUrl& url)
     if( name.isEmpty() )
         return;
 
-    bool selectedRevisionB = name.startsWith("revB#");
-    if( selectedRevisionB || name.startsWith("revA#") )
+    bool selectedRevisionB = name.startsWith(QLatin1String("revB#"));
+    if( selectedRevisionB || name.startsWith(QLatin1String("revA#")) )
     {
         emit revisionClicked(name.mid(5), selectedRevisionB);
     }

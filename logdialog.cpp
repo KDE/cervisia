@@ -324,7 +324,7 @@ bool LogDialog::parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service
                 }
                 break;
             case Branches:
-                if( !line.startsWith("branches:") )
+                if( !line.startsWith(QLatin1String("branches:")) )
                 {
                     logInfo.m_comment = line;
                     state = Comment;

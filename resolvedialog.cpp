@@ -49,7 +49,7 @@ using Cervisia::ResolveEditorDialog;
 // The following conditions are a rough hack
 static QTextCodec *DetectCodec(const QString &fileName)
 {
-    if (fileName.endsWith(".ui") || fileName.endsWith(".docbook")
+    if (fileName.endsWith(QLatin1String(".ui")) || fileName.endsWith(QLatin1String(".docbook"))
         || fileName.endsWith(".xml"))
         return QTextCodec::codecForName("utf8");
 

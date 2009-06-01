@@ -126,7 +126,7 @@ void AnnotateController::Private::parseCvsLogOutput()
                 state = Branches;
                 break;
             case Branches:
-                if( !line.startsWith("branches:") )
+                if( !line.startsWith(QLatin1String("branches:")) )
                 {
                     state = Comment;
                     comment = line;
@@ -152,7 +152,7 @@ void AnnotateController::Private::parseCvsLogOutput()
 
     // skip header part of cvs annotate output
     bool notEof = true;
-    while( notEof && !line.startsWith("*****") )
+    while( notEof && !line.startsWith(QLatin1String("*****")) )
         notEof = progress->getLine(line);
 }
 

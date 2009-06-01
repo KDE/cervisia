@@ -268,12 +268,12 @@ void ProgressDialog::processOutput()
         QString item = d->buffer.left(pos);
         if( item.startsWith(d->errorId1) ||
             item.startsWith(d->errorId2) ||
-            item.startsWith("cvs [server aborted]:") )
+            item.startsWith(QLatin1String("cvs [server aborted]:")) )
         {
             d->hasError = true;
             d->resultbox->insertPlainText(item);
         }
-        else if( item.startsWith("cvs server:") )
+        else if( item.startsWith(QLatin1String("cvs server:")) )
             d->resultbox->insertPlainText(item);
         else
             d->output.append(item);
