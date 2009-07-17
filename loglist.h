@@ -49,7 +49,7 @@ public:
     void setSelectedPair(const QString &selectionA, const QString &selectionB);
 
 signals:
-    void revisionClicked(QString rev, bool rmb);
+    void revisionClicked(const QString& rev, bool rmb);
 
 protected:
     virtual void contentsMousePressEvent(QMouseEvent *e);
