@@ -1,3 +1,7 @@
+2009-07-25  André Wöbbeking  <Woebbeking@kde.org>
+
+	* Text search and go to line in AnnotateDialog. Patch by Martin Koller.
+
 2008-08-15  André Wöbbeking  <Woebbeking@kde.org>
 
 	* Fix BR #162523:

@@ -44,6 +44,13 @@ public:
 
     virtual QSize sizeHint() const;
 
+    int currentLine() const;
+    int lastLine() const;
+    void gotoLine(int line);
+
+public slots:
+    void findText(const QString &textToFind, bool up);
+
 private slots:
 
     void configChanged();

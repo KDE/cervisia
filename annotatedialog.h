@@ -24,6 +24,7 @@
 
 class AnnotateView;
 class KConfig;
+class KLineEdit;
 
 namespace Cervisia
 {
@@ -33,6 +34,8 @@ struct LogInfo;
 
 class AnnotateDialog : public KDialog
 {
+    Q_OBJECT
+
 public:
 
     explicit AnnotateDialog( KConfig& cfg, QWidget *parent=0);
@@ -42,7 +45,13 @@ public:
     void addLine(const Cervisia::LogInfo& logInfo, const QString& content,
                  bool odd);
 
+private slots:
+    void findNext();
+    void findPrev();
+    void gotoLine();
+
 private:
+    KLineEdit    *findEdit;
     AnnotateView *annotate;
     KConfig&      partConfig;
 };

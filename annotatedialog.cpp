@@ -24,18 +24,41 @@
 
 #include <kconfig.h>
 #include <kconfiggroup.h>
+#include <klineedit.h>
+#include <klocale.h>
+#include <kpushbutton.h>
 
+#include <QVBoxLayout>
+#include <QInputDialog>
 
 AnnotateDialog::AnnotateDialog(KConfig& cfg, QWidget *parent)
     : KDialog(parent)
     , partConfig(cfg)
 {
-    setButtons(Close | Help);
-    setDefaultButton(Close);
+    setButtons(Close | Help | User1 | User2 | User3);
+    setButtonText(User3, i18n("Find Next"));
+    setButtonText(User2, i18n("Find Prev"));
+    setButtonText(User1, i18n("Go to Line..."));
+    setDefaultButton(User3);
+    setEscapeButton(Close);
     showButtonSeparator(true);
 
-    annotate = new AnnotateView(this);
-    setMainWidget(annotate);
+    QWidget *vbox = new QWidget(this);
+    QVBoxLayout *layout = new QVBoxLayout(vbox);
+
+    findEdit = new KLineEdit(vbox);
+    findEdit->setClearButtonShown(true);
+    findEdit->setClickMessage(i18n("Search"));
+
+    annotate = new AnnotateView(vbox);
+
+    layout->addWidget(findEdit);
+    layout->addWidget(annotate);
+    setMainWidget(vbox);
+
+    connect(button(User3), SIGNAL(clicked()), this, SLOT(findNext()));
+    connect(button(User2), SIGNAL(clicked()), this, SLOT(findPrev()));
+    connect(button(User1), SIGNAL(clicked()), this, SLOT(gotoLine()));
 
     setHelp("annotate");
 
@@ -59,6 +82,30 @@ void AnnotateDialog::addLine(const Cervisia::LogInfo& logInfo,
     annotate->addLine(logInfo, content, odd);
 }
 
+
+void AnnotateDialog::findNext()
+{
+    if ( !findEdit->text().isEmpty() )
+        annotate->findText(findEdit->text(), false);
+}
+
+void AnnotateDialog::findPrev()
+{
+    if ( !findEdit->text().isEmpty() )
+        annotate->findText(findEdit->text(), true);
+}
+
+void AnnotateDialog::gotoLine()
+{
+  bool ok = false;
+  int line = QInputDialog::getInteger(this, i18n("Go to Line"), i18n("Go to line number:"),
+                                      annotate->currentLine(), 1, annotate->lastLine(), 1, &ok);
+
+  if ( ok )
+      annotate->gotoLine(line);
+}
+
+#include "annotatedialog.moc"
 
 // Local Variables:
 // c-basic-offset: 4

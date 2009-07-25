@@ -39,6 +39,8 @@ public:
     AnnotateViewItem(AnnotateView *parent, const LogInfo& logInfo,
                      const QString &content, bool odd, int linenumber);
 
+    int lineNumber() const { return m_lineNumber; }
+
     virtual int compare(Q3ListViewItem *item, int col, bool ascending) const;
     virtual int width(const QFontMetrics &, const Q3ListView *, int col) const;
     virtual QString text(int col) const;
@@ -101,20 +103,22 @@ QString AnnotateViewItem::text(int col) const
 void AnnotateViewItem::paintCell(QPainter *p, const QColorGroup &, int col, int width, int align)
 {
     QColor backgroundColor;
+    QColor foregroundColor;
 
-    switch (col)
+    if ( isSelected() || col == LineNumberColumn )
     {
-    case LineNumberColumn:
         backgroundColor = KColorScheme(QPalette::Active, KColorScheme::Selection).background().color();
-        p->setPen(KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color());
-        break;
-    default:
-        backgroundColor = m_odd ? KColorScheme(QPalette::Active, KColorScheme::View).background().color()
-                                : KColorScheme(QPalette::Active, KColorScheme::View).background(KColorScheme::AlternateBackground).color();
-        p->setPen(KColorScheme(QPalette::Active, KColorScheme::View).foreground().color());
-        break;
-    };
+        foregroundColor = KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color();
+    }
+    else
+    {
+        backgroundColor = m_odd
+            ? KColorScheme(QPalette::Active, KColorScheme::View).background().color()
+            : KColorScheme(QPalette::Active, KColorScheme::View).background(KColorScheme::AlternateBackground).color();
+        foregroundColor = KColorScheme(QPalette::Active, KColorScheme::View).foreground().color();
+    }
 
+    p->setPen(foregroundColor);
     p->fillRect(0, 0, width, height(), backgroundColor);
 
     QString str = text(col);
@@ -146,7 +150,7 @@ AnnotateView::AnnotateView(QWidget *parent, const char *name)
     setFrameStyle(QFrame::WinPanel | QFrame::Sunken);
     setAllColumnsShowFocus(true);
     setShowToolTips(false);
-    setSelectionMode(NoSelection);
+    setSelectionMode(Single); // to be able to show the found item
     header()->hide();
     //    setResizeMode(LastColumn);
 
@@ -205,6 +209,71 @@ void AnnotateView::slotQueryToolTip(const QPoint& viewportPos,
     }
 }
 
+void AnnotateView::findText(const QString &textToFind, bool up)
+{
+    Q3ListViewItem *item = currentItem();
+    if ( !item )
+    {
+        if ( up )
+            item = lastItem();
+        else
+            item = firstChild();
+    }
+    else
+    {
+        setSelected(item, false);  // deselect current
+        if ( up )
+            item = item->itemAbove();
+        else
+            item = item->itemBelow();
+    }
+
+    for (; item && !item->text(AnnotateViewItem::ContentColumn).contains(textToFind, false);
+         item = up ? item->itemAbove() : item->itemBelow())
+      ;
+
+    if ( item )
+    {
+        setCurrentItem(item);
+        setSelected(item, true);
+        ensureItemVisible(item);
+    }
+}
+
+int AnnotateView::currentLine() const
+{
+    Q3ListViewItem *item = currentItem();
+    if ( !item )
+        return -1;
+
+    return static_cast<AnnotateViewItem*>(item)->lineNumber();
+}
+
+int AnnotateView::lastLine() const
+{
+    AnnotateViewItem *item = static_cast<AnnotateViewItem*>(lastItem());
+    if ( !item )
+        return 0;
+
+    return item->lineNumber();
+}
+
+
+void AnnotateView::gotoLine(int line)
+{
+    for (AnnotateViewItem *item = static_cast<AnnotateViewItem*>(firstChild());
+         item;
+         item = static_cast<AnnotateViewItem*>(item->itemBelow()))
+    {
+        if ( item->lineNumber() == line )
+        {
+            setCurrentItem(item);
+            setSelected(item, true);
+            ensureItemVisible(item);
+            return;
+        }
+    }
+}
 
 #include "annotateview.moc"
 
