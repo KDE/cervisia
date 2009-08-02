@@ -48,7 +48,7 @@ public:
     bool firstonbranch;
     int row;
     int col;
-    bool selected;
+    SelectedRevision selected;
 };
 
 
@@ -130,7 +130,7 @@ void LogTreeView::addRevision(const Cervisia::LogInfo& logInfo)
         item->firstonbranch = false;
         item->row = numRows()-1;
         item->col = 0;
-        item->selected = false;
+        item->selected = NoRevision;
         items.append(item);
         return;
     }
@@ -193,7 +193,7 @@ void LogTreeView::addRevision(const Cervisia::LogInfo& logInfo)
     item->firstonbranch = true;
     item->row = row;
     item->col = col;
-    item->selected = false;
+    item->selected = NoRevision;
     items.append(item);
 
 #if 0
@@ -237,12 +237,19 @@ void LogTreeView::setSelectedPair(QString selectionA, QString selectionB)
 {
     foreach (LogTreeItem* item, items)
     {
-        bool oldstate = item->selected;
-        bool newstate = ( selectionA == item->m_logInfo.m_revision ||
-                          selectionB == item->m_logInfo.m_revision );
-        if (oldstate != newstate)
+        const SelectedRevision oldSelection = item->selected;
+        SelectedRevision newSelection;
+
+        if ( selectionA == item->m_logInfo.m_revision )
+            newSelection = RevisionA;
+        else if ( selectionB == item->m_logInfo.m_revision )
+            newSelection = RevisionB;
+        else
+            newSelection = NoRevision;
+
+        if (oldSelection != newSelection)
         {
-            item->selected = newstate;
+            item->selected = newSelection;
             repaint();
         }
     }
@@ -370,7 +377,7 @@ QSize LogTreeView::computeSize(const Cervisia::LogInfo& logInfo,
 void LogTreeView::paintRevisionCell(QPainter *p,
                                     int row, int col,
                                     const Cervisia::LogInfo& logInfo,
-                                    bool followed, bool branched, bool selected)
+                                    bool followed, bool branched, SelectedRevision selected)
 {
     int authorHeight;
     int tagsHeight;
@@ -396,8 +403,20 @@ void LogTreeView::paintRevisionCell(QPainter *p,
     // The box itself
     if (selected)
     {
-        p->fillRect(rect, KColorScheme(QPalette::Active, KColorScheme::Selection).background().color());
-        p->setPen(KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color());
+        if ( selected == RevisionA )
+        {
+            p->fillRect(rect, KColorScheme(QPalette::Active, KColorScheme::Selection).background());
+            p->setPen(KColorScheme(QPalette::Active, KColorScheme::Selection).foreground());
+            p->drawText(rect, Qt::AlignLeft | Qt::AlignTop, "A");
+        }
+        else
+        {
+            p->fillRect(rect, KColorScheme(QPalette::Active, KColorScheme::Selection)
+                .background().color().light(130));
+            p->setPen(KColorScheme(QPalette::Active, KColorScheme::Selection)
+                .foreground().color().light(130));
+            p->drawText(rect, Qt::AlignLeft | Qt::AlignTop, "B");
+        }
     }
     else
     {

@@ -65,7 +65,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     , partConfig(cfg)
 {
     setButtons(Ok | Apply | Close | Help | User1 | User2 | User3);
-    setButtonGuiItem(User1, KGuiItem(i18n("&Annotate")));
+    setButtonGuiItem(User1, KGuiItem(i18n("&Annotate A")));
     setButtonGuiItem(User2, KGuiItem(i18n("&Diff"), "vcs_diff"));
     setButtonGuiItem(User3, KGuiItem(i18n("&Find"), "edit-find"));
     setDefaultButton(Close);
@@ -204,7 +204,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     connect(this,SIGNAL(okClicked()),
             this, SLOT(slotOk()));
     connect(this,SIGNAL(applyClicked()),this,SLOT(slotApply()));
-    setButtonGuiItem(Ok, KGuiItem(i18nc("to view something", "&View"),"document-open"));
+    setButtonGuiItem(Ok, KGuiItem(i18nc("to view revision A", "&View A"),"document-open"));
     setButtonGuiItem(Apply, KGuiItem(i18n("Create Patch...")));
     setHelp("browsinglogs");
 
@@ -583,9 +583,9 @@ void LogDialog::updateButtons()
     // both versions selected?
     else if( !selectionA.isEmpty() && !selectionB.isEmpty() )
     {
-        enableButton(User1, false); // annotate
+        enableButton(User1, true);  // annotate A
         enableButton(User2, true);  // diff
-        enableButtonOk(false);      // view
+        enableButtonOk(true);       // view A
         enableButtonApply(true);    // create patch
     }
     // only single version selected?

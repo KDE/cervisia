@@ -41,6 +41,14 @@ typedef QList<LogTreeItem*> LogTreeItemList;
 typedef QList<LogTreeConnection*> LogTreeConnectionList;
 
 
+enum SelectedRevision
+{
+    NoRevision,
+    RevisionA,
+    RevisionB
+};
+
+
 class LogTreeView : public Q3Table
 {
     Q_OBJECT
@@ -74,7 +82,7 @@ private slots:
 private:
     QSize computeSize(const Cervisia::LogInfo&, int* = 0, int* = 0) const;
     void paintRevisionCell(QPainter *p, int row, int col, const Cervisia::LogInfo& logInfo,
-                           bool followed, bool branched, bool selected);
+                           bool followed, bool branched, SelectedRevision selected);
     void paintConnector(QPainter *p, int row, int col, bool followed, bool branched);
 
     LogTreeItemList items;
