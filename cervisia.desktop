@@ -2,6 +2,7 @@
 GenericName=CVS Frontend
 GenericName[af]=Cvs Voorprogram
 GenericName[be]=Інтэрфейс да CVS
+GenericName[bg]=Програма за CVS
 GenericName[ca]=Frontal de CVS
 GenericName[cs]=Rozhraní pro CVS
 GenericName[cy]=Ochr Blaen CVS
@@ -65,6 +66,7 @@ MimeType=inode/directory;
 Name=Cervisia
 Name[af]=Cervisia
 Name[be]=Cervisia
+Name[bg]=Cervisia
 Name[br]=Cervisia
 Name[ca]=Cervisia
 Name[cs]=Cervisia

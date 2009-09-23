@@ -2,6 +2,7 @@
 Type=Service
 Name=CvsService
 Name[be]=CvsService
+Name[bg]=CvsService
 Name[br]=Servij Cvs
 Name[ca]=Servei de CVS
 Name[cs]=CVS služba
@@ -56,6 +57,7 @@ Exec=cvsservice
 X-DBUS-StartupType=Multi
 X-KDE-StartupNotify=false
 Comment=A D-Bus service that provides an interface to cvs
+Comment[bg]=Услуга на D-Bus, която предлага интерфейс към CVS
 Comment[ca]=Un servei D-Bus que proporciona una interfície per al cvs
 Comment[cs]=D-Bus služba poskytující rozhraní k CVS
 Comment[da]=En D-Bus-tjeneste der sørger for en CVS-grænseflade
