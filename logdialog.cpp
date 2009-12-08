@@ -302,25 +302,31 @@ bool LogDialog::parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service
                 }
                 break;
             case Revision:
-                logInfo.m_revision = rev = line.section(' ', 1, 1);
-                state = Author;
+                if( line.startsWith(QLatin1String("revision ")) )
+                {
+                    logInfo.m_revision = rev = line.section(' ', 1, 1);
+                    state = Author;
+                }
                 break;
             case Author:
                 {
-                    QStringList strList = line.split(';');
+                    if( line.startsWith(QLatin1String("date: ")) )
+                    {
+                        QStringList strList = line.split(';');
 
-                    // convert date into ISO format (YYYY-MM-DDTHH:MM:SS)
-                    int len = strList[0].length();
-                    QString dateTimeStr = strList[0].right(len-6); // remove 'date: '
-                    dateTimeStr.replace('/', '-');
+                        // convert date into ISO format (YYYY-MM-DDTHH:MM:SS)
+                        int len = strList[0].length();
+                        QString dateTimeStr = strList[0].right(len-6); // remove 'date: '
+                        dateTimeStr.replace('/', '-');
 
-                    QString date = dateTimeStr.section(' ', 0, 0);
-                    QString time = dateTimeStr.section(' ', 1, 1);
-                    logInfo.m_dateTime.setTime_t(KDateTime::fromString(date + 'T' + time).toTime_t());
+                        QString date = dateTimeStr.section(' ', 0, 0);
+                        QString time = dateTimeStr.section(' ', 1, 1);
+                        logInfo.m_dateTime.setTime_t(KDateTime::fromString(date + 'T' + time).toTime_t());
 
-                    logInfo.m_author = strList[1].section(':', 1, 1).trimmed();
+                        logInfo.m_author = strList[1].section(':', 1, 1).trimmed();
 
-                    state = Branches;
+                        state = Branches;
+                    }
                 }
                 break;
             case Branches:
@@ -333,7 +339,13 @@ bool LogDialog::parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service
             case Comment:
                 if( line == "----------------------------" )
                 {
-                    state = Revision;
+                    QStringList lines = dlg.getOutput();
+                    if( (lines.count() >= 2) &&  // at least revision and date line must follow
+                         lines[0].startsWith(QLatin1String("revision ")) &&
+                         lines[1].startsWith(QLatin1String("date: ")) )
+                    {
+                        state = Revision;
+                    }
                 }
                 else if( line == "=============================================================================" )
                 {
