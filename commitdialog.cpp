@@ -103,7 +103,6 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInter
 
     edit = new Cervisia::LogMessageEdit(mainWidget);
     messagelabel->setBuddy(edit);
-    edit->setCheckSpellingEnabled(true);
     edit->setFocus();
     edit->setMinimumSize(400, 100);
     layout->addWidget(edit, 10);

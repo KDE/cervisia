@@ -52,6 +52,7 @@ private:
 
     bool m_completing;
     int  m_completionStartPos;
+    bool m_checkSpellingEnabledBeforeCompletion;
 };
 
 

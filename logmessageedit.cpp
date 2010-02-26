@@ -33,6 +33,7 @@ LogMessageEdit::LogMessageEdit(QWidget* parent)
     , KCompletionBase()
     , m_completing(false)
     , m_completionStartPos(0)
+    , m_checkSpellingEnabledBeforeCompletion(false)
 {
     // create the completion object
     completionObject();
@@ -67,6 +68,7 @@ void LogMessageEdit::setCompletedText(const QString& match)
 
     m_completing = true;
 
+    m_checkSpellingEnabledBeforeCompletion = checkSpellingEnabled();
     // disable spellchecker during completion process. Otherwise we lose the
     // text selection.
     setCheckSpellingEnabled(false);
@@ -152,8 +154,11 @@ void LogMessageEdit::keyPressEvent(QKeyEvent* event)
 
 void LogMessageEdit::stopCompletion()
 {
-    m_completing = false;
-    setCheckSpellingEnabled(true);
+    if (m_completing)
+    {
+        m_completing = false;
+        setCheckSpellingEnabled(m_checkSpellingEnabledBeforeCompletion);
+    }
 }
 
 
