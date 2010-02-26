@@ -1,6 +1,10 @@
 [Global]
 IconName=cervisia
 Comment=Cervisia CVS Client
+Comment[pt]=Cliente de CVS Cervisia
+Comment[pt_BR]=Cliente de CVS Cervisia
+Comment[uk]=Клієнтська програма CVS Cervisia
+Comment[x-test]=xxCervisia CVS Clientxx
 
 [Event/cvs_commit_done]
 Name=CVS commit job done
