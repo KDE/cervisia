@@ -1,6 +1,8 @@
 [Global]
 IconName=cervisia
 Comment=Cervisia CVS Client
+Comment[ca]=Client de CVS Cervisia
+Comment[nds]=CVS-Programm "Cervisia"
 Comment[pt]=Cliente de CVS Cervisia
 Comment[pt_BR]=Cliente de CVS Cervisia
 Comment[uk]=Клієнтська програма CVS Cervisia
