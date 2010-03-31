@@ -2,6 +2,7 @@
 IconName=cervisia
 Comment=Cervisia CVS Client
 Comment[ca]=Client de CVS Cervisia
+Comment[ca@valencia]=Client de CVS Cervisia
 Comment[en_GB]=Cervisia CVS Client
 Comment[et]=CVS klient Cervisia
 Comment[nds]=CVS-Programm "Cervisia"
