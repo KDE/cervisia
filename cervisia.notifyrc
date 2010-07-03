@@ -1,6 +1,7 @@
 [Global]
 IconName=cervisia
 Comment=Cervisia CVS Client
+Comment[bg]=Клиент за CVS Cervisia
 Comment[ca]=Client de CVS Cervisia
 Comment[ca@valencia]=Client de CVS Cervisia
 Comment[cs]=CVS klient Cervisia
