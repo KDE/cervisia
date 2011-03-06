@@ -65,7 +65,7 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInter
     setCaption(i18n("CVS Commit"));
     setModal(true);
     setButtons(Ok | Cancel | Help | User1);
-    setButtonGuiItem(User1, KGuiItem(i18n("&Diff"), "vcs_diff"));
+    setButtonGuiItem(User1, KGuiItem(i18n("&Diff"), "vcs-diff-cvs-cervisia"));
     setDefaultButton(Ok);
     showButtonSeparator(true);
 

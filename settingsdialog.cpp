@@ -246,7 +246,7 @@ void SettingsDialog::addDiffPage()
 {
     QFrame* diffPage = new QFrame;
     KPageWidgetItem *page = new KPageWidgetItem( diffPage, i18n("Diff Viewer") );
-    page->setIcon( KIcon("vcs_diff") );
+    page->setIcon( KIcon("vcs-diff-cvs-cervisia") );
 
     QGridLayout* layout = new QGridLayout(diffPage);
 

@@ -258,7 +258,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action  = new KAction(KIcon("vcs_update"), i18n("&Update"), this);
+    action  = new KAction(KIcon("vcs-update-cvs-cervisia"), i18n("&Update"), this);
     actionCollection()->addAction("file_update", action );
     connect(action, SIGNAL(triggered(bool) ), SLOT( slotUpdate() ));
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_U));
@@ -266,7 +266,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action  = new KAction(KIcon("vcs_status"), i18n("&Status"), this);
+    action  = new KAction(KIcon("vcs-status-cvs-cervisia"), i18n("&Status"), this);
     actionCollection()->addAction("file_status", action );
     connect(action, SIGNAL(triggered(bool) ), SLOT( slotStatus() ));
     action->setShortcut(QKeySequence(Qt::Key_F5));
@@ -288,7 +288,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action  = new KAction(KIcon("vcs_commit"), i18n("&Commit..."), this);
+    action  = new KAction(KIcon("vcs-commit-cvs-cervisia"), i18n("&Commit..."), this);
     actionCollection()->addAction("file_commit", action );
     connect(action, SIGNAL(triggered(bool) ), SLOT( slotCommit() ));
     action->setShortcut(QKeySequence(Qt::Key_NumberSign));
@@ -296,7 +296,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action  = new KAction(KIcon("vcs_add"), i18n("&Add to Repository..."), this);
+    action  = new KAction(KIcon("vcs-add-cvs-cervisia"), i18n("&Add to Repository..."), this);
     actionCollection()->addAction("file_add", action );
     connect(action, SIGNAL(triggered(bool) ), SLOT( slotAdd() ));
     action->setIconText(i18n("Add"));
@@ -312,7 +312,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action  = new KAction(KIcon("vcs_remove"), i18n("&Remove From Repository..."), this);
+    action  = new KAction(KIcon("vcs-remove-cvs-cervisia"), i18n("&Remove From Repository..."), this);
     actionCollection()->addAction("file_remove", action );
     connect(action, SIGNAL(triggered(bool) ), SLOT( slotRemove() ));
     action->setIconText(i18n("Remove"));
@@ -366,7 +366,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action  = new KAction(KIcon("vcs_diff"), i18n("&Difference to Repository (BASE)..."), this);
+    action  = new KAction(KIcon("vcs-diff-cvs-cervisia"), i18n("&Difference to Repository (BASE)..."), this);
     actionCollection()->addAction("view_diff_base", action );
     connect(action, SIGNAL(triggered(bool) ), SLOT(slotDiffBase()));
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_D));
@@ -374,7 +374,7 @@ void CervisiaPart::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action  = new KAction(KIcon("vcs_diff"), i18n("Difference to Repository (HEAD)..."), this);
+    action  = new KAction(KIcon("vcs-diff-cvs-cervisia"), i18n("Difference to Repository (HEAD)..."), this);
     actionCollection()->addAction("view_diff_head", action );
     connect(action, SIGNAL(triggered(bool) ), SLOT(slotDiffHead()));
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_H));

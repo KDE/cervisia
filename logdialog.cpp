@@ -66,7 +66,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
 {
     setButtons(Ok | Apply | Close | Help | User1 | User2 | User3);
     setButtonGuiItem(User1, KGuiItem(i18n("&Annotate A")));
-    setButtonGuiItem(User2, KGuiItem(i18n("&Diff"), "vcs_diff"));
+    setButtonGuiItem(User2, KGuiItem(i18n("&Diff"), "vcs-diff-cvs-cervisia"));
     setButtonGuiItem(User3, KGuiItem(i18n("&Find"), "edit-find"));
     setDefaultButton(Close);
     showButtonSeparator(true);
