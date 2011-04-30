@@ -55,7 +55,7 @@ void FontButton::chooseFont()
 {
     QFont newFont(font());
 
-    if (KFontDialog::getFont(newFont, false, this) == QDialog::Rejected)
+    if (KFontDialog::getFont(newFont, KFontChooser::NoDisplayFlags, this) == QDialog::Rejected)
         return;
 
     setFont(newFont);
