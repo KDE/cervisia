@@ -71,7 +71,7 @@ QString UpdateItem::dirPath() const
 QString UpdateItem::filePath() const
 {
     // the filePath of the root item is '.'
-    return parent() ? dirPath() + m_entry.m_name : QLatin1String(".");
+    return parent() ? QString(dirPath() + m_entry.m_name) : QLatin1String(".");
 }
 
 
