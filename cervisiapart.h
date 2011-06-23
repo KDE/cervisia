@@ -24,7 +24,6 @@
 
 #include <kparts/part.h>
 #include <kparts/browserextension.h>
-#include <kparts/genericfactory.h>
 #include <kparts/statusbarextension.h>
 
 #include "addremovedialog.h"
