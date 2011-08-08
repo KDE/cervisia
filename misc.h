@@ -54,7 +54,6 @@ bool CheckOverwrite(const QString& fileName, QWidget* parent=0);
 }
 
 
-QString joinLine(const QStringList &list);
 QStringList splitLine(QString, char delim=' ');
 
 QString tempFileName(const QString& suffix);

@@ -32,7 +32,6 @@
 #include <kemailsettings.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <k3process.h>
 #include <ktemporaryfile.h>
 #include <kuser.h>
 #include <kdebug.h>
@@ -220,23 +219,6 @@ bool Cervisia::CheckOverwrite(const QString& fileName, QWidget* parent)
     }
 
     return result;
-}
-
-
-QString joinLine(const QStringList &list)
-{
-    QString line;
-    for ( QStringList::ConstIterator it = list.begin();
-          it != list.end(); ++it )
-    {
-        line += K3ShellProcess::quote(*it);
-        line += ' ';
-    }
-
-    if (line.length() > 0)
-        line.truncate(line.length()-1);
-
-    return line;
 }
 
 
