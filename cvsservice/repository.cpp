@@ -151,7 +151,7 @@ bool Repository::setWorkingCopy(const QString& dirName)
         return false;
 
     d->workingCopy = path;
-    d->location    = QString();
+    d->location.clear();
 
     // determine path to the repository
     QFile rootFile(path + "/CVS/Root");

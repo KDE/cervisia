@@ -20,6 +20,7 @@
 
 
 #include "resolvedialog.h"
+#include "resolvedialog_p.h"
 
 #include <qfile.h>
 #include <qnamespace.h>
@@ -41,7 +42,6 @@
 #include <qregexp.h>
 #include <kconfiggroup.h>
 #include "misc.h"
-#include "resolvedialog_p.h"
 using Cervisia::ResolveEditorDialog;
 
 
@@ -50,7 +50,7 @@ using Cervisia::ResolveEditorDialog;
 static QTextCodec *DetectCodec(const QString &fileName)
 {
     if (fileName.endsWith(QLatin1String(".ui")) || fileName.endsWith(QLatin1String(".docbook"))
-        || fileName.endsWith(".xml"))
+        || fileName.endsWith(QLatin1String(".xml")))
         return QTextCodec::codecForName("utf8");
 
     return QTextCodec::codecForLocale();
@@ -75,7 +75,7 @@ public:
         // already reach end of text on previous call
         if( m_endPos < 0 )
         {
-            m_currentLine = QString();
+            m_currentLine.clear();
             return m_currentLine;
         }
 
