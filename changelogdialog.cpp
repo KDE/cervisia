@@ -59,7 +59,7 @@ ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent)
     edit->setAcceptRichText(false);
     edit->setFont(CervisiaSettings::changeLogFont());
     edit->setFocus();
-    edit->setLineWrapMode(QTextEdit::NoWrap);
+    edit->setLineWrapMode(KTextEdit::NoWrap);
     QFontMetrics const fm(edit->fontMetrics());
     edit->setMinimumSize(fm.width('0') * 80,
                          fm.lineSpacing() * 20);

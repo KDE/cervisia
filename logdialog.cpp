@@ -28,7 +28,7 @@
 #include <qlayout.h>
 #include <qpushbutton.h>
 #include <qtabwidget.h>
-#include <qtextedit.h>
+#include <KTextEdit>
 #include <qtextstream.h>
 #include <qsplitter.h>
 
@@ -171,13 +171,13 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
         QLabel *commentlabel = new QLabel(i18n("Comment/Tags:"), mainWidget);
         grid->addWidget(commentlabel, 2, 0);
 
-        commentbox[i] = new QTextEdit(mainWidget);
+        commentbox[i] = new KTextEdit(mainWidget);
         commentbox[i]->setReadOnly(true);
         fm = commentbox[i]->fontMetrics();
         commentbox[i]->setMinimumHeight(2*fm.lineSpacing()+10);
         grid->addWidget(commentbox[i], 2, 1, 1, 3);
 
-        tagsbox[i] = new QTextEdit(mainWidget);
+        tagsbox[i] = new KTextEdit(mainWidget);
         tagsbox[i]->setReadOnly(true);
         tagsbox[i]->setMinimumHeight(2*fm.lineSpacing()+10);
         grid->addWidget(tagsbox[i], 2, 4);

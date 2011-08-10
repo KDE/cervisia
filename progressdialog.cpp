@@ -24,7 +24,7 @@
 #include <qstringlist.h>
 #include <qtimer.h>
 #include <QGridLayout>
-#include <QTextEdit>
+#include <KTextEdit>
 
 #include <cvsjobinterface.h>
 #include <kanimatedbutton.h>
@@ -47,7 +47,7 @@ struct ProgressDialog::Private
 
     QTimer*         timer;
     KAnimatedButton*    gear;
-    QTextEdit*      resultbox;
+    KTextEdit*      resultbox;
 };
 
 
@@ -106,7 +106,7 @@ void ProgressDialog::setupGui(const QString& heading)
     d->gear->setIcons("kde");
     layout->addWidget(d->gear, 0, 1);
 
-    d->resultbox = new QTextEdit(dummy);
+    d->resultbox = new KTextEdit(dummy);
     d->resultbox->setReadOnly(true);
     QFontMetrics fm(d->resultbox->fontMetrics());
     d->resultbox->setMinimumSize(fm.width("0")*70, fm.lineSpacing()*8);
