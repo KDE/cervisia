@@ -27,7 +27,7 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
-#include <qtabwidget.h>
+#include <KTabWidget>
 #include <KTextEdit>
 #include <qtextstream.h>
 #include <qsplitter.h>
@@ -101,7 +101,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     connect( plain, SIGNAL(revisionClicked(QString,bool)),
              this, SLOT(revisionSelected(QString,bool)) );
 
-    tabWidget = new QTabWidget(splitter);
+    tabWidget = new KTabWidget(splitter);
     tabWidget->addTab(tree, i18n("&Tree"));
     tabWidget->addTab(listWidget, i18n("&List"));
     tabWidget->addTab(plain, i18n("CVS &Output"));
