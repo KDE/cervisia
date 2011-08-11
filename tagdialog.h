@@ -24,7 +24,7 @@
 
 class QCheckBox;
 class KComboBox;
-class QLineEdit;
+class KLineEdit;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 
 namespace Cervisia
@@ -56,7 +56,7 @@ private:
     
     QCheckBox *branchtag_button;
     QCheckBox *forcetag_button;
-    QLineEdit *tag_edit;
+    KLineEdit *tag_edit;
     KComboBox *tag_combo;
 };
 

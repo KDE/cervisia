@@ -23,8 +23,7 @@
 #include <qcheckbox.h>
 #include <KComboBox>
 #include <qlabel.h>
-#include <qlayout.h>
-#include <qlineedit.h>
+#include <KLineEdit>
 #include <qpushbutton.h>
 //Added by qt3to4:
 #include <QVBoxLayout>
@@ -81,7 +80,7 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisiaCvsserviceCvsserviceInterf
         }
     else
         {
-            tag_edit = new QLineEdit(mainWidget);
+            tag_edit = new KLineEdit(mainWidget);
             tag_edit->setFocus();
             tag_edit->setMinimumWidth(fontMetrics().width('0') * 30);
 
