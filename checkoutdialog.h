@@ -23,7 +23,7 @@
 #include <kdialog.h>
 
 class QCheckBox;
-class QComboBox;
+class KComboBox;
 class KConfig;
 class KLineEdit;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
@@ -65,7 +65,7 @@ private:
     void saveUserInput();
     void restoreUserInput();
     
-    QComboBox *repo_combo, *module_combo, *branchCombo;
+    KComboBox *repo_combo, *module_combo, *branchCombo;
     KLineEdit *module_edit, *workdir_edit;
     KLineEdit *comment_edit;
     KLineEdit *vendortag_edit, *releasetag_edit, *ignore_edit, *alias_edit;

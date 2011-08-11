@@ -23,7 +23,7 @@
 #include <kdialog.h>
 
 class QCheckBox;
-class QComboBox;
+class KComboBox;
 class QLineEdit;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 
@@ -57,7 +57,7 @@ private:
     QCheckBox *branchtag_button;
     QCheckBox *forcetag_button;
     QLineEdit *tag_edit;
-    QComboBox *tag_combo;
+    KComboBox *tag_combo;
 };
 
 }

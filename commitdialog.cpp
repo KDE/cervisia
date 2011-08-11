@@ -22,7 +22,7 @@
 
 #include <QBoxLayout>
 #include <QCheckBox>
-#include <QComboBox>
+#include <KComboBox>
 #include <QDir>
 #include <QFileInfo>
 #include <QLabel>
@@ -91,7 +91,7 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInter
     QLabel *archivelabel = new QLabel(i18n("Older &messages:"), mainWidget);
     layout->addWidget(archivelabel);
 
-    combo = new QComboBox(mainWidget);
+    combo = new KComboBox(mainWidget);
     archivelabel->setBuddy(combo);
     connect( combo, SIGNAL(activated(int)), this, SLOT(comboActivated(int)) );
     // make sure that combobox is smaller than the screen

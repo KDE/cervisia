@@ -22,7 +22,7 @@
 
 #include <qpushbutton.h>
 #include <qcheckbox.h>
-#include <qcombobox.h>
+#include <KComboBox>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qnamespace.h>
@@ -100,7 +100,7 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
     connect( syncbox, SIGNAL(toggled(bool)),
 	     this, SLOT(toggleSynchronize(bool)) );
 
-    itemscombo = new QComboBox(mainWidget);
+    itemscombo = new KComboBox(mainWidget);
     itemscombo->addItem(QString());
     connect( itemscombo, SIGNAL(activated(int)),
              this, SLOT(comboActivated(int)) );

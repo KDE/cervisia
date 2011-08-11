@@ -21,7 +21,7 @@
 #include "mergedialog.h"
 
 #include <qbuttongroup.h>
-#include <qcombobox.h>
+#include <KComboBox>
 #include <qlabel.h>
 #include <qpushbutton.h>
 #include <qradiobutton.h>
@@ -60,7 +60,7 @@ MergeDialog::MergeDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
     bybranch_button->setChecked(true);
     layout->addWidget(bybranch_button);
 
-    branch_combo = new QComboBox(mainWidget);
+    branch_combo = new KComboBox(mainWidget);
     branch_combo->setEditable(true);
     branch_combo->setMinimumWidth(iComboBoxMinWidth);
 
@@ -78,12 +78,12 @@ MergeDialog::MergeDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
     layout->addWidget(bytags_button);
 
     QLabel *tag1_label = new QLabel(i18n("between tag: "), mainWidget);
-    tag1_combo = new QComboBox(mainWidget);
+    tag1_combo = new KComboBox(mainWidget);
     tag1_combo->setEditable(true);
     tag1_combo->setMinimumWidth(iComboBoxMinWidth);
 
     QLabel *tag2_label = new QLabel(i18n("and tag: "), mainWidget);
-    tag2_combo = new QComboBox(mainWidget);
+    tag2_combo = new KComboBox(mainWidget);
     tag2_combo->setEditable(true);
     tag2_combo->setMinimumWidth(iComboBoxMinWidth);
 

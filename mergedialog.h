@@ -22,7 +22,7 @@
 
 #include <kdialog.h>
 
-class QComboBox;
+class KComboBox;
 class QPushButton;
 class QRadioButton;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
@@ -49,7 +49,7 @@ private:
     OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService;
     
     QRadioButton *bybranch_button, *bytags_button;
-    QComboBox *branch_combo, *tag1_combo, *tag2_combo;
+    KComboBox *branch_combo, *tag1_combo, *tag2_combo;
     QPushButton *tag_button, *branch_button;
 };
 

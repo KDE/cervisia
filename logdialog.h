@@ -30,7 +30,7 @@ class LogListView;
 class LogTreeView;
 class LogPlainView;
 
-class QComboBox;
+class KComboBox;
 class QLabel;
 class QTabWidget;
 class KTextEdit;
@@ -88,7 +88,7 @@ private:
     QLabel *datebox[2];
     KTextEdit *commentbox[2];
     KTextEdit *tagsbox[2];
-    QComboBox *tagcombo[2];
+    KComboBox *tagcombo[2];
 
     OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService;
     KConfig&         partConfig;

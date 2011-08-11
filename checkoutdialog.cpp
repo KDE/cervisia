@@ -24,7 +24,7 @@
 // Qt
 #include <QBoxLayout>
 #include <QCheckBox>
-#include <QComboBox>
+#include <KComboBox>
 #include <QDir>
 #include <QGridLayout>
 #include <QHBoxLayout>
@@ -77,7 +77,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
     for( int i = 0; i < ((action==Checkout)? 4 : 10); ++i )
         grid->setRowStretch(i, 0);
 
-    repo_combo = new QComboBox(mainWidget);
+    repo_combo = new KComboBox(mainWidget);
     repo_combo->setEditable(true);
     repo_combo->setFocus();
     // make sure combobox is smaller than the screen
@@ -98,7 +98,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
     }
     else
     {
-        module_combo = new QComboBox(mainWidget);
+        module_combo = new KComboBox(mainWidget);
         module_combo->setEditable(true);
 
         QPushButton* module_button = new QPushButton(i18n("Fetch &List"), mainWidget);
@@ -114,7 +114,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
         module_label->setBuddy(module_combo);
         grid->addWidget(module_label, 1, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
-        branchCombo = new QComboBox(mainWidget);
+        branchCombo = new KComboBox(mainWidget);
         branchCombo->setEditable(true);
 
         QPushButton* branchButton = new QPushButton(i18n("Fetch &List"), mainWidget);

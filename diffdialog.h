@@ -28,7 +28,7 @@
 
 class QLabel;
 class QCheckBox;
-class QComboBox;
+class KComboBox;
 class KConfig;
 class DiffItem;
 class DiffView;
@@ -66,7 +66,7 @@ private:
 
     QLabel *revlabel1, *revlabel2, *nofnlabel;
     QCheckBox *syncbox;
-    QComboBox *itemscombo;
+    KComboBox *itemscombo;
     QPushButton *backbutton, *forwbutton;
     DiffView *diff1, *diff2;
 

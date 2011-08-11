@@ -21,7 +21,7 @@
 
 #include "logdialog.h"
 
-#include <qcombobox.h>
+#include <KComboBox>
 #include <qfile.h>
 #include <qfileinfo.h>
 #include <qlabel.h>
@@ -149,7 +149,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
         QLabel *selectlabel = new QLabel(i18n("Select by tag:"), mainWidget);
         grid->addWidget(selectlabel, 0, 2);
 
-        tagcombo[i] = new QComboBox(mainWidget);
+        tagcombo[i] = new KComboBox(mainWidget);
         QFontMetrics fm(tagcombo[i]->fontMetrics());
         tagcombo[i]->setMinimumWidth(fm.width("X")*20);
         grid->addWidget(tagcombo[i], 0, 3);
