@@ -13,3 +13,5 @@
  * A basic main window shell that embeds the CervisiaPart to provide the standalone
  * Cervisia application.
  */
+
+//krazy:skip
