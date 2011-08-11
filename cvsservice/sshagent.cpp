@@ -32,8 +32,8 @@
 // initialize static member variables
 bool    SshAgent::m_isRunning  = false;
 bool    SshAgent::m_isOurAgent = false;
-QString SshAgent::m_authSock   = QString();
-QString SshAgent::m_pid        = QString();
+QString SshAgent::m_authSock;
+QString SshAgent::m_pid;
 
 
 SshAgent::SshAgent(QObject* parent)
