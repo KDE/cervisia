@@ -25,7 +25,6 @@
 #include <kdeversion.h>
 #include <kprocess.h>
 
-#include <stdlib.h>
 #include <signal.h>
 
 
@@ -56,15 +55,15 @@ bool SshAgent::querySshAgent()
         return true;
 
     // Did the user already start a ssh-agent process?
-    char* pid;
-    if( (pid = ::getenv("SSH_AGENT_PID")) != 0 )
+    const QByteArray pid = qgetenv("SSH_AGENT_PID");
+    if( !pid.isEmpty() )
     {
         kDebug(8051) << "ssh-agent already exists";
 
         m_pid = QString::fromLocal8Bit(pid);
 
-        char* sock = ::getenv("SSH_AUTH_SOCK");
-        if( sock )
+        const QByteArray sock = qgetenv("SSH_AUTH_SOCK");
+        if( !sock.isEmpty() )
             m_authSock = QString::fromLocal8Bit(sock);
 
         m_isOurAgent = false;
