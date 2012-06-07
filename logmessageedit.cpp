@@ -43,7 +43,7 @@ LogMessageEdit::LogMessageEdit(QWidget* parent)
 #endif
 #if 0
     // a mouse click stops the completion process
-    connect( this, SIGNAL(clicked(int, int)), SLOT(stopCompletion()) );
+    connect( this, SIGNAL(clicked(int,int)), SLOT(stopCompletion()) );
 #endif
 }
 

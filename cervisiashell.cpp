@@ -97,7 +97,7 @@ void CervisiaShell::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = KStandardAction::quit( this, SLOT( close() ), actionCollection() );
+    action = KStandardAction::quit( this, SLOT(close()), actionCollection() );
     hint = i18n("Exits Cervisia");
     action->setToolTip( hint );
     action->setWhatsThis( hint );

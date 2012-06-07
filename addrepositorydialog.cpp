@@ -94,7 +94,7 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
                                             "server"), mainWidget);
     layout->addWidget(m_retrieveCvsignoreFile);
 
-    connect( repo_edit, SIGNAL(textChanged(const QString&)),
+    connect( repo_edit, SIGNAL(textChanged(QString)),
              this, SLOT(repoChanged()) );
     connect( m_useDifferentCompression, SIGNAL(toggled(bool)),
              this, SLOT(compressionToggled(bool)) );

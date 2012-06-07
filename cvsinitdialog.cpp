@@ -72,8 +72,8 @@ CvsInitDialog::CvsInitDialog(QWidget* parent)
     
     connect( dirButton, SIGNAL(clicked()),
              this,      SLOT(dirButtonClicked()) );
-    connect( m_directoryEdit, SIGNAL(textChanged(const QString&)),
-             this,            SLOT(lineEditTextChanged(const QString&)));
+    connect( m_directoryEdit, SIGNAL(textChanged(QString)),
+             this,            SLOT(lineEditTextChanged(QString)));
              
     enableButton(Ok, false);
 

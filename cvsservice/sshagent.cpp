@@ -187,7 +187,7 @@ bool SshAgent::startSshAgent()
 
     m_agentProcess = new KProcess(this);
 
-    connect(m_agentProcess, SIGNAL(finished(int, QProcess::ExitStatus)),
+    connect(m_agentProcess, SIGNAL(finished(int,QProcess::ExitStatus)),
             SLOT(slotProcessFinished()));
     connect(m_agentProcess, SIGNAL(readyReadStandardOutput()),
             SLOT(slotReceivedOutput()));

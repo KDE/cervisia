@@ -130,8 +130,8 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
         branch_label->setBuddy( branchCombo );
         grid->addWidget(branch_label, 2, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
-        connect( branchCombo, SIGNAL( textChanged( const QString&)),
-                 this, SLOT( branchTextChanged() ));
+        connect( branchCombo, SIGNAL(textChanged(QString)),
+                 this, SLOT(branchTextChanged()));
 
         recursive_box = new QCheckBox(i18n("Re&cursive checkout"), mainWidget);
         grid->addMultiCellWidget(recursive_box, 6, 6, 0, 1);
@@ -144,8 +144,8 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
     KUrlCompletion* comp = new KUrlCompletion();
     workdir_edit->setCompletionObject(comp);
     workdir_edit->setAutoDeleteCompletionObject(true);
-    connect( workdir_edit, SIGNAL(returnPressed(const QString&)),
-             comp, SLOT(addItem(const QString&)) );
+    connect( workdir_edit, SIGNAL(returnPressed(QString)),
+             comp, SLOT(addItem(QString)) );
 
     QPushButton* dir_button = new QPushButton("...", mainWidget);
     connect( dir_button, SIGNAL(clicked()),

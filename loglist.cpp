@@ -129,8 +129,8 @@ LogListView::LogListView(KConfig& cfg, QWidget *parent, const char *name)
 
     Cervisia::ToolTip* toolTip = new Cervisia::ToolTip(viewport());
 
-    connect(toolTip, SIGNAL(queryToolTip(const QPoint&, QRect&, QString&)),
-            this, SLOT(slotQueryToolTip(const QPoint&, QRect&, QString&)));
+    connect(toolTip, SIGNAL(queryToolTip(QPoint,QRect&,QString&)),
+            this, SLOT(slotQueryToolTip(QPoint,QRect&,QString&)));
 
     // without this restoreLayout() can't change the column widths
     for (int i = 0; i < columns(); ++i)

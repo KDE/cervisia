@@ -163,8 +163,8 @@ AnnotateView::AnnotateView(QWidget *parent, const char *name)
 
     ToolTip* toolTip = new ToolTip(viewport());
 
-    connect(toolTip, SIGNAL(queryToolTip(const QPoint&, QRect&, QString&)),
-            this, SLOT(slotQueryToolTip(const QPoint&, QRect&, QString&)));
+    connect(toolTip, SIGNAL(queryToolTip(QPoint,QRect&,QString&)),
+            this, SLOT(slotQueryToolTip(QPoint,QRect&,QString&)));
 
     configChanged();
 

@@ -146,8 +146,8 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
         update = new UpdateView(*config(), splitter);
         update->setFocusPolicy( Qt::StrongFocus );
         update->setFocus();
-        connect( update, SIGNAL(contextMenu(K3ListView*, Q3ListViewItem*, const QPoint&)),
-                 this, SLOT(popupRequested(K3ListView*, Q3ListViewItem*, const QPoint&)) );
+        connect( update, SIGNAL(contextMenu(K3ListView*,Q3ListViewItem*,QPoint)),
+                 this, SLOT(popupRequested(K3ListView*,Q3ListViewItem*,QPoint)) );
         connect( update, SIGNAL(fileOpened(QString)),
                  this, SLOT(openFile(QString)) );
         protocol = new ProtocolView(m_cvsServiceInterfaceName, splitter);
@@ -164,7 +164,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
     {
         setupActions();
         readSettings();
-        connect( update, SIGNAL( selectionChanged() ), this, SLOT( updateActions() ) );
+        connect( update, SIGNAL(selectionChanged()), this, SLOT(updateActions()) );
     }
 
     setXMLFile( "cervisiaui.rc" );
@@ -241,7 +241,7 @@ void CervisiaPart::setupActions()
     //
     action  = new KAction(KIcon("document-open"), i18n("O&pen Sandbox..."), this);
     actionCollection()->addAction("file_open", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT( slotOpenSandbox() ));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotOpenSandbox()));
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
     hint = i18n("Opens a CVS working folder in the main window");
     action->setToolTip( hint );
@@ -249,18 +249,18 @@ void CervisiaPart::setupActions()
 
     recent = new KRecentFilesAction( i18n("Recent Sandboxes"), this );
     actionCollection()->addAction("file_open_recent", recent);
-    connect(recent, SIGNAL(urlSelected(const KUrl&)), SLOT(openUrl(const KUrl&))),
+    connect(recent, SIGNAL(urlSelected(KUrl)), SLOT(openUrl(KUrl))),
 
     action  = new KAction(i18n("&Insert ChangeLog Entry..."), this);
     actionCollection()->addAction("insert_changelog_entry", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT( slotChangeLog() ));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotChangeLog()));
     hint = i18n("Inserts a new intro into the file ChangeLog in the toplevel folder");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(KIcon("vcs-update-cvs-cervisia"), i18n("&Update"), this);
     actionCollection()->addAction("file_update", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT( slotUpdate() ));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotUpdate()));
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_U));
     hint = i18n("Updates (cvs update) the selected files and folders");
     action->setToolTip( hint );
@@ -268,7 +268,7 @@ void CervisiaPart::setupActions()
 
     action  = new KAction(KIcon("vcs-status-cvs-cervisia"), i18n("&Status"), this);
     actionCollection()->addAction("file_status", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT( slotStatus() ));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotStatus()));
     action->setShortcut(QKeySequence(Qt::Key_F5));
     hint = i18n("Updates the status (cvs -n update) of the selected files and folders");
     action->setToolTip( hint );
@@ -276,21 +276,21 @@ void CervisiaPart::setupActions()
 
     action  = new KAction(i18n("&Edit"), this);
     actionCollection()->addAction("file_edit", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT( slotOpen() ));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotOpen()));
     hint = i18n("Opens the marked file for editing");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(i18n("Reso&lve..."), this);
     actionCollection()->addAction("file_resolve", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT( slotResolve() ));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotResolve()));
     hint = i18n("Opens the resolve dialog with the selected file");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(KIcon("vcs-commit-cvs-cervisia"), i18n("&Commit..."), this);
     actionCollection()->addAction("file_commit", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT( slotCommit() ));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotCommit()));
     action->setShortcut(QKeySequence(Qt::Key_NumberSign));
     hint = i18n("Commits the selected files");
     action->setToolTip( hint );
@@ -298,7 +298,7 @@ void CervisiaPart::setupActions()
 
     action  = new KAction(KIcon("vcs-add-cvs-cervisia"), i18n("&Add to Repository..."), this);
     actionCollection()->addAction("file_add", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT( slotAdd() ));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotAdd()));
     action->setIconText(i18n("Add"));
     action->setShortcut(QKeySequence(Qt::Key_Insert));
     hint = i18n("Adds (cvs add) the selected files to the repository");
@@ -307,14 +307,14 @@ void CervisiaPart::setupActions()
 
     action  = new KAction(i18n("Add &Binary..."), this);
     actionCollection()->addAction("file_add_binary", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT( slotAddBinary() ));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotAddBinary()));
     hint = i18n("Adds (cvs -kb add) the selected files as binaries to the repository");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(KIcon("vcs-remove-cvs-cervisia"), i18n("&Remove From Repository..."), this);
     actionCollection()->addAction("file_remove", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT( slotRemove() ));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotRemove()));
     action->setIconText(i18n("Remove"));
     action->setShortcut(QKeySequence(Qt::Key_Delete));
     hint = i18n("Removes (cvs remove) the selected files from the repository");
@@ -323,21 +323,21 @@ void CervisiaPart::setupActions()
 
     action  = new KAction(i18n("Rever&t"), this);
     actionCollection()->addAction("file_revert_local_changes", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT( slotRevert() ));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotRevert()));
     hint = i18n("Reverts (cvs update -C) the selected files (only cvs 1.11)");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(i18n("&Properties"), this);
     actionCollection()->addAction("file_properties", action );
-    connect(action, SIGNAL(triggered() ), SLOT( slotFileProperties() ));
+    connect(action, SIGNAL(triggered()), SLOT(slotFileProperties()));
 
     //
     // View Menu
     //
     action  = new KAction(KIcon("process-stop"), i18n("Stop"), this);
     actionCollection()->addAction("stop_job", action );
-    connect(action, SIGNAL(triggered(bool) ), protocol, SLOT(cancelJob()));
+    connect(action, SIGNAL(triggered(bool)), protocol, SLOT(cancelJob()));
     action->setShortcut(QKeySequence(Qt::Key_Escape));
     action->setEnabled( false );
     hint = i18n("Stops any running sub-processes");
@@ -347,7 +347,7 @@ void CervisiaPart::setupActions()
 
     action  = new KAction(i18n("Browse &Log..."), this);
     actionCollection()->addAction("view_log", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotBrowseLog()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotBrowseLog()));
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_L));
     hint = i18n("Shows the revision tree of the selected file");
     action->setToolTip( hint );
@@ -360,7 +360,7 @@ void CervisiaPart::setupActions()
 #endif
     action  = new KAction(i18n("&Annotate..."), this);
     actionCollection()->addAction("view_annotate", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotAnnotate()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotAnnotate()));
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_A));
     hint = i18n("Shows a blame-annotated view of the selected file");
     action->setToolTip( hint );
@@ -368,7 +368,7 @@ void CervisiaPart::setupActions()
 
     action  = new KAction(KIcon("vcs-diff-cvs-cervisia"), i18n("&Difference to Repository (BASE)..."), this);
     actionCollection()->addAction("view_diff_base", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotDiffBase()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotDiffBase()));
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_D));
     hint = i18n("Shows the differences of the selected file to the checked out version (tag BASE)");
     action->setToolTip( hint );
@@ -376,7 +376,7 @@ void CervisiaPart::setupActions()
 
     action  = new KAction(KIcon("vcs-diff-cvs-cervisia"), i18n("Difference to Repository (HEAD)..."), this);
     actionCollection()->addAction("view_diff_head", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotDiffHead()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotDiffHead()));
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_H));
     hint = i18n("Shows the differences of the selected file to the newest version in the repository (tag HEAD)");
     action->setToolTip( hint );
@@ -384,21 +384,21 @@ void CervisiaPart::setupActions()
 
     action  = new KAction(i18n("Last &Change..."), this);
     actionCollection()->addAction("view_last_change", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotLastChange()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotLastChange()));
     hint = i18n("Shows the differences between the last two revisions of the selected file");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(i18n("&History..."), this);
     actionCollection()->addAction("view_history", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotHistory()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotHistory()));
     hint = i18n("Shows the CVS history as reported by the server");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(i18n("&Unfold File Tree"), this);
     actionCollection()->addAction("view_unfold_tree", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotUnfoldTree()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotUnfoldTree()));
 
     hint = i18n("Opens all branches of the file tree");
     action->setToolTip( hint );
@@ -406,7 +406,7 @@ void CervisiaPart::setupActions()
 
     action  = new KAction(i18n("&Fold File Tree"), this);
     actionCollection()->addAction("view_fold_tree", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotFoldTree()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotFoldTree()));
     hint = i18n("Closes all branches of the file tree");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -416,98 +416,98 @@ void CervisiaPart::setupActions()
     //
     action  = new KAction(i18n("&Tag/Branch..."), this);
     actionCollection()->addAction("create_tag", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotCreateTag()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotCreateTag()));
     hint = i18n("Creates a tag or branch for the selected files");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(i18n("&Delete Tag..."), this);
     actionCollection()->addAction("delete_tag", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotDeleteTag()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotDeleteTag()));
     hint = i18n("Deletes a tag from the selected files");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(i18n("&Update to Tag/Date..."), this);
     actionCollection()->addAction("update_to_tag", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotUpdateToTag()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotUpdateToTag()));
     hint = i18n("Updates the selected files to a given tag, branch or date");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(i18n("Update to &HEAD"), this);
     actionCollection()->addAction("update_to_head", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotUpdateToHead()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotUpdateToHead()));
     hint = i18n("Updates the selected files to the HEAD revision");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(i18n("&Merge..."), this);
     actionCollection()->addAction("merge", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotMerge()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotMerge()));
     hint = i18n("Merges a branch or a set of modifications into the selected files");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(i18n("&Add Watch..."), this);
     actionCollection()->addAction("add_watch", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotAddWatch()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotAddWatch()));
     hint = i18n("Adds a watch for the selected files");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(i18n("&Remove Watch..."), this);
     actionCollection()->addAction("remove_watch", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotRemoveWatch()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotRemoveWatch()));
     hint = i18n("Removes a watch from the selected files");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(i18n("Show &Watchers"), this);
     actionCollection()->addAction("show_watchers", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotShowWatchers()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotShowWatchers()));
     hint = i18n("Shows the watchers of the selected files");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(i18n("Ed&it Files"), this);
     actionCollection()->addAction("edit_files", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotEdit()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotEdit()));
     hint = i18n("Edits (cvs edit) the selected files");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(i18n("U&nedit Files"), this);
     actionCollection()->addAction("unedit_files", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotUnedit()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotUnedit()));
     hint = i18n("Unedits (cvs unedit) the selected files");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(i18n("Show &Editors"), this);
     actionCollection()->addAction("show_editors", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotShowEditors()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotShowEditors()));
     hint = i18n("Shows the editors of the selected files");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(i18n("&Lock Files"), this);
     actionCollection()->addAction("lock_files", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotLock()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotLock()));
     hint = i18n("Locks the selected files, so that others cannot modify them");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(i18n("Unl&ock Files"), this);
     actionCollection()->addAction("unlock_files", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotUnlock()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotUnlock()));
     hint = i18n("Unlocks the selected files");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(i18n("Create &Patch Against Repository..."), this);
     actionCollection()->addAction("make_patch", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotMakePatch()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotMakePatch()));
     hint = i18n("Creates a patch from the modifications in your sandbox");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -517,25 +517,25 @@ void CervisiaPart::setupActions()
     //
     action  = new KAction(i18n("&Create..."), this);
     actionCollection()->addAction("repository_create", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotCreateRepository()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotCreateRepository()));
 
     action  = new KAction(i18n("&Checkout..."), this);
     actionCollection()->addAction("repository_checkout", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotCheckout()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotCheckout()));
     hint = i18n("Allows you to checkout a module from a repository");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(i18n("&Import..."), this);
     actionCollection()->addAction("repository_import", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotImport()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotImport()));
     hint = i18n("Allows you to import a module into a repository");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(i18n("&Repositories..."), this);
     actionCollection()->addAction("show_repositories", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotRepositories()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotRepositories()));
     hint = i18n("Configures a list of repositories you regularly use");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -545,14 +545,14 @@ void CervisiaPart::setupActions()
     //
     action  = new KToggleAction(i18n("Hide All &Files"), this);
     actionCollection()->addAction("settings_hide_files", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotHideFiles()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotHideFiles()));
     hint = i18n("Determines whether only folders are shown");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KToggleAction(i18n("Hide Unmodified Files"), this);
     actionCollection()->addAction("settings_hide_uptodate", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotHideUpToDate()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotHideUpToDate()));
     hint = i18n("Determines whether files with status up-to-date or "
                 "unknown are hidden");
     action->setToolTip( hint );
@@ -560,63 +560,63 @@ void CervisiaPart::setupActions()
 
     action  = new KToggleAction(i18n("Hide Removed Files"), this);
     actionCollection()->addAction("settings_hide_removed", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotHideRemoved()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotHideRemoved()));
     hint = i18n("Determines whether removed files are hidden");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KToggleAction(i18n("Hide Non-CVS Files"), this);
     actionCollection()->addAction("settings_hide_notincvs", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotHideNotInCVS()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotHideNotInCVS()));
     hint = i18n("Determines whether files not in CVS are hidden");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KToggleAction(i18n("Hide Empty Folders"), this);
     actionCollection()->addAction("settings_hide_empty_directories", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotHideEmptyDirectories()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotHideEmptyDirectories()));
     hint = i18n("Determines whether folders without visible entries are hidden");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KToggleAction(i18n("Create &Folders on Update"), this);
     actionCollection()->addAction("settings_create_dirs", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotCreateDirs()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotCreateDirs()));
     hint = i18n("Determines whether updates create folders");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KToggleAction(i18n("&Prune Empty Folders on Update"), this);
     actionCollection()->addAction("settings_prune_dirs", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotPruneDirs()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotPruneDirs()));
     hint = i18n("Determines whether updates remove empty folders");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KToggleAction(i18n("&Update Recursively"), this);
     actionCollection()->addAction("settings_update_recursively", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotUpdateRecursive()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotUpdateRecursive()));
     hint = i18n("Determines whether updates are recursive");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KToggleAction(i18n("C&ommit && Remove Recursively"), this);
     actionCollection()->addAction("settings_commit_recursively", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotCommitRecursive()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotCommitRecursive()));
     hint = i18n("Determines whether commits and removes are recursive");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KToggleAction(i18n("Do cvs &edit Automatically When Necessary"), this);
     actionCollection()->addAction("settings_do_cvs_edit", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotDoCVSEdit()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotDoCVSEdit()));
     hint = i18n("Determines whether automatic cvs editing is active");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
     action  = new KAction(KIcon("configure"), i18n("Configure Cervisia..."), this);
     actionCollection()->addAction("configure_cervisia", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotConfigure()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotConfigure()));
     hint = i18n("Allows you to configure the Cervisia KPart");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -629,7 +629,7 @@ void CervisiaPart::setupActions()
 
     action  = new KAction(i18n("CVS &Manual"), this);
     actionCollection()->addAction("help_cvs_manual", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT(slotCVSInfo()));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotCVSInfo()));
     hint = i18n("Opens the help browser with the CVS documentation");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -639,7 +639,7 @@ void CervisiaPart::setupActions()
     //
     action  = new KToggleAction(i18n("Unfold Folder"), this);
     actionCollection()->addAction("unfold_folder", action );
-    connect(action, SIGNAL(triggered(bool) ), SLOT( slotUnfoldFolder() ));
+    connect(action, SIGNAL(triggered(bool)), SLOT(slotUnfoldFolder()));
 }
 
 
@@ -902,8 +902,8 @@ void CervisiaPart::slotStatus()
     {
         showJobStart(cmdline);
         connect( protocol, SIGNAL(receivedLine(QString)), update, SLOT(processUpdateLine(QString)) );
-        connect( protocol, SIGNAL(jobFinished(bool, int)), update, SLOT(finishJob(bool, int)) );
-        connect( protocol, SIGNAL(jobFinished(bool, int)), this, SLOT(slotJobFinished()) );
+        connect( protocol, SIGNAL(jobFinished(bool,int)), update, SLOT(finishJob(bool,int)) );
+        connect( protocol, SIGNAL(jobFinished(bool,int)), this, SLOT(slotJobFinished()) );
     }
 }
 
@@ -1021,8 +1021,8 @@ void CervisiaPart::slotCommit()
         {
             m_jobType = Commit;
             showJobStart(cmdline);
-            connect( protocol, SIGNAL(jobFinished(bool, int)), update, SLOT(finishJob(bool, int)) );
-            connect( protocol, SIGNAL(jobFinished(bool, int)), this, SLOT(slotJobFinished()) );
+            connect( protocol, SIGNAL(jobFinished(bool,int)), update, SLOT(finishJob(bool,int)) );
+            connect( protocol, SIGNAL(jobFinished(bool,int)), this, SLOT(slotJobFinished()) );
         }
     }
 }
@@ -1090,8 +1090,8 @@ void CervisiaPart::updateSandbox(const QString &extraopt)
     {
         showJobStart(cmdline);
         connect( protocol, SIGNAL(receivedLine(QString)), update, SLOT(processUpdateLine(QString)) );
-        connect( protocol, SIGNAL(jobFinished(bool, int)), update, SLOT(finishJob(bool, int)) );
-        connect( protocol, SIGNAL(jobFinished(bool, int)), this, SLOT(slotJobFinished()) );
+        connect( protocol, SIGNAL(jobFinished(bool,int)), update, SLOT(finishJob(bool,int)) );
+        connect( protocol, SIGNAL(jobFinished(bool,int)), this, SLOT(slotJobFinished()) );
     }
 }
 
@@ -1143,9 +1143,9 @@ void CervisiaPart::addOrRemove(AddRemoveDialog::ActionType action)
         if (protocol->startJob())
         {
             showJobStart(cmdline);
-            connect( protocol, SIGNAL(jobFinished(bool, int)),
-                     update, SLOT(finishJob(bool, int)) );
-            connect( protocol, SIGNAL(jobFinished(bool, int)),
+            connect( protocol, SIGNAL(jobFinished(bool,int)),
+                     update, SLOT(finishJob(bool,int)) );
+            connect( protocol, SIGNAL(jobFinished(bool,int)),
                      this, SLOT(slotJobFinished()) );
         }
     }
@@ -1237,7 +1237,7 @@ void CervisiaPart::addOrRemoveWatch(WatchDialog::ActionType action)
         if( protocol->startJob() )
         {
             showJobStart(cmdline);
-            connect( protocol, SIGNAL(jobFinished(bool, int)),
+            connect( protocol, SIGNAL(jobFinished(bool,int)),
                      this,     SLOT(slotJobFinished()) );
         }
     }
@@ -1281,7 +1281,7 @@ void CervisiaPart::slotEdit()
     if( protocol->startJob() )
     {
         showJobStart(cmdline);
-        connect( protocol, SIGNAL(jobFinished(bool, int)),
+        connect( protocol, SIGNAL(jobFinished(bool,int)),
                  this,     SLOT(slotJobFinished()) );
     }
 }
@@ -1309,7 +1309,7 @@ void CervisiaPart::slotUnedit()
     if( protocol->startJob() )
     {
         showJobStart(cmdline);
-        connect( protocol, SIGNAL(jobFinished(bool, int)),
+        connect( protocol, SIGNAL(jobFinished(bool,int)),
                  this,     SLOT(slotJobFinished()) );
     }
 }
@@ -1335,7 +1335,7 @@ void CervisiaPart::slotLock()
     if( protocol->startJob() )
     {
         showJobStart(cmdline);
-        connect( protocol, SIGNAL(jobFinished(bool, int)),
+        connect( protocol, SIGNAL(jobFinished(bool,int)),
                  this,     SLOT(slotJobFinished()) );
     }
 }
@@ -1362,7 +1362,7 @@ void CervisiaPart::slotUnlock()
     if( protocol->startJob() )
     {
         showJobStart(cmdline);
-        connect( protocol, SIGNAL(jobFinished(bool, int)),
+        connect( protocol, SIGNAL(jobFinished(bool,int)),
                  this,     SLOT(slotJobFinished()) );
     }
 }
@@ -1389,7 +1389,7 @@ void CervisiaPart::slotShowEditors()
     if( protocol->startJob() )
     {
         showJobStart(cmdline);
-        connect( protocol, SIGNAL(jobFinished(bool, int)),
+        connect( protocol, SIGNAL(jobFinished(bool,int)),
                  this,     SLOT(slotJobFinished()) );
     }
 }
@@ -1465,7 +1465,7 @@ void CervisiaPart::slotImport()
     if( protocol->startJob() )
     {
         showJobStart(cmdline);
-        connect( protocol, SIGNAL(jobFinished(bool, int)),
+        connect( protocol, SIGNAL(jobFinished(bool,int)),
                  this,     SLOT(slotJobFinished()) );
     }
 }
@@ -1492,7 +1492,7 @@ void CervisiaPart::slotCreateRepository()
     if( protocol->startJob() )
     {
         showJobStart(cmdline);
-        connect( protocol, SIGNAL(jobFinished(bool, int)),
+        connect( protocol, SIGNAL(jobFinished(bool,int)),
                  this,     SLOT(slotJobFinished()) );
     }
 }
@@ -1519,7 +1519,7 @@ void CervisiaPart::slotCheckout()
     if( protocol->startJob() )
     {
         showJobStart(cmdline);
-        connect( protocol, SIGNAL(jobFinished(bool, int)),
+        connect( protocol, SIGNAL(jobFinished(bool,int)),
                  this,     SLOT(slotJobFinished()) );
     }
 }
@@ -1573,7 +1573,7 @@ void CervisiaPart::createOrDeleteTag(TagDialog::ActionType action)
         if( protocol->startJob() )
         {
             showJobStart(cmdline);
-            connect( protocol, SIGNAL(jobFinished(bool, int)),
+            connect( protocol, SIGNAL(jobFinished(bool,int)),
                      this,     SLOT(slotJobFinished()) );
         }
     }

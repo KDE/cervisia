@@ -167,7 +167,7 @@ bool CvsJob::execute()
     if( !d->directory.isEmpty() )
         d->childproc->setWorkingDirectory(d->directory);
 
-    connect(d->childproc, SIGNAL(finished(int, QProcess::ExitStatus)),
+    connect(d->childproc, SIGNAL(finished(int,QProcess::ExitStatus)),
         SLOT(slotProcessFinished()));
     connect(d->childproc, SIGNAL(readyReadStandardOutput()),
         SLOT(slotReceivedStdout()));

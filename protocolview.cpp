@@ -79,7 +79,7 @@ bool ProtocolView::startJob(bool isUpdateJob)
 
     // disconnect 3rd party slots from our signals
     disconnect( SIGNAL(receivedLine(QString)) );
-    disconnect( SIGNAL(jobFinished(bool, int)) );
+    disconnect( SIGNAL(jobFinished(bool,int)) );
 
     return job->execute();
 }
@@ -89,7 +89,7 @@ void ProtocolView::contextMenuEvent(QContextMenuEvent* event)
 {
     QMenu *menu = QTextEdit::createStandardContextMenu();
 
-    QAction* clearAction = menu->addAction(i18n("Clear"), this, SLOT( clear() ));
+    QAction* clearAction = menu->addAction(i18n("Clear"), this, SLOT(clear()));
 
     if( document()->isEmpty() )
         clearAction->setEnabled(false);

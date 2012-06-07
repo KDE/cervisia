@@ -92,8 +92,8 @@ void LogPlainView::searchText(int options, const QString& pattern)
 {
     m_find = new KFind(pattern, options, this);
 
-    connect(m_find, SIGNAL(highlight(const QString&, int, int)),
-            this, SLOT(searchHighlight(const QString&, int, int)));
+    connect(m_find, SIGNAL(highlight(QString,int,int)),
+            this, SLOT(searchHighlight(QString,int,int)));
     connect(m_find, SIGNAL(findNext()),
            this, SLOT(findNext()));
 
