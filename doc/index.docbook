@@ -9,7 +9,7 @@
   <!ENTITY CVS "<application>CVS</application>">
 ]>
 
-<book lang="&language;">
+<book id="cervisia" lang="&language;">
 
 <bookinfo>
 <title>&cervisia; Manual</title>
