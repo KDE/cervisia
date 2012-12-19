@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.6)
 
 project(cervisia)
 
+if (UNIX)
 find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
 
@@ -15,6 +16,7 @@ include_directories(
 # TODO port away from QT3_SUPPORT
 add_definitions(-DQT3_SUPPORT)
 
+add_subdirectory( doc )
 add_subdirectory( cvsservice ) 
 add_subdirectory( pics ) 
 
@@ -138,3 +140,5 @@ kde4_install_icons( ${ICON_INSTALL_DIR}   )
 #cervisia.1.in: cervisia.pod
 #	pod2man --center "Cervisia" --release "${CERVISIA_VERSION}" \
 #		cervisia.pod > cervisia.1.in
+
+endif ()
