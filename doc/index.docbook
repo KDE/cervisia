@@ -1251,7 +1251,7 @@ differing section of 3 total.
 </para>
 
 <para>
-Now can can decide section by section which version you want to have in the
+Now you can decide section by section which version you want to have in the
 merged file. By pressing <guibutton>A</guibutton>, you take over the version you
 edited. By pressing <guibutton>B</guibutton>, you take over the version from the
 repository. By pressing <guibutton>A+B</guibutton>, both versions will be added,
@@ -1638,7 +1638,7 @@ log</command>. You can mark two revisions, called &quot;A&quot; and &quot;B&quot
 relevant if you make use of further features provided by the buttons.
 Revision &quot;A&quot; can be chosen with the left mouse button, revision &quot;B&quot;
 with the middle one. In the list view, you can also
-navigate with with your cursor keys. In order to mark revisions &quot;A&quot; and &quot;B&quot;,
+navigate with your cursor keys. In order to mark revisions &quot;A&quot; and &quot;B&quot;,
 use the shortcuts <keycombo action="simul">&Ctrl;<keycap>A</keycap></keycombo>,
 <keycombo action="simul">&Ctrl;<keycap>B</keycap></keycombo>, respectively.
 Using the <guilabel>CVS Output</guilabel> view, you can click on the
