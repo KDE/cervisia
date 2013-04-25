@@ -91,7 +91,7 @@ project (commercial or not), but you can take advantage of the nice revision
 control features offered by &CVS; even for a project developed exclusively by
 you. It is easy to set up a local repository, and you will gain the ability to
 track changes that caused bugs, revert changes, avoid accidental loss of
-information, &etc;.
+information, &etc;
 </para>
 
 <para>
@@ -124,7 +124,7 @@ If you plan to develop a complex project, it is a good idea to use the
 &CVS; features, even if you are the only developer. You can make all changes in
 the working copy, and use &cervisia; (or any other &CVS; tool) to update and
 commit. This way, you will gain the ability to track changes that caused bugs,
-revert changes, avoid accidental loss of information, &etc;. Using &cervisia;, it
+revert changes, avoid accidental loss of information, &etc; Using &cervisia;, it
 is simple to create a local repository.
 </para>
 
@@ -182,7 +182,7 @@ Repositories dialog</phrase></textobject>
 <para>
 There are several methods to access a &CVS; repository. It may be reached via
 password authentication (:pserver:), secure shell (using :ext:), local
-repository (:local:), &etc;. The format for the repository location is
+repository (:local:), &etc; The format for the repository location is
 (optional items appear between square brackets):
 </para>
 
@@ -588,9 +588,9 @@ Tags are used to mark a version of a project. &CVS; stamps one
 version of each file with the tag, so when you checkout or
 update to a specific tag, you will get always the same file versions.
 Therefore, in opposition to branches, tags are not dynamic: you cannot develop a
-tag. Tags are useful to mark releases, big changes in the code, &etc;.
+tag. Tags are useful to mark releases, big changes in the code, &etc;
 Using tags, you can easily return the project to a previous state, to reproduce and
-track bugs, generate the release code again, &etc;.
+track bugs, generate the release code again, &etc;
 </para>
 
 <figure id="screenshot-checkout" float="1">
