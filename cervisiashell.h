@@ -50,7 +50,7 @@ protected slots:
 protected:
     void setupActions();
 
-    bool queryExit();
+    void closeEvent(QCloseEvent *event);
     virtual void readProperties(const KConfigGroup& config);
     virtual void saveProperties(KConfigGroup& config);
 

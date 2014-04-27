@@ -163,10 +163,10 @@ void CervisiaShell::slotNewToolbarConfig()
     applyMainWindowSettings( KGlobal::config()->group( autoSaveGroup() ) );
 }
 
-bool CervisiaShell::queryExit()
+void CervisiaShell::closeEvent(QCloseEvent *event)
 {
     writeSettings();
-    return true;
+    KParts::MainWindow::closeEvent(event);
 }
 
 
