@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<component type="desktop">
+  <id>cervisia.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <name>Cervisia</name>
+  <description>
+    <p>
+      Cervisia is a user friendly version control system front-end. The aim is to support CVS and other version control system
+      programs in a unified interface, featuring conflict resolution, difference and history viewers, status for the working
+      copy files, and support for most version control functions.
+    </p>
+  </description>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=cervisia</url>
+  <url type="help">http://docs.kde.org/stable/en/kdesdk/cervisia/index.html</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>http://kde.org/images/screenshots/cervisia.png</image>
+    </screenshot>
+  </screenshots>
+  <project_group>KDE</project_group>
+  <provides>
+    <binary>cervisia</binary>
+  </provides>
+</component>

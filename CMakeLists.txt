@@ -17,8 +17,8 @@ include_directories(
 add_definitions(-DQT3_SUPPORT)
 
 add_subdirectory( doc )
-add_subdirectory( cvsservice ) 
-add_subdirectory( pics ) 
+add_subdirectory( cvsservice )
+add_subdirectory( pics )
 
 set(_KDECONFDIR_ ${CONFIG_INSTALL_DIR})
 set(_KDEHTMLDIR_ ${HTML_INSTALL_DIR})
@@ -59,8 +59,8 @@ kde4_add_ui_files(libcervisia_SRCS settingsdialog_advanced.ui )
 kde4_add_kcfg_files(libcervisia_SRCS cervisiasettings.kcfgc )
 
 
-set(cervisia_KDEINIT_SRCS ${libcervisia_SRCS} 
-   main.cpp 
+set(cervisia_KDEINIT_SRCS ${libcervisia_SRCS}
+   main.cpp
    cervisiashell.cpp )
 
 
@@ -79,35 +79,35 @@ install(TARGETS cervisia  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 ########### next target ###############
 
 set(cervisiapart_PART_SRCS ${libcervisia_SRCS}
-   updateview.cpp 
-   protocolview.cpp 
-   watchdialog.cpp 
-   changelogdialog.cpp 
-   historydialog.cpp 
-   repositorydialog.cpp 
-   commitdialog.cpp 
-   checkoutdialog.cpp 
-   updatedialog.cpp 
-   tagdialog.cpp 
-   mergedialog.cpp 
-   cvsdir.cpp 
-   repositories.cpp 
-   cervisiapart.cpp 
-   addrepositorydialog.cpp 
-   addremovedialog.cpp 
-   watchersdialog.cpp 
-   watchersmodel.cpp 
-   updateview_items.cpp 
-   updateview_visitors.cpp 
-   entry.cpp 
-   entry_status.cpp 
-   stringmatcher.cpp 
-   cvsinitdialog.cpp 
-   ignorelistbase.cpp 
-   dirignorelist.cpp 
-   globalignorelist.cpp 
+   updateview.cpp
+   protocolview.cpp
+   watchdialog.cpp
+   changelogdialog.cpp
+   historydialog.cpp
+   repositorydialog.cpp
+   commitdialog.cpp
+   checkoutdialog.cpp
+   updatedialog.cpp
+   tagdialog.cpp
+   mergedialog.cpp
+   cvsdir.cpp
+   repositories.cpp
+   cervisiapart.cpp
+   addrepositorydialog.cpp
+   addremovedialog.cpp
+   watchersdialog.cpp
+   watchersmodel.cpp
+   updateview_items.cpp
+   updateview_visitors.cpp
+   entry.cpp
+   entry_status.cpp
+   stringmatcher.cpp
+   cvsinitdialog.cpp
+   ignorelistbase.cpp
+   dirignorelist.cpp
+   globalignorelist.cpp
    addignoremenu.cpp
-   editwithmenu.cpp 
+   editwithmenu.cpp
    logmessageedit.cpp )
 
 
@@ -128,6 +128,7 @@ install(TARGETS cervisiapart  DESTINATION ${PLUGIN_INSTALL_DIR} )
 ########### install files ###############
 
 install( PROGRAMS cervisia.desktop  DESTINATION  ${XDG_APPS_INSTALL_DIR} )
+install( FILES cervisia.appdata.xml DESTINATION  ${DATA_INSTALL_DIR}/appdata )
 install( FILES cervisiapart.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 install( FILES cervisiapart.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
 install( FILES cervisiaui.rc  DESTINATION  ${DATA_INSTALL_DIR}/cervisiapart )
