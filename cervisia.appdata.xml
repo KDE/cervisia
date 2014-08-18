@@ -6,6 +6,7 @@
   <name>Cervisia</name>
   <name xml:lang="ca">Cervisia</name>
   <name xml:lang="cs">Cervisia</name>
+  <name xml:lang="en-GB">Cervisia</name>
   <name xml:lang="es">Cervisia</name>
   <name xml:lang="nl">Cervisia</name>
   <name xml:lang="pl">Cervisia</name>
@@ -14,6 +15,7 @@
   <name xml:lang="sv">Cervisia</name>
   <name xml:lang="uk">Cervisia</name>
   <name xml:lang="x-test">xxCervisiaxx</name>
+  <name xml:lang="zh-TW">版本控制_Cervisia</name>
   <description>
     <p>
       Cervisia is a user friendly version control system front-end. The aim is to support CVS and other version control system
@@ -21,13 +23,16 @@
       copy files, and support for most version control functions.
     </p>
     <p xml:lang="ca">El Cervisia és un frontal amigable del sistema pel control de versions. El seu objectiu és donar admetre el CVS i altres programes del sistema de control de versions en una interfície unificada, amb resolució de conflictes, diferències i visors de l'historial, estat dels fitxers de la còpia de treball, i implementa la majoria de les funcions pel control de versions.</p>
+    <p xml:lang="en-GB">Cervisia is a user friendly version control system front-end. The aim is to support CVS and other version control system programs in a unified interface, featuring conflict resolution, difference and history viewers, status for the working copy files, and support for most version control functions.</p>
     <p xml:lang="es">Cervisia es una amigable interfaz de sistema de control de versiones. Está pensada para implementar CVS y otros programas de sistema de control de versiones usando una interfaz unificada, proporcionando resolución de conflictos, visores de diferencias y de historial, estado de los archivos de la copia de trabajo e implementación de la mayor parte de las funciones de control de versiones.</p>
     <p xml:lang="nl">Cervisia is een front-end van een gebruikersvriendelijk versiecontrolsysteem. Het doel is de ondersteuning van CVS en andere programma's voor versiecontrolsystemen in een gemeenschappelijk interface, met oplossen van conflicten, verschillen en tonen van de historie, status van de bestanden van de werkkopie en ondersteuning voor de meeste functies van een versiecontrolsysteem.</p>
     <p xml:lang="pl">Cervisia jest przyjazną użytkownikowi nakładką graficzną na system sterowania wersją. Celem jest obsługa CVS i innych programów do sterowania wersją przy pomocy ujednoliconego układu sterowania wraz z rozwiązywaniem niezgodności, przeglądarką różnic i historii, stanem plików kopi roboczej oraz obsługą większości możliwości sterowania wersją.</p>
     <p xml:lang="pt-BR">Cervisia é uma interface amigável ao usuário para o sistema de controle de versão. O objetivo é ter suporte ao CVS e outros programas de sistemas de controle de versão em uma interface unificada, com recursos de resolução de conflitos, visualizadores de diferenças e histórico, estado para as cópias de trabalho dos arquivos, e suporte para maioria das funções de controle.</p>
+    <p xml:lang="sk">Cervisia je používateľsky priateľská verzia frontendu na správu verzií. Jej cieľ je podpora CVS a iných programov na správu verzií v unifikovanom rozhraní, riešenie konfliktov, prehliadače rozdielov a histórie, stav pre súbory pracovnej kópie a podpora pre väčšinu funkcií správy verzií.</p>
     <p xml:lang="sv">Cervisia är ett användarvänligt gränssnitt för versionskontrollsystem. Målet är att stödja CVS och andra program för versionskontroll med ett gemensamt gränssnitt, med funktioner för konfliktupplösning, jämförelse- och historikvisning, status för kopierade arbetsfiler, och stöd för de flesta versionskontrollfunktioner.</p>
     <p xml:lang="uk">Cervisia — зручна у користуванні оболонка до системи керування версіями. Метою її створення була підтримка CVS та інших систем керування версіями за допомогою універсального інтерфейсу, з можливостями розв’язання конфліктів, інструментами перегляду відмінностей і історії, стану файлів робочої копії та підтримкою більшості функціональних можливостей системи керування версіями.</p>
     <p xml:lang="x-test">xxCervisia is a user friendly version control system front-end. The aim is to support CVS and other version control system programs in a unified interface, featuring conflict resolution, difference and history viewers, status for the working copy files, and support for most version control functions.xx</p>
+    <p xml:lang="zh-TW">Cervisia 是一套版本控制系統的前端介面。它可以用同一套介面支援 CVS 與其它版本控制系統，功能包括衝突解決，變更與歷史檢視，工作複本的狀態檢視，並支援許多其他的版本控制功能。</p>
   </description>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=cervisia</url>
   <url type="help">http://docs.kde.org/stable/en/kdesdk/cervisia/index.html</url>
