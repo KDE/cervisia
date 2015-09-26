@@ -22,7 +22,7 @@
 #include <kdialog.h>
 
 class QCheckBox;
-class Q3VButtonGroup;
+class QButtonGroup;
 class KIntNumInput;
 
 namespace Cervisia
@@ -43,7 +43,7 @@ private slots:
     void formatChanged(int buttonId);
        
 private:
-    Q3VButtonGroup* m_formatBtnGroup;
+    QButtonGroup*  m_formatBtnGroup;
     KIntNumInput*  m_contextLines;
     QCheckBox*     m_blankLineChk;
     QCheckBox*     m_allSpaceChk;

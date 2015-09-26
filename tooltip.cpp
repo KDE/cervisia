@@ -23,7 +23,7 @@
 #include <kglobalsettings.h>
 
 #include <qevent.h>
-#include <q3simplerichtext.h>
+#include <qtextdocument.h>
 #include <qtooltip.h>
 
 
@@ -107,12 +107,14 @@ QString truncateLines(const QString& text,
                        - desktopGeometry.top() - 10);
 
     // calculate the tooltip's size
-    const Q3SimpleRichText layoutedText(text, font);
+    QTextDocument layoutedText;
+    layoutedText.setHtml(text);
+    layoutedText.setDefaultFont(font);
 
     // only if the tooltip's size is bigger in x- and y-direction the text must
     // be truncated otherwise the tip is moved to a position where it fits
-    return  ((layoutedText.widthUsed() > maxWidth)
-             && (layoutedText.height() > maxHeight))
+    return  ((layoutedText.size().width() > maxWidth)
+             && (layoutedText.size().height() > maxHeight))
         ? truncateLines(text, QFontMetrics(font), QSize(maxWidth, maxHeight))
         : text;
 }

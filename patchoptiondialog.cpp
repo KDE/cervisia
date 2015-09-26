@@ -17,17 +17,19 @@
  */
 
 #include "patchoptiondialog.h"
-//Added by qt3to4:
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QBoxLayout>
+
 using Cervisia::PatchOptionDialog;
 
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qradiobutton.h>
-#include <q3buttongroup.h>
+#include <qgroupbox.h>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QBoxLayout>
+#include <QButtonGroup>
+
 #include <knuminput.h>
 #include <klocale.h>
 
@@ -47,16 +49,26 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent)
     topLayout->setSpacing(spacingHint());
     topLayout->setMargin(0);
 
-    m_formatBtnGroup = new Q3VButtonGroup(i18n("Output Format"), mainWidget, "");
-    topLayout->addWidget(m_formatBtnGroup);
+    { // format
+      m_formatBtnGroup = new QButtonGroup(mainWidget);
 
-    connect(m_formatBtnGroup, SIGNAL(clicked(int)),
-            this,             SLOT(formatChanged(int)));
+      connect(m_formatBtnGroup, SIGNAL(buttonClicked(int)),
+              this,             SLOT(formatChanged(int)));
 
-    new QRadioButton(i18n( "Context" ), m_formatBtnGroup);
-    new QRadioButton(i18n( "Normal" ), m_formatBtnGroup);
-    QRadioButton* unifiedFormatBtn = new QRadioButton(i18n( "Unified" ), m_formatBtnGroup);
-    unifiedFormatBtn->setChecked(true);
+      m_formatBtnGroup->addButton(new QRadioButton(i18n("Context")), 0);
+      m_formatBtnGroup->addButton(new QRadioButton(i18n("Normal")), 1);
+      QRadioButton* unifiedFormatBtn = new QRadioButton(i18n("Unified"));
+      unifiedFormatBtn->setChecked(true);
+      m_formatBtnGroup->addButton(unifiedFormatBtn, 2);
+
+      QGroupBox *box = new QGroupBox(i18n("Output Format"), mainWidget);
+      QVBoxLayout *v = new QVBoxLayout(box);
+      v->addWidget(m_formatBtnGroup->button(0));
+      v->addWidget(m_formatBtnGroup->button(1));
+      v->addWidget(m_formatBtnGroup->button(2));
+
+      topLayout->addWidget(box);
+    }
 
     QLabel* contextLinesLbl = new QLabel(i18n("&Number of context lines:"),
                                          mainWidget);
@@ -70,15 +82,28 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent)
     contextLinesLayout->addWidget(contextLinesLbl);
     contextLinesLayout->addWidget(m_contextLines);
 
-    Q3VButtonGroup* ignoreBtnGroup = new Q3VButtonGroup(i18n("Ignore Options"), mainWidget);
-    topLayout->addWidget(ignoreBtnGroup);
+    { // ignore options
+      QButtonGroup *group = new QButtonGroup(mainWidget);
 
-    m_blankLineChk = new QCheckBox(i18n("Ignore added or removed empty lines"),
-                                   ignoreBtnGroup);
-    m_spaceChangeChk = new QCheckBox(i18n("Ignore changes in the amount of whitespace"),
-                                     ignoreBtnGroup);
-    m_allSpaceChk = new QCheckBox(i18n("Ignore all whitespace"), ignoreBtnGroup);
-    m_caseChangesChk = new QCheckBox(i18n("Ignore changes in case"), ignoreBtnGroup);
+      m_blankLineChk   = new QCheckBox(i18n("Ignore added or removed empty lines"));
+      m_spaceChangeChk = new QCheckBox(i18n("Ignore changes in the amount of whitespace"));
+      m_allSpaceChk    = new QCheckBox(i18n("Ignore all whitespace"));
+      m_caseChangesChk = new QCheckBox(i18n("Ignore changes in case"));
+
+      group->addButton(m_blankLineChk);
+      group->addButton(m_spaceChangeChk);
+      group->addButton(m_allSpaceChk);
+      group->addButton(m_caseChangesChk);
+
+      QGroupBox *box = new QGroupBox(i18n("Ignore Options"), mainWidget);
+      QVBoxLayout *v = new QVBoxLayout(box);
+      v->addWidget(m_blankLineChk);
+      v->addWidget(m_spaceChangeChk);
+      v->addWidget(m_allSpaceChk);
+      v->addWidget(m_caseChangesChk);
+
+      topLayout->addWidget(box);
+    }
 }
 
 
@@ -109,7 +134,7 @@ QString PatchOptionDialog::diffOptions() const
 
 QString PatchOptionDialog::formatOption() const
 {
-    switch( m_formatBtnGroup->selectedId() )
+    switch( m_formatBtnGroup->checkedId() )
     {
         case 0: return "-C " + QString::number(m_contextLines->value());
         case 1: return "";
