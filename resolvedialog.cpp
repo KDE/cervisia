@@ -113,8 +113,6 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
     setDefaultButton(Close);
     showButtonSeparator(true);
 
-    items.setAutoDelete(true);
-
     QFrame* mainWidget = new QFrame(this);
     setMainWidget(mainWidget);
 
@@ -216,6 +214,8 @@ ResolveDialog::~ResolveDialog()
 {
     KConfigGroup cg(&partConfig, "ResolveDialog");
     saveDialogSize(cg);
+
+    qDeleteAll(items);
 }
 
 
@@ -447,9 +447,13 @@ void ResolveDialog::updateHighlight(int newitem)
 }
 
 
-void ResolveDialog::updateMergedVersion(ResolveItem* item,
-                                        ResolveDialog::ChooseType chosen)
+void ResolveDialog::updateMergedVersion(ResolveDialog::ChooseType chosen)
 {
+    if (markeditem < 0)
+        return;
+
+    ResolveItem *item = items.at(markeditem);
+
     // Remove old variant
     for (int i = 0; i < item->linecountTotal; ++i)
         merge->removeAtOffset(item->offsetM);
@@ -469,8 +473,9 @@ void ResolveDialog::updateMergedVersion(ResolveItem* item,
     int difference = total - item->linecountTotal;
     item->chosen = chosen;
     item->linecountTotal = total;
-    while ( (item = items.next()) != 0 )
-        item->offsetM += difference;
+
+    for (int i = markeditem + 1; i < items.count(); i++)
+        items[i]->offsetM += difference;
 
     merge->repaint();
 }
@@ -527,7 +532,7 @@ void ResolveDialog::choose(ChooseType ch)
             kDebug(8050) << "Internal error at switch";
         }
 
-    updateMergedVersion(item, ch);
+    updateMergedVersion(ch);
 }
 
 
@@ -575,7 +580,7 @@ void ResolveDialog::editClicked()
     if (dlg->exec())
     {
         m_contentMergedVersion = dlg->content();
-        updateMergedVersion(item, ChEdit);
+        updateMergedVersion(ChEdit);
     }
 
     delete dlg;
@@ -619,7 +624,7 @@ void ResolveDialog::keyPressEvent(QKeyEvent *e)
 
 
 /* This will return the A side of the diff in a QString. */
-QString ResolveDialog::contentVersionA(const ResolveItem *item)
+QString ResolveDialog::contentVersionA(const ResolveItem *item) const
 {
     QString result;
     for( int i = item->linenoA; i < item->linenoA+item->linecountA; ++i )
@@ -632,7 +637,7 @@ QString ResolveDialog::contentVersionA(const ResolveItem *item)
 
 
 /* This will return the B side of the diff item in a QString. */
-QString ResolveDialog::contentVersionB(const ResolveItem *item)
+QString ResolveDialog::contentVersionB(const ResolveItem *item) const
 {
     QString result;
     for( int i = item->linenoB; i < item->linenoB+item->linecountB; ++i )

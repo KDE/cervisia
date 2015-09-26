@@ -45,13 +45,6 @@ public:
 };
 
 
-int DiffViewItemList::compareItems(Q3PtrCollection::Item item1, Q3PtrCollection::Item item2)
-{
-    return (static_cast<DiffViewItem*>(item1)->no
-            == static_cast<DiffViewItem*>(item2)->no)? 0 : 1;
-}
-
-
 const int DiffView::BORDER = 7;
 
 
@@ -80,10 +73,14 @@ DiffView::DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
     const KConfigGroup group(&partConfig, "General");
     m_tabWidth = group.readEntry("TabWidth", 8);
 
-    items.setAutoDelete(true);
-
     connect(CervisiaSettings::self(), SIGNAL(configChanged()),
             this, SLOT(configChanged()));
+}
+
+
+DiffView::~DiffView()
+{
+    qDeleteAll(items);
 }
 
 
@@ -139,7 +136,7 @@ void DiffView::configChanged()
 // *offset methods are only for views withlineno
 void DiffView::removeAtOffset(int offset)
 {
-    items.remove(offset);
+    delete items.takeAt(offset);
     setNumRows(numRows()-1);
 }
 
@@ -199,7 +196,7 @@ void DiffView::addLine(const QString &line, DiffType type, int no)
 
 QString DiffView::stringAtOffset(int offset)
 {
-    if (offset >= (int)items.count())
+    if (offset >= items.count())
     {
         kDebug(8050) << "Internal error: lineAtOffset";
     }
@@ -215,15 +212,12 @@ int DiffView::count()
 
 int DiffView::findLine(int lineno)
 {
-    int offset;
-    DiffViewItem tmp;
-    tmp.no = lineno;
-    if ( (offset = items.find(&tmp)) == -1)
-    {
-        kDebug(8050) << "Internal Error: Line" << lineno << "not found";
-        return -1;
-    }
-    return offset;
+    for (int i = 0; i < items.count(); i++)
+        if ( items[i]->no == lineno )
+            return i;
+
+    kDebug(8050) << "Internal Error: Line" << lineno << "not found";
+    return -1;
 }
 
 
@@ -257,11 +251,9 @@ QByteArray DiffView::compressedContent()
 {
     QByteArray res(items.count(), '\0');
 
-    Q3PtrListIterator<DiffViewItem> it(items);
-    int i=0;
-    for (; it.current(); ++it)
+    for (int i = 0; i < items.count(); i++)
     {
-        switch (it.current()->type)
+        switch (items[i]->type)
         {
             case Change:   res[i] = 'C'; break;
             case Insert:   res[i] = 'I'; break;
@@ -270,7 +262,6 @@ QByteArray DiffView::compressedContent()
             case Unchanged:res[i] = 'U'; break;
             default:       res[i] = ' ';
         }
-        ++i;
     }
     return res;
 }

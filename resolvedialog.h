@@ -23,7 +23,7 @@
 
 #include <kdialog.h>
 
-#include <q3ptrlist.h>
+#include <QList>
 #include "diffview.h"
 
 class QLabel;
@@ -67,16 +67,16 @@ private:
     void addToMergeAndVersionA(const QString& line, DiffView::DiffType type, 
                                int& lineNo);
     void addToVersionB(const QString& line, DiffView::DiffType type, int& lineNo);
-    void updateMergedVersion(ResolveItem* item, ChooseType chosen);
-    QString contentVersionA(const ResolveItem *item);
-    QString contentVersionB(const ResolveItem *item);
+    void updateMergedVersion(ChooseType chosen);
+    QString contentVersionA(const ResolveItem *item) const;
+    QString contentVersionB(const ResolveItem *item) const;
     
     QLabel *nofnlabel;
     QPushButton *backbutton, *forwbutton;
     QPushButton *abutton, *bbutton, *abbutton, *babutton, *editbutton;
     DiffView *diff1, *diff2, *merge;
 
-    Q3PtrList<ResolveItem> items;
+    QList<ResolveItem *> items;
     QString fname;
     QTextCodec *fcodec;
     int markeditem;

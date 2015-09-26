@@ -24,19 +24,10 @@
 
 #include "qttableview.h"
 
-#include <q3ptrcollection.h>
-#include <q3ptrlist.h>
-
+#include <QList>
 
 class KConfig;
 class DiffViewItem;
-
-
-class DiffViewItemList : public Q3PtrList<DiffViewItem>
-{
-protected:
-    virtual int compareItems(Q3PtrCollection::Item item1, Q3PtrCollection::Item item2);
-};
 
 
 class DiffView : public QtTableView
@@ -48,6 +39,8 @@ public:
 
     DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
               QWidget *parent=0, const char *name=0 );
+
+    ~DiffView();
 
     void setPartner(DiffView *other);
 
@@ -88,7 +81,7 @@ private Q_SLOTS:
 private:
     int findLine(int lineno);
 
-    DiffViewItemList items;
+    QList<DiffViewItem *> items;
     bool linenos;
     bool marker;
     int textwidth;

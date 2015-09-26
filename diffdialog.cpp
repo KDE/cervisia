@@ -53,7 +53,6 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
     : KDialog(parent)
     , partConfig(cfg)
 {
-    items.setAutoDelete(true);
     markeditem = -1;
     setModal(modal);
     setButtons(Close | Help | User1);
@@ -143,6 +142,8 @@ DiffDialog::~DiffDialog()
     KConfigGroup cg(&partConfig, "DiffDialog");
     cg.writeEntry("Sync", syncbox->isChecked());
     saveDialogSize(cg);
+
+    qDeleteAll(items);
 }
 
 
@@ -480,7 +481,7 @@ void DiffDialog::forwClicked()
     int newitem;
     if (markeditem == -2 || (markeditem == -1 && !items.count()))
         return; // internal error (button not disabled)
-    else if (markeditem+1 == (int)items.count()) // past end
+    else if (markeditem+1 == items.count()) // past end
         newitem = -2;
     else
         newitem = markeditem+1;
