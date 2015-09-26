@@ -35,18 +35,18 @@ LogMessageEdit::LogMessageEdit(QWidget* parent)
     , m_completionStartPos(0)
     , m_checkSpellingEnabledBeforeCompletion(false)
 {
+    setAcceptRichText(false);
+
     // create the completion object
     completionObject();
-
-#ifdef __GNUC__
-#warning XXX: port to Qt4
-#endif
-#if 0
-    // a mouse click stops the completion process
-    connect( this, SIGNAL(clicked(int,int)), SLOT(stopCompletion()) );
-#endif
 }
 
+void LogMessageEdit::mousePressEvent(QMouseEvent *event)
+{
+    // a mouse click stops the completion process
+    QTextEdit::mousePressEvent(event);
+    stopCompletion();
+}
 
 void LogMessageEdit::setCompletedText(const QString& match)
 {
@@ -186,7 +186,7 @@ void LogMessageEdit::tryCompletion()
             cursor.movePosition(QTextCursor::Left);
             setTextCursor(cursor);
 
-			setCompletedText(match);
+            setCompletedText(match);
         }
         else
         {

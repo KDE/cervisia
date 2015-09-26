@@ -41,7 +41,8 @@ public:
     virtual void setCompletedItems(const QStringList& items, bool autoSuggest =true);
 
 protected:
-    void keyPressEvent(QKeyEvent* event);
+    virtual void keyPressEvent(QKeyEvent* event);
+    virtual void mousePressEvent(QMouseEvent *event);
 
 private slots:
     void stopCompletion();
