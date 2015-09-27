@@ -23,12 +23,12 @@
 
 #include <qlayout.h>
 #include <qpushbutton.h>
-//Added by qt3to4:
 #include <QHBoxLayout>
 #include <QBoxLayout>
+#include <QTreeWidget>
+#include <QHeaderView>
 #include <KDialogButtonBox>
 #include <kconfig.h>
-#include <k3listview.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kdebug.h>
@@ -42,10 +42,10 @@
 #include "repositories.h"
 
 
-class RepositoryListItem : public K3ListViewItem
+class RepositoryListItem : public QTreeWidgetItem
 {
 public:
-    RepositoryListItem(K3ListView* parent, const QString& repo, bool loggedin);
+    RepositoryListItem(QTreeWidget* parent, const QString& repo, bool loggedin);
 
     void setRsh(const QString& rsh);
     void setServer(const QString& server) { m_server = server; }
@@ -91,9 +91,9 @@ static bool LoginNeeded(const QString& repository)
 }
 
 
-RepositoryListItem::RepositoryListItem(K3ListView* parent, const QString& repo,
+RepositoryListItem::RepositoryListItem(QTreeWidget* parent, const QString& repo,
                                        bool loggedin)
-    : K3ListViewItem(parent)
+    : QTreeWidgetItem(parent)
     , m_isLoggedIn(loggedin)
 {
     kDebug(8050) << "repo=" << repo;
@@ -159,7 +159,8 @@ void RepositoryListItem::changeLoginStatusColumn()
 }
 
 
-RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService, const QString& cvsServiceInterfaceName, QWidget* parent)
+RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService,
+                                   const QString& cvsServiceInterfaceName, QWidget* parent)
     : KDialog(parent)
     , m_partConfig(cfg)
     , m_cvsService(cvsService)
@@ -178,19 +179,18 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserv
     hbox->setSpacing(spacingHint());
     hbox->setMargin(0);
 
-    m_repoList = new K3ListView(mainWidget);
+    m_repoList = new QTreeWidget(mainWidget);
     hbox->addWidget(m_repoList, 10);
     m_repoList->setMinimumWidth(fontMetrics().width('0') * 60);
     m_repoList->setAllColumnsShowFocus(true);
-    m_repoList->addColumn(i18n("Repository"));
-    m_repoList->addColumn(i18n("Method"));
-    m_repoList->addColumn(i18n("Compression"));
-    m_repoList->addColumn(i18n("Status"));
+    m_repoList->setRootIsDecorated(false);
+    m_repoList->setHeaderLabels(QStringList() << i18n("Repository") << i18n("Method")
+                                              << i18n("Compression") << i18n("Status"));
     m_repoList->setFocus();
 
-    connect(m_repoList, SIGNAL(doubleClicked(Q3ListViewItem*)),
-            this, SLOT(slotDoubleClicked(Q3ListViewItem*)));
-    connect(m_repoList, SIGNAL(selectionChanged()),
+    connect(m_repoList, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)),
+            this, SLOT(slotDoubleClicked(QTreeWidgetItem*, int)));
+    connect(m_repoList, SIGNAL(itemSelectionChanged()),
             this,       SLOT(slotSelectionChanged()));
 
     KDialogButtonBox* actionbox = new KDialogButtonBox(mainWidget, Qt::Vertical);
@@ -224,10 +224,10 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserv
     readCvsPassFile();
     readConfigFile();
 
-    if (Q3ListViewItem* item = m_repoList->firstChild())
+    if (QTreeWidgetItem *item = m_repoList->topLevelItem(0))
     {
         m_repoList->setCurrentItem(item);
-        m_repoList->setSelected(item, true);
+        item->setSelected(true);
     }
     else
     {
@@ -242,11 +242,9 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserv
     KConfigGroup cg(&m_partConfig, "RepositoryDialog");
     restoreDialogSize(cg);
 
-    // without this restoreLayout() can't change the column widths
-    for (int i = 0; i < m_repoList->columns(); ++i)
-        m_repoList->setColumnWidthMode(i, Q3ListView::Manual);
+    QByteArray state = cg.readEntry<QByteArray>("RepositoryListView", QByteArray());
+    m_repoList->header()->restoreState(state);
 
-    m_repoList->restoreLayout(&m_partConfig, QLatin1String("RepositoryListView"));
     connect(this,SIGNAL(okClicked()),this,SLOT(slotOk()));
 }
 
@@ -256,7 +254,7 @@ RepositoryDialog::~RepositoryDialog()
     KConfigGroup cg(&m_partConfig, "RepositoryDialog");
     saveDialogSize(cg);
 
-    m_repoList->saveLayout(&m_partConfig, QLatin1String("RepositoryListView"));
+    cg.writeEntry("RepositoryListView", m_repoList->header()->saveState());
 
     delete m_serviceConfig;
 }
@@ -275,18 +273,16 @@ void RepositoryDialog::readConfigFile()
     QStringList list = Repositories::readConfigFile();
 
     // Sort out all list elements which are already in the list view
-    Q3ListViewItem* item = m_repoList->firstChild();
-    for( ; item; item = item->nextSibling() )
-        list.removeAll(item->text(0));
+    for (int i = 0; i < m_repoList->topLevelItemCount(); i++)
+        list.removeAll(m_repoList->topLevelItem(i)->text(0));
 
     Q_FOREACH(const QString& it, list)
         new RepositoryListItem(m_repoList, it, false);
 
     // Now look for the used methods
-    item = m_repoList->firstChild();
-    for( ; item; item = item->nextSibling() )
+    for (int i = 0; i < m_repoList->topLevelItemCount(); i++)
     {
-        RepositoryListItem* ritem = static_cast<RepositoryListItem*>(item);
+        RepositoryListItem* ritem = static_cast<RepositoryListItem*>(m_repoList->topLevelItem(i));
 
         // read entries from cvs DCOP service configuration
         const KConfigGroup repoGroup = m_serviceConfig->group(QLatin1String("Repository-") +
@@ -305,23 +301,24 @@ void RepositoryDialog::readConfigFile()
         ritem->setCompression(compression);
         ritem->setRetrieveCvsignore(retrieveFile);
     }
+
+    m_repoList->header()->resizeSections(QHeaderView::ResizeToContents);
 }
 
 
 void RepositoryDialog::slotOk()
 {
     // Make list of repositories
-    Q3ListViewItem* item;
     QStringList list;
-    for( item = m_repoList->firstChild(); item; item = item->nextSibling() )
-        list.append(item->text(0));
+    for (int i = 0; i < m_repoList->topLevelItemCount(); i++)
+        list.append(m_repoList->topLevelItem(i)->text(0));
 
     KConfigGroup reposGroup = m_partConfig.group("Repositories");
     reposGroup.writeEntry("Repos", list);
 
-    for( item = m_repoList->firstChild(); item; item = item->nextSibling() )
+    for (int i = 0; i < m_repoList->topLevelItemCount(); i++)
     {
-        RepositoryListItem* ritem = static_cast<RepositoryListItem*>(item);
+        RepositoryListItem* ritem = static_cast<RepositoryListItem*>(m_repoList->topLevelItem(i));
 
         // write entries to cvs DCOP service configuration
         writeRepositoryData(ritem);
@@ -347,9 +344,8 @@ void RepositoryDialog::slotAddClicked()
         int compression   = dlg.compression();
         bool retrieveFile = dlg.retrieveCvsignoreFile();
 
-        Q3ListViewItem* item = m_repoList->firstChild();
-        for( ; item; item = item->nextSibling() )
-            if( item->text(0) == repo )
+        for (int i = 0; i < m_repoList->topLevelItemCount(); i++)
+            if( m_repoList->topLevelItem(i)->text(0) == repo )
             {
                 KMessageBox::information(this, i18n("This repository is already known."));
                 return;
@@ -371,7 +367,7 @@ void RepositoryDialog::slotAddClicked()
 
 void RepositoryDialog::slotModifyClicked()
 {
-    slotDoubleClicked(m_repoList->selectedItem());
+    slotDoubleClicked(m_repoList->currentItem(), 0);
 }
 
 
@@ -386,8 +382,10 @@ void RepositoryDialog::slotRemoveClicked()
 }
 
 
-void RepositoryDialog::slotDoubleClicked(Q3ListViewItem* item)
+void RepositoryDialog::slotDoubleClicked(QTreeWidgetItem *item, int column)
 {
+    Q_UNUSED(column)
+
     if( !item )
         return;
 
@@ -475,7 +473,7 @@ void RepositoryDialog::slotLogoutClicked()
 void RepositoryDialog::slotSelectionChanged()
 {
     // retrieve the selected item
-    RepositoryListItem* item = (RepositoryListItem*)m_repoList->selectedItem();
+    RepositoryListItem* item = (RepositoryListItem*)m_repoList->currentItem();
 
     // is an item in the list view selected?
     bool isItemSelected = (item != 0);

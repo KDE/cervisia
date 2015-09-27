@@ -23,9 +23,9 @@
 
 #include <kdialog.h>
 
-class Q3ListViewItem;
+class QTreeWidget;
+class QTreeWidgetItem;
 class QPushButton;
-class K3ListView;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 class RepositoryListItem;
 class KConfig;
@@ -48,7 +48,7 @@ private slots:
     void slotAddClicked();
     void slotModifyClicked();
     void slotRemoveClicked();
-    void slotDoubleClicked(Q3ListViewItem *item);
+    void slotDoubleClicked(QTreeWidgetItem *item, int column);
     void slotLoginClicked();
     void slotLogoutClicked();
     void slotSelectionChanged();
@@ -60,7 +60,7 @@ private:
     KConfig&         m_partConfig;
     OrgKdeCervisiaCvsserviceCvsserviceInterface* m_cvsService;
     KConfig*         m_serviceConfig;
-    K3ListView*       m_repoList;
+    QTreeWidget*     m_repoList;
     QPushButton*     m_modifyButton;
     QPushButton*     m_removeButton;
     QPushButton*     m_loginButton;
