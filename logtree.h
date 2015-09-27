@@ -25,7 +25,9 @@
 
 #include <qlist.h>
 
-#include <q3table.h>
+#include <QTableView>
+#include <QAbstractTableModel>
+#include <QStyledItemDelegate>
 
 
 class LogTreeItem;
@@ -49,7 +51,7 @@ enum SelectedRevision
 };
 
 
-class LogTreeView : public Q3Table
+class LogTreeView : public QTableView
 {
     Q_OBJECT
 
@@ -62,8 +64,7 @@ public:
     void setSelectedPair(QString selectionA, QString selectionB);
     void collectConnections();
     void recomputeCellSizes();
-    virtual void paintCell(QPainter *p, int row, int col, const QRect& cr,
-                           bool selected, const QColorGroup& cg);
+    void paintCell(QPainter *p, int row, int col);
 
     virtual QSize sizeHint() const;
     
@@ -72,11 +73,8 @@ public:
 signals:
     void revisionClicked(QString rev, bool rmb);
 
-protected:
-    virtual void contentsMousePressEvent(QMouseEvent *e);
-
 private slots:
-
+    void mousePressed(const QModelIndex &index);
     void slotQueryToolTip(const QPoint&, QRect&, QString&);
 
 private:
@@ -87,15 +85,59 @@ private:
 
     LogTreeItemList items;
     LogTreeConnectionList connections;
-    int currentRow, currentCol;
+    int rowCount, columnCount;
 
     static const int BORDER;
     static const int INSPACE;
+
+    friend class LogTreeModel;
+
+    class LogTreeModel *model;
+};
+
+
+class LogTreeModel : public QAbstractTableModel
+{
+public:
+    LogTreeModel(LogTreeView *t) : logView(t) { }
+
+    virtual int rowCount(const QModelIndex &parent = QModelIndex()) const
+    {
+        Q_UNUSED(parent)
+        return logView->rowCount;
+    }
+
+    virtual int columnCount(const QModelIndex &parent = QModelIndex()) const
+    {
+        Q_UNUSED(parent)
+        return logView->columnCount;
+    }
+
+    virtual QVariant data(const QModelIndex &, int) const { return QVariant(); }
+
+private:
+    LogTreeView *logView;
+
+    friend class LogTreeView;
+};
+
+
+class LogTreeDelegate : public QStyledItemDelegate
+{
+    Q_OBJECT
+
+public:
+    LogTreeDelegate(LogTreeView *t) : logView(t) { }
+    virtual void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+
+private:
+    LogTreeView *logView;
 };
 
 #endif
 
 
+// vim: set sw=4
 // Local Variables:
 // c-basic-offset: 4
 // End:

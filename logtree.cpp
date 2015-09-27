@@ -20,7 +20,7 @@
 
 #include "logtree.h"
 
-#include <qevent.h>
+#include <QApplication>
 #include <qpainter.h>
 #include <kdebug.h>
 #include <kglobal.h>
@@ -29,8 +29,10 @@
 #include "loginfo.h"
 #include "tooltip.h"
 
+#include <QHeaderView>
 
-const int LogTreeView::BORDER = 8;
+
+const int LogTreeView::BORDER = 5;
 const int LogTreeView::INSPACE = 3;
 
 namespace
@@ -61,8 +63,10 @@ public:
 
 
 LogTreeView::LogTreeView(QWidget *parent, const char *name)
-    : Q3Table(parent, name)
+    : QTableView(parent), rowCount(0), columnCount(1)
 {
+    setObjectName(QLatin1String(name));
+
     if (!static_initialized)
     {
         static_initialized = true;
@@ -71,27 +75,24 @@ LogTreeView::LogTreeView(QWidget *parent, const char *name)
         static_height = 2*fm.height() + 2*BORDER + 3*INSPACE;
     }
 
-    setNumCols(0);
-    setNumRows(0);
-    setReadOnly(true);
-    setFocusStyle(Q3Table::FollowStyle);
-    setSelectionMode(Q3Table::NoSelection);
+    setItemDelegate(new LogTreeDelegate(this));
+    setModel(model = new LogTreeModel(this));
+
+    setSelectionMode(QAbstractItemView::NoSelection);
     setShowGrid(false);
     horizontalHeader()->hide();
-    setTopMargin(0);
     verticalHeader()->hide();
-    setLeftMargin(0);
     setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
     setBackgroundRole( QPalette::Base );
     setFocusPolicy(Qt::NoFocus);
-
-    currentRow = -1;
-    currentCol = -1;
 
     Cervisia::ToolTip* toolTip = new Cervisia::ToolTip(viewport());
 
     connect(toolTip, SIGNAL(queryToolTip(QPoint,QRect&,QString&)),
             this, SLOT(slotQueryToolTip(QPoint,QRect&,QString&)));
+
+    connect(this, SIGNAL(pressed(const QModelIndex &)),
+            this, SLOT(mousePressed(const QModelIndex &)));
 }
 
 
@@ -122,16 +123,17 @@ void LogTreeView::addRevision(const Cervisia::LogInfo& logInfo)
     if (branchrev.isEmpty())
     {
         // Most probably we are on the trunk
-        setNumRows(numRows()+1);
-        setNumCols(1);
+        model->beginInsertRows(QModelIndex(), rowCount, rowCount);
+        rowCount++;
         LogTreeItem *item = new LogTreeItem;
         item->m_logInfo = logInfo;
         item->branchpoint = branchpoint;
         item->firstonbranch = false;
-        item->row = numRows()-1;
+        item->row = rowCount-1;
         item->col = 0;
         item->selected = NoRevision;
         items.append(item);
+        model->endInsertRows();
         return;
     }
 
@@ -151,8 +153,10 @@ void LogTreeView::addRevision(const Cervisia::LogInfo& logInfo)
             {
                 foreach (LogTreeItem* item2, items)
                     item2->row++;
-                setNumRows(numRows()+1);
+                model->beginInsertRows(QModelIndex(), rowCount, rowCount);
+                rowCount++;
                 row = 1;
+                model->endInsertRows();
             }
         }
     }
@@ -172,16 +176,20 @@ void LogTreeView::addRevision(const Cervisia::LogInfo& logInfo)
                 foreach (LogTreeItem* item2, items)
                     if (item2->col > item1->col)
                         item2->col++;
-                setNumCols(numCols()+1);
+                model->beginInsertColumns(QModelIndex(), columnCount, columnCount);
+                columnCount++;
                 row = item1->row-1;
                 col = item1->col+1;
                 if (row == -1)
                 {
                     foreach (LogTreeItem* item3, items)
                         item3->row++;
-                    setNumRows(numRows()+1);
+                    model->beginInsertRows(QModelIndex(), rowCount, rowCount);
+                    rowCount++;
                     row = 0;
+                    model->endInsertRows();
                 }
+                model->endInsertColumns();
                 break;
             }
         }
@@ -284,11 +292,8 @@ QString LogTreeView::text(int row, int col) const
 }
 
 
-void LogTreeView::paintCell(QPainter *p, int row, int col, const QRect& cr,
-                            bool selected, const QColorGroup& cg)
+void LogTreeView::paintCell(QPainter *p, int row, int col)
 {
-    Q_UNUSED(selected)
-    Q_UNUSED(cr)
     bool followed, branched;
     LogTreeItem *item;
 
@@ -314,9 +319,6 @@ void LogTreeView::paintCell(QPainter *p, int row, int col, const QRect& cr,
             branched = true;
     }
 
-    p->fillRect(0, 0, columnWidth(col), rowHeight(row),
-                cg.base());
-    p->setPen(cg.text());
     if (item)
         paintRevisionCell(p, row, col, item->m_logInfo,
                           followed, branched, item->selected);
@@ -447,29 +449,32 @@ void LogTreeView::paintRevisionCell(QPainter *p,
 }
 
 
-void LogTreeView::contentsMousePressEvent(QMouseEvent *e)
+void LogTreeView::mousePressed(const QModelIndex &index)
 {
-    if ( e->button() == Qt::MidButton ||
-         e->button() == Qt::LeftButton)
+    Qt::MouseButtons buttons = QApplication::mouseButtons();
+
+    if ( buttons == Qt::MidButton ||
+         buttons == Qt::LeftButton)
     {
-        int row = rowAt( e->pos().y() );
-        int col = columnAt( e->pos().x() );
+        int row = index.row();
+        int col = index.column();
 
         foreach (LogTreeItem* item, items)
+        {
             if (item->row == row && item->col == col)
             {
                 // Change selection for revision B if the middle mouse button or
                 // the left mouse button with the control key was pressed
-                bool changeRevB = (e->button() == Qt::MidButton) ||
-                                  (e->button() == Qt::LeftButton &&
-                                   e->modifiers() & Qt::ControlModifier);
+                bool changeRevB = (buttons == Qt::MidButton) ||
+                                  (buttons == Qt::LeftButton &&
+                                   QApplication::keyboardModifiers() & Qt::ControlModifier);
 
                 emit revisionClicked(item->m_logInfo.m_revision, changeRevB);
+                viewport()->update();
                 break;
             }
+        }
     }
-
-    viewport()->update();
 }
 
 
@@ -492,18 +497,26 @@ void LogTreeView::slotQueryToolTip(const QPoint& viewportPos,
                                    QRect&        viewportRect,
                                    QString&      tipText)
 {
-    const QPoint contentsPos(viewportToContents(viewportPos));
-    const int column(columnAt(contentsPos.x()));
-    const int row(rowAt(contentsPos.y()));
+    QModelIndex index(indexAt(viewportPos));
 
-    tipText = text(row, column);
+    tipText = text(index.row(), index.column());
     if (tipText.isEmpty())
         return;
 
-    viewportRect = cellGeometry(row, column);
-    viewportRect.moveTopLeft(contentsToViewport(viewportRect.topLeft()));
+    viewportRect = visualRect(index);
 }
 
+//---------------------------------------------------------------------
+
+void LogTreeDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+    painter->save();
+
+    painter->translate(option.rect.x(), option.rect.y());
+    logView->paintCell(painter, index.row(), index.column());
+
+    painter->restore();
+}
 
 #include "logtree.moc"
 
