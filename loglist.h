@@ -22,8 +22,7 @@
 #define LOGLIST_H
 
 
-#include <k3listview.h>
-//Added by qt3to4:
+#include <QTreeWidget>
 #include <QMouseEvent>
 #include <QKeyEvent>
 
@@ -37,12 +36,12 @@ struct LogInfo;
 }
 
 
-class LogListView : public K3ListView
+class LogListView : public QTreeWidget
 {
     Q_OBJECT
     
 public:
-    explicit LogListView( KConfig& cfg, QWidget *parent=0, const char *name=0 );
+    explicit LogListView(KConfig& cfg, QWidget *parent);
     virtual ~LogListView();
     
     void addRevision(const Cervisia::LogInfo& logInfo);
@@ -52,7 +51,7 @@ signals:
     void revisionClicked(QString rev, bool rmb);
 
 protected:
-    virtual void contentsMousePressEvent(QMouseEvent *e);
+    virtual void mousePressEvent(QMouseEvent *e);
     virtual void keyPressEvent(QKeyEvent *e);
 
 private slots:

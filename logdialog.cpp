@@ -38,7 +38,7 @@
 #include <kfinddialog.h>
 #include <kglobalsettings.h>
 #include <kiconloader.h>
-#include <k3listviewsearchline.h>
+#include <KTreeWidgetSearchLine>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kdatetime.h>
@@ -71,7 +71,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     setDefaultButton(Close);
     showButtonSeparator(true);
 
-    QSplitter *splitter = new QSplitter(Qt::Vertical, this);
+    splitter = new QSplitter(Qt::Vertical, this);
     setMainWidget(splitter);
 
     tree = new LogTreeView(this);
@@ -88,7 +88,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     list = new LogListView(partConfig, listWidget);
     listLayout->addWidget(list, 1);
 
-    K3ListViewSearchLine* searchLine = new K3ListViewSearchLine(listWidget, list);
+    KTreeWidgetSearchLine* searchLine = new KTreeWidgetSearchLine(listWidget, list);
     QLabel* searchLabel = new QLabel(i18n("S&earch:"),listWidget);
     searchLabel->setBuddy(searchLine);
     searchLayout->addWidget(searchLabel);
@@ -180,8 +180,11 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
         tagsbox[i] = new KTextEdit(mainWidget);
         tagsbox[i]->setReadOnly(true);
         tagsbox[i]->setMinimumHeight(2*fm.lineSpacing()+10);
-        grid->addWidget(tagsbox[i], 2, 4);
+        grid->addWidget(tagsbox[i], 0, 4, 3, 1);
     }
+
+    // initially make the version info widget as small as possible
+    splitter->setSizes(QList<int>() << height() << 1);
 
     revbox[0]->setWhatsThis( i18n("This revision is used when you click "
                                     "Annotate.\nIt is also used as the first "
@@ -214,6 +217,8 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     tabWidget->setCurrentIndex(cg.readEntry("ShowTab", 0));
     restoreDialogSize(cg);
 
+    splitter->restoreState(cg.readEntry<QByteArray>("Splitter", QByteArray()));
+
     updateButtons();
 }
 
@@ -226,6 +231,8 @@ LogDialog::~LogDialog()
     KConfigGroup cg(&partConfig, "LogDialog");
     cg.writeEntry("ShowTab", tabWidget->currentIndex());
     saveDialogSize(cg);
+
+    cg.writeEntry("Splitter", splitter->saveState());
 }
 
 

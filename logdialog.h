@@ -32,6 +32,7 @@ class LogPlainView;
 
 class KComboBox;
 class QLabel;
+class QSplitter;
 class KTabWidget;
 class KTextEdit;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
@@ -74,6 +75,7 @@ private:
     void tagSelected(LogDialogTagInfo* tag, bool rmb);
     void updateButtons();
 
+    QSplitter *splitter;
     QString filename;
     QList<Cervisia::LogInfo*> items;
     QList<LogDialogTagInfo*> tags;

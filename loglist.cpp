@@ -22,26 +22,28 @@
 
 #include <qapplication.h>
 #include <qnamespace.h>
-//Added by qt3to4:
+
 #include <QMouseEvent>
 #include <QKeyEvent>
-#include <QEvent>
+#include <QHeaderView>
+
 #include <klocale.h>
+#include <KConfigGroup>
 
 #include "loginfo.h"
 #include "misc.h"
 #include "tooltip.h"
 
 
-class LogListViewItem : public K3ListViewItem
+class LogListViewItem : public QTreeWidgetItem
 {
 public:
 
     enum { Revision, Author, Date, Branch, Comment, Tags };
 
-    LogListViewItem(Q3ListView* list, const Cervisia::LogInfo& logInfo);
+    LogListViewItem(QTreeWidget* list, const Cervisia::LogInfo& logInfo);
 
-    virtual int compare(Q3ListViewItem* i, int col, bool) const;
+    virtual bool operator<(const QTreeWidgetItem &other) const;
 
 private:
     static QString truncateLine(const QString &s);
@@ -51,8 +53,8 @@ private:
 };
 
 
-LogListViewItem::LogListViewItem(Q3ListView* list, const Cervisia::LogInfo& logInfo)
-    : K3ListViewItem(list),
+LogListViewItem::LogListViewItem(QTreeWidget* list, const Cervisia::LogInfo& logInfo)
+    : QTreeWidgetItem(list),
       m_logInfo(logInfo)
 {
     setText(Revision, logInfo.m_revision);
@@ -89,59 +91,46 @@ QString LogListViewItem::truncateLine(const QString &s)
 }
 
 
-int LogListViewItem::compare(Q3ListViewItem* i, int col, bool ascending) const
+bool LogListViewItem::operator<(const QTreeWidgetItem &other) const
 {
-    const LogListViewItem* item = static_cast<LogListViewItem*>(i);
+    const LogListViewItem &item = static_cast<const LogListViewItem &>(other);
 
-    int iResult;
-    switch (col)
+    switch ( treeWidget()->sortColumn() )
     {
-    case Revision:
-        iResult = ::compareRevisions(m_logInfo.m_revision, item->m_logInfo.m_revision);
-        break;
-    case Date:
-        iResult = ::compare(m_logInfo.m_dateTime, item->m_logInfo.m_dateTime);
-        break;
-    default:
-        iResult = Q3ListViewItem::compare(i, col, ascending);
+    case Revision: return ::compareRevisions(m_logInfo.m_revision, item.m_logInfo.m_revision) == -1;
+    case Date: return ::compare(m_logInfo.m_dateTime, item.m_logInfo.m_dateTime) == -1;
     }
 
-    return iResult;
+    return QTreeWidgetItem::operator<(other);
 }
 
 
-LogListView::LogListView(KConfig& cfg, QWidget *parent, const char *name)
-    : K3ListView(parent)
+LogListView::LogListView(KConfig& cfg, QWidget *parent)
+    : QTreeWidget(parent)
     , partConfig(cfg)
 {
-	setObjectName(name);
     setAllColumnsShowFocus(true);
-    setShowToolTips(false);
-    setShowSortIndicator(true);
-    setMultiSelection(true);
-    setSorting(LogListViewItem::Revision, false);
-    addColumn(i18n("Revision"));
-    addColumn(i18n("Author"));
-    addColumn(i18n("Date"));
-    addColumn(i18n("Branch"));
-    addColumn(i18n("Comment"));
-    addColumn(i18n("Tags"));
+    header()->setSortIndicatorShown(true);
+    setSelectionMode(QAbstractItemView::NoSelection);
+    setRootIsDecorated(false);
+    setSortingEnabled(true);
+    sortByColumn(LogListViewItem::Revision, Qt::DescendingOrder);
+    setHeaderLabels(QStringList() << i18n("Revision") << i18n("Author") << i18n("Date")
+                                  << i18n("Branch") << i18n("Comment") << i18n("Tags"));
 
     Cervisia::ToolTip* toolTip = new Cervisia::ToolTip(viewport());
 
     connect(toolTip, SIGNAL(queryToolTip(QPoint,QRect&,QString&)),
             this, SLOT(slotQueryToolTip(QPoint,QRect&,QString&)));
 
-    // without this restoreLayout() can't change the column widths
-    for (int i = 0; i < columns(); ++i)
-        setColumnWidthMode(i, Manual);
-    restoreLayout(&partConfig, QLatin1String("LogList view"));
+    QByteArray state = cfg.group("LogList view").readEntry<QByteArray>("Columns", QByteArray());
+    header()->restoreState(state);
 }
 
 
 LogListView::~LogListView()
 {
-    saveLayout(&partConfig, QLatin1String("LogList view"));
+    partConfig.group("LogList view").writeEntry("Columns", header()->saveState());
 }
 
 
@@ -153,20 +142,19 @@ void LogListView::addRevision(const Cervisia::LogInfo& logInfo)
 
 void LogListView::setSelectedPair(const QString &selectionA, const QString &selectionB)
 {
-    for ( Q3ListViewItem *item = firstChild(); item;
-	  item = item->nextSibling() )
-	{
-            LogListViewItem *i = static_cast<LogListViewItem*>(item);
-            setSelected(i, (selectionA == i->text(LogListViewItem::Revision) ||
-                            selectionB == i->text(LogListViewItem::Revision)) );
-        }
+    for (int j = 0; j < topLevelItemCount(); j++)
+    {
+        LogListViewItem *i = static_cast<LogListViewItem*>(topLevelItem(j));
+        i->setSelected(selectionA == i->text(LogListViewItem::Revision) ||
+                       selectionB == i->text(LogListViewItem::Revision));
+    }
 }
 
-void LogListView::contentsMousePressEvent(QMouseEvent *e)
+void LogListView::mousePressEvent(QMouseEvent *e)
 {
     // Retrieve selected item
     const LogListViewItem* selItem
-        = static_cast<LogListViewItem*>(itemAt(contentsToViewport(e->pos())));
+        = static_cast<LogListViewItem*>(itemAt(e->pos()));
     if( !selItem )
         return;
 
@@ -207,7 +195,7 @@ void LogListView::keyPressEvent(QKeyEvent *e)
     case Qt::Key_PageDown:
     case Qt::Key_PageUp:
         if (e->modifiers() == Qt::NoModifier)
-             Q3ListView::keyPressEvent(e);
+             QTreeWidget::keyPressEvent(e);
         else
             QApplication::postEvent(this, new QKeyEvent(QEvent::KeyPress, e->key(), e->ascii(), 0));
         break;
@@ -224,13 +212,11 @@ void LogListView::slotQueryToolTip(const QPoint& viewportPos,
 {
     if (const LogListViewItem* item = static_cast<LogListViewItem*>(itemAt(viewportPos)))
     {
-        viewportRect = itemRect(item);
+        viewportRect = visualRect(indexAt(viewportPos));
         text = item->m_logInfo.createToolTipText();
     }
 }
 
-
-#include "loglist.moc"
 
 // Local Variables:
 // c-basic-offset: 4
