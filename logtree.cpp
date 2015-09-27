@@ -85,6 +85,8 @@ LogTreeView::LogTreeView(QWidget *parent, const char *name)
     setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
     setBackgroundRole( QPalette::Base );
     setFocusPolicy(Qt::NoFocus);
+    setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+    setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
 
     Cervisia::ToolTip* toolTip = new Cervisia::ToolTip(viewport());
 

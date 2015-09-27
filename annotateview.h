@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 1999-2002 Bernd Gehrmann <bernd@mail.berlios.de>
  * Copyright (c) 2003-2008 André Wöbbeking <Woebbeking@kde.org>
+ * Copyright (c) 2015 Martin Koller <kollix@aon.at>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,9 +22,8 @@
 #ifndef ANNOTATEVIEW_H
 #define ANNOTATEVIEW_H
 
-
-#include <q3listview.h>
-
+#include <QTreeWidget>
+#include <QStyledItemDelegate>
 
 namespace Cervisia
 {
@@ -31,16 +31,14 @@ struct LogInfo;
 }
 
 
-class AnnotateView : public Q3ListView
+class AnnotateView : public QTreeWidget
 {
     Q_OBJECT
 
 public:
+    AnnotateView(QWidget *parent);
 
-    explicit AnnotateView( QWidget *parent=0, const char *name=0 );
-
-    void addLine(const Cervisia::LogInfo& logInfo, const QString& content,
-                 bool odd);
+    void addLine(const Cervisia::LogInfo& logInfo, const QString& content, bool odd);
 
     virtual QSize sizeHint() const;
 
@@ -52,11 +50,23 @@ public slots:
     void findText(const QString &textToFind, bool up);
 
 private slots:
-
     void configChanged();
 
     void slotQueryToolTip(const QPoint&, QRect&, QString&);
 };
 
+class AnnotateViewDelegate: public QStyledItemDelegate
+{
+    Q_OBJECT
+
+public:
+    AnnotateViewDelegate(AnnotateView *v) : view(v) { }
+    virtual void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+    virtual QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
+
+private:
+    enum { BORDER = 4 };
+    AnnotateView *view;
+};
 
 #endif
