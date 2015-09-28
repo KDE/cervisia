@@ -25,11 +25,13 @@
 #include <qlayout.h>
 #include <qpushbutton.h>
 #include <qregexp.h>
+#include <QTreeWidget>
+#include <QHeaderView>
+
 #include <kglobal.h>
 #include <kpushbutton.h>
 #include <kconfig.h>
 #include <klineedit.h>
-#include <k3listview.h>
 #include <klocale.h>
 #include <kdatetime.h>
 #include <kconfiggroup.h>
@@ -57,19 +59,19 @@ static QDateTime parseDate(const QString& date, const QString& time, const QStri
 }
 
 
-class HistoryItem : public Q3ListViewItem
+class HistoryItem : public QTreeWidgetItem
 {
 public:
 
     enum { Date, Event, Author, Revision, File, Path };
 
-    HistoryItem(Q3ListView *parent, const QDateTime& date)
-        : Q3ListViewItem(parent), m_date(date)
+    HistoryItem(QTreeWidget *parent, const QDateTime& date)
+        : QTreeWidgetItem(parent), m_date(date)
     {}
 
-    virtual int compare(Q3ListViewItem* i, int col, bool) const;
+    virtual bool operator<(const QTreeWidgetItem &other) const;
 
-    virtual QString text(int col) const;
+    virtual QVariant data(int column, int role) const;
 
     bool isCommit();
     bool isCheckout();
@@ -82,40 +84,26 @@ private:
 };
 
 
-int HistoryItem::compare(Q3ListViewItem* i, int col, bool ascending) const
+bool HistoryItem::operator<(const QTreeWidgetItem &other) const
 {
-    const HistoryItem* pItem = static_cast<HistoryItem*>(i);
+    const HistoryItem &item = static_cast<const HistoryItem &>(other);
 
-    int iResult;
-    switch (col)
+    switch ( treeWidget()->sortColumn() )
     {
-    case Date:
-        iResult = ::compare(m_date, pItem->m_date);
-        break;
-    case Revision:
-        iResult = ::compareRevisions(text(Revision), pItem->text(Revision));
-        break;
-    default:
-        iResult = Q3ListViewItem::compare(i, col, ascending);
+    case Date    : return ::compare(m_date, item.m_date) == -1;
+    case Revision: return ::compareRevisions(text(Revision), item.text(Revision)) == -1;
     }
 
-    return iResult;
+    return QTreeWidgetItem::operator<(other);
 }
 
 
-QString HistoryItem::text(int col) const
+QVariant HistoryItem::data(int column, int role) const
 {
-    QString sText;
-    switch (col)
-    {
-    case Date:
-        sText = KGlobal::locale()->formatDateTime(m_date);
-        break;
-    default:
-        sText = Q3ListViewItem::text(col);
-    }
+    if ( (role == Qt::DisplayRole) && (column == Date) )
+        return KGlobal::locale()->formatDateTime(m_date);
 
-    return sText;
+    return QTreeWidgetItem::data(column, role);
 }
 
 
@@ -159,17 +147,15 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent)
     layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
-    listview = new K3ListView(mainWidget);
-    listview->setSelectionMode(Q3ListView::NoSelection);
+    listview = new QTreeWidget(mainWidget);
+    listview->setSelectionMode(QAbstractItemView::NoSelection);
     listview->setAllColumnsShowFocus(true);
-    listview->setShowSortIndicator(true);
-    listview->setSorting(HistoryItem::Date, false);
-    listview->addColumn(i18n("Date"));
-    listview->addColumn(i18n("Event"));
-    listview->addColumn(i18n("Author"));
-    listview->addColumn(i18n("Revision"));
-    listview->addColumn(i18n("File"));
-    listview->addColumn(i18n("Repo Path"));
+    listview->setRootIsDecorated(false);
+    listview->header()->setSortIndicatorShown(true);
+    listview->setSortingEnabled(true);
+    listview->sortByColumn(HistoryItem::Date, Qt::DescendingOrder);
+    listview->setHeaderLabels(QStringList() << i18n("Date") << i18n("Event") << i18n("Author")
+                                            << i18n("Revision") << i18n("File") << i18n("Repo Path"));
     listview->setFocus();
     layout->addWidget(listview, 1);
 
@@ -255,11 +241,8 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent)
     KConfigGroup cg(&partConfig, "HistoryDialog");
     restoreDialogSize(cg);
 
-    // without this restoreLayout() can't change the column widths
-    for (int i = 0; i < listview->columns(); ++i)
-        listview->setColumnWidthMode(i, Q3ListView::Manual);
-
-    listview->restoreLayout(&partConfig, QLatin1String("HistoryListView"));
+    QByteArray state = cg.readEntry<QByteArray>("HistoryListView", QByteArray());
+    listview->header()->restoreState(state);
 }
 
 
@@ -268,7 +251,7 @@ HistoryDialog::~HistoryDialog()
     KConfigGroup cg(&partConfig, "HistoryDialog");
     saveDialogSize(cg);
 
-    listview->saveLayout(&partConfig, QLatin1String("HistoryListView"));
+    cg.writeEntry("HistoryListView", listview->header()->saveState());
 }
 
 
@@ -286,22 +269,21 @@ void HistoryDialog::choiceChanged()
     const bool filterByFile(onlyfilenames_box->isChecked() && !fileMatcher.isEmpty());
     const bool filterByPath(onlydirnames_box->isChecked() && !pathMatcher.isEmpty());
 
-    Q3ListViewItemIterator it(listview);
-    for (; it.current(); ++it)
-        {
-            HistoryItem *item = static_cast<HistoryItem*>(it.current());
+    for (int i = 0; i < listview->topLevelItemCount(); i++)
+    {
+        HistoryItem *item = static_cast<HistoryItem*>(listview->topLevelItem(i));
 
-            bool visible(   (showCommitEvents && item->isCommit())
-                         || (showCheckoutEvents && item->isCheckout())
-                         || (showTagEvents && item->isTag())
-                         || (showOtherEvents && item->isOther()));
-            visible = visible
-                && (!filterByAuthor || author == item->text(HistoryItem::Author))
-                && (!filterByFile || item->text(HistoryItem::File).contains(fileMatcher))
-                && (!filterByPath || item->text(HistoryItem::Path).contains(pathMatcher));
+        bool visible(   (showCommitEvents && item->isCommit())
+                     || (showCheckoutEvents && item->isCheckout())
+                     || (showTagEvents && item->isTag())
+                     || (showOtherEvents && item->isOther()));
+        visible = visible
+            && (!filterByAuthor || author == item->text(HistoryItem::Author))
+            && (!filterByFile || item->text(HistoryItem::File).contains(fileMatcher))
+            && (!filterByPath || item->text(HistoryItem::Path).contains(pathMatcher));
 
-            item->setVisible(visible);
-        }
+        item->setHidden(!visible);
+    }
 }
 
 

@@ -25,7 +25,7 @@
 class QCheckBox;
 class KConfig;
 class KLineEdit;
-class K3ListView;
+class QTreeWidget;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 
 class HistoryDialog : public KDialog
@@ -43,7 +43,7 @@ private slots:
     void toggled(bool b);
 
 private:
-    K3ListView *listview;
+    QTreeWidget *listview;
     QCheckBox *commit_box, *checkout_box, *tag_box, *other_box;
     QCheckBox *onlyuser_box, *onlyfilenames_box, *onlydirnames_box;
     KLineEdit *user_edit, *filename_edit, *dirname_edit;
