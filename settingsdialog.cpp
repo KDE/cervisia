@@ -156,7 +156,7 @@ void SettingsDialog::writeSettings()
 {
     // write entries to cvs D-Bus service configuration
     KConfigGroup group = serviceConfig->group("General");
-    group.writePathEntry("CVSPath", cvspathedit->url().path());
+    group.writePathEntry("CVSPath", cvspathedit->text());
     group.writeEntry("Compression",
         m_advancedPage->kcfg_Compression->value());
     group.writeEntry("UseSshAgent",
@@ -169,7 +169,7 @@ void SettingsDialog::writeSettings()
     CervisiaSettings::setTimeout(m_advancedPage->kcfg_Timeout->value());
     group.writeEntry("Username", usernameedit->text());
 
-    group.writePathEntry("ExternalDiff", extdiffedit->url().path());
+    group.writePathEntry("ExternalDiff", extdiffedit->text());
 
     group.writeEntry("ContextLines", (unsigned)contextedit->value());
     group.writeEntry("TabWidth", tabwidthedit->value());
