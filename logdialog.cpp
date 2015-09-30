@@ -70,6 +70,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     setButtonGuiItem(User3, KGuiItem(i18n("&Find"), "edit-find"));
     setDefaultButton(Close);
     showButtonSeparator(true);
+    showButton(User3, false);
 
     splitter = new QSplitter(Qt::Vertical, this);
     setMainWidget(splitter);
@@ -207,8 +208,6 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     connect( this, SIGNAL(user3Clicked()),
              this, SLOT(findClicked()) );
 
-    connect(this,SIGNAL(okClicked()),
-            this, SLOT(slotOk()));
     connect(this,SIGNAL(applyClicked()),this,SLOT(slotApply()));
     setButtonGuiItem(Ok, KGuiItem(i18nc("to view revision A", "&View A"),"document-open"));
     setButtonGuiItem(Apply, KGuiItem(i18n("Create Patch...")));
@@ -429,6 +428,17 @@ bool LogDialog::parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service
     return true;    // successful
 }
 
+void LogDialog::slotButtonClicked(int button)
+{
+    if ( button == KDialog::Ok )
+    {
+        // ok button (used for "view") shall not close the dialog
+        slotOk();
+        return;
+    }
+
+    KDialog::slotButtonClicked(button);
+}
 
 void LogDialog::slotOk()
 {
