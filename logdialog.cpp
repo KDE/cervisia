@@ -144,6 +144,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
 
         revbox[i] = new QLabel(mainWidget);
         revbox[i]->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+        revbox[i]->setTextInteractionFlags(Qt::TextSelectableByMouse);
         grid->addWidget(revbox[i], 0, 1, Qt::AlignVCenter);
 
         QLabel *selectlabel = new QLabel(i18n("Select by tag:"), mainWidget);
@@ -159,6 +160,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
 
         authorbox[i] = new QLabel(mainWidget);
         authorbox[i]->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+        authorbox[i]->setTextInteractionFlags(Qt::TextSelectableByMouse);
         grid->addWidget(authorbox[i], 1, 1);
 
         QLabel *datelabel = new QLabel(i18n("Date:"), mainWidget);
@@ -166,6 +168,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
 
         datebox[i] = new QLabel(mainWidget);
         datebox[i]->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+        datebox[i]->setTextInteractionFlags(Qt::TextSelectableByMouse);
         grid->addWidget(datebox[i], 1, 3);
 
         QLabel *commentlabel = new QLabel(i18n("Comment/Tags:"), mainWidget);
