@@ -260,7 +260,7 @@ void LogTreeView::setSelectedPair(QString selectionA, QString selectionB)
         if (oldSelection != newSelection)
         {
             item->selected = newSelection;
-            repaint();
+            viewport()->update();
         }
     }
 }
