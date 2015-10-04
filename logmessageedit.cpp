@@ -167,12 +167,22 @@ void LogMessageEdit::tryCompletion()
     int pos = textCursor().position();
     QString text = toPlainText();
 
-    if( text.at(pos-1).isSpace() )
+    // space or tab starts completion
+    if ( text.at(pos-1).isSpace() )
     {
-        if( !m_completing )
+        // if we already did complete this word and the user types another space,
+        // don't complete again, since the user can otherwise not enter the word
+        // without the completion. In this case, also remove the previous completion
+        // which is still selected
+        if ( m_completing )
         {
-            m_completionStartPos = text.lastIndexOf(' ', pos-2) + 1;
+            textCursor().removeSelectedText();
+            stopCompletion();
+            return;
         }
+
+        if ( !m_completing )
+            m_completionStartPos = text.lastIndexOf(' ', pos-2) + 1;
 
         // retrieve current word
         int length = pos - m_completionStartPos - 1;
@@ -182,8 +192,16 @@ void LogMessageEdit::tryCompletion()
         QString match = compObj()->makeCompletion(word);
         if( !match.isEmpty() && match != word )
         {
+            // if the matching text is already existing at this cursor position,
+            // don't insert it again
+            if ( text.mid(pos).startsWith(match.mid(word.length())) )
+            {
+                stopCompletion();
+                return;
+            }
+
             QTextCursor cursor = this->textCursor();
-            cursor.movePosition(QTextCursor::Left);
+            cursor.deletePreviousChar(); // delete the just inserted space
             setTextCursor(cursor);
 
             setCompletedText(match);
@@ -192,6 +210,10 @@ void LogMessageEdit::tryCompletion()
         {
             stopCompletion();
         }
+    }
+    else
+    {
+        stopCompletion();
     }
 }
 
@@ -216,5 +238,3 @@ void LogMessageEdit::rotateMatches(KeyBindingType type)
         setCompletedText(match);
     }
 }
-
-#include "logmessageedit.moc"
