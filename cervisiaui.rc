@@ -98,6 +98,7 @@
   <Action name="view_diff_head"/>
   <Action name="view_last_change"/>
   <Action name="file_resolve"/>
+  <Action name="file_revert_local_changes"/>
   <Action name="view_log"/>
   <Separator/>
   <Action name="file_update"/>

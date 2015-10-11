@@ -17,9 +17,10 @@
  */
 
 #include "resolvedialog_p.h"
+#include "cervisiasettings.h"
 
 #include <kconfig.h>
-#include <ktextedit.h>
+#include <QPlainTextEdit>
 #include <kconfiggroup.h>
 
 using namespace Cervisia;
@@ -34,7 +35,8 @@ ResolveEditorDialog::ResolveEditorDialog(KConfig& cfg, QWidget *parent)
     setDefaultButton(Ok);
     showButtonSeparator(true);
 
-    m_edit = new KTextEdit(this);
+    m_edit = new QPlainTextEdit(this);
+    m_edit->setFont(CervisiaSettings::diffFont());
     m_edit->setFocus();
 
     setMainWidget(m_edit);
@@ -57,11 +59,11 @@ ResolveEditorDialog::~ResolveEditorDialog()
 
 void ResolveEditorDialog::setContent(const QString& text)
 {
-    m_edit->setText(text);
+    m_edit->setPlainText(text);
 }
 
 
 QString ResolveEditorDialog::content() const
 {
-    return m_edit->text();
+    return m_edit->toPlainText();
 }

@@ -245,7 +245,7 @@ void AnnotateView::findText(const QString &textToFind, bool up)
             item = itemBelow(item);
     }
 
-    for (; item && !item->text(AnnotateViewItem::ContentColumn).contains(textToFind, false);
+    for (; item && !item->text(AnnotateViewItem::ContentColumn).contains(textToFind, Qt::CaseInsensitive);
          item = up ? itemAbove(item) : itemBelow(item))
       ;
 

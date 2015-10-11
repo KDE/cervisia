@@ -21,7 +21,7 @@
 
 #include <kdialog.h>
 
-class KTextEdit;
+class QPlainTextEdit;
 class KConfig;
 
 namespace Cervisia
@@ -37,7 +37,7 @@ public:
     QString content() const;
 
 private:   
-    KTextEdit* m_edit;
+    QPlainTextEdit* m_edit;
     KConfig&   m_partConfig;
 };  
 

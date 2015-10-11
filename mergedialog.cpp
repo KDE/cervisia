@@ -93,7 +93,7 @@ MergeDialog::MergeDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
 
     QGridLayout *tagsedit_layout = new QGridLayout();
     layout->addLayout( tagsedit_layout );
-    tagsedit_layout->addColSpacing(0, iWidgetIndent);
+    tagsedit_layout->addItem(new QSpacerItem(iWidgetIndent, 0), 0, 0);
     tagsedit_layout->setColumnStretch(0, 0);
     tagsedit_layout->setColumnStretch(1, 1);
     tagsedit_layout->setColumnStretch(2, 2);
@@ -102,7 +102,7 @@ MergeDialog::MergeDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
     tagsedit_layout->addWidget(tag1_combo, 0, 2);
     tagsedit_layout->addWidget(tag2_label, 1, 1);
     tagsedit_layout->addWidget(tag2_combo, 1, 2);
-    tagsedit_layout->addMultiCellWidget(tag_button, 0, 1, 3, 3);
+    tagsedit_layout->addWidget(tag_button, 0, 3, 2, 1);
 
     QButtonGroup* group = new QButtonGroup(mainWidget);
     group->addButton(bybranch_button);

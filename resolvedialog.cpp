@@ -336,6 +336,7 @@ bool ResolveDialog::parseFile(const QString &name)
     while( !separator.atEnd() );
 
     updateNofN();
+    forwClicked();  // go to first conflict
 
     return true; // successful
 }

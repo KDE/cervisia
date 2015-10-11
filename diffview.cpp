@@ -50,7 +50,7 @@ const int DiffView::BORDER = 7;
 
 DiffView::DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
                     QWidget *parent, const char *name )
-    : QtTableView(parent, name, Qt::WNoAutoErase)
+    : QtTableView(parent, name)
     , linenos(withlinenos)
     , marker(withmarker)
     , textwidth(0)

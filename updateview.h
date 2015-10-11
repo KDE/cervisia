@@ -22,7 +22,7 @@
 #define UPDATEVIEW_H
 
 
-#include <k3listview.h>
+#include <QTreeWidget>
 
 #include <qlist.h>
 
@@ -32,7 +32,7 @@
 class KConfig;
 
 
-class UpdateView : public K3ListView
+class UpdateView : public QTreeWidget
 {
     Q_OBJECT
     
@@ -42,7 +42,7 @@ public:
                   NoRemoved=4, NoNotInCVS=8 , NoEmptyDirectories = 16 };
     enum Action { Add, Remove, Update, UpdateNoAct, Commit };
     
-    explicit UpdateView(KConfig& partConfig, QWidget *parent=0, const char *name=0);
+    explicit UpdateView(KConfig& partConfig, QWidget *parent);
 
     virtual ~UpdateView();
 
@@ -69,7 +69,7 @@ public:
      */
     bool isUnfoldingTree() const;
 
-    void replaceItem(Q3ListViewItem*, Q3ListViewItem*);
+    void replaceItem(QTreeWidgetItem *, QTreeWidgetItem *);
 
 signals:
     void fileOpened(QString filename);
@@ -82,7 +82,8 @@ public slots:
     void processUpdateLine(QString line);
 
 private slots:
-    void itemExecuted(Q3ListViewItem *item);
+    void itemExecuted(QTreeWidgetItem *item, int column);
+    void itemExpandedSlot(QTreeWidgetItem *item);
     
 private:
     void updateItem(const QString &filename, Cervisia::EntryStatus status, bool isdir);
@@ -96,7 +97,7 @@ private:
 
     Filter filt;
     Action act;
-    QList<Q3ListViewItem*> relevantSelection;
+    QList<QTreeWidgetItem *> relevantSelection;
 
     QColor m_conflictColor;
     QColor m_localChangeColor;

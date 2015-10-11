@@ -410,7 +410,7 @@ void LogTreeView::paintRevisionCell(QPainter *p,
         if ( selected == RevisionA )
         {
             p->fillRect(rect, KColorScheme(QPalette::Active, KColorScheme::Selection).background());
-            p->setPen(KColorScheme(QPalette::Active, KColorScheme::Selection).foreground());
+            p->setPen(KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color());
             p->drawText(rect, Qt::AlignLeft | Qt::AlignTop, "A");
         }
         else

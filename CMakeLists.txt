@@ -7,14 +7,12 @@ find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
 
 add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
+
 include_directories(
     ${CMAKE_SOURCE_DIR}
     ${CMAKE_BINARY_DIR}
     ${KDE4_INCLUDES}
 )
-
-# TODO port away from QT3_SUPPORT
-add_definitions(-DQT3_SUPPORT)
 
 add_subdirectory( doc )
 add_subdirectory( cvsservice )
@@ -65,15 +63,12 @@ set(cervisia_KDEINIT_SRCS ${libcervisia_SRCS}
 
 
 
-kde4_add_kdeinit_executable( cervisia ${cervisia_KDEINIT_SRCS})
+kde4_add_kdeinit_executable(cervisia ${cervisia_KDEINIT_SRCS})
 
-# kde3support still needed for K3ListView and friends
-target_link_libraries(kdeinit_cervisia    ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KPARTS_LIBS})
+target_link_libraries(kdeinit_cervisia ${KDE4_KPARTS_LIBS})
 
 install(TARGETS kdeinit_cervisia ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-# kde3support still needed for K3ListView and friends
-target_link_libraries( cervisia kdeinit_cervisia ${KDE4_KDE3SUPPORT_LIBS})
 install(TARGETS cervisia  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### next target ###############
@@ -117,7 +112,7 @@ kde4_add_plugin(cervisiapart ${cervisiapart_PART_SRCS})
 
 
 
-target_link_libraries(cervisiapart  ${KDE4_KPARTS_LIBS} ${KDE4_KDE3SUPPORT_LIBS} )
+target_link_libraries(cervisiapart  ${KDE4_KPARTS_LIBS})
 
 install(TARGETS cervisiapart  DESTINATION ${PLUGIN_INSTALL_DIR} )
 

@@ -30,7 +30,7 @@ namespace CvsServiceUtils
 
 /**
  * Joins a list of file names to one QString and quotes
- * each name properly for usage with K3Process.
+ * each name properly for usage with QProcess.
  */
 QString joinFileList(const QStringList& files);
 

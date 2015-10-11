@@ -23,8 +23,7 @@
 #include <cassert>
 
 #include <qdir.h>
-#include <qpainter.h>
-//Added by qt3to4:
+
 #include <QPixmap>
 #include <QTextStream>
 
@@ -82,21 +81,21 @@ QString UpdateItem::filePath() const
 
 UpdateDirItem::UpdateDirItem(UpdateDirItem* parent,
                              const Entry& entry)
-    : UpdateItem(parent, entry),
+    : UpdateItem(parent, entry, RTTI),
       m_opened(false)
 {
-    setExpandable(true);
-    setPixmap(0, SmallIcon("folder"));
+    setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
+    setIcon(0, SmallIcon("folder"));
 }
 
 
 UpdateDirItem::UpdateDirItem(UpdateView* parent,
                              const Entry& entry)
-    : UpdateItem(parent, entry),
+    : UpdateItem(parent, entry, RTTI),
       m_opened(false)
 {
-    setExpandable(true);
-    setPixmap(0, SmallIcon("folder"));
+    setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
+    setIcon(0, SmallIcon("folder"));
 }
 
 
@@ -155,8 +154,8 @@ void UpdateDirItem::updateEntriesItem(const Entry& entry,
             }
             fileItem->setRevTag(entry.m_revision, entry.m_tag);
             fileItem->setDate(entry.m_dateTime);
-            fileItem->setPixmap(0, isBinary ? SmallIcon("application-octet-stream") 
-	                                    : QPixmap());
+            fileItem->setIcon(0, isBinary ? SmallIcon("application-octet-stream") 
+	                                  : QPixmap());
         }
         return;
     }
@@ -224,7 +223,7 @@ UpdateItem* UpdateDirItem::insertItem(UpdateItem* item)
         // OK, an item with that name already exists. If the item type is the
         // same then keep the old one to preserve it's status information
         UpdateItem* existingItem = *it;
-        if (existingItem->rtti() == item->rtti())
+        if (existingItem->type() == item->type())
         {
             delete item;
             item = existingItem;
@@ -281,7 +280,11 @@ void UpdateDirItem::syncWithEntries()
                 continue;
 
             entry.m_type = isDir ? Entry::Dir : Entry::File;
-            entry.m_name = line.section('/', 1, 1);
+
+            // since QString::section() always calls split internally, let's do it only once
+            const QStringList sections = line.split(QLatin1Char('/'), QString::KeepEmptyParts, Qt::CaseSensitive);
+
+            entry.m_name = sections[1];
 
             if (isDir)
             {
@@ -289,10 +292,10 @@ void UpdateDirItem::syncWithEntries()
             }
             else
             {
-                QString rev(line.section('/', 2, 2));
-                const QString timestamp(line.section('/', 3, 3));
-                const QString options(line.section('/', 4, 4));
-                entry.m_tag = line.section('/', 5, 5);
+                QString rev(sections[2]);
+                const QString timestamp(sections[3]);
+                const QString options(sections[4]);
+                entry.m_tag = sections[5];
 
                 const bool isBinary = options.contains("-kb");
 
@@ -366,9 +369,6 @@ void UpdateDirItem::maybeScanDir(bool recursive)
         m_opened = true;
         scanDirectory();
         syncWithEntries();
-
-        // sort the created items
-        sort();
     }
 
     if (recursive)
@@ -415,32 +415,29 @@ void UpdateDirItem::setOpen(bool open)
             view->setFilter(view->filter());
     }
 
-    Q3ListViewItem::setOpen(open);
+    setExpanded(open);
 }
 
 
-int UpdateDirItem::compare(Q3ListViewItem* i,
-                           int /*column*/,
-                           bool bAscending) const
+bool UpdateDirItem::operator<(const QTreeWidgetItem &other) const
 {
     // UpdateDirItems are always lesser than UpdateFileItems
-    if (isFileItem(i))
-        return bAscending ? -1 : 1;
+    if (isFileItem(&other))
+        return true;
 
-    const UpdateDirItem* item(static_cast<UpdateDirItem*>(i));
+    const UpdateDirItem &item(static_cast<const UpdateDirItem &>(other));
 
     // for every column just compare the directory name
-    return entry().m_name.localeAwareCompare(item->entry().m_name);
+    return entry().m_name.localeAwareCompare(item.entry().m_name) < 0;
 }
 
 
-QString UpdateDirItem::text(int column) const
+QVariant UpdateDirItem::data(int column, int role) const
 {
-    QString result;
-    if (column == Name)
-        result = entry().m_name;
+    if ( (role == Qt::DisplayRole) && (column == Name) )
+        return entry().m_name;
 
-    return result;
+    return QTreeWidgetItem::data(column, role);
 }
 
 
@@ -450,7 +447,7 @@ QString UpdateDirItem::text(int column) const
 
 
 UpdateFileItem::UpdateFileItem(UpdateDirItem* parent, const Entry& entry)
-    : UpdateItem(parent, entry),
+    : UpdateItem(parent, entry, RTTI),
       m_undefined(false)
 {
 }
@@ -461,9 +458,7 @@ void UpdateFileItem::setStatus(EntryStatus status)
     if (status != m_entry.m_status)
     {
         m_entry.m_status = status;
-        const bool visible(applyFilter(updateView()->filter()));
-        if (visible)
-            repaint();
+        emitDataChanged();
     }
     m_undefined = false;
 }
@@ -490,7 +485,7 @@ bool UpdateFileItem::applyFilter(UpdateView::Filter filter)
     if ((filter & UpdateView::NoNotInCVS) && (entry().m_status == Cervisia::NotInCVS))
         visible = false;
 
-    setVisible(visible);
+    setHidden(!visible);
 
     return visible;
 }
@@ -521,7 +516,7 @@ void UpdateFileItem::setRevTag(const QString& rev, const QString& tag)
             // tag date.
             const unsigned int dateTimeInSeconds(tagDateTimeUtc.toTime_t());
             QDateTime dateTime;
-            dateTime.setTime_t(dateTimeInSeconds, Qt::UTC);
+            dateTime.setTime_t(dateTimeInSeconds);
             const int localUtcOffset(dateTime.secsTo(tagDateTimeUtc));
 
             const QDateTime tagDateTimeLocal(tagDateTimeUtc.addSecs(localUtcOffset));
@@ -536,11 +531,7 @@ void UpdateFileItem::setRevTag(const QString& rev, const QString& tag)
     else
         m_entry.m_tag = tag;
 
-    if (isVisible())
-    {
-        widthChanged();
-        repaint();
-    }
+    emitDataChanged();
 }
 
 
@@ -604,119 +595,109 @@ int UpdateFileItem::statusClass() const
 }
 
 
-int UpdateFileItem::compare(Q3ListViewItem* i,
-                            int column,
-                            bool bAscending) const
+bool UpdateFileItem::operator<(const QTreeWidgetItem &other) const
 {
     // UpdateDirItems are always lesser than UpdateFileItems
-    if (isDirItem(i))
-        return bAscending ? 1 : -1;
+    if (isDirItem(&other))
+        return false;
 
-    const UpdateFileItem* item = static_cast<UpdateFileItem*>(i);
+    const UpdateFileItem &item = static_cast<const UpdateFileItem &>(other);
 
-    int iResult(0);
-    switch (column)
+    switch ( treeWidget()->sortColumn() )
     {
     case Name:
-        iResult = entry().m_name.localeAwareCompare(item->entry().m_name);
-        break;
+        return entry().m_name.localeAwareCompare(item.entry().m_name) < 0;
+
     case Status:
-        if ((iResult = ::compare(statusClass(), item->statusClass())) == 0)
-            iResult = entry().m_name.localeAwareCompare(item->entry().m_name);
-        break;
+        if (::compare(statusClass(), item.statusClass()) == 0)
+            return entry().m_name.localeAwareCompare(item.entry().m_name) < 0;
+        else
+            return false;
+
     case Revision:
-        iResult = ::compareRevisions(entry().m_revision, item->entry().m_revision);
-        break;
+        return ::compareRevisions(entry().m_revision, item.entry().m_revision) < 0;
+
     case TagOrDate:
-        iResult = entry().m_tag.localeAwareCompare(item->entry().m_tag);
-        break;
+        return entry().m_tag.localeAwareCompare(item.entry().m_tag) < 0;
+
     case Timestamp:
-        iResult = ::compare(entry().m_dateTime, item->entry().m_dateTime);
-        break;
+        return ::compare(entry().m_dateTime, item.entry().m_dateTime) < 0;
     }
 
-    return iResult;
+    return false;
 }
 
 
-QString UpdateFileItem::text(int column) const
+QVariant UpdateFileItem::data(int column, int role) const
 {
-    QString result;
-    switch (column)
+    if ( role == Qt::DisplayRole )
     {
-    case Name:
-        result = entry().m_name;
-        break;
-    case Status:
-        result = toString(entry().m_status);
-        break;
-    case Revision:
-        result = entry().m_revision;
-        break;
-    case TagOrDate:
-        result = entry().m_tag;
-        break;
-    case Timestamp:
-        if (entry().m_dateTime.isValid())
-            result = KGlobal::locale()->formatDateTime(entry().m_dateTime);
-        break;
+        switch (column)
+        {
+        case Name:
+            return entry().m_name;
+
+        case Status:
+            return toString(entry().m_status);
+
+        case Revision:
+            return entry().m_revision;
+
+        case TagOrDate:
+            return entry().m_tag;
+
+        case Timestamp:
+            if (entry().m_dateTime.isValid())
+                return KGlobal::locale()->formatDateTime(entry().m_dateTime);
+            break;
+        }
+    }
+    else if ( (role == Qt::ForegroundRole) || (role == Qt::FontRole) )
+    {
+        const UpdateView* view = static_cast<const UpdateView *>(treeWidget());
+
+        QColor color;
+        switch (m_entry.m_status)
+        {
+        case Cervisia::Conflict:
+            color = view->conflictColor();
+            break;
+        case Cervisia::LocallyAdded:
+        case Cervisia::LocallyModified:
+        case Cervisia::LocallyRemoved:
+            color = view->localChangeColor();
+            break;
+        case Cervisia::NeedsMerge:
+        case Cervisia::NeedsPatch:
+        case Cervisia::NeedsUpdate:
+        case Cervisia::Patched:
+        case Cervisia::Removed:
+        case Cervisia::Updated:
+            color = view->remoteChangeColor();
+            break;
+        case Cervisia::NotInCVS:
+            color = view->notInCvsColor();
+            break;
+        case Cervisia::Unknown:
+        case Cervisia::UpToDate:
+            break;
+        }
+
+        // potentially slow - cache it
+        static QColor schemeForeCol = KColorScheme(QPalette::Active, KColorScheme::View).foreground().color();
+
+        if ( (role == Qt::FontRole) && color.isValid() && (color != schemeForeCol) )
+        {
+            QFont f = view->font();
+            f.setBold(true);
+            return f;
+        }
+
+        if ( role == Qt::ForegroundRole )
+            return color;
     }
 
-    return result;
-}
-
-
-void UpdateFileItem::paintCell(QPainter *p,
-                               const QColorGroup &cg,
-                               int col,
-                               int width,
-                               int align)
-{
-    const UpdateView* view(updateView());
-
-    QColor color;
-    switch (m_entry.m_status)
-    {
-    case Cervisia::Conflict:
-        color = view->conflictColor();
-        break;
-    case Cervisia::LocallyAdded:
-    case Cervisia::LocallyModified:
-    case Cervisia::LocallyRemoved:
-        color = view->localChangeColor();
-        break;
-    case Cervisia::NeedsMerge:
-    case Cervisia::NeedsPatch:
-    case Cervisia::NeedsUpdate:
-    case Cervisia::Patched:
-    case Cervisia::Removed:
-    case Cervisia::Updated:
-        color = view->remoteChangeColor();
-        break;
-    case Cervisia::NotInCVS:
-        color = view->notInCvsColor();
-        break;
-    case Cervisia::Unknown:
-    case Cervisia::UpToDate:
-        break;
-    }
-
-    const QFont oldFont(p->font());
-    QColorGroup mycg(cg);
-    if (color.isValid() && color != KColorScheme(QPalette::Active, KColorScheme::View).foreground().color())
-    {
-        QFont myFont(oldFont);
-        myFont.setBold(true);
-        p->setFont(myFont);
-        mycg.setColor(QPalette::Text, color);
-    }
-
-    Q3ListViewItem::paintCell(p, mycg, col, width, align);
-
-    if (color.isValid())
-    {
-        p->setFont(oldFont);
-    }
+    return QTreeWidgetItem::data(column, role);
 }
 
 

@@ -24,6 +24,7 @@
 #include <qstringlist.h>
 #include <qtimer.h>
 #include <QGridLayout>
+#include <QEventLoop>
 #include <KTextEdit>
 
 #include <cvsjobinterface.h>
@@ -44,6 +45,7 @@ struct ProgressDialog::Private
     QString         buffer;
     QString         errorId1, errorId2;
     QStringList     output;
+    QEventLoop      eventLoop;
 
     QTimer*         timer;
     KAnimatedButton*    gear;
@@ -68,13 +70,12 @@ ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,const QSt
     d->hasError    = false;
 
     QDBusObjectPath path = jobPath;
-    d->jobPath=path.path();
-    d->cvsJob      = new OrgKdeCervisiaCvsserviceCvsjobInterface(cvsServiceNameService ,path.path(),QDBusConnection::sessionBus(), this);
-    d->buffer      = "";
+    d->jobPath = path.path();
+    d->cvsJob = new OrgKdeCervisiaCvsserviceCvsjobInterface(cvsServiceNameService, path.path(), QDBusConnection::sessionBus(), this);
 
     kDebug(8050) << "cvsServiceNameService:" << cvsServiceNameService
                  << "CvsjobInterface" << path.path() << "valid:" << d->cvsJob->isValid();
-  
+
     d->errorId1 = "cvs " + errorIndicator + ':';
     d->errorId2 = "cvs [" + errorIndicator + " aborted]:";
 
@@ -125,10 +126,12 @@ bool ProgressDialog::execute()
                                           "org.kde.cervisia.cvsservice.cvsjob",
                                           "jobExited", this,
                                           SLOT(slotJobExited(bool,int)));
+
     QDBusConnection::sessionBus().connect(QString(), d->jobPath,
                                           "org.kde.cervisia.cvsservice.cvsjob",
                                           "receivedStdout", this,
                                           SLOT(slotReceivedOutputNonGui(QString)));
+
     QDBusConnection::sessionBus().connect(QString(), d->jobPath,
                                           "org.kde.cervisia.cvsservice.cvsjob",
                                           "receivedStderr", this,
@@ -146,7 +149,9 @@ bool ProgressDialog::execute()
         return false;
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
-    kapp->enter_loop();
+
+    d->eventLoop.exec();
+
     if (QApplication::overrideCursor())
         QApplication::restoreOverrideCursor();
 
@@ -197,7 +202,7 @@ void ProgressDialog::slotReceivedOutput(QString buffer)
 
 void ProgressDialog::slotJobExited(bool normalExit, int status)
 {
-    Q_UNUSED(status)
+    Q_UNUSED(normalExit)
 
     if( !d->isShown )
         stopNonGuiPart();
@@ -209,11 +214,23 @@ void ProgressDialog::slotJobExited(bool normalExit, int status)
         processOutput();
     }
 
+    if ( status != 0 )  // cvs command exited with error -> show error text
+    {
+        QString line;
+        while ( getLine(line) )
+        {
+            d->resultbox->insertPlainText(QLatin1String("\n"));
+            d->resultbox->insertPlainText(line);
+        }
+        startGuiPart();
+        return;
+    }
+
     // Close the dialog automatically if there are no
     // error messages or the process has been aborted
     // 'by hand' (e.g.  by clicking the cancel button)
-    if( !d->hasError || !normalExit )
-        kapp->exit_loop();
+    if( !d->hasError || d->isCancelled )
+        d->eventLoop.exit();
 }
 
 
@@ -225,7 +242,7 @@ void ProgressDialog::slotCancel()
     if( isRunning )
         d->cvsJob->cancel();
     else
-        kapp->exit_loop();
+        d->eventLoop.exit();
 }
 
 
@@ -239,24 +256,28 @@ void ProgressDialog::slotTimeoutOccurred()
 void ProgressDialog::stopNonGuiPart()
 {
     d->timer->stop();
-    QDBusConnection::sessionBus().disconnect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob", "receivedStdout", this, SLOT(slotReceivedOutputNonGui(QString)));
-    QDBusConnection::sessionBus().disconnect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob", "receivedStderr", this, SLOT(slotReceivedOutputNonGui(QString)));
 
-    kapp->exit_loop();
+    QDBusConnection::sessionBus().disconnect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob",
+                                             "receivedStdout", this, SLOT(slotReceivedOutputNonGui(QString)));
+
+    QDBusConnection::sessionBus().disconnect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob",
+                                             "receivedStderr", this, SLOT(slotReceivedOutputNonGui(QString)));
 }
 
 
 void ProgressDialog::startGuiPart()
 {
-    QDBusConnection::sessionBus().connect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob", "receivedStdout", this, SLOT(slotReceivedOutput(QString)));
-    QDBusConnection::sessionBus().connect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob", "receivedStderr", this, SLOT(slotReceivedOutput(QString)));
+    QDBusConnection::sessionBus().connect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob",
+                                          "receivedStdout", this, SLOT(slotReceivedOutput(QString)));
+
+    QDBusConnection::sessionBus().connect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob",
+                                          "receivedStderr", this, SLOT(slotReceivedOutput(QString)));
 
     show();
     d->isShown = true;
 
     d->gear->start();
     QApplication::restoreOverrideCursor();
-    kapp->enter_loop();
 }
 
 
@@ -271,10 +292,14 @@ void ProgressDialog::processOutput()
             item.startsWith(QLatin1String("cvs [server aborted]:")) )
         {
             d->hasError = true;
+            d->resultbox->insertPlainText(QLatin1String("\n"));
             d->resultbox->insertPlainText(item);
         }
         else if( item.startsWith(QLatin1String("cvs server:")) )
+        {
+            d->resultbox->insertPlainText(QLatin1String("\n"));
             d->resultbox->insertPlainText(item);
+        }
         else
             d->output.append(item);
 
@@ -282,6 +307,3 @@ void ProgressDialog::processOutput()
         d->buffer.remove(0, pos+1);
     }
 }
-
-
-#include "progressdialog.moc"

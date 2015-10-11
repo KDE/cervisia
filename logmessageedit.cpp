@@ -83,9 +83,10 @@ void LogMessageEdit::setCompletedItems(const QStringList&, bool)
 void LogMessageEdit::keyPressEvent(QKeyEvent* event)
 {
     // handle normal key
-    bool noModifier = (event->state() == Qt::NoButton ||
-                       event->state() == Qt::ShiftButton ||
-                       event->state() == Qt::Keypad);
+    Qt::KeyboardModifiers modifiers= event->modifiers();
+    bool noModifier = (modifiers == Qt::NoModifier ||
+                       modifiers == Qt::ShiftModifier ||
+                       modifiers == Qt::KeypadModifier);
 
     if( noModifier )
     {

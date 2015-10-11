@@ -23,7 +23,7 @@
 
 
 #include <qdatetime.h>
-#include <q3listview.h>
+#include <QTreeWidgetItem>
 #include <qmap.h>
 
 #include "entry.h"
@@ -38,14 +38,15 @@ class Visitor;
 UpdateDirItem* findOrCreateDirItem(const QString&, UpdateDirItem*);
 
 
-class UpdateItem : public Q3ListViewItem
+class UpdateItem : public QTreeWidgetItem
 {
 public:
 
-    UpdateItem(UpdateView* parent, const Cervisia::Entry& entry)
-        : Q3ListViewItem(parent), m_entry(entry) {}
-    UpdateItem(UpdateItem* parent, const Cervisia::Entry& entry)
-        : Q3ListViewItem(parent), m_entry(entry) {}
+    UpdateItem(UpdateView* parent, const Cervisia::Entry& entry, int type)
+        : QTreeWidgetItem(parent, type), m_entry(entry), itemDepth(0) { }
+
+    UpdateItem(UpdateItem* parent, const Cervisia::Entry& entry, int type)
+        : QTreeWidgetItem(parent, type), m_entry(entry), itemDepth(parent->depth() + 1) { }
 
     const Cervisia::Entry& entry() const { return m_entry; }
 
@@ -59,11 +60,20 @@ public:
 
     virtual void accept(Visitor&) = 0;
 
+    virtual void setOpen(bool ) { }
+
+    int depth() const
+    {
+      return itemDepth;
+    }
+
 protected:
 
-    UpdateView* updateView() const { return static_cast<UpdateView*>(listView()); }
+    UpdateView* updateView() const { return static_cast<UpdateView*>(treeWidget()); }
 
     Cervisia::Entry m_entry;
+
+    int itemDepth;
 };
 
 
@@ -83,10 +93,11 @@ public:
 
     bool wasScanned() const { return m_opened; }
 
-    virtual int compare(Q3ListViewItem* i, int col, bool) const;
-    virtual QString text(int col) const;
+    virtual bool operator<(const QTreeWidgetItem &other) const;
+
+    virtual QVariant data(int column, int role) const;
+
     virtual void setOpen(bool o);
-    virtual int rtti() const { return RTTI; }
 
     void maybeScanDir(bool recursive);
 
@@ -126,11 +137,9 @@ public:
     bool undefinedState() const
     { return m_undefined; }
 
-    virtual int compare(Q3ListViewItem* i, int col, bool) const;
-    virtual QString text(int col) const;
-    virtual void paintCell(QPainter *p, const QColorGroup &cg,
-                           int col, int width, int align);
-    virtual int rtti() const { return RTTI; }
+    virtual bool operator<(const QTreeWidgetItem &other) const;
+
+    virtual QVariant data(int column, int role) const;
 
     void setStatus(Cervisia::EntryStatus status);
     void setRevTag(const QString& rev, const QString& tag);
@@ -154,15 +163,15 @@ private:
 };
 
 
-inline bool isDirItem(const Q3ListViewItem* item)
+inline bool isDirItem(const QTreeWidgetItem *item)
 {
-    return item && item->rtti() == UpdateDirItem::RTTI;
+    return item && item->type() == UpdateDirItem::RTTI;
 }
 
 
-inline bool isFileItem(const Q3ListViewItem* item)
+inline bool isFileItem(const QTreeWidgetItem *item)
 {
-    return item && item->rtti() == UpdateFileItem::RTTI;
+    return item && item->type() == UpdateFileItem::RTTI;
 }
 
 

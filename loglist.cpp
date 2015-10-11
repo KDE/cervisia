@@ -197,7 +197,7 @@ void LogListView::keyPressEvent(QKeyEvent *e)
         if (e->modifiers() == Qt::NoModifier)
              QTreeWidget::keyPressEvent(e);
         else
-            QApplication::postEvent(this, new QKeyEvent(QEvent::KeyPress, e->key(), e->ascii(), 0));
+            QApplication::postEvent(this, new QKeyEvent(QEvent::KeyPress, e->key(), Qt::NoModifier, e->text()));
         break;
     default:
         // Ignore Key_Enter, Key_Return

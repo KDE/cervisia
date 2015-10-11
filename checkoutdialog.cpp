@@ -134,7 +134,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
                  this, SLOT(branchTextChanged()));
 
         recursive_box = new QCheckBox(i18n("Re&cursive checkout"), mainWidget);
-        grid->addMultiCellWidget(recursive_box, 6, 6, 0, 1);
+        grid->addWidget(recursive_box, 6, 0, 1, 2);
     }
 
     workdir_edit = new KLineEdit(mainWidget);
@@ -194,11 +194,11 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
         grid->addWidget(comment_label, 6, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
         binary_box = new QCheckBox(i18n("Import as &binaries"), mainWidget);
-        grid->addMultiCellWidget(binary_box, 7, 7, 0, 1);
+        grid->addWidget(binary_box, 7, 0, 1, 2);
 
         m_useModificationTimeBox = new QCheckBox(
                 i18n("Use file's modification time as time of import"), mainWidget);
-        grid->addMultiCellWidget(m_useModificationTimeBox, 8, 8, 0, 1);
+        grid->addWidget(m_useModificationTimeBox, 8, 0, 1, 2);
     }
     else
     {
@@ -210,7 +210,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
         grid->addWidget(alias_label, 4, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
         export_box = new QCheckBox(i18n("Ex&port only"), mainWidget);
-        grid->addMultiCellWidget(export_box, 5, 5, 0, 1);
+        grid->addWidget(export_box, 5, 0, 1, 2);
     }
 
     QStringList list1 = Repositories::readCvsPassFile();
@@ -455,7 +455,7 @@ void CheckoutDialog::restoreUserInput()
     else
     {
         module_combo->setEditText(CervisiaSettings::module());
-        branchCombo->setCurrentText(cs.readEntry("Branch"));
+        branchCombo->setEditText(cs.readEntry("Branch"));
         alias_edit->setText(cs.readEntry("Alias"));
         export_box->setChecked(cs.readEntry("ExportOnly", false));
         recursive_box->setChecked(true);

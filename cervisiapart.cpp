@@ -145,9 +145,11 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
 
         update = new UpdateView(*config(), splitter);
         update->setFocusPolicy( Qt::StrongFocus );
+        update->setContextMenuPolicy(Qt::CustomContextMenu);
         update->setFocus();
-        connect( update, SIGNAL(contextMenu(K3ListView*,Q3ListViewItem*,QPoint)),
-                 this, SLOT(popupRequested(K3ListView*,Q3ListViewItem*,QPoint)) );
+        connect( update, SIGNAL(customContextMenuRequested(const QPoint &)),
+                 this, SLOT(popupRequested(const QPoint &)) );
+
         connect( update, SIGNAL(fileOpened(QString)),
                  this, SLOT(openFile(QString)) );
         protocol = new ProtocolView(m_cvsServiceInterfaceName, splitter);
@@ -156,15 +158,17 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
         setWidget(splitter);
     }
     else
+    {
         setWidget(new QLabel(i18n("This KPart is non-functional, because the "
                                   "cvs D-Bus service could not be started."),
                              parentWidget));
+    }
 
     if( cvsService )
     {
         setupActions();
         readSettings();
-        connect( update, SIGNAL(selectionChanged()), this, SLOT(updateActions()) );
+        connect(update, SIGNAL(itemSelectionChanged()), this, SLOT(updateActions()));
     }
 
     setXMLFile( "cervisiaui.rc" );
@@ -643,9 +647,10 @@ void CervisiaPart::setupActions()
 }
 
 
-void CervisiaPart::popupRequested(K3ListView*, Q3ListViewItem* item, const QPoint& p)
+void CervisiaPart::popupRequested(const QPoint& p)
 {
     QString xmlName = "context_popup";
+    QTreeWidgetItem *item = update->itemAt(p);
 
     // context menu for non-cvs files
     if( isFileItem(item) )
@@ -660,23 +665,13 @@ void CervisiaPart::popupRequested(K3ListView*, Q3ListViewItem* item, const QPoin
     {
         xmlName = "folder_context_popup";
         KToggleAction* action = static_cast<KToggleAction*>(actionCollection()->action("unfold_folder"));
-        action->setChecked(item->isOpen());
+        action->setChecked(item->isExpanded());
     }
 
     if( QMenu* popup = static_cast<QMenu*>(hostContainer(xmlName)) )
     {
         if( isFileItem(item) )
         {
-            // remove old 'Edit with...' menu
-            if( m_editWithAction && popup->actions().contains(m_editWithAction) )
-            {
-                popup->removeAction(m_editWithAction);
-                delete m_currentEditMenu;
-
-                m_editWithAction  = 0;
-                m_currentEditMenu = 0;
-            }
-
             // get name of selected file
             QString selectedFile;
             update->getSingleSelection(&selectedFile);
@@ -714,7 +709,17 @@ void CervisiaPart::popupRequested(K3ListView*, Q3ListViewItem* item, const QPoin
 		                                      m_currentIgnoreMenu->menu());
         }
 
-        popup->exec(p);
+        popup->exec(update->viewport()->mapToGlobal(p));
+
+        // remove old 'Edit with...' menu
+        if( m_editWithAction && popup->actions().contains(m_editWithAction) )
+        {
+            popup->removeAction(m_editWithAction);
+            delete m_currentEditMenu;
+
+            m_editWithAction  = 0;
+            m_currentEditMenu = 0;
+        }
     }
     else
         kDebug(8050) << "can't get XML definition for" << xmlName << ", factory()=" << factory();
@@ -1845,7 +1850,7 @@ bool CervisiaPart::openSandbox(const KUrl& url)
                                                        false);
     if (dostatus)
     {
-        update->setSelected(update->firstChild(), true);
+        update->topLevelItem(0)->setSelected(true);
         slotStatus();
     }
 

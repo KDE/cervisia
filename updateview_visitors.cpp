@@ -34,9 +34,9 @@ ApplyFilterVisitor::ApplyFilterVisitor(UpdateView::Filter filter)
 
 void ApplyFilterVisitor::preVisit(UpdateDirItem* item)
 {
-    // as QListViewItem::setVisible() is recursive we have to make
+    // as QTreeWidgetItem::setHidden() is recursive we have to make
     // this UpdateDirItem visible first and later we can make it invisible
-    item->setVisible(true);
+    item->setHidden(false);
 
     // assume that this item is invisible and correct it later
     // (see markAllParentsAsVisible())
@@ -56,7 +56,7 @@ void ApplyFilterVisitor::postVisit(UpdateDirItem* item)
                        || !(m_filter & UpdateView::NoEmptyDirectories)
                        || !item->parent());
 
-    // only set invisible as QListViewItem::setVisible() is recursive
+    // only set invisible as QTreeWidgetItem::setHidden() is recursive
     // and so maybe overrides the state applied by the filter
     if (visible)
     {
@@ -64,7 +64,7 @@ void ApplyFilterVisitor::postVisit(UpdateDirItem* item)
     }
     else
     {
-        item->setVisible(false);
+        item->setHidden(true);
     }
 }
 

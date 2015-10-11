@@ -177,7 +177,7 @@ void CommitDialog::setLogMessage(const QString &msg)
 
 QString CommitDialog::logMessage() const
 {
-    return edit->text();
+    return edit->toPlainText();
 }
 
 
@@ -216,7 +216,7 @@ void CommitDialog::comboActivated(int index)
     else
     {
         if (current_index == 0) // Store current text
-            current_text = edit->text();
+            current_text = edit->toPlainText();
 
         // Show archived text
         edit->setText(commits[index-1]);
@@ -319,7 +319,7 @@ void CommitDialog::addTemplateText()
 
 void CommitDialog::removeTemplateText()
 {
-    edit->setText(edit->text().remove(m_templateText));
+    edit->setText(edit->toPlainText().remove(m_templateText));
 }
 
 

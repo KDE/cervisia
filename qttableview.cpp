@@ -141,7 +141,7 @@ QCornerSquare::QCornerSquare( QWidget *parent )
 */
 
 QtTableView::QtTableView( QWidget *parent, const char *name, Qt::WFlags f )
-    : QFrame( parent, name, f )
+    : QFrame( parent, f )
 {
     nRows		 = nCols      = 0;	// zero rows/cols
     xCellOffs		 = yCellOffs  = 0;	// zero offset
@@ -161,6 +161,7 @@ QtTableView::QtTableView( QWidget *parent, const char *name, Qt::WFlags f )
     inSbUpdate		 = false;
 
     setAttribute(Qt::WA_NoBackground, true);
+    setObjectName(name);
 }
 
 /*!
@@ -210,7 +211,7 @@ void QtTableView::repaint( int x, int y, int w, int h, bool erase )
     QRect r( x, y, w, h );
     if ( r.isEmpty() )
 	return; // nothing to do
-    if ( erase && backgroundMode() != Qt::NoBackground )
+    if ( erase && testAttribute(Qt::WA_OpaquePaintEvent))
 	eraseInPaint = true;			// erase when painting
     QWidget::repaint( r );
     eraseInPaint = false;
@@ -1303,7 +1304,7 @@ void QtTableView::paintEvent( QPaintEvent *e )
 	    cellUR = cellR.intersect( updateR );
 	    if ( cellUR.isValid() ) {
 		cellUpdateR = cellUR;
-		cellUpdateR.moveBy( -xPos, -yPos ); // cell coordinates
+		cellUpdateR.translate( -xPos, -yPos ); // cell coordinates
 		if ( eraseInPaint )
 		    paint.eraseRect( cellUR );
 
@@ -1980,9 +1981,11 @@ void QtTableView::updateScrollBars( uint f )
 
 	if ( sbDirty & horSteps ) {
 	    if ( cellW )
-		hScrollBar->setSteps( qMin((int)cellW,viewWidth()/2), viewWidth() );
+		hScrollBar->setSingleStep( qMin((int)cellW,viewWidth()/2) );
 	    else
-		hScrollBar->setSteps( 16, viewWidth() );
+		hScrollBar->setSingleStep( 16 );
+
+	    hScrollBar->setPageStep( viewWidth() );
 	}
 
 	if ( sbDirty & horRange )
@@ -2004,9 +2007,11 @@ void QtTableView::updateScrollBars( uint f )
 
 	if ( sbDirty & verSteps ) {
 	    if ( cellH )
-		vScrollBar->setSteps( qMin((int)cellH,viewHeight()/2), viewHeight() );
+		vScrollBar->setSingleStep( qMin((int)cellH,viewHeight()/2) );
 	    else
-		vScrollBar->setSteps( 16, viewHeight() );  // fttb! ###
+		vScrollBar->setSingleStep( 16 );  // fttb! ###
+	    
+	    vScrollBar->setPageStep( viewHeight() );
 	}
 
 	if ( sbDirty & verRange )

@@ -72,7 +72,7 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
     pairlayout->setRowStretch(0, 0);
     pairlayout->setRowStretch(1, 1);
     pairlayout->setColumnStretch(1, 0);
-    pairlayout->addColSpacing(1, 16);
+    pairlayout->addItem(new QSpacerItem(16, 0), 0, 1);
     pairlayout->setColumnStretch(0, 10);
     pairlayout->setColumnStretch(2, 10);
 

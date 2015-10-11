@@ -31,20 +31,16 @@
 #include "checkoutdialog.h"
 #include "watchdialog.h"
 #include "tagdialog.h"
-//Added by qt3to4:
-#include <QLabel>
 
 namespace Cervisia { 
 class AddIgnoreMenu;
 class EditWithMenu; 
 }
 class QLabel;
-class Q3ListViewItem;
 class QSplitter;
 class UpdateView;
 class ProtocolView;
 class KAboutData;
-class K3ListView;
 class KRecentFilesAction;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 class CervisiaBrowserExtension;
@@ -77,7 +73,7 @@ public slots:
 
     void openFile(QString filename);
     void openFiles(const QStringList &filenames);
-    void popupRequested(K3ListView*, Q3ListViewItem*, const QPoint&);
+    void popupRequested(const QPoint&);
     void updateActions();
 
     void slotOpen();

@@ -23,6 +23,7 @@
 #include <set>
 
 #include <qapplication.h>
+#include <QHeaderView>
 #include <qfileinfo.h>
 #include <qstack.h>
 #include <klocale.h>
@@ -37,39 +38,45 @@ using Cervisia::Entry;
 using Cervisia::EntryStatus;
 
 
-UpdateView::UpdateView(KConfig& partConfig, QWidget *parent, const char *name)
-    : K3ListView(parent),
+UpdateView::UpdateView(KConfig& partConfig, QWidget *parent)
+    : QTreeWidget(parent),
       m_partConfig(partConfig),
       m_unfoldingTree(false)
 {
-	setObjectName(name);
     setAllColumnsShowFocus(true);
-    setShowSortIndicator(true);
-    setSelectionModeExt(Extended);
+    setUniformRowHeights(true);
+    setRootIsDecorated(false);
+    header()->setSortIndicatorShown(true);
+    setSortingEnabled(true);
+    setSelectionMode(QAbstractItemView::ExtendedSelection);
 
-    addColumn(i18n("File Name"), 280);
-    addColumn(i18n("Status"), 90);
-    addColumn(i18n("Revision"), 70);
-    addColumn(i18n("Tag/Date"), 90);
-    addColumn(i18n("Timestamp"), 120);
+    setHeaderLabels(QStringList() << i18n("File Name") << i18n("Status") << i18n("Revision")
+                                  << i18n("Tag/Date") << i18n("Timestamp"));
+
+    header()->resizeSection(0, 280);
+    header()->resizeSection(1, 90);
+    header()->resizeSection(2, 70);
+    header()->resizeSection(3, 90);
+    header()->resizeSection(4, 120);
 
     setFilter(NoFilter);
 
-    connect( this, SIGNAL(doubleClicked(Q3ListViewItem*)),
-             this, SLOT(itemExecuted(Q3ListViewItem*)) );
-    connect( this, SIGNAL(returnPressed(Q3ListViewItem*)),
-             this, SLOT(itemExecuted(Q3ListViewItem*)) );
+    connect( this, SIGNAL(itemActivated(QTreeWidgetItem *, int)),
+             this, SLOT(itemExecuted(QTreeWidgetItem *, int)) );
 
-    // without this restoreLayout() can't change the column widths
-    for (int col = 0; col < columns(); ++col)
-        setColumnWidthMode(col, Q3ListView::Manual);
-    restoreLayout(&m_partConfig, QLatin1String("UpdateView"));
+    connect( this, SIGNAL(itemExpanded(QTreeWidgetItem *)),
+             this, SLOT(itemExpandedSlot(QTreeWidgetItem *)) );
+
+    KConfigGroup cg(&m_partConfig, "UpdateView");
+    QByteArray state = cg.readEntry<QByteArray>("Columns", QByteArray());
+    header()->restoreState(state);
 }
 
 
 UpdateView::~UpdateView()
 {
-    saveLayout(&m_partConfig, QLatin1String("UpdateView"));
+    KConfigGroup cg(&m_partConfig, "UpdateView");
+    cg.writeEntry("Columns", header()->saveState());
 }
 
 
@@ -77,13 +84,11 @@ void UpdateView::setFilter(Filter filter)
 {
     filt = filter;
 
-    if (UpdateDirItem* item = static_cast<UpdateDirItem*>(firstChild()))
+    if (UpdateDirItem* item = static_cast<UpdateDirItem*>(topLevelItem(0)))
     {
         ApplyFilterVisitor applyFilterVisitor(filter);
         item->accept(applyFilterVisitor);
     }
-
-    setSorting(columnSorted(), ascendingSort());
 }
 
 
@@ -96,7 +101,7 @@ UpdateView::Filter UpdateView::filter() const
 // returns true iff exactly one UpdateFileItem is selected
 bool UpdateView::hasSingleSelection() const
 {
-    const QList<Q3ListViewItem*>& listSelectedItems(selectedItems());
+    const QList<QTreeWidgetItem *>& listSelectedItems(selectedItems());
 
     return (listSelectedItems.count() == 1) && isFileItem(listSelectedItems.first());
 }
@@ -104,7 +109,7 @@ bool UpdateView::hasSingleSelection() const
 
 void UpdateView::getSingleSelection(QString *filename, QString *revision) const
 {
-    const QList<Q3ListViewItem*>& listSelectedItems(selectedItems());
+    const QList<QTreeWidgetItem *>& listSelectedItems(selectedItems());
 
     QString tmpFileName;
     QString tmpRevision;
@@ -125,10 +130,10 @@ QStringList UpdateView::multipleSelection() const
 {
     QStringList res;
 
-    const QList<Q3ListViewItem*>& listSelectedItems(selectedItems());
-    foreach (Q3ListViewItem* item, listSelectedItems)
+    const QList<QTreeWidgetItem *>& listSelectedItems(selectedItems());
+    foreach (QTreeWidgetItem *item, listSelectedItems)
     {
-        if (item->isVisible())
+        if (!item->isHidden())
             res.append(static_cast<UpdateItem*>(item)->filePath());
     }
 
@@ -140,10 +145,10 @@ QStringList UpdateView::fileSelection() const
 {
     QStringList res;
 
-    const QList<Q3ListViewItem*>& listSelectedItems(selectedItems());
-    foreach (Q3ListViewItem* item, listSelectedItems)
+    const QList<QTreeWidgetItem *>& listSelectedItems(selectedItems());
+    foreach (QTreeWidgetItem *item, listSelectedItems)
     {
-        if (isFileItem(item) && item->isVisible())
+        if (isFileItem(item) && !item->isHidden())
             res.append(static_cast<UpdateFileItem*>(item)->filePath());
     }
 
@@ -182,8 +187,8 @@ bool UpdateView::isUnfoldingTree() const
 
 
 // updates internal data
-void UpdateView::replaceItem(Q3ListViewItem* oldItem,
-                             Q3ListViewItem* newItem)
+void UpdateView::replaceItem(QTreeWidgetItem *oldItem,
+                             QTreeWidgetItem *newItem)
 {
     const int index(relevantSelection.indexOf(oldItem));
     if (index >= 0)
@@ -209,10 +214,10 @@ void UpdateView::unfoldSelectedFolders()
     const bool _updatesEnabled = updatesEnabled();
     setUpdatesEnabled(false);
 
-    Q3ListViewItemIterator it(this);
-    while( Q3ListViewItem* item = it.current() )
+    QTreeWidgetItemIterator it(this);
+    while ( QTreeWidgetItem *item = (*it) )
     {
-        if( isDirItem(item) )
+        if ( isDirItem(item) )
         {
             UpdateDirItem* dirItem = static_cast<UpdateDirItem*>(item);
 
@@ -237,7 +242,7 @@ void UpdateView::unfoldSelectedFolders()
             else if( selectedItem == dirItem->entry().m_name )
             {
                 previousDepth = dirItem->depth();
-                isUnfolded = dirItem->isOpen();
+                isUnfolded = dirItem->isExpanded();
 
                 // if this dir wasn't scanned already scan it recursive
                 // (this is only a hack to reduce the processEvents() calls,
@@ -267,7 +272,7 @@ void UpdateView::unfoldSelectedFolders()
     setFilter(filter());
 
     setUpdatesEnabled(_updatesEnabled);
-    triggerUpdate();
+    viewport()->update();
 
     QApplication::restoreOverrideCursor();
 }
@@ -283,8 +288,8 @@ void UpdateView::unfoldTree()
 
     setUpdatesEnabled(false);
 
-    Q3ListViewItemIterator it(this);
-    while (Q3ListViewItem* item = it.current())
+    QTreeWidgetItemIterator it(this);
+    while (QTreeWidgetItem *item = (*it) )
     {
         if (isDirItem(item))
         {
@@ -313,7 +318,7 @@ void UpdateView::unfoldTree()
 
     setUpdatesEnabled(_updatesEnabled);
 
-    triggerUpdate();
+    viewport()->update();
 
     m_unfoldingTree = false;
 
@@ -323,12 +328,12 @@ void UpdateView::unfoldTree()
 
 void UpdateView::foldTree()
 {
-    Q3ListViewItemIterator it(this);
-    while (Q3ListViewItem* item = it.current())
+    QTreeWidgetItemIterator it(this);
+    while (QTreeWidgetItem* item = (*it) )
     {
         // don't close the top level directory
         if (isDirItem(item) && item->parent())
-            item->setOpen(false);
+            item->setExpanded(false);
 
         ++it;
     }
@@ -351,9 +356,9 @@ void UpdateView::openDirectory(const QString& dirName)
     entry.m_type = Entry::Dir;
 
     UpdateDirItem *item = new UpdateDirItem(this, entry);
-    item->setOpen(true);
+    item->setExpanded(true);
     setCurrentItem(item);
-    setSelected(item, true);
+    item->setSelected(true);
 }
 
 
@@ -370,7 +375,7 @@ void UpdateView::prepareJob(bool recursive, Action action)
 
     // Scan recursively all entries - there's no way around this here
     if (recursive)
-        static_cast<UpdateDirItem*>(firstChild())->maybeScanDir(true);
+        static_cast<UpdateDirItem*>(topLevelItem(0))->maybeScanDir(true);
 
     rememberSelection(recursive);
     if (act != Add)
@@ -405,22 +410,26 @@ void UpdateView::finishJob(bool normalExit, int exitStatus)
  */
 void UpdateView::markUpdated(bool laststage, bool success)
 {
-    foreach (Q3ListViewItem* it, relevantSelection)
+    foreach (QTreeWidgetItem* it, relevantSelection)
+    {
         if (isDirItem(it))
+        {
+            for (int i = 0; i < it->childCount(); i++)
             {
-                for (Q3ListViewItem *item = it->firstChild(); item;
-                     item = item->nextSibling() )
-                    if (isFileItem(item))
-                        {
-                            UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(item);
-                            fileItem->markUpdated(laststage, success);
-                        }
+                QTreeWidgetItem *item = it->child(i);
+                if (isFileItem(item))
+                    {
+                        UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(item);
+                        fileItem->markUpdated(laststage, success);
+                    }
             }
+        }
         else
-            {
-                UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(it);
-                fileItem->markUpdated(laststage, success);
-            }
+        {
+            UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(it);
+            fileItem->markUpdated(laststage, success);
+        }
+    }
 }
 
 
@@ -429,10 +438,10 @@ void UpdateView::markUpdated(bool laststage, bool success)
  */
 void UpdateView::rememberSelection(bool recursive)
 {
-    std::set<Q3ListViewItem*> setItems;
-    for (Q3ListViewItemIterator it(this); it.current(); ++it)
+    std::set<QTreeWidgetItem*> setItems;
+    for (QTreeWidgetItemIterator it(this); *it; ++it)
     {
-        Q3ListViewItem* item(it.current());
+        QTreeWidgetItem* item(*it);
 
         // if this item is selected and if it was not inserted already
         // and if we work recursive and if it is a dir item then insert
@@ -443,34 +452,38 @@ void UpdateView::rememberSelection(bool recursive)
             && recursive
             && isDirItem(item))
         {
-            QStack<Q3ListViewItem*> s;
-            for (Q3ListViewItem* childItem = item->firstChild(); childItem;
-                 childItem = childItem->nextSibling()
-                     ? childItem->nextSibling()
-                     : (s.isEmpty() ? 0 : s.pop()))
+            QStack<QTreeWidgetItem *> s;
+            int childNum = 0;
+            QTreeWidgetItem *childItem = item->child(childNum);
+            while ( childItem )
             {
                 // if this item is a dir item and if it is was not
                 // inserted already then insert all sub dirs
                 // DON'T CHANGE TESTING ORDER
                 if (isDirItem(childItem) && setItems.insert(childItem).second)
                 {
-                    if (Q3ListViewItem* childChildItem = childItem->firstChild())
+                    if (QTreeWidgetItem *childChildItem = childItem->child(0))
                         s.push(childChildItem);
                 }
+
+                if ( ++childNum < childItem->childCount() )
+                    childItem = childItem->child(childNum);
+                else
+                    childItem = (s.isEmpty() ? 0 : s.pop());
             }
         }
     }
 
     // Copy the set to the list
     relevantSelection.clear();
-    std::set<Q3ListViewItem*>::const_iterator const itItemEnd = setItems.end();
-    for (std::set<Q3ListViewItem*>::const_iterator itItem = setItems.begin();
+    std::set<QTreeWidgetItem *>::const_iterator const itItemEnd = setItems.end();
+    for (std::set<QTreeWidgetItem *>::const_iterator itItem = setItems.begin();
          itItem != itItemEnd; ++itItem)
         relevantSelection.append(*itItem);
 
 #if 0
     DEBUGOUT("Relevant:");
-    foreach (Q3ListViewItem* item, relevantSelection)
+    foreach (QTreeWidgetItem * item, relevantSelection)
         DEBUGOUT("  " << item->text(UpdateFileItem::File));
     DEBUGOUT("End");
 #endif
@@ -486,12 +499,12 @@ void UpdateView::syncSelection()
     // compute all directories which are selected or contain a selected file
     // (in recursive mode this includes all sub directories)
     std::set<UpdateDirItem*> setDirItems;
-    foreach (Q3ListViewItem* item, relevantSelection)
+    foreach (QTreeWidgetItem* item, relevantSelection)
     {
-        UpdateDirItem* dirItem(0);
+        UpdateDirItem *dirItem(0);
         if (isDirItem(item))
             dirItem = static_cast<UpdateDirItem*>(item);
-        else if (Q3ListViewItem* parentItem = item->parent())
+        else if (QTreeWidgetItem *parentItem = item->parent())
             dirItem = static_cast<UpdateDirItem*>(parentItem);
 
         if (dirItem)
@@ -592,21 +605,23 @@ void UpdateView::updateItem(const QString& filePath, EntryStatus status, bool is
 
     const QFileInfo fileInfo(filePath);
 
-    UpdateDirItem* rootItem = static_cast<UpdateDirItem*>(firstChild());
+    UpdateDirItem* rootItem = static_cast<UpdateDirItem*>(topLevelItem(0));
     UpdateDirItem* dirItem = findOrCreateDirItem(fileInfo.path(), rootItem);
 
     dirItem->updateChildItem(fileInfo.fileName(), status, isdir);
 }
 
 
-void UpdateView::itemExecuted(Q3ListViewItem *item)
+void UpdateView::itemExecuted(QTreeWidgetItem *item, int)
 {
     if (isFileItem(item))
         emit fileOpened(static_cast<UpdateFileItem*>(item)->filePath());
 }
 
-
-#include "updateview.moc"
+void UpdateView::itemExpandedSlot(QTreeWidgetItem *item)
+{
+    static_cast<UpdateItem *>(item)->setOpen(true);
+}
 
 
 // Local Variables:
