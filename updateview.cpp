@@ -418,10 +418,10 @@ void UpdateView::markUpdated(bool laststage, bool success)
             {
                 QTreeWidgetItem *item = it->child(i);
                 if (isFileItem(item))
-                    {
-                        UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(item);
-                        fileItem->markUpdated(laststage, success);
-                    }
+                {
+                    UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(item);
+                    fileItem->markUpdated(laststage, success);
+                }
             }
         }
         else
@@ -482,10 +482,10 @@ void UpdateView::rememberSelection(bool recursive)
         relevantSelection.append(*itItem);
 
 #if 0
-    DEBUGOUT("Relevant:");
+    qDebug() << "Relevant:";
     foreach (QTreeWidgetItem * item, relevantSelection)
-        DEBUGOUT("  " << item->text(UpdateFileItem::File));
-    DEBUGOUT("End");
+        qDebug() << "  " << item->text(0);
+    qDebug() << "End";
 #endif
 }
 
