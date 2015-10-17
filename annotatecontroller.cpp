@@ -166,7 +166,11 @@ void AnnotateController::Private::parseCvsAnnotateOutput()
 
     while( progress->getLine(line) )
     {
-        QString dateString = line.mid(23, 9);
+        int startIdxC2 = line.indexOf(QLatin1Char('('));  // column 2 "(author date):"
+
+        QString authorDate = line.mid(startIdxC2 + 1, line.indexOf(QLatin1Char(')'), startIdxC2 + 1) - startIdxC2);
+
+        QString dateString = authorDate.mid(authorDate.lastIndexOf(QLatin1Char(' '))).trimmed();
         if( !dateString.isEmpty() )
         {
             QDate date(QLocale::c().toDate(dateString, QLatin1String("dd-MMM-yy")));
@@ -175,16 +179,19 @@ void AnnotateController::Private::parseCvsAnnotateOutput()
             logInfo.m_dateTime = QDateTime(date, QTime(), Qt::UTC);
         }
 
-        rev               = line.left(13).trimmed();
-        logInfo.m_author  = line.mid(14, 8).trimmed();
-        content           = line.mid(35, line.length()-35);
+        rev               = line.left(startIdxC2).trimmed();
+        logInfo.m_author  = authorDate.left(authorDate.indexOf(QLatin1Char(' '))).trimmed();
+        content           = line.mid(line.indexOf(QLatin1String("): "), startIdxC2 + 1) + 3);
 
         logInfo.m_comment = comments[rev];
 
         if( rev == oldRevision )
         {
-            logInfo.m_author.clear();
-            rev.clear();
+            // don't remove revision/author info on following lines, since the user can not easily get
+            // the revision nor show the check-in comment tooltip when the first line of a large
+            // block with the same revision is already scrolled out of the viewport
+            //logInfo.m_author.clear();
+            //rev.clear();
         }
         else
         {
