@@ -1174,8 +1174,8 @@ void CervisiaPart::slotBrowseLog()
 
 void CervisiaPart::slotAnnotate()
 {
-    QString filename;
-    update->getSingleSelection(&filename);
+    QString filename, revision;
+    update->getSingleSelection(&filename, &revision);
 
     if (filename.isEmpty())
         return;
@@ -1183,7 +1183,7 @@ void CervisiaPart::slotAnnotate()
     // Non-modal dialog
     AnnotateDialog* dlg = new AnnotateDialog(*config());
     AnnotateController ctl(dlg, cvsService);
-    ctl.showDialog(filename);
+    ctl.showDialog(filename, revision);
 }
 
 
