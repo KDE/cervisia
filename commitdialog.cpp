@@ -323,9 +323,6 @@ void CommitDialog::removeTemplateText()
 }
 
 
-#include "commitdialog.moc"
-
-
 // Local Variables:
 // c-basic-offset: 4
 // End:
