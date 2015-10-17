@@ -146,6 +146,7 @@ void UpdateDirItem::updateEntriesItem(const Entry& entry,
             UpdateFileItem* fileItem = static_cast<UpdateFileItem*>(item);
             if (fileItem->entry().m_status == Cervisia::NotInCVS ||
                 fileItem->entry().m_status == Cervisia::LocallyRemoved ||
+                fileItem->entry().m_status == Cervisia::Unknown ||
                 entry.m_status == Cervisia::LocallyAdded ||
                 entry.m_status == Cervisia::LocallyRemoved ||
                 entry.m_status == Cervisia::Conflict)
