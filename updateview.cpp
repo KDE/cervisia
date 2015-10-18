@@ -390,7 +390,9 @@ void UpdateView::prepareJob(bool recursive, Action action)
 void UpdateView::finishJob(bool normalExit, int exitStatus)
 {
     // cvs exitStatus == 1 only means that there're conflicts
-    const bool success(normalExit && (exitStatus == 0 || exitStatus == 1));
+    // ... which is not correct (e.g. server not reachable also returns 1)
+    const bool success(normalExit && (exitStatus == 0));
+
     if (act != Add)
         markUpdated(true, success);
     syncSelection();
