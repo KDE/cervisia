@@ -33,6 +33,10 @@
 #include <kmessagebox.h>
 #include <kdebug.h>
 #include <kconfiggroup.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 #include "addrepositorydialog.h"
 #include "cvsserviceinterface.h"
@@ -161,25 +165,37 @@ void RepositoryListItem::changeLoginStatusColumn()
 
 RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService,
                                    const QString& cvsServiceInterfaceName, QWidget* parent)
-    : KDialog(parent)
+    : QDialog(parent)
     , m_partConfig(cfg)
     , m_cvsService(cvsService)
     , m_cvsServiceInterfaceName(cvsServiceInterfaceName)
 {
-    setCaption(i18n("Configure Access to Repositories"));
+    setWindowTitle(i18n("Configure Access to Repositories"));
     setModal(true);
-    setButtons(Ok | Cancel | Help);
-    setDefaultButton(Ok);
-    showButtonSeparator(true);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
+    mainLayout->addWidget(buttonBox);
+    okButton->setDefault(true);
 
     QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
+    mainLayout->addWidget(mainWidget);
 
     QBoxLayout* hbox = new QHBoxLayout(mainWidget);
+    mainLayout->addWidget(hbox);
     hbox->setSpacing(spacingHint());
     hbox->setMargin(0);
 
     m_repoList = new QTreeWidget(mainWidget);
+    mainLayout->addWidget(m_repoList);
     hbox->addWidget(m_repoList, 10);
     m_repoList->setMinimumWidth(fontMetrics().width('0') * 60);
     m_repoList->setAllColumnsShowFocus(true);
@@ -245,7 +261,7 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserv
     QByteArray state = cg.readEntry<QByteArray>("RepositoryListView", QByteArray());
     m_repoList->header()->restoreState(state);
 
-    connect(this,SIGNAL(okClicked()),this,SLOT(slotOk()));
+    connect(okButton,SIGNAL(clicked()),this,SLOT(slotOk()));
 }
 
 
@@ -327,7 +343,7 @@ void RepositoryDialog::slotOk()
     // write to disk so other services can reparse the configuration
     m_serviceConfig->sync();
 
-    KDialog::accept();
+    QDialog::accept();
 }
 
 
@@ -514,6 +530,5 @@ void RepositoryDialog::writeRepositoryData(RepositoryListItem* item)
     repoGroup.writeEntry("RetrieveCvsignore", item->retrieveCvsignore());
 }
 
-#include "repositorydialog.moc"
 
 // kate: space-indent on; indent-width 4; replace-tabs on;

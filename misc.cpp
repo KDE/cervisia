@@ -32,7 +32,7 @@
 #include <kemailsettings.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <ktemporaryfile.h>
+#include <QTemporaryFile>
 #include <kuser.h>
 #include <kdebug.h>
 
@@ -273,8 +273,9 @@ QString tempFileName(const QString& suffix)
     if (!tempFiles)
         tempFiles = new QStringList;
 
-    KTemporaryFile f;
-    f.setSuffix(suffix);
+    QTemporaryFile f;
+//code was     f.setSuffix(suffix);
+//Add to constructor and adapt if necessary: QDir::tempPath() + QLatin1String("/myapp_XXXXXX") + QLatin1String(suffix) 
     f.setAutoRemove(false);
     f.open();
     tempFiles->append(f.fileName());

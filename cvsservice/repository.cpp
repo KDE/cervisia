@@ -268,4 +268,3 @@ void Repository::Private::readConfig()
 }
 
 
-#include "repository.moc"

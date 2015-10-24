@@ -19,16 +19,16 @@
 #ifndef PATCHOPTIONDIALOG_H
 #define PATCHOPTIONDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 class QCheckBox;
 class QButtonGroup;
-class KIntNumInput;
+class QSpinBox;
 
 namespace Cervisia
 {
 
-class PatchOptionDialog : public KDialog
+class PatchOptionDialog : public QDialog
 {
     Q_OBJECT
     
@@ -43,12 +43,12 @@ private slots:
     void formatChanged(int buttonId);
        
 private:
-    QButtonGroup*  m_formatBtnGroup;
-    KIntNumInput*  m_contextLines;
-    QCheckBox*     m_blankLineChk;
-    QCheckBox*     m_allSpaceChk;
-    QCheckBox*     m_spaceChangeChk;
-    QCheckBox*     m_caseChangesChk;
+    QButtonGroup* m_formatBtnGroup;
+    QSpinBox*     m_contextLines;
+    QCheckBox*    m_blankLineChk;
+    QCheckBox*    m_allSpaceChk;
+    QCheckBox*    m_spaceChangeChk;
+    QCheckBox*    m_caseChangesChk;
 };
 
 }

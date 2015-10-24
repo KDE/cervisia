@@ -21,12 +21,12 @@
 #ifndef CHANGELOGDIALOG_H
 #define CHANGELOGDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 class KTextEdit;
 class KConfig;
 
-class ChangeLogDialog : public KDialog
+class ChangeLogDialog : public QDialog
 {
     Q_OBJECT
 public:

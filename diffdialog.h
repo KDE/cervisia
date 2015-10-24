@@ -23,7 +23,7 @@
 
 #include <QList>
 
-#include <kdialog.h>
+#include <QDialog>
 
 
 class QLabel;
@@ -34,7 +34,7 @@ class DiffItem;
 class DiffView;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 
-class DiffDialog : public KDialog
+class DiffDialog : public QDialog
 {
     Q_OBJECT
 

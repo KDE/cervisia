@@ -973,4 +973,3 @@ bool CvsService::Private::hasRunningJob()
 }
 
 
-#include "cvsservice.moc"

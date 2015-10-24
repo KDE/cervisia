@@ -188,4 +188,3 @@ void LogPlainView::setSource(const QUrl& url)
     }
 }
 
-#include "logplainview.moc"

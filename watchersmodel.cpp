@@ -153,4 +153,3 @@ bool WatchersSortModel::lessThan(const QModelIndex& left, const QModelIndex& rig
 }
 
 
-#include "watchersmodel.moc"

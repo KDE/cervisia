@@ -20,7 +20,6 @@
 
 
 #include "changelogdialog.h"
-#include "changelogdialog.moc"
 
 #include <QDate>
 #include <qfile.h>
@@ -31,6 +30,10 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <ktextedit.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 #include "cervisiasettings.h"
 #include "misc.h"
@@ -46,14 +49,24 @@ ChangeLogDialog::Options *ChangeLogDialog::options = 0;
 
 
 ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent)
-    : KDialog(parent)
+    : QDialog(parent)
     , partConfig(cfg)
 {
-    setCaption(i18n("Edit ChangeLog"));
+    setWindowTitle(i18n("Edit ChangeLog"));
     setModal(true);
-    setButtons(Ok | Cancel);
-    setDefaultButton(Ok);
-    showButtonSeparator(true);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
+    mainLayout->addWidget(buttonBox);
+    okButton->setDefault(true);
 
     edit = new KTextEdit(this);
     edit->setAcceptRichText(false);
@@ -64,11 +77,11 @@ ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent)
     edit->setMinimumSize(fm.width('0') * 80,
                          fm.lineSpacing() * 20);
 
-    setMainWidget(edit);
+    mainLayout->addWidget(edit);
 
     KConfigGroup cg(&partConfig, "ChangeLogDialog");
     restoreDialogSize(cg);
-    connect(this,SIGNAL(okClicked()),this,SLOT(slotOk()));
+    connect(okButton,SIGNAL(clicked()),this,SLOT(slotOk()));
 }
 
 
@@ -95,7 +108,7 @@ void ChangeLogDialog::slotOk()
     stream << edit->toPlainText();
     f.close();
 
-    KDialog::accept();
+    QDialog::accept();
 }
 
 

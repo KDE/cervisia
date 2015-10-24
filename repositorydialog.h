@@ -21,7 +21,7 @@
 #ifndef REPOSITORYDIALOG_H
 #define REPOSITORYDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 class QTreeWidget;
 class QTreeWidgetItem;
@@ -30,7 +30,7 @@ class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 class RepositoryListItem;
 class KConfig;
 
-class RepositoryDialog : public KDialog
+class RepositoryDialog : public QDialog
 {
     Q_OBJECT
 

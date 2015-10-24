@@ -20,17 +20,17 @@
 #ifndef TAGDIALOG_H
 #define TAGDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 class QCheckBox;
 class KComboBox;
-class KLineEdit;
+class QLineEdit;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 
 namespace Cervisia
 {
 
-class TagDialog : public KDialog
+class TagDialog : public QDialog
 {
     Q_OBJECT
 
@@ -56,7 +56,7 @@ private:
     
     QCheckBox *branchtag_button;
     QCheckBox *forcetag_button;
-    KLineEdit *tag_edit;
+    QLineEdit *tag_edit;
     KComboBox *tag_combo;
 };
 

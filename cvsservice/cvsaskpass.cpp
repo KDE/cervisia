@@ -18,7 +18,8 @@
  *
  */
 
-#include <qregexp.h>
+#include <QRegExp>
+
 #include <kaboutdata.h>
 #include <kapplication.h>
 #include <kcmdlineargs.h>

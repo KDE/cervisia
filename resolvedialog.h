@@ -21,7 +21,7 @@
 #ifndef RESOLVEDIALOG_H
 #define RESOLVEDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 #include <QList>
 #include "diffview.h"
@@ -31,7 +31,7 @@ class QTextCodec;
 class KConfig;
 class ResolveItem;
 
-class ResolveDialog : public KDialog
+class ResolveDialog : public QDialog
 {
     Q_OBJECT
 

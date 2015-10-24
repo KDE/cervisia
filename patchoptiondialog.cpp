@@ -29,24 +29,33 @@ using Cervisia::PatchOptionDialog;
 #include <QHBoxLayout>
 #include <QBoxLayout>
 #include <QButtonGroup>
-
-#include <knuminput.h>
+#include <QSpinBox>
 #include <klocale.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
 
 
 PatchOptionDialog::PatchOptionDialog(QWidget* parent)
-    : KDialog(parent)
+    : QDialog(parent)
 {
-    setButtons(Ok | Cancel | Help);
-    setDefaultButton(Ok);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    okButton->setDefault(true);
     setModal(false);
-    showButtonSeparator(true);
 
     QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
+    mainLayout->addWidget(mainWidget);
 
     QBoxLayout* topLayout = new QVBoxLayout(mainWidget);
-    topLayout->setSpacing(spacingHint());
+    mainLayout->addLayout(topLayout);
     topLayout->setMargin(0);
 
     { // format
@@ -62,6 +71,7 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent)
       m_formatBtnGroup->addButton(unifiedFormatBtn, 2);
 
       QGroupBox *box = new QGroupBox(i18n("Output Format"), mainWidget);
+      mainLayout->addWidget(box);
       QVBoxLayout *v = new QVBoxLayout(box);
       v->addWidget(m_formatBtnGroup->button(0));
       v->addWidget(m_formatBtnGroup->button(1));
@@ -72,9 +82,10 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent)
 
     QLabel* contextLinesLbl = new QLabel(i18n("&Number of context lines:"),
                                          mainWidget);
-    m_contextLines = new KIntNumInput(3, mainWidget);
-    m_contextLines->setRange(2, 65535, 1);
-    m_contextLines->setSliderEnabled(false);
+    m_contextLines = new QSpinBox(mainWidget);
+    m_contextLines->setValue(3);
+    mainLayout->addWidget(m_contextLines);
+    m_contextLines->setRange(2, 65535);
     contextLinesLbl->setBuddy(m_contextLines);
 
     QBoxLayout* contextLinesLayout = new QHBoxLayout();
@@ -96,6 +107,7 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent)
       group->addButton(m_caseChangesChk);
 
       QGroupBox *box = new QGroupBox(i18n("Ignore Options"), mainWidget);
+      mainLayout->addWidget(box);
       QVBoxLayout *v = new QVBoxLayout(box);
       v->addWidget(m_blankLineChk);
       v->addWidget(m_spaceChangeChk);
@@ -104,6 +116,8 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent)
 
       topLayout->addWidget(box);
     }
+
+    mainLayout->addWidget(buttonBox);
 }
 
 
@@ -151,4 +165,3 @@ void PatchOptionDialog::formatChanged(int buttonId)
     m_contextLines->setEnabled(enabled);
 }
 
-#include "patchoptiondialog.moc"

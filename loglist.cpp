@@ -28,7 +28,6 @@
 #include <QHeaderView>
 
 #include <klocale.h>
-#include <KConfigGroup>
 
 #include "loginfo.h"
 #include "misc.h"

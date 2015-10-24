@@ -22,7 +22,7 @@
 #define COMMITDIALOG_H
 
 #include <qstringlist.h>
-#include <kdialog.h>
+#include <QDialog>
 
 namespace Cervisia { class LogMessageEdit; }
 
@@ -33,7 +33,7 @@ class QListWidgetItem;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 class KConfig;
 
-class CommitDialog : public KDialog
+class CommitDialog : public QDialog
 {
     Q_OBJECT
 

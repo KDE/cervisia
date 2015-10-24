@@ -20,15 +20,15 @@
 #ifndef HISTORYDIALOG_H
 #define HISTORYDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 class QCheckBox;
 class KConfig;
-class KLineEdit;
+class QLineEdit;
 class QTreeWidget;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 
-class HistoryDialog : public KDialog
+class HistoryDialog : public QDialog
 {
     Q_OBJECT
 
@@ -46,7 +46,7 @@ private:
     QTreeWidget *listview;
     QCheckBox *commit_box, *checkout_box, *tag_box, *other_box;
     QCheckBox *onlyuser_box, *onlyfilenames_box, *onlydirnames_box;
-    KLineEdit *user_edit, *filename_edit, *dirname_edit;
+    QLineEdit *user_edit, *filename_edit, *dirname_edit;
     KConfig& partConfig;
 };
 

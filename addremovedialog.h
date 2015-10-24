@@ -21,12 +21,12 @@
 #ifndef ADDREMOVEDIALOG_H
 #define ADDREMOVEDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 class KListWidget;
 class QStringList;
 
-class AddRemoveDialog : public KDialog
+class AddRemoveDialog : public QDialog
 {
 public:
     enum ActionType { Add, AddBinary, Remove };

@@ -26,7 +26,6 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QLabel>
-#include <QLayout>
 #include <QTextStream>
 #include <QVBoxLayout>
 
@@ -34,6 +33,10 @@
 #include <klistwidget.h>
 #include <klocale.h>
 #include <kconfiggroup.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <KGuiItem>
 
 #include "cvsserviceinterface.h"
 #include "logmessageedit.h"
@@ -58,28 +61,43 @@ private:
 
 CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
                            QWidget *parent)
-    : KDialog(parent)
+    : QDialog(parent)
     , partConfig(cfg)
     , cvsService(service)
 {
-    setCaption(i18n("CVS Commit"));
+    setWindowTitle(i18n("CVS Commit"));
     setModal(true);
-    setButtons(Ok | Cancel | Help | User1);
-    setButtonGuiItem(User1, KGuiItem(i18n("&Diff"), "vcs-diff-cvs-cervisia"));
-    setDefaultButton(Ok);
-    showButtonSeparator(true);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    QPushButton *user1Button = new QPushButton;
+    buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
+    mainLayout->addWidget(buttonBox);
+    KGuiItem::assign(user1Button, KGuiItem(i18n("&Diff"));
+    okButton->setDefault(true);
 
     QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
+    mainLayout->addWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
+    mainLayout->addWidget(layout);
     layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
     QLabel *textlabel = new QLabel( i18n("Commit the following &files:"), mainWidget );
+    mainLayout->addWidget(textlabel);
     layout->addWidget(textlabel);
 
     m_fileList = new KListWidget(mainWidget);
+    mainLayout->addWidget(m_fileList);
     m_fileList->setEditTriggers(QAbstractItemView::NoEditTriggers);
     textlabel->setBuddy(m_fileList);
     connect( m_fileList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
@@ -89,9 +107,11 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInter
     layout->addWidget(m_fileList, 5);
 
     QLabel *archivelabel = new QLabel(i18n("Older &messages:"), mainWidget);
+    mainLayout->addWidget(archivelabel);
     layout->addWidget(archivelabel);
 
     combo = new KComboBox(mainWidget);
+    mainLayout->addWidget(combo);
     archivelabel->setBuddy(combo);
     connect( combo, SIGNAL(activated(int)), this, SLOT(comboActivated(int)) );
     // make sure that combobox is smaller than the screen
@@ -99,6 +119,7 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInter
     layout->addWidget(combo);
 
     QLabel *messagelabel = new QLabel(i18n("&Log message:"), mainWidget);
+    mainLayout->addWidget(messagelabel);
     layout->addWidget(messagelabel);
 
     edit = new Cervisia::LogMessageEdit(mainWidget);
@@ -108,13 +129,14 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInter
     layout->addWidget(edit, 10);
 
     m_useTemplateChk = new QCheckBox(i18n("Use log message &template"), mainWidget);
+    mainLayout->addWidget(m_useTemplateChk);
     layout->addWidget(m_useTemplateChk);
     connect( m_useTemplateChk, SIGNAL(clicked()), this, SLOT(useTemplateClicked()) );
 
     checkForTemplateFile();
 
-    enableButton(User1, false);
-    connect( this, SIGNAL(user1Clicked()),
+    user1Button->setEnabled(false);
+    connect(user1Button, SIGNAL(clicked()),
              this, SLOT(diffClicked()) );
 
     setHelp("commitingfiles");
@@ -234,7 +256,7 @@ void CommitDialog::fileSelected(QListWidgetItem* item)
 void CommitDialog::fileHighlighted()
 {
     bool isItemSelected = !m_fileList->selectedItems().isEmpty();
-    enableButton(User1, isItemSelected);
+    user1Button->setEnabled(isItemSelected);
 }
 
 
@@ -253,7 +275,7 @@ void CommitDialog::showDiffDialog(const QString& fileName)
     DiffDialog *l = new DiffDialog(partConfig, this, "diffdialog");
 
     // disable diff button so user doesn't open the same diff several times (#83018)
-    enableButton(User1, false);
+    user1Button->setEnabled(false);
 
     if (l->parseCvsDiff(cvsService, fileName, "", ""))
         l->show();
@@ -261,7 +283,7 @@ void CommitDialog::showDiffDialog(const QString& fileName)
         delete l;
 
     // re-enable diff button
-    enableButton(User1, true);
+    user1Button->setEnabled(true);
 }
 
 

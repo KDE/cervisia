@@ -23,6 +23,7 @@
 #include <qmap.h>
 
 #include <klocale.h>
+#include <KConfigGroup>
 
 #include "annotatedialog.h"
 #include "loginfo.h"
@@ -77,7 +78,7 @@ void AnnotateController::showDialog(const QString& fileName, const QString& revi
     // hide progress dialog
     delete d->progress; d->progress = 0;
 
-    d->dialog->setCaption(i18n("CVS Annotate: %1", fileName));
+    d->dialog->setWindowTitle(i18n("CVS Annotate: %1", fileName));
     d->dialog->show();
 }
 

@@ -202,7 +202,6 @@ void ProtocolView::appendHtml(const QString& html)
 }
 
 
-#include "protocolview.moc"
 
 
 // Local Variables:

@@ -225,4 +225,3 @@ void CvsJob::slotReceivedStderr()
     emit receivedStderr(output);
 }
 
-#include "cvsjob.moc"

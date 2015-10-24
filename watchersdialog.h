@@ -19,13 +19,13 @@
 #ifndef WATCHERSDIALOG_H
 #define WATCHERSDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 class QTableView;
 class KConfig;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 
-class WatchersDialog : public KDialog
+class WatchersDialog : public QDialog
 {
 public:
     explicit WatchersDialog(KConfig& cfg, QWidget* parent = 0);

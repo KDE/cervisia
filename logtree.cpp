@@ -520,7 +520,6 @@ void LogTreeDelegate::paint(QPainter *painter, const QStyleOptionViewItem &optio
     painter->restore();
 }
 
-#include "logtree.moc"
 
 
 // Local Variables:

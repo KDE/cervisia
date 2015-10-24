@@ -30,34 +30,50 @@
 #include <QBoxLayout>
 
 #include <kconfig.h>
-#include <klineedit.h>
+#include <QLineEdit>
 #include <klocale.h>
 #include <knuminput.h>
 #include <kconfiggroup.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
 
 
 AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
                                          QWidget* parent)
-    : KDialog(parent)
+    : QDialog(parent)
     , partConfig(cfg)
 {
-    setCaption(i18n("Add Repository"));
+    setWindowTitle(i18n("Add Repository"));
     setModal(true);
-    setButtons(Ok | Cancel);
-    setDefaultButton(Ok);
-    showButtonSeparator(true);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
+    mainLayout->addWidget(buttonBox);
+    okButton->setDefault(true);
 
     QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
+    mainLayout->addWidget(mainWidget);
 
     QBoxLayout* layout = new QVBoxLayout(mainWidget);
+    mainLayout->addWidget(layout);
     layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
     QLabel* repo_label = new QLabel(i18n("&Repository:"), mainWidget);
+    mainLayout->addWidget(repo_label);
     layout->addWidget(repo_label);
 
-    repo_edit = new KLineEdit(mainWidget);
+    repo_edit = new QLineEdit(mainWidget);
+    mainLayout->addWidget(repo_edit);
     repo_edit->setFocus();
     repo_label->setBuddy(repo_edit);
     if( !repo.isNull() )
@@ -68,9 +84,11 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
     layout->addWidget(repo_edit);
 
     QLabel* rsh_label = new QLabel(i18n("Use remote &shell (only for :ext: repositories):"), mainWidget);
+    mainLayout->addWidget(rsh_label);
     layout->addWidget(rsh_label);
 
-    rsh_edit = new KLineEdit(mainWidget);
+    rsh_edit = new QLineEdit(mainWidget);
+    mainLayout->addWidget(rsh_edit);
     rsh_label->setBuddy(rsh_edit);
     layout->addWidget(rsh_edit);
 
@@ -78,11 +96,13 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
                                       mainWidget);
     layout->addWidget(server_label);
 
-    server_edit = new KLineEdit(mainWidget);
+    server_edit = new QLineEdit(mainWidget);
+    mainLayout->addWidget(server_edit);
     server_label->setBuddy(server_edit);
     layout->addWidget(server_edit);
 
     KHBox* compressionBox = new KHBox(mainWidget);
+    mainLayout->addWidget(compressionBox);
     m_useDifferentCompression = new QCheckBox(i18n("Use different &compression level:"), compressionBox);
 
     m_compressionLevel = new KIntNumInput(compressionBox);
@@ -183,7 +203,7 @@ bool AddRepositoryDialog::retrieveCvsignoreFile() const
 
 void AddRepositoryDialog::setRepository(const QString& repo)
 {
-    setCaption(i18n("Repository Settings"));
+    setWindowTitle(i18n("Repository Settings"));
 
     repo_edit->setText(repo);
     repo_edit->setEnabled(false);
@@ -208,7 +228,6 @@ void AddRepositoryDialog::compressionToggled(bool checked)
     m_compressionLevel->setEnabled(checked);
 }
 
-#include "addrepositorydialog.moc"
 
 
 // Local Variables:

@@ -488,7 +488,6 @@ void DiffZoomWidget::paintEvent(QPaintEvent *)
     }
 }
 
-#include "diffview.moc"
 
 
 // Local Variables:

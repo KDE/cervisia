@@ -21,7 +21,7 @@ using namespace Cervisia;
 
 #include <qdir.h>
 #include <kdebug.h>
-#include <ktemporaryfile.h>
+#include <QTemporaryFile>
 
 #include "cvsserviceinterface.h"
 #include "progressdialog.h"
@@ -47,7 +47,7 @@ bool GlobalIgnoreList::matches(const QFileInfo* fi) const
 void GlobalIgnoreList::retrieveServerIgnoreList(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService,
                                                 const QString& repository)
 {
-    KTemporaryFile tmpFile;
+    QTemporaryFile tmpFile;
     tmpFile.open();
 
     // clear old ignore list

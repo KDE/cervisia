@@ -20,15 +20,15 @@
 #ifndef UPDATEDIALOG_H
 #define UPDATEDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 class KComboBox;
 class QPushButton;
 class QRadioButton;
-class KLineEdit;
+class QLineEdit;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 
-class UpdateDialog : public KDialog
+class UpdateDialog : public QDialog
 {
     Q_OBJECT
 
@@ -51,7 +51,7 @@ private:
     QRadioButton *bytag_button, *bybranch_button, *bydate_button;
     KComboBox *tag_combo, *branch_combo;
     QPushButton *tag_button, *branch_button;
-    KLineEdit *date_edit;
+    QLineEdit *date_edit;
 };
 
 #endif // UPDATEDIALOG_H

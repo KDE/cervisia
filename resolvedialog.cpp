@@ -41,6 +41,10 @@
 #include <kmessagebox.h>
 #include <qregexp.h>
 #include <kconfiggroup.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <KGuiItem>
 #include "misc.h"
 using Cervisia::ResolveEditorDialog;
 
@@ -103,24 +107,37 @@ private:
 
 
 ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
-    : KDialog(parent)
+    : QDialog(parent)
     , markeditem(-1)
     , partConfig(cfg)
 {
-    setButtons(Close | Help | User1 | User2);
-    setButtonGuiItem(User1, KStandardGuiItem::saveAs());
-    setButtonGuiItem(User2, KStandardGuiItem::save());
-    setDefaultButton(Close);
-    showButtonSeparator(true);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help|QDialogButtonBox::Close);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    QPushButton *user1Button = new QPushButton;
+    buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
+    QPushButton *user2Button = new QPushButton;
+    buttonBox->addButton(user2Button, QDialogButtonBox::ActionRole);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
+    mainLayout->addWidget(buttonBox);
+    KGuiItem::assign(user1Button, KStandardGuiItem::saveAs());
+    KGuiItem::assign(user2Button, KStandardGuiItem::save());
+    buttonBox->button(QDialogButtonBox::Close)->setDefault(true);
 
     QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
+    mainLayout->addWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
+    mainLayout->addWidget(layout);
     layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
     QSplitter *vertSplitter = new QSplitter(Qt::Vertical, mainWidget);
+    mainLayout->addWidget(vertSplitter);
 
     QSplitter *splitter = new QSplitter(Qt::Horizontal, vertSplitter);
 
@@ -158,27 +175,35 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
     layout->addWidget(vertSplitter);
 
     abutton = new QPushButton("&A", mainWidget);
+    mainLayout->addWidget(abutton);
     connect( abutton, SIGNAL(clicked()), SLOT(aClicked()) );
 
     bbutton = new QPushButton("&B", mainWidget);
+    mainLayout->addWidget(bbutton);
     connect( bbutton, SIGNAL(clicked()), SLOT(bClicked()) );
 
     abbutton = new QPushButton("A+B", mainWidget);
+    mainLayout->addWidget(abbutton);
     connect( abbutton, SIGNAL(clicked()), SLOT(abClicked()) );
 
     babutton = new QPushButton("B+A", mainWidget);
+    mainLayout->addWidget(babutton);
     connect( babutton, SIGNAL(clicked()), SLOT(baClicked()) );
 
     editbutton = new QPushButton(i18n("&Edit"), mainWidget);
+    mainLayout->addWidget(editbutton);
     connect( editbutton, SIGNAL(clicked()), SLOT(editClicked()) );
 
     nofnlabel = new QLabel(mainWidget);
+    mainLayout->addWidget(nofnlabel);
     nofnlabel->setAlignment(Qt::AlignCenter);
 
     backbutton = new QPushButton("&<<", mainWidget);
+    mainLayout->addWidget(backbutton);
     connect( backbutton, SIGNAL(clicked()), SLOT(backClicked()) );
 
     forwbutton = new QPushButton("&>>", mainWidget);
+    mainLayout->addWidget(forwbutton);
     connect( forwbutton, SIGNAL(clicked()), SLOT(forwClicked()) );
 
     QBoxLayout *buttonlayout = new QHBoxLayout();
@@ -194,8 +219,8 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
     buttonlayout->addWidget(backbutton, 1);
     buttonlayout->addWidget(forwbutton, 1);
 
-    connect( this, SIGNAL(user2Clicked()), SLOT(saveClicked()) );
-    connect( this, SIGNAL(user1Clicked()), SLOT(saveAsClicked()) );
+    connect(user2Button, SIGNAL(clicked()), SLOT(saveClicked()) );
+    connect(user1Button, SIGNAL(clicked()), SLOT(saveAsClicked()) );
 
     QFontMetrics const fm(fontMetrics());
     setMinimumSize(fm.width('0') * 120,
@@ -241,7 +266,7 @@ bool ResolveDialog::parseFile(const QString &name)
     int advanced1, advanced2;
     enum { Normal, VersionA, VersionB } state;
 
-    setCaption(i18n("CVS Resolve: %1", name));
+    setWindowTitle(i18n("CVS Resolve: %1", name));
 
     fname = name;
 
@@ -618,7 +643,7 @@ void ResolveDialog::keyPressEvent(QKeyEvent *e)
         case Qt::Key_Up:   diff1->up();   break;
         case Qt::Key_Down: diff1->down(); break;
         default:
-            KDialog::keyPressEvent(e);
+            QDialog::keyPressEvent(e);
     }
 }
 
@@ -649,7 +674,6 @@ QString ResolveDialog::contentVersionB(const ResolveItem *item) const
     return result;
 }
 
-#include "resolvedialog.moc"
 
 
 // Local Variables:

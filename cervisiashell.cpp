@@ -209,7 +209,6 @@ void CervisiaShell::writeSettings()
 }
 
 
-#include "cervisiashell.moc"
 
 
 // Local Variables:

@@ -27,7 +27,7 @@
 
 class QCheckBox;
 class KIntNumInput;
-class KLineEdit;
+class QLineEdit;
 class KConfig;
 class KColorButton;
 class KUrlRequester;
@@ -74,8 +74,8 @@ private:
     KIntNumInput *contextedit;
     KIntNumInput *tabwidthedit;
     KUrlRequester *cvspathedit;
-    KLineEdit *usernameedit;
-    KLineEdit *diffoptedit;
+    QLineEdit *usernameedit;
+    QLineEdit *diffoptedit;
     KUrlRequester *extdiffedit;
     QCheckBox *remotestatusbox;
     QCheckBox *localstatusbox;

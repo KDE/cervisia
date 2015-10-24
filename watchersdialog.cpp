@@ -27,9 +27,12 @@
 #include <QVBoxLayout>
 #include <QBoxLayout>
 #include <kconfig.h>
-#include <klineedit.h>
+#include <QLineEdit>
 #include <klocale.h>
 #include <kconfiggroup.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
 
 #include "cvsserviceinterface.h"
 #include "progressdialog.h"
@@ -37,20 +40,29 @@
 
 
 WatchersDialog::WatchersDialog(KConfig& cfg, QWidget* parent)
-    : KDialog(parent)
+    : QDialog(parent)
     , partConfig(cfg)
 {
-    setButtons(Close);
-    showButtonSeparator(true);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
+    mainLayout->addWidget(buttonBox);
 
     QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
+    mainLayout->addWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
+    mainLayout->addWidget(layout);
     layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
     m_tableView = new QTableView(mainWidget);
+    mainLayout->addWidget(m_tableView);
     m_tableView->setSelectionMode(QAbstractItemView::NoSelection);
     m_tableView->setSortingEnabled(true);
     m_tableView->verticalHeader()->setVisible(false);
@@ -74,7 +86,7 @@ WatchersDialog::~WatchersDialog()
 bool WatchersDialog::parseWatchers(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService,
                                    const QStringList& files)
 {
-    setCaption(i18n("CVS Watchers"));
+    setWindowTitle(i18n("CVS Watchers"));
 
     QDBusReply<QDBusObjectPath> job = cvsService->watchers(files);
     if( !job.isValid() )

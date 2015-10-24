@@ -20,7 +20,7 @@
 #ifndef LOGDIALOG_H
 #define LOGDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 #include "loginfo.h"
 
@@ -33,7 +33,7 @@ class LogPlainView;
 class KComboBox;
 class QLabel;
 class QSplitter;
-class KTabWidget;
+class QTabWidget;
 class KTextEdit;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 class KConfig;
@@ -47,7 +47,7 @@ public:
 };
 
 
-class LogDialog : public KDialog
+class LogDialog : public QDialog
 {
     Q_OBJECT
 
@@ -85,7 +85,7 @@ private:
     LogTreeView *tree;
     LogListView *list;
     LogPlainView *plain;
-    KTabWidget *tabWidget;
+    QTabWidget *tabWidget;
     QLabel *revbox[2];
     QLabel *authorbox[2];
     QLabel *datebox[2];

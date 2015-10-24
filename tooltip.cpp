@@ -123,4 +123,3 @@ QString truncateLines(const QString& text,
 } // namespace Cervisia
 
 
-#include "tooltip.moc"

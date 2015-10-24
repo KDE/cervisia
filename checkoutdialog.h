@@ -20,15 +20,15 @@
 #ifndef CHECKOUTDIALOG_H
 #define CHECKOUTDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 class QCheckBox;
 class KComboBox;
 class KConfig;
-class KLineEdit;
+class QLineEdit;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 
-class CheckoutDialog : public KDialog
+class CheckoutDialog : public QDialog
 {
     Q_OBJECT
 
@@ -66,9 +66,9 @@ private:
     void restoreUserInput();
     
     KComboBox *repo_combo, *module_combo, *branchCombo;
-    KLineEdit *module_edit, *workdir_edit;
-    KLineEdit *comment_edit;
-    KLineEdit *vendortag_edit, *releasetag_edit, *ignore_edit, *alias_edit;
+    QLineEdit *module_edit, *workdir_edit;
+    QLineEdit *comment_edit;
+    QLineEdit *vendortag_edit, *releasetag_edit, *ignore_edit, *alias_edit;
     QCheckBox *binary_box, *export_box, *recursive_box;
     QCheckBox* m_useModificationTimeBox;
     ActionType act;

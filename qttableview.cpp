@@ -140,8 +140,8 @@ QCornerSquare::QCornerSquare( QWidget *parent )
 
 */
 
-QtTableView::QtTableView( QWidget *parent, const char *name, Qt::WFlags f )
-    : QFrame( parent, f )
+QtTableView::QtTableView( QWidget *parent, const char *name)
+    : QFrame(parent)
 {
     nRows		 = nCols      = 0;	// zero rows/cols
     xCellOffs		 = yCellOffs  = 0;	// zero offset
@@ -2261,4 +2261,3 @@ void QtTableView::updateTableSize()
 }
 
 
-#include "qttableview.moc"

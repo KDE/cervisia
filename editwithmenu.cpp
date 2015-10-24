@@ -78,5 +78,4 @@ void EditWithMenu::actionTriggered(QAction* action)
 }
 
 
-#include "editwithmenu.moc"
 

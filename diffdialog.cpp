@@ -28,7 +28,7 @@
 #include <qnamespace.h>
 #include <qfileinfo.h>
 #include <qregexp.h>
-//Added by qt3to4:
+
 #include <QTextStream>
 #include <QGridLayout>
 #include <QKeyEvent>
@@ -37,10 +37,9 @@
 #include <QVBoxLayout>
 
 #include <kconfig.h>
-#include <kfiledialog.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <ktemporaryfile.h>
+#include <QTemporaryFile>
 #include <kprocess.h>
 #include <kconfiggroup.h>
 #include "cvsserviceinterface.h"
@@ -48,23 +47,35 @@
 #include "progressdialog.h"
 #include "diffview.h"
 #include <kshell.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <KGuiItem>
+#include <QFileDialog>
 
 DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
-    : KDialog(parent)
+    : QDialog(parent)
     , partConfig(cfg)
 {
     markeditem = -1;
     setModal(modal);
-    setButtons(Close | Help | User1);
-    setDefaultButton(Close);
-    showButtonSeparator(true);
-    setButtonGuiItem(User1,KStandardGuiItem::saveAs());
+
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help|QDialogButtonBox::Close);
+    QPushButton *user1Button = new QPushButton;
+    buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    buttonBox->button(QDialogButtonBox::Close)->setDefault(true);
+    KGuiItem::assign(user1Button, KStandardGuiItem::saveAs());
 
     QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
+    mainLayout->addWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    layout->setSpacing(spacingHint());
+    mainLayout->addLayout(layout);
     layout->setMargin(0);
 
     QGridLayout *pairlayout = new QGridLayout();
@@ -77,14 +88,19 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
     pairlayout->setColumnStretch(2, 10);
 
     revlabel1 = new QLabel(mainWidget);
+    mainLayout->addWidget(revlabel1);
     pairlayout->addWidget(revlabel1, 0, 0);
 
     revlabel2 = new QLabel(mainWidget);
+    mainLayout->addWidget(revlabel2);
     pairlayout->addWidget(revlabel2, 0, 2);
 
     diff1 = new DiffView(cfg, true, false, mainWidget);
+    mainLayout->addWidget(diff1);
     diff2 = new DiffView(cfg, true, true, mainWidget);
+    mainLayout->addWidget(diff2);
     DiffZoomWidget *zoom = new DiffZoomWidget(mainWidget);
+    mainLayout->addWidget(zoom);
     zoom->setDiffView(diff2);
 
     pairlayout->addWidget(diff1, 1, 0);
@@ -95,26 +111,31 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
     diff2->setPartner(diff1);
 
     syncbox = new QCheckBox(i18n("Synchronize scroll bars"), mainWidget);
+    mainLayout->addWidget(syncbox);
     syncbox->setChecked(true);
     connect( syncbox, SIGNAL(toggled(bool)),
 	     this, SLOT(toggleSynchronize(bool)) );
 
     itemscombo = new KComboBox(mainWidget);
+    mainLayout->addWidget(itemscombo);
     itemscombo->addItem(QString());
     connect( itemscombo, SIGNAL(activated(int)),
              this, SLOT(comboActivated(int)) );
 
     nofnlabel = new QLabel(mainWidget);
+    mainLayout->addWidget(nofnlabel);
     // avoids auto resize when the text is changed
     nofnlabel->setMinimumWidth(fontMetrics().width(i18np("%1 difference", "%1 differences", 10000)));
 
     backbutton = new QPushButton(QLatin1String("&<<"), mainWidget);
+    mainLayout->addWidget(backbutton);
     connect( backbutton, SIGNAL(clicked()), SLOT(backClicked()) );
 
     forwbutton = new QPushButton(QLatin1String("&>>"), mainWidget);
+    mainLayout->addWidget(forwbutton);
     connect( forwbutton, SIGNAL(clicked()), SLOT(forwClicked()) );
 
-    connect( this, SIGNAL(user1Clicked()), SLOT(saveAsClicked()) );
+    connect(user1Button, SIGNAL(clicked()), SLOT(saveAsClicked()) );
 
     QBoxLayout *buttonlayout = new QHBoxLayout();
     layout->addLayout(buttonlayout);
@@ -127,13 +148,15 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
     buttonlayout->addWidget(backbutton);
     buttonlayout->addWidget(forwbutton);
 
-    setHelp("diff");
+    mainLayout->addWidget(buttonBox);
+
+    //setHelp("diff");
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     KConfigGroup cg(&partConfig, "DiffDialog");
     syncbox->setChecked(cg.readEntry("Sync",false));
-    restoreDialogSize(cg);
+    restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
 }
 
 
@@ -141,7 +164,7 @@ DiffDialog::~DiffDialog()
 {
     KConfigGroup cg(&partConfig, "DiffDialog");
     cg.writeEntry("Sync", syncbox->isChecked());
-    saveDialogSize(cg);
+    cg.writeEntry("geometry", saveGeometry());
 
     qDeleteAll(items);
 }
@@ -168,7 +191,7 @@ void DiffDialog::keyPressEvent(QKeyEvent *e)
             diff2->prior();
             break;
         default:
-            KDialog::keyPressEvent(e);
+            QDialog::keyPressEvent(e);
 	}
 }
 
@@ -237,7 +260,7 @@ bool DiffDialog::parseCvsDiff(OrgKdeCervisiaCvsserviceCvsserviceInterface* servi
     QStringList linesA, linesB;
     int linenoA, linenoB;
 
-    setCaption(i18n("CVS Diff: %1", fileName));
+    setWindowTitle(i18n("CVS Diff: %1", fileName));
     revlabel1->setText( revA.isEmpty()?
                         i18n("Repository:")
                         : i18n("Revision ")+revA+':' );
@@ -491,7 +514,7 @@ void DiffDialog::forwClicked()
 
 void DiffDialog::saveAsClicked()
 {
-    QString fileName = KFileDialog::getSaveFileName(KUrl(), QString(), this);
+    QString fileName = QFileDialog::getSaveFileName(this, QString(), QString(), QString());
     if( fileName.isEmpty() )
         return;
 
@@ -515,7 +538,6 @@ void DiffDialog::saveAsClicked()
     f.close();
 }
 
-#include "diffdialog.moc"
 
 
 // Local Variables:

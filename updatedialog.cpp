@@ -27,8 +27,12 @@
 #include <qstyle.h>
 #include <QBoxLayout>
 
-#include <klineedit.h>
+#include <QLineEdit>
 #include <klocale.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 #include "misc.h"
 #include "cvsserviceinterface.h"
@@ -36,34 +40,48 @@
 
 UpdateDialog::UpdateDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
                            QWidget *parent)
-    : KDialog(parent),
+    : QDialog(parent),
       cvsService(service)
 {
-    setCaption(i18n("CVS Update"));
+    setWindowTitle(i18n("CVS Update"));
     setModal(true);
-    setButtons(Ok | Cancel);
-    setDefaultButton(Ok);
-    showButtonSeparator(true);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
+    mainLayout->addWidget(buttonBox);
+    okButton->setDefault(true);
 
     int const iComboBoxMinWidth(40 * fontMetrics().width('0'));
     int const iWidgetIndent(style()->pixelMetric(QStyle::PM_ExclusiveIndicatorWidth) + 6);
 
     QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
+    mainLayout->addWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
+    mainLayout->addWidget(layout);
     layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
     bybranch_button = new QRadioButton(i18n("Update to &branch: "), mainWidget);
+    mainLayout->addWidget(bybranch_button);
     bybranch_button->setChecked(true);
     layout->addWidget(bybranch_button);
 
     branch_combo = new KComboBox(mainWidget);
+    mainLayout->addWidget(branch_combo);
     branch_combo->setEditable(true);
     branch_combo->setMinimumWidth(iComboBoxMinWidth);
     
     branch_button = new QPushButton(i18n("Fetch &List"), mainWidget);
+    mainLayout->addWidget(branch_button);
     connect( branch_button, SIGNAL(clicked()),
              this, SLOT(branchButtonClicked()) );
             
@@ -74,13 +92,16 @@ UpdateDialog::UpdateDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
     branchedit_layout->addWidget(branch_button);
     
     bytag_button = new QRadioButton(i18n("Update to &tag: "), mainWidget);
+    mainLayout->addWidget(bytag_button);
     layout->addWidget(bytag_button);
 
     tag_combo = new KComboBox(mainWidget);
+    mainLayout->addWidget(tag_combo);
     tag_combo->setEditable(true);
     tag_combo->setMinimumWidth(iComboBoxMinWidth);
     
     tag_button = new QPushButton(i18n("Fetch L&ist"), mainWidget);
+    mainLayout->addWidget(tag_button);
     connect( tag_button, SIGNAL(clicked()),
              this, SLOT(tagButtonClicked()) );
             
@@ -91,9 +112,11 @@ UpdateDialog::UpdateDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
     tagedit_layout->addWidget(tag_button);
     
     bydate_button = new QRadioButton(i18n("Update to &date ('yyyy-mm-dd'):"), mainWidget);
+    mainLayout->addWidget(bydate_button);
     layout->addWidget(bydate_button);
 
-    date_edit = new KLineEdit(mainWidget);
+    date_edit = new QLineEdit(mainWidget);
+    mainLayout->addWidget(date_edit);
 
     QBoxLayout *dateedit_layout = new QHBoxLayout();
     layout->addLayout(dateedit_layout);
@@ -101,6 +124,7 @@ UpdateDialog::UpdateDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
     dateedit_layout->addWidget(date_edit);
 
     QButtonGroup* group = new QButtonGroup(mainWidget);
+    mainLayout->addWidget(group);
     group->addButton(bytag_button);
     group->addButton(bybranch_button);
     group->addButton(bydate_button);
@@ -166,7 +190,6 @@ void UpdateDialog::toggled()
         date_edit->setFocus();
 }
 
-#include "updatedialog.moc"
 
 
 // Local Variables:

@@ -30,6 +30,10 @@
 #include <cvsjobinterface.h>
 #include <kanimatedbutton.h>
 #include <kapplication.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 #include "cervisiasettings.h"
 
@@ -56,15 +60,22 @@ struct ProgressDialog::Private
 ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,const QString &cvsServiceNameService,
                                const QDBusReply<QDBusObjectPath>& jobPath, const QString& errorIndicator,
                                const QString& caption)
-    : KDialog(parent)
+    : QDialog(parent)
     , d(new Private)
 {
     // initialize private data
-    setCaption(caption);
-    setButtons(Cancel);
-    setDefaultButton(Cancel);
+    setWindowTitle(caption);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Cancel);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
+    mainLayout->addWidget(buttonBox);
+    buttonBox->button(QDialogButtonBox::Cancel)->setDefault(true);
     setModal(true);
-    showButtonSeparator(true);
     d->isCancelled = false;
     d->isShown     = false;
     d->hasError    = false;
@@ -80,7 +91,7 @@ ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,const QSt
     d->errorId2 = "cvs [" + errorIndicator + " aborted]:";
 
     setupGui(heading);
-    connect(this,SIGNAL(cancelClicked()),this,SLOT(slotCancel()));
+    connect(buttonBox->button(QDialogButtonBox::Cancel),SIGNAL(clicked()),this,SLOT(slotCancel()));
 }
 
 
@@ -95,19 +106,23 @@ void ProgressDialog::setupGui(const QString& heading)
 {
     QWidget* dummy = new QWidget(this);
 
-    setMainWidget(dummy);
+    mainLayout->addWidget(dummy);
 
     QGridLayout* layout = new QGridLayout(dummy);
+    mainLayout->addWidget(layout);
 
     QLabel* textLabel = new QLabel(heading, dummy);
+    mainLayout->addWidget(textLabel);
     layout->addWidget(textLabel, 0, 0);
 
     d->gear = new KAnimatedButton(dummy);
+    mainLayout->addWidget(gear);
     d->gear->setIconSize(QSize(32, 32));
     d->gear->setIcons("kde");
     layout->addWidget(d->gear, 0, 1);
 
     d->resultbox = new KTextEdit(dummy);
+    mainLayout->addWidget(resultbox);
     d->resultbox->setReadOnly(true);
     QFontMetrics fm(d->resultbox->fontMetrics());
     d->resultbox->setMinimumSize(fm.width("0")*70, fm.lineSpacing()*8);

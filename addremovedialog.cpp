@@ -29,26 +29,41 @@
 // KDE
 #include <KListWidget>
 #include <KLocale>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 
 AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent)
-    : KDialog(parent)
+    : QDialog(parent)
 {
-    setCaption( (action==Add)?       i18n("CVS Add") :
+    setWindowTitle( (action==Add)?       i18n("CVS Add") :
                 (action==AddBinary)? i18n("CVS Add Binary") :
                                      i18n("CVS Remove") );
     setModal(true);
-    setButtons(Ok | Cancel | Help);
-    setDefaultButton(Ok);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
+    mainLayout->addWidget(buttonBox);
+    okButton->setDefault(true);
     // Also give the focus to the OK button, otherwise the Help button gets focus
     // and is activated by Key_Return
-    setButtonFocus(Ok);
-    showButtonSeparator(true);
+    okButton->setFocus();
 
     QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
+    mainLayout->addWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
+    mainLayout->addWidget(layout);
     layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
@@ -60,6 +75,7 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent)
     layout->addWidget(textlabel);
 
     m_listBox = new KListWidget(mainWidget);
+    mainLayout->addWidget(m_listBox);
     m_listBox->setSelectionMode(QAbstractItemView::NoSelection);
     layout->addWidget(m_listBox, 5);
 
@@ -69,7 +85,8 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent)
         QBoxLayout *warningLayout = new QHBoxLayout;
 
         QLabel *warningIcon = new QLabel(mainWidget);
-        warningIcon->setPixmap(KIcon("dialog-warning").pixmap(32));
+        mainLayout->addWidget(warningIcon);
+        warningIcon->setPixmap(QIcon::fromTheme("dialog-warning").pixmap(32));
         warningLayout->addWidget(warningIcon);
 
         QLabel *warningText = new QLabel(i18n("This will also remove the files from "

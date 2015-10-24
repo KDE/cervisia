@@ -24,55 +24,71 @@
 
 #include <kconfig.h>
 #include <kconfiggroup.h>
-#include <klineedit.h>
+#include <QLineEdit>
 #include <klocale.h>
-#include <kpushbutton.h>
+#include <QPushButton>
 
 #include <QVBoxLayout>
 #include <QInputDialog>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
 
 AnnotateDialog::AnnotateDialog(KConfig& cfg, QWidget *parent)
-    : KDialog(parent)
+    : QDialog(parent)
     , partConfig(cfg)
 {
-    setButtons(Close | Help | User1 | User2 | User3);
-    setButtonText(User3, i18n("Find Next"));
-    setButtonText(User2, i18n("Find Prev"));
-    setButtonText(User1, i18n("Go to Line..."));
-    setDefaultButton(User3);
-    setEscapeButton(Close);
-    showButtonSeparator(true);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help|QDialogButtonBox::Close);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    QPushButton *user1Button = new QPushButton;
+    buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
+    QPushButton *user2Button = new QPushButton;
+    buttonBox->addButton(user2Button, QDialogButtonBox::ActionRole);
+    QPushButton *user3Button = new QPushButton;
+    buttonBox->addButton(user3Button, QDialogButtonBox::ActionRole);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    user3Button->setText(i18n("Find Next"));
+    user2Button->setText(i18n("Find Prev"));
+    user1Button->setText(i18n("Go to Line..."));
+    user3Button->setDefault(true);
+    buttonBox->button(QDialogButtonBox::Close)->setShortcut(Qt::Key_Escape);
 
     QWidget *vbox = new QWidget(this);
     QVBoxLayout *layout = new QVBoxLayout(vbox);
 
-    findEdit = new KLineEdit(vbox);
-    findEdit->setClearButtonShown(true);
-    findEdit->setClickMessage(i18n("Search"));
+    findEdit = new QLineEdit(vbox);
+    findEdit->setClearButtonEnabled(true);
+    findEdit->setPlaceholderText(i18n("Search"));
 
     annotate = new AnnotateView(vbox);
 
     layout->addWidget(findEdit);
     layout->addWidget(annotate);
-    setMainWidget(vbox);
+    mainLayout->addWidget(vbox);
 
-    connect(button(User3), SIGNAL(clicked()), this, SLOT(findNext()));
-    connect(button(User2), SIGNAL(clicked()), this, SLOT(findPrev()));
-    connect(button(User1), SIGNAL(clicked()), this, SLOT(gotoLine()));
+    mainLayout->addWidget(buttonBox);
 
-    setHelp("annotate");
+    connect(user3Button, SIGNAL(clicked()), this, SLOT(findNext()));
+    connect(user2Button, SIGNAL(clicked()), this, SLOT(findPrev()));
+    connect(user1Button, SIGNAL(clicked()), this, SLOT(gotoLine()));
+
+    //setHelp("annotate");
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     KConfigGroup cg(&partConfig, "AnnotateDialog");
-    restoreDialogSize(cg);
+    restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
 }
 
 
 AnnotateDialog::~AnnotateDialog()
 {
     KConfigGroup cg(&partConfig, "AnnotateDialog");
-    saveDialogSize(cg);
+    cg.writeEntry("geometry", saveGeometry());
 }
 
 
@@ -97,15 +113,14 @@ void AnnotateDialog::findPrev()
 
 void AnnotateDialog::gotoLine()
 {
-  bool ok = false;
-  int line = QInputDialog::getInteger(this, i18n("Go to Line"), i18n("Go to line number:"),
-                                      annotate->currentLine(), 1, annotate->lastLine(), 1, &ok);
+    bool ok = false;
+    int line = QInputDialog::getInt(this, i18n("Go to Line"), i18n("Go to line number:"),
+                                    annotate->currentLine(), 1, annotate->lastLine(), 1, &ok);
 
-  if ( ok )
-      annotate->gotoLine(line);
+    if ( ok )
+        annotate->gotoLine(line);
 }
 
-#include "annotatedialog.moc"
 
 // Local Variables:
 // c-basic-offset: 4

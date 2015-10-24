@@ -19,7 +19,7 @@
 #ifndef RESOLVEDIALOG_P_H
 #define RESOLVEDIALOG_P_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 class QPlainTextEdit;
 class KConfig;
@@ -27,7 +27,7 @@ class KConfig;
 namespace Cervisia
 {
 
-class ResolveEditorDialog : public KDialog
+class ResolveEditorDialog : public QDialog
 {
 public:
     explicit ResolveEditorDialog(KConfig& cfg, QWidget* parent=0);

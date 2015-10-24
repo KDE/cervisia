@@ -32,12 +32,15 @@
 #include <kconfig.h>
 #include <kfontdialog.h>
 #include <kglobal.h>
-#include <klineedit.h>
+#include <QLineEdit>
 #include <klocale.h>
 #include <knuminput.h>
 #include <kurlrequester.h>
 #include <kcomponentdata.h>
 #include <kvbox.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
 
 #include "misc.h"
 #include "cervisiasettings.h"
@@ -67,10 +70,20 @@ SettingsDialog::SettingsDialog(KConfig *conf, QWidget *parent)
     : KPageDialog(parent)
 {
     setFaceType( List );
-    setCaption(i18n("Configure Cervisia"));
-    setButtons(Ok | Cancel | Help);
-    setDefaultButton(Ok);
-    showButtonSeparator(true);
+    setWindowTitle(i18n("Configure Cervisia"));
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
+    mainLayout->addWidget(buttonBox);
+    okButton->setDefault(true);
 
     config = conf;
 
@@ -201,7 +214,7 @@ void SettingsDialog::done(int res)
 {
     if (res == Accepted)
         writeSettings();
-    KDialog::done(res);
+    QDialog::done(res);
 }
 
 
@@ -212,14 +225,14 @@ void SettingsDialog::addGeneralPage()
 {
     QFrame* generalPage = new QFrame;
     KPageWidgetItem *page = new KPageWidgetItem( generalPage, i18n("General") );
-    page->setIcon( KIcon("applications-system") );
+    page->setIcon( QIcon::fromTheme("applications-system") );
     
     QVBoxLayout* layout = new QVBoxLayout(generalPage);
-    layout->setSpacing(KDialog::spacingHint());
+//TODO PORT QT5     layout->setSpacing(QDialog::spacingHint());
     layout->setMargin(0);
 
     QLabel *usernamelabel = new QLabel( i18n("&User name for the change log editor:"), generalPage );
-    usernameedit = new KLineEdit(generalPage);
+    usernameedit = new QLineEdit(generalPage);
     usernameedit->setFocus();
     usernamelabel->setBuddy(usernameedit);
 
@@ -246,7 +259,7 @@ void SettingsDialog::addDiffPage()
 {
     QFrame* diffPage = new QFrame;
     KPageWidgetItem *page = new KPageWidgetItem( diffPage, i18n("Diff Viewer") );
-    page->setIcon( KIcon("vcs-diff-cvs-cervisia") );
+    page->setIcon( QIcon::fromTheme("vcs-diff-cvs-cervisia") );
 
     QGridLayout* layout = new QGridLayout(diffPage);
 
@@ -260,7 +273,7 @@ void SettingsDialog::addDiffPage()
     layout->addWidget(contextedit, 0, 1);
 
     QLabel *diffoptlabel = new QLabel(i18n("Additional &options for cvs diff:"), diffPage);
-    diffoptedit = new KLineEdit(diffPage);
+    diffoptedit = new QLineEdit(diffPage);
     diffoptlabel->setBuddy(diffoptedit);
 
     layout->addWidget(diffoptlabel, 1, 0);
@@ -295,7 +308,7 @@ void SettingsDialog::addStatusPage()
 {
     KVBox* statusPage = new KVBox;
     KPageWidgetItem *page = new KPageWidgetItem( statusPage, i18n("Status") );
-    page->setIcon( KIcon("fork") );
+    page->setIcon( QIcon::fromTheme("fork") );
 
     remotestatusbox = new QCheckBox(i18n("When opening a sandbox from a &remote repository,\n"
                                          "start a File->Status command automatically"), statusPage);
@@ -316,7 +329,7 @@ void SettingsDialog::addAdvancedPage()
 {
     QWidget* frame = new QWidget;
     KPageWidgetItem *page = new KPageWidgetItem( frame, i18n("Advanced") );
-    page->setIcon( KIcon("configure") );
+    page->setIcon( QIcon::fromTheme("configure") );
 
     m_advancedPage = new Ui::AdvancedPage;
     m_advancedPage->setupUi(frame);
@@ -336,7 +349,7 @@ void SettingsDialog::addLookAndFeelPage()
 {
     KVBox* lookPage = new KVBox;
     KPageWidgetItem *page = new KPageWidgetItem( lookPage, i18n("Appearance") );
-    page->setIcon( KIcon("preferences-desktop-theme") );
+    page->setIcon( QIcon::fromTheme("preferences-desktop-theme") );
 
     QGroupBox* fontGroupBox = new QGroupBox(i18n("Fonts"), lookPage);
 
@@ -407,7 +420,6 @@ void SettingsDialog::addLookAndFeelPage()
     addPage(page);
 }
 
-#include "settingsdialog.moc"
 
 
 // Local Variables:

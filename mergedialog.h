@@ -20,14 +20,14 @@
 #ifndef MERGEDIALOG_H
 #define MERGEDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 class KComboBox;
 class QPushButton;
 class QRadioButton;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 
-class MergeDialog : public KDialog
+class MergeDialog : public QDialog
 {
     Q_OBJECT
 

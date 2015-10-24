@@ -23,7 +23,7 @@
 #include <qcheckbox.h>
 #include <KComboBox>
 #include <qlabel.h>
-#include <KLineEdit>
+#include <QLineEdit>
 #include <qpushbutton.h>
 //Added by qt3to4:
 #include <QVBoxLayout>
@@ -31,6 +31,9 @@
 #include <QBoxLayout>
 #include <klocale.h>
 #include <kmessagebox.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
 
 #include "misc.h"
 #include "cvsserviceinterface.h"
@@ -39,36 +42,50 @@ using Cervisia::TagDialog;
 
 TagDialog::TagDialog(ActionType action, OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
                      QWidget *parent)
-    : KDialog(parent), 
+    : QDialog(parent), 
       act(action),
       cvsService(service),
       branchtag_button(0),
       forcetag_button(0)
 {
-    setButtons(Ok | Cancel | Help);
-    setDefaultButton(Ok);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
+    mainLayout->addWidget(buttonBox);
+    okButton->setDefault(true);
     setModal(true);
-    showButtonSeparator(true);
-    setCaption( (action==Delete)? i18n("CVS Delete Tag") : i18n("CVS Tag") );
+    setWindowTitle( (action==Delete)? i18n("CVS Delete Tag") : i18n("CVS Tag") );
 
     QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
+    mainLayout->addWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
+    mainLayout->addWidget(layout);
     layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
     if (action == Delete)
         {
             tag_combo = new KComboBox(mainWidget);
+            mainLayout->addWidget(tag_combo);
             tag_combo->setEditable(true);
             tag_combo->setFocus();
             tag_combo->setMinimumWidth(fontMetrics().width('0') * 30);
 
             QLabel *tag_label = new QLabel(i18n("&Name of tag:"), mainWidget);
+            mainLayout->addWidget(tag_label);
             tag_label->setBuddy( tag_combo );
 
             QPushButton *tag_button = new QPushButton(i18n("Fetch &List"), mainWidget);
+            mainLayout->addWidget(tag_button);
             connect( tag_button, SIGNAL(clicked()),
                      this, SLOT(tagButtonClicked()) );
 
@@ -80,11 +97,13 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisiaCvsserviceCvsserviceInterf
         }
     else
         {
-            tag_edit = new KLineEdit(mainWidget);
+            tag_edit = new QLineEdit(mainWidget);
+            mainLayout->addWidget(tag_edit);
             tag_edit->setFocus();
             tag_edit->setMinimumWidth(fontMetrics().width('0') * 30);
 
             QLabel *tag_label = new QLabel(i18n("&Name of tag:"), mainWidget);
+            mainLayout->addWidget(tag_label);
             tag_label->setBuddy( tag_edit );
 
             QBoxLayout *tagedit_layout = new QHBoxLayout();
@@ -93,12 +112,14 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisiaCvsserviceCvsserviceInterf
             tagedit_layout->addWidget(tag_edit);
 
             branchtag_button = new QCheckBox(i18n("Create &branch with this tag"), mainWidget);
+            mainLayout->addWidget(branchtag_button);
             layout->addWidget(branchtag_button);
 
             forcetag_button = new QCheckBox(i18n("&Force tag creation even if tag already exists"), mainWidget);
+            mainLayout->addWidget(forcetag_button);
             layout->addWidget(forcetag_button);
         }
-    connect(this, SIGNAL(okClicked()), this, SLOT(slotOk()));
+    connect(okButton, SIGNAL(clicked()), this, SLOT(slotOk()));
     setHelp("taggingbranching");
 }
 
@@ -142,7 +163,7 @@ void TagDialog::slotOk()
         return;
     }
 
-    KDialog::accept();
+    QDialog::accept();
 }
 
 
@@ -153,7 +174,6 @@ void TagDialog::tagButtonClicked()
 }
 
 
-#include "tagdialog.moc"
 
 
 // Local Variables:

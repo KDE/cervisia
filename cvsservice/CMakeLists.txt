@@ -9,21 +9,22 @@ set(cvsservice_bin_KDEINIT_SRCS
    cvsserviceutils.cpp 
    cvsloginjob.cpp) 
 
-qt4_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.cvsservice.xml cvsservice.h CvsService) 
+qt5_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.cvsservice.xml cvsservice.h CvsService) 
 
-qt4_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.cvsloginjob.xml cvsloginjob.h CvsLoginJob)
+qt5_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.cvsloginjob.xml cvsloginjob.h CvsLoginJob)
 
-qt4_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.repository.xml repository.h Repository)
+qt5_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.repository.xml repository.h Repository)
 
-qt4_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.cvsjob.xml cvsjob.h CvsJob)
+qt5_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.cvsjob.xml cvsjob.h CvsJob)
 
 
 
-kde4_add_kdeinit_executable( cvsservice_bin NOGUI ${cvsservice_bin_KDEINIT_SRCS})
+kf5_add_kdeinit_executable(cvsservice_bin ${cvsservice_bin_KDEINIT_SRCS})
+# TODO ecm_mark_nongui_executable(cvsservice_bin)
 set_target_properties(cvsservice_bin PROPERTIES OUTPUT_NAME cvsservice)
 
 
-target_link_libraries(kdeinit_cvsservice_bin  ${KDE4_KIO_LIBS} ${KDE4_KDESU_LIBS} )
+target_link_libraries(kdeinit_cvsservice_bin  KF5::KIOCore ${KDE4_KDESU_LIBS} )
 set_target_properties(kdeinit_cvsservice_bin PROPERTIES OUTPUT_NAME kdeinit4_cvsservice)
 
 install(TARGETS kdeinit_cvsservice_bin ${INSTALL_TARGETS_DEFAULT_ARGS} )
@@ -36,9 +37,9 @@ install(TARGETS cvsservice_bin  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 set(cvsaskpass_KDEINIT_SRCS cvsaskpass.cpp )
 
 
-kde4_add_kdeinit_executable( cvsaskpass ${cvsaskpass_KDEINIT_SRCS})
+kf5_add_kdeinit_executable( cvsaskpass ${cvsaskpass_KDEINIT_SRCS})
 
-target_link_libraries(kdeinit_cvsaskpass  ${KDE4_KDEUI_LIBS} ${KDE4_KDESU_LIBS} )
+target_link_libraries(kdeinit_cvsaskpass   ${KDE4_KDESU_LIBS} )
 
 install(TARGETS kdeinit_cvsaskpass ${INSTALL_TARGETS_DEFAULT_ARGS} )
 

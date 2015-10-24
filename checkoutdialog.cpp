@@ -29,17 +29,19 @@
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QLabel>
-#include <QLayout>
 #include <QPushButton>
 #include <QVBoxLayout>
 
 // KDE
 #include <kfiledialog.h>
-#include <klineedit.h>
+#include <QLineEdit>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kurlcompletion.h>
 #include <kconfiggroup.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QFileDialog>
 
 #include "progressdialog.h"
 #include "repositories.h"
@@ -52,21 +54,32 @@ using Cervisia::IsValidTag;
 
 CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
                                ActionType action, QWidget* parent)
-    : KDialog(parent)
+    : QDialog(parent)
     , act(action)
     , partConfig(cfg)
     , cvsService(service)
 {
-    setCaption( (action==Checkout)? i18n("CVS Checkout") : i18n("CVS Import") );
+    setWindowTitle( (action==Checkout)? i18n("CVS Checkout") : i18n("CVS Import") );
     setModal(true);
-    setButtons(Ok | Cancel | Help);
-    setDefaultButton(Ok);
-    showButtonSeparator(true);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
+    mainLayout->addWidget(buttonBox);
+    okButton->setDefault(true);
 
     QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
+    mainLayout->addWidget(mainWidget);
 
     QBoxLayout* layout = new QVBoxLayout(mainWidget);
+    mainLayout->addWidget(layout);
     layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
@@ -78,6 +91,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
         grid->setRowStretch(i, 0);
 
     repo_combo = new KComboBox(mainWidget);
+    mainLayout->addWidget(repo_combo);
     repo_combo->setEditable(true);
     repo_combo->setFocus();
     // make sure combobox is smaller than the screen
@@ -85,23 +99,28 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
     grid->addWidget(repo_combo, 0, 1);
 
     QLabel* repo_label = new QLabel(i18n("&Repository:"),mainWidget);
+    mainLayout->addWidget(repo_label);
     repo_label->setBuddy(repo_combo);
     grid->addWidget(repo_label, 0, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
     if( action == Import )
     {
-        module_edit = new KLineEdit(mainWidget);
+        module_edit = new QLineEdit(mainWidget);
+        mainLayout->addWidget(module_edit);
         grid->addWidget(module_edit, 1, 1);
         QLabel* module_label = new QLabel(i18n("&Module:"),mainWidget);
+        mainLayout->addWidget(module_label);
         module_label->setBuddy(module_edit);
         grid->addWidget(module_label, 1, 0, Qt::AlignLeft | Qt::AlignVCenter);
     }
     else
     {
         module_combo = new KComboBox(mainWidget);
+        mainLayout->addWidget(module_combo);
         module_combo->setEditable(true);
 
         QPushButton* module_button = new QPushButton(i18n("Fetch &List"), mainWidget);
+        mainLayout->addWidget(module_button);
         connect( module_button, SIGNAL(clicked()),
                  this, SLOT(moduleButtonClicked()) );
 
@@ -111,13 +130,16 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
         module_layout->addWidget(module_button, 0, Qt::AlignVCenter);
 
         QLabel* module_label = new QLabel(i18n("&Module:"),mainWidget);
+        mainLayout->addWidget(module_label);
         module_label->setBuddy(module_combo);
         grid->addWidget(module_label, 1, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
         branchCombo = new KComboBox(mainWidget);
+        mainLayout->addWidget(branchCombo);
         branchCombo->setEditable(true);
 
         QPushButton* branchButton = new QPushButton(i18n("Fetch &List"), mainWidget);
+        mainLayout->addWidget(branchButton);
         connect( branchButton, SIGNAL(clicked()),
                  this, SLOT(branchButtonClicked()) );
 
@@ -127,6 +149,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
         branchLayout->addWidget(branchButton, 0, Qt::AlignVCenter);
 
         QLabel* branch_label = new QLabel(i18n("&Branch tag:"), mainWidget);
+        mainLayout->addWidget(branch_label);
         branch_label->setBuddy( branchCombo );
         grid->addWidget(branch_label, 2, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
@@ -134,10 +157,12 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
                  this, SLOT(branchTextChanged()));
 
         recursive_box = new QCheckBox(i18n("Re&cursive checkout"), mainWidget);
+        mainLayout->addWidget(recursive_box);
         grid->addWidget(recursive_box, 6, 0, 1, 2);
     }
 
-    workdir_edit = new KLineEdit(mainWidget);
+    workdir_edit = new QLineEdit(mainWidget);
+    mainLayout->addWidget(workdir_edit);
     workdir_edit->setText(QDir::homePath());
     workdir_edit->setMinimumWidth(fontMetrics().width('X') * 40);
 
@@ -148,6 +173,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
              comp, SLOT(addItem(QString)) );
 
     QPushButton* dir_button = new QPushButton("...", mainWidget);
+    mainLayout->addWidget(dir_button);
     connect( dir_button, SIGNAL(clicked()),
              this, SLOT(dirButtonClicked()) );
     dir_button->setFixedWidth(30);
@@ -158,26 +184,32 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
     workdir_layout->addWidget(dir_button, 0, Qt::AlignVCenter);
 
     QLabel* workdir_label = new QLabel(i18n("Working &folder:"), mainWidget);
+    mainLayout->addWidget(workdir_label);
     workdir_label->setBuddy( workdir_edit );
     grid->addWidget(workdir_label, (action==Import)? 2 : 3, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
     if( action == Import )
     {
-        vendortag_edit = new KLineEdit(mainWidget);
+        vendortag_edit = new QLineEdit(mainWidget);
+        mainLayout->addWidget(vendortag_edit);
         grid->addWidget(vendortag_edit, 3, 1);
 
         QLabel* vendortag_label = new QLabel(i18n("&Vendor tag:"), mainWidget);
+        mainLayout->addWidget(vendortag_label);
         vendortag_label->setBuddy( vendortag_edit );
         grid->addWidget(vendortag_label, 3, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
-        releasetag_edit = new KLineEdit(mainWidget);
+        releasetag_edit = new QLineEdit(mainWidget);
+        mainLayout->addWidget(releasetag_edit);
         grid->addWidget(releasetag_edit, 4, 1);
 
         QLabel* releasetag_label = new QLabel(i18n("&Release tag:"), mainWidget);
+        mainLayout->addWidget(releasetag_label);
         releasetag_label->setBuddy( releasetag_edit );
         grid->addWidget(releasetag_label, 4, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
-        ignore_edit = new KLineEdit(mainWidget);
+        ignore_edit = new QLineEdit(mainWidget);
+        mainLayout->addWidget(ignore_edit);
         grid->addWidget(ignore_edit, 5, 1);
 
         QLabel* ignore_label = new QLabel( i18n("&Ignore files:"),
@@ -185,7 +217,8 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
         ignore_label->setBuddy( ignore_edit );
         grid->addWidget(ignore_label, 5, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
-        comment_edit = new KLineEdit(mainWidget);
+        comment_edit = new QLineEdit(mainWidget);
+        mainLayout->addWidget(comment_edit);
         grid->addWidget(comment_edit, 6, 1);
 
         QLabel* comment_label = new QLabel(i18n("&Comment:"),
@@ -194,6 +227,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
         grid->addWidget(comment_label, 6, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
         binary_box = new QCheckBox(i18n("Import as &binaries"), mainWidget);
+        mainLayout->addWidget(binary_box);
         grid->addWidget(binary_box, 7, 0, 1, 2);
 
         m_useModificationTimeBox = new QCheckBox(
@@ -202,14 +236,17 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
     }
     else
     {
-        alias_edit = new KLineEdit(mainWidget);
+        alias_edit = new QLineEdit(mainWidget);
+        mainLayout->addWidget(alias_edit);
         grid->addWidget(alias_edit, 4, 1);
 
         QLabel* alias_label = new QLabel(i18n("Chec&k out as:"),mainWidget);
+        mainLayout->addWidget(alias_label);
         alias_label->setBuddy(alias_edit);
         grid->addWidget(alias_label, 4, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
         export_box = new QCheckBox(i18n("Ex&port only"), mainWidget);
+        mainLayout->addWidget(export_box);
         grid->addWidget(export_box, 5, 0, 1, 2);
     }
 
@@ -227,7 +264,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
     setHelp((act == Import) ? "importing" : "checkingout");
 
     restoreUserInput();
-    connect(this,SIGNAL(okClicked()),this,SLOT(slotOk()));
+    connect(okButton,SIGNAL(clicked()),this,SLOT(slotOk()));
 }
 
 
@@ -348,13 +385,13 @@ void CheckoutDialog::slotOk()
 
     saveUserInput();
 
-    KDialog::accept();
+    QDialog::accept();
 }
 
 
 void CheckoutDialog::dirButtonClicked()
 {
-    QString dir = KFileDialog::getExistingDirectory(workdir_edit->text());
+    QString dir = QFileDialog::getExistingDirectory(0, QString(), workdir_edit->text());
     if (!dir.isEmpty())
         workdir_edit->setText(dir);
 }
@@ -502,7 +539,6 @@ void CheckoutDialog::branchTextChanged()
 }
 
 
-#include "checkoutdialog.moc"
 
 
 // Local Variables:

@@ -28,21 +28,36 @@
 #include <QBoxLayout>
 
 #include <klocale.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 
 WatchDialog::WatchDialog(ActionType action, QWidget *parent)
-    : KDialog(parent)
+    : QDialog(parent)
 {
-    setCaption( (action==Add)? i18n("CVS Watch Add") : i18n("CVS Watch Remove") );
+    setWindowTitle( (action==Add)? i18n("CVS Watch Add") : i18n("CVS Watch Remove") );
     setModal(true);
-    setButtons(Ok | Cancel | Help);
-    setDefaultButton(Ok);
-    showButtonSeparator(true);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
+    mainLayout->addWidget(buttonBox);
+    okButton->setDefault(true);
 
     QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
+    mainLayout->addWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
+    mainLayout->addWidget(layout);
     layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
@@ -52,11 +67,13 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent)
     layout->addWidget(textlabel, 0);
 
     all_button = new QRadioButton(i18n("&All"), mainWidget);
+    mainLayout->addWidget(all_button);
     all_button->setFocus();
     all_button->setChecked(true);
     layout->addWidget(all_button);
 
     only_button = new QRadioButton(i18n("&Only:"), mainWidget);
+    mainLayout->addWidget(only_button);
     layout->addWidget(only_button);
 
     QGridLayout *eventslayout = new QGridLayout();
@@ -66,18 +83,22 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent)
     eventslayout->setColumnStretch(1, 1);
 
     commitbox = new QCheckBox(i18n("&Commits"), mainWidget);
+    mainLayout->addWidget(commitbox);
     commitbox->setEnabled(false);
     eventslayout->addWidget(commitbox, 0, 1);
 
     editbox = new QCheckBox(i18n("&Edits"), mainWidget);
+    mainLayout->addWidget(editbox);
     editbox->setEnabled(false);
     eventslayout->addWidget(editbox, 1, 1);
 
     uneditbox = new QCheckBox(i18n("&Unedits"), mainWidget);
+    mainLayout->addWidget(uneditbox);
     uneditbox->setEnabled(false);
     eventslayout->addWidget(uneditbox, 2, 1);
 
     QButtonGroup* group = new QButtonGroup(mainWidget);
+    mainLayout->addWidget(group);
     group->addButton(all_button);
     group->addButton(only_button);
 

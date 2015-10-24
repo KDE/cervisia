@@ -205,4 +205,3 @@ bool SshAgent::startSshAgent()
 }
 
 
-#include "sshagent.moc"

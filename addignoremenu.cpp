@@ -112,4 +112,3 @@ void AddIgnoreMenu::appendIgnoreFile(const QString& path, const QString& fileNam
 }
 
 
-#include "addignoremenu.moc"
