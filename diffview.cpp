@@ -29,11 +29,12 @@
 
 #include <kconfig.h>
 #include <kconfiggroup.h>
-#include <kdebug.h>
+#include <QDebug>
 #include <kcolorscheme.h>
 #include <klocale.h>
 
 #include "cervisiasettings.h"
+#include "debug.h"
 
 class DiffViewItem
 {
@@ -198,7 +199,7 @@ QString DiffView::stringAtOffset(int offset)
 {
     if (offset >= items.count())
     {
-        kDebug(8050) << "Internal error: lineAtOffset";
+        qCDebug(log_cervisia) << "Internal error: lineAtOffset";
     }
     return items.at(offset)->line;
 }
@@ -216,7 +217,7 @@ int DiffView::findLine(int lineno)
         if ( items[i]->no == lineno )
             return i;
 
-    kDebug(8050) << "Internal Error: Line" << lineno << "not found";
+    qCDebug(log_cervisia) << "Internal Error: Line" << lineno << "not found";
     return -1;
 }
 

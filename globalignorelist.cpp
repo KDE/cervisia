@@ -20,7 +20,7 @@
 using namespace Cervisia;
 
 #include <qdir.h>
-#include <kdebug.h>
+#include <QDebug>
 #include <QTemporaryFile>
 
 #include "cvsserviceinterface.h"

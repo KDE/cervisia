@@ -46,7 +46,7 @@ ProtocolView::ProtocolView(const QString& appId, QWidget *parent)
     setUndoRedoEnabled(false);
     setTabChangesFocus(true);
 
-    //kDebug(8050) << "protocol view appId :" << appId;
+    //qCDebug(log_cervisia) << "protocol view appId :" << appId;
 
     job = new OrgKdeCervisiaCvsserviceCvsjobInterface(appId, "/NonConcurrentJob",QDBusConnection::sessionBus(), this);
 
@@ -101,7 +101,7 @@ void ProtocolView::contextMenuEvent(QContextMenuEvent* event)
 
 void ProtocolView::cancelJob()
 {
-    kDebug(8050);
+    qCDebug(log_cervisia);
     job->cancel();
 }
 
@@ -125,7 +125,7 @@ void ProtocolView::slotReceivedOutput(QString buffer)
 
 void ProtocolView::slotJobExited(bool normalExit, int exitStatus)
 {
-    kDebug(8050);
+    qCDebug(log_cervisia);
     QString msg;
 
     if( normalExit )

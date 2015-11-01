@@ -21,8 +21,8 @@
 
 #include <kfind.h>
 #include <kfinddialog.h>
-#include <klocale.h>
 #include <QScrollBar>
+#include <KLocalizedString>
 #include "loginfo.h"
 
 using namespace Cervisia;
@@ -46,17 +46,17 @@ void LogPlainView::addRevision(const LogInfo& logInfo)
     // assemble revision information lines
     QString logEntry;
 
-    logEntry += "<b>" + i18n("revision %1", Qt::escape(logInfo.m_revision)) +
+    logEntry += "<b>" + i18n("revision %1", logInfo.m_revision.toHtmlEscaped()) +
                 "</b>";
-    logEntry += " &nbsp;[<a href=\"revA#" + Qt::escape(logInfo.m_revision) + "\">" +
+    logEntry += " &nbsp;[<a href=\"revA#" + logInfo.m_revision.toHtmlEscaped() + "\">" +
                 i18n("Select for revision A") +
                 "</a>]";
-    logEntry += " [<a href=\"revB#" + Qt::escape(logInfo.m_revision) + "\">" +
+    logEntry += " [<a href=\"revB#" + logInfo.m_revision.toHtmlEscaped() + "\">" +
                 i18n("Select for revision B") +
                 "</a>]<br>";
     logEntry += "<i>" +
-                i18n("date: %1; author: %2", Qt::escape(logInfo.dateTimeToString()),
-                                             Qt::escape(logInfo.m_author)) +
+                i18n("date: %1; author: %2", logInfo.dateTimeToString().toHtmlEscaped(),
+                                             logInfo.m_author.toHtmlEscaped()) +
                 "</i><br><br>";
 
     insertHtml(logEntry);
@@ -69,7 +69,7 @@ void LogPlainView::addRevision(const LogInfo& logInfo)
     for( LogInfo::TTagInfoSeq::const_iterator it = logInfo.m_tags.begin();
          it != logInfo.m_tags.end(); ++it )
     {
-        insertHtml("<br><i>" + Qt::escape((*it).toString()) + "</i>");
+        insertHtml("<br><i>" + (*it).toString().toHtmlEscaped() + "</i>");
     }
 
     // add an empty line when we had tags or branches

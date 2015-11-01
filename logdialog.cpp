@@ -33,7 +33,7 @@
 #include <qsplitter.h>
 
 #include <kconfig.h>
-#include <kdebug.h>
+#include <QDebug>
 #include <kfinddialog.h>
 #include <kglobalsettings.h>
 //#include <KTreeWidgetSearchLine>
@@ -61,6 +61,7 @@
 #include "misc.h"
 #include "progressdialog.h"
 #include "patchoptiondialog.h"
+#include "debug.h"
 
 
 LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
@@ -73,14 +74,15 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
-    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-    QPushButton *user1Button = new QPushButton;
+    connect(okButton, &QPushButton::clicked, this, &LogDialog::slotOk);
+    user1Button = new QPushButton;
     buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
-    QPushButton *user2Button = new QPushButton;
+    user2Button = new QPushButton;
     buttonBox->addButton(user2Button, QDialogButtonBox::ActionRole);
-    QPushButton *user3Button = new QPushButton;
+    user3Button = new QPushButton;
     buttonBox->addButton(user3Button, QDialogButtonBox::ActionRole);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
@@ -449,20 +451,6 @@ bool LogDialog::parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service
     return true;    // successful
 }
 
-//Adapt code and connect okbutton or other to new slot. It doesn't exist in qdialog
-void LogDialog::slotButtonClicked(int button)
-{
-    if ( button == QDialog::Ok )
-    {
-        // ok button (used for "view") shall not close the dialog
-        slotOk();
-        return;
-    }
-
-//Adapt code and connect okbutton or other to new slot. It doesn't exist in qdialog
-    QDialog::slotButtonClicked(button);
-}
-
 void LogDialog::slotOk()
 {
     // make sure that the user selected a revision
@@ -494,12 +482,12 @@ void LogDialog::slotOk()
     if( dlg.execute() )
     {
         // make file read-only
-        chmod(QFile::encodeName(tempFileName), 0400);
+        QFile::setPermissions(tempFileName, QFileDevice::ReadOwner);
 
         // open file in preferred editor
         KUrl url;
         url.setPath(tempFileName);
-        (void) new KRun(url, 0, true, false);
+        (void) new KRun(url, 0, true);
     }
 }
 
@@ -612,7 +600,7 @@ void LogDialog::revisionSelected(QString rev, bool rmb)
                 updateButtons();
                 return;
             }
-    kDebug(8050) << "Internal error: Revision not found " << rev << ".";
+    qCDebug(log_cervisia) << "Internal error: Revision not found " << rev << ".";
 }
 
 

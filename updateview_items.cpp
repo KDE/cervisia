@@ -27,7 +27,7 @@
 #include <QPixmap>
 #include <QTextStream>
 
-#include <kdebug.h>
+#include <QDebug>
 #include <kcolorscheme.h>
 #include <kiconloader.h>
 #include <klocale.h>
@@ -731,7 +731,7 @@ UpdateDirItem* findOrCreateDirItem(const QString& dirPath,
                 // - update status (a file item is created for the directory)
                 // - add new directory in Cervisia
                 // - update status
-                kDebug(8050) << "file changed to dir " << dirName;
+                qCDebug(log_cervisia) << "file changed to dir " << dirName;
 
                 // just create a new dir item, createDirItem() will delete the
                 // file item and update the m_itemsByName map
@@ -740,7 +740,7 @@ UpdateDirItem* findOrCreateDirItem(const QString& dirPath,
 
             if (!item)
             {
-                kDebug(8050) << "create dir item " << dirName;
+                qCDebug(log_cervisia) << "create dir item " << dirName;
                 Entry entry;
                 entry.m_name = dirName;
                 entry.m_type = Entry::Dir;

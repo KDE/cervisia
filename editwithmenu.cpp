@@ -21,7 +21,7 @@ using namespace Cervisia;
 
 #include <QMenu>
 
-#include <kdebug.h>
+#include <QDebug>
 #include <kiconloader.h>
 #include <kmimetype.h>
 #include <KMimeTypeTrader>
@@ -37,7 +37,7 @@ EditWithMenu::EditWithMenu(const KUrl& url, QWidget* parent)
     KMimeType::Ptr type = KMimeType::findByUrl(url, 0, true);
     if( type->name() == KMimeType::defaultMimeType() )
     {
-        kDebug(8050) << "Couldn't find mime type!";
+        qCDebug(log_cervisia) << "Couldn't find mime type!";
         return;
     }
 

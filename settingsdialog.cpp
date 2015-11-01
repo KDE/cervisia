@@ -33,7 +33,6 @@
 #include <kfontdialog.h>
 #include <kglobal.h>
 #include <QLineEdit>
-#include <klocale.h>
 #include <knuminput.h>
 #include <kurlrequester.h>
 #include <kcomponentdata.h>

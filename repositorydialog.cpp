@@ -31,7 +31,7 @@
 #include <kconfig.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kdebug.h>
+#include <QDebug>
 #include <kconfiggroup.h>
 #include <KConfigGroup>
 #include <QDialogButtonBox>
@@ -100,7 +100,7 @@ RepositoryListItem::RepositoryListItem(QTreeWidget* parent, const QString& repo,
     : QTreeWidgetItem(parent)
     , m_isLoggedIn(loggedin)
 {
-    kDebug(8050) << "repo=" << repo;
+    qCDebug(log_cervisia) << "repo=" << repo;
     setText(0, repo);
 
     changeLoginStatusColumn();
@@ -304,7 +304,7 @@ void RepositoryDialog::readConfigFile()
         const KConfigGroup repoGroup = m_serviceConfig->group(QLatin1String("Repository-") +
                                                               ritem->repository());
 
-        kDebug(8050) << "repository=" << ritem->repository();
+        qCDebug(log_cervisia) << "repository=" << ritem->repository();
 
         QString rsh       = repoGroup.readEntry("rsh", QString());
         QString server    = repoGroup.readEntry("cvs_server", QString());
@@ -440,7 +440,7 @@ void RepositoryDialog::slotLoginClicked()
     if( !item )
         return;
 
-    kDebug(8050) << "repo=" << item->repository();
+    qCDebug(log_cervisia) << "repo=" << item->repository();
 
     QDBusReply<QDBusObjectPath> job = m_cvsService->login(item->repository());
     if( !job.isValid() )
@@ -522,7 +522,7 @@ void RepositoryDialog::writeRepositoryData(RepositoryListItem* item)
     KConfigGroup repoGroup = m_serviceConfig->group(QLatin1String("Repository-") +
                               item->repository());
 
-    kDebug(8050) << "repository=" << item->repository();
+    qCDebug(log_cervisia) << "repository=" << item->repository();
 
     repoGroup.writeEntry("rsh", item->rsh());
     repoGroup.writeEntry("cvs_server", item->server());

@@ -25,17 +25,19 @@
 #include <qtimer.h>
 #include <QGridLayout>
 #include <QEventLoop>
+#include <QMovie>
 #include <KTextEdit>
 
 #include <cvsjobinterface.h>
-#include <kanimatedbutton.h>
-#include <kapplication.h>
+#include <QLabel>
+#include <QApplication>
 #include <KConfigGroup>
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QVBoxLayout>
 
 #include "cervisiasettings.h"
+#include "debug.h"
 
 
 struct ProgressDialog::Private
@@ -52,7 +54,7 @@ struct ProgressDialog::Private
     QEventLoop      eventLoop;
 
     QTimer*         timer;
-    KAnimatedButton*    gear;
+    QLabel*         gear;
     KTextEdit*      resultbox;
 };
 
@@ -84,7 +86,7 @@ ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,const QSt
     d->jobPath = path.path();
     d->cvsJob = new OrgKdeCervisiaCvsserviceCvsjobInterface(cvsServiceNameService, path.path(), QDBusConnection::sessionBus(), this);
 
-    kDebug(8050) << "cvsServiceNameService:" << cvsServiceNameService
+    qCDebug(log_cervisia) << "cvsServiceNameService:" << cvsServiceNameService
                  << "CvsjobInterface" << path.path() << "valid:" << d->cvsJob->isValid();
 
     d->errorId1 = "cvs " + errorIndicator + ':';
@@ -106,23 +108,25 @@ void ProgressDialog::setupGui(const QString& heading)
 {
     QWidget* dummy = new QWidget(this);
 
+    QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(dummy);
 
     QGridLayout* layout = new QGridLayout(dummy);
-    mainLayout->addWidget(layout);
+    mainLayout->addLayout(layout);
 
     QLabel* textLabel = new QLabel(heading, dummy);
     mainLayout->addWidget(textLabel);
     layout->addWidget(textLabel, 0, 0);
 
-    d->gear = new KAnimatedButton(dummy);
-    mainLayout->addWidget(gear);
-    d->gear->setIconSize(QSize(32, 32));
-    d->gear->setIcons("kde");
+    d->gear = new QLabel(dummy);
+    mainLayout->addWidget(d->gear);
+#warning TODO
+    //d->gear->setIconSize(QSize(32, 32));
+    //d->gear->setIcons("kde");
     layout->addWidget(d->gear, 0, 1);
 
     d->resultbox = new KTextEdit(dummy);
-    mainLayout->addWidget(resultbox);
+    mainLayout->addWidget(d->resultbox);
     d->resultbox->setReadOnly(true);
     QFontMetrics fm(d->resultbox->fontMetrics());
     d->resultbox->setMinimumSize(fm.width("0")*70, fm.lineSpacing()*8);
@@ -135,7 +139,7 @@ bool ProgressDialog::execute()
     // get command line and display it
     QString cmdLine = d->cvsJob->cvsCommand();
     d->resultbox->insertPlainText(cmdLine);
-    kDebug(8050) << "cmdLine:" << cmdLine;
+    qCDebug(log_cervisia) << "cmdLine:" << cmdLine;
 
     QDBusConnection::sessionBus().connect(QString(), d->jobPath,
                                           "org.kde.cervisia.cvsservice.cvsjob",
@@ -194,7 +198,7 @@ QStringList ProgressDialog::getOutput() const
 
 void ProgressDialog::slotReceivedOutputNonGui(QString buffer)
 {
-    kDebug(8050) << buffer;
+    qCDebug(log_cervisia) << buffer;
 
     d->buffer += buffer;
 
@@ -209,7 +213,7 @@ void ProgressDialog::slotReceivedOutputNonGui(QString buffer)
 
 void ProgressDialog::slotReceivedOutput(QString buffer)
 {
-    kDebug(8050) << buffer;
+    qCDebug(log_cervisia) << buffer;
     d->buffer += buffer;
     processOutput();
 }
@@ -222,7 +226,7 @@ void ProgressDialog::slotJobExited(bool normalExit, int status)
     if( !d->isShown )
         stopNonGuiPart();
 
-    d->gear->stop();
+    d->gear->movie()->stop();
     if( !d->buffer.isEmpty() )
     {
         d->buffer += '\n';
@@ -291,7 +295,7 @@ void ProgressDialog::startGuiPart()
     show();
     d->isShown = true;
 
-    d->gear->start();
+    d->gear->movie()->start();
     QApplication::restoreOverrideCursor();
 }
 

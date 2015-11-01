@@ -34,7 +34,7 @@
 #include <kmessagebox.h>
 #include <QTemporaryFile>
 #include <kuser.h>
-#include <kdebug.h>
+#include <QDebug>
 
 #include "cvsserviceinterface.h"
 #include "progressdialog.h"
@@ -180,10 +180,10 @@ QString Cervisia::NormalizeRepository(const QString& repository)
         port     = rx.cap(6);
         path     = rx.cap(7);
 
-        kDebug(8050) << "username=" << userName;
-        kDebug(8050) << "hostname=" << hostName;
-        kDebug(8050) << "port    =" << port;
-        kDebug(8050) << "path    =" << path;
+        qCDebug(log_cervisia) << "username=" << userName;
+        qCDebug(log_cervisia) << "hostname=" << hostName;
+        qCDebug(log_cervisia) << "port    =" << port;
+        qCDebug(log_cervisia) << "path    =" << path;
 
         if( port.isEmpty() )
             port = "2401";
@@ -194,7 +194,7 @@ QString Cervisia::NormalizeRepository(const QString& repository)
         QString canonicalForm = ":pserver:" + userName + '@' + hostName +
                                 ':' + port + path;
 
-        kDebug(8050) << "canonicalForm=" << canonicalForm
+        qCDebug(log_cervisia) << "canonicalForm=" << canonicalForm
                      << endl;
         return canonicalForm;
     }

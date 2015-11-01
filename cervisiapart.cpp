@@ -41,7 +41,7 @@
 #include <kstandardaction.h>
 #include <kxmlguifactory.h>
 #include <krun.h>
-#include <kdebug.h>
+#include <QDebug>
 #include <kmessagebox.h>
 #include <kglobal.h>
 #include <ktoolinvocation.h>
@@ -78,6 +78,7 @@
 #include "patchoptiondialog.h"
 #include "addignoremenu.h"
 #include "editwithmenu.h"
+#include "debug.h"
 
 #include "cvsjobinterface.h"
 #include "version.h"
@@ -129,7 +130,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
     else
       // create a reference to the service
       cvsService = new OrgKdeCervisiaCvsserviceCvsserviceInterface(m_cvsServiceInterfaceName, "/CvsService",QDBusConnection::sessionBus(), this);
-    //kDebug(8050) << "m_cvsServiceInterfaceName:" << m_cvsServiceInterfaceName;
+    //qCDebug(log_cervisia) << "m_cvsServiceInterfaceName:" << m_cvsServiceInterfaceName;
     //kdDebug(8050) << "cvsService->service():" << cvsService->service()<<endl;
     // Create UI
     KConfigGroup conf( config(), "LookAndFeel");
@@ -724,7 +725,7 @@ void CervisiaPart::popupRequested(const QPoint& p)
         }
     }
     else
-        kDebug(8050) << "can't get XML definition for" << xmlName << ", factory()=" << factory();
+        qCDebug(log_cervisia) << "can't get XML definition for" << xmlName << ", factory()=" << factory();
 }
 
 void CervisiaPart::updateActions()
@@ -1012,8 +1013,8 @@ void CervisiaPart::slotCommit()
                                              opt_commitRecursive);
         QString cmdline;
         QDBusObjectPath cvsJob = cvsJobPath;
-        kDebug(8050) << " commit: cvsJob.path():" << cvsJob.path();
-        kDebug(8050) << " list:" << list << "dlg.logMessage():" << dlg.logMessage()
+        qCDebug(log_cervisia) << " commit: cvsJob.path():" << cvsJob.path();
+        qCDebug(log_cervisia) << " list:" << list << "dlg.logMessage():" << dlg.logMessage()
                      << "opt_commitRecursive" << opt_commitRecursive;
         if(cvsJob.path().isEmpty())
            return;
@@ -1460,7 +1461,7 @@ void CervisiaPart::slotImport()
 
     QDBusObjectPath cvsJob = cvsJobPath;
     QString cmdline;
-    //kdDebug()<<" cvsJob.path() :"<<cvsJob.path()<<endl;
+    ////qDebug()<<" cvsJob.path() :"<<cvsJob.path()<<endl;
     if(cvsJob.path().isEmpty())
 	return;
     OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);

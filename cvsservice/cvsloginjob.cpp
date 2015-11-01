@@ -20,7 +20,7 @@
 
 #include "cvsloginjob.h"
 
-#include <kdebug.h>
+#include <QDebug>
 #include <klocale.h>
 #include <kpassworddialog.h>
 

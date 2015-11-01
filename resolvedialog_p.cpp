@@ -60,14 +60,14 @@ ResolveEditorDialog::ResolveEditorDialog(KConfig& cfg, QWidget *parent)
                    fm.lineSpacing() * 40);
 
     KConfigGroup cg(&m_partConfig, "ResolveEditorDialog");
-    restoreDialogSize(cg);
+    restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
 }
 
 
 ResolveEditorDialog::~ResolveEditorDialog()
 {
     KConfigGroup cg(&m_partConfig, "ResolveEditorDialog");
-    saveDialogSize(cg);
+    cg.writeEntry("geometry", saveGeometry());
 }
 
 

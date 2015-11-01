@@ -54,6 +54,7 @@ set(libcervisia_SRCS
    qttableview.cpp
    tooltip.cpp
    settingsdialog.cpp
+   debug.cpp
    )
 
 qt5_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia.cvsservice.xml )
@@ -111,7 +112,9 @@ set(cervisiapart_PART_SRCS ${libcervisia_SRCS}
    globalignorelist.cpp
    addignoremenu.cpp
    editwithmenu.cpp
-   logmessageedit.cpp )
+   logmessageedit.cpp
+   debug.cpp
+)
 
 
 qt5_add_dbus_adaptor(cervisiapart_PART_SRCS org.kde.cervisia.protocolview.xml protocolview.h ProtocolView)

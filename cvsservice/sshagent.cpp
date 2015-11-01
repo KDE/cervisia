@@ -21,7 +21,7 @@
 #include "sshagent.h"
 
 #include <qregexp.h>
-#include <kdebug.h>
+#include <QDebug>
 #include <kdeversion.h>
 #include <kprocess.h>
 

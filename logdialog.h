@@ -34,6 +34,8 @@ class KComboBox;
 class QLabel;
 class QSplitter;
 class QTabWidget;
+class QPushButton;
+class QDialogButtonBox;
 class KTextEdit;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 class KConfig;
@@ -92,6 +94,8 @@ private:
     KTextEdit *commentbox[2];
     KTextEdit *tagsbox[2];
     KComboBox *tagcombo[2];
+    QPushButton *user1Button, *user2Button, *user3Button, *okButton;
+    QDialogButtonBox *buttonBox;
 
     OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService;
     KConfig&         partConfig;

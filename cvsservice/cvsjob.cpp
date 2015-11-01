@@ -22,7 +22,7 @@
 
 #include "sshagent.h"
 
-#include <kdebug.h>
+#include <QDebug>
 #include <kprocess.h>
 
 #include <cvsjobadaptor.h>

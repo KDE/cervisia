@@ -22,7 +22,7 @@
 
 #include <QApplication>
 #include <qpainter.h>
-#include <kdebug.h>
+#include <QDebug>
 #include <kglobal.h>
 #include <kcolorscheme.h>
 
@@ -207,15 +207,15 @@ void LogTreeView::addRevision(const Cervisia::LogInfo& logInfo)
     items.append(item);
 
 #if 0
-    kDebug(8050) << "Dump:";
-    kDebug(8050) << "Rows:" << numRows() << "Cols:" << numCols();
+    qCDebug(log_cervisia) << "Dump:";
+    qCDebug(log_cervisia) << "Rows:" << numRows() << "Cols:" << numCols();
     foreach (LogTreeItem* treeItem, items)
     {
-        kDebug(8050) << "Rev:" << treeItem->m_logInfo.m_revision;
-        kDebug(8050) << "row:" << treeItem->row << ", col:" << treeItem->col;
-        kDebug(8050) << "fob:" << treeItem->firstonbranch;
+        qCDebug(log_cervisia) << "Rev:" << treeItem->m_logInfo.m_revision;
+        qCDebug(log_cervisia) << "row:" << treeItem->row << ", col:" << treeItem->col;
+        qCDebug(log_cervisia) << "fob:" << treeItem->firstonbranch;
     }
-    kDebug(8050) << "End Dump";
+    qCDebug(log_cervisia) << "End Dump";
 #endif
 }
 

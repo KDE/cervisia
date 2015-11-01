@@ -29,14 +29,13 @@
 #include <qpushbutton.h>
 #include <qtextcodec.h>
 #include <qtextstream.h>
-//Added by qt3to4:
 #include <QKeyEvent>
 #include <QHBoxLayout>
 #include <QBoxLayout>
 #include <QVBoxLayout>
 #include <QSplitter>
-#include <kdebug.h>
-#include <kfiledialog.h>
+#include <QDebug>
+#include <QFileDialog>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <qregexp.h>
@@ -46,6 +45,7 @@
 #include <QPushButton>
 #include <KGuiItem>
 #include "misc.h"
+#include "debug.h"
 using Cervisia::ResolveEditorDialog;
 
 
@@ -112,18 +112,15 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
     , partConfig(cfg)
 {
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help|QDialogButtonBox::Close);
-    QWidget *mainWidget = new QWidget(this);
+
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
-    mainLayout->addWidget(mainWidget);
     QPushButton *user1Button = new QPushButton;
     buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
     QPushButton *user2Button = new QPushButton;
     buttonBox->addButton(user2Button, QDialogButtonBox::ActionRole);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
-    mainLayout->addWidget(buttonBox);
     KGuiItem::assign(user1Button, KStandardGuiItem::saveAs());
     KGuiItem::assign(user2Button, KStandardGuiItem::save());
     buttonBox->button(QDialogButtonBox::Close)->setDefault(true);
@@ -132,8 +129,8 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
     mainLayout->addWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    mainLayout->addWidget(layout);
-    layout->setSpacing(spacingHint());
+    mainLayout->addLayout(layout);
+    //layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
     QSplitter *vertSplitter = new QSplitter(Qt::Vertical, mainWidget);
@@ -222,23 +219,25 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
     connect(user2Button, SIGNAL(clicked()), SLOT(saveClicked()) );
     connect(user1Button, SIGNAL(clicked()), SLOT(saveAsClicked()) );
 
+    mainLayout->addWidget(buttonBox);
+
     QFontMetrics const fm(fontMetrics());
     setMinimumSize(fm.width('0') * 120,
                    fm.lineSpacing() * 40);
 
-    setHelp("resolvingconflicts");
+    //setHelp("resolvingconflicts");
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     KConfigGroup cg(&partConfig, "ResolveDialog");
-    restoreDialogSize(cg);
+    restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
 }
 
 
 ResolveDialog::~ResolveDialog()
 {
     KConfigGroup cg(&partConfig, "ResolveDialog");
-    saveDialogSize(cg);
+    cg.writeEntry("geometry", saveGeometry());
 
     qDeleteAll(items);
 }
@@ -555,7 +554,7 @@ void ResolveDialog::choose(ChooseType ch)
             m_contentMergedVersion = contentVersionB(item) + contentVersionA(item);
             break;
         default:
-            kDebug(8050) << "Internal error at switch";
+            qCDebug(log_cervisia) << "Internal error at switch";
         }
 
     updateMergedVersion(ch);
@@ -625,7 +624,7 @@ void ResolveDialog::saveClicked()
 void ResolveDialog::saveAsClicked()
 {
     QString filename =
-        KFileDialog::getSaveFileName(KUrl(), QString(), this, QString());
+        QFileDialog::getSaveFileName(this);
 
     if( !filename.isEmpty() && Cervisia::CheckOverwrite(filename) )
         saveFile(filename);
