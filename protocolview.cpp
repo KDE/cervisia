@@ -24,7 +24,7 @@
 
 #include <QAction>
 #include <QMenu>
-//#include <QTextDocument>
+#include <QContextMenuEvent>
 
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -32,6 +32,7 @@
 #include "cervisiapart.h"
 #include "cervisiasettings.h"
 #include "cvsjobinterface.h"
+#include "debug.h"
 
 
 ProtocolView::ProtocolView(const QString& appId, QWidget *parent)
@@ -166,7 +167,7 @@ void ProtocolView::appendLine(const QString &line)
 {
     // Escape output line, so that html tags in commit
     // messages aren't interpreted
-    const QString escapedLine = Qt::escape(line);
+    const QString escapedLine = line.toHtmlEscaped();
 
     // When we don't get the output from an update job then
     // just add it to the text edit.

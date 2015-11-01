@@ -25,12 +25,12 @@
 #include <qfile.h>
 #include <qtextstream.h>
 
-#include <kconfig.h>
-#include <kconfiggroup.h>
-#include <klocale.h>
+#include <KSharedConfig>
 #include <kmessagebox.h>
 #include <ktextedit.h>
 #include <KConfigGroup>
+#include <KLocalizedString>
+
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QVBoxLayout>
@@ -64,8 +64,6 @@ ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent)
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
-    mainLayout->addWidget(buttonBox);
     okButton->setDefault(true);
 
     edit = new KTextEdit(this);
@@ -79,8 +77,10 @@ ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent)
 
     mainLayout->addWidget(edit);
 
+    mainLayout->addWidget(buttonBox);
+
     KConfigGroup cg(&partConfig, "ChangeLogDialog");
-    restoreDialogSize(cg);
+    restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
     connect(okButton,SIGNAL(clicked()),this,SLOT(slotOk()));
 }
 
@@ -88,7 +88,7 @@ ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent)
 ChangeLogDialog::~ChangeLogDialog()
 {
     KConfigGroup cg(&partConfig, "ChangeLogDialog");
-    saveDialogSize(cg);
+    cg.writeEntry("geometry", saveGeometry());
 }
 
 

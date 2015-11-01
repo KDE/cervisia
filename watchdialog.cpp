@@ -26,9 +26,11 @@
 #include <qradiobutton.h>
 #include <QGridLayout>
 #include <QBoxLayout>
+#include <QGroupBox>
 
-#include <klocale.h>
 #include <KConfigGroup>
+#include <KLocalizedString>
+
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QVBoxLayout>
@@ -40,25 +42,21 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent)
     setWindowTitle( (action==Add)? i18n("CVS Watch Add") : i18n("CVS Watch Remove") );
     setModal(true);
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
-    QWidget *mainWidget = new QWidget(this);
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
-    mainLayout->addWidget(mainWidget);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
-    mainLayout->addWidget(buttonBox);
     okButton->setDefault(true);
 
     QFrame* mainWidget = new QFrame(this);
     mainLayout->addWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    mainLayout->addWidget(layout);
-    layout->setSpacing(spacingHint());
+    mainLayout->addLayout(layout);
+    //layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
     QLabel *textlabel = new QLabel
@@ -98,9 +96,16 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent)
     eventslayout->addWidget(uneditbox, 2, 1);
 
     QButtonGroup* group = new QButtonGroup(mainWidget);
-    mainLayout->addWidget(group);
     group->addButton(all_button);
     group->addButton(only_button);
+
+    QGroupBox *box = new QGroupBox(mainWidget);
+    mainLayout->addWidget(box);
+    QVBoxLayout *v = new QVBoxLayout(box);
+    v->addWidget(group->button(0));
+    v->addWidget(group->button(1));
+
+    mainLayout->addWidget(buttonBox);
 
     connect( only_button, SIGNAL(toggled(bool)),
              commitbox, SLOT(setEnabled(bool)) );
@@ -109,7 +114,7 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent)
     connect( only_button, SIGNAL(toggled(bool)),
              uneditbox, SLOT(setEnabled(bool)) );
 
-    setHelp("watches");
+    //setHelp("watches");
 }
 
 

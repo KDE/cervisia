@@ -23,13 +23,11 @@
 #include <qdir.h>
 #include <qfile.h>
 #include <qstring.h>
-//Added by qt3to4:
 #include <QTextStream>
 
 #include <ksharedconfig.h>
 #include <kdirwatch.h>
 #include <kstandarddirs.h>
-#include <kglobal.h>
 
 #include "sshagent.h"
 #include <QDBusConnection>
@@ -200,7 +198,7 @@ void Repository::slotConfigDirty(const QString& fileName)
     if( fileName == d->configFileName )
     {
         // reread the configuration data from disk
-        KGlobal::config()->reparseConfiguration();
+        KSharedConfig::openConfig()->reparseConfiguration();
         d->readConfig();
     }
 }
@@ -209,14 +207,14 @@ void Repository::slotConfigDirty(const QString& fileName)
 void Repository::Private::readGeneralConfig()
 {
     // get path to cvs client program
-    KConfigGroup cg(KGlobal::config(), "General");
+    KConfigGroup cg(KSharedConfig::openConfig(), "General");
     client = cg.readPathEntry("CVSPath", "cvs");
 }
 
 
 void Repository::Private::readConfig()
 {
-    KSharedConfig::Ptr config = KGlobal::config();
+    KSharedConfig::Ptr config = KSharedConfig::openConfig();
 
     // Sometimes the location can be unequal to the entry in the CVS/Root.
     //

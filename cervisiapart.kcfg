@@ -32,13 +32,13 @@
     <entry name="ProtocolFont" type="Font">
     </entry>
     <entry name="AnnotateFont" type="Font">
-      <default code="true">KGlobalSettings::fixedFont()</default>
+      <default code="true">QFontDatabase::systemFont(QFontDatabase::FixedFont)</default>
     </entry>
     <entry name="DiffFont" type="Font">
-      <default code="true">KGlobalSettings::fixedFont()</default>
+      <default code="true">QFontDatabase::systemFont(QFontDatabase::FixedFont)</default>
     </entry>
     <entry name="ChangeLogFont" type="Font">
-      <default code="true">KGlobalSettings::fixedFont()</default>
+      <default code="true">QFontDatabase::systemFont(QFontDatabase::FixedFont)</default>
     </entry>
   </group>
   <group name="General" >

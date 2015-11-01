@@ -19,12 +19,11 @@
  */
 
 #include <QRegExp>
+#include <QApplication>
+#include <QCommandLineParser>
 
 #include <kaboutdata.h>
-#include <kapplication.h>
-#include <kcmdlineargs.h>
-#include <klocale.h>
-#include <kpassworddialog.h>
+#include <KPasswordDialog>
 
 #include <iostream>
 
@@ -32,29 +31,30 @@
 
 extern "C" KDE_EXPORT int kdemain(int argc, char** argv)
 {
-    KAboutData about("cvsaskpass", 0, ki18n("cvsaskpass"), "0.1",
-                     ki18n("ssh-askpass for the CVS D-Bus Service"),
+    KAboutData about("cvsaskpass", 0, i18n("cvsaskpass"), "0.1",
+                     i18n("ssh-askpass for the CVS D-Bus Service"),
                      KAboutData::License_LGPL,
-                     ki18n("Copyright (c) 2003 Christian Loose"));
+                     i18n("Copyright (c) 2003 Christian Loose"));
 
-    KCmdLineArgs::init(argc, argv, &about);
-
-    KCmdLineOptions options;
-    options.add("+[prompt]", ki18n("prompt"));
-    KCmdLineArgs::addCmdLineOptions(options);
+    KAboutData::setApplicationData(about);
 
     // no need to register with the dcop server
     //KApplication::disableAutoDcopRegistration();
-    KApplication app;
+    QApplication app(argc, argv);
+
+    QCommandLineParser parser;
+    parser.addPositionalArgument(QCommandlineOption(QLatin1String("prompt"), i18n("prompt"), QLatin1String("[prompt]")));
 
     // no need for session management
     app.disableSessionManagement();
 
-    if( !KCmdLineArgs::parsedArgs()->count() )
+    parser.process(app);
+
+    if( !parser.positionalArguments()->count() )
         return 1;
 
     // parse repository name from the passed argument
-    QString prompt = KCmdLineArgs::parsedArgs()->arg(0);
+    QString prompt = parser.positionalArguments()[0];
     QRegExp rx("(.*@.*)'s password:");
 
     KPasswordDialog dlg;

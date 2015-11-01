@@ -30,13 +30,9 @@
 
 #include <kcolorbutton.h>
 #include <kconfig.h>
-#include <kfontdialog.h>
-#include <kglobal.h>
+#include <QFontDialog>
 #include <QLineEdit>
-#include <knuminput.h>
 #include <kurlrequester.h>
-#include <kcomponentdata.h>
-#include <kvbox.h>
 #include <KConfigGroup>
 #include <QDialogButtonBox>
 #include <QPushButton>
@@ -57,7 +53,11 @@ void FontButton::chooseFont()
 {
     QFont newFont(font());
 
-    if (KFontDialog::getFont(newFont, KFontChooser::NoDisplayFlags, this) == QDialog::Rejected)
+    bool ok;
+
+    QFontDialog::getFont(&ok, newFont, this);
+
+    if ( !ok )
         return;
 
     setFont(newFont);
@@ -116,7 +116,7 @@ SettingsDialog::SettingsDialog(KConfig *conf, QWidget *parent)
 
     readSettings();
 
-    setHelp("customization", "cervisia");
+    //setHelp("customization", "cervisia");
 }
 
 SettingsDialog::~SettingsDialog()
@@ -206,7 +206,7 @@ void SettingsDialog::writeSettings()
 
     config->sync();
 
-    CervisiaSettings::self()->writeConfig();
+    CervisiaSettings::self()->save();
 }
 
 void SettingsDialog::done(int res)
@@ -263,9 +263,8 @@ void SettingsDialog::addDiffPage()
     QGridLayout* layout = new QGridLayout(diffPage);
 
     QLabel *contextlabel = new QLabel( i18n("&Number of context lines in diff dialog:"), diffPage );
-    contextedit = new KIntNumInput( 0, diffPage );
+    contextedit = new QSpinBox(diffPage);
     contextedit->setRange(0, 65535);
-    contextedit->setSliderEnabled(false);
     contextlabel->setBuddy(contextedit);
 
     layout->addWidget(contextlabel, 0, 0);
@@ -279,9 +278,8 @@ void SettingsDialog::addDiffPage()
     layout->addWidget(diffoptedit, 1, 1);
 
     QLabel *tabwidthlabel = new QLabel(i18n("Tab &width in diff dialog:"), diffPage);
-    tabwidthedit = new KIntNumInput(0, diffPage);
+    tabwidthedit = new QSpinBox(diffPage);
     tabwidthedit->setRange(1, 16);
-    tabwidthedit->setSliderEnabled(false);
     tabwidthlabel->setBuddy(tabwidthedit);
 
     layout->addWidget(tabwidthlabel, 2, 0);
@@ -305,7 +303,9 @@ void SettingsDialog::addDiffPage()
  */
 void SettingsDialog::addStatusPage()
 {
-    KVBox* statusPage = new KVBox;
+    QWidget* statusPage = new QWidget;
+    QVBoxLayout *statusPageVBoxLayout = new QVBoxLayout(statusPage);
+    statusPageVBoxLayout->setMargin(0);
     KPageWidgetItem *page = new KPageWidgetItem( statusPage, i18n("Status") );
     page->setIcon( QIcon::fromTheme("fork") );
 
@@ -332,10 +332,9 @@ void SettingsDialog::addAdvancedPage()
 
     m_advancedPage = new Ui::AdvancedPage;
     m_advancedPage->setupUi(frame);
-    m_advancedPage->kcfg_Timeout->setRange(0, 50000, 100);
-    m_advancedPage->kcfg_Timeout->setSliderEnabled(false);
+    m_advancedPage->kcfg_Timeout->setRange(0, 50000);
+    m_advancedPage->kcfg_Timeout->setSingleStep(100);
     m_advancedPage->kcfg_Compression->setRange(0, 9);
-    m_advancedPage->kcfg_Compression->setSliderEnabled(false);
 
     addPage(page);
 }
@@ -346,11 +345,14 @@ void SettingsDialog::addAdvancedPage()
  */
 void SettingsDialog::addLookAndFeelPage()
 {
-    KVBox* lookPage = new KVBox;
+    QWidget* lookPage = new QWidget;
+    QVBoxLayout *lookPageVBoxLayout = new QVBoxLayout(lookPage);
+    lookPageVBoxLayout->setMargin(0);
     KPageWidgetItem *page = new KPageWidgetItem( lookPage, i18n("Appearance") );
     page->setIcon( QIcon::fromTheme("preferences-desktop-theme") );
 
     QGroupBox* fontGroupBox = new QGroupBox(i18n("Fonts"), lookPage);
+    lookPageVBoxLayout->addWidget(fontGroupBox);
 
     m_protocolFontBox  = new FontButton(i18n("Font for &Protocol Window..."),
                                         fontGroupBox);
@@ -368,6 +370,7 @@ void SettingsDialog::addLookAndFeelPage()
     fontLayout->addWidget( m_changelogFontBox );
 
     QGroupBox* colorGroupBox = new QGroupBox(i18n("Colors"), lookPage);
+    lookPageVBoxLayout->addWidget(colorGroupBox);
 
     QLabel* conflictLabel = new QLabel(i18n("Conflict:"), colorGroupBox);
     m_conflictButton      = new KColorButton(colorGroupBox);
@@ -415,6 +418,7 @@ void SettingsDialog::addLookAndFeelPage()
     colorLayout->addWidget( m_diffDeleteButton, 2, 4 );
 
     m_splitterBox = new QCheckBox(i18n("Split main window &horizontally"), lookPage);
+    lookPageVBoxLayout->addWidget(m_splitterBox);
 
     addPage(page);
 }

@@ -69,7 +69,7 @@ public:
 public slots:
     // unused because we overwrite the default behaviour of openUrl()
     virtual bool openFile() { return true; }
-    virtual bool openUrl( const KUrl & );
+    virtual bool openUrl( const QUrl & );
 
     void openFile(QString filename);
     void openFiles(const QStringList &filenames);
@@ -152,7 +152,7 @@ private:
     void readSettings();
     void writeSettings();
 
-    bool openSandbox(const KUrl& url);
+    bool openSandbox(const QUrl& url);
     void updateSandbox(const QString &extraopt = QString());
     void addOrRemove(AddRemoveDialog::ActionType action);
     void addOrRemoveWatch(WatchDialog::ActionType action);

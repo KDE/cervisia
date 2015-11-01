@@ -33,7 +33,6 @@
 #include <kfiledialog.h>
 #include <kinputdialog.h>
 #include <kcomponentdata.h>
-#include <klocale.h>
 #include <knotification.h>
 #include <kshell.h>
 #include <kpropertiesdialog.h>
@@ -48,6 +47,7 @@
 #include <kactioncollection.h>
 #include <ktoggleaction.h>
 #include <krecentfilesaction.h>
+#include <KLocalizedString>
 
 #include <repositoryinterface.h>
 #include <KConfigGroup>
@@ -86,6 +86,7 @@
 
 using Cervisia::TagDialog;
 
+#define TRANSLATION_DOMAIN "cervisia"
 
 K_PLUGIN_FACTORY( CervisiaFactory, registerPlugin<CervisiaPart>(); )
 K_EXPORT_PLUGIN( CervisiaFactory( "cervisiapart", "cervisia" ) )
@@ -197,7 +198,7 @@ KConfig *CervisiaPart::config()
                        // destroyed
 }
 
-bool CervisiaPart::openUrl( const KUrl &u )
+bool CervisiaPart::openUrl( const QUrl &u )
 {
     // right now, we are unfortunately not network-aware
     if( !u.isLocalFile() )
@@ -220,7 +221,7 @@ bool CervisiaPart::openUrl( const KUrl &u )
 
     // make a deep copy as if we're called via KRecentFilesAction::urlSelected()
     // KRecentFilesAction::addUrl() makes the URL invalid
-    const KUrl deepCopy(u);
+    const QUrl deepCopy(u);
 
     return openSandbox(deepCopy);
 }
@@ -788,7 +789,7 @@ void CervisiaPart::slotOpenSandbox()
     if (dirname.isEmpty())
         return;
 
-    openSandbox(KUrl(dirname));
+    openSandbox(QUrl::fromLocalFile(dirname));
 }
 
 
@@ -1794,7 +1795,7 @@ void CervisiaPart::slotJobFinished()
 }
 
 
-bool CervisiaPart::openSandbox(const KUrl& url)
+bool CervisiaPart::openSandbox(const QUrl& url)
 {
     // Do we have a cvs service?
     if( !cvsService )
@@ -1999,7 +2000,6 @@ void CervisiaPart::guiActivateEvent(KParts::GUIActivateEvent* event)
 CervisiaBrowserExtension::CervisiaBrowserExtension( CervisiaPart *p )
     : KParts::BrowserExtension( p )
 {
-    KGlobal::locale()->insertCatalog("cervisia");
 }
 
 CervisiaBrowserExtension::~CervisiaBrowserExtension()

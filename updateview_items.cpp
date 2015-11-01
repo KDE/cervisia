@@ -30,7 +30,6 @@
 #include <QDebug>
 #include <kcolorscheme.h>
 #include <kiconloader.h>
-#include <klocale.h>
 
 #include "cvsdir.h"
 #include "entry.h"
@@ -522,7 +521,7 @@ void UpdateFileItem::setRevTag(const QString& rev, const QString& tag)
 
             const QDateTime tagDateTimeLocal(tagDateTimeUtc.addSecs(localUtcOffset));
 
-            m_entry.m_tag = KGlobal::locale()->formatDateTime(tagDateTimeLocal);
+            m_entry.m_tag = QLocale().toString(tagDateTimeLocal);
         }
         else
             m_entry.m_tag = tag;
@@ -649,7 +648,7 @@ QVariant UpdateFileItem::data(int column, int role) const
 
         case Timestamp:
             if (entry().m_dateTime.isValid())
-                return KGlobal::locale()->formatDateTime(entry().m_dateTime);
+                return QLocale().toString(entry().m_dateTime);
             break;
         }
     }

@@ -28,7 +28,6 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kshell.h>
-#include <kglobal.h>
 #include <QDebug>
 
 #include "cvsjob.h"
@@ -82,8 +81,7 @@ CvsService::CvsService()
     // create repository manager
     d->repository = new Repository();
 
-    KSharedConfig::Ptr config = KGlobal::config();
-    KConfigGroup cs(config, "General");
+    KConfigGroup cs(KSharedConfig::open(), "General");
     if( cs.readEntry("UseSshAgent", false) )
     {
         // use the existing or start a new ssh-agent

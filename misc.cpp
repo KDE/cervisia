@@ -20,6 +20,7 @@
 
 
 #include "misc.h"
+#include "debug.h"
 
 #include <ctype.h>
 #include <pwd.h>
@@ -30,8 +31,8 @@
 #include <qregexp.h>
 #include <qstringlist.h>
 #include <kemailsettings.h>
-#include <klocale.h>
 #include <kmessagebox.h>
+#include <KLocalizedString>
 #include <QTemporaryFile>
 #include <kuser.h>
 #include <QDebug>
@@ -273,9 +274,7 @@ QString tempFileName(const QString& suffix)
     if (!tempFiles)
         tempFiles = new QStringList;
 
-    QTemporaryFile f;
-//code was     f.setSuffix(suffix);
-//Add to constructor and adapt if necessary: QDir::tempPath() + QLatin1String("/myapp_XXXXXX") + QLatin1String(suffix) 
+    QTemporaryFile f(QDir::tempPath() + QLatin1String("/cervisia_XXXXXX") + suffix);
     f.setAutoRemove(false);
     f.open();
     tempFiles->append(f.fileName());

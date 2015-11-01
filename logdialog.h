@@ -61,7 +61,6 @@ public:
     bool parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service, const QString& fileName);
 
 protected slots:
-    virtual void slotButtonClicked(int button);
     void slotOk();
     void slotApply();
 

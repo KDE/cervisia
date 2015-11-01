@@ -353,7 +353,7 @@ bool LogDialog::parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service
 
                         QString date = dateTimeStr.section(' ', 0, 0);
                         QString time = dateTimeStr.section(' ', 1, 1);
-                        logInfo.m_dateTime.setTime_t(KDateTime::fromString(date + 'T' + time).toTime_t());
+                        logInfo.m_dateTime.setTime_t(QDateTime::fromString(date + 'T' + time, Qt::ISODate).toTime_t());
 
                         logInfo.m_author = strList[1].section(':', 1, 1).trimmed();
 
@@ -485,7 +485,7 @@ void LogDialog::slotOk()
         QFile::setPermissions(tempFileName, QFileDevice::ReadOwner);
 
         // open file in preferred editor
-        KUrl url;
+        QUrl url;
         url.setPath(tempFileName);
         (void) new KRun(url, 0, true);
     }

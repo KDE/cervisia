@@ -60,7 +60,7 @@
         </widget>
       </item>
       <item row="1" column="1" >
-        <widget class="KIntNumInput" name="kcfg_Compression" >
+        <widget class="QSpinBox" name="kcfg_Compression" >
           <property name="minimum" >
             <number>0</number>
           </property>
@@ -70,7 +70,7 @@
         </widget>
       </item>
       <item row="0" column="1" >
-        <widget class="KIntNumInput" name="kcfg_Timeout" >
+        <widget class="QSpinBox" name="kcfg_Timeout" >
           <property name="minimum" >
             <number>0</number>
           </property>
@@ -81,14 +81,4 @@
       </item>
     </layout>
   </widget>
-    <customwidgets>
-    <customwidget>
-      <class>KIntNumInput</class>
-      <extends>QWidget</extends>
-      <header location="global" >knuminput.h</header>
-    </customwidget>
-  </customwidgets>
-  <includes>
-    <include location="local" >knuminput.h</include>
-  </includes>
 </ui>

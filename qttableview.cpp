@@ -932,7 +932,7 @@ void QtTableView::updateCell( int row, int col, bool erase )
     QRect uR = QRect( xPos, yPos,
 		      cellW ? cellW : cellWidth(col),
 		      cellH ? cellH : cellHeight(row) );
-    repaint( uR.intersect(viewRect()), erase );
+    repaint( uR.intersected(viewRect()), erase );
 }
 
 
@@ -1301,7 +1301,7 @@ void QtTableView::paintEvent( QPaintEvent *e )
 
 	    cellR.setRect( xPos, yPos, cellW ? cellW : cellWidth(col),
 				       cellH ? cellH : cellHeight(row) );
-	    cellUR = cellR.intersect( updateR );
+	    cellUR = cellR.intersected( updateR );
 	    if ( cellUR.isValid() ) {
 		cellUpdateR = cellUR;
 		cellUpdateR.translate( -xPos, -yPos ); // cell coordinates
@@ -1364,17 +1364,17 @@ void QtTableView::paintEvent( QPaintEvent *e )
 	r.setLeft( xPos );
 	r.setBottom( yPos<maxY?yPos:maxY );
 	if ( inherits( "QMultiLineEdit" ) )
-	    paint.fillRect( r.intersect( updateR ), g.base() );
+	    paint.fillRect( r.intersected( updateR ), g.base() );
 	else
-	    paint.eraseRect( r.intersect( updateR ) );
+	    paint.eraseRect( r.intersected( updateR ) );
     }
     if ( yPos <= maxY ) {
 	QRect r = viewR;
 	r.setTop( yPos );
 	if ( inherits( "QMultiLineEdit" ) )
-	    paint.fillRect( r.intersect( updateR ), g.base() );
+	    paint.fillRect( r.intersected( updateR ), g.base() );
 	else
-	    paint.eraseRect( r.intersect( updateR ) );
+	    paint.eraseRect( r.intersected( updateR ) );
     }
 }
 

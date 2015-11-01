@@ -26,7 +26,7 @@
 
 
 class QCheckBox;
-class KIntNumInput;
+class QSpinBox;
 class QLineEdit;
 class KConfig;
 class KColorButton;
@@ -71,8 +71,8 @@ private:
     void addLookAndFeelPage();
 
     KConfig *config;
-    KIntNumInput *contextedit;
-    KIntNumInput *tabwidthedit;
+    QSpinBox *contextedit;
+    QSpinBox *tabwidthedit;
     KUrlRequester *cvspathedit;
     QLineEdit *usernameedit;
     QLineEdit *diffoptedit;

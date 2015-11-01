@@ -23,7 +23,6 @@
 #include <QApplication>
 #include <qpainter.h>
 #include <QDebug>
-#include <kglobal.h>
 #include <kcolorscheme.h>
 
 #include "loginfo.h"

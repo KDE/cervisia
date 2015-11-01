@@ -28,13 +28,8 @@
 #include <QTreeWidget>
 #include <QHeaderView>
 
-#include <kglobal.h>
 #include <QPushButton>
-#include <kconfig.h>
 #include <QLineEdit>
-#include <klocale.h>
-#include <kdatetime.h>
-#include <kconfiggroup.h>
 #include <KConfigGroup>
 #include <QDialogButtonBox>
 #include <QPushButton>
@@ -105,7 +100,7 @@ bool HistoryItem::operator<(const QTreeWidgetItem &other) const
 QVariant HistoryItem::data(int column, int role) const
 {
     if ( (role == Qt::DisplayRole) && (column == Date) )
-        return KGlobal::locale()->formatDateTime(m_date);
+        return QLocale().toString(m_date);
 
     return QTreeWidgetItem::data(column, role);
 }
