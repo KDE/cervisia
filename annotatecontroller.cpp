@@ -169,7 +169,7 @@ void AnnotateController::Private::parseCvsAnnotateOutput()
     {
         int startIdxC2 = line.indexOf(QLatin1Char('('));  // column 2 "(author date):"
 
-        QString authorDate = line.mid(startIdxC2 + 1, line.indexOf(QLatin1Char(')'), startIdxC2 + 1) - startIdxC2);
+        QString authorDate = line.mid(startIdxC2 + 1, line.indexOf(QLatin1Char(')'), startIdxC2 + 1) - startIdxC2 - 1);
 
         QString dateString = authorDate.mid(authorDate.lastIndexOf(QLatin1Char(' '))).trimmed();
         if( !dateString.isEmpty() )
