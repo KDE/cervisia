@@ -7,7 +7,8 @@ set(cvsservice_bin_KDEINIT_SRCS
    repository.cpp 
    sshagent.cpp 
    cvsserviceutils.cpp 
-   cvsloginjob.cpp) 
+   cvsloginjob.cpp
+   ../debug.cpp)
 
 qt5_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.cvsservice.xml cvsservice.h CvsService) 
 
@@ -19,13 +20,11 @@ qt5_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia.cvsjob.xml cvs
 
 
 
-kf5_add_kdeinit_executable(cvsservice_bin ${cvsservice_bin_KDEINIT_SRCS})
-# TODO ecm_mark_nongui_executable(cvsservice_bin)
+kf5_add_kdeinit_executable(cvsservice_bin ${cvsservice_bin_KDEINIT_SRCS} NOGUI)
 set_target_properties(cvsservice_bin PROPERTIES OUTPUT_NAME cvsservice)
 
-
-target_link_libraries(kdeinit_cvsservice_bin  KF5::KIOCore ${KDE4_KDESU_LIBS} )
-set_target_properties(kdeinit_cvsservice_bin PROPERTIES OUTPUT_NAME kdeinit4_cvsservice)
+target_link_libraries(kdeinit_cvsservice_bin Qt5::Widgets Qt5::DBus KF5::KIOCore KF5::I18n KF5::WidgetsAddons KF5::Su)
+set_target_properties(kdeinit_cvsservice_bin PROPERTIES OUTPUT_NAME kdeinit5_cvsservice)
 
 install(TARGETS kdeinit_cvsservice_bin ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
@@ -34,16 +33,12 @@ install(TARGETS cvsservice_bin  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### next target ###############
 
-set(cvsaskpass_KDEINIT_SRCS cvsaskpass.cpp )
+kf5_add_kdeinit_executable(cvsaskpass cvsaskpass.cpp)
 
-
-kf5_add_kdeinit_executable( cvsaskpass ${cvsaskpass_KDEINIT_SRCS})
-
-target_link_libraries(kdeinit_cvsaskpass   ${KDE4_KDESU_LIBS} )
+target_link_libraries(kdeinit_cvsaskpass Qt5::Widgets KF5::WidgetsAddons KF5::CoreAddons KF5::I18n)
 
 install(TARGETS kdeinit_cvsaskpass ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-target_link_libraries( cvsaskpass kdeinit_cvsaskpass )
 install(TARGETS cvsaskpass  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 

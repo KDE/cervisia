@@ -46,17 +46,13 @@ UpdateDialog::UpdateDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
     setWindowTitle(i18n("CVS Update"));
     setModal(true);
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
-    QWidget *mainWidget = new QWidget(this);
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
-    mainLayout->addWidget(mainWidget);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
-    mainLayout->addWidget(buttonBox);
     okButton->setDefault(true);
 
     int const iComboBoxMinWidth(40 * fontMetrics().width('0'));
@@ -66,8 +62,6 @@ UpdateDialog::UpdateDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
     mainLayout->addWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    mainLayout->addWidget(layout);
-    layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
     bybranch_button = new QRadioButton(i18n("Update to &branch: "), mainWidget);
@@ -124,12 +118,13 @@ UpdateDialog::UpdateDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
     dateedit_layout->addWidget(date_edit);
 
     QButtonGroup* group = new QButtonGroup(mainWidget);
-    mainLayout->addWidget(group);
     group->addButton(bytag_button);
     group->addButton(bybranch_button);
     group->addButton(bydate_button);
     connect( group, SIGNAL(buttonClicked(int)),
              this, SLOT(toggled()) );
+
+    mainLayout->addWidget(buttonBox);
 
     // dis-/enable the widgets
     toggled();

@@ -20,8 +20,8 @@
 #define EDITWITHMENU_H
 
 #include <qobject.h>
+#include <QUrl>
 
-#include <kurl.h>
 #include <kservicetypetrader.h>
 
 class QAction;
@@ -37,7 +37,7 @@ class EditWithMenu : public QObject
     Q_OBJECT
 
 public:
-    EditWithMenu(const KUrl& url, QWidget* parent);
+    EditWithMenu(const QUrl& url, QWidget* parent);
     QMenu* menu();
 
 private slots:
@@ -46,7 +46,7 @@ private slots:
 private:
     KService::List m_offers;
     QMenu* m_menu;
-    KUrl               m_url;
+    QUrl   m_url;
 };
 
 

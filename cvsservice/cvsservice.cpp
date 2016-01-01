@@ -19,16 +19,18 @@
  */
 
 #include "cvsservice.h"
+#include "../debug.h"
 
 #include <qstring.h>
 #include <QApplication>
 #include <QHash>
+#include <QDebug>
 
 #include <kconfig.h>
-#include <klocale.h>
 #include <kmessagebox.h>
 #include <kshell.h>
-#include <QDebug>
+#include <KSharedConfig>
+#include <KLocalizedString>
 
 #include "cvsjob.h"
 #include "cvsloginjob.h"
@@ -81,7 +83,7 @@ CvsService::CvsService()
     // create repository manager
     d->repository = new Repository();
 
-    KConfigGroup cs(KSharedConfig::open(), "General");
+    KConfigGroup cs(KSharedConfig::openConfig(), "General");
     if( cs.readEntry("UseSshAgent", false) )
     {
         // use the existing or start a new ssh-agent
@@ -289,7 +291,7 @@ QDBusObjectPath CvsService::checkout(const QString& workingDir, const QString& r
 QDBusObjectPath CvsService::commit(const QStringList& files, const QString& commitMessage,
                            bool recursive)
 {
-    kDebug(8051) << "d->hasWorkingCopy:" << d->hasWorkingCopy()
+    qCDebug(log_cervisia) << "d->hasWorkingCopy:" << d->hasWorkingCopy()
                  << "d->hasRunningJob:" << d->hasRunningJob();
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
         return QDBusObjectPath();
@@ -306,7 +308,7 @@ QDBusObjectPath CvsService::commit(const QStringList& files, const QString& comm
     *d->singleCvsJob << "-m" << KShell::quoteArg(commitMessage)
                      << CvsServiceUtils::joinFileList(files) << REDIRECT_STDERR;
 
-    kDebug(8051) << "end";
+    qCDebug(log_cervisia) << "end";
     return d->setupNonConcurrentJob();
 }
 

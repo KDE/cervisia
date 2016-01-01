@@ -26,7 +26,6 @@
 #include <QApplication>
 #include <QCommandLineParser>
 #include <kconfig.h>
-#include <kurl.h>
 #include <ktoolinvocation.h>
 #include <KLocalizedString>
 
@@ -137,7 +136,7 @@ static int ShowAnnotateDialog(const QString& fileName)
 }
 
 
-extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
+extern "C" int kdemain(int argc, char **argv)
 {
     KAboutData about("cervisia", i18n("Cervisia"), CERVISIA_VERSION,
                      i18n("A CVS frontend"), KAboutLicense::GPL,

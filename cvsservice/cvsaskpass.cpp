@@ -21,36 +21,34 @@
 #include <QRegExp>
 #include <QApplication>
 #include <QCommandLineParser>
+#include <QCommandLineOption>
 
 #include <kaboutdata.h>
 #include <KPasswordDialog>
+#include <KLocalizedString>
 
 #include <iostream>
 
+#include "../version.h"
 
 
-extern "C" KDE_EXPORT int kdemain(int argc, char** argv)
+extern "C" int kdemain(int argc, char** argv)
 {
-    KAboutData about("cvsaskpass", 0, i18n("cvsaskpass"), "0.1",
+    KAboutData about("cvsaskpass", i18n("cvsaskpass"), CERVISIA_VERSION,
                      i18n("ssh-askpass for the CVS D-Bus Service"),
-                     KAboutData::License_LGPL,
+                     KAboutLicense::LGPL,
                      i18n("Copyright (c) 2003 Christian Loose"));
 
     KAboutData::setApplicationData(about);
 
-    // no need to register with the dcop server
-    //KApplication::disableAutoDcopRegistration();
     QApplication app(argc, argv);
 
     QCommandLineParser parser;
-    parser.addPositionalArgument(QCommandlineOption(QLatin1String("prompt"), i18n("prompt"), QLatin1String("[prompt]")));
-
-    // no need for session management
-    app.disableSessionManagement();
+    parser.addPositionalArgument(QLatin1String("prompt"), i18n("prompt"), QLatin1String("[prompt]"));
 
     parser.process(app);
 
-    if( !parser.positionalArguments()->count() )
+    if( !parser.positionalArguments().count() )
         return 1;
 
     // parse repository name from the passed argument
@@ -67,7 +65,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char** argv)
     int res = dlg.exec();
     if( res == KPasswordDialog::Accepted )
     {
-        std::cout << dlg.password().toAscii().constData() << std::endl;
+        std::cout << dlg.password().toUtf8().constData() << std::endl;
         return 0;
     }
 

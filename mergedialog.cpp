@@ -47,17 +47,13 @@ MergeDialog::MergeDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
     setWindowTitle(i18n("CVS Merge"));
     setModal(true);
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
-    QWidget *mainWidget = new QWidget(this);
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
-    mainLayout->addWidget(mainWidget);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
-    mainLayout->addWidget(buttonBox);
     okButton->setDefault(true);
 
     int const iComboBoxMinWidth(30 * fontMetrics().width('0'));
@@ -67,8 +63,6 @@ MergeDialog::MergeDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
     mainLayout->addWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    mainLayout->addWidget(layout);
-    layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
     bybranch_button = new QRadioButton(i18n("Merge from &branch:"), mainWidget);
@@ -129,11 +123,12 @@ MergeDialog::MergeDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
     tagsedit_layout->addWidget(tag_button, 0, 3, 2, 1);
 
     QButtonGroup* group = new QButtonGroup(mainWidget);
-    mainLayout->addWidget(group);
     group->addButton(bybranch_button);
     group->addButton(bytags_button);
     connect( group, SIGNAL(buttonClicked(int)),
              this, SLOT(toggled()) );
+
+    mainLayout->addWidget(buttonBox);
 
     // dis-/enable the widgets
     toggled();

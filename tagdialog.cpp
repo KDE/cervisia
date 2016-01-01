@@ -49,17 +49,13 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisiaCvsserviceCvsserviceInterf
       forcetag_button(0)
 {
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
-    QWidget *mainWidget = new QWidget(this);
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
-    mainLayout->addWidget(mainWidget);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
-    mainLayout->addWidget(buttonBox);
     okButton->setDefault(true);
     setModal(true);
     setWindowTitle( (action==Delete)? i18n("CVS Delete Tag") : i18n("CVS Tag") );
@@ -68,59 +64,59 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisiaCvsserviceCvsserviceInterf
     mainLayout->addWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    mainLayout->addWidget(layout);
-    layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
     if (action == Delete)
-        {
-            tag_combo = new KComboBox(mainWidget);
-            mainLayout->addWidget(tag_combo);
-            tag_combo->setEditable(true);
-            tag_combo->setFocus();
-            tag_combo->setMinimumWidth(fontMetrics().width('0') * 30);
+    {
+        tag_combo = new KComboBox(mainWidget);
+        mainLayout->addWidget(tag_combo);
+        tag_combo->setEditable(true);
+        tag_combo->setFocus();
+        tag_combo->setMinimumWidth(fontMetrics().width('0') * 30);
 
-            QLabel *tag_label = new QLabel(i18n("&Name of tag:"), mainWidget);
-            mainLayout->addWidget(tag_label);
-            tag_label->setBuddy( tag_combo );
+        QLabel *tag_label = new QLabel(i18n("&Name of tag:"), mainWidget);
+        mainLayout->addWidget(tag_label);
+        tag_label->setBuddy( tag_combo );
 
-            QPushButton *tag_button = new QPushButton(i18n("Fetch &List"), mainWidget);
-            mainLayout->addWidget(tag_button);
-            connect( tag_button, SIGNAL(clicked()),
-                     this, SLOT(tagButtonClicked()) );
+        QPushButton *tag_button = new QPushButton(i18n("Fetch &List"), mainWidget);
+        mainLayout->addWidget(tag_button);
+        connect( tag_button, SIGNAL(clicked()),
+                 this, SLOT(tagButtonClicked()) );
 
-            QBoxLayout *tagedit_layout = new QHBoxLayout();
-            layout->addLayout(tagedit_layout);
-            tagedit_layout->addWidget(tag_label);
-            tagedit_layout->addWidget(tag_combo);
-            tagedit_layout->addWidget(tag_button);
-        }
+        QBoxLayout *tagedit_layout = new QHBoxLayout();
+        layout->addLayout(tagedit_layout);
+        tagedit_layout->addWidget(tag_label);
+        tagedit_layout->addWidget(tag_combo);
+        tagedit_layout->addWidget(tag_button);
+    }
     else
-        {
-            tag_edit = new QLineEdit(mainWidget);
-            mainLayout->addWidget(tag_edit);
-            tag_edit->setFocus();
-            tag_edit->setMinimumWidth(fontMetrics().width('0') * 30);
+    {
+        tag_edit = new QLineEdit(mainWidget);
+        mainLayout->addWidget(tag_edit);
+        tag_edit->setFocus();
+        tag_edit->setMinimumWidth(fontMetrics().width('0') * 30);
 
-            QLabel *tag_label = new QLabel(i18n("&Name of tag:"), mainWidget);
-            mainLayout->addWidget(tag_label);
-            tag_label->setBuddy( tag_edit );
+        QLabel *tag_label = new QLabel(i18n("&Name of tag:"), mainWidget);
+        mainLayout->addWidget(tag_label);
+        tag_label->setBuddy( tag_edit );
 
-            QBoxLayout *tagedit_layout = new QHBoxLayout();
-            layout->addLayout(tagedit_layout);
-            tagedit_layout->addWidget(tag_label);
-            tagedit_layout->addWidget(tag_edit);
+        QBoxLayout *tagedit_layout = new QHBoxLayout();
+        layout->addLayout(tagedit_layout);
+        tagedit_layout->addWidget(tag_label);
+        tagedit_layout->addWidget(tag_edit);
 
-            branchtag_button = new QCheckBox(i18n("Create &branch with this tag"), mainWidget);
-            mainLayout->addWidget(branchtag_button);
-            layout->addWidget(branchtag_button);
+        branchtag_button = new QCheckBox(i18n("Create &branch with this tag"), mainWidget);
+        mainLayout->addWidget(branchtag_button);
+        layout->addWidget(branchtag_button);
 
-            forcetag_button = new QCheckBox(i18n("&Force tag creation even if tag already exists"), mainWidget);
-            mainLayout->addWidget(forcetag_button);
-            layout->addWidget(forcetag_button);
-        }
+        forcetag_button = new QCheckBox(i18n("&Force tag creation even if tag already exists"), mainWidget);
+        mainLayout->addWidget(forcetag_button);
+        layout->addWidget(forcetag_button);
+    }
     connect(okButton, SIGNAL(clicked()), this, SLOT(slotOk()));
-    setHelp("taggingbranching");
+    //setHelp("taggingbranching");
+
+    mainLayout->addWidget(buttonBox);
 }
 
 

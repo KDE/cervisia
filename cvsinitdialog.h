@@ -21,7 +21,8 @@
 
 #include <QDialog>
 
-class QLineEdit;
+class KLineEdit;
+class QPushButton;
 
 
 namespace Cervisia
@@ -42,7 +43,8 @@ private slots:
     void lineEditTextChanged(const QString& text);
 
 private:   
-    QLineEdit* m_directoryEdit;
+    KLineEdit* m_directoryEdit;
+    QPushButton *okButton;
 };
 
 

@@ -21,6 +21,7 @@
 #ifndef CVSLOGINJOB_H
 #define CVSLOGINJOB_H
 
+#include <QObject>
 #include <qbytearray.h>
 #include <qstring.h>
 #include <qstringlist.h>

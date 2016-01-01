@@ -18,33 +18,33 @@
  *
  */
 
+#include <QApplication>
+
 #include <kaboutdata.h>
-#include <kapplication.h>
 #include <kcmdlineargs.h>
-#include <klocale.h>
+#include <KLocalizedString>
+
 #include "cvsservice.h"
+#include "../version.h"
 
 
-extern "C" KDE_EXPORT int kdemain(int argc, char** argv)
+extern "C" int kdemain(int argc, char** argv)
 {
-    KAboutData about("cvsservice", 0, ki18n("CVS D-Bus service"), "0.1",
-            ki18n("D-Bus service for CVS"), KAboutData::License_LGPL,
-            ki18n("Copyright (c) 2002-2003 Christian Loose"));
-    about.addAuthor(ki18n("Christian Loose"), ki18n("Developer"),
-            "christian.loose@hamburg.de");
+    KAboutData about("cvsservice", i18n("CVS D-Bus service"), CERVISIA_VERSION,
+                     i18n("D-Bus service for CVS"), KAboutLicense::LGPL,
+                     i18n("Copyright (c) 2002-2003 Christian Loose"));
 
-    KCmdLineArgs::init(argc, argv, &about);
+    about.addAuthor(i18n("Christian Loose"), i18n("Developer"),
+                    "christian.loose@hamburg.de");
 
-    KApplication app;
+    KAboutData::setApplicationData(about);
+
+    QApplication app(argc, argv);
 
     // Don't quit if password dialog for login is closed
     app.setQuitOnLastWindowClosed(false);
-
-    // This app is started automatically, no need for session management
-    app.disableSessionManagement();
 
     CvsService service;
 
     return app.exec();
 }
-

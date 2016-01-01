@@ -18,7 +18,7 @@
 
 #include "watchersmodel.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 
 #include "misc.h"
 

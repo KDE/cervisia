@@ -19,6 +19,7 @@
  */
 
 #include "sshagent.h"
+#include "../debug.h"
 
 #include <qregexp.h>
 #include <QDebug>
@@ -49,7 +50,7 @@ SshAgent::~SshAgent()
 
 bool SshAgent::querySshAgent()
 {
-    kDebug(8051) << "ENTER";
+    qCDebug(log_cervisia) << "ENTER";
 
     if( m_isRunning )
         return true;
@@ -58,7 +59,7 @@ bool SshAgent::querySshAgent()
     const QByteArray pid = qgetenv("SSH_AGENT_PID");
     if( !pid.isEmpty() )
     {
-        kDebug(8051) << "ssh-agent already exists";
+        qCDebug(log_cervisia) << "ssh-agent already exists";
 
         m_pid = QString::fromLocal8Bit(pid);
 
@@ -72,7 +73,7 @@ bool SshAgent::querySshAgent()
     // We have to start a new ssh-agent process
     else
     {
-        kDebug(8051) << "start ssh-agent";
+        qCDebug(log_cervisia) << "start ssh-agent";
 
         m_isOurAgent = true;
         m_isRunning  = startSshAgent();
@@ -84,7 +85,7 @@ bool SshAgent::querySshAgent()
 
 bool SshAgent::addSshIdentities()
 {
-    kDebug(8051) << "ENTER";
+    qCDebug(log_cervisia) << "ENTER";
 
     if( !m_isRunning || !m_isOurAgent )
         return false;
@@ -104,7 +105,7 @@ bool SshAgent::addSshIdentities()
     // TODO CL use timeout?
     proc.waitForFinished();
 
-    kDebug(8051) << "added identities";
+    qCDebug(log_cervisia) << "added identities";
 
     return (proc.exitStatus() == QProcess::NormalExit
             && proc.exitCode() == 0);
@@ -113,20 +114,20 @@ bool SshAgent::addSshIdentities()
 
 void SshAgent::killSshAgent()
 {
-    kDebug(8051) << "ENTER";
+    qCDebug(log_cervisia) << "ENTER";
 
     if( !m_isRunning || !m_isOurAgent )
         return;
 
     kill(m_pid.toInt(), SIGTERM);
 
-    kDebug(8051) << "killed pid=" << m_pid;
+    qCDebug(log_cervisia) << "killed pid=" << m_pid;
 }
 
 
 void SshAgent::slotProcessFinished()
 {
-    kDebug(8051) << "ENTER";
+    qCDebug(log_cervisia) << "ENTER";
 
     QRegExp cshPidRx("setenv SSH_AGENT_PID (\\d*);");
     QRegExp cshSockRx("setenv SSH_AUTH_SOCK (.*);");
@@ -167,7 +168,7 @@ void SshAgent::slotProcessFinished()
         }
     }
 
-    kDebug(8051) << "pid=" << m_pid << ", socket=" << m_authSock;
+    qCDebug(log_cervisia) << "pid=" << m_pid << ", socket=" << m_authSock;
 }
 
 
@@ -177,13 +178,13 @@ void SshAgent::slotReceivedOutput()
 
     m_outputLines += output.split('\n');
 
-    kDebug(8051) << "output=" << output;
+    qCDebug(log_cervisia) << "output=" << output;
 }
 
 
 bool SshAgent::startSshAgent()
 {
-    kDebug(8051) << "ENTER";
+    qCDebug(log_cervisia) << "ENTER";
 
     m_agentProcess = new KProcess(this);
 

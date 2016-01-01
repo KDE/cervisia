@@ -25,6 +25,7 @@
 class QCheckBox;
 class KComboBox;
 class KConfig;
+class KLineEdit;
 class QLineEdit;
 class OrgKdeCervisiaCvsserviceCvsserviceInterface;
 
@@ -66,8 +67,8 @@ private:
     void restoreUserInput();
     
     KComboBox *repo_combo, *module_combo, *branchCombo;
-    QLineEdit *module_edit, *workdir_edit;
-    QLineEdit *comment_edit;
+    KLineEdit *workdir_edit;
+    QLineEdit *module_edit, *comment_edit;
     QLineEdit *vendortag_edit, *releasetag_edit, *ignore_edit, *alias_edit;
     QCheckBox *binary_box, *export_box, *recursive_box;
     QCheckBox* m_useModificationTimeBox;

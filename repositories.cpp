@@ -22,7 +22,10 @@
 #include <qfile.h>
 #include <qdir.h>
 #include <qtextstream.h>
-#include <kconfig.h>
+#include <QDateTime>
+
+#include <KConfig>
+#include <KConfigGroup>
 
 #include "cervisiapart.h"
 

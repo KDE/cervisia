@@ -21,6 +21,7 @@
 #include "cvsjob.h"
 
 #include "sshagent.h"
+#include "../debug.h"
 
 #include <QDebug>
 #include <kprocess.h>
@@ -53,7 +54,7 @@ CvsJob::CvsJob(unsigned jobNum)
     (void)new CvsjobAdaptor(this);
     QDBusConnection dbus = QDBusConnection::sessionBus();
     d->dbusObjectPath = "/CvsJob" + QString::number(jobNum);
-    kDebug(8051) << "dbusObjectPath:" << d->dbusObjectPath;
+    qCDebug(log_cervisia) << "dbusObjectPath:" << d->dbusObjectPath;
     dbus.registerObject( d->dbusObjectPath, this );
 }
 
@@ -65,7 +66,7 @@ CvsJob::CvsJob(const QString& objId)
     (void)new CvsjobAdaptor(this);
     //TODO register it with good name
     d->dbusObjectPath = '/' + objId;
-    kDebug(8051) << "dbusObjectPath:" << d->dbusObjectPath;
+    qCDebug(log_cervisia) << "dbusObjectPath:" << d->dbusObjectPath;
     QDBusConnection::sessionBus().registerObject( d->dbusObjectPath, this );
 }
 
@@ -149,8 +150,8 @@ bool CvsJob::execute()
     SshAgent ssh;
     if( !ssh.pid().isEmpty() )
     {
-        // kDebug(8051) << "PID  = " << ssh.pid();
-        // kDebug(8051) << "SOCK = " << ssh.authSock();
+        // qCDebug(log_cervisia) << "PID  = " << ssh.pid();
+        // qCDebug(log_cervisia) << "SOCK = " << ssh.authSock();
 
         d->childproc->setEnv("SSH_AGENT_PID", ssh.pid());
         d->childproc->setEnv("SSH_AUTH_SOCK", ssh.authSock());
@@ -174,7 +175,7 @@ bool CvsJob::execute()
     connect(d->childproc, SIGNAL(readyReadStandardError()),
         SLOT(slotReceivedStderr()));
 
-    kDebug(8051) << "Execute cvs command:" << cvsCommand();
+    qCDebug(log_cervisia) << "Execute cvs command:" << cvsCommand();
 
     d->isRunning = true;
     d->childproc->setOutputChannelMode(KProcess::SeparateChannels);
@@ -191,7 +192,7 @@ void CvsJob::cancel()
 
 void CvsJob::slotProcessFinished()
 {
-    kDebug(8051);
+    qCDebug(log_cervisia);
     // disconnect all connections to childproc's signals
     d->childproc->disconnect();
     d->childproc->clearProgram();
@@ -209,7 +210,7 @@ void CvsJob::slotReceivedStdout()
     // accumulate output
     d->outputLines += output.split('\n');
 
-    kDebug(8051) << "output:" << output;
+    qCDebug(log_cervisia) << "output:" << output;
     emit receivedStdout(output);
 }
 
@@ -221,7 +222,7 @@ void CvsJob::slotReceivedStderr()
     // accumulate output
     d->outputLines += output.split('\n');
 
-    kDebug(8051) << "output:" << output;
+    qCDebug(log_cervisia) << "output:" << output;
     emit receivedStderr(output);
 }
 

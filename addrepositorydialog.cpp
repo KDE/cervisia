@@ -22,21 +22,18 @@
 #include "addrepositorydialog.h"
 
 #include <qcheckbox.h>
-#include <khbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-//Added by qt3to4:
+#include <QLabel>
 #include <QVBoxLayout>
 #include <QBoxLayout>
 
-#include <kconfig.h>
 #include <QLineEdit>
-#include <klocale.h>
-#include <knuminput.h>
-#include <kconfiggroup.h>
-#include <KConfigGroup>
 #include <QDialogButtonBox>
 #include <QPushButton>
+#include <QSpinBox>
+
+#include <KConfig>
+#include <KConfigGroup>
+#include <KLocalizedString>
 
 
 AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
@@ -47,25 +44,19 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
     setWindowTitle(i18n("Add Repository"));
     setModal(true);
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
-    QWidget *mainWidget = new QWidget(this);
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
-    mainLayout->addWidget(mainWidget);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
-    mainLayout->addWidget(buttonBox);
     okButton->setDefault(true);
 
     QFrame* mainWidget = new QFrame(this);
     mainLayout->addWidget(mainWidget);
 
     QBoxLayout* layout = new QVBoxLayout(mainWidget);
-    mainLayout->addWidget(layout);
-    layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
     QLabel* repo_label = new QLabel(i18n("&Repository:"), mainWidget);
@@ -101,18 +92,21 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
     server_label->setBuddy(server_edit);
     layout->addWidget(server_edit);
 
-    KHBox* compressionBox = new KHBox(mainWidget);
-    mainLayout->addWidget(compressionBox);
-    m_useDifferentCompression = new QCheckBox(i18n("Use different &compression level:"), compressionBox);
+    QHBoxLayout* compressionBox = new QHBoxLayout;
+    mainLayout->addLayout(compressionBox);
+    m_useDifferentCompression = new QCheckBox(i18n("Use different &compression level:"));
 
-    m_compressionLevel = new KIntNumInput(compressionBox);
-    m_compressionLevel->setRange(0, 9, 1);
-    m_compressionLevel->setSliderEnabled(false);
-    layout->addWidget(compressionBox);
+    m_compressionLevel = new QSpinBox();
+    m_compressionLevel->setRange(0, 9);
+
+    compressionBox->addWidget(m_useDifferentCompression);
+    compressionBox->addWidget(m_compressionLevel);
 
     m_retrieveCvsignoreFile = new QCheckBox(i18n("Download cvsignore file from "
                                             "server"), mainWidget);
     layout->addWidget(m_retrieveCvsignoreFile);
+
+    mainLayout->addWidget(buttonBox);
 
     connect( repo_edit, SIGNAL(textChanged(QString)),
              this, SLOT(repoChanged()) );
@@ -121,14 +115,14 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
     repoChanged();
 
     KConfigGroup cg(&partConfig, "AddRepositoryDialog");
-    restoreDialogSize(cg);
+    restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
 }
 
 
 AddRepositoryDialog::~AddRepositoryDialog()
 {
     KConfigGroup cg(&partConfig, "AddRepositoryDialog");
-    saveDialogSize(cg);
+    cg.writeEntry("geometry", saveGeometry());
 }
 
 

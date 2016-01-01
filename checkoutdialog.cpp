@@ -31,17 +31,16 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QVBoxLayout>
-
-// KDE
-#include <kfiledialog.h>
 #include <QLineEdit>
-#include <klocale.h>
-#include <kmessagebox.h>
-#include <kurlcompletion.h>
-#include <kconfiggroup.h>
-#include <KConfigGroup>
 #include <QDialogButtonBox>
 #include <QFileDialog>
+
+// KDE
+#include <kmessagebox.h>
+#include <kurlcompletion.h>
+#include <KConfigGroup>
+#include <KLocalizedString>
+#include <KLineEdit>
 
 #include "progressdialog.h"
 #include "repositories.h"
@@ -62,25 +61,19 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
     setWindowTitle( (action==Checkout)? i18n("CVS Checkout") : i18n("CVS Import") );
     setModal(true);
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
-    QWidget *mainWidget = new QWidget(this);
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
-    mainLayout->addWidget(mainWidget);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
-    mainLayout->addWidget(buttonBox);
     okButton->setDefault(true);
 
     QFrame* mainWidget = new QFrame(this);
     mainLayout->addWidget(mainWidget);
 
     QBoxLayout* layout = new QVBoxLayout(mainWidget);
-    mainLayout->addWidget(layout);
-    layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
     QGridLayout* grid = new QGridLayout();
@@ -161,7 +154,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
         grid->addWidget(recursive_box, 6, 0, 1, 2);
     }
 
-    workdir_edit = new QLineEdit(mainWidget);
+    workdir_edit = new KLineEdit(mainWidget);
     mainLayout->addWidget(workdir_edit);
     workdir_edit->setText(QDir::homePath());
     workdir_edit->setMinimumWidth(fontMetrics().width('X') * 40);
@@ -250,6 +243,8 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
         grid->addWidget(export_box, 5, 0, 1, 2);
     }
 
+    mainLayout->addWidget(buttonBox);
+
     QStringList list1 = Repositories::readCvsPassFile();
     QStringList::ConstIterator it1;
     for (it1 = list1.constBegin(); it1 != list1.constEnd(); ++it1)
@@ -261,7 +256,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceI
         if (!list1.contains(*it2))
             repo_combo->addItem(*it2);
 
-    setHelp((act == Import) ? "importing" : "checkingout");
+    //setHelp((act == Import) ? "importing" : "checkingout");
 
     restoreUserInput();
     connect(okButton,SIGNAL(clicked()),this,SLOT(slotOk()));
@@ -508,7 +503,7 @@ void CheckoutDialog::saveUserInput()
     CervisiaSettings::setModule(module());
     CervisiaSettings::setWorkingFolder(workingDirectory());
 
-    CervisiaSettings::self()->writeConfig();
+    CervisiaSettings::self()->save();
 
     if (act == Import)
     {

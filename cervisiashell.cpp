@@ -95,8 +95,7 @@ void CervisiaShell::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = KStandardAction::keyBindings( this, SLOT(slotConfigureKeys()),
-                                      actionCollection() );
+    action = KStandardAction::keyBindings( this, SLOT(slotConfigureKeys()), actionCollection() );
     hint = i18n("Allows you to customize the keybindings");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -107,7 +106,7 @@ void CervisiaShell::setupActions()
     action->setWhatsThis( hint );
 
     setHelpMenuEnabled(false);
-    (void) new KHelpMenu(this, componentData(), false);
+    (void) new KHelpMenu(this, KAboutData::applicationData(), false);
 
     action = actionCollection()->action("help_contents");
     hint = i18n("Invokes the KDE help system with the Cervisia documentation");

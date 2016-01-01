@@ -30,10 +30,13 @@
 
 #include <QPushButton>
 #include <QLineEdit>
-#include <KConfigGroup>
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QVBoxLayout>
+
+#include <KConfig>
+#include <KConfigGroup>
+#include <KLocalizedString>
 
 #include "misc.h"
 #include "cvsserviceinterface.h"
@@ -47,7 +50,7 @@ static QDateTime parseDate(const QString& date, const QString& time, const QStri
     if( !offset.contains(':') && offset.size() == 5 )
         offset.insert( 3, ':' );
 
-    const KDateTime dt( KDateTime::fromString( date + 'T' + time + offset ) );
+    const QDateTime dt( QDateTime::fromString(date + 'T' + time + offset, Qt::ISODate) );
     if ( !dt.isValid() )
         return QDateTime();
 
@@ -136,23 +139,14 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent)
     : QDialog(parent)
     , partConfig(cfg)
 {
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help|QDialogButtonBox::Close);
-    QWidget *mainWidget = new QWidget(this);
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
-    mainLayout->addWidget(mainWidget);
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
-    mainLayout->addWidget(buttonBox);
 
     QFrame* mainWidget = new QFrame(this);
-    mainLayout->addWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    mainLayout->addWidget(layout);
-    layout->setSpacing(spacingHint());
     layout->setMargin(0);
+    mainLayout->addWidget(mainWidget);
 
     listview = new QTreeWidget(mainWidget);
     mainLayout->addWidget(listview);
@@ -204,6 +198,11 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent)
     mainLayout->addWidget(dirname_edit);
     dirname_edit->setEnabled(false);
 
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help|QDialogButtonBox::Close);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    mainLayout->addWidget(buttonBox);
+
     connect( onlyuser_box, SIGNAL(toggled(bool)),
              this, SLOT(toggled(bool)) );
     connect( onlyfilenames_box, SIGNAL(toggled(bool)),
@@ -252,12 +251,12 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent)
     buttonBox->button(QDialogButtonBox::Help)->setAutoDefault(false);
     buttonBox->button(QDialogButtonBox::Close)->setAutoDefault(false);
 
-    setHelp("browsinghistory");
+    //setHelp("browsinghistory");
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     KConfigGroup cg(&partConfig, "HistoryDialog");
-    restoreDialogSize(cg);
+    restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
 
     QByteArray state = cg.readEntry<QByteArray>("HistoryListView", QByteArray());
     listview->header()->restoreState(state);
@@ -267,7 +266,7 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent)
 HistoryDialog::~HistoryDialog()
 {
     KConfigGroup cg(&partConfig, "HistoryDialog");
-    saveDialogSize(cg);
+    cg.writeEntry("geometry", saveGeometry());
 
     cg.writeEntry("HistoryListView", listview->header()->saveState());
 }

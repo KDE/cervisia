@@ -25,7 +25,7 @@
 
 class QCheckBox;
 class KConfig;
-class KIntNumInput;
+class QSpinBox;
 class QLineEdit;
 
 class AddRepositoryDialog : public QDialog
@@ -58,7 +58,7 @@ private:
     QLineEdit*    server_edit;
     QCheckBox*    m_useDifferentCompression;
     QCheckBox*    m_retrieveCvsignoreFile;
-    KIntNumInput* m_compressionLevel;
+    QSpinBox*     m_compressionLevel;
     KConfig&      partConfig;
 };
 

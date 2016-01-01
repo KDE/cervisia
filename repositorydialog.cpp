@@ -20,6 +20,7 @@
 
 
 #include "repositorydialog.h"
+#include "debug.h"
 
 #include <qlayout.h>
 #include <qpushbutton.h>
@@ -27,7 +28,7 @@
 #include <QBoxLayout>
 #include <QTreeWidget>
 #include <QHeaderView>
-#include <KDialogButtonBox>
+#include <QDialogButtonBox>
 #include <kconfig.h>
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -173,25 +174,20 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserv
     setWindowTitle(i18n("Configure Access to Repositories"));
     setModal(true);
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
-    QWidget *mainWidget = new QWidget(this);
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
-    mainLayout->addWidget(mainWidget);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
-    mainLayout->addWidget(buttonBox);
     okButton->setDefault(true);
 
     QFrame* mainWidget = new QFrame(this);
     mainLayout->addWidget(mainWidget);
 
     QBoxLayout* hbox = new QHBoxLayout(mainWidget);
-    mainLayout->addWidget(hbox);
-    hbox->setSpacing(spacingHint());
+    mainLayout->addLayout(hbox);
     hbox->setMargin(0);
 
     m_repoList = new QTreeWidget(mainWidget);
@@ -209,7 +205,7 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserv
     connect(m_repoList, SIGNAL(itemSelectionChanged()),
             this,       SLOT(slotSelectionChanged()));
 
-    KDialogButtonBox* actionbox = new KDialogButtonBox(mainWidget, Qt::Vertical);
+    QDialogButtonBox* actionbox = new QDialogButtonBox(Qt::Vertical);
     QPushButton* addbutton = actionbox->addButton(i18n("&Add..."), QDialogButtonBox::ActionRole);
     m_modifyButton = actionbox->addButton(i18n("&Modify..."), QDialogButtonBox::ActionRole);
     m_removeButton = actionbox->addButton(i18n("&Remove"), QDialogButtonBox::ActionRole);
@@ -251,24 +247,25 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserv
         slotSelectionChanged();
     }
 
-    setHelp("accessing-repository");
+    //setHelp("accessing-repository");
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     KConfigGroup cg(&m_partConfig, "RepositoryDialog");
-    restoreDialogSize(cg);
+    restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
 
     QByteArray state = cg.readEntry<QByteArray>("RepositoryListView", QByteArray());
     m_repoList->header()->restoreState(state);
 
     connect(okButton,SIGNAL(clicked()),this,SLOT(slotOk()));
+    mainLayout->addWidget(buttonBox);
 }
 
 
 RepositoryDialog::~RepositoryDialog()
 {
     KConfigGroup cg(&m_partConfig, "RepositoryDialog");
-    saveDialogSize(cg);
+    cg.writeEntry("geometry", saveGeometry());
 
     cg.writeEntry("RepositoryListView", m_repoList->header()->saveState());
 

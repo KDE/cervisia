@@ -24,7 +24,6 @@ using Cervisia::LogMessageEdit;
 
 #include <QKeyEvent>
 
-#include <KShortcut>
 #include <KStandardShortcut>
 
 
@@ -101,7 +100,7 @@ void LogMessageEdit::keyPressEvent(QKeyEvent* event)
     }
 
     // get shortcut for text completion key
-    KShortcut shortcut = getKeyBinding(TextCompletion);
+    QList<QKeySequence> shortcut = keyBinding(TextCompletion);
     if( shortcut.isEmpty() )
         shortcut = KStandardShortcut::shortcut(KStandardShortcut::TextCompletion);
 
@@ -121,7 +120,7 @@ void LogMessageEdit::keyPressEvent(QKeyEvent* event)
     }
 
     // handle previous match key
-    shortcut = getKeyBinding(PrevCompletionMatch);
+    shortcut = keyBinding(PrevCompletionMatch);
     if( shortcut.isEmpty() )
         shortcut = KStandardShortcut::shortcut(KStandardShortcut::PrevCompletion);
 
@@ -132,7 +131,7 @@ void LogMessageEdit::keyPressEvent(QKeyEvent* event)
     }
 
     // handle next match key
-    shortcut = getKeyBinding(NextCompletionMatch);
+    shortcut = keyBinding(NextCompletionMatch);
     if( shortcut.isEmpty() )
         shortcut = KStandardShortcut::shortcut(KStandardShortcut::NextCompletion);
 

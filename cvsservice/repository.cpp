@@ -24,15 +24,16 @@
 #include <qfile.h>
 #include <qstring.h>
 #include <QTextStream>
+#include <QStandardPaths>
+#include <QDBusConnection>
 
 #include <ksharedconfig.h>
+#include <kconfiggroup.h>
 #include <kdirwatch.h>
-#include <kstandarddirs.h>
 
 #include "sshagent.h"
-#include <QDBusConnection>
 #include <repositoryadaptor.h>
-#include <kconfiggroup.h>
+
 struct Repository::Private
 {
     Private() : compressionLevel(0) {}
@@ -65,7 +66,7 @@ Repository::Repository()
 
     // other cvsservice instances might change the configuration file
     // so we watch it for changes
-    d->configFileName = KStandardDirs::locate("config", "cvsservicerc");
+    d->configFileName = QStandardPaths::locate(QStandardPaths::GenericConfigLocation, "cvsservicerc");
     KDirWatch* fileWatcher = new KDirWatch(this);
     connect(fileWatcher, SIGNAL(dirty(QString)),
             this, SLOT(slotConfigDirty(QString)));
@@ -86,7 +87,7 @@ Repository::Repository(const QString& repository)
 
     // other cvsservice instances might change the configuration file
     // so we watch it for changes
-    d->configFileName = KStandardDirs::locate("config", "cvsservicerc");
+    d->configFileName = QStandardPaths::locate(QStandardPaths::GenericConfigLocation, "cvsservicerc");
     KDirWatch* fileWatcher = new KDirWatch(this);
     connect(fileWatcher, SIGNAL(dirty(QString)),
             this, SLOT(slotConfigDirty(QString)));

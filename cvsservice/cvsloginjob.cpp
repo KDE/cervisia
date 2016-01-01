@@ -19,11 +19,12 @@
  */
 
 #include "cvsloginjob.h"
+#include "../debug.h"
+
+#include <kpassworddialog.h>
+#include <KLocalizedString>
 
 #include <QDebug>
-#include <klocale.h>
-#include <kpassworddialog.h>
-
 #include <qbytearray.h>
 
 #include <sys/types.h>
@@ -87,7 +88,7 @@ bool CvsLoginJob::execute()
     int res = m_Proc->exec(m_CvsClient, m_Arguments);
     if( res < 0 )
     {
-        kDebug(8051) << "Couldn't start 'cvs login' process!";
+        qCDebug(log_cervisia) << "Couldn't start 'cvs login' process!";
         return false;
     }
 
@@ -102,7 +103,7 @@ bool CvsLoginJob::execute()
 
         // add line to output list
         m_output << line;
-        kDebug(8051) << "process output = " << line;
+        qCDebug(log_cervisia) << "process output = " << line;
 
         // retrieve repository from 'Logging in to'-line
         if( line.contains(LOGIN_PHRASE) )
@@ -128,7 +129,7 @@ bool CvsLoginJob::execute()
             {
                 password = dlg.password();
                 // send password to process
-                m_Proc->WaitSlave();
+                m_Proc->waitSlave();
                 m_Proc->writeLine(password.toLocal8Bit());
 
                 // wait for the result
@@ -140,7 +141,7 @@ bool CvsLoginJob::execute()
 
                     // add line to output list
                     m_output << line;
-                    kDebug(8051) << "process output = " << line;
+                    qCDebug(log_cervisia) << "process output = " << line;
                 }
 
                 result = false;

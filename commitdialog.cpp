@@ -22,21 +22,20 @@
 
 #include <QBoxLayout>
 #include <QCheckBox>
-#include <KComboBox>
+#include <QComboBox>
 #include <QDir>
 #include <QFileInfo>
 #include <QLabel>
 #include <QTextStream>
 #include <QVBoxLayout>
-
-#include <kconfig.h>
-#include <klistwidget.h>
-#include <klocale.h>
-#include <kconfiggroup.h>
-#include <KConfigGroup>
+#include <QListWidget>
 #include <QDialogButtonBox>
 #include <QPushButton>
+
+#include <KConfig>
+#include <KConfigGroup>
 #include <KGuiItem>
+#include <KLocalizedString>
 
 #include "cvsserviceinterface.h"
 #include "logmessageedit.h"
@@ -68,35 +67,29 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInter
     setWindowTitle(i18n("CVS Commit"));
     setModal(true);
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
-    QWidget *mainWidget = new QWidget(this);
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
-    mainLayout->addWidget(mainWidget);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-    QPushButton *user1Button = new QPushButton;
+    user1Button = new QPushButton;
     buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
-    mainLayout->addWidget(buttonBox);
-    KGuiItem::assign(user1Button, KGuiItem(i18n("&Diff"));
+    KGuiItem::assign(user1Button, KGuiItem(i18n("&Diff")));
     okButton->setDefault(true);
 
     QFrame* mainWidget = new QFrame(this);
     mainLayout->addWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    mainLayout->addWidget(layout);
-    layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
     QLabel *textlabel = new QLabel( i18n("Commit the following &files:"), mainWidget );
     mainLayout->addWidget(textlabel);
     layout->addWidget(textlabel);
 
-    m_fileList = new KListWidget(mainWidget);
+    m_fileList = new QListWidget(mainWidget);
     mainLayout->addWidget(m_fileList);
     m_fileList->setEditTriggers(QAbstractItemView::NoEditTriggers);
     textlabel->setBuddy(m_fileList);
@@ -110,7 +103,7 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInter
     mainLayout->addWidget(archivelabel);
     layout->addWidget(archivelabel);
 
-    combo = new KComboBox(mainWidget);
+    combo = new QComboBox(mainWidget);
     mainLayout->addWidget(combo);
     archivelabel->setBuddy(combo);
     connect( combo, SIGNAL(activated(int)), this, SLOT(comboActivated(int)) );
@@ -133,24 +126,26 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInter
     layout->addWidget(m_useTemplateChk);
     connect( m_useTemplateChk, SIGNAL(clicked()), this, SLOT(useTemplateClicked()) );
 
+    mainLayout->addWidget(buttonBox);
+
     checkForTemplateFile();
 
     user1Button->setEnabled(false);
     connect(user1Button, SIGNAL(clicked()),
              this, SLOT(diffClicked()) );
 
-    setHelp("commitingfiles");
+    //setHelp("commitingfiles");
 
     KConfigGroup cg(&partConfig, "CommitDialog");
-    restoreDialogSize(cg);
+    restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
 }
 
 
 CommitDialog::~CommitDialog()
 {
     KConfigGroup cg(&partConfig, "CommitDialog");
+    cg.writeEntry("geometry", saveGeometry());
     cg.writeEntry("UseTemplate", m_useTemplateChk->isChecked());
-    saveDialogSize(cg);
 }
 
 

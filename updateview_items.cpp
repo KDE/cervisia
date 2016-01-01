@@ -29,8 +29,8 @@
 
 #include <QDebug>
 #include <kcolorscheme.h>
-#include <kiconloader.h>
 
+#include "debug.h"
 #include "cvsdir.h"
 #include "entry.h"
 #include "misc.h"
@@ -84,7 +84,7 @@ UpdateDirItem::UpdateDirItem(UpdateDirItem* parent,
       m_opened(false)
 {
     setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
-    setIcon(0, SmallIcon("folder"));
+    setIcon(0, QIcon::fromTheme("folder"));
 }
 
 
@@ -94,7 +94,7 @@ UpdateDirItem::UpdateDirItem(UpdateView* parent,
       m_opened(false)
 {
     setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
-    setIcon(0, SmallIcon("folder"));
+    setIcon(0, QIcon::fromTheme("folder"));
 }
 
 
@@ -154,8 +154,8 @@ void UpdateDirItem::updateEntriesItem(const Entry& entry,
             }
             fileItem->setRevTag(entry.m_revision, entry.m_tag);
             fileItem->setDate(entry.m_dateTime);
-            fileItem->setIcon(0, isBinary ? SmallIcon("application-octet-stream") 
-	                                  : QPixmap());
+            fileItem->setIcon(0, isBinary ? QIcon::fromTheme("application-octet-stream") 
+	                                  : QIcon());
         }
         return;
     }

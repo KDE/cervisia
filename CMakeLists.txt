@@ -9,20 +9,16 @@ set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 add_definitions(-DTRANSLATION_DOMAIN="cervisia")
 
 include(KDEInstallDirs)
-include(KDECompilerSettings)
 include(KDECMakeSettings)
+include(KDECompilerSettings)
 include(ECMInstallIcons)
-include(FeatureSummary)
 include(ECMAddAppIcon)
+include(ECMMarkNonGuiExecutable)
+include(FeatureSummary)
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Widgets DBus)
 
-find_package(KF5 REQUIRED COMPONENTS Parts DocTools Init)
-
-include_directories(
-    ${CMAKE_SOURCE_DIR}
-    ${CMAKE_BINARY_DIR}
-)
+find_package(KF5 REQUIRED COMPONENTS Parts DocTools Init IconThemes Notifications WidgetsAddons Su)
 
 add_subdirectory( doc )
 add_subdirectory( cvsservice )
@@ -31,7 +27,7 @@ add_subdirectory( pics )
 set(_KDECONFDIR_ ${CONFIG_INSTALL_DIR})
 set(_KDEHTMLDIR_ ${HTML_INSTALL_DIR})
 
-configure_file (cervisia.1.cmake ${CMAKE_CURRENT_BINARY_DIR}/cervisia.1 @ONLY)
+configure_file(cervisia.1.cmake ${CMAKE_CURRENT_BINARY_DIR}/cervisia.1 @ONLY)
 
 ########### next target ###############
 
@@ -121,7 +117,7 @@ qt5_add_dbus_adaptor(cervisiapart_PART_SRCS org.kde.cervisia.protocolview.xml pr
 
 add_library(cervisiapart MODULE ${cervisiapart_PART_SRCS})
 
-target_link_libraries(cervisiapart KF5::Parts)
+target_link_libraries(cervisiapart KF5::Parts KF5::Notifications)
 
 install(TARGETS cervisiapart  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
