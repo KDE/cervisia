@@ -127,12 +127,12 @@ install(TARGETS cervisiapart  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 ########### install files ###############
 
-install( PROGRAMS cervisia.desktop  DESTINATION  ${XDG_APPS_INSTALL_DIR} )
+install( PROGRAMS org.kde.cervisia.desktop  DESTINATION  ${XDG_APPS_INSTALL_DIR} )
 install( FILES cervisia.appdata.xml DESTINATION  ${DATA_INSTALL_DIR}/appdata )
-install( FILES cervisiapart.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES org.kde.cervisiapart.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 install( FILES cervisiapart.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
-install( FILES cervisiaui.rc  DESTINATION  ${DATA_INSTALL_DIR}/cervisiapart )
-install( FILES cervisiashellui.rc cervisia.notifyrc  DESTINATION  ${DATA_INSTALL_DIR}/cervisia )
+install( FILES cervisiaui.rc  DESTINATION  ${KXMLGUI_INSTALL_DIR}/cervisiapart )
+install( FILES cervisiashellui.rc cervisia.notifyrc  DESTINATION  ${KXMLGUI_INSTALL_DIR}/cervisia )
 install( FILES ${CMAKE_CURRENT_BINARY_DIR}/cervisia.1 DESTINATION ${MAN_INSTALL_DIR}/man1)
 ecm_install_icons( ${ICON_INSTALL_DIR}   )
 

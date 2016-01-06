@@ -108,6 +108,7 @@ void CervisiaShell::setupActions()
     setHelpMenuEnabled(false);
     (void) new KHelpMenu(this, KAboutData::applicationData(), false);
 
+    /*
     action = actionCollection()->action("help_contents");
     hint = i18n("Invokes the KDE help system with the Cervisia documentation");
     action->setToolTip( hint );
@@ -127,6 +128,7 @@ void CervisiaShell::setupActions()
     hint = i18n("Displays the information about KDE and its version number");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
+    */
 }
 
 

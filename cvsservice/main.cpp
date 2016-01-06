@@ -21,15 +21,16 @@
 #include <QApplication>
 
 #include <kaboutdata.h>
-#include <kcmdlineargs.h>
 #include <KLocalizedString>
 
 #include "cvsservice.h"
 #include "../version.h"
 
 
-extern "C" int kdemain(int argc, char** argv)
+extern "C" Q_DECL_EXPORT int kdemain(int argc, char** argv)
 {
+    QApplication app(argc, argv);
+
     KAboutData about("cvsservice", i18n("CVS D-Bus service"), CERVISIA_VERSION,
                      i18n("D-Bus service for CVS"), KAboutLicense::LGPL,
                      i18n("Copyright (c) 2002-2003 Christian Loose"));
@@ -38,8 +39,6 @@ extern "C" int kdemain(int argc, char** argv)
                     "christian.loose@hamburg.de");
 
     KAboutData::setApplicationData(about);
-
-    QApplication app(argc, argv);
 
     // Don't quit if password dialog for login is closed
     app.setQuitOnLastWindowClosed(false);

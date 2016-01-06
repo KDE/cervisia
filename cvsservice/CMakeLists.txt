@@ -44,5 +44,10 @@ install(TARGETS cvsaskpass  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### install files ###############
 
-install( FILES  cvsservice.desktop  DESTINATION  ${SERVICES_INSTALL_DIR} )
-install( FILES org.kde.cervisia.cvsjob.xml  org.kde.cervisia.cvsservice.xml  org.kde.cervisia.repository.xml org.kde.cervisia.cvsloginjob.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR} )
+install( FILES  org.kde.cvsservice.desktop  DESTINATION  ${SERVICES_INSTALL_DIR} )
+
+install( FILES org.kde.cervisia.cvsjob.xml
+               org.kde.cervisia.cvsservice.xml
+               org.kde.cervisia.repository.xml
+               org.kde.cervisia.cvsloginjob.xml
+         DESTINATION ${DBUS_INTERFACES_INSTALL_DIR} )

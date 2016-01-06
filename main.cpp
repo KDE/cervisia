@@ -44,16 +44,14 @@ static OrgKdeCervisiaCvsserviceCvsserviceInterface* StartDBusService(const QStri
     // start the cvs D-Bus service
     QString error;
     QString appId;
-    if( KToolInvocation::startServiceByDesktopName("cvsservice", QStringList(),
-                                                &error,&appId)  )
+    if ( KToolInvocation::startServiceByDesktopName("cvsservice", QStringList(), &error,&appId) )
     {
         std::cerr << "Starting cvsservice failed with message: "
-                  << error.toLatin1().constData() << std::endl;
+                  << error.toLocal8Bit().constData() << std::endl;
         exit(1);
     }
 
     OrgKdeCervisiaRepositoryInterface repository(appId, "/CvsRepository",QDBusConnection::sessionBus());
-    
 
     repository.setWorkingCopy(directory);
 
@@ -136,8 +134,10 @@ static int ShowAnnotateDialog(const QString& fileName)
 }
 
 
-extern "C" int kdemain(int argc, char **argv)
+extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
 {
+    QApplication app(argc, argv);
+
     KAboutData about("cervisia", i18n("Cervisia"), CERVISIA_VERSION,
                      i18n("A CVS frontend"), KAboutLicense::GPL,
                      i18n("Copyright (c) 1999-2002 Bernd Gehrmann\n"
@@ -162,16 +162,18 @@ extern "C" int kdemain(int argc, char **argv)
 
     KAboutData::setApplicationData(about);
 
-    QApplication app(argc, argv);
-
     QCommandLineParser parser;
+    about.setupCommandLine(&parser);
 
     parser.addPositionalArgument(QLatin1String("directory"), i18n("The sandbox to be loaded"), QLatin1String("[directory]"));
-    parser.addOption(QCommandLineOption("resolve <file>", i18n("Show resolve dialog for the given file")));
-    parser.addOption(QCommandLineOption("log <file>", i18n("Show log dialog for the given file")));
-    parser.addOption(QCommandLineOption("annotate <file>", i18n("Show annotation dialog for the given file")));
+    parser.addOption(QCommandLineOption(QLatin1String("resolve"), i18n("Show resolve dialog for the given file."), QLatin1String("file")));
+    parser.addOption(QCommandLineOption(QLatin1String("log"), i18n("Show log dialog for the given file."), QLatin1String("file")));
+    parser.addOption(QCommandLineOption(QLatin1String("annotate"), i18n("Show annotation dialog for the given file."), QLatin1String("file")));
+    parser.addVersionOption();
+    parser.addHelpOption();
 
     parser.process(app);
+    about.processCommandLine(&parser);
 
     QString resolvefile = parser.value(QLatin1String("resolve"));
     if (!resolvefile.isEmpty())

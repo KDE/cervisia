@@ -71,7 +71,7 @@ private slots:
     void revisionSelected(QString rev, bool rmb);
     void tagASelected(int n);
     void tagBSelected(int n);
-    void tabChanged(QWidget* w);
+    void tabChanged(int index);
 
 private:
     void tagSelected(LogDialogTagInfo* tag, bool rmb);

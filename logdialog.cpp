@@ -69,7 +69,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     , cvsService(0)
     , partConfig(cfg)
 {
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Help|QDialogButtonBox::Close|QDialogButtonBox::Apply);
+    buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Help|QDialogButtonBox::Close|QDialogButtonBox::Apply);
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
@@ -129,8 +129,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     tabWidget->addTab(listWidget, i18n("&List"));
     tabWidget->addTab(plain, i18n("CVS &Output"));
 
-    connect(tabWidget, SIGNAL(currentChanged(QWidget*)),
-            this, SLOT(tabChanged(QWidget*)));
+    connect(tabWidget, &QTabWidget::currentChanged, this, &LogDialog::tabChanged);
 
     tree->setWhatsThis( i18n("Choose revision A by clicking with the left "
                                "mouse button,\nrevision B by clicking with "
@@ -656,9 +655,9 @@ void LogDialog::tagBSelected(int n)
 }
 
 
-void LogDialog::tabChanged(QWidget* w)
+void LogDialog::tabChanged(int index)
 {
-    bool isPlainView = (w == plain);
+    bool isPlainView = (tabWidget->widget(index) == plain);
     user3Button->setVisible(isPlainView);
 }
 

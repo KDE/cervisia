@@ -62,6 +62,7 @@ Name[zh_CN]=CvsService
 Name[zh_TW]=CVS 服務
 Exec=cvsservice
 X-DBUS-StartupType=Multi
+X-DBUS-ServiceName=org.kde.cvsservice
 X-KDE-StartupNotify=false
 Comment=A D-Bus service that provides an interface to cvs
 Comment[ast]=Un serviciu D-Bus qu'apurre una interface pa cvs
