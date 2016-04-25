@@ -27,7 +27,7 @@ class KComboBox;
 class KConfig;
 class KLineEdit;
 class QLineEdit;
-class OrgKdeCervisiaCvsserviceCvsserviceInterface;
+class OrgKdeCervisia5CvsserviceCvsserviceInterface;
 
 class CheckoutDialog : public QDialog
 {
@@ -36,7 +36,7 @@ class CheckoutDialog : public QDialog
 public:
     enum ActionType { Checkout, Import };
     
-    CheckoutDialog( KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* service, ActionType action,
+    CheckoutDialog( KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInterface* service, ActionType action,
                     QWidget *parent=0);
 
     QString workingDirectory() const;
@@ -75,7 +75,7 @@ private:
     ActionType act;
     KConfig&   partConfig;
 
-    OrgKdeCervisiaCvsserviceCvsserviceInterface *cvsService;
+    OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService;
 };
 
 #endif // CHECKOUTDIALOG_H

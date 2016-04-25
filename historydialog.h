@@ -26,7 +26,7 @@ class QCheckBox;
 class KConfig;
 class QLineEdit;
 class QTreeWidget;
-class OrgKdeCervisiaCvsserviceCvsserviceInterface;
+class OrgKdeCervisia5CvsserviceCvsserviceInterface;
 
 class HistoryDialog : public QDialog
 {
@@ -36,7 +36,7 @@ public:
     explicit HistoryDialog(KConfig& cfg, QWidget *parent=0);
     virtual ~HistoryDialog();
 
-    bool parseHistory(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService);
+    bool parseHistory(OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService);
 
 private slots:
     void choiceChanged();

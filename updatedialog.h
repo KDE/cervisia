@@ -26,14 +26,14 @@ class KComboBox;
 class QPushButton;
 class QRadioButton;
 class QLineEdit;
-class OrgKdeCervisiaCvsserviceCvsserviceInterface;
+class OrgKdeCervisia5CvsserviceCvsserviceInterface;
 
 class UpdateDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit UpdateDialog( OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
+    explicit UpdateDialog( OrgKdeCervisia5CvsserviceCvsserviceInterface* service,
                            QWidget *parent=0 );
 
     bool byTag() const;
@@ -46,7 +46,7 @@ private slots:
     void branchButtonClicked();
     
 private:
-    OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService;
+    OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService;
     
     QRadioButton *bytag_button, *bybranch_button, *bydate_button;
     KComboBox *tag_combo, *branch_combo;

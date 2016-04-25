@@ -20,18 +20,17 @@
 
 #include "tagdialog.h"
 
-#include <qcheckbox.h>
 #include <KComboBox>
-#include <qlabel.h>
-#include <QLineEdit>
-#include <qpushbutton.h>
-//Added by qt3to4:
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QBoxLayout>
+#include <KHelpClient>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <KConfigGroup>
+
+#include <QCheckBox>
+#include <QLabel>
+#include <QLineEdit>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QDialogButtonBox>
 #include <QPushButton>
 
@@ -40,7 +39,7 @@
 
 using Cervisia::TagDialog;
 
-TagDialog::TagDialog(ActionType action, OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
+TagDialog::TagDialog(ActionType action, OrgKdeCervisia5CvsserviceCvsserviceInterface* service,
                      QWidget *parent)
     : QDialog(parent), 
       act(action),
@@ -48,14 +47,16 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisiaCvsserviceCvsserviceInterf
       branchtag_button(0),
       forcetag_button(0)
 {
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &TagDialog::slotHelp);
     okButton->setDefault(true);
     setModal(true);
     setWindowTitle( (action==Delete)? i18n("CVS Delete Tag") : i18n("CVS Tag") );
@@ -114,7 +115,6 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisiaCvsserviceCvsserviceInterf
         layout->addWidget(forcetag_button);
     }
     connect(okButton, SIGNAL(clicked()), this, SLOT(slotOk()));
-    //setHelp("taggingbranching");
 
     mainLayout->addWidget(buttonBox);
 }
@@ -137,6 +137,10 @@ QString TagDialog::tag() const
     return act==Delete? tag_combo->currentText() : tag_edit->text();
 }
 
+void TagDialog::slotHelp()
+{
+  KHelpClient::invokeHelp(QLatin1String("taggingbranching"));
+}
 
 void TagDialog::slotOk()
 {

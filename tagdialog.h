@@ -25,7 +25,7 @@
 class QCheckBox;
 class KComboBox;
 class QLineEdit;
-class OrgKdeCervisiaCvsserviceCvsserviceInterface;
+class OrgKdeCervisia5CvsserviceCvsserviceInterface;
 
 namespace Cervisia
 {
@@ -37,7 +37,7 @@ class TagDialog : public QDialog
 public:
     enum ActionType { Create, Delete };
     
-    TagDialog( ActionType action, OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
+    TagDialog( ActionType action, OrgKdeCervisia5CvsserviceCvsserviceInterface* service,
                QWidget *parent=0 );
 
     bool branchTag() const;
@@ -46,13 +46,14 @@ public:
 
 protected slots:
     void slotOk();
+    void slotHelp();
 
 private slots:
     void tagButtonClicked();
 
 private:
     ActionType act;
-    OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService;
+    OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService;
     
     QCheckBox *branchtag_button;
     QCheckBox *forcetag_button;

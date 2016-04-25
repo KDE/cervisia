@@ -39,7 +39,7 @@
 #include "cvsserviceinterface.h"
 
 
-MergeDialog::MergeDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
+MergeDialog::MergeDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface* service,
                          QWidget *parent)
     : QDialog(parent),
       cvsService(service)

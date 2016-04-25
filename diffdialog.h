@@ -32,7 +32,7 @@ class KComboBox;
 class KConfig;
 class DiffItem;
 class DiffView;
-class OrgKdeCervisiaCvsserviceCvsserviceInterface;
+class OrgKdeCervisia5CvsserviceCvsserviceInterface;
 
 class DiffDialog : public QDialog
 {
@@ -42,7 +42,7 @@ public:
     explicit DiffDialog(KConfig& config, QWidget *parent=0, bool modal=false);
     virtual ~DiffDialog();
 
-    bool parseCvsDiff(OrgKdeCervisiaCvsserviceCvsserviceInterface* service, const QString &fileName, 
+    bool parseCvsDiff(OrgKdeCervisia5CvsserviceCvsserviceInterface* service, const QString &fileName, 
                       const QString &revA, const QString &revB);
 
 protected:
@@ -58,7 +58,7 @@ private slots:
 private:
     void newDiffHunk(int& linenoA, int& linenoB, const QStringList& linesA,
                      const QStringList& linesB);
-    void callExternalDiff(const QString& extdiff, OrgKdeCervisiaCvsserviceCvsserviceInterface* service, 
+    void callExternalDiff(const QString& extdiff, OrgKdeCervisia5CvsserviceCvsserviceInterface* service, 
                           const QString& fileName, const QString& revA, 
                           const QString& revB);
     void updateNofN();

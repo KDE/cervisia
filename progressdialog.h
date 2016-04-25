@@ -45,7 +45,7 @@ public Q_SLOTS:
     void slotJobExited(bool normalExit, int status);
 
 protected slots:
-    virtual void slotCancel();
+    virtual void reject();
 
 private slots:
     void slotTimeoutOccurred();

@@ -141,5 +141,5 @@ Name[zh_CN]=Cervisia
 Name[zh_TW]=Cervisia
 
 X-DBUS-StartupType=Multi
-X-DBUS-ServiceName=org.kde.cervisia
+X-DBUS-ServiceName=org.kde.cervisia5
 Categories=Qt;KDE;Development;RevisionControl;

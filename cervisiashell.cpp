@@ -46,7 +46,7 @@ CervisiaShell::CervisiaShell( const char *name )
     setObjectName( name );
     setXMLFile( "cervisiashellui.rc" );
 
-    KPluginLoader loader("cervisiapart");
+    KPluginLoader loader("cervisiapart5");
     if( KPluginFactory *factory = loader.factory() )
     {
         m_part = factory->create< KParts::ReadOnlyPart >(this);
@@ -59,7 +59,9 @@ CervisiaShell::CervisiaShell( const char *name )
     else
     {
         KMessageBox::detailedError(this, i18n("The Cervisia library could not be loaded."),
-                                   loader.errorString());
+                                   loader.errorString() +
+                                   QLatin1String("\n") + loader.pluginName() +
+                                   QLatin1String("\n") + loader.fileName());
         qApp->quit();
         return;
     }
@@ -134,14 +136,15 @@ void CervisiaShell::setupActions()
 
 void CervisiaShell::openURL()
 {
-    if( !m_lastOpenDir.isEmpty() )
+    if ( m_part && !m_lastOpenDir.isEmpty() )
         m_part->openUrl( QUrl::fromLocalFile( m_lastOpenDir ) );
 }
 
 
 void CervisiaShell::openURL(const QUrl& url)
 {
-    m_part->openUrl(url);
+    if ( m_part )
+        m_part->openUrl(url);
 }
 
 
@@ -149,7 +152,7 @@ void CervisiaShell::slotConfigureKeys()
 {
     KShortcutsDialog dlg;
     dlg.addCollection(actionCollection());
-    if( m_part )
+    if ( m_part )
         dlg.addCollection(m_part->actionCollection());
 
     dlg.configure();
@@ -191,7 +194,7 @@ void CervisiaShell::readProperties(const KConfigGroup& config)
 void CervisiaShell::saveProperties(KConfigGroup & config)
 {
     // Save current working directory (if part was created)
-    if( m_part )
+    if ( m_part )
     {
         config.writePathEntry("Current Directory", m_part->url().path());
 

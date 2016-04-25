@@ -58,7 +58,7 @@ private:
 };
 
 
-CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
+CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInterface* service,
                            QWidget *parent)
     : QDialog(parent)
     , partConfig(cfg)

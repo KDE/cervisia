@@ -353,7 +353,7 @@ public Q_SLOTS:
     QDBusObjectPath watchers(const QStringList& files);
 
     /**
-     * Quits the DCOP service.
+     * Quits the service.
      */
     void quit();
 

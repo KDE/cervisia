@@ -37,7 +37,7 @@ class QTabWidget;
 class QPushButton;
 class QDialogButtonBox;
 class KTextEdit;
-class OrgKdeCervisiaCvsserviceCvsserviceInterface;
+class OrgKdeCervisia5CvsserviceCvsserviceInterface;
 class KConfig;
 
 class LogDialogTagInfo
@@ -58,11 +58,12 @@ public:
 
     virtual ~LogDialog();
 
-    bool parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service, const QString& fileName);
+    bool parseCvsLog(OrgKdeCervisia5CvsserviceCvsserviceInterface* service, const QString& fileName);
 
 protected slots:
     void slotOk();
     void slotApply();
+    void slotHelp();
 
 private slots:
     void findClicked();
@@ -96,7 +97,7 @@ private:
     QPushButton *user1Button, *user2Button, *user3Button, *okButton;
     QDialogButtonBox *buttonBox;
 
-    OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService;
+    OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService;
     KConfig&         partConfig;
 };
 

@@ -23,7 +23,7 @@
 
 class QTableView;
 class KConfig;
-class OrgKdeCervisiaCvsserviceCvsserviceInterface;
+class OrgKdeCervisia5CvsserviceCvsserviceInterface;
 
 class WatchersDialog : public QDialog
 {
@@ -31,7 +31,7 @@ public:
     explicit WatchersDialog(KConfig& cfg, QWidget* parent = 0);
     virtual ~WatchersDialog();
 
-    bool parseWatchers(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService, const QStringList& files);
+    bool parseWatchers(OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService, const QStringList& files);
 
 private:
     QTableView* m_tableView;

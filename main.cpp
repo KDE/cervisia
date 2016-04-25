@@ -39,24 +39,24 @@
 #include "version.h"
 #include "repositoryinterface.h"
 
-static OrgKdeCervisiaCvsserviceCvsserviceInterface* StartDBusService(const QString& directory)
+static OrgKdeCervisia5CvsserviceCvsserviceInterface* StartDBusService(const QString& directory)
 {
     // start the cvs D-Bus service
     QString error;
     QString appId;
-    if ( KToolInvocation::startServiceByDesktopName("cvsservice", QStringList(), &error,&appId) )
+    if ( KToolInvocation::startServiceByDesktopName("org.kde.cvsservice5", QStringList(), &error, &appId) )
     {
         std::cerr << "Starting cvsservice failed with message: "
                   << error.toLocal8Bit().constData() << std::endl;
         exit(1);
     }
 
-    OrgKdeCervisiaRepositoryInterface repository(appId, "/CvsRepository",QDBusConnection::sessionBus());
+    OrgKdeCervisia5RepositoryInterface repository(appId, "/CvsRepository", QDBusConnection::sessionBus());
 
     repository.setWorkingCopy(directory);
 
     // create a reference to the service
-    return new OrgKdeCervisiaCvsserviceCvsserviceInterface(appId, "/CvsService",QDBusConnection::sessionBus());
+    return new OrgKdeCervisia5CvsserviceCvsserviceInterface(appId, "/CvsService", QDBusConnection::sessionBus());
 }
 
 
@@ -88,7 +88,7 @@ static int ShowLogDialog(const QString& fileName)
     QString directory = fi.absolutePath();
 
     // start the cvs DCOP service
-    OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService = StartDBusService(directory);
+    OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService = StartDBusService(directory);
 
     if( dlg->parseCvsLog(cvsService, fi.fileName()) )
         dlg->show();
@@ -117,7 +117,7 @@ static int ShowAnnotateDialog(const QString& fileName)
     QString directory = fi.absolutePath();
 
     // start the cvs D-Bus service
-    OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService = StartDBusService(directory);
+    OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService = StartDBusService(directory);
 
     AnnotateController ctl(dlg, cvsService);
     ctl.showDialog(fi.fileName());

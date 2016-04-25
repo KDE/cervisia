@@ -44,6 +44,8 @@
 #include <kurl.h>
 #include <kconfiggroup.h>
 #include <KConfigGroup>
+#include <KHelpClient>
+
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <KGuiItem>
@@ -69,28 +71,8 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     , cvsService(0)
     , partConfig(cfg)
 {
-    buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Help|QDialogButtonBox::Close|QDialogButtonBox::Apply);
-
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
-
-    okButton = buttonBox->button(QDialogButtonBox::Ok);
-    okButton->setDefault(true);
-    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-    connect(okButton, &QPushButton::clicked, this, &LogDialog::slotOk);
-    user1Button = new QPushButton;
-    buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
-    user2Button = new QPushButton;
-    buttonBox->addButton(user2Button, QDialogButtonBox::ActionRole);
-    user3Button = new QPushButton;
-    buttonBox->addButton(user3Button, QDialogButtonBox::ActionRole);
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    KGuiItem::assign(user1Button, KGuiItem(i18n("&Annotate A")));
-    KGuiItem::assign(user2Button, KGuiItem(i18n("&Diff")));
-    KGuiItem::assign(user3Button, KGuiItem(i18n("&Find")));
-    buttonBox->button(QDialogButtonBox::Close)->setDefault(true);
-    user3Button->setVisible(false);
 
     splitter = new QSplitter(Qt::Vertical, this);
     mainLayout->addWidget(splitter);
@@ -109,6 +91,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     list = new LogListView(partConfig, listWidget);
     listLayout->addWidget(list, 1);
 
+#warning TODO
     // TODO   how ?
     //KTreeWidgetSearchLine* searchLine = new KTreeWidgetSearchLine(listWidget, list);
     QLabel* searchLabel = new QLabel(i18n("S&earch:"),listWidget);
@@ -123,11 +106,12 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     connect( plain, SIGNAL(revisionClicked(QString,bool)),
              this, SLOT(revisionSelected(QString,bool)) );
 
-    tabWidget = new QTabWidget(splitter);
-    mainLayout->addWidget(tabWidget);
+    tabWidget = new QTabWidget;
     tabWidget->addTab(tree, i18n("&Tree"));
     tabWidget->addTab(listWidget, i18n("&List"));
     tabWidget->addTab(plain, i18n("CVS &Output"));
+    splitter->addWidget(tabWidget);
+    splitter->setStretchFactor(0, 1);
 
     connect(tabWidget, &QTabWidget::currentChanged, this, &LogDialog::tabChanged);
 
@@ -135,8 +119,8 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
                                "mouse button,\nrevision B by clicking with "
                                "the middle mouse button."));
 
-    QWidget *mainWidget = new QWidget(splitter);
-    mainLayout->addWidget(mainWidget);
+    QWidget *mainWidget = new QWidget;
+    splitter->addWidget(mainWidget);
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
     layout->setMargin(0);
 
@@ -208,8 +192,27 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
         grid->addWidget(tagsbox[i], 0, 4, 3, 1);
     }
 
+    buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Help|QDialogButtonBox::Close|QDialogButtonBox::Apply);
+    okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(okButton, &QPushButton::clicked, this, &LogDialog::slotOk);
+    user1Button = new QPushButton;
+    buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
+    user2Button = new QPushButton;
+    buttonBox->addButton(user2Button, QDialogButtonBox::ActionRole);
+    user3Button = new QPushButton;
+    buttonBox->addButton(user3Button, QDialogButtonBox::ActionRole);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    KGuiItem::assign(user1Button, KGuiItem(i18n("&Annotate A")));
+    KGuiItem::assign(user2Button, KGuiItem(i18n("&Diff")));
+    KGuiItem::assign(user3Button, KGuiItem(i18n("&Find")));
+    buttonBox->button(QDialogButtonBox::Close)->setDefault(true);
+    user3Button->setVisible(false);
+
     // initially make the version info widget as small as possible
-    splitter->setSizes(QList<int>() << height() << 1);
+    splitter->setSizes(QList<int>() << height() << 10);
 
     revbox[0]->setWhatsThis( i18n("This revision is used when you click "
                                     "Annotate.\nIt is also used as the first "
@@ -229,11 +232,11 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     connect(user3Button, SIGNAL(clicked()),
              this, SLOT(findClicked()) );
 
-    connect(buttonBox->button(QDialogButtonBox::Apply),SIGNAL(clicked()),this,SLOT(slotApply()));
+    connect(buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked()), this, SLOT(slotApply()));
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &LogDialog::slotHelp);
+
     KGuiItem::assign(okButton, KGuiItem(i18n("to view revision A")));
     KGuiItem::assign(buttonBox->button(QDialogButtonBox::Apply), KGuiItem(i18n("Create Patch...")));
-
-    //setHelp("browsinglogs");
 
     mainLayout->addWidget(buttonBox);
     setAttribute(Qt::WA_DeleteOnClose, true);
@@ -247,6 +250,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     updateButtons();
 }
 
+//--------------------------------------------------------------------------------
 
 LogDialog::~LogDialog()
 {
@@ -259,8 +263,9 @@ LogDialog::~LogDialog()
     cg.writeEntry("Splitter", splitter->saveState());
 }
 
+//--------------------------------------------------------------------------------
 
-bool LogDialog::parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service, const QString& fileName)
+bool LogDialog::parseCvsLog(OrgKdeCervisia5CvsserviceCvsserviceInterface* service, const QString& fileName)
 {
     QString rev;
 
@@ -450,6 +455,8 @@ bool LogDialog::parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service
     return true;    // successful
 }
 
+//--------------------------------------------------------------------------------
+
 void LogDialog::slotOk()
 {
     // make sure that the user selected a revision
@@ -490,6 +497,7 @@ void LogDialog::slotOk()
     }
 }
 
+//--------------------------------------------------------------------------------
 
 void LogDialog::slotApply()
 {
@@ -541,6 +549,14 @@ void LogDialog::slotApply()
     f.close();
 }
 
+//--------------------------------------------------------------------------------
+
+void LogDialog::slotHelp()
+{
+  KHelpClient::invokeHelp(QLatin1String("browsinglogs"));
+}
+
+//--------------------------------------------------------------------------------
 
 void LogDialog::findClicked()
 {

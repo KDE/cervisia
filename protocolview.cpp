@@ -49,11 +49,11 @@ ProtocolView::ProtocolView(const QString& appId, QWidget *parent)
 
     //qCDebug(log_cervisia) << "protocol view appId :" << appId;
 
-    job = new OrgKdeCervisiaCvsserviceCvsjobInterface(appId, "/NonConcurrentJob",QDBusConnection::sessionBus(), this);
+    job = new OrgKdeCervisia5CvsserviceCvsjobInterface(appId, "/NonConcurrentJob",QDBusConnection::sessionBus(), this);
 
-    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia.cvsservice.cvsjob", "jobExited", this, SLOT(slotJobExited(bool,int)));
-    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia.cvsservice.cvsjob", "receivedStdout", this, SLOT(slotReceivedOutput(QString)));
-    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia.cvsservice.cvsjob", "receivedStderr", this, SLOT(slotReceivedOutput(QString)));
+    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia5.cvsservice.cvsjob", "jobExited", this, SLOT(slotJobExited(bool,int)));
+    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia5.cvsservice.cvsjob", "receivedStdout", this, SLOT(slotReceivedOutput(QString)));
+    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia5.cvsservice.cvsjob", "receivedStderr", this, SLOT(slotReceivedOutput(QString)));
 
     configChanged();
 

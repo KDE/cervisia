@@ -117,13 +117,13 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
 
     // start the cvs D-Bus service
     QString error;
-    if( KToolInvocation::startServiceByDesktopName("cvsservice", QStringList(), &error, &m_cvsServiceInterfaceName) )
+    if( KToolInvocation::startServiceByDesktopName("org.kde.cvsservice5", QStringList(), &error, &m_cvsServiceInterfaceName) )
     {
         KMessageBox::sorry(0, i18n("Starting cvsservice failed with message: ") + error, "Cervisia");
     }
     else
       // create a reference to the service
-      cvsService = new OrgKdeCervisiaCvsserviceCvsserviceInterface(m_cvsServiceInterfaceName, "/CvsService",QDBusConnection::sessionBus(), this);
+      cvsService = new OrgKdeCervisia5CvsserviceCvsserviceInterface(m_cvsServiceInterfaceName, "/CvsService",QDBusConnection::sessionBus(), this);
     //qCDebug(log_cervisia) << "m_cvsServiceInterfaceName:" << m_cvsServiceInterfaceName;
     //kdDebug(8050) << "cvsService->service():" << cvsService->service()<<endl;
     // Create UI
@@ -239,10 +239,10 @@ void CervisiaPart::setupActions()
     //
     // File Menu
     //
-    action  = new QAction(QIcon::fromTheme("document-open"), i18n("O&pen Sandbox..."), this);
-    actionCollection()->addAction("file_open", action );
+    action  = new QAction(QIcon::fromTheme("document-open"), i18n("Open Sandbox..."), this);
+    actionCollection()->addAction("file_open", action);
+    actionCollection()->setDefaultShortcut(action, QKeySequence(Qt::CTRL + Qt::Key_O));
     connect(action, SIGNAL(triggered(bool)), SLOT(slotOpenSandbox()));
-    action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
     hint = i18n("Opens a CVS working folder in the main window");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -261,7 +261,7 @@ void CervisiaPart::setupActions()
     action  = new QAction(QIcon::fromTheme("vcs-update-cvs-cervisia"), i18n("&Update"), this);
     actionCollection()->addAction("file_update", action );
     connect(action, SIGNAL(triggered(bool)), SLOT(slotUpdate()));
-    action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_U));
+    actionCollection()->setDefaultShortcut(action, QKeySequence(Qt::CTRL + Qt::Key_U));
     hint = i18n("Updates (cvs update) the selected files and folders");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -269,7 +269,7 @@ void CervisiaPart::setupActions()
     action  = new QAction(QIcon::fromTheme("vcs-status-cvs-cervisia"), i18n("&Status"), this);
     actionCollection()->addAction("file_status", action );
     connect(action, SIGNAL(triggered(bool)), SLOT(slotStatus()));
-    action->setShortcut(QKeySequence(Qt::Key_F5));
+    actionCollection()->setDefaultShortcut(action, QKeySequence(Qt::Key_F5));
     hint = i18n("Updates the status (cvs -n update) of the selected files and folders");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -291,7 +291,7 @@ void CervisiaPart::setupActions()
     action  = new QAction(QIcon::fromTheme("vcs-commit-cvs-cervisia"), i18n("&Commit..."), this);
     actionCollection()->addAction("file_commit", action );
     connect(action, SIGNAL(triggered(bool)), SLOT(slotCommit()));
-    action->setShortcut(QKeySequence(Qt::Key_NumberSign));
+    actionCollection()->setDefaultShortcut(action, QKeySequence(Qt::Key_NumberSign));
     hint = i18n("Commits the selected files");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -300,7 +300,7 @@ void CervisiaPart::setupActions()
     actionCollection()->addAction("file_add", action );
     connect(action, SIGNAL(triggered(bool)), SLOT(slotAdd()));
     action->setIconText(i18n("Add"));
-    action->setShortcut(QKeySequence(Qt::Key_Insert));
+    actionCollection()->setDefaultShortcut(action, QKeySequence(Qt::Key_Insert));
     hint = i18n("Adds (cvs add) the selected files to the repository");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -316,7 +316,7 @@ void CervisiaPart::setupActions()
     actionCollection()->addAction("file_remove", action );
     connect(action, SIGNAL(triggered(bool)), SLOT(slotRemove()));
     action->setIconText(i18n("Remove"));
-    action->setShortcut(QKeySequence(Qt::Key_Delete));
+    actionCollection()->setDefaultShortcut(action, QKeySequence(Qt::Key_Delete));
     hint = i18n("Removes (cvs remove) the selected files from the repository");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -338,7 +338,7 @@ void CervisiaPart::setupActions()
     action  = new QAction(QIcon::fromTheme("process-stop"), i18n("Stop"), this);
     actionCollection()->addAction("stop_job", action );
     connect(action, SIGNAL(triggered(bool)), protocol, SLOT(cancelJob()));
-    action->setShortcut(QKeySequence(Qt::Key_Escape));
+    actionCollection()->setDefaultShortcut(action, QKeySequence(Qt::Key_Escape));
     action->setEnabled( false );
     hint = i18n("Stops any running sub-processes");
     action->setToolTip( hint );
@@ -348,7 +348,7 @@ void CervisiaPart::setupActions()
     action  = new QAction(i18n("Browse &Log..."), this);
     actionCollection()->addAction("view_log", action );
     connect(action, SIGNAL(triggered(bool)), SLOT(slotBrowseLog()));
-    action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_L));
+    actionCollection()->setDefaultShortcut(action, QKeySequence(Qt::CTRL + Qt::Key_L));
     hint = i18n("Shows the revision tree of the selected file");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -361,7 +361,7 @@ void CervisiaPart::setupActions()
     action  = new QAction(i18n("&Annotate..."), this);
     actionCollection()->addAction("view_annotate", action );
     connect(action, SIGNAL(triggered(bool)), SLOT(slotAnnotate()));
-    action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_A));
+    actionCollection()->setDefaultShortcut(action, QKeySequence(Qt::CTRL + Qt::Key_A));
     hint = i18n("Shows a blame-annotated view of the selected file");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -369,7 +369,7 @@ void CervisiaPart::setupActions()
     action  = new QAction(QIcon::fromTheme("vcs-diff-cvs-cervisia"), i18n("&Difference to Repository (BASE)..."), this);
     actionCollection()->addAction("view_diff_base", action );
     connect(action, SIGNAL(triggered(bool)), SLOT(slotDiffBase()));
-    action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_D));
+    actionCollection()->setDefaultShortcut(action, QKeySequence(Qt::CTRL + Qt::Key_D));
     hint = i18n("Shows the differences of the selected file to the checked out version (tag BASE)");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -377,7 +377,7 @@ void CervisiaPart::setupActions()
     action  = new QAction(QIcon::fromTheme("vcs-diff-cvs-cervisia"), i18n("Difference to Repository (HEAD)..."), this);
     actionCollection()->addAction("view_diff_head", action );
     connect(action, SIGNAL(triggered(bool)), SLOT(slotDiffHead()));
-    action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_H));
+    actionCollection()->setDefaultShortcut(action, QKeySequence(Qt::CTRL + Qt::Key_H));
     hint = i18n("Shows the differences of the selected file to the newest version in the repository (tag HEAD)");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -624,11 +624,10 @@ void CervisiaPart::setupActions()
     //
     // Help Menu
     //
-    action = KStandardAction::help( this, SLOT(slotHelp()),
-                               actionCollection() );
+    action = KStandardAction::help( this, SLOT(slotHelp()), actionCollection());
 
     action  = new QAction(i18n("CVS &Manual"), this);
-    actionCollection()->addAction("help_cvs_manual", action );
+    actionCollection()->addAction("help_cvs_manual", action);
     connect(action, SIGNAL(triggered(bool)), SLOT(slotCVSInfo()));
     hint = i18n("Opens the help browser with the CVS documentation");
     action->setToolTip( hint );
@@ -638,7 +637,7 @@ void CervisiaPart::setupActions()
     // Folder context menu
     //
     action  = new KToggleAction(i18n("Unfold Folder"), this);
-    actionCollection()->addAction("unfold_folder", action );
+    actionCollection()->addAction("unfold_folder", action);
     connect(action, SIGNAL(triggered(bool)), SLOT(slotUnfoldFolder()));
 }
 
@@ -891,7 +890,7 @@ void CervisiaPart::slotStatus()
     if(cvsJob.path().isEmpty())
        return;
 
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
+    OrgKdeCervisia5CvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
     if( reply.isValid() )
         cmdline = reply;
@@ -1009,7 +1008,7 @@ void CervisiaPart::slotCommit()
         if(cvsJob.path().isEmpty())
            return;
 
-        OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
+        OrgKdeCervisia5CvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
         QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
         if( reply.isValid() )
             cmdline = reply;
@@ -1076,7 +1075,7 @@ void CervisiaPart::updateSandbox(const QString &extraopt)
     QDBusObjectPath cvsJob = cvsJobPath;
     if(cvsJob.path().isEmpty())
         return;
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
+    OrgKdeCervisia5CvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
 
     if( reply.isValid() )
@@ -1130,7 +1129,7 @@ void CervisiaPart::addOrRemove(AddRemoveDialog::ActionType action)
         if(cvsJobPath.path().isEmpty())
            return;
 
-        OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJobPath.path(),QDBusConnection::sessionBus(), this);
+        OrgKdeCervisia5CvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJobPath.path(),QDBusConnection::sessionBus(), this);
         QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
 
         if( reply.isValid() )
@@ -1224,7 +1223,7 @@ void CervisiaPart::addOrRemoveWatch(WatchDialog::ActionType action)
         if(cvsJobPath.path().isEmpty())
            return;
 
-        OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJobPath.path(),QDBusConnection::sessionBus(), this);
+        OrgKdeCervisia5CvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJobPath.path(),QDBusConnection::sessionBus(), this);
         QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
 
         if( reply.isValid() )
@@ -1268,7 +1267,7 @@ void CervisiaPart::slotEdit()
     if(cvsJob.path().isEmpty())
        return;
 
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
+    OrgKdeCervisia5CvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
 
     if( reply.isValid() )
@@ -1296,7 +1295,7 @@ void CervisiaPart::slotUnedit()
     if(cvsJobPath.path().isEmpty())
         return;
 
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJobPath.path(),QDBusConnection::sessionBus(), this);
+    OrgKdeCervisia5CvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJobPath.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
 
     if( reply.isValid() )
@@ -1322,7 +1321,7 @@ void CervisiaPart::slotLock()
     if(cvsJob.path().isEmpty())
       return;
     QString cmdline;
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
+    OrgKdeCervisia5CvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
 
     if( reply.isValid() )
@@ -1349,7 +1348,7 @@ void CervisiaPart::slotUnlock()
       return;
 
     QString cmdline;
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
+    OrgKdeCervisia5CvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
 
     if( reply.isValid() )
@@ -1376,7 +1375,7 @@ void CervisiaPart::slotShowEditors()
        return;
 
     QString cmdline;
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
+    OrgKdeCervisia5CvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
 
     if( reply.isValid() )
@@ -1452,7 +1451,7 @@ void CervisiaPart::slotImport()
     ////qDebug()<<" cvsJob.path() :"<<cvsJob.path()<<endl;
     if(cvsJob.path().isEmpty())
         return;
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
+    OrgKdeCervisia5CvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
 
     if( reply.isValid() )
@@ -1479,7 +1478,7 @@ void CervisiaPart::slotCreateRepository()
     QString cmdline;
     if(cvsJob.path().isEmpty())
        return;
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
+    OrgKdeCervisia5CvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
 
     if( reply.isValid() )
@@ -1506,7 +1505,7 @@ void CervisiaPart::slotCheckout()
                                           dlg.alias(), dlg.exportOnly(), dlg.recursive());
     QDBusObjectPath cvsJob = cvsJobPath;
     QString cmdline;
-    OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
+    OrgKdeCervisia5CvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJob.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
 
     if( reply.isValid() )
@@ -1560,7 +1559,7 @@ void CervisiaPart::createOrDeleteTag(TagDialog::ActionType action)
                                            dlg.forceTag());
     QDBusObjectPath cvsJobPath = cvsJob;
         QString cmdline;
-        OrgKdeCervisiaCvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJobPath.path(),QDBusConnection::sessionBus(), this);
+        OrgKdeCervisia5CvsserviceCvsjobInterface cvsjobinterface(m_cvsServiceInterfaceName,cvsJobPath.path(),QDBusConnection::sessionBus(), this);
         QDBusReply<QString> reply = cvsjobinterface.cvsCommand();
 
         if( reply.isValid() )
@@ -1787,7 +1786,7 @@ bool CervisiaPart::openSandbox(const QUrl& url)
     // Do we have a cvs service?
     if( !cvsService )
         return false;
-    OrgKdeCervisiaRepositoryInterface cvsRepository( m_cvsServiceInterfaceName, "/CvsRepository",QDBusConnection::sessionBus());
+    OrgKdeCervisia5RepositoryInterface cvsRepository( m_cvsServiceInterfaceName, "/CvsRepository",QDBusConnection::sessionBus());
 
     // change the working copy directory for the cvs D-Bus service
     QDBusReply<bool> reply = cvsRepository.setWorkingCopy(url.path());

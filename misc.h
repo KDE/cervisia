@@ -26,7 +26,7 @@
 class QString;
 class QStringList;
 class QWidget;
-class OrgKdeCervisiaCvsserviceCvsserviceInterface;
+class OrgKdeCervisia5CvsserviceCvsserviceInterface;
 
 
 namespace Cervisia
@@ -59,8 +59,8 @@ QStringList splitLine(QString, char delim=' ');
 QString tempFileName(const QString& suffix);
 void cleanupTempFiles();
 
-const QStringList fetchBranches(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService, QWidget* parent);
-const QStringList fetchTags(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService, QWidget* parent);
+const QStringList fetchBranches(OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService, QWidget* parent);
+const QStringList fetchTags(OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService, QWidget* parent);
 
 /**
  * Compares two revision numbers.

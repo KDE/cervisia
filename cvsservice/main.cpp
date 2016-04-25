@@ -31,9 +31,11 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char** argv)
 {
     QApplication app(argc, argv);
 
-    KAboutData about("cvsservice", i18n("CVS D-Bus service"), CERVISIA_VERSION,
+    KAboutData about("cvsservice5", i18n("CVS D-Bus service"), CERVISIA_VERSION,
                      i18n("D-Bus service for CVS"), KAboutLicense::LGPL,
                      i18n("Copyright (c) 2002-2003 Christian Loose"));
+
+    about.setOrganizationDomain("kde.org");
 
     about.addAuthor(i18n("Christian Loose"), i18n("Developer"),
                     "christian.loose@hamburg.de");

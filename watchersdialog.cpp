@@ -76,7 +76,7 @@ WatchersDialog::~WatchersDialog()
 }
 
 
-bool WatchersDialog::parseWatchers(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService,
+bool WatchersDialog::parseWatchers(OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService,
                                    const QStringList& files)
 {
     setWindowTitle(i18n("CVS Watchers"));

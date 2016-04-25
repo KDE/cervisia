@@ -31,6 +31,7 @@
 #include <kshell.h>
 #include <KSharedConfig>
 #include <KLocalizedString>
+#include <KDBusService>
 
 #include "cvsjob.h"
 #include "cvsloginjob.h"
@@ -40,6 +41,7 @@
 #include "cvsserviceadaptor.h"
 #include <cvsjobadaptor.h>
 #include <kconfiggroup.h>
+
 static const char SINGLE_JOB_ID[]   = "NonConcurrentJob";
 static const char REDIRECT_STDERR[] = "2>&1";
 
@@ -73,7 +75,6 @@ struct CvsService::Private
 CvsService::CvsService()
     : d(new Private)
 {
-
     (void) new CvsserviceAdaptor(this);
     QDBusConnection::sessionBus().registerObject("/CvsService", this);
  
@@ -92,6 +93,8 @@ CvsService::CvsService()
         //bool res = ssh.querySshAgent();
         ssh.querySshAgent();
     }
+
+    new KDBusService(KDBusService::Multiple, this);
 }
 
 

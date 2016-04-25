@@ -1,4 +1,34 @@
-
-
-ecm_install_icons( ${ICON_INSTALL_DIR}   )
-
+ecm_install_icons(ICONS
+    16-actions-vcs-add-cvs-cervisia.png
+    16-actions-vcs-commit-cvs-cervisia.png
+    16-actions-vcs-diff-cvs-cervisia.png
+    16-actions-vcs-remove-cvs-cervisia.png
+    16-actions-vcs-status-cvs-cervisia.png
+    16-actions-vcs-update-cvs-cervisia.png
+    22-actions-vcs-add-cvs-cervisia.png
+    22-actions-vcs-commit-cvs-cervisia.png
+    22-actions-vcs-diff-cvs-cervisia.png
+    22-actions-vcs-remove-cvs-cervisia.png
+    22-actions-vcs-status-cvs-cervisia.png
+    22-actions-vcs-update-cvs-cervisia.png
+    32-actions-vcs-add-cvs-cervisia.png
+    32-actions-vcs-commit-cvs-cervisia.png
+    32-actions-vcs-diff-cvs-cervisia.png
+    32-actions-vcs-remove-cvs-cervisia.png
+    32-actions-vcs-status-cvs-cervisia.png
+    32-actions-vcs-update-cvs-cervisia.png
+    48-actions-vcs-add-cvs-cervisia.png
+    48-actions-vcs-commit-cvs-cervisia.png
+    48-actions-vcs-diff-cvs-cervisia.png
+    48-actions-vcs-remove-cvs-cervisia.png
+    48-actions-vcs-status-cvs-cervisia.png
+    48-actions-vcs-update-cvs-cervisia.png
+    sc-actions-vcs-add-cvs-cervisia.svgz
+    sc-actions-vcs-commit-cvs-cervisia.svgz
+    sc-actions-vcs-diff-cvs-cervisia.svgz
+    sc-actions-vcs-remove-cvs-cervisia.svgz
+    sc-actions-vcs-status-cvs-cervisia.svgz
+    sc-actions-vcs-update-cvs-cervisia.svgz
+    DESTINATION ${ICON_INSTALL_DIR}
+    THEME hicolor
+)
