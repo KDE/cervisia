@@ -46,6 +46,7 @@ public:
                  bool odd);
 
 private slots:
+    void slotHelp();
     void findNext();
     void findPrev();
     void gotoLine();

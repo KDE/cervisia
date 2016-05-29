@@ -33,6 +33,7 @@
 // KDE
 #include <KLocalizedString>
 #include <KConfigGroup>
+#include <KHelpClient>
 
 
 AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent)
@@ -43,6 +44,7 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent)
                                      i18n("CVS Remove") );
     setModal(true);
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &AddRemoveDialog::slotHelp);
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
@@ -92,14 +94,17 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent)
         layout->addSpacing(5);
     }
 
-    /*
-    if( action == Remove )
-        setHelp("removingfiles");
+    if ( action == Remove )
+        helpTopic = "removingfiles";
     else
-        setHelp("addingfiles");
-    */
+        helpTopic = "addingfiles";
 
     mainLayout->addWidget(buttonBox);
+}
+
+void AddRemoveDialog::slotHelp()
+{
+  KHelpClient::invokeHelp(helpTopic);
 }
 
 

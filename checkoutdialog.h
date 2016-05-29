@@ -57,6 +57,7 @@ protected slots:
     void slotOk();
     
 private slots:
+    void slotHelp();
     void dirButtonClicked();
     void moduleButtonClicked();
     void branchButtonClicked();
@@ -74,6 +75,7 @@ private:
     QCheckBox* m_useModificationTimeBox;
     ActionType act;
     KConfig&   partConfig;
+    QString helpTopic;
 
     OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService;
 };

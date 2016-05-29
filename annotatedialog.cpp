@@ -19,26 +19,25 @@
 
 
 #include "annotatedialog.h"
-
 #include "annotateview.h"
 
-#include <kconfig.h>
-#include <kconfiggroup.h>
-#include <QLineEdit>
 #include <klocale.h>
-#include <QPushButton>
+#include <kconfig.h>
+#include <KConfigGroup>
+#include <KHelpClient>
 
+#include <QLineEdit>
+#include <QPushButton>
 #include <QVBoxLayout>
 #include <QInputDialog>
-#include <KConfigGroup>
 #include <QDialogButtonBox>
-#include <QPushButton>
 
 AnnotateDialog::AnnotateDialog(KConfig& cfg, QWidget *parent)
     : QDialog(parent)
     , partConfig(cfg)
 {
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help|QDialogButtonBox::Close);
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &AnnotateDialog::slotHelp);
     QWidget *mainWidget = new QWidget(this);
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
@@ -76,8 +75,6 @@ AnnotateDialog::AnnotateDialog(KConfig& cfg, QWidget *parent)
     connect(user2Button, SIGNAL(clicked()), this, SLOT(findPrev()));
     connect(user1Button, SIGNAL(clicked()), this, SLOT(gotoLine()));
 
-    //setHelp("annotate");
-
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     KConfigGroup cg(&partConfig, "AnnotateDialog");
@@ -89,6 +86,11 @@ AnnotateDialog::~AnnotateDialog()
 {
     KConfigGroup cg(&partConfig, "AnnotateDialog");
     cg.writeEntry("geometry", saveGeometry());
+}
+
+void AnnotateDialog::slotHelp()
+{
+  KHelpClient::invokeHelp(QLatin1String("annotate"));
 }
 
 

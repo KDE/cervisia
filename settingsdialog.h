@@ -60,6 +60,9 @@ public:
 protected slots:
      virtual void done(int res);
 
+private slots:
+    void slotHelp();
+
 private:
     void readSettings();
     void writeSettings();

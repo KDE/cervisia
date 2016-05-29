@@ -41,6 +41,7 @@
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <KLineEdit>
+#include <KHelpClient>
 
 #include "progressdialog.h"
 #include "repositories.h"
@@ -61,6 +62,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsservice
     setWindowTitle( (action==Checkout)? i18n("CVS Checkout") : i18n("CVS Import") );
     setModal(true);
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &CheckoutDialog::slotHelp);
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
@@ -146,8 +148,7 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsservice
         branch_label->setBuddy( branchCombo );
         grid->addWidget(branch_label, 2, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
-        connect( branchCombo, SIGNAL(textChanged(QString)),
-                 this, SLOT(branchTextChanged()));
+        connect(branchCombo, SIGNAL(editTextChanged(QString)), this, SLOT(branchTextChanged()));
 
         recursive_box = new QCheckBox(i18n("Re&cursive checkout"), mainWidget);
         mainLayout->addWidget(recursive_box);
@@ -256,10 +257,15 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsservice
         if (!list1.contains(*it2))
             repo_combo->addItem(*it2);
 
-    //setHelp((act == Import) ? "importing" : "checkingout");
+    helpTopic = (act == Import) ? "importing" : "checkingout";
 
     restoreUserInput();
     connect(okButton,SIGNAL(clicked()),this,SLOT(slotOk()));
+}
+
+void CheckoutDialog::slotHelp()
+{
+  KHelpClient::invokeHelp(helpTopic);
 }
 
 

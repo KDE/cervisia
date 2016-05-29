@@ -40,6 +40,7 @@ public:
     QString formatOption() const;
 
 private slots:
+    void slotHelp();
     void formatChanged(int buttonId);
        
 private:

@@ -26,26 +26,28 @@
 #include <qnamespace.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qpushbutton.h>
 #include <qtextcodec.h>
 #include <qtextstream.h>
+#include <qregexp.h>
 #include <QKeyEvent>
 #include <QHBoxLayout>
-#include <QBoxLayout>
 #include <QVBoxLayout>
 #include <QSplitter>
 #include <QDebug>
 #include <QFileDialog>
-#include <klocale.h>
-#include <kmessagebox.h>
-#include <qregexp.h>
-#include <kconfiggroup.h>
-#include <KConfigGroup>
 #include <QDialogButtonBox>
 #include <QPushButton>
+
+#include <klocale.h>
+#include <kmessagebox.h>
+
+#include <kconfiggroup.h>
+#include <KConfigGroup>
+#include <KHelpClient>
 #include <KGuiItem>
 #include "misc.h"
 #include "debug.h"
+
 using Cervisia::ResolveEditorDialog;
 
 
@@ -112,6 +114,7 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
     , partConfig(cfg)
 {
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help|QDialogButtonBox::Close);
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &ResolveDialog::slotHelp);
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
@@ -225,8 +228,6 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
     setMinimumSize(fm.width('0') * 120,
                    fm.lineSpacing() * 40);
 
-    //setHelp("resolvingconflicts");
-
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     KConfigGroup cg(&partConfig, "ResolveDialog");
@@ -240,6 +241,11 @@ ResolveDialog::~ResolveDialog()
     cg.writeEntry("geometry", saveGeometry());
 
     qDeleteAll(items);
+}
+
+void ResolveDialog::slotHelp()
+{
+  KHelpClient::invokeHelp(QLatin1String("resolvingconflicts"));
 }
 
 

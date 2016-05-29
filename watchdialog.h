@@ -35,6 +35,9 @@ public:
 
     Events events() const;
 
+private slots:
+    void slotHelp();
+
 private:
     QRadioButton *all_button, *only_button;
     QCheckBox *commitbox, *editbox, *uneditbox;

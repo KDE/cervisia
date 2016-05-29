@@ -22,22 +22,20 @@
 #include "repositorydialog.h"
 #include "debug.h"
 
-#include <qlayout.h>
-#include <qpushbutton.h>
 #include <QHBoxLayout>
-#include <QBoxLayout>
+#include <QVBoxLayout>
 #include <QTreeWidget>
 #include <QHeaderView>
 #include <QDialogButtonBox>
+#include <QPushButton>
+#include <QDebug>
+
 #include <kconfig.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <QDebug>
 #include <kconfiggroup.h>
 #include <KConfigGroup>
-#include <QDialogButtonBox>
-#include <QPushButton>
-#include <QVBoxLayout>
+#include <KHelpClient>
 
 #include "addrepositorydialog.h"
 #include "cvsserviceinterface.h"
@@ -173,21 +171,20 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsser
 {
     setWindowTitle(i18n("Configure Access to Repositories"));
     setModal(true);
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    okButton->setDefault(true);
 
     QFrame* mainWidget = new QFrame(this);
     mainLayout->addWidget(mainWidget);
 
     QBoxLayout* hbox = new QHBoxLayout(mainWidget);
-    mainLayout->addLayout(hbox);
     hbox->setMargin(0);
 
     m_repoList = new QTreeWidget(mainWidget);
@@ -206,14 +203,11 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsser
             this,       SLOT(slotSelectionChanged()));
 
     QDialogButtonBox* actionbox = new QDialogButtonBox(Qt::Vertical);
-    QPushButton* addbutton = actionbox->addButton(i18n("&Add..."), QDialogButtonBox::ActionRole);
-    m_modifyButton = actionbox->addButton(i18n("&Modify..."), QDialogButtonBox::ActionRole);
-    m_removeButton = actionbox->addButton(i18n("&Remove"), QDialogButtonBox::ActionRole);
-    //actionbox->addStretch();
+    QPushButton* addbutton = actionbox->addButton(i18n("Add..."), QDialogButtonBox::ActionRole);
+    m_modifyButton = actionbox->addButton(i18n("Modify..."), QDialogButtonBox::ActionRole);
+    m_removeButton = actionbox->addButton(i18n("Remove"), QDialogButtonBox::ActionRole);
     m_loginButton  = actionbox->addButton(i18n("Login..."), QDialogButtonBox::ActionRole);
     m_logoutButton = actionbox->addButton(i18n("Logout"), QDialogButtonBox::ActionRole);
-    //actionbox->addStretch();
-    actionbox->layout();
     hbox->addWidget(actionbox, 0);
 
     m_loginButton->setEnabled(false);
@@ -230,7 +224,7 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsser
     connect( m_logoutButton, SIGNAL(clicked()),
              this, SLOT(slotLogoutClicked()) );
 
-    // open cvs DCOP service configuration file
+    // open cvs DBUS service configuration file
     m_serviceConfig = new KConfig("cvsservicerc");
 
     readCvsPassFile();
@@ -247,7 +241,7 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsser
         slotSelectionChanged();
     }
 
-    //setHelp("accessing-repository");
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &RepositoryDialog::slotHelp);
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 
@@ -318,6 +312,10 @@ void RepositoryDialog::readConfigFile()
     m_repoList->header()->resizeSections(QHeaderView::ResizeToContents);
 }
 
+void RepositoryDialog::slotHelp()
+{
+    KHelpClient::invokeHelp(QLatin1String("accessing-repository"));
+}
 
 void RepositoryDialog::slotOk()
 {

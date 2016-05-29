@@ -30,6 +30,7 @@
 
 #include <KConfigGroup>
 #include <KLocalizedString>
+#include <KHelpClient>
 
 #include <QDialogButtonBox>
 #include <QPushButton>
@@ -42,6 +43,7 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent)
     setWindowTitle( (action==Add)? i18n("CVS Watch Add") : i18n("CVS Watch Remove") );
     setModal(true);
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &WatchDialog::slotHelp);
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
@@ -49,14 +51,11 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent)
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    okButton->setDefault(true);
 
     QFrame* mainWidget = new QFrame(this);
     mainLayout->addWidget(mainWidget);
 
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    mainLayout->addLayout(layout);
-    //layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
     QLabel *textlabel = new QLabel
@@ -99,12 +98,6 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent)
     group->addButton(all_button);
     group->addButton(only_button);
 
-    QGroupBox *box = new QGroupBox(mainWidget);
-    mainLayout->addWidget(box);
-    QVBoxLayout *v = new QVBoxLayout(box);
-    v->addWidget(group->button(0));
-    v->addWidget(group->button(1));
-
     mainLayout->addWidget(buttonBox);
 
     connect( only_button, SIGNAL(toggled(bool)),
@@ -113,8 +106,11 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent)
              editbox, SLOT(setEnabled(bool)) );
     connect( only_button, SIGNAL(toggled(bool)),
              uneditbox, SLOT(setEnabled(bool)) );
+}
 
-    //setHelp("watches");
+void WatchDialog::slotHelp()
+{
+  KHelpClient::invokeHelp(QLatin1String("watches"));
 }
 
 

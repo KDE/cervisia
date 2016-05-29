@@ -20,6 +20,8 @@
 
 using Cervisia::PatchOptionDialog;
 
+#include <KHelpClient>
+
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
@@ -27,7 +29,6 @@ using Cervisia::PatchOptionDialog;
 #include <qgroupbox.h>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-#include <QBoxLayout>
 #include <QButtonGroup>
 #include <QSpinBox>
 #include <klocale.h>
@@ -43,19 +44,18 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent)
     setLayout(mainLayout);
 
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &PatchOptionDialog::slotHelp);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    okButton->setDefault(true);
     setModal(false);
 
     QFrame* mainWidget = new QFrame(this);
     mainLayout->addWidget(mainWidget);
 
     QBoxLayout* topLayout = new QVBoxLayout(mainWidget);
-    mainLayout->addLayout(topLayout);
     topLayout->setMargin(0);
 
     { // format
@@ -123,6 +123,11 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent)
 
 PatchOptionDialog::~PatchOptionDialog()
 {
+}
+
+void PatchOptionDialog::slotHelp()
+{
+  KHelpClient::invokeHelp(QLatin1String("creatingpatches"));
 }
 
 

@@ -37,6 +37,7 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <KLocalizedString>
+#include <KHelpClient>
 
 #include "misc.h"
 #include "cvsserviceinterface.h"
@@ -199,6 +200,7 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent)
     dirname_edit->setEnabled(false);
 
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help|QDialogButtonBox::Close);
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &HistoryDialog::slotHelp);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
     mainLayout->addWidget(buttonBox);
@@ -251,8 +253,6 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent)
     buttonBox->button(QDialogButtonBox::Help)->setAutoDefault(false);
     buttonBox->button(QDialogButtonBox::Close)->setAutoDefault(false);
 
-    //setHelp("browsinghistory");
-
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     KConfigGroup cg(&partConfig, "HistoryDialog");
@@ -269,6 +269,11 @@ HistoryDialog::~HistoryDialog()
     cg.writeEntry("geometry", saveGeometry());
 
     cg.writeEntry("HistoryListView", listview->header()->saveState());
+}
+
+void HistoryDialog::slotHelp()
+{
+  KHelpClient::invokeHelp(QLatin1String("browsinghistory"));
 }
 
 

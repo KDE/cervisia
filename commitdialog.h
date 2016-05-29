@@ -48,6 +48,7 @@ public:
     void setLogHistory(const QStringList &list);
 
 private slots:
+    void slotHelp();
     void comboActivated(int);
     void fileSelected(QListWidgetItem* item);
     void fileHighlighted();

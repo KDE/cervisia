@@ -54,6 +54,7 @@ private slots:
     void backClicked();
     void forwClicked();
     void saveAsClicked();
+    void slotHelp();
 
 private:
     void newDiffHunk(int& linenoA, int& linenoB, const QStringList& linesA,

@@ -56,6 +56,7 @@ private slots:
     void editClicked();
     void saveClicked();
     void saveAsClicked();
+    void slotHelp();
     
 private:
     void updateNofN();

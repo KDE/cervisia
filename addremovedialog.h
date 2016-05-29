@@ -35,8 +35,12 @@ public:
 
     void setFileList(const QStringList& files);
 
+private slots:
+    void slotHelp();
+
 private:
     QListWidget* m_listBox;
+    QString helpTopic;
 };
 
 #endif // ADDREMOVEDIALOG_H

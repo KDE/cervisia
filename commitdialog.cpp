@@ -36,6 +36,7 @@
 #include <KConfigGroup>
 #include <KGuiItem>
 #include <KLocalizedString>
+#include <KHelpClient>
 
 #include "cvsserviceinterface.h"
 #include "logmessageedit.h"
@@ -67,6 +68,7 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInte
     setWindowTitle(i18n("CVS Commit"));
     setModal(true);
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &CommitDialog::slotHelp);
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
@@ -134,8 +136,6 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInte
     connect(user1Button, SIGNAL(clicked()),
              this, SLOT(diffClicked()) );
 
-    //setHelp("commitingfiles");
-
     KConfigGroup cg(&partConfig, "CommitDialog");
     restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
 }
@@ -146,6 +146,11 @@ CommitDialog::~CommitDialog()
     KConfigGroup cg(&partConfig, "CommitDialog");
     cg.writeEntry("geometry", saveGeometry());
     cg.writeEntry("UseTemplate", m_useTemplateChk->isChecked());
+}
+
+void CommitDialog::slotHelp()
+{
+  KHelpClient::invokeHelp(QLatin1String("committingfiles"));
 }
 
 

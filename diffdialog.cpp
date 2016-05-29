@@ -51,6 +51,7 @@
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <KGuiItem>
+#include <KHelpClient>
 #include <QFileDialog>
 
 DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
@@ -64,6 +65,8 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
     setLayout(mainLayout);
 
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help|QDialogButtonBox::Close);
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &DiffDialog::slotHelp);
+
     QPushButton *user1Button = new QPushButton;
     buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
@@ -150,8 +153,6 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
 
     mainLayout->addWidget(buttonBox);
 
-    //setHelp("diff");
-
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     KConfigGroup cg(&partConfig, "DiffDialog");
@@ -167,6 +168,11 @@ DiffDialog::~DiffDialog()
     cg.writeEntry("geometry", saveGeometry());
 
     qDeleteAll(items);
+}
+
+void DiffDialog::slotHelp()
+{
+  KHelpClient::invokeHelp(QLatin1String("diff"));
 }
 
 
@@ -433,7 +439,6 @@ void DiffDialog::callExternalDiff(const QString& extdiff, OrgKdeCervisia5Cvsserv
     if( dlg.execute() )
     {
         // call external diff application
-        // TODO CL maybe use system()?
         KProcess proc;
         proc.setShellCommand(extcmdline);
         proc.startDetached();

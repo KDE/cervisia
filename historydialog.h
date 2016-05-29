@@ -39,6 +39,7 @@ public:
     bool parseHistory(OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService);
 
 private slots:
+    void slotHelp();
     void choiceChanged();
     void toggled(bool b);
 

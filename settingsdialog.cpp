@@ -27,15 +27,16 @@
 #include <qwidget.h>
 #include <qradiobutton.h>
 #include <QVBoxLayout>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QFontDialog>
+#include <QLineEdit>
 
 #include <kcolorbutton.h>
 #include <kconfig.h>
-#include <QFontDialog>
-#include <QLineEdit>
 #include <kurlrequester.h>
 #include <KConfigGroup>
-#include <QDialogButtonBox>
-#include <QPushButton>
+#include <KHelpClient>
 
 #include "misc.h"
 #include "cervisiasettings.h"
@@ -70,19 +71,11 @@ SettingsDialog::SettingsDialog(KConfig *conf, QWidget *parent)
 {
     setFaceType( List );
     setWindowTitle(i18n("Configure Cervisia"));
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
-    QWidget *mainWidget = new QWidget(this);
-    QVBoxLayout *mainLayout = new QVBoxLayout;
-    setLayout(mainLayout);
-    mainLayout->addWidget(mainWidget);
-    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    setStandardButtons(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+
+    QPushButton *okButton = button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
-    mainLayout->addWidget(buttonBox);
-    okButton->setDefault(true);
 
     config = conf;
 
@@ -116,13 +109,20 @@ SettingsDialog::SettingsDialog(KConfig *conf, QWidget *parent)
 
     readSettings();
 
-    //setHelp("customization", "cervisia");
+    connect(button(QDialogButtonBox::Help), &QPushButton::clicked, this, &SettingsDialog::slotHelp);
 }
 
 SettingsDialog::~SettingsDialog()
 {
     delete serviceConfig;
 }
+
+
+void SettingsDialog::slotHelp()
+{
+  KHelpClient::invokeHelp(QLatin1String("customization"));
+}
+
 
 void SettingsDialog::readSettings()
 {
@@ -227,8 +227,6 @@ void SettingsDialog::addGeneralPage()
     page->setIcon( QIcon::fromTheme("applications-system") );
     
     QVBoxLayout* layout = new QVBoxLayout(generalPage);
-//TODO PORT QT5     layout->setSpacing(QDialog::spacingHint());
-    layout->setMargin(0);
 
     QLabel *usernamelabel = new QLabel( i18n("&User name for the change log editor:"), generalPage );
     usernameedit = new QLineEdit(generalPage);
@@ -305,7 +303,6 @@ void SettingsDialog::addStatusPage()
 {
     QWidget* statusPage = new QWidget;
     QVBoxLayout *statusPageVBoxLayout = new QVBoxLayout(statusPage);
-    statusPageVBoxLayout->setMargin(0);
     KPageWidgetItem *page = new KPageWidgetItem( statusPage, i18n("Status") );
     page->setIcon( QIcon::fromTheme("fork") );
 
@@ -314,8 +311,9 @@ void SettingsDialog::addStatusPage()
     localstatusbox = new QCheckBox(i18n("When opening a sandbox from a &local repository,\n"
                                         "start a File->Status command automatically"), statusPage);
 
-    // dummy widget to take up the vertical space
-    new QWidget(statusPage);
+    statusPageVBoxLayout->addWidget(remotestatusbox);
+    statusPageVBoxLayout->addWidget(localstatusbox);
+    statusPageVBoxLayout->addStretch();
 
     addPage(page);
 }
@@ -347,7 +345,6 @@ void SettingsDialog::addLookAndFeelPage()
 {
     QWidget* lookPage = new QWidget;
     QVBoxLayout *lookPageVBoxLayout = new QVBoxLayout(lookPage);
-    lookPageVBoxLayout->setMargin(0);
     KPageWidgetItem *page = new KPageWidgetItem( lookPage, i18n("Appearance") );
     page->setIcon( QIcon::fromTheme("preferences-desktop-theme") );
 

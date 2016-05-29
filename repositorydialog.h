@@ -45,6 +45,7 @@ protected slots:
     void slotOk();
 
 private slots:
+    void slotHelp();
     void slotAddClicked();
     void slotModifyClicked();
     void slotRemoveClicked();
