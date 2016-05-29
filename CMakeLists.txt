@@ -52,6 +52,7 @@ set(libcervisia_SRCS
    tooltip.cpp
    settingsdialog.cpp
    debug.cpp
+   ktreewidgetsearchline.cpp
    )
 
 qt5_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia5.cvsservice.xml )

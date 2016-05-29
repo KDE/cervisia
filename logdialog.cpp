@@ -36,7 +36,7 @@
 #include <QDebug>
 #include <kfinddialog.h>
 #include <kglobalsettings.h>
-//#include <KTreeWidgetSearchLine>
+#include <ktreewidgetsearchline.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kdatetime.h>
@@ -85,19 +85,15 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     QVBoxLayout* listLayout = new QVBoxLayout(listWidget);
     QHBoxLayout* searchLayout = new QHBoxLayout();
     listLayout->addLayout(searchLayout);
-//TODO PORT QT5     searchLayout->setMargin(QDialog::spacingHint());
-//TODO PORT QT5     searchLayout->setSpacing(QDialog::spacingHint());
 
     list = new LogListView(partConfig, listWidget);
     listLayout->addWidget(list, 1);
 
-#warning TODO
-    // TODO   how ?
-    //KTreeWidgetSearchLine* searchLine = new KTreeWidgetSearchLine(listWidget, list);
-    QLabel* searchLabel = new QLabel(i18n("S&earch:"),listWidget);
-    //searchLabel->setBuddy(searchLine);
+    KTreeWidgetSearchLine* searchLine = new KTreeWidgetSearchLine(listWidget, list);
+    QLabel* searchLabel = new QLabel(i18n("Search:"),listWidget);
+    searchLabel->setBuddy(searchLine);
     searchLayout->addWidget(searchLabel);
-    //searchLayout->addWidget(searchLine, 1);
+    searchLayout->addWidget(searchLine, 1);
 
     connect( list, SIGNAL(revisionClicked(QString,bool)),
              this, SLOT(revisionSelected(QString,bool)) );
@@ -235,7 +231,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     connect(buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked()), this, SLOT(slotApply()));
     connect(buttonBox, &QDialogButtonBox::helpRequested, this, &LogDialog::slotHelp);
 
-    KGuiItem::assign(okButton, KGuiItem(i18n("to view revision A")));
+    KGuiItem::assign(okButton, KGuiItem(i18n("&View A")));
     KGuiItem::assign(buttonBox->button(QDialogButtonBox::Apply), KGuiItem(i18n("Create Patch...")));
 
     mainLayout->addWidget(buttonBox);
@@ -274,7 +270,7 @@ bool LogDialog::parseCvsLog(OrgKdeCervisia5CvsserviceCvsserviceInterface* servic
     enum { Begin, Tags, Admin, Revision,
        Author, Branches, Comment, Finished } state;
 
-    // remember DCOP reference and file name for diff or annotate
+    // remember DBUS reference and file name for diff or annotate
     cvsService = service;
     filename = fileName;
 
