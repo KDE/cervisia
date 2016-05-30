@@ -19,7 +19,7 @@ include(FeatureSummary)
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Widgets DBus)
 
-find_package(KF5 REQUIRED COMPONENTS Parts DocTools Init IconThemes Notifications WidgetsAddons Su)
+find_package(KF5 REQUIRED COMPONENTS Parts DocTools Init IconThemes Notifications WidgetsAddons ItemViews Su)
 
 add_subdirectory( doc )
 add_subdirectory( cvsservice )
@@ -52,7 +52,6 @@ set(libcervisia_SRCS
    tooltip.cpp
    settingsdialog.cpp
    debug.cpp
-   ktreewidgetsearchline.cpp
    )
 
 qt5_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia5.cvsservice.xml )
@@ -72,7 +71,7 @@ set(cervisia_KDEINIT_SRCS ${libcervisia_SRCS}
 
 kf5_add_kdeinit_executable(cervisia ${cervisia_KDEINIT_SRCS})
 
-target_link_libraries(kdeinit_cervisia KF5::Parts)
+target_link_libraries(kdeinit_cervisia KF5::Parts KF5::ItemViews)
 
 install(TARGETS kdeinit_cervisia ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
@@ -119,7 +118,7 @@ qt5_add_dbus_adaptor(cervisiapart_PART_SRCS org.kde.cervisia5.protocolview.xml p
 
 add_library(cervisiapart5 MODULE ${cervisiapart_PART_SRCS})
 
-target_link_libraries(cervisiapart5 KF5::Parts KF5::Notifications)
+target_link_libraries(cervisiapart5 KF5::Parts KF5::Notifications KF5::ItemViews)
 
 install(TARGETS cervisiapart5  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
