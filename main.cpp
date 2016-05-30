@@ -196,7 +196,8 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
 
         if( parser.positionalArguments().count() )
         {
-            QUrl directory = QUrl::fromLocalFile(parser.positionalArguments()[0]);
+            QDir dir(parser.positionalArguments()[0]);
+            QUrl directory = QUrl::fromLocalFile(dir.absolutePath());
             shell->openURL(directory);
         }
         else
