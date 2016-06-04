@@ -113,10 +113,10 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
     , markeditem(-1)
     , partConfig(cfg)
 {
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help | QDialogButtonBox::Close);
-
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help | QDialogButtonBox::Close);
 
     QPushButton *user1Button = new QPushButton;
     buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
@@ -130,15 +130,7 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
     KGuiItem::assign(user1Button, KStandardGuiItem::saveAs());
     KGuiItem::assign(user2Button, KStandardGuiItem::save());
 
-    QFrame* mainWidget = new QFrame(this);
-    mainLayout->addWidget(mainWidget);
-
-    QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    mainLayout->addLayout(layout);
-    //layout->setSpacing(spacingHint());
-    layout->setMargin(0);
-
-    QSplitter *vertSplitter = new QSplitter(Qt::Vertical, mainWidget);
+    QSplitter *vertSplitter = new QSplitter(Qt::Vertical, this);
     mainLayout->addWidget(vertSplitter);
 
     QSplitter *splitter = new QSplitter(Qt::Horizontal, vertSplitter);
@@ -174,42 +166,34 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
     merge = new DiffView(cfg, false, false, mergeLayoutWidget);
     mergeLayout->addWidget(merge, 10);
 
-    layout->addWidget(vertSplitter);
+    mainLayout->addWidget(vertSplitter);
 
-    abutton = new QPushButton("&A", mainWidget);
-    mainLayout->addWidget(abutton);
+    abutton = new QPushButton("&A");
     connect( abutton, SIGNAL(clicked()), SLOT(aClicked()) );
 
-    bbutton = new QPushButton("&B", mainWidget);
-    mainLayout->addWidget(bbutton);
+    bbutton = new QPushButton("&B");
     connect( bbutton, SIGNAL(clicked()), SLOT(bClicked()) );
 
-    abbutton = new QPushButton("A+B", mainWidget);
-    mainLayout->addWidget(abbutton);
+    abbutton = new QPushButton("A+B");
     connect( abbutton, SIGNAL(clicked()), SLOT(abClicked()) );
 
-    babutton = new QPushButton("B+A", mainWidget);
-    mainLayout->addWidget(babutton);
+    babutton = new QPushButton("B+A");
     connect( babutton, SIGNAL(clicked()), SLOT(baClicked()) );
 
-    editbutton = new QPushButton(i18n("&Edit"), mainWidget);
-    mainLayout->addWidget(editbutton);
+    editbutton = new QPushButton(i18n("&Edit"));
     connect( editbutton, SIGNAL(clicked()), SLOT(editClicked()) );
 
-    nofnlabel = new QLabel(mainWidget);
-    mainLayout->addWidget(nofnlabel);
+    nofnlabel = new QLabel;
     nofnlabel->setAlignment(Qt::AlignCenter);
 
-    backbutton = new QPushButton("&<<", mainWidget);
-    mainLayout->addWidget(backbutton);
+    backbutton = new QPushButton("&<<");
     connect( backbutton, SIGNAL(clicked()), SLOT(backClicked()) );
 
-    forwbutton = new QPushButton("&>>", mainWidget);
-    mainLayout->addWidget(forwbutton);
+    forwbutton = new QPushButton("&>>");
     connect( forwbutton, SIGNAL(clicked()), SLOT(forwClicked()) );
 
     QBoxLayout *buttonlayout = new QHBoxLayout();
-    layout->addLayout(buttonlayout);
+    mainLayout->addLayout(buttonlayout);
     buttonlayout->addWidget(abutton, 1);
     buttonlayout->addWidget(bbutton, 1);
     buttonlayout->addWidget(abbutton, 1);
@@ -228,8 +212,7 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
     buttonBox->button(QDialogButtonBox::Close)->setDefault(true);
 
     QFontMetrics const fm(fontMetrics());
-    setMinimumSize(fm.width('0') * 120,
-                   fm.lineSpacing() * 40);
+    resize(fm.width('0') * 100, fm.lineSpacing() * 40);
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 

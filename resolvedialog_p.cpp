@@ -35,29 +35,25 @@ ResolveEditorDialog::ResolveEditorDialog(KConfig& cfg, QWidget *parent)
     , m_partConfig(cfg)
 {
     setModal(true);
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
-    QWidget *mainWidget = new QWidget(this);
+
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
-    mainLayout->addWidget(mainWidget);
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
-    okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
-    mainLayout->addWidget(buttonBox);
-    okButton->setDefault(true);
 
     m_edit = new QPlainTextEdit(this);
     m_edit->setFont(CervisiaSettings::diffFont());
     m_edit->setFocus();
 
     mainLayout->addWidget(m_edit);
+    mainLayout->addWidget(buttonBox);
 
     QFontMetrics const fm(fontMetrics());
-    setMinimumSize(fm.width('0') * 120,
-                   fm.lineSpacing() * 40);
+    resize(fm.width('0') * 120, fm.lineSpacing() * 40);
 
     KConfigGroup cg(&m_partConfig, "ResolveEditorDialog");
     restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
