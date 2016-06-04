@@ -47,73 +47,66 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisia5CvsserviceCvsserviceInter
       branchtag_button(0),
       forcetag_button(0)
 {
+    setModal(true);
+    setWindowTitle( (action==Delete)? i18n("CVS Delete Tag") : i18n("CVS Tag") );
+
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
-    okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
     connect(buttonBox, &QDialogButtonBox::helpRequested, this, &TagDialog::slotHelp);
-    okButton->setDefault(true);
-    setModal(true);
-    setWindowTitle( (action==Delete)? i18n("CVS Delete Tag") : i18n("CVS Tag") );
 
-    QFrame* mainWidget = new QFrame(this);
-    mainLayout->addWidget(mainWidget);
-
-    QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    layout->setMargin(0);
-
-    if (action == Delete)
+    if ( action == Delete )
     {
-        tag_combo = new KComboBox(mainWidget);
+        tag_combo = new KComboBox;
         mainLayout->addWidget(tag_combo);
         tag_combo->setEditable(true);
         tag_combo->setFocus();
         tag_combo->setMinimumWidth(fontMetrics().width('0') * 30);
 
-        QLabel *tag_label = new QLabel(i18n("&Name of tag:"), mainWidget);
+        QLabel *tag_label = new QLabel(i18n("&Name of tag:"));
         mainLayout->addWidget(tag_label);
-        tag_label->setBuddy( tag_combo );
+        tag_label->setBuddy(tag_combo);
 
-        QPushButton *tag_button = new QPushButton(i18n("Fetch &List"), mainWidget);
+        QPushButton *tag_button = new QPushButton(i18n("Fetch &List"));
         mainLayout->addWidget(tag_button);
-        connect( tag_button, SIGNAL(clicked()),
-                 this, SLOT(tagButtonClicked()) );
+        connect(tag_button, SIGNAL(clicked()), this, SLOT(tagButtonClicked()));
 
         QBoxLayout *tagedit_layout = new QHBoxLayout();
-        layout->addLayout(tagedit_layout);
+        mainLayout->addLayout(tagedit_layout);
         tagedit_layout->addWidget(tag_label);
         tagedit_layout->addWidget(tag_combo);
         tagedit_layout->addWidget(tag_button);
     }
     else
     {
-        tag_edit = new QLineEdit(mainWidget);
+        tag_edit = new QLineEdit;
         mainLayout->addWidget(tag_edit);
         tag_edit->setFocus();
         tag_edit->setMinimumWidth(fontMetrics().width('0') * 30);
 
-        QLabel *tag_label = new QLabel(i18n("&Name of tag:"), mainWidget);
+        QLabel *tag_label = new QLabel(i18n("&Name of tag:"));
         mainLayout->addWidget(tag_label);
         tag_label->setBuddy( tag_edit );
 
         QBoxLayout *tagedit_layout = new QHBoxLayout();
-        layout->addLayout(tagedit_layout);
+        mainLayout->addLayout(tagedit_layout);
         tagedit_layout->addWidget(tag_label);
         tagedit_layout->addWidget(tag_edit);
 
-        branchtag_button = new QCheckBox(i18n("Create &branch with this tag"), mainWidget);
+        branchtag_button = new QCheckBox(i18n("Create &branch with this tag"));
         mainLayout->addWidget(branchtag_button);
-        layout->addWidget(branchtag_button);
+        mainLayout->addWidget(branchtag_button);
 
-        forcetag_button = new QCheckBox(i18n("&Force tag creation even if tag already exists"), mainWidget);
+        forcetag_button = new QCheckBox(i18n("&Force tag creation even if tag already exists"));
         mainLayout->addWidget(forcetag_button);
-        layout->addWidget(forcetag_button);
+        mainLayout->addWidget(forcetag_button);
     }
+
     connect(okButton, SIGNAL(clicked()), this, SLOT(slotOk()));
 
     mainLayout->addWidget(buttonBox);

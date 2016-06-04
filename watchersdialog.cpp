@@ -37,28 +37,20 @@
 
 
 WatchersDialog::WatchersDialog(KConfig& cfg, QWidget* parent)
-    : QDialog(parent)
-    , partConfig(cfg)
+    : QDialog(parent), partConfig(cfg)
 {
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
-    QFrame* mainWidget = new QFrame(this);
-    mainLayout->addWidget(mainWidget);
-
-    QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    layout->setMargin(0);
-
-    m_tableView = new QTableView(mainWidget);
+    m_tableView = new QTableView;
     mainLayout->addWidget(m_tableView);
     m_tableView->setSelectionMode(QAbstractItemView::NoSelection);
     m_tableView->setSortingEnabled(true);
     m_tableView->verticalHeader()->setVisible(false);
-
-    layout->addWidget(m_tableView, 1);
 
     mainLayout->addWidget(buttonBox);
 

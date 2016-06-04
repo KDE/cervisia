@@ -67,74 +67,65 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInte
 {
     setWindowTitle(i18n("CVS Commit"));
     setModal(true);
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
-    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &CommitDialog::slotHelp);
+
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
-    okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+
     user1Button = new QPushButton;
     buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
+
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &CommitDialog::slotHelp);
+
     KGuiItem::assign(user1Button, KGuiItem(i18n("&Diff")));
-    okButton->setDefault(true);
 
-    QFrame* mainWidget = new QFrame(this);
-    mainLayout->addWidget(mainWidget);
-
-    QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    layout->setMargin(0);
-
-    QLabel *textlabel = new QLabel( i18n("Commit the following &files:"), mainWidget );
+    QLabel *textlabel = new QLabel( i18n("Commit the following &files:"));
     mainLayout->addWidget(textlabel);
-    layout->addWidget(textlabel);
 
-    m_fileList = new QListWidget(mainWidget);
-    mainLayout->addWidget(m_fileList);
+    m_fileList = new QListWidget;
     m_fileList->setEditTriggers(QAbstractItemView::NoEditTriggers);
     textlabel->setBuddy(m_fileList);
+    mainLayout->addWidget(m_fileList);
     connect( m_fileList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
              this, SLOT(fileSelected(QListWidgetItem*)));
     connect( m_fileList, SIGNAL(itemSelectionChanged()),
              this, SLOT(fileHighlighted()) );
-    layout->addWidget(m_fileList, 5);
 
-    QLabel *archivelabel = new QLabel(i18n("Older &messages:"), mainWidget);
+    QLabel *archivelabel = new QLabel(i18n("Older &messages:"));
     mainLayout->addWidget(archivelabel);
-    layout->addWidget(archivelabel);
 
-    combo = new QComboBox(mainWidget);
+    combo = new QComboBox;
     mainLayout->addWidget(combo);
     archivelabel->setBuddy(combo);
     connect( combo, SIGNAL(activated(int)), this, SLOT(comboActivated(int)) );
     // make sure that combobox is smaller than the screen
     combo->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
-    layout->addWidget(combo);
 
-    QLabel *messagelabel = new QLabel(i18n("&Log message:"), mainWidget);
+    QLabel *messagelabel = new QLabel(i18n("&Log message:"));
     mainLayout->addWidget(messagelabel);
-    layout->addWidget(messagelabel);
 
-    edit = new Cervisia::LogMessageEdit(mainWidget);
+    edit = new Cervisia::LogMessageEdit(this);
     messagelabel->setBuddy(edit);
     edit->setFocus();
     edit->setMinimumSize(400, 100);
-    layout->addWidget(edit, 10);
+    mainLayout->addWidget(edit, 10);
 
-    m_useTemplateChk = new QCheckBox(i18n("Use log message &template"), mainWidget);
+    m_useTemplateChk = new QCheckBox(i18n("Use log message &template"));
     mainLayout->addWidget(m_useTemplateChk);
-    layout->addWidget(m_useTemplateChk);
     connect( m_useTemplateChk, SIGNAL(clicked()), this, SLOT(useTemplateClicked()) );
 
     mainLayout->addWidget(buttonBox);
+    okButton->setDefault(true);
 
     checkForTemplateFile();
 
     user1Button->setEnabled(false);
-    connect(user1Button, SIGNAL(clicked()),
-             this, SLOT(diffClicked()) );
+    connect(user1Button, SIGNAL(clicked()), this, SLOT(diffClicked()) );
 
     KConfigGroup cg(&partConfig, "CommitDialog");
     restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));

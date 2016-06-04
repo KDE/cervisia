@@ -113,20 +113,22 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
     , markeditem(-1)
     , partConfig(cfg)
 {
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help|QDialogButtonBox::Close);
-    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &ResolveDialog::slotHelp);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help | QDialogButtonBox::Close);
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
+
     QPushButton *user1Button = new QPushButton;
     buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
+
     QPushButton *user2Button = new QPushButton;
     buttonBox->addButton(user2Button, QDialogButtonBox::ActionRole);
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &ResolveDialog::slotHelp);
+
     KGuiItem::assign(user1Button, KStandardGuiItem::saveAs());
     KGuiItem::assign(user2Button, KStandardGuiItem::save());
-    buttonBox->button(QDialogButtonBox::Close)->setDefault(true);
 
     QFrame* mainWidget = new QFrame(this);
     mainLayout->addWidget(mainWidget);
@@ -223,6 +225,7 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
     connect(user1Button, SIGNAL(clicked()), SLOT(saveAsClicked()) );
 
     mainLayout->addWidget(buttonBox);
+    buttonBox->button(QDialogButtonBox::Close)->setDefault(true);
 
     QFontMetrics const fm(fontMetrics());
     setMinimumSize(fm.width('0') * 120,

@@ -107,30 +107,7 @@ void CervisiaShell::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    setHelpMenuEnabled(false);
-    (void) new KHelpMenu(this, KAboutData::applicationData(), false);
-
-    /*
-    action = actionCollection()->action("help_contents");
-    hint = i18n("Invokes the KDE help system with the Cervisia documentation");
-    action->setToolTip( hint );
-    action->setWhatsThis( hint );
-
-    action = actionCollection()->action("help_report_bug");
-    hint = i18n("Opens the bug report dialog");
-    action->setToolTip( hint );
-    action->setWhatsThis( hint );
-
-    action = actionCollection()->action("help_about_app");
-    hint = i18n("Displays the version number and copyright information");
-    action->setToolTip( hint );
-    action->setWhatsThis( hint );
-
-    action = actionCollection()->action("help_about_kde");
-    hint = i18n("Displays the information about KDE and its version number");
-    action->setToolTip( hint );
-    action->setWhatsThis( hint );
-    */
+    setHelpMenuEnabled(true);
 }
 
 

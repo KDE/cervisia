@@ -46,71 +46,57 @@ MergeDialog::MergeDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface* service,
 {
     setWindowTitle(i18n("CVS Merge"));
     setModal(true);
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
-    okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    okButton->setDefault(true);
 
-    int const iComboBoxMinWidth(30 * fontMetrics().width('0'));
-    int const iWidgetIndent(style()->pixelMetric(QStyle::PM_ExclusiveIndicatorWidth) + 6);
+    const int iComboBoxMinWidth(30 * fontMetrics().width('0'));
+    const int iWidgetIndent(style()->pixelMetric(QStyle::PM_ExclusiveIndicatorWidth) + 6);
 
-    QFrame* mainWidget = new QFrame(this);
-    mainLayout->addWidget(mainWidget);
-
-    QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    layout->setMargin(0);
-
-    bybranch_button = new QRadioButton(i18n("Merge from &branch:"), mainWidget);
-    mainLayout->addWidget(bybranch_button);
+    bybranch_button = new QRadioButton(i18n("Merge from &branch:"));
     bybranch_button->setChecked(true);
-    layout->addWidget(bybranch_button);
+    mainLayout->addWidget(bybranch_button);
 
-    branch_combo = new KComboBox(mainWidget);
-    mainLayout->addWidget(branch_combo);
+    branch_combo = new KComboBox;
     branch_combo->setEditable(true);
     branch_combo->setMinimumWidth(iComboBoxMinWidth);
+    mainLayout->addWidget(branch_combo);
 
-    branch_button = new QPushButton(i18n("Fetch &List"), mainWidget);
+    branch_button = new QPushButton(i18n("Fetch &List"));
     mainLayout->addWidget(branch_button);
-    connect( branch_button, SIGNAL(clicked()),
-             this, SLOT(branchButtonClicked()) );
+    connect(branch_button, SIGNAL(clicked()), this, SLOT(branchButtonClicked()));
 
     QBoxLayout *branchedit_layout = new QHBoxLayout();
-    layout->addLayout(branchedit_layout);
     branchedit_layout->addSpacing(iWidgetIndent);
     branchedit_layout->addWidget(branch_combo, 2);
     branchedit_layout->addWidget(branch_button, 0);
+    mainLayout->addLayout(branchedit_layout);
 
-    bytags_button = new QRadioButton(i18n("Merge &modifications:"), mainWidget);
+    bytags_button = new QRadioButton(i18n("Merge &modifications:"));
     mainLayout->addWidget(bytags_button);
-    layout->addWidget(bytags_button);
 
-    QLabel *tag1_label = new QLabel(i18n("between tag: "), mainWidget);
-    mainLayout->addWidget(tag1_label);
-    tag1_combo = new KComboBox(mainWidget);
-    mainLayout->addWidget(tag1_combo);
+    QLabel *tag1_label = new QLabel(i18n("between tag: "));
+
+    tag1_combo = new KComboBox;
     tag1_combo->setEditable(true);
     tag1_combo->setMinimumWidth(iComboBoxMinWidth);
 
-    QLabel *tag2_label = new QLabel(i18n("and tag: "), mainWidget);
-    mainLayout->addWidget(tag2_label);
-    tag2_combo = new KComboBox(mainWidget);
-    mainLayout->addWidget(tag2_combo);
+    QLabel *tag2_label = new QLabel(i18n("and tag: "));
+
+    tag2_combo = new KComboBox;
     tag2_combo->setEditable(true);
     tag2_combo->setMinimumWidth(iComboBoxMinWidth);
 
-    tag_button = new QPushButton(i18n("Fetch L&ist"), mainWidget);
-    mainLayout->addWidget(tag_button);
-    connect( tag_button, SIGNAL(clicked()),
-             this, SLOT(tagButtonClicked()) );
+    tag_button = new QPushButton(i18n("Fetch L&ist"));
+    connect(tag_button, SIGNAL(clicked()), this, SLOT(tagButtonClicked()));
 
     QGridLayout *tagsedit_layout = new QGridLayout();
-    layout->addLayout( tagsedit_layout );
     tagsedit_layout->addItem(new QSpacerItem(iWidgetIndent, 0), 0, 0);
     tagsedit_layout->setColumnStretch(0, 0);
     tagsedit_layout->setColumnStretch(1, 1);
@@ -121,12 +107,12 @@ MergeDialog::MergeDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface* service,
     tagsedit_layout->addWidget(tag2_label, 1, 1);
     tagsedit_layout->addWidget(tag2_combo, 1, 2);
     tagsedit_layout->addWidget(tag_button, 0, 3, 2, 1);
+    mainLayout->addLayout( tagsedit_layout );
 
-    QButtonGroup* group = new QButtonGroup(mainWidget);
+    QButtonGroup* group = new QButtonGroup(this);
     group->addButton(bybranch_button);
     group->addButton(bytags_button);
-    connect( group, SIGNAL(buttonClicked(int)),
-             this, SLOT(toggled()) );
+    connect(group, SIGNAL(buttonClicked(int)), this, SLOT(toggled()));
 
     mainLayout->addWidget(buttonBox);
 

@@ -64,25 +64,16 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help|QDialogButtonBox::Close);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help | QDialogButtonBox::Close);
     connect(buttonBox, &QDialogButtonBox::helpRequested, this, &DiffDialog::slotHelp);
 
     QPushButton *user1Button = new QPushButton;
     buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    buttonBox->button(QDialogButtonBox::Close)->setDefault(true);
     KGuiItem::assign(user1Button, KStandardGuiItem::saveAs());
 
-    QFrame* mainWidget = new QFrame(this);
-    mainLayout->addWidget(mainWidget);
-
-    QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    mainLayout->addLayout(layout);
-    layout->setMargin(0);
-
     QGridLayout *pairlayout = new QGridLayout();
-    layout->addLayout( pairlayout );
+    mainLayout->addLayout(pairlayout);
     pairlayout->setRowStretch(0, 0);
     pairlayout->setRowStretch(1, 1);
     pairlayout->setColumnStretch(1, 0);
@@ -90,20 +81,15 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
     pairlayout->setColumnStretch(0, 10);
     pairlayout->setColumnStretch(2, 10);
 
-    revlabel1 = new QLabel(mainWidget);
-    mainLayout->addWidget(revlabel1);
+    revlabel1 = new QLabel;
     pairlayout->addWidget(revlabel1, 0, 0);
 
-    revlabel2 = new QLabel(mainWidget);
-    mainLayout->addWidget(revlabel2);
+    revlabel2 = new QLabel;
     pairlayout->addWidget(revlabel2, 0, 2);
 
-    diff1 = new DiffView(cfg, true, false, mainWidget);
-    mainLayout->addWidget(diff1);
-    diff2 = new DiffView(cfg, true, true, mainWidget);
-    mainLayout->addWidget(diff2);
-    DiffZoomWidget *zoom = new DiffZoomWidget(mainWidget);
-    mainLayout->addWidget(zoom);
+    diff1 = new DiffView(cfg, true, false, this);
+    diff2 = new DiffView(cfg, true, true, this);
+    DiffZoomWidget *zoom = new DiffZoomWidget(this);
     zoom->setDiffView(diff2);
 
     pairlayout->addWidget(diff1, 1, 0);
@@ -113,35 +99,28 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
     diff1->setPartner(diff2);
     diff2->setPartner(diff1);
 
-    syncbox = new QCheckBox(i18n("Synchronize scroll bars"), mainWidget);
-    mainLayout->addWidget(syncbox);
+    syncbox = new QCheckBox(i18n("Synchronize scroll bars"));
     syncbox->setChecked(true);
-    connect( syncbox, SIGNAL(toggled(bool)),
-	     this, SLOT(toggleSynchronize(bool)) );
+    connect(syncbox, SIGNAL(toggled(bool)), this, SLOT(toggleSynchronize(bool)));
 
-    itemscombo = new KComboBox(mainWidget);
-    mainLayout->addWidget(itemscombo);
+    itemscombo = new KComboBox;
     itemscombo->addItem(QString());
-    connect( itemscombo, SIGNAL(activated(int)),
-             this, SLOT(comboActivated(int)) );
+    connect(itemscombo, SIGNAL(activated(int)), this, SLOT(comboActivated(int)));
 
-    nofnlabel = new QLabel(mainWidget);
-    mainLayout->addWidget(nofnlabel);
+    nofnlabel = new QLabel;
     // avoids auto resize when the text is changed
     nofnlabel->setMinimumWidth(fontMetrics().width(i18np("%1 difference", "%1 differences", 10000)));
 
-    backbutton = new QPushButton(QLatin1String("&<<"), mainWidget);
-    mainLayout->addWidget(backbutton);
-    connect( backbutton, SIGNAL(clicked()), SLOT(backClicked()) );
+    backbutton = new QPushButton(QLatin1String("&<<"));
+    connect(backbutton, SIGNAL(clicked()), SLOT(backClicked()));
 
-    forwbutton = new QPushButton(QLatin1String("&>>"), mainWidget);
-    mainLayout->addWidget(forwbutton);
-    connect( forwbutton, SIGNAL(clicked()), SLOT(forwClicked()) );
+    forwbutton = new QPushButton(QLatin1String("&>>"));
+    connect(forwbutton, SIGNAL(clicked()), SLOT(forwClicked()));
 
-    connect(user1Button, SIGNAL(clicked()), SLOT(saveAsClicked()) );
+    connect(user1Button, SIGNAL(clicked()), SLOT(saveAsClicked()));
 
     QBoxLayout *buttonlayout = new QHBoxLayout();
-    layout->addLayout(buttonlayout);
+    mainLayout->addLayout(buttonlayout);
     buttonlayout->addWidget(syncbox, 0);
     buttonlayout->addStretch(4);
     buttonlayout->addWidget(itemscombo);
@@ -152,6 +131,7 @@ DiffDialog::DiffDialog(KConfig& cfg, QWidget *parent, bool modal)
     buttonlayout->addWidget(forwbutton);
 
     mainLayout->addWidget(buttonBox);
+    buttonBox->button(QDialogButtonBox::Close)->setDefault(true);
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 

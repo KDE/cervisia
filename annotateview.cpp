@@ -238,7 +238,6 @@ void AnnotateView::findText(const QString &textToFind, bool up)
     }
     else
     {
-        clearSelection();
         if ( up )
             item = itemAbove(item);
         else
@@ -249,9 +248,10 @@ void AnnotateView::findText(const QString &textToFind, bool up)
          item = up ? itemAbove(item) : itemBelow(item))
       ;
 
+    setCurrentItem(item);
+
     if ( item )
     {
-        setCurrentItem(item);
         item->setSelected(true);
         scrollToItem(item);
     }

@@ -188,53 +188,54 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
         grid->addWidget(tagsbox[i], 0, 4, 3, 1);
     }
 
-    buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Help|QDialogButtonBox::Close|QDialogButtonBox::Apply);
+    buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Help | QDialogButtonBox::Close | QDialogButtonBox::Apply);
+
     okButton = buttonBox->button(QDialogButtonBox::Ok);
-    okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(okButton, &QPushButton::clicked, this, &LogDialog::slotOk);
+
     user1Button = new QPushButton;
     buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
+
     user2Button = new QPushButton;
     buttonBox->addButton(user2Button, QDialogButtonBox::ActionRole);
+
     user3Button = new QPushButton;
     buttonBox->addButton(user3Button, QDialogButtonBox::ActionRole);
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+
     KGuiItem::assign(user1Button, KGuiItem(i18n("&Annotate A")));
     KGuiItem::assign(user2Button, KGuiItem(i18n("&Diff")));
     KGuiItem::assign(user3Button, KGuiItem(i18n("&Find")));
-    buttonBox->button(QDialogButtonBox::Close)->setDefault(true);
     user3Button->setVisible(false);
 
     // initially make the version info widget as small as possible
     splitter->setSizes(QList<int>() << height() << 10);
 
-    revbox[0]->setWhatsThis( i18n("This revision is used when you click "
-                                    "Annotate.\nIt is also used as the first "
-                                    "item of a Diff operation."));
-    revbox[1]->setWhatsThis( i18n("This revision is used as the second "
-                                    "item of a Diff operation."));
+    revbox[0]->setWhatsThis(i18n("This revision is used when you click "
+                                 "Annotate.\nIt is also used as the first "
+                                 "item of a Diff operation."));
 
-    connect( tagcombo[0], SIGNAL(activated(int)),
-             this, SLOT(tagASelected(int)) );
-    connect( tagcombo[1], SIGNAL(activated(int)),
-             this, SLOT(tagBSelected(int)) );
+    revbox[1]->setWhatsThis(i18n("This revision is used as the second "
+                                 "item of a Diff operation."));
 
-    connect(user1Button, SIGNAL(clicked()),
-             this, SLOT(annotateClicked()) );
-    connect(user2Button, SIGNAL(clicked()),
-             this, SLOT(diffClicked()) );
-    connect(user3Button, SIGNAL(clicked()),
-             this, SLOT(findClicked()) );
+    connect(tagcombo[0], SIGNAL(activated(int)), this, SLOT(tagASelected(int)));
+    connect(tagcombo[1], SIGNAL(activated(int)), this, SLOT(tagBSelected(int)));
 
-    connect(buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked()), this, SLOT(slotApply()));
+    connect(user1Button, SIGNAL(clicked()), this, SLOT(annotateClicked()));
+    connect(user2Button, SIGNAL(clicked()), this, SLOT(diffClicked()));
+    connect(user3Button, SIGNAL(clicked()), this, SLOT(findClicked()));
+
+    connect(buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked()), this, SLOT(slotPatch()));
     connect(buttonBox, &QDialogButtonBox::helpRequested, this, &LogDialog::slotHelp);
 
     KGuiItem::assign(okButton, KGuiItem(i18n("&View A")));
     KGuiItem::assign(buttonBox->button(QDialogButtonBox::Apply), KGuiItem(i18n("Create Patch...")));
 
     mainLayout->addWidget(buttonBox);
+    buttonBox->button(QDialogButtonBox::Close)->setDefault(true);
+
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     KConfigGroup cg(&partConfig, "LogDialog");
@@ -495,7 +496,7 @@ void LogDialog::slotOk()
 
 //--------------------------------------------------------------------------------
 
-void LogDialog::slotApply()
+void LogDialog::slotPatch()
 {
     if( selectionA.isEmpty() )
     {
@@ -512,12 +513,11 @@ void LogDialog::slotApply()
     QString format      = optionDlg.formatOption();
     QString diffOptions = optionDlg.diffOptions();
 
-    QDBusReply<QDBusObjectPath> job = cvsService->diff(filename, selectionA, selectionB, diffOptions,
-                                   format);
+    QDBusReply<QDBusObjectPath> job = cvsService->diff(filename, selectionA, selectionB, diffOptions, format);
     if( !job.isValid() )
         return;
 
-    ProgressDialog dlg(this, "Diff",cvsService->service(), job, "", i18n("CVS Diff"));
+    ProgressDialog dlg(this, "Diff", cvsService->service(), job, "", i18n("CVS Diff"));
     if( !dlg.execute() )
         return;
 

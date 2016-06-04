@@ -27,22 +27,18 @@
 
 #include <KSharedConfig>
 #include <kmessagebox.h>
-#include <ktextedit.h>
 #include <KConfigGroup>
 #include <KLocalizedString>
 
+#include <QPlainTextEdit>
+#include <QTextBlock>
+#include <QScrollBar>
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QVBoxLayout>
 
 #include "cervisiasettings.h"
 #include "misc.h"
-
-
-static inline QString DateStringISO8601()
-{
-    return QDate::currentDate().toString(Qt::ISODate);
-}
 
 
 ChangeLogDialog::Options *ChangeLogDialog::options = 0;
@@ -54,29 +50,24 @@ ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent)
 {
     setWindowTitle(i18n("Edit ChangeLog"));
     setModal(true);
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
-    QWidget *mainWidget = new QWidget(this);
+
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
-    mainLayout->addWidget(mainWidget);
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
-    okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    okButton->setDefault(true);
 
-    edit = new KTextEdit(this);
-    edit->setAcceptRichText(false);
+    edit = new QPlainTextEdit(this);
     edit->setFont(CervisiaSettings::changeLogFont());
     edit->setFocus();
-    edit->setLineWrapMode(KTextEdit::NoWrap);
+    edit->setLineWrapMode(QPlainTextEdit::NoWrap);
     QFontMetrics const fm(edit->fontMetrics());
-    edit->setMinimumSize(fm.width('0') * 80,
-                         fm.lineSpacing() * 20);
+    edit->setMinimumSize(fm.width('0') * 80, fm.lineSpacing() * 20);
 
     mainLayout->addWidget(edit);
-
     mainLayout->addWidget(buttonBox);
 
     KConfigGroup cg(&partConfig, "ChangeLogDialog");
@@ -117,32 +108,36 @@ bool ChangeLogDialog::readFile(const QString &filename)
     fname = filename;
 
     if (!QFile::exists(filename))
-        {
-            if (KMessageBox::warningContinueCancel(this,
-                                         i18n("A ChangeLog file does not exist. Create one?"),
-                                         i18n("Create")) != KMessageBox::Continue)
-                return false;
-        }
+    {
+        if (KMessageBox::warningContinueCancel(this,
+                                     i18n("A ChangeLog file does not exist. Create one?"),
+                                     i18n("Create")) != KMessageBox::Continue)
+            return false;
+    }
     else
+    {
+        QFile f(filename);
+        if (!f.open(QIODevice::ReadWrite))
         {
-            QFile f(filename);
-            if (!f.open(QIODevice::ReadWrite))
-                {
-                    KMessageBox::sorry(this,
-                                       i18n("The ChangeLog file could not be read."),
-                                       "Cervisia");
-                    return false;
-                }
-            QTextStream stream(&f);
-            edit->setPlainText(stream.readAll());
-            f.close();
+            KMessageBox::sorry(this,
+                               i18n("The ChangeLog file could not be read."),
+                               "Cervisia");
+            return false;
         }
+        QTextStream stream(&f);
+        edit->setPlainText(stream.readAll());
+        f.close();
+    }
 
     KConfigGroup cs(&partConfig, "General");
     const QString username = cs.readEntry("Username", Cervisia::UserName());
 
-    edit->insertPlainText(DateStringISO8601() + "  " + username + "\n\n\t* \n\n");
-    edit->textCursor().movePosition(QTextCursor::Right, QTextCursor::MoveAnchor, 2);
+    edit->insertPlainText(QDate::currentDate().toString(Qt::ISODate) + "  " + username + "\n\n\t* \n\n");
+    QTextCursor cursor = edit->textCursor();
+    cursor.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor, 2);
+    edit->setTextCursor(cursor);
+
+    edit->verticalScrollBar()->setValue(0);  // show top line
 
     return true;
 }
@@ -150,58 +145,58 @@ bool ChangeLogDialog::readFile(const QString &filename)
 
 QString ChangeLogDialog::message()
 {
-#ifdef __GNUC__
-#warning disabled to make it compile
-#endif
-//     int no = 0;
-//     // Find first line which begins with non-whitespace
-//     while (no < edit->lines())
-//         {
-//             QString str = edit->text(no);
-//             if (!str.isEmpty() && !str[0].isSpace())
-//                 break;
-//             ++no;
-//         }
-//     ++no;
-//     // Skip empty lines
-//     while (no < edit->lines())
-//         {
-//             QString str = edit->text(no);
-//             if( str.isEmpty() || str == " " )
-//                 break;
-//             ++no;
-//         }
-//     QString res;
-//     // Use all lines until one which begins with non-whitespace
-//     // Remove tabs or 8 whitespace at beginning of each line
-//     while (no < edit->lines())
-//         {
-//             QString str = edit->text(no);
-//             if (!str.isEmpty() && !str[0].isSpace())
-//                 break;
-//             if (!str.isEmpty() && str[0] == '\t')
-//                 str.remove(0, 1);
-//             else
-//                 {
-//                     int j;
-//                     for (j = 0; j < (int)str.length(); ++j)
-//                         if (!str[j].isSpace())
-//                             break;
-//                     str.remove(0, qMin(j, 8));
-//                 }
-//             res += str;
-//             res += '\n';
-//             ++no;
-//         }
-//     // Remove newlines at end
-//     int l;
-//     for (l = res.length()-1; l > 0; --l)
-//         if (res[l] != '\n')
-//             break;
-//     res.truncate(l+1);
-//     return res;
+     int no = 0;
+     // Find first line which begins with non-whitespace
+     while (no < edit->document()->lineCount())
+     {
+       QString str = edit->document()->findBlockByLineNumber(no).text();
 
-    return "";
+       if ( !str.isEmpty() && !str[0].isSpace() )
+         break;
+
+       ++no;
+     }
+     ++no;
+     // Skip empty lines
+     while (no < edit->document()->lineCount())
+     {
+       QString str = edit->document()->findBlockByLineNumber(no).text();
+
+       if ( str.isEmpty() || str == " " )
+         break;
+
+       ++no;
+     }
+     QString res;
+     // Use all lines until one which begins with non-whitespace
+     // Remove tabs or 8 whitespace at beginning of each line
+     while (no < edit->document()->lineCount())
+     {
+         QString str = edit->document()->findBlockByLineNumber(no).text();
+
+         if (!str.isEmpty() && !str[0].isSpace())
+             break;
+         if (!str.isEmpty() && str[0] == '\t')
+             str.remove(0, 1);
+         else
+             {
+                 int j;
+                 for (j = 0; j < (int)str.length(); ++j)
+                     if (!str[j].isSpace())
+                         break;
+                 str.remove(0, qMin(j, 8));
+             }
+         res += str;
+         res += '\n';
+         ++no;
+     }
+     // Remove newlines at end
+     int l;
+     for (l = res.length()-1; l > 0; --l)
+         if (res[l] != '\n')
+             break;
+     res.truncate(l+1);
+     return res;
 }
 
 

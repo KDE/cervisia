@@ -40,26 +40,20 @@ using Cervisia::PatchOptionDialog;
 PatchOptionDialog::PatchOptionDialog(QWidget* parent)
     : QDialog(parent)
 {
+    setModal(false);
+
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
-    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &PatchOptionDialog::slotHelp);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
-    okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    setModal(false);
-
-    QFrame* mainWidget = new QFrame(this);
-    mainLayout->addWidget(mainWidget);
-
-    QBoxLayout* topLayout = new QVBoxLayout(mainWidget);
-    topLayout->setMargin(0);
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &PatchOptionDialog::slotHelp);
 
     { // format
-      m_formatBtnGroup = new QButtonGroup(mainWidget);
+      m_formatBtnGroup = new QButtonGroup(this);
 
       connect(m_formatBtnGroup, SIGNAL(buttonClicked(int)),
               this,             SLOT(formatChanged(int)));
@@ -70,31 +64,31 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent)
       unifiedFormatBtn->setChecked(true);
       m_formatBtnGroup->addButton(unifiedFormatBtn, 2);
 
-      QGroupBox *box = new QGroupBox(i18n("Output Format"), mainWidget);
+      QGroupBox *box = new QGroupBox(i18n("Output Format"));
       mainLayout->addWidget(box);
       QVBoxLayout *v = new QVBoxLayout(box);
       v->addWidget(m_formatBtnGroup->button(0));
       v->addWidget(m_formatBtnGroup->button(1));
       v->addWidget(m_formatBtnGroup->button(2));
 
-      topLayout->addWidget(box);
+      mainLayout->addWidget(box);
     }
 
-    QLabel* contextLinesLbl = new QLabel(i18n("&Number of context lines:"),
-                                         mainWidget);
-    m_contextLines = new QSpinBox(mainWidget);
+    QLabel* contextLinesLbl = new QLabel(i18n("&Number of context lines:"));
+    m_contextLines = new QSpinBox;
     m_contextLines->setValue(3);
     mainLayout->addWidget(m_contextLines);
     m_contextLines->setRange(2, 65535);
     contextLinesLbl->setBuddy(m_contextLines);
 
     QBoxLayout* contextLinesLayout = new QHBoxLayout();
-    topLayout->addLayout(contextLinesLayout);
+    mainLayout->addLayout(contextLinesLayout);
     contextLinesLayout->addWidget(contextLinesLbl);
     contextLinesLayout->addWidget(m_contextLines);
 
     { // ignore options
-      QButtonGroup *group = new QButtonGroup(mainWidget);
+      QButtonGroup *group = new QButtonGroup(this);
+      group->setExclusive(false);
 
       m_blankLineChk   = new QCheckBox(i18n("Ignore added or removed empty lines"));
       m_spaceChangeChk = new QCheckBox(i18n("Ignore changes in the amount of whitespace"));
@@ -106,7 +100,7 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent)
       group->addButton(m_allSpaceChk);
       group->addButton(m_caseChangesChk);
 
-      QGroupBox *box = new QGroupBox(i18n("Ignore Options"), mainWidget);
+      QGroupBox *box = new QGroupBox(i18n("Ignore Options"));
       mainLayout->addWidget(box);
       QVBoxLayout *v = new QVBoxLayout(box);
       v->addWidget(m_blankLineChk);
@@ -114,7 +108,7 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent)
       v->addWidget(m_allSpaceChk);
       v->addWidget(m_caseChangesChk);
 
-      topLayout->addWidget(box);
+      mainLayout->addWidget(box);
     }
 
     mainLayout->addWidget(buttonBox);

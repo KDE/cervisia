@@ -171,24 +171,21 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsser
 {
     setWindowTitle(i18n("Configure Access to Repositories"));
     setModal(true);
+
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
-    okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(okButton, SIGNAL(clicked()), this, SLOT(slotOk()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
-    QFrame* mainWidget = new QFrame(this);
-    mainLayout->addWidget(mainWidget);
-
-    QBoxLayout* hbox = new QHBoxLayout(mainWidget);
+    QBoxLayout* hbox = new QHBoxLayout;
     hbox->setMargin(0);
+    mainLayout->addLayout(hbox);
 
-    m_repoList = new QTreeWidget(mainWidget);
-    mainLayout->addWidget(m_repoList);
+    m_repoList = new QTreeWidget;
     hbox->addWidget(m_repoList, 10);
     m_repoList->setMinimumWidth(fontMetrics().width('0') * 60);
     m_repoList->setAllColumnsShowFocus(true);
@@ -251,7 +248,6 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsser
     QByteArray state = cg.readEntry<QByteArray>("RepositoryListView", QByteArray());
     m_repoList->header()->restoreState(state);
 
-    connect(okButton,SIGNAL(clicked()),this,SLOT(slotOk()));
     mainLayout->addWidget(buttonBox);
 }
 
@@ -291,7 +287,7 @@ void RepositoryDialog::readConfigFile()
     {
         RepositoryListItem* ritem = static_cast<RepositoryListItem*>(m_repoList->topLevelItem(i));
 
-        // read entries from cvs DCOP service configuration
+        // read entries from cvs DBUS service configuration
         const KConfigGroup repoGroup = m_serviceConfig->group(QLatin1String("Repository-") +
                                                               ritem->repository());
 
@@ -300,8 +296,7 @@ void RepositoryDialog::readConfigFile()
         QString rsh       = repoGroup.readEntry("rsh", QString());
         QString server    = repoGroup.readEntry("cvs_server", QString());
         int compression   = repoGroup.readEntry("Compression", -1);
-        bool retrieveFile = repoGroup.readEntry("RetrieveCvsignore",
-                                                           false);
+        bool retrieveFile = repoGroup.readEntry("RetrieveCvsignore", false);
 
         ritem->setRsh(rsh);
         ritem->setServer(server);
@@ -331,7 +326,7 @@ void RepositoryDialog::slotOk()
     {
         RepositoryListItem* ritem = static_cast<RepositoryListItem*>(m_repoList->topLevelItem(i));
 
-        // write entries to cvs DCOP service configuration
+        // write entries to cvs DBUS service configuration
         writeRepositoryData(ritem);
     }
 
@@ -367,7 +362,7 @@ void RepositoryDialog::slotAddClicked()
         ritem->setCompression(compression);
         ritem->setRetrieveCvsignore(retrieveFile);
 
-        // write entries to cvs DCOP service configuration
+        // write entries to cvs DBUS service configuration
         writeRepositoryData(ritem);
 
         // write to disk so other services can reparse the configuration
@@ -420,7 +415,7 @@ void RepositoryDialog::slotDoubleClicked(QTreeWidgetItem *item, int column)
         ritem->setCompression(dlg.compression());
         ritem->setRetrieveCvsignore(dlg.retrieveCvsignoreFile());
 
-        // write entries to cvs DCOP service configuration
+        // write entries to cvs DBUS service configuration
         writeRepositoryData(ritem);
 
         // write to disk so other services can reparse the configuration
@@ -513,7 +508,7 @@ void RepositoryDialog::slotSelectionChanged()
 
 void RepositoryDialog::writeRepositoryData(RepositoryListItem* item)
 {
-    // write entries to cvs DCOP service configuration
+    // write entries to cvs DBUS service configuration
     KConfigGroup repoGroup = m_serviceConfig->group(QLatin1String("Repository-") +
                               item->repository());
 

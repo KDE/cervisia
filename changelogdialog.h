@@ -23,7 +23,7 @@
 
 #include <QDialog>
 
-class KTextEdit;
+class QPlainTextEdit;
 class KConfig;
 
 class ChangeLogDialog : public QDialog
@@ -47,7 +47,7 @@ private:
     static Options *options;
 
     QString fname;
-    KTextEdit *edit;
+    QPlainTextEdit *edit;
     KConfig&   partConfig;
 };
 

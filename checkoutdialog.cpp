@@ -61,115 +61,94 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsservice
 {
     setWindowTitle( (action==Checkout)? i18n("CVS Checkout") : i18n("CVS Import") );
     setModal(true);
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
-    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &CheckoutDialog::slotHelp);
+
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
-    okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    okButton->setDefault(true);
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &CheckoutDialog::slotHelp);
 
-    QFrame* mainWidget = new QFrame(this);
-    mainLayout->addWidget(mainWidget);
-
-    QBoxLayout* layout = new QVBoxLayout(mainWidget);
-    layout->setMargin(0);
-
-    QGridLayout* grid = new QGridLayout();
-    layout->addLayout( grid );
+    QGridLayout* grid = new QGridLayout;
+    mainLayout->addLayout(grid);
     grid->setColumnStretch(0, 1);
     grid->setColumnStretch(1, 20);
-    for( int i = 0; i < ((action==Checkout)? 4 : 10); ++i )
+    for (int i = 0; i < ((action==Checkout)? 4 : 10); ++i)
         grid->setRowStretch(i, 0);
 
-    repo_combo = new KComboBox(mainWidget);
-    mainLayout->addWidget(repo_combo);
+    repo_combo = new KComboBox;
     repo_combo->setEditable(true);
     repo_combo->setFocus();
     // make sure combobox is smaller than the screen
     repo_combo->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     grid->addWidget(repo_combo, 0, 1);
 
-    QLabel* repo_label = new QLabel(i18n("&Repository:"),mainWidget);
-    mainLayout->addWidget(repo_label);
+    QLabel* repo_label = new QLabel(i18n("&Repository:"));
     repo_label->setBuddy(repo_combo);
     grid->addWidget(repo_label, 0, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
     if( action == Import )
     {
-        module_edit = new QLineEdit(mainWidget);
-        mainLayout->addWidget(module_edit);
+        module_edit = new QLineEdit;
+        module_edit->setClearButtonEnabled(true);
         grid->addWidget(module_edit, 1, 1);
-        QLabel* module_label = new QLabel(i18n("&Module:"),mainWidget);
-        mainLayout->addWidget(module_label);
+        QLabel* module_label = new QLabel(i18n("&Module:"));
         module_label->setBuddy(module_edit);
         grid->addWidget(module_label, 1, 0, Qt::AlignLeft | Qt::AlignVCenter);
     }
     else
     {
-        module_combo = new KComboBox(mainWidget);
-        mainLayout->addWidget(module_combo);
+        module_combo = new KComboBox;
         module_combo->setEditable(true);
 
-        QPushButton* module_button = new QPushButton(i18n("Fetch &List"), mainWidget);
-        mainLayout->addWidget(module_button);
-        connect( module_button, SIGNAL(clicked()),
-                 this, SLOT(moduleButtonClicked()) );
+        QPushButton* module_button = new QPushButton(i18n("Fetch &List"));
+        connect(module_button, SIGNAL(clicked()), this, SLOT(moduleButtonClicked()));
 
         QBoxLayout* module_layout = new QHBoxLayout();
         grid->addLayout(module_layout, 1, 1);
         module_layout->addWidget(module_combo, 10);
         module_layout->addWidget(module_button, 0, Qt::AlignVCenter);
 
-        QLabel* module_label = new QLabel(i18n("&Module:"),mainWidget);
-        mainLayout->addWidget(module_label);
+        QLabel* module_label = new QLabel(i18n("&Module:"));
         module_label->setBuddy(module_combo);
         grid->addWidget(module_label, 1, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
-        branchCombo = new KComboBox(mainWidget);
-        mainLayout->addWidget(branchCombo);
+        branchCombo = new KComboBox;
         branchCombo->setEditable(true);
 
-        QPushButton* branchButton = new QPushButton(i18n("Fetch &List"), mainWidget);
-        mainLayout->addWidget(branchButton);
-        connect( branchButton, SIGNAL(clicked()),
-                 this, SLOT(branchButtonClicked()) );
+        QPushButton* branchButton = new QPushButton(i18n("Fetch &List"));
+        connect(branchButton, SIGNAL(clicked()), this, SLOT(branchButtonClicked()));
 
         QBoxLayout* branchLayout = new QHBoxLayout();
         grid->addLayout(branchLayout, 2, 1);
         branchLayout->addWidget(branchCombo, 10);
         branchLayout->addWidget(branchButton, 0, Qt::AlignVCenter);
 
-        QLabel* branch_label = new QLabel(i18n("&Branch tag:"), mainWidget);
-        mainLayout->addWidget(branch_label);
+        QLabel* branch_label = new QLabel(i18n("&Branch tag:"));
         branch_label->setBuddy( branchCombo );
         grid->addWidget(branch_label, 2, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
         connect(branchCombo, SIGNAL(editTextChanged(QString)), this, SLOT(branchTextChanged()));
 
-        recursive_box = new QCheckBox(i18n("Re&cursive checkout"), mainWidget);
-        mainLayout->addWidget(recursive_box);
+        recursive_box = new QCheckBox(i18n("Re&cursive checkout"));
         grid->addWidget(recursive_box, 6, 0, 1, 2);
     }
 
-    workdir_edit = new KLineEdit(mainWidget);
-    mainLayout->addWidget(workdir_edit);
+    workdir_edit = new KLineEdit;
+    workdir_edit->setClearButtonEnabled(true);
     workdir_edit->setText(QDir::homePath());
     workdir_edit->setMinimumWidth(fontMetrics().width('X') * 40);
 
     KUrlCompletion* comp = new KUrlCompletion();
     workdir_edit->setCompletionObject(comp);
     workdir_edit->setAutoDeleteCompletionObject(true);
-    connect( workdir_edit, SIGNAL(returnPressed(QString)),
-             comp, SLOT(addItem(QString)) );
+    connect(workdir_edit, SIGNAL(returnPressed(QString)), comp, SLOT(addItem(QString)));
 
-    QPushButton* dir_button = new QPushButton("...", mainWidget);
-    mainLayout->addWidget(dir_button);
-    connect( dir_button, SIGNAL(clicked()),
-             this, SLOT(dirButtonClicked()) );
+    QPushButton* dir_button = new QPushButton("...");
+    connect(dir_button, SIGNAL(clicked()), this, SLOT(dirButtonClicked()));
     dir_button->setFixedWidth(30);
 
     QBoxLayout* workdir_layout = new QHBoxLayout();
@@ -177,70 +156,62 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsservice
     workdir_layout->addWidget(workdir_edit, 10);
     workdir_layout->addWidget(dir_button, 0, Qt::AlignVCenter);
 
-    QLabel* workdir_label = new QLabel(i18n("Working &folder:"), mainWidget);
-    mainLayout->addWidget(workdir_label);
+    QLabel* workdir_label = new QLabel(i18n("Working &folder:"));
     workdir_label->setBuddy( workdir_edit );
     grid->addWidget(workdir_label, (action==Import)? 2 : 3, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
-    if( action == Import )
+    if ( action == Import )
     {
-        vendortag_edit = new QLineEdit(mainWidget);
-        mainLayout->addWidget(vendortag_edit);
+        vendortag_edit = new QLineEdit;
+        vendortag_edit->setClearButtonEnabled(true);
         grid->addWidget(vendortag_edit, 3, 1);
 
-        QLabel* vendortag_label = new QLabel(i18n("&Vendor tag:"), mainWidget);
-        mainLayout->addWidget(vendortag_label);
+        QLabel* vendortag_label = new QLabel(i18n("&Vendor tag:"));
         vendortag_label->setBuddy( vendortag_edit );
         grid->addWidget(vendortag_label, 3, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
-        releasetag_edit = new QLineEdit(mainWidget);
-        mainLayout->addWidget(releasetag_edit);
+        releasetag_edit = new QLineEdit;
+        releasetag_edit->setClearButtonEnabled(true);
         grid->addWidget(releasetag_edit, 4, 1);
 
-        QLabel* releasetag_label = new QLabel(i18n("&Release tag:"), mainWidget);
-        mainLayout->addWidget(releasetag_label);
+        QLabel* releasetag_label = new QLabel(i18n("&Release tag:"));
         releasetag_label->setBuddy( releasetag_edit );
         grid->addWidget(releasetag_label, 4, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
-        ignore_edit = new QLineEdit(mainWidget);
-        mainLayout->addWidget(ignore_edit);
+        ignore_edit = new QLineEdit;
+        ignore_edit->setClearButtonEnabled(true);
         grid->addWidget(ignore_edit, 5, 1);
 
-        QLabel* ignore_label = new QLabel( i18n("&Ignore files:"),
-                                          mainWidget);
-        ignore_label->setBuddy( ignore_edit );
+        QLabel* ignore_label = new QLabel( i18n("&Ignore files:"));
+        ignore_label->setBuddy(ignore_edit);
         grid->addWidget(ignore_label, 5, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
-        comment_edit = new QLineEdit(mainWidget);
-        mainLayout->addWidget(comment_edit);
+        comment_edit = new QLineEdit;
+        comment_edit->setClearButtonEnabled(true);
         grid->addWidget(comment_edit, 6, 1);
 
-        QLabel* comment_label = new QLabel(i18n("&Comment:"),
-                                           mainWidget);
+        QLabel* comment_label = new QLabel(i18n("&Comment:"));
         comment_label->setBuddy( comment_edit );
         grid->addWidget(comment_label, 6, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
-        binary_box = new QCheckBox(i18n("Import as &binaries"), mainWidget);
-        mainLayout->addWidget(binary_box);
+        binary_box = new QCheckBox(i18n("Import as &binaries"));
         grid->addWidget(binary_box, 7, 0, 1, 2);
 
         m_useModificationTimeBox = new QCheckBox(
-                i18n("Use file's modification time as time of import"), mainWidget);
+                i18n("Use file's modification time as time of import"));
         grid->addWidget(m_useModificationTimeBox, 8, 0, 1, 2);
     }
     else
     {
-        alias_edit = new QLineEdit(mainWidget);
-        mainLayout->addWidget(alias_edit);
+        alias_edit = new QLineEdit;
+        alias_edit->setClearButtonEnabled(true);
         grid->addWidget(alias_edit, 4, 1);
 
-        QLabel* alias_label = new QLabel(i18n("Chec&k out as:"),mainWidget);
-        mainLayout->addWidget(alias_label);
+        QLabel* alias_label = new QLabel(i18n("Chec&k out as:"));
         alias_label->setBuddy(alias_edit);
         grid->addWidget(alias_label, 4, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
-        export_box = new QCheckBox(i18n("Ex&port only"), mainWidget);
-        mainLayout->addWidget(export_box);
+        export_box = new QCheckBox(i18n("Ex&port only"));
         grid->addWidget(export_box, 5, 0, 1, 2);
     }
 

@@ -143,14 +143,7 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent)
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
-    QFrame* mainWidget = new QFrame(this);
-
-    QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    layout->setMargin(0);
-    mainLayout->addWidget(mainWidget);
-
-    listview = new QTreeWidget(mainWidget);
-    mainLayout->addWidget(listview);
+    listview = new QTreeWidget;
     listview->setSelectionMode(QAbstractItemView::NoSelection);
     listview->setAllColumnsShowFocus(true);
     listview->setRootIsDecorated(false);
@@ -160,50 +153,38 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent)
     listview->setHeaderLabels(QStringList() << i18n("Date") << i18n("Event") << i18n("Author")
                                             << i18n("Revision") << i18n("File") << i18n("Repo Path"));
     listview->setFocus();
-    layout->addWidget(listview, 1);
+    mainLayout->addWidget(listview);
 
-    commit_box = new QCheckBox(i18n("Show c&ommit events"), mainWidget);
-    mainLayout->addWidget(commit_box);
+    commit_box = new QCheckBox(i18n("Show c&ommit events"));
     commit_box->setChecked(true);
 
-    checkout_box = new QCheckBox(i18n("Show ch&eckout events"), mainWidget);
-    mainLayout->addWidget(checkout_box);
+    checkout_box = new QCheckBox(i18n("Show ch&eckout events"));
     checkout_box->setChecked(true);
 
-    tag_box = new QCheckBox(i18n("Show &tag events"), mainWidget);
-    mainLayout->addWidget(tag_box);
+    tag_box = new QCheckBox(i18n("Show &tag events"));
     tag_box->setChecked(true);
 
-    other_box = new QCheckBox(i18n("Show &other events"), mainWidget);
-    mainLayout->addWidget(other_box);
+    other_box = new QCheckBox(i18n("Show &other events"));
     other_box->setChecked(true);
 
-    onlyuser_box = new QCheckBox(i18n("Only &user:"), mainWidget);
-    mainLayout->addWidget(onlyuser_box);
+    onlyuser_box = new QCheckBox(i18n("Only &user:"));
 
-    onlyfilenames_box = new QCheckBox(i18n("Only &filenames matching:"), mainWidget);
-    mainLayout->addWidget(onlyfilenames_box);
+    onlyfilenames_box = new QCheckBox(i18n("Only &filenames matching:"));
 
-    onlydirnames_box = new QCheckBox(i18n("Only &folders matching:"), mainWidget);
-    mainLayout->addWidget(onlydirnames_box);
+    onlydirnames_box = new QCheckBox(i18n("Only &folders matching:"));
 
-    user_edit = new QLineEdit(mainWidget);
-    mainLayout->addWidget(user_edit);
+    user_edit = new QLineEdit;
     user_edit->setEnabled(false);
 
-    filename_edit = new QLineEdit(mainWidget);
-    mainLayout->addWidget(filename_edit);
+    filename_edit = new QLineEdit;
     filename_edit->setEnabled(false);
 
-    dirname_edit = new QLineEdit(mainWidget);
-    mainLayout->addWidget(dirname_edit);
+    dirname_edit = new QLineEdit;
     dirname_edit->setEnabled(false);
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help|QDialogButtonBox::Close);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help | QDialogButtonBox::Close);
     connect(buttonBox, &QDialogButtonBox::helpRequested, this, &HistoryDialog::slotHelp);
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    mainLayout->addWidget(buttonBox);
 
     connect( onlyuser_box, SIGNAL(toggled(bool)),
              this, SLOT(toggled(bool)) );
@@ -232,8 +213,8 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent)
     connect( dirname_edit, SIGNAL(returnPressed()),
              this, SLOT(choiceChanged()) );
 
-    QGridLayout *grid = new QGridLayout();
-    layout->addLayout( grid );
+    QGridLayout *grid = new QGridLayout;
+    mainLayout->addLayout( grid );
     grid->setColumnStretch(0, 1);
     grid->setColumnStretch(1, 0);
     grid->setColumnStretch(2, 4);
@@ -252,6 +233,8 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent)
     // no default button because "return" is needed to activate the filters (line edits)
     buttonBox->button(QDialogButtonBox::Help)->setAutoDefault(false);
     buttonBox->button(QDialogButtonBox::Close)->setAutoDefault(false);
+
+    mainLayout->addWidget(buttonBox);
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 

@@ -44,6 +44,7 @@ struct ProgressDialog::Private
     bool            isCancelled;
     bool            isShown;
     bool            hasError;
+    bool            isDiff;
 
     OrgKdeCervisia5CvsserviceCvsjobInterface*    cvsJob;
     QString         jobPath;
@@ -73,6 +74,7 @@ ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,const QSt
     d->isCancelled = false;
     d->isShown     = false;
     d->hasError    = false;
+    d->isDiff      = heading == QLatin1String("Diff");  // cvs returns error status when there is a difference
 
     QDBusObjectPath path = jobPath;
     d->jobPath = path.path();
@@ -230,7 +232,7 @@ void ProgressDialog::slotJobExited(bool normalExit, int status)
         processOutput();
     }
 
-    if ( status != 0 )  // cvs command exited with error -> show error text
+    if ( (status != 0) && !d->isDiff )  // cvs command exited with error -> show error text
     {
         QString line;
         while ( getLine(line) )

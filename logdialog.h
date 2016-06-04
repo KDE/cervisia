@@ -62,7 +62,7 @@ public:
 
 protected slots:
     void slotOk();
-    void slotApply();
+    void slotPatch();
     void slotHelp();
 
 private slots:

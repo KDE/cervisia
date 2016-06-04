@@ -36,35 +36,28 @@
 #include <KLocalizedString>
 
 
-AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
-                                         QWidget* parent)
-    : QDialog(parent)
-    , partConfig(cfg)
+AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo, QWidget* parent)
+    : QDialog(parent), partConfig(cfg)
 {
     setWindowTitle(i18n("Add Repository"));
     setModal(true);
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
-    okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    okButton->setDefault(true);
 
-    QFrame* mainWidget = new QFrame(this);
-    mainLayout->addWidget(mainWidget);
-
-    QBoxLayout* layout = new QVBoxLayout(mainWidget);
-    layout->setMargin(0);
-
-    QLabel* repo_label = new QLabel(i18n("&Repository:"), mainWidget);
+    QLabel* repo_label = new QLabel(i18n("&Repository:"));
     mainLayout->addWidget(repo_label);
-    layout->addWidget(repo_label);
 
-    repo_edit = new QLineEdit(mainWidget);
+    repo_edit = new QLineEdit;
     mainLayout->addWidget(repo_edit);
+
     repo_edit->setFocus();
     repo_label->setBuddy(repo_edit);
     if( !repo.isNull() )
@@ -72,25 +65,24 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
         repo_edit->setText(repo);
         repo_edit->setEnabled(false);
     }
-    layout->addWidget(repo_edit);
+    mainLayout->addWidget(repo_edit);
 
-    QLabel* rsh_label = new QLabel(i18n("Use remote &shell (only for :ext: repositories):"), mainWidget);
+    QLabel* rsh_label = new QLabel(i18n("Use remote &shell (only for :ext: repositories):"));
     mainLayout->addWidget(rsh_label);
-    layout->addWidget(rsh_label);
+    mainLayout->addWidget(rsh_label);
 
-    rsh_edit = new QLineEdit(mainWidget);
+    rsh_edit = new QLineEdit;
     mainLayout->addWidget(rsh_edit);
     rsh_label->setBuddy(rsh_edit);
-    layout->addWidget(rsh_edit);
+    mainLayout->addWidget(rsh_edit);
 
-    QLabel* server_label = new QLabel(i18n("Invoke this program on the server side:"),
-                                      mainWidget);
-    layout->addWidget(server_label);
+    QLabel* server_label = new QLabel(i18n("Invoke this program on the server side:"));
+    mainLayout->addWidget(server_label);
 
-    server_edit = new QLineEdit(mainWidget);
+    server_edit = new QLineEdit;
     mainLayout->addWidget(server_edit);
     server_label->setBuddy(server_edit);
-    layout->addWidget(server_edit);
+    mainLayout->addWidget(server_edit);
 
     QHBoxLayout* compressionBox = new QHBoxLayout;
     mainLayout->addLayout(compressionBox);
@@ -102,16 +94,15 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo,
     compressionBox->addWidget(m_useDifferentCompression);
     compressionBox->addWidget(m_compressionLevel);
 
-    m_retrieveCvsignoreFile = new QCheckBox(i18n("Download cvsignore file from "
-                                            "server"), mainWidget);
-    layout->addWidget(m_retrieveCvsignoreFile);
+    m_retrieveCvsignoreFile = new QCheckBox(i18n("Download cvsignore file from server"));
+    mainLayout->addWidget(m_retrieveCvsignoreFile);
 
     mainLayout->addWidget(buttonBox);
+    okButton->setDefault(true);
 
-    connect( repo_edit, SIGNAL(textChanged(QString)),
-             this, SLOT(repoChanged()) );
-    connect( m_useDifferentCompression, SIGNAL(toggled(bool)),
-             this, SLOT(compressionToggled(bool)) );
+    connect(repo_edit, SIGNAL(textChanged(QString)), this, SLOT(repoChanged()));
+    connect(m_useDifferentCompression, SIGNAL(toggled(bool)), this, SLOT(compressionToggled(bool)));
+
     repoChanged();
 
     KConfigGroup cg(&partConfig, "AddRepositoryDialog");
