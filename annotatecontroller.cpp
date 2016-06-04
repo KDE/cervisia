@@ -23,6 +23,7 @@
 #include <qmap.h>
 
 #include <klocale.h>
+#include <KConfigGroup>
 
 #include "annotatedialog.h"
 #include "loginfo.h"
@@ -37,7 +38,7 @@ struct AnnotateController::Private
     typedef QMap<QString, QString>  RevisionCommentMap;
     RevisionCommentMap  comments;                  // maps comment to a revision
 
-    OrgKdeCervisiaCvsserviceCvsserviceInterface*    cvsService;
+    OrgKdeCervisia5CvsserviceCvsserviceInterface*    cvsService;
     AnnotateDialog*     dialog;
     ProgressDialog*     progress;
 
@@ -47,7 +48,7 @@ struct AnnotateController::Private
 };
 
 
-AnnotateController::AnnotateController(AnnotateDialog* dialog, OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService)
+AnnotateController::AnnotateController(AnnotateDialog* dialog, OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService)
     : d(new Private)
 {
     // initialize private data
@@ -77,7 +78,7 @@ void AnnotateController::showDialog(const QString& fileName, const QString& revi
     // hide progress dialog
     delete d->progress; d->progress = 0;
 
-    d->dialog->setCaption(i18n("CVS Annotate: %1", fileName));
+    d->dialog->setWindowTitle(i18n("CVS Annotate: %1", fileName));
     d->dialog->show();
 }
 

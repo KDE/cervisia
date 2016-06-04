@@ -20,7 +20,7 @@
 #ifndef LOGDIALOG_H
 #define LOGDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 #include "loginfo.h"
 
@@ -33,9 +33,11 @@ class LogPlainView;
 class KComboBox;
 class QLabel;
 class QSplitter;
-class KTabWidget;
+class QTabWidget;
+class QPushButton;
+class QDialogButtonBox;
 class KTextEdit;
-class OrgKdeCervisiaCvsserviceCvsserviceInterface;
+class OrgKdeCervisia5CvsserviceCvsserviceInterface;
 class KConfig;
 
 class LogDialogTagInfo
@@ -47,7 +49,7 @@ public:
 };
 
 
-class LogDialog : public KDialog
+class LogDialog : public QDialog
 {
     Q_OBJECT
 
@@ -56,12 +58,12 @@ public:
 
     virtual ~LogDialog();
 
-    bool parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service, const QString& fileName);
+    bool parseCvsLog(OrgKdeCervisia5CvsserviceCvsserviceInterface* service, const QString& fileName);
 
 protected slots:
-    virtual void slotButtonClicked(int button);
     void slotOk();
-    void slotApply();
+    void slotPatch();
+    void slotHelp();
 
 private slots:
     void findClicked();
@@ -70,7 +72,7 @@ private slots:
     void revisionSelected(QString rev, bool rmb);
     void tagASelected(int n);
     void tagBSelected(int n);
-    void tabChanged(QWidget* w);
+    void tabChanged(int index);
 
 private:
     void tagSelected(LogDialogTagInfo* tag, bool rmb);
@@ -85,15 +87,17 @@ private:
     LogTreeView *tree;
     LogListView *list;
     LogPlainView *plain;
-    KTabWidget *tabWidget;
+    QTabWidget *tabWidget;
     QLabel *revbox[2];
     QLabel *authorbox[2];
     QLabel *datebox[2];
     KTextEdit *commentbox[2];
     KTextEdit *tagsbox[2];
     KComboBox *tagcombo[2];
+    QPushButton *user1Button, *user2Button, *user3Button, *okButton;
+    QDialogButtonBox *buttonBox;
 
-    OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService;
+    OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService;
     KConfig&         partConfig;
 };
 

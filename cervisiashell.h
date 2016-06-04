@@ -23,6 +23,7 @@
 #define CERVISIASHELL_H
 
 #include <kparts/mainwindow.h>
+#include <kparts/readonlypart.h>
 
 
 
@@ -40,7 +41,7 @@ public:
 
 public slots:
     void openURL();
-    void openURL(const KUrl& url);
+    void openURL(const QUrl& url);
     void slotConfigureKeys();
     void slotConfigureToolBars();
 

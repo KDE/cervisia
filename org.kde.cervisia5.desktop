@@ -65,7 +65,7 @@ GenericName[xh]=CVS Isiqalo sesiphelo
 GenericName[x-test]=xxCVS Frontendxx
 GenericName[zh_CN]=CVS 前端
 GenericName[zh_TW]=CVS 前端
-Exec=cervisia -caption %c %i %u
+Exec=cervisia -qwindowtitle %c %u
 Icon=cervisia
 X-DocPath=cervisia/index.html
 Type=Application
@@ -141,4 +141,5 @@ Name[zh_CN]=Cervisia
 Name[zh_TW]=Cervisia
 
 X-DBUS-StartupType=Multi
+X-DBUS-ServiceName=org.kde.cervisia5
 Categories=Qt;KDE;Development;RevisionControl;

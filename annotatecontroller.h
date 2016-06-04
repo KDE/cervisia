@@ -22,12 +22,12 @@
 #include <qstring.h>
 
 class AnnotateDialog;
-class OrgKdeCervisiaCvsserviceCvsserviceInterface;
+class OrgKdeCervisia5CvsserviceCvsserviceInterface;
 
 class AnnotateController
 {
 public:
-    AnnotateController(AnnotateDialog* dialog, OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService);
+    AnnotateController(AnnotateDialog* dialog, OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService);
     ~AnnotateController();
 
     void showDialog(const QString& fileName, const QString& revision = QString());

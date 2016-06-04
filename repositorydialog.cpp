@@ -20,19 +20,22 @@
 
 
 #include "repositorydialog.h"
+#include "debug.h"
 
-#include <qlayout.h>
-#include <qpushbutton.h>
 #include <QHBoxLayout>
-#include <QBoxLayout>
+#include <QVBoxLayout>
 #include <QTreeWidget>
 #include <QHeaderView>
-#include <KDialogButtonBox>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QDebug>
+
 #include <kconfig.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kdebug.h>
 #include <kconfiggroup.h>
+#include <KConfigGroup>
+#include <KHelpClient>
 
 #include "addrepositorydialog.h"
 #include "cvsserviceinterface.h"
@@ -96,7 +99,7 @@ RepositoryListItem::RepositoryListItem(QTreeWidget* parent, const QString& repo,
     : QTreeWidgetItem(parent)
     , m_isLoggedIn(loggedin)
 {
-    kDebug(8050) << "repo=" << repo;
+    qCDebug(log_cervisia) << "repo=" << repo;
     setText(0, repo);
 
     changeLoginStatusColumn();
@@ -159,27 +162,30 @@ void RepositoryListItem::changeLoginStatusColumn()
 }
 
 
-RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService,
+RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService,
                                    const QString& cvsServiceInterfaceName, QWidget* parent)
-    : KDialog(parent)
+    : QDialog(parent)
     , m_partConfig(cfg)
     , m_cvsService(cvsService)
     , m_cvsServiceInterfaceName(cvsServiceInterfaceName)
 {
-    setCaption(i18n("Configure Access to Repositories"));
+    setWindowTitle(i18n("Configure Access to Repositories"));
     setModal(true);
-    setButtons(Ok | Cancel | Help);
-    setDefaultButton(Ok);
-    showButtonSeparator(true);
 
-    QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
 
-    QBoxLayout* hbox = new QHBoxLayout(mainWidget);
-    hbox->setSpacing(spacingHint());
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(okButton, SIGNAL(clicked()), this, SLOT(slotOk()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+
+    QBoxLayout* hbox = new QHBoxLayout;
     hbox->setMargin(0);
+    mainLayout->addLayout(hbox);
 
-    m_repoList = new QTreeWidget(mainWidget);
+    m_repoList = new QTreeWidget;
     hbox->addWidget(m_repoList, 10);
     m_repoList->setMinimumWidth(fontMetrics().width('0') * 60);
     m_repoList->setAllColumnsShowFocus(true);
@@ -193,15 +199,12 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserv
     connect(m_repoList, SIGNAL(itemSelectionChanged()),
             this,       SLOT(slotSelectionChanged()));
 
-    KDialogButtonBox* actionbox = new KDialogButtonBox(mainWidget, Qt::Vertical);
-    QPushButton* addbutton = actionbox->addButton(i18n("&Add..."), QDialogButtonBox::ActionRole);
-    m_modifyButton = actionbox->addButton(i18n("&Modify..."), QDialogButtonBox::ActionRole);
-    m_removeButton = actionbox->addButton(i18n("&Remove"), QDialogButtonBox::ActionRole);
-    //actionbox->addStretch();
+    QDialogButtonBox* actionbox = new QDialogButtonBox(Qt::Vertical);
+    QPushButton* addbutton = actionbox->addButton(i18n("Add..."), QDialogButtonBox::ActionRole);
+    m_modifyButton = actionbox->addButton(i18n("Modify..."), QDialogButtonBox::ActionRole);
+    m_removeButton = actionbox->addButton(i18n("Remove"), QDialogButtonBox::ActionRole);
     m_loginButton  = actionbox->addButton(i18n("Login..."), QDialogButtonBox::ActionRole);
     m_logoutButton = actionbox->addButton(i18n("Logout"), QDialogButtonBox::ActionRole);
-    //actionbox->addStretch();
-    actionbox->layout();
     hbox->addWidget(actionbox, 0);
 
     m_loginButton->setEnabled(false);
@@ -218,7 +221,7 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserv
     connect( m_logoutButton, SIGNAL(clicked()),
              this, SLOT(slotLogoutClicked()) );
 
-    // open cvs DCOP service configuration file
+    // open cvs DBUS service configuration file
     m_serviceConfig = new KConfig("cvsservicerc");
 
     readCvsPassFile();
@@ -235,24 +238,24 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserv
         slotSelectionChanged();
     }
 
-    setHelp("accessing-repository");
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &RepositoryDialog::slotHelp);
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     KConfigGroup cg(&m_partConfig, "RepositoryDialog");
-    restoreDialogSize(cg);
+    restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
 
     QByteArray state = cg.readEntry<QByteArray>("RepositoryListView", QByteArray());
     m_repoList->header()->restoreState(state);
 
-    connect(this,SIGNAL(okClicked()),this,SLOT(slotOk()));
+    mainLayout->addWidget(buttonBox);
 }
 
 
 RepositoryDialog::~RepositoryDialog()
 {
     KConfigGroup cg(&m_partConfig, "RepositoryDialog");
-    saveDialogSize(cg);
+    cg.writeEntry("geometry", saveGeometry());
 
     cg.writeEntry("RepositoryListView", m_repoList->header()->saveState());
 
@@ -284,17 +287,16 @@ void RepositoryDialog::readConfigFile()
     {
         RepositoryListItem* ritem = static_cast<RepositoryListItem*>(m_repoList->topLevelItem(i));
 
-        // read entries from cvs DCOP service configuration
+        // read entries from cvs DBUS service configuration
         const KConfigGroup repoGroup = m_serviceConfig->group(QLatin1String("Repository-") +
                                                               ritem->repository());
 
-        kDebug(8050) << "repository=" << ritem->repository();
+        qCDebug(log_cervisia) << "repository=" << ritem->repository();
 
         QString rsh       = repoGroup.readEntry("rsh", QString());
         QString server    = repoGroup.readEntry("cvs_server", QString());
         int compression   = repoGroup.readEntry("Compression", -1);
-        bool retrieveFile = repoGroup.readEntry("RetrieveCvsignore",
-                                                           false);
+        bool retrieveFile = repoGroup.readEntry("RetrieveCvsignore", false);
 
         ritem->setRsh(rsh);
         ritem->setServer(server);
@@ -305,6 +307,10 @@ void RepositoryDialog::readConfigFile()
     m_repoList->header()->resizeSections(QHeaderView::ResizeToContents);
 }
 
+void RepositoryDialog::slotHelp()
+{
+    KHelpClient::invokeHelp(QLatin1String("accessing-repository"));
+}
 
 void RepositoryDialog::slotOk()
 {
@@ -320,14 +326,14 @@ void RepositoryDialog::slotOk()
     {
         RepositoryListItem* ritem = static_cast<RepositoryListItem*>(m_repoList->topLevelItem(i));
 
-        // write entries to cvs DCOP service configuration
+        // write entries to cvs DBUS service configuration
         writeRepositoryData(ritem);
     }
 
     // write to disk so other services can reparse the configuration
     m_serviceConfig->sync();
 
-    KDialog::accept();
+    QDialog::accept();
 }
 
 
@@ -356,7 +362,7 @@ void RepositoryDialog::slotAddClicked()
         ritem->setCompression(compression);
         ritem->setRetrieveCvsignore(retrieveFile);
 
-        // write entries to cvs DCOP service configuration
+        // write entries to cvs DBUS service configuration
         writeRepositoryData(ritem);
 
         // write to disk so other services can reparse the configuration
@@ -409,7 +415,7 @@ void RepositoryDialog::slotDoubleClicked(QTreeWidgetItem *item, int column)
         ritem->setCompression(dlg.compression());
         ritem->setRetrieveCvsignore(dlg.retrieveCvsignoreFile());
 
-        // write entries to cvs DCOP service configuration
+        // write entries to cvs DBUS service configuration
         writeRepositoryData(ritem);
 
         // write to disk so other services can reparse the configuration
@@ -424,14 +430,14 @@ void RepositoryDialog::slotLoginClicked()
     if( !item )
         return;
 
-    kDebug(8050) << "repo=" << item->repository();
+    qCDebug(log_cervisia) << "repo=" << item->repository();
 
     QDBusReply<QDBusObjectPath> job = m_cvsService->login(item->repository());
     if( !job.isValid() )
         // TODO: error handling
         return;
     QDBusObjectPath jobPath = job;
-    OrgKdeCervisiaCvsserviceCvsloginjobInterface cvsloginjobinterface(m_cvsServiceInterfaceName,jobPath.path(),QDBusConnection::sessionBus(), this);
+    OrgKdeCervisia5CvsserviceCvsloginjobInterface cvsloginjobinterface(m_cvsServiceInterfaceName,jobPath.path(),QDBusConnection::sessionBus(), this);
     QDBusReply<bool> reply = cvsloginjobinterface.execute();
     bool success = false;
     if(reply.isValid())
@@ -502,11 +508,11 @@ void RepositoryDialog::slotSelectionChanged()
 
 void RepositoryDialog::writeRepositoryData(RepositoryListItem* item)
 {
-    // write entries to cvs DCOP service configuration
+    // write entries to cvs DBUS service configuration
     KConfigGroup repoGroup = m_serviceConfig->group(QLatin1String("Repository-") +
                               item->repository());
 
-    kDebug(8050) << "repository=" << item->repository();
+    qCDebug(log_cervisia) << "repository=" << item->repository();
 
     repoGroup.writeEntry("rsh", item->rsh());
     repoGroup.writeEntry("cvs_server", item->server());
@@ -514,6 +520,5 @@ void RepositoryDialog::writeRepositoryData(RepositoryListItem* item)
     repoGroup.writeEntry("RetrieveCvsignore", item->retrieveCvsignore());
 }
 
-#include "repositorydialog.moc"
 
 // kate: space-indent on; indent-width 4; replace-tabs on;

@@ -1,18 +1,25 @@
-cmake_minimum_required(VERSION 2.6)
-
 project(cervisia)
 
-if (UNIX)
-find_package(KDE4 REQUIRED)
-include(KDE4Defaults)
+cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
+set(QT_MIN_VERSION "5.2.0")
 
-add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
+find_package(ECM 1.3.0 REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
-include_directories(
-    ${CMAKE_SOURCE_DIR}
-    ${CMAKE_BINARY_DIR}
-    ${KDE4_INCLUDES}
-)
+add_definitions(-DTRANSLATION_DOMAIN="cervisia")
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings)
+include(ECMInstallIcons)
+include(ECMAddAppIcon)
+include(ECMMarkNonGuiExecutable)
+include(FeatureSummary)
+#include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
+
+find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Widgets DBus)
+
+find_package(KF5 REQUIRED COMPONENTS Parts DocTools Init IconThemes Notifications WidgetsAddons ItemViews Su)
 
 add_subdirectory( doc )
 add_subdirectory( cvsservice )
@@ -21,7 +28,7 @@ add_subdirectory( pics )
 set(_KDECONFDIR_ ${CONFIG_INSTALL_DIR})
 set(_KDEHTMLDIR_ ${HTML_INSTALL_DIR})
 
-configure_file (cervisia.1.cmake ${CMAKE_CURRENT_BINARY_DIR}/cervisia.1 @ONLY)
+configure_file(cervisia.1.cmake ${CMAKE_CURRENT_BINARY_DIR}/cervisia.1 @ONLY)
 
 ########### next target ###############
 
@@ -44,28 +51,27 @@ set(libcervisia_SRCS
    qttableview.cpp
    tooltip.cpp
    settingsdialog.cpp
+   debug.cpp
    )
 
-qt4_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia.cvsservice.xml )
-qt4_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia.cvsjob.xml )
-qt4_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia.cvsloginjob.xml )
-qt4_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia.repository.xml )
+qt5_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia5.cvsservice.xml )
+qt5_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia5.cvsjob.xml )
+qt5_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia5.cvsloginjob.xml )
+qt5_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia5.repository.xml )
 
 
-kde4_add_ui_files(libcervisia_SRCS settingsdialog_advanced.ui )
+ki18n_wrap_ui(libcervisia_SRCS settingsdialog_advanced.ui )
 
-kde4_add_kcfg_files(libcervisia_SRCS cervisiasettings.kcfgc )
+kconfig_add_kcfg_files(libcervisia_SRCS cervisiasettings.kcfgc )
 
 
 set(cervisia_KDEINIT_SRCS ${libcervisia_SRCS}
    main.cpp
    cervisiashell.cpp )
 
+kf5_add_kdeinit_executable(cervisia ${cervisia_KDEINIT_SRCS})
 
-
-kde4_add_kdeinit_executable(cervisia ${cervisia_KDEINIT_SRCS})
-
-target_link_libraries(kdeinit_cervisia ${KDE4_KPARTS_LIBS})
+target_link_libraries(kdeinit_cervisia KF5::Parts KF5::ItemViews)
 
 install(TARGETS kdeinit_cervisia ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
@@ -103,18 +109,18 @@ set(cervisiapart_PART_SRCS ${libcervisia_SRCS}
    globalignorelist.cpp
    addignoremenu.cpp
    editwithmenu.cpp
-   logmessageedit.cpp )
+   logmessageedit.cpp
+   debug.cpp
+)
 
 
-qt4_add_dbus_adaptor(cervisiapart_PART_SRCS org.kde.cervisia.protocolview.xml protocolview.h ProtocolView)
+qt5_add_dbus_adaptor(cervisiapart_PART_SRCS org.kde.cervisia5.protocolview.xml protocolview.h ProtocolView)
 
-kde4_add_plugin(cervisiapart ${cervisiapart_PART_SRCS})
+add_library(cervisiapart5 MODULE ${cervisiapart_PART_SRCS})
 
+target_link_libraries(cervisiapart5 KF5::Parts KF5::Notifications KF5::ItemViews)
 
-
-target_link_libraries(cervisiapart  ${KDE4_KPARTS_LIBS})
-
-install(TARGETS cervisiapart  DESTINATION ${PLUGIN_INSTALL_DIR} )
+install(TARGETS cervisiapart5  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 
 ########### next target ###############
@@ -122,14 +128,22 @@ install(TARGETS cervisiapart  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 ########### install files ###############
 
-install( PROGRAMS cervisia.desktop  DESTINATION  ${XDG_APPS_INSTALL_DIR} )
-install( FILES cervisia.appdata.xml DESTINATION  ${DATA_INSTALL_DIR}/appdata )
-install( FILES cervisiapart.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
-install( FILES cervisiapart.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
-install( FILES cervisiaui.rc  DESTINATION  ${DATA_INSTALL_DIR}/cervisiapart )
-install( FILES cervisiashellui.rc cervisia.notifyrc  DESTINATION  ${DATA_INSTALL_DIR}/cervisia )
-install( FILES ${CMAKE_CURRENT_BINARY_DIR}/cervisia.1 DESTINATION ${MAN_INSTALL_DIR}/man1)
-kde4_install_icons( ${ICON_INSTALL_DIR}   )
+install(PROGRAMS org.kde.cervisia5.desktop  DESTINATION  ${XDG_APPS_INSTALL_DIR} )
+install(FILES cervisia.appdata.xml DESTINATION  ${DATA_INSTALL_DIR}/appdata )
+install(FILES org.kde.cervisiapart5.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install(FILES cervisiapart.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
+install(FILES cervisiaui.rc  DESTINATION  ${KXMLGUI_INSTALL_DIR}/cervisiapart )
+install(FILES cervisiashellui.rc cervisia.notifyrc  DESTINATION  ${KXMLGUI_INSTALL_DIR}/cervisia )
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/cervisia.1 DESTINATION ${MAN_INSTALL_DIR}/man1)
+
+ecm_install_icons(ICONS
+    16-apps-cervisia.png
+    22-apps-cervisia.png
+    32-apps-cervisia.png
+    48-apps-cervisia.png
+    DESTINATION ${ICON_INSTALL_DIR}
+    THEME hicolor
+)
 
 
 
@@ -137,4 +151,4 @@ kde4_install_icons( ${ICON_INSTALL_DIR}   )
 #	pod2man --center "Cervisia" --release "${CERVISIA_VERSION}" \
 #		cervisia.pod > cervisia.1.in
 
-endif ()
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

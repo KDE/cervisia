@@ -22,41 +22,48 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
-//Added by qt3to4:
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QLineEdit>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QFileDialog>
 
-#include <kfiledialog.h>
-#include <klineedit.h>
-#include <klocale.h>
 #include <kurlcompletion.h>
-
+#include <KConfigGroup>
+#include <KLineEdit>
+#include <KLocalizedString>
 
 using Cervisia::CvsInitDialog;
 
 
 CvsInitDialog::CvsInitDialog(QWidget* parent)
-    : KDialog(parent)
+    : QDialog(parent)
 {
-    setCaption(i18n("Create New Repository (cvs init)"));
+    setWindowTitle(i18n("Create New Repository (cvs init)"));
     setModal(true);
-    setButtons(Ok | Cancel);
-    setDefaultButton(Ok);
-    showButtonSeparator(true);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    okButton->setDefault(true);
 
     QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
-    QVBoxLayout* mainLayout = new QVBoxLayout(mainWidget);
-    mainLayout->setSpacing(spacingHint());
-    mainLayout->setMargin(0);
+    mainLayout->addWidget(mainWidget);
 
     QLabel* dirLabel = new QLabel(i18n("Repository folder:"), mainWidget);
+    mainLayout->addWidget(dirLabel);
     mainLayout->addWidget(dirLabel);
 
     QHBoxLayout* dirLayout = new QHBoxLayout();
     mainLayout->addLayout(dirLayout);
      
     m_directoryEdit = new KLineEdit(mainWidget);
+    mainLayout->addWidget(m_directoryEdit);
     m_directoryEdit->setFocus();
         
     KUrlCompletion* comp = new KUrlCompletion();
@@ -67,6 +74,7 @@ CvsInitDialog::CvsInitDialog(QWidget* parent)
     dirLayout->addWidget(m_directoryEdit); 
     
     QPushButton* dirButton = new QPushButton("...", mainWidget);
+    mainLayout->addWidget(dirButton);
     dirButton->setFixedWidth(30);
     dirLayout->addWidget(dirButton);
     
@@ -74,8 +82,10 @@ CvsInitDialog::CvsInitDialog(QWidget* parent)
              this,      SLOT(dirButtonClicked()) );
     connect( m_directoryEdit, SIGNAL(textChanged(QString)),
              this,            SLOT(lineEditTextChanged(QString)));
-             
-    enableButton(Ok, false);
+
+    mainLayout->addWidget(buttonBox);
+
+    okButton->setEnabled(false);
 
     setMinimumWidth(350);
 }
@@ -89,7 +99,7 @@ QString CvsInitDialog::directory() const
 
 void CvsInitDialog::dirButtonClicked()
 {
-    QString dir = KFileDialog::getExistingDirectory(m_directoryEdit->text());
+    QString dir = QFileDialog::getExistingDirectory(0, QString(), m_directoryEdit->text());
     if( !dir.isEmpty() )
         m_directoryEdit->setText(dir);
 }
@@ -97,7 +107,6 @@ void CvsInitDialog::dirButtonClicked()
 
 void CvsInitDialog::lineEditTextChanged(const QString& text)
 {
-    enableButton(Ok, !text.trimmed().isEmpty());
+    okButton->setEnabled(!text.trimmed().isEmpty());
 }
     
-#include "cvsinitdialog.moc"

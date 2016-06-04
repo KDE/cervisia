@@ -27,24 +27,30 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
-#include <KTabWidget>
+#include <QTabWidget>
 #include <KTextEdit>
 #include <qtextstream.h>
 #include <qsplitter.h>
 
 #include <kconfig.h>
-#include <kdebug.h>
-#include <kfiledialog.h>
+#include <QDebug>
 #include <kfinddialog.h>
 #include <kglobalsettings.h>
-#include <kiconloader.h>
-#include <KTreeWidgetSearchLine>
+#include <ktreewidgetsearchline.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kdatetime.h>
 #include <krun.h>
 #include <kurl.h>
 #include <kconfiggroup.h>
+#include <KConfigGroup>
+#include <KHelpClient>
+
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <KGuiItem>
+#include <QVBoxLayout>
+#include <QFileDialog>
 
 #include "cvsserviceinterface.h"
 #include "annotatedialog.h"
@@ -57,23 +63,19 @@
 #include "misc.h"
 #include "progressdialog.h"
 #include "patchoptiondialog.h"
+#include "debug.h"
 
 
 LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
-    : KDialog(parent)
+    : QDialog(parent)
     , cvsService(0)
     , partConfig(cfg)
 {
-    setButtons(Ok | Apply | Close | Help | User1 | User2 | User3);
-    setButtonGuiItem(User1, KGuiItem(i18n("&Annotate A")));
-    setButtonGuiItem(User2, KGuiItem(i18n("&Diff"), "vcs-diff-cvs-cervisia"));
-    setButtonGuiItem(User3, KGuiItem(i18n("&Find"), "edit-find"));
-    setDefaultButton(Close);
-    showButtonSeparator(true);
-    showButton(User3, false);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
 
     splitter = new QSplitter(Qt::Vertical, this);
-    setMainWidget(splitter);
+    mainLayout->addWidget(splitter);
 
     tree = new LogTreeView(this);
     connect( tree, SIGNAL(revisionClicked(QString,bool)),
@@ -83,14 +85,12 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     QVBoxLayout* listLayout = new QVBoxLayout(listWidget);
     QHBoxLayout* searchLayout = new QHBoxLayout();
     listLayout->addLayout(searchLayout);
-    searchLayout->setMargin(KDialog::spacingHint());
-    searchLayout->setSpacing(KDialog::spacingHint());
 
     list = new LogListView(partConfig, listWidget);
     listLayout->addWidget(list, 1);
 
     KTreeWidgetSearchLine* searchLine = new KTreeWidgetSearchLine(listWidget, list);
-    QLabel* searchLabel = new QLabel(i18n("S&earch:"),listWidget);
+    QLabel* searchLabel = new QLabel(i18n("Search:"),listWidget);
     searchLabel->setBuddy(searchLine);
     searchLayout->addWidget(searchLabel);
     searchLayout->addWidget(searchLine, 1);
@@ -102,21 +102,22 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     connect( plain, SIGNAL(revisionClicked(QString,bool)),
              this, SLOT(revisionSelected(QString,bool)) );
 
-    tabWidget = new KTabWidget(splitter);
+    tabWidget = new QTabWidget;
     tabWidget->addTab(tree, i18n("&Tree"));
     tabWidget->addTab(listWidget, i18n("&List"));
     tabWidget->addTab(plain, i18n("CVS &Output"));
+    splitter->addWidget(tabWidget);
+    splitter->setStretchFactor(0, 1);
 
-    connect(tabWidget, SIGNAL(currentChanged(QWidget*)),
-            this, SLOT(tabChanged(QWidget*)));
+    connect(tabWidget, &QTabWidget::currentChanged, this, &LogDialog::tabChanged);
 
     tree->setWhatsThis( i18n("Choose revision A by clicking with the left "
                                "mouse button,\nrevision B by clicking with "
                                "the middle mouse button."));
 
-    QWidget *mainWidget = new QWidget(splitter);
+    QWidget *mainWidget = new QWidget;
+    splitter->addWidget(mainWidget);
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    layout->setSpacing(spacingHint());
     layout->setMargin(0);
 
     for (int i = 0; i < 2; ++i)
@@ -187,43 +188,66 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
         grid->addWidget(tagsbox[i], 0, 4, 3, 1);
     }
 
+    buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Help | QDialogButtonBox::Close | QDialogButtonBox::Apply);
+
+    okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(okButton, &QPushButton::clicked, this, &LogDialog::slotOk);
+
+    user1Button = new QPushButton;
+    buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
+
+    user2Button = new QPushButton;
+    buttonBox->addButton(user2Button, QDialogButtonBox::ActionRole);
+
+    user3Button = new QPushButton;
+    buttonBox->addButton(user3Button, QDialogButtonBox::ActionRole);
+
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+
+    KGuiItem::assign(user1Button, KGuiItem(i18n("&Annotate A")));
+    KGuiItem::assign(user2Button, KGuiItem(i18n("&Diff")));
+    KGuiItem::assign(user3Button, KGuiItem(i18n("&Find")));
+    user3Button->setVisible(false);
+
     // initially make the version info widget as small as possible
-    splitter->setSizes(QList<int>() << height() << 1);
+    splitter->setSizes(QList<int>() << height() << 10);
 
-    revbox[0]->setWhatsThis( i18n("This revision is used when you click "
-                                    "Annotate.\nIt is also used as the first "
-                                    "item of a Diff operation."));
-    revbox[1]->setWhatsThis( i18n("This revision is used as the second "
-                                    "item of a Diff operation."));
+    revbox[0]->setWhatsThis(i18n("This revision is used when you click "
+                                 "Annotate.\nIt is also used as the first "
+                                 "item of a Diff operation."));
 
-    connect( tagcombo[0], SIGNAL(activated(int)),
-             this, SLOT(tagASelected(int)) );
-    connect( tagcombo[1], SIGNAL(activated(int)),
-             this, SLOT(tagBSelected(int)) );
+    revbox[1]->setWhatsThis(i18n("This revision is used as the second "
+                                 "item of a Diff operation."));
 
-    connect( this, SIGNAL(user1Clicked()),
-             this, SLOT(annotateClicked()) );
-    connect( this, SIGNAL(user2Clicked()),
-             this, SLOT(diffClicked()) );
-    connect( this, SIGNAL(user3Clicked()),
-             this, SLOT(findClicked()) );
+    connect(tagcombo[0], SIGNAL(activated(int)), this, SLOT(tagASelected(int)));
+    connect(tagcombo[1], SIGNAL(activated(int)), this, SLOT(tagBSelected(int)));
 
-    connect(this,SIGNAL(applyClicked()),this,SLOT(slotApply()));
-    setButtonGuiItem(Ok, KGuiItem(i18nc("to view revision A", "&View A"),"document-open"));
-    setButtonGuiItem(Apply, KGuiItem(i18n("Create Patch...")));
-    setHelp("browsinglogs");
+    connect(user1Button, SIGNAL(clicked()), this, SLOT(annotateClicked()));
+    connect(user2Button, SIGNAL(clicked()), this, SLOT(diffClicked()));
+    connect(user3Button, SIGNAL(clicked()), this, SLOT(findClicked()));
+
+    connect(buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked()), this, SLOT(slotPatch()));
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &LogDialog::slotHelp);
+
+    KGuiItem::assign(okButton, KGuiItem(i18n("&View A")));
+    KGuiItem::assign(buttonBox->button(QDialogButtonBox::Apply), KGuiItem(i18n("Create Patch...")));
+
+    mainLayout->addWidget(buttonBox);
+    buttonBox->button(QDialogButtonBox::Close)->setDefault(true);
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     KConfigGroup cg(&partConfig, "LogDialog");
     tabWidget->setCurrentIndex(cg.readEntry("ShowTab", 0));
-    restoreDialogSize(cg);
+    restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
 
     splitter->restoreState(cg.readEntry<QByteArray>("Splitter", QByteArray()));
 
     updateButtons();
 }
 
+//--------------------------------------------------------------------------------
 
 LogDialog::~LogDialog()
 {
@@ -232,13 +256,13 @@ LogDialog::~LogDialog()
 
     KConfigGroup cg(&partConfig, "LogDialog");
     cg.writeEntry("ShowTab", tabWidget->currentIndex());
-    saveDialogSize(cg);
-
+    cg.writeEntry("geometry", saveGeometry());
     cg.writeEntry("Splitter", splitter->saveState());
 }
 
+//--------------------------------------------------------------------------------
 
-bool LogDialog::parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service, const QString& fileName)
+bool LogDialog::parseCvsLog(OrgKdeCervisia5CvsserviceCvsserviceInterface* service, const QString& fileName)
 {
     QString rev;
 
@@ -247,11 +271,11 @@ bool LogDialog::parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service
     enum { Begin, Tags, Admin, Revision,
        Author, Branches, Comment, Finished } state;
 
-    // remember DCOP reference and file name for diff or annotate
+    // remember DBUS reference and file name for diff or annotate
     cvsService = service;
     filename = fileName;
 
-    setCaption(i18n("CVS Log: %1", filename));
+    setWindowTitle(i18n("CVS Log: %1", filename));
 
     QDBusReply<QDBusObjectPath> job = cvsService->log(filename);
     if( !job.isValid() )
@@ -330,7 +354,7 @@ bool LogDialog::parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service
 
                         QString date = dateTimeStr.section(' ', 0, 0);
                         QString time = dateTimeStr.section(' ', 1, 1);
-                        logInfo.m_dateTime.setTime_t(KDateTime::fromString(date + 'T' + time).toTime_t());
+                        logInfo.m_dateTime.setTime_t(QDateTime::fromString(date + 'T' + time, Qt::ISODate).toTime_t());
 
                         logInfo.m_author = strList[1].section(':', 1, 1).trimmed();
 
@@ -428,17 +452,7 @@ bool LogDialog::parseCvsLog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service
     return true;    // successful
 }
 
-void LogDialog::slotButtonClicked(int button)
-{
-    if ( button == KDialog::Ok )
-    {
-        // ok button (used for "view") shall not close the dialog
-        slotOk();
-        return;
-    }
-
-    KDialog::slotButtonClicked(button);
-}
+//--------------------------------------------------------------------------------
 
 void LogDialog::slotOk()
 {
@@ -471,17 +485,18 @@ void LogDialog::slotOk()
     if( dlg.execute() )
     {
         // make file read-only
-        chmod(QFile::encodeName(tempFileName), 0400);
+        QFile::setPermissions(tempFileName, QFileDevice::ReadOwner);
 
         // open file in preferred editor
-        KUrl url;
+        QUrl url;
         url.setPath(tempFileName);
-        (void) new KRun(url, 0, true, false);
+        (void) new KRun(url, 0, true);
     }
 }
 
+//--------------------------------------------------------------------------------
 
-void LogDialog::slotApply()
+void LogDialog::slotPatch()
 {
     if( selectionA.isEmpty() )
     {
@@ -492,22 +507,21 @@ void LogDialog::slotApply()
     }
 
     Cervisia::PatchOptionDialog optionDlg;
-    if( optionDlg.exec() == KDialog::Rejected )
+    if( optionDlg.exec() == QDialog::Rejected )
         return;
 
     QString format      = optionDlg.formatOption();
     QString diffOptions = optionDlg.diffOptions();
 
-    QDBusReply<QDBusObjectPath> job = cvsService->diff(filename, selectionA, selectionB, diffOptions,
-                                   format);
+    QDBusReply<QDBusObjectPath> job = cvsService->diff(filename, selectionA, selectionB, diffOptions, format);
     if( !job.isValid() )
         return;
 
-    ProgressDialog dlg(this, "Diff",cvsService->service(), job, "", i18n("CVS Diff"));
+    ProgressDialog dlg(this, "Diff", cvsService->service(), job, "", i18n("CVS Diff"));
     if( !dlg.execute() )
         return;
 
-    QString fileName = KFileDialog::getSaveFileName();
+    QString fileName = QFileDialog::getSaveFileName();
     if( fileName.isEmpty() )
         return;
 
@@ -531,11 +545,19 @@ void LogDialog::slotApply()
     f.close();
 }
 
+//--------------------------------------------------------------------------------
+
+void LogDialog::slotHelp()
+{
+  KHelpClient::invokeHelp(QLatin1String("browsinglogs"));
+}
+
+//--------------------------------------------------------------------------------
 
 void LogDialog::findClicked()
 {
     KFindDialog dlg(this);
-    if( dlg.exec() == KDialog::Accepted )
+    if( dlg.exec() == QDialog::Accepted )
         plain->searchText(dlg.options(), dlg.pattern());
 }
 
@@ -589,7 +611,7 @@ void LogDialog::revisionSelected(QString rev, bool rmb)
                 updateButtons();
                 return;
             }
-    kDebug(8050) << "Internal error: Revision not found " << rev << ".";
+    qCDebug(log_cervisia) << "Internal error: Revision not found " << rev << ".";
 }
 
 
@@ -607,26 +629,26 @@ void LogDialog::updateButtons()
     // no versions selected?
     if( selectionA.isEmpty() && selectionB.isEmpty() )
     {
-        enableButton(User1, true);  // annotate
-        enableButton(User2, false); // diff
-        enableButtonOk(false);      // view
-        enableButtonApply(false);   // create patch
+        user1Button->setEnabled(true);
+        user2Button->setEnabled(false);
+        okButton->setEnabled(false);      // view
+        buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);   // create patch
     }
     // both versions selected?
     else if( !selectionA.isEmpty() && !selectionB.isEmpty() )
     {
-        enableButton(User1, true);  // annotate A
-        enableButton(User2, true);  // diff
-        enableButtonOk(true);       // view A
-        enableButtonApply(true);    // create patch
+        user1Button->setEnabled(true);
+        user2Button->setEnabled(true);
+        okButton->setEnabled(true);       // view A
+        buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);    // create patch
     }
     // only single version selected?
     else
     {
-        enableButton(User1, true);  // annotate
-        enableButton(User2, true);  // diff
-        enableButtonOk(true);       // view
-        enableButtonApply(true);    // create patch
+        user1Button->setEnabled(true);
+        user2Button->setEnabled(true);
+        okButton->setEnabled(true);       // view
+        buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);    // create patch
     }
 }
 
@@ -645,13 +667,12 @@ void LogDialog::tagBSelected(int n)
 }
 
 
-void LogDialog::tabChanged(QWidget* w)
+void LogDialog::tabChanged(int index)
 {
-    bool isPlainView = (w == plain);
-    showButton(User3, isPlainView);
+    bool isPlainView = (tabWidget->widget(index) == plain);
+    user3Button->setVisible(isPlainView);
 }
 
-#include "logdialog.moc"
 
 // Local Variables:
 // c-basic-offset: 4

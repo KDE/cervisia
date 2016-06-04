@@ -24,7 +24,7 @@ using namespace Cervisia;
 #include <QMenu>
 #include <QTextStream>
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <KMessageBox>
 
 
@@ -112,4 +112,3 @@ void AddIgnoreMenu::appendIgnoreFile(const QString& path, const QString& fileNam
 }
 
 
-#include "addignoremenu.moc"

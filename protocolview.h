@@ -26,7 +26,7 @@
 
 #include <kdemacros.h>
 
-class OrgKdeCervisiaCvsserviceCvsjobInterface;
+class OrgKdeCervisia5CvsserviceCvsjobInterface;
 
 
 class ProtocolView : public QTextEdit
@@ -64,7 +64,7 @@ private:
     QColor localChangeColor;
     QColor remoteChangeColor;
 
-    OrgKdeCervisiaCvsserviceCvsjobInterface* job;
+    OrgKdeCervisia5CvsserviceCvsjobInterface* job;
 
     bool   m_isUpdateJob;
 };

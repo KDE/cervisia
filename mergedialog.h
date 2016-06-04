@@ -20,19 +20,19 @@
 #ifndef MERGEDIALOG_H
 #define MERGEDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 class KComboBox;
 class QPushButton;
 class QRadioButton;
-class OrgKdeCervisiaCvsserviceCvsserviceInterface;
+class OrgKdeCervisia5CvsserviceCvsserviceInterface;
 
-class MergeDialog : public KDialog
+class MergeDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit MergeDialog( OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
+    explicit MergeDialog( OrgKdeCervisia5CvsserviceCvsserviceInterface* service,
                           QWidget *parent=0 );
 
     bool byBranch() const;
@@ -46,7 +46,7 @@ private slots:
     void branchButtonClicked();
     
 private:
-    OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService;
+    OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService;
     
     QRadioButton *bybranch_button, *bytags_button;
     KComboBox *branch_combo, *tag1_combo, *tag2_combo;

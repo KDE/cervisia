@@ -22,38 +22,52 @@
 #include <kconfig.h>
 #include <QPlainTextEdit>
 #include <kconfiggroup.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 using namespace Cervisia;
 
 
 ResolveEditorDialog::ResolveEditorDialog(KConfig& cfg, QWidget *parent)
-    : KDialog(parent)
+    : QDialog(parent)
     , m_partConfig(cfg)
 {
     setModal(true);
-    setButtons(Ok | Cancel);
-    setDefaultButton(Ok);
-    showButtonSeparator(true);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    //PORTING SCRIPT: WARNING mainLayout->addWidget(buttonBox) must be last item in layout. Please move it.
+    mainLayout->addWidget(buttonBox);
+    okButton->setDefault(true);
 
     m_edit = new QPlainTextEdit(this);
     m_edit->setFont(CervisiaSettings::diffFont());
     m_edit->setFocus();
 
-    setMainWidget(m_edit);
+    mainLayout->addWidget(m_edit);
 
     QFontMetrics const fm(fontMetrics());
     setMinimumSize(fm.width('0') * 120,
                    fm.lineSpacing() * 40);
 
     KConfigGroup cg(&m_partConfig, "ResolveEditorDialog");
-    restoreDialogSize(cg);
+    restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
 }
 
 
 ResolveEditorDialog::~ResolveEditorDialog()
 {
     KConfigGroup cg(&m_partConfig, "ResolveEditorDialog");
-    saveDialogSize(cg);
+    cg.writeEntry("geometry", saveGeometry());
 }
 
 

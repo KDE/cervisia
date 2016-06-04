@@ -18,7 +18,7 @@
 
 #include "watchersmodel.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 
 #include "misc.h"
 
@@ -153,4 +153,3 @@ bool WatchersSortModel::lessThan(const QModelIndex& left, const QModelIndex& rig
 }
 
 
-#include "watchersmodel.moc"

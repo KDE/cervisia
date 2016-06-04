@@ -20,24 +20,24 @@
 #ifndef TAGDIALOG_H
 #define TAGDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 class QCheckBox;
 class KComboBox;
-class KLineEdit;
-class OrgKdeCervisiaCvsserviceCvsserviceInterface;
+class QLineEdit;
+class OrgKdeCervisia5CvsserviceCvsserviceInterface;
 
 namespace Cervisia
 {
 
-class TagDialog : public KDialog
+class TagDialog : public QDialog
 {
     Q_OBJECT
 
 public:
     enum ActionType { Create, Delete };
     
-    TagDialog( ActionType action, OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
+    TagDialog( ActionType action, OrgKdeCervisia5CvsserviceCvsserviceInterface* service,
                QWidget *parent=0 );
 
     bool branchTag() const;
@@ -46,17 +46,18 @@ public:
 
 protected slots:
     void slotOk();
+    void slotHelp();
 
 private slots:
     void tagButtonClicked();
 
 private:
     ActionType act;
-    OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService;
+    OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService;
     
     QCheckBox *branchtag_button;
     QCheckBox *forcetag_button;
-    KLineEdit *tag_edit;
+    QLineEdit *tag_edit;
     KComboBox *tag_combo;
 };
 

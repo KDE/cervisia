@@ -27,8 +27,9 @@
 #include <QKeyEvent>
 #include <QHeaderView>
 
-#include <klocale.h>
 #include <KConfigGroup>
+#include <KConfig>
+#include <klocalizedstring.h>
 
 #include "loginfo.h"
 #include "misc.h"

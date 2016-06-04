@@ -22,23 +22,23 @@
 #define COMMITDIALOG_H
 
 #include <qstringlist.h>
-#include <kdialog.h>
+#include <QDialog>
 
 namespace Cervisia { class LogMessageEdit; }
 
-class KComboBox;
+class QComboBox;
 class QCheckBox;
-class KListWidget;
+class QListWidget;
 class QListWidgetItem;
-class OrgKdeCervisiaCvsserviceCvsserviceInterface;
+class OrgKdeCervisia5CvsserviceCvsserviceInterface;
 class KConfig;
 
-class CommitDialog : public KDialog
+class CommitDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    CommitDialog( KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* service, QWidget *parent=0 );
+    CommitDialog( KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInterface* service, QWidget *parent=0 );
     virtual ~CommitDialog();
 
     void setFileList(const QStringList &list);
@@ -48,6 +48,7 @@ public:
     void setLogHistory(const QStringList &list);
 
 private slots:
+    void slotHelp();
     void comboActivated(int);
     void fileSelected(QListWidgetItem* item);
     void fileHighlighted();
@@ -60,9 +61,10 @@ private:
     void addTemplateText();
     void removeTemplateText();
 
-    KListWidget* m_fileList;
+    QListWidget* m_fileList;
     Cervisia::LogMessageEdit* edit;
-    KComboBox *combo;
+    QComboBox *combo;
+    QPushButton *user1Button;
     QStringList commits;
     int current_index;
     QString current_text;
@@ -72,7 +74,7 @@ private:
     QString    m_templateText;
 
     KConfig&            partConfig;
-    OrgKdeCervisiaCvsserviceCvsserviceInterface*    cvsService;     // for diff dialog
+    OrgKdeCervisia5CvsserviceCvsserviceInterface*    cvsService;     // for diff dialog
 };
 
 #endif // COMMITDIALOG_H

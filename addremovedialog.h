@@ -21,12 +21,12 @@
 #ifndef ADDREMOVEDIALOG_H
 #define ADDREMOVEDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
-class KListWidget;
+class QListWidget;
 class QStringList;
 
-class AddRemoveDialog : public KDialog
+class AddRemoveDialog : public QDialog
 {
 public:
     enum ActionType { Add, AddBinary, Remove };
@@ -35,8 +35,12 @@ public:
 
     void setFileList(const QStringList& files);
 
+private slots:
+    void slotHelp();
+
 private:
-    KListWidget* m_listBox;
+    QListWidget* m_listBox;
+    QString helpTopic;
 };
 
 #endif // ADDREMOVEDIALOG_H

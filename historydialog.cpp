@@ -28,13 +28,16 @@
 #include <QTreeWidget>
 #include <QHeaderView>
 
-#include <kglobal.h>
-#include <kpushbutton.h>
-#include <kconfig.h>
-#include <klineedit.h>
-#include <klocale.h>
-#include <kdatetime.h>
-#include <kconfiggroup.h>
+#include <QPushButton>
+#include <QLineEdit>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
+
+#include <KConfig>
+#include <KConfigGroup>
+#include <KLocalizedString>
+#include <KHelpClient>
 
 #include "misc.h"
 #include "cvsserviceinterface.h"
@@ -48,7 +51,7 @@ static QDateTime parseDate(const QString& date, const QString& time, const QStri
     if( !offset.contains(':') && offset.size() == 5 )
         offset.insert( 3, ':' );
 
-    const KDateTime dt( KDateTime::fromString( date + 'T' + time + offset ) );
+    const QDateTime dt( QDateTime::fromString(date + 'T' + time + offset, Qt::ISODate) );
     if ( !dt.isValid() )
         return QDateTime();
 
@@ -101,7 +104,7 @@ bool HistoryItem::operator<(const QTreeWidgetItem &other) const
 QVariant HistoryItem::data(int column, int role) const
 {
     if ( (role == Qt::DisplayRole) && (column == Date) )
-        return KGlobal::locale()->formatDateTime(m_date);
+        return QLocale().toString(m_date);
 
     return QTreeWidgetItem::data(column, role);
 }
@@ -134,20 +137,13 @@ bool HistoryItem::isOther()
 
 
 HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent)
-    : KDialog(parent)
+    : QDialog(parent)
     , partConfig(cfg)
 {
-    setButtons(Close | Help);
-    showButtonSeparator(true);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
 
-    QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
-
-    QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    layout->setSpacing(spacingHint());
-    layout->setMargin(0);
-
-    listview = new QTreeWidget(mainWidget);
+    listview = new QTreeWidget;
     listview->setSelectionMode(QAbstractItemView::NoSelection);
     listview->setAllColumnsShowFocus(true);
     listview->setRootIsDecorated(false);
@@ -157,34 +153,38 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent)
     listview->setHeaderLabels(QStringList() << i18n("Date") << i18n("Event") << i18n("Author")
                                             << i18n("Revision") << i18n("File") << i18n("Repo Path"));
     listview->setFocus();
-    layout->addWidget(listview, 1);
+    mainLayout->addWidget(listview);
 
-    commit_box = new QCheckBox(i18n("Show c&ommit events"), mainWidget);
+    commit_box = new QCheckBox(i18n("Show c&ommit events"));
     commit_box->setChecked(true);
 
-    checkout_box = new QCheckBox(i18n("Show ch&eckout events"), mainWidget);
+    checkout_box = new QCheckBox(i18n("Show ch&eckout events"));
     checkout_box->setChecked(true);
 
-    tag_box = new QCheckBox(i18n("Show &tag events"), mainWidget);
+    tag_box = new QCheckBox(i18n("Show &tag events"));
     tag_box->setChecked(true);
 
-    other_box = new QCheckBox(i18n("Show &other events"), mainWidget);
+    other_box = new QCheckBox(i18n("Show &other events"));
     other_box->setChecked(true);
 
-    onlyuser_box = new QCheckBox(i18n("Only &user:"), mainWidget);
+    onlyuser_box = new QCheckBox(i18n("Only &user:"));
 
-    onlyfilenames_box = new QCheckBox(i18n("Only &filenames matching:"), mainWidget);
+    onlyfilenames_box = new QCheckBox(i18n("Only &filenames matching:"));
 
-    onlydirnames_box = new QCheckBox(i18n("Only &folders matching:"), mainWidget);
+    onlydirnames_box = new QCheckBox(i18n("Only &folders matching:"));
 
-    user_edit = new KLineEdit(mainWidget);
+    user_edit = new QLineEdit;
     user_edit->setEnabled(false);
 
-    filename_edit = new KLineEdit(mainWidget);
+    filename_edit = new QLineEdit;
     filename_edit->setEnabled(false);
 
-    dirname_edit = new KLineEdit(mainWidget);
+    dirname_edit = new QLineEdit;
     dirname_edit->setEnabled(false);
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help | QDialogButtonBox::Close);
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &HistoryDialog::slotHelp);
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
     connect( onlyuser_box, SIGNAL(toggled(bool)),
              this, SLOT(toggled(bool)) );
@@ -213,8 +213,8 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent)
     connect( dirname_edit, SIGNAL(returnPressed()),
              this, SLOT(choiceChanged()) );
 
-    QGridLayout *grid = new QGridLayout();
-    layout->addLayout( grid );
+    QGridLayout *grid = new QGridLayout;
+    mainLayout->addLayout( grid );
     grid->setColumnStretch(0, 1);
     grid->setColumnStretch(1, 0);
     grid->setColumnStretch(2, 4);
@@ -231,15 +231,15 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent)
     grid->addWidget(dirname_edit,      2, 2);
 
     // no default button because "return" is needed to activate the filters (line edits)
-    button(Help)->setAutoDefault(false);
-    button(Close)->setAutoDefault(false);
+    buttonBox->button(QDialogButtonBox::Help)->setAutoDefault(false);
+    buttonBox->button(QDialogButtonBox::Close)->setAutoDefault(false);
 
-    setHelp("browsinghistory");
+    mainLayout->addWidget(buttonBox);
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     KConfigGroup cg(&partConfig, "HistoryDialog");
-    restoreDialogSize(cg);
+    restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
 
     QByteArray state = cg.readEntry<QByteArray>("HistoryListView", QByteArray());
     listview->header()->restoreState(state);
@@ -249,9 +249,14 @@ HistoryDialog::HistoryDialog(KConfig& cfg, QWidget *parent)
 HistoryDialog::~HistoryDialog()
 {
     KConfigGroup cg(&partConfig, "HistoryDialog");
-    saveDialogSize(cg);
+    cg.writeEntry("geometry", saveGeometry());
 
     cg.writeEntry("HistoryListView", listview->header()->saveState());
+}
+
+void HistoryDialog::slotHelp()
+{
+  KHelpClient::invokeHelp(QLatin1String("browsinghistory"));
 }
 
 
@@ -289,7 +294,7 @@ void HistoryDialog::choiceChanged()
 
 void HistoryDialog::toggled(bool b)
 {
-    KLineEdit *edit = 0;
+    QLineEdit *edit = 0;
 
     if (sender() == onlyuser_box)
         edit = user_edit;
@@ -307,9 +312,9 @@ void HistoryDialog::toggled(bool b)
 }
 
 
-bool HistoryDialog::parseHistory(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService)
+bool HistoryDialog::parseHistory(OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService)
 {
-    setCaption(i18n("CVS History"));
+    setWindowTitle(i18n("CVS History"));
 
     QDBusReply<QDBusObjectPath> job = cvsService->history();
     if( !job.isValid() )
@@ -388,7 +393,6 @@ bool HistoryDialog::parseHistory(OrgKdeCervisiaCvsserviceCvsserviceInterface* cv
     return true;
 }
 
-#include "historydialog.moc"
 
 
 // Local Variables:

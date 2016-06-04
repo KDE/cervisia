@@ -21,14 +21,14 @@
 #ifndef ADDREPOSITORYDIALOG_H
 #define ADDREPOSITORYDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 class QCheckBox;
 class KConfig;
-class KIntNumInput;
-class KLineEdit;
+class QSpinBox;
+class QLineEdit;
 
-class AddRepositoryDialog : public KDialog
+class AddRepositoryDialog : public QDialog
 {
     Q_OBJECT
 
@@ -53,12 +53,12 @@ private slots:
     void compressionToggled(bool checked);
     
 private:
-    KLineEdit*    repo_edit;
-    KLineEdit*    rsh_edit;
-    KLineEdit*    server_edit;
+    QLineEdit*    repo_edit;
+    QLineEdit*    rsh_edit;
+    QLineEdit*    server_edit;
     QCheckBox*    m_useDifferentCompression;
     QCheckBox*    m_retrieveCvsignoreFile;
-    KIntNumInput* m_compressionLevel;
+    QSpinBox*     m_compressionLevel;
     KConfig&      partConfig;
 };
 

@@ -24,7 +24,7 @@
 
 #include <QAction>
 #include <QMenu>
-//#include <QTextDocument>
+#include <QContextMenuEvent>
 
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -32,6 +32,7 @@
 #include "cervisiapart.h"
 #include "cervisiasettings.h"
 #include "cvsjobinterface.h"
+#include "debug.h"
 
 
 ProtocolView::ProtocolView(const QString& appId, QWidget *parent)
@@ -46,13 +47,13 @@ ProtocolView::ProtocolView(const QString& appId, QWidget *parent)
     setUndoRedoEnabled(false);
     setTabChangesFocus(true);
 
-    //kDebug(8050) << "protocol view appId :" << appId;
+    //qCDebug(log_cervisia) << "protocol view appId :" << appId;
 
-    job = new OrgKdeCervisiaCvsserviceCvsjobInterface(appId, "/NonConcurrentJob",QDBusConnection::sessionBus(), this);
+    job = new OrgKdeCervisia5CvsserviceCvsjobInterface(appId, "/NonConcurrentJob",QDBusConnection::sessionBus(), this);
 
-    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia.cvsservice.cvsjob", "jobExited", this, SLOT(slotJobExited(bool,int)));
-    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia.cvsservice.cvsjob", "receivedStdout", this, SLOT(slotReceivedOutput(QString)));
-    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia.cvsservice.cvsjob", "receivedStderr", this, SLOT(slotReceivedOutput(QString)));
+    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia5.cvsservice.cvsjob", "jobExited", this, SLOT(slotJobExited(bool,int)));
+    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia5.cvsservice.cvsjob", "receivedStdout", this, SLOT(slotReceivedOutput(QString)));
+    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia5.cvsservice.cvsjob", "receivedStderr", this, SLOT(slotReceivedOutput(QString)));
 
     configChanged();
 
@@ -101,7 +102,7 @@ void ProtocolView::contextMenuEvent(QContextMenuEvent* event)
 
 void ProtocolView::cancelJob()
 {
-    kDebug(8050);
+    qCDebug(log_cervisia);
     job->cancel();
 }
 
@@ -125,7 +126,7 @@ void ProtocolView::slotReceivedOutput(QString buffer)
 
 void ProtocolView::slotJobExited(bool normalExit, int exitStatus)
 {
-    kDebug(8050);
+    qCDebug(log_cervisia);
     QString msg;
 
     if( normalExit )
@@ -166,7 +167,7 @@ void ProtocolView::appendLine(const QString &line)
 {
     // Escape output line, so that html tags in commit
     // messages aren't interpreted
-    const QString escapedLine = Qt::escape(line);
+    const QString escapedLine = line.toHtmlEscaped();
 
     // When we don't get the output from an update job then
     // just add it to the text edit.
@@ -202,7 +203,6 @@ void ProtocolView::appendHtml(const QString& html)
 }
 
 
-#include "protocolview.moc"
 
 
 // Local Variables:

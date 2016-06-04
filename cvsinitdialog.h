@@ -19,16 +19,17 @@
 #ifndef CVSINITDIALOG_H
 #define CVSINITDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 class KLineEdit;
+class QPushButton;
 
 
 namespace Cervisia
 {
 
 
-class CvsInitDialog : public KDialog
+class CvsInitDialog : public QDialog
 {
     Q_OBJECT
 
@@ -43,6 +44,7 @@ private slots:
 
 private:   
     KLineEdit* m_directoryEdit;
+    QPushButton *okButton;
 };
 
 

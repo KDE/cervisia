@@ -18,42 +18,41 @@
  *
  */
 
-#include <qregexp.h>
+#include <QRegExp>
+#include <QApplication>
+#include <QCommandLineParser>
+#include <QCommandLineOption>
+
 #include <kaboutdata.h>
-#include <kapplication.h>
-#include <kcmdlineargs.h>
-#include <klocale.h>
-#include <kpassworddialog.h>
+#include <KPasswordDialog>
+#include <KLocalizedString>
 
 #include <iostream>
 
+#include "../version.h"
 
 
-extern "C" KDE_EXPORT int kdemain(int argc, char** argv)
+extern "C" Q_DECL_EXPORT int kdemain(int argc, char** argv)
 {
-    KAboutData about("cvsaskpass", 0, ki18n("cvsaskpass"), "0.1",
-                     ki18n("ssh-askpass for the CVS D-Bus Service"),
-                     KAboutData::License_LGPL,
-                     ki18n("Copyright (c) 2003 Christian Loose"));
+    KAboutData about("cvsaskpass", i18n("cvsaskpass"), CERVISIA_VERSION,
+                     i18n("ssh-askpass for the CVS D-Bus Service"),
+                     KAboutLicense::LGPL,
+                     i18n("Copyright (c) 2003 Christian Loose"));
 
-    KCmdLineArgs::init(argc, argv, &about);
+    KAboutData::setApplicationData(about);
 
-    KCmdLineOptions options;
-    options.add("+[prompt]", ki18n("prompt"));
-    KCmdLineArgs::addCmdLineOptions(options);
+    QApplication app(argc, argv);
 
-    // no need to register with the dcop server
-    //KApplication::disableAutoDcopRegistration();
-    KApplication app;
+    QCommandLineParser parser;
+    parser.addPositionalArgument(QLatin1String("prompt"), i18n("prompt"), QLatin1String("[prompt]"));
 
-    // no need for session management
-    app.disableSessionManagement();
+    parser.process(app);
 
-    if( !KCmdLineArgs::parsedArgs()->count() )
+    if( !parser.positionalArguments().count() )
         return 1;
 
     // parse repository name from the passed argument
-    QString prompt = KCmdLineArgs::parsedArgs()->arg(0);
+    QString prompt = parser.positionalArguments()[0];
     QRegExp rx("(.*@.*)'s password:");
 
     KPasswordDialog dlg;
@@ -66,7 +65,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char** argv)
     int res = dlg.exec();
     if( res == KPasswordDialog::Accepted )
     {
-        std::cout << dlg.password().toAscii().constData() << std::endl;
+        std::cout << dlg.password().toUtf8().constData() << std::endl;
         return 0;
     }
 

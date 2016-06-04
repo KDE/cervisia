@@ -26,69 +26,78 @@
 #include <qradiobutton.h>
 #include <QGridLayout>
 #include <QBoxLayout>
+#include <QGroupBox>
 
-#include <klocale.h>
+#include <KConfigGroup>
+#include <KLocalizedString>
+#include <KHelpClient>
+
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 
 WatchDialog::WatchDialog(ActionType action, QWidget *parent)
-    : KDialog(parent)
+    : QDialog(parent)
 {
-    setCaption( (action==Add)? i18n("CVS Watch Add") : i18n("CVS Watch Remove") );
+    setWindowTitle( (action==Add)? i18n("CVS Watch Add") : i18n("CVS Watch Remove") );
     setModal(true);
-    setButtons(Ok | Cancel | Help);
-    setDefaultButton(Ok);
-    showButtonSeparator(true);
 
-    QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
 
-    QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    layout->setSpacing(spacingHint());
-    layout->setMargin(0);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &WatchDialog::slotHelp);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
     QLabel *textlabel = new QLabel
 	( (action==Add)? i18n("Add watches for the following events:")
-          :  i18n("Remove watches for the following events:"), mainWidget );
-    layout->addWidget(textlabel, 0);
+          :  i18n("Remove watches for the following events:"));
+    mainLayout->addWidget(textlabel);
 
-    all_button = new QRadioButton(i18n("&All"), mainWidget);
+    all_button = new QRadioButton(i18n("&All"));
+    mainLayout->addWidget(all_button);
     all_button->setFocus();
     all_button->setChecked(true);
-    layout->addWidget(all_button);
 
-    only_button = new QRadioButton(i18n("&Only:"), mainWidget);
-    layout->addWidget(only_button);
+    only_button = new QRadioButton(i18n("&Only:"));
+    mainLayout->addWidget(only_button);
 
     QGridLayout *eventslayout = new QGridLayout();
-    layout->addLayout( eventslayout );
+    mainLayout->addLayout(eventslayout);
     eventslayout->addItem(new QSpacerItem(20, 0), 0, 0);
     eventslayout->setColumnStretch(0, 0);
     eventslayout->setColumnStretch(1, 1);
 
-    commitbox = new QCheckBox(i18n("&Commits"), mainWidget);
+    commitbox = new QCheckBox(i18n("&Commits"));
     commitbox->setEnabled(false);
     eventslayout->addWidget(commitbox, 0, 1);
 
-    editbox = new QCheckBox(i18n("&Edits"), mainWidget);
+    editbox = new QCheckBox(i18n("&Edits"));
     editbox->setEnabled(false);
     eventslayout->addWidget(editbox, 1, 1);
 
-    uneditbox = new QCheckBox(i18n("&Unedits"), mainWidget);
+    uneditbox = new QCheckBox(i18n("&Unedits"));
     uneditbox->setEnabled(false);
     eventslayout->addWidget(uneditbox, 2, 1);
 
-    QButtonGroup* group = new QButtonGroup(mainWidget);
+    QButtonGroup* group = new QButtonGroup(this);
     group->addButton(all_button);
     group->addButton(only_button);
 
-    connect( only_button, SIGNAL(toggled(bool)),
-             commitbox, SLOT(setEnabled(bool)) );
-    connect( only_button, SIGNAL(toggled(bool)),
-             editbox, SLOT(setEnabled(bool)) );
-    connect( only_button, SIGNAL(toggled(bool)),
-             uneditbox, SLOT(setEnabled(bool)) );
+    mainLayout->addWidget(buttonBox);
 
-    setHelp("watches");
+    connect(only_button, SIGNAL(toggled(bool)), commitbox, SLOT(setEnabled(bool)));
+    connect(only_button, SIGNAL(toggled(bool)), editbox, SLOT(setEnabled(bool)));
+    connect(only_button, SIGNAL(toggled(bool)), uneditbox, SLOT(setEnabled(bool)));
+}
+
+void WatchDialog::slotHelp()
+{
+  KHelpClient::invokeHelp(QLatin1String("watches"));
 }
 
 

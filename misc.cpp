@@ -20,6 +20,7 @@
 
 
 #include "misc.h"
+#include "debug.h"
 
 #include <ctype.h>
 #include <pwd.h>
@@ -30,11 +31,11 @@
 #include <qregexp.h>
 #include <qstringlist.h>
 #include <kemailsettings.h>
-#include <klocale.h>
 #include <kmessagebox.h>
-#include <ktemporaryfile.h>
+#include <KLocalizedString>
+#include <QTemporaryFile>
 #include <kuser.h>
-#include <kdebug.h>
+#include <QDebug>
 
 #include "cvsserviceinterface.h"
 #include "progressdialog.h"
@@ -71,7 +72,7 @@ static int FindWhiteSpace(const QString& str, int index)
 
 
 static const QStringList FetchBranchesAndTags(const QString& searchedType,
-                                              OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService,
+                                              OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService,
                                               QWidget* parent)
 {
     QStringList branchOrTagList;
@@ -180,10 +181,10 @@ QString Cervisia::NormalizeRepository(const QString& repository)
         port     = rx.cap(6);
         path     = rx.cap(7);
 
-        kDebug(8050) << "username=" << userName;
-        kDebug(8050) << "hostname=" << hostName;
-        kDebug(8050) << "port    =" << port;
-        kDebug(8050) << "path    =" << path;
+        qCDebug(log_cervisia) << "username=" << userName;
+        qCDebug(log_cervisia) << "hostname=" << hostName;
+        qCDebug(log_cervisia) << "port    =" << port;
+        qCDebug(log_cervisia) << "path    =" << path;
 
         if( port.isEmpty() )
             port = "2401";
@@ -194,7 +195,7 @@ QString Cervisia::NormalizeRepository(const QString& repository)
         QString canonicalForm = ":pserver:" + userName + '@' + hostName +
                                 ':' + port + path;
 
-        kDebug(8050) << "canonicalForm=" << canonicalForm
+        qCDebug(log_cervisia) << "canonicalForm=" << canonicalForm
                      << endl;
         return canonicalForm;
     }
@@ -240,14 +241,14 @@ QStringList splitLine(QString line, char delim)
 }
 
 
-const QStringList fetchBranches(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService, QWidget* parent)
+const QStringList fetchBranches(OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService, QWidget* parent)
 {
     return FetchBranchesAndTags(QLatin1String("branch"), cvsService,
                                 parent);
 }
 
 
-const QStringList fetchTags(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService, QWidget* parent)
+const QStringList fetchTags(OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService, QWidget* parent)
 {
     return FetchBranchesAndTags(QLatin1String("revision"), cvsService,
                                 parent);
@@ -273,8 +274,7 @@ QString tempFileName(const QString& suffix)
     if (!tempFiles)
         tempFiles = new QStringList;
 
-    KTemporaryFile f;
-    f.setSuffix(suffix);
+    QTemporaryFile f(QDir::tempPath() + QLatin1String("/cervisia_XXXXXX") + suffix);
     f.setAutoRemove(false);
     f.open();
     tempFiles->append(f.fileName());

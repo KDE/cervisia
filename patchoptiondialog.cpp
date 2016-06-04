@@ -20,6 +20,8 @@
 
 using Cervisia::PatchOptionDialog;
 
+#include <KHelpClient>
+
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
@@ -27,30 +29,31 @@ using Cervisia::PatchOptionDialog;
 #include <qgroupbox.h>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-#include <QBoxLayout>
 #include <QButtonGroup>
-
-#include <knuminput.h>
+#include <QSpinBox>
 #include <klocale.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
 
 
 PatchOptionDialog::PatchOptionDialog(QWidget* parent)
-    : KDialog(parent)
+    : QDialog(parent)
 {
-    setButtons(Ok | Cancel | Help);
-    setDefaultButton(Ok);
     setModal(false);
-    showButtonSeparator(true);
 
-    QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
 
-    QBoxLayout* topLayout = new QVBoxLayout(mainWidget);
-    topLayout->setSpacing(spacingHint());
-    topLayout->setMargin(0);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &PatchOptionDialog::slotHelp);
 
     { // format
-      m_formatBtnGroup = new QButtonGroup(mainWidget);
+      m_formatBtnGroup = new QButtonGroup(this);
 
       connect(m_formatBtnGroup, SIGNAL(buttonClicked(int)),
               this,             SLOT(formatChanged(int)));
@@ -61,29 +64,31 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent)
       unifiedFormatBtn->setChecked(true);
       m_formatBtnGroup->addButton(unifiedFormatBtn, 2);
 
-      QGroupBox *box = new QGroupBox(i18n("Output Format"), mainWidget);
+      QGroupBox *box = new QGroupBox(i18n("Output Format"));
+      mainLayout->addWidget(box);
       QVBoxLayout *v = new QVBoxLayout(box);
       v->addWidget(m_formatBtnGroup->button(0));
       v->addWidget(m_formatBtnGroup->button(1));
       v->addWidget(m_formatBtnGroup->button(2));
 
-      topLayout->addWidget(box);
+      mainLayout->addWidget(box);
     }
 
-    QLabel* contextLinesLbl = new QLabel(i18n("&Number of context lines:"),
-                                         mainWidget);
-    m_contextLines = new KIntNumInput(3, mainWidget);
-    m_contextLines->setRange(2, 65535, 1);
-    m_contextLines->setSliderEnabled(false);
+    QLabel* contextLinesLbl = new QLabel(i18n("&Number of context lines:"));
+    m_contextLines = new QSpinBox;
+    m_contextLines->setValue(3);
+    mainLayout->addWidget(m_contextLines);
+    m_contextLines->setRange(2, 65535);
     contextLinesLbl->setBuddy(m_contextLines);
 
     QBoxLayout* contextLinesLayout = new QHBoxLayout();
-    topLayout->addLayout(contextLinesLayout);
+    mainLayout->addLayout(contextLinesLayout);
     contextLinesLayout->addWidget(contextLinesLbl);
     contextLinesLayout->addWidget(m_contextLines);
 
     { // ignore options
-      QButtonGroup *group = new QButtonGroup(mainWidget);
+      QButtonGroup *group = new QButtonGroup(this);
+      group->setExclusive(false);
 
       m_blankLineChk   = new QCheckBox(i18n("Ignore added or removed empty lines"));
       m_spaceChangeChk = new QCheckBox(i18n("Ignore changes in the amount of whitespace"));
@@ -95,20 +100,28 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent)
       group->addButton(m_allSpaceChk);
       group->addButton(m_caseChangesChk);
 
-      QGroupBox *box = new QGroupBox(i18n("Ignore Options"), mainWidget);
+      QGroupBox *box = new QGroupBox(i18n("Ignore Options"));
+      mainLayout->addWidget(box);
       QVBoxLayout *v = new QVBoxLayout(box);
       v->addWidget(m_blankLineChk);
       v->addWidget(m_spaceChangeChk);
       v->addWidget(m_allSpaceChk);
       v->addWidget(m_caseChangesChk);
 
-      topLayout->addWidget(box);
+      mainLayout->addWidget(box);
     }
+
+    mainLayout->addWidget(buttonBox);
 }
 
 
 PatchOptionDialog::~PatchOptionDialog()
 {
+}
+
+void PatchOptionDialog::slotHelp()
+{
+  KHelpClient::invokeHelp(QLatin1String("creatingpatches"));
 }
 
 
@@ -151,4 +164,3 @@ void PatchOptionDialog::formatChanged(int buttonId)
     m_contextLines->setEnabled(enabled);
 }
 
-#include "patchoptiondialog.moc"

@@ -26,8 +26,8 @@
 
 
 class QCheckBox;
-class KIntNumInput;
-class KLineEdit;
+class QSpinBox;
+class QLineEdit;
 class KConfig;
 class KColorButton;
 class KUrlRequester;
@@ -60,6 +60,9 @@ public:
 protected slots:
      virtual void done(int res);
 
+private slots:
+    void slotHelp();
+
 private:
     void readSettings();
     void writeSettings();
@@ -71,11 +74,11 @@ private:
     void addLookAndFeelPage();
 
     KConfig *config;
-    KIntNumInput *contextedit;
-    KIntNumInput *tabwidthedit;
+    QSpinBox *contextedit;
+    QSpinBox *tabwidthedit;
     KUrlRequester *cvspathedit;
-    KLineEdit *usernameedit;
-    KLineEdit *diffoptedit;
+    QLineEdit *usernameedit;
+    QLineEdit *diffoptedit;
     KUrlRequester *extdiffedit;
     QCheckBox *remotestatusbox;
     QCheckBox *localstatusbox;

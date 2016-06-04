@@ -22,18 +22,22 @@
 #include "cervisiashell.h"
 
 #include <kactioncollection.h>
-#include <kapplication.h>
 #include <kconfig.h>
+#include <KSharedConfig>
 #include <kedittoolbar.h>
 #include <khelpmenu.h>
-#include <klocale.h>
 #include <kpluginfactory.h>
 #include <kpluginloader.h>
 #include <kmessagebox.h>
 #include <kshortcutsdialog.h>
 #include <kstandardaction.h>
 #include <kstatusbar.h>
-#include <kurl.h>
+#include <KLocalizedString>
+#include <KAboutData>
+#include <KConfigGroup>
+
+#include <QApplication>
+#include <QAction>
 
 
 CervisiaShell::CervisiaShell( const char *name )
@@ -42,7 +46,7 @@ CervisiaShell::CervisiaShell( const char *name )
     setObjectName( name );
     setXMLFile( "cervisiashellui.rc" );
 
-    KPluginLoader loader("cervisiapart");
+    KPluginLoader loader("cervisiapart5");
     if( KPluginFactory *factory = loader.factory() )
     {
         m_part = factory->create< KParts::ReadOnlyPart >(this);
@@ -55,7 +59,9 @@ CervisiaShell::CervisiaShell( const char *name )
     else
     {
         KMessageBox::detailedError(this, i18n("The Cervisia library could not be loaded."),
-                                   loader.errorString());
+                                   loader.errorString() +
+                                   QLatin1String("\n") + loader.pluginName() +
+                                   QLatin1String("\n") + loader.fileName());
         qApp->quit();
         return;
     }
@@ -72,7 +78,7 @@ CervisiaShell::CervisiaShell( const char *name )
     setAutoSaveSettings("MainWindow", true);
 
     // if the session is restoring, we already read the settings
-    if( !kapp->isSessionRestored() )
+    if( !qApp->isSessionRestored() )
         readSettings();
 }
 
@@ -91,8 +97,7 @@ void CervisiaShell::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    action = KStandardAction::keyBindings( this, SLOT(slotConfigureKeys()),
-                                      actionCollection() );
+    action = KStandardAction::keyBindings( this, SLOT(slotConfigureKeys()), actionCollection() );
     hint = i18n("Allows you to customize the keybindings");
     action->setToolTip( hint );
     action->setWhatsThis( hint );
@@ -102,41 +107,21 @@ void CervisiaShell::setupActions()
     action->setToolTip( hint );
     action->setWhatsThis( hint );
 
-    setHelpMenuEnabled(false);
-    (void) new KHelpMenu(this, componentData().aboutData(), false, actionCollection());
-
-    action = actionCollection()->action("help_contents");
-    hint = i18n("Invokes the KDE help system with the Cervisia documentation");
-    action->setToolTip( hint );
-    action->setWhatsThis( hint );
-
-    action = actionCollection()->action("help_report_bug");
-    hint = i18n("Opens the bug report dialog");
-    action->setToolTip( hint );
-    action->setWhatsThis( hint );
-
-    action = actionCollection()->action("help_about_app");
-    hint = i18n("Displays the version number and copyright information");
-    action->setToolTip( hint );
-    action->setWhatsThis( hint );
-
-    action = actionCollection()->action("help_about_kde");
-    hint = i18n("Displays the information about KDE and its version number");
-    action->setToolTip( hint );
-    action->setWhatsThis( hint );
+    setHelpMenuEnabled(true);
 }
 
 
 void CervisiaShell::openURL()
 {
-    if( !m_lastOpenDir.isEmpty() )
-        m_part->openUrl( KUrl( m_lastOpenDir ) );
+    if ( m_part && !m_lastOpenDir.isEmpty() )
+        m_part->openUrl( QUrl::fromLocalFile( m_lastOpenDir ) );
 }
 
 
-void CervisiaShell::openURL(const KUrl& url)
+void CervisiaShell::openURL(const QUrl& url)
 {
-    m_part->openUrl(url);
+    if ( m_part )
+        m_part->openUrl(url);
 }
 
 
@@ -144,7 +129,7 @@ void CervisiaShell::slotConfigureKeys()
 {
     KShortcutsDialog dlg;
     dlg.addCollection(actionCollection());
-    if( m_part )
+    if ( m_part )
         dlg.addCollection(m_part->actionCollection());
 
     dlg.configure();
@@ -152,7 +137,8 @@ void CervisiaShell::slotConfigureKeys()
 
 void CervisiaShell::slotConfigureToolBars()
 {
-    saveMainWindowSettings( KGlobal::config()->group( autoSaveGroup() ) );
+    KConfigGroup cg(KSharedConfig::openConfig(), autoSaveGroup());
+    saveMainWindowSettings(cg);
     KEditToolBar dlg( factory() );
     connect(&dlg,SIGNAL(newToolbarConfig()),this,SLOT(slotNewToolbarConfig()));
     dlg.exec();
@@ -160,7 +146,8 @@ void CervisiaShell::slotConfigureToolBars()
 
 void CervisiaShell::slotNewToolbarConfig()
 {
-    applyMainWindowSettings( KGlobal::config()->group( autoSaveGroup() ) );
+    KConfigGroup cg(KSharedConfig::openConfig(), autoSaveGroup());
+    applyMainWindowSettings(cg);
 }
 
 void CervisiaShell::closeEvent(QCloseEvent *event)
@@ -176,7 +163,7 @@ void CervisiaShell::readProperties(const KConfigGroup& config)
 
     // if the session is restoring, make sure we open the URL
     // since it's not handled by main()
-    if( kapp->isSessionRestored() )
+    if( qApp->isSessionRestored() )
         openURL();
 }
 
@@ -184,7 +171,7 @@ void CervisiaShell::readProperties(const KConfigGroup& config)
 void CervisiaShell::saveProperties(KConfigGroup & config)
 {
     // Save current working directory (if part was created)
-    if( m_part )
+    if ( m_part )
     {
         config.writePathEntry("Current Directory", m_part->url().path());
 
@@ -196,7 +183,7 @@ void CervisiaShell::saveProperties(KConfigGroup & config)
 
 void CervisiaShell::readSettings()
 {
-    KConfigGroup cg( KGlobal::config(), "Session");
+    KConfigGroup cg(KSharedConfig::openConfig(), "Session");
 
     readProperties(cg);
 }
@@ -204,12 +191,11 @@ void CervisiaShell::readSettings()
 
 void CervisiaShell::writeSettings()
 {
-    KConfigGroup cg( KGlobal::config(), "Session");
+    KConfigGroup cg(KSharedConfig::openConfig(), "Session");
     saveProperties(cg);
 }
 
 
-#include "cervisiashell.moc"
 
 
 // Local Variables:

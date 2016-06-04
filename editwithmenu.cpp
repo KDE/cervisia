@@ -17,31 +17,35 @@
  */
 
 #include "editwithmenu.h"
+#include "debug.h"
 using namespace Cervisia;
 
 #include <QMenu>
 
-#include <kdebug.h>
+#include <QDebug>
 #include <kiconloader.h>
-#include <kmimetype.h>
+
 #include <KMimeTypeTrader>
+#include <KLocalizedString>
 #include <krun.h>
-#include <kurl.h>
+#include <QMimeDatabase>
+#include <QMimeType>
 
 
-EditWithMenu::EditWithMenu(const KUrl& url, QWidget* parent)
+EditWithMenu::EditWithMenu(const QUrl& url, QWidget* parent)
     : QObject(parent)
     , m_menu(0)
     , m_url(url)
 {
-    KMimeType::Ptr type = KMimeType::findByUrl(url, 0, true);
-    if( type->name() == KMimeType::defaultMimeType() )
+    QMimeDatabase db;
+    QMimeType type = db.mimeTypeForFile(url.path(), QMimeDatabase::MatchExtension);
+    if ( !type.isValid() )
     {
-        kDebug(8050) << "Couldn't find mime type!";
+        qCDebug(log_cervisia) << "Couldn't find mime type!";
         return;
     }
 
-    m_offers = KMimeTypeTrader::self()->query(type->name());
+    m_offers = KMimeTypeTrader::self()->query(type.name());
 
     if( !m_offers.isEmpty() )
     {
@@ -50,8 +54,7 @@ EditWithMenu::EditWithMenu(const KUrl& url, QWidget* parent)
         KService::List::ConstIterator it = m_offers.constBegin();
         for( int i = 0 ; it != m_offers.constEnd(); ++it, ++i )
         {
-            QAction* pAction = m_menu->addAction(SmallIcon((*it)->icon()),
-                                                 (*it)->name());
+            QAction* pAction = m_menu->addAction(QIcon::fromTheme((*it)->icon()), (*it)->name());
             pAction->setData(i);
         }
 
@@ -71,12 +74,11 @@ void EditWithMenu::actionTriggered(QAction* action)
 {
     const KService::Ptr service = m_offers[action->data().toInt()];
 
-    KUrl::List list;
+    QList<QUrl> list;
     list.append(m_url);
 
-    KRun::run(*service, list, 0L);
+    KRun::runService(*service, list, 0);
 }
 
 
-#include "editwithmenu.moc"
 

@@ -20,86 +20,96 @@
 
 #include "tagdialog.h"
 
-#include <qcheckbox.h>
 #include <KComboBox>
-#include <qlabel.h>
-#include <KLineEdit>
-#include <qpushbutton.h>
-//Added by qt3to4:
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QBoxLayout>
+#include <KHelpClient>
 #include <klocale.h>
 #include <kmessagebox.h>
+#include <KConfigGroup>
+
+#include <QCheckBox>
+#include <QLabel>
+#include <QLineEdit>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QDialogButtonBox>
+#include <QPushButton>
 
 #include "misc.h"
 #include "cvsserviceinterface.h"
 
 using Cervisia::TagDialog;
 
-TagDialog::TagDialog(ActionType action, OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
+TagDialog::TagDialog(ActionType action, OrgKdeCervisia5CvsserviceCvsserviceInterface* service,
                      QWidget *parent)
-    : KDialog(parent), 
+    : QDialog(parent), 
       act(action),
       cvsService(service),
       branchtag_button(0),
       forcetag_button(0)
 {
-    setButtons(Ok | Cancel | Help);
-    setDefaultButton(Ok);
     setModal(true);
-    showButtonSeparator(true);
-    setCaption( (action==Delete)? i18n("CVS Delete Tag") : i18n("CVS Tag") );
+    setWindowTitle( (action==Delete)? i18n("CVS Delete Tag") : i18n("CVS Tag") );
 
-    QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
 
-    QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    layout->setSpacing(spacingHint());
-    layout->setMargin(0);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &TagDialog::slotHelp);
 
-    if (action == Delete)
-        {
-            tag_combo = new KComboBox(mainWidget);
-            tag_combo->setEditable(true);
-            tag_combo->setFocus();
-            tag_combo->setMinimumWidth(fontMetrics().width('0') * 30);
+    if ( action == Delete )
+    {
+        tag_combo = new KComboBox;
+        mainLayout->addWidget(tag_combo);
+        tag_combo->setEditable(true);
+        tag_combo->setFocus();
+        tag_combo->setMinimumWidth(fontMetrics().width('0') * 30);
 
-            QLabel *tag_label = new QLabel(i18n("&Name of tag:"), mainWidget);
-            tag_label->setBuddy( tag_combo );
+        QLabel *tag_label = new QLabel(i18n("&Name of tag:"));
+        mainLayout->addWidget(tag_label);
+        tag_label->setBuddy(tag_combo);
 
-            QPushButton *tag_button = new QPushButton(i18n("Fetch &List"), mainWidget);
-            connect( tag_button, SIGNAL(clicked()),
-                     this, SLOT(tagButtonClicked()) );
+        QPushButton *tag_button = new QPushButton(i18n("Fetch &List"));
+        mainLayout->addWidget(tag_button);
+        connect(tag_button, SIGNAL(clicked()), this, SLOT(tagButtonClicked()));
 
-            QBoxLayout *tagedit_layout = new QHBoxLayout();
-            layout->addLayout(tagedit_layout);
-            tagedit_layout->addWidget(tag_label);
-            tagedit_layout->addWidget(tag_combo);
-            tagedit_layout->addWidget(tag_button);
-        }
+        QBoxLayout *tagedit_layout = new QHBoxLayout();
+        mainLayout->addLayout(tagedit_layout);
+        tagedit_layout->addWidget(tag_label);
+        tagedit_layout->addWidget(tag_combo);
+        tagedit_layout->addWidget(tag_button);
+    }
     else
-        {
-            tag_edit = new KLineEdit(mainWidget);
-            tag_edit->setFocus();
-            tag_edit->setMinimumWidth(fontMetrics().width('0') * 30);
+    {
+        tag_edit = new QLineEdit;
+        mainLayout->addWidget(tag_edit);
+        tag_edit->setFocus();
+        tag_edit->setMinimumWidth(fontMetrics().width('0') * 30);
 
-            QLabel *tag_label = new QLabel(i18n("&Name of tag:"), mainWidget);
-            tag_label->setBuddy( tag_edit );
+        QLabel *tag_label = new QLabel(i18n("&Name of tag:"));
+        mainLayout->addWidget(tag_label);
+        tag_label->setBuddy( tag_edit );
 
-            QBoxLayout *tagedit_layout = new QHBoxLayout();
-            layout->addLayout(tagedit_layout);
-            tagedit_layout->addWidget(tag_label);
-            tagedit_layout->addWidget(tag_edit);
+        QBoxLayout *tagedit_layout = new QHBoxLayout();
+        mainLayout->addLayout(tagedit_layout);
+        tagedit_layout->addWidget(tag_label);
+        tagedit_layout->addWidget(tag_edit);
 
-            branchtag_button = new QCheckBox(i18n("Create &branch with this tag"), mainWidget);
-            layout->addWidget(branchtag_button);
+        branchtag_button = new QCheckBox(i18n("Create &branch with this tag"));
+        mainLayout->addWidget(branchtag_button);
+        mainLayout->addWidget(branchtag_button);
 
-            forcetag_button = new QCheckBox(i18n("&Force tag creation even if tag already exists"), mainWidget);
-            layout->addWidget(forcetag_button);
-        }
-    connect(this, SIGNAL(okClicked()), this, SLOT(slotOk()));
-    setHelp("taggingbranching");
+        forcetag_button = new QCheckBox(i18n("&Force tag creation even if tag already exists"));
+        mainLayout->addWidget(forcetag_button);
+        mainLayout->addWidget(forcetag_button);
+    }
+
+    connect(okButton, SIGNAL(clicked()), this, SLOT(slotOk()));
+
+    mainLayout->addWidget(buttonBox);
 }
 
 
@@ -120,6 +130,10 @@ QString TagDialog::tag() const
     return act==Delete? tag_combo->currentText() : tag_edit->text();
 }
 
+void TagDialog::slotHelp()
+{
+  KHelpClient::invokeHelp(QLatin1String("taggingbranching"));
+}
 
 void TagDialog::slotOk()
 {
@@ -142,7 +156,7 @@ void TagDialog::slotOk()
         return;
     }
 
-    KDialog::accept();
+    QDialog::accept();
 }
 
 
@@ -153,7 +167,6 @@ void TagDialog::tagButtonClicked()
 }
 
 
-#include "tagdialog.moc"
 
 
 // Local Variables:

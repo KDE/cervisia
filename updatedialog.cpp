@@ -27,85 +27,92 @@
 #include <qstyle.h>
 #include <QBoxLayout>
 
-#include <klineedit.h>
+#include <QLineEdit>
 #include <klocale.h>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 #include "misc.h"
 #include "cvsserviceinterface.h"
 
 
-UpdateDialog::UpdateDialog(OrgKdeCervisiaCvsserviceCvsserviceInterface* service,
+UpdateDialog::UpdateDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface* service,
                            QWidget *parent)
-    : KDialog(parent),
+    : QDialog(parent),
       cvsService(service)
 {
-    setCaption(i18n("CVS Update"));
+    setWindowTitle(i18n("CVS Update"));
     setModal(true);
-    setButtons(Ok | Cancel);
-    setDefaultButton(Ok);
-    showButtonSeparator(true);
 
-    int const iComboBoxMinWidth(40 * fontMetrics().width('0'));
-    int const iWidgetIndent(style()->pixelMetric(QStyle::PM_ExclusiveIndicatorWidth) + 6);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
 
-    QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
-    QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    layout->setSpacing(spacingHint());
-    layout->setMargin(0);
+    const int iComboBoxMinWidth(40 * fontMetrics().width('0'));
+    const int iWidgetIndent(style()->pixelMetric(QStyle::PM_ExclusiveIndicatorWidth) + 6);
 
-    bybranch_button = new QRadioButton(i18n("Update to &branch: "), mainWidget);
+    bybranch_button = new QRadioButton(i18n("Update to &branch: "));
+    mainLayout->addWidget(bybranch_button);
     bybranch_button->setChecked(true);
-    layout->addWidget(bybranch_button);
 
-    branch_combo = new KComboBox(mainWidget);
+    branch_combo = new KComboBox;
+    mainLayout->addWidget(branch_combo);
     branch_combo->setEditable(true);
     branch_combo->setMinimumWidth(iComboBoxMinWidth);
     
-    branch_button = new QPushButton(i18n("Fetch &List"), mainWidget);
-    connect( branch_button, SIGNAL(clicked()),
-             this, SLOT(branchButtonClicked()) );
+    branch_button = new QPushButton(i18n("Fetch &List"));
+    mainLayout->addWidget(branch_button);
+    connect(branch_button, SIGNAL(clicked()), this, SLOT(branchButtonClicked()));
             
-    QBoxLayout *branchedit_layout = new QHBoxLayout();
-    layout->addLayout(branchedit_layout);
+    QBoxLayout *branchedit_layout = new QHBoxLayout;
     branchedit_layout->addSpacing(iWidgetIndent);
     branchedit_layout->addWidget(branch_combo);
     branchedit_layout->addWidget(branch_button);
+    mainLayout->addLayout(branchedit_layout);
     
-    bytag_button = new QRadioButton(i18n("Update to &tag: "), mainWidget);
-    layout->addWidget(bytag_button);
+    bytag_button = new QRadioButton(i18n("Update to &tag: "));
+    mainLayout->addWidget(bytag_button);
 
-    tag_combo = new KComboBox(mainWidget);
+    tag_combo = new KComboBox;
     tag_combo->setEditable(true);
     tag_combo->setMinimumWidth(iComboBoxMinWidth);
+    mainLayout->addWidget(tag_combo);
     
-    tag_button = new QPushButton(i18n("Fetch L&ist"), mainWidget);
-    connect( tag_button, SIGNAL(clicked()),
-             this, SLOT(tagButtonClicked()) );
+    tag_button = new QPushButton(i18n("Fetch L&ist"));
+    mainLayout->addWidget(tag_button);
+    connect(tag_button, SIGNAL(clicked()), this, SLOT(tagButtonClicked()));
             
     QBoxLayout *tagedit_layout = new QHBoxLayout();
-    layout->addLayout(tagedit_layout);
     tagedit_layout->addSpacing(iWidgetIndent);
     tagedit_layout->addWidget(tag_combo);
     tagedit_layout->addWidget(tag_button);
+    mainLayout->addLayout(tagedit_layout);
     
-    bydate_button = new QRadioButton(i18n("Update to &date ('yyyy-mm-dd'):"), mainWidget);
-    layout->addWidget(bydate_button);
+    bydate_button = new QRadioButton(i18n("Update to &date ('yyyy-mm-dd'):"));
+    mainLayout->addWidget(bydate_button);
 
-    date_edit = new KLineEdit(mainWidget);
+    date_edit = new QLineEdit;
+    mainLayout->addWidget(date_edit);
 
-    QBoxLayout *dateedit_layout = new QHBoxLayout();
-    layout->addLayout(dateedit_layout);
+    QBoxLayout *dateedit_layout = new QHBoxLayout;
     dateedit_layout->addSpacing(iWidgetIndent);
     dateedit_layout->addWidget(date_edit);
+    mainLayout->addLayout(dateedit_layout);
 
-    QButtonGroup* group = new QButtonGroup(mainWidget);
+    QButtonGroup* group = new QButtonGroup(this);
     group->addButton(bytag_button);
     group->addButton(bybranch_button);
     group->addButton(bydate_button);
-    connect( group, SIGNAL(buttonClicked(int)),
-             this, SLOT(toggled()) );
+    connect(group, SIGNAL(buttonClicked(int)), this, SLOT(toggled()));
+
+    mainLayout->addWidget(buttonBox);
 
     // dis-/enable the widgets
     toggled();
@@ -166,7 +173,6 @@ void UpdateDialog::toggled()
         date_edit->setFocus();
 }
 
-#include "updatedialog.moc"
 
 
 // Local Variables:

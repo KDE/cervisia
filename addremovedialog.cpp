@@ -25,66 +25,81 @@
 #include <QFileInfo>
 #include <QLabel>
 #include <QStringList>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <QListWidget>
 
 // KDE
-#include <KListWidget>
-#include <KLocale>
+#include <KLocalizedString>
+#include <KConfigGroup>
+#include <KHelpClient>
+#include <KMessageWidget>
 
 
 AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent)
-    : KDialog(parent)
+    : QDialog(parent)
 {
-    setCaption( (action==Add)?       i18n("CVS Add") :
-                (action==AddBinary)? i18n("CVS Add Binary") :
-                                     i18n("CVS Remove") );
+    setWindowTitle((action == Add) ?       i18n("CVS Add") :
+                   (action == AddBinary) ? i18n("CVS Add Binary") :
+                                           i18n("CVS Remove") );
     setModal(true);
-    setButtons(Ok | Cancel | Help);
-    setDefaultButton(Ok);
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
+
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &AddRemoveDialog::slotHelp);
+
     // Also give the focus to the OK button, otherwise the Help button gets focus
     // and is activated by Key_Return
-    setButtonFocus(Ok);
-    showButtonSeparator(true);
-
-    QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
-
-    QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    layout->setSpacing(spacingHint());
-    layout->setMargin(0);
+    okButton->setFocus();
 
     QLabel *textlabel = new QLabel
-        ( (action==Add)?       i18n("Add the following files to the repository:") :
-          (action==AddBinary)? i18n("Add the following binary files to the repository:") :
-                               i18n("Remove the following files from the repository:") ,
-          mainWidget );
-    layout->addWidget(textlabel);
+        ((action == Add) ?       i18n("Add the following files to the repository:") :
+         (action == AddBinary) ? i18n("Add the following binary files to the repository:") :
+                                 i18n("Remove the following files from the repository:"));
 
-    m_listBox = new KListWidget(mainWidget);
+    mainLayout->addWidget(textlabel);
+
+    m_listBox = new QListWidget;
     m_listBox->setSelectionMode(QAbstractItemView::NoSelection);
-    layout->addWidget(m_listBox, 5);
+
+    mainLayout->addWidget(m_listBox);
 
     // Add warning message to dialog when user wants to remove a file
-    if (action==Remove)
+    if ( action == Remove )
     {
-        QBoxLayout *warningLayout = new QHBoxLayout;
+        KMessageWidget *warning =
+            new KMessageWidget(i18n("This will also remove the files from "
+                                    "your local working copy."));
 
-        QLabel *warningIcon = new QLabel(mainWidget);
-        warningIcon->setPixmap(KIcon("dialog-warning").pixmap(32));
-        warningLayout->addWidget(warningIcon);
+        warning->setIcon(QIcon::fromTheme("dialog-warning").pixmap(32));
+        warning->setCloseButtonVisible(false);
 
-        QLabel *warningText = new QLabel(i18n("This will also remove the files from "
-                                              "your local working copy."), mainWidget);
-        warningLayout->addWidget(warningText);
-
-        layout->addSpacing(5);
-        layout->addLayout(warningLayout);
-        layout->addSpacing(5);
+        mainLayout->addSpacing(5);
+        mainLayout->addWidget(warning);
+        mainLayout->addSpacing(5);
     }
 
-    if( action == Remove )
-        setHelp("removingfiles");
+    if ( action == Remove )
+        helpTopic = "removingfiles";
     else
-        setHelp("addingfiles");
+        helpTopic = "addingfiles";
+
+    mainLayout->addWidget(buttonBox);
+    okButton->setDefault(true);
+}
+
+void AddRemoveDialog::slotHelp()
+{
+  KHelpClient::invokeHelp(helpTopic);
 }
 
 

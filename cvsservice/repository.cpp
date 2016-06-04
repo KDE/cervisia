@@ -23,18 +23,17 @@
 #include <qdir.h>
 #include <qfile.h>
 #include <qstring.h>
-//Added by qt3to4:
 #include <QTextStream>
+#include <QStandardPaths>
+#include <QDBusConnection>
 
 #include <ksharedconfig.h>
+#include <kconfiggroup.h>
 #include <kdirwatch.h>
-#include <kstandarddirs.h>
-#include <kglobal.h>
 
 #include "sshagent.h"
-#include <QDBusConnection>
 #include <repositoryadaptor.h>
-#include <kconfiggroup.h>
+
 struct Repository::Private
 {
     Private() : compressionLevel(0) {}
@@ -67,7 +66,7 @@ Repository::Repository()
 
     // other cvsservice instances might change the configuration file
     // so we watch it for changes
-    d->configFileName = KStandardDirs::locate("config", "cvsservicerc");
+    d->configFileName = QStandardPaths::locate(QStandardPaths::GenericConfigLocation, "cvsservicerc");
     KDirWatch* fileWatcher = new KDirWatch(this);
     connect(fileWatcher, SIGNAL(dirty(QString)),
             this, SLOT(slotConfigDirty(QString)));
@@ -88,7 +87,7 @@ Repository::Repository(const QString& repository)
 
     // other cvsservice instances might change the configuration file
     // so we watch it for changes
-    d->configFileName = KStandardDirs::locate("config", "cvsservicerc");
+    d->configFileName = QStandardPaths::locate(QStandardPaths::GenericConfigLocation, "cvsservicerc");
     KDirWatch* fileWatcher = new KDirWatch(this);
     connect(fileWatcher, SIGNAL(dirty(QString)),
             this, SLOT(slotConfigDirty(QString)));
@@ -200,7 +199,7 @@ void Repository::slotConfigDirty(const QString& fileName)
     if( fileName == d->configFileName )
     {
         // reread the configuration data from disk
-        KGlobal::config()->reparseConfiguration();
+        KSharedConfig::openConfig()->reparseConfiguration();
         d->readConfig();
     }
 }
@@ -209,14 +208,14 @@ void Repository::slotConfigDirty(const QString& fileName)
 void Repository::Private::readGeneralConfig()
 {
     // get path to cvs client program
-    KConfigGroup cg(KGlobal::config(), "General");
+    KConfigGroup cg(KSharedConfig::openConfig(), "General");
     client = cg.readPathEntry("CVSPath", "cvs");
 }
 
 
 void Repository::Private::readConfig()
 {
-    KSharedConfig::Ptr config = KGlobal::config();
+    KSharedConfig::Ptr config = KSharedConfig::openConfig();
 
     // Sometimes the location can be unequal to the entry in the CVS/Root.
     //
@@ -268,4 +267,3 @@ void Repository::Private::readConfig()
 }
 
 
-#include "repository.moc"

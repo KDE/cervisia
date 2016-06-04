@@ -21,15 +21,15 @@
 
 #include <QHeaderView>
 #include <QTableView>
-
-#include <qlayout.h>
-//Added by qt3to4:
 #include <QVBoxLayout>
 #include <QBoxLayout>
-#include <kconfig.h>
-#include <klineedit.h>
-#include <klocale.h>
-#include <kconfiggroup.h>
+#include <QLineEdit>
+#include <QDialogButtonBox>
+#include <QPushButton>
+
+#include <KConfig>
+#include <KConfigGroup>
+#include <KLocalizedString>
 
 #include "cvsserviceinterface.h"
 #include "progressdialog.h"
@@ -37,44 +37,41 @@
 
 
 WatchersDialog::WatchersDialog(KConfig& cfg, QWidget* parent)
-    : KDialog(parent)
-    , partConfig(cfg)
+    : QDialog(parent), partConfig(cfg)
 {
-    setButtons(Close);
-    showButtonSeparator(true);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
 
-    QFrame* mainWidget = new QFrame(this);
-    setMainWidget(mainWidget);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
-    QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    layout->setSpacing(spacingHint());
-    layout->setMargin(0);
-
-    m_tableView = new QTableView(mainWidget);
+    m_tableView = new QTableView;
+    mainLayout->addWidget(m_tableView);
     m_tableView->setSelectionMode(QAbstractItemView::NoSelection);
     m_tableView->setSortingEnabled(true);
     m_tableView->verticalHeader()->setVisible(false);
 
-    layout->addWidget(m_tableView, 1);
+    mainLayout->addWidget(buttonBox);
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     KConfigGroup cg(&partConfig, "WatchersDialog");
-    restoreDialogSize(cg);
+    restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
 }
 
 
 WatchersDialog::~WatchersDialog()
 {
     KConfigGroup cg(&partConfig, "WatchersDialog");
-    saveDialogSize(cg);
+    cg.writeEntry("geometry", saveGeometry());
 }
 
 
-bool WatchersDialog::parseWatchers(OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService,
+bool WatchersDialog::parseWatchers(OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService,
                                    const QStringList& files)
 {
-    setCaption(i18n("CVS Watchers"));
+    setWindowTitle(i18n("CVS Watchers"));
 
     QDBusReply<QDBusObjectPath> job = cvsService->watchers(files);
     if( !job.isValid() )

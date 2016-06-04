@@ -27,17 +27,16 @@
 #include <qwidget.h>
 #include <qradiobutton.h>
 #include <QVBoxLayout>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QFontDialog>
+#include <QLineEdit>
 
 #include <kcolorbutton.h>
 #include <kconfig.h>
-#include <kfontdialog.h>
-#include <kglobal.h>
-#include <klineedit.h>
-#include <klocale.h>
-#include <knuminput.h>
 #include <kurlrequester.h>
-#include <kcomponentdata.h>
-#include <kvbox.h>
+#include <KConfigGroup>
+#include <KHelpClient>
 
 #include "misc.h"
 #include "cervisiasettings.h"
@@ -55,7 +54,11 @@ void FontButton::chooseFont()
 {
     QFont newFont(font());
 
-    if (KFontDialog::getFont(newFont, KFontChooser::NoDisplayFlags, this) == QDialog::Rejected)
+    bool ok;
+
+    QFontDialog::getFont(&ok, newFont, this);
+
+    if ( !ok )
         return;
 
     setFont(newFont);
@@ -67,10 +70,12 @@ SettingsDialog::SettingsDialog(KConfig *conf, QWidget *parent)
     : KPageDialog(parent)
 {
     setFaceType( List );
-    setCaption(i18n("Configure Cervisia"));
-    setButtons(Ok | Cancel | Help);
-    setDefaultButton(Ok);
-    showButtonSeparator(true);
+    setWindowTitle(i18n("Configure Cervisia"));
+    setStandardButtons(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+
+    QPushButton *okButton = button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
 
     config = conf;
 
@@ -104,13 +109,20 @@ SettingsDialog::SettingsDialog(KConfig *conf, QWidget *parent)
 
     readSettings();
 
-    setHelp("customization", "cervisia");
+    connect(button(QDialogButtonBox::Help), &QPushButton::clicked, this, &SettingsDialog::slotHelp);
 }
 
 SettingsDialog::~SettingsDialog()
 {
     delete serviceConfig;
 }
+
+
+void SettingsDialog::slotHelp()
+{
+  KHelpClient::invokeHelp(QLatin1String("customization"));
+}
+
 
 void SettingsDialog::readSettings()
 {
@@ -194,14 +206,14 @@ void SettingsDialog::writeSettings()
 
     config->sync();
 
-    CervisiaSettings::self()->writeConfig();
+    CervisiaSettings::self()->save();
 }
 
 void SettingsDialog::done(int res)
 {
     if (res == Accepted)
         writeSettings();
-    KDialog::done(res);
+    QDialog::done(res);
 }
 
 
@@ -212,14 +224,12 @@ void SettingsDialog::addGeneralPage()
 {
     QFrame* generalPage = new QFrame;
     KPageWidgetItem *page = new KPageWidgetItem( generalPage, i18n("General") );
-    page->setIcon( KIcon("applications-system") );
+    page->setIcon( QIcon::fromTheme("applications-system") );
     
     QVBoxLayout* layout = new QVBoxLayout(generalPage);
-    layout->setSpacing(KDialog::spacingHint());
-    layout->setMargin(0);
 
     QLabel *usernamelabel = new QLabel( i18n("&User name for the change log editor:"), generalPage );
-    usernameedit = new KLineEdit(generalPage);
+    usernameedit = new QLineEdit(generalPage);
     usernameedit->setFocus();
     usernamelabel->setBuddy(usernameedit);
 
@@ -246,30 +256,28 @@ void SettingsDialog::addDiffPage()
 {
     QFrame* diffPage = new QFrame;
     KPageWidgetItem *page = new KPageWidgetItem( diffPage, i18n("Diff Viewer") );
-    page->setIcon( KIcon("vcs-diff-cvs-cervisia") );
+    page->setIcon( QIcon::fromTheme("vcs-diff-cvs-cervisia") );
 
     QGridLayout* layout = new QGridLayout(diffPage);
 
     QLabel *contextlabel = new QLabel( i18n("&Number of context lines in diff dialog:"), diffPage );
-    contextedit = new KIntNumInput( 0, diffPage );
+    contextedit = new QSpinBox(diffPage);
     contextedit->setRange(0, 65535);
-    contextedit->setSliderEnabled(false);
     contextlabel->setBuddy(contextedit);
 
     layout->addWidget(contextlabel, 0, 0);
     layout->addWidget(contextedit, 0, 1);
 
     QLabel *diffoptlabel = new QLabel(i18n("Additional &options for cvs diff:"), diffPage);
-    diffoptedit = new KLineEdit(diffPage);
+    diffoptedit = new QLineEdit(diffPage);
     diffoptlabel->setBuddy(diffoptedit);
 
     layout->addWidget(diffoptlabel, 1, 0);
     layout->addWidget(diffoptedit, 1, 1);
 
     QLabel *tabwidthlabel = new QLabel(i18n("Tab &width in diff dialog:"), diffPage);
-    tabwidthedit = new KIntNumInput(0, diffPage);
+    tabwidthedit = new QSpinBox(diffPage);
     tabwidthedit->setRange(1, 16);
-    tabwidthedit->setSliderEnabled(false);
     tabwidthlabel->setBuddy(tabwidthedit);
 
     layout->addWidget(tabwidthlabel, 2, 0);
@@ -293,17 +301,19 @@ void SettingsDialog::addDiffPage()
  */
 void SettingsDialog::addStatusPage()
 {
-    KVBox* statusPage = new KVBox;
+    QWidget* statusPage = new QWidget;
+    QVBoxLayout *statusPageVBoxLayout = new QVBoxLayout(statusPage);
     KPageWidgetItem *page = new KPageWidgetItem( statusPage, i18n("Status") );
-    page->setIcon( KIcon("fork") );
+    page->setIcon( QIcon::fromTheme("fork") );
 
     remotestatusbox = new QCheckBox(i18n("When opening a sandbox from a &remote repository,\n"
                                          "start a File->Status command automatically"), statusPage);
     localstatusbox = new QCheckBox(i18n("When opening a sandbox from a &local repository,\n"
                                         "start a File->Status command automatically"), statusPage);
 
-    // dummy widget to take up the vertical space
-    new QWidget(statusPage);
+    statusPageVBoxLayout->addWidget(remotestatusbox);
+    statusPageVBoxLayout->addWidget(localstatusbox);
+    statusPageVBoxLayout->addStretch();
 
     addPage(page);
 }
@@ -316,14 +326,13 @@ void SettingsDialog::addAdvancedPage()
 {
     QWidget* frame = new QWidget;
     KPageWidgetItem *page = new KPageWidgetItem( frame, i18n("Advanced") );
-    page->setIcon( KIcon("configure") );
+    page->setIcon( QIcon::fromTheme("configure") );
 
     m_advancedPage = new Ui::AdvancedPage;
     m_advancedPage->setupUi(frame);
-    m_advancedPage->kcfg_Timeout->setRange(0, 50000, 100);
-    m_advancedPage->kcfg_Timeout->setSliderEnabled(false);
+    m_advancedPage->kcfg_Timeout->setRange(0, 50000);
+    m_advancedPage->kcfg_Timeout->setSingleStep(100);
     m_advancedPage->kcfg_Compression->setRange(0, 9);
-    m_advancedPage->kcfg_Compression->setSliderEnabled(false);
 
     addPage(page);
 }
@@ -334,11 +343,13 @@ void SettingsDialog::addAdvancedPage()
  */
 void SettingsDialog::addLookAndFeelPage()
 {
-    KVBox* lookPage = new KVBox;
+    QWidget* lookPage = new QWidget;
+    QVBoxLayout *lookPageVBoxLayout = new QVBoxLayout(lookPage);
     KPageWidgetItem *page = new KPageWidgetItem( lookPage, i18n("Appearance") );
-    page->setIcon( KIcon("preferences-desktop-theme") );
+    page->setIcon( QIcon::fromTheme("preferences-desktop-theme") );
 
     QGroupBox* fontGroupBox = new QGroupBox(i18n("Fonts"), lookPage);
+    lookPageVBoxLayout->addWidget(fontGroupBox);
 
     m_protocolFontBox  = new FontButton(i18n("Font for &Protocol Window..."),
                                         fontGroupBox);
@@ -356,6 +367,7 @@ void SettingsDialog::addLookAndFeelPage()
     fontLayout->addWidget( m_changelogFontBox );
 
     QGroupBox* colorGroupBox = new QGroupBox(i18n("Colors"), lookPage);
+    lookPageVBoxLayout->addWidget(colorGroupBox);
 
     QLabel* conflictLabel = new QLabel(i18n("Conflict:"), colorGroupBox);
     m_conflictButton      = new KColorButton(colorGroupBox);
@@ -403,11 +415,11 @@ void SettingsDialog::addLookAndFeelPage()
     colorLayout->addWidget( m_diffDeleteButton, 2, 4 );
 
     m_splitterBox = new QCheckBox(i18n("Split main window &horizontally"), lookPage);
+    lookPageVBoxLayout->addWidget(m_splitterBox);
 
     addPage(page);
 }
 
-#include "settingsdialog.moc"
 
 
 // Local Variables:

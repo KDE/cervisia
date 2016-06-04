@@ -19,60 +19,79 @@
 
 
 #include "annotatedialog.h"
-
 #include "annotateview.h"
 
-#include <kconfig.h>
-#include <kconfiggroup.h>
-#include <klineedit.h>
 #include <klocale.h>
-#include <kpushbutton.h>
+#include <kconfig.h>
+#include <KConfigGroup>
+#include <KHelpClient>
 
+#include <QLineEdit>
+#include <QPushButton>
 #include <QVBoxLayout>
 #include <QInputDialog>
+#include <QDialogButtonBox>
 
 AnnotateDialog::AnnotateDialog(KConfig& cfg, QWidget *parent)
-    : KDialog(parent)
+    : QDialog(parent)
     , partConfig(cfg)
 {
-    setButtons(Close | Help | User1 | User2 | User3);
-    setButtonText(User3, i18n("Find Next"));
-    setButtonText(User2, i18n("Find Prev"));
-    setButtonText(User1, i18n("Go to Line..."));
-    setDefaultButton(User3);
-    setEscapeButton(Close);
-    showButtonSeparator(true);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
 
-    QWidget *vbox = new QWidget(this);
-    QVBoxLayout *layout = new QVBoxLayout(vbox);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help | QDialogButtonBox::Close);
 
-    findEdit = new KLineEdit(vbox);
-    findEdit->setClearButtonShown(true);
-    findEdit->setClickMessage(i18n("Search"));
+    QPushButton *user1Button = new QPushButton;
+    user1Button->setText(i18n("Go to Line..."));
+    user1Button->setAutoDefault(false);
+    buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
 
-    annotate = new AnnotateView(vbox);
+    QPushButton *user2Button = new QPushButton;
+    user2Button->setText(i18n("Find Prev"));
+    user2Button->setAutoDefault(false);
+    buttonBox->addButton(user2Button, QDialogButtonBox::ActionRole);
 
-    layout->addWidget(findEdit);
-    layout->addWidget(annotate);
-    setMainWidget(vbox);
+    QPushButton *user3Button = new QPushButton;
+    user3Button->setText(i18n("Find Next"));
+    buttonBox->addButton(user3Button, QDialogButtonBox::ActionRole);
 
-    connect(button(User3), SIGNAL(clicked()), this, SLOT(findNext()));
-    connect(button(User2), SIGNAL(clicked()), this, SLOT(findPrev()));
-    connect(button(User1), SIGNAL(clicked()), this, SLOT(gotoLine()));
+    buttonBox->button(QDialogButtonBox::Help)->setAutoDefault(false);
 
-    setHelp("annotate");
+    connect(buttonBox, &QDialogButtonBox::rejected, this, &AnnotateDialog::reject);
+    connect(buttonBox, &QDialogButtonBox::helpRequested, this, &AnnotateDialog::slotHelp);
+
+    findEdit = new QLineEdit;
+    findEdit->setClearButtonEnabled(true);
+    findEdit->setPlaceholderText(i18n("Search"));
+
+    annotate = new AnnotateView(this);
+
+    mainLayout->addWidget(findEdit);
+    mainLayout->addWidget(annotate);
+    mainLayout->addWidget(buttonBox);
+
+    connect(user3Button, SIGNAL(clicked()), this, SLOT(findNext()));
+    connect(user2Button, SIGNAL(clicked()), this, SLOT(findPrev()));
+    connect(user1Button, SIGNAL(clicked()), this, SLOT(gotoLine()));
 
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     KConfigGroup cg(&partConfig, "AnnotateDialog");
-    restoreDialogSize(cg);
+    restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
+
+    findEdit->setFocus();
 }
 
 
 AnnotateDialog::~AnnotateDialog()
 {
     KConfigGroup cg(&partConfig, "AnnotateDialog");
-    saveDialogSize(cg);
+    cg.writeEntry("geometry", saveGeometry());
+}
+
+void AnnotateDialog::slotHelp()
+{
+  KHelpClient::invokeHelp(QLatin1String("annotate"));
 }
 
 
@@ -97,15 +116,14 @@ void AnnotateDialog::findPrev()
 
 void AnnotateDialog::gotoLine()
 {
-  bool ok = false;
-  int line = QInputDialog::getInteger(this, i18n("Go to Line"), i18n("Go to line number:"),
-                                      annotate->currentLine(), 1, annotate->lastLine(), 1, &ok);
+    bool ok = false;
+    int line = QInputDialog::getInt(this, i18n("Go to Line"), i18n("Go to line number:"),
+                                    annotate->currentLine(), 1, annotate->lastLine(), 1, &ok);
 
-  if ( ok )
-      annotate->gotoLine(line);
+    if ( ok )
+        annotate->gotoLine(line);
 }
 
-#include "annotatedialog.moc"
 
 // Local Variables:
 // c-basic-offset: 4

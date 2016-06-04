@@ -19,20 +19,25 @@
 
 #include "progressdialog.h"
 
-#include <qlabel.h>
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qtimer.h>
-#include <QGridLayout>
+#include <QString>
+#include <QStringList>
+#include <QTimer>
 #include <QEventLoop>
-#include <KTextEdit>
+#include <QProgressBar>
+#include <QPlainTextEdit>
+#include <QLabel>
+#include <QApplication>
+#include <QDialogButtonBox>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+
+#include <KConfigGroup>
 
 #include <cvsjobinterface.h>
-#include <kanimatedbutton.h>
-#include <kapplication.h>
-
 #include "cervisiasettings.h"
+#include "debug.h"
 
+//---------------------------------------------------------------------
 
 struct ProgressDialog::Private
 {
@@ -41,7 +46,7 @@ struct ProgressDialog::Private
     bool            hasError;
     bool            isDiff;
 
-    OrgKdeCervisiaCvsserviceCvsjobInterface*    cvsJob;
+    OrgKdeCervisia5CvsserviceCvsjobInterface*    cvsJob;
     QString         jobPath;
     QString         buffer;
     QString         errorId1, errorId2;
@@ -49,42 +54,40 @@ struct ProgressDialog::Private
     QEventLoop      eventLoop;
 
     QTimer*         timer;
-    KAnimatedButton*    gear;
-    KTextEdit*      resultbox;
+    QProgressBar*   busy;
+    QPlainTextEdit* resultbox;
 };
 
+//---------------------------------------------------------------------
 
 ProgressDialog::ProgressDialog(QWidget* parent, const QString& heading,const QString &cvsServiceNameService,
                                const QDBusReply<QDBusObjectPath>& jobPath, const QString& errorIndicator,
                                const QString& caption)
-    : KDialog(parent)
+    : QDialog(parent)
     , d(new Private)
 {
-    // initialize private data
-    setCaption(caption);
-    setButtons(Cancel);
-    setDefaultButton(Cancel);
+    setWindowTitle(caption);
     setModal(true);
-    showButtonSeparator(true);
+
+    setupGui(heading);
+
     d->isCancelled = false;
     d->isShown     = false;
     d->hasError    = false;
-    d->isDiff = (heading == QLatin1String("Diff"));
+    d->isDiff      = heading == QLatin1String("Diff");  // cvs returns error status when there is a difference
 
     QDBusObjectPath path = jobPath;
     d->jobPath = path.path();
-    d->cvsJob = new OrgKdeCervisiaCvsserviceCvsjobInterface(cvsServiceNameService, path.path(), QDBusConnection::sessionBus(), this);
+    d->cvsJob = new OrgKdeCervisia5CvsserviceCvsjobInterface(cvsServiceNameService, path.path(), QDBusConnection::sessionBus(), this);
 
-    kDebug(8050) << "cvsServiceNameService:" << cvsServiceNameService
+    qCDebug(log_cervisia) << "cvsServiceNameService:" << cvsServiceNameService
                  << "CvsjobInterface" << path.path() << "valid:" << d->cvsJob->isValid();
 
     d->errorId1 = "cvs " + errorIndicator + ':';
     d->errorId2 = "cvs [" + errorIndicator + " aborted]:";
-
-    setupGui(heading);
-    connect(this,SIGNAL(cancelClicked()),this,SLOT(slotCancel()));
 }
 
+//---------------------------------------------------------------------
 
 ProgressDialog::~ProgressDialog()
 {
@@ -92,50 +95,57 @@ ProgressDialog::~ProgressDialog()
     delete d;
 }
 
+//---------------------------------------------------------------------
 
 void ProgressDialog::setupGui(const QString& heading)
 {
-    QWidget* dummy = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
 
-    setMainWidget(dummy);
+    QLabel *textLabel = new QLabel(heading);
+    mainLayout->addWidget(textLabel);
 
-    QGridLayout* layout = new QGridLayout(dummy);
-
-    QLabel* textLabel = new QLabel(heading, dummy);
-    layout->addWidget(textLabel, 0, 0);
-
-    d->gear = new KAnimatedButton(dummy);
-    d->gear->setIconSize(QSize(32, 32));
-    d->gear->setIcons("kde");
-    layout->addWidget(d->gear, 0, 1);
-
-    d->resultbox = new KTextEdit(dummy);
+    d->resultbox = new QPlainTextEdit;
     d->resultbox->setReadOnly(true);
     QFontMetrics fm(d->resultbox->fontMetrics());
     d->resultbox->setMinimumSize(fm.width("0")*70, fm.lineSpacing()*8);
-    layout->addWidget(d->resultbox, 1, 0, 1, 2);
+    mainLayout->addWidget(d->resultbox);
+
+    QHBoxLayout *hbox = new QHBoxLayout;
+
+    d->busy = new QProgressBar;
+    d->busy->setMinimum(0);
+    d->busy->setMaximum(0);  // min == max  =>  busy indicator
+    hbox->addWidget(d->busy);
+    d->busy->hide();
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Cancel);
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    hbox->addWidget(buttonBox);
+
+    mainLayout->addLayout(hbox);
 }
 
+//---------------------------------------------------------------------
 
 bool ProgressDialog::execute()
 {
     // get command line and display it
     QString cmdLine = d->cvsJob->cvsCommand();
     d->resultbox->insertPlainText(cmdLine);
-    kDebug(8050) << "cmdLine:" << cmdLine;
+    qCDebug(log_cervisia) << "cmdLine:" << cmdLine;
 
     QDBusConnection::sessionBus().connect(QString(), d->jobPath,
-                                          "org.kde.cervisia.cvsservice.cvsjob",
+                                          "org.kde.cervisia5.cvsservice.cvsjob",
                                           "jobExited", this,
                                           SLOT(slotJobExited(bool,int)));
 
     QDBusConnection::sessionBus().connect(QString(), d->jobPath,
-                                          "org.kde.cervisia.cvsservice.cvsjob",
+                                          "org.kde.cervisia5.cvsservice.cvsjob",
                                           "receivedStdout", this,
                                           SLOT(slotReceivedOutputNonGui(QString)));
 
     QDBusConnection::sessionBus().connect(QString(), d->jobPath,
-                                          "org.kde.cervisia.cvsservice.cvsjob",
+                                          "org.kde.cervisia5.cvsservice.cvsjob",
                                           "receivedStderr", this,
                                           SLOT(slotReceivedOutputNonGui(QString)));
 
@@ -160,6 +170,7 @@ bool ProgressDialog::execute()
     return !d->isCancelled;
 }
 
+//---------------------------------------------------------------------
 
 bool ProgressDialog::getLine(QString& line)
 {
@@ -172,16 +183,18 @@ bool ProgressDialog::getLine(QString& line)
     return true;
 }
 
+//---------------------------------------------------------------------
 
 QStringList ProgressDialog::getOutput() const
 {
     return d->output;
 }
 
+//---------------------------------------------------------------------
 
 void ProgressDialog::slotReceivedOutputNonGui(QString buffer)
 {
-    kDebug(8050) << buffer;
+    qCDebug(log_cervisia) << buffer;
 
     d->buffer += buffer;
 
@@ -193,14 +206,16 @@ void ProgressDialog::slotReceivedOutputNonGui(QString buffer)
     }
 }
 
+//---------------------------------------------------------------------
 
 void ProgressDialog::slotReceivedOutput(QString buffer)
 {
-    kDebug(8050) << buffer;
+    qCDebug(log_cervisia) << buffer;
     d->buffer += buffer;
     processOutput();
 }
 
+//---------------------------------------------------------------------
 
 void ProgressDialog::slotJobExited(bool normalExit, int status)
 {
@@ -209,15 +224,15 @@ void ProgressDialog::slotJobExited(bool normalExit, int status)
     if( !d->isShown )
         stopNonGuiPart();
 
-    d->gear->stop();
+    d->busy->hide();
+
     if( !d->buffer.isEmpty() )
     {
         d->buffer += '\n';
         processOutput();
     }
 
-    // cvs diff exit status just says if there are differences
-    if ( !d->isDiff && (status != 0) )  // cvs command exited with error -> show error text
+    if ( (status != 0) && !d->isDiff )  // cvs command exited with error -> show error text
     {
         QString line;
         while ( getLine(line) )
@@ -226,6 +241,7 @@ void ProgressDialog::slotJobExited(bool normalExit, int status)
             d->resultbox->insertPlainText(line);
         }
         startGuiPart();
+        d->busy->hide();
         return;
     }
 
@@ -236,8 +252,9 @@ void ProgressDialog::slotJobExited(bool normalExit, int status)
         d->eventLoop.exit();
 }
 
+//---------------------------------------------------------------------
 
-void ProgressDialog::slotCancel()
+void ProgressDialog::reject()
 {
     d->isCancelled = true;
 
@@ -246,8 +263,11 @@ void ProgressDialog::slotCancel()
         d->cvsJob->cancel();
     else
         d->eventLoop.exit();
+
+    QDialog::reject();
 }
 
+//---------------------------------------------------------------------
 
 void ProgressDialog::slotTimeoutOccurred()
 {
@@ -255,34 +275,37 @@ void ProgressDialog::slotTimeoutOccurred()
     startGuiPart();
 }
 
+//---------------------------------------------------------------------
 
 void ProgressDialog::stopNonGuiPart()
 {
     d->timer->stop();
 
-    QDBusConnection::sessionBus().disconnect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob",
+    QDBusConnection::sessionBus().disconnect(QString(), d->jobPath, "org.kde.cervisia5.cvsservice.cvsjob",
                                              "receivedStdout", this, SLOT(slotReceivedOutputNonGui(QString)));
 
-    QDBusConnection::sessionBus().disconnect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob",
+    QDBusConnection::sessionBus().disconnect(QString(), d->jobPath, "org.kde.cervisia5.cvsservice.cvsjob",
                                              "receivedStderr", this, SLOT(slotReceivedOutputNonGui(QString)));
 }
 
+//---------------------------------------------------------------------
 
 void ProgressDialog::startGuiPart()
 {
-    QDBusConnection::sessionBus().connect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob",
+    QDBusConnection::sessionBus().connect(QString(), d->jobPath, "org.kde.cervisia5.cvsservice.cvsjob",
                                           "receivedStdout", this, SLOT(slotReceivedOutput(QString)));
 
-    QDBusConnection::sessionBus().connect(QString(), d->jobPath, "org.kde.cervisia.cvsservice.cvsjob",
+    QDBusConnection::sessionBus().connect(QString(), d->jobPath, "org.kde.cervisia5.cvsservice.cvsjob",
                                           "receivedStderr", this, SLOT(slotReceivedOutput(QString)));
 
     show();
     d->isShown = true;
 
-    d->gear->start();
+    d->busy->show();
     QApplication::restoreOverrideCursor();
 }
 
+//---------------------------------------------------------------------
 
 void ProgressDialog::processOutput()
 {
@@ -310,3 +333,5 @@ void ProgressDialog::processOutput()
         d->buffer.remove(0, pos+1);
     }
 }
+
+//---------------------------------------------------------------------

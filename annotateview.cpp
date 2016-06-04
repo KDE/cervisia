@@ -23,7 +23,7 @@
 #include <QHeaderView>
 #include <qpainter.h>
 #include <kcolorscheme.h>
-#include <KGlobalSettings>
+#include <QApplication>
 
 #include "cervisiasettings.h"
 #include "loginfo.h"
@@ -136,7 +136,7 @@ void AnnotateViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &
     if ( index.column() == AnnotateViewItem::ContentColumn )
         painter->setFont(view->font());
     else
-        painter->setFont(KGlobalSettings::generalFont());
+        painter->setFont(QApplication::font());
 
     painter->drawText(option.rect.x() + BORDER, option.rect.y(), option.rect.width() - 2*BORDER, option.rect.height(), align, str);
 
@@ -151,7 +151,7 @@ QSize AnnotateViewDelegate::sizeHint(const QStyleOptionViewItem &option, const Q
     if ( index.column() == AnnotateViewItem::ContentColumn )
         opt.font = view->font();
     else
-        opt.font = KGlobalSettings::generalFont();
+        opt.font = QApplication::font();
 
     QSize s = QStyledItemDelegate::sizeHint(opt, index);
     s.setWidth(s.width() + 2*BORDER);
@@ -171,7 +171,7 @@ AnnotateView::AnnotateView(QWidget *parent)
     setRootIsDecorated(false);
     setAutoScroll(false);
     setSelectionMode(QAbstractItemView::SingleSelection); // to be able to show the found item
-    header()->setResizeMode(QHeaderView::ResizeToContents);
+    header()->setSectionResizeMode(QHeaderView::ResizeToContents);
     header()->setStretchLastSection(false);
     header()->hide();
     setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
@@ -238,7 +238,6 @@ void AnnotateView::findText(const QString &textToFind, bool up)
     }
     else
     {
-        clearSelection();
         if ( up )
             item = itemAbove(item);
         else
@@ -249,9 +248,10 @@ void AnnotateView::findText(const QString &textToFind, bool up)
          item = up ? itemAbove(item) : itemBelow(item))
       ;
 
+    setCurrentItem(item);
+
     if ( item )
     {
-        setCurrentItem(item);
         item->setSelected(true);
         scrollToItem(item);
     }

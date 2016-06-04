@@ -21,12 +21,12 @@
 #ifndef CHANGELOGDIALOG_H
 #define CHANGELOGDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
-class KTextEdit;
+class QPlainTextEdit;
 class KConfig;
 
-class ChangeLogDialog : public KDialog
+class ChangeLogDialog : public QDialog
 {
     Q_OBJECT
 public:
@@ -47,7 +47,7 @@ private:
     static Options *options;
 
     QString fname;
-    KTextEdit *edit;
+    QPlainTextEdit *edit;
     KConfig&   partConfig;
 };
 

@@ -22,8 +22,8 @@
 #ifndef CERVISIA_LOGMESSAGEEDIT_H
 #define CERVISIA_LOGMESSAGEEDIT_H
 
-#include <ktextedit.h>
-#include <kcompletion.h>
+#include <KTextEdit>
+#include <KCompletionBase>
 
 
 namespace Cervisia

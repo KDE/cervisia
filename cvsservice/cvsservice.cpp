@@ -19,17 +19,19 @@
  */
 
 #include "cvsservice.h"
+#include "../debug.h"
 
 #include <qstring.h>
 #include <QApplication>
 #include <QHash>
+#include <QDebug>
 
 #include <kconfig.h>
-#include <klocale.h>
 #include <kmessagebox.h>
 #include <kshell.h>
-#include <kglobal.h>
-#include <kdebug.h>
+#include <KSharedConfig>
+#include <KLocalizedString>
+#include <KDBusService>
 
 #include "cvsjob.h"
 #include "cvsloginjob.h"
@@ -39,6 +41,7 @@
 #include "cvsserviceadaptor.h"
 #include <cvsjobadaptor.h>
 #include <kconfiggroup.h>
+
 static const char SINGLE_JOB_ID[]   = "NonConcurrentJob";
 static const char REDIRECT_STDERR[] = "2>&1";
 
@@ -72,8 +75,7 @@ struct CvsService::Private
 CvsService::CvsService()
     : d(new Private)
 {
-
-    (void) new CvsserviceAdaptor(this );
+    (void) new CvsserviceAdaptor(this);
     QDBusConnection::sessionBus().registerObject("/CvsService", this);
  
     // create non-concurrent cvs job
@@ -82,8 +84,7 @@ CvsService::CvsService()
     // create repository manager
     d->repository = new Repository();
 
-    KSharedConfig::Ptr config = KGlobal::config();
-    KConfigGroup cs(config, "General");
+    KConfigGroup cs(KSharedConfig::openConfig(), "General");
     if( cs.readEntry("UseSshAgent", false) )
     {
         // use the existing or start a new ssh-agent
@@ -92,6 +93,8 @@ CvsService::CvsService()
         //bool res = ssh.querySshAgent();
         ssh.querySshAgent();
     }
+
+    new KDBusService(KDBusService::Multiple, this);
 }
 
 
@@ -291,7 +294,7 @@ QDBusObjectPath CvsService::checkout(const QString& workingDir, const QString& r
 QDBusObjectPath CvsService::commit(const QStringList& files, const QString& commitMessage,
                            bool recursive)
 {
-    kDebug(8051) << "d->hasWorkingCopy:" << d->hasWorkingCopy()
+    qCDebug(log_cervisia) << "d->hasWorkingCopy:" << d->hasWorkingCopy()
                  << "d->hasRunningJob:" << d->hasRunningJob();
     if( !d->hasWorkingCopy() || d->hasRunningJob() )
         return QDBusObjectPath();
@@ -308,7 +311,7 @@ QDBusObjectPath CvsService::commit(const QStringList& files, const QString& comm
     *d->singleCvsJob << "-m" << KShell::quoteArg(commitMessage)
                      << CvsServiceUtils::joinFileList(files) << REDIRECT_STDERR;
 
-    kDebug(8051) << "end";
+    qCDebug(log_cervisia) << "end";
     return d->setupNonConcurrentJob();
 }
 
@@ -395,7 +398,7 @@ QDBusObjectPath CvsService::downloadCvsIgnoreFile(const QString& repository,
          << "-q checkout -p CVSROOT/cvsignore >" 
          << KShell::quoteArg(outputFile);
 
-    // return a DCOP reference to the cvs job
+    // return a reference to the cvs job
     return QDBusObjectPath(job->dbusObjectPath());
 }
 
@@ -419,7 +422,7 @@ QDBusObjectPath CvsService::downloadRevision(const QString& fileName,
 
     *job << KShell::quoteArg(fileName) << ">" << KShell::quoteArg(outputFile);
 
-    // return a DCOP reference to the cvs job
+    // return a reference to the cvs job
     return QDBusObjectPath(job->dbusObjectPath());
 }
 
@@ -446,7 +449,7 @@ QDBusObjectPath CvsService::downloadRevision(const QString& fileName,
          << "-r" << KShell::quoteArg(revB)
          << KShell::quoteArg(fileName) << ">" << KShell::quoteArg(outputFileB);
 
-    // return a DCOP reference to the cvs job
+    // return a reference to the cvs job
     return QDBusObjectPath(job->dbusObjectPath());
 }
 
@@ -484,7 +487,7 @@ QDBusObjectPath CvsService::diff(const QString& fileName, const QString& revA,
 
     *job << KShell::quoteArg(fileName);
 
-    // return a DCOP reference to the cvs job
+    // return a reference to the cvs job
     return QDBusObjectPath(job->dbusObjectPath());
 }
 
@@ -533,7 +536,7 @@ QDBusObjectPath CvsService::history()
     // cvs history -e -a
     *job << d->repository->cvsClient() << "history -e -a";
 
-    // return a DCOP reference to the cvs job
+    // return a reference to the cvs job
     return QDBusObjectPath(job->dbusObjectPath());
 }
 
@@ -606,7 +609,7 @@ QDBusObjectPath CvsService::log(const QString& fileName)
     // cvs log [FILE]
     *job << d->repository->cvsClient() << "log" << KShell::quoteArg(fileName);
 
-    // return a DCOP reference to the cvs job
+    // return a reference to the cvs job
     return QDBusObjectPath(job->dbusObjectPath());
 }
 
@@ -632,7 +635,7 @@ QDBusObjectPath CvsService::login(const QString& repository)
     job->setCvsClient(repo.clientOnly().toLocal8Bit());
     job->setRepository(repository.toLocal8Bit());
 
-    // return a DCOP reference to the cvs job
+    // return a reference to the cvs job
     return QDBusObjectPath(job->dbusObjectPath());
 }
 
@@ -658,7 +661,7 @@ QDBusObjectPath CvsService::logout(const QString& repository)
     // cvs -d [REPOSITORY] logout
     *job << repo.cvsClient() << "-d" << repository << "logout";
 
-    // return a DCOP reference to the cvs job
+    // return a reference to the cvs job
     return QDBusObjectPath(job->dbusObjectPath());
 }
 
@@ -682,7 +685,7 @@ QDBusObjectPath CvsService::makePatch(const QString& diffOptions, const QString&
     *job << d->repository->cvsClient() << "diff" << diffOptions << format << "-R"
          << "2>/dev/null";
 
-    // return a DCOP reference to the cvs job
+    // return a reference to the cvs job
     return QDBusObjectPath(job->dbusObjectPath());
 }
 
@@ -705,7 +708,7 @@ QDBusObjectPath CvsService::moduleList(const QString& repository)
     // cvs -d [REPOSITORY] checkout -c
     *job << repo.cvsClient() << "-d" << repository << "checkout -c";
 
-    // return a DCOP reference to the cvs job
+    // return a reference to the cvs job
     return QDBusObjectPath(job->dbusObjectPath());
 }
 
@@ -779,7 +782,7 @@ QDBusObjectPath CvsService::rlog(const QString& repository, const QString& modul
 
     *job << module;
 
-    // return a DCOP reference to the cvs job
+    // return a reference to the cvs job
     return QDBusObjectPath(job->dbusObjectPath());
 }
 
@@ -831,7 +834,7 @@ QDBusObjectPath CvsService::status(const QStringList& files, bool recursive, boo
 
     *job << CvsServiceUtils::joinFileList(files);
 
-    // return a DCOP reference to the cvs job
+    // return a reference to the cvs job
     return QDBusObjectPath(job->dbusObjectPath());
 }
 
@@ -973,4 +976,3 @@ bool CvsService::Private::hasRunningJob()
 }
 
 
-#include "cvsservice.moc"

@@ -19,12 +19,11 @@
 
 #include "tooltip.h"
 
-#include <kglobal.h>
-#include <kglobalsettings.h>
-
 #include <qevent.h>
 #include <qtextdocument.h>
 #include <qtooltip.h>
+#include <QApplication>
+#include <QDesktopWidget>
 
 
 namespace Cervisia
@@ -58,7 +57,7 @@ bool ToolTip::eventFilter(QObject* watched, QEvent* event)
             text = truncateLines(text,
                                  QToolTip::font(),
                                  helpEvent->globalPos(),
-                                 KGlobalSettings::desktopGeometry(parentWidget));
+                                 qApp->desktop()->availableGeometry(parentWidget));
             QToolTip::showText(helpEvent->globalPos(), text, parentWidget, rect);
         }
 
@@ -123,4 +122,3 @@ QString truncateLines(const QString& text,
 } // namespace Cervisia
 
 
-#include "tooltip.moc"

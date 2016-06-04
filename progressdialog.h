@@ -20,13 +20,13 @@
 #ifndef PROGRESSDIALOG_H
 #define PROGRESSDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 #include <QDBusReply>
 
 class QString;
 class QWidget;
 class QDBusObjectPath;
-class ProgressDialog : public KDialog
+class ProgressDialog : public QDialog
 {
     Q_OBJECT
 
@@ -45,7 +45,7 @@ public Q_SLOTS:
     void slotJobExited(bool normalExit, int status);
 
 protected slots:
-    virtual void slotCancel();
+    virtual void reject();
 
 private slots:
     void slotTimeoutOccurred();

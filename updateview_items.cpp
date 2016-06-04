@@ -27,11 +27,10 @@
 #include <QPixmap>
 #include <QTextStream>
 
-#include <kdebug.h>
+#include <QDebug>
 #include <kcolorscheme.h>
-#include <kiconloader.h>
-#include <klocale.h>
 
+#include "debug.h"
 #include "cvsdir.h"
 #include "entry.h"
 #include "misc.h"
@@ -85,7 +84,7 @@ UpdateDirItem::UpdateDirItem(UpdateDirItem* parent,
       m_opened(false)
 {
     setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
-    setIcon(0, SmallIcon("folder"));
+    setIcon(0, QIcon::fromTheme("folder"));
 }
 
 
@@ -95,7 +94,7 @@ UpdateDirItem::UpdateDirItem(UpdateView* parent,
       m_opened(false)
 {
     setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
-    setIcon(0, SmallIcon("folder"));
+    setIcon(0, QIcon::fromTheme("folder"));
 }
 
 
@@ -155,8 +154,8 @@ void UpdateDirItem::updateEntriesItem(const Entry& entry,
             }
             fileItem->setRevTag(entry.m_revision, entry.m_tag);
             fileItem->setDate(entry.m_dateTime);
-            fileItem->setIcon(0, isBinary ? SmallIcon("application-octet-stream") 
-	                                  : QPixmap());
+            fileItem->setIcon(0, isBinary ? QIcon::fromTheme("application-octet-stream") 
+	                                  : QIcon());
         }
         return;
     }
@@ -522,7 +521,7 @@ void UpdateFileItem::setRevTag(const QString& rev, const QString& tag)
 
             const QDateTime tagDateTimeLocal(tagDateTimeUtc.addSecs(localUtcOffset));
 
-            m_entry.m_tag = KGlobal::locale()->formatDateTime(tagDateTimeLocal);
+            m_entry.m_tag = QLocale().toString(tagDateTimeLocal);
         }
         else
             m_entry.m_tag = tag;
@@ -649,7 +648,7 @@ QVariant UpdateFileItem::data(int column, int role) const
 
         case Timestamp:
             if (entry().m_dateTime.isValid())
-                return KGlobal::locale()->formatDateTime(entry().m_dateTime);
+                return QLocale().toString(entry().m_dateTime);
             break;
         }
     }
@@ -731,7 +730,7 @@ UpdateDirItem* findOrCreateDirItem(const QString& dirPath,
                 // - update status (a file item is created for the directory)
                 // - add new directory in Cervisia
                 // - update status
-                kDebug(8050) << "file changed to dir " << dirName;
+                qCDebug(log_cervisia) << "file changed to dir " << dirName;
 
                 // just create a new dir item, createDirItem() will delete the
                 // file item and update the m_itemsByName map
@@ -740,7 +739,7 @@ UpdateDirItem* findOrCreateDirItem(const QString& dirPath,
 
             if (!item)
             {
-                kDebug(8050) << "create dir item " << dirName;
+                qCDebug(log_cervisia) << "create dir item " << dirName;
                 Entry entry;
                 entry.m_name = dirName;
                 entry.m_type = Entry::Dir;

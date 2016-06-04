@@ -459,7 +459,7 @@ void UpdateView::rememberSelection(bool recursive)
             QTreeWidgetItem *childItem = item->child(childNum);
             while ( childItem )
             {
-                // if this item is a dir item and if it is was not
+                // if this item is a dir item and if it was not
                 // inserted already then insert all sub dirs
                 // DON'T CHANGE TESTING ORDER
                 if (isDirItem(childItem) && setItems.insert(childItem).second)

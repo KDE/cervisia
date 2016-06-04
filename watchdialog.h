@@ -20,12 +20,12 @@
 #ifndef WATCHDIALOG_H
 #define WATCHDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 class QRadioButton;
 class QCheckBox;
 
-class WatchDialog : public KDialog
+class WatchDialog : public QDialog
 {
 public:
     enum ActionType { Add, Remove };
@@ -34,6 +34,9 @@ public:
     explicit WatchDialog(ActionType action, QWidget *parent=0);
 
     Events events() const;
+
+private slots:
+    void slotHelp();
 
 private:
     QRadioButton *all_button, *only_button;

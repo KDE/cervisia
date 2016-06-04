@@ -20,11 +20,11 @@
 #ifndef ANNOTATEDIALOG_H
 #define ANNOTATEDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 class AnnotateView;
 class KConfig;
-class KLineEdit;
+class QLineEdit;
 
 namespace Cervisia
 {
@@ -32,7 +32,7 @@ struct LogInfo;
 }
 
 
-class AnnotateDialog : public KDialog
+class AnnotateDialog : public QDialog
 {
     Q_OBJECT
 
@@ -46,12 +46,13 @@ public:
                  bool odd);
 
 private slots:
+    void slotHelp();
     void findNext();
     void findPrev();
     void gotoLine();
 
 private:
-    KLineEdit    *findEdit;
+    QLineEdit    *findEdit;
     AnnotateView *annotate;
     KConfig&      partConfig;
 };

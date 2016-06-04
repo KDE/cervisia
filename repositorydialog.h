@@ -21,21 +21,21 @@
 #ifndef REPOSITORYDIALOG_H
 #define REPOSITORYDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 class QTreeWidget;
 class QTreeWidgetItem;
 class QPushButton;
-class OrgKdeCervisiaCvsserviceCvsserviceInterface;
+class OrgKdeCervisia5CvsserviceCvsserviceInterface;
 class RepositoryListItem;
 class KConfig;
 
-class RepositoryDialog : public KDialog
+class RepositoryDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    RepositoryDialog(KConfig& cfg, OrgKdeCervisiaCvsserviceCvsserviceInterface* cvsService, const QString& cvsServiceInterfaceName, QWidget* parent = 0);
+    RepositoryDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService, const QString& cvsServiceInterfaceName, QWidget* parent = 0);
     virtual ~RepositoryDialog();
 
     void readConfigFile();
@@ -45,6 +45,7 @@ protected slots:
     void slotOk();
 
 private slots:
+    void slotHelp();
     void slotAddClicked();
     void slotModifyClicked();
     void slotRemoveClicked();
@@ -58,7 +59,7 @@ private:
 
 private:
     KConfig&         m_partConfig;
-    OrgKdeCervisiaCvsserviceCvsserviceInterface* m_cvsService;
+    OrgKdeCervisia5CvsserviceCvsserviceInterface* m_cvsService;
     KConfig*         m_serviceConfig;
     QTreeWidget*     m_repoList;
     QPushButton*     m_modifyButton;
