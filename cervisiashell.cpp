@@ -31,7 +31,6 @@
 #include <kmessagebox.h>
 #include <kshortcutsdialog.h>
 #include <kstandardaction.h>
-#include <kstatusbar.h>
 #include <KLocalizedString>
 #include <KAboutData>
 #include <KConfigGroup>

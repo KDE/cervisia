@@ -38,13 +38,13 @@
 #include <QDialogButtonBox>
 #include <QPushButton>
 
-#include <klocale.h>
 #include <kmessagebox.h>
-
-#include <kconfiggroup.h>
+#include <KLocalizedString>
 #include <KConfigGroup>
+#include <KConfig>
 #include <KHelpClient>
 #include <KGuiItem>
+
 #include "misc.h"
 #include "debug.h"
 

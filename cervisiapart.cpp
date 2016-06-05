@@ -27,14 +27,13 @@
 #include <qtextstream.h>
 #include <QSplitter>
 #include <QList>
+#include <QStatusBar>
 
 #include <kaboutdata.h>
-#include <kinputdialog.h>
 #include <kcomponentdata.h>
 #include <knotification.h>
 #include <kshell.h>
 #include <kpropertiesdialog.h>
-#include <kstatusbar.h>
 #include <kstandardaction.h>
 #include <kxmlguifactory.h>
 #include <krun.h>

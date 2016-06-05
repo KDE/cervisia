@@ -21,19 +21,17 @@
 #include "mergedialog.h"
 
 #include <qbuttongroup.h>
-#include <KComboBox>
 #include <qlabel.h>
-#include <qpushbutton.h>
 #include <qradiobutton.h>
 #include <qstyle.h>
 #include <QGridLayout>
-#include <QBoxLayout>
-
-#include <klocale.h>
-#include <KConfigGroup>
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QVBoxLayout>
+
+#include <KComboBox>
+#include <KConfigGroup>
+#include <KLocalizedString>
 
 #include "misc.h"
 #include "cvsserviceinterface.h"

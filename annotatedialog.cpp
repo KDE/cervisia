@@ -21,10 +21,10 @@
 #include "annotatedialog.h"
 #include "annotateview.h"
 
-#include <klocale.h>
 #include <kconfig.h>
 #include <KConfigGroup>
 #include <KHelpClient>
+#include <KLocalizedString>
 
 #include <QLineEdit>
 #include <QPushButton>

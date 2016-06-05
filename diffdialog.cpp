@@ -37,8 +37,9 @@
 #include <QVBoxLayout>
 
 #include <kconfig.h>
-#include <klocale.h>
 #include <kmessagebox.h>
+#include <KLocalizedString>
+
 #include <QTemporaryFile>
 #include <kprocess.h>
 #include <kconfiggroup.h>

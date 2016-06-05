@@ -26,13 +26,13 @@
 #include <qradiobutton.h>
 #include <qstyle.h>
 #include <QBoxLayout>
-
 #include <QLineEdit>
-#include <klocale.h>
-#include <KConfigGroup>
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QVBoxLayout>
+
+#include <KConfigGroup>
+#include <KLocalizedString>
 
 #include "misc.h"
 #include "cvsserviceinterface.h"

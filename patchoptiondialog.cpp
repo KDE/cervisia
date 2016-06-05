@@ -21,6 +21,8 @@
 using Cervisia::PatchOptionDialog;
 
 #include <KHelpClient>
+#include <KConfigGroup>
+#include <KLocalizedString>
 
 #include <qcheckbox.h>
 #include <qlabel.h>
@@ -31,8 +33,6 @@ using Cervisia::PatchOptionDialog;
 #include <QHBoxLayout>
 #include <QButtonGroup>
 #include <QSpinBox>
-#include <klocale.h>
-#include <KConfigGroup>
 #include <QDialogButtonBox>
 #include <QPushButton>
 

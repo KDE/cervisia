@@ -22,9 +22,9 @@
 
 #include <KComboBox>
 #include <KHelpClient>
-#include <klocale.h>
 #include <kmessagebox.h>
 #include <KConfigGroup>
+#include <KLocalizedString>
 
 #include <QCheckBox>
 #include <QLabel>

@@ -21,7 +21,7 @@
 
 #include <qstring.h>
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 
 namespace Cervisia

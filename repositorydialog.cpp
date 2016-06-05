@@ -31,11 +31,11 @@
 #include <QDebug>
 
 #include <kconfig.h>
-#include <klocale.h>
 #include <kmessagebox.h>
 #include <kconfiggroup.h>
 #include <KConfigGroup>
 #include <KHelpClient>
+#include <KLocalizedString>
 
 #include "addrepositorydialog.h"
 #include "cvsserviceinterface.h"

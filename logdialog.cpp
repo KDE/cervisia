@@ -35,9 +35,7 @@
 #include <kconfig.h>
 #include <QDebug>
 #include <kfinddialog.h>
-#include <kglobalsettings.h>
 #include <ktreewidgetsearchline.h>
-#include <klocale.h>
 #include <kmessagebox.h>
 #include <kdatetime.h>
 #include <krun.h>
@@ -45,6 +43,7 @@
 #include <kconfiggroup.h>
 #include <KConfigGroup>
 #include <KHelpClient>
+#include <KLocalizedString>
 
 #include <QDialogButtonBox>
 #include <QPushButton>

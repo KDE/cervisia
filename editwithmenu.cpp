@@ -23,7 +23,6 @@ using namespace Cervisia;
 #include <QMenu>
 
 #include <QDebug>
-#include <kiconloader.h>
 
 #include <KMimeTypeTrader>
 #include <KLocalizedString>

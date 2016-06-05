@@ -26,8 +26,8 @@
 #include <QHeaderView>
 #include <qfileinfo.h>
 #include <qstack.h>
-#include <klocale.h>
 #include <kconfiggroup.h>
+#include <KLocalizedString>
 
 #include "cervisiasettings.h"
 #include "updateview_items.h"

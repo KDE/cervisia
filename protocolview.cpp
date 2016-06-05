@@ -26,8 +26,8 @@
 #include <QMenu>
 #include <QContextMenuEvent>
 
-#include <klocale.h>
 #include <kmessagebox.h>
+#include <KLocalizedString>
 
 #include "cervisiapart.h"
 #include "cervisiasettings.h"

@@ -31,7 +31,7 @@
 #include <kconfiggroup.h>
 #include <QDebug>
 #include <kcolorscheme.h>
-#include <klocale.h>
+#include <KLocalizedString>
 
 #include "cervisiasettings.h"
 #include "debug.h"
