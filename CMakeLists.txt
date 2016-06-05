@@ -28,8 +28,6 @@ add_subdirectory( pics )
 set(_KDECONFDIR_ ${CONFIG_INSTALL_DIR})
 set(_KDEHTMLDIR_ ${HTML_INSTALL_DIR})
 
-configure_file(cervisia.1.cmake ${CMAKE_CURRENT_BINARY_DIR}/cervisia.1 @ONLY)
-
 ########### next target ###############
 
 set(libcervisia_SRCS
@@ -134,7 +132,6 @@ install(FILES org.kde.cervisiapart5.desktop DESTINATION ${SERVICES_INSTALL_DIR} 
 install(FILES cervisiapart.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
 install(FILES cervisiaui.rc  DESTINATION  ${KXMLGUI_INSTALL_DIR}/cervisiapart )
 install(FILES cervisiashellui.rc cervisia.notifyrc  DESTINATION  ${KXMLGUI_INSTALL_DIR}/cervisia )
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/cervisia.1 DESTINATION ${MAN_INSTALL_DIR}/man1)
 
 ecm_install_icons(ICONS
     16-apps-cervisia.png
@@ -144,11 +141,5 @@ ecm_install_icons(ICONS
     DESTINATION ${ICON_INSTALL_DIR}
     THEME hicolor
 )
-
-
-
-#cervisia.1.in: cervisia.pod
-#	pod2man --center "Cervisia" --release "${CERVISIA_VERSION}" \
-#		cervisia.pod > cervisia.1.in
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
