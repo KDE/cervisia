@@ -129,7 +129,7 @@ install(TARGETS cervisiapart5  DESTINATION ${PLUGIN_INSTALL_DIR} )
 ########### install files ###############
 
 install(PROGRAMS org.kde.cervisia5.desktop  DESTINATION  ${XDG_APPS_INSTALL_DIR} )
-install(FILES cervisia.appdata.xml DESTINATION  ${DATA_INSTALL_DIR}/appdata )
+install(FILES org.kde.cervisia.appdata.xml DESTINATION  ${DATA_INSTALL_DIR}/appdata )
 install(FILES org.kde.cervisiapart5.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 install(FILES cervisiapart.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
 install(FILES cervisiaui.rc  DESTINATION  ${KXMLGUI_INSTALL_DIR}/cervisiapart )
