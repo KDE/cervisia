@@ -24,12 +24,11 @@
 #include <qstringlist.h>
 #include <qobject.h>
 #include <QDBusObjectPath>
-#include <kdemacros.h>
 
 class QString;
 
 
-class KDE_EXPORT CvsService : public QObject
+class Q_DECL_EXPORT CvsService : public QObject
 {
     Q_OBJECT
 

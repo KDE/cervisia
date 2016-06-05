@@ -23,8 +23,6 @@
 
 #include <qobject.h>
 
-#include <kdemacros.h>
-
 class QString;
 
 
@@ -32,7 +30,7 @@ class QString;
  * Represents a local or remote cvs repository with
  * its repository-specific configuration data.
  */
-class KDE_EXPORT Repository : public QObject
+class Q_DECL_EXPORT Repository : public QObject
 {
     Q_OBJECT
 public:

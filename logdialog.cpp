@@ -31,15 +31,14 @@
 #include <KTextEdit>
 #include <qtextstream.h>
 #include <qsplitter.h>
+#include <QUrl>
 
 #include <kconfig.h>
 #include <QDebug>
 #include <kfinddialog.h>
 #include <ktreewidgetsearchline.h>
 #include <kmessagebox.h>
-#include <kdatetime.h>
 #include <krun.h>
-#include <kurl.h>
 #include <kconfiggroup.h>
 #include <KConfigGroup>
 #include <KHelpClient>

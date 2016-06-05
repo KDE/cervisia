@@ -30,7 +30,6 @@
 #include <QStatusBar>
 
 #include <kaboutdata.h>
-#include <kcomponentdata.h>
 #include <knotification.h>
 #include <kshell.h>
 #include <kpropertiesdialog.h>
@@ -45,9 +44,11 @@
 #include <krecentfilesaction.h>
 #include <KLocalizedString>
 #include <kparts/guiactivateevent.h>
+#include <KConfig>
+#include <KConfigGroup>
+#include <KSharedConfig>
 
 #include <repositoryinterface.h>
-#include <KConfigGroup>
 #include <QFileDialog>
 #include "progressdialog.h"
 #include "logdialog.h"

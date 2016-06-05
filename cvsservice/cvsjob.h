@@ -23,13 +23,11 @@
 
 #include <qobject.h>
 
-#include <kdemacros.h>
-
 class QString;
 class QStringList;
 
 
-class KDE_EXPORT CvsJob : public QObject
+class Q_DECL_EXPORT CvsJob : public QObject
 {
     Q_OBJECT
 public:

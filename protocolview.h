@@ -24,8 +24,6 @@
 
 #include <QTextEdit>
 
-#include <kdemacros.h>
-
 class OrgKdeCervisia5CvsserviceCvsjobInterface;
 
 

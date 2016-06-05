@@ -23,7 +23,6 @@
 
 #include <qregexp.h>
 #include <QDebug>
-#include <kdeversion.h>
 #include <kprocess.h>
 
 #include <signal.h>
