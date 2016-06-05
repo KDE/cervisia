@@ -34,6 +34,8 @@
 
 extern "C" Q_DECL_EXPORT int kdemain(int argc, char** argv)
 {
+    KLocalizedString::setApplicationDomain("cervisia");
+
     KAboutData about("cvsaskpass", i18n("cvsaskpass"), CERVISIA_VERSION,
                      i18n("ssh-askpass for the CVS D-Bus Service"),
                      KAboutLicense::LGPL,

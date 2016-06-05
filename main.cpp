@@ -136,6 +136,8 @@ static int ShowAnnotateDialog(const QString& fileName)
 
 extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
 {
+    KLocalizedString::setApplicationDomain("cervisia");
+
     QApplication app(argc, argv);
 
     KAboutData about("cervisia", i18n("Cervisia"), CERVISIA_VERSION,

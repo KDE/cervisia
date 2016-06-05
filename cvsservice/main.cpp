@@ -29,6 +29,8 @@
 
 extern "C" Q_DECL_EXPORT int kdemain(int argc, char** argv)
 {
+    KLocalizedString::setApplicationDomain("cervisia");
+
     QApplication app(argc, argv);
 
     KAboutData about("cvsservice5", i18n("CVS D-Bus service"), CERVISIA_VERSION,
