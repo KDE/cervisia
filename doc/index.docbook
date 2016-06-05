@@ -1,7 +1,5 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-  <!ENTITY kappname "&cervisia;">
-  <!ENTITY package "kdesdk">
   <!ENTITY ssh "<command>ssh</command>">
   <!ENTITY rsh "<command>rsh</command>">
   <!ENTITY % addindex "IGNORE">
@@ -65,7 +63,7 @@
 <title>Introduction</title>
 
 <para>
-<ulink url="http://www.kde.org/apps/cervisia/">&cervisia;</ulink> is a
+<ulink url="https://www.kde.org/applications/development/cervisia/">&cervisia;</ulink> is a
 user friendly version control system front-end. The aim is to support &CVS; and
 other version control system programs in a unified interface, featuring conflict
 resolution, difference and history viewers, status for the working copy files,
@@ -259,6 +257,7 @@ case, the key must not be encrypted with a passphrase (see the &ssh; manpage and
 the &CVS;/<acronym>SSH</acronym> <acronym>FAQ</acronym> on
 SourceForge). If you are unsure about these issues, ask your system
 administrator.
+<!--FIXME found no CVS / SSH FAQ on SourceForge, where to link to?-->
 </para>
 
 </listitem>
@@ -2538,9 +2537,9 @@ known as "The Cederqvist". If it is properly installed, you can browse it by
 typing in <userinput>info:/cvs</userinput> into the locationbar of
 &konqueror;, or you can just choose
 <menuchoice><guimenu>Help</guimenu><guimenuitem>CVS
-Manual</guimenuitem></menuchoice> in &cervisia;. An on-line &HTML; version of the
+Manual</guimenuitem></menuchoice> in &cervisia;. An on-line PDF version of the
 Cederqvist is available <ulink
-url="http://ximbiot.com/cvs/manual/">on the web</ulink>.
+url="https://ftp.gnu.org/non-gnu/cvs/source/stable/1.11.21/cederqvist-1.11.21.pdf">on the web</ulink>.
 </para>
 
 <para>
