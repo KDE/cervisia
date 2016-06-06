@@ -29,7 +29,7 @@
 
 <refsynopsisdiv>
 <cmdsynopsis>
-<command>kaffeine</command>
+<command>cervisia</command>
 <arg choice="opt"><option>--resolve <replaceable>file</replaceable></option></arg>
 <arg choice="opt"><option>--log <replaceable>file</replaceable></option></arg>
 <arg choice="opt"><option>--annotate <replaceable>file</replaceable></option></arg>
