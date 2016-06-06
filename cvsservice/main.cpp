@@ -29,7 +29,7 @@
 
 extern "C" Q_DECL_EXPORT int kdemain(int argc, char** argv)
 {
-    KLocalizedString::setApplicationDomain("cervisia");
+    KLocalizedString::setApplicationDomain("cvsservice");
 
     QApplication app(argc, argv);
 
