@@ -87,7 +87,7 @@ url="help:/cervisia ">help:/cervisia</ulink>
 <userinput><command>khelpcenter</command>
 <parameter>help:/cervisia</parameter></userinput>).</member>
 <member>kf5options(1)</member>
-<!--<member>qt5options(1)</member>  only for application with a GUI FIXME use if we have an updated man page qt5options-->
+<member>qt5options(1)</member>
 <member>cvs(1)</member>
 <member>There is also further information available at the
 <ulink url="https://www.kde.org/applications/development/cervisia/">Cervisia Page</ulink></member>
