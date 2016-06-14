@@ -86,8 +86,8 @@ url="help:/cervisia ">help:/cervisia</ulink>
 (either enter this &URL; into &konqueror;, or run
 <userinput><command>khelpcenter</command>
 <parameter>help:/cervisia</parameter></userinput>).</member>
-<member>kf5options(1)</member>
-<member>qt5options(1)</member>
+<member>kf5options(7)</member>
+<member>qt5options(7)</member>
 <member>cvs(1)</member>
 <member>There is also further information available at the
 <ulink url="https://www.kde.org/applications/development/cervisia/">Cervisia Page</ulink></member>
