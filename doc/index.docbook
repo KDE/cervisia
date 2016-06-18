@@ -41,8 +41,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2016-16-06</date>
-<releaseinfo>3.11.0 (Applications 16.08)</releaseinfo>
+<date>2016-06-16</date>
+<releaseinfo>3.11 (Applications 16.08)</releaseinfo>
 
 <abstract>
 <para>&cervisia; provides a graphical view of &CVS;.</para>
