@@ -41,8 +41,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2008-09-08</date>
-<releaseinfo>3.1.1</releaseinfo>
+<date>2016-16-06</date>
+<releaseinfo>3.11.0 (Applications 16.08)</releaseinfo>
 
 <abstract>
 <para>&cervisia; provides a graphical view of &CVS;.</para>
@@ -50,7 +50,6 @@
 
 <keywordset>
 <keyword>KDE</keyword>
-<keyword>kdesdk</keyword>
 <keyword>Cervisia</keyword>
 <keyword>CVS</keyword>
 <keyword>version control</keyword>
@@ -64,13 +63,12 @@
 
 <para>
 <ulink url="https://www.kde.org/applications/development/cervisia/">&cervisia;</ulink> is a
-user friendly version control system front-end. The aim is to support &CVS; and
-other version control system programs in a unified interface, featuring conflict
+user friendly version control system front-end. The aim is to support &CVS;
+in a unified interface, featuring conflict
 resolution, difference and history viewers, status for the working copy files,
 and support for most version control functions. You can get &cervisia;
-by building the kdesdk module or installing the kdesdk package provided by your
-distribution. Currently, only &CVS; is supported, but other version control
-systems may be integrated in the future.
+by building the <ulink url="https://commits.kde.org/cervisia">&cervisia;</ulink>
+program or installing the &cervisia; package provided by your distribution.
 </para>
 
 <para>
@@ -96,7 +94,7 @@ information, &etc;
 The repository holds the project files, and every contributor keeps their
 own local copy, named <firstterm>working copy</firstterm> or
 <firstterm>sandbox</firstterm>; one can then add their modifications to the main
-repository (a process called &quot;committing&quot;) and/or update their own
+repository (a process called <quote>committing</quote>) and/or update their own
 copy to reflect recent changes made by other contributors.
 </para>
 
@@ -110,7 +108,7 @@ copy to reflect recent changes made by other contributors.
 
 <para>
 In this section, we show how to use the basic version control system
-	functionality using &cervisia; to checkout modules from the
+functionality using &cervisia; to checkout modules from the
 repository and work with them. To do that, you must have access to the
 repository as a client, meaning that someone (probably the administrator of
 the &CVS; repository) gave you an account on the server machine. Alternatively,
@@ -253,11 +251,7 @@ with a list of trusted hosts (see the &rsh; manpage).
 With &ssh;, it can be achieved by copying your public key located in the file
 <filename>identity.pub</filename>, located in the
 <filename>$<envar>HOME</envar>/.ssh/</filename> folder to the server. In this
-case, the key must not be encrypted with a passphrase (see the &ssh; manpage and
-the &CVS;/<acronym>SSH</acronym> <acronym>FAQ</acronym> on
-SourceForge). If you are unsure about these issues, ask your system
-administrator.
-<!--FIXME found no CVS / SSH FAQ on SourceForge, where to link to?-->
+case, the key must not be encrypted with a passphrase, see the &ssh; manpage.
 </para>
 
 </listitem>
@@ -578,7 +572,7 @@ major release, there are bugs in the code that should be fixed, but people want
 to add new features to the application too. It is very hard to do both at the
 same time because new features usually introduce new bugs, making it hard to
 track down the old ones. To solve this dilemma, &CVS; lets you create a parallel
-version, that we will call the &quot;stable release branch&quot;, where you can
+version, that we will call the <quote>stable release branch</quote>, where you can
 only add bugfixes, leaving the main branch (HEAD) open for adding new features.
 </para>
 
@@ -633,10 +627,7 @@ button.
 <para>
 Note that it is possible to checkout any existing subfolder of the module,
 without retrieving the rest of the module. Just enter the path to the subfolder 
-as well. For instance, if you want to get only the
-<filename class="directory">doc/cervisia</filename> subfolder of the kdesdk
-module, enter <filename class="directory">kdesdk/doc/cervisia</filename> in this
-field.
+as well.
 </para></listitem>
 </varlistentry>
 
@@ -1425,10 +1416,10 @@ Another possibility is to select one file in the main view and choose
 or right click the marked file and choose
 <guimenuitem>Browse Log...</guimenuitem> from the context menu, in order to open
 the <link linkend="browsinglogs">Browse log dialog</link>. Now, select the
-version you want to create a patch against, as revision &quot;A&quot; and press
+version you want to create a patch against, as revision <quote>A</quote> and press
 the button <guilabel>Create Patch...</guilabel>. This will generate a patch with
 the differences between the <emphasis>marked file</emphasis> in your working
-copy and the version selected as revision &quot;A&quot;.
+copy and the version selected as revision <quote>A</quote>.
 </para>
 
 <para>
@@ -1538,7 +1529,7 @@ dialog.
 
 <para>
 In the annotate dialog, you see in a window the latest version of the selected
-file (or the revision &quot;A&quot; version, in case you launched the annotate
+file (or the revision <quote>A</quote>version, in case you launched the annotate
 dialog from the <link linkend="browsinglogs">Browse log dialog</link>). In
 the columns before the text, you get some information related to the
 latest change in each line. In the first column the line number is
@@ -1633,11 +1624,11 @@ have the ability to search the text of the &CVS; output, by pressing the
 To obtain more information about a certain revision, you can click on it
 either in the list or the tree view. The fields in the middle of the dialog
 are then filled with the complete information provided by <command>cvs
-log</command>. You can mark two revisions, called &quot;A&quot; and &quot;B&quot;, which are
+log</command>. You can mark two revisions, called <quote>A</quote>and <quote>B</quote>, which are
 relevant if you make use of further features provided by the buttons.
-Revision &quot;A&quot; can be chosen with the left mouse button, revision &quot;B&quot;
+Revision <quote>A</quote>can be chosen with the left mouse button, revision <quote>B</quote>
 with the middle one. In the list view, you can also
-navigate with your cursor keys. In order to mark revisions &quot;A&quot; and &quot;B&quot;,
+navigate with your cursor keys. In order to mark revisions <quote>A</quote>and <quote>B</quote>,
 use the shortcuts <keycombo action="simul">&Ctrl;<keycap>A</keycap></keycombo>,
 <keycombo action="simul">&Ctrl;<keycap>B</keycap></keycombo>, respectively.
 Using the <guilabel>CVS Output</guilabel> view, you can click on the
@@ -1647,7 +1638,7 @@ revision B</guilabel> to mark the revisions.
 
 <para>
 If you press the <guibutton>Annotate</guibutton> button, you get a dialog
-showing the text of file belonging to the revision marked as &quot;A&quot;.
+showing the text of file belonging to the revision marked as <quote>A</quote>.
 Every line is prefixed with the information about who edited this last time,
 and at which revision this happened. You can get more information about viewing
 annotated versions in <xref linkend="annotate" />.
@@ -1656,9 +1647,9 @@ annotated versions in <xref linkend="annotate" />.
 <para>
 If you press the <guibutton>Diff</guibutton> button, a <command>cvs diff</command>
 call is issued and you get a dialog in which all the modifications between the
-two marked revisions are shown. If you mark revision &quot;A&quot;, but not
-revision &quot;B&quot;, &cervisia; will generate the modifications between
-the file version marked as revision &quot;A&quot; and the working copy version
+two marked revisions are shown. If you mark revision <quote>A</quote>, but not
+revision <quote>B</quote>, &cervisia; will generate the modifications between
+the file version marked as revision <quote>A</quote>and the working copy version
 of the file. This allows you to view the differences between your version of the
 file and any version available in &CVS;. To make it easy to see the changes,
 different colors are used to mark lines which have been added, removed or simply
@@ -1670,8 +1661,8 @@ changed. You can get more information about viewing differences in
 If you press the <guibutton>Create Patch...</guibutton> button, you get a dialog
 in which you can set the format options for generating a file containing all the
 modifications between the two marked revisions which are shown. If you mark
-revision &quot;A&quot;, but not revision &quot;B&quot;, &cervisia; will generate
-the modifications between the file version marked as revision &quot;A&quot; and
+revision <quote>A</quote>, but not revision <quote>B</quote>, &cervisia; will generate
+the modifications between the file version marked as revision <quote>A</quote>and
 the working copy version of the file. This allows you to generate a patch, or
 difference file, between your version of the file and any version available in
 &CVS;. After configuring the format of the patch in the dialog, and pressing
@@ -1684,7 +1675,7 @@ format options in <xref linkend="creatingpatches" />.
 
 <para>
 If you press the <guibutton>View</guibutton> button, &cervisia; will retrieve
-the revision marked as &quot;A&quot; and display it using the default
+the revision marked as <quote>A</quote>and display it using the default
 application for its file type.
 </para>
 
@@ -1862,7 +1853,7 @@ major release, there are bugs in the code that should be fixed, but people want
 to add new features to the application too. It is very hard to do both at the
 same time because new features usually introduce new bugs, making it hard to
 track down the old ones. To solve this dilemma, &CVS; lets you create a parallel
-version, that we will call the &quot;stable release branch&quot;, where you can
+version, that we will call the <quote>stable release branch</quote>, where you can
 only add bugfixes, leaving the main branch (HEAD) open for adding new features.
 </para>
 
@@ -2570,12 +2561,6 @@ this group, but nevertheless it may be interesting for discussing merits of
 various revision control systems compared to &CVS;.
 </para></listitem>
 
-<listitem><para>
-Last but not least, there is a (low traffic) <ulink
-url="http://lists.sourceforge.net/mailman/listinfo/cervisia-user">&cervisia;
-mailing list</ulink>.
-</para></listitem>
-
 </itemizedlist>
 
 </sect1>
@@ -2593,6 +2578,7 @@ mailing list</ulink>.
 
 <varlistentry>
 <term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;<keycap>O</keycap></keycombo></shortcut>
 <guimenu>File</guimenu><guimenuitem>Open Sandbox...</guimenuitem>
 </menuchoice></term>
 <listitem><para>
@@ -2710,7 +2696,7 @@ the version in the repository (Option <option>-C</option> to <command>cvs
 update</command>).
 </para></listitem>
 </varlistentry>
-
+<!--FIXME Properties-->
 <varlistentry>
 <term><menuchoice>
 <shortcut><keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo></shortcut>
@@ -3062,18 +3048,14 @@ and how to access them. See <xref linkend="accessing-repository" />.
 
 <!-- Settings Menu -->
 <sect2 id="menuoptions">
-<title>The Settings Menu</title>
+<title>The Settings and Help Menu</title>
+
+<para>Apart from the common &kde; <guimenu>Settings</guimenu> and <guimenu>Help</guimenu>
+menus described in the <ulink url="help:/fundamentals/ui.html#menus">Menu</ulink>
+chapter of the &kde; Fundamentals documentation &cervisia; has these application specific menu entries:
+</para>
 
 <variablelist>
-
-<varlistentry>
-<term><menuchoice>
-<guimenu>Settings</guimenu><guimenuitem>Show Toolbar</guimenuitem>
-</menuchoice></term>
-<listitem><para>
-Determines whether the toolbar is displayed.
-</para></listitem>
-</varlistentry>
 
 <varlistentry>
 <term><menuchoice>
@@ -3127,51 +3109,10 @@ whenever you edit a file.
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Settings</guimenu><guimenuitem>Configure Shortcuts...</guimenuitem>
-</menuchoice></term>
-<listitem><para>
-Opens a dialog for configuring shortcuts.
-</para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice>
-<guimenu>Settings</guimenu><guimenuitem>Configure Toolbars...</guimenuitem>
-</menuchoice></term>
-<listitem><para>
-Opens a dialog for configuring &cervisia;'s toolbars.
-</para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice>
-<guimenu>Settings</guimenu><guimenuitem>Configure &cervisia;...</guimenuitem>
-</menuchoice></term>
-<listitem><para>
-Opens a dialog for customizing &cervisia;.
-</para></listitem>
-</varlistentry>
-
-</variablelist>
-
-</sect2>
-
-<!-- Help -->
-<sect2 id="menuhelp">
-<title>The Help Menu</title>
-
-&help.menu.documentation;
-
-<para>Apart from the standard &kde; <guimenu>Help</guimenu> menu items
-described above you will have this additional menu entry:</para>
-
-<variablelist>
-<varlistentry>
-<term><menuchoice>
 <guimenu>Help</guimenu><guimenuitem>CVS Manual</guimenuitem>
 </menuchoice></term>
 <listitem><para>
-Opens the &CVS; info pages in the &kde; help system.
+Opens the &CVS; info pages in the &khelpcenter;.
 </para></listitem>
 </varlistentry>
 </variablelist>
