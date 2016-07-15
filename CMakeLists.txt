@@ -1,6 +1,6 @@
 project(cervisia)
 
-cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
+cmake_minimum_required(VERSION 2.8.12)
 set(QT_MIN_VERSION "5.2.0")
 
 find_package(ECM 1.3.0 REQUIRED NO_MODULE)
@@ -10,12 +10,11 @@ add_definitions(-DTRANSLATION_DOMAIN="cervisia")
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
-include(KDECompilerSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
 include(ECMInstallIcons)
 include(ECMAddAppIcon)
 include(ECMMarkNonGuiExecutable)
 include(FeatureSummary)
-#include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Widgets DBus)
 
