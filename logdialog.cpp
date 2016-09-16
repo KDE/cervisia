@@ -486,9 +486,7 @@ void LogDialog::slotOk()
         QFile::setPermissions(tempFileName, QFileDevice::ReadOwner);
 
         // open file in preferred editor
-        QUrl url;
-        url.setPath(tempFileName);
-        (void) new KRun(url, 0, true);
+        (void) new KRun(QUrl::fromLocalFile(tempFileName), 0, true);
     }
 }
 
