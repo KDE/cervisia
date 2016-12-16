@@ -130,7 +130,8 @@ install(FILES org.kde.cervisia.appdata.xml DESTINATION  ${KDE_INSTALL_METAINFODI
 install(FILES org.kde.cervisiapart5.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 install(FILES cervisiapart.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
 install(FILES cervisiaui.rc  DESTINATION  ${KXMLGUI_INSTALL_DIR}/cervisiapart )
-install(FILES cervisiashellui.rc cervisia.notifyrc  DESTINATION  ${KXMLGUI_INSTALL_DIR}/cervisia )
+install(FILES cervisiashellui.rc DESTINATION  ${KXMLGUI_INSTALL_DIR}/cervisia )
+install(FILES cervisia.notifyrc  DESTINATION  ${KDE_INSTALL_KNOTIFY5RCDIR} )
 
 ecm_install_icons(ICONS
     16-apps-cervisia.png
