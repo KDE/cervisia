@@ -1,7 +1,6 @@
 [Global]
 IconName=cervisia
 Comment=Cervisia CVS Client
-Comment[ast]=Veceru Cervisia CVS
 Comment[bg]=Клиент за CVS Cervisia
 Comment[bs]=CVS klijent cervisia-e
 Comment[ca]=Client de CVS Cervisia
@@ -48,7 +47,6 @@ Comment[zh_TW]=Cervisia CVS 客戶端程式
 
 [Event/cvs_commit_done]
 Name=CVS commit job done
-Name[ast]=Trabayu d'unvíu al CVS fináu
 Name[bs]=CVS posao potvrde gotov
 Name[ca]=S'ha completat la tasca d'entrega al CVS
 Name[ca@valencia]=S'ha completat la tasca d'entrega al CVS
@@ -98,7 +96,6 @@ Name[x-test]=xxCVS commit job donexx
 Name[zh_CN]=CVS 提交任务已完成
 Name[zh_TW]=CVS 提交完成
 Comment=A CVS commit job is done
-Comment[ast]=Un trabayu d'unvíu al CVS finó
 Comment[bs]=CVS posao potvrde je gotov
 Comment[ca]=S'ha completat una tasca d'entrega al CVS
 Comment[ca@valencia]=S'ha completat una tasca d'entrega al CVS

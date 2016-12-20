@@ -1,7 +1,6 @@
 [Desktop Entry]
 GenericName=CVS Frontend
 GenericName[af]=Cvs Voorprogram
-GenericName[ast]=Interface CVS
 GenericName[be]=Інтэрфейс да CVS
 GenericName[bg]=Програма за CVS
 GenericName[bs]=CVS okruženje
@@ -74,7 +73,6 @@ MimeType=inode/directory;
 Name=Cervisia
 Name[af]=Cervisia
 Name[ar]=Cervisia
-Name[ast]=Cervisia
 Name[be]=Cervisia
 Name[bg]=Cervisia
 Name[br]=Cervisia
