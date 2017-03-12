@@ -31,6 +31,7 @@
   <name xml:lang="x-test">xxCervisiaxx</name>
   <name xml:lang="zh-CN">Cervisia</name>
   <name xml:lang="zh-TW">版本控制_Cervisia</name>
+  <summary>A graphical CVS version control system front-end</summary>
   <description>
     <p>
       Cervisia is a user friendly version control system front-end. The aim is to support CVS and other version control system
