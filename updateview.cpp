@@ -456,7 +456,8 @@ void UpdateView::rememberSelection(bool recursive)
         {
             QStack<QTreeWidgetItem *> s;
             int childNum = 0;
-            QTreeWidgetItem *childItem = item->child(childNum);
+            QTreeWidgetItem *startItem = item;
+            QTreeWidgetItem *childItem = startItem->child(childNum);
             while ( childItem )
             {
                 // if this item is a dir item and if it was not
@@ -468,10 +469,19 @@ void UpdateView::rememberSelection(bool recursive)
                         s.push(childChildItem);
                 }
 
-                if ( ++childNum < childItem->childCount() )
-                    childItem = childItem->child(childNum);
+                if ( ++childNum < startItem->childCount() )
+                    childItem = startItem->child(childNum);
                 else
-                    childItem = (s.isEmpty() ? 0 : s.pop());
+                {
+                    if ( s.isEmpty() )
+                        break;
+                    else
+                    {
+                        childItem = s.pop();
+                        startItem = childItem->parent();
+                        childNum = 0;
+                    }
+                }
             }
         }
     }
