@@ -302,6 +302,11 @@ void UpdateDirItem::syncWithEntries()
                 // file date in local time
                 entry.m_dateTime = QFileInfo(path + entry.m_name).lastModified();
 
+                // set milliseconds to 0 since CVS/Entries does only contain seconds resolution
+                QTime t =  entry.m_dateTime.time();
+                t.setHMS(t.hour(), t.minute(), t.second());
+                entry.m_dateTime.setTime(t);
+
                 if( rev == "0" )
                     entry.m_status = Cervisia::LocallyAdded;
                 else if( rev.length() > 2 && rev[0] == '-' )
