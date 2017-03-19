@@ -33,6 +33,7 @@
   <name xml:lang="zh-TW">版本控制_Cervisia</name>
   <summary>A graphical CVS version control system front-end</summary>
   <summary xml:lang="ca">Un frontal gràfic del sistema de control de versions CVS</summary>
+  <summary xml:lang="ca-valencia">Un frontal gràfic del sistema de control de versions CVS</summary>
   <summary xml:lang="cs">Grafické prostředí pro systém pro správu verzí CVS</summary>
   <summary xml:lang="es">Una interfaz gráfica para el sistema de control de versiones CVS</summary>
   <summary xml:lang="nl">Een grafische front-end voor CVS versiecontrolsysteem</summary>
