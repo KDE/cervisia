@@ -61,7 +61,7 @@ UpdateView::UpdateView(KConfig& partConfig, QWidget *parent)
 
     setFilter(NoFilter);
 
-    connect( this, SIGNAL(itemActivated(QTreeWidgetItem *, int)),
+    connect( this, SIGNAL(itemDoubleClicked(QTreeWidgetItem *, int)),
              this, SLOT(itemExecuted(QTreeWidgetItem *, int)) );
 
     connect( this, SIGNAL(itemExpanded(QTreeWidgetItem *)),
