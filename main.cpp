@@ -162,6 +162,8 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
     about.addCredit(i18n("Martin Koller"), i18n("Port to KDE Frameworks 5"),
                     "kollix@aon.at");
 
+    about.setOrganizationDomain(QByteArray("kde.org"));
+
     KAboutData::setApplicationData(about);
 
     QCommandLineParser parser;
