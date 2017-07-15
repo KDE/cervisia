@@ -104,7 +104,7 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInte
     archivelabel->setBuddy(combo);
     connect( combo, SIGNAL(activated(int)), this, SLOT(comboActivated(int)) );
     // make sure that combobox is smaller than the screen
-    combo->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
+    combo->setSizePolicy(QSizePolicy(QSizePolicy::Ignored, QSizePolicy::Fixed));
 
     QLabel *messagelabel = new QLabel(i18n("&Log message:"));
     mainLayout->addWidget(messagelabel);
