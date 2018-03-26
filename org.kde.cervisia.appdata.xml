@@ -53,6 +53,7 @@
   <summary xml:lang="tr">CVS sürüm kontrol sistemi için bir grafik ön-yüzü</summary>
   <summary xml:lang="uk">Графічна оболонка для системи керування версіями CVS</summary>
   <summary xml:lang="x-test">xxA graphical CVS version control system front-endxx</summary>
+  <summary xml:lang="zh-TW">一個圖形化 CVS 版本控制系統終端</summary>
   <description>
     <p>
       Cervisia is a user friendly version control system front-end. The aim is to support CVS and other version control system
