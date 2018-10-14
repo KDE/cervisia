@@ -20,18 +20,15 @@
 
 #include "historydialog.h"
 
-#include <qcheckbox.h>
-#include <qdatetime.h>
-#include <qlayout.h>
-#include <qpushbutton.h>
-#include <qregexp.h>
-#include <QTreeWidget>
-#include <QHeaderView>
-
-#include <QPushButton>
-#include <QLineEdit>
+#include <QCheckBox>
+#include <QDateTime>
 #include <QDialogButtonBox>
+#include <QHeaderView>
+#include <QLayout>
+#include <QLineEdit>
 #include <QPushButton>
+#include <QRegExp>
+#include <QTreeWidget>
 #include <QVBoxLayout>
 
 #include <KConfig>

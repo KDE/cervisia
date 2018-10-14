@@ -131,7 +131,7 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
     bool splitHorz = conf.readEntry("SplitHorizontally",true);
 
     // When we couldn't start the D-Bus service, we just display a QLabel with
-    // an explaination
+    // an explanation
     if( cvsService )
     {
         Qt::Orientation o = splitHorz ? Qt::Vertical : Qt::Horizontal;
@@ -143,8 +143,8 @@ CervisiaPart::CervisiaPart( QWidget *parentWidget,
         update->setFocusPolicy( Qt::StrongFocus );
         update->setContextMenuPolicy(Qt::CustomContextMenu);
         update->setFocus();
-        connect( update, SIGNAL(customContextMenuRequested(const QPoint &)),
-                 this, SLOT(popupRequested(const QPoint &)) );
+        connect( update, SIGNAL(customContextMenuRequested(QPoint)),
+                 this, SLOT(popupRequested(QPoint)) );
 
         connect( update, SIGNAL(fileOpened(QString)),
                  this, SLOT(openFile(QString)) );

@@ -36,7 +36,7 @@ class CervisiaShell : public KParts::MainWindow
     Q_OBJECT
 
 public:
-    CervisiaShell(const char* name=0);
+    explicit CervisiaShell(const char* name=0);
     virtual ~CervisiaShell();
 
 public slots:

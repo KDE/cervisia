@@ -194,8 +194,8 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsser
                                               << i18n("Compression") << i18n("Status"));
     m_repoList->setFocus();
 
-    connect(m_repoList, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)),
-            this, SLOT(slotDoubleClicked(QTreeWidgetItem*, int)));
+    connect(m_repoList, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
+            this, SLOT(slotDoubleClicked(QTreeWidgetItem*,int)));
     connect(m_repoList, SIGNAL(itemSelectionChanged()),
             this,       SLOT(slotSelectionChanged()));
 

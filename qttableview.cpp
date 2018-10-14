@@ -219,7 +219,7 @@ void QtTableView::repaint( int x, int y, int w, int h, bool erase )
 
 /*!
   \overload void QtTableView::repaint( const QRect &r, bool erase )
-  Replaints rectangle \a r. If \a erase is 'true' draws the background
+  Repaints rectangle \a r. If \a erase is 'true' draws the background
   using the palette's background.
 */
 
@@ -1353,7 +1353,7 @@ void QtTableView::paintEvent( QPaintEvent *e )
     // eraseInPaint or not. Reason: a subclass may implement
     // flicker-freeness and encourage the use of repaint(false).
     // The subclass, however, cannot draw all pixels, just those
-    // inside the cells. So QtTableView is reponsible for all pixels
+    // inside the cells. So QtTableView is responsible for all pixels
     // outside the cells.
 
     QRect viewR = viewRect();

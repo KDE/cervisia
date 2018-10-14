@@ -199,7 +199,7 @@ class CervisiaBrowserExtension : public KParts::BrowserExtension
     Q_OBJECT
 
 public:
-    CervisiaBrowserExtension( CervisiaPart * );
+    explicit CervisiaBrowserExtension( CervisiaPart * );
     ~CervisiaBrowserExtension();
 };
 

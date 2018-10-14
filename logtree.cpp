@@ -92,8 +92,8 @@ LogTreeView::LogTreeView(QWidget *parent, const char *name)
     connect(toolTip, SIGNAL(queryToolTip(QPoint,QRect&,QString&)),
             this, SLOT(slotQueryToolTip(QPoint,QRect&,QString&)));
 
-    connect(this, SIGNAL(pressed(const QModelIndex &)),
-            this, SLOT(mousePressed(const QModelIndex &)));
+    connect(this, SIGNAL(pressed(QModelIndex)),
+            this, SLOT(mousePressed(QModelIndex)));
 }
 
 

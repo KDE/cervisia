@@ -68,7 +68,7 @@ bool ToolTip::eventFilter(QObject* watched, QEvent* event)
 }
 
 
-// Primtive routine to truncate the text. size.width() is ignored, only
+// Primitive routine to truncate the text. size.width() is ignored, only
 // size.height() is used at the moment to keep it fast. It doesn't work
 // correct if text lines have different heights.
 QString truncateLines(const QString&      text,

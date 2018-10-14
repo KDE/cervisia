@@ -61,11 +61,11 @@ UpdateView::UpdateView(KConfig& partConfig, QWidget *parent)
 
     setFilter(NoFilter);
 
-    connect( this, SIGNAL(itemDoubleClicked(QTreeWidgetItem *, int)),
-             this, SLOT(itemExecuted(QTreeWidgetItem *, int)) );
+    connect( this, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
+             this, SLOT(itemExecuted(QTreeWidgetItem*,int)) );
 
-    connect( this, SIGNAL(itemExpanded(QTreeWidgetItem *)),
-             this, SLOT(itemExpandedSlot(QTreeWidgetItem *)) );
+    connect( this, SIGNAL(itemExpanded(QTreeWidgetItem*)),
+             this, SLOT(itemExpandedSlot(QTreeWidgetItem*)) );
 
     KConfigGroup cg(&m_partConfig, "UpdateView");
     QByteArray state = cg.readEntry<QByteArray>("Columns", QByteArray());

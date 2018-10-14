@@ -36,7 +36,7 @@ class AnnotateView : public QTreeWidget
     Q_OBJECT
 
 public:
-    AnnotateView(QWidget *parent);
+    explicit AnnotateView(QWidget *parent);
 
     void addLine(const Cervisia::LogInfo& logInfo, const QString& content, bool odd);
 
@@ -60,7 +60,7 @@ class AnnotateViewDelegate: public QStyledItemDelegate
     Q_OBJECT
 
 public:
-    AnnotateViewDelegate(AnnotateView *v) : view(v) { }
+    explicit AnnotateViewDelegate(AnnotateView *v) : view(v) { }
     virtual void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
     virtual QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
 

@@ -99,7 +99,7 @@ private:
 class LogTreeModel : public QAbstractTableModel
 {
 public:
-    LogTreeModel(LogTreeView *t) : logView(t) { }
+    explicit LogTreeModel(LogTreeView *t) : logView(t) { }
 
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const
     {
@@ -127,7 +127,7 @@ class LogTreeDelegate : public QStyledItemDelegate
     Q_OBJECT
 
 public:
-    LogTreeDelegate(LogTreeView *t) : logView(t) { }
+    explicit LogTreeDelegate(LogTreeView *t) : logView(t) { }
     virtual void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
 
 private:
