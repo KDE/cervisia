@@ -415,15 +415,15 @@ void LogTreeView::paintRevisionCell(QPainter *p,
         else
         {
             p->fillRect(rect, KColorScheme(QPalette::Active, KColorScheme::Selection)
-                .background().color().light(130));
+                .background().color().lighter(130));
             p->setPen(KColorScheme(QPalette::Active, KColorScheme::Selection)
-                .foreground().color().light(130));
+                .foreground().color().lighter(130));
             p->drawText(rect, Qt::AlignLeft | Qt::AlignTop, "B");
         }
     }
     else
     {
-        p->drawRoundRect(rect, 10, 10);
+        p->drawRoundedRect(rect, 10, 10);
     }
 
     rect.setY(rect.y() + INSPACE);

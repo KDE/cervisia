@@ -1285,7 +1285,7 @@ void QtTableView::paintEvent( QPaintEvent *e )
     QRect cellR;
     QRect cellUR;
 #ifndef QT_NO_TRANSFORMATIONS
-    QMatrix matrix;
+    QTransform matrix;
 #endif
 
     while ( yPos <= maxY && row < nRows ) {
@@ -1310,7 +1310,7 @@ void QtTableView::paintEvent( QPaintEvent *e )
 
 #ifndef QT_NO_TRANSFORMATIONS
 		matrix.translate( xPos, yPos );
-		paint.setMatrix( matrix );
+		paint.setTransform( matrix );
 		if ( testTableFlags(Tbl_clipCellPainting) ||
 		     frameWidth() > 0 && !winR.contains( cellR ) ) { //##arnt
 #ifdef __GNUC__
@@ -1323,7 +1323,7 @@ void QtTableView::paintEvent( QPaintEvent *e )
 		    paintCell( &paint, row, col );
 		}
 		matrix.reset();
-		paint.setMatrix( matrix );
+		paint.setTransform( matrix );
 #else
 		paint.translate( xPos, yPos );
 		if ( testTableFlags(Tbl_clipCellPainting) ||
