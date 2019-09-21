@@ -36,7 +36,7 @@
 #include "annotatecontroller.h"
 #include "logdialog.h"
 #include "resolvedialog.h"
-#include "version.h"
+#include "cervisia_version.h"
 #include "repositoryinterface.h"
 
 static OrgKdeCervisia5CvsserviceCvsserviceInterface* StartDBusService(const QString& directory)
@@ -140,7 +140,7 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
 
     QApplication app(argc, argv);
 
-    KAboutData about("cervisia", i18n("Cervisia"), CERVISIA_VERSION,
+    KAboutData about("cervisia", i18n("Cervisia"), CERVISIA_VERSION_STRING,
                      i18n("A CVS frontend"), KAboutLicense::GPL,
                      i18n("Copyright (c) 1999-2002 Bernd Gehrmann\n"
                           "Copyright (c) 2002-2008 the Cervisia authors"), QString(),

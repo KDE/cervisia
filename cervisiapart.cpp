@@ -79,7 +79,7 @@
 #include "debug.h"
 
 #include "cvsjobinterface.h"
-#include "version.h"
+#include "cervisia_version.h"
 
 using Cervisia::TagDialog;
 
@@ -746,7 +746,7 @@ KAboutData* CervisiaPart::createAboutData()
 {
     KAboutData* about = new KAboutData(
                             "cervisiapart", i18n("Cervisia Part"),
-                            CERVISIA_VERSION, i18n("A CVS frontend"),
+                            CERVISIA_VERSION_STRING, i18n("A CVS frontend"),
                             KAboutLicense::GPL,
                             i18n("Copyright (c) 1999-2002 Bernd Gehrmann\n"
                                   "Copyright (c) 2002-2008 the Cervisia authors"),

@@ -1,6 +1,13 @@
-project(cervisia)
+cmake_minimum_required(VERSION 3.5)
 
-cmake_minimum_required(VERSION 2.8.12)
+# KDE Application Version, managed by release script
+set(KDE_APPLICATIONS_VERSION_MAJOR "19")
+set(KDE_APPLICATIONS_VERSION_MINOR "11")
+set(KDE_APPLICATIONS_VERSION_MICRO "70")
+set(KDE_APPLICATIONS_VERSION "${KDE_APPLICATIONS_VERSION_MAJOR}.${KDE_APPLICATIONS_VERSION_MINOR}.${KDE_APPLICATIONS_VERSION_MICRO}")
+
+project(cervisia VERSION ${KDE_APPLICATIONS_VERSION})
+
 set(QT_MIN_VERSION "5.2.0")
 
 find_package(ECM 1.3.0 REQUIRED NO_MODULE)
@@ -15,6 +22,9 @@ include(ECMInstallIcons)
 include(ECMAddAppIcon)
 include(ECMMarkNonGuiExecutable)
 include(FeatureSummary)
+include(ECMSetupVersion)
+
+ecm_setup_version(${KDE_APPLICATIONS_VERSION} VARIABLE_PREFIX CERVISIA VERSION_HEADER cervisia_version.h)
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Widgets DBus)
 

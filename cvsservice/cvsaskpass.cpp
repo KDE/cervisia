@@ -29,14 +29,14 @@
 
 #include <iostream>
 
-#include "../version.h"
+#include "../cervisia_version.h"
 
 
 extern "C" Q_DECL_EXPORT int kdemain(int argc, char** argv)
 {
     KLocalizedString::setApplicationDomain("cervisia");
 
-    KAboutData about("cvsaskpass", i18n("cvsaskpass"), CERVISIA_VERSION,
+    KAboutData about("cvsaskpass", i18n("cvsaskpass"), CERVISIA_VERSION_STRING,
                      i18n("ssh-askpass for the CVS D-Bus Service"),
                      KAboutLicense::LGPL,
                      i18n("Copyright (c) 2003 Christian Loose"));
