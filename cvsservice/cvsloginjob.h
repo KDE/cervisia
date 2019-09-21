@@ -35,7 +35,7 @@ class CvsLoginJob : public QObject
 
 public:
     explicit CvsLoginJob(unsigned jobNum);
-    virtual ~CvsLoginJob();
+    ~CvsLoginJob() override;
 
     void setServer(const QString& server);
 

@@ -56,7 +56,7 @@ class LogDialog : public QDialog
 public:
     explicit LogDialog( KConfig& cfg, QWidget *parent=0);
 
-    virtual ~LogDialog();
+    ~LogDialog() override;
 
     bool parseCvsLog(OrgKdeCervisia5CvsserviceCvsserviceInterface* service, const QString& fileName);
 

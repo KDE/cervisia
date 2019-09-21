@@ -38,7 +38,7 @@ class LogPlainView : public QTextBrowser
 
 public:
     explicit LogPlainView(QWidget* parent = 0);
-    ~LogPlainView();
+    ~LogPlainView() override;
 
     void addRevision(const Cervisia::LogInfo& logInfo);
 
@@ -53,7 +53,7 @@ public slots:
     void searchHighlight(const QString& text, int index, int length);
 
 protected:                     
-    virtual void setSource(const QUrl& url);
+    void setSource(const QUrl& url) override;
     
 private:
     KFind* m_find;

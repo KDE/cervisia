@@ -58,7 +58,7 @@ class LogTreeView : public QTableView
 public:
     explicit LogTreeView( QWidget *parent=0, const char *name=0 );
 
-    virtual ~LogTreeView();
+    ~LogTreeView() override;
 
     void addRevision(const Cervisia::LogInfo& logInfo);
     void setSelectedPair(QString selectionA, QString selectionB);
@@ -66,7 +66,7 @@ public:
     void recomputeCellSizes();
     void paintCell(QPainter *p, int row, int col);
 
-    virtual QSize sizeHint() const;
+    QSize sizeHint() const override;
     
     virtual QString text(int row, int col) const;
 
@@ -101,19 +101,19 @@ class LogTreeModel : public QAbstractTableModel
 public:
     explicit LogTreeModel(LogTreeView *t) : logView(t) { }
 
-    virtual int rowCount(const QModelIndex &parent = QModelIndex()) const
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override
     {
         Q_UNUSED(parent)
         return logView->rowCount;
     }
 
-    virtual int columnCount(const QModelIndex &parent = QModelIndex()) const
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override
     {
         Q_UNUSED(parent)
         return logView->columnCount;
     }
 
-    virtual QVariant data(const QModelIndex &, int) const { return QVariant(); }
+    QVariant data(const QModelIndex &, int) const override { return QVariant(); }
 
 private:
     LogTreeView *logView;
@@ -128,7 +128,7 @@ class LogTreeDelegate : public QStyledItemDelegate
 
 public:
     explicit LogTreeDelegate(LogTreeView *t) : logView(t) { }
-    virtual void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
 private:
     LogTreeView *logView;

@@ -55,10 +55,10 @@ class SettingsDialog : public KPageDialog
 
 public:
     explicit SettingsDialog(KConfig *conf, QWidget *parent=0);
-    virtual ~SettingsDialog();
+    ~SettingsDialog() override;
 
 protected slots:
-     virtual void done(int res);
+     void done(int res) override;
 
 private slots:
     void slotHelp();

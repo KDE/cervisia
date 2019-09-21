@@ -69,9 +69,9 @@ public:
         : QTreeWidgetItem(parent), m_date(date)
     {}
 
-    virtual bool operator<(const QTreeWidgetItem &other) const;
+    bool operator<(const QTreeWidgetItem &other) const override;
 
-    virtual QVariant data(int column, int role) const;
+    QVariant data(int column, int role) const override;
 
     bool isCommit();
     bool isCheckout();

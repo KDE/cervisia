@@ -37,12 +37,12 @@ class LogMessageEdit : public KTextEdit, public KCompletionBase
 public:
     explicit LogMessageEdit(QWidget* parent);
 
-    virtual void setCompletedText(const QString& match);
-    virtual void setCompletedItems(const QStringList& items, bool autoSuggest =true);
+    void setCompletedText(const QString& match) override;
+    void setCompletedItems(const QStringList& items, bool autoSuggest =true) override;
 
 protected:
-    virtual void keyPressEvent(QKeyEvent* event);
-    virtual void mousePressEvent(QMouseEvent *event);
+    void keyPressEvent(QKeyEvent* event) override;
+    void mousePressEvent(QMouseEvent *event) override;
 
 private slots:
     void stopCompletion();

@@ -36,7 +36,7 @@ class Q_DECL_EXPORT Repository : public QObject
 public:
     Repository();
     explicit Repository(const QString& repository);
-    ~Repository();
+    ~Repository() override;
 
 public Q_SLOTS:
     /**

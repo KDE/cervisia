@@ -40,7 +40,7 @@ public:
 
     explicit AnnotateDialog( KConfig& cfg, QWidget *parent=0);
 
-    virtual ~AnnotateDialog();
+    ~AnnotateDialog() override;
 
     void addLine(const Cervisia::LogInfo& logInfo, const QString& content,
                  bool odd);

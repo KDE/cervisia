@@ -37,7 +37,7 @@ class CervisiaShell : public KParts::MainWindow
 
 public:
     explicit CervisiaShell(const char* name=0);
-    virtual ~CervisiaShell();
+    ~CervisiaShell() override;
 
 public slots:
     void openURL();
@@ -51,9 +51,9 @@ protected slots:
 protected:
     void setupActions();
 
-    void closeEvent(QCloseEvent *event);
-    virtual void readProperties(const KConfigGroup& config);
-    virtual void saveProperties(KConfigGroup& config);
+    void closeEvent(QCloseEvent *event) override;
+    void readProperties(const KConfigGroup& config) override;
+    void saveProperties(KConfigGroup& config) override;
 
 private:
     void readSettings();

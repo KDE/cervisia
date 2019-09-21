@@ -39,12 +39,12 @@ public:
     enum ChooseType { ChA, ChB, ChAB, ChBA, ChEdit };
 
     explicit ResolveDialog(KConfig& cfg, QWidget *parent=0);
-    virtual ~ResolveDialog();
+    ~ResolveDialog() override;
 
     bool parseFile(const QString &name);
 
 protected:
-    virtual void keyPressEvent(QKeyEvent *e);
+    void keyPressEvent(QKeyEvent *e) override;
 
 private slots:
     void backClicked();

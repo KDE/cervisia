@@ -55,7 +55,7 @@ class CervisiaPart : public KParts::ReadOnlyPart
 
 public:
     CervisiaPart( QWidget *parentWidget, QObject *parent, const QVariantList& args = QVariantList());
-    virtual ~CervisiaPart();
+    ~CervisiaPart() override;
 
     /**
      * Get the config object for the part's instance.
@@ -68,8 +68,8 @@ public:
 
 public slots:
     // unused because we overwrite the default behaviour of openUrl()
-    virtual bool openFile() { return true; }
-    virtual bool openUrl( const QUrl & );
+    bool openFile() override { return true; }
+    bool openUrl( const QUrl & ) override;
 
     void openFile(QString filename);
     void openFiles(const QStringList &filenames);
@@ -142,7 +142,7 @@ private slots:
     void slotSetupStatusBar();
 
 protected:
-    virtual void guiActivateEvent(KParts::GUIActivateEvent* event);
+    void guiActivateEvent(KParts::GUIActivateEvent* event) override;
 
 private:
     enum JobType { Unknown, Commit };
@@ -200,7 +200,7 @@ class CervisiaBrowserExtension : public KParts::BrowserExtension
 
 public:
     explicit CervisiaBrowserExtension( CervisiaPart * );
-    ~CervisiaBrowserExtension();
+    ~CervisiaBrowserExtension() override;
 };
 
 #endif // CERVISIAPART_H

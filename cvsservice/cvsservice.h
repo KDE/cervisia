@@ -34,7 +34,7 @@ class Q_DECL_EXPORT CvsService : public QObject
 
 public:
     CvsService();
-    ~CvsService();
+    ~CvsService() override;
 
 public Q_SLOTS:
     /**

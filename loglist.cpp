@@ -44,7 +44,7 @@ public:
 
     LogListViewItem(QTreeWidget* list, const Cervisia::LogInfo& logInfo);
 
-    virtual bool operator<(const QTreeWidgetItem &other) const;
+    bool operator<(const QTreeWidgetItem &other) const override;
 
 private:
     static QString truncateLine(const QString &s);

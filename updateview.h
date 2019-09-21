@@ -44,7 +44,7 @@ public:
     
     explicit UpdateView(KConfig& partConfig, QWidget *parent);
 
-    virtual ~UpdateView();
+    ~UpdateView() override;
 
     void setFilter(Filter filter);
     Filter filter() const;

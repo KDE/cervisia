@@ -31,7 +31,7 @@ class ResolveEditorDialog : public QDialog
 {
 public:
     explicit ResolveEditorDialog(KConfig& cfg, QWidget* parent=0);
-    virtual ~ResolveEditorDialog();
+    ~ResolveEditorDialog() override;
 
     void setContent(const QString& text);
     QString content() const;

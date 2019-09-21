@@ -33,7 +33,7 @@ class ProgressDialog : public QDialog
 public:
     ProgressDialog(QWidget* parent, const QString& heading, const QString &cvsServiceNameService,const QDBusReply<QDBusObjectPath>& job,
                    const QString& errorIndicator, const QString& caption = "");
-    ~ProgressDialog();
+    ~ProgressDialog() override;
 
     bool execute();
     bool getLine(QString& line);
@@ -45,7 +45,7 @@ public Q_SLOTS:
     void slotJobExited(bool normalExit, int status);
 
 protected slots:
-    virtual void reject();
+    void reject() override;
 
 private slots:
     void slotTimeoutOccurred();

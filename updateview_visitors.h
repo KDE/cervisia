@@ -50,10 +50,10 @@ public:
 
     explicit ApplyFilterVisitor(UpdateView::Filter filter);
 
-    virtual void preVisit(UpdateDirItem*);
-    virtual void postVisit(UpdateDirItem*);
+    void preVisit(UpdateDirItem*) override;
+    void postVisit(UpdateDirItem*) override;
 
-    virtual void visit(UpdateFileItem*);
+    void visit(UpdateFileItem*) override;
 
 private:
 

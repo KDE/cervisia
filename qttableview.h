@@ -35,7 +35,7 @@ public:
 
 protected:
     QtTableView(QWidget *parent=0, const char *name=0);
-   ~QtTableView();
+   ~QtTableView() override;
 
     int		numRows()	const;
     virtual void setNumRows( int );
@@ -98,10 +98,10 @@ protected:
     virtual void paintCell( QPainter *, int row, int col ) = 0;
     virtual void setupPainter( QPainter * );
 
-    void	paintEvent( QPaintEvent * );
-    void	resizeEvent( QResizeEvent * );
-    virtual void showEvent( QShowEvent * );
-    virtual void wheelEvent( QWheelEvent *e );
+    void	paintEvent( QPaintEvent * ) override;
+    void	resizeEvent( QResizeEvent * ) override;
+    void showEvent( QShowEvent * ) override;
+    void wheelEvent( QWheelEvent *e ) override;
 
     int		findRow( int yPos ) const;
     int		findCol( int xPos ) const;

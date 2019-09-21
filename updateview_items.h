@@ -93,15 +93,15 @@ public:
 
     bool wasScanned() const { return m_opened; }
 
-    virtual bool operator<(const QTreeWidgetItem &other) const;
+    bool operator<(const QTreeWidgetItem &other) const override;
 
-    virtual QVariant data(int column, int role) const;
+    QVariant data(int column, int role) const override;
 
-    virtual void setOpen(bool o);
+    void setOpen(bool o) override;
 
     void maybeScanDir(bool recursive);
 
-    virtual void accept(Visitor&);
+    void accept(Visitor&) override;
 
     enum { RTTI = 10000 };
 
@@ -137,9 +137,9 @@ public:
     bool undefinedState() const
     { return m_undefined; }
 
-    virtual bool operator<(const QTreeWidgetItem &other) const;
+    bool operator<(const QTreeWidgetItem &other) const override;
 
-    virtual QVariant data(int column, int role) const;
+    QVariant data(int column, int role) const override;
 
     void setStatus(Cervisia::EntryStatus status);
     void setRevTag(const QString& rev, const QString& tag);
@@ -149,7 +149,7 @@ public:
 
     void markUpdated(bool laststage, bool success);
 
-    virtual void accept(Visitor&);
+    void accept(Visitor&) override;
 
     bool applyFilter(UpdateView::Filter filter);
 

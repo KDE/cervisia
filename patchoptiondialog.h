@@ -34,7 +34,7 @@ class PatchOptionDialog : public QDialog
     
 public:
     explicit PatchOptionDialog(QWidget* parent = 0);
-    virtual ~PatchOptionDialog();
+    ~PatchOptionDialog() override;
     
     QString diffOptions() const;
     QString formatOption() const;

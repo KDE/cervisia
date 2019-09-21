@@ -35,10 +35,10 @@ class DirIgnoreList : public IgnoreListBase
 public:
     explicit DirIgnoreList(const QString& path);
 
-    virtual bool matches(const QFileInfo* fi) const;
+    bool matches(const QFileInfo* fi) const override;
 
 private:
-    virtual void addEntry(const QString& entry);
+    void addEntry(const QString& entry) override;
 
     StringMatcher m_stringMatcher;
 };

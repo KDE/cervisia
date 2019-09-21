@@ -42,7 +42,7 @@ class LogListView : public QTreeWidget
     
 public:
     explicit LogListView(KConfig& cfg, QWidget *parent);
-    virtual ~LogListView();
+    ~LogListView() override;
     
     void addRevision(const Cervisia::LogInfo& logInfo);
     void setSelectedPair(const QString &selectionA, const QString &selectionB);
@@ -51,8 +51,8 @@ signals:
     void revisionClicked(QString rev, bool rmb);
 
 protected:
-    virtual void mousePressEvent(QMouseEvent *e);
-    virtual void keyPressEvent(QKeyEvent *e);
+    void mousePressEvent(QMouseEvent *e) override;
+    void keyPressEvent(QKeyEvent *e) override;
 
 private slots:
 

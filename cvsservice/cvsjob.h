@@ -33,7 +33,7 @@ class Q_DECL_EXPORT CvsJob : public QObject
 public:
     explicit CvsJob(unsigned jobNum);
     explicit CvsJob(const QString& objId);
-    virtual ~CvsJob();
+    ~CvsJob() override;
 
     void clearCvsCommand();
 

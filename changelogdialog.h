@@ -32,7 +32,7 @@ class ChangeLogDialog : public QDialog
 public:
     explicit ChangeLogDialog( KConfig& cfg, QWidget *parent=0 );
 
-    virtual ~ChangeLogDialog();
+    ~ChangeLogDialog() override;
 
     bool readFile(const QString &fileName);
     QString message();

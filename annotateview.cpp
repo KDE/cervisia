@@ -43,7 +43,7 @@ public:
 
     int lineNumber() const { return m_lineNumber; }
 
-    virtual QVariant data(int column, int role) const;
+    QVariant data(int column, int role) const override;
 
 private:
     LogInfo m_logInfo;

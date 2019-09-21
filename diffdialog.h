@@ -40,13 +40,13 @@ class DiffDialog : public QDialog
 
 public:
     explicit DiffDialog(KConfig& config, QWidget *parent=0, bool modal=false);
-    virtual ~DiffDialog();
+    ~DiffDialog() override;
 
     bool parseCvsDiff(OrgKdeCervisia5CvsserviceCvsserviceInterface* service, const QString &fileName, 
                       const QString &revA, const QString &revB);
 
 protected:
-    virtual void keyPressEvent(QKeyEvent *e);
+    void keyPressEvent(QKeyEvent *e) override;
 
 private slots:
     void toggleSynchronize(bool b);

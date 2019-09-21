@@ -40,7 +40,7 @@ public:
 
     void addLine(const Cervisia::LogInfo& logInfo, const QString& content, bool odd);
 
-    virtual QSize sizeHint() const;
+    QSize sizeHint() const override;
 
     int currentLine() const;
     int lastLine() const;
@@ -61,8 +61,8 @@ class AnnotateViewDelegate: public QStyledItemDelegate
 
 public:
     explicit AnnotateViewDelegate(AnnotateView *v) : view(v) { }
-    virtual void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
-    virtual QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
 private:
     enum { BORDER = 4 };

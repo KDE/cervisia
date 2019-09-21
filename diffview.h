@@ -40,7 +40,7 @@ public:
     DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
               QWidget *parent=0, const char *name=0 );
 
-    ~DiffView();
+    ~DiffView() override;
 
     void setPartner(DiffView *other);
 
@@ -65,9 +65,9 @@ public:
     QByteArray compressedContent();
 
     virtual void setFont(const QFont &font);
-    virtual int cellWidth(int col);
-    virtual QSize sizeHint() const;
-    virtual void paintCell(QPainter *p, int row, int col);
+    int cellWidth(int col) override;
+    QSize sizeHint() const override;
+    void paintCell(QPainter *p, int row, int col) override;
     const QScrollBar *scrollBar() const
         { return verticalScrollBar(); }
 
@@ -103,14 +103,14 @@ class DiffZoomWidget : public QFrame
 
 public:
     explicit DiffZoomWidget(QWidget *parent=0);
-    ~DiffZoomWidget();
+    ~DiffZoomWidget() override;
 
     void setDiffView(DiffView *view);
-    QSize sizeHint() const;
+    QSize sizeHint() const override;
 
 protected:
-    void paintEvent(QPaintEvent *);
-    bool eventFilter(QObject *, QEvent *e);
+    void paintEvent(QPaintEvent *) override;
+    bool eventFilter(QObject *, QEvent *e) override;
 
 private:
     DiffView *diffview;

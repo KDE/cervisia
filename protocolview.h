@@ -32,12 +32,12 @@ class ProtocolView : public QTextEdit
     Q_OBJECT
 public:
     explicit ProtocolView(const QString& appId, QWidget *parent=0);
-    ~ProtocolView();
+    ~ProtocolView() override;
 
     bool startJob(bool isUpdateJob = false);
 
 protected:
-    void contextMenuEvent(QContextMenuEvent* event);
+    void contextMenuEvent(QContextMenuEvent* event) override;
 
 public Q_SLOTS:
     void slotReceivedOutput(QString buffer);
