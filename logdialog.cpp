@@ -116,7 +116,7 @@ LogDialog::LogDialog(KConfig& cfg, QWidget *parent)
     QWidget *mainWidget = new QWidget;
     splitter->addWidget(mainWidget);
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
-    layout->setMargin(0);
+    layout->setContentsMargins(0, 0, 0, 0);
 
     for (int i = 0; i < 2; ++i)
     {

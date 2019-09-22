@@ -182,7 +182,7 @@ RepositoryDialog::RepositoryDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsser
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
     QBoxLayout* hbox = new QHBoxLayout;
-    hbox->setMargin(0);
+    hbox->setContentsMargins(0, 0, 0, 0);
     mainLayout->addLayout(hbox);
 
     m_repoList = new QTreeWidget;
