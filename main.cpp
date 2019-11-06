@@ -194,7 +194,7 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
         return ShowAnnotateDialog(annotateFile);
 
     if ( app.isSessionRestored() ) {
-        RESTORE(CervisiaShell);
+        kRestoreMainWindows<CervisiaShell>();
     } else {
         CervisiaShell* shell = new CervisiaShell();
 

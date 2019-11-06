@@ -624,7 +624,7 @@ void CervisiaPart::setupActions()
     //
     // Help Menu
     //
-    action = KStandardAction::help( this, SLOT(slotHelp()), actionCollection());
+    action = KStandardAction::helpContents( this, SLOT(slotHelp()), actionCollection());
 
     action  = new QAction(i18n("CVS &Manual"), this);
     actionCollection()->addAction("help_cvs_manual", action);
