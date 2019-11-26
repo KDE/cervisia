@@ -3051,7 +3051,7 @@ and how to access them. See <xref linkend="accessing-repository" />.
 <title>The Settings and Help Menu</title>
 
 <para>Apart from the common &kde; <guimenu>Settings</guimenu> and <guimenu>Help</guimenu>
-menus described in the <ulink url="help:/fundamentals/ui.html#menus">Menu</ulink>
+menus described in the <ulink url="help:/fundamentals/menus.html">Menu</ulink>
 chapter of the &kde; Fundamentals documentation &cervisia; has these application specific menu entries:
 </para>
 
