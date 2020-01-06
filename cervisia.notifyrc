@@ -43,7 +43,7 @@ Comment[tr]=Cervisia CVS İstemcisi
 Comment[uk]=Клієнтська програма CVS Cervisia
 Comment[x-test]=xxCervisia CVS Clientxx
 Comment[zh_CN]=Cervisia CVS 客户端
-Comment[zh_TW]=Cervisia CVS 客戶端程式
+Comment[zh_TW]=Cervisia CVS 用戶端程式
 
 [Event/cvs_commit_done]
 Name=CVS commit job done
