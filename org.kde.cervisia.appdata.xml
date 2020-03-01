@@ -89,11 +89,11 @@
     <p xml:lang="zh-TW">Cervisia 是一套版本控制系統的前端介面。它可以用同一套介面支援 CVS 與其它版本控制系統，功能包括衝突解決，變更與歷史檢視，工作複本的狀態檢視，並支援許多其他的版本控制功能。</p>
   </description>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=cervisia</url>
-  <url type="help">http://docs.kde.org/stable/en/kdesdk/cervisia/index.html</url>
+  <url type="help">https://docs.kde.org/?application=cervisia</url>
   <url type="donation">https://www.kde.org/community/donations/?app=cervisia&amp;source=appdata</url>
   <screenshots>
     <screenshot type="default">
-      <image>http://kde.org/images/screenshots/cervisia.png</image>
+      <image>https://cdn.kde.org/screenshots/cervisia/cervisia.png</image>
     </screenshot>
   </screenshots>
   <project_group>KDE</project_group>
