@@ -29,9 +29,6 @@ ecm_setup_version(${RELEASE_SERVICE_VERSION} VARIABLE_PREFIX CERVISIA VERSION_HE
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Widgets DBus)
 
 find_package(KF5 REQUIRED COMPONENTS Parts DocTools Init IconThemes Notifications WidgetsAddons ItemViews Su)
-if (EXISTS "${CMAKE_SOURCE_DIR}/.git")
-   add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x060000)
-endif()
 
 add_subdirectory( doc )
 add_subdirectory( cvsservice )
