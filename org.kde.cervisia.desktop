@@ -61,7 +61,6 @@ GenericName[uk]=Інтерфейс до CVS
 GenericName[vi]=CVS Frontend
 GenericName[wa]=Eterface grafike po CVS
 GenericName[xh]=CVS Isiqalo sesiphelo
-GenericName[x-test]=xxCVS Frontendxx
 GenericName[zh_CN]=CVS 前端
 GenericName[zh_TW]=CVS 前端
 Exec=cervisia -qwindowtitle %c %u
@@ -134,7 +133,6 @@ Name[uk]=Cervisia
 Name[vi]=Cervisia
 Name[wa]=Cervisia
 Name[xh]=Cervisia
-Name[x-test]=xxCervisiaxx
 Name[zh_CN]=Cervisia
 Name[zh_TW]=Cervisia
 
