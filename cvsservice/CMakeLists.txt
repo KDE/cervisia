@@ -23,7 +23,7 @@ qt5_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia5.cvsjob.xml cv
 kf5_add_kdeinit_executable(cvsservice_bin ${cvsservice_bin_KDEINIT_SRCS} NOGUI)
 set_target_properties(cvsservice_bin PROPERTIES OUTPUT_NAME cvsservice5)
 
-target_link_libraries(kdeinit_cvsservice_bin Qt5::Widgets Qt5::DBus KF5::KIOCore KF5::I18n KF5::WidgetsAddons KF5::Su KF5::DBusAddons)
+target_link_libraries(kdeinit_cvsservice_bin Qt5::Widgets Qt5::DBus KF5::KIOCore KF5::I18n KF5::WidgetsAddons KF5::Su KF5::DBusAddons KF5::ConfigCore)
 set_target_properties(kdeinit_cvsservice_bin PROPERTIES OUTPUT_NAME kdeinit5_cvsservice)
 
 install(TARGETS kdeinit_cvsservice_bin ${INSTALL_TARGETS_DEFAULT_ARGS} )
