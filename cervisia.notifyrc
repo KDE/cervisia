@@ -48,6 +48,7 @@ Comment[zh_TW]=Cervisia CVS 用戶端程式
 
 [Event/cvs_commit_done]
 Name=CVS commit job done
+Name[ar]=تمت عملية إيداع CVS
 Name[bs]=CVS posao potvrde gotov
 Name[ca]=S'ha completat la tasca d'entrega al CVS
 Name[ca@valencia]=S'ha completat la tasca d'entrega al CVS
@@ -97,6 +98,7 @@ Name[x-test]=xxCVS commit job donexx
 Name[zh_CN]=CVS 提交任务已完成
 Name[zh_TW]=CVS 提交完成
 Comment=A CVS commit job is done
+Comment[ar]=عملية إيداع CVS تمت
 Comment[bs]=CVS posao potvrde je gotov
 Comment[ca]=S'ha completat una tasca d'entrega al CVS
 Comment[ca@valencia]=S'ha completat una tasca d'entrega al CVS

@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Service
 Name=CvsService
+Name[ar]=خدمة CVS
 Name[be]=CvsService
 Name[bg]=CvsService
 Name[br]=Servij Cvs
@@ -64,6 +65,7 @@ X-DBUS-StartupType=Multi
 X-DBUS-ServiceName=org.kde.cvsservice5
 StartupNotify=false
 Comment=A D-Bus service that provides an interface to cvs
+Comment[ar]=خدمة دي-باص توفر واجهة لـ cvs
 Comment[bg]=Услуга на D-Bus, която предлага интерфейс към CVS
 Comment[bs]=A D-Bus usluga koja omogućava interfejs sa cvs-om
 Comment[ca]=Un servei D-Bus que proporciona una interfície per al cvs
