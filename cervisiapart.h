@@ -130,7 +130,6 @@ public slots:
     void slotCommitRecursive();
     void slotDoCVSEdit();
     void slotConfigure();
-    void slotHelp();
     void slotCVSInfo();
 
 protected slots:

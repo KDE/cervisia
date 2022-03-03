@@ -624,7 +624,6 @@ void CervisiaPart::setupActions()
     //
     // Help Menu
     //
-    action = KStandardAction::helpContents( this, SLOT(slotHelp()), actionCollection());
 
     action  = new QAction(i18n("CVS &Manual"), this);
     actionCollection()->addAction("help_cvs_manual", action);
@@ -1719,13 +1718,6 @@ void CervisiaPart::slotConfigure()
                               Qt::Horizontal);
     delete l;
 }
-
-void CervisiaPart::slotHelp()
-{
-    emit setStatusBarText( i18n("Invoking help on Cervisia") );
-    KToolInvocation::startServiceByDesktopName("khelpcenter", QString("help:/cervisia/index.html"));
-}
-
 
 void CervisiaPart::slotCVSInfo()
 {
