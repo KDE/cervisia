@@ -1722,7 +1722,7 @@ void CervisiaPart::slotConfigure()
 void CervisiaPart::slotCVSInfo()
 {
     emit setStatusBarText( i18n("Invoking help on CVS") );
-    KToolInvocation::startServiceByDesktopName("khelpcenter", QString("info:/cvs/Top"));
+    KToolInvocation::startServiceByDesktopName("khelpcenter", QString("man:/(1)/cvs"));
 }
 
 
