@@ -30,6 +30,7 @@
 #include <QStatusBar>
 
 #include <kaboutdata.h>
+#include <KIO/ApplicationLauncherJob>
 #include <knotification.h>
 #include <kshell.h>
 #include <kpropertiesdialog.h>
@@ -1722,7 +1723,9 @@ void CervisiaPart::slotConfigure()
 void CervisiaPart::slotCVSInfo()
 {
     emit setStatusBarText( i18n("Invoking help on CVS") );
-    KToolInvocation::startServiceByDesktopName("khelpcenter", QString("man:/(1)/cvs"));
+    auto *job = new KIO::ApplicationLauncherJob(KService::serviceByDesktopName("org.kde.khelpcenter"));
+    job->setUrls({QUrl(QStringLiteral("man:/(1)/cvs"))});
+    job->start();
 }
 
 
