@@ -34,6 +34,9 @@ add_subdirectory( doc )
 add_subdirectory( cvsservice )
 add_subdirectory( pics )
 
+ki18n_install(po)
+kdoctools_install(po)
+
 set(_KDECONFDIR_ ${CONFIG_INSTALL_DIR})
 set(_KDEHTMLDIR_ ${HTML_INSTALL_DIR})
 
