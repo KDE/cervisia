@@ -29,6 +29,6 @@ ecm_install_icons(ICONS
     sc-actions-vcs-remove-cvs-cervisia.svgz
     sc-actions-vcs-status-cvs-cervisia.svgz
     sc-actions-vcs-update-cvs-cervisia.svgz
-    DESTINATION ${ICON_INSTALL_DIR}
+    DESTINATION ${KDE_INSTALL_ICONDIR}
     THEME hicolor
 )
