@@ -22,9 +22,9 @@
 #define CVSJOB_H
 
 #include <qobject.h>
+#include <QStringList>
 
 class QString;
-class QStringList;
 
 
 class Q_DECL_EXPORT CvsJob : public QObject

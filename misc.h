@@ -22,9 +22,9 @@
 #ifndef MISC_H
 #define MISC_H
 
+#include <QStringList>
 
 class QString;
-class QStringList;
 class QWidget;
 class OrgKdeCervisia5CvsserviceCvsserviceInterface;
 
