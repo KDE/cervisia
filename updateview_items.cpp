@@ -23,10 +23,8 @@
 
 #include <qdir.h>
 
-#include <QPixmap>
 #include <QTextStream>
 
-#include <QDebug>
 #include <kcolorscheme.h>
 
 #include "cvsdir.h"

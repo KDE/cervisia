@@ -21,7 +21,6 @@
 #include <qdatetime.h>
 #include <qmap.h>
 
-#include <KConfigGroup>
 #include <KLocalizedString>
 
 #include "annotatedialog.h"

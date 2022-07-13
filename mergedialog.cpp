@@ -29,7 +29,6 @@
 #include <qstyle.h>
 
 #include <KComboBox>
-#include <KConfigGroup>
 #include <KLocalizedString>
 
 #include "cvsserviceinterface.h"

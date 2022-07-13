@@ -21,14 +21,12 @@
 #include <QDialogButtonBox>
 #include <QFileDialog>
 #include <QHBoxLayout>
-#include <QLineEdit>
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
 
-#include <KConfigGroup>
 #include <KLineEdit>
 #include <KLocalizedString>
 #include <kurlcompletion.h>

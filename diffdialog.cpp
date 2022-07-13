@@ -50,7 +50,6 @@
 #include <QDialogButtonBox>
 #include <QFileDialog>
 #include <QPushButton>
-#include <QTemporaryFile>
 #include <kconfiggroup.h>
 #include <kprocess.h>
 #include <kshell.h>

@@ -31,8 +31,6 @@
 #include <QTimer>
 #include <QVBoxLayout>
 
-#include <KConfigGroup>
-
 #include "cervisiasettings.h"
 #include "debug.h"
 #include <cvsjobinterface.h>

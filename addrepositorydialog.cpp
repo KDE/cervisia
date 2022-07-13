@@ -20,7 +20,6 @@
 
 #include "addrepositorydialog.h"
 
-#include <QBoxLayout>
 #include <QLabel>
 #include <QVBoxLayout>
 #include <qcheckbox.h>

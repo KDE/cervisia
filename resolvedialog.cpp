@@ -21,7 +21,6 @@
 #include "resolvedialog.h"
 #include "resolvedialog_p.h"
 
-#include <QDebug>
 #include <QDialogButtonBox>
 #include <QFileDialog>
 #include <QHBoxLayout>

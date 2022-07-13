@@ -28,7 +28,6 @@
 #include <qstyleoption.h>
 
 #include <KLocalizedString>
-#include <QDebug>
 #include <kcolorscheme.h>
 #include <kconfig.h>
 #include <kconfiggroup.h>

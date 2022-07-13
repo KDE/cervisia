@@ -18,10 +18,8 @@
 
 #include "watchersdialog.h"
 
-#include <QBoxLayout>
 #include <QDialogButtonBox>
 #include <QHeaderView>
-#include <QLineEdit>
 #include <QPushButton>
 #include <QTableView>
 #include <QVBoxLayout>

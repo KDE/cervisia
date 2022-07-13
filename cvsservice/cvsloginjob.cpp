@@ -24,8 +24,6 @@
 #include <KLocalizedString>
 #include <kpassworddialog.h>
 
-#include <QDebug>
-
 #include <csignal>
 #include <cvsloginjobadaptor.h>
 #include <sys/types.h>

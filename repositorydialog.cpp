@@ -21,7 +21,6 @@
 #include "repositorydialog.h"
 #include "debug.h"
 
-#include <QDebug>
 #include <QDialogButtonBox>
 #include <QHBoxLayout>
 #include <QHeaderView>

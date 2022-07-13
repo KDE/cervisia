@@ -22,8 +22,6 @@ using namespace Cervisia;
 
 #include <QMenu>
 
-#include <QDebug>
-
 #include <KLocalizedString>
 #include <KMimeTypeTrader>
 #include <QMimeDatabase>

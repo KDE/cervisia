@@ -35,7 +35,6 @@
 #include <KConfigGroup>
 #include <KHelpClient>
 #include <KLocalizedString>
-#include <QDebug>
 #include <kconfig.h>
 #include <kconfiggroup.h>
 #include <kfinddialog.h>

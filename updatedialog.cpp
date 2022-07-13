@@ -30,7 +30,6 @@
 #include <qradiobutton.h>
 #include <qstyle.h>
 
-#include <KConfigGroup>
 #include <KLocalizedString>
 
 #include "cvsserviceinterface.h"

@@ -21,7 +21,6 @@
 #include "addremovedialog.h"
 
 // Qt
-#include <QBoxLayout>
 #include <QDialogButtonBox>
 #include <QFileInfo>
 #include <QLabel>
@@ -31,7 +30,6 @@
 #include <QVBoxLayout>
 
 // KDE
-#include <KConfigGroup>
 #include <KHelpClient>
 #include <KLocalizedString>
 #include <KMessageWidget>

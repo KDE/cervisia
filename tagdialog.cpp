@@ -20,7 +20,6 @@
 #include "tagdialog.h"
 
 #include <KComboBox>
-#include <KConfigGroup>
 #include <KHelpClient>
 #include <KLocalizedString>
 #include <kmessagebox.h>

@@ -22,7 +22,6 @@
 #include "debug.h"
 
 #include <KLocalizedString>
-#include <QDebug>
 #include <QTemporaryFile>
 #include <cctype>
 #include <kemailsettings.h>

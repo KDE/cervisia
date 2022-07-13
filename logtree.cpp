@@ -21,7 +21,6 @@
 #include "logtree.h"
 
 #include <QApplication>
-#include <QDebug>
 #include <kcolorscheme.h>
 #include <qpainter.h>
 

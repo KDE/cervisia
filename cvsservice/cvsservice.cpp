@@ -22,7 +22,6 @@
 #include "../debug.h"
 
 #include <QApplication>
-#include <QDebug>
 #include <QHash>
 #include <qstring.h>
 

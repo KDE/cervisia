@@ -23,7 +23,6 @@
 #include <QDateTime>
 #include <QDialogButtonBox>
 #include <QHeaderView>
-#include <QLayout>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QRegExp>

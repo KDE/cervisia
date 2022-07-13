@@ -19,7 +19,6 @@
  */
 
 #include <QApplication>
-#include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QRegExp>
 

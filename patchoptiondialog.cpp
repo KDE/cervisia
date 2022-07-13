@@ -20,7 +20,6 @@
 
 using Cervisia::PatchOptionDialog;
 
-#include <KConfigGroup>
 #include <KHelpClient>
 #include <KLocalizedString>
 

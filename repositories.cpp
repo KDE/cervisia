@@ -19,7 +19,6 @@
 
 #include "repositories.h"
 
-#include <QDateTime>
 #include <qdir.h>
 #include <qfile.h>
 #include <qtextstream.h>

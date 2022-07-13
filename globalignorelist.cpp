@@ -19,7 +19,6 @@
 #include "globalignorelist.h"
 using namespace Cervisia;
 
-#include <QDebug>
 #include <QTemporaryFile>
 #include <qdir.h>
 

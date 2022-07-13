@@ -19,15 +19,12 @@
 
 #include "watchdialog.h"
 
-#include <QBoxLayout>
 #include <QGridLayout>
-#include <QGroupBox>
 #include <qbuttongroup.h>
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qradiobutton.h>
 
-#include <KConfigGroup>
 #include <KHelpClient>
 #include <KLocalizedString>
 

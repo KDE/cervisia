@@ -20,7 +20,6 @@
 
 #include "cervisiashell.h"
 
-#include <KAboutData>
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <KSharedConfig>

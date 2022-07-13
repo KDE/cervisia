@@ -20,7 +20,6 @@
 
 #include "commitdialog.h"
 
-#include <QBoxLayout>
 #include <QCheckBox>
 #include <QComboBox>
 #include <QDialogButtonBox>
