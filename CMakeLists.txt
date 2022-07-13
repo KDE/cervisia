@@ -63,6 +63,25 @@ set(libcervisia_SRCS
    tooltip.cpp
    settingsdialog.cpp
    debug.cpp
+   annotatedialog.h
+   diffdialog.h
+   patchoptiondialog.h
+   logdialog.h
+   progressdialog.h
+   resolvedialog.h
+   resolvedialog_p.h
+   annotateview.h
+   diffview.h
+   loglist.h
+   logplainview.h
+   logtree.h
+   annotatecontroller.h
+   loginfo.h
+   misc.h
+   qttableview.h
+   tooltip.h
+   settingsdialog.h
+   debug.h
    )
 
 qt_add_dbus_interfaces( libcervisia_SRCS cvsservice/org.kde.cervisia5.cvsservice.xml )
@@ -121,7 +140,36 @@ set(cervisiapart_PART_SRCS ${libcervisia_SRCS}
    addignoremenu.cpp
    editwithmenu.cpp
    logmessageedit.cpp
-   debug.cpp
+   updateview.h
+   protocolview.h
+   watchdialog.h
+   changelogdialog.h
+   historydialog.h
+   repositorydialog.h
+   commitdialog.h
+   checkoutdialog.h
+   updatedialog.h
+   tagdialog.h
+   mergedialog.h
+   cvsdir.h
+   repositories.h
+   cervisiapart.h
+   addrepositorydialog.h
+   addremovedialog.h
+   watchersdialog.h
+   watchersmodel.h
+   updateview_items.h
+   updateview_visitors.h
+   entry.h
+   entry_status.h
+   stringmatcher.h
+   cvsinitdialog.h
+   ignorelistbase.h
+   dirignorelist.h
+   globalignorelist.h
+   addignoremenu.h
+   editwithmenu.h
+   logmessageedit.h
 )
 
 
