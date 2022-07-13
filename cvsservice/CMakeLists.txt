@@ -8,6 +8,12 @@ set(cvsservice_bin_KDEINIT_SRCS
    sshagent.cpp 
    cvsserviceutils.cpp 
    cvsloginjob.cpp
+   cvsservice.h
+   cvsjob.h
+   repository.h
+   sshagent.h
+   cvsserviceutils.h
+   cvsloginjob.h
    ../debug.cpp)
 
 qt_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia5.cvsservice.xml cvsservice.h CvsService)
