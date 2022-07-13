@@ -27,8 +27,8 @@
 #include <QDebug>
 #include <qbytearray.h>
 
+#include <csignal>
 #include <cvsloginjobadaptor.h>
-#include <signal.h>
 #include <sys/types.h>
 
 static const char LOGIN_PHRASE[] = "Logging in to";

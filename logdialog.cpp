@@ -67,7 +67,7 @@ LogDialog::LogDialog(KConfig &cfg, QWidget *parent)
     , cvsService(0)
     , partConfig(cfg)
 {
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
     splitter = new QSplitter(Qt::Vertical, this);
@@ -76,16 +76,16 @@ LogDialog::LogDialog(KConfig &cfg, QWidget *parent)
     tree = new LogTreeView(this);
     connect(tree, SIGNAL(revisionClicked(QString, bool)), this, SLOT(revisionSelected(QString, bool)));
 
-    QWidget *listWidget = new QWidget(this);
-    QVBoxLayout *listLayout = new QVBoxLayout(listWidget);
-    QHBoxLayout *searchLayout = new QHBoxLayout();
+    auto listWidget = new QWidget(this);
+    auto listLayout = new QVBoxLayout(listWidget);
+    auto searchLayout = new QHBoxLayout();
     listLayout->addLayout(searchLayout);
 
     list = new LogListView(partConfig, listWidget);
     listLayout->addWidget(list, 1);
 
-    KTreeWidgetSearchLine *searchLine = new KTreeWidgetSearchLine(listWidget, list);
-    QLabel *searchLabel = new QLabel(i18n("Search:"), listWidget);
+    auto searchLine = new KTreeWidgetSearchLine(listWidget, list);
+    auto searchLabel = new QLabel(i18n("Search:"), listWidget);
     searchLabel->setBuddy(searchLine);
     searchLayout->addWidget(searchLabel);
     searchLayout->addWidget(searchLine, 1);
@@ -109,19 +109,19 @@ LogDialog::LogDialog(KConfig &cfg, QWidget *parent)
              "mouse button,\nrevision B by clicking with "
              "the middle mouse button."));
 
-    QWidget *mainWidget = new QWidget;
+    auto mainWidget = new QWidget;
     splitter->addWidget(mainWidget);
     QBoxLayout *layout = new QVBoxLayout(mainWidget);
     layout->setContentsMargins(0, 0, 0, 0);
 
     for (int i = 0; i < 2; ++i) {
         if (i == 1) {
-            QFrame *frame = new QFrame(mainWidget);
+            auto frame = new QFrame(mainWidget);
             frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
             layout->addWidget(frame);
         }
 
-        QGridLayout *grid = new QGridLayout();
+        auto grid = new QGridLayout();
         layout->addLayout(grid);
         grid->setRowStretch(0, 0);
         grid->setRowStretch(1, 0);
@@ -133,7 +133,7 @@ LogDialog::LogDialog(KConfig &cfg, QWidget *parent)
         grid->setColumnStretch(4, 2);
 
         QString versionident = (i == 0) ? i18n("Revision A:") : i18n("Revision B:");
-        QLabel *versionlabel = new QLabel(versionident, mainWidget);
+        auto versionlabel = new QLabel(versionident, mainWidget);
         grid->addWidget(versionlabel, 0, 0);
 
         revbox[i] = new QLabel(mainWidget);
@@ -141,7 +141,7 @@ LogDialog::LogDialog(KConfig &cfg, QWidget *parent)
         revbox[i]->setTextInteractionFlags(Qt::TextSelectableByMouse);
         grid->addWidget(revbox[i], 0, 1, Qt::AlignVCenter);
 
-        QLabel *selectlabel = new QLabel(i18n("Select by tag:"), mainWidget);
+        auto selectlabel = new QLabel(i18n("Select by tag:"), mainWidget);
         grid->addWidget(selectlabel, 0, 2);
 
         tagcombo[i] = new KComboBox(mainWidget);
@@ -149,7 +149,7 @@ LogDialog::LogDialog(KConfig &cfg, QWidget *parent)
         tagcombo[i]->setMinimumWidth(fm.width("X") * 20);
         grid->addWidget(tagcombo[i], 0, 3);
 
-        QLabel *authorlabel = new QLabel(i18n("Author:"), mainWidget);
+        auto authorlabel = new QLabel(i18n("Author:"), mainWidget);
         grid->addWidget(authorlabel, 1, 0);
 
         authorbox[i] = new QLabel(mainWidget);
@@ -157,7 +157,7 @@ LogDialog::LogDialog(KConfig &cfg, QWidget *parent)
         authorbox[i]->setTextInteractionFlags(Qt::TextSelectableByMouse);
         grid->addWidget(authorbox[i], 1, 1);
 
-        QLabel *datelabel = new QLabel(i18n("Date:"), mainWidget);
+        auto datelabel = new QLabel(i18n("Date:"), mainWidget);
         grid->addWidget(datelabel, 1, 2);
 
         datebox[i] = new QLabel(mainWidget);
@@ -165,7 +165,7 @@ LogDialog::LogDialog(KConfig &cfg, QWidget *parent)
         datebox[i]->setTextInteractionFlags(Qt::TextSelectableByMouse);
         grid->addWidget(datebox[i], 1, 3);
 
-        QLabel *commentlabel = new QLabel(i18n("Comment/Tags:"), mainWidget);
+        auto commentlabel = new QLabel(i18n("Comment/Tags:"), mainWidget);
         grid->addWidget(commentlabel, 2, 0);
 
         commentbox[i] = new KTextEdit(mainWidget);
@@ -302,7 +302,7 @@ bool LogDialog::parseCvsLog(OrgKdeCervisia5CvsserviceCvsserviceInterface *servic
                     rev.remove(pos1 + 1, pos2 - pos1);
                 }
                 if (rev != "1.1.1") {
-                    LogDialogTagInfo *taginfo = new LogDialogTagInfo;
+                    auto taginfo = new LogDialogTagInfo;
                     taginfo->rev = rev;
                     taginfo->tag = tag;
                     taginfo->branchpoint = branchpoint;
@@ -520,7 +520,7 @@ void LogDialog::diffClicked()
     }
 
     // Non-modal dialog
-    DiffDialog *l = new DiffDialog(partConfig);
+    auto l = new DiffDialog(partConfig);
     if (l->parseCvsDiff(cvsService, filename, selectionA, selectionB))
         l->show();
     else
@@ -529,7 +529,7 @@ void LogDialog::diffClicked()
 
 void LogDialog::annotateClicked()
 {
-    AnnotateDialog *l = new AnnotateDialog(partConfig);
+    auto l = new AnnotateDialog(partConfig);
     AnnotateController ctl(l, cvsService);
     ctl.showDialog(filename, selectionA);
 }

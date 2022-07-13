@@ -126,7 +126,7 @@ void DiffView::removeAtOffset(int offset)
 
 void DiffView::insertAtOffset(const QString &line, DiffType type, int offset)
 {
-    DiffViewItem *item = new DiffViewItem;
+    auto item = new DiffViewItem;
     item->line = line;
     item->type = type;
     item->no = -1;
@@ -163,7 +163,7 @@ void DiffView::addLine(const QString &line, DiffType type, int no)
     const int copyWidth = qMax(fm.width(copy), fmbold.width(copy));
     textwidth = qMax(textwidth, copyWidth + numTabs * tabSize);
 
-    DiffViewItem *item = new DiffViewItem;
+    auto item = new DiffViewItem;
     item->line = line;
     item->type = type;
     item->no = no;
@@ -215,7 +215,7 @@ QString DiffView::stringAtLine(int lineno)
     if ((pos = findLine(lineno)) != -1)
         return items.at(pos)->line;
     else
-        return QString();
+        return {};
 }
 
 QByteArray DiffView::compressedContent()
@@ -265,7 +265,7 @@ int DiffView::cellWidth(int col)
 QSize DiffView::sizeHint() const
 {
     QFontMetrics fm(font());
-    return QSize(4 * fm.width("0123456789"), fm.lineSpacing() * 8);
+    return {4 * fm.width("0123456789"), fm.lineSpacing() * 8};
 }
 
 void DiffView::paintCell(QPainter *p, int row, int col)
@@ -346,20 +346,18 @@ DiffZoomWidget::DiffZoomWidget(QWidget *parent)
     setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Minimum));
 }
 
-DiffZoomWidget::~DiffZoomWidget()
-{
-}
+DiffZoomWidget::~DiffZoomWidget() = default;
 
 void DiffZoomWidget::setDiffView(DiffView *view)
 {
     diffview = view;
-    QScrollBar *sb = const_cast<QScrollBar *>(diffview->scrollBar());
+    auto sb = const_cast<QScrollBar *>(diffview->scrollBar());
     sb->installEventFilter(this);
 }
 
 QSize DiffZoomWidget::sizeHint() const
 {
-    return QSize(25, style()->pixelMetric(QStyle::PM_ScrollBarExtent, 0, this));
+    return {25, style()->pixelMetric(QStyle::PM_ScrollBarExtent, 0, this)};
 }
 
 bool DiffZoomWidget::eventFilter(QObject *o, QEvent *e)

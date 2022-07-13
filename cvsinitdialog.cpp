@@ -41,32 +41,32 @@ CvsInitDialog::CvsInitDialog(QWidget *parent)
     setWindowTitle(i18n("Create New Repository (cvs init)"));
     setModal(true);
 
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
-    QLabel *dirLabel = new QLabel(i18n("Repository folder:"));
+    auto dirLabel = new QLabel(i18n("Repository folder:"));
     mainLayout->addWidget(dirLabel);
 
-    QHBoxLayout *dirLayout = new QHBoxLayout;
+    auto dirLayout = new QHBoxLayout;
     mainLayout->addLayout(dirLayout);
 
     m_directoryEdit = new KLineEdit;
     m_directoryEdit->setFocus();
 
-    KUrlCompletion *comp = new KUrlCompletion();
+    auto comp = new KUrlCompletion();
     m_directoryEdit->setCompletionObject(comp);
     m_directoryEdit->setAutoDeleteCompletionObject(true);
 
     dirLabel->setBuddy(m_directoryEdit);
     dirLayout->addWidget(m_directoryEdit);
 
-    QPushButton *dirButton = new QPushButton("...");
+    auto dirButton = new QPushButton("...");
     dirButton->setFixedWidth(30);
     dirLayout->addWidget(dirButton);
 

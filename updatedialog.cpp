@@ -43,10 +43,10 @@ UpdateDialog::UpdateDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface *service
     setWindowTitle(i18n("CVS Update"));
     setModal(true);
 
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
@@ -103,7 +103,7 @@ UpdateDialog::UpdateDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface *service
     dateedit_layout->addWidget(date_edit);
     mainLayout->addLayout(dateedit_layout);
 
-    QButtonGroup *group = new QButtonGroup(this);
+    auto group = new QButtonGroup(this);
     group->addButton(bytag_button);
     group->addButton(bybranch_button);
     group->addButton(bydate_button);

@@ -107,15 +107,15 @@ ResolveDialog::ResolveDialog(KConfig &cfg, QWidget *parent)
     , markeditem(-1)
     , partConfig(cfg)
 {
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help | QDialogButtonBox::Close);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Help | QDialogButtonBox::Close);
 
-    QPushButton *user1Button = new QPushButton;
+    auto user1Button = new QPushButton;
     buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
 
-    QPushButton *user2Button = new QPushButton;
+    auto user2Button = new QPushButton;
     buttonBox->addButton(user2Button, QDialogButtonBox::ActionRole);
 
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
@@ -124,25 +124,25 @@ ResolveDialog::ResolveDialog(KConfig &cfg, QWidget *parent)
     KGuiItem::assign(user1Button, KStandardGuiItem::saveAs());
     KGuiItem::assign(user2Button, KStandardGuiItem::save());
 
-    QSplitter *vertSplitter = new QSplitter(Qt::Vertical, this);
+    auto vertSplitter = new QSplitter(Qt::Vertical, this);
     mainLayout->addWidget(vertSplitter);
 
-    QSplitter *splitter = new QSplitter(Qt::Horizontal, vertSplitter);
+    auto splitter = new QSplitter(Qt::Horizontal, vertSplitter);
 
-    QWidget *versionALayoutWidget = new QWidget(splitter);
+    auto versionALayoutWidget = new QWidget(splitter);
     QBoxLayout *versionAlayout = new QVBoxLayout(versionALayoutWidget);
     versionAlayout->setSpacing(5);
 
-    QLabel *revlabel1 = new QLabel(i18n("Your version (A):"), versionALayoutWidget);
+    auto revlabel1 = new QLabel(i18n("Your version (A):"), versionALayoutWidget);
     versionAlayout->addWidget(revlabel1);
     diff1 = new DiffView(cfg, true, false, versionALayoutWidget);
     versionAlayout->addWidget(diff1, 10);
 
-    QWidget *versionBLayoutWidget = new QWidget(splitter);
+    auto versionBLayoutWidget = new QWidget(splitter);
     QBoxLayout *versionBlayout = new QVBoxLayout(versionBLayoutWidget);
     versionBlayout->setSpacing(5);
 
-    QLabel *revlabel2 = new QLabel(i18n("Other version (B):"), versionBLayoutWidget);
+    auto revlabel2 = new QLabel(i18n("Other version (B):"), versionBLayoutWidget);
     versionBlayout->addWidget(revlabel2);
     diff2 = new DiffView(cfg, true, false, versionBLayoutWidget);
     versionBlayout->addWidget(diff2, 10);
@@ -150,11 +150,11 @@ ResolveDialog::ResolveDialog(KConfig &cfg, QWidget *parent)
     diff1->setPartner(diff2);
     diff2->setPartner(diff1);
 
-    QWidget *mergeLayoutWidget = new QWidget(vertSplitter);
+    auto mergeLayoutWidget = new QWidget(vertSplitter);
     QBoxLayout *mergeLayout = new QVBoxLayout(mergeLayoutWidget);
     mergeLayout->setSpacing(5);
 
-    QLabel *mergelabel = new QLabel(i18n("Merged version:"), mergeLayoutWidget);
+    auto mergelabel = new QLabel(i18n("Merged version:"), mergeLayoutWidget);
     mergeLayout->addWidget(mergelabel);
 
     merge = new DiffView(cfg, false, false, mergeLayoutWidget);
@@ -305,7 +305,7 @@ bool ResolveDialog::parseFile(const QString &name)
                 addToVersionB(line, DiffView::Change, lineno2);
             } else {
                 // create an resolve item
-                ResolveItem *item = new ResolveItem;
+                auto item = new ResolveItem;
                 item->linenoA = lineno1 - advanced1 + 1;
                 item->linecountA = advanced1;
                 item->linenoB = lineno2 - advanced2 + 1;
@@ -368,7 +368,7 @@ QString ResolveDialog::readFile()
 {
     QFile f(fname);
     if (!f.open(QIODevice::ReadOnly))
-        return QString();
+        return {};
 
     QTextStream stream(&f);
     QTextCodec *codec = DetectCodec(fname);
@@ -541,7 +541,7 @@ void ResolveDialog::editClicked()
     for (int i = 0; i < total; ++i)
         mergedPart += merge->stringAtOffset(offset + i);
 
-    ResolveEditorDialog *dlg = new ResolveEditorDialog(partConfig, this);
+    auto dlg = new ResolveEditorDialog(partConfig, this);
     dlg->setObjectName("edit");
     dlg->setContent(mergedPart);
 

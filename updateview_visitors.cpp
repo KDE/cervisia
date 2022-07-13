@@ -21,8 +21,6 @@
 #include "updateview.h"
 #include "updateview_items.h"
 
-using Cervisia::Entry;
-
 ApplyFilterVisitor::ApplyFilterVisitor(UpdateView::Filter filter)
     : m_filter(filter)
 {
@@ -68,7 +66,7 @@ void ApplyFilterVisitor::visit(UpdateFileItem *item)
 void ApplyFilterVisitor::markAllParentsAsVisible(UpdateItem *item)
 {
     while ((item = static_cast<UpdateDirItem *>(item->parent()))) {
-        TItemSet::iterator it = m_invisibleDirItems.find(item);
+        auto it = m_invisibleDirItems.find(item);
         if (it != m_invisibleDirItems.end()) {
             m_invisibleDirItems.erase(it);
         } else {

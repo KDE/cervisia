@@ -41,17 +41,17 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent)
     setWindowTitle((action == Add) ? i18n("CVS Watch Add") : i18n("CVS Watch Remove"));
     setModal(true);
 
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
     connect(buttonBox, &QDialogButtonBox::helpRequested, this, &WatchDialog::slotHelp);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
-    QLabel *textlabel = new QLabel((action == Add) ? i18n("Add watches for the following events:") : i18n("Remove watches for the following events:"));
+    auto textlabel = new QLabel((action == Add) ? i18n("Add watches for the following events:") : i18n("Remove watches for the following events:"));
     mainLayout->addWidget(textlabel);
 
     all_button = new QRadioButton(i18n("&All"));
@@ -62,7 +62,7 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent)
     only_button = new QRadioButton(i18n("&Only:"));
     mainLayout->addWidget(only_button);
 
-    QGridLayout *eventslayout = new QGridLayout();
+    auto eventslayout = new QGridLayout();
     mainLayout->addLayout(eventslayout);
     eventslayout->addItem(new QSpacerItem(20, 0), 0, 0);
     eventslayout->setColumnStretch(0, 0);
@@ -80,7 +80,7 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent)
     uneditbox->setEnabled(false);
     eventslayout->addWidget(uneditbox, 2, 1);
 
-    QButtonGroup *group = new QButtonGroup(this);
+    auto group = new QButtonGroup(this);
     group->addButton(all_button);
     group->addButton(only_button);
 

@@ -41,17 +41,17 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig &cfg, const QString &repo, QWid
     setWindowTitle(i18n("Add Repository"));
     setModal(true);
 
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
 
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
-    QLabel *repo_label = new QLabel(i18n("&Repository:"));
+    auto repo_label = new QLabel(i18n("&Repository:"));
     mainLayout->addWidget(repo_label);
 
     repo_edit = new QLineEdit;
@@ -65,7 +65,7 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig &cfg, const QString &repo, QWid
     }
     mainLayout->addWidget(repo_edit);
 
-    QLabel *rsh_label = new QLabel(i18n("Use remote &shell (only for :ext: repositories):"));
+    auto rsh_label = new QLabel(i18n("Use remote &shell (only for :ext: repositories):"));
     mainLayout->addWidget(rsh_label);
     mainLayout->addWidget(rsh_label);
 
@@ -74,7 +74,7 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig &cfg, const QString &repo, QWid
     rsh_label->setBuddy(rsh_edit);
     mainLayout->addWidget(rsh_edit);
 
-    QLabel *server_label = new QLabel(i18n("Invoke this program on the server side:"));
+    auto server_label = new QLabel(i18n("Invoke this program on the server side:"));
     mainLayout->addWidget(server_label);
 
     server_edit = new QLineEdit;
@@ -82,7 +82,7 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig &cfg, const QString &repo, QWid
     server_label->setBuddy(server_edit);
     mainLayout->addWidget(server_edit);
 
-    QHBoxLayout *compressionBox = new QHBoxLayout;
+    auto compressionBox = new QHBoxLayout;
     mainLayout->addLayout(compressionBox);
     m_useDifferentCompression = new QCheckBox(i18n("Use different &compression level:"));
 

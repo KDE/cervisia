@@ -46,7 +46,7 @@ bool ToolTip::eventFilter(QObject *watched, QEvent *event)
         emit queryToolTip(helpEvent->pos(), rect, text);
 
         if (rect.isValid() && !text.isEmpty()) {
-            QWidget *parentWidget = static_cast<QWidget *>(parent());
+            auto parentWidget = static_cast<QWidget *>(parent());
             text = truncateLines(text, QToolTip::font(), helpEvent->globalPos(), qApp->desktop()->availableGeometry(parentWidget));
             QToolTip::showText(helpEvent->globalPos(), text, parentWidget, rect);
         }

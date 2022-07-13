@@ -59,9 +59,9 @@ static OrgKdeCervisia5CvsserviceCvsserviceInterface *StartDBusService(const QStr
 
 static int ShowResolveDialog(const QString &fileName)
 {
-    KConfig *config = new KConfig("cervisiapartrc");
+    auto config = new KConfig("cervisiapartrc");
 
-    ResolveDialog *dlg = new ResolveDialog(*config);
+    auto dlg = new ResolveDialog(*config);
     if (dlg->parseFile(fileName))
         dlg->show();
     else
@@ -76,8 +76,8 @@ static int ShowResolveDialog(const QString &fileName)
 
 static int ShowLogDialog(const QString &fileName)
 {
-    KConfig *config = new KConfig("cervisiapartrc");
-    LogDialog *dlg = new LogDialog(*config);
+    auto config = new KConfig("cervisiapartrc");
+    auto dlg = new LogDialog(*config);
 
     // get directory for file
     const QFileInfo fi(fileName);
@@ -104,8 +104,8 @@ static int ShowLogDialog(const QString &fileName)
 
 static int ShowAnnotateDialog(const QString &fileName)
 {
-    KConfig *config = new KConfig("cervisiapartrc");
-    AnnotateDialog *dlg = new AnnotateDialog(*config);
+    auto config = new KConfig("cervisiapartrc");
+    auto dlg = new AnnotateDialog(*config);
 
     // get directory for file
     const QFileInfo fi(fileName);
@@ -190,7 +190,7 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
     if (app.isSessionRestored()) {
         kRestoreMainWindows<CervisiaShell>();
     } else {
-        CervisiaShell *shell = new CervisiaShell();
+        auto shell = new CervisiaShell();
 
         if (parser.positionalArguments().count()) {
             QDir dir(parser.positionalArguments()[0]);

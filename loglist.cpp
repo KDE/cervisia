@@ -83,7 +83,7 @@ QString LogListViewItem::truncateLine(const QString &s)
 
 bool LogListViewItem::operator<(const QTreeWidgetItem &other) const
 {
-    const LogListViewItem &item = static_cast<const LogListViewItem &>(other);
+    const auto &item = static_cast<const LogListViewItem &>(other);
 
     switch (treeWidget()->sortColumn()) {
     case Revision:
@@ -107,7 +107,7 @@ LogListView::LogListView(KConfig &cfg, QWidget *parent)
     sortByColumn(LogListViewItem::Revision, Qt::DescendingOrder);
     setHeaderLabels(QStringList() << i18n("Revision") << i18n("Author") << i18n("Date") << i18n("Branch") << i18n("Comment") << i18n("Tags"));
 
-    Cervisia::ToolTip *toolTip = new Cervisia::ToolTip(viewport());
+    auto toolTip = new Cervisia::ToolTip(viewport());
 
     connect(toolTip, SIGNAL(queryToolTip(QPoint, QRect &, QString &)), this, SLOT(slotQueryToolTip(QPoint, QRect &, QString &)));
 
@@ -128,7 +128,7 @@ void LogListView::addRevision(const Cervisia::LogInfo &logInfo)
 void LogListView::setSelectedPair(const QString &selectionA, const QString &selectionB)
 {
     for (int j = 0; j < topLevelItemCount(); j++) {
-        LogListViewItem *i = static_cast<LogListViewItem *>(topLevelItem(j));
+        auto i = static_cast<LogListViewItem *>(topLevelItem(j));
         i->setSelected(selectionA == i->text(LogListViewItem::Revision) || selectionB == i->text(LogListViewItem::Revision));
     }
 }

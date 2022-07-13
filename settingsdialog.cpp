@@ -211,13 +211,13 @@ void SettingsDialog::done(int res)
  */
 void SettingsDialog::addGeneralPage()
 {
-    QFrame *generalPage = new QFrame;
-    KPageWidgetItem *page = new KPageWidgetItem(generalPage, i18n("General"));
+    auto generalPage = new QFrame;
+    auto page = new KPageWidgetItem(generalPage, i18n("General"));
     page->setIcon(QIcon::fromTheme("applications-system"));
 
-    QVBoxLayout *layout = new QVBoxLayout(generalPage);
+    auto layout = new QVBoxLayout(generalPage);
 
-    QLabel *usernamelabel = new QLabel(i18n("&User name for the change log editor:"), generalPage);
+    auto usernamelabel = new QLabel(i18n("&User name for the change log editor:"), generalPage);
     usernameedit = new QLineEdit(generalPage);
     usernameedit->setFocus();
     usernamelabel->setBuddy(usernameedit);
@@ -225,7 +225,7 @@ void SettingsDialog::addGeneralPage()
     layout->addWidget(usernamelabel);
     layout->addWidget(usernameedit);
 
-    QLabel *cvspathlabel = new QLabel(i18n("&Path to CVS executable, or 'cvs':"), generalPage);
+    auto cvspathlabel = new QLabel(i18n("&Path to CVS executable, or 'cvs':"), generalPage);
     cvspathedit = new KUrlRequester(generalPage);
     cvspathlabel->setBuddy(cvspathedit);
 
@@ -242,13 +242,13 @@ void SettingsDialog::addGeneralPage()
  */
 void SettingsDialog::addDiffPage()
 {
-    QFrame *diffPage = new QFrame;
-    KPageWidgetItem *page = new KPageWidgetItem(diffPage, i18n("Diff Viewer"));
+    auto diffPage = new QFrame;
+    auto page = new KPageWidgetItem(diffPage, i18n("Diff Viewer"));
     page->setIcon(QIcon::fromTheme("vcs-diff-cvs-cervisia"));
 
-    QGridLayout *layout = new QGridLayout(diffPage);
+    auto layout = new QGridLayout(diffPage);
 
-    QLabel *contextlabel = new QLabel(i18n("&Number of context lines in diff dialog:"), diffPage);
+    auto contextlabel = new QLabel(i18n("&Number of context lines in diff dialog:"), diffPage);
     contextedit = new QSpinBox(diffPage);
     contextedit->setRange(0, 65535);
     contextlabel->setBuddy(contextedit);
@@ -256,14 +256,14 @@ void SettingsDialog::addDiffPage()
     layout->addWidget(contextlabel, 0, 0);
     layout->addWidget(contextedit, 0, 1);
 
-    QLabel *diffoptlabel = new QLabel(i18n("Additional &options for cvs diff:"), diffPage);
+    auto diffoptlabel = new QLabel(i18n("Additional &options for cvs diff:"), diffPage);
     diffoptedit = new QLineEdit(diffPage);
     diffoptlabel->setBuddy(diffoptedit);
 
     layout->addWidget(diffoptlabel, 1, 0);
     layout->addWidget(diffoptedit, 1, 1);
 
-    QLabel *tabwidthlabel = new QLabel(i18n("Tab &width in diff dialog:"), diffPage);
+    auto tabwidthlabel = new QLabel(i18n("Tab &width in diff dialog:"), diffPage);
     tabwidthedit = new QSpinBox(diffPage);
     tabwidthedit->setRange(1, 16);
     tabwidthlabel->setBuddy(tabwidthedit);
@@ -271,7 +271,7 @@ void SettingsDialog::addDiffPage()
     layout->addWidget(tabwidthlabel, 2, 0);
     layout->addWidget(tabwidthedit, 2, 1);
 
-    QLabel *extdifflabel = new QLabel(i18n("External diff &frontend:"), diffPage);
+    auto extdifflabel = new QLabel(i18n("External diff &frontend:"), diffPage);
     extdiffedit = new KUrlRequester(diffPage);
     extdifflabel->setBuddy(extdiffedit);
 
@@ -288,9 +288,9 @@ void SettingsDialog::addDiffPage()
  */
 void SettingsDialog::addStatusPage()
 {
-    QWidget *statusPage = new QWidget;
-    QVBoxLayout *statusPageVBoxLayout = new QVBoxLayout(statusPage);
-    KPageWidgetItem *page = new KPageWidgetItem(statusPage, i18n("Status"));
+    auto statusPage = new QWidget;
+    auto statusPageVBoxLayout = new QVBoxLayout(statusPage);
+    auto page = new KPageWidgetItem(statusPage, i18n("Status"));
     page->setIcon(QIcon::fromTheme("fork"));
 
     remotestatusbox = new QCheckBox(i18n("When opening a sandbox from a &remote repository,\n"
@@ -312,8 +312,8 @@ void SettingsDialog::addStatusPage()
  */
 void SettingsDialog::addAdvancedPage()
 {
-    QWidget *frame = new QWidget;
-    KPageWidgetItem *page = new KPageWidgetItem(frame, i18n("Advanced"));
+    auto frame = new QWidget;
+    auto page = new KPageWidgetItem(frame, i18n("Advanced"));
     page->setIcon(QIcon::fromTheme("configure"));
 
     m_advancedPage = new Ui::AdvancedPage;
@@ -330,12 +330,12 @@ void SettingsDialog::addAdvancedPage()
  */
 void SettingsDialog::addLookAndFeelPage()
 {
-    QWidget *lookPage = new QWidget;
-    QVBoxLayout *lookPageVBoxLayout = new QVBoxLayout(lookPage);
-    KPageWidgetItem *page = new KPageWidgetItem(lookPage, i18n("Appearance"));
+    auto lookPage = new QWidget;
+    auto lookPageVBoxLayout = new QVBoxLayout(lookPage);
+    auto page = new KPageWidgetItem(lookPage, i18n("Appearance"));
     page->setIcon(QIcon::fromTheme("preferences-desktop-theme"));
 
-    QGroupBox *fontGroupBox = new QGroupBox(i18n("Fonts"), lookPage);
+    auto fontGroupBox = new QGroupBox(i18n("Fonts"), lookPage);
     lookPageVBoxLayout->addWidget(fontGroupBox);
 
     m_protocolFontBox = new FontButton(i18n("Font for &Protocol Window..."), fontGroupBox);
@@ -343,44 +343,44 @@ void SettingsDialog::addLookAndFeelPage()
     m_diffFontBox = new FontButton(i18n("Font for D&iff View..."), fontGroupBox);
     m_changelogFontBox = new FontButton(i18n("Font for ChangeLog View..."), fontGroupBox);
 
-    QVBoxLayout *fontLayout(new QVBoxLayout(fontGroupBox));
+    auto fontLayout(new QVBoxLayout(fontGroupBox));
     fontLayout->addWidget(m_protocolFontBox);
     fontLayout->addWidget(m_annotateFontBox);
     fontLayout->addWidget(m_diffFontBox);
     fontLayout->addWidget(m_changelogFontBox);
 
-    QGroupBox *colorGroupBox = new QGroupBox(i18n("Colors"), lookPage);
+    auto colorGroupBox = new QGroupBox(i18n("Colors"), lookPage);
     lookPageVBoxLayout->addWidget(colorGroupBox);
 
-    QLabel *conflictLabel = new QLabel(i18n("Conflict:"), colorGroupBox);
+    auto conflictLabel = new QLabel(i18n("Conflict:"), colorGroupBox);
     m_conflictButton = new KColorButton(colorGroupBox);
     conflictLabel->setBuddy(m_conflictButton);
 
-    QLabel *diffChangeLabel = new QLabel(i18n("Diff change:"), colorGroupBox);
+    auto diffChangeLabel = new QLabel(i18n("Diff change:"), colorGroupBox);
     m_diffChangeButton = new KColorButton(colorGroupBox);
     diffChangeLabel->setBuddy(m_diffChangeButton);
 
-    QLabel *localChangeLabel = new QLabel(i18n("Local change:"), colorGroupBox);
+    auto localChangeLabel = new QLabel(i18n("Local change:"), colorGroupBox);
     m_localChangeButton = new KColorButton(colorGroupBox);
     localChangeLabel->setBuddy(m_localChangeButton);
 
-    QLabel *diffInsertLabel = new QLabel(i18n("Diff insertion:"), colorGroupBox);
+    auto diffInsertLabel = new QLabel(i18n("Diff insertion:"), colorGroupBox);
     m_diffInsertButton = new KColorButton(colorGroupBox);
     diffInsertLabel->setBuddy(m_diffInsertButton);
 
-    QLabel *remoteChangeLabel = new QLabel(i18n("Remote change:"), colorGroupBox);
+    auto remoteChangeLabel = new QLabel(i18n("Remote change:"), colorGroupBox);
     m_remoteChangeButton = new KColorButton(colorGroupBox);
     remoteChangeLabel->setBuddy(m_remoteChangeButton);
 
-    QLabel *diffDeleteLabel = new QLabel(i18n("Diff deletion:"), colorGroupBox);
+    auto diffDeleteLabel = new QLabel(i18n("Diff deletion:"), colorGroupBox);
     m_diffDeleteButton = new KColorButton(colorGroupBox);
     diffDeleteLabel->setBuddy(m_diffDeleteButton);
 
-    QLabel *notInCvsLabel = new QLabel(i18n("Not in cvs:"), colorGroupBox);
+    auto notInCvsLabel = new QLabel(i18n("Not in cvs:"), colorGroupBox);
     m_notInCvsButton = new KColorButton(colorGroupBox);
     notInCvsLabel->setBuddy(m_notInCvsButton);
 
-    QGridLayout *colorLayout(new QGridLayout(colorGroupBox));
+    auto colorLayout(new QGridLayout(colorGroupBox));
     colorLayout->addWidget(conflictLabel, 0, 0);
     colorLayout->addWidget(m_conflictButton, 0, 1);
     colorLayout->addWidget(localChangeLabel, 1, 0);

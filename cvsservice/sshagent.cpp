@@ -25,7 +25,7 @@
 #include <kprocess.h>
 #include <qregexp.h>
 
-#include <signal.h>
+#include <csignal>
 
 // initialize static member variables
 bool SshAgent::m_isRunning = false;
@@ -39,9 +39,7 @@ SshAgent::SshAgent(QObject *parent)
 {
 }
 
-SshAgent::~SshAgent()
-{
-}
+SshAgent::~SshAgent() = default;
 
 bool SshAgent::querySshAgent()
 {

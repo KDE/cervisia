@@ -42,10 +42,10 @@ MergeDialog::MergeDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface *service, 
     setWindowTitle(i18n("CVS Merge"));
     setModal(true);
 
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
@@ -76,13 +76,13 @@ MergeDialog::MergeDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface *service, 
     bytags_button = new QRadioButton(i18n("Merge &modifications:"));
     mainLayout->addWidget(bytags_button);
 
-    QLabel *tag1_label = new QLabel(i18n("between tag: "));
+    auto tag1_label = new QLabel(i18n("between tag: "));
 
     tag1_combo = new KComboBox;
     tag1_combo->setEditable(true);
     tag1_combo->setMinimumWidth(iComboBoxMinWidth);
 
-    QLabel *tag2_label = new QLabel(i18n("and tag: "));
+    auto tag2_label = new QLabel(i18n("and tag: "));
 
     tag2_combo = new KComboBox;
     tag2_combo->setEditable(true);
@@ -91,7 +91,7 @@ MergeDialog::MergeDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface *service, 
     tag_button = new QPushButton(i18n("Fetch L&ist"));
     connect(tag_button, SIGNAL(clicked()), this, SLOT(tagButtonClicked()));
 
-    QGridLayout *tagsedit_layout = new QGridLayout();
+    auto tagsedit_layout = new QGridLayout();
     tagsedit_layout->addItem(new QSpacerItem(iWidgetIndent, 0), 0, 0);
     tagsedit_layout->setColumnStretch(0, 0);
     tagsedit_layout->setColumnStretch(1, 1);
@@ -104,7 +104,7 @@ MergeDialog::MergeDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface *service, 
     tagsedit_layout->addWidget(tag_button, 0, 3, 2, 1);
     mainLayout->addLayout(tagsedit_layout);
 
-    QButtonGroup *group = new QButtonGroup(this);
+    auto group = new QButtonGroup(this);
     group->addButton(bybranch_button);
     group->addButton(bytags_button);
     connect(group, SIGNAL(buttonClicked(int)), this, SLOT(toggled()));

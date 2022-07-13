@@ -13,7 +13,7 @@
 **********************************************************************/
 
 #include "qttableview.h"
-#include <limits.h>
+#include <climits>
 #include <qapplication.h>
 #include <qdrawutil.h>
 #include <qevent.h>
@@ -924,7 +924,7 @@ void QtTableView::updateCell(int row, int col, bool erase)
 
 QRect QtTableView::viewRect() const
 {
-    return QRect(frameWidth(), frameWidth(), viewWidth(), viewHeight());
+    return {frameWidth(), frameWidth(), viewWidth(), viewHeight()};
 }
 
 /*!
@@ -1375,9 +1375,9 @@ void QtTableView::updateView()
 
 QScrollBar *QtTableView::verticalScrollBar() const
 {
-    QtTableView *that = (QtTableView *)this; // semantic const
+    auto that = (QtTableView *)this; // semantic const
     if (!vScrollBar) {
-        QScrollBar *sb = new QScrollBar(Qt::Vertical, that);
+        auto sb = new QScrollBar(Qt::Vertical, that);
         sb->setAttribute(Qt::WA_NoMousePropagation);
         sb->setAutoFillBackground(true);
 #ifndef QT_NO_CURSOR
@@ -1405,9 +1405,9 @@ QScrollBar *QtTableView::verticalScrollBar() const
 
 QScrollBar *QtTableView::horizontalScrollBar() const
 {
-    QtTableView *that = (QtTableView *)this; // semantic const
+    auto that = (QtTableView *)this; // semantic const
     if (!hScrollBar) {
-        QScrollBar *sb = new QScrollBar(Qt::Horizontal, that);
+        auto sb = new QScrollBar(Qt::Horizontal, that);
         sb->setAutoFillBackground(true);
 #ifndef QT_NO_CURSOR
         sb->setCursor(Qt::ArrowCursor);
@@ -1526,7 +1526,7 @@ int QtTableView::findRawRow(int yPos, int *cellMaxY, int *cellMinY, bool goOutsi
                 *cellMinY = r * cellH + minViewY() - yCellDelta;
             r += yCellOffs; // absolute cell index
         } else { // variable cell height
-            QtTableView *tw = (QtTableView *)this;
+            auto tw = (QtTableView *)this;
             r = yCellOffs;
             int h = minViewY() - yCellDelta; //##arnt3
             int oldH = h;
@@ -1573,7 +1573,7 @@ int QtTableView::findRawCol(int xPos, int *cellMaxX, int *cellMinX, bool goOutsi
                 *cellMinX = c * cellW + minViewX() - xCellDelta;
             c += xCellOffs; // absolute cell index
         } else { // variable cell width
-            QtTableView *tw = (QtTableView *)this;
+            auto tw = (QtTableView *)this;
             c = xCellOffs;
             int w = minViewX() - xCellDelta; //##arnt3
             int oldW = w;
@@ -1655,7 +1655,7 @@ bool QtTableView::rowYPos(int row, int *yPos) const
             //##arnt3
             y = minViewY() - yCellDelta; // y of leftmost cell in view
             int r = yCellOffs;
-            QtTableView *tw = (QtTableView *)this;
+            auto tw = (QtTableView *)this;
             int maxY = maxViewY();
             while (r < row && y <= maxY)
                 y += tw->cellHeight(r++);
@@ -1693,7 +1693,7 @@ bool QtTableView::colXPos(int col, int *xPos) const
             //##arnt3
             x = minViewX() - xCellDelta; // x of uppermost cell in view
             int c = xCellOffs;
-            QtTableView *tw = (QtTableView *)this;
+            auto tw = (QtTableView *)this;
             int maxX = maxViewX();
             while (c < col && x <= maxX)
                 x += tw->cellWidth(c++);

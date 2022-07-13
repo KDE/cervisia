@@ -48,7 +48,7 @@ static QDateTime parseDate(const QString &date, const QString &time, const QStri
 
     const QDateTime dt(QDateTime::fromString(date + 'T' + time + offset, Qt::ISODate));
     if (!dt.isValid())
-        return QDateTime();
+        return {};
 
     QDateTime dateTime;
     dateTime.setTime_t(dt.toTime_t());
@@ -82,7 +82,7 @@ private:
 
 bool HistoryItem::operator<(const QTreeWidgetItem &other) const
 {
-    const HistoryItem &item = static_cast<const HistoryItem &>(other);
+    const auto &item = static_cast<const HistoryItem &>(other);
 
     switch (treeWidget()->sortColumn()) {
     case Date:
@@ -126,7 +126,7 @@ HistoryDialog::HistoryDialog(KConfig &cfg, QWidget *parent)
     : QDialog(parent)
     , partConfig(cfg)
 {
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
     listview = new QTreeWidget;
@@ -167,7 +167,7 @@ HistoryDialog::HistoryDialog(KConfig &cfg, QWidget *parent)
     dirname_edit = new QLineEdit;
     dirname_edit->setEnabled(false);
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help | QDialogButtonBox::Close);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Help | QDialogButtonBox::Close);
     connect(buttonBox, &QDialogButtonBox::helpRequested, this, &HistoryDialog::slotHelp);
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
@@ -185,7 +185,7 @@ HistoryDialog::HistoryDialog(KConfig &cfg, QWidget *parent)
     connect(filename_edit, SIGNAL(returnPressed()), this, SLOT(choiceChanged()));
     connect(dirname_edit, SIGNAL(returnPressed()), this, SLOT(choiceChanged()));
 
-    QGridLayout *grid = new QGridLayout;
+    auto grid = new QGridLayout;
     mainLayout->addLayout(grid);
     grid->setColumnStretch(0, 1);
     grid->setColumnStretch(1, 0);
@@ -245,7 +245,7 @@ void HistoryDialog::choiceChanged()
     const bool filterByPath(onlydirnames_box->isChecked() && !pathMatcher.isEmpty());
 
     for (int i = 0; i < listview->topLevelItemCount(); i++) {
-        HistoryItem *item = static_cast<HistoryItem *>(listview->topLevelItem(i));
+        auto item = static_cast<HistoryItem *>(listview->topLevelItem(i));
 
         bool visible((showCommitEvents && item->isCommit()) || (showCheckoutEvents && item->isCheckout()) || (showTagEvents && item->isTag())
                      || (showOtherEvents && item->isOther()));
@@ -355,7 +355,7 @@ bool HistoryDialog::parseHistory(OrgKdeCervisia5CvsserviceCvsserviceInterface *c
 
         const QDateTime date(parseDate(list[1], list[2], list[3]));
 
-        HistoryItem *item = new HistoryItem(listview, date);
+        auto item = new HistoryItem(listview, date);
         item->setText(HistoryItem::Event, event);
         item->setText(HistoryItem::Author, list[4]);
         if (ncol == 10) {

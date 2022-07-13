@@ -92,7 +92,7 @@ void UpdateDirItem::updateChildItem(const QString &name, EntryStatus status, boo
 {
     if (UpdateItem *item = findItem(name)) {
         if (isFileItem(item)) {
-            UpdateFileItem *fileItem = static_cast<UpdateFileItem *>(item);
+            auto fileItem = static_cast<UpdateFileItem *>(item);
             fileItem->setStatus(status);
         }
         return;
@@ -118,7 +118,7 @@ void UpdateDirItem::updateEntriesItem(const Entry &entry, bool isBinary)
 {
     if (UpdateItem *item = findItem(entry.m_name)) {
         if (isFileItem(item)) {
-            UpdateFileItem *fileItem = static_cast<UpdateFileItem *>(item);
+            auto fileItem = static_cast<UpdateFileItem *>(item);
             if (fileItem->entry().m_status == Cervisia::NotInCVS || fileItem->entry().m_status == Cervisia::LocallyRemoved
                 || fileItem->entry().m_status == Cervisia::Unknown || entry.m_status == Cervisia::LocallyAdded || entry.m_status == Cervisia::LocallyRemoved
                 || entry.m_status == Cervisia::Conflict) {
@@ -289,7 +289,7 @@ void UpdateDirItem::syncWithDirectory()
     for (TMapItemsByName::iterator it(m_itemsByName.begin()), itEnd(m_itemsByName.end()); it != itEnd; ++it) {
         // only files
         if (isFileItem(*it)) {
-            UpdateFileItem *fileItem = static_cast<UpdateFileItem *>(*it);
+            auto fileItem = static_cast<UpdateFileItem *>(*it);
 
             // is file removed?
             if (!dir.exists(it.key())) {
@@ -355,7 +355,7 @@ bool UpdateDirItem::operator<(const QTreeWidgetItem &other) const
     if (isFileItem(&other))
         return true;
 
-    const UpdateDirItem &item(static_cast<const UpdateDirItem &>(other));
+    const auto &item(static_cast<const UpdateDirItem &>(other));
 
     // for every column just compare the directory name
     return entry().m_name.localeAwareCompare(item.entry().m_name) < 0;
@@ -504,7 +504,7 @@ bool UpdateFileItem::operator<(const QTreeWidgetItem &other) const
     if (isDirItem(&other))
         return false;
 
-    const UpdateFileItem &item = static_cast<const UpdateFileItem &>(other);
+    const auto &item = static_cast<const UpdateFileItem &>(other);
 
     switch (treeWidget()->sortColumn()) {
     case Name:
@@ -551,7 +551,7 @@ QVariant UpdateFileItem::data(int column, int role) const
             break;
         }
     } else if ((role == Qt::ForegroundRole) || (role == Qt::FontRole)) {
-        const UpdateView *view = static_cast<const UpdateView *>(treeWidget());
+        const auto view = static_cast<const UpdateView *>(treeWidget());
 
         QColor color;
         switch (m_entry.m_status) {

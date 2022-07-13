@@ -42,9 +42,9 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget *parent)
     setWindowTitle((action == Add) ? i18n("CVS Add") : (action == AddBinary) ? i18n("CVS Add Binary") : i18n("CVS Remove"));
     setModal(true);
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
 
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
@@ -58,9 +58,9 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget *parent)
     // and is activated by Key_Return
     okButton->setFocus();
 
-    QLabel *textlabel = new QLabel((action == Add)             ? i18n("Add the following files to the repository:")
-                                       : (action == AddBinary) ? i18n("Add the following binary files to the repository:")
-                                                               : i18n("Remove the following files from the repository:"));
+    auto textlabel = new QLabel((action == Add)             ? i18n("Add the following files to the repository:")
+                                    : (action == AddBinary) ? i18n("Add the following binary files to the repository:")
+                                                            : i18n("Remove the following files from the repository:"));
 
     mainLayout->addWidget(textlabel);
 
@@ -71,7 +71,7 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget *parent)
 
     // Add warning message to dialog when user wants to remove a file
     if (action == Remove) {
-        KMessageWidget *warning =
+        auto warning =
             new KMessageWidget(i18n("This will also remove the files from "
                                     "your local working copy."));
 

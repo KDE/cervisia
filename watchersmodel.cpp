@@ -41,7 +41,7 @@ int WatchersModel::rowCount(const QModelIndex & /*parent*/) const
 QVariant WatchersModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid() || index.row() < 0 || index.row() >= m_list.count())
-        return QVariant();
+        return {};
 
     WatchersEntry entry = m_list.at(index.row());
 
@@ -52,7 +52,7 @@ QVariant WatchersModel::data(const QModelIndex &index, int role) const
         case WatcherColumn:
             return entry.watcher;
         default:
-            return QVariant();
+            return {};
         }
     }
 
@@ -65,18 +65,18 @@ QVariant WatchersModel::data(const QModelIndex &index, int role) const
         case CommitColumn:
             return entry.commit ? Qt::Checked : Qt::Unchecked;
         default:
-            return QVariant();
+            return {};
         }
     }
 
-    return QVariant();
+    return {};
 }
 
 QVariant WatchersModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     // only provide text for the headers
     if (role != Qt::DisplayRole)
-        return QVariant();
+        return {};
 
     if (orientation == Qt::Horizontal) {
         switch (section) {
@@ -91,7 +91,7 @@ QVariant WatchersModel::headerData(int section, Qt::Orientation orientation, int
         case CommitColumn:
             return i18n("Commit");
         default:
-            return QVariant();
+            return {};
         }
     }
 

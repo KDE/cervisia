@@ -35,22 +35,22 @@ AnnotateDialog::AnnotateDialog(KConfig &cfg, QWidget *parent)
     : QDialog(parent)
     , partConfig(cfg)
 {
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help | QDialogButtonBox::Close);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Help | QDialogButtonBox::Close);
 
-    QPushButton *user1Button = new QPushButton;
+    auto user1Button = new QPushButton;
     user1Button->setText(i18n("Go to Line..."));
     user1Button->setAutoDefault(false);
     buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
 
-    QPushButton *user2Button = new QPushButton;
+    auto user2Button = new QPushButton;
     user2Button->setText(i18n("Find Prev"));
     user2Button->setAutoDefault(false);
     buttonBox->addButton(user2Button, QDialogButtonBox::ActionRole);
 
-    QPushButton *user3Button = new QPushButton;
+    auto user3Button = new QPushButton;
     user3Button->setText(i18n("Find Next"));
     buttonBox->addButton(user3Button, QDialogButtonBox::ActionRole);
 

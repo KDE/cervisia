@@ -172,10 +172,10 @@ RepositoryDialog::RepositoryDialog(KConfig &cfg,
     setWindowTitle(i18n("Configure Access to Repositories"));
     setModal(true);
 
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(okButton, SIGNAL(clicked()), this, SLOT(slotOk()));
@@ -196,7 +196,7 @@ RepositoryDialog::RepositoryDialog(KConfig &cfg,
     connect(m_repoList, SIGNAL(itemDoubleClicked(QTreeWidgetItem *, int)), this, SLOT(slotDoubleClicked(QTreeWidgetItem *, int)));
     connect(m_repoList, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectionChanged()));
 
-    QDialogButtonBox *actionbox = new QDialogButtonBox(Qt::Vertical);
+    auto actionbox = new QDialogButtonBox(Qt::Vertical);
     QPushButton *addbutton = actionbox->addButton(i18n("Add..."), QDialogButtonBox::ActionRole);
     m_modifyButton = actionbox->addButton(i18n("Modify..."), QDialogButtonBox::ActionRole);
     m_removeButton = actionbox->addButton(i18n("Remove"), QDialogButtonBox::ActionRole);
@@ -270,7 +270,7 @@ void RepositoryDialog::readConfigFile()
 
     // Now look for the used methods
     for (int i = 0; i < m_repoList->topLevelItemCount(); i++) {
-        RepositoryListItem *ritem = static_cast<RepositoryListItem *>(m_repoList->topLevelItem(i));
+        auto ritem = static_cast<RepositoryListItem *>(m_repoList->topLevelItem(i));
 
         // read entries from cvs DBUS service configuration
         const KConfigGroup repoGroup = m_serviceConfig->group(QLatin1String("Repository-") + ritem->repository());
@@ -307,7 +307,7 @@ void RepositoryDialog::slotOk()
     reposGroup.writeEntry("Repos", list);
 
     for (int i = 0; i < m_repoList->topLevelItemCount(); i++) {
-        RepositoryListItem *ritem = static_cast<RepositoryListItem *>(m_repoList->topLevelItem(i));
+        auto ritem = static_cast<RepositoryListItem *>(m_repoList->topLevelItem(i));
 
         // write entries to cvs DBUS service configuration
         writeRepositoryData(ritem);
@@ -337,7 +337,7 @@ void RepositoryDialog::slotAddClicked()
                 return;
             }
 
-        RepositoryListItem *ritem = new RepositoryListItem(m_repoList, repo, false);
+        auto ritem = new RepositoryListItem(m_repoList, repo, false);
         ritem->setRsh(rsh);
         ritem->setCompression(compression);
         ritem->setRetrieveCvsignore(retrieveFile);
@@ -372,7 +372,7 @@ void RepositoryDialog::slotDoubleClicked(QTreeWidgetItem *item, int column)
     if (!item)
         return;
 
-    RepositoryListItem *ritem = static_cast<RepositoryListItem *>(item);
+    auto ritem = static_cast<RepositoryListItem *>(item);
     QString repo = ritem->repository();
     QString rsh = ritem->rsh();
     QString server = ritem->server();
@@ -401,7 +401,7 @@ void RepositoryDialog::slotDoubleClicked(QTreeWidgetItem *item, int column)
 
 void RepositoryDialog::slotLoginClicked()
 {
-    RepositoryListItem *item = (RepositoryListItem *)m_repoList->currentItem();
+    auto item = (RepositoryListItem *)m_repoList->currentItem();
     if (!item)
         return;
 
@@ -431,7 +431,7 @@ void RepositoryDialog::slotLoginClicked()
 
 void RepositoryDialog::slotLogoutClicked()
 {
-    RepositoryListItem *item = (RepositoryListItem *)m_repoList->currentItem();
+    auto item = (RepositoryListItem *)m_repoList->currentItem();
     if (!item)
         return;
 
@@ -451,7 +451,7 @@ void RepositoryDialog::slotLogoutClicked()
 void RepositoryDialog::slotSelectionChanged()
 {
     // retrieve the selected item
-    RepositoryListItem *item = (RepositoryListItem *)m_repoList->currentItem();
+    auto item = (RepositoryListItem *)m_repoList->currentItem();
 
     // is an item in the list view selected?
     bool isItemSelected = (item != 0);

@@ -76,7 +76,7 @@ void UpdateView::setFilter(Filter filter)
 {
     filt = filter;
 
-    if (UpdateDirItem *item = static_cast<UpdateDirItem *>(topLevelItem(0))) {
+    if (auto item = static_cast<UpdateDirItem *>(topLevelItem(0))) {
         ApplyFilterVisitor applyFilterVisitor(filter);
         item->accept(applyFilterVisitor);
     }
@@ -102,7 +102,7 @@ void UpdateView::getSingleSelection(QString *filename, QString *revision) const
     QString tmpFileName;
     QString tmpRevision;
     if ((listSelectedItems.count() == 1) && isFileItem(listSelectedItems.first())) {
-        UpdateFileItem *fileItem(static_cast<UpdateFileItem *>(listSelectedItems.first()));
+        auto fileItem(static_cast<UpdateFileItem *>(listSelectedItems.first()));
         tmpFileName = fileItem->filePath();
         tmpRevision = fileItem->entry().m_revision;
     }
@@ -192,7 +192,7 @@ void UpdateView::unfoldSelectedFolders()
     QTreeWidgetItemIterator it(this);
     while (QTreeWidgetItem *item = (*it)) {
         if (isDirItem(item)) {
-            UpdateDirItem *dirItem = static_cast<UpdateDirItem *>(item);
+            auto dirItem = static_cast<UpdateDirItem *>(item);
 
             // below selected folder?
             if (previousDepth && dirItem->depth() > previousDepth) {
@@ -258,7 +258,7 @@ void UpdateView::unfoldTree()
     QTreeWidgetItemIterator it(this);
     while (QTreeWidgetItem *item = (*it)) {
         if (isDirItem(item)) {
-            UpdateDirItem *dirItem(static_cast<UpdateDirItem *>(item));
+            auto dirItem(static_cast<UpdateDirItem *>(item));
 
             // if this dir wasn't scanned already scan it recursive
             // (this is only a hack to reduce the processEvents() calls,
@@ -316,7 +316,7 @@ void UpdateView::openDirectory(const QString &dirName)
     entry.m_name = dirName;
     entry.m_type = Entry::Dir;
 
-    UpdateDirItem *item = new UpdateDirItem(this, entry);
+    auto item = new UpdateDirItem(this, entry);
     item->setExpanded(true);
     setCurrentItem(item);
     item->setSelected(true);
@@ -375,12 +375,12 @@ void UpdateView::markUpdated(bool laststage, bool success)
             for (int i = 0; i < it->childCount(); i++) {
                 QTreeWidgetItem *item = it->child(i);
                 if (isFileItem(item)) {
-                    UpdateFileItem *fileItem = static_cast<UpdateFileItem *>(item);
+                    auto fileItem = static_cast<UpdateFileItem *>(item);
                     fileItem->markUpdated(laststage, success);
                 }
             }
         } else {
-            UpdateFileItem *fileItem = static_cast<UpdateFileItem *>(it);
+            auto fileItem = static_cast<UpdateFileItem *>(it);
             fileItem->markUpdated(laststage, success);
         }
     }
@@ -431,7 +431,7 @@ void UpdateView::rememberSelection(bool recursive)
     // Copy the set to the list
     relevantSelection.clear();
     std::set<QTreeWidgetItem *>::const_iterator const itItemEnd = setItems.end();
-    for (std::set<QTreeWidgetItem *>::const_iterator itItem = setItems.begin(); itItem != itItemEnd; ++itItem)
+    for (auto itItem = setItems.begin(); itItem != itItemEnd; ++itItem)
         relevantSelection.append(*itItem);
 
 #if 0
@@ -465,7 +465,7 @@ void UpdateView::syncSelection()
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
     std::set<UpdateDirItem *>::const_iterator const itDirItemEnd = setDirItems.end();
-    for (std::set<UpdateDirItem *>::const_iterator itDirItem = setDirItems.begin(); itDirItem != itDirItemEnd; ++itDirItem) {
+    for (auto itDirItem = setDirItems.begin(); itDirItem != itDirItemEnd; ++itDirItem) {
         UpdateDirItem *dirItem = *itDirItem;
 
         dirItem->syncWithDirectory();
@@ -547,7 +547,7 @@ void UpdateView::updateItem(const QString &filePath, EntryStatus status, bool is
 
     const QFileInfo fileInfo(filePath);
 
-    UpdateDirItem *rootItem = static_cast<UpdateDirItem *>(topLevelItem(0));
+    auto rootItem = static_cast<UpdateDirItem *>(topLevelItem(0));
     UpdateDirItem *dirItem = findOrCreateDirItem(fileInfo.path(), rootItem);
 
     dirItem->updateChildItem(fileInfo.fileName(), status, isdir);

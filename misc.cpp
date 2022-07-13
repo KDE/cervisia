@@ -24,7 +24,7 @@
 #include <KLocalizedString>
 #include <QDebug>
 #include <QTemporaryFile>
-#include <ctype.h>
+#include <cctype>
 #include <kemailsettings.h>
 #include <kmessagebox.h>
 #include <kuser.h>
@@ -130,7 +130,7 @@ QString Cervisia::UserName()
         // 2. Try to retrieve the information from the system
         struct passwd *pw = getpwuid(getuid());
         if (!pw)
-            return QString();
+            return {};
 
         char hostname[512];
         hostname[0] = '\0';

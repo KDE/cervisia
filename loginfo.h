@@ -83,7 +83,7 @@ struct TagInfo {
  * convenience methods.
  */
 struct LogInfo {
-    typedef QList<TagInfo> TTagInfoSeq;
+    using TTagInfoSeq = QList<TagInfo>;
 
     /**
      * @param showTime show commit time in tooltip.

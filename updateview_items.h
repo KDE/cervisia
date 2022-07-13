@@ -125,7 +125,7 @@ private:
 
     UpdateItem *findItem(const QString &name) const;
 
-    typedef QMap<QString, UpdateItem *> TMapItemsByName;
+    using TMapItemsByName = QMap<QString, UpdateItem *>;
 
     TMapItemsByName m_itemsByName;
 

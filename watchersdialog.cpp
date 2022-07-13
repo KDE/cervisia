@@ -38,10 +38,10 @@ WatchersDialog::WatchersDialog(KConfig &cfg, QWidget *parent)
     : QDialog(parent)
     , partConfig(cfg)
 {
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
@@ -77,7 +77,7 @@ bool WatchersDialog::parseWatchers(OrgKdeCervisia5CvsserviceCvsserviceInterface 
     if (!dlg.execute())
         return false;
 
-    WatchersSortModel *proxyModel = new WatchersSortModel(this);
+    auto proxyModel = new WatchersSortModel(this);
     proxyModel->setSourceModel(new WatchersModel(dlg.getOutput()));
     m_tableView->setModel(proxyModel);
     m_tableView->sortByColumn(0, Qt::AscendingOrder);

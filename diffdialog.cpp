@@ -62,18 +62,18 @@ DiffDialog::DiffDialog(KConfig &cfg, QWidget *parent, bool modal)
     markeditem = -1;
     setModal(modal);
 
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Help | QDialogButtonBox::Close);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Help | QDialogButtonBox::Close);
     connect(buttonBox, &QDialogButtonBox::helpRequested, this, &DiffDialog::slotHelp);
 
-    QPushButton *user1Button = new QPushButton;
+    auto user1Button = new QPushButton;
     buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
     KGuiItem::assign(user1Button, KStandardGuiItem::saveAs());
 
-    QGridLayout *pairlayout = new QGridLayout();
+    auto pairlayout = new QGridLayout();
     mainLayout->addLayout(pairlayout);
     pairlayout->setRowStretch(0, 0);
     pairlayout->setRowStretch(1, 1);
@@ -90,7 +90,7 @@ DiffDialog::DiffDialog(KConfig &cfg, QWidget *parent, bool modal)
 
     diff1 = new DiffView(cfg, true, false, this);
     diff2 = new DiffView(cfg, true, true, this);
-    DiffZoomWidget *zoom = new DiffZoomWidget(this);
+    auto zoom = new DiffZoomWidget(this);
     zoom->setDiffView(diff2);
 
     pairlayout->addWidget(diff1, 1, 0);
@@ -317,7 +317,7 @@ bool DiffDialog::parseCvsDiff(OrgKdeCervisia5CvsserviceCvsserviceInterface *serv
 
 void DiffDialog::newDiffHunk(int &linenoA, int &linenoB, const QStringList &linesA, const QStringList &linesB)
 {
-    DiffItem *item = new DiffItem;
+    auto item = new DiffItem;
     item->linenoA = linenoA + 1;
     item->linenoB = linenoB + 1;
     item->linecountA = linesA.count();

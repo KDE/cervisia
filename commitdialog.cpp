@@ -68,10 +68,10 @@ CommitDialog::CommitDialog(KConfig &cfg, OrgKdeCervisia5CvsserviceCvsserviceInte
     setWindowTitle(i18n("CVS Commit"));
     setModal(true);
 
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
 
@@ -84,7 +84,7 @@ CommitDialog::CommitDialog(KConfig &cfg, OrgKdeCervisia5CvsserviceCvsserviceInte
 
     KGuiItem::assign(user1Button, KGuiItem(i18n("&Diff")));
 
-    QLabel *textlabel = new QLabel(i18n("Commit the following &files:"));
+    auto textlabel = new QLabel(i18n("Commit the following &files:"));
     mainLayout->addWidget(textlabel);
 
     m_fileList = new QListWidget;
@@ -94,7 +94,7 @@ CommitDialog::CommitDialog(KConfig &cfg, OrgKdeCervisia5CvsserviceCvsserviceInte
     connect(m_fileList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(fileSelected(QListWidgetItem *)));
     connect(m_fileList, SIGNAL(itemSelectionChanged()), this, SLOT(fileHighlighted()));
 
-    QLabel *archivelabel = new QLabel(i18n("Older &messages:"));
+    auto archivelabel = new QLabel(i18n("Older &messages:"));
     mainLayout->addWidget(archivelabel);
 
     combo = new QComboBox;
@@ -104,7 +104,7 @@ CommitDialog::CommitDialog(KConfig &cfg, OrgKdeCervisia5CvsserviceCvsserviceInte
     // make sure that combobox is smaller than the screen
     combo->setSizePolicy(QSizePolicy(QSizePolicy::Ignored, QSizePolicy::Fixed));
 
-    QLabel *messagelabel = new QLabel(i18n("&Log message:"));
+    auto messagelabel = new QLabel(i18n("&Log message:"));
     mainLayout->addWidget(messagelabel);
 
     edit = new Cervisia::LogMessageEdit(this);
@@ -153,7 +153,7 @@ void CommitDialog::setFileList(const QStringList &list)
 
         edit->compObj()->addItem(text);
 
-        CommitListItem *item = new CommitListItem(text, *it, m_fileList);
+        auto item = new CommitListItem(text, *it, m_fileList);
         item->setCheckState(Qt::Checked);
     }
 }
@@ -163,7 +163,7 @@ QStringList CommitDialog::fileList() const
     QStringList files;
 
     for (int i = 0; i < m_fileList->count(); ++i) {
-        CommitListItem *item = static_cast<CommitListItem *>(m_fileList->item(i));
+        auto item = static_cast<CommitListItem *>(m_fileList->item(i));
         if (item->checkState() & Qt::Checked)
             files.append(item->fileName());
     }
@@ -245,7 +245,7 @@ void CommitDialog::diffClicked()
 
 void CommitDialog::showDiffDialog(const QString &fileName)
 {
-    DiffDialog *l = new DiffDialog(partConfig, this, "diffdialog");
+    auto l = new DiffDialog(partConfig, this, "diffdialog");
 
     // disable diff button so user doesn't open the same diff several times (#83018)
     user1Button->setEnabled(false);

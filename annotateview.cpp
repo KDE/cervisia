@@ -92,7 +92,7 @@ void AnnotateViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &
 {
     painter->save();
 
-    AnnotateViewItem *item = static_cast<AnnotateViewItem *>(view->topLevelItem(index.row()));
+    auto item = static_cast<AnnotateViewItem *>(view->topLevelItem(index.row()));
 
     QColor backgroundColor;
     QColor foregroundColor;
@@ -168,7 +168,7 @@ AnnotateView::AnnotateView(QWidget *parent)
 
     setColumnCount(3);
 
-    ToolTip *toolTip = new ToolTip(viewport());
+    auto toolTip = new ToolTip(viewport());
 
     connect(toolTip, SIGNAL(queryToolTip(QPoint, QRect &, QString &)), this, SLOT(slotQueryToolTip(QPoint, QRect &, QString &)));
 
@@ -185,7 +185,7 @@ void AnnotateView::addLine(const LogInfo &logInfo, const QString &content, bool 
 QSize AnnotateView::sizeHint() const
 {
     QFontMetrics fm(fontMetrics());
-    return QSize(100 * fm.width("0"), 10 * fm.lineSpacing());
+    return {100 * fm.width("0"), 10 * fm.lineSpacing()};
 }
 
 void AnnotateView::configChanged()
@@ -241,7 +241,7 @@ int AnnotateView::currentLine() const
 
 int AnnotateView::lastLine() const
 {
-    AnnotateViewItem *item = static_cast<AnnotateViewItem *>(topLevelItem(topLevelItemCount() - 1));
+    auto item = static_cast<AnnotateViewItem *>(topLevelItem(topLevelItemCount() - 1));
     if (!item)
         return 0;
 
@@ -250,7 +250,7 @@ int AnnotateView::lastLine() const
 
 void AnnotateView::gotoLine(int line)
 {
-    for (AnnotateViewItem *item = static_cast<AnnotateViewItem *>(topLevelItem(0)); item; item = static_cast<AnnotateViewItem *>(itemBelow(item))) {
+    for (auto item = static_cast<AnnotateViewItem *>(topLevelItem(0)); item; item = static_cast<AnnotateViewItem *>(itemBelow(item))) {
         if (item->lineNumber() == line) {
             setCurrentItem(item);
             item->setSelected(true);

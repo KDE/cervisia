@@ -30,9 +30,7 @@ class UpdateFileItem;
 class Visitor
 {
 public:
-    virtual ~Visitor()
-    {
-    }
+    virtual ~Visitor() = default;
 
     virtual void preVisit(UpdateDirItem *) = 0;
     virtual void postVisit(UpdateDirItem *) = 0;
@@ -55,7 +53,7 @@ private:
 
     UpdateView::Filter m_filter;
 
-    typedef std::set<UpdateItem *> TItemSet;
+    using TItemSet = std::set<UpdateItem *>;
     TItemSet m_invisibleDirItems;
 };
 

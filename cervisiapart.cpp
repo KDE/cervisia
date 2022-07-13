@@ -635,7 +635,7 @@ void CervisiaPart::popupRequested(const QPoint &p)
 
     // context menu for non-cvs files
     if (isFileItem(item)) {
-        UpdateItem *fileItem = static_cast<UpdateItem *>(item);
+        auto fileItem = static_cast<UpdateItem *>(item);
         if (fileItem->entry().m_status == Cervisia::NotInCVS)
             xmlName = "noncvs_context_popup";
     }
@@ -647,7 +647,7 @@ void CervisiaPart::popupRequested(const QPoint &p)
         action->setChecked(item->isExpanded());
     }
 
-    if (QMenu *popup = static_cast<QMenu *>(hostContainer(xmlName))) {
+    if (auto popup = static_cast<QMenu *>(hostContainer(xmlName))) {
         if (isFileItem(item)) {
             // get name of selected file
             QString selectedFile;
@@ -714,15 +714,15 @@ void CervisiaPart::updateActions()
 
 KAboutData *CervisiaPart::createAboutData()
 {
-    KAboutData *about = new KAboutData("cervisiapart",
-                                       i18n("Cervisia Part"),
-                                       CERVISIA_VERSION_STRING,
-                                       i18n("A CVS frontend"),
-                                       KAboutLicense::GPL,
-                                       i18n("Copyright (c) 1999-2002 Bernd Gehrmann\n"
-                                            "Copyright (c) 2002-2008 the Cervisia authors"),
-                                       QString(),
-                                       QLatin1String("http://cervisia.kde.org"));
+    auto about = new KAboutData("cervisiapart",
+                                i18n("Cervisia Part"),
+                                CERVISIA_VERSION_STRING,
+                                i18n("A CVS frontend"),
+                                KAboutLicense::GPL,
+                                i18n("Copyright (c) 1999-2002 Bernd Gehrmann\n"
+                                     "Copyright (c) 2002-2008 the Cervisia authors"),
+                                QString(),
+                                QLatin1String("http://cervisia.kde.org"));
 
     about->addAuthor(i18n("Bernd Gehrmann"),
                      i18n("Original author and former "
@@ -816,7 +816,7 @@ void CervisiaPart::slotResolve()
         return;
 
     // Non-modal dialog
-    ResolveDialog *l = new ResolveDialog(*config());
+    auto l = new ResolveDialog(*config());
     if (l->parseFile(filename))
         l->show();
     else
@@ -859,7 +859,7 @@ void CervisiaPart::slotStatus()
 
 void CervisiaPart::slotUpdateToTag()
 {
-    UpdateDialog *l = new UpdateDialog(cvsService, widget());
+    auto l = new UpdateDialog(cvsService, widget());
 
     if (l->exec()) {
         QString tagopt;
@@ -1075,7 +1075,7 @@ void CervisiaPart::slotBrowseLog()
         return;
 
     // Non-modal dialog
-    LogDialog *l = new LogDialog(*CervisiaPart::config());
+    auto l = new LogDialog(*CervisiaPart::config());
     if (l->parseCvsLog(cvsService, filename))
         l->show();
     else
@@ -1091,7 +1091,7 @@ void CervisiaPart::slotAnnotate()
         return;
 
     // Non-modal dialog
-    AnnotateDialog *dlg = new AnnotateDialog(*config());
+    auto dlg = new AnnotateDialog(*config());
     AnnotateController ctl(dlg, cvsService);
     ctl.showDialog(filename, revision);
 }
@@ -1157,7 +1157,7 @@ void CervisiaPart::slotShowWatchers()
         return;
 
     // Non-modal dialog
-    WatchersDialog *dlg = new WatchersDialog(*config());
+    auto dlg = new WatchersDialog(*config());
     if (dlg->parseWatchers(cvsService, list))
         dlg->show();
     else
@@ -1407,7 +1407,7 @@ void CervisiaPart::slotCheckout()
 
 void CervisiaPart::slotRepositories()
 {
-    RepositoryDialog *l = new RepositoryDialog(*config(), cvsService, m_cvsServiceInterfaceName, widget());
+    auto l = new RepositoryDialog(*config(), cvsService, m_cvsServiceInterfaceName, widget());
     l->show();
 }
 
@@ -1472,7 +1472,7 @@ void CervisiaPart::slotLastChange()
     revB += QString::number(lastnumber - 1);
 
     // Non-modal dialog
-    DiffDialog *l = new DiffDialog(*config());
+    auto l = new DiffDialog(*config());
     if (l->parseCvsDiff(cvsService, filename, revB, revA))
         l->show();
     else
@@ -1482,7 +1482,7 @@ void CervisiaPart::slotLastChange()
 void CervisiaPart::slotHistory()
 {
     // Non-modal dialog
-    HistoryDialog *l = new HistoryDialog(*config());
+    auto l = new HistoryDialog(*config());
     if (l->parseHistory(cvsService))
         l->show();
     else
@@ -1565,7 +1565,7 @@ void CervisiaPart::slotDoCVSEdit()
 void CervisiaPart::slotConfigure()
 {
     KConfig *conf = config();
-    SettingsDialog *l = new SettingsDialog(conf, widget());
+    auto l = new SettingsDialog(conf, widget());
     l->exec();
 
     bool splitHorz = conf->group("LookAndFeel").readEntry("SplitHorizontally", true);
@@ -1576,7 +1576,7 @@ void CervisiaPart::slotConfigure()
 void CervisiaPart::slotCVSInfo()
 {
     emit setStatusBarText(i18n("Invoking help on CVS"));
-    auto *job = new KIO::ApplicationLauncherJob(KService::serviceByDesktopName("org.kde.khelpcenter"));
+    auto job = new KIO::ApplicationLauncherJob(KService::serviceByDesktopName("org.kde.khelpcenter"));
     job->setUrls({QUrl(QStringLiteral("man:/(1)/cvs"))});
     job->start();
 }
@@ -1599,7 +1599,7 @@ void CervisiaPart::showDiff(const QString &revision)
         return;
 
     // Non-modal dialog
-    DiffDialog *l = new DiffDialog(*config());
+    auto l = new DiffDialog(*config());
     if (l->parseCvsDiff(cvsService, fileName, revision, QString()))
         l->show();
     else
@@ -1686,7 +1686,7 @@ bool CervisiaPart::openSandbox(const QUrl &url)
 
 void CervisiaPart::setFilter()
 {
-    UpdateView::Filter filter = UpdateView::Filter(0);
+    auto filter = UpdateView::Filter(0);
     if (opt_hideFiles)
         filter = UpdateView::Filter(filter | UpdateView::OnlyDirectories);
     if (opt_hideUpToDate)
@@ -1804,9 +1804,7 @@ CervisiaBrowserExtension::CervisiaBrowserExtension(CervisiaPart *p)
 {
 }
 
-CervisiaBrowserExtension::~CervisiaBrowserExtension()
-{
-}
+CervisiaBrowserExtension::~CervisiaBrowserExtension() = default;
 
 // Local Variables:
 // c-basic-offset: 4

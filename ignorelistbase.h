@@ -28,9 +28,7 @@ namespace Cervisia
 class IgnoreListBase
 {
 public:
-    virtual ~IgnoreListBase()
-    {
-    }
+    virtual ~IgnoreListBase() = default;
 
     virtual bool matches(const QFileInfo *fi) const = 0;
 

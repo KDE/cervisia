@@ -48,10 +48,10 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisia5CvsserviceCvsserviceInter
     setModal(true);
     setWindowTitle((action == Delete) ? i18n("CVS Delete Tag") : i18n("CVS Tag"));
 
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
@@ -65,11 +65,11 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisia5CvsserviceCvsserviceInter
         tag_combo->setFocus();
         tag_combo->setMinimumWidth(fontMetrics().width('0') * 30);
 
-        QLabel *tag_label = new QLabel(i18n("&Name of tag:"));
+        auto tag_label = new QLabel(i18n("&Name of tag:"));
         mainLayout->addWidget(tag_label);
         tag_label->setBuddy(tag_combo);
 
-        QPushButton *tag_button = new QPushButton(i18n("Fetch &List"));
+        auto tag_button = new QPushButton(i18n("Fetch &List"));
         mainLayout->addWidget(tag_button);
         connect(tag_button, SIGNAL(clicked()), this, SLOT(tagButtonClicked()));
 
@@ -84,7 +84,7 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisia5CvsserviceCvsserviceInter
         tag_edit->setFocus();
         tag_edit->setMinimumWidth(fontMetrics().width('0') * 30);
 
-        QLabel *tag_label = new QLabel(i18n("&Name of tag:"));
+        auto tag_label = new QLabel(i18n("&Name of tag:"));
         mainLayout->addWidget(tag_label);
         tag_label->setBuddy(tag_edit);
 

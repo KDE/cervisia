@@ -116,7 +116,7 @@ CvsService::~CvsService()
 QDBusObjectPath CvsService::add(const QStringList &files, bool isBinary)
 {
     if (!d->hasWorkingCopy() || d->hasRunningJob())
-        return QDBusObjectPath();
+        return {};
 
     // assemble the command line
     // cvs add [-kb] [FILES]
@@ -135,7 +135,7 @@ QDBusObjectPath CvsService::add(const QStringList &files, bool isBinary)
 QDBusObjectPath CvsService::addWatch(const QStringList &files, int events)
 {
     if (!d->hasWorkingCopy() || d->hasRunningJob())
-        return QDBusObjectPath();
+        return {};
 
     // assemble the command line
     d->singleCvsJob->clearCvsCommand();
@@ -159,7 +159,7 @@ QDBusObjectPath CvsService::addWatch(const QStringList &files, int events)
 QDBusObjectPath CvsService::annotate(const QString &fileName, const QString &revision)
 {
     if (!d->hasWorkingCopy())
-        return QDBusObjectPath();
+        return {};
 
     // create a cvs job
     CvsJob *job = d->createCvsJob();
@@ -184,7 +184,7 @@ QDBusObjectPath CvsService::annotate(const QString &fileName, const QString &rev
 QDBusObjectPath CvsService::checkout(const QString &workingDir, const QString &repository, const QString &module, const QString &tag, bool pruneDirs)
 {
     if (d->hasRunningJob())
-        return QDBusObjectPath();
+        return {};
 
     Repository repo(repository);
 
@@ -214,7 +214,7 @@ QDBusObjectPath CvsService::checkout(const QString &workingDir,
                                      bool exportOnly)
 {
     if (d->hasRunningJob())
-        return QDBusObjectPath();
+        return {};
 
     Repository repo(repository);
 
@@ -252,7 +252,7 @@ QDBusObjectPath CvsService::checkout(const QString &workingDir,
                                      bool recursive)
 {
     if (d->hasRunningJob())
-        return QDBusObjectPath();
+        return {};
 
     Repository repo(repository);
 
@@ -287,7 +287,7 @@ QDBusObjectPath CvsService::commit(const QStringList &files, const QString &comm
 {
     qCDebug(log_cervisia) << "d->hasWorkingCopy:" << d->hasWorkingCopy() << "d->hasRunningJob:" << d->hasRunningJob();
     if (!d->hasWorkingCopy() || d->hasRunningJob())
-        return QDBusObjectPath();
+        return {};
 
     // assemble the command line
     // cvs commit [-l] [-m MESSAGE] [FILES]
@@ -307,7 +307,7 @@ QDBusObjectPath CvsService::commit(const QStringList &files, const QString &comm
 QDBusObjectPath CvsService::createRepository(const QString &repository)
 {
     if (d->hasRunningJob())
-        return QDBusObjectPath();
+        return {};
 
     // assemble the command line
     // cvs -d [REPOSITORY] init
@@ -321,7 +321,7 @@ QDBusObjectPath CvsService::createRepository(const QString &repository)
 QDBusObjectPath CvsService::createTag(const QStringList &files, const QString &tag, bool branch, bool force)
 {
     if (!d->hasWorkingCopy() || d->hasRunningJob())
-        return QDBusObjectPath();
+        return {};
 
     // assemble the command line
     // cvs tag [-b] [-F] [TAG] [FILES]
@@ -343,7 +343,7 @@ QDBusObjectPath CvsService::createTag(const QStringList &files, const QString &t
 QDBusObjectPath CvsService::deleteTag(const QStringList &files, const QString &tag, bool branch, bool force)
 {
     if (!d->hasWorkingCopy() || d->hasRunningJob())
-        return QDBusObjectPath();
+        return {};
 
     // assemble the command line
     // cvs tag -d [-b] [-F] [TAG] [FILES]
@@ -381,7 +381,7 @@ QDBusObjectPath CvsService::downloadCvsIgnoreFile(const QString &repository, con
 QDBusObjectPath CvsService::downloadRevision(const QString &fileName, const QString &revision, const QString &outputFile)
 {
     if (!d->hasWorkingCopy())
-        return QDBusObjectPath();
+        return {};
 
     // create a cvs job
     CvsJob *job = d->createCvsJob();
@@ -403,7 +403,7 @@ QDBusObjectPath
 CvsService::downloadRevision(const QString &fileName, const QString &revA, const QString &outputFileA, const QString &revB, const QString &outputFileB)
 {
     if (!d->hasWorkingCopy())
-        return QDBusObjectPath();
+        return {};
 
     // create a cvs job
     CvsJob *job = d->createCvsJob();
@@ -430,7 +430,7 @@ QDBusObjectPath CvsService::diff(const QString &fileName, const QString &revA, c
 QDBusObjectPath CvsService::diff(const QString &fileName, const QString &revA, const QString &revB, const QString &diffOptions, const QString &format)
 {
     if (!d->hasWorkingCopy())
-        return QDBusObjectPath();
+        return {};
 
     // create a cvs job
     CvsJob *job = d->createCvsJob();
@@ -454,7 +454,7 @@ QDBusObjectPath CvsService::diff(const QString &fileName, const QString &revA, c
 QDBusObjectPath CvsService::edit(const QStringList &files)
 {
     if (!d->hasWorkingCopy() || d->hasRunningJob())
-        return QDBusObjectPath();
+        return {};
 
     // assemble the command line
     // cvs edit [FILES]
@@ -468,7 +468,7 @@ QDBusObjectPath CvsService::edit(const QStringList &files)
 QDBusObjectPath CvsService::editors(const QStringList &files)
 {
     if (!d->hasWorkingCopy() || d->hasRunningJob())
-        return QDBusObjectPath();
+        return {};
 
     // assemble the command line
     // cvs editors [FILES]
@@ -482,7 +482,7 @@ QDBusObjectPath CvsService::editors(const QStringList &files)
 QDBusObjectPath CvsService::history()
 {
     if (!d->hasWorkingCopy())
-        return QDBusObjectPath();
+        return {};
 
     // create a cvs job
     CvsJob *job = d->createCvsJob();
@@ -506,7 +506,7 @@ QDBusObjectPath CvsService::import(const QString &workingDir,
                                    bool useModificationTime)
 {
     if (d->hasRunningJob())
-        return QDBusObjectPath();
+        return {};
 
     Repository repo(repository);
 
@@ -538,7 +538,7 @@ QDBusObjectPath CvsService::import(const QString &workingDir,
 QDBusObjectPath CvsService::lock(const QStringList &files)
 {
     if (!d->hasWorkingCopy() || d->hasRunningJob())
-        return QDBusObjectPath();
+        return {};
 
     // assemble the command line
     // cvs admin -l [FILES]
@@ -552,7 +552,7 @@ QDBusObjectPath CvsService::lock(const QStringList &files)
 QDBusObjectPath CvsService::log(const QString &fileName)
 {
     if (!d->hasWorkingCopy())
-        return QDBusObjectPath();
+        return {};
 
     // create a cvs job
     CvsJob *job = d->createCvsJob();
@@ -568,14 +568,14 @@ QDBusObjectPath CvsService::log(const QString &fileName)
 QDBusObjectPath CvsService::login(const QString &repository)
 {
     if (repository.isEmpty())
-        return QDBusObjectPath();
+        return {};
 
     Repository repo(repository);
 
     // create a cvs job
     ++(d->lastJobId);
 
-    CvsLoginJob *job = new CvsLoginJob(d->lastJobId);
+    auto job = new CvsLoginJob(d->lastJobId);
     d->loginJobs.insert(d->lastJobId, job);
 
     // TODO: CVS_SERVER doesn't work ATM
@@ -593,14 +593,14 @@ QDBusObjectPath CvsService::login(const QString &repository)
 QDBusObjectPath CvsService::logout(const QString &repository)
 {
     if (repository.isEmpty())
-        return QDBusObjectPath();
+        return {};
 
     Repository repo(repository);
 
     // create a cvs job
     ++(d->lastJobId);
 
-    CvsJob *job = new CvsJob(d->lastJobId);
+    auto job = new CvsJob(d->lastJobId);
     d->cvsJobs.insert(d->lastJobId, job);
 
     job->setRSH(repo.rsh());
@@ -623,7 +623,7 @@ QDBusObjectPath CvsService::makePatch()
 QDBusObjectPath CvsService::makePatch(const QString &diffOptions, const QString &format)
 {
     if (!d->hasWorkingCopy())
-        return QDBusObjectPath();
+        return {};
 
     // create a cvs job
     CvsJob *job = d->createCvsJob();
@@ -644,7 +644,7 @@ QDBusObjectPath CvsService::moduleList(const QString &repository)
     // create a cvs job
     ++(d->lastJobId);
 
-    CvsJob *job = new CvsJob(d->lastJobId);
+    auto job = new CvsJob(d->lastJobId);
     d->cvsJobs.insert(d->lastJobId, job);
 
     job->setRSH(repo.rsh());
@@ -662,7 +662,7 @@ QDBusObjectPath CvsService::moduleList(const QString &repository)
 QDBusObjectPath CvsService::remove(const QStringList &files, bool recursive)
 {
     if (!d->hasWorkingCopy() || d->hasRunningJob())
-        return QDBusObjectPath();
+        return {};
 
     // assemble the command line
     // cvs remove -f [-l] [FILES]
@@ -681,7 +681,7 @@ QDBusObjectPath CvsService::remove(const QStringList &files, bool recursive)
 QDBusObjectPath CvsService::removeWatch(const QStringList &files, int events)
 {
     if (!d->hasWorkingCopy() || d->hasRunningJob())
-        return QDBusObjectPath();
+        return {};
 
     // assemble the command line
     d->singleCvsJob->clearCvsCommand();
@@ -709,7 +709,7 @@ QDBusObjectPath CvsService::rlog(const QString &repository, const QString &modul
     // create a cvs job
     ++(d->lastJobId);
 
-    CvsJob *job = new CvsJob(d->lastJobId);
+    auto job = new CvsJob(d->lastJobId);
     d->cvsJobs.insert(d->lastJobId, job);
 
     job->setRSH(repo.rsh());
@@ -731,7 +731,7 @@ QDBusObjectPath CvsService::rlog(const QString &repository, const QString &modul
 QDBusObjectPath CvsService::simulateUpdate(const QStringList &files, bool recursive, bool createDirs, bool pruneDirs)
 {
     if (!d->hasWorkingCopy() || d->hasRunningJob())
-        return QDBusObjectPath();
+        return {};
 
     // assemble the command line
     // cvs -n update [-l] [-d] [-P] [FILES]
@@ -756,7 +756,7 @@ QDBusObjectPath CvsService::simulateUpdate(const QStringList &files, bool recurs
 QDBusObjectPath CvsService::status(const QStringList &files, bool recursive, bool tagInfo)
 {
     if (!d->hasWorkingCopy())
-        return QDBusObjectPath();
+        return {};
 
     // create a cvs job
     CvsJob *job = d->createCvsJob();
@@ -780,7 +780,7 @@ QDBusObjectPath CvsService::status(const QStringList &files, bool recursive, boo
 QDBusObjectPath CvsService::unedit(const QStringList &files)
 {
     if (!d->hasWorkingCopy() || d->hasRunningJob())
-        return QDBusObjectPath();
+        return {};
 
     // assemble the command line
     // echo y | cvs unedit [FILES]
@@ -794,7 +794,7 @@ QDBusObjectPath CvsService::unedit(const QStringList &files)
 QDBusObjectPath CvsService::unlock(const QStringList &files)
 {
     if (!d->hasWorkingCopy() || d->hasRunningJob())
-        return QDBusObjectPath();
+        return {};
 
     // assemble the command line
     // cvs admin -u [FILES]
@@ -808,7 +808,7 @@ QDBusObjectPath CvsService::unlock(const QStringList &files)
 QDBusObjectPath CvsService::update(const QStringList &files, bool recursive, bool createDirs, bool pruneDirs, const QString &extraOpt)
 {
     if (!d->hasWorkingCopy() || d->hasRunningJob())
-        return QDBusObjectPath();
+        return {};
 
     // assemble the command line
     // cvs update [-l] [-d] [-P] [EXTRAOPTIONS] [FILES]
@@ -833,7 +833,7 @@ QDBusObjectPath CvsService::update(const QStringList &files, bool recursive, boo
 QDBusObjectPath CvsService::watchers(const QStringList &files)
 {
     if (!d->hasWorkingCopy() || d->hasRunningJob())
-        return QDBusObjectPath();
+        return {};
 
     // assemble the command line
     // cvs watchers [FILES]
@@ -854,7 +854,7 @@ CvsJob *CvsService::Private::createCvsJob()
     ++lastJobId;
 
     // create a cvs job
-    CvsJob *job = new CvsJob(lastJobId);
+    auto job = new CvsJob(lastJobId);
     cvsJobs.insert(lastJobId, job);
 
     job->setRSH(repository->rsh());

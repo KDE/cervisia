@@ -85,7 +85,7 @@ LogTreeView::LogTreeView(QWidget *parent, const char *name)
     setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
     setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
 
-    Cervisia::ToolTip *toolTip = new Cervisia::ToolTip(viewport());
+    auto toolTip = new Cervisia::ToolTip(viewport());
 
     connect(toolTip, SIGNAL(queryToolTip(QPoint, QRect &, QString &)), this, SLOT(slotQueryToolTip(QPoint, QRect &, QString &)));
 
@@ -117,7 +117,7 @@ void LogTreeView::addRevision(const Cervisia::LogInfo &logInfo)
         // Most probably we are on the trunk
         model->beginInsertRows(QModelIndex(), rowCount, rowCount);
         rowCount++;
-        LogTreeItem *item = new LogTreeItem;
+        auto item = new LogTreeItem;
         item->m_logInfo = logInfo;
         item->branchpoint = branchpoint;
         item->firstonbranch = false;
@@ -180,7 +180,7 @@ void LogTreeView::addRevision(const Cervisia::LogInfo &logInfo)
         }
     }
 
-    LogTreeItem *item = new LogTreeItem;
+    auto item = new LogTreeItem;
     item->m_logInfo = logInfo;
     item->branchpoint = branchpoint;
     item->firstonbranch = true;
@@ -211,7 +211,7 @@ void LogTreeView::collectConnections()
         ++it2;
         for (; it2 != itEnd; ++it2)
             if ((*it2)->branchpoint == rev && (*it2)->firstonbranch) {
-                LogTreeConnection *conn = new LogTreeConnection;
+                auto conn = new LogTreeConnection;
                 conn->start = (*it);
                 conn->end = (*it2);
                 connections.append(conn);
@@ -241,7 +241,7 @@ void LogTreeView::setSelectedPair(QString selectionA, QString selectionB)
 
 QSize LogTreeView::sizeHint() const
 {
-    return QSize(2 * static_width, 3 * static_height);
+    return {2 * static_width, 3 * static_height};
 }
 
 QString LogTreeView::text(int row, int col) const
@@ -331,7 +331,7 @@ QSize LogTreeView::computeSize(const Cervisia::LogInfo &logInfo, int *authorHeig
     }
     infoWidth += 2 * INSPACE;
 
-    return QSize(infoWidth, infoHeight);
+    return {infoWidth, infoHeight};
 }
 
 void LogTreeView::paintRevisionCell(QPainter *p, int row, int col, const Cervisia::LogInfo &logInfo, bool followed, bool branched, SelectedRevision selected)

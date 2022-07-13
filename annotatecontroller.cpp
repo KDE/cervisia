@@ -33,7 +33,7 @@
 using namespace Cervisia;
 
 struct AnnotateController::Private {
-    typedef QMap<QString, QString> RevisionCommentMap;
+    using RevisionCommentMap = QMap<QString, QString>;
     RevisionCommentMap comments; // maps comment to a revision
 
     OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService;

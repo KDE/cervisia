@@ -100,9 +100,9 @@ ProgressDialog::~ProgressDialog()
 
 void ProgressDialog::setupGui(const QString &heading)
 {
-    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    auto mainLayout = new QVBoxLayout(this);
 
-    QLabel *textLabel = new QLabel(heading);
+    auto textLabel = new QLabel(heading);
     mainLayout->addWidget(textLabel);
 
     d->resultbox = new QPlainTextEdit;
@@ -111,7 +111,7 @@ void ProgressDialog::setupGui(const QString &heading)
     d->resultbox->setMinimumSize(fm.width("0") * 70, fm.lineSpacing() * 8);
     mainLayout->addWidget(d->resultbox);
 
-    QHBoxLayout *hbox = new QHBoxLayout;
+    auto hbox = new QHBoxLayout;
 
     d->busy = new QProgressBar;
     d->busy->setMinimum(0);
@@ -119,7 +119,7 @@ void ProgressDialog::setupGui(const QString &heading)
     hbox->addWidget(d->busy);
     d->busy->hide();
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Cancel);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Cancel);
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
     hbox->addWidget(buttonBox);
 

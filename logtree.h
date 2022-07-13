@@ -35,8 +35,8 @@ namespace Cervisia
 struct LogInfo;
 }
 
-typedef QList<LogTreeItem *> LogTreeItemList;
-typedef QList<LogTreeConnection *> LogTreeConnectionList;
+using LogTreeItemList = QList<LogTreeItem *>;
+using LogTreeConnectionList = QList<LogTreeConnection *>;
 
 enum SelectedRevision { NoRevision, RevisionA, RevisionB };
 
@@ -105,7 +105,7 @@ public:
 
     QVariant data(const QModelIndex &, int) const override
     {
-        return QVariant();
+        return {};
     }
 
 private:
