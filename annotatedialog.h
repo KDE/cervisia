@@ -38,7 +38,7 @@ class AnnotateDialog : public QDialog
 
 public:
 
-    explicit AnnotateDialog( KConfig& cfg, QWidget *parent=0);
+    explicit AnnotateDialog( KConfig& cfg, QWidget *parent=nullptr);
 
     ~AnnotateDialog() override;
 

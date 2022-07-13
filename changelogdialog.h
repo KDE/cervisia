@@ -30,7 +30,7 @@ class ChangeLogDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit ChangeLogDialog( KConfig& cfg, QWidget *parent=0 );
+    explicit ChangeLogDialog( KConfig& cfg, QWidget *parent=nullptr );
 
     ~ChangeLogDialog() override;
 

@@ -49,7 +49,7 @@ QString UserName();
  */
 QString NormalizeRepository(const QString& repository);
 
-bool CheckOverwrite(const QString& fileName, QWidget* parent=0);
+bool CheckOverwrite(const QString& fileName, QWidget* parent=nullptr);
 
 }
 

@@ -38,7 +38,7 @@ class ResolveDialog : public QDialog
 public:
     enum ChooseType { ChA, ChB, ChAB, ChBA, ChEdit };
 
-    explicit ResolveDialog(KConfig& cfg, QWidget *parent=0);
+    explicit ResolveDialog(KConfig& cfg, QWidget *parent=nullptr);
     ~ResolveDialog() override;
 
     bool parseFile(const QString &name);

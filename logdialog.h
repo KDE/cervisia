@@ -54,7 +54,7 @@ class LogDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit LogDialog( KConfig& cfg, QWidget *parent=0);
+    explicit LogDialog( KConfig& cfg, QWidget *parent=nullptr);
 
     ~LogDialog() override;
 

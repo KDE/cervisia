@@ -38,7 +38,7 @@ class CommitDialog : public QDialog
     Q_OBJECT
 
 public:
-    CommitDialog( KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInterface* service, QWidget *parent=0 );
+    CommitDialog( KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInterface* service, QWidget *parent=nullptr );
     ~CommitDialog() override;
 
     void setFileList(const QStringList &list);

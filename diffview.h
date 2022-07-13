@@ -38,7 +38,7 @@ public:
     enum DiffType { Change, Insert, Delete, Neutral, Unchanged, Separator };
 
     DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
-              QWidget *parent=0, const char *name=0 );
+              QWidget *parent=nullptr, const char *name=0 );
 
     ~DiffView() override;
 
@@ -102,7 +102,7 @@ class DiffZoomWidget : public QFrame
     Q_OBJECT
 
 public:
-    explicit DiffZoomWidget(QWidget *parent=0);
+    explicit DiffZoomWidget(QWidget *parent=nullptr);
     ~DiffZoomWidget() override;
 
     void setDiffView(DiffView *view);

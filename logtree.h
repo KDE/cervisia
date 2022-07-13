@@ -56,7 +56,7 @@ class LogTreeView : public QTableView
     Q_OBJECT
 
 public:
-    explicit LogTreeView( QWidget *parent=0, const char *name=0 );
+    explicit LogTreeView( QWidget *parent=nullptr, const char *name=0 );
 
     ~LogTreeView() override;
 

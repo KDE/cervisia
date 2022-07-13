@@ -39,7 +39,7 @@ class DiffDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit DiffDialog(KConfig& config, QWidget *parent=0, bool modal=false);
+    explicit DiffDialog(KConfig& config, QWidget *parent=nullptr, bool modal=false);
     ~DiffDialog() override;
 
     bool parseCvsDiff(OrgKdeCervisia5CvsserviceCvsserviceInterface* service, const QString &fileName, 

@@ -33,7 +33,7 @@ class HistoryDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit HistoryDialog(KConfig& cfg, QWidget *parent=0);
+    explicit HistoryDialog(KConfig& cfg, QWidget *parent=nullptr);
     ~HistoryDialog() override;
 
     bool parseHistory(OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService);

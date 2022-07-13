@@ -34,7 +34,7 @@ public:
     void	repaint( const QRect &, bool erase=true );
 
 protected:
-    QtTableView(QWidget *parent=0, const char *name=0);
+    QtTableView(QWidget *parent=nullptr, const char *name=0);
    ~QtTableView() override;
 
     int		numRows()	const;

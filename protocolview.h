@@ -31,7 +31,7 @@ class ProtocolView : public QTextEdit
 {
     Q_OBJECT
 public:
-    explicit ProtocolView(const QString& appId, QWidget *parent=0);
+    explicit ProtocolView(const QString& appId, QWidget *parent=nullptr);
     ~ProtocolView() override;
 
     bool startJob(bool isUpdateJob = false);
