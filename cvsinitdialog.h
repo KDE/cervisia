@@ -34,7 +34,7 @@ class CvsInitDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit CvsInitDialog(QWidget* parent = 0);
+    explicit CvsInitDialog(QWidget* parent = nullptr);
 
     QString directory() const;
    

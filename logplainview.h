@@ -37,7 +37,7 @@ class LogPlainView : public QTextBrowser
     Q_OBJECT
 
 public:
-    explicit LogPlainView(QWidget* parent = 0);
+    explicit LogPlainView(QWidget* parent = nullptr);
     ~LogPlainView() override;
 
     void addRevision(const Cervisia::LogInfo& logInfo);

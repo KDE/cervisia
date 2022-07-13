@@ -40,7 +40,7 @@ class WatchersModel : public QAbstractTableModel
     enum Columns { FileColumn = 0, WatcherColumn, EditColumn, UneditColumn, CommitColumn };
 
 public:
-    explicit WatchersModel(const QStringList& data, QObject* parent = 0);
+    explicit WatchersModel(const QStringList& data, QObject* parent = nullptr);
 
     int columnCount(const QModelIndex& parent = QModelIndex()) const override;
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
@@ -59,7 +59,7 @@ private:
 class WatchersSortModel : public QSortFilterProxyModel
 {
 public:
-    explicit WatchersSortModel(QObject* parent = 0);
+    explicit WatchersSortModel(QObject* parent = nullptr);
 
 protected:
     bool lessThan(const QModelIndex& left, const QModelIndex& right) const override;

@@ -46,7 +46,7 @@
 class CommitListItem : public QListWidgetItem
 {
 public:
-    CommitListItem(const QString& text, const QString& fileName, QListWidget* parent = 0)
+    CommitListItem(const QString& text, const QString& fileName, QListWidget* parent = nullptr)
         : QListWidgetItem(text, parent)
         , m_fileName(fileName)
     {

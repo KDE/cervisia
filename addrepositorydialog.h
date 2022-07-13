@@ -33,7 +33,7 @@ class AddRepositoryDialog : public QDialog
     Q_OBJECT
 
 public:
-    AddRepositoryDialog(KConfig& cfg, const QString& repo, QWidget* parent = 0);
+    AddRepositoryDialog(KConfig& cfg, const QString& repo, QWidget* parent = nullptr);
     ~AddRepositoryDialog() override;
 
     void setRepository(const QString& repo);

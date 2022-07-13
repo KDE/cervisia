@@ -28,7 +28,7 @@ class OrgKdeCervisia5CvsserviceCvsserviceInterface;
 class WatchersDialog : public QDialog
 {
 public:
-    explicit WatchersDialog(KConfig& cfg, QWidget* parent = 0);
+    explicit WatchersDialog(KConfig& cfg, QWidget* parent = nullptr);
     ~WatchersDialog() override;
 
     bool parseWatchers(OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService, const QStringList& files);

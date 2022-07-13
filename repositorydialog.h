@@ -35,7 +35,7 @@ class RepositoryDialog : public QDialog
     Q_OBJECT
 
 public:
-    RepositoryDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService, const QString& cvsServiceInterfaceName, QWidget* parent = 0);
+    RepositoryDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService, const QString& cvsServiceInterfaceName, QWidget* parent = nullptr);
     ~RepositoryDialog() override;
 
     void readConfigFile();
