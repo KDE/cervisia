@@ -36,7 +36,7 @@ QString CvsServiceUtils::joinFileList(const QStringList &files)
         result += ' ';
     }
 
-    if (result.length() > 0)
+    if (!result.isEmpty())
         result.truncate(result.length() - 1);
 
     return result;
