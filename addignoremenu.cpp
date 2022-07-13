@@ -20,7 +20,6 @@
 using namespace Cervisia;
 
 #include <QFile>
-#include <QFileInfo>
 #include <QMenu>
 #include <QTextStream>
 

@@ -23,8 +23,6 @@
 #include <qnamespace.h>
 
 #include <QHeaderView>
-#include <QKeyEvent>
-#include <QMouseEvent>
 
 #include <KConfig>
 #include <KConfigGroup>

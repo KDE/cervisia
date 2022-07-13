@@ -25,7 +25,6 @@
 #include <kpassworddialog.h>
 
 #include <QDebug>
-#include <qbytearray.h>
 
 #include <csignal>
 #include <cvsloginjobadaptor.h>

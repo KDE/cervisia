@@ -31,7 +31,6 @@
 
 #include "cvsdir.h"
 #include "debug.h"
-#include "entry.h"
 #include "misc.h"
 #include "updateview_visitors.h"
 

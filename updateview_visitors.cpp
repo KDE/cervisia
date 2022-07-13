@@ -18,7 +18,6 @@
 
 #include "updateview_visitors.h"
 
-#include "updateview.h"
 #include "updateview_items.h"
 
 ApplyFilterVisitor::ApplyFilterVisitor(UpdateView::Filter filter)

@@ -54,7 +54,6 @@
 #include "cvsserviceinterface.h"
 #include "debug.h"
 #include "diffdialog.h"
-#include "loginfo.h"
 #include "loglist.h"
 #include "logplainview.h"
 #include "logtree.h"
