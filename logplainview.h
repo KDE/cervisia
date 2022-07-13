@@ -51,7 +51,11 @@ public slots:
     void searchHighlight(const QString &text, int index, int length);
 
 protected:
-    void setSource(const QUrl &url) override;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    void setSource(const QUrl &name) override;
+#else
+    void doSetSource(const QUrl &name, QTextDocument::ResourceType type) override;
+#endif
 
 private:
     KFind *m_find;

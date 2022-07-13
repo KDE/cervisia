@@ -22,9 +22,8 @@
 #define ADDREMOVEDIALOG_H
 
 #include <QDialog>
-
+#include <QStringList>
 class QListWidget;
-class QStringList;
 
 class AddRemoveDialog : public QDialog
 {

@@ -394,7 +394,7 @@ void LogTreeView::mousePressed(const QModelIndex &index)
 {
     Qt::MouseButtons buttons = QApplication::mouseButtons();
 
-    if (buttons == Qt::MidButton || buttons == Qt::LeftButton) {
+    if (buttons == Qt::MiddleButton || buttons == Qt::LeftButton) {
         int row = index.row();
         int col = index.column();
 
@@ -402,7 +402,7 @@ void LogTreeView::mousePressed(const QModelIndex &index)
             if (item->row == row && item->col == col) {
                 // Change selection for revision B if the middle mouse button or
                 // the left mouse button with the control key was pressed
-                bool changeRevB = (buttons == Qt::MidButton) || (buttons == Qt::LeftButton && QApplication::keyboardModifiers() & Qt::ControlModifier);
+                bool changeRevB = (buttons == Qt::MiddleButton) || (buttons == Qt::LeftButton && QApplication::keyboardModifiers() & Qt::ControlModifier);
 
                 emit revisionClicked(item->m_logInfo.m_revision, changeRevB);
                 viewport()->update();

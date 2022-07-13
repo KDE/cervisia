@@ -21,10 +21,10 @@
 
 #include <QFileInfo>
 #include <QObject>
+#include <QStringList>
 
 class QAction;
 class QMenu;
-class QStringList;
 
 namespace Cervisia
 {

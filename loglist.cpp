@@ -147,7 +147,7 @@ void LogListView::mousePressEvent(QMouseEvent *e)
             emit revisionClicked(revision, true);
         else
             emit revisionClicked(revision, false);
-    } else if (e->button() == Qt::MidButton)
+    } else if (e->button() == Qt::MiddleButton)
         emit revisionClicked(revision, true);
 }
 

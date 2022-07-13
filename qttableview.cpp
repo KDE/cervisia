@@ -156,7 +156,7 @@ QtTableView::QtTableView(QWidget *parent, const char *name)
     coveringCornerSquare = false;
     inSbUpdate = false;
 
-    setAttribute(Qt::WA_NoBackground, true);
+    setAttribute(Qt::WA_OpaquePaintEvent, true);
     setObjectName(name);
 }
 

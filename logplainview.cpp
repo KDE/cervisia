@@ -144,7 +144,11 @@ void LogPlainView::searchHighlight(const QString &text, int index, int length)
     setTextCursor(cursor);
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 void LogPlainView::setSource(const QUrl &url)
+#else
+void LogPlainView::doSetSource(const QUrl &url, QTextDocument::ResourceType type)
+#endif
 {
     const QString name(url.toString());
     if (name.isEmpty())

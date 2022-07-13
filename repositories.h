@@ -20,7 +20,7 @@
 #ifndef REPOSITORIES_H
 #define REPOSITORIES_H
 
-class QStringList;
+#include <QStringList>
 
 class Repositories
 {
