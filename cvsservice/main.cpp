@@ -20,27 +20,28 @@
 
 #include <QApplication>
 
-#include <kaboutdata.h>
 #include <KLocalizedString>
+#include <kaboutdata.h>
 
-#include "cvsservice.h"
 #include "../cervisia_version.h"
+#include "cvsservice.h"
 
-
-extern "C" Q_DECL_EXPORT int kdemain(int argc, char** argv)
+extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
 {
     KLocalizedString::setApplicationDomain("cvsservice");
 
     QApplication app(argc, argv);
 
-    KAboutData about("cvsservice5", i18n("CVS D-Bus service"), CERVISIA_VERSION_STRING,
-                     i18n("D-Bus service for CVS"), KAboutLicense::LGPL,
+    KAboutData about("cvsservice5",
+                     i18n("CVS D-Bus service"),
+                     CERVISIA_VERSION_STRING,
+                     i18n("D-Bus service for CVS"),
+                     KAboutLicense::LGPL,
                      i18n("Copyright (c) 2002-2003 Christian Loose"));
 
     about.setOrganizationDomain("kde.org");
 
-    about.addAuthor(i18n("Christian Loose"), i18n("Developer"),
-                    "christian.loose@hamburg.de");
+    about.addAuthor(i18n("Christian Loose"), i18n("Developer"), "christian.loose@hamburg.de");
 
     KAboutData::setApplicationData(about);
 

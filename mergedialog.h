@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -32,8 +32,7 @@ class MergeDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit MergeDialog( OrgKdeCervisia5CvsserviceCvsserviceInterface* service,
-                          QWidget *parent=nullptr );
+    explicit MergeDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface *service, QWidget *parent = nullptr);
 
     bool byBranch() const;
     QString branch() const;
@@ -44,10 +43,10 @@ private slots:
     void toggled();
     void tagButtonClicked();
     void branchButtonClicked();
-    
+
 private:
-    OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService;
-    
+    OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService;
+
     QRadioButton *bybranch_button, *bytags_button;
     KComboBox *branch_combo, *tag1_combo, *tag2_combo;
     QPushButton *tag_button, *branch_button;

@@ -21,32 +21,31 @@
 #ifndef CVSJOB_H
 #define CVSJOB_H
 
-#include <qobject.h>
 #include <QStringList>
+#include <qobject.h>
 
 class QString;
-
 
 class Q_DECL_EXPORT CvsJob : public QObject
 {
     Q_OBJECT
 public:
     explicit CvsJob(unsigned jobNum);
-    explicit CvsJob(const QString& objId);
+    explicit CvsJob(const QString &objId);
     ~CvsJob() override;
 
     void clearCvsCommand();
 
-    void setRSH(const QString& rsh);
-    void setServer(const QString& server);
-    void setDirectory(const QString& directory);
+    void setRSH(const QString &rsh);
+    void setServer(const QString &server);
+    void setDirectory(const QString &directory);
 
-    CvsJob& operator<<(const QString& arg);
-    CvsJob& operator<<(const char* arg);
-    CvsJob& operator<<(const QStringList& args);
+    CvsJob &operator<<(const QString &arg);
+    CvsJob &operator<<(const char *arg);
+    CvsJob &operator<<(const QStringList &args);
 
     QString dbusObjectPath() const;
-public Q_SLOTS: //dbus function
+public Q_SLOTS: // dbus function
     bool execute();
     void cancel();
     bool isRunning() const;
@@ -60,10 +59,10 @@ public Q_SLOTS: //dbus function
 
     QStringList output() const;
 
-signals: //dbus signal
+signals: // dbus signal
     void jobExited(bool normalExit, int status);
-    void receivedStdout(const QString& buffer);
-    void receivedStderr(const QString& buffer);
+    void receivedStdout(const QString &buffer);
+    void receivedStderr(const QString &buffer);
 
 private slots:
     void slotProcessFinished();
@@ -72,8 +71,7 @@ private slots:
 
 private:
     struct Private;
-    Private* d;
+    Private *d;
 };
-
 
 #endif

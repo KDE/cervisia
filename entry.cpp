@@ -16,19 +16,15 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #include "entry.h"
-
 
 namespace Cervisia
 {
 
-
 Entry::Entry()
-    : m_type(File),
-      m_status(Unknown)
+    : m_type(File)
+    , m_status(Unknown)
 {
 }
-
 
 } // namespace Cervisia

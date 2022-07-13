@@ -18,7 +18,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #ifndef PROTOCOLVIEW_H
 #define PROTOCOLVIEW_H
 
@@ -26,18 +25,17 @@
 
 class OrgKdeCervisia5CvsserviceCvsjobInterface;
 
-
 class ProtocolView : public QTextEdit
 {
     Q_OBJECT
 public:
-    explicit ProtocolView(const QString& appId, QWidget *parent=nullptr);
+    explicit ProtocolView(const QString &appId, QWidget *parent = nullptr);
     ~ProtocolView() override;
 
     bool startJob(bool isUpdateJob = false);
 
 protected:
-    void contextMenuEvent(QContextMenuEvent* event) override;
+    void contextMenuEvent(QContextMenuEvent *event) override;
 
 public Q_SLOTS:
     void slotReceivedOutput(QString buffer);
@@ -54,7 +52,7 @@ private Q_SLOTS:
 private:
     void processOutput();
     void appendLine(const QString &line);
-    void appendHtml(const QString& html);
+    void appendHtml(const QString &html);
 
     QString buf;
 
@@ -62,13 +60,12 @@ private:
     QColor localChangeColor;
     QColor remoteChangeColor;
 
-    OrgKdeCervisia5CvsserviceCvsjobInterface* job;
+    OrgKdeCervisia5CvsserviceCvsjobInterface *job;
 
-    bool   m_isUpdateJob;
+    bool m_isUpdateJob;
 };
 
 #endif
-
 
 // Local Variables:
 // c-basic-offset: 4

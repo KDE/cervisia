@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -33,8 +33,7 @@ class UpdateDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit UpdateDialog( OrgKdeCervisia5CvsserviceCvsserviceInterface* service,
-                           QWidget *parent=nullptr );
+    explicit UpdateDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface *service, QWidget *parent = nullptr);
 
     bool byTag() const;
     QString tag() const;
@@ -44,10 +43,10 @@ private slots:
     void toggled();
     void tagButtonClicked();
     void branchButtonClicked();
-    
+
 private:
-    OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService;
-    
+    OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService;
+
     QRadioButton *bytag_button, *bybranch_button, *bydate_button;
     KComboBox *tag_combo, *branch_combo;
     QPushButton *tag_button, *branch_button;

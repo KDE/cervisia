@@ -19,5 +19,3 @@
 
 #include "debug.h"
 Q_LOGGING_CATEGORY(log_cervisia, "log_cervisia")
-
-

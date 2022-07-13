@@ -21,24 +21,23 @@
 #include "logtree.h"
 
 #include <QApplication>
-#include <qpainter.h>
 #include <QDebug>
 #include <kcolorscheme.h>
+#include <qpainter.h>
 
 #include "loginfo.h"
 #include "tooltip.h"
 
 #include <QHeaderView>
 
-
 const int LogTreeView::BORDER = 5;
 const int LogTreeView::INSPACE = 3;
 
 namespace
 {
-    bool static_initialized = false;
-    int static_width;
-    int static_height;
+bool static_initialized = false;
+int static_width;
+int static_height;
 }
 
 class LogTreeItem
@@ -52,7 +51,6 @@ public:
     SelectedRevision selected;
 };
 
-
 class LogTreeConnection
 {
 public:
@@ -60,18 +58,18 @@ public:
     LogTreeItem *end;
 };
 
-
 LogTreeView::LogTreeView(QWidget *parent, const char *name)
-    : QTableView(parent), rowCount(0), columnCount(1)
+    : QTableView(parent)
+    , rowCount(0)
+    , columnCount(1)
 {
     setObjectName(QLatin1String(name));
 
-    if (!static_initialized)
-    {
+    if (!static_initialized) {
         static_initialized = true;
-        QFontMetrics fm( fontMetrics() );
-        static_width = fm.width("1234567890") + 2*BORDER + 2*INSPACE;
-        static_height = 2*fm.height() + 2*BORDER + 3*INSPACE;
+        QFontMetrics fm(fontMetrics());
+        static_width = fm.width("1234567890") + 2 * BORDER + 2 * INSPACE;
+        static_height = 2 * fm.height() + 2 * BORDER + 3 * INSPACE;
     }
 
     setItemDelegate(new LogTreeDelegate(this));
@@ -81,21 +79,18 @@ LogTreeView::LogTreeView(QWidget *parent, const char *name)
     setShowGrid(false);
     horizontalHeader()->hide();
     verticalHeader()->hide();
-    setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
-    setBackgroundRole( QPalette::Base );
+    setFrameStyle(QFrame::WinPanel | QFrame::Sunken);
+    setBackgroundRole(QPalette::Base);
     setFocusPolicy(Qt::NoFocus);
     setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
     setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
 
-    Cervisia::ToolTip* toolTip = new Cervisia::ToolTip(viewport());
+    Cervisia::ToolTip *toolTip = new Cervisia::ToolTip(viewport());
 
-    connect(toolTip, SIGNAL(queryToolTip(QPoint,QRect&,QString&)),
-            this, SLOT(slotQueryToolTip(QPoint,QRect&,QString&)));
+    connect(toolTip, SIGNAL(queryToolTip(QPoint, QRect &, QString &)), this, SLOT(slotQueryToolTip(QPoint, QRect &, QString &)));
 
-    connect(this, SIGNAL(pressed(QModelIndex)),
-            this, SLOT(mousePressed(QModelIndex)));
+    connect(this, SIGNAL(pressed(QModelIndex)), this, SLOT(mousePressed(QModelIndex)));
 }
-
 
 LogTreeView::~LogTreeView()
 {
@@ -103,8 +98,7 @@ LogTreeView::~LogTreeView()
     qDeleteAll(connections);
 }
 
-
-void LogTreeView::addRevision(const Cervisia::LogInfo& logInfo)
+void LogTreeView::addRevision(const Cervisia::LogInfo &logInfo)
 {
     QString branchpoint, branchrev;
 
@@ -112,17 +106,14 @@ void LogTreeView::addRevision(const Cervisia::LogInfo& logInfo)
 
     // find branch
     int pos1, pos2;
-    if ((pos2 = rev.lastIndexOf('.')) > 0 &&
-        (pos1 = rev.lastIndexOf('.', pos2-1)) > 0)
-    {
+    if ((pos2 = rev.lastIndexOf('.')) > 0 && (pos1 = rev.lastIndexOf('.', pos2 - 1)) > 0) {
         // e. g. for rev = 1.1.2.3 we have
         // branchrev = 1.1.2, branchpoint = 1.1
         branchrev = rev.left(pos2);
         branchpoint = rev.left(pos1);
     }
 
-    if (branchrev.isEmpty())
-    {
+    if (branchrev.isEmpty()) {
         // Most probably we are on the trunk
         model->beginInsertRows(QModelIndex(), rowCount, rowCount);
         rowCount++;
@@ -130,7 +121,7 @@ void LogTreeView::addRevision(const Cervisia::LogInfo& logInfo)
         item->m_logInfo = logInfo;
         item->branchpoint = branchpoint;
         item->firstonbranch = false;
-        item->row = rowCount-1;
+        item->row = rowCount - 1;
         item->col = 0;
         item->selected = NoRevision;
         items.append(item);
@@ -140,19 +131,16 @@ void LogTreeView::addRevision(const Cervisia::LogInfo& logInfo)
 
     // look whether we have revisions on this branch
     // shift them up
-    int row=-1, col=-1;
-    foreach (LogTreeItem* item1, items)
-    {
-        if (branchrev == (item1->m_logInfo.m_revision).left(branchrev.length()))
-        {
+    int row = -1, col = -1;
+    foreach (LogTreeItem *item1, items) {
+        if (branchrev == (item1->m_logInfo.m_revision).left(branchrev.length())) {
             item1->firstonbranch = false;
             row = item1->row;
             col = item1->col;
             item1->row--;
             // Are we at the top of the widget?
-            if (row == 0)
-            {
-                foreach (LogTreeItem* item2, items)
+            if (row == 0) {
+                foreach (LogTreeItem *item2, items)
                     item2->row++;
                 model->beginInsertRows(QModelIndex(), rowCount, rowCount);
                 rowCount++;
@@ -162,28 +150,24 @@ void LogTreeView::addRevision(const Cervisia::LogInfo& logInfo)
         }
     }
 
-    if (row == -1)
-    {
+    if (row == -1) {
         // Ok, so we must open a new branch
         // Let's find the branch point
-        QListIterator<LogTreeItem*> iter(items);
+        QListIterator<LogTreeItem *> iter(items);
         iter.toBack();
-        while (iter.hasPrevious())
-        {
-            LogTreeItem* item1(iter.previous());
-            if (branchpoint == item1->m_logInfo.m_revision)
-            {
+        while (iter.hasPrevious()) {
+            LogTreeItem *item1(iter.previous());
+            if (branchpoint == item1->m_logInfo.m_revision) {
                 // Move existing branches to the right
-                foreach (LogTreeItem* item2, items)
+                foreach (LogTreeItem *item2, items)
                     if (item2->col > item1->col)
                         item2->col++;
                 model->beginInsertColumns(QModelIndex(), columnCount, columnCount);
                 columnCount++;
-                row = item1->row-1;
-                col = item1->col+1;
-                if (row == -1)
-                {
-                    foreach (LogTreeItem* item3, items)
+                row = item1->row - 1;
+                col = item1->col + 1;
+                if (row == -1) {
+                    foreach (LogTreeItem *item3, items)
                         item3->row++;
                     model->beginInsertRows(QModelIndex(), rowCount, rowCount);
                     rowCount++;
@@ -218,21 +202,15 @@ void LogTreeView::addRevision(const Cervisia::LogInfo& logInfo)
 #endif
 }
 
-
 void LogTreeView::collectConnections()
 {
-    for (LogTreeItemList::const_iterator it(items.begin()),
-                                         itEnd(items.end());
-         it != itEnd; ++it)
-    {
+    for (LogTreeItemList::const_iterator it(items.begin()), itEnd(items.end()); it != itEnd; ++it) {
         QString rev = (*it)->m_logInfo.m_revision;
 
         LogTreeItemList::const_iterator it2(it);
         ++it2;
         for (; it2 != itEnd; ++it2)
-            if ((*it2)->branchpoint == rev &&
-                (*it2)->firstonbranch)
-            {
+            if ((*it2)->branchpoint == rev && (*it2)->firstonbranch) {
                 LogTreeConnection *conn = new LogTreeConnection;
                 conn->start = (*it);
                 conn->end = (*it2);
@@ -241,44 +219,37 @@ void LogTreeView::collectConnections()
     }
 }
 
-
 void LogTreeView::setSelectedPair(QString selectionA, QString selectionB)
 {
-    foreach (LogTreeItem* item, items)
-    {
+    foreach (LogTreeItem *item, items) {
         const SelectedRevision oldSelection = item->selected;
         SelectedRevision newSelection;
 
-        if ( selectionA == item->m_logInfo.m_revision )
+        if (selectionA == item->m_logInfo.m_revision)
             newSelection = RevisionA;
-        else if ( selectionB == item->m_logInfo.m_revision )
+        else if (selectionB == item->m_logInfo.m_revision)
             newSelection = RevisionB;
         else
             newSelection = NoRevision;
 
-        if (oldSelection != newSelection)
-        {
+        if (oldSelection != newSelection) {
             item->selected = newSelection;
             viewport()->update();
         }
     }
 }
 
-
 QSize LogTreeView::sizeHint() const
 {
     return QSize(2 * static_width, 3 * static_height);
 }
 
-
 QString LogTreeView::text(int row, int col) const
 {
-    LogTreeItem* item = 0;
+    LogTreeItem *item = 0;
 
-    foreach (LogTreeItem* treeItem, items)
-    {
-        if( treeItem->col == col && treeItem->row == row )
-        {
+    foreach (LogTreeItem *treeItem, items) {
+        if (treeItem->col == col && treeItem->row == row) {
             item = treeItem;
             break;
         }
@@ -286,12 +257,11 @@ QString LogTreeView::text(int row, int col) const
 
     QString text;
 
-    if( item && !item->m_logInfo.m_author.isNull() )
+    if (item && !item->m_logInfo.m_author.isNull())
         text = item->m_logInfo.createToolTipText();
 
     return text;
 }
-
 
 void LogTreeView::paintCell(QPainter *p, int row, int col)
 {
@@ -302,17 +272,15 @@ void LogTreeView::paintCell(QPainter *p, int row, int col)
     followed = false;
     item = 0;
 
-    foreach (LogTreeItem* treeItem, items)
-    {
+    foreach (LogTreeItem *treeItem, items) {
         int itcol = treeItem->col;
         int itrow = treeItem->row;
-        if (itrow == row-1 && itcol == col)
+        if (itrow == row - 1 && itcol == col)
             followed = true;
         if (itrow == row && itcol == col)
             item = treeItem;
     }
-    foreach (LogTreeConnection* connection, connections)
-    {
+    foreach (LogTreeConnection *connection, connections) {
         int itcol1 = connection->start->col;
         int itcol2 = connection->end->col;
         int itrow = connection->start->row;
@@ -321,15 +289,12 @@ void LogTreeView::paintCell(QPainter *p, int row, int col)
     }
 
     if (item)
-        paintRevisionCell(p, row, col, item->m_logInfo,
-                          followed, branched, item->selected);
+        paintRevisionCell(p, row, col, item->m_logInfo, followed, branched, item->selected);
     else if (followed || branched)
         paintConnector(p, row, col, followed, branched);
 }
 
-
-void LogTreeView::paintConnector(QPainter *p,
-                                 int row, int col, bool followed, bool branched)
+void LogTreeView::paintConnector(QPainter *p, int row, int col, bool followed, bool branched)
 {
     const int midx = columnWidth(col) / 2;
     const int midy = rowHeight(row) / 2;
@@ -339,15 +304,11 @@ void LogTreeView::paintConnector(QPainter *p,
         p->drawLine(midx, midy, midx, 0);
 }
 
-
-QSize LogTreeView::computeSize(const Cervisia::LogInfo& logInfo,
-                               int*                     authorHeight,
-                               int*                     tagsHeight) const
+QSize LogTreeView::computeSize(const Cervisia::LogInfo &logInfo, int *authorHeight, int *tagsHeight) const
 {
     const QFontMetrics fm(fontMetrics());
 
-    const QString tags(logInfo.tagsToString(Cervisia::TagInfo::Branch | Cervisia::TagInfo::Tag,
-                                            Cervisia::TagInfo::Branch));
+    const QString tags(logInfo.tagsToString(Cervisia::TagInfo::Branch | Cervisia::TagInfo::Tag, Cervisia::TagInfo::Branch));
 
     const QSize r1 = fm.size(Qt::AlignCenter, logInfo.m_revision);
     const QSize r3 = fm.size(Qt::AlignCenter, logInfo.m_author);
@@ -358,16 +319,13 @@ QSize LogTreeView::computeSize(const Cervisia::LogInfo& logInfo,
     int infoWidth = qMax(static_width - 2 * BORDER, qMax(r1.width(), r3.width()));
     int infoHeight = r1.height() + r3.height() + 3 * INSPACE;
 
-    if (!tags.isEmpty())
-    {
+    if (!tags.isEmpty()) {
         const QSize r2 = fm.size(Qt::AlignCenter, tags);
         infoWidth = qMax(infoWidth, r2.width());
         infoHeight += r2.height() + INSPACE;
         if (tagsHeight)
             *tagsHeight = r2.height();
-    }
-    else
-    {
+    } else {
         if (tagsHeight)
             *tagsHeight = 0;
     }
@@ -376,11 +334,7 @@ QSize LogTreeView::computeSize(const Cervisia::LogInfo& logInfo,
     return QSize(infoWidth, infoHeight);
 }
 
-
-void LogTreeView::paintRevisionCell(QPainter *p,
-                                    int row, int col,
-                                    const Cervisia::LogInfo& logInfo,
-                                    bool followed, bool branched, SelectedRevision selected)
+void LogTreeView::paintRevisionCell(QPainter *p, int row, int col, const Cervisia::LogInfo &logInfo, bool followed, bool branched, SelectedRevision selected)
 {
     int authorHeight;
     int tagsHeight;
@@ -390,9 +344,7 @@ void LogTreeView::paintRevisionCell(QPainter *p,
     const int midx(cellSize.width() / 2);
     const int midy(cellSize.height() / 2);
 
-    QRect rect(QPoint((cellSize.width() - infoSize.width()) / 2,
-                      (cellSize.height() - infoSize.height()) / 2),
-               infoSize);
+    QRect rect(QPoint((cellSize.width() - infoSize.width()) / 2, (cellSize.height() - infoSize.height()) / 2), infoSize);
 
     // Connectors
     if (followed)
@@ -404,25 +356,17 @@ void LogTreeView::paintRevisionCell(QPainter *p,
     p->drawLine(midx, rect.y() + infoSize.height(), midx, cellSize.height()); // to the bottom
 
     // The box itself
-    if (selected)
-    {
-        if ( selected == RevisionA )
-        {
+    if (selected) {
+        if (selected == RevisionA) {
             p->fillRect(rect, KColorScheme(QPalette::Active, KColorScheme::Selection).background());
             p->setPen(KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color());
             p->drawText(rect, Qt::AlignLeft | Qt::AlignTop, "A");
-        }
-        else
-        {
-            p->fillRect(rect, KColorScheme(QPalette::Active, KColorScheme::Selection)
-                .background().color().lighter(130));
-            p->setPen(KColorScheme(QPalette::Active, KColorScheme::Selection)
-                .foreground().color().lighter(130));
+        } else {
+            p->fillRect(rect, KColorScheme(QPalette::Active, KColorScheme::Selection).background().color().lighter(130));
+            p->setPen(KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color().lighter(130));
             p->drawText(rect, Qt::AlignLeft | Qt::AlignTop, "B");
         }
-    }
-    else
-    {
+    } else {
         p->drawRoundedRect(rect, 10, 10);
     }
 
@@ -431,10 +375,8 @@ void LogTreeView::paintRevisionCell(QPainter *p,
     p->drawText(rect, Qt::AlignHCenter, logInfo.m_author);
     rect.setY(rect.y() + authorHeight + INSPACE);
 
-    const QString tags(logInfo.tagsToString(Cervisia::TagInfo::Branch | Cervisia::TagInfo::Tag,
-                                            Cervisia::TagInfo::Branch));
-    if (!tags.isEmpty())
-    {
+    const QString tags(logInfo.tagsToString(Cervisia::TagInfo::Branch | Cervisia::TagInfo::Tag, Cervisia::TagInfo::Branch));
+    if (!tags.isEmpty()) {
         const QFont font(p->font());
         QFont underline(font);
         underline.setUnderline(true);
@@ -449,26 +391,19 @@ void LogTreeView::paintRevisionCell(QPainter *p,
     p->drawText(rect, Qt::AlignHCenter, logInfo.m_revision);
 }
 
-
 void LogTreeView::mousePressed(const QModelIndex &index)
 {
     Qt::MouseButtons buttons = QApplication::mouseButtons();
 
-    if ( buttons == Qt::MidButton ||
-         buttons == Qt::LeftButton)
-    {
+    if (buttons == Qt::MidButton || buttons == Qt::LeftButton) {
         int row = index.row();
         int col = index.column();
 
-        foreach (LogTreeItem* item, items)
-        {
-            if (item->row == row && item->col == col)
-            {
+        foreach (LogTreeItem *item, items) {
+            if (item->row == row && item->col == col) {
                 // Change selection for revision B if the middle mouse button or
                 // the left mouse button with the control key was pressed
-                bool changeRevB = (buttons == Qt::MidButton) ||
-                                  (buttons == Qt::LeftButton &&
-                                   QApplication::keyboardModifiers() & Qt::ControlModifier);
+                bool changeRevB = (buttons == Qt::MidButton) || (buttons == Qt::LeftButton && QApplication::keyboardModifiers() & Qt::ControlModifier);
 
                 emit revisionClicked(item->m_logInfo.m_revision, changeRevB);
                 viewport()->update();
@@ -478,13 +413,11 @@ void LogTreeView::mousePressed(const QModelIndex &index)
     }
 }
 
-
-void LogTreeView::recomputeCellSizes ()
+void LogTreeView::recomputeCellSizes()
 {
     // Compute maximum for each column and row
-    foreach (const LogTreeItem* item, items)
-    {
-        const QSize cellSize(computeSize(item->m_logInfo) + QSize(2 * BORDER,  2 * BORDER));
+    foreach (const LogTreeItem *item, items) {
+        const QSize cellSize(computeSize(item->m_logInfo) + QSize(2 * BORDER, 2 * BORDER));
 
         setColumnWidth(item->col, qMax(columnWidth(item->col), cellSize.width()));
         setRowHeight(item->row, qMax(rowHeight(item->row), cellSize.height()));
@@ -493,10 +426,7 @@ void LogTreeView::recomputeCellSizes ()
     viewport()->update();
 }
 
-
-void LogTreeView::slotQueryToolTip(const QPoint& viewportPos,
-                                   QRect&        viewportRect,
-                                   QString&      tipText)
+void LogTreeView::slotQueryToolTip(const QPoint &viewportPos, QRect &viewportRect, QString &tipText)
 {
     QModelIndex index(indexAt(viewportPos));
 
@@ -518,8 +448,6 @@ void LogTreeDelegate::paint(QPainter *painter, const QStyleOptionViewItem &optio
 
     painter->restore();
 }
-
-
 
 // Local Variables:
 // c-basic-offset: 4

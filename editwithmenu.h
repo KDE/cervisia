@@ -19,39 +19,33 @@
 #ifndef EDITWITHMENU_H
 #define EDITWITHMENU_H
 
-#include <qobject.h>
 #include <QUrl>
+#include <qobject.h>
 
 #include <kservicetypetrader.h>
 
 class QAction;
 class QMenu;
 
-
 namespace Cervisia
 {
-
 
 class EditWithMenu : public QObject
 {
     Q_OBJECT
 
 public:
-    EditWithMenu(const QUrl& url, QWidget* parent);
-    QMenu* menu();
+    EditWithMenu(const QUrl &url, QWidget *parent);
+    QMenu *menu();
 
 private slots:
-    void actionTriggered(QAction*);
+    void actionTriggered(QAction *);
 
 private:
     KService::List m_offers;
-    QMenu* m_menu;
-    QUrl   m_url;
+    QMenu *m_menu;
+    QUrl m_url;
 };
-
-
 }
 
-
 #endif
-

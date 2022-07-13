@@ -19,40 +19,35 @@
 #ifndef ADDIGNOREMENU_H
 #define ADDIGNOREMENU_H
 
-#include <QObject>
 #include <QFileInfo>
+#include <QObject>
 
 class QAction;
 class QMenu;
 class QStringList;
 
-
 namespace Cervisia
 {
-
 
 class AddIgnoreMenu : public QObject
 {
     Q_OBJECT
 
 public:
-    AddIgnoreMenu(const QString& directory, const QStringList& fileList, QWidget* parent);
+    AddIgnoreMenu(const QString &directory, const QStringList &fileList, QWidget *parent);
 
-    QMenu* menu();
+    QMenu *menu();
 
 private slots:
-    void actionTriggered(QAction*);
+    void actionTriggered(QAction *);
 
 private:
     void addActions();
-    void appendIgnoreFile(const QString& path, const QString& fileName);
+    void appendIgnoreFile(const QString &path, const QString &fileName);
 
-    QMenu*        m_menu;
+    QMenu *m_menu;
     QFileInfoList m_fileList;
 };
-
-
 }
-
 
 #endif

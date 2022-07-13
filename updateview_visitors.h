@@ -16,54 +16,47 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #ifndef UPDATEVIEW_VISITORS_H
 #define UPDATEVIEW_VISITORS_H
-
 
 #include "updateview.h"
 
 #include <set>
 
-
 class UpdateItem;
 class UpdateDirItem;
 class UpdateFileItem;
 
-
 class Visitor
 {
 public:
+    virtual ~Visitor()
+    {
+    }
 
-    virtual ~Visitor() {}
+    virtual void preVisit(UpdateDirItem *) = 0;
+    virtual void postVisit(UpdateDirItem *) = 0;
 
-    virtual void preVisit(UpdateDirItem*) = 0;
-    virtual void postVisit(UpdateDirItem*) = 0;
-
-    virtual void visit(UpdateFileItem*) = 0;
+    virtual void visit(UpdateFileItem *) = 0;
 };
-
 
 class ApplyFilterVisitor : public Visitor
 {
 public:
-
     explicit ApplyFilterVisitor(UpdateView::Filter filter);
 
-    void preVisit(UpdateDirItem*) override;
-    void postVisit(UpdateDirItem*) override;
+    void preVisit(UpdateDirItem *) override;
+    void postVisit(UpdateDirItem *) override;
 
-    void visit(UpdateFileItem*) override;
+    void visit(UpdateFileItem *) override;
 
 private:
-
-    void markAllParentsAsVisible(UpdateItem*);
+    void markAllParentsAsVisible(UpdateItem *);
 
     UpdateView::Filter m_filter;
 
-    typedef std::set<UpdateItem*> TItemSet;
+    typedef std::set<UpdateItem *> TItemSet;
     TItemSet m_invisibleDirItems;
 };
-
 
 #endif // UPDATEVIEW_VISITORS_H

@@ -18,17 +18,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #ifndef LOGTREE_H
 #define LOGTREE_H
 
-
 #include <qlist.h>
 
-#include <QTableView>
 #include <QAbstractTableModel>
 #include <QStyledItemDelegate>
-
+#include <QTableView>
 
 class LogTreeItem;
 class LogTreeConnection;
@@ -38,36 +35,28 @@ namespace Cervisia
 struct LogInfo;
 }
 
+typedef QList<LogTreeItem *> LogTreeItemList;
+typedef QList<LogTreeConnection *> LogTreeConnectionList;
 
-typedef QList<LogTreeItem*> LogTreeItemList;
-typedef QList<LogTreeConnection*> LogTreeConnectionList;
-
-
-enum SelectedRevision
-{
-    NoRevision,
-    RevisionA,
-    RevisionB
-};
-
+enum SelectedRevision { NoRevision, RevisionA, RevisionB };
 
 class LogTreeView : public QTableView
 {
     Q_OBJECT
 
 public:
-    explicit LogTreeView( QWidget *parent=nullptr, const char *name=0 );
+    explicit LogTreeView(QWidget *parent = nullptr, const char *name = 0);
 
     ~LogTreeView() override;
 
-    void addRevision(const Cervisia::LogInfo& logInfo);
+    void addRevision(const Cervisia::LogInfo &logInfo);
     void setSelectedPair(QString selectionA, QString selectionB);
     void collectConnections();
     void recomputeCellSizes();
     void paintCell(QPainter *p, int row, int col);
 
     QSize sizeHint() const override;
-    
+
     virtual QString text(int row, int col) const;
 
 signals:
@@ -75,12 +64,11 @@ signals:
 
 private slots:
     void mousePressed(const QModelIndex &index);
-    void slotQueryToolTip(const QPoint&, QRect&, QString&);
+    void slotQueryToolTip(const QPoint &, QRect &, QString &);
 
 private:
-    QSize computeSize(const Cervisia::LogInfo&, int* = 0, int* = 0) const;
-    void paintRevisionCell(QPainter *p, int row, int col, const Cervisia::LogInfo& logInfo,
-                           bool followed, bool branched, SelectedRevision selected);
+    QSize computeSize(const Cervisia::LogInfo &, int * = 0, int * = 0) const;
+    void paintRevisionCell(QPainter *p, int row, int col, const Cervisia::LogInfo &logInfo, bool followed, bool branched, SelectedRevision selected);
     void paintConnector(QPainter *p, int row, int col, bool followed, bool branched);
 
     LogTreeItemList items;
@@ -95,11 +83,13 @@ private:
     class LogTreeModel *model;
 };
 
-
 class LogTreeModel : public QAbstractTableModel
 {
 public:
-    explicit LogTreeModel(LogTreeView *t) : logView(t) { }
+    explicit LogTreeModel(LogTreeView *t)
+        : logView(t)
+    {
+    }
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override
     {
@@ -113,7 +103,10 @@ public:
         return logView->columnCount;
     }
 
-    QVariant data(const QModelIndex &, int) const override { return QVariant(); }
+    QVariant data(const QModelIndex &, int) const override
+    {
+        return QVariant();
+    }
 
 private:
     LogTreeView *logView;
@@ -121,13 +114,15 @@ private:
     friend class LogTreeView;
 };
 
-
 class LogTreeDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 
 public:
-    explicit LogTreeDelegate(LogTreeView *t) : logView(t) { }
+    explicit LogTreeDelegate(LogTreeView *t)
+        : logView(t)
+    {
+    }
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
 private:
@@ -135,7 +130,6 @@ private:
 };
 
 #endif
-
 
 // vim: set sw=4
 // Local Variables:

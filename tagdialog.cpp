@@ -17,38 +17,36 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #include "tagdialog.h"
 
 #include <KComboBox>
-#include <KHelpClient>
-#include <kmessagebox.h>
 #include <KConfigGroup>
+#include <KHelpClient>
 #include <KLocalizedString>
+#include <kmessagebox.h>
 
 #include <QCheckBox>
+#include <QDialogButtonBox>
+#include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QDialogButtonBox>
 #include <QPushButton>
+#include <QVBoxLayout>
 
-#include "misc.h"
 #include "cvsserviceinterface.h"
+#include "misc.h"
 
 using Cervisia::TagDialog;
 
-TagDialog::TagDialog(ActionType action, OrgKdeCervisia5CvsserviceCvsserviceInterface* service,
-                     QWidget *parent)
-    : QDialog(parent), 
-      act(action),
-      cvsService(service),
-      branchtag_button(0),
-      forcetag_button(0)
+TagDialog::TagDialog(ActionType action, OrgKdeCervisia5CvsserviceCvsserviceInterface *service, QWidget *parent)
+    : QDialog(parent)
+    , act(action)
+    , cvsService(service)
+    , branchtag_button(0)
+    , forcetag_button(0)
 {
     setModal(true);
-    setWindowTitle( (action==Delete)? i18n("CVS Delete Tag") : i18n("CVS Tag") );
+    setWindowTitle((action == Delete) ? i18n("CVS Delete Tag") : i18n("CVS Tag"));
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
@@ -60,8 +58,7 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisia5CvsserviceCvsserviceInter
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
     connect(buttonBox, &QDialogButtonBox::helpRequested, this, &TagDialog::slotHelp);
 
-    if ( action == Delete )
-    {
+    if (action == Delete) {
         tag_combo = new KComboBox;
         mainLayout->addWidget(tag_combo);
         tag_combo->setEditable(true);
@@ -81,9 +78,7 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisia5CvsserviceCvsserviceInter
         tagedit_layout->addWidget(tag_label);
         tagedit_layout->addWidget(tag_combo);
         tagedit_layout->addWidget(tag_button);
-    }
-    else
-    {
+    } else {
         tag_edit = new QLineEdit;
         mainLayout->addWidget(tag_edit);
         tag_edit->setFocus();
@@ -91,7 +86,7 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisia5CvsserviceCvsserviceInter
 
         QLabel *tag_label = new QLabel(i18n("&Name of tag:"));
         mainLayout->addWidget(tag_label);
-        tag_label->setBuddy( tag_edit );
+        tag_label->setBuddy(tag_edit);
 
         QBoxLayout *tagedit_layout = new QHBoxLayout();
         mainLayout->addLayout(tagedit_layout);
@@ -112,43 +107,36 @@ TagDialog::TagDialog(ActionType action, OrgKdeCervisia5CvsserviceCvsserviceInter
     mainLayout->addWidget(buttonBox);
 }
 
-
 bool TagDialog::branchTag() const
 {
     return branchtag_button && branchtag_button->isChecked();
 }
-
 
 bool TagDialog::forceTag() const
 {
     return forcetag_button && forcetag_button->isChecked();
 }
 
-
 QString TagDialog::tag() const
 {
-    return act==Delete? tag_combo->currentText() : tag_edit->text();
+    return act == Delete ? tag_combo->currentText() : tag_edit->text();
 }
 
 void TagDialog::slotHelp()
 {
-  KHelpClient::invokeHelp(QLatin1String("taggingbranching"));
+    KHelpClient::invokeHelp(QLatin1String("taggingbranching"));
 }
 
 void TagDialog::slotOk()
 {
     QString const str(tag());
 
-    if (str.isEmpty())
-    {
-        KMessageBox::sorry(this,
-                           i18n("You must define a tag name."),
-                           "Cervisia");
+    if (str.isEmpty()) {
+        KMessageBox::sorry(this, i18n("You must define a tag name."), "Cervisia");
         return;
     }
 
-    if (!Cervisia::IsValidTag(str))
-    {
+    if (!Cervisia::IsValidTag(str)) {
         KMessageBox::sorry(this,
                            i18n("Tag must start with a letter and may contain "
                                 "letters, digits and the characters '-' and '_'."),
@@ -159,15 +147,11 @@ void TagDialog::slotOk()
     QDialog::accept();
 }
 
-
 void TagDialog::tagButtonClicked()
 {
     tag_combo->clear();
     tag_combo->addItems(::fetchTags(cvsService, this));
 }
-
-
-
 
 // Local Variables:
 // c-basic-offset: 4

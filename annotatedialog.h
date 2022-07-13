@@ -31,19 +31,16 @@ namespace Cervisia
 struct LogInfo;
 }
 
-
 class AnnotateDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-
-    explicit AnnotateDialog( KConfig& cfg, QWidget *parent=nullptr);
+    explicit AnnotateDialog(KConfig &cfg, QWidget *parent = nullptr);
 
     ~AnnotateDialog() override;
 
-    void addLine(const Cervisia::LogInfo& logInfo, const QString& content,
-                 bool odd);
+    void addLine(const Cervisia::LogInfo &logInfo, const QString &content, bool odd);
 
 private slots:
     void slotHelp();
@@ -52,9 +49,9 @@ private slots:
     void gotoLine();
 
 private:
-    QLineEdit    *findEdit;
+    QLineEdit *findEdit;
     AnnotateView *annotate;
-    KConfig&      partConfig;
+    KConfig &partConfig;
 };
 
 #endif // ANNOTATEDIALOG_H

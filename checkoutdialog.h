@@ -35,9 +35,8 @@ class CheckoutDialog : public QDialog
 
 public:
     enum ActionType { Checkout, Import };
-    
-    CheckoutDialog( KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInterface* service, ActionType action,
-                    QWidget *parent=nullptr);
+
+    CheckoutDialog(KConfig &cfg, OrgKdeCervisia5CvsserviceCvsserviceInterface *service, ActionType action, QWidget *parent = nullptr);
 
     QString workingDirectory() const;
     QString repository() const;
@@ -55,7 +54,7 @@ public:
 
 protected slots:
     void slotOk();
-    
+
 private slots:
     void slotHelp();
     void dirButtonClicked();
@@ -66,15 +65,15 @@ private slots:
 private:
     void saveUserInput();
     void restoreUserInput();
-    
+
     KComboBox *repo_combo, *module_combo, *branchCombo;
     KLineEdit *workdir_edit;
     QLineEdit *module_edit, *comment_edit;
     QLineEdit *vendortag_edit, *releasetag_edit, *ignore_edit, *alias_edit;
     QCheckBox *binary_box, *export_box, *recursive_box;
-    QCheckBox* m_useModificationTimeBox;
+    QCheckBox *m_useModificationTimeBox;
     ActionType act;
-    KConfig&   partConfig;
+    KConfig &partConfig;
     QString helpTopic;
 
     OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService;

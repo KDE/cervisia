@@ -18,16 +18,15 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #include "addrepositorydialog.h"
 
-#include <qcheckbox.h>
+#include <QBoxLayout>
 #include <QLabel>
 #include <QVBoxLayout>
-#include <QBoxLayout>
+#include <qcheckbox.h>
 
-#include <QLineEdit>
 #include <QDialogButtonBox>
+#include <QLineEdit>
 #include <QPushButton>
 #include <QSpinBox>
 
@@ -35,9 +34,9 @@
 #include <KConfigGroup>
 #include <KLocalizedString>
 
-
-AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo, QWidget* parent)
-    : QDialog(parent), partConfig(cfg)
+AddRepositoryDialog::AddRepositoryDialog(KConfig &cfg, const QString &repo, QWidget *parent)
+    : QDialog(parent)
+    , partConfig(cfg)
 {
     setWindowTitle(i18n("Add Repository"));
     setModal(true);
@@ -52,7 +51,7 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo, QWid
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
-    QLabel* repo_label = new QLabel(i18n("&Repository:"));
+    QLabel *repo_label = new QLabel(i18n("&Repository:"));
     mainLayout->addWidget(repo_label);
 
     repo_edit = new QLineEdit;
@@ -60,14 +59,13 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo, QWid
 
     repo_edit->setFocus();
     repo_label->setBuddy(repo_edit);
-    if( !repo.isNull() )
-    {
+    if (!repo.isNull()) {
         repo_edit->setText(repo);
         repo_edit->setEnabled(false);
     }
     mainLayout->addWidget(repo_edit);
 
-    QLabel* rsh_label = new QLabel(i18n("Use remote &shell (only for :ext: repositories):"));
+    QLabel *rsh_label = new QLabel(i18n("Use remote &shell (only for :ext: repositories):"));
     mainLayout->addWidget(rsh_label);
     mainLayout->addWidget(rsh_label);
 
@@ -76,7 +74,7 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo, QWid
     rsh_label->setBuddy(rsh_edit);
     mainLayout->addWidget(rsh_edit);
 
-    QLabel* server_label = new QLabel(i18n("Invoke this program on the server side:"));
+    QLabel *server_label = new QLabel(i18n("Invoke this program on the server side:"));
     mainLayout->addWidget(server_label);
 
     server_edit = new QLineEdit;
@@ -84,7 +82,7 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo, QWid
     server_label->setBuddy(server_edit);
     mainLayout->addWidget(server_edit);
 
-    QHBoxLayout* compressionBox = new QHBoxLayout;
+    QHBoxLayout *compressionBox = new QHBoxLayout;
     mainLayout->addLayout(compressionBox);
     m_useDifferentCompression = new QCheckBox(i18n("Use different &compression level:"));
 
@@ -109,36 +107,29 @@ AddRepositoryDialog::AddRepositoryDialog(KConfig& cfg, const QString& repo, QWid
     restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
 }
 
-
 AddRepositoryDialog::~AddRepositoryDialog()
 {
     KConfigGroup cg(&partConfig, "AddRepositoryDialog");
     cg.writeEntry("geometry", saveGeometry());
 }
 
-
-void AddRepositoryDialog::setRsh(const QString& rsh)
+void AddRepositoryDialog::setRsh(const QString &rsh)
 {
     rsh_edit->setText(rsh);
 }
 
-
-void AddRepositoryDialog::setServer(const QString& server)
+void AddRepositoryDialog::setServer(const QString &server)
 {
     server_edit->setText(server);
 }
 
-
 void AddRepositoryDialog::setCompression(int compression)
 {
-    if( compression < 0 )
-    {
+    if (compression < 0) {
         // TODO: use KConfigXT to retrieve default compression level
         m_compressionLevel->setValue(0);
         m_useDifferentCompression->setChecked(false);
-    }
-    else
-    {
+    } else {
         m_useDifferentCompression->setChecked(true);
         m_compressionLevel->setValue(compression);
     }
@@ -146,47 +137,40 @@ void AddRepositoryDialog::setCompression(int compression)
     compressionToggled(m_useDifferentCompression->isChecked());
 }
 
-
 void AddRepositoryDialog::setRetrieveCvsignoreFile(bool enabled)
 {
     m_retrieveCvsignoreFile->setChecked(enabled);
 }
-
 
 QString AddRepositoryDialog::repository() const
 {
     return repo_edit->text();
 }
 
-
 QString AddRepositoryDialog::rsh() const
 {
     return rsh_edit->text();
 }
-
 
 QString AddRepositoryDialog::server() const
 {
     return server_edit->text();
 }
 
-
 int AddRepositoryDialog::compression() const
 {
-    if( m_useDifferentCompression->isChecked() )
+    if (m_useDifferentCompression->isChecked())
         return m_compressionLevel->value();
     else
         return -1;
 }
-
 
 bool AddRepositoryDialog::retrieveCvsignoreFile() const
 {
     return m_retrieveCvsignoreFile->isChecked();
 }
 
-
-void AddRepositoryDialog::setRepository(const QString& repo)
+void AddRepositoryDialog::setRepository(const QString &repo)
 {
     setWindowTitle(i18n("Repository Settings"));
 
@@ -194,26 +178,21 @@ void AddRepositoryDialog::setRepository(const QString& repo)
     repo_edit->setEnabled(false);
 }
 
-
 void AddRepositoryDialog::repoChanged()
 {
     QString repo = repository();
-    rsh_edit->setEnabled((!repo.startsWith(QLatin1String(":pserver:")))
-                         && repo.contains(":"));
+    rsh_edit->setEnabled((!repo.startsWith(QLatin1String(":pserver:"))) && repo.contains(":"));
     m_useDifferentCompression->setEnabled(repo.contains(":"));
-    if( !repo.contains(":") )
+    if (!repo.contains(":"))
         m_compressionLevel->setEnabled(false);
     else
         compressionToggled(m_useDifferentCompression->isChecked());
 }
 
-
 void AddRepositoryDialog::compressionToggled(bool checked)
 {
     m_compressionLevel->setEnabled(checked);
 }
-
-
 
 // Local Variables:
 // c-basic-offset: 4

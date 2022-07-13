@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (c) 2003 Christian Loose <christian.loose@hamburg.de>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -16,7 +16,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #ifndef LOGPLAINVIEW_H
 #define LOGPLAINVIEW_H
 
@@ -31,18 +30,17 @@ namespace Cervisia
 struct LogInfo;
 }
 
-
 class LogPlainView : public QTextBrowser
-{   
+{
     Q_OBJECT
 
 public:
-    explicit LogPlainView(QWidget* parent = nullptr);
+    explicit LogPlainView(QWidget *parent = nullptr);
     ~LogPlainView() override;
 
-    void addRevision(const Cervisia::LogInfo& logInfo);
+    void addRevision(const Cervisia::LogInfo &logInfo);
 
-    void searchText(int options, const QString& pattern);
+    void searchText(int options, const QString &pattern);
 
 signals:
     void revisionClicked(QString rev, bool rmb);
@@ -50,13 +48,13 @@ signals:
 public slots:
     void scrollToTop();
     void findNext();
-    void searchHighlight(const QString& text, int index, int length);
+    void searchHighlight(const QString &text, int index, int length);
 
-protected:                     
-    void setSource(const QUrl& url) override;
-    
+protected:
+    void setSource(const QUrl &url) override;
+
 private:
-    KFind* m_find;
+    KFind *m_find;
     QTextBlock m_currentBlock;
 };
 

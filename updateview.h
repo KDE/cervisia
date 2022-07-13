@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 1999-2002 Bernd Gehrmann <bernd@mail.berlios.de>
  * Copyright (c) 2003-2008 André Wöbbeking <Woebbeking@kde.org>
  *
@@ -17,10 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #ifndef UPDATEVIEW_H
 #define UPDATEVIEW_H
-
 
 #include <QTreeWidget>
 
@@ -28,21 +26,17 @@
 
 #include "entry.h"
 
-
 class KConfig;
-
 
 class UpdateView : public QTreeWidget
 {
     Q_OBJECT
-    
-public:
 
-    enum Filter { NoFilter=0, OnlyDirectories=1, NoUpToDate=2,
-                  NoRemoved=4, NoNotInCVS=8 , NoEmptyDirectories = 16 };
+public:
+    enum Filter { NoFilter = 0, OnlyDirectories = 1, NoUpToDate = 2, NoRemoved = 4, NoNotInCVS = 8, NoEmptyDirectories = 16 };
     enum Action { Add, Remove, Update, UpdateNoAct, Commit };
-    
-    explicit UpdateView(KConfig& partConfig, QWidget *parent);
+
+    explicit UpdateView(KConfig &partConfig, QWidget *parent);
 
     ~UpdateView() override;
 
@@ -50,19 +44,19 @@ public:
     Filter filter() const;
 
     bool hasSingleSelection() const;
-    void getSingleSelection(QString *filename, QString *revision=0) const;
+    void getSingleSelection(QString *filename, QString *revision = 0) const;
     /* Returns a list of all marked files and directories */
     QStringList multipleSelection() const;
     /* Returns a list of all marked files, excluding directories*/
     QStringList fileSelection() const;
 
-    void openDirectory(const QString& dirname);
+    void openDirectory(const QString &dirname);
     void prepareJob(bool recursive, Action action);
 
-    const QColor& conflictColor() const;
-    const QColor& localChangeColor() const;
-    const QColor& remoteChangeColor() const;
-    const QColor& notInCvsColor() const;
+    const QColor &conflictColor() const;
+    const QColor &localChangeColor() const;
+    const QColor &remoteChangeColor() const;
+    const QColor &notInCvsColor() const;
 
     /**
      * @return \c true iff unfoldTree() is active.
@@ -73,7 +67,7 @@ public:
 
 signals:
     void fileOpened(QString filename);
-    
+
 public slots:
     void unfoldSelectedFolders();
     void unfoldTree();
@@ -84,7 +78,7 @@ public slots:
 private slots:
     void itemExecuted(QTreeWidgetItem *item, int column);
     void itemExpandedSlot(QTreeWidgetItem *item);
-    
+
 private:
     void updateItem(const QString &filename, Cervisia::EntryStatus status, bool isdir);
     void rememberSelection(bool recursive);
@@ -93,7 +87,7 @@ private:
 
     void updateColors();
 
-    KConfig& m_partConfig;
+    KConfig &m_partConfig;
 
     Filter filt;
     Action act;
@@ -111,7 +105,6 @@ private:
 };
 
 #endif
-
 
 // Local Variables:
 // c-basic-offset: 4

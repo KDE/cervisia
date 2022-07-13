@@ -20,86 +20,80 @@
 
 #include "repository.h"
 
+#include <QDBusConnection>
+#include <QStandardPaths>
+#include <QTextStream>
 #include <qdir.h>
 #include <qfile.h>
 #include <qstring.h>
-#include <QTextStream>
-#include <QStandardPaths>
-#include <QDBusConnection>
 
-#include <ksharedconfig.h>
 #include <kconfiggroup.h>
 #include <kdirwatch.h>
+#include <ksharedconfig.h>
 
 #include "sshagent.h"
 #include <repositoryadaptor.h>
 
-struct Repository::Private
-{
-    Private() : compressionLevel(0) {}
+struct Repository::Private {
+    Private()
+        : compressionLevel(0)
+    {
+    }
 
-    QString     configFileName;
+    QString configFileName;
 
-    QString     workingCopy;
-    QString     location;
+    QString workingCopy;
+    QString location;
 
-    QString     client;
-    QString     rsh;
-    QString     server;
-    int         compressionLevel;
-    bool        retrieveCvsignoreFile;
+    QString client;
+    QString rsh;
+    QString server;
+    int compressionLevel;
+    bool retrieveCvsignoreFile;
 
     void readConfig();
     void readGeneralConfig();
 };
-
-
 
 Repository::Repository()
     : QObject()
     , d(new Private)
 {
     d->readGeneralConfig();
-    new RepositoryAdaptor(this );
+    new RepositoryAdaptor(this);
     QDBusConnection::sessionBus().registerObject("/CvsRepository", this);
-
 
     // other cvsservice instances might change the configuration file
     // so we watch it for changes
     d->configFileName = QStandardPaths::locate(QStandardPaths::GenericConfigLocation, "cvsservicerc");
-    KDirWatch* fileWatcher = new KDirWatch(this);
-    connect(fileWatcher, SIGNAL(dirty(QString)),
-            this, SLOT(slotConfigDirty(QString)));
+    KDirWatch *fileWatcher = new KDirWatch(this);
+    connect(fileWatcher, SIGNAL(dirty(QString)), this, SLOT(slotConfigDirty(QString)));
     fileWatcher->addFile(d->configFileName);
 }
 
-
-Repository::Repository(const QString& repository)
+Repository::Repository(const QString &repository)
     : QObject()
     , d(new Private)
 {
     d->location = repository;
     d->readGeneralConfig();
     d->readConfig();
-    //TODO verify it before : DCOPObject()
-    new RepositoryAdaptor(this );
+    // TODO verify it before : DCOPObject()
+    new RepositoryAdaptor(this);
     QDBusConnection::sessionBus().registerObject("/CvsRepository", this);
 
     // other cvsservice instances might change the configuration file
     // so we watch it for changes
     d->configFileName = QStandardPaths::locate(QStandardPaths::GenericConfigLocation, "cvsservicerc");
-    KDirWatch* fileWatcher = new KDirWatch(this);
-    connect(fileWatcher, SIGNAL(dirty(QString)),
-            this, SLOT(slotConfigDirty(QString)));
+    KDirWatch *fileWatcher = new KDirWatch(this);
+    connect(fileWatcher, SIGNAL(dirty(QString)), this, SLOT(slotConfigDirty(QString)));
     fileWatcher->addFile(d->configFileName);
 }
-
 
 Repository::~Repository()
 {
     delete d;
 }
-
 
 QString Repository::cvsClient() const
 {
@@ -109,44 +103,37 @@ QString Repository::cvsClient() const
     client += " -f";
 
     // we don't need the command line option if there is no compression level set
-    if( d->compressionLevel > 0 )
-    {
+    if (d->compressionLevel > 0) {
         client += " -z" + QString::number(d->compressionLevel) + ' ';
     }
 
     return client;
 }
 
-
 QString Repository::clientOnly() const
 {
     return d->client;
 }
-
 
 QString Repository::rsh() const
 {
     return d->rsh;
 }
 
-
 QString Repository::server() const
 {
     return d->server;
 }
 
-
-bool Repository::setWorkingCopy(const QString& dirName)
+bool Repository::setWorkingCopy(const QString &dirName)
 {
     const QFileInfo fi(dirName);
     const QString path = fi.absoluteFilePath();
 
     // is this really a cvs-controlled directory?
     const QFileInfo cvsDirInfo(path + "/CVS");
-    if( !cvsDirInfo.exists() || !cvsDirInfo.isDir() ||
-        !QFile::exists( cvsDirInfo.filePath() + "/Entries" ) ||
-        !QFile::exists( cvsDirInfo.filePath() + "/Repository" ) ||
-        !QFile::exists( cvsDirInfo.filePath() + "/Root" ) )
+    if (!cvsDirInfo.exists() || !cvsDirInfo.isDir() || !QFile::exists(cvsDirInfo.filePath() + "/Entries")
+        || !QFile::exists(cvsDirInfo.filePath() + "/Repository") || !QFile::exists(cvsDirInfo.filePath() + "/Root"))
         return false;
 
     d->workingCopy = path;
@@ -154,8 +141,7 @@ bool Repository::setWorkingCopy(const QString& dirName)
 
     // determine path to the repository
     QFile rootFile(path + "/CVS/Root");
-    if( rootFile.open(QIODevice::ReadOnly) )
-    {
+    if (rootFile.open(QIODevice::ReadOnly)) {
         QTextStream stream(&rootFile);
         d->location = stream.readLine();
     }
@@ -163,8 +149,7 @@ bool Repository::setWorkingCopy(const QString& dirName)
 
     // add identities (ssh-add) to ssh-agent
     // TODO CL make sure this is called only once
-    if( d->location.contains(":ext:", Qt::CaseInsensitive) )
-    {
+    if (d->location.contains(":ext:", Qt::CaseInsensitive)) {
         SshAgent ssh;
         ssh.addSshIdentities();
     }
@@ -175,35 +160,29 @@ bool Repository::setWorkingCopy(const QString& dirName)
     return true;
 }
 
-
 QString Repository::workingCopy() const
 {
     return d->workingCopy;
 }
-
 
 QString Repository::location() const
 {
     return d->location;
 }
 
-
 bool Repository::retrieveCvsignoreFile() const
 {
     return d->retrieveCvsignoreFile;
 }
 
-
-void Repository::slotConfigDirty(const QString& fileName)
+void Repository::slotConfigDirty(const QString &fileName)
 {
-    if( fileName == d->configFileName )
-    {
+    if (fileName == d->configFileName) {
         // reread the configuration data from disk
         KSharedConfig::openConfig()->reparseConfiguration();
         d->readConfig();
     }
 }
-
 
 void Repository::Private::readGeneralConfig()
 {
@@ -211,7 +190,6 @@ void Repository::Private::readGeneralConfig()
     KConfigGroup cg(KSharedConfig::openConfig(), "General");
     client = cg.readPathEntry("CVSPath", "cvs");
 }
-
 
 void Repository::Private::readConfig()
 {
@@ -228,15 +206,13 @@ void Repository::Private::readConfig()
     // In order to be able to read this group, we then have to manually add
     // the port number to it.
     QString repositoryGroup = QLatin1String("Repository-") + location;
-    if( !config->hasGroup(repositoryGroup) )
-    {
+    if (!config->hasGroup(repositoryGroup)) {
         // find the position of the first path separator
         const int insertPos = repositoryGroup.indexOf('/');
-        if( insertPos > 0 )
-        {
+        if (insertPos > 0) {
             // add port to location
             // (1) :pserver:user@hostname.com:/path
-            if( repositoryGroup.at(insertPos - 1) == ':' )
+            if (repositoryGroup.at(insertPos - 1) == ':')
                 repositoryGroup.insert(insertPos, "2401");
             // (2) :pserver:user@hostname.com/path
             else
@@ -253,8 +229,7 @@ void Repository::Private::readConfig()
     compressionLevel = group.readEntry("Compression", -1);
 
     // use default global compression level instead?
-    if( compressionLevel < 0 )
-    {
+    if (compressionLevel < 0) {
         KConfigGroup cs(config, "General");
         compressionLevel = cs.readEntry("Compression", 0);
     }
@@ -265,5 +240,3 @@ void Repository::Private::readConfig()
     // get program to start on the server side
     server = group.readEntry("cvs_server");
 }
-
-

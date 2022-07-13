@@ -27,81 +27,63 @@ using namespace Cervisia;
 #include <KLocalizedString>
 #include <KMessageBox>
 
-
-AddIgnoreMenu::AddIgnoreMenu(const QString& directory, const QStringList& fileList,
-                             QWidget* parent)
+AddIgnoreMenu::AddIgnoreMenu(const QString &directory, const QStringList &fileList, QWidget *parent)
     : QObject(parent)
     , m_menu(0)
 {
-    if( !fileList.isEmpty() )
-    {
+    if (!fileList.isEmpty()) {
         m_menu = new QMenu(i18n("Add to Ignore List"), parent);
-	
-        foreach( const QString& fileName, fileList )
+
+        foreach (const QString &fileName, fileList)
             m_fileList << QFileInfo(directory + '/' + fileName);
 
         addActions();
 
-        connect(m_menu, SIGNAL(triggered(QAction*)),
-                this, SLOT(actionTriggered(QAction*)));
+        connect(m_menu, SIGNAL(triggered(QAction *)), this, SLOT(actionTriggered(QAction *)));
     }
 }
 
-
-QMenu* AddIgnoreMenu::menu()
+QMenu *AddIgnoreMenu::menu()
 {
     return m_menu;
 }
 
-
-void AddIgnoreMenu::actionTriggered(QAction* action)
+void AddIgnoreMenu::actionTriggered(QAction *action)
 {
     // action with wildcard?
-    if( action->data().toBool() )
-    {
-	QFileInfo fi = m_fileList.at(0); 
-	appendIgnoreFile(fi.absolutePath(), "*." + fi.completeSuffix());
-    }
-    else
-    {
-        foreach( const QFileInfo& fi, m_fileList )
+    if (action->data().toBool()) {
+        QFileInfo fi = m_fileList.at(0);
+        appendIgnoreFile(fi.absolutePath(), "*." + fi.completeSuffix());
+    } else {
+        foreach (const QFileInfo &fi, m_fileList)
             appendIgnoreFile(fi.absolutePath(), fi.fileName());
     }
 }
 
-
 void AddIgnoreMenu::addActions()
 {
-    if( m_fileList.count() > 1 )
-    {
-        QAction* action = m_menu->addAction(i18np("Ignore File", "Ignore %1 Files", m_fileList.count()));
+    if (m_fileList.count() > 1) {
+        QAction *action = m_menu->addAction(i18np("Ignore File", "Ignore %1 Files", m_fileList.count()));
         action->setData(false);
-    }
-    else
-    {
+    } else {
         QFileInfo fi = m_fileList.at(0);
-        QAction* action = m_menu->addAction(fi.fileName());
-	action->setData(false);
-	
+        QAction *action = m_menu->addAction(fi.fileName());
+        action->setData(false);
+
         QString extension = fi.completeSuffix();
-        if( !extension.isEmpty() )
-        {
-            QAction* action = m_menu->addAction("*." + extension);
-	    action->setData(true);
+        if (!extension.isEmpty()) {
+            QAction *action = m_menu->addAction("*." + extension);
+            action->setData(true);
         }
     }
 }
 
-
 // append the filename to the .cvsignore file in the same subdirectory
-void AddIgnoreMenu::appendIgnoreFile(const QString& path, const QString& fileName)
+void AddIgnoreMenu::appendIgnoreFile(const QString &path, const QString &fileName)
 {
     QFile ignoreFile(path + "/.cvsignore");
-    if( !ignoreFile.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text) )
-    {
-	KMessageBox::sorry(0, 
-	                   i18n("Cannot open file '%1' for writing.", ignoreFile.fileName()),
-			   "Cervisia");
+    if (!ignoreFile.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text)) {
+        KMessageBox::sorry(0, i18n("Cannot open file '%1' for writing.", ignoreFile.fileName()), "Cervisia");
         return;
     }
 
@@ -110,5 +92,3 @@ void AddIgnoreMenu::appendIgnoreFile(const QString& path, const QString& fileNam
 
     ignoreFile.close();
 }
-
-

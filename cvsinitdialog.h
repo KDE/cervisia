@@ -24,30 +24,26 @@
 class KLineEdit;
 class QPushButton;
 
-
 namespace Cervisia
 {
-
 
 class CvsInitDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit CvsInitDialog(QWidget* parent = nullptr);
+    explicit CvsInitDialog(QWidget *parent = nullptr);
 
     QString directory() const;
-   
+
 private slots:
     void dirButtonClicked();
-    void lineEditTextChanged(const QString& text);
+    void lineEditTextChanged(const QString &text);
 
-private:   
-    KLineEdit* m_directoryEdit;
+private:
+    KLineEdit *m_directoryEdit;
     QPushButton *okButton;
 };
-
-
 }
 
 #endif // CVSINITDIALOG_H

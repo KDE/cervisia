@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -29,9 +29,9 @@ class WatchDialog : public QDialog
 {
 public:
     enum ActionType { Add, Remove };
-    enum Events { None=0, All=1, Commits=2, Edits=4, Unedits=8 };
+    enum Events { None = 0, All = 1, Commits = 2, Edits = 4, Unedits = 8 };
 
-    explicit WatchDialog(ActionType action, QWidget *parent=nullptr);
+    explicit WatchDialog(ActionType action, QWidget *parent = nullptr);
 
     Events events() const;
 

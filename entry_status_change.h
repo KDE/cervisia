@@ -16,26 +16,21 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #ifndef CERVISIA_ENTRY_STATUS_CHANGE_H
 #define CERVISIA_ENTRY_STATUS_CHANGE_H
-
 
 #include <qstring.h>
 
 #include "entry_status.h"
 
-
 namespace Cervisia
 {
-
 
 /**
  * Dumb data struct to store a status change of an entry (i.e. for jobs like
  * status, update, ...).
  */
-struct EntryStatusChange
-{
+struct EntryStatusChange {
     /**
      * The name of the changed entry (including the path inside the repository / working copy).
      */
@@ -47,8 +42,6 @@ struct EntryStatusChange
     EntryStatus m_status;
 };
 
-
 } // namespace Cervisia
-
 
 #endif // CERVISIA_ENTRY_STATUS_CHANGE_H

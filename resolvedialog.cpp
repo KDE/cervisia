@@ -18,50 +18,46 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #include "resolvedialog.h"
 #include "resolvedialog_p.h"
 
+#include <QDebug>
+#include <QDialogButtonBox>
+#include <QFileDialog>
+#include <QHBoxLayout>
+#include <QKeyEvent>
+#include <QPushButton>
+#include <QSplitter>
+#include <QVBoxLayout>
 #include <qfile.h>
-#include <qnamespace.h>
 #include <qlabel.h>
 #include <qlayout.h>
+#include <qnamespace.h>
+#include <qregexp.h>
 #include <qtextcodec.h>
 #include <qtextstream.h>
-#include <qregexp.h>
-#include <QKeyEvent>
-#include <QHBoxLayout>
-#include <QVBoxLayout>
-#include <QSplitter>
-#include <QDebug>
-#include <QFileDialog>
-#include <QDialogButtonBox>
-#include <QPushButton>
 
-#include <kmessagebox.h>
-#include <KLocalizedString>
-#include <KConfigGroup>
 #include <KConfig>
-#include <KHelpClient>
+#include <KConfigGroup>
 #include <KGuiItem>
+#include <KHelpClient>
+#include <KLocalizedString>
+#include <kmessagebox.h>
 
-#include "misc.h"
 #include "debug.h"
+#include "misc.h"
 
 using Cervisia::ResolveEditorDialog;
-
 
 // *UGLY HACK*
 // The following conditions are a rough hack
 static QTextCodec *DetectCodec(const QString &fileName)
 {
-    if (fileName.endsWith(QLatin1String(".ui")) || fileName.endsWith(QLatin1String(".docbook"))
-        || fileName.endsWith(QLatin1String(".xml")))
+    if (fileName.endsWith(QLatin1String(".ui")) || fileName.endsWith(QLatin1String(".docbook")) || fileName.endsWith(QLatin1String(".xml")))
         return QTextCodec::codecForName("utf8");
 
     return QTextCodec::codecForLocale();
 }
-
 
 namespace
 {
@@ -69,7 +65,7 @@ namespace
 class LineSeparator
 {
 public:
-    LineSeparator(const QString& text)
+    LineSeparator(const QString &text)
         : m_text(text)
         , m_startPos(0)
         , m_endPos(0)
@@ -79,17 +75,16 @@ public:
     QString nextLine() const
     {
         // already reach end of text on previous call
-        if( m_endPos < 0 )
-        {
+        if (m_endPos < 0) {
             m_currentLine.clear();
             return m_currentLine;
         }
 
         m_endPos = m_text.indexOf('\n', m_startPos);
 
-        int length    = m_endPos - m_startPos + 1;
+        int length = m_endPos - m_startPos + 1;
         m_currentLine = m_text.mid(m_startPos, length);
-        m_startPos    = m_endPos + 1;
+        m_startPos = m_endPos + 1;
 
         return m_currentLine;
     }
@@ -100,15 +95,14 @@ public:
     }
 
 private:
-    const QString    m_text;
-    mutable QString  m_currentLine;
-    mutable int      m_startPos, m_endPos;
+    const QString m_text;
+    mutable QString m_currentLine;
+    mutable int m_startPos, m_endPos;
 };
 
 }
 
-
-ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
+ResolveDialog::ResolveDialog(KConfig &cfg, QWidget *parent)
     : QDialog(parent)
     , markeditem(-1)
     , partConfig(cfg)
@@ -144,7 +138,7 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
     diff1 = new DiffView(cfg, true, false, versionALayoutWidget);
     versionAlayout->addWidget(diff1, 10);
 
-    QWidget* versionBLayoutWidget = new QWidget(splitter);
+    QWidget *versionBLayoutWidget = new QWidget(splitter);
     QBoxLayout *versionBlayout = new QVBoxLayout(versionBLayoutWidget);
     versionBlayout->setSpacing(5);
 
@@ -156,7 +150,7 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
     diff1->setPartner(diff2);
     diff2->setPartner(diff1);
 
-    QWidget* mergeLayoutWidget = new QWidget(vertSplitter);
+    QWidget *mergeLayoutWidget = new QWidget(vertSplitter);
     QBoxLayout *mergeLayout = new QVBoxLayout(mergeLayoutWidget);
     mergeLayout->setSpacing(5);
 
@@ -169,28 +163,28 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
     mainLayout->addWidget(vertSplitter);
 
     abutton = new QPushButton("&A");
-    connect( abutton, SIGNAL(clicked()), SLOT(aClicked()) );
+    connect(abutton, SIGNAL(clicked()), SLOT(aClicked()));
 
     bbutton = new QPushButton("&B");
-    connect( bbutton, SIGNAL(clicked()), SLOT(bClicked()) );
+    connect(bbutton, SIGNAL(clicked()), SLOT(bClicked()));
 
     abbutton = new QPushButton("A+B");
-    connect( abbutton, SIGNAL(clicked()), SLOT(abClicked()) );
+    connect(abbutton, SIGNAL(clicked()), SLOT(abClicked()));
 
     babutton = new QPushButton("B+A");
-    connect( babutton, SIGNAL(clicked()), SLOT(baClicked()) );
+    connect(babutton, SIGNAL(clicked()), SLOT(baClicked()));
 
     editbutton = new QPushButton(i18n("&Edit"));
-    connect( editbutton, SIGNAL(clicked()), SLOT(editClicked()) );
+    connect(editbutton, SIGNAL(clicked()), SLOT(editClicked()));
 
     nofnlabel = new QLabel;
     nofnlabel->setAlignment(Qt::AlignCenter);
 
     backbutton = new QPushButton("&<<");
-    connect( backbutton, SIGNAL(clicked()), SLOT(backClicked()) );
+    connect(backbutton, SIGNAL(clicked()), SLOT(backClicked()));
 
     forwbutton = new QPushButton("&>>");
-    connect( forwbutton, SIGNAL(clicked()), SLOT(forwClicked()) );
+    connect(forwbutton, SIGNAL(clicked()), SLOT(forwClicked()));
 
     QBoxLayout *buttonlayout = new QHBoxLayout();
     mainLayout->addLayout(buttonlayout);
@@ -205,8 +199,8 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
     buttonlayout->addWidget(backbutton, 1);
     buttonlayout->addWidget(forwbutton, 1);
 
-    connect(user2Button, SIGNAL(clicked()), SLOT(saveClicked()) );
-    connect(user1Button, SIGNAL(clicked()), SLOT(saveAsClicked()) );
+    connect(user2Button, SIGNAL(clicked()), SLOT(saveClicked()));
+    connect(user1Button, SIGNAL(clicked()), SLOT(saveAsClicked()));
 
     mainLayout->addWidget(buttonBox);
     buttonBox->button(QDialogButtonBox::Close)->setDefault(true);
@@ -220,7 +214,6 @@ ResolveDialog::ResolveDialog(KConfig& cfg, QWidget *parent)
     restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
 }
 
-
 ResolveDialog::~ResolveDialog()
 {
     KConfigGroup cg(&partConfig, "ResolveDialog");
@@ -231,9 +224,8 @@ ResolveDialog::~ResolveDialog()
 
 void ResolveDialog::slotHelp()
 {
-  KHelpClient::invokeHelp(QLatin1String("resolvingconflicts"));
+    KHelpClient::invokeHelp(QLatin1String("resolvingconflicts"));
 }
-
 
 // One resolve item has a line number range of linenoA:linenoA+linecountA-1
 // in A and linenoB:linenoB+linecountB-1 in B. If the user has chosen version A
@@ -250,7 +242,6 @@ public:
     ResolveDialog::ChooseType chosen;
 };
 
-
 bool ResolveDialog::parseFile(const QString &name)
 {
     int lineno1, lineno2;
@@ -262,7 +253,7 @@ bool ResolveDialog::parseFile(const QString &name)
     fname = name;
 
     QString fileContent = readFile();
-    if( fileContent.isNull() )
+    if (fileContent.isNull())
         return false;
 
     LineSeparator separator(fileContent);
@@ -270,119 +261,95 @@ bool ResolveDialog::parseFile(const QString &name)
     state = Normal;
     lineno1 = lineno2 = 0;
     advanced1 = advanced2 = 0;
-    do
-    {
+    do {
         QString line = separator.nextLine();
 
         // reached end of file?
-        if( separator.atEnd() )
+        if (separator.atEnd())
             break;
 
-        switch( state )
-        {
-            case Normal:
-                {
-                    // check for start of conflict block
-                    // Set to look for <<<<<<< at beginning of line with exactly one
-                    // space after then anything after that.
-                    QRegExp rx( "^<{7}\\s.*$" );
-                    if( line.contains( rx ) )
-                    {
-                        state     = VersionA;
-                        advanced1 = 0;
-                    }
-                    else
-                    {
-                        addToMergeAndVersionA(line, DiffView::Unchanged, lineno1);
-                        addToVersionB(line, DiffView::Unchanged, lineno2);
-                    }
-                }
-                break;
-            case VersionA:
-                {
-                    // Set to look for ======= at beginning of line which may have one
-                    // or more spaces after then nothing else.
-                    QRegExp rx( "^={7}\\s*$" );
-                    if( !line.contains( rx ) ) // still in version A
-                    {
-                        advanced1++;
-                        addToMergeAndVersionA(line, DiffView::Change, lineno1);
-                    }
-                    else
-                    {
-                        state     = VersionB;
-                        advanced2 = 0;
-                    }
-                }
-                break;
-            case VersionB:
-                {
-                    // Set to look for >>>>>>> at beginning of line with exactly one
-                    // space after then anything after that.
-                    QRegExp rx( "^>{7}\\s.*$" );
-                    if( !line.contains( rx ) ) // still in version B
-                    {
-                        advanced2++;
-                        addToVersionB(line, DiffView::Change, lineno2);
-                    }
-                    else
-                    {
-                        // create an resolve item
-                        ResolveItem *item = new ResolveItem;
-                        item->linenoA        = lineno1-advanced1+1;
-                        item->linecountA     = advanced1;
-                        item->linenoB        = lineno2-advanced2+1;
-                        item->linecountB     = advanced2;
-                        item->offsetM        = item->linenoA-1;
-                        item->chosen         = ChA;
-                        item->linecountTotal = item->linecountA;
-                        items.append(item);
+        switch (state) {
+        case Normal: {
+            // check for start of conflict block
+            // Set to look for <<<<<<< at beginning of line with exactly one
+            // space after then anything after that.
+            QRegExp rx("^<{7}\\s.*$");
+            if (line.contains(rx)) {
+                state = VersionA;
+                advanced1 = 0;
+            } else {
+                addToMergeAndVersionA(line, DiffView::Unchanged, lineno1);
+                addToVersionB(line, DiffView::Unchanged, lineno2);
+            }
+        } break;
+        case VersionA: {
+            // Set to look for ======= at beginning of line which may have one
+            // or more spaces after then nothing else.
+            QRegExp rx("^={7}\\s*$");
+            if (!line.contains(rx)) // still in version A
+            {
+                advanced1++;
+                addToMergeAndVersionA(line, DiffView::Change, lineno1);
+            } else {
+                state = VersionB;
+                advanced2 = 0;
+            }
+        } break;
+        case VersionB: {
+            // Set to look for >>>>>>> at beginning of line with exactly one
+            // space after then anything after that.
+            QRegExp rx("^>{7}\\s.*$");
+            if (!line.contains(rx)) // still in version B
+            {
+                advanced2++;
+                addToVersionB(line, DiffView::Change, lineno2);
+            } else {
+                // create an resolve item
+                ResolveItem *item = new ResolveItem;
+                item->linenoA = lineno1 - advanced1 + 1;
+                item->linecountA = advanced1;
+                item->linenoB = lineno2 - advanced2 + 1;
+                item->linecountB = advanced2;
+                item->offsetM = item->linenoA - 1;
+                item->chosen = ChA;
+                item->linecountTotal = item->linecountA;
+                items.append(item);
 
-                        for (; advanced1 < advanced2; advanced1++)
-                            diff1->addLine("", DiffView::Neutral);
-                        for (; advanced2 < advanced1; advanced2++)
-                            diff2->addLine("", DiffView::Neutral);
+                for (; advanced1 < advanced2; advanced1++)
+                    diff1->addLine("", DiffView::Neutral);
+                for (; advanced2 < advanced1; advanced2++)
+                    diff2->addLine("", DiffView::Neutral);
 
-                        state = Normal;
-                    }
-                }
-                break;
+                state = Normal;
+            }
+        } break;
         }
-    }
-    while( !separator.atEnd() );
+    } while (!separator.atEnd());
 
     updateNofN();
-    forwClicked();  // go to first conflict
+    forwClicked(); // go to first conflict
 
     return true; // successful
 }
 
-
-void ResolveDialog::addToMergeAndVersionA(const QString& line,
-                                          DiffView::DiffType type, int& lineNo)
+void ResolveDialog::addToMergeAndVersionA(const QString &line, DiffView::DiffType type, int &lineNo)
 {
     lineNo++;
     diff1->addLine(line, type, lineNo);
     merge->addLine(line, type, lineNo);
 }
 
-
-void ResolveDialog::addToVersionB(const QString& line, DiffView::DiffType type,
-                                  int& lineNo)
+void ResolveDialog::addToVersionB(const QString &line, DiffView::DiffType type, int &lineNo)
 {
     lineNo++;
     diff2->addLine(line, type, lineNo);
 }
 
-
 void ResolveDialog::saveFile(const QString &name)
 {
     QFile f(name);
-    if (!f.open(QIODevice::WriteOnly))
-    {
-        KMessageBox::sorry(this,
-                           i18n("Could not open file for writing."),
-                           "Cervisia");
+    if (!f.open(QIODevice::WriteOnly)) {
+        KMessageBox::sorry(this, i18n("Could not open file for writing."), "Cervisia");
         return;
     }
     QTextStream stream(&f);
@@ -390,33 +357,31 @@ void ResolveDialog::saveFile(const QString &name)
     stream.setCodec(fcodec);
 
     QString output;
-    for( int i = 0; i < merge->count(); i++ )
-       output +=merge->stringAtOffset(i);
+    for (int i = 0; i < merge->count(); i++)
+        output += merge->stringAtOffset(i);
     stream << output;
 
     f.close();
 }
 
-
 QString ResolveDialog::readFile()
 {
     QFile f(fname);
-    if( !f.open(QIODevice::ReadOnly) )
+    if (!f.open(QIODevice::ReadOnly))
         return QString();
 
     QTextStream stream(&f);
-    QTextCodec* codec = DetectCodec(fname);
+    QTextCodec *codec = DetectCodec(fname);
     stream.setCodec(codec);
 
     return stream.readAll();
 }
 
-
 void ResolveDialog::updateNofN()
 {
     QString str;
     if (markeditem >= 0)
-        str = i18n("%1 of %2", markeditem+1, items.count());
+        str = i18n("%1 of %2", markeditem + 1, items.count());
     else
         str = i18n("%1 conflicts", items.count());
     nofnlabel->setText(str);
@@ -432,26 +397,23 @@ void ResolveDialog::updateNofN()
     editbutton->setEnabled(marked);
 }
 
-
 void ResolveDialog::updateHighlight(int newitem)
 {
-    if (markeditem >= 0)
-    {
+    if (markeditem >= 0) {
         ResolveItem *item = items.at(markeditem);
-        for (int i = item->linenoA; i < item->linenoA+item->linecountA; ++i)
+        for (int i = item->linenoA; i < item->linenoA + item->linecountA; ++i)
             diff1->setInverted(i, false);
-        for (int i = item->linenoB; i < item->linenoB+item->linecountB; ++i)
+        for (int i = item->linenoB; i < item->linenoB + item->linecountB; ++i)
             diff2->setInverted(i, false);
     }
 
     markeditem = newitem;
 
-    if (markeditem >= 0)
-    {
+    if (markeditem >= 0) {
         ResolveItem *item = items.at(markeditem);
-        for (int i = item->linenoA; i < item->linenoA+item->linecountA; ++i)
+        for (int i = item->linenoA; i < item->linenoA + item->linecountA; ++i)
             diff1->setInverted(i, true);
-        for (int i = item->linenoB; i < item->linenoB+item->linecountB; ++i)
+        for (int i = item->linenoB; i < item->linenoB + item->linecountB; ++i)
             diff2->setInverted(i, true);
         diff1->setCenterLine(item->linenoA);
         diff2->setCenterLine(item->linenoB);
@@ -462,7 +424,6 @@ void ResolveDialog::updateHighlight(int newitem)
     merge->repaint();
     updateNofN();
 }
-
 
 void ResolveDialog::updateMergedVersion(ResolveDialog::ChooseType chosen)
 {
@@ -479,9 +440,8 @@ void ResolveDialog::updateMergedVersion(ResolveDialog::ChooseType chosen)
     int total = 0;
     LineSeparator separator(m_contentMergedVersion);
     QString line = separator.nextLine();
-    while( !separator.atEnd() )
-    {
-        merge->insertAtOffset(line, DiffView::Change, item->offsetM+total);
+    while (!separator.atEnd()) {
+        merge->insertAtOffset(line, DiffView::Change, item->offsetM + total);
         line = separator.nextLine();
         ++total;
     }
@@ -497,32 +457,29 @@ void ResolveDialog::updateMergedVersion(ResolveDialog::ChooseType chosen)
     merge->repaint();
 }
 
-
 void ResolveDialog::backClicked()
 {
     int newitem;
     if (markeditem == -1)
         return; // internal error (button not disabled)
     else if (markeditem == -2) // past end
-        newitem = items.count()-1;
+        newitem = items.count() - 1;
     else
-        newitem = markeditem-1;
+        newitem = markeditem - 1;
     updateHighlight(newitem);
 }
-
 
 void ResolveDialog::forwClicked()
 {
     int newitem;
     if (markeditem == -2 || (markeditem == -1 && !items.count()))
         return; // internal error (button not disabled)
-    else if (markeditem+1 == (int)items.count()) // past end
+    else if (markeditem + 1 == (int)items.count()) // past end
         newitem = -2;
     else
-        newitem = markeditem+1;
+        newitem = markeditem + 1;
     updateHighlight(newitem);
 }
-
 
 void ResolveDialog::choose(ChooseType ch)
 {
@@ -531,51 +488,45 @@ void ResolveDialog::choose(ChooseType ch)
 
     ResolveItem *item = items.at(markeditem);
 
-    switch (ch)
-        {
-        case ChA:
-            m_contentMergedVersion = contentVersionA(item);
-            break;
-        case ChB:
-            m_contentMergedVersion = contentVersionB(item);
-            break;
-        case ChAB:
-            m_contentMergedVersion = contentVersionA(item) + contentVersionB(item);
-            break;
-        case ChBA:
-            m_contentMergedVersion = contentVersionB(item) + contentVersionA(item);
-            break;
-        default:
-            qCDebug(log_cervisia) << "Internal error at switch";
-        }
+    switch (ch) {
+    case ChA:
+        m_contentMergedVersion = contentVersionA(item);
+        break;
+    case ChB:
+        m_contentMergedVersion = contentVersionB(item);
+        break;
+    case ChAB:
+        m_contentMergedVersion = contentVersionA(item) + contentVersionB(item);
+        break;
+    case ChBA:
+        m_contentMergedVersion = contentVersionB(item) + contentVersionA(item);
+        break;
+    default:
+        qCDebug(log_cervisia) << "Internal error at switch";
+    }
 
     updateMergedVersion(ch);
 }
-
 
 void ResolveDialog::aClicked()
 {
     choose(ChA);
 }
 
-
 void ResolveDialog::bClicked()
 {
     choose(ChB);
 }
-
 
 void ResolveDialog::abClicked()
 {
     choose(ChAB);
 }
 
-
 void ResolveDialog::baClicked()
 {
     choose(ChBA);
 }
-
 
 void ResolveDialog::editClicked()
 {
@@ -585,17 +536,16 @@ void ResolveDialog::editClicked()
     ResolveItem *item = items.at(markeditem);
 
     QString mergedPart;
-    int total  = item->linecountTotal;
+    int total = item->linecountTotal;
     int offset = item->offsetM;
-    for( int i = 0; i < total; ++i )
-        mergedPart += merge->stringAtOffset(offset+i);
+    for (int i = 0; i < total; ++i)
+        mergedPart += merge->stringAtOffset(offset + i);
 
     ResolveEditorDialog *dlg = new ResolveEditorDialog(partConfig, this);
     dlg->setObjectName("edit");
     dlg->setContent(mergedPart);
 
-    if (dlg->exec())
-    {
+    if (dlg->exec()) {
         m_contentMergedVersion = dlg->content();
         updateMergedVersion(ChEdit);
     }
@@ -606,66 +556,66 @@ void ResolveDialog::editClicked()
     merge->repaint();
 }
 
-
 void ResolveDialog::saveClicked()
 {
     saveFile(fname);
 }
 
-
 void ResolveDialog::saveAsClicked()
 {
-    QString filename =
-        QFileDialog::getSaveFileName(this);
+    QString filename = QFileDialog::getSaveFileName(this);
 
-    if( !filename.isEmpty() && Cervisia::CheckOverwrite(filename) )
+    if (!filename.isEmpty() && Cervisia::CheckOverwrite(filename))
         saveFile(filename);
 }
 
-
 void ResolveDialog::keyPressEvent(QKeyEvent *e)
 {
-    switch (e->key())
-    {
-        case Qt::Key_A:    aClicked();    break;
-        case Qt::Key_B:    bClicked();    break;
-        case Qt::Key_Left: backClicked(); break;
-        case Qt::Key_Right:forwClicked(); break;
-        case Qt::Key_Up:   diff1->up();   break;
-        case Qt::Key_Down: diff1->down(); break;
-        default:
-            QDialog::keyPressEvent(e);
+    switch (e->key()) {
+    case Qt::Key_A:
+        aClicked();
+        break;
+    case Qt::Key_B:
+        bClicked();
+        break;
+    case Qt::Key_Left:
+        backClicked();
+        break;
+    case Qt::Key_Right:
+        forwClicked();
+        break;
+    case Qt::Key_Up:
+        diff1->up();
+        break;
+    case Qt::Key_Down:
+        diff1->down();
+        break;
+    default:
+        QDialog::keyPressEvent(e);
     }
 }
-
-
 
 /* This will return the A side of the diff in a QString. */
 QString ResolveDialog::contentVersionA(const ResolveItem *item) const
 {
     QString result;
-    for( int i = item->linenoA; i < item->linenoA+item->linecountA; ++i )
-    {
+    for (int i = item->linenoA; i < item->linenoA + item->linecountA; ++i) {
         result += diff1->stringAtLine(i);
     }
 
     return result;
 }
 
-
 /* This will return the B side of the diff item in a QString. */
 QString ResolveDialog::contentVersionB(const ResolveItem *item) const
 {
     QString result;
-    for( int i = item->linenoB; i < item->linenoB+item->linecountB; ++i )
-    {
+    for (int i = item->linenoB; i < item->linenoB + item->linecountB; ++i) {
         result += diff2->stringAtLine(i);
     }
 
     return result;
 }
-
-
 
 // Local Variables:
 // c-basic-offset: 4

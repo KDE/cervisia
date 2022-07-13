@@ -19,28 +19,25 @@
 
 #include "repositories.h"
 
-#include <qfile.h>
-#include <qdir.h>
-#include <qtextstream.h>
 #include <QDateTime>
+#include <qdir.h>
+#include <qfile.h>
+#include <qtextstream.h>
 
 #include <KConfig>
 #include <KConfigGroup>
 
 #include "cervisiapart.h"
 
-
 static QString fileNameCvs()
 {
     return QDir::homePath() + "/.cvspass";
 }
 
-
 static QString fileNameCvsnt()
 {
     return QDir::homePath() + "/.cvs/cvspass";
 }
-
 
 // old .cvspass format:
 //    user@host:/path Acleartext_password
@@ -53,26 +50,22 @@ static QStringList readCvsPassFile()
     QStringList list;
 
     QFile f(fileNameCvs());
-    if (f.open(QIODevice::ReadOnly))
-        {
-            QTextStream stream(&f);
-	    while (!stream.atEnd())
-		{
-		    int pos;
-		    QString line = stream.readLine();
-		    if ( (pos = line.indexOf(' ')) != -1)
-		    {
-			if (line[0] != '/')	// old format
-                            list.append(line.left(pos));
-			else			// new format
-			    list.append(line.section(' ', 1, 1));
-		    }
-		}
-	}
+    if (f.open(QIODevice::ReadOnly)) {
+        QTextStream stream(&f);
+        while (!stream.atEnd()) {
+            int pos;
+            QString line = stream.readLine();
+            if ((pos = line.indexOf(' ')) != -1) {
+                if (line[0] != '/') // old format
+                    list.append(line.left(pos));
+                else // new format
+                    list.append(line.section(' ', 1, 1));
+            }
+        }
+    }
 
     return list;
 }
-
 
 // .cvs/cvspass format
 //    user@host:port/path=Aencoded_password
@@ -82,11 +75,9 @@ static QStringList readCvsntPassFile()
     QStringList list;
 
     QFile file(fileNameCvsnt());
-    if (file.open(QIODevice::ReadOnly))
-    {
+    if (file.open(QIODevice::ReadOnly)) {
         QTextStream stream(&file);
-        while (!stream.atEnd())
-        {
+        while (!stream.atEnd()) {
             const QString line(stream.readLine());
 
             const int pos(line.indexOf("=A"));
@@ -98,31 +89,25 @@ static QStringList readCvsntPassFile()
     return list;
 }
 
-
 QStringList Repositories::readCvsPassFile()
 {
-    return (QFileInfo(fileNameCvs()).lastModified()
-            < QFileInfo(fileNameCvsnt()).lastModified())
-        ? readCvsntPassFile()
-        : ::readCvsPassFile();
+    return (QFileInfo(fileNameCvs()).lastModified() < QFileInfo(fileNameCvsnt()).lastModified()) ? readCvsntPassFile() : ::readCvsPassFile();
 }
-
 
 QStringList Repositories::readConfigFile()
 {
     QStringList list;
 
     KConfigGroup config(CervisiaPart::config(), "Repositories");
-    list = config.readEntry("Repos",QStringList());
+    list = config.readEntry("Repos", QStringList());
 
     // Some people actually use CVSROOT, so we add it here
     QString env = QString::fromLocal8Bit(qgetenv("CVSROOT"));
-    if ( !env.isEmpty() && !list.contains(env) )
+    if (!env.isEmpty() && !list.contains(env))
         list.append(env);
 
     return list;
 }
-
 
 // Local Variables:
 // c-basic-offset: 4

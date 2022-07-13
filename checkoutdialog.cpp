@@ -18,48 +18,45 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #include "checkoutdialog.h"
 
 // Qt
+#include <KComboBox>
 #include <QBoxLayout>
 #include <QCheckBox>
-#include <KComboBox>
+#include <QDialogButtonBox>
 #include <QDir>
+#include <QFileDialog>
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QLineEdit>
 #include <QPushButton>
 #include <QVBoxLayout>
-#include <QLineEdit>
-#include <QDialogButtonBox>
-#include <QFileDialog>
 
 // KDE
+#include <KConfigGroup>
+#include <KHelpClient>
+#include <KLineEdit>
+#include <KLocalizedString>
 #include <kmessagebox.h>
 #include <kurlcompletion.h>
-#include <KConfigGroup>
-#include <KLocalizedString>
-#include <KLineEdit>
-#include <KHelpClient>
 
-#include "progressdialog.h"
-#include "repositories.h"
-#include "misc.h"
 #include "cervisiasettings.h"
 #include "cvsserviceinterface.h"
+#include "misc.h"
+#include "progressdialog.h"
+#include "repositories.h"
 
 using Cervisia::IsValidTag;
 
-
-CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInterface* service,
-                               ActionType action, QWidget* parent)
+CheckoutDialog::CheckoutDialog(KConfig &cfg, OrgKdeCervisia5CvsserviceCvsserviceInterface *service, ActionType action, QWidget *parent)
     : QDialog(parent)
     , act(action)
     , partConfig(cfg)
     , cvsService(service)
 {
-    setWindowTitle( (action==Checkout)? i18n("CVS Checkout") : i18n("CVS Import") );
+    setWindowTitle((action == Checkout) ? i18n("CVS Checkout") : i18n("CVS Import"));
     setModal(true);
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
@@ -72,11 +69,11 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsservice
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
     connect(buttonBox, &QDialogButtonBox::helpRequested, this, &CheckoutDialog::slotHelp);
 
-    QGridLayout* grid = new QGridLayout;
+    QGridLayout *grid = new QGridLayout;
     mainLayout->addLayout(grid);
     grid->setColumnStretch(0, 1);
     grid->setColumnStretch(1, 20);
-    for (int i = 0; i < ((action==Checkout)? 4 : 10); ++i)
+    for (int i = 0; i < ((action == Checkout) ? 4 : 10); ++i)
         grid->setRowStretch(i, 0);
 
     repo_combo = new KComboBox;
@@ -86,49 +83,46 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsservice
     repo_combo->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     grid->addWidget(repo_combo, 0, 1);
 
-    QLabel* repo_label = new QLabel(i18n("&Repository:"));
+    QLabel *repo_label = new QLabel(i18n("&Repository:"));
     repo_label->setBuddy(repo_combo);
     grid->addWidget(repo_label, 0, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
-    if( action == Import )
-    {
+    if (action == Import) {
         module_edit = new QLineEdit;
         module_edit->setClearButtonEnabled(true);
         grid->addWidget(module_edit, 1, 1);
-        QLabel* module_label = new QLabel(i18n("&Module:"));
+        QLabel *module_label = new QLabel(i18n("&Module:"));
         module_label->setBuddy(module_edit);
         grid->addWidget(module_label, 1, 0, Qt::AlignLeft | Qt::AlignVCenter);
-    }
-    else
-    {
+    } else {
         module_combo = new KComboBox;
         module_combo->setEditable(true);
 
-        QPushButton* module_button = new QPushButton(i18n("Fetch &List"));
+        QPushButton *module_button = new QPushButton(i18n("Fetch &List"));
         connect(module_button, SIGNAL(clicked()), this, SLOT(moduleButtonClicked()));
 
-        QBoxLayout* module_layout = new QHBoxLayout();
+        QBoxLayout *module_layout = new QHBoxLayout();
         grid->addLayout(module_layout, 1, 1);
         module_layout->addWidget(module_combo, 10);
         module_layout->addWidget(module_button, 0, Qt::AlignVCenter);
 
-        QLabel* module_label = new QLabel(i18n("&Module:"));
+        QLabel *module_label = new QLabel(i18n("&Module:"));
         module_label->setBuddy(module_combo);
         grid->addWidget(module_label, 1, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
         branchCombo = new KComboBox;
         branchCombo->setEditable(true);
 
-        QPushButton* branchButton = new QPushButton(i18n("Fetch &List"));
+        QPushButton *branchButton = new QPushButton(i18n("Fetch &List"));
         connect(branchButton, SIGNAL(clicked()), this, SLOT(branchButtonClicked()));
 
-        QBoxLayout* branchLayout = new QHBoxLayout();
+        QBoxLayout *branchLayout = new QHBoxLayout();
         grid->addLayout(branchLayout, 2, 1);
         branchLayout->addWidget(branchCombo, 10);
         branchLayout->addWidget(branchButton, 0, Qt::AlignVCenter);
 
-        QLabel* branch_label = new QLabel(i18n("&Branch tag:"));
-        branch_label->setBuddy( branchCombo );
+        QLabel *branch_label = new QLabel(i18n("&Branch tag:"));
+        branch_label->setBuddy(branchCombo);
         grid->addWidget(branch_label, 2, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
         connect(branchCombo, SIGNAL(editTextChanged(QString)), this, SLOT(branchTextChanged()));
@@ -142,47 +136,46 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsservice
     workdir_edit->setText(QDir::homePath());
     workdir_edit->setMinimumWidth(fontMetrics().width('X') * 40);
 
-    KUrlCompletion* comp = new KUrlCompletion();
+    KUrlCompletion *comp = new KUrlCompletion();
     workdir_edit->setCompletionObject(comp);
     workdir_edit->setAutoDeleteCompletionObject(true);
     connect(workdir_edit, SIGNAL(returnPressed(QString)), comp, SLOT(addItem(QString)));
 
-    QPushButton* dir_button = new QPushButton("...");
+    QPushButton *dir_button = new QPushButton("...");
     connect(dir_button, SIGNAL(clicked()), this, SLOT(dirButtonClicked()));
     dir_button->setFixedWidth(30);
 
-    QBoxLayout* workdir_layout = new QHBoxLayout();
-    grid->addLayout(workdir_layout, (action==Import)? 2 : 3, 1);
+    QBoxLayout *workdir_layout = new QHBoxLayout();
+    grid->addLayout(workdir_layout, (action == Import) ? 2 : 3, 1);
     workdir_layout->addWidget(workdir_edit, 10);
     workdir_layout->addWidget(dir_button, 0, Qt::AlignVCenter);
 
-    QLabel* workdir_label = new QLabel(i18n("Working &folder:"));
-    workdir_label->setBuddy( workdir_edit );
-    grid->addWidget(workdir_label, (action==Import)? 2 : 3, 0, Qt::AlignLeft | Qt::AlignVCenter);
+    QLabel *workdir_label = new QLabel(i18n("Working &folder:"));
+    workdir_label->setBuddy(workdir_edit);
+    grid->addWidget(workdir_label, (action == Import) ? 2 : 3, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
-    if ( action == Import )
-    {
+    if (action == Import) {
         vendortag_edit = new QLineEdit;
         vendortag_edit->setClearButtonEnabled(true);
         grid->addWidget(vendortag_edit, 3, 1);
 
-        QLabel* vendortag_label = new QLabel(i18n("&Vendor tag:"));
-        vendortag_label->setBuddy( vendortag_edit );
+        QLabel *vendortag_label = new QLabel(i18n("&Vendor tag:"));
+        vendortag_label->setBuddy(vendortag_edit);
         grid->addWidget(vendortag_label, 3, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
         releasetag_edit = new QLineEdit;
         releasetag_edit->setClearButtonEnabled(true);
         grid->addWidget(releasetag_edit, 4, 1);
 
-        QLabel* releasetag_label = new QLabel(i18n("&Release tag:"));
-        releasetag_label->setBuddy( releasetag_edit );
+        QLabel *releasetag_label = new QLabel(i18n("&Release tag:"));
+        releasetag_label->setBuddy(releasetag_edit);
         grid->addWidget(releasetag_label, 4, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
         ignore_edit = new QLineEdit;
         ignore_edit->setClearButtonEnabled(true);
         grid->addWidget(ignore_edit, 5, 1);
 
-        QLabel* ignore_label = new QLabel( i18n("&Ignore files:"));
+        QLabel *ignore_label = new QLabel(i18n("&Ignore files:"));
         ignore_label->setBuddy(ignore_edit);
         grid->addWidget(ignore_label, 5, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
@@ -190,24 +183,21 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsservice
         comment_edit->setClearButtonEnabled(true);
         grid->addWidget(comment_edit, 6, 1);
 
-        QLabel* comment_label = new QLabel(i18n("&Comment:"));
-        comment_label->setBuddy( comment_edit );
+        QLabel *comment_label = new QLabel(i18n("&Comment:"));
+        comment_label->setBuddy(comment_edit);
         grid->addWidget(comment_label, 6, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
         binary_box = new QCheckBox(i18n("Import as &binaries"));
         grid->addWidget(binary_box, 7, 0, 1, 2);
 
-        m_useModificationTimeBox = new QCheckBox(
-                i18n("Use file's modification time as time of import"));
+        m_useModificationTimeBox = new QCheckBox(i18n("Use file's modification time as time of import"));
         grid->addWidget(m_useModificationTimeBox, 8, 0, 1, 2);
-    }
-    else
-    {
+    } else {
         alias_edit = new QLineEdit;
         alias_edit->setClearButtonEnabled(true);
         grid->addWidget(alias_edit, 4, 1);
 
-        QLabel* alias_label = new QLabel(i18n("Chec&k out as:"));
+        QLabel *alias_label = new QLabel(i18n("Chec&k out as:"));
         alias_label->setBuddy(alias_edit);
         grid->addWidget(alias_label, 4, 0, Qt::AlignLeft | Qt::AlignVCenter);
 
@@ -231,56 +221,48 @@ CheckoutDialog::CheckoutDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsservice
     helpTopic = (act == Import) ? "importing" : "checkingout";
 
     restoreUserInput();
-    connect(okButton,SIGNAL(clicked()),this,SLOT(slotOk()));
+    connect(okButton, SIGNAL(clicked()), this, SLOT(slotOk()));
 }
 
 void CheckoutDialog::slotHelp()
 {
-  KHelpClient::invokeHelp(helpTopic);
+    KHelpClient::invokeHelp(helpTopic);
 }
-
 
 QString CheckoutDialog::workingDirectory() const
 {
     return workdir_edit->text();
 }
 
-
 QString CheckoutDialog::repository() const
 {
     return repo_combo->currentText();
 }
 
-
 QString CheckoutDialog::module() const
 {
-    return act==Import? module_edit->text() : module_combo->currentText();
+    return act == Import ? module_edit->text() : module_combo->currentText();
 }
-
 
 QString CheckoutDialog::branch() const
 {
     return branchCombo->currentText();
 }
 
-
 QString CheckoutDialog::vendorTag() const
 {
     return vendortag_edit->text();
 }
-
 
 QString CheckoutDialog::releaseTag() const
 {
     return releasetag_edit->text();
 }
 
-
 QString CheckoutDialog::ignoreFiles() const
 {
     return ignore_edit->text();
 }
-
 
 QString CheckoutDialog::comment() const
 {
@@ -304,7 +286,7 @@ bool CheckoutDialog::useModificationTime() const
 
 bool CheckoutDialog::exportOnly() const
 {
-    if( export_box->isEnabled() )
+    if (export_box->isEnabled())
         return export_box->isChecked();
 
     return false;
@@ -318,39 +300,29 @@ bool CheckoutDialog::recursive() const
 void CheckoutDialog::slotOk()
 {
     QFileInfo fi(workingDirectory());
-    if (!fi.exists() || !fi.isDir())
-    {
+    if (!fi.exists() || !fi.isDir()) {
         KMessageBox::information(this, i18n("Please choose an existing working folder."));
         return;
     }
-    if (module().isEmpty())
-    {
+    if (module().isEmpty()) {
         KMessageBox::information(this, i18n("Please specify a module name."));
         return;
     }
 
-    if (act==Import)
-    {
-        if (vendorTag().isEmpty() || releaseTag().isEmpty())
-        {
-            KMessageBox::information(this,
-                                     i18n("Please specify a vendor tag and a release tag."));
+    if (act == Import) {
+        if (vendorTag().isEmpty() || releaseTag().isEmpty()) {
+            KMessageBox::information(this, i18n("Please specify a vendor tag and a release tag."));
             return;
         }
-        if (!IsValidTag(vendorTag()) || !IsValidTag(releaseTag()))
-        {
+        if (!IsValidTag(vendorTag()) || !IsValidTag(releaseTag())) {
             KMessageBox::information(this,
                                      i18n("Tags must start with a letter and may contain\n"
                                           "letters, digits and the characters '-' and '_'."));
             return;
         }
-    }
-    else
-    {
-        if( branch().isEmpty() && exportOnly() )
-        {
-            KMessageBox::information(this,
-                            i18n("A branch must be specified for export."));
+    } else {
+        if (branch().isEmpty() && exportOnly()) {
+            KMessageBox::information(this, i18n("A branch must be specified for export."));
             return;
         }
     }
@@ -360,7 +332,6 @@ void CheckoutDialog::slotOk()
     QDialog::accept();
 }
 
-
 void CheckoutDialog::dirButtonClicked()
 {
     QString dir = QFileDialog::getExistingDirectory(0, QString(), workdir_edit->text());
@@ -368,21 +339,19 @@ void CheckoutDialog::dirButtonClicked()
         workdir_edit->setText(dir);
 }
 
-
 void CheckoutDialog::moduleButtonClicked()
 {
     QDBusReply<QDBusObjectPath> cvsJob = cvsService->moduleList(repository());
-    if( !cvsJob.isValid() )
+    if (!cvsJob.isValid())
         return;
 
-    ProgressDialog dlg(this, "Checkout", cvsService->service(),cvsJob, "checkout", i18n("CVS Checkout"));
-    if( !dlg.execute() )
+    ProgressDialog dlg(this, "Checkout", cvsService->service(), cvsJob, "checkout", i18n("CVS Checkout"));
+    if (!dlg.execute())
         return;
 
     module_combo->clear();
     QString str;
-    while (dlg.getLine(str))
-    {
+    while (dlg.getLine(str)) {
         if (str.left(12) == "Unknown host")
             continue;
 
@@ -391,51 +360,45 @@ void CheckoutDialog::moduleButtonClicked()
             pos = str.indexOf('\t');
         if (pos == -1)
             pos = str.length();
-        QString module( str.left(pos).trimmed() );
-        if ( !module.isEmpty() )
+        QString module(str.left(pos).trimmed());
+        if (!module.isEmpty())
             module_combo->addItem(module);
     }
 }
-
 
 void CheckoutDialog::branchButtonClicked()
 {
     QStringList branchTagList;
 
-    if( repository().isEmpty() )
-    {
+    if (repository().isEmpty()) {
         KMessageBox::information(this, i18n("Please specify a repository."));
         return;
     }
 
-    if( module().isEmpty() )
-    {
+    if (module().isEmpty()) {
         KMessageBox::information(this, i18n("Please specify a module name."));
         return;
     }
 
-    QDBusReply<QDBusObjectPath> cvsJob = cvsService->rlog(repository(), module(),
-                                      false/*recursive*/);
-    if( !cvsJob.isValid() )
+    QDBusReply<QDBusObjectPath> cvsJob = cvsService->rlog(repository(), module(), false /*recursive*/);
+    if (!cvsJob.isValid())
         return;
 
-    ProgressDialog dlg(this, "Remote Log", cvsService->service(),cvsJob, QString(),
-                       i18n("CVS Remote Log"));
-    if( !dlg.execute() )
+    ProgressDialog dlg(this, "Remote Log", cvsService->service(), cvsJob, QString(), i18n("CVS Remote Log"));
+    if (!dlg.execute())
         return;
 
     QString line;
-    while( dlg.getLine(line) )
-    {
+    while (dlg.getLine(line)) {
         int colonPos;
 
-        if( line.isEmpty() || line[0] != '\t' )
+        if (line.isEmpty() || line[0] != '\t')
             continue;
-        if( (colonPos = line.indexOf(':', 1)) < 0 )
-           continue;
+        if ((colonPos = line.indexOf(':', 1)) < 0)
+            continue;
 
-        const QString tag  = line.mid(1, colonPos - 1);
-        if( !branchTagList.contains(tag) )
+        const QString tag = line.mid(1, colonPos - 1);
+        if (!branchTagList.contains(tag))
             branchTagList.push_back(tag);
     }
 
@@ -445,7 +408,6 @@ void CheckoutDialog::branchButtonClicked()
     branchCombo->addItems(branchTagList);
 }
 
-
 void CheckoutDialog::restoreUserInput()
 {
     KConfigGroup cs(&partConfig, "CheckoutDialog");
@@ -453,16 +415,13 @@ void CheckoutDialog::restoreUserInput()
     repo_combo->setEditText(CervisiaSettings::repository());
     workdir_edit->setText(CervisiaSettings::workingFolder());
 
-    if (act == Import)
-    {
+    if (act == Import) {
         module_edit->setText(CervisiaSettings::module());
         vendortag_edit->setText(cs.readEntry("Vendor tag"));
         releasetag_edit->setText(cs.readEntry("Release tag"));
         ignore_edit->setText(cs.readEntry("Ignore files"));
-        binary_box->setChecked(cs.readEntry("Import binary",false));
-    }
-    else
-    {
+        binary_box->setChecked(cs.readEntry("Import binary", false));
+    } else {
         module_combo->setEditText(CervisiaSettings::module());
         branchCombo->setEditText(cs.readEntry("Branch"));
         alias_edit->setText(cs.readEntry("Alias"));
@@ -470,7 +429,6 @@ void CheckoutDialog::restoreUserInput()
         recursive_box->setChecked(true);
     }
 }
-
 
 void CheckoutDialog::saveUserInput()
 {
@@ -482,15 +440,12 @@ void CheckoutDialog::saveUserInput()
 
     CervisiaSettings::self()->save();
 
-    if (act == Import)
-    {
+    if (act == Import) {
         cs.writeEntry("Vendor tag", vendorTag());
         cs.writeEntry("Release tag", releaseTag());
         cs.writeEntry("Ignore files", ignoreFiles());
         cs.writeEntry("Import binary", importBinary());
-    }
-    else
-    {
+    } else {
         cs.writeEntry("Branch", branch());
         cs.writeEntry("Alias", alias());
         cs.writeEntry("ExportOnly", exportOnly());
@@ -499,19 +454,13 @@ void CheckoutDialog::saveUserInput()
 
 void CheckoutDialog::branchTextChanged()
 {
-    if( branch().isEmpty() )
-    {
+    if (branch().isEmpty()) {
         export_box->setEnabled(false);
         export_box->setChecked(false);
-    }
-    else
-    {
+    } else {
         export_box->setEnabled(true);
     }
 }
-
-
-
 
 // Local Variables:
 // c-basic-offset: 4

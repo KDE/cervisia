@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -25,31 +25,25 @@
 class QFileInfo;
 class OrgKdeCervisia5CvsserviceCvsserviceInterface;
 
-
 namespace Cervisia
 {
-
 
 class GlobalIgnoreList : public IgnoreListBase
 {
 public:
     GlobalIgnoreList();
 
-    bool matches(const QFileInfo* fi) const override;
-    
-    void retrieveServerIgnoreList(OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService,
-                                  const QString& repository);
+    bool matches(const QFileInfo *fi) const override;
+
+    void retrieveServerIgnoreList(OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService, const QString &repository);
 
 private:
     void setup();
-    void addEntry(const QString& entry) override;
+    void addEntry(const QString &entry) override;
 
     static StringMatcher m_stringMatcher;
-    static bool          m_isInitialized;
+    static bool m_isInitialized;
 };
-
-
 }
-
 
 #endif

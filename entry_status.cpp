@@ -16,23 +16,19 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #include "entry_status.h"
 
 #include <qstring.h>
 
 #include <KLocalizedString>
 
-
 namespace Cervisia
 {
-
 
 QString toString(EntryStatus entryStatus)
 {
     QString result;
-    switch (entryStatus)
-    {
+    switch (entryStatus) {
     case LocallyModified:
         result = i18n("Locally Modified");
         break;
@@ -76,6 +72,5 @@ QString toString(EntryStatus entryStatus)
 
     return result;
 }
-
 
 } // namespace Cervisia

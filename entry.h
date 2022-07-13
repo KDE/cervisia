@@ -16,31 +16,22 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #ifndef CERVISIA_ENTRY_H
 #define CERVISIA_ENTRY_H
-
 
 #include <qdatetime.h>
 #include <qstring.h>
 
 #include "entry_status.h"
 
-
 namespace Cervisia
 {
-
 
 /**
  * Dumb data struct to store an entry controlled by a version control system.
  */
-struct Entry
-{
-    enum Type
-    {
-        Dir,
-        File
-    };
+struct Entry {
+    enum Type { Dir, File };
 
     /**
      * Sets status to \a EntryStatus::Unknown and type to \a File.
@@ -78,8 +69,6 @@ struct Entry
     QString m_tag;
 };
 
-
 } // namespace Cervisia
-
 
 #endif // CERVISIA_ENTRY_H

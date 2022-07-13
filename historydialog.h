@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -33,10 +33,10 @@ class HistoryDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit HistoryDialog(KConfig& cfg, QWidget *parent=nullptr);
+    explicit HistoryDialog(KConfig &cfg, QWidget *parent = nullptr);
     ~HistoryDialog() override;
 
-    bool parseHistory(OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService);
+    bool parseHistory(OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService);
 
 private slots:
     void slotHelp();
@@ -48,7 +48,7 @@ private:
     QCheckBox *commit_box, *checkout_box, *tag_box, *other_box;
     QCheckBox *onlyuser_box, *onlyfilenames_box, *onlydirnames_box;
     QLineEdit *user_edit, *filename_edit, *dirname_edit;
-    KConfig& partConfig;
+    KConfig &partConfig;
 };
 
 #endif // HISTORYDIALOG_H

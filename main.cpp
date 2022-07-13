@@ -22,32 +22,30 @@
 
 #include <QFileInfo>
 
-#include <kaboutdata.h>
+#include <KLocalizedString>
 #include <QApplication>
 #include <QCommandLineParser>
+#include <kaboutdata.h>
 #include <kconfig.h>
 #include <ktoolinvocation.h>
-#include <KLocalizedString>
 
-#include "misc.h"
+#include "annotatecontroller.h"
+#include "annotatedialog.h"
+#include "cervisia_version.h"
 #include "cervisiashell.h"
 #include "cvsserviceinterface.h"
-#include "annotatedialog.h"
-#include "annotatecontroller.h"
 #include "logdialog.h"
-#include "resolvedialog.h"
-#include "cervisia_version.h"
+#include "misc.h"
 #include "repositoryinterface.h"
+#include "resolvedialog.h"
 
-static OrgKdeCervisia5CvsserviceCvsserviceInterface* StartDBusService(const QString& directory)
+static OrgKdeCervisia5CvsserviceCvsserviceInterface *StartDBusService(const QString &directory)
 {
     // start the cvs D-Bus service
     QString error;
     QString appId;
-    if ( KToolInvocation::startServiceByDesktopName("org.kde.cvsservice5", QStringList(), &error, &appId) )
-    {
-        std::cerr << "Starting cvsservice failed with message: "
-                  << error.toLocal8Bit().constData() << std::endl;
+    if (KToolInvocation::startServiceByDesktopName("org.kde.cvsservice5", QStringList(), &error, &appId)) {
+        std::cerr << "Starting cvsservice failed with message: " << error.toLocal8Bit().constData() << std::endl;
         exit(1);
     }
 
@@ -59,13 +57,12 @@ static OrgKdeCervisia5CvsserviceCvsserviceInterface* StartDBusService(const QStr
     return new OrgKdeCervisia5CvsserviceCvsserviceInterface(appId, "/CvsService", QDBusConnection::sessionBus());
 }
 
-
-static int ShowResolveDialog(const QString& fileName)
+static int ShowResolveDialog(const QString &fileName)
 {
-    KConfig* config = new KConfig("cervisiapartrc");
+    KConfig *config = new KConfig("cervisiapartrc");
 
-    ResolveDialog* dlg = new ResolveDialog(*config);
-    if( dlg->parseFile(fileName) )
+    ResolveDialog *dlg = new ResolveDialog(*config);
+    if (dlg->parseFile(fileName))
         dlg->show();
     else
         delete dlg;
@@ -77,20 +74,19 @@ static int ShowResolveDialog(const QString& fileName)
     return result;
 }
 
-
-static int ShowLogDialog(const QString& fileName)
+static int ShowLogDialog(const QString &fileName)
 {
-    KConfig* config = new KConfig("cervisiapartrc");
-    LogDialog* dlg = new LogDialog(*config);
+    KConfig *config = new KConfig("cervisiapartrc");
+    LogDialog *dlg = new LogDialog(*config);
 
     // get directory for file
     const QFileInfo fi(fileName);
     QString directory = fi.absolutePath();
 
     // start the cvs DCOP service
-    OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService = StartDBusService(directory);
+    OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService = StartDBusService(directory);
 
-    if( dlg->parseCvsLog(cvsService, fi.fileName()) )
+    if (dlg->parseCvsLog(cvsService, fi.fileName()))
         dlg->show();
     else
         delete dlg;
@@ -106,18 +102,17 @@ static int ShowLogDialog(const QString& fileName)
     return result;
 }
 
-
-static int ShowAnnotateDialog(const QString& fileName)
+static int ShowAnnotateDialog(const QString &fileName)
 {
-    KConfig* config = new KConfig("cervisiapartrc");
-    AnnotateDialog* dlg = new AnnotateDialog(*config);
+    KConfig *config = new KConfig("cervisiapartrc");
+    AnnotateDialog *dlg = new AnnotateDialog(*config);
 
     // get directory for file
     const QFileInfo fi(fileName);
     QString directory = fi.absolutePath();
 
     // start the cvs D-Bus service
-    OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService = StartDBusService(directory);
+    OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService = StartDBusService(directory);
 
     AnnotateController ctl(dlg, cvsService);
     ctl.showDialog(fi.fileName());
@@ -133,34 +128,33 @@ static int ShowAnnotateDialog(const QString& fileName)
     return result;
 }
 
-
 extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
 {
     KLocalizedString::setApplicationDomain("cervisia");
 
     QApplication app(argc, argv);
 
-    KAboutData about("cervisia", i18n("Cervisia"), CERVISIA_VERSION_STRING,
-                     i18n("A CVS frontend"), KAboutLicense::GPL,
+    KAboutData about("cervisia",
+                     i18n("Cervisia"),
+                     CERVISIA_VERSION_STRING,
+                     i18n("A CVS frontend"),
+                     KAboutLicense::GPL,
                      i18n("Copyright (c) 1999-2002 Bernd Gehrmann\n"
-                          "Copyright (c) 2002-2008 the Cervisia authors"), QString(),
+                          "Copyright (c) 2002-2008 the Cervisia authors"),
+                     QString(),
                      QLatin1String("http://cervisia.kde.org"));
 
-    about.addAuthor(i18n("Bernd Gehrmann"), i18n("Original author and former "
-                    "maintainer"), "bernd@mail.berlios.de");
-    about.addAuthor(i18n("Christian Loose"), i18n("Maintainer"),
-                    "christian.loose@kdemail.net");
-    about.addAuthor(i18n("Andr\303\251 W\303\266bbeking"), i18n("Developer"),
-                    "woebbeking@kde.org");
-    about.addAuthor(i18n("Carlos Woelz"), i18n("Documentation"),
-                    "carloswoelz@imap-mail.com");
+    about.addAuthor(i18n("Bernd Gehrmann"),
+                    i18n("Original author and former "
+                         "maintainer"),
+                    "bernd@mail.berlios.de");
+    about.addAuthor(i18n("Christian Loose"), i18n("Maintainer"), "christian.loose@kdemail.net");
+    about.addAuthor(i18n("Andr\303\251 W\303\266bbeking"), i18n("Developer"), "woebbeking@kde.org");
+    about.addAuthor(i18n("Carlos Woelz"), i18n("Documentation"), "carloswoelz@imap-mail.com");
 
-    about.addCredit(i18n("Richard Moore"), i18n("Conversion to KPart"),
-                    "rich@kde.org");
-    about.addCredit(i18n("Laurent Montel"), i18n("Conversion to D-Bus"),
-                    "montel@kde.org");
-    about.addCredit(i18n("Martin Koller"), i18n("Port to KDE Frameworks 5"),
-                    "kollix@aon.at");
+    about.addCredit(i18n("Richard Moore"), i18n("Conversion to KPart"), "rich@kde.org");
+    about.addCredit(i18n("Laurent Montel"), i18n("Conversion to D-Bus"), "montel@kde.org");
+    about.addCredit(i18n("Martin Koller"), i18n("Port to KDE Frameworks 5"), "kollix@aon.at");
 
     about.setOrganizationDomain(QByteArray("kde.org"));
 
@@ -185,26 +179,24 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
 
     // is command line option 'show log dialog' specified?
     QString logFile = parser.value(QLatin1String("log"));
-    if( !logFile.isEmpty() )
+    if (!logFile.isEmpty())
         return ShowLogDialog(logFile);
 
     // is command line option 'show annotation dialog' specified?
     QString annotateFile = parser.value(QLatin1String("annotate"));
-    if( !annotateFile.isEmpty() )
+    if (!annotateFile.isEmpty())
         return ShowAnnotateDialog(annotateFile);
 
-    if ( app.isSessionRestored() ) {
+    if (app.isSessionRestored()) {
         kRestoreMainWindows<CervisiaShell>();
     } else {
-        CervisiaShell* shell = new CervisiaShell();
+        CervisiaShell *shell = new CervisiaShell();
 
-        if( parser.positionalArguments().count() )
-        {
+        if (parser.positionalArguments().count()) {
             QDir dir(parser.positionalArguments()[0]);
             QUrl directory = QUrl::fromLocalFile(dir.absolutePath());
             shell->openURL(directory);
-        }
-        else
+        } else
             shell->openURL();
 
         shell->setWindowIcon(qApp->windowIcon());
@@ -215,7 +207,6 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
     cleanupTempFiles();
     return res;
 }
-
 
 // Local Variables:
 // c-basic-offset: 4

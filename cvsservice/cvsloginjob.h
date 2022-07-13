@@ -28,19 +28,18 @@
 
 #include <kdesu/process.h>
 
-
 class CvsLoginJob : public QObject
 {
-    Q_OBJECT 
+    Q_OBJECT
 
 public:
     explicit CvsLoginJob(unsigned jobNum);
     ~CvsLoginJob() override;
 
-    void setServer(const QString& server);
+    void setServer(const QString &server);
 
-    void setCvsClient(const QByteArray& cvsClient);
-    void setRepository(const QByteArray& repository);
+    void setCvsClient(const QByteArray &cvsClient);
+    void setRepository(const QByteArray &repository);
 
     QString dbusObjectPath() const;
 public slots:
@@ -48,14 +47,13 @@ public slots:
     QStringList output();
 
 private:
-    KDESu::PtyProcess*    m_Proc;
-    QString        m_Server;
-    QString        m_Rsh;
-    QByteArray     m_CvsClient;
+    KDESu::PtyProcess *m_Proc;
+    QString m_Server;
+    QString m_Rsh;
+    QByteArray m_CvsClient;
     QList<QByteArray> m_Arguments;
-    QStringList    m_output;
-    QString        m_dbusObjectPath;
+    QStringList m_output;
+    QString m_dbusObjectPath;
 };
-
 
 #endif

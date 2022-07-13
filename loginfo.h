@@ -16,35 +16,29 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #ifndef CERVISIA_LOGINFO_H
 #define CERVISIA_LOGINFO_H
 
-
+#include <QList>
 #include <qdatetime.h>
 #include <qstring.h>
-#include <QList>
-
 
 namespace Cervisia
 {
-
 
 /**
  * Dumb data struct to store information of the tags plus some
  * convenience methods. The struct is used by the LogInfo struct.
  */
-struct TagInfo
-{
+struct TagInfo {
     /**
      * The types of a tag.
      */
-    enum Type
-    {
+    enum Type {
         /**
          * Branchpoint.
          */
-        Branch   = 1 << 0,
+        Branch = 1 << 0,
 
         /**
          * This type is for internal use. If the revision is in a branch
@@ -55,10 +49,10 @@ struct TagInfo
         /**
          * Normal tag.
          */
-        Tag      = 1 << 2
+        Tag = 1 << 2
     };
 
-    explicit TagInfo(const QString& name = QString(), Type type = Tag);
+    explicit TagInfo(const QString &name = QString(), Type type = Tag);
 
     /**
      * @param prefixWithType prefix the string with the type of the tag
@@ -84,13 +78,11 @@ struct TagInfo
     Type m_type;
 };
 
-
 /**
  * Dumb data struct to store the results of the log command plus some
  * convenience methods.
  */
-struct LogInfo
-{
+struct LogInfo {
     typedef QList<TagInfo> TTagInfoSeq;
 
     /**
@@ -110,11 +102,7 @@ struct LogInfo
      */
     QString dateTimeToString(bool showTime = true, bool shortFormat = true) const;
 
-    enum
-    {
-        NoTagType   = 0,
-        AllTagTypes = TagInfo::Branch | TagInfo::OnBranch | TagInfo::Tag
-    };
+    enum { NoTagType = 0, AllTagTypes = TagInfo::Branch | TagInfo::OnBranch | TagInfo::Tag };
 
     /**
      * Creates a single string from alls tags.
@@ -126,9 +114,7 @@ struct LogInfo
      *
      * @return string of joined tags.
      */
-    QString tagsToString(unsigned int types = AllTagTypes,
-                         unsigned int prefixWithType = AllTagTypes,
-                         const QString& separator = QString(QChar('\n'))) const;
+    QString tagsToString(unsigned int types = AllTagTypes, unsigned int prefixWithType = AllTagTypes, const QString &separator = QString(QChar('\n'))) const;
 
     /**
      * The revision of this entry.
@@ -156,8 +142,6 @@ struct LogInfo
     TTagInfoSeq m_tags;
 };
 
-
 } // namespace Cervisia
-
 
 #endif // CERVISIA_LOGINFO_H

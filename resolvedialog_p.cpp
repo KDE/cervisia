@@ -19,18 +19,17 @@
 #include "resolvedialog_p.h"
 #include "cervisiasettings.h"
 
-#include <kconfig.h>
-#include <QPlainTextEdit>
-#include <kconfiggroup.h>
 #include <KConfigGroup>
 #include <QDialogButtonBox>
+#include <QPlainTextEdit>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <kconfig.h>
+#include <kconfiggroup.h>
 
 using namespace Cervisia;
 
-
-ResolveEditorDialog::ResolveEditorDialog(KConfig& cfg, QWidget *parent)
+ResolveEditorDialog::ResolveEditorDialog(KConfig &cfg, QWidget *parent)
     : QDialog(parent)
     , m_partConfig(cfg)
 {
@@ -59,19 +58,16 @@ ResolveEditorDialog::ResolveEditorDialog(KConfig& cfg, QWidget *parent)
     restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
 }
 
-
 ResolveEditorDialog::~ResolveEditorDialog()
 {
     KConfigGroup cg(&m_partConfig, "ResolveEditorDialog");
     cg.writeEntry("geometry", saveGeometry());
 }
 
-
-void ResolveEditorDialog::setContent(const QString& text)
+void ResolveEditorDialog::setContent(const QString &text)
 {
     m_edit->setPlainText(text);
 }
-
 
 QString ResolveEditorDialog::content() const
 {

@@ -17,30 +17,27 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #include "mergedialog.h"
 
+#include <QDialogButtonBox>
+#include <QGridLayout>
+#include <QPushButton>
+#include <QVBoxLayout>
 #include <qbuttongroup.h>
 #include <qlabel.h>
 #include <qradiobutton.h>
 #include <qstyle.h>
-#include <QGridLayout>
-#include <QDialogButtonBox>
-#include <QPushButton>
-#include <QVBoxLayout>
 
 #include <KComboBox>
 #include <KConfigGroup>
 #include <KLocalizedString>
 
-#include "misc.h"
 #include "cvsserviceinterface.h"
+#include "misc.h"
 
-
-MergeDialog::MergeDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface* service,
-                         QWidget *parent)
-    : QDialog(parent),
-      cvsService(service)
+MergeDialog::MergeDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface *service, QWidget *parent)
+    : QDialog(parent)
+    , cvsService(service)
 {
     setWindowTitle(i18n("CVS Merge"));
     setModal(true);
@@ -105,9 +102,9 @@ MergeDialog::MergeDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface* service,
     tagsedit_layout->addWidget(tag2_label, 1, 1);
     tagsedit_layout->addWidget(tag2_combo, 1, 2);
     tagsedit_layout->addWidget(tag_button, 0, 3, 2, 1);
-    mainLayout->addLayout( tagsedit_layout );
+    mainLayout->addLayout(tagsedit_layout);
 
-    QButtonGroup* group = new QButtonGroup(this);
+    QButtonGroup *group = new QButtonGroup(this);
     group->addButton(bybranch_button);
     group->addButton(bytags_button);
     connect(group, SIGNAL(buttonClicked(int)), this, SLOT(toggled()));
@@ -118,30 +115,25 @@ MergeDialog::MergeDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface* service,
     toggled();
 }
 
-
 bool MergeDialog::byBranch() const
 {
     return bybranch_button->isChecked();
 }
-
 
 QString MergeDialog::branch() const
 {
     return branch_combo->currentText();
 }
 
-
 QString MergeDialog::tag1() const
 {
     return tag1_combo->currentText();
 }
 
-
 QString MergeDialog::tag2() const
 {
     return tag2_combo->currentText();
 }
-
 
 void MergeDialog::tagButtonClicked()
 {
@@ -152,13 +144,11 @@ void MergeDialog::tagButtonClicked()
     tag2_combo->addItems(listTags);
 }
 
-
 void MergeDialog::branchButtonClicked()
 {
     branch_combo->clear();
     branch_combo->addItems(::fetchBranches(cvsService, this));
 }
-
 
 void MergeDialog::toggled()
 {
@@ -173,8 +163,6 @@ void MergeDialog::toggled()
     else
         tag1_combo->setFocus();
 }
-
-
 
 // Local Variables:
 // c-basic-offset: 4

@@ -24,7 +24,6 @@
 #include <QStringList>
 class QString;
 
-
 namespace CvsServiceUtils
 {
 
@@ -32,9 +31,7 @@ namespace CvsServiceUtils
  * Joins a list of file names to one QString and quotes
  * each name properly for usage with QProcess.
  */
-QString joinFileList(const QStringList& files);
-
+QString joinFileList(const QStringList &files);
 }
-
 
 #endif

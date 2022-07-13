@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (c) 2003-2007 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -28,14 +28,14 @@ class OrgKdeCervisia5CvsserviceCvsserviceInterface;
 class WatchersDialog : public QDialog
 {
 public:
-    explicit WatchersDialog(KConfig& cfg, QWidget* parent = nullptr);
+    explicit WatchersDialog(KConfig &cfg, QWidget *parent = nullptr);
     ~WatchersDialog() override;
 
-    bool parseWatchers(OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService, const QStringList& files);
+    bool parseWatchers(OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService, const QStringList &files);
 
 private:
-    QTableView* m_tableView;
-    KConfig& partConfig;
+    QTableView *m_tableView;
+    KConfig &partConfig;
 };
 
 #endif // WATCHERSDIALOG_H

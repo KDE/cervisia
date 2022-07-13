@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *  Copyright (c) 2003-2007 Christian Loose <christian.loose@kdemail.net>
@@ -25,7 +25,6 @@
 
 #include <QDialog>
 
-
 class QLabel;
 class QCheckBox;
 class KComboBox;
@@ -39,11 +38,10 @@ class DiffDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit DiffDialog(KConfig& config, QWidget *parent=nullptr, bool modal=false);
+    explicit DiffDialog(KConfig &config, QWidget *parent = nullptr, bool modal = false);
     ~DiffDialog() override;
 
-    bool parseCvsDiff(OrgKdeCervisia5CvsserviceCvsserviceInterface* service, const QString &fileName, 
-                      const QString &revA, const QString &revB);
+    bool parseCvsDiff(OrgKdeCervisia5CvsserviceCvsserviceInterface *service, const QString &fileName, const QString &revA, const QString &revB);
 
 protected:
     void keyPressEvent(QKeyEvent *e) override;
@@ -57,11 +55,12 @@ private slots:
     void slotHelp();
 
 private:
-    void newDiffHunk(int& linenoA, int& linenoB, const QStringList& linesA,
-                     const QStringList& linesB);
-    void callExternalDiff(const QString& extdiff, OrgKdeCervisia5CvsserviceCvsserviceInterface* service, 
-                          const QString& fileName, const QString& revA, 
-                          const QString& revB);
+    void newDiffHunk(int &linenoA, int &linenoB, const QStringList &linesA, const QStringList &linesB);
+    void callExternalDiff(const QString &extdiff,
+                          OrgKdeCervisia5CvsserviceCvsserviceInterface *service,
+                          const QString &fileName,
+                          const QString &revA,
+                          const QString &revB);
     void updateNofN();
     void updateHighlight(int newitem);
 
@@ -73,12 +72,11 @@ private:
 
     QList<DiffItem *> items;
     int markeditem;
-    KConfig& partConfig;
+    KConfig &partConfig;
     QStringList m_diffOutput;
 };
 
 #endif
-
 
 // Local Variables:
 // c-basic-offset: 4

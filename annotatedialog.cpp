@@ -17,22 +17,21 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #include "annotatedialog.h"
 #include "annotateview.h"
 
-#include <kconfig.h>
 #include <KConfigGroup>
 #include <KHelpClient>
 #include <KLocalizedString>
+#include <kconfig.h>
 
+#include <QDialogButtonBox>
+#include <QInputDialog>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QVBoxLayout>
-#include <QInputDialog>
-#include <QDialogButtonBox>
 
-AnnotateDialog::AnnotateDialog(KConfig& cfg, QWidget *parent)
+AnnotateDialog::AnnotateDialog(KConfig &cfg, QWidget *parent)
     : QDialog(parent)
     , partConfig(cfg)
 {
@@ -82,7 +81,6 @@ AnnotateDialog::AnnotateDialog(KConfig& cfg, QWidget *parent)
     findEdit->setFocus();
 }
 
-
 AnnotateDialog::~AnnotateDialog()
 {
     KConfigGroup cg(&partConfig, "AnnotateDialog");
@@ -91,39 +89,34 @@ AnnotateDialog::~AnnotateDialog()
 
 void AnnotateDialog::slotHelp()
 {
-  KHelpClient::invokeHelp(QLatin1String("annotate"));
+    KHelpClient::invokeHelp(QLatin1String("annotate"));
 }
 
-
-void AnnotateDialog::addLine(const Cervisia::LogInfo& logInfo,
-                             const QString& content, bool odd)
+void AnnotateDialog::addLine(const Cervisia::LogInfo &logInfo, const QString &content, bool odd)
 {
     annotate->addLine(logInfo, content, odd);
 }
 
-
 void AnnotateDialog::findNext()
 {
-    if ( !findEdit->text().isEmpty() )
+    if (!findEdit->text().isEmpty())
         annotate->findText(findEdit->text(), false);
 }
 
 void AnnotateDialog::findPrev()
 {
-    if ( !findEdit->text().isEmpty() )
+    if (!findEdit->text().isEmpty())
         annotate->findText(findEdit->text(), true);
 }
 
 void AnnotateDialog::gotoLine()
 {
     bool ok = false;
-    int line = QInputDialog::getInt(this, i18n("Go to Line"), i18n("Go to line number:"),
-                                    annotate->currentLine(), 1, annotate->lastLine(), 1, &ok);
+    int line = QInputDialog::getInt(this, i18n("Go to Line"), i18n("Go to line number:"), annotate->currentLine(), 1, annotate->lastLine(), 1, &ok);
 
-    if ( ok )
+    if (ok)
         annotate->gotoLine(line);
 }
-
 
 // Local Variables:
 // c-basic-offset: 4

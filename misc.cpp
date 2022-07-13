@@ -18,24 +18,23 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #include "misc.h"
 #include "debug.h"
 
+#include <KLocalizedString>
+#include <QDebug>
+#include <QTemporaryFile>
 #include <ctype.h>
+#include <kemailsettings.h>
+#include <kmessagebox.h>
+#include <kuser.h>
 #include <pwd.h>
-#include <sys/types.h>
-#include <unistd.h>
 #include <qfile.h>
 #include <qfileinfo.h>
 #include <qregexp.h>
 #include <qstringlist.h>
-#include <kemailsettings.h>
-#include <kmessagebox.h>
-#include <KLocalizedString>
-#include <QTemporaryFile>
-#include <kuser.h>
-#include <QDebug>
+#include <sys/types.h>
+#include <unistd.h>
 
 #include "cvsserviceinterface.h"
 #include "progressdialog.h"
@@ -48,60 +47,54 @@ static const QString hostNameRegExp("([^:/@]+)");
 static const QString portRegExp("(:(\\d*))?");
 static const QString pathRegExp("(/.*)");
 
-
-static int FindWhiteSpace(const QString& str, int index)
+static int FindWhiteSpace(const QString &str, int index)
 {
     const int length = str.length();
 
-    if( index < 0 )
+    if (index < 0)
         index += length;
 
-    if( index < 0 || index >= length )
+    if (index < 0 || index >= length)
         return -1;
 
-    const QChar* const startPos = str.unicode();
-    const QChar* const endPos   = startPos + length;
+    const QChar *const startPos = str.unicode();
+    const QChar *const endPos = startPos + length;
 
-    const QChar* pos = startPos + index;
-    while( pos < endPos && !pos->isSpace() )
+    const QChar *pos = startPos + index;
+    while (pos < endPos && !pos->isSpace())
         ++pos;
 
     const int foundIndex = pos - startPos;
     return (foundIndex < length ? foundIndex : -1);
 }
 
-
-static const QStringList FetchBranchesAndTags(const QString& searchedType,
-                                              OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService,
-                                              QWidget* parent)
+static const QStringList FetchBranchesAndTags(const QString &searchedType, OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService, QWidget *parent)
 {
     QStringList branchOrTagList;
 
     QDBusReply<QDBusObjectPath> job = cvsService->status(QStringList(), true, true);
-    if( !job.isValid() )
+    if (!job.isValid())
         return branchOrTagList;
 
-    ProgressDialog dlg(parent, "Status", cvsService->service(),job, QString(), i18n("CVS Status"));
+    ProgressDialog dlg(parent, "Status", cvsService->service(), job, QString(), i18n("CVS Status"));
 
-    if( dlg.execute() )
-    {
+    if (dlg.execute()) {
         QString line;
-        while( dlg.getLine(line) )
-        {
+        while (dlg.getLine(line)) {
             int wsPos, bracketPos, colonPos;
 
-            if( line.isEmpty() || line[0] != '\t' )
+            if (line.isEmpty() || line[0] != '\t')
                 continue;
-            if( (wsPos = FindWhiteSpace(line, 2)) < 0 )
+            if ((wsPos = FindWhiteSpace(line, 2)) < 0)
                 continue;
-            if( (bracketPos = line.indexOf('(', wsPos + 1)) < 0 )
+            if ((bracketPos = line.indexOf('(', wsPos + 1)) < 0)
                 continue;
-            if( (colonPos = line.indexOf(':', bracketPos + 1)) < 0 )
+            if ((colonPos = line.indexOf(':', bracketPos + 1)) < 0)
                 continue;
 
-            const QString tag  = line.mid(1, wsPos - 1);
+            const QString tag = line.mid(1, wsPos - 1);
             const QString type = line.mid(bracketPos + 1, colonPos - bracketPos - 1);
-            if( type == searchedType && !branchOrTagList.contains(tag) )
+            if (type == searchedType && !branchOrTagList.contains(tag))
                 branchOrTagList.push_back(tag);
         }
 
@@ -111,47 +104,42 @@ static const QStringList FetchBranchesAndTags(const QString& searchedType,
     return branchOrTagList;
 }
 
-
-bool Cervisia::IsValidTag(const QString& tag)
+bool Cervisia::IsValidTag(const QString &tag)
 {
     static const QString prohibitedChars("$,.:;@");
 
-    if( !isalpha(tag[0].toLatin1()) )
+    if (!isalpha(tag[0].toLatin1()))
         return false;
 
-    for( int i = 1; i < tag.length(); ++i )
-    {
-        if( !isgraph(tag[i].toLatin1()) || prohibitedChars.contains(tag[i]) )
-                return false;
+    for (int i = 1; i < tag.length(); ++i) {
+        if (!isgraph(tag[i].toLatin1()) || prohibitedChars.contains(tag[i]))
+            return false;
     }
 
     return true;
 }
 
-
 QString Cervisia::UserName()
 {
     // 1. Try to retrieve the information from the control center settings
     KEMailSettings settings;
-    QString name  = settings.getSetting(KEMailSettings::RealName);
+    QString name = settings.getSetting(KEMailSettings::RealName);
     QString email = settings.getSetting(KEMailSettings::EmailAddress);
 
-    if( name.isEmpty() || email.isEmpty() )
-    {
+    if (name.isEmpty() || email.isEmpty()) {
         // 2. Try to retrieve the information from the system
-        struct passwd* pw = getpwuid(getuid());
-        if( !pw )
+        struct passwd *pw = getpwuid(getuid());
+        if (!pw)
             return QString();
 
         char hostname[512];
         hostname[0] = '\0';
 
-        if( !gethostname(hostname, sizeof(hostname)) )
-            hostname[sizeof(hostname)-1] = '0';
+        if (!gethostname(hostname, sizeof(hostname)))
+            hostname[sizeof(hostname) - 1] = '0';
 
-        name  = QString::fromLocal8Bit(pw->pw_gecos);
-        email = QString::fromLocal8Bit(pw->pw_name) + '@' +
-                QString::fromLocal8Bit(hostname);
+        name = QString::fromLocal8Bit(pw->pw_gecos);
+        email = QString::fromLocal8Bit(pw->pw_name) + '@' + QString::fromLocal8Bit(hostname);
     }
 
     QString result = name;
@@ -162,70 +150,62 @@ QString Cervisia::UserName()
     return result;
 }
 
-
-QString Cervisia::NormalizeRepository(const QString& repository)
+QString Cervisia::NormalizeRepository(const QString &repository)
 {
     // only :pserver: repositories
-    if( !repository.startsWith(QLatin1String(":pserver:")) )
+    if (!repository.startsWith(QLatin1String(":pserver:")))
         return repository;
 
-    QRegExp rx(":pserver:(" + userNameRegExp + passwordRegExp + "@)?" +
-               hostNameRegExp + portRegExp + pathRegExp);
+    QRegExp rx(":pserver:(" + userNameRegExp + passwordRegExp + "@)?" + hostNameRegExp + portRegExp + pathRegExp);
 
     // extract username, hostname, port and path from CVSROOT
     QString userName, hostName, port, path;
-    if( repository.contains( rx ) )
-    {
+    if (repository.contains(rx)) {
         userName = rx.cap(2);
         hostName = rx.cap(4);
-        port     = rx.cap(6);
-        path     = rx.cap(7);
+        port = rx.cap(6);
+        path = rx.cap(7);
 
         qCDebug(log_cervisia) << "username=" << userName;
         qCDebug(log_cervisia) << "hostname=" << hostName;
         qCDebug(log_cervisia) << "port    =" << port;
         qCDebug(log_cervisia) << "path    =" << path;
 
-        if( port.isEmpty() )
+        if (port.isEmpty())
             port = "2401";
 
-        if( userName.isEmpty() )
+        if (userName.isEmpty())
             userName = KUser().loginName();
 
-        QString canonicalForm = ":pserver:" + userName + '@' + hostName +
-                                ':' + port + path;
+        QString canonicalForm = ":pserver:" + userName + '@' + hostName + ':' + port + path;
 
-        qCDebug(log_cervisia) << "canonicalForm=" << canonicalForm
-                     << endl;
+        qCDebug(log_cervisia) << "canonicalForm=" << canonicalForm << endl;
         return canonicalForm;
-    }
-    else
+    } else
         return repository;
 }
 
-
-bool Cervisia::CheckOverwrite(const QString& fileName, QWidget* parent)
+bool Cervisia::CheckOverwrite(const QString &fileName, QWidget *parent)
 {
     bool result = true;
 
     QFileInfo fi(fileName);
 
     // does the file already exist?
-    if( fi.exists() )
-    {
+    if (fi.exists()) {
         KGuiItem overwriteItem = KStandardGuiItem::overwrite();
         overwriteItem.setIconName("document-save");
         overwriteItem.setToolTip(i18n("Overwrite the file"));
 
         result = (KMessageBox::warningContinueCancel(parent,
-                  i18n("A file named \"%1\" already exists. Are you sure you want to overwrite it?", fileName),
-                  i18n("Overwrite File?"),
-                  overwriteItem) == KMessageBox::Continue);
+                                                     i18n("A file named \"%1\" already exists. Are you sure you want to overwrite it?", fileName),
+                                                     i18n("Overwrite File?"),
+                                                     overwriteItem)
+                  == KMessageBox::Continue);
     }
 
     return result;
 }
-
 
 // Should be replaceable by QStringList::split
 QStringList splitLine(QString line, char delim)
@@ -234,37 +214,30 @@ QStringList splitLine(QString line, char delim)
     QStringList list;
 
     line = line.simplified();
-    while ((pos = line.indexOf(delim)) != -1)
-    {
+    while ((pos = line.indexOf(delim)) != -1) {
         list.append(line.left(pos));
-        line = line.mid(pos+1, line.length()-pos-1);
+        line = line.mid(pos + 1, line.length() - pos - 1);
     }
     if (!line.isEmpty())
         list.append(line);
     return list;
 }
 
-
-const QStringList fetchBranches(OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService, QWidget* parent)
+const QStringList fetchBranches(OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService, QWidget *parent)
 {
-    return FetchBranchesAndTags(QLatin1String("branch"), cvsService,
-                                parent);
+    return FetchBranchesAndTags(QLatin1String("branch"), cvsService, parent);
 }
 
-
-const QStringList fetchTags(OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService, QWidget* parent)
+const QStringList fetchTags(OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService, QWidget *parent)
 {
-    return FetchBranchesAndTags(QLatin1String("revision"), cvsService,
-                                parent);
+    return FetchBranchesAndTags(QLatin1String("revision"), cvsService, parent);
 }
-
 
 static QStringList *tempFiles = 0;
 
 void cleanupTempFiles()
 {
-    if (tempFiles)
-    {
+    if (tempFiles) {
         QStringList::Iterator it;
         for (it = tempFiles->begin(); it != tempFiles->end(); ++it)
             QFile::remove(*it);
@@ -272,8 +245,7 @@ void cleanupTempFiles()
     }
 }
 
-
-QString tempFileName(const QString& suffix)
+QString tempFileName(const QString &suffix)
 {
     if (!tempFiles)
         tempFiles = new QStringList;
@@ -285,8 +257,7 @@ QString tempFileName(const QString& suffix)
     return f.fileName();
 }
 
-
-int compareRevisions(const QString& rev1, const QString& rev2)
+int compareRevisions(const QString &rev1, const QString &rev2)
 {
     const int length1(rev1.length());
     const int length2(rev2.length());
@@ -295,8 +266,7 @@ int compareRevisions(const QString& rev1, const QString& rev2)
 
     int startPos1(0);
     int startPos2(0);
-    while (startPos1 < length1 && startPos2 < length2)
-    {
+    while (startPos1 < length1 && startPos2 < length2) {
         int pos1(rev1.indexOf('.', startPos1));
         if (pos1 < 0)
             pos1 = length1;
@@ -312,8 +282,7 @@ int compareRevisions(const QString& rev1, const QString& rev2)
             return comp;
 
         // if the parts are not equal we are ready
-        if (const int comp = ::compare(rev1.mid(startPos1, partLength1),
-                                       rev2.mid(startPos2, partLength2)))
+        if (const int comp = ::compare(rev1.mid(startPos1, partLength1), rev2.mid(startPos2, partLength2)))
             return comp;
 
         // continue with next part
@@ -331,7 +300,6 @@ int compareRevisions(const QString& rev1, const QString& rev2)
     else
         return 0;
 }
-
 
 // Local Variables:
 // c-basic-offset: 4

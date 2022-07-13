@@ -25,7 +25,6 @@
 
 class QString;
 
-
 /**
  * Represents a local or remote cvs repository with
  * its repository-specific configuration data.
@@ -35,7 +34,7 @@ class Q_DECL_EXPORT Repository : public QObject
     Q_OBJECT
 public:
     Repository();
-    explicit Repository(const QString& repository);
+    explicit Repository(const QString &repository);
     ~Repository() override;
 
 public Q_SLOTS:
@@ -50,7 +49,7 @@ public Q_SLOTS:
     /**
      */
     QString clientOnly() const;
-    
+
     /**
      * Remote shell command line client which should be used to
      * access the remote cvs repository, when :ext: access method
@@ -65,7 +64,7 @@ public Q_SLOTS:
      * repository using :ext: access method. ($CVS_SERVER)
      *
      * @return The server program. Can be null if not set.
-    */
+     */
     QString server() const;
 
     /**
@@ -73,7 +72,7 @@ public Q_SLOTS:
      *
      * @param dirName path to the local working copy directory.
      */
-    bool setWorkingCopy(const QString& dirName);
+    bool setWorkingCopy(const QString &dirName);
 
     /**
      * Path to the current working copy.
@@ -89,18 +88,17 @@ public Q_SLOTS:
      * @return The path and method to access the cvs repository.
      */
     QString location() const;
-    
+
     /**
      */
     bool retrieveCvsignoreFile() const;
 
 private slots:
-    void slotConfigDirty(const QString& fileName);
+    void slotConfigDirty(const QString &fileName);
 
 private:
     struct Private;
-    Private* d;
+    Private *d;
 };
-
 
 #endif

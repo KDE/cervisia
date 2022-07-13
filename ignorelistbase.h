@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -22,28 +22,25 @@
 class QFileInfo;
 class QString;
 
-
 namespace Cervisia
 {
-
 
 class IgnoreListBase
 {
 public:
-    virtual ~IgnoreListBase() {}
-    
-    virtual bool matches(const QFileInfo* fi) const = 0;
+    virtual ~IgnoreListBase()
+    {
+    }
+
+    virtual bool matches(const QFileInfo *fi) const = 0;
 
 protected:
-    void addEntriesFromString(const QString& str);
-    void addEntriesFromFile(const QString& name);
+    void addEntriesFromString(const QString &str);
+    void addEntriesFromFile(const QString &name);
 
 private:
-    virtual void addEntry(const QString& entry) = 0;
+    virtual void addEntry(const QString &entry) = 0;
 };
-
-
 }
-
 
 #endif

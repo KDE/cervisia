@@ -21,9 +21,8 @@
 #ifndef SETTINGSDIALOG_H
 #define SETTINGSDIALOG_H
 
-#include <qpushbutton.h>
 #include <kpagedialog.h>
-
+#include <qpushbutton.h>
 
 class QCheckBox;
 class QSpinBox;
@@ -32,33 +31,32 @@ class KConfig;
 class KColorButton;
 class KUrlRequester;
 
-namespace Ui {
-    class AdvancedPage;
+namespace Ui
+{
+class AdvancedPage;
 }
-
 
 class FontButton : public QPushButton
 {
     Q_OBJECT
 
 public:
-    explicit FontButton( const QString &text, QWidget *parent=nullptr );
+    explicit FontButton(const QString &text, QWidget *parent = nullptr);
 
 private slots:
     void chooseFont();
 };
-
 
 class SettingsDialog : public KPageDialog
 {
     Q_OBJECT
 
 public:
-    explicit SettingsDialog(KConfig *conf, QWidget *parent=nullptr);
+    explicit SettingsDialog(KConfig *conf, QWidget *parent = nullptr);
     ~SettingsDialog() override;
 
 protected slots:
-     void done(int res) override;
+    void done(int res) override;
 
 private slots:
     void slotHelp();
@@ -82,27 +80,26 @@ private:
     KUrlRequester *extdiffedit;
     QCheckBox *remotestatusbox;
     QCheckBox *localstatusbox;
-    FontButton*   m_protocolFontBox;
-    FontButton*   m_annotateFontBox;
-    FontButton*   m_diffFontBox;
-    FontButton*   m_changelogFontBox;
+    FontButton *m_protocolFontBox;
+    FontButton *m_annotateFontBox;
+    FontButton *m_diffFontBox;
+    FontButton *m_changelogFontBox;
 
-    KColorButton* m_conflictButton;
-    KColorButton* m_localChangeButton;
-    KColorButton* m_remoteChangeButton;
-    KColorButton* m_notInCvsButton;
-    KColorButton* m_diffChangeButton;
-    KColorButton* m_diffInsertButton;
-    KColorButton* m_diffDeleteButton;
+    KColorButton *m_conflictButton;
+    KColorButton *m_localChangeButton;
+    KColorButton *m_remoteChangeButton;
+    KColorButton *m_notInCvsButton;
+    KColorButton *m_diffChangeButton;
+    KColorButton *m_diffInsertButton;
+    KColorButton *m_diffDeleteButton;
 
-    QCheckBox*    m_splitterBox;
-    Ui::AdvancedPage* m_advancedPage;
+    QCheckBox *m_splitterBox;
+    Ui::AdvancedPage *m_advancedPage;
 
-    KConfig* serviceConfig;
+    KConfig *serviceConfig;
 };
 
 #endif
-
 
 // Local Variables:
 // c-basic-offset: 4

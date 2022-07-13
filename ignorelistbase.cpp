@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -23,26 +23,21 @@ using namespace Cervisia;
 #include <qstringlist.h>
 #include <qtextstream.h>
 
-
-void IgnoreListBase::addEntriesFromString(const QString& str)
+void IgnoreListBase::addEntriesFromString(const QString &str)
 {
     QStringList entries = str.split(' ');
-    for( QStringList::iterator it = entries.begin(); it != entries.end(); ++it )
-    {
+    for (QStringList::iterator it = entries.begin(); it != entries.end(); ++it) {
         addEntry(*it);
     }
 }
 
-
-void IgnoreListBase::addEntriesFromFile(const QString& name)
+void IgnoreListBase::addEntriesFromFile(const QString &name)
 {
     QFile file(name);
 
-    if( file.open(QIODevice::ReadOnly) )
-    {
+    if (file.open(QIODevice::ReadOnly)) {
         QTextStream stream(&file);
-        while( !stream.atEnd() )
-        {
+        while (!stream.atEnd()) {
             addEntriesFromString(stream.readLine());
         }
     }

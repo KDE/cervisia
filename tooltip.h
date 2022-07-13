@@ -16,21 +16,16 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #ifndef CERVISIA_TOOLTIP_H
 #define CERVISIA_TOOLTIP_H
 
-
 #include <qobject.h>
-
 
 class QPoint;
 class QRect;
 
-
 namespace Cervisia
 {
-
 
 /**
  * This class extends QToolTip:
@@ -42,13 +37,12 @@ class ToolTip : public QObject
     Q_OBJECT
 
 public:
-
     /**
      * @param widget The widget you want to add tooltips to. It's also used as
      * parent for the QObject. So you don't have to free an instance of this
      * class yourself.
      */
-    explicit ToolTip(QWidget* widget);
+    explicit ToolTip(QWidget *widget);
 
 signals:
 
@@ -64,15 +58,12 @@ signals:
      *
      * @param text The tooltip text.
      */
-    void queryToolTip(const QPoint& pos, QRect& rect, QString& text);
+    void queryToolTip(const QPoint &pos, QRect &rect, QString &text);
 
 protected:
-
-    bool eventFilter(QObject*, QEvent*) override;
+    bool eventFilter(QObject *, QEvent *) override;
 };
 
-
 } // namespace Cervisia
-
 
 #endif // CERVISIA_TOOLTIP_H

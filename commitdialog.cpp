@@ -23,44 +23,44 @@
 #include <QBoxLayout>
 #include <QCheckBox>
 #include <QComboBox>
+#include <QDialogButtonBox>
 #include <QDir>
 #include <QFileInfo>
 #include <QLabel>
+#include <QListWidget>
+#include <QPushButton>
 #include <QTextStream>
 #include <QVBoxLayout>
-#include <QListWidget>
-#include <QDialogButtonBox>
-#include <QPushButton>
 
 #include <KConfig>
 #include <KConfigGroup>
 #include <KGuiItem>
-#include <KLocalizedString>
 #include <KHelpClient>
+#include <KLocalizedString>
 
 #include "cvsserviceinterface.h"
-#include "logmessageedit.h"
 #include "diffdialog.h"
-
+#include "logmessageedit.h"
 
 class CommitListItem : public QListWidgetItem
 {
 public:
-    CommitListItem(const QString& text, const QString& fileName, QListWidget* parent = nullptr)
+    CommitListItem(const QString &text, const QString &fileName, QListWidget *parent = nullptr)
         : QListWidgetItem(text, parent)
         , m_fileName(fileName)
     {
     }
 
-    QString fileName() const { return m_fileName; }
+    QString fileName() const
+    {
+        return m_fileName;
+    }
 
 private:
     QString m_fileName;
 };
 
-
-CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInterface* service,
-                           QWidget *parent)
+CommitDialog::CommitDialog(KConfig &cfg, OrgKdeCervisia5CvsserviceCvsserviceInterface *service, QWidget *parent)
     : QDialog(parent)
     , partConfig(cfg)
     , cvsService(service)
@@ -84,17 +84,15 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInte
 
     KGuiItem::assign(user1Button, KGuiItem(i18n("&Diff")));
 
-    QLabel *textlabel = new QLabel( i18n("Commit the following &files:"));
+    QLabel *textlabel = new QLabel(i18n("Commit the following &files:"));
     mainLayout->addWidget(textlabel);
 
     m_fileList = new QListWidget;
     m_fileList->setEditTriggers(QAbstractItemView::NoEditTriggers);
     textlabel->setBuddy(m_fileList);
     mainLayout->addWidget(m_fileList);
-    connect( m_fileList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
-             this, SLOT(fileSelected(QListWidgetItem*)));
-    connect( m_fileList, SIGNAL(itemSelectionChanged()),
-             this, SLOT(fileHighlighted()) );
+    connect(m_fileList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(fileSelected(QListWidgetItem *)));
+    connect(m_fileList, SIGNAL(itemSelectionChanged()), this, SLOT(fileHighlighted()));
 
     QLabel *archivelabel = new QLabel(i18n("Older &messages:"));
     mainLayout->addWidget(archivelabel);
@@ -102,7 +100,7 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInte
     combo = new QComboBox;
     mainLayout->addWidget(combo);
     archivelabel->setBuddy(combo);
-    connect( combo, SIGNAL(activated(int)), this, SLOT(comboActivated(int)) );
+    connect(combo, SIGNAL(activated(int)), this, SLOT(comboActivated(int)));
     // make sure that combobox is smaller than the screen
     combo->setSizePolicy(QSizePolicy(QSizePolicy::Ignored, QSizePolicy::Fixed));
 
@@ -117,7 +115,7 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInte
 
     m_useTemplateChk = new QCheckBox(i18n("Use log message &template"));
     mainLayout->addWidget(m_useTemplateChk);
-    connect( m_useTemplateChk, SIGNAL(clicked()), this, SLOT(useTemplateClicked()) );
+    connect(m_useTemplateChk, SIGNAL(clicked()), this, SLOT(useTemplateClicked()));
 
     mainLayout->addWidget(buttonBox);
     okButton->setDefault(true);
@@ -125,12 +123,11 @@ CommitDialog::CommitDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInte
     checkForTemplateFile();
 
     user1Button->setEnabled(false);
-    connect(user1Button, SIGNAL(clicked()), this, SLOT(diffClicked()) );
+    connect(user1Button, SIGNAL(clicked()), this, SLOT(diffClicked()));
 
     KConfigGroup cg(&partConfig, "CommitDialog");
     restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
 }
-
 
 CommitDialog::~CommitDialog()
 {
@@ -141,58 +138,51 @@ CommitDialog::~CommitDialog()
 
 void CommitDialog::slotHelp()
 {
-  KHelpClient::invokeHelp(QLatin1String("committingfiles"));
+    KHelpClient::invokeHelp(QLatin1String("committingfiles"));
 }
-
 
 void CommitDialog::setFileList(const QStringList &list)
 {
     QString currentDirName = QFileInfo(QLatin1String(".")).absoluteFilePath();
 
     QStringList::ConstIterator it = list.begin();
-    for( ; it != list.end(); ++it )
-    {
+    for (; it != list.end(); ++it) {
         // the dot for the root directory is hard to see, so
         // we convert it to the absolut path
         QString text = (*it != QLatin1String(".") ? *it : currentDirName);
 
         edit->compObj()->addItem(text);
 
-        CommitListItem* item = new CommitListItem(text, *it, m_fileList);
+        CommitListItem *item = new CommitListItem(text, *it, m_fileList);
         item->setCheckState(Qt::Checked);
     }
 }
-
 
 QStringList CommitDialog::fileList() const
 {
     QStringList files;
 
-    for( int i = 0; i < m_fileList->count(); ++i )
-    {
-        CommitListItem* item = static_cast<CommitListItem*>(m_fileList->item(i));
-        if( item->checkState() & Qt::Checked )
+    for (int i = 0; i < m_fileList->count(); ++i) {
+        CommitListItem *item = static_cast<CommitListItem *>(m_fileList->item(i));
+        if (item->checkState() & Qt::Checked)
             files.append(item->fileName());
     }
 
     return files;
 }
 
-
 void CommitDialog::setLogMessage(const QString &msg)
 {
     edit->setText(msg);
 
-    if( m_useTemplateChk->isChecked() )
+    if (m_useTemplateChk->isChecked())
         addTemplateText();
 }
-
 
 QString CommitDialog::logMessage() const
 {
     return edit->toPlainText();
 }
-
 
 void CommitDialog::setLogHistory(const QStringList &list)
 {
@@ -200,24 +190,21 @@ void CommitDialog::setLogHistory(const QStringList &list)
 
     combo->addItem(i18n("Current"));
 
-    for ( QStringList::ConstIterator it = list.begin();
-          it != list.end(); ++it )
+    for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it) {
+        if ((*it).isEmpty())
+            continue;
+
+        QString txt = *it;
+        int index = txt.indexOf('\n', 0);
+        if (index != -1) // Fetch first line
         {
-            if( (*it).isEmpty() )
-                continue;
-
-            QString txt = *it;
-            int index = txt.indexOf('\n', 0);
-            if ( index != -1 ) // Fetch first line
-            {
-                txt = txt.mid(0, index);
-                txt += "...";
-            }
-
-            combo->addItem(txt);
+            txt = txt.mid(0, index);
+            txt += "...";
         }
-}
 
+        combo->addItem(txt);
+    }
+}
 
 void CommitDialog::comboActivated(int index)
 {
@@ -226,23 +213,20 @@ void CommitDialog::comboActivated(int index)
 
     if (index == 0) // Handle current text
         edit->setText(current_text);
-    else
-    {
+    else {
         if (current_index == 0) // Store current text
             current_text = edit->toPlainText();
 
         // Show archived text
-        edit->setText(commits[index-1]);
+        edit->setText(commits[index - 1]);
     }
     current_index = index;
 }
 
-
-void CommitDialog::fileSelected(QListWidgetItem* item)
+void CommitDialog::fileSelected(QListWidgetItem *item)
 {
     showDiffDialog(item->text());
 }
-
 
 void CommitDialog::fileHighlighted()
 {
@@ -250,18 +234,16 @@ void CommitDialog::fileHighlighted()
     user1Button->setEnabled(isItemSelected);
 }
 
-
 void CommitDialog::diffClicked()
 {
-    QListWidgetItem* item = m_fileList->selectedItems().first();
-    if( !item )
+    QListWidgetItem *item = m_fileList->selectedItems().first();
+    if (!item)
         return;
 
     showDiffDialog(item->text());
 }
 
-
-void CommitDialog::showDiffDialog(const QString& fileName)
+void CommitDialog::showDiffDialog(const QString &fileName)
 {
     DiffDialog *l = new DiffDialog(partConfig, this, "diffdialog");
 
@@ -277,28 +259,21 @@ void CommitDialog::showDiffDialog(const QString& fileName)
     user1Button->setEnabled(true);
 }
 
-
 void CommitDialog::useTemplateClicked()
 {
-    if( m_useTemplateChk->isChecked() )
-    {
+    if (m_useTemplateChk->isChecked()) {
         addTemplateText();
-    }
-    else
-    {
+    } else {
         removeTemplateText();
     }
 }
 
-
 void CommitDialog::checkForTemplateFile()
 {
     QString filename = QDir::current().absolutePath() + "/CVS/Template";
-    if( QFile::exists(filename) )
-    {
+    if (QFile::exists(filename)) {
         QFile f(filename);
-        if( f.open(QIODevice::ReadOnly) )
-        {
+        if (f.open(QIODevice::ReadOnly)) {
             QTextStream stream(&f);
             m_templateText = stream.readAll();
             f.close();
@@ -309,18 +284,13 @@ void CommitDialog::checkForTemplateFile()
             m_useTemplateChk->setChecked(check);
 
             addTemplateText();
-        }
-        else
-        {
+        } else {
             m_useTemplateChk->setEnabled(false);
         }
-    }
-    else
-    {
+    } else {
         m_useTemplateChk->setEnabled(false);
     }
 }
-
 
 void CommitDialog::addTemplateText()
 {
@@ -329,12 +299,10 @@ void CommitDialog::addTemplateText()
     edit->ensureCursorVisible();
 }
 
-
 void CommitDialog::removeTemplateText()
 {
     edit->setText(edit->toPlainText().remove(m_templateText));
 }
-
 
 // Local Variables:
 // c-basic-offset: 4

@@ -20,24 +20,23 @@
 
 using Cervisia::PatchOptionDialog;
 
-#include <KHelpClient>
 #include <KConfigGroup>
+#include <KHelpClient>
 #include <KLocalizedString>
 
+#include <QButtonGroup>
+#include <QDialogButtonBox>
+#include <QHBoxLayout>
+#include <QPushButton>
+#include <QSpinBox>
+#include <QVBoxLayout>
 #include <qcheckbox.h>
+#include <qgroupbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qradiobutton.h>
-#include <qgroupbox.h>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QButtonGroup>
-#include <QSpinBox>
-#include <QDialogButtonBox>
-#include <QPushButton>
 
-
-PatchOptionDialog::PatchOptionDialog(QWidget* parent)
+PatchOptionDialog::PatchOptionDialog(QWidget *parent)
     : QDialog(parent)
 {
     setModal(false);
@@ -53,67 +52,65 @@ PatchOptionDialog::PatchOptionDialog(QWidget* parent)
     connect(buttonBox, &QDialogButtonBox::helpRequested, this, &PatchOptionDialog::slotHelp);
 
     { // format
-      m_formatBtnGroup = new QButtonGroup(this);
+        m_formatBtnGroup = new QButtonGroup(this);
 
-      connect(m_formatBtnGroup, SIGNAL(buttonClicked(int)),
-              this,             SLOT(formatChanged(int)));
+        connect(m_formatBtnGroup, SIGNAL(buttonClicked(int)), this, SLOT(formatChanged(int)));
 
-      m_formatBtnGroup->addButton(new QRadioButton(i18n("Context")), 0);
-      m_formatBtnGroup->addButton(new QRadioButton(i18n("Normal")), 1);
-      QRadioButton* unifiedFormatBtn = new QRadioButton(i18n("Unified"));
-      unifiedFormatBtn->setChecked(true);
-      m_formatBtnGroup->addButton(unifiedFormatBtn, 2);
+        m_formatBtnGroup->addButton(new QRadioButton(i18n("Context")), 0);
+        m_formatBtnGroup->addButton(new QRadioButton(i18n("Normal")), 1);
+        QRadioButton *unifiedFormatBtn = new QRadioButton(i18n("Unified"));
+        unifiedFormatBtn->setChecked(true);
+        m_formatBtnGroup->addButton(unifiedFormatBtn, 2);
 
-      QGroupBox *box = new QGroupBox(i18n("Output Format"));
-      mainLayout->addWidget(box);
-      QVBoxLayout *v = new QVBoxLayout(box);
-      v->addWidget(m_formatBtnGroup->button(0));
-      v->addWidget(m_formatBtnGroup->button(1));
-      v->addWidget(m_formatBtnGroup->button(2));
+        QGroupBox *box = new QGroupBox(i18n("Output Format"));
+        mainLayout->addWidget(box);
+        QVBoxLayout *v = new QVBoxLayout(box);
+        v->addWidget(m_formatBtnGroup->button(0));
+        v->addWidget(m_formatBtnGroup->button(1));
+        v->addWidget(m_formatBtnGroup->button(2));
 
-      mainLayout->addWidget(box);
+        mainLayout->addWidget(box);
     }
 
-    QLabel* contextLinesLbl = new QLabel(i18n("&Number of context lines:"));
+    QLabel *contextLinesLbl = new QLabel(i18n("&Number of context lines:"));
     m_contextLines = new QSpinBox;
     m_contextLines->setValue(3);
     mainLayout->addWidget(m_contextLines);
     m_contextLines->setRange(2, 65535);
     contextLinesLbl->setBuddy(m_contextLines);
 
-    QBoxLayout* contextLinesLayout = new QHBoxLayout();
+    QBoxLayout *contextLinesLayout = new QHBoxLayout();
     mainLayout->addLayout(contextLinesLayout);
     contextLinesLayout->addWidget(contextLinesLbl);
     contextLinesLayout->addWidget(m_contextLines);
 
     { // ignore options
-      QButtonGroup *group = new QButtonGroup(this);
-      group->setExclusive(false);
+        QButtonGroup *group = new QButtonGroup(this);
+        group->setExclusive(false);
 
-      m_blankLineChk   = new QCheckBox(i18n("Ignore added or removed empty lines"));
-      m_spaceChangeChk = new QCheckBox(i18n("Ignore changes in the amount of whitespace"));
-      m_allSpaceChk    = new QCheckBox(i18n("Ignore all whitespace"));
-      m_caseChangesChk = new QCheckBox(i18n("Ignore changes in case"));
+        m_blankLineChk = new QCheckBox(i18n("Ignore added or removed empty lines"));
+        m_spaceChangeChk = new QCheckBox(i18n("Ignore changes in the amount of whitespace"));
+        m_allSpaceChk = new QCheckBox(i18n("Ignore all whitespace"));
+        m_caseChangesChk = new QCheckBox(i18n("Ignore changes in case"));
 
-      group->addButton(m_blankLineChk);
-      group->addButton(m_spaceChangeChk);
-      group->addButton(m_allSpaceChk);
-      group->addButton(m_caseChangesChk);
+        group->addButton(m_blankLineChk);
+        group->addButton(m_spaceChangeChk);
+        group->addButton(m_allSpaceChk);
+        group->addButton(m_caseChangesChk);
 
-      QGroupBox *box = new QGroupBox(i18n("Ignore Options"));
-      mainLayout->addWidget(box);
-      QVBoxLayout *v = new QVBoxLayout(box);
-      v->addWidget(m_blankLineChk);
-      v->addWidget(m_spaceChangeChk);
-      v->addWidget(m_allSpaceChk);
-      v->addWidget(m_caseChangesChk);
+        QGroupBox *box = new QGroupBox(i18n("Ignore Options"));
+        mainLayout->addWidget(box);
+        QVBoxLayout *v = new QVBoxLayout(box);
+        v->addWidget(m_blankLineChk);
+        v->addWidget(m_spaceChangeChk);
+        v->addWidget(m_allSpaceChk);
+        v->addWidget(m_caseChangesChk);
 
-      mainLayout->addWidget(box);
+        mainLayout->addWidget(box);
     }
 
     mainLayout->addWidget(buttonBox);
 }
-
 
 PatchOptionDialog::~PatchOptionDialog()
 {
@@ -121,46 +118,44 @@ PatchOptionDialog::~PatchOptionDialog()
 
 void PatchOptionDialog::slotHelp()
 {
-  KHelpClient::invokeHelp(QLatin1String("creatingpatches"));
+    KHelpClient::invokeHelp(QLatin1String("creatingpatches"));
 }
-
 
 QString PatchOptionDialog::diffOptions() const
 {
     QString options;
 
-    if( m_blankLineChk->isChecked() )
+    if (m_blankLineChk->isChecked())
         options += " -B ";
 
-    if( m_spaceChangeChk->isChecked() )
+    if (m_spaceChangeChk->isChecked())
         options += " -b ";
 
-    if( m_allSpaceChk->isChecked() )
+    if (m_allSpaceChk->isChecked())
         options += " -w ";
 
-    if( m_caseChangesChk->isChecked() )
+    if (m_caseChangesChk->isChecked())
         options += " -i ";
 
     return options;
 }
 
-
 QString PatchOptionDialog::formatOption() const
 {
-    switch( m_formatBtnGroup->checkedId() )
-    {
-        case 0: return "-C " + QString::number(m_contextLines->value());
-        case 1: return "";
-        case 2: return "-U " + QString::number(m_contextLines->value());
+    switch (m_formatBtnGroup->checkedId()) {
+    case 0:
+        return "-C " + QString::number(m_contextLines->value());
+    case 1:
+        return "";
+    case 2:
+        return "-U " + QString::number(m_contextLines->value());
     }
 
     return "";
 }
 
-
 void PatchOptionDialog::formatChanged(int buttonId)
 {
-    bool enabled = ( buttonId == 0 || buttonId == 2 );
+    bool enabled = (buttonId == 0 || buttonId == 2);
     m_contextLines->setEnabled(enabled);
 }
-

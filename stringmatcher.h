@@ -16,32 +16,26 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #ifndef CERVISIA_STRINGMATCHER_H
 #define CERVISIA_STRINGMATCHER_H
 
-
 #include <QStringList>
-
-
 
 namespace Cervisia
 {
 
-
 class StringMatcher
 {
 public:
-
     /**
      * @return \c true, if text matches one of the given patterns.
      */
-    bool match(const QString& text) const;
+    bool match(const QString &text) const;
 
     /**
      * Adds pattern \a pattern.
      */
-    void add(const QString& pattern);
+    void add(const QString &pattern);
 
     /**
      * Removes all patterns.
@@ -49,7 +43,6 @@ public:
     void clear();
 
 private:
-
     /**
      * The patterns which are tested in match().
      */
@@ -71,8 +64,6 @@ private:
     QList<QByteArray> m_generalPatterns;
 };
 
-
 } // namespace Cervisia
-
 
 #endif // CERVISIA_STRINGMATCHER_H

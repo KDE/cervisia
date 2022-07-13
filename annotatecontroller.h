@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (c) 2002 Christian Loose <christian.loose@hamburg.de>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -27,14 +27,14 @@ class OrgKdeCervisia5CvsserviceCvsserviceInterface;
 class AnnotateController
 {
 public:
-    AnnotateController(AnnotateDialog* dialog, OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService);
+    AnnotateController(AnnotateDialog *dialog, OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService);
     ~AnnotateController();
 
-    void showDialog(const QString& fileName, const QString& revision = QString());
+    void showDialog(const QString &fileName, const QString &revision = QString());
 
 private:
     struct Private;
-    Private* d;
+    Private *d;
 };
 
 #endif // ANNOTATECONTROLLER_H

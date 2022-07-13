@@ -21,50 +21,46 @@
 #include "cvsloginjob.h"
 #include "../debug.h"
 
-#include <kpassworddialog.h>
 #include <KLocalizedString>
+#include <kpassworddialog.h>
 
 #include <QDebug>
 #include <qbytearray.h>
 
-#include <sys/types.h>
-#include <signal.h>
 #include <cvsloginjobadaptor.h>
+#include <signal.h>
+#include <sys/types.h>
 
-static const char LOGIN_PHRASE[]   = "Logging in to";
+static const char LOGIN_PHRASE[] = "Logging in to";
 static const char FAILURE_PHRASE[] = "authorization failed:";
-static const char PASS_PHRASE[]    = "CVS PASSWORD: ";
-
+static const char PASS_PHRASE[] = "CVS PASSWORD: ";
 
 CvsLoginJob::CvsLoginJob(unsigned jobNum)
     : m_Proc(0)
 {
     new CvsloginjobAdaptor(this);
-    m_dbusObjectPath = "/CvsLoginJob" + QString::number(jobNum); 
+    m_dbusObjectPath = "/CvsLoginJob" + QString::number(jobNum);
     QDBusConnection::sessionBus().registerObject(m_dbusObjectPath, this);
 
     m_Proc = new KDESu::PtyProcess;
 }
-
 
 CvsLoginJob::~CvsLoginJob()
 {
     delete m_Proc;
 }
 
-
 QString CvsLoginJob::dbusObjectPath() const
 {
-  return m_dbusObjectPath;
+    return m_dbusObjectPath;
 }
 
-void CvsLoginJob::setServer(const QString& server)
+void CvsLoginJob::setServer(const QString &server)
 {
     m_Server = server;
 }
 
-
-void CvsLoginJob::setCvsClient(const QByteArray& cvsClient)
+void CvsLoginJob::setCvsClient(const QByteArray &cvsClient)
 {
     m_CvsClient = cvsClient;
 
@@ -72,32 +68,27 @@ void CvsLoginJob::setCvsClient(const QByteArray& cvsClient)
     m_Arguments += "-f";
 }
 
-
-void CvsLoginJob::setRepository(const QByteArray& repository)
+void CvsLoginJob::setRepository(const QByteArray &repository)
 {
     m_Arguments += "-d";
     m_Arguments += repository;
     m_Arguments += "login";
 }
 
-
 bool CvsLoginJob::execute()
 {
     static QByteArray repository;
 
     int res = m_Proc->exec(m_CvsClient, m_Arguments);
-    if( res < 0 )
-    {
+    if (res < 0) {
         qCDebug(log_cervisia) << "Couldn't start 'cvs login' process!";
         return false;
     }
 
     bool result = false;
-    while( true )
-    {
+    while (true) {
         QByteArray line = m_Proc->readLine();
-        if( line.isNull() )
-        {
+        if (line.isNull()) {
             return result;
         }
 
@@ -106,33 +97,28 @@ bool CvsLoginJob::execute()
         qCDebug(log_cervisia) << "process output = " << line;
 
         // retrieve repository from 'Logging in to'-line
-        if( line.contains(LOGIN_PHRASE) )
-        {
+        if (line.contains(LOGIN_PHRASE)) {
             repository = line.remove(0, line.indexOf(":pserver:"));
             continue;
         }
 
         // process asks for the password
         // search case insensitive as cvs and cvsnt use different capitalization
-        if( line.toUpper().contains(PASS_PHRASE) )
-        {
-
+        if (line.toUpper().contains(PASS_PHRASE)) {
             // show password dialog
             QString password;
             KPasswordDialog dlg;
             dlg.setPrompt(i18n("Enter password for repository %1.").arg(QString::fromLocal8Bit(repository)));
-            if( dlg.exec() )
-            {
+            if (dlg.exec()) {
                 password = dlg.password();
                 // send password to process
                 m_Proc->waitSlave();
                 m_Proc->writeLine(password.toLocal8Bit());
 
                 // wait for the result
-                while( !line.contains(FAILURE_PHRASE) )
-                {
+                while (!line.contains(FAILURE_PHRASE)) {
                     line = m_Proc->readLine();
-                    if( line.isNull() )
+                    if (line.isNull())
                         return true;
 
                     // add line to output list
@@ -141,9 +127,7 @@ bool CvsLoginJob::execute()
                 }
 
                 result = false;
-            }
-            else
-            {
+            } else {
                 // user pressed cancel so kill the process
                 kill(m_Proc->pid(), SIGKILL);
                 m_Proc->waitForChild();
@@ -154,10 +138,7 @@ bool CvsLoginJob::execute()
     return false;
 }
 
-
 QStringList CvsLoginJob::output()
 {
     return m_output;
 }
-
-

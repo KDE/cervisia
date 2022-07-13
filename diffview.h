@@ -17,10 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #ifndef DIFFVIEW_H
 #define DIFFVIEW_H
-
 
 #include "qttableview.h"
 
@@ -29,7 +27,6 @@
 class KConfig;
 class DiffViewItem;
 
-
 class DiffView : public QtTableView
 {
     Q_OBJECT
@@ -37,23 +34,30 @@ class DiffView : public QtTableView
 public:
     enum DiffType { Change, Insert, Delete, Neutral, Unchanged, Separator };
 
-    DiffView( KConfig& cfg, bool withlinenos, bool withmarker,
-              QWidget *parent=nullptr, const char *name=0 );
+    DiffView(KConfig &cfg, bool withlinenos, bool withmarker, QWidget *parent = nullptr, const char *name = 0);
 
     ~DiffView() override;
 
     void setPartner(DiffView *other);
 
     void up()
-        { setTopCell(topCell()-1); }
+    {
+        setTopCell(topCell() - 1);
+    }
     void down()
-        { setTopCell(topCell()+1); }
+    {
+        setTopCell(topCell() + 1);
+    }
     void next()
-        { setTopCell(topCell()+viewHeight()/cellHeight()); }
+    {
+        setTopCell(topCell() + viewHeight() / cellHeight());
+    }
     void prior()
-        { setTopCell(topCell()-viewHeight()/cellHeight()); }
+    {
+        setTopCell(topCell() - viewHeight() / cellHeight());
+    }
 
-    void addLine(const QString &line, DiffType type, int no=-1);
+    void addLine(const QString &line, DiffType type, int no = -1);
     QString stringAtLine(int lineno);
     void setCenterLine(int lineno);
     void setInverted(int lineno, bool inverted);
@@ -69,7 +73,9 @@ public:
     QSize sizeHint() const override;
     void paintCell(QPainter *p, int row, int col) override;
     const QScrollBar *scrollBar() const
-        { return verticalScrollBar(); }
+    {
+        return verticalScrollBar();
+    }
 
 protected Q_SLOTS:
     void vertPositionChanged(int val);
@@ -93,16 +99,15 @@ private:
     QColor diffDeleteColor;
 
     int m_tabWidth;
-    KConfig& partConfig;
+    KConfig &partConfig;
 };
-
 
 class DiffZoomWidget : public QFrame
 {
     Q_OBJECT
 
 public:
-    explicit DiffZoomWidget(QWidget *parent=nullptr);
+    explicit DiffZoomWidget(QWidget *parent = nullptr);
     ~DiffZoomWidget() override;
 
     void setDiffView(DiffView *view);
@@ -121,7 +126,6 @@ private:
 };
 
 #endif
-
 
 // Local Variables:
 // c-basic-offset: 4

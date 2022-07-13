@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (c) 2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -30,17 +30,16 @@ namespace Cervisia
 class ResolveEditorDialog : public QDialog
 {
 public:
-    explicit ResolveEditorDialog(KConfig& cfg, QWidget* parent=nullptr);
+    explicit ResolveEditorDialog(KConfig &cfg, QWidget *parent = nullptr);
     ~ResolveEditorDialog() override;
 
-    void setContent(const QString& text);
+    void setContent(const QString &text);
     QString content() const;
 
-private:   
-    QPlainTextEdit* m_edit;
-    KConfig&   m_partConfig;
-};  
-
+private:
+    QPlainTextEdit *m_edit;
+    KConfig &m_partConfig;
+};
 }
 
 #endif // RESOLVEDIALOG_P_H

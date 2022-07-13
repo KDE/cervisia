@@ -16,7 +16,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #include "stringmatcher.h"
 
 // For some reason fnmatch is defined as ap_fnmatch
@@ -25,57 +24,41 @@
 
 #include <QByteArray>
 
-
 namespace Cervisia
 {
 namespace
 {
-    const QChar asterix('*');
-    const QChar question('?');
+const QChar asterix('*');
+const QChar question('?');
 
-    inline bool isMetaCharacter(QChar c)
-    {
-        return c == asterix || c == question;
-    }
-
-
-    unsigned int countMetaCharacters(const QString& text);
+inline bool isMetaCharacter(QChar c)
+{
+    return c == asterix || c == question;
 }
 
+unsigned int countMetaCharacters(const QString &text);
+}
 
-bool StringMatcher::match(const QString& text) const
+bool StringMatcher::match(const QString &text) const
 {
-    if (m_exactPatterns.contains(text))
-    {
+    if (m_exactPatterns.contains(text)) {
         return true;
     }
 
-    for (QStringList::const_iterator it(m_startPatterns.begin()),
-                                     itEnd(m_startPatterns.end());
-         it != itEnd; ++it)
-    {
-        if (text.startsWith(*it))
-        {
+    for (QStringList::const_iterator it(m_startPatterns.begin()), itEnd(m_startPatterns.end()); it != itEnd; ++it) {
+        if (text.startsWith(*it)) {
             return true;
         }
     }
 
-    for (QStringList::const_iterator it(m_endPatterns.begin()),
-                                     itEnd(m_endPatterns.end());
-         it != itEnd; ++it)
-    {
-        if (text.endsWith(*it))
-        {
+    for (QStringList::const_iterator it(m_endPatterns.begin()), itEnd(m_endPatterns.end()); it != itEnd; ++it) {
+        if (text.endsWith(*it)) {
             return true;
         }
     }
 
-    for (QList<QByteArray>::const_iterator it(m_generalPatterns.begin()),
-                                           itEnd(m_generalPatterns.end());
-         it != itEnd; ++it)
-    {
-        if (::fnmatch(*it, text.toLocal8Bit(), FNM_PATHNAME) == 0)
-        {
+    for (QList<QByteArray>::const_iterator it(m_generalPatterns.begin()), itEnd(m_generalPatterns.end()); it != itEnd; ++it) {
+        if (::fnmatch(*it, text.toLocal8Bit(), FNM_PATHNAME) == 0) {
             return true;
         }
     }
@@ -83,32 +66,24 @@ bool StringMatcher::match(const QString& text) const
     return false;
 }
 
-
-void StringMatcher::add(const QString& pattern)
+void StringMatcher::add(const QString &pattern)
 {
-    if (pattern.isEmpty())
-    {
+    if (pattern.isEmpty()) {
         return;
     }
 
     const int lengthMinusOne(pattern.length() - 1);
-    switch (countMetaCharacters(pattern))
-    {
+    switch (countMetaCharacters(pattern)) {
     case 0:
         m_exactPatterns.push_back(pattern);
         break;
 
     case 1:
-        if (pattern.at(0) == asterix)
-        {
+        if (pattern.at(0) == asterix) {
             m_endPatterns.push_back(pattern.right(lengthMinusOne));
-        }
-        else if (pattern.at(lengthMinusOne) == asterix)
-        {
+        } else if (pattern.at(lengthMinusOne) == asterix) {
             m_startPatterns.push_back(pattern.left(lengthMinusOne));
-        }
-        else
-        {
+        } else {
             m_generalPatterns.push_back(pattern.toLocal8Bit());
         }
         break;
@@ -119,7 +94,6 @@ void StringMatcher::add(const QString& pattern)
     }
 }
 
-
 void StringMatcher::clear()
 {
     m_exactPatterns.clear();
@@ -128,17 +102,15 @@ void StringMatcher::clear()
     m_generalPatterns.clear();
 }
 
-
 namespace
 {
-unsigned int countMetaCharacters(const QString& text)
+unsigned int countMetaCharacters(const QString &text)
 {
     unsigned int count(0);
 
-    const QChar* pos(text.unicode());
-    const QChar* posEnd(pos + text.length());
-    while (pos < posEnd)
-    {
+    const QChar *pos(text.unicode());
+    const QChar *posEnd(pos + text.length());
+    while (pos < posEnd) {
         count += isMetaCharacter(*pos++);
     }
 

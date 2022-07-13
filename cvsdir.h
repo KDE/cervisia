@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -17,12 +17,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #ifndef CVSDIR_H
 #define CVSDIR_H
 
 #include <qdir.h>
-
 
 class CvsDir : public QDir
 {
@@ -37,8 +35,6 @@ private:
 
 #endif
 
-
 // Local Variables:
 // c-basic-offset: 4
 // End:
-

@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -17,34 +17,29 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #ifndef LOGLIST_H
 #define LOGLIST_H
 
-
-#include <QTreeWidget>
-#include <QMouseEvent>
 #include <QKeyEvent>
-
+#include <QMouseEvent>
+#include <QTreeWidget>
 
 class KConfig;
-
 
 namespace Cervisia
 {
 struct LogInfo;
 }
 
-
 class LogListView : public QTreeWidget
 {
     Q_OBJECT
-    
+
 public:
-    explicit LogListView(KConfig& cfg, QWidget *parent);
+    explicit LogListView(KConfig &cfg, QWidget *parent);
     ~LogListView() override;
-    
-    void addRevision(const Cervisia::LogInfo& logInfo);
+
+    void addRevision(const Cervisia::LogInfo &logInfo);
     void setSelectedPair(const QString &selectionA, const QString &selectionB);
 
 signals:
@@ -56,15 +51,13 @@ protected:
 
 private slots:
 
-    void slotQueryToolTip(const QPoint&, QRect&, QString&);
+    void slotQueryToolTip(const QPoint &, QRect &, QString &);
 
 private:
-
-    KConfig& partConfig;
+    KConfig &partConfig;
 };
 
 #endif
-
 
 // Local Variables:
 // c-basic-offset: 4

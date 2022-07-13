@@ -22,48 +22,42 @@
 #include <QAbstractTableModel>
 #include <QSortFilterProxyModel>
 
-
-struct WatchersEntry
-{
+struct WatchersEntry {
     QString file;
     QString watcher;
-    bool    edit;
-    bool    unedit;
-    bool    commit;
+    bool edit;
+    bool unedit;
+    bool commit;
 };
-
 
 class WatchersModel : public QAbstractTableModel
 {
     Q_OBJECT
-    
+
     enum Columns { FileColumn = 0, WatcherColumn, EditColumn, UneditColumn, CommitColumn };
 
 public:
-    explicit WatchersModel(const QStringList& data, QObject* parent = nullptr);
+    explicit WatchersModel(const QStringList &data, QObject *parent = nullptr);
 
-    int columnCount(const QModelIndex& parent = QModelIndex()) const override;
-    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
-    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
-    QVariant headerData(int section, Qt::Orientation orientation,
-                        int role = Qt::DisplayRole) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
 private:
-    void parseData(const QStringList& data);
+    void parseData(const QStringList &data);
 
     QList<WatchersEntry> m_list;
 };
 
-
 class WatchersSortModel : public QSortFilterProxyModel
 {
 public:
-    explicit WatchersSortModel(QObject* parent = nullptr);
+    explicit WatchersSortModel(QObject *parent = nullptr);
 
 protected:
-    bool lessThan(const QModelIndex& left, const QModelIndex& right) const override;
+    bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
 };
-
 
 #endif

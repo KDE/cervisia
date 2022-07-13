@@ -18,55 +18,53 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #include "protocolview.h"
 #include "protocolviewadaptor.h"
 
 #include <QAction>
-#include <QMenu>
 #include <QContextMenuEvent>
+#include <QMenu>
 
-#include <kmessagebox.h>
 #include <KLocalizedString>
+#include <kmessagebox.h>
 
 #include "cervisiapart.h"
 #include "cervisiasettings.h"
 #include "cvsjobinterface.h"
 #include "debug.h"
 
-
-ProtocolView::ProtocolView(const QString& appId, QWidget *parent)
+ProtocolView::ProtocolView(const QString &appId, QWidget *parent)
     : QTextEdit(parent)
     , job(0)
     , m_isUpdateJob(false)
 {
     new ProtocolviewAdaptor(this);
-    QDBusConnection::sessionBus().registerObject( "/ProtocolView", this );
+    QDBusConnection::sessionBus().registerObject("/ProtocolView", this);
 
     setReadOnly(true);
     setUndoRedoEnabled(false);
     setTabChangesFocus(true);
 
-    //qCDebug(log_cervisia) << "protocol view appId :" << appId;
+    // qCDebug(log_cervisia) << "protocol view appId :" << appId;
 
-    job = new OrgKdeCervisia5CvsserviceCvsjobInterface(appId, "/NonConcurrentJob",QDBusConnection::sessionBus(), this);
+    job = new OrgKdeCervisia5CvsserviceCvsjobInterface(appId, "/NonConcurrentJob", QDBusConnection::sessionBus(), this);
 
-    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia5.cvsservice.cvsjob", "jobExited", this, SLOT(slotJobExited(bool,int)));
-    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia5.cvsservice.cvsjob", "receivedStdout", this, SLOT(slotReceivedOutput(QString)));
-    QDBusConnection::sessionBus().connect(QString(), "/NonConcurrentJob", "org.kde.cervisia5.cvsservice.cvsjob", "receivedStderr", this, SLOT(slotReceivedOutput(QString)));
+    QDBusConnection::sessionBus()
+        .connect(QString(), "/NonConcurrentJob", "org.kde.cervisia5.cvsservice.cvsjob", "jobExited", this, SLOT(slotJobExited(bool, int)));
+    QDBusConnection::sessionBus()
+        .connect(QString(), "/NonConcurrentJob", "org.kde.cervisia5.cvsservice.cvsjob", "receivedStdout", this, SLOT(slotReceivedOutput(QString)));
+    QDBusConnection::sessionBus()
+        .connect(QString(), "/NonConcurrentJob", "org.kde.cervisia5.cvsservice.cvsjob", "receivedStderr", this, SLOT(slotReceivedOutput(QString)));
 
     configChanged();
 
-    connect(CervisiaSettings::self(), SIGNAL(configChanged()),
-            this, SLOT(configChanged()));
+    connect(CervisiaSettings::self(), SIGNAL(configChanged()), this, SLOT(configChanged()));
 }
-
 
 ProtocolView::~ProtocolView()
 {
     delete job;
 }
-
 
 bool ProtocolView::startJob(bool isUpdateJob)
 {
@@ -79,33 +77,30 @@ bool ProtocolView::startJob(bool isUpdateJob)
     processOutput();
 
     // disconnect 3rd party slots from our signals
-    disconnect( SIGNAL(receivedLine(QString)) );
-    disconnect( SIGNAL(jobFinished(bool,int)) );
+    disconnect(SIGNAL(receivedLine(QString)));
+    disconnect(SIGNAL(jobFinished(bool, int)));
 
     return job->execute();
 }
 
-
-void ProtocolView::contextMenuEvent(QContextMenuEvent* event)
+void ProtocolView::contextMenuEvent(QContextMenuEvent *event)
 {
     QMenu *menu = QTextEdit::createStandardContextMenu();
 
-    QAction* clearAction = menu->addAction(i18n("Clear"), this, SLOT(clear()));
+    QAction *clearAction = menu->addAction(i18n("Clear"), this, SLOT(clear()));
 
-    if( document()->isEmpty() )
+    if (document()->isEmpty())
         clearAction->setEnabled(false);
 
     menu->exec(event->globalPos());
     delete menu;
 }
 
-
 void ProtocolView::cancelJob()
 {
     qCDebug(log_cervisia);
     job->cancel();
 }
-
 
 void ProtocolView::configChanged()
 {
@@ -116,27 +111,23 @@ void ProtocolView::configChanged()
     setFont(CervisiaSettings::protocolFont());
 }
 
-
 void ProtocolView::slotReceivedOutput(QString buffer)
 {
     buf += buffer;
     processOutput();
 }
 
-
 void ProtocolView::slotJobExited(bool normalExit, int exitStatus)
 {
     qCDebug(log_cervisia);
     QString msg;
 
-    if( normalExit )
-    {
-        if( exitStatus )
+    if (normalExit) {
+        if (exitStatus)
             msg = i18n("[Exited with status %1]\n", exitStatus);
         else
             msg = i18n("[Finished]\n");
-    }
-    else
+    } else
         msg = i18n("[Aborted]\n");
 
     buf += '\n';
@@ -146,22 +137,18 @@ void ProtocolView::slotJobExited(bool normalExit, int exitStatus)
     emit jobFinished(normalExit, exitStatus);
 }
 
-
 void ProtocolView::processOutput()
 {
     int pos;
-    while ( (pos = buf.indexOf('\n')) != -1)
-    {
+    while ((pos = buf.indexOf('\n')) != -1) {
         QString line = buf.left(pos);
-        if (!line.isEmpty())
-        {
+        if (!line.isEmpty()) {
             appendLine(line);
             emit receivedLine(line);
         }
-        buf = buf.right(buf.length()-pos-1);
+        buf = buf.right(buf.length() - pos - 1);
     }
 }
-
 
 void ProtocolView::appendLine(const QString &line)
 {
@@ -171,8 +158,7 @@ void ProtocolView::appendLine(const QString &line)
 
     // When we don't get the output from an update job then
     // just add it to the text edit.
-    if( !m_isUpdateJob )
-    {
+    if (!m_isUpdateJob) {
         appendHtml(escapedLine);
         return;
     }
@@ -181,29 +167,21 @@ void ProtocolView::appendLine(const QString &line)
     // Colors are the same as in UpdateViewItem::paintCell()
     if (line.startsWith(QLatin1String("C ")))
         color = conflictColor;
-    else if (line.startsWith(QLatin1String("M "))
-             || line.startsWith(QLatin1String("A ")) || line.startsWith(QLatin1String("R ")))
+    else if (line.startsWith(QLatin1String("M ")) || line.startsWith(QLatin1String("A ")) || line.startsWith(QLatin1String("R ")))
         color = localChangeColor;
     else if (line.startsWith(QLatin1String("P ")) || line.startsWith(QLatin1String("U ")))
         color = remoteChangeColor;
 
-    appendHtml(color.isValid()
-           ? QString("<font color=\"%1\"><b>%2</b></font>").arg(color.name())
-                                                           .arg(escapedLine)
-           : escapedLine);
+    appendHtml(color.isValid() ? QString("<font color=\"%1\"><b>%2</b></font>").arg(color.name()).arg(escapedLine) : escapedLine);
 }
 
-
-void ProtocolView::appendHtml(const QString& html)
+void ProtocolView::appendHtml(const QString &html)
 {
     QTextCursor cursor(textCursor());
     cursor.insertHtml(html);
     cursor.insertBlock();
     ensureCursorVisible();
 }
-
-
-
 
 // Local Variables:
 // c-basic-offset: 4

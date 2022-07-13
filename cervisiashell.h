@@ -18,14 +18,11 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #ifndef CERVISIASHELL_H
 #define CERVISIASHELL_H
 
 #include <kparts/mainwindow.h>
 #include <kparts/readonlypart.h>
-
-
 
 /**
  * A basic shell that embeds the Cervisia part directly to make a standalone
@@ -36,12 +33,12 @@ class CervisiaShell : public KParts::MainWindow
     Q_OBJECT
 
 public:
-    explicit CervisiaShell(const char* name=0);
+    explicit CervisiaShell(const char *name = 0);
     ~CervisiaShell() override;
 
 public slots:
     void openURL();
-    void openURL(const QUrl& url);
+    void openURL(const QUrl &url);
     void slotConfigureKeys();
     void slotConfigureToolBars();
 
@@ -52,17 +49,16 @@ protected:
     void setupActions();
 
     void closeEvent(QCloseEvent *event) override;
-    void readProperties(const KConfigGroup& config) override;
-    void saveProperties(KConfigGroup& config) override;
+    void readProperties(const KConfigGroup &config) override;
+    void saveProperties(KConfigGroup &config) override;
 
 private:
     void readSettings();
     void writeSettings();
 
-    KParts::ReadOnlyPart* m_part;
-    QString               m_lastOpenDir;
+    KParts::ReadOnlyPart *m_part;
+    QString m_lastOpenDir;
 };
-
 
 #endif // CERVISIASHELL_H
 

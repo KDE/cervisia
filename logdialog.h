@@ -48,17 +48,16 @@ public:
     QString branchpoint;
 };
 
-
 class LogDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit LogDialog( KConfig& cfg, QWidget *parent=nullptr);
+    explicit LogDialog(KConfig &cfg, QWidget *parent = nullptr);
 
     ~LogDialog() override;
 
-    bool parseCvsLog(OrgKdeCervisia5CvsserviceCvsserviceInterface* service, const QString& fileName);
+    bool parseCvsLog(OrgKdeCervisia5CvsserviceCvsserviceInterface *service, const QString &fileName);
 
 protected slots:
     void slotOk();
@@ -75,13 +74,13 @@ private slots:
     void tabChanged(int index);
 
 private:
-    void tagSelected(LogDialogTagInfo* tag, bool rmb);
+    void tagSelected(LogDialogTagInfo *tag, bool rmb);
     void updateButtons();
 
     QSplitter *splitter;
     QString filename;
-    QList<Cervisia::LogInfo*> items;
-    QList<LogDialogTagInfo*> tags;
+    QList<Cervisia::LogInfo *> items;
+    QList<LogDialogTagInfo *> tags;
     QString selectionA;
     QString selectionB;
     LogTreeView *tree;
@@ -97,8 +96,8 @@ private:
     QPushButton *user1Button, *user2Button, *user3Button, *okButton;
     QDialogButtonBox *buttonBox;
 
-    OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService;
-    KConfig&         partConfig;
+    OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService;
+    KConfig &partConfig;
 };
 
 #endif // LOGDIALOG_H

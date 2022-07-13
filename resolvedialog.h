@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *  Copyright (c) 2003-2004 Christian Loose <christian.loose@hamburg.de>
@@ -23,8 +23,8 @@
 
 #include <QDialog>
 
-#include <QList>
 #include "diffview.h"
+#include <QList>
 
 class QLabel;
 class QTextCodec;
@@ -38,7 +38,7 @@ class ResolveDialog : public QDialog
 public:
     enum ChooseType { ChA, ChB, ChAB, ChBA, ChEdit };
 
-    explicit ResolveDialog(KConfig& cfg, QWidget *parent=nullptr);
+    explicit ResolveDialog(KConfig &cfg, QWidget *parent = nullptr);
     ~ResolveDialog() override;
 
     bool parseFile(const QString &name);
@@ -57,7 +57,7 @@ private slots:
     void saveClicked();
     void saveAsClicked();
     void slotHelp();
-    
+
 private:
     void updateNofN();
     void updateHighlight(int newitem);
@@ -65,13 +65,12 @@ private:
     void chooseEdit();
     void saveFile(const QString &name);
     QString readFile();
-    void addToMergeAndVersionA(const QString& line, DiffView::DiffType type, 
-                               int& lineNo);
-    void addToVersionB(const QString& line, DiffView::DiffType type, int& lineNo);
+    void addToMergeAndVersionA(const QString &line, DiffView::DiffType type, int &lineNo);
+    void addToVersionB(const QString &line, DiffView::DiffType type, int &lineNo);
     void updateMergedVersion(ChooseType chosen);
     QString contentVersionA(const ResolveItem *item) const;
     QString contentVersionB(const ResolveItem *item) const;
-    
+
     QLabel *nofnlabel;
     QPushButton *backbutton, *forwbutton;
     QPushButton *abutton, *bbutton, *abbutton, *babutton, *editbutton;
@@ -81,11 +80,10 @@ private:
     QString fname;
     QTextCodec *fcodec;
     int markeditem;
-    KConfig& partConfig;
-    
-    QString    m_contentMergedVersion;
-};
+    KConfig &partConfig;
 
+    QString m_contentMergedVersion;
+};
 
 #endif // RESOLVEDIALOG_H
 

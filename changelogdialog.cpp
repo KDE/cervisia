@@ -18,33 +18,30 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #include "changelogdialog.h"
 
 #include <QDate>
 #include <qfile.h>
 #include <qtextstream.h>
 
-#include <KSharedConfig>
-#include <kmessagebox.h>
 #include <KConfigGroup>
 #include <KLocalizedString>
+#include <KSharedConfig>
+#include <kmessagebox.h>
 
-#include <QPlainTextEdit>
-#include <QTextBlock>
-#include <QScrollBar>
 #include <QDialogButtonBox>
+#include <QPlainTextEdit>
 #include <QPushButton>
+#include <QScrollBar>
+#include <QTextBlock>
 #include <QVBoxLayout>
 
 #include "cervisiasettings.h"
 #include "misc.h"
 
-
 ChangeLogDialog::Options *ChangeLogDialog::options = 0;
 
-
-ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent)
+ChangeLogDialog::ChangeLogDialog(KConfig &cfg, QWidget *parent)
     : QDialog(parent)
     , partConfig(cfg)
 {
@@ -72,9 +69,8 @@ ChangeLogDialog::ChangeLogDialog(KConfig& cfg, QWidget *parent)
 
     KConfigGroup cg(&partConfig, "ChangeLogDialog");
     restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
-    connect(okButton,SIGNAL(clicked()),this,SLOT(slotOk()));
+    connect(okButton, SIGNAL(clicked()), this, SLOT(slotOk()));
 }
-
 
 ChangeLogDialog::~ChangeLogDialog()
 {
@@ -82,16 +78,12 @@ ChangeLogDialog::~ChangeLogDialog()
     cg.writeEntry("geometry", saveGeometry());
 }
 
-
 void ChangeLogDialog::slotOk()
 {
     // Write changelog
     QFile f(fname);
-    if (!f.open(QIODevice::ReadWrite))
-    {
-        KMessageBox::sorry(this,
-                           i18n("The ChangeLog file could not be written."),
-                           "Cervisia");
+    if (!f.open(QIODevice::ReadWrite)) {
+        KMessageBox::sorry(this, i18n("The ChangeLog file could not be written."), "Cervisia");
         return;
     }
 
@@ -102,26 +94,17 @@ void ChangeLogDialog::slotOk()
     QDialog::accept();
 }
 
-
 bool ChangeLogDialog::readFile(const QString &filename)
 {
     fname = filename;
 
-    if (!QFile::exists(filename))
-    {
-        if (KMessageBox::warningContinueCancel(this,
-                                     i18n("A ChangeLog file does not exist. Create one?"),
-                                     i18n("Create")) != KMessageBox::Continue)
+    if (!QFile::exists(filename)) {
+        if (KMessageBox::warningContinueCancel(this, i18n("A ChangeLog file does not exist. Create one?"), i18n("Create")) != KMessageBox::Continue)
             return false;
-    }
-    else
-    {
+    } else {
         QFile f(filename);
-        if (!f.open(QIODevice::ReadWrite))
-        {
-            KMessageBox::sorry(this,
-                               i18n("The ChangeLog file could not be read."),
-                               "Cervisia");
+        if (!f.open(QIODevice::ReadWrite)) {
+            KMessageBox::sorry(this, i18n("The ChangeLog file could not be read."), "Cervisia");
             return false;
         }
         QTextStream stream(&f);
@@ -137,68 +120,62 @@ bool ChangeLogDialog::readFile(const QString &filename)
     cursor.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor, 2);
     edit->setTextCursor(cursor);
 
-    edit->verticalScrollBar()->setValue(0);  // show top line
+    edit->verticalScrollBar()->setValue(0); // show top line
 
     return true;
 }
 
-
 QString ChangeLogDialog::message()
 {
-     int no = 0;
-     // Find first line which begins with non-whitespace
-     while (no < edit->document()->lineCount())
-     {
-       QString str = edit->document()->findBlockByLineNumber(no).text();
+    int no = 0;
+    // Find first line which begins with non-whitespace
+    while (no < edit->document()->lineCount()) {
+        QString str = edit->document()->findBlockByLineNumber(no).text();
 
-       if ( !str.isEmpty() && !str[0].isSpace() )
-         break;
+        if (!str.isEmpty() && !str[0].isSpace())
+            break;
 
-       ++no;
-     }
-     ++no;
-     // Skip empty lines
-     while (no < edit->document()->lineCount())
-     {
-       QString str = edit->document()->findBlockByLineNumber(no).text();
+        ++no;
+    }
+    ++no;
+    // Skip empty lines
+    while (no < edit->document()->lineCount()) {
+        QString str = edit->document()->findBlockByLineNumber(no).text();
 
-       if ( str.isEmpty() || str == " " )
-         break;
+        if (str.isEmpty() || str == " ")
+            break;
 
-       ++no;
-     }
-     QString res;
-     // Use all lines until one which begins with non-whitespace
-     // Remove tabs or 8 whitespace at beginning of each line
-     while (no < edit->document()->lineCount())
-     {
-         QString str = edit->document()->findBlockByLineNumber(no).text();
+        ++no;
+    }
+    QString res;
+    // Use all lines until one which begins with non-whitespace
+    // Remove tabs or 8 whitespace at beginning of each line
+    while (no < edit->document()->lineCount()) {
+        QString str = edit->document()->findBlockByLineNumber(no).text();
 
-         if (!str.isEmpty() && !str[0].isSpace())
-             break;
-         if (!str.isEmpty() && str[0] == '\t')
-             str.remove(0, 1);
-         else
-             {
-                 int j;
-                 for (j = 0; j < (int)str.length(); ++j)
-                     if (!str[j].isSpace())
-                         break;
-                 str.remove(0, qMin(j, 8));
-             }
-         res += str;
-         res += '\n';
-         ++no;
-     }
-     // Remove newlines at end
-     int l;
-     for (l = res.length()-1; l > 0; --l)
-         if (res[l] != '\n')
-             break;
-     res.truncate(l+1);
-     return res;
+        if (!str.isEmpty() && !str[0].isSpace())
+            break;
+        if (!str.isEmpty() && str[0] == '\t')
+            str.remove(0, 1);
+        else {
+            int j;
+            for (j = 0; j < (int)str.length(); ++j)
+                if (!str[j].isSpace())
+                    break;
+            str.remove(0, qMin(j, 8));
+        }
+        res += str;
+        res += '\n';
+        ++no;
+    }
+    // Remove newlines at end
+    int l;
+    for (l = res.length() - 1; l > 0; --l)
+        if (res[l] != '\n')
+            break;
+    res.truncate(l + 1);
+    return res;
 }
-
 
 // Local Variables:
 // c-basic-offset: 4

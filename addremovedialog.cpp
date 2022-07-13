@@ -22,27 +22,24 @@
 
 // Qt
 #include <QBoxLayout>
+#include <QDialogButtonBox>
 #include <QFileInfo>
 #include <QLabel>
-#include <QStringList>
-#include <QDialogButtonBox>
-#include <QPushButton>
-#include <QVBoxLayout>
 #include <QListWidget>
+#include <QPushButton>
+#include <QStringList>
+#include <QVBoxLayout>
 
 // KDE
-#include <KLocalizedString>
 #include <KConfigGroup>
 #include <KHelpClient>
+#include <KLocalizedString>
 #include <KMessageWidget>
 
-
-AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent)
+AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget *parent)
     : QDialog(parent)
 {
-    setWindowTitle((action == Add) ?       i18n("CVS Add") :
-                   (action == AddBinary) ? i18n("CVS Add Binary") :
-                                           i18n("CVS Remove") );
+    setWindowTitle((action == Add) ? i18n("CVS Add") : (action == AddBinary) ? i18n("CVS Add Binary") : i18n("CVS Remove"));
     setModal(true);
 
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
@@ -61,10 +58,9 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent)
     // and is activated by Key_Return
     okButton->setFocus();
 
-    QLabel *textlabel = new QLabel
-        ((action == Add) ?       i18n("Add the following files to the repository:") :
-         (action == AddBinary) ? i18n("Add the following binary files to the repository:") :
-                                 i18n("Remove the following files from the repository:"));
+    QLabel *textlabel = new QLabel((action == Add)             ? i18n("Add the following files to the repository:")
+                                       : (action == AddBinary) ? i18n("Add the following binary files to the repository:")
+                                                               : i18n("Remove the following files from the repository:"));
 
     mainLayout->addWidget(textlabel);
 
@@ -74,8 +70,7 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent)
     mainLayout->addWidget(m_listBox);
 
     // Add warning message to dialog when user wants to remove a file
-    if ( action == Remove )
-    {
+    if (action == Remove) {
         KMessageWidget *warning =
             new KMessageWidget(i18n("This will also remove the files from "
                                     "your local working copy."));
@@ -88,7 +83,7 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent)
         mainLayout->addSpacing(5);
     }
 
-    if ( action == Remove )
+    if (action == Remove)
         helpTopic = "removingfiles";
     else
         helpTopic = "addingfiles";
@@ -99,25 +94,21 @@ AddRemoveDialog::AddRemoveDialog(ActionType action, QWidget* parent)
 
 void AddRemoveDialog::slotHelp()
 {
-  KHelpClient::invokeHelp(helpTopic);
+    KHelpClient::invokeHelp(helpTopic);
 }
 
-
-void AddRemoveDialog::setFileList(const QStringList& files)
+void AddRemoveDialog::setFileList(const QStringList &files)
 {
     // the dot for the root directory is hard to see, so
     // we convert it to the absolut path
-    if( files.contains(".") )
-    {
+    if (files.contains(".")) {
         QStringList copy(files);
         int idx = copy.indexOf(".");
         copy[idx] = QFileInfo(".").absoluteFilePath();
 
         m_listBox->addItems(copy);
-    }
-    else
+    } else
         m_listBox->addItems(files);
 }
-
 
 // kate: space-indent on; indent-width 4; replace-tabs on;

@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2001 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *  Copyright (c) 2002-2007 Christian Loose <christian.loose@hamburg.de>
@@ -30,7 +30,7 @@ class ChangeLogDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit ChangeLogDialog( KConfig& cfg, QWidget *parent=nullptr );
+    explicit ChangeLogDialog(KConfig &cfg, QWidget *parent = nullptr);
 
     ~ChangeLogDialog() override;
 
@@ -48,7 +48,7 @@ private:
 
     QString fname;
     QPlainTextEdit *edit;
-    KConfig&   partConfig;
+    KConfig &partConfig;
 };
 
 #endif // CHANGELOGDIALOG_H

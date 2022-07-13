@@ -17,31 +17,28 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #include "updatedialog.h"
 
-#include <qbuttongroup.h>
 #include <KComboBox>
+#include <QBoxLayout>
+#include <QDialogButtonBox>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <qbuttongroup.h>
 #include <qpushbutton.h>
 #include <qradiobutton.h>
 #include <qstyle.h>
-#include <QBoxLayout>
-#include <QLineEdit>
-#include <QDialogButtonBox>
-#include <QPushButton>
-#include <QVBoxLayout>
 
 #include <KConfigGroup>
 #include <KLocalizedString>
 
-#include "misc.h"
 #include "cvsserviceinterface.h"
+#include "misc.h"
 
-
-UpdateDialog::UpdateDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface* service,
-                           QWidget *parent)
-    : QDialog(parent),
-      cvsService(service)
+UpdateDialog::UpdateDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface *service, QWidget *parent)
+    : QDialog(parent)
+    , cvsService(service)
 {
     setWindowTitle(i18n("CVS Update"));
     setModal(true);
@@ -66,17 +63,17 @@ UpdateDialog::UpdateDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface* service
     mainLayout->addWidget(branch_combo);
     branch_combo->setEditable(true);
     branch_combo->setMinimumWidth(iComboBoxMinWidth);
-    
+
     branch_button = new QPushButton(i18n("Fetch &List"));
     mainLayout->addWidget(branch_button);
     connect(branch_button, SIGNAL(clicked()), this, SLOT(branchButtonClicked()));
-            
+
     QBoxLayout *branchedit_layout = new QHBoxLayout;
     branchedit_layout->addSpacing(iWidgetIndent);
     branchedit_layout->addWidget(branch_combo);
     branchedit_layout->addWidget(branch_button);
     mainLayout->addLayout(branchedit_layout);
-    
+
     bytag_button = new QRadioButton(i18n("Update to &tag: "));
     mainLayout->addWidget(bytag_button);
 
@@ -84,17 +81,17 @@ UpdateDialog::UpdateDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface* service
     tag_combo->setEditable(true);
     tag_combo->setMinimumWidth(iComboBoxMinWidth);
     mainLayout->addWidget(tag_combo);
-    
+
     tag_button = new QPushButton(i18n("Fetch L&ist"));
     mainLayout->addWidget(tag_button);
     connect(tag_button, SIGNAL(clicked()), this, SLOT(tagButtonClicked()));
-            
+
     QBoxLayout *tagedit_layout = new QHBoxLayout();
     tagedit_layout->addSpacing(iWidgetIndent);
     tagedit_layout->addWidget(tag_combo);
     tagedit_layout->addWidget(tag_button);
     mainLayout->addLayout(tagedit_layout);
-    
+
     bydate_button = new QRadioButton(i18n("Update to &date ('yyyy-mm-dd'):"));
     mainLayout->addWidget(bydate_button);
 
@@ -106,7 +103,7 @@ UpdateDialog::UpdateDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface* service
     dateedit_layout->addWidget(date_edit);
     mainLayout->addLayout(dateedit_layout);
 
-    QButtonGroup* group = new QButtonGroup(this);
+    QButtonGroup *group = new QButtonGroup(this);
     group->addButton(bytag_button);
     group->addButton(bybranch_button);
     group->addButton(bydate_button);
@@ -118,26 +115,20 @@ UpdateDialog::UpdateDialog(OrgKdeCervisia5CvsserviceCvsserviceInterface* service
     toggled();
 }
 
-
 bool UpdateDialog::byTag() const
 {
     return bybranch_button->isChecked() || bytag_button->isChecked();
 }
 
-
 QString UpdateDialog::tag() const
 {
-    return bybranch_button->isChecked()
-        ? branch_combo->currentText()
-        : tag_combo->currentText();
+    return bybranch_button->isChecked() ? branch_combo->currentText() : tag_combo->currentText();
 }
-
 
 QString UpdateDialog::date() const
 {
     return date_edit->text();
 }
-
 
 void UpdateDialog::tagButtonClicked()
 {
@@ -145,13 +136,11 @@ void UpdateDialog::tagButtonClicked()
     tag_combo->addItems(::fetchTags(cvsService, this));
 }
 
-
 void UpdateDialog::branchButtonClicked()
 {
     branch_combo->clear();
     branch_combo->addItems(::fetchBranches(cvsService, this));
 }
-
 
 void UpdateDialog::toggled()
 {
@@ -172,8 +161,6 @@ void UpdateDialog::toggled()
     if (bydate)
         date_edit->setFocus();
 }
-
-
 
 // Local Variables:
 // c-basic-offset: 4

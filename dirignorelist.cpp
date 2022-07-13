@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -21,27 +21,21 @@ using namespace Cervisia;
 
 #include <qfileinfo.h>
 
-
-DirIgnoreList::DirIgnoreList(const QString& path)
+DirIgnoreList::DirIgnoreList(const QString &path)
 {
     addEntriesFromFile(path + "/.cvsignore");
 }
 
-
-void DirIgnoreList::addEntry(const QString& entry)
+void DirIgnoreList::addEntry(const QString &entry)
 {
-    if (entry != QLatin1String("!"))
-    {
+    if (entry != QLatin1String("!")) {
         m_stringMatcher.add(entry);
-    }
-    else
-    {
+    } else {
         m_stringMatcher.clear();
     }
 }
 
-
-bool DirIgnoreList::matches(const QFileInfo* fi) const
-{  
+bool DirIgnoreList::matches(const QFileInfo *fi) const
+{
     return m_stringMatcher.match(fi->fileName());
 }

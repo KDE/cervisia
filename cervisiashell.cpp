@@ -18,49 +18,42 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #include "cervisiashell.h"
 
-#include <kactioncollection.h>
-#include <kconfig.h>
-#include <KSharedConfig>
-#include <kedittoolbar.h>
-#include <khelpmenu.h>
-#include <kpluginfactory.h>
-#include <kpluginloader.h>
-#include <kmessagebox.h>
-#include <kshortcutsdialog.h>
-#include <kstandardaction.h>
-#include <KLocalizedString>
 #include <KAboutData>
 #include <KConfigGroup>
+#include <KLocalizedString>
+#include <KSharedConfig>
+#include <kactioncollection.h>
+#include <kconfig.h>
+#include <kedittoolbar.h>
+#include <khelpmenu.h>
+#include <kmessagebox.h>
+#include <kpluginfactory.h>
+#include <kpluginloader.h>
+#include <kshortcutsdialog.h>
+#include <kstandardaction.h>
 
-#include <QApplication>
 #include <QAction>
+#include <QApplication>
 
-
-CervisiaShell::CervisiaShell( const char *name )
-  : m_part(0)
+CervisiaShell::CervisiaShell(const char *name)
+    : m_part(0)
 {
-    setObjectName( name );
-    setXMLFile( "cervisiashellui.rc" );
+    setObjectName(name);
+    setXMLFile("cervisiashellui.rc");
 
     KPluginLoader loader("cervisiapart5");
-    if( KPluginFactory *factory = loader.factory() )
-    {
-        m_part = factory->create< KParts::ReadOnlyPart >(this);
-        if( m_part )
-        {
-            m_part->setObjectName( "cervisiaview" );
+    if (KPluginFactory *factory = loader.factory()) {
+        m_part = factory->create<KParts::ReadOnlyPart>(this);
+        if (m_part) {
+            m_part->setObjectName("cervisiaview");
             setCentralWidget(m_part->widget());
         }
-    }
-    else
-    {
-        KMessageBox::detailedError(this, i18n("The Cervisia library could not be loaded."),
-                                   loader.errorString() +
-                                   QLatin1String("\n") + loader.pluginName() +
-                                   QLatin1String("\n") + loader.fileName());
+    } else {
+        KMessageBox::detailedError(this,
+                                   i18n("The Cervisia library could not be loaded."),
+                                   loader.errorString() + QLatin1String("\n") + loader.pluginName() + QLatin1String("\n") + loader.fileName());
         qApp->quit();
         return;
     }
@@ -70,14 +63,14 @@ CervisiaShell::CervisiaShell( const char *name )
     //
     // Magic needed for status texts
     //
-    createGUI( m_part );
+    createGUI(m_part);
 
     // enable auto-save of toolbar/menubar/statusbar and window size settings
     // and apply the previously saved settings
     setAutoSaveSettings("MainWindow", true);
 
     // if the session is restoring, we already read the settings
-    if( !qApp->isSessionRestored() )
+    if (!qApp->isSessionRestored())
         readSettings();
 }
 
@@ -88,47 +81,43 @@ CervisiaShell::~CervisiaShell()
 
 void CervisiaShell::setupActions()
 {
-    setStandardToolBarMenuEnabled( true );
+    setStandardToolBarMenuEnabled(true);
 
-    QAction *action = KStandardAction::configureToolbars( this, SLOT(slotConfigureToolBars()),
-                                            actionCollection() );
+    QAction *action = KStandardAction::configureToolbars(this, SLOT(slotConfigureToolBars()), actionCollection());
     QString hint = i18n("Allows you to configure the toolbar");
-    action->setToolTip( hint );
-    action->setWhatsThis( hint );
+    action->setToolTip(hint);
+    action->setWhatsThis(hint);
 
-    action = KStandardAction::keyBindings( this, SLOT(slotConfigureKeys()), actionCollection() );
+    action = KStandardAction::keyBindings(this, SLOT(slotConfigureKeys()), actionCollection());
     hint = i18n("Allows you to customize the keybindings");
-    action->setToolTip( hint );
-    action->setWhatsThis( hint );
+    action->setToolTip(hint);
+    action->setWhatsThis(hint);
 
-    action = KStandardAction::quit( this, SLOT(close()), actionCollection() );
+    action = KStandardAction::quit(this, SLOT(close()), actionCollection());
     hint = i18n("Exits Cervisia");
-    action->setToolTip( hint );
-    action->setWhatsThis( hint );
+    action->setToolTip(hint);
+    action->setWhatsThis(hint);
 
     setHelpMenuEnabled(true);
 }
 
-
 void CervisiaShell::openURL()
 {
-    if ( m_part && !m_lastOpenDir.isEmpty() )
-        m_part->openUrl( QUrl::fromLocalFile( m_lastOpenDir ) );
+    if (m_part && !m_lastOpenDir.isEmpty())
+        m_part->openUrl(QUrl::fromLocalFile(m_lastOpenDir));
 }
 
-
-void CervisiaShell::openURL(const QUrl& url)
+void CervisiaShell::openURL(const QUrl &url)
 {
-    if ( m_part )
+    if (m_part)
         m_part->openUrl(url);
 }
-
 
 void CervisiaShell::slotConfigureKeys()
 {
     KShortcutsDialog dlg;
     dlg.addCollection(actionCollection());
-    if ( m_part )
+    if (m_part)
         dlg.addCollection(m_part->actionCollection());
 
     dlg.configure();
@@ -138,8 +127,8 @@ void CervisiaShell::slotConfigureToolBars()
 {
     KConfigGroup cg(KSharedConfig::openConfig(), autoSaveGroup());
     saveMainWindowSettings(cg);
-    KEditToolBar dlg( factory() );
-    connect(&dlg,SIGNAL(newToolbarConfig()),this,SLOT(slotNewToolbarConfig()));
+    KEditToolBar dlg(factory());
+    connect(&dlg, SIGNAL(newToolbarConfig()), this, SLOT(slotNewToolbarConfig()));
     dlg.exec();
 }
 
@@ -155,30 +144,26 @@ void CervisiaShell::closeEvent(QCloseEvent *event)
     KParts::MainWindow::closeEvent(event);
 }
 
-
-void CervisiaShell::readProperties(const KConfigGroup& config)
+void CervisiaShell::readProperties(const KConfigGroup &config)
 {
     m_lastOpenDir = config.readPathEntry("Current Directory", QString());
 
     // if the session is restoring, make sure we open the URL
     // since it's not handled by main()
-    if( qApp->isSessionRestored() )
+    if (qApp->isSessionRestored())
         openURL();
 }
 
-
-void CervisiaShell::saveProperties(KConfigGroup & config)
+void CervisiaShell::saveProperties(KConfigGroup &config)
 {
     // Save current working directory (if part was created)
-    if ( m_part )
-    {
+    if (m_part) {
         config.writePathEntry("Current Directory", m_part->url().path());
 
         // write to disk
         config.sync();
     }
 }
-
 
 void CervisiaShell::readSettings()
 {
@@ -187,15 +172,11 @@ void CervisiaShell::readSettings()
     readProperties(cg);
 }
 
-
 void CervisiaShell::writeSettings()
 {
     KConfigGroup cg(KSharedConfig::openConfig(), "Session");
     saveProperties(cg);
 }
-
-
-
 
 // Local Variables:
 // c-basic-offset: 4

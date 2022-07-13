@@ -18,7 +18,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #ifndef MISC_H
 #define MISC_H
 
@@ -28,14 +27,13 @@ class QString;
 class QWidget;
 class OrgKdeCervisia5CvsserviceCvsserviceInterface;
 
-
 namespace Cervisia
 {
 
 /**
  * Verifies that the passed tag name is a valid cvs tag.
  */
-bool IsValidTag(const QString& tag);
+bool IsValidTag(const QString &tag);
 
 /**
  * Returns the user name (real name + mail address) for the changelog entry.
@@ -47,28 +45,25 @@ QString UserName();
  * always the form:
  *  :pserver:[user]@[host]:[port][path]
  */
-QString NormalizeRepository(const QString& repository);
+QString NormalizeRepository(const QString &repository);
 
-bool CheckOverwrite(const QString& fileName, QWidget* parent=nullptr);
-
+bool CheckOverwrite(const QString &fileName, QWidget *parent = nullptr);
 }
 
+QStringList splitLine(QString, char delim = ' ');
 
-QStringList splitLine(QString, char delim=' ');
-
-QString tempFileName(const QString& suffix);
+QString tempFileName(const QString &suffix);
 void cleanupTempFiles();
 
-const QStringList fetchBranches(OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService, QWidget* parent);
-const QStringList fetchTags(OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService, QWidget* parent);
+const QStringList fetchBranches(OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService, QWidget *parent);
+const QStringList fetchTags(OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService, QWidget *parent);
 
 /**
  * Compares two revision numbers.
  *
  * @return -1 / 0 / 1 if rev1 is < / == / > rev2
  */
-int compareRevisions(const QString& rev1, const QString& rev2);
-
+int compareRevisions(const QString &rev1, const QString &rev2);
 
 /**
  * Generic compare for two objects of the same class. operator<() must
@@ -77,7 +72,7 @@ int compareRevisions(const QString& rev1, const QString& rev2);
  * @return -1 / 0 / 1 if lhs is < / == / > rhs
  */
 template<class C>
-int compare(const C& lhs, const C& rhs)
+int compare(const C &lhs, const C &rhs)
 {
     if (lhs < rhs)
         return -1;
@@ -87,9 +82,7 @@ int compare(const C& lhs, const C& rhs)
         return 0;
 }
 
-
 #endif
-
 
 // Local Variables:
 // c-basic-offset: 4

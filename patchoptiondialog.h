@@ -31,25 +31,25 @@ namespace Cervisia
 class PatchOptionDialog : public QDialog
 {
     Q_OBJECT
-    
+
 public:
-    explicit PatchOptionDialog(QWidget* parent = nullptr);
+    explicit PatchOptionDialog(QWidget *parent = nullptr);
     ~PatchOptionDialog() override;
-    
+
     QString diffOptions() const;
     QString formatOption() const;
 
 private slots:
     void slotHelp();
     void formatChanged(int buttonId);
-       
+
 private:
-    QButtonGroup* m_formatBtnGroup;
-    QSpinBox*     m_contextLines;
-    QCheckBox*    m_blankLineChk;
-    QCheckBox*    m_allSpaceChk;
-    QCheckBox*    m_spaceChangeChk;
-    QCheckBox*    m_caseChangesChk;
+    QButtonGroup *m_formatBtnGroup;
+    QSpinBox *m_contextLines;
+    QCheckBox *m_blankLineChk;
+    QCheckBox *m_allSpaceChk;
+    QCheckBox *m_spaceChangeChk;
+    QCheckBox *m_caseChangesChk;
 };
 
 }

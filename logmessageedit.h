@@ -22,26 +22,24 @@
 #ifndef CERVISIA_LOGMESSAGEEDIT_H
 #define CERVISIA_LOGMESSAGEEDIT_H
 
-#include <KTextEdit>
 #include <KCompletionBase>
-
+#include <KTextEdit>
 
 namespace Cervisia
 {
-
 
 class LogMessageEdit : public KTextEdit, public KCompletionBase
 {
     Q_OBJECT
 
 public:
-    explicit LogMessageEdit(QWidget* parent);
+    explicit LogMessageEdit(QWidget *parent);
 
-    void setCompletedText(const QString& match) override;
-    void setCompletedItems(const QStringList& items, bool autoSuggest =true) override;
+    void setCompletedText(const QString &match) override;
+    void setCompletedItems(const QStringList &items, bool autoSuggest = true) override;
 
 protected:
-    void keyPressEvent(QKeyEvent* event) override;
+    void keyPressEvent(QKeyEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
 
 private slots:
@@ -52,12 +50,9 @@ private:
     void rotateMatches(KeyBindingType type);
 
     bool m_completing;
-    int  m_completionStartPos;
+    int m_completionStartPos;
     bool m_checkSpellingEnabledBeforeCompletion;
 };
-
-
 }
-
 
 #endif

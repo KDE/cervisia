@@ -17,30 +17,28 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #include "watchdialog.h"
 
+#include <QBoxLayout>
+#include <QGridLayout>
+#include <QGroupBox>
 #include <qbuttongroup.h>
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qradiobutton.h>
-#include <QGridLayout>
-#include <QBoxLayout>
-#include <QGroupBox>
 
 #include <KConfigGroup>
-#include <KLocalizedString>
 #include <KHelpClient>
+#include <KLocalizedString>
 
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QVBoxLayout>
 
-
 WatchDialog::WatchDialog(ActionType action, QWidget *parent)
     : QDialog(parent)
 {
-    setWindowTitle( (action==Add)? i18n("CVS Watch Add") : i18n("CVS Watch Remove") );
+    setWindowTitle((action == Add) ? i18n("CVS Watch Add") : i18n("CVS Watch Remove"));
     setModal(true);
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
@@ -53,9 +51,7 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent)
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
-    QLabel *textlabel = new QLabel
-	( (action==Add)? i18n("Add watches for the following events:")
-          :  i18n("Remove watches for the following events:"));
+    QLabel *textlabel = new QLabel((action == Add) ? i18n("Add watches for the following events:") : i18n("Remove watches for the following events:"));
     mainLayout->addWidget(textlabel);
 
     all_button = new QRadioButton(i18n("&All"));
@@ -84,7 +80,7 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent)
     uneditbox->setEnabled(false);
     eventslayout->addWidget(uneditbox, 2, 1);
 
-    QButtonGroup* group = new QButtonGroup(this);
+    QButtonGroup *group = new QButtonGroup(this);
     group->addButton(all_button);
     group->addButton(only_button);
 
@@ -97,27 +93,24 @@ WatchDialog::WatchDialog(ActionType action, QWidget *parent)
 
 void WatchDialog::slotHelp()
 {
-  KHelpClient::invokeHelp(QLatin1String("watches"));
+    KHelpClient::invokeHelp(QLatin1String("watches"));
 }
-
 
 WatchDialog::Events WatchDialog::events() const
 {
     Events res = None;
     if (all_button->isChecked())
         res = All;
-    else
-        {
-            if (commitbox->isChecked())
-                res = Events(res | Commits);
-            if (editbox->isChecked())
-                res = Events(res | Edits);
-            if (uneditbox->isChecked())
-                res = Events(res | Unedits);
-        }
+    else {
+        if (commitbox->isChecked())
+            res = Events(res | Commits);
+        if (editbox->isChecked())
+            res = Events(res | Edits);
+        if (uneditbox->isChecked())
+            res = Events(res | Unedits);
+    }
     return res;
 }
-
 
 // Local Variables:
 // c-basic-offset: 4

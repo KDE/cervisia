@@ -35,7 +35,7 @@ class RepositoryDialog : public QDialog
     Q_OBJECT
 
 public:
-    RepositoryDialog(KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService, const QString& cvsServiceInterfaceName, QWidget* parent = nullptr);
+    RepositoryDialog(KConfig &cfg, OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService, const QString &cvsServiceInterfaceName, QWidget *parent = nullptr);
     ~RepositoryDialog() override;
 
     void readConfigFile();
@@ -53,20 +53,20 @@ private slots:
     void slotLoginClicked();
     void slotLogoutClicked();
     void slotSelectionChanged();
-    
-private:
-    void writeRepositoryData(RepositoryListItem* item);
 
 private:
-    KConfig&         m_partConfig;
-    OrgKdeCervisia5CvsserviceCvsserviceInterface* m_cvsService;
-    KConfig*         m_serviceConfig;
-    QTreeWidget*     m_repoList;
-    QPushButton*     m_modifyButton;
-    QPushButton*     m_removeButton;
-    QPushButton*     m_loginButton;
-    QPushButton*     m_logoutButton;
-    QString          m_cvsServiceInterfaceName;
+    void writeRepositoryData(RepositoryListItem *item);
+
+private:
+    KConfig &m_partConfig;
+    OrgKdeCervisia5CvsserviceCvsserviceInterface *m_cvsService;
+    KConfig *m_serviceConfig;
+    QTreeWidget *m_repoList;
+    QPushButton *m_modifyButton;
+    QPushButton *m_removeButton;
+    QPushButton *m_loginButton;
+    QPushButton *m_logoutButton;
+    QString m_cvsServiceInterfaceName;
 };
 
 #endif // REPOSITORYDIALOG_H

@@ -21,72 +21,65 @@
 #include "sshagent.h"
 #include "../debug.h"
 
-#include <qregexp.h>
 #include <QDebug>
 #include <kprocess.h>
+#include <qregexp.h>
 
 #include <signal.h>
 
-
 // initialize static member variables
-bool    SshAgent::m_isRunning  = false;
-bool    SshAgent::m_isOurAgent = false;
+bool SshAgent::m_isRunning = false;
+bool SshAgent::m_isOurAgent = false;
 QString SshAgent::m_authSock;
 QString SshAgent::m_pid;
 
-
-SshAgent::SshAgent(QObject* parent)
+SshAgent::SshAgent(QObject *parent)
     : QObject(parent)
     , m_agentProcess(0)
 {
 }
 
-
 SshAgent::~SshAgent()
 {
 }
-
 
 bool SshAgent::querySshAgent()
 {
     qCDebug(log_cervisia) << "ENTER";
 
-    if( m_isRunning )
+    if (m_isRunning)
         return true;
 
     // Did the user already start a ssh-agent process?
     const QByteArray pid = qgetenv("SSH_AGENT_PID");
-    if( !pid.isEmpty() )
-    {
+    if (!pid.isEmpty()) {
         qCDebug(log_cervisia) << "ssh-agent already exists";
 
         m_pid = QString::fromLocal8Bit(pid);
 
         const QByteArray sock = qgetenv("SSH_AUTH_SOCK");
-        if( !sock.isEmpty() )
+        if (!sock.isEmpty())
             m_authSock = QString::fromLocal8Bit(sock);
 
         m_isOurAgent = false;
-        m_isRunning  = true;
+        m_isRunning = true;
     }
     // We have to start a new ssh-agent process
-    else
-    {
+    else {
         qCDebug(log_cervisia) << "start ssh-agent";
 
         m_isOurAgent = true;
-        m_isRunning  = startSshAgent();
+        m_isRunning = startSshAgent();
     }
 
     return m_isRunning;
 }
 
-
 bool SshAgent::addSshIdentities()
 {
     qCDebug(log_cervisia) << "ENTER";
 
-    if( !m_isRunning || !m_isOurAgent )
+    if (!m_isRunning || !m_isOurAgent)
         return false;
 
     // add identities to ssh-agent
@@ -106,23 +99,20 @@ bool SshAgent::addSshIdentities()
 
     qCDebug(log_cervisia) << "added identities";
 
-    return (proc.exitStatus() == QProcess::NormalExit
-            && proc.exitCode() == 0);
+    return (proc.exitStatus() == QProcess::NormalExit && proc.exitCode() == 0);
 }
-
 
 void SshAgent::killSshAgent()
 {
     qCDebug(log_cervisia) << "ENTER";
 
-    if( !m_isRunning || !m_isOurAgent )
+    if (!m_isRunning || !m_isOurAgent)
         return;
 
     kill(m_pid.toInt(), SIGTERM);
 
     qCDebug(log_cervisia) << "killed pid=" << m_pid;
 }
-
 
 void SshAgent::slotProcessFinished()
 {
@@ -134,33 +124,26 @@ void SshAgent::slotProcessFinished()
     QRegExp bashPidRx("SSH_AGENT_PID=(\\d*).*");
     QRegExp bashSockRx("SSH_AUTH_SOCK=(.*\\.\\d*);.*");
 
-    foreach( const QString &line, m_outputLines )
-    {
-        if( m_pid.isEmpty() )
-        {
-            if( line.contains(cshPidRx) )
-            {
+    foreach (const QString &line, m_outputLines) {
+        if (m_pid.isEmpty()) {
+            if (line.contains(cshPidRx)) {
                 m_pid = cshPidRx.cap(1);
                 continue;
             }
 
-            if( line.contains(bashPidRx) )
-            {
+            if (line.contains(bashPidRx)) {
                 m_pid = bashPidRx.cap(1);
                 continue;
             }
         }
 
-        if( m_authSock.isEmpty() )
-        {
-            if( line.contains(cshSockRx) )
-            {
+        if (m_authSock.isEmpty()) {
+            if (line.contains(cshSockRx)) {
                 m_authSock = cshSockRx.cap(1);
                 continue;
             }
 
-            if( line.contains(bashSockRx) )
-            {
+            if (line.contains(bashSockRx)) {
                 m_authSock = bashSockRx.cap(1);
                 continue;
             }
@@ -169,7 +152,6 @@ void SshAgent::slotProcessFinished()
 
     qCDebug(log_cervisia) << "pid=" << m_pid << ", socket=" << m_authSock;
 }
-
 
 void SshAgent::slotReceivedOutput()
 {
@@ -180,17 +162,14 @@ void SshAgent::slotReceivedOutput()
     qCDebug(log_cervisia) << "output=" << output;
 }
 
-
 bool SshAgent::startSshAgent()
 {
     qCDebug(log_cervisia) << "ENTER";
 
     m_agentProcess = new KProcess(this);
 
-    connect(m_agentProcess, SIGNAL(finished(int,QProcess::ExitStatus)),
-            SLOT(slotProcessFinished()));
-    connect(m_agentProcess, SIGNAL(readyReadStandardOutput()),
-            SLOT(slotReceivedOutput()));
+    connect(m_agentProcess, SIGNAL(finished(int, QProcess::ExitStatus)), SLOT(slotProcessFinished()));
+    connect(m_agentProcess, SIGNAL(readyReadStandardOutput()), SLOT(slotReceivedOutput()));
 
     m_agentProcess->setOutputChannelMode(KProcess::MergedChannels);
     m_agentProcess->setProgram(QLatin1String("ssh-agent"));
@@ -200,8 +179,5 @@ bool SshAgent::startSshAgent()
     // TODO CL use timeout?
     m_agentProcess->waitForFinished();
 
-    return (m_agentProcess->exitStatus() == QProcess::NormalExit
-            && m_agentProcess->exitCode() == 0);
+    return (m_agentProcess->exitStatus() == QProcess::NormalExit && m_agentProcess->exitCode() == 0);
 }
-
-

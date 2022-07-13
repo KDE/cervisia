@@ -26,8 +26,7 @@ using Cervisia::LogMessageEdit;
 
 #include <KStandardShortcut>
 
-
-LogMessageEdit::LogMessageEdit(QWidget* parent)
+LogMessageEdit::LogMessageEdit(QWidget *parent)
     : KTextEdit(parent)
     , KCompletionBase()
     , m_completing(false)
@@ -47,7 +46,7 @@ void LogMessageEdit::mousePressEvent(QMouseEvent *event)
     stopCompletion();
 }
 
-void LogMessageEdit::setCompletedText(const QString& match)
+void LogMessageEdit::setCompletedText(const QString &match)
 {
     QTextCursor cursor = this->textCursor();
 
@@ -73,25 +72,19 @@ void LogMessageEdit::setCompletedText(const QString& match)
     setCheckSpellingEnabled(false);
 }
 
-
-void LogMessageEdit::setCompletedItems(const QStringList&, bool)
+void LogMessageEdit::setCompletedItems(const QStringList &, bool)
 {
 }
 
-
-void LogMessageEdit::keyPressEvent(QKeyEvent* event)
+void LogMessageEdit::keyPressEvent(QKeyEvent *event)
 {
     // handle normal key
-    Qt::KeyboardModifiers modifiers= event->modifiers();
-    bool noModifier = (modifiers == Qt::NoModifier ||
-                       modifiers == Qt::ShiftModifier ||
-                       modifiers == Qt::KeypadModifier);
+    Qt::KeyboardModifiers modifiers = event->modifiers();
+    bool noModifier = (modifiers == Qt::NoModifier || modifiers == Qt::ShiftModifier || modifiers == Qt::KeypadModifier);
 
-    if( noModifier )
-    {
+    if (noModifier) {
         QString keyCode = event->text();
-        if( !keyCode.isEmpty() && keyCode.unicode()->isPrint() )
-        {
+        if (!keyCode.isEmpty() && keyCode.unicode()->isPrint()) {
             KTextEdit::keyPressEvent(event);
             tryCompletion();
             event->accept();
@@ -101,14 +94,13 @@ void LogMessageEdit::keyPressEvent(QKeyEvent* event)
 
     // get shortcut for text completion key
     QList<QKeySequence> shortcut = keyBinding(TextCompletion);
-    if( shortcut.isEmpty() )
+    if (shortcut.isEmpty())
         shortcut = KStandardShortcut::shortcut(KStandardShortcut::TextCompletion);
 
     int key = event->key() | event->modifiers();
 
     // handle text completion key
-    if( m_completing && shortcut.contains(key) )
-    {
+    if (m_completing && shortcut.contains(key)) {
         // accept the suggested completion
         QTextCursor cursor = this->textCursor();
         cursor.setPosition(cursor.selectionEnd());
@@ -121,46 +113,39 @@ void LogMessageEdit::keyPressEvent(QKeyEvent* event)
 
     // handle previous match key
     shortcut = keyBinding(PrevCompletionMatch);
-    if( shortcut.isEmpty() )
+    if (shortcut.isEmpty())
         shortcut = KStandardShortcut::shortcut(KStandardShortcut::PrevCompletion);
 
-    if( shortcut.contains(key) )
-    {
+    if (shortcut.contains(key)) {
         rotateMatches(PrevCompletionMatch);
         return;
     }
 
     // handle next match key
     shortcut = keyBinding(NextCompletionMatch);
-    if( shortcut.isEmpty() )
+    if (shortcut.isEmpty())
         shortcut = KStandardShortcut::shortcut(KStandardShortcut::NextCompletion);
 
-    if( shortcut.contains(key) )
-    {
+    if (shortcut.contains(key)) {
         rotateMatches(NextCompletionMatch);
         return;
     }
 
     // any other key (except modifiers) will end the text completion
-    if( event->key() != Qt::Key_Shift && event->key() != Qt::Key_Control &&
-        event->key() != Qt::Key_Alt   && event->key() != Qt::Key_Meta )
-    {
+    if (event->key() != Qt::Key_Shift && event->key() != Qt::Key_Control && event->key() != Qt::Key_Alt && event->key() != Qt::Key_Meta) {
         stopCompletion();
     }
 
     KTextEdit::keyPressEvent(event);
 }
 
-
 void LogMessageEdit::stopCompletion()
 {
-    if (m_completing)
-    {
+    if (m_completing) {
         m_completing = false;
         setCheckSpellingEnabled(m_checkSpellingEnabledBeforeCompletion);
     }
 }
-
 
 void LogMessageEdit::tryCompletion()
 {
@@ -168,21 +153,19 @@ void LogMessageEdit::tryCompletion()
     QString text = toPlainText();
 
     // space or tab starts completion
-    if ( text.at(pos-1).isSpace() )
-    {
+    if (text.at(pos - 1).isSpace()) {
         // if we already did complete this word and the user types another space,
         // don't complete again, since the user can otherwise not enter the word
         // without the completion. In this case, also remove the previous completion
         // which is still selected
-        if ( m_completing )
-        {
+        if (m_completing) {
             textCursor().removeSelectedText();
             stopCompletion();
             return;
         }
 
-        if ( !m_completing )
-            m_completionStartPos = text.lastIndexOf(' ', pos-2) + 1;
+        if (!m_completing)
+            m_completionStartPos = text.lastIndexOf(' ', pos - 2) + 1;
 
         // retrieve current word
         int length = pos - m_completionStartPos - 1;
@@ -190,12 +173,10 @@ void LogMessageEdit::tryCompletion()
 
         // try to complete the word
         QString match = compObj()->makeCompletion(word);
-        if( !match.isEmpty() && match != word )
-        {
+        if (!match.isEmpty() && match != word) {
             // if the matching text is already existing at this cursor position,
             // don't insert it again
-            if ( text.mid(pos).startsWith(match.mid(word.length())) )
-            {
+            if (text.mid(pos).startsWith(match.mid(word.length()))) {
                 stopCompletion();
                 return;
             }
@@ -205,34 +186,26 @@ void LogMessageEdit::tryCompletion()
             setTextCursor(cursor);
 
             setCompletedText(match);
-        }
-        else
-        {
+        } else {
             stopCompletion();
         }
-    }
-    else
-    {
+    } else {
         stopCompletion();
     }
 }
 
-
 void LogMessageEdit::rotateMatches(KeyBindingType type)
 {
-    KCompletion* completionObj = compObj();
-    if( completionObj && m_completing &&
-        (type == PrevCompletionMatch || type == NextCompletionMatch) )
-    {
-        QString match = (type == PrevCompletionMatch) ? completionObj->previousMatch()
-                                                      : completionObj->nextMatch();
+    KCompletion *completionObj = compObj();
+    if (completionObj && m_completing && (type == PrevCompletionMatch || type == NextCompletionMatch)) {
+        QString match = (type == PrevCompletionMatch) ? completionObj->previousMatch() : completionObj->nextMatch();
 
         int pos = textCursor().position();
         QString text = toPlainText();
 
         QString word = text.mid(m_completionStartPos, pos - m_completionStartPos);
 
-        if( match.isEmpty() || match == word )
+        if (match.isEmpty() || match == word)
             return;
 
         setCompletedText(match);

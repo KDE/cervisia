@@ -33,15 +33,15 @@ class AddRepositoryDialog : public QDialog
     Q_OBJECT
 
 public:
-    AddRepositoryDialog(KConfig& cfg, const QString& repo, QWidget* parent = nullptr);
+    AddRepositoryDialog(KConfig &cfg, const QString &repo, QWidget *parent = nullptr);
     ~AddRepositoryDialog() override;
 
-    void setRepository(const QString& repo);
-    void setRsh(const QString& rsh);
-    void setServer(const QString& server);
+    void setRepository(const QString &repo);
+    void setRsh(const QString &rsh);
+    void setServer(const QString &server);
     void setCompression(int compression);
     void setRetrieveCvsignoreFile(bool enabled);
-    
+
     QString repository() const;
     QString rsh() const;
     QString server() const;
@@ -51,15 +51,15 @@ public:
 private slots:
     void repoChanged();
     void compressionToggled(bool checked);
-    
+
 private:
-    QLineEdit*    repo_edit;
-    QLineEdit*    rsh_edit;
-    QLineEdit*    server_edit;
-    QCheckBox*    m_useDifferentCompression;
-    QCheckBox*    m_retrieveCvsignoreFile;
-    QSpinBox*     m_compressionLevel;
-    KConfig&      partConfig;
+    QLineEdit *repo_edit;
+    QLineEdit *rsh_edit;
+    QLineEdit *server_edit;
+    QCheckBox *m_useDifferentCompression;
+    QCheckBox *m_retrieveCvsignoreFile;
+    QSpinBox *m_compressionLevel;
+    KConfig &partConfig;
 };
 
 #endif // ADDREPOSITORYDIALOG_H

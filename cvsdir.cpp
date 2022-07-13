@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -17,38 +17,33 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #include "cvsdir.h"
 
 #include "dirignorelist.h"
 #include "globalignorelist.h"
 using namespace Cervisia;
 
-
 CvsDir::CvsDir(const QString &path)
-    : QDir( path, 0, QDir::Name,
-            QDir::TypeMask | QDir::Hidden | QDir::NoSymLinks )
-{}
-
+    : QDir(path, 0, QDir::Name, QDir::TypeMask | QDir::Hidden | QDir::NoSymLinks)
+{
+}
 
 const QFileInfoList *CvsDir::entryInfoList() const
 {
     DirIgnoreList ignorelist(absolutePath());
-    const QFileInfoList& fulllist = QDir::entryInfoList();
+    const QFileInfoList &fulllist = QDir::entryInfoList();
     if (fulllist.empty())
         return 0;
 
     entrylist.clear();
 
-    Q_FOREACH (const QFileInfo &info, fulllist)
-    {
+    Q_FOREACH (const QFileInfo &info, fulllist) {
         if (!ignorelist.matches(&info) && !GlobalIgnoreList().matches(&info))
             entrylist.append(info);
     }
 
     return &entrylist;
 }
-
 
 // Local Variables:
 // c-basic-offset: 4

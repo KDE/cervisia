@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *  Copyright (c) 2003-2008 Christian Loose <christian.loose@kdemail.net>
@@ -21,10 +21,13 @@
 #ifndef COMMITDIALOG_H
 #define COMMITDIALOG_H
 
-#include <qstringlist.h>
 #include <QDialog>
+#include <qstringlist.h>
 
-namespace Cervisia { class LogMessageEdit; }
+namespace Cervisia
+{
+class LogMessageEdit;
+}
 
 class QComboBox;
 class QCheckBox;
@@ -38,7 +41,7 @@ class CommitDialog : public QDialog
     Q_OBJECT
 
 public:
-    CommitDialog( KConfig& cfg, OrgKdeCervisia5CvsserviceCvsserviceInterface* service, QWidget *parent=nullptr );
+    CommitDialog(KConfig &cfg, OrgKdeCervisia5CvsserviceCvsserviceInterface *service, QWidget *parent = nullptr);
     ~CommitDialog() override;
 
     void setFileList(const QStringList &list);
@@ -50,19 +53,19 @@ public:
 private slots:
     void slotHelp();
     void comboActivated(int);
-    void fileSelected(QListWidgetItem* item);
+    void fileSelected(QListWidgetItem *item);
     void fileHighlighted();
     void diffClicked();
     void useTemplateClicked();
 
 private:
-    void showDiffDialog(const QString& fileName);
+    void showDiffDialog(const QString &fileName);
     void checkForTemplateFile();
     void addTemplateText();
     void removeTemplateText();
 
-    QListWidget* m_fileList;
-    Cervisia::LogMessageEdit* edit;
+    QListWidget *m_fileList;
+    Cervisia::LogMessageEdit *edit;
     QComboBox *combo;
     QPushButton *user1Button;
     QStringList commits;
@@ -70,11 +73,11 @@ private:
     QString current_text;
     int highlightedFile;
 
-    QCheckBox* m_useTemplateChk;
-    QString    m_templateText;
+    QCheckBox *m_useTemplateChk;
+    QString m_templateText;
 
-    KConfig&            partConfig;
-    OrgKdeCervisia5CvsserviceCvsserviceInterface*    cvsService;     // for diff dialog
+    KConfig &partConfig;
+    OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService; // for diff dialog
 };
 
 #endif // COMMITDIALOG_H

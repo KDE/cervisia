@@ -31,15 +31,15 @@ class AddRemoveDialog : public QDialog
 public:
     enum ActionType { Add, AddBinary, Remove };
 
-    explicit AddRemoveDialog(ActionType action, QWidget* parent=nullptr);
+    explicit AddRemoveDialog(ActionType action, QWidget *parent = nullptr);
 
-    void setFileList(const QStringList& files);
+    void setFileList(const QStringList &files);
 
 private slots:
     void slotHelp();
 
 private:
-    QListWidget* m_listBox;
+    QListWidget *m_listBox;
     QString helpTopic;
 };
 

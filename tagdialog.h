@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 1999-2002 Bernd Gehrmann
  *                          bernd@mail.berlios.de
  *
@@ -36,9 +36,8 @@ class TagDialog : public QDialog
 
 public:
     enum ActionType { Create, Delete };
-    
-    TagDialog( ActionType action, OrgKdeCervisia5CvsserviceCvsserviceInterface* service,
-               QWidget *parent=nullptr );
+
+    TagDialog(ActionType action, OrgKdeCervisia5CvsserviceCvsserviceInterface *service, QWidget *parent = nullptr);
 
     bool branchTag() const;
     bool forceTag() const;
@@ -53,8 +52,8 @@ private slots:
 
 private:
     ActionType act;
-    OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService;
-    
+    OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService;
+
     QCheckBox *branchtag_button;
     QCheckBox *forcetag_button;
     QLineEdit *tag_edit;

@@ -18,25 +18,26 @@
  *
  */
 
-#include <QRegExp>
 #include <QApplication>
-#include <QCommandLineParser>
 #include <QCommandLineOption>
+#include <QCommandLineParser>
+#include <QRegExp>
 
-#include <kaboutdata.h>
-#include <KPasswordDialog>
 #include <KLocalizedString>
+#include <KPasswordDialog>
+#include <kaboutdata.h>
 
 #include <iostream>
 
 #include "../cervisia_version.h"
 
-
-extern "C" Q_DECL_EXPORT int kdemain(int argc, char** argv)
+extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
 {
     KLocalizedString::setApplicationDomain("cervisia");
 
-    KAboutData about("cvsaskpass", i18n("cvsaskpass"), CERVISIA_VERSION_STRING,
+    KAboutData about("cvsaskpass",
+                     i18n("cvsaskpass"),
+                     CERVISIA_VERSION_STRING,
                      i18n("ssh-askpass for the CVS D-Bus Service"),
                      KAboutLicense::LGPL,
                      i18n("Copyright (c) 2003 Christian Loose"));
@@ -50,7 +51,7 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char** argv)
 
     parser.process(app);
 
-    if( !parser.positionalArguments().count() )
+    if (!parser.positionalArguments().count())
         return 1;
 
     // parse repository name from the passed argument
@@ -59,14 +60,13 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char** argv)
 
     KPasswordDialog dlg;
     dlg.setPrompt(i18n("Please type in your password below."));
-    //dlg.setWindowTitle(i18n("Enter Password"));
+    // dlg.setWindowTitle(i18n("Enter Password"));
 
-    if( prompt.contains( rx ) )
+    if (prompt.contains(rx))
         dlg.addCommentLine(i18n("Repository:"), rx.cap(1));
 
     int res = dlg.exec();
-    if( res == KPasswordDialog::Accepted )
-    {
+    if (res == KPasswordDialog::Accepted) {
         std::cout << dlg.password().toUtf8().constData() << std::endl;
         return 0;
     }

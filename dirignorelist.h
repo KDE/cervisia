@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -24,27 +24,22 @@
 
 class QFileInfo;
 
-
 namespace Cervisia
 {
-
 
 /* Encapsulates the .cvsignore file inside a CVS-controlled directory. */
 class DirIgnoreList : public IgnoreListBase
 {
 public:
-    explicit DirIgnoreList(const QString& path);
+    explicit DirIgnoreList(const QString &path);
 
-    bool matches(const QFileInfo* fi) const override;
+    bool matches(const QFileInfo *fi) const override;
 
 private:
-    void addEntry(const QString& entry) override;
+    void addEntry(const QString &entry) override;
 
     StringMatcher m_stringMatcher;
 };
-
-
 }
-
 
 #endif

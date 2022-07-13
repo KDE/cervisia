@@ -16,16 +16,15 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #include "watchersdialog.h"
 
+#include <QBoxLayout>
+#include <QDialogButtonBox>
 #include <QHeaderView>
+#include <QLineEdit>
+#include <QPushButton>
 #include <QTableView>
 #include <QVBoxLayout>
-#include <QBoxLayout>
-#include <QLineEdit>
-#include <QDialogButtonBox>
-#include <QPushButton>
 
 #include <KConfig>
 #include <KConfigGroup>
@@ -35,9 +34,9 @@
 #include "progressdialog.h"
 #include "watchersmodel.h"
 
-
-WatchersDialog::WatchersDialog(KConfig& cfg, QWidget* parent)
-    : QDialog(parent), partConfig(cfg)
+WatchersDialog::WatchersDialog(KConfig &cfg, QWidget *parent)
+    : QDialog(parent)
+    , partConfig(cfg)
 {
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
@@ -60,28 +59,25 @@ WatchersDialog::WatchersDialog(KConfig& cfg, QWidget* parent)
     restoreGeometry(cg.readEntry<QByteArray>("geometry", QByteArray()));
 }
 
-
 WatchersDialog::~WatchersDialog()
 {
     KConfigGroup cg(&partConfig, "WatchersDialog");
     cg.writeEntry("geometry", saveGeometry());
 }
 
-
-bool WatchersDialog::parseWatchers(OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService,
-                                   const QStringList& files)
+bool WatchersDialog::parseWatchers(OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService, const QStringList &files)
 {
     setWindowTitle(i18n("CVS Watchers"));
 
     QDBusReply<QDBusObjectPath> job = cvsService->watchers(files);
-    if( !job.isValid() )
+    if (!job.isValid())
         return false;
 
-    ProgressDialog dlg(this, "Watchers",cvsService->service(), job, "watchers", i18n("CVS Watchers"));
-    if( !dlg.execute() )
+    ProgressDialog dlg(this, "Watchers", cvsService->service(), job, "watchers", i18n("CVS Watchers"));
+    if (!dlg.execute())
         return false;
 
-    WatchersSortModel* proxyModel = new WatchersSortModel(this);
+    WatchersSortModel *proxyModel = new WatchersSortModel(this);
     proxyModel->setSourceModel(new WatchersModel(dlg.getOutput()));
     m_tableView->setModel(proxyModel);
     m_tableView->sortByColumn(0, Qt::AscendingOrder);

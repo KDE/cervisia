@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (c) 1999-2002 Bernd Gehrmann <bernd@mail.berlios.de>
  *  Copyright (c) 2002      Christian Loose <christian.loose@hamburg.de>
  *
@@ -20,8 +20,8 @@
 #ifndef PROGRESSDIALOG_H
 #define PROGRESSDIALOG_H
 
-#include <QDialog>
 #include <QDBusReply>
+#include <QDialog>
 
 class QString;
 class QWidget;
@@ -31,12 +31,16 @@ class ProgressDialog : public QDialog
     Q_OBJECT
 
 public:
-    ProgressDialog(QWidget* parent, const QString& heading, const QString &cvsServiceNameService,const QDBusReply<QDBusObjectPath>& job,
-                   const QString& errorIndicator, const QString& caption = "");
+    ProgressDialog(QWidget *parent,
+                   const QString &heading,
+                   const QString &cvsServiceNameService,
+                   const QDBusReply<QDBusObjectPath> &job,
+                   const QString &errorIndicator,
+                   const QString &caption = "");
     ~ProgressDialog() override;
 
     bool execute();
-    bool getLine(QString& line);
+    bool getLine(QString &line);
     QStringList getOutput() const;
 
 public Q_SLOTS:
@@ -51,13 +55,13 @@ private slots:
     void slotTimeoutOccurred();
 
 private:
-    void setupGui(const QString& heading);
+    void setupGui(const QString &heading);
     void stopNonGuiPart();
     void startGuiPart();
     void processOutput();
 
     struct Private;
-    Private* d;
+    Private *d;
 };
 
 #endif // PROGRESSDIALOG_H

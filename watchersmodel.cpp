@@ -22,88 +22,76 @@
 
 #include "misc.h"
 
-
-WatchersModel::WatchersModel(const QStringList& data, QObject* parent)
+WatchersModel::WatchersModel(const QStringList &data, QObject *parent)
     : QAbstractTableModel(parent)
 {
     parseData(data);
 }
 
-
-int WatchersModel::columnCount(const QModelIndex& /*parent*/) const
+int WatchersModel::columnCount(const QModelIndex & /*parent*/) const
 {
     return 5;
 }
 
-
-int WatchersModel::rowCount(const QModelIndex& /*parent*/) const
+int WatchersModel::rowCount(const QModelIndex & /*parent*/) const
 {
     return m_list.count();
 }
 
-
-QVariant WatchersModel::data(const QModelIndex& index, int role) const
+QVariant WatchersModel::data(const QModelIndex &index, int role) const
 {
-    if( !index.isValid() || index.row() < 0 || index.row() >= m_list.count() )
+    if (!index.isValid() || index.row() < 0 || index.row() >= m_list.count())
         return QVariant();
 
     WatchersEntry entry = m_list.at(index.row());
 
-    if( role == Qt::DisplayRole )
-    {
-        switch( index.column() )
-        {
-            case FileColumn:
-                return entry.file;
-            case WatcherColumn:
-                return entry.watcher;
-            default:
-                return QVariant();
+    if (role == Qt::DisplayRole) {
+        switch (index.column()) {
+        case FileColumn:
+            return entry.file;
+        case WatcherColumn:
+            return entry.watcher;
+        default:
+            return QVariant();
         }
     }
 
-    if( role == Qt::CheckStateRole )
-    {
-        switch( index.column() )
-        {
-            case EditColumn:
-                return entry.edit ? Qt::Checked : Qt::Unchecked;
-            case UneditColumn:
-                return entry.unedit ? Qt::Checked : Qt::Unchecked;
-            case CommitColumn:
-                return entry.commit ? Qt::Checked : Qt::Unchecked;
-            default:
-                return QVariant();
+    if (role == Qt::CheckStateRole) {
+        switch (index.column()) {
+        case EditColumn:
+            return entry.edit ? Qt::Checked : Qt::Unchecked;
+        case UneditColumn:
+            return entry.unedit ? Qt::Checked : Qt::Unchecked;
+        case CommitColumn:
+            return entry.commit ? Qt::Checked : Qt::Unchecked;
+        default:
+            return QVariant();
         }
     }
 
     return QVariant();
 }
 
-
-QVariant WatchersModel::headerData(int section, Qt::Orientation orientation,
-                                   int role) const
+QVariant WatchersModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     // only provide text for the headers
-    if( role != Qt::DisplayRole )
+    if (role != Qt::DisplayRole)
         return QVariant();
 
-    if( orientation == Qt::Horizontal )
-    {
-        switch( section )
-        {
-            case FileColumn:
-                return i18n("File");
-            case WatcherColumn:
-                return i18n("Watcher");
-            case EditColumn:
-                return i18n("Edit");
-            case UneditColumn:
-                return i18n("Unedit");
-            case CommitColumn:
-                return i18n("Commit");
-            default:
-                return QVariant();
+    if (orientation == Qt::Horizontal) {
+        switch (section) {
+        case FileColumn:
+            return i18n("File");
+        case WatcherColumn:
+            return i18n("Watcher");
+        case EditColumn:
+            return i18n("Edit");
+        case UneditColumn:
+            return i18n("Unedit");
+        case CommitColumn:
+            return i18n("Commit");
+        default:
+            return QVariant();
         }
     }
 
@@ -111,45 +99,39 @@ QVariant WatchersModel::headerData(int section, Qt::Orientation orientation,
     return QString(section);
 }
 
-
-void WatchersModel::parseData(const QStringList& data)
+void WatchersModel::parseData(const QStringList &data)
 {
-    foreach( const QString &line, data )
-    {
+    foreach (const QString &line, data) {
         // parse the output line
         QStringList list = splitLine(line);
 
         // ignore empty lines and unknown files
-        if( list.isEmpty() || list[0] == "?" )
+        if (list.isEmpty() || list[0] == "?")
             continue;
 
         WatchersEntry entry;
-        entry.file    = list[0];
+        entry.file = list[0];
         entry.watcher = list[1];
-        entry.edit    = list.contains("edit");
-        entry.unedit  = list.contains("unedit");
-        entry.commit  = list.contains("commit");
+        entry.edit = list.contains("edit");
+        entry.unedit = list.contains("unedit");
+        entry.commit = list.contains("commit");
 
         m_list.append(entry);
     }
 }
 
-
-WatchersSortModel::WatchersSortModel(QObject* parent)
+WatchersSortModel::WatchersSortModel(QObject *parent)
     : QSortFilterProxyModel(parent)
 {
 }
 
-
-bool WatchersSortModel::lessThan(const QModelIndex& left, const QModelIndex& right) const
+bool WatchersSortModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
-    QVariant leftData  = sourceModel()->data(left, Qt::CheckStateRole);
+    QVariant leftData = sourceModel()->data(left, Qt::CheckStateRole);
     QVariant rightData = sourceModel()->data(right, Qt::CheckStateRole);
 
-    if( !leftData.isValid() )
+    if (!leftData.isValid())
         return QSortFilterProxyModel::lessThan(left, right);
 
     return leftData.toInt() < rightData.toInt();
 }
-
-

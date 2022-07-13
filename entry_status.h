@@ -16,23 +16,18 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #ifndef CERVISIA_ENTRY_STATUS_H
 #define CERVISIA_ENTRY_STATUS_H
 
-
 class QString;
-
 
 namespace Cervisia
 {
 
-
 /**
  * All stati a an entry could have.
  */
-enum EntryStatus
-{
+enum EntryStatus {
     LocallyModified,
     LocallyAdded,
     LocallyRemoved,
@@ -57,8 +52,6 @@ enum EntryStatus
  */
 QString toString(EntryStatus entryStatus);
 
-
 } // namespace Cervisia
-
 
 #endif // CERVISIA_ENTRY_STATUS_H

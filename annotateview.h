@@ -18,18 +18,16 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #ifndef ANNOTATEVIEW_H
 #define ANNOTATEVIEW_H
 
-#include <QTreeWidget>
 #include <QStyledItemDelegate>
+#include <QTreeWidget>
 
 namespace Cervisia
 {
 struct LogInfo;
 }
-
 
 class AnnotateView : public QTreeWidget
 {
@@ -38,7 +36,7 @@ class AnnotateView : public QTreeWidget
 public:
     explicit AnnotateView(QWidget *parent);
 
-    void addLine(const Cervisia::LogInfo& logInfo, const QString& content, bool odd);
+    void addLine(const Cervisia::LogInfo &logInfo, const QString &content, bool odd);
 
     QSize sizeHint() const override;
 
@@ -52,15 +50,18 @@ public slots:
 private slots:
     void configChanged();
 
-    void slotQueryToolTip(const QPoint&, QRect&, QString&);
+    void slotQueryToolTip(const QPoint &, QRect &, QString &);
 };
 
-class AnnotateViewDelegate: public QStyledItemDelegate
+class AnnotateViewDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 
 public:
-    explicit AnnotateViewDelegate(AnnotateView *v) : view(v) { }
+    explicit AnnotateViewDelegate(AnnotateView *v)
+        : view(v)
+    {
+    }
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
     QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 

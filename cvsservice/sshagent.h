@@ -27,22 +27,30 @@
 
 class KProcess;
 
-
 class SshAgent : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit SshAgent(QObject* parent = 0);
+    explicit SshAgent(QObject *parent = 0);
     ~SshAgent() override;
 
     bool querySshAgent();
     bool addSshIdentities();
     void killSshAgent();
 
-    bool isRunning() const { return m_isRunning; }
-    QString pid() const { return m_pid; }
-    QString authSock() const { return m_authSock; }
+    bool isRunning() const
+    {
+        return m_isRunning;
+    }
+    QString pid() const
+    {
+        return m_pid;
+    }
+    QString authSock() const
+    {
+        return m_authSock;
+    }
 
 private slots:
     void slotProcessFinished();
@@ -51,15 +59,14 @@ private slots:
 private:
     bool startSshAgent();
 
-    QStringList    m_outputLines;
+    QStringList m_outputLines;
 
-    KProcess* m_agentProcess;
+    KProcess *m_agentProcess;
 
-    static bool    m_isRunning;
-    static bool    m_isOurAgent;
+    static bool m_isRunning;
+    static bool m_isOurAgent;
     static QString m_authSock;
     static QString m_pid;
 };
-
 
 #endif

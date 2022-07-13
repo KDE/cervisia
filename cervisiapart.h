@@ -18,23 +18,23 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #ifndef CERVISIAPART_H
 #define CERVISIAPART_H
 
-#include <kparts/part.h>
 #include <kparts/browserextension.h>
+#include <kparts/part.h>
 #include <kparts/statusbarextension.h>
 
 #include "addremovedialog.h"
-#include "commitdialog.h"
 #include "checkoutdialog.h"
-#include "watchdialog.h"
+#include "commitdialog.h"
 #include "tagdialog.h"
+#include "watchdialog.h"
 
-namespace Cervisia { 
+namespace Cervisia
+{
 class AddIgnoreMenu;
-class EditWithMenu; 
+class EditWithMenu;
 }
 class QLabel;
 class QSplitter;
@@ -45,7 +45,6 @@ class KRecentFilesAction;
 class OrgKdeCervisia5CvsserviceCvsserviceInterface;
 class CervisiaBrowserExtension;
 
-
 /**
  * An embeddable Cervisia viewer.
  */
@@ -54,7 +53,7 @@ class CervisiaPart : public KParts::ReadOnlyPart
     Q_OBJECT
 
 public:
-    CervisiaPart( QWidget *parentWidget, QObject *parent, const QVariantList& args = QVariantList());
+    CervisiaPart(QWidget *parentWidget, QObject *parent, const QVariantList &args = QVariantList());
     ~CervisiaPart() override;
 
     /**
@@ -62,18 +61,24 @@ public:
      */
     static KConfig *config();
 
-    QString sandBox() const { return sandbox; }
+    QString sandBox() const
+    {
+        return sandbox;
+    }
 
-    static KAboutData* createAboutData();
+    static KAboutData *createAboutData();
 
 public slots:
     // unused because we overwrite the default behaviour of openUrl()
-    bool openFile() override { return true; }
-    bool openUrl( const QUrl & ) override;
+    bool openFile() override
+    {
+        return true;
+    }
+    bool openUrl(const QUrl &) override;
 
     void openFile(QString filename);
     void openFiles(const QStringList &filenames);
-    void popupRequested(const QPoint&);
+    void popupRequested(const QPoint &);
     void updateActions();
 
     void slotOpen();
@@ -141,7 +146,7 @@ private slots:
     void slotSetupStatusBar();
 
 protected:
-    void guiActivateEvent(KParts::GUIActivateEvent* event) override;
+    void guiActivateEvent(KParts::GUIActivateEvent *event) override;
 
 private:
     enum JobType { Unknown, Commit };
@@ -151,13 +156,13 @@ private:
     void readSettings();
     void writeSettings();
 
-    bool openSandbox(const QUrl& url);
+    bool openSandbox(const QUrl &url);
     void updateSandbox(const QString &extraopt = QString());
     void addOrRemove(AddRemoveDialog::ActionType action);
     void addOrRemoveWatch(WatchDialog::ActionType action);
     void createOrDeleteTag(Cervisia::TagDialog::ActionType action);
     void showJobStart(const QString &command);
-    void showDiff(const QString& revision);
+    void showDiff(const QString &revision);
     void setFilter();
 
     UpdateView *update;
@@ -174,20 +179,20 @@ private:
     bool opt_createDirs, opt_pruneDirs;
     bool opt_updateRecursive, opt_commitRecursive, opt_doCVSEdit;
 
-    //for the Open Recent directories
+    // for the Open Recent directories
     KRecentFilesAction *recent;
 
-    OrgKdeCervisia5CvsserviceCvsserviceInterface*            cvsService;
-    KParts::StatusBarExtension* m_statusBar;
-    CervisiaBrowserExtension*   m_browserExt;
-    QLabel*                     filterLabel;
+    OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService;
+    KParts::StatusBarExtension *m_statusBar;
+    CervisiaBrowserExtension *m_browserExt;
+    QLabel *filterLabel;
 
-    QAction*                    m_editWithAction;
-    Cervisia::EditWithMenu*     m_currentEditMenu;
-    QAction*                    m_addIgnoreAction;
-    Cervisia::AddIgnoreMenu*    m_currentIgnoreMenu;
-    JobType                     m_jobType;
-    QString 			m_cvsServiceInterfaceName;
+    QAction *m_editWithAction;
+    Cervisia::EditWithMenu *m_currentEditMenu;
+    QAction *m_addIgnoreAction;
+    Cervisia::AddIgnoreMenu *m_currentIgnoreMenu;
+    JobType m_jobType;
+    QString m_cvsServiceInterfaceName;
 };
 
 /**
@@ -198,12 +203,11 @@ class CervisiaBrowserExtension : public KParts::BrowserExtension
     Q_OBJECT
 
 public:
-    explicit CervisiaBrowserExtension( CervisiaPart * );
+    explicit CervisiaBrowserExtension(CervisiaPart *);
     ~CervisiaBrowserExtension() override;
 };
 
 #endif // CERVISIAPART_H
-
 
 // Local Variables:
 // c-basic-offset: 4

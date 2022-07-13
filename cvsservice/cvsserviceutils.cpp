@@ -20,26 +20,24 @@
 
 #include "cvsserviceutils.h"
 
+#include <kshell.h>
 #include <qstring.h>
 #include <qstringlist.h>
-#include <kshell.h>
 
-
-QString CvsServiceUtils::joinFileList(const QStringList& files)
+QString CvsServiceUtils::joinFileList(const QStringList &files)
 {
     QString result;
-    
-    QStringList::ConstIterator it  = files.begin();
+
+    QStringList::ConstIterator it = files.begin();
     QStringList::ConstIterator end = files.end();
-    
-    for( ; it != end; ++it )
-    {
+
+    for (; it != end; ++it) {
         result += KShell::quoteArg(*it);
         result += ' ';
     }
-    
-    if( result.length() > 0 )
-        result.truncate(result.length()-1);
-        
+
+    if (result.length() > 0)
+        result.truncate(result.length() - 1);
+
     return result;
 }

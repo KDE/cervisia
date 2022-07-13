@@ -21,12 +21,11 @@
 #ifndef CVSSERVICE_H
 #define CVSSERVICE_H
 
-#include <qstringlist.h>
-#include <qobject.h>
 #include <QDBusObjectPath>
+#include <qobject.h>
+#include <qstringlist.h>
 
 class QString;
-
 
 class Q_DECL_EXPORT CvsService : public QObject
 {
@@ -47,11 +46,11 @@ public Q_SLOTS:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    QDBusObjectPath add(const QStringList& files, bool isBinary);
+    QDBusObjectPath add(const QStringList &files, bool isBinary);
 
     /**
      */
-    QDBusObjectPath addWatch(const QStringList& files, int events);
+    QDBusObjectPath addWatch(const QStringList &files, int events);
 
     /**
      * Shows information on who last modified each line of a file and when.
@@ -62,7 +61,7 @@ public Q_SLOTS:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    QDBusObjectPath annotate(const QString& fileName, const QString& revision);
+    QDBusObjectPath annotate(const QString &fileName, const QString &revision);
 
     /**
      * Checks out a module from the repository into a working copy.
@@ -76,9 +75,8 @@ public Q_SLOTS:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    QDBusObjectPath checkout(const QString& workingDir, const QString& repository,
-                     const QString& module, const QString& tag, bool pruneDirs);
-    
+    QDBusObjectPath checkout(const QString &workingDir, const QString &repository, const QString &module, const QString &tag, bool pruneDirs);
+
     /**
      * Checks out a module from the repository into a working copy.
      *
@@ -94,9 +92,13 @@ public Q_SLOTS:
      *         null reference.
      */
     //### KDE4: merge with above checkout() method
-    QDBusObjectPath checkout(const QString& workingDir, const QString& repository,
-                     const QString& module, const QString& tag, bool pruneDirs, 
-                     const QString& alias, bool exportOnly);
+    QDBusObjectPath checkout(const QString &workingDir,
+                             const QString &repository,
+                             const QString &module,
+                             const QString &tag,
+                             bool pruneDirs,
+                             const QString &alias,
+                             bool exportOnly);
 
     /**
      * Checks out a module from the repository into a working copy.
@@ -113,9 +115,14 @@ public Q_SLOTS:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    QDBusObjectPath checkout(const QString& workingDir, const QString& repository,
-                     const QString& module, const QString& tag, bool pruneDirs, 
-                     const QString& alias, bool exportOnly, bool recursive);
+    QDBusObjectPath checkout(const QString &workingDir,
+                             const QString &repository,
+                             const QString &module,
+                             const QString &tag,
+                             bool pruneDirs,
+                             const QString &alias,
+                             bool exportOnly,
+                             bool recursive);
 
     /**
      *
@@ -127,41 +134,34 @@ public Q_SLOTS:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    QDBusObjectPath commit(const QStringList& files, const QString& commitMessage,
-                   bool recursive);
+    QDBusObjectPath commit(const QStringList &files, const QString &commitMessage, bool recursive);
 
     /**
      * Creates a new root repository.
      *
      * @param repository
      */
-    QDBusObjectPath createRepository(const QString& repository);
-    
-    /**
-     */
-    QDBusObjectPath createTag(const QStringList& files, const QString& tag,
-                      bool branch, bool force);
+    QDBusObjectPath createRepository(const QString &repository);
 
     /**
      */
-    QDBusObjectPath deleteTag(const QStringList& files, const QString& tag,
-                      bool branch, bool force);
+    QDBusObjectPath createTag(const QStringList &files, const QString &tag, bool branch, bool force);
 
     /**
      */
-    QDBusObjectPath downloadCvsIgnoreFile(const QString& repository,
-                                  const QString& outputFile);
-    
-    /**
-     */
-    QDBusObjectPath downloadRevision(const QString& fileName, const QString& revision,
-                             const QString& outputFile);
+    QDBusObjectPath deleteTag(const QStringList &files, const QString &tag, bool branch, bool force);
 
     /**
      */
-    QDBusObjectPath downloadRevision(const QString& fileName, const QString& revA,
-                             const QString& outputFileA, const QString& revB,
-                             const QString& outputFileB);
+    QDBusObjectPath downloadCvsIgnoreFile(const QString &repository, const QString &outputFile);
+
+    /**
+     */
+    QDBusObjectPath downloadRevision(const QString &fileName, const QString &revision, const QString &outputFile);
+
+    /**
+     */
+    QDBusObjectPath downloadRevision(const QString &fileName, const QString &revA, const QString &outputFileA, const QString &revB, const QString &outputFileB);
 
     /**
      *
@@ -174,10 +174,8 @@ public Q_SLOTS:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    QDBusObjectPath diff(const QString& fileName, const QString& revA,
-                 const QString& revB, const QString& diffOptions,
-                 unsigned contextLines);
-    
+    QDBusObjectPath diff(const QString &fileName, const QString &revA, const QString &revB, const QString &diffOptions, unsigned contextLines);
+
     /**
      *
      * @param fileName
@@ -189,19 +187,17 @@ public Q_SLOTS:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    QDBusObjectPath diff(const QString& fileName, const QString& revA,
-                 const QString& revB, const QString& diffOptions,
-                 const QString& format);
+    QDBusObjectPath diff(const QString &fileName, const QString &revA, const QString &revB, const QString &diffOptions, const QString &format);
 
     /**
      * @param files
      */
-    QDBusObjectPath edit(const QStringList& files);
+    QDBusObjectPath edit(const QStringList &files);
 
     /**
      * @param files
      */
-    QDBusObjectPath editors(const QStringList& files);
+    QDBusObjectPath editors(const QStringList &files);
 
     /**
      * Shows a history of activity (like checkouts, commits, etc) in the
@@ -216,16 +212,20 @@ public Q_SLOTS:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    QDBusObjectPath import(const QString& workingDir, const QString& repository,
-                   const QString& module, const QString& ignoreList,
-                   const QString& comment, const QString& vendorTag,
-                   const QString& releaseTag, bool importAsBinary,
-                   bool useModificationTime);
+    QDBusObjectPath import(const QString &workingDir,
+                           const QString &repository,
+                           const QString &module,
+                           const QString &ignoreList,
+                           const QString &comment,
+                           const QString &vendorTag,
+                           const QString &releaseTag,
+                           bool importAsBinary,
+                           bool useModificationTime);
 
     /**
      * @param files
      */
-    QDBusObjectPath lock(const QStringList& files);
+    QDBusObjectPath lock(const QStringList &files);
 
     /**
      * Shows log messages for a file.
@@ -235,7 +235,7 @@ public Q_SLOTS:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    QDBusObjectPath log(const QString& fileName);
+    QDBusObjectPath log(const QString &fileName);
 
     /**
      * @param repository
@@ -243,7 +243,7 @@ public Q_SLOTS:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    QDBusObjectPath login(const QString& repository);
+    QDBusObjectPath login(const QString &repository);
 
     /**
      * @param repository
@@ -251,16 +251,16 @@ public Q_SLOTS:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    QDBusObjectPath logout(const QString& repository);
+    QDBusObjectPath logout(const QString &repository);
 
     /**
      */
     QDBusObjectPath makePatch();
-    
+
     /**
      */
     //### KDE4: merge with above makePatch() method
-    QDBusObjectPath makePatch(const QString& diffOptions, const QString& format);
+    QDBusObjectPath makePatch(const QString &diffOptions, const QString &format);
 
     /**
      * @param repository
@@ -268,7 +268,7 @@ public Q_SLOTS:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    QDBusObjectPath moduleList(const QString& repository);
+    QDBusObjectPath moduleList(const QString &repository);
 
     /**
      * Deletes files from the local working copy and schedules them to be
@@ -281,16 +281,15 @@ public Q_SLOTS:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    QDBusObjectPath remove(const QStringList& files, bool recursive);
+    QDBusObjectPath remove(const QStringList &files, bool recursive);
 
     /**
      */
-    QDBusObjectPath removeWatch(const QStringList& files, int events);
+    QDBusObjectPath removeWatch(const QStringList &files, int events);
 
     /**
      */
-    QDBusObjectPath rlog(const QString& repository, const QString& module, 
-                 bool recursive);
+    QDBusObjectPath rlog(const QString &repository, const QString &module, bool recursive);
 
     /**
      * Shows a summary of what's been done locally, without changing the
@@ -304,8 +303,7 @@ public Q_SLOTS:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    QDBusObjectPath simulateUpdate(const QStringList& files, bool recursive,
-                           bool createDirs, bool pruneDirs);
+    QDBusObjectPath simulateUpdate(const QStringList &files, bool recursive, bool createDirs, bool pruneDirs);
 
     /**
      * Shows the status of the files in the working copy.
@@ -317,17 +315,17 @@ public Q_SLOTS:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    QDBusObjectPath status(const QStringList& files, bool recursive, bool tagInfo);
+    QDBusObjectPath status(const QStringList &files, bool recursive, bool tagInfo);
 
     /**
      * @param files
      */
-    QDBusObjectPath unedit(const QStringList& files);
+    QDBusObjectPath unedit(const QStringList &files);
 
     /**
      * @param files
      */
-    QDBusObjectPath unlock(const QStringList& files);
+    QDBusObjectPath unlock(const QStringList &files);
 
     /**
      * Merges changes from the repository into the files of the
@@ -343,13 +341,12 @@ public Q_SLOTS:
      * @return A DCOP reference to the cvs job or in case of failure a
      *         null reference.
      */
-    QDBusObjectPath update(const QStringList& files, bool recursive, bool createDirs,
-                   bool pruneDirs, const QString& extraOpt);
+    QDBusObjectPath update(const QStringList &files, bool recursive, bool createDirs, bool pruneDirs, const QString &extraOpt);
 
     /**
      * @param files
      */
-    QDBusObjectPath watchers(const QStringList& files);
+    QDBusObjectPath watchers(const QStringList &files);
 
     /**
      * Quits the service.
@@ -358,8 +355,7 @@ public Q_SLOTS:
 
 private:
     struct Private;
-    Private* d;
+    Private *d;
 };
-
 
 #endif

@@ -14,4 +14,4 @@
  * Cervisia application.
  */
 
-//krazy:skip
+// krazy:skip

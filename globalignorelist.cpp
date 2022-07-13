@@ -1,4 +1,4 @@
-/* 
+/*
  *  Copyright (C) 2004 Christian Loose <christian.loose@kdemail.net>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -19,62 +19,52 @@
 #include "globalignorelist.h"
 using namespace Cervisia;
 
-#include <qdir.h>
 #include <QDebug>
 #include <QTemporaryFile>
+#include <qdir.h>
 
 #include "cvsserviceinterface.h"
 #include "progressdialog.h"
 
-
 StringMatcher GlobalIgnoreList::m_stringMatcher;
-bool          GlobalIgnoreList::m_isInitialized = false;
-
+bool GlobalIgnoreList::m_isInitialized = false;
 
 GlobalIgnoreList::GlobalIgnoreList()
 {
-    if( !m_isInitialized )
+    if (!m_isInitialized)
         setup();
 }
 
-
-bool GlobalIgnoreList::matches(const QFileInfo* fi) const
+bool GlobalIgnoreList::matches(const QFileInfo *fi) const
 {
     return m_stringMatcher.match(fi->fileName());
 }
 
-
-void GlobalIgnoreList::retrieveServerIgnoreList(OrgKdeCervisia5CvsserviceCvsserviceInterface* cvsService,
-                                                const QString& repository)
+void GlobalIgnoreList::retrieveServerIgnoreList(OrgKdeCervisia5CvsserviceCvsserviceInterface *cvsService, const QString &repository)
 {
     QTemporaryFile tmpFile;
     tmpFile.open();
 
     // clear old ignore list
     m_stringMatcher.clear();
-    
+
     // now set it up again
     setup();
-    
-    QDBusReply<QDBusObjectPath> ref = cvsService->downloadCvsIgnoreFile(repository, 
-                                                    tmpFile.fileName());
-      
-    ProgressDialog dlg(0, "Edit", cvsService->service(),ref, "checkout", "CVS Edit");
-    if( !dlg.execute() )
+
+    QDBusReply<QDBusObjectPath> ref = cvsService->downloadCvsIgnoreFile(repository, tmpFile.fileName());
+
+    ProgressDialog dlg(0, "Edit", cvsService->service(), ref, "checkout", "CVS Edit");
+    if (!dlg.execute())
         return;
-    
+
     addEntriesFromFile(tmpFile.fileName());
 }
 
-
-void GlobalIgnoreList::addEntry(const QString& entry)
+void GlobalIgnoreList::addEntry(const QString &entry)
 {
-    if (entry != QLatin1String("!"))
-    {
+    if (entry != QLatin1String("!")) {
         m_stringMatcher.add(entry);
-    }
-    else
-    {
+    } else {
         m_stringMatcher.clear();
 
         // Bug #89215:
@@ -84,16 +74,16 @@ void GlobalIgnoreList::addEntry(const QString& entry)
     }
 }
 
-
 void GlobalIgnoreList::setup()
 {
-    static const char ignorestr[] = ". .. core RCSLOG tags TAGS RCS SCCS .make.state\
+    static const char ignorestr[] =
+        ". .. core RCSLOG tags TAGS RCS SCCS .make.state\
 .nse_depinfo #* .#* cvslog.* ,* CVS CVS.adm .del-* *.a *.olb *.o *.obj\
 *.so *.Z *~ *.old *.elc *.ln *.bak *.BAK *.orig *.rej *.exe _$* *$";
-    
+
     addEntriesFromString(QLatin1String(ignorestr));
     addEntriesFromString(QString::fromLocal8Bit(qgetenv("CVSIGNORE")));
-    addEntriesFromFile(QDir::homePath() + "/.cvsignore");  
-    
+    addEntriesFromFile(QDir::homePath() + "/.cvsignore");
+
     m_isInitialized = true;
 }
