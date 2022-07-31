@@ -131,12 +131,12 @@ void TagDialog::slotOk()
     QString const str(tag());
 
     if (str.isEmpty()) {
-        KMessageBox::sorry(this, i18n("You must define a tag name."), "Cervisia");
+        KMessageBox::error(this, i18n("You must define a tag name."), "Cervisia");
         return;
     }
 
     if (!Cervisia::IsValidTag(str)) {
-        KMessageBox::sorry(this,
+        KMessageBox::error(this,
                            i18n("Tag must start with a letter and may contain "
                                 "letters, digits and the characters '-' and '_'."),
                            "Cervisia");

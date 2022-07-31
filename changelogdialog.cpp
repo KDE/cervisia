@@ -83,7 +83,7 @@ void ChangeLogDialog::slotOk()
     // Write changelog
     QFile f(fname);
     if (!f.open(QIODevice::ReadWrite)) {
-        KMessageBox::sorry(this, i18n("The ChangeLog file could not be written."), "Cervisia");
+        KMessageBox::error(this, i18n("The ChangeLog file could not be written."), "Cervisia");
         return;
     }
 
@@ -104,7 +104,7 @@ bool ChangeLogDialog::readFile(const QString &filename)
     } else {
         QFile f(filename);
         if (!f.open(QIODevice::ReadWrite)) {
-            KMessageBox::sorry(this, i18n("The ChangeLog file could not be read."), "Cervisia");
+            KMessageBox::error(this, i18n("The ChangeLog file could not be read."), "Cervisia");
             return false;
         }
         QTextStream stream(&f);

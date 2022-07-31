@@ -115,7 +115,7 @@ CervisiaPart::CervisiaPart(QWidget *parentWidget, QObject *parent, const QVarian
     // start the cvs D-Bus service
     QString error;
     if (KToolInvocation::startServiceByDesktopName("org.kde.cvsservice5", QStringList(), &error, &m_cvsServiceInterfaceName)) {
-        KMessageBox::sorry(0, i18n("Starting cvsservice failed with message: ") + error, "Cervisia");
+        KMessageBox::error(0, i18n("Starting cvsservice failed with message: ") + error, "Cervisia");
     } else
         // create a reference to the service
         cvsService = new OrgKdeCervisia5CvsserviceCvsserviceInterface(m_cvsServiceInterfaceName, "/CvsService", QDBusConnection::sessionBus(), this);
@@ -182,7 +182,7 @@ bool CervisiaPart::openUrl(const QUrl &u)
 {
     // right now, we are unfortunately not network-aware
     if (!u.isLocalFile()) {
-        KMessageBox::sorry(widget(),
+        KMessageBox::error(widget(),
                            i18n("Remote CVS working folders are not "
                                 "supported."),
                            "Cervisia");
@@ -190,7 +190,7 @@ bool CervisiaPart::openUrl(const QUrl &u)
     }
 
     if (hasRunningJob) {
-        KMessageBox::sorry(widget(),
+        KMessageBox::error(widget(),
                            i18n("You cannot change to a different folder "
                                 "while there is a running cvs job."),
                            "Cervisia");
@@ -1308,7 +1308,7 @@ void CervisiaPart::slotMakePatch()
 
     QFile f(fileName);
     if (!f.open(QIODevice::WriteOnly)) {
-        KMessageBox::sorry(widget(), i18n("Could not open file for writing."), "Cervisia");
+        KMessageBox::error(widget(), i18n("Could not open file for writing."), "Cervisia");
         return;
     }
 
@@ -1458,11 +1458,11 @@ void CervisiaPart::slotLastChange()
     int pos, lastnumber = 0;
     bool ok;
     if ((pos = revA.lastIndexOf('.')) == -1 || (lastnumber = revA.right(revA.length() - pos - 1).toUInt(&ok), !ok)) {
-        KMessageBox::sorry(widget(), i18n("The revision looks invalid."), "Cervisia");
+        KMessageBox::error(widget(), i18n("The revision looks invalid."), "Cervisia");
         return;
     }
     if (lastnumber == 0) {
-        KMessageBox::sorry(widget(), i18n("This is the first revision of the branch."), "Cervisia");
+        KMessageBox::error(widget(), i18n("This is the first revision of the branch."), "Cervisia");
         return;
     }
     revB = revA.left(pos + 1);
@@ -1629,7 +1629,7 @@ bool CervisiaPart::openSandbox(const QUrl &url)
     QDBusReply<bool> reply = cvsRepository.setWorkingCopy(url.path());
 
     if (!reply.isValid() || !reply.value()) {
-        KMessageBox::sorry(widget(),
+        KMessageBox::error(widget(),
                            i18n("This is not a CVS folder.\n"
                                 "If you did not intend to use Cervisia, you can "
                                 "switch view modes within Konqueror."),

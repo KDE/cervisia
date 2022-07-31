@@ -482,7 +482,7 @@ void LogDialog::slotPatch()
 
     QFile f(fileName);
     if (!f.open(QIODevice::WriteOnly)) {
-        KMessageBox::sorry(this, i18n("Could not open file for writing."), "Cervisia");
+        KMessageBox::error(this, i18n("Could not open file for writing."), "Cervisia");
         return;
     }
 

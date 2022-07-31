@@ -879,7 +879,7 @@ QDBusObjectPath CvsService::Private::setupNonConcurrentJob(Repository *repo)
 bool CvsService::Private::hasWorkingCopy()
 {
     if (repository->workingCopy().isEmpty()) {
-        KMessageBox::sorry(0,
+        KMessageBox::error(0,
                            i18n("You have to set a local working copy "
                                 "directory before you can use this function!"));
         return false;
@@ -893,7 +893,7 @@ bool CvsService::Private::hasRunningJob()
     bool result = singleCvsJob->isRunning();
 
     if (result)
-        KMessageBox::sorry(0, i18n("There is already a job running"));
+        KMessageBox::error(0, i18n("There is already a job running"));
 
     return result;
 }

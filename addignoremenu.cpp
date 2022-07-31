@@ -82,7 +82,7 @@ void AddIgnoreMenu::appendIgnoreFile(const QString &path, const QString &fileNam
 {
     QFile ignoreFile(path + "/.cvsignore");
     if (!ignoreFile.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text)) {
-        KMessageBox::sorry(0, i18n("Cannot open file '%1' for writing.", ignoreFile.fileName()), "Cervisia");
+        KMessageBox::error(0, i18n("Cannot open file '%1' for writing.", ignoreFile.fileName()), "Cervisia");
         return;
     }
 
