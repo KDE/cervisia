@@ -355,7 +355,9 @@ void LogTreeView::paintRevisionCell(QPainter *p, int row, int col, const Cervisi
     p->drawLine(midx, rect.y() + infoSize.height(), midx, cellSize.height()); // to the bottom
 
     // The box itself
-    if (selected) {
+    if (selected == NoRevision) {
+        p->drawRoundedRect(rect, 10, 10);
+    } else {
         if (selected == RevisionA) {
             p->fillRect(rect, KColorScheme(QPalette::Active, KColorScheme::Selection).background());
             p->setPen(KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color());
@@ -365,8 +367,6 @@ void LogTreeView::paintRevisionCell(QPainter *p, int row, int col, const Cervisi
             p->setPen(KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color().lighter(130));
             p->drawText(rect, Qt::AlignLeft | Qt::AlignTop, "B");
         }
-    } else {
-        p->drawRoundedRect(rect, 10, 10);
     }
 
     rect.setY(rect.y() + INSPACE);
