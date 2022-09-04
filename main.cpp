@@ -173,8 +173,6 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
     parser.addOption(QCommandLineOption(QLatin1String("resolve"), i18n("Show resolve dialog for the given file."), QLatin1String("file")));
     parser.addOption(QCommandLineOption(QLatin1String("log"), i18n("Show log dialog for the given file."), QLatin1String("file")));
     parser.addOption(QCommandLineOption(QLatin1String("annotate"), i18n("Show annotation dialog for the given file."), QLatin1String("file")));
-    parser.addVersionOption();
-    parser.addHelpOption();
 
     parser.process(app);
     about.processCommandLine(&parser);
