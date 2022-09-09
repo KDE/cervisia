@@ -99,6 +99,7 @@
     <p xml:lang="zh-CN">Cervisia 是一个简单易用的版本控制系统前端软件。软件的设计目标是在一个统一的界面之下支持 CVS 和其他的版本控制系统，提供冲突解决、差异和历史查看器、显示正在复制文件的状态，并支持大多数版本控制的所需功能。</p>
     <p xml:lang="zh-TW">Cervisia 是一套版本控制系統的前端介面。它可以用同一套介面支援 CVS 與其它版本控制系統，功能包括衝突解決，變更與歷史檢視，工作複本的狀態檢視，並支援許多其他的版本控制功能。</p>
   </description>
+  <content_rating type="oars-1.1"/>
   <url type="homepage">https://apps.kde.org/cervisia/</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=cervisia</url>
   <url type="help">https://docs.kde.org/?application=cervisia</url>
