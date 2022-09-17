@@ -42,8 +42,8 @@ add_subdirectory( pics )
 ki18n_install(po)
 kdoctools_install(po)
 
-set(_KDECONFDIR_ ${CONFIG_INSTALL_DIR})
-set(_KDEHTMLDIR_ ${HTML_INSTALL_DIR})
+set(_KDECONFDIR_ ${KDE_INSTALL_CONFDIR})
+set(_KDEHTMLDIR_ ${KDE_INSTALL_DOCBUNDLEDIR})
 
 ########### next target ###############
 
@@ -107,9 +107,9 @@ kf5_add_kdeinit_executable(cervisia ${cervisia_KDEINIT_SRCS})
 
 target_link_libraries(kdeinit_cervisia KF5::I18n KF5::TextWidgets KF5::Parts KF5::ItemViews)
 
-install(TARGETS kdeinit_cervisia ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS kdeinit_cervisia ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install(TARGETS cervisia  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS cervisia  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### next target ###############
 
@@ -195,8 +195,8 @@ install(PROGRAMS org.kde.cervisia.desktop  DESTINATION  ${KDE_INSTALL_APPDIR} )
 install(FILES org.kde.cervisia.appdata.xml DESTINATION  ${KDE_INSTALL_METAINFODIR} )
 install(FILES org.kde.cervisiapart5.desktop DESTINATION ${KDE_INSTALL_KSERVICESDIR} )
 install(FILES cervisiapart.kcfg  DESTINATION  ${KDE_INSTALL_KCFGDIR} )
-install(FILES cervisiaui.rc  DESTINATION  ${KXMLGUI_INSTALL_DIR}/cervisiapart )
-install(FILES cervisiashellui.rc DESTINATION  ${KXMLGUI_INSTALL_DIR}/cervisia )
+install(FILES cervisiaui.rc  DESTINATION  ${KDE_INSTALL_KXMLGUIDIR}/cervisiapart )
+install(FILES cervisiashellui.rc DESTINATION  ${KDE_INSTALL_KXMLGUIDIR}/cervisia )
 install(FILES cervisia.notifyrc  DESTINATION  ${KDE_INSTALL_KNOTIFYRCDIR} )
 
 ecm_install_icons(ICONS

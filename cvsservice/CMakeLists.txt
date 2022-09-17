@@ -32,10 +32,10 @@ set_target_properties(cvsservice_bin PROPERTIES OUTPUT_NAME cvsservice5)
 target_link_libraries(kdeinit_cvsservice_bin Qt::Widgets Qt::DBus KF5::KIOCore KF5::I18n KF5::WidgetsAddons KF5::Su KF5::DBusAddons KF5::ConfigCore)
 set_target_properties(kdeinit_cvsservice_bin PROPERTIES OUTPUT_NAME kdeinit5_cvsservice)
 
-install(TARGETS kdeinit_cvsservice_bin ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS kdeinit_cvsservice_bin ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 target_link_libraries( cvsservice_bin kdeinit_cvsservice_bin )
-install(TARGETS cvsservice_bin  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS cvsservice_bin  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### next target ###############
 
@@ -43,9 +43,9 @@ kf5_add_kdeinit_executable(cvsaskpass cvsaskpass.cpp)
 
 target_link_libraries(kdeinit_cvsaskpass Qt::Widgets KF5::WidgetsAddons KF5::CoreAddons KF5::I18n)
 
-install(TARGETS kdeinit_cvsaskpass ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS kdeinit_cvsaskpass ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install(TARGETS cvsaskpass  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS cvsaskpass  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 
 ########### install files ###############
