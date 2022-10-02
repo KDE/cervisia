@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# Tamas Szanto <tszanto@interware.hu>, 2003.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: KDE 4.0\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-14 00:48+0000\n"
+"PO-Revision-Date: 2008-03-04 11:11+0100\n"
+"Last-Translator: Tamas Szanto <tszanto@interware.hu>\n"
+"Language-Team: Hungarian <kde-lista@sophia.jpte.hu>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Szántó Tamás"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "tszanto@interware.hu"
+
+#: cvsaskpass.cpp:38
+#, kde-format
+msgid "cvsaskpass"
+msgstr "cvsaskpass"
+
+#: cvsaskpass.cpp:40
+#, kde-format
+msgid "ssh-askpass for the CVS D-Bus Service"
+msgstr "ssh-askpass a CVS D-Bus szolgáltatáshoz"
+
+#: cvsaskpass.cpp:42
+#, kde-format
+msgid "Copyright (c) 2003 Christian Loose"
+msgstr "Copyright (c) Christian Loose, 2003."
+
+#: cvsaskpass.cpp:49
+#, kde-format
+msgid "prompt"
+msgstr "bekérés"
+
+#: cvsaskpass.cpp:61
+#, kde-format
+msgid "Please type in your password below."
+msgstr "Adja meg a jelszót az alábbi mezőben."
+
+#: cvsaskpass.cpp:65
+#, kde-format
+msgid "Repository:"
+msgstr "Adatraktár:"
+
+#: cvsloginjob.cpp:108
+#, fuzzy, kde-format
+#| msgid "Please type in your password for the repository below."
+msgid "Enter password for repository %1."
+msgstr "Kérem adja meg az alábbi adatraktárhoz tartozó jelszavát."
+
+#: cvsservice.cpp:883
+#, kde-format
+msgid ""
+"You have to set a local working copy directory before you can use this "
+"function!"
+msgstr "A függvény használata előtt be kell állítani a helyi munkakönytárat."
+
+#: cvsservice.cpp:896
+#, kde-format
+msgid "There is already a job running"
+msgstr "Már fut egy feladat"
+
+#: main.cpp:36
+#, kde-format
+msgid "CVS D-Bus service"
+msgstr "CVS D-Bus szolgáltatás"
+
+#: main.cpp:38
+#, kde-format
+msgid "D-Bus service for CVS"
+msgstr "D-Bus szolgáltatás a CVS-hez"
+
+#: main.cpp:40
+#, kde-format
+msgid "Copyright (c) 2002-2003 Christian Loose"
+msgstr "Copyright (c) Christian Loose, 2002-2003."
+
+#: main.cpp:44
+#, kde-format
+msgid "Christian Loose"
+msgstr "Christian Loose"
+
+#: main.cpp:44
+#, kde-format
+msgid "Developer"
+msgstr "Fejlesztő"

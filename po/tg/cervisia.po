@@ -1,0 +1,2236 @@
+# translation of cervisia.po to
+# translation of cervisia.po to Tajik
+# Copyright (C) 2004, 2005 Free Software Foundation, Inc.
+# 2004, infoDev, a World Bank organization
+# 2004, Khujand Computer Technologies, Inc.
+# 2004, Youth Opportunities NGO
+# Youth Opportunities NGO, 2005.
+# Roger V Kovacs, <rkovacs@khujand.org>, 2004.
+# Victor Ibragimov <youth_opportunities@tajik.net>, 2004.
+# VATANSHOEV AKBAR <vatanshoevAkbar@hotmail.com>, 2004.
+# Marina Kolucheva <youth_opportunities@tajik.net>, 2004.
+# Akbar Vatanshoev  <vatanshoevAkbar@hotmail.com>, 2004.
+# Akmal Vatanshoev  <akmal_49@hotmail.com>, 2004.
+# Farkhod Akhmedov <farkhod9@hotmail.com>, 2004.
+# Victor Ibragimov <youth_opportunities@tajikngo.org>, 2005, 2019.
+msgid ""
+msgstr ""
+"Project-Id-Version: cervisia\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-14 00:48+0000\n"
+"PO-Revision-Date: 2019-09-29 12:44+0500\n"
+"Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
+"Language-Team: English <kde-i18n-doc@kde.org>\n"
+"Language: tg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 19.04.3\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+"Роҷер Ковакс,Виктор Ибрагимов,Марина Колючева,Сайфулло Каримов,Акмал Саломов,"
+"Акбар Ватаншоев,Акмал Ватаншоев,Шухрат Лоиков"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+"rkovacs@khujand.org,youth_opportunities@tajik.net,tajik_linux@hotmail."
+"com,,,,,"
+
+#: addignoremenu.cpp:34
+#, kde-format
+msgid "Add to Ignore List"
+msgstr ""
+
+#: addignoremenu.cpp:65
+#, fuzzy, kde-format
+#| msgid "&Ignore files:"
+msgid "Ignore File"
+msgid_plural "Ignore %1 Files"
+msgstr[0] "&Рад кардани файл:"
+msgstr[1] "&Рад кардани файл:"
+
+#: addignoremenu.cpp:85
+#, fuzzy, kde-format
+#| msgid "Could not open file for writing."
+msgid "Cannot open file '%1' for writing."
+msgstr "Наметавонам файлро барои сабт боз кунам."
+
+#: addremovedialog.cpp:40
+#, kde-format
+msgid "CVS Add"
+msgstr "Афзоиш дар CVS"
+
+#: addremovedialog.cpp:40
+#, kde-format
+msgid "CVS Add Binary"
+msgstr "Афзудани файли бинарӣ дар CVS"
+
+#: addremovedialog.cpp:40
+#, kde-format
+msgid "CVS Remove"
+msgstr "Ҳузф кардан аз CVS"
+
+#: addremovedialog.cpp:59
+#, kde-format
+msgid "Add the following files to the repository:"
+msgstr "Афзудани файлҳои интихобшуда дар репозиторий:"
+
+#: addremovedialog.cpp:60
+#, kde-format
+msgid "Add the following binary files to the repository:"
+msgstr "Афзудани файлҳои бинарии интихобшуда дар репозиторий:"
+
+#: addremovedialog.cpp:61
+#, kde-format
+msgid "Remove the following files from the repository:"
+msgstr "Ҳузфи файлҳои интихобшуда дар репозиторий:"
+
+#: addremovedialog.cpp:73
+#, kde-format
+msgid "This will also remove the files from your local working copy."
+msgstr "Ин ҳам файлҳоро аз нусхаҳои кори локалӣ низ дур мекунад."
+
+#: addrepositorydialog.cpp:40
+#, kde-format
+msgid "Add Repository"
+msgstr "Афзоиши репозиторий"
+
+#: addrepositorydialog.cpp:53 checkoutdialog.cpp:86
+#, kde-format
+msgid "&Repository:"
+msgstr "&Репозиторий:"
+
+#: addrepositorydialog.cpp:67
+#, kde-format
+msgid "Use remote &shell (only for :ext: repositories):"
+msgstr "&Истифодаи пардаи дастурӣ (танҳо барои репозиторияҳо :ext:):"
+
+#: addrepositorydialog.cpp:76
+#, kde-format
+msgid "Invoke this program on the server side:"
+msgstr "Оғоз намудани ин барнома ба тарафи сервер:"
+
+#: addrepositorydialog.cpp:86
+#, kde-format
+msgid "Use different &compression level:"
+msgstr "Дараҷаи &тазъиқ:"
+
+#: addrepositorydialog.cpp:94
+#, kde-format
+msgid "Download cvsignore file from server"
+msgstr "Пурборкунии файли cvsignore аз рӯи сервер"
+
+#: addrepositorydialog.cpp:174
+#, kde-format
+msgid "Repository Settings"
+msgstr "Танзимоти репозитория"
+
+#: annotatecontroller.cpp:75
+#, kde-format
+msgid "CVS Annotate: %1"
+msgstr "Шарҳи мухтасар дар CVS: %1"
+
+#: annotatecontroller.cpp:85
+#, kde-format
+msgid "CVS Annotate"
+msgstr "Шарҳи мухтасар дар CVS"
+
+#: annotatedialog.cpp:44
+#, kde-format
+msgid "Go to Line..."
+msgstr ""
+
+#: annotatedialog.cpp:49
+#, kde-format
+msgid "Find Prev"
+msgstr ""
+
+#: annotatedialog.cpp:54
+#, kde-format
+msgid "Find Next"
+msgstr ""
+
+#: annotatedialog.cpp:64
+#, fuzzy, kde-format
+#| msgid "S&earch:"
+msgid "Search"
+msgstr "К&офтани:"
+
+#: annotatedialog.cpp:115
+#, kde-format
+msgid "Go to Line"
+msgstr ""
+
+#: annotatedialog.cpp:115
+#, kde-format
+msgid "Go to line number:"
+msgstr ""
+
+#: cervisiapart.cpp:111 main.cpp:138
+#, kde-format
+msgid "Cervisia"
+msgstr "Cervisia"
+
+#: cervisiapart.cpp:118
+#, kde-format
+msgid "Starting cvsservice failed with message: "
+msgstr "Оғозёбии cvхизмат бо хабар бекор карда шуд: "
+
+#: cervisiapart.cpp:148
+#, fuzzy, kde-format
+msgid ""
+"This KPart is non-functional, because the cvs D-Bus service could not be "
+"started."
+msgstr ""
+"Ин KPart амал намекунад, барои оғоз намудани хизматгузорӣ DCOP  cvs "
+"имконпазир нест."
+
+#: cervisiapart.cpp:186
+#, kde-format
+msgid "Remote CVS working folders are not supported."
+msgstr "Каталогҳои ғайри маҳдуди CVS дастгирӣ карда намешаванд."
+
+#: cervisiapart.cpp:194
+#, kde-format
+msgid ""
+"You cannot change to a different folder while there is a running cvs job."
+msgstr ""
+"Шумо ба дигар каталог гузашта наметавонед то ҳолате, ки дастурӣ СVS иҷро "
+"шудаистодааст."
+
+#: cervisiapart.cpp:214
+#, kde-format
+msgid ""
+"F - All files are hidden, the tree shows only folders\n"
+"N - All up-to-date files are hidden\n"
+"R - All removed files are hidden"
+msgstr ""
+"F - Тамоми файлҳо пинҳон ҳастанд, танҳо каталогҳо тасвир ёфтаанд\n"
+"N - Тамоми файлҳои ба рӯз расонидашуда пинҳонанд\n"
+"R - Тамоми файлҳои ҳузф кардашуда пинҳонанд"
+
+#: cervisiapart.cpp:227
+#, fuzzy, kde-format
+#| msgid "O&pen Sandbox..."
+msgid "Open Sandbox..."
+msgstr "&Боз кардани регдон..."
+
+#: cervisiapart.cpp:231
+#, kde-format
+msgid "Opens a CVS working folder in the main window"
+msgstr "Боз кардани каталоги кории CVS дар тирезаи асосӣ"
+
+#: cervisiapart.cpp:235
+#, kde-format
+msgid "Recent Sandboxes"
+msgstr "Регдонҳои ҷорӣ"
+
+#: cervisiapart.cpp:239
+#, kde-format
+msgid "&Insert ChangeLog Entry..."
+msgstr "&Гузоштани сабт дар ChangeLog..."
+
+#: cervisiapart.cpp:242
+#, kde-format
+msgid "Inserts a new intro into the file ChangeLog in the toplevel folder"
+msgstr "Иловаи асбти нав дар файли ChangeLog дар каталоги ибтидои"
+
+#: cervisiapart.cpp:246
+#, fuzzy, kde-format
+msgid "&Update"
+msgstr "Нав нарда шудааст"
+
+#: cervisiapart.cpp:250
+#, kde-format
+msgid "Updates (cvs update) the selected files and folders"
+msgstr "Аз навсозии (cvs update) файлҳо ва каталогҳои интихобшуда"
+
+#: cervisiapart.cpp:254
+#, kde-format
+msgid "&Status"
+msgstr "&Ҳолат"
+
+#: cervisiapart.cpp:258
+#, kde-format
+msgid "Updates the status (cvs -n update) of the selected files and folders"
+msgstr "Аз навсозии ҳолати (cvs -n update) файлҳо ва каталогҳои интихобшуда"
+
+#: cervisiapart.cpp:262 resolvedialog.cpp:176
+#, fuzzy, kde-format
+msgid "&Edit"
+msgstr "&таъир додан"
+
+#: cervisiapart.cpp:265
+#, kde-format
+msgid "Opens the marked file for editing"
+msgstr "Боз намудани файҳои интихобшуда барои муҳаррирӣят"
+
+#: cervisiapart.cpp:269
+#, kde-format
+msgid "Reso&lve..."
+msgstr "&Ҳал намудани низоъ..."
+
+#: cervisiapart.cpp:272
+#, kde-format
+msgid "Opens the resolve dialog with the selected file"
+msgstr "Боз намудани мусоҳибаи ҳалкунии низоъ барои файли интихобшуда"
+
+#: cervisiapart.cpp:276
+#, kde-format
+msgid "&Commit..."
+msgstr "&Cупурдан..."
+
+#: cervisiapart.cpp:280
+#, kde-format
+msgid "Commits the selected files"
+msgstr "Супурдани файлҳои интихобшуда"
+
+#: cervisiapart.cpp:284
+#, kde-format
+msgid "&Add to Repository..."
+msgstr "&Aфзоиш дар репозиторий..."
+
+#: cervisiapart.cpp:287
+#, fuzzy, kde-format
+#| msgid "CVS Add"
+msgid "Add"
+msgstr "Афзоиш дар CVS"
+
+#: cervisiapart.cpp:289
+#, kde-format
+msgid "Adds (cvs add) the selected files to the repository"
+msgstr "Aфзудани (cvs add) файлҳои интихобшуда дар репозтория"
+
+#: cervisiapart.cpp:293
+#, kde-format
+msgid "Add &Binary..."
+msgstr "Aфзудан ҳамчун &бинарӣ..."
+
+#: cervisiapart.cpp:296
+#, kde-format
+msgid "Adds (cvs -kb add) the selected files as binaries to the repository"
+msgstr ""
+"Aфзудани (cvs -kb add) файлҳои интихобшуда ҳамчун бинарӣ дар репозтория"
+
+#: cervisiapart.cpp:300
+#, kde-format
+msgid "&Remove From Repository..."
+msgstr "&Ҳузф намудан аз репозитория..."
+
+#: cervisiapart.cpp:303 repositorydialog.cpp:201
+#, fuzzy, kde-format
+#| msgid "Removed"
+msgid "Remove"
+msgstr "Хузф карда шуд"
+
+#: cervisiapart.cpp:305
+#, kde-format
+msgid "Removes (cvs remove) the selected files from the repository"
+msgstr "Ҳузф намудани (cvs remove) файлҳои аз репозитория интихобшуда"
+
+#: cervisiapart.cpp:309
+#, kde-format
+msgid "Rever&t"
+msgstr "&Баргардонидан"
+
+#: cervisiapart.cpp:312
+#, kde-format
+msgid "Reverts (cvs update -C) the selected files (only cvs 1.11)"
+msgstr ""
+"Баргардонидани (cvs update -C) файлҳои интихобшуда (танҳо дар cvs 1.11)"
+
+#: cervisiapart.cpp:316
+#, kde-format
+msgid "&Properties"
+msgstr "&Хусусиятҳо"
+
+#: cervisiapart.cpp:323
+#, kde-format
+msgid "Stop"
+msgstr ""
+
+#: cervisiapart.cpp:328
+#, kde-format
+msgid "Stops any running sub-processes"
+msgstr "Боз доштани тамоми зерамалҳои иҷрошудаистода"
+
+#: cervisiapart.cpp:332
+#, kde-format
+msgid "Browse &Log..."
+msgstr "Азназаргузаронии &маҷала..."
+
+#: cervisiapart.cpp:336
+#, kde-format
+msgid "Shows the revision tree of the selected file"
+msgstr "Намоиши дарахти тафтиши файли интихобшуда"
+
+#: cervisiapart.cpp:341
+#, kde-format
+msgid "Browse Multi-File Log..."
+msgstr "Азназаргузаронии маҷалаи якчанд файлҳо..."
+
+#: cervisiapart.cpp:345
+#, kde-format
+msgid "&Annotate..."
+msgstr "&Шарҳи мухтасар..."
+
+#: cervisiapart.cpp:349
+#, kde-format
+msgid "Shows a blame-annotated view of the selected file"
+msgstr "Намоиши шарҳи мухтасари файли интихобшуда"
+
+#: cervisiapart.cpp:353
+#, kde-format
+msgid "&Difference to Repository (BASE)..."
+msgstr "&Фарқият дар репозиторияи (BASE)..."
+
+#: cervisiapart.cpp:357
+#, kde-format
+msgid ""
+"Shows the differences of the selected file to the checked out version (tag "
+"BASE)"
+msgstr "Намоиши фарқияти файли интихобшуда ва равияти қалбии он (нишонаи BASE)"
+
+#: cervisiapart.cpp:361
+#, kde-format
+msgid "Difference to Repository (HEAD)..."
+msgstr "Фарқият дар репозиторияи (HEAD)..."
+
+#: cervisiapart.cpp:365
+#, kde-format
+msgid ""
+"Shows the differences of the selected file to the newest version in the "
+"repository (tag HEAD)"
+msgstr ""
+"Намоиши фарқияти файли интихобшуда ва равияти баъдинаи он (нишонаи HEAD)"
+
+#: cervisiapart.cpp:369
+#, kde-format
+msgid "Last &Change..."
+msgstr "Таъғироти &охирин..."
+
+#: cervisiapart.cpp:372
+#, kde-format
+msgid ""
+"Shows the differences between the last two revisions of the selected file"
+msgstr "Намоиши фарқияти байни ду тафтиши охирини файлҳои интихобшуда"
+
+#: cervisiapart.cpp:376
+#, kde-format
+msgid "&History..."
+msgstr "&Таърих..."
+
+#: cervisiapart.cpp:379
+#, kde-format
+msgid "Shows the CVS history as reported by the server"
+msgstr "Намоиши таърихи CVS, бо сервер пешниҳодшуда"
+
+#: cervisiapart.cpp:383
+#, kde-format
+msgid "&Unfold File Tree"
+msgstr "&Кушодани дарахти файлҳо"
+
+#: cervisiapart.cpp:387
+#, kde-format
+msgid "Opens all branches of the file tree"
+msgstr "Кушодани тамоми шохаҳо дар рӯйхати файлҳо"
+
+#: cervisiapart.cpp:391
+#, kde-format
+msgid "&Fold File Tree"
+msgstr "&Печондани дарахти файлҳо"
+
+#: cervisiapart.cpp:394
+#, kde-format
+msgid "Closes all branches of the file tree"
+msgstr "Пӯшидани тамоми шохаҳо дар рӯйхати файлҳо"
+
+#: cervisiapart.cpp:401
+#, kde-format
+msgid "&Tag/Branch..."
+msgstr "&Нишона/шоха..."
+
+#: cervisiapart.cpp:404
+#, kde-format
+msgid "Creates a tag or branch for the selected files"
+msgstr "Эҷоди нишона ё инки шоха барои файлҳои  интихобшуда"
+
+#: cervisiapart.cpp:408
+#, kde-format
+msgid "&Delete Tag..."
+msgstr "&Ҳузф намудани нишона..."
+
+#: cervisiapart.cpp:411
+#, kde-format
+msgid "Deletes a tag from the selected files"
+msgstr "Ҳузф намудани нишона аз файлҳои интихобшуда"
+
+#: cervisiapart.cpp:415
+#, kde-format
+msgid "&Update to Tag/Date..."
+msgstr "&Бозсозӣ то нишони/санаи..."
+
+#: cervisiapart.cpp:418
+#, kde-format
+msgid "Updates the selected files to a given tag, branch or date"
+msgstr "Аз нав созии файлҳои интихобшуда то нишонаи ишорашуда шоха ё сана"
+
+#: cervisiapart.cpp:422
+#, kde-format
+msgid "Update to &HEAD"
+msgstr "Бозсозӣ то &HEAD"
+
+#: cervisiapart.cpp:425
+#, kde-format
+msgid "Updates the selected files to the HEAD revision"
+msgstr "Бозсозии файлҳои интихобшуда то тафтиши HEAD"
+
+#: cervisiapart.cpp:429
+#, kde-format
+msgid "&Merge..."
+msgstr "&Mуттаҳид кардан..."
+
+#: cervisiapart.cpp:432
+#, kde-format
+msgid "Merges a branch or a set of modifications into the selected files"
+msgstr "Mуттаҳид кардани шоха ё маҷмӯи таъғиротҳоифайлҳои интихобшуда"
+
+#: cervisiapart.cpp:436
+#, kde-format
+msgid "&Add Watch..."
+msgstr "&Aфзудани мушоҳидот..."
+
+#: cervisiapart.cpp:439
+#, kde-format
+msgid "Adds a watch for the selected files"
+msgstr "Танзими мушоҳидот барои файлҳои интихобшуда"
+
+#: cervisiapart.cpp:443
+#, kde-format
+msgid "&Remove Watch..."
+msgstr "&Ҳузфи мушоҳидот..."
+
+#: cervisiapart.cpp:446
+#, kde-format
+msgid "Removes a watch from the selected files"
+msgstr "Ҳузфи мушоҳидот аз файлҳои интихобшуда"
+
+#: cervisiapart.cpp:450
+#, kde-format
+msgid "Show &Watchers"
+msgstr "Намоиши &мушоҳидот"
+
+#: cervisiapart.cpp:453
+#, kde-format
+msgid "Shows the watchers of the selected files"
+msgstr "Намоиши мушоҳидон барои файлҳои интихобшуда"
+
+#: cervisiapart.cpp:457
+#, kde-format
+msgid "Ed&it Files"
+msgstr "&Муҳарририяти файлҳо"
+
+#: cervisiapart.cpp:460
+#, kde-format
+msgid "Edits (cvs edit) the selected files"
+msgstr "Муҳарририяти (cvs edit) файлҳои интихобшуда"
+
+#: cervisiapart.cpp:464
+#, kde-format
+msgid "U&nedit Files"
+msgstr "Хотима додани &муҳарририяти файлҳо"
+
+#: cervisiapart.cpp:467
+#, kde-format
+msgid "Unedits (cvs unedit) the selected files"
+msgstr "Хотима додани муҳарририяти (cvs unedit) файлҳои интихобшуда"
+
+#: cervisiapart.cpp:471
+#, kde-format
+msgid "Show &Editors"
+msgstr "Намоиши &муҳаррир"
+
+#: cervisiapart.cpp:474
+#, kde-format
+msgid "Shows the editors of the selected files"
+msgstr "Намоиши муҳаррирҳои файлҳои интихобшуда"
+
+#: cervisiapart.cpp:478
+#, kde-format
+msgid "&Lock Files"
+msgstr "&Бастани файлҳо"
+
+#: cervisiapart.cpp:481
+#, kde-format
+msgid "Locks the selected files, so that others cannot modify them"
+msgstr "Бастани файлҳои интихобшуда, дигарон онҳро таъғир дода наметавонанд"
+
+#: cervisiapart.cpp:485
+#, kde-format
+msgid "Unl&ock Files"
+msgstr "&Боз кардани файлҳо"
+
+#: cervisiapart.cpp:488
+#, kde-format
+msgid "Unlocks the selected files"
+msgstr "Боз кардани файлҳои интихобшуда"
+
+#: cervisiapart.cpp:492
+#, kde-format
+msgid "Create &Patch Against Repository..."
+msgstr "&Эҷод намудани дарбеҳ барои репозитория..."
+
+#: cervisiapart.cpp:495
+#, kde-format
+msgid "Creates a patch from the modifications in your sandbox"
+msgstr "Эҷод намудани дарбеҳ аз таъғироти регдони шумо"
+
+#: cervisiapart.cpp:502
+#, kde-format
+msgid "&Create..."
+msgstr "&Эҷод намудан..."
+
+#: cervisiapart.cpp:506
+#, kde-format
+msgid "&Checkout..."
+msgstr "&Озмоиш/пурборкунӣ..."
+
+#: cervisiapart.cpp:509
+#, kde-format
+msgid "Allows you to checkout a module from a repository"
+msgstr "Озмоидан ва пурборкунии модулро аз репозитория рухсат медиҳад"
+
+#: cervisiapart.cpp:513
+#, kde-format
+msgid "&Import..."
+msgstr "&Воридот..."
+
+#: cervisiapart.cpp:516
+#, kde-format
+msgid "Allows you to import a module into a repository"
+msgstr "Иҷозати содироти модул дар репозитория"
+
+#: cervisiapart.cpp:520
+#, kde-format
+msgid "&Repositories..."
+msgstr "&Репозиторияҳо..."
+
+#: cervisiapart.cpp:523
+#, kde-format
+msgid "Configures a list of repositories you regularly use"
+msgstr "Танзимоти рӯйхати репозиторияҳое, ки шумо бештар истифода мебаред"
+
+#: cervisiapart.cpp:530
+#, kde-format
+msgid "Hide All &Files"
+msgstr "Пӯшонидани &тамоми файлҳо"
+
+#: cervisiapart.cpp:533
+#, kde-format
+msgid "Determines whether only folders are shown"
+msgstr "Фақат намоиши каталогҳоро рухсат медиҳад"
+
+#: cervisiapart.cpp:537
+#, kde-format
+msgid "Hide Unmodified Files"
+msgstr "Пӯшонидани файлҳои ғайри таъғирёфта"
+
+#: cervisiapart.cpp:541
+#, kde-format
+msgid "Determines whether files with status up-to-date or unknown are hidden"
+msgstr ""
+"Пӯшонидани файлҳои, ки бозсозии (\"ОК\") ё файлҳои номаълумро талаб "
+"намекунанд"
+
+#: cervisiapart.cpp:546
+#, kde-format
+msgid "Hide Removed Files"
+msgstr "Пӯшонидани файлҳои ҳузфшуда"
+
+#: cervisiapart.cpp:549
+#, kde-format
+msgid "Determines whether removed files are hidden"
+msgstr "Пӯшонидани файлҳои аз CVS ҳузфшударо рухсат медиҳад"
+
+#: cervisiapart.cpp:553
+#, kde-format
+msgid "Hide Non-CVS Files"
+msgstr "Пӯшонидани файлҳои аз CVS набуда"
+
+#: cervisiapart.cpp:556
+#, kde-format
+msgid "Determines whether files not in CVS are hidden"
+msgstr "Пӯшонидани файлҳои ғайри CVS-ро рухсат медиҳад"
+
+#: cervisiapart.cpp:560
+#, kde-format
+msgid "Hide Empty Folders"
+msgstr "Пӯшонидани каталогҳои холӣ"
+
+#: cervisiapart.cpp:563
+#, kde-format
+msgid "Determines whether folders without visible entries are hidden"
+msgstr "Пӯшонидани каталогҳое, ки дорои ҷузъҳои айён нестанд рухсат медиҳанд"
+
+#: cervisiapart.cpp:567
+#, kde-format
+msgid "Create &Folders on Update"
+msgstr "Эҷоди каталогҳо мавриди &бозсозӣ"
+
+#: cervisiapart.cpp:570
+#, kde-format
+msgid "Determines whether updates create folders"
+msgstr "Мавриди бозсозӣ эҷоди каталогҳоро рухсат медиҳад "
+
+#: cervisiapart.cpp:574
+#, kde-format
+msgid "&Prune Empty Folders on Update"
+msgstr "&Ҳузфи каталогҳои холӣ ҳангоми бозсозӣ"
+
+#: cervisiapart.cpp:577
+#, kde-format
+msgid "Determines whether updates remove empty folders"
+msgstr "Ҳангоми бозсозӣ ҳузфи каталогҳои холиро рухсат медиҳад"
+
+#: cervisiapart.cpp:581
+#, kde-format
+msgid "&Update Recursively"
+msgstr "&Бозсозии рекурсивӣ"
+
+#: cervisiapart.cpp:584
+#, kde-format
+msgid "Determines whether updates are recursive"
+msgstr "Иҷоза медиҳад ба тарзи рекурсивӣ бозсозӣ кунед"
+
+#: cervisiapart.cpp:588
+#, kde-format
+msgid "C&ommit && Remove Recursively"
+msgstr "&Ба тарзи рекурсивӣ додан ва ҳузф намудан"
+
+#: cervisiapart.cpp:591
+#, kde-format
+msgid "Determines whether commits and removes are recursive"
+msgstr "Ба тарзи рекурсивӣ додан ва ҳузф намуданро рухсат медиҳад"
+
+#: cervisiapart.cpp:595
+#, kde-format
+msgid "Do cvs &edit Automatically When Necessary"
+msgstr "Ба тарзи худкор иҷро нмудани cvs &edit "
+
+#: cervisiapart.cpp:598
+#, kde-format
+msgid "Determines whether automatic cvs editing is active"
+msgstr "Иҷоза медиҳад, ки таҳрири худкори cvs-ро иҷро кунад"
+
+#: cervisiapart.cpp:602
+#, kde-format
+msgid "Configure Cervisia..."
+msgstr "Танзимоти Cervisia..."
+
+#: cervisiapart.cpp:605
+#, kde-format
+msgid "Allows you to configure the Cervisia KPart"
+msgstr "Танзимоти параметрҳои қисмҳои Cervisia"
+
+#: cervisiapart.cpp:613
+#, kde-format
+msgid "CVS &Manual"
+msgstr "&Дастур аз рӯи CVS "
+
+#: cervisiapart.cpp:616
+#, kde-format
+msgid "Opens the help browser with the CVS documentation"
+msgstr "Намоиши санадот аз рӯи CVS"
+
+#: cervisiapart.cpp:623
+#, kde-format
+msgid "Unfold Folder"
+msgstr "Нагузоштани феҳерист"
+
+#: cervisiapart.cpp:715
+#, kde-format
+msgid "Cervisia Part"
+msgstr "Қисмати Cervisia"
+
+#: cervisiapart.cpp:717 main.cpp:140
+#, kde-format
+msgid "A CVS frontend"
+msgstr "Ҷилд барои CVS"
+
+#: cervisiapart.cpp:719 main.cpp:142
+#, fuzzy, kde-format
+msgid ""
+"Copyright (c) 1999-2002 Bernd Gehrmann\n"
+"Copyright (c) 2002-2008 the Cervisia authors"
+msgstr ""
+"Ҳуқуқҳои муаллифӣ (c) 1999-2002 Bernd Gehrmann\n"
+"Ҳуқуқҳои муаллифӣ (c) 1999-2002 Cervisia муаллифон"
+
+#: cervisiapart.cpp:724 main.cpp:147
+#, kde-format
+msgid "Bernd Gehrmann"
+msgstr ""
+
+#: cervisiapart.cpp:725 main.cpp:148
+#, kde-format
+msgid "Original author and former maintainer"
+msgstr "Муаллифи ақида, координатори қаблӣ"
+
+#: cervisiapart.cpp:728 main.cpp:151
+#, kde-format
+msgid "Christian Loose"
+msgstr ""
+
+#: cervisiapart.cpp:728 main.cpp:151
+#, kde-format
+msgid "Maintainer"
+msgstr "Координатор"
+
+#: cervisiapart.cpp:729 main.cpp:152
+#, kde-format
+msgid "André Wöbbeking"
+msgstr ""
+
+#: cervisiapart.cpp:729 main.cpp:152
+#, kde-format
+msgid "Developer"
+msgstr "Тайёркунанда"
+
+#: cervisiapart.cpp:730 main.cpp:153
+#, kde-format
+msgid "Carlos Woelz"
+msgstr ""
+
+#: cervisiapart.cpp:730 main.cpp:153
+#, kde-format
+msgid "Documentation"
+msgstr "Ҳуҷҷатҳо"
+
+#: cervisiapart.cpp:732 main.cpp:155
+#, kde-format
+msgid "Richard Moore"
+msgstr ""
+
+#: cervisiapart.cpp:732 main.cpp:155
+#, kde-format
+msgid "Conversion to KPart"
+msgstr "Таъғирдиҳи дар KPart"
+
+#: cervisiapart.cpp:733 main.cpp:156
+#, kde-format
+msgid "Laurent Montel"
+msgstr ""
+
+#: cervisiapart.cpp:733 main.cpp:156
+#, fuzzy, kde-format
+msgid "Conversion to D-Bus"
+msgstr "Таъғирдиҳи дар KPart"
+
+#: cervisiapart.cpp:734 main.cpp:157
+#, kde-format
+msgid "Martin Koller"
+msgstr ""
+
+#: cervisiapart.cpp:734 main.cpp:157
+#, kde-format
+msgid "Port to KDE Frameworks 5"
+msgstr ""
+
+#: cervisiapart.cpp:741
+#, kde-format
+msgid "Open Sandbox"
+msgstr "Боз кардани регдон"
+
+#: cervisiapart.cpp:791
+#, kde-format
+msgid "CVS Edit"
+msgstr "Таъғир додани CVS"
+
+#: cervisiapart.cpp:1298 diffdialog.cpp:263 logdialog.cpp:472
+#, kde-format
+msgid "CVS Diff"
+msgstr "Фарқияти CVS"
+
+#: cervisiapart.cpp:1311 diffdialog.cpp:473 logdialog.cpp:485
+#: resolvedialog.cpp:351
+#, kde-format
+msgid "Could not open file for writing."
+msgstr "Наметавонам файлро барои сабт боз кунам."
+
+#: cervisiapart.cpp:1461
+#, kde-format
+msgid "The revision looks invalid."
+msgstr "Дархрсти нодурусти тафтиш."
+
+#: cervisiapart.cpp:1465
+#, kde-format
+msgid "This is the first revision of the branch."
+msgstr "Ин тафтиши якӯм дар шоха."
+
+#: cervisiapart.cpp:1575
+#, kde-format
+msgid "Invoking help on CVS"
+msgstr "Даъвати ёри аз рӯи CVS"
+
+#: cervisiapart.cpp:1610
+#, kde-format
+msgid "Done"
+msgstr "Хотима ёфтааст"
+
+#: cervisiapart.cpp:1616
+#, kde-format
+msgid "A CVS commit to repository %1 is done"
+msgstr "A CVS ба иҷрорасонии анбори додаҳо %1 тайёр аст"
+
+#: cervisiapart.cpp:1633
+#, kde-format
+msgid ""
+"This is not a CVS folder.\n"
+"If you did not intend to use Cervisia, you can switch view modes within "
+"Konqueror."
+msgstr ""
+"Ин каталоги CVS нест.\n"
+"Агар шумо Cervisia-ро истифода бурдани набошед, метавонед тартиби тасвиротро "
+"ба Konqueror гузаронед."
+
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr ""
+"Истифодабарии файли пешзаминаи ранги равшан бо нобаробарии намуди файл."
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr "Боздоштан пеш аз барориши иттилоот оиди иҷрошави дар миллисонияҳо."
+
+#: cervisiashell.cpp:54
+#, kde-format
+msgid "The Cervisia library could not be loaded."
+msgstr "Файли  Cervisia library хонда нахоҳад шуд."
+
+#: cervisiashell.cpp:86
+#, kde-format
+msgid "Allows you to configure the toolbar"
+msgstr "Иҷозат медиҳад навори асбобҳоро танзим созед"
+
+#: cervisiashell.cpp:91
+#, kde-format
+msgid "Allows you to customize the keybindings"
+msgstr "Иҷозат медиҳад мувофиқати тугмаҳоро танзим созед"
+
+#: cervisiashell.cpp:96
+#, kde-format
+msgid "Exits Cervisia"
+msgstr "Баормад аз Cervisia"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, fuzzy, kde-format
+msgid "&File"
+msgstr "&Муҳарририяти файлҳо"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, fuzzy, kde-format
+msgid "&Settings"
+msgstr "&Ҳолат"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr ""
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr ""
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, fuzzy, kde-format
+msgid "&View"
+msgstr "&Нишон додан"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, kde-format
+msgid "&Advanced"
+msgstr "&Иловагӣ"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, kde-format
+msgid "&Repository"
+msgstr "&Репозитория"
+
+#: changelogdialog.cpp:48
+#, kde-format
+msgid "Edit ChangeLog"
+msgstr "Таъғир додани ChangeLog"
+
+#: changelogdialog.cpp:86
+#, kde-format
+msgid "The ChangeLog file could not be written."
+msgstr "Файли ChangeLog нигоҳ дошта нахоҳад шуд."
+
+#: changelogdialog.cpp:102
+#, kde-format
+msgid "A ChangeLog file does not exist. Create one?"
+msgstr "Файли ChangeLog вуҷуд надорад.Онро эҷод кунам?"
+
+#: changelogdialog.cpp:102
+#, kde-format
+msgid "Create"
+msgstr "Эҷод кардан"
+
+#: changelogdialog.cpp:107
+#, kde-format
+msgid "The ChangeLog file could not be read."
+msgstr "Файли ChangeLog хонда нахоҳад шуд."
+
+#: checkoutdialog.cpp:59 checkoutdialog.cpp:348
+#, kde-format
+msgid "CVS Checkout"
+msgstr "Тафтиши CVS "
+
+#: checkoutdialog.cpp:59
+#, kde-format
+msgid "CVS Import"
+msgstr "Воридоти CVS"
+
+#: checkoutdialog.cpp:94 checkoutdialog.cpp:109
+#, kde-format
+msgid "&Module:"
+msgstr "&Модул:"
+
+#: checkoutdialog.cpp:101 checkoutdialog.cpp:116 mergedialog.cpp:65
+#: tagdialog.cpp:71 updatedialog.cpp:66
+#, kde-format
+msgid "Fetch &List"
+msgstr "&Қабул намудани рӯйхат"
+
+#: checkoutdialog.cpp:124
+#, kde-format
+msgid "&Branch tag:"
+msgstr "&Нишоани шоха:"
+
+#: checkoutdialog.cpp:130
+#, kde-format
+msgid "Re&cursive checkout"
+msgstr "Бо&згашти санҷиши берунӣ"
+
+#: checkoutdialog.cpp:153
+#, kde-format
+msgid "Working &folder:"
+msgstr "&Каталоги корӣ:"
+
+#: checkoutdialog.cpp:162
+#, kde-format
+msgid "&Vendor tag:"
+msgstr "&Нишонаи тайёркунанда:"
+
+#: checkoutdialog.cpp:170
+#, kde-format
+msgid "&Release tag:"
+msgstr "&Нишонаи раванд:"
+
+#: checkoutdialog.cpp:178
+#, kde-format
+msgid "&Ignore files:"
+msgstr "&Рад кардани файл:"
+
+#: checkoutdialog.cpp:186
+#, kde-format
+msgid "&Comment:"
+msgstr "&Эзоҳ:"
+
+#: checkoutdialog.cpp:190
+#, kde-format
+msgid "Import as &binaries"
+msgstr "Воридот ҳамчун &файлҳои бинарӣ"
+
+#: checkoutdialog.cpp:193
+#, kde-format
+msgid "Use file's modification time as time of import"
+msgstr "Истифодаи вақти охирини таъғироти файл ҳангоми воридот"
+
+#: checkoutdialog.cpp:200
+#, kde-format
+msgid "Chec&k out as:"
+msgstr "&Тафтиш дар:"
+
+#: checkoutdialog.cpp:204
+#, kde-format
+msgid "Ex&port only"
+msgstr "Танҳо &содирот"
+
+#: checkoutdialog.cpp:304
+#, kde-format
+msgid "Please choose an existing working folder."
+msgstr "Каталоги кории мавҷуд бударо интихоб кунед."
+
+#: checkoutdialog.cpp:308 checkoutdialog.cpp:379
+#, kde-format
+msgid "Please specify a module name."
+msgstr "Номи мидулро ишора кунед."
+
+#: checkoutdialog.cpp:314
+#, kde-format
+msgid "Please specify a vendor tag and a release tag."
+msgstr "Нишонаи тайёркунанда ё равандро ишора кунед."
+
+#: checkoutdialog.cpp:319
+#, kde-format
+msgid ""
+"Tags must start with a letter and may contain\n"
+"letters, digits and the characters '-' and '_'."
+msgstr ""
+"Нишонаҳо бояд аз ҳарфҳо оғоз ёбанд ва метавонанд дорои \n"
+" ҳарфҳо, рақамҳо ва аломатҳо бошанд '-' ё '_'."
+
+#: checkoutdialog.cpp:325
+#, kde-format
+msgid "A branch must be specified for export."
+msgstr "Барои содирот шохаро ишора намудан лозим аст."
+
+#: checkoutdialog.cpp:374
+#, kde-format
+msgid "Please specify a repository."
+msgstr "Марҳамад анбори додаҳро интихоб кунед."
+
+#: checkoutdialog.cpp:387
+#, kde-format
+msgid "CVS Remote Log"
+msgstr "CVS дурдаст кардани сабти воқеъӣ"
+
+#: commitdialog.cpp:67
+#, kde-format
+msgid "CVS Commit"
+msgstr "Ҷойгиркуни дар CVS"
+
+#: commitdialog.cpp:84 logdialog.cpp:199
+#, kde-format
+msgid "&Diff"
+msgstr "&Фарқият"
+
+#: commitdialog.cpp:86
+#, kde-format
+msgid "Commit the following &files:"
+msgstr "Додани &файлҳои ишорашуда:"
+
+#: commitdialog.cpp:96
+#, kde-format
+msgid "Older &messages:"
+msgstr "Иттилоотҳои &кӯҳна:"
+
+#: commitdialog.cpp:106
+#, kde-format
+msgid "&Log message:"
+msgstr "&Иттилооти маҷала:"
+
+#: commitdialog.cpp:115
+#, kde-format
+msgid "Use log message &template"
+msgstr "Истифодабарии сабти воқеъии хабари &қолаб"
+
+#: commitdialog.cpp:190
+#, kde-format
+msgid "Current"
+msgstr "Ҷорӣ"
+
+#: cvsinitdialog.cpp:39
+#, kde-format
+msgid "Create New Repository (cvs init)"
+msgstr "Эҷоди репозиторияи нави (cvs init)"
+
+#: cvsinitdialog.cpp:51
+#, kde-format
+msgid "Repository folder:"
+msgstr "Каталоги репозитория:"
+
+#: diffdialog.cpp:102
+#, kde-format
+msgid "Synchronize scroll bars"
+msgstr "Синхронизатсия кардани хатҳои чархак"
+
+#: diffdialog.cpp:112 diffdialog.cpp:403
+#, fuzzy, kde-format
+#| msgid "%1 differences"
+msgid "%1 difference"
+msgid_plural "%1 differences"
+msgstr[0] "%1 фарқият"
+msgstr[1] "%1 фарқият"
+
+#: diffdialog.cpp:238
+#, kde-format
+msgid "CVS Diff: %1"
+msgstr "Фарқияти CVS: %1"
+
+#: diffdialog.cpp:239
+#, kde-format
+msgid "Repository:"
+msgstr "Репозитория:"
+
+#: diffdialog.cpp:239 diffdialog.cpp:240
+#, kde-format
+msgid "Revision "
+msgstr "Тафтиш"
+
+#: diffdialog.cpp:240
+#, kde-format
+msgid "Working dir:"
+msgstr "Каталоги корӣ:"
+
+#: diffdialog.cpp:401 resolvedialog.cpp:383
+#, kde-format
+msgid "%1 of %2"
+msgstr "%1 аз %2"
+
+#: diffview.cpp:255 diffview.cpp:313
+#, fuzzy, kde-format
+msgid "Delete"
+msgstr "&Ҳузф намудани нишона..."
+
+#: diffview.cpp:255 diffview.cpp:313
+#, kde-format
+msgid "Insert"
+msgstr ""
+
+#: diffview.cpp:255 diffview.cpp:313
+#, fuzzy, kde-format
+msgid "Change"
+msgstr "Таъғир додани ChangeLog"
+
+#: editwithmenu.cpp:46
+#, kde-format
+msgid "Edit With"
+msgstr "Боз кардан дар"
+
+#: entry_status.cpp:33
+#, kde-format
+msgid "Locally Modified"
+msgstr "Маҳаллӣ таъғир ёфтааст"
+
+#: entry_status.cpp:36
+#, kde-format
+msgid "Locally Added"
+msgstr "Маҳаллӣ илова шудааст"
+
+#: entry_status.cpp:39
+#, kde-format
+msgid "Locally Removed"
+msgstr "Маҳаллӣ ҳузф карда шудааст"
+
+#: entry_status.cpp:42
+#, kde-format
+msgid "Needs Update"
+msgstr "Бозсозиҳои лозимӣ"
+
+#: entry_status.cpp:45
+#, kde-format
+msgid "Needs Patch"
+msgstr "Дарбеҳ лозим аст"
+
+#: entry_status.cpp:48
+#, kde-format
+msgid "Needs Merge"
+msgstr "Якҷоя кардан лозим аст"
+
+#: entry_status.cpp:51
+#, kde-format
+msgid "Up to Date"
+msgstr "Нав аст"
+
+#: entry_status.cpp:54
+#, kde-format
+msgid "Conflict"
+msgstr "Низоъ"
+
+#: entry_status.cpp:57
+#, kde-format
+msgid "Updated"
+msgstr "Нав нарда шудааст"
+
+#: entry_status.cpp:60
+#, kde-format
+msgid "Patched"
+msgstr "Ислоҳ карда шудааст"
+
+#: entry_status.cpp:63
+#, kde-format
+msgid "Removed"
+msgstr "Хузф карда шуд"
+
+#: entry_status.cpp:66
+#, kde-format
+msgid "Not in CVS"
+msgstr "Дар CVS нест"
+
+#: entry_status.cpp:69
+#, kde-format
+msgid "Unknown"
+msgstr "Номаълум"
+
+#: historydialog.cpp:106 historydialog.cpp:343
+#, kde-format
+msgid "Commit, Modified "
+msgstr "Дода шуд, таъғир дода шуд"
+
+#: historydialog.cpp:106 historydialog.cpp:346
+#, kde-format
+msgid "Commit, Added "
+msgstr "Дода шуд,илова карда шуд"
+
+#: historydialog.cpp:106 historydialog.cpp:349
+#, kde-format
+msgid "Commit, Removed "
+msgstr "Дода шуд, ҳузф карда шуд"
+
+#: historydialog.cpp:111 historydialog.cpp:319
+#, kde-format
+msgid "Checkout "
+msgstr "Озмоиш"
+
+#: historydialog.cpp:116 loginfo.cpp:57
+#, kde-format
+msgid "Tag"
+msgstr "Нишона"
+
+#: historydialog.cpp:138 loglist.cpp:106
+#, kde-format
+msgid "Date"
+msgstr "Сана"
+
+#: historydialog.cpp:138
+#, kde-format
+msgid "Event"
+msgstr "Воқеъа"
+
+#: historydialog.cpp:138 loglist.cpp:106
+#, kde-format
+msgid "Author"
+msgstr "Муаллиф"
+
+#: historydialog.cpp:138 loglist.cpp:106 updateview.cpp:50
+#, kde-format
+msgid "Revision"
+msgstr "Тафтиш"
+
+#: historydialog.cpp:138 watchersmodel.cpp:84
+#, fuzzy, kde-format
+msgid "File"
+msgstr "Намоиши файл"
+
+#: historydialog.cpp:138
+#, kde-format
+msgid "Repo Path"
+msgstr "Роҳ ба репозиторий"
+
+#: historydialog.cpp:142
+#, kde-format
+msgid "Show c&ommit events"
+msgstr "Намоиши &супoриши воқеъот"
+
+#: historydialog.cpp:145
+#, kde-format
+msgid "Show ch&eckout events"
+msgstr "Намоиши воқеъоти &озмоиш"
+
+#: historydialog.cpp:148
+#, kde-format
+msgid "Show &tag events"
+msgstr "Намоиши воқеъоти бо &нишона"
+
+#: historydialog.cpp:151
+#, kde-format
+msgid "Show &other events"
+msgstr "Намоиши &воқеъоти дигар"
+
+#: historydialog.cpp:154
+#, kde-format
+msgid "Only &user:"
+msgstr "&Танҳо истифодакунанда:"
+
+#: historydialog.cpp:156
+#, kde-format
+msgid "Only &filenames matching:"
+msgstr "Танҳо &файлҳои мувофиқ бо:"
+
+#: historydialog.cpp:158
+#, kde-format
+msgid "Only &folders matching:"
+msgstr "Муқоисаи танҳо номи &каталогҳо:"
+
+#: historydialog.cpp:279 historydialog.cpp:285
+#, kde-format
+msgid "CVS History"
+msgstr "Таърихи CVS"
+
+#: historydialog.cpp:322
+#, kde-format
+msgid "Tag "
+msgstr "Нишона"
+
+#: historydialog.cpp:325
+#, kde-format
+msgid "Release "
+msgstr "Раванд"
+
+#: historydialog.cpp:328
+#, kde-format
+msgid "Update, Deleted "
+msgstr "Нав карда шуд, ҳузф карда шуд"
+
+#: historydialog.cpp:331
+#, kde-format
+msgid "Update, Copied "
+msgstr "Нав карда шуд, нусха карда шуд"
+
+#: historydialog.cpp:334
+#, kde-format
+msgid "Update, Merged "
+msgstr "Нав карда шуд, якҷоя карди шуд"
+
+#: historydialog.cpp:337
+#, kde-format
+msgid "Update, Conflict "
+msgstr "Нав карда шуд, низоъ"
+
+#: historydialog.cpp:340
+#, fuzzy, kde-format
+msgid "Update, Patched "
+msgstr "Нав карда шуд, ҳузф карда шуд"
+
+#: historydialog.cpp:352
+#, kde-format
+msgid "Unknown "
+msgstr "Номаълум"
+
+#: logdialog.cpp:86
+#, fuzzy, kde-format
+#| msgid "S&earch:"
+msgid "Search:"
+msgstr "К&офтани:"
+
+#: logdialog.cpp:97
+#, kde-format
+msgid "&Tree"
+msgstr "&Дарахт"
+
+#: logdialog.cpp:98
+#, kde-format
+msgid "&List"
+msgstr "&Рӯйхат"
+
+#: logdialog.cpp:99
+#, kde-format
+msgid "CVS &Output"
+msgstr "&Баровардани CVS"
+
+#: logdialog.cpp:106
+#, kde-format
+msgid ""
+"Choose revision A by clicking with the left mouse button,\n"
+"revision B by clicking with the middle mouse button."
+msgstr ""
+"Тафтиши А-ро бо прхш кардани тугмаи чапи муш, \n"
+"тафтиши В-ро бо тугмаи мобайни муш интихоб кунед."
+
+#: logdialog.cpp:133
+#, kde-format
+msgid "Revision A:"
+msgstr "Тафтиши А:"
+
+#: logdialog.cpp:133
+#, kde-format
+msgid "Revision B:"
+msgstr "Тафтиши В:"
+
+#: logdialog.cpp:142
+#, kde-format
+msgid "Select by tag:"
+msgstr "Интихоб аз рӯи нишони:"
+
+#: logdialog.cpp:150
+#, kde-format
+msgid "Author:"
+msgstr "Муаллиф:"
+
+#: logdialog.cpp:158
+#, kde-format
+msgid "Date:"
+msgstr "Сана:"
+
+#: logdialog.cpp:166
+#, kde-format
+msgid "Comment/Tags:"
+msgstr "Эзоҳот/нишона:"
+
+#: logdialog.cpp:198
+#, fuzzy, kde-format
+#| msgid "&Annotate"
+msgid "&Annotate A"
+msgstr "&Шарҳи мухтасар"
+
+#: logdialog.cpp:200
+#, kde-format
+msgid "&Find"
+msgstr ""
+
+#: logdialog.cpp:207
+#, kde-format
+msgid ""
+"This revision is used when you click Annotate.\n"
+"It is also used as the first item of a Diff operation."
+msgstr ""
+"Ин тафтишот дар шарҳи мухтасар ва ҳамчун далели \n"
+"якуми амалиёти ҷустуҷӯи фарқият истифода бурда мешавад."
+
+#: logdialog.cpp:212
+#, kde-format
+msgid "This revision is used as the second item of a Diff operation."
+msgstr ""
+"Ин тафтишот ҳамчун далели дюми амалиёти ҷустуҷӯи фарқият истифода бурда "
+"мешавад."
+
+#: logdialog.cpp:225
+#, fuzzy, kde-format
+msgid "&View A"
+msgstr "&Нишон додан"
+
+#: logdialog.cpp:226
+#, kde-format
+msgid "Create Patch..."
+msgstr "Эҷоди дарбеҳ..."
+
+#: logdialog.cpp:269
+#, kde-format
+msgid "CVS Log: %1"
+msgstr "Маҷалаи CVS: %1"
+
+#: logdialog.cpp:275
+#, kde-format
+msgid "CVS Log"
+msgstr "Маҷалаи CVS"
+
+#: logdialog.cpp:402
+#, kde-format
+msgid " (Branchpoint)"
+msgstr " (Нуқтаи шоха)"
+
+#: logdialog.cpp:421
+#, kde-format
+msgid "Please select revision A or B first."
+msgstr "Дар аввал тафтишоти А ё В-ро интихоб кунед."
+
+#: logdialog.cpp:442
+#, kde-format
+msgid "View File"
+msgstr "Намоиши файл"
+
+#: logdialog.cpp:457 logdialog.cpp:516
+#, kde-format
+msgid "Please select revision A or revisions A and B first."
+msgstr "Дар аввал тафтишоти А ё тафтишоти А ва В-ро интихоб кунед."
+
+#: loginfo.cpp:51
+#, kde-format
+msgid "Branchpoint"
+msgstr "Нуқтаи шоха"
+
+#: loginfo.cpp:54
+#, kde-format
+msgid "On Branch"
+msgstr "Дар шоха"
+
+#: loglist.cpp:106
+#, kde-format
+msgid "Branch"
+msgstr "Шоха"
+
+#: loglist.cpp:106
+#, kde-format
+msgid "Comment"
+msgstr "Эзоҳ"
+
+#: loglist.cpp:106
+#, kde-format
+msgid "Tags"
+msgstr "Нишона"
+
+#: logplainview.cpp:46
+#, kde-format
+msgid "revision %1"
+msgstr "тафтиш %1"
+
+#: logplainview.cpp:47
+#, kde-format
+msgid "Select for revision A"
+msgstr "Барои тафтиши А интихоб кунед"
+
+#: logplainview.cpp:48
+#, kde-format
+msgid "Select for revision B"
+msgstr "Барои тафтиши В интихоб кунед"
+
+#: logplainview.cpp:49
+#, kde-format
+msgid "date: %1; author: %2"
+msgstr "сана: %1; муаллиф: %2"
+
+#: main.cpp:166
+#, kde-format
+msgid "The sandbox to be loaded"
+msgstr "Регдоне, ки пурбор карда мешавад"
+
+#: main.cpp:167
+#, fuzzy, kde-format
+#| msgid "Show resolve dialog for the given file"
+msgid "Show resolve dialog for the given file."
+msgstr "Намоиши мубоҳисаи бартарафкунии низоъ барои файли ишорашуда"
+
+#: main.cpp:168
+#, fuzzy, kde-format
+#| msgid "Show log dialog for the given file"
+msgid "Show log dialog for the given file."
+msgstr "Намоиши маҷала барои файли ишорашуда"
+
+#: main.cpp:169
+#, fuzzy, kde-format
+#| msgid "Show annotation dialog for the given file"
+msgid "Show annotation dialog for the given file."
+msgstr "Намоиши маҷала барои файли иҷшорашуда"
+
+#: mergedialog.cpp:41
+#, kde-format
+msgid "CVS Merge"
+msgstr "якҷоякунии CVS"
+
+#: mergedialog.cpp:56
+#, kde-format
+msgid "Merge from &branch:"
+msgstr "Якчякуни аз &шохаи:"
+
+#: mergedialog.cpp:75
+#, kde-format
+msgid "Merge &modifications:"
+msgstr "Якчякунии &таъғиротҳо:"
+
+#: mergedialog.cpp:78
+#, kde-format
+msgid "between tag: "
+msgstr "байни нишона: "
+
+#: mergedialog.cpp:84
+#, kde-format
+msgid "and tag: "
+msgstr "ва нишона: "
+
+#: mergedialog.cpp:90 updatedialog.cpp:84
+#, kde-format
+msgid "Fetch L&ist"
+msgstr "Қабули &рӯйхат "
+
+#: misc.cpp:78
+#, kde-format
+msgid "CVS Status"
+msgstr "Ҳолати CVS"
+
+#: misc.cpp:197
+#, kde-format
+msgid "Overwrite the file"
+msgstr "Ин файлро рӯйнавис кунед"
+
+#: misc.cpp:200
+#, kde-format
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr ""
+"Номи файли \"%1\" ҳоло вуҷуд дорад. Шумо боварӣ доред,ки рӯйнавис кунед?"
+
+#: misc.cpp:201
+#, kde-format
+msgid "Overwrite File?"
+msgstr "Рӯйнависи файл?"
+
+#: patchoptiondialog.cpp:58
+#, kde-format
+msgid "Context"
+msgstr "Матнӣ"
+
+#: patchoptiondialog.cpp:59
+#, kde-format
+msgid "Normal"
+msgstr "Оддӣ"
+
+#: patchoptiondialog.cpp:60
+#, kde-format
+msgid "Unified"
+msgstr "Яякхела кардашуда"
+
+#: patchoptiondialog.cpp:64
+#, kde-format
+msgid "Output Format"
+msgstr "Формати барориш"
+
+#: patchoptiondialog.cpp:74
+#, kde-format
+msgid "&Number of context lines:"
+msgstr "Миқдори сатрҳои &матнӣ:"
+
+#: patchoptiondialog.cpp:90
+#, kde-format
+msgid "Ignore added or removed empty lines"
+msgstr "Рад кардани сатҳои холӣ"
+
+#: patchoptiondialog.cpp:91
+#, kde-format
+msgid "Ignore changes in the amount of whitespace"
+msgstr "Рад кардани таъғироти шумораи фосилаҳо"
+
+#: patchoptiondialog.cpp:92
+#, kde-format
+msgid "Ignore all whitespace"
+msgstr "Рад кардани фосилаҳо"
+
+#: patchoptiondialog.cpp:93
+#, kde-format
+msgid "Ignore changes in case"
+msgstr "Бе баҳисобгирии қайдот"
+
+#: patchoptiondialog.cpp:100
+#, kde-format
+msgid "Ignore Options"
+msgstr "Параметри радкуни"
+
+#: protocolview.cpp:90
+#, kde-format
+msgid "Clear"
+msgstr ""
+
+#: protocolview.cpp:127
+#, kde-format
+msgid "[Exited with status %1]\n"
+msgstr "[Хотима ёфтааст бо ҳолати %1]\n"
+
+#: protocolview.cpp:129
+#, kde-format
+msgid "[Finished]\n"
+msgstr "[Хотима ёфтааст]\n"
+
+#: protocolview.cpp:131
+#, kde-format
+msgid "[Aborted]\n"
+msgstr "[Хароб шуд]\n"
+
+#: repositorydialog.cpp:138
+#, kde-format
+msgid "Default"
+msgstr ""
+
+#: repositorydialog.cpp:155
+#, kde-format
+msgid "Logged in"
+msgstr "Фаъол карда шуд"
+
+#: repositorydialog.cpp:155
+#, kde-format
+msgid "Not logged in"
+msgstr "Ғайри фаъол карда шуд"
+
+#: repositorydialog.cpp:157
+#, kde-format
+msgid "No login required"
+msgstr "Зарурият дар қайдгири нест"
+
+#: repositorydialog.cpp:171
+#, kde-format
+msgid "Configure Access to Repositories"
+msgstr "Идоракунии дастрасӣ ба репозиторияҳо"
+
+#: repositorydialog.cpp:192
+#, kde-format
+msgid "Repository"
+msgstr "Репозитория"
+
+#: repositorydialog.cpp:192
+#, kde-format
+msgid "Method"
+msgstr "Метод"
+
+#: repositorydialog.cpp:192
+#, kde-format
+msgid "Compression"
+msgstr "Фишурдашавӣ"
+
+#: repositorydialog.cpp:192 settingsdialog.cpp:293 updateview.cpp:50
+#, kde-format
+msgid "Status"
+msgstr "Ҳолат"
+
+#: repositorydialog.cpp:199
+#, fuzzy, kde-format
+#| msgid "&Add..."
+msgid "Add..."
+msgstr "&Aфзоиш..."
+
+#: repositorydialog.cpp:200
+#, fuzzy, kde-format
+#| msgid "&Modify..."
+msgid "Modify..."
+msgstr "&Таъғир додан..."
+
+#: repositorydialog.cpp:202
+#, kde-format
+msgid "Login..."
+msgstr "Даромадан..."
+
+#: repositorydialog.cpp:203
+#, kde-format
+msgid "Logout"
+msgstr "Баромад аз мизи корӣ"
+
+#: repositorydialog.cpp:335
+#, kde-format
+msgid "This repository is already known."
+msgstr "Репозиторий аллакай маълум аст."
+
+#: repositorydialog.cpp:423
+#, kde-format
+msgid "Login failed."
+msgstr "Ба сервер қайд кунондан имконпазир набуд."
+
+#: repositorydialog.cpp:442
+#, kde-format
+msgid "CVS Logout"
+msgstr "Ғайри фаъол сохтан аз СVS"
+
+#: resolvedialog.cpp:135
+#, kde-format
+msgid "Your version (A):"
+msgstr "Тафтишоти шумо (А):"
+
+#: resolvedialog.cpp:144
+#, kde-format
+msgid "Other version (B):"
+msgstr "Тафтишоти дигар (В):"
+
+#: resolvedialog.cpp:156
+#, kde-format
+msgid "Merged version:"
+msgstr "Раванди якҷоякардашуда:"
+
+#: resolvedialog.cpp:250
+#, kde-format
+msgid "CVS Resolve: %1"
+msgstr "Иҷозати низоъи CVS: %1"
+
+#: resolvedialog.cpp:385
+#, kde-format
+msgid "%1 conflicts"
+msgstr "%1 низоъҳо"
+
+#: settingsdialog.cpp:70
+#, kde-format
+msgid "Configure Cervisia"
+msgstr "Танзимоти Cervisia"
+
+#: settingsdialog.cpp:215
+#, kde-format
+msgid "General"
+msgstr "Умумӣ"
+
+#: settingsdialog.cpp:220
+#, kde-format
+msgid "&User name for the change log editor:"
+msgstr "&Номи истифодабарандаи муҳаррири файлҳои СhangeLog:"
+
+#: settingsdialog.cpp:228
+#, kde-format
+msgid "&Path to CVS executable, or 'cvs':"
+msgstr "&Pоҳ ба барномаи CVS ё 'cvs':"
+
+#: settingsdialog.cpp:246
+#, kde-format
+msgid "Diff Viewer"
+msgstr "Фарқият"
+
+#: settingsdialog.cpp:251
+#, kde-format
+msgid "&Number of context lines in diff dialog:"
+msgstr "Шумораи &сатр дар мубоҳисаи фарқият:"
+
+#: settingsdialog.cpp:259
+#, kde-format
+msgid "Additional &options for cvs diff:"
+msgstr "Опсияҳои иловагӣ барои фарқият дар &СBS:"
+
+#: settingsdialog.cpp:266
+#, kde-format
+msgid "Tab &width in diff dialog:"
+msgstr "Васеъии &мубоҳисаи фарқият:"
+
+#: settingsdialog.cpp:274
+#, kde-format
+msgid "External diff &frontend:"
+msgstr "Пардаи зоҳирӣ барои &diff:"
+
+#: settingsdialog.cpp:296
+#, kde-format
+msgid ""
+"When opening a sandbox from a &remote repository,\n"
+"start a File->Status command automatically"
+msgstr ""
+"Мавриди боз кардани регдон аз &репозиторияи, ҳузфшуда\n"
+"дастури Файл->Ҳолат ба тарзи худкор оғоз меёбад"
+
+#: settingsdialog.cpp:299
+#, kde-format
+msgid ""
+"When opening a sandbox from a &local repository,\n"
+"start a File->Status command automatically"
+msgstr ""
+"Мавриди боз кардани регдон аз &репозиторияи, маҳаллӣ\n"
+"дастури Файл->Ҳолат ба тарзи худкор оғоз меёбад"
+
+#: settingsdialog.cpp:316
+#, kde-format
+msgid "Advanced"
+msgstr "Васеъкардашуда"
+
+#: settingsdialog.cpp:335
+#, kde-format
+msgid "Appearance"
+msgstr ""
+
+#: settingsdialog.cpp:338
+#, kde-format
+msgid "Fonts"
+msgstr ""
+
+#: settingsdialog.cpp:341
+#, kde-format
+msgid "Font for &Protocol Window..."
+msgstr "Ҳуруф барои &тирезаи протокол..."
+
+#: settingsdialog.cpp:342
+#, kde-format
+msgid "Font for A&nnotate View..."
+msgstr "Ҳуруф барои намоиши &шарҳи мухтасар ..."
+
+#: settingsdialog.cpp:343
+#, kde-format
+msgid "Font for D&iff View..."
+msgstr "Ҳуруф барои намоиши &фарқият..."
+
+#: settingsdialog.cpp:344
+#, kde-format
+msgid "Font for ChangeLog View..."
+msgstr "Ҳуруф барои намоиши таъғирот..."
+
+#: settingsdialog.cpp:352
+#, kde-format
+msgid "Colors"
+msgstr "Рангҳо"
+
+#: settingsdialog.cpp:355
+#, kde-format
+msgid "Conflict:"
+msgstr "Низоъ:"
+
+#: settingsdialog.cpp:359
+#, kde-format
+msgid "Diff change:"
+msgstr "Таъғир дода шудааст:"
+
+#: settingsdialog.cpp:363
+#, kde-format
+msgid "Local change:"
+msgstr "Таъғироти маҳаллӣ:"
+
+#: settingsdialog.cpp:367
+#, kde-format
+msgid "Diff insertion:"
+msgstr "Илова шудааст:"
+
+#: settingsdialog.cpp:371
+#, kde-format
+msgid "Remote change:"
+msgstr "Таъғироти ғайри маҳаллӣ:"
+
+#: settingsdialog.cpp:375
+#, kde-format
+msgid "Diff deletion:"
+msgstr "Ҳузф шудааст:"
+
+#: settingsdialog.cpp:379
+#, kde-format
+msgid "Not in cvs:"
+msgstr "Дар cvs нест:"
+
+#: settingsdialog.cpp:400
+#, kde-format
+msgid "Split main window &horizontally"
+msgstr "Ҷудо кардани тирезаи &асосӣ ба тарзи уфуқӣ "
+
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr "&Боздошт пеш аз намоиши мубоҳисаи ҳолати иҷрошави (дар мс):"
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, kde-format
+msgid "Default compression &level:"
+msgstr "Дараҷаи &фишудашавӣ бо пешарзӣ:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr "Истифодаи иҷро шуда истода ё инки оғози амали нави ssh-agent"
+
+#: tagdialog.cpp:48
+#, kde-format
+msgid "CVS Delete Tag"
+msgstr "Ҳузфи нишонаи CVS"
+
+#: tagdialog.cpp:48
+#, kde-format
+msgid "CVS Tag"
+msgstr "Нишонаи CVS"
+
+#: tagdialog.cpp:67 tagdialog.cpp:86
+#, kde-format
+msgid "&Name of tag:"
+msgstr "&Номи нишона:"
+
+#: tagdialog.cpp:95
+#, kde-format
+msgid "Create &branch with this tag"
+msgstr "Эҷоди &шоха бо ин нишона"
+
+#: tagdialog.cpp:99
+#, kde-format
+msgid "&Force tag creation even if tag already exists"
+msgstr "&Эҷоди кардани нишона агар чанде, кион вуҷуд дорад"
+
+#: tagdialog.cpp:134
+#, kde-format
+msgid "You must define a tag name."
+msgstr "Шумо бояд номи нишонаро муайян кунед."
+
+#: tagdialog.cpp:140
+#, kde-format
+msgid ""
+"Tag must start with a letter and may contain letters, digits and the "
+"characters '-' and '_'."
+msgstr ""
+"Нишонаҳо бояд аз ҳарфҳо оғоз ёбанд ва дорои ҳарфҳо, рақамҳо ва алоиатҳо '-' "
+"ё '_' бошанд."
+
+#: updatedialog.cpp:42
+#, kde-format
+msgid "CVS Update"
+msgstr "Бозсозии CVS"
+
+#: updatedialog.cpp:57
+#, kde-format
+msgid "Update to &branch: "
+msgstr "Бозсози то &шоха: "
+
+#: updatedialog.cpp:76
+#, kde-format
+msgid "Update to &tag: "
+msgstr "Бозсози то &нишона: "
+
+#: updatedialog.cpp:94
+#, kde-format
+msgid "Update to &date ('yyyy-mm-dd'):"
+msgstr "Бозсозӣ то &санаи ('гггг-мм-дд'):"
+
+#: updateview.cpp:50
+#, kde-format
+msgid "File Name"
+msgstr "Номи файл"
+
+#: updateview.cpp:50
+#, kde-format
+msgid "Tag/Date"
+msgstr "Нишона/сана"
+
+#: updateview.cpp:50
+#, kde-format
+msgid "Timestamp"
+msgstr "Нишонаи муваққатӣ"
+
+#: watchdialog.cpp:38
+#, kde-format
+msgid "CVS Watch Add"
+msgstr "Афзудани мушоҳида аз паи CVS"
+
+#: watchdialog.cpp:38
+#, kde-format
+msgid "CVS Watch Remove"
+msgstr "Ҳузфи мушоҳида аз паи CVS"
+
+#: watchdialog.cpp:51
+#, kde-format
+msgid "Add watches for the following events:"
+msgstr "Мушоҳида аз паи воқеъот:"
+
+#: watchdialog.cpp:51
+#, kde-format
+msgid "Remove watches for the following events:"
+msgstr "Дигар аз паи воқеъаҳои зерин мушоҳиданакунед:"
+
+#: watchdialog.cpp:54
+#, kde-format
+msgid "&All"
+msgstr "&бо ҳама"
+
+#: watchdialog.cpp:59
+#, kde-format
+msgid "&Only:"
+msgstr "&фақат:"
+
+#: watchdialog.cpp:68
+#, kde-format
+msgid "&Commits"
+msgstr "&супоридан"
+
+#: watchdialog.cpp:72
+#, kde-format
+msgid "&Edits"
+msgstr "&таъир додан"
+
+#: watchdialog.cpp:76
+#, kde-format
+msgid "&Unedits"
+msgstr "&хотимаитаъғир"
+
+#: watchersdialog.cpp:68 watchersdialog.cpp:74
+#, kde-format
+msgid "CVS Watchers"
+msgstr "Мушоҳидакунандагони CVS"
+
+#: watchersmodel.cpp:86
+#, kde-format
+msgid "Watcher"
+msgstr "Мушоҳидакунанда"
+
+#: watchersmodel.cpp:88
+#, fuzzy, kde-format
+msgid "Edit"
+msgstr "&таъир додан"
+
+#: watchersmodel.cpp:90
+#, kde-format
+msgid "Unedit"
+msgstr "Хотима додани таъғирдиҳӣ"
+
+#: watchersmodel.cpp:92
+#, kde-format
+msgid "Commit"
+msgstr "Супурдан"
+
+#~ msgid "Invoking help on Cervisia"
+#~ msgstr "Даъвати ёри аз рӯи Cervisia"
+
+#~ msgid "&Overwrite"
+#~ msgstr "&Рӯйнавис"
+
+#~ msgid "Invokes the KDE help system with the Cervisia documentation"
+#~ msgstr "Дархост дар ситемаи маълумоти KDE, санадот аз рӯи Cervisia "
+
+#~ msgid "Opens the bug report dialog"
+#~ msgstr "Навиштани иттилоот оиди хатогӣ"
+
+#~ msgid "Displays the version number and copyright information"
+#~ msgstr "Намоиш додани иттилоот ва оиди ҳуқуқҳои муаллиф"
+
+#~ msgid "Displays the information about KDE and its version number"
+#~ msgstr "Намоиш додани иттилоот оиди KDE оиди рақами раванди он"
+
+#, fuzzy
+#~ msgid "&Remove"
+#~ msgstr "Хузф карда шуд"
+
+#~ msgctxt "to view something"
+#~ msgid "&View"
+#~ msgstr "&Нишон додан"
+
+#~ msgid "Copyright (c) 1999-2002 Bernd Gehrmann"
+#~ msgstr "Ҳуқуқҳои муаллифӣ (c) 1999-2002 Bernd Gehrmann"
+
+#~ msgid "Show All &Files"
+#~ msgstr "Намоиши &тамоми файлҳо"
+
+#~ msgid "Show Unmodified Files"
+#~ msgstr "Намоиши файлҳои ғайри таъғирёфта"
+
+#~ msgid "Show Removed Files"
+#~ msgstr "Намоиши файлҳои ҳузфшуда"
+
+#~ msgid "Show Non-CVS Files"
+#~ msgstr "Намоиши файлҳои аз CVS набуда"
+
+#~ msgid "Show Empty Folders"
+#~ msgstr "Намоиши каталогҳои холӣ"
+
+#~ msgid "Fold Folder"
+#~ msgstr "Гузоштани феҳерест"
+
+#~ msgid ""
+#~ "Cervisia %1\n"
+#~ "(Using KDE %2)\n"
+#~ "\n"
+#~ "Copyright (c) 1999-2002\n"
+#~ "Bernd Gehrmann <bernd@mail.berlios.de>\n"
+#~ "\n"
+#~ "This program is free software; you can redistribute it and/or modify\n"
+#~ "it under the terms of the GNU General Public License as published by\n"
+#~ "the Free Software Foundation; either version 2 of the License, or\n"
+#~ "(at your option) any later version.\n"
+#~ "This program is distributed in the hope that it will be useful,\n"
+#~ "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+#~ "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+#~ "GNU General Public License for more details.\n"
+#~ "See the ChangeLog file for a list of contributors."
+#~ msgstr ""
+#~ "Cervisia %1\n"
+#~ "(дар ҳайати KDE %2)\n"
+#~ "\n"
+#~ "Ҳуқуқи муаллиф (c) 1999-2002\n"
+#~ "Бернд Герман (Bernd Gehrmann) <bernd@mail.berlios.de>\n"
+#~ "\n"
+#~ "Ин барнома метавонад мувофиқи шартҳои Q Public License, ки бо ширкати \n"
+#~ "Trolltech AS-и Норвегия истифода мешаванд, паҳн шавад. Матни\n"
+#~ "литсензия дар файли LICENSE.QPL, ки дар дистрибутиви\n"
+#~ "барнома дохил аст, ҷойгир аст.\n"
+#~ "\n"
+#~ "Ин барнома бо умеди ёрирасон буданаш паҳн мешавад, аммо\n"
+#~ "БЕ ЯГОН КАФОЛАТ, ҳатто бе кафолати зимнан дар назар доштани ТАЛАБОТИ "
+#~ "БАЛАНД ё МУТОБИҚАТИ ҲАДАФИ ЗАРУРӢ.\n"
+#~ "Барои аз назар гузаронидани номҳои муаллиф, ба файли ChangeLog муроҷиат "
+#~ "кунед."
+
+#~ msgid "About Cervisia"
+#~ msgstr "Доир ба барномаи Cervisia"
+
+#~ msgid "File Type"
+#~ msgstr "Таҳрири файл"

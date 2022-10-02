@@ -1,0 +1,103 @@
+# translation of cvsservice.po to
+# Copyright (C) 2004, 2007 Free Software Foundation, Inc.
+# Ahmad M. Zawawi <azawawi@emirates.net.ae>, 2004.
+# Khaled Hosny <khaledhosny@eglug.org>, 2007.
+# Youssef Chahibi <chahibi@gmail.com>, 2007.
+# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: cvsservice\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-14 00:48+0000\n"
+"PO-Revision-Date: 2022-02-07 09:37+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: ar\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 21.07.70\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "أحمد محمد زواوي,خالد حسني"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "azawawi@emirates.net.ae,khaledhosny@eglug.org"
+
+#: cvsaskpass.cpp:38
+#, kde-format
+msgid "cvsaskpass"
+msgstr "cvsaskpass"
+
+#: cvsaskpass.cpp:40
+#, kde-format
+msgid "ssh-askpass for the CVS D-Bus Service"
+msgstr "‏ssh-askpass  لخدمة دي-باص CVS"
+
+#: cvsaskpass.cpp:42
+#, kde-format
+msgid "Copyright (c) 2003 Christian Loose"
+msgstr "حقوق النسخ (c) 2003 Christian Loose"
+
+#: cvsaskpass.cpp:49
+#, kde-format
+msgid "prompt"
+msgstr "محثّ"
+
+#: cvsaskpass.cpp:61
+#, kde-format
+msgid "Please type in your password below."
+msgstr "فضلا اكتب كلمة سرّك بأسفل."
+
+#: cvsaskpass.cpp:65
+#, kde-format
+msgid "Repository:"
+msgstr "المستودع:"
+
+#: cvsloginjob.cpp:108
+#, kde-format
+msgid "Enter password for repository %1."
+msgstr "فضلا اكتب كلمة سرّك للمستودع %1."
+
+#: cvsservice.cpp:883
+#, kde-format
+msgid ""
+"You have to set a local working copy directory before you can use this "
+"function!"
+msgstr "تحتاج لتحديد مجلّد نسخة العمل المحلّية قبل تمكنك من استخدام هذه الوظيفة!"
+
+#: cvsservice.cpp:896
+#, kde-format
+msgid "There is already a job running"
+msgstr "هناك مهمة تعمل بالفعل"
+
+#: main.cpp:36
+#, kde-format
+msgid "CVS D-Bus service"
+msgstr "خدمة دي-باص لـCVS"
+
+#: main.cpp:38
+#, kde-format
+msgid "D-Bus service for CVS"
+msgstr "خدمة دي-باص لـCVS"
+
+#: main.cpp:40
+#, kde-format
+msgid "Copyright (c) 2002-2003 Christian Loose"
+msgstr "حقوق النسخ (c) 2002-2003 Christian Loose"
+
+#: main.cpp:44
+#, kde-format
+msgid "Christian Loose"
+msgstr "Christian Loose"
+
+#: main.cpp:44
+#, kde-format
+msgid "Developer"
+msgstr "المطور"

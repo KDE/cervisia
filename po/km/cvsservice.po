@@ -1,0 +1,105 @@
+# translation of cvsservice.po to Khmer
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2008.
+# Auk Piseth <piseth_dv@khmeros.info>, 2008.
+# Eng Vannak <evannak@khmeros.info>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: cvsservice\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-14 00:48+0000\n"
+"PO-Revision-Date: 2008-12-19 10:19+0700\n"
+"Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
+"Language-Team: Khmer <support@khmeros.info>\n"
+"Language: km\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "ខឹម សុខែម, អេង វណ្ណៈ, អោក ពិសិដ្ឋ​​"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "khoemsokhem@khmeros.info,​​evannak@khmeros.info,piseth_dv@khmeros.info"
+
+#: cvsaskpass.cpp:38
+#, kde-format
+msgid "cvsaskpass"
+msgstr "cvsaskpass"
+
+#: cvsaskpass.cpp:40
+#, kde-format
+msgid "ssh-askpass for the CVS D-Bus Service"
+msgstr "ssh-askpass សម្រាប់​សេវា CVS D-Bus"
+
+#: cvsaskpass.cpp:42
+#, kde-format
+msgid "Copyright (c) 2003 Christian Loose"
+msgstr "រក្សា​សិទ្ធិ​ឆ្នាំ ២០០៣ ដោយ Christian Loose"
+
+#: cvsaskpass.cpp:49
+#, kde-format
+msgid "prompt"
+msgstr "ជូន​ដំណឹង"
+
+#: cvsaskpass.cpp:61
+#, kde-format
+msgid "Please type in your password below."
+msgstr "សូម​វាយ​ក្នុង​ពាក្យ​សម្ងាត់​របស់​អ្នក​ខាងក្រោម ៖"
+
+#: cvsaskpass.cpp:65
+#, kde-format
+msgid "Repository:"
+msgstr "ឃ្លាំង ៖"
+
+#: cvsloginjob.cpp:108
+#, fuzzy, kde-format
+#| msgid "Please type in your password for the repository below."
+msgid "Enter password for repository %1."
+msgstr "សូម​វា​ក្នុង​ពាក្យ​សម្ងាត់​របស់​អ្នក សម្រាប់​ឃ្លាំង​ខាងក្រោម ។"
+
+#: cvsservice.cpp:883
+#, kde-format
+msgid ""
+"You have to set a local working copy directory before you can use this "
+"function!"
+msgstr "អ្នក​ត្រូវ​តែ​កំណត់​ថត​ច្បាប់​ចម្លង​ដែល​ធ្វើការ​មូលដ្ឋាន មុន​ពេល​អ្នក​អាច​ប្រើ​មុខងារ​នេះ!"
+
+#: cvsservice.cpp:896
+#, kde-format
+msgid "There is already a job running"
+msgstr "មាន​មុខងារ​កំពុង​រត់​រួច​ហើយ"
+
+#: main.cpp:36
+#, kde-format
+msgid "CVS D-Bus service"
+msgstr "សេវា CVS D-Bus"
+
+#: main.cpp:38
+#, kde-format
+msgid "D-Bus service for CVS"
+msgstr "សេវា D-Bus សម្រាប់ CVS"
+
+#: main.cpp:40
+#, kde-format
+msgid "Copyright (c) 2002-2003 Christian Loose"
+msgstr "រក្សា​សិទ្ធិ​ឆ្នាំ ២០០២-២០០៣ ដោយ Christian Loose"
+
+#: main.cpp:44
+#, kde-format
+msgid "Christian Loose"
+msgstr "Christian Loose"
+
+#: main.cpp:44
+#, kde-format
+msgid "Developer"
+msgstr "អ្នក​អភិវឌ្ឍន៍"

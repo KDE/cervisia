@@ -1,0 +1,2099 @@
+# translation of cervisia.po to Chinese Traditional
+# Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2006, 2009.
+# Franklin Weng <franklin at goodhorse dot idv dot tw>, 2007, 2008.
+# Jeff Huang <s8321414@gmail.com>, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: cervisia\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-14 00:48+0000\n"
+"PO-Revision-Date: 2016-11-15 21:08+0800\n"
+"Last-Translator: Jeff Huang <s8321414@gmail.com>\n"
+"Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 2.0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Frank Weng (a.k.a. Franklin), Jeff Huang"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "franklin@goodhorse.idv.tw, s8321414@gmail.com"
+
+#: addignoremenu.cpp:34
+#, kde-format
+msgid "Add to Ignore List"
+msgstr "新增到忽略清單"
+
+#: addignoremenu.cpp:65
+#, kde-format
+msgid "Ignore File"
+msgid_plural "Ignore %1 Files"
+msgstr[0] "忽略 %1 個檔案"
+
+#: addignoremenu.cpp:85
+#, kde-format
+msgid "Cannot open file '%1' for writing."
+msgstr "無法開啟檔案 %1 以寫入。"
+
+#: addremovedialog.cpp:40
+#, kde-format
+msgid "CVS Add"
+msgstr "CVS 新增"
+
+#: addremovedialog.cpp:40
+#, kde-format
+msgid "CVS Add Binary"
+msgstr "CVS 新增（二進位檔）"
+
+#: addremovedialog.cpp:40
+#, kde-format
+msgid "CVS Remove"
+msgstr "CVS 移除"
+
+#: addremovedialog.cpp:59
+#, kde-format
+msgid "Add the following files to the repository:"
+msgstr "新增以下的檔案到主目錄中："
+
+#: addremovedialog.cpp:60
+#, kde-format
+msgid "Add the following binary files to the repository:"
+msgstr "新增以下的二進位檔案到主目錄中："
+
+#: addremovedialog.cpp:61
+#, kde-format
+msgid "Remove the following files from the repository:"
+msgstr "從主目錄中移除以下的檔案："
+
+#: addremovedialog.cpp:73
+#, kde-format
+msgid "This will also remove the files from your local working copy."
+msgstr "這也會將檔案從您本地端的工作複本中移除。"
+
+#: addrepositorydialog.cpp:40
+#, kde-format
+msgid "Add Repository"
+msgstr "新增主目錄"
+
+#: addrepositorydialog.cpp:53 checkoutdialog.cpp:86
+#, kde-format
+msgid "&Repository:"
+msgstr "主目錄(&R)："
+
+#: addrepositorydialog.cpp:67
+#, kde-format
+msgid "Use remote &shell (only for :ext: repositories):"
+msgstr "使用遠端 shell（只對 :ext: 的主目錄）(&S)："
+
+#: addrepositorydialog.cpp:76
+#, kde-format
+msgid "Invoke this program on the server side:"
+msgstr "在伺服器端啟動此程式："
+
+#: addrepositorydialog.cpp:86
+#, kde-format
+msgid "Use different &compression level:"
+msgstr "使用不同的壓縮等級(&C)："
+
+#: addrepositorydialog.cpp:94
+#, kde-format
+msgid "Download cvsignore file from server"
+msgstr "從伺服器上下載 cvsignore 檔案"
+
+#: addrepositorydialog.cpp:174
+#, kde-format
+msgid "Repository Settings"
+msgstr "主目錄設定"
+
+#: annotatecontroller.cpp:75
+#, kde-format
+msgid "CVS Annotate: %1"
+msgstr "CVS 最後狀態註記：%1"
+
+#: annotatecontroller.cpp:85
+#, kde-format
+msgid "CVS Annotate"
+msgstr "CVS 最後狀態註記"
+
+#: annotatedialog.cpp:44
+#, kde-format
+msgid "Go to Line..."
+msgstr "跳至行號..."
+
+#: annotatedialog.cpp:49
+#, kde-format
+msgid "Find Prev"
+msgstr "尋找上一個"
+
+#: annotatedialog.cpp:54
+#, kde-format
+msgid "Find Next"
+msgstr "尋找下一個"
+
+#: annotatedialog.cpp:64
+#, kde-format
+msgid "Search"
+msgstr "搜尋"
+
+#: annotatedialog.cpp:115
+#, kde-format
+msgid "Go to Line"
+msgstr "跳至行號"
+
+#: annotatedialog.cpp:115
+#, kde-format
+msgid "Go to line number:"
+msgstr "跳至行號："
+
+#: cervisiapart.cpp:111 main.cpp:138
+#, kde-format
+msgid "Cervisia"
+msgstr "Cervisia"
+
+#: cervisiapart.cpp:118
+#, kde-format
+msgid "Starting cvsservice failed with message: "
+msgstr "cvsservice 啟動失敗，訊息為："
+
+#: cervisiapart.cpp:148
+#, kde-format
+msgid ""
+"This KPart is non-functional, because the cvs D-Bus service could not be "
+"started."
+msgstr "因為無法啟動 cvs DBus 服務，因此這個 KPart 無法發揮功能。"
+
+#: cervisiapart.cpp:186
+#, kde-format
+msgid "Remote CVS working folders are not supported."
+msgstr "不支援遠端 CVS 工作目錄。"
+
+#: cervisiapart.cpp:194
+#, kde-format
+msgid ""
+"You cannot change to a different folder while there is a running cvs job."
+msgstr "您無法在正在執行 cvs 工作時切換到其他資料夾。"
+
+#: cervisiapart.cpp:214
+#, kde-format
+msgid ""
+"F - All files are hidden, the tree shows only folders\n"
+"N - All up-to-date files are hidden\n"
+"R - All removed files are hidden"
+msgstr ""
+"F - 所有檔案都被隱藏，樹狀圖只顯示資料夾。\n"
+"N - 所有的未變更的檔案都被隱藏。\n"
+"R - 所有已移除的檔案都被隱藏。"
+
+#: cervisiapart.cpp:227
+#, kde-format
+msgid "Open Sandbox..."
+msgstr "開啟沙箱..."
+
+#: cervisiapart.cpp:231
+#, kde-format
+msgid "Opens a CVS working folder in the main window"
+msgstr "在主視窗中開啟 CVS 的工作資料夾"
+
+#: cervisiapart.cpp:235
+#, kde-format
+msgid "Recent Sandboxes"
+msgstr "最近的沙箱"
+
+#: cervisiapart.cpp:239
+#, kde-format
+msgid "&Insert ChangeLog Entry..."
+msgstr "插入 ChangeLog 項目(&I)..."
+
+#: cervisiapart.cpp:242
+#, kde-format
+msgid "Inserts a new intro into the file ChangeLog in the toplevel folder"
+msgstr "將新的項目加到頂層資料夾中的 ChangeLog 檔中。"
+
+#: cervisiapart.cpp:246
+#, kde-format
+msgid "&Update"
+msgstr "更新(&U)"
+
+#: cervisiapart.cpp:250
+#, kde-format
+msgid "Updates (cvs update) the selected files and folders"
+msgstr "更新（cvs update）所選取的檔案與資料夾"
+
+#: cervisiapart.cpp:254
+#, kde-format
+msgid "&Status"
+msgstr "狀態(&S)"
+
+#: cervisiapart.cpp:258
+#, kde-format
+msgid "Updates the status (cvs -n update) of the selected files and folders"
+msgstr "更新（cvs -n update）所選取的檔案與資料夾的狀態"
+
+#: cervisiapart.cpp:262 resolvedialog.cpp:176
+#, kde-format
+msgid "&Edit"
+msgstr "編輯(&E)"
+
+#: cervisiapart.cpp:265
+#, kde-format
+msgid "Opens the marked file for editing"
+msgstr "編輯所標記的檔案"
+
+#: cervisiapart.cpp:269
+#, kde-format
+msgid "Reso&lve..."
+msgstr "解決衝突(&L)..."
+
+#: cervisiapart.cpp:272
+#, kde-format
+msgid "Opens the resolve dialog with the selected file"
+msgstr "開啟檔案的解決衝突對話框"
+
+#: cervisiapart.cpp:276
+#, kde-format
+msgid "&Commit..."
+msgstr "提交(&C)..."
+
+#: cervisiapart.cpp:280
+#, kde-format
+msgid "Commits the selected files"
+msgstr "提交所選取的檔案"
+
+#: cervisiapart.cpp:284
+#, kde-format
+msgid "&Add to Repository..."
+msgstr "新增到主目錄(&A)..."
+
+#: cervisiapart.cpp:287
+#, kde-format
+msgid "Add"
+msgstr "新增"
+
+#: cervisiapart.cpp:289
+#, kde-format
+msgid "Adds (cvs add) the selected files to the repository"
+msgstr "新增（cvs add）所選取的檔案到主目錄中"
+
+#: cervisiapart.cpp:293
+#, kde-format
+msgid "Add &Binary..."
+msgstr "新增二進位檔(&B)..."
+
+#: cervisiapart.cpp:296
+#, kde-format
+msgid "Adds (cvs -kb add) the selected files as binaries to the repository"
+msgstr "新增（cvs -kb add）所選取的檔案到主目錄中，並標記為二進位檔。"
+
+#: cervisiapart.cpp:300
+#, kde-format
+msgid "&Remove From Repository..."
+msgstr "從主目錄中移除(&R)..."
+
+#: cervisiapart.cpp:303 repositorydialog.cpp:201
+#, kde-format
+msgid "Remove"
+msgstr "移除"
+
+#: cervisiapart.cpp:305
+#, kde-format
+msgid "Removes (cvs remove) the selected files from the repository"
+msgstr "從主目錄中移除（cvs remove）所選取的檔案。"
+
+#: cervisiapart.cpp:309
+#, kde-format
+msgid "Rever&t"
+msgstr "回復(&T)"
+
+#: cervisiapart.cpp:312
+#, kde-format
+msgid "Reverts (cvs update -C) the selected files (only cvs 1.11)"
+msgstr "回復（cvs yodate -C）所選取的檔案（cvs 1.11 版以後才有作用）。"
+
+#: cervisiapart.cpp:316
+#, kde-format
+msgid "&Properties"
+msgstr "內容(&P)"
+
+#: cervisiapart.cpp:323
+#, kde-format
+msgid "Stop"
+msgstr "停止"
+
+#: cervisiapart.cpp:328
+#, kde-format
+msgid "Stops any running sub-processes"
+msgstr "停止任何正在執行中的子行程"
+
+#: cervisiapart.cpp:332
+#, kde-format
+msgid "Browse &Log..."
+msgstr "瀏覽紀錄檔(&L)..."
+
+#: cervisiapart.cpp:336
+#, kde-format
+msgid "Shows the revision tree of the selected file"
+msgstr "顯示所選擇檔案的版本樹狀圖"
+
+#: cervisiapart.cpp:341
+#, kde-format
+msgid "Browse Multi-File Log..."
+msgstr "瀏覽多重檔案紀錄..."
+
+#: cervisiapart.cpp:345
+#, kde-format
+msgid "&Annotate..."
+msgstr "最後狀態註記(&A)..."
+
+#: cervisiapart.cpp:349
+#, kde-format
+msgid "Shows a blame-annotated view of the selected file"
+msgstr "顯示所選取檔案，每一行最後狀態的註記"
+
+#: cervisiapart.cpp:353
+#, kde-format
+msgid "&Difference to Repository (BASE)..."
+msgstr "與主目錄比較（BASE）(&D)..."
+
+#: cervisiapart.cpp:357
+#, kde-format
+msgid ""
+"Shows the differences of the selected file to the checked out version (tag "
+"BASE)"
+msgstr "顯示所選取的檔案與取出來的版本（tag BASE）的不同處。"
+
+#: cervisiapart.cpp:361
+#, kde-format
+msgid "Difference to Repository (HEAD)..."
+msgstr "與主目錄比較（HEAD）(&D)..."
+
+#: cervisiapart.cpp:365
+#, kde-format
+msgid ""
+"Shows the differences of the selected file to the newest version in the "
+"repository (tag HEAD)"
+msgstr "顯示所選取的檔案與最新的版本（tag HEAD）的不同處。"
+
+#: cervisiapart.cpp:369
+#, kde-format
+msgid "Last &Change..."
+msgstr "最後變更(&C)..."
+
+#: cervisiapart.cpp:372
+#, kde-format
+msgid ""
+"Shows the differences between the last two revisions of the selected file"
+msgstr "顯示所選取的檔案最後兩個版本間的差異"
+
+#: cervisiapart.cpp:376
+#, kde-format
+msgid "&History..."
+msgstr "歷史紀錄(&H)..."
+
+#: cervisiapart.cpp:379
+#, kde-format
+msgid "Shows the CVS history as reported by the server"
+msgstr "顯示伺服器回報的 CVS 歷史紀錄"
+
+#: cervisiapart.cpp:383
+#, kde-format
+msgid "&Unfold File Tree"
+msgstr "展開檔案樹狀圖(&U)"
+
+#: cervisiapart.cpp:387
+#, kde-format
+msgid "Opens all branches of the file tree"
+msgstr "將檔案樹狀圖全部打開"
+
+#: cervisiapart.cpp:391
+#, kde-format
+msgid "&Fold File Tree"
+msgstr "關閉檔案樹狀圖(&F)"
+
+#: cervisiapart.cpp:394
+#, kde-format
+msgid "Closes all branches of the file tree"
+msgstr "將檔案樹狀圖全部合起來"
+
+#: cervisiapart.cpp:401
+#, kde-format
+msgid "&Tag/Branch..."
+msgstr "標籤/分支(&T)..."
+
+#: cervisiapart.cpp:404
+#, kde-format
+msgid "Creates a tag or branch for the selected files"
+msgstr "建立所選取檔案的標籤（tag）或分支（branch）"
+
+#: cervisiapart.cpp:408
+#, kde-format
+msgid "&Delete Tag..."
+msgstr "刪除標籤(&D)..."
+
+#: cervisiapart.cpp:411
+#, kde-format
+msgid "Deletes a tag from the selected files"
+msgstr "刪除所選取檔案中的標籤"
+
+#: cervisiapart.cpp:415
+#, kde-format
+msgid "&Update to Tag/Date..."
+msgstr "更新到標籤/日期(&U)..."
+
+#: cervisiapart.cpp:418
+#, kde-format
+msgid "Updates the selected files to a given tag, branch or date"
+msgstr "將所選取的檔案更新到指定的標籤、分支或日期"
+
+#: cervisiapart.cpp:422
+#, kde-format
+msgid "Update to &HEAD"
+msgstr "更新到 HEAD(&H)"
+
+#: cervisiapart.cpp:425
+#, kde-format
+msgid "Updates the selected files to the HEAD revision"
+msgstr "將所選取的檔案更新到 HEAD 版本"
+
+#: cervisiapart.cpp:429
+#, kde-format
+msgid "&Merge..."
+msgstr "合併(&M)..."
+
+#: cervisiapart.cpp:432
+#, kde-format
+msgid "Merges a branch or a set of modifications into the selected files"
+msgstr "將某一分支或許多變更合併到所選取的檔案中"
+
+#: cervisiapart.cpp:436
+#, kde-format
+msgid "&Add Watch..."
+msgstr "新增監控(&A)..."
+
+#: cervisiapart.cpp:439
+#, kde-format
+msgid "Adds a watch for the selected files"
+msgstr "對所選取的檔案新增監控（Watch）"
+
+#: cervisiapart.cpp:443
+#, kde-format
+msgid "&Remove Watch..."
+msgstr "移除監控(&R)..."
+
+#: cervisiapart.cpp:446
+#, kde-format
+msgid "Removes a watch from the selected files"
+msgstr "移除對所選取的檔案的監控(Watch)"
+
+#: cervisiapart.cpp:450
+#, kde-format
+msgid "Show &Watchers"
+msgstr "顯示監控(&W)"
+
+#: cervisiapart.cpp:453
+#, kde-format
+msgid "Shows the watchers of the selected files"
+msgstr "顯示所選取檔案的監控（Watch）"
+
+#: cervisiapart.cpp:457
+#, kde-format
+msgid "Ed&it Files"
+msgstr "編輯檔案(&I)"
+
+#: cervisiapart.cpp:460
+#, kde-format
+msgid "Edits (cvs edit) the selected files"
+msgstr "編輯（cvs edit）所選取的檔案"
+
+#: cervisiapart.cpp:464
+#, kde-format
+msgid "U&nedit Files"
+msgstr "解除編輯檔案(&N)"
+
+#: cervisiapart.cpp:467
+#, kde-format
+msgid "Unedits (cvs unedit) the selected files"
+msgstr "解除編輯（cvs unedit）所選取的檔案"
+
+#: cervisiapart.cpp:471
+#, kde-format
+msgid "Show &Editors"
+msgstr "顯示編輯者(&E)"
+
+#: cervisiapart.cpp:474
+#, kde-format
+msgid "Shows the editors of the selected files"
+msgstr "顯示所選取檔案的編輯者"
+
+#: cervisiapart.cpp:478
+#, kde-format
+msgid "&Lock Files"
+msgstr "鎖定檔案(&L)"
+
+#: cervisiapart.cpp:481
+#, kde-format
+msgid "Locks the selected files, so that others cannot modify them"
+msgstr "鎖定所選取的檔案，讓其他人無法變更"
+
+#: cervisiapart.cpp:485
+#, kde-format
+msgid "Unl&ock Files"
+msgstr "解除鎖定檔案(&O)"
+
+#: cervisiapart.cpp:488
+#, kde-format
+msgid "Unlocks the selected files"
+msgstr "解除鎖定所選取的檔案"
+
+#: cervisiapart.cpp:492
+#, kde-format
+msgid "Create &Patch Against Repository..."
+msgstr "建立修補檔(&P)..."
+
+#: cervisiapart.cpp:495
+#, kde-format
+msgid "Creates a patch from the modifications in your sandbox"
+msgstr "根據您的工作目錄中的變更來建立修補檔"
+
+#: cervisiapart.cpp:502
+#, kde-format
+msgid "&Create..."
+msgstr "建立(&C)..."
+
+#: cervisiapart.cpp:506
+#, kde-format
+msgid "&Checkout..."
+msgstr "取出(&C)..."
+
+#: cervisiapart.cpp:509
+#, kde-format
+msgid "Allows you to checkout a module from a repository"
+msgstr "從主目錄中取出（checkout）模組"
+
+#: cervisiapart.cpp:513
+#, kde-format
+msgid "&Import..."
+msgstr "匯入(&I)..."
+
+#: cervisiapart.cpp:516
+#, kde-format
+msgid "Allows you to import a module into a repository"
+msgstr "允許您將模組匯入（import） 主目錄中"
+
+#: cervisiapart.cpp:520
+#, kde-format
+msgid "&Repositories..."
+msgstr "主目錄(&R)..."
+
+#: cervisiapart.cpp:523
+#, kde-format
+msgid "Configures a list of repositories you regularly use"
+msgstr "設定您常用的主目錄清單"
+
+#: cervisiapart.cpp:530
+#, kde-format
+msgid "Hide All &Files"
+msgstr "隱藏所有檔案(&F)"
+
+#: cervisiapart.cpp:533
+#, kde-format
+msgid "Determines whether only folders are shown"
+msgstr "決定是否只顯示資料夾"
+
+#: cervisiapart.cpp:537
+#, kde-format
+msgid "Hide Unmodified Files"
+msgstr "隱藏未變更的檔案"
+
+#: cervisiapart.cpp:541
+#, kde-format
+msgid "Determines whether files with status up-to-date or unknown are hidden"
+msgstr "決定是否隱藏未做過任何變更的檔案"
+
+#: cervisiapart.cpp:546
+#, kde-format
+msgid "Hide Removed Files"
+msgstr "隱藏已移除的檔案"
+
+#: cervisiapart.cpp:549
+#, kde-format
+msgid "Determines whether removed files are hidden"
+msgstr "決定是否隱藏已移除的檔案"
+
+#: cervisiapart.cpp:553
+#, kde-format
+msgid "Hide Non-CVS Files"
+msgstr "隱藏非 CVS 檔案"
+
+#: cervisiapart.cpp:556
+#, kde-format
+msgid "Determines whether files not in CVS are hidden"
+msgstr "決定是否隱藏非 CVS 的檔案"
+
+#: cervisiapart.cpp:560
+#, kde-format
+msgid "Hide Empty Folders"
+msgstr "隱藏空的資料夾"
+
+#: cervisiapart.cpp:563
+#, kde-format
+msgid "Determines whether folders without visible entries are hidden"
+msgstr "決定是否要隱藏空的資料夾"
+
+#: cervisiapart.cpp:567
+#, kde-format
+msgid "Create &Folders on Update"
+msgstr "更新時建立資料夾(&F)"
+
+#: cervisiapart.cpp:570
+#, kde-format
+msgid "Determines whether updates create folders"
+msgstr "決定是否在更新時建立資料夾"
+
+#: cervisiapart.cpp:574
+#, kde-format
+msgid "&Prune Empty Folders on Update"
+msgstr "更新時移除空的資料夾(&P)"
+
+#: cervisiapart.cpp:577
+#, kde-format
+msgid "Determines whether updates remove empty folders"
+msgstr "決定是否在更新時移除空的資料夾"
+
+#: cervisiapart.cpp:581
+#, kde-format
+msgid "&Update Recursively"
+msgstr "遞迴更新(&U)"
+
+#: cervisiapart.cpp:584
+#, kde-format
+msgid "Determines whether updates are recursive"
+msgstr "決定是否要連同子目錄一起更新（update）"
+
+#: cervisiapart.cpp:588
+#, kde-format
+msgid "C&ommit && Remove Recursively"
+msgstr "遞迴提交與移除(&O)"
+
+#: cervisiapart.cpp:591
+#, kde-format
+msgid "Determines whether commits and removes are recursive"
+msgstr "決定在提交（commit）或移除（remove）時是否要連子目錄一起做"
+
+#: cervisiapart.cpp:595
+#, kde-format
+msgid "Do cvs &edit Automatically When Necessary"
+msgstr "需要時自動執行 cvs edit(&E)"
+
+#: cervisiapart.cpp:598
+#, kde-format
+msgid "Determines whether automatic cvs editing is active"
+msgstr "決定是否要自動執行 cvs edit"
+
+#: cervisiapart.cpp:602
+#, kde-format
+msgid "Configure Cervisia..."
+msgstr "設定 Cervisia..."
+
+#: cervisiapart.cpp:605
+#, kde-format
+msgid "Allows you to configure the Cervisia KPart"
+msgstr "設定 Cervisia KPart"
+
+#: cervisiapart.cpp:613
+#, kde-format
+msgid "CVS &Manual"
+msgstr "CVS 手冊(&M)"
+
+#: cervisiapart.cpp:616
+#, kde-format
+msgid "Opens the help browser with the CVS documentation"
+msgstr "開啟 CVS 文件的說明瀏覽器"
+
+#: cervisiapart.cpp:623
+#, kde-format
+msgid "Unfold Folder"
+msgstr "展開資料夾"
+
+#: cervisiapart.cpp:715
+#, kde-format
+msgid "Cervisia Part"
+msgstr "Cervisia Part"
+
+#: cervisiapart.cpp:717 main.cpp:140
+#, kde-format
+msgid "A CVS frontend"
+msgstr "CVS 前端介面"
+
+#: cervisiapart.cpp:719 main.cpp:142
+#, kde-format
+msgid ""
+"Copyright (c) 1999-2002 Bernd Gehrmann\n"
+"Copyright (c) 2002-2008 the Cervisia authors"
+msgstr ""
+"Copyright (c) 1999-2002 Bernd Gehrmann\n"
+"Copyright (c) 2002-2008，Cervisia 作者群"
+
+#: cervisiapart.cpp:724 main.cpp:147
+#, kde-format
+msgid "Bernd Gehrmann"
+msgstr "Bernd Gehrmann"
+
+#: cervisiapart.cpp:725 main.cpp:148
+#, kde-format
+msgid "Original author and former maintainer"
+msgstr "原始作者和前任維護者"
+
+#: cervisiapart.cpp:728 main.cpp:151
+#, kde-format
+msgid "Christian Loose"
+msgstr "Christian Loose"
+
+#: cervisiapart.cpp:728 main.cpp:151
+#, kde-format
+msgid "Maintainer"
+msgstr "維護者"
+
+#: cervisiapart.cpp:729 main.cpp:152
+#, kde-format
+msgid "André Wöbbeking"
+msgstr "André Wöbbeking"
+
+#: cervisiapart.cpp:729 main.cpp:152
+#, kde-format
+msgid "Developer"
+msgstr "開發者"
+
+#: cervisiapart.cpp:730 main.cpp:153
+#, kde-format
+msgid "Carlos Woelz"
+msgstr "Carlos Woelz"
+
+#: cervisiapart.cpp:730 main.cpp:153
+#, kde-format
+msgid "Documentation"
+msgstr "文件"
+
+#: cervisiapart.cpp:732 main.cpp:155
+#, kde-format
+msgid "Richard Moore"
+msgstr "Richard Moore"
+
+#: cervisiapart.cpp:732 main.cpp:155
+#, kde-format
+msgid "Conversion to KPart"
+msgstr "轉換到 KPart"
+
+#: cervisiapart.cpp:733 main.cpp:156
+#, kde-format
+msgid "Laurent Montel"
+msgstr "Laurent Montel"
+
+#: cervisiapart.cpp:733 main.cpp:156
+#, kde-format
+msgid "Conversion to D-Bus"
+msgstr "轉換到 D-Bus"
+
+#: cervisiapart.cpp:734 main.cpp:157
+#, kde-format
+msgid "Martin Koller"
+msgstr "Martin Koller"
+
+#: cervisiapart.cpp:734 main.cpp:157
+#, kde-format
+msgid "Port to KDE Frameworks 5"
+msgstr "移植到 KDE Frameworks 5"
+
+#: cervisiapart.cpp:741
+#, kde-format
+msgid "Open Sandbox"
+msgstr "開啟沙箱"
+
+#: cervisiapart.cpp:791
+#, kde-format
+msgid "CVS Edit"
+msgstr "CVS 編輯"
+
+#: cervisiapart.cpp:1298 diffdialog.cpp:263 logdialog.cpp:472
+#, kde-format
+msgid "CVS Diff"
+msgstr "CVS 比較"
+
+#: cervisiapart.cpp:1311 diffdialog.cpp:473 logdialog.cpp:485
+#: resolvedialog.cpp:351
+#, kde-format
+msgid "Could not open file for writing."
+msgstr "無法開啟檔案以寫入。"
+
+#: cervisiapart.cpp:1461
+#, kde-format
+msgid "The revision looks invalid."
+msgstr "此版本不合法。"
+
+#: cervisiapart.cpp:1465
+#, kde-format
+msgid "This is the first revision of the branch."
+msgstr "這是此分支的第一個版本。"
+
+#: cervisiapart.cpp:1575
+#, kde-format
+msgid "Invoking help on CVS"
+msgstr "打開 CVS 說明"
+
+#: cervisiapart.cpp:1610
+#, kde-format
+msgid "Done"
+msgstr "完成"
+
+#: cervisiapart.cpp:1616
+#, kde-format
+msgid "A CVS commit to repository %1 is done"
+msgstr "CVS 提交到主目錄 %1 已完成"
+
+#: cervisiapart.cpp:1633
+#, kde-format
+msgid ""
+"This is not a CVS folder.\n"
+"If you did not intend to use Cervisia, you can switch view modes within "
+"Konqueror."
+msgstr ""
+"這不是 CVS 資料夾。\n"
+"如果您沒有打算使用 Cervisia，您可以在 Konqueror 中切換顯示模式。"
+
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr "在檔案檢視時，顯示有衝突檔案的前景顏色。"
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr "進度對話框出現前的延遲（毫秒）。"
+
+#: cervisiashell.cpp:54
+#, kde-format
+msgid "The Cervisia library could not be loaded."
+msgstr "無法載入 Cervisia 函式庫。"
+
+#: cervisiashell.cpp:86
+#, kde-format
+msgid "Allows you to configure the toolbar"
+msgstr "讓您設定工具列"
+
+#: cervisiashell.cpp:91
+#, kde-format
+msgid "Allows you to customize the keybindings"
+msgstr "讓您自訂組合鍵"
+
+#: cervisiashell.cpp:96
+#, kde-format
+msgid "Exits Cervisia"
+msgstr "離開 Cervisia"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "檔案(&F)"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, kde-format
+msgid "&Settings"
+msgstr "設定(&S)"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr "說明(&H)"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr "主工具列"
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, kde-format
+msgid "&View"
+msgstr "檢視(&V)"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, kde-format
+msgid "&Advanced"
+msgstr "進階(&A)"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, kde-format
+msgid "&Repository"
+msgstr "主目錄(&R)"
+
+#: changelogdialog.cpp:48
+#, kde-format
+msgid "Edit ChangeLog"
+msgstr "編輯 ChangeLog"
+
+#: changelogdialog.cpp:86
+#, kde-format
+msgid "The ChangeLog file could not be written."
+msgstr "無法寫入 ChangeLog 檔。"
+
+#: changelogdialog.cpp:102
+#, kde-format
+msgid "A ChangeLog file does not exist. Create one?"
+msgstr "ChangeLog 檔不存在。要建立嗎？"
+
+#: changelogdialog.cpp:102
+#, kde-format
+msgid "Create"
+msgstr "建立"
+
+#: changelogdialog.cpp:107
+#, kde-format
+msgid "The ChangeLog file could not be read."
+msgstr "無法讀取 ChangeLog 檔。"
+
+#: checkoutdialog.cpp:59 checkoutdialog.cpp:348
+#, kde-format
+msgid "CVS Checkout"
+msgstr "CVS 取出"
+
+#: checkoutdialog.cpp:59
+#, kde-format
+msgid "CVS Import"
+msgstr "CVS 匯入"
+
+#: checkoutdialog.cpp:94 checkoutdialog.cpp:109
+#, kde-format
+msgid "&Module:"
+msgstr "模組(&M)："
+
+#: checkoutdialog.cpp:101 checkoutdialog.cpp:116 mergedialog.cpp:65
+#: tagdialog.cpp:71 updatedialog.cpp:66
+#, kde-format
+msgid "Fetch &List"
+msgstr "取回列表(&L)"
+
+#: checkoutdialog.cpp:124
+#, kde-format
+msgid "&Branch tag:"
+msgstr "分支標籤(&B)："
+
+#: checkoutdialog.cpp:130
+#, kde-format
+msgid "Re&cursive checkout"
+msgstr "遞迴取出(&C)"
+
+#: checkoutdialog.cpp:153
+#, kde-format
+msgid "Working &folder:"
+msgstr "工作資料夾(&F)："
+
+#: checkoutdialog.cpp:162
+#, kde-format
+msgid "&Vendor tag:"
+msgstr "Vendor 標籤(&V)："
+
+#: checkoutdialog.cpp:170
+#, kde-format
+msgid "&Release tag:"
+msgstr "Release 標籤(&R)："
+
+#: checkoutdialog.cpp:178
+#, kde-format
+msgid "&Ignore files:"
+msgstr "忽略檔案(&I)："
+
+#: checkoutdialog.cpp:186
+#, kde-format
+msgid "&Comment:"
+msgstr "註解(&C)："
+
+#: checkoutdialog.cpp:190
+#, kde-format
+msgid "Import as &binaries"
+msgstr "以二進位檔匯入(&B)"
+
+#: checkoutdialog.cpp:193
+#, kde-format
+msgid "Use file's modification time as time of import"
+msgstr "使用檔案的變更時間做為匯入時間"
+
+#: checkoutdialog.cpp:200
+#, kde-format
+msgid "Chec&k out as:"
+msgstr "取出到(&K)："
+
+#: checkoutdialog.cpp:204
+#, kde-format
+msgid "Ex&port only"
+msgstr "只做匯出(&P)"
+
+#: checkoutdialog.cpp:304
+#, kde-format
+msgid "Please choose an existing working folder."
+msgstr "請選擇一個已存在的工作資料夾。"
+
+#: checkoutdialog.cpp:308 checkoutdialog.cpp:379
+#, kde-format
+msgid "Please specify a module name."
+msgstr "請指定模組名稱。"
+
+#: checkoutdialog.cpp:314
+#, kde-format
+msgid "Please specify a vendor tag and a release tag."
+msgstr "請指定 vender 與 release 標籤。"
+
+#: checkoutdialog.cpp:319
+#, kde-format
+msgid ""
+"Tags must start with a letter and may contain\n"
+"letters, digits and the characters '-' and '_'."
+msgstr "標籤必須以字母開頭，並且只能包含字母、數字、字元 '-' 及字元 '_'。"
+
+#: checkoutdialog.cpp:325
+#, kde-format
+msgid "A branch must be specified for export."
+msgstr "要匯出必須指定分支。"
+
+#: checkoutdialog.cpp:374
+#, kde-format
+msgid "Please specify a repository."
+msgstr "請指定主目錄。"
+
+#: checkoutdialog.cpp:387
+#, kde-format
+msgid "CVS Remote Log"
+msgstr "CVS 遠端紀錄檔"
+
+#: commitdialog.cpp:67
+#, kde-format
+msgid "CVS Commit"
+msgstr "CVS 提交"
+
+#: commitdialog.cpp:84 logdialog.cpp:199
+#, kde-format
+msgid "&Diff"
+msgstr "比較(&D)"
+
+#: commitdialog.cpp:86
+#, kde-format
+msgid "Commit the following &files:"
+msgstr "提交以下的檔案(&F)："
+
+#: commitdialog.cpp:96
+#, kde-format
+msgid "Older &messages:"
+msgstr "舊訊息(&M)："
+
+#: commitdialog.cpp:106
+#, kde-format
+msgid "&Log message:"
+msgstr "紀錄訊息(&L)："
+
+#: commitdialog.cpp:115
+#, kde-format
+msgid "Use log message &template"
+msgstr "使用記錄訊息樣本(&T)"
+
+#: commitdialog.cpp:190
+#, kde-format
+msgid "Current"
+msgstr "目前"
+
+#: cvsinitdialog.cpp:39
+#, kde-format
+msgid "Create New Repository (cvs init)"
+msgstr "建立新的主目錄（cvs init）"
+
+#: cvsinitdialog.cpp:51
+#, kde-format
+msgid "Repository folder:"
+msgstr "主目錄資料夾："
+
+#: diffdialog.cpp:102
+#, kde-format
+msgid "Synchronize scroll bars"
+msgstr "同步捲軸列"
+
+#: diffdialog.cpp:112 diffdialog.cpp:403
+#, kde-format
+msgid "%1 difference"
+msgid_plural "%1 differences"
+msgstr[0] "%1 個不同"
+
+#: diffdialog.cpp:238
+#, kde-format
+msgid "CVS Diff: %1"
+msgstr "CVS 比較：%1"
+
+#: diffdialog.cpp:239
+#, kde-format
+msgid "Repository:"
+msgstr "主目錄："
+
+#: diffdialog.cpp:239 diffdialog.cpp:240
+#, kde-format
+msgid "Revision "
+msgstr "版本"
+
+#: diffdialog.cpp:240
+#, kde-format
+msgid "Working dir:"
+msgstr "工作目錄："
+
+#: diffdialog.cpp:401 resolvedialog.cpp:383
+#, kde-format
+msgid "%1 of %2"
+msgstr "%1/%2"
+
+#: diffview.cpp:255 diffview.cpp:313
+#, kde-format
+msgid "Delete"
+msgstr "刪除"
+
+#: diffview.cpp:255 diffview.cpp:313
+#, kde-format
+msgid "Insert"
+msgstr "插入"
+
+#: diffview.cpp:255 diffview.cpp:313
+#, kde-format
+msgid "Change"
+msgstr "變更"
+
+#: editwithmenu.cpp:46
+#, kde-format
+msgid "Edit With"
+msgstr "編輯用"
+
+#: entry_status.cpp:33
+#, kde-format
+msgid "Locally Modified"
+msgstr "本地端已修改"
+
+#: entry_status.cpp:36
+#, kde-format
+msgid "Locally Added"
+msgstr "本地端已新增"
+
+#: entry_status.cpp:39
+#, kde-format
+msgid "Locally Removed"
+msgstr "本地端已移除"
+
+#: entry_status.cpp:42
+#, kde-format
+msgid "Needs Update"
+msgstr "需要更新"
+
+#: entry_status.cpp:45
+#, kde-format
+msgid "Needs Patch"
+msgstr "需要修補"
+
+#: entry_status.cpp:48
+#, kde-format
+msgid "Needs Merge"
+msgstr "需要合併"
+
+#: entry_status.cpp:51
+#, kde-format
+msgid "Up to Date"
+msgstr "最新日期"
+
+#: entry_status.cpp:54
+#, kde-format
+msgid "Conflict"
+msgstr "衝突"
+
+#: entry_status.cpp:57
+#, kde-format
+msgid "Updated"
+msgstr "已更新"
+
+#: entry_status.cpp:60
+#, kde-format
+msgid "Patched"
+msgstr "已修補"
+
+#: entry_status.cpp:63
+#, kde-format
+msgid "Removed"
+msgstr "已移除"
+
+#: entry_status.cpp:66
+#, kde-format
+msgid "Not in CVS"
+msgstr "不在 CVS 內"
+
+#: entry_status.cpp:69
+#, kde-format
+msgid "Unknown"
+msgstr "未知"
+
+#: historydialog.cpp:106 historydialog.cpp:343
+#, kde-format
+msgid "Commit, Modified "
+msgstr "提交，已修改"
+
+#: historydialog.cpp:106 historydialog.cpp:346
+#, kde-format
+msgid "Commit, Added "
+msgstr "提交，已新增 "
+
+#: historydialog.cpp:106 historydialog.cpp:349
+#, kde-format
+msgid "Commit, Removed "
+msgstr "提交，已移除"
+
+#: historydialog.cpp:111 historydialog.cpp:319
+#, kde-format
+msgid "Checkout "
+msgstr "取出"
+
+#: historydialog.cpp:116 loginfo.cpp:57
+#, kde-format
+msgid "Tag"
+msgstr "標籤"
+
+#: historydialog.cpp:138 loglist.cpp:106
+#, kde-format
+msgid "Date"
+msgstr "日期"
+
+#: historydialog.cpp:138
+#, kde-format
+msgid "Event"
+msgstr "事件"
+
+#: historydialog.cpp:138 loglist.cpp:106
+#, kde-format
+msgid "Author"
+msgstr "作者"
+
+#: historydialog.cpp:138 loglist.cpp:106 updateview.cpp:50
+#, kde-format
+msgid "Revision"
+msgstr "版本"
+
+#: historydialog.cpp:138 watchersmodel.cpp:84
+#, kde-format
+msgid "File"
+msgstr "檔案"
+
+#: historydialog.cpp:138
+#, kde-format
+msgid "Repo Path"
+msgstr "主目錄路徑"
+
+#: historydialog.cpp:142
+#, kde-format
+msgid "Show c&ommit events"
+msgstr "顯示提交事件(&O)"
+
+#: historydialog.cpp:145
+#, kde-format
+msgid "Show ch&eckout events"
+msgstr "顯示取出事件(&E)"
+
+#: historydialog.cpp:148
+#, kde-format
+msgid "Show &tag events"
+msgstr "顯示標籤事件(&T)"
+
+#: historydialog.cpp:151
+#, kde-format
+msgid "Show &other events"
+msgstr "顯示其他事件(&O)"
+
+#: historydialog.cpp:154
+#, kde-format
+msgid "Only &user:"
+msgstr "只顯示使用者(&U)："
+
+#: historydialog.cpp:156
+#, kde-format
+msgid "Only &filenames matching:"
+msgstr "只顯示符合檔名(&F)："
+
+#: historydialog.cpp:158
+#, kde-format
+msgid "Only &folders matching:"
+msgstr "只顯示符合資料夾(&F)："
+
+#: historydialog.cpp:279 historydialog.cpp:285
+#, kde-format
+msgid "CVS History"
+msgstr "CVS 歷史"
+
+#: historydialog.cpp:322
+#, kde-format
+msgid "Tag "
+msgstr "標籤 "
+
+#: historydialog.cpp:325
+#, kde-format
+msgid "Release "
+msgstr "釋出"
+
+#: historydialog.cpp:328
+#, kde-format
+msgid "Update, Deleted "
+msgstr "更新，已刪除"
+
+#: historydialog.cpp:331
+#, kde-format
+msgid "Update, Copied "
+msgstr "更新，已複製"
+
+#: historydialog.cpp:334
+#, kde-format
+msgid "Update, Merged "
+msgstr "更新，已合併"
+
+#: historydialog.cpp:337
+#, kde-format
+msgid "Update, Conflict "
+msgstr "更新，衝突"
+
+#: historydialog.cpp:340
+#, kde-format
+msgid "Update, Patched "
+msgstr "更新，已修補"
+
+#: historydialog.cpp:352
+#, kde-format
+msgid "Unknown "
+msgstr "未知"
+
+#: logdialog.cpp:86
+#, kde-format
+msgid "Search:"
+msgstr "搜尋："
+
+#: logdialog.cpp:97
+#, kde-format
+msgid "&Tree"
+msgstr "樹狀圖(&T)"
+
+#: logdialog.cpp:98
+#, kde-format
+msgid "&List"
+msgstr "清單(&L)"
+
+#: logdialog.cpp:99
+#, kde-format
+msgid "CVS &Output"
+msgstr "CVS 輸出(&O)"
+
+#: logdialog.cpp:106
+#, kde-format
+msgid ""
+"Choose revision A by clicking with the left mouse button,\n"
+"revision B by clicking with the middle mouse button."
+msgstr ""
+"點擊滑鼠左鍵選擇版本 A。\n"
+"點擊滑鼠中鍵選擇版本 B。"
+
+#: logdialog.cpp:133
+#, kde-format
+msgid "Revision A:"
+msgstr "版本 A："
+
+#: logdialog.cpp:133
+#, kde-format
+msgid "Revision B:"
+msgstr "版本 B："
+
+#: logdialog.cpp:142
+#, kde-format
+msgid "Select by tag:"
+msgstr "選擇標籤："
+
+#: logdialog.cpp:150
+#, kde-format
+msgid "Author:"
+msgstr "作者："
+
+#: logdialog.cpp:158
+#, kde-format
+msgid "Date:"
+msgstr "日期："
+
+#: logdialog.cpp:166
+#, kde-format
+msgid "Comment/Tags:"
+msgstr "註解/標籤："
+
+#: logdialog.cpp:198
+#, kde-format
+msgid "&Annotate A"
+msgstr "最後狀態註記 A(&A)"
+
+#: logdialog.cpp:200
+#, kde-format
+msgid "&Find"
+msgstr "尋找(&F)"
+
+#: logdialog.cpp:207
+#, kde-format
+msgid ""
+"This revision is used when you click Annotate.\n"
+"It is also used as the first item of a Diff operation."
+msgstr ""
+"這個版本用於您點擊「最後狀態註記」時。\n"
+"它也會用於比較時的第一個項目。"
+
+#: logdialog.cpp:212
+#, kde-format
+msgid "This revision is used as the second item of a Diff operation."
+msgstr "這個版本用於比較時的第二個項目。"
+
+#: logdialog.cpp:225
+#, kde-format
+msgid "&View A"
+msgstr "檢視 A(&V)"
+
+#: logdialog.cpp:226
+#, kde-format
+msgid "Create Patch..."
+msgstr "建立修補檔..."
+
+#: logdialog.cpp:269
+#, kde-format
+msgid "CVS Log: %1"
+msgstr "CVS 紀錄：%1"
+
+#: logdialog.cpp:275
+#, kde-format
+msgid "CVS Log"
+msgstr "CVS 紀錄"
+
+#: logdialog.cpp:402
+#, kde-format
+msgid " (Branchpoint)"
+msgstr "（分支點）"
+
+#: logdialog.cpp:421
+#, kde-format
+msgid "Please select revision A or B first."
+msgstr "請先選擇版本 A 或 B。"
+
+#: logdialog.cpp:442
+#, kde-format
+msgid "View File"
+msgstr "檢視檔案"
+
+#: logdialog.cpp:457 logdialog.cpp:516
+#, kde-format
+msgid "Please select revision A or revisions A and B first."
+msgstr "請先選擇版本 A，或版本 A 與 B。"
+
+#: loginfo.cpp:51
+#, kde-format
+msgid "Branchpoint"
+msgstr "分支點"
+
+#: loginfo.cpp:54
+#, kde-format
+msgid "On Branch"
+msgstr "於分支"
+
+#: loglist.cpp:106
+#, kde-format
+msgid "Branch"
+msgstr "分支"
+
+#: loglist.cpp:106
+#, kde-format
+msgid "Comment"
+msgstr "註解"
+
+#: loglist.cpp:106
+#, kde-format
+msgid "Tags"
+msgstr "標籤"
+
+#: logplainview.cpp:46
+#, kde-format
+msgid "revision %1"
+msgstr "版本 %1"
+
+#: logplainview.cpp:47
+#, kde-format
+msgid "Select for revision A"
+msgstr "選擇版本 A"
+
+#: logplainview.cpp:48
+#, kde-format
+msgid "Select for revision B"
+msgstr "選擇版本 B"
+
+#: logplainview.cpp:49
+#, kde-format
+msgid "date: %1; author: %2"
+msgstr "日期：%1，作者：%2"
+
+#: main.cpp:166
+#, kde-format
+msgid "The sandbox to be loaded"
+msgstr "沙箱已載入"
+
+#: main.cpp:167
+#, kde-format
+msgid "Show resolve dialog for the given file."
+msgstr "顯示指定檔案的解決衝突對話框。"
+
+#: main.cpp:168
+#, kde-format
+msgid "Show log dialog for the given file."
+msgstr "顯示指定檔案的紀錄對話框。"
+
+#: main.cpp:169
+#, kde-format
+msgid "Show annotation dialog for the given file."
+msgstr "顯示指定檔案的註釋對話框。"
+
+#: mergedialog.cpp:41
+#, kde-format
+msgid "CVS Merge"
+msgstr "CVS 合併"
+
+#: mergedialog.cpp:56
+#, kde-format
+msgid "Merge from &branch:"
+msgstr "合併從分支(&B)："
+
+#: mergedialog.cpp:75
+#, kde-format
+msgid "Merge &modifications:"
+msgstr "合併修改(&M)："
+
+#: mergedialog.cpp:78
+#, kde-format
+msgid "between tag: "
+msgstr "於標籤："
+
+#: mergedialog.cpp:84
+#, kde-format
+msgid "and tag: "
+msgstr "和標籤："
+
+#: mergedialog.cpp:90 updatedialog.cpp:84
+#, kde-format
+msgid "Fetch L&ist"
+msgstr "取回列表(&I)"
+
+#: misc.cpp:78
+#, kde-format
+msgid "CVS Status"
+msgstr "CVS 狀態"
+
+#: misc.cpp:197
+#, kde-format
+msgid "Overwrite the file"
+msgstr "覆寫檔案"
+
+#: misc.cpp:200
+#, kde-format
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr "名為「%1」的檔案已經存在。您確定要覆寫它嗎？"
+
+#: misc.cpp:201
+#, kde-format
+msgid "Overwrite File?"
+msgstr "覆寫檔案？"
+
+#: patchoptiondialog.cpp:58
+#, kde-format
+msgid "Context"
+msgstr "內容"
+
+#: patchoptiondialog.cpp:59
+#, kde-format
+msgid "Normal"
+msgstr "正常"
+
+#: patchoptiondialog.cpp:60
+#, kde-format
+msgid "Unified"
+msgstr "統一"
+
+#: patchoptiondialog.cpp:64
+#, kde-format
+msgid "Output Format"
+msgstr "輸出格式"
+
+#: patchoptiondialog.cpp:74
+#, kde-format
+msgid "&Number of context lines:"
+msgstr "內容行數(&N)："
+
+#: patchoptiondialog.cpp:90
+#, kde-format
+msgid "Ignore added or removed empty lines"
+msgstr "忽略新增或移除的空行"
+
+#: patchoptiondialog.cpp:91
+#, kde-format
+msgid "Ignore changes in the amount of whitespace"
+msgstr "忽略只有空白的改變"
+
+#: patchoptiondialog.cpp:92
+#, kde-format
+msgid "Ignore all whitespace"
+msgstr "忽略所有的空白"
+
+#: patchoptiondialog.cpp:93
+#, kde-format
+msgid "Ignore changes in case"
+msgstr "忽略大小寫的改變"
+
+#: patchoptiondialog.cpp:100
+#, kde-format
+msgid "Ignore Options"
+msgstr "忽略選項"
+
+#: protocolview.cpp:90
+#, kde-format
+msgid "Clear"
+msgstr "清除"
+
+#: protocolview.cpp:127
+#, kde-format
+msgid "[Exited with status %1]\n"
+msgstr "【離開狀態 %1】\n"
+
+#: protocolview.cpp:129
+#, kde-format
+msgid "[Finished]\n"
+msgstr "【已完成】\n"
+
+#: protocolview.cpp:131
+#, kde-format
+msgid "[Aborted]\n"
+msgstr "【已中止】\n"
+
+#: repositorydialog.cpp:138
+#, kde-format
+msgid "Default"
+msgstr "預設"
+
+#: repositorydialog.cpp:155
+#, kde-format
+msgid "Logged in"
+msgstr "已登入"
+
+#: repositorydialog.cpp:155
+#, kde-format
+msgid "Not logged in"
+msgstr "未登入"
+
+#: repositorydialog.cpp:157
+#, kde-format
+msgid "No login required"
+msgstr "不需登入"
+
+#: repositorydialog.cpp:171
+#, kde-format
+msgid "Configure Access to Repositories"
+msgstr "設定對主目錄的存取"
+
+#: repositorydialog.cpp:192
+#, kde-format
+msgid "Repository"
+msgstr "主目錄"
+
+#: repositorydialog.cpp:192
+#, kde-format
+msgid "Method"
+msgstr "方法"
+
+#: repositorydialog.cpp:192
+#, kde-format
+msgid "Compression"
+msgstr "壓縮"
+
+#: repositorydialog.cpp:192 settingsdialog.cpp:293 updateview.cpp:50
+#, kde-format
+msgid "Status"
+msgstr "狀態"
+
+#: repositorydialog.cpp:199
+#, kde-format
+msgid "Add..."
+msgstr "新增..."
+
+#: repositorydialog.cpp:200
+#, kde-format
+msgid "Modify..."
+msgstr "變更..."
+
+#: repositorydialog.cpp:202
+#, kde-format
+msgid "Login..."
+msgstr "登入..."
+
+#: repositorydialog.cpp:203
+#, kde-format
+msgid "Logout"
+msgstr "登出"
+
+#: repositorydialog.cpp:335
+#, kde-format
+msgid "This repository is already known."
+msgstr "已知主目錄。"
+
+#: repositorydialog.cpp:423
+#, kde-format
+msgid "Login failed."
+msgstr "登入失敗。"
+
+#: repositorydialog.cpp:442
+#, kde-format
+msgid "CVS Logout"
+msgstr "CVS 登出"
+
+#: resolvedialog.cpp:135
+#, kde-format
+msgid "Your version (A):"
+msgstr "您的版本（A）："
+
+#: resolvedialog.cpp:144
+#, kde-format
+msgid "Other version (B):"
+msgstr "其他版本（B）："
+
+#: resolvedialog.cpp:156
+#, kde-format
+msgid "Merged version:"
+msgstr "合併版本："
+
+#: resolvedialog.cpp:250
+#, kde-format
+msgid "CVS Resolve: %1"
+msgstr "CVS 解決衝突：%1"
+
+#: resolvedialog.cpp:385
+#, kde-format
+msgid "%1 conflicts"
+msgstr "%1 個衝突"
+
+#: settingsdialog.cpp:70
+#, kde-format
+msgid "Configure Cervisia"
+msgstr "設定 Cervisia"
+
+#: settingsdialog.cpp:215
+#, kde-format
+msgid "General"
+msgstr "一般"
+
+#: settingsdialog.cpp:220
+#, kde-format
+msgid "&User name for the change log editor:"
+msgstr "變更記錄編輯器的使用者名稱(&U)："
+
+#: settingsdialog.cpp:228
+#, kde-format
+msgid "&Path to CVS executable, or 'cvs':"
+msgstr "CVS 執行路徑(&P)："
+
+#: settingsdialog.cpp:246
+#, kde-format
+msgid "Diff Viewer"
+msgstr "比較檢視器"
+
+#: settingsdialog.cpp:251
+#, kde-format
+msgid "&Number of context lines in diff dialog:"
+msgstr "比較對話框中內容行數(&N)："
+
+#: settingsdialog.cpp:259
+#, kde-format
+msgid "Additional &options for cvs diff:"
+msgstr "比較（cvs diff）的額外選項(&O)："
+
+#: settingsdialog.cpp:266
+#, kde-format
+msgid "Tab &width in diff dialog:"
+msgstr "比較對話框中的 Tab 寬度(&W)："
+
+#: settingsdialog.cpp:274
+#, kde-format
+msgid "External diff &frontend:"
+msgstr "外部比較（diff）前端介面(&F)："
+
+#: settingsdialog.cpp:296
+#, kde-format
+msgid ""
+"When opening a sandbox from a &remote repository,\n"
+"start a File->Status command automatically"
+msgstr "從遠端主目錄開啟沙箱時，自動執行「檔案＞狀態」的命令(&R)"
+
+#: settingsdialog.cpp:299
+#, kde-format
+msgid ""
+"When opening a sandbox from a &local repository,\n"
+"start a File->Status command automatically"
+msgstr "從本地端主目錄開啟沙箱時，自動執行「檔案＞狀態」的命令(&L)"
+
+#: settingsdialog.cpp:316
+#, kde-format
+msgid "Advanced"
+msgstr "進階"
+
+#: settingsdialog.cpp:335
+#, kde-format
+msgid "Appearance"
+msgstr "外觀"
+
+#: settingsdialog.cpp:338
+#, kde-format
+msgid "Fonts"
+msgstr "字型"
+
+#: settingsdialog.cpp:341
+#, kde-format
+msgid "Font for &Protocol Window..."
+msgstr "協定視窗的字型(&P)..."
+
+#: settingsdialog.cpp:342
+#, kde-format
+msgid "Font for A&nnotate View..."
+msgstr "最後狀態註記檢視的字型(&N)..."
+
+#: settingsdialog.cpp:343
+#, kde-format
+msgid "Font for D&iff View..."
+msgstr "比較檢視的字型(&I)..."
+
+#: settingsdialog.cpp:344
+#, kde-format
+msgid "Font for ChangeLog View..."
+msgstr "ChangeLog 檢視的字型..."
+
+#: settingsdialog.cpp:352
+#, kde-format
+msgid "Colors"
+msgstr "顏色"
+
+#: settingsdialog.cpp:355
+#, kde-format
+msgid "Conflict:"
+msgstr "衝突："
+
+#: settingsdialog.cpp:359
+#, kde-format
+msgid "Diff change:"
+msgstr "比較改變："
+
+#: settingsdialog.cpp:363
+#, kde-format
+msgid "Local change:"
+msgstr "本地端改變："
+
+#: settingsdialog.cpp:367
+#, kde-format
+msgid "Diff insertion:"
+msgstr "比較插入："
+
+#: settingsdialog.cpp:371
+#, kde-format
+msgid "Remote change:"
+msgstr "遠端改變："
+
+#: settingsdialog.cpp:375
+#, kde-format
+msgid "Diff deletion:"
+msgstr "比較刪除："
+
+#: settingsdialog.cpp:379
+#, kde-format
+msgid "Not in cvs:"
+msgstr "不在 CVS 內："
+
+#: settingsdialog.cpp:400
+#, kde-format
+msgid "Split main window &horizontally"
+msgstr "水平切割主視窗(&H)"
+
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr "進度對話框出現後的逾時時間（毫秒）："
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, kde-format
+msgid "Default compression &level:"
+msgstr "預設壓縮等級(&L)："
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr "使用正在執行中的，或是開啟新的 ssh 代理者行程"
+
+#: tagdialog.cpp:48
+#, kde-format
+msgid "CVS Delete Tag"
+msgstr "CVS 刪除標籤"
+
+#: tagdialog.cpp:48
+#, kde-format
+msgid "CVS Tag"
+msgstr "CVS 標籤"
+
+#: tagdialog.cpp:67 tagdialog.cpp:86
+#, kde-format
+msgid "&Name of tag:"
+msgstr "標籤名稱(&N)："
+
+#: tagdialog.cpp:95
+#, kde-format
+msgid "Create &branch with this tag"
+msgstr "以此標籤建立分支(&B)"
+
+#: tagdialog.cpp:99
+#, kde-format
+msgid "&Force tag creation even if tag already exists"
+msgstr "即使標籤已存在，也強制建立標籤(&F)"
+
+#: tagdialog.cpp:134
+#, kde-format
+msgid "You must define a tag name."
+msgstr "您必須指定標籤名稱。"
+
+#: tagdialog.cpp:140
+#, kde-format
+msgid ""
+"Tag must start with a letter and may contain letters, digits and the "
+"characters '-' and '_'."
+msgstr "標籤必須以字母開頭，並且只能包含字母、數字、字元 '-' 及字元 '_'。"
+
+#: updatedialog.cpp:42
+#, kde-format
+msgid "CVS Update"
+msgstr "CVS 更新"
+
+#: updatedialog.cpp:57
+#, kde-format
+msgid "Update to &branch: "
+msgstr "更新到分支(&B)："
+
+#: updatedialog.cpp:76
+#, kde-format
+msgid "Update to &tag: "
+msgstr "更新到標籤(&T)："
+
+#: updatedialog.cpp:94
+#, kde-format
+msgid "Update to &date ('yyyy-mm-dd'):"
+msgstr "更新到日期（yyyy-mm-dd）(&D)："
+
+#: updateview.cpp:50
+#, kde-format
+msgid "File Name"
+msgstr "檔案名稱"
+
+#: updateview.cpp:50
+#, kde-format
+msgid "Tag/Date"
+msgstr "標籤/日期"
+
+#: updateview.cpp:50
+#, kde-format
+msgid "Timestamp"
+msgstr "時間"
+
+#: watchdialog.cpp:38
+#, kde-format
+msgid "CVS Watch Add"
+msgstr "CVS 新增監控"
+
+#: watchdialog.cpp:38
+#, kde-format
+msgid "CVS Watch Remove"
+msgstr "CVS 移除監控"
+
+#: watchdialog.cpp:51
+#, kde-format
+msgid "Add watches for the following events:"
+msgstr "新增以下事件的監控："
+
+#: watchdialog.cpp:51
+#, kde-format
+msgid "Remove watches for the following events:"
+msgstr "移除以下事件的監控："
+
+#: watchdialog.cpp:54
+#, kde-format
+msgid "&All"
+msgstr "全部(&A)"
+
+#: watchdialog.cpp:59
+#, kde-format
+msgid "&Only:"
+msgstr "只有(&O)："
+
+#: watchdialog.cpp:68
+#, kde-format
+msgid "&Commits"
+msgstr "提交(&C)"
+
+#: watchdialog.cpp:72
+#, kde-format
+msgid "&Edits"
+msgstr "編輯(&E)"
+
+#: watchdialog.cpp:76
+#, kde-format
+msgid "&Unedits"
+msgstr "解除編輯(&U)"
+
+#: watchersdialog.cpp:68 watchersdialog.cpp:74
+#, kde-format
+msgid "CVS Watchers"
+msgstr "CVS 監控者"
+
+#: watchersmodel.cpp:86
+#, kde-format
+msgid "Watcher"
+msgstr "監控者"
+
+#: watchersmodel.cpp:88
+#, kde-format
+msgid "Edit"
+msgstr "編輯"
+
+#: watchersmodel.cpp:90
+#, kde-format
+msgid "Unedit"
+msgstr "解除編輯"
+
+#: watchersmodel.cpp:92
+#, kde-format
+msgid "Commit"
+msgstr "提交"
+
+#~ msgid "Invoking help on Cervisia"
+#~ msgstr "打開 Cervisia 說明"

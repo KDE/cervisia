@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+# Aydın CAN <aydincan2001@yahoo.com>, 2004
+# Mustafa Günay <mustafagunay@gmail.com>, 2007
+msgid ""
+msgstr ""
+"Project-Id-Version: kdesdk-kde4\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-14 00:48+0000\n"
+"PO-Revision-Date: 2017-06-04 11:30+0000\n"
+"Last-Translator: Mete <metebilgin48@gmail.com>\n"
+"Language-Team: Turkish (http://www.transifex.com/projects/p/kdesdk-k-tr/"
+"language/tr/)\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Aydın CAN, Mustafa Günay"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "aydincan2001@yahoo.com, mustafagunay@gmail.com"
+
+#: cvsaskpass.cpp:38
+#, kde-format
+msgid "cvsaskpass"
+msgstr "cvsaskpass"
+
+#: cvsaskpass.cpp:40
+#, kde-format
+msgid "ssh-askpass for the CVS D-Bus Service"
+msgstr "CVS D-BUS Servisi için ssh-parolası sor"
+
+#: cvsaskpass.cpp:42
+#, kde-format
+msgid "Copyright (c) 2003 Christian Loose"
+msgstr "Telif Hakkı (c) 2003 Christian Loose"
+
+#: cvsaskpass.cpp:49
+#, kde-format
+msgid "prompt"
+msgstr "Hazır"
+
+#: cvsaskpass.cpp:61
+#, kde-format
+msgid "Please type in your password below."
+msgstr "Lütfen aşağıdan parola türünüzü seçin."
+
+#: cvsaskpass.cpp:65
+#, kde-format
+msgid "Repository:"
+msgstr "Depo:"
+
+#: cvsloginjob.cpp:108
+#, kde-format
+msgid "Enter password for repository %1."
+msgstr "Lütfen %1 deposu için parola girin."
+
+#: cvsservice.cpp:883
+#, kde-format
+msgid ""
+"You have to set a local working copy directory before you can use this "
+"function!"
+msgstr ""
+"Bu fonksiyonu kullanmadan önce bir lokal çalışma kopya dizini oluşturmak "
+"zorundasınız"
+
+#: cvsservice.cpp:896
+#, kde-format
+msgid "There is already a job running"
+msgstr "Halihazırda çalışan bir işiniz var"
+
+#: main.cpp:36
+#, kde-format
+msgid "CVS D-Bus service"
+msgstr "CVS D-BUS servisi"
+
+#: main.cpp:38
+#, kde-format
+msgid "D-Bus service for CVS"
+msgstr "CVS için D-BUS servisi"
+
+#: main.cpp:40
+#, kde-format
+msgid "Copyright (c) 2002-2003 Christian Loose"
+msgstr "Telif Hakkı (c) 2002-2003 Christian Loose"
+
+#: main.cpp:44
+#, kde-format
+msgid "Christian Loose"
+msgstr "Christian Loose"
+
+#: main.cpp:44
+#, kde-format
+msgid "Developer"
+msgstr "Geliştirici"

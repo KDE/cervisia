@@ -1,0 +1,102 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Freek de Kruijf <freekdekruijf@kde.nl>, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-14 00:48+0000\n"
+"PO-Revision-Date: 2016-06-06 13:43+0100\n"
+"Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
+"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 2.0\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Freek de Kruijf"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "freekdekruijf@kde.nl"
+
+#: cvsaskpass.cpp:38
+#, kde-format
+msgid "cvsaskpass"
+msgstr "cvsaskpass"
+
+#: cvsaskpass.cpp:40
+#, kde-format
+msgid "ssh-askpass for the CVS D-Bus Service"
+msgstr "ssh-askpass voor the CVS DBUS-service"
+
+#: cvsaskpass.cpp:42
+#, kde-format
+msgid "Copyright (c) 2003 Christian Loose"
+msgstr "Copyright (c) 2003 Christian Loose"
+
+#: cvsaskpass.cpp:49
+#, kde-format
+msgid "prompt"
+msgstr "prompt"
+
+#: cvsaskpass.cpp:61
+#, kde-format
+msgid "Please type in your password below."
+msgstr "Voer hier uw wachtwoord in."
+
+#: cvsaskpass.cpp:65
+#, kde-format
+msgid "Repository:"
+msgstr "Repository:"
+
+#: cvsloginjob.cpp:108
+#, kde-format
+msgid "Enter password for repository %1."
+msgstr "Wachtwoord voor repository %1 invoeren."
+
+#: cvsservice.cpp:883
+#, kde-format
+msgid ""
+"You have to set a local working copy directory before you can use this "
+"function!"
+msgstr ""
+"U dient over een lokale kopie te beschikken alvorens deze functie gebruikt "
+"kan worden!"
+
+#: cvsservice.cpp:896
+#, kde-format
+msgid "There is already a job running"
+msgstr "Er is reeds een taak actief"
+
+#: main.cpp:36
+#, kde-format
+msgid "CVS D-Bus service"
+msgstr "CVS DBUS-service"
+
+#: main.cpp:38
+#, kde-format
+msgid "D-Bus service for CVS"
+msgstr "DBUS-service voor CVS"
+
+#: main.cpp:40
+#, kde-format
+msgid "Copyright (c) 2002-2003 Christian Loose"
+msgstr "Copyright (c) 2002-2003 Christian Loose"
+
+#: main.cpp:44
+#, kde-format
+msgid "Christian Loose"
+msgstr "Christian Loose"
+
+#: main.cpp:44
+#, kde-format
+msgid "Developer"
+msgstr "Ontwikkelaar"

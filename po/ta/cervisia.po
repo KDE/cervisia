@@ -1,0 +1,2214 @@
+# translation of cervisia.po to
+# translation of cervisia.po to
+# translation of cervisia.po to
+# translation of cervisia.po to
+# translation of cervisia.po to Tamil
+# Copyright (C) 2004 Free Software Foundation, Inc.
+#
+# Ambalam <tamilpc@ambalam.com>, 2004.
+# root <root@localhost.localdomain>, 2004.
+# Kishore G <kishore96@gmail.com>, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: cervisia\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-14 00:48+0000\n"
+"PO-Revision-Date: 2021-01-18 18:59+0530\n"
+"Last-Translator: Kishore G <kishore96@gmail.com>\n"
+"Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.12.1\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "vijay"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "jvijay_loyola@hotmail.com"
+
+#: addignoremenu.cpp:34
+#, kde-format
+msgid "Add to Ignore List"
+msgstr ""
+
+#: addignoremenu.cpp:65
+#, fuzzy, kde-format
+#| msgid "&Ignore files:"
+msgid "Ignore File"
+msgid_plural "Ignore %1 Files"
+msgstr[0] "கோப்புகளை தவிர்"
+msgstr[1] "கோப்புகளை தவிர்"
+
+#: addignoremenu.cpp:85
+#, fuzzy, kde-format
+#| msgid "Could not open file for writing."
+msgid "Cannot open file '%1' for writing."
+msgstr "கோப்பினை எழுதுவதற்காக திறக்க முடியவில்லை"
+
+#: addremovedialog.cpp:40
+#, kde-format
+msgid "CVS Add"
+msgstr "CVS சேர்"
+
+#: addremovedialog.cpp:40
+#, kde-format
+msgid "CVS Add Binary"
+msgstr "CVS இருநிலையைச் சேர்"
+
+#: addremovedialog.cpp:40
+#, kde-format
+msgid "CVS Remove"
+msgstr "CVS  நீக்கு"
+
+#: addremovedialog.cpp:59
+#, kde-format
+msgid "Add the following files to the repository:"
+msgstr "கீழ்கண்ட கோப்புகளை களஞ்சியத்தில் சேமி"
+
+#: addremovedialog.cpp:60
+#, kde-format
+msgid "Add the following binary files to the repository:"
+msgstr "பின்வரும் இருநிலைக் கோப்புகளை களஞ்சியத்தில் சேர்:"
+
+#: addremovedialog.cpp:61
+#, kde-format
+msgid "Remove the following files from the repository:"
+msgstr "பின்வரும் இருமக் கோப்புகளை தகவல் தளத்திலிருந்து நீக்கு:"
+
+#: addremovedialog.cpp:73
+#, fuzzy, kde-format
+msgid "This will also remove the files from your local working copy."
+msgstr "இது உங்கள் கோப்புகளை வட்டார பணி பதிவில் இருந்து நீக்கி விடும்!"
+
+#: addrepositorydialog.cpp:40
+#, kde-format
+msgid "Add Repository"
+msgstr "களஞ்சியத்தைச் சேர்"
+
+#: addrepositorydialog.cpp:53 checkoutdialog.cpp:86
+#, kde-format
+msgid "&Repository:"
+msgstr "&களஞ்சியம்"
+
+#: addrepositorydialog.cpp:67
+#, kde-format
+msgid "Use remote &shell (only for :ext: repositories):"
+msgstr "தொலை மேல்வடிவைப் பயன்படுத்து(:ext: களஞ்சியங்களுக்கு மட்டும்):"
+
+#: addrepositorydialog.cpp:76
+#, kde-format
+msgid "Invoke this program on the server side:"
+msgstr "இந்த நிரலை சேவகன் பக்கம் செயல்படுத்து:"
+
+#: addrepositorydialog.cpp:86
+#, kde-format
+msgid "Use different &compression level:"
+msgstr "மாற்று அழுத்த அளவை பயன்படுத்து:"
+
+#: addrepositorydialog.cpp:94
+#, kde-format
+msgid "Download cvsignore file from server"
+msgstr "cvsignore கோப்பினை சேவையகத்தில் இருந்து கீழிறக்கு"
+
+#: addrepositorydialog.cpp:174
+#, kde-format
+msgid "Repository Settings"
+msgstr "கிடங்கு அமைப்புகள்"
+
+#: annotatecontroller.cpp:75
+#, kde-format
+msgid "CVS Annotate: %1"
+msgstr "CVS சுட்டுவிளக்கு: %1"
+
+#: annotatecontroller.cpp:85
+#, kde-format
+msgid "CVS Annotate"
+msgstr "CVS Annotate"
+
+#: annotatedialog.cpp:44
+#, kde-format
+msgid "Go to Line..."
+msgstr ""
+
+#: annotatedialog.cpp:49
+#, kde-format
+msgid "Find Prev"
+msgstr ""
+
+#: annotatedialog.cpp:54
+#, kde-format
+msgid "Find Next"
+msgstr ""
+
+#: annotatedialog.cpp:64
+#, kde-format
+msgid "Search"
+msgstr ""
+
+#: annotatedialog.cpp:115
+#, kde-format
+msgid "Go to Line"
+msgstr ""
+
+#: annotatedialog.cpp:115
+#, kde-format
+msgid "Go to line number:"
+msgstr ""
+
+#: cervisiapart.cpp:111 main.cpp:138
+#, kde-format
+msgid "Cervisia"
+msgstr "சர்விசிய"
+
+#: cervisiapart.cpp:118
+#, kde-format
+msgid "Starting cvsservice failed with message: "
+msgstr ""
+
+#: cervisiapart.cpp:148
+#, fuzzy, kde-format
+msgid ""
+"This KPart is non-functional, because the cvs D-Bus service could not be "
+"started."
+msgstr ""
+"இந்த KPart செயலிழந்து இருக்கிறது, ஏனென்றால் நம்மால் cvs DCOP  சேவையை துவக்க "
+"முடியவில்லை."
+
+#: cervisiapart.cpp:186
+#, kde-format
+msgid "Remote CVS working folders are not supported."
+msgstr "தொலை CVS பணி அடைவுகள், ஆதரிக்கப்படவில்லை."
+
+#: cervisiapart.cpp:194
+#, kde-format
+msgid ""
+"You cannot change to a different folder while there is a running cvs job."
+msgstr ""
+"ஒரு cvs  பணி நடந்துக்கொண்டிருக்கும் போது, தங்களால் வேறொரு அடைவுக்கு மாற இயலாது."
+
+#: cervisiapart.cpp:214
+#, kde-format
+msgid ""
+"F - All files are hidden, the tree shows only folders\n"
+"N - All up-to-date files are hidden\n"
+"R - All removed files are hidden"
+msgstr ""
+"F - இந்த மரம் காண்பிப்பது அடைவுகளை மட்டுமே,  கோப்புகள் அனைத்தும் மறைக்கப்பட்டிருக்கிறது\n"
+"N - தற்போதைய கோப்புகள் அனைத்தும் மறைக்கப்பட்டிருக்கிறது\n"
+"R - நீக்கப்பட்ட கோப்புகள் அனைத்தும் மறைக்கப்பட்டிருக்கிறது"
+
+#: cervisiapart.cpp:227
+#, fuzzy, kde-format
+#| msgid "O&pen Sandbox..."
+msgid "Open Sandbox..."
+msgstr "Sandboxஐ திற"
+
+#: cervisiapart.cpp:231
+#, kde-format
+msgid "Opens a CVS working folder in the main window"
+msgstr "ஒரு CVS பணி அடைவை பிரதான சாளரத்தில் திறக்கிறது."
+
+#: cervisiapart.cpp:235
+#, kde-format
+msgid "Recent Sandboxes"
+msgstr "சமீபத்திய Sandboxes"
+
+#: cervisiapart.cpp:239
+#, kde-format
+msgid "&Insert ChangeLog Entry..."
+msgstr "மாற்றுப்பதிவேடு உள்ளிட்டதை சொருகுக"
+
+#: cervisiapart.cpp:242
+#, kde-format
+msgid "Inserts a new intro into the file ChangeLog in the toplevel folder"
+msgstr "ஒரு புதிய அறிமுகத்தை மேல்மட்ட அடைவில் உள்ள மாற்றுபதிவேட்டுக் கோப்பில் செருகுக."
+
+#: cervisiapart.cpp:246
+#, fuzzy, kde-format
+msgid "&Update"
+msgstr "புதுப்பிக்கப்பட்டது"
+
+#: cervisiapart.cpp:250
+#, kde-format
+msgid "Updates (cvs update) the selected files and folders"
+msgstr "தேர்ந்தெடுக்கப்பட்ட கோப்புகள் மற்றும் அடைவுகளை புதுப்பி"
+
+#: cervisiapart.cpp:254
+#, kde-format
+msgid "&Status"
+msgstr "நிலை"
+
+#: cervisiapart.cpp:258
+#, kde-format
+msgid "Updates the status (cvs -n update) of the selected files and folders"
+msgstr "தேர்ந்தெடுக்கப்பட்ட கோப்புகள் மற்றும் அடைவுகளின் நிலையை புதுப்பி"
+
+#: cervisiapart.cpp:262 resolvedialog.cpp:176
+#, fuzzy, kde-format
+msgid "&Edit"
+msgstr "திருத்தங்கள்"
+
+#: cervisiapart.cpp:265
+#, kde-format
+msgid "Opens the marked file for editing"
+msgstr "குறிப்பிட்ட கோப்பினை திருத்துவதற்குத் திறக்கிறது"
+
+#: cervisiapart.cpp:269
+#, kde-format
+msgid "Reso&lve..."
+msgstr "தெளிவுத்திறன் உரையாடல் பெட்டியை, தேர்தெடுக்கப்பட்ட கோப்பினைக் கொண்டு திறக்கிறது"
+
+#: cervisiapart.cpp:272
+#, kde-format
+msgid "Opens the resolve dialog with the selected file"
+msgstr "தேர்ந்தெடுத்த கோப்புகள் மூலம் தீர்மானிக்கும் உரையாடலை திறக்கவும்"
+
+#: cervisiapart.cpp:276
+#, kde-format
+msgid "&Commit..."
+msgstr "சொருகுக"
+
+#: cervisiapart.cpp:280
+#, kde-format
+msgid "Commits the selected files"
+msgstr "தேர்ந்தெடுக்கப்பட்ட கோப்புகளை சொருகுக"
+
+#: cervisiapart.cpp:284
+#, kde-format
+msgid "&Add to Repository..."
+msgstr "கிடங்கில் சேர்"
+
+#: cervisiapart.cpp:287
+#, fuzzy, kde-format
+#| msgid "CVS Add"
+msgid "Add"
+msgstr "CVS சேர்"
+
+#: cervisiapart.cpp:289
+#, kde-format
+msgid "Adds (cvs add) the selected files to the repository"
+msgstr "தேர்ந்தெடுக்கப்பட்ட கோப்புகளை கிடங்கில் சேர்"
+
+#: cervisiapart.cpp:293
+#, kde-format
+msgid "Add &Binary..."
+msgstr "பைனரியைச் சேர்"
+
+#: cervisiapart.cpp:296
+#, kde-format
+msgid "Adds (cvs -kb add) the selected files as binaries to the repository"
+msgstr "தேர்ந்தெடுக்கப்பட்ட கோப்புகளை பைனரியாக கிடங்கில் சேர்க்கிறது"
+
+#: cervisiapart.cpp:300
+#, kde-format
+msgid "&Remove From Repository..."
+msgstr "கிடங்கிலிருந்து நீக்கு"
+
+#: cervisiapart.cpp:303 repositorydialog.cpp:201
+#, fuzzy, kde-format
+#| msgid "Removed"
+msgid "Remove"
+msgstr "நீக்கப்பட்டது"
+
+#: cervisiapart.cpp:305
+#, kde-format
+msgid "Removes (cvs remove) the selected files from the repository"
+msgstr "தேர்ந்தெடுக்கப்பட்ட கோப்புகளை கிடங்கிலிருந்து நீக்குகிறது"
+
+#: cervisiapart.cpp:309
+#, kde-format
+msgid "Rever&t"
+msgstr "முந்தைய நிலைக்குச் செல்"
+
+#: cervisiapart.cpp:312
+#, kde-format
+msgid "Reverts (cvs update -C) the selected files (only cvs 1.11)"
+msgstr "தேர்ந்தெடுக்கப்பட்ட கோப்புகளை முந்தைய நிலைக்கு கொண்டுச் செல்"
+
+#: cervisiapart.cpp:316
+#, kde-format
+msgid "&Properties"
+msgstr ""
+
+#: cervisiapart.cpp:323
+#, kde-format
+msgid "Stop"
+msgstr ""
+
+#: cervisiapart.cpp:328
+#, kde-format
+msgid "Stops any running sub-processes"
+msgstr "இயங்கிக்கொண்டிருக்கும் உச்செயல்களை நிறுத்துகிறது"
+
+#: cervisiapart.cpp:332
+#, kde-format
+msgid "Browse &Log..."
+msgstr "பதிவேட்டை தேடு"
+
+#: cervisiapart.cpp:336
+#, kde-format
+msgid "Shows the revision tree of the selected file"
+msgstr "தேர்ந்தெடுக்கப்பட்ட கோப்புகளின் revision மரத்தைக் காண்பிக்கிறது"
+
+#: cervisiapart.cpp:341
+#, kde-format
+msgid "Browse Multi-File Log..."
+msgstr "பலகோப்பு பதிவேட்டை தேடு"
+
+#: cervisiapart.cpp:345
+#, kde-format
+msgid "&Annotate..."
+msgstr "விளக்கக் குறிப்பு செய்"
+
+#: cervisiapart.cpp:349
+#, kde-format
+msgid "Shows a blame-annotated view of the selected file"
+msgstr "சிறுவிளக்க கோப்பு காட்சிகளை காட்டவும்"
+
+#: cervisiapart.cpp:353
+#, kde-format
+msgid "&Difference to Repository (BASE)..."
+msgstr "(BASE) தகவலின் மாற்றம்..."
+
+#: cervisiapart.cpp:357
+#, kde-format
+msgid ""
+"Shows the differences of the selected file to the checked out version (tag "
+"BASE)"
+msgstr "தேர்ந்தெடுத்த கோப்புகளில் உள்ள வேறுபாடுகளை மூலம் காட்டுக."
+
+#: cervisiapart.cpp:361
+#, kde-format
+msgid "Difference to Repository (HEAD)..."
+msgstr " (HEAD) தகவலின் மாற்றம் "
+
+#: cervisiapart.cpp:365
+#, kde-format
+msgid ""
+"Shows the differences of the selected file to the newest version in the "
+"repository (tag HEAD)"
+msgstr ""
+"புதிதாக உள்ள தகவல் பதிப்புக்கு கிடங்கு கடைசி இரண்டு பதிப்புகளில் உள்ள வேறுபாடுகளை "
+"காட்டவும்."
+
+#: cervisiapart.cpp:369
+#, kde-format
+msgid "Last &Change..."
+msgstr "கடைசி மாற்றம்...."
+
+#: cervisiapart.cpp:372
+#, kde-format
+msgid ""
+"Shows the differences between the last two revisions of the selected file"
+msgstr "கடைசி இரண்டு பதிப்புகளில் உள்ள வேறுபாடுகளை காட்டவும்"
+
+#: cervisiapart.cpp:376
+#, kde-format
+msgid "&History..."
+msgstr "&சரித்திரம்"
+
+#: cervisiapart.cpp:379
+#, kde-format
+msgid "Shows the CVS history as reported by the server"
+msgstr " cvs சரித்திரத்தை சேவையகத்தின் அறிக்கையின்படி காட்டவும்"
+
+#: cervisiapart.cpp:383
+#, kde-format
+msgid "&Unfold File Tree"
+msgstr "மடிக்கப்படாத கோப்பு மரம் "
+
+#: cervisiapart.cpp:387
+#, kde-format
+msgid "Opens all branches of the file tree"
+msgstr "கோப்பு மரத்தின் அனைத்து கிளைகளையும் திற"
+
+#: cervisiapart.cpp:391
+#, kde-format
+msgid "&Fold File Tree"
+msgstr "கோப்பு மரங்களை &மடி"
+
+#: cervisiapart.cpp:394
+#, kde-format
+msgid "Closes all branches of the file tree"
+msgstr "கோப்பு மரத்தின் அனைத்து கிளைகளையும் மூடு"
+
+#: cervisiapart.cpp:401
+#, kde-format
+msgid "&Tag/Branch..."
+msgstr "&அட்டை/கிளை....."
+
+#: cervisiapart.cpp:404
+#, kde-format
+msgid "Creates a tag or branch for the selected files"
+msgstr "தேர்வு செய்யப்பட்ட கோப்புகளுக்கு அட்டை அல்லது கிளையை உருவாக்கு"
+
+#: cervisiapart.cpp:408
+#, kde-format
+msgid "&Delete Tag..."
+msgstr "&அட்டையை அழி...."
+
+#: cervisiapart.cpp:411
+#, kde-format
+msgid "Deletes a tag from the selected files"
+msgstr "தேர்வுச்செய்யப்பட்ட கோப்புகளிலிருந்து ஓர் அட்டை நீக்கப்படும்."
+
+#: cervisiapart.cpp:415
+#, kde-format
+msgid "&Update to Tag/Date..."
+msgstr "குறியீடு/ தேதியை புதுப்பி"
+
+#: cervisiapart.cpp:418
+#, kde-format
+msgid "Updates the selected files to a given tag, branch or date"
+msgstr "தேர்வுச் செய்த கோப்புகளை குறிப்பு அட்டைகளுக்கு, கிளை அல்லது தேதியை புதிப்பித்தல்"
+
+#: cervisiapart.cpp:422
+#, kde-format
+msgid "Update to &HEAD"
+msgstr "HEAD யைப் புதுப்பி"
+
+#: cervisiapart.cpp:425
+#, kde-format
+msgid "Updates the selected files to the HEAD revision"
+msgstr "தேர்வுச் செய்த கோப்புகளை HEAD மீள்நோக்குக்கு புதிப்பித்தல்"
+
+#: cervisiapart.cpp:429
+#, kde-format
+msgid "&Merge..."
+msgstr "&சேர்"
+
+#: cervisiapart.cpp:432
+#, kde-format
+msgid "Merges a branch or a set of modifications into the selected files"
+msgstr "தேர்வுச் செய்த கோப்புகளில் உள்ள கிளை அல்லது மாற்றங்களை சேர்த்தல்"
+
+#: cervisiapart.cpp:436
+#, kde-format
+msgid "&Add Watch..."
+msgstr "கண்கானிப்பாளரை சேர்"
+
+#: cervisiapart.cpp:439
+#, kde-format
+msgid "Adds a watch for the selected files"
+msgstr "தேர்வு செய்யப்பட்ட கோப்புகளுக்கு கண்காணிப்பாளரை சேர்"
+
+#: cervisiapart.cpp:443
+#, kde-format
+msgid "&Remove Watch..."
+msgstr "கண்காணிப்பாளரை நீக்கு"
+
+#: cervisiapart.cpp:446
+#, kde-format
+msgid "Removes a watch from the selected files"
+msgstr "தேர்வு செய்யப்பட்ட கோப்புகளுக்கு கண்காணிப்பாளரை நீக்கு"
+
+#: cervisiapart.cpp:450
+#, kde-format
+msgid "Show &Watchers"
+msgstr "கண்காணிப்பாளரை காட்டு"
+
+#: cervisiapart.cpp:453
+#, kde-format
+msgid "Shows the watchers of the selected files"
+msgstr "தேர்வு செய்யப்பட்ட கோப்புகளுக்குக் கண்காணிப்பாளரை காட்டு"
+
+#: cervisiapart.cpp:457
+#, kde-format
+msgid "Ed&it Files"
+msgstr "கோப்புக்களைத் திருத்து"
+
+#: cervisiapart.cpp:460
+#, kde-format
+msgid "Edits (cvs edit) the selected files"
+msgstr "தேர்வு செய்யப்பட்ட கோப்புகளை திருத்துகிறது(சிவிஎஸ் திருத்தம்)"
+
+#: cervisiapart.cpp:464
+#, kde-format
+msgid "U&nedit Files"
+msgstr "&திருத்தப்படாத கோப்புகள்"
+
+#: cervisiapart.cpp:467
+#, kde-format
+msgid "Unedits (cvs unedit) the selected files"
+msgstr "தேர்வு செய்யப்பட்ட கோப்புகளை திருத்துப்படவில்லை(சிவிஸ் திருத்தப்படாதவை)"
+
+#: cervisiapart.cpp:471
+#, kde-format
+msgid "Show &Editors"
+msgstr "திருத்துபவனைக் காண்பி"
+
+#: cervisiapart.cpp:474
+#, kde-format
+msgid "Shows the editors of the selected files"
+msgstr "தேர்வு செய்யப்பட்ட கோப்புகளின் திருத்தங்களை காண்பிக்கிறது"
+
+#: cervisiapart.cpp:478
+#, kde-format
+msgid "&Lock Files"
+msgstr "&பூட்டப்பட்ட கோப்புகள்"
+
+#: cervisiapart.cpp:481
+#, kde-format
+msgid "Locks the selected files, so that others cannot modify them"
+msgstr "தேர்வுச்செய்த கோப்புகளை மாற்றமுடியாத படி பூட்டப்பட்டது"
+
+#: cervisiapart.cpp:485
+#, kde-format
+msgid "Unl&ock Files"
+msgstr "&பூட்டப்பட்டாத கோப்புகள்"
+
+#: cervisiapart.cpp:488
+#, kde-format
+msgid "Unlocks the selected files"
+msgstr "தேர்வுச்செய்யப்பட்ட கோப்புக்களை பூட்டுவதில்லை"
+
+#: cervisiapart.cpp:492
+#, kde-format
+msgid "Create &Patch Against Repository..."
+msgstr "தகவலுக்கு எதிரான பாதையை உருவாக்கு "
+
+#: cervisiapart.cpp:495
+#, kde-format
+msgid "Creates a patch from the modifications in your sandbox"
+msgstr "ஒட்டு வேலையை மாற்றங்கள் உள்ள sandbox மூலம் உருவாக்கவும்"
+
+#: cervisiapart.cpp:502
+#, kde-format
+msgid "&Create..."
+msgstr "&உருவாக்கு..."
+
+#: cervisiapart.cpp:506
+#, kde-format
+msgid "&Checkout..."
+msgstr "&சரி செய்"
+
+#: cervisiapart.cpp:509
+#, kde-format
+msgid "Allows you to checkout a module from a repository"
+msgstr "பதிப்புக்கு கிடங்கில் உள்ள பகுதிகளை சரி செய்ய முடியும்"
+
+#: cervisiapart.cpp:513
+#, kde-format
+msgid "&Import..."
+msgstr "&இறக்குமதி"
+
+#: cervisiapart.cpp:516
+#, kde-format
+msgid "Allows you to import a module into a repository"
+msgstr "பதிப்புக்கு கிடங்கில் உள்ள பகுதிகளை உள்வாங்கு முடியும்"
+
+#: cervisiapart.cpp:520
+#, kde-format
+msgid "&Repositories..."
+msgstr "தகவல் தளம்..."
+
+#: cervisiapart.cpp:523
+#, kde-format
+msgid "Configures a list of repositories you regularly use"
+msgstr "வழக்கமான உபயோகத்திற்கு பதிப்புக்கு கிடங்கில் உள்ள பகுதிகளை உள்ளமை செய்ய முடியும் "
+
+#: cervisiapart.cpp:530
+#, kde-format
+msgid "Hide All &Files"
+msgstr "அனைத்துக் கோப்புகளையும் மறை"
+
+#: cervisiapart.cpp:533
+#, kde-format
+msgid "Determines whether only folders are shown"
+msgstr "கோப்பு தொகுப்புகள் மட்டும் இருக்கின்றதா என்பதை உறுதிபடுத்து"
+
+#: cervisiapart.cpp:537
+#, kde-format
+msgid "Hide Unmodified Files"
+msgstr "மாற்றப்படாத கோப்புக்களை நீக்கு"
+
+#: cervisiapart.cpp:541
+#, kde-format
+msgid "Determines whether files with status up-to-date or unknown are hidden"
+msgstr "அன்றைக்கு அல்லது தெரியாத நிலையில் உள்ள கோப்புகள் மறைந்துள்ளதா என்பதை குறிக்கும்."
+
+#: cervisiapart.cpp:546
+#, kde-format
+msgid "Hide Removed Files"
+msgstr "மறைத்த கோப்புகளை நீக்கு"
+
+#: cervisiapart.cpp:549
+#, kde-format
+msgid "Determines whether removed files are hidden"
+msgstr "நீக்கப்பட்ட கோப்புகள் இருக்கின்றதா என்பதை உறுதிபடுத்து"
+
+#: cervisiapart.cpp:553
+#, kde-format
+msgid "Hide Non-CVS Files"
+msgstr "CVS அல்லாத கோப்புகளை மறை "
+
+#: cervisiapart.cpp:556
+#, kde-format
+msgid "Determines whether files not in CVS are hidden"
+msgstr "CVSல் இல்லாத கோப்புகள் இருக்கின்றதா என்பதை உறுதிபடுத்து"
+
+#: cervisiapart.cpp:560
+#, kde-format
+msgid "Hide Empty Folders"
+msgstr "காலி கோப்புகளை மறைக்கிறது"
+
+#: cervisiapart.cpp:563
+#, kde-format
+msgid "Determines whether folders without visible entries are hidden"
+msgstr "தெரிந்த உள்ளீடுகள் இல்லாமல் கோப்பு தொகுப்புகள் இருக்கின்றதா என்பதை உறுதிபடுத்து"
+
+#: cervisiapart.cpp:567
+#, kde-format
+msgid "Create &Folders on Update"
+msgstr "புதுப்பபிக்கப்பட்ட தொகுப்புகளை உருவாக்கு"
+
+#: cervisiapart.cpp:570
+#, kde-format
+msgid "Determines whether updates create folders"
+msgstr "புதுப்பிக்கப்பட்ட கோப்புகள் உருவாகின்றதா என்பதை உறுதிபடுத்து"
+
+#: cervisiapart.cpp:574
+#, kde-format
+msgid "&Prune Empty Folders on Update"
+msgstr "காலியான அடைவுகளை புதிப்பிக்கும் போது நீக்கு"
+
+#: cervisiapart.cpp:577
+#, kde-format
+msgid "Determines whether updates remove empty folders"
+msgstr "புதுப்பிக்கப்பட்டவை எழுதப்படாத தொகுப்புகளை நீக்கிவிட்டதா என்பதை உறுதிபடுத்து"
+
+#: cervisiapart.cpp:581
+#, kde-format
+msgid "&Update Recursively"
+msgstr "சுழல் நிலையை &புதுப்பி"
+
+#: cervisiapart.cpp:584
+#, kde-format
+msgid "Determines whether updates are recursive"
+msgstr "சூழல் புதுப்பிக்கப்பட்டது என்பதை உறுதிபடுத்து"
+
+#: cervisiapart.cpp:588
+#, kde-format
+msgid "C&ommit && Remove Recursively"
+msgstr "நிறைவேற்று && சுழல்நிலையாக நீக்கு"
+
+#: cervisiapart.cpp:591
+#, kde-format
+msgid "Determines whether commits and removes are recursive"
+msgstr "சூழல் புதுப்பிக்கப்பட்ட கோப்புகள் உருவாகின்றதா என்பதை உறுதிபடுத்து"
+
+#: cervisiapart.cpp:595
+#, kde-format
+msgid "Do cvs &edit Automatically When Necessary"
+msgstr "தேவையான இடத்தில் தானியங்கும் cvs உரைத் திருத்தம் செய்க"
+
+#: cervisiapart.cpp:598
+#, kde-format
+msgid "Determines whether automatic cvs editing is active"
+msgstr "தானியங்கும் cvs உரைத் திருத்தம் நடப்பில் உள்ள என்று கண்டுபிடி"
+
+#: cervisiapart.cpp:602
+#, kde-format
+msgid "Configure Cervisia..."
+msgstr "சர்விசியாவை அமை...."
+
+#: cervisiapart.cpp:605
+#, kde-format
+msgid "Allows you to configure the Cervisia KPart"
+msgstr "cervisia kpart திருத்த உங்களை அனுமதிக்கிறது"
+
+#: cervisiapart.cpp:613
+#, kde-format
+msgid "CVS &Manual"
+msgstr "சிவிஸ் கையேடு"
+
+#: cervisiapart.cpp:616
+#, kde-format
+msgid "Opens the help browser with the CVS documentation"
+msgstr "உதவி தேடியந்திரம் மூலம் cvs நுட்ப புத்தகத்தை திறக்கவும்"
+
+#: cervisiapart.cpp:623
+#, fuzzy, kde-format
+msgid "Unfold Folder"
+msgstr "மடிக்கப்படாத கோப்பு மரம் "
+
+#: cervisiapart.cpp:715
+#, kde-format
+msgid "Cervisia Part"
+msgstr "சர்விசியாவின் அங்கம்"
+
+#: cervisiapart.cpp:717 main.cpp:140
+#, kde-format
+msgid "A CVS frontend"
+msgstr "ஒர் சிவிஸ் முன்நிலை"
+
+#: cervisiapart.cpp:719 main.cpp:142
+#, fuzzy, kde-format
+msgid ""
+"Copyright (c) 1999-2002 Bernd Gehrmann\n"
+"Copyright (c) 2002-2008 the Cervisia authors"
+msgstr ""
+"காப்புரிமை (c) 1999-2002 பெர்ண்ட் கெர்மான்\n"
+"காப்புரிமை (c) 2002-2004 செர்விசியா ஆசிரியர்கள்"
+
+#: cervisiapart.cpp:724 main.cpp:147
+#, kde-format
+msgid "Bernd Gehrmann"
+msgstr ""
+
+#: cervisiapart.cpp:725 main.cpp:148
+#, kde-format
+msgid "Original author and former maintainer"
+msgstr "உண்மையான எழுத்தாளர் மற்றும் அமைப்பாளர்"
+
+#: cervisiapart.cpp:728 main.cpp:151
+#, kde-format
+msgid "Christian Loose"
+msgstr ""
+
+#: cervisiapart.cpp:728 main.cpp:151
+#, kde-format
+msgid "Maintainer"
+msgstr "பாதுக்காப்பாளர்"
+
+#: cervisiapart.cpp:729 main.cpp:152
+#, kde-format
+msgid "André Wöbbeking"
+msgstr ""
+
+#: cervisiapart.cpp:729 main.cpp:152
+#, kde-format
+msgid "Developer"
+msgstr "உருவாக்குபவர்"
+
+#: cervisiapart.cpp:730 main.cpp:153
+#, kde-format
+msgid "Carlos Woelz"
+msgstr ""
+
+#: cervisiapart.cpp:730 main.cpp:153
+#, kde-format
+msgid "Documentation"
+msgstr "ஆவணமாக்குதல்"
+
+#: cervisiapart.cpp:732 main.cpp:155
+#, kde-format
+msgid "Richard Moore"
+msgstr ""
+
+#: cervisiapart.cpp:732 main.cpp:155
+#, kde-format
+msgid "Conversion to KPart"
+msgstr " Kபகுதிக்கு பரிமாற்றம்"
+
+#: cervisiapart.cpp:733 main.cpp:156
+#, kde-format
+msgid "Laurent Montel"
+msgstr ""
+
+#: cervisiapart.cpp:733 main.cpp:156
+#, fuzzy, kde-format
+msgid "Conversion to D-Bus"
+msgstr " Kபகுதிக்கு பரிமாற்றம்"
+
+#: cervisiapart.cpp:734 main.cpp:157
+#, kde-format
+msgid "Martin Koller"
+msgstr ""
+
+#: cervisiapart.cpp:734 main.cpp:157
+#, kde-format
+msgid "Port to KDE Frameworks 5"
+msgstr ""
+
+#: cervisiapart.cpp:741
+#, kde-format
+msgid "Open Sandbox"
+msgstr "Sandbox ஐ திற"
+
+#: cervisiapart.cpp:791
+#, kde-format
+msgid "CVS Edit"
+msgstr "சிவிஸ் திருத்தம்"
+
+#: cervisiapart.cpp:1298 diffdialog.cpp:263 logdialog.cpp:472
+#, kde-format
+msgid "CVS Diff"
+msgstr "சிவிஸ் வேறுபாடு"
+
+#: cervisiapart.cpp:1311 diffdialog.cpp:473 logdialog.cpp:485
+#: resolvedialog.cpp:351
+#, kde-format
+msgid "Could not open file for writing."
+msgstr "கோப்பினை எழுதுவதற்காக திறக்க முடியவில்லை"
+
+#: cervisiapart.cpp:1461
+#, kde-format
+msgid "The revision looks invalid."
+msgstr "மீள்நோக்கு சரியாக தெரியவில்லை"
+
+#: cervisiapart.cpp:1465
+#, kde-format
+msgid "This is the first revision of the branch."
+msgstr "இது முதல் மீள்நோக்கு கிளை ஆகும் "
+
+#: cervisiapart.cpp:1575
+#, kde-format
+msgid "Invoking help on CVS"
+msgstr " CVS  வில் உதவி துவங்குகின்றது "
+
+#: cervisiapart.cpp:1610
+#, kde-format
+msgid "Done"
+msgstr "செய்தாயிற்று"
+
+#: cervisiapart.cpp:1616
+#, kde-format
+msgid "A CVS commit to repository %1 is done"
+msgstr ""
+
+#: cervisiapart.cpp:1633
+#, kde-format
+msgid ""
+"This is not a CVS folder.\n"
+"If you did not intend to use Cervisia, you can switch view modes within "
+"Konqueror."
+msgstr ""
+"இது CVSஆவணம் அல்ல.\n"
+"உங்களுக்கு cervisia உபயோகப்படுத்த விருப்பம் இல்லையென்றால் Konquerorக்கு மாற்றிக்கொள்ளலாம்"
+
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr "முன்னேற்ற உரையாடல் தோன்றிய (ms) நேரமின்மை."
+
+#: cervisiashell.cpp:54
+#, kde-format
+msgid "The Cervisia library could not be loaded."
+msgstr "செர்விசியா நூலகத்தை ஏற்ற முடியவில்லை"
+
+#: cervisiashell.cpp:86
+#, kde-format
+msgid "Allows you to configure the toolbar"
+msgstr "கருவிப்பட்டியை திருத்த உங்களை அனுமதிக்கிறது"
+
+#: cervisiashell.cpp:91
+#, kde-format
+msgid "Allows you to customize the keybindings"
+msgstr "உங்களை தனதாக்கு விசைகாட்டுதலுக்கு அனுமதிக்கும்"
+
+#: cervisiashell.cpp:96
+#, kde-format
+msgid "Exits Cervisia"
+msgstr "சர்விஸ்யாவிலிருந்து வெளியேற்றுகிறது"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, fuzzy, kde-format
+msgid "&File"
+msgstr "கோப்புக்களைத் திருத்து"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, fuzzy, kde-format
+msgid "&Settings"
+msgstr "நிலை"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr ""
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr "பிரதான கருவிப்பட்டை"
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, fuzzy, kde-format
+msgid "&View"
+msgstr "பார்வை"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, kde-format
+msgid "&Advanced"
+msgstr "முன்னேற்றம்"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, kde-format
+msgid "&Repository"
+msgstr "தகவல்"
+
+#: changelogdialog.cpp:48
+#, kde-format
+msgid "Edit ChangeLog"
+msgstr "பதிவேடு மாற்றியை திருத்து"
+
+#: changelogdialog.cpp:86
+#, kde-format
+msgid "The ChangeLog file could not be written."
+msgstr "மாற்று பதிவேட்டு கோப்புகளை எழுத முடியாது"
+
+#: changelogdialog.cpp:102
+#, kde-format
+msgid "A ChangeLog file does not exist. Create one?"
+msgstr "மாற்று பதிவேடு கோப்புகள் இல்லை. உருவாக்குக"
+
+#: changelogdialog.cpp:102
+#, kde-format
+msgid "Create"
+msgstr "உருவாக்கு"
+
+#: changelogdialog.cpp:107
+#, kde-format
+msgid "The ChangeLog file could not be read."
+msgstr "மற்று பதிவேடு கோப்புகள் படிக்க இயலவில்லை"
+
+#: checkoutdialog.cpp:59 checkoutdialog.cpp:348
+#, kde-format
+msgid "CVS Checkout"
+msgstr "சிவிஸ் சரிசெய்"
+
+#: checkoutdialog.cpp:59
+#, kde-format
+msgid "CVS Import"
+msgstr "சிவிஸ் இறக்குமதி"
+
+#: checkoutdialog.cpp:94 checkoutdialog.cpp:109
+#, kde-format
+msgid "&Module:"
+msgstr "&பகுதி"
+
+#: checkoutdialog.cpp:101 checkoutdialog.cpp:116 mergedialog.cpp:65
+#: tagdialog.cpp:71 updatedialog.cpp:66
+#, kde-format
+msgid "Fetch &List"
+msgstr "கொணர் பட்டியல்"
+
+#: checkoutdialog.cpp:124
+#, kde-format
+msgid "&Branch tag:"
+msgstr "&கிளை அட்டை"
+
+#: checkoutdialog.cpp:130
+#, kde-format
+msgid "Re&cursive checkout"
+msgstr "திரும்ப நிகழக்கூடிய சரிப்பார்த்தல்"
+
+#: checkoutdialog.cpp:153
+#, kde-format
+msgid "Working &folder:"
+msgstr "உறையில் பணிப்புரி"
+
+#: checkoutdialog.cpp:162
+#, kde-format
+msgid "&Vendor tag:"
+msgstr "&வணிகர் அட்டை"
+
+#: checkoutdialog.cpp:170
+#, kde-format
+msgid "&Release tag:"
+msgstr "அட்டையை &விடுவி"
+
+#: checkoutdialog.cpp:178
+#, kde-format
+msgid "&Ignore files:"
+msgstr "கோப்புகளை தவிர்"
+
+#: checkoutdialog.cpp:186
+#, kde-format
+msgid "&Comment:"
+msgstr "&குறிப்பு"
+
+#: checkoutdialog.cpp:190
+#, kde-format
+msgid "Import as &binaries"
+msgstr "இருநிலையாக ஏற்று"
+
+#: checkoutdialog.cpp:193
+#, kde-format
+msgid "Use file's modification time as time of import"
+msgstr "கோப்புகளுக்கான நேரத்தை ஏற்றுமதி நேரமாக மாற்றி பயன்படுத்து."
+
+#: checkoutdialog.cpp:200
+#, kde-format
+msgid "Chec&k out as:"
+msgstr "சரிப்பார்:"
+
+#: checkoutdialog.cpp:204
+#, kde-format
+msgid "Ex&port only"
+msgstr "ஏற்றுமதி மட்டும்"
+
+#: checkoutdialog.cpp:304
+#, kde-format
+msgid "Please choose an existing working folder."
+msgstr "தற்போது உபயோகத்தில் உள்ள ஆவணத்தை தேர்வு செய்யவும்."
+
+#: checkoutdialog.cpp:308 checkoutdialog.cpp:379
+#, kde-format
+msgid "Please specify a module name."
+msgstr "அங்கத்தின் பெயரைக் குறிப்பிடவும்"
+
+#: checkoutdialog.cpp:314
+#, kde-format
+msgid "Please specify a vendor tag and a release tag."
+msgstr "விற்பனை குறியீடு மற்றும் விடுவிக்கப்பட்ட குறியீடை குறிப்பிடவும்"
+
+#: checkoutdialog.cpp:319
+#, kde-format
+msgid ""
+"Tags must start with a letter and may contain\n"
+"letters, digits and the characters '-' and '_'."
+msgstr ""
+"ஒட்டு ஒரு எழுத்தை முதன்மை பெற்றிருக்க வேண்டும், ஆனால் அது எழுத்தையோ அல்லது இலக்கம் அல்லது "
+"குறிப்புகள் '-' && '_'  பெற்றிருக்கலாம்"
+
+#: checkoutdialog.cpp:325
+#, kde-format
+msgid "A branch must be specified for export."
+msgstr "ஏற்றுதலுக்கு ஒரு கிளை குறிப்பிடப்பட வேண்டும்."
+
+#: checkoutdialog.cpp:374
+#, kde-format
+msgid "Please specify a repository."
+msgstr "ஒரு களஞ்சியத்தை குறிப்பிடு."
+
+#: checkoutdialog.cpp:387
+#, kde-format
+msgid "CVS Remote Log"
+msgstr "CVS  தொலைதூர பதிவு"
+
+#: commitdialog.cpp:67
+#, kde-format
+msgid "CVS Commit"
+msgstr "சிவிஸ் கமிட்"
+
+#: commitdialog.cpp:84 logdialog.cpp:199
+#, kde-format
+msgid "&Diff"
+msgstr "&வித்தியாசம்"
+
+#: commitdialog.cpp:86
+#, kde-format
+msgid "Commit the following &files:"
+msgstr "பின்வரும் கோப்புகளை சேர்"
+
+#: commitdialog.cpp:96
+#, kde-format
+msgid "Older &messages:"
+msgstr "பழைய &செய்திகள்"
+
+#: commitdialog.cpp:106
+#, kde-format
+msgid "&Log message:"
+msgstr "&பதிகை செய்திகள்"
+
+#: commitdialog.cpp:115
+#, kde-format
+msgid "Use log message &template"
+msgstr ""
+
+#: commitdialog.cpp:190
+#, kde-format
+msgid "Current"
+msgstr "நடப்பு"
+
+#: cvsinitdialog.cpp:39
+#, kde-format
+msgid "Create New Repository (cvs init)"
+msgstr "(cvs init) புதிய களஞ்சியத்தை உருவாக்கு"
+
+#: cvsinitdialog.cpp:51
+#, kde-format
+msgid "Repository folder:"
+msgstr "எதிரான பாதை அடைவு:"
+
+#: diffdialog.cpp:102
+#, kde-format
+msgid "Synchronize scroll bars"
+msgstr "உருள்பட்டைகளை  ஒத்தியக்கு "
+
+#: diffdialog.cpp:112 diffdialog.cpp:403
+#, fuzzy, kde-format
+#| msgid "%1 differences"
+msgid "%1 difference"
+msgid_plural "%1 differences"
+msgstr[0] "%1 வித்தியாசங்கள்"
+msgstr[1] "%1 வித்தியாசங்கள்"
+
+#: diffdialog.cpp:238
+#, kde-format
+msgid "CVS Diff: %1"
+msgstr "CVS வித்தியாசம்: %1"
+
+#: diffdialog.cpp:239
+#, kde-format
+msgid "Repository:"
+msgstr "கிடங்கு"
+
+#: diffdialog.cpp:239 diffdialog.cpp:240
+#, kde-format
+msgid "Revision "
+msgstr "மீள்நோக்கு "
+
+#: diffdialog.cpp:240
+#, kde-format
+msgid "Working dir:"
+msgstr "பணிப்புரி "
+
+#: diffdialog.cpp:401 resolvedialog.cpp:383
+#, kde-format
+msgid "%1 of %2"
+msgstr "%2வின் %1"
+
+#: diffview.cpp:255 diffview.cpp:313
+#, fuzzy, kde-format
+msgid "Delete"
+msgstr "&அட்டையை அழி...."
+
+#: diffview.cpp:255 diffview.cpp:313
+#, kde-format
+msgid "Insert"
+msgstr ""
+
+#: diffview.cpp:255 diffview.cpp:313
+#, fuzzy, kde-format
+msgid "Change"
+msgstr "பதிவேடு மாற்றியை திருத்து"
+
+#: editwithmenu.cpp:46
+#, kde-format
+msgid "Edit With"
+msgstr "கோப்புக்களைத் திருத்து"
+
+#: entry_status.cpp:33
+#, kde-format
+msgid "Locally Modified"
+msgstr "உள்ளமை"
+
+#: entry_status.cpp:36
+#, kde-format
+msgid "Locally Added"
+msgstr "பொதுவாக கூட்டப்பட்டது"
+
+#: entry_status.cpp:39
+#, kde-format
+msgid "Locally Removed"
+msgstr "பொதுவாக விளக்கப்பட்டது"
+
+#: entry_status.cpp:42
+#, kde-format
+msgid "Needs Update"
+msgstr "புதுப்பிக்க வேண்டும்"
+
+#: entry_status.cpp:45
+#, kde-format
+msgid "Needs Patch"
+msgstr "ஒட்டி வேண்டும்"
+
+#: entry_status.cpp:48
+#, kde-format
+msgid "Needs Merge"
+msgstr "சேர்க்க வேண்டும்"
+
+#: entry_status.cpp:51
+#, kde-format
+msgid "Up to Date"
+msgstr "இன்று வரை"
+
+#: entry_status.cpp:54
+#, kde-format
+msgid "Conflict"
+msgstr "குழப்பம்"
+
+#: entry_status.cpp:57
+#, kde-format
+msgid "Updated"
+msgstr "புதுப்பிக்கப்பட்டது"
+
+#: entry_status.cpp:60
+#, kde-format
+msgid "Patched"
+msgstr "ஒட்டப்பட்டது"
+
+#: entry_status.cpp:63
+#, kde-format
+msgid "Removed"
+msgstr "நீக்கப்பட்டது"
+
+#: entry_status.cpp:66
+#, kde-format
+msgid "Not in CVS"
+msgstr "சிவிஸ்ல் இல்லை"
+
+#: entry_status.cpp:69
+#, kde-format
+msgid "Unknown"
+msgstr "தெரியாத"
+
+#: historydialog.cpp:106 historydialog.cpp:343
+#, kde-format
+msgid "Commit, Modified "
+msgstr "திருத்து"
+
+#: historydialog.cpp:106 historydialog.cpp:346
+#, kde-format
+msgid "Commit, Added "
+msgstr "சேர்,கூட்டுதல்"
+
+#: historydialog.cpp:106 historydialog.cpp:349
+#, kde-format
+msgid "Commit, Removed "
+msgstr "சேர்,நீக்குதல்"
+
+#: historydialog.cpp:111 historydialog.cpp:319
+#, kde-format
+msgid "Checkout "
+msgstr "சரிப்பார்"
+
+#: historydialog.cpp:116 loginfo.cpp:57
+#, kde-format
+msgid "Tag"
+msgstr "அடையாளவொட்டு"
+
+#: historydialog.cpp:138 loglist.cpp:106
+#, kde-format
+msgid "Date"
+msgstr "தேதி"
+
+#: historydialog.cpp:138
+#, kde-format
+msgid "Event"
+msgstr "நிகழ்வு"
+
+#: historydialog.cpp:138 loglist.cpp:106
+#, kde-format
+msgid "Author"
+msgstr "ஆசிரியர்"
+
+#: historydialog.cpp:138 loglist.cpp:106 updateview.cpp:50
+#, kde-format
+msgid "Revision"
+msgstr "மீள்நோக்கு "
+
+#: historydialog.cpp:138 watchersmodel.cpp:84
+#, fuzzy, kde-format
+msgid "File"
+msgstr "கோப்பு காட்சி"
+
+#: historydialog.cpp:138
+#, kde-format
+msgid "Repo Path"
+msgstr "Repo வழி"
+
+#: historydialog.cpp:142
+#, kde-format
+msgid "Show c&ommit events"
+msgstr "செயல்படுத்தப்பட்ட நிகழ்வுகளை காட்டு"
+
+#: historydialog.cpp:145
+#, kde-format
+msgid "Show ch&eckout events"
+msgstr "உள்வாங்கும் நிகழ்வுகளை காட்டு"
+
+#: historydialog.cpp:148
+#, kde-format
+msgid "Show &tag events"
+msgstr "குறியீடு நிகழ்வுகளை காட்டு"
+
+#: historydialog.cpp:151
+#, kde-format
+msgid "Show &other events"
+msgstr "மற்ற நிகழ்வுகளை காட்டு"
+
+#: historydialog.cpp:154
+#, kde-format
+msgid "Only &user:"
+msgstr "பயனர் மட்டும்"
+
+#: historydialog.cpp:156
+#, kde-format
+msgid "Only &filenames matching:"
+msgstr "கோப்பின் பெயர் மட்டின் ஒன்றியமைகின்றது:"
+
+#: historydialog.cpp:158
+#, kde-format
+msgid "Only &folders matching:"
+msgstr "கோப்பு தொகை சேர்வு"
+
+#: historydialog.cpp:279 historydialog.cpp:285
+#, kde-format
+msgid "CVS History"
+msgstr "சிவிஸ் சரித்திரம்"
+
+#: historydialog.cpp:322
+#, kde-format
+msgid "Tag "
+msgstr "அட்டை"
+
+#: historydialog.cpp:325
+#, kde-format
+msgid "Release "
+msgstr "விடுவி"
+
+#: historydialog.cpp:328
+#, kde-format
+msgid "Update, Deleted "
+msgstr "அழித்தவற்றை புதுப்பி"
+
+#: historydialog.cpp:331
+#, kde-format
+msgid "Update, Copied "
+msgstr "படியெடுத்தவற்றை புதுப்பி"
+
+#: historydialog.cpp:334
+#, kde-format
+msgid "Update, Merged "
+msgstr "குறுகியவற்றை புதுப்பி"
+
+#: historydialog.cpp:337
+#, kde-format
+msgid "Update, Conflict "
+msgstr "குழம்பியவற்றைப் புதுப்பி "
+
+#: historydialog.cpp:340
+#, fuzzy, kde-format
+msgid "Update, Patched "
+msgstr "அழித்தவற்றை புதுப்பி"
+
+#: historydialog.cpp:352
+#, kde-format
+msgid "Unknown "
+msgstr "தெரியாத"
+
+#: logdialog.cpp:86
+#, kde-format
+msgid "Search:"
+msgstr ""
+
+#: logdialog.cpp:97
+#, kde-format
+msgid "&Tree"
+msgstr "&மரம்"
+
+#: logdialog.cpp:98
+#, kde-format
+msgid "&List"
+msgstr "&பட்டியல்"
+
+#: logdialog.cpp:99
+#, kde-format
+msgid "CVS &Output"
+msgstr "சிவிஸ் &வெளியீடு"
+
+#: logdialog.cpp:106
+#, kde-format
+msgid ""
+"Choose revision A by clicking with the left mouse button,\n"
+"revision B by clicking with the middle mouse button."
+msgstr ""
+"மீள்நோக்கு A தேர்வு செய்ய வலது சுட்டி விசை அழுத்தவும்.\n"
+"மீள்நோக்கு B தேர்வு செய்ய இடது சுட்டி விசை அழுத்தவும்."
+
+#: logdialog.cpp:133
+#, kde-format
+msgid "Revision A:"
+msgstr "மீள்நோக்கு ஏ:"
+
+#: logdialog.cpp:133
+#, kde-format
+msgid "Revision B:"
+msgstr "மீள்நோக்கு பி:"
+
+#: logdialog.cpp:142
+#, kde-format
+msgid "Select by tag:"
+msgstr "அட்டையின் படி தேர்வு செய்"
+
+#: logdialog.cpp:150
+#, kde-format
+msgid "Author:"
+msgstr "எழுதியவர்"
+
+#: logdialog.cpp:158
+#, kde-format
+msgid "Date:"
+msgstr "நாள்"
+
+#: logdialog.cpp:166
+#, kde-format
+msgid "Comment/Tags:"
+msgstr "குறிப்பு/அட்டை"
+
+#: logdialog.cpp:198
+#, fuzzy, kde-format
+#| msgid "&Annotate"
+msgid "&Annotate A"
+msgstr "விளக்கு"
+
+#: logdialog.cpp:200
+#, kde-format
+msgid "&Find"
+msgstr ""
+
+#: logdialog.cpp:207
+#, kde-format
+msgid ""
+"This revision is used when you click Annotate.\n"
+"It is also used as the first item of a Diff operation."
+msgstr ""
+"இந்த மீள்நோக்கு Annotateயை அழுத்தும் பொது உபயோகப்படும்.\n"
+"இந்த மீள்நோக்கு Diff  செயல்களில் உள்ள முதல் தர விவரங்கள் ஆகும்"
+
+#: logdialog.cpp:212
+#, kde-format
+msgid "This revision is used as the second item of a Diff operation."
+msgstr "இந்த மீள்நோக்கு Diff  செயல்களில் உள்ள இரண்டம் தர விவரங்கள் ஆகும்"
+
+#: logdialog.cpp:225
+#, fuzzy, kde-format
+msgid "&View A"
+msgstr "பார்வை"
+
+#: logdialog.cpp:226
+#, kde-format
+msgid "Create Patch..."
+msgstr "&உருவாக்கு..."
+
+#: logdialog.cpp:269
+#, kde-format
+msgid "CVS Log: %1"
+msgstr "CVS பதிவேடு: %1"
+
+#: logdialog.cpp:275
+#, kde-format
+msgid "CVS Log"
+msgstr "CVS பதிவேடு"
+
+#: logdialog.cpp:402
+#, kde-format
+msgid " (Branchpoint)"
+msgstr " (புள்ளியின் கிளை)"
+
+#: logdialog.cpp:421
+#, kde-format
+msgid "Please select revision A or B first."
+msgstr "தயவு செய்து மீள்நோக்கு A அல்லது B யை முதலில் தேர்வு செய்யவும்"
+
+#: logdialog.cpp:442
+#, kde-format
+msgid "View File"
+msgstr "கோப்பு காட்சி"
+
+#: logdialog.cpp:457 logdialog.cpp:516
+#, kde-format
+msgid "Please select revision A or revisions A and B first."
+msgstr "தயவு செய்து மீள்நோக்கு A அல்லது மீள்நோக்கு A அல்லது B யை முதலில் தேர்வு செய்யவும்."
+
+#: loginfo.cpp:51
+#, kde-format
+msgid "Branchpoint"
+msgstr "கிளைப்புள்ளி"
+
+#: loginfo.cpp:54
+#, kde-format
+msgid "On Branch"
+msgstr "கிளையின் மேல்"
+
+#: loglist.cpp:106
+#, kde-format
+msgid "Branch"
+msgstr "கிளை"
+
+#: loglist.cpp:106
+#, kde-format
+msgid "Comment"
+msgstr "குறிப்புரை"
+
+#: loglist.cpp:106
+#, kde-format
+msgid "Tags"
+msgstr "அடையாளவொட்டுகள்"
+
+#: logplainview.cpp:46
+#, kde-format
+msgid "revision %1"
+msgstr "மீள்நோக்கு %1:"
+
+#: logplainview.cpp:47
+#, kde-format
+msgid "Select for revision A"
+msgstr "மீள்நோக்கு ஏவிற்கு தேர்வு செய்"
+
+#: logplainview.cpp:48
+#, kde-format
+msgid "Select for revision B"
+msgstr "மீள்நோக்கு பிக்கு தேர்வு செய்"
+
+#: logplainview.cpp:49
+#, kde-format
+msgid "date: %1; author: %2"
+msgstr "தேதி: %1; எழுத்தாளர்: %2"
+
+#: main.cpp:166
+#, kde-format
+msgid "The sandbox to be loaded"
+msgstr "sandbox யை உள்வாங்கு"
+
+#: main.cpp:167
+#, fuzzy, kde-format
+#| msgid "Show resolve dialog for the given file"
+msgid "Show resolve dialog for the given file."
+msgstr "கொடுக்கப்பட்ட கோப்புக்கு சரிசெய்யப்பட்ட உரையாடலை காட்டு"
+
+#: main.cpp:168
+#, fuzzy, kde-format
+#| msgid "Show log dialog for the given file"
+msgid "Show log dialog for the given file."
+msgstr "கொடுக்கப்பட்ட கோப்புக்கு உள்ளிடு உரையாடலை காட்டு"
+
+#: main.cpp:169
+#, fuzzy, kde-format
+msgid "Show annotation dialog for the given file."
+msgstr "கொடுக்கப்பட்ட கோப்புக்கு உள்ளிடு உரையாடலை காட்டு"
+
+#: mergedialog.cpp:41
+#, kde-format
+msgid "CVS Merge"
+msgstr "சிவிஸ் இணைப்பு"
+
+#: mergedialog.cpp:56
+#, kde-format
+msgid "Merge from &branch:"
+msgstr "கிளையிலிருந்து ஒன்றாக சேர்"
+
+#: mergedialog.cpp:75
+#, kde-format
+msgid "Merge &modifications:"
+msgstr "திருத்தங்களை ஒன்றாக சேர்"
+
+#: mergedialog.cpp:78
+#, kde-format
+msgid "between tag: "
+msgstr "அட்டைகளுக்கு இடையே"
+
+#: mergedialog.cpp:84
+#, kde-format
+msgid "and tag: "
+msgstr "மற்றும் அட்டை"
+
+#: mergedialog.cpp:90 updatedialog.cpp:84
+#, kde-format
+msgid "Fetch L&ist"
+msgstr "பட்டியலை கொணர்"
+
+#: misc.cpp:78
+#, kde-format
+msgid "CVS Status"
+msgstr "CVS நிலை"
+
+#: misc.cpp:197
+#, kde-format
+msgid "Overwrite the file"
+msgstr ""
+
+#: misc.cpp:200
+#, kde-format
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr ""
+
+#: misc.cpp:201
+#, kde-format
+msgid "Overwrite File?"
+msgstr ""
+
+#: patchoptiondialog.cpp:58
+#, kde-format
+msgid "Context"
+msgstr "சந்தர்ப்பம்"
+
+#: patchoptiondialog.cpp:59
+#, kde-format
+msgid "Normal"
+msgstr "சாதாரண"
+
+#: patchoptiondialog.cpp:60
+#, kde-format
+msgid "Unified"
+msgstr "Unified"
+
+#: patchoptiondialog.cpp:64
+#, kde-format
+msgid "Output Format"
+msgstr "வெளிவரும் வடிவம்"
+
+#: patchoptiondialog.cpp:74
+#, kde-format
+msgid "&Number of context lines:"
+msgstr "சூழ்நிலை கோடுகளின் எண்ணிக்கை"
+
+#: patchoptiondialog.cpp:90
+#, kde-format
+msgid "Ignore added or removed empty lines"
+msgstr "சேர்க்கப்பட்ட அல்லது நீக்கப்பட்ட வரிகளை தவிர்"
+
+#: patchoptiondialog.cpp:91
+#, kde-format
+msgid "Ignore changes in the amount of whitespace"
+msgstr "வெள்ளை இடங்களில் உள்ள மாற்றங்களை தவிர்"
+
+#: patchoptiondialog.cpp:92
+#, kde-format
+msgid "Ignore all whitespace"
+msgstr "எல்லா வெள்ளை இடங்களையும் தவிர்"
+
+#: patchoptiondialog.cpp:93
+#, kde-format
+msgid "Ignore changes in case"
+msgstr "எழுத்தில் உள்ள மாற்றங்களை தவிர்"
+
+#: patchoptiondialog.cpp:100
+#, kde-format
+msgid "Ignore Options"
+msgstr "கோப்புகளை தவிர்"
+
+#: protocolview.cpp:90
+#, kde-format
+msgid "Clear"
+msgstr ""
+
+#: protocolview.cpp:127
+#, kde-format
+msgid "[Exited with status %1]\n"
+msgstr "[%1னை கொண்டு முடிக்கப்பட்டுள்ளது]\n"
+
+#: protocolview.cpp:129
+#, kde-format
+msgid "[Finished]\n"
+msgstr "(முடிக்கப்பட்டது)\n"
+
+#: protocolview.cpp:131
+#, kde-format
+msgid "[Aborted]\n"
+msgstr "[நிருத்தப்பட்டது]\n"
+
+#: repositorydialog.cpp:138
+#, kde-format
+msgid "Default"
+msgstr ""
+
+#: repositorydialog.cpp:155
+#, kde-format
+msgid "Logged in"
+msgstr "உள்ளீடப்பட்டது"
+
+#: repositorydialog.cpp:155
+#, kde-format
+msgid "Not logged in"
+msgstr "உள்நுழையவில்லை"
+
+#: repositorydialog.cpp:157
+#, kde-format
+msgid "No login required"
+msgstr "உள்நுழை தேவையில்லை"
+
+#: repositorydialog.cpp:171
+#, kde-format
+msgid "Configure Access to Repositories"
+msgstr "தகவல்களுக்கு அமைப்பு ஏற்கப்பட்டது"
+
+#: repositorydialog.cpp:192
+#, kde-format
+msgid "Repository"
+msgstr "கிடங்கு"
+
+#: repositorydialog.cpp:192
+#, kde-format
+msgid "Method"
+msgstr "முறை"
+
+#: repositorydialog.cpp:192
+#, kde-format
+msgid "Compression"
+msgstr "அழுத்தம்"
+
+#: repositorydialog.cpp:192 settingsdialog.cpp:293 updateview.cpp:50
+#, kde-format
+msgid "Status"
+msgstr "நிலை"
+
+#: repositorydialog.cpp:199
+#, fuzzy, kde-format
+#| msgid "&Add..."
+msgid "Add..."
+msgstr "&சேர்"
+
+#: repositorydialog.cpp:200
+#, fuzzy, kde-format
+#| msgid "&Modify..."
+msgid "Modify..."
+msgstr "&திருத்து....."
+
+#: repositorydialog.cpp:202
+#, kde-format
+msgid "Login..."
+msgstr "உள்நுழைதல்"
+
+#: repositorydialog.cpp:203
+#, fuzzy, kde-format
+msgid "Logout"
+msgstr "வெளியேறுதல்"
+
+#: repositorydialog.cpp:335
+#, kde-format
+msgid "This repository is already known."
+msgstr "இந்த தகவல் முன்பே தெரிந்தது"
+
+#: repositorydialog.cpp:423
+#, kde-format
+msgid "Login failed."
+msgstr "உள்நுழைவு தோல்வி அடைந்தது"
+
+#: repositorydialog.cpp:442
+#, kde-format
+msgid "CVS Logout"
+msgstr "சிவிஸ் வெளியேறுதல்"
+
+#: resolvedialog.cpp:135
+#, kde-format
+msgid "Your version (A):"
+msgstr "உங்கள் பதிப்பு(ஏ):"
+
+#: resolvedialog.cpp:144
+#, kde-format
+msgid "Other version (B):"
+msgstr "மற்ற பதிப்பு(பி)"
+
+#: resolvedialog.cpp:156
+#, kde-format
+msgid "Merged version:"
+msgstr "ஒன்றாகச் சேர்க்கப்பட்ட பதிப்புகள்"
+
+#: resolvedialog.cpp:250
+#, kde-format
+msgid "CVS Resolve: %1"
+msgstr "CVS Resolve: %1"
+
+#: resolvedialog.cpp:385
+#, kde-format
+msgid "%1 conflicts"
+msgstr "%1 குழப்பங்கள்"
+
+#: settingsdialog.cpp:70
+#, kde-format
+msgid "Configure Cervisia"
+msgstr "சர்விஸ்யாவை அமை"
+
+#: settingsdialog.cpp:215
+#, kde-format
+msgid "General"
+msgstr "பொதுவாக"
+
+#: settingsdialog.cpp:220
+#, kde-format
+msgid "&User name for the change log editor:"
+msgstr "மாற்று உள்ளீடு திருத்தி பயன்படுத்துபவரின் பெயர் "
+
+#: settingsdialog.cpp:228
+#, kde-format
+msgid "&Path to CVS executable, or 'cvs':"
+msgstr "CVS பாதை செயல்படுத்தக்கூடியது, அல்லது 'cvs':"
+
+#: settingsdialog.cpp:246
+#, kde-format
+msgid "Diff Viewer"
+msgstr "வேறுபாடு காட்சியகம்"
+
+#: settingsdialog.cpp:251
+#, kde-format
+msgid "&Number of context lines in diff dialog:"
+msgstr "வெவ்வேறு உரையாடலில் உள்ள சூழ்நிலை கோடுகளின் எண்ணிக்கை"
+
+#: settingsdialog.cpp:259
+#, kde-format
+msgid "Additional &options for cvs diff:"
+msgstr "cvs க்குகூடுதலான விருப்பங்கள்  "
+
+#: settingsdialog.cpp:266
+#, kde-format
+msgid "Tab &width in diff dialog:"
+msgstr "வெவ்வேறு உரையாடலில் அகல தத்தல்"
+
+#: settingsdialog.cpp:274
+#, kde-format
+msgid "External diff &frontend:"
+msgstr "வெளிப்புற diff மற்றும் frontend:"
+
+#: settingsdialog.cpp:296
+#, kde-format
+msgid ""
+"When opening a sandbox from a &remote repository,\n"
+"start a File->Status command automatically"
+msgstr ""
+"sandbox யை திறக்கும் போது &தொலை கிடங்கு,\n"
+"கோப்பினை துவக்கு->தானியங்கும் நிலை கட்டளை"
+
+#: settingsdialog.cpp:299
+#, kde-format
+msgid ""
+"When opening a sandbox from a &local repository,\n"
+"start a File->Status command automatically"
+msgstr ""
+"sandbox யை திறக்கும் போது &உள்தகவல் கிடங்கு,\n"
+"கோப்பினை துவக்கு->தானியங்கும் நிலை கட்டளை"
+
+#: settingsdialog.cpp:316
+#, kde-format
+msgid "Advanced"
+msgstr "கூடுதல்"
+
+#: settingsdialog.cpp:335
+#, kde-format
+msgid "Appearance"
+msgstr ""
+
+#: settingsdialog.cpp:338
+#, kde-format
+msgid "Fonts"
+msgstr ""
+
+#: settingsdialog.cpp:341
+#, kde-format
+msgid "Font for &Protocol Window..."
+msgstr "எழுத்துரு சாளரத்தின் நெறிமுறை..."
+
+#: settingsdialog.cpp:342
+#, kde-format
+msgid "Font for A&nnotate View..."
+msgstr "எழுத்துரு வளக்கத்தின் பார்வை"
+
+#: settingsdialog.cpp:343
+#, kde-format
+msgid "Font for D&iff View..."
+msgstr "வெவ்வேறு பார்வைக்கான எழுத்துரு..."
+
+#: settingsdialog.cpp:344
+#, kde-format
+msgid "Font for ChangeLog View..."
+msgstr "பதிவு மாற்றி பார்வைக்கான எழுத்துரு "
+
+#: settingsdialog.cpp:352
+#, kde-format
+msgid "Colors"
+msgstr "வண்ணங்கள்"
+
+#: settingsdialog.cpp:355
+#, kde-format
+msgid "Conflict:"
+msgstr "முரண்பாடு"
+
+#: settingsdialog.cpp:359
+#, kde-format
+msgid "Diff change:"
+msgstr "வேறுபாட்டை மாற்று"
+
+#: settingsdialog.cpp:363
+#, kde-format
+msgid "Local change:"
+msgstr "உள்ளமை மாற்றம்"
+
+#: settingsdialog.cpp:367
+#, kde-format
+msgid "Diff insertion:"
+msgstr "வேறுபாட்டை சொருகுதல்"
+
+#: settingsdialog.cpp:371
+#, kde-format
+msgid "Remote change:"
+msgstr "தொலைவு மாற்றம்"
+
+#: settingsdialog.cpp:375
+#, kde-format
+msgid "Diff deletion:"
+msgstr "வேறுபாட்டை நீக்குதல்"
+
+#: settingsdialog.cpp:379
+#, fuzzy, kde-format
+msgid "Not in cvs:"
+msgstr "சிவிஸ்ல் இல்லை"
+
+#: settingsdialog.cpp:400
+#, kde-format
+msgid "Split main window &horizontally"
+msgstr "பிரதான சாளரத்தை நீள்வாக்கில் பிரி"
+
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr "முன்னேற்ற உரையாடல் தோன்றிய பிறகு &timeout(in ms)"
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, kde-format
+msgid "Default compression &level:"
+msgstr "முன்பிருந்த அழுத்த நிலை"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr "நடைமுறையில் உள்ளதை உபயோகி அல்லது  புதிய ssh-agent செயல்முறையை துவக்கு."
+
+#: tagdialog.cpp:48
+#, kde-format
+msgid "CVS Delete Tag"
+msgstr "CVS அடையாளவோட்டை நீக்கு"
+
+#: tagdialog.cpp:48
+#, kde-format
+msgid "CVS Tag"
+msgstr "CVS அடையாளவோட்டு"
+
+#: tagdialog.cpp:67 tagdialog.cpp:86
+#, kde-format
+msgid "&Name of tag:"
+msgstr "அட்டையின் &பெயர்"
+
+#: tagdialog.cpp:95
+#, kde-format
+msgid "Create &branch with this tag"
+msgstr "இந்த குறியீடுடன் கிளையை உருவாக்கு "
+
+#: tagdialog.cpp:99
+#, kde-format
+msgid "&Force tag creation even if tag already exists"
+msgstr "குறியீடை இறுக்கும் போதும் குறியீடை இயக்கு "
+
+#: tagdialog.cpp:134
+#, kde-format
+msgid "You must define a tag name."
+msgstr "நீங்கள் அடையாளவோட்டின் பெயரை வரையறுக்க வேண்டும்"
+
+#: tagdialog.cpp:140
+#, kde-format
+msgid ""
+"Tag must start with a letter and may contain letters, digits and the "
+"characters '-' and '_'."
+msgstr ""
+"குறியீடு எழுத்தை கொண்டும் எழுத்துடனும் துவங்கலாம், இலக்குகள் மற்றும் எழுத்துகள்'-' மற்றும் "
+"'_'."
+
+#: updatedialog.cpp:42
+#, kde-format
+msgid "CVS Update"
+msgstr "CVS புதுப்பி"
+
+#: updatedialog.cpp:57
+#, kde-format
+msgid "Update to &branch: "
+msgstr "கிளையை புதுப்பி"
+
+#: updatedialog.cpp:76
+#, kde-format
+msgid "Update to &tag: "
+msgstr "குறியீடை புதுப்பி: "
+
+#: updatedialog.cpp:94
+#, kde-format
+msgid "Update to &date ('yyyy-mm-dd'):"
+msgstr "Update to &date ('yyyy-mm-dd'):"
+
+#: updateview.cpp:50
+#, kde-format
+msgid "File Name"
+msgstr "கோப்பின் பெயர்"
+
+#: updateview.cpp:50
+#, kde-format
+msgid "Tag/Date"
+msgstr "அடையாளவோட்டு/தேதி"
+
+#: updateview.cpp:50
+#, kde-format
+msgid "Timestamp"
+msgstr "காலமுத்திரை"
+
+#: watchdialog.cpp:38
+#, kde-format
+msgid "CVS Watch Add"
+msgstr "கண்காணிப்பைச் சேர்"
+
+#: watchdialog.cpp:38
+#, kde-format
+msgid "CVS Watch Remove"
+msgstr "கண்காணிப்பை நீக்கு"
+
+#: watchdialog.cpp:51
+#, kde-format
+msgid "Add watches for the following events:"
+msgstr "பின்வரும் நிகழ்வுகளுக்கு கண்காணிப்புகளை சேர்"
+
+#: watchdialog.cpp:51
+#, kde-format
+msgid "Remove watches for the following events:"
+msgstr "பின்வரும் நிகழ்வுகளுக்கு கண்காணிப்புகளை நீக்கு"
+
+#: watchdialog.cpp:54
+#, kde-format
+msgid "&All"
+msgstr "அனைத்தும்"
+
+#: watchdialog.cpp:59
+#, kde-format
+msgid "&Only:"
+msgstr "மட்டும்"
+
+#: watchdialog.cpp:68
+#, kde-format
+msgid "&Commits"
+msgstr "சொருகிய வகைகள்"
+
+#: watchdialog.cpp:72
+#, kde-format
+msgid "&Edits"
+msgstr "திருத்தங்கள்"
+
+#: watchdialog.cpp:76
+#, kde-format
+msgid "&Unedits"
+msgstr "திரும்பப் பெற்ற திருத்தங்கள்"
+
+#: watchersdialog.cpp:68 watchersdialog.cpp:74
+#, kde-format
+msgid "CVS Watchers"
+msgstr "CVS கண்காணிப்பாளர்கள்"
+
+#: watchersmodel.cpp:86
+#, kde-format
+msgid "Watcher"
+msgstr "கண்காணிப்பாளர்"
+
+#: watchersmodel.cpp:88
+#, fuzzy, kde-format
+msgid "Edit"
+msgstr "திருத்தங்கள்"
+
+#: watchersmodel.cpp:90
+#, kde-format
+msgid "Unedit"
+msgstr "திருத்தம் திரும்பப் பெறு"
+
+#: watchersmodel.cpp:92
+#, kde-format
+msgid "Commit"
+msgstr "சொருகுக"
+
+#~ msgid "Invoking help on Cervisia"
+#~ msgstr " Cervisia வில் உதவி துவங்குகின்றது "
+
+#~ msgid "Invokes the KDE help system with the Cervisia documentation"
+#~ msgstr "KDE உதவி இயந்திரம் மூலம் cervisia நுட்ப புத்தகத்தை இயக்கவும்"
+
+#~ msgid "Opens the bug report dialog"
+#~ msgstr "வழு அறிக்கை உரையாடல் திறக்கப்படுகின்றது"
+
+#~ msgid "Displays the version number and copyright information"
+#~ msgstr "பதிப்பு எண் மற்றும் காப்புரிமையை காட்டவும்"
+
+#~ msgid "Displays the information about KDE and its version number"
+#~ msgstr "பதிப்பு எண் மற்றும் KDE விபரங்களை காட்டும்"
+
+#, fuzzy
+#~ msgid "&Remove"
+#~ msgstr "நீக்கப்பட்டது"
+
+#~ msgctxt "to view something"
+#~ msgid "&View"
+#~ msgstr "பார்வை"
+
+#~ msgid "Copyright (c) 1999-2002 Bernd Gehrmann"
+#~ msgstr "உரிமை (c) 1999-2002 Bernd Gehrmann"
+
+#~ msgid "Show All &Files"
+#~ msgstr "அனைத்துக் கோப்புகளையும் காட்டு"
+
+#~ msgid "Show Unmodified Files"
+#~ msgstr "மாற்றப்படாத கோப்புக்களை காட்டு"
+
+#~ msgid "Show Removed Files"
+#~ msgstr "நீக்கப்பட்ட கோப்புகளை காட்டு"
+
+#~ msgid "Show Non-CVS Files"
+#~ msgstr "CVS அல்லாத கோப்புகளை காட்டு "
+
+#~ msgid "Show Empty Folders"
+#~ msgstr "காலியான அடைவுகளை காட்டு"
+
+#, fuzzy
+#~ msgid "Fold Folder"
+#~ msgstr "கோப்பு மரங்களை &மடி"
+
+#, fuzzy
+#~ msgid ""
+#~ "Cervisia %1\n"
+#~ "(Using KDE %2)\n"
+#~ "\n"
+#~ "Copyright (c) 1999-2002\n"
+#~ "Bernd Gehrmann <bernd@mail.berlios.de>\n"
+#~ "\n"
+#~ "This program is free software; you can redistribute it and/or modify\n"
+#~ "it under the terms of the GNU General Public License as published by\n"
+#~ "the Free Software Foundation; either version 2 of the License, or\n"
+#~ "(at your option) any later version.\n"
+#~ "This program is distributed in the hope that it will be useful,\n"
+#~ "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+#~ "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+#~ "GNU General Public License for more details.\n"
+#~ "See the ChangeLog file for a list of contributors."
+#~ msgstr ""
+#~ "Cervisia %1\n"
+#~ "(Using KDE %2)\n"
+#~ "\n"
+#~ "Copyright (c) 1999-2002\n"
+#~ "Bernd Gehrmann <bernd@mail.berlios.de>\n"
+#~ "\n"
+#~ "This program may be distributed under the terms of the Q Public\n"
+#~ "License as defined by Trolltech AS of Norway and appearing in the\n"
+#~ "file LICENSE.QPL included in the packaging of this file.\n"
+#~ "\n"
+#~ "This program is distributed in the hope that it will be useful,\n"
+#~ "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+#~ "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
+#~ "\n"
+#~ "See the ChangeLog file for a list of contributors."
+
+#~ msgid "About Cervisia"
+#~ msgstr "சர்விசியாவைப் பற்றி "
+
+#, fuzzy
+#~ msgid "File Type"
+#~ msgstr "கோப்பின் பெயர்"

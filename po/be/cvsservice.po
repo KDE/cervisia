@@ -1,0 +1,106 @@
+# translation of cvsservice.po to Belarusian
+#
+# Siarhei Liantsevich <serzh.by@gmail.com>, 2007.
+# Darafei Praliaskouski <komzpa@licei2.com>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: cvsservice\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-14 00:48+0000\n"
+"PO-Revision-Date: 2007-05-02 17:46+0300\n"
+"Last-Translator: Darafei Praliaskouski <komzpa@licei2.com>\n"
+"Language-Team: Belarusian <i18n@mova.org>\n"
+"Language: be\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || n%10>=5 && n%10<=9 || n"
+"%100>=11 && n%100<=14 ? 2 : 3);\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Сяржук Лянцэвіч"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "serzh.by@gmail.com"
+
+#: cvsaskpass.cpp:38
+#, kde-format
+msgid "cvsaskpass"
+msgstr "cvsaskpass"
+
+#: cvsaskpass.cpp:40
+#, fuzzy, kde-format
+msgid "ssh-askpass for the CVS D-Bus Service"
+msgstr "ssh-askpass для сэрвісу CVS DCOP"
+
+#: cvsaskpass.cpp:42
+#, kde-format
+msgid "Copyright (c) 2003 Christian Loose"
+msgstr "Copyright (c) 2003 Christian Loose"
+
+#: cvsaskpass.cpp:49
+#, kde-format
+msgid "prompt"
+msgstr "prompt"
+
+#: cvsaskpass.cpp:61
+#, kde-format
+msgid "Please type in your password below."
+msgstr "Увядзіце ваш пароль"
+
+#: cvsaskpass.cpp:65
+#, fuzzy, kde-format
+msgid "Repository:"
+msgstr "Рэпазітар:"
+
+#: cvsloginjob.cpp:108
+#, fuzzy, kde-format
+msgid "Enter password for repository %1."
+msgstr "Увядзіце ваш пароль для рэпазітара."
+
+#: cvsservice.cpp:883
+#, fuzzy, kde-format
+msgid ""
+"You have to set a local working copy directory before you can use this "
+"function!"
+msgstr ""
+"Усталюеце лакальную працоўную копію каталогаў перад выкарыстаннем гэтай "
+"функцыі."
+
+#: cvsservice.cpp:896
+#, fuzzy, kde-format
+msgid "There is already a job running"
+msgstr "Заданне ўжо запушчанае"
+
+#: main.cpp:36
+#, fuzzy, kde-format
+msgid "CVS D-Bus service"
+msgstr "Сэрвіс CVS DCOP"
+
+#: main.cpp:38
+#, fuzzy, kde-format
+msgid "D-Bus service for CVS"
+msgstr "Сэрвіс DCOP для CVS"
+
+#: main.cpp:40
+#, fuzzy, kde-format
+#| msgid "Copyright (c) 2003 Christian Loose"
+msgid "Copyright (c) 2002-2003 Christian Loose"
+msgstr "Copyright (c) 2003 Christian Loose"
+
+#: main.cpp:44
+#, fuzzy, kde-format
+#| msgid "Copyright (c) 2003 Christian Loose"
+msgid "Christian Loose"
+msgstr "Copyright (c) 2003 Christian Loose"
+
+#: main.cpp:44
+#, fuzzy, kde-format
+msgid "Developer"
+msgstr "Распрацоўнік"

@@ -1,0 +1,110 @@
+# translation of cvsservice.po to Tajik
+# Copyright (C) 2004 Free Software Foundation, Inc.
+# 2004, infoDev, a World Bank organization
+# 2004, Khujand Computer Technologies, Inc.
+# 2004, Youth Opportunities NGO
+# Roger V Kovacs, <rkovacs@khujand.org>, 2004.
+# Victor Ibragimov <youth_opportunities@tajik.net>, 2004.
+# Marina Kolucheva <youth_opportunities@tajik.net>, 2004.
+msgid ""
+msgstr ""
+"Project-Id-Version: cvsservice\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-14 00:48+0000\n"
+"PO-Revision-Date: 2004-09-10 17:48-0400\n"
+"Last-Translator: Marina Kolucheva <youth_opportunities@tajik.net>\n"
+"Language-Team: Tajik\n"
+"Language: tg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.3\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Tajik KDE Teams:,Марина Колючева,Виктор Ибрагимов,Роҷер Ковакс"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ",,youth_opprtunities@tajik.net,"
+
+#: cvsaskpass.cpp:38
+#, kde-format
+msgid "cvsaskpass"
+msgstr "свсекпес"
+
+#: cvsaskpass.cpp:40
+#, fuzzy, kde-format
+#| msgid "ssh-askpass for the CVS DCOP Service"
+msgid "ssh-askpass for the CVS D-Bus Service"
+msgstr "ssh-askpass барои Сервисӣ CVS DCOP "
+
+#: cvsaskpass.cpp:42
+#, kde-format
+msgid "Copyright (c) 2003 Christian Loose"
+msgstr "Ҳуқуқи Муаллифи (с) 2003 Кристиан Луз"
+
+#: cvsaskpass.cpp:49
+#, kde-format
+msgid "prompt"
+msgstr "промт"
+
+#: cvsaskpass.cpp:61
+#, kde-format
+msgid "Please type in your password below."
+msgstr "Марҳамат ба Номи шабатон дар поён чоп кунед."
+
+#: cvsaskpass.cpp:65
+#, kde-format
+msgid "Repository:"
+msgstr "Анбор:"
+
+#: cvsloginjob.cpp:108
+#, fuzzy, kde-format
+#| msgid "Please type in your password for the repository below."
+msgid "Enter password for repository %1."
+msgstr "Марҳамат дар номи шабатон чоп кунед барои анбори дар поён буда."
+
+#: cvsservice.cpp:883
+#, kde-format
+msgid ""
+"You have to set a local working copy directory before you can use this "
+"function!"
+msgstr ""
+"Ба шумо лозим аст ,ки таҳҷои директроияи нусхаи коркунанадаро барқарор "
+"намоед пеш аз истифодаи ин функсия!"
+
+#: cvsservice.cpp:896
+#, kde-format
+msgid "There is already a job running"
+msgstr "Аллакай кор рафтаистодааст"
+
+#: main.cpp:36
+#, fuzzy, kde-format
+msgid "CVS D-Bus service"
+msgstr "CVS DCOP cервис"
+
+#: main.cpp:38
+#, fuzzy, kde-format
+msgid "D-Bus service for CVS"
+msgstr "DCOP сервис барои CVS"
+
+#: main.cpp:40
+#, fuzzy, kde-format
+#| msgid "Copyright (c) 2003 Christian Loose"
+msgid "Copyright (c) 2002-2003 Christian Loose"
+msgstr "Ҳуқуқи Муаллифи (с) 2003 Кристиан Луз"
+
+#: main.cpp:44
+#, fuzzy, kde-format
+#| msgid "Copyright (c) 2003 Christian Loose"
+msgid "Christian Loose"
+msgstr "Ҳуқуқи Муаллифи (с) 2003 Кристиан Луз"
+
+#: main.cpp:44
+#, kde-format
+msgid "Developer"
+msgstr "Тараққикунак"

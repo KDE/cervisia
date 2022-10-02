@@ -1,0 +1,102 @@
+# translation of cvsservice.po to Persian
+# Nazanin Kazemi <kazemi@itland.ir>, 2006, 2007.
+# Nasim Daniarzadeh <daniarzadeh@itland.ir>, 2006.
+msgid ""
+msgstr ""
+"Project-Id-Version: cvsservice\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-14 00:48+0000\n"
+"PO-Revision-Date: 2007-06-30 15:27+0330\n"
+"Last-Translator: Nazanin Kazemi <kazemi@itland.ir>\n"
+"Language-Team: Persian <kde-i18n-fa@kde.org>\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "نازنین کاظمی"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "kazemi@itland.ir"
+
+#: cvsaskpass.cpp:38
+#, kde-format
+msgid "cvsaskpass"
+msgstr ""
+
+#: cvsaskpass.cpp:40
+#, kde-format
+msgid "ssh-askpass for the CVS D-Bus Service"
+msgstr "ssh-askpass برای خدمت CVS D-Bus"
+
+#: cvsaskpass.cpp:42
+#, kde-format
+msgid "Copyright (c) 2003 Christian Loose"
+msgstr ""
+
+#: cvsaskpass.cpp:49
+#, kde-format
+msgid "prompt"
+msgstr "اعلان"
+
+#: cvsaskpass.cpp:61
+#, kde-format
+msgid "Please type in your password below."
+msgstr "لطفاً، اسم رمز خود را در زیر وارد کنید."
+
+#: cvsaskpass.cpp:65
+#, kde-format
+msgid "Repository:"
+msgstr "مخزن:"
+
+#: cvsloginjob.cpp:108
+#, fuzzy, kde-format
+#| msgid "Please type in your password for the repository below."
+msgid "Enter password for repository %1."
+msgstr "لطفاً، اسم رمز خود را برای مخزن در زیر وارد کنید."
+
+#: cvsservice.cpp:883
+#, kde-format
+msgid ""
+"You have to set a local working copy directory before you can use this "
+"function!"
+msgstr ""
+"باید قبل از این که بتوانید از این تابع استفاده کنید، فهرست راهنمای رونوشت "
+"کار محلی خود را تنظیم نمایید!"
+
+#: cvsservice.cpp:896
+#, kde-format
+msgid "There is already a job running"
+msgstr "هم اکنون کاری در حال اجراست"
+
+#: main.cpp:36
+#, kde-format
+msgid "CVS D-Bus service"
+msgstr "خدمت CVS D-Bus"
+
+#: main.cpp:38
+#, kde-format
+msgid "D-Bus service for CVS"
+msgstr "خدمت D-Bus برای CVS"
+
+#: main.cpp:40
+#, kde-format
+msgid "Copyright (c) 2002-2003 Christian Loose"
+msgstr ""
+
+#: main.cpp:44
+#, kde-format
+msgid "Christian Loose"
+msgstr ""
+
+#: main.cpp:44
+#, kde-format
+msgid "Developer"
+msgstr "توسعه‌دهنده"

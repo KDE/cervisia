@@ -1,0 +1,2111 @@
+# cervisia Bahasa Melayu (Malay) (ms)
+#
+# Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: cervisia\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-14 00:48+0000\n"
+"PO-Revision-Date: 2009-02-19 23:54+0800\n"
+"Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
+"Language-Team: Malay <kedidiemas@yahoogroups.com>\n"
+"Language: ms\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=1;\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Sharuzzaman Ahmat Raslan"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "sharuzzaman@myrealbox.com"
+
+#: addignoremenu.cpp:34
+#, kde-format
+msgid "Add to Ignore List"
+msgstr ""
+
+#: addignoremenu.cpp:65
+#, kde-format
+msgid "Ignore File"
+msgid_plural "Ignore %1 Files"
+msgstr[0] "Abai Fail"
+msgstr[1] "Abai %1 Fail"
+
+#: addignoremenu.cpp:85
+#, kde-format
+msgid "Cannot open file '%1' for writing."
+msgstr "Tidak dapat membuka fail '%1' untuk menulis."
+
+#: addremovedialog.cpp:40
+#, fuzzy, kde-format
+msgid "CVS Add"
+msgstr "Tambah Partisyen"
+
+#: addremovedialog.cpp:40
+#, fuzzy, kde-format
+msgid "CVS Add Binary"
+msgstr "pakej binari utama"
+
+#: addremovedialog.cpp:40
+#, fuzzy, kde-format
+msgid "CVS Remove"
+msgstr "akan membuang %s\n"
+
+#: addremovedialog.cpp:59
+#, fuzzy, kde-format
+msgid "Add the following files to the repository:"
+msgstr "Jangan tambah baris baru pada penghujung fail"
+
+#: addremovedialog.cpp:60
+#, kde-format
+msgid "Add the following binary files to the repository:"
+msgstr ""
+
+#: addremovedialog.cpp:61
+#, kde-format
+msgid "Remove the following files from the repository:"
+msgstr ""
+
+#: addremovedialog.cpp:73
+#, kde-format
+msgid "This will also remove the files from your local working copy."
+msgstr ""
+
+#: addrepositorydialog.cpp:40
+#, fuzzy, kde-format
+msgid "Add Repository"
+msgstr "Tambah Repositori"
+
+#: addrepositorydialog.cpp:53 checkoutdialog.cpp:86
+#, fuzzy, kde-format
+msgid "&Repository:"
+msgstr "<b>URL repositori:</b>"
+
+#: addrepositorydialog.cpp:67
+#, kde-format
+msgid "Use remote &shell (only for :ext: repositories):"
+msgstr ""
+
+#: addrepositorydialog.cpp:76
+#, kde-format
+msgid "Invoke this program on the server side:"
+msgstr ""
+
+#: addrepositorydialog.cpp:86
+#, kde-format
+msgid "Use different &compression level:"
+msgstr ""
+
+#: addrepositorydialog.cpp:94
+#, kde-format
+msgid "Download cvsignore file from server"
+msgstr ""
+
+#: addrepositorydialog.cpp:174
+#, fuzzy, kde-format
+msgid "Repository Settings"
+msgstr "Tetapan Lain-lain"
+
+#: annotatecontroller.cpp:75
+#, fuzzy, kde-format
+msgid "CVS Annotate: %1"
+msgstr "Servis DCOP CVS"
+
+#: annotatecontroller.cpp:85
+#, fuzzy, kde-format
+msgid "CVS Annotate"
+msgstr "Servis DCOP CVS"
+
+#: annotatedialog.cpp:44
+#, kde-format
+msgid "Go to Line..."
+msgstr ""
+
+#: annotatedialog.cpp:49
+#, kde-format
+msgid "Find Prev"
+msgstr ""
+
+#: annotatedialog.cpp:54
+#, kde-format
+msgid "Find Next"
+msgstr ""
+
+#: annotatedialog.cpp:64
+#, fuzzy, kde-format
+msgid "Search"
+msgstr "&Cari:"
+
+#: annotatedialog.cpp:115
+#, kde-format
+msgid "Go to Line"
+msgstr ""
+
+#: annotatedialog.cpp:115
+#, kde-format
+msgid "Go to line number:"
+msgstr ""
+
+#: cervisiapart.cpp:111 main.cpp:138
+#, kde-format
+msgid "Cervisia"
+msgstr "Cervisia"
+
+#: cervisiapart.cpp:118
+#, kde-format
+msgid "Starting cvsservice failed with message: "
+msgstr ""
+
+#: cervisiapart.cpp:148
+#, kde-format
+msgid ""
+"This KPart is non-functional, because the cvs D-Bus service could not be "
+"started."
+msgstr ""
+
+#: cervisiapart.cpp:186
+#, kde-format
+msgid "Remote CVS working folders are not supported."
+msgstr ""
+
+#: cervisiapart.cpp:194
+#, kde-format
+msgid ""
+"You cannot change to a different folder while there is a running cvs job."
+msgstr ""
+
+#: cervisiapart.cpp:214
+#, kde-format
+msgid ""
+"F - All files are hidden, the tree shows only folders\n"
+"N - All up-to-date files are hidden\n"
+"R - All removed files are hidden"
+msgstr ""
+
+#: cervisiapart.cpp:227
+#, fuzzy, kde-format
+msgid "Open Sandbox..."
+msgstr "tidak dapat membuka %s!\n"
+
+#: cervisiapart.cpp:231
+#, kde-format
+msgid "Opens a CVS working folder in the main window"
+msgstr ""
+
+#: cervisiapart.cpp:235
+#, fuzzy, kde-format
+msgid "Recent Sandboxes"
+msgstr "&Import Helaiankerja Terbaru"
+
+#: cervisiapart.cpp:239
+#, fuzzy, kde-format
+msgid "&Insert ChangeLog Entry..."
+msgstr "Masukan tidak dijumpai.\n"
+
+#: cervisiapart.cpp:242
+#, kde-format
+msgid "Inserts a new intro into the file ChangeLog in the toplevel folder"
+msgstr ""
+
+#: cervisiapart.cpp:246
+#, fuzzy, kde-format
+msgid "&Update"
+msgstr "&Kemaskini"
+
+#: cervisiapart.cpp:250
+#, kde-format
+msgid "Updates (cvs update) the selected files and folders"
+msgstr ""
+
+#: cervisiapart.cpp:254
+#, kde-format
+msgid "&Status"
+msgstr "&Status"
+
+#: cervisiapart.cpp:258
+#, kde-format
+msgid "Updates the status (cvs -n update) of the selected files and folders"
+msgstr ""
+
+#: cervisiapart.cpp:262 resolvedialog.cpp:176
+#, fuzzy, kde-format
+msgid "&Edit"
+msgstr "&Edit"
+
+#: cervisiapart.cpp:265
+#, kde-format
+msgid "Opens the marked file for editing"
+msgstr ""
+
+#: cervisiapart.cpp:269
+#, kde-format
+msgid "Reso&lve..."
+msgstr ""
+
+#: cervisiapart.cpp:272
+#, kde-format
+msgid "Opens the resolve dialog with the selected file"
+msgstr ""
+
+#: cervisiapart.cpp:276
+#, fuzzy, kde-format
+msgid "&Commit..."
+msgstr "Laksana"
+
+#: cervisiapart.cpp:280
+#, fuzzy, kde-format
+msgid "Commits the selected files"
+msgstr "Tambah fail dipilih"
+
+#: cervisiapart.cpp:284
+#, fuzzy, kde-format
+msgid "&Add to Repository..."
+msgstr "Tambah kepada Tandabuku"
+
+#: cervisiapart.cpp:287
+#, fuzzy, kde-format
+msgid "Add"
+msgstr "Tambah"
+
+#: cervisiapart.cpp:289
+#, kde-format
+msgid "Adds (cvs add) the selected files to the repository"
+msgstr ""
+
+#: cervisiapart.cpp:293
+#, fuzzy, kde-format
+msgid "Add &Binary..."
+msgstr "[%s (perduaan): diabaikan]\n"
+
+#: cervisiapart.cpp:296
+#, kde-format
+msgid "Adds (cvs -kb add) the selected files as binaries to the repository"
+msgstr ""
+
+#: cervisiapart.cpp:300
+#, fuzzy, kde-format
+msgid "&Remove From Repository..."
+msgstr "Buang Daripada Panel"
+
+#: cervisiapart.cpp:303 repositorydialog.cpp:201
+#, fuzzy, kde-format
+msgid "Remove"
+msgstr "Buang"
+
+#: cervisiapart.cpp:305
+#, kde-format
+msgid "Removes (cvs remove) the selected files from the repository"
+msgstr ""
+
+#: cervisiapart.cpp:309
+#, kde-format
+msgid "Rever&t"
+msgstr ""
+
+#: cervisiapart.cpp:312
+#, kde-format
+msgid "Reverts (cvs update -C) the selected files (only cvs 1.11)"
+msgstr ""
+
+#: cervisiapart.cpp:316
+#, fuzzy, kde-format
+msgid "&Properties"
+msgstr "&Ciri"
+
+#: cervisiapart.cpp:323
+#, fuzzy, kde-format
+msgid "Stop"
+msgstr "Henti"
+
+#: cervisiapart.cpp:328
+#, kde-format
+msgid "Stops any running sub-processes"
+msgstr ""
+
+#: cervisiapart.cpp:332
+#, fuzzy, kde-format
+msgid "Browse &Log..."
+msgstr "Log Ralat"
+
+#: cervisiapart.cpp:336
+#, kde-format
+msgid "Shows the revision tree of the selected file"
+msgstr ""
+
+#: cervisiapart.cpp:341
+#, fuzzy, kde-format
+msgid "Browse Multi-File Log..."
+msgstr "Membuka semula fail log $prog: "
+
+#: cervisiapart.cpp:345
+#, kde-format
+msgid "&Annotate..."
+msgstr ""
+
+#: cervisiapart.cpp:349
+#, kde-format
+msgid "Shows a blame-annotated view of the selected file"
+msgstr ""
+
+#: cervisiapart.cpp:353
+#, kde-format
+msgid "&Difference to Repository (BASE)..."
+msgstr ""
+
+#: cervisiapart.cpp:357
+#, kde-format
+msgid ""
+"Shows the differences of the selected file to the checked out version (tag "
+"BASE)"
+msgstr ""
+
+#: cervisiapart.cpp:361
+#, kde-format
+msgid "Difference to Repository (HEAD)..."
+msgstr ""
+
+#: cervisiapart.cpp:365
+#, kde-format
+msgid ""
+"Shows the differences of the selected file to the newest version in the "
+"repository (tag HEAD)"
+msgstr ""
+
+#: cervisiapart.cpp:369
+#, fuzzy, kde-format
+msgid "Last &Change..."
+msgstr "Perubahan Terakhir:\t%s\n"
+
+#: cervisiapart.cpp:372
+#, kde-format
+msgid ""
+"Shows the differences between the last two revisions of the selected file"
+msgstr ""
+
+#: cervisiapart.cpp:376
+#, fuzzy, kde-format
+msgid "&History..."
+msgstr "&Sejarah..."
+
+#: cervisiapart.cpp:379
+#, kde-format
+msgid "Shows the CVS history as reported by the server"
+msgstr ""
+
+#: cervisiapart.cpp:383
+#, fuzzy, kde-format
+msgid "&Unfold File Tree"
+msgstr "Sisipkan ke tree"
+
+#: cervisiapart.cpp:387
+#, kde-format
+msgid "Opens all branches of the file tree"
+msgstr ""
+
+#: cervisiapart.cpp:391
+#, fuzzy, kde-format
+msgid "&Fold File Tree"
+msgstr "Sisipkan ke tree"
+
+#: cervisiapart.cpp:394
+#, kde-format
+msgid "Closes all branches of the file tree"
+msgstr ""
+
+#: cervisiapart.cpp:401
+#, fuzzy, kde-format
+msgid "&Tag/Branch..."
+msgstr "Tag ID3:"
+
+#: cervisiapart.cpp:404
+#, kde-format
+msgid "Creates a tag or branch for the selected files"
+msgstr ""
+
+#: cervisiapart.cpp:408
+#, fuzzy, kde-format
+msgid "&Delete Tag..."
+msgstr "Tag ID3:"
+
+#: cervisiapart.cpp:411
+#, kde-format
+msgid "Deletes a tag from the selected files"
+msgstr ""
+
+#: cervisiapart.cpp:415
+#, fuzzy, kde-format
+msgid "&Update to Tag/Date..."
+msgstr "Tiada tag untuk dibuang!"
+
+#: cervisiapart.cpp:418
+#, kde-format
+msgid "Updates the selected files to a given tag, branch or date"
+msgstr ""
+
+#: cervisiapart.cpp:422
+#, fuzzy, kde-format
+msgid "Update to &HEAD"
+msgstr "gagal kemaskini media \"%s\"\n"
+
+#: cervisiapart.cpp:425
+#, kde-format
+msgid "Updates the selected files to the HEAD revision"
+msgstr ""
+
+#: cervisiapart.cpp:429
+#, fuzzy, kde-format
+msgid "&Merge..."
+msgstr "Gabung"
+
+#: cervisiapart.cpp:432
+#, kde-format
+msgid "Merges a branch or a set of modifications into the selected files"
+msgstr ""
+
+#: cervisiapart.cpp:436
+#, fuzzy, kde-format
+msgid "&Add Watch..."
+msgstr "Tonton televisyen"
+
+#: cervisiapart.cpp:439
+#, kde-format
+msgid "Adds a watch for the selected files"
+msgstr ""
+
+#: cervisiapart.cpp:443
+#, fuzzy, kde-format
+msgid "&Remove Watch..."
+msgstr "Tonton televisyen"
+
+#: cervisiapart.cpp:446
+#, kde-format
+msgid "Removes a watch from the selected files"
+msgstr ""
+
+#: cervisiapart.cpp:450
+#, fuzzy, kde-format
+msgid "Show &Watchers"
+msgstr "Papar _Bantuan"
+
+#: cervisiapart.cpp:453
+#, kde-format
+msgid "Shows the watchers of the selected files"
+msgstr ""
+
+#: cervisiapart.cpp:457
+#, fuzzy, kde-format
+msgid "Ed&it Files"
+msgstr "Tiada Fail Dinyatakan."
+
+#: cervisiapart.cpp:460
+#, kde-format
+msgid "Edits (cvs edit) the selected files"
+msgstr ""
+
+#: cervisiapart.cpp:464
+#, fuzzy, kde-format
+msgid "U&nedit Files"
+msgstr "Fail Log"
+
+#: cervisiapart.cpp:467
+#, kde-format
+msgid "Unedits (cvs unedit) the selected files"
+msgstr ""
+
+#: cervisiapart.cpp:471
+#, fuzzy, kde-format
+msgid "Show &Editors"
+msgstr "Penyunting Web"
+
+#: cervisiapart.cpp:474
+#, kde-format
+msgid "Shows the editors of the selected files"
+msgstr ""
+
+#: cervisiapart.cpp:478
+#, fuzzy, kde-format
+msgid "&Lock Files"
+msgstr "Fail Log"
+
+#: cervisiapart.cpp:481
+#, kde-format
+msgid "Locks the selected files, so that others cannot modify them"
+msgstr ""
+
+#: cervisiapart.cpp:485
+#, fuzzy, kde-format
+msgid "Unl&ock Files"
+msgstr "Tiada Fail Dinyatakan."
+
+#: cervisiapart.cpp:488
+#, fuzzy, kde-format
+msgid "Unlocks the selected files"
+msgstr "Tambah fail dipilih"
+
+#: cervisiapart.cpp:492
+#, kde-format
+msgid "Create &Patch Against Repository..."
+msgstr ""
+
+#: cervisiapart.cpp:495
+#, kde-format
+msgid "Creates a patch from the modifications in your sandbox"
+msgstr ""
+
+#: cervisiapart.cpp:502
+#, fuzzy, kde-format
+msgid "&Create..."
+msgstr "Cipta"
+
+#: cervisiapart.cpp:506
+#, kde-format
+msgid "&Checkout..."
+msgstr ""
+
+#: cervisiapart.cpp:509
+#, kde-format
+msgid "Allows you to checkout a module from a repository"
+msgstr ""
+
+#: cervisiapart.cpp:513
+#, fuzzy, kde-format
+msgid "&Import..."
+msgstr "&Import..."
+
+#: cervisiapart.cpp:516
+#, kde-format
+msgid "Allows you to import a module into a repository"
+msgstr ""
+
+#: cervisiapart.cpp:520
+#, kde-format
+msgid "&Repositories..."
+msgstr ""
+
+#: cervisiapart.cpp:523
+#, kde-format
+msgid "Configures a list of repositories you regularly use"
+msgstr ""
+
+#: cervisiapart.cpp:530
+#, fuzzy, kde-format
+msgid "Hide All &Files"
+msgstr "kemaskini semua fail tetapan"
+
+#: cervisiapart.cpp:533
+#, kde-format
+msgid "Determines whether only folders are shown"
+msgstr ""
+
+#: cervisiapart.cpp:537
+#, fuzzy, kde-format
+msgid "Hide Unmodified Files"
+msgstr "Tiada Fail Dinyatakan."
+
+#: cervisiapart.cpp:541
+#, kde-format
+msgid "Determines whether files with status up-to-date or unknown are hidden"
+msgstr ""
+
+#: cervisiapart.cpp:546
+#, fuzzy, kde-format
+msgid "Hide Removed Files"
+msgstr "Tiada Fail Dinyatakan."
+
+#: cervisiapart.cpp:549
+#, kde-format
+msgid "Determines whether removed files are hidden"
+msgstr ""
+
+#: cervisiapart.cpp:553
+#, kde-format
+msgid "Hide Non-CVS Files"
+msgstr ""
+
+#: cervisiapart.cpp:556
+#, kde-format
+msgid "Determines whether files not in CVS are hidden"
+msgstr ""
+
+#: cervisiapart.cpp:560
+#, fuzzy, kde-format
+msgid "Hide Empty Folders"
+msgstr "fail kosong biasa"
+
+#: cervisiapart.cpp:563
+#, kde-format
+msgid "Determines whether folders without visible entries are hidden"
+msgstr ""
+
+#: cervisiapart.cpp:567
+#, kde-format
+msgid "Create &Folders on Update"
+msgstr ""
+
+#: cervisiapart.cpp:570
+#, kde-format
+msgid "Determines whether updates create folders"
+msgstr ""
+
+#: cervisiapart.cpp:574
+#, kde-format
+msgid "&Prune Empty Folders on Update"
+msgstr ""
+
+#: cervisiapart.cpp:577
+#, kde-format
+msgid "Determines whether updates remove empty folders"
+msgstr ""
+
+#: cervisiapart.cpp:581
+#, fuzzy, kde-format
+msgid "&Update Recursively"
+msgstr "Kemaskini Sistem"
+
+#: cervisiapart.cpp:584
+#, kde-format
+msgid "Determines whether updates are recursive"
+msgstr ""
+
+#: cervisiapart.cpp:588
+#, fuzzy, kde-format
+msgid "C&ommit && Remove Recursively"
+msgstr "gagal untuk membuang %s: %s\n"
+
+#: cervisiapart.cpp:591
+#, kde-format
+msgid "Determines whether commits and removes are recursive"
+msgstr ""
+
+#: cervisiapart.cpp:595
+#, kde-format
+msgid "Do cvs &edit Automatically When Necessary"
+msgstr ""
+
+#: cervisiapart.cpp:598
+#, kde-format
+msgid "Determines whether automatic cvs editing is active"
+msgstr ""
+
+#: cervisiapart.cpp:602
+#, fuzzy, kde-format
+msgid "Configure Cervisia..."
+msgstr "_Konfigurasikan Firewall"
+
+#: cervisiapart.cpp:605
+#, kde-format
+msgid "Allows you to configure the Cervisia KPart"
+msgstr ""
+
+#: cervisiapart.cpp:613
+#, fuzzy, kde-format
+msgid "CVS &Manual"
+msgstr "/Bantuan/_Manual"
+
+#: cervisiapart.cpp:616
+#, kde-format
+msgid "Opens the help browser with the CVS documentation"
+msgstr ""
+
+#: cervisiapart.cpp:623
+#, fuzzy, kde-format
+msgid "Unfold Folder"
+msgstr "Tambah _direktori"
+
+#: cervisiapart.cpp:715
+#, fuzzy, kde-format
+msgid "Cervisia Part"
+msgstr "Mesej keluar saluran default:"
+
+#: cervisiapart.cpp:717 main.cpp:140
+#, fuzzy, kde-format
+msgid "A CVS frontend"
+msgstr "Servis DCOP CVS"
+
+#: cervisiapart.cpp:719 main.cpp:142
+#, kde-format
+msgid ""
+"Copyright (c) 1999-2002 Bernd Gehrmann\n"
+"Copyright (c) 2002-2008 the Cervisia authors"
+msgstr ""
+
+#: cervisiapart.cpp:724 main.cpp:147
+#, kde-format
+msgid "Bernd Gehrmann"
+msgstr ""
+
+#: cervisiapart.cpp:725 main.cpp:148
+#, kde-format
+msgid "Original author and former maintainer"
+msgstr ""
+
+#: cervisiapart.cpp:728 main.cpp:151
+#, kde-format
+msgid "Christian Loose"
+msgstr ""
+
+#: cervisiapart.cpp:728 main.cpp:151
+#, fuzzy, kde-format
+msgid "Maintainer"
+msgstr "Penyelenggara"
+
+#: cervisiapart.cpp:729 main.cpp:152
+#, kde-format
+msgid "André Wöbbeking"
+msgstr ""
+
+#: cervisiapart.cpp:729 main.cpp:152
+#, kde-format
+msgid "Developer"
+msgstr "Pemaju"
+
+#: cervisiapart.cpp:730 main.cpp:153
+#, kde-format
+msgid "Carlos Woelz"
+msgstr ""
+
+#: cervisiapart.cpp:730 main.cpp:153
+#, fuzzy, kde-format
+msgid "Documentation"
+msgstr "Dokumentasi"
+
+#: cervisiapart.cpp:732 main.cpp:155
+#, fuzzy, kde-format
+msgid "Richard Moore"
+msgstr "Richard Moore"
+
+#: cervisiapart.cpp:732 main.cpp:155
+#, fuzzy, kde-format
+msgid "Conversion to KPart"
+msgstr "Penukaran tab ditaip kepada ruang"
+
+#: cervisiapart.cpp:733 main.cpp:156
+#, kde-format
+msgid "Laurent Montel"
+msgstr ""
+
+#: cervisiapart.cpp:733 main.cpp:156
+#, fuzzy, kde-format
+msgid "Conversion to D-Bus"
+msgstr "Penukaran tab ditaip kepada ruang"
+
+#: cervisiapart.cpp:734 main.cpp:157
+#, kde-format
+msgid "Martin Koller"
+msgstr ""
+
+#: cervisiapart.cpp:734 main.cpp:157
+#, kde-format
+msgid "Port to KDE Frameworks 5"
+msgstr ""
+
+#: cervisiapart.cpp:741
+#, fuzzy, kde-format
+msgid "Open Sandbox"
+msgstr "tidak dapat membuka %s!\n"
+
+#: cervisiapart.cpp:791
+#, fuzzy, kde-format
+msgid "CVS Edit"
+msgstr "Edit Antaramuka %s"
+
+#: cervisiapart.cpp:1298 diffdialog.cpp:263 logdialog.cpp:472
+#, fuzzy, kde-format
+msgid "CVS Diff"
+msgstr "%s: diff gagal: "
+
+#: cervisiapart.cpp:1311 diffdialog.cpp:473 logdialog.cpp:485
+#: resolvedialog.cpp:351
+#, fuzzy, kde-format
+msgid "Could not open file for writing."
+msgstr "Fail tidak dapat dibuka untuk ditulis: %s"
+
+#: cervisiapart.cpp:1461
+#, fuzzy, kde-format
+msgid "The revision looks invalid."
+msgstr "Titik lekapan tidak sah"
+
+#: cervisiapart.cpp:1465
+#, fuzzy, kde-format
+msgid "This is the first revision of the branch."
+msgstr "Adakah ini sistem Linux pertama anda?"
+
+#: cervisiapart.cpp:1575
+#, fuzzy, kde-format
+msgid "Invoking help on CVS"
+msgstr ""
+"\n"
+"Tiada bantuan yang ada bagi larahan itu.\n"
+
+#: cervisiapart.cpp:1610
+#, kde-format
+msgid "Done"
+msgstr "Selesai"
+
+#: cervisiapart.cpp:1616
+#, kde-format
+msgid "A CVS commit to repository %1 is done"
+msgstr ""
+
+#: cervisiapart.cpp:1633
+#, kde-format
+msgid ""
+"This is not a CVS folder.\n"
+"If you did not intend to use Cervisia, you can switch view modes within "
+"Konqueror."
+msgstr ""
+
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr ""
+
+#: cervisiashell.cpp:54
+#, kde-format
+msgid "The Cervisia library could not be loaded."
+msgstr ""
+
+#: cervisiashell.cpp:86
+#, fuzzy, kde-format
+msgid "Allows you to configure the toolbar"
+msgstr "Apa yang anda ingin konfigurasikan?"
+
+#: cervisiashell.cpp:91
+#, kde-format
+msgid "Allows you to customize the keybindings"
+msgstr ""
+
+#: cervisiashell.cpp:96
+#, fuzzy, kde-format
+msgid "Exits Cervisia"
+msgstr "GenericName=Integrasi CVS (Cervisia)"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, fuzzy, kde-format
+msgid "&File"
+msgstr "&Fail"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, fuzzy, kde-format
+msgid "&Settings"
+msgstr "&Tetapan"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, fuzzy, kde-format
+msgid "&Help"
+msgstr "&Bantuan"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, fuzzy, kde-format
+msgid "Main Toolbar"
+msgstr "Bar Alatan Utama"
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, fuzzy, kde-format
+msgid "&View"
+msgstr "&Lihat"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, fuzzy, kde-format
+msgid "&Advanced"
+msgstr "L&anjutan"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, fuzzy, kde-format
+msgid "&Repository"
+msgstr "<b>URL repositori:</b>"
+
+#: changelogdialog.cpp:48
+#, fuzzy, kde-format
+msgid "Edit ChangeLog"
+msgstr "Edit Antaramuka %s"
+
+#: changelogdialog.cpp:86
+#, kde-format
+msgid "The ChangeLog file could not be written."
+msgstr ""
+
+#: changelogdialog.cpp:102
+#, kde-format
+msgid "A ChangeLog file does not exist. Create one?"
+msgstr ""
+
+#: changelogdialog.cpp:102
+#, kde-format
+msgid "Create"
+msgstr "Cipta"
+
+#: changelogdialog.cpp:107
+#, kde-format
+msgid "The ChangeLog file could not be read."
+msgstr ""
+
+#: checkoutdialog.cpp:59 checkoutdialog.cpp:348
+#, fuzzy, kde-format
+msgid "CVS Checkout"
+msgstr "Servis DCOP CVS"
+
+#: checkoutdialog.cpp:59
+#, fuzzy, kde-format
+msgid "CVS Import"
+msgstr "_Import PPD..."
+
+#: checkoutdialog.cpp:94 checkoutdialog.cpp:109
+#, fuzzy, kde-format
+msgid "&Module:"
+msgstr "Module"
+
+#: checkoutdialog.cpp:101 checkoutdialog.cpp:116 mergedialog.cpp:65
+#: tagdialog.cpp:71 updatedialog.cpp:66
+#, fuzzy, kde-format
+msgid "Fetch &List"
+msgstr "Senarai Dibenarkan"
+
+#: checkoutdialog.cpp:124
+#, fuzzy, kde-format
+msgid "&Branch tag:"
+msgstr "Tag ID3:"
+
+#: checkoutdialog.cpp:130
+#, fuzzy, kde-format
+msgid "Re&cursive checkout"
+msgstr "/Kumpulan/Ubah _nama"
+
+#: checkoutdialog.cpp:153
+#, fuzzy, kde-format
+msgid "Working &folder:"
+msgstr "Tambah _direktori"
+
+#: checkoutdialog.cpp:162
+#, fuzzy, kde-format
+msgid "&Vendor tag:"
+msgstr "Tag ID3:"
+
+#: checkoutdialog.cpp:170
+#, fuzzy, kde-format
+msgid "&Release tag:"
+msgstr "Tag ID3:"
+
+#: checkoutdialog.cpp:178
+#, fuzzy, kde-format
+msgid "&Ignore files:"
+msgstr "Fail Log"
+
+#: checkoutdialog.cpp:186
+#, fuzzy, kde-format
+msgid "&Comment:"
+msgstr "&Komen:"
+
+#: checkoutdialog.cpp:190
+#, fuzzy, kde-format
+msgid "Import as &binaries"
+msgstr "Binari tidak dipadatkan"
+
+#: checkoutdialog.cpp:193
+#, kde-format
+msgid "Use file's modification time as time of import"
+msgstr ""
+
+#: checkoutdialog.cpp:200
+#, fuzzy, kde-format
+msgid "Chec&k out as:"
+msgstr "Format sebagai Swap?"
+
+#: checkoutdialog.cpp:204
+#, fuzzy, kde-format
+msgid "Ex&port only"
+msgstr "Pencetak Teks Sahaja"
+
+#: checkoutdialog.cpp:304
+#, kde-format
+msgid "Please choose an existing working folder."
+msgstr ""
+
+#: checkoutdialog.cpp:308 checkoutdialog.cpp:379
+#, fuzzy, kde-format
+msgid "Please specify a module name."
+msgstr "Sila nyatakan nama pengguna"
+
+#: checkoutdialog.cpp:314
+#, kde-format
+msgid "Please specify a vendor tag and a release tag."
+msgstr ""
+
+#: checkoutdialog.cpp:319
+#, kde-format
+msgid ""
+"Tags must start with a letter and may contain\n"
+"letters, digits and the characters '-' and '_'."
+msgstr ""
+
+#: checkoutdialog.cpp:325
+#, kde-format
+msgid "A branch must be specified for export."
+msgstr ""
+
+#: checkoutdialog.cpp:374
+#, fuzzy, kde-format
+msgid "Please specify a repository."
+msgstr "Sila nyatakan titik lekapan"
+
+#: checkoutdialog.cpp:387
+#, fuzzy, kde-format
+msgid "CVS Remote Log"
+msgstr "Log Rentetan Tersendiri:"
+
+#: commitdialog.cpp:67
+#, fuzzy, kde-format
+msgid "CVS Commit"
+msgstr "Servis DCOP CVS"
+
+#: commitdialog.cpp:84 logdialog.cpp:199
+#, fuzzy, kde-format
+msgid "&Diff"
+msgstr "%s: diff gagal: "
+
+#: commitdialog.cpp:86
+#, fuzzy, kde-format
+msgid "Commit the following &files:"
+msgstr "Tiada Fail Dinyatakan."
+
+#: commitdialog.cpp:96
+#, fuzzy, kde-format
+msgid "Older &messages:"
+msgstr "Buang Mesej"
+
+#: commitdialog.cpp:106
+#, fuzzy, kde-format
+msgid "&Log message:"
+msgstr "&Log mesej:"
+
+#: commitdialog.cpp:115
+#, fuzzy, kde-format
+msgid "Use log message &template"
+msgstr "RALAT: [ipv6_log] Kehilangan 'message' (arg 1)"
+
+#: commitdialog.cpp:190
+#, fuzzy, kde-format
+msgid "Current"
+msgstr "Semasa"
+
+#: cvsinitdialog.cpp:39
+#, kde-format
+msgid "Create New Repository (cvs init)"
+msgstr ""
+
+#: cvsinitdialog.cpp:51
+#, fuzzy, kde-format
+msgid "Repository folder:"
+msgstr "Tambah _direktori"
+
+#: diffdialog.cpp:102
+#, fuzzy, kde-format
+msgid "Synchronize scroll bars"
+msgstr "Segerak hubungan semasa"
+
+#: diffdialog.cpp:112 diffdialog.cpp:403
+#, fuzzy, kde-format
+msgid "%1 difference"
+msgid_plural "%1 differences"
+msgstr[0] "Perbezaan antara fail"
+msgstr[1] "Perbezaan antara fail"
+
+#: diffdialog.cpp:238
+#, fuzzy, kde-format
+msgid "CVS Diff: %1"
+msgstr "%s: diff gagal: "
+
+#: diffdialog.cpp:239
+#, fuzzy, kde-format
+msgid "Repository:"
+msgstr "Repositori:"
+
+#: diffdialog.cpp:239 diffdialog.cpp:240
+#, fuzzy, kde-format
+msgid "Revision "
+msgstr "Semakan perkakasan: %u"
+
+#: diffdialog.cpp:240
+#, fuzzy, kde-format
+msgid "Working dir:"
+msgstr "Dir Temp: "
+
+#: diffdialog.cpp:401 resolvedialog.cpp:383
+#, kde-format
+msgid "%1 of %2"
+msgstr ""
+
+#: diffview.cpp:255 diffview.cpp:313
+#, fuzzy, kde-format
+msgid "Delete"
+msgstr "Padam"
+
+#: diffview.cpp:255 diffview.cpp:313
+#, fuzzy, kde-format
+msgid "Insert"
+msgstr "Selit"
+
+#: diffview.cpp:255 diffview.cpp:313
+#, fuzzy, kde-format
+msgid "Change"
+msgstr "Tukar"
+
+#: editwithmenu.cpp:46
+#, fuzzy, kde-format
+msgid "Edit With"
+msgstr "Segerak %s@%s:%s dgn %s."
+
+#: entry_status.cpp:33
+#, fuzzy, kde-format
+msgid "Locally Modified"
+msgstr "_Sambungan tempatan"
+
+#: entry_status.cpp:36
+#, fuzzy, kde-format
+msgid "Locally Added"
+msgstr "(telah ditambah %s)"
+
+#: entry_status.cpp:39
+#, fuzzy, kde-format
+msgid "Locally Removed"
+msgstr "dibuang selepas 7.7.3\n"
+
+#: entry_status.cpp:42
+#, fuzzy, kde-format
+msgid "Needs Update"
+msgstr "Kemaskini Sistem"
+
+#: entry_status.cpp:45
+#, fuzzy, kde-format
+msgid "Needs Patch"
+msgstr "ALSA-patch-bay"
+
+#: entry_status.cpp:48
+#, kde-format
+msgid "Needs Merge"
+msgstr ""
+
+#: entry_status.cpp:51
+#, fuzzy, kde-format
+msgid "Up to Date"
+msgstr "Sistem adalah terkini\n"
+
+#: entry_status.cpp:54
+#, kde-format
+msgid "Conflict"
+msgstr "Konflik"
+
+#: entry_status.cpp:57
+#, fuzzy, kde-format
+msgid "Updated"
+msgstr "Telah Dinaik Taraf"
+
+#: entry_status.cpp:60
+#, kde-format
+msgid "Patched"
+msgstr ""
+
+#: entry_status.cpp:63
+#, fuzzy, kde-format
+msgid "Removed"
+msgstr "%s dibuang \n"
+
+#: entry_status.cpp:66
+#, fuzzy, kde-format
+msgid "Not in CVS"
+msgstr "%s: %s: bukan dalam format a.out\n"
+
+#: entry_status.cpp:69
+#, fuzzy, kde-format
+msgid "Unknown"
+msgstr "Tidak diketahui"
+
+#: historydialog.cpp:106 historydialog.cpp:343
+#, fuzzy, kde-format
+msgid "Commit, Modified "
+msgstr "Profil aktif: %s (diubahsuai)"
+
+#: historydialog.cpp:106 historydialog.cpp:346
+#, fuzzy, kde-format
+msgid "Commit, Added "
+msgstr "(telah ditambah %s)"
+
+#: historydialog.cpp:106 historydialog.cpp:349
+#, fuzzy, kde-format
+msgid "Commit, Removed "
+msgstr "dibuang selepas 7.7.3\n"
+
+#: historydialog.cpp:111 historydialog.cpp:319
+#, kde-format
+msgid "Checkout "
+msgstr ""
+
+#: historydialog.cpp:116 loginfo.cpp:57
+#, kde-format
+msgid "Tag"
+msgstr "Tag"
+
+#: historydialog.cpp:138 loglist.cpp:106
+#, kde-format
+msgid "Date"
+msgstr "Tarikh"
+
+#: historydialog.cpp:138
+#, kde-format
+msgid "Event"
+msgstr "Acara"
+
+#: historydialog.cpp:138 loglist.cpp:106
+#, fuzzy, kde-format
+msgid "Author"
+msgstr "Pengarang"
+
+#: historydialog.cpp:138 loglist.cpp:106 updateview.cpp:50
+#, fuzzy, kde-format
+msgid "Revision"
+msgstr "Semakan"
+
+#: historydialog.cpp:138 watchersmodel.cpp:84
+#, fuzzy, kde-format
+msgid "File"
+msgstr "Fail"
+
+#: historydialog.cpp:138
+#, fuzzy, kde-format
+msgid "Repo Path"
+msgstr "Laluan SFS"
+
+#: historydialog.cpp:142
+#, fuzzy, kde-format
+msgid "Show c&ommit events"
+msgstr "Papar Rekod DNSSEC"
+
+#: historydialog.cpp:145
+#, kde-format
+msgid "Show ch&eckout events"
+msgstr ""
+
+#: historydialog.cpp:148
+#, fuzzy, kde-format
+msgid "Show &tag events"
+msgstr "Tidak dapat menulis tag!"
+
+#: historydialog.cpp:151
+#, fuzzy, kde-format
+msgid "Show &other events"
+msgstr "Melekap sistemfail lain: "
+
+#: historydialog.cpp:154
+#, fuzzy, kde-format
+msgid "Only &user:"
+msgstr "Edit Pengguna"
+
+#: historydialog.cpp:156
+#, fuzzy, kde-format
+msgid "Only &filenames matching:"
+msgstr "Cari braket sepadan"
+
+#: historydialog.cpp:158
+#, fuzzy, kde-format
+msgid "Only &folders matching:"
+msgstr "Cari braket sepadan"
+
+#: historydialog.cpp:279 historydialog.cpp:285
+#, fuzzy, kde-format
+msgid "CVS History"
+msgstr "Buang Sejarah"
+
+#: historydialog.cpp:322
+#, kde-format
+msgid "Tag "
+msgstr "Tag"
+
+#: historydialog.cpp:325
+#, kde-format
+msgid "Release "
+msgstr "Keluaran"
+
+#: historydialog.cpp:328
+#, fuzzy, kde-format
+msgid "Update, Deleted "
+msgstr " item dipadam"
+
+#: historydialog.cpp:331
+#, fuzzy, kde-format
+msgid "Update, Copied "
+msgstr "Cekupanskrin Disalin"
+
+#: historydialog.cpp:334
+#, fuzzy, kde-format
+msgid "Update, Merged "
+msgstr "Kemaskini Sistem"
+
+#: historydialog.cpp:337
+#, fuzzy, kde-format
+msgid "Update, Conflict "
+msgstr "Kemaskini Sistem"
+
+#: historydialog.cpp:340
+#, fuzzy, kde-format
+msgid "Update, Patched "
+msgstr "Kemaskini Sistem"
+
+#: historydialog.cpp:352
+#, fuzzy, kde-format
+msgid "Unknown "
+msgstr "Entah"
+
+#: logdialog.cpp:86
+#, fuzzy, kde-format
+msgid "Search:"
+msgstr "&Cari:"
+
+#: logdialog.cpp:97
+#, fuzzy, kde-format
+msgid "&Tree"
+msgstr "&Pepohon"
+
+#: logdialog.cpp:98
+#, fuzzy, kde-format
+msgid "&List"
+msgstr "&Senarai"
+
+#: logdialog.cpp:99
+#, fuzzy, kde-format
+msgid "CVS &Output"
+msgstr "Fail output:"
+
+#: logdialog.cpp:106
+#, kde-format
+msgid ""
+"Choose revision A by clicking with the left mouse button,\n"
+"revision B by clicking with the middle mouse button."
+msgstr ""
+
+#: logdialog.cpp:133
+#, fuzzy, kde-format
+msgid "Revision A:"
+msgstr "Semakan perkakasan: %u"
+
+#: logdialog.cpp:133
+#, fuzzy, kde-format
+msgid "Revision B:"
+msgstr "Semakan perkakasan: %u"
+
+#: logdialog.cpp:142
+#, fuzzy, kde-format
+msgid "Select by tag:"
+msgstr "Tidak dapat menulis tag!"
+
+#: logdialog.cpp:150
+#, kde-format
+msgid "Author:"
+msgstr "Pengarang:"
+
+#: logdialog.cpp:158
+#, kde-format
+msgid "Date:"
+msgstr "Tarikh:"
+
+#: logdialog.cpp:166
+#, fuzzy, kde-format
+msgid "Comment/Tags:"
+msgstr "Senarai tag:\n"
+
+#: logdialog.cpp:198
+#, fuzzy, kde-format
+msgid "&Annotate A"
+msgstr "Servis DCOP CVS"
+
+#: logdialog.cpp:200
+#, fuzzy, kde-format
+msgid "&Find"
+msgstr "&Cari"
+
+#: logdialog.cpp:207
+#, kde-format
+msgid ""
+"This revision is used when you click Annotate.\n"
+"It is also used as the first item of a Diff operation."
+msgstr ""
+
+#: logdialog.cpp:212
+#, kde-format
+msgid "This revision is used as the second item of a Diff operation."
+msgstr ""
+
+#: logdialog.cpp:225
+#, fuzzy, kde-format
+msgid "&View A"
+msgstr "&Lihat"
+
+#: logdialog.cpp:226
+#, fuzzy, kde-format
+msgid "Create Patch..."
+msgstr "Cipta _akaun"
+
+#: logdialog.cpp:269
+#, fuzzy, kde-format
+msgid "CVS Log: %1"
+msgstr "Log Ralat"
+
+#: logdialog.cpp:275
+#, fuzzy, kde-format
+msgid "CVS Log"
+msgstr "Log Ralat"
+
+#: logdialog.cpp:402
+#, kde-format
+msgid " (Branchpoint)"
+msgstr ""
+
+#: logdialog.cpp:421
+#, fuzzy, kde-format
+msgid "Please select revision A or B first."
+msgstr "Sila pilih beberapa eksten dahulu!"
+
+#: logdialog.cpp:442
+#, fuzzy, kde-format
+msgid "View File"
+msgstr "Lihat fail log sistem"
+
+#: logdialog.cpp:457 logdialog.cpp:516
+#, kde-format
+msgid "Please select revision A or revisions A and B first."
+msgstr ""
+
+#: loginfo.cpp:51
+#, kde-format
+msgid "Branchpoint"
+msgstr ""
+
+#: loginfo.cpp:54
+#, fuzzy, kde-format
+msgid "On Branch"
+msgstr "Pada Ahli:"
+
+#: loglist.cpp:106
+#, kde-format
+msgid "Branch"
+msgstr ""
+
+#: loglist.cpp:106
+#, kde-format
+msgid "Comment"
+msgstr "Komen"
+
+#: loglist.cpp:106
+#, fuzzy, kde-format
+msgid "Tags"
+msgstr "Senarai tag:\n"
+
+#: logplainview.cpp:46
+#, fuzzy, kde-format
+msgid "revision %1"
+msgstr "Semakan perkakasan: %u"
+
+#: logplainview.cpp:47
+#, fuzzy, kde-format
+msgid "Select for revision A"
+msgstr "Pilih Peranti untuk Eksport"
+
+#: logplainview.cpp:48
+#, fuzzy, kde-format
+msgid "Select for revision B"
+msgstr "Pilih Peranti untuk Eksport"
+
+#: logplainview.cpp:49
+#, fuzzy, kde-format
+msgid "date: %1; author: %2"
+msgstr "Tarikh & Masa"
+
+#: main.cpp:166
+#, fuzzy, kde-format
+msgid "The sandbox to be loaded"
+msgstr "Pakej untuk dibuang"
+
+#: main.cpp:167
+#, kde-format
+msgid "Show resolve dialog for the given file."
+msgstr ""
+
+#: main.cpp:168
+#, kde-format
+msgid "Show log dialog for the given file."
+msgstr ""
+
+#: main.cpp:169
+#, kde-format
+msgid "Show annotation dialog for the given file."
+msgstr ""
+
+#: mergedialog.cpp:41
+#, fuzzy, kde-format
+msgid "CVS Merge"
+msgstr "Servis DCOP CVS"
+
+#: mergedialog.cpp:56
+#, fuzzy, kde-format
+msgid "Merge from &branch:"
+msgstr "Benarkan hos dari:"
+
+#: mergedialog.cpp:75
+#, kde-format
+msgid "Merge &modifications:"
+msgstr ""
+
+#: mergedialog.cpp:78
+#, fuzzy, kde-format
+msgid "between tag: "
+msgstr "Tag ID3:"
+
+#: mergedialog.cpp:84
+#, fuzzy, kde-format
+msgid "and tag: "
+msgstr "Tag ID3:"
+
+#: mergedialog.cpp:90 updatedialog.cpp:84
+#, kde-format
+msgid "Fetch L&ist"
+msgstr ""
+
+#: misc.cpp:78
+#, fuzzy, kde-format
+msgid "CVS Status"
+msgstr "Status Gugusan"
+
+#: misc.cpp:197
+#, fuzzy, kde-format
+msgid "Overwrite the file"
+msgstr "Tulis ganti fail"
+
+#: misc.cpp:200
+#, fuzzy, kde-format
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr "Fail bernama \"%1\" telah wujud. Anda pasti ingin tulis semula?"
+
+#: misc.cpp:201
+#, fuzzy, kde-format
+msgid "Overwrite File?"
+msgstr "Tulis Ganti Fail?"
+
+#: patchoptiondialog.cpp:58
+#, fuzzy, kde-format
+msgid "Context"
+msgstr "Konteks"
+
+#: patchoptiondialog.cpp:59
+#, kde-format
+msgid "Normal"
+msgstr "Normal"
+
+#: patchoptiondialog.cpp:60
+#, fuzzy, kde-format
+msgid "Unified"
+msgstr "Disatukan"
+
+#: patchoptiondialog.cpp:64
+#, fuzzy, kde-format
+msgid "Output Format"
+msgstr "Format Keluaran"
+
+#: patchoptiondialog.cpp:74
+#, fuzzy, kde-format
+msgid "&Number of context lines:"
+msgstr "bilangan baris tidak sah"
+
+#: patchoptiondialog.cpp:90
+#, fuzzy, kde-format
+msgid "Ignore added or removed empty lines"
+msgstr "Abaikan tambahan atau pemadaman baris kosong"
+
+#: patchoptiondialog.cpp:91
+#, fuzzy, kde-format
+msgid "Ignore changes in the amount of whitespace"
+msgstr "-b  --ignore-space-change  Abai perubahan dalam jumlah ruang putih."
+
+#: patchoptiondialog.cpp:92
+#, fuzzy, kde-format
+msgid "Ignore all whitespace"
+msgstr "-w  --ignore-all-space  Abai semua ruang putih."
+
+#: patchoptiondialog.cpp:93
+#, fuzzy, kde-format
+msgid "Ignore changes in case"
+msgstr "Abaikan perubahan pada 'case'"
+
+#: patchoptiondialog.cpp:100
+#, fuzzy, kde-format
+msgid "Ignore Options"
+msgstr "Opsyen RAID"
+
+#: protocolview.cpp:90
+#, fuzzy, kde-format
+msgid "Clear"
+msgstr "Kosongkan"
+
+#: protocolview.cpp:127
+#, fuzzy, kde-format
+msgid "[Exited with status %1]\n"
+msgstr "%s: keluar dengan status; abaikan"
+
+#: protocolview.cpp:129
+#, fuzzy, kde-format
+msgid "[Finished]\n"
+msgstr "Pemasangan selesai"
+
+#: protocolview.cpp:131
+#, fuzzy, kde-format
+msgid "[Aborted]\n"
+msgstr "Dibatalkan"
+
+#: repositorydialog.cpp:138
+#, fuzzy, kde-format
+msgid "Default"
+msgstr "Default"
+
+#: repositorydialog.cpp:155
+#, fuzzy, kde-format
+msgid "Logged in"
+msgstr "Sedang dilaksanakan...   "
+
+#: repositorydialog.cpp:155
+#, fuzzy, kde-format
+msgid "Not logged in"
+msgstr "%s: %s: bukan dalam format a.out\n"
+
+#: repositorydialog.cpp:157
+#, fuzzy, kde-format
+msgid "No login required"
+msgstr "%s: tiada nama logmasuk\n"
+
+#: repositorydialog.cpp:171
+#, fuzzy, kde-format
+msgid "Configure Access to Repositories"
+msgstr "Tidak boleh untuk akses ke CDROM"
+
+#: repositorydialog.cpp:192
+#, fuzzy, kde-format
+msgid "Repository"
+msgstr "<b>URL repositori:</b>"
+
+#: repositorydialog.cpp:192
+#, fuzzy, kde-format
+msgid "Method"
+msgstr "Kaedah"
+
+#: repositorydialog.cpp:192
+#, kde-format
+msgid "Compression"
+msgstr "Mampatan"
+
+#: repositorydialog.cpp:192 settingsdialog.cpp:293 updateview.cpp:50
+#, kde-format
+msgid "Status"
+msgstr "Status"
+
+#: repositorydialog.cpp:199
+#, fuzzy, kde-format
+msgid "Add..."
+msgstr "&Tambah..."
+
+#: repositorydialog.cpp:200
+#, fuzzy, kde-format
+msgid "Modify..."
+msgstr "&Ubah suai..."
+
+#: repositorydialog.cpp:202
+#, fuzzy, kde-format
+msgid "Login..."
+msgstr "_Logmasuk:"
+
+#: repositorydialog.cpp:203
+#, kde-format
+msgid "Logout"
+msgstr "Logkeluar"
+
+#: repositorydialog.cpp:335
+#, fuzzy, kde-format
+msgid "This repository is already known."
+msgstr "Label ini telah digunakan"
+
+#: repositorydialog.cpp:423
+#, fuzzy, kde-format
+msgid "Login failed."
+msgstr "Logmasuk gagal"
+
+#: repositorydialog.cpp:442
+#, fuzzy, kde-format
+msgid "CVS Logout"
+msgstr "Servis DCOP CVS"
+
+#: resolvedialog.cpp:135
+#, fuzzy, kde-format
+msgid "Your version (A):"
+msgstr "versi alternatif %s\n"
+
+#: resolvedialog.cpp:144
+#, fuzzy, kde-format
+msgid "Other version (B):"
+msgstr "versi alternatif %s\n"
+
+#: resolvedialog.cpp:156
+#, fuzzy, kde-format
+msgid "Merged version:"
+msgstr "versi alternatif %s\n"
+
+#: resolvedialog.cpp:250
+#, fuzzy, kde-format
+msgid "CVS Resolve: %1"
+msgstr "Tidak dapat menterjemah proksi\n"
+
+#: resolvedialog.cpp:385
+#, fuzzy, kde-format
+msgid "%1 conflicts"
+msgstr "konflik: %d pengurangan/pengurangan\n"
+
+#: settingsdialog.cpp:70
+#, fuzzy, kde-format
+msgid "Configure Cervisia"
+msgstr "_Konfigurasikan Firewall"
+
+#: settingsdialog.cpp:215
+#, kde-format
+msgid "General"
+msgstr "Umum"
+
+#: settingsdialog.cpp:220
+#, kde-format
+msgid "&User name for the change log editor:"
+msgstr ""
+
+#: settingsdialog.cpp:228
+#, kde-format
+msgid "&Path to CVS executable, or 'cvs':"
+msgstr ""
+
+#: settingsdialog.cpp:246
+#, fuzzy, kde-format
+msgid "Diff Viewer"
+msgstr "Pelihat Dokumen"
+
+#: settingsdialog.cpp:251
+#, kde-format
+msgid "&Number of context lines in diff dialog:"
+msgstr ""
+
+#: settingsdialog.cpp:259
+#, kde-format
+msgid "Additional &options for cvs diff:"
+msgstr ""
+
+#: settingsdialog.cpp:266
+#, fuzzy, kde-format
+msgid "Tab &width in diff dialog:"
+msgstr "Tetapkan lebar tab dalam lajur ke #lajur"
+
+#: settingsdialog.cpp:274
+#, fuzzy, kde-format
+msgid "External diff &frontend:"
+msgstr "--normal  Keluarkan diff normal."
+
+#: settingsdialog.cpp:296
+#, kde-format
+msgid ""
+"When opening a sandbox from a &remote repository,\n"
+"start a File->Status command automatically"
+msgstr ""
+
+#: settingsdialog.cpp:299
+#, kde-format
+msgid ""
+"When opening a sandbox from a &local repository,\n"
+"start a File->Status command automatically"
+msgstr ""
+
+#: settingsdialog.cpp:316
+#, kde-format
+msgid "Advanced"
+msgstr "Lanjutan"
+
+#: settingsdialog.cpp:335
+#, fuzzy, kde-format
+msgid "Appearance"
+msgstr "Rupa"
+
+#: settingsdialog.cpp:338
+#, fuzzy, kde-format
+msgid "Fonts"
+msgstr "Font"
+
+#: settingsdialog.cpp:341
+#, fuzzy, kde-format
+msgid "Font for &Protocol Window..."
+msgstr "Pelayan font untuk Sistem X Window."
+
+#: settingsdialog.cpp:342
+#, fuzzy, kde-format
+msgid "Font for A&nnotate View..."
+msgstr "Pelayan font untuk Sistem X Window."
+
+#: settingsdialog.cpp:343
+#, fuzzy, kde-format
+msgid "Font for D&iff View..."
+msgstr "Pelayan font untuk Sistem X Window."
+
+#: settingsdialog.cpp:344
+#, fuzzy, kde-format
+msgid "Font for ChangeLog View..."
+msgstr "Pelayan font untuk Sistem X Window."
+
+#: settingsdialog.cpp:352
+#, kde-format
+msgid "Colors"
+msgstr "Warna"
+
+#: settingsdialog.cpp:355
+#, fuzzy, kde-format
+msgid "Conflict:"
+msgstr "Konflik"
+
+#: settingsdialog.cpp:359
+#, fuzzy, kde-format
+msgid "Diff change:"
+msgstr "Tukar CDROM"
+
+#: settingsdialog.cpp:363
+#, fuzzy, kde-format
+msgid "Local change:"
+msgstr "Tukar CDROM"
+
+#: settingsdialog.cpp:367
+#, fuzzy, kde-format
+msgid "Diff insertion:"
+msgstr "%s: diff gagal: "
+
+#: settingsdialog.cpp:371
+#, fuzzy, kde-format
+msgid "Remote change:"
+msgstr "Tukar CDROM"
+
+#: settingsdialog.cpp:375
+#, fuzzy, kde-format
+msgid "Diff deletion:"
+msgstr "%s: diff gagal: "
+
+#: settingsdialog.cpp:379
+#, fuzzy, kde-format
+msgid "Not in cvs:"
+msgstr "%s: %s: bukan dalam format a.out\n"
+
+#: settingsdialog.cpp:400
+#, kde-format
+msgid "Split main window &horizontally"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, fuzzy, kde-format
+msgid "Default compression &level:"
+msgstr "         %s [--level <tahap>] <nama> %s)\n"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr ""
+
+#: tagdialog.cpp:48
+#, fuzzy, kde-format
+msgid "CVS Delete Tag"
+msgstr "Tidak dapat menulis tag!"
+
+#: tagdialog.cpp:48
+#, fuzzy, kde-format
+msgid "CVS Tag"
+msgstr "Tag ID3:"
+
+#: tagdialog.cpp:67 tagdialog.cpp:86
+#, fuzzy, kde-format
+msgid "&Name of tag:"
+msgstr "Tag ID3:"
+
+#: tagdialog.cpp:95
+#, kde-format
+msgid "Create &branch with this tag"
+msgstr ""
+
+#: tagdialog.cpp:99
+#, kde-format
+msgid "&Force tag creation even if tag already exists"
+msgstr ""
+
+#: tagdialog.cpp:134
+#, fuzzy, kde-format
+msgid "You must define a tag name."
+msgstr "Anda mesti membekalkan nama pengguna"
+
+#: tagdialog.cpp:140
+#, kde-format
+msgid ""
+"Tag must start with a letter and may contain letters, digits and the "
+"characters '-' and '_'."
+msgstr ""
+
+#: updatedialog.cpp:42
+#, fuzzy, kde-format
+msgid "CVS Update"
+msgstr "Kemaskini Sistem"
+
+#: updatedialog.cpp:57
+#, fuzzy, kde-format
+msgid "Update to &branch: "
+msgstr "gagal kemaskini media \"%s\"\n"
+
+#: updatedialog.cpp:76
+#, fuzzy, kde-format
+msgid "Update to &tag: "
+msgstr "Tiada tag untuk dibuang!"
+
+#: updatedialog.cpp:94
+#, kde-format
+msgid "Update to &date ('yyyy-mm-dd'):"
+msgstr ""
+
+#: updateview.cpp:50
+#, fuzzy, kde-format
+msgid "File Name"
+msgstr "Nama Fail"
+
+#: updateview.cpp:50
+#, fuzzy, kde-format
+msgid "Tag/Date"
+msgstr "Tarikh & Masa"
+
+#: updateview.cpp:50
+#, kde-format
+msgid "Timestamp"
+msgstr ""
+
+#: watchdialog.cpp:38
+#, fuzzy, kde-format
+msgid "CVS Watch Add"
+msgstr "Tambah peranti FCP"
+
+#: watchdialog.cpp:38
+#, fuzzy, kde-format
+msgid "CVS Watch Remove"
+msgstr "gagal untuk membuang %s: %s\n"
+
+#: watchdialog.cpp:51
+#, kde-format
+msgid "Add watches for the following events:"
+msgstr ""
+
+#: watchdialog.cpp:51
+#, kde-format
+msgid "Remove watches for the following events:"
+msgstr ""
+
+#: watchdialog.cpp:54
+#, fuzzy, kde-format
+msgid "&All"
+msgstr "&Semua"
+
+#: watchdialog.cpp:59
+#, fuzzy, kde-format
+msgid "&Only:"
+msgstr "&Hanya:"
+
+#: watchdialog.cpp:68
+#, kde-format
+msgid "&Commits"
+msgstr ""
+
+#: watchdialog.cpp:72
+#, fuzzy, kde-format
+msgid "&Edits"
+msgstr "&Sunting"
+
+#: watchdialog.cpp:76
+#, kde-format
+msgid "&Unedits"
+msgstr ""
+
+#: watchersdialog.cpp:68 watchersdialog.cpp:74
+#, kde-format
+msgid "CVS Watchers"
+msgstr "Pemerhati CVS"
+
+#: watchersmodel.cpp:86
+#, kde-format
+msgid "Watcher"
+msgstr ""
+
+#: watchersmodel.cpp:88
+#, fuzzy, kde-format
+msgid "Edit"
+msgstr "Edit"
+
+#: watchersmodel.cpp:90
+#, kde-format
+msgid "Unedit"
+msgstr ""
+
+#: watchersmodel.cpp:92
+#, kde-format
+msgid "Commit"
+msgstr "Lakukan"
+
+#, fuzzy
+#~ msgid "Invoking help on Cervisia"
+#~ msgstr ""
+#~ "\n"
+#~ "Tiada bantuan yang ada bagi larahan itu.\n"
+
+#, fuzzy
+#~ msgid "&Overwrite"
+#~ msgstr "&Tindih"
+
+#, fuzzy
+#~ msgid "Opens the bug report dialog"
+#~ msgstr "Lapor pepijat pada GNOME"
+
+#, fuzzy
+#~ msgid "&Remove"
+#~ msgstr "&Buang"
+
+#, fuzzy
+#~ msgctxt "to view something"
+#~ msgid "&View"
+#~ msgstr "&Lihat"

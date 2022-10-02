@@ -1,0 +1,4083 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY ssh "<command
+>ssh</command
+>">
+  <!ENTITY rsh "<command
+>rsh</command
+>">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % German "INCLUDE"
+> <!-- Change language only here -->
+  <!ENTITY CVS "<application
+>CVS</application
+>">
+]>
+
+<book id="cervisia" lang="&language;">
+
+<bookinfo>
+<title
+>Das Handbuch zu &cervisia;</title>
+<authorgroup>
+<author
+><firstname
+>Bernd</firstname
+><surname
+>Gehrmann</surname
+> <affiliation
+><address
+>&Bernd.Gehrmann.mail;</address
+></affiliation>
+</author
+> 
+<author
+><firstname
+>Carlos</firstname
+><surname
+>Woelz</surname
+> <affiliation
+><address
+><email
+>carloswoelz@imap-mail.com</email
+></address
+></affiliation>
+</author
+> 
+
+
+<othercredit role="translator"
+> <firstname
+>Stephan</firstname
+> <surname
+>Johach</surname
+><affiliation
+> <address
+><email
+>hunsum@gmx.de</email
+></address
+> </affiliation
+> <contrib
+>Übersetzung</contrib
+> </othercredit
+> 
+
+</authorgroup>
+
+<copyright>
+<year
+>1999</year>
+<year
+>2000</year>
+<year
+>2001</year>
+<year
+>2002</year>
+<holder
+>&Bernd.Gehrmann;</holder>
+</copyright>
+
+<copyright>
+<year
+>2004</year>
+<holder
+>Carlos Woelz</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2016-06-16</date>
+<releaseinfo
+>3.11 (Anwendungen 16.08)</releaseinfo>
+
+<abstract>
+<para
+>&cervisia; ist eine grafische Benutzeroberfläche für &CVS;.</para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>Cervisia</keyword>
+<keyword
+>CVS</keyword>
+<keyword
+>Versionsverwaltung</keyword>
+<keyword
+>Revisionsverwaltung</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Einführung</title>
+
+<para
+><ulink url="http://www.kde.org/applications/development/cervisia/"
+>&cervisia;</ulink
+> ist eine anwenderfreundliche Benutzeroberfläche für Versionsverwaltungssysteme. Die Zielsetzung besteht darin eine einheitliche Oberfläche für &CVS; bereitzustellen, die das Auflösen von Versionskonflikten, die Darstellung von Versionsunterschieden und Änderungsverläufen und die Verwaltung von lokalen Arbeitskopien erlaubt. &cervisia; können Sie selbst kompilieren oder das Paket Ihrer Distribution installieren. </para>
+
+<para
+>Ein Versionsverwaltungssystem ist ein Werkzeug zur Erfassung, Verwaltung und Verteilung von Dateiversionen. &CVS; ist ein Versionsverwaltungssystem. Sie können damit Ihre Änderungen mit anderen teilen, ohne dass Sie befürchten müssen, die Änderungen der anderen zu überschreiben, denn jeder Beitragende arbeitet mit einer eigenen lokalen Kopie. Es ermöglicht das Wiederherstellen alter Versionen (nützlich bei der Fehlersuche), das Anlegen von Verzweigungen (für experimentelle Entwicklung oder die Verwaltung von Auslieferungen) und vieles mehr. </para>
+
+<para
+>Das <firstterm
+>&CVS;-Archiv</firstterm
+> enthält gewöhnlich ein (kommerzielles oder nichtkommerzielles) Projekt, an dem mehrere Parteien arbeiten, aber sie können die nützlichen Funktionen von &CVS; auf für Projekte nutzen, auf die nur Sie allein Zugriff haben. Ein lokales &CVS;-Archiv ist leicht aufgesetzt, und Sie gewinnen dadurch die Fähigkeit Änderungen zu verfolgen, die zu Fehlern geführt haben, können Änderungen zurücknehmen, den versehentlichen Verlust von Informationen vermeiden &etc; </para>
+
+<para
+>Obwohl das CVS-Archiv die Projektdateien enthält und jeder Mitarbeiter seine eigene lokale Kopie, genannt <firstterm
+>Arbeitskopie</firstterm
+> oder <firstterm
+>Arbeitsordner</firstterm
+> führt, können diese ihre Änderungen in das CVS-Archiv einfügen (ein Vorgang, den wir mit <quote
+>einspielen</quote
+> bezeichnen) und / oder seine eigene Kopie aktualisieren, um die letzten Änderungen der anderen Mitarbeiter zu erhalten. </para>
+
+</chapter>
+
+<chapter id="getting-started">
+<title
+>Erste Schritte</title>
+
+<sect1 id="accessing-repository">
+<title
+>Zugriff auf das &CVS;-Archiv</title>
+
+<para
+>In diesem Abschnitt zeigen wir, wie Sie die grundlegenden Funktionen des Versionsverwaltungssystems mit &cervisia; nutzen. Dabei liegt der Schwerpunkt auf dem Auslesen von Modulen aus dem &CVS;-Archiv und der Arbeit an diesen. Dazu müssen Sie Zugriff auf das &CVS;-Archiv haben, &ie; jemand (wahrscheinlich der Administrator des &CVS;-Archivs) hat Ihnen einen Zugang erteilt. Alternativ können Sie sich für Ihr eigenes Projekt einfach ein lokales &CVS;-Archiv anlegen. </para>
+
+<tip
+><para
+>Wenn Sie ein aufwendigeres Projekt planen, ist es ratsam die Funktionalität von &CVS; zu nutzen, selbst wenn Sie der einzige Entwickler sind. Sämtliche Änderungen führen Sie an Ihrer Arbeitskopie durch und spielen diese mit &cervisia; (oder einem anderen Werkzeug für &CVS;) ein. Auf diese Weise sind Sie in der Lage, Änderungen zu finden, die Fehler hervorgerufen haben, können Änderungen rückgängig machen, vermeiden den versehentlichen Verlust von Informationen &etc; Mit &cervisia; ist das Anlegen eines lokalen Archivs sehr einfach. </para>
+
+<procedure>
+<title
+>Das Anlegen eines lokalen &CVS;-Archivs</title>
+
+<step
+><para
+>Öffnen Sie den Dialog <guilabel
+>Neues CVS-Archiv anlegen (cvs init)</guilabel
+> durch Auswahl von <menuchoice
+><guimenu
+>Archiv</guimenu
+><guimenuitem
+>Erstellen ...</guimenuitem
+></menuchoice
+> aus dem Menü. </para
+></step>
+
+<step
+><para
+>Wählen Sie mit dem Knopf <guilabel
+>...</guilabel
+> den Ordner aus, in dem das Archiv erstellt werden soll oder geben Sie den Speicherort in das Textfeld ein. Möchten Sie das Archiv beispielsweise im Ordner <filename
+>/home/usr</filename
+> unterbringen und mit dem Namen <filename
+>cvsroot</filename
+> versehen, geben Sie <filename
+>/home/user/cvsroot</filename
+> in das Textfeld ein oder wählen Sie mit der Maus den Ordner <filename
+>/home/user</filename
+> aus und fügen <filename
+>cvsroot</filename
+> hinzu. </para
+></step>
+
+<step
+><para
+>Bestätigen Sie Ihre Eingaben mit <guibutton
+>OK</guibutton
+>. &cervisia; legt nun den neuen Archiv-Ordner an und initialisiert ihn. </para
+></step>
+
+<step
+><para
+>Jetzt können Sie den aktuellen Stand ihres Projektes in das Archiv importieren oder einfach einen neuen Ordner im Archiv anlegen, wenn Sie ein neues Modul anlegen wollen. </para
+></step>
+
+</procedure>
+
+</tip>
+
+
+<para
+>&cervisia; bietet eine Benutzeroberfläche zur Verwaltung Ihrer Archive. Wählen Sie aus dem Menü <menuchoice
+><guimenu
+>Archiv</guimenu
+><guimenuitem
+>Archive ... </guimenuitem
+></menuchoice
+>, um den Dialog <guilabel
+>Zugang zu den &CVS;-Archiven einrichten</guilabel
+> aufzurufen. </para>
+
+<figure id="screenshot-repositories" float="1">
+<title
+>Ein Bildschirmfoto des Dialogs <quote
+>Zugang zu den CVS-Archiven einrichten</quote
+></title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="repositories.png"/></imageobject>
+<textobject
+><phrase
+>Ein Bildschirmfoto des Dialogs <quote
+>Zugang zu den CVS-Archiven einrichten</quote
+></phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Sie können auf verschiedene Arten auf ein &CVS;-Archiv zugreifen. Der Zugriff kann über Passwort-Authentifizierung (:puser:), die Secure Shell (unter Verwendung von :ext:), lokal (:lokal:) &etc; erfolgen. Das Format für den Zugriffspfad auf ein Archiv ist wie folgt (optionale Bestandteile sind in eckige Klammern eingefasst): </para>
+
+<para>
+<filename
+>[:method:][[user][:password]@]hostname[:[port]]/pfad/zum/archiv</filename>
+</para>
+
+<para
+>Es werden nicht immer alle Elemente (user, password, hostname, port) benötigt, um auf das Archiv zuzugreifen.Die benötigten Informationen hängen von der Methode ab, mit der auf das Archiv zugegriffen wird, die wie folgt eingeteilt werden können: </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+>Lokal</term>
+
+<listitem>
+<para
+>Die lokale Zugriffsmethode ist die Standardmethode für &CVS;. Daher ist die Angabe der :local:-Methode im Pfad des &CVS;-Archivs freiwillig. Geben Sie nur den Pfad zum Ordner Ihres &CVS;-Archivs an, auf das Sie von Ihrem Rechner aus Zugriff haben: <filename class="directory"
+>/pfad/zum/archiv</filename
+>, oder, um ein richtiges Beispiel zu geben, <filename class="directory"
+>/home/cvs</filename
+>.</para>
+
+<para
+>Das Archiv kann physisch auf einem Datenträger liegen, der über <acronym
+>NFS</acronym
+> eingebunden ist, das ist hier aber unwichtig. Wenn Sie ein lokales Archiv angelegt haben, ist der Pfad des &CVS;-Archivs der Verzeichnispfad. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry id="rsh">
+<term
+>&rsh;</term>
+
+<listitem>
+<para
+>Der Name des &CVS;-Archivs sieht so aus: <filename
+>:extbenutzername@host.url.org:/pfad/zum/archiv</filename
+>. </para>
+
+<para
+>Diese Methode setzt voraus, dass Sie einen Benutzerzugang auf dem Server (in diesem Beispiel <systemitem class="systemname"
+>host.url.org</systemitem
+>)besitzen und auf diesen über eine Remote-Shell zugreifen. &CVS; benutzt dazu normalerweise &rsh;. Da &rsh; jedoch allgemein als unsicher gilt, wird es mittlerweile weitgehend durch &ssh; verdrängt. </para>
+
+<para
+>Wenn Sie den Befehl <command
+>cvs</command
+> verwenden und der Zugriff über &ssh; erfolgen soll, müssen Sie die Umgebungsvariable $<envar
+>CVS_RSH</envar
+> mit dem Wert &ssh; belegen. &cervisia; unterstützt auch diese Art der Verbindung. </para>
+
+<!-- TODO: verify if the above still apply -->
+
+<para
+>Beachten Sie, dass &cervisia; mögliche Passwortabfragen des Servers nicht beantworten kann. Sie müssen sicherstellen, dass die Anmeldung beim Server ohne Eingabe eines Passwortes funktioniert. Mit einem normalen &rsh; erreichen Sie dies beispielsweise durch Anlegen einer Datei <filename
+>.rhosts</filename
+> in Ihrem Persönlichen Ordner, in der eine Liste der vertrauenswürdigen Host-Rechner eingetragen wird. Näheres dazu finden Sie in der Manpage zu &rsh;. </para>
+
+<para
+>Verwenden Sie &ssh;, erreichen Sie dies durch Kopieren Ihres öffentlichen Schlüssels aus der Datei <filename
+>identity.pub</filename
+> (liegt in <filename
+>$<envar
+>HOME</envar
+>/.ssh/</filename
+>) auf den Server. In diesem Fall darf der Schlüssel nicht mit einer Passphrase verschlüsselt sein. Beachten Sie hierzu auch die Handbuchseite zu &ssh;. </para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>pserver</term>
+
+<listitem>
+<para
+>Der Name des &CVS;-Archivs sieht so aus: <filename
+>:pserver:benutzername@host.url.org:/pfad/zum/archiv</filename
+> </para>
+
+<para
+>Diese Methode greift über ein spezielles Protokoll auf den Server zu. Die hier verwendete Authentifizierung ist nicht sonderlich sicher (<literal
+>pserver</literal
+> steht hier für Password-Authentifizierung). Bevor Sie einen solchen Server nutzen können, benötigen Sie einen Benutzernamen und ein Passwort vom &CVS;-Serveradministrator, müssen Sie sich anmelden. Beachten Sie, dass Ihr &CVS;-Benutzername nicht mit dem des Systems übereinstimmen muss. Bevor Sie auf den &CVS;-Server zugreifen können, müssen Sie sich anmelden. </para>
+
+<para
+>Open-Source-Projekte bieten normalerweise anonymen &CVS;-Zugriff zu den Quelltexten. Sie können so die neusten Versionen beziehen, verändern, und Patches (Unterschiede zwischen Dateien) mit dem Archiv erstellen, ohne einen &CVS;-Account zu haben. Normalerweise verwendet anonymes &CVS; Passwort-Authentisierung (:pserver:), und stellt das Archiv nur lesend bereit, sodass Sie Ihre Änderungen nicht direkt einspielen können. </para>
+
+</listitem>
+</varlistentry>
+</variablelist>
+
+<para
+>Wenn Sie die Zugriffsmethode und den Ort des CVS-Archivs kennen, können Sie es zur Liste der CVS-Archive in &cervisia; hinzufügen: </para>
+
+<procedure>
+<title
+>Hinzufügen eines neuen &CVS;-Archivs</title>
+
+<step
+><para
+>Öffnen Sie den Dialog <guilabel
+>Zugang zu den &CVS;-Archiven einrichten</guilabel
+>, indem Sie aus dem Menü <menuchoice
+><guimenu
+>Archiv</guimenu
+><guimenuitem
+>Archive ...</guimenuitem
+></menuchoice
+> wählen. </para
+></step>
+
+<step
+><para
+>Mit den Knopf <guilabel
+>Hinzufügen ...</guilabel
+> öffnen Sie den Dialog <guilabel
+>Archiv hinzufügen</guilabel
+>. </para
+></step>
+
+<step
+><para
+>Geben Sie die Ort des CVS-Archivs in das Textfeld <guilabel
+>Archiv:</guilabel
+> ein. &cervisia; wird die Teile des Dialogs, die für die eingegebene Zugriffsmethode nicht wichtig sind, automatisch ausblenden. </para
+></step>
+
+<step
+><para
+>Wenn Sie die Methode <quote
+>ext</quote
+> zum Zugriff auf das CVS-Archiv verwenden, geben Sie die gewünschte Remote-Shell (&eg; &ssh;) in das Textfeld <guilabel
+>Remote-Shell verwenden:</guilabel
+> ein. </para
+></step>
+
+<step
+><para
+>Drücken Sie <guibutton
+>OK</guibutton
+>. Nun sehen Sie das neu angelegte CVS-Archiv in der Liste der CVS-Archive. </para
+></step>
+
+<step
+><para
+>Haben Sie für das CVS-Archiv die Zugriffsmethode Passwort-Authentisierung (pserver) gewählt, müssen Sie sich anmelden, bevor Sie zum Server eine Verbindung herstellen können. Klicken Sie auf das CVS-Archiv in der Liste um es auszuwählen, und drücken Sie <guilabel
+>Anmeldung ...</guilabel
+>. Geben Sie Ihr Passwort in den erscheinenden Dialog ein. </para>
+<para
+>Wenn Ihre Passworteingabe erfolgreich war, ändert sich die Spalte <guilabel
+>Status</guilabel
+> für das pserver-CVS-Archiv von <guilabel
+>Nicht angemeldet</guilabel
+> zu <guilabel
+>Angemeldet</guilabel
+>. </para
+></step>
+
+<step
+><para
+>Drücken Sie <guibutton
+>OK</guibutton
+> um Ihre Änderungen anzuwenden, oder fügen Sie der Liste ein weiteres CVS-Archiv hinzu. &cervisia; speichert beliebig viele CVS-Archive. </para
+></step>
+
+</procedure>
+
+</sect1>
+
+
+<sect1 id="importing">
+<title
+>Ein Modul in das &CVS;-Archiv importieren</title>
+
+<para
+>Dieser Abschnitt behandelt das Hinzufügen eines neuen Projektes in ein &CVS;-Archiv. Wenn Sie nur mit Projekten arbeiten, die bereits in einem &CVS;-Archiv sind, können Sie diesen Abschnitt überspringen. </para>
+
+<para
+>Es gibt zwei Wege, Ihr Projekt in ein CVS-Archiv zu bringen: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Die Dateien und Ordner mit dem &cervisia;-Importdialog in ein neues <firstterm
+>Modul</firstterm
+> importieren. Module sind die obersten Ordner des Verzeichnisbaums im &CVS;-Archiv und werden zur Organisation verschiedener Projekte in einem &CVS;-Archiv verwendet. </para
+></listitem>
+
+<listitem
+><para
+>Ein leeres Modul erstellen, und die neuen Dateien und Ordner selbst hinzufügen. So haben Sie mehr Kontrolle, aber es ist etwas zeitaufwändiger. </para
+></listitem>
+
+</itemizedlist>
+
+<important>
+<para
+>Beachten Sie, dass &CVS; ursprünglich entwickelt wurde, um Textdateien zu verwalten. Viele Eigenschaften, wie Zusammenführen von Revisionen, Anzeigen von Unterschieden in lesbarer Form &etc;, sind nur mit Textdateien möglich. Das bedeutet nicht, dass Sie &CVS; nicht zur Verwaltung binärer Dateien verwenden können, sie müssen jedoch <emphasis
+>&CVS; ausdrücklich sagen, ob es sich um eine Text- oder Binärdatei handelt</emphasis
+>. Geben Sie einen falschen Dateityp an, funktioniert &CVS; mit diesen Dateien nicht richtig, und sie können beschädigt werden. </para>
+</important>
+
+
+<para
+>Ein Projekt (als neues Modul) zu importieren, hat einige Vorteile: Sie importieren alle Dateien und Ordner rekursiv, und das Modul wird automatisch erstellt. Das vereinfacht den Import großer, existierender Projekte. Der Nachteil dabei ist, dass Sie nicht den Importdialog von &cervisia; benutzen können, um Dateien zum bestehenden Modul hinzuzufügen. Zudem können Sie die Dateien entweder als Text- oder Binärdateien importieren. Um dieses Problem zu umgehen, erstellen Sie einen Ordner für jeden der Dateitypen, oder Sie erstellen eine Liste mit Mustern für Dateinamen, die beim Import ignoriert werden sollen. </para>
+
+<para
+>Stellen Sie sich &eg; vor, Ihr Projekt besteht nur aus Textdateien und einigen PNG-Bildern (Binärdateien). Sie können &CVS; sagen, dass alle Dateien, die auf das Muster <filename class="extension"
+>*.png</filename
+> passen, ignoriert werden sollen, während die anderen Dateien als Textdateien importiert werden. Oder Sie verschieben die Bilder in einen anderen Ordner und importieren alle verbleibenden Dateien (als Textdateien). In jedem Fall müssen Sie das neu importierte Modul als neue Arbeitskopie <link linkend="checkingout"
+>auslesen</link
+>, die fehlenden Dateien und Ordner hineinkopieren, diese <link linkend="addingfiles"
+>hinzufügen</link
+> und sie in das &CVS;-Archiv <link linkend="committingfiles"
+>einspielen</link
+> um den Import abzuschließen. </para>
+
+<para
+>Alternativ können Sie Dateien und Ordner auch manuell hinzufügen, indem Sie für sie ein Modul erstellen. Um ein leeres Modul zu einem Archiv hinzuzufügen, erstellen Sie einen neuen Ordner im Wurzelverzeichnis des &CVS;-Archivs. Der Name des Ordners ist gleichzeitig der Modulname. <link linkend="checkingout"
+>Checken Sie das neue, leere Modul aus</link
+>, kopieren Sie die Dateien und Ordner in die Arbeitskopie, <link linkend="addingfiles"
+>fügen Sie sie dem Archiv hinzu</link
+> und <link linkend="committingfiles"
+>spielen Sie sie in das &CVS;-Archiv ein</link
+>. </para>
+
+
+<figure id="screenshot-import" float="1">
+<title
+>Ein Bildschirmfoto des Dialogs <quote
+>Importieren</quote
+></title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="import.png"/></imageobject>
+<textobject
+><phrase
+>Ein Bildschirmfoto des Dialogs <quote
+>Importieren</quote
+></phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>In <xref linkend="screenshot-import"/> sehen Sie den Dialog, der Sie beim <emphasis
+>Importieren</emphasis
+> eines Projekts als Modul unterstützt. Um den Importdialog in &cervisia; aufzurufen, wählen Sie <menuchoice
+><guimenu
+>Archiv</guimenu
+><guimenuitem
+>Importieren ...</guimenuitem
+></menuchoice
+> aus dem Menü. </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Archiv:</guilabel
+> <xref linkend="co-repository"/></term>
+<listitem
+><para
+>In dem Auswahlfeld können Sie den Namen des &CVS;-Archivs, auch bekannt als $<envar
+>CVSROOT</envar
+>, eingeben oder auswählen. Sie müssen Schreibrechte im Archiv besitzen, und das &CVS;-Archiv muss entsprechend eingerichtet sein. Existiert das Archiv noch nicht, erstellen Sie es mit dem Menübefehl <menuchoice
+><guimenu
+>Archiv</guimenu
+><guimenuitem
+>Erstellen ...</guimenuitem
+></menuchoice
+>. </para>
+<para
+>Das Auswahlfeld zeigt eine Liste der Archive, die Sie zuvor über den Dialog <guilabel
+>Zugang zu den &CVS;-Archiven einrichten</guilabel
+> eingegeben haben. Handelt es sich um ein Archiv auf einem entfernten Rechner, müssen Sie zuvor sicherstellen, dass Sie sich erfolgreich anmelden können . Näheres hierzu finden Sie unter <xref linkend="accessing-repository"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Modul:</guilabel
+> <xref linkend="co-module"/></term>
+<listitem
+><para
+>Der Name des Moduls, in dem das Projekt abgelegt wird. Nach dem Importieren kann das Projekt unter diesem Namen vom Server heruntergeladen werden. Näheres hierzu finden Sie unter <xref linkend="checkingout"/>. Dies ist gleichzeitig der Name des zugehörigen Ordners im &CVS;-Archiv. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Arbeitsordner:</guilabel
+></term>
+<listitem
+><para
+>Dies ist der Hauptordner des Projektes, das Sie importieren möchten. Der Importvorgang beginnt in diesem Ordner und durchläuft rekursiv alle Unterordner. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Herkunfts-Tag:</guilabel
+> <xref linkend="co-vendortag"/></term>
+<listitem
+><para
+>Das Herkunfts-Tag wurde ursprünglich dazu verwendet Quelltexte Dritter im Archiv zu kennzeichnen. Wenn Ihnen nichts besseres einfällt, tragen Sie hier Ihren Benutzernamen ein. Es ist völlig egal, was Sie hier eintragen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Freigabe-Tag:</guilabel
+> <xref linkend="co-releasetag"/></term>
+<listitem
+><para
+>Dieses Tag wird aus historischen Gründen für den Import verschiedener Versionen von Drittanbieter-Software verwendet. Wenn Sie so etwas nicht vorhaben, verwenden Sie einfach <literal
+>start</literal
+> oder den Bezeichner <literal
+>FOO_1_0</literal
+>, wobei <literal
+>FOO</literal
+> der Name ihres Projektes ist und <literal
+>1.0</literal
+> die Version der importierten Software. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Folgende Dateien ignorieren:</guilabel
+></term>
+<listitem
+><para
+>Wenn Sie dieses Eingabefeld ausfüllen, wird dem Befehl <command
+>cvs import</command
+> zusätzlich die Option <option
+>-I <replaceable
+>Dateinamen</replaceable
+></option
+> übergeben. Dieser Eintrag wird als eine Liste durch Whitespaces getrennter Dateinamen (oder Mustern) interpretiert, die beim Importieren ignoriert werden sollen. Allgemein ist es sicherer und weniger fehleranfällig, einen Ordner anzulegen, in dem nur solche Dateien vorhanden sind, die importiert werden sollen. Dennoch erweist sich diese Option als nützlich, wenn das Projekt Dateien enthält, die normalerweise von &CVS; ignoriert werden, &eg; Dateien mit dem Namen <filename
+>core</filename
+>. In diesem Fall geben Sie in das entsprechende Eingabefeld das Zeichen <literal
+>!</literal
+> ein. Damit werden die Standardeinstellungen von &CVS; für ignorierte Dateien überschrieben. Weitere Informationen dazu finden Sie unter <xref linkend="ignoredfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Kommentar:</guilabel
+> <xref linkend="co-comment"/></term>
+<listitem
+><para
+>Verwenden Sie dieses Feld für Kommentare über Herkunft, Benutzung, Entwicklung &etc; der importierten Dateien. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Als Binärdatei importieren</guilabel
+></term>
+<listitem
+><para
+>Ist dieses Ankreuzfeld markiert, werden alle Dateien im Binär-Modus importiert, &ie; dem Befehl <command
+>cvs import</command
+> wird die Option <option
+>-kb</option
+> übergeben. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Änderungszeit der Datei als Zeit für den Import verwenden</guilabel
+></term>
+<listitem
+><para
+>Ist dieses Ankreuzfeld markiert, wird anstatt der eigentlichen Importzeit, die Zeit der letzten Änderung als Importzeit verwendet. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+
+<para
+>Wenn Sie die Eingabefelder ausgefüllt und Ihre Eingaben mit <guibutton
+>OK</guibutton
+> bestätigt haben, wird der folgende &CVS;-Befehl abgesetzt:</para>
+
+<screen
+><command
+>cvs</command
+> -d <co id="co-repository"
+></co
+><replaceable
+>archiv</replaceable
+> import -m "<co id="co-comment"
+></co
+>" <co id="co-module"
+></co
+><replaceable
+>modul</replaceable
+> <co id="co-vendortag"
+></co
+><replaceable
+>herkunfts_tag</replaceable
+> <co id="co-releasetag"
+></co
+><replaceable
+>freigabe_tag</replaceable
+></screen>
+
+</sect1>
+
+
+<sect1 id="checkingout">
+<title
+>Herunterladen eines Moduls aus dem &CVS;-Archiv</title>
+<para
+>Nachdem Sie erfolgreich den Speicherort des &CVS;-Archivs eingestellt und die benötigten Dateien eingespielt haben, können Sie nun das Modul aus dem &CVS;-Archiv auslesen um Ihre Arbeitskopie zu erstellen. </para>
+
+<para
+>Sie sollten den Namen des <firstterm
+>Zweigs</firstterm
+> oder <firstterm
+>Tags</firstterm
+> kennen, den Sie verwenden möchten. </para>
+
+<para
+>Zweige eines Moduls sind Parallele Versionen des Moduls. Ein praxisnahes Beispiel für diese Eigenschaft ist die Freigabe einer Version eines Softwareprojekts. Nach der Freigabe einer Hauptversion gibt es Fehler in dem Programm, die beseitigt werden sollten. Gleichzeitig möchten die Entwickler dem Programm aber auch neue Features hinzufügen. Beides gleichzeitig zu tun ist sehr schwierig, da neue Features normalerweise neue Fehler mit sich bringen, was das Beseitigen der alten Fehler erschwert. Um diesen Konflikt zu löschen, kann in &CVS; eine parallele Version erstellt werden, die wir <quote
+>stabilen Freigabezweig</quote
+> nennen, in dem Sie ausschließlich Fehler korrigieren. Der Hauptzweig (HEAD) bleibt so offen für neue Features. </para>
+
+<para
+>Tags werden verwendet, um Versionen des Projekts zu markieren. &CVS; markiert eine Version jeder Datei mit dem Tag. Wenn Sie also ein bestimmtes Tag auslesen oder aktualisieren, bekommen Sie immer die gleiche Versionen der Dateien. Daher sind Tags im Gegensatz zu Zweigen nicht dynamisch: Sie können nicht in einem Tag entwickeln. Tags sind nützlich, um Versionen für die Freigabe, große Änderungen am Programm &etc; zu markieren. Mit Tags können Sie schnell zu einem früheren Stand zurückkehren, um Fehler zu reproduzieren oder zu suchen, den Quelltext der Freigabeversion neu zu generieren &etc; </para>
+
+<figure id="screenshot-checkout" float="1">
+<title
+>Ein Bildschirmfoto des Dialogs <quote
+>Aus CVS auslesen</quote
+>.</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="checkout.png"/></imageobject>
+<textobject
+><phrase
+>Ein Bildschirmfoto des Dialogs <quote
+>Aus CVS auslesen</quote
+>.</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Archiv:</guilabel
+></term>
+<listitem
+><para
+>Der Name des &CVS;-Archivs, auch als <filename
+><envar
+>$CVSROOT</envar
+></filename
+> bezeichnet. Das Auswahlfeld zeigt eine Liste der Archive, die sie zuvor über den Dialog <guilabel
+>Zugang zu den &CVS;-Archiven einrichten</guilabel
+> eingegeben haben. Handelt es sich um ein Archiv auf einem entfernten Rechner, müssen Sie zuvor sicherstellen, dass Sie sich erfolgreich anmelden können. Näheres hierzu finden Sie unter <xref linkend="accessing-repository"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Modul:</guilabel
+></term>
+<listitem
+><para
+>Der Name des Moduls, das Sie auslesen. Wenn Sie mit einem bestehenden &CVS;-Archiv arbeiten, erfahren Sie diesen Namen wahrscheinlich vom Systemadministrator oder von der Webseite des Projekts. Um ein neues Modul in einem lokalen &CVS;-Archiv anzulegen, erstellen Sie einen Ordner im Wurzelverzeichnis des &CVS;-Archivs. Der Name des Ordners ist gleichzeitig der Name des leeren Moduls. </para>
+<para
+>Falls das &CVS;-Archiv die Datei <filename
+><envar
+>$CVSROOT</envar
+>/modules</filename
+> enthält, können Sie eine Liste der verfügbaren Module mit dem Knopf<guibutton
+>Liste abholen</guibutton
+> auslesen. </para>
+<para
+>Beachten Sie, dass es möglich ist, jeden beliebigen Unterordner eines Moduls auszulesen, ohne das gesamte Module zu beziehen. Geben Sie dazu den Unterordner mit an. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Verzweigungs-Tag:</guilabel
+></term>
+<listitem
+><para
+>Der Name des Zweiges oder Tags, den Sie auslesen möchten. Wenn Sie in dieses Feld nichts eingeben, bezieht &cervisia; den Hauptzweig (HEAD). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Arbeitsordner:</guilabel
+></term>
+<listitem
+><para
+>Der Ordner, aus dem das Modul ausgelesen werden soll. Beachten Sie, dass der Hauptordner der Arbeitskopie immer den Namen des Moduls erhält, sofern Sie ihm mit <guilabel
+>Auslesen als:</guilabel
+> keinen anderen Namen zuweisen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Auslesen als:</guilabel
+></term>
+<listitem
+><para
+>Wenn der Name des Ordners nicht dem Namen des Moduls entsprechen soll, geben Sie hier den gewünschten Namen ein. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Nur exportieren</guilabel
+></term>
+<listitem
+><para
+>Ist diese Einstellung markiert, werden die Dateien exportiert anstatt ausgelesen. Beim Exportieren wird eine Kopie des Moduls ohne die administrativen Ordner von &CVS; erstellt. Das ist zum Beispiel sinnvoll, wenn der Quelltext zur Veröffentlichung vorbereitet wird. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Rekursiv auslesen (checkout)</guilabel
+></term>
+<listitem
+><para
+>Liest alle Dateien und Ordner rekursiv aus.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+
+<sect1 id="mainscreen">
+<title
+>Der Hauptbildschirm, Dateistatus und Aktualisierung</title>
+<para
+>Wenn Sie nach dem Starten von &cervisia; mit <menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>&CVS;-Arbeitsordner öffnen ...</guimenuitem
+></menuchoice
+> eine Arbeitskopie öffnen, sehen Sie zwei Hauptbereiche im Hauptfenster von &cervisia;: im oberen befindet sich eine Baumansicht der Arbeitskopie; der untere zeigt die &CVS;-Befehle und deren Ausgaben an, die &cervisia; ausführt um bestimmte Aufgaben zu erledigen. </para>
+
+<para
+>Voreingestellt zeigt &cervisia; Dateien in Unterordnern nicht an, sie müssen die Unterordner also anklicken, um die enthaltenen Dateien zu sehen. Um alle Dateien Ihrer Arbeitskopie anzuzeigen, wählen Sie <menuchoice
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Dateibaum ausklappen</guimenuitem
+></menuchoice
+>. Um alle Ordner wieder zu schließen, wählen Sie <menuchoice
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Dateibaum einklappen</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>Abhängig von den Einstellungen in der Datei <filename
+>.cvsignore</filename
+> werden die Dateien, die sie normalerweise nicht in das &CVS;-Archiv einspielen wollen, nicht angezeigt. Das betrifft beispielsweise Objekt-Dateien, die beim Übersetzen stets neu angelegt werden. Für jede Datei wird der Status angezeigt. Zunächst steht hier <quote
+>Unbekannt</quote
+>, da &cervisia; die Informationen erst aus dem &CVS;-Archiv lädt, wenn Sie <menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Aktualisieren</guimenuitem
+></menuchoice
+> oder <menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Status</guimenuitem
+></menuchoice
+> wählen. Auf diese Weise können Sie über eine minimale Funktionalität verfügen, selbst wenn Sie keine permanente Verbindung zum &CVS;-Server haben. </para>
+
+<figure id="screenshot-mainview" float="1">
+<title
+>Ein Bildschirmfoto von &cervisia;s Hauptansicht</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="mainview.png"/></imageobject>
+<textobject
+><phrase
+>Ein Bildschirmfoto von &cervisia;s Hauptansicht</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Die Befehle im Dateimenü beziehen sich nur auf die gerade markierten Dateien. Sie können ebenso Ordner markieren. Wählen Sie nun <menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Status</guimenuitem
+></menuchoice
+> oder drücken Sie <keycap
+>F5</keycap
+>&cervisia; setzt folgenden Befehl ab: </para>
+
+<para>
+<screen
+><command
+>cvs update -n <replaceable
+>Dateinamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>um den Status der markieren Dateien abzufragen. Beachten Sie, dass &cervisia; Unterordner nur dann einbezieht, wenn Sie diese Einstellung unter <guimenu
+>Einstellungen</guimenu
+> markiert haben. Nach Ausführung des Befehls sehen Sie nun den aktuellen Status der Datei(en) in der Spalte <guilabel
+>Status</guilabel
+>: </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Lokal geändert</guilabel
+></term>
+<listitem
+><para
+>Das bedeutet, Ihre lokale Arbeitskopie der Datei wurde gegenüber dem Original im &CVS;-Archiv geändert. </para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><guilabel
+>Lokal hinzugefügt</guilabel
+></term>
+<listitem
+><para
+>Das bedeutet, die Datei existiert noch nicht im &CVS;-Archiv, aber sie wurde bereits in Ihrem Arbeitsordner für das Hinzufügen vorbereitet. Die Datei wird erst beim Einspielen dem &CVS;-Archiv hinzugefügt. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Lokal entfernt</guilabel
+></term>
+<listitem
+><para
+>Das bedeutet, dass Sie die Datei für das Entfernen aus dem &CVS;-Archiv vorbereitet haben. Die Datei wird aber erst beim nächsten Einspielen aus dem &CVS;-Archiv entfernt. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Aktualisierung erforderlich</guilabel
+></term>
+<listitem
+><para
+>Dieser Status wird angezeigt, wenn im &CVS;-Archiv eine neuere Version der Datei vorliegt, beispielsweise weil jemand zwischenzeitlich eine Änderung eingespielt hat. Üblicherweise möchten Sie eine solche Datei aktualisieren, damit Sie die neueste Version in Ihrem Arbeitsordner vorliegen haben. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Patch erforderlich</guilabel
+></term>
+<listitem
+><para
+>Dies ist im Wesentlichen dasselbe wie der zuvor erwähnte Status <quote
+>Aktualisierung erforderlich</quote
+>, mit dem Unterschied, dass der &CVS;-Server beim Aktualisieren der lokalen Kopie nicht die ganze Datei ersetzt, sondern diese mit den Änderungen versieht (&ie; einen Patch schickt). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Zusammenführung erforderlich</guilabel
+></term>
+<listitem
+><para
+>Dieser Zustand zeigt an, dass eine Zusammenführung der Version im &CVS;-Archiv mit Ihrer lokalen Kopie erforderlich ist. Dies tritt normalerweise dann auf, wenn Sie lokal Änderungen durchgeführt haben und jemand anders seinerseits Änderungen im &CVS;-Archiv eingespielt hat. Beim nächsten Aktualisieren werden die Änderungen im &CVS;-Archiv mit den lokalen Änderungen zusammengeführt. Treten hierbei Konflikte auf, beispielsweise wenn die lokalen Änderungen dieselben Zeilen betreffen wie die Änderungen im &CVS;-Archiv, erhält die Datei den Status <quote
+>Konflikt</quote
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Aktuell</guilabel
+></term>
+<listitem
+><para
+>Dieser Status zeigt an, dass Ihre lokale Kopie mit der Version im &CVS;-Archiv identisch ist. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Konflikt</guilabel
+></term>
+<listitem
+><para
+>Dieser Zustand wird angezeigt, wenn die Datei Konflikt-Markierungen enthält, die durch Zusammenführen einer geänderten lokalen Kopie mit einer aktuelleren Version aus dem &CVS;-Archiv zustande gekommen sind. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Nicht im CVS</guilabel
+></term>
+<listitem
+><para
+>Dieser Status zeigt an, dass die betreffende Datei nicht im &CVS;-Archiv verwaltet wird. Wollen Sie diese Datei anderen zur Verfügung stellen, sollten Sie sie zum &CVS;-Archiv hinzufügen. Falls das nicht der Fall ist, können Sie die Datei in die <filename
+>.cvsignore</filename
+> eintragen. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Jetzt, da Sie einen Überblick über den Zustand des &CVS;-Archivs gewonnen haben, möchten Sie vielleicht Ihren Arbeitsordner aktualisieren. Markieren Sie einige Dateien (oder das Wurzelverzeichnis, was dem Markieren aller darin enthaltenen Dateien entspricht) und wählen Sie <menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Aktualisieren</guimenuitem
+></menuchoice
+> (Dies könnte natürlich zu Beginn einer Sitzung getan werden). Möglicherweise ändert sich nun der Status einiger Dateien. Normalerweise werden Dateien mit dem Status <quote
+>Patch erforderlich</quote
+> oder <quote
+>Aktualisieren erforderlich</quote
+> aktualisiert. Nach diesem Vorgang sind in der Status-Spalte folgende neuen Einträge möglich: </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Aktualisiert</guilabel
+></term>
+<listitem
+><para
+>Dieser Status wird angezeigt, wenn die Datei aus dem &CVS;-Archiv aktualisiert wurde. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Gepatcht</guilabel
+></term>
+<listitem
+><para
+>Dieser Status zeigt an, dass der &CVS;-Server diese Datei erfolgreich mit einem Patch aktualisiert hat. Traten bei diesem Vorgang Konflikte zwischen Ihren Änderungen und den Änderungen im &CVS;-Archiv auf, hat die Datei nun den Status <quote
+>Konflikt</quote
+>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Ihnen wird aufgefallen sein, dass der Eintrag einer Datei in der Hauptansicht entsprechend Ihrem Status eingefärbt wird. Die Farben sollen gewissermaßen die Priorität des Status wiedergeben. Eine Datei mit dem Status <quote
+>Konflikt</quote
+> wird beispielsweise rot markiert, um anzuzeigen, dass Sie diesen Konflikt erst auflösen müssen, bevor Sie mit dieser Datei arbeiten können. Nichtsdestotrotz können Sie bei einer Vielzahl von Dateien im Arbeitsordner schnell den Überblick verlieren. Um eine bessere Übersicht darüber zu gewinnen, welche Dateien einen ungewöhnlichen Status aufweisen, reicht ein Klick auf die Überschrift der Spalte <guilabel
+>Status</guilabel
+>. Die Dateiliste wird nun nach der Priorität der Status sortiert, sodass die wichtigsten Informationen zu Anfang der Liste stehen. Um wieder die normale Sortierung zu erhalten, klicken Sie auf die Überschrift der Spalte <guilabel
+>Dateiname</guilabel
+>. </para>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="workingwithfiles">
+<title
+>Arbeiten mit Dateien</title>
+
+<para
+>Die am häufigsten verwendeten &CVS;-Funktionalitäten sind direkt in der Hauptansicht von &cervisia; verfügbar. Befehle wirken sich normalerweise auf mehrere Dateien gleichzeitig aus, nämlich auf die gerade markierten. Werden Ordner markiert, wirkt sich dies abhängig von den unter <guimenu
+>Einstellungen</guimenu
+> eingestellten Optionen aus. Ist dort beispielsweise die Option <menuchoice
+><guimenu
+>Einstellungen</guimenu
+> <guimenuitem
+>Unterordner beim Einspielen und Entfernen einbeziehen</guimenuitem
+> </menuchoice
+> markiert, werden bei Auswahl von <menuchoice
+><guimenu
+>Datei</guimenu
+> <guimenuitem
+>Einspielen ...</guimenuitem
+></menuchoice
+> alle Dateien in den markierten Ordnern eingespielt. Anderenfalls wird der Befehl nur auf die im aktuellen Ordner befindlichen Dateien angewandt. </para>
+
+<figure id="screenshot-popup" float="1">
+<title
+>Ein Bildschirmfoto des Kontextmenüs von &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="popup.png"/></imageobject>
+</mediaobject>
+</figure>
+
+<para
+>Auch im Kontextmenü, das Sie über einen Rechtsklick auf Dateien erreichen, finden Sie die am häufigsten verwendeten Funktionen. <xref linkend="screenshot-popup"/> zeigt das Kontextmenü des Hauptfensters. </para>
+
+<para
+>Sie können eine Datei bearbeiten, indem Sie auf diese Doppelklicken, oder indem Sie sie markieren und &Enter; drücken. Es wird die Anwendung gestartet, die dem Dateityp zugeordnet ist (die Zuordnung erfolgt &kde;-weit). Möchten Sie die Datei nicht mit der, ihr zugeordneten Anwendung starten, können Sie im Kontextmenü das Untermenü <menuchoice
+><guisubmenu
+>Bearbeiten mit</guisubmenu
+></menuchoice
+> wählen und eine der anderen Anwendungen verwenden. </para>
+
+<sect1 id="addingfiles">
+<title
+>Hinzufügen von Dateien</title>
+
+<para
+>Das Hinzufügen von Dateien zu einem Projekt bedarf zweier Schritte: Zuerst müssen die Dateien in &CVS; registriert, mit anderen Worten <emphasis
+>dem Archiv hinzugefügt</emphasis
+> werden. Das ist notwendig, aber noch nicht alles. Damit die Dateien tatsächlich in das &CVS;-Archiv gelangen, müssen Sie die hinzugefügten Dateien <emphasis
+>einspielen</emphasis
+>. Diese Vorgehensweise hat den Vorteil, dass Sie die hinzugefügten Dateien zusammen mit anderen lokal vorgenommenen Änderungen in das &CVS;-Archiv einspielen können. Sie können beispielsweise in einer versandten <quote
+>Einspiel-Benachrichtigung</quote
+> leicht nachvollziehen, dass alle diese Änderungen in einem Arbeitsschritt durchgeführt wurden. </para>
+
+<para
+>Markieren Sie in der Hauptansicht von &cervisia; alle Dateien, die Sie hinzufügen möchten. Wählen Sie nun <menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Zum CVS-Archiv hinzufügen ...</guimenuitem
+></menuchoice
+>, oder klicken Sie mit der rechten Maustaste auf eine der markierten Dateien und wählen <guimenuitem
+>Zum CVS-Archiv hinzufügen</guimenuitem
+>. Der Dialog <guilabel
+>Zu CVS hinzufügen (add)</guilabel
+> erscheint und zeigt eine Liste der ausgewählten Dateien. Bestätigen Sie diesen mit <guibutton
+>OK</guibutton
+>. </para>
+
+<para
+>&cervisia; setzt folgenden Befehl ab:</para>
+
+<para>
+<screen
+><command
+>cvs add <replaceable
+>Dateinamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Nach erfolgreicher Durchführung des Befehls, sollte in der Status-Spalte für die betreffenden Dateien der Eintrag <quote
+>Zum &CVS;-Archiv hinzugefügt</quote
+> erscheinen. </para>
+
+<warning
+><para
+>&CVS; ist nicht auf eine Versionsverwaltung für Binärdateien ausgerichtet. So ergibt beispielsweise das Zusammenführen von Binärdateien keinen Sinn. Darüberhinaus führt &CVS; in der Standardkonfiguration eine automatische Ersetzung von Schlüsselwörtern durch (&eg; während des Einspielens bei einem Eintrag der Form <literal
+>&dollar;Revision: 1.6 &dollar;</literal
+>). Bei Binärdateien kann die Ersetzung solcher Zeichenfolgen zur Zerstörung der Datei führen. </para
+></warning>
+
+<para
+>Damit dieses Verhalten unterdrückt wird, sollten Sie zum Einspielen von Binärdateien (oder anderen Dateien etwa Postscript oder PNG-Bildern) <menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Binärdatei hinzufügen ...</guimenuitem
+></menuchoice
+> wählen. Der Dialog <guilabel
+>CVS Binärdateien hinzufügen</guilabel
+> erscheint und zeigt eine Liste der ausgewählten Dateien. Bestätigen Sie diesen mit <guibutton
+>OK</guibutton
+>. </para>
+
+<para
+>&cervisia; setzt folgenden Befehl ab: </para>
+
+<para>
+<screen
+><command
+>cvs add -kb <replaceable
+>Dateinamen</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="removingfiles">
+<title
+>Entfernen von Dateien</title>
+
+<para
+>Das Entfernen von Dateien erfolgt, genau wie das Hinzufügen, in zwei Schritten: Zunächst werden die Dateien über <menuchoice
+><guimenu
+>Datei</guimenu
+> <guimenuitem
+>Aus CVS-Archiv entfernen ...</guimenuitem
+></menuchoice
+> oder durch einen Rechtsklick auf eine der markierten Dateien und Auswahl von <guimenuitem
+>Aus CVS-Archiv entfernen ...</guimenuitem
+> aus dem Kontextmenü. Der Dialog <guilabel
+>Aus CVS entfernen</guilabel
+> erscheint und zeigt eine Liste der markierten Dateien. Bestätigen Sie diesen Dialog mit <guibutton
+>OK</guibutton
+>. &cervisia; setzt folgenden Befehl ab: </para>
+<para>
+<screen
+><command
+>cvs remove -f <replaceable
+>Dateinamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Danach muss die Änderung im Arbeitsordner noch in das &CVS;-Archiv eingespielt werden, ggf. zusammen mit anderen lokal erfolgten Änderungen. </para>
+
+<note
+><para
+>Der zuvor erwähnte Befehl funktioniert nur, wenn die betreffende Datei im Arbeitsordner aktuell ist. Dieses Verhalten ist durchaus vernünftig. Wenn Sie eine Version im Arbeitsordner haben, die gegenüber der im &CVS;-Archiv vorliegenden Dateiversion Unterschiede aufweist, möchten Sie wahrscheinlich zunächst prüfen, ob Sie diese Änderungen tatsächlich verwerfen wollen. </para
+></note>
+
+</sect1>
+
+
+<sect1 id="addingremovingdirs">
+<title
+>Hinzufügen und Entfernen von Ordnern</title>
+
+<para
+>Ordner werden durch &CVS; grundsätzlich anders behandelt als normale Dateien. Sie unterliegen keiner Versionsverwaltung, &ie; Sie können nicht nachvollziehen, welche Ordner in einem Projekt zu einem bestimmten Zeitpunkt existiert haben. Darüberhinaus können Ordner nicht mehr aus dem &CVS;-Archiv entfernt werden. Die einzige Möglichkeit hierzu ist das direkte Entfernen im &CVS;-Archiv auf dem Server. </para>
+
+<para
+>Aus diesem Grund folgt &CVS; der Konvention, einen Ordner als <quote
+>nicht existent</quote
+> zu betrachten, wenn es keine Dateien enthält. Diese Konvention kann durch die Option <option
+>-P</option
+> für <command
+>cvs update</command
+> und <command
+>cvs checkout</command
+> erzwungen werden. In &cervisia; erreichen Sie dies über Markieren von <menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Leere Ordner beim Aktualisieren entfernen</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>Einen Ordner fügen Sie mit <menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Zum CVS-Archiv hinzufügen ...</guimenuitem
+></menuchoice
+> zum Archiv hinzu, oder indem Sie mit der rechten Maustaste auf den markierten Ordner klicken und aus dem Kontextmenü <guimenuitem
+>Zum Archiv hinzufügen ...</guimenuitem
+> wählen. Beachten Sie, dass anders als beim Hinzufügen von Dateien kein darauffolgendes Einspielen des Ordners erforderlich ist. &cervisia; setzt den folgenden Befehl ab: </para>
+
+
+<para>
+<screen
+><command
+>cvs add <replaceable
+>Ordnername</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="committingfiles">
+<title
+>Einspielen von Dateien</title>
+
+<para
+>Wenn Sie eine Reihe von Änderungen in Ihrem Arbeitsordner vorgenommen haben und diese nun anderen Entwicklern zur Verfügung stellen wollen, spielen Sie die betreffenden Dateien in das &CVS;-Archiv ein. Beim Einspielen werden die von Ihnen veränderten Versionen der Dateien zur aktuellen Version im &CVS;-Archiv. Aktualisiert ein anderer Entwickler später sein Arbeitsordner, erhält er Ihre Änderungen aus dem &CVS;-Archiv. </para>
+
+<para
+>Wenn Sie Dateien einspielen möchten, markieren Sie diese in der Hauptansicht von &cervisia; und wählen Sie im Menü <menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Einspielen ...</guimenuitem
+></menuchoice
+> oder klicken Sie mit der rechten Maustaste auf eine der markierten Dateien und wählen Sie <guimenuitem
+>Einspielen ...</guimenuitem
+> aus dem Kontextmenü. </para>
+
+<figure id="screenshot-commit" float="1">
+<title
+>Ein Bildschirmfoto des Dialogs <quote
+>Einspielen</quote
+></title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="commit.png"/></imageobject>
+</mediaobject>
+</figure>
+
+<para
+>&cervisia; unterstützt Sie auf vielfältige Weise bei der Erstellung des Log-Eintrags. Zum Einen können Sie eine Datei in der Liste durch Doppelklick oder Betätigen von <keycap
+>Eingabe</keycap
+> auswählen, um die Änderungen zu sehen, die Sie an dieser Datei durchgeführt habe. Desweiteren bietet Ihnen &cervisia; eine Liste der von Ihnen zuletzt eingegebenen Log-Einträge zur Auswahl. Und zu guter Letzt ist der Dialog mit dem weiter unten beschriebenen Changelog-Dialog verbunden. Der Befehl </para>
+
+<para>
+<screen
+><command
+>cvs commit -m <replaceable
+>Log-Eintrag</replaceable
+> <replaceable
+>Dateinamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>wird verwendet. </para>
+
+
+<note
+><para
+>Eine häufig anzutreffende Fehlermeldung beim Einspielen ist die Meldung <errorname
+>Up-to-date check failed</errorname
+>. Das bedeutet, dass jemand anders seit Ihrem letzten Aktualisieren Änderungen in das &CVS;-Archiv eingespielt hat. Oder technisch ausgedrückt: Ihre <literal
+>BASE</literal
+>-Version der Dateien, auf denen Sie Ihre Änderungen durchgeführt haben, ist nicht die aktuellste im &CVS;-Archiv. In einem solchen Fall weigert sich &CVS; Ihre Änderungen in das &CVS;-Archiv einzuspielen. Um dieses Problem zu lösen, müssen Sie Ihre lokale, geänderte Kopie aus dem &CVS;-Archiv aktualisieren, sämtliche auftretenden Konflikte auflösen und versuchen die so geänderte Datei erneut einspielen. Sofern Sie in einem Software-Projekt arbeiten, ist es natürlich empfehlenswert, zunächst zu prüfen, ob das Programm nach dem Update und dem Auflösen der Konflikte noch funktioniert, bevor Sie Ihre Version einspielen. Es können durch das Auflösen der Konflikte ohne weiteres Nebeneffekte auftreten, die das Funktionieren des Programms beeinträchtigen. </para
+></note>
+
+<note>
+<para
+>Ein weiterer beliebter Fehler führt zu der Meldung <errorname
+>Sticky tag ‚X‘ for file ‚X‘ is not a branch</errorname
+>. Diese Fehler tritt auf, wenn Sie versuchen eine Datei einzuspielen, die Sie vorher auf ein bestimmtes Tag oder eine bestimmte Version gesetzt haben. Dies geschieht durch den Befehl: </para>
+<para>
+<screen
+><prompt
+>%</prompt
+><userinput
+>cvs update -r X</userinput
+></screen>
+</para>
+<para
+>Dieser Befehl wird von dem Menüeintrag <menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Auf Tag/Datum aktualisieren ...</guimenuitem
+></menuchoice
+> verwendet. In einem solchen Fall wird die Datei <quote
+>sticky</quote
+>, &ie; Sie wird auf diesen Stand <quote
+>festgenagelt</quote
+>, sodass ein späteres Aktualisieren die Datei nicht auf die neueste Version im Zweig bringt. Wollen Sie weitere Versionen in den Zweig einspielen, müssen Sie die Datei erst auf das Zweig-Tag aktualisieren. </para>
+</note>
+
+<para
+>Mit &cervisia; ist es ziemlich einfach eine Changelog-Datei zu pflegen, die dem in den &GNU; Coding Guidelines festgelegten Format entspricht. Diese Funktionalität erreichen Sie über <menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Changelog-Eintrag hinzufügen ...</guimenuitem
+></menuchoice
+>. Existiert im Hauptverzeichnis Ihres Arbeitsordners eine Datei mit dem Namen <filename
+>Changelog</filename
+>, wird diese geöffnet. Sie können diese nun bequem bearbeiten. Hierzu wird am Anfang der Datei ein Eintrag mit dem aktuellen Datum und Ihrem Benutzernamen eingefügt. Näheres zur Einstellung des Benutzernamens finden Sie unter <xref linkend="customize-general"/>. Beenden Sie den Dialog mit <guibutton
+>OK</guibutton
+>. Beim nächsten Öffnen finden Sie den hier eingegebenen Text als Voreinstellung für den Log-Eintrag im Einspielen-Dialog. </para>
+
+</sect1>
+
+
+<sect1 id="resolvingconflicts">
+<title
+>Auflösen von Konflikten</title>
+
+<para
+>Konflikte können immer dann auftreten, wenn Sie eine Datei ändern und gleichzeitig ein anderer Entwickler Änderungen an derselben Datei durchgeführt hat. Solche Konflikte werden von &CVS; beim Aktualisieren entdeckt. &CVS; versucht dann, die von dem anderen Entwickler durchgeführten Änderungen mit Ihrer lokalen Kopie zusammenzuführen. Das schlägt dann fehl, wenn sich Ihre Änderungen mit denen des anderen Entwicklers überschneiden. Der &CVS;-Server gibt in diesem Fall eine Fehlermeldung aus. </para>
+
+<para
+>In der Hauptansicht von &cervisia; werden Dateien mit Konflikten durch den Text <quote
+>Konflikt</quote
+> in der Status-Spalte und durch Rotfärbung gekennzeichnet. Es ist Ihre Aufgabe, diese Konflikte vor dem Einspielen der Dateien aufzulösen. &CVS; wird sich weigern, Dateien mit Konflikten einzuspielen, bis Sie sie bearbeitet haben. Natürlich können Sie Konflikte auf die traditionelle Art durch Doppelklick und anschließendes Bearbeiten der Datei im Editor auflösen.</para>
+
+<para
+>&CVS; markiert Stellen an denen Konflikte auftreten in den Dateien wie folgt:</para>
+
+<screen
+>&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+Änderungen in der Arbeitskopie
+=======
+Änderungen im &CVS;-Archiv
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; Revisionsnummer
+</screen>
+
+<para
+>Sie sollten den gesamten Block durch eine zusammengeführte Version ersetzen. Beim Auflösen der Konflikte haben Sie große Freiheiten. Sie können bei jedem Konflikt entscheiden, ob Sie die eine oder die andere Variante beibehalten wollen. Genausogut können Sie beide Änderungen verwerfen und die komplette Funktion oder sogar die ganze Datei neu schreiben. </para>
+
+<para
+>Glücklicherweise bietet &cervisia; eine schöne Oberfläche, um Konflikte zu behandeln. Das bedeutet nicht, dass Sie niemals Dateien von Hand bearbeiten müssen, aber einfache Konflikte lassen sich so ohne manuelles Editieren lösen. Um den Dialog <guilabel
+>Auflösen von Konflikten</guilabel
+> zu verwenden, wählen Sie <menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Konflikte auflösen ...</guimenuitem
+></menuchoice
+> aus dem Menü, oder klicken Sie mit der rechten Maustaste auf eine der markierten Dateien und wählen Sie aus dem Kontextmenü <guimenuitem
+>Konflikt auflösen</guimenuitem
+>. </para>
+
+<figure id="screenshot-resolve" float="1">
+<title
+>Ein Bildschirmfoto des Dialogs <quote
+>Auflösen von Konflikten</quote
+></title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="resolve.png"/></imageobject>
+<textobject
+><phrase
+>Ein Bildschirmfoto des Dialogs <quote
+>Auflösen von Konflikten</quote
+></phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Im oberen Teil des Dialogs sehen Sie auf der linken Seite <guilabel
+>Ihre Version (A):</guilabel
+> und auf der rechten Seite die <guilabel
+>Andere Version (B):</guilabel
+>, die im &CVS;-Archiv vorliegt. Die Unterschiede zwischen den Dateien sind rot markiert. Unterhalb der beiden Versionen sehen Sie die <guilabel
+>Zusammengeführte Version:</guilabel
+>, die gespeichert wird, sobald Sie den Knopf <guibutton
+>Speichern</guibutton
+> betätigen. </para>
+
+<para
+>Mit den Knöpfen <guibutton
+>&lt;&lt;</guibutton
+> und <guibutton
+>&gt;&gt;</guibutton
+> können Sie zwischen den abweichenden Bereichen hin- und herschalten. Sie können im Dialog sehen, welcher Abschnitt gerade markiert ist. Die Anzeige <literal
+>2 von 3</literal
+> bedeutet, dass Sie sich gerade im zweiten von insgesamt drei voneinander abweichenden Bereichen befinden. </para>
+
+<para
+> In jedem Abschnitt können Sie sich für eine der beiden Versionen entscheiden, die dann in der zusammengeführten Datei gespeichert wird. Mit dem Knopf <guibutton
+>A</guibutton
+> übernehmen Sie Ihre Version, mit dem Knopf <guibutton
+>B</guibutton
+> die Version aus dem &CVS;-Archiv. <guibutton
+>A+B</guibutton
+> bedeutet, dass beide Versionen übernommen werden, erst Ihre, dann die aus dem Archiv. Auch mit <guibutton
+>B+A</guibutton
+> werden beide Versionen übernommen, jedoch in umgekehrter Reihenfolge; zuerst die aus dem Archiv, dann Ihre. </para>
+
+<para
+>Sollten Sie mit einer der Versionen nicht zufrieden sein, können Sie mit dem Knopf <guibutton
+>Bearbeiten</guibutton
+> einen einfachen Editor zum Bearbeiten des Abschnitts öffnen. Sind Sie damit fertig, drücken Sie <guibutton
+>OK</guibutton
+> um zum Dialog <guilabel
+>Auflösen von Konflikten</guilabel
+> zurück zu kehren und die weiteren Konflikte aufzulösen. In der <guilabel
+>Zusammengeführten Version:</guilabel
+> sehen Sie nun die eben gemachten Änderungen. </para>
+
+<para
+>Um die Änderungen zu speichern und die Arbeitskopie zu überschreiben, drücken Sie <guibutton
+>Speichern</guibutton
+>. Beachten Sie, dass alle Abschnitte gespeichert werden, nicht nur der aktuell angezeigte. Möchten Sie die Änderungen in eine andere Datei speichern, drücken Sie <guibutton
+>Speichern unter ...</guibutton
+>. Zum verlassen des Dialoges drücken Sie <guibutton
+>Schließen</guibutton
+>. Wenn Sie den Dialog schließen, ohne zu speichern, gehen die Änderungen verloren. </para>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="obtaininginformation">
+<title
+>Informationen über Dateien erhalten und Patches erstellen</title>
+
+<sect1 id="diff">
+<title
+>Untersuchen von Unterschieden zwischen Dateiversionen</title>
+
+<para
+>Es gibt in &cervisia; verschiedene Stellen, an denen Sie sich die Unterschiede zwischen den einzelnen Versionen einer Datei anzeigen lassen können: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>In der Hauptansicht tun Sie dies mit <menuchoice
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Abweichungen vom Archiv ...</guimenuitem
+></menuchoice
+>. Es wird der Befehl <command
+>cvs diff</command
+> verwendet, und Ihnen werden die Unterschiede zwischen der Version in Ihrem Arbeitsordner und der Version auf die Sie zuletzt aktualisiert haben (auch als <literal
+>BASE</literal
+> bekannt) angezeigt. Dies ist vor dem Einspielen einer Datei sinnvoll, um eine angemessene Nachricht für das Protokoll schreiben zu können. </para
+></listitem>
+
+<listitem
+><para
+>Sie können sich auch die Unterschiede zwischen der Version in Ihrem Arbeitsordner und der Version im Haupt-Entwicklungszweig (auch als <literal
+>HEAD</literal
+> bekannt) anzeigen lassen, indem Sie im Menü <menuchoice
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Abweichungen vom Archiv (HEAD) ...</guimenuitem
+></menuchoice
+> wählen. </para
+></listitem>
+
+<listitem
+><para
+>Die Unterschiede zwischen den letzten beiden Dateiversionen bekommen Sie über <menuchoice
+><guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Letzte Änderung ...</guimenuitem
+></menuchoice
+> angezeigt. </para
+></listitem>
+
+<listitem
+><para
+>Sie können <guimenuitem
+>Abweichungen vom Archiv ...</guimenuitem
+>, <guimenuitem
+>Abweichungen vom Archiv (HEAD) ...</guimenuitem
+> und <guimenuitem
+>Letzte Änderung ...</guimenuitem
+> zusätzlich über das Kontextmenü der Hauptansicht erreichen, indem Sie auf die gewünschte Datei rechtsklicken. </para
+></listitem>
+
+<listitem
+><para
+>Im Dialog, der beim Einspielen von Dateien angezeigt wird, können Sie eine Ansicht der Unterschiede aufrufen, indem Sie entweder die Datei mit der Maus Doppelklicken oder die Taste <keycap
+>Eingabe</keycap
+> drücken. Dies ist vergleichbar mit dem Aufruf von <menuchoice
+><guimenu
+>Ansicht</guimenu
+> <guimenuitem
+>Abweichungen zum Archiv ...</guimenuitem
+></menuchoice
+> in der Hauptansicht. </para
+></listitem>
+
+<listitem
+><para
+>Im Dialog <quote
+>CVS-Log</quote
+> können Sie zwei Versionen einer Datei markieren und sich die Unterschiede in einem Dialog anzeigen lassen. Näheres dazu finden Sie unter <xref linkend="browsinglogs"/>. </para
+></listitem>
+
+</itemizedlist>
+
+<para
+>Wie Sie vielleicht erwarten, zeigt &cervisia; nicht einfach nur die Ausgabe des Befehls <command
+>diff</command
+> an, sondern bietet eine grafische Ansicht wie Sie sie unter <xref linkend="screenshot-log"/> sehen. </para>
+
+<figure id="screenshot-log" float="1">
+<title
+>Ein Bildschirmfoto des Dialogs <quote
+>CVS-Diff</quote
+></title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="diff.png"/></imageobject>
+<textobject
+><phrase
+>Ein Bildschirmfoto des Dialogs <quote
+>CVS-Diff</quote
+></phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Der im Dialog anzeigte Text ist eine verbesserte Variante der Ausgabe des Diff-Befehls mit dem Parameter <option
+>-u</option
+>. Die beiden Versionen der Datei werden in zwei Fenstern so nebeneinander dargestellt, dass Sie einen direkten Vergleich der einzelnen Zeilen vornehmen können. D. h. dass beispielsweise dort, wo Zeilen entfernt oder hinzugefügt wurden, diese als Leerzeile mit der linksseitigen Markierung <literal
+>+++++</literal
+> dargestellt werden. Ansonsten wird die Zeilennummer in der linken Spalte angezeigt. </para>
+
+<para
+>Die zweite Spalte im rechten Fenster zeigt an, welche Änderung durchgeführt wurde. Möglich sind <literal
+>Hinzugefügt</literal
+>, <literal
+>Gelöscht</literal
+> und <literal
+>Geändert</literal
+>. Die entsprechenden Zeilen sind in blau, grün und rot markiert. In der Mitte des Dialogs wird eine komprimierte Version der Farbmarkierungen dargestellt. Auf diese Weise erhalten Sie einen schnellen Überblick über die in der Datei aufgetretenen Änderungen. Sie können darüber hinaus die Position der eingefärbten Bereiche als Orientierungshilfe beim Blättern in der Datei nutzen. </para>
+
+<para
+>Normalerweise werden die Bildlaufleisten des rechten und linken Fensters synchronisiert, &ie; wenn Sie im linken Fenster blättern, wird das rechte Fenster automatisch mitgeführt. Sie können dieses Verhalten über das Ankreuzfeld <guibutton
+>Bildlaufleisten synchronisieren</guibutton
+> ändern. </para>
+
+<para
+>Weitere Information zur Anpassung des Diff-Dialogs finden Sie unter <xref linkend="customize-diff"/>. </para>
+
+</sect1>
+
+<sect1 id="creatingpatches">
+<title
+>Patches erstellen</title>
+
+<para
+>Es kommt vor, dass Sie Ihre Änderungen jemandem zur Durchsicht zeigen möchten, bevor Sie sie einspielen. Oder Sie haben keine Schreibrechte für das &CVS;-Archiv, können also nicht Einspielen. &CVS; bietet Standardformate zum Austausch von Änderungen aus dem Arbeitsordner, sodass andere Entwickler Ihre Patches durchsehen, testen und in das &CVS;-Archiv einspielen können. Die Datei, die diese Unterschiede enthält, heißt <firstterm
+>Patch</firstterm
+> und wird mit dem Befehl <command
+>cvs diff</command
+> erstellt, wie unter <xref linkend="diff"/> beschrieben. Patches anstatt ganzer Dateien auszutauschen benötigt weniger Bandbreite, und Patches sind einfacher zu verwalten, da man Änderungen in vielen Dateien in einer Patchdatei speichern kann. </para>
+
+<para
+>In &cervisia; erreichen Sie diese Eigenschaft über <menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Patch gegen das Archiv erstellen ...</guimenuitem
+></menuchoice
+>. </para>
+
+<important
+><para
+>Die Aktion <guimenuitem
+>Patch gegen das Archiv erstellen ...</guimenuitem
+> erstellt einen Patch mit allen Änderungen in allen Dateien in Ihrem Arbeitsordner gegen das <literal
+>BASE</literal
+>-Archiv. Daher beeinflussen Markierungen in der Hauptansicht nicht die Erstellung des Patches. </para
+></important>
+
+<para
+>Sie können auch in der Hauptansicht eine Datei markieren und <guimenuitem
+>Protokoll durchsuchen ...</guimenuitem
+> aus dem Menü <guimenu
+>Ansicht</guimenu
+> wählen oder mit der rechten Maustaste auf die markierte Datei klicken und <guimenuitem
+>Protokoll durchsuchen ...</guimenuitem
+> aus dem Kontextmenü wählen, um den Dialog <link linkend="browsinglogs"
+>CVS-Protokoll</link
+> zu öffnen. Wählen Sie nun die Version gegen die Sie den Patch erstellen möchten als Revision <quote
+>A</quote
+>, und drücken Sie den Knopf <guilabel
+>Patch erstellen ...</guilabel
+>. Das erstellt einen Patch mit den Unterschieden zwischen der <emphasis
+>markierten Datei</emphasis
+> in Ihrem Arbeitsordner und der Version, die als Revision <quote
+>A</quote
+> gewählt wurde. </para>
+
+<para
+>Bevor der Patch erstellt wird, zeigt &cervisia; einen Dialog an, der es Ihnen ermöglicht, das Ausgabeformat einzustellen. </para>
+
+<figure id="screenshot-patch" float="1">
+<title
+>Ein Bildschirmfoto des Patch-Dialogs</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="patch.png"/></imageobject>
+<textobject
+><phrase
+>Ein Bildschirmfoto des Patch-Dialogs</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Ausgabeformat</guilabel
+></term>
+<listitem
+><para
+>Es gibt drei Ausgabeformate: </para>
+<para
+><guilabel
+>Normal</guilabel
+>: In dieses Format erstellt der Editor Ed automatisch eine Kopie der alten Datei, die zur neuen Datei passt. Im normalen Ausgabeformat markieren die Zeichen <quote
+>&lt;</quote
+> und <quote
+>&gt;</quote
+> die Änderungen, und es gibt keine Kontextinformationen. </para>
+<para
+><guilabel
+>Vereinheitlicht (unified)</guilabel
+>: Das am meisten verwendete Format zum Austausch von Patches. Zusätzlich zu den Zeilennummern verwendet es Kontextzeilen zum Anzeigen der Unterschiede. Dadurch wird das Anwenden von Patches robuster. Das Format ist kompakt und lesbar mit einem Header für jede geändert Datei und getrennte Abschnitte (chunks) für jede Änderung. Durch die Kontextzeilen für jeden Unterschied ist das Lesen der Änderungen einfacher. Im vereinheitlichten Format markieren die Zeichen <quote
+>+</quote
+> und <quote
+>-</quote
+> die Änderungen. </para>
+<para
+><guilabel
+>Kontext</guilabel
+>: liefert die gleichen Informationen wie das vereinheitlichte Format, aber weniger Kompakt. Im Kontext-Format markiert das Zeichen <quote
+>!</quote
+> die Änderungen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Anzahl Kontextzeilen im Diff-Dialog:</guilabel
+></term>
+<listitem
+><para
+>Geben Sie hier die gewünschte Anzahl der Kontextzeilen im vereinheitlichten und Kontext-Format an. Diese Einstellung gilt nicht für das normale Ausgabeformat, da es keine Kontextinformationen besitzt. Eine höhere Zahl Kontextzeilen macht es einfacher, die Rohdaten des Patches zu lesen und das Anbringen des Patches wird präziser. Durch mehr Zeilen wird der Patch aber auch größer. Es wird empfohlen, wenigstens zwei Zeilen zu verwenden, damit der Patch ordentlich verarbeitet werden kann. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Einstellungen ignorieren</guilabel
+></term>
+<listitem
+><para
+>Markieren Sie hier die Änderungen, die bei der Erstellung eines Patches nicht als Unterschiede betrachtet werden sollen. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+
+<para
+>Nachdem Sie das Ausgabeformat eingestellt haben, erstellt &cervisia; den Patch und öffnet den Dialog <guilabel
+>Speichern unter</guilabel
+>. Geben Sie hier den gewünschten Namen und den Ort für den Patch an. </para>
+
+
+</sect1>
+
+<sect1 id="annotate">
+<title
+>Die Anmerkungsansicht einer Datei betrachten</title>
+
+<para
+>Der &CVS;-Befehl <command
+>cvs annotate</command
+> bietet die Möglichkeit, für jede Zeile einer Datei den letzten Bearbeiter anzuzeigen. Diese Ansicht kann sich als hilfreich erweisen, wenn man herausfinden möchte, wer eine bestimmte Änderung eingebaut hat. </para>
+
+<para
+>&cervisia; ermöglicht auch dies, bereichert die hier dargestellten Informationen aber darüberhinaus auf interaktive Weise. Sie erhalten eine Anmerkungsansicht über <menuchoice
+><guimenu
+>Ansicht</guimenu
+> <guimenuitem
+>Anmerkung ...</guimenuitem
+></menuchoice
+>. Eine weitere Möglichkeit besteht darin, den Knopf <guilabel
+>Anmerkung</guilabel
+> im Dialog <link linkend="browsinglogs"
+>Durchsuchen der Log-Einträge</link
+> zu benutzen, in dem Sie wählen können, welche Version der Datei Sie anzeigen möchten. Unter <xref linkend="screenshot-annotate"/> finden Sie ein Bildschirmfoto des Dialogs. </para>
+
+<figure id="screenshot-annotate" float="1">
+<title
+>Ein Bildschirmfoto des Dialogs <quote
+>CVS-Anmerkung</quote
+></title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="annotate.png"/></imageobject>
+<textobject
+><phrase
+>Ein Bildschirmfoto des Dialogs <quote
+>CVS-Anmerkung</quote
+></phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Im Anmerkungs-Dialog wird in Ihnen die letzte Version der ausgewählten Datei angezeigt (oder die Revision <quote
+>A</quote
+>, wenn Sie die Anmerkungsansicht aus dem Dialog <link linkend="browsinglogs"
+>Protokoll durchsuchen</link
+> aufgerufen haben). In den Spalten vor dem Text erhalten Sie für jede Zeile Informationen über die letzte Änderung. In der ersten Spalte wird die Versionsnummer angezeigt, in der zweiten der Name des Autors, der die letzte Änderung durchgeführt hat. In der dritten Spalte wird das Datum dieser letzten Änderung angezeigt. </para>
+
+<para
+>Wenn Sie auf eine seltsame Stelle im Quellcode stoßen oder einen Fehler vermuten, können Sie so direkt sehen, wer für diese Zeile verantwortlich ist. Aber das ist nicht alles. Sie können sogar herausfinden, <emphasis
+>warum</emphasis
+> diese Zeile geändert wurde. Hierzu bewegen Sie den Mauszeiger über die betreffende Versionsnummer. Daraufhin erscheint eine Kurzinfo, das den zugehörigen Log-Eintrag und das Datum der Änderung anzeigt. </para>
+
+</sect1>
+
+
+<sect1 id="browsinglogs">
+<title
+>&CVS;-Protokolle durchsuchen</title>
+
+<para
+>Wenn Sie in der Hauptansicht eine Datei markieren und <guimenuitem
+>Protokoll durchsuchen ...</guimenuitem
+> aus dem Menü <guimenu
+>Ansicht</guimenu
+> wählen, oder mit der rechten Maustaste auf die Datei klicken und aus dem Kontextmenü <guimenuitem
+>Protokoll durchsuchen ...</guimenuitem
+> wählen, wird der Dialog <guilabel
+>CVS-Protokoll</guilabel
+> angezeigt. (Bei mehr als einer Datei passiert nichts, da &cervisia; nur das Protokoll einer Datei zur gleichen Zeit bearbeiten kann.) Der Dialog bietet mehr als nur das Betrachten der Versionsgeschichte einer Datei. Sie können mit ihm: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Die Informationen über Revision, Autor, Datum, Zweig, Commitnachricht und Tags für jede Version der markierten Datei betrachten. </para
+></listitem>
+
+<listitem
+><para
+>Eine grafische Baumansicht der Zweige und Tags der markierten Datei betrachten.  </para
+></listitem>
+
+<listitem
+><para
+>Beliebige Version der markierten Datei (mit der Standardanwendung) betrachten. </para
+></listitem>
+
+<listitem
+><para
+>Die Anmerkungsansicht einer beliebigen Version der markierten Datei betrachten. </para
+></listitem>
+
+<listitem
+><para
+>Unterschiede zwischen beliebigen Versionen der markierten Datei betrachten. </para
+></listitem>
+
+<listitem
+><para
+>Patches mit den Unterschieden zwischen beliebigen Versionen der markierten Datei erstellen. </para
+></listitem>
+
+</itemizedlist>
+
+<figure float="1">
+<title
+>Ein Bildschirmfoto des Dialogs <quote
+>Protokoll durchsuchen</quote
+></title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="logtree.png"/></imageobject>
+<textobject
+><phrase
+>Ein Bildschirmfoto des Dialogs <quote
+>Protokoll durchsuchen</quote
+></phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Sie können wählen, ob die Versionsgeschichte wie vom Befehl <command
+>cvs log</command
+> (<guilabel
+>CVS-Ausgabe</guilabel
+>), als <guilabel
+>Baum</guilabel
+> oder als <guilabel
+>Liste</guilabel
+> dargestellt werden soll. Dies ist natürlich Geschmacksache und hängt davon ab, an welchen Informationen Sie interessiert sind. Die Baumdarstellung zeigt deutlich, welche Änderungen in den verschiedenen Zweigen von welchem Autor durchgeführt wurden. Die zugehörigen Protokolleinträge werden als Kurzinfo angezeigt. Die Listenansicht ist schon aufgrund der Darstellung weniger für eine Ansicht der Zweige geeignet, hat aber den Vorteil, dass Sie sich auf andere relevante Informationen konzentriert und dabei weniger Platz auf dem Bildschirm einnimmt. Hierunter fallen insbesondere der Zeitpunkt jeder Änderung und der Anfang der Protokolleinträge. Die &CVS;-Ausgabe ist vollständig, aber lang und schwer zu lesen. Um dies zu erleichtern, können Sie die &CVS;-Ausgabe durchsuchen, indem Sie auch den Knopf <guibutton
+>Suchen ...</guibutton
+> drücken. </para>
+
+<para
+>Wollen Sie mehr Informationen über eine bestimmt Dateiversion, erhalten Sie diese sowohl in der Baum- als auch in der Listenansicht durch Anklicken des betreffenden Eintrags. In den Feldern in der Mitte des Dialogs werden dann sämtliche Informationen angezeigt, die der Befehl <command
+>cvs log</command
+> ergibt. Sie können auch zwei Versionen gleichzeitig markieren. Diese werden dann mit <quote
+>A</quote
+> und <quote
+>B</quote
+> bezeichnet. Version <quote
+>A</quote
+> können Sie durch Anklicken mit der linken Maustaste markieren, Version <quote
+>B</quote
+> markieren Sie durch Anklicken mit der mittleren Maustaste. In der Listenansicht können Sie sich auch mit Hilfe der Pfeiltasten bewegen. Um hier die Versionen <quote
+>A</quote
+> und <quote
+>B</quote
+> zu markieren, können Sie die Kurztasten <keycombo
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+> bzw. <keycombo
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> verwenden. In der <guilabel
+>CVS-Ausgabe</guilabel
+>-Ansicht können Sie die Knöpfe <guilabel
+>Als Revision A auswählen</guilabel
+> und <guilabel
+>Als Revision B auswählen</guilabel
+> verwenden, um die Revisionen zu markieren. </para>
+
+<para
+>Wenn Sie den Knopf <guibutton
+>Anmerkung</guibutton
+> drücken, wird ein Dialog angezeigt, der den Text der Datei in der Version <quote
+>A</quote
+> anzeigt. Vor jeder Zeile wird die Information ausgegeben, wer sie zuletzt bearbeitet hat und in welcher Version der Datei dies geschehen ist. Mehr Informationen über das Betrachten von Anmerkungen zu Versionen erhalten Sie unter <xref linkend="annotate"/>. </para>
+
+<para
+>Drücken Sie den Knopf <guibutton
+>Diff</guibutton
+>, wird der Befehl <command
+>cvs diff</command
+> abgesetzt und ein Dialog erscheint, in dem die Unterschiede zwischen den beiden markierten Versionen angezeigt werden. Wenn Sie Revision <quote
+>A</quote
+> aber nicht Revision <quote
+>B</quote
+> markieren, wird &cervisia; die Unterschiede zwischen der als Revision <quote
+>A</quote
+> markierten Dateiversion und der Version in Ihrem Arbeitsordner anzeigen. Dies erlaubt Ihnen den Vergleich zwischen Ihrer Version einer Datei mit jeder Version, die im &CVS;-Archiv verfügbar ist. Um die Änderungen deutlicher hervorzuheben, sind die Zeilen, die hinzugefügt, entfernt oder geändert wurden, in unterschiedlichen Farben dargestellt. Mehr Informationen über das betrachten von Unterschieden erhalten Sie unter <xref linkend="diff"/>. </para>
+
+<para
+>Wenn Sie den Knopf <guibutton
+>Patch erstellen ...</guibutton
+> drücken, erscheint ein Dialog zum Einstellen des Formats, in dem die Änderungen zwischen den beiden markierten Revisionen angezeigt werden. Wenn Sie eine Revision <quote
+>A</quote
+>, aber keine Revision <quote
+>B</quote
+> angeben, erstellt &cervisia; einen Patch zwischen der Dateiversion, die als Revision <quote
+>A</quote
+> markiert ist und der Dateiversion in Ihrem Arbeitsordner. Nachdem Sie das Format für den Patch eingestellt haben, drücken Sie auf <guibutton
+>OK</guibutton
+>. Der Befehl <command
+>cvs diff</command
+> wird abgesetzt um die Datei mit den Unterschieden zu erstellen. Es öffnet sich der Dialog <guilabel
+>Speichern unter</guilabel
+>, in dem Sie den Name und den Ort für die von &cervisia; erstellte Datei festlegen können um sie zu speichern. Mehr zum Thema Erstellen von Patches und den Format-Einstellungen finden Sie unter <xref linkend="creatingpatches"/>. </para>
+
+<para
+>Wenn Sie auf den Knopf <guibutton
+>Anzeigen</guibutton
+> drücken, bezieht &cervisia; die als <quote
+>A</quote
+> markierte Revision und zeigt sie mit der diesem Dateityp zugeordneten Standardanwendung an. </para>
+
+<para
+>Drücken Sie den <guibutton
+>Schließen</guibutton
+>-Knopf um den Dialog zu verlassen und zur Hauptansicht zurück zu kehren. </para>
+
+
+<para
+>Um das Protokoll für den Dialog <guilabel
+>CVS-Protokoll</guilabel
+> zu erstellen, setzt &cervisia; den folgenden Befehl ab: </para>
+
+
+<para>
+<screen
+><command
+>cvs log <replaceable
+>Dateinamen</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+<sect1 id="browsinghistory">
+<title
+>Die Versionsgeschichte durchsuchen</title>
+
+<para
+>Ist im verwendeten &CVS;-Archiv die Protokollierung eingeschaltet, kann &cervisia; Ihnen eine Historie bestimmter Ereignisse wie Auslesen, Einspielen, Aktualisierungen und Freigaben darstellen. Wählen Sie den Eintrag <guimenuitem
+>Versionsgeschichte</guimenuitem
+> aus dem Menü <guimenu
+>Ansicht</guimenu
+>, und &cervisia; setzt den folgenden Befehl ab: </para>
+
+<para>
+<screen
+><command
+>cvs history -e -a</command
+></screen>
+</para>
+
+<note
+><para
+>Hierdurch wird die komplette Protokolldatei vom Server geholt, &ie; eine Liste der Vorgänge aller Benutzer und Module. Hierbei kann es sich um eine gewaltige Datenmenge handeln. </para
+></note>
+
+<para
+>Sie können nun die Liste der Ereignisse nach Datum sortiert sehen. In der zweiten Spalte wird die Art des Ereignisses angezeigt: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Auslesen - Der in der Spalte ‚Autor‘ aufgeführte Benutzer hat ein Modul aus dem &CVS;-Archiv ausgelesen. </para
+></listitem>
+
+<listitem
+><para
+>Tag - Ein Benutzer hat den Befehl <command
+>cvs rtag</command
+> verwendet. Beachten Sie, dass die Verwendung des Befehls <command
+>cvs tag</command
+> (das Sie in &cervisia; über den Menüpunkt <menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Tag setzen/Verzweigen ...</guimenuitem
+></menuchoice
+> ausführen können) nicht in der Historien-Datenbank gespeichert wird. Dieses Verhalten hat historische Gründe, die Sie in der &CVS; <acronym
+>FAQ</acronym
+> nachlesen können. </para
+></listitem>
+
+<listitem
+><para
+>Freigabe - Ein Benutzer hat ein Modul freigegeben. Dieser Befehl wird eigentlich selten benutzt und ist von geringem Nutzen. </para
+></listitem>
+
+<listitem
+><para
+>Aktualisiert, Gelöscht - Ein Benutzer hat eine Datei aktualisiert, die im &CVS;-Archiv bereits gelöscht war. Das hat zur Folge, dass seine Arbeitskopie ebenfalls gelöscht wurde. </para
+></listitem>
+
+<listitem
+><para
+>Aktualisiert, Kopiert - Ein Benutzer hat eine Datei aktualisiert. Eine neue Version wurde in den Arbeitsordner kopiert. </para
+></listitem>
+
+<listitem
+><para
+>Aktualisiert, Zusammengeführt - Ein Benutzer hat eine Datei aktualisiert. Die Änderungen im &CVS;-Archiv wurden in seine Arbeitskopie eingefügt. </para
+></listitem>
+
+<listitem
+><para
+>Aktualisiert, Konflikt - Ein Benutzer hat eine Datei aktualisiert. Dabei wurde ein Konflikt mit den von ihm durchgeführten Änderungen festgestellt. </para
+></listitem>
+
+<listitem
+><para
+>Einspielen, Geändert - Ein Benutzer hat eine geänderte Datei eingespielt. </para
+></listitem>
+
+<listitem
+><para
+>Einspielen, Hinzufügen - Ein Benutzer hat eine Datei zum &CVS;-Archiv hinzugefügt und diese eingespielt. </para
+></listitem>
+
+<listitem
+><para
+>Einspielen, Entfernt - Ein Benutzer hat eine Datei aus dem &CVS;-Archiv entfernt und diese Änderung eingespielt. </para
+></listitem>
+
+</itemizedlist>
+
+<figure id="screenshot-history" float="1">
+<title
+>Ein Bildschirmfoto Dialogs <quote
+>CVS-Versionsgeschichte</quote
+></title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="history.png"/></imageobject>
+<textobject
+><phrase
+>Ein Bildschirmfoto Dialogs <quote
+>CVS-Versionsgeschichte</quote
+></phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Sie können die Liste nach anderen Kriterien sortieren, indem Sie die entsprechende Spaltenüberschrift anklicken. Sie können die Sie interessierenden Einträge aus der Historie über verschiedene Filter darstellen, die über Ankreuzfelder auswählbar sind. </para>
+
+<itemizedlist>
+<listitem
+><para
+>Einspiel-Ereignisse anzeigen - Anzeige der Einspielvorgänge</para
+></listitem>
+<listitem
+><para
+>Auslese-Ereignisse anzeigen - Auslese</para
+></listitem>
+<listitem
+><para
+>Tag-Ereignisse anzeigen - Das Setzen von Tags anzeigen</para
+></listitem>
+<listitem
+><para
+>Andere Ereignisse anzeigen - Vorgänge anzeigen, die nicht durch die obigen abgedeckt werden.</para
+></listitem>
+<listitem
+><para
+>Nur dieser Benutzer - Zeigt nur Ereignisse an, die von diesem Benutzer verursacht wurden</para
+></listitem>
+<listitem
+><para
+>Nur die zutreffenden Dateinamen - Filtert Dateinamen mittels regulärer Ausdrücke</para
+></listitem>
+<listitem
+><para
+>Nur die zutreffenden Ordnernamen - Filtert Ordnernamen mittels regulärer Ausdrücke</para
+></listitem>
+</itemizedlist>
+
+<para
+>Folgende Sonderzeichen werden bei regulären Ausdrücken ausgewertet: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+><literal
+>x*</literal
+> trifft auf eine beliebige Anzahl des Zeichens <literal
+>x</literal
+> zu. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>x+</literal
+> trifft auf das Vorkommen eines oder mehrere Zeichen <literal
+>x</literal
+> zu. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>x?</literal
+> trifft auf kein oder einmaliges Vorkommen des Zeichens  <literal
+>x</literal
+>.zu. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>^</literal
+> Vorkommen am Anfang einer Zeichenfolge. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>$</literal
+> Vorkommen am Ende einer Zeichenfolge. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>[a-cx-z]</literal
+> Vorkommen einer Gruppe von Zeichen, &eg; in diesem Fall einer Zeichengruppe bestehend aus a,b,c,x,y,z. </para
+></listitem>
+
+</itemizedlist>
+
+</sect1>
+
+
+</chapter>
+
+<chapter id="advancedusage">
+<title
+>Weiterführende Funktionen</title>
+
+<sect1 id="updatingto">
+<title
+>Zum Tag, Zweig oder Datum aktualisieren</title>
+
+<para
+>Zweige eines Moduls sind parallele Versionen des Moduls. Eine gutes Beispiel für die Verwendung ist das Release eines Software-Projekts. Nach einem Haupt-Release gibt es Fehler, die korrigiert werden müssen, aber die Entwickler wollen auch neue Features hinzufügen. Es ist schwer, beides gleichzeitig zu tun, da neue Features normalerweise neue Fehler mit sich bringen, was es schwer machen, die alten Fehler zu finden. Um dieses Problem zu umgehen, können Sie in &CVS; eine parallele Version erstellen, die wir hier <quote
+>stabiler Release-Zweig</quote
+> nennen, in den Sie nur Fehlerbereinigungen einpflegen. Der Hauptzweig (HEAD) bleibt offen für das Hinzufügen neuer Features. </para>
+
+<para
+>Mit Tags markieren Sie Versionen eines Projekts. &CVS; markiert eine Version jeder Datei mit dem Tag, sodass Sie beim Auslesen eines Tags immer die gleichen Versionen der Dateien bekommen. Somit ist der Unterschied zum Zweig, dass ein Tag nicht dynamisch ist: Sie können in einem Tag nicht entwickeln. Tags sind sinnvoll um Releases, große Änderungen im Code &etc; zu markieren. </para>
+
+<para
+>Wenn Sie in einem Software-Projekt entwickeln, oder dessen Entwicklung verfolgen, arbeiten Sie nicht unbedingt die ganze Zeit im Hauptzweig. Nach einem Release könnten Sie in dem Release-Zweig bleiben wollen, um ein stabiles System zu haben, Fehler zu korrigieren, die Quellen zu übersetzen &etc; Um das zu tun, müssen Sie auf den Release-Zweig aktualisieren. Alle Ihre Dateien werden auf die letzte Version des Release-Zweiges aktualisiert. Nach der Aktualisierung werden auch alle Ihre Commits in den Release-Zweig eingespielt. </para>
+
+<para
+>Auch wenn Sie einen Fehler nachvollziehen möchten, der in einer älteren Version gemeldet wurde, können Sie mit &CVS; die Version des Releases beziehen, indem Sie auf dieses Tag aktualisieren. Zudem können Sie auf eine beliebige ältere Version aktualisieren, indem Sie das Datum angeben. Das ist nützlich, wenn es zwischen zwei Releases einen Fehler gab, von dem Sie ungefähr wissen, wann er auftrat. Wenn Sie auf ein Datum oder ein Tag aktualisieren, werden Ihre Dateien sein wie die an dem bestimmten Datum oder wie die Versionen, die mit dem Tag markiert sind. </para>
+
+<warning
+><para
+>Bevor Sie auf einen anderen Zweig oder ein Tag aktualisieren, versichern Sie sich, dass Sie alle Änderungen, die für den aktuellen Zweig gedacht sind, eingespielt haben. Sollten die Änderungen noch nicht bereit zum Einspielen sein, aber auch nicht verworfen werden, aktualisieren Sie nicht auf den neuen Zweig, da Sie sonst Ihre Änderungen verlieren. Alternativ können Sie in einen anderen Ordner <link linkend="checkingout"
+>auschecken</link
+> und parallel an zwei Versionen arbeiten. </para
+></warning>
+
+<figure id="screenshot-updatetag" float="1">
+<title
+>Ein Bildschirmfoto des Dialogs <quote
+>CVS aktualisieren</quote
+></title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="updatetag.png"/></imageobject>
+<textobject
+><phrase
+>Ein Bildschirmfoto des Dialogs <quote
+>CVS aktualisieren</quote
+></phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<variablelist>
+<varlistentry>
+<term
+><guilabel
+>Auf Zweig aktualisieren</guilabel
+></term>
+<listitem
+><para
+>Wählen Sie dies, um auf einen Zweig zu aktualisieren. Geben Sie den Namen des Zweigs in das Kombinationsfeld ein (oder drücken Sie den Knopf <guilabel
+>Liste holen</guilabel
+> um eine Liste der Zweige vom &CVS;-Server zu beziehen, und wählen Sie den gewünschten Zweig aus dem Auswahlfeld). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Auf Tag aktualisieren</guilabel
+></term>
+<listitem
+><para
+>Wählen Sie dies, um auf ein Tag zu aktualisieren. Geben Sie den Namen des Tags in das Kombinationsfeld ein (oder drücken Sie den Knopf <guilabel
+>Liste holen</guilabel
+> um eine Liste der Tags vom &CVS;-Server zu beziehen, und wählen Sie das gewünschte Tag aus dem Auswahlfeld). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Auf Datum aktualisieren</guilabel
+></term>
+<listitem
+><para
+>Wählen Sie dies, um auf ein Datum zu aktualisieren. In dem zugehörigen Eingabefeld können Sie ein Datum in verschiedenen Formaten eingeben. Ein mögliches Format ist <literal
+>yyyy-mm-dd</literal
+>, wobei <literal
+>yyyy</literal
+> das Jahr ist, <literal
+>mm</literal
+> der Monat (als Zahlenwert) und <literal
+>dd</literal
+> der Tag. Alternativen sind einige englische Begriffe wie <literal
+>yesterday</literal
+> oder <literal
+>2 weeks ago</literal
+>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<note
+><para
+>Beide oben erwähnten Möglichkeiten bewirken, dass ein Tag oder Datum den Status <quote
+>sticky</quote
+> erhält, &ie; Sie können keine weiteren Änderungen für diese Dateien einspielen (es sei denn, es handelt sich um ein Verzweigungs-Tag). Um wieder zum Hauptzweig zurückzukehren, verwenden Sie den Menüeintrag <menuchoice
+><guimenu
+>Erweitert</guimenu
+> <guimenuitem
+>Auf HEAD aktualisieren</guimenuitem
+></menuchoice
+>. </para
+></note>
+
+<para
+>Der Befehl zum Aktualisieren eines Zweiges oder eines Tags lautet: <screen
+><command
+>cvs update -r <replaceable
+>tag</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Der Befehl, der zur Aktualisierung auf ein Datum abgesetzt wird, lautet: <screen
+><command
+>cvs update -D <replaceable
+>Datum</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Der Befehl, der zur Aktualisierung auf den Hauptzweig (HEAD) abgesetzt wird, lautet: <screen
+><command
+>cvs update <option
+>-A</option
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="taggingbranching">
+<title
+>Taggen und Verzweigen</title>
+
+<para
+>Dieses Handbuch behandelt nur die technischen Aspekte von Taggen und Verzweigen. Wenn Sie nur ein <emphasis
+>Benutzer</emphasis
+> und nicht der Administrator des &CVS;-Archivs sind, werden Sie mit dieser Problematik wahrscheinlich gar nicht in Berührung kommen. Sind Sie allerdings der Administrator, sollten Sie sich, zunächst mit den nicht-technischen Problemen beschäftigen, die mit dem Verzweigen einhergehen, damit Sie sich einen Eindruck darüber verschaffen können, wie zeitaufwendig und fehleranfällig die Verwaltung mehrere Projektzweige sein kann. Im Anhang finden Sie einige Verweise auf Quellen zu diesem Thema. </para>
+
+<para
+>Das Taggen ist ein Vorgang, den Sie normalerweise durchführen, wenn Sie eine Version Ihrer Software freigeben. Durch das Taggen der Quelltexte können Sie später jederzeit zu genau diesem Zustand der Auslieferung zurückkehren. Tags erhalten gewöhnlich einen Namen bestehend aus dem Namen des Projekts und einer Versionsnummer. &cervisia; 1.0 ist beispielsweise unter dem Tag <literal
+>CERVISIA_1_0</literal
+> verfügbar. &cervisia; erzwingt die strikten Regeln von &CVS; betreffend der Namensgebung von Tags. Ein Tag muss mit einem Buchstaben beginnen und darf Buchstaben, Ziffern, Binde- und Unterstriche enthalten. </para>
+
+<para
+>Normalerweise möchten Sie das ganze Projekt taggen (wobei &CVS; natürlich auch das Taggen von Teilen des Projektes unterstützt). Dazu markieren Sie den Hauptordner des Projektes und wählen <menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Tag setzen/verzweigen</guimenuitem
+></menuchoice
+>. Geben Sie nun den Namen des Tags ein und drücken Sie <keycap
+>Eingabe</keycap
+>. Fertig. </para>
+
+<para
+>Das Anlegen einer Verzweigung ist nicht wesentlich schwerer. Im Tag-Dialog markieren Sie das Ankreuzfeld <guibutton
+>Verzweigung mit diesem Tag anlegen</guibutton
+>. Genauso gut können Sie ein existierendes Tag löschen. Wählen Sie <menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Tag löschen</guimenuitem
+></menuchoice
+> in der Hauptansicht. </para>
+
+<para
+>Ein weiterer Aspekt des Verzweigens ist die Zusammenführung von Änderungen aus einem Zweig in den aktuellen Zweig. Hierzu rufen Sie <menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Zusammenführen ...</guimenuitem
+></menuchoice
+> auf. Der erscheinende Dialog bietet Ihnen zwei Optionen: </para>
+
+<para
+>In dem einen Fall möchten Sie alle Änderungen, die sie in einem Zweig durchgeführt haben, in den aktuellen Zweig einpflegen. In diesem Fall markieren Sie das Ankreuzfeld <guibutton
+>Aus Zweig zusammenführen</guibutton
+> und geben den Zweig an, von dem Sie die Änderungen einpflegen wollen. &cervisia; führt daraufhin den folgende Befehl aus: </para>
+
+<para>
+<screen
+><command
+>cvs update <option
+>-j</option
+> <replaceable
+>Verzweigungs-Tag</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Die andere Möglichkeit besteht darin, dass Sie nur die Änderungen zusammenführen möchten, die zwischen zwei Tags in einem Zweig durchgeführt wurden. Das geschieht normalerweise, wenn sie mehrmals aus demselben Zweig in den HEAD-Zweig einpflegen wollen. In diesem Fall markieren Sie das Ankreuzfeld <guibutton
+>Änderungen zusammenführen</guibutton
+> und geben die beiden Tags in der richtigen Reihenfolge ein. Hierauf wird folgendes ausgeführt: </para>
+
+<para>
+<screen
+><command
+>cvs update <option
+>-j</option
+> <replaceable
+>Verzweigungs-Tag1</replaceable
+> <option
+>-j</option
+> <replaceable
+>Verzweigungs-Tag2</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="watches">
+<title
+>Überwachen</title>
+
+<para
+>Eine Überwachung ist die übliche Bezeichnung für die Fähigkeit von &CVS; die Benutzer zu benachrichtigen, wenn eine Datei geändert wurde oder ein anderer Entwickler mit deren Bearbeitung begonnen hat. Die Verwendung von Überwachungen setzt voraus, dass die Datei <filename
+><envar
+>$CVSROOT</envar
+>/CVSROOT/notify</filename
+> entsprechend eingerichtet wurde. Dieses Thema wird hier nicht weiter behandelt. Wenn Sie weitergehende Informationen benötigen, finden Sie diese in den im Anhang erwähnten Büchern. </para>
+
+<para
+>&cervisia;s Unterstützung für Überwachungen umfasst sechs Menüpunkte. </para>
+
+<para
+>Möchten Sie für eine oder mehrere Dateien eine Überwachung setzen, verwenden Sie den Menüeintrag <menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Status „Überwachen“ setzen ...</guimenuitem
+></menuchoice
+>. Der erscheinende Dialog bietet Ihnen die Möglichkeit über alle von &CVS; unterstützten Vorgänge benachrichtigt zu werden. Möchten Sie beispielsweise eine Benachrichtigung erhalten, wenn eine Datei eingespielt wird, markieren Sie die Ankreuzfelder <guibutton
+>Nur</guibutton
+> und <guibutton
+>Einspielungen</guibutton
+>. Möchten Sie über alle Vorgänge benachrichtigt werden, markieren Sie das Ankreuzfeld <guibutton
+>Alle</guibutton
+>. Bei Abschließen des Dialogs wird folgende Befehlszeile ausgeführt: </para>
+
+<para>
+<screen
+><command
+>cvs watch add -a commit <replaceable
+>Dateinamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>oder eine ähnlichen Befehlszeile, abhängig von den im Dialog ausgewählten Ereignissen. </para>
+
+<para
+>Wenn Sie an einigen Dateien nicht mehr interessiert sind, können Sie die Überwachung aufheben. Hierzu wählen Sie im Menü <menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Status „Überwachen“ entfernen ...</guimenuitem
+></menuchoice
+>. In diesem Dialog werden dieselben Optionen angeboten wie beim Setzen der Überwachung. Schließen Sie diesen Dialog ab, setzt &cervisia; folgenden Befehl ab: </para>
+
+<para>
+<screen
+><command
+>cvs watch remove <replaceable
+>Dateinamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>gegebenenfalls mit der Option <option
+>-a</option
+> für das ausgewählte Ereignis. </para>
+
+<para
+>Darüberhinaus können Sie eine Liste von Benutzern anfordern, die bestimmte Dateien überwachen. Wählen Sie im Menü <menuchoice
+> <guimenu
+>Erweitert</guimenu
+> <guimenuitem
+>Überwacher anzeigen</guimenuitem
+></menuchoice
+>. Hierdurch wird folgender Befehl ausgeführt: </para>
+
+<para>
+<screen
+><command
+>cvs watchers <replaceable
+>Dateinamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Gewöhnlich wird &CVS; dergestalt eingesetzt, dass jeder Entwickler in seinem lokalen Arbeitsordner arbeitet. Möchte er eine Datei ändern, öffnet er sie in seinem Editor und bearbeitet sie. Erst das Einspielen der geänderten Datei bewirkt, dass andere Entwickler bemerken, dass er an dieser Datei arbeitet. </para>
+
+<para
+>Manche Entwicklergruppen bevorzugen eine andere Vorgehensweise. Sie möchten informiert werden, wenn jemand eine Datei bearbeitet, und zwar <emphasis
+>sobald</emphasis
+> er damit beginnt. Dies erreicht man durch die Anwendung weiterer &CVS;-Befehle. Möchte Sie eine Datei bearbeiten, wählen Sie sie in &cervisia; aus und rufen Sie den Menüpunkt <menuchoice
+><guimenu
+>Erweitert</guimenu
+> <guimenuitem
+>Datei bearbeiten</guimenuitem
+></menuchoice
+> auf. Hierdurch wird der folgende Befehl ausgeführt: </para>
+
+<para>
+<screen
+><command
+>cvs edit <replaceable
+>Dateinamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Hierdurch erhalten alle Benutzer eine Mitteilung, die für diese Datei die Überwachung des Ereignisses <literal
+>Bearbeiten</literal
+> gesetzt haben. Gleichzeitig werden Sie als <emphasis
+>Bearbeiter</emphasis
+> der Datei registriert. Eine Liste aller Bearbeiter einer Datei erhalten Sie über <menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Bearbeiter anzeigen</guimenuitem
+></menuchoice
+>. Dies entspricht dem Befehl: </para>
+
+<para>
+<screen
+><command
+>cvs editors <replaceable
+>Dateinamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Eine Bearbeitungs-Sitzung wird automatisch beim Einspielen der betreffenden Datei beendet. Zu diesem Zeitpunkt wird an alle, die eine entsprechende Überwachung für diese Datei gesetzt haben, eine <literal
+>unedit</literal
+>-Benachrichtigung verschickt. Natürlich kann es auch vorkommen, dass Sie eine Datei nicht einspielen möchten und die Bearbeitungs-Sitzung abbrechen, um auf die zuletzt eingespielte Version der Datei zurückzugehen. Hierzu wählen Sie im Menü <menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Status „in Bearbeitung“ zurücknehmen</guimenuitem
+></menuchoice
+>. Beachten Sie hierbei, dass &cervisia; diesen Befehl ohne Rückfrage ausführt. Das bedeutet im Klartext, dass sämtliche Änderungen, die Sie seit dem letzten Aufruf von <menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Datei bearbeiten</guimenuitem
+></menuchoice
+> durchgeführt haben, verloren gehen. Genau gesagt führt &cervisia; folgenden Befehl aus: </para>
+
+<para>
+<screen
+><command
+>echo y | cvs unedit <replaceable
+>Dateinamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Bislang haben wir nur den Fall besprochen, bei dem die Entwickler die Bearbeitungs-Befehle freiwillig benutzen. Darüber hinaus unterstützt &CVS; ein Entwicklungsmodell, bei dem der Einsatz dieser Befehle <emphasis
+>erzwungen</emphasis
+> wird. Der hierfür verantwortliche Befehl lautet <command
+>cvs watch on</command
+>. Er soll hier nicht weiter erläutert werden, da er normalerweise vom Administrator des &CVS;-Archivs verwendet wird. Für den Entwickler ist hierbei nur wichtig, dass bei diesem erzwungenen Bearbeitungs-Modus, die Arbeitskopien der Dateien beim Auslesen aus dem &CVS;-Archiv den Status <emphasis
+><quote
+>nur lesen</quote
+></emphasis
+> erhalten. Das bedeutet, dass Sie eine Datei normalerweise nicht ändern können (es sei denn, Sie verwenden Tricks wie den Befehl <command
+>chmod</command
+>). Erst wenn Sie <menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Dateien bearbeiten</guimenuitem
+></menuchoice
+> auswählen, wird die Datei beschreibbar. Sobald Sie die Datei einspielen oder im Menü <menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Status „in Bearbeitung“ zurücknehmen</guimenuitem
+></menuchoice
+> auswählen, wird die Datei erneut <quote
+>nur lesbar</quote
+>. </para>
+
+<para
+>&cervisia;s Editor-Schnittstelle unterstützt Sie bei Projekten, die Überwachungen erzwingen, auch auf andere Weise. Wenn Sie einen Editor durch Doppelklick auf eine Datei mit dem Status <quote
+>nur lesen</quote
+> oder durch Auswahl von <menuchoice
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Bearbeiten</guimenuitem
+> </menuchoice
+> öffnen, wären Sie später nicht in der Lage, Ihre Änderungen abzuspeichern. Das hat natürlich seine Gründe. Immer dann, wenn Sie eine Datei ändern wollen, sollten Sie zuvor den Befehl <command
+>cvs edit</command
+> ausführen, sodass alle Anwender, die diese Datei überwachen, darüber benachrichtigt werden, dass Sie diese Datei bearbeiten. </para>
+
+<para
+>In einem solchen Fall ist es ratsam, die Option <menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Bei Bedarf automatisch Status „in Bearbeitung“ setzen</guimenuitem
+></menuchoice
+> zu markieren. Jetzt führt &cervisia;, sobald Sie eine Datei mit einem Doppelklick öffnen, erst den Befehl <command
+>cvs edit</command
+> aus, bevor der Editor mit der Datei aufgerufen wird. Sie können diese Datei dann wie sonst auch bearbeiten. Wenn Sie die Änderungen durchgeführt haben, spielen Sie die Datei ein, und die eingespielte Datei erhält wieder den Status <quote
+>nur lesen</quote
+>. </para>
+
+</sect1>
+
+
+<sect1 id="locking">
+<title
+>Sperren</title>
+
+<para
+>Das Entwicklungsmodell, das bei der Verwendung von &CVS; benutzt wird nennt sich <emphasis
+>unreserved checkouts</emphasis
+> (was soviel bedeutet wie <quote
+>uneingeschränktes Auslesen</quote
+>). Jeder Entwickler hat seinen eigenen Arbeitsordner, in dem er die Dateien nach Belieben bearbeiten kann. Verschiedene Entwickler können synchron auf den Dateien arbeiten, sofern die Überwachungsfunktionen wie <command
+>cvs edit</command
+> verwendet werden. Änderungen, die von einem anderen Entwickler durchgeführt wurden, werden beim nächsten Aktualisieren des Arbeitsordners mit den lokalen Änderungen zusammengeführt. </para>
+
+<para
+>Andere Versionskontrollsysteme wie <acronym
+>RCS</acronym
+> und <application
+>SourceSafe</application
+> verwenden ein hiervon abweichendes Modell. Möchte ein Entwickler eine Datei bearbeiten, muss er diese <emphasis
+>sperren</emphasis
+>. Eine Datei kann zur selben Zeit nur von einem Entwickler gesperrt sein. Ist die Änderung der Datei abgeschlossen, wird die Sperrung aufgehoben. Bei diesem Modell können niemals Konflikte auftreten. Andererseits können auch nie zwei Entwickler gleichzeitig an derselben Datei arbeiten, selbst dann nicht, wenn Ihre Änderungen sich nicht beeinflussen. Das kann sich bei der Entwicklung als Flaschenhals erweisen. Wir wollen hier nicht die organisatorischen Vorteile beider Modelle besprechen. Nichtsdestotrotz soll aber erwähnt werden, dass, auch wenn das Sperren von Dateien in gewisser Weise unterstützt wird, diese Vorgehensweise nicht den bevorzugten Weg beim Einsatz von &CVS; darstellt. Sie sollten diese Funktionalität nur einsetzen, wenn Sie sich sicher sind, dass der Projektleiter dies erlaubt. </para>
+
+<para
+>Mit &cervisia; können Sie Dateien wie folgt sperren. Wählen Sie die gewünschte Datei aus. Der Menüpunkt <menuchoice
+><guimenu
+>Erweitert</guimenu
+> <guimenuitem
+>Datei sperren</guimenuitem
+></menuchoice
+> führt den folgenden Befehl aus: </para>
+
+<para>
+<screen
+><command
+>cvs admin -l <replaceable
+>Dateinamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Den umgekehrten Effekt erreicht man über <menuchoice
+><guimenu
+>Erweitert</guimenu
+> <guimenuitem
+>Dateien freigeben</guimenuitem
+></menuchoice
+>. Hierbei wird folgender Befehl ausgeführt:</para>
+
+<para>
+<screen
+><command
+>cvs admin -u <replaceable
+>Dateinamen</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="customization">
+<title
+>Einrichten von &cervisia;</title>
+
+<para
+>Sie können &cervisia; für Ihre persönlichen Bedürfnisse einrichten. Einige der Einstellungen, die Sie möglicherweise häufiger ändern möchten, sind direkt über das Menü <guimenu
+>Einrichtung</guimenu
+> erreichbar. </para>
+
+
+<sect1 id="customize-general">
+<title
+>Allgemein</title>
+
+<variablelist>
+
+<varlistentry id="customize-username">
+<term
+><guilabel
+>Benutzername für den Changelog-Editor:</guilabel
+></term>
+<listitem
+><para
+>Immer dann, wenn Sie den Menüpunkt <menuchoice
+><guimenu
+>Datei</guimenu
+> <guimenuitem
+>Changelog-Eintrag hinzufügen ...</guimenuitem
+></menuchoice
+> verwenden, wird ein neuer Changelog-Eintrag mit dem aktuellen Datum und Ihrem Benutzernamen angelegt. Es wird allgemein als guter Stil angesehen, wenn Sie in jedem Changelog-Eintrag Ihren vollen Namen und Ihre E-Mail-Adresse hinterlassen. &cervisia; fügt automatisch die hier eingegebenen Informationen ein. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-cvspath">
+<term
+><guilabel
+>Pfad zur CVS-Programmdatei oder 'cvs':</guilabel
+></term>
+<listitem
+><para
+>Hier können Sie den Namen (oder den Pfad) zum Befehlszeilenprogramm <command
+>cvs</command
+> eintragen. Als Voreinstellung wird von &cervisia; die ausführbare Datei aufgerufen, die in Ihrem <envar
+>$PATH</envar
+> gefunden wird. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="customize-diff">
+<title
+>Diff-Betrachter</title>
+
+<variablelist>
+
+<varlistentry id="customize-context">
+<term
+><guilabel
+>Anzahl Kontextzeilen im Diff-Dialog:</guilabel
+></term>
+<listitem
+><para
+>Für den Diff-Dialog verwendet &cervisia; beim Aufruf des Befehls <command
+>diff</command
+> die Option <option
+>-U</option
+>. Der Befehl <command
+>diff</command
+> zeigt hierdurch nur eine begrenzte Anzahl von Zeilen in direkter Nachbarschaft zu einer Änderung an (Kontextzeilen). An dieser Stelle können Sie das Argument zur Option <option
+>-U</option
+> einstellen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-diffopt">
+<term
+><guilabel
+>Weitere Optionen für „cvs diff“:</guilabel
+></term>
+<listitem
+><para
+>An dieser Stelle können Sie zusätzliche Optionen für den Befehl <command
+>diff</command
+> angeben. Ein beliebtes Beispiel ist die Option <option
+>-b</option
+>, bei deren Anwendung der Befehl <command
+>diff</command
+> Änderungen bei Whitespaces (also Leerzeichen, Tabulatoren &etc;) ignoriert. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-tabwidth">
+<term
+><guilabel
+>Tabulatorweite im Diff-Dialog:</guilabel
+></term>
+<listitem
+><para
+>Im Diff-Dialog werden Tabulatorzeichen in den Dateien oder in der Ausgabe des Befehls <command
+>diff</command
+> durch eine feste Anzahl Leerzeichen ersetzt. Als Voreinstellung wird ein Tabulatorzeichen durch 8 Leerzeichen ersetzt. Diese Voreinstellung können Sie hier an Ihre Bedürfnisse anpassen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-difffrontend">
+<term
+><guilabel
+>Externe Diff-Oberfläche:</guilabel
+></term>
+<listitem
+><para
+>Immer dann, wenn Sie eine der Funktionalitäten aufrufen, die den Diff-Dialog verwenden, ruft &cervisia; seine interne Diff-Oberfläche auf. Bevorzugen Sie eine andere Oberfläche, beispielsweise &kompare;, <application
+>TkDiff</application
+> oder <application
+>xxdiff</application
+>, können Sie diese hier angeben. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="customize-status">
+<title
+>Status</title>
+
+<variablelist>
+
+<varlistentry id="customize-startstatus-remote">
+<term
+><guilabel
+>Den Befehl Datei-&gt;Status beim Öffnen der Arbeitskopie eines entfernten Archivs automatisch ausführen.</guilabel
+></term>
+<listitem
+><para
+>Ist diese Einstellung markiert, setzt &cervisia; den Befehl <menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Status</guimenuitem
+></menuchoice
+> automatisch ab, wenn ein entfernter Arbeitsordner geöffnet wird. Die Ausführung dieses Befehls kann einige Zeit in Anspruch nehmen und setzt eine Verbindung zum entfernten &CVS;-Archiv voraus. Daher ist die Ausführung offline nicht möglich. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-startstatus-local">
+<term
+><guilabel
+>Den Befehl Datei-&gt;Status beim Öffnen der Arbeitskopie eines lokalen Archivs automatisch ausführen.</guilabel
+></term>
+<listitem
+><para
+>Ist diese Einstellung markiert, setzt &cervisia; den Befehl <menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Status</guimenuitem
+></menuchoice
+> automatisch ab, wenn ein lokaler Arbeitsordner geöffnet wird. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="customize-advanced">
+<title
+>Erweitert</title>
+
+<variablelist>
+
+<varlistentry id="customize-timeout">
+<term
+><guilabel
+>Verzögerung in Millisekunden, nach der eine Fortschrittsanzeige erscheint:</guilabel
+></term>
+<listitem
+><para
+>Nahezu alle &CVS;-Befehle, die in einem Arbeitsordner ausgeführt werden, das zu einem nichtlokalen Archiv gehört, benötigen eine Verbindung zum &CVS;-Server. Hierbei spielen Verzögerungen bei der Netzwerkverbindung oder die Auslastung des Servers eine Rolle. Aus diesem Grund öffnet &cervisia; für Befehle wie <menuchoice
+><guimenu
+>Ansicht</guimenu
+> <guimenuitem
+>Abweichungen vom Archiv ...</guimenuitem
+></menuchoice
+> einen Dialog, der anzeigt, dass die Ausführung des Befehls noch nicht beendet ist. Zudem erlaubt dieser Dialog den Abbruch des laufenden Befehls und dient der Anzeige von &CVS;-Fehlermeldungen. Da dieser Dialog möglicherweise störend wirkt, erscheint er erst nach einer gewissen Verzögerung, die in der Voreinstellung 4 Sekunden beträgt. Diesen Wert können Sie hier ändern. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-compression">
+<term
+><guilabel
+>Standard-Kompressionsstufe:</guilabel
+></term>
+<listitem
+><para
+>Der Befehl <command
+>cvs</command
+> komprimiert Dateien und Patches, sofern sie über ein Netzwerk übertragen werden. Mit dem Befehlszeilenschalter <option
+>-z</option
+> kann die Kompressions-Stufe eingestellt werden. Sie können die ausgewählte Kompressions-Stufe hier einstellen. Der hier eingestellte Wert ist nur eine Voreinstellung. Sie können die Kompressions-Stufe zusätzlich für jedes &CVS;-Archiv über <menuchoice
+><guimenu
+>Archiv</guimenu
+> <guimenuitem
+>Archive ...</guimenuitem
+></menuchoice
+> anpassen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-sshagent">
+<term
+><guilabel
+>Laufenden ssh-Agent-Prozess verwenden oder einen neuen starten</guilabel
+></term>
+<listitem
+><para
+>Markieren Sie dieses Kästchen, wenn Sie <link linkend="rsh"
+>ext-(&rsh;)-Archive</link
+> verwenden, die &ssh;-Shell um mit dem Archiv zu kommunizieren und <application
+>ssh-agent</application
+> um die Schlüssel zu verwalten. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+
+<sect1 id="customize-look">
+<title
+>Erscheinungsbild</title>
+
+<variablelist>
+
+<varlistentry id="customize-protocolfont">
+<term
+><guilabel
+>Schriftart für das Protokoll-Fenster ...</guilabel
+></term>
+<listitem
+><para
+>Drücken Sie diesen Knopf, um den Dialog <guilabel
+>Schriftart auswählen</guilabel
+> zu öffnen, der die Schriftart für das Protokoll-Fenster vorgibt in dem die Ausgaben des Befehls <command
+>cvs</command
+> angezeigt werden. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-annotatefont">
+<term
+><guilabel
+>Schriftart für die Anmerkungs-Ansicht ...</guilabel
+></term>
+<listitem
+><para
+>Drücken Sie diesen Knopf, um den Dialog <guilabel
+>Schriftart auswählen</guilabel
+> zu öffnen, der die Schriftart für die <link linkend="annotate"
+>Anmerkungs-Ansicht</link
+> vorgibt. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-difffont">
+<term
+><guilabel
+>Schriftart für Diff-Ansicht ...</guilabel
+></term>
+<listitem
+><para
+>Drücken Sie diesen Knopf, um den Dialog <guilabel
+>Schriftart auswählen</guilabel
+> zu öffnen, der die Schriftart für die <link linkend="diff"
+>Diff-Ansicht</link
+> vorgibt. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-colors">
+<term
+><guilabel
+>Farben</guilabel
+></term>
+<listitem
+><para
+>Drücken Sie die farbigen Knöpfe, um den Dialog <guilabel
+>Farbe wählen</guilabel
+> zu öffnen und die Farben für <guilabel
+>Konflikt</guilabel
+>, <guilabel
+>Lokale Änderung</guilabel
+> oder <guilabel
+>Änderung im Archiv</guilabel
+> in der Hauptansicht, und <guilabel
+>Diff-Änderung</guilabel
+>, <guilabel
+>Diff-Einfügung</guilabel
+> oder <guilabel
+>Diff-Entfernung</guilabel
+> in der Diff-Oberfläche von &cervisia; einzustellen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-splitter">
+<term
+><guilabel
+>Hauptfenster waagerecht aufteilen</guilabel
+></term>
+<listitem
+><para
+>&cervisia;s Hauptfenster ist normalerweise senkrecht aufgeteilt. Ein Bereich zeigt den Dateibaum, der andere die &CVS;-Ausgaben. Sie können die Fenster auch waagerecht aufteilen. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+</chapter>
+
+
+<chapter id="appendix">
+<title
+>Anhang</title>
+
+<sect1 id="ignoredfiles">
+<title
+>Ignorierte Dateien</title>
+
+<para
+>Im Dateibaum zeigt &cervisia; nicht alle Dateien an, die vorhanden sind. Dieses Verhalten ist analog zum Befehl <command
+>cvs</command
+> und verhindert eine Überfüllung der Anzeige mit Dateien, die für die Bearbeitung durch &cervisia; nicht von Interesse sind. &cervisia; versucht hierbei so gut wie möglich das Verhalten von <command
+>cvs</command
+> zu imitieren und zieht für das Ignorieren von Dateien folgende Quellen heran: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Eine statische Liste, die Einträge wie <literal role="extension"
+>*.o</literal
+> und <filename
+>core</filename
+> enthält. Weitere Einzelheiten hierzu finden Sie in der &CVS;-Dokumentation. </para
+></listitem>
+<listitem
+><para
+>Die Datei <filename
+><envar
+>$HOME</envar
+>/.cvsignore</filename
+>. </para
+></listitem>
+
+<listitem
+><para
+>Die Umgebungsvariable <envar
+>$CVSIGNORE</envar
+>. </para
+></listitem>
+<listitem
+><para
+>Die Datei <filename
+>.cvsignore</filename
+> im jeweiligen Ordner. </para
+></listitem>
+
+</itemizedlist>
+
+<para
+><command
+>cvs</command
+> selbst überprüft darüberhinaus noch die Einträge in <filename
+><envar
+>$CVSROOT</envar
+>/CVSROOT/cvsignore</filename
+>, aber dies ist eine Datei auf dem Server und &cervisia; muss auch ohne Verbindung zum Server starten. Arbeiten Sie in einer Gruppe, die die Verwendung einer Ignore-Liste auf dem Server bevorzugt, ist es möglicherweise ratsam einen Blick auf die dort eingetragenen Dateimuster zu werfen und diese in die Datei <filename
+>.cvsignore</filename
+> in Ihrem Persönlichen Ordner einzutragen. </para>
+
+</sect1>
+
+
+<sect1 id="information">
+<title
+>Weitere Informationen und Unterstützung bei Problemen</title>
+
+<itemizedlist>
+
+<listitem
+><para
+>&CVS; verfügt über eine umfassende Dokumentation in Form von Info-Seiten, die unter dem Namen <quote
+>The Cederqvist</quote
+> bekannt sind. Bei einer korrekten &CVS;-Installation können Sie über den Befehl <userinput
+>info:/cvs</userinput
+> in der Eingabezeile von &konqueror; darauf zugreifen. Alternativ können Sie in &cervisia; <menuchoice
+><guimenu
+>Hilfe</guimenu
+><guimenuitem
+>CVS-Handbuch</guimenuitem
+></menuchoice
+> aufrufen. Eine Online PDF-Version des <quote
+>Cederqvist</quote
+> ist im <ulink url="https://ftp.gnu.org/non-gnu/cvs/source/stable/1.11.21/cederqvist-1.11.21.pdf"
+>Internet</ulink
+> verfügbar. </para>
+
+<para
+>Da dieses Buch gemeinsam mit &CVS; weiterentwickelt wird, ist es normalerweise die aktuellste Referenz. Erwägen Sie trotzdem andere Dokumentationen zum Erlernen der Anwendung von &CVS; hinzuzuziehen. Insbesondere sind dies: </para
+></listitem>
+
+<listitem
+><para
+>Karl Fogel hat ein ausgezeichnetes Buch geschrieben: <ulink url="http://cvsbook.red-bean.com/index.html"
+>Open Source Development with &CVS;</ulink
+>. Über die Hälfte des Buches beschäftigt sich mit dem Entwicklungsprozess von Open Source Software. Die andere Hälfte ist eine technische Dokumentation von &CVS;. Dankenswerterweise wurde der technische Teil des Buches unter der GPL frei verfügbar gemacht, sodass Sie diesen als &HTML;-Version herunterladen können. Auf der oben erwähnten Webseite findet sich zudem eine Liste von Berichtigungen. </para
+></listitem>
+
+<listitem
+><para
+>Themen in Zusammenhang mit &CVS; werden auf einer besonderen <ulink url="http://mail.gnu.org/mailman/listinfo/info-cvs"
+>Mailingliste</ulink
+> behandelt. </para
+></listitem>
+
+<listitem
+><para
+>Es gibt eine USENET Gruppe - <literal
+>comp.software.config-mgmt</literal
+>, - die sich mit Konfigurations-Management im Allgemeinen befasst. &CVS; ist in dieser Gruppe nur ein Randbereich, sie dürfte aber zur Diskussion der Vorteile anderer Versionsverwaltungssysteme gegenüber &CVS; von Interesse sein. </para
+></listitem>
+
+</itemizedlist>
+
+</sect1>
+
+
+<sect1 id="commandreference">
+<title
+>Befehlsreferenz</title>
+
+<!-- File Menu -->
+<sect2 id="menufile">
+
+<title
+>Das Menü <guimenu
+>Datei</guimenu
+></title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datei</guimenu
+><guimenuitem
+>Arbeitsordner öffnen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Öffnet einen Arbeitsordner im Hauptfenster. Siehe <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Datei</guimenu
+><guisubmenu
+>Zuletzt geöffnete Arbeitsordner</guisubmenu
+> </menuchoice
+></term>
+<listitem
+><para
+>Öffnet einen der Arbeitsordner, mit denen zuletzt gearbeitet wurde. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Changelog-Eintrag hinzufügen ... </guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Öffnet den Changelog-Editor so, dass Sie einen neuen Eintrag mit dem aktuellen Datum hinzufügen können. Siehe <xref linkend="committingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datei</guimenu
+><guimenuitem
+>Aktualisieren</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ruft ‚cvs update‘ für die ausgewählten Dateien auf und ändert den Status und die Revisionsnummer entsprechend in der Dateiliste. Siehe <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F5</keycap
+></shortcut
+> <guimenu
+>Datei</guimenu
+><guimenuitem
+>Status</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ruft ‚cvs -n update‘ für die ausgewählten Dateien auf und ändert den Status und die Revisionsnummer entsprechend in der Dateiliste. Siehe <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Bearbeiten</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Öffnet die ausgewählte Datei in dem für diesen Dateityp eingestellten Standardeditor in &kde;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Konflikte auflösen ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Öffnet einen Dialog für die ausgewählte Datei, der die Auflösung von Konflikten ermöglichte, die beim Zusammenführen von Änderungen entstanden sind. Siehe <xref linkend="resolvingconflicts"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>#</keycap
+></shortcut
+> <guimenu
+>Datei</guimenu
+><guimenuitem
+>Einspielen ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ermöglicht das Einspielen der ausgewählten Dateien. Siehe <xref linkend="committingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Einfg</keycap
+></shortcut
+> <guimenu
+>File</guimenu
+><guimenuitem
+>Zum &CVS;-Archiv hinzufügen ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ermöglicht das Hinzufügen der ausgewählten Dateien zum Archiv. Siehe <xref linkend="addingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>File</guimenu
+><guimenuitem
+>Binärdatei hinzufügen ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ermöglicht das Hinzufügen der ausgewählten Dateien als Binärdateien. (<command
+>cvs add<option
+>-kb</option
+></command
+>). Siehe <xref linkend="addingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Entf</keycap
+></shortcut
+> <guimenu
+>Datei</guimenu
+><guimenuitem
+>Aus &CVS;-Archiv entfernen ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ermöglicht das Entfernen der ausgewählten Dateien aus dem &CVS;-Archiv. Siehe <xref linkend="removingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<!--TODO: add the revert action to the working with files chapter -->
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Zurücknehmen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Verwirft alle lokal durchgeführten Änderungen an den markierten Dateien und geht auf die im &CVS;-Archiv enthaltene Version zurück. (Option <option
+>-C</option
+> für <command
+>cvs update</command
+>). </para
+></listitem>
+</varlistentry>
+<!--FIXME Properties-->
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datei</guimenu
+><guimenuitem
+>Beenden</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Beendet &cervisia;. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- View Menu -->
+<sect2 id="menuview">
+
+<title
+>Das Menü Anzeigen</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Escape</keycap
+></shortcut
+> <guimenu
+>Anzeigen</guimenu
+><guimenuitem
+>Anhalten</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Bricht laufende Unterprozesse ab. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo
+>&Ctrl;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Anzeigen</guimenu
+><guimenuitem
+>Protokoll durchsuchen ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Zeigt die Protokollansicht der markierten Dateiversionen. Siehe <xref linkend="browsinglogs"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Anzeigen</guimenu
+> <guimenuitem
+>Anmerkung ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Zeigt eine mit Anmerkungen versehene Ansicht der ausgewählten Datei, &ie; es wird für jede Zeile der Autor und das Datum der letzten Änderung angezeigt. Siehe <xref linkend="annotate"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Anzeigen</guimenu
+><guimenuitem
+>Abweichungen vom &CVS;-Archiv ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Zeigt die Unterschiede zwischen der ausgewählten Datei im Arbeitsordner und der Revision, die beim letzten Aktualisieren aus dem Archiv geholt wurde (BASE). Siehe <xref linkend="diff"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo
+>&Ctrl;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Anzeigen</guimenu
+><guimenuitem
+>Abweichungen vom &CVS;-Archiv (HEAD) ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Zeigt die Unterschiede zwischen der ausgewählten Datei im Arbeitsordner und der Revision, die beim letzten Aktualisieren aus dem &CVS;-Archiv geholt wurde (HEAD). Siehe <xref linkend="diff"/>. </para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Anzeigen</guimenu
+><guimenuitem
+>Letzte Änderung ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Zeigt die Unterschiede zwischen der Revision der ausgewählten Datei, die Sie zuletzt geholt haben (BASE) und der Vorgängerversion. Siehe <xref linkend="diff"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Anzeigen</guimenu
+><guimenuitem
+>Versionsgeschichte ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Zeigt die &CVS;-Versionsgeschichte an, wie Sie vom Server bereitgestellt wird. Siehe <xref linkend="browsinghistory"/>. </para
+></listitem>
+</varlistentry>
+
+<!--TODO: add hide menus to mainscreen section-->
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Anzeigen</guimenu
+><guimenuitem
+>Nur Ordner anzeigen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Gibt an, ob nur Ordner in der Hauptansicht angezeigt werden. Siehe <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Anzeigen</guimenu
+><guimenuitem
+>Nicht geänderte Dateien ausblenden</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Gibt an, ob Dateien mit unbekanntem Status und solche, die nicht verändert wurden, in der Hauptansicht ausgeblendet werden. Siehe <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Anzeigen</guimenu
+><guimenuitem
+>Dateien mit Status „Entfernt“ ausblenden</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Gibt an, ob entfernte Dateien in der Hauptansicht ausgeblendet werden. Siehe <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Anzeigen</guimenu
+><guimenuitem
+>Dateien ausblenden, die nicht zum Archiv gehören</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Gibt an, ob Dateien, die nicht zum Archiv gehören, in der Hauptansicht ausgeblendet werden. Siehe <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Anzeigen</guimenu
+><guimenuitem
+>Leere Ordner ausblenden</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Gibt an, ob Ordner, ohne sichtbare Einträge in der Hauptansicht ausgeblendet werden. Siehe <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Anzeigen</guimenu
+><guimenuitem
+>Dateibaum ausklappen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Öffnet alle Verzweigungen des Dateibaums, sodass Sie alle Dateien und Ordner sehen können. Siehe <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Anzeigen</guimenu
+><guimenuitem
+>Dateibaum einklappen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Klappt alle Verzweigungen im Dateibaum ein. Siehe <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- Advanced Menu -->
+<sect2 id="menuadvanced">
+
+<title
+>Das Menü Erweitert</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Tag setzen/verzweigen ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Setzt ein Tag oder verzweigt die ausgewählten Dateien. Siehe <xref linkend="taggingbranching"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Tag löschen ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Entfernt das angegebene Tag von den ausgewählten Dateien. Siehe <xref linkend="taggingbranching"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Auf Tag/Datum aktualisieren ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Setzt die ausgewählten Dateien dauerhaft auf das angegebene Tag oder Datum. Siehe <xref linkend="updatingto"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Auf HEAD aktualisieren ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Setzt die ausgewählten Dateien auf die entsprechende HEAD-Revision. Siehe <xref linkend="updatingto"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Zusammenführen ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Führt entweder die angegebene Verzweigung oder die Unterschiede zwischen zwei Tags mit den ausgewählten Dateien zusammen. Siehe <xref linkend="taggingbranching"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Status „Überwachen“ setzen ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Setzt für die ausgewählten Dateien eine Überwachung für bestimmte Ereignisse. Siehe <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Status „Überwachen“ entfernen ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Entfernt eine Überwachung für bestimmte Ereignisse von den ausgewählten Dateien. Siehe <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Überwacher anzeigen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Zeigt eine Liste der Überwacher der ausgewählten Dateien an. Siehe <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Dateien bearbeiten</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Führt den Befehl <command
+>cvs edit</command
+> für die ausgewählten Dateien aus. Siehe <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Status „In Bearbeitung“ zurücknehmen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Führt den Befehl <command
+>cvs unedit</command
+> für die ausgewählten Dateien aus. Siehe <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Bearbeiter anzeigen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Führt den Befehl <command
+>cvs editors</command
+> für die ausgewählten Dateien aus. Siehe <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Datei sperren</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Sperrt die ausgewählten Dateien. Siehe <xref linkend="locking"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Erweitert</guimenu
+><guimenuitem
+>Dateien freigeben</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Gibt die ausgewählten Dateien frei. Siehe <xref linkend="locking"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Erweitert</guimenu
+> <guimenuitem
+>Patch gegen das &CVS;-Archiv erstellen ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Erstellt einen Patch aus den Änderungen in Ihrem Arbeitsordner. Siehe <xref linkend="creatingpatches"/>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- Repository Menu -->
+<sect2 id="menurepository">
+
+<title
+>Das Menü Archiv</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Archiv</guimenu
+><guimenuitem
+>Herunterladen ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Öffnet einen Dialog, der das Erstellen eines neuen lokalen &CVS;-Archivs ermöglicht. Siehe <xref linkend="accessing-repository"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Archiv</guimenu
+><guimenuitem
+>Herunterladen ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Öffnet einen Dialog, der das Herunterladen eines Moduls aus einem &CVS;-Archiv ermöglicht. Siehe <xref linkend="checkingout"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Archiv</guimenu
+><guimenuitem
+>Importieren ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Öffnet einen Dialog, der das Importieren eines Softwarepakets in das &CVS;-Archiv ermöglicht. Siehe <xref linkend="importing"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Archiv</guimenu
+><guimenuitem
+>Archive ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Dieser Dialog erlaubt die Konfiguration von &CVS;-Archiven, auf die Sie häufig zugreifen. Siehe <xref linkend="accessing-repository"/>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- Settings Menu -->
+<sect2 id="menuoptions">
+<title
+>Die Menüs Einstellungen und Hilfe</title>
+
+<para
+>Außer den bekannten &kde;-Menüeinträgen <guimenu
+>Einstellungen</guimenu
+> und <guimenu
+>Hilfe</guimenu
+>, die im Kapitel <ulink url="help:/fundamentals/menus.html"
+>Menüs</ulink
+> der &kde;-Grundlagen beschrieben werden, gibt es folgende spezielle Menüeinträge für &cervisia;: </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Beim Aktualisieren fehlende Ordner anlegen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Legt fest, ob im Arbeitsordner noch nicht vorhandene Ordner automatisch angelegt werden. (Option <option
+>-d</option
+> für <command
+>cvs update</command
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Leere Ordner beim Aktualisieren entfernen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Legt fest, ob leere Ordner beim Aktualisieren aus dem Arbeitsordner gelöscht werden. (Option <option
+>-P</option
+> für <command
+>cvs update</command
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Unterordner beim Aktualisieren einbeziehen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Legt fest, ob beim Aktualisieren Unterordner mit einbezogen werden sollen. (Option <option
+>-r</option
+> für <command
+>cvs update</command
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Unterordner beim Einspielen und Entfernen einbeziehen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Legt fest, ob beim Einspielen und Entfernen Unterordner mit einbezogen werden sollen. (Option <option
+>-r</option
+> für <command
+>cvs add</command
+>, bzw. <command
+>cvs remove</command
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>Bei Bedarf automatisch Status "In Bearbeitung" setzen.</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Legt fest, ob beim Bearbeiten einer Datei automatisch der Befehl <command
+>cvs edit</command
+> ausgeführt wird. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Hilfe</guimenu
+><guimenuitem
+>CVS-Handbuch</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Öffnet die Info-Seiten zu &CVS; im &khelpcenter; </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="credits-and-license">
+<title
+>Danksagungen und Lizenz</title>
+<para
+>Copyright des Programms</para>
+<itemizedlist>
+<listitem
+><para
+>1999-2002 &Bernd.Gehrmann; &Bernd.Gehrmann.mail;</para
+></listitem>
+<listitem
+><para
+>2002-2008 Die &cervisia;-Autoren</para
+></listitem>
+</itemizedlist>
+
+<para
+>Dokumentation Copyright 1999-2002 &Bernd.Gehrmann; &Bernd.Gehrmann.mail; und 2004 Carlos Woelz carloswoelz@imap-mail.com</para>
+
+<para
+>Übersetzung Stephan Johach <email
+>hunsum@gmx.de</email
+></para
+> &underFDL; &underGPL; </chapter>
+</book>

@@ -1,0 +1,2134 @@
+# translation of cervisia.po to Slovak
+# Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>, 2001,2002.
+# Stanislav Visnovsky <visnovsky@kde.org>, 2004.
+# Richard Fric <Richard.Fric@kdemail.net>, 2006, 2009.
+# Roman Paholik <wizzardsk@gmail.com>, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: cervisia\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-14 00:48+0000\n"
+"PO-Revision-Date: 2016-06-07 22:15+0100\n"
+"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
+"Language-Team: Slovak <kde-sk@linux.sk>\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 2.0\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Stanislav Višňovský, Eugen Tarabčák"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "visnovsky@nenya.ms.mff.cuni.cz, flashmann@szm.sk"
+
+#: addignoremenu.cpp:34
+#, kde-format
+msgid "Add to Ignore List"
+msgstr "Pridať do zoznamu ignorovaných"
+
+#: addignoremenu.cpp:65
+#, kde-format
+msgid "Ignore File"
+msgid_plural "Ignore %1 Files"
+msgstr[0] "Ignorovať súbor"
+msgstr[1] "Ignorovať %1 súbory"
+msgstr[2] "Ignorovať %1 súborov"
+
+#: addignoremenu.cpp:85
+#, kde-format
+msgid "Cannot open file '%1' for writing."
+msgstr "Nemôžem otvoriť súbor '%1' pre zápis."
+
+#: addremovedialog.cpp:40
+#, kde-format
+msgid "CVS Add"
+msgstr "CVS pridanie"
+
+#: addremovedialog.cpp:40
+#, kde-format
+msgid "CVS Add Binary"
+msgstr "CVS pridať binárny"
+
+#: addremovedialog.cpp:40
+#, kde-format
+msgid "CVS Remove"
+msgstr "CVS odstránenie"
+
+#: addremovedialog.cpp:59
+#, kde-format
+msgid "Add the following files to the repository:"
+msgstr "Pridať nasledujúce súbory do repository:"
+
+#: addremovedialog.cpp:60
+#, kde-format
+msgid "Add the following binary files to the repository:"
+msgstr "Pridať nasledujúce binárne súbory do repository:"
+
+#: addremovedialog.cpp:61
+#, kde-format
+msgid "Remove the following files from the repository:"
+msgstr "Odstrániť tieto súbory z repository:"
+
+#: addremovedialog.cpp:73
+#, kde-format
+msgid "This will also remove the files from your local working copy."
+msgstr "Toto odstráni súbory aj z vašej lokálnej kópie!"
+
+#: addrepositorydialog.cpp:40
+#, kde-format
+msgid "Add Repository"
+msgstr "Pridať repository"
+
+#: addrepositorydialog.cpp:53 checkoutdialog.cpp:86
+#, kde-format
+msgid "&Repository:"
+msgstr "&Repository:"
+
+#: addrepositorydialog.cpp:67
+#, kde-format
+msgid "Use remote &shell (only for :ext: repositories):"
+msgstr "Použiť remote &shell: (len pre repository s :ext:):"
+
+#: addrepositorydialog.cpp:76
+#, kde-format
+msgid "Invoke this program on the server side:"
+msgstr "Na serveri spustiť tento program:"
+
+#: addrepositorydialog.cpp:86
+#, kde-format
+msgid "Use different &compression level:"
+msgstr "Použiť inú úroveň &kompresie:"
+
+#: addrepositorydialog.cpp:94
+#, kde-format
+msgid "Download cvsignore file from server"
+msgstr "Stiahnuť súbor cvsignore zo serveru"
+
+#: addrepositorydialog.cpp:174
+#, kde-format
+msgid "Repository Settings"
+msgstr "Nastavenie repository"
+
+#: annotatecontroller.cpp:75
+#, kde-format
+msgid "CVS Annotate: %1"
+msgstr "Anotácia CVS: %1"
+
+#: annotatecontroller.cpp:85
+#, kde-format
+msgid "CVS Annotate"
+msgstr "Anotácia CVS"
+
+#: annotatedialog.cpp:44
+#, kde-format
+msgid "Go to Line..."
+msgstr "Prejsť na riadok..."
+
+#: annotatedialog.cpp:49
+#, kde-format
+msgid "Find Prev"
+msgstr "Nájsť predchádzajúci"
+
+#: annotatedialog.cpp:54
+#, kde-format
+msgid "Find Next"
+msgstr "Nájsť nasledujúci"
+
+#: annotatedialog.cpp:64
+#, kde-format
+msgid "Search"
+msgstr "Hľadať"
+
+#: annotatedialog.cpp:115
+#, kde-format
+msgid "Go to Line"
+msgstr "Prejsť na riadok"
+
+#: annotatedialog.cpp:115
+#, kde-format
+msgid "Go to line number:"
+msgstr "Prejsť na číslo riadku:"
+
+#: cervisiapart.cpp:111 main.cpp:138
+#, kde-format
+msgid "Cervisia"
+msgstr "Cervisia"
+
+#: cervisiapart.cpp:118
+#, kde-format
+msgid "Starting cvsservice failed with message: "
+msgstr "Spustenie cvsservice neuspelo so správou:"
+
+#: cervisiapart.cpp:148
+#, kde-format
+msgid ""
+"This KPart is non-functional, because the cvs D-Bus service could not be "
+"started."
+msgstr ""
+"Tento KPart nefunguje, pretože nie je možné spustiť službu cvs cez D-Bus."
+
+#: cervisiapart.cpp:186
+#, kde-format
+msgid "Remote CVS working folders are not supported."
+msgstr "Vzdialené pracovné priečinky CVS nie sú podporované."
+
+#: cervisiapart.cpp:194
+#, kde-format
+msgid ""
+"You cannot change to a different folder while there is a running cvs job."
+msgstr "Nemôžete prejsť do iného priečinku, kým beží úloha cvs."
+
+#: cervisiapart.cpp:214
+#, kde-format
+msgid ""
+"F - All files are hidden, the tree shows only folders\n"
+"N - All up-to-date files are hidden\n"
+"R - All removed files are hidden"
+msgstr ""
+"F - Všetky súbory sú skryté, strom zobrazuje iba priečinky\n"
+"N - Všetky aktualizované súbory sú skryté\n"
+"R - Všetky odstránené súbory sú skryté"
+
+#: cervisiapart.cpp:227
+#, kde-format
+msgid "Open Sandbox..."
+msgstr "Otvoriť pieskovisko..."
+
+#: cervisiapart.cpp:231
+#, kde-format
+msgid "Opens a CVS working folder in the main window"
+msgstr "Otvorí pracovný priečinok CVS v hlavnom okne"
+
+#: cervisiapart.cpp:235
+#, kde-format
+msgid "Recent Sandboxes"
+msgstr "Naposledy použité repository"
+
+#: cervisiapart.cpp:239
+#, kde-format
+msgid "&Insert ChangeLog Entry..."
+msgstr "&Vložiť položku ChangeLog..."
+
+#: cervisiapart.cpp:242
+#, kde-format
+msgid "Inserts a new intro into the file ChangeLog in the toplevel folder"
+msgstr "Vloží nový záznam do súboru ChangeLog v priečinku najvyššej úrovne"
+
+#: cervisiapart.cpp:246
+#, kde-format
+msgid "&Update"
+msgstr "&Aktualizovať"
+
+#: cervisiapart.cpp:250
+#, kde-format
+msgid "Updates (cvs update) the selected files and folders"
+msgstr "Aktualizuje (cvs update) vybrané súbory a priečinky"
+
+#: cervisiapart.cpp:254
+#, kde-format
+msgid "&Status"
+msgstr "&Stav"
+
+#: cervisiapart.cpp:258
+#, kde-format
+msgid "Updates the status (cvs -n update) of the selected files and folders"
+msgstr "Aktualizuje stav (cvs -n update) vybraných súborov a priečinkov"
+
+#: cervisiapart.cpp:262 resolvedialog.cpp:176
+#, kde-format
+msgid "&Edit"
+msgstr "&Upraviť"
+
+#: cervisiapart.cpp:265
+#, kde-format
+msgid "Opens the marked file for editing"
+msgstr "Otvorí označený súbor pre úpravy"
+
+#: cervisiapart.cpp:269
+#, kde-format
+msgid "Reso&lve..."
+msgstr "Vy&riešiť..."
+
+#: cervisiapart.cpp:272
+#, kde-format
+msgid "Opens the resolve dialog with the selected file"
+msgstr "Otvorí dialóg pre vyriešenie vybraného súboru"
+
+#: cervisiapart.cpp:276
+#, kde-format
+msgid "&Commit..."
+msgstr "&Commit..."
+
+#: cervisiapart.cpp:280
+#, kde-format
+msgid "Commits the selected files"
+msgstr "Potvrdí vybrané súbory"
+
+#: cervisiapart.cpp:284
+#, kde-format
+msgid "&Add to Repository..."
+msgstr "&Pridať do repository..."
+
+#: cervisiapart.cpp:287
+#, kde-format
+msgid "Add"
+msgstr "Pridať"
+
+#: cervisiapart.cpp:289
+#, kde-format
+msgid "Adds (cvs add) the selected files to the repository"
+msgstr "Pridá (cvs add) vybrané súbory do repository"
+
+#: cervisiapart.cpp:293
+#, kde-format
+msgid "Add &Binary..."
+msgstr "Pridať &binárny..."
+
+#: cervisiapart.cpp:296
+#, kde-format
+msgid "Adds (cvs -kb add) the selected files as binaries to the repository"
+msgstr "Pridá (cvs -kb add) vybrané súbory do repository ako binárne"
+
+#: cervisiapart.cpp:300
+#, kde-format
+msgid "&Remove From Repository..."
+msgstr "&Odstrániť z repository..."
+
+#: cervisiapart.cpp:303 repositorydialog.cpp:201
+#, kde-format
+msgid "Remove"
+msgstr "Odstrániť"
+
+#: cervisiapart.cpp:305
+#, kde-format
+msgid "Removes (cvs remove) the selected files from the repository"
+msgstr "Odstráni (cvs remove) vybrané súbory z repository"
+
+#: cervisiapart.cpp:309
+#, kde-format
+msgid "Rever&t"
+msgstr "&Vrátiť"
+
+#: cervisiapart.cpp:312
+#, kde-format
+msgid "Reverts (cvs update -C) the selected files (only cvs 1.11)"
+msgstr "Vráti (cvs update -C) vybrané súbory (iba pre cvs 1.11)"
+
+#: cervisiapart.cpp:316
+#, kde-format
+msgid "&Properties"
+msgstr "&Možnosti"
+
+#: cervisiapart.cpp:323
+#, kde-format
+msgid "Stop"
+msgstr "Zastaviť"
+
+#: cervisiapart.cpp:328
+#, kde-format
+msgid "Stops any running sub-processes"
+msgstr "Zastaví všetky bežiace podprocesy"
+
+#: cervisiapart.cpp:332
+#, kde-format
+msgid "Browse &Log..."
+msgstr "Prehliadať &záznam..."
+
+#: cervisiapart.cpp:336
+#, kde-format
+msgid "Shows the revision tree of the selected file"
+msgstr "Zobrazí strom revízií vybraného súboru"
+
+#: cervisiapart.cpp:341
+#, kde-format
+msgid "Browse Multi-File Log..."
+msgstr "Prehliadať záznam o viacerých súboroch..."
+
+#: cervisiapart.cpp:345
+#, kde-format
+msgid "&Annotate..."
+msgstr "&Anotácia..."
+
+#: cervisiapart.cpp:349
+#, kde-format
+msgid "Shows a blame-annotated view of the selected file"
+msgstr "Zobrazí anotovaný zoznam pre vybraný súbor s pôvodcom"
+
+#: cervisiapart.cpp:353
+#, kde-format
+msgid "&Difference to Repository (BASE)..."
+msgstr "&Rozdiel oproti repository (BASE)..."
+
+#: cervisiapart.cpp:357
+#, kde-format
+msgid ""
+"Shows the differences of the selected file to the checked out version (tag "
+"BASE)"
+msgstr "Zobrazí rozdiely vybraného súboru oproti základnej verzii (tag BASE)"
+
+#: cervisiapart.cpp:361
+#, kde-format
+msgid "Difference to Repository (HEAD)..."
+msgstr "Rozdiel oproti repository (HEAD)..."
+
+#: cervisiapart.cpp:365
+#, kde-format
+msgid ""
+"Shows the differences of the selected file to the newest version in the "
+"repository (tag HEAD)"
+msgstr "Zobrazí rozdiely vybraného súboru oproti základnej verzii (tag HEAD)"
+
+#: cervisiapart.cpp:369
+#, kde-format
+msgid "Last &Change..."
+msgstr "Posledná &zmena..."
+
+#: cervisiapart.cpp:372
+#, kde-format
+msgid ""
+"Shows the differences between the last two revisions of the selected file"
+msgstr "Zobrazí rozdiely medzi poslednými dvoma zmenami vybraného súboru"
+
+#: cervisiapart.cpp:376
+#, kde-format
+msgid "&History..."
+msgstr "&História..."
+
+#: cervisiapart.cpp:379
+#, kde-format
+msgid "Shows the CVS history as reported by the server"
+msgstr "Zobrazí históriu CVS ako o nej informuje server"
+
+#: cervisiapart.cpp:383
+#, kde-format
+msgid "&Unfold File Tree"
+msgstr "&Rozbaliť strom súborov"
+
+#: cervisiapart.cpp:387
+#, kde-format
+msgid "Opens all branches of the file tree"
+msgstr "Otvorí všetky časti stromu súborov"
+
+#: cervisiapart.cpp:391
+#, kde-format
+msgid "&Fold File Tree"
+msgstr "&Zabaliť strom súborov"
+
+#: cervisiapart.cpp:394
+#, kde-format
+msgid "Closes all branches of the file tree"
+msgstr "Zatvorí všetky časti stromu súborov"
+
+#: cervisiapart.cpp:401
+#, kde-format
+msgid "&Tag/Branch..."
+msgstr "&Tag/Branch..."
+
+#: cervisiapart.cpp:404
+#, kde-format
+msgid "Creates a tag or branch for the selected files"
+msgstr "Vytvorí tag alebo branch pre vybrané súbory"
+
+#: cervisiapart.cpp:408
+#, kde-format
+msgid "&Delete Tag..."
+msgstr "&Odstrániť tag..."
+
+#: cervisiapart.cpp:411
+#, kde-format
+msgid "Deletes a tag from the selected files"
+msgstr "Odstráni tag pre vybrané súbory"
+
+#: cervisiapart.cpp:415
+#, kde-format
+msgid "&Update to Tag/Date..."
+msgstr "&Aktualizovať na tag/dátum..."
+
+#: cervisiapart.cpp:418
+#, kde-format
+msgid "Updates the selected files to a given tag, branch or date"
+msgstr "Aktualizuje vybrané súbory na daný tag, branch alebo dátum"
+
+#: cervisiapart.cpp:422
+#, kde-format
+msgid "Update to &HEAD"
+msgstr "Aktualizovať na &HEAD"
+
+#: cervisiapart.cpp:425
+#, kde-format
+msgid "Updates the selected files to the HEAD revision"
+msgstr "Aktualizuje vybrané súbory na revíziu HEAD"
+
+#: cervisiapart.cpp:429
+#, kde-format
+msgid "&Merge..."
+msgstr "Z&liať..."
+
+#: cervisiapart.cpp:432
+#, kde-format
+msgid "Merges a branch or a set of modifications into the selected files"
+msgstr "Zleje branch alebo skupinu zmien do vybraných súborov"
+
+#: cervisiapart.cpp:436
+#, kde-format
+msgid "&Add Watch..."
+msgstr "&Pridať sledované..."
+
+#: cervisiapart.cpp:439
+#, kde-format
+msgid "Adds a watch for the selected files"
+msgstr "Pridá sledovací bod pre vybrané súbory"
+
+#: cervisiapart.cpp:443
+#, kde-format
+msgid "&Remove Watch..."
+msgstr "&Odstrániť sledované..."
+
+#: cervisiapart.cpp:446
+#, kde-format
+msgid "Removes a watch from the selected files"
+msgstr "Odstráni sledovací bod z vybraných súborov"
+
+#: cervisiapart.cpp:450
+#, kde-format
+msgid "Show &Watchers"
+msgstr "Zobraziť &sledované"
+
+#: cervisiapart.cpp:453
+#, kde-format
+msgid "Shows the watchers of the selected files"
+msgstr "Zobrazí sledovacie body pre vybrané súbory"
+
+#: cervisiapart.cpp:457
+#, kde-format
+msgid "Ed&it Files"
+msgstr "&Upraviť súbory"
+
+#: cervisiapart.cpp:460
+#, kde-format
+msgid "Edits (cvs edit) the selected files"
+msgstr "Upraví (cvs edit) vybrané súbory"
+
+#: cervisiapart.cpp:464
+#, kde-format
+msgid "U&nedit Files"
+msgstr "&Neupraviť súbor"
+
+#: cervisiapart.cpp:467
+#, kde-format
+msgid "Unedits (cvs unedit) the selected files"
+msgstr "Zruší úpravu (cvs unedit) vybraných súborov"
+
+#: cervisiapart.cpp:471
+#, kde-format
+msgid "Show &Editors"
+msgstr "Zobraziť &editorov"
+
+#: cervisiapart.cpp:474
+#, kde-format
+msgid "Shows the editors of the selected files"
+msgstr "Zobrazí editorov vybraných súborov"
+
+#: cervisiapart.cpp:478
+#, kde-format
+msgid "&Lock Files"
+msgstr "&Zamknúť súbory"
+
+#: cervisiapart.cpp:481
+#, kde-format
+msgid "Locks the selected files, so that others cannot modify them"
+msgstr "Zamkne vybrané súbory, takže ich ostatní nemôžu upraviť"
+
+#: cervisiapart.cpp:485
+#, kde-format
+msgid "Unl&ock Files"
+msgstr "&Odomknúť súbory"
+
+#: cervisiapart.cpp:488
+#, kde-format
+msgid "Unlocks the selected files"
+msgstr "Odomkne vybrané súbory"
+
+#: cervisiapart.cpp:492
+#, kde-format
+msgid "Create &Patch Against Repository..."
+msgstr "Vytvoriť &patch oproti repository..."
+
+#: cervisiapart.cpp:495
+#, kde-format
+msgid "Creates a patch from the modifications in your sandbox"
+msgstr "Vytvorí patch pre zmeny vo vašej repository"
+
+#: cervisiapart.cpp:502
+#, kde-format
+msgid "&Create..."
+msgstr "&Vytvoriť..."
+
+#: cervisiapart.cpp:506
+#, kde-format
+msgid "&Checkout..."
+msgstr "&Checkout..."
+
+#: cervisiapart.cpp:509
+#, kde-format
+msgid "Allows you to checkout a module from a repository"
+msgstr "Umožní získať modul z repository"
+
+#: cervisiapart.cpp:513
+#, kde-format
+msgid "&Import..."
+msgstr "&Importovať..."
+
+#: cervisiapart.cpp:516
+#, kde-format
+msgid "Allows you to import a module into a repository"
+msgstr "Umožňuje importovať modul do repository"
+
+#: cervisiapart.cpp:520
+#, kde-format
+msgid "&Repositories..."
+msgstr "&Repository..."
+
+#: cervisiapart.cpp:523
+#, kde-format
+msgid "Configures a list of repositories you regularly use"
+msgstr "Nastaví zoznam repository, ktoré obvykle používate"
+
+#: cervisiapart.cpp:530
+#, kde-format
+msgid "Hide All &Files"
+msgstr "Skryť všetky &súbory"
+
+#: cervisiapart.cpp:533
+#, kde-format
+msgid "Determines whether only folders are shown"
+msgstr "Určuje, či sú zobrazené iba priečinky"
+
+#: cervisiapart.cpp:537
+#, kde-format
+msgid "Hide Unmodified Files"
+msgstr "Skryť nezmenené súbory"
+
+#: cervisiapart.cpp:541
+#, kde-format
+msgid "Determines whether files with status up-to-date or unknown are hidden"
+msgstr ""
+"Určuje, či sú všetky súbory, ktoré sú aktuálne alebo s neznámym stavom, "
+"skryté"
+
+#: cervisiapart.cpp:546
+#, kde-format
+msgid "Hide Removed Files"
+msgstr "Skryť odstránené súbory"
+
+#: cervisiapart.cpp:549
+#, kde-format
+msgid "Determines whether removed files are hidden"
+msgstr "Určuje, či sú odstránené súbory skryté"
+
+#: cervisiapart.cpp:553
+#, kde-format
+msgid "Hide Non-CVS Files"
+msgstr "Skryť súbory nie v CVS"
+
+#: cervisiapart.cpp:556
+#, kde-format
+msgid "Determines whether files not in CVS are hidden"
+msgstr "Určuje, či súbory, ktoré nie sú v CVS, sú skryté"
+
+#: cervisiapart.cpp:560
+#, kde-format
+msgid "Hide Empty Folders"
+msgstr "Skryť prázdne priečinky"
+
+#: cervisiapart.cpp:563
+#, kde-format
+msgid "Determines whether folders without visible entries are hidden"
+msgstr "Určuje, či skryté priečinky bez zobraziteľných položiek"
+
+#: cervisiapart.cpp:567
+#, kde-format
+msgid "Create &Folders on Update"
+msgstr "Vytvoriť &priečinky pri aktualizácii"
+
+#: cervisiapart.cpp:570
+#, kde-format
+msgid "Determines whether updates create folders"
+msgstr "Určuje, či aktualizácie vytvárajú priečinky"
+
+#: cervisiapart.cpp:574
+#, kde-format
+msgid "&Prune Empty Folders on Update"
+msgstr "&Odstrániť prázdne priečinky pri aktualizácii"
+
+#: cervisiapart.cpp:577
+#, kde-format
+msgid "Determines whether updates remove empty folders"
+msgstr "Určuje, či aktualizácia odstraňuje prázdne priečinky"
+
+#: cervisiapart.cpp:581
+#, kde-format
+msgid "&Update Recursively"
+msgstr "&Aktualizovať rekurzívne"
+
+#: cervisiapart.cpp:584
+#, kde-format
+msgid "Determines whether updates are recursive"
+msgstr "Určuje, či sú aktualizácie rekurzívne"
+
+#: cervisiapart.cpp:588
+#, kde-format
+msgid "C&ommit && Remove Recursively"
+msgstr "Rekurzívny c&ommit a odstránenie"
+
+#: cervisiapart.cpp:591
+#, kde-format
+msgid "Determines whether commits and removes are recursive"
+msgstr "Určuje, či sú commity a odstránenia rekurzívne"
+
+#: cervisiapart.cpp:595
+#, kde-format
+msgid "Do cvs &edit Automatically When Necessary"
+msgstr "Automaticky použiť cvs &edit"
+
+#: cervisiapart.cpp:598
+#, kde-format
+msgid "Determines whether automatic cvs editing is active"
+msgstr "Určuje, či sa má automaticky používate cvs editing"
+
+#: cervisiapart.cpp:602
+#, kde-format
+msgid "Configure Cervisia..."
+msgstr "Nastaviť Cervisia..."
+
+#: cervisiapart.cpp:605
+#, kde-format
+msgid "Allows you to configure the Cervisia KPart"
+msgstr "Umožňuje nastaviť KPart Cervisia"
+
+#: cervisiapart.cpp:613
+#, kde-format
+msgid "CVS &Manual"
+msgstr "CVS &Manuál"
+
+#: cervisiapart.cpp:616
+#, kde-format
+msgid "Opens the help browser with the CVS documentation"
+msgstr "Otvorí Pomocníka a zobrazí dokumentáciu k CVS"
+
+#: cervisiapart.cpp:623
+#, kde-format
+msgid "Unfold Folder"
+msgstr "&Rozbaliť priečinok"
+
+#: cervisiapart.cpp:715
+#, kde-format
+msgid "Cervisia Part"
+msgstr "Part Cervisia"
+
+#: cervisiapart.cpp:717 main.cpp:140
+#, kde-format
+msgid "A CVS frontend"
+msgstr "Rozhranie pre CVS"
+
+#: cervisiapart.cpp:719 main.cpp:142
+#, kde-format
+msgid ""
+"Copyright (c) 1999-2002 Bernd Gehrmann\n"
+"Copyright (c) 2002-2008 the Cervisia authors"
+msgstr ""
+"Copyright (c) 1999-2002 Bernd Gehrmann\n"
+"Copyright (c) 2002-2008 Autori Cervisia"
+
+#: cervisiapart.cpp:724 main.cpp:147
+#, kde-format
+msgid "Bernd Gehrmann"
+msgstr "Bernd Gehrmann"
+
+#: cervisiapart.cpp:725 main.cpp:148
+#, kde-format
+msgid "Original author and former maintainer"
+msgstr "Pôvodný autor a bývalý správca"
+
+#: cervisiapart.cpp:728 main.cpp:151
+#, kde-format
+msgid "Christian Loose"
+msgstr "Christian Loose"
+
+#: cervisiapart.cpp:728 main.cpp:151
+#, kde-format
+msgid "Maintainer"
+msgstr "Správca"
+
+#: cervisiapart.cpp:729 main.cpp:152
+#, kde-format
+msgid "André Wöbbeking"
+msgstr "André Wöbbeking"
+
+#: cervisiapart.cpp:729 main.cpp:152
+#, kde-format
+msgid "Developer"
+msgstr "Vývojár"
+
+#: cervisiapart.cpp:730 main.cpp:153
+#, kde-format
+msgid "Carlos Woelz"
+msgstr "Carlos Woelz"
+
+#: cervisiapart.cpp:730 main.cpp:153
+#, kde-format
+msgid "Documentation"
+msgstr "Dokumentácia"
+
+#: cervisiapart.cpp:732 main.cpp:155
+#, kde-format
+msgid "Richard Moore"
+msgstr "Richard Moore"
+
+#: cervisiapart.cpp:732 main.cpp:155
+#, kde-format
+msgid "Conversion to KPart"
+msgstr "Prevod na KPart"
+
+#: cervisiapart.cpp:733 main.cpp:156
+#, kde-format
+msgid "Laurent Montel"
+msgstr "Laurent Montel"
+
+#: cervisiapart.cpp:733 main.cpp:156
+#, kde-format
+msgid "Conversion to D-Bus"
+msgstr "Konverzia na D-Bus"
+
+#: cervisiapart.cpp:734 main.cpp:157
+#, kde-format
+msgid "Martin Koller"
+msgstr "Martin Koller"
+
+#: cervisiapart.cpp:734 main.cpp:157
+#, kde-format
+msgid "Port to KDE Frameworks 5"
+msgstr "Port do KDE Frameworks 5"
+
+#: cervisiapart.cpp:741
+#, kde-format
+msgid "Open Sandbox"
+msgstr "Otvoriť repository"
+
+#: cervisiapart.cpp:791
+#, kde-format
+msgid "CVS Edit"
+msgstr "CVS edit"
+
+#: cervisiapart.cpp:1298 diffdialog.cpp:263 logdialog.cpp:472
+#, kde-format
+msgid "CVS Diff"
+msgstr "CVS diff"
+
+#: cervisiapart.cpp:1311 diffdialog.cpp:473 logdialog.cpp:485
+#: resolvedialog.cpp:351
+#, kde-format
+msgid "Could not open file for writing."
+msgstr "Nepodarilo sa otvoriť súbor pre zápis."
+
+#: cervisiapart.cpp:1461
+#, kde-format
+msgid "The revision looks invalid."
+msgstr "Revízia asi nie je platná."
+
+#: cervisiapart.cpp:1465
+#, kde-format
+msgid "This is the first revision of the branch."
+msgstr "Toto je prvá revízia pre branch."
+
+#: cervisiapart.cpp:1575
+#, kde-format
+msgid "Invoking help on CVS"
+msgstr "Spúšťam pomocníka pre CVS"
+
+#: cervisiapart.cpp:1610
+#, kde-format
+msgid "Done"
+msgstr "Hotovo"
+
+#: cervisiapart.cpp:1616
+#, kde-format
+msgid "A CVS commit to repository %1 is done"
+msgstr "CVS uloženie do repozitára %1 je dokončené."
+
+#: cervisiapart.cpp:1633
+#, kde-format
+msgid ""
+"This is not a CVS folder.\n"
+"If you did not intend to use Cervisia, you can switch view modes within "
+"Konqueror."
+msgstr ""
+"Toto nie je priečinok CVS.\n"
+"Ak nechcete používať program Cervisia, v Konquerori môžete prepnúť pohľad."
+
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr ""
+"Farba popredia pre zvýraznenie súborov s konfliktom v zobrazení súborov."
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr "Čakanie pred zobrazením dialógu priebehu (v ms)."
+
+#: cervisiashell.cpp:54
+#, kde-format
+msgid "The Cervisia library could not be loaded."
+msgstr "Nebolo možné načítať knižnicu Cervisia."
+
+#: cervisiashell.cpp:86
+#, kde-format
+msgid "Allows you to configure the toolbar"
+msgstr "Umožňuje nastaviť panel nástrojov"
+
+#: cervisiashell.cpp:91
+#, kde-format
+msgid "Allows you to customize the keybindings"
+msgstr "Umožňuje upraviť klávesové skratky"
+
+#: cervisiashell.cpp:96
+#, kde-format
+msgid "Exits Cervisia"
+msgstr "Ukončí Cervisia"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "&Súbor"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, kde-format
+msgid "&Settings"
+msgstr "&Nastavenia"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr "&Pomocník"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Hlavný panel nástrojov"
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, kde-format
+msgid "&View"
+msgstr "&Zobraziť"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, kde-format
+msgid "&Advanced"
+msgstr "&Pokročilé"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, kde-format
+msgid "&Repository"
+msgstr "&Repository"
+
+#: changelogdialog.cpp:48
+#, kde-format
+msgid "Edit ChangeLog"
+msgstr "Upraviť ChangeLog"
+
+#: changelogdialog.cpp:86
+#, kde-format
+msgid "The ChangeLog file could not be written."
+msgstr "Súbor ChangeLog nie je možné zapísať."
+
+#: changelogdialog.cpp:102
+#, kde-format
+msgid "A ChangeLog file does not exist. Create one?"
+msgstr "Súbor ChangeLog neexistuje. Má sa vytvoriť?"
+
+#: changelogdialog.cpp:102
+#, kde-format
+msgid "Create"
+msgstr "Vytvoriť"
+
+#: changelogdialog.cpp:107
+#, kde-format
+msgid "The ChangeLog file could not be read."
+msgstr "Nepodarilo sa prečítať súbor ChangeLog."
+
+#: checkoutdialog.cpp:59 checkoutdialog.cpp:348
+#, kde-format
+msgid "CVS Checkout"
+msgstr "CVS checkout"
+
+#: checkoutdialog.cpp:59
+#, kde-format
+msgid "CVS Import"
+msgstr "CVS import"
+
+#: checkoutdialog.cpp:94 checkoutdialog.cpp:109
+#, kde-format
+msgid "&Module:"
+msgstr "&Modul:"
+
+#: checkoutdialog.cpp:101 checkoutdialog.cpp:116 mergedialog.cpp:65
+#: tagdialog.cpp:71 updatedialog.cpp:66
+#, kde-format
+msgid "Fetch &List"
+msgstr "Získať &zoznam"
+
+#: checkoutdialog.cpp:124
+#, kde-format
+msgid "&Branch tag:"
+msgstr "&Branch tag:"
+
+#: checkoutdialog.cpp:130
+#, kde-format
+msgid "Re&cursive checkout"
+msgstr "Re&kurzívna kontrola"
+
+#: checkoutdialog.cpp:153
+#, kde-format
+msgid "Working &folder:"
+msgstr "Pracovný &priečinok:"
+
+#: checkoutdialog.cpp:162
+#, kde-format
+msgid "&Vendor tag:"
+msgstr "Tag &výrobcu:"
+
+#: checkoutdialog.cpp:170
+#, kde-format
+msgid "&Release tag:"
+msgstr "&Release tag:"
+
+#: checkoutdialog.cpp:178
+#, kde-format
+msgid "&Ignore files:"
+msgstr "&Ignorovať súbory:"
+
+#: checkoutdialog.cpp:186
+#, kde-format
+msgid "&Comment:"
+msgstr "&Komentár:"
+
+#: checkoutdialog.cpp:190
+#, kde-format
+msgid "Import as &binaries"
+msgstr "Importovať ako &binárne"
+
+#: checkoutdialog.cpp:193
+#, kde-format
+msgid "Use file's modification time as time of import"
+msgstr "Použiť dátum zmeny súboru ako čas importu"
+
+#: checkoutdialog.cpp:200
+#, kde-format
+msgid "Chec&k out as:"
+msgstr "Chec&k out ako:"
+
+#: checkoutdialog.cpp:204
+#, kde-format
+msgid "Ex&port only"
+msgstr "Iba e&xportovať"
+
+#: checkoutdialog.cpp:304
+#, kde-format
+msgid "Please choose an existing working folder."
+msgstr "Prosím, vyberte existujúci pracovný priečinok."
+
+#: checkoutdialog.cpp:308 checkoutdialog.cpp:379
+#, kde-format
+msgid "Please specify a module name."
+msgstr "Prosím, zadajte meno modulu."
+
+#: checkoutdialog.cpp:314
+#, kde-format
+msgid "Please specify a vendor tag and a release tag."
+msgstr "Prosím, zadajte tag výrobcu a release."
+
+#: checkoutdialog.cpp:319
+#, kde-format
+msgid ""
+"Tags must start with a letter and may contain\n"
+"letters, digits and the characters '-' and '_'."
+msgstr ""
+"Tagy musia začínať písmenom a môžu obsahovať\n"
+"číslice, písmená a znaky '-' a '_'."
+
+#: checkoutdialog.cpp:325
+#, kde-format
+msgid "A branch must be specified for export."
+msgstr "Pre export je nutné zadať branch."
+
+#: checkoutdialog.cpp:374
+#, kde-format
+msgid "Please specify a repository."
+msgstr "Prosím, zadajte repozitár."
+
+#: checkoutdialog.cpp:387
+#, kde-format
+msgid "CVS Remote Log"
+msgstr "CVS Vzdialený Záznam"
+
+#: commitdialog.cpp:67
+#, kde-format
+msgid "CVS Commit"
+msgstr "CVS Commit"
+
+#: commitdialog.cpp:84 logdialog.cpp:199
+#, kde-format
+msgid "&Diff"
+msgstr "&Diff"
+
+#: commitdialog.cpp:86
+#, kde-format
+msgid "Commit the following &files:"
+msgstr "Commit nasledujúcich &súborov:"
+
+#: commitdialog.cpp:96
+#, kde-format
+msgid "Older &messages:"
+msgstr "Staršie &správy:"
+
+#: commitdialog.cpp:106
+#, kde-format
+msgid "&Log message:"
+msgstr "Správa &záznamu:"
+
+#: commitdialog.cpp:115
+#, kde-format
+msgid "Use log message &template"
+msgstr "Použiť šablónu správy &záznamu"
+
+#: commitdialog.cpp:190
+#, kde-format
+msgid "Current"
+msgstr "Aktuálne"
+
+#: cvsinitdialog.cpp:39
+#, kde-format
+msgid "Create New Repository (cvs init)"
+msgstr "Vytvoriť novú repository (cvs init)"
+
+#: cvsinitdialog.cpp:51
+#, kde-format
+msgid "Repository folder:"
+msgstr "Priečinok pre repository:"
+
+#: diffdialog.cpp:102
+#, kde-format
+msgid "Synchronize scroll bars"
+msgstr "Synchronizovať posuvníky"
+
+#: diffdialog.cpp:112 diffdialog.cpp:403
+#, kde-format
+msgid "%1 difference"
+msgid_plural "%1 differences"
+msgstr[0] "%1 rozdiel"
+msgstr[1] "%1 rozdiely"
+msgstr[2] "%1 rozdielov"
+
+#: diffdialog.cpp:238
+#, kde-format
+msgid "CVS Diff: %1"
+msgstr "CVS diff: %1"
+
+#: diffdialog.cpp:239
+#, kde-format
+msgid "Repository:"
+msgstr "Repository:"
+
+#: diffdialog.cpp:239 diffdialog.cpp:240
+#, kde-format
+msgid "Revision "
+msgstr "Revízia"
+
+#: diffdialog.cpp:240
+#, kde-format
+msgid "Working dir:"
+msgstr "Pracovný priečinok:"
+
+#: diffdialog.cpp:401 resolvedialog.cpp:383
+#, kde-format
+msgid "%1 of %2"
+msgstr "%1 z %2"
+
+#: diffview.cpp:255 diffview.cpp:313
+#, kde-format
+msgid "Delete"
+msgstr "Odstrániť"
+
+#: diffview.cpp:255 diffview.cpp:313
+#, kde-format
+msgid "Insert"
+msgstr "Vložiť"
+
+#: diffview.cpp:255 diffview.cpp:313
+#, kde-format
+msgid "Change"
+msgstr "Zmeniť"
+
+#: editwithmenu.cpp:46
+#, kde-format
+msgid "Edit With"
+msgstr "Upraviť pomocou"
+
+#: entry_status.cpp:33
+#, kde-format
+msgid "Locally Modified"
+msgstr "Lokálne zmenený"
+
+#: entry_status.cpp:36
+#, kde-format
+msgid "Locally Added"
+msgstr "Lokálne pridaný"
+
+#: entry_status.cpp:39
+#, kde-format
+msgid "Locally Removed"
+msgstr "Lokálne odstránený"
+
+#: entry_status.cpp:42
+#, kde-format
+msgid "Needs Update"
+msgstr "Vyžaduje aktualizáciu"
+
+#: entry_status.cpp:45
+#, kde-format
+msgid "Needs Patch"
+msgstr "Vyžaduje patch"
+
+#: entry_status.cpp:48
+#, kde-format
+msgid "Needs Merge"
+msgstr "Vyžaduje merge"
+
+#: entry_status.cpp:51
+#, kde-format
+msgid "Up to Date"
+msgstr "Akuálne"
+
+#: entry_status.cpp:54
+#, kde-format
+msgid "Conflict"
+msgstr "Konflikt"
+
+#: entry_status.cpp:57
+#, kde-format
+msgid "Updated"
+msgstr "Aktualizované"
+
+#: entry_status.cpp:60
+#, kde-format
+msgid "Patched"
+msgstr "Aplikovaný patch"
+
+#: entry_status.cpp:63
+#, kde-format
+msgid "Removed"
+msgstr "Odstránený"
+
+#: entry_status.cpp:66
+#, kde-format
+msgid "Not in CVS"
+msgstr "Nie je v CVS"
+
+#: entry_status.cpp:69
+#, kde-format
+msgid "Unknown"
+msgstr "Neznáme"
+
+#: historydialog.cpp:106 historydialog.cpp:343
+#, kde-format
+msgid "Commit, Modified "
+msgstr "Commit, zmenené"
+
+#: historydialog.cpp:106 historydialog.cpp:346
+#, kde-format
+msgid "Commit, Added "
+msgstr "Commit, pridané"
+
+#: historydialog.cpp:106 historydialog.cpp:349
+#, kde-format
+msgid "Commit, Removed "
+msgstr "Commit, odstránené"
+
+#: historydialog.cpp:111 historydialog.cpp:319
+#, kde-format
+msgid "Checkout "
+msgstr "Checkout "
+
+#: historydialog.cpp:116 loginfo.cpp:57
+#, kde-format
+msgid "Tag"
+msgstr "Tag"
+
+#: historydialog.cpp:138 loglist.cpp:106
+#, kde-format
+msgid "Date"
+msgstr "Dátum"
+
+#: historydialog.cpp:138
+#, kde-format
+msgid "Event"
+msgstr "Udalosť"
+
+#: historydialog.cpp:138 loglist.cpp:106
+#, kde-format
+msgid "Author"
+msgstr "Autor"
+
+#: historydialog.cpp:138 loglist.cpp:106 updateview.cpp:50
+#, kde-format
+msgid "Revision"
+msgstr "Revízia"
+
+#: historydialog.cpp:138 watchersmodel.cpp:84
+#, kde-format
+msgid "File"
+msgstr "Súbor"
+
+#: historydialog.cpp:138
+#, kde-format
+msgid "Repo Path"
+msgstr "Cesta repo"
+
+#: historydialog.cpp:142
+#, kde-format
+msgid "Show c&ommit events"
+msgstr "Zobraziť udalosti &commit"
+
+#: historydialog.cpp:145
+#, kde-format
+msgid "Show ch&eckout events"
+msgstr "Zobraziť udalosti &checkout"
+
+#: historydialog.cpp:148
+#, kde-format
+msgid "Show &tag events"
+msgstr "Zobraziť udalosti &tagu"
+
+#: historydialog.cpp:151
+#, kde-format
+msgid "Show &other events"
+msgstr "Zobraziť &ostatné udalosti"
+
+#: historydialog.cpp:154
+#, kde-format
+msgid "Only &user:"
+msgstr "Iba &užívateľ:"
+
+#: historydialog.cpp:156
+#, kde-format
+msgid "Only &filenames matching:"
+msgstr "Iba &súbory odpovedajúce:"
+
+#: historydialog.cpp:158
+#, kde-format
+msgid "Only &folders matching:"
+msgstr "Iba &priečinky odpovedajúce:"
+
+#: historydialog.cpp:279 historydialog.cpp:285
+#, kde-format
+msgid "CVS History"
+msgstr "História CVS"
+
+#: historydialog.cpp:322
+#, kde-format
+msgid "Tag "
+msgstr "Tag "
+
+#: historydialog.cpp:325
+#, kde-format
+msgid "Release "
+msgstr "Release "
+
+#: historydialog.cpp:328
+#, kde-format
+msgid "Update, Deleted "
+msgstr "Aktualizácia, odstránené"
+
+#: historydialog.cpp:331
+#, kde-format
+msgid "Update, Copied "
+msgstr "Aktualizácia, kopírované"
+
+#: historydialog.cpp:334
+#, kde-format
+msgid "Update, Merged "
+msgstr "Aktualizácia, zliate"
+
+#: historydialog.cpp:337
+#, kde-format
+msgid "Update, Conflict "
+msgstr "Aktualizácia, konflikt"
+
+#: historydialog.cpp:340
+#, kde-format
+msgid "Update, Patched "
+msgstr "Aktualizácia, zaplátané"
+
+#: historydialog.cpp:352
+#, kde-format
+msgid "Unknown "
+msgstr "Neznámy"
+
+#: logdialog.cpp:86
+#, kde-format
+msgid "Search:"
+msgstr "Hľadať:"
+
+#: logdialog.cpp:97
+#, kde-format
+msgid "&Tree"
+msgstr "&Strom"
+
+#: logdialog.cpp:98
+#, kde-format
+msgid "&List"
+msgstr "&Zoznam"
+
+#: logdialog.cpp:99
+#, kde-format
+msgid "CVS &Output"
+msgstr "&Výstup CVS"
+
+#: logdialog.cpp:106
+#, kde-format
+msgid ""
+"Choose revision A by clicking with the left mouse button,\n"
+"revision B by clicking with the middle mouse button."
+msgstr ""
+"Vyberte revíziu A kliknutím ľavým tlačidlom myši, revíziu B\n"
+"kliknutím stredným tlačidlom myši."
+
+#: logdialog.cpp:133
+#, kde-format
+msgid "Revision A:"
+msgstr "Revízia A:"
+
+#: logdialog.cpp:133
+#, kde-format
+msgid "Revision B:"
+msgstr "Revízia B:"
+
+#: logdialog.cpp:142
+#, kde-format
+msgid "Select by tag:"
+msgstr "Vybrať pomocou tagu:"
+
+#: logdialog.cpp:150
+#, kde-format
+msgid "Author:"
+msgstr "Autor:"
+
+#: logdialog.cpp:158
+#, kde-format
+msgid "Date:"
+msgstr "Dátum:"
+
+#: logdialog.cpp:166
+#, kde-format
+msgid "Comment/Tags:"
+msgstr "Komentár/tagy:"
+
+#: logdialog.cpp:198
+#, kde-format
+msgid "&Annotate A"
+msgstr "&Anotovať A"
+
+#: logdialog.cpp:200
+#, kde-format
+msgid "&Find"
+msgstr "Nájsť"
+
+#: logdialog.cpp:207
+#, kde-format
+msgid ""
+"This revision is used when you click Annotate.\n"
+"It is also used as the first item of a Diff operation."
+msgstr ""
+"Táto revízia je použitá ak stlačíte Anotácie.\n"
+"Používa sa aj ako prvá položka pre operáciu Diff."
+
+#: logdialog.cpp:212
+#, kde-format
+msgid "This revision is used as the second item of a Diff operation."
+msgstr " áto revízia sa používa ako druhá položka operácie Diff."
+
+#: logdialog.cpp:225
+#, kde-format
+msgid "&View A"
+msgstr "&Zobraziť A"
+
+#: logdialog.cpp:226
+#, kde-format
+msgid "Create Patch..."
+msgstr "Vytvoriť patch..."
+
+#: logdialog.cpp:269
+#, kde-format
+msgid "CVS Log: %1"
+msgstr "CVS záznam: %1"
+
+#: logdialog.cpp:275
+#, kde-format
+msgid "CVS Log"
+msgstr "CVS záznam"
+
+#: logdialog.cpp:402
+#, kde-format
+msgid " (Branchpoint)"
+msgstr " (Bod branch)"
+
+#: logdialog.cpp:421
+#, kde-format
+msgid "Please select revision A or B first."
+msgstr "Prosím, najprv vyberte revízie A a B."
+
+#: logdialog.cpp:442
+#, kde-format
+msgid "View File"
+msgstr "Zobraziť súbor"
+
+#: logdialog.cpp:457 logdialog.cpp:516
+#, kde-format
+msgid "Please select revision A or revisions A and B first."
+msgstr "Prosím, najprv vyberte revíziu A alebo revízie A a B."
+
+#: loginfo.cpp:51
+#, kde-format
+msgid "Branchpoint"
+msgstr "Bod branch"
+
+#: loginfo.cpp:54
+#, kde-format
+msgid "On Branch"
+msgstr "Na branch"
+
+#: loglist.cpp:106
+#, kde-format
+msgid "Branch"
+msgstr "Branch"
+
+#: loglist.cpp:106
+#, kde-format
+msgid "Comment"
+msgstr "Komentár"
+
+#: loglist.cpp:106
+#, kde-format
+msgid "Tags"
+msgstr "Tagy"
+
+#: logplainview.cpp:46
+#, kde-format
+msgid "revision %1"
+msgstr "revízia %1"
+
+#: logplainview.cpp:47
+#, kde-format
+msgid "Select for revision A"
+msgstr "Výber pre revíziu A"
+
+#: logplainview.cpp:48
+#, kde-format
+msgid "Select for revision B"
+msgstr "Výber pre revíziu B"
+
+#: logplainview.cpp:49
+#, kde-format
+msgid "date: %1; author: %2"
+msgstr "dátum: %1; autor: %2"
+
+#: main.cpp:166
+#, kde-format
+msgid "The sandbox to be loaded"
+msgstr "Repository načítané"
+
+#: main.cpp:167
+#, kde-format
+msgid "Show resolve dialog for the given file."
+msgstr "Otvorí dialóg pre vyriešenie vybraného súboru."
+
+#: main.cpp:168
+#, kde-format
+msgid "Show log dialog for the given file."
+msgstr "Otvorí dialóg záznamu vybraného súboru."
+
+#: main.cpp:169
+#, kde-format
+msgid "Show annotation dialog for the given file."
+msgstr "Otvorí dialóg anotácie pre vybraný súbor."
+
+#: mergedialog.cpp:41
+#, kde-format
+msgid "CVS Merge"
+msgstr "CVS merge"
+
+#: mergedialog.cpp:56
+#, kde-format
+msgid "Merge from &branch:"
+msgstr "Zliať z &branch:"
+
+#: mergedialog.cpp:75
+#, kde-format
+msgid "Merge &modifications:"
+msgstr "Zliať &zmeny:"
+
+#: mergedialog.cpp:78
+#, kde-format
+msgid "between tag: "
+msgstr "medzi tagom:"
+
+#: mergedialog.cpp:84
+#, kde-format
+msgid "and tag: "
+msgstr "a tagom:"
+
+#: mergedialog.cpp:90 updatedialog.cpp:84
+#, kde-format
+msgid "Fetch L&ist"
+msgstr "Získať &zoznam"
+
+#: misc.cpp:78
+#, kde-format
+msgid "CVS Status"
+msgstr "CVS stav"
+
+#: misc.cpp:197
+#, kde-format
+msgid "Overwrite the file"
+msgstr "Prepísať súbor"
+
+#: misc.cpp:200
+#, kde-format
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr ""
+"Súbor s názvom \"%1\" už existuje. Ste si istý, že si ho prajete prepísať?"
+
+#: misc.cpp:201
+#, kde-format
+msgid "Overwrite File?"
+msgstr "Prepísať súbor?"
+
+#: patchoptiondialog.cpp:58
+#, kde-format
+msgid "Context"
+msgstr "Kontextový"
+
+#: patchoptiondialog.cpp:59
+#, kde-format
+msgid "Normal"
+msgstr "Normálny"
+
+#: patchoptiondialog.cpp:60
+#, kde-format
+msgid "Unified"
+msgstr "Unifikovaný"
+
+#: patchoptiondialog.cpp:64
+#, kde-format
+msgid "Output Format"
+msgstr "Formát výstupu"
+
+#: patchoptiondialog.cpp:74
+#, kde-format
+msgid "&Number of context lines:"
+msgstr "&Počet riadkov kontextu:"
+
+#: patchoptiondialog.cpp:90
+#, kde-format
+msgid "Ignore added or removed empty lines"
+msgstr "Ignorovať pridané alebo odstránené prázdne riadky"
+
+#: patchoptiondialog.cpp:91
+#, kde-format
+msgid "Ignore changes in the amount of whitespace"
+msgstr "Ignorovať zmeny v prázdnom mieste"
+
+#: patchoptiondialog.cpp:92
+#, kde-format
+msgid "Ignore all whitespace"
+msgstr "Ignorovať všetko prázdne miesto"
+
+#: patchoptiondialog.cpp:93
+#, kde-format
+msgid "Ignore changes in case"
+msgstr "Ignorovať zmeny veľkosti písmen"
+
+#: patchoptiondialog.cpp:100
+#, kde-format
+msgid "Ignore Options"
+msgstr "Voľby pre ignorovanie"
+
+#: protocolview.cpp:90
+#, kde-format
+msgid "Clear"
+msgstr "Vyčistiť"
+
+#: protocolview.cpp:127
+#, kde-format
+msgid "[Exited with status %1]\n"
+msgstr "[Ukončené stavom %1]\n"
+
+#: protocolview.cpp:129
+#, kde-format
+msgid "[Finished]\n"
+msgstr "[Dokončené]\n"
+
+#: protocolview.cpp:131
+#, kde-format
+msgid "[Aborted]\n"
+msgstr "[Prerušené]\n"
+
+#: repositorydialog.cpp:138
+#, kde-format
+msgid "Default"
+msgstr "Predvolené"
+
+#: repositorydialog.cpp:155
+#, kde-format
+msgid "Logged in"
+msgstr "Prihlásený"
+
+#: repositorydialog.cpp:155
+#, kde-format
+msgid "Not logged in"
+msgstr "Neprihlásený"
+
+#: repositorydialog.cpp:157
+#, kde-format
+msgid "No login required"
+msgstr "Prihlásenie nie je potrebné"
+
+#: repositorydialog.cpp:171
+#, kde-format
+msgid "Configure Access to Repositories"
+msgstr "Nastavenie prístupu k repository"
+
+#: repositorydialog.cpp:192
+#, kde-format
+msgid "Repository"
+msgstr "Repository"
+
+#: repositorydialog.cpp:192
+#, kde-format
+msgid "Method"
+msgstr "Metóda"
+
+#: repositorydialog.cpp:192
+#, kde-format
+msgid "Compression"
+msgstr "Kompresia"
+
+#: repositorydialog.cpp:192 settingsdialog.cpp:293 updateview.cpp:50
+#, kde-format
+msgid "Status"
+msgstr "Stav"
+
+#: repositorydialog.cpp:199
+#, kde-format
+msgid "Add..."
+msgstr "Pridať..."
+
+#: repositorydialog.cpp:200
+#, kde-format
+msgid "Modify..."
+msgstr "Upraviť..."
+
+#: repositorydialog.cpp:202
+#, kde-format
+msgid "Login..."
+msgstr "Prihlásenie..."
+
+#: repositorydialog.cpp:203
+#, kde-format
+msgid "Logout"
+msgstr "Odhlásenie..."
+
+#: repositorydialog.cpp:335
+#, kde-format
+msgid "This repository is already known."
+msgstr "Táto repository už je známa."
+
+#: repositorydialog.cpp:423
+#, kde-format
+msgid "Login failed."
+msgstr "Prihlásenie zlyhalo."
+
+#: repositorydialog.cpp:442
+#, kde-format
+msgid "CVS Logout"
+msgstr "Odhlásiť z CVS"
+
+#: resolvedialog.cpp:135
+#, kde-format
+msgid "Your version (A):"
+msgstr "Vaša verzia (A):"
+
+#: resolvedialog.cpp:144
+#, kde-format
+msgid "Other version (B):"
+msgstr "Iná verzia (B):"
+
+#: resolvedialog.cpp:156
+#, kde-format
+msgid "Merged version:"
+msgstr "Spojená verzia:"
+
+#: resolvedialog.cpp:250
+#, kde-format
+msgid "CVS Resolve: %1"
+msgstr "CVS vyriešenie konfliktov: %1"
+
+#: resolvedialog.cpp:385
+#, kde-format
+msgid "%1 conflicts"
+msgstr "%1 konfliktov"
+
+#: settingsdialog.cpp:70
+#, kde-format
+msgid "Configure Cervisia"
+msgstr "Nastaviť Cervisia"
+
+#: settingsdialog.cpp:215
+#, kde-format
+msgid "General"
+msgstr "Všeobecné"
+
+#: settingsdialog.cpp:220
+#, kde-format
+msgid "&User name for the change log editor:"
+msgstr "&Užívateľské meno pre editor ChangeLog:"
+
+#: settingsdialog.cpp:228
+#, kde-format
+msgid "&Path to CVS executable, or 'cvs':"
+msgstr "&Cesta k programu CVS alebo 'cvs':"
+
+#: settingsdialog.cpp:246
+#, kde-format
+msgid "Diff Viewer"
+msgstr "Prehliadač rozdielov"
+
+#: settingsdialog.cpp:251
+#, kde-format
+msgid "&Number of context lines in diff dialog:"
+msgstr "&Počet riadkov kontextu pre dialóg diff:"
+
+#: settingsdialog.cpp:259
+#, kde-format
+msgid "Additional &options for cvs diff:"
+msgstr "Dalšie &možnosti pre cvs diff:"
+
+#: settingsdialog.cpp:266
+#, kde-format
+msgid "Tab &width in diff dialog:"
+msgstr "Šírka &tabulátoru pre dialóg diff:"
+
+#: settingsdialog.cpp:274
+#, kde-format
+msgid "External diff &frontend:"
+msgstr "Externé &rozhranie pre diff:"
+
+#: settingsdialog.cpp:296
+#, kde-format
+msgid ""
+"When opening a sandbox from a &remote repository,\n"
+"start a File->Status command automatically"
+msgstr ""
+"Pri otváraní &vzdialeného repository spustiť automaticky\n"
+"príkaz Súbor->Stav"
+
+#: settingsdialog.cpp:299
+#, kde-format
+msgid ""
+"When opening a sandbox from a &local repository,\n"
+"start a File->Status command automatically"
+msgstr ""
+"Pri otváraní &lokálneho repository spustiť automaticky\n"
+"príkaz Súbor->Stav"
+
+#: settingsdialog.cpp:316
+#, kde-format
+msgid "Advanced"
+msgstr "Pokročilé"
+
+#: settingsdialog.cpp:335
+#, kde-format
+msgid "Appearance"
+msgstr "Vzhľad"
+
+#: settingsdialog.cpp:338
+#, kde-format
+msgid "Fonts"
+msgstr "Písmo"
+
+#: settingsdialog.cpp:341
+#, kde-format
+msgid "Font for &Protocol Window..."
+msgstr "Písmo pre okno &protokolu..."
+
+#: settingsdialog.cpp:342
+#, kde-format
+msgid "Font for A&nnotate View..."
+msgstr "Písmo pre pohľad &anotácií..."
+
+#: settingsdialog.cpp:343
+#, kde-format
+msgid "Font for D&iff View..."
+msgstr "Písmo pre pohľad &diff..."
+
+#: settingsdialog.cpp:344
+#, kde-format
+msgid "Font for ChangeLog View..."
+msgstr "Písmo pre pohľad záznamu..."
+
+#: settingsdialog.cpp:352
+#, kde-format
+msgid "Colors"
+msgstr "Farby"
+
+#: settingsdialog.cpp:355
+#, kde-format
+msgid "Conflict:"
+msgstr "Konflikt:"
+
+#: settingsdialog.cpp:359
+#, kde-format
+msgid "Diff change:"
+msgstr "Zmena diff:"
+
+#: settingsdialog.cpp:363
+#, kde-format
+msgid "Local change:"
+msgstr "Lokálna zmena:"
+
+#: settingsdialog.cpp:367
+#, kde-format
+msgid "Diff insertion:"
+msgstr "Vloženie diff:"
+
+#: settingsdialog.cpp:371
+#, kde-format
+msgid "Remote change:"
+msgstr "Vzdialená zmena:"
+
+#: settingsdialog.cpp:375
+#, kde-format
+msgid "Diff deletion:"
+msgstr "Odstránenie diff:"
+
+#: settingsdialog.cpp:379
+#, kde-format
+msgid "Not in cvs:"
+msgstr "Nie je v CVS:"
+
+#: settingsdialog.cpp:400
+#, kde-format
+msgid "Split main window &horizontally"
+msgstr "Rozdeliť hlavné okno &horizontálne"
+
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr "Ča&kanie pred zobrazením dialógu priebehu (v ms):"
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, kde-format
+msgid "Default compression &level:"
+msgstr "Štandardná úroveň &kompresie:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr "Využiť bežiaci, alebo spustiť nový proces ssh-agent"
+
+#: tagdialog.cpp:48
+#, kde-format
+msgid "CVS Delete Tag"
+msgstr "CVS odstránenie tagu"
+
+#: tagdialog.cpp:48
+#, kde-format
+msgid "CVS Tag"
+msgstr "CVS tag"
+
+#: tagdialog.cpp:67 tagdialog.cpp:86
+#, kde-format
+msgid "&Name of tag:"
+msgstr "&Meno tagu:"
+
+#: tagdialog.cpp:95
+#, kde-format
+msgid "Create &branch with this tag"
+msgstr "Vytvoriť &branch s týmto tagom"
+
+#: tagdialog.cpp:99
+#, kde-format
+msgid "&Force tag creation even if tag already exists"
+msgstr "&Vynútiť vytvorenie tagu aj ked tag už existuje"
+
+#: tagdialog.cpp:134
+#, kde-format
+msgid "You must define a tag name."
+msgstr "Musíte definovať meno tagu."
+
+#: tagdialog.cpp:140
+#, kde-format
+msgid ""
+"Tag must start with a letter and may contain letters, digits and the "
+"characters '-' and '_'."
+msgstr ""
+"Tag musí začínať písmom a môže obsahovať číslice, písmená a znaky '-' a '_'."
+
+#: updatedialog.cpp:42
+#, kde-format
+msgid "CVS Update"
+msgstr "Aktualizácia CVS"
+
+#: updatedialog.cpp:57
+#, kde-format
+msgid "Update to &branch: "
+msgstr "Aktualizovať na &branch:"
+
+#: updatedialog.cpp:76
+#, kde-format
+msgid "Update to &tag: "
+msgstr "Aktualizovať na &tag:"
+
+#: updatedialog.cpp:94
+#, kde-format
+msgid "Update to &date ('yyyy-mm-dd'):"
+msgstr "Aktualizovať na &dátum ('yyyy-mm-dd'):"
+
+#: updateview.cpp:50
+#, kde-format
+msgid "File Name"
+msgstr "Meno súboru"
+
+#: updateview.cpp:50
+#, kde-format
+msgid "Tag/Date"
+msgstr "Tag/Dátum"
+
+#: updateview.cpp:50
+#, kde-format
+msgid "Timestamp"
+msgstr "Časové razítko"
+
+#: watchdialog.cpp:38
+#, kde-format
+msgid "CVS Watch Add"
+msgstr "CVS pridať sledované"
+
+#: watchdialog.cpp:38
+#, kde-format
+msgid "CVS Watch Remove"
+msgstr "CVS odstrániť sledované"
+
+#: watchdialog.cpp:51
+#, kde-format
+msgid "Add watches for the following events:"
+msgstr "Pridať sledovací bod pre tieto udalosti:"
+
+#: watchdialog.cpp:51
+#, kde-format
+msgid "Remove watches for the following events:"
+msgstr "Odstrániť sledovací bod pre tieto udalosti:"
+
+#: watchdialog.cpp:54
+#, kde-format
+msgid "&All"
+msgstr "&Všetky"
+
+#: watchdialog.cpp:59
+#, kde-format
+msgid "&Only:"
+msgstr "&Iba:"
+
+#: watchdialog.cpp:68
+#, kde-format
+msgid "&Commits"
+msgstr "&Commity"
+
+#: watchdialog.cpp:72
+#, kde-format
+msgid "&Edits"
+msgstr "Ú&pravy"
+
+#: watchdialog.cpp:76
+#, kde-format
+msgid "&Unedits"
+msgstr "&Vrátené úpravy"
+
+#: watchersdialog.cpp:68 watchersdialog.cpp:74
+#, kde-format
+msgid "CVS Watchers"
+msgstr "Sledované v CVS"
+
+#: watchersmodel.cpp:86
+#, kde-format
+msgid "Watcher"
+msgstr "Sledovanie"
+
+#: watchersmodel.cpp:88
+#, kde-format
+msgid "Edit"
+msgstr "Upraviť"
+
+#: watchersmodel.cpp:90
+#, kde-format
+msgid "Unedit"
+msgstr "Vrátiť úpravy"
+
+#: watchersmodel.cpp:92
+#, kde-format
+msgid "Commit"
+msgstr "Commit"
+
+#~ msgid "Invoking help on Cervisia"
+#~ msgstr "Spúšťam pomocníka pre Cervisia"
+
+#~ msgid "&Overwrite"
+#~ msgstr "&Prepísať"
+
+#~ msgid "Invokes the KDE help system with the Cervisia documentation"
+#~ msgstr "Otvorí Pomocníka a zobrazí dokumentáciu k Cervisia"
+
+#~ msgid "Opens the bug report dialog"
+#~ msgstr "Otvorí dialóg pre správu o chybe"
+
+#~ msgid "Displays the version number and copyright information"
+#~ msgstr "Zobrazí verziu a informácie o copyrighte"
+
+#~ msgid "Displays the information about KDE and its version number"
+#~ msgstr "Zobrazí informácie o KDE a jeho verzii"
+
+#~ msgid "&Remove"
+#~ msgstr "&Odstrániť"

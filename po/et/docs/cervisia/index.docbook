@@ -1,0 +1,4049 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kappname "&cervisia;">
+  <!ENTITY package "kdesdk">
+  <!ENTITY ssh "<command
+>ssh</command
+>">
+  <!ENTITY rsh "<command
+>rsh</command
+>">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Estonian  "INCLUDE"
+> <!-- Change language only here -->
+  <!ENTITY CVS "<application
+>CVS</application
+>">
+]>
+
+<book id="cervisia" lang="&language;">
+
+<bookinfo>
+<title
+>&cervisia; käsiraamat</title>
+<authorgroup>
+<author
+><firstname
+>Bernd</firstname
+><surname
+>Gehrmann</surname
+> <affiliation
+><address
+>&Bernd.Gehrmann.mail;</address
+></affiliation>
+</author
+> 
+<author
+><firstname
+>Carlos</firstname
+><surname
+>Woelz</surname
+> <affiliation
+><address
+><email
+>carloswoelz@imap-mail.com</email
+></address
+></affiliation>
+</author
+> 
+
+
+<othercredit role="translator"
+><firstname
+>Marek</firstname
+><surname
+>Laane</surname
+><affiliation
+><address
+><email
+>bald@starman.ee</email
+></address
+></affiliation
+><contrib
+>Tõlge eesti keelde</contrib
+></othercredit
+> 
+
+</authorgroup>
+
+<copyright>
+<year
+>1999</year>
+<year
+>2000</year>
+<year
+>2001</year>
+<year
+>2002</year>
+<holder
+>&Bernd.Gehrmann;</holder>
+</copyright>
+
+<copyright>
+<year
+>2004</year>
+<holder
+>Carlos Woelz</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2008-09-08</date>
+<releaseinfo
+>3.1.1</releaseinfo>
+
+<abstract>
+<para
+>&cervisia; on &CVS;i graafiline kasutajaliides.</para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdesdk</keyword>
+<keyword
+>Cervisia</keyword>
+<keyword
+>CVS</keyword>
+<keyword
+>versioonide kontroll</keyword>
+<keyword
+>versiooni kontroll</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Sissejuhatus</title>
+
+<para
+><ulink url="http://www.kde.org/apps/cervisia/"
+>&cervisia;</ulink
+> on kasutajasõbralik versioonikontrolli süsteemi kasutajaliides. Selle eesmärk on toetada &CVS;-i ja muid versioonikontrolli süsteemi programme ühtse liidesena, mis võimaldab lahendada konflikte, vaadata erinevusi ja ajalugu, näha töös olevate failide staatust ja üldse kasutada enamikku võimalusi, mida versioonikontrolli süsteemid pakuvad. &cervisia; on võimalik paigaldada kas ise moodulist kdesdk või siis kasutada sinu distributsiooni pakutavat tarkvarapaketti kdesdk. Praegu on süsteemidest toetatud ainult &CVS;, kuid tulevikus on võimalik ka teiste süsteemide tugi. </para>
+
+<para
+>Versioonikontrolli süsteem pakub võimalust salvestada, hallata ja levitada failide erinevaid versioone. &CVS; on üks selliseid süsteeme. See lubab tehtud muudatusi hõlpsasti teistega jagada, sest iga autor võib oma versiooniga töötada kartmata, et ta kirjutab nii üle teiste muudatused või vastupidi. See süstem lubab taastada varasemaid versioone (mis tuleb kasuks vigade otsimisel), luua harusid (näiteks arendusversiooniga töötamiseks või valmisvariandi väljalaskmiseks) ja veel palju muud. </para>
+
+<para
+>Peamine <firstterm
+>hoidla</firstterm
+> sisaldab tavaliselt mõnda koostööprojekti (olgu siis kommertsprojekt või mitte), kuid &CVS; võimaldab paindlikult ennast ära kasutada ka vaid sinu enda huvides arendatava projekti tarbeks. Väga lihtne on luua kohalik hoidla, kus võid silma peal hoida vigu tekitanud muudatustel, neid tühistada, vältida juhuslikku infokadu &etc; </para>
+
+<para
+>Kui hoidlas asuvad projektifailid, siis iga autor võib endal hoida oma kohalikku koopiat, mis kannabki nime <firstterm
+>kohalik koopia</firstterm
+> või ka <firstterm
+>liivakast</firstterm
+>. Samas saab igaüks kanda oma muudatused peahoidlasse (see tegevus kannab nimetust &quot;sissekandmine&quot;) ja/või uuendada enda koopiat, et see kajastaks teiste arendajate tehtud muudatusi. </para>
+
+</chapter>
+
+<chapter id="getting-started">
+<title
+>Alustamine</title>
+
+<sect1 id="accessing-repository">
+<title
+>Hoidla kasutamine</title>
+
+<para
+>Selles osas selgitame, kuidas kasutada &cervisia; pakutavaid võimalusi kõige elementaarsemate versioonikontrolli süsteemi võtete jaoks ehk siis moodulite väljavõtmiseks hoidlast ja nendega töötamiseks. Selleks peab sul olema hoidlale ligipääs kliendina, mis tähendab, et keegi (arvatavasti &CVS; hoidla administraator) on sulle eraldanud serveril konto. Teine võimalus on muidugi luua vähese vaevaga oma projekti arendamiseks kohalik hoidla. </para>
+
+<tip
+><para
+>Kui kavatsed hakata arendama mõnda suuremat ja keerulisemat projekti, on mõttekas kasutada ära &CVS;-i võimalusi isegi siis, kui oled projekti ainuarendaja. Nii saad teha kohalikku koopiasse kõik vajalikud muudatused ja kasutada &cervisia;t (või ka muid &CVS;-i vahendeid) selle uuendamiseks ja sissekandmiseks. Sel moel saad hoida silma peal vigu põhjustanud muudatustel, neid tühistada, vältida juhuslikku infokadu jne. &cervisia; kasutamisel on kohaliku hoidla loomine äärmiselt lihtne. </para>
+
+<procedure>
+<title
+>Kohaliku hoidla loomine</title>
+
+<step
+><para
+>Ava dialoog <guilabel
+>Uue hoidla loomine (cvs init)</guilabel
+> menüükäsuga <menuchoice
+><guimenu
+> Hoidla</guimenu
+> <guimenuitem
+>Loo...</guimenuitem
+></menuchoice
+>. </para
+></step>
+
+<step
+><para
+>Klõpsa nupule <guilabel
+>...</guilabel
+> ja vali kataloog, kuhu soovid hoidla luua, või sisesta selle asukoht tekstikasti. Kui näiteks soovid hoidla luua kataloogi <filename
+>/home/user</filename
+> ja anda sellele nimeks <filename
+>cvsroot</filename
+>, tuleb tekstikasti kirjutada <filename
+>/home/user/cvsroot</filename
+> või valida failivalijat kasutades kataloog <filename
+>/home/user</filename
+> ning lisada <filename
+>cvsroot</filename
+>. </para
+></step>
+
+<step
+><para
+>Kui oled valmis, klõpsa nuppu <guibutton
+>OK</guibutton
+>. &cervisia; loob nüüd ja initsialiseerib uue hoidla kataloogi. </para
+></step>
+
+<step
+><para
+>Seejärel võid importida hoidlasse oma senise töö või luua hoidlas kataloog, kus kogu uut moodulit algusest peale arendama hakata. </para
+></step>
+
+</procedure>
+
+</tip>
+
+
+<para
+>&cervisia; võimadab dialoogiga <guilabel
+>Hoidlate seadistamine</guilabel
+> hallata kõiki hoidlate asukohti. Dialoogi saab avada menüükäsuga <menuchoice
+><guimenu
+>Hoidla</guimenu
+> <guimenuitem
+>Hoidlad...</guimenuitem
+></menuchoice
+>. </para>
+
+<figure id="screenshot-repositories" float="1">
+<title
+>&cervisia; hoidlate seadistamise dialoog</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="repositories.png"/></imageobject>
+<textobject
+><phrase
+>&cervisia; hoidlate seadistamise dialoog</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>&CVS;-i hoidlat saab kasutada mitme meetodiga: ligipääsu võib tagada parooliga autentimine (:pserver:), turvashell (kasutades :ext:), kohalik hoidla (:kohalik:) &etc; Hoidla asukoha vorming on järgmine (lisavõimalused on toodud ära nurksulgudes): </para>
+
+<para>
+<filename
+>[:meetod:][[kasutaja][:parool]@]masinanimi[:[port]]/hoidla/asukoht</filename>
+</para>
+
+<para
+>Hoidlale ligipääsuks pole sugugi alati vaja anda kõiki neid elemente (kasutajanime, parooli, masinanime, porti). Nõutav info sõltub kasutatavast ligipääsumeetodist, mille võib kokku võtta nii: </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+>Kohalik</term>
+
+<listitem>
+<para
+>Kohalik ligipääs on &CVS;-i vaikemeetod. Seepärast ei ole meetodi :local: lisamine hoidla asukohale vajalikki: sisestada võib ka lihtsalt kataloogi asukoha, kus &CVS;-i hoidla asub ja millele arvuti ligi pääseb, kujul <filename class="directory"
+>/hoidla/asukoht</filename
+> või kui tuua näide elust enesest, siis <filename class="directory"
+>/home/cvs</filename
+>.</para>
+
+<para
+>Füüsiliselt võib see asuda ka <acronym
+>NFS</acronym
+>-i vahendusel ühendatud kettal, kuid antud juhul on see ebaoluline. Kui oled loonud kohaliku hoidla, on asukoht lihtsalt tee, mida mööda sellele ligi pääseb. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry id="rsh">
+<term
+>&rsh;</term>
+
+<listitem>
+<para
+>Hoidla asukohaks võib olla näiteks <filename
+>:ext:kasutajanimi@masin.url.org:/hoidla/asukoht</filename
+> </para>
+
+<para
+>See meetod nõuab, et sul oleks konto serveris (antud juhul siis <systemitem class="systemname"
+>masin.url.org</systemitem
+>) ja et sa kasutaksid suhtlemiseks kaugshelli. Vaikimisi pruugib &CVS; &rsh;-d, kuid &rsh; on juba ammu tunnistatud ebaturvaliseks ja selle asemele on üldjuhul astunud &ssh;. </para>
+
+<para
+>Kui kasutad &ssh;-d, pead keskkonnamuutja <envar
+>CVS_RSH</envar
+> määrama <command
+>cvs</command
+> klienti kasutades &ssh;-le. &cervisia; toetab seda võimalust. </para>
+
+<!-- TODO: verify if the above still apply -->
+
+<para
+>Arvesta, et &cervisia; ei suuda vastata serveri võimalikule paroolinõudele. Kontrolli, et sisselogimine toimiks ilma parooli nõudmata. Puhta &rsh; korral saab seda näiteks teha usaldusväärsete masinate nimekirjaga faili <filename
+>.rhosts</filename
+> sinu kodukataloogis luues (vaata täpsemat infot &rsh; manuaalileheküljelt). </para>
+
+<para
+>&ssh; korral tuleb selleks kopeerida serverile oma avalik võti <filename
+>identity.pub</filename
+> (see asub kataloogis <filename
+>$<envar
+>HOME</envar
+>/.ssh/</filename
+>). Sellisel juhul ei tohi võti olla krüptitud paroolifraasiga (vaata täpsemat infot &ssh; manuaalileheküljelt ja &CVS;/<acronym
+>SSH</acronym
+> <acronym
+>KKK</acronym
+>-st SourceForge'is). Kui sa ei ole päris kindel, küsi nõu oma süsteemiadministraatorilt. </para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>pserver</term>
+
+<listitem>
+<para
+>Hoidla asukohaks võib olla näiteks <filename
+>:pserver:kasutajanimi@masin.url.org:/hoidla/asukoht</filename
+> </para>
+
+<para
+>See meetod võtab serveriga ühendust erilise suhteliselt nõrga autentimisega protokolli vahendusel (<literal
+>pserver</literal
+> tähendabki parooliga autentimist). Enne sellise serveri kasutamist peab sul olema &CVS;-serveri administraatori antud kasutajanimi ja parool ning sa pead end sellele sisse logima. Pane tähele, et sinu &CVS;-serveri autentimisel kasutatav nimi ei pruugi olla sama, mida kasutad enda süsteemi sisselogimisel. Enne &CVS;-serveri kasutamist tuleb sul end sisse logida. </para>
+
+<para
+>Vaba tarkvara projektid pakuvad enamasti võimalust ka lähtekoodile ligi pääseda anonüümset &CVS;-i kasutades. See tähendab, et sul on võimalik ka uusim lähtekood hõlpsasti hankida, seda muuta ning luua ilma &CVS;-i kontot loomata paigad (erinevused) hoidlas asuvate versioonide suhtes. Reeglina kasutab anonüümne &CVS; parooliga autentimist (:pserver:) ning on ainult lugemisõigusega, lubamata sul muudatusi vahetult hoidlasse sisse kanda. </para>
+
+</listitem>
+</varlistentry>
+</variablelist>
+
+<para
+>Hoidla ligipääsumeetodi ja asukoha määramine järel saab selle lisada &cervisia; hoidlate loendisse: </para>
+
+<procedure>
+<title
+>Uue hoidla lisamine</title>
+
+<step
+><para
+>Ava dialoog <guilabel
+>Hoidlate seadistamine</guilabel
+> menüükäsuga <menuchoice
+><guimenu
+>Hoidla</guimenu
+> <guimenuitem
+>Hoidlad...</guimenuitem
+></menuchoice
+> </para
+></step>
+
+<step
+><para
+>Klõpsa nupule <guilabel
+>Lisa...</guilabel
+>, mis avab dialoogi <guilabel
+>Hoidla lisamine</guilabel
+>. </para
+></step>
+
+<step
+><para
+>Kirjuta hoidla asukoht tekstikasti <guilabel
+>Hoidla:</guilabel
+>. &cervisia; lülitab automaatselt välja dialoogi need osad, mida valitud ligipääsumeetodi korral nagunii kasutada ei saa. </para
+></step>
+
+<step
+><para
+>Kui kasutad hoidlale ligipääsemisel ext-meetodit, anna tekstikastis <guilabel
+>Kasutatakse kaugshelli</guilabel
+> kaugshelli nimi, mida soovid pruukida (&eg; &ssh;). </para
+></step>
+
+<step
+><para
+>Klõpsa nupule <guibutton
+>OK</guibutton
+> ja näedki äsja sisestatud hoidlat hoidlate loendis. </para
+></step>
+
+<step
+><para
+>Kui sisestatud hoidla kasutamiseks on vaja parooliga autentimist (pserver), tuleb sul enne serveriga ühendumist end sisse logida. Klõpsa loendis hoidlanimel, et see valida, ning siis nupul <guilabel
+>Logi sisse...</guilabel
+> Sisesta parool ilmuvasse dialoogi. </para>
+<para
+>Kui oled parooli edukalt sisestanud, ilmub pserveri hoidla veerus <guilabel
+>Olek</guilabel
+> kirje <guilabel
+>Pole sisse logitud</guilabel
+> asemele <guilabel
+>Sisse logitud</guilabel
+>. </para
+></step>
+
+<step
+><para
+>Klõpsa muudatuste rakendamiseks nupule <guibutton
+>OK</guibutton
+> või kui tahad, jätka hoidlate asukohtade lisamist. &cervisia; suudab salvestada just nii palju asukohti, kui sa talle ette annad. </para
+></step>
+
+</procedure>
+
+</sect1>
+
+
+<sect1 id="importing">
+<title
+>Mooduli import hoidlasse</title>
+
+<para
+>Selles osas vaatame, kuidas uut projekti &CVS; hoidlasse lülitada. Kui soovid kõigest töötada olemasoleva projektiga, mis juba on hoidlas, võid selle osa vahele jätta. </para>
+
+<para
+>Projekti saab &CVS;-i lülitada kahel viisil: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Importides failid ja kataloogid &cervisia; importimisdialoogi abil uude <firstterm
+>moodul</firstterm
+>isse. Moodulid on &CVS;-i hoidla kataloogipuu tipptaseme kataloogid, millega eristatakse ja korrastatakse erinevaid hoidlas asuvaid tarkvaraprojekte. </para
+></listitem>
+
+<listitem
+><para
+>Luues tühja mooduli ja lisades sinna käsitsi uued failid ja kataloogid. See tagab sulle suurema kontrolli, võtab aga usutavasti märksa enam aega. </para
+></listitem>
+
+</itemizedlist>
+
+<important>
+<para
+>Arvesta, et &CVS; on algselt loodud tekstifailide tarbeks. Paljud võimalused, näiteks versioonide liitmine, erinevuste näitamine loetaval kujul jne., on kasutatavad ainult tekstifailide puhul. See ei tähenda küll, et &CVS;-i ei saa kasutada ka binaarfailide jaoks, küll aga seda, et sul tuleb <emphasis
+>anda &CVS;-ile täpselt teada, kas tegu on teksti- või binaarfailiga</emphasis
+>. Kui määrad vale failitüübi, saad peagi aru, et &CVS; ei käitu nendega õigesti ning lõpuks võivad su andmed tugevasti viga saada. </para>
+</important>
+
+
+<para
+>Projekti importimisel (uue moodulina) on teatud eelised: võimalik on importida kõik failid ja kataloogid rekusiivselt ning moodul ise luuakse automaatselt. Nii on ka suurte projektide import hoidlasse üpris hõlpus. Kuid siin on ka mõningad puudujäägid: &cervisia; importimisdialoogi ei saa kasutada failide lisamiseks olemasolevatesse moodulitesse ning faile saab importida kas teksti- või binaarfailidena. Sellest piirangust saab küll mööda hiilida, kui luua kataloog ainult üht tüüpi failidele või anda ette failimustrid, mida importimisel ignoreerida. </para>
+
+<para
+>Oletame näiteks, et sinu projektis on ainult tekstifailid ja mõned PNG pildid (need on siis binaarfailid). Sa võid lasta &CVS;-il ignoreerida kõik faile mustriga <filename class="extension"
+>*.png</filename
+>, kui impordid ülejäänud failid tekstifailidena, või siis liigutada pildid omaette kataloogi ja importida seejärel ülejäänud failid (tekstifailidena). Nii või teisiti tuleb sul äsja imporditud moodulist kohaliku koopia jaoks <link linkend="checkingout"
+>väljavõte teha</link
+>, kopeerida sellesse puuduvad failid ja kataloogid ning need hoidlasse <link linkend="addingfiles"
+>lisada</link
+> ja <link linkend="committingfiles"
+>sisse kanda</link
+>. Alles siis on import tegelikult läbi saanud. </para>
+
+<para
+>Seepärast on teine võimalus lisada failid ja kataloogid käsitsi, luues neile eelnevalt tühja mooduli. Tühja mooduli lisamiseks hoidlasse loo lihtsalt uus kataloog &CVS;-hoidla juurkataloogis. Uue kataloogi nimi on ühtlasi mooduli nimi. Tee uuest moodulist <link linkend="checkingout"
+>väljavõte</link
+>. Seejärel kopeeri failid ja kataloogid kohalikku koopiasse ning <link linkend="addingfiles"
+>lisa</link
+> ja <link linkend="committingfiles"
+>kanna sisse</link
+> &CVS;-hoidlasse saatmiseks. </para>
+
+
+<figure id="screenshot-import" float="1">
+<title
+>&cervisia; importimisdialoog</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="import.png"/></imageobject>
+<textobject
+><phrase
+>&cervisia; importimisdialoog</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+><xref linkend="screenshot-import"/> näitab dialoogi, mis aitab <emphasis
+>importida</emphasis
+> projekti moodulina. &cervisia; importimisdialoogi avamiseks vali menüükäsk <menuchoice
+><guimenu
+>Hoidla</guimenu
+> <guimenuitem
+>Impordi...</guimenuitem
+></menuchoice
+> </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Hoidla:</guilabel
+> <xref linkend="co-repository"/></term>
+<listitem
+><para
+>&CVS; hoidla nimi, tuntud ka kui $<envar
+>CVSROOT</envar
+>. Sul peab olema selles kirjutamisõigus ja hoidla peab olema korrektselt initsialiseeritud. Kui hoidlat ei ole veel olemas, loo see menüükäsuga <menuchoice
+> <guimenu
+>Hoidla</guimenu
+> <guimenuitem
+>Loo...</guimenuitem
+> </menuchoice
+> </para>
+<para
+>Rippmenüüga kastis on näha kõik hoidlad, mille oled varem loendisse sisestanud dialoogiga <guilabel
+>Hoidlate seadistamine</guilabel
+>. Kui tegemist on kaughoidlaga, kontrolli, et autentimine töötaks, täpsemat infot annab <xref linkend="accessing-repository"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Moodul:</guilabel
+> <xref linkend="co-module"/></term>
+<listitem
+><para
+>Mooduli nimi, millega projekt salvestatakse. Pärast importimist saab projektist just selle nimega väljavõtteid teha. Täpsemat infot annab <xref linkend="checkingout"/>. See on ka vastava kataloogi nimi hoidlas. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Töökataloog:</guilabel
+></term>
+<listitem
+><para
+>See on imporditava projekti ülemkataloog. Import algab sellest kataloogist ning edeneb rekursiivselt allapoole. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Tootja silt:</guilabel
+> <xref linkend="co-vendortag"/></term>
+<listitem
+><para
+>Tootja silti kasutatakse traditsiooniliselt allikate jälgimiseks. Kui sul mingit paremat mõtet ei ole, anna siin oma kasutajanimi. Õigupoolest pole eriti tähtis, mida siin sisestad. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Väljalaske silt:</guilabel
+> <xref linkend="co-releasetag"/></term>
+<listitem
+><para
+>Ka seda silti on traditsiooniliselt kasutatud tarkvara erinevate versioonide importimisel. Kui sa sellega ei tegele, kasuta sõna <literal
+>start</literal
+> või stringi <literal
+>SUVA_1_0</literal
+>, kus <literal
+>SUVA</literal
+> on projekti nimi ja <literal
+>1.0</literal
+> imporditava väljalaske versiooni number. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Eiratakse faile:</guilabel
+></term>
+<listitem
+><para
+>Selle välja täitmisel antakse käsule <command
+>cvs import</command
+> täiendavalt võti <option
+>-I <replaceable
+>failinimed</replaceable
+></option
+>. Seda kirjet tõlgendatakse tühikutega eraldatud nimekirjana, kus seisavad failide nimed, mida tuleb ignoreerida. Üldiselt on mõttekam ja veakindlam viis kontrollida, millised failid hoidlasse lähevad, luua kataloog ainult nende failidega, mida soovid importida, ja siis sellest kataloogist alustadagi. Siiski võib see võti olla kasulik, kui projektis leidub faile, mida &CVS; vaikimisi eirab, nt. failid nimetusega <filename
+>core</filename
+>. Sellisel juhul kirjuta väljale ainult märk <literal
+>!</literal
+>. See tühistab &CVS;i eiratavate failide skeemi, täpsemalt vaata <xref linkend="ignoredfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Kommentaar:</guilabel
+> <xref linkend="co-comment"/></term>
+<listitem
+><para
+>Sellele väljale saab kirjutada kommentaarid, mis sul on imporditavate failide päritolu, kasutamise, arendamise &etc; kohta. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Imporditakse binaarfailidena</guilabel
+></term>
+<listitem
+><para
+>Selle märkimisel imporditakse kõik failid binaarkujul, &ie; käsule <command
+>cvs import</command
+> lisatakse võti <option
+>-kb</option
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Faili muutmise aega kasutatakse importimisajana</guilabel
+></term>
+<listitem
+><para
+>Selle märkimisel märgitakse importimise ajaks failide muutmise aeg, mitte aga importimise aeg ise. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+
+<para
+>Kui oled väljad täitnud ja klõpsanud nuppu <guibutton
+>OK</guibutton
+>, antakse järgmine &CVS; käsk:</para>
+
+<screen
+><command
+>cvs</command
+> -d <co id="co-repository"
+></co
+><replaceable
+>hoidla</replaceable
+> import -m "<co id="co-comment"
+></co
+>" <co id="co-module"
+></co
+><replaceable
+>moodul</replaceable
+> <co id="co-vendortag"
+></co
+><replaceable
+>tootja_silt</replaceable
+> <co id="co-releasetag"
+></co
+><replaceable
+>väljalaske_silt</replaceable
+></screen>
+
+</sect1>
+
+
+<sect1 id="checkingout">
+<title
+>Mooduli väljavõtte tegemine hoidlast</title>
+<para
+>Nüüd, kui oled edukalt määranud hoidla asukoha ja esimesed failid hoidlasse importinud, on aeg &CVS;-hoidla moodulist väljavõte teha ning enda kohalik koopia luua. </para>
+
+<para
+>Selleks võib olla vajalik teada ka, milline on õige <firstterm
+>haru</firstterm
+> või <firstterm
+>silt</firstterm
+> </para>
+
+<para
+>Mooduli harud on selle paralleelsed versioonid. Heaks näiteks nende praktilise kasutamise kohta on tarkvaraprojektide väljalasked. Pärast väljalaset on kahtlemata lähtekoodis vigu, mis ootavad parandamist, kuid samas soovib keegi kindlasti ka mõne hoopis uue võimaluse lisada. Mõlemat korraga on reeglina päris raske saavutada, sest uued võimalused toovad enamasti kaasa uusi vigu ning seeläbi muutub vanade vigade jälgimine keerukamaks. Selle dilemma lahendamiseks lubab &CVS; luua paralleelse versiooni, mida me nimetame &quot;stabiilseks väljalaskeharuks&quot; ja milles parandatakse ainult vigu, samal ajal kui peaharu (HEAD) on avatud ka uute võimaluste lisamisele. </para>
+
+<para
+>Silte kasutatakse projekti versiooni märkimiseks. &CVS; tähistab iga faili teatud versiooni sildiga, nii et kui teed väljavõtte või uuendad vastavalt konkreetsele sildile, saad alati ühe ja sama failiversiooni. Seepärast ei ole erinevalt harust sildid dünaamilised: sildiga tähistatud faile ei saa õigupoolest arendada. Sildid on kasulikud näiteks väljalaske tähistamiseks, suurte muudatuste puhul lähtetekstis &etc; Siltide abil saab projekti hõlpsasti pöörata tagasi mingisse varasemasse olekusse, et vigu tuvastada, lähtekoodi uuesti genereerida &etc; </para>
+
+<figure id="screenshot-checkout" float="1">
+<title
+>&cervisia; väljavõtte tegemise dialoog</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="checkout.png"/></imageobject>
+<textobject
+><phrase
+>&cervisia; väljavõtte tegemise dialoog</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Hoidla:</guilabel
+></term>
+<listitem
+><para
+>&CVS; hoidla nimi, tuntud ka kui <filename
+><envar
+>$CVSROOT</envar
+></filename
+>. Rippmenüüga kastis on näha kõik hoidlad, mille oled varem loendisse sisestanud dialoogiga <guilabel
+>Hoidlate seadistamine</guilabel
+>. Kui tegemist on kaughoidlaga, kontrolli, et autentimine töötaks, täpsemat infot annab <xref linkend="accessing-repository"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Moodul:</guilabel
+></term>
+<listitem
+><para
+>Moodul, millest soovid väljavõtte teha. Kui töötad olemasoleva hoidlaga, saad nime arvatavasti süsteemiadministraatorilt või kui tegemist on vaba tarkvara hoidlaga, siis projekti veebileheküljelt. Kui soovid luua uue mooduli nullist peale kohalikku hoidlat kasutades, loo lihtsalt uus kataloog kohaliku hoidla juurkataloogis. Kataloogi nimi on sama, mis tühjal moodulil. </para>
+<para
+>Kui hoidlal on aga olemas fail <filename
+><envar
+>$CVSROOT</envar
+>/modules</filename
+>, saab olemasolevate moodulite nimekirja tõmmata klõpsuga nupul <guibutton
+>Laadi nimekiri</guibutton
+>. </para>
+<para
+>Pane tähele, et väljavõtte saab teha ka mooduli mis tahes olemasolevast alamkataloogist ilma ülejäänud moodulit kaasamata. Selleks anna lihtsalt alamkataloogi asukoht. Kui soovid näiteks teha moodulis kdesdk ainult alamkataloogi <filename class="directory"
+>doc/cervisia</filename
+> väljavõtte, kirjutagi sellele väljale <filename class="directory"
+>kdesdk/doc/cervisia</filename
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Haru silt:</guilabel
+></term>
+<listitem
+><para
+>Haru või sildi nimi, mille väljavõtte soovid teha. Kui jätad selle välja tühjaks, teeb &cervisia; väljavõtte peaharust (HEAD). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Töökataloog:</guilabel
+></term>
+<listitem
+><para
+>Kataloog, kuhu mooduli väljavõte salvestatakse. Arvesta, et töövariandi ülemkataloog luuakse alati siin antud kataloogi töövariandiga sama nime kandva alamkataloogina, kui sa ei ole just andnud alternatiivset nime väljal <guilabel
+>Väljavõtte tegemine kui:</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Väljavõtte tegemine kui:</guilabel
+></term>
+<listitem
+><para
+>Alternatiivne kataloog, kuhu väljavõte teha. Selle tulemusena saab väljavõetavad failid paigutada aktiivses töökataloogis mingi muu nimega kataloogi kui mooduli nimele vastav kataloog. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Ainult eksport</guilabel
+></term>
+<listitem
+><para
+>Selle märkimisel failid eksporditakse, mitte aga ei tehta väljavõtet. Eksportimisel tõmmatakse mooduli koopia ilma &CVS;-i haldamise kataloogideta. Eksport võib olla mõttekas näiteks lähtekoodi väljalaske ettevalmistamisel. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Rekursiivne väljavõte</guilabel
+></term>
+<listitem
+><para
+>Kõigi failide ja kataloogide väljavõte rekursiivselt.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+
+<sect1 id="mainscreen">
+<title
+>Peaaken, faili olek ja uuendamine</title>
+<para
+>&cervisia; käivitamisel ja kohaliku koopia avamisel menüükäsuga <menuchoice
+> <guimenu
+>Fail</guimenu
+> <guimenuitem
+>Ava liivakast...</guimenuitem
+> </menuchoice
+> võid näha &cervisia; peaaknas kaht põhiosa: üleval asub avatud kohaliku koopia hierarhiline puuvaade, all näidatakse &CVS; käske, mida &cervisia; annab sinu sooritatud ülesannete täitmiseks, samuti nende käskude väljundit. </para>
+
+<para
+>Vaikimisi ei näita &cervisia; alamkataloogides leiduvaid faile ning sul tuleb klõpsata kataloogidel, mille sisu soovid näha. Kohaliku koopia kõigi failide nägemiseks kasuta menüükäsku <menuchoice
+> <guimenu
+>Vaade</guimenu
+> <guimenuitem
+>Rulli failipuu lahti</guimenuitem
+> </menuchoice
+>. Kui soovid nüüd jälle taastada algseisu, vali menüükäsk <menuchoice
+> <guimenu
+>Vaade</guimenu
+> <guimenuitem
+>Rulli failipuu kokku</guimenuitem
+> </menuchoice
+>. </para>
+
+<para
+>Vastavalt failide <filename
+>.cvsignore</filename
+> seadistustele ei ole näha faile, mida tavaliselt ei soovita hoidlas näha, nt. objektifaile. Iga faili korral on näha selle olek. Vaikimisi on see "Tundmatu", sest &cervisia; ei hangi infot enne, kui oled valinud menüükäsu <menuchoice
+> <guimenu
+>Fail</guimenu
+> <guimenuitem
+>Värskenda</guimenuitem
+> </menuchoice
+> või <menuchoice
+> <guimenu
+>Fail</guimenu
+> <guimenuitem
+>Olek</guimenuitem
+> </menuchoice
+>. Sellisel moel on sul võimalik üht-teist ära teha isegi juhul, kui puudub püsiühendus &CVS; serveriga. </para>
+
+<figure id="screenshot-mainview" float="1">
+<title
+>&cervisia; peaaken</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="mainview.png"/></imageobject>
+<textobject
+><phrase
+>&cervisia; peaaken</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Käsud menüüs Fail rakenduvad üldiselt ainult failidele, mis on parajasti ära märgitud. Märkida saab ka katalooge. Vali seejärel <menuchoice
+> <guimenu
+>Fail</guimenu
+> <guimenuitem
+>Olek</guimenuitem
+> </menuchoice
+> või vajuta klahvi <keycap
+>F5</keycap
+>. &cervisia; annab siis korralduse </para>
+
+<para>
+<screen
+><command
+>cvs update -n <replaceable
+>failinimed</replaceable
+></command
+></screen>
+</para>
+
+<para
+>märgitud failide olekuinfo hankimiseks. Arvesta, et &cervisia; liigub rekursiivselt alamkataloogidesse ainult juhul, kui vastav võimalus menüüs <guimenu
+>Seadistused</guimenu
+> on sisse lülitatud. Vastavalt faili staatusele on veerus <guilabel
+>Olek</guilabel
+> näha järgmised märked: </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Lokaalselt muudetud</guilabel
+></term>
+<listitem
+><para
+>See tähendab, et faili on muudetud võrreldes hoidlas oleva versiooniga. </para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><guilabel
+>Lokaalselt lisatud</guilabel
+></term>
+<listitem
+><para
+>See tähendab, et faili ei ole hoidlas, küll aga sinu töökataloogis ja et see on märgitud imporditavaks. Hoidlasse jõuab see siiski alles pärast sinna sissekande tegemist. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Lokaalselt eemaldatud</guilabel
+></term>
+<listitem
+><para
+>See tähendab, et oled märkinud faili eemaldatavaks, kuid see on hoidlas siiski veel alles. Hoidlast eemaldatakse see alles pärast sinna sissekande tegemist. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Vajab värskendamist </guilabel
+></term>
+<listitem
+><para
+>Seda näeb siis, kui hoidlas on olemas uuem versioon, &eg; kui keegi on sellesse mingi muudatuse teinud. Tavaliselt valitseb sinus kange kihu seda faili uuendada, et oma töökataloog ajakohasena hoida. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Vajab paikamist</guilabel
+></term>
+<listitem
+><para
+>Sisuliselt on see sama, mis eelmine. Erinevuseks on see, et uuendamise korral saadab &CVS; server kogu faili asemel ainult paiga. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Vajab ühendamist</guilabel
+></term>
+<listitem
+><para
+>See annab märku, et vajalik on antud faili töökataloogis eksisteeriva versiooni ühendamine hoidlas oleva versiooniga. See juhtub tavaliselt siis, kui oled faili muutnud ning samal ajal on seda teinud ka keegi teine. Kui valid uuendamise, liidetakse hoidlas olevad muutused sinu faili. Konflikti korral (&ie; kui keegi on muutnud mõnda rida, mida sinagi oled muutnud, aga teisiti) saab uueks olekuks "Konflikt". </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Värske</guilabel
+></term>
+<listitem
+><para
+>Näitab, et fail on samane hoidlas oleva versiooniga. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Konflikt</guilabel
+></term>
+<listitem
+><para
+>Seda näidatakse siis, kui failis leidub konfliktimärgiseid. See võib juhtuda näiteks siis, kui oled faili varem värskendanud, kuid konfliktid lahendamata jätnud. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Pole CVSis</guilabel
+></term>
+<listitem
+><para
+>Näitab, et faili ei ole registreeritud &CVS;-hoidlas. Kui soovid, et see oleks kättesaadav ka teistele, tuleb see hoidlasse lisada. Kui aga mitte, võiksid selle nime lisada oma faili <filename
+>.cvsignore</filename
+>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Nüüd, kus oled saanud ülevaate &CVS;-i hetkeolekust, võib tekkida soov võtta ette värskendamine. Märgi mõned failid (või ka kataloogipuu juur, mis võrdub kõigi selles kataloogis olevate failide märkimisega). Vali  <menuchoice
+> <guimenu
+>Fail</guimenu
+> <guimenuitem
+>Värskenda</guimenuitem
+> </menuchoice
+> (kuigi tegelikult võiks seda käsku kasutada kohe seanssi alustades). Mõne faili olek võib muutuda. Tavaliselt uuendatakse faile, mille olek oli "Vajab paikamist" või "Vajab värskendamist". Nüüd võivad olekuveergu ilmuda mõningad uued elemendid: </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Värskendatud</guilabel
+></term>
+<listitem
+><para
+>Näitab, et faili on hoidlast värskendatud. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Paigatud</guilabel
+></term>
+<listitem
+><para
+>Näitab, et &CVS; server on saatnud failile paiga ja et see on edukalt lisatud. Kui see hästi ei õnnestunud, sest tekkis konflikt sinu tehtud ja kellegi teise hoidlasse saadetud muudatuste vahel, saab olekuks <guilabel
+>Konflict</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Kindlasti märkad, et vastavalt olekule on ridadel erinev värv. Need on valitud mingil määral peegeldama oleku prioriteetsust. Näiteks konfliktiga fail on märgitud punasega, mis annab märku, et konflikt tuleks lahendada, enne kui failiga edasi tegutseda. Kui kataloogis on palju faile, võib siiski ülevaade kaotsi minna. Täpsema info saamiseks mitte-päris-tavalise olekuga failide kohta klõpsa veerul <guilabel
+>Olek</guilabel
+>. Nimekiri sorteeritakse siis vastavalt prioriteedile, nii et kogu oluline info koondub nimekirja esiotsa. Et näha taas tähestiku järgi sorteeritud nimekirja, klõpsa veerul <guilabel
+>Faili nimi</guilabel
+>. </para>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="workingwithfiles">
+<title
+>Töö failidega</title>
+
+<para
+>&cervisia; peaaken võimaldab kasutada vahetult kõiki &CVS;-i tavapäraseid võimalusi. Käsud rakenduvad tavaliselt mitmele failile korraga - nimelt neile, mida oled parajasti valinud. Kui valik hõlmab ka katalooge, sõltub käsu rakendamise kord menüüs <guimenu
+>Seadistused</guimenu
+> määratust. Kui näiteks on sisse lülitatud <menuchoice
+><guimenu
+>Seadistused</guimenu
+><guimenuitem
+>Rekursiivne sissekannete tegemine ja eemaldamine</guimenuitem
+></menuchoice
+> ning sa valid menüükäsu <menuchoice
+><guimenu
+>Fail</guimenu
+><guimenuitem
+>Tee sissekanne...</guimenuitem
+></menuchoice
+>, kusjuures valitud on mõni kataloog, siis tehakse sissekanne kõigist antud kataloogi alla kuuluvatest failidest. Vastasel juhul puudutab käsk vaid tavalisi faile kataloogis endas. </para>
+
+<figure id="screenshot-popup" float="1">
+<title
+>&cervisia; kontekstimenüü</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="popup.png"/></imageobject>
+</mediaobject>
+</figure>
+
+<para
+>Kõige sagedamini vajaminevad toimingud leiab ka failidel puuvaates hiire parema nupuga klõpsates avanevast kontekstimenüüst. <xref linkend="screenshot-popup"/> näitab &cervisia; peaakna kontekstimenüüd. </para>
+
+<para
+>Faili redigeerimiseks piisab, kui sellele topeltklõps teha vüi fail valida ja vajutada klahvile &Enter;. Seejärel käivitatakse antud failitüübi käsitlemiseks mõeldud vaikerakendus (iga failitüübi vaikerakendus on kogu &kde;-s kehtiv seadistus). Kui vaikerakendus ei ole mitte see, mida sa tahaksid parajasti kasutada, võib failil teha klõpsu hiire parema nupuga, valida alammenüü <menuchoice
+> <guisubmenu
+>Redigeeri kasutades</guisubmenu
+> </menuchoice
+> ning sealt juba mõni muu rakendus, mis antud failitüübiga tegelda oskab. </para>
+
+<sect1 id="addingfiles">
+<title
+>Failide lisamine</title>
+
+<para
+>Failide lisamine projekti eeldab kaht sammu. Esiteks peab failid &CVS;-is registreerima ehk nad <emphasis
+>hoidlasse lisama</emphasis
+>. Kuid see ei ole veel kõik: et failid ka tegelikult hoidlasse jõuaks, tuleb nad <emphasis
+>sisse kanda</emphasis
+>. Sellel on üks oluline eelis: failid saab sisse kanda koos muudatustega projekti muudes osades. Nii võivad teised (&eg; sissekandemeilides) hõlpsasti näha, et kõik need muudatused on tehtud korraga. </para>
+
+<para
+>Selleks märgi &cervisia; peaaknas failid, mida soovid lisada. Seejärel vali menüükäsk <menuchoice
+><guimenu
+>Fail</guimenu
+><guimenuitem
+>Lisa hoidlasse...</guimenuitem
+></menuchoice
+> või klõpsa märgitud failidel hiire parema nupuga ja vali <guimenuitem
+>Lisa hoidlasse...</guimenuitem
+> Ilmub dialoog <guilabel
+>CVS - lisamine</guilabel
+>, mis näitab kõiki märgitud faile ja soovib saada sinu kinnitust. Klõpsa nupule <guibutton
+>OK</guibutton
+>. </para>
+
+<para
+>&cervisia; annab käsu</para>
+
+<para>
+<screen
+><command
+>cvs add <replaceable
+>failinimed</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Kui see õnnestub, ilmub lisatavate failide olekuveergu märge "Lisatud hoidlasse". </para>
+
+<warning
+><para
+>&CVS; ei ole mõeldud pakkuma korralikku versioonide kontrolli binaarfailidele. Näiteks binaarfailide ühendamisel ei ole üldjuhul mingit mõtet. Pealegi võtab &CVS; sissekande tegemisel vaikimisi ette võtmesõna täiendamise (&eg; stringis <literal
+>&dollar;Revision: 1.6 &dollar;</literal
+>). Binaarfailides võivad sellised asendused faili rikkuda ja muuta täiesti kasutamatuks. </para
+></warning>
+
+<para
+>Et seda ei juhtuks, tuleb binaarfailid (või ka muud, näiteks PostScript failid või PNG pildifailid) sisse kanda menüükäsuga <menuchoice
+><guimenu
+>Fail</guimenu
+><guimenuitem
+>Lisa binaarfail...</guimenuitem
+></menuchoice
+> Ilmub dialoog <guilabel
+>CVS - Binaarfaili lisamine</guilabel
+>, mis näitab kõiki märgitud faile ja soovib saada sinu kinnitust. Klõpsa nupule <guibutton
+>OK</guibutton
+>. </para>
+
+<para
+>&cervisia; annab käsu </para>
+
+<para>
+<screen
+><command
+>cvs add -kb <replaceable
+>failinimed</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="removingfiles">
+<title
+>Failide eemaldamine</title>
+
+<para
+>Sarnaselt failide lisamisele on failide eemaldamine kaheastmeline protsess. Esmalt tuleb failid registreerida eemaldatavaks menüükäsuga <menuchoice
+><guimenu
+>Fail</guimenu
+><guimenuitem
+>Eemalda hoidlast...</guimenuitem
+></menuchoice
+> või hiire parema nupu klõpsuga märgitud failidel ja kontekstimenüüst kirje <guimenuitem
+>Eemalda hoidlast...</guimenuitem
+> valimisega. Ilmub dialoog <guilabel
+>CVS - Eemaldamine</guilabel
+>, mis näitab kõiki märgitud faile ja soovib saada sinu kinnitust. Klõpsa nupule <guibutton
+>OK</guibutton
+>. &cervisia; annab käsu </para>
+<para>
+<screen
+><command
+>cvs remove -f <replaceable
+>failinimed</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Seejärel tuleb see liivakastis tehtud muudatus sisse kanda, millega võib kaasneda projekti ka muude muutuste tegemine. </para>
+
+<note
+><para
+>Ülaltoodud käsk toimib ainult siis, kui fail on värske. Muidu on tulemuseks veateade. See on üsna arukas: kui oled teinud faili võrreldes hoidlaga muutusi või on muutusi teinud keegi teine, tasuks enne kontrollida, kas need tasub tõesti täielikult unustusehõlma saata. </para
+></note>
+
+</sect1>
+
+
+<sect1 id="addingremovingdirs">
+<title
+>Kataloogide lisamine ja eemaldamine</title>
+
+<para
+>&CVS; käsitleb katalooge põhimõtteliselt täiesti erinevalt tavalistest failidest. Need ei allu versioonide kontrollile, &ie; sul ei ole võimalik määrata, millised kataloogid olid projektis teatud ajahetkel olemas. Lisaks sellele ei saa katalooge otseselt eemaldada, kui sa just neid vahetult hoidlast ei kõrvalda. </para>
+
+<para
+>&CVS; järgib tava, et kataloog on projekti versioonis "olematu", kui see on tühi. Seda saab teostada võtme <option
+>-P</option
+> lisamisega käsule <command
+>cvs update</command
+> ja <command
+>cvs checkout</command
+>. Selle võimaluse saab kehtestada menüükäsuga <menuchoice
+><guimenu
+>Seadistused</guimenu
+><guimenuitem
+>Värskendamisel eemaldatakse tühjad kataloogid</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>Kataloogi saab lisada hoidlasse menüükäsuga <menuchoice
+><guimenu
+>Fail</guimenu
+><guimenuitem
+>Lisa hoidlasse...</guimenuitem
+></menuchoice
+> või hiire parema nupuga märgitud kataloogil klõpsates ja ilmuvast kontekstimenüüst kirjet <guimenuitem
+>Lisa hoidlasse...</guimenuitem
+> valides. Arvesta, et erinevalt failide lisamisest ei nõua kataloogi lisamine hilisemat sissekannet. &cervisia; annab seejärel käsu </para>
+
+
+<para>
+<screen
+><command
+>cvs add <replaceable
+>kataloogi_nimi</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="committingfiles">
+<title
+>Failide sissekandmine</title>
+
+<para
+>Kui oled oma tööversiooni teinud mitmeid muutusi ja soovid, et ka teised arendajad saaks neid kasutada, tuleb need <emphasis
+>sisse kanda</emphasis
+>. Sissekandmisega paigutad muudetud failide versioonid uute versioonidena hoidlasse. Kui nüüd mõni teine arendaja võtab ette värskendamise, jõuavad sinu tehtud muudatused tema tööversiooni. </para>
+
+<para
+>Failide sissekandmiseks vali need &cervisia; peaaknas ja kasuta menüükäsku <menuchoice
+><guimenu
+>Fail</guimenu
+><guimenuitem
+>Tee sissekanne...</guimenuitem
+></menuchoice
+> või klõpsa märgitud failidel hiire parema nupuga ja vali ilmuvast kontekstimenüüst kirje <guimenuitem
+>Tee sissekanne...</guimenuitem
+> </para>
+
+<figure id="screenshot-commit" float="1">
+<title
+>&cervisia; sissekande tegemise dialoog</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="commit.png"/></imageobject>
+</mediaobject>
+</figure>
+
+<para
+>Ilmub dialoog, mille ülaosas on näha valitud failid ning alumises osas pakutakse sulle võimalust panna kirja logiteade. &cervisia; aitab igati kaasa mõtestatud logiteadete koostamisele. Esiteks saab failide nimekirjas mõnel failil topeltklõpsu tehes või klahvi <keycap
+>Return</keycap
+> vajutades näha sellesse tehtud muudatusi. Teiseks näidatakse liitkastis varasemaid logiteateid. Kolmandaks on dialoog seotud allpool kirjeldatava &cervisia; faili ChangeLog redaktoriga. Kui oled dialoogis asjadega valmis saanud, antakse käsk </para>
+
+<para>
+<screen
+><command
+>cvs commit -m <replaceable
+>teade</replaceable
+> <replaceable
+>failinimed</replaceable
+></command
+></screen>
+</para>
+
+ 
+
+
+<note
+><para
+>Üsna tavaline viga sissekande tegemisel on <errorname
+>Up-to-date check failed</errorname
+> (<quote
+>värskuse kontroll ebaõnnestus</quote
+>). See näitab, et keegi on hoidlasse pärast sinu viimast värskendamist muudatusi teinud ehk kui tehnilisemalt rääkida, ei ole sinu <literal
+>BASE</literal
+>-versioon antud harus mitte kõige uuem. Sellisel juhul keeldub &CVS; sinu muudatusi hoidlasse ühendamast. Lahenduseks on värskendada, lahendada vajadusel konfliktid ja uuesti sissekanne teha. Kui töötad tarkvaraprojekti kallal, tasub mõistagi pärast värskendamist ka kontrollida, kas rakendus ikka töötab, sest lõppeks võib ju sinu ja teiste tehtud muudatuste vahel olla vastuolusid, mis koodi rikuvad. </para
+></note>
+
+<note>
+<para
+>Teine levinud veateade on <errorname
+>Sticky tag 'X' for file 'X' is not a branch</errorname
+>. See juhtub siis, kui püüad sisse kanda faili, mille oled varem uuendanud teatud versiooni või sildini käsuga </para>
+<para>
+<screen
+><prompt
+>%</prompt
+><userinput
+>cvs update -r X</userinput
+></screen>
+</para>
+<para
+>(seda saab &eg; teha menüükäsuga <menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Värskenda silti/kuupäeva...</guimenuitem
+></menuchoice
+>). Sellisel juhul muutub faili silt 'kleepuvaks', &ie; edasised värskendamised ei anna tulemuseks haru uusimat versiooni. Kui soovid nüüd harusse sissekannet teha, tuleb enne seda värskendada haru silti. </para>
+</note>
+
+<para
+>&cervisia; puhul on üpris lihtne hallata faili ChangeLog, mis ühildub &GNU; koodijuhistes kirja pandud vorminguga. Selle kasutamiseks vali menüükäsk <menuchoice
+><guimenu
+>Fail</guimenu
+><guimenuitem
+>Lisa ChangeLogi kirje...</guimenuitem
+></menuchoice
+>. Kui liivakasti ülemkataloogis on fail <filename
+>ChangeLog</filename
+> olemas, avatakse see ja sul on võimalus seda redigeerida. Selleks lisatakse faili algusesse kirje käesoleva kuupäeva ja sinu kasutajanimega (seda saab kohandada, täpsemalt räägib sellest <xref linkend="customize-general"/>). Kui oled töö lõpetanud ja klõpsanud nupule <guibutton
+>OK</guibutton
+>, on järgmisel sissekande tegemise dialoogi avamisel sind ees ootamast logiteade, mis vastab viimati muutuste logisse tehtud muudatustele. </para>
+
+</sect1>
+
+
+<sect1 id="resolvingconflicts">
+<title
+>Konfliktide lahendamine</title>
+
+<para
+>Konfliktid tekivad siis, kui muudad faili, mida on samal ajal muutnud ka mõni teine arendaja. &CVS; tuvastab konfliktid muudetud faili värskendamisel. &CVS; püüab siis ühendada teise arendaja tehtud muudatused sinu tööversiooni. Ühendamine aga ei õnnestu, kui nii sina kui teine arendaja olete muutnud faili ühesuguseid osi, mispeale &CVS; annab veateate. </para>
+
+<para
+>&cervisia; peaaknas annab konfliktidega failidest märku kirje "Konflikt" olekuveerus ning punane värv. Nüüd tuleb sul konfliktid lahendada, enne kui saad faili sisse kanda. &CVS; keeldub lubamast sisse kanda konfliktidega faile, kui neid pole redigeeritud. Konflikte saab lahendada tavapäraselt: tee peaaknas vajalikul failil topeltklõps ja redigeeri faili meelepärases redaktoris.</para>
+
+<para
+>&CVS; tähistab konfliktsed muudatused teatud märke otse keset faili lisades järgmise reegli kohaselt:</para>
+
+<screen
+>&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+Muudatused sinu kohalikus versioonis
+=======
+Muudatused hoidlas
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; versiooni_number
+</screen>
+
+<para
+>Sul tuleb kogu see plokk asendada uue, ühtse versiooniga. Mõistagi on konfliktide lahendamisel jäme ots sinu käes: iga konflikti puhul võid just sina otsustada, milline kahest võimalusest valida.Samuti võid langetada otsuse, et kumbki variant tegelikult ei kõlba ning kirjutada kogu ploki või isegi kogu faili algusest peale uuesti. </para>
+
+<para
+>Õnneks pakub aga &cervisia; välja kena liidese konfliktide lahendamiseks. See ei tähenda, et sa ei pea kunagi faile käsitsi redigeerima, aga tavalisemate konfliktide puhul pole küll selleks vajadust. &cervisia; dialoogi <guilabel
+>CVS - Lahendamine</guilabel
+> avamiseks vali menüükäsk <menuchoice
+><guimenu
+>Fail</guimenu
+><guimenuitem
+>Lahenda...</guimenuitem
+></menuchoice
+> või klõpsa märgitud failil hiire parema nupuga ja vali ilmuvast kontekstimenüüst kirje <guimenuitem
+>Lahenda...</guimenuitem
+> </para>
+
+<figure id="screenshot-resolve" float="1">
+<title
+>&cervisia; lahendamisdialoog</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="resolve.png"/></imageobject>
+<textobject
+><phrase
+>&cervisia; lahendamisdialoog</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Dialoogi ülaosas on vasakul näha sinu faili <guilabel
+>Sinu versioon (A)</guilabel
+> ja paremal faili versioon hoidlas ehk <guilabel
+>Teine versioon (B)</guilabel
+>. Erinevused on tähistatud punase värviga. Kahest versioonist allpool on näha <guilabel
+>Ühendatud versioon</guilabel
+>. See näitab, milline antud osa sinu kohalikus koopias välja hakkab nägema pärast seda, kui oled klõpsanud nupule <guibutton
+>Salvesta</guibutton
+>. </para>
+
+<para
+>Erinevusi sisaldavate osade vahel saab liikuda nuppudega <guibutton
+>&lt;&lt;</guibutton
+> ja <guibutton
+>&gt;&gt;</guibutton
+>. Dialoogi allosas keskel on näha, millise osa juures parajasti ollakse. Näiteks <literal
+>2 / 3</literal
+> tähendab, et parajasti on tegemist teise erinevusega kokku kolmest erinevusest. </para>
+
+<para
+>Seda, milline variant tuleks lõplikku versiooni jätta, saab otsustada iga osa kohta eraldi. Klõps nupule <guibutton
+>A</guibutton
+> valib sinu versiooni, nupule <guibutton
+>B</guibutton
+> aga hoidla versiooni. Klõps nupule <guibutton
+>A+B</guibutton
+> lisab mõlemad versioonid, kusjuures sinu versioon on esimene. <guibutton
+>B+A</guibutton
+> annab samasuguse tulemuse, aga teistpidi: esimesena tuleb hoidla ja seejärel sinu versioon. </para>
+
+<para
+>Kui mitte ükski versioon sind ei rahulda, klõpsa nupule <guibutton
+>Muuda</guibutton
+>, mis avab lihtsa tekstiredaktori, kus saad kogu osa redigeerida. Kui oled valmis saanud, klõpsa nupule <guibutton
+>OK</guibutton
+> ning saad tagasi pöörduda dialoogi <guilabel
+>CVS - Lahendamine</guilabel
+> juurde ja jätkata konfliktide lahendamist. Näed nüüd osas <guilabel
+>Ühendatud versioon</guilabel
+> just äsja redigeeritud osa koos tehtud muudatustega. </para>
+
+<para
+>Muudatuste salvestamiseks ja oma kohaliku koopia ülekirjutamiseks klõpsa nupule <guibutton
+>Salvesta</guibutton
+>. Arvesta, et sellega salvestad mitte ainult selle osa, mis on parajasti näha, vaid kõik faili tehtud muudatused. Kui soovid muudatused salvestada igaks juhuks muu nime all, klõpsa nupule <guibutton
+>Salvesta kui...</guibutton
+> Klõps nupule <guibutton
+>Sulge</guibutton
+> paneb dialoogi kinni. Kui sulged dialoogi ilma salvestamata, lähevad kõik tehtud muudatused kaotsi. </para>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="obtaininginformation">
+<title
+>Failide info hankimine ja paikade loomine</title>
+
+<sect1 id="diff">
+<title
+>Versioonide erinevuste jälgimine</title>
+
+<para
+>&cervisia; võimaldab mitmel puhul avada akna, mis näitab failiversioonide erinevusi: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Peaaknas saab valida menüükäsu <menuchoice
+><guimenu
+>Vaade</guimenu
+><guimenuitem
+>Erinevus hoidlast (BASE)...</guimenuitem
+></menuchoice
+>. See annab käsu <command
+>cvs diff</command
+> ning näitab erinevusi sinu liivakasti ja viimati värskendatud (tuntud ka kui <literal
+>BASE</literal
+>) versiooni vahel. See on eriti kasulik vahetult enne faili sissekandmist, et leida sobiv logiteade. </para
+></listitem>
+
+<listitem
+><para
+>Erinevusi oma liivakasti ja peamise arendusharu ehk <literal
+>HEAD</literal
+> vahel saab vaadata menüükäsuga <menuchoice
+><guimenu
+>Vaade</guimenu
+> <guimenuitem
+>Erinevus hoidlast (HEAD)...</guimenuitem
+></menuchoice
+> </para
+></listitem>
+
+<listitem
+><para
+>Valitud faili kahe viimase versiooni erinevusi saab vaadata menüükäsuga <menuchoice
+><guimenu
+>Vaade</guimenu
+><guimenuitem
+>Viimane muudatus...</guimenuitem
+></menuchoice
+> </para
+></listitem>
+
+<listitem
+><para
+>Käske <guimenuitem
+>Erinevus hoidlast (BASE)...</guimenuitem
+>, <guimenuitem
+>Erinevus hoidlast (HEAD)...</guimenuitem
+> ja <guimenuitem
+>Viimane muudatus...</guimenuitem
+> saab samuti kasutada peaaknas failil, mille erinevusi soovid näha, hiire parema nupuga klõpsates. </para
+></listitem>
+
+<listitem
+><para
+>Sissekande tegemise dialoogis saab erinevusi lasta näidata faili nime valides ning sellel topeltklõpsu tehes või klahvi <keycap
+>Return</keycap
+> vajutades. Selle tulemus on sarnane menüükäsuga <menuchoice
+><guimenu
+>Vaade</guimenu
+><guimenuitem
+>Erinevus hoidlast (BASE)...</guimenuitem
+></menuchoice
+> </para
+></listitem>
+
+<listitem
+><para
+>Logifailide lehitsemise dialoogis saab märkida faili kaks versiooni ja lasta näidata nende erinevusi (täpsemalt vaata <xref linkend="browsinglogs"/>). </para
+></listitem>
+
+</itemizedlist>
+
+<para
+>Nagu oodata võibki, ei paiska &cervisia; lihtsalt käsu <command
+>diff</command
+> väljundit terminaliaknasse, vaid näitab seda graafiliselt, näiteks nagu <xref linkend="screenshot-log"/>. </para>
+
+<figure id="screenshot-log" float="1">
+<title
+>&cervisia; võrdlemise dialoog</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="diff.png"/></imageobject>
+<textobject
+><phrase
+>&cervisia; võrdlemise dialoog</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Dialoogis olev tekst kujutab endast veidi paremaks muudetud varianti tekstist, mille annab võrdlemiskäsk võtmega <option
+>-u</option
+>. Kahes aknas on näha erinevad versioonid, kusjuures read on korraldatud nii, et neid saaks otse võrrelda. See tähendab, et seal, kus teksti on lisatud või kustutatud, on teise akna vasakus servas vastavas kohas näha tühjad read tähistusega <literal
+>+++++</literal
+>. Lisaks sellele on näha iga rea number. </para>
+
+<para
+>Parempoolse akna teises veerus on näha, milline on muudatus olnud. Võimalikud tüübid on <literal
+>Lisatud</literal
+>, <literal
+>Kustutatud</literal
+> ja <literal
+>Muudetud</literal
+>, need read on vastavalt sinised, rohelised ja punased. Dialoogi keskel on kokkusurutult näha värvimärgised ridade kaupa. Nii saab faili muudatustest kiire ülevaate. Kokkusurutud kujundi värviribade asendit saab kasutada ka orienteerumiseks kerimisribade kasutamisel. </para>
+
+<para
+>Tavaliselt on kerimisribad vasakus ja paremas aknas sünkroonitud, &ie; kui kerid vasakut akent, liigub vastavalt ka parem aken. Seda käitumist saab muuta märkekasti <guibutton
+>Sünkroonitud kerimisribad</guibutton
+> abil. </para>
+
+<para
+>Seda, kuidas kohandada võrdlemisdialoogi, annab teada <xref linkend="customize-diff"/>. </para>
+
+</sect1>
+
+<sect1 id="creatingpatches">
+<title
+>Paikade loomine</title>
+
+<para
+>Mõnikord võib juhtuda, et soovid oma muudatused kõigepealt teistele ülevaatamiseks anda, enne kui need sisse kanda, või siis ei olegi sul hoidlas kirjutamisõigust ning sa ei saagi midagi sisse kanda. &CVS; pakub välja standardse vorminduse failidele, millega jagada oma kohalikku koopiasse tehtud muudatusi teistega, testida neid kohaliku koopia peal ja rakendada &CVS;-hoidlale. Selliseid erinevusi sisaldav fail kannab nimetust <firstterm
+>paik</firstterm
+> (inglise keeles <quote
+>patch</quote
+>) ja see luuakse käsuga <command
+>cvs diff</command
+> täpselt samamoodi nagu erinevused, mida kirjeldas <xref linkend="diff"/>. Paikade kasutamine tervete failide asemel võimaldab toime tulla ka siis, kui näiteks internetiühendus on kallis või vähese läbilaskevõimega, pealegi on paiku hõlpsam käsitleda, sest ka üksainus paigafail võib sisaldada paljude läthefailide erinevusi. </para>
+
+<para
+>&cervisia; võimaldab seda teha menüükäsuga <menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Loo hoidla suhtes paigafail...</guimenuitem
+></menuchoice
+> </para>
+
+<important
+><para
+>Käsk <guimenuitem
+>Loo hoidla suhtes paigafail...</guimenuitem
+> loob paiga, mis sisaldab kõigi sinu kohaliku koopia (liivakasti) failide kõiki muudatusi võrreldes hoidla <literal
+>BASE</literal
+>-versiooniga. Seepärast ei ole paiga loomisel ka oluline, kas peaaknas on mingid failid valitud või mitte. </para
+></important>
+
+<para
+>Teine võimalus on valida peaaknas üks kindel fail ning seejärel menüüst <guimenu
+>Vaade</guimenu
+> käsk <guimenuitem
+>Näita logifaili...</guimenuitem
+> või märgitud failil hiire parema nupuga klõpsates kirje <guimenuitem
+>Näita logifaili...</guimenuitem
+>, mis avab <link linkend="browsinglogs"
+>logidialoogi</link
+>. Vali nüüd versiooniks &quot;A&quot; versioon, mille suhtes soovid paiga luua, ning klõpsa nupule <guilabel
+>Loo paik...</guilabel
+> See tekitab paiga, mis sisaldab erinevusi sinu kohaliku koopia <emphasis
+>märgitud faili</emphasis
+> ning versiooni &quot;A&quot; vahel. </para>
+
+<para
+>Enne paiga tekitamist avab &cervisia; dialoogi, milles saab kindlaks määrata väljundi vorminduse. </para>
+
+<figure id="screenshot-patch" float="1">
+<title
+>&cervisia; paikamisdialoog</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="patch.png"/></imageobject>
+<textobject
+><phrase
+>&cervisia; paikamisdialoog</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Väljundi vormindus</guilabel
+></term>
+<listitem
+><para
+>Väljund võib olla vormindatud kolmel viisil: </para>
+<para
+><guilabel
+>Tavaline</guilabel
+>: vormindus, millega saab näiteks redaktori ed pnna automaatselt looma vanast failist koopiat uue failiga sobimiseks. Tavalise vorminduse korral tähistavad muudatusi sümbolid &lt; ja &gt; ning kontekstiinfo puudub. </para>
+<para
+><guilabel
+>Unifitseeritud</guilabel
+>: levinuim paikade vormindus. Selle puhul kasutatakse erinevuste salvestamiseks lisaks reanumbritele ka kontekstiridasid. See muudab paikade rakendamise märksa turvalisemaks. Erinevusi näidatakse kompaktses ja loetavas vormis, näidates iga asjassepuutuva faili päist ning omaette sektsioone (tükke) iga erinevuse kohta. Iga erinevuse kontekstiread muudavad muudatustest ülevaate saamise hõlpsamaks. Muudatusi tähistavad sümbolid + ja -. </para>
+<para
+><guilabel
+>Kontekst</guilabel
+> näitab sama infot, mis unifitseeritud vorminduski, aga mitte nii kompaktselt. Kontekstivorminduse korral tähistab muudatusi sümbol !. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Kontekstiridade arv:</guilabel
+></term>
+<listitem
+><para
+>Siin saab määrata kontekstiridade arvu unifitseeritud või kontekstivorminduse korral. Tavalise vorminduse puhul ei saa seda kasutada, sest sellisel juhul ju kontekstiinfot ei salvestata. Mida rohkem kontekstiinfot, seda hõlpsam on toorväljundit lugeda ja seda täpsemini saab paiku rakendada, kuid paiga suurus sel moel mõistagi kasvab. Väga mõistlik oleks siiski kasutada vähemalt kaht kontekstirida. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Ignoreerimisvalikud</guilabel
+></term>
+<listitem
+><para
+>Siin saab valida, milliseid muudatusi ei peeta paiga loomisel erinevuseks. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+
+<para
+>Pärast väljundi vorminduse määramist loob &cervisia; paiga ja avab dialoogi <guilabel
+>Salvesta kui</guilabel
+>. Määra seal paigafaili nimi ja asukoht. </para>
+
+
+</sect1>
+
+<sect1 id="annotate">
+<title
+>Faili annoteeritud vaate jälgimine</title>
+
+<para
+>Käsu <command
+>cvs annotate</command
+> peale pakub &CVS; võimalust rida-realt näha, kes on failis viimati muudatusi teinud. See on kasulik tuvastamaks, kes millise muutuse on sisse viinud või kellele esitada küsimus koodi tehtud muudatuse või sellesse tekkinud vea kohta. </para>
+
+<para
+>&cervisia; võimaldab seda kasutada, kuid rikastab pakutavat infot omalt pooltki. Annotatsioonivaate saab avada menüükäsuga <menuchoice
+><guimenu
+>Vaade</guimenu
+><guimenuitem
+>Näita annotatsiooni...</guimenuitem
+></menuchoice
+>. Teine võimalus on klõpsata <link linkend="browsinglogs"
+>logi lehitsemise dialoogis</link
+> nuppu <guilabel
+>Annoteerimine</guilabel
+>, mille puhul saab valida, millist failiversiooni soovid näha. Milline see dialoog välja näeb, näitab <xref linkend="screenshot-annotate"/>. </para>
+
+<figure id="screenshot-annotate" float="1">
+<title
+>&cervisia; annotatsioonidialoog</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="annotate.png"/></imageobject>
+<textobject
+><phrase
+>&cervisia; annotatsioonidialoog</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Annotatsioonidialoogi aknas on näha valitud faili viimane versioon (või versioon &quot;A&quot;, kui käivitasid annotatsioonidialoogi <link linkend="browsinglogs"
+>logi lehitsemise dialoogist</link
+>). Veerud enne teksti näitavad iga rea puhul infot viimaste muudatuste kohta. Esimeses veerus näidatakse reanumbrit. Teises veerus on näha selle versiooni autori nimi ja versiooni number. Kolmandas versioonis aga rea tegelikku sisu. </para>
+
+<para
+>Nii saab juhul, kui mingi rida paistab kahtlasena või kahtlustad, et seal võib peituda viga, kohe teada, kellele selle rea eest vastutus langeb. Lisaks sellele võib aga ka teada saada, <emphasis
+>miks</emphasis
+> seda rida muudeti. Selleks vii hiirekursor vastava versiooninumbri kohale, misjärel ilmub kohtspikker logiteate ja muutmise kuupäevaga. </para>
+
+</sect1>
+
+
+<sect1 id="browsinglogs">
+<title
+>&CVS; logide lehitsemine</title>
+
+<para
+>Kui märgid peaaknas mõne faili ja valid menüüst <guimenu
+>Vaade</guimenu
+> käsu <guimenuitem
+>Näita logifaili...</guimenuitem
+> või klõpsad märgitud failil hiire parema nupuga ja valid kontekstimenüüst <guimenuitem
+>Näita logifaili...</guimenuitem
+>, näidatakse dialoogi <guilabel
+>CVS - logifaili vaatamine</guilabel
+> (kui märgid enam kui ühe faili, ei juhtu midagi, sest &cervisia; suudab korraga luua ja parsida ainult ühe faili logi). See dialoog pakub tegelikult märksa enam võimalusi kui ainult faili ajalooga tutvumine. Selle sirvija abil on võimalik: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Näha märgitud faili iga versiooni numbrit, autorit, kuupäeva, haru, sissekandmisteadet ja silte. </para
+></listitem>
+
+<listitem
+><para
+>Näha märgitud faili harru lisamist ja sildi omistamist graafiliselt puuna. </para
+></listitem>
+
+<listitem
+><para
+>Näha märgitud faili iga versiooni (vaikerakenduses). </para
+></listitem>
+
+<listitem
+><para
+>Jälgida märgitud faili iga versiooni annoteeritud vaadet. </para
+></listitem>
+
+<listitem
+><para
+>Näha märgitud faili mis tahes kahe versiooni erinevusi, sealhulgas ka erinevust märgitud faili parajasti kohalikus koopias olevast versioonist. </para
+></listitem>
+
+<listitem
+><para
+>Luua paiku erinevustega märgitud faili mis tahes kahe versiooni vahel, sealhulgas erinevustega märgitud faili parajasti kohalikus koopias oleva versiooni suhtes. </para
+></listitem>
+
+</itemizedlist>
+
+<figure float="1">
+<title
+>&cervisia; logi lehitsemise dialoog</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="logtree.png"/></imageobject>
+<textobject
+><phrase
+>&cervisia; logi lehitsemise dialoog</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Ajalugu, nagu seda pakub käsk <command
+>cvs log</command
+> (<guilabel
+>CVS väljund</guilabel
+>) võib vaadata kas <guilabel
+>puu</guilabel
+> või <guilabel
+>nimekirja</guilabel
+> kujul. Kumb valida, sõltub sinu maitsest ning sellest, milline info sind huvitab. Puu kujutab ülevaadet, mida milline autor erinevates harudes on teinud. Kohtspikrid näitavad vastavaid logiteateid. Nimekiri on loomult lineaarne ega anna seetõttu ühe pilguga hõlmatavat ülevaadet harudest. Teisalt koondub siin rohkem asjakohast infot väiksemale ruumile, nimelt faili iga muutmise aeg ja logiteate algus. &CVS; väljund on põhjalik ja täielik, kuid pikk ja raskesti loetav. Selle lihtsustamiseks on võimalik &CVS; väljundis teksti otsida, millist võimalust pakub nupp <guibutton
+>Otsi...</guibutton
+> </para>
+
+<para
+>Konkreetse versiooni kohta enama info hankimiseks tuleb sellel klõpsata, olgu siis tegemist nimekirjaga või puuga. Dialoogi keskel asuvad väljad täituvad seejärel infoga, mida tagastab käsk <command
+>cvs log</command
+>. Sa võid ära märkida ka kaks versiooni, vastavalt &quot;A&quot; ja &quot;B&quot;, kui soovid korraga näha huvipakkuvaid versioone. Versiooni &quot;A&quot; saab valida hiire vasaku, &quot;B&quot; keskmise nupuga. Nimekirjavaates saab liikuda ka kursoriklahvidega. Versioonide &quot;A&quot; ja &quot;B&quot; märkimiseks kasuta vastavalt kiirklahve <keycombo action="simul"
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+> ja <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+>. Vaates <guilabel
+>CVS väljund</guilabel
+> saab versioonide märkimiseks klõpsata nuppudele <guilabel
+>Vali versioon A</guilabel
+> ja <guilabel
+>Vali versioon B</guilabel
+>. </para>
+
+<para
+>Klõps nupule <guibutton
+>Annoteerimine</guibutton
+> avab dialoogi, kus on näha versiooni &quot;A&quot; tekst. Iga rea ees on info selle viimase redigeerija ning redigeerimisaja kohta. Rohkem infot annoteeritud versioonide vaatamise kohta annab <xref linkend="annotate"/>. </para>
+
+<para
+>Klõps nupule <guibutton
+>Võrdlemine</guibutton
+> kutsub välja käsu <command
+>cvs diff</command
+>, mille tulemuseks on dialoog, mis näitab kõiki erinevusi kahe märgitud versiooni vahel. Kui märgid versiooni &quot;A&quot;, aga mitte versiooni &quot;B&quot;, genereerib &cervisia; muudatused versiooni &quot;A&quot; ning faili kohalikus koopias parajasti eksisteeriva versiooni vahel. See lubab näha erinevusi faili sinu ja millise tahes &CVS;-is oleva versiooni vahel. Vaatamise hõlbustamiseks kasutatakse erinevaid värve lisatud, eemaldatud või muudetud ridade märkimiseks. Rohkem infot erinevuste vaatamise kohta annab <xref linkend="diff"/>. </para>
+
+<para
+>Klõps nupule <guibutton
+>Loo paik...</guibutton
+> avab dialoogi, kus saab määrata millises vorminduses luuakse fail, mis sisaldab kõiki kahe näidatava versiooni vahelisi erinevusi. Kui märgid versiooni &quot;A&quot;, aga mitte versiooni &quot;B&quot;, genereerib &cervisia; muudatused versiooni &quot;A&quot; ning faili kohalikus koopias parajasti eksisteeriva versiooni vahel. See lubab luua paiga- ehk erinevustefaili sinu ja millise tahes &CVS;-is oleva versiooni vahel. Pärast paiga vorminduse määramist dialoogis ja klõpsu nupule <guibutton
+>OK</guibutton
+> antakse käsk <command
+>cvs diff</command
+>, mis loobki erinevustefaili. Ilmub dialoog <guilabel
+>Salvesta kui</guilabel
+>, kus tuleb määrata &cervisia; loodud paigafaili nimi ja asukoht, kui soovid seda ikka salvestada. Rohkem infot paikade loomise ja paigafailide vorminduse kohta annab <xref linkend="creatingpatches"/>. </para>
+
+<para
+>Klõpsuga nupule <guibutton
+>Näita</guibutton
+> hangib &cervisia; versiooni &quot;A&quot; ning näitab seda antud failitüübi vaikerakenduses. </para>
+
+<para
+>Klõpsuga nupule <guibutton
+>Sulge</guibutton
+> saab dialoogi kinni panna ja naasta peaaknasse. </para>
+
+
+<para
+>Dialoogi <guilabel
+>CVS - Logifaili vaatamine</guilabel
+> aluseks oleva logi genereerimiseks annab &cervisia; käsu: </para>
+
+
+<para>
+<screen
+><command
+>cvs log <replaceable
+>failinimi</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+<sect1 id="browsinghistory">
+<title
+>Ajaloo lehitsemine</title>
+
+<para
+>Kui hoidlas on logimine lubatud, võib &cervisia; näidata teatud sündmuste, näiteks väljavõtete ja sissekannete tegemise, siltide, värskendamiste ja väljalasete ajalugu. Vali menüüst <guimenu
+>Vaade</guimenu
+> käsk <guimenuitem
+>Ajalugu</guimenuitem
+>, mispeale &cervisia; annab käsu </para>
+
+<para>
+<screen
+><command
+>cvs history -e -a</command
+></screen>
+</para>
+
+<note
+><para
+>See tõmbab serverilt kogu logifaili, &ie; nimekirja kõigi kasutajate ja kõigi moodulite sündmuste kohta. See fail võib olla päris suur. </para
+></note>
+
+<para
+>Nüüd võid kuupäevade kaupa sorteerituna näha sündmuste nimekirja. Teises veerus näidatakse sündmuse tüüpi: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Tehtud väljavõte - veerus 'Autor' näidatud kasutaja tegi mooduli väljavõtte </para
+></listitem>
+
+<listitem
+><para
+>Silt - kasutaja tarvitas käsku <command
+>cvs rtag</command
+>. Arvesta, et käsu <command
+>cvs tag</command
+> (mida teeb &cervisia; käsk <menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Silt/haru...</guimenuitem
+></menuchoice
+>) kasutamist ajaloo andmebaasis ei leidu. Sellel on oma ajaloolised põhjused (täpsemat infot jagab &CVS; <acronym
+>KKK</acronym
+>). </para
+></listitem>
+
+<listitem
+><para
+>Väljalase - kasutaja on mooduli välja lasknud. Tegelikult kasutatakse seda käsku väga harva ning sellel puudub eriline mõte. </para
+></listitem>
+
+<listitem
+><para
+>Värskendatud, kustutatud - kasutaja on värskendanud faili, mis on hoidlast kustutatud. Selle tulemusena kustutati fail ka tööversioonist. </para
+></listitem>
+
+<listitem
+><para
+>Värskendatud, kopeeritud - kasutaja on faili värskendanud, töökataloogi kopeeriti uus versioon. </para
+></listitem>
+
+<listitem
+><para
+>Värskendatud, ühendatud - kasutaja on faili värskendanud, hoidla versioonis olevad muutused ühendati tööversiooni failiga. </para
+></listitem>
+
+<listitem
+><para
+>Värskendatud, konflikt - kasutaja on faili värskendanud ning tuvastati konflikt tööversioonis tehtud muudatustega. </para
+></listitem>
+
+<listitem
+><para
+>Tehtud sissekanne, muudetud - kasutaja on muudetud faili sisse kandnud. </para
+></listitem>
+
+<listitem
+><para
+>Tehtud sissekanne, lisatud  - kasutaja on faili lisanud ja sissekande teinud. </para
+></listitem>
+
+<listitem
+><para
+>Tehtud sissekanne, eemaldatud - kasutaja on faili eemaldanud ja sissekande teinud. </para
+></listitem>
+
+</itemizedlist>
+
+<figure id="screenshot-history" float="1">
+<title
+>&cervisia; ajaloo dialoog</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="history.png"/></imageobject>
+<textobject
+><phrase
+>&cervisia; ajaloo dialoog</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Nimekirja saab vastaval veerupäisel klõpsates selle veeru järgi sorteerida. Sorteerimaks ajalookirjeid huvipakkuva teema järgi, saab märkekastidega rakendada mitmesuguseid filtreid: </para>
+
+<itemizedlist>
+<listitem
+><para
+>Näita sissekannete tegemisi - näitab sissekandeid</para
+></listitem>
+<listitem
+><para
+>Näita väljavõtete tegemisi - näitab väljavõtteid</para
+></listitem>
+<listitem
+><para
+>Näita sildistamisi - näitab sildistamisi</para
+></listitem>
+<listitem
+><para
+>Näita muid sündmusi - näitab sündmusi, mida ülaltoodud võimalused ei hõlma</para
+></listitem>
+<listitem
+><para
+>Ainult kasutaja - näitab ainult konkreetse kasutajaga seotud sündmusi</para
+></listitem>
+<listitem
+><para
+>Ainult failinimed - filtreerib failinimed vastavalt regulaaravaldisele</para
+></listitem>
+<listitem
+><para
+>Ainult kataloogid - filtreerib katalooginimed vastavalt regulaaravaldisele</para
+></listitem>
+</itemizedlist>
+
+<para
+>Regulaaravaldistes saab kasutada järgmisi erimärke: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+><literal
+>x*</literal
+>: sobib suvaline arv <literal
+>x</literal
+> esinemisi. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>x+</literal
+>: sobib üks või enam <literal
+>x</literal
+> esinemist. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>x?</literal
+>: sobib null või üks <literal
+>x</literal
+> esinemist. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>^</literal
+>: sobib stringi algus. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>$</literal
+>: sobib stringi lõpp. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>[a-cx-y]</literal
+>: sobib märgirühm, &eg; antud juhul a,b,c,x,y. </para
+></listitem>
+
+</itemizedlist>
+
+</sect1>
+
+
+</chapter>
+
+<chapter id="advancedusage">
+<title
+>Kasutamine edasijõudnutele</title>
+
+<sect1 id="updatingto">
+<title
+>Värskendamine sildi, haru või kuupäeva järgi</title>
+
+<para
+>Mooduli harud on selle paralleelsed versioonid. Heaks näiteks nende praktilise kasutamise kohta on tarkvaraprojektide väljalasked. Pärast väljalaset on kahtlemata lähtekoodis vigu, mis ootavad parandamist, kuid samas soovib keegi kindlasti ka mõne hoopis uue võimaluse lisada. Mõlemat korraga on reeglina päris raske saavutada, sest uued võimalused toovad enamasti kaasa uusi vigu ning seeläbi muutub vanade vigade jälgimine keerukamaks. Selle dilemma lahendamiseks lubab &CVS; luua paralleelse versiooni, mida me nimetame &quot;stabiilseks väljalaskeharuks&quot; ja milles parandatakse ainult vigu, samal ajal kui peaharu (HEAD) on avatud ka uute võimaluste lisamisele. </para>
+
+<para
+>Silte kasutatakse projekti versiooni tähistamiseks. &CVS; märgib iga faili kindla versiooni sildiga, nii et kui teed väljavõtte või värskendad konkreetse sildi järgi, saad alati failist ühe ja sama versiooni. Sestap ei saa erinevalt harust sildiga faili õigupoolest arendada. Silte on mõtet kasutada väljalasete, koodis tehtud suuremate muudatuste &etc; korral. </para>
+
+<para
+>Kui arendad mõnd tarkvaraprojekti, ei ole mitte alati vajalik ega mõttekaski töötada põhiharus. Pärast väljalaset näiteks on mõttekas antud versioon mõneks ajaks suhteliselt rahule jätte, parandades seal ainult vigu, lastes töötada tarkvara tõlkijatel &etc; Selleks tuleb värskendada väljalaskeharu järgi. Sellisel juhul värskendatakse kõik sinu failid antud haru failide uusima versioonini. Pärast värskendamist saad muudatuste tegemisel need samasse harusse taas sisse kanda. </para>
+
+<para
+>Samuti võib tekkida vajadus uurida mõnd viga, mis tekkis mingi sildiga tähistatud väljalaskes. Sellisel juhul pakub &CVS; võimalust hankida tarkvara just sellisel kujul, nagu see väljalaskes esines. Kui aga soovid hankida oma projekti mõne varasema versiooni, võid kohaliku töökoopia värskendada kindla kuupäeva järgi. See on mõttekas näiteks juhul, kui mingi viga tekkis kahe väljalaske vahel ja sul on ka üsna täpne ettekujutus, millal. Kui värskendad kuupäeva või sildi järgi, saab sinu failide versiooniks sama versioon, mis on antud kuupäevaga või sildiga failidel. </para>
+
+<warning
+><para
+>Enne seda, kui värskendada mõne muu haru või sildi järgi, kontrolli, et oled oma senises tööharus kõik muudatused sisse kandnud. Kui sa seda mingil põhjusel teha ei saa ja tehtud muudatusi kaotada ka ei taha, siis ära värskenda uude harru, sest nii lähevad muudatused kaotsi. Teine võimalus on sooritada täiesti uus <link linkend="checkingout"
+>väljavõte</link
+> ning töötada paralleelselt mõlema versiooniga. </para
+></warning>
+
+<figure id="screenshot-updatetag" float="1">
+<title
+>&cervisia; sildi järgi uuendamise dialoog</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="updatetag.png"/></imageobject>
+<textobject
+><phrase
+>&cervisia; sildi järgi uuendamise dialoog</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<variablelist>
+<varlistentry>
+<term
+><guilabel
+>Uuenda harusse</guilabel
+></term>
+<listitem
+><para
+>Selle valimisel saad faile värskendada teatud haru järgi. Sisesta haru nimi tekstikasti (või klõpsa nupule <guilabel
+>Laadi nimekiri</guilabel
+>, mis hangib &CVS;-serverist harude loendi, millest saad valida endale sobiva). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Uuenda sildi järgi</guilabel
+></term>
+<listitem
+><para
+>Selle valimisel saad faile värskendada teatud sildi järgi. Sisesta sildi nimi tekstikasti (või klõpsa nupule <guilabel
+>Laadi nimekiri</guilabel
+>, mis hangib &CVS;-serverist siltide loendi, millest saad valida endale sobiva). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Uuenda kuupäeva järgi</guilabel
+></term>
+<listitem
+><para
+>Selle valimisel saad faile värskendada teatud kuupäeva järgi. Alloleval väljal võid mitmel moel sisestada kuupäeva. See võib olla näiteks <literal
+>yyyy-mm-dd</literal
+>, kus <literal
+>yyyy</literal
+> on aasta, <literal
+>mm</literal
+> kuu (numbrilisel kujul) ja <literal
+>dd</literal
+> päev. Kasutada saab ka mõningaid ingliskeelseid fraase, näiteks <literal
+>yesterday</literal
+> (<quote
+>eile</quote
+>) ja <literal
+>2 weeks ago</literal
+> (<quote
+>2 nädala eest</quote
+>). </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<note
+><para
+>Sildi või kuupäeva järgi värskendamine muudab sildi või kuupäeva 'kleepuvaks', &ie; sul ei ole enam võimalik nende failide puhul teha sissekandeid (kui just silt ei ole antud haru silt). Põhiharuga (tuntud ka kui <literal
+>HEAD</literal
+>) taasliitumiseks kasuta menüükäsku <menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Värskenda HEAD-harusse</guimenuitem
+></menuchoice
+>. </para
+></note>
+
+<para
+>Haru või sildi järgi värskendamiseks antakse käsk: <screen
+><command
+>cvs update -r <replaceable
+>silt</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Kuupäeva järgi värskendamiseks antakse käsk: <screen
+><command
+>cvs update -D <replaceable
+>kuupäev</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Peaharru (HEAD) värskendamiseks antakse käsk: <screen
+><command
+>cvs update <option
+>-A</option
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="taggingbranching">
+<title
+>Sildi ja haru omistamine</title>
+
+<para
+>Me puudutame siin ainult sildi ja haru omistamise tehnilist külge. Kui oled lihtsalt hoidla <emphasis
+>kasutaja</emphasis
+>, mitte administraator, ei pruugi sellised probleemid sul ette tullagi. Kui aga oled administraator, tuleks esmalt tutvuda sildi omistamisega seotud mittetehniliste küsimustega, et saada arusaam, kui aeganõudev ja vigaderohke võib ühe projekti erinevate harude haldamine olla. Mõningaid lisamaterjale selle kohta pakub käsiraamatu lisa. </para>
+
+<para
+>Sildi omistamisega tuleb tegemist teha enamasti väljalaske korral, et alati oleks võimalik pöörduda hõlpsasti tagasi projekti sellel hetkel valitsenud olukorra juurde. Silt on tavaliselt ühtlustatud projektinime ja versiooninumbriga. Näiteks &cervisia; 1.0 silt on <literal
+>CERVISIA_1_0</literal
+>. &cervisia; kasutab otsustamisel, milline on sobilik silt, &CVS; rangeid reegleid: see peab algama tähega ning sisaldama vaid tähti, numbreid, sidekriipse ja alakriipse. </para>
+
+<para
+>Tavaliselt omistatakse silt kogu projektile (kuigi &CVS; lubab mõistagi sildi omistada ainult alamprojektile). Selleks vali ülemkataloog ning seejärel menüükäsk <menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Silt/haru</guimenuitem
+></menuchoice
+>. Sisesta dialoogis sildi nimi, vajuta klahvi <keycap
+>Return</keycap
+> ja asi ants! </para>
+
+<para
+>Haru loomine ei ole tegelikult märgatavalt keerulisem: märgista sildi omistamise dialoogis kast <guibutton
+>Luuakse selle sildiga haru</guibutton
+>. Olemasolev silt on võimalik ka kustutada, selleks vali peaaknas menüükäsk <menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Eemalda silt</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>Haru omistamise veel üks aspekt on muudatuste ühendamine harust käesolevasse harru. Kui kavatsed seda teha, vali menüükäsk <menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Ühenda...</guimenuitem
+></menuchoice
+>. Ilmuv dialoog pakub kaks võimalust: </para>
+
+<para
+>Ühendada kõik harus tehtud muudatused käesolevasse harru. Selleks märgi ära <guibutton
+>Ühenda harust</guibutton
+> ja kirjuta haru, millest soovid ühendada. &cervisia; annab seejärel käsu </para>
+
+<para>
+<screen
+><command
+>cvs update <option
+>-j</option
+> <replaceable
+>haru_loomise_kuupäev</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Ühendada ainult haru kahe sildi vahelised muudatused. Seda on vaja siis, kui ühendad mitmel korral samast harust põhiharru. Selleks märgi ära <guibutton
+>Ühenda siltidevahelised muudatused</guibutton
+> ning sisesta (õiges järjekorras) kaks silti. See tähendab käsku </para>
+
+<para>
+<screen
+><command
+>cvs update <option
+>-j</option
+> <replaceable
+>haru_loomise_kuupäev1</replaceable
+> <option
+>-j</option
+> <replaceable
+>haru_loomise_kuupäev2</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="watches">
+<title
+>Jälgijate kasutamine</title>
+
+<para
+>Jälgija (inglise keeles <quote
+>watch</quote
+>) on &CVS;i tavapärane viis anda hoidla kasutajatele märku, kui faili on muudetud või kui mõni arendaja on hakanud faili redigeerima. Jälgijate kasutamine nõuab faili <filename
+><envar
+>$CVSROOT</envar
+>/CVSROOT/notify</filename
+> korrektset seadistamist. Seda siinkohal ei puudutata. Kui vajad rohkem infot, kuidas administraator taolisel korral käituma peaks, loe mõnda lisas soovitatud materjalidest. </para>
+
+<para
+>&cervisia; tugi jälgijatele koosneb põhiliselt kuuest menüükäsust. </para>
+
+<para
+>Jälgija lisamiseks ühele või mitmele failile vali menüükäsk <menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Lisa jälgija...</guimenuitem
+></menuchoice
+>. Ilmuvas dialoogis saad määrata, millist tüüpi &CVS;i toega sündmustest märku antakse. Kui näiteks soovid märku saada vaid sissekannete tegemisel, märgi ära <guibutton
+>Ainult</guibutton
+> ja <guibutton
+>Sissekande tegemine</guibutton
+>. Kui soovid teada saada kõigist märgitud failidega toimuvatest sündmustest, vali <guibutton
+>Kõik</guibutton
+>. Valiku kinnitamisel antakse käsk </para>
+
+<para>
+<screen
+><command
+>cvs watch add -a commit <replaceable
+>failinimed</replaceable
+></command
+></screen>
+</para>
+
+<para
+>või mõne muu sarnase võtmega vastavalt sellele, millise sündmuse valid. </para>
+
+<para
+>Kui mingid failid enam huvi ei paku, saab neilt jälgija eemaldada. Selleks vali menüükäsk <menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Eemalda jälgija...</guimenuitem
+></menuchoice
+>. Ilmuvas dialoogis on samasugused valikud, nagu jälgija lisamise dialoogis. Valiku kinnitamisel annab &cervisia; käsu </para>
+
+<para>
+<screen
+><command
+>cvs watch remove <replaceable
+>failinimed</replaceable
+></command
+></screen>
+</para>
+
+<para
+>(võimalik on lisada valitud sündmuste jaoks võti <option
+>-a</option
+>). </para>
+
+<para
+>On võimalik hankida ka nimekiri inimeste kohta, kes faile jälgivad. Selleks kasuta menüükäsku <menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Näita jälgijaid</guimenuitem
+></menuchoice
+>. See annab käsu </para>
+
+<para>
+<screen
+><command
+>cvs watchers <replaceable
+>failinimed</replaceable
+></command
+></screen>
+</para>
+
+<para
+>&CVS;i kõige tavalisema pruukimise korral töötab iga arendaja omaenda liivakastis. Kui ta soovib mõnda faili muuta, avab ta selle oma redaktoris ning asub tööle. Keegi teine ei pruugi tema tööst teada saada, enne kui ta faili hoidlasse sisse kannab. </para>
+
+<para
+>Mõned arendajate grupid aga eelistavad teistsugust töökorraldust, kus teised saavad sellest, et keegi on asunud mõne failiga tegutsema, teada <emphasis
+>otsekohe</emphasis
+>. See on &CVS;is samuti võimalik. Enne kui alustad faili redigeerimist, vali see &cervisia; peaaknas ning kasuta menüükäsku <menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Muuda faile</guimenuitem
+></menuchoice
+>. See annab käsu </para>
+
+<para>
+<screen
+><command
+>cvs edit <replaceable
+>failinimed</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Ühtlasi saadab see teadaande kõigile, kes on antud failile määranud jälgija <literal
+>redigeerimine</literal
+>. Samuti registreeritakse sind faili <emphasis
+>redigeerijana</emphasis
+>. Kõigi mingi faili redigeerijate nimekiri on võimalik saada menüükäsuga <menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Näita muutjaid</guimenuitem
+></menuchoice
+>. See võrdub käsurea korraldusega </para>
+
+<para>
+<screen
+><command
+>cvs editors <replaceable
+>failinimed</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Redigeerimisseanss lõpeb automaatselt, kui teed antud faili sissekande. Sel hetkel saadetakse teadaanne <literal
+>unedit</literal
+> kõigile, kes on antud faili jälgimise sisse lülitanud. Vahel võib mõistagi juhtuda, et sa ei soovi faili sisse kanda, vaid hoopis redigeerimisseansi lõpetada ja taastada faili varasema versiooni. Seda saab teha menüükäsuga <menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Loobu muutustest</guimenuitem
+></menuchoice
+>. Arvesta, et &cervisia; küsib selle peale, kas sa seda tõesti soovid. Selle menüükäsu kasutamine tähendab, et kõik muutused, mida oled teinud alates menüükäsu <menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Muuda faile</guimenuitem
+></menuchoice
+> kasutamisest, lähevad kaotsi. Kui olla täpne, annab &cervisia; sellel puhul käsu </para>
+
+<para>
+<screen
+><command
+>echo y | cvs unedit <replaceable
+>failinimed</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Seni oleme rääkinud juhtumitest, kus arendajad kasutavad failide muutmise ja muutustest loobumise võimalust vabatahtlikult. Lisaks sellele toetab &CVS; meetodit, mis <emphasis
+>sunnib peale</emphasis
+> nende käskude kasutamise. Selle meetodi kasutamise käsk on <command
+>cvs watch on</command
+>, millel me pikemalt ei peatu, sest seda kasutab ennekõike hoidla administraator. Kuid arendaja seisukohalt on oluline tähele panna, et kui projekt sunnib faili muutmise käsu peale, tehakse töökoopia väljavõtted <emphasis
+>kirjutuskaitstult</emphasis
+> (readonly). See tähendab, et vaikimisi ei ole võimalik faili redigeerida (kui sa just ei kasuta mõnda möödahiilimisvõimalust, näiteks <command
+>chmod</command
+>). Failile tekib kirjutamisõigus alles menüükäsu <menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Muuda faile</guimenuitem
+></menuchoice
+> kasutamisel. See omandab taas vaid lugemisõiguse niipea, kui oled faili sisse kandnud või kasutanud menüükäsku <menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Loobu muutustest</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>&cervisia; redaktoriliides võib jälgijaid peale sundivate projektide korral abiks olla veel ühel viisil. Kui käivitasid redaktori vaid lugemisõigusega failiga sellel topeltklõpsu tehes või menüükäsku <menuchoice
+><guimenu
+>Fail</guimenu
+><guimenuitem
+>Redigeeri</guimenuitem
+></menuchoice
+> pruukides, ei saa sa tehtud muudatusi hiljem salvestada. Sellel on mõistagi oma põhjus: kui sa soovid faili muuta, pead kasutama käsku <command
+>cvs edit</command
+>, et need, kes antud faili jälgivad, saaksid teada, et oled asunud selle kallal tööle. </para>
+
+<para
+>Sellisel juhul on soovitav lülitada sisse võimalus <menuchoice
+><guimenu
+>Seadistused</guimenu
+><guimenuitem
+>Automaatse redigeerimise lubamine (cvs edit)</guimenuitem
+></menuchoice
+>. Kui nüüd failil topeltklõpsu teed, annab &cervisia; enne redaktori käivitamist käsu <command
+>cvs edit</command
+>. Seejärel saad faili vabalt redigeerida. Kui oled töö lõpetanud, tee sissekanne ning sissekantud failid on taas vaid lugemisõigusega. </para>
+
+</sect1>
+
+
+<sect1 id="locking">
+<title
+>Lukustamine</title>
+
+<para
+>&CVS;i kasutamisel tavapäraselt rakendatav arendusmudel on <emphasis
+>piiramatud väljavõtted</emphasis
+>. Igal arendajal on oma liivakast, kus ta saab faile oma suva järgi redigeerida. Kui kasutatakse jälgimisvõimalusi, näiteks <command
+>cvs edit</command
+>, võib mitu arendajat failidega sünkroonselt töötada. Teise arendaja tehtud muudatused ühendatakse kohalikku liivakasti, kui faili värskendad. </para>
+
+<para
+>Muud versioonikontrolli süsteemid, näiteks <acronym
+>RCS</acronym
+> ja <application
+>SourceSafe</application
+>, kasutavad teistsugust meetodit. Kui arendaja soovib faili redigeerida, peab ta selle <emphasis
+>lukustama</emphasis
+>. See tähendab, et korraga saab üht faili redigeerida vaid üks arendaja. Kui ta redigeerimise lõpetab, lukustus eemaldatakse. Ühelt poolt ei saa sellise meetodi korral kunagi ette tulla konflikte. Teisalt ei saa aga kaks arendajat korraga ühe faili kallal töötada isegi juhul, kui nad töötavad faili erinevate osade kallal. See võib tööd aeglustada. Siin ei ole õige koht arutada nende meetodite organisatoorsete plusside ja miinuste üle. Tasub siiski mainida, et kuigi &CVS; pakub lukustamisele teatud tuge, ei ole see &CVS;i korral sugugi eelistatud töömeetod. Seda ei peaks kasutama, kui sa ei ole just kindel, et projekti haldur seda soosib. </para>
+
+<para
+>&cervisia;s saab faile lukustada järgmiselt. Vali peaaknas vajalik fail. Seejärel kasuta menüükäsku <menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Lukusta failid</guimenuitem
+></menuchoice
+>. See annab käsu </para>
+
+<para>
+<screen
+><command
+>cvs admin -l <replaceable
+>failinimed</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Vastupidise toimingu sooritamiseks kasuta menüükäsku <menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Eemalda lukustus</guimenuitem
+></menuchoice
+>. See annab käsu</para>
+
+<para>
+<screen
+><command
+>cvs admin -u <replaceable
+>failinimed</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="customization">
+<title
+>&cervisia; seadistamine</title>
+
+<para
+>&cervisia;t saab vastavalt kasutaja vajadustele ja eelistustele mitmeti kohandada. Mõningad võimalused, mida võib olla vajadus sageli muuta, on kättesaadavad menüüs <guimenu
+>Seadistused</guimenu
+>. </para>
+
+
+<sect1 id="customize-general">
+<title
+>Üldine</title>
+
+<variablelist>
+
+<varlistentry id="customize-username">
+<term
+><guilabel
+>Kasutaja andmed ChangeLog failis:</guilabel
+></term>
+<listitem
+><para
+>Kui kasutad menüükäsku <menuchoice
+><guimenu
+>Fail</guimenu
+><guimenuitem
+>Lisa ChangeLogi kirje...</guimenuitem
+></menuchoice
+>, luuakse uus ChangeLogi kirje käesoleva kuupäeva ja sinu kasutajanimega. Üldiselt peetakse heaks tooniks lisada igale ChangeLogi kirjele enda täielik nimi ja e-posti aadress. &cervisia; lisab need automaatselt, kui sa nad siin ära määrad. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-cvspath">
+<term
+><guilabel
+>CVS-i rakenduse asukoht või 'cvs':</guilabel
+></term>
+<listitem
+><para
+>Siin saab määrata <command
+>cvs</command
+> käsureakliendi nime või otsingutee. Vaikimisi kasutab &cervisia; &CVS;-i käivitatavat faili, mis asub sinu otsinguteel (<envar
+>$PATH</envar
+>). </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="customize-diff">
+<title
+>Võrdluse näitaja</title>
+
+<variablelist>
+
+<varlistentry id="customize-context">
+<term
+><guilabel
+>Kontekstiridade arv võrdlemise dialoogis:</guilabel
+></term>
+<listitem
+><para
+>&cervisia; kasutab võrdlemisdialoogis käsul <command
+>diff</command
+> võtit <option
+>-U</option
+>. Selle tulemusena näitab <command
+>diff</command
+> igas erinevuse piirkonnas ainult piiratud arvu ridu. Siin saab määrata võtme <option
+>-U</option
+> parameetri. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-diffopt">
+<term
+><guilabel
+>Võrdlemise lisavalikud:</guilabel
+></term>
+<listitem
+><para
+>Siin saab anda käsu <command
+>diff</command
+> lisavõtmed. Üsna levinud on võti <option
+>-b</option
+>, milel peale <command
+>diff</command
+> ignoreerib erinevusi tühikute arvus. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-tabwidth">
+<term
+><guilabel
+>Tabulaatori laius võrdlusdialoogis:</guilabel
+></term>
+<listitem
+><para
+>Võrdlemise dialoogis hõlmavad sinu failis või käsu <command
+>diff</command
+> väljundis leiduvad tabeldusmärgid teatud kindla ruumi. Vaikimisi on selleks kaheksa märgi ruum, kuid siin saab määrata ka muu suuruse. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-difffrontend">
+<term
+><guilabel
+>Väline võrdlemise kasutajaliides:</guilabel
+></term>
+<listitem
+><para
+>Kui kasutad mingeid võrdlusdialoogi avavaid võimalusi, näiteks <menuchoice
+><guimenu
+>Vaade</guimenu
+><guimenuitem
+>Erinevus hoidlast...</guimenuitem
+></menuchoice
+>, kutsub &cervisia; välja välise võrdlemise kasutajaliidese. Kui mõni neist on sulle eriti meelepärane, näiteks &kompare;, <application
+>TkDiff</application
+> või <application
+>xxdiff</application
+>, saad selle siin määrata. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="customize-status">
+<title
+>Olek</title>
+
+<variablelist>
+
+<varlistentry id="customize-startstatus-remote">
+<term
+><guilabel
+>Kaughoidla liivakasti avamisel käivitatakse Fail-&gt;Olek automaatselt</guilabel
+></term>
+<listitem
+><para
+>Selle märkimisel käivitatakse alati käsk <menuchoice
+><guimenu
+>Fail</guimenu
+><guimenuitem
+>Olek</guimenuitem
+></menuchoice
+>, kui avad liivakasti. Et see käsk võtab veidi aega ning vajab ühendust kaughoidla serverisse (mistõttu ei ole eriti mõttekas võrguühenduse puudumise korral), on vahest parem määrata see kohaliku ja kaughoidla jaoks erinev. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-startstatus-local">
+<term
+><guilabel
+>Lokaalhoidla liivakasti avamisel käivitatakse Fail-&gt;Olek automaatselt</guilabel
+></term>
+<listitem
+><para
+>Selle sisselülitamisel käivitatakse kohaliku liivakasti avamisel alati käsk <menuchoice
+><guimenu
+>Fail</guimenu
+><guimenuitem
+>Olek</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="customize-advanced">
+<title
+>Täpsem</title>
+
+<variablelist>
+
+<varlistentry id="customize-timeout">
+<term
+><guilabel
+>Edenemisdialoogi näitamise ajavahemik (millisekundites):</guilabel
+></term>
+<listitem
+><para
+>Sisuliselt kõik liivakastis käivitatud &CVS; käsud, mis puudutavad kaughoidlat, nõuavad ühendust &CVS; serveriga. Seda mõjutab ühenduse kiirus või ka näiteks serveri koormus. Seepärast avab &cervisia; selliste käskude puhul, nagu <menuchoice
+><guimenu
+>Vaade</guimenu
+><guimenuitem
+>Erinevus hoidlast...</guimenuitem
+></menuchoice
+>, dialoogi, mis näitab, et käsku veel täidetakse, ja ühtlasi võimaldab käsu täitmisest loobuda. Lisaks võimaldab dialoog näha &CVS;i veateateid. Et selline dialoog võib muutuda ka tüütavaks, näidatakse seda alles pärast teatud aja möödumist, milleks on vaikimisi 4 sekundit. Siin saab seda aega muuta. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-compression">
+<term
+><guilabel
+>Pakkimise tase vaikimisi:</guilabel
+></term>
+<listitem
+><para
+><command
+>cvs</command
+> klient tihendab failid ja paigad, kui peab neid võrgus edastama. Pakkimise taseme seab käsurea võti <option
+>-z</option
+>. Siin saab määrata &cervisia; seda võtit konkreetsel tasemel kasutama. Siin määratud väärtust kasutatakse ainult vaikimisi, lisaks on hoidlate kaupa võimalik see määrata menüükäsuga <menuchoice
+><guimenu
+>Hoidla</guimenu
+><guimenuitem
+>Hoidlad...</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-sshagent">
+<term
+><guilabel
+>Kasutatakse töötavat või käivitatakse uus ssh-agent protsess</guilabel
+></term>
+<listitem
+><para
+>Märgi see kast, kui kasutad <link linkend="rsh"
+>ext (&rsh;) hoidlaid</link
+>, &ssh; kaugshelli hoidlaga suhtlemiseks ning programmi <application
+>ssh-agent</application
+> oma võtmete haldamiseks. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+
+<sect1 id="customize-look">
+<title
+>Välimus</title>
+
+<variablelist>
+
+<varlistentry id="customize-protocolfont">
+<term
+><guilabel
+>Protokolliakna font...</guilabel
+></term>
+<listitem
+><para
+>Sellele nupule klõpsates avaneb dialoog <guilabel
+>Fondi valik</guilabel
+>, milles saab valida fondi, mida kasutatakse protokolliaknas. See on aken, mis näitab <command
+>cvs</command
+> kliendi väljundit. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-annotatefont">
+<term
+><guilabel
+>Annotatsiooniakna font...</guilabel
+></term>
+<listitem
+><para
+>Sellele nupule klõpsates avaneb dialoog <guilabel
+>Fondi valik</guilabel
+>, milles saab valida fondi, mida kasutatakse <link linkend="annotate"
+>annotatsioonivaates</link
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-difffont">
+<term
+><guilabel
+>Võrdlemisakna font...</guilabel
+></term>
+<listitem
+><para
+>Sellele nupule klõpsates avaneb dialoog <guilabel
+>Fondi valik</guilabel
+>, milles saab valida fondi, mida kasutatakse <link linkend="diff"
+>võrdlusdialoogides</link
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-colors">
+<term
+><guilabel
+>Värvid</guilabel
+></term>
+<listitem
+><para
+>Klõps värvinuppudel avab dialoogi <guilabel
+>Värvi valimine</guilabel
+>, millega saab määrata värvi, mida kasutatakse peaaknas olekute <guilabel
+>Konflikt</guilabel
+>, <guilabel
+>Kohalik muudatus</guilabel
+> või <guilabel
+>Kaugmuudatus</guilabel
+> ning &cervisia; sisseehitatud võrdlusliideses olekute <guilabel
+>Võrdluse muudatus</guilabel
+>, <guilabel
+>Võrdluse lisamine</guilabel
+> või <guilabel
+>Võrdluse kustutamine</guilabel
+> näitamiseks. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-splitter">
+<term
+><guilabel
+>Peaaken poolitatakse rõhtsalt</guilabel
+></term>
+<listitem
+><para
+>&cervisia; peaaken on tavaliselt jagatud vertikaalselt ülal asuvaks failipuuks ja all asuvaks &CVS;-i väljundi osaks. Siin saab aknad korraldada horisontaalselt. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+</chapter>
+
+
+<chapter id="appendix">
+<title
+>Lisa</title>
+
+<sect1 id="ignoredfiles">
+<title
+>Ignoreeritavad failid</title>
+
+<para
+>&cervisia; ei näita oma peamises failipuus sugugi mitte kõiki seal tegelikult leiduvaid faile. See on sarnane käsule <command
+>cvs</command
+>, aidates ära hoida asjatut segadust, kui vaadet risustavad ebavajalikud asjad, näiteks objektifailid. &cervisia; püüab selles osas võimalikult hästi jäljendada käsku <command
+>cvs</command
+>, &ie; hankida ignoreeritavate failide nimekirjad järgmistest allikatest: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Kirjete staatiline nimekiri, kus on sellised elemendid, nagu failid laiendiga <literal role="extension"
+>.o</literal
+> ja <filename
+>core</filename
+>. Täpsemat infot leiab &CVS;i käsiraamatust. </para
+></listitem>
+<listitem
+><para
+>Failist <filename
+><envar
+>$HOME</envar
+>/.cvsignore</filename
+>. </para
+></listitem>
+
+<listitem
+><para
+>Keskkonnamuutujast <envar
+>$CVSIGNORE</envar
+>. </para
+></listitem>
+<listitem
+><para
+>Failist <filename
+>.cvsignore</filename
+> vastavas kataloogis. </para
+></listitem>
+
+</itemizedlist>
+
+<para
+><command
+>cvs</command
+> uurib lisaks veel kirjeid failis <filename
+><envar
+>$CVSROOT</envar
+>/CVSROOT/cvsignore</filename
+>, kuid see fail asub serveril ning &cervisia; peab olema võimeline käivituma ka võrguühenduse puudumisel. Kui töötad grupis, mis eelistab kasutada serveril asuvat ignoreeritavate failide nimekirja, on arvatavasti kasulik vaadata üle, mis seal seisab, ning asetada vastavad mustrid oma kodukataloogis faili <filename
+>.cvsignore</filename
+>. </para>
+
+</sect1>
+
+
+<sect1 id="information">
+<title
+>Täiendav info ja abi</title>
+
+<itemizedlist>
+
+<listitem
+><para
+>&CVS; pakub põhjalikku dokumentatsiooni infolehekülgede näol, mis kannab nimetust "The Cederqvist". Kui see on korrektselt paigaldatud, saab seda sirvida, kui kirjutada &konqueror;i asukohareale <userinput
+>info:/cvs</userinput
+>. Samuti võib valida &cervisia; menüükäsu <menuchoice
+><guimenu
+>Abi</guimenu
+><guimenuitem
+>CVSi info</guimenuitem
+></menuchoice
+>. Cederqvisti võib leida ka &HTML; versioonina <ulink url="http://ximbiot.com/cvs/manual/"
+>internetis</ulink
+>. </para>
+
+<para
+>Et seda raamatut hooldatakse koos &CVS;iga, kajastab see üldjuhul uusimat infot. Siiski on soovitatav lugeda ka mõningaid muid materjale, kui soovid &CVS;i kasutama õppida, eriti just järgmisi. </para
+></listitem>
+
+<listitem
+><para
+>Karl Fogel on kirjutanud suurepärase raamatu <ulink url="http://cvsbook.red-bean.com/index.html"
+>Open Source Development with &CVS;</ulink
+> (<quote
+>Vaba tarkvara arendamine &CVS;i abil</quote
+>). Umbes pool raamatust on pühendatud vaba tarkvara arenamisele. Teine pool kujutab endast &CVS;-i tehnilist dokumentatsiooni. Tänuväärsel kombel on raamatu tehniline osa vabalt levitatav vastavalt GPL-i tingimustele, nii et selle &HTML; versiooni võib iga soovija endale ise tõmmata. Ülalmainitud veebileheküljel on saadaval ka vigade nimekiri. </para
+></listitem>
+
+<listitem
+><para
+>&CVS;i teemadele on pühendatud omaette <ulink url="http://mail.gnu.org/mailman/listinfo/info-cvs"
+>meililist</ulink
+>. </para
+></listitem>
+
+<listitem
+><para
+>Seadistuse haldamisele üldiselt on pühendatud USENETi grupp <literal
+>comp.software.config-mgmt</literal
+>. &CVS; on seal suhteliselt kõrvaline teema, kuid seal võib leida vägagi huvitavat materjali teiste versioonikontrolli süsteemide kohta ning nende võrdlust &CVS;iga. </para
+></listitem>
+
+<listitem
+><para
+>Ning viimase, kuid sugugi mitte tähtsusetuimana on olemas ka (paraku üsna väheaktiivne) <ulink url="http://lists.sourceforge.net/mailman/listinfo/cervisia-user"
+>&cervisia; meililist</ulink
+>. </para
+></listitem>
+
+</itemizedlist>
+
+</sect1>
+
+
+<sect1 id="commandreference">
+<title
+>Käskude seletused</title>
+
+<!-- File Menu -->
+<sect2 id="menufile">
+
+<title
+>Menüü Fail</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fail</guimenu
+> <guimenuitem
+>Ava liivakast...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avab peaaknas liivakasti. Vaata <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fail</guimenu
+> <guisubmenu
+>Viimati kasutatud liivakastid</guisubmenu
+> </menuchoice
+></term>
+<listitem
+><para
+>Võimalus avada mõni hiljuti kasutatud liivakastidest. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fail</guimenu
+><guimenuitem
+>Lisa ChangeLogi kirje...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avab ChangeLogi redaktori, kus saab kohe lisada uue käesoleva kuupäevaga kirje. Vaata <xref linkend="committingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Fail</guimenu
+> <guimenuitem
+>Värskenda</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Rakendab valitud failidele käsku 'cvs update' ning muudab vastavalt nende olekut ja versiooninumbrit. Vaata <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F5</keycap
+></shortcut
+> <guimenu
+>Fail</guimenu
+><guimenuitem
+>Olek</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Rakendab valitud failidele käsku 'cvs -n update' ning muudab vastavalt nende olekut ja versiooninumbrit. Vaata <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fail</guimenu
+><guimenuitem
+>Redigeeri</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avab valitud faili &kde; antud failitüübile määratud vaikeredaktoris. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fail</guimenu
+><guimenuitem
+>Lahenda...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avab valitud faili dialoogis, kus saab lahendada ühendamisel tekkinud konflikte. Vaata <xref linkend="resolvingconflicts"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>#</keycap
+></shortcut
+> <guimenu
+>Fail</guimenu
+><guimenuitem
+>Tee sissekanne...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Võimaldab valitud failid sisse kanda. Vaata <xref linkend="committingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Ins</keycap
+></shortcut
+> <guimenu
+>Fail</guimenu
+><guimenuitem
+>Lisa hoidlasse...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Võimaldab lisada valitud failid hoidlasse. Vaata <xref linkend="addingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fail</guimenu
+><guimenuitem
+>Lisa binaarfail...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Võimaldab lisada valitud failid hoidlasse binaarkujul (<command
+>cvs add <option
+>-kb</option
+></command
+>). Vaata <xref linkend="addingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Del</keycap
+></shortcut
+> <guimenu
+>Fail</guimenu
+><guimenuitem
+>Eemalda hoidlast...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Võimaldab eemaldada valitud failid hoidlast. Vaata <xref linkend="removingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<!--TODO: add the revert action to the working with files chapter -->
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fail</guimenu
+><guimenuitem
+>Hangi vanem versioon</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Tühistab kõik kohalikus liivakastis valitud faili(de)s tehtud muudatused ning taastab versiooni hoidla põhjal (käsk <command
+>cvs update</command
+> võtmega <option
+>-C</option
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Fail</guimenu
+><guimenuitem
+>Välju</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Lõpetab &cervisia; töö </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- View Menu -->
+<sect2 id="menuview">
+
+<title
+>Vaatemenüü</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Escape</keycap
+></shortcut
+> <guimenu
+>Vaade</guimenu
+><guimenuitem
+>Peata</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Peatab kõik töötavad alamprotsessid. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Vaade</guimenu
+><guimenuitem
+>Näita logifaili...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avab valitud failiversioonide logisirvija. Vaata <xref linkend="browsinglogs"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Vaade</guimenu
+> <guimenuitem
+>Näita annotatsiooni...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Näitab valitud faili annotatsioonivaadet, &ie; vaadet, kus iga rea puhul on näha, kes seda viimati redigeeris. Vaata <xref linkend="annotate"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Vaade</guimenu
+><guimenuitem
+>Erinevus hoidlast (BASE)...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Näitab erinevusi liivakastis valitud faili ja viimati värskendatud versiooni (BASE) vahel. Vaata <xref linkend="diff"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Vaade</guimenu
+><guimenuitem
+>Erinevus hoidlast (HEAD)...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Näitab erinevusi livakastis valitud faili ja viimati värskendatud versiooni (HEAD) vahel. Vaata <xref linkend="diff"/>. </para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Vaade</guimenu
+><guimenuitem
+>Viimane muudatus...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Näitab erinevusi valitud faili viimati värskendatud versiooni (BASE) ja sellele eelneva versiooni vahel. Vaata <xref linkend="diff"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Vaade</guimenu
+><guimenuitem
+>Ajalugu...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Näitab &CVS;-i ajalugu, nagu server selle tagastab. Vaata <xref linkend="browsinghistory"/>. </para
+></listitem>
+</varlistentry>
+
+<!--TODO: add hide menus to mainscreen section-->
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Vaade</guimenu
+><guimenuitem
+>Peida kõik failid</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Valimisel näidatakse peaaknas ainult katalooge. Vaata <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Vaade</guimenu
+><guimenuitem
+>Peida muutmata failid</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Valimisel peidetakse peaaknas tundmatud ja värsked failid. Vaata <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Vaade</guimenu
+><guimenuitem
+>Peida eemaldatud failid</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Valimisel peidetakse peaaknas eemaldatud failid. Vaata <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Vaade</guimenu
+><guimenuitem
+>Peida CVSivälised failid</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Valimisel peidetakse peaaknas failid, mida pole &CVS;-is. Vaata <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Vaade</guimenu
+><guimenuitem
+>Peida tühjad kataloogid</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Valimisel peidetakse peaaknas nähtavate kirjeteta kataloogid. Vaata <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Vaade</guimenu
+><guimenuitem
+>Rulli failipuu lahti</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avab failipuu kõik harud, nii et näha on kõik failid ja kataloogid. Vaata <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Vaade</guimenu
+><guimenuitem
+>Rulli failipuu kokku</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Sulgeb failipuu kõik harud. Vaata <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- Advanced Menu -->
+<sect2 id="menuadvanced">
+
+<title
+>Menüü Muud</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Silt/haru...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Valitud failidele sildi või haru omistamine. Vaata <xref linkend="taggingbranching"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Eemalda silt...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Eemaldab valitud failidelt konkreetse sildi. Vaata <xref linkend="taggingbranching"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Värskenda sildi/kuupäeva järgi...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Annab valitud failidele konkreetse sildi või kuupäeva, muutes selle kleepuvaks. Vaata <xref linkend="updatingto"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Värskenda HEAD-harusse...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Annab valitud failidele vastava HEAD versiooni. Vaata <xref linkend="updatingto"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Ühenda...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ühendab konkreetse haru või kahe sildi vahelised muudatused valitud failidesse. Vaata <xref linkend="taggingbranching"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Lisa jälgija...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Lisab jälgija valitud failide sündmustele. Vaata <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Eemalda jälgija...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Eemaldab jälgija valitud failide sündmustelt. Vaata <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Näita jälgijaid</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Näitab valitud failide jälgijaid. Vaata <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Muuda faile</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Rakendab valitud failidele käsku <command
+>cvs edit</command
+>. Vaata <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Loobu muutustest</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Rakendab valitud failidele käsku <command
+>cvs unedit</command
+>. Vaata <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Näita muutjaid</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Rakendab valitud failidele käsku <command
+>cvs editors</command
+>. Vaata <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Lukusta failid</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Lukustab valitud failid. Vaata <xref linkend="locking"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Eemalda lukustus</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Eemaldab valitud failide lukustuse. Vaata <xref linkend="locking"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Muud</guimenu
+><guimenuitem
+>Loo hoidla suhtes paigafail...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Loob liivakastis tehtud muudatuste põhjal paigafaili. Vaata <xref linkend="creatingpatches"/>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- Repository Menu -->
+<sect2 id="menurepository">
+
+<title
+>Menüü Hoidla</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Hoidla</guimenu
+><guimenuitem
+>Loo...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avab dialoogi, mis võimaldab luua uue kohaliku hoidla. Vaata <xref linkend="accessing-repository"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Hoidla</guimenu
+><guimenuitem
+>Tee väljavõte...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avab dialoogi, mis võimaldab teha hoidlast mooduli väljavõtte. Vaata <xref linkend="checkingout"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Hoidla</guimenu
+><guimenuitem
+>Impordi...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avab dialoogi, mis võimaldab importida paketi hoidlasse. Vaata <xref linkend="importing"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Hoidla</guimenu
+><guimenuitem
+>Hoidlad...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Võimaldab seadistada sageli kasutatavaid hoidlaid ja juurdepääsu neile. Vaata <xref linkend="accessing-repository"/>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- Settings Menu -->
+<sect2 id="menuoptions">
+<title
+>Seadistustemenüü</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Seadistused</guimenu
+><guimenuitem
+>Tööriistariba näitamine</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Määrab, kas tööriistariba näidata või mitte. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Seadistused</guimenu
+><guimenuitem
+>Värskendamisel luuakse kataloogid</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Määrab, kas värskendamisel luuakse liivakastis kataloogid, mida seal varem polnud (käsu <command
+>cvs update</command
+> võti <option
+>-d</option
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Seadistused</guimenu
+><guimenuitem
+>Värskendamisel eemaldatakse tühjad kataloogid</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Määrab, kas värskendamisel eemaldatakse liivakastist tühjad kataloogid (käsu <command
+>cvs update</command
+> võti <option
+>-P</option
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Seadistused</guimenu
+><guimenuitem
+>Rekursiivne värskendamine</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Määrab, kas värskendamine on rekursiivne (käsu <command
+>cvs update</command
+> võti <option
+>-r</option
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Seadistused</guimenu
+><guimenuitem
+>Rekursiivne sissekannete tegemine ja eemaldamine</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Määrab, kas sissekandmised ja eemaldamised on rekursiivsed (vastavalt käsu <command
+>cvs add</command
+> ja <command
+>cvs remove</command
+> võti <option
+>-r</option
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Seadistused</guimenu
+><guimenuitem
+>Automaatse redigeerimise lubamine (cvs edit)</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Määrab, kas käsku <command
+>cvs edit</command
+> rakendatakse automaatselt alati, kui faili redigeerid. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Seadistused</guimenu
+> <guimenuitem
+>Kiirklahvide seadistamine...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avab kiirklahvide seadistamise dialoogi. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Seadistused</guimenu
+> <guimenuitem
+>Tööriistaribade seadistamine...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avab &cervisia; tööriistaribade seadistamise dialoogi. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Seadistused</guimenu
+><guimenuitem
+>&cervisia; seadistamine...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avab &cervisia; seadistustedialoogi. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- Help -->
+<sect2 id="menuhelp">
+<title
+>Abimenüü</title>
+&help.menu.documentation; <para
+>Lisaks tavapärastele &kde; menüü <guimenu
+>Abi</guimenu
+> elementidele on selles menüüs veel üks kirje:</para>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Abi</guimenu
+><guimenuitem
+>CVS käsiraamat</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avab &kde; abikeskuses &CVS; infoleheküljed. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="credits-and-license">
+<title
+>Autorid ja litsents</title>
+<para
+>Rakenduse autoriõigus</para>
+<itemizedlist>
+<listitem
+><para
+>1999-2002: &Bernd.Gehrmann; &Bernd.Gehrmann.mail;</para
+></listitem>
+<listitem
+><para
+>2002-2008: &cervisia; autorid</para
+></listitem>
+</itemizedlist>
+
+<para
+>Dokumentatsiooni autoriõigus 1999-2002: &Bernd.Gehrmann; &Bernd.Gehrmann.mail; ja 2004: Carlos Woelz carloswoelz@imap-mail.com</para>
+
+<para
+>Tõlge eesti keelde: Marek Laane <email
+>bald@starman.ee</email
+></para
+> 
+&underFDL; &underGPL; </chapter>
+</book>

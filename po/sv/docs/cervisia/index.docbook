@@ -1,0 +1,3977 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY ssh "<command
+>ssh</command
+>">
+  <!ENTITY rsh "<command
+>rsh</command
+>">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Swedish "INCLUDE"
+> <!-- Change language only here -->
+  <!ENTITY CVS "<application
+>CVS</application
+>">
+]>
+
+<book id="cervisia" lang="&language;">
+
+<bookinfo>
+<title
+>Handbok &cervisia;</title>
+<authorgroup>
+<author
+><firstname
+>Bernd</firstname
+><surname
+>Gehrmann</surname
+> <affiliation
+><address
+>&Bernd.Gehrmann.mail;</address
+></affiliation>
+</author
+> 
+<author
+><firstname
+>Carlos</firstname
+><surname
+>Woelz</surname
+> <affiliation
+><address
+><email
+>carloswoelz@imap-mail.com</email
+></address
+></affiliation>
+</author
+> 
+
+
+<othercredit role="translator"
+> <firstname
+>Stefan</firstname
+> <surname
+>Asserhäll</surname
+> <affiliation
+><address
+><email
+>stefan.asserhall@bredband.net</email
+></address
+></affiliation
+> <contrib
+>Översättare</contrib
+></othercredit
+> 
+
+</authorgroup>
+
+<copyright>
+<year
+>1999</year>
+<year
+>2000</year>
+<year
+>2001</year>
+<year
+>2002</year>
+<holder
+>&Bernd.Gehrmann;</holder>
+</copyright>
+
+<copyright>
+<year
+>2004</year>
+<holder
+>Carlos Woelz</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2016-06-16</date>
+<releaseinfo
+>3.11 (Program 16.08)</releaseinfo>
+
+<abstract>
+<para
+>&cervisia; tillhandahåller en grafisk bild av &CVS;.</para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>Cervisia</keyword>
+<keyword
+>CVS</keyword>
+<keyword
+>versionskontroll</keyword>
+<keyword
+>versionskontroll</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Inledning</title>
+
+<para
+><ulink url="https://www.kde.org/applications/development/cervisia/"
+>&cervisia;</ulink
+> är ett användarvänligt gränssnitt för versionskontrollsystem. Målet är att stödja &CVS; och andra program för versionskontroll med ett gemensamt gränssnitt, med funktioner för konfliktupplösning, jämförelse- och historikvisning, status för kopierade arbetsfiler, och stöd för de flesta versionskontrollfunktioner. Du kan skaffa &cervisia; genom att bygga programmet <ulink url="https://commits.kde.org/cervisia"
+>&cervisia;</ulink
+>, eller installera cervisia-paketet som tillhandahålls av din distribution. </para>
+
+<para
+>Ett versionskontrollsystem är ett verktyg för att lagra, hantera och distribuera olika versioner av filer. &CVS; är ett versionskontrollsystem. Det låter dig enkelt dela ändringar, eftersom var och en av bidragsgivarna kan arbeta i en lokal kopia, utan risk att skriva över varandras ändringar. Det tillåter att tidigare versioner återskapas (användbart för att spåra fel), att skapa grenar (för experimentell utveckling eller för utgåvor av källkod) med mera. </para>
+
+<para
+>Det huvudsakliga <firstterm
+>arkivet</firstterm
+> innehåller oftast ett samarbetsprojekt (kommersiellt eller inte) men du kan dra fördel av de utmärkta versionshanteringsfunktionerna som &CVS; erbjuder också för projekt som enbart utvecklas av dig själv. Det är enkelt att skapa ett lokalt arkiv, och du får möjlighet att spåra ändringar som orsakade fel, ångra ändringar, undvika oönskad informationsförlust, etc. </para>
+
+<para
+>Arkivet innehåller projektfilerna, har varje bidragsgivare sin egen lokala kopia, som kallas <firstterm
+>arbetskopia</firstterm
+> eller <firstterm
+>arbetskatalog</firstterm
+>. Därefter kan man lägga till sina ändringar i huvudarkivet (en process som kallas <quote
+>arkivera</quote
+>) och/eller uppdatera sin egen kopia för att erhålla de senaste ändringarna som gjorts av andra bidragsgivare. </para>
+
+</chapter>
+
+<chapter id="getting-started">
+<title
+>Att komma igång</title>
+
+<sect1 id="accessing-repository">
+<title
+>Åtkomst av arkivet</title>
+
+<para
+>I det här avsnittet visar vi hur de grundläggande funktionerna i versionshanteringssystemet används med &cervisia;, hur moduler checkas ut från arkivet och arbetas med. För att det ska kunna göras, måste du kunna komma åt arkivet som klient, vilket betyder att någon (troligen &CVS;-arkivets administratör) måste ge dig ett konto på serverdatorn. Som ett alternativ kan du enkelt skapa ett lokalt arkiv för dina egna projekt. </para>
+
+<tip
+><para
+>Om du planerar utveckla ett komplext projekt, är det en god idé att använda funktionerna i &CVS;, även om du är den enda utvecklaren. Du kan göra alla ändringar i arbetskopian, och använda &cervisia; (eller vilket annat &CVS;-verktyg som helst) för att uppdatera och arkivera. På så sätt får du möjlighet att spåra ändringar som orsakade fel, ångra ändringar, undvika oönskad informationsförlust, etc. Genom att använda &cervisia; är det enkelt att skapa ett lokalt arkiv. </para>
+
+<procedure>
+<title
+>Skapa ett lokalt arkiv</title>
+
+<step
+><para
+>Öppna dialogrutan <guilabel
+>Skapa nytt arkiv (cvs init)</guilabel
+> genom att välja <menuchoice
+><guimenu
+>Arkivering</guimenu
+> <guimenuitem
+>Skapa...</guimenuitem
+></menuchoice
+>. </para
+></step>
+
+<step
+><para
+>Tryck på knappen <guilabel
+>...</guilabel
+> för att välja katalogen där du vill skapa arkivet, eller skriv in dess plats i redigeringsrutan. Om du till exempel vill placera arkivet i katalogen <filename
+>/home/user</filename
+>, och namnge den <filename
+>cvsroot</filename
+>, ska du skriva in <filename
+>/home/user/cvsroot</filename
+> i redigeringsrutan, eller välja katalogen <filename
+>/home/user</filename
+> med filväljaren, och lägga till <filename
+>cvsroot</filename
+>. </para
+></step>
+
+<step
+><para
+>Bekräfta genom att trycka på knappen <guibutton
+>Ok</guibutton
+>. &cervisia; skapar och initierar det nya arkivets katalog. </para
+></step>
+
+<step
+><para
+>Nu kan du importera ditt aktuella arbete i arkivet, eller helt enkelt skapa en katalog i arkivet för att påbörja en ny modul. </para
+></step>
+
+</procedure>
+
+</tip>
+
+
+<para
+>&cervisia; erbjuder ett integrerat gränssnitt för att hantera alla dina arkivplatser, dialogrutan <guilabel
+>Anpassa tillgång till arkiv</guilabel
+>. För att visa den, välj menyalternativet <menuchoice
+><guimenu
+>Arkivering</guimenu
+> <guimenuitem
+>Arkiv...</guimenuitem
+></menuchoice
+>. </para>
+
+<figure id="screenshot-repositories" float="1">
+<title
+>En skärmbild av &cervisia;s dialogruta Anpassa tillgång till arkiv</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="repositories.png"/></imageobject>
+<textobject
+><phrase
+>En skärmbild av &cervisia;s dialogruta Anpassa tillgång till arkiv</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Det finns flera metoder att komma åt ett &CVS;-arkiv. Det kan nås via behörighetskontroll med lösenord (:pserver:), säkert skal (med :ext:), lokalt arkiv (:local:), etc. Formatet för arkivplatsen är (valfria delar visas mellan hakparenteser): </para>
+
+<para>
+<filename
+>[:metod:][[användare][:lösenord]@]värddator[:[port]]/sökväg/till/arkiv</filename>
+</para>
+
+<para
+>Alla dessa delar (användare, lösenord, värddator, port) är inte alltid nödvändiga för att komma åt arkivet. Informationen som behövs beror på åtkomstmetoden som används, vilken kan kategoriseras på följande sätt: </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+>Lokal</term>
+
+<listitem>
+<para
+>Den lokala åtkomstmetoden är den normala metoden som används av &CVS;. Därför är det inte nödvändigt att lägga till metoden :local: i arkivplatsen. Du kan helt enkelt skriva in sökvägen till katalogen som lagrar &CVS;-arkivet, och kan kommas åt från datorn, som <filename class="directory"
+>/sökväg/till/arkiv</filename
+> eller för att ge ett exempel som används i verkliga livet, <filename class="directory"
+>/home/cvs</filename
+>.</para>
+
+<para
+>Den kan fysiskt finnas på en disk som är monterad via <acronym
+>NFS</acronym
+>, men den detaljen är inte relevant. Om du skapade ett lokalt arkiv, är platsen helt enkelt sökvägen till det. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry id="rsh">
+<term
+>&rsh;</term>
+
+<listitem>
+<para
+>Arkivplatsen är något som ser ut som <filename
+>:ext:användarnamn@värddator.webbadress.org:/sökväg/till/arkiv</filename
+>. </para>
+
+<para
+>Den här metoden kräver att du har ett användarkonto på serverdatorn (i det här fallet, <systemitem class="systemname"
+>värddator.webbadress.org</systemitem
+>) och använder ett fjärrskal för kommunikation. Normalt använder &CVS; &rsh; för det här ändamålet, men &rsh; har sedan länge ansetts vara osäkert, och har ersatts av &ssh; på många ställen. </para>
+
+<para
+>Om du önskar använda &ssh;, måste du ställa in miljövariabeln $<envar
+>CVS_RSH</envar
+> till &ssh; när du använder <command
+>cvs</command
+>-klienten. &cervisia; stöder detta på ett enkelt sätt. </para>
+
+<!-- TODO: verify if the above still apply -->
+
+<para
+>Observera att &cervisia; inte kan svara på en eventuell begäran om lösenord från serverdatorn. Du måste försäkra dig om att de här inloggningarna fungerar utan att du måste skriva in lösenordet. Med det vanliga enkla &rsh;, kan det åstadkommas genom att till exempel skapa filen <filename
+>.rhosts</filename
+> i din hemkatalog med en lista med pålitliga värddatorer (se manualsidan för &rsh;). </para>
+
+<para
+>Med &ssh;, kan det åstadkommas genom att kopiera din öppna nyckel som finns i filen <filename
+>identity.pub</filename
+>, placerad i katalogen <filename
+>$<envar
+>HOME</envar
+>/.ssh/</filename
+> till servern. I det här fallet får inte nyckeln vara krypterad med en lösenordsfras, se manualsidan för &ssh;. </para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>pserver</term>
+
+<listitem>
+<para
+>Arkivplatsen ser ut som <filename
+>:pserver:användarnamn@värddator.webbadress.org:/sökväg/till/arkiv</filename
+> </para>
+
+<para
+>Den här metoden kommer åt servern via ett speciellt protokoll med en relativt svag behörighetskontroll (<literal
+>pserver</literal
+> står för behörighetskontroll med lösenord). Innan du kan använda en sådan server, behöver du ett användarnamn och lösenord som ges av &CVS;-serverns administratör, och du måste logga in. Observera att användarnamnet som används för &CVS; behörighetskontroll med lösenord inte nödvändigtvis motsvarar systemets användarnamn. Innan du kan komma åt &CVS;-servern, måste du logga in. </para>
+
+<para
+>Projekt med öppen källkod erbjuder oftast anonym &CVS;-åtkomst till källkoden. Det betyder att du enkelt kan skaffa den senaste källkoden, ändra och skapa programfixar (jämförelsefiler) för arkivet utan att be om ett &CVS;-konto. I allmänhet använder anonym &CVS; behörighetskontroll med lösenord (:pserver:) och är ett skrivskyddat arkiv, som inte låter dig direkt ladda upp dina ändringar. </para>
+
+</listitem>
+</varlistentry>
+</variablelist>
+
+<para
+>När du känner till åtkomstmetod och plats för arkivet, kan du lägga till det i &cervisia;s lista över arkiv: </para>
+
+<procedure>
+<title
+>Lägga till ett nytt arkiv</title>
+
+<step
+><para
+>Öppna dialogrutan <guilabel
+>Anpassa tillgång till arkiv</guilabel
+> genom att välja menyalternativet <menuchoice
+><guimenu
+>Arkivering</guimenu
+> <guimenuitem
+>Arkiv...</guimenuitem
+></menuchoice
+>. </para
+></step>
+
+<step
+><para
+>Tryck på knappen <guilabel
+>Lägg till...</guilabel
+> för att visa dialogrutan <guilabel
+>Lägg till arkiv</guilabel
+>. </para
+></step>
+
+<step
+><para
+>Skriv in arkivets plats i redigeringsrutan <guilabel
+>Arkiv:</guilabel
+>. &cervisia; inaktiverar automatiskt delarna av dialogrutan som inte är relevanta för åtkomstmetoden du angav. </para
+></step>
+
+<step
+><para
+>Om du använder metoden ext för att komma åt arkivet, skriv in fjärrskalet du vill använda (t.ex. &ssh;) i redigeringsrutan <guilabel
+>Använd fjärrskal (bara för :ext:-arkiv)</guilabel
+>. </para
+></step>
+
+<step
+><para
+>Klicka på <guibutton
+>Ok</guibutton
+>. Du ser arkivet som du just matade in i listan över arkiv. </para
+></step>
+
+<step
+><para
+>Om åtkomstmetoden till arkivet som du just skrivit in är behörighetskontroll med lösenord (pserver), måste du logga in innan du ansluter till servern. Klicka på arkivet i listan för att markera det, och tryck på knappen <guilabel
+>Logga in...</guilabel
+>. Skriv in lösenordet i dialogrutan som dyker upp. </para>
+<para
+>Om du skriver in lösenordet med lyckat resultat, ändras kolumnen <guilabel
+>Status</guilabel
+> i pserver-arkivet från <guilabel
+>Inte inloggad</guilabel
+> till <guilabel
+>Inloggad</guilabel
+>. </para
+></step>
+
+<step
+><para
+>Tryck på <guibutton
+>Ok</guibutton
+> för att verkställa dina ändringar, eller lägg till en annan plats i listan. &cervisia; lagrar hur många platser du vill. </para
+></step>
+
+</procedure>
+
+</sect1>
+
+
+<sect1 id="importing">
+<title
+>Importera en modul till arkivet</title>
+
+<para
+>I det här avsnittet beskriver vi hur du kan lägga till ett nytt projekt i &CVS;-arkivet. Om du bara vill arbeta med ett befintligt projekt som redan finns i arkivet, kan du hoppa över det här avsnittet. </para>
+
+<para
+>Det finns två sätt att lägga till ett projekt i &CVS;: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Importera filerna och katalogerna till en ny <firstterm
+>modul</firstterm
+>, med &cervisia;s importdialogruta. Moduler är toppnivåkataloger i &CVS;-arkivets katalogträd, och används för att skilja på och organisera de olika programvaruprojekt som finns i arkivet. </para
+></listitem>
+
+<listitem
+><para
+>Skapa en tom modul och lägg till de nya filerna och katalogerna för hand. Du har större kontroll, men det tar troligen lite längre tid. </para
+></listitem>
+
+</itemizedlist>
+
+<important>
+<para
+>Kom ihåg att &CVS; ursprungligen skapades för att hantera textfiler. Många funktioner, som sammanfogning av versioner, skapa skillnader på läsbar form, etc., utförs bara med textfiler. Det betyder inte att du inte kan använda &CVS; för att lagra binärfiler, det betyder bara att du <emphasis
+>explicit måste tala om för &CVS; om en fil är en textfil eller binärfil</emphasis
+>. Om du anger felaktig filtyp, får du problem med &CVS;-funktioner för filerna, och de kan bli förstörda. </para>
+</important>
+
+
+<para
+>Att importera ett projekt (som en ny modul) har några fördelar: du importerar alla filer och kataloger rekursivt, och modulen skapas automatiskt åt dig. Det gör det enklare att importera stora befintliga projekt i arkivet. Det finns dock några nackdelar: du kan inte använda &cervisia;s importdialogruta för att lägga till filer i befintliga moduler, och du kan antingen importera filerna som text eller binärfiler. Du kan komma runt den här begränsning genom att skapa en katalog med filer av bara en typ, eller genom att ange filmönster som ska ignoreras under importprocessen. </para>
+
+<para
+>Antag till exempel att ditt projekt bara innehåller textfiler och några PNG-bilder (binära filer). Du kan tala om för &CVS; att ignorera alla filer med mönstret <filename class="extension"
+>*.png</filename
+> medan övriga filer importeras som text, eller du kan flytta bilderna till en särskild katalog och därefter importera återstående filer (som textfiler). På båda sätt måste du <link linkend="checkingout"
+>checka ut</link
+> den nyimporterade modulen i en ny arbetskopia, kopiera de saknade filerna och katalogerna till den, <link linkend="addingfiles"
+>lägga till</link
+> och <link linkend="committingfiles"
+>arkivera</link
+> dem i arkivet för att avsluta importprocessen. </para>
+
+<para
+>Som ett alternativ kan du lägga till filerna och katalogerna för hand, genom att skapa en tom modul för dem. För att lägga till en tom modul i ett arkiv, skapa bara en ny katalog i &CVS;-arkivets rotkatalog. Namnet på den nya katalogen blir modulens namn. <link linkend="checkingout"
+>Checka ut</link
+> den nya tomma modulen. Kopiera därefter filerna och katalogerna till arbetskopian, <link linkend="addingfiles"
+>lägg till</link
+> och <link linkend="committingfiles"
+>arkivera</link
+> för att ladda upp dem till &CVS;-arkivet. </para>
+
+
+<figure id="screenshot-import" float="1">
+<title
+>En skärmbild av &cervisia;s importdialogruta</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="import.png"/></imageobject>
+<textobject
+><phrase
+>En skärmbild av &cervisia;s importdialogruta</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>I <xref linkend="screenshot-import"/> kan du se dialogrutan som hjälper dig att <emphasis
+>importera</emphasis
+> ett projekt som en modul. För att komma åt &cervisia;s importdialogruta, välj menyalternativet <menuchoice
+><guimenu
+>Arkivering</guimenu
+> <guimenuitem
+>Importera...</guimenuitem
+></menuchoice
+>. </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Arkiv:</guilabel
+> <xref linkend="co-repository"/></term>
+<listitem
+><para
+>Skriv in eller välj namnet på &CVS;-arkivet från kombinationsrutan, också känt som $<envar
+>CVSROOT</envar
+>. Du måste ha skrivrättigheter till arkivet, och det måste vara riktigt initierat. Om arkivet inte finns ännu, kan du skapa ett genom att välja menyalternativet <menuchoice
+><guimenu
+>Arkivering</guimenu
+> <guimenuitem
+>Skapa...</guimenuitem
+></menuchoice
+>. </para>
+<para
+>Kombinationsrutan visar en lista med arkiv som du tidigare skrivit in i dialogrutan <guilabel
+>Anpassa tillgång till arkiv</guilabel
+>. Om arkivet är på en annan dator, försäkra dig om att behörighetskontrollen fungerar. Se <xref linkend="accessing-repository"/> för mer information. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Modul:</guilabel
+> <xref linkend="co-module"/></term>
+<listitem
+><para
+>Namnet på modulen där projektet kommer att lagras. Efter importen, kan projektet checkas ut med det här namnet. Se <xref linkend="checkingout"/> för mer information. Detta är också namnet på motsvarande katalog i arkivet. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Arbetskatalog:</guilabel
+></term>
+<listitem
+><para
+>Toppnivåkatalogen för projektet som du vill importera. Importen börjar i den här katalogen och går neråt rekursivt. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Leverantörstagg:</guilabel
+> <xref linkend="co-vendortag"/></term>
+<listitem
+><para
+>Taggen för leverantören används historiskt för att följa källkod från tredje part. Använd bara ditt användarnamn om du inte har någon bättre idé. Det spelar inte så stor roll vad du skriver in här. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Versionstagg:</guilabel
+> <xref linkend="co-releasetag"/></term>
+<listitem
+><para
+>Den här taggen används också historiskt för att importera olika versioner av programvara från tredje part. Om du inte gör detta, använd ordet <literal
+>start</literal
+> eller strängen <literal
+>PROJEKT_1_0</literal
+>, där <literal
+>PROJEKT</literal
+> är namnet på ditt projekt och <literal
+>1.0</literal
+> är versionsnumret för den importerade versionen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Ignorera filer:</guilabel
+></term>
+<listitem
+><para
+>Om du fyller i det här fältet, ges den ytterligare väljaren <option
+>-I <replaceable
+>filnamn</replaceable
+></option
+> till kommandot <command
+>cvs import</command
+>. Den här parametern tolkas som en lista med filnamnsmönster, skilda med mellanslag, som ignoreras. I allmänhet är ett renare och mindre felbenäget sätt att styra vilka filer som hamnar i arkivet, att skapa en katalog med bara de filer som du vill importera och utgå från den. Hur som helst, kan det här fältet vara användbart om projektet innehåller filer som normalt ignoreras av &CVS;, t.ex. filer med namnet <filename
+>core</filename
+>. Om detta är fallet, skriv helt enkelt in tecknet <literal
+>!</literal
+> i fältet. Det här överskrider &CVS; sätt att ignorera filer, se <xref linkend="ignoredfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Kommentar:</guilabel
+> <xref linkend="co-comment"/></term>
+<listitem
+><para
+>Använd fältet för att spara kommentarer du kan ha om ursprunget, användningen, utvecklingen, etc. för filerna du importerar. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Importera som binärfiler</guilabel
+></term>
+<listitem
+><para
+>Om du markerar den här rutan, importeras alla filer som binärfiler, dvs. väljaren <option
+>-kb</option
+> anges för <command
+>cvs import</command
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Använd filens ändringstid som importtid</guilabel
+></term>
+<listitem
+><para
+>Om du markerar rutan, är importtiden filens ändringstid istället för tiden då den importeras. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+
+<para
+>Efter du har fyllt i det här formuläret och bekräftat med <guibutton
+>Ok</guibutton
+>, används följande &CVS;-kommando:</para>
+
+<screen
+><command
+>cvs</command
+> -d <co id="co-repository"
+></co
+><replaceable
+>arkiv</replaceable
+> import -m "<co id="co-comment"
+></co
+>" <co id="co-module"
+></co
+><replaceable
+>modul</replaceable
+> <co id="co-vendortag"
+></co
+><replaceable
+>leverantörstagg</replaceable
+> <co id="co-releasetag"
+></co
+><replaceable
+>versionstagg</replaceable
+></screen>
+
+</sect1>
+
+
+<sect1 id="checkingout">
+<title
+>Checka ut en modul från arkivet</title>
+<para
+>Nu när du har definierat platsen för arkivet med lyckat resultat, och importerat de urspungliga filerna i arkivet, är det dags att hämta modulen från &CVS;-arkivet, för att skapa din arbetskopia. </para>
+
+<para
+>Du måste också känna till namnet på den <firstterm
+>gren</firstterm
+> eller <firstterm
+>tagg</firstterm
+> som du vill använda. </para>
+
+<para
+>Grenar av en modul är parallella versioner av modulen. Ett bra exempel på användning av funktionen från verkliga livet är utgåvorna i ett programvaruprojekt. Efter en större utgåva, finns det fel i koden som bör rättas, men personer vill också lägga till nya funktioner i programmet. Det är mycket svårt att göra båda samtidigt, eftersom nya funktioner oftast introducerar nya fel, vilket gör det svårt att spåra de gamla. För att lösa dilemmat, låter &CVS; dig skapa en parallell version, som vi kallar <quote
+>grenen med den stabila utgåvan</quote
+>, där du bara kan lägga till felrättningar, vilket lämnar huvudversionen (HEAD) öppen för att lägga till nya funktioner. </para>
+
+<para
+>Taggar används för att markera en projektversion. &CVS; stämplar en version av varje fil med taggen, så att när du checkar ut eller uppdaterar med en specifik tagg, får du alltid samma filversioner. Därför är taggar inte dynamiska, i motsats till grenar: man kan inte utveckla med en tagg. Taggar är användbara för att markera utgåvor, stora ändringar i koden, etc. Genom att använda taggar kan du enkelt återgå till ett tidigare tillstånd av projektet för att reproducera och spåra fel, skapa koden för en utgåva igen, etc. </para>
+
+<figure id="screenshot-checkout" float="1">
+<title
+>En skärmbild av &cervisia;s utcheckningsdialogruta</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="checkout.png"/></imageobject>
+<textobject
+><phrase
+>En skärmbild av &cervisia;s utcheckningsdialogruta</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Arkiv:</guilabel
+></term>
+<listitem
+><para
+>Namnet på &CVS;-arkivet, också känt som <filename
+><envar
+>$CVSROOT</envar
+></filename
+>. Kombinationsrutan visar en lista med arkiven som du tidigare matade in med dialogrutan <guilabel
+>Anpassa tillgång till arkiv</guilabel
+>. Om arkivet är på en annan dator, försäkra dig om att behörighetskontrollen fungerar. Se <xref linkend="accessing-repository"/> för mer information. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Modul:</guilabel
+></term>
+<listitem
+><para
+>Namnet på modulen som ska checkas ut. Om du arbetar med ett befintligt arkiv kan du förmodligen få namnet från systemadministratören, eller om det är ett arkiv med öppen källkod, kan du få modulnamnen från projektets webbsidor. Om du vill skapa en ny modul från början med ett lokalt arkiv, skapa bara en ny katalog i det lokala arkivets rotkatalog. Namnet på katalogen blir samma som namnet på den tomma modulen. </para>
+<para
+>Annars, om arkivet har en fil som heter <filename
+><envar
+>$CVSROOT</envar
+>/modules</filename
+>, kan du hämta en lista med tillgängliga moduler genom att klicka på knappen <guibutton
+>Hämta lista</guibutton
+>. </para>
+<para
+>Observera att det är möjligt att checka ut vilken befintlig underkatalog som helst i modulen, utan att hämta resten av modulen. Skriv bara dessutom in sökvägen till underkatalogen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Grentagg:</guilabel
+></term>
+<listitem
+><para
+>Namnet på grenen eller taggen du vill checka ut. Om du lämnar fältet tomt, hämtar &cervisia; huvudversionen (HEAD). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Arbetskatalog:</guilabel
+></term>
+<listitem
+><para
+>Katalogen där modulen ska checkas ut. Observera att toppnivåkatalogen för arbetskopian namnges av modulen du hämtar, om du inte ger den ett alternativt namn i fältet <guilabel
+>Checka ut som:</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Checka ut som:</guilabel
+></term>
+<listitem
+><para
+>Det resulterar i att filerna checkas ut i en alternativ katalog under arbetskatalogen istället för en katalog med modulens namn. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Bara export</guilabel
+></term>
+<listitem
+><para
+>Om du markerar rutan, exporteras filerna i stället för att checkas ut. Export hämtar en kopia av modulens källkod utan &CVS; administrationskataloger. Export kan till exempel användas för att förbereda källkoden för en utgåva. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Rekursiv utcheckning</guilabel
+></term>
+<listitem
+><para
+>Checka ut alla filer och kataloger rekursivt.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+
+<sect1 id="mainscreen">
+<title
+>Huvudskärmen, visa filstatus och uppdatera</title>
+<para
+>När du startar &cervisia;, och öppnar en arbetskopia genom att välja <menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Öppna arbetskatalog...</guimenuitem
+></menuchoice
+> kan du se två huvudområden i &cervisia;s huvudfönster: det övre är en hierarkisk vy av den nuvarande arbetskopian, det nedre används för att visa &CVS;-kommandon som &cervisia; ger för att utföra åtgärder, samt utmatningen som skapas av kommandona. </para>
+
+<para
+>Normalt visar inte &cervisia; filerna som finns i underkatalogerna, så du måste klicka på katalogerna du vill se. För att visa alla filer i arbetskopian, välj <menuchoice
+><guimenu
+>Visa</guimenu
+> <guimenuitem
+>Expandera filträd...</guimenuitem
+></menuchoice
+>. För att stänga alla kataloger i arbetskopian, välj <menuchoice
+><guimenu
+>Visa</guimenu
+> <guimenuitem
+>Dra ihop filträd</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>Beroende på inställningarna i filen <filename
+>.cvsignore</filename
+>, visas inte filer som du normalt inte vill ha i arkivet, såsom objektfiler, i trädvyn. För varje fil syns motsvarande status. Med de normala inställningarna är detta "Okänd" eftersom &cervisia; väntar med att hämta information till du markerar filerna och katalogerna vars status du vill uppdatera eller visa och väljer <guimenuitem
+>Uppdatera</guimenuitem
+> eller <guimenuitem
+>Status</guimenuitem
+> i menyn <guimenu
+>Arkiv</guimenu
+>. På det här sättet har du en minimal funktionalitet tillgänglig även om du inte har en permanent anslutning till &CVS;-servern. </para>
+
+<figure id="screenshot-mainview" float="1">
+<title
+>En skärmbild av &cervisia;s huvudfönster</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="mainview.png"/></imageobject>
+<textobject
+><phrase
+>En skärmbild av &cervisia;s huvudfönster</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Kommandon i menyn Arkiv gäller vanligen bara filerna som du har markerat. Du kan också markera kataloger. Välj nu <menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Status</guimenuitem
+></menuchoice
+>, eller tryck på <keycap
+>F5</keycap
+>. &cervisia; kör kommandot </para>
+
+<para>
+<screen
+><command
+>cvs update -n <replaceable
+>filnamn</replaceable
+></command
+></screen>
+</para>
+
+<para
+>för att hämta statusinformation för de markerade filerna. Observera att &cervisia; bara går in i underkataloger rekursivt, om du har aktiverat motsvarande alternativ i menyn <guimenu
+>Inställningar</guimenu
+>. Beroende på varje fils status, ser du nu något värde i kolumnen <guilabel
+>Status</guilabel
+>. </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Ändrad lokalt</guilabel
+></term>
+<listitem
+><para
+>Det här betyder att du har ändrat filen jämfört med versionen i arkivet. </para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><guilabel
+>Tillagd lokalt</guilabel
+></term>
+<listitem
+><para
+>Det här betyder att filen inte finns i arkivet, men den finns i din arbetskopia och du har schemalagt den för att läggas till. Filen infogas verkligen i arkivet först vid en arkivering. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Borttagen lokalt</guilabel
+></term>
+<listitem
+><para
+>Det här betyder att du har schemalagt filen för att tas bort, men den finns fortfarande i arkivet. Filen tas verkligen bort i arkivet först vid en arkivering. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Behöver uppdateras</guilabel
+></term>
+<listitem
+><para
+>Det här visas om en nyare version av filen finns i arkivet, t.ex. på grund av att någon har arkiverat en ändring. Normalt vill du uppdatera filen så att du har en aktuell version i din katalog. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Behöver programfix</guilabel
+></term>
+<listitem
+><para
+>Det här är i allt väsentligt samma sak som ovan. Skillnaden är bara att vid en uppdatering, överför &CVS;-servern bara en programfix istället för hela filen till dig. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Behöver sammanfogas</guilabel
+></term>
+<listitem
+><para
+>Anger att en sammanfogning av versionen i din arbetskopia med versionen i arkivet är nödvändig. Det här händer oftast om du har gjort ändringar i filen medan någon annan har arkiverat sina ändringar. Om du väljer att uppdatera, sammanfogas ändringarna i arkivet med din fil. Om det uppstår konflikter (dvs. någon annan har ändrat samma rader som du) är filens nya status "Konflikt". </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Aktuell</guilabel
+></term>
+<listitem
+><para
+>Anger att filen är identisk med versionen i arkivet. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Konflikt</guilabel
+></term>
+<listitem
+><para
+>Det här visas om den här filen fortfarande har konfliktmarkörer i sig. Kanske har du tidigare uppdaterat filen och inte löst upp konflikterna. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Inte i CVS</guilabel
+></term>
+<listitem
+><para
+>Anger att filen inte är registrerad i &CVS;-arkivet. Om du vill att den ska vara tillgänglig för andra, ska du lägga till den i arkivet. Om inte, kan du fundera på att lägga till den i filen <filename
+>.cvsignore</filename
+>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>När du nu har fått en överblick av nuvarande status i &CVS;, kanske du vill göra en uppdatering. Markera några filer (eller roten i katalogträdet, vilket motsvarar att markera alla filer i katalogen. Välj nu <menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Uppdatera</guimenuitem
+></menuchoice
+>. (Du kunde förstås ha valt detta redan från början). Status kan nu ändras för vissa filer. Normalt uppdateras filer som hade status "Behöver programfix" eller "Behöver uppdateras". Följande nya värden är alltså möjliga i statuskolumnen: </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Uppdaterad</guilabel
+></term>
+<listitem
+><para
+>Visar om filen uppdaterades från arkivet. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Har programfix</guilabel
+></term>
+<listitem
+><para
+>Anger att &CVS;-servern har skickat en programfix för den här filen, och att fixen har tillämpats med lyckat resultat. Om fixen inte lyckades på grund av att det var en konflikt mellan dina ändringar och de som någon annan har arkiverat, är status nu <guilabel
+>Konflikt</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Du kanske har märkt att beroende på filens status, har dess rad en annorlunda färg. Färgerna är valda för att på något sätt ange statusprioriteten. En fil med konflikter är till exempel markerad med rött för att visa dig att du måste lösa upp en konflikt innan du kan fortsätta att arbeta med filen. Om katalogen innehåller ett stort antal filer, kan du ändå förlora överblicken. För att få mer kortfattad information om vilka filer som har en ovanlig status, klicka helt enkelt på rubriken för kolumnen <guilabel
+>Status</guilabel
+>. Fillistan sorteras då enligt prioritet, så att du har all viktig information överst i listan. För att återgå till en alfabetiskt sorterad lista, klicka på rubriken för kolumnen <guilabel
+>Filnamn</guilabel
+>. </para>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="workingwithfiles">
+<title
+>Arbeta med filer</title>
+
+<para
+>Alla vanliga funktioner i &CVS; är direkt tillgängliga i &cervisia;s huvudfönster. Kommandon gäller oftast flera filer på en gång, nämligen alla som för närvarande är markerade. Om kataloger också är markerade, beror tolkningen på inställningarna som gjorts i menyn <guimenu
+>Inställningar</guimenu
+>. Om <menuchoice
+><guimenu
+>Inställningar</guimenu
+><guimenuitem
+>Arkivera och ta bort rekursivt</guimenuitem
+></menuchoice
+> till exempel är markerat och du väljer <menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Arkivera...</guimenuitem
+> </menuchoice
+> medan en katalog är markerad, arkiveras alla filer i trädet under den katalogen. Annars påverkas bara de vanliga filerna i katalogen själv. </para>
+
+<figure id="screenshot-popup" float="1">
+<title
+>En skärmbild av &cervisia;s sammanhangsberoende meny</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="popup.png"/></imageobject>
+</mediaobject>
+</figure>
+
+<para
+>De vanligaste åtgärderna är också tillgängliga genom att högerklicka på filerna i trädvyn, via den sammanhangsberoende menyn. <xref linkend="screenshot-popup"/> visar &cervisia;s sammanhangsberoende meny i huvudfönstret. </para>
+
+<para
+>Du kan helt enkelt redigera en fil genom att dubbelklicka på den eller markera den och trycka på returtangenten. Då startas förvalt program som hanterar filtypen (förvalt program för varje filtyp är en inställning som gäller hela &kde;). Om det förvalda programmet inte är det som du vill använda, kan du högerklicka på filen och välja undermenyn <menuchoice
+><guisubmenu
+>Redigera med</guisubmenu
+></menuchoice
+>, och välja ett av de andra program som kan hantera filtypen. </para>
+
+<sect1 id="addingfiles">
+<title
+>Lägga till filer</title>
+
+<para
+>Att lägga till filer i ett projekt kräver två steg: Först måste filerna registreras med &CVS;, eller med andra ord <emphasis
+>läggas till i arkivet</emphasis
+>. Det är nödvändigt, men inte tillräckligt. För att verkligen lagra filerna i arkivet, måste du <emphasis
+>arkivera</emphasis
+> dem. Den här proceduren har en viktig fördel: Du kan arkivera de här filerna tillsammans med ändringar i andra delar av projektet. När man gör detta kan man lätt se (t.ex. i e-post från arkiveringen) att alla dessa ändringar är en del av en helhet. </para>
+
+<para
+>För att åstadkomma detta, markera alla filer som ska läggas till i &cervisia;s huvudvy. Välj därefter <menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Lägg till i arkiv...</guimenuitem
+></menuchoice
+>, eller högerklicka på markerade filer och välj <guimenuitem
+>Lägg till i arkiv...</guimenuitem
+>. Dialogrutan <guilabel
+>CVS lägg till</guilabel
+> visas, där filerna du markerade listas, och ber om bekräftelse. Tryck på <guibutton
+>Ok</guibutton
+>. </para>
+
+<para
+>&cervisia; utför ett kommando</para>
+
+<para>
+<screen
+><command
+>cvs add <replaceable
+>filnamn</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Om åtgärden lyckades, ska statuskolumnen lyda "Tillagd i arkivet" för de tillagda filerna. </para>
+
+<warning
+><para
+>&CVS; är inte konstruerat för att tillhandahålla meningsfull versionskontroll för binärfiler. Att sammanfoga binärfiler, är till exempel oftast inte meningsfullt. Dessutom expanderar &CVS; normalt nyckelord (t.ex. för strängen <literal
+>&dollar;Revision: 1.6 &dollar;</literal
+>) när en fil arkiveras. För binärfiler kan en sådan expansion förstöra filen och göra den fullständigt oanvändbar. </para
+></warning>
+
+<para
+>För att ändra beteendet ovan, ska du arkivera binärfiler (eller andra filer, som Postscript eller PNG-bilder) genom att välja <menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Lägg till binärfil...</guimenuitem
+></menuchoice
+>. Dialogrutan <guilabel
+>Lägg till i CVS</guilabel
+> visas, där binärfilerna du markerade listas, och ber om bekräftelse. Tryck på knappen <guibutton
+>Ok</guibutton
+>. </para>
+
+<para
+>&cervisia; utför ett kommando </para>
+
+<para>
+<screen
+><command
+>cvs add -kb <replaceable
+>filnamn</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="removingfiles">
+<title
+>Ta bort filer</title>
+
+<para
+>Precis som att lägga till filer, så tas filer bort i två steg: Först måste filerna registreras för att tas bort genom att välja <menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Ta bort från arkiv...</guimenuitem
+></menuchoice
+> eller högerklicka på de markerade filerna och välja <guimenuitem
+>Ta bort från arkiv...</guimenuitem
+> i den sammanhangsberoende menyn. Dialogrutan <guilabel
+>Ta bort från CVS</guilabel
+> visas, där filerna du markerade listas, och ber om bekräftelse. Tryck på <guibutton
+>Ok</guibutton
+>. &cervisia; ger kommandot </para>
+<para>
+<screen
+><command
+>cvs remove -f <replaceable
+>filnamn</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Därefter måste den här ändringen i arbetskatalogen arkiveras, möjligen tillsammans med andra ändringar i projektet. </para>
+
+<note
+><para
+>Kommandot ovan fungerar bara om filen är aktuell. Annars får du ett felmeddelande. Det här beteendet är förnuftigt: Om du har ändrat filen jämfört med versionen i arkivet, eller om någon annan har gjort några ändringar, vill du nog först kontrollera om du verkligen vill slänga dem. </para
+></note>
+
+</sect1>
+
+
+<sect1 id="addingremovingdirs">
+<title
+>Lägga till och ta bort kataloger</title>
+
+<para
+>Kataloger hanteras fullständigt annorlunda av &CVS; jämfört med vanliga filer. Ingen versionskontroll utförs av kataloger, dvs. du kan inte avgöra vilka kataloger som fanns i projektet vid en viss tid. Dessutom kan kataloger aldrig uttryckligen tas bort (utom om de tas bort direkt i arkivet). </para>
+
+<para
+>Som en ersättning, följer &CVS; konventionen att en katalog "inte existerar" i en version av projektet om den är tom. Den här konventionen följs genom att använda väljaren <option
+>-P</option
+> i kommandona <command
+>cvs update</command
+> och <command
+>cvs checkout</command
+>. Alternativet kan anges i menyn <menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Ta bort tomma kataloger vid uppdatering</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>En katalog kan läggas till i arkivet genom att välja <menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Lägg till i arkiv...</guimenuitem
+></menuchoice
+>, eller genom att högerklicka på den markerade katalogen och välja <guimenuitem
+>Lägg till i arkiv...</guimenuitem
+> i den sammanhangsberoende menyn. Observera att i motsats till att lägga till filer, krävs ingen arkivering när kataloger läggs till. &cervisia; ger kommandot </para>
+
+
+<para>
+<screen
+><command
+>cvs add <replaceable
+>katalognamn</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="committingfiles">
+<title
+>Arkivera filer</title>
+
+<para
+>När du har gjort ett visst antal ändringar i din arbetskopia, och du vill att andra utvecklare ska få tillgång till dem, så <emphasis
+>arkiverar</emphasis
+> du dem. Vid en arkivering, lägger du in dina versioner av de ändrade filerna som nya versioner i arkivet. En senare uppdatering av en annan utvecklare, gör att dina ändringar införs i hans arbetskopia. </para>
+
+<para
+>För att arkivera några filer, markera dem i &cervisia;s huvudfönster, och välj <menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Arkivera...</guimenuitem
+></menuchoice
+> eller högerklicka på de markerade filerna och välj <guimenuitem
+>Arkivera...</guimenuitem
+> i den sammanhangsberoende menyn. </para>
+
+<figure id="screenshot-commit" float="1">
+<title
+>En skärmbild av &cervisia;s arkiveringsdialogruta</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="commit.png"/></imageobject>
+</mediaobject>
+</figure>
+
+<para
+>Du får en dialogruta som visar en lista med markerade filer i övre delen och ett loggmeddelande med dina ändringar nedanför. &cervisia; hjälper till på flera sätt att ange ett meningsfullt loggmeddelande: För det första kan du dubbelklicka på en fil eller trycka på returtangenten för att se ändringarna som du har gjort i filen. För det andra får du en lista med loggmeddelanden som du tidigare har använt i en kombinationsruta. För det tredje är den här dialogrutan ihopkopplad med &cervisia;s editor för ändringslogg som beskrivs nedan. När du är klar med dialogrutan kommer kommandot </para>
+
+<para>
+<screen
+><command
+>cvs commit -m <replaceable
+>meddelande</replaceable
+> <replaceable
+>filnamn</replaceable
+></command
+></screen>
+</para>
+
+<para
+>utföras. </para>
+
+
+<note
+><para
+>Ett vanligt fel som du kan stöta på när du arkiverar är "<errorname
+>Up-to-date check failed</errorname
+>" (kontroll att filen är aktuell misslyckades). Det här anger att någon har arkiverat ändringar sedan du sist uppdaterade - eller, mer tekniskt, att din basversion inte är den senaste på sin gren. För ett sådant fall, så vägrar &CVS; att lägga in dina ändringar i arkivet. Lösningen är att uppdatera, lösa upp eventuella konflikter, och arkivera igen. Om du arbetar med ett programvaruprojekt, är det förstås normalt en god vana att kontrollera om programmet fortfarande fungerar efter du har uppdaterat. Det kan ju trots allt finnas dolda samband mellan dina ändringar och andras ändringar som ger upphov till fel i koden. </para
+></note>
+
+<note>
+<para
+>Ett annat vanligt misstag ger felmeddelandet "<errorname
+>Sticky tag 'X' for file 'X' is not a branch</errorname
+>" (fast tagg 'X' för filen 'X' är inte en gren). Det här inträffar om du försöker arkivera en fil som du tidigare har uppdaterat till en viss version eller tagg med kommandot </para>
+<para>
+<screen
+><prompt
+>%</prompt
+><userinput
+>cvs update -r X</userinput
+></screen>
+</para>
+<para
+>(som t.ex. används av menyalternativet <menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Uppdatera till tagg/datum...</guimenuitem
+></menuchoice
+>). I detta fall, blir filens tagg fast, dvs. följande uppdateringar byter inte till den senaste revisionen på grenen. Om du vill lägga till flera versioner på grenen, så måste du uppdatera till grenens tagg innan du arkiverar ytterligare versioner. </para>
+</note>
+
+<para
+>Det är lätt att underhålla en ändringslogg med &cervisia;, som följer formatet som anges i &GNU;:s kodningsregler. För att göra detta, välj <menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Infoga post i ändringsloggen...</guimenuitem
+> </menuchoice
+>. Om en fil som heter <filename
+>ChangeLog</filename
+> (ändringslogg) finns i arbetskatalogens toppnivå, laddas den och du har möjlighet att redigera den. För att kunna göra detta, finns en post tillagd med dagens datum och ditt användarnamn (som kan anpassas enligt beskrivningen i <xref linkend="customize-general"/>). När du avslutar dialogrutan genom att klicka på <guibutton
+>Ok</guibutton
+>, kommer nästa arkiveringsdialogruta att ha samma loggmeddelande som meddelandet du skrev in i ändringsloggen. </para>
+
+</sect1>
+
+
+<sect1 id="resolvingconflicts">
+<title
+>Lösa upp konflikter</title>
+
+<para
+>Konflikter kan uppstå så fort du har gjort ändringar i en fil som också ändrats av någon annan utvecklare. Konflikten detekteras av &CVS; när du uppdaterar den ändrade filen. &CVS; försöker då sammanfoga ändringarna som arkiverats av den andra utvecklaren i din arbetskopia. Sammanfogningen misslyckas om både dina och hans ändringar är i överlappande delar av filen, och &CVS;-servern skriver då ut ett felmeddelande. </para>
+
+<para
+>Filer med konflikter anges i &cervisia;s huvudfönster med "Konflikt" i statuskolumnen och med röd färg. Nu är det ditt jobb att lösa upp konflikterna innan du arkiverar filen. &CVS; vägrar att arkivera alla filer med konflikter innan de har redigerats. I huvudfönstret kan du förstås lösa upp konflikter på det traditionella sättet: Dubbelklicka bara på filen i fråga, och redigera den med din favoriteditor.</para>
+
+<para
+>&CVS; markerar ändringarna med konflikt genom att placera markeringar inne i filerna, på följande sätt:</para>
+
+<screen
+>&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+Ändringar i din arbetskopia
+=======
+Ändringar i arkivet
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; versionsnummer
+</screen>
+
+<para
+>Du bör ersätta hela blocket med den nya sammanfogade versionen.Du har förstås fullständig frihet när en uppsättning konflikter ska lösas upp: för varje konflikt kan du bestämma dig för att välja en av två olika versioner. Du kan också bestämma dig för att båda angreppssätten är felaktiga och skriva om hela rutinen eller hela filen från början. </para>
+
+<para
+>Som tur är erbjuder &cervisia; ett trevligare gränssnitt för att hantera konflikterna. Det betyder inte att du aldrig behöver redigera filerna för hand, men du kan åtminstone eliminera behovet att göra det för trivial upplösning av konflikter. För att använda dialogrutan <guilabel
+>CVS-upplösning</guilabel
+> i &cervisia;, välj <menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Lös upp...</guimenuitem
+></menuchoice
+> eller högerklicka på den markerade filen och välj <guimenuitem
+>Lös upp...</guimenuitem
+> i den sammanhangsberoende menyn. </para>
+
+<figure id="screenshot-resolve" float="1">
+<title
+>En skärmbild av &cervisia;s dialogruta för att lösa upp konflikter</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="resolve.png"/></imageobject>
+<textobject
+><phrase
+>En skärmbild av &cervisia;s dialogruta för att lösa upp konflikter</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Längst upp i dialogrutan ser du <guilabel
+>Din version (A)</guilabel
+> av filen till vänster och versionen i arkivet, <guilabel
+>Annan version (B)</guilabel
+> till höger. Skillnaderna mellan dem är angivna med röd färg. Under de två versionerna, kan du se <guilabel
+>Sammanfogad version</guilabel
+>. Den sammanfogade versionen visar hur sektionen kommer att se ut i din arbetskopia om du klickar på knappen <guibutton
+>Spara</guibutton
+>. </para>
+
+<para
+>Du kan byta mellan olika stycken genom att trycka på <guibutton
+>&lt;&lt;</guibutton
+> och <guibutton
+>&gt;&gt;</guibutton
+>. Längre ner i mitten på dialogrutan ser du vilket stycke som för närvarande är markerat. Till exempel så betyder <literal
+>2 av 3</literal
+> att du för närvarande är på det andra stycket av totalt tre. </para>
+
+<para
+>Nu kan du bestämma stycke för stycke vilken av de två versionerna som du vill ha i den sammanfogade filen. Genom att trycka på <guibutton
+>A</guibutton
+>, väljer du versionen som du redigerat. Genom att trycka på <guibutton
+>B</guibutton
+>, övertar du versionen från arkivet. Genom att trycka på <guibutton
+>A+B</guibutton
+> läggs båda versioner till, och din version kommer först. <guibutton
+>B+A</guibutton
+> ger samma resultat, men ordningen är annorlunda: först versionen från arkivet, och därefter din. </para>
+
+<para
+>Om du inte är nöjd med någon av versionerna, tryck på <guibutton
+>Redigera</guibutton
+> för att visa en enkel texteditor där du kan redigera sektionen. När du är klar med redigeringen, tryck på <guibutton
+>Ok</guibutton
+> för att återgå till dialogrutan <guilabel
+>CVS-upplösning</guilabel
+> och fortsätta lösa upp konflikter. Du ser sektionen du just redigerade under <guilabel
+>Sammanfogad version</guilabel
+>, med dina ändringar. </para>
+
+<para
+>För att spara dina ändringar och skriva över versionen i arbetskopian, tryck på <guibutton
+>Spara</guibutton
+>. Observera att det sparar valen för alla sektioner i filen, inte bara den du för närvarande tittar på. Om du vill spara i en annan fil, tryck på <guibutton
+>Spara som...</guibutton
+>. Tryck på <guibutton
+>Stäng</guibutton
+> för att avsluta dialogrutan. Om du stänger dialogrutan utan att spara, går ändringarna du gjort förlorade. </para>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="obtaininginformation">
+<title
+>Skaffa information om filer och skapa programfixar</title>
+
+<sect1 id="diff">
+<title
+>Bevaka skillnader mellan versioner</title>
+
+<para
+>Det finns flera platser i &cervisia; där du kan fråga efter ett fönster som visar skillnader mellan filversioner: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>I huvudfönstret kan du välja <menuchoice
+><guimenu
+>Visa</guimenu
+> <guimenuitem
+>Skillnad mot arkivet (BASE)...</guimenuitem
+></menuchoice
+>. Den baseras på kommandot <command
+>cvs diff</command
+> och visar dig skillnaden mellan versionen i din arbetskatalog och versionen som du senast uppdaterade (också känd som basversionen). Det här är särskilt användbart precis innan du arkiverar en fil, för att hitta ett passande loggmeddelande. </para
+></listitem>
+
+<listitem
+><para
+>Du kan se skillnaderna mellan versionen i din arbetskatalog och versionen i huvudutvecklingsversionen (som också kallas <literal
+>HEAD</literal
+>) genom att välja <menuchoice
+><guimenu
+>Visa</guimenu
+> <guimenuitem
+>Skillnad mot arkivet (HEAD)...</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+
+<listitem
+><para
+>Du kan se skillnaderna mellan de två senaste versionerna av den markerade filen genom att välja <menuchoice
+><guimenu
+>Visa</guimenu
+> <guimenuitem
+>Senaste ändring...</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+
+<listitem
+><para
+>Du kan komma åt menyalternativen <guimenuitem
+>Skillnad mot arkivet (BASE)...</guimenuitem
+>, <guimenuitem
+>Skillnad mot arkivet (HEAD)...</guimenuitem
+> och <guimenuitem
+>Senaste ändring...</guimenuitem
+> från huvudfönstrets sammanhangsberoende meny, genom att högerklicka på filen du vill visa. </para
+></listitem>
+
+<listitem
+><para
+>Du kan begära ett skillnadsfönster genom att välja ett filnamn i listan på markerade filer, i dialogrutan som visas när du arkiverar en uppsättning filer, genom att välja ett filnamn i listan, antingen genom att dubbelklicka på den eller trycka på returtangenten. Det här är ganska likt användning av <menuchoice
+><guimenu
+>Visa</guimenu
+> <guimenuitem
+>Skillnad mot arkivet (BASE)...</guimenuitem
+></menuchoice
+> i huvudfönstret, med respektive fil. </para
+></listitem>
+
+<listitem
+><para
+>Du kan markera två versioner av en fil i dialogrutan för att bläddra i loggar, och begära en dialogruta som visar skillnaderna mellan dem (se <xref linkend="browsinglogs"/>). </para
+></listitem>
+
+</itemizedlist>
+
+<para
+>Som du kan vänta dig, så matar inte &cervisia; bara ut resultatet från kommandot <command
+>diff</command
+> på terminalen, utan visar en grafisk vy som framgår av <xref linkend="screenshot-log"/>. </para>
+
+<figure id="screenshot-log" float="1">
+<title
+>En skärmbild av &cervisia;s jämförelsedialogruta</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="diff.png"/></imageobject>
+<textobject
+><phrase
+>En skärmbild av &cervisia;s jämförelsedialogruta</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Texten i dialogrutan är en förbättrad variant av texten som ges av kommandot diff med väljaren <option
+>-u</option
+>. Du kan se de olika versionerna i två fönster, med rader som arrangeras så att du kan jämföra dem sida vid sida. Det här betyder att där text har lagts till eller tagits bort, visar varje fönster tomma rader med markeringen <literal
+>+++++</literal
+> till vänster. För andra rader kan du se löpande radnummer i vänsterkolumnen. </para>
+
+<para
+>I den andra kolumnen i högerfönstret kan du se vilken sorts ändring som har gjorts. Möjliga sorter är <literal
+>Tillagd</literal
+>, <literal
+>Borttagen</literal
+> och <literal
+>Ändrad</literal
+>. Motsvarande rader är markerade med blå, grön och röd färg. Mitt i dialogrutan visas en komprimerad bild av färgmarkeringarna. På det här sättet kan du få en snabb översikt av filens fullständiga ändringar. Du kan också använda platsen för de färgade områdena i den komprimerade bilden för orientering när du använder rullningslisterna. </para>
+
+<para
+>Normalt synkroniseras rullningslisterna i vänstra och högra fönstret, dvs. om du flyttar vänstra sidan, så flyttas högra sidan lika mycket. Du kan ändar det genom att markera rutan <guibutton
+>Synkronisera rullningslister</guibutton
+>. </para>
+
+<para
+>För information om hur man anpassar jämförelsedialogrutan, se <xref linkend="customize-diff"/>. </para>
+
+</sect1>
+
+<sect1 id="creatingpatches">
+<title
+>Skapa programfixar</title>
+
+<para
+>Ibland vill du tillhandahålla dina ändringar för granskning, innan de arkiveras, eller så saknar du skrivåtkomst till arkivet (och kan därför inte arkivera). &CVS; erbjuder standardformat för att dela ändringarna i din arbetskopia, så att andra kan granska ändringarna, testa dem i sin arbetskopia och arkivera dem i &CVS;-arkivet. En fil med dessa ändringar kallas en <firstterm
+>programfix</firstterm
+>, och skapas i allmänhet med kommandot <command
+>cvs diff</command
+>, på samma sätt som skillnaderna i <xref linkend="diff"/>. Att dela programfixar istället för uppsättningar med filer kräver mindre bandbredd, och programfixar är enklare att hantera, eftersom du kan skicka en programfixfil som innehåller alla skillnader från många källkodsfiler. </para>
+
+<para
+>&cervisia; ger dig tillgång till funktionen genom att välja <menuchoice
+><guimenu
+>Avancerat</guimenu
+> <guimenuitem
+>Skapa programfix för arkiv...</guimenuitem
+></menuchoice
+>. </para>
+
+<important
+><para
+>Åtgärden <guimenuitem
+>Skapa programfix för arkiv...</guimenuitem
+> skapar en programfix med alla ändringar i alla filer i din arbetskopia (arbetskatalog) mot arkivet <literal
+>BASE</literal
+>. Därför påverkar inte markerade filer i huvudvyn programfixen som skapas. </para
+></important>
+
+<para
+>En annan möjlighet är att markera en fil i huvudvyn och välja <guimenuitem
+>Bläddra i logg...</guimenuitem
+> i menyn <guimenu
+>Visa</guimenu
+>, eller högerklicka på den markerade filen och välja <guimenuitem
+>Bläddra i logg...</guimenuitem
+> från den sammanhangsberoende menyn, för att visa dialogrutan <link linkend="browsinglogs"
+>CVS-logg</link
+>. Välj nu versionen som du vill skapa en programfix för, som version <quote
+>A</quote
+> och tryck på knappen <guilabel
+>Skapa programfix...</guilabel
+>. Det skapar en programfix med skillnaden mellan den <emphasis
+>markerade filen</emphasis
+> i din arbetskopia och versionen som valdes som <quote
+>A</quote
+>. </para>
+
+<para
+>Innan programfixen skapas, visar &cervisia; en dialogruta som låter dig anpassa utdataformatet. </para>
+
+<figure id="screenshot-patch" float="1">
+<title
+>En skärmbild av &cervisia;s dialogruta för programfixar</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="patch.png"/></imageobject>
+<textobject
+><phrase
+>En skärmbild av &cervisia;s dialogruta för programfixar</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Utdataformat</guilabel
+></term>
+<listitem
+><para
+>Det finns tre tillgängliga utdataformat: </para>
+<para
+><guilabel
+>Normalt</guilabel
+>: Ett format som kan användas för att editorn ed automatiskt ska kunna ändra en annan kopia av den gamla filen så att den motsvarar den nya. Med utdataformatet Normalt, markeras ändringarna av tecknen &lt; och &gt;, och det finns ingen sammanhangsinformation. </para>
+<para
+><guilabel
+>Förenat</guilabel
+>: Formatet som oftast används för att utbyta programfixar. Formatet Förenat använder sammanhangsrader förutom radnummer för att ange skillnaderna. Det gör processen att använda programfixar robustare. Formatet visar skillnaden på ett kortfattat och läsbart sätt, med ett huvud för varje fil som ingår, och separata sektioner (stycken) för varje skillnad. Sammanhangsraderna som är tillgängliga för varje skillnad gör det enklare att läsa ändringarna. Med formatet Förenat, markeras ändringarna av tecknen + och -. </para>
+<para
+><guilabel
+>Med sammanhang</guilabel
+>, som presenterar samma information som formatet Förenat, men på ett mindre kompakt sätt. I utdataformatet Med sammanhang, markerar tecknet ! ändringarna. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Antal sammanhangsrader:</guilabel
+></term>
+<listitem
+><para
+>Ange antal sammanhangsrader för utdataformaten Förenat eller Med sammanhang. Alternativet är inte tillgängligt för formatet Normalt, eftersom det inte sparas någon sammanhangsinformation med det formatet. Mer sammanhangsinformation gör det enklare att läsa obehandlad utdata, och noggrannare att verkställa programfixen, men det ökar programfixens storlek. Åtminstone två sammanhangsrader rekommenderas för att programfixen ska kunna användas riktigt. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Ignorera alternativ</guilabel
+></term>
+<listitem
+><para
+>Markera ändringar här som inte ska anses vara skillnader när programfixen skapas. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+
+<para
+>Efter att utdataformatet har angivits, skapar &cervisia; programfixen och visar dialogrutan <guilabel
+>Spara som</guilabel
+>. Skriv in filnamnet och platsen för programfixens fil i dialogrutan. </para>
+
+
+</sect1>
+
+<sect1 id="annotate">
+<title
+>Bevaka en kommentarvy för en fil</title>
+
+<para
+>Med kommandot <command
+>cvs annotate</command
+>, erbjuder &CVS; möjlighet att se, för varje rad i en fil, vem som senast har ändrat raden. Denna vy kan vara till hjälp för att ta reda på vem som har introducerat en ändring i ett programs beteende, eller vem man ska fråga om en viss ändring eller ett visst fel i koden. </para>
+
+<para
+>&cervisia; ger dig tillgång till den här funktionen, men utökar informationen ytterligare interaktivt. Du får en kommentarvy genom att välja <menuchoice
+><guimenu
+>Visa</guimenu
+> <guimenuitem
+>Kommentarer...</guimenuitem
+></menuchoice
+>. Ett annat sätt är att trycka på knappen <guilabel
+>Kommentera</guilabel
+> i dialogrutan <link linkend="browsinglogs"
+>Bläddra i logg</link
+>, där du kan välja vilken version av filen du vill visa. På <xref linkend="screenshot-annotate"/> kan du se en skärmbild av dialogrutan. </para>
+
+<figure id="screenshot-annotate" float="1">
+<title
+>En skärmbild av &cervisia;s kommentardialogruta</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="annotate.png"/></imageobject>
+<textobject
+><phrase
+>En skärmbild av &cervisia;s kommentardialogruta</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>I kommentardialogrutan ser du ett fönster med den senaste versionen av den markerade filen (eller version <quote
+>A</quote
+>, om du startade kommentardialogrutan från <link linkend="browsinglogs"
+>Bläddra i logg</link
+>). I kolumnen innan texten, får du en del information som har att göra med den senaste ändringen på varje rad. I första kolumnen visas radnumret. I andra kolumnen syns upphovsmannen och versionsnumret. Till sist syns radens verkliga innehåll i tredje kolumnen. </para>
+
+<para
+>Därför, om en viss rad ser konstig ut, eller du antar att det finns ett fel där, kan du omedelbart se vem som är ansvarig för raden. Men inte bara det, du kan också ta reda på <emphasis
+>varför</emphasis
+> raden ändrades. För att göra det, flytta muspekaren över respektive versionsnummer. Då visas ett verktygstips med loggmeddelandet och datum för ändringen. </para>
+
+</sect1>
+
+
+<sect1 id="browsinglogs">
+<title
+>Bläddra i &CVS;-loggar</title>
+
+<para
+>När du markerar en fil i huvudvyn och väljer <guimenuitem
+>Bläddra i logg...</guimenuitem
+> i menyn <guimenu
+>Visa</guimenu
+>, eller högerklickar på den markerade filen och väljer <guimenuitem
+>Bläddra i logg...</guimenuitem
+> från den sammanhangsberoende menyn, visas dialogrutan <link linkend="browsinglogs"
+>CVS-logg</link
+> (om du markerar mer än en, händer ingenting eftersom &cervisia; bara kan skapa och tolka loggen för en fil åt gången). Dialogrutan erbjuder funktioner som går längre än att visa filens historik. Genom att använda den som en versionsbläddrare kan du: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Visa version, upphovsman, datum, gren, arkiveringsmeddelande och taggar för alla versioner av den markerade filen. </para
+></listitem>
+
+<listitem
+><para
+>Visa en grafisk trädrepresentation som anger grenar och taggar för den markerade filen. </para
+></listitem>
+
+<listitem
+><para
+>Visa vilken version som helst av den markerade filen (med förvalt program). </para
+></listitem>
+
+<listitem
+><para
+>Bevaka en kommentarvy för vilken version som helst av den markerade filen </para
+></listitem>
+
+<listitem
+><para
+>Visa skillnaderna mellan vilket versionspar som helst av den markerade filen, inklusive par med aktuell arbetskopia av den markerade filen. </para
+></listitem>
+
+<listitem
+><para
+>Skapa programfixar som innehåller skillnaden mellan vilka versionspar som helst av den markerade filen, inklusive par med aktuell arbetskopia av den markerade filen. </para
+></listitem>
+
+</itemizedlist>
+
+<figure float="1">
+<title
+>En skärmbild av &cervisia;s dialogruta för att bläddra i loggar</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="logtree.png"/></imageobject>
+<textobject
+><phrase
+>En skärmbild av &cervisia;s dialogruta för att bläddra i loggar</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Du kan välja att se historiken som erhålls från kommandot <command
+>cvs log</command
+> (<guilabel
+>CVS-utmatning</guilabel
+>) som ett träd, eller på listform. Vilket du föredrar är förstås en fråga om smak, och beror på vilken information du är intresserad av. Trädet är en intuitiv representation av vad som har gjorts i olika grenar av olika upphovsmän. Du kan se motsvarande loggmeddelanden som verktygstips. Listan är av sin natur linjär, och ger därför inte omedelbart information om grenar. Å andra sidan, koncentreras annan relevant information på en mindre yta, nämligen tiden för varje ändring i filen och första delen av loggmeddelandet. &CVS;-utmatningen är fullständig, men lång och svår att läsa. För att komma tillrätta med problemen, har du möjlighet att söka i texten för &CVS;-utmatningen genom att klicka på knappen <guibutton
+>Sök...</guibutton
+>. </para>
+
+<para
+>För att få mer information om en viss version, kan du antingen klicka på den i listan eller trädet. Fälten i mitten av dialogrutan fylls då i med den fullständiga informationen som ges av kommandot <command
+>cvs log</command
+>. Du kan markera två versioner, som kallas <quote
+>A</quote
+> och <quote
+>B</quote
+>, som har betydelse om du vill använda de ytterligare funktioner som tillhandahålls av knapparna. Version <quote
+>A</quote
+> kan väljas med vänster musknapp, och version <quote
+>B</quote
+> med mittenknappen. Du kan också förflytta dig med piltangenterna i listan. För att markera versionerna <quote
+>A</quote
+> och <quote
+>B</quote
+>, använd de två snabbtangenterna <keycombo action="simul"
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+> och <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+>. Genom att använda vyn <guilabel
+>CVS-utmatning</guilabel
+> kan du klicka på <guilabel
+>Välj för version A</guilabel
+> och <guilabel
+>Välj för version B</guilabel
+> för att markera versionerna. </para>
+
+<para
+>Om du trycker på knappen <guibutton
+>Kommentarer</guibutton
+>, så visas en dialogruta med texten från filen som hör till versionen som är markerad som <quote
+>A</quote
+>. Varje rad inleds med information om vem som redigerade den senast, och vid vilken version detta inträffade. Du kan få mer information om att visa kommenterade versioner i <xref linkend="annotate"/>. </para>
+
+<para
+>Om du trycker på knappen <guibutton
+>Jämför</guibutton
+>, så körs kommandot <command
+>cvs diff</command
+> och en dialogruta visas där skillnaderna mellan de två markerade versionerna visas. Om du markerar version <quote
+>A</quote
+> men inte version <quote
+>B</quote
+>, skapar &cervisia; ändringarna mellan versionen av filen som är markerad som version <quote
+>A</quote
+> och arbetskopian av filen. Det låter dig se skillnaderna mellan din version av filen och vilken version som helst som är tillgänglig i &CVS;. För att göra det lätt att se ändringar, används olika färger för att markera rader som har lagts till, tagits bort eller helt enkelt ändrats. Du kan få mer information om att visa skillnader i <xref linkend="diff"/>. </para>
+
+<para
+>Om du klickar på knappen <guibutton
+>Skapa programfix...</guibutton
+>, visas en dialogruta där du kan ange formatalternativen för att skapa en fil som innehåller alla ändringar mellan de två markerade versionerna som visas. Om du markerar version <quote
+>A</quote
+> men inte version <quote
+>B</quote
+>, skapar &cervisia; ändringarna mellan filversionen markerad som <quote
+>A</quote
+> och filens arbetskopia. Det låter dig skapa en programfix, eller jämförelsefil, mellan din version av filen och vilken version som helst tom är tillgänglig i &CVS;. Efter att ha ställt in programfixens format i dialogrutan, och klickat på <guibutton
+>Ok</guibutton
+>, utförs kommandot <command
+>cvs diff</command
+> för att skapa jämförelsefilen. Dialogrutan <guilabel
+>Spara som </guilabel
+> dyker upp. Skriv in filnamn och plats för programfixfilen som &cervisia; skapade, för att kunna spara den. Du kan få mer information om att skapa programfixar, och formatalternativ för programfixar i <xref linkend="creatingpatches"/>. </para>
+
+<para
+>Om du trycker på knappen <guibutton
+>Visa</guibutton
+>, hämtar &cervisia; versionen markerad som <quote
+>A</quote
+> och visar den med förvalt program för dess filtyp. </para>
+
+<para
+>Klicka på knappen <guibutton
+>Stäng</guibutton
+> för att  lämna dialogrutan och återgå till huvudvyn. </para>
+
+
+<para
+>För att skapa loggen som ligger till grund för dialogrutan <guilabel
+>CVS-logg</guilabel
+>, utför &cervisia; följande kommando: </para>
+
+
+<para>
+<screen
+><command
+>cvs log <replaceable
+>filnamn</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+<sect1 id="browsinghistory">
+<title
+>Bläddra i historiken</title>
+
+<para
+>Om arkivet som används har loggning av händelser aktiverad, kan &cervisia; visa en historik av vissa händelser som utcheckningar, arkiveringar, taggningar, uppdateringar och utgåvor. Välj <guimenuitem
+>Historik</guimenuitem
+> i menyn <guimenu
+>Visa</guimenu
+>, så kör &cervisia; kommandot </para>
+
+<para>
+<screen
+><command
+>cvs history -e -a</command
+></screen>
+</para>
+
+<note
+><para
+>Det här hämtar den fullständiga loggfilen från servern, dvs. en lista på händelser för alla användare och alla moduler. Det här kan vara en enorm mängd data. </para
+></note>
+
+<para
+>Nu kan du se listan med händelser, sorterade efter datum. I den andra kolumnen visas typen av händelse: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Utcheckad - Användaren som visas i kolumnen Upphovsman har checkat ut en modul </para
+></listitem>
+
+<listitem
+><para
+>Taggad - En användare har använt kommandot <command
+>cvs rtag</command
+>. Observera att användningen av <command
+>cvs tag</command
+> (som görs med &cervisia;s kommando <menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Tagg/gren...</guimenuitem
+></menuchoice
+>) inte lagras i historikdatabasen. Det här beror på historiska skäl (se vanliga frågor om &CVS;). </para
+></listitem>
+
+<listitem
+><para
+>Släppt - En användare har släppt modulen. I själva verket används det här kommandot sällan och är inte av stort värde. </para
+></listitem>
+
+<listitem
+><para
+>Uppdatera, borttagen - En användare har gjort en uppdatering av en fil som var borttagen i arkivet. Som en konsekvens av detta, har filen tagits bort i hans arbetskopia. </para
+></listitem>
+
+<listitem
+><para
+>Uppdatera, kopierad - En användare har gjort en uppdatering av filen. En ny version kopierades till arbetskopian. </para
+></listitem>
+
+<listitem
+><para
+>Uppdatera, sammanfogad - En användare har gjort en uppdatering av en fil. Ändringarna i arkivets version av filen sammanfogades med hans arbetskopia. </para
+></listitem>
+
+<listitem
+><para
+>Uppdatera, konflikt - En användare har gjort en uppdatering av en fil, och en konflikt med hans egna ändringar upptäcktes. </para
+></listitem>
+
+<listitem
+><para
+>Arkivera, ändrad - En användare arkiverade en ändrad fil. </para
+></listitem>
+
+<listitem
+><para
+>Arkivera, tillagd - En användare lade till en fil och arkiverade den. </para
+></listitem>
+
+<listitem
+><para
+>Arkivera, borttagen - En användare tog bort en fil och arkiverade ändringen. </para
+></listitem>
+
+</itemizedlist>
+
+<figure id="screenshot-history" float="1">
+<title
+>En skärmbild av &cervisia;s historikdialogruta</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="history.png"/></imageobject>
+<textobject
+><phrase
+>En skärmbild av &cervisia;s historikdialogruta</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Du kan sortera listan med andra villkor genom att helt enkelt klicka på respektive kolumnrubrik. För att sortera de historikposter som du är intresserad av, finns det olika filtreringsalternativ som aktiveras med kryssrutor: </para>
+
+<itemizedlist>
+<listitem
+><para
+>Visa arkiveringshändelser - visar arkiveringar</para
+></listitem>
+<listitem
+><para
+>Visa utcheckningshändelser - visar utcheckningar</para
+></listitem>
+<listitem
+><para
+>Visa taggningshändelser - visar taggningar</para
+></listitem>
+<listitem
+><para
+>Visa övriga händelser - visar händelser som inte ingår i ovanstående</para
+></listitem>
+<listitem
+><para
+>Bara användare - visar bara händelser som orsakats av en viss användare</para
+></listitem>
+<listitem
+><para
+>Bara filnamn som matchar - filtrerar filnamn med ett reguljärt uttryck</para
+></listitem>
+<listitem
+><para
+>Bara kataloger som matchar - filtrerar katalognamn med ett reguljärt uttryck</para
+></listitem>
+</itemizedlist>
+
+<para
+>Särskilda tecken som känns igen av matchning med reguljära uttryck är: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+><literal
+>x*</literal
+> matchar hur många förekomster som helst av tecknet <literal
+>x</literal
+>. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>x+</literal
+> matchar en eller flera förekomster av tecknet <literal
+>x</literal
+>. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>x?</literal
+> matchar noll eller en förekomst av tecknet <literal
+>x</literal
+>. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>^</literal
+> matchar början på strängen. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>$</literal
+> matchar slutet på strängen. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>[a-cx-z]</literal
+> matchar en uppsättning tecken, t.ex. här uppsättningen som består av a,b,c,x,y,z. </para
+></listitem>
+
+</itemizedlist>
+
+</sect1>
+
+
+</chapter>
+
+<chapter id="advancedusage">
+<title
+>Avancerad användning</title>
+
+<sect1 id="updatingto">
+<title
+>Uppdatera till tagg, gren eller datum</title>
+
+<para
+>Grenar av en modul är parallella versioner av modulen. Ett bra exempel på användning av funktionen från verkliga livet är utgåvorna i ett programvaruprojekt. Efter en större utgåva, finns det fel i koden som bör rättas, men personer vill också lägga till nya funktioner i programmet. Det är mycket svårt att göra båda samtidigt, eftersom nya funktioner oftast introducerar nya fel, vilket gör det svårt att spåra de gamla. För att lösa dilemmat, låter &CVS; dig skapa en parallell version, som vi kallar <quote
+>grenen med den stabila utgåvan</quote
+>, där du bara kan lägga till felrättningar, vilket lämnar huvudversionen (HEAD) öppen för att lägga till nya funktioner. </para>
+
+<para
+>Taggar används för att markera en projektversion. &CVS; stämplar en version av varje fil med taggen, så att när du checkar ut eller uppdaterar med en specifik tagg, får du alltid samma filversioner. Därför är taggar inte dynamiska, i motsats till grenar: man kan inte utveckla med en tagg. Taggar är användbara för att markera utgåvor, stora ändringar i koden, etc. </para>
+
+<para
+>När du utvecklar eller följer utvecklingen av ett programvaruprojekt, arbetar du inte nödvändigtvis med huvudversionen hela tiden. Efter en utgåva, kanske du vill vara kvar i den utgivna grenen ett tag, för att njuta av dess relativa stabilitet, rätta fel, översätta källkoden, etc. För att göra allt detta, måste du uppdatera till den utgivna grenen. Alla filer uppdateras till den senaste versionen av filerna i grenen. Efter uppdateringen, laddas också alla dina nya arkiveringar upp till den nya grenen. </para>
+
+<para
+>Dessutom, om du vill spåra ett fel som rapporterats för en tidigare taggad utgåva, erbjuder &CVS; möjlighet att hämta programvaran som den gavs ut, genom att uppdatera till taggen. Förutom det, om du vill hämta en tidigare version av projektet, kan du uppdatera din arbetskopia till ett särskilt datum. Det kan vara användbart om ett fel introducerades i projektet mellan två utgåvor, och du har en uppfattning om när det skedde. När du uppdaterar till ett datum eller en tagg, blir versionerna för dina filer samma som versionerna det specifika datumet eller stämplade med den taggen. </para>
+
+<warning
+><para
+>Innan du uppdaterar till en annan gren eller tagg, försäkra dig om att du har arkiverat alla ändringar i grenen du arbetar med. Om du inte är klar att arkivera dina ändringar, men inte vill kasta dem, uppdatera då inte till den nya grenen, eftersom dina ändringar då kan gå förlorade. Som ett alternativ kan du göra en ny <link linkend="checkingout"
+>utcheckning</link
+>, för att arbeta med båda versionerna i parallell. </para
+></warning>
+
+<figure id="screenshot-updatetag" float="1">
+<title
+>En skärmbild av &cervisia;s dialogruta för att uppdatera till en tagg</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="updatetag.png"/></imageobject>
+<textobject
+><phrase
+>En skärmbild av &cervisia;s dialogruta för att uppdatera till en tagg</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<variablelist>
+<varlistentry>
+<term
+><guilabel
+>Uppdatera till gren</guilabel
+></term>
+<listitem
+><para
+>Markera alternativet för att uppdatera till en gren. Skriv in grenens namn i kombinationsrutan (eller tryck på knappen <guilabel
+>Hämta lista</guilabel
+> för att hämta listan med grenar från &CVS;-servern, och välja den du vill ha i kombinationsrutan). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Uppdatera till tagg</guilabel
+></term>
+<listitem
+><para
+>Markera alternativet för att uppdatera till en tagg. Skriv in taggens namn i kombinationsrutan (eller tryck på knappen <guilabel
+>Hämta lista</guilabel
+> för att hämta listan med taggar från &CVS;-servern, och välja den du vill ha i kombinationsrutan). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Uppdatera till datum</guilabel
+></term>
+<listitem
+><para
+>Välj alternativet för att uppdatera till ett datum. I fältet nedanför kan du skriva in en stor mängd olika datumformat. Ett möjligt format är <literal
+>åååå-mm-dd</literal
+> där <literal
+>åååå</literal
+> är året, <literal
+>mm</literal
+> är månaden (numerisk) och <literal
+>dd</literal
+> är dagen. Som alternativ kan vissa engelska uttryck användas, som <literal
+>yesterday</literal
+> (igår) eller <literal
+>2 weeks ago</literal
+> (för 2 veckor sedan). </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<note
+><para
+>Att uppdatera till en tagg eller ett datum gör dem 'fasta', dvs. du kan inte lägga till ytterligare ändringar för dessa filer (om inte taggen är en grentagg). För att komma tillbaka till stammen, använd menyalternativet <menuchoice
+><guimenu
+>Avancerat</guimenu
+> <guimenuitem
+>Uppdatera till huvudversion</guimenuitem
+></menuchoice
+>. </para
+></note>
+
+<para
+>Kommandot som utförs för att uppdatera till en gren eller tagg är: <screen
+><command
+>cvs update -r <replaceable
+>tagg</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Kommandot som utförs för att uppdatera till ett datum är: <screen
+><command
+>cvs update -D <replaceable
+>datum</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Kommandot som utförs för att uppdatera till huvudversionen (HEAD) är: <screen
+><command
+>cvs update <option
+>-A</option
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="taggingbranching">
+<title
+>Taggar och grenar</title>
+
+<para
+>Här beskriver vi bara de tekniska aspekterna av taggning och grenar. Om du bara är en <emphasis
+>användare</emphasis
+>, och inte administrerar arkivet, kommer du nog inte i kontakt med problemet. Om du i stället själv administrerar arkivet, bör du först läsa om de icke-tekniska problem som åtföljer grenar, för att få ett intryck av hur tidsödande och felbenäget det kan vara att hantera flera grenar av ett projekt. Appendix innehåller några referensdokument om det här ämnet. </para>
+
+<para
+>Enkel taggning är något som man ofta gör när en ny utgåva ges ut, så att man när som helst lätt kan komma tillbaka till projektets status vid den tiden. Taggar ges ofta ett namn som består av projektets namn och versionsnumret. &cervisia; 1.0 finns till exempel tillgängligt med taggen <literal
+>CERVISIA_1_0</literal
+>. &cervisia; följer reglerna i &CVS; om vad som är ett giltigt taggnamn. Det måste börja med en bokstav, och får innehålla bokstäver, siffror, bindestreck och understreck. </para>
+
+<para
+>Normalt vill man tagga ett helt projekt (även om &CVS; förstås låter dig tagga en delmängd). För att kunna göra detta, markera toppnivåkatalogen i vyn och välj <menuchoice
+><guimenu
+>Avancerat</guimenu
+> <guimenuitem
+>Tagg/gren</guimenuitem
+></menuchoice
+>. Skriv nu in taggens namn, tryck på returtangenten, och du är klar. </para>
+
+<para
+>Att skapa en gren är inte särskilt mycket svårare: Markera rutan <guibutton
+>Skapa gren med den här taggen</guibutton
+> i taggningsdialogrutan. Du kan också ta bort en befintlig tagg: Välj <menuchoice
+><guimenu
+>Avancerat</guimenu
+> <guimenuitem
+>Ta bort tagg</guimenuitem
+></menuchoice
+> i huvudmenyn. </para>
+
+<para
+>En annan del av hantering av grenar, är sammanfogningen av ändringar från en gren till den nuvarande grenen. Om du ska göra detta, välj <menuchoice
+><guimenu
+>Avancerat</guimenu
+> <guimenuitem
+>Sammanfoga...</guimenuitem
+></menuchoice
+>. Dialogrutan som visas har två alternativ: </para>
+
+<para
+>I det första fallet kan du sammanfoga alla ändringar som gjorts i en gren med den nuvarande grenen. I detta fall, markera rutan <guibutton
+>Sammanfoga från gren</guibutton
+> och fyll i grenen som du vill sammanfoga från. &cervisia; kör då kommandot </para>
+
+<para>
+<screen
+><command
+>cvs update <option
+>-j</option
+> <replaceable
+>grentagg</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Den andra möjligheten är att du bara vill sammanfoga ändringar som gjorts mellan två taggar på en gren. Det här inträffar oftast om du sammanfogar från samma gren till stammen flera gånger. I detta fall, markera rutan <guibutton
+>Sammanfoga ändringar</guibutton
+> och skriv in de två tillämpliga taggarna (i rätt ordning). Det här ger upphov till kommandot </para>
+
+<para>
+<screen
+><command
+>cvs update <option
+>-j</option
+> <replaceable
+>grentagg1</replaceable
+> <option
+>-j</option
+> <replaceable
+>grentagg2</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="watches">
+<title
+>Använda bevakning</title>
+
+<para
+>Bevakning är det vanliga namnet för &CVS;-funktionen att skicka meddelanden till användare av arkivet, så fort en fil har ändrats eller en utvecklare har börjat redigera en fil. Användning av bevakning kräver att filen <filename
+><envar
+>$CVSROOT</envar
+>/notify</filename
+> har anpassats på ett riktigt sätt. Det här beskrivs inte här. Om du behöver mer information om hur anpassning går till från en administratörs synvinkel, läs en av böckerna som räknas upp i appendix. </para>
+
+<para
+>&cervisia;'s huvudsakliga stöd för bevakning är sex menyalternativ. </para>
+
+<para
+>För att lägga till bevakning för en eller flera filer, använd <menuchoice
+><guimenu
+>Avancerat</guimenu
+> <guimenuitem
+>Lägg till bevakning...</guimenuitem
+></menuchoice
+>. I dialogrutan som visas kan du välja att få ett meddelande för alla sorters händelser som &CVS; stöder. Om du till exempel bara vill få reda på när en fil arkiveras, markera rutorna <guibutton
+>Bara</guibutton
+> och <guibutton
+>Arkivering</guibutton
+>. Om du vill få reda på alla händelser som gäller de markerade filerna, markera rutan <guibutton
+>Alla</guibutton
+>. Kommandoraden som används när du bekräftar dialogrutan är </para>
+
+<para>
+<screen
+><command
+>cvs watch add -a commit <replaceable
+>filnamn</replaceable
+></command
+></screen>
+</para>
+
+<para
+>eller med en liknande väljare, beroende på händelserna som du väljer att bevaka. </para>
+
+<para
+>Om du inte längre är intresserad av vissa filer, kan du ta bort bevakningen av dem. För att åstadkomma detta, använd <menuchoice
+><guimenu
+>Avancerat</guimenu
+> <guimenuitem
+>Ta bort bevakning...</guimenuitem
+></menuchoice
+>. Samma alternativ som fanns i formuläret du fyllde i när bevakningen lades till ingår i dialogrutan som visas. När du bekräftar dialogrutan, kör &cervisia; kommandot </para>
+
+<para>
+<screen
+><command
+>cvs watch remove <replaceable
+>filnamn</replaceable
+></command
+></screen>
+</para>
+
+<para
+>möjligen med väljaren <option
+>-a</option
+> för de valda händelserna. </para>
+
+<para
+>Till sist kan du få en lista på de som bevakar vissa filer. Välj <menuchoice
+><guimenu
+>Avancerat</guimenu
+> <guimenuitem
+>Visa bevakning</guimenuitem
+></menuchoice
+>. Att aktivera det här menyalternativet ger upphov till kommandot </para>
+
+<para>
+<screen
+><command
+>cvs watchers <replaceable
+>filnamn</replaceable
+></command
+></screen>
+</para>
+
+<para
+>I &CVS; normala användningsscenario, så arbetar varje utvecklare för sig i en egen arbetskatalog. När en fil ska ändras, öppnas den bara i editorn och redigeras. Ingen annan känner till ändringarna, förrän filen arkiveras. </para>
+
+<para
+>För vissa utvecklingsgrupper, är det här inte samarbetsmodellen som föredras. De vill få reda på att någon arbetar med en fil <emphasis
+>så fort</emphasis
+> arbetet startas. Detta kan åstadkommas med några ytterligare &CVS;-kommandon. Innan du börjar redigera en fil, markera den i &cervisia;s huvudfönster, och välj <menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Redigera filer</guimenuitem
+></menuchoice
+>. Detta kör kommandot </para>
+
+<para>
+<screen
+><command
+>cvs edit <replaceable
+>filnamn</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Då skickas ett meddelande till alla som har ställt in <literal
+>redigerings</literal
+> bevakning för filen. Du registreras också som <emphasis
+>redigerare</emphasis
+> av filen. Man kan skaffa en lista på alla som redigerar en viss fil genom att använda <menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Visa redigering</guimenuitem
+></menuchoice
+>. Det här motsvarar att skriva följande på kommandoraden </para>
+
+<para>
+<screen
+><command
+>cvs editors <replaceable
+>filnamn</replaceable
+></command
+></screen>
+</para>
+
+<para
+>En redigeringssession avslutas automatiskt när du arkiverar den påverkade filen. I det ögonblicket skickas ett <literal
+>unedit</literal
+>-meddelande till alla som har registrerat motsvarande bevakning av filen. Ibland vill du förstås inte arkivera filen, utan avbryta redigeringssessionen och återgå till föregående version av filen. Detta görs genom att använda <menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Sluta redigera filer</guimenuitem
+></menuchoice
+>. Observera att &cervisia; inte ber om bekräftelse. Det betyder att allt arbete gjort sedan du använde <menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Redigera filer</guimenuitem
+></menuchoice
+> går förlorat. Mer exakt, så använder &cervisia; kommandoraden </para>
+
+<para>
+<screen
+><command
+>echo y | cvs unedit <replaceable
+>filnamn</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Hittills har vi bara diskuterat fallet när börja och sluta redigera används frivilligt av utvecklarna. Dessutom stöder &CVS; en modell som <emphasis
+>kräver</emphasis
+> användning av dessa kommandon. Kommandot som används för att byta till den här modellen är <command
+>cvs watch on</command
+>, som inte förklaras ytterligare, eftersom det oftast används av arkivets administratör. Det viktiga, ur utvecklarens synvinkel, är dock att när projektet kräver redigeringar, så checkas arbetskopior ut <emphasis
+>skrivskyddade</emphasis
+>. Det betyder att du inte normalt kan redigera en fil (om du inte använder trick som <command
+>chmod</command
+>). Filen blir bara skrivbar när du använder <menuchoice
+><guimenu
+>Avancerat</guimenu
+> <guimenuitem
+>Redigera filer</guimenuitem
+></menuchoice
+>. Den blir skrivskyddat igen, när du arkiverar den eller använder <menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Sluta redigera filer</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>&cervisia;s editorgränssnitt hjälper dig också med projekt som använder bevakning på ett annat sätt. Om du bara startar en editor med en skrivskyddad fil, genom att dubbelklicka på den eller genom att använda <menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Redigera</guimenuitem
+></menuchoice
+>. så kan du senare inte spara dina ändringar. Det här har förstås en orsak: Så fort du vill ändra en fil, ska du köra kommandot <command
+>cvs edit</command
+> innan, så att de som bevakar filen får ett meddelande om att du arbetar med den. </para>
+
+<para
+>I ett sådant fall är det lämpligt att markera alternativet <menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Redigera (cvs edit) automatiskt om nödvändigt</guimenuitem
+></menuchoice
+>. Så fort du redigerar en fil genom att dubbelklicka på den, så kör &cervisia; kommandot <command
+>cvs edit</command
+> innan editorn verkligen startas. Därefter kan du redigera filen som vanligt. När du har avslutat arbetet, arkivera filerna. Därefter är de arkiverade filerna återigen skrivskyddade. </para>
+
+</sect1>
+
+
+<sect1 id="locking">
+<title
+>Låsning</title>
+
+<para
+>Utvecklingsmodellen som oftast används med &CVS; kallas <emphasis
+>utcheckning utan reservation</emphasis
+>. Varje utvecklare har sin egen arbetskatalog, där filer kan redigeras godtyckligt. Om bevakningsfunktionen används, som <command
+>cvs edit</command
+>, kan flera utvecklare arbeta med filer synkront. Ändringar som görs av en annan utvecklare, sammanfogas i den lokala arbetskatalogen när en uppdatering görs. </para>
+
+<para
+>Andra revisionskontrollsystem, som <acronym
+>RCS</acronym
+> och <application
+>SourceSafe</application
+> använder en annan modell. När en utvecklare vill redigera en fil, måste den <emphasis
+>låsas</emphasis
+>. Bara en utvecklare i taget kan ha en fil låst. När redigeringen är färdig, släpps låset. Å ena sidan kan aldrig konflikter inträffa med den här modellen. Å andra sidan kan aldrig två utvecklare arbeta med samma fil samtidigt, även om deras ändringar inte påverkar varandra. Detta kan bli en flaskhals. Vi tänker inte diskutera organisatoriska fördelar med de två metoderna. Vi nämner dock, att även om &CVS; har visst stöd för låsning, är det inte sättet att arbeta med &CVS; som är att föredra. Du bör inte använda dessa funktioner, om du inte är säker på att projektledaren tillåter dem. </para>
+
+<para
+>Med &cervisia; låser du filer på följande sätt: Markera önskade filer i huvudfönstret. Välj sedan <menuchoice
+><guimenu
+>Avancerat</guimenu
+> <guimenuitem
+>Lås filer</guimenuitem
+></menuchoice
+>. Detta kör kommandot </para>
+
+<para>
+<screen
+><command
+>cvs admin -l <replaceable
+>filnamn</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Motsatt effekt uppnås genom att använda <menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Lås upp filer</guimenuitem
+></menuchoice
+>. Detta kör kommandot</para>
+
+<para>
+<screen
+><command
+>cvs admin -u <replaceable
+>filnamn</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="customization">
+<title
+>Anpassa &cervisia;</title>
+
+<para
+>&cervisia; kan anpassas på olika sätt enligt dina behov och vad du föredrar. Vissa alternativ som du kan vilja ändra regelbundet är direkt tillgängliga i menyn <guimenu
+>Inställningar</guimenu
+>. </para>
+
+
+<sect1 id="customize-general">
+<title
+>Allmänt</title>
+
+<variablelist>
+
+<varlistentry id="customize-username">
+<term
+><guilabel
+>Användarnamn för redigering av ändringslogg:</guilabel
+></term>
+<listitem
+><para
+>Så fort du använder menyalternativet <menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Infoga post i ändringsloggen...</guimenuitem
+></menuchoice
+>, så skapas en ny post i ändringsloggen med nuvarande datum och ditt användarnamn. Normalt anses det vara god sed att infoga hela ditt namn och e-postadress i varje post i ändringsloggen. &cervisia; lägger automatiskt till hela namnet och e-postadressen som skrivs in här. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-cvspath">
+<term
+><guilabel
+>Sökväg till körbar CVS eller 'cvs':</guilabel
+></term>
+<listitem
+><para
+>Här kan du ange namnet (eller sökvägen) till <command
+>cvs</command
+>-kommandoradsklienten. Normalt används den körbara &CVS;-filen som hittas i din <envar
+>$PATH</envar
+> av &cervisia;. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="customize-diff">
+<title
+>Jämförelsevisning</title>
+
+<variablelist>
+
+<varlistentry id="customize-context">
+<term
+><guilabel
+>Antal sammanhangsrader i jämförelsedialogrutan:</guilabel
+></term>
+<listitem
+><para
+>&cervisia; använder väljaren <option
+>-U</option
+> för <command
+>diff</command
+> för jämförelsedialogrutan. Det här låter <command
+>diff</command
+> visa ett begränsat antal rader omkring varje skillnad (sammanhangsrader). Här kan du ange parametern till väljaren <option
+>-U</option
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-diffopt">
+<term
+><guilabel
+>Ytterligare alternativ för CVS-jämförelse:</guilabel
+></term>
+<listitem
+><para
+>Här kan du lägga till ytterligare väljare till <command
+>diff</command
+>. Ett vanligt exempel är <option
+>-b</option
+> som låter <command
+>diff</command
+> ignorera ändringar i mellanslag. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-tabwidth">
+<term
+><guilabel
+>Tabulatorbredd i jämförelsedialogrutan:</guilabel
+></term>
+<listitem
+><para
+>I jämförelsedialogrutan, expanderas tabulatortecken som finns i filen eller utmatningen av <command
+>diff</command
+>-kommandot till ett fast antal mellanslag. Normalt ersätts varje tabulator med åtta mellanslag, men du kan ställa in ett annat värde. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-difffrontend">
+<term
+><guilabel
+>Yttre jämförelsegränssnitt:</guilabel
+></term>
+<listitem
+><para
+>När du använder någon av funktionerna som visar jämförelsedialogrutan, som <menuchoice
+><guimenu
+>Visa</guimenu
+><guimenuitem
+>Skillnad mot arkivet...</guimenuitem
+></menuchoice
+>, startar &cervisia; sitt interna diff-gränssnitt. Om du föredrar ett annat, som &kompare;, <application
+>TkDiff</application
+> eller <application
+>xxdiff</application
+>, skriv in filnamnet och sökvägen här. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="customize-status">
+<title
+>Status</title>
+
+<variablelist>
+
+<varlistentry id="customize-startstatus-remote">
+<term
+><guilabel
+>Starta Arkiv->Status automatiskt, när en arbetskatalog öppnas för ett fjärrarkiv</guilabel
+></term>
+<listitem
+><para
+>När du markerar det här alternativet, startas kommandot <menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Status</guimenuitem
+></menuchoice
+> så fort du öppnar en fjärrkatalog. Det här kommandot kan ta en viss tid, och dessutom behöver det en anslutning till servern för fjärrarkiv (som gör det oanvändbart för nerkopplad användning). </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-startstatus-local">
+<term
+><guilabel
+>Starta Arkiv->Status automatiskt, när en arbetskatalog öppnas för ett lokalt arkiv</guilabel
+></term>
+<listitem
+><para
+>När du markerar alternativet, startas kommandot <menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Status</guimenuitem
+></menuchoice
+> så fort du öppnar en lokal arbetskatalog. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="customize-advanced">
+<title
+>Avancerat</title>
+
+<variablelist>
+
+<varlistentry id="customize-timeout">
+<term
+><guilabel
+>Tidsgräns innan en förloppsdialogruta visas (i ms):</guilabel
+></term>
+<listitem
+><para
+>Nästan alla &CVS;-kommandon startas i en arbetskatalog som hör ihop med ett fjärrarkiv, och behöver en anslutning till &CVS;-servern. Det här påverkas av fördröjningar i nätverksanslutningen eller hög last på servern. Av denna anledning, öppnar &cervisia; en dialogruta som anger att kommandot fortfarande kör, för kommandon som <menuchoice
+><guimenu
+>Visa</guimenu
+><guimenuitem
+>Skillnad mot arkiv...</guimenuitem
+></menuchoice
+> och låter dig avbryta det. Dessutom används den här dialogrutan för att visa felmeddelanden från &CVS;. Eftersom dialogrutan kan vara irriterande efter en tid, visas den bara efter en tidsgräns som normalt är 4 sekunder. Här kan du ändra detta värde. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-compression">
+<term
+><guilabel
+>Förvald komprimeringsnivå:</guilabel
+></term>
+<listitem
+><para
+><command
+>cvs</command
+>-klienten komprimerar filer och programfixar när de skickas via ett nätverk. Med kommandoradsväljaren <option
+>-z</option
+>, kan komprimeringsnivån anges. Du kan ställa in &cervisia; att använda det här alternativet, genom att ställa in nivån här. Värdet som ställs in här används bara som standardvärde. Dessutom finns det en inställning för varje arkiv i <menuchoice
+><guimenu
+>Arkivering</guimenu
+><guimenuitem
+>Arkiv...</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-sshagent">
+<term
+><guilabel
+>Använd en som körs, eller starta en ny SSH-agentprocess</guilabel
+></term>
+<listitem
+><para
+>Markera rutan om du använder <link linkend="rsh"
+>ext (&rsh;) arkiv</link
+>, fjärrskalet &ssh; för att kommunicera med arkivet och <application
+>ssh-agent</application
+> för att hantera dina nycklar. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+
+<sect1 id="customize-look">
+<title
+>Utseende</title>
+
+<variablelist>
+
+<varlistentry id="customize-protocolfont">
+<term
+><guilabel
+>Teckensnitt för protokollfönster...</guilabel
+></term>
+<listitem
+><para
+>Klicka på knappen för att visa dialogrutan <guilabel
+>Välj teckensnitt</guilabel
+>, för att ange teckensnittet som används i protokollfönstret (det är fönstret som visar utmatningen från <command
+>cvs</command
+>-klienten). </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-annotatefont">
+<term
+><guilabel
+>Teckensnitt för kommentarvy...</guilabel
+></term>
+<listitem
+><para
+>Klicka på knappen för att visa dialogrutan <guilabel
+>Välj teckensnitt</guilabel
+>, för att ange teckensnittet som används i <link linkend="annotate"
+>kommentarvyn</link
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-difffont">
+<term
+><guilabel
+>Teckensnitt för jämförelsevy...</guilabel
+></term>
+<listitem
+><para
+>Klicka på knappen för att visa dialogrutan <guilabel
+>Välj teckensnitt</guilabel
+>, för att ange teckensnittet som används i <link linkend="diff"
+>jämförelsedialogrutorna</link
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-colors">
+<term
+><guilabel
+>Färger</guilabel
+></term>
+<listitem
+><para
+>Tryck på de färgade knapparna för att visa dialogrutan <guilabel
+>Välj färg</guilabel
+>, och ange färgen för <guilabel
+>Konflikt</guilabel
+>, <guilabel
+>Lokal ändring</guilabel
+> eller <guilabel
+>Fjärrändring</guilabel
+> i huvudvyn, eller <guilabel
+>Ändring vid jämför</guilabel
+>, <guilabel
+>Tillägg vid jämför</guilabel
+> eller <guilabel
+>Borttaget vid jämför</guilabel
+> i &cervisia;s inbyggda jämförelsegränssnitt. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-splitter">
+<term
+><guilabel
+>Dela huvudfönstret horisontellt</guilabel
+></term>
+<listitem
+><para
+>&cervisia;s huvudfönster delas normalt vertikalt i ett fönster med filträdet längst upp, och ett med &CVS;-utmatning nedanför. Alternativt kan du arrangera dem horisontellt. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+</chapter>
+
+
+<chapter id="appendix">
+<title
+>Appendix</title>
+
+<sect1 id="ignoredfiles">
+<title
+>Filer som ignoreras</title>
+
+<para
+>&cervisia; visar inte alla filer som verkligen finns i sitt huvudträd. Det här görs på samma sätt som <command
+>cvs</command
+> självt, och hjälper till att undvika skräp som orsakas av ointressanta saker som objektfiler. &cervisia; försöker imitera <command
+>cvs</command
+> eget beteende så nära som möjligt, dvs. listor på filer som ska ignoreras hämtas från följande källor: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>En statisk lista med poster, som omfattar saker som <literal role="extension"
+>*.o</literal
+> och <filename
+>core</filename
+>. För detaljer, se &CVS;-dokumentationen. </para
+></listitem>
+<listitem
+><para
+>Filen <filename
+><envar
+>$HOME</envar
+>/.cvsignore</filename
+>. </para
+></listitem>
+
+<listitem
+><para
+>Miljövariabeln <envar
+>$CVSIGNORE</envar
+>. </para
+></listitem>
+<listitem
+><para
+>Filen <filename
+>.cvsignore</filename
+> i respektive katalog. </para
+></listitem>
+
+</itemizedlist>
+
+<para
+><command
+>cvs</command
+> själv slår dessutom upp poster i <filename
+><envar
+>$CVSROOT</envar
+>/cvsignore</filename
+>, men det här är en fil på servern, och &cervisia; måste kunna starta i nedkopplat läge. Om du arbetar med en grupp som föredrar att använda en lista att ignorera på servern, är det troligen en bra idé att ta en titt på vilka mönster som listas där och lägga till dem i filen <filename
+>.cvsignore</filename
+> i din hemkatalog. </para>
+
+</sect1>
+
+
+<sect1 id="information">
+<title
+>Ytterligare information och stöd</title>
+
+<itemizedlist>
+
+<listitem
+><para
+>&CVS; levereras med en komplett uppsättning dokumentation i form av info-sidor, som är kända som "Cederqvist"-dokumentet. Om den är riktigt installerad, kan du bläddra i den genom att skriva <userinput
+>info:/cvs</userinput
+> i &konqueror;s platsrad eller helt enkelt välja <menuchoice
+><guimenu
+>Hjälp</guimenu
+> <guimenuitem
+>CVS-manual</guimenuitem
+></menuchoice
+> i &cervisia;. En elektronisk PDF-version av Cederqvist-dokumentet är tillgängligt på <ulink url="https://ftp.gnu.org/non-gnu/cvs/source/stable/1.11.21/cederqvist-1.11.21.pdf"
+>Internet</ulink
+>. </para>
+
+<para
+>Eftersom den här boken underhålls tillsammans med &CVS;, är den normalt den mest aktuella referensdokumentationen. Du rekommenderas ändå att överväga att använda annan dokumentation för att lära dig hur man använder &CVS;, särskilt det följande. </para
+></listitem>
+
+<listitem
+><para
+>Karl Fogel har skrivit den utmärkta boken <ulink url="http://cvsbook.red-bean.com/index.html"
+>Open Source Development with &CVS;</ulink
+>. Ungefär hälften av den här boken handlar om utvecklingsprocessen för programvara med öppen källkod. Den andra halvan är en teknisk dokumentation av &CVS;. Som tur är, har den tekniska delen av boken gjorts fritt tillgänglig enligt GPL, så att du kan ladda ner en &HTML;-version av den. En lista med errata finns tillgänglig på webbsidan som nämns ovan. </para
+></listitem>
+
+<listitem
+><para
+>&CVS; frågor diskuteras på en särskild <ulink url="http://mail.gnu.org/mailman/listinfo/info-cvs"
+>e-postlista</ulink
+>. </para
+></listitem>
+
+<listitem
+><para
+>Det finns en Usenet-grupp som heter <literal
+>comp.software.config-mgmt</literal
+>, tillägnad konfigurationshantering i allmänhet. &CVS; är bara en marginell del av ämnet för den här gruppen, men den kan ändå vara intressant eftersom den diskuterar fördelar med olika versionshanteringssystem i förhållande till &CVS;. </para
+></listitem>
+
+</itemizedlist>
+
+</sect1>
+
+
+<sect1 id="commandreference">
+<title
+>Kommandoreferens</title>
+
+<!-- File Menu -->
+<sect2 id="menufile">
+
+<title
+>Menyn Arkiv</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Öppna arbetskatalog...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Öppnar en arbetskatalog i huvudfönstret. Se <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+><guisubmenu
+>Senaste arbetskataloger</guisubmenu
+> </menuchoice
+></term>
+<listitem
+><para
+>Öppnar en av arbetskatalogerna som nyligen använts. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Infoga post i ändringsloggen...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Öppnar editorn för ändringslogg, förberedd så att du kan lägga till en ny post med dagens datum. Se <xref linkend="committingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Uppdatera</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Kör 'cvs update' på markerade filer och ändrar status och versionsnummer i listan enligt resultatet. Se <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F5</keycap
+></shortcut
+> <guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Status</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Kör 'cvs -n update' på markerade filer och ändrar status och versionsnummer i listan enligt resultatet. Se <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Redigera</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Öppnar den markerade filen i &kde;:s standardeditor för den markerade filens typ. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Lös upp...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Öppnar en dialogruta för den markerade filen som låter dig lösa upp konflikter från en sammanfogning i den. Se <xref linkend="resolvingconflicts"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>#</keycap
+></shortcut
+> <guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Arkivera...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Låter dig arkivera de markerade filerna. Se <xref linkend="committingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Insert</keycap
+></shortcut
+> <guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Lägg till i arkiv...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Låter dig lägga till de markerade filerna i arkivet. Se <xref linkend="addingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Lägg till binärfil...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Låter dig lägga till de markerade filerna i arkivet som binärfiler (<command
+>cvs add <option
+>-kb</option
+></command
+>). Se <xref linkend="addingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Delete</keycap
+></shortcut
+> <guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Ta bort från arkiv...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Låter dig ta bort de markerade filerna i arkivet. Se <xref linkend="removingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<!--TODO: add the revert action to the working with files chapter -->
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Återställ</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Kastar alla lokala ändringar som du har gjort för de markerade filerna och återgår till versionen i arkivet (väljaren <option
+>-C</option
+> till <command
+>cvs update</command
+>). </para
+></listitem>
+</varlistentry>
+<!--FIXME Properties-->
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Avsluta</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avslutar &cervisia;. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- View Menu -->
+<sect2 id="menuview">
+
+<title
+>Menyn Visa</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Escape</keycap
+></shortcut
+> <guimenu
+>Visa</guimenu
+><guimenuitem
+>Stoppa</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avbryter alla underprocesser som kör. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+><guimenuitem
+>Bläddra i logg...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Visar bläddring i logg för markerade filversioner. Se <xref linkend="browsinglogs"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+><guimenuitem
+>Kommentarer...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Visar en kommentarvy av den markerade filen, dvs. en vy där du kan se vilken person som senast ändrat filen, för varje rad. Se <xref linkend="annotate"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+><guimenuitem
+>Skillnad mot arkivet (BASE)...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Visar skillnaderna mellan den markerade filen i arbetskatalogen och versionen som du senast uppdaterat (BASE). Se <xref linkend="diff"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visa</guimenu
+><guimenuitem
+>Skillnad mot arkivet (HEAD)...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Visar skillnaderna mellan den markerade filen i arbetskatalogen och versionen som du senast uppdaterat (HEAD). Se <xref linkend="diff"/>. </para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visa</guimenu
+><guimenuitem
+>Senaste ändring...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Visar skillnaden mellan versionen för den markerade filen som du senast uppdaterade (basversionen) och en tidigare version. Se <xref linkend="diff"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visa</guimenu
+><guimenuitem
+>Historik...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Visar &CVS;-historiken som den rapporteras av servern. Se <xref linkend="browsinghistory"/>. </para
+></listitem>
+</varlistentry>
+
+<!--TODO: add hide menus to mainscreen section-->
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visa</guimenu
+><guimenuitem
+>Dölj alla filer</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avgör om bara kataloger visas i huvudträdvyn. Se <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visa</guimenu
+><guimenuitem
+>Dölj oändrade filer</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avgör om okända och uppdaterade filer döljs i huvudträdvyn. Se <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visa</guimenu
+><guimenuitem
+>Dölj borttagna filer</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avgör om borttagna filer döljs i huvudträdvyn. Se <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visa</guimenu
+><guimenuitem
+>Dölj filer som inte hör till CVS</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avgör om filer som inte finns i &CVS; döljs i huvudträdvyn. Se <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visa</guimenu
+><guimenuitem
+>Dölj tomma kataloger...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avgör om kataloger utan synliga poster döljs i huvudträdvyn. Se <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visa</guimenu
+><guimenuitem
+>Expandera filträd</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Öppnar alla grenar i filträdet så att du kan se alla filer och alla kataloger. Se <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visa</guimenu
+><guimenuitem
+>Dra ihop filträd</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Stänger alla grenar i filträdet. Se <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- Advanced Menu -->
+<sect2 id="menuadvanced">
+
+<title
+>Menyn Avancerat</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Tagg/gren...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Lägger till en tagg eller skapar en gren för de markerade filerna. Se <xref linkend="taggingbranching"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Ta bort tagg...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Tar bort en given tagg från de markerade filerna. Se <xref linkend="taggingbranching"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Uppdatera till tagg/datum...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ändrar de markerade filerna till en given tagg eller ett givet datum, och gör taggen eller datumet fast. Se <xref linkend="updatingto"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Uppdatera till huvudversion...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ändrar de markerade filerna till respektive huvudversion. Se <xref linkend="updatingto"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Sammanfoga...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Sammanfogar antingen en given gren eller ändringarna mellan två olika taggar för de markerade filerna. Se <xref linkend="taggingbranching"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Lägg till bevakning...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Lägger till bevakning för en uppsättning händelser för de markerade filerna. Se <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Ta bort bevakning...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Tar bort bevakning för en uppsättning händelser från de markerade filerna. Se <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Visa bevakning</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Listar bevakare av de markerade filerna. Se <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Redigera filer</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Kör <command
+>cvs edit</command
+> för de markerade filerna. Se <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Sluta redigera filer</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Kör <command
+>cvs unedit</command
+> för de markerade filerna. Se <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Visa redigering</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Kör <command
+>cvs editors</command
+> för de markerade filerna. Se <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Lås filer</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Låser de markerade filerna. Se <xref linkend="locking"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Lås upp filer</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Låser upp de markerade filerna. Se <xref linkend="locking"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avancerat</guimenu
+><guimenuitem
+>Skapa programfix för arkiv...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Skapar en programfix från ändringarna i din arbetskatalog. Se <xref linkend="creatingpatches"/>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- Repository Menu -->
+<sect2 id="menurepository">
+
+<title
+>Menyn Arkivering</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arkivering</guimenu
+><guimenuitem
+>Skapa...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Öppnar en dialogruta som låter dig skapa ett nytt lokalt arkiv. Se <xref linkend="accessing-repository"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arkivering</guimenu
+><guimenuitem
+>Checka ut...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Öppnar en dialogruta som låter dig checka ut en modul från arkivet. Se <xref linkend="checkingout"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arkivering</guimenu
+><guimenuitem
+>Importera...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Öppnar en dialogruta som låter dig importera ett paket till arkivet. Se <xref linkend="importing"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arkivering</guimenu
+><guimenuitem
+>Arkiv...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ställer in en lista med arkiv som du ofta använder, och hur de kan kommas åt. Se <xref linkend="accessing-repository"/>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- Settings Menu -->
+<sect2 id="menuoptions">
+<title
+>Menyerna Inställningar och Hjälp</title>
+
+<para
+>Förutom de vanliga menyerna <guimenu
+>Inställningar</guimenu
+> och <guimenu
+>Hjälp</guimenu
+> i &kde; som beskrivs i kapitlet <ulink url="help:/fundamentals/menus.html"
+>Meny</ulink
+> i dokumentet &kde;:s grunder, har &cervisia; följande programspecifika menyalternativ: </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+><guimenuitem
+>Skapa kataloger vid uppdatering</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avgör om uppdateringar skapar kataloger i arbetskatalogen som inte tidigare fanns där (väljaren <option
+>-d</option
+> till <command
+>cvs update</command
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+><guimenuitem
+>Ta bort tomma kataloger vid uppdatering</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avgör om uppdateringar tar bort tomma kataloger i arbetskatalogen. (väljaren <option
+>-P</option
+> till <command
+>cvs update</command
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+><guimenuitem
+>Uppdatera rekursivt</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avgör om uppdateringar är rekursiva (väljaren <option
+>-r</option
+> till <command
+>cvs update</command
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+><guimenuitem
+>Arkivera och ta bort rekursivt</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avgör om tillägg och borttagning är rekursiva (väljaren <option
+>-r</option
+> till <command
+>cvs add</command
+> och <command
+>cvs remove</command
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+><guimenuitem
+>Redigera (cvs edit) automatiskt om nödvändigt</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Avgör om <command
+>cvs edit</command
+> körs automatiskt så fort du redigerar en fil. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Hjälp</guimenu
+> <guimenuitem
+>CVS-manual</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Öppnar &CVS;-infosidor i Hjälpcentralen. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="credits-and-license">
+<title
+>Tack till och licens</title>
+<para
+>Program copyright</para>
+<itemizedlist>
+<listitem
+><para
+>1999-2002 &Bernd.Gehrmann; &Bernd.Gehrmann.mail;</para
+></listitem>
+<listitem
+><para
+>2002-2008 &cervisia;-upphovsmännen</para
+></listitem>
+</itemizedlist>
+
+<para
+>Dokumentation Copyright 1999-2002 &Bernd.Gehrmann; &Bernd.Gehrmann.mail; och 2004 Carlos Woelz carloswoelz@imap-mail.com</para>
+
+<para
+>Översättning Stefan Asserhäll <email
+>stefan.asserhall@bredband.net</email
+></para
+> &underFDL; &underGPL; </chapter>
+</book>

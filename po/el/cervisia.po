@@ -1,0 +1,2164 @@
+# translation of cervisia.po to greek
+#
+# Spiros Georgaras <sng@hellug.gr>, 2005, 2006, 2007, 2008.
+# Andreas Vlachos <avlach@gmail.com>, 2005.
+# Toussis Manolis <manolis@koppermind.homelinux.org>, 2005, 2007, 2008, 2009.
+# Petros <pvidalis@gmail.com>, 2010, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: cervisia\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-14 00:48+0000\n"
+"PO-Revision-Date: 2016-10-12 16:56+0200\n"
+"Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
+"Language-Team: Greek <kde-i18n-doc@kde.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 2.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Σπύρος Γεωργαράς,Τούσης Μανώλης, Πέτρος Βιδάλης"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "sng@hellug.gr,manolis@koppermind.homelinux.org, pvidalis@gmail.com"
+
+#: addignoremenu.cpp:34
+#, kde-format
+msgid "Add to Ignore List"
+msgstr "Προσθήκη στη λίστα αγνόησης"
+
+#: addignoremenu.cpp:65
+#, kde-format
+msgid "Ignore File"
+msgid_plural "Ignore %1 Files"
+msgstr[0] "Αγνόηση αρχείου"
+msgstr[1] "Αγνόηση %1 αρχείων"
+
+#: addignoremenu.cpp:85
+#, kde-format
+msgid "Cannot open file '%1' for writing."
+msgstr "Αδυναμία ανοίγματος του αρχείου '%1' για εγγραφή."
+
+#: addremovedialog.cpp:40
+#, kde-format
+msgid "CVS Add"
+msgstr "Προσθήκη στο CVS"
+
+#: addremovedialog.cpp:40
+#, kde-format
+msgid "CVS Add Binary"
+msgstr "Προσθήκη δυαδικού στο CVS"
+
+#: addremovedialog.cpp:40
+#, kde-format
+msgid "CVS Remove"
+msgstr "Αφαίρεση από CVS"
+
+#: addremovedialog.cpp:59
+#, kde-format
+msgid "Add the following files to the repository:"
+msgstr "Προσθήκη των παρακάτω αρχείων στο χώρο αποθήκευσης:"
+
+#: addremovedialog.cpp:60
+#, kde-format
+msgid "Add the following binary files to the repository:"
+msgstr "Προσθήκη των παρακάτω δυαδικών αρχείων στο χώρο αποθήκευσης:"
+
+#: addremovedialog.cpp:61
+#, kde-format
+msgid "Remove the following files from the repository:"
+msgstr "Αφαίρεση των παρακάτω αρχείων από το χώρο αποθήκευσης:"
+
+#: addremovedialog.cpp:73
+#, kde-format
+msgid "This will also remove the files from your local working copy."
+msgstr "Αυτό θα αφαιρέσει τα αρχεία και από το τοπικό αντίγραφο εργασίας."
+
+#: addrepositorydialog.cpp:40
+#, kde-format
+msgid "Add Repository"
+msgstr "Προσθήκη χώρου αποθήκευσης"
+
+#: addrepositorydialog.cpp:53 checkoutdialog.cpp:86
+#, kde-format
+msgid "&Repository:"
+msgstr "&Χώρος αποθήκευσης:"
+
+#: addrepositorydialog.cpp:67
+#, kde-format
+msgid "Use remote &shell (only for :ext: repositories):"
+msgstr "Χρήση απομακρυσμένου &κελύφους (μόνο για χώρους :ext:):"
+
+#: addrepositorydialog.cpp:76
+#, kde-format
+msgid "Invoke this program on the server side:"
+msgstr "Κλήση αυτού του προγράμματος από την πλευρά του εξυπηρετητή:"
+
+#: addrepositorydialog.cpp:86
+#, kde-format
+msgid "Use different &compression level:"
+msgstr "Χρήση διαφορετικού επιπέδου &συμπίεσης:"
+
+#: addrepositorydialog.cpp:94
+#, kde-format
+msgid "Download cvsignore file from server"
+msgstr "Λήψη του αρχείου cvsignore από τον εξυπηρετητή"
+
+#: addrepositorydialog.cpp:174
+#, kde-format
+msgid "Repository Settings"
+msgstr "Ρυθμίσεις χώρου αποθήκευσης"
+
+#: annotatecontroller.cpp:75
+#, kde-format
+msgid "CVS Annotate: %1"
+msgstr "Επισήμανση CVS: %1"
+
+#: annotatecontroller.cpp:85
+#, kde-format
+msgid "CVS Annotate"
+msgstr "Επισήμανση CVS"
+
+#: annotatedialog.cpp:44
+#, kde-format
+msgid "Go to Line..."
+msgstr "Μετάβαση στη γραμμή..."
+
+#: annotatedialog.cpp:49
+#, kde-format
+msgid "Find Prev"
+msgstr "Αναζήτηση προηγούμενου"
+
+#: annotatedialog.cpp:54
+#, kde-format
+msgid "Find Next"
+msgstr "Εύρεση επόμενου"
+
+#: annotatedialog.cpp:64
+#, kde-format
+msgid "Search"
+msgstr "Αναζήτηση"
+
+#: annotatedialog.cpp:115
+#, kde-format
+msgid "Go to Line"
+msgstr "Μετάβαση στη Γραμμή"
+
+#: annotatedialog.cpp:115
+#, kde-format
+msgid "Go to line number:"
+msgstr "Μετάβαση στη γραμμή με αριθμό:"
+
+#: cervisiapart.cpp:111 main.cpp:138
+#, kde-format
+msgid "Cervisia"
+msgstr "Cervisia"
+
+#: cervisiapart.cpp:118
+#, kde-format
+msgid "Starting cvsservice failed with message: "
+msgstr "Η εκκίνηση της υπηρεσίας cvs απέτυχε με μήνυμα: "
+
+#: cervisiapart.cpp:148
+#, kde-format
+msgid ""
+"This KPart is non-functional, because the cvs D-Bus service could not be "
+"started."
+msgstr ""
+"Αυτό το KPart δε λειτουργεί, επειδή η υπηρεσία cvs D-Bus δεν μπόρεσε να "
+"εκκινήσει."
+
+#: cervisiapart.cpp:186
+#, kde-format
+msgid "Remote CVS working folders are not supported."
+msgstr "Δεν υποστηρίζονται απομακρυσμένοι κατάλογοι εργασίας CVS."
+
+#: cervisiapart.cpp:194
+#, kde-format
+msgid ""
+"You cannot change to a different folder while there is a running cvs job."
+msgstr ""
+"Δεν μπορείτε να μεταβείτε σε έναν άλλο φάκελο όσο υπάρχει μια εργασία cvs "
+"που εκτελείται."
+
+#: cervisiapart.cpp:214
+#, kde-format
+msgid ""
+"F - All files are hidden, the tree shows only folders\n"
+"N - All up-to-date files are hidden\n"
+"R - All removed files are hidden"
+msgstr ""
+"F - Όλα τα αρχεία αποκρύπτονται, το δέντρο εμφανίζει μόνο φακέλους\n"
+"N - Όλα τα ενημερωμένα αρχεία αποκρύπτονται\n"
+"R - Όλα τα αφαιρεμένα αρχεία αποκρύπτονται"
+
+#: cervisiapart.cpp:227
+#, kde-format
+msgid "Open Sandbox..."
+msgstr "Άνοιγμα τοπικού αντιγράφου..."
+
+#: cervisiapart.cpp:231
+#, kde-format
+msgid "Opens a CVS working folder in the main window"
+msgstr "Ανοίγει ένα φάκελο εργασίας CVS στο κύριο παράθυρο"
+
+#: cervisiapart.cpp:235
+#, kde-format
+msgid "Recent Sandboxes"
+msgstr "Πρόσφατα τοπικά αντίγραφα"
+
+#: cervisiapart.cpp:239
+#, kde-format
+msgid "&Insert ChangeLog Entry..."
+msgstr "&Εισαγωγή καταχώρησης στις καταχωρήσεις τροποποιήσεων..."
+
+#: cervisiapart.cpp:242
+#, kde-format
+msgid "Inserts a new intro into the file ChangeLog in the toplevel folder"
+msgstr ""
+"Εισάγει μια νέα εισαγωγή στο αρχείο καταγραφής τροποποιήσεων μέσα στον "
+"ανώτερο κατάλογο"
+
+#: cervisiapart.cpp:246
+#, kde-format
+msgid "&Update"
+msgstr "Ενη&μέρωση"
+
+#: cervisiapart.cpp:250
+#, kde-format
+msgid "Updates (cvs update) the selected files and folders"
+msgstr "Ενημερώνει (cvs update) τα επιλεγμένα αρχεία και φακέλους"
+
+#: cervisiapart.cpp:254
+#, kde-format
+msgid "&Status"
+msgstr "&Κατάσταση"
+
+#: cervisiapart.cpp:258
+#, kde-format
+msgid "Updates the status (cvs -n update) of the selected files and folders"
+msgstr ""
+"Ενημερώνει την κατάσταση (cvs -n update) των επιλεγμένων αρχείων και φακέλων"
+
+#: cervisiapart.cpp:262 resolvedialog.cpp:176
+#, kde-format
+msgid "&Edit"
+msgstr "&Επεξεργασία"
+
+#: cervisiapart.cpp:265
+#, kde-format
+msgid "Opens the marked file for editing"
+msgstr "Ανοίγει το σημαδεμένο αρχείο για επεξεργασία"
+
+#: cervisiapart.cpp:269
+#, kde-format
+msgid "Reso&lve..."
+msgstr "Επί&λυση..."
+
+#: cervisiapart.cpp:272
+#, kde-format
+msgid "Opens the resolve dialog with the selected file"
+msgstr "Ανοίγει το διάλογο επίλυσης για το επιλεγμένο αρχείο"
+
+#: cervisiapart.cpp:276
+#, kde-format
+msgid "&Commit..."
+msgstr "&Καταχώρηση..."
+
+#: cervisiapart.cpp:280
+#, kde-format
+msgid "Commits the selected files"
+msgstr "Καταχώρηση των επιλεγμένων αρχείων"
+
+#: cervisiapart.cpp:284
+#, kde-format
+msgid "&Add to Repository..."
+msgstr "&Προσθήκη στο χώρο φύλαξης..."
+
+#: cervisiapart.cpp:287
+#, kde-format
+msgid "Add"
+msgstr "Προσθήκη"
+
+#: cervisiapart.cpp:289
+#, kde-format
+msgid "Adds (cvs add) the selected files to the repository"
+msgstr "Προσθέτει (cvs add) τα επιλεγμένα αρχεία στο χώρο αποθήκευσης"
+
+#: cervisiapart.cpp:293
+#, kde-format
+msgid "Add &Binary..."
+msgstr "Προσθήκη &δυαδικού αρχείου..."
+
+#: cervisiapart.cpp:296
+#, kde-format
+msgid "Adds (cvs -kb add) the selected files as binaries to the repository"
+msgstr ""
+"Προσθέτει (cvs -kb add) τα επιλεγμένα αρχεία ως δυαδικά στο χώρο αποθήκευσης"
+
+#: cervisiapart.cpp:300
+#, kde-format
+msgid "&Remove From Repository..."
+msgstr "&Αφαίρεση από το χώρο αποθήκευσης..."
+
+#: cervisiapart.cpp:303 repositorydialog.cpp:201
+#, kde-format
+msgid "Remove"
+msgstr "Αφαίρεση"
+
+#: cervisiapart.cpp:305
+#, kde-format
+msgid "Removes (cvs remove) the selected files from the repository"
+msgstr "Αφαιρεί (cvs remove) τα επιλεγμένα αρχεία από το χώρο αποθήκευσης"
+
+#: cervisiapart.cpp:309
+#, kde-format
+msgid "Rever&t"
+msgstr "&Επαναφορά"
+
+#: cervisiapart.cpp:312
+#, kde-format
+msgid "Reverts (cvs update -C) the selected files (only cvs 1.11)"
+msgstr "Επαναφορά (cvs update -C) των επιλεγμένων αρχείων (μόνο για cvs 1.11)"
+
+#: cervisiapart.cpp:316
+#, kde-format
+msgid "&Properties"
+msgstr "&Ιδιότητες"
+
+#: cervisiapart.cpp:323
+#, kde-format
+msgid "Stop"
+msgstr "Σταμάτημα"
+
+#: cervisiapart.cpp:328
+#, kde-format
+msgid "Stops any running sub-processes"
+msgstr "Σταμάτημα κάθε εκτελούμενης υποδιεργασίας"
+
+#: cervisiapart.cpp:332
+#, kde-format
+msgid "Browse &Log..."
+msgstr "Εξερεύνηση α&ρχείου καταγραφής..."
+
+#: cervisiapart.cpp:336
+#, kde-format
+msgid "Shows the revision tree of the selected file"
+msgstr "Εμφανίζει το δέντρο αναθεωρήσεων του επιλεγμένου αρχείου"
+
+#: cervisiapart.cpp:341
+#, kde-format
+msgid "Browse Multi-File Log..."
+msgstr "Εξερεύνηση πολλαπλού αρχείου καταγραφής..."
+
+#: cervisiapart.cpp:345
+#, kde-format
+msgid "&Annotate..."
+msgstr "&Επισήμανση..."
+
+#: cervisiapart.cpp:349
+#, kde-format
+msgid "Shows a blame-annotated view of the selected file"
+msgstr "Εμφανίζει μια προβολή επισημάνσεων του επιλεγμένου αρχείου"
+
+#: cervisiapart.cpp:353
+#, kde-format
+msgid "&Difference to Repository (BASE)..."
+msgstr "&Διαφορά με το χώρο αποθήκευσης (BASE)..."
+
+#: cervisiapart.cpp:357
+#, kde-format
+msgid ""
+"Shows the differences of the selected file to the checked out version (tag "
+"BASE)"
+msgstr ""
+"Εμφανίζει τις διαφορές του επιλεγμένου αρχείου με την έκδοση ελέγχου εξόδου "
+"(ετικέτα BASE)"
+
+#: cervisiapart.cpp:361
+#, kde-format
+msgid "Difference to Repository (HEAD)..."
+msgstr "Διαφορά με το χώρο αποθήκευσης (HEAD)..."
+
+#: cervisiapart.cpp:365
+#, kde-format
+msgid ""
+"Shows the differences of the selected file to the newest version in the "
+"repository (tag HEAD)"
+msgstr ""
+"Εμφανίζει τις διαφορές του επιλεγμένου αρχείου με την πιο καινούργια έκδοση "
+"στο χώρο αποθήκευσης (ετικέτα HEAD)"
+
+#: cervisiapart.cpp:369
+#, kde-format
+msgid "Last &Change..."
+msgstr "Τελευταία &αλλαγή..."
+
+#: cervisiapart.cpp:372
+#, kde-format
+msgid ""
+"Shows the differences between the last two revisions of the selected file"
+msgstr ""
+"Εμφανίζει τις διαφορές μεταξύ των δύο τελευταίων αναθεωρήσεων του "
+"επιλεγμένου αρχείου"
+
+#: cervisiapart.cpp:376
+#, kde-format
+msgid "&History..."
+msgstr "&Ιστορικό..."
+
+#: cervisiapart.cpp:379
+#, kde-format
+msgid "Shows the CVS history as reported by the server"
+msgstr "Προβολή του ιστορικού του CVS από τον εξυπηρετητή"
+
+#: cervisiapart.cpp:383
+#, kde-format
+msgid "&Unfold File Tree"
+msgstr "&Ξετύλιγμα δέντρου αρχείων"
+
+#: cervisiapart.cpp:387
+#, kde-format
+msgid "Opens all branches of the file tree"
+msgstr "Ανοίγει όλους τους κλάδους του δέντρου αρχείων"
+
+#: cervisiapart.cpp:391
+#, kde-format
+msgid "&Fold File Tree"
+msgstr "&Τύλιγμα δέντρου αρχείων"
+
+#: cervisiapart.cpp:394
+#, kde-format
+msgid "Closes all branches of the file tree"
+msgstr "Κλείνει όλους τους κλάδους του δέντρου αρχείων"
+
+#: cervisiapart.cpp:401
+#, kde-format
+msgid "&Tag/Branch..."
+msgstr "Ε&τικέτα/Κλάδος..."
+
+#: cervisiapart.cpp:404
+#, kde-format
+msgid "Creates a tag or branch for the selected files"
+msgstr "Δημιουργεί μια ετικέτα ή κλάδο για τα επιλεγμένα αρχεία"
+
+#: cervisiapart.cpp:408
+#, kde-format
+msgid "&Delete Tag..."
+msgstr "&Διαγραφή ετικέτας..."
+
+#: cervisiapart.cpp:411
+#, kde-format
+msgid "Deletes a tag from the selected files"
+msgstr "Διαγραφή μιας ετικέτας από τα επιλεγμένα αρχεία"
+
+#: cervisiapart.cpp:415
+#, kde-format
+msgid "&Update to Tag/Date..."
+msgstr "&Ενημέρωση σε ετικέτα/ημερομηνία..."
+
+#: cervisiapart.cpp:418
+#, kde-format
+msgid "Updates the selected files to a given tag, branch or date"
+msgstr ""
+"Ενημερώνει τα επιλεγμένα αρχεία σε μια δοσμένη ετικέτα, κλάδο ή ημερομηνία"
+
+#: cervisiapart.cpp:422
+#, kde-format
+msgid "Update to &HEAD"
+msgstr "Ενημέρωση στο &HEAD"
+
+#: cervisiapart.cpp:425
+#, kde-format
+msgid "Updates the selected files to the HEAD revision"
+msgstr "Ενημερώνει τα επιλεγμένα αρχεία στην αναθεώρηση HEAD"
+
+#: cervisiapart.cpp:429
+#, kde-format
+msgid "&Merge..."
+msgstr "&Συγχώνευση..."
+
+#: cervisiapart.cpp:432
+#, kde-format
+msgid "Merges a branch or a set of modifications into the selected files"
+msgstr "Συγχωνεύει έναν κλάδο ή ένα σύνολο τροποποιήσεων στα επιλεγμένα αρχεία"
+
+#: cervisiapart.cpp:436
+#, kde-format
+msgid "&Add Watch..."
+msgstr "&Προσθήκη παρακολούθησης..."
+
+#: cervisiapart.cpp:439
+#, kde-format
+msgid "Adds a watch for the selected files"
+msgstr "Προσθήκη μιας παρακολούθησης για τα επιλεγμένα αρχεία"
+
+#: cervisiapart.cpp:443
+#, kde-format
+msgid "&Remove Watch..."
+msgstr "Α&φαίρεση παρακολούθησης..."
+
+#: cervisiapart.cpp:446
+#, kde-format
+msgid "Removes a watch from the selected files"
+msgstr "Αφαίρεση μιας παρακολούθησης για τα επιλεγμένα αρχεία"
+
+#: cervisiapart.cpp:450
+#, kde-format
+msgid "Show &Watchers"
+msgstr "Προβολή &παρακολουθήσεων"
+
+#: cervisiapart.cpp:453
+#, kde-format
+msgid "Shows the watchers of the selected files"
+msgstr "Εμφανίζει τις παρακολουθήσεις των επιλεγμένων αρχείων"
+
+#: cervisiapart.cpp:457
+#, kde-format
+msgid "Ed&it Files"
+msgstr "&Επεξεργασία αρχείων"
+
+#: cervisiapart.cpp:460
+#, kde-format
+msgid "Edits (cvs edit) the selected files"
+msgstr "Επεξεργάζεται (cvs edit) τα επιλεγμένα αρχεία"
+
+#: cervisiapart.cpp:464
+#, kde-format
+msgid "U&nedit Files"
+msgstr "Α&ναίρεση επεξεργασίας αρχείων"
+
+#: cervisiapart.cpp:467
+#, kde-format
+msgid "Unedits (cvs unedit) the selected files"
+msgstr "Αναιρεί την επεξεργασία (cvs unedit) των επιλεγμένων αρχείων"
+
+#: cervisiapart.cpp:471
+#, kde-format
+msgid "Show &Editors"
+msgstr "Εμφάνιση &επεξεργαστών"
+
+#: cervisiapart.cpp:474
+#, kde-format
+msgid "Shows the editors of the selected files"
+msgstr "Εμφανίζει τους επεξεργαστές των επιλεγμένων αρχείων"
+
+#: cervisiapart.cpp:478
+#, kde-format
+msgid "&Lock Files"
+msgstr "Κ&λείδωμα αρχείων"
+
+#: cervisiapart.cpp:481
+#, kde-format
+msgid "Locks the selected files, so that others cannot modify them"
+msgstr ""
+"Κλειδώνει τα επιλεγμένα αρχεία, έτσι ώστε να μην είναι δυνατή η τροποποίηση "
+"από άλλους"
+
+#: cervisiapart.cpp:485
+#, kde-format
+msgid "Unl&ock Files"
+msgstr "Ξεκλείδ&ωμα αρχείων"
+
+#: cervisiapart.cpp:488
+#, kde-format
+msgid "Unlocks the selected files"
+msgstr "Ξεκλείδωμα των επιλεγμένων αρχείων"
+
+#: cervisiapart.cpp:492
+#, kde-format
+msgid "Create &Patch Against Repository..."
+msgstr "Δημιουργία επι&διόρθωσης σε σχέση με το χώρο αποθήκευσης..."
+
+#: cervisiapart.cpp:495
+#, kde-format
+msgid "Creates a patch from the modifications in your sandbox"
+msgstr ""
+"Δημιουργεί μια επιδιόρθωση από τις τροποποιήσεις στο τοπικό αντίγραφό σας"
+
+#: cervisiapart.cpp:502
+#, kde-format
+msgid "&Create..."
+msgstr "&Δημιουργία..."
+
+#: cervisiapart.cpp:506
+#, kde-format
+msgid "&Checkout..."
+msgstr "Έ&λεγχος εξόδου..."
+
+#: cervisiapart.cpp:509
+#, kde-format
+msgid "Allows you to checkout a module from a repository"
+msgstr ""
+"Σας επιτρέπει τον έλεγχο εξόδου ενός αρθρώματος από ένα χώρο αποθήκευσης"
+
+#: cervisiapart.cpp:513
+#, kde-format
+msgid "&Import..."
+msgstr "Εισαγ&ωγή..."
+
+#: cervisiapart.cpp:516
+#, kde-format
+msgid "Allows you to import a module into a repository"
+msgstr ""
+"Σας επιτρέπει την εισαγωγή ενός αρθρώματος μέσα σε ένα χώρο αποθήκευσης"
+
+#: cervisiapart.cpp:520
+#, kde-format
+msgid "&Repositories..."
+msgstr "&Χώροι αποθήκευσης..."
+
+#: cervisiapart.cpp:523
+#, kde-format
+msgid "Configures a list of repositories you regularly use"
+msgstr "Ρύθμιση μιας λίστας των χώρων αποθήκευσης που συνήθως χρησιμοποιείτε"
+
+#: cervisiapart.cpp:530
+#, kde-format
+msgid "Hide All &Files"
+msgstr "Α&πόκρυψη όλων των αρχείων"
+
+#: cervisiapart.cpp:533
+#, kde-format
+msgid "Determines whether only folders are shown"
+msgstr "Καθορίζει αν εμφανίζονται ή όχι, μόνο οι φάκελοι"
+
+#: cervisiapart.cpp:537
+#, kde-format
+msgid "Hide Unmodified Files"
+msgstr "Απόκρυψη μη τροποποιημένων αρχείων"
+
+#: cervisiapart.cpp:541
+#, kde-format
+msgid "Determines whether files with status up-to-date or unknown are hidden"
+msgstr ""
+"Καθορίζει αν τα αρχεία με κατάσταση ενημερωμένη ή άγνωστη αποκρύπτονται ή όχι"
+
+#: cervisiapart.cpp:546
+#, kde-format
+msgid "Hide Removed Files"
+msgstr "Απόκρυψη αφαιρεμένων αρχείων"
+
+#: cervisiapart.cpp:549
+#, kde-format
+msgid "Determines whether removed files are hidden"
+msgstr "Καθορίζει αν τα αφαιρεμένα αρχεία αποκρύπτονται ή όχι"
+
+#: cervisiapart.cpp:553
+#, kde-format
+msgid "Hide Non-CVS Files"
+msgstr "Απόκρυψη μη CVS αρχείων"
+
+#: cervisiapart.cpp:556
+#, kde-format
+msgid "Determines whether files not in CVS are hidden"
+msgstr "Καθορίζει αν τα αρχεία που δεν ανήκουν στο CVS αποκρύπτονται ή όχι"
+
+#: cervisiapart.cpp:560
+#, kde-format
+msgid "Hide Empty Folders"
+msgstr "Απόκρυψη κενών φακέλων"
+
+#: cervisiapart.cpp:563
+#, kde-format
+msgid "Determines whether folders without visible entries are hidden"
+msgstr "Καθορίζει αν οι φάκελοι χωρίς ορατές καταχωρήσεις αποκρύπτονται ή όχι"
+
+#: cervisiapart.cpp:567
+#, kde-format
+msgid "Create &Folders on Update"
+msgstr "Δημιουργία &φακέλων κατά την ενημέρωση"
+
+#: cervisiapart.cpp:570
+#, kde-format
+msgid "Determines whether updates create folders"
+msgstr "Καθορίζει αν οι ενημερώσεις δημιουργούν φακέλους"
+
+#: cervisiapart.cpp:574
+#, kde-format
+msgid "&Prune Empty Folders on Update"
+msgstr "Α&φαίρεση κενών φακέλων κατά την ενημέρωση"
+
+#: cervisiapart.cpp:577
+#, kde-format
+msgid "Determines whether updates remove empty folders"
+msgstr "Καθορίζει αν οι ενημερώσεις αφαιρούν τους κενούς φακέλους ή όχι"
+
+#: cervisiapart.cpp:581
+#, kde-format
+msgid "&Update Recursively"
+msgstr "Ενη&μέρωση αναδρομικά"
+
+#: cervisiapart.cpp:584
+#, kde-format
+msgid "Determines whether updates are recursive"
+msgstr "Καθορίζει αν οι ενημερώσεις γίνονται αναδρομικά"
+
+#: cervisiapart.cpp:588
+#, kde-format
+msgid "C&ommit && Remove Recursively"
+msgstr "&Καταχώρηση && αφαίρεση αναδρομικά"
+
+#: cervisiapart.cpp:591
+#, kde-format
+msgid "Determines whether commits and removes are recursive"
+msgstr "Καθορίζει αν οι καταχωρήσεις και οι αφαιρέσεις είναι αναδρομικές"
+
+#: cervisiapart.cpp:595
+#, kde-format
+msgid "Do cvs &edit Automatically When Necessary"
+msgstr "Εκτέλεση &επεξεργασίας cvs αυτόματα όταν απαιτείται"
+
+#: cervisiapart.cpp:598
+#, kde-format
+msgid "Determines whether automatic cvs editing is active"
+msgstr "Καθορίζει αν η αυτόματη επεξεργασία cvs είναι ενεργή"
+
+#: cervisiapart.cpp:602
+#, kde-format
+msgid "Configure Cervisia..."
+msgstr "Ρύθμιση του Cervisia..."
+
+#: cervisiapart.cpp:605
+#, kde-format
+msgid "Allows you to configure the Cervisia KPart"
+msgstr "Επιτρέπει τη ρύθμιση του KPart Cervisia"
+
+#: cervisiapart.cpp:613
+#, kde-format
+msgid "CVS &Manual"
+msgstr "Εγ&χειρίδιο CVS"
+
+#: cervisiapart.cpp:616
+#, kde-format
+msgid "Opens the help browser with the CVS documentation"
+msgstr "Ανοίγει την περιήγηση βοήθειας στην τεκμηρίωση CVS"
+
+#: cervisiapart.cpp:623
+#, kde-format
+msgid "Unfold Folder"
+msgstr "Ξετύλιγμα φακέλου"
+
+#: cervisiapart.cpp:715
+#, kde-format
+msgid "Cervisia Part"
+msgstr "Τμήμα Cervisia"
+
+#: cervisiapart.cpp:717 main.cpp:140
+#, kde-format
+msgid "A CVS frontend"
+msgstr "Ένα πρόγραμμα διασύνδεσης CVS"
+
+#: cervisiapart.cpp:719 main.cpp:142
+#, kde-format
+msgid ""
+"Copyright (c) 1999-2002 Bernd Gehrmann\n"
+"Copyright (c) 2002-2008 the Cervisia authors"
+msgstr ""
+"Πνευματικά δικαιώματα (c) 1999-2002 Bernd Gehrmann\n"
+"Πνευματικά δικαιώματα (c) 2002-2008 οι συγγραφείς του Cervisia"
+
+#: cervisiapart.cpp:724 main.cpp:147
+#, kde-format
+msgid "Bernd Gehrmann"
+msgstr "Bernd Gehrmann"
+
+#: cervisiapart.cpp:725 main.cpp:148
+#, kde-format
+msgid "Original author and former maintainer"
+msgstr "Αρχικός συγγραφέας και πρώην συντηρητής"
+
+#: cervisiapart.cpp:728 main.cpp:151
+#, kde-format
+msgid "Christian Loose"
+msgstr "Christian Loose"
+
+#: cervisiapart.cpp:728 main.cpp:151
+#, kde-format
+msgid "Maintainer"
+msgstr "Συντηρητής"
+
+#: cervisiapart.cpp:729 main.cpp:152
+#, kde-format
+msgid "André Wöbbeking"
+msgstr "André Wöbbeking"
+
+#: cervisiapart.cpp:729 main.cpp:152
+#, kde-format
+msgid "Developer"
+msgstr "Προγραμματιστής"
+
+#: cervisiapart.cpp:730 main.cpp:153
+#, kde-format
+msgid "Carlos Woelz"
+msgstr "Carlos Woelz"
+
+#: cervisiapart.cpp:730 main.cpp:153
+#, kde-format
+msgid "Documentation"
+msgstr "Τεκμηρίωση"
+
+#: cervisiapart.cpp:732 main.cpp:155
+#, kde-format
+msgid "Richard Moore"
+msgstr "Richard Moore"
+
+#: cervisiapart.cpp:732 main.cpp:155
+#, kde-format
+msgid "Conversion to KPart"
+msgstr "Μετατροπή σε KPart"
+
+#: cervisiapart.cpp:733 main.cpp:156
+#, kde-format
+msgid "Laurent Montel"
+msgstr "Laurent Montel"
+
+#: cervisiapart.cpp:733 main.cpp:156
+#, kde-format
+msgid "Conversion to D-Bus"
+msgstr "Μετατροπή σε D-Bus"
+
+#: cervisiapart.cpp:734 main.cpp:157
+#, kde-format
+msgid "Martin Koller"
+msgstr "Martin Koller"
+
+#: cervisiapart.cpp:734 main.cpp:157
+#, kde-format
+msgid "Port to KDE Frameworks 5"
+msgstr "Μεταφορά στο KDE Framework 5"
+
+#: cervisiapart.cpp:741
+#, kde-format
+msgid "Open Sandbox"
+msgstr "Άνοιγμα τοπικού αντιγράφου"
+
+#: cervisiapart.cpp:791
+#, kde-format
+msgid "CVS Edit"
+msgstr "Επεξεργασία CVS"
+
+#: cervisiapart.cpp:1298 diffdialog.cpp:263 logdialog.cpp:472
+#, kde-format
+msgid "CVS Diff"
+msgstr "Διαφορά CVS"
+
+#: cervisiapart.cpp:1311 diffdialog.cpp:473 logdialog.cpp:485
+#: resolvedialog.cpp:351
+#, kde-format
+msgid "Could not open file for writing."
+msgstr "Αδυναμία ανοίγματος αρχείου για εγγραφή."
+
+#: cervisiapart.cpp:1461
+#, kde-format
+msgid "The revision looks invalid."
+msgstr "Η αναθεώρηση μοιάζει μη έγκυρη."
+
+#: cervisiapart.cpp:1465
+#, kde-format
+msgid "This is the first revision of the branch."
+msgstr "Αυτή είναι η πρώτη αναθεώρηση του κλάδου."
+
+#: cervisiapart.cpp:1575
+#, kde-format
+msgid "Invoking help on CVS"
+msgstr "Κλήση βοήθειας για το CVS"
+
+#: cervisiapart.cpp:1610
+#, kde-format
+msgid "Done"
+msgstr "Έτοιμο"
+
+#: cervisiapart.cpp:1616
+#, kde-format
+msgid "A CVS commit to repository %1 is done"
+msgstr "Μια καταχώρηση CVS στο χώρο αποθήκευσης %1 ολοκληρώθηκε"
+
+#: cervisiapart.cpp:1633
+#, kde-format
+msgid ""
+"This is not a CVS folder.\n"
+"If you did not intend to use Cervisia, you can switch view modes within "
+"Konqueror."
+msgstr ""
+"Αυτός δεν είναι ένας φάκελος CVS.\n"
+"Αν δε σκοπεύετε να χρησιμοποιήσετε το Cervisia, μπορείτε να αλλάξετε "
+"λειτουργία προβολής μέσα από τον Konqueror."
+
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr ""
+"Το χρώμα προσκηνίου που θα χρησιμοποιηθεί για τον τονισμό μιας σύγκρουσης "
+"στην προβολή αρχείου."
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr "Καθυστέρηση (ms) μέχρι να εμφανιστεί ο διάλογος προόδου."
+
+#: cervisiashell.cpp:54
+#, kde-format
+msgid "The Cervisia library could not be loaded."
+msgstr "Η βιβλιοθήκη του Cervisia δεν μπορεί να φορτωθεί."
+
+#: cervisiashell.cpp:86
+#, kde-format
+msgid "Allows you to configure the toolbar"
+msgstr "Σας επιτρέπει να ρυθμίσετε τη γραμμή εργαλείων"
+
+#: cervisiashell.cpp:91
+#, kde-format
+msgid "Allows you to customize the keybindings"
+msgstr "Σας επιτρέπει να ρυθμίσετε τις συντομεύσεις πληκτρολογίου"
+
+#: cervisiashell.cpp:96
+#, kde-format
+msgid "Exits Cervisia"
+msgstr "Τερματίζει το Cervisia"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "&Αρχείο"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, kde-format
+msgid "&Settings"
+msgstr "Ρ&υθμίσεις"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr "&Βοήθεια"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Κύρια γραμμή εργαλείων"
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, kde-format
+msgid "&View"
+msgstr "Π&ροβολή"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, kde-format
+msgid "&Advanced"
+msgstr "Για &προχωρημένους"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, kde-format
+msgid "&Repository"
+msgstr "&Χώρος αποθήκευσης"
+
+#: changelogdialog.cpp:48
+#, kde-format
+msgid "Edit ChangeLog"
+msgstr "Επεξεργασία αρχείου καταγραφής τροποποιήσεων"
+
+#: changelogdialog.cpp:86
+#, kde-format
+msgid "The ChangeLog file could not be written."
+msgstr "Το αρχείο καταγραφής τροποποιήσεων δεν μπορεί να γραφτεί."
+
+#: changelogdialog.cpp:102
+#, kde-format
+msgid "A ChangeLog file does not exist. Create one?"
+msgstr "Ένα αρχείο καταγραφής τροποποιήσεων δεν υπάρχει. Δημιουργία ενός;"
+
+#: changelogdialog.cpp:102
+#, kde-format
+msgid "Create"
+msgstr "Δημιουργία"
+
+#: changelogdialog.cpp:107
+#, kde-format
+msgid "The ChangeLog file could not be read."
+msgstr "Το αρχείο καταγραφής τροποποιήσεων δεν μπορεί να αναγνωσθεί."
+
+#: checkoutdialog.cpp:59 checkoutdialog.cpp:348
+#, kde-format
+msgid "CVS Checkout"
+msgstr "Έλεγχος εξόδου CVS"
+
+#: checkoutdialog.cpp:59
+#, kde-format
+msgid "CVS Import"
+msgstr "Εισαγωγή CVS"
+
+#: checkoutdialog.cpp:94 checkoutdialog.cpp:109
+#, kde-format
+msgid "&Module:"
+msgstr "&Άρθρωμα:"
+
+#: checkoutdialog.cpp:101 checkoutdialog.cpp:116 mergedialog.cpp:65
+#: tagdialog.cpp:71 updatedialog.cpp:66
+#, kde-format
+msgid "Fetch &List"
+msgstr "Ανάκτηση &λίστας"
+
+#: checkoutdialog.cpp:124
+#, kde-format
+msgid "&Branch tag:"
+msgstr "Ετικέτα &κλάδου:"
+
+#: checkoutdialog.cpp:130
+#, kde-format
+msgid "Re&cursive checkout"
+msgstr "Ανα&δρομικός έλεγχος εξόδου"
+
+#: checkoutdialog.cpp:153
+#, kde-format
+msgid "Working &folder:"
+msgstr "&Φάκελος εργασίας:"
+
+#: checkoutdialog.cpp:162
+#, kde-format
+msgid "&Vendor tag:"
+msgstr "Ετικέτα &κατασκευαστή:"
+
+#: checkoutdialog.cpp:170
+#, kde-format
+msgid "&Release tag:"
+msgstr "Ετικέτα κυκ&λοφορίας:"
+
+#: checkoutdialog.cpp:178
+#, kde-format
+msgid "&Ignore files:"
+msgstr "Α&γνόηση αρχείων:"
+
+#: checkoutdialog.cpp:186
+#, kde-format
+msgid "&Comment:"
+msgstr "&Σχόλιο:"
+
+#: checkoutdialog.cpp:190
+#, kde-format
+msgid "Import as &binaries"
+msgstr "Εισαγωγή ως &δυαδικά"
+
+#: checkoutdialog.cpp:193
+#, kde-format
+msgid "Use file's modification time as time of import"
+msgstr "Χρήση του χρόνου τροποποίησης του αρχείου ως χρόνο εισαγωγής"
+
+#: checkoutdialog.cpp:200
+#, kde-format
+msgid "Chec&k out as:"
+msgstr "Έλεγ&χος εξόδου ως:"
+
+#: checkoutdialog.cpp:204
+#, kde-format
+msgid "Ex&port only"
+msgstr "Μόνο ε&ξαγωγή"
+
+#: checkoutdialog.cpp:304
+#, kde-format
+msgid "Please choose an existing working folder."
+msgstr "Παρακαλώ επιλέξτε έναν υπάρχοντα φάκελο εργασίας."
+
+#: checkoutdialog.cpp:308 checkoutdialog.cpp:379
+#, kde-format
+msgid "Please specify a module name."
+msgstr "Παρακαλώ ορίστε ένα όνομα αρθρώματος."
+
+#: checkoutdialog.cpp:314
+#, kde-format
+msgid "Please specify a vendor tag and a release tag."
+msgstr "Παρακαλώ ορίστε μια ετικέτα κατασκευαστή και μια ετικέτα κυκλοφορίας."
+
+#: checkoutdialog.cpp:319
+#, kde-format
+msgid ""
+"Tags must start with a letter and may contain\n"
+"letters, digits and the characters '-' and '_'."
+msgstr ""
+"Οι ετικέτες πρέπει να αρχίζουν με ένα γράμμα και μπορούν να περιέχουν\n"
+"γράμματα, ψηφία, και τους χαρακτήρες '-' και '_'."
+
+#: checkoutdialog.cpp:325
+#, kde-format
+msgid "A branch must be specified for export."
+msgstr "Πρέπει να οριστεί ένας κλάδος για εξαγωγή."
+
+#: checkoutdialog.cpp:374
+#, kde-format
+msgid "Please specify a repository."
+msgstr "Παρακαλώ ορίστε ένα χώρο αποθήκευσης."
+
+#: checkoutdialog.cpp:387
+#, kde-format
+msgid "CVS Remote Log"
+msgstr "Απομακρυσμένη καταγραφή CVS"
+
+#: commitdialog.cpp:67
+#, kde-format
+msgid "CVS Commit"
+msgstr "Καταχώρηση CVS"
+
+#: commitdialog.cpp:84 logdialog.cpp:199
+#, kde-format
+msgid "&Diff"
+msgstr "&Διαφορές"
+
+#: commitdialog.cpp:86
+#, kde-format
+msgid "Commit the following &files:"
+msgstr "Καταχώρηση των παρα&κάτω αρχείων:"
+
+#: commitdialog.cpp:96
+#, kde-format
+msgid "Older &messages:"
+msgstr "Παλαιότερα &μηνύματα:"
+
+#: commitdialog.cpp:106
+#, kde-format
+msgid "&Log message:"
+msgstr "&Μήνυμα καταγραφής:"
+
+#: commitdialog.cpp:115
+#, kde-format
+msgid "Use log message &template"
+msgstr "Χρήση προ&τύπου μηνύματος καταγραφής"
+
+#: commitdialog.cpp:190
+#, kde-format
+msgid "Current"
+msgstr "Τρέχον"
+
+#: cvsinitdialog.cpp:39
+#, kde-format
+msgid "Create New Repository (cvs init)"
+msgstr "Δημιουργία νέου χώρου αποθήκευσης (cvs init)"
+
+#: cvsinitdialog.cpp:51
+#, kde-format
+msgid "Repository folder:"
+msgstr "Φάκελος χώρου αποθήκευσης:"
+
+#: diffdialog.cpp:102
+#, kde-format
+msgid "Synchronize scroll bars"
+msgstr "Συγχρονισμός γραμμών κύλισης"
+
+#: diffdialog.cpp:112 diffdialog.cpp:403
+#, kde-format
+msgid "%1 difference"
+msgid_plural "%1 differences"
+msgstr[0] "%1 διαφορά"
+msgstr[1] "%1 διαφορές"
+
+#: diffdialog.cpp:238
+#, kde-format
+msgid "CVS Diff: %1"
+msgstr "Διαφορές CVS: %1"
+
+#: diffdialog.cpp:239
+#, kde-format
+msgid "Repository:"
+msgstr "Χώρος αποθήκευσης:"
+
+#: diffdialog.cpp:239 diffdialog.cpp:240
+#, kde-format
+msgid "Revision "
+msgstr "Αναθεώρηση "
+
+#: diffdialog.cpp:240
+#, kde-format
+msgid "Working dir:"
+msgstr "Κατάλογος εργασίας:"
+
+#: diffdialog.cpp:401 resolvedialog.cpp:383
+#, kde-format
+msgid "%1 of %2"
+msgstr "%1 από %2"
+
+#: diffview.cpp:255 diffview.cpp:313
+#, kde-format
+msgid "Delete"
+msgstr "Διαγραφή"
+
+#: diffview.cpp:255 diffview.cpp:313
+#, kde-format
+msgid "Insert"
+msgstr "Εισαγωγή"
+
+#: diffview.cpp:255 diffview.cpp:313
+#, kde-format
+msgid "Change"
+msgstr "Αλλαγή"
+
+#: editwithmenu.cpp:46
+#, kde-format
+msgid "Edit With"
+msgstr "Επεξεργασία με"
+
+#: entry_status.cpp:33
+#, kde-format
+msgid "Locally Modified"
+msgstr "Τροποποιήθηκε τοπικά"
+
+#: entry_status.cpp:36
+#, kde-format
+msgid "Locally Added"
+msgstr "Προστέθηκε τοπικά"
+
+#: entry_status.cpp:39
+#, kde-format
+msgid "Locally Removed"
+msgstr "Αφαιρέθηκε τοπικά"
+
+#: entry_status.cpp:42
+#, kde-format
+msgid "Needs Update"
+msgstr "Απαιτείται ενημέρωση"
+
+#: entry_status.cpp:45
+#, kde-format
+msgid "Needs Patch"
+msgstr "Απαιτείται επιδιόρθωση"
+
+#: entry_status.cpp:48
+#, kde-format
+msgid "Needs Merge"
+msgstr "Απαιτείται συγχώνευση"
+
+#: entry_status.cpp:51
+#, kde-format
+msgid "Up to Date"
+msgstr "Ενημερωμένο"
+
+#: entry_status.cpp:54
+#, kde-format
+msgid "Conflict"
+msgstr "Σύγκρουση"
+
+#: entry_status.cpp:57
+#, kde-format
+msgid "Updated"
+msgstr "Ενημερωμένο"
+
+#: entry_status.cpp:60
+#, kde-format
+msgid "Patched"
+msgstr "Επιδιορθωμένο"
+
+#: entry_status.cpp:63
+#, kde-format
+msgid "Removed"
+msgstr "Αφαιρέθηκε"
+
+#: entry_status.cpp:66
+#, kde-format
+msgid "Not in CVS"
+msgstr "Όχι μέσα στο CVS"
+
+#: entry_status.cpp:69
+#, kde-format
+msgid "Unknown"
+msgstr "Άγνωστο"
+
+#: historydialog.cpp:106 historydialog.cpp:343
+#, kde-format
+msgid "Commit, Modified "
+msgstr "Κατά την καταχώρηση, τροποποιήθηκε "
+
+#: historydialog.cpp:106 historydialog.cpp:346
+#, kde-format
+msgid "Commit, Added "
+msgstr "Κατά την καταχώρηση, προστέθηκε "
+
+#: historydialog.cpp:106 historydialog.cpp:349
+#, kde-format
+msgid "Commit, Removed "
+msgstr "Κατά την καταχώρηση, αφαιρέθηκε "
+
+#: historydialog.cpp:111 historydialog.cpp:319
+#, kde-format
+msgid "Checkout "
+msgstr "Έλεγχος εξόδου "
+
+#: historydialog.cpp:116 loginfo.cpp:57
+#, kde-format
+msgid "Tag"
+msgstr "Ετικέτα"
+
+#: historydialog.cpp:138 loglist.cpp:106
+#, kde-format
+msgid "Date"
+msgstr "Ημερομηνία"
+
+#: historydialog.cpp:138
+#, kde-format
+msgid "Event"
+msgstr "Γεγονός"
+
+#: historydialog.cpp:138 loglist.cpp:106
+#, kde-format
+msgid "Author"
+msgstr "Συγγραφέας"
+
+#: historydialog.cpp:138 loglist.cpp:106 updateview.cpp:50
+#, kde-format
+msgid "Revision"
+msgstr "Αναθεώρηση"
+
+#: historydialog.cpp:138 watchersmodel.cpp:84
+#, kde-format
+msgid "File"
+msgstr "Αρχείο"
+
+#: historydialog.cpp:138
+#, kde-format
+msgid "Repo Path"
+msgstr "Διαδρομή χώρου αποθήκευσης"
+
+#: historydialog.cpp:142
+#, kde-format
+msgid "Show c&ommit events"
+msgstr "Εμφάνιση γεγονότων &καταχώρησης"
+
+#: historydialog.cpp:145
+#, kde-format
+msgid "Show ch&eckout events"
+msgstr "Εμφάνιση γεγονότων ελέ&γχου εξόδου"
+
+#: historydialog.cpp:148
+#, kde-format
+msgid "Show &tag events"
+msgstr "Εμφάνιση γεγονότων ε&τικέτας"
+
+#: historydialog.cpp:151
+#, kde-format
+msgid "Show &other events"
+msgstr "Εμφάνιση ά&λλων γεγονότων"
+
+#: historydialog.cpp:154
+#, kde-format
+msgid "Only &user:"
+msgstr "Μόνο ο &χρήστης:"
+
+#: historydialog.cpp:156
+#, kde-format
+msgid "Only &filenames matching:"
+msgstr "Μόνο ο&νόματα αρχείων που ταιριάζουν με:"
+
+#: historydialog.cpp:158
+#, kde-format
+msgid "Only &folders matching:"
+msgstr "Μόνο &φακέλους που ταιριάζουν με:"
+
+#: historydialog.cpp:279 historydialog.cpp:285
+#, kde-format
+msgid "CVS History"
+msgstr "Ιστορικό CVS"
+
+#: historydialog.cpp:322
+#, kde-format
+msgid "Tag "
+msgstr "Ετικέτα "
+
+#: historydialog.cpp:325
+#, kde-format
+msgid "Release "
+msgstr "Κυκλοφορία "
+
+#: historydialog.cpp:328
+#, kde-format
+msgid "Update, Deleted "
+msgstr "Κατά την ενημέρωση, διαγράφηκε "
+
+#: historydialog.cpp:331
+#, kde-format
+msgid "Update, Copied "
+msgstr "Κατά την ενημέρωση, αντιγράφηκε"
+
+#: historydialog.cpp:334
+#, kde-format
+msgid "Update, Merged "
+msgstr "Κατά την ενημέρωση, συγχωνεύτηκε "
+
+#: historydialog.cpp:337
+#, kde-format
+msgid "Update, Conflict "
+msgstr "Κατά την ενημέρωση, συγκρούσεις"
+
+#: historydialog.cpp:340
+#, kde-format
+msgid "Update, Patched "
+msgstr "Κατά την ενημέρωση, διορθώθηκε "
+
+#: historydialog.cpp:352
+#, kde-format
+msgid "Unknown "
+msgstr "Άγνωστο "
+
+#: logdialog.cpp:86
+#, kde-format
+msgid "Search:"
+msgstr "Αναζήτηση:"
+
+#: logdialog.cpp:97
+#, kde-format
+msgid "&Tree"
+msgstr "&Δέντρο"
+
+#: logdialog.cpp:98
+#, kde-format
+msgid "&List"
+msgstr "&Λίστα"
+
+#: logdialog.cpp:99
+#, kde-format
+msgid "CVS &Output"
+msgstr "Έ&ξοδος CVS"
+
+#: logdialog.cpp:106
+#, kde-format
+msgid ""
+"Choose revision A by clicking with the left mouse button,\n"
+"revision B by clicking with the middle mouse button."
+msgstr ""
+"Επιλέξτε την αναθεώρηση A κάνοντας κλικ με το αριστερό κουμπί του "
+"ποντικιού,\n"
+"και την αναθεώρηση B με το μεσαίο πλήκτρο του ποντικιού."
+
+#: logdialog.cpp:133
+#, kde-format
+msgid "Revision A:"
+msgstr "Αναθεώρηση Α:"
+
+#: logdialog.cpp:133
+#, kde-format
+msgid "Revision B:"
+msgstr "Αναθεώρηση Β:"
+
+#: logdialog.cpp:142
+#, kde-format
+msgid "Select by tag:"
+msgstr "Επιλογή με ετικέτα:"
+
+#: logdialog.cpp:150
+#, kde-format
+msgid "Author:"
+msgstr "Συγγραφέας:"
+
+#: logdialog.cpp:158
+#, kde-format
+msgid "Date:"
+msgstr "Ημερομηνία:"
+
+#: logdialog.cpp:166
+#, kde-format
+msgid "Comment/Tags:"
+msgstr "Σχόλιο/Ετικέτες:"
+
+#: logdialog.cpp:198
+#, kde-format
+msgid "&Annotate A"
+msgstr "&Επισήμανση Α"
+
+#: logdialog.cpp:200
+#, kde-format
+msgid "&Find"
+msgstr "&Αναζήτηση"
+
+#: logdialog.cpp:207
+#, kde-format
+msgid ""
+"This revision is used when you click Annotate.\n"
+"It is also used as the first item of a Diff operation."
+msgstr ""
+"Αυτή η αναθεώρηση χρησιμοποιείται όταν κάνετε κλικ στην επισήμανση.\n"
+"Χρησιμοποιείται επίσης ως το πρώτο αντικείμενο σε μια λειτουργία διαφορών."
+
+#: logdialog.cpp:212
+#, kde-format
+msgid "This revision is used as the second item of a Diff operation."
+msgstr ""
+"Αυτή η αναθεώρηση χρησιμοποιείται ως το δεύτερο αντικείμενο μιας λειτουργίας "
+"διαφορών."
+
+#: logdialog.cpp:225
+#, kde-format
+msgid "&View A"
+msgstr "Προβολή Α"
+
+#: logdialog.cpp:226
+#, kde-format
+msgid "Create Patch..."
+msgstr "Δημιουργία επιδιόρθωσης..."
+
+#: logdialog.cpp:269
+#, kde-format
+msgid "CVS Log: %1"
+msgstr "Καταγραφή CVS: %1"
+
+#: logdialog.cpp:275
+#, kde-format
+msgid "CVS Log"
+msgstr "Καταγραφή CVS"
+
+#: logdialog.cpp:402
+#, kde-format
+msgid " (Branchpoint)"
+msgstr " (σημείο κλάδου)"
+
+#: logdialog.cpp:421
+#, kde-format
+msgid "Please select revision A or B first."
+msgstr "Παρακαλώ επιλέξτε την αναθεώρηση Α ή Β πρώτα."
+
+#: logdialog.cpp:442
+#, kde-format
+msgid "View File"
+msgstr "Προβολή αρχείου"
+
+#: logdialog.cpp:457 logdialog.cpp:516
+#, kde-format
+msgid "Please select revision A or revisions A and B first."
+msgstr "Παρακαλώ επιλέξτε την αναθεώρηση Α ή τις αναθεωρήσεις Α και Β πρώτα."
+
+#: loginfo.cpp:51
+#, kde-format
+msgid "Branchpoint"
+msgstr "Σημείο κλάδου"
+
+#: loginfo.cpp:54
+#, kde-format
+msgid "On Branch"
+msgstr "Στον κλάδο"
+
+#: loglist.cpp:106
+#, kde-format
+msgid "Branch"
+msgstr "Κλάδος"
+
+#: loglist.cpp:106
+#, kde-format
+msgid "Comment"
+msgstr "Σχόλιο"
+
+#: loglist.cpp:106
+#, kde-format
+msgid "Tags"
+msgstr "Ετικέτες"
+
+#: logplainview.cpp:46
+#, kde-format
+msgid "revision %1"
+msgstr "αναθεώρηση %1"
+
+#: logplainview.cpp:47
+#, kde-format
+msgid "Select for revision A"
+msgstr "Επιλογή αναθεώρησης Α"
+
+#: logplainview.cpp:48
+#, kde-format
+msgid "Select for revision B"
+msgstr "Επιλογή αναθεώρησης Β"
+
+#: logplainview.cpp:49
+#, kde-format
+msgid "date: %1; author: %2"
+msgstr "ημερομηνία: %1; συγγραφέας: %2"
+
+#: main.cpp:166
+#, kde-format
+msgid "The sandbox to be loaded"
+msgstr "Το τοπικό αντίγραφο για φόρτωση"
+
+#: main.cpp:167
+#, kde-format
+msgid "Show resolve dialog for the given file."
+msgstr "Εμφάνιση του διαλόγου επίλυσης για το αρχείο."
+
+#: main.cpp:168
+#, kde-format
+msgid "Show log dialog for the given file."
+msgstr "Εμφάνιση του διαλόγου καταγραφής για το αρχείο."
+
+#: main.cpp:169
+#, kde-format
+msgid "Show annotation dialog for the given file."
+msgstr "Εμφάνιση διαλόγου σημειώσεων για το αρχείο."
+
+#: mergedialog.cpp:41
+#, kde-format
+msgid "CVS Merge"
+msgstr "Συγχώνευση CVS"
+
+#: mergedialog.cpp:56
+#, kde-format
+msgid "Merge from &branch:"
+msgstr "Συγχώνευση από τον &κλάδο:"
+
+#: mergedialog.cpp:75
+#, kde-format
+msgid "Merge &modifications:"
+msgstr "Συγχώνευση &τροποποιήσεων:"
+
+#: mergedialog.cpp:78
+#, kde-format
+msgid "between tag: "
+msgstr "ανάμεσα στην ετικέτα: "
+
+#: mergedialog.cpp:84
+#, kde-format
+msgid "and tag: "
+msgstr "και την ετικέτα: "
+
+#: mergedialog.cpp:90 updatedialog.cpp:84
+#, kde-format
+msgid "Fetch L&ist"
+msgstr "Ανάκτηση &λίστας"
+
+#: misc.cpp:78
+#, kde-format
+msgid "CVS Status"
+msgstr "Κατάσταση CVS"
+
+#: misc.cpp:197
+#, kde-format
+msgid "Overwrite the file"
+msgstr "Αντικατάσταση του αρχείου"
+
+#: misc.cpp:200
+#, kde-format
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr ""
+"Ένα αρχείο με όνομα \"%1\" υπάρχει ήδη. Σίγουρα επιθυμείτε να αντικατασταθεί;"
+
+#: misc.cpp:201
+#, kde-format
+msgid "Overwrite File?"
+msgstr "Αντικατάσταση αρχείου;"
+
+#: patchoptiondialog.cpp:58
+#, kde-format
+msgid "Context"
+msgstr "Σχετικό"
+
+#: patchoptiondialog.cpp:59
+#, kde-format
+msgid "Normal"
+msgstr "Κανονικό"
+
+#: patchoptiondialog.cpp:60
+#, kde-format
+msgid "Unified"
+msgstr "Ενοποιημένο"
+
+#: patchoptiondialog.cpp:64
+#, kde-format
+msgid "Output Format"
+msgstr "Μορφή εξόδου"
+
+#: patchoptiondialog.cpp:74
+#, kde-format
+msgid "&Number of context lines:"
+msgstr "Α&ριθμός σχετικών γραμμών:"
+
+#: patchoptiondialog.cpp:90
+#, kde-format
+msgid "Ignore added or removed empty lines"
+msgstr "Παράβλεψη κενών γραμμών που προστέθηκαν ή αφαιρέθηκαν"
+
+#: patchoptiondialog.cpp:91
+#, kde-format
+msgid "Ignore changes in the amount of whitespace"
+msgstr "Παράβλεψη των αλλαγών στο πλήθος των κενών"
+
+#: patchoptiondialog.cpp:92
+#, kde-format
+msgid "Ignore all whitespace"
+msgstr "Παράβλεψη όλων των κενών"
+
+#: patchoptiondialog.cpp:93
+#, kde-format
+msgid "Ignore changes in case"
+msgstr "Παράβλεψη αλλαγών μεταξύ πεζών και κεφαλαίων"
+
+#: patchoptiondialog.cpp:100
+#, kde-format
+msgid "Ignore Options"
+msgstr "Επιλογές παράβλεψης"
+
+#: protocolview.cpp:90
+#, kde-format
+msgid "Clear"
+msgstr "Καθαρισμός"
+
+#: protocolview.cpp:127
+#, kde-format
+msgid "[Exited with status %1]\n"
+msgstr "[Τερματίστηκε με κατάσταση %1]\n"
+
+#: protocolview.cpp:129
+#, kde-format
+msgid "[Finished]\n"
+msgstr "[Ολοκληρώθηκε]\n"
+
+#: protocolview.cpp:131
+#, kde-format
+msgid "[Aborted]\n"
+msgstr "[Διακόπηκε]\n"
+
+#: repositorydialog.cpp:138
+#, kde-format
+msgid "Default"
+msgstr "Προκαθορισμένο"
+
+#: repositorydialog.cpp:155
+#, kde-format
+msgid "Logged in"
+msgstr "Συνδέθηκε"
+
+#: repositorydialog.cpp:155
+#, kde-format
+msgid "Not logged in"
+msgstr "Δε συνδέθηκε"
+
+#: repositorydialog.cpp:157
+#, kde-format
+msgid "No login required"
+msgstr "Δεν απαιτείται σύνδεση"
+
+#: repositorydialog.cpp:171
+#, kde-format
+msgid "Configure Access to Repositories"
+msgstr "Ρύθμιση πρόσβασης στους χώρους αποθήκευσης"
+
+#: repositorydialog.cpp:192
+#, kde-format
+msgid "Repository"
+msgstr "Χώρος αποθήκευσης"
+
+#: repositorydialog.cpp:192
+#, kde-format
+msgid "Method"
+msgstr "Μέθοδος"
+
+#: repositorydialog.cpp:192
+#, kde-format
+msgid "Compression"
+msgstr "Συμπίεση"
+
+#: repositorydialog.cpp:192 settingsdialog.cpp:293 updateview.cpp:50
+#, kde-format
+msgid "Status"
+msgstr "Κατάσταση"
+
+#: repositorydialog.cpp:199
+#, kde-format
+msgid "Add..."
+msgstr "Προσθήκη..."
+
+#: repositorydialog.cpp:200
+#, kde-format
+msgid "Modify..."
+msgstr "Τροποποίηση..."
+
+#: repositorydialog.cpp:202
+#, kde-format
+msgid "Login..."
+msgstr "Σύνδεση..."
+
+#: repositorydialog.cpp:203
+#, kde-format
+msgid "Logout"
+msgstr "Αποσύνδεση"
+
+#: repositorydialog.cpp:335
+#, kde-format
+msgid "This repository is already known."
+msgstr "Αυτός ο χώρος αποθήκευσης είναι ήδη γνωστός."
+
+#: repositorydialog.cpp:423
+#, kde-format
+msgid "Login failed."
+msgstr "Η σύνδεση απέτυχε."
+
+#: repositorydialog.cpp:442
+#, kde-format
+msgid "CVS Logout"
+msgstr "Αποσύνδεση CVS"
+
+#: resolvedialog.cpp:135
+#, kde-format
+msgid "Your version (A):"
+msgstr "Η δική σας έκδοση (Α):"
+
+#: resolvedialog.cpp:144
+#, kde-format
+msgid "Other version (B):"
+msgstr "Άλλη έκδοση (Β):"
+
+#: resolvedialog.cpp:156
+#, kde-format
+msgid "Merged version:"
+msgstr "Συγχωνευμένη έκδοση:"
+
+#: resolvedialog.cpp:250
+#, kde-format
+msgid "CVS Resolve: %1"
+msgstr "Επίλυση CVS: %1"
+
+#: resolvedialog.cpp:385
+#, kde-format
+msgid "%1 conflicts"
+msgstr "%1 συγκρούσεις"
+
+#: settingsdialog.cpp:70
+#, kde-format
+msgid "Configure Cervisia"
+msgstr "Ρύθμιση του Cervisia"
+
+#: settingsdialog.cpp:215
+#, kde-format
+msgid "General"
+msgstr "Γενικά"
+
+#: settingsdialog.cpp:220
+#, kde-format
+msgid "&User name for the change log editor:"
+msgstr "Ό&νομα χρήστη για τον επεξεργαστή του αρχείου καταγραφής:"
+
+#: settingsdialog.cpp:228
+#, kde-format
+msgid "&Path to CVS executable, or 'cvs':"
+msgstr "&Διαδρομή στο εκτελέσιμο CVS, ή 'cvs':"
+
+#: settingsdialog.cpp:246
+#, kde-format
+msgid "Diff Viewer"
+msgstr "Προβολέας διαφορών"
+
+#: settingsdialog.cpp:251
+#, kde-format
+msgid "&Number of context lines in diff dialog:"
+msgstr "&Αριθμός των σχετικών γραμμών στο διάλογο διαφορών:"
+
+#: settingsdialog.cpp:259
+#, kde-format
+msgid "Additional &options for cvs diff:"
+msgstr "Πρόσθετες &επιλογές για τις διαφορές cvs:"
+
+#: settingsdialog.cpp:266
+#, kde-format
+msgid "Tab &width in diff dialog:"
+msgstr "Π&λάτος στηλοθέτη στο διάλογο διαφορών:"
+
+#: settingsdialog.cpp:274
+#, kde-format
+msgid "External diff &frontend:"
+msgstr "Εξωτερικό &πρόγραμμα diff:"
+
+#: settingsdialog.cpp:296
+#, kde-format
+msgid ""
+"When opening a sandbox from a &remote repository,\n"
+"start a File->Status command automatically"
+msgstr ""
+"Κατά το άνοιγμα ενός τοπικού αντιγράφου από έναν α&πομακρυσμένο χώρο,\n"
+"εκκίνηση αυτόματα της εντολής Αρχείο->Κατάσταση"
+
+#: settingsdialog.cpp:299
+#, kde-format
+msgid ""
+"When opening a sandbox from a &local repository,\n"
+"start a File->Status command automatically"
+msgstr ""
+"Κατά το άνοιγμα ενός τοπικού αντιγράφου από έναν &τοπικό χώρο,\n"
+"εκκίνηση αυτόματα της εντολής Αρχείο->Κατάσταση"
+
+#: settingsdialog.cpp:316
+#, kde-format
+msgid "Advanced"
+msgstr "Για προχωρημένους"
+
+#: settingsdialog.cpp:335
+#, kde-format
+msgid "Appearance"
+msgstr "Εμφάνιση"
+
+#: settingsdialog.cpp:338
+#, kde-format
+msgid "Fonts"
+msgstr "Γραμματοσειρές"
+
+#: settingsdialog.cpp:341
+#, kde-format
+msgid "Font for &Protocol Window..."
+msgstr "Γραμματοσειρά για το παράθυρο &πρωτοκόλλου..."
+
+#: settingsdialog.cpp:342
+#, kde-format
+msgid "Font for A&nnotate View..."
+msgstr "Γραμματοσειρά για την προβολή &επισημάνσεων..."
+
+#: settingsdialog.cpp:343
+#, kde-format
+msgid "Font for D&iff View..."
+msgstr "Γραμματοσειρά για την προβολή &διαφορών..."
+
+#: settingsdialog.cpp:344
+#, kde-format
+msgid "Font for ChangeLog View..."
+msgstr "Γραμματοσειρά για την προβολή καταγραφής αλλαγών..."
+
+#: settingsdialog.cpp:352
+#, kde-format
+msgid "Colors"
+msgstr "Χρώματα"
+
+#: settingsdialog.cpp:355
+#, kde-format
+msgid "Conflict:"
+msgstr "Σύγκρουση:"
+
+#: settingsdialog.cpp:359
+#, kde-format
+msgid "Diff change:"
+msgstr "Αλλαγή διαφορών:"
+
+#: settingsdialog.cpp:363
+#, kde-format
+msgid "Local change:"
+msgstr "Τοπική αλλαγή:"
+
+#: settingsdialog.cpp:367
+#, kde-format
+msgid "Diff insertion:"
+msgstr "Εισαγωγή διαφορών:"
+
+#: settingsdialog.cpp:371
+#, kde-format
+msgid "Remote change:"
+msgstr "Απομακρυσμένη αλλαγή:"
+
+#: settingsdialog.cpp:375
+#, kde-format
+msgid "Diff deletion:"
+msgstr "Διαγραφή διαφορών:"
+
+#: settingsdialog.cpp:379
+#, kde-format
+msgid "Not in cvs:"
+msgstr "Όχι στο cvs:"
+
+#: settingsdialog.cpp:400
+#, kde-format
+msgid "Split main window &horizontally"
+msgstr "Διαίρεση κύριου παραθύρου &οριζόντια"
+
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr ""
+"&Χρονικό περιθώριο μετά από το οποίο εμφανίζεται ένας διάλογος προόδου (σε "
+"ms):"
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, kde-format
+msgid "Default compression &level:"
+msgstr "Προκαθορισμένο επίπεδο &συμπίεσης:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr "Χρήση ενός ήδη εκτελούμενου ssh-agent ή εκκίνηση μιας νέας διεργασίας"
+
+#: tagdialog.cpp:48
+#, kde-format
+msgid "CVS Delete Tag"
+msgstr "Διαγραφή ετικέτας CVS"
+
+#: tagdialog.cpp:48
+#, kde-format
+msgid "CVS Tag"
+msgstr "Ετικέτα CVS"
+
+#: tagdialog.cpp:67 tagdialog.cpp:86
+#, kde-format
+msgid "&Name of tag:"
+msgstr "Ό&νομα της ετικέτας:"
+
+#: tagdialog.cpp:95
+#, kde-format
+msgid "Create &branch with this tag"
+msgstr "Δημιουργία &κλάδου με αυτή την ετικέτα"
+
+#: tagdialog.cpp:99
+#, kde-format
+msgid "&Force tag creation even if tag already exists"
+msgstr "Ε&ξαναγκασμός δημιουργίας ετικέτας ακόμη και αν η ετικέτα υπάρχει ήδη"
+
+#: tagdialog.cpp:134
+#, kde-format
+msgid "You must define a tag name."
+msgstr "Πρέπει να ορίσετε ένα όνομα ετικέτας."
+
+#: tagdialog.cpp:140
+#, kde-format
+msgid ""
+"Tag must start with a letter and may contain letters, digits and the "
+"characters '-' and '_'."
+msgstr ""
+"H ετικέτα πρέπει να αρχίζει με ένα γράμμα και μπορεί να περιέχει\n"
+"γράμματα, ψηφία, και τους χαρακτήρες '-' και '_'."
+
+#: updatedialog.cpp:42
+#, kde-format
+msgid "CVS Update"
+msgstr "Ενημέρωση CVS"
+
+#: updatedialog.cpp:57
+#, kde-format
+msgid "Update to &branch: "
+msgstr "Ενημέρωση στον &κλάδο: "
+
+#: updatedialog.cpp:76
+#, kde-format
+msgid "Update to &tag: "
+msgstr "Ενημέρωση στην ε&τικέτα: "
+
+#: updatedialog.cpp:94
+#, kde-format
+msgid "Update to &date ('yyyy-mm-dd'):"
+msgstr "Ενημέρωση στην η&μερομηνία ('χχχχ-μμ-ηη'):"
+
+#: updateview.cpp:50
+#, kde-format
+msgid "File Name"
+msgstr "Όνομα αρχείου"
+
+#: updateview.cpp:50
+#, kde-format
+msgid "Tag/Date"
+msgstr "Ετικέτα/Ημερομηνία"
+
+#: updateview.cpp:50
+#, kde-format
+msgid "Timestamp"
+msgstr "Χρονική ένδειξη"
+
+#: watchdialog.cpp:38
+#, kde-format
+msgid "CVS Watch Add"
+msgstr "Προσθήκη παρακολούθησης CVS"
+
+#: watchdialog.cpp:38
+#, kde-format
+msgid "CVS Watch Remove"
+msgstr "Αφαίρεση παρακολούθησης CVS"
+
+#: watchdialog.cpp:51
+#, kde-format
+msgid "Add watches for the following events:"
+msgstr "Προσθήκη παρακολουθήσεων για τα παρακάτω γεγονότα:"
+
+#: watchdialog.cpp:51
+#, kde-format
+msgid "Remove watches for the following events:"
+msgstr "Αφαίρεση παρακολουθήσεων για τα παρακάτω γεγονότα:"
+
+#: watchdialog.cpp:54
+#, kde-format
+msgid "&All"
+msgstr "Ό&λες"
+
+#: watchdialog.cpp:59
+#, kde-format
+msgid "&Only:"
+msgstr "Μό&νο:"
+
+#: watchdialog.cpp:68
+#, kde-format
+msgid "&Commits"
+msgstr "&Καταχωρήσεις"
+
+#: watchdialog.cpp:72
+#, kde-format
+msgid "&Edits"
+msgstr "&Επεξεργασίες"
+
+#: watchdialog.cpp:76
+#, kde-format
+msgid "&Unedits"
+msgstr "&Αναιρέσεις επεξεργασίας"
+
+#: watchersdialog.cpp:68 watchersdialog.cpp:74
+#, kde-format
+msgid "CVS Watchers"
+msgstr "Παρακολουθήσεις CVS"
+
+#: watchersmodel.cpp:86
+#, kde-format
+msgid "Watcher"
+msgstr "Παρακολούθηση"
+
+#: watchersmodel.cpp:88
+#, kde-format
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+#: watchersmodel.cpp:90
+#, kde-format
+msgid "Unedit"
+msgstr "Αναίρεση επεξεργασίας"
+
+#: watchersmodel.cpp:92
+#, kde-format
+msgid "Commit"
+msgstr "Καταχώρηση"
+
+#~ msgid "Invoking help on Cervisia"
+#~ msgstr "Κλήση βοήθειας για το Cervisia"
+
+#~ msgid "&Overwrite"
+#~ msgstr "&Αντικατάσταση"
+
+#~ msgid "Invokes the KDE help system with the Cervisia documentation"
+#~ msgstr "Καλεί το σύστημα βοήθειας του KDE με την τεκμηρίωση Cervisia"
+
+#~ msgid "Opens the bug report dialog"
+#~ msgstr "Ανοίγει το διάλογο αναφοράς σφάλματος"
+
+#~ msgid "Displays the version number and copyright information"
+#~ msgstr ""
+#~ "Εμφανίζει τον αριθμό έκδοσης και πληροφορίες για τα δικαιώματα χρήσης"
+
+#~ msgid "Displays the information about KDE and its version number"
+#~ msgstr "Εμφανίζει πληροφορίες σχετικά με το KDE και τον αριθμό έκδοσής του"
+
+#~ msgid "&Remove"
+#~ msgstr "Α&φαίρεση"
+
+#~ msgctxt "to view something"
+#~ msgid "&View"
+#~ msgstr "Π&ροβολή"

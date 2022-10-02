@@ -1,0 +1,181 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Swedish "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>Cervisia användarhandbok</title>
+<author
+><personname
+> <firstname
+>Burkhard</firstname
+> <surname
+>Lück</surname
+> </personname
+> <email
+>lueck@hube-lueck.de</email
+></author>
+
+<date
+>2016-06-05</date>
+<releaseinfo
+>3.11.0 (Program 16.08)</releaseinfo>
+
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>cervisia</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>cervisia</command
+></refname>
+<refpurpose
+>Ett CVS-gränssnitt av KDE</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>cervisia</command
+> <arg choice="opt"
+><option
+>--resolve <replaceable
+>fil</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+>--log <replaceable
+>fil</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+>--annotate <replaceable
+>fil</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>katalog</replaceable
+></option
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+
+<refsect1>
+<title
+>Beskrivning</title>
+<para
+>Cervisia är ett användarvänligt gränssnitt för versionskontrollsystem. Målet är att stödja CVS och andra program för versionskontroll med ett gemensamt gränssnitt, med funktioner för konfliktupplösning, jämförelse- och historikvisning, status för kopierade arbetsfiler, och stöd för de flesta versionskontrollfunktioner.</para>
+</refsect1>
+
+<refsect1>
+<title
+>Väljare</title>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>--resolve</option
+></term>
+<listitem
+><para
+>Visa upplösningsdialogrutan för den angivna filen.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--log</option
+></term>
+<listitem
+><para
+>Visa loggningsdialogrutan för den angivna filen.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--annotate</option
+> <replaceable
+>fil</replaceable
+></term>
+<listitem
+><para
+>Visa kommentardialogrutan för den angivna filen.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>katalog</replaceable
+></option
+></term>
+<listitem
+><para
+>Arbetskatalogen som ska laddas.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</refsect1>
+
+<refsect1>
+<title
+>Se också</title>
+<simplelist>
+<member
+>Mer detaljerad användardokumentation är tillgänglig med <ulink url="help:/cervisia "
+>help:/cervisia</ulink
+> (skriv antingen in webbadressen i &konqueror;, eller kör  <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/cervisia</parameter
+></userinput
+>).</member>
+<member
+>kf5options(7)</member>
+<member
+>qt5options(7)</member>
+<member
+>cvs(1)</member>
+<member
+>Det finns också ytterligare information tillgänglig på <ulink url="https://www.kde.org/applications/development/cervisia/"
+>Cervisia-sidan</ulink
+>.</member>
+</simplelist>
+</refsect1>
+
+<refsect1>
+<title
+>Upphovsmän</title>
+<para
+>Använd <userinput
+><command
+>cervisia</command
+> <option
+>--author</option
+></userinput
+> i en terminal för att lista Cervisias upphovsmän.</para>
+</refsect1>
+
+</refentry>

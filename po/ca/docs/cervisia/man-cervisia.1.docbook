@@ -1,0 +1,181 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Catalan  "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>Manual d'usuari del Cervisia</title>
+<author
+><personname
+> <firstname
+>Burkhard</firstname
+> <surname
+>Lück</surname
+> </personname
+> <email
+>lueck@hube-lueck.de</email
+></author>
+
+<date
+>5 de juny de 2016</date>
+<releaseinfo
+>3.11.0 (Aplicacions 16.08)</releaseinfo>
+
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>cervisia</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>cervisia</command
+></refname>
+<refpurpose
+>Un frontal de CVS creat per la comunitat KDE</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>cervisia</command
+> <arg choice="opt"
+><option
+>--resolve <replaceable
+>fitxer</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+>--log <replaceable
+>fitxer</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+>--annotate <replaceable
+>fitxer</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>directori</replaceable
+></option
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+
+<refsect1>
+<title
+>Descripció</title>
+<para
+>El Cervisia és un frontal fàcil d'emprar del sistema pel control de versions. El seu objectiu és implementar el CVS i altres programes del sistema de control de versions en una interfície unificada, amb resolució de conflictes, diferències i visualitzadors de l'historial, estat dels fitxers de la còpia de treball, i admet la majoria de les funcions pel control de versions.</para>
+</refsect1>
+
+<refsect1>
+<title
+>Opcions</title>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>--resolve</option
+></term>
+<listitem
+><para
+>Mostra el diàleg de resolució de conflictes per al fitxer indicat.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--log</option
+></term>
+<listitem
+><para
+>Mostra el diàleg del registre per al fitxer indicat.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--annotate</option
+> <replaceable
+>fitxer</replaceable
+></term>
+<listitem
+><para
+>Mostra el diàleg de les anotacions per al fitxer indicat.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>directori</replaceable
+></option
+></term>
+<listitem
+><para
+>L'entorn de proves a carregar.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</refsect1>
+
+<refsect1>
+<title
+>Vegeu també</title>
+<simplelist>
+<member
+>Hi ha disponible documentació d'usuari més detallada des de <ulink url="help:/cervisia "
+>help:/cervisia</ulink
+> (podeu emprar aquest &URL; al &konqueror; o bé executar <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/cervisia</parameter
+></userinput
+>).</member>
+<member
+>kf5options(7)</member>
+<member
+>qt5options(7)</member>
+<member
+>cvs(1)</member>
+<member
+>També hi ha més informació disponible al <ulink url="https://www.kde.org/applications/development/cervisia/"
+>lloc web del Cervisia</ulink
+></member>
+</simplelist>
+</refsect1>
+
+<refsect1>
+<title
+>Autors</title>
+<para
+>Per a una llista dels autors del Cervisia, executeu <userinput
+><command
+>cervisia</command
+> <option
+>--author</option
+></userinput
+> a una finestra de terminal.</para>
+</refsect1>
+
+</refentry>

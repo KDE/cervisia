@@ -1,0 +1,183 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Ukrainian "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>Підручник користувача Cervisia</title>
+<author
+><personname
+><firstname
+>Burkhard</firstname
+><surname
+>Lück</surname
+></personname
+> <email
+>lueck@hube-lueck.de</email
+></author>
+
+<date
+>5 червня 2016 року</date>
+<releaseinfo
+>3.11.0 (Програми 16.08)</releaseinfo>
+
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>cervisia</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>cervisia</command
+></refname>
+<refpurpose
+>Оболонка для CVS</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>cervisia</command
+> <arg choice="opt"
+><option
+>--resolve <replaceable
+>file</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+>--log <replaceable
+>file</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+>--annotate <replaceable
+>file</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>directory</replaceable
+></option
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+
+<refsect1>
+<title
+>Опис</title>
+<para
+>Cervisia — зручна у користуванні оболонка до системи керування версіями. Метою її створення була підтримка CVS та інших систем керування версіями за допомогою універсального інтерфейсу, з можливостями розв’язання конфліктів, інструментами перегляду відмінностей і історії, стану файлів робочої копії та підтримкою більшості функціональних можливостей системи керування версіями/</para>
+</refsect1>
+
+<refsect1>
+<title
+>Параметри</title>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>--resolve</option
+></term>
+<listitem
+><para
+>Показати діалогове вікно рішення для вказаного файла.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--log</option
+></term>
+<listitem
+><para
+>Показати вікно журналу для вказаного файла.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--annotate</option
+> <replaceable
+>файл</replaceable
+></term>
+<listitem
+><para
+>Показати вікно примітки для вказаного файла.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>каталог</replaceable
+></option
+></term>
+<listitem
+><para
+>Пісочниця, яку слід завантажити.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</refsect1>
+
+<refsect1>
+<title
+>Прочитайте також</title>
+<simplelist>
+<member
+>Докладніша документація для користувачів доступна за адресою <ulink url="help:/cervisia"
+>help:/cervisia</ulink
+> (або введіть цю адресу <acronym
+>URL</acronym
+> у поле адреси &konqueror;, або віддайте команду <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/cervisia</parameter
+></userinput
+>).</member>
+<member
+>kf5options(7)</member>
+<member
+>qt5options(7)</member>
+<member
+>cvs(1)</member>
+<member
+>Докладнішу інформацію можна знайти на <ulink url="https://www.kde.org/applications/development/cervisia/"
+>домашній сторінці Cervisia</ulink
+></member>
+</simplelist>
+</refsect1>
+
+<refsect1>
+<title
+>Автори</title>
+<para
+>Щоб переглянути список авторів Cervisia, скористайтеся командою <userinput
+><command
+>cervisia</command
+> <option
+>--author</option
+></userinput
+> у терміналі.</para>
+</refsect1>
+
+</refentry>

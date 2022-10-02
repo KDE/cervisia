@@ -1,0 +1,2135 @@
+# translation of cervisia.po to Khmer
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2008, 2010.
+# Auk Piseth <piseth_dv@khmeros.info>, 2008.
+#  Seng Sutha <Sutha@khmeros.info>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: cervisia\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-14 00:48+0000\n"
+"PO-Revision-Date: 2010-11-30 20:40+0700\n"
+"Last-Translator:  Seng Sutha <Sutha@khmeros.info>\n"
+"Language-Team: Khmer [km] <Support@khmeros.info>\n"
+"Language: km\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: WordForge 0.8 beta1\n"
+"X-Language: km_KH\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "ខឹម សុខែម, ម៉ន ម៉េត, សេង សុត្ថា"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "khoemsokhem@khmeros.info,​​mornmet@khmeros.info,sutha@khmeros.info"
+
+#: addignoremenu.cpp:34
+#, fuzzy, kde-format
+msgid "Add to Ignore List"
+msgstr "បន្ថែម​ទៅកាន់​បញ្ជី​មិន​អើ​ពើ"
+
+#: addignoremenu.cpp:65
+#, fuzzy, kde-format
+msgid "Ignore File"
+msgid_plural "Ignore %1 Files"
+msgstr[0] "មិន​អើពើ​ឯកសារ​ %1 "
+
+#: addignoremenu.cpp:85
+#, kde-format
+msgid "Cannot open file '%1' for writing."
+msgstr "មិនអាចបើក​ឯកសារ​ '%1' សម្រាប់​សរសេរ​បាន​ឡើយ​ ។"
+
+#: addremovedialog.cpp:40
+#, kde-format
+msgid "CVS Add"
+msgstr "បន្ថែម​ CVS "
+
+#: addremovedialog.cpp:40
+#, fuzzy, kde-format
+msgid "CVS Add Binary"
+msgstr "បន្ថែម​ CVS ទ្វេ​ភាគ​"
+
+#: addremovedialog.cpp:40
+#, kde-format
+msgid "CVS Remove"
+msgstr "យក​ CVS ចេញ​"
+
+#: addremovedialog.cpp:59
+#, fuzzy, kde-format
+msgid "Add the following files to the repository:"
+msgstr "បន្ថែម​ឯកសារ​ជា​បន្ត​បន្ទាប់​ទៅកាន់​ឃ្លាំង​ ៖"
+
+#: addremovedialog.cpp:60
+#, fuzzy, kde-format
+msgid "Add the following binary files to the repository:"
+msgstr "បន្ថែម​ឯកសារ​ទ្វេ​ភាគ​ជា​បន្ត​បន្ទាប់​ទៅកាន់​ឃ្លាំង​ ៖​"
+
+#: addremovedialog.cpp:61
+#, fuzzy, kde-format
+msgid "Remove the following files from the repository:"
+msgstr "យក​​ឯកសារ​ចេញ​ជា​បន្តបន្ទាប់​​ពី​ឃ្លាំង​ ៖​"
+
+#: addremovedialog.cpp:73
+#, kde-format
+msgid "This will also remove the files from your local working copy."
+msgstr "វាល​នឹង​យក​ឯកសារ​ចេញ​​ពី​ច្បាប់​ចម្លង​ធ្វើ​ការ​របស់​អ្នក​ ។"
+
+#: addrepositorydialog.cpp:40
+#, kde-format
+msgid "Add Repository"
+msgstr "បន្ថែម​ឃ្លាំ​ង​"
+
+#: addrepositorydialog.cpp:53 checkoutdialog.cpp:86
+#, kde-format
+msgid "&Repository:"
+msgstr "ឃ្លាំង​ ៖​"
+
+#: addrepositorydialog.cpp:67
+#, fuzzy, kde-format
+msgid "Use remote &shell (only for :ext: repositories):"
+msgstr "ប្រើ​សែល​ពី​ចម្ងាយ (សម្រាប់​តែ​ឃ្លាំ​ង​ :ext: ប៉ុណ្ណោះ​) ៖"
+
+#: addrepositorydialog.cpp:76
+#, fuzzy, kde-format
+msgid "Invoke this program on the server side:"
+msgstr "ហៅ​កម្មវិធី​នេះ​លើ​ខាង​ម៉ាស៊ីន​បម្រើ​ ៖"
+
+#: addrepositorydialog.cpp:86
+#, fuzzy, kde-format
+msgid "Use different &compression level:"
+msgstr "ប្រើ​កម្រិត​ការ​បង្ហាប់​ខុស​គ្នា​ ៖​"
+
+#: addrepositorydialog.cpp:94
+#, kde-format
+msgid "Download cvsignore file from server"
+msgstr "ទាញ​យក​ឯកសារ​ cvsignore ពី​ម៉ាស៊ីន​បម្រើ​"
+
+#: addrepositorydialog.cpp:174
+#, kde-format
+msgid "Repository Settings"
+msgstr "ការ​កំណត់​ឃ្លាំង​"
+
+#: annotatecontroller.cpp:75
+#, fuzzy, kde-format
+msgid "CVS Annotate: %1"
+msgstr "ចារ​សេចក្ដី​ពន្យល់​របស់​ CVS ៖ %1"
+
+#: annotatecontroller.cpp:85
+#, fuzzy, kde-format
+msgid "CVS Annotate"
+msgstr "ចារ​សេចក្ដី​ពន្យល់​របស់​ CVS"
+
+#: annotatedialog.cpp:44
+#, kde-format
+msgid "Go to Line..."
+msgstr "ទៅ​កាន់​បន្ទាត់​​...​"
+
+#: annotatedialog.cpp:49
+#, kde-format
+msgid "Find Prev"
+msgstr "រក​មុន​"
+
+#: annotatedialog.cpp:54
+#, kde-format
+msgid "Find Next"
+msgstr "រក​បន្ទាប់​"
+
+#: annotatedialog.cpp:64
+#, kde-format
+msgid "Search"
+msgstr "ស្វែងរក"
+
+#: annotatedialog.cpp:115
+#, kde-format
+msgid "Go to Line"
+msgstr "ទៅកាន់​បន្ទាត់​​"
+
+#: annotatedialog.cpp:115
+#, fuzzy, kde-format
+msgid "Go to line number:"
+msgstr "ទៅកាន់​ចំនួន​បន្ទាត់​"
+
+#: cervisiapart.cpp:111 main.cpp:138
+#, kde-format
+msgid "Cervisia"
+msgstr "Cervisia"
+
+#: cervisiapart.cpp:118
+#, fuzzy, kde-format
+msgid "Starting cvsservice failed with message: "
+msgstr "បាន​បរាជ័យ​ការ​ចាប់​ផ្ដើម​ cvsservice ជាមួយ​សារ​ ៖​"
+
+#: cervisiapart.cpp:148
+#, fuzzy, kde-format
+msgid ""
+"This KPart is non-functional, because the cvs D-Bus service could not be "
+"started."
+msgstr "KPart នេះ​គ្មាន​មុខងារ​ឡើយ​​ ពី​ព្រោះ​សេវា​ cvs D-Bus មិន​ត្រូវ​បាន​ចាប់​ផ្ដើម​ ។"
+
+#: cervisiapart.cpp:186
+#, fuzzy, kde-format
+msgid "Remote CVS working folders are not supported."
+msgstr "មិន​គាំ​ទ្រ​ការ​ដំណើរការ​ថត​ CVS ពី​ចម្ងាយ​ឡើយ​ ។"
+
+#: cervisiapart.cpp:194
+#, fuzzy, kde-format
+msgid ""
+"You cannot change to a different folder while there is a running cvs job."
+msgstr "មិន​អាច​ប្ដូរ​​ទៅ​កាន់​ថត​ខុសគ្នា​ខណៈ​ពេល​កំពុង​​ដំណើរការ​កិច្ចការ​​ cvs ឡើយ​ ។"
+
+#: cervisiapart.cpp:214
+#, fuzzy, kde-format
+msgid ""
+"F - All files are hidden, the tree shows only folders\n"
+"N - All up-to-date files are hidden\n"
+"R - All removed files are hidden"
+msgstr ""
+"F - គ្រប់​ឯកសារ​ដែល​បាន​លាក់​ មែកធាង​បង្ហាញ​តែ​ថត​​\n"
+"N - គ្រប់​ឯកសារ​ទាន់សម័យ ត្រូវ​បាន​លាក់​\n"
+"R - គ្រប់​ឯកសារ​ដែល​បាន​យកចេញ​ត្រូវ​បាន​លាក់​"
+
+#: cervisiapart.cpp:227
+#, fuzzy, kde-format
+msgid "Open Sandbox..."
+msgstr "បើក Sandbox..."
+
+#: cervisiapart.cpp:231
+#, fuzzy, kde-format
+msgid "Opens a CVS working folder in the main window"
+msgstr "បើក​ថត​ដែល​កំពុង​ដំណើរ​ការ​របស់​ CVS ក្នុង​បង្អួច​ចម្បង​"
+
+#: cervisiapart.cpp:235
+#, fuzzy, kde-format
+msgid "Recent Sandboxes"
+msgstr "Sandboxes ថ្មី​"
+
+#: cervisiapart.cpp:239
+#, fuzzy, kde-format
+msgid "&Insert ChangeLog Entry..."
+msgstr "បញ្ចូល​ធាតុ​ ChangeLog ..."
+
+#: cervisiapart.cpp:242
+#, fuzzy, kde-format
+msgid "Inserts a new intro into the file ChangeLog in the toplevel folder"
+msgstr "បញ្ចូល​ intro ថ្មី​ទៅ​ក្នុង​ ChangeLog ឯកសារ​ក្នុង​ថត​កម្រិត​ខ្ពស់​"
+
+#: cervisiapart.cpp:246
+#, kde-format
+msgid "&Update"
+msgstr "ធ្វើបច្ចុប្បន្នភាព​"
+
+#: cervisiapart.cpp:250
+#, fuzzy, kde-format
+msgid "Updates (cvs update) the selected files and folders"
+msgstr "ធ្វើ​បច្ចុប្បន្នភាព​​ (បច្ចុប្បន្នភាព cvs ) ថត​ និង​ឯកសារ​ដែល​បាន​ជ្រើស​"
+
+#: cervisiapart.cpp:254
+#, kde-format
+msgid "&Status"
+msgstr "ស្ថានភាព​"
+
+#: cervisiapart.cpp:258
+#, fuzzy, kde-format
+msgid "Updates the status (cvs -n update) of the selected files and folders"
+msgstr "ធ្វើ​បច្ចុប្បន្ន​ភាព​ស្ថានភាព​ (បច្ចុប្បន្នភាព​ cvs -n ) នៃ​ថត​ និង​ឯកសារ​ដែល​បាន​ជ្រើស​"
+
+#: cervisiapart.cpp:262 resolvedialog.cpp:176
+#, kde-format
+msgid "&Edit"
+msgstr "កែសម្រួល​"
+
+#: cervisiapart.cpp:265
+#, fuzzy, kde-format
+msgid "Opens the marked file for editing"
+msgstr "បើក​ឯកសារ​ដែល​សម្គាល់​ សម្រាប់​ធ្វើ​ការ​កែ​សម្រួល​"
+
+#: cervisiapart.cpp:269
+#, kde-format
+msgid "Reso&lve..."
+msgstr "ដោះស្រាយ​​..."
+
+#: cervisiapart.cpp:272
+#, fuzzy, kde-format
+msgid "Opens the resolve dialog with the selected file"
+msgstr "បើក​ប្រអប់​ដោះ​ស្រាយ​ជាមួយ​ឯកសារ​ដែល​បាន​ជ្រើស​"
+
+#: cervisiapart.cpp:276
+#, kde-format
+msgid "&Commit..."
+msgstr "&Commit..."
+
+#: cervisiapart.cpp:280
+#, fuzzy, kde-format
+msgid "Commits the selected files"
+msgstr "Commits ឯកសារ​ដែល​បាន​ជ្រើស​"
+
+#: cervisiapart.cpp:284
+#, kde-format
+msgid "&Add to Repository..."
+msgstr "បន្ថែម​ទៅកាន់​ឃ្លាំង​..."
+
+#: cervisiapart.cpp:287
+#, kde-format
+msgid "Add"
+msgstr "បន្ថែម​"
+
+#: cervisiapart.cpp:289
+#, fuzzy, kde-format
+msgid "Adds (cvs add) the selected files to the repository"
+msgstr "បន្ថែម​ (បន្ថែម​ cvs ) ឯកសារ​ដែល​បាន​ជ្រើស​ទៅកាន់​ឃ្លាំង​"
+
+#: cervisiapart.cpp:293
+#, kde-format
+msgid "Add &Binary..."
+msgstr "បន្ថែម​ទ្វេភាគ​..."
+
+#: cervisiapart.cpp:296
+#, fuzzy, kde-format
+msgid "Adds (cvs -kb add) the selected files as binaries to the repository"
+msgstr "បន្ថែម​ (បន្ថែម cvs -kb ) ឯកសារ​ដែល​បាន​ជ្រើស​​ទ្វេភាគ​​ទៅ​កាន់​ឃ្លាំង​"
+
+#: cervisiapart.cpp:300
+#, kde-format
+msgid "&Remove From Repository..."
+msgstr "យក​ចេញ​ពី​ឃ្លាំង​..."
+
+#: cervisiapart.cpp:303 repositorydialog.cpp:201
+#, kde-format
+msgid "Remove"
+msgstr "យក​ចេញ​"
+
+#: cervisiapart.cpp:305
+#, fuzzy, kde-format
+msgid "Removes (cvs remove) the selected files from the repository"
+msgstr "យក​ចេញ​ (យក​ចេញ​ cvs ) ឯកសារ​ដែល​បាន​ជ្រើស​ពី​ឃ្លាំង​"
+
+#: cervisiapart.cpp:309
+#, kde-format
+msgid "Rever&t"
+msgstr "ត្រឡប់​ទៅ​ដើម​"
+
+#: cervisiapart.cpp:312
+#, fuzzy, kde-format
+msgid "Reverts (cvs update -C) the selected files (only cvs 1.11)"
+msgstr "ត្រឡប់​ទៅ​ដើម​ (បច្ចុប្បន្នភាព​ cvs ​ -C) ឯកសារ​ដែល​បាន​ជ្រើស​ (​តែ​ cvs 1.11)"
+
+#: cervisiapart.cpp:316
+#, kde-format
+msgid "&Properties"
+msgstr "លក្ខណសម្បត្តិ​"
+
+#: cervisiapart.cpp:323
+#, kde-format
+msgid "Stop"
+msgstr "បញ្ឈប់​"
+
+#: cervisiapart.cpp:328
+#, fuzzy, kde-format
+msgid "Stops any running sub-processes"
+msgstr "បញ្ឈប់​ការ​ដំណើរការ​រង​មួយ​ចំនួន​"
+
+#: cervisiapart.cpp:332
+#, kde-format
+msgid "Browse &Log..."
+msgstr "រកមើល​កំណត់​ហេតុ​..."
+
+#: cervisiapart.cpp:336
+#, fuzzy, kde-format
+msgid "Shows the revision tree of the selected file"
+msgstr "បង្ហាញ​មែក​ធាង​ការ​ពិនិត្យ​ឡើងវិញ​នៃ​ឯកសារ​ដែល​បាន​ជ្រើស​"
+
+#: cervisiapart.cpp:341
+#, kde-format
+msgid "Browse Multi-File Log..."
+msgstr "រកមើល​កំណត់ហេតុ​​​ឯកសារ​ជា​ច្រើន​​...​"
+
+#: cervisiapart.cpp:345
+#, fuzzy, kde-format
+msgid "&Annotate..."
+msgstr "កត់ហេតុ​​..."
+
+#: cervisiapart.cpp:349
+#, fuzzy, kde-format
+msgid "Shows a blame-annotated view of the selected file"
+msgstr "បង្ហាញ​ទិដ្ឋភាព​​កត់ហេតុ​រិះគន់​នៃ​ឯកសារ​ដែល​បាន​ជ្រើស​"
+
+#: cervisiapart.cpp:353
+#, kde-format
+msgid "&Difference to Repository (BASE)..."
+msgstr "ទៅកាន់​ឃ្លាំង​​ផ្សេង​គ្នា​​ (BASE)..."
+
+#: cervisiapart.cpp:357
+#, fuzzy, kde-format
+msgid ""
+"Shows the differences of the selected file to the checked out version (tag "
+"BASE)"
+msgstr "បង្ហាញ​ភាព​ខុសគ្នា​នៃ​ឯកសារ​ដែល​បាន​ជ្រើស​​ ដើម្បី​បង្ហាញ​ថា​កំណែ​ត្រឹមត្រូវ​​ (ស្លាក​ BASE)"
+
+#: cervisiapart.cpp:361
+#, kde-format
+msgid "Difference to Repository (HEAD)..."
+msgstr "ទៅកាន់​ឃ្លាំ​ង​ផ្សេង​គ្នា​ (HEAD)..."
+
+#: cervisiapart.cpp:365
+#, fuzzy, kde-format
+msgid ""
+"Shows the differences of the selected file to the newest version in the "
+"repository (tag HEAD)"
+msgstr "បង្ហាញ​ភាព​ខុសគ្នា​នៃ​ឯកសារ​ដែល​បាន​ជ្រើស​ ទៅកាន់​កំណែ​​ថ្មី​បំផុត​​ក្នុង​ឃ្លាំង​ (ស្លាក HEAD)"
+
+#: cervisiapart.cpp:369
+#, kde-format
+msgid "Last &Change..."
+msgstr "ប្ដូរ​ចុងក្រោយ​..."
+
+#: cervisiapart.cpp:372
+#, fuzzy, kde-format
+msgid ""
+"Shows the differences between the last two revisions of the selected file"
+msgstr "បង្ហាញ​ភាព​ខុសគ្នា​​រវាង​កំណែ​ពីរ​​ចុងក្រោយ​នៃ​ឯកសារ​ដែល​បាន​ជ្រើស​"
+
+#: cervisiapart.cpp:376
+#, kde-format
+msgid "&History..."
+msgstr "ប្រវត្តិ...​"
+
+#: cervisiapart.cpp:379
+#, fuzzy, kde-format
+msgid "Shows the CVS history as reported by the server"
+msgstr "បង្ហាញ​ប្រវត្តិ​របស់​ CVS ដូច​ដែល​រាយការណ៍​តាម​ម៉ាស៊ីន​បម្រើ​"
+
+#: cervisiapart.cpp:383
+#, fuzzy, kde-format
+msgid "&Unfold File Tree"
+msgstr "​មែក​ធាង​ឯកសារ​លាតត្រដាង​​"
+
+#: cervisiapart.cpp:387
+#, fuzzy, kde-format
+msgid "Opens all branches of the file tree"
+msgstr "បើក​គ្រប់​សាខា​នៃ​មែកធាង​របស់​ឯកសារ​"
+
+#: cervisiapart.cpp:391
+#, fuzzy, kde-format
+msgid "&Fold File Tree"
+msgstr "មែក​ធាង​ឯកសារ​មិន​លាត​ត្រដាង​"
+
+#: cervisiapart.cpp:394
+#, fuzzy, kde-format
+msgid "Closes all branches of the file tree"
+msgstr "បិទ​គ្រប់​សាខា​​នៃ​មែកធាង​របស់​ឯកសារ​"
+
+#: cervisiapart.cpp:401
+#, kde-format
+msgid "&Tag/Branch..."
+msgstr "ស្លាក/​សាខា..."
+
+#: cervisiapart.cpp:404
+#, kde-format
+msgid "Creates a tag or branch for the selected files"
+msgstr "បង្កើត​ស្លាក​ ឬ​​សាខា​ សម្រាប់​ឯកសារ​ដែល​បាន​ជ្រើស​"
+
+#: cervisiapart.cpp:408
+#, kde-format
+msgid "&Delete Tag..."
+msgstr "លុប​ស្លា​ក​..."
+
+#: cervisiapart.cpp:411
+#, kde-format
+msgid "Deletes a tag from the selected files"
+msgstr "លុប​ស្លាក​ចេញ​ពី​ឯកសារ​ដែល​បាន​ជ្រើស​"
+
+#: cervisiapart.cpp:415
+#, kde-format
+msgid "&Update to Tag/Date..."
+msgstr "ធ្វើ​បច្ចុប្បន្នភាព​ ស្លាក​/​កាលបរិច្ឆេទ​..."
+
+#: cervisiapart.cpp:418
+#, kde-format
+msgid "Updates the selected files to a given tag, branch or date"
+msgstr "ធ្វើ​បច្ចុប្បន្នភាព​ឯកសារ​ដែល​បាន​ជ្រើស​​ទៅ​កាន់​ស្លាក​ដែល​បាន​ផ្ដល់​ ​សាខា ឬ​កាលបរិច្ឆេទ​"
+
+#: cervisiapart.cpp:422
+#, kde-format
+msgid "Update to &HEAD"
+msgstr "ធ្វើ​បច្ចុប្បន្នភាព​ទៅកាន់​​ &HEAD"
+
+#: cervisiapart.cpp:425
+#, fuzzy, kde-format
+msgid "Updates the selected files to the HEAD revision"
+msgstr "ធ្វើ​បច្ចុប្បន្នភាព​ឯកសារ​ដែល​​បាន​ជ្រើស​​ទៅកាន់​កំណែ​របស់​ HEAD "
+
+#: cervisiapart.cpp:429
+#, kde-format
+msgid "&Merge..."
+msgstr "បញ្ចូល​ចូល​គ្នា​..."
+
+#: cervisiapart.cpp:432
+#, fuzzy, kde-format
+msgid "Merges a branch or a set of modifications into the selected files"
+msgstr "បញ្ចូល​សាខា​​ចូល​គ្នា​ ឬ​​កំណត់​នៃ​ការ​កែប្រែ​ក្នុង​​ឯកសារ​ដែល​បាន​ជ្រើស​"
+
+#: cervisiapart.cpp:436
+#, kde-format
+msgid "&Add Watch..."
+msgstr "​ឃ្លាំ​មើល​បន្ថែម​​..."
+
+#: cervisiapart.cpp:439
+#, kde-format
+msgid "Adds a watch for the selected files"
+msgstr "ឃ្លាំ​មើល​បន្ថែម​​ សម្រាប់​ឯកសារ​ដែល​​​បាន​ជ្រើស​"
+
+#: cervisiapart.cpp:443
+#, kde-format
+msgid "&Remove Watch..."
+msgstr "យក​ឃ្លាំ​មើល​ចេញ​​..."
+
+#: cervisiapart.cpp:446
+#, kde-format
+msgid "Removes a watch from the selected files"
+msgstr "យក​ឃ្លាំ​មើល​ចេញ​ពី​ឯកសារ​ដែល​បាន​ជ្រើស​"
+
+#: cervisiapart.cpp:450
+#, kde-format
+msgid "Show &Watchers"
+msgstr "បង្ហាញ​កម្មវិធី​ឃ្លាំ​មើល​"
+
+#: cervisiapart.cpp:453
+#, kde-format
+msgid "Shows the watchers of the selected files"
+msgstr "បង្ហាញ​កម្មវិធី​ឃ្លាំ​មើល​នៃ​ឯកសារ​ដែល​បាន​ជ្រើស​"
+
+#: cervisiapart.cpp:457
+#, kde-format
+msgid "Ed&it Files"
+msgstr "កែសម្រួល​ឯកសារ​"
+
+#: cervisiapart.cpp:460
+#, kde-format
+msgid "Edits (cvs edit) the selected files"
+msgstr "កែសម្រួល​ (កែសម្រួល cvs ) ឯកសារ​ដែល​បាន​ជ្រើស​"
+
+#: cervisiapart.cpp:464
+#, kde-format
+msgid "U&nedit Files"
+msgstr "គ្មាន​ឯកសារ​កែសម្រួល​"
+
+#: cervisiapart.cpp:467
+#, kde-format
+msgid "Unedits (cvs unedit) the selected files"
+msgstr "គ្មាន​កែសម្រួល​ (គ្មាន​កែ​សម្រួល​ cvs ) ឯកសារ​ដែល​បាន​ជ្រើស​"
+
+#: cervisiapart.cpp:471
+#, kde-format
+msgid "Show &Editors"
+msgstr "បង្ហាញ​កម្ម​វិធី​កែ​សម្រួល​"
+
+#: cervisiapart.cpp:474
+#, fuzzy, kde-format
+msgid "Shows the editors of the selected files"
+msgstr "បង្ហាញ​កម្មវិធី​កែសម្រួល​នៃ​ឯកសារ​ដែល​បាន​ជ្រើស​"
+
+#: cervisiapart.cpp:478
+#, kde-format
+msgid "&Lock Files"
+msgstr "ឯកសារ​ជាប់​​សោ​"
+
+#: cervisiapart.cpp:481
+#, fuzzy, kde-format
+msgid "Locks the selected files, so that others cannot modify them"
+msgstr "ឯកសារ​ដែល​បាន​ជ្រើស​ជាប់​សោ​ ដូច្នេះ​ឯកសារ​ផ្សេង​ទៀត​មិន​អាច​កែ​ប្រែ​វា​​បាន​ឡើយ​ "
+
+#: cervisiapart.cpp:485
+#, kde-format
+msgid "Unl&ock Files"
+msgstr "ឯកសារ​មិន​ជាប់​សោ"
+
+#: cervisiapart.cpp:488
+#, kde-format
+msgid "Unlocks the selected files"
+msgstr "ឯកសារ​ដែល​បាន​ជ្រើស​មិន​ជាប់​សោ​"
+
+#: cervisiapart.cpp:492
+#, fuzzy, kde-format
+msgid "Create &Patch Against Repository..."
+msgstr "បង្កើត​ឃ្លាំង​ប្រឆាំង​នឹង​បំណះ​​..."
+
+#: cervisiapart.cpp:495
+#, kde-format
+msgid "Creates a patch from the modifications in your sandbox"
+msgstr "បង្កើត​បំណះ​ពី​ការ​កែប្រែ​ក្នុង​​ sandbox របស់​អ្នក​"
+
+#: cervisiapart.cpp:502
+#, kde-format
+msgid "&Create..."
+msgstr "បង្កើត​..."
+
+#: cervisiapart.cpp:506
+#, fuzzy, kde-format
+msgid "&Checkout..."
+msgstr "បង្ហាញ​​​ត្រឹមត្រូវ​..."
+
+#: cervisiapart.cpp:509
+#, fuzzy, kde-format
+msgid "Allows you to checkout a module from a repository"
+msgstr "អនុញ្ញាត​ឲ្យ​អ្នកបង្ហាញ​ម៉ូឌុល​ត្រឹមត្រូវ​​ចេញ​ពី​ឃ្លាំង​"
+
+#: cervisiapart.cpp:513
+#, kde-format
+msgid "&Import..."
+msgstr "នាំចូល...​"
+
+#: cervisiapart.cpp:516
+#, kde-format
+msgid "Allows you to import a module into a repository"
+msgstr "អនុញ្ញាត​ឲ្យ​អ្នក​នាំចូល​ម៉ូឌុលទៅ​​ក្នុង​ឃ្លាំង​"
+
+#: cervisiapart.cpp:520
+#, kde-format
+msgid "&Repositories..."
+msgstr "ឃ្លាំង​..."
+
+#: cervisiapart.cpp:523
+#, fuzzy, kde-format
+msgid "Configures a list of repositories you regularly use"
+msgstr "កំណត់​រចនាសម្ព័ន្ធ​បញ្ជី​របស់​ឃ្លាំង​ដែល​​អ្នក​ប្រើ​យ៉ាង​ទៀត​ទាត់​"
+
+#: cervisiapart.cpp:530
+#, kde-format
+msgid "Hide All &Files"
+msgstr "លាក់​គ្រប់​ឯកសារ​"
+
+#: cervisiapart.cpp:533
+#, fuzzy, kde-format
+msgid "Determines whether only folders are shown"
+msgstr "កំណត់​​​ថា​តើ​ថត​​តែ​ប៉ុណ្ណោះ​ត្រូវ​បាន​បង្ហាញ​"
+
+#: cervisiapart.cpp:537
+#, kde-format
+msgid "Hide Unmodified Files"
+msgstr "លាក់​ឯកសារ​ដែល​មិនបាន​កែប្រែ​"
+
+#: cervisiapart.cpp:541
+#, fuzzy, kde-format
+msgid "Determines whether files with status up-to-date or unknown are hidden"
+msgstr "កំណត់​ថា​តើ​ឯកសារ​ជាមួយ​ស្ថានភាព​ទាន់សម័យ​ ឬ​មិន​ស្គាល់​ត្រូវ​បាន​លាក់​"
+
+#: cervisiapart.cpp:546
+#, kde-format
+msgid "Hide Removed Files"
+msgstr "លាក់​យក​ឯកសារ​ចេញ"
+
+#: cervisiapart.cpp:549
+#, fuzzy, kde-format
+msgid "Determines whether removed files are hidden"
+msgstr "កំណត់​ថា​តើ​ឯកសារ​ដែល​បាន​យក​ចេញ​ត្រូវ​បាន​លាក់​"
+
+#: cervisiapart.cpp:553
+#, fuzzy, kde-format
+msgid "Hide Non-CVS Files"
+msgstr "លាក់​ឯកសារ​គ្មាន​ -CVS "
+
+#: cervisiapart.cpp:556
+#, fuzzy, kde-format
+msgid "Determines whether files not in CVS are hidden"
+msgstr "កំណត់​ថា​តើ​ឯកសារ​គ្មាន​នៅ​ក្នុង​ CVS ត្រូវ​បាន​លាក់​"
+
+#: cervisiapart.cpp:560
+#, kde-format
+msgid "Hide Empty Folders"
+msgstr "លាក់​ថត​ទទេ​"
+
+#: cervisiapart.cpp:563
+#, fuzzy, kde-format
+msgid "Determines whether folders without visible entries are hidden"
+msgstr "កំណត់​ថា​តើ​​ធាតុ​ដែល​អាច​មើល​ឃើញ​ថត​ខាង​ក្រៅ​ត្រូវ​បាន​លាក់​"
+
+#: cervisiapart.cpp:567
+#, kde-format
+msgid "Create &Folders on Update"
+msgstr "បង្កើត​ថត​នៅ​ពេល​ធ្វើ​​បច្ចុប្បន្នភាព​"
+
+#: cervisiapart.cpp:570
+#, fuzzy, kde-format
+msgid "Determines whether updates create folders"
+msgstr "កំណត់​ថា​តើ​ធ្វើ​បច្ចុប្បន្នភាព​បង្កើត​ថត​"
+
+#: cervisiapart.cpp:574
+#, kde-format
+msgid "&Prune Empty Folders on Update"
+msgstr "កាត់​ថត​ទទេ​ចេញ​ពេល​ធ្វើ​បច្ចុប្បន្នភាព​"
+
+#: cervisiapart.cpp:577
+#, fuzzy, kde-format
+msgid "Determines whether updates remove empty folders"
+msgstr "កំណត់​ថា​តើ​ធ្វើ​បច្ចុប្បន្នភាព​យក​ថត​ទទេ​ចេញ​"
+
+#: cervisiapart.cpp:581
+#, fuzzy, kde-format
+msgid "&Update Recursively"
+msgstr "ធ្វើ​បច្ចុប្បន្នភាព​ដោយ​សរសេរ​ជាប់​គ្នា​ឡើងវិញ​"
+
+#: cervisiapart.cpp:584
+#, fuzzy, kde-format
+msgid "Determines whether updates are recursive"
+msgstr "កំណត់​ថា​តើ​ធ្វើ​បច្ចុប្បន្ន​គឺ​សរសេរ​ជាប់​គ្នា​ឡើងវិញ​"
+
+#: cervisiapart.cpp:588
+#, fuzzy, kde-format
+msgid "C&ommit && Remove Recursively"
+msgstr "យក &ommit ចេញ​ដែល​​សរសេរ​ជាប់​​គ្នា​ឡើង​វិញ​"
+
+#: cervisiapart.cpp:591
+#, fuzzy, kde-format
+msgid "Determines whether commits and removes are recursive"
+msgstr "កំណត់​ថា​តើ​ commits និង​យក​ចេញ​ដែល​សរសេរ​ជាប់​គ្នា​"
+
+#: cervisiapart.cpp:595
+#, kde-format
+msgid "Do cvs &edit Automatically When Necessary"
+msgstr "កែសម្រួល​ cvs ដោយ​ស្វ័យ​ប្រវត្តិ​ នៅ​ពេល​ចាំបាច់​"
+
+#: cervisiapart.cpp:598
+#, fuzzy, kde-format
+msgid "Determines whether automatic cvs editing is active"
+msgstr "កំណត់​ថា​តើ​ការ​កែសម្រួល​ cvs ស្វ័យ​ប្រវត្តិ​​សកម្ម​"
+
+#: cervisiapart.cpp:602
+#, kde-format
+msgid "Configure Cervisia..."
+msgstr "កំណត់​រចនាសម្ព័ន្ធ​ Cervisia..."
+
+#: cervisiapart.cpp:605
+#, fuzzy, kde-format
+msgid "Allows you to configure the Cervisia KPart"
+msgstr "អនុញ្ញាត​ឲ្យ​កំណត់​រចនាសម្ព័ន្ធ​ Cervisia KPart"
+
+#: cervisiapart.cpp:613
+#, kde-format
+msgid "CVS &Manual"
+msgstr "សៀវភៅ​ដៃ​ CVS "
+
+#: cervisiapart.cpp:616
+#, kde-format
+msgid "Opens the help browser with the CVS documentation"
+msgstr "បើក​កម្មវិធី​រុករក​ជំនួយ​ជាមួយ​ឯកសារ​ CVS "
+
+#: cervisiapart.cpp:623
+#, fuzzy, kde-format
+msgid "Unfold Folder"
+msgstr "ថត​លាតត្រដាង​"
+
+#: cervisiapart.cpp:715
+#, kde-format
+msgid "Cervisia Part"
+msgstr "ផ្នែក​របស់​​ Cervisia"
+
+#: cervisiapart.cpp:717 main.cpp:140
+#, kde-format
+msgid "A CVS frontend"
+msgstr "ផ្នែក​ខាង​មុខ​របស់​ CVS "
+
+#: cervisiapart.cpp:719 main.cpp:142
+#, kde-format
+msgid ""
+"Copyright (c) 1999-2002 Bernd Gehrmann\n"
+"Copyright (c) 2002-2008 the Cervisia authors"
+msgstr ""
+"រក្សាសិទ្ធិ​ឆ្នាំ​ ១៩៩៩-២០០២ ដោយ​ Bernd Gehrmann\n"
+"រក្សាសិទ្ធិ​ឆ្នាំ​ ២០០២-២០០៨ ដោយ​អ្នកនិពន្ធ​របស់​ Cervisia "
+
+#: cervisiapart.cpp:724 main.cpp:147
+#, kde-format
+msgid "Bernd Gehrmann"
+msgstr "Bernd Gehrmann"
+
+#: cervisiapart.cpp:725 main.cpp:148
+#, fuzzy, kde-format
+msgid "Original author and former maintainer"
+msgstr "អ្នក​និពន្ធ​ដើម​ និង​អ្នក​ថែទាំ​មុន"
+
+#: cervisiapart.cpp:728 main.cpp:151
+#, kde-format
+msgid "Christian Loose"
+msgstr "Christian Loose"
+
+#: cervisiapart.cpp:728 main.cpp:151
+#, kde-format
+msgid "Maintainer"
+msgstr "អ្នក​ថែទាំ​"
+
+#: cervisiapart.cpp:729 main.cpp:152
+#, kde-format
+msgid "André Wöbbeking"
+msgstr "André Wöbbeking"
+
+#: cervisiapart.cpp:729 main.cpp:152
+#, kde-format
+msgid "Developer"
+msgstr "អ្នក​អភិវឌ្ឍន៍​"
+
+#: cervisiapart.cpp:730 main.cpp:153
+#, kde-format
+msgid "Carlos Woelz"
+msgstr "Carlos Woelz"
+
+#: cervisiapart.cpp:730 main.cpp:153
+#, kde-format
+msgid "Documentation"
+msgstr "ឯកសារ​"
+
+#: cervisiapart.cpp:732 main.cpp:155
+#, fuzzy, kde-format
+msgid "Richard Moore"
+msgstr "Richard Moore"
+
+#: cervisiapart.cpp:732 main.cpp:155
+#, kde-format
+msgid "Conversion to KPart"
+msgstr "ការ​បម្លែង​ទៅកាន់​ KPart"
+
+#: cervisiapart.cpp:733 main.cpp:156
+#, kde-format
+msgid "Laurent Montel"
+msgstr "Laurent Montel"
+
+#: cervisiapart.cpp:733 main.cpp:156
+#, kde-format
+msgid "Conversion to D-Bus"
+msgstr "ការ​បម្លែង​ទៅកាន់​ D-Bus"
+
+#: cervisiapart.cpp:734 main.cpp:157
+#, kde-format
+msgid "Martin Koller"
+msgstr ""
+
+#: cervisiapart.cpp:734 main.cpp:157
+#, kde-format
+msgid "Port to KDE Frameworks 5"
+msgstr ""
+
+#: cervisiapart.cpp:741
+#, kde-format
+msgid "Open Sandbox"
+msgstr "បើក​ Sandbox"
+
+#: cervisiapart.cpp:791
+#, kde-format
+msgid "CVS Edit"
+msgstr "កែសម្រួល​ CVS "
+
+#: cervisiapart.cpp:1298 diffdialog.cpp:263 logdialog.cpp:472
+#, kde-format
+msgid "CVS Diff"
+msgstr "CVS Diff"
+
+#: cervisiapart.cpp:1311 diffdialog.cpp:473 logdialog.cpp:485
+#: resolvedialog.cpp:351
+#, kde-format
+msgid "Could not open file for writing."
+msgstr "មិន​អាច​បើក​ឯកសារ​ដើម្បី​សរសេរ​បាន​ឡើយ ។"
+
+#: cervisiapart.cpp:1461
+#, fuzzy, kde-format
+msgid "The revision looks invalid."
+msgstr "មើល​ការ​ពិនិត្យ​ឡើងវិញ​មិន​ត្រឹមត្រូវ​ ។"
+
+#: cervisiapart.cpp:1465
+#, fuzzy, kde-format
+msgid "This is the first revision of the branch."
+msgstr "នេះ​ជា​ការ​ពិនិត្យ​សាខា​ឡើងវិញ​ដំបូង​ ។"
+
+#: cervisiapart.cpp:1575
+#, fuzzy, kde-format
+msgid "Invoking help on CVS"
+msgstr "ការ​ហៅ​ជំនួយ​លើ​​ CVS"
+
+#: cervisiapart.cpp:1610
+#, kde-format
+msgid "Done"
+msgstr "ធ្វើ​រួច​"
+
+#: cervisiapart.cpp:1616
+#, kde-format
+msgid "A CVS commit to repository %1 is done"
+msgstr "A CVS commit ទៅកាន់​ឃ្លាំង​ %1 ត្រូវ​បាន​ធ្វើ​រួច​ហើយ​"
+
+#: cervisiapart.cpp:1633
+#, fuzzy, kde-format
+msgid ""
+"This is not a CVS folder.\n"
+"If you did not intend to use Cervisia, you can switch view modes within "
+"Konqueror."
+msgstr ""
+"នេះ​មិនមែន​ជា​ថត​​របស់​ CVS ។\n"
+"ប្រសិនបើ​ អ្នក​មិន​​បម្រុង​ប្រើ​ Cervisia ទេ​ ​អ្នក​អាច​ប្ដូរ​របៀប​ទិដ្ឋភាព​នៅ​ក្នុង Konqueror ។"
+
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, fuzzy, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr "បាន​ប្រើ​ពណ៌​ផ្ទៃ​ខាងមុខ​ទៅកាន់​ឯកសារ​ផ្នែក​សំខាន់​ប៉ះទង្គិច​ជាមួយ​ទិដ្ឋភាព​ឯកសារ​ ។ "
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, fuzzy, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr "ពន្យារពេល​ (មិល្លី​វិនាទី​) រហូត​ដល់​ប្រអប់​វឌ្ឍនភាព​លេចឡើង​ ។"
+
+#: cervisiashell.cpp:54
+#, fuzzy, kde-format
+msgid "The Cervisia library could not be loaded."
+msgstr "បណ្ណាល័យ​ Cervisia មិន​អាច​ត្រូវ​បា​ផ្ទុក​ឡើយ​ ។"
+
+#: cervisiashell.cpp:86
+#, kde-format
+msgid "Allows you to configure the toolbar"
+msgstr "អនុញ្ញាត​ឲ្យ​អ្នក​កំណត់​រចនាសម្ព័ន្ធ​របារ​ឧបករណ៍​"
+
+#: cervisiashell.cpp:91
+#, fuzzy, kde-format
+msgid "Allows you to customize the keybindings"
+msgstr "អនុញ្ញាត​ឲ្យ​អ្នក​ប្ដូរ keybindings​ តាម​បំណង​"
+
+#: cervisiashell.cpp:96
+#, kde-format
+msgid "Exits Cervisia"
+msgstr "ចេញ​ Cervisia"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "ឯកសារ​"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, kde-format
+msgid "&Settings"
+msgstr "ការ​កំណត់​"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr "ជំនួយ ​"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr "របារ​ឧបករណ៍​មេ​"
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, kde-format
+msgid "&View"
+msgstr "មើល​"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, kde-format
+msgid "&Advanced"
+msgstr "កម្រិត​ខ្ពស់​"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, kde-format
+msgid "&Repository"
+msgstr "ឃ្លាំង​"
+
+#: changelogdialog.cpp:48
+#, kde-format
+msgid "Edit ChangeLog"
+msgstr "កែសម្រួល​ ChangeLog"
+
+#: changelogdialog.cpp:86
+#, kde-format
+msgid "The ChangeLog file could not be written."
+msgstr "ឯកសារ​ ChangeLog មិន​អាច​ត្រូវ​បាន​សរសេរ​ឡើយ​ ។​"
+
+#: changelogdialog.cpp:102
+#, kde-format
+msgid "A ChangeLog file does not exist. Create one?"
+msgstr "គ្មាន​ឯកសារ​ ChangeLog ឡើយ​​ ។ បង្កើត​មួយ​ឬ​ ?"
+
+#: changelogdialog.cpp:102
+#, kde-format
+msgid "Create"
+msgstr "បង្កើត​"
+
+#: changelogdialog.cpp:107
+#, kde-format
+msgid "The ChangeLog file could not be read."
+msgstr "មិន​អាច​អាន​ឯកសារ​ ChangeLog ឡើយ​ ។"
+
+#: checkoutdialog.cpp:59 checkoutdialog.cpp:348
+#, fuzzy, kde-format
+msgid "CVS Checkout"
+msgstr "នាំចេញ CVS "
+
+#: checkoutdialog.cpp:59
+#, fuzzy, kde-format
+msgid "CVS Import"
+msgstr "នាំចូល​ CVS"
+
+#: checkoutdialog.cpp:94 checkoutdialog.cpp:109
+#, kde-format
+msgid "&Module:"
+msgstr "ម៉ូឌុល​ ៖"
+
+#: checkoutdialog.cpp:101 checkoutdialog.cpp:116 mergedialog.cpp:65
+#: tagdialog.cpp:71 updatedialog.cpp:66
+#, kde-format
+msgid "Fetch &List"
+msgstr "ទៅ​ប្រមូល​យក​បញ្ជី​"
+
+#: checkoutdialog.cpp:124
+#, fuzzy, kde-format
+msgid "&Branch tag:"
+msgstr "ស្លាក​សាខា ៖​"
+
+#: checkoutdialog.cpp:130
+#, fuzzy, kde-format
+msgid "Re&cursive checkout"
+msgstr "ពិនិត្យ​មើល​ថត​​ដែល​សរសេរ​ជាន់​គ្នា​ឡើង​វិញ"
+
+#: checkoutdialog.cpp:153
+#, kde-format
+msgid "Working &folder:"
+msgstr "ថត​ដំណើរការ​ ៖​"
+
+#: checkoutdialog.cpp:162
+#, kde-format
+msgid "&Vendor tag:"
+msgstr "ស្លាក​របស់​ក្រុម​ហ៊ុន​លក់​ ៖​"
+
+#: checkoutdialog.cpp:170
+#, kde-format
+msgid "&Release tag:"
+msgstr "ស្លាក​ចេញ​ផ្សាយ​ ៖​"
+
+#: checkoutdialog.cpp:178
+#, kde-format
+msgid "&Ignore files:"
+msgstr "មិន​អើពើ​ឯកសារ​ ៖​"
+
+#: checkoutdialog.cpp:186
+#, kde-format
+msgid "&Comment:"
+msgstr "សេចក្ដី​អធិប្បាយ ៖​"
+
+#: checkoutdialog.cpp:190
+#, kde-format
+msgid "Import as &binaries"
+msgstr "នាំចូល​ទ្វេភាគ​"
+
+#: checkoutdialog.cpp:193
+#, fuzzy, kde-format
+msgid "Use file's modification time as time of import"
+msgstr "ប្រើ​ពេលវេលា​កែប្រែ​​​ឯកសារ​ជា​ពេលវេលា​សម្រាប់​នាំចូល​"
+
+#: checkoutdialog.cpp:200
+#, kde-format
+msgid "Chec&k out as:"
+msgstr "ចេញ​ជា​ ៖"
+
+#: checkoutdialog.cpp:204
+#, kde-format
+msgid "Ex&port only"
+msgstr "នាំចេញ​តែ​"
+
+#: checkoutdialog.cpp:304
+#, fuzzy, kde-format
+msgid "Please choose an existing working folder."
+msgstr "សូម​ជ្រើស​ថត​ដំណើរការ​ដែល​មាន​ស្រាប់​ ។"
+
+#: checkoutdialog.cpp:308 checkoutdialog.cpp:379
+#, kde-format
+msgid "Please specify a module name."
+msgstr "សូម​បញ្ជាក់​ឈ្មោះ​របស់​ម៉ូឌុល​ ។"
+
+#: checkoutdialog.cpp:314
+#, fuzzy, kde-format
+msgid "Please specify a vendor tag and a release tag."
+msgstr "សូម​បញ្ជាក់​ស្លាក​របស់​ក្រុមហ៊ុន​ផ្ដល់​ និង​ស្លាក​ចេញផ្សាយ​ ។ "
+
+#: checkoutdialog.cpp:319
+#, fuzzy, kde-format
+msgid ""
+"Tags must start with a letter and may contain\n"
+"letters, digits and the characters '-' and '_'."
+msgstr ""
+"ស្លាក​​ត្រូវ​តែ​ចាប់​ផ្ដើម​ជាមួយ​អក្សរ​ និង​មាន​ជា​ច្រើន​​\n"
+"អក្សរ​ តួលេខ​ និង​តួ​អក្សរ​​ '-' and '_' ។"
+
+#: checkoutdialog.cpp:325
+#, kde-format
+msgid "A branch must be specified for export."
+msgstr "សាខា​ត្រូវ​តែ​បាន​បញ្ជាក់​សម្រាប់​នាំចេញ​ ។"
+
+#: checkoutdialog.cpp:374
+#, kde-format
+msgid "Please specify a repository."
+msgstr "សូម​បញ្ជាក់​ឃ្លាំង​ ។"
+
+#: checkoutdialog.cpp:387
+#, fuzzy, kde-format
+msgid "CVS Remote Log"
+msgstr "ចុះកំណត់ហេតុ​ CVS ពី​ចម្ងាយ​"
+
+#: commitdialog.cpp:67
+#, kde-format
+msgid "CVS Commit"
+msgstr "CVS Commit"
+
+#: commitdialog.cpp:84 logdialog.cpp:199
+#, kde-format
+msgid "&Diff"
+msgstr "&Diff"
+
+#: commitdialog.cpp:86
+#, fuzzy, kde-format
+msgid "Commit the following &files:"
+msgstr "Commit ឯកសារ​ខាង​ក្រោម​ ៖​"
+
+#: commitdialog.cpp:96
+#, kde-format
+msgid "Older &messages:"
+msgstr "សារ​ចាស់​ជាង​ ៖"
+
+#: commitdialog.cpp:106
+#, fuzzy, kde-format
+msgid "&Log message:"
+msgstr "សារ​កំណត់​ហេតុ​ ៖​"
+
+#: commitdialog.cpp:115
+#, kde-format
+msgid "Use log message &template"
+msgstr "ប្រើ​ពុម្ព​សារ​កំណត់​ហេតុ​​"
+
+#: commitdialog.cpp:190
+#, kde-format
+msgid "Current"
+msgstr "បច្ចុប្បន្ន​"
+
+#: cvsinitdialog.cpp:39
+#, fuzzy, kde-format
+msgid "Create New Repository (cvs init)"
+msgstr "បង្កើត​​ឃ្លាំង​ថ្មី​ (cvs init)"
+
+#: cvsinitdialog.cpp:51
+#, kde-format
+msgid "Repository folder:"
+msgstr "ថត​ឃ្លាំង​ ៖​"
+
+#: diffdialog.cpp:102
+#, kde-format
+msgid "Synchronize scroll bars"
+msgstr "ធ្វើ​សម​កាល​កម្ម​របារ​រមូរ​"
+
+#: diffdialog.cpp:112 diffdialog.cpp:403
+#, kde-format
+msgid "%1 difference"
+msgid_plural "%1 differences"
+msgstr[0] "%1 ខុស​គ្នា​"
+
+#: diffdialog.cpp:238
+#, kde-format
+msgid "CVS Diff: %1"
+msgstr "CVS Diff: %1"
+
+#: diffdialog.cpp:239
+#, kde-format
+msgid "Repository:"
+msgstr "ឃ្លាំង​ ៖​"
+
+#: diffdialog.cpp:239 diffdialog.cpp:240
+#, kde-format
+msgid "Revision "
+msgstr "ការ​ពិនិត្យ​ឡើង​វិញ​"
+
+#: diffdialog.cpp:240
+#, kde-format
+msgid "Working dir:"
+msgstr "ធ្វើ​កិច្ចការ​ dir ៖"
+
+#: diffdialog.cpp:401 resolvedialog.cpp:383
+#, kde-format
+msgid "%1 of %2"
+msgstr "%1 នៃ %2​"
+
+#: diffview.cpp:255 diffview.cpp:313
+#, kde-format
+msgid "Delete"
+msgstr "លុប​"
+
+#: diffview.cpp:255 diffview.cpp:313
+#, kde-format
+msgid "Insert"
+msgstr "បញ្ចូល​​"
+
+#: diffview.cpp:255 diffview.cpp:313
+#, kde-format
+msgid "Change"
+msgstr "ផ្លាស់​ប្ដូរ"
+
+#: editwithmenu.cpp:46
+#, kde-format
+msgid "Edit With"
+msgstr "កែសម្រួល​ជាមួយ​"
+
+#: entry_status.cpp:33
+#, fuzzy, kde-format
+msgid "Locally Modified"
+msgstr "បាន​កែប្រែ​តែមួយ​កន្លែង​"
+
+#: entry_status.cpp:36
+#, fuzzy, kde-format
+msgid "Locally Added"
+msgstr "បាន​បន្ថែម​តែមួយ​កន្លែង​"
+
+#: entry_status.cpp:39
+#, fuzzy, kde-format
+msgid "Locally Removed"
+msgstr "បាន​យក​ចេញ​តែ​មួយ​កន្លែង​"
+
+#: entry_status.cpp:42
+#, kde-format
+msgid "Needs Update"
+msgstr "ធ្វើ​បច្ចុប្បន្នភាព​ដោយ​ចាំបាច់​"
+
+#: entry_status.cpp:45
+#, kde-format
+msgid "Needs Patch"
+msgstr "ប៉ះ​ដោយ​ចាំបាច់​"
+
+#: entry_status.cpp:48
+#, kde-format
+msgid "Needs Merge"
+msgstr "បញ្ចូល​ចូលគ្នា​ដោយ​ចាំបាច់​"
+
+#: entry_status.cpp:51
+#, kde-format
+msgid "Up to Date"
+msgstr "ទាន់​សម័យ​"
+
+#: entry_status.cpp:54
+#, kde-format
+msgid "Conflict"
+msgstr "ការ​ប៉ះទង្គិច​"
+
+#: entry_status.cpp:57
+#, kde-format
+msgid "Updated"
+msgstr "ធ្វើ​បច្ចុប្បន្នភាព​"
+
+#: entry_status.cpp:60
+#, kde-format
+msgid "Patched"
+msgstr "បាន​ប៉ះ​"
+
+#: entry_status.cpp:63
+#, kde-format
+msgid "Removed"
+msgstr "បាន​យកចេញ​"
+
+#: entry_status.cpp:66
+#, kde-format
+msgid "Not in CVS"
+msgstr "គ្មាន​ក្នុង​ CVS"
+
+#: entry_status.cpp:69
+#, kde-format
+msgid "Unknown"
+msgstr "មិន​ស្គាល់​"
+
+#: historydialog.cpp:106 historydialog.cpp:343
+#, kde-format
+msgid "Commit, Modified "
+msgstr "បាន​​កែប្រែ​ Commit"
+
+#: historydialog.cpp:106 historydialog.cpp:346
+#, kde-format
+msgid "Commit, Added "
+msgstr "បាន​បន្ថែម​ Commit"
+
+#: historydialog.cpp:106 historydialog.cpp:349
+#, kde-format
+msgid "Commit, Removed "
+msgstr "បាន​​យក​ចេញ​ Commit"
+
+#: historydialog.cpp:111 historydialog.cpp:319
+#, kde-format
+msgid "Checkout "
+msgstr "ចេញ​"
+
+#: historydialog.cpp:116 loginfo.cpp:57
+#, kde-format
+msgid "Tag"
+msgstr "​ស្លាក​"
+
+#: historydialog.cpp:138 loglist.cpp:106
+#, kde-format
+msgid "Date"
+msgstr "កាលបរិច្ឆេទ​"
+
+#: historydialog.cpp:138
+#, kde-format
+msgid "Event"
+msgstr "ព្រឹត្តិការណ៍​"
+
+#: historydialog.cpp:138 loglist.cpp:106
+#, kde-format
+msgid "Author"
+msgstr "អ្នក​និពន្ធ​"
+
+#: historydialog.cpp:138 loglist.cpp:106 updateview.cpp:50
+#, kde-format
+msgid "Revision"
+msgstr "ការ​ពិនិត្យ​ឡើង​វិញ​"
+
+#: historydialog.cpp:138 watchersmodel.cpp:84
+#, kde-format
+msgid "File"
+msgstr "ឯកសារ​"
+
+#: historydialog.cpp:138
+#, fuzzy, kde-format
+msgid "Repo Path"
+msgstr "ផ្លូវ​របស់​ Repo "
+
+#: historydialog.cpp:142
+#, kde-format
+msgid "Show c&ommit events"
+msgstr "បង្ហាញ​ព្រឹត្តិការណ៍​​ c&ommit"
+
+#: historydialog.cpp:145
+#, fuzzy, kde-format
+msgid "Show ch&eckout events"
+msgstr "បង្ហាញ​​ព្រឹត្តិការណ៍​ចេញ​"
+
+#: historydialog.cpp:148
+#, kde-format
+msgid "Show &tag events"
+msgstr "បង្ហាញ​ព្រឹត្តិការណ៍​ស្លាក​"
+
+#: historydialog.cpp:151
+#, kde-format
+msgid "Show &other events"
+msgstr "បង្ហាញ​ព្រឹត្តិការណ៍​ផ្សេង​ៗ​ទៀត​"
+
+#: historydialog.cpp:154
+#, kde-format
+msgid "Only &user:"
+msgstr "អ្នក​ប្រើ​តែ​ប៉ុណ្ណោះ​ ៖​"
+
+#: historydialog.cpp:156
+#, fuzzy, kde-format
+msgid "Only &filenames matching:"
+msgstr "ផ្គូផ្គង​តែ​ឈ្មោះ​ឯកសារ​ប៉ុណ្ណោះ​ ៖​"
+
+#: historydialog.cpp:158
+#, fuzzy, kde-format
+msgid "Only &folders matching:"
+msgstr "ផ្គូផ្គង​តែ​ថត​ប៉ុណ្ណោះ​ ៖​"
+
+#: historydialog.cpp:279 historydialog.cpp:285
+#, kde-format
+msgid "CVS History"
+msgstr "ប្រវត្តិ​របស់​ CVS "
+
+#: historydialog.cpp:322
+#, kde-format
+msgid "Tag "
+msgstr "ស្លាក​"
+
+#: historydialog.cpp:325
+#, kde-format
+msgid "Release "
+msgstr "ការ​ចេញ​ផ្សាយ​"
+
+#: historydialog.cpp:328
+#, kde-format
+msgid "Update, Deleted "
+msgstr "បាន​លុប​ ធ្វើ​បច្ចុប្បន្នភាព​"
+
+#: historydialog.cpp:331
+#, kde-format
+msgid "Update, Copied "
+msgstr "បាន​ចម្លង​ ធ្វើ​បច្ចុប្បន្នភាព​​"
+
+#: historydialog.cpp:334
+#, kde-format
+msgid "Update, Merged "
+msgstr "បាន​បញ្ចូល​ ធ្វើ​បច្ចុប្បន្នភាព​"
+
+#: historydialog.cpp:337
+#, kde-format
+msgid "Update, Conflict "
+msgstr "ការ​ប៉ះទង្គិច​ ធ្វើ​បច្ចុប្បន្នភាព​"
+
+#: historydialog.cpp:340
+#, kde-format
+msgid "Update, Patched "
+msgstr "បាន​ប៉ះ​ ធ្វើ​បច្ចុប្បន្នភាព​"
+
+#: historydialog.cpp:352
+#, kde-format
+msgid "Unknown "
+msgstr "មិន​ស្គាល់​"
+
+#: logdialog.cpp:86
+#, fuzzy, kde-format
+#| msgid "S&earch:"
+msgid "Search:"
+msgstr "ស្វែងរក ៖ "
+
+#: logdialog.cpp:97
+#, kde-format
+msgid "&Tree"
+msgstr "មែក​ធាង "
+
+#: logdialog.cpp:98
+#, kde-format
+msgid "&List"
+msgstr "បញ្ជី "
+
+#: logdialog.cpp:99
+#, kde-format
+msgid "CVS &Output"
+msgstr "ទិន្នផល​ CVS "
+
+#: logdialog.cpp:106
+#, fuzzy, kde-format
+msgid ""
+"Choose revision A by clicking with the left mouse button,\n"
+"revision B by clicking with the middle mouse button."
+msgstr ""
+"ជ្រើស​ការ​ពិនិត្យ​ A ឡើង​វិញ​​ដោយ​ប៊ូតុង​​​ចុច​កណ្ដុរ​ឆ្វេង​​\n"
+"ការ​ពិនិត្យ​ B ដោយ​ចុច​ប៊ូតុង​កណ្ដុរ​កណ្ដាល​ ។"
+
+#: logdialog.cpp:133
+#, kde-format
+msgid "Revision A:"
+msgstr "ការ​ពិនិត្យ A ឡើងវិញ​ ៖"
+
+#: logdialog.cpp:133
+#, kde-format
+msgid "Revision B:"
+msgstr "ការ​ពិនិត្យ B ឡើង​វិញ​ ៖"
+
+#: logdialog.cpp:142
+#, kde-format
+msgid "Select by tag:"
+msgstr "ជ្រើស​តាម​ស្លាក​ ៖​"
+
+#: logdialog.cpp:150
+#, kde-format
+msgid "Author:"
+msgstr "អ្នក​និពន្ធ ៖​"
+
+#: logdialog.cpp:158
+#, kde-format
+msgid "Date:"
+msgstr "កាល​បរិច្ឆេទ ៖​"
+
+#: logdialog.cpp:166
+#, kde-format
+msgid "Comment/Tags:"
+msgstr "សេចក្ដី​អធិប្បាយ​​/ស្លាក​ ៖​"
+
+#: logdialog.cpp:198
+#, fuzzy, kde-format
+msgid "&Annotate A"
+msgstr "ចារ​សេចក្ដី​ពន្យល់​ A"
+
+#: logdialog.cpp:200
+#, kde-format
+msgid "&Find"
+msgstr "រក "
+
+#: logdialog.cpp:207
+#, fuzzy, kde-format
+msgid ""
+"This revision is used when you click Annotate.\n"
+"It is also used as the first item of a Diff operation."
+msgstr ""
+"ការ​ពិនិត្យ​ឡើង​វិញ​នេះ​ត្រូវ​បាន​ប្រើ​ នៅ​ពេល​អ្នក​ចុច​​ Annotate ។\n"
+"វា​ត្រូវ​បាន​ប្រើ​ធាតុ​នៃ​ប្រតិបត្តិការ​ Diff ​ដំបូង​ ។"
+
+#: logdialog.cpp:212
+#, fuzzy, kde-format
+msgid "This revision is used as the second item of a Diff operation."
+msgstr "កំណែ​នេះ​ត្រូវ​បាន​​ប្រើ​ធាតុ​នៃ​ប្រតិបត្តិការ​ Diff ទីពីរ​ ។"
+
+#: logdialog.cpp:225
+#, fuzzy, kde-format
+#| msgctxt "to view revision A"
+#| msgid "&View A"
+msgid "&View A"
+msgstr "មើល​ A"
+
+#: logdialog.cpp:226
+#, kde-format
+msgid "Create Patch..."
+msgstr "បង្កើត​បំណះ​..."
+
+#: logdialog.cpp:269
+#, kde-format
+msgid "CVS Log: %1"
+msgstr "កំណត់​ហេតុ​ CVS ៖ %1"
+
+#: logdialog.cpp:275
+#, kde-format
+msgid "CVS Log"
+msgstr "កំណត់ហេតុ​ CVS "
+
+#: logdialog.cpp:402
+#, kde-format
+msgid " (Branchpoint)"
+msgstr " (Branchpoint)"
+
+#: logdialog.cpp:421
+#, fuzzy, kde-format
+msgid "Please select revision A or B first."
+msgstr "ដំបូង​សូម​ជ្រើស​ការ​ពិនិត្យ​ឡើង​វិញ​ A ឬ​ B ។"
+
+#: logdialog.cpp:442
+#, fuzzy, kde-format
+msgid "View File"
+msgstr "មើល​ឯកសារ​"
+
+#: logdialog.cpp:457 logdialog.cpp:516
+#, fuzzy, kde-format
+msgid "Please select revision A or revisions A and B first."
+msgstr "ដំបូង​សូម​ជ្រើស​ការ​ពិនិត្យ A ឡើង​វិញ​ ឬ​ការ​ពិនិត្យ​ A និង​ B ឡើង​វិញ​ ។"
+
+#: loginfo.cpp:51
+#, kde-format
+msgid "Branchpoint"
+msgstr "Branchpoint"
+
+#: loginfo.cpp:54
+#, kde-format
+msgid "On Branch"
+msgstr "នៅ​សាខា​"
+
+#: loglist.cpp:106
+#, kde-format
+msgid "Branch"
+msgstr "សាខា​"
+
+#: loglist.cpp:106
+#, kde-format
+msgid "Comment"
+msgstr "សេចក្ដី​អធិប្បាយ"
+
+#: loglist.cpp:106
+#, kde-format
+msgid "Tags"
+msgstr "ស្លាក "
+
+#: logplainview.cpp:46
+#, kde-format
+msgid "revision %1"
+msgstr "ការ​ពិនិត្យ​ %1 ឡើងវិញ​"
+
+#: logplainview.cpp:47
+#, kde-format
+msgid "Select for revision A"
+msgstr "ជ្រើស​​សម្រាប់​ការ​ពិនិត្យ​ A ឡើងវិញ​"
+
+#: logplainview.cpp:48
+#, kde-format
+msgid "Select for revision B"
+msgstr "ជ្រើស​សម្រាប់​ការពិនិត្យ​ B ឡើង​វិញ​"
+
+#: logplainview.cpp:49
+#, kde-format
+msgid "date: %1; author: %2"
+msgstr "date: %1; author: %2"
+
+#: main.cpp:166
+#, fuzzy, kde-format
+msgid "The sandbox to be loaded"
+msgstr "sandbox ​ត្រូវ​បាន​ផ្ទុក​"
+
+#: main.cpp:167
+#, fuzzy, kde-format
+msgid "Show resolve dialog for the given file."
+msgstr "បង្ហាញ​ប្រអប់​ដោះស្រាយ​ សម្រាប់​ឯកសារ​ដែល​បាន​ផ្ដល់​"
+
+#: main.cpp:168
+#, fuzzy, kde-format
+msgid "Show log dialog for the given file."
+msgstr "បង្ហាញ​ប្រអប់​កំណត់​ហេតុ​ សម្រាប់​ឯកសារ​ដែល​បាន​ផ្ដល់​"
+
+#: main.cpp:169
+#, fuzzy, kde-format
+msgid "Show annotation dialog for the given file."
+msgstr "បង្ហាញ​ប្រអប់​ចំណារ​ពន្យល់​ សម្រាប់​ឯកសារ​ដែល​បាន​ផ្ដល់​"
+
+#: mergedialog.cpp:41
+#, kde-format
+msgid "CVS Merge"
+msgstr "បញ្ចូល​ CVS ចូល​គ្នា​"
+
+#: mergedialog.cpp:56
+#, fuzzy, kde-format
+msgid "Merge from &branch:"
+msgstr "បញ្ចូល​ចូល​គ្នា​ពី​សាខា​ ៖​"
+
+#: mergedialog.cpp:75
+#, kde-format
+msgid "Merge &modifications:"
+msgstr "បញ្ចូល​ការ​កែប្រែ​ចូលគ្នា​ ៖​"
+
+#: mergedialog.cpp:78
+#, kde-format
+msgid "between tag: "
+msgstr "រវាង​ស្លាក​ ៖​"
+
+#: mergedialog.cpp:84
+#, kde-format
+msgid "and tag: "
+msgstr "និង​ស្លាក​ ៖​"
+
+#: mergedialog.cpp:90 updatedialog.cpp:84
+#, kde-format
+msgid "Fetch L&ist"
+msgstr "បញ្ជី​ប្រមូល​យក​ "
+
+#: misc.cpp:78
+#, kde-format
+msgid "CVS Status"
+msgstr "ស្ថានភាព​ CVS "
+
+#: misc.cpp:197
+#, kde-format
+msgid "Overwrite the file"
+msgstr "សរសេរ​ជាន់​លើ​ឯកសារ​"
+
+#: misc.cpp:200
+#, kde-format
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr "មាន​ឯកសារ​ឈ្មោះ \"%1\" រួច​ហើយ ។ តើ​អ្នក​ពិត​ជា​ចង់​សរសេរ​ជាន់​លើ​វា​ឬ ?"
+
+#: misc.cpp:201
+#, kde-format
+msgid "Overwrite File?"
+msgstr "សរសេរ​ជាន់​លើ​ឯកសារឬ ?​"
+
+#: patchoptiondialog.cpp:58
+#, kde-format
+msgid "Context"
+msgstr "បរិបទ​"
+
+#: patchoptiondialog.cpp:59
+#, kde-format
+msgid "Normal"
+msgstr "ធម្មតា​"
+
+#: patchoptiondialog.cpp:60
+#, kde-format
+msgid "Unified"
+msgstr "បាន​រួម​បញ្ចូល​"
+
+#: patchoptiondialog.cpp:64
+#, kde-format
+msgid "Output Format"
+msgstr "ទ្រង់ទ្រាយ​ទិន្នផល​"
+
+#: patchoptiondialog.cpp:74
+#, fuzzy, kde-format
+msgid "&Number of context lines:"
+msgstr "ចំនួននឌ​​បន្ទាត់​បរិបទ​ ៖​"
+
+#: patchoptiondialog.cpp:90
+#, fuzzy, kde-format
+msgid "Ignore added or removed empty lines"
+msgstr "បាន​បន្ថែម​ មិន​អើពើ​ ឬ​​បាន​យក​បន្ទាត់​ទទេ​ចេញ​"
+
+#: patchoptiondialog.cpp:91
+#, fuzzy, kde-format
+msgid "Ignore changes in the amount of whitespace"
+msgstr "មិន​អើពើ​ការ​ផ្លាស់ប្ដូរ​ក្នុង​ចំនួន​របស់​ whitespace"
+
+#: patchoptiondialog.cpp:92
+#, kde-format
+msgid "Ignore all whitespace"
+msgstr "មិន​អើពើ​ whitespace ទាំងអស់​"
+
+#: patchoptiondialog.cpp:93
+#, fuzzy, kde-format
+msgid "Ignore changes in case"
+msgstr "មិន​អើពើ​ការ​ផ្លាស់​​ប្ដូរ​ក្នុង​ធុង​"
+
+#: patchoptiondialog.cpp:100
+#, kde-format
+msgid "Ignore Options"
+msgstr "ជម្រើស​មិន​អើពើ"
+
+#: protocolview.cpp:90
+#, kde-format
+msgid "Clear"
+msgstr "ជម្រះ​"
+
+#: protocolview.cpp:127
+#, fuzzy, kde-format
+msgid "[Exited with status %1]\n"
+msgstr "[បាន​ចេញ​តាម​ស្ថានភាព​ %1]\n"
+
+#: protocolview.cpp:129
+#, kde-format
+msgid "[Finished]\n"
+msgstr "[បាន​បញ្ចប់​​]\n"
+
+#: protocolview.cpp:131
+#, kde-format
+msgid "[Aborted]\n"
+msgstr "[បាន​បោះបង់​​]\n"
+
+#: repositorydialog.cpp:138
+#, kde-format
+msgid "Default"
+msgstr "លំនាំដើម​"
+
+#: repositorydialog.cpp:155
+#, kde-format
+msgid "Logged in"
+msgstr "បាន​ចូល​"
+
+#: repositorydialog.cpp:155
+#, kde-format
+msgid "Not logged in"
+msgstr "មិន​បាន​ចូល​"
+
+#: repositorydialog.cpp:157
+#, kde-format
+msgid "No login required"
+msgstr "មិន​បាន​ទាមទារ​ចូល​"
+
+#: repositorydialog.cpp:171
+#, fuzzy, kde-format
+msgid "Configure Access to Repositories"
+msgstr "កំណត់​រចនាសម្ព័ន្ធ​ចូល​ដំណើរការ​ទៅកាន់​ឃ្លាំង​"
+
+#: repositorydialog.cpp:192
+#, kde-format
+msgid "Repository"
+msgstr "ឃ្លាំង​"
+
+#: repositorydialog.cpp:192
+#, kde-format
+msgid "Method"
+msgstr "វិធីសាស្ត្រ​​"
+
+#: repositorydialog.cpp:192
+#, kde-format
+msgid "Compression"
+msgstr "ការ​បង្ហាប់"
+
+#: repositorydialog.cpp:192 settingsdialog.cpp:293 updateview.cpp:50
+#, kde-format
+msgid "Status"
+msgstr "ស្ថានភាព​"
+
+#: repositorydialog.cpp:199
+#, fuzzy, kde-format
+#| msgid "&Add..."
+msgid "Add..."
+msgstr "បន្ថែម...​"
+
+#: repositorydialog.cpp:200
+#, fuzzy, kde-format
+#| msgid "&Modify..."
+msgid "Modify..."
+msgstr "កែប្រែ...​"
+
+#: repositorydialog.cpp:202
+#, kde-format
+msgid "Login..."
+msgstr "ចូល​..."
+
+#: repositorydialog.cpp:203
+#, kde-format
+msgid "Logout"
+msgstr "ចេញ​"
+
+#: repositorydialog.cpp:335
+#, kde-format
+msgid "This repository is already known."
+msgstr "ស្គាល់​ឃ្លាំង​នេះ​ហើយ​ ។"
+
+#: repositorydialog.cpp:423
+#, kde-format
+msgid "Login failed."
+msgstr "ចូល​បាន​បរាជ័យ​ ។"
+
+#: repositorydialog.cpp:442
+#, kde-format
+msgid "CVS Logout"
+msgstr "ចេញ​ CVS​"
+
+#: resolvedialog.cpp:135
+#, kde-format
+msgid "Your version (A):"
+msgstr "កំណែ​របស់​អ្នក​​ (A) ៖​"
+
+#: resolvedialog.cpp:144
+#, kde-format
+msgid "Other version (B):"
+msgstr "កំណែ​ផ្សេង​ទៀត​​ (B) ៖​"
+
+#: resolvedialog.cpp:156
+#, kde-format
+msgid "Merged version:"
+msgstr "បាន​បញ្ចូល​កំណែ​ចូល​គ្នា ៖​"
+
+#: resolvedialog.cpp:250
+#, kde-format
+msgid "CVS Resolve: %1"
+msgstr "ដោះស្រាយ​ CVS ៖ %1"
+
+#: resolvedialog.cpp:385
+#, kde-format
+msgid "%1 conflicts"
+msgstr "ការ​ប៉ះទង្គិច​ %1 "
+
+#: settingsdialog.cpp:70
+#, kde-format
+msgid "Configure Cervisia"
+msgstr "កំណត់​រចនាសម្ព័ន្ធ​ Cervisia"
+
+#: settingsdialog.cpp:215
+#, kde-format
+msgid "General"
+msgstr "ទូទៅ​"
+
+#: settingsdialog.cpp:220
+#, fuzzy, kde-format
+msgid "&User name for the change log editor:"
+msgstr "ឈ្មោះ​អ្នក​ប្រើ​ សម្រាប់​​ផ្លាស់ប្ដូរ​កម្មវិធី​កែសម្រួល​កំណត់​ហេតុ​ ៖"
+
+#: settingsdialog.cpp:228
+#, kde-format
+msgid "&Path to CVS executable, or 'cvs':"
+msgstr "ផ្លូវ​ទៅកាន់​ឯកសារ​ប្រតិបត្តិ​ CVS ឬ 'cvs' ៖"
+
+#: settingsdialog.cpp:246
+#, kde-format
+msgid "Diff Viewer"
+msgstr "កម្មវិធី​មើល​ Diff "
+
+#: settingsdialog.cpp:251
+#, kde-format
+msgid "&Number of context lines in diff dialog:"
+msgstr "ចំនួន​បន្ទាត់​បរិបទ​នៅ​ក្នុង​ប្រអប់ diff ៖​"
+
+#: settingsdialog.cpp:259
+#, kde-format
+msgid "Additional &options for cvs diff:"
+msgstr "ជម្រើស​បន្ថែម​ សម្រាប់​ cvs diff ៖​"
+
+#: settingsdialog.cpp:266
+#, kde-format
+msgid "Tab &width in diff dialog:"
+msgstr "ទទឹង​ផ្ទាំង​​ក្នុង​ប្រអប់​​ diff ៖"
+
+#: settingsdialog.cpp:274
+#, kde-format
+msgid "External diff &frontend:"
+msgstr "ផ្នែក​ខាង​មុន​ diff ក្រៅ​ ៖​"
+
+#: settingsdialog.cpp:296
+#, fuzzy, kde-format
+msgid ""
+"When opening a sandbox from a &remote repository,\n"
+"start a File->Status command automatically"
+msgstr ""
+"នៅ​ពេល​​បើក​ sandbox ​ពី​ឃ្លាំង​ពី​ចម្ងាយ​​\n"
+"​ចាប់​ផ្ដើម​ពាក្យ​បញ្ជា​ស្ថាន​ភាព​ File-> ដោយ​ស្វ័យ​ប្រវត្តិ​ "
+
+#: settingsdialog.cpp:299
+#, fuzzy, kde-format
+msgid ""
+"When opening a sandbox from a &local repository,\n"
+"start a File->Status command automatically"
+msgstr ""
+"នៅ​ពេល​បើក​ sandbox ពី​​ឃ្លាំង​​មូលដ្ឋាន​\n"
+"ចាប់ផ្ដើម​ពាក្យ​បញ្ជា​ស្ថានភាព​​ File-> ​ដោយ​ស្វ័យ​ប្រវត្តិ​"
+
+#: settingsdialog.cpp:316
+#, kde-format
+msgid "Advanced"
+msgstr "កម្រិត​ខ្ពស់​"
+
+#: settingsdialog.cpp:335
+#, kde-format
+msgid "Appearance"
+msgstr "រូបរាង​"
+
+#: settingsdialog.cpp:338
+#, kde-format
+msgid "Fonts"
+msgstr "ពុម្ពអក្សរ​"
+
+#: settingsdialog.cpp:341
+#, fuzzy, kde-format
+msgid "Font for &Protocol Window..."
+msgstr "ពុម្ព​​អក្សរ​សម្រាប់​បង្អួច​ពិធីការ​​..."
+
+#: settingsdialog.cpp:342
+#, fuzzy, kde-format
+msgid "Font for A&nnotate View..."
+msgstr "ពុម្ព​អក្សរ​ សម្រាប់​​មើល​ចារ​សេចក្ដី​ពន្យល់​..."
+
+#: settingsdialog.cpp:343
+#, kde-format
+msgid "Font for D&iff View..."
+msgstr "ពុម្ព​អក្សរ​សម្រាប់​មើល​ D&iff ..."
+
+#: settingsdialog.cpp:344
+#, kde-format
+msgid "Font for ChangeLog View..."
+msgstr "ពុម្ព​អក្សរ​សម្រាប់​មើល​ ChangeLog ..."
+
+#: settingsdialog.cpp:352
+#, kde-format
+msgid "Colors"
+msgstr "ពណ៌​"
+
+#: settingsdialog.cpp:355
+#, kde-format
+msgid "Conflict:"
+msgstr "ប៉ះទង្គិច​ ៖​"
+
+#: settingsdialog.cpp:359
+#, kde-format
+msgid "Diff change:"
+msgstr "​ប្ដូរ​ Diff ៖​"
+
+#: settingsdialog.cpp:363
+#, kde-format
+msgid "Local change:"
+msgstr "ប្ដូរទីតាំង​​ ៖​"
+
+#: settingsdialog.cpp:367
+#, kde-format
+msgid "Diff insertion:"
+msgstr "ការ​ដាក់​ចូល​ Diff ៖​"
+
+#: settingsdialog.cpp:371
+#, kde-format
+msgid "Remote change:"
+msgstr "ប្ដូរ​ពី​ចម្ងាយ​ ៖​"
+
+#: settingsdialog.cpp:375
+#, kde-format
+msgid "Diff deletion:"
+msgstr "ការ​លុប​ចោល​ ៖​"
+
+#: settingsdialog.cpp:379
+#, kde-format
+msgid "Not in cvs:"
+msgstr "គ្មាន​ក្នុង​ cvs ៖​"
+
+#: settingsdialog.cpp:400
+#, kde-format
+msgid "Split main window &horizontally"
+msgstr "ពុះ​បង្អួច​ចម្បង​ផ្ដេក​​"
+
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, fuzzy, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr "អស់​ពេលវេលា​ដែល​ប្រអប់​វឌ្ឍនភាព​លេចឡើង​ (ជា​មិល្លី​វិនាទី​) ៖​"
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, kde-format
+msgid "Default compression &level:"
+msgstr "កម្រិត​នៃ​ការ​បង្ហាប់​លំនាំ​ដើម​ ៖​"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr "កំពុង​ដំណើរការ​ ឬ​ចាប់​ផ្ដើម​ដំណើរការ​​ ssh-agent ថ្មី​"
+
+#: tagdialog.cpp:48
+#, kde-format
+msgid "CVS Delete Tag"
+msgstr "លុប​ស្លាក​របស់​​ CVS"
+
+#: tagdialog.cpp:48
+#, kde-format
+msgid "CVS Tag"
+msgstr "ស្លាក​របស់​ CVS"
+
+#: tagdialog.cpp:67 tagdialog.cpp:86
+#, kde-format
+msgid "&Name of tag:"
+msgstr "ឈ្មោះ​របស់​ស្លាក​ ៖​"
+
+#: tagdialog.cpp:95
+#, fuzzy, kde-format
+msgid "Create &branch with this tag"
+msgstr "បង្កើត​សាខា​ជាមួយ​ស្លាក​នេះ​"
+
+#: tagdialog.cpp:99
+#, fuzzy, kde-format
+msgid "&Force tag creation even if tag already exists"
+msgstr "បង្ខំ​ស្លាក​បង្កើត​ព្រឹត្តិការណ៍​ ប្រសិនបើ​មាន​រួច​ហើយ​"
+
+#: tagdialog.cpp:134
+#, kde-format
+msgid "You must define a tag name."
+msgstr "អ្នក​ត្រូវ​តែ​កំណត់​ឈ្មោះ​របស់​​ស្លាក​ ។"
+
+#: tagdialog.cpp:140
+#, fuzzy, kde-format
+msgid ""
+"Tag must start with a letter and may contain letters, digits and the "
+"characters '-' and '_'."
+msgstr "ស្លាក​ត្រូវ​តែ​ចាប់ផ្ដើម​ជាមួយ​អក្សរ​ និង​អាច​មាន​​អក្សរ​ច្រើន​ តួ​លេខ​ និង​តួ​អក្សរ​ '-' and '_' ។"
+
+#: updatedialog.cpp:42
+#, kde-format
+msgid "CVS Update"
+msgstr "ធ្វើ​បច្ចុប្បន្នភាព​ CVS"
+
+#: updatedialog.cpp:57
+#, fuzzy, kde-format
+msgid "Update to &branch: "
+msgstr "ធ្វើ​បច្ចុប្បន្នភាព​ទៅកាន់​សាខា​ ៖​"
+
+#: updatedialog.cpp:76
+#, kde-format
+msgid "Update to &tag: "
+msgstr "ធ្វើ​បច្ចុប្បន្ន​ភាព​ទៅកាន់​ស្លាក​ ៖​"
+
+#: updatedialog.cpp:94
+#, kde-format
+msgid "Update to &date ('yyyy-mm-dd'):"
+msgstr "ធ្វើ​បច្ចុប្បន្នភាព​ទៅកាន់​កាលបរិច្ឆេទ​ ('yyyy-mm-dd'):"
+
+#: updateview.cpp:50
+#, kde-format
+msgid "File Name"
+msgstr "ឈ្មោះ​ឯកសារ​"
+
+#: updateview.cpp:50
+#, kde-format
+msgid "Tag/Date"
+msgstr "ស្លាក​​/កាលបរិច្ឆេទ​"
+
+#: updateview.cpp:50
+#, kde-format
+msgid "Timestamp"
+msgstr "ត្រា​ពេលវេលា​"
+
+#: watchdialog.cpp:38
+#, kde-format
+msgid "CVS Watch Add"
+msgstr "បន្ថែម​ឃ្លាំ​មើល​របស់​ CVS "
+
+#: watchdialog.cpp:38
+#, kde-format
+msgid "CVS Watch Remove"
+msgstr "យក​ឃ្លាំ​មើល​របស់​ CVS ចេញ​"
+
+#: watchdialog.cpp:51
+#, fuzzy, kde-format
+msgid "Add watches for the following events:"
+msgstr "បន្ថែម​កម្មវិធី​ឃ្លាំមើល​ សម្រាប់​ព្រឹត្តិការណ៍​ដូច​ខាង​ក្រោម​ ៖​"
+
+#: watchdialog.cpp:51
+#, fuzzy, kde-format
+msgid "Remove watches for the following events:"
+msgstr "យក​កម្មវិធី​ឃ្លាំមើល​ សម្រាប់​ព្រឹត្តិការណ៍​​ដូច​ខាង​ក្រោម​ ៖​"
+
+#: watchdialog.cpp:54
+#, kde-format
+msgid "&All"
+msgstr "ទាំងអស់​"
+
+#: watchdialog.cpp:59
+#, kde-format
+msgid "&Only:"
+msgstr "ប៉ុណ្ណោះ​ ៖​"
+
+#: watchdialog.cpp:68
+#, kde-format
+msgid "&Commits"
+msgstr "&Commits"
+
+#: watchdialog.cpp:72
+#, kde-format
+msgid "&Edits"
+msgstr "កែសម្រួល​"
+
+#: watchdialog.cpp:76
+#, kde-format
+msgid "&Unedits"
+msgstr "មិន​កែសម្រួល​"
+
+#: watchersdialog.cpp:68 watchersdialog.cpp:74
+#, kde-format
+msgid "CVS Watchers"
+msgstr "កម្មវិធី​ឃ្លាំមើល​របស់​ CVS "
+
+#: watchersmodel.cpp:86
+#, kde-format
+msgid "Watcher"
+msgstr "កម្មវិធី​ឃ្លាំមើល​"
+
+#: watchersmodel.cpp:88
+#, kde-format
+msgid "Edit"
+msgstr "កែ​សម្រួល​"
+
+#: watchersmodel.cpp:90
+#, kde-format
+msgid "Unedit"
+msgstr "មិន​កែសម្រួល​"
+
+#: watchersmodel.cpp:92
+#, kde-format
+msgid "Commit"
+msgstr "Commit"
+
+#, fuzzy
+#~ msgid "Invoking help on Cervisia"
+#~ msgstr "ការ​ហៅ​ជំនួយ​លើ​ Cervisia"
+
+#~ msgid "&Overwrite"
+#~ msgstr "សរសេរ​ជាន់​លើ​"
+
+#, fuzzy
+#~ msgid "Invokes the KDE help system with the Cervisia documentation"
+#~ msgstr "ហៅ​ប្រព័ន្ធ​ជំនួយ​របស់​ KDE ជាមួយ​ឯកសារ​​ Cervisia"
+
+#~ msgid "Opens the bug report dialog"
+#~ msgstr "បើក​ប្រអប់​របាយការណ៍​កំហុស​"
+
+#, fuzzy
+#~ msgid "Displays the version number and copyright information"
+#~ msgstr "បង្ហាញ​លេខ​កំណែ​ និង​រក្សាសិទ្ធិ​ព័ត៌មាន​​"
+
+#, fuzzy
+#~ msgid "Displays the information about KDE and its version number"
+#~ msgstr "បង្ហាញ​ព័ត៌មាន​អំពី​ KDE និង​លេខ​កំណែ​របស់​វា​"
+
+#~ msgid "&Remove"
+#~ msgstr "យក​ចេញ​​"

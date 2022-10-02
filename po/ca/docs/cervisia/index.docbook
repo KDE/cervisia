@@ -1,0 +1,3983 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY ssh "<command
+>ssh</command
+>">
+  <!ENTITY rsh "<command
+>rsh</command
+>">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Catalan  "INCLUDE"
+> <!-- Change language only here -->
+  <!ENTITY CVS "<application
+>CVS</application
+>">
+]>
+
+<book id="cervisia" lang="&language;">
+
+<bookinfo>
+<title
+>Manual del &cervisia;</title>
+<authorgroup>
+<author
+><firstname
+>Bernd</firstname
+><surname
+>Gehrmann</surname
+> <affiliation
+><address
+>&Bernd.Gehrmann.mail;</address
+></affiliation>
+</author
+> 
+<author
+><firstname
+>Carlos</firstname
+><surname
+>Woelz</surname
+> <affiliation
+><address
+><email
+>carloswoelz@imap-mail.com</email
+></address
+></affiliation>
+</author
+> 
+
+
+&traductor.Manuel.Tortosa; &revisor.Antoni.Bella; 
+
+</authorgroup>
+
+<copyright>
+<year
+>1999</year>
+<year
+>2000</year>
+<year
+>2001</year>
+<year
+>2002</year>
+<holder
+>&Bernd.Gehrmann;</holder>
+</copyright>
+
+<copyright>
+<year
+>2004</year>
+<holder
+>Carlos Woelz</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>16 de juny de 2016</date>
+<releaseinfo
+>3.11 (Aplicacions 16.08)</releaseinfo>
+
+<abstract>
+<para
+>El &cervisia; proporciona una vista gràfica del &CVS;.</para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>Cervisia</keyword>
+<keyword
+>CVS</keyword>
+<keyword
+>control de versió</keyword>
+<keyword
+>control de revisió</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Introducció</title>
+
+<para
+>El <ulink url="https://www.kde.org/applications/development/cervisia/"
+>&cervisia;</ulink
+> és un frontal fàcil d'emprar per al sistema de control de versions. Amb l'ànim d'implementar el &CVS; en una interfície unificada, amb resolució de conflictes, diferències i visualitzadors de l'historial, estat de les còpies de treball dels fitxers i implementació de la majoria de funcions del control de versions. El podeu obtenir construint el programa <ulink url="https://commits.kde.org/cervisia"
+>&cervisia;</ulink
+> o instal·lant el paquet &cervisia; proporcionat per la vostra distribució. </para>
+
+<para
+>Un sistema de control de versions és una eina per enregistrar, gestionar i distribuir diferents versions de fitxers. El &CVS; és un sistema de control de versions. Permet compartir senzillament les vostres modificacions, de manera que cadascun dels contribuïdors pot treballar amb la seva còpia local al mateix temps, sense por de sobreescriure les altres modificacions. Permet recuperar les versions passades (útil per fer el seguiment d'errors), la creació de branques (per desenvolupament experimental o per llançaments del codi) i més. </para>
+
+<para
+>El <firstterm
+>repositori</firstterm
+> principal normalment conté un projecte col·laboratiu (comercial o no), però podeu aprofitar les característiques de control que ofereix el &CVS; fins i tot per a un projecte desenvolupat exclusivament per vós. És fàcil establir un repositori local, i obtenir la capacitat de rastrejar els canvis que causen els errors, desfer els canvis, evitar la pèrdua accidental de la informació, &etc; </para>
+
+<para
+>El repositori conté els fitxers del projecte, i cada contribuïdor manté la seva pròpia còpia local, anomenada <firstterm
+>còpia de treball</firstterm
+> o <firstterm
+>entorn de proves</firstterm
+>; podeu afegir les vostres modificacions al repositori principal (un procés anomenat <quote
+>publicació</quote
+>) i/o actualitzar la còpia pròpia per a reflectir els canvis recents fets pels altres contribuïdors. </para>
+
+</chapter>
+
+<chapter id="getting-started">
+<title
+>Com començar</title>
+
+<sect1 id="accessing-repository">
+<title
+>Accedint al repositori</title>
+
+<para
+>En aquesta secció, us mostrarem com utilitzar les funcionalitats bàsiques del sistema de control de versions utilitzant el &cervisia; per obtenir els mòduls des del repositori i treballar amb ells. Per a fer-ho, heu de tenir accés al repositori com a client, entenent que algú (probablement l'administrador del repositori &CVS;) us ha donat un compte a la màquina del servidor. Alternativament, podeu crear amb facilitat un repositori local pel vostre propi projecte. </para>
+
+<tip
+><para
+>Si esteu planejant desenvolupar un projecte complex, és una bona idea utilitzar les característiques del &CVS;, encara que sigueu l'únic desenvolupador. Podeu fer tots els canvis en la còpia de treball, i utilitzar el &cervisia; (o una altra eina de &CVS;) per actualitzar i publicar. D'aquesta manera, guanyareu la capacitat de seguir els canvis que causen errors, revertir-los, prevenir la pèrdua accidental de la informació, &etc; Utilitzant el &cervisia; és fàcil crear un repositori local. </para>
+
+<procedure>
+<title
+>Creació d'un repositori local</title>
+
+<step
+><para
+>Obriu el diàleg <guilabel
+>Crea un repositori nou (cvs init)</guilabel
+> seleccionant <menuchoice
+><guimenu
+>Repositori</guimenu
+><guimenuitem
+>Crea...</guimenuitem
+></menuchoice
+>. </para
+></step>
+
+<step
+><para
+>Premeu el botó <guilabel
+>...</guilabel
+> per a seleccionar la carpeta a on voleu crear el repositori, o bé introduïu la seva ubicació en el quadre de text. Per exemple, si voleu emplaçar el repositori a la carpeta <filename
+>/home/usuari</filename
+>, i anomenar-lo <filename
+>cvsroot</filename
+>, hauríeu d'escriure <filename
+>/home/usuari/cvsroot</filename
+> en el quadre de text, o bé seleccionar la carpeta <filename
+>/home/usuari</filename
+> utilitzant el diàleg de selecció de fitxers i afegir <filename
+>cvsroot</filename
+>. </para
+></step>
+
+<step
+><para
+>Confirmeu-ho prement el botó <guibutton
+>D'acord</guibutton
+>. El &cervisia; crearà i inicialitzarà la nova carpeta del repositori. </para
+></step>
+
+<step
+><para
+>Ara podreu importar el vostre treball actual al repositori, o simplement crear una carpeta en el repositori per a començar un nou mòdul des de zero. </para
+></step>
+
+</procedure>
+
+</tip>
+
+
+<para
+>El &cervisia; ofereix un frontal integrat per a gestionar totes les ubicacions dels vostres repositoris, el diàleg <guilabel
+>Configura l'accés als repositoris</guilabel
+>. Per a mostrar-lo, seleccioneu l'element <menuchoice
+><guimenu
+>Repositori</guimenu
+><guimenuitem
+>Repositoris...</guimenuitem
+></menuchoice
+> del menú. </para>
+
+<figure id="screenshot-repositories" float="1">
+<title
+>Una captura de pantalla del diàleg Configura l'accés als repositoris amb el &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="repositories.png"/></imageobject>
+<textobject
+><phrase
+>Una captura de pantalla del diàleg Configura l'accés als repositoris amb el &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Hi ha diferents mètodes per accedir a un repositori de &CVS;. A través d'una autenticació per contrasenya (:pserver:), intèrpret d'ordres segur (emprant :ext:), repositori local (:local:), &etc; El format per al repositori local és (els elements opcionals apareixen entre claudàtors): </para>
+
+<para>
+<filename
+>[:mètode:][[usuari][:contrasenya]@]nom_de_la_màquina[:[port]]/camí/al/repositori</filename>
+</para>
+
+<para
+>No sempre són necessaris tots aquests elements (usuari, contrasenya, nom de la màquina, port) per accedir al repositori. La informació necessària dependrà del mètode d'accés emprat, el qual es pot categoritzar com segueix: </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+>Local</term>
+
+<listitem>
+<para
+>El mètode d'accés local és el mètode predeterminat emprat pel &CVS;. Per tant, és opcional afegir el mètode :local: a la ubicació del repositori: simplement podeu introduir el camí cap a la carpeta que emmagatzema el repositori de &CVS;, i és accessible des del vostre ordinador, com ara <filename class="directory"
+>/camí/al/repositori</filename
+> o per donar un exemple real, <filename class="directory"
+>/home/cvs</filename
+>.</para>
+
+<para
+>Pot estar físicament en un disc que està muntat via <acronym
+>NFS</acronym
+>, però aquest és un detall irrellevant. Si heu creat un repositori local, la ubicació serà senzillament el camí cap a ell. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry id="rsh">
+<term
+>&rsh;</term>
+
+<listitem>
+<para
+>La ubicació del repositori és quelcom semblant a <filename
+>:ext:nom_usuari@màquina.url.org:/camí/al/repositori</filename
+>. </para>
+
+<para
+>Aquest mètode requereix que tingueu un compte d'usuari a la màquina del servidor (en aquest exemple, <systemitem class="systemname"
+>màquina.url.org</systemitem
+>) i utilitzar un intèrpret d'ordres remot per a la comunicació. Per omissió, el &CVS; utilitza el &rsh; per a fer-ho; no obstant això, el &rsh; s'ha considerat insegur durant molt de temps i normalment és substituït pel &ssh;. </para>
+
+<para
+>Si voleu utilitzar el &ssh;, haureu d'establir la variable d'entorn $<envar
+>CVS_RSH</envar
+> al &ssh; en utilitzar el client de <command
+>cvs</command
+>, el &cervisia; ho implementa de manera senzilla. </para>
+
+<!-- TODO: verify if the above still apply -->
+
+<para
+>Tingueu en compte que el &cervisia; no pot respondre a les possibles peticions de contrasenya de la màquina del servidor. Us heu d'assegurar que l'inici de sessió remot funciona sense que hàgiu d'introduir una contrasenya. Amb el &rsh; estàndard normal això es pot aconseguir, per exemple, creant un fitxer anomenat <filename
+>.rhosts</filename
+> a la vostra carpeta personal amb una llista de les màquines autenticades (vegeu la pàgina man del &rsh;). </para>
+
+<para
+>Amb el &ssh;, es pot aconseguir copiant la vostra clau pública ubicada al fitxer <filename
+>identity.pub</filename
+>, ubicat a la carpeta <filename
+>$<envar
+>HOME</envar
+>/.ssh/</filename
+> del servidor. En aquest cas, la clau no haurà d'estar encriptada amb una frase de pas, vegeu la pàgina man del &ssh;. </para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>pserver</term>
+
+<listitem>
+<para
+>La ubicació del repositori s'ha de veure com <filename
+>:pserver:nom_usuari@màquina.url.org:/camí/al/repositori</filename
+> </para>
+
+<para
+>Aquest mètode accedeix al servidor mitjançant un protocol especial amb una autenticació relativament feble (<literal
+>pserver</literal
+> per a l'autenticació de la contrasenya). Abans de poder utilitzar aquest servidor, necessiteu un nom d'usuari i la contrasenya donada per l'administrador del servidor del &CVS;, i heu d'iniciar la sessió. Tingueu en compte que el vostre nom d'usuari d'autenticació de la contrasenya del &CVS; no ha de coincidir necessàriament amb el nom d'usuari del sistema. Abans d'accedir al servidor del &CVS;, necessitareu iniciar la sessió. </para>
+
+<para
+>El projectes de codi obert normalment ofereixen accés anònim al &CVS; del seu codi font. Això significa que podeu obtenir amb facilitat el darrer codi font, modificar-lo i crear pedaços (diferències) contra el repositori sense que se us demani un compte de &CVS;. Com a regla general, el &CVS; anònim utilitza autenticació per contrasenya (:pserver:) i és un repositori de només lectura, no permetent-vos pujar els vostres canvis directament. </para>
+
+</listitem>
+</varlistentry>
+</variablelist>
+
+<para
+>Coneixent el mètode d'accés i la ubicació del repositori, podeu afegir-lo a la llista de repositoris del &cervisia;: </para>
+
+<procedure>
+<title
+>Afegir un repositori nou</title>
+
+<step
+><para
+>Obriu el diàleg <guilabel
+>Configura l'accés als repositoris</guilabel
+> seleccionant l'element <menuchoice
+><guimenu
+>Repositori</guimenu
+><guimenuitem
+>Repositoris...</guimenuitem
+></menuchoice
+> del menú. </para
+></step>
+
+<step
+><para
+>Premeu el botó <guilabel
+>Afegeix...</guilabel
+> per obrir el diàleg <guilabel
+>Afegeix un repositori</guilabel
+>. </para
+></step>
+
+<step
+><para
+>Introduïu la ubicació del repositori en el quadre de text <guilabel
+>Repositori:</guilabel
+>. El &cervisia; desactivarà automàticament les àrees del diàleg que no són pertinents per al mètode d'accés que heu introduït. </para
+></step>
+
+<step
+><para
+>Si esteu utilitzant el mètode «ext» per accedir al repositori, introduïu l'intèrpret d'ordres remot que voleu utilitzar (&pex; &ssh;) en el quadre de text <guilabel
+>Usa l'intèrpret d'ordres remot (només per a repositoris :ext:):</guilabel
+>. </para
+></step>
+
+<step
+><para
+>Premeu <guibutton
+>D'acord</guibutton
+>. Veureu el repositori que acabeu d'introduir a la llista de repositoris. </para
+></step>
+
+<step
+><para
+>Si el mètode d'accés al repositori que acabeu d'introduir és autenticació per contrasenya (pserver), necessitareu iniciar la sessió abans de connectar-vos al servidor. Feu clic al repositori en la llista per a seleccionar-lo i premeu el botó <guilabel
+>Accedeix...</guilabel
+>. Introduïu la vostra contrasenya en el diàleg que aparegui. </para>
+<para
+>Si heu introduït correctament la vostra contrasenya, l'entrada de la columna <guilabel
+>Estat</guilabel
+> del repositori «pserver» canviarà de <guilabel
+>No s'ha accedit al compte</guilabel
+> a <guilabel
+>S'ha accedit al compte</guilabel
+>. </para
+></step>
+
+<step
+><para
+>Premeu <guibutton
+>D'acord</guibutton
+> per aplicar les modificacions o afegiu una altra ubicació a la llista. El &cervisia; emmagatzemarà tantes ubicacions com vulgueu. </para
+></step>
+
+</procedure>
+
+</sect1>
+
+
+<sect1 id="importing">
+<title
+>Importació d'un mòdul al repositori</title>
+
+<para
+>En aquesta secció, analitzarem com posar un projecte nou al repositori de &CVS;. Si només voleu treballar amb el projecte existent que ja es troba en un repositori, podeu saltar-vos aquesta secció. </para>
+
+<para
+>Hi ha dues maneres de posar un projecte al &CVS;: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Importar els fitxers i les carpetes a un nou <firstterm
+>mòdul</firstterm
+>, utilitzant el diàleg d'importació del &cervisia;. Els mòduls són les carpetes superiors a l'arbre de carpetes del repositori de &CVS; i s'utilitzen per a separar i organitzar els diferents projectes de programari dintre del repositori. </para
+></listitem>
+
+<listitem
+><para
+>Crear un mòdul buit i afegir nous fitxers i carpetes manualment. Tindreu més control, però probablement trigareu una mica més de temps. </para
+></listitem>
+
+</itemizedlist>
+
+<important>
+<para
+>Tingueu en compte que el &CVS; fou dissenyat inicialment per a gestionar fitxers de text. Moltes característiques, com ara la fusió de les revisions, la creació de les diferències de forma que siguin llegibles, &etc; només són efectuades en els fitxers de text. Això no vol dir que no pugueu utilitzar el &CVS; per a mantenir fitxers binaris, senzillament significa que heu d'<emphasis
+>especificar explícitament al &CVS; si és un fitxer de text o un fitxer binari</emphasis
+>. Si declareu un tipus de fitxer erroni, tindreu problemes amb la funcionalitat del &CVS; per a aquests fitxers i es podrien corrompre. </para>
+</important>
+
+
+<para
+>La importació d'un projecte (com un mòdul nou) té alguns avantatges: importareu tots els fitxers i carpetes recursivament, i el mòdul es crearà automàticament. Això simplifica la importació de grans projectes existents en el repositori. No obstant això, hi ha alguns desavantatges: no es pot utilitzar el diàleg d'importació del &cervisia; per afegir fitxers als mòduls existents, i podeu importar els fitxers tant de text com binaris. Podeu solucionar aquesta limitació mitjançant la creació d'una carpeta amb els fitxers de només un dels tipus, o informar dels patrons dels fitxers que s'hauran d'ignorar en el procés d'importació. </para>
+
+<para
+>Per exemple, suposant que el vostre projecte només contingui fitxers de text i algunes imatges PNG (fitxers binaris). Podeu dir-li al &CVS; que ignori tots els fitxers que continguin el patró <filename class="extension"
+>*.png</filename
+> mentre importa els altres fitxers com a text, o podeu moure les imatges a una carpeta separada i després importar els fitxers restants (com a fitxers de text). De qualsevol manera haureu de fer un <link linkend="checkingout"
+>checkout</link
+> del mòdul importat recentment a una còpia de treball nova i copiar-ne els fitxers i carpetes restants, <link linkend="addingfiles"
+>afegir</link
+> i <link linkend="committingfiles"
+>publicar</link
+> al repositori per a completar el procés d'importació. </para>
+
+<para
+>Alternativament, podeu afegir els fitxers i les carpetes manualment, creant un mòdul buit. Per afegir un mòdul buit a un repositori, simplement heu de crear una carpeta nova a la carpeta arrel del repositori de &CVS;. El nom d'aquesta carpeta serà el nom del mòdul. Feu un <link linkend="checkingout"
+>checkout</link
+> del nou mòdul buit. Després copieu els fitxers i carpetes a la còpia de treball, feu <link linkend="addingfiles"
+>afegeix</link
+> i <link linkend="committingfiles"
+>publica</link
+> per a pujar-ho tot al repositori de &CVS;. </para>
+
+
+<figure id="screenshot-import" float="1">
+<title
+>Una captura de pantalla del diàleg d'importació del &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="import.png"/></imageobject>
+<textobject
+><phrase
+>Una captura de pantalla del diàleg d'importació del &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>A la <xref linkend="screenshot-import"/> podeu veure el diàleg que us ajudarà a <emphasis
+>importar</emphasis
+> un projecte com a un mòdul. Per accedir al diàleg d'importació del &cervisia;, escolliu l'element <menuchoice
+><guimenu
+>Repositori</guimenu
+> <guimenuitem
+>Importa...</guimenuitem
+></menuchoice
+> del menú. </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Repositori:</guilabel
+> <xref linkend="co-repository"/></term>
+<listitem
+><para
+>Introduïu o seleccioneu des de la llista desplegable el nom del repositori de &CVS;, també conegut com a $<envar
+>CVSROOT</envar
+>. Haureu de tenir accés d'escriptura per accedir-hi i el repositori haurà d'estar adequadament inicialitzat. Si el repositori encara no existeix, podeu crear-ne un seleccionant l'element <menuchoice
+> <guimenu
+>Repositori</guimenu
+> <guimenuitem
+>Crea...</guimenuitem
+></menuchoice
+> del menú. </para>
+<para
+>La llista desplegable mostra una llista dels repositoris que heu introduït prèviament utilitzant el diàleg <guilabel
+>Configura l'accés als repositoris</guilabel
+>. Si el repositori és remot, assegureu-vos que l'autenticació funciona. Vegeu <xref linkend="accessing-repository"/> per a més informació. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Mòdul:</guilabel
+> <xref linkend="co-module"/></term>
+<listitem
+><para
+>El nom del mòdul sota el qual serà emmagatzemat el projecte. Després d'importar-lo, el projecte es podrà obtenir sota aquest nom. Vegeu <xref linkend="checkingout"/> per a més informació. Aquest també és el nom de la carpeta corresponent en el repositori. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Carpeta de treball:</guilabel
+></term>
+<listitem
+><para
+>La carpeta de nivell superior del projecte que voleu importar. La importació comença a partir d'aquesta carpeta i baixa recursivament. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Etiqueta del distribuïdor:</guilabel
+> <xref linkend="co-vendortag"/></term>
+<listitem
+><para
+>L'etiqueta del distribuïdor s'ha emprat històricament pel seguiment del codi font de tercers. Només haureu d'utilitzar el vostre nom d'usuari si no teniu cap idea millor. El que introduïu aquí no importa massa. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Etiqueta de llançament:</guilabel
+> <xref linkend="co-releasetag"/></term>
+<listitem
+><para
+>Aquesta etiqueta també s'ha emprat històricament per a importar diferents versions del programari de tercers. Si no ho esteu fent, utilitzeu la paraula <literal
+>start</literal
+> o una cadena <literal
+>FOO_1.0</literal
+> on <literal
+>FOO</literal
+> és el nom del projecte, i <literal
+>1.0</literal
+> és el número de la versió del llançament importat. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Ignora els fitxers:</guilabel
+></term>
+<listitem
+><para
+>Si empleneu aquest camp, es donarà una opció addicional <option
+>-I <replaceable
+>noms_de_fitxer</replaceable
+></option
+> a l'ordre <command
+>cvs import</command
+>. Aquesta entrada serà interpretada com una llista de patrons de noms de fitxer separats per un espai que seran ignorats. En general una forma més neta i menys propensa a errors per a controlar quins fitxers van al repositori, és crear una carpeta amb només els fitxers que voleu importar i començar des d'aquesta carpeta. No obstant això, aquesta entrada pot ser útil si el projecte conté fitxers que són ignorats per defecte pel &CVS;, &pex; fitxers amb el nom <filename
+>core</filename
+>, en aquest cas, simplement introduïu el caràcter <literal
+>!</literal
+> en aquest camp: això redefineix l'esquema original dels fitxers ignorats pel &CVS;, vegeu <xref linkend="ignoredfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Comentari:</guilabel
+> <xref linkend="co-comment"/></term>
+<listitem
+><para
+>Utilitzeu aquest camp per enregistrar els comentaris que pugueu tenir sobre l'origen, ús, desenvolupament, &etc; dels fitxers que esteu important. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Importa com a binaris</guilabel
+></term>
+<listitem
+><para
+>Si marqueu aquesta casella, tots els fitxers s'importaran en el mode binari, &ead; es donarà un argument <option
+>-kb</option
+> al <command
+>cvs import</command
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Usa la data de modificació del fitxer com a data d'importació</guilabel
+></term>
+<listitem
+><para
+>Si marqueu aquesta casella, la data de la importació serà la de modificació del fitxer en lloc de la data d'importació. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+
+<para
+>Una vegada hàgiu emplenat aquest formulari i ho hàgiu confirmat prement <guibutton
+>D'acord</guibutton
+>, s'utilitzarà la següent ordre de &CVS;:</para>
+
+<screen
+><command
+>cvs</command
+> -d <co id="co-repository"
+></co
+><replaceable
+>repositori</replaceable
+> import -m "<co id="co-comment"
+></co
+>" <co id="co-module"
+></co
+><replaceable
+>mòdul</replaceable
+> <co id="co-vendortag"
+></co
+><replaceable
+>etiqueta_distribuïdor</replaceable
+> <co id="co-releasetag"
+></co
+><replaceable
+>etiqueta_llançament</replaceable
+></screen>
+
+</sect1>
+
+
+<sect1 id="checkingout">
+<title
+>Obtenció d'un mòdul del repositori</title>
+<para
+>Ara que heu definit amb èxit la ubicació del vostre repositori, i importat els fitxers inicials al repositori, és el moment de recuperar el mòdul del repositori de &CVS;, creant la vostra còpia de treball. </para>
+
+<para
+>També heu de conèixer el nom de la <firstterm
+>branca</firstterm
+> o <firstterm
+>etiqueta</firstterm
+> que voleu utilitzar. </para>
+
+<para
+>Les branques d'un mòdul són versions paral·leles d'aquest mòdul. Un bon exemple real de la utilització d'aquesta característica és el llançament d'un projecte de programari. Després d'un llançament important, hi ha errors en el codi que s'han d'arranjar, però la gent també vol afegir noves característiques. És molt difícil fer les dues coses alhora, perquè les noves característiques generalment introdueixen errors nous, cosa que dificulta localitzar els antics. Per a resoldre aquest dilema, el &CVS; permet crear una versió paral·lela, que anomenarem la <quote
+>branca de la versió estable</quote
+>, on només es poden afegir correccions d'errors, deixant la branca de llançament principal (HEAD) oberta per afegir noves característiques. </para>
+
+<para
+>Les etiquetes s'utilitzen per a marcar una versió d'un projecte. El &CVS; marca una versió de cada fitxer amb l'etiqueta, així que quan obtingueu o actualitzeu a una etiqueta específica, s'obtindran sempre les mateixes versions dels fitxers. Per tant, en oposició a les branques, les etiquetes no són dinàmiques: no és possible desenvolupar una etiqueta. Les etiquetes són útils per a marcar productes nous, grans canvis en el codi, &etc; Utilitzant etiquetes, podeu tornar amb facilitat el projecte a un estat anterior, per a reproduir i seguir els errors, generar el codi de llançament de nou, &etc;. </para>
+
+<figure id="screenshot-checkout" float="1">
+<title
+>Una captura de pantalla del diàleg de recuperació del &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="checkout.png"/></imageobject>
+<textobject
+><phrase
+>Una captura de pantalla del diàleg de recuperació del &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Repositori:</guilabel
+></term>
+<listitem
+><para
+>El nom del repositori de &CVS;, també conegut com a <filename
+><envar
+>$CVSROOT</envar
+></filename
+>. La llista desplegable mostra una llista dels repositoris que heu introduït prèviament utilitzant el diàleg <guilabel
+>Configura l'accés als repositoris</guilabel
+>. Si el repositori és remot, assegureu-vos que l'autenticació funciona. Vegeu <xref linkend="accessing-repository"/> per a més informació. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Mòdul:</guilabel
+></term>
+<listitem
+><para
+>El nom del mòdul a obtenir. Si esteu treballant amb un d'existent en el repositori, probablement podeu aconseguir aquest nom de l'administrador del sistema, o bé, si és un repositori de codi font obert, podeu obtenir els noms dels mòduls de les pàgines web del projecte. Si voleu crear un nou mòdul a partir de zero amb un repositori local, n'hi ha prou amb crear una carpeta nova a la carpeta arrel del repositori local. El nom de la carpeta serà el mateix que el nom del mòdul buit. </para>
+<para
+>Alternativament, si el repositori té un fitxer <filename
+><envar
+>$CVSROOT</envar
+>/modules</filename
+>, podeu obtenir una llista dels mòduls disponibles prement el botó <guibutton
+>Obtén la llista</guibutton
+>. </para>
+<para
+>Tingueu present que és possible obtenir una subcarpeta existent del mòdul, sense recuperar la resta del mòdul. Simplement introduïu el camí cap a la subcarpeta. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Etiqueta de la branca:</guilabel
+></term>
+<listitem
+><para
+>El nom de la branca o etiqueta que voleu obtenir. Si deixeu aquest camp en blanc, el &cervisia; obtindrà la branca principal (HEAD). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Carpeta de treball:</guilabel
+></term>
+<listitem
+><para
+>La carpeta sota la qual s'ha d'obtenir el mòdul. Tingueu present que la carpeta del nivell superior de la còpia de treball és anomenada després del mòdul que esteu obtenint, fins que doneu un nom alternatiu en el camp <guilabel
+>Obtén com a:</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Obtén com a:</guilabel
+></term>
+<listitem
+><para
+>De resultes d'això, els fitxers de la còpia de treball seran obtinguts en una carpeta alternativa sota la carpeta de treball en lloc d'una carpeta anomenada després del mòdul. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Només exporta</guilabel
+></term>
+<listitem
+><para
+>Si marqueu aquesta casella, els fitxers s'exportaran en lloc d'obtenir-los. En exportar-los s'obté una còpia del codi al mòdul de &CVS; sense les carpetes administratives. Per exemple, l'exportació es pot utilitzar per a preparar el codi font per a un llançament. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Obtén en mode recursiu</guilabel
+></term>
+<listitem
+><para
+>Obtén tots els fitxers i carpetes recursivament.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+
+<sect1 id="mainscreen">
+<title
+>La pantalla principal, visualització de l'estat dels fitxers i actualització</title>
+<para
+>En iniciar el &cervisia;, i obrir una còpia de treball seleccionant <menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Obre un entorn de proves...</guimenuitem
+> </menuchoice
+>, podeu veure dues àrees principals a la finestra principal del &cervisia;, la superior és una vista jerarquitzada (arbre) de la còpia de treball actual; la inferior s'utilitza per a mostrar les ordres de &CVS; que el &cervisia; emet per a realitzar les seves taques, així com la sortida generada per aquestes ordres. </para>
+
+<para
+>Per omissió, el &cervisia; no mostra els fitxers que contenen les subcarpetes, per tant heu de fer clic a les carpetes que voleu veure. Per a mostrar tots els fitxers de la còpia de treball, seleccioneu <menuchoice
+> <guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Desplega l'arbre de fitxers</guimenuitem
+> </menuchoice
+>. Per tornar a tancar totes les carpetes de la còpia de treball, escolliu <menuchoice
+> <guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Plega l'arbre de fitxers</guimenuitem
+> </menuchoice
+>. </para>
+
+<para
+>D'acord amb la configuració als vostres fitxers <filename
+>.cvsignore</filename
+>, els fitxers que normalment no voleu incloure en el repositori -com ara els fitxers d'objecte- no seran mostrats a la vista en arbre. A cada fila, podeu veure el seu estat corresponent. A l'opció per omissió, després d'obrir l'entorn de proves, l'estat és «Desconegut» perquè el &cervisia; retarda l'obtenció de la informació fins que seleccioneu els fitxers i les carpetes l'estat dels quals voleu actualitzar o veure i escolliu <menuchoice
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Actualitza</guimenuitem
+> </menuchoice
+> o <menuchoice
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Estat</guimenuitem
+> </menuchoice
+>. Amb aquest enfocament, teniu una quantitat mínima de funcionalitat disponible fins i tot si no teniu una connexió permanent amb el servidor de &CVS;. </para>
+
+<figure id="screenshot-mainview" float="1">
+<title
+>Una captura de pantalla de la vista principal del &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="mainview.png"/></imageobject>
+<textobject
+><phrase
+>Una captura de pantalla de la vista principal del &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Les ordres del menú Fitxer normalment només actuen sobre els fitxers que heu marcat. També podeu marcar carpetes. Ara escolliu <menuchoice
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Estat</guimenuitem
+> </menuchoice
+> o premeu <keycap
+>F5</keycap
+>. El &cervisia; emetrà una ordre </para>
+
+<para>
+<screen
+><command
+>cvs update -n <replaceable
+>noms_de_fitxer</replaceable
+></command
+></screen>
+</para>
+
+<para
+>per obtenir la informació de l'estat pels fitxers marcats. Tingueu present que el &cervisia; va recursivament dintre de les subcarpetes només si heu establert l'opció corresponent en el menú <guimenu
+>Arranjament</guimenu
+>. Ara podreu veure una entrada a la columna <guilabel
+>Estat</guilabel
+> d'acord amb l'estat respectiu dels fitxers: </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Modificat localment</guilabel
+></term>
+<listitem
+><para
+>Vol dir que heu modificat el fitxer comparat amb la versió en el repositori. </para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><guilabel
+>Afegit localment</guilabel
+></term>
+<listitem
+><para
+>Vol dir que el fitxer no existeix en el repositori, però es troba a la còpia de treball i heu programat que s'afegeixi. La inserció real dins del repositori només succeeix després d'una publicació. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Eliminat localment</guilabel
+></term>
+<listitem
+><para
+>Vol dir que heu programat el fitxer per a suprimir-lo, però encara existeix al repositori. La supressió real només succeeix després d'una publicació. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Necessita actualitzar-se</guilabel
+></term>
+<listitem
+><para
+>Es mostra si existeix una versió més recent del fitxer al repositori, &pex; perquè algú ha publicat una modificació. Normalment, voldreu actualitzar aquest fitxer per tenir una versió al dia a la vostra carpeta. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Necessita apedaçar-se</guilabel
+></term>
+<listitem
+><para
+>Essencialment és el mateix d'abans; la diferència amb una actualització, el servidor de &CVS; només transfereix un pedaç en lloc del fitxer sencer. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Necessita fusionar-se</guilabel
+></term>
+<listitem
+><para
+>Indica que és necessària una fusió de la revisió d'aquest fitxer a la vostra còpia de treball amb la versió al repositori. Això succeeix normalment si heu fet modificacions al fitxer mentre algú ha publicat les seves modificacions. Si escolliu actualitzar, les modificacions al repositori es fusionaran al vostre fitxer. En cas de conflicte (&ead; si algú ha canviat algunes de les mateixes línies que vós) llavors el nou estat serà «Conflicte». </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Última versió</guilabel
+></term>
+<listitem
+><para
+>Indica que el fitxer és idèntic amb la versió al repositori. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Conflicte</guilabel
+></term>
+<listitem
+><para
+>Es mostra si el fitxer encara té marcadors de conflicte. Potser heu actualitzat prèviament el fitxer i no s'han resolt els conflictes. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>No és al CVS</guilabel
+></term>
+<listitem
+><para
+>Indica que el fitxer no està registrat al repositori de &CVS;. Si voleu que estigui disponible pels altres, haureu d'afegir-lo al repositori, Si no, considereu d'afegir-lo al vostre fitxer <filename
+>.cvsignore</filename
+>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Ara que heu obtingut un resum sobre l'estat actual del &CVS;, potser voleu fer una actualització. Marqueu alguns fitxers (o l'arrel de l'arbre de carpetes, el qual equival a marcar tots els fitxers en aquesta carpeta). Ara escolliu <menuchoice
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Actualitza</guimenuitem
+> </menuchoice
+> (per descomptat, podríeu haver seleccionat això a l'inici de la sessió). Ara podreu canviar l'estat d'alguns dels fitxers. Normalment, els fitxers que tenen «Necessita apedaçar-se» o «Necessita actualitzar-se» s'actualitzen. Per tant són possibles els següents elements nous a la columna d'estat: </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Actualitzat</guilabel
+></term>
+<listitem
+><para
+>Mostra si el fitxer ha estat actualitzat des del repositori. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Apedaçat</guilabel
+></term>
+<listitem
+><para
+>Indica que el servidor de &CVS; ha enviat un pedaç per a aquest fitxer i el pedaç s'ha aplicat satisfactòriament. Si l'apedaçat no ha estat possible perquè hi ha un conflicte entre les vostres modificacions i les que algú ha publicat al repositori, ara l'estat és <guilabel
+>Conflicte</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Podríeu haver notat que, segons l'estat del fitxer de la fila, aquesta té un color diferent. Els colors són seleccionats per a reflectir d'alguna manera la prioritat de l'estat. Per exemple, un fitxer amb un conflicte està marcat en vermell per indicar que heu de resoldre un conflicte abans que pugueu seguir treballant amb el fitxer. No obstant això, si la carpeta té un gran nombre de fitxers podeu perdre la vista general. Per obtenir informació més concreta quant a quins fitxers tenen un estat inusual, simplement feu clic a la capçalera de la columna <guilabel
+>Estat</guilabel
+>. La llista de fitxers s'ordenarà per prioritat, d'aquesta manera tindreu tota la informació important a l'inici de la llista. Per tornar a la vista ordenada alfabèticament, feu clic a la capçalera de la columna <guilabel
+>Nom de fitxer</guilabel
+>. </para>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="workingwithfiles">
+<title
+>Treballant amb fitxers</title>
+
+<para
+>Totes les funcions emprades habitualment amb el &CVS; estan disponibles directament a la vista principal del &cervisia;. Les ordres actuen normalment sobre diversos fitxers alhora, és a dir, tots els que estan seleccionats. Si la selecció inclou carpetes, la seva interpretació dependrà de les opcions fetes sota el menú <guimenu
+>Arranjament</guimenu
+>. Per exemple, si està marcat <menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Commit i Remove recursivament</guimenuitem
+></menuchoice
+> i escolliu <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Publica...</guimenuitem
+></menuchoice
+> mentre hi ha seleccionada una carpeta, tots els fitxers en l'arbre sota aquesta carpeta seran publicats. Altrament, només els fitxers normals de la mateixa carpeta es veuran afectats. </para>
+
+<figure id="screenshot-popup" float="1">
+<title
+>Una captura de pantalla del menú contextual del &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="popup.png"/></imageobject>
+</mediaobject>
+</figure>
+
+<para
+>Les accions més emprades també estan disponibles fent clic dret als fitxers a la vista en arbre, a través del menú contextual. La <xref linkend="screenshot-popup"/> mostra el menú contextual de la finestra principal del &cervisia;. </para>
+
+<para
+>Podeu editar simplement un fitxer fent-hi doble clic o seleccionant-lo i prement &Intro;. Això inicia l'aplicació per omissió que gestiona aquest tipus de fitxer (l'aplicació predeterminada per a un tipus de fitxer és una opció per a tot el &kde;), si l'aplicació per omissió no és la que voleu utilitzar, podeu fer clic dret al fitxer i escollir <menuchoice
+> <guisubmenu
+>Edita amb</guisubmenu
+> </menuchoice
+> al submenú, i seleccionar una de les altres aplicacions que gestionen aquest tipus de fitxer. </para>
+
+<sect1 id="addingfiles">
+<title
+>Afegint fitxers</title>
+
+<para
+>Afegir fitxers a un projecte requereix dos passos: primer, els fitxers han d'estar registrats amb el &CVS;, o en altres paraules, <emphasis
+>afegir-los al repositori</emphasis
+>. Això és necessari però no n'hi ha prou. Per a posar-los al repositori, haureu de <emphasis
+>publicar-los</emphasis
+>. Aquest procediment té un avantatge important: podeu publicar els fitxers juntament amb les modificacions a altres parts del projecte. En fer això veureu amb facilitat (&pex; en correus de la publicació) que tots aquests canvis formen part d'una totalitat. </para>
+
+<para
+>Amb aquesta finalitat, marqueu tots els fitxers per afegir-los a la vista principal del &cervisia;. A continuació escolliu <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Afegeix al repositori...</guimenuitem
+></menuchoice
+>, o feu clic dret als fitxers marcats i seleccioneu <guimenuitem
+>Afegeix al repositori...</guimenuitem
+>. Apareixerà el diàleg <guilabel
+>Afegeix al CVS</guilabel
+>, llistant els fitxers que heu marcat, i demanant-vos confirmació. Premeu <guibutton
+>D'acord</guibutton
+> per a confirmar. </para>
+
+<para
+>El &cervisia; emetrà una ordre</para>
+
+<para>
+<screen
+><command
+>cvs add <replaceable
+>noms_de_fitxer</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Si l'operació ha estat satisfactòria, la columna d'estat ha de tenir «Publicat, afegit» pels fitxers afegits. </para>
+
+<warning
+><para
+>El &CVS; no està dissenyat per a dotar d'un control de revisions significatiu pels fitxers binaris. Per exemple, normalment no té sentit fusionar fitxers binaris. A més, per omissió, el &CVS; realitza una expansió de les paraules clau (&pex; a la cadena <literal
+>&dollar;Revisió: 1.6 &dollar;</literal
+>) quan un fitxer es publica en fitxers binaris, aquestes substitucions poden corrompre el fitxer i fer-lo completament inusable. </para
+></warning>
+
+<para
+>Per tal de desactivar el comportament anterior, podeu publicar fitxers binaris (o altres fitxers, com ara imatges Postscript o PNG) escollint <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Afegeix un binari...</guimenuitem
+></menuchoice
+>. Apareixerà el diàleg <guilabel
+>Afegeix al CVS</guilabel
+>, llistant els fitxers binaris que heu marcat i us demanarà confirmació. Premeu <guibutton
+>D'acord</guibutton
+> per a confirmar. </para>
+
+<para
+>El &cervisia; emetrà una ordre </para>
+
+<para>
+<screen
+><command
+>cvs add -kb <replaceable
+>noms_de_fitxer</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="removingfiles">
+<title
+>Eliminant fitxers</title>
+
+<para
+>De la mateixa manera que en afegir fitxers, l'eliminació dels fitxers es fa en dos passos. Primer, s'han de registrar els fitxers com a eliminats escollint <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Elimina del repositori...</guimenuitem
+></menuchoice
+> o bé fent clic dret als fitxers marcats i escollint <guimenuitem
+>Elimina del repositori...</guimenuitem
+> des del menú contextual. Apareixerà el diàleg <guilabel
+>Elimina del CVS</guilabel
+> llistant els fitxers que heu marcat i se us demanarà confirmació. Premeu <guibutton
+>D'acord</guibutton
+> i el &cervisia; emetrà l'ordre </para>
+<para>
+<screen
+><command
+>cvs remove -f <replaceable
+>noms_de_fitxer</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Després d'això, s'haurà de publicar aquesta modificació a l'entorn de proves, possiblement amb altres modificacions al projecte. </para>
+
+<note
+><para
+>L'ordre anterior només funciona si el fitxer està al dia. Altrament, obtindreu un missatge d'error. Aquest comportament és sensat: si heu modificat el fitxer en comparació amb la versió al repositori, o algú ha fet alguna modificació, voldreu comprovar primer si realment voleu descartar-lo. </para
+></note>
+
+</sect1>
+
+
+<sect1 id="addingremovingdirs">
+<title
+>Afegint o eliminant carpetes</title>
+
+<para
+>Les carpetes són gestionades fonamentalment de forma diferent als fitxers normals pel &CVS;. No són sota el control de revisions, &ead; no podeu dir quines carpetes existien en el projecte en una data determinada. A més, les carpetes no es poden esborrar mai explícitament (a excepció d'eliminar-les directament en el repositori). </para>
+
+<para
+>Com a alternativa, el &CVS; segueix la convenció que una carpeta «no existeix» en la versió del projecte si és buida. Aquesta convenció pot forçar-se utilitzant l'opció <option
+>-P</option
+> al <command
+>cvs update</command
+> i <command
+>cvs checkout</command
+>. Aquesta opció es pot establir en el menú <menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Elimina les carpetes buides en actualitzar</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>Es pot afegir una carpeta al repositori escollint <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Afegeix al repositori...</guimenuitem
+></menuchoice
+> o fent clic dret a les carpetes marcades i escollint <guimenuitem
+>Afegeix al repositori...</guimenuitem
+> des del menú contextual. Tingueu present que contràriament a afegir fitxers, afegir carpetes no requereix una publicació posterior. El &cervisia; emetrà l'ordre </para>
+
+
+<para>
+<screen
+><command
+>cvs add <replaceable
+>nom_del_directori</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="committingfiles">
+<title
+>Publicant fitxers</title>
+
+<para
+>Quan hàgiu fet un cert nombre de canvis a la còpia de treball, i vulgueu que altres desenvolupadors en tinguin accés, els <emphasis
+>publicareu</emphasis
+>. Amb una publicació, emplaceu les vostres versions dels fitxers modificats com a una nova revisió al repositori. Una actualització posterior d'un altre desenvolupador li servirà les vostres modificacions a la seva còpia de treball. </para>
+
+<para
+>Per tal de publicar un conjunt de fitxers, seleccioneu-los a la vista principal del &cervisia; i escolliu <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Publica...</guimenuitem
+></menuchoice
+> o feu clic dret als fitxers marcats i escolliu <guimenuitem
+>Publica...</guimenuitem
+> des del menú contextual. </para>
+
+<figure id="screenshot-commit" float="1">
+<title
+>Una captura de pantalla del diàleg de publicació del &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="commit.png"/></imageobject>
+</mediaobject>
+</figure>
+
+<para
+>Obtindreu un diàleg que mostrarà una llista dels fitxers seleccionats a la secció superior i un registre de missatges pels canvis a sota. El &cervisia; ajuda de diverses formes per a trobar un missatge concret: primer, a la llista de fitxers podeu fer doble clic a un fitxer o prémer <keycap
+>Retorn</keycap
+> per tal de veure els canvis que heu fet en el fitxer. Segon, us donarà una llista dels missatges de registre que heu utilitzat prèviament en un quadre combinat. Tercer, aquest diàleg s'integrarà amb l'editor del registre de canvis del &cervisia; descrit a continuació. En finalitzar el diàleg, s'utilitzarà l'ordre </para>
+
+<para>
+<screen
+><command
+>cvs commit -m <replaceable
+>missatge</replaceable
+> <replaceable
+>noms_de_fitxer</replaceable
+></command
+></screen>
+</para>
+
+<para
+>. </para>
+
+
+<note
+><para
+>Un error habitual que podeu trobar en publicar és <errorname
+>Ha fallat la comprovació de l'última versió</errorname
+>. Això indica que algú ha publicat canvis en el repositori des de la vostra darrera actualització: o, més tècnicament, que la vostra revisió <literal
+>BASE</literal
+> no és la més nova d'aquesta branca. En aquest cas, el &CVS; rebutjarà fusionar les vostres modificacions en el repositori. La solució és actualitzar, resoldre qualsevol conflicte i tornar a publicar. Per descomptat, si esteu treballant en un projecte de programari, és un bon costum comprovar si el programa encara funciona després que heu actualitzat -després de tot, hi poden haver interaccions negatives entre les vostres modificacions i les altres modificacions que poden malmetre el codi-. </para
+></note>
+
+<note>
+<para
+>Un altre error habitual resulta en el missatge d'error <errorname
+>L'etiqueta «X» pel fitxer «X» no és una branca</errorname
+>. Això succeeix si intenteu publicar un fitxer que heu portat prèviament a una certa revisió o etiquetat amb l'ordre </para>
+<para>
+<screen
+><prompt
+>%</prompt
+><userinput
+>cvs update -r X</userinput
+></screen>
+</para>
+<para
+>(que s'utilitza per, &pex; per a l'element <menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Actualitza a etiqueta/data...</guimenuitem
+></menuchoice
+> del menú). En aquest cas, l'etiqueta del fitxer queda adherida, &ead; actualitzacions posteriors no us portaran la revisió més nova a la branca. Si voleu publicar revisions posteriors a la branca, haureu d'actualitzar a l'etiqueta de la branca abans de fer futures publicacions. </para>
+</note>
+
+<para
+>Amb el &cervisia; és molt fàcil de mantenir un fitxer de registre dels canvis que sigui compatible amb l'establert a les línies mestres de programació de &GNU;. Per utilitzar-lo, escolliu <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Insereix una entrada al registre de canvis...</guimenuitem
+></menuchoice
+>. Si existeix un fitxer amb el nom <filename
+>ChangeLog</filename
+> al nivell superior del vostre entorn de proves, aquest fitxer serà carregat i tindreu la possibilitat d'editar-lo. Amb aquesta finalitat, a la part superior del fitxer, s'insereix una entrada amb la data actual i el vostre nom d'usuari (que es pot configurar com es descriu a <xref linkend="customize-general"/>). Quan acabeu podreu tancar el diàleg fent clic a <guibutton
+>D'acord</guibutton
+>, el pròxim diàleg de publicació que obriu tindrà el missatge de registre establert al darrer missatge que heu introduït al registre de canvis. </para>
+
+</sect1>
+
+
+<sect1 id="resolvingconflicts">
+<title
+>Resolució de conflictes</title>
+
+<para
+>Es poden produir conflictes cada vegada que feu canvis a un fitxer que també ha estat modificat per un altre desenvolupador. El conflicte és detectat pel &CVS; en actualitzar el fitxer modificat: llavors, el &CVS; intentarà fusionar les modificacions publicades per un altre desenvolupador a la vostra còpia de treball. La fusió falla si ambdues, les vostres modificacions i les seves modificacions se superposen en parts del fitxer, i el servidor de &CVS; emetrà un missatge d'error. </para>
+
+<para
+>A la vista principal del &cervisia;, s'indiquen els fitxers amb conflictes amb «Conflicte» a la columna d'estat i amb el color vermell. Ara és feina vostra resoldre aquests conflictes abans de publicar el fitxer. El &CVS; rebutjarà publicar qualsevol fitxer amb conflictes fins que s'hagi editat. Per descomptat podeu resoldre conflictes des de la vista principal de la manera tradicional: simplement feu doble clic al fitxer en qüestió i editeu-lo amb el vostre editor favorit.</para>
+
+<para
+>El &CVS; marca els canvis conflictius emplaçant marques en mig dels fitxers, de la següent manera:</para>
+
+<screen
+>&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+Canvis a la vostra còpia de treball
+=======
+Canvis al repositori
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; número_de_revisió
+</screen>
+
+<para
+>Heu de substituir aquest bloc sencer amb la nova versió fusionada. Per descomptat, teniu una gran llibertat per a resoldre una sèrie de conflictes: per a cada conflicte podeu decidir adoptar una de les dues versions alternatives. També podeu decidir que tots dos enfocaments estan trencats i tornar a escriure una rutina completa o el fitxer complet des de zero. </para>
+
+<para
+>Afortunadament, el &cervisia; ofereix una interfície més agradable per a gestionar aquests conflictes. Això no significa que no necessitareu mai editar manualment els fitxers, però almenys podeu eliminar la necessitat de fer-ho per a resoldre conflictes trivials. Per utilitzar el diàleg <guilabel
+>Resolució CVS</guilabel
+> del &cervisia; escolliu <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Resoldre...</guimenuitem
+></menuchoice
+> o feu clic dret al fitxer marcat i escolliu <guimenuitem
+>Resoldre...</guimenuitem
+> des del menú contextual. </para>
+
+<figure id="screenshot-resolve" float="1">
+<title
+>Una captura de pantalla del diàleg de resolució del &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="resolve.png"/></imageobject>
+<textobject
+><phrase
+>Una captura de pantalla del diàleg de resolució del &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>A la part superior del diàleg, podeu veure <guilabel
+>La vostra versió (A)</guilabel
+> del fitxer a mà esquerra i la versió en el repositori <guilabel
+>l'altra versió (B)</guilabel
+> a mà dreta. Les diferències entre ells estan marcades en color vermell. Sota d'aquestes dues columnes, podeu veure la <guilabel
+>Versió fusionada</guilabel
+>. La versió fusionada reflecteix quina d'aquestes seccions serà a la vostra còpia de treball si premeu el botó <guibutton
+>Desa</guibutton
+>. </para>
+
+<para
+>Podeu anar enrere i endavant entre les seccions amb conflictes prement <guibutton
+>&lt;&lt;</guibutton
+> i <guibutton
+>&gt;&gt;</guibutton
+>. a la part inferior central del diàleg podeu veure quina secció està marcada actualment. Per exemple, <literal
+>2 de 3</literal
+> vol dir que actualment esteu a la segona secció amb diferències d'un total de 3. </para>
+
+<para
+>Ara podeu decidir secció per secció quina versió voleu tenir en el fitxer fusionat. Prement <guibutton
+>A</guibutton
+> tindreu la versió que heu editat. Prement <guibutton
+>B</guibutton
+> tindreu la versió del repositori. Prement <guibutton
+>A+B</guibutton
+>, s'afegiran ambdues versions, i la vostra versió vindrà primer. <guibutton
+>B+A</guibutton
+> obté el mateix resultat, però l'ordre serà diferent: primer la versió del repositori, després la vostra. </para>
+
+<para
+>Si no esteu content amb cap d'aquestes versions, premeu <guibutton
+>Edita</guibutton
+> per obrir un editor de text simple on podreu editar la secció. En acabar l'edició, premeu <guibutton
+>D'acord</guibutton
+> per tornar al diàleg <guilabel
+>Resolució CVS</guilabel
+> i acabar de resoldre els conflictes. Podeu veure la secció que acabeu d'editar a la <guilabel
+>Versió fusionada</guilabel
+>, amb les vostres modificacions. </para>
+
+<para
+>Per a desar les modificacions, sobreescrivint la versió de la còpia de treball, premeu <guibutton
+>Desa</guibutton
+>. Tingueu present que això desarà les eleccions no només de la selecció que esteu veient actualment, sinó de totes les versions en el fitxer. Si voleu desar-los en un altre fitxer, premeu <guibutton
+>Desa com a...</guibutton
+>. Premeu <guibutton
+>Tanca</guibutton
+> per a tancar el diàleg. Si tanqueu el diàleg sense desar, es perdran els canvis que heu fet. </para>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="obtaininginformation">
+<title
+>Obtenint informació quant als fitxers i la creació de pedaços</title>
+
+<sect1 id="diff">
+<title
+>Observant les diferències entre revisions</title>
+
+<para
+>Hi ha diversos llocs en el &cervisia; on podeu demanar una finestra mostrant les diferències entre les revisions d'un fitxer: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>En la vista principal, podeu seleccionar <menuchoice
+><guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Diferències amb el repositori (BASE)...</guimenuitem
+></menuchoice
+>. Això està basat en l'ordre <command
+>cvs diff</command
+> i us mostra les diferències entre la versió al vostre entorn de proves i la darrera versió a què heu actualitzat (també coneguda com a <literal
+>BASE</literal
+>). Això és particularment útil tot just després de publicar un fitxer, ja que podeu trobar un missatge de registre apropiat. </para
+></listitem>
+
+<listitem
+><para
+>Podeu veure les diferències entre la versió en el vostre entorn de proves i la branca de desenvolupament principal (també anomenada <literal
+>HEAD</literal
+>) seleccionant <menuchoice
+><guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Diferències amb el repositori (HEAD)...</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+
+<listitem
+><para
+>Podeu veure les diferències entre les dues darreres revisions del fitxer seleccionat triant <menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Últims canvis...</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+
+<listitem
+><para
+>Podeu accedir als elements del menú <guimenuitem
+>Diferències amb el repositori (BASE)...</guimenuitem
+>, <guimenuitem
+>Diferències amb el repositori (HEAD)...</guimenuitem
+> i <guimenuitem
+>Últims canvis...</guimenuitem
+> des del menú contextual de la vista principal, dretaclicant el fitxer que voleu visualitzar. </para
+></listitem>
+
+<listitem
+><para
+>En el diàleg que es mostra quan publiqueu un conjunt de fitxers, podeu sol·licitar una finestra de diferències seleccionant un nom de fitxer en la llista de selecció, sigui dobleclicant-hi o prement <keycap
+>Retorn</keycap
+>. Això és molt similar a usar <menuchoice
+><guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Diferències amb el repositori (BASE)...</guimenuitem
+></menuchoice
+> amb el fitxer respectiu en la vista principal. </para
+></listitem>
+
+<listitem
+><para
+>En el diàleg de navegació dels registres, podeu marcar dues revisions d'un fitxer i sol·licitar un diàleg mostrant-ne les diferències (vegeu <xref linkend="browsinglogs"/>). </para
+></listitem>
+
+</itemizedlist>
+
+<para
+>Tal com podeu haver esperat, el &cervisia; no simplement bolca la sortida de l'ordre <command
+>diff</command
+> en el vostre terminal, sinó que mostra una vista gràfica com es veu en <xref linkend="screenshot-log"/>. </para>
+
+<figure id="screenshot-log" float="1">
+<title
+>Una captura de pantalla del diàleg de diferències del &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="diff.png"/></imageobject>
+<textobject
+><phrase
+>Una captura de pantalla del diàleg de diferències del &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>El text del diàleg és una variant millorada del text donat per l'ordre diff amb l'opció <option
+>-u</option
+>. Podeu veure les diferents versions en dues finestres, amb línies arranjades de manera que podeu fer una comparació costat a costat. Això vol dir que, on s'ha afegit o suprimit text, les respectives finestres mostren línies buides amb el marcador <literal
+>+++++</literal
+> a mà esquerra. Per a tot el fitxer podeu veure el número d'execució de cada línia en la columna de l'esquerra. </para>
+
+<para
+>En la segona columna de la dreta de la finestra, podeu veure quin tipus de canvi s'ha fet. Els tipus possibles són <literal
+>Afegeix</literal
+>, <literal
+>Elimina</literal
+> i <literal
+>canvia</literal
+>. Les línies respectives són marcades en blau, verd i vermell. En el centre del diàleg es mostra una imatge comprimida dels colors dels marcadors. D'aquesta manera, podeu tenir una vista general ràpida de tots els canvis al fitxer. També podeu usar les posicions de les regions acolorides en la imatge comprimida com una orientació en usar les barres de desplaçament. </para>
+
+<para
+>Normalment, les barres de desplaçament a l'esquerra i la dreta de la finestra estan sincronitzades, &ead; si desplaceu a mà esquerra, la dreta és desplaçada en la mateixa quantitat. Podeu canviar això marcant la casella <guibutton
+>Sincronitza les barres de desplaçament</guibutton
+>. </para>
+
+<para
+>Per informació quant a com personalitzar el diàleg de diferències, vegeu <xref linkend="customize-diff"/>. </para>
+
+</sect1>
+
+<sect1 id="creatingpatches">
+<title
+>Creació de pedaços</title>
+
+<para
+>De vegades voldreu oferir les vostres modificacions per revisar-les, abans de publicar-les, o no teniu accés al repositori (i per tant no podeu publicar). &CVS; ofereix formats estàndards per compartir les modificacions en la vostra còpia de treball, de manera que altres puguin revisar els canvis, provar-los en la seva còpia i aplicar-los al repositori &CVS;. Un fitxer contenint aquestes diferències s'anomena <firstterm
+>pedaç</firstterm
+>, i normalment és generat per l'ordre <command
+>cvs diff</command
+>, de la mateixa manera que les diferències en <xref linkend="diff"/>. Compartir pedaços en lloc de grups de fitxers requereix menys amplada de banda, i els pedaços són més fàcils de gestionar, ja que podeu enviar només un fitxer de pedaç contenint totes les diferències de molts fitxers de codi font. </para>
+
+<para
+>El &cervisia; us dona accés a aquesta característica seleccionant <menuchoice
+><guimenu
+>Avançat</guimenu
+> <guimenuitem
+>Crea pedaç contra el repositori...</guimenuitem
+></menuchoice
+>. </para>
+
+<important
+><para
+>L'acció <guimenuitem
+>Crea pedaç contra el repositori...</guimenuitem
+> crea un pedaç amb totes les modificacions en tots els fitxers de la vostra còpia de treball (entorn de proves) contra el repositori <literal
+>BASE</literal
+>. La selecció de fitxers en la vista principal no afecta el pedaç que serà generat. </para
+></important>
+
+<para
+>Una altra possibilitat és seleccionar un fitxer en la vista principal i seleccionar <guimenuitem
+>Navega pel registre...</guimenuitem
+> del menú <guimenu
+>Visualitza</guimenu
+> o dretaclicar el fitxer marcat i seleccionar <guimenuitem
+>Navega pel registre...</guimenuitem
+> del menú contextual, per tal d'obrir el <link linkend="browsinglogs"
+>Diàleg de navegació del registre</link
+>. Ara seleccioneu la versió contra la que voleu crear un pedaç, com a revisió <quote
+>A</quote
+> i premeu el botó <guilabel
+>Crea un pedaç...</guilabel
+>. Això generarà un pedaç amb les diferències entre el <emphasis
+>fitxer marcat</emphasis
+> en la vostra còpia de treball i la versió seleccionada com a revisió <quote
+>A</quote
+>. </para>
+
+<para
+>Abans de generar el pedaç, el &cervisia; mostra un diàleg permetent-vos configurar el format de sortida. </para>
+
+<figure id="screenshot-patch" float="1">
+<title
+>Una captura de pantalla del diàleg de pedaços del &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="patch.png"/></imageobject>
+<textobject
+><phrase
+>Una captura de pantalla del diàleg de pedaços del &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Format de sortida</guilabel
+></term>
+<listitem
+><para
+>Hi ha disponibles tres formats de sortida: </para>
+<para
+><guilabel
+>Normal</guilabel
+>:un format que es pot usar per fer que l'editor faci automàticament una altra còpia de l'antic fitxer que casi amb el nou fitxer. En el format normal de sortida, els caràcters &lt; i &gt; marquen els canvis i no hi ha informació de context. </para>
+<para
+><guilabel
+>Unificat</guilabel
+>: el més usat per intercanviar pedaços. El format unificat usa línies de context en addició als números de línia per enregistrar les diferències. Això fa més robust el procés d'aplicar pedaços. Aquest format mostra les diferències en un format compacte i llegible, amb una capçalera per cada fitxer involucrat, i seccions separades (blocs) per cada diferència. Les línies de context disponibles per cada diferència fa més llegibles les modificacions. En el format de sortida unificat, els caràcters + i - marquen els canvis. </para>
+<para
+><guilabel
+>Context</guilabel
+>, que presenta la mateixa informació que el format unificat, però d'una manera menys compacta. En el format de sortida amb context, el caràcter «!» marca els canvis. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Nombre de línies de context:</guilabel
+></term>
+<listitem
+><para
+>Establiu aquí el nombre de línies de context pels formats de sortida unificat o context. Aquesta opció no és disponible pel format de sortida normal, ja que en aquest format no s'enregistra informació de context. Més informació de context fa més fàcil llegir la sortida sense processar, i més precís d'aplicar el pedaç, però incrementa la mida del pedaç. Està recomanat usar almenys dues línies de context per una operació d'apedaçat adequada. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Opcions per ignorar</guilabel
+></term>
+<listitem
+><para
+>Marqueu aquí els canvis que no s'han de considerar com a diferències en generar el pedaç. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+
+<para
+>Després d'establir el format de sortida, el &cervisia; genera el pedaç i mostra el diàleg <guilabel
+>Desa com a</guilabel
+>. Introduïu el nom de fitxer i la ubicació del fitxer de pedaç en aquest diàleg. </para>
+
+
+</sect1>
+
+<sect1 id="annotate">
+<title
+>Visualitzant una vista anotada d'un fitxer</title>
+
+<para
+>Amb l'ordre <command
+>cvs annotate</command
+>, &CVS; ofereix la possibilitat de veure - per cada línia d'un fitxer - qui ha modificat la línia més recentment. Aquesta vista pot ser útil per tal de trobar qui ha introduït un canvi en el comportament d'un programa o a qui se li ha de preguntar quant a algun canvi o errada en el codi. </para>
+
+<para
+>El &cervisia; us dona accés a aquesta característica, però més endavant enriqueix la informació de forma interactiva. Podeu obtenir una vista anotada seleccionant <menuchoice
+><guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Anotacions...</guimenuitem
+></menuchoice
+>. Una altra possibilitat és prémer el botó <guilabel
+>Anotacions</guilabel
+> en el <link linkend="browsinglogs"
+>diàleg de navegació del registre</link
+>, on podeu seleccionar quina versió del fitxer voleu visualitzar. Podeu veure una captura de pantalla del diàleg en <xref linkend="screenshot-annotate"/>. </para>
+
+<figure id="screenshot-annotate" float="1">
+<title
+>Una captura de pantalla del diàleg d'anotacions del &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="annotate.png"/></imageobject>
+<textobject
+><phrase
+>Una captura de pantalla del diàleg d'anotacions del &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>En el diàleg d'anotacions, podeu veure en una finestra la darrera versió del fitxer seleccionat (o la revisió versió <quote
+>A</quote
+>, en el cas que hàgiu llançat el diàleg d'anotacions des del <link linkend="browsinglogs"
+>diàleg navega registre</link
+>). En les columnes anteriors al text, podeu obtenir alguna informació relacionada als darrers canvis en cada línia. En la primera columna es mostra el número de línia. En la segona columna podeu veure el nom de l'autor i el número de revisió. Finalment, en la tercera columna podeu veure el contingut real d'aquesta línia. </para>
+
+<para
+>En conseqüència, quan una certa línia us sembli estranya o penseu que hi ha una errada, podeu veure immediatament qui és el responsable d'aquesta línia. Però no només això, també podeu trobar <emphasis
+>perquè</emphasis
+> s'ha canviat aquesta línia. Per acabar, situeu el cursor del ratolí sobre el respectiu número de revisió. Apareixerà un consell emergent mostrant el missatge de registre i la data del canvi. </para>
+
+</sect1>
+
+
+<sect1 id="browsinglogs">
+<title
+>Navegant pels registres del &CVS;</title>
+
+<para
+>En marcar un fitxer en la vista principal i seleccionar <guimenuitem
+>Navega pel registre...</guimenuitem
+> del menú <guimenu
+>Visualitza</guimenu
+> o dretaclicant el fitxer marcat i seleccionant <guimenuitem
+>Navega pel registre...</guimenuitem
+> del menú contextual, es mostrarà el diàleg <guilabel
+>Registre de CVS</guilabel
+> (si marqueu més d'un, no passarà res, ja que el &cervisia; només pot generar i analitzar el registre per un fitxer alhora). Aquest diàleg ofereix la funcionalitat de veure l'historial del fitxer. Usant-lo com un navegador de versió podeu: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Veure la revisió, autor, data, branca, missatge de publicació, i etiquetes per cada versió del fitxer marcat. </para
+></listitem>
+
+<listitem
+><para
+>Veure una representació gràfica en arbre mostrant l'embrancament i l'etiquetatge del fitxer marcat. </para
+></listitem>
+
+<listitem
+><para
+>Veure qualsevol versió del fitxer marcat (amb l'aplicació per omissió). </para
+></listitem>
+
+<listitem
+><para
+>Veure una vista anotada de qualsevol versió del fitxer marcat </para
+></listitem>
+
+<listitem
+><para
+>Veure les diferències entre qualsevol parell de versions del fitxer marcat, incloent-hi parelles amb la còpia de treball actual del fitxer marcat. </para
+></listitem>
+
+<listitem
+><para
+>Crear pedaços contenint les diferències entre qualsevol parell de versions del fitxer marcat, incloent-hi parelles amb la còpia de treball actual del fitxer marcat. </para
+></listitem>
+
+</itemizedlist>
+
+<figure float="1">
+<title
+>Una captura de pantalla del diàleg de navegació de registres del &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="logtree.png"/></imageobject>
+<textobject
+><phrase
+>Una captura de pantalla del diàleg de navegació de registres del &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Podeu seleccionar veure la història proporcionada per l'ordre <command
+>cvs log</command
+> (<guilabel
+>Sortida CVS </guilabel
+>), com un <guilabel
+>Arbre</guilabel
+> o en forma de <guilabel
+>Llista</guilabel
+>. El que preferiu és una qüestió de gustos i depèn de la informació en què esteu interessat. L'arbre és una representació intuïtiva del que s'ha fet en diverses branques i per quins autors. Podeu veure els corresponents missatges de registre com a consells emergents. La llista és per la seva naturalesa, lineal i per tant, no ofereix una vista immediata de les branques, per altra banda, concentra més informació relevant en menys estat de pantalla, anomenant la data de cava canvi del fitxer i la primera part del missatge de registre. La informació de la sortida &CVS; és completa però extensa, i difícil de llegir. Per alleugerir aquests problemes, teniu l'habilitat de cercar el text de la sortida &CVS;, prement el botó <guibutton
+>Cerca...</guibutton
+>. </para>
+
+<para
+>Per obtenir més informació quant a una certa revisió, podeu clicar tant en la llista com en la vista en arbre. Els camps del centre del diàleg s'emplenen amb la informació completa proporcionada per <command
+>cvs log</command
+>. Podeu marcar dues revisions, anomenades <quote
+>A</quote
+> i <quote
+>B</quote
+>, que és pertinent si feu ús de les següents característiques proporcionades pels botons. La revisió <quote
+>A</quote
+> es pot seleccionar amb el &BER;, la revisió <quote
+>B</quote
+> amb el botó central. En la vista de llista, també podeu navegar amb les tecles del cursor. Per tal de marcar dues revisions <quote
+>A</quote
+> i <quote
+>B</quote
+>, utilitzeu les dreceres <keycombo action="simul"
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+>, <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+>, respectivament. Utilitzant la vista <guilabel
+>Sortida del CVS </guilabel
+>, podeu clicar en <guilabel
+>Selecció per a la revisió A</guilabel
+> i <guilabel
+>Selecció per a la revisió B</guilabel
+> per a marcar les revisions. </para>
+
+<para
+>Si premeu el botó <guibutton
+>Anotacions</guibutton
+>, obtindreu un diàleg mostrant el text del fitxer corresponent a la revisió marcada com <quote
+>A</quote
+>. Cada línia està prefixada amb informació quant a qui l'ha editat per darrera vegada, i en quina revisió ha succeït això. Podeu obtenir més informació quant a visualitzar versions anotades en <xref linkend="annotate"/>. </para>
+
+<para
+>Si premeu el botó <guibutton
+>Diff</guibutton
+>, s'emetrà una crida a l'ordre <command
+>cvs diff</command
+> i obtindreu un diàleg on es mostraran totes les modificacions entre les dues revisions marcades. Si marqueu una revisió <quote
+>A</quote
+>, però no una revisió <quote
+>B</quote
+>, el &cervisia; generarà les modificacions entre la versió del fitxer marcat com a revisió <quote
+>A</quote
+>, i la versió de la còpia de treball del fitxer. Això permet veure les diferències entre la vostra versió del fitxer i qualsevol versió disponible en el &CVS;. Per a fer més fàcil de veure els canvis, s'utilitzen diferents colors per a marcar les línies que s'han afegit, eliminat o simplement canviat. Podeu obtenir més informació quant a veure les diferències en <xref linkend="diff"/>. </para>
+
+<para
+>Si premeu el botó <guibutton
+>Crea un pedaç...</guibutton
+>, obtindreu un diàleg el que podreu establir les opcions de format per generar un fitxer contenint totes les modificacions entre les dues reversions marcades que es mostren. Si marqueu una revisió <quote
+>A</quote
+>, però no una revisió <quote
+>B</quote
+>, el &cervisia; generarà les modificacions entre la versió marcada del fitxer com a revisió <quote
+>A</quote
+>, i la versió del fitxer de la còpia de treball. Això permet generar un pedaç, o fitxer de diferències, entre la vostra versió del fitxer i qualsevol versió disponible en &CVS;. Després de configurar el format del pedaç en el diàleg, i prement <guibutton
+>D'acord</guibutton
+>, s'emet una ordre <command
+>cvs diff</command
+> per a generar el fitxer de diferències. S'obrirà un diàleg <guilabel
+>Desa com a</guilabel
+>. Introduïu el nom de fitxer i la ubicació del fitxer de pedaç que ha generat el &cervisia; per tal de desar-lo. Podeu obtenir més informació quant a la creació de pedaços, i les opcions de format dels pedaços en <xref linkend="creatingpatches"/>. </para>
+
+<para
+>Si premeu el botó <guibutton
+>Visualitza</guibutton
+>, el &cervisia; recuperarà la revisió marcada com <quote
+>A</quote
+> i la mostrarà utilitzant l'aplicació per omissió per a aquest tipus de fitxer. </para>
+
+<para
+>Premeu el botó <guibutton
+>Tanca</guibutton
+> per abandonar el diàleg i tornar a la vista principal. </para>
+
+
+<para
+>Per generar el registre que és la base pel diàleg <guilabel
+>Registre de CVS</guilabel
+>, el &cervisia; emet la següent ordre: </para>
+
+
+<para>
+<screen
+><command
+>cvs log <replaceable
+>nom_de_fitxer</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+<sect1 id="browsinghistory">
+<title
+>Navegant per l'historial</title>
+
+<para
+>Si el repositori emprat té activat el registre, el &cervisia; pot presentar-vos un historial de certs esdeveniments com ara recuperacions, publicacions, etiquetatges, actualitzacions i llançaments. Seleccioneu <guimenuitem
+>Historial</guimenuitem
+> des del menú <guimenu
+>Visualitza</guimenu
+>, i el &cervisia; emetrà l'ordre </para>
+
+<para>
+<screen
+><command
+>cvs history -e -a</command
+></screen>
+</para>
+
+<note
+><para
+>Això recupera el registre complet del servidor, &ead; una llista dels esdeveniments per tots els usuaris i tots els mòduls. Això pot ser una enorme quantitat de dades. </para
+></note>
+
+<para
+>Ara podeu veure la llista d'esdeveniments, ordenats per la data, en la segona columna es mostra el tipus d'esdeveniment: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Obtenció - l'usuari que es mostra en la columna «Autor» ha proporcionat un mòdul </para
+></listitem>
+
+<listitem
+><para
+>Etiqueta - un usuari ha usat l'ordre <command
+>cvs rtag</command
+>. Noteu que l'ús de <command
+>cvs tag</command
+> (tal com fa l'ordre del &cervisia; <menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Etiqueta/branca...</guimenuitem
+></menuchoice
+>) no s'enregistra en la base de dades de l'historial. Això té motius històrics (vegeu les <acronym
+>PMF</acronym
+> de &CVS;). </para
+></listitem>
+
+<listitem
+><para
+>Llançament - un usuari ha alliberat un mòdul. Realment, aquesta ordre s'usa rarament i no té gaire valor. </para
+></listitem>
+
+<listitem
+><para
+>Actualització, eliminat - un usuari ha fet una actualització en un fitxer que s'ha esborrat en el repositori. Com a conseqüència, el fitxer que va ser eliminat està en la seva còpia de treball. </para
+></listitem>
+
+<listitem
+><para
+>Actualització, copiat - un usuari ha fet una actualització en un fitxer. S'ha copiat una nova versió en la seva còpia de treball. </para
+></listitem>
+
+<listitem
+><para
+>Actualització, fusionat - un usuari ha fet una actualització en un fitxer. Les modificacions en la versió del repositori del fitxer s'han fusionat en la seva còpia de treball. </para
+></listitem>
+
+<listitem
+><para
+>Actualització, conflicte - un usuari ha fet una actualització en un fitxer, i s'ha detectat un conflicte amb les seves pròpies modificacions. </para
+></listitem>
+
+<listitem
+><para
+>Publicat, modificat - un usuari ha publicat un fitxer modificat. </para
+></listitem>
+
+<listitem
+><para
+>Publicat, afegit - un usuari ha afegit un fitxer i l'ha publicat. </para
+></listitem>
+
+<listitem
+><para
+>Publicat, eliminat - un usuari ha publicat l'eliminació d'un fitxer. </para
+></listitem>
+
+</itemizedlist>
+
+<figure id="screenshot-history" float="1">
+<title
+>Una captura de pantalla del diàleg d'historial del &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="history.png"/></imageobject>
+<textobject
+><phrase
+>Una captura de pantalla del diàleg d'historial del &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Podeu ordenar la llista amb un altre criteri simplement clicant en la seva respectiva capçalera de columna. Per ordenar les entrades de l'historial en les que esteu interessat hi ha diverses opcions de filtre que s'activen amb caselles de selecció: </para>
+
+<itemizedlist>
+<listitem
+><para
+>Mostra els esdeveniments de publicació - mostra les publicacions</para
+></listitem>
+<listitem
+><para
+>Mostra els esdeveniments d'obtenció - mostra les obtencions</para
+></listitem>
+<listitem
+><para
+>Mostra els esdeveniments d'etiquetatge - mostra els etiquetatges</para
+></listitem>
+<listitem
+><para
+>Mostra els altres esdeveniments - mostra els esdeveniments que no estan inclosos amunt</para
+></listitem>
+<listitem
+><para
+>Només l'usuari - Només mostra els esdeveniments causats per un cert usuari</para
+></listitem>
+<listitem
+><para
+>Només els noms de fitxer que coincideixin - filtra els noms de fitxer amb una expressió regular</para
+></listitem>
+<listitem
+><para
+>Només les carpetes que coincideixin - filtra els noms de carpeta amb una expressió regular</para
+></listitem>
+</itemizedlist>
+
+<para
+>Els caràcters especials reconeguts pel cercador d'expressions regulars són: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+><literal
+>x*</literal
+> coincideix amb qualsevol nombre d'ocurrències del caràcter <literal
+>x</literal
+>. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>x+</literal
+> coincideix amb una o més ocurrències del caràcter <literal
+>x</literal
+>. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>x?</literal
+> coincideix amb zero o una ocurrència del caràcter <literal
+>x</literal
+>. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>^</literal
+> coincideix amb l'inici de la cadena. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>$</literal
+> coincideix amb el final de la cadena. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>[a-cx-z]</literal
+> coincideix amb un conjunt de caràcters, &pex; aquí el conjunt consisteix en a,b,c,x,y,z. </para
+></listitem>
+
+</itemizedlist>
+
+</sect1>
+
+
+</chapter>
+
+<chapter id="advancedusage">
+<title
+>Ús avançat</title>
+
+<sect1 id="updatingto">
+<title
+>Actualitzant a una etiqueta, branca o data</title>
+
+<para
+>Les branques d'un mòdul són versions paral·leles d'aquest mòdul. Un bon exemple real de la utilització d'aquesta característica és el llançament d'un projecte de programari. Després d'un llançament important, hi ha errors en el codi que han de ser arranjats, però la gent també vol afegir noves característiques. És molt difícil fer les dues coses alhora, perquè les noves característiques generalment introdueixen nous errors, cosa que dificulta localitzar els antics. Per resoldre aquest dilema, &CVS; us permet crear una versió paral·lela, que anomenarem la <quote
+>branca de la versió estable</quote
+>, on només es poden afegir correccions d'errors, deixant la branca de llançament principal (HEAD) oberta per afegir noves característiques. </para>
+
+<para
+>Les etiquetes s'usen per marcar una versió d'un projecte. &CVS; marca una versió de cada fitxer amb l'etiqueta, de manera que quan vulgueu obtenir o actualitzar a una etiqueta específica, sempre obtingueu la mateixa versió dels fitxers: per tant, en oposició a les branques, les etiquetes no són dinàmiques: no podeu desenvolupar una etiqueta. Les etiquetes són útils per marcar llançaments, grans canvis en el codi, &etc; </para>
+
+<para
+>Quan esteu desenvolupant o seguint el desenvolupament d'un projecte de programari, no heu de treballar necessàriament amb la branca principal tot el temps. Després d'un llançament, potser voldreu mantenir-vos amb la branca llançada durant un temps, per gaudir de la seva relativa estabilitat, arranjar errors, traduir les fonts, &etc;. Per fer tot això, heu d'actualitzar la branca llançada. Tots els vostres fitxers s'actualitzaran a les darreres versions dels fitxers en aquesta branca. Després d'actualitzar, totes les vostres noves publicacions també es pujaran a la nova branca. </para>
+
+<para
+>Si voleu seguir un error que fou reportat contra el passat llançament etiquetat, &CVS; també ofereix la possibilitat de recuperar el programari tal com fou llançat, actualitzant a aquesta etiqueta. Per altra banda, si voleu obtenir una versió passada del vostre projecte, podeu actualitzar la vostra còpia de treball a una data específica. Això pot ser útil si s'ha introduït un error en el projecte entre dos llançaments, i teniu una idea de quan va ser. En actualitzar a una data o etiqueta, les versions dels vostres fitxers seran les mateixes a les versions en la data específica o les versions marcades amb aquesta etiqueta. </para>
+
+<warning
+><para
+>Abans d'actualitzar a una branca o etiqueta diferent, assegureu-vos que heu publicat tots els vostres canvis a la branca amb què esteu treballant. Si no esteu preparat per publicar els vostres canvis, però no els voleu descartar, no actualitzeu a la nova branca, ja que perdríeu els vostres canvis. Com a alternativa, podeu fer una nova <link linkend="checkingout"
+>obtenció</link
+>, per treballar en paral·lel amb ambdues versions. </para
+></warning>
+
+<figure id="screenshot-updatetag" float="1">
+<title
+>Una captura de pantalla del diàleg actualitza a l'etiqueta del &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="updatetag.png"/></imageobject>
+<textobject
+><phrase
+>Una captura de pantalla del diàleg actualitza a l'etiqueta del &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<variablelist>
+<varlistentry>
+<term
+><guilabel
+>Actualitza a la branca</guilabel
+></term>
+<listitem
+><para
+>Seleccioneu aquesta opció per actualitzar a una branca. Introduïu el nom de la branca en el quadre de text desplegable (o premeu el botó <guilabel
+>Obtén llista</guilabel
+> per recuperar la llista de branques del servidor &CVS;, i seleccioneu la que vulgueu en la llista desplegable). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Actualitza a l'etiqueta</guilabel
+></term>
+<listitem
+><para
+>Seleccioneu aquesta opció per actualitzar a una etiqueta. Introduïu el nom de la branca en el quadre de text desplegable (o premeu el botó <guilabel
+>Obtén llista</guilabel
+> per recuperar la llista d'etiquetes del servidor &CVS;, i seleccioneu la que vulgueu en la llista desplegable). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Actualitza a la data</guilabel
+></term>
+<listitem
+><para
+>Seleccioneu aquesta opció si voleu actualitzar a una data. En el camp inferior, podeu introduir una ampla varietat de formats de data. Un format possible és <literal
+>aaaa-mm-dd</literal
+> on <literal
+>aaaa</literal
+> és l'any, <literal
+>mm</literal
+> és el mes (numero) i <literal
+>dd</literal
+> és el dia. Les alternatives són algunes frases en anglès com ara <literal
+>yesterday</literal
+> o <literal
+>2 weeks ago</literal
+>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<note
+><para
+>Actualitzar a una etiqueta o data fa que sigui etiquetat, &ead; no podreu publicar futures modificacions d'aquests fitxers (tret que l'etiqueta sigui una etiqueta de branca). Per tal de tornar enrere a la branca principal, useu l'element del menú <menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Actualitza a HEAD</guimenuitem
+></menuchoice
+>. </para
+></note>
+
+<para
+>L'ordre emesa per actualitzar a una branca o etiqueta és: <screen
+><command
+>cvs update -r <replaceable
+>etiqueta</replaceable
+></command
+></screen>
+</para>
+
+<para
+>L'ordre emesa per actualitzar a una data és: <screen
+><command
+>cvs update -D <replaceable
+>data</replaceable
+></command
+></screen>
+</para>
+
+<para
+>L'ordre emesa per actualitzar a la branca principal (HEAD) és: <screen
+><command
+>cvs update <option
+>-A</option
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="taggingbranching">
+<title
+>Etiquetatge i branques</title>
+
+<para
+>Aquí només analitzarem els aspectes tècnics de l'etiquetatge i de les branques. Si només sou un <emphasis
+>usuari</emphasis
+> i no l'administrador del repositori, segurament no us trobareu amb el problema. No obstant això, si sou el vostre propi administrador, hauríeu de llegir primer quant als problemes no tècnics que acompanyen a les branques, per tal d'obtenir una impressió de quant de temps es consumeix i de com pot ser mantenir i netejar d'errors les diferents branques. L'apèndix inclou algunes referències quant a aquest tema. </para>
+
+<para
+>L'etiquetatge simple és una cosa que fareu normalment quan feu un llançament. d'aquesta manera podreu tornar fàcilment quan vulgueu enrere a l'estat del projecte en aquesta data. Les etiquetes normalment consisteixen en el nom del projecte i el número de versió. Per exemple el &cervisia; 1.0 està disponible sota l'etiqueta <literal
+>CERVISIA_1_0</literal
+>. El &cervisia; força les regles estrictes del &CVS; quant a la constitució de noms vàlids d'etiquetes. Han de començar amb una lletra i poden contenir lletres, dígits, guions i guions baixos. </para>
+
+<para
+>Normalment, voldreu etiquetar el projecte sencer (encara que, per descomptat, &CVS; permet etiquetar només un subconjunt). Amb aquesta finalitat, marqueu la carpeta de nivell superior en la vista i seleccioneu <menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Etiqueta/branca</guimenuitem
+></menuchoice
+>. Ara, introduïu el nom de l'etiqueta, premeu <keycap
+>Retorn</keycap
+> i haureu enllestit. </para>
+
+<para
+>La creació d'una branca no és significativament més difícil: en el diàleg d'etiquetatge marqueu la casella <guibutton
+>Crea branca amb aquesta etiqueta</guibutton
+>. També podeu esborrar una etiqueta existent: seleccioneu <menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Elimina etiqueta</guimenuitem
+></menuchoice
+> en la vista principal. </para>
+
+<para
+>Un altre aspecte de les branques és la fusió de modificacions des d'una banca a la branca actual. Si esteu fent això, seleccioneu <menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Fusiona...</guimenuitem
+></menuchoice
+>. El diàleg que apareixerà us donarà dues opcions: </para>
+
+<para
+>Podeu fusionar totes les modificacions realitzades en una branca a la branca actual, en aquest cas, marqueu la casella <guibutton
+>Fusiona des de branca</guibutton
+> i emplenar la branca des de què voleu fusionar. El &cervisia; executarà l'ordre </para>
+
+<para>
+<screen
+><command
+>cvs update <option
+>-j</option
+> <replaceable
+>etiqueta_branca</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Una altra possibilitat és que vulgueu fusionar només les modificacions fetes entre dues etiquetes d'una branca. Això normalment succeeix en fusionar des de la mateixa branca al tronc diverses vegades. En aquest cas, marqueu la casella <guibutton
+>Fusiona les modificacions</guibutton
+> i introduïu (en l'ordre correcte) les dues etiquetes apropiades. Això resulta en una ordre </para>
+
+<para>
+<screen
+><command
+>cvs update <option
+>-j</option
+> <replaceable
+>etiqueta_branca1</replaceable
+> <option
+>-j</option
+> <replaceable
+>etiqueta_branca2</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="watches">
+<title
+>Usant els vigilants</title>
+
+<para
+>Un vigilant és el nom convencional d'una característica de &CVS; per notificar als usuaris del repositori si un fitxer ha canviat o un desenvolupador ha iniciat l'edició d'un fitxer. L'ús dels vigilants requereix que s'hagi arranjat correctament el fitxer <filename
+><envar
+>$CVSROOT</envar
+>/CVSROOT/notify</filename
+>. Això no s'explica aquí; si necessiteu més informació quant a l'arranjament des del punt de vista de l'administrador, llegiu un dels llibres llistats en l'apèndix. </para>
+
+<para
+>El suport principal dels vigilants del &cervisia; són sis elements del menú. </para>
+
+<para
+>Per tal d'afegir un vigilant a un o diversos fitxers, useu <menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Afegeix vigilant...</guimenuitem
+></menuchoice
+>. En el diàleg que obtindreu, podreu seleccionar ser notificat per qualsevol dels tipus d'esdeveniments que &CVS; accepta. Per exemple, si només voleu ser notificat quan un fitxer és publicat, marqueu les caselles <guibutton
+>Només</guibutton
+> i <guibutton
+>Publicacions</guibutton
+>. Si voleu ser notificat de qualsevol esdeveniment relacionat amb els fitxers marcats, marqueu la casella <guibutton
+>Tot</guibutton
+>. La línia d'ordres usada en acceptar el diàleg és </para>
+
+<para>
+<screen
+><command
+>cvs watch add -a commit <replaceable
+>noms_dels_fitxers</replaceable
+></command
+></screen>
+</para>
+
+<para
+>o amb una opció similar, depenent dels esdeveniments que trieu per observar. </para>
+
+<para
+>SI ja no esteu interessat en alguns fitxers, podeu suprimir els vigilants sobre ells. Amb aquesta finalitat, useu <menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Elimina vigilant...</guimenuitem
+></menuchoice
+>. En el diàleg que obtindreu aquí, s'oferiran les mateixes opcions que en el formulari que heu emplenat en afegir el vigilant. Quan confirmeu aquest diàleg, el &cervisia;emet l'ordre </para>
+
+<para>
+<screen
+><command
+>cvs watch remove <replaceable
+>noms_dels_fitxers</replaceable
+></command
+></screen>
+</para>
+
+<para
+>possiblement amb una opció <option
+>-a</option
+> pels esdeveniments seleccionats. </para>
+
+<para
+>Finalment, podeu obtenir una llista de les persones que estan vigilant un conjunt de fitxers. Seleccioneu <menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Mostra els vigilants</guimenuitem
+></menuchoice
+>. Usar aquest element del menú resulta en una ordre </para>
+
+<para>
+<screen
+><command
+>cvs watchers <replaceable
+>noms_dels_fitxers</replaceable
+></command
+></screen>
+</para>
+
+<para
+>En l'escenari normal d'ús de &CVS; cada desenvolupador treballa per separat al seu entorn de proves obtingut. Quan vol modificar algun fitxer, simplement l'obre en l'editor i comença a treballar en ell. Ningú té coneixement quant a aquest treball fins que es publica el fitxer. </para>
+
+<para
+>Per alguns grups de desenvolupadors, aquest no és el model preferit de cooperació. Volen estar notificats de quan algú està treballant en un fitxer <emphasis
+>tan aviat</emphasis
+> comença. Això es pot aconseguir amb algunes de les següents ordres &CVS; Abans de començar a editar un fitxer, seleccioneu-lo en la finestra principal del &cervisia; i seleccioneu <menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Edita fitxers</guimenuitem
+></menuchoice
+>. Això executarà l'ordre </para>
+
+<para>
+<screen
+><command
+>cvs edit <replaceable
+>noms_dels_fitxers</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Això enviarà una notificació a qualsevol que hagi establert un vigilant <literal
+>edició</literal
+> en aquest fitxer. També us registrarà com a <emphasis
+>editor</emphasis
+> del fitxer. Podeu obtenir una llista de tots els editors d'un cert fitxer usant <menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Mostra els editors</guimenuitem
+></menuchoice
+>. Això és equivalent a escriure en la línia d'ordres </para>
+
+<para>
+<screen
+><command
+>cvs editors <replaceable
+>noms_dels_fitxers</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Una sessió d'edició finalitza automàticament en publicar el fitxer afectat. En aquest moment s'envia una notificació <literal
+>deseditat</literal
+> a totes les persones que hagin registrat un vigilant respectiu en el fitxer. Per descomptat, algunes vegades no voldreu publicar el fitxer, però voldreu cancel·lar la sessió d'edició del fitxer i revertir-lo a la versió anterior. Això es fa usant <menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Desfés l'edició de fitxers</guimenuitem
+></menuchoice
+>. Noteu que el &cervisia; no us demanarà confirmació; això vol dir que si useu aquest element del menú, tot el treball fet des que vàreu usar <menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Edita fitxers</guimenuitem
+></menuchoice
+> es perdrà. Més exactament, el &cervisia; usa la línia d'ordres </para>
+
+<para>
+<screen
+><command
+>echo y | cvs unedit <replaceable
+>noms_dels_fitxers</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Fins ara, només hem parlat dels casos en els que els editats i els deseditats s'usen voluntàriament pels desenvolupadors. En addició &CVS; implementa un model que <emphasis
+>força</emphasis
+> l'ús d'aquestes ordres. L'ordre responsable de commutar a aquest model és <command
+>cvs watch on</command
+> que no explicarem més detalladament perquè s'usa majorment per l'administrador del repositori. No obstant això el punt important des del punt de vista del desenvolupador és que quan el projecte força els editats, les còpies de treball s'obtenen com <emphasis
+>només de lectura</emphasis
+>. Això significa que no podeu editar un fitxer per omissió (tret que useu trucs com ara <command
+>chmod</command
+>). El fitxer es torna d'escriptura només en usar <menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Edita fitxers</guimenuitem
+></menuchoice
+>. Es torna de només lectura una altra vegada en publicar-lo o usar <menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Desfés l'edició de fitxers</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>La interfície de l'editor del &cervisia; també us ajuda amb projectes que forcen els vigilants d'una altra manera. Si acabeu d'iniciar un editor amb un fitxer de només lectura dobleclicant-lo o usant <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Edita</guimenuitem
+></menuchoice
+>, no podreu desar les modificacions. Això per descomptat, té una raó: sempre que vulgueu canviar un fitxer, haureu d'executar abans <command
+>cvs edit</command
+>, perquè totes les persones que estan vigilant el fitxer obtinguin una notificació que esteu treballant en ell. </para>
+
+<para
+>En aquest cas, és recomanable marcar l'opció <menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Fes el cvs edit automàticament quan sigui necessari</guimenuitem
+></menuchoice
+>. Ara, cada vegada que editeu un fitxer fent-hi doble clic, el &cervisia; executarà <command
+>cvs edit</command
+> abans d'executar l'editor. D'aquesta manera podeu editar el vostre fitxer de la forma habitual. En finalitzar el vostre treball, publiqueu els fitxers, i els fitxers publicats seran de només lectura de nou. </para>
+
+</sect1>
+
+
+<sect1 id="locking">
+<title
+>Bloqueig</title>
+
+<para
+>El model de desenvolupament seguit habitualment quan s'usa &CVS; s'anomena <emphasis
+>obtencions sense reserves</emphasis
+>. Cada desenvolupador té el seu propi entorn de proves on podrà editar els fitxers com vulgui. I quan s'utilitzen les característiques de supervisió com ara <command
+>cvs edit</command
+>. múltiples desenvolupadors poden treball en els fitxers sincronitzadament. Els canvis efectuats per un desenvolupador diferent són fusionats a l'entorn de proves en realitzar una actualització. </para>
+
+<para
+>Altres sistemes de control de revisions - com ara <acronym
+>RCS</acronym
+> i <application
+>SourceSafe</application
+> usen un model diferent. Quan un desenvolupador vol editar un fitxer, l'ha de <emphasis
+>bloquejar</emphasis
+>. Només pot bloquejar un fitxer un editor alhora. Quan ha acabat l'edició, s'allibera el bloqueig. D'una banda, amb aquest model, no poden aparèixer conflictes mai. Per altra banda, dos desenvolupadors no poden treballar alhora en el mateix fitxer, encara que els seus canvis no afectin a ningú més. Això pot ser un coll d'ampolla. No parlarem dels beneficis d'organització d'ambdós enfocaments. No obstant això, mencionarem que, encara que &CVS; té algunes funcions per bloquejar, no és la manera preferida de treballar amb &CVS;. No heu d'usar aquestes característiques llevat que estigueu segur que l'encarregat del vostre projecte ho permet. </para>
+
+<para
+>Amb el &cervisia;, bloquejareu els fitxers de la següent manera. Seleccioneu els fitxers desitjats en la vista principal. Després seleccioneu <menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Bloqueja els fitxers</guimenuitem
+></menuchoice
+>. Això executa l'ordre </para>
+
+<para>
+<screen
+><command
+>cvs admin -l <replaceable
+>noms_dels_fitxers</replaceable
+></command
+></screen>
+</para>
+
+<para
+>L'efecte contrari s'aconsegueix usant <menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Desbloqueja els fitxers</guimenuitem
+></menuchoice
+>. Això executa l'ordre</para>
+
+<para>
+<screen
+><command
+>cvs admin -u <replaceable
+>noms_dels_fitxers</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="customization">
+<title
+>Personalitzant el &cervisia;</title>
+
+<para
+>El &cervisia; es pot personalitzar de diverses maneres d'acord amb les vostres necessitats i preferències. Algunes opcions que podeu voler canviar regularment estan disponibles directament en el menú <guimenu
+>Arranjament</guimenu
+>. </para>
+
+
+<sect1 id="customize-general">
+<title
+>General</title>
+
+<variablelist>
+
+<varlistentry id="customize-username">
+<term
+><guilabel
+>Nom d'usuari per a l'editor del registre de canvis:</guilabel
+></term>
+<listitem
+><para
+>Sempre que useu l'element del menú <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Insereix entrada en el registre de canvis...</guimenuitem
+></menuchoice
+>, es generarà una nova entrada en el registre de canvis amb la data actual i el vostre nom d'usuari. Normalment, es considera un nou estil inserir el vostre nom complet i la vostra adreça de correu electrònic en cada entrada del registre de canvis. El &cervisia; afegeix automàticament el nom sencer i l'adreça de correu electrònic introduïts aquí. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-cvspath">
+<term
+><guilabel
+>Camí cap a l'executable CVS, o «cvs»:</guilabel
+></term>
+<listitem
+><para
+>Aquí podeu establir el nom (o camí) a la línia d'ordres del client <command
+>cvs</command
+>. Per omissió, el &cervisia; utilitza l'executable &CVS; trobat a la vostra <envar
+>$PATH</envar
+>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="customize-diff">
+<title
+>Visualitzador de diferències</title>
+
+<variablelist>
+
+<varlistentry id="customize-context">
+<term
+><guilabel
+>Nombre de línies de context al diàleg diff:</guilabel
+></term>
+<listitem
+><para
+>Pel diàleg de diferències, el &cervisia; usa l'opció <option
+>-U</option
+> per <command
+>diff</command
+>. Això permet que <command
+>diff</command
+> només mostri un nombre de línies limitat al voltant de cada regió (línies de context). Aquí podeu establir l'argument per <option
+>-U</option
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-diffopt">
+<term
+><guilabel
+>Opcions addicionals per al cvs diff:</guilabel
+></term>
+<listitem
+><para
+>Aquí podeu afegir arguments addicionals per a <command
+>diff</command
+>. Un exemple popular és <option
+>-b</option
+> que permet que <command
+>diff</command
+> ignori els canvis en la quantitat d'espai en blanc. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-tabwidth">
+<term
+><guilabel
+>Amplada de la pestanya al diàleg de diff:</guilabel
+></term>
+<listitem
+><para
+>En el diàleg de diferències, els caràcters tabuladors presents en el vostre fitxer o en la sortida de l'ordre <command
+>diff</command
+> s'expandeixen en un nombre fixat de caràcters d'espai. Per omissió cada tabulador és reemplaçat per vuit espais, però aquí podeu establir un número diferent. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-difffrontend">
+<term
+><guilabel
+>Frontal extern de diff:</guilabel
+></term>
+<listitem
+><para
+>Quan useu qualsevol de les característiques que mostra el diàleg de diferències, com ara <menuchoice
+><guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Diferències amb el repositori...</guimenuitem
+></menuchoice
+>, el &cervisia; invoca el seu frontal diff intern, si preferiu un de diferent, com ara el &kompare;, <application
+>TkDiff</application
+>, o <application
+>xxdiff</application
+>, introduïu el seu nom de fitxer i camí aquí. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="customize-status">
+<title
+>Estat</title>
+
+<variablelist>
+
+<varlistentry id="customize-startstatus-remote">
+<term
+><guilabel
+>En obrir un entorn de proves des d'un repositori remot, executa automàticament l'ordre «Fitxer -&gt; Estat»</guilabel
+></term>
+<listitem
+><para
+>En marcar aquesta opció, s'inicia l'ordre <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Estat</guimenuitem
+></menuchoice
+> cada vegada que obriu un entorn de proves remot. Aquesta ordre pot trigar una mica i també necessita una connexió al servidor per repositoris remots (fent-la inusable fora de línia). </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-startstatus-local">
+<term
+><guilabel
+>En obrir un entorn de proves des d'un repositori local, executa automàticament l'ordre «Fitxer -&gt; Estat»</guilabel
+></term>
+<listitem
+><para
+>En marcar aquesta opció, s'executa l'ordre <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Estat</guimenuitem
+></menuchoice
+> cada vegada que obriu un entorn de proves local. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="customize-advanced">
+<title
+>Avançat</title>
+
+<variablelist>
+
+<varlistentry id="customize-timeout">
+<term
+><guilabel
+>Temps d'espera després del qual apareixerà el diàleg de progrés (en ms):</guilabel
+></term>
+<listitem
+><para
+>Pràcticament totes les ordres &CVS; que s'executen en un entorn de proves pertanyent a un repositori remot necessiten una connexió al servidor &CVS;. Això es veu afectat per retards de la connexió de xarxa o una ocupació alta del servidor. Per aquest motiu, per ordres com ara <menuchoice
+><guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Diferències amb el repositori...</guimenuitem
+></menuchoice
+>, el &cervisia; obre un diàleg que indica que l'ordre s'està executant i que us permet cancel·lar-lo. A més, aquest diàleg s'usa per mostrar-vos els missatges d'error des de &CVS;. Com que aquest diàleg pot resultar molest després d'un temps, només es mostra després d'un cert temps d'espera que és de 4 segons per omissió. Aquí podeu canviar aquest valor. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-compression">
+<term
+><guilabel
+>Nivell de compressió per omissió:</guilabel
+></term>
+<listitem
+><para
+>El client <command
+>cvs</command
+> comprimeix els fitxers i els pedaços en transferir-los per la xarxa. Amb l'opció de línia d'ordres <option
+>-z</option
+>, es pot establir el nivell de compressió. Podeu arranjar el &cervisia; per utilitzar aquesta opció configurant aquí el nivell. El valor establert aquí només s'usa com a predeterminat; addicionalment hi ha un arranjament per a cada repositori disponible en <menuchoice
+><guimenu
+>Repositori</guimenu
+><guimenuitem
+>Repositoris...</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-sshagent">
+<term
+><guilabel
+>Inicia un procés nou de ssh-agent o empra'n un d'existent</guilabel
+></term>
+<listitem
+><para
+>Marqueu aquesta casella si useu <link linkend="rsh"
+> repositoris ext (&rsh;)</link
+>, la consola remota &ssh; per comunicar-vos amb el repositori i <application
+>ssh-agent</application
+> per gestionar les vostres claus. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+
+<sect1 id="customize-look">
+<title
+>Aparença</title>
+
+<variablelist>
+
+<varlistentry id="customize-protocolfont">
+<term
+><guilabel
+>Tipus de lletra per a la finestra de protocol...</guilabel
+></term>
+<listitem
+><para
+>Premeu aquest botó per obrir el diàleg <guilabel
+>Selecció del tipus de lletra</guilabel
+> per establir el tipus de lletra usat en la finestra de protocol (la finestra que mostra la sortida del client <command
+>cvs</command
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-annotatefont">
+<term
+><guilabel
+>Tipus de lletra per a la vista anotacions...</guilabel
+></term>
+<listitem
+><para
+>Premeu aquest botó per obrir el diàleg <guilabel
+>Selecció del tipus de lletra</guilabel
+>, per establir la font usada en la <link linkend="annotate"
+>vista anotada</link
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-difffont">
+<term
+><guilabel
+>Tipus de lletra per a la vista de diff...</guilabel
+></term>
+<listitem
+><para
+>Premeu aquest botó per obrir el diàleg <guilabel
+>Selecció del tipus de lletra</guilabel
+>, per establir la font usada en els <link linkend="diff"
+>diàlegs de diferències</link
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-colors">
+<term
+><guilabel
+>Colors</guilabel
+></term>
+<listitem
+><para
+>Premeu els botons acolorits per obrir el diàleg <guilabel
+>Selecció dels colors</guilabel
+>, per establir el color usat per <guilabel
+>Conflicte</guilabel
+>, <guilabel
+>Canvi local</guilabel
+>, o <guilabel
+>Canvi remot</guilabel
+>, en la vista principal o <guilabel
+>Canvi diff</guilabel
+>, <guilabel
+>Inserció diff</guilabel
+>, o <guilabel
+>Esborrat diff</guilabel
+>, en el frontal intern de diff del &cervisia;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-splitter">
+<term
+><guilabel
+>Divideix la finestra principal horitzontalment</guilabel
+></term>
+<listitem
+><para
+>La finestra principal del &cervisia; normalment es divideix verticalment en una finestra amb l'arbre de fitxers amunt i una amb la sortida &CVS; sota; alternativament les podeu arranjar horitzontalment. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+</chapter>
+
+
+<chapter id="appendix">
+<title
+>Apèndix</title>
+
+<sect1 id="ignoredfiles">
+<title
+>Fitxers ignorats</title>
+
+<para
+>En el seu arbre de fitxers principal, el &cervisia; no mostra tots els fitxers que són allà realment. Això és anàleg a <command
+>cvs</command
+> en si mateix i us ajuda a evitar el desordre causat per elements que no interessen com ara els fitxers d'objecte. El &cervisia; intenta imitar el comportament del <command
+>cvs</command
+> tant com sigui possible. &ead; obté les llistes d'ignorats de les següents fonts: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Una llista estàtica d'entrades que inclou coses com ara <literal role="extension"
+>*.o</literal
+> i <filename
+>core</filename
+>. Per detalls vegeu la documentació del &CVS;. </para
+></listitem>
+<listitem
+><para
+>El fitxer <filename
+><envar
+>$HOME</envar
+>/.cvsignore</filename
+>. </para
+></listitem>
+
+<listitem
+><para
+>La variable d'entorn <envar
+>$CVSIGNORE</envar
+>. </para
+></listitem>
+<listitem
+><para
+>El fitxer <filename
+>.cvsignore</filename
+> en la carpeta respectiva. </para
+></listitem>
+
+</itemizedlist>
+
+<para
+>El <command
+>cvs</command
+> en si mateix cerca addicionalment entrades en <filename
+><envar
+>$CVSROOT</envar
+>/CVSROOT/cvsignore</filename
+>, però aquest és un fitxer en el servidor, i el &cervisia; ha de ser capaç d'iniciar-se fora de línia. Si esteu treballant amb un grup que prefereix usar una llista d'ignorats en el servidor, probablement és una bona idea donar una ullada als patrons que es llisten aquí per introduir-los en el fitxer <filename
+>.cvsignore</filename
+> en la vostra carpeta inici. </para>
+
+</sect1>
+
+
+<sect1 id="information">
+<title
+>Més informació i suport</title>
+
+<itemizedlist>
+
+<listitem
+><para
+>El &CVS; ve amb un complet conjunt de documentació en el format de pàgines d'informació, conegudes com «The Cederqvist». Si està adequadament instal·lat, podeu fullejar-les escrivint <userinput
+>info:/cvs</userinput
+> en la barra d'adreces del &konqueror; o podeu simplement seleccionar <menuchoice
+><guimenu
+>Ajuda</guimenu
+><guimenuitem
+>Manual del CVS</guimenuitem
+></menuchoice
+> al &cervisia;. Una versió &HTML; en línia de Cederqvist és disponible <ulink url="https://ftp.gnu.org/non-gnu/cvs/source/stable/1.11.21/cederqvist-1.11.21.pdf"
+>en la web</ulink
+>. </para>
+
+<para
+>Com que aquest llibre està mantingut juntament amb &CVS;, és normalment la referència més al dia; no obstant això hi ha altres documentacions recomanades per aprendre a usar &CVS; en particular les següents. </para
+></listitem>
+
+<listitem
+><para
+>Karl Fogel ha escrit un llibre excel·lent <ulink url="http://cvsbook.red-bean.com/index.html"
+>Desenvolupament de codi obert amb &CVS;</ulink
+>. Prop de la meitat d'aquest llibre és sobre el procés de desenvolupament de programari de codi obert. L'altra meitat és una documentació tècnica de &CVS;. Afortunadament, la part tècnica del llibre s'ha fet lliurement redistribuïble sota la llicència GPL, de manera que podeu baixar una versió &HTML; del mateix. Una llista d'errates és disponible en la plana web mencionada a dalt. </para
+></listitem>
+
+<listitem
+><para
+>Les qüestions del &CVS; es discuteixen en una <ulink url="http://mail.gnu.org/mailman/listinfo/info-cvs"
+>llista de correu</ulink
+> dedicada. </para
+></listitem>
+
+<listitem
+><para
+>Hi ha un grup USENET <literal
+>comp.software.config-mgmt</literal
+> dedicat a la gestió de la configuració en general. &CVS; és només un tema aïllat en aquest grup, però no obstant això pot ser interessant per discutir als avantatges de diversos sistemes de control de revisions en comparació amb &CVS;. </para
+></listitem>
+
+</itemizedlist>
+
+</sect1>
+
+
+<sect1 id="commandreference">
+<title
+>Referència d'ordres</title>
+
+<!-- File Menu -->
+<sect2 id="menufile">
+
+<title
+>El menú fitxer</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Obre un entorn de proves...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Obre un entorn de proves a la finestra principal. Vegeu <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+><guisubmenu
+>Entorns de proves recents</guisubmenu
+> </menuchoice
+></term>
+<listitem
+><para
+>Obre un dels entorns de proves que s'han emprat recentment. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Insereix entrada en el registre de canvis...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Obre l'editor del registre de canvis; preparat de manera que pugueu afegir una nova entrada amb la data actual. Vegeu <xref linkend="committingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Actualitza</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Executa «cvs update» en els fitxers seleccionats i canvia adequadament l'estat i els números de revisió en la llista. Vegeu <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F5</keycap
+></shortcut
+> <guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Estat</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Executa «cvs -n update» en els fitxers seleccionats i canvia adequadament l'estat i els números de revisió en la llista. Vegeu <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Edita</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Obre el fitxer seleccionat amb l'editor predeterminat del &kde; pels tipus de fitxer seleccionat. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Resoldre...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Obre un diàleg pels fitxers seleccionats que us permet resoldre conflictes de fusió. Vegeu <xref linkend="resolvingconflicts"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>#</keycap
+></shortcut
+> <guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Publica...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Us permet publicar els fitxers seleccionats. Vegeu <xref linkend="committingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Inser</keycap
+></shortcut
+> <guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Afegeix al repositori...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Us permet afegir els fitxers seleccionats al repositori. Vegeu <xref linkend="addingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Afegeix un binari...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Us permet afegir els fitxers seleccionats al repositori com a binaris (<command
+>cvs add<option
+>-kb</option
+></command
+>). Vegeu <xref linkend="addingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Supr</keycap
+></shortcut
+> <guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Elimina del repositori...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Us permet eliminar fitxers del repositori. Vegeu <xref linkend="removingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<!--TODO: add the revert action to the working with files chapter -->
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Reverteix</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Descarta qualsevol canvi que heu fet en els fitxers seleccionats i els reverteix a la versió en el repositori (opció <option
+>-C</option
+> a l'ordre <command
+>cvs update</command
+>). </para
+></listitem>
+</varlistentry>
+<!--FIXME Properties-->
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Surt</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Surt del &cervisia;. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- View Menu -->
+<sect2 id="menuview">
+
+<title
+>El menú visualitza</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Esc</keycap
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Atura</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Atura qualsevol subprocés en execució. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visualització</guimenu
+><guimenuitem
+>Navega pel registre...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Mostra el navegador del registre de les versions dels fitxers seleccionats. Vegeu <xref linkend="browsinglogs"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Anotacions...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Mostra una vista anotada del fitxer seleccionat, &ead; una vista un podeu veure l'últim autor que ha modificat cada línia. Vegeu <xref linkend="annotate"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Diferències amb el repositori (BASE)...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Mostra les diferències entre el fitxer seleccionat a l'entorn de proves i la darrera revisió que heu actualitzat (BASE) Vegeu <xref linkend="diff"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Diferències amb el repositori (HEAD)...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Mostra les diferències entre el fitxer seleccionat a l'entorn de proves i la darrera revisió que heu actualitzat (BASE). Vegeu <xref linkend="diff"/>. </para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Últims canvis...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Mostra les diferències entre la revisió del fitxer seleccionat des de la darrera actualització (BASE) i la revisió anterior. Vegeu <xref linkend="diff"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Historial...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Mostra l'historial del &CVS; retornat pel servidor. Vegeu <xref linkend="browsinghistory"/>. </para
+></listitem>
+</varlistentry>
+
+<!--TODO: add hide menus to mainscreen section-->
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Oculta tots els fitxers</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Determina si només es mostren carpetes en la vista en arbre principal. Vegeu <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Oculta els fitxers sense modificar</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Determina si els fitxers amb l'última versió i els fitxers desconeguts s'oculten en la vista en arbre principal. Vegeu <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Oculta els fitxers eliminats</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Determina si els fitxers eliminats s'oculten en la vista en arbre principal. Vegeu <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Oculta els fitxers que no són en el CVS</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Determina si els fitxers que no són en el &CVS; s'oculten en la vista en arbre principal. Vegeu <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Oculta les carpetes buides</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Determina si les carpetes sense entrades visibles s'oculten en la vista en arbre principal. Vegeu <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Desplega l'arbre de fitxers</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Obre totes les branques en l'arbre de fitxers perquè pugueu veure tots els fitxers i les carpetes. Vegeu <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Plega l'arbre de fitxers</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Tanca totes les branques en l'arbre de fitxers. Vegeu <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- Advanced Menu -->
+<sect2 id="menuadvanced">
+
+<title
+>El menú avançat</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Etiqueta/branca...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Etiqueta o embranca els fitxers seleccionats. Vegeu <xref linkend="taggingbranching"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Elimina etiqueta...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Elimina una etiqueta donada dels fitxers seleccionats. Vegeu <xref linkend="taggingbranching"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Actualitza a etiqueta/data...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Proporciona els fitxers seleccionats a una etiqueta o data donada, marcant-los com etiquetats. Vegeu <xref linkend="updatingto"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Actualitza a HEAD...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Proporciona els fitxers seleccionats a la seva revisió HEAD respectiva. Vegeu <xref linkend="updatingto"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Fusiona...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Fusiona, sigui una branca especificada o les modificacions entre dues etiquetes en els fitxers seleccionats. Vegeu <xref linkend="taggingbranching"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Afegeix vigilant...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Afegeix un vigilant per a un grup d'esdeveniments pels fitxers seleccionats. Vegeu <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Elimina vigilant...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Elimina un vigilant per a un grup d'esdeveniments dels fitxers seleccionats. Vegeu <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Mostra els vigilants</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Llista els vigilants dels fitxers seleccionats. Vegeu <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Edita els fitxers</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Executa <command
+>cvs edit</command
+> en els fitxers seleccionats. Vegeu <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Desfés l'edició de fitxers</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Executa <command
+>cvs unedit</command
+> en els fitxers seleccionats. Vegeu <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Mostra els editors</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Executa <command
+>cvs editors</command
+> en els fitxers seleccionats. Vegeu <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Bloqueja els fitxers</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Bloqueja els fitxers seleccionats. Vegeu <xref linkend="locking"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Desbloqueja els fitxers</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Desbloqueja els fitxers seleccionats. Vegeu <xref linkend="locking"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançat</guimenu
+><guimenuitem
+>Crea pedaç contra el repositori...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Crea un pedaç a partir de les modificacions al vostre entorn de proves. Vegeu <xref linkend="creatingpatches"/>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- Repository Menu -->
+<sect2 id="menurepository">
+
+<title
+>El menú repositori</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Repositori</guimenu
+><guimenuitem
+>Crea...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Obre un diàleg que us permet crear un nou repositori local. Vegeu <xref linkend="accessing-repository"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Repositori</guimenu
+><guimenuitem
+>Obtenir...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Obre un diàleg que us permet recuperar un mòdul d'un repositori. Vegeu <xref linkend="checkingout"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Repositori</guimenu
+><guimenuitem
+>Importa...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Obre un diàleg que us permet importar un paquet en el repositori. Vegeu <xref linkend="importing"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Repositori</guimenu
+><guimenuitem
+>Repositoris...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Configura una llista dels repositoris que soleu utilitzar i com accedir-hi. Vegeu <xref linkend="accessing-repository"/>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- Settings Menu -->
+<sect2 id="menuoptions">
+<title
+>Els menús Arranjament i Ajuda</title>
+
+<para
+>A part dels menús <guimenu
+>Arranjament</guimenu
+> i <guimenu
+>Ajuda</guimenu
+> comuns al &kde; que es descriuen en el capítol <ulink url="help:/fundamentals/menus.html"
+>Menú</ulink
+> de la documentació Fonaments del &kde;, el &cervisia; té aquestes entrades de menú específiques de l'aplicació: </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>En actualitzar crea les carpetes</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Determina si durant les actualitzacions es crearan les carpetes que no hi eren abans a l'entorn de proves (opció <option
+>-d</option
+> a <command
+>cvs update</command
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>En actualitzar elimina les carpetes buides</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Determina si durant les actualitzacions s'eliminaran les carpetes buides a l'entorn de proves (opció <option
+>-P</option
+> a <command
+>cvs update</command
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Actualitza recursivament</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Determina si les actualitzacions seran recursives (opció <option
+>-f</option
+> a <command
+>cvs update</command
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Commit i Remove recursivament</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Determina si les publicacions i eliminacions seran recursives (opció <option
+>-f</option
+> a <command
+>cvs add</command
+>, <command
+>cvs remove</command
+> respectivament). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Fes el cvs edit automàticament quan sigui necessari</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Determina si l'ordre <command
+>cvs edit</command
+> s'executa automàticament cada vegada que s'edita un fitxer. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ajuda</guimenu
+><guimenuitem
+>Manual de CVS</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Obre les pàgines info del &CVS; en el &khelpcenter;. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="credits-and-license">
+<title
+>Crèdits i llicència</title>
+<para
+>Copyright del programa</para>
+<itemizedlist>
+<listitem
+><para
+>1999-2002 &Bernd.Gehrmann; &Bernd.Gehrmann.mail;</para
+></listitem>
+<listitem
+><para
+>2002-2008 els autors del &cervisia;</para
+></listitem>
+</itemizedlist>
+
+<para
+>Copyright de la documentació 1999-2002 &Bernd.Gehrmann; &Bernd.Gehrmann.mail; i 2004 Carlos Woelz carloswoelz@imap-mail.com</para>
+
+<para
+>Traductor/Revisor de la documentació: &credits.Antoni.Bella;</para
+> &underFDL; &underGPL; </chapter>
+</book>

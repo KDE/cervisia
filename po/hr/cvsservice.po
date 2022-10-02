@@ -1,0 +1,106 @@
+# Translation of cvsservice to Croatian
+#
+# Marko Dimjasevic <marko@dimjasevic.net>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: cvsservice 0\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-14 00:48+0000\n"
+"PO-Revision-Date: 2010-01-11 18:07+0100\n"
+"Last-Translator: Marko Dimjasevic <marko@dimjasevic.net>\n"
+"Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 1.0\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "lokalizacija@linux.hr"
+
+#: cvsaskpass.cpp:38
+#, fuzzy, kde-format
+msgid "cvsaskpass"
+msgstr "cvsaskpass"
+
+#: cvsaskpass.cpp:40
+#, fuzzy, kde-format
+msgid "ssh-askpass for the CVS D-Bus Service"
+msgstr "ssh-askpass za CVS DCOP servis"
+
+#: cvsaskpass.cpp:42
+#, fuzzy, kde-format
+msgid "Copyright (c) 2003 Christian Loose"
+msgstr "Autorska prava (c) 2003 Kristijan Luz (Christian Loose)"
+
+#: cvsaskpass.cpp:49
+#, kde-format
+msgid "prompt"
+msgstr "ažuran"
+
+#: cvsaskpass.cpp:61
+#, kde-format
+msgid "Please type in your password below."
+msgstr "Niže unesite svoju zaporku."
+
+#: cvsaskpass.cpp:65
+#, kde-format
+msgid "Repository:"
+msgstr "Repozitorij:"
+
+#: cvsloginjob.cpp:108
+#, fuzzy, kde-format
+#| msgid "Please type in your password for the repository below."
+msgid "Enter password for repository %1."
+msgstr "Niže unesite svoju zaporku za repozitorij."
+
+#: cvsservice.cpp:883
+#, fuzzy, kde-format
+msgid ""
+"You have to set a local working copy directory before you can use this "
+"function!"
+msgstr ""
+"Morate postaviti lokalni direktorij za radnu kopiju prije nego što možete da "
+"koristite ovu funkciju!"
+
+#: cvsservice.cpp:896
+#, fuzzy, kde-format
+msgid "There is already a job running"
+msgstr "Postoji već aktivan posao"
+
+#: main.cpp:36
+#, fuzzy, kde-format
+msgid "CVS D-Bus service"
+msgstr "CVS DCOP servis"
+
+#: main.cpp:38
+#, fuzzy, kde-format
+msgid "D-Bus service for CVS"
+msgstr "DCOP servis za CVS"
+
+#: main.cpp:40
+#, fuzzy, kde-format
+msgid "Copyright (c) 2002-2003 Christian Loose"
+msgstr "Autorska prava (c) 2003 Kristijan Luz (Christian Loose)"
+
+#: main.cpp:44
+#, fuzzy, kde-format
+msgid "Christian Loose"
+msgstr "Autorska prava (c) 2003 Kristijan Luz (Christian Loose)"
+
+#: main.cpp:44
+#, kde-format
+msgid "Developer"
+msgstr "Programer"

@@ -1,0 +1,101 @@
+# translation of cvsservice.po to Punjabi
+# Amanpreet Singh Alam <aalam@redhat.com>, 2004.
+# A S Alam <aalam@users.sf.net>, 2007, 2009.
+# ASB <aalam@users.sf.net>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: cvsservice\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-14 00:48+0000\n"
+"PO-Revision-Date: 2009-01-15 09:43+0530\n"
+"Last-Translator: A S Alam <aalam@users.sf.net>\n"
+"Language-Team: Punjabi <punjabi-l10n@users.sf.net>\n"
+"Language: pa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "ਅਮਨਪਰੀਤ ਸਿੰਘ ਆਲਮ"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "aalam@users.sf.net"
+
+#: cvsaskpass.cpp:38
+#, kde-format
+msgid "cvsaskpass"
+msgstr "cvsaskpass"
+
+#: cvsaskpass.cpp:40
+#, kde-format
+msgid "ssh-askpass for the CVS D-Bus Service"
+msgstr "CVS D-Bus ਸੇਵਾ ਲਈ ssh-askpass"
+
+#: cvsaskpass.cpp:42
+#, kde-format
+msgid "Copyright (c) 2003 Christian Loose"
+msgstr "Copyright (c) ੨੦੦੩ ਕ੍ਰਿਸਟੀਨ ਲੂਸ"
+
+#: cvsaskpass.cpp:49
+#, kde-format
+msgid "prompt"
+msgstr "ਪੁਸ਼ਟੀ"
+
+#: cvsaskpass.cpp:61
+#, kde-format
+msgid "Please type in your password below."
+msgstr "ਹੇਠਾਂ ਆਪਣਾ ਪਾਸਵਰਡ ਦਿਉ ਜੀ।"
+
+#: cvsaskpass.cpp:65
+#, kde-format
+msgid "Repository:"
+msgstr "ਰਿਪੌਜ਼ਟਰੀ:"
+
+#: cvsloginjob.cpp:108
+#, fuzzy, kde-format
+#| msgid "Please type in your password for the repository below."
+msgid "Enter password for repository %1."
+msgstr "ਰਿਪੌਜ਼ਟਰੀ ਲਈ ਆਪਣਾ ਪਾਸਵਰਡ ਦਿਉ ਜੀ।"
+
+#: cvsservice.cpp:883
+#, kde-format
+msgid ""
+"You have to set a local working copy directory before you can use this "
+"function!"
+msgstr "ਇਸ ਸਹੂਲਤ ਦਾ ਇਸਤੇਮਾਲ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਤੁਹਾਨੂੰ ਇੱਕ ਲੋਕਲ ਵਰਕਿੰਗ ਡਾਇਰੈਕਟਰੀ ਦੇਣੀ ਚਾਹੀਦੀ ਹੈ!"
+
+#: cvsservice.cpp:896
+#, kde-format
+msgid "There is already a job running"
+msgstr "ਇੱਕ ਕਾਰਵਾਈ ਪਹਿਲਾਂ ਹੀ ਚੱਲ ਰਹੀ ਹੈ"
+
+#: main.cpp:36
+#, kde-format
+msgid "CVS D-Bus service"
+msgstr "CVS D-Bus ਸੇਵਾ"
+
+#: main.cpp:38
+#, kde-format
+msgid "D-Bus service for CVS"
+msgstr "CVS ਲਈ D-Bus ਸੇਵਾ"
+
+#: main.cpp:40
+#, kde-format
+msgid "Copyright (c) 2002-2003 Christian Loose"
+msgstr "Copyright (c) ੨੦੦੨-੨੦੦੩ ਕ੍ਰਿਸਟੀਨ ਲੂਸ"
+
+#: main.cpp:44
+#, kde-format
+msgid "Christian Loose"
+msgstr "ਕ੍ਰਿਸਟੀਨ ਲੂਸ"
+
+#: main.cpp:44
+#, kde-format
+msgid "Developer"
+msgstr "ਡੀਵੈਲਪਰ"

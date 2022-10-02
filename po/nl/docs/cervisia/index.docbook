@@ -1,0 +1,3939 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY ssh "<command
+>ssh</command
+>">
+  <!ENTITY rsh "<command
+>rsh</command
+>">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Dutch "INCLUDE"
+> <!-- Change language only here -->
+  <!ENTITY CVS "<application
+>CVS</application
+>">
+]>
+
+<book id="cervisia" lang="&language;">
+
+<bookinfo>
+<title
+>Het handboek van &cervisia;</title>
+<authorgroup>
+<author
+><firstname
+>Bernd</firstname
+><surname
+>Gehrmann</surname
+> <affiliation
+><address
+>&Bernd.Gehrmann.mail;</address
+></affiliation>
+</author
+> 
+<author
+><firstname
+>Carlos</firstname
+><surname
+>Woelz</surname
+> <affiliation
+><address
+><email
+>carloswoelz@imap-mail.com</email
+></address
+></affiliation>
+</author
+> 
+
+
+&Fabrice.Mous;&Tom.Albers;&Rinse.Devries;&Bram.Schoenmakers;&Freek.de.Kruijf; 
+
+</authorgroup>
+
+<copyright>
+<year
+>1999</year>
+<year
+>2000</year>
+<year
+>2001</year>
+<year
+>2002</year>
+<holder
+>&Bernd.Gehrmann;</holder>
+</copyright>
+
+<copyright>
+<year
+>2004</year>
+<holder
+>Carlos Woelz</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2016-06-16</date>
+<releaseinfo
+>3.11 (Applications 16.08)</releaseinfo>
+
+<abstract>
+<para
+>&cervisia; voorziet in een grafische weergave van &CVS;.</para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>Cervisia</keyword>
+<keyword
+>CVS</keyword>
+<keyword
+>versie beheer</keyword>
+<keyword
+>revisie beheer</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Inleiding</title>
+
+<para
+><ulink url="http://www.kde.org/applications//development/cervisia/"
+>&cervisia;</ulink
+> is een frontend van een gebruikersvriendelijk versiecontrolsysteem. Het doel is de ondersteuning van &CVS; in een gemeenschappelijk interface, met oplossen van conflicten, verschillen en tonen van de historie, status van de bestanden van de werkkopie en ondersteuning voor de meeste functies van een versiecontrolsysteem. U kunt &cervisia; verkrijgen door door het bouwen van <ulink url="https://commits.kde.org/cervisia"
+>&cervisia;</ulink
+> of het pakket &cervisia; geleverd door uw distributie te installeren. </para>
+
+<para
+>Een versiecontrolsysteem is een hulpmiddel om verschillende versies van bestanden op te slaan, te beheren en te distribueren. &CVS; is een versiecontrolsysteem. Het biedt u de mogelijkheid om uw wijzigingen gemakkelijk te delen, zodat elke medewerker op dezelfde tijd met zijn eigen kopieën kan werken, zonder vrees om elkaars wijzigingen te overschrijven. Het biedt het herstellen van eerdere versies (nuttig bij het nalopen van bugs), de creatie van branches (voor experimentele ontwikkeling of voor het vrijgeven van code) en meer. </para>
+
+<para
+>De hoofd-<firstterm
+>repository</firstterm
+> bevat gebruikelijk een samenwerkingsproject (commercieel of niet), maar u kunt voordeel hebben bij de mooie revisiecontrolemogelijkheden die &CVS; biedt zelfs voor een project dat u alleen ontwikkeld. Het is gemakkelijk om een lokale repository op te zetten en u zult de mogelijkheid hebben om wijzigingen te volgen die bugs veroorzaken, wijzigingen terugfraaien, per ongeluk verlies van informatie vermijden, &etc; </para>
+
+<para
+>De repository bevat de projectbestanden en elke medewerker heeft zijn eigen lokale kopie, genaamd <firstterm
+>werkkopie</firstterm
+> of <firstterm
+>sandbox</firstterm
+>; men kan dan eigen wijzigingen aan de hoofdrepository toevogen (een proces dat <quote
+>committing</quote
+> of vastleggen wordt genoemd) en/of de eigen kopie bijwerken om recente wijzigingen, die door andere medewerkers zijn gemaakt, te laten zien. </para>
+
+</chapter>
+
+<chapter id="getting-started">
+<title
+>Laten we beginnen</title>
+
+<sect1 id="accessing-repository">
+<title
+>Toegang tot de repository</title>
+
+<para
+>In deze sectie, tonen we hoe u de basis functionaliteit van het versiecontrolsysteem &cervisia; kunt gebruiken om modules uit checken uit de repository en er mee te werken. Om dat te kunnen doen moet u toegang hebben tot de repository als een client, wat betekent dat iemand (waarschijnlijk de beheerder van de &CVS;-repository) u een account op de servermachine heeft gegeven. Als alternatief kunt u zelf gemakkelijk een lokale repository voor uw eigen project aanmaken. </para>
+
+<tip
+><para
+>Als u van plan bent om een complex project te ontwikkelen, dan is het een goed idee om de &CVS; features te gebruiken, zelfs als u de enige ontwikkelaar bent. U kunt alle wijzigingen in de werkkopie maken en &cervisia; gebruiken (of elk ander &CVS; hulpmiddel) om bij te werken en vast te leggen. Op deze manier, krijgt u de mogelijkheid om wijzigingen te volgen die bugs hebben veroorzaakt, wijzigingen terugdraaien, ongewild verlies van informatie vermijden, &etc; Door &cervisia; te gebruiken is het eenvoudig om een lokale repository aan te maken. </para>
+
+<procedure>
+<title
+>Een lokale repository aanmaken</title>
+
+<step
+><para
+>Open de dialoog <guilabel
+>Nieuwe repository aanmaken (cvs init)</guilabel
+> door te kiezen <menuchoice
+><guimenu
+>Repository</guimenu
+> <guimenuitem
+>Aanmaken...</guimenuitem
+></menuchoice
+>. </para
+></step>
+
+<step
+><para
+>Druk op de knop <guilabel
+>...</guilabel
+> om de map te selecteren waarin u de repository wilt aanmaken of voer zijn locatie in in het tekstvak. Als u bijvoorbeeld de repository in de map <filename
+>/home/gebruiker</filename
+> wilt plaatsen en het de naam <filename
+>cvsroot</filename
+> wilt geven, dan kunt u <filename
+>/home/user/cvsroot</filename
+> in het tekstvak invoeren of de map <filename
+>/home/user</filename
+> selecteren met de bestandkiezer en <filename
+>cvsroot</filename
+> toevoegen. </para
+></step>
+
+<step
+><para
+>Bevestig dit via de knop <guibutton
+>OK</guibutton
+>. &cervisia; zal de nieuwe map voor de repository aanmaken en initialiseren. </para
+></step>
+
+<step
+><para
+>Nu kunt u uw huidige werk importeren in de repository of eenvoudig een map aanmaken in de repository om vanuit het niets een nieuwe module  te beginnen. </para
+></step>
+
+</procedure>
+
+</tip>
+
+
+<para
+>&cervisia; biedt een geïntegreerde front-end om al uw locaties met een repository te beheren, via de dialoog <guilabel
+>Toegang tot repositoryn instellen</guilabel
+>. Om deze weer te geven kies <menuchoice
+><guimenu
+>Repository</guimenu
+> <guimenuitem
+>Repositories...</guimenuitem
+></menuchoice
+>. </para>
+
+<figure id="screenshot-repositories" float="1">
+<title
+>Een schermafdruk van de dialoog Toegang tot repositories van &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="repositories.png"/></imageobject>
+<textobject
+><phrase
+>Een schermafdruk van de dialoog Toegang tot repositories van &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Er zijn verschillende methoden om toegang te krijgen tot een &CVS;-repository. Het kan worden bereikt via authemticatie met wachtwoord (:pserver:), secure shell (met :ext:), lokale repository (:local:), &etc; Het format voor de locatie van de repository is (optionele items staan tussen rechte haakjes): </para>
+
+<para>
+<filename
+>[:methode:][[gebruiker][:wachtwoord]@]hostnaam[:[poort]]/pad/naar/repository</filename>
+</para>
+
+<para
+>Niet alle items (gebruiker, wachtwoord, hostnaam, poort) zijn altijd nodig voor toegang tot de repository. De vereiste informatie hangt af van de gebruikte toegangsmethode, die als volgt kan worden gecategoriseerd: </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+>Lokaal</term>
+
+<listitem>
+<para
+>De lokale toegangsmethode is de standaard methode van de &CVS;. Het is daarom optioneel om de :local: methode toe te voegen aan de locatie van de repository: u kunt eenvoudig het pad naar de map met de &CVS;-repository invoeren en het is toegankelijk vanaf uw computer, zoals <filename class="directory"
+>/pad/naar/repository</filename
+> of een voor beeld uit het echte leven te geven, <filename class="directory"
+>/home/cvs</filename
+>.</para>
+
+<para
+>Het kan fysiek op een schijf aanwezig zijn die is aangekoppeld via <acronym
+>NFS</acronym
+>, maar dat is een irrelevant detail. Als u een lokale repository hebt aangemaakt, dan is de locatie eenvoudig het pad ernaar. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry id="rsh">
+<term
+>&rsh;</term>
+
+<listitem>
+<para
+>De locatie van de repository ziet er dan zoiets als volgt uit: <filename
+>:ext:gebruikersnaam@host.url.org:/pad/naar/repository</filename
+> </para>
+
+<para
+>Deze methode vereist dat u een gebruikersaccount hebt op de server (in dit geval <systemitem class="systemname"
+>host.url.org</systemitem
+>) en gebruikt een remote shell voor communicatie. Standaard gebruikt &CVS; hiervoor &rsh;, alhoewel &rsh; als onbetrouwbaar is bestempeld en vervangen is door &ssh;. </para>
+
+<para
+>Indien u &ssh; wilt gebruiken, stelt u de omgevingsvariabele $<envar
+>CVS_RSH</envar
+> in op &ssh;. Dit is alleen nodig als u het <command
+>cvs</command
+>-commando gebruikt. &cervisia; ondersteunt dit probleemloos. </para>
+
+<!-- TODO: verify if the above still apply -->
+
+<para
+>Hou er rekening mee dat &cervisia; geen mogelijke verzoeken voor een wachtwoord van de servermachine kan beantwoorden. U moet er zeker van zijn dat de remote login werkt zonder dat u iedere keer een wachtwoord moet invoeren. Met de "plain vanilla" &rsh; kan dit worden bereikt door bijvoorbeeld het bestand <filename
+>.rhosts</filename
+> in uw persoonlijke map aan te maken met een lijst van "vertrouwde servers" (in het engels "trusted hosts", zie de manpage van &rsh;) </para>
+
+<para
+>Met &ssh; kan dit worden bereikt door het kopiëren van de publieke sleutel (<filename
+>$<envar
+>HOME</envar
+>/.ssh/identity.pub</filename
+>) naar de server. In dat geval moet de sleutel niet versleuteld worden met een wachtwoordzin, zie de &ssh; manpagina. </para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>pserver</term>
+
+<listitem>
+<para
+>De naam van de repository ziet er dan als volgt uit: <filename
+>:pserver:gebruikersnaam@cvs.kde.org:/home/kde</filename
+> </para>
+
+<para
+>Deze methode benadert de server met een speciaal protocol met een relatief zwakke authenticatie (<literal
+>pserver</literal
+> staat voor password authenticatie). Voordat u zo'n server kunt gebruiken, hebt u een gebruikersnaam en wachtwoord nodig, dat u gegeven is door de beheerder van de &CVS;-server, waarna u zich aan moet melden. Merk op dat uw gebruikersnaam en wachtwoord van &CVS; niet noodzakelijk die van het systeem zijn. Voordat u toegang krijgt tot de &CVS;-server moet u zich aanmelden. </para>
+
+<para
+>Open-source projecten bieden typisch anonieme toegang via &CVS; tot broncode. Dit betekent dat u gemakkelijk de laatste broncode kan pakken, kan wijzigen en patches (differences) maken tegen de repository zonder om te vragen om toegang met een &CVS; account. Als algemene regel geldt dat anonieme &CVS; wachtwoord-authenticatie (:pserver:) gebruikt en een alleen-lezen repository is, waarin u uw wijzigingen niet direct kunt uploaden. </para>
+
+</listitem>
+</varlistentry>
+</variablelist>
+
+<para
+>De toegangsmethode wetend en de locatie van de repository, kunt u het toevoegen aan de lijst met repositories van &cervisia;: </para>
+
+<procedure>
+<title
+>Een nieuwerepositorye toevoegen</title>
+
+<step
+><para
+>Open de dialoog <guilabel
+>Toegang tot repositories instellen</guilabel
+> door menu-item <menuchoice
+><guimenu
+>Repository</guimenu
+> <guimenuitem
+>Repositories...</guimenuitem
+></menuchoice
+> te kiezen. </para
+></step>
+
+<step
+><para
+>Druk op de knop <guilabel
+>Toevoegen...</guilabel
+> om de dialoog <guilabel
+>Repository toevoegen</guilabel
+> te openen. </para
+></step>
+
+<step
+><para
+>Voer de locatie van de repository in in het tekstvak <guilabel
+>Repository:</guilabel
+>. &cervisia; zal automatisch de gebieden in de dialoog uitschakelen die niet relevant zijn voor de toegangsmethode die u hebt ingevoerd. </para
+></step>
+
+<step
+><para
+>Als u de ext-methode voor toegang tot de repository gebruikt, voer dan de remote shell in, die u wilt gebruiken (&eg; &ssh;), in het tekstvak <guilabel
+>Remote shell gebruiken (alleen voor :ext:-repositories):</guilabel
+>. </para
+></step>
+
+<step
+><para
+>Druk op <guibutton
+>OK</guibutton
+>. De repository, die u zojuist hebt toegevoegd aan de lijst met repositories, is dan te zien. </para
+></step>
+
+<step
+><para
+>Als de toegangsmethode tot de repository die u hebt ingevoerd is via wachtwoord-authenticatie (pserver), dan is het nodig u eerst aan te melden alvorens te verbinden met de server. Klik op de repository in de lijst om deze te selecteren en druk op de knop <guilabel
+>Aanmelden...</guilabel
+>. voer uw wachtwoord in in de opkomende dialoog. </para>
+<para
+>Als u met succes uw wachtwoord hebt ingevoerd, dan zal in de kolom <guilabel
+>Status</guilabel
+> van de pserver-repository deze wijzigen van <guilabel
+>Niet  aangemeld</guilabel
+> naar <guilabel
+>Aangemeld</guilabel
+>. </para
+></step>
+
+<step
+><para
+>Druk op <guibutton
+>OK</guibutton
+> om uw wijzigingen toe te passen of voeg een andere locatie toe aan de lijst. &cervisia; zal zoveel locaties als u wilt opslaan. </para
+></step>
+
+</procedure>
+
+</sect1>
+
+
+<sect1 id="importing">
+<title
+>Importeren van een module in de repository</title>
+
+<para
+>In deze sectie bespreken we hoe u een nieuw project in de &CVS;-repository kunt aanmaken. Wanneer u alleen maar wilt werken met een bestaand project in de repository dan kunt u deze sectie overslaan. </para>
+
+<para
+>Er zijn twee manieren om een project in de &CVS; te stoppen: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Importeer de bestanden en mappen naar een nieuwe <firstterm
+>module</firstterm
+>, met behulp van de importeerdialoog van &cervisia;. Modules zijn de hoogste mappen in de boomstructuur van de &CVS; repository en worden gebruikt om de verschillende software projecten in de repository apart te houden en te organiseren. </para
+></listitem>
+
+<listitem
+><para
+>Maak een lege module aan en voeg de nieuwe bestanden en mappen handmatig toe. U zult meer controle hebben, maar het zal waarschijnlijk een beetje meer tijd kosten. </para
+></listitem>
+
+</itemizedlist>
+
+<important>
+<para
+>Houdt in gedachten dat &CVS; oorspronkelijk is ontworpen om tekstbestanden te behandelen. Veel functies, zoals revisie samenvoegen, verschillen maken in een leesbare vorm, &etc; worden alleen toegepast op tekstbestanden. Dit betekent niet dat u de &CVS; niet kan gebruiken voor binaire bestanden, het betekent dat u <emphasis
+>de &CVS; expliciet moet vertellen of het een tekst- of binair bestand is</emphasis
+>. Als u het verkeerde type bestand aangeeft, dan zult u problemen ervaren met de functionaliteit van &CVS; voor deze bestanden en kunnen ze verminkt raken. </para>
+</important>
+
+
+<para
+>Een project importeren (als een nieuwe module) heeft enige voordelen: u kunt alle bestanden en mappen recursief importeren en de module zal automatisch voor u worden aangemaakt. Dit maakt het importeren van grote bestaande projecten naar de repository gemakkelijker. Er zijn echter ook enkele nedelen: u kunt geen gebruik maken van de importdialoog van &cervisia; om bestanden aan bestaande modules toe te voegen en u kunt de bestanden ofwel als tekst of als binaire bestanden importeren. U kunt om de beperkingen heen werken door een map met bestanden van alleen één van deze types aan te maken of door de patronen van de bestanden die genegeerd moeten worden bij het importeren te specificeren. </para>
+
+<para
+>Veronderstel bijvoorbeeld dat uw project alleen tekstbestanden en enige PNG-afbeeldingen (binaire bestanden) bevat. U kunt &CVS; vertellen om alle bestanden met het patroon <filename class="extension"
+>*.png</filename
+> te negeren bij bij het importeren van de andere bestanden als tekst of u kunt de afbeeldingen naar een aparte map verplaatsen en dan de overige bestanden (als tekstbestanden) importeren. Op beide manieren moet u een <link linkend="checkingout"
+>checkout</link
+> op de nieuw geïmporteerde module doen naar een nieuwe werkkopie, de ontbrekende bestanden en mappen er naar toe kopiëren, <link linkend="addingfiles"
+>toevoegen</link
+> en ze <link linkend="committingfiles"
+>vastleggen (commit)</link
+> in de repository om het proces van importeren te voltooien. </para>
+
+<para
+>Als een alternatief kunt u de bestanden en mappen handmatig toevoegen, daarmee een lege module voor ze aan te maken. Om een lege module aan een repository toe te voegen, maakt u een nieuwe map aan in de basismap van de &CVS; repository. De naam van deze nieuwe map is de naam van de module. <link linkend="checkingout"
+>Checkout</link
+> de nieuwe lege module. Kopieer daarna de bestanden en mappen naar de werkkopie, <link linkend="addingfiles"
+>voeg toe</link
+> en <link linkend="committingfiles"
+>leg vast (commit)</link
+> om ze te uploaden naar de &CVS; repository. </para>
+
+
+<figure id="screenshot-import" float="1">
+<title
+>Een schermafdruk van &cervisia;'s import venster</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="import.png"/></imageobject>
+<textobject
+><phrase
+>Een schermafdruk van &cervisia;'s import venster</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>In <xref linkend="screenshot-import"/> kunt u de dialoog zien die u helpt om een project als een module te <emphasis
+>importeren</emphasis
+>. Om toegang te krijgen tot de importdialoog van &cervisia;, kiest u het menu-item <menuchoice
+><guimenu
+>Repository</guimenu
+> <guimenuitem
+>Importeren...</guimenuitem
+></menuchoice
+>. </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Repository:</guilabel
+> <xref linkend="co-repository"/></term>
+<listitem
+><para
+>Voer de naam van de &CVS;-repository in of selecteer deze uit het afrolvak. De naam wordt ook wel $<envar
+>CVSROOT</envar
+> genoemd. U moet er schrijftoegang hebben en de repository dient geïnitialiseerd te zijn. Wanneer de repository nog niet bestaat, maak deze dan aan met het kiezen van het menu-item <menuchoice
+> <guimenu
+>Repository</guimenu
+> <guimenuitem
+>Aanmaken...</guimenuitem
+> </menuchoice
+>. </para>
+<para
+>Het afrolvak toont een lijst met repositories die u eerder hebt ingevoerd met het dialoogvak <guilabel
+>Toegang tot repositories instellen</guilabel
+>. Indien de repository zich bevindt op een server, zorg er dan voor dat de authenticatie werkt, bekijk hiervoor de sectie <xref linkend="accessing-repository"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Module:</guilabel
+> <xref linkend="co-module"/></term>
+<listitem
+><para
+>De naam van de module waaronder het project bewaard zal worden. Na het importeren, kan het project uitgecheckt worden onder deze naam. Zie de sectie <xref linkend="checkingout"/> voor meer informatie. Dit is tevens de naam van de corresponderende map in de repository. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Werkmap:</guilabel
+></term>
+<listitem
+><para
+>Dit is de hoofdmap van het project dat u wilt importeren. Het importeren start vanuit deze hoofdmap. Alle onderliggende mappen worden ook geïmporteerd. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Distributeurtag:</guilabel
+> <xref linkend="co-vendortag"/></term>
+<listitem
+><para
+>De vendor tag is van oorsprong bedoeld om bronbestanden van derde partijen of fabrikanten op te zoeken. Wanneer u geen idee hebt wat u ermee aan moet kunt u gewoon uw gebruikersnaam invullen. Het maakt niet zoveel uit wat u hier invult. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Uitgave-tag:</guilabel
+> <xref linkend="co-releasetag"/></term>
+<listitem
+><para
+>Deze tag wordt van oorsprong gebruikt voor het importeren van verschillende versies van software van derde partijen. Wanneer dit niet van toepassing is,gebruik dan het woord <literal
+>start</literal
+> of <literal
+>FOO_1_0</literal
+>, <literal
+>FOO</literal
+> is de naam van uw project en <literal
+>1.0</literal
+> is het versienummer van de geimporteerde uitgave. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Bestanden negeren:</guilabel
+></term>
+<listitem
+><para
+>Indien u dit veld invult, dan zal een extra optie <option
+>-I <replaceable
+>bestandsnamen</replaceable
+></option
+> worden meegegeven aan het commando <command
+>cvs import</command
+>. Deze, met een spatie gescheiden bestanden (jokertekens zijn hierin toegestaan), worden niet meegenomen tijdens het importeren. In het algemeen is het handiger om een aparte map te maken met alle bestanden die u wilt importeren. Dit voorkomt ook fouten. Andersom kan dit veld wel handig zijn om bestanden te importeren die normaalgesproken door &CVS; genegeerd worden, zoals &eg; bestanden met de naam <filename
+>core</filename
+>. In dit soort gevallen, kunt u in de lijst de bestandsnaam invullen, voorafgegaan door een <literal
+>!</literal
+>. Dit zorgt er dan voor dat dit bestand juist wel wordt meegenomen. Een lijst met bestandsnamen die normaalgesproken niet worden meegenomen is te vinden in het gedeelte <xref linkend="ignoredfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Commentaar:</guilabel
+> <xref linkend="co-comment"/></term>
+<listitem
+><para
+>Gebruik dit veld om het commentaar dat u zou willen opslaan over de oorsprong, gebruik, ontwikkeling, &etc; van de bestanden die u aan het importeren bent. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Als binairies importeren</guilabel
+></term>
+<listitem
+><para
+>Indien u deze optie activeert, zullen alle bestanden geimporteerd worden in de binaire modus. Dit houdt in dat de parameter <option
+>-kb</option
+> wordt meegegeven aan het commando <command
+>cvs import</command
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Het modificatietijdstip van het bestand als tijdstip van importeren gebruiken</guilabel
+></term>
+<listitem
+><para
+>Als u dit vakje activeert zal het tijdstip van importeren worden gebruikt als het modificatietijdstip van het bestand. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+
+<para
+>Nadat u dit formulier hebt ingevuld en bevestigd door <guibutton
+>OK</guibutton
+> in te drukken, zal het volgende &CVS;-commando worden gebruikt:</para>
+
+<screen
+><command
+>cvs</command
+> -d <co id="co-repository"
+></co
+><replaceable
+>repository</replaceable
+> import -m "<co id="co-comment"
+></co
+>" <co id="co-module"
+></co
+><replaceable
+>module</replaceable
+> <co id="co-vendortag"
+></co
+><replaceable
+>leverancierstag</replaceable
+> <co id="co-releasetag"
+></co
+><replaceable
+>vrijgavetag</replaceable
+></screen>
+
+</sect1>
+
+
+<sect1 id="checkingout">
+<title
+>Een module uitchecken van de repository</title>
+<para
+>Nu u met succes uw repository-locatie hebt gedefinieerd en de initiële bestanden hebt geïmporteerd naar de repository, is het tijd om de module uit de &CVS; repositoryop te halen en uw eigen werkkopie te maken. </para>
+
+<para
+>U zult ook de naam van de <firstterm
+>branch</firstterm
+> of <firstterm
+>tag</firstterm
+> die u wilt gebruiken moeten weten. </para>
+
+<para
+>Branches van een module zijn parallelle versies van deze module. Een goed voorbeeld uit het echte leven hiervan is de vrijgave van een softwareproject. Na een hoofdvrijgave zijn er bugs in de code die gerepareerd moeten worden, er zijn echter ook mensen die nieuwe functies aan de toepassing willen toevoegen. Het is erg moeilijk om beiden tegelijk te doen omdat nieuwe functies gewoonlijk ook nieuwe bugs introduceren, waardoor het moeilijk is om de ouden te volgen. Om dit dilemma op te lossen, laat &CVS; u een parallelle versie aanmaken, die we de <quote
+>stabiele uitgave branch</quote
+> noemen waaraan u alleen bugreparaties kunt toevoegen, waarbij de hoofdbranch (HEAD) open is voor het toevoegen van nieuwe functies. </para>
+
+<para
+>Tags worden gebruikt om een versie van een project te markeren. &CVS; stempelt één versie van elke bestand met de tag, dus wanneer u een checkout doet of bijwerkt naar een specifieke tag, dan krijgt u altijd dezelfde versies van de bestanden. Daarom zijn, in tegenstelling tot branches, tags niet dynamisch: u kunt niet op een tag ontwikkelen. Tags zijn bruikbaar om uitgaven te markeren, grote wijzigingen in de code, &etc; Met tags kunt u gemakkelijk terugkeren naar het project in een voorgaande status, om bugs te reproduceren en te volgen, opnieuw de vrijgegeven code te genereren, &etc; </para>
+
+<figure id="screenshot-checkout" float="1">
+<title
+>Een schermafdruk van het venster dat verschijnt bij het uitchecken</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="checkout.png"/></imageobject>
+<textobject
+><phrase
+>Een schermafdruk van het venster dat verschijnt bij het uitchecken</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Repository:</guilabel
+></term>
+<listitem
+><para
+>De naam van de &CVS;-repository, ook wel bekend als <filename
+><envar
+>$CVSROOT</envar
+></filename
+>. Het afrolvak toont de lijst met repositories, die u eerder hebt ingevoerd met het dialoogvak <guilabel
+>Toegang tot repositories instellen</guilabel
+>. Als de repository zich bevindt op een server, zorg er dan voor dat de authenticatie werkt, bekijk hiervoor de sectie <xref linkend="accessing-repository"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Module:</guilabel
+></term>
+<listitem
+><para
+>De naam van de module om uit te checken. Als u werkt met een bestaande repository, dan kunt u deze naam waarschijnlijk van de systeembeheerder krijgen; of, als het een open source repository is, dan kunt u de naam van de module krijgen uit de webpagina's van het project. Als u een nieuwe module vanuit het niets wilt aanmaken, maak dan gewoon een nieuwe map aan in de lokale basismap van de repository. De naam van de map zal hetzelfde zijn als de naam van de lege module. </para>
+<para
+>Anders, als de repository een bestand <filename
+><envar
+>$CVSROOT</envar
+>/modules</filename
+> heeft, kunt u een lijst van beschikbare modules verkrijgen door op de knop <guibutton
+>Lijst ophalen</guibutton
+> te klikken. </para>
+<para
+>Merk op dat het mogelijk is om elke bestaande subfolder van de module uit te checken, zonder de rest van de module op te halen. Voer gewoon ook het pad naar de subfolder in. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Branch-tag:</guilabel
+></term>
+<listitem
+><para
+>De naam van de branch of tag die u uit wilt checken. Als u dit veld leeg laat zal &cervisia; de hoofd (HEAD) tak ophalen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Werkmap:</guilabel
+></term>
+<listitem
+><para
+>De map waaronder de module moet worden uitgecheckt. Merk op dat de topniveaumap van de werkkopie  genoemd is naar de module die u wilt ophalen, tenzij u een alternatieve naam in het veld <guilabel
+>Uitchecken als:</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Uitchecken als:</guilabel
+></term>
+<listitem
+><para
+>Dit resulteert er in dat de bestanden in de werkkopie worden uitgecheckt naar een alternatieve map onder de werkmap in plaats van een map vernoemd naar de module. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Alleen exporteren</guilabel
+></term>
+<listitem
+><para
+>Als u dit vakje activeert zullen de bestanden worden geëxporteerd in plaats van uitgecheckt. Exporteren maakt een kopie van de broncode voor de module zonder de administratieve mappen van de &CVS;. Exporteren kan worden gebruikt om de broncode klaar te maken voor een uitgave. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Recursief uitchecken</guilabel
+></term>
+<listitem
+><para
+>Alle bestanden en mappen recursief uitchecken.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+
+<sect1 id="mainscreen">
+<title
+>Het hoofdvenster, status van bestanden bekijken en bijwerken</title>
+<para
+>Wanneer u &cervisia; start en een werkkopie opent door <menuchoice
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Sandbox openen...</guimenuitem
+> </menuchoice
+> te kiezen, dan ziet u twee hoofdgebieden in het hoofdvenster van &cervisia;: de bovenste is een hiërarchisch (boomstructuur) beeld van de huidige werkkopie; het onderste gebied wordt gebruikt de &CVS; commando's, die door &cervisia; worden uitgevoerd om zijn taken te vervullen, evenals de uitvoer die gegenereerd wordt door deze commando's. </para>
+
+<para
+>Standaard laat &cervisia; niet de bestanden in de submappen zien, zodat u op de mappen moet klikken als u ze wilt zien. Om alle bestanden in de werkkopie te zien, selecteert u <menuchoice
+> <guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Boomstructuur uitvouwen</guimenuitem
+> </menuchoice
+>. Om alle mappen in de werkkopie weer te sluiten, kiest u <menuchoice
+> <guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Boomstructuur invouwen</guimenuitem
+> </menuchoice
+>. </para>
+
+<para
+>Conform de instellingen in de bestanden <filename
+>.cvsignore</filename
+>, zullen de bestanden die u meestal niet wilt toevoegen in de repository, zoals bijvoorbeeld object-bestanden, niet getoond worden. Voor ieder bestand kunt u de bijbehorende status zien. Standaard is dit "Onbekend" omdat &cervisia; het ophalen van gegevens pas doet wanneer u kiest voor <menuchoice
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Bijwerken</guimenuitem
+> </menuchoice
+> of <menuchoice
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Status</guimenuitem
+> </menuchoice
+>. Met deze werkwijze heeft u in ieder geval een minimale hoeveelheid aan functionaliteit tot uw beschikking, zelfs wanneer u niet de beschikking heeft over een permanente verbinding met de &CVS;-server. </para>
+
+<figure id="screenshot-mainview" float="1">
+<title
+>Een schermafdruk van het hoofdscherm</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="mainview.png"/></imageobject>
+<textobject
+><phrase
+>Een schermafdruk van het hoofdscherm</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>De commando's in het menu Bestand zullen alleen maar uitgevoerd worden op de bestanden die gemarkeerd zijn. U kunt ook mappen markeren. Kies nu de optie <menuchoice
+> <guimenu
+>Bestand</guimenu
+><guimenuitem
+>Bijwerken</guimenuitem
+> </menuchoice
+> of druk op <keycap
+>F5</keycap
+>. &cervisia; gebruikt het commando </para>
+
+<para>
+<screen
+><command
+>cvs update -n <replaceable
+>bestandsnamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>om status-informatie te krijgen over de gemarkeerde bestanden. Bedenk dat &cervisia; alleen maar recursief door de submappen zal controleren wanneer u de betreffende optie in het menu <guimenu
+>Instellingen</guimenu
+> activeert. U kunt de status van de bestanden uitlezen in de kolom <guilabel
+>Status</guilabel
+>: </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Lokaal gewijzigd</guilabel
+></term>
+<listitem
+><para
+>Dit betekent dat het bestand gewijzigd is ten opzichte van de versie in de repository. </para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><guilabel
+>Lokaal toegevoegd</guilabel
+></term>
+<listitem
+><para
+>Dit betekent dat het bestand niet bestaat in de repository, maar wel in de werkmap staat. Het staat dus op de planning om aan de repository toegevoegd te worden. Het werkelijk toevoegen aan de repository gebeurt bij het vastleggen. Dit wordt "commit" genoemd. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Lokaal verwijderd</guilabel
+></term>
+<listitem
+><para
+>Dit betekent dat het bestand staat gepland om verwijderd te worden, maar dat het nu nog bestaat in de repository. Het werkelijk verwijderen gebeurt alleen na een commit. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Bijwerken noodzakelijk</guilabel
+></term>
+<listitem
+><para
+>Dit wordt getoond wanneer er een nieuwere versie van het bestand bestaat in de repository, &eg; wanneer iemand anders een aanpassing heeft gecommit. Normaal gesproken wilt u dit bestand bijwerken in uw lokale repository zodat u een versie in uw lokale map hebt staan die recent is. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Patch noodzakelijk</guilabel
+></term>
+<listitem
+><para
+>Dit is identiek aan hierboven. Het verschil is alleen dat als u gekozen heeft voor Bijwerken, de &CVS;-server alleen een patch naar u toe stuurt in plaats van het hele bestand. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Samenvoegen noodzakelijk</guilabel
+></term>
+<listitem
+><para
+>Geeft aan dat samenvoegen (merge) van de revisie van het bestand in uw werkmap met de versie in de repository nodig is. Dit gebeurt wanneer u aanpassingen aan het bestand hebt gemaakt terwijl iemand anders ook zijn/haar aanpassingen heeft vastgelegd (commit) in de repository. Wanneer u kiest voor bijwerken worden de gemaakte aanpassingen in de repository samengevoegd met uw bestand. Wanneer er een conflict plaatsvindt (bijvoorbeeld wanneer iemand dezelfde regels als u hebt veranderd) dan zal de kolom status "Conflict" aangeven. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Actueel</guilabel
+></term>
+<listitem
+><para
+>Geeft aan dat het bestand identiek is met die in de repository. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Conflict</guilabel
+></term>
+<listitem
+><para
+>Dit wordt getoond wanneer het bestand nog conflictmarkeringen bevat. Misschien heeft u reeds het bestand bijgewerkt en niet de conflicten opgelost. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Niet in CVS</guilabel
+></term>
+<listitem
+><para
+>Geeft aan dat een bestand niet geregistreerd is in de &CVS;-repository. Wanneer u het bestand beschikbaar wilt stellen aan anderen zult u het moeten toevoegen aan de repository. Wanneer dat niet de bedoeling is dan kunt u overwegen om het toe te voegen aan het bestand <filename
+>.cvsignore</filename
+>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Nu dat we een overzicht hebben van de huidige status van het &CVS; zou u een update kunnen uitvoeren. Markeer enkele bestanden (of de hoofdmap van een mappenstructuur, waarmee u gelijk alle bestanden in de hoofdmap selecteert). Kies nu de optie <menuchoice
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Bijwerken</guimenuitem
+> </menuchoice
+>. (Uiteraard had u daar ook mee kunnen beginnen in deze sessie). Voor enkele van de bestanden kan de status daarmee veranderen. Met name de bestanden die waren gemarkeerd als "Patch benodigd" of "Bijwerken noodzakelijk". De kolom Status kan nu ook het volgende bevatten: </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Bijgewerkt</guilabel
+></term>
+<listitem
+><para
+>Wordt getoond wanneer het bestand is bijgewerkt vanuit de repository. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Gepatched</guilabel
+></term>
+<listitem
+><para
+>Geeft aan dat de &CVS;-server een patch heeft verzonden voor dit bestand en dat deze succesvol is aangebracht. Wanneer de patch niet succesvol was omdat er een conflict is ontstaan tussen uw aanpassingen en de aanpassingen van iemand anders die reeds zijn vastgelegd (commit) in de repository zal de status van het bestand veranderen in <guilabel
+>Conflict</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>U zult waarschijnlijk al gezien hebben dat sommige rijen een andere kleur hebben nagelang de status van het bestand. Bijvoorbeeld: een bestand met een conflict wordt met rood gemarkeerd om aan te geven dat er een conflict is dat eerst opgelost moet worden voordat u verder kunt gaan werken aan het bestand. Wanneer de map een hoop bestanden heeft kunt u daarmee wel eens het overzicht verliezen. Klik in zo'n situatie op het kolomhoofd van de kolom <guilabel
+>Status</guilabel
+>. De lijst met bestanden wordt dan gesorteerd op de prioriteit van de status, waardoor de meest belangrijke informatie bovenaan staat. Om weer terug te keren naar de weergave waarbij de bestanden alfabetisch gesorteerd zijn, klik op de koptekst van de kolom <guilabel
+>Bestandsnaam</guilabel
+>. </para>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="workingwithfiles">
+<title
+>Werken met bestanden</title>
+
+<para
+>Alle gangbare functionaliteit die in &CVS; zit is direct beschikbaar in &cervisia;. Commando's worden meestal uitgevoerd op enkele bestanden tegelijkertijd, namelijk alle bestanden die op dat moment zijn geselecteerd. Wanneer er ook submappen zijn geselecteerd, hangt het af van de gemaakte instellingen in het menu <guimenu
+>instellingen</guimenu
+>. Bijvoorbeeld wanneer bij <menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Recursief vastleggen (commit) &amp; verwijderen</guimenuitem
+></menuchoice
+> is geactiveerd en u kiest de optie <menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Vastleggen (commit)...</guimenuitem
+></menuchoice
+> terwijl een map is geselecteerd, dan zullen alle bestanden in de boomstructuur onder deze map worden vastgelegd. Anders worden alleen de gewonde bestanden in de map zelf vastgelegd. </para>
+
+<figure id="screenshot-popup" float="1">
+<title
+>Een schermafdruk van het contextmenu van &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="popup.png"/></imageobject>
+</mediaobject>
+</figure>
+
+<para
+>De meest gebruikte acties zijn ook beschikbaar door rechts te klikken op de bestanden in de boomstructuur via het contextmenu. <xref linkend="screenshot-popup"/> toont het contextmenu van het hoofdvenster van &cervisia;. </para>
+
+<para
+>U kunt eenvoudig een bestand bewerken door er dubbel op te klikken of het te selecteren en op &Enter; te drukken. Dit start de standaard toepassing die dat type bestand behandeld (de standaard toepassing voor elk bestandstype is een &kde; brede instelling). Als de standaard toepassing niet die is die u wilt gebruiken, dan kunt u rechts klikken op het bestand en het submenu <menuchoice
+> <guisubmenu
+>Bewerken met</guisubmenu
+> </menuchoice
+> kiezen en een van de andere toepassingen kiezen die dat bestandstype behandeld. </para>
+
+<sect1 id="addingfiles">
+<title
+>Bestanden toevoegen</title>
+
+<para
+>Bestanden aan de repository toevoegen vereist twee stappen: ten eerste moeten deze in de &CVS; worden geregistreerd, met andere woorden <emphasis
+>toegevoegd aan de repository</emphasis
+>. Dit is nodig, maar niet genoeg. Om ze daadwerkelijk in de repository te stoppen moet u deze gaan vastleggen ( <emphasis
+>commit</emphasis
+>). Deze werkwijze heeft een belangrijk voordeel: u kunt bestanden vastleggen samen met de aanpassingen op andere delen van het project. Wanneer u dit doet dan kunt u gemakkelijk zien (bijvoorbeeld in de commit-e-mailberichten) dat al deze veranderingen onderdeel zijn van een groter geheel. </para>
+
+<para
+>Om dit te voltooien, markeert u alle toe te voegen bestanden in het hoofdvenster van &cervisia;. Daarna kiest u <menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Aab repository toevoegen...</guimenuitem
+></menuchoice
+> of u klikt rechts op de gemarkeerde bestanden en kiest <guimenuitem
+>Aan repository toevoegen...</guimenuitem
+>. De dialoog <guilabel
+>Aan CVS toevoegen</guilabel
+> zal verschijnen, met de lijst gemarkeerde bestanden en om bevestiging vragen. Druk op de knop <guibutton
+>OK</guibutton
+>. </para>
+
+<para
+>&cervisia; start een commando</para>
+
+<para>
+<screen
+><command
+>cvs add <replaceable
+>bestandsnamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>uit. Wanneer de opdracht succesvol was zal de kolom Status "Lokaal toegevoegd" weergeven. </para>
+
+<warning
+><para
+>&CVS; is niet gemaakt een zinvolle revisiecontrole uit te voeren op binaire bestanden. Bijvoorbeeld het samenvoegen (merging) van binaire bestanden heeft geen zin. Verder heeft &CVS; standaard "keyword expansion" (bijvoorbeeld op de string <literal
+>&dollar;Revision: 1.78.2.4 &dollar;</literal
+>) wanneer een bestand wordt vastgelegd. In binaire bestanden kunnen zulke vervangingen het bestand beschadigen en volledig onbruikbaar maken. </para
+></warning>
+
+<para
+>Om dit gedrag tegen te gaan kan men het beste binaire bestanden (of andere bestandstypen zoals Postscript of PNG-bestanden) vastleggen door te kiezen <menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Binair bestand vastleggen...</guimenuitem
+></menuchoice
+>. De dialoog<guilabel
+>Aan CVS toevoegen</guilabel
+> zal verschijnen, met de lijst met door u gemarkeerde binaire bestanden en om bevestiging vragen. Druk op de knop <guibutton
+>OK</guibutton
+>. </para>
+
+<para
+>&cervisia; start een commando </para>
+
+<para>
+<screen
+><command
+>cvs add -kb <replaceable
+>bestandsnamen</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="removingfiles">
+<title
+>Bestanden verwijderen</title>
+
+<para
+>Net als het toevoegen van bestanden wordt het verwijderen van bestanden in twee stappen gedaan: Allereerst moeten de bestanden gemarkeerd worden voor verwijdering door te kiezen voor <menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Uit de repository verwijderen</guimenuitem
+></menuchoice
+> of rechts klikken op de gemarkeerde bestanden en <guimenuitem
+>Uit de repository verwijderen...</guimenuitem
+> uit het contextmenu. De dialoog <guilabel
+>Uit CVS verwijderen</guilabel
+> zal verschijnen met de lijst door u gemarkeerde bestanden en om bevestiging vragen. Druk op de knop <guibutton
+>OK</guibutton
+>. &cervisia; zal het commando </para>
+<para>
+<screen
+><command
+>cvs remove -f <replaceable
+>bestandsnamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>uitvoeren. Daarna zal de aanpassing op de sandbox vastgelegd (commit) moeten worden samen met eventuele andere aanpassingen binnen het project. </para>
+
+<note
+><para
+>Het bovenstaande commando werkt alleen wanneer het bestand goed is bijgewerkt. Anders zult u een foutmelding krijgen. Dit is vrij zinnig wanneer u bedenkt dat wanneer u het bestand heeft gewijzigd ten opzichte van de versie in de repository en iemand anders heeft aanpassingen gemaakt u eerst dient te controleren of u deze veranderen wilt negeren. </para
+></note>
+
+</sect1>
+
+
+<sect1 id="addingremovingdirs">
+<title
+>Toevoegen en verwijderen van mappen</title>
+
+<para
+>Mappen worden totaal anders door &CVS; afgehandeld dan normale bestanden.Ze vallen namelijk niet onder de revisie-controle, wat bijvoorbeeld wil zeggen dat men niet kan nagaan welke mappen ooit hebben bestaan binnen een project op een bepaald moment. Daarnaast kunnen mappen niet expliciet verwijderd worden (tenzij men ze direct in de repository weggooit). </para>
+
+<para
+>In plaats daarvan heeft &CVS; de stelregel dat een map "niet bestaat", wanneer de map leeg is. Deze regel kan afgedwongen worden door de parameter <option
+>-P</option
+> toe te voegen aan het commando <command
+>cvs update</command
+> and <command
+>cvs checkout</command
+>. Deze parameter kan ingesteld worden in het menu <menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Lege mappen verwijderen bij bijwerken</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>Een map kan aan de repository worden toegevoegd met het menu-item <menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Aan repository toevoegen</guimenuitem
+></menuchoice
+> of door rechts te klikken op de gemarkeerde map en uit het contextmenu <guimenuitem
+>Aan repository toevoegen...</guimenuitem
+>. Merk op dat in tegenstelling tot het toevoegen van bestanden, men na afloop niets hoeft vast te leggen (commit). &cervisia; geeft het commando </para>
+
+
+<para>
+<screen
+><command
+>cvs add <replaceable
+>mapnaam</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="committingfiles">
+<title
+>Bestanden vastleggen (commit)</title>
+
+<para
+>Wanneer u een bepaalde hoeveelheid veranderingen in de werkkopie hebt gemaakt en u wil de andere ontwikkelaars hier deelgenoot van maken dan zul u ze moeten vastleggen. De engelstalige term hiervoor is <emphasis
+>commit</emphasis
+>. Door het vastleggen wordt uw versies als nieuwe revisies aan de repository toegevoegd. Een ontwikkelaar die vervolgens een update uitvoert zal daarin uw aanpassingen terugvinden. </para>
+
+<para
+>Om een aantal bestanden tegelijk vast te leggen, selecteert u ze in &cervisia; en kiest u voor <menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Vastleggen (commit)...</guimenuitem
+></menuchoice
+> of u klikt rechts op de gemarkeerde bestanden en kiest in het contextmenu <guimenuitem
+>Vastleggen (commit)...</guimenuitem
+>. </para>
+
+<figure id="screenshot-commit" float="1">
+<title
+>Een schermafdruk van het dialoogvenster "CVS commit" van Cervisia</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="commit.png"/></imageobject>
+</mediaobject>
+</figure>
+
+<para
+>U krijgt een dialoog die u een lijst met de geselecteerde bestanden boven aan de sectie laat zien en een logbericht voor uw onderstaande wijzigingen. &cervisia; helpt u op een aantal manieren om een betekenisvol logbericht te vinden: allereerst in de lijst van bestanden kunt u dubbelklikken op een bestand of de toets <keycap
+>Return</keycap
+> drukken om de gemaakte veranderingen aan het bestand te zien. Ten tweede geeft het een lijst van logberichten die je eerder hebt gebruikt in een comboveld. Ten derde is dit venster geïntegreerd met de changelog-editor van &cervisia; zoals hieronder beschreven. Als u de dialoog hebt beëindigd, zal het commando </para>
+
+<para>
+<screen
+><command
+>cvs commit -m <replaceable
+>bericht</replaceable
+> <replaceable
+>besandsnamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>worden gebruikt. </para>
+
+
+<note
+><para
+>Een veelvoorkomende fout die u tegen kunt komen wanneer u bestanden vastlegt is <errorname
+>Up-to-date check failed</errorname
+>. Dit geeft aan dat iemand veranderingen in de repository heeft gemaakt sinds de laatste keer dat de lokale repository is bijgewerkt. Of technisch gesproken: dat de <literal
+>BASE</literal
+>-revisie niet de nieuwste binnen zijn branch is. In zo'n geval weigert CVS om uw aanpassingen toe te voegen aan de repository. De oplossing is om de lokale repository bij te werken, conflicten op te lossen en vervolgens in de repository vast te leggen. Wanneer u werkt aan een softwareproject is het een goede gewoonte om te controleren of het programma nog goed werkt nadat u de repository hebt bijgewerkt. Het kan namelijk zo zijn dat de door u gemaakte aanpassingen en andermans aanpassingen nadelig hebben gewerkt op de programmacode waardoor het programma niet meer werkt. </para
+></note>
+
+<note>
+<para
+>Een andere veelvoorkomende fout is de foutmelding <errorname
+>Sticky tag 'X' for file 'X' is not a branch</errorname
+>. Dit gebeurt wanneer u probeert een bestand vast te leggen die u eerder naar een bepaalde revisie of tag heb gebracht met het commando: </para>
+<para>
+<screen
+><prompt
+>%</prompt
+><userinput
+>cvs update -r X</userinput
+></screen>
+</para>
+<para
+>(wat &eg; het geval is als u kiest voor <menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Bijwerken naar tag/datum...</guimenuitem
+></menuchoice
+>). In zo'n geval zal de tag op het bestand "sticky" worden, wat wil zeggen dat verdere updates niet de nieuwste revisie aan die branch toevoegt. Wanneer u verdere revisies wilt vastleggen binnen de branch zult u de branch-tag moeten bijwerken voordat u weer een commit kunt uitvoeren. </para>
+</note>
+
+<para
+>Met &cervisia; is het vrij gemakkelijk om een ChangeLog-bestand te onderhouden dat voldoet aan het formaat zoals is omschreven in de standaarden voor GNU-programmeren (GNU coding guidelines). Om deze te gebruiken kiest u voor <menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>ChangeLog-ingang invoegen...</guimenuitem
+></menuchoice
+>. Wanneer een bestand met de naam <filename
+>ChangeLog</filename
+> bestaat in de hoofdmap van de sandbox, zal dit bestand worden geladen. Vervolgens heeft u de mogelijkheid om deze te bewerken. Aan de bovenzijde van dit bestand wordt een regel met de huidige datum en uw gebruikersnaam (wat kan worden ingesteld zoals staat beschreven in de sectie <xref linkend="customize-general"/>) aangemaakt. Wanneer u klaar bent met het invullen van het venster klikt u op de knop <guibutton
+>OK</guibutton
+>. De volgende keer dat het venster "CVS commit" wordt aangeroepen zult u zien dat u het laatste ChangeLog-bericht is toegevoegd aan de ChangeLog. </para>
+
+</sect1>
+
+
+<sect1 id="resolvingconflicts">
+<title
+>Conflicten oplossen</title>
+
+<para
+>Conflicten kunnen zich voordoen wanneer u veranderingen maakt aan een bestand dat gelijktijdig ook door een andere ontwikkelaar wordt aangepast. Het conflict wordt opgemerkt door &CVS; wanneer u het aangepaste bestand wilt bijwerken in de repository. &CVS; probeert de veranderingen samen te voegen (merge) met uw lokale werkkopie. Dit samenvoegen zal niet lukken wanneer de veranderingen aan het bestand elkaar overlappen (dwz dat de aangepaste regels in het bestand van de ene ontwikkelaar samenvalt met de aangepaste regels van die van uzelf). De &CVS;-server zal een foutmelding geven. </para>
+
+<para
+>In het hoofdvenster van &cervisia; worden bestanden welke een conflict hebben, weergeven in de kolom Status met "Conflict" en rood gekleurd. Het is nu uw taak om deze conflicten op te lossen alvorens het bestand vast te leggen. &CVS; zal weigeren om elk bestand met conflicten vast te leggen totdat ze zijn bewerkt. Vanuit het hoofdvenster kunt u uiteraard conflicten op de traditionele manier oplossen: gewoon op het betreffende bestand dubbelklikken en aanpassen met uw favoriete editor.</para>
+
+<para
+>&CVS; markeert de conflicterende wijzigingen door markeringen te plaatsen midden in de bestanden, op de volgende manier:</para>
+
+<screen
+>&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+Wijzigingen in uw werkkopie
+=======
+Wijzigingen in de repository
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; revisie_nummer
+</screen>
+
+<para
+>U zult dit gehele blok met de nieuwe samengevoegde versie moeten vervangen. Natuurlijk heeft u een grote mate van vrijheid wanneer u een set conflicten dient op te lossen: voor elk conflict kunt u besluiten om te kiezen uit twee alternatieve versies. U kunt ook besluiten dat dat geen goed resultaat zal opleveren en vervolgens beide aanpassingen herschrijven tot een nieuwe routine of zelfs een compleet nieuw bestand. </para>
+
+<para
+>Gelukkig biedt &cervisia; een mooier interface voor het behandelen van deze conflicten. Dit betekent niet dat het nooit nodig is om handmatig de bestanden te bewerken, maar minstens de noodzaak om triviale conflicten op te lossen is verdwenen. Om de dialoog van &cervisia; voor <guilabel
+>CVS oplossen</guilabel
+> te gebruiken, kiest u <menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Oplossen...</guimenuitem
+></menuchoice
+> of klikt u rechts op het gemarkeerde bestand en kiest <guimenuitem
+>oplossen...</guimenuitem
+> uit het contextmenu. </para>
+
+<figure id="screenshot-resolve" float="1">
+<title
+>Een schermafdruk van het oplossenvenster</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="resolve.png"/></imageobject>
+<textobject
+><phrase
+>Een schermafdruk van het oplossenvenster</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Bovenaan de dialoog ziet u <guilabel
+>Uw eigen versie (A)</guilabel
+> van het bestand aan de linkerzijde en de versie in de repository, <guilabel
+>Andere versie (B)</guilabel
+>, aan de rechterzijde. De verschillen worden gemarkeerd met een rode kleur. Onder deze twee versies kunt u de <guilabel
+>Samengevoegde versie</guilabel
+> zien. Deze wordt bewaard in uw werkkopie als u op de knop <guibutton
+>Opslaan</guibutton
+> klikt. </para>
+
+<para
+>U kunt verder of terug gaan naar de verschillende secties door de knoppen <guibutton
+>&lt;&lt;</guibutton
+> en <guibutton
+>&gt;&gt;</guibutton
+> te gebruiken. In het lage midden van het venster kunt u zien welke sectie op dat moment is gemarkeerd. Bijvoorbeeld <literal
+>2 van 3</literal
+> betekent dat u momenteel op de tweede conflicterende sectie bent van drie conflicterende secties in totaal. </para>
+
+<para
+>Nu kunt u sectie voor sectie bepalen welke versie u wilt hebben in het samengevoegde bestand. Door op <guibutton
+>A</guibutton
+> te drukken, neemt u de versie over die u maakte. Door op <guibutton
+>B</guibutton
+> te drukken, neemt u de versie over uit de repository. Door op <guibutton
+>A+B</guibutton
+> te drukken, worden beide versies toegevoegd en uw versie wordt eerste. <guibutton
+>B+A</guibutton
+> heeft hetzelfde resultaat, maar de volgorde is verschillend: eerst de versie uit de repository en daarna die van u. </para>
+
+<para
+>Als u niet tevreden bent met elk van deze versies, druk dan op <guibutton
+>Bewerken</guibutton
+> om een eenvoudige tekstbewerker te starten waarmee u de sectie kunt bewerken. Wanneer u klaar bent, drukt u op <guibutton
+>OK</guibutton
+> om terug te keren naar de dialoog <guilabel
+>CVS oplossen</guilabel
+> en verder gaan met het oplossen van conflicten. U zult de sectie, die u zojuist hebt bewerkt, in de <guilabel
+>Samengevoegde versie</guilabel
+> zien, met uw wijzigingen. </para>
+
+<para
+>Om uw wijzigingen op te slaan, waarmee de versie van de werkkopie wordt overschreven, druk dan op <guibutton
+>Opslaan</guibutton
+>. Merk op dat hiermee niet alleen de sectie die u aan het bekijken was, wordt opgeslagen, maar alle secties in het bestand. Als u het in een ander bestand wilt opslaan, druk dan op <guibutton
+>Opslaan als...</guibutton
+>. Druk op <guibutton
+>Sluiten</guibutton
+> om de dialoog te verlaten. Als u de dialoog sluit zonder opslaan, dan zullen de gemaakte wijzigingen verloren gaan. </para>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="obtaininginformation">
+<title
+>Informatie verkrijgen over bestanden en patches aanmaken</title>
+
+<sect1 id="diff">
+<title
+>Verschillen bekijken tussen revisies</title>
+
+<para
+>Er zijn enkele plekken binnen Cervisia waar u een dialoogvenster kunt opvragen waarin u de verschillen tussen de revisies van een bestand kunt zien: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>In het hoofdvenster kunt u kiezen voor <menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Verschil met de repository (BASE)...</guimenuitem
+></menuchoice
+>. Dit is gebaseerd op het commando <command
+>cvs diff</command
+> en toont u de verschillen tussen de versie in uw sandbox en de versie die u het laatst heeft opgehaald via bijwerken. Deze versie is ook wel bekend als <literal
+>BASE</literal
+>. Dit is vooral nuttig net voordat u een bestand wilt vastleggen (commit), zodat u een toepasselijk logbericht kunt maken. </para
+></listitem>
+
+<listitem
+><para
+>U kunt de verschillen tussen de versie in uw sandbox en de versie in de hoofd ontwikkeltak (ook genaamd <literal
+>HEAD</literal
+>) zien door <menuchoice
+><guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Verschil met de repository (HEAD)...</guimenuitem
+></menuchoice
+> te kiezen. </para
+></listitem>
+
+<listitem
+><para
+>U kunt de verschillen tussen de laatste twee revisies van het geselecteerde bestand zien door <menuchoice
+><guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Laatste wijziging...</guimenuitem
+></menuchoice
+> te kiezen. </para
+></listitem>
+
+<listitem
+><para
+>U kunt toegang krijgen tot de menu-items <guimenuitem
+>Verschil met de repository (BASE)...</guimenuitem
+>, <guimenuitem
+>Verschil met de repository (HEAD)...</guimenuitem
+> en <guimenuitem
+>Laatste wijziging...</guimenuitem
+> vanuit het contextmenu van het hoofdvenster, door rechts te klikken op het bestand dat u wilt bekijken. </para
+></listitem>
+
+<listitem
+><para
+>In het venster dat getoond wordt wanneer bestanden worden vastgelegd kunt u een venster met verschillen oproepen door het selecteren van een bestandsnaam in de selectielijst, ofwel door dubbelklikken of door de toets <keycap
+>Enter</keycap
+> te gebruiken. Hetzelfde kan ook bereikt worden via <menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Verschil met de repository (BASE)...</guimenuitem
+></menuchoice
+> met het juiste bestand geselecteerd in het hoofdvenster. </para
+></listitem>
+
+<listitem
+><para
+>In het dialoogvenster CVS-log kunt u twee revisies markeren van een bestand en een venster laten tonen waarbij men de verschillen tussen deze twee revisies kan zien (zie de sectie <xref linkend="browsinglogs"/>). </para
+></listitem>
+
+</itemizedlist>
+
+<para
+>Zoals u al zou verwachten zal &cervisia; niet zomaar een dump maken naar een terminal van de output van het <command
+>diff</command
+>-commando, maar zal het een grafische weergave laten zien zoals te zien is in <xref linkend="screenshot-log"/>. </para>
+
+<figure id="screenshot-log" float="1">
+<title
+>Een schermafdruk van het diff-venster</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="diff.png"/></imageobject>
+<textobject
+><phrase
+>Een schermafdruk van het diff-venster</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>De tekst in het dialoogvenster is een verbeterde variant van de tekst die wordt gegeven door het commando diff met de optie <option
+>-u</option
+>. U kunt de verschillende versies in de twee vensters zien, waarbij de regels dusdanig geplaatst dat u makkelijk een vergelijking kunt maken. Dat betekent dat waar tekst is toegevoegd of verwijderd, het venster lege lijnen toont met de markering <literal
+>+++++</literal
+> aan de linkerzijde. Ergens anders kunt u het _running_ nummer zien van iedere regel in de linkerkolom. </para>
+
+<para
+>In de tweede kolom in het rechtervenster , kunt u zien wat voor type verandering is gemaakt. Mogelijke veranderingen zijn <literal
+>Invoegen</literal
+>, <literal
+>Verwijderen</literal
+> en <literal
+>Wijzigen</literal
+>. De lijnen zijn daarbij respectievelijk blauw, groen en rood gemarkeerd. In het midden van het venster ziet u een gecomprimeerde afbeelding van de gebruikte kleurmarkeringen in het bestand. Op deze wijze heeft u een snel overzicht van de veranderingen die op het bestand zijn uitgevoerd. U kunt de positie van de gekleurde regionen van de gecomprimeerde afbeelding gebruiken als orientatie wanneer u de scrollbalken gebruikt. </para>
+
+<para
+>Normaliter worden de schuifbalken links en rechts gesynchroniseerd, wat wil zeggen dat wanneer je links scrollt de rechterzijde van het venster ook meescrollt. Deze optie kunt u uitzetten met de instelling <guibutton
+>Schuifbalken synchroniseren</guibutton
+>. </para>
+
+<para
+>Voor meer informatie hoe u het dialoogvenster CVS-diff kunt aanpassen , zie de sectie <xref linkend="customize-diff"/>. </para>
+
+</sect1>
+
+<sect1 id="creatingpatches">
+<title
+>Patches aanmaken</title>
+
+<para
+>Soms wilt u uw wijzigingen aanbieden om te worden nagekeken, alvorens ze vast te leggen of u hebt geen schrijftoegang tot de repository (daarom kunt u niet vastleggen). &CVS; biedt standaard formaten om de wijzigingen in uw werkkopie te delen, zodat anderen uw wijzigingen kunnen nakijken, testen in hun werkkopie en aanbrengen in de &CVS; repository. Een bestand met deze verschillen wordt a <firstterm
+>patch</firstterm
+> genoemd en wordt gegenereerd door het commando <command
+>cvs diff</command
+>, dezelfde manier als de verschillen in <xref linkend="diff"/>. Delen van patches in plaats van bestanden vereist minder bandbreedte en patches zijn gemakkelijker te behandelen, omdat u één patch-bestand kunt verzenden met alle verschillen van vele bronbestanden. </para>
+
+<para
+>In &cervisia; wordt dit bereikt door het kiezen van <menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Patch aanmaken tegen repository...</guimenuitem
+></menuchoice
+> </para>
+
+<important
+><para
+>De actie <guimenuitem
+>Patch tegen de repository aanmaken...</guimenuitem
+> maakt een patch met alle wijzigingen in alle bestanden in uw werkkopie (sandbox) tegen de <literal
+>BASE</literal
+>-repository. De selectie van bestanden in het hoofdvenster heeft geen invloed op de patch die zal worden gegenereerd. </para
+></important>
+
+<para
+>Een andere mogelijkheid is om één bestand in het hoofdvenster te selecteren en <guimenuitem
+>Logbestand doorbladeren...</guimenuitem
+> uit het menu <guimenu
+>Beeld</guimenu
+> of klik rechts op het gemarkeerde bestand en kies <guimenuitem
+>Logbestand doorbladeren...</guimenuitem
+> uit het contextmenu, om de <link linkend="browsinglogs"
+>Dialoog CVS-log</link
+> te openen. Selecteer nu de versie waartegen u een patch wilt aanmaken, als revisie <quote
+>A</quote
+> en druk op de knop <guilabel
+>Patch aanmaken...</guilabel
+>. Dit genereert een patch met de verschillen tussen het <emphasis
+>gemarkeerde bestand</emphasis
+> in uw werkkopie en de versie geselecteerd als revisie <quote
+>A</quote
+>. </para>
+
+<para
+>Alvorens de patch te maken toont &cervisia; een dialoog waarmee u het uitvoerformaat kunt instellen. </para>
+
+<figure id="screenshot-patch" float="1">
+<title
+>Een schermafdruk van &cervisia;'s patchdialoog</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="patch.png"/></imageobject>
+<textobject
+><phrase
+>Een schermafdruk van &cervisia;'s patchdialoog</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Uitvoerformaat</guilabel
+></term>
+<listitem
+><para
+>Er zijn hier drie formaten beschikbaar: </para>
+<para
+><guilabel
+>Normaal</guilabel
+>: een formaat dat kan worden gebruikt om met de ed-editor automatisch met een kopie van het oude bestand het nieuwe bestand te maken. In het normale uitvoerformaat, markeren de tekens &lt; en &gt; de wijzigingen en is er geen contextinformatie. </para>
+<para
+><guilabel
+>Geünificeerd</guilabel
+>: het meest gebruikte formaat voor het uitwisselen van patches. Het geünificeerde formaat gebruikt context-regels naast regelnummers om de verschillen op te slaan. Dit maakt het proces van het toepassen van patches meer robuust. Dit formaat toont de verschillen in een compacte en leesbare vorm, met een kop voor elk betrokken bestand en gescheiden secties voor elk verschil. De context-regels voor elk verschil maakt het lezen van de wijzigingen gemakkelijker. In het geünificeerde uitvoerformaat markeren de tekens + en - de wijzigingen. </para>
+<para
+><guilabel
+>Context</guilabel
+> presenteert dezelfde informatie als het geünificeerde formaat, maar op een minder compacte manier. In het uitvoerformaat markeert het teken ! de wijzigingen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Aantal contextregels:</guilabel
+></term>
+<listitem
+><para
+>Stel hier het aantal context-regels in voor het geünificeerde of context-uitvoer-formaten. Deze optie is niet beschikbaar voor het normale uitvoerformaat, omdat in dat formaat geen contextinformatie wordt opgeslagen. Meer contextinformatie maakt het lezen van de ruwe uitvoer gemakkelijker en toepassen van de patch meer precies, maar vergroot de afmeting van de patch. Het is aanbevolen om minstens twee context-regels te gebruiken voor de juiste bewerking met de patch. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Negeerinstellingen</guilabel
+></term>
+<listitem
+><para
+>Controleer hier de wijzigingen die niet beschouwd moeten worden als verschillen bij het genereren van de patch. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+
+<para
+>Na het instellen van het uitvoerformaat genereert &cervisia; de patch en toont de dialoog <guilabel
+>Opslaan als</guilabel
+>. Voer in deze dialoog de naam en locatie van het patch-bestand in. </para>
+
+
+</sect1>
+
+<sect1 id="annotate">
+<title
+>De annotatie-weergave van een bestand bekijken</title>
+
+<para
+>Met het commando <command
+>cvs annotate</command
+>, biedt &CVS; de mogelijkheid om bij iedere regel in het bestand te zien wie deze het meest recentelijk heeft aangepast. Deze weergave kan handig zijn om uit te zoeken wie een verandering veroorzaakt heeft of aan wie men iets dient te vragen over een verandering of een bug in de programma. </para>
+
+<para
+>&cervisia; geeft u toegang tot deze mogelijkheid, maar het verrijkt ook nog eens de informatie op een interactieve wijze. U kunt een annotatie-weergave zien door te kiezen voor <menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Annoteren...</guimenuitem
+></menuchoice
+>. Een andere mogelijkheid is om op de knop <guilabel
+>Annotatie</guilabel
+> in het venster <link linkend="browsinglogs"
+>CVS-log</link
+>, waarin u kunt selecteren welke versie van het bestand u wilt weergeven. Bij <xref linkend="screenshot-annotate"/> kunt u een schermafdruk zien van de dialoog. </para>
+
+<figure id="screenshot-annotate" float="1">
+<title
+>Een schermafdruk van &cervisia;'s annotatiedialoog</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="annotate.png"/></imageobject>
+<textobject
+><phrase
+>Een schermafdruk van &cervisia;'s annotatiedialoog</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>In annotatiedialoog, ziet u in een venster de laatste versie van het geselecteerde bestand (of de versie van revisie <quote
+>A</quote
+>, als u de annotatiedialoog hebt gestart vanuit de dialoog <link linkend="browsinglogs"
+>CVS-log</link
+>)). In de kolommen voorafgaand aan de tekst, kunt u wat informatie verkrijgen die gerelateerd zijn aan de laatste veranderingen van iedere regel. In de eerste kolom wordt het regelnummer getoond. In de tweede kolom ziet u de naam van de auteur van deze revisie en het revisienummer. In de derde kolom ziet u de actuele inhoud van deze regel. </para>
+
+<para
+>Wat betekent dat wanneer u een bepaalde regel ziet die u vreemd voorkomt of denkt dat het een bug betreft, kunt u gelijk zien wie verantwoordelijk is geweest voor die regel. Maar niet alleen dat, u kunt ook nagaan waarom de regel was gewijzigd. Om dit te zien zult u de muiscursor over het revisienummer moeten bewegen. Vervolgens zal er een tooltip verschijnen die het logbericht en de datum van de verandering zal tonen. </para>
+
+</sect1>
+
+
+<sect1 id="browsinglogs">
+<title
+>&CVS; logs doorbladeren</title>
+
+<para
+>Wanneer u een bestand in het hoofdvenster markeert en <guimenuitem
+>Logbestand doorbladeren...</guimenuitem
+> kiest uit het menu <guimenu
+>Beeld</guimenu
+> of rechts klikt op het gemarkeerde bestand en kies <guimenuitem
+>Logbestand doorbladeren...</guimenuitem
+> uit het contextmenu, dan zal de dialoog <guilabel
+>CVS log</guilabel
+> worden getoond (als u er meer dan één markeert, zal er niets gebeuren, omdat &cervisia; alleen de log voor één bestand tegelijk kan genereren en ontleden). Deze dialoog biedt functionaliteit die verder gaat dan het bekijken van de geschiedenis van het bestand. Als u het gebruikt als een bladerprogramma door versies, dan kunt u: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Bekijk de revisie, auteur, datum, branch, commitbericht en tags voor elke versie van het gemarkeerde bestand. </para
+></listitem>
+
+<listitem
+><para
+>Bekijk een grafische representatie met boomstructuur waarin de branches en tags van het gemarkeerde bestand wordt getoond. </para
+></listitem>
+
+<listitem
+><para
+>Bekijk elke versie van het gemarkeerde bestand (met de standaard toepassing). </para
+></listitem>
+
+<listitem
+><para
+>De annotatie-weergave van elke versie van het gemarkeerde bestand bekijken </para
+></listitem>
+
+<listitem
+><para
+>Bekijk de verschillen tussen elk paar versies van het gemarkeerde bestand, inclusief paren met de huidige versie van de werkkopie van het gemarkeerde bestand. </para
+></listitem>
+
+<listitem
+><para
+>Maak patches aan die de verschillen bevatten tussen elk paar versies van het gemarkeerde bestand, inclusief paren met de huidige versie van de werkkopie van het gemarkeerde bestand. </para
+></listitem>
+
+</itemizedlist>
+
+<figure float="1">
+<title
+>Een schermafdruk van het logvenster</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="logtree.png"/></imageobject>
+<textobject
+><phrase
+>Een schermafdruk van het logvenster</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>U kunt kiezen of u de geschiedenis bekijkt, zoals geleverd door het commando <command
+>cvs log</command
+> (<guilabel
+>CVS uitvoer</guilabel
+>), in een <guilabel
+>Boomstructuur</guilabel
+> of in een <guilabel
+>Lijst</guilabel
+>. Wat u kiest is een kwestie van smaak en in welke informatie u geïnteresseerd bent. De boomstructuur is een intuïtieve representatie van wat er gebeurt binnen verschillende branches en door welke auteurs. U kunt de bijbehorende logberichten als tekstballon bekijken door er met uw muis boven te blijven hangen. De lijst is van nature lineair en daarom zal de weergave van branches niet direct duidelijk worden. Aan de andere kant toont het meer relevante informatie op een veel mindere schermgrootte. Voornamelijk de tijd van iedere wijziging op het bestand en het eerste deel van het logbericht. De &CVS; uitvoerinformatie is compleet, maar lang, en moeilijk te lezen. Om deze problemen te verlichten hebt u de mogelijkheid te zoeken in de tekst van de &CVS; uitvoer, door op de knop <guibutton
+>Zoeken...</guibutton
+> te drukken. </para>
+
+<para
+>Om meer informatie te verkrijgen over een bepaalde revisie kunt u er op klikken ofwel in de lijst ofwel in de boomstructuur. De invulvelden in het midden van het dialoogvenster worden dan gevuld met informatie afkomstig uit het commando <command
+>cvs log</command
+>. U kunt twee revisies markeren, genaamd <quote
+>A</quote
+> en <quote
+>B</quote
+>. Dit is van belang als u gebruik wilt maken van de mogelijkheden die worden aangeboden door de aanwezige knoppen. Revisie <quote
+>A</quote
+> kan gekozen worden met de linkermuisknop, revisie <quote
+>B</quote
+> kan gekozen worden met de middelste muisknop. In de lijstweergave kunt u ook navigeren met de cursor. Om revisies <quote
+>A</quote
+> en <quote
+>B</quote
+> te markeren kunt u respectievelijk de volgende sneltoetsen gebruiken <keycombo action="simul"
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+>, <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+>. Met het beeld <guilabel
+>CVS uitvoer</guilabel
+> kunt u klikken op <guilabel
+>Revisie A selecteren</guilabel
+> en <guilabel
+>Revisie B selecteren</guilabel
+> om de revisies te markeren. </para>
+
+<para
+>Indien u op de knop <guibutton
+>Annotatie</guibutton
+> drukt, krijgt u een dialoog met de tekst van het bestand met de versiemarkering <quote
+>A</quote
+>. Elke regel wordt voorafgegaan  door informatie over wie voor het laatst die regel heeft aangepast, wanneer dat is gebeurd en in welk versienummer. U kunt meer informatie over het bekijken van geannoteerde versies in <xref linkend="annotate"/>. </para>
+
+<para
+>Wanneer u op de knop <guibutton
+>Diff</guibutton
+> drukt zal het commando <command
+>cvs diff</command
+> worden uitgevoerd. U krijgt een venster waarbinnen alle veranderingen tussen de twee gemarkeerde revisies getoond worden. Als u revisie <quote
+>A</quote
+>, maar niet revisie <quote
+>B</quote
+> markeert, zal &cervisia; de wijzigingen tussen de gemarkeerde versie van het bestand als revisie <quote
+>A</quote
+> en de versie van de werkkopie van het bestand. Dit stelt u in staat om de verschillen tussen uw versie van het bestand en elke beschikbare versie in &CVS;. Om het makkelijk te maken om veranderingen te zien, worden verschillende kleuren gebruikt om regels te markeren die toegevoegd, verwijderd of simpelweg veranderd zijn. U kunt meer informatie over het bekijken van verschillen zien in <xref linkend="diff"/>. </para>
+
+<para
+>Als u op de knop <guibutton
+>Patch aanmaken...</guibutton
+> drukt, krijgt u een dialoog waarin u de formaatopties instelt voor het genereren van een bestand met alle wijzigingen tussen de twee gemarkeerde revisies die worden getoond. Als u revisie <quote
+>A</quote
+> markeert, maar niet revisie <quote
+>B</quote
+>, dan zal &cervisia; de wijzigingen genereren tussen de versie van het bestand gemarkeerd als revisie <quote
+>A</quote
+> en de versie van de werkkopie van het bestand. Dit stelt u in staat om een patch te genereren ofwel een verschilbestand, tussen uw versie van het bestand en elke beschikbare versie in &CVS;. Na het instellen van het formaat van de patch in de dialoog en op <guibutton
+>OK</guibutton
+> drukken, zal het commando <command
+>cvs diff</command
+> worden uitgevoerd mo het verschilbestand te genereren. Daarna verschijnt de dialoog <guilabel
+>Opslaan als</guilabel
+>. Voer de naam en locatie van het door &cervisia; gegenereerde patchbestand in, om het op te slaan. U kunt meer informatie over het aanmaken van patches en het patchformaat krijgen in <xref linkend="creatingpatches"/>. </para>
+
+<para
+>Als u de knop <guibutton
+>Beeld</guibutton
+> indrukt, zal &cervisia; de revisie gemarkeerd als <quote
+>A</quote
+> ophalen en weergeven met de standaard toepassing voor dit type bestand. </para>
+
+<para
+>Druk op de knop <guilabel
+>Sluiten</guilabel
+> om de dialoog te beëindigen en keer terug naar het hoofdvenster. </para>
+
+
+<para
+>Om de log te genereren die de basis is voor de dialoog <guilabel
+>CVS Log</guilabel
+>, zal &cervisia; het volgende commando uitvoeren: </para>
+
+
+<para>
+<screen
+><command
+>cvs log <replaceable
+>bestandsnamen</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+<sect1 id="browsinghistory">
+<title
+>Door de geschiedenis bladeren</title>
+
+<para
+>Wanneer de gebruikte repository logging heeft geactiveerd zal &cervisia; u de geschiedenis laten zien van bepaalde gebeurtenissen zoals checkout, commit, tags, updates en releases. Kies de optie <guimenuitem
+>Geschiedenis</guimenuitem
+> uit het menu <guimenu
+>Beeld</guimenu
+> waarna &cervisia; het volgende commando zal uitvoeren: </para>
+
+<para>
+<screen
+><command
+>cvs history -e -a</command
+></screen>
+</para>
+
+<note
+><para
+>Dit haalt een compleet logbestand op van de server, &ie; een lijst van gebeurtenissen van alle gebruikers en alle modulen. Dit kan een grote hoeveelheid gegevens zijn. </para
+></note>
+
+<para
+>Nu ziet u een lijst van gebeurtenissen gesorteerd op datum. In de tweede kolom wordt de soort gebeurtenis vermeld: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Checkout - De gebruiker die wordt weergegeven in de kolom 'Auteur' heeft een module uitgecheckt </para
+></listitem>
+
+<listitem
+><para
+>Tag - Een gebruiker heeft het commando <command
+>cvs rtag</command
+> gebruikt. Merk op dat het gebruik van het commando <command
+>cvs tag</command
+> (te bereiken via het menu <menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Tag/Branch...</guimenuitem
+></menuchoice
+>) niet wordt vastgelegd in de geschiedenisdatabase. Dit heeft historische redenen (zie de &CVS;-<acronym
+>FAQ</acronym
+>). </para
+></listitem>
+
+<listitem
+><para
+>Uitgave - Een gebruiker heeft een nieuwe module uitgegeven. Eigenlijk wordt dit commando zelden gebruikt en heeft daarom niet zoveel waarde. </para
+></listitem>
+
+<listitem
+><para
+>Bijgewerkt, Verwijderd - Een gebruiker heeft het bestand bijgewerkt (update) dat verwijderd was in de repository. Als gevolg daarvan werd het bestand verwijderd uit zijn/haar werkkopie. </para
+></listitem>
+
+<listitem
+><para
+>Bijgewerkt, gekopieerd - een gebruiker heeft het bestand bijgewerkt (update), een nieuwere versie is gekopieerd naar de werkmap. </para
+></listitem>
+
+<listitem
+><para
+>Bijgewerkt, Samengevoegd - Een gebruiker heeft het bestand bijgewerkt. De aanpassingen van de versie die in de repository staat is samengevoegd met de versie in de eigen werkkopie. </para
+></listitem>
+
+<listitem
+><para
+>Bijgewerkt, Conflict - Een gebruiker heeft het bestand bijgewerkt waardoor een conflict werd bemerkt door zijn/haar eigen aanpassingen. </para
+></listitem>
+
+<listitem
+><para
+>Vastgelegd, Gewijzigd - Een gebruiker heeft een gewijzigd bestand vastgelegd. </para
+></listitem>
+
+<listitem
+><para
+>Vastgelegd, Toegevoegd - Een gebruiker heeft een bestand toegevoegd en deze vervolgens vastgelegd. </para
+></listitem>
+
+<listitem
+><para
+>Vastgelegd, Verwijderd - Een gebruiker heeft een bestand verwijderd en dit vervolgens vastgelegd. </para
+></listitem>
+
+</itemizedlist>
+
+<figure id="screenshot-history" float="1">
+<title
+>Een schermafdruk van het geschiedenisvenster</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="history.png"/></imageobject>
+<textobject
+><phrase
+>Een schermafdruk van het geschiedenisvenster</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>U kunt deze lijst sorteren op andere criteria door te klikken op het betreffende kolomhoofd. Wanneer men gebeurtenissen wilt sorteren waarin men geinteresseerd is zijn er een aantal filteropties beschikbaar die men kan activeren door het aanvinken van keuzevelden: </para>
+
+<itemizedlist>
+<listitem
+><para
+>Vastleg-gebeurtenissen tonen</para
+></listitem>
+<listitem
+><para
+>Uitcheck-gebeurtenissen tonen</para
+></listitem>
+<listitem
+><para
+>Tag-gebeurtenissen tonen</para
+></listitem>
+<listitem
+><para
+>Overige gebeurtenissen tonen</para
+></listitem>
+<listitem
+><para
+>Alleen gebruiker</para
+></listitem>
+<listitem
+><para
+>Alleen bestandsnamen overeenkomstig met - filtert bestandsnamen met een reguliere expressie</para
+></listitem>
+<listitem
+><para
+>Alleen mappen overeenkomstig met - filtert mapnamen met een reguliere expressie</para
+></listitem>
+</itemizedlist>
+
+<para
+>Speciale tekens die gebruikt kunnen worden binnen een reguliere expressie zijn: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+><literal
+>x*</literal
+> zal iedere instantie van het teken <literal
+>x</literal
+> matchen. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>x+</literal
+> zal één of meerdere instanties van het teken <literal
+>x</literal
+> matchen. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>x?</literal
+> zal nul of één instantie van het teken <literal
+>x</literal
+> matchen. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>^</literal
+> zal het begin met een string matchen. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>$</literal
+> zal het einde van een string matchen </para
+></listitem>
+
+<listitem
+><para
+><literal
+>[a-cx-z]</literal
+> zal een set van tekens matchen, zoals in dit geval de set die bestaat uit a,b,c,x,y,z. </para
+></listitem>
+
+</itemizedlist>
+
+</sect1>
+
+
+</chapter>
+
+<chapter id="advancedusage">
+<title
+>Gevorderd gebruik</title>
+
+<sect1 id="updatingto">
+<title
+>Bijwerken tot tag, branch of datum</title>
+
+<para
+>Branches van een module zijn parallelle versies van deze module. Een goed voorbeeld uit het echte leven hiervan is de vrijgave van een softwareproject. Na een hoofdvrijgave zijn er bugs in de code die gerepareerd moeten worden, er zijn echter ook mensen die nieuwe functies aan de toepassing willen toevoegen. Het is erg moeilijk om beiden tegelijk te doen omdat nieuwe functies gewoonlijk ook nieuwe bugs introduceren, waardoor het moeilijk is om de ouden te volgen. Om dit dilemma op te lossen, laat &CVS; u een parallelle versie aanmaken, die we de <quote
+>stabiele uitgave branch</quote
+> noemen waaraan u alleen bugreparaties kunt toevoegen, waarbij de hoofdbranch (HEAD) open is voor het toevoegen van nieuwe functies. </para>
+
+<para
+>Tags worden gebruikt om een versie van een project te markeren &CVS; stempelt één versie van elke bestand met de tag, dus wanneer u een checkout doet of bijwerkt naar een specifieke tag, dan krijgt u altijd dezelfde versies van de bestanden. Daarom zijn, in tegenstelling tot branches, tags niet dynamisch: u kunt niet op een tag ontwikkelen. Tags zijn bruikbaar om uitgaven te markeren, grote wijzigingen in de code, &etc;. </para>
+
+<para
+>Wanneer u een softwareproject ontwikkeld of de ontwikkeling volgt, dan werkt u niet noodzakelijk altijd met de hoofdbranch. Na een vrijgave, kunt blijven een poosje bij de vrijgegeven branchwillen blijven, om te genieten van zijn relatieve stabiliteit, bugs repareren, bronnen vertalen, &etc; Om dat allemaal te doen, moet u de vrijgegeven branch bijwerken. Al uw bestanden zullen worden bijgewerkt tot de laatste versie van de bestanden in die branch. Na bijwerken zullen alle uw nieuwe commits ook geüpload worden naar de nieuwe branch. </para>
+
+<para
+>Ook als u een bug wil nagaan die is gerapporteerd tegen een oude vrijgave met een tag, dan biedt &CVS; u de mogelijkheid om de software op te halen zoals deze was vrijgegeven, door bij te werken naar die tag. Daarnaast kunt u, als u een oude versie van uw project ophalen, dan kunt u uw werkkopie bijwerken naar een specifieke datum. Dit kan nuttig zijn als er een fout is in het project geïntroduceerd tussen twee vrijgaven en u bent van mening over wanneer dat was. Wanneer u bijwerkt naar een datum of tag, dan zullen de versies van uw bestanden hetzelfde zijn als de versies op die specifieke datum of de versies gestempeld door die tag. </para>
+
+<warning
+><para
+>Alvorens naar een verschillende branch of tag bij te werken, is het belangrijk dat u al uw wijzigingen vastlegt in de branch waarmee u werkt. Als u niet klaar bent om uw wijzigingen vast te leggen, maar u wilt ze niet weggooien, werk dan nieuwe branch niet bij, omdat u uw wijzigingen zou kunnen verliezen. Als alternatief, kunt u een nieuwe <link linkend="checkingout"
+>checkout</link
+> doen, om parallel te werken met beide versies. </para
+></warning>
+
+<figure id="screenshot-updatetag" float="1">
+<title
+>Een schermafdruk van het venster bijwerken naar tag</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="updatetag.png"/></imageobject>
+<textobject
+><phrase
+>Een schermafdruk van het venster bijwerken naar tag</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<variablelist>
+<varlistentry>
+<term
+><guilabel
+>Bijwerken naar branch </guilabel
+></term>
+<listitem
+><para
+>Selecteer deze optie om een branch bij te werken. Voer de naam van de branch in in het afroltekstvak (of druk op de knop <guilabel
+>Lijst ophalen</guilabel
+> om de lijst met branches vanuit de &CVS; server op te halen en selecteer diegene die u wilt uit de lijst in het afrolvak). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Bijwerken naar tag </guilabel
+></term>
+<listitem
+><para
+>Selecteer deze optie om naar een tag bij te werken. Voer de naam van de tag in in het afroltekstvak (of druk op de knop <guilabel
+>Lijst ophalen</guilabel
+> om de lijst met tags vanuit de &CVS; server op te halen en selecteer diegene die u wilt uit de lijst in het afrolvak). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Bijwerken naar datum</guilabel
+></term>
+<listitem
+><para
+>Selecteer deze optie om naar een datum bij te werken. In het onderstaande veld, kunt u een brede variëteit van datumformaten invoeren. Een mogelijk formaat is <literal
+>yyyy-mm-dd</literal
+> waar <literal
+>yyyy</literal
+> het jaar is, <literal
+>mm</literal
+> de maand is (numeriek) en <literal
+>dd</literal
+> de dag is. Alternatieven zijn enige Engelse uitdrukkingen zoals <literal
+>yesterday</literal
+> of <literal
+>2 weeks ago</literal
+>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<note
+><para
+>Beide opties maken de tag of datum 'sticky', wat wil zeggen dat je geen verdere wijzigingen kunt vastleggen (commit) op die bestanden (tenzij de tag een branch tag is). Om terug te kunnen keren naar de [trunk], ook wel bekend als de branch met de naam <literal
+>HEAD </literal
+> gebruik dan het menu-item <menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Bijwerken naar HEAD</guimenuitem
+></menuchoice
+>. </para
+></note>
+
+<para
+>Het uitgevoerde commando om bij te werken naar een branch of tag is: <screen
+><command
+>cvs update -r <replaceable
+>tag</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Het uitgevoerde commando om bij te werken naar een datum is: <screen
+><command
+>cvs update -D <replaceable
+>date</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Het uitgevoerde commando om bij te werken naar de hoofd branch (HEAD) is: <screen
+><command
+>cvs update <option
+>-A</option
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="taggingbranching">
+<title
+>Taggen en branching</title>
+
+<para
+>We bespreken hier alleen maar de technische aspecten van tagging en branching. Wanneer u een <emphasis
+>gebruiker</emphasis
+> bent en niet de beheerder van de repository, dan zult u waarschijnlijk niet geconfronteerd worden met dit probleem. Wanneer u daarentegen wel de beheerder van een repository bent, kunt u beter eerst over de niet-technische problemen van branching lezen om een impressie te krijgen van hoe tijdsconsumptief en foutgevoelig het onderhouden van verschillende branches binnen een project kan zijn. De appendix bevat enkele referenties over dit onderwerp. </para>
+
+<para
+>Simpel tagging is iets wat u normaliter doet wanneer een uitgave (release) wordt gedaan zodat op ieder moment in de toekomst makkelijk kunt terugkeren naar de status van het project op een bepaalde tijdstip in het verleden. Tags krijgen meestal een naam die bestaat uit de projectnaam en het versienummer. Bijvoorbeeld &cervisia; 1.0 is beschikbaar onder de tag <literal
+>CERVISIA_1_0</literal
+>. &cervisia; dwingt strikte &CVS;-regels af over wat nu een geldige tag-naam is. Het moet beginnen met een letter en mag bestaan uit letters, verbindingstreepjes en underscores. </para>
+
+<para
+>Normaal gesproken wilt u het hele project voorzien van een tag (alhoewel &CVS; het ook toelaat dat u slechts een subset markeert met een tag). Om dit te bereiken, markeert u de hoofdmap in de weergave en kiest u voor <menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Tag/Branch</guimenuitem
+></menuchoice
+>. Vul nu de naam in van de tag en druk op de toets <keycap
+>Return</keycap
+> en u bent klaar. </para>
+
+<para
+>Een branch aanmaken is niet veel moeilijker. In het dialoogvenster voor het aanmaken van tags activeert u <guibutton
+>Branch aanmaken met deze tag</guibutton
+>. U kunt ook een bestaande tag verwijderen. Kies <menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Tag verwijderen</guimenuitem
+></menuchoice
+> in de hoofdweergave. </para>
+
+<para
+>Een ander aspect van branching is het samenvoegen van wijzigingen van een branch naar de huidige branch. Wanneer u dit gaat doen, kiest u <menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Samenvoegen...</guimenuitem
+></menuchoice
+>.  Het venster wat dan verschijnt geeft u twee mogelijkheden: </para>
+
+<para
+>Ofwel u mag alle wijzigingen op een branch samenvoegen met de huidige branch. In dat geval kiest u voor <guibutton
+>Samenvoegen van branch</guibutton
+> en vult u de branch in waarmee u wilt samenvoegen. &cervisia; zal dan het volgende commando uitvoeren: </para>
+
+<para>
+<screen
+><command
+>cvs update <option
+>-j</option
+> <replaceable
+>branchtag</replaceable
+></command
+></screen>
+</para>
+
+<para
+>De andere mogelijkheid is dat u alleen wijzigingen wilt samenvoegen die gemaakt zijn tussen twee tags op een branch. Dit gebeurt meestal wanneer u een aantal malen samenvoegt van dezelfde branch naar de [trunk]. In dat geval kiest u voor <guibutton
+>Aanpassingen samenvoegen</guibutton
+> en vul (in de juiste volorde) de twee betreffende tags in. Dit zal dan resulteren in het commando </para>
+
+<para>
+<screen
+><command
+>cvs update <option
+>-j</option
+> <replaceable
+>branchtag1</replaceable
+> <option
+>-j</option
+> <replaceable
+>branchtag2</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="watches">
+<title
+>Watches gebruiken</title>
+
+<para
+>Een watch is een conventionele naam voor de mogelijkheid binnen &CVS; om gebruikers van de repository in te lichten wanneer een bestand gewijzigd is of wanneer een ontwikkelaar is begonnen met het bewerken van een bestand. Het gebruik van watches vereist dat het bestand<filename
+><envar
+>$CVSROOT</envar
+>/CVSROOT/notify</filename
+> correct is ingesteld. Hier gaan we verder niet op in, wanneer u verdere informatie nodig heeft hoe u dit kunt instellen, vanuit het oogpunt van de systeembeheerder, kunt u één van de boeken lezen die genoemd worden in de appendix. </para>
+
+<para
+>&cervisia; ondersteunt hoofdzakelijk watches via zes menu-opties. </para>
+
+<para
+>Om een watch toe te voegen op een of meerdere bestanden, gebruik dan <menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Watch toevoegen...</guimenuitem
+></menuchoice
+>. In het dialoogvenster dat u krijgt kunt u kiezen voor welk type voorval, dat door &CVS; wordt ondersteund, u gewaarschuwd wil worden. Bijvoorbeeld, wanneer u alleen maar gewaarschuwd wil worden wanneer een bestand wordt vastgelegd (commit) selecteer dan de keuzeoptie <guibutton
+>Alleen</guibutton
+> en <guibutton
+>Vastleggingen (commits)</guibutton
+>. Wanneer u gewaarschuwd wilt worden over elk voorval met de gemarkeerde bestanden selecteer dan de keuzeoptie <guibutton
+>Alles</guibutton
+>. De bijbehorende commandoregel is: </para>
+
+<para>
+<screen
+><command
+>cvs watch add -a commit <replaceable
+>bestandsnamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>of met een soortgelijk commando, afhankelijk van het voorval dat u in de gaten wilt houden. </para>
+
+<para
+>Wanneer u niet meer geïnteresseerd bent in het "watchen" van deze bestanden dan kunt u de toegepaste watches verwijderen. Om dit te bereiken gebruikt u <menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Watch verwijderen...</guimenuitem
+></menuchoice
+>. In het dialoogvenster dat u krijgt, zijn dezelfde opties voorhanden als toen u de watch toevoegde. Wanneer u dit dialoogvenster bevestigt gebruikt &cervisia; het commando: </para>
+
+<para>
+<screen
+><command
+>cvs watch remove <replaceable
+>bestandsnamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>mogelijk met de parameter <option
+>-a</option
+> voor het gekozen voorval. </para>
+
+<para
+>Uiteindelijk kunt u een lijst van mensen krijgen die een aantal bestanden volgen. Kies <menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Watchers tonen</guimenuitem
+></menuchoice
+>. Gebruik van deze menu-optie zal het volgende commando genereren: </para>
+
+<para>
+<screen
+><command
+>cvs watchers <replaceable
+>bestandsnamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Normaliter zal iedere ontwikkelaar apart werken in zijn uitgecheckte sandbox. Wanneer hij een bestand wil aanpassen, kan hij deze gewoon aanpassen in zijn editor en eraan werken. Niemand anders zal hiervan op de hoogte zijn totdat hij zijn werk vastlegt (commit). </para>
+
+<para
+>Voor sommige ontwikkelaarsgroepen is dit niet het gewenste samenwerkingsmodel. Zij prefereren dat zij worden gewaarschuwd wanneer iemand aan een bestand gaat werken. Dit kan bereikt worden door &CVS;-commando's. Voordat u begint met het bewerken van een bestand, selecteert u het en kiest <menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Bestanden bewerken</guimenuitem
+></menuchoice
+> in het hoofdvenster van &cervisia;. Dit zal het volgende commando uitvoeren: </para>
+
+<para>
+<screen
+><command
+>cvs edit <replaceable
+>bestandsnamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Dit zal een melding sturen naar iedereen die de watch <literal
+>Bestanden bewerken</literal
+> op dit bestand heeft gezet. Het zal u tevens registreren als een <emphasis
+>editor</emphasis
+> van het bestand. U kunt een lijst verkrijgen van alle mensen die bestanden bewerken via <menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Editors tonen</guimenuitem
+></menuchoice
+>. Dit staat gelijk aan het volgende wat men op de commandoregel kan typen: </para>
+
+<para>
+<screen
+><command
+>cvs editors <replaceable
+>bestandsnamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Een sessie waarbij men het bestand bewerkt wordt automatisch beeindigd wanneer men het betreffende bestand vastlegt (commit). Op dat moment zal een melding <literal
+>bewerking beëindigd</literal
+> gestuurd worden naar iedereen die een watch heeft geregistreerd op het bestand. Natuurlijk zou u soms niet het bestand willen vastleggen maar eerder de sessie waarbij men het bestand aan het bewerken is beëindigen en terugkeren naar de vorige versie van het bestand. Dit wordt gedaan door gebruik te maken <menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Bestandsbewerking verwijderen</guimenuitem
+></menuchoice
+>. Merk op dat &cervisia; geen bevestiging zal vragen! Dat betekent dat bij gebruik van deze menu-optie al uw werk sinds het gebruik van <menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Bestanden bewerken</guimenuitem
+></menuchoice
+> ongedaan gemaakt zal worden. &cervisia; zal het volgende commando gebruiken: </para>
+
+<para>
+<screen
+><command
+>echo y | cvs unedit <replaceable
+>bestandsnamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Tot nog toe hebben we alleen het geval besproken waarbij bestanden werden bewerkt of waarbij de bewerking vrijwillig door de ontwikkelaars ongedaan werd gemaakt. Daar komt bij dat CVS een model ondersteunt waarbij men het gebruik van deze commando's afdwingt. Het commando wat verantwoordelijk is om naar dit model om te schakelen is het <command
+>commando cvs watch on</command
+> waarop we in deze helptekst niet verder zullen gaan omdat het meestal gebruikt wordt door de beheerder van de repository. Daarentegen is het een belangrijk gegeven vanuit het oogpunt van de ontwikkelaar wanneer het project [edits] afdwingt dat men werkt op een werkkopie die <emphasis
+>alleen-lezen</emphasis
+> is. Wat betekent dat je een bestand standaard niet kan bewerken (tenzij u dingen gaat uithalen zoals <command
+>chmod</command
+>). Alleen wanner je gebruik maakt van <menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Bestanden bewerken</guimenuitem
+></menuchoice
+>, wordt het bestand weer beschrijfbaar. Het wordt weer alleen-lezen gemaakt wanneer je het bestand vastlegt (commit) of wanneer je <menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Bestandsbewerking verwijderen</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>De editor interface van Cervisia helpt u met projecten waarbij men watches op een andere wijzeafdwingt . Wanneer u net de editor gestart hebt met een bestand die alleen-lezen is door erop te dubbelklikken of via Bestand Bewerken, zou het niet mogelijk zijn om vervolgens uw aanpassingen later te bewaren. Dit heeft natuurlijk een reden. Wanneer u een bestand wilt veranderen zult u eerst het commando cvs edit moeten draaien zodat alle mensen die het bestand in de gaten houden (middels watch) een melding krijgen dat u aan het bestand werkt. </para>
+
+<para
+>In zo'n geval is het aan te raden om de optie <menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>cvs edit automatisch uitvoeren wanneer nodig</guimenuitem
+></menuchoice
+>. Wanneer het dan nodig is een bestand te bewerken door erop te dubbelklikken zal &cervisia; het commando <command
+>cvs edit</command
+> uitvoeren alvorens de editor daadwerkelijk wordt aangeroepen. Vervolgens kunt u het bestand zoals gewoonlijk bewerken. Wanneer u klaar bent met uw werk, legt u de bestanden vast en vervolgens zijn de vastgelegde bestanden weer alleen-lezen. </para>
+
+</sect1>
+
+
+<sect1 id="locking">
+<title
+>vergrendelen</title>
+
+<para
+>Het ontwikkelmodel dat meestal wordt gevolgd met CVS wordt unreserved checkouts genoemd. Iedere ontwikkelaar heeft zijn eigen sandbox waar hij zijn bestanden naar hartelust kan bewerken. Wanneer een van de watch mogelijkheden wordt gebruikt zoals cvs edit, kunnen verschillende ontwikkelaars tegelijkertijd synchroon aan bestanden werken. Veranderingen die gedaan zijn door een andere ontwikkelaar worden samengevoegd (merge) in de lokale sandbox wanneer men een bijwerking (update) uitvoert.  </para>
+
+<para
+>Andere revisie controlesystemen zoals <acronym
+>RCS</acronym
+> en <application
+>SourceSafe</application
+> gebruiken een ander model. Wanneer een ontwikkelaar een bestand wil bewerken, zal hij deze moeten <emphasis
+>vergrendelen</emphasis
+>. Er kan maar een ontwikkelaar tegelijkertijd een bestand vergrendelen. Wanneer hij klaar is met bewerken zal de vergrendeling worden verwijderd. Aan de ene kant zijn met dit model geen conflicten mogelijk. Aan de andere kant kunnen twee ontwikkelaars niet tegelijkertijd werken aan hetzelfde bestand, zelfs wanneer de gemaakte wijzigingen geen invloed op elkaar hebben. Dit kan soms een probleem zijn. We gaan hier niet verder op in wat de organisatorisch voordelen zijn van beide benaderingen. Toch willen we aangeven dat &CVS; ondersteuning heeft voor vergrendeling, alhoewel het niet de geprefereerde manier is van hoe je kunt werken met CVS Je kunt het beste deze mogelijkheden niet gebruiken tenzij je er zeker van bent dat de projectmanager het toestaat. </para>
+
+<para
+>Met &cervisia; kun je als volgt bestanden vergrendelen. Kies de gewenste bestanden in de hoofdweergave. Kies dan <menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Bestanden vergrendelen</guimenuitem
+></menuchoice
+>. Dit zal het commando uitvoeren: </para>
+
+<para>
+<screen
+><command
+>cvs admin -l <replaceable
+>bestandsnamen</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Het omgekeerde effect wordt bereikt met <menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Bestanden ontgrendelen</guimenuitem
+></menuchoice
+>. Dit zal het commando uitvoeren:</para>
+
+<para>
+<screen
+><command
+>cvs admin -u <replaceable
+>bestandsnamen</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="customization">
+<title
+>&cervisia; aanpassen</title>
+
+<para
+>&cervisia; kan op allerlei manieren aangepast worden aan uw behoeften en voorkeuren, Sommige opties die u regelmatig zou willen veranderen zijn direct beschikbaar via het menu <guimenu
+>Instellingen</guimenu
+>. </para>
+
+
+<sect1 id="customize-general">
+<title
+>Algemeen</title>
+
+<variablelist>
+
+<varlistentry id="customize-username">
+<term
+><guilabel
+>Gebruikersnaam voor de changelog-editor:</guilabel
+></term>
+<listitem
+><para
+>Wanneer u ooit het menu-item <menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Changelog-ingang invoegen...</guimenuitem
+></menuchoice
+> gebruikt, dan zal een nieuwe changelog-ingang worden gegenereerd met de huidige datum en uw gebruikersnaam. Normaal wordt het als goede stijl opgevat om uw volledige naam en uw e-mailadres in elk van uw changelog-ingangen in te voegen. &cervisia; voegt automatisch de ingevoerde volledige naam en e-mailadres hier in. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-cvspath">
+<term
+><guilabel
+>Pad naar CVS-programma of gewoon 'cvs':</guilabel
+></term>
+<listitem
+><para
+>Hier kunt u de naam (of pad) naar het <command
+>cvs</command
+> programma instellen. Standaard wordt de &CVS;-toepassing, die in uw <envar
+>$PATH</envar
+> aanwezig is, door &cervisia; gebruikt. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="customize-diff">
+<title
+>Diff-weergave</title>
+
+<variablelist>
+
+<varlistentry id="customize-context">
+<term
+><guilabel
+>Aantal contextregels in diff-dialoog:</guilabel
+></term>
+<listitem
+><para
+>Voor de diff-dialoog, gebruikt &cervisia; de optie <option
+>-U</option
+> voor <command
+>diff</command
+>. Dit maakt dat <command
+>diff</command
+> slechts een beperkt aantal regels rond elk verschillend gebied (contextregels). Hier kunt u het argument van <option
+>-U</option
+> instellen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-diffopt">
+<term
+><guilabel
+>Additionele opties voor cvs diff:</guilabel
+></term>
+<listitem
+><para
+>Hier kunt u extra argumenten toevoegen aan <command
+>diff</command
+>. Een populair voorbeeld is <option
+>-b</option
+> waarmee u <command
+>diff</command
+> wijzigingen in de hoeveelheid witruimte laat negeren. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-tabwidth">
+<term
+><guilabel
+>Tabbreedte in diff-dialoog:</guilabel
+></term>
+<listitem
+><para
+>In de diff-dialoog wordt te tab-tekens die aanwezig zijn in uw bestand of in de uitvoer van het commando <command
+>diff</command
+> geëxpandeerd naar een vast aantal spaties. Standaard wordt elk tab-teken vervangen door acht spaties, maar hier kunt u een ander aantal instellen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-difffrontend">
+<term
+><guilabel
+>Extern diff-programma:</guilabel
+></term>
+<listitem
+><para
+>Wanneer u een van de in de diff-dialoog getoonde mogelijkheden gebruikt, zoals <menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Verschil met de repository...</guimenuitem
+></menuchoice
+>, dan zal &cervisia; zijn interne diff-frontend aanroepen. Als u een voorkeur hebt voor een andere, zoals &kompare;, <application
+>TkDiff</application
+> of <application
+>xxdiff</application
+>, voer hier dan de naam en locatie van zijn bestand in. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="customize-status">
+<title
+>Status</title>
+
+<variablelist>
+
+<varlistentry id="customize-startstatus-remote">
+<term
+><guilabel
+>Bij het openen van een sandbox van een repository op afstand, start dan automatisch het commando Bestand-&gt;Status</guilabel
+></term>
+<listitem
+><para
+>Wanneer u deze optie activeert, dan wordt het commando <menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Status</guimenuitem
+></menuchoice
+> gestart wanneer u een sandbox op afstand opent. Dit commando neemt enige tijd en heeft ook een verbinding met de server nodig voor repositories op afstand (offline gebruik is dan onmogelijk). </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-startstatus-local">
+<term
+><guilabel
+>Bij het openen van een sandbox van een lokale repository, start dan automatisch het commando Bestand-&gt;Status</guilabel
+></term>
+<listitem
+><para
+>Als u deze optie activeert wordt het commando <menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Status</guimenuitem
+></menuchoice
+> gestart wanneer u een lokale sandbox opent. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="customize-advanced">
+<title
+>Geavanceerd</title>
+
+<variablelist>
+
+<varlistentry id="customize-timeout">
+<term
+><guilabel
+>Tijdslimiet waarna een voortgangsdialoog verschijnt (in ms):</guilabel
+></term>
+<listitem
+><para
+>Praktisch alle &CVS;-commando's, die in een sandbox worden gestart en bij een repository op afstand horen hebben een verbinding naar de &CVS;-server nodig. Dit wordt beïnvloedt door vertragingen in de netwerkverbinding of een hoge load van de server. Daarom opent &cervisia; voor commando's zoals <menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Verschil met repository...</guimenuitem
+></menuchoice
+> een dialoog die aangeeft dat het commando nog steeds bezig is en die u in staat stelt om het af te breken. Verder wordt deze dialoog gebruikt om foutmeldingen van &CVS; te tonen. Omdat deze dialoog na enige tijd gaat vervelen, wordt deze pas na een bepaalde tijd, die standaard 4 seconden is, getoond. Hier kunt u deze waarde wijzigen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-compression">
+<term
+><guilabel
+>Standaard compressieniveau:</guilabel
+></term>
+<listitem
+><para
+>Het clientprogramma <command
+>cvs</command
+> comprimeert bestanden en patches wanneer zij over een netwerk wordt getransporteerd. Met de optie op de commandoregel, <option
+>-z</option
+>, kan het compressieniveau worden ingesteld. U kunt &cervisia; instellen om deze optie te gebruiken door het niveau hier in te stellen. De waarde hier ingesteld wordt alleen als een standaard gebruikt; er is ook een instelling per repository beschikbaar in <menuchoice
+><guimenu
+>Repository</guimenu
+><guimenuitem
+>Repositories...</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-sshagent">
+<term
+><guilabel
+>Gebruik een reeds actief ssh-agent-proces, of start een nieuw</guilabel
+></term>
+<listitem
+><para
+>Activeer dit vakje als u <link linkend="rsh"
+>ext (&rsh;) repositories</link
+>, de &ssh; remote shell, om met de repository te communiceren en <application
+>ssh-agent</application
+> gebruikt, om uw sleutels te beheren. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+
+<sect1 id="customize-look">
+<title
+>Uiterlijk</title>
+
+<variablelist>
+
+<varlistentry id="customize-protocolfont">
+<term
+><guilabel
+>Lettertype voor protocolvenster...</guilabel
+></term>
+<listitem
+><para
+>Druk op deze knop om de dialoog <guilabel
+>Lettertype selecteren</guilabel
+> te openen om het gebruikte lettertype in het protocolvenster in te stellen (dit is het venster dat de uitvoer van de <command
+>cvs</command
+>-client toont). </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-annotatefont">
+<term
+><guilabel
+>Lettertype voor annotatieweergave...</guilabel
+></term>
+<listitem
+><para
+>Druk op deze knop om de dialoog <guilabel
+>Lettertype selecteren</guilabel
+> te openen om het gebruikte lettertype in de <link linkend="annotate"
+>annotatieweergave</link
+> in te stellen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-difffont">
+<term
+><guilabel
+>Lettertype voor diff-weergave...</guilabel
+></term>
+<listitem
+><para
+>Druk op deze knop om de dialoog <guilabel
+>Lettertype selecteren</guilabel
+> te openen om het gebruikte lettertype in de <link linkend="diff"
+>diff-weergave</link
+> in te stellen </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-colors">
+<term
+><guilabel
+>Kleuren</guilabel
+></term>
+<listitem
+><para
+>Druk op de gekleurde knoppen om de dialoog <guilabel
+>Kleur selecteren</guilabel
+>, om de gebruikte kleur in te stellen voor <guilabel
+>Conflict</guilabel
+>, <guilabel
+>Lokale wijziging</guilabel
+> of <guilabel
+>Wijziging op afstand</guilabel
+>, in de hoofdweergave of <guilabel
+>Diff-wijziging</guilabel
+>, <guilabel
+>Diff-invoeging</guilabel
+> of <guilabel
+>Diff-verwijdering</guilabel
+>, in de diff-frontend ingebouwd in &cervisia;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-splitter">
+<term
+><guilabel
+>Hoofdvenster horizontaal splitsen</guilabel
+></term>
+<listitem
+><para
+>&cervisia;'s hoofdscherm is normaal gesproken verdeeld in een venster met de boomstructuur weergave en een met de onderstaande uitvoer van &CVS;. U kunt ze ook naast elkaar zetten. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+</chapter>
+
+
+<chapter id="appendix">
+<title
+>Bijlage</title>
+
+<sect1 id="ignoredfiles">
+<title
+>Genegeerde bestanden</title>
+
+<para
+>In de hoofdboomstructuur laat &cervisia; niet alle bestanden zien die uiteindelijk daar zijn. Dit is analoog met <command
+>cvs</command
+> zelf en helpt overzicht te behouden veroorzaakt door oninteressante dingen zoals objectbestanden. &cervisia; probeert het <command
+>cvs</command
+>-gedrag zo goed mogelijk na te bootsen, &ie; dat het negeerlijsten van de volgende bronnen verkrijgt: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Een lijst van ingangen die dingen invoegen zoals *.o en core Voor details zie de CVS -documentatie </para
+></listitem>
+<listitem
+><para
+> Het bestand $HOME/.cvsignore. </para
+></listitem>
+
+<listitem
+><para
+> De omgevingsvariabele $CVSIGNORE. </para
+></listitem>
+<listitem
+><para
+> Het bestand .cvsignore in hun respectivelijke directory </para
+></listitem>
+
+</itemizedlist>
+
+<para
+>cvs zelf zoekt ook nog ingangen op in $CVSROOT/CVSROOT/cvsignore, maar dit is een bestand op de serer en Cervisia zou in staat moeten zijn om ffline om te kunnen starten . Wanneer je met een groep werkt dat prefereert om een negeerlijst op een server te gebruiken is het miscchien een goed idee om een blik te werpen op de patronen die daar zijn vermeldt en deze dan te vermelden .cvsignore in de eigen home directory. </para>
+
+</sect1>
+
+
+<sect1 id="information">
+<title
+>Verdere informatie en ondersteuning</title>
+
+<itemizedlist>
+
+<listitem
+><para
+>&CVS; komt met een complete set documentatie in de vorm van info-pagina's ook wel bekend als "The Cederqvists". Wanneer het correct is geinstalleerd kun je deze doorbladeren door het volgende te typen in de adresbalk van konqueror <userinput
+>info:/cvs</userinput
+> of u kunt <menuchoice
+><guimenu
+>Help</guimenu
+><guimenuitem
+>CVS handleiding</guimenuitem
+></menuchoice
+> kiezen in &cervisia;. U kunt ook nog eens kiezen via Help CVS Info in Cervisia. Een online PDF-versie van Cederqvist is beschikbaar <ulink url="https://ftp.gnu.org/non-gnu/cvs/source/stable/1.11.21/cederqvist-1.11.21.pdf"
+>op het web</ulink
+>. </para>
+
+<para
+>Aangezien dit boek samen met &CVS; wordt onderhouden is het meestal de meest bijgewerkte referentie. Toch kunnen we iedere andere vorm van documentatie aanbevelen om het gebruik van &CVS; te leren, vooral de volgende bronnen. </para
+></listitem>
+
+<listitem
+><para
+>Karl Fogel heeft een excellent boek geschreven <ulink url="http://cvsbook.red-bean.com/index.html"
+>Open Source Development with &CVS;</ulink
+>. Bijna de helft van dit boek is over het ontwikkelproces van Open Source software. De andere helft behandelt de technische documentatie van &CVS;. Gelukkig is het technische gedeelte van het boek vrij verkr ijgbaar onder een GPL-licentie zodat u een &HTML;-versie kunt downloaden. Een errata-lijst is beschikbaar op bovengenoemde webpagina. </para
+></listitem>
+
+<listitem
+><para
+> CVS-zaken worden besproken op een mailinglijst </para
+></listitem>
+
+<listitem
+><para
+> Er is een USENET-groep comp.software.config-mgmt die zich bezighoudt met configuratiemanagement in het algemeen. CVS is alleen marginaal een onderwerp in deze groep, toch kan het interessant zijn om de voordelen van verschillende revisie controle systemen te bespreken vergeleken met CVS </para
+></listitem>
+
+</itemizedlist>
+
+</sect1>
+
+
+<sect1 id="commandreference">
+<title
+>Overzicht van de opdrachten</title>
+
+<!-- File Menu -->
+<sect2 id="menufile">
+
+<title
+>Het menu Bestand</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bestand</guimenu
+><guimenuitem
+>Sandbox openen...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Opent een sandbox in het hoofdvenster. Zie <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Recente sandboxes</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Opent een lijst met sandboxes die recent zijn gebruikt </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>ChangeLog-ingang invoegen...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Opent de ChangeLog-editor, zodanig voorbereid dat u een nieuwe ingang kunt toevoegen met de huidige datum. Zie <xref linkend="committingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bestand</guimenu
+><guimenuitem
+>Bijwerken</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Start het commando 'cvs update' op de geselecteerde bestanden en verandert eventueel de status en revisienummers. Zie <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F5</keycap
+></shortcut
+> <guimenu
+>Bestand</guimenu
+><guimenuitem
+>Status</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Start het commando 'cvs -n update' op de geselecteerde bestanden en verandert eventueel de status en revisienummers. Zie <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Bewerken</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Opent het geselecteerde bestand in de standaard editor van &kde; voor het type van het geselecteerde bestand. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Oplossen (Resolve)...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Opent een dialoog voor het geselecteerde bestand om u de mogelijkheid te geven samenvoeg-conflicten op te lossen. Zie <xref linkend="resolvingconflicts"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>#</keycap
+></shortcut
+> <guimenu
+>Bestand</guimenu
+><guimenuitem
+>Vastleggen (commit)...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Stelt u in staat om de geselecteerde bestanden vast te leggen. Zie <xref linkend="committingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Ins</keycap
+></shortcut
+> <guimenu
+>Bestand</guimenu
+><guimenuitem
+>Aan repository toevoegen...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Stelt u in staat de geselecteerde bestanden aan de repository toevoegen. Zie <xref linkend="addingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Binair toevoegen...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Stelt u in staat de geselecteerde bestanden aan de repository toevoegen als binaire bestanden (<command
+>cvs add <option
+>-kb</option
+></command
+>). Zie <xref linkend="addingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Del</keycap
+></shortcut
+> <guimenu
+>Bestand</guimenu
+><guimenuitem
+>Uit repository verwijderen...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Stelt u in staat de geselecteerde bestanden uit de repository te verwijderen. Zie <xref linkend="removingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<!--TODO: add the revert action to the working with files chapter -->
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Ongedaan maken</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Negeert de lokale veranderingen die u hebt gemaakt op de geselecteerde bestanden en maakt deze ongedaan door terug te keren naar de versie die in de repository is te vinden.(Optie <option
+>-C</option
+> bij <command
+>cvs update</command
+>). </para
+></listitem>
+</varlistentry>
+<!--FIXME Properties-->
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Afsluiten</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Sluit &cervisia; </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- View Menu -->
+<sect2 id="menuview">
+
+<title
+>Het menu Beeld</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Escape</keycap
+></shortcut
+> <guimenu
+>Beeld</guimenu
+><guimenuitem
+>Stoppen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Stopt ieder proces dat op dit moment actief is. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Beeld</guimenu
+><guimenuitem
+>Logbestand doorbladeren...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Toont de log-browser van de geselecteerde versies van het bestand. Zie <xref linkend="browsinglogs"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Beeld</guimenu
+><guimenuitem
+>Annoteren...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Laat een annotatie-weergave zien van het geselecteerde bestand, &ie; een weergave waarbij u voor iedere regel kunt zien wie als laatste de regel heeft aangepast. Zie <xref linkend="annotate"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Beeld</guimenu
+><guimenuitem
+>Verschil met repository (BASE)...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Laat de verschillen zien tussen het geselecteerde bestand in de sandbox en de versie die u als laatste hebt bijgewerkt (BASE). Zie <xref linkend="diff"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Beeld</guimenu
+><guimenuitem
+>Verschil met repository (HEAD)...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Laat de verschillen zien tussen het geselecteerde bestand in de sandbox en de versie die u als laatste hebt bijgewerkt (HEAD). Zie <xref linkend="diff"/>. </para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Laatste wijziging...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Laat de verschillen zien tussen de revisie van het geselecteerde bestand die u het laatst hebt bijgewerkt (BASE) en de revisie daarvoor. Zie <xref linkend="diff"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Geschiedenis...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Laat de &CVS;-geschiedenis zien zoals deze gemeld wordt door de server. Zie <xref linkend="browsinghistory"/>. </para
+></listitem>
+</varlistentry>
+
+<!--TODO: add hide menus to mainscreen section-->
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Alle bestanden verbergen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Bepaalt of alleen mappen worden getoond in het hoofdvenster met boomstructuurweergave. Zie <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Niet-gewijzigde bestanden verbergen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Bepaalt of onbekende en bijgewerkte bestanden worden verborgen in het hoofdvenster met boomstructuurweergave. Zie <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Verwijderde bestanden verbergen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Bepaalt of verwijderde bestanden worden verborgen in het hoofdvenster met boomstructuurweergave. Zie <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Niet-CVS bestanden verbergen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Bepaalt of bestanden, die niet in &CVS; zitten, worden verborgen in het hoofdvenster met de boomstructuurweergave. Zie <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Lege mappen verbergen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Bepaalt of mappen zonder zichtbare ingangen verborgen worden in het hoofdvenster met de boomstructuur. Zie <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Boomstructuur uitvouwen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Opent alle branches in de boomstructuur zodat alle bestanden en mappen zichtbaar worden. Zie <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+><guimenuitem
+>Boomstructuur invouwen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Sluit alle branches in de boomstructuur. Zie <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- Advanced Menu -->
+<sect2 id="menuadvanced">
+
+<title
+>Het menu Geavanceerd</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Tag/Branch...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Stelt de tags of branches van de geselecteerde bestanden in. Zie <xref linkend="taggingbranching"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Tag verwijderen...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Verwijdert een gegeven tag van de geselecteerde bestanden. Zie <xref linkend="taggingbranching"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Update naar Tag/datum uitvoeren...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Werkt de geselecteerde bestanden bij naar een bepaalde tag of datum en maakt deze sticky. Zie <xref linkend="updatingto"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Update naar HEAD uitvoeren</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Brengt de geselecteerde bestanden naar de revisie HEAD. Zie <xref linkend="updatingto"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Samenvoegen...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Voegt een bepaalde branche of wijzigingen tussen twee tags samen in de geselecteerde bestanden. Zie <xref linkend="taggingbranching"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Watch toevoegen...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Voegt een watch toe voor een serie gebeurtenissen op de geselecteerde bestanden. Zie <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Watch verwijderen...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Verwijdert een watch voor een serie gebeurtenissen op de geselecteerde bestanden. Zie <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Watchers tonen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Lijst van watchers tonen van de geselecteerde bestanden. Zie <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Bestanden bewerken</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Start het commando <command
+>cvs edit</command
+> voor de geselecteerde bestanden. Zie <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Bestandsbewerking verwijderen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Start het commando <command
+>cvs unedit</command
+> voor de geselecteerde bestanden. Zie <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Editors tonen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Start het commando <command
+>cvs editors</command
+> voor de geselecteerde bestanden. Zie <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Bestanden vergrendelen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Vergrendelt de geselecteerde bestanden. Zie <xref linkend="locking"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Bestanden ontgrendelen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ontgrendelt de geselecteerde bestanden. Zie <xref linkend="locking"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Geavanceerd</guimenu
+><guimenuitem
+>Patch tegen repository aanmaken...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Maakt een patch van de wijzigingen in uw sandbox. Zie <xref linkend="creatingpatches"/>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- Repository Menu -->
+<sect2 id="menurepository">
+
+<title
+>Het menu Repository</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Repository</guimenu
+><guimenuitem
+>Aanmaken...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Opent een dialoog die u toestaat om een nieuwe lokale repository aan te maken. Zie <xref linkend="accessing-repository"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Repository</guimenu
+><guimenuitem
+>Checkout...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Opent een dialoogvenster die u toestaat om een module van de repository uit te checken. Zie <xref linkend="checkingout"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Repository</guimenu
+><guimenuitem
+>Import...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Opent een dialoog die u toestaat om een pakket te importeren in de repository. Zie <xref linkend="importing"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Repository</guimenu
+><guimenuitem
+>Repositories...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Configureert een lijst van repositories die u vaak gebruikt en hoe u ze kunt benaderen. Zie <xref linkend="accessing-repository"/>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- Settings Menu -->
+<sect2 id="menuoptions">
+<title
+>De menu's Instellingen en Help</title>
+
+<para
+>Naast de standaard &kde;-menu's <guimenu
+>Instellingen</guimenu
+> en <guimenu
+>Help</guimenu
+> zoals beschreven in het hoofdstuk <ulink url="help:/fundamentals/menus.html#menus"
+>Menu</ulink
+> van de documentatie in &kde; Fundamentals heeft &cervisia; specifieke menu-items van het programma: </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Mappen aanmaken bij bijwerken</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Bepaalt of updates mappen aanmaken in de sandbox die er niet eerder waren (Parameter <option
+>-d</option
+> bij een <command
+>cvs update</command
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Lege mappen verwijderen bij update</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Bepaalt of updates lege mappen verwijderen in de sandbox. (Parameter <option
+>-P</option
+> bij <command
+>cvs update</command
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Bijwerken recursief uitvoeren</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Bepaalt of bijwerken recursief uitgevoerd dient te worden (Parameter <option
+>-r</option
+> bij <command
+>cvs update</command
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>Recursief vastleggen (commit) &amp; verwijderen (remove)</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Bepaalt of vastleggingen (commits) en verwijderingen recursief zijn (Parameter <option
+>-r</option
+> bij <command
+>cvs add</command
+> en <command
+>cvs remove</command
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>'cvs edit' automatisch uitvoeren wanneer nodig</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Bepaalt of het commando <command
+>cvs edit</command
+> automatisch wordt uitgevoerd wanneer u een bestand bewerkt. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Help</guimenu
+><guimenuitem
+>CVS Handboek</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Opent de &CVS;-informatiepagina's in het &khelpcenter;. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="credits-and-license">
+<title
+>Dankbetuigingen en licentie</title>
+<para
+>Programma copyright</para>
+<itemizedlist>
+<listitem
+><para
+>1999-2002 &Bernd.Gehrmann; &Bernd.Gehrmann.mail;</para
+></listitem>
+<listitem
+><para
+>2002-2008 de auteurs van &cervisia;</para
+></listitem>
+</itemizedlist>
+
+<para
+>Documentatie Copyright 1999-2002 &Bernd.Gehrmann; &Bernd.Gehrmann.mail; en 2004 Carlos Woelz carloswoelz@imap-mail.com</para>
+
+&meld.fouten;&vertaling.freek; &underFDL; &underGPL; </chapter>
+</book>

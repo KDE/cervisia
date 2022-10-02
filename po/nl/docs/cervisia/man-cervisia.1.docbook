@@ -1,0 +1,181 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Dutch "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>Cervisia gebruikershandleiding</title>
+<author
+><personname
+> <firstname
+>Burkhard</firstname
+> <surname
+>Lück</surname
+> </personname
+> <email
+>lueck@hube-lueck.de</email
+></author>
+
+<date
+>2016-06-05</date>
+<releaseinfo
+>3.11.0 (Applications 16.08)</releaseinfo>
+
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>cervisia</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>cervisia</command
+></refname>
+<refpurpose
+>Een CVS-frontend-programma door KDE</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>cervisia</command
+> <arg choice="opt"
+><option
+>--resolve <replaceable
+>bestand</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+>--log <replaceable
+>bestand</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+>--annotate <replaceable
+>bestand</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>map</replaceable
+></option
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+
+<refsect1>
+<title
+>Beschrijving</title>
+<para
+>Cervisia is een front-end van een gebruikersvriendelijk versiecontrolsysteem. Het doel is de ondersteuning van CVS en andere programma's voor versiecontrolsystemen in een gemeenschappelijk interface, met oplossen van conflicten, verschillen en tonen van de historie, status van de bestanden van de werkkopie en ondersteuning voor de meeste functies van een versiecontrolsysteem</para>
+</refsect1>
+
+<refsect1>
+<title
+>Opties</title>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>--resolve</option
+></term>
+<listitem
+><para
+>De Resolve-dialoog met het geselecteerde bestand openen.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--log</option
+></term>
+<listitem
+><para
+>De logdialoog voor het gegeven bestand tonen</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--annotate</option
+> <replaceable
+>bestand</replaceable
+></term>
+<listitem
+><para
+>Het annotatievenster voor het gegeven bestand tonen.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>map</replaceable
+></option
+></term>
+<listitem
+><para
+>De te laden sandbox.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</refsect1>
+
+<refsect1>
+<title
+>Zie ook</title>
+<simplelist>
+<member
+>Meer gedetailleerde gebruikersdocumentatie is beschikbaar op <ulink url="help:/cervisia"
+>help:/cervisia</ulink
+> (voer ofwel deze &URL; in &konqueror; in of vier uit <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/cervisia</parameter
+></userinput
+>).</member>
+<member
+>kf5options(7)</member>
+<member
+>qt5options(7)</member>
+<member
+>cvs(1)</member>
+<member
+>Er is ook verdere informatie beschikbaar op <ulink url="https://www.kde.org/applications/development/cervisia/"
+>Cervisia pagina</ulink
+></member>
+</simplelist>
+</refsect1>
+
+<refsect1>
+<title
+>Auteurs</title>
+<para
+>Om de lijst met auteurs van Cervisia te maken gebruik <userinput
+><command
+>cervisia</command
+> <option
+>--author</option
+></userinput
+> in een terminal.</para>
+</refsect1>
+
+</refentry>

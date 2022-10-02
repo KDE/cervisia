@@ -1,0 +1,4036 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kappname "&cervisia;">
+  <!ENTITY package "kdesdk">
+  <!ENTITY ssh "<command
+>ssh</command
+>">
+  <!ENTITY rsh "<command
+>rsh</command
+>">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Brazilian-Portuguese "INCLUDE"
+> <!-- Change language only here -->
+  <!ENTITY CVS "<application
+>CVS</application
+>">
+]>
+
+<book id="cervisia" lang="&language;">
+
+<bookinfo>
+<title
+>Manual do &cervisia;</title>
+<authorgroup>
+<author
+><firstname
+>Bernd</firstname
+><surname
+>Gehrmann</surname
+> <affiliation
+><address
+>&Bernd.Gehrmann.mail;</address
+></affiliation>
+</author
+> 
+<author
+><firstname
+>Carlos</firstname
+><surname
+>Woelz</surname
+> <affiliation
+><address
+><email
+>carloswoelz@imap-mail.com</email
+></address
+></affiliation>
+</author
+> 
+
+
+<othercredit role="translator"
+><firstname
+>Marcus</firstname
+><surname
+>Gama</surname
+><affiliation
+><address
+><email
+>marcus.gama@gmail.com</email
+></address
+></affiliation
+><contrib
+>Tradução</contrib
+></othercredit
+> 
+
+</authorgroup>
+
+<copyright>
+<year
+>1999</year>
+<year
+>2000</year>
+<year
+>2001</year>
+<year
+>2002</year>
+<holder
+>&Bernd.Gehrmann;</holder>
+</copyright>
+
+<copyright>
+<year
+>2004</year>
+<holder
+>Carlos Woelz</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>08/09/2008</date>
+<releaseinfo
+>3.1.1</releaseinfo>
+
+<abstract>
+<para
+>O &cervisia; oferece uma visão gráfica do &CVS;.</para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdesdk</keyword>
+<keyword
+>Cervisia</keyword>
+<keyword
+>CVS</keyword>
+<keyword
+>controle de versão</keyword>
+<keyword
+>controle de revisão</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Introdução</title>
+
+<para
+>O <ulink url="http://www.kde.org/apps/cervisia/"
+>&cervisia;</ulink
+> é uma interface amigável com o usuário para o sistema de controle de versão. O objetivo é suportar o &CVS; e outros programas de sistemas de controle de versão em uma interface unificada, com recursos de resolução de conflitos, visualizadores de diferenças e histórico, estado para as cópias de trabalho dos arquivos, e suporte para maioria das funções de controle. Você pode obter o &cervisia; compilando o módulo do kdesdk ou instalando o pacote kdesdk fornecido por sua distribuição. Atualmente, apenas o &CVS; é suportado, mas outros sistemas de controle de versão serão integrados no futuro. </para>
+
+<para
+>Um sistema de controle de versão é uma ferramenta para gravar, gerenciar e distribuir diferentes versões de arquivos. O &CVS; é um sistema de controle de versão. Ele permite compartilhar suas modificações facilmente, bem como que cada contribuidor possa trabalhar em sua cópia local ao mesmo tempo, sem medo de sobrescrever modificações feitas por outros. Ele permite a recuperação de versões antigas (útil para análise de erros), a criação de ramificações (para desenvolvimento experimental ou para lançamentos de código) e mais. </para>
+
+<para
+>O <firstterm
+>repositório</firstterm
+> principal normalmente mantém um projeto colaborativo (comercial ou não), mas você pode aproveitar as vantagens dos excelentes recursos de controle de versão oferecidos pelo &CVS; também para um projeto desenvolvido exclusivamente por você. É fácil configurar um repositório local, e você terá a habilidade de rastrear as mudanças que causaram erros, reverter mudanças, prevenir perda acidental de informação, &etc; </para>
+
+<para
+>O repositório mantém os arquivos do projeto, e cada contribuidor mantém sua própria cópia local, chamada <firstterm
+>cópia de trabalho</firstterm
+> ou <firstterm
+>área local</firstterm
+>. Um contribuidor pode adicionar suas modificações no repositório principal (um processo chamado &quot;envio&quot;) e/ou atualizar sua própria cópia para refletir as mudanças recentes feitas por outros contribuidores. </para>
+
+</chapter>
+
+<chapter id="getting-started">
+<title
+>Iniciando</title>
+
+<sect1 id="accessing-repository">
+<title
+>Acessando O Repositório</title>
+
+<para
+>Nesta seção, nós mostraremos como usar as funcionalidades básicas do sistema de controle de versão usando o &cervisia;, basicamente para copiar módulos do repositório e trabalhar com eles. Para fazer isto, você deve ter acesso ao repositório como um cliente, ou seja, alguém (provavelmente o administrador do repositório &CVS;) deve lhe fornecer uma conta na máquina servidora. Alternativamente, você pode facilmente criar um repositório local para seu próprio projeto. </para>
+
+<tip
+><para
+>Se você planeja desenvolver um projeto complexo, é uma boa ideia usar os recursos do &CVS;, mesmo que seja o único desenvolvedor. Você pode fazer todas as mudanças em sua cópia de trabalho e usar o &cervisia; (ou qualquer outra ferramenta &CVS;) para atualizar e enviar. Deste modo, você obterá a habilidade de rastrear mudanças que causem erros, reverter mudanças, evitar perda acidental de informação, &etc; Usando o &cervisia; é simples criar um repositório local. </para>
+
+<procedure>
+<title
+>Criando um Repositório Local</title>
+
+<step
+><para
+>Abra o diálogo <guilabel
+>Criar Novo Repositório (cvs init)</guilabel
+> escolhendo <menuchoice
+><guimenu
+>Repositório</guimenu
+> <guimenuitem
+>Criar...</guimenuitem
+></menuchoice
+>. </para
+></step>
+
+<step
+><para
+>Pressione o botão <guilabel
+>...</guilabel
+> para selecionar a pasta onde você deseja criar o repositório, ou insira sua localização na caixa de texto. Por exemplo, se você deseja colocar o repositório na pasta <filename
+>/home/usuario</filename
+>, e nomeá-lo como <filename
+>raizcvs</filename
+>, você deve digitar <filename
+>/home/usuario/raizcvs</filename
+> na caixa de texto, ou selecionar a pasta <filename
+>/home/usuario</filename
+> usando o selecionador de arquivo e adicionar <filename
+>raizcvs</filename
+>. </para
+></step>
+
+<step
+><para
+>Confirme pressionando o botão <guibutton
+>OK</guibutton
+>. O &cervisia; criará e inicializará a nova pasta do repositório. </para
+></step>
+
+<step
+><para
+>Agora você pode importar seu trabalho atual para o repositório, ou simplesmente criar uma pasta no repositório para iniciar um novo módulo a partir do zero. </para
+></step>
+
+</procedure>
+
+</tip>
+
+
+<para
+>O &cervisia; oferece uma interface integrada para gerenciar todas as localizações de seus repositórios, o diálogo <guilabel
+>Configurar Acesso aos Repositórios</guilabel
+>. Para exibi-lo, selecione o item de menu <menuchoice
+><guimenu
+>Repositório</guimenu
+> <guimenuitem
+>Repositórios...</guimenuitem
+></menuchoice
+>. </para>
+
+<figure id="screenshot-repositories" float="1">
+<title
+>Uma captura de tela da caixa de diálogo Configurar Acesso aos Repositórios do &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="repositories.png"/></imageobject>
+<textobject
+><phrase
+>Uma captura de tela da caixa de diálogo Configurar Acesso aos Repositórios do &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Existem vários métodos para acessar a um repositório de &CVS;. Ele pode ser acessado através da autenticação por senha (:pserver:), por uma linha de comandos segura (usando o :ext:), um em repositório local (:local:), &etc; O formato para a localização do repositório é (os itens opcionais aparecem entre colchetes): </para>
+
+<para>
+<filename
+>[:método:][[usuário][:senha]@]nomemáquina[:[porta]]/caminho/para/repositório</filename>
+</para>
+
+<para
+>Nem todos os itens (usuário, senha, nome da máquina, porta) são sempre necessários para acessar o repositório. As informações necessárias dependem do método de acesso usado, que pode ser categorizado como se segue: </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+>Local</term>
+
+<listitem>
+<para
+>O método de acesso local é o método padrão usado pelo &CVS;. Logo, é opcional adicionar o método :local: à localização do repositório. Você pode inserir simplesmente o caminho para a pasta que armazena o repositório &CVS;, e é acessível de seu computador, como <filename class="directory"
+>/caminho/para/repositório</filename
+> ou para fornecer um exemplo da vida real, <filename class="directory"
+>/home/cvs</filename
+>.</para>
+
+<para
+>Ela pode estar fisicamente em um disco que é montado via <acronym
+>NFS</acronym
+>, mas este é um detalhe irrelevante. Se você criar um repositório local, a localização será simplesmente o caminho para ele. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry id="rsh">
+<term
+>&rsh;</term>
+
+<listitem>
+<para
+>A localização do repositório se parece com algo como <filename
+>:ext:usuario@maquina.url.org:/caminho/para/repositorio</filename
+>. </para>
+
+<para
+>Este método necessita que você tenha uma conta de usuário na máquina servidora (neste exemplo, <systemitem class="systemname"
+>maquina.url.org</systemitem
+>) e use um shell remoto para comunicação. Por padrão, o &CVS; usa o &rsh; para esta finalidade, no entanto, o &rsh; é considerado muito inseguro, e é frequentemente substituído pelo &ssh;. </para>
+
+<para
+>Se você usar o &ssh;, você deve configurar a variável de ambiente $<envar
+>CVS_RSH</envar
+> para &ssh; quando usar o cliente <command
+>cvs</command
+>. O &cervisia; suporta isto facilmente. </para>
+
+<!-- TODO: verify if the above still apply -->
+
+<para
+>Observe que o &cervisia; não pode responder a possíveis solicitações de senha da máquina servidora. Você deve certificar-se que um login remoto trabalhe sem requisitar que você insira a senha. Com o &rsh;, isto pode ser conseguido por exemplo criando um arquivo <filename
+>.rhosts</filename
+> em sua pasta pessoal com uma lista de máquinas confiáveis (veja o manual do &rsh;). </para>
+
+<para
+>Com o &ssh;, isto pode ser conseguido copiando sua chave pública localizada no arquivo <filename
+>identity.pub</filename
+>, localizado na pasta <filename
+>$<envar
+>HOME</envar
+>/.ssh</filename
+> para o servidor. Neste caso, a chave não deve estar criptografada com a frase-senha (veja o manual do &ssh; e o <acronym
+>FAQ</acronym
+> do &CVS;/<acronym
+>SSH</acronym
+> no SourceForge). Se você não tem certeza de como fazer isso, pergunte ao seu administrador de sistema. </para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>pserver</term>
+
+<listitem>
+<para
+>A localização do repositório se parece com algo como <filename
+>:pserver:usuario@maquina.url.org:/caminho/para/repositorio</filename
+> </para>
+
+<para
+>Este método acessa o servidor através de um protocolo especial com um autenticação relativamente fraca (<literal
+>pserver</literal
+> pede por uma autenticação de senha). Antes de você poder usar um servidor, você precisa de um nome de usuário e senha fornecidos pelo administrador do servidor &CVS;, e deve realizar o login. Observe que seu nome de usuário e senha para o &CVS; não precisam necessariamente corresponder aos do sistema. Antes de acessar o servidor &CVS;, você precisará logar-se. </para>
+
+<para
+>Os projetos de código aberto oferecem tipicamente o acesso anônimo do &CVS; ao seu código. Isto significa que você poderá obter facilmente a última versão do código, modificar e criar arquivos de diferenças ('patches') em relação ao repositório, sem que seja necessária uma conta no &CVS;. Como regra geral, o &CVS; anônimo usa a autenticação por senhas (:pserver:), e é um repositório apenas para leitura, o que o impede de enviar as suas alterações diretamente para o repositório. </para>
+
+</listitem>
+</varlistentry>
+</variablelist>
+
+<para
+>Conhecendo o método de acesso e localização do repositório, você pode adicioná-lo à lista de repositórios do &cervisia;: </para>
+
+<procedure>
+<title
+>Adicionando um Novo Repositório</title>
+
+<step
+><para
+>Abra o diálogo <guilabel
+>Configurar Acesso aos Repositórios</guilabel
+> selecionando o item de menu <menuchoice
+><guimenu
+>Repositório</guimenu
+> <guimenuitem
+>Repositórios...</guimenuitem
+></menuchoice
+>. </para
+></step>
+
+<step
+><para
+>Pressione o botão <guilabel
+>Adicionar...</guilabel
+> para abrir o diálogo <guilabel
+>Adicionar Repositório</guilabel
+>. </para
+></step>
+
+<step
+><para
+>Insira a localização do repositório na caixa de texto <guilabel
+>Repositório:</guilabel
+>. O &cervisia; automaticamente desabilitará áreas do diálogo que não são relevantes ao método de acesso inserido. </para
+></step>
+
+<step
+><para
+>Se você estiver usando o método de acesso ext ao repositório, insira o shell remoto que deseja usar (&eg; &ssh;) na caixa de texto <guilabel
+>Usar shell remoto (somente para repositórios :ext:):</guilabel
+>. </para
+></step>
+
+<step
+><para
+>Pressione <guibutton
+>OK</guibutton
+>. Você verá o repositório que acabou de inserir na lista de repositórios. </para
+></step>
+
+<step
+><para
+>Se o método de acesso do repositório que você inseriu é autenticado por senha (pserver), você precisará logar-se antes de conectar ao servidor. Clique o repositório na lista para selecioná-lo, e pressione o botão <guilabel
+>Login...</guilabel
+>. Insira sua senha no diálogo que é exibido. </para>
+<para
+>Se você inserir com sucesso sua senha, a entrada de coluna <guilabel
+>Estado</guilabel
+> do repositório pserver mudará de <guilabel
+>Não logado</guilabel
+> para <guilabel
+>Logado</guilabel
+>. </para
+></step>
+
+<step
+><para
+>Pressione <guibutton
+>OK</guibutton
+> para aplicar suas modificações, ou adicione outra localização à lista. O &cervisia; armazenará tantas localizações quanto desejar. </para
+></step>
+
+</procedure>
+
+</sect1>
+
+
+<sect1 id="importing">
+<title
+>Importando um Módulo Para o Repositório</title>
+
+<para
+>Nesta seção, nós discutiremos como você pode colocar um novo projeto em um repositório &CVS;. Se você apenas deseja trabalhar com um projeto existente que já está em um repositório, você pode pular esta seção. </para>
+
+<para
+>Existem duas maneiras de colocar um projeto em um &CVS;: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Importar os arquivos e pastas para um novo <firstterm
+>módulo</firstterm
+>, usando o diálogo de importação do &cervisia;. Módulos são pastas de nível superior na árvore de pastas do repositório &CVS;, e são usados para separar e organizar os diferentes projetos de software dentre do repositório. </para
+></listitem>
+
+<listitem
+><para
+>Criar um módulo vazio e adicionar os novos arquivos e pastas manualmente. Você terá mais controle, mas isto provavelmente demorará um pouco mais. </para
+></listitem>
+
+</itemizedlist>
+
+<important>
+<para
+>Tenha em mente que o &CVS; foi desenhado inicialmente para lidar com arquivos de texto. Muitas das funcionalidades, como a mesclagem de versões, a criação de diferenças de forma legível, etc... só são efetuadas em arquivos de texto. Isto não significa que você não possa usar o &CVS; para manter os arquivos binários, significa apenas que você terá que <emphasis
+>indicar explicitamente ao &CVS; se é um arquivo de texto ou binário</emphasis
+>. Se declarar o tipo errado de arquivo, você poderá ter problemas com as funcionalidades do &CVS; para esses arquivos, e eles podem ficar corrompidos. </para>
+</important>
+
+
+<para
+>Importar um projeto (como um novo módulo) tem algumas vantagens: você importará todos os arquivos e pastas recursivamente, e o módulo automaticamente será criado para você. Isto torna a importação de grandes projetos existentes para o repositório mais fácil. No entanto, existem algumas desvantagens: você não pode usar o diálogo de importação do &cervisia; para adicionar arquivos aos módulos existentes, e você pode tanto importar os arquivos como arquivos texto ou binário. Você pode trabalhar esta limitação criando uma pasta com arquivos de somente um dos tipos, ou informando padrões dos arquivos que devem ser ignorados durante o processo de importação. </para>
+
+<para
+>Por exemplo, suponhamos que seu projeto contenha somente arquivos texto e algumas imagens PNG (arquivos binários). Você pode dizer ao &CVS; para ignorar todos os arquivos com o padrão <filename class="extension"
+>*.png</filename
+> enquanto importa qualquer outro arquivo como texto, ou você pode mover as imagens para uma pasta separada, e então importar os arquivos remanescentes (como arquivos texto). De qualquer modo, você terá que <link linkend="checkingout"
+>baixar</link
+> o novo módulo importado para uma nova cópia de trabalho, copiar os arquivos e pastas que faltam para ele, <link linkend="addingfiles"
+>adicionar</link
+> e <link linkend="committingfiles"
+>enviar</link
+> estes arquivos e pastas para o repositório para completar o processo de importação. </para>
+
+<para
+>Como alternativa, você pode adicionar os arquivos e pastas manualmente, criando um módulo vazio para eles. Para adicionar um módulo vazio ao repositório, simplesmente crie uma nova pasta na pasta raiz do repositório &CVS;. O nome desta nova pasta será o nome do módulo. <link linkend="checkingout"
+>Baixe</link
+> o novo módulo vazio. Então copie os arquivos e pastas para a cópia de trabalho, <link linkend="addingfiles"
+>adicione</link
+> e <link linkend="committingfiles"
+>envie</link
+> estes arquivos e pastas para o repositório &CVS;. </para>
+
+
+<figure id="screenshot-import" float="1">
+<title
+>Uma captura de tela do diálogo de importação do &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="import.png"/></imageobject>
+<textobject
+><phrase
+>Uma captura de tela do diálogo de importação do &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Em <xref linkend="screenshot-import"/> você pode ver o diálogo que o auxilia a <emphasis
+>importar</emphasis
+> um projeto como um módulo. Para acessar o diálogo de importação do &cervisia;, selecione o item de menu <menuchoice
+><guimenu
+>Repositório</guimenu
+> <guimenuitem
+>Importar...</guimenuitem
+></menuchoice
+>. </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Repositório:</guilabel
+> <xref linkend="co-repository"/></term>
+<listitem
+><para
+>Insira ou selecione na lista o nome do repositório &CVS;, também conhecido por $<envar
+>CVSROOT</envar
+>. Você precisa ter acesso de escrita à ele, e o repositório precisa de estar devidamente inicializado. Se o repositório ainda não existir, inicialize-o com a opção do menu <menuchoice
+> <guimenu
+>Repositório</guimenu
+> <guimenuitem
+>Criar...</guimenuitem
+></menuchoice
+>. </para>
+<para
+>A caixa combinada mostra uma lista de repositórios que você inseriu previamente na caixa de diálogo <guilabel
+>Configurar Acesso aos Repositórios</guilabel
+>.Se o repositório é remoto, certifique-se de que a autenticação funciona. Veja em <xref linkend="accessing-repository"/> para mais informações. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Módulo:</guilabel
+> <xref linkend="co-module"/></term>
+<listitem
+><para
+>O nome do módulo sob o qual o projeto será armazenado. Após a importação, o projeto pode ser verificado sob este nome. Veja <xref linkend="checkingout"/> para mais informações. Isto é também o nome da pasta correspondente no repositório. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Pasta de Trabalho:</guilabel
+></term>
+<listitem
+><para
+>Este é a pasta de nível superior do projeto que você deseja importar. A importação inicia a partir desta pasta e vai descendo recursivamente. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Tag do vendedor:</guilabel
+> <xref linkend="co-vendortag"/></term>
+<listitem
+><para
+>A tag do vendedor é historicamente usada para pesquisar por código de outros grupos. Apenas use seu nome de usuário se não tiver melhor ideias. Não faz muita diferença o que você insere aqui. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Tag da versão:</guilabel
+> <xref linkend="co-releasetag"/></term>
+<listitem
+><para
+>Esta tag é também historicamente usada para importar diferentes versões de softwares de outros grupos. Se você não está fazendo isto, usa a palavra <literal
+>start</literal
+> ou um string <literal
+>FOO_1_0</literal
+> onde <literal
+>FOO</literal
+> é o nome do seu projeto e <literal
+>1.0</literal
+> é o número de versão do módulo importado. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Ignorar arquivos:</guilabel
+></term>
+<listitem
+><para
+>Se você preencher este campo, uma opção adicional <option
+>-I <replaceable
+>nomes de arquivo</replaceable
+></option
+> é fornecida para o comando <command
+>cvs import</command
+>. Esta entrada é interpretada como uma lista separada por espaços em branco de padrões de nomes de arquivo que serão ignorados. Em geral, uma maneira limpa e menos suscetível a erros de controlar quais arquivos irão para o repositório é criar uma pasta somente com os arquivos que você deseja importar e iniciar a partir dela. No entanto, esta entrada pode ser útil se o projeto contém arquivos que serão ignorados por padrão pelo &CVS;, &eg; arquivos com o nome <filename
+>core</filename
+>. Neste caso, simplesmente insira o caracter <literal
+>!</literal
+> neste campo. Isto sobrepõe-se as regras de esquema do &CVS; de arquivos ignorados, veja <xref linkend="ignoredfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Comentário:</guilabel
+> <xref linkend="co-comment"/></term>
+<listitem
+><para
+>Use este campo para gravar os comentários que você deseja fazer sobre o origem, usuário, desenvolvimento, &etc;, dos arquivos que você está importando. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Importar como binários</guilabel
+></term>
+<listitem
+><para
+>Se você assinalar esta opção, todos os arquivos serão importados no modo binário, &ie; é passado um argumento <option
+>-kb</option
+> ao comando <command
+>cvs import</command
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Usar a modificação do arquivo como hora de importação</guilabel
+></term>
+<listitem
+><para
+>Se você habilitar esta caixa, a hora de importação será a hora de modificação do arquivo ao invés da hora de importação. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+
+<para
+>Após você ter preenchido este formulário e confirmado pressionando <guibutton
+>OK</guibutton
+>, o seguinte comando &CVS; é enviado:</para>
+
+<screen
+><command
+>cvs</command
+> -d <co id="co-repository"
+></co
+><replaceable
+>repositório</replaceable
+> import -m "<co id="co-comment"
+></co
+>" <co id="co-module"
+></co
+><replaceable
+>módulo</replaceable
+> <co id="co-vendortag"
+></co
+><replaceable
+>tagvendedor</replaceable
+> <co id="co-releasetag"
+></co
+><replaceable
+>tagversão</replaceable
+></screen>
+
+</sect1>
+
+
+<sect1 id="checkingout">
+<title
+>Baixar um Módulo do Repositório</title>
+<para
+>Agora que você definiu com sucesso sua localização do repositório, e importou os arquivos iniciais para o repositório, é hora de obter o módulo do repositório &CVS;, criando sua cópia de trabalho. </para>
+
+<para
+>Você deve também saber o nome da <firstterm
+>ramificação</firstterm
+> ou <firstterm
+>tag</firstterm
+> que deseja usar. </para>
+
+<para
+>Ramificações de um módulo são versões paralelas deste módulo. Um bom exemplo prático do uso deste recurso é o lançamento de um projeto de software. Após uma versão principal, existem erros no código que devem ser concertados, mas as pessoas desejam adicionar novos recursos ao aplicativo também. É muito difícil fazer as duas coisas ao mesmo tempo porque novos recursos normalmente introduzem novos erros, tornando difícil rastrear os antigos. Para resolver este dilema, o &CVS; permite que você crie uma versão paralela, que nós chamaremos de &quot;ramificação da versão estável&quot;, onde você pode somente adicionar correções de erro, deixando a ramificação principal (HEAD) aberta para adição de novos recursos. </para>
+
+<para
+>Tags são usadas para marcar uma versão do projeto. O &CVS; estampa uma versão de cada arquivo com a tag, de modo que quando você baixa ou atualiza para uma tag específica, você obterá as mesmas versões de arquivo. No entanto, ao contrário das ramificações, tags não são dinâmicas: você não pode desenvolver uma tag. Tags são úteis para marcar versões, grandes mudanças no código, &etc; Usando tags, você pode facilmente retornar o projeto a um estado anterior, para reproduzir e rastrear erros, gerar o código de lançamento novamente, &etc; </para>
+
+<figure id="screenshot-checkout" float="1">
+<title
+>Uma captura de tela do diálogo de verificar do &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="checkout.png"/></imageobject>
+<textobject
+><phrase
+>Uma captura de tela do diálogo de verificar do &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Repositório:</guilabel
+></term>
+<listitem
+><para
+>O nome do repositório &CVS;, também conhecido por <filename
+><envar
+>$CVSROOT</envar
+></filename
+>. A lista abaixo apresenta os repositórios que você inseriu anteriormente com a janela <guilabel
+>Configurar Acesso aos Repositórios</guilabel
+>. Se o repositório for remoto, certifique-se de que a autenticação funciona; veja isso em <xref linkend="accessing-repository"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Módulo:</guilabel
+></term>
+<listitem
+><para
+>O nome do módulo a ser baixado. Se você estiver trabalhando com um repositório existente, você provavelmente poderá obter este nome a partir do administrador do sistema, ou se ele é um repositório de código aberto, você pode obter os nomes dos módulos a partir das páginas web do projeto. Se você deseja criar um novo módulo a partir do zero usando um repositório local, simplesmente crie uma nova pasta na pasta raiz do repositório local. O nome da pasta será o mesmo do módulo vazio. </para>
+<para
+>Alternativamente, se o repositório possui um arquivo <filename
+><envar
+>$CVSROOT</envar
+>/modules</filename
+>, você pode obter uma lista dos módulos disponíveis clicando no botão <guibutton
+>Obter Lista</guibutton
+>. </para>
+<para
+>Observe que é possível baixar qualquer subpasta existente do módulo, sem obter o resto do módulo. Simplesmente insira o caminho para a subpasta. Por exemplo, se você deseja obter somente a subpasta <filename class="directory"
+>doc/cervisia</filename
+> do módulo kdesdk, insira <filename class="directory"
+>kdesdk/doc/cervisia</filename
+> neste campo. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Marca de ramificação:</guilabel
+></term>
+<listitem
+><para
+>O nome da ramificação ou tag que você deseja baixar. Se você deixar este campo vazio, o &cervisia; obterá a ramificação principal (HEAD). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Pasta de trabalho:</guilabel
+></term>
+<listitem
+><para
+>A pasta na qual o módulo deve ser baixado. Observe que a pasta de nível superior da cópia de trabalho é nomeada após o módulo que você está obtendo, a menos que você forneça um nome alternativo no campo <guilabel
+>Baixar como:</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Baixar como:</guilabel
+></term>
+<listitem
+><para
+>Isto faz com que os arquivos da cópia de trabalho sejam baixados em uma pasta alternativa dentro da pasta de trabalho ao invés de usar a pasta com o nome do módulo. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Exportar somente</guilabel
+></term>
+<listitem
+><para
+>Se você assinalar esta opção, os arquivos serão exportados em vez de ser feito um 'checkout'. A exportação obtém uma cópia dos arquivos do módulo sem as pastas administrativas do &CVS;. Por exemplo, a exportação poderá ser usada para preparar o código-fonte para um lançamento. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Baixar recursivamente</guilabel
+></term>
+<listitem
+><para
+>Baixar todos os arquivos e pastas recursivamente.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+
+<sect1 id="mainscreen">
+<title
+>A Tela Principal, Visão do Estado do Arquivo e Atualização</title>
+<para
+>Quando você inicia o &cervisia; e abre uma cópia de trabalho selecionando <menuchoice
+> <guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Abrir Área Local...</guimenuitem
+> </menuchoice
+> você pode ver duas áreas principais na janela principal do &cervisia;: a superior é uma visão hierárquica (em árvore) da cópia de trabalho atual, e a inferior é usada para exibir os comandos &CVS; que o &cervisia; envia para realizar suas tarefas, bem como a saída gerada por estes comandos. </para>
+
+<para
+>Por padrão, o &cervisia; não exibe os arquivos contidos nas subpastas, de modo que você terá que clicar nas pastas se desejar vê-los. Para exibir todos os arquivos da cópia de trabalho, selecione <menuchoice
+> <guimenu
+>Exibir</guimenu
+> <guimenuitem
+>Expandir a árvore de arquivos</guimenuitem
+> </menuchoice
+>. Para fechar todas as pastas de sua cópia de trabalho, selecione <menuchoice
+> <guimenu
+>Exibir</guimenu
+> <guimenuitem
+>Recolher a árvore de arquivos</guimenuitem
+> </menuchoice
+>. </para>
+
+<para
+>De acordo com as configurações de seu arquivo <filename
+>.cvsignore</filename
+>, os arquivos que você normalmente não quer incluir no repositório - como por exemplo arquivos de objeto - não são exibidos na visão em árvore. Para cada arquivo, você vê seu estado correspondente. Na configuração padrão, após abrir uma área local, ele é "Desconhecido" porque o &cervisia; aguarda para atualizar as informações até você selecionar os arquivos e pastas que deseja ver o estado ou atualizar e selecionar <menuchoice
+> <guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Atualizar</guimenuitem
+> </menuchoice
+> ou <menuchoice
+> <guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Estado</guimenuitem
+> </menuchoice
+>. Com este comportamento, você tem um mínimo de funcionalidade disponível caso você não tenha uma conexão permanente com o servidor &CVS;. </para>
+
+<figure id="screenshot-mainview" float="1">
+<title
+>Um captura de tela da janela principal do &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="mainview.png"/></imageobject>
+<textobject
+><phrase
+>Um captura de tela da janela principal do &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Os comandos no menu Arquivo normalmente agem somente nos arquivos que você tenha marcado. Você pode também marcar pastas. Agora escolha <menuchoice
+><guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Estado</guimenuitem
+></menuchoice
+> ou pressione <keycap
+>F5</keycap
+>. O &cervisia; envia um comando </para>
+
+<para>
+<screen
+><command
+>cvs update -n <replaceable
+>nomes dos arquivos</replaceable
+></command
+></screen>
+</para>
+
+<para
+>para obter informações de estado dos arquivos marcados. Observe que o &cervisia; age recursivamente nas subpastas somente se você tiver configurado esta opção no menu <guimenu
+>Configurações</guimenu
+>. De acordo com o respectivo estado do arquivo, você agora pode ver uma entrada na coluna <guilabel
+>Estado</guilabel
+>: </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Modificado Localmente</guilabel
+></term>
+<listitem
+><para
+>Isto significa que você tem o arquivo modificado comparado com a versão do repositório. </para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><guilabel
+>Adicionado Localmente</guilabel
+></term>
+<listitem
+><para
+>Isto significa que o arquivo não existe no repositório, mas em sua cópia de trabalho e você deve agendá-lo para adição. A inserção atual no repositório somente acontecerá após um envio. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Removido Localmente</guilabel
+></term>
+<listitem
+><para
+>Isto significa que você tem agendado o arquivo para remoção, mas ele ainda existe no repositório. A remoção atual acontecerá somente após um envio. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Precisa de Atualização</guilabel
+></term>
+<listitem
+><para
+>Isto é mostrado se já existir uma versão mais recente do arquivo no repositório, &eg; se alguém já fez alguma alteração ao arquivo. Normalmente, você precisará atualizar este arquivo para que fique com uma versão atualizada na sua pasta. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Precisa de Remendo</guilabel
+></term>
+<listitem
+><para
+>Isto é essencialmente o mesmo que o anterior; a diferença é que no caso de uma atualização, o servidor &CVS; transferirá somente um remendo ao invés de todo o arquivo para você. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Precisa Mesclar</guilabel
+></term>
+<listitem
+><para
+>Indica que é necessário fazer uma mesclagem da versão deste arquivo na sua pasta local com a versão que se encontra no repositório. Isto tipicamente acontece se você modificou o arquivo enquanto alguém também enviou as suas alterações. Se você optar por atualizar, as modificações no repositório são mescladas no seu arquivo. No caso de gerar algum conflito (&ie;, se alguém efetuou modificações nas mesmas linhas que você), o novo estado passa a "Conflito". </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Atualizado</guilabel
+></term>
+<listitem
+><para
+>Indica que o arquivo é idêntico à versão do repositório. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Conflito</guilabel
+></term>
+<listitem
+><para
+>Isto é mostrado se o arquivo ainda possui conflitos marcados nele. Talvez você tenha previamente atualizado o arquivo e não resolvido os conflitos. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Fora do CVS</guilabel
+></term>
+<listitem
+><para
+>Indica que o arquivo não está registrado no repositório &CVS;. Se você deseja torná-lo disponível para outros, você deve adicioná-lo ao repositório. Caso contrário, você deve considerar a adição dele ao seu arquivo <filename
+>.cvsignore</filename
+>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Agora que você teve uma ideia geral do estado atual do &CVS;, você poderá querer fazer uma atualização. Marque alguns arquivos (ou o topo da árvore de pastas, o que significa marcar todos os arquivos nesta pasta). Agora escolha <menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Atualizar</guimenuitem
+></menuchoice
+> (Obviamente, você poderá ter escolhido isto no início da sessão). Para alguns dos arquivos, o estado poderá ser alterado agora. Tipicamente, os arquivos que ficaram com "Necessita de 'Patch'" ou "Necessita de Atualização" ficaram atualizados. Por isso, os seguintes itens novos são possíveis na coluna do estado: </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Atualizado</guilabel
+></term>
+<listitem
+><para
+>Mostra se o arquivo foi atualizado a partir do repositório. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Remendado</guilabel
+></term>
+<listitem
+><para
+>Indica que o servidor &CVS; enviou um remendo para este arquivo e o remendo foi aplicado com sucesso. Se o remendo não foi aplicado com sucesso devido a um conflito entre suas modificações e as de alguém que já havia enviado para o repositório, o estado agora é<guilabel
+>Conflito</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Você deve ter observado que de acordo com o estado do arquivo, sua linha possui uma cor diferente. As cores são escolhidas de modo a refletir a prioridade do estado. Por exemplo, um arquivo com um conflito é marcado em vermelho para mostrar-lhe que deve resolver o conflito antes de continuar o trabalho com o arquivo. Se sua pasta contém um grande número de arquivos, você pode apesar disso perder da visão geral. Para obter informações mais concisas sobre quais arquivos possuem um estado incomum, simplesmente clique no cabeçalho da coluna <guilabel
+>Estado</guilabel
+>. A lista de arquivos é então ordenada por prioridade, de modo que você tenha todas informações importantes na parte superior da lista. Para retornar à visão ordenada alfabeticamente, clique no cabeçalho da coluna <guilabel
+>Nome do arquivo</guilabel
+>. </para>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="workingwithfiles">
+<title
+>Trabalhando Com Arquivos</title>
+
+<para
+>Todas as funcionalidades normalmente usadas no &CVS; estão diretamente disponíveis na janela principal do &cervisia;. Comandos usualmente agem em diversos arquivos ao mesmo tempo, atingindo todos que estão selecionados atualmente. Se a seleção inclui pastas, esta interpretação depende das configurações feitas no menu <guimenu
+>Configurações</guimenu
+>. Por exemplo, se <menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Enviar &amp; Remover Recursivamente</guimenuitem
+></menuchoice
+> estiver habilitado e você escolher <menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Enviar...</guimenuitem
+></menuchoice
+> quando uma pasta estiver selecionada, então todos os arquivos na árvore sob esta pasta são atualizados. Caso contrário, somente os arquivos regulares na pasta serão afetados. </para>
+
+<figure id="screenshot-popup" float="1">
+<title
+>Uma captura de tela do menu de contexto do &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="popup.png"/></imageobject>
+</mediaobject>
+</figure>
+
+<para
+>As ações mais usadas estão também disponíveis ao clicar com o botão direito do mouse nos arquivos da árvore, através do menu de contexto. O <xref linkend="screenshot-popup"/> mostra o menu de contexto da janela principal do &cervisia;. </para>
+
+<para
+>Você poderá simplesmente editar um arquivo fazendo duplo-clique nele ou selecionando-o e pressionando &Enter;. Isto inicia o aplicativo padrão que lida com esse tipo de arquivo (o aplicativo padrão para cada tipo de arquivo é uma configuração a nível do &kde;). Se o aplicativo padrão não for o que deseja usar, você poderá clicar com o botão direito no arquivo e escolher o submenu <menuchoice
+> <guisubmenu
+>Editar com</guisubmenu
+> </menuchoice
+> e selecionar um dos outros aplicativos que lidam com esse tipo de arquivo. </para>
+
+<sect1 id="addingfiles">
+<title
+>Adicionando Arquivos</title>
+
+<para
+>Para adicionar arquivos ao projeto são necessários dois passos: Primeiro, os arquivos devem ser registrados no &CVS;, ou em outras palavras, <emphasis
+>adicionados ao repositório</emphasis
+>. Isto é necessário, mas não o suficiente. Para colocar os arquivos no repositório, você deve também realizar um <emphasis
+>envio</emphasis
+>. Este procedimento tem uma importante vantagem. Você pode realizar um envio dos arquivos junto com modificações de outras partes do projeto. Quando fizer isto, você pode facilmente ver (&eg; nas mensagens de envio) que todas as mudanças são parte de um todo. </para>
+
+<para
+>Para este fim, marque todos os arquivos a serem adicionados na janela principal do &cervisia;. Então, selecione <menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Adicionar ao Repositório...</guimenuitem
+></menuchoice
+>, ou clique-direito nos arquivos marcados e selecione <guimenuitem
+>Adicionar ao Repositório...</guimenuitem
+>. O diálogo <guilabel
+>Adicionar ao CVS</guilabel
+> aparecerá, listando os arquivos que você marcou, e pedindo uma confirmação. Pressione <guibutton
+>OK</guibutton
+>. </para>
+
+<para
+>O &cervisia; envia um comando</para>
+
+<para>
+<screen
+><command
+>cvs add <replaceable
+>nomes dos arquivos</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Se a operação tiver sucesso, a coluna de estado deverá possuir "Adicionado ao repositório" para os arquivos adicionados. </para>
+
+<warning
+><para
+>O &CVS; não foi desenvolvido para fornecer um significativo controle de revisão para arquivos binários. Por exemplo, mesclar arquivos binários normalmente não faz sentido. Além do mais, por padrão o &CVS; realiza expansão de palavras chave (&eg; no string <literal
+>&dollar;Revision: 1.6 &dollar;</literal
+>) quando um arquivo é enviado. Em arquivos binários, estas substituições podem corromper o arquivo e fazê-lo completamente inutilizável. </para
+></warning>
+
+<para
+>Para desabilitar este comportamento, você deve enviar arquivos binários (ou outros arquivos, como Postscript ou imagens PNG) selecionando <menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Adicionar Binário...</guimenuitem
+></menuchoice
+>. O diálogo <guilabel
+>Adicionar ao CVS</guilabel
+> aparecerá, listando os arquivos binários que você marcou, e pedindo uma confirmação. Pressione <guibutton
+>OK</guibutton
+>. </para>
+
+<para
+>O &cervisia; envia um comando </para>
+
+<para>
+<screen
+><command
+>cvs add -kb <replaceable
+>nomes dos arquivos</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="removingfiles">
+<title
+>Removendo Arquivos</title>
+
+<para
+>Como na adição de arquivos, a remoção de arquivos é feita em dois passos: Primeiro, os arquivos devem ser registrados como removidos selecionando <menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Remover Do Repositório...</guimenuitem
+></menuchoice
+> ou clique-direito nos arquivos marcados e selecionando <guimenuitem
+>Remover Do Repositório...</guimenuitem
+> a partir do menu de contexto. O diálogo <guilabel
+>Remover do CVS</guilabel
+> aparecerá, listando os arquivos que você marcou, e pedindo por uma confirmação. Pressione <guibutton
+>OK</guibutton
+>. O &cervisia; envia o comando </para>
+<para>
+<screen
+><command
+>cvs remove -f <replaceable
+>nomes dos arquivos</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Após isto, esta modificação para cópia local deve ser enviada, possivelmente junto com outras modificações ao projeto. </para>
+
+<note
+><para
+>O comando acima somente funciona se o arquivo estiver atualizado. Caso contrário, você obterá uma mensagem de erro. Este comportamento faz sentido: Se você tem um arquivo modificado em relação à versão do repositório, ou se outro alguém fez qualquer modificação, você desejará primeiro verificar se você realmente quer descartá-lo. </para
+></note>
+
+</sect1>
+
+
+<sect1 id="addingremovingdirs">
+<title
+>Adicionando e Removendo Pastas</title>
+
+<para
+>As pastas são tratadas fundamentalmente de forma diferente dos arquivos normais pelo &CVS;. Elas não estão sob o controle de versões, &ie; você não pode dizer que pastas existiam no projeto numa determinada altura. Além disso, as pastas nunca podem ser removidas explicitamente (exceto se removê-las diretamente do repositório). </para>
+
+<para
+>Como um substituto o &CVS; segue a convenção que uma pasta é "não existente" em uma versão do projeto se ela está vazia. Esta convenção pode ser forçada usando a opção <option
+>-P</option
+> para o <command
+>cvs update</command
+> e <command
+>cvs checkout</command
+>. Esta opção pode ser configurada no menu <menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Excluir Pastas Vazias Ao Atualizar</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>A pasta pode ser adicionada ao repositório selecionando <menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Adicionar ao Repositório...</guimenuitem
+></menuchoice
+> ou clique direito na pasta marcada e selecionando <guimenuitem
+>Adicionar ao Repositório...</guimenuitem
+> no menu de contexto. Observe que ao contrário da adição de arquivos, adicionar pastas não necessita de um envio posterior. O &cervisia; envia o comando </para>
+
+
+<para>
+<screen
+><command
+>cvs add <replaceable
+>nomedapasta</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="committingfiles">
+<title
+>Enviando Arquivos</title>
+
+<para
+>Quando você realiza uma certa quantidade de mudanças em sua cópia de trabalho, e você deseja que outros desenvolvedores tenham acesso a elas, você as <emphasis
+>envia</emphasis
+>. Com um envio, você coloca suas versões de arquivos modificados como novas revisões no repositório. Uma atualização subsequente por outro desenvolvedor trará suas modificações para a cópia de trabalho dele. </para>
+
+<para
+>Para enviar um conjunto de arquivos, selecione-os na janela principal do &cervisia; e selecione <menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Enviar...</guimenuitem
+></menuchoice
+> ou clique direito sobre os arquivos marcados e selecione <guimenuitem
+>Enviar...</guimenuitem
+> no menu de contexto. </para>
+
+<figure id="screenshot-commit" float="1">
+<title
+>Uma captura de tela do diálogo de envio do &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="commit.png"/></imageobject>
+</mediaobject>
+</figure>
+
+<para
+>Você obtém um diálogo que mostra uma lista dos arquivos selecionados na seção superior e uma mensagem de registro para suas mudanças abaixo. O &cervisia; lhe auxilia de diversas formas para encontrar um mensagem de registro significativa. Primeiro, na lista de arquivos você pode dar um duplo-clique em um arquivo ou pressionar <keycap
+>Return</keycap
+> para ver as mudanças que você realizou no arquivo. Em segundo, ele lhe oferece uma lista de mensagens de registro que você usou previamente em uma caixa combinada. Em terceiro, este diálogo é integrado com o editor de changelog do &cervisia; descrito abaixo. Quando você tiver terminado o diálogo, o comando </para>
+
+<para>
+<screen
+><command
+>cvs commit -m <replaceable
+>mensagem</replaceable
+> <replaceable
+>nomes dos arquivos</replaceable
+></command
+></screen>
+</para>
+
+<para
+>é usado. </para>
+
+
+<note
+><para
+>Um erro comum que você pode encontrar durante um envio é <errorname
+>falha na verificação de atualização</errorname
+>. Isto indica que alguém fez mudanças no repositório desde sua última atualização. Ou mais tecnicamente, que sua revisão <literal
+>BASE</literal
+> não é a mais nova do repositório. Neste caso o &CVS; recusa-se a mesclar suas modificações para o repositório. A solução é atualizar, resolver qualquer conflito e sincronizar novamente. É claro, se você está trabalhando no projeto de um software, isto é normalmente uma boa maneira de verificar se o programa ainda funciona após você tê-lo atualizado - além do mais, podem existir interações incorretas entre suas modificações e a de outros desenvolvedores causando uma quebra de código. </para
+></note>
+
+<note>
+<para
+>Outro erro comum resulta na mensagem de erro <errorname
+>Tag 'X' pregada para arquivo 'X' não está no repositório</errorname
+>. Isto acontece se você tenta enviar um arquivo que foi trazido previamente para uma determinada revisão ou tag com o comando </para>
+<para>
+<screen
+><prompt
+>%</prompt
+><userinput
+>cvs update -r X</userinput
+></screen>
+</para>
+<para
+>(que é &eg; usada pelo item do menu <menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Atualizar para Marca/Data...</guimenuitem
+></menuchoice
+>). Nesse caso, a marca do arquivo fica fixa, &ie; as atualizações posteriores não lhe trarão a versão mais recente da ramificação ('branch'). Se você quiser enviar versões posteriores para essa ramificação, você terá que atualizar para o nome da marca antes de poder fazer novos 'commits'. </para>
+</note>
+
+<para
+>Com o &cervisia;, é bastante simples manter um arquivo de ChangeLog que esteja em conformidade com o formato definido pelas sugestões de codificação da &GNU;. Para usá-lo, escolha a opção <menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Inserir Registro do ChangeLog...</guimenuitem
+></menuchoice
+>. Se existir um arquivo com o nome <filename
+>ChangeLog</filename
+> na pasta de topo da sua área local, este arquivo será carregado e você terá a possibilidade de editá-lo. Para isso, no topo do arquivo, é inserido um item com a data atual e o nome do seu usuário (o qual poderá ser configurado tal como é descrito em <xref linkend="customize-general"/>). Quando você tiver terminado, a janela pode ser fechada clicando <guibutton
+>OK</guibutton
+>. A próxima janela de envio das alterações que você abrir terá a mensagem de registro idêntica à mensagem que você inseriu no registro de alterações. </para>
+
+</sect1>
+
+
+<sect1 id="resolvingconflicts">
+<title
+>Resolvendo Conflitos</title>
+
+<para
+>Conflitos podem ocorrer sempre que você tenha feito mudanças em um arquivo que também foi modificado por outro desenvolvedor. O conflito é detectado pelo &CVS; quando você atualiza o arquivo modificado. O &CVS; então tenta mesclar as modificações enviadas por outro desenvolvedor em sua cópia local. A mesclagem falha se tanto a sua modificação como a do outro desenvolvedor estão em partes sobrepostas do arquivo, e o servidor &CVS; envia uma mensagem de erro. </para>
+
+<para
+>Na janela principal do &cervisia;, arquivos com conflitos são indicados com "Conflito" na coluna de estado e com uma cor vermelha. É seu trabalho agora resolver estes conflitos antes de enviar o arquivo. O &CVS; recusará enviar qualquer arquivo com conflitos até eles serem editados. A partir da janela principal, você pode resolver conflitos da maneira tradicional, é claro: apenas dê um duplo-clique no arquivo em questão e edite-o com seu editor favorito.</para>
+
+<para
+>O &CVS; marca as mudanças dos conflitos colocando marcas no meio dos arquivos da seguinte maneira:</para>
+
+<screen
+>&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+Mudanças em sua cópia de trabalho
+=======
+Mudanças no repositório
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; número_revisão
+</screen>
+
+<para
+>Você deve substituir todo este bloco com uma nova versão mesclada.É claro, você tem uma grande liberdade para resolver um conjunto de conflitos: você pode para cada conflito decidir por uma das duas versões alternativas. Você pode também decidir que ambas as versões estão quebradas e reescrever toda a rotina ou o arquivo completo. </para>
+
+<para
+>Felizmente, o &cervisia; oferece uma bela interface para manipular estes conflitos. Isto não significa que você nunca precisará editar manualmente os arquivos, mas pelo menos pode eliminar a necessidade de fazer isto para a resolução de conflitos triviais. Para usar o diálogo <guilabel
+>Resolver CVS</guilabel
+> do &cervisia; selecione <menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Resolver...</guimenuitem
+></menuchoice
+> ou clique direito no arquivo marcado e selecione <guimenuitem
+>Resolver...</guimenuitem
+> no menu de contexto. </para>
+
+<figure id="screenshot-resolve" float="1">
+<title
+>Uma captura de tela da caixa de diálogo resolver do &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="resolve.png"/></imageobject>
+<textobject
+><phrase
+>Uma captura de tela da caixa de diálogo resolver do &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>No topo do diálogo, você vê <guilabel
+>Sua versão (A)</guilabel
+> do arquivo no lado esquerdo e a versão do repositório, <guilabel
+>Outra versão (B)</guilabel
+>, no lado direito. As diferenças entre elas estão marcadas com a cor vermelha. Abaixo destas duas versões, você pode ver a <guilabel
+>Versão mesclada</guilabel
+>. A versão mesclada reflete que seção estará em sua cópia de trabalho se você pressionar o botão <guibutton
+>Salvar</guibutton
+>. </para>
+
+<para
+>Você pode alternar entre as diferentes seções conflitantes pressionando <guibutton
+>&lt;&lt;</guibutton
+> e <guibutton
+>&gt;&gt;</guibutton
+>. Na metade inferior do diálogo você pode ver qual seção está atualmente marcada. Por exemplo, <literal
+>2 de 3</literal
+> significa que você está atualmente na segunda seção de diferença de um total de 3. </para>
+
+<para
+>Agora você pode decidir seção por seção qual das duas versões você deseja que esteja no arquivo mesclado. Pressionando <guibutton
+>A</guibutton
+>, você aceita a versão que você editou. Pressionando <guibutton
+>B</guibutton
+>, você aceita a versão do repositório. Pressionando <guibutton
+>A+B</guibutton
+>, ambas as versões serão adicionadas, e sua versão virá primeiro. O <guibutton
+>B+A</guibutton
+> obtém o mesmo resultado, mas a ordem será diferente: primeiro a versão do repositório, depois a sua. </para>
+
+<para
+>Se você não estiver satisfeito com nenhuma destas versões, pressione <guibutton
+>Editar</guibutton
+> para abrir um editor de texto simples de onde você pode editar a seção. Quando você tiver terminado a edição, pressione <guibutton
+>OK</guibutton
+> para retornar ao diálogo <guilabel
+>Resolver CVS</guilabel
+> e terminar de resolver os conflitos. Você verá a seção que acabou de editar na <guilabel
+>Versão mesclada</guilabel
+>, com suas modificações. </para>
+
+<para
+>Para salvar suas modificações, sobrescrevendo a versão da cópia de trabalho, pressione <guibutton
+>Salvar</guibutton
+>. Observe que isto salvará as escolhas não somente da seção que você está atualmente vendo, mas de todas as seções no arquivo. Se você deseja salvar em outro arquivo, pressione <guibutton
+>Salvar Como...</guibutton
+>. Pressione <guibutton
+>Fechar</guibutton
+> para sair do diálogo. Se você fechar o diálogo sem salvar, as mudanças serão perdidas. </para>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="obtaininginformation">
+<title
+>Obtendo informações Sobre os Arquivos e Criando Remendos</title>
+
+<sect1 id="diff">
+<title
+>Encontrando Diferenças Entre Revisões</title>
+
+<para
+>Existem diversos locais no &cervisia; onde você pode pedir por uma janela mostrando as diferenças entre as revisões de um arquivo: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Na visão principal, você pode selecionar <menuchoice
+><guimenu
+>Ver</guimenu
+><guimenuitem
+>Diferença para Repositório...</guimenuitem
+></menuchoice
+>. Isto é baseado no comando <command
+>cvs diff</command
+> e lhe mostra as diferenças entre a versão em sua cópia local e a versão de sua última atualização (também conhecida como <literal
+>BASE</literal
+>). Isto é particularmente útil apenas antes de você enviar um arquivo, de modo que você possa encontrar uma mensagem de registro apropriada. </para
+></listitem>
+
+<listitem
+><para
+>Você pode ver as diferenças entra as versões em sua área local e a versão no ramo de desenvolvimento principal (também chamado <literal
+>HEAD</literal
+>) selecionando <menuchoice
+><guimenu
+>Ver</guimenu
+> <guimenuitem
+>Diferença para o Repositório (HEAD)...</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+
+<listitem
+><para
+>Você pode ver as diferenças entre as duas últimas revisões do arquivo selecionado escolhendo <menuchoice
+><guimenu
+>Ver</guimenu
+> <guimenuitem
+>Última Mudança...</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+
+<listitem
+><para
+>Você pode acessar os itens de menu <guimenuitem
+>Diferença para o Repositório (BASE)...</guimenuitem
+>. <guimenuitem
+>Diferença para o Repositório (HEAD)...</guimenuitem
+> e <guimenuitem
+>Última Mudança...</guimenuitem
+> a partir do menu de contexto da visão principal, com um clique direito sobre o arquivo que deseja ver. </para
+></listitem>
+
+<listitem
+><para
+>No diálogo que é mostrado quando você envia um conjunto de arquivos, você pode solicitar uma janela de diferenças selecionando um nome de arquivo na lista de seleção, seja através de um duplo-clique ou pressionando <keycap
+>Return</keycap
+>. Isto é idêntico ao uso do <menuchoice
+><guimenu
+>Ver</guimenu
+><guimenuitem
+>Diferença para Repositório (BASE)...</guimenuitem
+></menuchoice
+> com o respectivo arquivo na janela principal. </para
+></listitem>
+
+<listitem
+><para
+>No diálogo do Navegador de registros, você pode marcar duas revisões de um arquivo e solicitar um diálogo que mostra as diferenças entre eles (veja em <xref linkend="browsinglogs"/>). </para
+></listitem>
+
+</itemizedlist>
+
+<para
+>Como você deve esperar, o &cervisia; não apenas exibe a saída do comando <command
+>diff</command
+> em seu terminal, mas lhe mostra uma visão gráfica como vista em <xref linkend="screenshot-log"/>. </para>
+
+<figure id="screenshot-log" float="1">
+<title
+>Uma captura de tela do diálogo de diferenças do &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="diff.png"/></imageobject>
+<textobject
+><phrase
+>Uma captura de tela do diálogo de diferenças do &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>O testo no diálogo é uma variante melhorada do texto obtido pelo comando diff com a opção <option
+>-u</option
+>. Você pode ver as diferentes versões em duas janelas, com linhas arranjadas de modo que você possa fazer uma comparação lado a lado. Quer dizer, onde o texto foi adicionado ou excluído, a janela respectiva mostra linhas vazias com a marca <literal
+>+++++</literal
+> no lado esquerdo. Na outra parte, você pode ver o número de execução de cada linha na coluna da esquerda. </para>
+
+<para
+>Na segunda coluna da janela direita, você pode ver que tipo de mudança foi feita. Tipos possíveis são <literal
+>Adicionado</literal
+>, <literal
+>Excluído</literal
+> e <literal
+>Mudado</literal
+>. As linhas são marcadas respectivamente em azul, verde e vermelho. No meio do diálogo uma imagem comprimida dos marcadores coloridos é mostrada. Deste modo, você pode obter uma visão rápida de todas as mudanças do arquivo. Você pode também usar a posição das regiões coloridas na imagem comprimida como uma orientação de quando usar as barras de rolagem. </para>
+
+<para
+>Normalmente, as barras de rolagem das janelas esquerda e direita estão sincronizadas, &ie;, se você posicionar do lado esquerdo, o lado direito é deslocado da mesma forma. Você poderá ativar isto assinalando a opção <guibutton
+>Sincronizar barras de rolagem</guibutton
+>. </para>
+
+<para
+>Para informações sobre como personalizar o diálogo de diferenças, veja <xref linkend="customize-diff"/>. </para>
+
+</sect1>
+
+<sect1 id="creatingpatches">
+<title
+>Criando Remendos</title>
+
+<para
+>Algumas vezes você pode oferecer suas modificações para revisão, antes de enviá-las, ou você não possui acesso de escrita ao repositório (logo você não pode enviar). O &CVS; oferece um formato padrão para compartilhar as modificações em sua cópia de trabalho, de modo que outras pessoas possam revisar suas mudanças, testá-las em suas cópias de trabalho e aplicá-las ao repositório &CVS;. Um arquivo contendo estas diferenças é chamado um <firstterm
+>remendo</firstterm
+>, e é gerado pelo comando <command
+>cvs diff</command
+>, da mesma maneira que as diferenças são geradas em <xref linkend="diff"/>. Compartilhar remendos ao invés de conjuntos de arquivos consome menos banda de rede, e remendos são mais fáceis de manipular, de modo que você pode enviar um único arquivo de remendo contendo todas as diferenças de diversos arquivos fonte. </para>
+
+<para
+>O &cervisia;, oferece acesso a este recursos selecionado <menuchoice
+><guimenu
+>Avançado</guimenu
+> <guimenuitem
+>Criar Remendo Contra Repositório...</guimenuitem
+></menuchoice
+>. </para>
+
+<important
+><para
+>A ação <guimenuitem
+>Criar Remendo Contra Repositório...</guimenuitem
+> cria um remendo com todas as modificações em todos os arquivos em sua cópia de trabalho (área local) contra o repositório <literal
+>BASE</literal
+>. Logo, a seleção de arquivos na visão principal não afeta o remendo que será gerado. </para
+></important>
+
+<para
+>Outra possibilidade é selecionar um arquivo na visão principal e selecionar <guimenuitem
+>Navegar Registro...</guimenuitem
+> a partir do menu <guimenu
+>Ver</guimenu
+> ou clique direito no arquivo marcado e selecionar <guimenuitem
+>Navegar Registro...</guimenuitem
+> a partir do menu instantâneo, para abrir o <link linkend="browsinglogs"
+>Diálogo do navegador de registro</link
+>. Agora, selecione a versão contra a qual deseja criar um remendo, como a revisão &quot;A&quot; e pressione o botão <guilabel
+>Criar Remendo...</guilabel
+>. Isto irá gerar um remendo com as diferenças entre o <emphasis
+>arquivo marcado</emphasis
+> em sua cópia e a versão selecionada com a revisão &quot;A&quot;. </para>
+
+<para
+>Antes de gerar o remendo, o &cervisia; exibe um diálogo permitindo-lhe configurar o formato de saída. </para>
+
+<figure id="screenshot-patch" float="1">
+<title
+>Uma captura de tela do diálogo de remendo do &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="patch.png"/></imageobject>
+<textobject
+><phrase
+>Uma captura de tela do diálogo de remendo do &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Formato de Saída</guilabel
+></term>
+<listitem
+><para
+>Existem três formatos de saída disponíveis: </para>
+<para
+><guilabel
+>Normal</guilabel
+>: um formato que pode ser usado para fazer com que o editor ed automaticamente crie outra cópia do arquivo antigo correspondendo ao novo arquivo. No formato de saída normal, os caracteres &lt; e &gt; marcam as mudanças, e não existe informação de contexto. </para>
+<para
+><guilabel
+>Unificado</guilabel
+>: o formato mais usado para troca de remendos. O formato unificado usa linhas de contexto em adição aos números de linha para gravar as diferenças. Isto torna o processo de aplicação de remendos mais robusto. Este formato exibe as diferenças em uma forma legível e compacta, com um cabeçalho para cada arquivo envolvido, e seções separadas (pedaços) para cada diferença. As linhas de contexto disponíveis para cada diferença torna a leitura das modificações mais fácil. No formato de saída unificado, os caracteres + e - marcam as mudanças. </para>
+<para
+><guilabel
+>Contexto</guilabel
+>, que representa a mesma informação do formato unificado, mas de uma maneira menos compacta. No formato de saída contexto, o caracter ! marca as mudanças. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Número de linhas de contexto:</guilabel
+></term>
+<listitem
+><para
+>Configure aqui o número de linhas de contexto para os formatos unificado ou contexto. Esta opção não está disponível para o formato de saída normal, uma vez que neste formato nenhuma informação de contexto é gravada. Mais informações de contexto torna a leitura da saída gerada mais fácil, e a aplicação do remendo mais precisa, mas aumenta o tamanho do remendo. É recomendável usar pelo menos duas linhas de contexto para a operação de remendo apropriada. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Opções para Ignorar</guilabel
+></term>
+<listitem
+><para
+>Verifique aqui as mudanças que não devem ser consideradas como diferenças ao gerar o remendo. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+
+<para
+>Após configurar o formato de saída, o &cervisia; gera o remendo e exibe o diálogo <guilabel
+>Salvar Como</guilabel
+>. Insira neste diálogo o nome do arquivo e localização do arquivo de remendo. </para>
+
+
+</sect1>
+
+<sect1 id="annotate">
+<title
+>Procurando uma Visão Anotada de um Arquivo</title>
+
+<para
+>Com o comando <command
+>cvs annotate</command
+>, o &CVS; oferece a possibilidade de ver - para cada linha no arquivo - quem modificou uma linha mais recentemente. Esta visão é útil para encontrar quem introduziu uma mudança no comportamento de um programa ou quem deve ser questionado sobre alguma mudança ou erro no código. </para>
+
+<para
+>O &cervisia; lhe dá o acesso a este recurso, mas ele posteriormente enriquece as informações de uma maneira interativa. Você obtém uma visão anotada selecionando <menuchoice
+><guimenu
+>Ver</guimenu
+><guimenuitem
+>Anotação...</guimenuitem
+></menuchoice
+>. Outra possibilidade é pressionar o botão <guilabel
+>Anotação</guilabel
+> no <link linkend="browsinglogs"
+>Diálogo de navegação de registro</link
+>. Em <xref linkend="screenshot-annotate"/> você pode ver uma captura de tela do diálogo. </para>
+
+<figure id="screenshot-annotate" float="1">
+<title
+>Uma captura de tela do diálogo de anotação do &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="annotate.png"/></imageobject>
+<textobject
+><phrase
+>Uma captura de tela do diálogo de anotação do &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>No diálogo de anotação, você pode ver em uma janela a última versão do arquivo selecionado (ou a versão da revisão &quot;A&quot;, no caso de você ter lançado o diálogo de anotação a partir do <link linkend="browsinglogs"
+>Diálogo do navegador de registro</link
+>). Nas colunas antes do texto, você obtém algumas informações relacionadas à última mudança em cada linha. Na primeira coluna o número da linha é mostrado. Na segunda coluna você vê o nome do autor e o número da revisão. Finalmente, na terceira coluna você vê o conteúdo atual da linha. </para>
+
+<para
+>Consequentemente, quando uma determinada linha parecer estranha para você ou você encontrar um erro nela, você pode imediatamente ver quem é o responsável por aquela linha. Mas não é só isso, você pode também encontrar <emphasis
+>porque</emphasis
+> aquela linha foi mudada. Para isso, mova o cursor sobre o número de revisão respectivo. Então uma dica aparecerá que mostra a mensagem de log e a data da mudança. </para>
+
+</sect1>
+
+
+<sect1 id="browsinglogs">
+<title
+>Navegando nos Registros do &CVS;</title>
+
+<para
+>Quando você marca um arquivo na visão principal e seleciona <guimenuitem
+>Navegar Registro...</guimenuitem
+> a partir do menu <guimenu
+>Ver</guimenu
+> ou clique direito no arquivo marcado e seleciona <guimenuitem
+>Navegar Registro...</guimenuitem
+> a partir do menu de contexto, o diálogo <guilabel
+>Registro do CVS</guilabel
+> é mostrado (se você marcar mais de um, nada acontece, uma vez que o &cervisia; somente pode gerar e analisar o registro de um arquivo por vez). Este diálogo oferece funcionalidades que vão além da visualização do histórico do arquivo. Usando-o como uma navegador de versão você pode: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Ver a revisão, autor, data, ramificação, mensagem de envio, e tags para cada versão do arquivo marcado. </para
+></listitem>
+
+<listitem
+><para
+>Ver uma representação gráfica em árvore mostrando a ramificação e tags do arquivo marcado. </para
+></listitem>
+
+<listitem
+><para
+>Ver qualquer versão do arquivo marcado (com o aplicativo padrão). </para
+></listitem>
+
+<listitem
+><para
+>Obter uma visão anotada de qualquer versão do arquivo marcado. </para
+></listitem>
+
+<listitem
+><para
+>Ver as diferenças entre quaisquer par de versões do arquivo marcado, incluindo pares com a versão da cópia de trabalho atual do arquivo marcado. </para
+></listitem>
+
+<listitem
+><para
+>Criar remendos contendo as diferenças entre quaisquer par de versões do arquivo marcado, incluindo pares com a versão da cópia de trabalho atual do arquivo marcado. </para
+></listitem>
+
+</itemizedlist>
+
+<figure float="1">
+<title
+>Uma captura de tela do diálogo de navegação de registros do &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="logtree.png"/></imageobject>
+<textobject
+><phrase
+>Uma captura de tela do diálogo de navegação de registros do &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Você poderá optar por ver o histórico devolvido pelo comando <command
+>cvs log</command
+> (no <guilabel
+>Resultado do CVS</guilabel
+>) como uma <guilabel
+>Árvore</guilabel
+> ou como uma <guilabel
+>Lista</guilabel
+>. O que você preferir é, obviamente, uma questão de gosto e depende da informação em que você está interessado. A árvore é uma representação intuitiva do que foi feito nas várias ramificações ('branches') e por quais autores. Como dica, você poderá ver as mensagens de registro correspondentes. A lista é, por natureza, linear e como tal não dá uma ideia imediata das ramificações. Por outro lado, concentra-se em informações mais relevantes em um menor espaço da tela, nomeadamente a hora de cada alteração do arquivo e a primeira parte da mensagem de registro. A informação do resultado do &CVS; é completa, mas extensa e algumas vezes difícil de ler. Para minimizar estes problemas, você pode procurar texto no resultado do &CVS;, pressionando o botão <guibutton
+>Procurar...</guibutton
+>. </para>
+
+<para
+>Para obter mais informações sobre uma determinada versão, você poderá clicar nela tanto na lista como na árvore. Os campos no meio da janela serão então preenchidos com a informação completa fornecida pelo <command
+>cvs log</command
+>. Você poderá marcar duas versões, chamadas de &quot;A&quot; e &quot;B&quot;, que são relevantes se você tirar partido das funcionalidades posteriores disponibilizadas através dos botões. A versão &quot;A&quot; poderá ser escolhida com o botão esquerdo do mouse, enquanto que a &quot;B&quot; será com o botão do meio. Na lista, você poderá também navegar com as teclas dos cursores. Para poder marcar as versões &quot;A&quot; e &quot;B&quot;, use as combinações de teclas <keycombo action="simul"
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+> e <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+>, respectivamente. Se usar a janela do <guilabel
+>Resultado do CVS</guilabel
+>, você poderá clicar em <guilabel
+>Selecionar versão A</guilabel
+> ou <guilabel
+>Selecionar versão B</guilabel
+> para marcar as versões corretas. </para>
+
+<para
+>Se você pressionar o botão <guibutton
+>Anotação</guibutton
+>, você obterá um diálogo mostrando o texto do arquivo quando na revisão marcada como &quot;A&quot;. Cada linha é precedida com a informação sobre quem editou a linha pela última vez, e em que revisão isto aconteceu. Você pode obter mais informações sobre as versões das visões anotadas em <xref linkend="annotate"/>. </para>
+
+<para
+>Se você pressionar o botão <guibutton
+>Diferença</guibutton
+>, uma chamada <command
+>cvs diff</command
+> é enviada e você obterá um diálogo no qual todas as modificações entre as duas revisões marcadas serão mostradas. Se você marcar a revisão &quot;A&quot;, mas não a revisão &quot;B&quot;, o &cervisia; irá gerar as modificações entre a versão do arquivo marcada como revisão &quot;A&quot; e a versão da cópia de trabalho do arquivo. Isto permite ver as diferenças entre sua versão do arquivo e qualquer versão disponível no &CVS;. Para tornar fácil ver as mudanças, cores diferentes são usadas para marcar linhas que foram adicionadas, removidas ou simplesmente mudadas. Você pode obter mais informações sobre a visão das diferenças em <xref linkend="diff"/>. </para>
+
+<para
+>Se você pressionar o botão <guibutton
+>Criar Remendo...</guibutton
+>, você obterá um diálogo no qual você pode configurar as opções de formato para gerar um arquivo conterá todas as modificações entre as duas revisões marcadas que estão sendo exibidas. Se você marcar a revisão &quot;A&quot;, mas não a revisão &quot;B&quot;, o &cervisia; irá gerar as modificações entre a revisão marcada como &quot;A&quot; e a versão da cópia de trabalho do arquivo. Isto permite gera um remendo, ou arquivo de diferenças, entre sua versão do arquivo e qualquer versão disponível no &CVS;. Após configurar o formato do remendo no diálogo, e pressionar <guibutton
+>OK</guibutton
+>, um comando <command
+>cvs diff</command
+> é enviado para gerar as diferenças do arquivo. Um diálogo <guilabel
+>Salvar Como</guilabel
+> aparecerá. Insira o nome do arquivo e localização do arquivo de remendo que o &cervisia; gerou, para salvá-lo. Você pode obter mais informações sobre como criar remendos, e sobre as opções de formato do remendo em <xref linkend="creatingpatches"/>. </para>
+
+<para
+>Se você pressionar o botão <guibutton
+>Ver</guibutton
+>, o &cervisia; irá recuperar a revisão marcada como &quot;A&quot; e a exibirá usando o aplicativo padrão para este tipo de arquivo. </para>
+
+<para
+>Pressione o botão <guibutton
+>Fechar</guibutton
+> para deixar o diálogo e retornar à visão principal. </para>
+
+
+<para
+>Para gerar o registro que é a base para o diálogo <guilabel
+>Registro do CVS</guilabel
+>, o &cervisia; envia o seguinte comando: </para>
+
+
+<para>
+<screen
+><command
+>cvs log <replaceable
+>nome do arquivo</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+<sect1 id="browsinghistory">
+<title
+>Navegando o Histórico</title>
+
+<para
+>Se o repositório usado possui o logging habilitado o &cervisia; pode lhe apresentar um histórico de certos eventos como verificações, envios, tags, atualizações e versões. Escolha <guimenuitem
+>Histórico</guimenuitem
+> no menu <guimenu
+>Ver</guimenu
+>, e o &cervisia; enviará o comando </para>
+
+<para>
+<screen
+><command
+>cvs history -e -a</command
+></screen>
+</para>
+
+<note
+><para
+>Isto irá obter o arquivo de registro completo do servidor, &ie;, uma lista dos eventos para todos os usuários e para todos os módulos. Isto poderá ser uma quantidade enorme de dados. </para
+></note>
+
+<para
+>Agora você pode ver a lista de eventos, ordenada por data. Na segunda coluna, o tipo de evento é mostrado: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Verificação - O usuário que é exibido na coluna 'Autor' fez uma verificação de um módulo </para
+></listitem>
+
+<listitem
+><para
+>Tag - Um usuário fez uso do comando <command
+>cvs rtag</command
+>. Observe que o uso do <command
+>cvs tag</command
+> (como feito pelo comando <menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Tag/Repositório...</guimenuitem
+></menuchoice
+> do &cervisia;) não é gravado no banco de dados de histórico. Isto ocorre por razões históricas (veja a <acronym
+>FAQ</acronym
+> do &CVS;). </para
+></listitem>
+
+<listitem
+><para
+>Versão - Um usuário lançou a versão de um módulo. Atualmente, este comando é raramente usado e não tem muito valor. </para
+></listitem>
+
+<listitem
+><para
+>Atualizado, Excluído - Um usuário fez uma atualização de um arquivo que foi excluído do repositório. Como consequência, o arquivo foi excluído em sua cópia local. </para
+></listitem>
+
+<listitem
+><para
+>Atualizado, Copiado - Um usuário fez uma atualização de um arquivo. Uma nova versão foi copiada para a cópia de trabalho. </para
+></listitem>
+
+<listitem
+><para
+>Atualizado, Mesclado - Um usuário fez uma atualização de um arquivo. As modificações na versão do arquivo no repositório foram mescladas em sua cópia de trabalho. </para
+></listitem>
+
+<listitem
+><para
+>Atualizado, Conflito - Um usuário fez uma atualização de um arquivo, e um conflito com suas modificações foi detectado. </para
+></listitem>
+
+<listitem
+><para
+>Enviado, Modificado - Um usuário enviou um arquivo modificado. </para
+></listitem>
+
+<listitem
+><para
+>Enviado, Adicionado - Um usuário adicionou um arquivo e enviou-o. </para
+></listitem>
+
+<listitem
+><para
+>Enviado, Removido - Um usuário removeu um arquivo e enviou-o. </para
+></listitem>
+
+</itemizedlist>
+
+<figure id="screenshot-history" float="1">
+<title
+>Um captura de tela do diálogo de histórico do &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="history.png"/></imageobject>
+<textobject
+><phrase
+>Um captura de tela do diálogo de histórico do &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<para
+>Você pode ordenar a lista por outro critério simplesmente clicando no respectivo cabeçalho da coluna. Para ordenar as entradas do histórico da maneira que você deseja, existem várias opções de filtros ativadas pelas caixas de checagem: </para>
+
+<itemizedlist>
+<listitem
+><para
+>Mostrar eventos de envio - mostrar envios</para
+></listitem>
+<listitem
+><para
+>Mostrar eventos de verificação - mostrar verificações</para
+></listitem>
+<listitem
+><para
+>Mostrar eventos de tag - mostrar tags</para
+></listitem>
+<listitem
+><para
+>Mostrar outros eventos - mostrar eventos não incluídos acima</para
+></listitem>
+<listitem
+><para
+>Somente usuário - mostrar somente eventos causados por um determinado usuário</para
+></listitem>
+<listitem
+><para
+>Somente nomes de arquivo correspondentes - filtra os nomes de arquivo por uma expressão regular</para
+></listitem>
+<listitem
+><para
+>Somente pastas correspondentes - filtra os nomes de pasta por uma expressão regular</para
+></listitem>
+</itemizedlist>
+
+<para
+>Caracteres especiais reconhecidos pelas expressões regulares de correspondência são: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+><literal
+>x*</literal
+> corresponde a qualquer número de ocorrências do caracter <literal
+>x</literal
+>. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>x+</literal
+> corresponde a uma ou mais ocorrências do caracter <literal
+>x</literal
+>. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>x?</literal
+> corresponde a zero ou uma ocorrência do caracter <literal
+>x</literal
+>. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>^</literal
+> corresponde ao início do string. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>$</literal
+> corresponde ao final do string. </para
+></listitem>
+
+<listitem
+><para
+><literal
+>[a-cx-z]</literal
+> corresponde ao conjunto de caracteres, &eg; aqui a conjunto consiste de a,b,c,x,y,z. </para
+></listitem>
+
+</itemizedlist>
+
+</sect1>
+
+
+</chapter>
+
+<chapter id="advancedusage">
+<title
+>Uso Avançado</title>
+
+<sect1 id="updatingto">
+<title
+>Atualizando para Tag, Ramificação ou Data</title>
+
+<para
+>Ramificações de um módulo são versões paralelas deste módulo. Um bom exemplo prático do uso deste recurso é o lançamento de um projeto de software. Após uma versão principal, existem erros no código que devem ser concertados, mas as pessoas desejam adicionar novos recursos ao aplicativo também. É muito difícil fazer as duas coisas ao mesmo tempo porque novos recursos normalmente introduzem novos erros, tornando difícil rastrear os antigos. Para resolver este dilema, o &CVS; permite que você crie uma versão paralela, que nós chamaremos de &quot;ramificação da versão estável&quot;, onde você pode somente adicionar correções de erro, deixando a ramificação principal (HEAD) aberta para adição de novos recursos. </para>
+
+<para
+>Tags são usadas para marcar a versão de um projeto. O &CVS; estampa uma versão de cada arquivo com a tag, de modo que quando você importar ou atualizar para uma tag específica, você obterá sempre as mesmas versões de arquivo. Por outro lado, ao contrário das ramificações, tags não são dinâmicas: você não pode desenvolver uma tag. Tags são úteis para marcar lançamentos, grandes mudanças no código, &etc; </para>
+
+<para
+>Quando você está desenvolvendo ou seguindo o desenvolvimento de um projeto de software, você não trabalha necessariamente com a ramificação principal sempre. Após um lançamento, você pode desejar permanecer com a ramificação do lançamento por um tempo, para verificar sua relativa estabilidade, corrigir erros, traduzir as fontes, &etc; Para fazer tudo isto, você deve atualizar para a ramificação de lançamento. Todos os seus arquivos serão atualizados para o última versão dos arquivos na ramificação. Após a atualização, todos os seus novos envios serão remetidos para a nova ramificação. </para>
+
+<para
+>Além disso, se você deseja rastrear um erro que foi reportado em uma versão com tag anterior, o &CVS; oferece a possibilidade de recuperar o software como ele foi lançado, atualizado para a tag. Ao lado disso, se você deseja buscar uma versão passada do seu projeto, você pode atualizar sua cópia de trabalho para uma data específica. Isto pode ser útil se um erro foi introduzido no projeto entre dois lançamentos, e você tem uma ideia de quando ele ocorreu. Quando você atualiza para uma data ou tag, as versões de seus arquivos serão as mesmas das versões naquela data específica ou das versões estampadas pela tag. </para>
+
+<warning
+><para
+>Antes de atualizar para uma ramificação diferente ou tag, certifique-se de que você enviou todas as suas mudanças para a ramificação que você está trabalhando. Se você não estiver pronto para enviar suas mudanças, mas não quer descartá-las, não atualize para a nova ramificação, ou perderá todo o seu trabalho. Como uma alternativa, você pode fazer uma nova <link linkend="checkingout"
+>verificação</link
+>, para trabalhar em paralelo com ambas as versões. </para
+></warning>
+
+<figure id="screenshot-updatetag" float="1">
+<title
+>Uma captura de tela do diálogo de atualização de tag do &cervisia;</title>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="updatetag.png"/></imageobject>
+<textobject
+><phrase
+>Uma captura de tela do diálogo de atualização de tag do &cervisia;</phrase
+></textobject>
+</mediaobject>
+</figure>
+
+<variablelist>
+<varlistentry>
+<term
+><guilabel
+>Atualizar para ramificação</guilabel
+></term>
+<listitem
+><para
+>Selecione esta opção para atualizar para uma ramificação. Insira o nome da ramificação na caixa de texto combinada (ou pressione o botão <guilabel
+>Obter Lista</guilabel
+> para recuperar a lista de ramificações a partir do servidor &CVS;, e selecione a que você deseja na lista combinada). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Atualizar para tag</guilabel
+></term>
+<listitem
+><para
+>Selecione esta opção para atualizar para uma tag. Insira o nome da tag na caixa de texto combinada (ou pressione o botão <guilabel
+>Obter Lista</guilabel
+> para recuperar a lista de ramificações a partir do servidor &CVS;, e selecione a que você deseja na lista combinada). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Atualizar para data</guilabel
+></term>
+<listitem
+><para
+>Selecione esta opção para atualizar para uma data. No campo abaixo, você pode inserir uma grande variedade de formatos de data. Um formato possível é <literal
+>aaaa-mm-dd</literal
+> onde <literal
+>aaaa</literal
+> é o ano, <literal
+>mm</literal
+> é o mês (numérico) e <literal
+>dd</literal
+> é o dia. Alternativas são algumas frases em inglês como <literal
+>yesterday</literal
+> ou <literal
+>2 weeks ago</literal
+>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+<note
+><para
+>Ambas as opções acima indicadas tornam uma marca ou data 'fixas', &ie; você não poderá efetuar mais modificações nesses arquivos (a menos que a marca seja de uma ramificação). Para obter de volta o ramo principal, use o item do menu <menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Atualizar para o HEAD</guimenuitem
+></menuchoice
+>. </para
+></note>
+
+<para
+>O comando enviado para atualizar para uma ramificação ou tag é: <screen
+><command
+>cvs update -r <replaceable
+>tag</replaceable
+></command
+></screen>
+</para>
+
+<para
+>O comando enviado para atualizar para uma data é: <screen
+><command
+>cvs update -D <replaceable
+>data</replaceable
+></command
+></screen>
+</para>
+
+<para
+>O comando enviado para atualizar para a ramificação principal (HEAD) é: <screen
+><command
+>cvs update <option
+>-A</option
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="taggingbranching">
+<title
+>Tags e Ramificações</title>
+
+<para
+>Nós discutiremos aqui somente aspectos de tags e ramificações. Se você é somente um <emphasis
+>usuário</emphasis
+>, e não o administrador do repositório, você provavelmente não será confrontado com o problema. Se no entanto você é seu próprio administrador, você deve primeiro ler sobre problemas não técnicos que acompanham as ramificações, para ter uma ideia de quanto tempo se gasta e quantos erros ocorrem por causa da manutenção de diferentes ramificações de um projeto. O apêndice inclui algumas referências sobre este tópico. </para>
+
+<para
+>Tag simples é algo que usualmente é feito quando uma revisão é executada, de modo que você possa a qualquer momento facilmente voltar para o estado de um projeto no tempo. Tags comumente fornecem um nome consistindo do nome do projeto e o número de revisão. Por exemplo, o &cervisia; 1.0 está disponível sob a tag <literal
+>CERVISIA_1_0</literal
+>. O &cervisia; força regras estritas do &CVS; sobre o que constitui um nome válido de tag. Ele deve iniciar com uma letra e pode conter letras, dígitos, hifens e sublinhados. </para>
+
+<para
+>Normalmente, você desejará uma tag para todo o projeto (apesar do &CVS; permitir uma tag para um subconjunto somente). Para este fim, marque a pasta de nível superior na janela e escolha <menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Tag/Ramificação</guimenuitem
+></menuchoice
+>. Agora insira o nome da tag, pressione <keycap
+>Return</keycap
+> e está feito! </para>
+
+<para
+>Criar uma ramificação não é significativamente mais difícil. No diálogo de tag, habilite a caixa <guibutton
+>Criar ramificação com esta tag</guibutton
+>. Você pode também excluir uma tag existente: Selecione <menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Excluir Tag</guimenuitem
+></menuchoice
+> na janela principal. </para>
+
+<para
+>Outro aspecto da ramificação é a mesclagem de modificações de uma ramificação para a ramificação atual. Se você está fazendo isso, escolha <menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Mesclar...</guimenuitem
+></menuchoice
+>. O diálogo que aparece agora lhe oferece duas opções: </para>
+
+<para
+>Você pode mesclar todas as modificações feitas na ramificação para a ramificação atual. Neste caso, habilite a caixa de checagem <guibutton
+>Mesclar a partir da ramificação</guibutton
+> e preencha a ramificação a partir da qual mesclar. O &cervisia; então executará o comando </para>
+
+<para>
+<screen
+><command
+>cvs update <option
+>-j</option
+> <replaceable
+>tagramificação</replaceable
+></command
+></screen>
+</para>
+
+<para
+>A outra possibilidade é que você deseja mesclar somente as modificações feitas entre duas tags em uma ramificação. Isto usualmente acontece quando você mescla a partir da mesma ramificação para o tronco diversas vezes. Neste caso, habilite a caixa <guibutton
+>Mesclar modificações</guibutton
+> e insira (na ordem correta) as duas tags relevantes. Isto resultará em um comando </para>
+
+<para>
+<screen
+><command
+>cvs update <option
+>-j</option
+> <replaceable
+>tagramificação1</replaceable
+> <option
+>-j</option
+> <replaceable
+>tagramificação2</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+
+<sect1 id="watches">
+<title
+>Usando Monitores</title>
+
+<para
+>Um monitor é o nome convencional para a característica do &CVS; de notificar usuários do repositório sempre que um arquivo for mudado ou um desenvolvedor iniciar a edição de um arquivo. O uso de monitores requer que o arquivo <filename
+><envar
+>$CVSROOT</envar
+>/CVSROOT/notify</filename
+> tenha sido configurado corretamente. Isto não será discutido aqui, se você necessitar de mais informações sobre a configuração de pontos de monitoramento, leia um dos livros listados no apêndice. </para>
+
+<para
+>O principal suporte de monitores do &cervisia; possui seis itens de menu. </para>
+
+<para
+>Para adicionar um monitor para um ou diversos arquivos, use <menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Adicionar Monitor...</guimenuitem
+></menuchoice
+>. No diálogo obtido, você pode selecionar para quais tipos de eventos que o &CVS; suporta você deseja receber uma notificação. Por exemplo, se você somente quer receber notificações quando um arquivo é enviado, habilite as caixas <guibutton
+>Somente</guibutton
+> e <guibutton
+>Envios</guibutton
+>. Se você deseja obter notificações sobre qualquer evento relacionado aos arquivos marcados, habilite a caixa <guibutton
+>Todos</guibutton
+>. A linha de comando usada quando você aceita este diálogo é </para>
+
+<para>
+<screen
+><command
+>cvs watch add -a commit <replaceable
+>nomes dos arquivos</replaceable
+></command
+></screen>
+</para>
+
+<para
+>ou com uma opção similar, dependendo dos eventos que você escolher monitorar. </para>
+
+<para
+>Se você não está mais interessado em alguns arquivos, você pode remover os monitores deles. Para isto, use <menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Remover Monitor...</guimenuitem
+></menuchoice
+>. No diálogo obtido aqui, as mesmas opções no formulário preenchido para adição são oferecidas. Quando você confirmar este diálogo, o &cervisia; enviará o comando </para>
+
+<para>
+<screen
+><command
+>cvs watch remove <replaceable
+>nomes dos arquivos</replaceable
+></command
+></screen>
+</para>
+
+<para
+>possivelmente com uma opção <option
+>-a</option
+> para a escolha dos eventos. </para>
+
+<para
+>Finalmente, você pode obter uma lista das pessoas que estão monitorando um conjunto de arquivos. Escolha <menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Mostrar Monitores</guimenuitem
+></menuchoice
+>. Usar este item de menu resultará em um comando </para>
+
+<para>
+<screen
+><command
+>cvs watchers <replaceable
+>nomes dos arquivos</replaceable
+></command
+></screen>
+</para>
+
+<para
+>No cenário normal de utilização do &CVS;, cada desenvolvedor trabalha separadamente em sua cópia local sincronizada. Quando ele deseja modificar algum arquivo, ele pode apenas abri-lo em seu editor e iniciar seu trabalho. Ninguém saberá sobre este trabalho até o arquivo ser enviado. </para>
+
+<para
+>Para alguns grupos de desenvolvedores, este não é o modelo preferido de cooperação. Eles preferem ser notificados sobre alguém trabalhando em um arquivo <emphasis
+>tão logo</emphasis
+> ele inicie. Isto pode ser obtido por alguns comando &CVS; posteriores. Antes de você iniciar a edição de um arquivo, selecione-o na janela principal do &cervisia; e escolha <menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Editar Arquivos</guimenuitem
+></menuchoice
+>. Isto executará o comando </para>
+
+<para>
+<screen
+><command
+>cvs edit <replaceable
+>nomes dos arquivos</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Isto enviará uma notificação para todos que tem configurado um monitor de <literal
+>edição</literal
+> no arquivo. Isto também registrará também você como um <emphasis
+>editor</emphasis
+> do arquivo. Você pode obter uma lista de todos os editores de um determinado arquivo usando <menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Mostrar Editores</guimenuitem
+></menuchoice
+>. Isto é equivalente a digitar na linha de comando </para>
+
+<para>
+<screen
+><command
+>cvs editors <replaceable
+>nomes dos arquivos</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Uma sessão de edição é automaticamente terminada quando você envia o arquivo afetado. Neste momento, uma notificação de <literal
+>cancelar edição</literal
+> é enviado para todas as pessoas que tem registrado o respectivo monitor no arquivo. É claro, algumas vezes você pode não desejar sincronizar o arquivo, mas aborta a sessão de edição e reverte para a versão anterior do arquivo. Isto é feito usando <menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Cancelar Edição de Arquivos</guimenuitem
+></menuchoice
+>. Observe que o &cervisia; não lhe pedirá por uma confirmação! Isto significa que se você usar este item de menu, todo seu trabalho feito desde o uso do <menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Editar Arquivos</guimenuitem
+></menuchoice
+> será perdido. Precisamente, o &cervisia; usa a linha de comando </para>
+
+<para>
+<screen
+><command
+>echo y | cvs unedit <replaceable
+>nomes dos arquivos</replaceable
+></command
+></screen>
+</para>
+
+<para
+>Até agora, só foi discutido o caso em que as edições e fins de edições são usadas voluntariamente pelos programadores. Além disso, o &CVS; suporta um modelo que <emphasis
+>obriga</emphasis
+> ao uso desses comandos. O comando responsável por mudar para esse modelo é o <command
+>cvs watch on</command
+>, o qual não será muito mais detalhado, porque é usado, na maior parte dos casos, pelo administrador do repositório. Contudo, a parte importante do ponto de vista do programador é que, quando o projeto obrigar às edições, as cópias de trabalho são extraídas <emphasis
+>apenas com permissões de leitura</emphasis
+>. Isso significa que você não poderá editar um arquivo por padrão (a menos que use truques do tipo do <command
+>chmod</command
+>). Só quando você usar a opção <menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Editar Arquivos</guimenuitem
+></menuchoice
+>, é que o arquivo poderá ser alterado. Ele será tornado de novo acessível apenas para leitura quando você enviar as alterações ao arquivo ou quando usar a opção <menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Cancelar Edição dos Arquivos</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>A interface do editor do &cervisia; lhe auxilia com projetos que forçam monitores também de diferentes maneiras. Se você apenas iniciou um editor com um arquivo apenas para leitura com um duplo-clique nele ou usando <menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Editar</guimenuitem
+></menuchoice
+>, você pode não ser capaz de salvar suas modificações posteriormente. Isto tem sua própria razão. Sempre que você deseja mudar um arquivo, você deve executar <command
+>cvs edit</command
+> antes, de modo que todas as pessoas monitorando o arquivo recebem uma notificação que você está trabalhando nele. </para>
+
+<para
+>Neste caso, é conveniente habilitar a opção <menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Executar cvs edit Automaticamente Quando Necessário</guimenuitem
+></menuchoice
+>. Agora, sempre que você editar um arquivo com um duplo clique nele, o &cervisia; executará <command
+>cvs edit</command
+> antes do editor ser executado. Então você poderá editar seu arquivo normalmente. Quando tiver terminado seu trabalho, envie seus arquivos, e os arquivos enviados serão somente leitura novamente. </para>
+
+</sect1>
+
+
+<sect1 id="locking">
+<title
+>Travando</title>
+
+<para
+>O modelo de desenvolvimento seguido quando o &CVS; é usado é chamado <emphasis
+>verificações não reservadas</emphasis
+>. Cada desenvolvedor tem sua própria cópia local onde ele pode editar arquivos como desejar. Quando as características de monitoramento - como <command
+>cvs edit</command
+> - são usada, múltiplos desenvolvedores podem trabalhar em arquivos sincronizadamente. Mudanças feitas por um desenvolvedor diferente são mescladas para sua cópia local quando uma atualização é executada. </para>
+
+<para
+>Outros sistemas de controle de versões - como o <acronym
+>RCS</acronym
+> e o <application
+>SourceSafe</application
+> usam um modelo diferente. Sempre que um editor quiser editar um arquivo, ele terá que <emphasis
+>bloqueá-lo</emphasis
+>. Só um usuário poderá bloquear um determinado arquivo de cada vez. Quando ele terminar a edição, o bloqueio é retirado. Por um lado, com este modelo, os conflitos nunca poderão acontecer. Por outro lado, dois programadores não poderão trabalhar no mesmo arquivo ao mesmo tempo, mesmo quando as suas alterações não afetam um ao outro. Isto poderá tornar-se uma restrição ou impedimento. Não serão aqui discutidos os benefícios organizacionais de ambas as abordagens. Contudo, ainda que o &CVS; tenha algum suporte para bloquear arquivos, não é a forma preferida de lidar com o &CVS;. Você não deverá usar estas funcionalidades, a menos que tenha certeza que o seu gerenciador de projeto as permite. </para>
+
+<para
+>Com o &cervisia;, você trava arquivos como se segue. Selecione os arquivos desejados na janela principal. Então escolha <menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Travar Arquivos</guimenuitem
+></menuchoice
+>. Isto executa o comando </para>
+
+<para>
+<screen
+><command
+>cvs admin -l <replaceable
+>nomes dos arquivos</replaceable
+></command
+></screen>
+</para>
+
+<para
+>O efeito reverso é obtido usando <menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Destravar Arquivos</guimenuitem
+></menuchoice
+>. Isto executa o comando</para>
+
+<para>
+<screen
+><command
+>cvs admin -u <replaceable
+>nomes dos arquivos</replaceable
+></command
+></screen>
+</para>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="customization">
+<title
+>Personalizando o &cervisia;</title>
+
+<para
+>O &cervisia; pode ser personalizado de diversas maneiras para suas necessidades e preferências. Algumas opções que você pode desejar mudar regularmente estão disponíveis diretamente no menu <guimenu
+>Configurações</guimenu
+>. </para>
+
+
+<sect1 id="customize-general">
+<title
+>Geral</title>
+
+<variablelist>
+
+<varlistentry id="customize-username">
+<term
+><guilabel
+>Nome de usuário para o editor de registro de mudanças:</guilabel
+></term>
+<listitem
+><para
+>Quando você utilizar o item do menu <menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Inserir Registro do ChangeLog...</guimenuitem
+></menuchoice
+>, será adicionado um novo item ao arquivo ChangeLog com a data atual e o seu nome de usuário. Normalmente, é considerado uma boa prática inserir o seu nome completo e o seu endereço de e-mail em cada um dos itens do ChangeLog. O &cervisia; adiciona automaticamente o seu nome completo e o endereço de e-mail aqui. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-cvspath">
+<term
+><guilabel
+>Caminho para o executável do CVS, ou 'cvs':</guilabel
+></term>
+<listitem
+><para
+>Aqui você pode configurar o nome (ou caminho) para o cliente de linha de comando <command
+>cvs</command
+>. Por padrão, o executável do &CVS; encontrado em seu<envar
+>$PATH</envar
+> é usado pelo &cervisia;. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="customize-diff">
+<title
+>Visualizador de Diferenças</title>
+
+<variablelist>
+
+<varlistentry id="customize-context">
+<term
+><guilabel
+>Número das linhas de contexto no diálogo de diferenças:</guilabel
+></term>
+<listitem
+><para
+>Para o diálogo de diferenças o &cervisia; usa a opção <option
+>-U</option
+> para o <command
+>diff</command
+>. Isto faz com que o <command
+>diff</command
+> mostre somente um número limitado de linhas ao redor de cada região de diferença (linhas de contexto). Aqui você pode configurar o argumento para o <option
+>-U</option
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-diffopt">
+<term
+><guilabel
+>Opções adicionais para o cvs diff:</guilabel
+></term>
+<listitem
+><para
+>Aqui você pode adicionar argumentos suplementares ao <command
+>diff</command
+>. Um exemplo popular é <option
+>-b</option
+> que faz com que o <command
+>diff</command
+> ignore mudanças na quantidade de espaços em branco. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-tabwidth">
+<term
+><guilabel
+>Largura da tabulação no diálogo de diferenças:</guilabel
+></term>
+<listitem
+><para
+>No diálogo de diferenças, caracteres de tabulação presentes em seu arquivo ou na saída do comando <command
+>diff</command
+> são expandidos para um número fixo de caracteres de espaço. Por padrão, cada tabulação é substituída por oito espaços, mas aqui você pode configurar um número diferente. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-difffrontend">
+<term
+><guilabel
+>Interface externa do diff:</guilabel
+></term>
+<listitem
+><para
+>Quando você usar qualquer uma das funcionalidades que mostram a janela das diferenças, como a <menuchoice
+><guimenu
+>Ver</guimenu
+><guimenuitem
+>Diferenças do Repositório...</guimenuitem
+></menuchoice
+>, o &cervisia; invoca a sua interface interna do 'diff'. Se você preferir uma diferente como a do &kompare;, do <application
+>TkDiff</application
+> ou do <application
+>xxdiff</application
+>, insira o nome e a localização do arquivo aqui. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="customize-status">
+<title
+>Estado</title>
+
+<variablelist>
+
+<varlistentry id="customize-startstatus-remote">
+<term
+><guilabel
+>Ao abrir uma área local de um repositório remoto, iniciar um comando Arquivo-&gt;Estado automaticamente</guilabel
+></term>
+<listitem
+><para
+>Quando você habilita esta opção, o comando <menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Estado</guimenuitem
+></menuchoice
+> é iniciado sempre que você abre uma área local de um repositório remoto. Este comando pode demorar algum tempo e também necessita de uma conexão com o servidor para repositórios remotos (tornando-o indisponível para uso off-line). </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-startstatus-local">
+<term
+><guilabel
+>Ao abrir uma área local de um repositório local, iniciar um comando Arquivo-&gt;Estado automaticamente</guilabel
+></term>
+<listitem
+><para
+>Quando você habilita esta opção, o comando <menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Estado</guimenuitem
+></menuchoice
+> é iniciado sempre que você abre uma área local de um repositório local. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="customize-advanced">
+<title
+>Avançado</title>
+
+<variablelist>
+
+<varlistentry id="customize-timeout">
+<term
+><guilabel
+>Tempo limite após o qual um diálogo de progresso aparece (em ms):</guilabel
+></term>
+<listitem
+><para
+>Praticamente todos os comando &CVS; iniciados em uma cópia local que se estendem a um repositório remoto necessitam de uma conexão para o servidor &CVS;. Isto é afetado pelos retardos da conexão da rede ou uma sobrecarga no servidor. Por esta razão, para comandos como <menuchoice
+><guimenu
+>Ver</guimenu
+><guimenuitem
+>Diferença para Repositório...</guimenuitem
+></menuchoice
+> o &cervisia; abre um diálogo que indica que o comando ainda está rodando e que lhe permite abortá-lo. Além disso, este diálogo é usado para mostrar mensagens de erro do &CVS;. Com este diálogo deve aparecer após algum tempo, ele é mostrado somente após um determinado limite de tempo que é de 4 segundos por padrão. Aqui você pode mudar este valor. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-compression">
+<term
+><guilabel
+>Nível de compressão padrão:</guilabel
+></term>
+<listitem
+><para
+>O cliente <command
+>cvs</command
+> comprime arquivos e remendos quando eles são transferidos pela rede. Com a opção de linha de comando <option
+>-z</option
+>, o nível de compressão pode ser configurado. Você pode configurar o &cervisia; para usar esta opção na configuração do nível. O valor configurado aqui é usado somente como padrão; adicionalmente existe uma configuração por repositório disponível em <menuchoice
+><guimenu
+>Repositório</guimenu
+><guimenuitem
+>Repositórios...</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-sshagent">
+<term
+><guilabel
+>Utilizar um processo de agente ssh em execução ou iniciar um novo</guilabel
+></term>
+<listitem
+><para
+>Assinale esta opção se você usar os <link linkend="rsh"
+>repositórios 'ext' (&rsh;)</link
+>, a linha de comando &ssh; para comunicar com o repositório e o <application
+>ssh-agent</application
+> para gerenciar as suas chaves. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+
+<sect1 id="customize-look">
+<title
+>Aparência</title>
+
+<variablelist>
+
+<varlistentry id="customize-protocolfont">
+<term
+><guilabel
+>Fonte para Janela de Protocolo...</guilabel
+></term>
+<listitem
+><para
+>Pressione este botão para abrir o diálogo <guilabel
+>Selecionar Fonte</guilabel
+>, para configurar a fonte usada na janela de protocolo (esta é a janela que mostra a saída do cliente <command
+>cvs</command
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-annotatefont">
+<term
+><guilabel
+>Fonte para a visão de anotações...</guilabel
+></term>
+<listitem
+><para
+>Pressione este botão para abrir o diálogo <guilabel
+>Selecionar Fonte</guilabel
+>, para configurar a fonte usada na <link linkend="annotate"
+>visão anotada</link
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-difffont">
+<term
+><guilabel
+>Fonte para Visão das Diferenças...</guilabel
+></term>
+<listitem
+><para
+>Pressione este botão para abrir o diálogo <guilabel
+>Selecionar Fonte</guilabel
+>, para configurar a fonte usada no <link linkend="diff"
+>diálogo de diferenças</link
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-colors">
+<term
+><guilabel
+>Cores</guilabel
+></term>
+<listitem
+><para
+>Pressione os botões coloridos para abrir o diálogo <guilabel
+>Selecionar Cor</guilabel
+>, para configurar a cor usada para <guilabel
+>Conflito</guilabel
+>, <guilabel
+>Mudado Localmente</guilabel
+>, ou <guilabel
+>Mudado Remotamente</guilabel
+> na visão principal ou <guilabel
+>Diferença de mudança</guilabel
+>, <guilabel
+>Diferença de inserção</guilabel
+> ou <guilabel
+>Diferença de exclusão</guilabel
+> na interface embutida do &cervisia; para o diff. </para
+></listitem>
+</varlistentry>
+
+<varlistentry id="customize-splitter">
+<term
+><guilabel
+>Dividir janela principal horizontalmente</guilabel
+></term>
+<listitem
+><para
+>A janela principal do &cervisia; é normalmente dividida verticalmente em uma janela com a árvore de arquivos e uma com a saída do &CVS;. Alternativamente, você pode arranjá-las horizontalmente. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+</chapter>
+
+
+<chapter id="appendix">
+<title
+>Apêndice</title>
+
+<sect1 id="ignoredfiles">
+<title
+>Arquivos Ignorados</title>
+
+<para
+>Na sua árvore de arquivos principal, o &cervisia; não mostra todos os arquivos que existem de fato. Isto é análogo ao <command
+>cvs</command
+> propriamente dito, e evita a confusão causada pelos itens desinteressantes como os arquivos-objeto. O &cervisia; tenta imitar o comportamento do <command
+>cvs</command
+> o máximo possível, &ie; ele obtém as listas de arquivos ignorados nos seguintes locais: </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>Um lista estática de entradas que incluem coisas como <literal role="extension"
+>*.o</literal
+> e <filename
+>core</filename
+>. Para detalhes, veja a documentação do &CVS;. </para
+></listitem>
+<listitem
+><para
+>O arquivo <filename
+><envar
+>$HOME</envar
+>/.cvsignore</filename
+>. </para
+></listitem>
+
+<listitem
+><para
+>A variável de ambiente <envar
+>$CVSIGNORE</envar
+>. </para
+></listitem>
+<listitem
+><para
+>O arquivo <filename
+>.cvsignore</filename
+> na respectiva pasta. </para
+></listitem>
+
+</itemizedlist>
+
+<para
+>O próprio <command
+>cvs</command
+> adicionalmente procura por entradas em <filename
+><envar
+>$CVSROOT</envar
+>/CVSROOT/cvsignore</filename
+>, mas este é um arquivo do servidor, e o &cervisia; pode não ser capaz de iniciá-lo estando offline. Se você estiver trabalhando com um grupo que prefere usar uma lista de arquivos para ignorar no servidor, é provavelmente uma boa ideia dar uma olhada em quais padrões estão listados nele e colocá-los no arquivo <filename
+>.cvsignore</filename
+> em sua pasta pessoal. </para>
+
+</sect1>
+
+
+<sect1 id="information">
+<title
+>Informações Adicionais e Suporte</title>
+
+<itemizedlist>
+
+<listitem
+><para
+>O &CVS; vem com um conjunto completo de documentação no formato de páginas de informação, conhecido como "O Cederqvist". Se for instalado corretamente, você poderá navegar nele, digitando <userinput
+>info:/cvs</userinput
+> na barra de localização do &konqueror;, ou você poderá apenas escolher a opção <menuchoice
+><guimenu
+>Ajuda</guimenu
+><guimenuitem
+>Manual do CVS</guimenuitem
+></menuchoice
+> no &cervisia;. Uma versão 'online' em &HTML; do Cederqvist está disponível <ulink url="http://ximbiot.com/cvs/manual/"
+>na Web</ulink
+>. </para>
+
+<para
+>Como este livro é mantido junto com o &CVS;, ele é normalmente a referência mais atualizada. No entanto eu recomendo considerar outras documentações para aprender a usar o &CVS;, particularmente as seguintes. </para
+></listitem>
+
+<listitem
+><para
+>O Karl Fogel escreveu o excelente livro <ulink url="http://cvsbook.red-bean.com/index.html"
+>Open Source Development with &CVS;</ulink
+> (Programação Open-Source com o CVS). Mais da metade deste livro fala sobre o processo de desenvolvimento de 'software' de código aberto. A outra parte é uma documentação técnica sobre o &CVS;. Felizmente, a parte técnica do livro foi tornada livre para distribuição sob a GPL, de modo a que você possa obter uma versão em &HTML; dela. Uma lista com a errata está disponível na página Web acima mencionada. </para
+></listitem>
+
+<listitem
+><para
+>Versões &CVS; são discutidas em uma <ulink url="http://mail.gnu.org/mailman/listinfo/info-cvs"
+>lista de discussão</ulink
+> dedicada. </para
+></listitem>
+
+<listitem
+><para
+>Existe um grupo USENET <literal
+>comp.software.config-mgmt</literal
+> dedicado ao gerenciamento da configuração em geral. O &CVS; é somente um tópico marginal neste grupo, mas ao menos pode ser interessante para discutir os méritos de vários sistemas de controle de revisão comparados ao &CVS;. </para
+></listitem>
+
+<listitem
+><para
+>Por fim, mas não menos importante, existe uma (de baixo tráfico) <ulink url="http://lists.sourceforge.net/mailman/listinfo/cervisia-user"
+>lista de discussão do &cervisia;</ulink
+>. </para
+></listitem>
+
+</itemizedlist>
+
+</sect1>
+
+
+<sect1 id="commandreference">
+<title
+>Referência de comandos</title>
+
+<!-- File Menu -->
+<sect2 id="menufile">
+
+<title
+>Menu Arquivo</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Abrir Cópia Local...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Abre uma área local na janela principal. Veja <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arquivo</guimenu
+><guisubmenu
+>Áreas Locais Recentes</guisubmenu
+> </menuchoice
+></term>
+<listitem
+><para
+>Abre uma das cópias locais que foi usada recentemente. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Inserir Entrada ChangeLog...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Abre o editor de ChangeLog, preparado de modo que você possa adicionar uma nova entrada com a data atual. Veja <xref linkend="committingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Atualizar</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Executa um 'cvs update' nos arquivos selecionados e muda o estado e número de revisão na lista de acordo. Veja <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F5</keycap
+></shortcut
+> <guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Estado</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Executa um 'cvs update' nos arquivos selecionados e muda o estado e número de revisão na lista de acordo. Veja <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Editar</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Abre o arquivo selecionado no editor padrão do &kde; para o tipo de arquivo selecionado. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Resolver...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Abre um diálogo para o arquivo selecionado que lhe permite resolver conflitos de mesclagem existentes. Veja <xref linkend="resolvingconflicts"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>#</keycap
+></shortcut
+> <guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Enviar...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Permite-lhe enviar os arquivos selecionados. Veja <xref linkend="committingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Ins</keycap
+></shortcut
+> <guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Adicionar ao Repositório...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Permite-lhe adicionar os arquivos selecionados ao repositório. Veja <xref linkend="addingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Adicionar Binário...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Permite-lhe adicionar os arquivos selecionados ao repositório como binários (<command
+>cvs add<option
+>-kb</option
+></command
+>). Veja <xref linkend="addingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Del</keycap
+></shortcut
+> <guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Remover do Repositório...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Permite-lhe remover os arquivos selecionados do repositório. Veja <xref linkend="removingfiles"/>. </para
+></listitem>
+</varlistentry>
+
+<!--TODO: add the revert action to the working with files chapter -->
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Reverter</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Descarta qualquer mudança local que você tenha feito nos arquivos selecionados e reverte para a versão do repositório (Opção <option
+>-C</option
+> para o <command
+>cvs update</command
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Sair</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Sai do &cervisia;. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- View Menu -->
+<sect2 id="menuview">
+
+<title
+>O menu Exibir</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Escape</keycap
+></shortcut
+> <guimenu
+>Ver</guimenu
+><guimenuitem
+>Parar</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Cancela qualquer subprocesso em execução. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Ver</guimenu
+><guimenuitem
+>Navegar Log...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Mostra o navegador de registro das versões do arquivo selecionado. Veja <xref linkend="browsinglogs"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Ver</guimenu
+><guimenuitem
+>Anotações...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Mostra uma visão anotada com o arquivo selecionado, &ie;, uma visão onde você poderá ver para cada linha quem foi o última autor a alterá-la. Veja a seção <xref linkend="annotate"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Ver</guimenu
+><guimenuitem
+>Diferença para Repositório (BASE)...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Mostra as diferenças entre o arquivo selecionado na cópia local e a revisão da última atualização (BASE). Veja <xref linkend="diff"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Ver</guimenu
+><guimenuitem
+>Diferença para Repositório (HEAD)...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Mostra as diferenças entre o arquivo selecionado na cópia local e a revisão da última atualização (HEAD). Veja <xref linkend="diff"/>. </para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ver</guimenu
+><guimenuitem
+>Última Mudança...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Mostra as diferenças entre a revisão do arquivo selecionado que você atualizou por último (BASE) e a revisão anterior. Veja <xref linkend="diff"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ver</guimenu
+><guimenuitem
+>Histórico...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Mostra o histórico &CVS; como reportado pelo servidor. Veja <xref linkend="browsinghistory"/>. </para
+></listitem>
+</varlistentry>
+
+<!--TODO: add hide menus to mainscreen section-->
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ver</guimenu
+><guimenuitem
+>Ocultar Todos Arquivos</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Determina se somente pastas são mostradas na visão em árvore principal. Veja <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ver</guimenu
+><guimenuitem
+>Ocultar Arquivos Não Modificados</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Determina se arquivos desconhecidos e atualizados são ocultos na visão em árvore principal. Veja <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ver</guimenu
+><guimenuitem
+>Ocultar Arquivos Removidos</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Determina se os arquivos removidos são ocultos na visão em árvore principal. Veja <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ver</guimenu
+><guimenuitem
+>Ocultar Arquivos Não-CVS</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Determina se os arquivos que não estejam no &CVS; ficam ocultos na árvore principal. Veja em <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ver</guimenu
+><guimenuitem
+>Ocultar Pastas Vazias</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Determina se pastas sem entradas visíveis são ocultas na visão em árvore principal. Veja <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ver</guimenu
+><guimenuitem
+>Expandir Árvore de Arquivos</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Abre todos os níveis na árvore de arquivos de modo que você possa ver todos os arquivos e pastas. Veja <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ver</guimenu
+><guimenuitem
+>Colapsar Árvore de Arquivos</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Fecha todas as ramificações na árvore de arquivos. Veja <xref linkend="mainscreen"/>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- Advanced Menu -->
+<sect2 id="menuadvanced">
+
+<title
+>O menu Avançado</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Tag/Ramificação...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Cria tags ou ramificações para os arquivos selecionados. Veja <xref linkend="taggingbranching"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Excluir Tag...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Remove uma tag fornecida dos arquivos selecionados. Veja <xref linkend="taggingbranching"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Atualizar para Tag/Data...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Traz os arquivos selecionados para uma tag ou data fornecida, pregando-os. Veja <xref linkend="updatingto"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Atualizar para HEAD...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Traz os arquivos selecionados para a revisão HEAD respectiva. Veja <xref linkend="updatingto"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Mesclar...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Mescla uma ramificação fornecida ou as modificações entre duas tags nos arquivos selecionados. Veja <xref linkend="taggingbranching"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Adicionar Monitor...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Adiciona um monitor para um conjunto de eventos dos arquivos selecionados. Veja <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Remover Monitor...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Remove um monitor para um conjunto de eventos dos arquivos selecionados. Veja <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Mostrar Monitores</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Lista os monitores dos arquivos selecionados. Veja <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Editar Arquivos</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Executa um <command
+>cvs edit</command
+> nos arquivos selecionados. Veja <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Cancelar Edição dos Arquivos</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Executa um <command
+>cvs unedit</command
+> nos arquivos selecionados. Veja <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Mostrar Editores</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Executa um <command
+>cvs editors</command
+> nos arquivos selecionados. Veja <xref linkend="watches"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Travar Arquivos</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Trava os arquivos selecionados. Veja <xref linkend="locking"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Destravar Arquivos</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Destrava os arquivos selecionados. Veja <xref linkend="locking"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Avançado</guimenu
+><guimenuitem
+>Criar Remendo Contra Repositório...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Cria um remendo a partir das modificações em sua cópia local. Veja <xref linkend="creatingpatches"/>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- Repository Menu -->
+<sect2 id="menurepository">
+
+<title
+>O menu Repositório</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Repositório</guimenu
+><guimenuitem
+>Criar...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Abre um diálogo que lhe permite criar um novo repositório local. Veja <xref linkend="accessing-repository"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Repositório</guimenu
+><guimenuitem
+>Verificar...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Abre um diálogo que lhe permite verificar um módulo a partir de um repositório. Veja <xref linkend="checkingout"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Repositório</guimenu
+><guimenuitem
+>Importar...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Abre um diálogo que lhe permite importar um pacote para o repositório. Veja <xref linkend="importing"/>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Repositório</guimenu
+><guimenuitem
+>Repositórios...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Configura uma lista de repositórios que você frequentemente usa e como acessá-los. Veja <xref linkend="accessing-repository"/>. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- Settings Menu -->
+<sect2 id="menuoptions">
+<title
+>O menu Configurações</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Mostrar Barra de Ferramentas</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Determina se a barra de ferramentas é exibida. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Criar Pastas ao Atualizar</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Determina se atualizações criam pastas na cópia local quando elas ainda não existirem (Opção <option
+>-d</option
+> do <command
+>cvs update</command
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Excluir Pastas Vazias ao Atualizar</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Determina se atualizações removem pastas vazias na cópia local (Opção <option
+>-P</option
+> do <command
+>cvs update</command
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Atualizar Recursivamente</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Determina se atualizações são recursivas (Opção <option
+>-r</option
+> do <command
+>cvs update</command
+>). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Enviar &amp; Remover Recursivamente</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Determina se os envios e exclusões são recursivos (Opção <option
+>-r</option
+> do <command
+>cvs add</command
+>, <command
+>cvs remove</command
+> respectivamente.). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Executar cvs edit Automaticamente Quando Necessário</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Determina se o <command
+>cvs edit</command
+> é executado automaticamente sempre que você edita um arquivo. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Configurar atalhos...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Abre uma janela para configurar as combinações de teclas (atalhos). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Configurar barras de ferramentas...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Abre um diálogo para configuração das barras de ferramentas do &cervisia;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Configurar o &cervisia;...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Abre um diálogo para personalização do &cervisia;. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<!-- Help -->
+<sect2 id="menuhelp">
+<title
+>O menu Ajuda</title>
+&help.menu.documentation; <para
+>Além dos itens normais do menu <guimenu
+>Ajuda</guimenu
+> para o &kde;, descritos acima, você irá encontrar este item adicional:</para>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Ajuda</guimenu
+><guimenuitem
+>Manual do CVS</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Abre as páginas de informação do &CVS; no sistema de ajuda do &kde;. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="credits-and-license">
+<title
+>Créditos e licença</title>
+<para
+>Direitos autorais do programa</para>
+<itemizedlist>
+<listitem
+><para
+>1999-2002 &Bernd.Gehrmann; &Bernd.Gehrmann.mail;</para
+></listitem>
+<listitem
+><para
+>2002-2008 os autores do &cervisia;</para
+></listitem>
+</itemizedlist>
+
+<para
+>Documentação com 'Copyright' 1999-2002 de &Bernd.Gehrmann; &Bernd.Gehrmann.mail; e 2004 Carlos Woelz carloswoelz@imap-mail.com</para>
+
+<para
+>Tradução de Marcus Gama <email
+>marcus.gama@gmail.com</email
+></para
+> 
+&underFDL; &underGPL; </chapter>
+</book>
