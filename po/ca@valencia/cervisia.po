@@ -234,7 +234,7 @@ msgstr ""
 #: cervisiapart.cpp:246
 #, kde-format
 msgid "&Update"
-msgstr "Act&ualisa"
+msgstr "Act&ualitza"
 
 #: cervisiapart.cpp:250
 #, kde-format
@@ -285,7 +285,7 @@ msgstr "Publica els fitxers seleccionats"
 #: cervisiapart.cpp:284
 #, kde-format
 msgid "&Add to Repository..."
-msgstr "&Afig al repositori..."
+msgstr "Afi&g al repositori..."
 
 #: cervisiapart.cpp:287
 #, kde-format
@@ -466,7 +466,7 @@ msgstr "Elimina una etiqueta dels fitxers seleccionats"
 #: cervisiapart.cpp:415
 #, kde-format
 msgid "&Update to Tag/Date..."
-msgstr "&Actualitza a etiqueta/data..."
+msgstr "Act&ualitza a etiqueta/data..."
 
 #: cervisiapart.cpp:418
 #, kde-format
@@ -498,7 +498,7 @@ msgstr ""
 #: cervisiapart.cpp:436
 #, kde-format
 msgid "&Add Watch..."
-msgstr "&Afig un vigilant..."
+msgstr "Afi&g un vigilant..."
 
 #: cervisiapart.cpp:439
 #, kde-format
@@ -625,7 +625,7 @@ msgstr "Configura una llista dels repositoris que utilitzeu regularment"
 #: cervisiapart.cpp:530
 #, kde-format
 msgid "Hide All &Files"
-msgstr "Oculta tots els &fitxers"
+msgstr "Oculta tots els fi&txers"
 
 #: cervisiapart.cpp:533
 #, kde-format
@@ -697,7 +697,7 @@ msgstr ""
 #: cervisiapart.cpp:581
 #, kde-format
 msgid "&Update Recursively"
-msgstr "Act&ualisa recursivament"
+msgstr "Act&ualitza recursivament"
 
 #: cervisiapart.cpp:584
 #, kde-format
@@ -935,7 +935,7 @@ msgstr "Ix de Cervisia"
 #: cervisiashellui.rc:4 cervisiaui.rc:4
 #, kde-format
 msgid "&File"
-msgstr "&Fitxer"
+msgstr "Fi&txer"
 
 #. i18n: ectx: Menu (settings)
 #: cervisiashellui.rc:7 cervisiaui.rc:70
@@ -1126,7 +1126,7 @@ msgstr "&Diff"
 #: commitdialog.cpp:86
 #, kde-format
 msgid "Commit the following &files:"
-msgstr "Publica els següents &fitxers:"
+msgstr "Publica els següents fi&txers:"
 
 #: commitdialog.cpp:96
 #, kde-format
@@ -1433,7 +1433,7 @@ msgstr "&Llista"
 #: logdialog.cpp:99
 #, kde-format
 msgid "CVS &Output"
-msgstr "&Eixida de CVS"
+msgstr "Ei&xida de CVS"
 
 #: logdialog.cpp:106
 #, kde-format
@@ -1501,7 +1501,7 @@ msgstr "Esta revisió s'utilitza com a segon element d'una operació de «diff»
 #: logdialog.cpp:225
 #, kde-format
 msgid "&View A"
-msgstr "&Visualitza A"
+msgstr "Vi&sualitza A"
 
 #: logdialog.cpp:226
 #, kde-format
@@ -1867,7 +1867,7 @@ msgstr "&Opcions addicionals per a «diff» de cvs:"
 #: settingsdialog.cpp:266
 #, kde-format
 msgid "Tab &width in diff dialog:"
-msgstr "&Amplària de la pestanya en el diàleg de «diff»:"
+msgstr "A&mplària de la pestanya en el diàleg de «diff»:"
 
 #: settingsdialog.cpp:274
 #, kde-format
