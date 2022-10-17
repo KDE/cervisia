@@ -1101,7 +1101,7 @@ msgstr ""
 #: checkoutdialog.cpp:325
 #, kde-format
 msgid "A branch must be specified for export."
-msgstr "S'ha d'especificar una branca que s'haja d'exportar."
+msgstr "S'ha d'especificar una branca per a exportar."
 
 #: checkoutdialog.cpp:374
 #, kde-format
@@ -1586,7 +1586,7 @@ msgstr "data: %1; autor: %2"
 #: main.cpp:166
 #, kde-format
 msgid "The sandbox to be loaded"
-msgstr "L'entorn de proves que es carregarà"
+msgstr "L'entorn de proves que s'ha de carregar"
 
 #: main.cpp:167
 #, kde-format
