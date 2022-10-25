@@ -1490,7 +1490,7 @@ msgid ""
 "This revision is used when you click Annotate.\n"
 "It is also used as the first item of a Diff operation."
 msgstr ""
-"Esta revisió s'utilitza quan feu clic a Anota.\n"
+"Esta revisió s'utilitza quan feu clic en Anota.\n"
 "També s'utilitza com a primer element d'una operació de «diff»."
 
 #: logdialog.cpp:212
