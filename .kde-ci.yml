@@ -11,7 +11,7 @@ Dependencies:
     'frameworks/kinit': '@stable'
     'frameworks/kiconthemes': '@stable'
     'frameworks/knotifications': '@stable'
-    'frameworks/kwidgetaddons': '@stable'
+    'frameworks/kwidgetsaddons': '@stable'
     'frameworks/kitemviews': '@stable'
     'frameworks/kdesu': '@stable'
     'frameworks/ktextwidgets': '@stable'
