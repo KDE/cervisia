@@ -1,55 +1,54 @@
-# translation of cervisia.po to Basque
-# translation of cervisia.po to Euskara
-# translation of cervisia.po to
-# translation of cervisia.po to basque
-# Copyright (C) 2003, 2005, 2006 Free Software Foundation, Inc.
+# Translation for cervisia.po to Euskara/Basque (eu).
+# Copyright (C) 2003-2023 This file is copyright:
+# This file is distributed under the same license as the cervisia package.
+# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
+#
+# Translators:
 # Marcos  <marcos@euskalgnu.org>, 2003, 2005, 2006.
 # Ion Gaztañaga <ion_g_m@hotmail.com>, 2005.
 # Ion Gaztañaga <igaztanaga@gmail.com>, 2005.
-#
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-14 00:48+0000\n"
-"PO-Revision-Date: 2006-02-10 09:42+0100\n"
-"Last-Translator: Marcos <marcos@euskalgnu.org>\n"
-"Language-Team: basque <itzulpena@euskalgnu.org>\n"
+"PO-Revision-Date: 2023-01-03 10:47+0100\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
+"Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: Lokalize 22.12.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Ion Gaztañaga"
+msgstr "Ion Gaztañaga,Iñigo Salvador Azurmendi"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "igaztanaga@gmail.com"
+msgstr "igaztanaga@gmail.com,xalba@ni.eus"
 
 #: addignoremenu.cpp:34
 #, kde-format
 msgid "Add to Ignore List"
-msgstr ""
+msgstr "Gehitu ezikusteko zerrendara"
 
 #: addignoremenu.cpp:65
-#, fuzzy, kde-format
-#| msgid "&Ignore files:"
+#, kde-format
 msgid "Ignore File"
 msgid_plural "Ignore %1 Files"
-msgstr[0] "&Ez ikusi fitxategiak:"
-msgstr[1] "&Ez ikusi fitxategiak:"
+msgstr[0] "Ezikusi fitxategia"
+msgstr[1] "Ezikusi %1 fitxategi"
 
 #: addignoremenu.cpp:85
-#, fuzzy, kde-format
-#| msgid "Could not open file for writing."
+#, kde-format
 msgid "Cannot open file '%1' for writing."
-msgstr "Ezin izan da fitxategia idazteko ireki."
+msgstr "Ezin du '%1' fitxategia idazteko ireki."
 
 #: addremovedialog.cpp:40
 #, kde-format
@@ -124,43 +123,42 @@ msgstr "Biltegiaren ezarpenak"
 #: annotatecontroller.cpp:75
 #, kde-format
 msgid "CVS Annotate: %1"
-msgstr "CVS oharrak idatzi: %1"
+msgstr "CVS idatzi oharrak: %1"
 
 #: annotatecontroller.cpp:85
 #, kde-format
 msgid "CVS Annotate"
-msgstr "CVS Annotate"
+msgstr "CVS idatzi oharrak"
 
 #: annotatedialog.cpp:44
 #, kde-format
 msgid "Go to Line..."
-msgstr ""
+msgstr "Joan ... lerrora"
 
 #: annotatedialog.cpp:49
 #, kde-format
 msgid "Find Prev"
-msgstr ""
+msgstr "Aurkitu aurrekoa"
 
 #: annotatedialog.cpp:54
 #, kde-format
 msgid "Find Next"
-msgstr ""
+msgstr "Aurkitu hurrengoa"
 
 #: annotatedialog.cpp:64
-#, fuzzy, kde-format
-#| msgid "S&earch:"
+#, kde-format
 msgid "Search"
-msgstr "&Bilatu:"
+msgstr "Bilatu"
 
 #: annotatedialog.cpp:115
 #, kde-format
 msgid "Go to Line"
-msgstr ""
+msgstr "Joan lerrora"
 
 #: annotatedialog.cpp:115
 #, kde-format
 msgid "Go to line number:"
-msgstr ""
+msgstr "Joan lerro zenbakira:"
 
 #: cervisiapart.cpp:111 main.cpp:138
 #, kde-format
@@ -173,12 +171,12 @@ msgid "Starting cvsservice failed with message: "
 msgstr "Errorea cvsservice abiatzean. Mezua: "
 
 #: cervisiapart.cpp:148
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "This KPart is non-functional, because the cvs D-Bus service could not be "
 "started."
 msgstr ""
-"KPart hau ez dago erabilgarri, cvs DCOP zerbitzua ezin izan delako abiatu."
+"KPart hau ez da funtzionala, cvs D-Bus zerbitzua ezin izan delako abiatu."
 
 #: cervisiapart.cpp:186
 #, kde-format
@@ -204,10 +202,9 @@ msgstr ""
 "R - Kendutako fitxategi guztiak ezkutatzen dira"
 
 #: cervisiapart.cpp:227
-#, fuzzy, kde-format
-#| msgid "O&pen Sandbox..."
+#, kde-format
 msgid "Open Sandbox..."
-msgstr "&Ireki lan-direktorioa..."
+msgstr "Ireki hondar-kaxa..."
 
 #: cervisiapart.cpp:231
 #, kde-format
@@ -217,7 +214,7 @@ msgstr "CVS lan-direktorio bat irekitzen du lehio nagusian"
 #: cervisiapart.cpp:235
 #, kde-format
 msgid "Recent Sandboxes"
-msgstr "Azken lan-direktorioak"
+msgstr "Azken aldiko hondar-kaxak"
 
 #: cervisiapart.cpp:239
 #, kde-format
@@ -231,9 +228,9 @@ msgstr ""
 "Maila altueneko karpetako aldaketa egunkarian sarrera berri bat txertatzen du"
 
 #: cervisiapart.cpp:246
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Update"
-msgstr "Eguneratua"
+msgstr "Eg&uneratu"
 
 #: cervisiapart.cpp:250
 #, kde-format
@@ -252,9 +249,9 @@ msgstr ""
 "Hautatutako fitxategi eta karpeten egoera (cvs -n update) eguneratzen du"
 
 #: cervisiapart.cpp:262 resolvedialog.cpp:176
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Edit"
-msgstr "&Edizioak"
+msgstr "&Editatu"
 
 #: cervisiapart.cpp:265
 #, kde-format
@@ -287,10 +284,9 @@ msgid "&Add to Repository..."
 msgstr "&Gehitu biltegira..."
 
 #: cervisiapart.cpp:287
-#, fuzzy, kde-format
-#| msgid "CVS Add"
+#, kde-format
 msgid "Add"
-msgstr "CVS gehitu"
+msgstr "Gehitu"
 
 #: cervisiapart.cpp:289
 #, kde-format
@@ -313,10 +309,9 @@ msgid "&Remove From Repository..."
 msgstr "&Kendu biltegitik..."
 
 #: cervisiapart.cpp:303 repositorydialog.cpp:201
-#, fuzzy, kde-format
-#| msgid "Removed"
+#, kde-format
 msgid "Remove"
-msgstr "Kendua"
+msgstr "Kendu"
 
 #: cervisiapart.cpp:305
 #, kde-format
@@ -343,7 +338,7 @@ msgstr "&Propietateak"
 #: cervisiapart.cpp:323
 #, kde-format
 msgid "Stop"
-msgstr ""
+msgstr "Gelditu"
 
 #: cervisiapart.cpp:328
 #, kde-format
@@ -368,12 +363,13 @@ msgstr "Arakatu fitategi-anitzeko egunkaria..."
 #: cervisiapart.cpp:345
 #, kde-format
 msgid "&Annotate..."
-msgstr "&Annotate..."
+msgstr "&Idatzi oharra..."
 
 #: cervisiapart.cpp:349
 #, kde-format
 msgid "Shows a blame-annotated view of the selected file"
-msgstr "Hautatutako fitxategiaren oharren ikuspegia erakusten du"
+msgstr ""
+"Hautatutako fitxategiaren erru-idatzoharrak dituen ikuspegia erakusten du"
 
 #: cervisiapart.cpp:353
 #, kde-format
@@ -588,7 +584,7 @@ msgstr "Sortu adabakia biltegiaren aurka..."
 #: cervisiapart.cpp:495
 #, kde-format
 msgid "Creates a patch from the modifications in your sandbox"
-msgstr "Zure lan-direktorioko aldaketetatik adabaki bat sortzen du"
+msgstr "Zure hondar-kaxako aldaketetatik adabaki bat sortzen du"
 
 #: cervisiapart.cpp:502
 #, kde-format
@@ -765,18 +761,18 @@ msgid "A CVS frontend"
 msgstr "CVS interfaze bat"
 
 #: cervisiapart.cpp:719 main.cpp:142
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "Copyright (c) 1999-2002 Bernd Gehrmann\n"
 "Copyright (c) 2002-2008 the Cervisia authors"
 msgstr ""
 "Copyright (c) 1999-2002 Bernd Gehrmann\n"
-"Copyright (c) 2002-2006 Cervisia egileak"
+"Copyright (c) 2002-2008 Cervisia egileak"
 
 #: cervisiapart.cpp:724 main.cpp:147
 #, kde-format
 msgid "Bernd Gehrmann"
-msgstr ""
+msgstr "Bernd Gehrmann"
 
 #: cervisiapart.cpp:725 main.cpp:148
 #, kde-format
@@ -786,7 +782,7 @@ msgstr "Jatorrizko egilea eta aurreko mantentzailea"
 #: cervisiapart.cpp:728 main.cpp:151
 #, kde-format
 msgid "Christian Loose"
-msgstr ""
+msgstr "Christian Loose"
 
 #: cervisiapart.cpp:728 main.cpp:151
 #, kde-format
@@ -796,7 +792,7 @@ msgstr "Mantentzailea"
 #: cervisiapart.cpp:729 main.cpp:152
 #, kde-format
 msgid "André Wöbbeking"
-msgstr ""
+msgstr "André Wöbbeking"
 
 #: cervisiapart.cpp:729 main.cpp:152
 #, kde-format
@@ -806,7 +802,7 @@ msgstr "Garatzailea"
 #: cervisiapart.cpp:730 main.cpp:153
 #, kde-format
 msgid "Carlos Woelz"
-msgstr ""
+msgstr "Carlos Woelz"
 
 #: cervisiapart.cpp:730 main.cpp:153
 #, kde-format
@@ -816,7 +812,7 @@ msgstr "Dokumentazioa"
 #: cervisiapart.cpp:732 main.cpp:155
 #, kde-format
 msgid "Richard Moore"
-msgstr ""
+msgstr "Richard Moore"
 
 #: cervisiapart.cpp:732 main.cpp:155
 #, kde-format
@@ -826,27 +822,27 @@ msgstr "Moldaketa KPart-era"
 #: cervisiapart.cpp:733 main.cpp:156
 #, kde-format
 msgid "Laurent Montel"
-msgstr ""
+msgstr "Laurent Montel"
 
 #: cervisiapart.cpp:733 main.cpp:156
-#, fuzzy, kde-format
+#, kde-format
 msgid "Conversion to D-Bus"
-msgstr "Moldaketa KPart-era"
+msgstr "«D-Bus»era bihurtzea"
 
 #: cervisiapart.cpp:734 main.cpp:157
 #, kde-format
 msgid "Martin Koller"
-msgstr ""
+msgstr "Martin Koller"
 
 #: cervisiapart.cpp:734 main.cpp:157
 #, kde-format
 msgid "Port to KDE Frameworks 5"
-msgstr ""
+msgstr "KDE Frameworks 5era eratortzea"
 
 #: cervisiapart.cpp:741
 #, kde-format
 msgid "Open Sandbox"
-msgstr "Ireki lan-direktorioa"
+msgstr "Ireki hondar-kaxa"
 
 #: cervisiapart.cpp:791
 #, kde-format
@@ -937,33 +933,33 @@ msgstr "Irten Cervisia-tik"
 
 #. i18n: ectx: Menu (file)
 #: cervisiashellui.rc:4 cervisiaui.rc:4
-#, fuzzy, kde-format
+#, kde-format
 msgid "&File"
-msgstr "Ed&itatu fitxategiak"
+msgstr "&Fitxategia"
 
 #. i18n: ectx: Menu (settings)
 #: cervisiashellui.rc:7 cervisiaui.rc:70
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Settings"
-msgstr "&Egoera"
+msgstr "E&zarpenak"
 
 #. i18n: ectx: Menu (help)
 #: cervisiashellui.rc:11 cervisiaui.rc:80
 #, kde-format
 msgid "&Help"
-msgstr ""
+msgstr "&Laguntza"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: cervisiashellui.rc:16 cervisiaui.rc:84
 #, kde-format
 msgid "Main Toolbar"
-msgstr ""
+msgstr "Tresna-barra nagusia"
 
 #. i18n: ectx: Menu (view)
 #: cervisiaui.rc:24
-#, fuzzy, kde-format
+#, kde-format
 msgid "&View"
-msgstr "&Ikusi"
+msgstr "I&kuspegia"
 
 #. i18n: ectx: Menu (advanced)
 #: cervisiaui.rc:43
@@ -1169,12 +1165,11 @@ msgid "Synchronize scroll bars"
 msgstr "Sinkronizatu scroll barrak"
 
 #: diffdialog.cpp:112 diffdialog.cpp:403
-#, fuzzy, kde-format
-#| msgid "%1 differences"
+#, kde-format
 msgid "%1 difference"
 msgid_plural "%1 differences"
-msgstr[0] "%1 desberdintasun"
-msgstr[1] "%1 desberdintasun"
+msgstr[0] "ezberdintasun %1"
+msgstr[1] "%1 ezberdintasun"
 
 #: diffdialog.cpp:238
 #, kde-format
@@ -1202,19 +1197,19 @@ msgid "%1 of %2"
 msgstr "%2-(e)tik %1"
 
 #: diffview.cpp:255 diffview.cpp:313
-#, fuzzy, kde-format
+#, kde-format
 msgid "Delete"
-msgstr "&Ezabatu etiketa..."
+msgstr "Ezabatu"
 
 #: diffview.cpp:255 diffview.cpp:313
 #, kde-format
 msgid "Insert"
-msgstr ""
+msgstr "Txertatu"
 
 #: diffview.cpp:255 diffview.cpp:313
-#, fuzzy, kde-format
+#, kde-format
 msgid "Change"
-msgstr "Editatu aldaketa-egunkaria"
+msgstr "Aldatu"
 
 #: editwithmenu.cpp:46
 #, kde-format
@@ -1332,9 +1327,9 @@ msgid "Revision"
 msgstr "Errebisioa"
 
 #: historydialog.cpp:138 watchersmodel.cpp:84
-#, fuzzy, kde-format
+#, kde-format
 msgid "File"
-msgstr "Ikusi fitxategia"
+msgstr "Fitxategia"
 
 #: historydialog.cpp:138
 #, kde-format
@@ -1412,9 +1407,9 @@ msgid "Update, Conflict "
 msgstr "Eguneratu, gatazkak"
 
 #: historydialog.cpp:340
-#, fuzzy, kde-format
+#, kde-format
 msgid "Update, Patched "
-msgstr "Eguneratu, ezabatutakoak"
+msgstr "Eguneratu, adabakia ezarrita"
 
 #: historydialog.cpp:352
 #, kde-format
@@ -1422,10 +1417,9 @@ msgid "Unknown "
 msgstr "Ezezaguna"
 
 #: logdialog.cpp:86
-#, fuzzy, kde-format
-#| msgid "S&earch:"
+#, kde-format
 msgid "Search:"
-msgstr "&Bilatu:"
+msgstr "Bilatu:"
 
 #: logdialog.cpp:97
 #, kde-format
@@ -1482,15 +1476,14 @@ msgid "Comment/Tags:"
 msgstr "Iruzkina/Etiketak:"
 
 #: logdialog.cpp:198
-#, fuzzy, kde-format
-#| msgid "&Annotate"
+#, kde-format
 msgid "&Annotate A"
-msgstr "&Oharrak idatzi"
+msgstr "Id&atzi oharra A"
 
 #: logdialog.cpp:200
 #, kde-format
 msgid "&Find"
-msgstr ""
+msgstr "&Bilatu"
 
 #: logdialog.cpp:207
 #, kde-format
@@ -1498,8 +1491,8 @@ msgid ""
 "This revision is used when you click Annotate.\n"
 "It is also used as the first item of a Diff operation."
 msgstr ""
-"Bertsio hau \"Oharra idatzi\" klikatzen duzunean erabiltzen da.\n"
-"Konparaketa baten lehen elementu bezala ere erabil daiteke."
+"Berrikuspen hau «Idatzi oharra»ri klik egiten diozunean erabiltzen da.\n"
+"«Diff» eragiketa baten lehenengo elementu bezala ere erabiltzen da."
 
 #: logdialog.cpp:212
 #, kde-format
@@ -1507,9 +1500,9 @@ msgid "This revision is used as the second item of a Diff operation."
 msgstr "Bertsio hau konparaketa baten bigarren elementu bezala erabiltzen da."
 
 #: logdialog.cpp:225
-#, fuzzy, kde-format
+#, kde-format
 msgid "&View A"
-msgstr "&Ikusi"
+msgstr "I&kusi A"
 
 #: logdialog.cpp:226
 #, kde-format
@@ -1594,27 +1587,22 @@ msgstr "data: %1, egilea. %2"
 #: main.cpp:166
 #, kde-format
 msgid "The sandbox to be loaded"
-msgstr "Kargatuko den direktorio-lokala"
+msgstr "Zamatu beharreko hondar-kaxa"
 
 #: main.cpp:167
-#, fuzzy, kde-format
-#| msgid "Show resolve dialog for the given file"
+#, kde-format
 msgid "Show resolve dialog for the given file."
-msgstr ""
-"Erakutsi gatazka konponketa elkarrizketa-koadroa emandako fitxategiarentzat"
+msgstr "Erakutsi emandako fitxategia ebazteko elkarrizketa-koadroa."
 
 #: main.cpp:168
-#, fuzzy, kde-format
-#| msgid "Show log dialog for the given file"
+#, kde-format
 msgid "Show log dialog for the given file."
-msgstr "Erakutsi egunkari elkarrizketa-koadroa emandako fitxategiarentzat"
+msgstr "Erakutsi emandako fitxategiaren egunkari elkarrizketa-koadroa."
 
 #: main.cpp:169
-#, fuzzy, kde-format
-#| msgid "Show annotation dialog for the given file"
+#, kde-format
 msgid "Show annotation dialog for the given file."
-msgstr ""
-"Erakutsi oharrak idazteko elkarrizketa-koadroa emandako fitxategiarentzat"
+msgstr "Erakutsi emandako fitxategiaren idatzohar elkarrizketa-koadroa."
 
 #: mergedialog.cpp:41
 #, kde-format
@@ -1722,7 +1710,7 @@ msgstr "Ez ikusi aukerak"
 #: protocolview.cpp:90
 #, kde-format
 msgid "Clear"
-msgstr ""
+msgstr "Garbitu"
 
 #: protocolview.cpp:127
 #, kde-format
@@ -1742,7 +1730,7 @@ msgstr "[Bertan behera utzi da]\n"
 #: repositorydialog.cpp:138
 #, kde-format
 msgid "Default"
-msgstr ""
+msgstr "Lehenetsia"
 
 #: repositorydialog.cpp:155
 #, kde-format
@@ -1785,16 +1773,14 @@ msgid "Status"
 msgstr "Egoera"
 
 #: repositorydialog.cpp:199
-#, fuzzy, kde-format
-#| msgid "&Add..."
+#, kde-format
 msgid "Add..."
-msgstr "&Gehitu..."
+msgstr "Gehitu..."
 
 #: repositorydialog.cpp:200
-#, fuzzy, kde-format
-#| msgid "&Modify..."
+#, kde-format
 msgid "Modify..."
-msgstr "&Aldatu..."
+msgstr "Aldatu..."
 
 #: repositorydialog.cpp:202
 #, kde-format
@@ -1897,8 +1883,8 @@ msgid ""
 "When opening a sandbox from a &remote repository,\n"
 "start a File->Status command automatically"
 msgstr ""
-"&Urruneko biltegi batetik direktorio lokal bat irekitzean\n"
-"abiatu Fitxategia->Egoera agindua automatikoki"
+"Hondar-kaxa bat u&rrutiko gordetegi batetik irekitzean,\n"
+"automatikoki abiatu Fitxategia->Egoera komando bat"
 
 #: settingsdialog.cpp:299
 #, kde-format
@@ -1906,8 +1892,8 @@ msgid ""
 "When opening a sandbox from a &local repository,\n"
 "start a File->Status command automatically"
 msgstr ""
-"Biltegi &lokal batetik direktorio lokal bat irekitzean\n"
-"abiatu Fitxategia->Egoera agindua automatikoki"
+"Hondar-kaxa bat tokiko gordetegi batetik irekitzean\n"
+"automatikoki abiatu Fitxategia->Egoera komando bat"
 
 #: settingsdialog.cpp:316
 #, kde-format
@@ -1917,12 +1903,12 @@ msgstr "Aurreratua"
 #: settingsdialog.cpp:335
 #, kde-format
 msgid "Appearance"
-msgstr ""
+msgstr "Itxura"
 
 #: settingsdialog.cpp:338
 #, kde-format
 msgid "Fonts"
-msgstr ""
+msgstr "Letra-tipoak"
 
 #: settingsdialog.cpp:341
 #, kde-format
@@ -1932,7 +1918,7 @@ msgstr "&Protokolo lehiorako letra-tipoa..."
 #: settingsdialog.cpp:342
 #, kde-format
 msgid "Font for A&nnotate View..."
-msgstr "Ohar ikuspegirako letra-tipoa..."
+msgstr "Id&atzi oharra ikuspegirako letra-tipoa..."
 
 #: settingsdialog.cpp:343
 #, kde-format
@@ -2139,9 +2125,9 @@ msgid "Watcher"
 msgstr "Lekukoa"
 
 #: watchersmodel.cpp:88
-#, fuzzy, kde-format
+#, kde-format
 msgid "Edit"
-msgstr "&Edizioak"
+msgstr "Editatu"
 
 #: watchersmodel.cpp:90
 #, kde-format

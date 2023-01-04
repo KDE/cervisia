@@ -1,33 +1,36 @@
-# translation of cvsservice.po to Euskara
-# translation of cvsservice.po to basque
-# Copyright (C) 2003, 2005 Free Software Foundation, Inc.
+# Translation for cvsservice.po to Euskara/Basque (eu).
+# Copyright (C) 2003-2023 This file is copyright:
+# This file is distributed under the same license as the cervisia package.
+# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
+#
+# Translators:
 # Marcos  <marcos@euskalgnu.org>, 2003.
 # Ion Gaztañaga <ion_g_m@hotmail.com>, 2005.
-#
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: cvsservice\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-14 00:48+0000\n"
-"PO-Revision-Date: 2005-01-26 22:08+0100\n"
-"Last-Translator: Ion Gaztañaga <ion_g_m@hotmail.com>\n"
-"Language-Team: Euskara <eu@li.org>\n"
+"PO-Revision-Date: 2023-01-03 10:11+0100\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
+"Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: Lokalize 22.12.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Ion Gaztañaga"
+msgstr "Iñigo Salvador Azurmendi,Ion Gaztañaga"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "ion_g_m@hotmail.com"
+msgstr "ixalba@ni.eus,ion_g_m@hotmail.com"
 
 #: cvsaskpass.cpp:38
 #, kde-format
@@ -35,10 +38,9 @@ msgid "cvsaskpass"
 msgstr "cvsaskpass"
 
 #: cvsaskpass.cpp:40
-#, fuzzy, kde-format
-#| msgid "ssh-askpass for the CVS DCOP Service"
+#, kde-format
 msgid "ssh-askpass for the CVS D-Bus Service"
-msgstr "ssh-askpass CVS DCOP zerbitzurako"
+msgstr "ssh-askpass CVS D-BUS zerbitzurako"
 
 #: cvsaskpass.cpp:42
 #, kde-format
@@ -61,10 +63,9 @@ msgid "Repository:"
 msgstr "Biltegia:"
 
 #: cvsloginjob.cpp:108
-#, fuzzy, kde-format
-#| msgid "Please type in your password for the repository below."
+#, kde-format
 msgid "Enter password for repository %1."
-msgstr "Sartu zure pasahitza beheko biltegirako."
+msgstr "Sartu %1 gordetegirako pasahitza."
 
 #: cvsservice.cpp:883
 #, kde-format
@@ -81,26 +82,24 @@ msgid "There is already a job running"
 msgstr "Dagoeneko lan bat martxan dago"
 
 #: main.cpp:36
-#, fuzzy, kde-format
+#, kde-format
 msgid "CVS D-Bus service"
-msgstr "CVS DCOP zerbitzua"
+msgstr "CVS D-BUS zerbitzua"
 
 #: main.cpp:38
-#, fuzzy, kde-format
+#, kde-format
 msgid "D-Bus service for CVS"
-msgstr "CVS-rako DCOP zerbitzua"
+msgstr "CVS-rako D-Bus zerbitzua"
 
 #: main.cpp:40
-#, fuzzy, kde-format
-#| msgid "Copyright (c) 2003 Christian Loose"
+#, kde-format
 msgid "Copyright (c) 2002-2003 Christian Loose"
-msgstr "Copyright (c) 2003 Christian Loose"
+msgstr "Copyright (c) 2002-2003 Christian Loose"
 
 #: main.cpp:44
-#, fuzzy, kde-format
-#| msgid "Copyright (c) 2003 Christian Loose"
+#, kde-format
 msgid "Christian Loose"
-msgstr "Copyright (c) 2003 Christian Loose"
+msgstr "Christian Loose"
 
 #: main.cpp:44
 #, kde-format
