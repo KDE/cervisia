@@ -119,7 +119,7 @@ msgstr "Baixa el fitxer cvsignore del servidor"
 #: addrepositorydialog.cpp:174
 #, kde-format
 msgid "Repository Settings"
-msgstr "Configuració del repositori"
+msgstr "Configureu el repositori"
 
 #: annotatecontroller.cpp:75
 #, kde-format
@@ -1832,7 +1832,7 @@ msgstr "%1 conflictes"
 #: settingsdialog.cpp:70
 #, kde-format
 msgid "Configure Cervisia"
-msgstr "Configuració de Cervisia"
+msgstr "Configureu Cervisia"
 
 #: settingsdialog.cpp:215
 #, kde-format
