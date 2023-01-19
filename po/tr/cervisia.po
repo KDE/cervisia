@@ -10,13 +10,13 @@
 # Nilgün Belma Bugüner <nilgun@superonline.com>, 2001-2002.
 # obsoleteman <tulliana@gmail.com>, 2008-2009,2012.
 # Volkan Gezer <volkangezer@gmail.com>, 2013-2014.
-# Emir SARI <emir_sari@icloud.com>, 2022.
+# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-14 00:48+0000\n"
-"PO-Revision-Date: 2022-12-11 19:51+0300\n"
+"PO-Revision-Date: 2023-01-18 22:32+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -101,7 +101,7 @@ msgstr "&Depo:"
 #: addrepositorydialog.cpp:67
 #, kde-format
 msgid "Use remote &shell (only for :ext: repositories):"
-msgstr "&Uzak kabuk kullan (sadece :ext: için):"
+msgstr "&Uzak kabuk kullan (yalnızca :ext: için):"
 
 #: addrepositorydialog.cpp:76
 #, kde-format
@@ -198,7 +198,7 @@ msgid ""
 "N - All up-to-date files are hidden\n"
 "R - All removed files are hidden"
 msgstr ""
-"F - Tüm dosyalar gizli. Ağaç sadece klasörleri gösterir\n"
+"F - Tüm dosyalar gizli. Ağaç yalnızca klasörleri gösterir\n"
 "N - Tüm güncel dosyalar gizli\n"
 "R - Tüm silinen dosyalar gizli"
 
@@ -327,7 +327,7 @@ msgstr "&Geri Al"
 #, kde-format
 msgid "Reverts (cvs update -C) the selected files (only cvs 1.11)"
 msgstr ""
-"(cvs update -C) Seçili dosyaları eski haline döndürür. (sadece cvs-1.11)"
+"(cvs update -C) Seçili dosyaları eski haline döndürür. (yalnızca cvs-1.11)"
 
 #: cervisiapart.cpp:316
 #, kde-format
@@ -1345,17 +1345,17 @@ msgstr "&Diğer eylemleri göster"
 #: historydialog.cpp:154
 #, kde-format
 msgid "Only &user:"
-msgstr "Sadece &kullanıcı:"
+msgstr "Yalnızca &kullanıcı:"
 
 #: historydialog.cpp:156
 #, kde-format
 msgid "Only &filenames matching:"
-msgstr "Sadece eşleşen d&osya adları:"
+msgstr "Yalnızca eşleşen d&osya adları:"
 
 #: historydialog.cpp:158
 #, kde-format
 msgid "Only &folders matching:"
-msgstr "Sadece eşleşen d&izinler:"
+msgstr "Yalnızca eşleşen d&izinler:"
 
 #: historydialog.cpp:279 historydialog.cpp:285
 #, kde-format
@@ -1836,7 +1836,7 @@ msgstr "Günlük düzenleyici için &kullanıcı adı:"
 #: settingsdialog.cpp:228
 #, kde-format
 msgid "&Path to CVS executable, or 'cvs':"
-msgstr "&CVS komutu için yol (veya sadece 'cvs'):"
+msgstr "&CVS komutu için yol (veya yalnızca 'cvs'):"
 
 #: settingsdialog.cpp:246
 #, kde-format
@@ -1971,7 +1971,7 @@ msgstr "Bir işlem penceresi göründükten sonraki &zamanaşımı (ms):"
 #: settingsdialog_advanced.ui:45
 #, kde-format
 msgid "Default compression &level:"
-msgstr "Ö&ntanımlı sıkıştırma seviyesi:"
+msgstr "Ö&ntanımlı sıkıştırma düzeyi:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
 #: settingsdialog_advanced.ui:58
