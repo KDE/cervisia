@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-14 00:48+0000\n"
-"PO-Revision-Date: 2022-10-06 09:37+0200\n"
+"PO-Revision-Date: 2023-02-13 17:59+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -31,19 +31,19 @@ msgstr "Temuri.doghonadze@gmail.com"
 #: addignoremenu.cpp:34
 #, kde-format
 msgid "Add to Ignore List"
-msgstr ""
+msgstr "იგნორის სიაში ჩამატება"
 
 #: addignoremenu.cpp:65
 #, kde-format
 msgid "Ignore File"
 msgid_plural "Ignore %1 Files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ფაილის იგნორი"
+msgstr[1] "%1 ფაილის იგნორი"
 
 #: addignoremenu.cpp:85
 #, kde-format
 msgid "Cannot open file '%1' for writing."
-msgstr ""
+msgstr "'%1'-ის ჩასაწერად გახსნის შეცდომა."
 
 #: addremovedialog.cpp:40
 #, kde-format
@@ -63,17 +63,17 @@ msgstr "CVS წაშლა"
 #: addremovedialog.cpp:59
 #, kde-format
 msgid "Add the following files to the repository:"
-msgstr ""
+msgstr "შემდეგი ფაილების რეპოზიტორიაში ჩამატება:"
 
 #: addremovedialog.cpp:60
 #, kde-format
 msgid "Add the following binary files to the repository:"
-msgstr ""
+msgstr "შემდეგი ბინარული ფაილების რეპოზიტორიაში ჩამატება:"
 
 #: addremovedialog.cpp:61
 #, kde-format
 msgid "Remove the following files from the repository:"
-msgstr ""
+msgstr "შემდეგი ფაილების რეპოზიტორიიდან წაშლა:"
 
 #: addremovedialog.cpp:73
 #, kde-format
@@ -153,7 +153,7 @@ msgstr "ხაზზე გადასვლა"
 #: annotatedialog.cpp:115
 #, kde-format
 msgid "Go to line number:"
-msgstr ""
+msgstr "ხაზის ნომერზე გადასვლა:"
 
 #: cervisiapart.cpp:111 main.cpp:138
 #, kde-format
@@ -589,7 +589,7 @@ msgstr ""
 #: cervisiapart.cpp:520
 #, kde-format
 msgid "&Repositories..."
-msgstr ""
+msgstr "&რეპოზიტორიები..."
 
 #: cervisiapart.cpp:523
 #, kde-format
@@ -746,7 +746,7 @@ msgstr "Bernd Gehrmann"
 #: cervisiapart.cpp:725 main.cpp:148
 #, kde-format
 msgid "Original author and former maintainer"
-msgstr ""
+msgstr "ავტორი და ყოფილი ლიდერი"
 
 #: cervisiapart.cpp:728 main.cpp:151
 #, kde-format
@@ -806,7 +806,7 @@ msgstr "Martin Koller"
 #: cervisiapart.cpp:734 main.cpp:157
 #, kde-format
 msgid "Port to KDE Frameworks 5"
-msgstr ""
+msgstr "KDE Frameworks 5-ზე გადატანა"
 
 #: cervisiapart.cpp:741
 #, kde-format
@@ -1084,7 +1084,7 @@ msgstr ""
 #: commitdialog.cpp:84 logdialog.cpp:199
 #, kde-format
 msgid "&Diff"
-msgstr ""
+msgstr "&ცვლილება"
 
 #: commitdialog.cpp:86
 #, kde-format
@@ -1465,7 +1465,7 @@ msgstr ""
 #: logdialog.cpp:226
 #, kde-format
 msgid "Create Patch..."
-msgstr ""
+msgstr "პაჩის შექმნა..."
 
 #: logdialog.cpp:269
 #, kde-format
@@ -1631,7 +1631,7 @@ msgstr "გაერთიანებული"
 #: patchoptiondialog.cpp:64
 #, kde-format
 msgid "Output Format"
-msgstr ""
+msgstr "გამოტანის ფორმატი"
 
 #: patchoptiondialog.cpp:74
 #, kde-format
@@ -1641,7 +1641,7 @@ msgstr ""
 #: patchoptiondialog.cpp:90
 #, kde-format
 msgid "Ignore added or removed empty lines"
-msgstr ""
+msgstr "დამატებული ან წაშლილი ცარიელი ხაზების გამოტოვება"
 
 #: patchoptiondialog.cpp:91
 #, kde-format
@@ -1656,7 +1656,7 @@ msgstr ""
 #: patchoptiondialog.cpp:93
 #, kde-format
 msgid "Ignore changes in case"
-msgstr ""
+msgstr "რეგისტრის ცვლილებების იგნორი"
 
 #: patchoptiondialog.cpp:100
 #, kde-format
