@@ -1,7 +1,5 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-  <!ENTITY kappname "&cervisia;">
-  <!ENTITY package "kdesdk">
   <!ENTITY ssh "<command
 >ssh</command
 >">
@@ -90,9 +88,9 @@
 >&FDLNotice;</legalnotice>
 
 <date
->08/09/2008</date>
+>16/06/2016</date>
 <releaseinfo
->3.1.1</releaseinfo>
+>3.11 (Applications 16.08)</releaseinfo>
 
 <abstract>
 <para
@@ -102,8 +100,6 @@
 <keywordset>
 <keyword
 >KDE</keyword>
-<keyword
->kdesdk</keyword>
 <keyword
 >Cervisia</keyword>
 <keyword
@@ -121,9 +117,11 @@
 >Introdução</title>
 
 <para
->O <ulink url="http://www.kde.org/apps/cervisia/"
+>O <ulink url="https://www.kde.org/applications/development/cervisia/"
 >&cervisia;</ulink
-> é uma interface amigável com o usuário para o sistema de controle de versão. O objetivo é suportar o &CVS; e outros programas de sistemas de controle de versão em uma interface unificada, com recursos de resolução de conflitos, visualizadores de diferenças e histórico, estado para as cópias de trabalho dos arquivos, e suporte para maioria das funções de controle. Você pode obter o &cervisia; compilando o módulo do kdesdk ou instalando o pacote kdesdk fornecido por sua distribuição. Atualmente, apenas o &CVS; é suportado, mas outros sistemas de controle de versão serão integrados no futuro. </para>
+> é uma interface amigável com o usuário para o sistema de controle de versão. O objetivo é suportar o &CVS; em uma interface unificada, com recursos de resolução de conflitos, visualizadores de diferenças e histórico, estado para as cópias de trabalho dos arquivos, e suporte para a maioria das funções de controle. Você pode obter o &cervisia; compilando o programa <ulink url="https://commits.kde.org/cervisia"
+>&cervisia;</ulink
+> ou instalando o pacote &cervisia; fornecido por sua distribuição. </para>
 
 <para
 >Um sistema de controle de versão é uma ferramenta para gravar, gerenciar e distribuir diferentes versões de arquivos. O &CVS; é um sistema de controle de versão. Ele permite compartilhar suas modificações facilmente, bem como que cada contribuidor possa trabalhar em sua cópia local ao mesmo tempo, sem medo de sobrescrever modificações feitas por outros. Ele permite a recuperação de versões antigas (útil para análise de erros), a criação de ramificações (para desenvolvimento experimental ou para lançamentos de código) e mais. </para>
@@ -138,7 +136,9 @@
 >cópia de trabalho</firstterm
 > ou <firstterm
 >área local</firstterm
->. Um contribuidor pode adicionar suas modificações no repositório principal (um processo chamado &quot;envio&quot;) e/ou atualizar sua própria cópia para refletir as mudanças recentes feitas por outros contribuidores. </para>
+>. Um contribuidor pode adicionar suas modificações no repositório principal (um processo chamado <quote
+>envio</quote
+>) e/ou atualizar sua própria cópia para refletir as mudanças recentes feitas por outros contribuidores. </para>
 
 </chapter>
 
@@ -300,11 +300,7 @@
 >$<envar
 >HOME</envar
 >/.ssh</filename
-> para o servidor. Neste caso, a chave não deve estar criptografada com a frase-senha (veja o manual do &ssh; e o <acronym
->FAQ</acronym
-> do &CVS;/<acronym
->SSH</acronym
-> no SourceForge). Se você não tem certeza de como fazer isso, pergunte ao seu administrador de sistema. </para>
+> para o servidor. Neste caso, a chave não deve estar criptografada com a senha, veja o manual do &ssh;. </para>
 
 </listitem>
 </varlistentry>
@@ -673,7 +669,9 @@
 > que deseja usar. </para>
 
 <para
->Ramificações de um módulo são versões paralelas deste módulo. Um bom exemplo prático do uso deste recurso é o lançamento de um projeto de software. Após uma versão principal, existem erros no código que devem ser concertados, mas as pessoas desejam adicionar novos recursos ao aplicativo também. É muito difícil fazer as duas coisas ao mesmo tempo porque novos recursos normalmente introduzem novos erros, tornando difícil rastrear os antigos. Para resolver este dilema, o &CVS; permite que você crie uma versão paralela, que nós chamaremos de &quot;ramificação da versão estável&quot;, onde você pode somente adicionar correções de erro, deixando a ramificação principal (HEAD) aberta para adição de novos recursos. </para>
+>Ramificações de um módulo são versões paralelas deste módulo. Um bom exemplo prático do uso deste recurso é o lançamento de um projeto de software. Após uma versão principal, existem erros no código que devem ser concertados, mas as pessoas desejam adicionar novos recursos ao aplicativo também. É muito difícil fazer as duas coisas ao mesmo tempo porque novos recursos normalmente introduzem novos erros, tornando difícil rastrear os antigos. Para resolver este dilema, o &CVS; permite que você crie uma versão paralela, que nós chamaremos de <quote
+>ramificação da versão estável</quote
+>, onde você pode somente adicionar correções de erro, deixando a ramificação principal (HEAD) aberta para adição de novos recursos. </para>
 
 <para
 >Tags são usadas para marcar uma versão do projeto. O &CVS; estampa uma versão de cada arquivo com a tag, de modo que quando você baixa ou atualiza para uma tag específica, você obterá as mesmas versões de arquivo. No entanto, ao contrário das ramificações, tags não são dinâmicas: você não pode desenvolver uma tag. Tags são úteis para marcar versões, grandes mudanças no código, &etc; Usando tags, você pode facilmente retornar o projeto a um estado anterior, para reproduzir e rastrear erros, gerar o código de lançamento novamente, &etc; </para>
@@ -717,7 +715,7 @@
 ></term>
 <listitem
 ><para
->O nome do módulo a ser baixado. Se você estiver trabalhando com um repositório existente, você provavelmente poderá obter este nome a partir do administrador do sistema, ou se ele é um repositório de código aberto, você pode obter os nomes dos módulos a partir das páginas web do projeto. Se você deseja criar um novo módulo a partir do zero usando um repositório local, simplesmente crie uma nova pasta na pasta raiz do repositório local. O nome da pasta será o mesmo do módulo vazio. </para>
+>O nome do módulo a ser baixado. Se você estiver trabalhando com um repositório existente, você provavelmente poderá obter este nome a partir do administrador do sistema, ou se ele é um repositório de código aberto, você pode obter os nomes dos módulos a partir dos sites do projeto. Se você deseja criar um novo módulo a partir do zero usando um repositório local, simplesmente crie uma nova pasta na pasta raiz do repositório local. O nome da pasta será o mesmo do módulo vazio. </para>
 <para
 >Alternativamente, se o repositório possui um arquivo <filename
 ><envar
@@ -727,11 +725,7 @@
 >Obter Lista</guibutton
 >. </para>
 <para
->Observe que é possível baixar qualquer subpasta existente do módulo, sem obter o resto do módulo. Simplesmente insira o caminho para a subpasta. Por exemplo, se você deseja obter somente a subpasta <filename class="directory"
->doc/cervisia</filename
-> do módulo kdesdk, insira <filename class="directory"
->kdesdk/doc/cervisia</filename
-> neste campo. </para
+>Observe que é possível baixar qualquer subpasta existente do módulo, sem obter o resto do módulo. Simplesmente insira o caminho para a subpasta. </para
 ></listitem>
 </varlistentry>
 
@@ -1604,11 +1598,15 @@ Mudanças no repositório
 >Navegar Registro...</guimenuitem
 > a partir do menu instantâneo, para abrir o <link linkend="browsinglogs"
 >Diálogo do navegador de registro</link
->. Agora, selecione a versão contra a qual deseja criar um remendo, como a revisão &quot;A&quot; e pressione o botão <guilabel
+>. Agora, selecione a versão contra a qual deseja criar um remendo, como a revisão <quote
+>A</quote
+> e pressione o botão <guilabel
 >Criar Remendo...</guilabel
 >. Isto irá gerar um remendo com as diferenças entre o <emphasis
 >arquivo marcado</emphasis
-> em sua cópia e a versão selecionada com a revisão &quot;A&quot;. </para>
+> em sua cópia e a versão selecionada com a revisão <quote
+>A</quote
+>. </para>
 
 <para
 >Antes de gerar o remendo, o &cervisia; exibe um diálogo permitindo-lhe configurar o formato de saída. </para>
@@ -1720,7 +1718,9 @@ Mudanças no repositório
 </figure>
 
 <para
->No diálogo de anotação, você pode ver em uma janela a última versão do arquivo selecionado (ou a versão da revisão &quot;A&quot;, no caso de você ter lançado o diálogo de anotação a partir do <link linkend="browsinglogs"
+>No diálogo de anotação, você pode ver em uma janela a última versão do arquivo selecionado (ou a versão da revisão <quote
+>A</quote
+>, no caso de você ter lançado o diálogo de anotação a partir do <link linkend="browsinglogs"
 >Diálogo do navegador de registro</link
 >). Nas colunas antes do texto, você obtém algumas informações relacionadas à última mudança em cada linha. Na primeira coluna o número da linha é mostrado. Na segunda coluna você vê o nome do autor e o número da revisão. Finalmente, na terceira coluna você vê o conteúdo atual da linha. </para>
 
@@ -1810,7 +1810,19 @@ Mudanças no repositório
 <para
 >Para obter mais informações sobre uma determinada versão, você poderá clicar nela tanto na lista como na árvore. Os campos no meio da janela serão então preenchidos com a informação completa fornecida pelo <command
 >cvs log</command
->. Você poderá marcar duas versões, chamadas de &quot;A&quot; e &quot;B&quot;, que são relevantes se você tirar partido das funcionalidades posteriores disponibilizadas através dos botões. A versão &quot;A&quot; poderá ser escolhida com o botão esquerdo do mouse, enquanto que a &quot;B&quot; será com o botão do meio. Na lista, você poderá também navegar com as teclas dos cursores. Para poder marcar as versões &quot;A&quot; e &quot;B&quot;, use as combinações de teclas <keycombo action="simul"
+>. Você poderá marcar duas versões, chamadas de <quote
+>A</quote
+> e <quote
+>B</quote
+>, que são relevantes se você tirar partido das funcionalidades posteriores disponibilizadas através dos botões. A versão <quote
+>A</quote
+> poderá ser escolhida com o botão esquerdo do mouse, enquanto que a <quote
+>B</quote
+>; será com o botão do meio. Na lista, você poderá também navegar com as teclas dos cursores. Para poder marcar as versões <quote
+>A</quote
+> e <quote
+>B</quote
+>, use as combinações de teclas <keycombo action="simul"
 >&Ctrl;<keycap
 >A</keycap
 ></keycombo
@@ -1829,19 +1841,33 @@ Mudanças no repositório
 <para
 >Se você pressionar o botão <guibutton
 >Anotação</guibutton
->, você obterá um diálogo mostrando o texto do arquivo quando na revisão marcada como &quot;A&quot;. Cada linha é precedida com a informação sobre quem editou a linha pela última vez, e em que revisão isto aconteceu. Você pode obter mais informações sobre as versões das visões anotadas em <xref linkend="annotate"/>. </para>
+>, você obterá um diálogo mostrando o texto do arquivo quando na revisão marcada como <quote
+>A</quote
+>. Cada linha é precedida com a informação sobre quem editou a linha pela última vez, e em que revisão isto aconteceu. Você pode obter mais informações sobre as versões das visões anotadas em <xref linkend="annotate"/>. </para>
 
 <para
 >Se você pressionar o botão <guibutton
 >Diferença</guibutton
 >, uma chamada <command
 >cvs diff</command
-> é enviada e você obterá um diálogo no qual todas as modificações entre as duas revisões marcadas serão mostradas. Se você marcar a revisão &quot;A&quot;, mas não a revisão &quot;B&quot;, o &cervisia; irá gerar as modificações entre a versão do arquivo marcada como revisão &quot;A&quot; e a versão da cópia de trabalho do arquivo. Isto permite ver as diferenças entre sua versão do arquivo e qualquer versão disponível no &CVS;. Para tornar fácil ver as mudanças, cores diferentes são usadas para marcar linhas que foram adicionadas, removidas ou simplesmente mudadas. Você pode obter mais informações sobre a visão das diferenças em <xref linkend="diff"/>. </para>
+> é enviada e você obterá um diálogo no qual todas as modificações entre as duas revisões marcadas serão mostradas. Se você marcar a revisão <quote
+>A</quote
+>, mas não a revisão <quote
+>B</quote
+>;, o &cervisia; irá gerar as modificações entre a versão do arquivo marcada como revisão <quote
+>A</quote
+> e a versão da cópia de trabalho do arquivo. Isto permite ver as diferenças entre sua versão do arquivo e qualquer versão disponível no &CVS;. Para tornar fácil ver as mudanças, cores diferentes são usadas para marcar linhas que foram adicionadas, removidas ou simplesmente mudadas. Você pode obter mais informações sobre a visão das diferenças em <xref linkend="diff"/>. </para>
 
 <para
 >Se você pressionar o botão <guibutton
 >Criar Remendo...</guibutton
->, você obterá um diálogo no qual você pode configurar as opções de formato para gerar um arquivo conterá todas as modificações entre as duas revisões marcadas que estão sendo exibidas. Se você marcar a revisão &quot;A&quot;, mas não a revisão &quot;B&quot;, o &cervisia; irá gerar as modificações entre a revisão marcada como &quot;A&quot; e a versão da cópia de trabalho do arquivo. Isto permite gera um remendo, ou arquivo de diferenças, entre sua versão do arquivo e qualquer versão disponível no &CVS;. Após configurar o formato do remendo no diálogo, e pressionar <guibutton
+>, você obterá um diálogo no qual você pode configurar as opções de formato para gerar um arquivo conterá todas as modificações entre as duas revisões marcadas que estão sendo exibidas. Se você marcar a revisão <quote
+>A</quote
+>, mas não a revisão <quote
+>B</quote
+>, o &cervisia; irá gerar as modificações entre a revisão marcada como <quote
+>A</quote
+> e a versão da cópia de trabalho do arquivo. Isto permite gera um remendo, ou arquivo de diferenças, entre sua versão do arquivo e qualquer versão disponível no &CVS;. Após configurar o formato do remendo no diálogo, e pressionar <guibutton
 >OK</guibutton
 >, um comando <command
 >cvs diff</command
@@ -1852,7 +1878,9 @@ Mudanças no repositório
 <para
 >Se você pressionar o botão <guibutton
 >Ver</guibutton
->, o &cervisia; irá recuperar a revisão marcada como &quot;A&quot; e a exibirá usando o aplicativo padrão para este tipo de arquivo. </para>
+>, o &cervisia; irá recuperar a revisão marcada como <quote
+>A</quote
+> e a exibirá usando o aplicativo padrão para este tipo de arquivo. </para>
 
 <para
 >Pressione o botão <guibutton
@@ -2085,7 +2113,9 @@ Mudanças no repositório
 >Atualizando para Tag, Ramificação ou Data</title>
 
 <para
->Ramificações de um módulo são versões paralelas deste módulo. Um bom exemplo prático do uso deste recurso é o lançamento de um projeto de software. Após uma versão principal, existem erros no código que devem ser concertados, mas as pessoas desejam adicionar novos recursos ao aplicativo também. É muito difícil fazer as duas coisas ao mesmo tempo porque novos recursos normalmente introduzem novos erros, tornando difícil rastrear os antigos. Para resolver este dilema, o &CVS; permite que você crie uma versão paralela, que nós chamaremos de &quot;ramificação da versão estável&quot;, onde você pode somente adicionar correções de erro, deixando a ramificação principal (HEAD) aberta para adição de novos recursos. </para>
+>Ramificações de um módulo são versões paralelas deste módulo. Um bom exemplo prático do uso deste recurso é o lançamento de um projeto de software. Após uma versão principal, existem erros no código que devem ser concertados, mas as pessoas desejam adicionar novos recursos ao aplicativo também. É muito difícil fazer as duas coisas ao mesmo tempo porque novos recursos normalmente introduzem novos erros, tornando difícil rastrear os antigos. Para resolver este dilema, o &CVS; permite que você crie uma versão paralela, que nós chamaremos de <quote
+>ramificação da versão estável</quote
+>, onde você pode somente adicionar correções de erro, deixando a ramificação principal (HEAD) aberta para adição de novos recursos. </para>
 
 <para
 >Tags são usadas para marcar a versão de um projeto. O &CVS; estampa uma versão de cada arquivo com a tag, de modo que quando você importar ou atualizar para uma tag específica, você obterá sempre as mesmas versões de arquivo. Por outro lado, ao contrário das ramificações, tags não são dinâmicas: você não pode desenvolver uma tag. Tags são úteis para marcar lançamentos, grandes mudanças no código, &etc; </para>
@@ -2423,7 +2453,7 @@ Mudanças no repositório
 <para
 >Uma sessão de edição é automaticamente terminada quando você envia o arquivo afetado. Neste momento, uma notificação de <literal
 >cancelar edição</literal
-> é enviado para todas as pessoas que tem registrado o respectivo monitor no arquivo. É claro, algumas vezes você pode não desejar sincronizar o arquivo, mas aborta a sessão de edição e reverte para a versão anterior do arquivo. Isto é feito usando <menuchoice
+> é enviado para todas as pessoas que tem registrado o respectivo monitor no arquivo. É claro, algumas vezes você pode não desejar sincronizar o arquivo, mas cancela a sessão de edição e reverte para a versão anterior do arquivo. Isto é feito usando <menuchoice
 ><guimenu
 >Avançado</guimenu
 ><guimenuitem
@@ -2750,7 +2780,7 @@ Mudanças no repositório
 ><guimenuitem
 >Diferença para Repositório...</guimenuitem
 ></menuchoice
-> o &cervisia; abre um diálogo que indica que o comando ainda está rodando e que lhe permite abortá-lo. Além disso, este diálogo é usado para mostrar mensagens de erro do &CVS;. Com este diálogo deve aparecer após algum tempo, ele é mostrado somente após um determinado limite de tempo que é de 4 segundos por padrão. Aqui você pode mudar este valor. </para
+> o &cervisia; abre um diálogo que indica que o comando ainda está rodando e que lhe permite cancelá-lo. Além disso, este diálogo é usado para mostrar mensagens de erro do &CVS;. Com este diálogo deve aparecer após algum tempo, ele é mostrado somente após um determinado limite de tempo que é de 4 segundos por padrão. Aqui você pode mudar este valor. </para
 ></listitem>
 </varlistentry>
 
@@ -2967,7 +2997,7 @@ Mudanças no repositório
 ><guimenuitem
 >Manual do CVS</guimenuitem
 ></menuchoice
-> no &cervisia;. Uma versão 'online' em &HTML; do Cederqvist está disponível <ulink url="http://ximbiot.com/cvs/manual/"
+> no &cervisia;. Uma versão online em PDF do Cederqvist está disponível <ulink url="https://ftp.gnu.org/non-gnu/cvs/source/stable/1.11.21/cederqvist-1.11.21.pdf"
 >na Web</ulink
 >. </para>
 
@@ -2996,13 +3026,6 @@ Mudanças no repositório
 > dedicado ao gerenciamento da configuração em geral. O &CVS; é somente um tópico marginal neste grupo, mas ao menos pode ser interessante para discutir os méritos de vários sistemas de controle de revisão comparados ao &CVS;. </para
 ></listitem>
 
-<listitem
-><para
->Por fim, mas não menos importante, existe uma (de baixo tráfico) <ulink url="http://lists.sourceforge.net/mailman/listinfo/cervisia-user"
->lista de discussão do &cervisia;</ulink
->. </para
-></listitem>
-
 </itemizedlist>
 
 </sect1>
@@ -3023,10 +3046,16 @@ Mudanças no repositório
 <varlistentry>
 <term
 ><menuchoice
-><guimenu
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+></shortcut
+> <guimenu
 >Arquivo</guimenu
 ><guimenuitem
->Abrir Cópia Local...</guimenuitem
+>Abrir área local...</guimenuitem
 > </menuchoice
 ></term>
 <listitem
@@ -3231,7 +3260,7 @@ Mudanças no repositório
 >). </para
 ></listitem>
 </varlistentry>
-
+<!--FIXME Properties-->
 <varlistentry>
 <term
 ><menuchoice
@@ -3812,24 +3841,18 @@ Mudanças no repositório
 <!-- Settings Menu -->
 <sect2 id="menuoptions">
 <title
->O menu Configurações</title>
+>O menu Configurações e Ajuda</title>
+
+<para
+>Além dos menus comuns do &kde; <guimenu
+>Configurações</guimenu
+> e <guimenu
+>Ajuda</guimenu
+> descritos no capítulo <ulink url="help:/fundamentals/menus.html"
+>Menu</ulink
+> dos Fundamentos do &kde;, a documentação do &cervisia; temestas entradas de menu específicas do aplicativo: </para>
 
 <variablelist>
-
-<varlistentry>
-<term
-><menuchoice
-><guimenu
->Configurações</guimenu
-><guimenuitem
->Mostrar Barra de Ferramentas</guimenuitem
-> </menuchoice
-></term>
-<listitem
-><para
->Determina se a barra de ferramentas é exibida. </para
-></listitem>
-</varlistentry>
 
 <varlistentry>
 <term
@@ -3930,65 +3953,6 @@ Mudanças no repositório
 <term
 ><menuchoice
 ><guimenu
->Configurações</guimenu
-><guimenuitem
->Configurar atalhos...</guimenuitem
-> </menuchoice
-></term>
-<listitem
-><para
->Abre uma janela para configurar as combinações de teclas (atalhos). </para
-></listitem>
-</varlistentry>
-
-<varlistentry>
-<term
-><menuchoice
-><guimenu
->Configurações</guimenu
-><guimenuitem
->Configurar barras de ferramentas...</guimenuitem
-> </menuchoice
-></term>
-<listitem
-><para
->Abre um diálogo para configuração das barras de ferramentas do &cervisia;. </para
-></listitem>
-</varlistentry>
-
-<varlistentry>
-<term
-><menuchoice
-><guimenu
->Configurações</guimenu
-><guimenuitem
->Configurar o &cervisia;...</guimenuitem
-> </menuchoice
-></term>
-<listitem
-><para
->Abre um diálogo para personalização do &cervisia;. </para
-></listitem>
-</varlistentry>
-
-</variablelist>
-
-</sect2>
-
-<!-- Help -->
-<sect2 id="menuhelp">
-<title
->O menu Ajuda</title>
-&help.menu.documentation; <para
->Além dos itens normais do menu <guimenu
->Ajuda</guimenu
-> para o &kde;, descritos acima, você irá encontrar este item adicional:</para>
-
-<variablelist>
-<varlistentry>
-<term
-><menuchoice
-><guimenu
 >Ajuda</guimenu
 ><guimenuitem
 >Manual do CVS</guimenuitem
@@ -3996,7 +3960,7 @@ Mudanças no repositório
 ></term>
 <listitem
 ><para
->Abre as páginas de informação do &CVS; no sistema de ajuda do &kde;. </para
+>Abre as páginas de informação do &CVS; no &khelpcenter;. </para
 ></listitem>
 </varlistentry>
 </variablelist>
@@ -4031,6 +3995,5 @@ Mudanças no repositório
 >Tradução de Marcus Gama <email
 >marcus.gama@gmail.com</email
 ></para
-> 
-&underFDL; &underGPL; </chapter>
+> &underFDL; &underGPL; </chapter>
 </book>

@@ -1,0 +1,181 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Brazilian-Portuguese "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>Manual do usuário do Cervisia</title>
+<author
+><personname
+> <firstname
+>Burkhard</firstname
+> <surname
+>Lück</surname
+> </personname
+> <email
+>lueck@hube-lueck.de</email
+></author>
+
+<date
+>05/06/2016</date>
+<releaseinfo
+>3.11.0 (Applications 16.08)</releaseinfo>
+
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>cervisia</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>cervisia</command
+></refname>
+<refpurpose
+>Uma interface de CVS do KDE</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>cervisia</command
+> <arg choice="opt"
+><option
+>--resolve <replaceable
+>arquivo</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+>--log <replaceable
+>arquivo</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+>--annotate <replaceable
+>arquivo</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>pasta</replaceable
+></option
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+
+<refsect1>
+<title
+>Descrição</title>
+<para
+>Cervisia é uma interface amigável ao usuário para o sistema de controle de versão. O objetivo é ter suporte ao CVS e outros programas de sistemas de controle de versão em uma interface unificada, com recursos de resolução de conflitos, visualizadores de diferenças e histórico, estado para as cópias de trabalho dos arquivos, e suporte para maioria das funções de controle.</para>
+</refsect1>
+
+<refsect1>
+<title
+>Opções</title>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>--resolve</option
+></term>
+<listitem
+><para
+>Mostra o diálogo de resolução para o arquivo fornecido.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--log</option
+></term>
+<listitem
+><para
+>Mostra o diálogo de registro para o arquivo fornecido.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--annotate</option
+> <replaceable
+>arquivo</replaceable
+></term>
+<listitem
+><para
+>Mostra o diálogo de anotação para o arquivo fornecido.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>pasta</replaceable
+></option
+></term>
+<listitem
+><para
+>A área local a ser carregada.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</refsect1>
+
+<refsect1>
+<title
+>Veja também</title>
+<simplelist>
+<member
+>Documentação do usuário mais detalhada está disponível em <ulink url="help:/cervisia "
+>help:/cervisia</ulink
+> (digite esta &URL; no &konqueror;, ou execute <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/cervisia</parameter
+></userinput
+>).</member>
+<member
+>kf5options(7)</member>
+<member
+>qt5options(7)</member>
+<member
+>cvs(1)</member>
+<member
+>Também existe mais informação no <ulink url="https://www.kde.org/applications/development/cervisia/"
+>site do Cervisia</ulink
+></member>
+</simplelist>
+</refsect1>
+
+<refsect1>
+<title
+>Autores</title>
+<para
+>Para listar os autores do Cervisia use <userinput
+><command
+>cervisia</command
+> <option
+>--author</option
+></userinput
+> em um terminal.</para>
+</refsect1>
+
+</refentry>
