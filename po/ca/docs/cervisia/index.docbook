@@ -123,7 +123,7 @@
 > o <firstterm
 >entorn de proves</firstterm
 >; podeu afegir les vostres modificacions al repositori principal (un procés anomenat <quote
->publicació</quote
+>comissió</quote
 >) i/o actualitzar la còpia pròpia per a reflectir els canvis recents fets pels altres contribuïdors. </para>
 
 </chapter>
@@ -141,7 +141,7 @@
 
 <tip
 ><para
->Si esteu planejant desenvolupar un projecte complex, és una bona idea utilitzar les característiques del &CVS;, encara que sigueu l'únic desenvolupador. Podeu fer tots els canvis en la còpia de treball, i utilitzar el &cervisia; (o una altra eina de &CVS;) per actualitzar i publicar. D'aquesta manera, guanyareu la capacitat de seguir els canvis que causen errors, revertir-los, prevenir la pèrdua accidental de la informació, &etc; Utilitzant el &cervisia; és fàcil crear un repositori local. </para>
+>Si esteu planejant desenvolupar un projecte complex, és una bona idea utilitzar les característiques del &CVS;, encara que sigueu l'únic desenvolupador. Podeu fer tots els canvis en la còpia de treball, i utilitzar el &cervisia; (o una altra eina de &CVS;) per actualitzar i cometre. D'aquesta manera, guanyareu la capacitat de seguir els canvis que causen errors, revertir-los, prevenir la pèrdua accidental de la informació, &etc; Utilitzant el &cervisia; és fàcil crear un repositori local. </para>
 
 <procedure>
 <title
@@ -435,7 +435,7 @@
 > del mòdul importat recentment a una còpia de treball nova i copiar-ne els fitxers i carpetes restants, <link linkend="addingfiles"
 >afegir</link
 > i <link linkend="committingfiles"
->publicar</link
+>cometre</link
 > al repositori per a completar el procés d'importació. </para>
 
 <para
@@ -444,7 +444,7 @@
 > del nou mòdul buit. Després copieu els fitxers i carpetes a la còpia de treball, feu <link linkend="addingfiles"
 >afegeix</link
 > i <link linkend="committingfiles"
->publica</link
+>comet</link
 > per a pujar-ho tot al repositori de &CVS;. </para>
 
 
@@ -882,7 +882,7 @@
 ></term>
 <listitem
 ><para
->Vol dir que el fitxer no existeix en el repositori, però es troba a la còpia de treball i heu programat que s'afegeixi. La inserció real dins del repositori només succeeix després d'una publicació. </para
+>Vol dir que el fitxer no existeix en el repositori, però es troba a la còpia de treball i heu programat que s'afegeixi. La inserció real dins del repositori només succeeix després d'una comissió. </para
 ></listitem>
 </varlistentry>
 
@@ -893,7 +893,7 @@
 ></term>
 <listitem
 ><para
->Vol dir que heu programat el fitxer per a suprimir-lo, però encara existeix al repositori. La supressió real només succeeix després d'una publicació. </para
+>Vol dir que heu programat el fitxer per a suprimir-lo, però encara existeix al repositori. La supressió real només succeeix després d'una comissió. </para
 ></listitem>
 </varlistentry>
 
@@ -904,7 +904,7 @@
 ></term>
 <listitem
 ><para
->Es mostra si existeix una versió més recent del fitxer al repositori, &pex; perquè algú ha publicat una modificació. Normalment, voldreu actualitzar aquest fitxer per tenir una versió al dia a la vostra carpeta. </para
+>Es mostra si existeix una versió més recent del fitxer al repositori, &pex; perquè algú ha comès una modificació. Normalment, voldreu actualitzar aquest fitxer per tenir una versió al dia a la vostra carpeta. </para
 ></listitem>
 </varlistentry>
 
@@ -926,7 +926,7 @@
 ></term>
 <listitem
 ><para
->Indica que és necessària una fusió de la revisió d'aquest fitxer a la vostra còpia de treball amb la versió al repositori. Això succeeix normalment si heu fet modificacions al fitxer mentre algú ha publicat les seves modificacions. Si escolliu actualitzar, les modificacions al repositori es fusionaran al vostre fitxer. En cas de conflicte (&ead; si algú ha canviat algunes de les mateixes línies que vós) llavors el nou estat serà «Conflicte». </para
+>Indica que és necessària una fusió de la revisió d'aquest fitxer a la vostra còpia de treball amb la versió al repositori. Això succeeix normalment si heu fet modificacions al fitxer mentre algú ha comès les seves modificacions. Si escolliu actualitzar, les modificacions al repositori es fusionaran al vostre fitxer. En cas de conflicte (&ead; si algú ha canviat algunes de les mateixes línies que vós) llavors el nou estat serà «Conflicte». </para
 ></listitem>
 </varlistentry>
 
@@ -996,7 +996,7 @@
 ></term>
 <listitem
 ><para
->Indica que el servidor de &CVS; ha enviat un pedaç per a aquest fitxer i el pedaç s'ha aplicat satisfactòriament. Si l'apedaçat no ha estat possible perquè hi ha un conflicte entre les vostres modificacions i les que algú ha publicat al repositori, ara l'estat és <guilabel
+>Indica que el servidor de &CVS; ha enviat un pedaç per a aquest fitxer i el pedaç s'ha aplicat satisfactòriament. Si l'apedaçat no ha estat possible perquè hi ha un conflicte entre les vostres modificacions i les que algú ha comès al repositori, ara l'estat és <guilabel
 >Conflicte</guilabel
 >. </para
 ></listitem>
@@ -1027,15 +1027,15 @@
 ><guimenu
 >Arranjament</guimenu
 ><guimenuitem
->Commit i Remove recursivament</guimenuitem
+>Comet i elimina recursivament</guimenuitem
 ></menuchoice
 > i escolliu <menuchoice
 ><guimenu
 >Fitxer</guimenu
 ><guimenuitem
->Publica...</guimenuitem
+>Comet...</guimenuitem
 ></menuchoice
-> mentre hi ha seleccionada una carpeta, tots els fitxers en l'arbre sota aquesta carpeta seran publicats. Altrament, només els fitxers normals de la mateixa carpeta es veuran afectats. </para>
+> mentre hi ha seleccionada una carpeta, tots els fitxers en l'arbre sota aquesta carpeta seran comesos. Altrament, només els fitxers normals de la mateixa carpeta es veuran afectats. </para>
 
 <figure id="screenshot-popup" float="1">
 <title
@@ -1064,8 +1064,8 @@
 >Afegir fitxers a un projecte requereix dos passos: primer, els fitxers han d'estar registrats amb el &CVS;, o en altres paraules, <emphasis
 >afegir-los al repositori</emphasis
 >. Això és necessari però no n'hi ha prou. Per a posar-los al repositori, haureu de <emphasis
->publicar-los</emphasis
->. Aquest procediment té un avantatge important: podeu publicar els fitxers juntament amb les modificacions a altres parts del projecte. En fer això veureu amb facilitat (&pex; en correus de la publicació) que tots aquests canvis formen part d'una totalitat. </para>
+>cometre'ls</emphasis
+>. Aquest procediment té un avantatge important: podeu cometre els fitxers juntament amb les modificacions a altres parts del projecte. En fer això veureu amb facilitat (&pex; en correus de la comissió) que tots aquests canvis formen part d'una totalitat. </para>
 
 <para
 >Amb aquesta finalitat, marqueu tots els fitxers per afegir-los a la vista principal del &cervisia;. A continuació escolliu <menuchoice
@@ -1095,17 +1095,17 @@
 </para>
 
 <para
->Si l'operació ha estat satisfactòria, la columna d'estat ha de tenir «Publicat, afegit» pels fitxers afegits. </para>
+>Si l'operació ha estat satisfactòria, la columna d'estat ha de tenir «Comès, afegit» pels fitxers afegits. </para>
 
 <warning
 ><para
 >El &CVS; no està dissenyat per a dotar d'un control de revisions significatiu pels fitxers binaris. Per exemple, normalment no té sentit fusionar fitxers binaris. A més, per omissió, el &CVS; realitza una expansió de les paraules clau (&pex; a la cadena <literal
 >&dollar;Revisió: 1.6 &dollar;</literal
->) quan un fitxer es publica en fitxers binaris, aquestes substitucions poden corrompre el fitxer i fer-lo completament inusable. </para
+>) quan un fitxer es comet en fitxers binaris, aquestes substitucions poden corrompre el fitxer i fer-lo completament inusable. </para
 ></warning>
 
 <para
->Per tal de desactivar el comportament anterior, podeu publicar fitxers binaris (o altres fitxers, com ara imatges Postscript o PNG) escollint <menuchoice
+>Per tal de desactivar el comportament anterior, podeu cometre fitxers binaris (o altres fitxers, com ara imatges Postscript o PNG) escollint <menuchoice
 ><guimenu
 >Fitxer</guimenu
 ><guimenuitem
@@ -1160,7 +1160,7 @@
 </para>
 
 <para
->Després d'això, s'haurà de publicar aquesta modificació a l'entorn de proves, possiblement amb altres modificacions al projecte. </para>
+>Després d'això, s'haurà de cometre aquesta modificació a l'entorn de proves, possiblement amb altres modificacions al projecte. </para>
 
 <note
 ><para
@@ -1201,7 +1201,7 @@
 ></menuchoice
 > o fent clic dret a les carpetes marcades i escollint <guimenuitem
 >Afegeix al repositori...</guimenuitem
-> des del menú contextual. Tingueu present que contràriament a afegir fitxers, afegir carpetes no requereix una publicació posterior. El &cervisia; emetrà l'ordre </para>
+> des del menú contextual. Tingueu present que contràriament a afegir fitxers, afegir carpetes no requereix una comissió posterior. El &cervisia; emetrà l'ordre </para>
 
 
 <para>
@@ -1218,27 +1218,27 @@
 
 <sect1 id="committingfiles">
 <title
->Publicant fitxers</title>
+>Cometent fitxers</title>
 
 <para
 >Quan hàgiu fet un cert nombre de canvis a la còpia de treball, i vulgueu que altres desenvolupadors en tinguin accés, els <emphasis
->publicareu</emphasis
->. Amb una publicació, emplaceu les vostres versions dels fitxers modificats com a una nova revisió al repositori. Una actualització posterior d'un altre desenvolupador li servirà les vostres modificacions a la seva còpia de treball. </para>
+>cometreu</emphasis
+>. Amb una comissió, emplaceu les vostres versions dels fitxers modificats com a una nova revisió al repositori. Una actualització posterior d'un altre desenvolupador li servirà les vostres modificacions a la seva còpia de treball. </para>
 
 <para
->Per tal de publicar un conjunt de fitxers, seleccioneu-los a la vista principal del &cervisia; i escolliu <menuchoice
+>Per tal de cometre un conjunt de fitxers, seleccioneu-los a la vista principal del &cervisia; i escolliu <menuchoice
 ><guimenu
 >Fitxer</guimenu
 ><guimenuitem
->Publica...</guimenuitem
+>Comet...</guimenuitem
 ></menuchoice
 > o feu clic dret als fitxers marcats i escolliu <guimenuitem
->Publica...</guimenuitem
+>Comet...</guimenuitem
 > des del menú contextual. </para>
 
 <figure id="screenshot-commit" float="1">
 <title
->Una captura de pantalla del diàleg de publicació del &cervisia;</title>
+>Una captura de pantalla del diàleg de comissió del &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="commit.png"/></imageobject>
@@ -1267,18 +1267,18 @@
 
 <note
 ><para
->Un error habitual que podeu trobar en publicar és <errorname
+>Un error habitual que podeu trobar en cometre és <errorname
 >Ha fallat la comprovació de l'última versió</errorname
->. Això indica que algú ha publicat canvis en el repositori des de la vostra darrera actualització: o, més tècnicament, que la vostra revisió <literal
+>. Això indica que algú ha comès canvis en el repositori des de la vostra darrera actualització: o, més tècnicament, que la vostra revisió <literal
 >BASE</literal
-> no és la més nova d'aquesta branca. En aquest cas, el &CVS; rebutjarà fusionar les vostres modificacions en el repositori. La solució és actualitzar, resoldre qualsevol conflicte i tornar a publicar. Per descomptat, si esteu treballant en un projecte de programari, és un bon costum comprovar si el programa encara funciona després que heu actualitzat -després de tot, hi poden haver interaccions negatives entre les vostres modificacions i les altres modificacions que poden malmetre el codi-. </para
+> no és la més nova d'aquesta branca. En aquest cas, el &CVS; rebutjarà fusionar les vostres modificacions en el repositori. La solució és actualitzar, resoldre qualsevol conflicte i tornar a cometre. Per descomptat, si esteu treballant en un projecte de programari, és un bon costum comprovar si el programa encara funciona després que heu actualitzat -després de tot, hi poden haver interaccions negatives entre les vostres modificacions i les altres modificacions que poden malmetre el codi-. </para
 ></note>
 
 <note>
 <para
 >Un altre error habitual resulta en el missatge d'error <errorname
 >L'etiqueta «X» pel fitxer «X» no és una branca</errorname
->. Això succeeix si intenteu publicar un fitxer que heu portat prèviament a una certa revisió o etiquetat amb l'ordre </para>
+>. Això succeeix si intenteu cometre un fitxer que heu portat prèviament a una certa revisió o etiquetat amb l'ordre </para>
 <para>
 <screen
 ><prompt
@@ -1294,7 +1294,7 @@
 ><guimenuitem
 >Actualitza a etiqueta/data...</guimenuitem
 ></menuchoice
-> del menú). En aquest cas, l'etiqueta del fitxer queda adherida, &ead; actualitzacions posteriors no us portaran la revisió més nova a la branca. Si voleu publicar revisions posteriors a la branca, haureu d'actualitzar a l'etiqueta de la branca abans de fer futures publicacions. </para>
+> del menú). En aquest cas, l'etiqueta del fitxer queda adherida, &ead; actualitzacions posteriors no us portaran la revisió més nova a la branca. Si voleu cometre revisions posteriors a la branca, haureu d'actualitzar a l'etiqueta de la branca abans de fer futures comissions. </para>
 </note>
 
 <para
@@ -1308,7 +1308,7 @@
 >ChangeLog</filename
 > al nivell superior del vostre entorn de proves, aquest fitxer serà carregat i tindreu la possibilitat d'editar-lo. Amb aquesta finalitat, a la part superior del fitxer, s'insereix una entrada amb la data actual i el vostre nom d'usuari (que es pot configurar com es descriu a <xref linkend="customize-general"/>). Quan acabeu podreu tancar el diàleg fent clic a <guibutton
 >D'acord</guibutton
->, el pròxim diàleg de publicació que obriu tindrà el missatge de registre establert al darrer missatge que heu introduït al registre de canvis. </para>
+>, el pròxim diàleg de comissió que obriu tindrà el missatge de registre establert al darrer missatge que heu introduït al registre de canvis. </para>
 
 </sect1>
 
@@ -1318,10 +1318,10 @@
 >Resolució de conflictes</title>
 
 <para
->Es poden produir conflictes cada vegada que feu canvis a un fitxer que també ha estat modificat per un altre desenvolupador. El conflicte és detectat pel &CVS; en actualitzar el fitxer modificat: llavors, el &CVS; intentarà fusionar les modificacions publicades per un altre desenvolupador a la vostra còpia de treball. La fusió falla si ambdues, les vostres modificacions i les seves modificacions se superposen en parts del fitxer, i el servidor de &CVS; emetrà un missatge d'error. </para>
+>Es poden produir conflictes cada vegada que feu canvis a un fitxer que també ha estat modificat per un altre desenvolupador. El conflicte és detectat pel &CVS; en actualitzar el fitxer modificat: llavors, el &CVS; intentarà fusionar les modificacions comeses per un altre desenvolupador a la vostra còpia de treball. La fusió falla si ambdues, les vostres modificacions i les seves modificacions se superposen en parts del fitxer, i el servidor de &CVS; emetrà un missatge d'error. </para>
 
 <para
->A la vista principal del &cervisia;, s'indiquen els fitxers amb conflictes amb «Conflicte» a la columna d'estat i amb el color vermell. Ara és feina vostra resoldre aquests conflictes abans de publicar el fitxer. El &CVS; rebutjarà publicar qualsevol fitxer amb conflictes fins que s'hagi editat. Per descomptat podeu resoldre conflictes des de la vista principal de la manera tradicional: simplement feu doble clic al fitxer en qüestió i editeu-lo amb el vostre editor favorit.</para>
+>A la vista principal del &cervisia;, s'indiquen els fitxers amb conflictes amb «Conflicte» a la columna d'estat i amb el color vermell. Ara és feina vostra resoldre aquests conflictes abans de cometre el fitxer. El &CVS; rebutjarà cometre qualsevol fitxer amb conflictes fins que s'hagi editat. Per descomptat podeu resoldre conflictes des de la vista principal de la manera tradicional: simplement feu doble clic al fitxer en qüestió i editeu-lo amb el vostre editor favorit.</para>
 
 <para
 >El &CVS; marca els canvis conflictius emplaçant marques en mig dels fitxers, de la següent manera:</para>
@@ -1444,7 +1444,7 @@ Canvis al repositori
 >cvs diff</command
 > i us mostra les diferències entre la versió al vostre entorn de proves i la darrera versió a què heu actualitzat (també coneguda com a <literal
 >BASE</literal
->). Això és particularment útil tot just després de publicar un fitxer, ja que podeu trobar un missatge de registre apropiat. </para
+>). Això és particularment útil tot just després de cometre un fitxer, ja que podeu trobar un missatge de registre apropiat. </para
 ></listitem>
 
 <listitem
@@ -1484,7 +1484,7 @@ Canvis al repositori
 
 <listitem
 ><para
->En el diàleg que es mostra quan publiqueu un conjunt de fitxers, podeu sol·licitar una finestra de diferències seleccionant un nom de fitxer en la llista de selecció, sigui dobleclicant-hi o prement <keycap
+>En el diàleg que es mostra quan cometeu un conjunt de fitxers, podeu sol·licitar una finestra de diferències seleccionant un nom de fitxer en la llista de selecció, sigui dobleclicant-hi o prement <keycap
 >Retorn</keycap
 >. Això és molt similar a usar <menuchoice
 ><guimenu
@@ -1551,7 +1551,7 @@ Canvis al repositori
 >Creació de pedaços</title>
 
 <para
->De vegades voldreu oferir les vostres modificacions per revisar-les, abans de publicar-les, o no teniu accés al repositori (i per tant no podeu publicar). &CVS; ofereix formats estàndards per compartir les modificacions en la vostra còpia de treball, de manera que altres puguin revisar els canvis, provar-los en la seva còpia i aplicar-los al repositori &CVS;. Un fitxer contenint aquestes diferències s'anomena <firstterm
+>De vegades voldreu oferir les vostres modificacions per revisar-les, abans de cometre-les, o no teniu accés al repositori (i per tant no podeu cometre). &CVS; ofereix formats estàndards per compartir les modificacions en la vostra còpia de treball, de manera que altres puguin revisar els canvis, provar-los en la seva còpia i aplicar-los al repositori &CVS;. Un fitxer contenint aquestes diferències s'anomena <firstterm
 >pedaç</firstterm
 >, i normalment és generat per l'ordre <command
 >cvs diff</command
@@ -1737,7 +1737,7 @@ Canvis al repositori
 
 <listitem
 ><para
->Veure la revisió, autor, data, branca, missatge de publicació, i etiquetes per cada versió del fitxer marcat. </para
+>Veure la revisió, autor, data, branca, missatge de comissió, i etiquetes per cada versió del fitxer marcat. </para
 ></listitem>
 
 <listitem
@@ -1896,7 +1896,7 @@ Canvis al repositori
 >Navegant per l'historial</title>
 
 <para
->Si el repositori emprat té activat el registre, el &cervisia; pot presentar-vos un historial de certs esdeveniments com ara recuperacions, publicacions, etiquetatges, actualitzacions i llançaments. Seleccioneu <guimenuitem
+>Si el repositori emprat té activat el registre, el &cervisia; pot presentar-vos un historial de certs esdeveniments com ara recuperacions, comissions, etiquetatges, actualitzacions i llançaments. Seleccioneu <guimenuitem
 >Historial</guimenuitem
 > des del menú <guimenu
 >Visualitza</guimenu
@@ -1968,17 +1968,17 @@ Canvis al repositori
 
 <listitem
 ><para
->Publicat, modificat - un usuari ha publicat un fitxer modificat. </para
+>Comès, modificat - un usuari ha comès un fitxer modificat. </para
 ></listitem>
 
 <listitem
 ><para
->Publicat, afegit - un usuari ha afegit un fitxer i l'ha publicat. </para
+>Comès, afegit - un usuari ha afegit un fitxer i l'ha comès. </para
 ></listitem>
 
 <listitem
 ><para
->Publicat, eliminat - un usuari ha publicat l'eliminació d'un fitxer. </para
+>Comès, eliminat - un usuari ha comès l'eliminació d'un fitxer. </para
 ></listitem>
 
 </itemizedlist>
@@ -2002,7 +2002,7 @@ Canvis al repositori
 <itemizedlist>
 <listitem
 ><para
->Mostra els esdeveniments de publicació - mostra les publicacions</para
+>Mostra els esdeveniments de comissió - mostra les comissions</para
 ></listitem>
 <listitem
 ><para
@@ -2107,14 +2107,14 @@ Canvis al repositori
 >Les etiquetes s'usen per marcar una versió d'un projecte. &CVS; marca una versió de cada fitxer amb l'etiqueta, de manera que quan vulgueu obtenir o actualitzar a una etiqueta específica, sempre obtingueu la mateixa versió dels fitxers: per tant, en oposició a les branques, les etiquetes no són dinàmiques: no podeu desenvolupar una etiqueta. Les etiquetes són útils per marcar llançaments, grans canvis en el codi, &etc; </para>
 
 <para
->Quan esteu desenvolupant o seguint el desenvolupament d'un projecte de programari, no heu de treballar necessàriament amb la branca principal tot el temps. Després d'un llançament, potser voldreu mantenir-vos amb la branca llançada durant un temps, per gaudir de la seva relativa estabilitat, arranjar errors, traduir les fonts, &etc;. Per fer tot això, heu d'actualitzar la branca llançada. Tots els vostres fitxers s'actualitzaran a les darreres versions dels fitxers en aquesta branca. Després d'actualitzar, totes les vostres noves publicacions també es pujaran a la nova branca. </para>
+>Quan esteu desenvolupant o seguint el desenvolupament d'un projecte de programari, no heu de treballar necessàriament amb la branca principal tot el temps. Després d'un llançament, potser voldreu mantenir-vos amb la branca llançada durant un temps, per gaudir de la seva relativa estabilitat, arranjar errors, traduir les fonts, &etc;. Per fer tot això, heu d'actualitzar la branca llançada. Tots els vostres fitxers s'actualitzaran a les darreres versions dels fitxers en aquesta branca. Després d'actualitzar, totes les vostres comissions noves també es pujaran a la nova branca. </para>
 
 <para
 >Si voleu seguir un error que fou reportat contra el passat llançament etiquetat, &CVS; també ofereix la possibilitat de recuperar el programari tal com fou llançat, actualitzant a aquesta etiqueta. Per altra banda, si voleu obtenir una versió passada del vostre projecte, podeu actualitzar la vostra còpia de treball a una data específica. Això pot ser útil si s'ha introduït un error en el projecte entre dos llançaments, i teniu una idea de quan va ser. En actualitzar a una data o etiqueta, les versions dels vostres fitxers seran les mateixes a les versions en la data específica o les versions marcades amb aquesta etiqueta. </para>
 
 <warning
 ><para
->Abans d'actualitzar a una branca o etiqueta diferent, assegureu-vos que heu publicat tots els vostres canvis a la branca amb què esteu treballant. Si no esteu preparat per publicar els vostres canvis, però no els voleu descartar, no actualitzeu a la nova branca, ja que perdríeu els vostres canvis. Com a alternativa, podeu fer una nova <link linkend="checkingout"
+>Abans d'actualitzar a una branca o etiqueta diferent, assegureu-vos que heu comès tots els vostres canvis a la branca amb què esteu treballant. Si no esteu preparat per cometre els vostres canvis, però no els voleu descartar, no actualitzeu a la nova branca, ja que perdríeu els vostres canvis. Com a alternativa, podeu fer una nova <link linkend="checkingout"
 >obtenció</link
 >, per treballar en paral·lel amb ambdues versions. </para
 ></warning>
@@ -2186,7 +2186,7 @@ Canvis al repositori
 
 <note
 ><para
->Actualitzar a una etiqueta o data fa que sigui etiquetat, &ead; no podreu publicar futures modificacions d'aquests fitxers (tret que l'etiqueta sigui una etiqueta de branca). Per tal de tornar enrere a la branca principal, useu l'element del menú <menuchoice
+>Actualitzar a una etiqueta o data fa que sigui etiquetat, &ead; no podreu cometre futures modificacions d'aquests fitxers (tret que l'etiqueta sigui una etiqueta de branca). Per tal de tornar enrere a la branca principal, useu l'element del menú <menuchoice
 ><guimenu
 >Avançat</guimenu
 ><guimenuitem
@@ -2330,10 +2330,10 @@ Canvis al repositori
 ><guimenuitem
 >Afegeix vigilant...</guimenuitem
 ></menuchoice
->. En el diàleg que obtindreu, podreu seleccionar ser notificat per qualsevol dels tipus d'esdeveniments que &CVS; accepta. Per exemple, si només voleu ser notificat quan un fitxer és publicat, marqueu les caselles <guibutton
+>. En el diàleg que obtindreu, podreu seleccionar ser notificat per qualsevol dels tipus d'esdeveniments que &CVS; accepta. Per exemple, si només voleu ser notificat quan un fitxer és comès, marqueu les caselles <guibutton
 >Només</guibutton
 > i <guibutton
->Publicacions</guibutton
+>Comissions</guibutton
 >. Si voleu ser notificat de qualsevol esdeveniment relacionat amb els fitxers marcats, marqueu la casella <guibutton
 >Tot</guibutton
 >. La línia d'ordres usada en acceptar el diàleg és </para>
@@ -2392,7 +2392,7 @@ Canvis al repositori
 </para>
 
 <para
->En l'escenari normal d'ús de &CVS; cada desenvolupador treballa per separat al seu entorn de proves obtingut. Quan vol modificar algun fitxer, simplement l'obre en l'editor i comença a treballar en ell. Ningú té coneixement quant a aquest treball fins que es publica el fitxer. </para>
+>En l'escenari normal d'ús de &CVS; cada desenvolupador treballa per separat al seu entorn de proves obtingut. Quan vol modificar algun fitxer, simplement l'obre en l'editor i comença a treballar en ell. Ningú té coneixement quant a aquest treball fins que es comet el fitxer. </para>
 
 <para
 >Per alguns grups de desenvolupadors, aquest no és el model preferit de cooperació. Volen estar notificats de quan algú està treballant en un fitxer <emphasis
@@ -2437,9 +2437,9 @@ Canvis al repositori
 </para>
 
 <para
->Una sessió d'edició finalitza automàticament en publicar el fitxer afectat. En aquest moment s'envia una notificació <literal
+>Una sessió d'edició finalitza automàticament en cometre el fitxer afectat. En aquest moment s'envia una notificació <literal
 >deseditat</literal
-> a totes les persones que hagin registrat un vigilant respectiu en el fitxer. Per descomptat, algunes vegades no voldreu publicar el fitxer, però voldreu cancel·lar la sessió d'edició del fitxer i revertir-lo a la versió anterior. Això es fa usant <menuchoice
+> a totes les persones que hagin registrat un vigilant respectiu en el fitxer. Per descomptat, algunes vegades no voldreu cometre el fitxer, però voldreu cancel·lar la sessió d'edició del fitxer i revertir-lo a la versió anterior. Això es fa usant <menuchoice
 ><guimenu
 >Avançat</guimenu
 ><guimenuitem
@@ -2477,7 +2477,7 @@ Canvis al repositori
 ><guimenuitem
 >Edita fitxers</guimenuitem
 ></menuchoice
->. Es torna de només lectura una altra vegada en publicar-lo o usar <menuchoice
+>. Es torna de només lectura una altra vegada en cometre'l o usar <menuchoice
 ><guimenu
 >Avançat</guimenu
 ><guimenuitem
@@ -2505,7 +2505,7 @@ Canvis al repositori
 ></menuchoice
 >. Ara, cada vegada que editeu un fitxer fent-hi doble clic, el &cervisia; executarà <command
 >cvs edit</command
-> abans d'executar l'editor. D'aquesta manera podeu editar el vostre fitxer de la forma habitual. En finalitzar el vostre treball, publiqueu els fitxers, i els fitxers publicats seran de només lectura de nou. </para>
+> abans d'executar l'editor. D'aquesta manera podeu editar el vostre fitxer de la forma habitual. En finalitzar el vostre treball, cometeu els fitxers, i els fitxers comesos seran de només lectura de nou. </para>
 
 </sect1>
 
@@ -3160,12 +3160,12 @@ Canvis al repositori
 > <guimenu
 >Fitxer</guimenu
 ><guimenuitem
->Publica...</guimenuitem
+>Comet...</guimenuitem
 > </menuchoice
 ></term>
 <listitem
 ><para
->Us permet publicar els fitxers seleccionats. Vegeu <xref linkend="committingfiles"/>. </para
+>Us permet cometre els fitxers seleccionats. Vegeu <xref linkend="committingfiles"/>. </para
 ></listitem>
 </varlistentry>
 
@@ -3908,7 +3908,7 @@ Canvis al repositori
 ></term>
 <listitem
 ><para
->Determina si les publicacions i eliminacions seran recursives (opció <option
+>Determina si les comissions i eliminacions seran recursives (opció <option
 >-f</option
 > a <command
 >cvs add</command
