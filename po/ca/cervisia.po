@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-14 00:48+0000\n"
-"PO-Revision-Date: 2023-03-06 15:33+0100\n"
+"PO-Revision-Date: 2023-03-09 13:54+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -383,7 +383,7 @@ msgid ""
 "Shows the differences of the selected file to the checked out version (tag "
 "BASE)"
 msgstr ""
-"Mostra les diferències del fitxer seleccionat amb la versió obtinguda "
+"Mostra les diferències del fitxer seleccionat amb la versió extreta "
 "(etiqueta BASE)"
 
 #: cervisiapart.cpp:361
@@ -594,12 +594,12 @@ msgstr "&Crea..."
 #: cervisiapart.cpp:506
 #, kde-format
 msgid "&Checkout..."
-msgstr "O&btén..."
+msgstr "E&xtreu..."
 
 #: cervisiapart.cpp:509
 #, kde-format
 msgid "Allows you to checkout a module from a repository"
-msgstr "Us permet recuperar un mòdul des d'un repositori"
+msgstr "Us permet extreure un mòdul des d'un repositori"
 
 #: cervisiapart.cpp:513
 #, kde-format
@@ -1026,7 +1026,7 @@ msgstr "&Etiqueta de la branca:"
 #: checkoutdialog.cpp:130
 #, kde-format
 msgid "Re&cursive checkout"
-msgstr "Obtén en mode re&cursiu"
+msgstr "Extracció en mode re&cursiu"
 
 #: checkoutdialog.cpp:153
 #, kde-format
@@ -1299,7 +1299,7 @@ msgstr "Comès, eliminat "
 #: historydialog.cpp:111 historydialog.cpp:319
 #, kde-format
 msgid "Checkout "
-msgstr "Obtenció"
+msgstr "Extracció"
 
 #: historydialog.cpp:116 loginfo.cpp:57
 #, kde-format
@@ -1344,7 +1344,7 @@ msgstr "Mostra els esdeveniments de &comissió"
 #: historydialog.cpp:145
 #, kde-format
 msgid "Show ch&eckout events"
-msgstr "Mostra els esdeveniments d'o&btenció"
+msgstr "Mostra els esdeveniments d'&extracció"
 
 #: historydialog.cpp:148
 #, kde-format
