@@ -137,7 +137,7 @@
 >Accedint al repositori</title>
 
 <para
->En aquesta secció, us mostrarem com utilitzar les funcionalitats bàsiques del sistema de control de versions utilitzant el &cervisia; per obtenir els mòduls des del repositori i treballar amb ells. Per a fer-ho, heu de tenir accés al repositori com a client, entenent que algú (probablement l'administrador del repositori &CVS;) us ha donat un compte a la màquina del servidor. Alternativament, podeu crear amb facilitat un repositori local pel vostre propi projecte. </para>
+>En aquesta secció, us mostrarem com utilitzar les funcionalitats bàsiques del sistema de control de versions utilitzant el &cervisia; per extreure els mòduls des del repositori i treballar amb ells. Per a fer-ho, heu de tenir accés al repositori com a client, entenent que algú (probablement l'administrador del repositori &CVS;) us ha donat un compte a la màquina del servidor. Alternativament, podeu crear amb facilitat un repositori local pel vostre propi projecte. </para>
 
 <tip
 ><para
@@ -504,7 +504,7 @@
 > <xref linkend="co-module"/></term>
 <listitem
 ><para
->El nom del mòdul sota el qual serà emmagatzemat el projecte. Després d'importar-lo, el projecte es podrà obtenir sota aquest nom. Vegeu <xref linkend="checkingout"/> per a més informació. Aquest també és el nom de la carpeta corresponent en el repositori. </para
+>El nom del mòdul sota el qual serà emmagatzemat el projecte. Després d'importar-lo, el projecte es podrà extreure amb aquest nom. Vegeu <xref linkend="checkingout"/> per a més informació. Aquest també és el nom de la carpeta corresponent en el repositori. </para
 ></listitem>
 </varlistentry>
 
@@ -643,7 +643,7 @@
 
 <sect1 id="checkingout">
 <title
->Obtenció d'un mòdul del repositori</title>
+>Extracció d'un mòdul del repositori</title>
 <para
 >Ara que heu definit amb èxit la ubicació del vostre repositori, i importat els fitxers inicials al repositori, és el moment de recuperar el mòdul del repositori de &CVS;, creant la vostra còpia de treball. </para>
 
@@ -660,17 +660,17 @@
 >, on només es poden afegir correccions d'errors, deixant la branca de llançament principal (HEAD) oberta per afegir noves característiques. </para>
 
 <para
->Les etiquetes s'utilitzen per a marcar una versió d'un projecte. El &CVS; marca una versió de cada fitxer amb l'etiqueta, així que quan obtingueu o actualitzeu a una etiqueta específica, s'obtindran sempre les mateixes versions dels fitxers. Per tant, en oposició a les branques, les etiquetes no són dinàmiques: no és possible desenvolupar una etiqueta. Les etiquetes són útils per a marcar productes nous, grans canvis en el codi, &etc; Utilitzant etiquetes, podeu tornar amb facilitat el projecte a un estat anterior, per a reproduir i seguir els errors, generar el codi de llançament de nou, &etc;. </para>
+>Les etiquetes s'utilitzen per a marcar una versió d'un projecte. El &CVS; marca una versió de cada fitxer amb l'etiqueta, així que quan extraieu o actualitzeu a una etiqueta específica, s'obtindran sempre les mateixes versions dels fitxers. Per tant, en oposició a les branques, les etiquetes no són dinàmiques: no és possible desenvolupar una etiqueta. Les etiquetes són útils per a marcar productes nous, grans canvis en el codi, &etc; Utilitzant etiquetes, podeu tornar amb facilitat el projecte a un estat anterior, per a reproduir i seguir els errors, generar el codi de llançament de nou, &etc;. </para>
 
 <figure id="screenshot-checkout" float="1">
 <title
->Una captura de pantalla del diàleg de recuperació del &cervisia;</title>
+>Una captura de pantalla del diàleg d'extracció del &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="checkout.png"/></imageobject>
 <textobject
 ><phrase
->Una captura de pantalla del diàleg de recuperació del &cervisia;</phrase
+>Una captura de pantalla del diàleg d'extracció del &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
@@ -701,7 +701,7 @@
 ></term>
 <listitem
 ><para
->El nom del mòdul a obtenir. Si esteu treballant amb un d'existent en el repositori, probablement podeu aconseguir aquest nom de l'administrador del sistema, o bé, si és un repositori de codi font obert, podeu obtenir els noms dels mòduls de les pàgines web del projecte. Si voleu crear un nou mòdul a partir de zero amb un repositori local, n'hi ha prou amb crear una carpeta nova a la carpeta arrel del repositori local. El nom de la carpeta serà el mateix que el nom del mòdul buit. </para>
+>El nom del mòdul a extreure. Si esteu treballant amb un d'existent en el repositori, probablement podeu aconseguir aquest nom de l'administrador del sistema, o bé, si és un repositori de codi font obert, podeu obtenir els noms dels mòduls de les pàgines web del projecte. Si voleu crear un nou mòdul a partir de zero amb un repositori local, n'hi ha prou amb crear una carpeta nova a la carpeta arrel del repositori local. El nom de la carpeta serà el mateix que el nom del mòdul buit. </para>
 <para
 >Alternativament, si el repositori té un fitxer <filename
 ><envar
@@ -711,7 +711,7 @@
 >Obtén la llista</guibutton
 >. </para>
 <para
->Tingueu present que és possible obtenir una subcarpeta existent del mòdul, sense recuperar la resta del mòdul. Simplement introduïu el camí cap a la subcarpeta. </para
+>Tingueu present que és possible extreure una subcarpeta existent del mòdul, sense recuperar la resta del mòdul. Simplement introduïu el camí cap a la subcarpeta. </para
 ></listitem>
 </varlistentry>
 
@@ -722,7 +722,7 @@
 ></term>
 <listitem
 ><para
->El nom de la branca o etiqueta que voleu obtenir. Si deixeu aquest camp en blanc, el &cervisia; obtindrà la branca principal (HEAD). </para
+>El nom de la branca o etiqueta que voleu extreure. Si deixeu aquest camp en blanc, el &cervisia; recuperarà la branca principal (HEAD). </para
 ></listitem>
 </varlistentry>
 
@@ -733,8 +733,8 @@
 ></term>
 <listitem
 ><para
->La carpeta sota la qual s'ha d'obtenir el mòdul. Tingueu present que la carpeta del nivell superior de la còpia de treball és anomenada després del mòdul que esteu obtenint, fins que doneu un nom alternatiu en el camp <guilabel
->Obtén com a:</guilabel
+>La carpeta sota la qual s'ha d'extreure el mòdul. Tingueu present que la carpeta del nivell superior de la còpia de treball és anomenada després del mòdul que esteu obtenint, fins que doneu un nom alternatiu en el camp <guilabel
+>Extreu com a:</guilabel
 >. </para
 ></listitem>
 </varlistentry>
@@ -742,11 +742,11 @@
 <varlistentry>
 <term
 ><guilabel
->Obtén com a:</guilabel
+>Extreu com a:</guilabel
 ></term>
 <listitem
 ><para
->De resultes d'això, els fitxers de la còpia de treball seran obtinguts en una carpeta alternativa sota la carpeta de treball en lloc d'una carpeta anomenada després del mòdul. </para
+>De resultes d'això, els fitxers de la còpia de treball seran extrets en una carpeta alternativa sota la carpeta de treball en lloc d'una carpeta anomenada després del mòdul. </para
 ></listitem>
 </varlistentry>
 
@@ -757,18 +757,18 @@
 ></term>
 <listitem
 ><para
->Si marqueu aquesta casella, els fitxers s'exportaran en lloc d'obtenir-los. En exportar-los s'obté una còpia del codi al mòdul de &CVS; sense les carpetes administratives. Per exemple, l'exportació es pot utilitzar per a preparar el codi font per a un llançament. </para
+>Si marqueu aquesta casella, els fitxers s'exportaran en lloc d'extreure'ls. En exportar-los s'obté una còpia del codi al mòdul de &CVS; sense les carpetes administratives. Per exemple, l'exportació es pot utilitzar per a preparar el codi font per a un llançament. </para
 ></listitem>
 </varlistentry>
 
 <varlistentry>
 <term
 ><guilabel
->Obtén en mode recursiu</guilabel
+>Extracció en mode recursiu</guilabel
 ></term>
 <listitem
 ><para
->Obtén tots els fitxers i carpetes recursivament.</para
+>Extreu tots els fitxers i carpetes recursivament.</para
 ></listitem>
 </varlistentry>
 
@@ -1896,7 +1896,7 @@ Canvis al repositori
 >Navegant per l'historial</title>
 
 <para
->Si el repositori emprat té activat el registre, el &cervisia; pot presentar-vos un historial de certs esdeveniments com ara recuperacions, comissions, etiquetatges, actualitzacions i llançaments. Seleccioneu <guimenuitem
+>Si el repositori emprat té activat el registre, el &cervisia; pot presentar-vos un historial de certs esdeveniments com ara extraccions, comissions, etiquetatges, actualitzacions i llançaments. Seleccioneu <guimenuitem
 >Historial</guimenuitem
 > des del menú <guimenu
 >Visualitza</guimenu
@@ -1921,7 +1921,7 @@ Canvis al repositori
 
 <listitem
 ><para
->Obtenció - l'usuari que es mostra en la columna «Autor» ha proporcionat un mòdul </para
+>Extracció - l'usuari que es mostra en la columna «Autor» ha extret un mòdul </para
 ></listitem>
 
 <listitem
@@ -2006,7 +2006,7 @@ Canvis al repositori
 ></listitem>
 <listitem
 ><para
->Mostra els esdeveniments d'obtenció - mostra les obtencions</para
+>Mostra els esdeveniments d'extracció - mostra les extraccions</para
 ></listitem>
 <listitem
 ><para
@@ -2104,7 +2104,7 @@ Canvis al repositori
 >, on només es poden afegir correccions d'errors, deixant la branca de llançament principal (HEAD) oberta per afegir noves característiques. </para>
 
 <para
->Les etiquetes s'usen per marcar una versió d'un projecte. &CVS; marca una versió de cada fitxer amb l'etiqueta, de manera que quan vulgueu obtenir o actualitzar a una etiqueta específica, sempre obtingueu la mateixa versió dels fitxers: per tant, en oposició a les branques, les etiquetes no són dinàmiques: no podeu desenvolupar una etiqueta. Les etiquetes són útils per marcar llançaments, grans canvis en el codi, &etc; </para>
+>Les etiquetes s'usen per marcar una versió d'un projecte. &CVS; marca una versió de cada fitxer amb l'etiqueta, de manera que quan vulgueu extreure o actualitzar a una etiqueta específica, sempre obtingueu la mateixa versió dels fitxers: per tant, en oposició a les branques, les etiquetes no són dinàmiques: no podeu desenvolupar una etiqueta. Les etiquetes són útils per marcar llançaments, grans canvis en el codi, &etc; </para>
 
 <para
 >Quan esteu desenvolupant o seguint el desenvolupament d'un projecte de programari, no heu de treballar necessàriament amb la branca principal tot el temps. Després d'un llançament, potser voldreu mantenir-vos amb la branca llançada durant un temps, per gaudir de la seva relativa estabilitat, arranjar errors, traduir les fonts, &etc;. Per fer tot això, heu d'actualitzar la branca llançada. Tots els vostres fitxers s'actualitzaran a les darreres versions dels fitxers en aquesta branca. Després d'actualitzar, totes les vostres comissions noves també es pujaran a la nova branca. </para>
@@ -2115,7 +2115,7 @@ Canvis al repositori
 <warning
 ><para
 >Abans d'actualitzar a una branca o etiqueta diferent, assegureu-vos que heu comès tots els vostres canvis a la branca amb què esteu treballant. Si no esteu preparat per cometre els vostres canvis, però no els voleu descartar, no actualitzeu a la nova branca, ja que perdríeu els vostres canvis. Com a alternativa, podeu fer una nova <link linkend="checkingout"
->obtenció</link
+>extracció</link
 >, per treballar en paral·lel amb ambdues versions. </para
 ></warning>
 
@@ -2392,7 +2392,7 @@ Canvis al repositori
 </para>
 
 <para
->En l'escenari normal d'ús de &CVS; cada desenvolupador treballa per separat al seu entorn de proves obtingut. Quan vol modificar algun fitxer, simplement l'obre en l'editor i comença a treballar en ell. Ningú té coneixement quant a aquest treball fins que es comet el fitxer. </para>
+>En l'escenari normal d'ús de &CVS; cada desenvolupador treballa per separat al seu entorn de proves extret. Quan vol modificar algun fitxer, simplement l'obre en l'editor i comença a treballar en ell. Ningú té coneixement quant a aquest treball fins que es comet el fitxer. </para>
 
 <para
 >Per alguns grups de desenvolupadors, aquest no és el model preferit de cooperació. Volen estar notificats de quan algú està treballant en un fitxer <emphasis
@@ -2463,11 +2463,11 @@ Canvis al repositori
 </para>
 
 <para
->Fins ara, només hem parlat dels casos en els que els editats i els deseditats s'usen voluntàriament pels desenvolupadors. En addició &CVS; implementa un model que <emphasis
+>Fins ara, només hem parlat dels casos en els que els editats i els no editats s'usen voluntàriament pels desenvolupadors. En addició &CVS; implementa un model que <emphasis
 >força</emphasis
 > l'ús d'aquestes ordres. L'ordre responsable de commutar a aquest model és <command
 >cvs watch on</command
-> que no explicarem més detalladament perquè s'usa majorment per l'administrador del repositori. No obstant això el punt important des del punt de vista del desenvolupador és que quan el projecte força els editats, les còpies de treball s'obtenen com <emphasis
+> que no explicarem més detalladament perquè s'usa majorment per l'administrador del repositori. No obstant això el punt important des del punt de vista del desenvolupador és que quan el projecte força els editats, les còpies de treball s'extreuen com <emphasis
 >només de lectura</emphasis
 >. Això significa que no podeu editar un fitxer per omissió (tret que useu trucs com ara <command
 >chmod</command
@@ -2516,7 +2516,7 @@ Canvis al repositori
 
 <para
 >El model de desenvolupament seguit habitualment quan s'usa &CVS; s'anomena <emphasis
->obtencions sense reserves</emphasis
+>extraccions sense reserves</emphasis
 >. Cada desenvolupador té el seu propi entorn de proves on podrà editar els fitxers com vulgui. I quan s'utilitzen les característiques de supervisió com ara <command
 >cvs edit</command
 >. múltiples desenvolupadors poden treball en els fitxers sincronitzadament. Els canvis efectuats per un desenvolupador diferent són fusionats a l'entorn de proves en realitzar una actualització. </para>
@@ -3781,12 +3781,12 @@ Canvis al repositori
 ><guimenu
 >Repositori</guimenu
 ><guimenuitem
->Obtenir...</guimenuitem
+>Extreu...</guimenuitem
 > </menuchoice
 ></term>
 <listitem
 ><para
->Obre un diàleg que us permet recuperar un mòdul d'un repositori. Vegeu <xref linkend="checkingout"/>. </para
+>Obre un diàleg que us permet extreure un mòdul d'un repositori. Vegeu <xref linkend="checkingout"/>. </para
 ></listitem>
 </varlistentry>
 
