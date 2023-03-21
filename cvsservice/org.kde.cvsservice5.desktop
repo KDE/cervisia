@@ -76,6 +76,7 @@ Comment[da]=En D-Bus-tjeneste der sørger for en CVS-grænseflade
 Comment[de]=Ein D-Bus-Dienst, der eine Schnittstelle zu CVS bereitstellt
 Comment[el]=Μια υπηρεσία D-Bus που προσφέρει ένα περιβάλλον χρήσης για το cvs
 Comment[en_GB]=A D-Bus service that provides an interface to cvs
+Comment[eo]=D-Bus-servo kiu provizas interfacon al cvs
 Comment[es]=Un servicio D-Bus que proporciona una interfaz para cvs
 Comment[et]=CVS-ile liidest pakkuv D-Busi teenus
 Comment[eu]=cvs-rako interfazea eskeintzen duen D-BUS zerbitzu bat
