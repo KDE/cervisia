@@ -1,13 +1,14 @@
 # translation of cervisia.po to Esperanto
 # Copyright (C) 2002 Free Software Foundation, Inc.
 # Heiko Evermann <heiko@evermann.de>, 2002
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-14 00:48+0000\n"
-"PO-Revision-Date: 2007-10-10 20:46+0100\n"
+"PO-Revision-Date: 2023-03-20 22:31+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -30,7 +31,7 @@ msgstr "heiko@evermann.de, okellogg@users.sourceforge.net"
 #: addignoremenu.cpp:34
 #, kde-format
 msgid "Add to Ignore List"
-msgstr ""
+msgstr "Aldoni al Ignor-Listo"
 
 #: addignoremenu.cpp:65
 #, kde-format
@@ -191,10 +192,9 @@ msgid ""
 msgstr ""
 
 #: cervisiapart.cpp:227
-#, fuzzy, kde-format
-#| msgid "O&pen Sandbox..."
+#, kde-format
 msgid "Open Sandbox..."
-msgstr "Malfermi &Provejon..."
+msgstr "Malfermi Provejon..."
 
 #: cervisiapart.cpp:231
 #, kde-format
@@ -737,12 +737,11 @@ msgid "A CVS frontend"
 msgstr "CVS-fasado"
 
 #: cervisiapart.cpp:719 main.cpp:142
-#, fuzzy, kde-format
-#| msgid "Copyright (c) 1999-2002 Bernd Gehrmann"
+#, kde-format
 msgid ""
 "Copyright (c) 1999-2002 Bernd Gehrmann\n"
 "Copyright (c) 2002-2008 the Cervisia authors"
-msgstr "Kopirajto (k) 1999-2002 Bernd Gehrmann"
+msgstr ""
 
 #: cervisiapart.cpp:724 main.cpp:147
 #, kde-format
@@ -1133,12 +1132,11 @@ msgid "Synchronize scroll bars"
 msgstr "Sinkronigi rulumskalojn"
 
 #: diffdialog.cpp:112 diffdialog.cpp:403
-#, fuzzy, kde-format
-#| msgid "%1 differences"
+#, kde-format
 msgid "%1 difference"
 msgid_plural "%1 differences"
-msgstr[0] "%1 diferencoj"
-msgstr[1] "%1 diferencoj"
+msgstr[0] ""
+msgstr[1] ""
 
 #: diffdialog.cpp:238
 #, kde-format
@@ -1386,10 +1384,9 @@ msgid "Unknown "
 msgstr "Nekonata "
 
 #: logdialog.cpp:86
-#, fuzzy, kde-format
-#| msgid "S&earch:"
+#, kde-format
 msgid "Search:"
-msgstr "S&erĉi:"
+msgstr "Serĉi:"
 
 #: logdialog.cpp:97
 #, kde-format
@@ -1444,10 +1441,9 @@ msgid "Comment/Tags:"
 msgstr "Komento/Etikedoj:"
 
 #: logdialog.cpp:198
-#, fuzzy, kde-format
-#| msgid "&Annotate"
+#, kde-format
 msgid "&Annotate A"
-msgstr "Prinot&adi"
+msgstr ""
 
 #: logdialog.cpp:200
 #, kde-format
@@ -1467,11 +1463,9 @@ msgid "This revision is used as the second item of a Diff operation."
 msgstr ""
 
 #: logdialog.cpp:225
-#, fuzzy, kde-format
-#| msgctxt "to view something"
-#| msgid "&View"
+#, kde-format
 msgid "&View A"
-msgstr "&Vidi"
+msgstr ""
 
 #: logdialog.cpp:226
 #, kde-format
@@ -1559,22 +1553,19 @@ msgid "The sandbox to be loaded"
 msgstr "La ŝargenda provejo"
 
 #: main.cpp:167
-#, fuzzy, kde-format
-#| msgid "Show resolve dialog for the given file"
+#, kde-format
 msgid "Show resolve dialog for the given file."
-msgstr "Montri solvaddialogon por la donita dosiero"
+msgstr "Montri solvaddialogon por la donita dosiero."
 
 #: main.cpp:168
-#, fuzzy, kde-format
-#| msgid "Show log dialog for the given file"
+#, kde-format
 msgid "Show log dialog for the given file."
-msgstr "Montri protokoldialogon por la donita dosiero"
+msgstr "Montri protokoldialogon por la donita dosiero."
 
 #: main.cpp:169
-#, fuzzy, kde-format
-#| msgid "Show annotation dialog for the given file"
+#, kde-format
 msgid "Show annotation dialog for the given file."
-msgstr "Montri prinotaddialogon por la donita dosiero"
+msgstr "Montri prinotaddialogon por la donita dosiero."
 
 #: mergedialog.cpp:41
 #, kde-format
@@ -1743,16 +1734,14 @@ msgid "Status"
 msgstr "Stato"
 
 #: repositorydialog.cpp:199
-#, fuzzy, kde-format
-#| msgid "&Add..."
+#, kde-format
 msgid "Add..."
-msgstr "&Aldoni..."
+msgstr "Aldoni..."
 
 #: repositorydialog.cpp:200
-#, fuzzy, kde-format
-#| msgid "&Modify..."
+#, kde-format
 msgid "Modify..."
-msgstr "&Modifi..."
+msgstr "Modifi..."
 
 #: repositorydialog.cpp:202
 #, kde-format
@@ -1951,10 +1940,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, compressionLbl)
 #: settingsdialog_advanced.ui:45
-#, fuzzy, kde-format
-#| msgid "Use different &compression level:"
+#, kde-format
 msgid "Default compression &level:"
-msgstr "Uzi alian &densignivelon:"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
 #: settingsdialog_advanced.ui:58
@@ -2103,36 +2091,3 @@ msgstr "Malredakti"
 #, kde-format
 msgid "Commit"
 msgstr "Enmeti"
-
-#~ msgid "Invoking help on Cervisia"
-#~ msgstr "Alvokante helpon pri Cervisia"
-
-#~ msgid "&Overwrite"
-#~ msgstr "&Anstataŭigi"
-
-#~ msgid "Opens the bug report dialog"
-#~ msgstr "Malfermas la cimraportan dialogon"
-
-#~ msgid "&Remove"
-#~ msgstr "Fo&rigi"
-
-#~ msgid "Copyright (c) 1999-2002 Bernd Gehrmann"
-#~ msgstr "Kopirajto (k) 1999-2002 Bernd Gehrmann"
-
-#~ msgid "Show All &Files"
-#~ msgstr "Montri Ĉiu&jn Dosierojn"
-
-#~ msgid "Show Unmodified Files"
-#~ msgstr "Montri Nemodifitajn Dosierojn"
-
-#~ msgid "Show Removed Files"
-#~ msgstr "Montri Forigitajn Dosierojn"
-
-#~ msgid "Show Non-CVS Files"
-#~ msgstr "Montri Ne-CVS-ajn Dosierojn"
-
-#~ msgid "Show Empty Folders"
-#~ msgstr "Montri Malplenajn Dosierujojn"
-
-#~ msgid "Fold Folder"
-#~ msgstr "Faldi Dosierujon"
