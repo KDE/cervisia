@@ -3,7 +3,7 @@
 # Copyright (C) 2003 Free Software Foundation, Inc.
 # Teemu Rytilahti <teemu.rytilahti@d5k.net>, 2003.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2010, 2012, 2013, 2014, 2016.
-# Tommi Nieminen <translator@legisign.org>, 2021.
+# Tommi Nieminen <translator@legisign.org>, 2021, 2023.
 #
 # KDE Finnish translation sprint participants:
 # Author: Artnay
@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-14 00:48+0000\n"
-"PO-Revision-Date: 2021-08-29 12:37+0300\n"
+"PO-Revision-Date: 2023-04-02 16:13+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2012-12-01 22:25:30+0000\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1281,27 +1281,27 @@ msgstr "Tuntematon"
 #: historydialog.cpp:106 historydialog.cpp:343
 #, kde-format
 msgid "Commit, Modified "
-msgstr ""
+msgstr "Toimitus, Muutettu "
 
 #: historydialog.cpp:106 historydialog.cpp:346
 #, kde-format
 msgid "Commit, Added "
-msgstr ""
+msgstr "Toimitus, Lisätty"
 
 #: historydialog.cpp:106 historydialog.cpp:349
 #, kde-format
 msgid "Commit, Removed "
-msgstr ""
+msgstr "Toimitus, Poistettu "
 
 #: historydialog.cpp:111 historydialog.cpp:319
 #, kde-format
 msgid "Checkout "
-msgstr ""
+msgstr "Nouto "
 
 #: historydialog.cpp:116 loginfo.cpp:57
 #, kde-format
 msgid "Tag"
-msgstr ""
+msgstr "Tunniste"
 
 #: historydialog.cpp:138 loglist.cpp:106
 #, kde-format
@@ -1341,7 +1341,7 @@ msgstr "Näytä t&oimitustapahtumat"
 #: historydialog.cpp:145
 #, kde-format
 msgid "Show ch&eckout events"
-msgstr ""
+msgstr "Näytä t&oimitustapahtumat"
 
 #: historydialog.cpp:148
 #, kde-format
@@ -1361,12 +1361,12 @@ msgstr "Vain &käyttäjä:"
 #: historydialog.cpp:156
 #, kde-format
 msgid "Only &filenames matching:"
-msgstr ""
+msgstr "Vain &tiedostonimet, jotka vastaavat hakua"
 
 #: historydialog.cpp:158
 #, kde-format
 msgid "Only &folders matching:"
-msgstr ""
+msgstr "Vain &kansiot, jotka vastaavat hakua:"
 
 #: historydialog.cpp:279 historydialog.cpp:285
 #, kde-format
@@ -1386,27 +1386,27 @@ msgstr ""
 #: historydialog.cpp:328
 #, kde-format
 msgid "Update, Deleted "
-msgstr ""
+msgstr "Päivitys, Poistettu "
 
 #: historydialog.cpp:331
 #, kde-format
 msgid "Update, Copied "
-msgstr ""
+msgstr "Päivitys, Kopioitu"
 
 #: historydialog.cpp:334
 #, kde-format
 msgid "Update, Merged "
-msgstr ""
+msgstr "Päivitys, Yhdistetty "
 
 #: historydialog.cpp:337
 #, kde-format
 msgid "Update, Conflict "
-msgstr ""
+msgstr "Päivitys, Ristiriita "
 
 #: historydialog.cpp:340
-#, fuzzy, kde-format
+#, kde-format
 msgid "Update, Patched "
-msgstr "Päivitetty"
+msgstr "Päivitys, Paikattu "
 
 #: historydialog.cpp:352
 #, kde-format
@@ -1431,7 +1431,7 @@ msgstr "&Lista"
 #: logdialog.cpp:99
 #, kde-format
 msgid "CVS &Output"
-msgstr ""
+msgstr "&CVS-tuloste"
 
 #: logdialog.cpp:106
 #, kde-format
@@ -1853,22 +1853,22 @@ msgstr "Diff-katselin"
 #: settingsdialog.cpp:251
 #, kde-format
 msgid "&Number of context lines in diff dialog:"
-msgstr ""
+msgstr "&Diff-näkymän kontekstirivien määrä:"
 
 #: settingsdialog.cpp:259
 #, kde-format
 msgid "Additional &options for cvs diff:"
-msgstr ""
+msgstr "&CVS-diffin lisävalinnat:"
 
 #: settingsdialog.cpp:266
 #, kde-format
 msgid "Tab &width in diff dialog:"
-msgstr ""
+msgstr "Diff-näkymän &sarakeleveys:"
 
 #: settingsdialog.cpp:274
 #, kde-format
 msgid "External diff &frontend:"
-msgstr ""
+msgstr "&Ulkoinen diff-käyttöliittymä:"
 
 #: settingsdialog.cpp:296
 #, kde-format
@@ -1876,6 +1876,8 @@ msgid ""
 "When opening a sandbox from a &remote repository,\n"
 "start a File->Status command automatically"
 msgstr ""
+"Avattaessa hiekkalaatikkoa &etälähteestä käynnistä\n"
+"automaattisesti Tiedosto→Tila-komento"
 
 #: settingsdialog.cpp:299
 #, kde-format
@@ -1883,6 +1885,8 @@ msgid ""
 "When opening a sandbox from a &local repository,\n"
 "start a File->Status command automatically"
 msgstr ""
+"Avattaessa hiekkalaatikkoa &paikallisesta lähteestä\n"
+"käynnistä automaattisesti Tiedosto→Tila-komento"
 
 #: settingsdialog.cpp:316
 #, kde-format
@@ -1990,7 +1994,7 @@ msgstr ""
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Tag"
-msgstr ""
+msgstr "CVS-tunniste"
 
 #: tagdialog.cpp:67 tagdialog.cpp:86
 #, kde-format
@@ -2018,6 +2022,8 @@ msgid ""
 "Tag must start with a letter and may contain letters, digits and the "
 "characters '-' and '_'."
 msgstr ""
+"Tunnisteiden on alettava kirjaimella, ja niissä saa olla vain kirjaimia, "
+"numeroita ja merkkejä ”-” ja ”_”."
 
 #: updatedialog.cpp:42
 #, kde-format
@@ -2087,17 +2093,17 @@ msgstr "&Vain:"
 #: watchdialog.cpp:68
 #, kde-format
 msgid "&Commits"
-msgstr ""
+msgstr "T&oimitukset"
 
 #: watchdialog.cpp:72
 #, kde-format
 msgid "&Edits"
-msgstr ""
+msgstr "&Muokkaukset"
 
 #: watchdialog.cpp:76
 #, kde-format
 msgid "&Unedits"
-msgstr ""
+msgstr "Muokkausten &kumoamiset"
 
 #: watchersdialog.cpp:68 watchersdialog.cpp:74
 #, kde-format
