@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-14 00:48+0000\n"
-"PO-Revision-Date: 2023-03-20 22:31+0100\n"
+"PO-Revision-Date: 2023-04-18 06:31+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -270,7 +270,7 @@ msgstr ""
 #: cervisiapart.cpp:284
 #, kde-format
 msgid "&Add to Repository..."
-msgstr "&Aldonu al arĥivo..."
+msgstr "&Aldoni al arĥivo..."
 
 #: cervisiapart.cpp:287
 #, kde-format
@@ -374,7 +374,7 @@ msgstr ""
 #: cervisiapart.cpp:361
 #, kde-format
 msgid "Difference to Repository (HEAD)..."
-msgstr "&Diferenco al Deponejo (HEAD)..."
+msgstr "Diferenco al Deponejo (HEAD)..."
 
 #: cervisiapart.cpp:365
 #, kde-format
@@ -704,17 +704,17 @@ msgstr ""
 #: cervisiapart.cpp:602
 #, kde-format
 msgid "Configure Cervisia..."
-msgstr "Agordu Versioadministrilon..."
+msgstr "Agordi Versioadministrilon..."
 
 #: cervisiapart.cpp:605
 #, kde-format
 msgid "Allows you to configure the Cervisia KPart"
-msgstr ""
+msgstr "Permesas al vi agordi la Cervisia-KPart"
 
 #: cervisiapart.cpp:613
 #, kde-format
 msgid "CVS &Manual"
-msgstr "&CVS manlibro"
+msgstr "CVS &manlibro"
 
 #: cervisiapart.cpp:616
 #, kde-format
@@ -1135,13 +1135,13 @@ msgstr "Sinkronigi rulumskalojn"
 #, kde-format
 msgid "%1 difference"
 msgid_plural "%1 differences"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 diferenco"
+msgstr[1] "%1 diferencoj"
 
 #: diffdialog.cpp:238
 #, kde-format
 msgid "CVS Diff: %1"
-msgstr ""
+msgstr "CVS Diff: %1"
 
 #: diffdialog.cpp:239
 #, kde-format
@@ -1448,7 +1448,7 @@ msgstr ""
 #: logdialog.cpp:200
 #, kde-format
 msgid "&Find"
-msgstr "&Trovu"
+msgstr "&Trovi"
 
 #: logdialog.cpp:207
 #, kde-format
@@ -1796,7 +1796,7 @@ msgstr "%1 konfliktas"
 #: settingsdialog.cpp:70
 #, kde-format
 msgid "Configure Cervisia"
-msgstr "Agordu Versioadministrilon"
+msgstr "Agordi Versioadministrilon"
 
 #: settingsdialog.cpp:215
 #, kde-format
