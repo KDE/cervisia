@@ -1,4 +1,4 @@
-find_package(KF5DBusAddons)
+find_package(KF${KF_MAJOR_VERSION}DBusAddons)
 
 set(cvsservice_bin_KDEINIT_SRCS 
    main.cpp 
@@ -29,7 +29,7 @@ qt_add_dbus_adaptor(cvsservice_bin_KDEINIT_SRCS org.kde.cervisia5.cvsjob.xml cvs
 kf5_add_kdeinit_executable(cvsservice_bin ${cvsservice_bin_KDEINIT_SRCS} NOGUI)
 set_target_properties(cvsservice_bin PROPERTIES OUTPUT_NAME cvsservice5)
 
-target_link_libraries(kdeinit_cvsservice_bin Qt::Widgets Qt::DBus KF5::KIOCore KF5::I18n KF5::WidgetsAddons KF5::Su KF5::DBusAddons KF5::ConfigCore)
+target_link_libraries(kdeinit_cvsservice_bin Qt::Widgets Qt::DBus KF${KF_MAJOR_VERSION}::KIOCore KF${KF_MAJOR_VERSION}::I18n KF${KF_MAJOR_VERSION}::WidgetsAddons KF${KF_MAJOR_VERSION}::Su KF${KF_MAJOR_VERSION}::DBusAddons KF${KF_MAJOR_VERSION}::ConfigCore)
 set_target_properties(kdeinit_cvsservice_bin PROPERTIES OUTPUT_NAME kdeinit5_cvsservice)
 
 install(TARGETS kdeinit_cvsservice_bin ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
@@ -41,7 +41,7 @@ install(TARGETS cvsservice_bin  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 kf5_add_kdeinit_executable(cvsaskpass cvsaskpass.cpp)
 
-target_link_libraries(kdeinit_cvsaskpass Qt::Widgets KF5::WidgetsAddons KF5::CoreAddons KF5::I18n)
+target_link_libraries(kdeinit_cvsaskpass Qt::Widgets KF${KF_MAJOR_VERSION}::WidgetsAddons KF${KF_MAJOR_VERSION}::CoreAddons KF${KF_MAJOR_VERSION}::I18n)
 
 install(TARGETS kdeinit_cvsaskpass ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 

@@ -8,8 +8,17 @@ set(RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_
 
 project(cervisia VERSION ${RELEASE_SERVICE_VERSION})
 
-set(QT_MIN_VERSION "5.15.0")
+set(QT_REQUIRED_VERSION "5.15.0")
 set (KDE_COMPILERSETTINGS_LEVEL "5.82.0")
+
+if (QT_MAJOR_VERSION STREQUAL "6")
+    set(QT_REQUIRED_VERSION "6.4.0")
+    set(KF_MIN_VERSION "5.240.0")
+    set(KF_MAJOR_VERSION "6")
+else()
+    set(KF_MAJOR_VERSION "5")
+endif()
+
 
 find_package(ECM 5.90.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
@@ -33,7 +42,7 @@ ecm_setup_version(${RELEASE_SERVICE_VERSION} VARIABLE_PREFIX CERVISIA VERSION_HE
 
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Widgets DBus)
 
-find_package(KF5 REQUIRED COMPONENTS I18n Parts DocTools Init IconThemes Notifications WidgetsAddons ItemViews Su TextWidgets)
+find_package(KF${KF_MAJOR_VERSION} REQUIRED COMPONENTS I18n Parts DocTools Init IconThemes Notifications WidgetsAddons ItemViews Su TextWidgets)
 
 add_subdirectory( doc )
 add_subdirectory( cvsservice )
@@ -105,7 +114,7 @@ set(cervisia_KDEINIT_SRCS ${libcervisia_SRCS}
 
 kf5_add_kdeinit_executable(cervisia ${cervisia_KDEINIT_SRCS})
 
-target_link_libraries(kdeinit_cervisia KF5::I18n KF5::TextWidgets KF5::Parts KF5::ItemViews)
+target_link_libraries(kdeinit_cervisia KF${KF_MAJOR_VERSION}::I18n KF${KF_MAJOR_VERSION}::TextWidgets KF${KF_MAJOR_VERSION}::Parts KF${KF_MAJOR_VERSION}::ItemViews)
 
 install(TARGETS kdeinit_cervisia ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
@@ -181,7 +190,7 @@ qt_add_dbus_adaptor(cervisiapart_PART_SRCS org.kde.cervisia5.protocolview.xml pr
 
 add_library(cervisiapart5 MODULE ${cervisiapart_PART_SRCS})
 
-target_link_libraries(cervisiapart5 KF5::I18n KF5::TextWidgets KF5::Parts KF5::Notifications KF5::ItemViews)
+target_link_libraries(cervisiapart5 KF${KF_MAJOR_VERSION}::I18n KF${KF_MAJOR_VERSION}::TextWidgets KF${KF_MAJOR_VERSION}::Parts KF${KF_MAJOR_VERSION}::Notifications KF${KF_MAJOR_VERSION}::ItemViews)
 
 install(TARGETS cervisiapart5  DESTINATION ${KDE_INSTALL_PLUGINDIR} )
 
