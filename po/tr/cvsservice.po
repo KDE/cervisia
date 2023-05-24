@@ -1,24 +1,24 @@
-# SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Aydın CAN <aydincan2001@yahoo.com>, 2004
-# Mustafa Günay <mustafagunay@gmail.com>, 2007
+# Aydın CAN <aydincan2001@yahoo.com>, 2004.
+# Mustafa Günay <mustafagunay@gmail.com>, 2007.
+# Emir SARI <emir_sari@icloud.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-14 00:48+0000\n"
-"PO-Revision-Date: 2017-06-04 11:30+0000\n"
-"Last-Translator: Mete <metebilgin48@gmail.com>\n"
-"Language-Team: Turkish (http://www.transifex.com/projects/p/kdesdk-k-tr/"
-"language/tr/)\n"
+"PO-Revision-Date: 2023-05-24 00:51+0300\n"
+"Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
+"Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 23.07.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -38,7 +38,7 @@ msgstr "cvsaskpass"
 #: cvsaskpass.cpp:40
 #, kde-format
 msgid "ssh-askpass for the CVS D-Bus Service"
-msgstr "CVS D-BUS Servisi için ssh-parolası sor"
+msgstr "CVS D-BUS Hizmeti için ssh-parolası sor"
 
 #: cvsaskpass.cpp:42
 #, kde-format
@@ -82,12 +82,12 @@ msgstr "Halihazırda çalışan bir işiniz var"
 #: main.cpp:36
 #, kde-format
 msgid "CVS D-Bus service"
-msgstr "CVS D-BUS servisi"
+msgstr "CVS D-BUS hizmeti"
 
 #: main.cpp:38
 #, kde-format
 msgid "D-Bus service for CVS"
-msgstr "CVS için D-BUS servisi"
+msgstr "CVS için D-BUS hizmeti"
 
 #: main.cpp:40
 #, kde-format
