@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
@@ -40,8 +40,7 @@ msgstr "無視リストに追加"
 #, kde-format
 msgid "Ignore File"
 msgid_plural "Ignore %1 Files"
-msgstr[0] "ファイルを無視"
-msgstr[1] "%1 ファイルを無視"
+msgstr[0] "%1 ファイルを無視"
 
 #: addignoremenu.cpp:85
 #, kde-format
@@ -1145,7 +1144,6 @@ msgstr "スクロールバーを同期"
 msgid "%1 difference"
 msgid_plural "%1 differences"
 msgstr[0] "%1 件の差異"
-msgstr[1] "%1 件の差異"
 
 #: diffdialog.cpp:238
 #, kde-format
