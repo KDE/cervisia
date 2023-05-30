@@ -1,13 +1,16 @@
 # Translation of cvsservice into esperanto.
+# Copyright (C) 2009 Free Software Foundation, Inc.
+# This file is distributed under the same license as the cervisia package.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: cvsservice\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-14 00:48+0000\n"
-"PO-Revision-Date: 2009-11-15 12:06+0100\n"
-"Last-Translator: Axel Rousseau <axel@esperanto-jeunes.org>\n"
+"PO-Revision-Date: 2023-05-29 21:25+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -19,12 +22,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Axel Rousseau"
+msgstr "Axel Rousseau,Oliver Kellogg"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "axel@esperanto-jeunes.org"
+msgstr "axel@esperanto-jeunes.org,okellogg@users.sourceforge.net"
 
 #: cvsaskpass.cpp:38
 #, kde-format
@@ -34,12 +37,12 @@ msgstr "cvsaskpass"
 #: cvsaskpass.cpp:40
 #, kde-format
 msgid "ssh-askpass for the CVS D-Bus Service"
-msgstr ""
+msgstr "ssh-askpass por la CVS D-Bus-servo"
 
 #: cvsaskpass.cpp:42
 #, kde-format
 msgid "Copyright (c) 2003 Christian Loose"
-msgstr ""
+msgstr "Kopirajto (K) 2003 Christian Loose"
 
 #: cvsaskpass.cpp:49
 #, kde-format
@@ -49,7 +52,7 @@ msgstr "prompt"
 #: cvsaskpass.cpp:61
 #, kde-format
 msgid "Please type in your password below."
-msgstr ""
+msgstr "Bonvolu entajpu via pasvorton sube."
 
 #: cvsaskpass.cpp:65
 #, kde-format
@@ -59,7 +62,7 @@ msgstr "Deponejo:"
 #: cvsloginjob.cpp:108
 #, kde-format
 msgid "Enter password for repository %1."
-msgstr ""
+msgstr "Enigu pasvorton por deponejo %1."
 
 #: cvsservice.cpp:883
 #, kde-format
@@ -67,26 +70,27 @@ msgid ""
 "You have to set a local working copy directory before you can use this "
 "function!"
 msgstr ""
+"Vi devas unue meti dosierujon por loka laborkopio antaŭ povi uzi ĉi funkcion!"
 
 #: cvsservice.cpp:896
 #, kde-format
 msgid "There is already a job running"
-msgstr ""
+msgstr "Estas jam labortasko rulanta"
 
 #: main.cpp:36
 #, kde-format
 msgid "CVS D-Bus service"
-msgstr ""
+msgstr "CVS D-Bus-servo"
 
 #: main.cpp:38
 #, kde-format
 msgid "D-Bus service for CVS"
-msgstr ""
+msgstr "D-Bus-servo por CVS"
 
 #: main.cpp:40
 #, kde-format
 msgid "Copyright (c) 2002-2003 Christian Loose"
-msgstr ""
+msgstr "Kopirajto (k) 2002-2003 Christian Loose"
 
 #: main.cpp:44
 #, kde-format
