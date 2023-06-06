@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-14 00:48+0000\n"
-"PO-Revision-Date: 2023-04-23 05:24+0200\n"
+"PO-Revision-Date: 2023-06-05 13:05+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1870,7 +1870,7 @@ msgid ""
 "start a File->Status command automatically"
 msgstr ""
 "Ao abrir un borrador local dun repositorio &remoto,\n"
-"iniciar automaticamente unha orde Ficheiro->Estado"
+"iniciar automaticamente unha orde «Ficheiro → Estado»."
 
 #: settingsdialog.cpp:299
 #, kde-format
@@ -1879,7 +1879,7 @@ msgid ""
 "start a File->Status command automatically"
 msgstr ""
 "Ao abrir un borrador local dun repositorio &local,\n"
-"iniciar automaticamente unha orde Ficheiro->Estado"
+"iniciar automaticamente unha orde «Ficheiro → Estado»."
 
 #: settingsdialog.cpp:316
 #, kde-format
