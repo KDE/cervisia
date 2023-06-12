@@ -13,6 +13,7 @@
   <name xml:lang="de">Cervisia</name>
   <name xml:lang="el">Cervisia</name>
   <name xml:lang="en-GB">Cervisia</name>
+  <name xml:lang="eo">Cervisia</name>
   <name xml:lang="es">Cervisia</name>
   <name xml:lang="et">Cervisia</name>
   <name xml:lang="eu">Cervisia</name>
@@ -45,6 +46,7 @@
   <summary xml:lang="de">Eine grafische Benutzeroberfläche für das Versionsverwaltungssystem CVS</summary>
   <summary xml:lang="el">Ένα γραφικό περιβάλλον για το σύστημα ελέγχου CVS</summary>
   <summary xml:lang="en-GB">A graphical CVS version control system front-end</summary>
+  <summary xml:lang="eo">Grafika fasado por CVS versiokontrola sistemo</summary>
   <summary xml:lang="es">Una interfaz gráfica para el sistema de control de versiones CVS</summary>
   <summary xml:lang="et">Versioonihaldussüsteemi CVS graafiline kasutajaliides</summary>
   <summary xml:lang="eu">CVS bertsio kontrolerako sistemarentzako aurrealdeko grafiko bat</summary>
