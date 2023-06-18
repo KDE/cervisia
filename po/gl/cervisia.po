@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-14 00:48+0000\n"
-"PO-Revision-Date: 2023-06-05 13:05+0200\n"
+"PO-Revision-Date: 2023-06-17 16:06+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -530,7 +530,7 @@ msgstr "Edita (cvs edit) os ficheiros escollidos"
 #: cervisiapart.cpp:464
 #, kde-format
 msgid "U&nedit Files"
-msgstr "Fi&nalizar a edición dos ficheiros"
+msgstr "Anular a edición dos ficheiros"
 
 #: cervisiapart.cpp:467
 #, kde-format
@@ -2097,7 +2097,7 @@ msgstr "&Edicións"
 #: watchdialog.cpp:76
 #, kde-format
 msgid "&Unedits"
-msgstr "&Fin de edición"
+msgstr "Anulacións de edición"
 
 #: watchersdialog.cpp:68 watchersdialog.cpp:74
 #, kde-format
@@ -2117,7 +2117,7 @@ msgstr "Editar"
 #: watchersmodel.cpp:90
 #, kde-format
 msgid "Unedit"
-msgstr "Terminar a edición"
+msgstr "Anular a edición"
 
 #: watchersmodel.cpp:92
 #, kde-format
