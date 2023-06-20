@@ -3,20 +3,21 @@
 # mvillarino <mvillarino@users.sourceforge.net>, 2007.
 # Marce Villarino <mvillarino@gmail.com>, 2009.
 # Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail.com>, 2017.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: cvsservice\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-14 00:48+0000\n"
-"PO-Revision-Date: 2017-01-11 08:39+0100\n"
-"Last-Translator: Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail."
-"com>\n"
-"Language-Team: Galician <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2023-06-19 14:28+0200\n"
+"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
+"Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -69,7 +70,7 @@ msgid ""
 "You have to set a local working copy directory before you can use this "
 "function!"
 msgstr ""
-"Debe configurar un directorio para a copia local de traballo antes de poder "
+"Debe definir un directorio para a copia local de traballo antes de poder "
 "usar esta función!"
 
 #: cvsservice.cpp:896

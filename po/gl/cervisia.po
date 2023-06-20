@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-14 00:48+0000\n"
-"PO-Revision-Date: 2023-06-17 16:06+0200\n"
+"PO-Revision-Date: 2023-06-19 14:28+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -195,7 +195,7 @@ msgid ""
 "N - All up-to-date files are hidden\n"
 "R - All removed files are hidden"
 msgstr ""
-"F: Agóchanse todos os ficheiros, a árbore só mostra cartafoles\n"
+"F: Agóchanse todos os ficheiros, a árbore só amosa cartafoles\n"
 "N: Agóchanse todos os ficheiros actualizados\n"
 "R: Agóchanse todos os ficheiros retirados"
 
@@ -349,7 +349,7 @@ msgstr "Examinar o &rexistro…"
 #: cervisiapart.cpp:336
 #, kde-format
 msgid "Shows the revision tree of the selected file"
-msgstr "Mostra a árbore revisións do ficheiro escollido"
+msgstr "Amosa a árbore revisións do ficheiro escollido"
 
 #: cervisiapart.cpp:341
 #, kde-format
@@ -364,7 +364,7 @@ msgstr "&Anotar…"
 #: cervisiapart.cpp:349
 #, kde-format
 msgid "Shows a blame-annotated view of the selected file"
-msgstr "Mostra unha vista do ficheiro escollido coas autorías"
+msgstr "Amosa unha vista do ficheiro escollido coas autorías"
 
 #: cervisiapart.cpp:353
 #, kde-format
@@ -377,8 +377,7 @@ msgid ""
 "Shows the differences of the selected file to the checked out version (tag "
 "BASE)"
 msgstr ""
-"Mostra as diferenzas do ficheiro escollido coa versión obtida (a versión "
-"BASE)"
+"Amosa as diferenzas do ficheiro escollido coa versión obtida (a versión BASE)"
 
 #: cervisiapart.cpp:361
 #, kde-format
@@ -391,7 +390,7 @@ msgid ""
 "Shows the differences of the selected file to the newest version in the "
 "repository (tag HEAD)"
 msgstr ""
-"Mostra as diferenzas do ficheiro escollido coa versión máis recente do "
+"Amosa as diferenzas do ficheiro escollido coa versión máis recente do "
 "repositorio (versión HEAD)"
 
 #: cervisiapart.cpp:369
@@ -404,7 +403,7 @@ msgstr "Último &cambio…"
 msgid ""
 "Shows the differences between the last two revisions of the selected file"
 msgstr ""
-"Mostra as diferenzas entre as dúas últimas revisións do ficheiro escollido"
+"Amosa as diferenzas entre as dúas últimas revisións do ficheiro escollido"
 
 #: cervisiapart.cpp:376
 #, kde-format
@@ -414,7 +413,7 @@ msgstr "&Historial…"
 #: cervisiapart.cpp:379
 #, kde-format
 msgid "Shows the CVS history as reported by the server"
-msgstr "Mostra o historial do CVS coñecido polo servidor"
+msgstr "Amosa o historial do CVS coñecido polo servidor"
 
 #: cervisiapart.cpp:383
 #, kde-format
@@ -510,12 +509,12 @@ msgstr "Retira o vixilante dos ficheiros seleccionados"
 #: cervisiapart.cpp:450
 #, kde-format
 msgid "Show &Watchers"
-msgstr "Mostrar os &vixilantes"
+msgstr "Amosar os &vixilantes"
 
 #: cervisiapart.cpp:453
 #, kde-format
 msgid "Shows the watchers of the selected files"
-msgstr "Mostra os usuarios que están a vixiar os ficheiros escollidos"
+msgstr "Amosa os usuarios que están a vixiar os ficheiros escollidos"
 
 #: cervisiapart.cpp:457
 #, kde-format
@@ -540,12 +539,12 @@ msgstr "Anula a edición (cvs unedit) dos ficheiros escollidos"
 #: cervisiapart.cpp:471
 #, kde-format
 msgid "Show &Editors"
-msgstr "Mostrar os &editores"
+msgstr "Amosar os &editores"
 
 #: cervisiapart.cpp:474
 #, kde-format
 msgid "Shows the editors of the selected files"
-msgstr "Mostra os editores dos ficheiros escollidos"
+msgstr "Amosa os editores dos ficheiros escollidos"
 
 #: cervisiapart.cpp:478
 #, kde-format
@@ -622,7 +621,7 @@ msgstr "Agochar todos os &ficheiros"
 #: cervisiapart.cpp:533
 #, kde-format
 msgid "Determines whether only folders are shown"
-msgstr "Indica se mostrar só os cartafoles"
+msgstr "Indica se amosar só os cartafoles"
 
 #: cervisiapart.cpp:537
 #, kde-format
@@ -1327,22 +1326,22 @@ msgstr "Ruta ao Repositorio"
 #: historydialog.cpp:142
 #, kde-format
 msgid "Show c&ommit events"
-msgstr "M&ostrar os eventos de remisións"
+msgstr "Am&osar os eventos de remisións"
 
 #: historydialog.cpp:145
 #, kde-format
 msgid "Show ch&eckout events"
-msgstr "Mostrar os eventos de o&btención"
+msgstr "Amosar os eventos de o&btención"
 
 #: historydialog.cpp:148
 #, kde-format
 msgid "Show &tag events"
-msgstr "Mostrar os eventos de creación de e&tiqueta"
+msgstr "Amosar os eventos de creación de e&tiqueta"
 
 #: historydialog.cpp:151
 #, kde-format
 msgid "Show &other events"
-msgstr "Mostrar &outros eventos"
+msgstr "Amosar &outros eventos"
 
 #: historydialog.cpp:154
 #, kde-format
@@ -1580,17 +1579,17 @@ msgstr "O borrador de traballo a cargar"
 #: main.cpp:167
 #, kde-format
 msgid "Show resolve dialog for the given file."
-msgstr "Mostrar o diálogo de resolución co ficheiro escollido."
+msgstr "Amosar o diálogo de resolución co ficheiro escollido."
 
 #: main.cpp:168
 #, kde-format
 msgid "Show log dialog for the given file."
-msgstr "Mostrar o diálogo de rexistro do ficheiro escollido."
+msgstr "Amosar o diálogo de rexistro do ficheiro escollido."
 
 #: main.cpp:169
 #, kde-format
 msgid "Show annotation dialog for the given file."
-msgstr "Mostrar o diálogo de anotación do ficheiro escollido."
+msgstr "Amosar o diálogo de anotación do ficheiro escollido."
 
 #: mergedialog.cpp:41
 #, kde-format
