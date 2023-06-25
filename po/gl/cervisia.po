@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-14 00:48+0000\n"
-"PO-Revision-Date: 2023-06-19 14:28+0200\n"
+"PO-Revision-Date: 2023-06-24 11:21+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -974,7 +974,7 @@ msgstr "Non se puido escribir no ficheiro ChangeLog."
 #: changelogdialog.cpp:102
 #, kde-format
 msgid "A ChangeLog file does not exist. Create one?"
-msgstr "Non existe un ficheiro ChangeLog. Desexa crear un?"
+msgstr "Non existe un ficheiro ChangeLog. Quere crear un?"
 
 #: changelogdialog.cpp:102
 #, kde-format
@@ -1176,7 +1176,7 @@ msgstr "Revisión "
 #: diffdialog.cpp:240
 #, kde-format
 msgid "Working dir:"
-msgstr "Directorio de traballo:"
+msgstr "Cartafol de traballo:"
 
 #: diffdialog.cpp:401 resolvedialog.cpp:383
 #, kde-format
@@ -1640,7 +1640,7 @@ msgstr "Xa existe un ficheiro chamado «%1». Seguro que quere sobrescribilo?"
 #: misc.cpp:201
 #, kde-format
 msgid "Overwrite File?"
-msgstr "Desexa sobrescribir o ficheiro?"
+msgstr "Quere sobrescribir o ficheiro?"
 
 #: patchoptiondialog.cpp:58
 #, kde-format
