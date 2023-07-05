@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Lokalize 1.2\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -39,6 +39,7 @@ msgstr ""
 msgid "Ignore File"
 msgid_plural "Ignore %1 Files"
 msgstr[0] "&چشم‌پوشی از پرونده‌ها:‌"
+msgstr[1] ""
 
 #: addignoremenu.cpp:85
 #, fuzzy, kde-format
@@ -1152,6 +1153,7 @@ msgstr "همگام‌سازی میله‌های لغزش"
 msgid "%1 difference"
 msgid_plural "%1 differences"
 msgstr[0] "%1 تفاوت"
+msgstr[1] ""
 
 #: diffdialog.cpp:238
 #, kde-format
