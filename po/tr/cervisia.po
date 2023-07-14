@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-14 00:48+0000\n"
-"PO-Revision-Date: 2023-03-24 16:44+0300\n"
+"PO-Revision-Date: 2023-07-13 23:52+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.07.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1841,7 +1841,7 @@ msgstr "&CVS komutu için yol (veya yalnızca 'cvs'):"
 #: settingsdialog.cpp:246
 #, kde-format
 msgid "Diff Viewer"
-msgstr "Diff İzleyici"
+msgstr "Diff Görüntüleyicisi"
 
 #: settingsdialog.cpp:251
 #, kde-format
