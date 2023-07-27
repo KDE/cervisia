@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-14 00:48+0000\n"
-"PO-Revision-Date: 2023-04-02 16:13+0300\n"
+"PO-Revision-Date: 2023-07-25 16:37+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -516,12 +516,12 @@ msgstr "Poistaa valvonnan valituilta tiedostoilta"
 #: cervisiapart.cpp:450
 #, kde-format
 msgid "Show &Watchers"
-msgstr "Näytä &valvojat"
+msgstr "Näytä &vahdit"
 
 #: cervisiapart.cpp:453
 #, kde-format
 msgid "Shows the watchers of the selected files"
-msgstr "Näyttää valittujen tiedostojen valvojat"
+msgstr "Näyttää valittujen tiedostojen vahdit"
 
 #: cervisiapart.cpp:457
 #, kde-format
@@ -996,7 +996,7 @@ msgstr "ChangeLog-tiedostoa ei voitu lukea."
 #: checkoutdialog.cpp:59 checkoutdialog.cpp:348
 #, kde-format
 msgid "CVS Checkout"
-msgstr ""
+msgstr "CVS-nouto"
 
 #: checkoutdialog.cpp:59
 #, kde-format
@@ -1022,7 +1022,7 @@ msgstr "&Haaran tunniste:"
 #: checkoutdialog.cpp:130
 #, kde-format
 msgid "Re&cursive checkout"
-msgstr ""
+msgstr "&Rekursiivine nouto"
 
 #: checkoutdialog.cpp:153
 #, kde-format
@@ -1062,7 +1062,7 @@ msgstr "Käytä tuontiaikana tiedoston muokkausaikaa"
 #: checkoutdialog.cpp:200
 #, kde-format
 msgid "Chec&k out as:"
-msgstr ""
+msgstr "Nouda n&imellä:"
 
 #: checkoutdialog.cpp:204
 #, kde-format
@@ -1168,7 +1168,7 @@ msgstr[1] "%1 eroavuutta"
 #: diffdialog.cpp:238
 #, kde-format
 msgid "CVS Diff: %1"
-msgstr ""
+msgstr "CVS-diff: %1"
 
 #: diffdialog.cpp:239
 #, kde-format
@@ -1378,10 +1378,11 @@ msgstr "CVS-historia"
 msgid "Tag "
 msgstr "Tunniste"
 
+# *** TARKISTA: ”Julkaisu” vai ”Irrota”?
 #: historydialog.cpp:325
 #, kde-format
 msgid "Release "
-msgstr ""
+msgstr "Julkaisu "
 
 #: historydialog.cpp:328
 #, kde-format
@@ -1475,7 +1476,7 @@ msgstr "Huomautus/tunnisteet:"
 #: logdialog.cpp:198
 #, kde-format
 msgid "&Annotate A"
-msgstr ""
+msgstr "&Merkitse A"
 
 #: logdialog.cpp:200
 #, kde-format
@@ -1488,6 +1489,8 @@ msgid ""
 "This revision is used when you click Annotate.\n"
 "It is also used as the first item of a Diff operation."
 msgstr ""
+"Tätä versiota käytetään napsauttaessasi Merkitse.\n"
+"Samoin sitä käytetään diff-toiminnon ensimmäisenä kohteena."
 
 #: logdialog.cpp:212
 #, kde-format
@@ -2063,22 +2066,22 @@ msgstr "Aikaleima"
 #: watchdialog.cpp:38
 #, kde-format
 msgid "CVS Watch Add"
-msgstr ""
+msgstr "CVS-vahdin lisääminen"
 
 #: watchdialog.cpp:38
 #, kde-format
 msgid "CVS Watch Remove"
-msgstr ""
+msgstr "CVS-vahdin poistaminen"
 
 #: watchdialog.cpp:51
 #, kde-format
 msgid "Add watches for the following events:"
-msgstr ""
+msgstr "Lisää vahdit seuraaville tapahtumille:"
 
 #: watchdialog.cpp:51
 #, kde-format
 msgid "Remove watches for the following events:"
-msgstr ""
+msgstr "Poista vahdit seuraavilta tapahtumilta:"
 
 #: watchdialog.cpp:54
 #, kde-format
@@ -2108,12 +2111,12 @@ msgstr "Muokkausten &kumoamiset"
 #: watchersdialog.cpp:68 watchersdialog.cpp:74
 #, kde-format
 msgid "CVS Watchers"
-msgstr ""
+msgstr "CVS-vahdit"
 
 #: watchersmodel.cpp:86
 #, kde-format
 msgid "Watcher"
-msgstr ""
+msgstr "Vahti"
 
 #: watchersmodel.cpp:88
 #, kde-format
