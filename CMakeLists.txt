@@ -213,6 +213,7 @@ ecm_install_icons(ICONS
     22-apps-cervisia.png
     32-apps-cervisia.png
     48-apps-cervisia.png
+    sc-apps-cervisia.svg
     DESTINATION ${KDE_INSTALL_ICONDIR}
     THEME hicolor
 )
