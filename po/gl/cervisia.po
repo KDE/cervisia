@@ -44,7 +44,7 @@ msgstr[1] "Ignorar os %1 ficheiros"
 #: addignoremenu.cpp:85
 #, kde-format
 msgid "Cannot open file '%1' for writing."
-msgstr "Non se pode abrir o ficheiro «%1» para escribir nel."
+msgstr "Non é posíbel abrir o ficheiro «%1» para escribir nel."
 
 #: addremovedialog.cpp:40
 #, kde-format
@@ -611,7 +611,7 @@ msgstr "&Repositorios…"
 #: cervisiapart.cpp:523
 #, kde-format
 msgid "Configures a list of repositories you regularly use"
-msgstr "Configura a lista dos repositorios que utiliza normalmente"
+msgstr "Configura a lista dos repositorios que usa normalmente"
 
 #: cervisiapart.cpp:530
 #, kde-format
@@ -846,7 +846,7 @@ msgstr "Diferenzas co CVS"
 #: resolvedialog.cpp:351
 #, kde-format
 msgid "Could not open file for writing."
-msgstr "Non se puido abrir o ficheiro para escribir nel."
+msgstr "Non foi posíbel abrir o ficheiro para escribir nel."
 
 #: cervisiapart.cpp:1461
 #, kde-format
@@ -902,7 +902,7 @@ msgstr "Atraso (ms) ata que aparece o diálogo de progreso."
 #: cervisiashell.cpp:54
 #, kde-format
 msgid "The Cervisia library could not be loaded."
-msgstr "Non se puido cargar a biblioteca de Cervisia."
+msgstr "Non foi posíbel cargar a biblioteca de Cervisia."
 
 #: cervisiashell.cpp:86
 #, kde-format
@@ -969,7 +969,7 @@ msgstr "Editar o ChangeLog"
 #: changelogdialog.cpp:86
 #, kde-format
 msgid "The ChangeLog file could not be written."
-msgstr "Non se puido escribir no ficheiro ChangeLog."
+msgstr "Non foi posíbel escribir no ficheiro ChangeLog."
 
 #: changelogdialog.cpp:102
 #, kde-format
@@ -984,7 +984,7 @@ msgstr "Crear"
 #: changelogdialog.cpp:107
 #, kde-format
 msgid "The ChangeLog file could not be read."
-msgstr "Non se puido ler o ficheiro ChangeLog."
+msgstr "Non foi posíbel ler o ficheiro ChangeLog."
 
 #: checkoutdialog.cpp:59 checkoutdialog.cpp:348
 #, kde-format
@@ -1050,7 +1050,7 @@ msgstr "Importar como &binarios"
 #: checkoutdialog.cpp:193
 #, kde-format
 msgid "Use file's modification time as time of import"
-msgstr "Utilizar a hora de modificación do ficheiro como hora de importación"
+msgstr "Usar a hora de modificación do ficheiro como hora de importación"
 
 #: checkoutdialog.cpp:200
 #, kde-format
