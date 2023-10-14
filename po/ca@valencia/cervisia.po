@@ -134,7 +134,7 @@ msgstr "Anotació CVS"
 #: annotatedialog.cpp:44
 #, kde-format
 msgid "Go to Line..."
-msgstr "Ves a la línia..."
+msgstr "Ves fins a la línia..."
 
 #: annotatedialog.cpp:49
 #, kde-format
@@ -154,12 +154,12 @@ msgstr "Busca"
 #: annotatedialog.cpp:115
 #, kde-format
 msgid "Go to Line"
-msgstr "Ves a la línia"
+msgstr "Ves fins a la línia"
 
 #: annotatedialog.cpp:115
 #, kde-format
 msgid "Go to line number:"
-msgstr "Ves a la línia número:"
+msgstr "Ves fins a la línia número:"
 
 #: cervisiapart.cpp:111 main.cpp:138
 #, kde-format
