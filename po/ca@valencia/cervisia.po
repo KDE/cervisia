@@ -732,7 +732,7 @@ msgstr "Configura Cervisia..."
 #: cervisiapart.cpp:605
 #, kde-format
 msgid "Allows you to configure the Cervisia KPart"
-msgstr "Us permet configurar KPart de Cervisia"
+msgstr "Us permet configurar la KPart de Cervisia"
 
 #: cervisiapart.cpp:613
 #, kde-format
@@ -757,7 +757,7 @@ msgstr "Part de Cervisia"
 #: cervisiapart.cpp:717 main.cpp:140
 #, kde-format
 msgid "A CVS frontend"
-msgstr "Un frontal per CVS"
+msgstr "Un frontal pel CVS"
 
 #: cervisiapart.cpp:719 main.cpp:142
 #, kde-format
@@ -816,7 +816,7 @@ msgstr "Richard Moore"
 #: cervisiapart.cpp:732 main.cpp:155
 #, kde-format
 msgid "Conversion to KPart"
-msgstr "Conversió a KPart"
+msgstr "Conversió a les KPart"
 
 #: cervisiapart.cpp:733 main.cpp:156
 #, kde-format

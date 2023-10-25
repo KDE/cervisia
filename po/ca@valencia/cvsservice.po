@@ -88,7 +88,7 @@ msgstr "Servei D-Bus de CVS"
 #: main.cpp:38
 #, kde-format
 msgid "D-Bus service for CVS"
-msgstr "Servei D-Bus per CVS"
+msgstr "Servei D-Bus pel CVS"
 
 #: main.cpp:40
 #, kde-format
