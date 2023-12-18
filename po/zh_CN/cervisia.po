@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:37+0000\n"
-"PO-Revision-Date: 2023-12-09 09:27\n"
+"PO-Revision-Date: 2023-12-17 11:28\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -315,7 +315,7 @@ msgstr "复原(&T)"
 #: cervisiapart.cpp:312
 #, kde-format
 msgid "Reverts (cvs update -C) the selected files (only cvs 1.11)"
-msgstr "复原所选择的文件(仅用于 CVS 1.11)(cvs update -C)"
+msgstr "复原所选择的文件 (仅用于 CVS 1.11) (cvs update -C)"
 
 #: cervisiapart.cpp:316
 #, kde-format
@@ -1945,7 +1945,7 @@ msgstr "上下分割主窗口(&H)"
 #: settingsdialog_advanced.ui:32
 #, kde-format
 msgid "&Timeout after which a progress dialog appears (in ms):"
-msgstr "显示进度对话框前的等待时间(毫秒)(&T)："
+msgstr "显示进度对话框前的等待时间 (毫秒) (&T)："
 
 #. i18n: ectx: property (text), widget (QLabel, compressionLbl)
 #: settingsdialog_advanced.ui:45
@@ -2014,7 +2014,7 @@ msgstr "更新到标签(&T)："
 #: updatedialog.cpp:94
 #, kde-format
 msgid "Update to &date ('yyyy-mm-dd'):"
-msgstr "更新到日期(格式“yyyy-mm-dd”)(&D)："
+msgstr "更新到日期 (格式“yyyy-mm-dd”) (&D)："
 
 #: updateview.cpp:50
 #, kde-format
