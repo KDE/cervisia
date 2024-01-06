@@ -2,15 +2,15 @@
     "id": "org.kde.cervisia",
     "branch": "master",
     "runtime": "org.kde.Platform",
-    "runtime-version": "5.15-22.08",
+    "runtime-version": "6.6-kf6preview",
     "sdk": "org.kde.Sdk",
     "command": "cervisia",
     "tags": ["nightly"],
     "desktop-file-name-suffix": " (Nightly)",
-    "finish-args": ["--share=ipc", "--socket=x11", "--socket=wayland", "--filesystem=host" ],
+    "finish-args": ["--share=ipc", "--socket=fallback-x11", "--socket=wayland", "--filesystem=host" ],
 
     "modules": [
-        { "name": "ksu", "buildsystem": "cmake-ninja", "sources": [ { "type": "git", "url": "https://invent.kde.org/frameworks/kdesu.git", "tag": "v5.85.0" } ] },
+        { "name": "ksu", "buildsystem": "cmake-ninja", "sources": [ { "type": "git", "url": "https://invent.kde.org/frameworks/kdesu.git" } ] },
         {
             "name": "cervisia",
             "buildsystem": "cmake-ninja",
