@@ -464,7 +464,7 @@
 <para
 >A la <xref linkend="screenshot-import"/> podeu veure el diàleg que us ajudarà a <emphasis
 >importar</emphasis
-> un projecte com a un mòdul. Per accedir al diàleg d'importació del &cervisia;, escolliu l'element <menuchoice
+> un projecte com a un mòdul. Per a accedir al diàleg d'importació del &cervisia;, escolliu l'element <menuchoice
 ><guimenu
 >Repositori</guimenu
 > <guimenuitem
@@ -1627,7 +1627,7 @@ Canvis al repositori
 <para
 ><guilabel
 >Unificat</guilabel
->: el més usat per a intercanviar pedaços. El format unificat usa línies de context en addició als números de línia per enregistrar les diferències. Això fa més robust el procés d'aplicar pedaços. Aquest format mostra les diferències en un format compacte i llegible, amb una capçalera per cada fitxer involucrat, i seccions separades (blocs) per cada diferència. Les línies de context disponibles per cada diferència fa més llegibles les modificacions. En el format de sortida unificat, els caràcters + i - marquen els canvis. </para>
+>: el més usat per a intercanviar pedaços. El format unificat usa línies de context en addició als números de línia per a enregistrar les diferències. Això fa més robust el procés d'aplicar pedaços. Aquest format mostra les diferències en un format compacte i llegible, amb una capçalera per cada fitxer involucrat, i seccions separades (blocs) per cada diferència. Les línies de context disponibles per cada diferència fa més llegibles les modificacions. En el format de sortida unificat, els caràcters + i - marquen els canvis. </para>
 <para
 ><guilabel
 >Context</guilabel
@@ -1871,7 +1871,7 @@ Canvis al repositori
 <para
 >Premeu el botó <guibutton
 >Tanca</guibutton
-> per abandonar el diàleg i tornar a la vista principal. </para>
+> per a abandonar el diàleg i tornar a la vista principal. </para>
 
 
 <para
@@ -2104,7 +2104,7 @@ Canvis al repositori
 >, on només es poden afegir correccions d'errors, deixant la branca de llançament principal (HEAD) oberta per a afegir característiques noves. </para>
 
 <para
->Les etiquetes s'usen per a marcar una versió d'un projecte. &CVS; marca una versió de cada fitxer amb l'etiqueta, de manera que quan vulgueu extreure o actualitzar a una etiqueta específica, sempre obtingueu la mateixa versió dels fitxers: per tant, en oposició a les branques, les etiquetes no són dinàmiques: no podeu desenvolupar una etiqueta. Les etiquetes són útils per marcar llançaments, grans canvis en el codi, &etc; </para>
+>Les etiquetes s'usen per a marcar una versió d'un projecte. &CVS; marca una versió de cada fitxer amb l'etiqueta, de manera que quan vulgueu extreure o actualitzar a una etiqueta específica, sempre obtingueu la mateixa versió dels fitxers: per tant, en oposició a les branques, les etiquetes no són dinàmiques: no podeu desenvolupar una etiqueta. Les etiquetes són útils per a marcar llançaments, grans canvis en el codi, &etc; </para>
 
 <para
 >Quan esteu desenvolupant o seguint el desenvolupament d'un projecte de programari, no heu de treballar necessàriament amb la branca principal tot el temps. Després d'un llançament, potser voldreu mantenir-vos amb la branca llançada durant un temps, per a gaudir de la seva relativa estabilitat, arranjar errors, traduir les fonts, &etc; Per a fer tot això, heu d'actualitzar la branca llançada. Tots els vostres fitxers s'actualitzaran a les darreres versions dels fitxers en aquesta branca. Després d'actualitzar, totes les vostres comissions noves també es pujaran a la branca nova. </para>
