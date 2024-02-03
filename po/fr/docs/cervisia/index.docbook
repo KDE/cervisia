@@ -221,7 +221,7 @@
 
 <para>
 <filename
->[ : méthode : ][[utilisateur][ : mot_de_passe]@]nom_hote[ : [port]]/emplacement/du/dépôt</filename>
+>[ : méthode : ][[utilisateur][ : mot-de-passe]@]nom-hôte[ : [port]]/emplacement/du/dépôt</filename>
 </para>
 
 <para
@@ -255,7 +255,7 @@
 <listitem>
 <para
 >L'emplacement du dépôt se présente sous la forme <filename
-> : ext:username@host.url.org : /path/to/repository</filename
+> : ext:username@host.url.org : /emplacement/vers/dépôt</filename
 >. </para>
 
 <para
@@ -273,9 +273,9 @@
 <!-- TODO: verify if the above still apply -->
 
 <para
->Notez que &cervisia; ne peut pas répondre aux possibles requêtes de mots de passe depuis le serveur. Assurez-vous qu'un nom d'utilisateur (<foreignphrase
+>Veuillez noter qu'il est impossible pour  &cervisia; de répondre aux possibles requêtes de mots de passe depuis le serveur. Veuillez vous assurer qu'un nom d'utilisateur (<foreignphrase
 >login</foreignphrase
->) distant soit opérationnel que vous ayez à saisir le mot de passe. Avec la version standard de &rsh; il suffit par exemple de créer un fichier <filename
+>) distant soit opérationnel sans que vous ayez à saisir le mot de passe. Avec la version standard de &rsh; il suffit par exemple de créer un fichier <filename
 >/.rhosts</filename
 > dans votre dossier personnel, avec une liste d'hôtes de confiance (reportez-vous à la page de manuel de &rsh;). </para>
 
@@ -1386,7 +1386,7 @@ Modifications dans le dépôt
 > et <guibutton
 >&gt;&gt;</guibutton
 >. Au centre de la partie inférieure de la boîte de dialogue, vous pouvez voir quelle est la section actuellement marquée. Par exemple, <literal
->2 of 3</literal
+>2 parmi 3</literal
 > signifie que vous êtes actuellement positionné sur la deuxième section présentant des différences, sur un total de 3. </para>
 
 <para
@@ -2979,7 +2979,7 @@ Modifications dans le dépôt
 
 <listitem
 ><para
->Il existe un groupe USENET <literal
+>Il existe un groupe « USENET » <literal
 >comp.software.config-mgmt</literal
 > consacré à la gestion de la configuration en général. &CVS; est un thème assez peu traité dans ce groupe, mais il peut néanmoins être intéressant d'étudier les mérites de divers systèmes de contrôle de révision comparés à &CVS;. </para
 ></listitem>
@@ -3146,7 +3146,7 @@ Modifications dans le dépôt
 ><menuchoice
 ><shortcut
 ><keycap
->Inser</keycap
+>Ins.</keycap
 ></shortcut
 > <guimenu
 >Fichier</guimenu
