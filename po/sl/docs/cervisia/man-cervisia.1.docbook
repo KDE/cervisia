@@ -1,0 +1,181 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Slovenian "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+<title
+>Cervisia Uporabniški priročnik</title>
+<author
+><personname
+> <firstname
+>Burkhard</firstname
+> <surname
+>Lück</surname
+> </personname
+> <email
+>lueck@hube-lueck.de</email
+></author>
+
+<date
+>05.06.2016</date>
+<releaseinfo
+>3.11.0 (Applications 16.08)</releaseinfo>
+
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>cervisia</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>cervisia</command
+></refname>
+<refpurpose
+>Vmesnik CVS iz KDE</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>cervisia</command
+> <arg choice="opt"
+><option
+>--resolve <replaceable
+>file</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+>--log <replaceable
+>file</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+>--annotate <replaceable
+>file</replaceable
+></option
+></arg
+> <arg choice="opt"
+><option
+><replaceable
+>directory</replaceable
+></option
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+
+<refsect1>
+<title
+>Opis</title>
+<para
+>Cervisia je uporabniku prijazen sprednji del sistema za nadzor različic. Cilj je podpirati CVS in druge sistemske programe za nadzor različic v poenotenem vmesniku, ki vključuje reševanje sporov, pregledovalnike razlik in zgodovine, status datotek delovne kopije in podporo za večino funkcij nadzora različic.</para>
+</refsect1>
+
+<refsect1>
+<title
+>Opcije</title>
+
+<variablelist>
+<varlistentry>
+<term
+><option
+>--resolve</option
+></term>
+<listitem
+><para
+>Prikaži pogovorno okno za razrešitev za dano datoteko.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--log</option
+></term>
+<listitem
+><para
+>Prikaži pogovorno okno dnevnika za dano datoteko.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--annotate</option
+> <replaceable
+>file</replaceable
+></term>
+<listitem
+><para
+>Pokaži pogovorno okno z opombami za dano datoteko.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+><replaceable
+>imenik</replaceable
+></option
+></term>
+<listitem
+><para
+>Peskovnik, ki ga je treba naložiti.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</refsect1>
+
+<refsect1>
+<title
+>Poglejte tudi</title>
+<simplelist>
+<member
+>Podrobnejša uporabniška dokumentacija je na voljo na <ulink url="help:/cervisia "
+>help:/cervisia</ulink
+> (vnesite ta &URL; v &konqueror; ali zaženite <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/cervisia</parameter
+></userinput
+>).</member>
+<member
+>kf5options(7)</member>
+<member
+>qt5options(7)</member>
+<member
+>cvs(1)</member>
+<member
+>Dodatne informacije so na voljo tudi na <ulink url="https://www.kde.org/applications/development/cervisia/"
+>strani Cervisia</ulink
+></member>
+</simplelist>
+</refsect1>
+
+<refsect1>
+<title
+>Avtorji</title>
+<para
+>Za seznam avtorjev Cervisia uporabite <userinput
+><command
+>cervisia</command
+> <option
+>--author</option
+></userinput
+> v terminalu.</para>
+</refsect1>
+
+</refentry>
