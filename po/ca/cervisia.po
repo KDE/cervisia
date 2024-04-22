@@ -2136,3 +2136,24 @@ msgstr "Deseditat"
 #, kde-format
 msgid "Commit"
 msgstr "Comet"
+
+#~ msgid "Invoking help on Cervisia"
+#~ msgstr "S'està invocant l'ajuda quant al Cervisia"
+
+#~ msgid "&Overwrite"
+#~ msgstr "S&obreescriu"
+
+#~ msgid "Invokes the KDE help system with the Cervisia documentation"
+#~ msgstr "Invoca el sistema d'ajuda de KDE amb la documentació sobre Cervisia"
+
+#~ msgid "Opens the bug report dialog"
+#~ msgstr "Obre el diàleg d'informe d'errors"
+
+#~ msgid "Displays the version number and copyright information"
+#~ msgstr "Mostra el número de versió i la informació de copyright"
+
+#~ msgid "Displays the information about KDE and its version number"
+#~ msgstr "Mostra la informació a sobre del KDE i el seu nombre de versió"
+
+#~ msgid "&Remove"
+#~ msgstr "&Elimina"
