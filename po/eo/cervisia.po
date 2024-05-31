@@ -1,15 +1,15 @@
 # translation of cervisia.po to Esperanto
 # Copyright (C) 2002 Free Software Foundation, Inc.
 # Heiko Evermann <heiko@evermann.de>, 2002
-# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
+# Oliver Kellogg <olivermkellogg@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:37+0000\n"
-"PO-Revision-Date: 2023-11-19 16:53+0100\n"
-"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
+"PO-Revision-Date: 2024-05-30 22:41+0200\n"
+"Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr "Heiko Evermann, Oliver Kellogg"
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "heiko@evermann.de, okellogg@users.sourceforge.net"
+msgstr "heiko@evermann.de, olivermkellogg@gmail.com"
 
 #: addignoremenu.cpp:34
 #, kde-format
@@ -585,7 +585,7 @@ msgstr "&Elpreni..."
 #: cervisiapart.cpp:509
 #, kde-format
 msgid "Allows you to checkout a module from a repository"
-msgstr "Permesas al vi kontroli modulon el deponejo"
+msgstr "Permesas al vi elpreni modulon el deponejo"
 
 #: cervisiapart.cpp:513
 #, kde-format
@@ -1124,7 +1124,7 @@ msgstr "Protoko&lmesaĝo:"
 #: commitdialog.cpp:115
 #, kde-format
 msgid "Use log message &template"
-msgstr "Uzi protokolmesaĝan ŝablonon"
+msgstr "Uzi pro&tokolmesaĝan ŝablonon"
 
 #: commitdialog.cpp:190
 #, kde-format
