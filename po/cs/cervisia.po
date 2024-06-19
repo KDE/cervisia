@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:37+0000\n"
-"PO-Revision-Date: 2024-04-26 10:58+0200\n"
+"PO-Revision-Date: 2024-06-18 15:57+0200\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -901,7 +901,7 @@ msgstr "Umožňuje nastavit panel nástrojů"
 #: cervisiashell.cpp:91
 #, kde-format
 msgid "Allows you to customize the keybindings"
-msgstr "Umožňuje upravit klávesové zkratky"
+msgstr "Umožňuje přizpůsobit klávesové zkratky"
 
 #: cervisiashell.cpp:96
 #, kde-format
