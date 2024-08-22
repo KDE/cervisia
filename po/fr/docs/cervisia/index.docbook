@@ -273,7 +273,7 @@
 <!-- TODO: verify if the above still apply -->
 
 <para
->Veuillez noter qu'il est impossible pour  &cervisia; de répondre aux possibles requêtes de mots de passe depuis le serveur. Veuillez vous assurer qu'un nom d'utilisateur (<foreignphrase
+>Veuillez noter qu'il est impossible pour &cervisia; de répondre aux possibles requêtes de mots de passe depuis le serveur. Veuillez vous assurer qu'un nom d'utilisateur (<foreignphrase
 >login</foreignphrase
 >) distant soit opérationnel sans que vous ayez à saisir le mot de passe. Avec la version standard de &rsh; il suffit par exemple de créer un fichier <filename
 >/.rhosts</filename
