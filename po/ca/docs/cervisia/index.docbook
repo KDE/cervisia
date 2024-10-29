@@ -1551,7 +1551,7 @@ Canvis al repositori
 >Creació de pedaços</title>
 
 <para
->De vegades voldreu oferir les vostres modificacions per a revisar-les, abans de cometre-les, o no teniu accés al repositori (i per tant, no podeu cometre). &CVS; ofereix formats estàndards per compartir les modificacions en la vostra còpia de treball, de manera que altres puguin revisar els canvis, provar-los en la seva còpia i aplicar-los al repositori &CVS;. Un fitxer contenint aquestes diferències s'anomena <firstterm
+>De vegades voldreu oferir les vostres modificacions per a revisar-les, abans de cometre-les, o no teniu accés al repositori (i per tant, no podeu cometre). &CVS; ofereix formats estàndards per a compartir les modificacions en la vostra còpia de treball, de manera que altres puguin revisar els canvis, provar-los en la seva còpia i aplicar-los al repositori &CVS;. Un fitxer contenint aquestes diferències s'anomena <firstterm
 >pedaç</firstterm
 >, i normalment és generat per l'ordre <command
 >cvs diff</command
@@ -2172,7 +2172,7 @@ Canvis al repositori
 >aaaa</literal
 > és l'any, <literal
 >mm</literal
-> és el mes (numero) i <literal
+> és el mes (numèric) i <literal
 >dd</literal
 > és el dia. Les alternatives són algunes frases en anglès com ara <literal
 >yesterday</literal
@@ -2528,7 +2528,7 @@ Canvis al repositori
 >SourceSafe</application
 > usen un model diferent. Quan un desenvolupador vol editar un fitxer, l'ha de <emphasis
 >bloquejar</emphasis
->. Només pot bloquejar un fitxer un editor alhora. Quan ha acabat l'edició, s'allibera el bloqueig. D'una banda, amb aquest model, no poden aparèixer conflictes mai. Per altra banda, dos desenvolupadors no poden treballar alhora en el mateix fitxer, encara que els seus canvis no afectin a ningú més. Això pot ser un coll d'ampolla. No parlarem dels beneficis d'organització d'ambdós enfocaments. No obstant això, mencionarem que, encara que &CVS; té algunes funcions per bloquejar, no és la manera preferida de treballar amb &CVS;. No heu d'usar aquestes característiques llevat que estigueu segur que l'encarregat del vostre projecte ho permet. </para>
+>. Només pot bloquejar un fitxer un editor alhora. Quan ha acabat l'edició, s'allibera el bloqueig. D'una banda, amb aquest model, no poden aparèixer conflictes mai. Per altra banda, dos desenvolupadors no poden treballar alhora en el mateix fitxer, encara que els seus canvis no afectin a ningú més. Això pot ser un coll d'ampolla. No parlarem dels beneficis d'organització d'ambdós enfocaments. No obstant això, mencionarem que, encara que &CVS; té algunes funcions per a bloquejar, no és la manera preferida de treballar amb &CVS;. No heu d'usar aquestes característiques llevat que estigueu segur que l'encarregat del vostre projecte ho permet. </para>
 
 <para
 >Amb el &cervisia;, bloquejareu els fitxers de la següent manera. Seleccioneu els fitxers desitjats en la vista principal. Després seleccioneu <menuchoice
@@ -2691,7 +2691,7 @@ Canvis al repositori
 ><guimenuitem
 >Diferències amb el repositori...</guimenuitem
 ></menuchoice
->, el &cervisia; invoca el seu frontal diff intern, si preferiu un de diferent, com ara el &kompare;, <application
+>, el &cervisia; invoca el seu frontal diff intern, si en preferiu un de diferent, com ara el &kompare;, <application
 >TkDiff</application
 >, o <application
 >xxdiff</application
@@ -2988,7 +2988,7 @@ Canvis al repositori
 >. </para>
 
 <para
->Com que aquest llibre està mantingut juntament amb &CVS;, és normalment la referència més al dia; no obstant això, hi ha altres documentacions recomanades per aprendre a usar &CVS; en particular les següents. </para
+>Com que aquest llibre està mantingut juntament amb &CVS;, és normalment la referència més al dia; no obstant això, hi ha altres documentacions recomanades per a aprendre a usar &CVS; en particular les següents. </para
 ></listitem>
 
 <listitem
@@ -3009,7 +3009,7 @@ Canvis al repositori
 ><para
 >Hi ha un grup USENET <literal
 >comp.software.config-mgmt</literal
-> dedicat a la gestió de la configuració en general. &CVS; és només un tema aïllat en aquest grup, però no obstant això, pot ser interessant per discutir als avantatges de diversos sistemes de control de revisions en comparació amb &CVS;. </para
+> dedicat a la gestió de la configuració en general. &CVS; és només un tema aïllat en aquest grup, però no obstant això, pot ser interessant per a debatre als avantatges de diversos sistemes de control de revisions en comparació amb &CVS;. </para
 ></listitem>
 
 </itemizedlist>
@@ -3337,7 +3337,7 @@ Canvis al repositori
 ></term>
 <listitem
 ><para
->Mostra una vista anotada del fitxer seleccionat, &ead; una vista un podeu veure l'últim autor que ha modificat cada línia. Vegeu <xref linkend="annotate"/>. </para
+>Mostra una vista anotada del fitxer seleccionat, &ead; una vista on podeu veure l'últim autor que ha modificat cada línia. Vegeu <xref linkend="annotate"/>. </para
 ></listitem>
 </varlistentry>
 
