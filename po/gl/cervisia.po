@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:37+0000\n"
-"PO-Revision-Date: 2024-12-16 00:43+0100\n"
+"PO-Revision-Date: 2024-12-17 19:17+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -32,7 +32,7 @@ msgstr "mvillarino@users.sourceforge.net"
 #: addignoremenu.cpp:34
 #, kde-format
 msgid "Add to Ignore List"
-msgstr "Engadir á lista dos ficheiros para ignorar"
+msgstr "Engadir á lista para ignorar"
 
 #: addignoremenu.cpp:65
 #, kde-format
@@ -661,7 +661,7 @@ msgstr "Agochar os cartafoles baleiros"
 #: cervisiapart.cpp:563
 #, kde-format
 msgid "Determines whether folders without visible entries are hidden"
-msgstr "Determina se debe agochar os cartafoles sen elementos visíbeis"
+msgstr "Determina se debe agochar os cartafoles sen entradas visíbeis"
 
 #: cervisiapart.cpp:567
 #, kde-format
@@ -1830,7 +1830,7 @@ msgstr "Xeral"
 #: settingsdialog.cpp:220
 #, kde-format
 msgid "&User name for the change log editor:"
-msgstr "Nome de &usuario para o editor do historial de cambios:"
+msgstr "Nome de persoa &usuaria para o editor do rexistro de cambios:"
 
 #: settingsdialog.cpp:228
 #, kde-format
