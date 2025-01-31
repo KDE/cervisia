@@ -8,7 +8,6 @@ Dependencies:
     'frameworks/ki18n': '@stable'
     'frameworks/kparts': '@stable'
     'frameworks/kdoctools': '@stable'
-    'frameworks/kinit': '@stable'
     'frameworks/kiconthemes': '@stable'
     'frameworks/knotifications': '@stable'
     'frameworks/kwidgetsaddons': '@stable'

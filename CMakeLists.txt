@@ -42,7 +42,7 @@ ecm_setup_version(${RELEASE_SERVICE_VERSION} VARIABLE_PREFIX CERVISIA VERSION_HE
 
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Widgets DBus)
 
-find_package(KF${KF_MAJOR_VERSION} REQUIRED COMPONENTS I18n Parts DocTools Init IconThemes Notifications WidgetsAddons ItemViews Su TextWidgets)
+find_package(KF${KF_MAJOR_VERSION} REQUIRED COMPONENTS I18n Parts DocTools IconThemes Notifications WidgetsAddons ItemViews Su TextWidgets)
 
 add_subdirectory( doc )
 add_subdirectory( cvsservice )
@@ -108,15 +108,13 @@ ki18n_wrap_ui(libcervisia_SRCS settingsdialog_advanced.ui )
 kconfig_add_kcfg_files(libcervisia_SRCS cervisiasettings.kcfgc )
 
 
-set(cervisia_KDEINIT_SRCS ${libcervisia_SRCS}
+set(cervisia_SRCS ${libcervisia_SRCS}
    main.cpp
    cervisiashell.cpp )
 
-kf5_add_kdeinit_executable(cervisia ${cervisia_KDEINIT_SRCS})
+add_executable(cervisia ${cervisia_SRCS})
 
-target_link_libraries(kdeinit_cervisia KF${KF_MAJOR_VERSION}::I18n KF${KF_MAJOR_VERSION}::TextWidgets KF${KF_MAJOR_VERSION}::Parts KF${KF_MAJOR_VERSION}::ItemViews)
-
-install(TARGETS kdeinit_cervisia ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
+target_link_libraries(cervisia KF${KF_MAJOR_VERSION}::I18n KF${KF_MAJOR_VERSION}::TextWidgets KF${KF_MAJOR_VERSION}::Parts KF${KF_MAJOR_VERSION}::ItemViews)
 
 install(TARGETS cervisia  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
