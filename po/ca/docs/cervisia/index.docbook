@@ -1324,7 +1324,7 @@
 >A la vista principal del &cervisia;, s'indiquen els fitxers amb conflictes amb «Conflicte» a la columna d'estat i amb el color vermell. Ara és feina vostra resoldre aquests conflictes abans de cometre el fitxer. El &CVS; rebutjarà cometre qualsevol fitxer amb conflictes fins que s'hagi editat. Per descomptat podeu resoldre conflictes des de la vista principal de la manera tradicional: simplement feu doble clic al fitxer en qüestió i editeu-lo amb el vostre editor favorit.</para>
 
 <para
->El &CVS; marca els canvis conflictius emplaçant marques en mig dels fitxers, de la següent manera:</para>
+>El &CVS; marca els canvis conflictius emplaçant marques en mig dels fitxers, de la manera següent:</para>
 
 <screen
 >&lt;&lt;&lt;&lt;&lt;&lt;&lt;
@@ -2531,7 +2531,7 @@ Canvis al repositori
 >. Només pot bloquejar un fitxer un editor alhora. Quan ha acabat l'edició, s'allibera el bloqueig. D'una banda, amb aquest model, no poden aparèixer conflictes mai. Per altra banda, dos desenvolupadors no poden treballar alhora en el mateix fitxer, encara que els seus canvis no afectin a ningú més. Això pot ser un coll d'ampolla. No parlarem dels beneficis d'organització d'ambdós enfocaments. No obstant això, mencionarem que, encara que &CVS; té algunes funcions per a bloquejar, no és la manera preferida de treballar amb &CVS;. No heu d'usar aquestes característiques llevat que estigueu segur que l'encarregat del vostre projecte ho permet. </para>
 
 <para
->Amb el &cervisia;, bloquejareu els fitxers de la següent manera. Seleccioneu els fitxers desitjats en la vista principal. Després seleccioneu <menuchoice
+>Amb el &cervisia;, bloquejareu els fitxers de la manera següent. Seleccioneu els fitxers desitjats en la vista principal. Després seleccioneu <menuchoice
 ><guimenu
 >Avançat</guimenu
 ><guimenuitem
