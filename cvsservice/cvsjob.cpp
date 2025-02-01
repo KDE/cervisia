@@ -182,7 +182,7 @@ void CvsJob::slotProcessFinished()
 
     d->isRunning = false;
 
-    emit jobExited(d->childproc->exitStatus() == QProcess::NormalExit, d->childproc->exitCode());
+    Q_EMIT jobExited(d->childproc->exitStatus() == QProcess::NormalExit, d->childproc->exitCode());
 }
 
 void CvsJob::slotReceivedStdout()
@@ -193,7 +193,7 @@ void CvsJob::slotReceivedStdout()
     d->outputLines += output.split('\n');
 
     qCDebug(log_cervisia) << "output:" << output;
-    emit receivedStdout(output);
+    Q_EMIT receivedStdout(output);
 }
 
 void CvsJob::slotReceivedStderr()
@@ -204,5 +204,5 @@ void CvsJob::slotReceivedStderr()
     d->outputLines += output.split('\n');
 
     qCDebug(log_cervisia) << "output:" << output;
-    emit receivedStderr(output);
+    Q_EMIT receivedStderr(output);
 }

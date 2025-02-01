@@ -42,7 +42,7 @@ protected:
     void keyPressEvent(QKeyEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
 
-private slots:
+private Q_SLOTS:
     void stopCompletion();
 
 private:

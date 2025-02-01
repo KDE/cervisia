@@ -556,7 +556,7 @@ void UpdateView::updateItem(const QString &filePath, EntryStatus status, bool is
 void UpdateView::itemExecuted(QTreeWidgetItem *item, int)
 {
     if (isFileItem(item))
-        emit fileOpened(static_cast<UpdateFileItem *>(item)->filePath());
+        Q_EMIT fileOpened(static_cast<UpdateFileItem *>(item)->filePath());
 }
 
 void UpdateView::itemExpandedSlot(QTreeWidgetItem *item)

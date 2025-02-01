@@ -41,7 +41,7 @@ public Q_SLOTS:
     void slotReceivedOutput(QString buffer);
     void slotJobExited(bool normalExit, int exitStatus);
 
-signals:
+Q_SIGNALS:
     void receivedLine(QString line);
     void jobFinished(bool normalExit, int exitStatus);
 

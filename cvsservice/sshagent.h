@@ -52,7 +52,7 @@ public:
         return m_authSock;
     }
 
-private slots:
+private Q_SLOTS:
     void slotProcessFinished();
     void slotReceivedOutput();
 

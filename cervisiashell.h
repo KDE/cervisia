@@ -36,13 +36,13 @@ public:
     explicit CervisiaShell(const char *name = 0);
     ~CervisiaShell() override;
 
-public slots:
+public Q_SLOTS:
     void openURL();
     void openURL(const QUrl &url);
     void slotConfigureKeys();
     void slotConfigureToolBars();
 
-protected slots:
+protected Q_SLOTS:
     void slotNewToolbarConfig();
 
 protected:

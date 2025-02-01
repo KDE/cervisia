@@ -36,7 +36,7 @@ public:
 
     QString directory() const;
 
-private slots:
+private Q_SLOTS:
     void dirButtonClicked();
     void lineEditTextChanged(const QString &text);
 

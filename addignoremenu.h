@@ -38,7 +38,7 @@ public:
 
     QMenu *menu();
 
-private slots:
+private Q_SLOTS:
     void actionTriggered(QAction *);
 
 private:

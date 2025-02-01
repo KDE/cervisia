@@ -38,7 +38,7 @@ public:
     EditWithMenu(const QUrl &url, QWidget *parent);
     QMenu *menu();
 
-private slots:
+private Q_SLOTS:
     void actionTriggered(QAction *);
 
 private:

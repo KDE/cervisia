@@ -144,11 +144,11 @@ void LogListView::mousePressEvent(QMouseEvent *e)
     if (e->button() == Qt::LeftButton) {
         // If the control key was pressed, then we change revision B not A
         if (e->modifiers() & Qt::ControlModifier)
-            emit revisionClicked(revision, true);
+            Q_EMIT revisionClicked(revision, true);
         else
-            emit revisionClicked(revision, false);
+            Q_EMIT revisionClicked(revision, false);
     } else if (e->button() == Qt::MiddleButton)
-        emit revisionClicked(revision, true);
+        Q_EMIT revisionClicked(revision, true);
 }
 
 void LogListView::keyPressEvent(QKeyEvent *e)
@@ -156,12 +156,12 @@ void LogListView::keyPressEvent(QKeyEvent *e)
     switch (e->key()) {
     case Qt::Key_A:
         if (currentItem())
-            emit revisionClicked(currentItem()->text(LogListViewItem::Revision), false);
+            Q_EMIT revisionClicked(currentItem()->text(LogListViewItem::Revision), false);
         break;
         break;
     case Qt::Key_B:
         if (currentItem())
-            emit revisionClicked(currentItem()->text(LogListViewItem::Revision), true);
+            Q_EMIT revisionClicked(currentItem()->text(LogListViewItem::Revision), true);
         break;
     case Qt::Key_Backspace:
     case Qt::Key_Delete:

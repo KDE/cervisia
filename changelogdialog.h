@@ -37,7 +37,7 @@ public:
     bool readFile(const QString &fileName);
     QString message();
 
-protected slots:
+protected Q_SLOTS:
     void slotOk();
 
 private:

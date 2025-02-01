@@ -156,6 +156,6 @@ void LogPlainView::doSetSource(const QUrl &url, QTextDocument::ResourceType type
 
     bool selectedRevisionB = name.startsWith(QLatin1String("revB#"));
     if (selectedRevisionB || name.startsWith(QLatin1String("revA#"))) {
-        emit revisionClicked(name.mid(5), selectedRevisionB);
+        Q_EMIT revisionClicked(name.mid(5), selectedRevisionB);
     }
 }

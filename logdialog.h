@@ -59,12 +59,12 @@ public:
 
     bool parseCvsLog(OrgKdeCervisia5CvsserviceCvsserviceInterface *service, const QString &fileName);
 
-protected slots:
+protected Q_SLOTS:
     void slotOk();
     void slotPatch();
     void slotHelp();
 
-private slots:
+private Q_SLOTS:
     void findClicked();
     void diffClicked();
     void annotateClicked();

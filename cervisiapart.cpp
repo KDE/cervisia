@@ -1573,7 +1573,7 @@ void CervisiaPart::slotConfigure()
 
 void CervisiaPart::slotCVSInfo()
 {
-    emit setStatusBarText(i18n("Invoking help on CVS"));
+    Q_EMIT setStatusBarText(i18n("Invoking help on CVS"));
     auto job = new KIO::ApplicationLauncherJob(KService::serviceByDesktopName("org.kde.khelpcenter"));
     job->setUrls({QUrl(QStringLiteral("man:/(1)/cvs"))});
     job->start();
@@ -1584,7 +1584,7 @@ void CervisiaPart::showJobStart(const QString &cmdline)
     hasRunningJob = true;
     actionCollection()->action("stop_job")->setEnabled(true);
 
-    emit setStatusBarText(cmdline);
+    Q_EMIT setStatusBarText(cmdline);
     updateActions();
 }
 
@@ -1608,7 +1608,7 @@ void CervisiaPart::slotJobFinished()
 {
     actionCollection()->action("stop_job")->setEnabled(false);
     hasRunningJob = false;
-    emit setStatusBarText(i18n("Done"));
+    Q_EMIT setStatusBarText(i18n("Done"));
     updateActions();
 
     disconnect(protocol, SIGNAL(receivedLine(QString)), update, SLOT(processUpdateLine(QString)));
@@ -1652,7 +1652,7 @@ bool CervisiaPart::openSandbox(const QUrl &url)
 
     // get repository for the caption of the window
     repository = cvsRepository.location();
-    emit setWindowCaption(sandbox + '(' + repository + ')');
+    Q_EMIT setWindowCaption(sandbox + '(' + repository + ')');
 
     // set m_url member for tabbed window modus of Konqueror
     setUrl(url);

@@ -42,7 +42,7 @@ public:
     void setRepository(const QByteArray &repository);
 
     QString dbusObjectPath() const;
-public slots:
+public Q_SLOTS:
     bool execute();
     QStringList output();
 

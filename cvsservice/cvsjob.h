@@ -59,12 +59,12 @@ public Q_SLOTS: // dbus function
 
     QStringList output() const;
 
-signals: // dbus signal
+Q_SIGNALS: // dbus signal
     void jobExited(bool normalExit, int status);
     void receivedStdout(const QString &buffer);
     void receivedStderr(const QString &buffer);
 
-private slots:
+private Q_SLOTS:
     void slotProcessFinished();
     void slotReceivedStdout();
     void slotReceivedStderr();

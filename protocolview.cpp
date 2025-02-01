@@ -134,7 +134,7 @@ void ProtocolView::slotJobExited(bool normalExit, int exitStatus)
     buf += msg;
     processOutput();
 
-    emit jobFinished(normalExit, exitStatus);
+    Q_EMIT jobFinished(normalExit, exitStatus);
 }
 
 void ProtocolView::processOutput()
@@ -144,7 +144,7 @@ void ProtocolView::processOutput()
         QString line = buf.left(pos);
         if (!line.isEmpty()) {
             appendLine(line);
-            emit receivedLine(line);
+            Q_EMIT receivedLine(line);
         }
         buf = buf.right(buf.length() - pos - 1);
     }

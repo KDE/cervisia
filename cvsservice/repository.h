@@ -93,7 +93,7 @@ public Q_SLOTS:
      */
     bool retrieveCvsignoreFile() const;
 
-private slots:
+private Q_SLOTS:
     void slotConfigDirty(const QString &fileName);
 
 private:

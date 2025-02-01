@@ -39,7 +39,7 @@ public:
     QString diffOptions() const;
     QString formatOption() const;
 
-private slots:
+private Q_SLOTS:
     void slotHelp();
     void formatChanged(int buttonId);
 

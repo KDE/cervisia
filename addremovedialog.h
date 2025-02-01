@@ -34,7 +34,7 @@ public:
 
     void setFileList(const QStringList &files);
 
-private slots:
+private Q_SLOTS:
     void slotHelp();
 
 private:

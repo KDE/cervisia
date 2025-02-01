@@ -42,7 +42,7 @@ public:
 
     void addLine(const Cervisia::LogInfo &logInfo, const QString &content, bool odd);
 
-private slots:
+private Q_SLOTS:
     void slotHelp();
     void findNext();
     void findPrev();

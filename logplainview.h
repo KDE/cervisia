@@ -42,10 +42,10 @@ public:
 
     void searchText(int options, const QString &pattern);
 
-signals:
+Q_SIGNALS:
     void revisionClicked(QString rev, bool rmb);
 
-public slots:
+public Q_SLOTS:
     void scrollToTop();
     void findNext();
     void searchHighlight(const QString &text, int index, int length);

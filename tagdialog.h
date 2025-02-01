@@ -43,11 +43,11 @@ public:
     bool forceTag() const;
     QString tag() const;
 
-protected slots:
+protected Q_SLOTS:
     void slotOk();
     void slotHelp();
 
-private slots:
+private Q_SLOTS:
     void tagButtonClicked();
 
 private:

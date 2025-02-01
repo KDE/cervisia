@@ -43,7 +43,7 @@ bool ToolTip::eventFilter(QObject *watched, QEvent *event)
 
         QRect rect;
         QString text;
-        emit queryToolTip(helpEvent->pos(), rect, text);
+        Q_EMIT queryToolTip(helpEvent->pos(), rect, text);
 
         if (rect.isValid() && !text.isEmpty()) {
             auto parentWidget = static_cast<QWidget *>(parent());

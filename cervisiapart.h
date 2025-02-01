@@ -68,7 +68,7 @@ public:
 
     static KAboutData *createAboutData();
 
-public slots:
+public Q_SLOTS:
     // unused because we overwrite the default behaviour of openUrl()
     bool openFile() override
     {
@@ -137,10 +137,10 @@ public slots:
     void slotConfigure();
     void slotCVSInfo();
 
-protected slots:
+protected Q_SLOTS:
     void slotJobFinished();
 
-private slots:
+private Q_SLOTS:
     // called by menu action "Open Sandbox..."
     void slotOpenSandbox();
     void slotSetupStatusBar();

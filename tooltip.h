@@ -44,7 +44,7 @@ public:
      */
     explicit ToolTip(QWidget *widget);
 
-signals:
+Q_SIGNALS:
 
     /**
      * This signal is emitted when a tooltip could be displayed. When a client

@@ -52,10 +52,10 @@ public:
     bool exportOnly() const;
     bool recursive() const;
 
-protected slots:
+protected Q_SLOTS:
     void slotOk();
 
-private slots:
+private Q_SLOTS:
     void slotHelp();
     void dirButtonClicked();
     void moduleButtonClicked();

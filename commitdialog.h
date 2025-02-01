@@ -50,7 +50,7 @@ public:
     QString logMessage() const;
     void setLogHistory(const QStringList &list);
 
-private slots:
+private Q_SLOTS:
     void slotHelp();
     void comboActivated(int);
     void fileSelected(QListWidgetItem *item);

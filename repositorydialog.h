@@ -41,10 +41,10 @@ public:
     void readConfigFile();
     void readCvsPassFile();
 
-protected slots:
+protected Q_SLOTS:
     void slotOk();
 
-private slots:
+private Q_SLOTS:
     void slotHelp();
     void slotAddClicked();
     void slotModifyClicked();

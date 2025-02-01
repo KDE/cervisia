@@ -59,10 +59,10 @@ public:
 
     virtual QString text(int row, int col) const;
 
-signals:
+Q_SIGNALS:
     void revisionClicked(QString rev, bool rmb);
 
-private slots:
+private Q_SLOTS:
     void mousePressed(const QModelIndex &index);
     void slotQueryToolTip(const QPoint &, QRect &, QString &);
 

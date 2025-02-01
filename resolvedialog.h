@@ -46,7 +46,7 @@ public:
 protected:
     void keyPressEvent(QKeyEvent *e) override;
 
-private slots:
+private Q_SLOTS:
     void backClicked();
     void forwClicked();
     void aClicked();

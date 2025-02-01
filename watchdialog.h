@@ -35,7 +35,7 @@ public:
 
     Events events() const;
 
-private slots:
+private Q_SLOTS:
     void slotHelp();
 
 private:

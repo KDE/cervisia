@@ -48,7 +48,7 @@ public:
     int compression() const;
     bool retrieveCvsignoreFile() const;
 
-private slots:
+private Q_SLOTS:
     void repoChanged();
     void compressionToggled(bool checked);
 

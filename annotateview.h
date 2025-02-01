@@ -44,10 +44,10 @@ public:
     int lastLine() const;
     void gotoLine(int line);
 
-public slots:
+public Q_SLOTS:
     void findText(const QString &textToFind, bool up);
 
-private slots:
+private Q_SLOTS:
     void configChanged();
 
     void slotQueryToolTip(const QPoint &, QRect &, QString &);

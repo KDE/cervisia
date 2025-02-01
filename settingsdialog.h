@@ -43,7 +43,7 @@ class FontButton : public QPushButton
 public:
     explicit FontButton(const QString &text, QWidget *parent = nullptr);
 
-private slots:
+private Q_SLOTS:
     void chooseFont();
 };
 
@@ -55,10 +55,10 @@ public:
     explicit SettingsDialog(KConfig *conf, QWidget *parent = nullptr);
     ~SettingsDialog() override;
 
-protected slots:
+protected Q_SLOTS:
     void done(int res) override;
 
-private slots:
+private Q_SLOTS:
     void slotHelp();
 
 private:

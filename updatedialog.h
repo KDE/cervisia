@@ -39,7 +39,7 @@ public:
     QString tag() const;
     QString date() const;
 
-private slots:
+private Q_SLOTS:
     void toggled();
     void tagButtonClicked();
     void branchButtonClicked();

@@ -65,17 +65,17 @@ public:
 
     void replaceItem(QTreeWidgetItem *, QTreeWidgetItem *);
 
-signals:
+Q_SIGNALS:
     void fileOpened(QString filename);
 
-public slots:
+public Q_SLOTS:
     void unfoldSelectedFolders();
     void unfoldTree();
     void foldTree();
     void finishJob(bool normalExit, int exitStatus);
     void processUpdateLine(QString line);
 
-private slots:
+private Q_SLOTS:
     void itemExecuted(QTreeWidgetItem *item, int column);
     void itemExpandedSlot(QTreeWidgetItem *item);
 

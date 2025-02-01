@@ -404,7 +404,7 @@ void LogTreeView::mousePressed(const QModelIndex &index)
                 // the left mouse button with the control key was pressed
                 bool changeRevB = (buttons == Qt::MiddleButton) || (buttons == Qt::LeftButton && QApplication::keyboardModifiers() & Qt::ControlModifier);
 
-                emit revisionClicked(item->m_logInfo.m_revision, changeRevB);
+                Q_EMIT revisionClicked(item->m_logInfo.m_revision, changeRevB);
                 viewport()->update();
                 break;
             }

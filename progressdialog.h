@@ -48,10 +48,10 @@ public Q_SLOTS:
     void slotReceivedOutput(QString buffer);
     void slotJobExited(bool normalExit, int status);
 
-protected slots:
+protected Q_SLOTS:
     void reject() override;
 
-private slots:
+private Q_SLOTS:
     void slotTimeoutOccurred();
 
 private:

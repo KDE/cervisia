@@ -42,14 +42,14 @@ public:
     void addRevision(const Cervisia::LogInfo &logInfo);
     void setSelectedPair(const QString &selectionA, const QString &selectionB);
 
-signals:
+Q_SIGNALS:
     void revisionClicked(QString rev, bool rmb);
 
 protected:
     void mousePressEvent(QMouseEvent *e) override;
     void keyPressEvent(QKeyEvent *e) override;
 
-private slots:
+private Q_SLOTS:
 
     void slotQueryToolTip(const QPoint &, QRect &, QString &);
 

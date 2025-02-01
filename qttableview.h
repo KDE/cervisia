@@ -85,7 +85,7 @@ protected:
     QScrollBar *verticalScrollBar() const;
     QScrollBar *horizontalScrollBar() const;
 
-private slots:
+private Q_SLOTS:
     void horSbValue(int);
     void horSbSliding(int);
     void horSbSlidingDone();
