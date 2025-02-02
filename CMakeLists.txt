@@ -186,11 +186,9 @@ set(cervisiapart_PART_SRCS ${libcervisia_SRCS}
 
 qt_add_dbus_adaptor(cervisiapart_PART_SRCS org.kde.cervisia5.protocolview.xml protocolview.h ProtocolView)
 
-add_library(cervisiapart5 MODULE ${cervisiapart_PART_SRCS})
+kcoreaddons_add_plugin(cervisiapart SOURCES ${cervisiapart_PART_SRCS} INSTALL_NAMESPACE "kf5/parts")
 
-target_link_libraries(cervisiapart5 KF${KF_MAJOR_VERSION}::I18n KF${KF_MAJOR_VERSION}::TextWidgets KF${KF_MAJOR_VERSION}::Parts KF${KF_MAJOR_VERSION}::Notifications KF${KF_MAJOR_VERSION}::ItemViews)
-
-install(TARGETS cervisiapart5  DESTINATION ${KDE_INSTALL_PLUGINDIR} )
+target_link_libraries(cervisiapart KF${KF_MAJOR_VERSION}::I18n KF${KF_MAJOR_VERSION}::TextWidgets KF${KF_MAJOR_VERSION}::Parts KF${KF_MAJOR_VERSION}::Notifications KF${KF_MAJOR_VERSION}::ItemViews)
 
 
 ########### next target ###############
@@ -200,7 +198,6 @@ install(TARGETS cervisiapart5  DESTINATION ${KDE_INSTALL_PLUGINDIR} )
 
 install(PROGRAMS org.kde.cervisia.desktop  DESTINATION  ${KDE_INSTALL_APPDIR} )
 install(FILES org.kde.cervisia.appdata.xml DESTINATION  ${KDE_INSTALL_METAINFODIR} )
-install(FILES org.kde.cervisiapart5.desktop DESTINATION ${KDE_INSTALL_KSERVICESDIR} )
 install(FILES cervisiapart.kcfg  DESTINATION  ${KDE_INSTALL_KCFGDIR} )
 install(FILES cervisiaui.rc  DESTINATION  ${KDE_INSTALL_KXMLGUIDIR}/cervisiapart )
 install(FILES cervisiashellui.rc DESTINATION  ${KDE_INSTALL_KXMLGUIDIR}/cervisia )

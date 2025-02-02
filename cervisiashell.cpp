@@ -22,14 +22,14 @@
 
 #include <KConfigGroup>
 #include <KLocalizedString>
+#include <KPluginFactory>
+#include <KPluginMetaData>
 #include <KSharedConfig>
 #include <kactioncollection.h>
 #include <kconfig.h>
 #include <kedittoolbar.h>
 #include <khelpmenu.h>
 #include <kmessagebox.h>
-#include <kpluginfactory.h>
-#include <kpluginloader.h>
 #include <kshortcutsdialog.h>
 #include <kstandardaction.h>
 
@@ -42,17 +42,16 @@ CervisiaShell::CervisiaShell(const char *name)
     setObjectName(name);
     setXMLFile("cervisiashellui.rc");
 
-    KPluginLoader loader("cervisiapart5");
-    if (KPluginFactory *factory = loader.factory()) {
-        m_part = factory->create<KParts::ReadOnlyPart>(this);
-        if (m_part) {
-            m_part->setObjectName("cervisiaview");
-            setCentralWidget(m_part->widget());
-        }
+    KPluginMetaData md(QStringLiteral("kf5/parts/cervisiapart"));
+    const auto result = KPluginFactory::instantiatePlugin<KParts::ReadOnlyPart>(md, this);
+    if (result) {
+        m_part = result.plugin;
+        m_part->setObjectName("cervisiaview");
+        setCentralWidget(m_part->widget());
     } else {
         KMessageBox::detailedError(this,
                                    i18n("The Cervisia library could not be loaded."),
-                                   loader.errorString() + QLatin1String("\n") + loader.pluginName() + QLatin1String("\n") + loader.fileName());
+                                   result.errorString + QLatin1String("\n") + md.pluginId() + QLatin1String("\n") + md.fileName());
         qApp->quit();
         return;
     }

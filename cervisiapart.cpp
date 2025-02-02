@@ -81,7 +81,8 @@
 
 using Cervisia::TagDialog;
 
-K_PLUGIN_FACTORY(CervisiaFactory, registerPlugin<CervisiaPart>();)
+K_PLUGIN_CLASS_WITH_JSON(CervisiaPart, "cervisiapart.json")
+
 #include <cervisiapart.moc>
 
 CervisiaPart::CervisiaPart(QWidget *parentWidget, QObject *parent, const QVariantList & /*args*/)
