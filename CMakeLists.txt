@@ -51,9 +51,6 @@ add_subdirectory( pics )
 ki18n_install(po)
 kdoctools_install(po)
 
-set(_KDECONFDIR_ ${KDE_INSTALL_CONFDIR})
-set(_KDEHTMLDIR_ ${KDE_INSTALL_DOCBUNDLEDIR})
-
 ########### next target ###############
 
 set(libcervisia_SRCS
