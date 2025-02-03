@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:37+0000\n"
+"POT-Creation-Date: 2025-02-03 01:53+0000\n"
 "PO-Revision-Date: 2021-01-18 18:59+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -162,17 +162,17 @@ msgstr ""
 msgid "Go to line number:"
 msgstr ""
 
-#: cervisiapart.cpp:111 main.cpp:138
+#: cervisiapart.cpp:112 main.cpp:138
 #, kde-format
 msgid "Cervisia"
 msgstr "சர்விசிய"
 
-#: cervisiapart.cpp:118
+#: cervisiapart.cpp:119
 #, kde-format
 msgid "Starting cvsservice failed with message: "
 msgstr ""
 
-#: cervisiapart.cpp:148
+#: cervisiapart.cpp:149
 #, fuzzy, kde-format
 msgid ""
 "This KPart is non-functional, because the cvs D-Bus service could not be "
@@ -181,19 +181,19 @@ msgstr ""
 "இந்த KPart செயலிழந்து இருக்கிறது, ஏனென்றால் நம்மால் cvs DCOP  சேவையை துவக்க "
 "முடியவில்லை."
 
-#: cervisiapart.cpp:186
+#: cervisiapart.cpp:187
 #, kde-format
 msgid "Remote CVS working folders are not supported."
 msgstr "தொலை CVS பணி அடைவுகள், ஆதரிக்கப்படவில்லை."
 
-#: cervisiapart.cpp:194
+#: cervisiapart.cpp:195
 #, kde-format
 msgid ""
 "You cannot change to a different folder while there is a running cvs job."
 msgstr ""
 "ஒரு cvs  பணி நடந்துக்கொண்டிருக்கும் போது, தங்களால் வேறொரு அடைவுக்கு மாற இயலாது."
 
-#: cervisiapart.cpp:214
+#: cervisiapart.cpp:215
 #, kde-format
 msgid ""
 "F - All files are hidden, the tree shows only folders\n"
@@ -204,192 +204,192 @@ msgstr ""
 "N - தற்போதைய கோப்புகள் அனைத்தும் மறைக்கப்பட்டிருக்கிறது\n"
 "R - நீக்கப்பட்ட கோப்புகள் அனைத்தும் மறைக்கப்பட்டிருக்கிறது"
 
-#: cervisiapart.cpp:227
+#: cervisiapart.cpp:228
 #, fuzzy, kde-format
 #| msgid "O&pen Sandbox..."
 msgid "Open Sandbox..."
 msgstr "Sandboxஐ திற"
 
-#: cervisiapart.cpp:231
+#: cervisiapart.cpp:232
 #, kde-format
 msgid "Opens a CVS working folder in the main window"
 msgstr "ஒரு CVS பணி அடைவை பிரதான சாளரத்தில் திறக்கிறது."
 
-#: cervisiapart.cpp:235
+#: cervisiapart.cpp:236
 #, kde-format
 msgid "Recent Sandboxes"
 msgstr "சமீபத்திய Sandboxes"
 
-#: cervisiapart.cpp:239
+#: cervisiapart.cpp:240
 #, kde-format
 msgid "&Insert ChangeLog Entry..."
 msgstr "மாற்றுப்பதிவேடு உள்ளிட்டதை சொருகுக"
 
-#: cervisiapart.cpp:242
+#: cervisiapart.cpp:243
 #, kde-format
 msgid "Inserts a new intro into the file ChangeLog in the toplevel folder"
 msgstr "ஒரு புதிய அறிமுகத்தை மேல்மட்ட அடைவில் உள்ள மாற்றுபதிவேட்டுக் கோப்பில் செருகுக."
 
-#: cervisiapart.cpp:246
+#: cervisiapart.cpp:247
 #, fuzzy, kde-format
 msgid "&Update"
 msgstr "புதுப்பிக்கப்பட்டது"
 
-#: cervisiapart.cpp:250
+#: cervisiapart.cpp:251
 #, kde-format
 msgid "Updates (cvs update) the selected files and folders"
 msgstr "தேர்ந்தெடுக்கப்பட்ட கோப்புகள் மற்றும் அடைவுகளை புதுப்பி"
 
-#: cervisiapart.cpp:254
+#: cervisiapart.cpp:255
 #, kde-format
 msgid "&Status"
 msgstr "நிலை"
 
-#: cervisiapart.cpp:258
+#: cervisiapart.cpp:259
 #, kde-format
 msgid "Updates the status (cvs -n update) of the selected files and folders"
 msgstr "தேர்ந்தெடுக்கப்பட்ட கோப்புகள் மற்றும் அடைவுகளின் நிலையை புதுப்பி"
 
-#: cervisiapart.cpp:262 resolvedialog.cpp:176
+#: cervisiapart.cpp:263 resolvedialog.cpp:176
 #, fuzzy, kde-format
 msgid "&Edit"
 msgstr "திருத்தங்கள்"
 
-#: cervisiapart.cpp:265
+#: cervisiapart.cpp:266
 #, kde-format
 msgid "Opens the marked file for editing"
 msgstr "குறிப்பிட்ட கோப்பினை திருத்துவதற்குத் திறக்கிறது"
 
-#: cervisiapart.cpp:269
+#: cervisiapart.cpp:270
 #, kde-format
 msgid "Reso&lve..."
 msgstr "தெளிவுத்திறன் உரையாடல் பெட்டியை, தேர்தெடுக்கப்பட்ட கோப்பினைக் கொண்டு திறக்கிறது"
 
-#: cervisiapart.cpp:272
+#: cervisiapart.cpp:273
 #, kde-format
 msgid "Opens the resolve dialog with the selected file"
 msgstr "தேர்ந்தெடுத்த கோப்புகள் மூலம் தீர்மானிக்கும் உரையாடலை திறக்கவும்"
 
-#: cervisiapart.cpp:276
+#: cervisiapart.cpp:277
 #, kde-format
 msgid "&Commit..."
 msgstr "சொருகுக"
 
-#: cervisiapart.cpp:280
+#: cervisiapart.cpp:281
 #, kde-format
 msgid "Commits the selected files"
 msgstr "தேர்ந்தெடுக்கப்பட்ட கோப்புகளை சொருகுக"
 
-#: cervisiapart.cpp:284
+#: cervisiapart.cpp:285
 #, kde-format
 msgid "&Add to Repository..."
 msgstr "கிடங்கில் சேர்"
 
-#: cervisiapart.cpp:287
+#: cervisiapart.cpp:288
 #, fuzzy, kde-format
 #| msgid "CVS Add"
 msgid "Add"
 msgstr "CVS சேர்"
 
-#: cervisiapart.cpp:289
+#: cervisiapart.cpp:290
 #, kde-format
 msgid "Adds (cvs add) the selected files to the repository"
 msgstr "தேர்ந்தெடுக்கப்பட்ட கோப்புகளை கிடங்கில் சேர்"
 
-#: cervisiapart.cpp:293
+#: cervisiapart.cpp:294
 #, kde-format
 msgid "Add &Binary..."
 msgstr "பைனரியைச் சேர்"
 
-#: cervisiapart.cpp:296
+#: cervisiapart.cpp:297
 #, kde-format
 msgid "Adds (cvs -kb add) the selected files as binaries to the repository"
 msgstr "தேர்ந்தெடுக்கப்பட்ட கோப்புகளை பைனரியாக கிடங்கில் சேர்க்கிறது"
 
-#: cervisiapart.cpp:300
+#: cervisiapart.cpp:301
 #, kde-format
 msgid "&Remove From Repository..."
 msgstr "கிடங்கிலிருந்து நீக்கு"
 
-#: cervisiapart.cpp:303 repositorydialog.cpp:201
+#: cervisiapart.cpp:304 repositorydialog.cpp:201
 #, fuzzy, kde-format
 #| msgid "Removed"
 msgid "Remove"
 msgstr "நீக்கப்பட்டது"
 
-#: cervisiapart.cpp:305
+#: cervisiapart.cpp:306
 #, kde-format
 msgid "Removes (cvs remove) the selected files from the repository"
 msgstr "தேர்ந்தெடுக்கப்பட்ட கோப்புகளை கிடங்கிலிருந்து நீக்குகிறது"
 
-#: cervisiapart.cpp:309
+#: cervisiapart.cpp:310
 #, kde-format
 msgid "Rever&t"
 msgstr "முந்தைய நிலைக்குச் செல்"
 
-#: cervisiapart.cpp:312
+#: cervisiapart.cpp:313
 #, kde-format
 msgid "Reverts (cvs update -C) the selected files (only cvs 1.11)"
 msgstr "தேர்ந்தெடுக்கப்பட்ட கோப்புகளை முந்தைய நிலைக்கு கொண்டுச் செல்"
 
-#: cervisiapart.cpp:316
+#: cervisiapart.cpp:317
 #, kde-format
 msgid "&Properties"
 msgstr ""
 
-#: cervisiapart.cpp:323
+#: cervisiapart.cpp:324
 #, kde-format
 msgid "Stop"
 msgstr ""
 
-#: cervisiapart.cpp:328
+#: cervisiapart.cpp:329
 #, kde-format
 msgid "Stops any running sub-processes"
 msgstr "இயங்கிக்கொண்டிருக்கும் உச்செயல்களை நிறுத்துகிறது"
 
-#: cervisiapart.cpp:332
+#: cervisiapart.cpp:333
 #, kde-format
 msgid "Browse &Log..."
 msgstr "பதிவேட்டை தேடு"
 
-#: cervisiapart.cpp:336
+#: cervisiapart.cpp:337
 #, kde-format
 msgid "Shows the revision tree of the selected file"
 msgstr "தேர்ந்தெடுக்கப்பட்ட கோப்புகளின் revision மரத்தைக் காண்பிக்கிறது"
 
-#: cervisiapart.cpp:341
+#: cervisiapart.cpp:342
 #, kde-format
 msgid "Browse Multi-File Log..."
 msgstr "பலகோப்பு பதிவேட்டை தேடு"
 
-#: cervisiapart.cpp:345
+#: cervisiapart.cpp:346
 #, kde-format
 msgid "&Annotate..."
 msgstr "விளக்கக் குறிப்பு செய்"
 
-#: cervisiapart.cpp:349
+#: cervisiapart.cpp:350
 #, kde-format
 msgid "Shows a blame-annotated view of the selected file"
 msgstr "சிறுவிளக்க கோப்பு காட்சிகளை காட்டவும்"
 
-#: cervisiapart.cpp:353
+#: cervisiapart.cpp:354
 #, kde-format
 msgid "&Difference to Repository (BASE)..."
 msgstr "(BASE) தகவலின் மாற்றம்..."
 
-#: cervisiapart.cpp:357
+#: cervisiapart.cpp:358
 #, kde-format
 msgid ""
 "Shows the differences of the selected file to the checked out version (tag "
 "BASE)"
 msgstr "தேர்ந்தெடுத்த கோப்புகளில் உள்ள வேறுபாடுகளை மூலம் காட்டுக."
 
-#: cervisiapart.cpp:361
+#: cervisiapart.cpp:362
 #, kde-format
 msgid "Difference to Repository (HEAD)..."
 msgstr " (HEAD) தகவலின் மாற்றம் "
 
-#: cervisiapart.cpp:365
+#: cervisiapart.cpp:366
 #, kde-format
 msgid ""
 "Shows the differences of the selected file to the newest version in the "
@@ -398,358 +398,358 @@ msgstr ""
 "புதிதாக உள்ள தகவல் பதிப்புக்கு கிடங்கு கடைசி இரண்டு பதிப்புகளில் உள்ள வேறுபாடுகளை "
 "காட்டவும்."
 
-#: cervisiapart.cpp:369
+#: cervisiapart.cpp:370
 #, kde-format
 msgid "Last &Change..."
 msgstr "கடைசி மாற்றம்...."
 
-#: cervisiapart.cpp:372
+#: cervisiapart.cpp:373
 #, kde-format
 msgid ""
 "Shows the differences between the last two revisions of the selected file"
 msgstr "கடைசி இரண்டு பதிப்புகளில் உள்ள வேறுபாடுகளை காட்டவும்"
 
-#: cervisiapart.cpp:376
+#: cervisiapart.cpp:377
 #, kde-format
 msgid "&History..."
 msgstr "&சரித்திரம்"
 
-#: cervisiapart.cpp:379
+#: cervisiapart.cpp:380
 #, kde-format
 msgid "Shows the CVS history as reported by the server"
 msgstr " cvs சரித்திரத்தை சேவையகத்தின் அறிக்கையின்படி காட்டவும்"
 
-#: cervisiapart.cpp:383
+#: cervisiapart.cpp:384
 #, kde-format
 msgid "&Unfold File Tree"
 msgstr "மடிக்கப்படாத கோப்பு மரம் "
 
-#: cervisiapart.cpp:387
+#: cervisiapart.cpp:388
 #, kde-format
 msgid "Opens all branches of the file tree"
 msgstr "கோப்பு மரத்தின் அனைத்து கிளைகளையும் திற"
 
-#: cervisiapart.cpp:391
+#: cervisiapart.cpp:392
 #, kde-format
 msgid "&Fold File Tree"
 msgstr "கோப்பு மரங்களை &மடி"
 
-#: cervisiapart.cpp:394
+#: cervisiapart.cpp:395
 #, kde-format
 msgid "Closes all branches of the file tree"
 msgstr "கோப்பு மரத்தின் அனைத்து கிளைகளையும் மூடு"
 
-#: cervisiapart.cpp:401
+#: cervisiapart.cpp:402
 #, kde-format
 msgid "&Tag/Branch..."
 msgstr "&அட்டை/கிளை....."
 
-#: cervisiapart.cpp:404
+#: cervisiapart.cpp:405
 #, kde-format
 msgid "Creates a tag or branch for the selected files"
 msgstr "தேர்வு செய்யப்பட்ட கோப்புகளுக்கு அட்டை அல்லது கிளையை உருவாக்கு"
 
-#: cervisiapart.cpp:408
+#: cervisiapart.cpp:409
 #, kde-format
 msgid "&Delete Tag..."
 msgstr "&அட்டையை அழி...."
 
-#: cervisiapart.cpp:411
+#: cervisiapart.cpp:412
 #, kde-format
 msgid "Deletes a tag from the selected files"
 msgstr "தேர்வுச்செய்யப்பட்ட கோப்புகளிலிருந்து ஓர் அட்டை நீக்கப்படும்."
 
-#: cervisiapart.cpp:415
+#: cervisiapart.cpp:416
 #, kde-format
 msgid "&Update to Tag/Date..."
 msgstr "குறியீடு/ தேதியை புதுப்பி"
 
-#: cervisiapart.cpp:418
+#: cervisiapart.cpp:419
 #, kde-format
 msgid "Updates the selected files to a given tag, branch or date"
 msgstr "தேர்வுச் செய்த கோப்புகளை குறிப்பு அட்டைகளுக்கு, கிளை அல்லது தேதியை புதிப்பித்தல்"
 
-#: cervisiapart.cpp:422
+#: cervisiapart.cpp:423
 #, kde-format
 msgid "Update to &HEAD"
 msgstr "HEAD யைப் புதுப்பி"
 
-#: cervisiapart.cpp:425
+#: cervisiapart.cpp:426
 #, kde-format
 msgid "Updates the selected files to the HEAD revision"
 msgstr "தேர்வுச் செய்த கோப்புகளை HEAD மீள்நோக்குக்கு புதிப்பித்தல்"
 
-#: cervisiapart.cpp:429
+#: cervisiapart.cpp:430
 #, kde-format
 msgid "&Merge..."
 msgstr "&சேர்"
 
-#: cervisiapart.cpp:432
+#: cervisiapart.cpp:433
 #, kde-format
 msgid "Merges a branch or a set of modifications into the selected files"
 msgstr "தேர்வுச் செய்த கோப்புகளில் உள்ள கிளை அல்லது மாற்றங்களை சேர்த்தல்"
 
-#: cervisiapart.cpp:436
+#: cervisiapart.cpp:437
 #, kde-format
 msgid "&Add Watch..."
 msgstr "கண்கானிப்பாளரை சேர்"
 
-#: cervisiapart.cpp:439
+#: cervisiapart.cpp:440
 #, kde-format
 msgid "Adds a watch for the selected files"
 msgstr "தேர்வு செய்யப்பட்ட கோப்புகளுக்கு கண்காணிப்பாளரை சேர்"
 
-#: cervisiapart.cpp:443
+#: cervisiapart.cpp:444
 #, kde-format
 msgid "&Remove Watch..."
 msgstr "கண்காணிப்பாளரை நீக்கு"
 
-#: cervisiapart.cpp:446
+#: cervisiapart.cpp:447
 #, kde-format
 msgid "Removes a watch from the selected files"
 msgstr "தேர்வு செய்யப்பட்ட கோப்புகளுக்கு கண்காணிப்பாளரை நீக்கு"
 
-#: cervisiapart.cpp:450
+#: cervisiapart.cpp:451
 #, kde-format
 msgid "Show &Watchers"
 msgstr "கண்காணிப்பாளரை காட்டு"
 
-#: cervisiapart.cpp:453
+#: cervisiapart.cpp:454
 #, kde-format
 msgid "Shows the watchers of the selected files"
 msgstr "தேர்வு செய்யப்பட்ட கோப்புகளுக்குக் கண்காணிப்பாளரை காட்டு"
 
-#: cervisiapart.cpp:457
+#: cervisiapart.cpp:458
 #, kde-format
 msgid "Ed&it Files"
 msgstr "கோப்புக்களைத் திருத்து"
 
-#: cervisiapart.cpp:460
+#: cervisiapart.cpp:461
 #, kde-format
 msgid "Edits (cvs edit) the selected files"
 msgstr "தேர்வு செய்யப்பட்ட கோப்புகளை திருத்துகிறது(சிவிஎஸ் திருத்தம்)"
 
-#: cervisiapart.cpp:464
+#: cervisiapart.cpp:465
 #, kde-format
 msgid "U&nedit Files"
 msgstr "&திருத்தப்படாத கோப்புகள்"
 
-#: cervisiapart.cpp:467
+#: cervisiapart.cpp:468
 #, kde-format
 msgid "Unedits (cvs unedit) the selected files"
 msgstr "தேர்வு செய்யப்பட்ட கோப்புகளை திருத்துப்படவில்லை(சிவிஸ் திருத்தப்படாதவை)"
 
-#: cervisiapart.cpp:471
+#: cervisiapart.cpp:472
 #, kde-format
 msgid "Show &Editors"
 msgstr "திருத்துபவனைக் காண்பி"
 
-#: cervisiapart.cpp:474
+#: cervisiapart.cpp:475
 #, kde-format
 msgid "Shows the editors of the selected files"
 msgstr "தேர்வு செய்யப்பட்ட கோப்புகளின் திருத்தங்களை காண்பிக்கிறது"
 
-#: cervisiapart.cpp:478
+#: cervisiapart.cpp:479
 #, kde-format
 msgid "&Lock Files"
 msgstr "&பூட்டப்பட்ட கோப்புகள்"
 
-#: cervisiapart.cpp:481
+#: cervisiapart.cpp:482
 #, kde-format
 msgid "Locks the selected files, so that others cannot modify them"
 msgstr "தேர்வுச்செய்த கோப்புகளை மாற்றமுடியாத படி பூட்டப்பட்டது"
 
-#: cervisiapart.cpp:485
+#: cervisiapart.cpp:486
 #, kde-format
 msgid "Unl&ock Files"
 msgstr "&பூட்டப்பட்டாத கோப்புகள்"
 
-#: cervisiapart.cpp:488
+#: cervisiapart.cpp:489
 #, kde-format
 msgid "Unlocks the selected files"
 msgstr "தேர்வுச்செய்யப்பட்ட கோப்புக்களை பூட்டுவதில்லை"
 
-#: cervisiapart.cpp:492
+#: cervisiapart.cpp:493
 #, kde-format
 msgid "Create &Patch Against Repository..."
 msgstr "தகவலுக்கு எதிரான பாதையை உருவாக்கு "
 
-#: cervisiapart.cpp:495
+#: cervisiapart.cpp:496
 #, kde-format
 msgid "Creates a patch from the modifications in your sandbox"
 msgstr "ஒட்டு வேலையை மாற்றங்கள் உள்ள sandbox மூலம் உருவாக்கவும்"
 
-#: cervisiapart.cpp:502
+#: cervisiapart.cpp:503
 #, kde-format
 msgid "&Create..."
 msgstr "&உருவாக்கு..."
 
-#: cervisiapart.cpp:506
+#: cervisiapart.cpp:507
 #, kde-format
 msgid "&Checkout..."
 msgstr "&சரி செய்"
 
-#: cervisiapart.cpp:509
+#: cervisiapart.cpp:510
 #, kde-format
 msgid "Allows you to checkout a module from a repository"
 msgstr "பதிப்புக்கு கிடங்கில் உள்ள பகுதிகளை சரி செய்ய முடியும்"
 
-#: cervisiapart.cpp:513
+#: cervisiapart.cpp:514
 #, kde-format
 msgid "&Import..."
 msgstr "&இறக்குமதி"
 
-#: cervisiapart.cpp:516
+#: cervisiapart.cpp:517
 #, kde-format
 msgid "Allows you to import a module into a repository"
 msgstr "பதிப்புக்கு கிடங்கில் உள்ள பகுதிகளை உள்வாங்கு முடியும்"
 
-#: cervisiapart.cpp:520
+#: cervisiapart.cpp:521
 #, kde-format
 msgid "&Repositories..."
 msgstr "தகவல் தளம்..."
 
-#: cervisiapart.cpp:523
+#: cervisiapart.cpp:524
 #, kde-format
 msgid "Configures a list of repositories you regularly use"
 msgstr "வழக்கமான உபயோகத்திற்கு பதிப்புக்கு கிடங்கில் உள்ள பகுதிகளை உள்ளமை செய்ய முடியும் "
 
-#: cervisiapart.cpp:530
+#: cervisiapart.cpp:531
 #, kde-format
 msgid "Hide All &Files"
 msgstr "அனைத்துக் கோப்புகளையும் மறை"
 
-#: cervisiapart.cpp:533
+#: cervisiapart.cpp:534
 #, kde-format
 msgid "Determines whether only folders are shown"
 msgstr "கோப்பு தொகுப்புகள் மட்டும் இருக்கின்றதா என்பதை உறுதிபடுத்து"
 
-#: cervisiapart.cpp:537
+#: cervisiapart.cpp:538
 #, kde-format
 msgid "Hide Unmodified Files"
 msgstr "மாற்றப்படாத கோப்புக்களை நீக்கு"
 
-#: cervisiapart.cpp:541
+#: cervisiapart.cpp:542
 #, kde-format
 msgid "Determines whether files with status up-to-date or unknown are hidden"
 msgstr "அன்றைக்கு அல்லது தெரியாத நிலையில் உள்ள கோப்புகள் மறைந்துள்ளதா என்பதை குறிக்கும்."
 
-#: cervisiapart.cpp:546
+#: cervisiapart.cpp:547
 #, kde-format
 msgid "Hide Removed Files"
 msgstr "மறைத்த கோப்புகளை நீக்கு"
 
-#: cervisiapart.cpp:549
+#: cervisiapart.cpp:550
 #, kde-format
 msgid "Determines whether removed files are hidden"
 msgstr "நீக்கப்பட்ட கோப்புகள் இருக்கின்றதா என்பதை உறுதிபடுத்து"
 
-#: cervisiapart.cpp:553
+#: cervisiapart.cpp:554
 #, kde-format
 msgid "Hide Non-CVS Files"
 msgstr "CVS அல்லாத கோப்புகளை மறை "
 
-#: cervisiapart.cpp:556
+#: cervisiapart.cpp:557
 #, kde-format
 msgid "Determines whether files not in CVS are hidden"
 msgstr "CVSல் இல்லாத கோப்புகள் இருக்கின்றதா என்பதை உறுதிபடுத்து"
 
-#: cervisiapart.cpp:560
+#: cervisiapart.cpp:561
 #, kde-format
 msgid "Hide Empty Folders"
 msgstr "காலி கோப்புகளை மறைக்கிறது"
 
-#: cervisiapart.cpp:563
+#: cervisiapart.cpp:564
 #, kde-format
 msgid "Determines whether folders without visible entries are hidden"
 msgstr "தெரிந்த உள்ளீடுகள் இல்லாமல் கோப்பு தொகுப்புகள் இருக்கின்றதா என்பதை உறுதிபடுத்து"
 
-#: cervisiapart.cpp:567
+#: cervisiapart.cpp:568
 #, kde-format
 msgid "Create &Folders on Update"
 msgstr "புதுப்பபிக்கப்பட்ட தொகுப்புகளை உருவாக்கு"
 
-#: cervisiapart.cpp:570
+#: cervisiapart.cpp:571
 #, kde-format
 msgid "Determines whether updates create folders"
 msgstr "புதுப்பிக்கப்பட்ட கோப்புகள் உருவாகின்றதா என்பதை உறுதிபடுத்து"
 
-#: cervisiapart.cpp:574
+#: cervisiapart.cpp:575
 #, kde-format
 msgid "&Prune Empty Folders on Update"
 msgstr "காலியான அடைவுகளை புதிப்பிக்கும் போது நீக்கு"
 
-#: cervisiapart.cpp:577
+#: cervisiapart.cpp:578
 #, kde-format
 msgid "Determines whether updates remove empty folders"
 msgstr "புதுப்பிக்கப்பட்டவை எழுதப்படாத தொகுப்புகளை நீக்கிவிட்டதா என்பதை உறுதிபடுத்து"
 
-#: cervisiapart.cpp:581
+#: cervisiapart.cpp:582
 #, kde-format
 msgid "&Update Recursively"
 msgstr "சுழல் நிலையை &புதுப்பி"
 
-#: cervisiapart.cpp:584
+#: cervisiapart.cpp:585
 #, kde-format
 msgid "Determines whether updates are recursive"
 msgstr "சூழல் புதுப்பிக்கப்பட்டது என்பதை உறுதிபடுத்து"
 
-#: cervisiapart.cpp:588
+#: cervisiapart.cpp:589
 #, kde-format
 msgid "C&ommit && Remove Recursively"
 msgstr "நிறைவேற்று && சுழல்நிலையாக நீக்கு"
 
-#: cervisiapart.cpp:591
+#: cervisiapart.cpp:592
 #, kde-format
 msgid "Determines whether commits and removes are recursive"
 msgstr "சூழல் புதுப்பிக்கப்பட்ட கோப்புகள் உருவாகின்றதா என்பதை உறுதிபடுத்து"
 
-#: cervisiapart.cpp:595
+#: cervisiapart.cpp:596
 #, kde-format
 msgid "Do cvs &edit Automatically When Necessary"
 msgstr "தேவையான இடத்தில் தானியங்கும் cvs உரைத் திருத்தம் செய்க"
 
-#: cervisiapart.cpp:598
+#: cervisiapart.cpp:599
 #, kde-format
 msgid "Determines whether automatic cvs editing is active"
 msgstr "தானியங்கும் cvs உரைத் திருத்தம் நடப்பில் உள்ள என்று கண்டுபிடி"
 
-#: cervisiapart.cpp:602
+#: cervisiapart.cpp:603
 #, kde-format
 msgid "Configure Cervisia..."
 msgstr "சர்விசியாவை அமை...."
 
-#: cervisiapart.cpp:605
+#: cervisiapart.cpp:606
 #, kde-format
 msgid "Allows you to configure the Cervisia KPart"
 msgstr "cervisia kpart திருத்த உங்களை அனுமதிக்கிறது"
 
-#: cervisiapart.cpp:613
+#: cervisiapart.cpp:614
 #, kde-format
 msgid "CVS &Manual"
 msgstr "சிவிஸ் கையேடு"
 
-#: cervisiapart.cpp:616
+#: cervisiapart.cpp:617
 #, kde-format
 msgid "Opens the help browser with the CVS documentation"
 msgstr "உதவி தேடியந்திரம் மூலம் cvs நுட்ப புத்தகத்தை திறக்கவும்"
 
-#: cervisiapart.cpp:623
+#: cervisiapart.cpp:624
 #, fuzzy, kde-format
 msgid "Unfold Folder"
 msgstr "மடிக்கப்படாத கோப்பு மரம் "
 
-#: cervisiapart.cpp:715
+#: cervisiapart.cpp:716
 #, kde-format
 msgid "Cervisia Part"
 msgstr "சர்விசியாவின் அங்கம்"
 
-#: cervisiapart.cpp:717 main.cpp:140
+#: cervisiapart.cpp:718 main.cpp:140
 #, kde-format
 msgid "A CVS frontend"
 msgstr "ஒர் சிவிஸ் முன்நிலை"
 
-#: cervisiapart.cpp:719 main.cpp:142
+#: cervisiapart.cpp:720 main.cpp:142
 #, fuzzy, kde-format
 msgid ""
 "Copyright (c) 1999-2002 Bernd Gehrmann\n"
@@ -758,123 +758,123 @@ msgstr ""
 "காப்புரிமை (c) 1999-2002 பெர்ண்ட் கெர்மான்\n"
 "காப்புரிமை (c) 2002-2004 செர்விசியா ஆசிரியர்கள்"
 
-#: cervisiapart.cpp:724 main.cpp:147
+#: cervisiapart.cpp:725 main.cpp:147
 #, kde-format
 msgid "Bernd Gehrmann"
 msgstr ""
 
-#: cervisiapart.cpp:725 main.cpp:148
+#: cervisiapart.cpp:726 main.cpp:148
 #, kde-format
 msgid "Original author and former maintainer"
 msgstr "உண்மையான எழுத்தாளர் மற்றும் அமைப்பாளர்"
 
-#: cervisiapart.cpp:728 main.cpp:151
+#: cervisiapart.cpp:729 main.cpp:151
 #, kde-format
 msgid "Christian Loose"
 msgstr ""
 
-#: cervisiapart.cpp:728 main.cpp:151
+#: cervisiapart.cpp:729 main.cpp:151
 #, kde-format
 msgid "Maintainer"
 msgstr "பாதுக்காப்பாளர்"
 
-#: cervisiapart.cpp:729 main.cpp:152
+#: cervisiapart.cpp:730 main.cpp:152
 #, kde-format
 msgid "André Wöbbeking"
 msgstr ""
 
-#: cervisiapart.cpp:729 main.cpp:152
+#: cervisiapart.cpp:730 main.cpp:152
 #, kde-format
 msgid "Developer"
 msgstr "உருவாக்குபவர்"
 
-#: cervisiapart.cpp:730 main.cpp:153
+#: cervisiapart.cpp:731 main.cpp:153
 #, kde-format
 msgid "Carlos Woelz"
 msgstr ""
 
-#: cervisiapart.cpp:730 main.cpp:153
+#: cervisiapart.cpp:731 main.cpp:153
 #, kde-format
 msgid "Documentation"
 msgstr "ஆவணமாக்குதல்"
 
-#: cervisiapart.cpp:732 main.cpp:155
+#: cervisiapart.cpp:733 main.cpp:155
 #, kde-format
 msgid "Richard Moore"
 msgstr ""
 
-#: cervisiapart.cpp:732 main.cpp:155
+#: cervisiapart.cpp:733 main.cpp:155
 #, kde-format
 msgid "Conversion to KPart"
 msgstr " Kபகுதிக்கு பரிமாற்றம்"
 
-#: cervisiapart.cpp:733 main.cpp:156
+#: cervisiapart.cpp:734 main.cpp:156
 #, kde-format
 msgid "Laurent Montel"
 msgstr ""
 
-#: cervisiapart.cpp:733 main.cpp:156
+#: cervisiapart.cpp:734 main.cpp:156
 #, fuzzy, kde-format
 msgid "Conversion to D-Bus"
 msgstr " Kபகுதிக்கு பரிமாற்றம்"
 
-#: cervisiapart.cpp:734 main.cpp:157
+#: cervisiapart.cpp:735 main.cpp:157
 #, kde-format
 msgid "Martin Koller"
 msgstr ""
 
-#: cervisiapart.cpp:734 main.cpp:157
+#: cervisiapart.cpp:735 main.cpp:157
 #, kde-format
 msgid "Port to KDE Frameworks 5"
 msgstr ""
 
-#: cervisiapart.cpp:741
+#: cervisiapart.cpp:742
 #, kde-format
 msgid "Open Sandbox"
 msgstr "Sandbox ஐ திற"
 
-#: cervisiapart.cpp:791
+#: cervisiapart.cpp:792
 #, kde-format
 msgid "CVS Edit"
 msgstr "சிவிஸ் திருத்தம்"
 
-#: cervisiapart.cpp:1298 diffdialog.cpp:263 logdialog.cpp:472
+#: cervisiapart.cpp:1299 diffdialog.cpp:263 logdialog.cpp:472
 #, kde-format
 msgid "CVS Diff"
 msgstr "சிவிஸ் வேறுபாடு"
 
-#: cervisiapart.cpp:1311 diffdialog.cpp:473 logdialog.cpp:485
+#: cervisiapart.cpp:1312 diffdialog.cpp:473 logdialog.cpp:485
 #: resolvedialog.cpp:351
 #, kde-format
 msgid "Could not open file for writing."
 msgstr "கோப்பினை எழுதுவதற்காக திறக்க முடியவில்லை"
 
-#: cervisiapart.cpp:1461
+#: cervisiapart.cpp:1462
 #, kde-format
 msgid "The revision looks invalid."
 msgstr "மீள்நோக்கு சரியாக தெரியவில்லை"
 
-#: cervisiapart.cpp:1465
+#: cervisiapart.cpp:1466
 #, kde-format
 msgid "This is the first revision of the branch."
 msgstr "இது முதல் மீள்நோக்கு கிளை ஆகும் "
 
-#: cervisiapart.cpp:1575
+#: cervisiapart.cpp:1576
 #, kde-format
 msgid "Invoking help on CVS"
 msgstr " CVS  வில் உதவி துவங்குகின்றது "
 
-#: cervisiapart.cpp:1610
+#: cervisiapart.cpp:1611
 #, kde-format
 msgid "Done"
 msgstr "செய்தாயிற்று"
 
-#: cervisiapart.cpp:1616
+#: cervisiapart.cpp:1617
 #, kde-format
 msgid "A CVS commit to repository %1 is done"
 msgstr ""
 
-#: cervisiapart.cpp:1633
+#: cervisiapart.cpp:1634
 #, kde-format
 msgid ""
 "This is not a CVS folder.\n"
@@ -898,22 +898,22 @@ msgstr ""
 msgid "Delay (ms) until the progress dialog appears."
 msgstr "முன்னேற்ற உரையாடல் தோன்றிய (ms) நேரமின்மை."
 
-#: cervisiashell.cpp:54
+#: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
 msgstr "செர்விசியா நூலகத்தை ஏற்ற முடியவில்லை"
 
-#: cervisiashell.cpp:86
+#: cervisiashell.cpp:85
 #, kde-format
 msgid "Allows you to configure the toolbar"
 msgstr "கருவிப்பட்டியை திருத்த உங்களை அனுமதிக்கிறது"
 
-#: cervisiashell.cpp:91
+#: cervisiashell.cpp:90
 #, kde-format
 msgid "Allows you to customize the keybindings"
 msgstr "உங்களை தனதாக்கு விசைகாட்டுதலுக்கு அனுமதிக்கும்"
 
-#: cervisiashell.cpp:96
+#: cervisiashell.cpp:95
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "சர்விஸ்யாவிலிருந்து வெளியேற்றுகிறது"

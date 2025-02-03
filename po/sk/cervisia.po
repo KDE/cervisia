@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:37+0000\n"
+"POT-Creation-Date: 2025-02-03 01:53+0000\n"
 "PO-Revision-Date: 2016-06-07 22:15+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -156,17 +156,17 @@ msgstr "Prejsť na riadok"
 msgid "Go to line number:"
 msgstr "Prejsť na číslo riadku:"
 
-#: cervisiapart.cpp:111 main.cpp:138
+#: cervisiapart.cpp:112 main.cpp:138
 #, kde-format
 msgid "Cervisia"
 msgstr "Cervisia"
 
-#: cervisiapart.cpp:118
+#: cervisiapart.cpp:119
 #, kde-format
 msgid "Starting cvsservice failed with message: "
 msgstr "Spustenie cvsservice neuspelo so správou:"
 
-#: cervisiapart.cpp:148
+#: cervisiapart.cpp:149
 #, kde-format
 msgid ""
 "This KPart is non-functional, because the cvs D-Bus service could not be "
@@ -174,18 +174,18 @@ msgid ""
 msgstr ""
 "Tento KPart nefunguje, pretože nie je možné spustiť službu cvs cez D-Bus."
 
-#: cervisiapart.cpp:186
+#: cervisiapart.cpp:187
 #, kde-format
 msgid "Remote CVS working folders are not supported."
 msgstr "Vzdialené pracovné priečinky CVS nie sú podporované."
 
-#: cervisiapart.cpp:194
+#: cervisiapart.cpp:195
 #, kde-format
 msgid ""
 "You cannot change to a different folder while there is a running cvs job."
 msgstr "Nemôžete prejsť do iného priečinku, kým beží úloha cvs."
 
-#: cervisiapart.cpp:214
+#: cervisiapart.cpp:215
 #, kde-format
 msgid ""
 "F - All files are hidden, the tree shows only folders\n"
@@ -196,549 +196,549 @@ msgstr ""
 "N - Všetky aktualizované súbory sú skryté\n"
 "R - Všetky odstránené súbory sú skryté"
 
-#: cervisiapart.cpp:227
+#: cervisiapart.cpp:228
 #, kde-format
 msgid "Open Sandbox..."
 msgstr "Otvoriť pieskovisko..."
 
-#: cervisiapart.cpp:231
+#: cervisiapart.cpp:232
 #, kde-format
 msgid "Opens a CVS working folder in the main window"
 msgstr "Otvorí pracovný priečinok CVS v hlavnom okne"
 
-#: cervisiapart.cpp:235
+#: cervisiapart.cpp:236
 #, kde-format
 msgid "Recent Sandboxes"
 msgstr "Naposledy použité repository"
 
-#: cervisiapart.cpp:239
+#: cervisiapart.cpp:240
 #, kde-format
 msgid "&Insert ChangeLog Entry..."
 msgstr "&Vložiť položku ChangeLog..."
 
-#: cervisiapart.cpp:242
+#: cervisiapart.cpp:243
 #, kde-format
 msgid "Inserts a new intro into the file ChangeLog in the toplevel folder"
 msgstr "Vloží nový záznam do súboru ChangeLog v priečinku najvyššej úrovne"
 
-#: cervisiapart.cpp:246
+#: cervisiapart.cpp:247
 #, kde-format
 msgid "&Update"
 msgstr "&Aktualizovať"
 
-#: cervisiapart.cpp:250
+#: cervisiapart.cpp:251
 #, kde-format
 msgid "Updates (cvs update) the selected files and folders"
 msgstr "Aktualizuje (cvs update) vybrané súbory a priečinky"
 
-#: cervisiapart.cpp:254
+#: cervisiapart.cpp:255
 #, kde-format
 msgid "&Status"
 msgstr "&Stav"
 
-#: cervisiapart.cpp:258
+#: cervisiapart.cpp:259
 #, kde-format
 msgid "Updates the status (cvs -n update) of the selected files and folders"
 msgstr "Aktualizuje stav (cvs -n update) vybraných súborov a priečinkov"
 
-#: cervisiapart.cpp:262 resolvedialog.cpp:176
+#: cervisiapart.cpp:263 resolvedialog.cpp:176
 #, kde-format
 msgid "&Edit"
 msgstr "&Upraviť"
 
-#: cervisiapart.cpp:265
+#: cervisiapart.cpp:266
 #, kde-format
 msgid "Opens the marked file for editing"
 msgstr "Otvorí označený súbor pre úpravy"
 
-#: cervisiapart.cpp:269
+#: cervisiapart.cpp:270
 #, kde-format
 msgid "Reso&lve..."
 msgstr "Vy&riešiť..."
 
-#: cervisiapart.cpp:272
+#: cervisiapart.cpp:273
 #, kde-format
 msgid "Opens the resolve dialog with the selected file"
 msgstr "Otvorí dialóg pre vyriešenie vybraného súboru"
 
-#: cervisiapart.cpp:276
+#: cervisiapart.cpp:277
 #, kde-format
 msgid "&Commit..."
 msgstr "&Commit..."
 
-#: cervisiapart.cpp:280
+#: cervisiapart.cpp:281
 #, kde-format
 msgid "Commits the selected files"
 msgstr "Potvrdí vybrané súbory"
 
-#: cervisiapart.cpp:284
+#: cervisiapart.cpp:285
 #, kde-format
 msgid "&Add to Repository..."
 msgstr "&Pridať do repository..."
 
-#: cervisiapart.cpp:287
+#: cervisiapart.cpp:288
 #, kde-format
 msgid "Add"
 msgstr "Pridať"
 
-#: cervisiapart.cpp:289
+#: cervisiapart.cpp:290
 #, kde-format
 msgid "Adds (cvs add) the selected files to the repository"
 msgstr "Pridá (cvs add) vybrané súbory do repository"
 
-#: cervisiapart.cpp:293
+#: cervisiapart.cpp:294
 #, kde-format
 msgid "Add &Binary..."
 msgstr "Pridať &binárny..."
 
-#: cervisiapart.cpp:296
+#: cervisiapart.cpp:297
 #, kde-format
 msgid "Adds (cvs -kb add) the selected files as binaries to the repository"
 msgstr "Pridá (cvs -kb add) vybrané súbory do repository ako binárne"
 
-#: cervisiapart.cpp:300
+#: cervisiapart.cpp:301
 #, kde-format
 msgid "&Remove From Repository..."
 msgstr "&Odstrániť z repository..."
 
-#: cervisiapart.cpp:303 repositorydialog.cpp:201
+#: cervisiapart.cpp:304 repositorydialog.cpp:201
 #, kde-format
 msgid "Remove"
 msgstr "Odstrániť"
 
-#: cervisiapart.cpp:305
+#: cervisiapart.cpp:306
 #, kde-format
 msgid "Removes (cvs remove) the selected files from the repository"
 msgstr "Odstráni (cvs remove) vybrané súbory z repository"
 
-#: cervisiapart.cpp:309
+#: cervisiapart.cpp:310
 #, kde-format
 msgid "Rever&t"
 msgstr "&Vrátiť"
 
-#: cervisiapart.cpp:312
+#: cervisiapart.cpp:313
 #, kde-format
 msgid "Reverts (cvs update -C) the selected files (only cvs 1.11)"
 msgstr "Vráti (cvs update -C) vybrané súbory (iba pre cvs 1.11)"
 
-#: cervisiapart.cpp:316
+#: cervisiapart.cpp:317
 #, kde-format
 msgid "&Properties"
 msgstr "&Možnosti"
 
-#: cervisiapart.cpp:323
+#: cervisiapart.cpp:324
 #, kde-format
 msgid "Stop"
 msgstr "Zastaviť"
 
-#: cervisiapart.cpp:328
+#: cervisiapart.cpp:329
 #, kde-format
 msgid "Stops any running sub-processes"
 msgstr "Zastaví všetky bežiace podprocesy"
 
-#: cervisiapart.cpp:332
+#: cervisiapart.cpp:333
 #, kde-format
 msgid "Browse &Log..."
 msgstr "Prehliadať &záznam..."
 
-#: cervisiapart.cpp:336
+#: cervisiapart.cpp:337
 #, kde-format
 msgid "Shows the revision tree of the selected file"
 msgstr "Zobrazí strom revízií vybraného súboru"
 
-#: cervisiapart.cpp:341
+#: cervisiapart.cpp:342
 #, kde-format
 msgid "Browse Multi-File Log..."
 msgstr "Prehliadať záznam o viacerých súboroch..."
 
-#: cervisiapart.cpp:345
+#: cervisiapart.cpp:346
 #, kde-format
 msgid "&Annotate..."
 msgstr "&Anotácia..."
 
-#: cervisiapart.cpp:349
+#: cervisiapart.cpp:350
 #, kde-format
 msgid "Shows a blame-annotated view of the selected file"
 msgstr "Zobrazí anotovaný zoznam pre vybraný súbor s pôvodcom"
 
-#: cervisiapart.cpp:353
+#: cervisiapart.cpp:354
 #, kde-format
 msgid "&Difference to Repository (BASE)..."
 msgstr "&Rozdiel oproti repository (BASE)..."
 
-#: cervisiapart.cpp:357
+#: cervisiapart.cpp:358
 #, kde-format
 msgid ""
 "Shows the differences of the selected file to the checked out version (tag "
 "BASE)"
 msgstr "Zobrazí rozdiely vybraného súboru oproti základnej verzii (tag BASE)"
 
-#: cervisiapart.cpp:361
+#: cervisiapart.cpp:362
 #, kde-format
 msgid "Difference to Repository (HEAD)..."
 msgstr "Rozdiel oproti repository (HEAD)..."
 
-#: cervisiapart.cpp:365
+#: cervisiapart.cpp:366
 #, kde-format
 msgid ""
 "Shows the differences of the selected file to the newest version in the "
 "repository (tag HEAD)"
 msgstr "Zobrazí rozdiely vybraného súboru oproti základnej verzii (tag HEAD)"
 
-#: cervisiapart.cpp:369
+#: cervisiapart.cpp:370
 #, kde-format
 msgid "Last &Change..."
 msgstr "Posledná &zmena..."
 
-#: cervisiapart.cpp:372
+#: cervisiapart.cpp:373
 #, kde-format
 msgid ""
 "Shows the differences between the last two revisions of the selected file"
 msgstr "Zobrazí rozdiely medzi poslednými dvoma zmenami vybraného súboru"
 
-#: cervisiapart.cpp:376
+#: cervisiapart.cpp:377
 #, kde-format
 msgid "&History..."
 msgstr "&História..."
 
-#: cervisiapart.cpp:379
+#: cervisiapart.cpp:380
 #, kde-format
 msgid "Shows the CVS history as reported by the server"
 msgstr "Zobrazí históriu CVS ako o nej informuje server"
 
-#: cervisiapart.cpp:383
+#: cervisiapart.cpp:384
 #, kde-format
 msgid "&Unfold File Tree"
 msgstr "&Rozbaliť strom súborov"
 
-#: cervisiapart.cpp:387
+#: cervisiapart.cpp:388
 #, kde-format
 msgid "Opens all branches of the file tree"
 msgstr "Otvorí všetky časti stromu súborov"
 
-#: cervisiapart.cpp:391
+#: cervisiapart.cpp:392
 #, kde-format
 msgid "&Fold File Tree"
 msgstr "&Zabaliť strom súborov"
 
-#: cervisiapart.cpp:394
+#: cervisiapart.cpp:395
 #, kde-format
 msgid "Closes all branches of the file tree"
 msgstr "Zatvorí všetky časti stromu súborov"
 
-#: cervisiapart.cpp:401
+#: cervisiapart.cpp:402
 #, kde-format
 msgid "&Tag/Branch..."
 msgstr "&Tag/Branch..."
 
-#: cervisiapart.cpp:404
+#: cervisiapart.cpp:405
 #, kde-format
 msgid "Creates a tag or branch for the selected files"
 msgstr "Vytvorí tag alebo branch pre vybrané súbory"
 
-#: cervisiapart.cpp:408
+#: cervisiapart.cpp:409
 #, kde-format
 msgid "&Delete Tag..."
 msgstr "&Odstrániť tag..."
 
-#: cervisiapart.cpp:411
+#: cervisiapart.cpp:412
 #, kde-format
 msgid "Deletes a tag from the selected files"
 msgstr "Odstráni tag pre vybrané súbory"
 
-#: cervisiapart.cpp:415
+#: cervisiapart.cpp:416
 #, kde-format
 msgid "&Update to Tag/Date..."
 msgstr "&Aktualizovať na tag/dátum..."
 
-#: cervisiapart.cpp:418
+#: cervisiapart.cpp:419
 #, kde-format
 msgid "Updates the selected files to a given tag, branch or date"
 msgstr "Aktualizuje vybrané súbory na daný tag, branch alebo dátum"
 
-#: cervisiapart.cpp:422
+#: cervisiapart.cpp:423
 #, kde-format
 msgid "Update to &HEAD"
 msgstr "Aktualizovať na &HEAD"
 
-#: cervisiapart.cpp:425
+#: cervisiapart.cpp:426
 #, kde-format
 msgid "Updates the selected files to the HEAD revision"
 msgstr "Aktualizuje vybrané súbory na revíziu HEAD"
 
-#: cervisiapart.cpp:429
+#: cervisiapart.cpp:430
 #, kde-format
 msgid "&Merge..."
 msgstr "Z&liať..."
 
-#: cervisiapart.cpp:432
+#: cervisiapart.cpp:433
 #, kde-format
 msgid "Merges a branch or a set of modifications into the selected files"
 msgstr "Zleje branch alebo skupinu zmien do vybraných súborov"
 
-#: cervisiapart.cpp:436
+#: cervisiapart.cpp:437
 #, kde-format
 msgid "&Add Watch..."
 msgstr "&Pridať sledované..."
 
-#: cervisiapart.cpp:439
+#: cervisiapart.cpp:440
 #, kde-format
 msgid "Adds a watch for the selected files"
 msgstr "Pridá sledovací bod pre vybrané súbory"
 
-#: cervisiapart.cpp:443
+#: cervisiapart.cpp:444
 #, kde-format
 msgid "&Remove Watch..."
 msgstr "&Odstrániť sledované..."
 
-#: cervisiapart.cpp:446
+#: cervisiapart.cpp:447
 #, kde-format
 msgid "Removes a watch from the selected files"
 msgstr "Odstráni sledovací bod z vybraných súborov"
 
-#: cervisiapart.cpp:450
+#: cervisiapart.cpp:451
 #, kde-format
 msgid "Show &Watchers"
 msgstr "Zobraziť &sledované"
 
-#: cervisiapart.cpp:453
+#: cervisiapart.cpp:454
 #, kde-format
 msgid "Shows the watchers of the selected files"
 msgstr "Zobrazí sledovacie body pre vybrané súbory"
 
-#: cervisiapart.cpp:457
+#: cervisiapart.cpp:458
 #, kde-format
 msgid "Ed&it Files"
 msgstr "&Upraviť súbory"
 
-#: cervisiapart.cpp:460
+#: cervisiapart.cpp:461
 #, kde-format
 msgid "Edits (cvs edit) the selected files"
 msgstr "Upraví (cvs edit) vybrané súbory"
 
-#: cervisiapart.cpp:464
+#: cervisiapart.cpp:465
 #, kde-format
 msgid "U&nedit Files"
 msgstr "&Neupraviť súbor"
 
-#: cervisiapart.cpp:467
+#: cervisiapart.cpp:468
 #, kde-format
 msgid "Unedits (cvs unedit) the selected files"
 msgstr "Zruší úpravu (cvs unedit) vybraných súborov"
 
-#: cervisiapart.cpp:471
+#: cervisiapart.cpp:472
 #, kde-format
 msgid "Show &Editors"
 msgstr "Zobraziť &editorov"
 
-#: cervisiapart.cpp:474
+#: cervisiapart.cpp:475
 #, kde-format
 msgid "Shows the editors of the selected files"
 msgstr "Zobrazí editorov vybraných súborov"
 
-#: cervisiapart.cpp:478
+#: cervisiapart.cpp:479
 #, kde-format
 msgid "&Lock Files"
 msgstr "&Zamknúť súbory"
 
-#: cervisiapart.cpp:481
+#: cervisiapart.cpp:482
 #, kde-format
 msgid "Locks the selected files, so that others cannot modify them"
 msgstr "Zamkne vybrané súbory, takže ich ostatní nemôžu upraviť"
 
-#: cervisiapart.cpp:485
+#: cervisiapart.cpp:486
 #, kde-format
 msgid "Unl&ock Files"
 msgstr "&Odomknúť súbory"
 
-#: cervisiapart.cpp:488
+#: cervisiapart.cpp:489
 #, kde-format
 msgid "Unlocks the selected files"
 msgstr "Odomkne vybrané súbory"
 
-#: cervisiapart.cpp:492
+#: cervisiapart.cpp:493
 #, kde-format
 msgid "Create &Patch Against Repository..."
 msgstr "Vytvoriť &patch oproti repository..."
 
-#: cervisiapart.cpp:495
+#: cervisiapart.cpp:496
 #, kde-format
 msgid "Creates a patch from the modifications in your sandbox"
 msgstr "Vytvorí patch pre zmeny vo vašej repository"
 
-#: cervisiapart.cpp:502
+#: cervisiapart.cpp:503
 #, kde-format
 msgid "&Create..."
 msgstr "&Vytvoriť..."
 
-#: cervisiapart.cpp:506
+#: cervisiapart.cpp:507
 #, kde-format
 msgid "&Checkout..."
 msgstr "&Checkout..."
 
-#: cervisiapart.cpp:509
+#: cervisiapart.cpp:510
 #, kde-format
 msgid "Allows you to checkout a module from a repository"
 msgstr "Umožní získať modul z repository"
 
-#: cervisiapart.cpp:513
+#: cervisiapart.cpp:514
 #, kde-format
 msgid "&Import..."
 msgstr "&Importovať..."
 
-#: cervisiapart.cpp:516
+#: cervisiapart.cpp:517
 #, kde-format
 msgid "Allows you to import a module into a repository"
 msgstr "Umožňuje importovať modul do repository"
 
-#: cervisiapart.cpp:520
+#: cervisiapart.cpp:521
 #, kde-format
 msgid "&Repositories..."
 msgstr "&Repository..."
 
-#: cervisiapart.cpp:523
+#: cervisiapart.cpp:524
 #, kde-format
 msgid "Configures a list of repositories you regularly use"
 msgstr "Nastaví zoznam repository, ktoré obvykle používate"
 
-#: cervisiapart.cpp:530
+#: cervisiapart.cpp:531
 #, kde-format
 msgid "Hide All &Files"
 msgstr "Skryť všetky &súbory"
 
-#: cervisiapart.cpp:533
+#: cervisiapart.cpp:534
 #, kde-format
 msgid "Determines whether only folders are shown"
 msgstr "Určuje, či sú zobrazené iba priečinky"
 
-#: cervisiapart.cpp:537
+#: cervisiapart.cpp:538
 #, kde-format
 msgid "Hide Unmodified Files"
 msgstr "Skryť nezmenené súbory"
 
-#: cervisiapart.cpp:541
+#: cervisiapart.cpp:542
 #, kde-format
 msgid "Determines whether files with status up-to-date or unknown are hidden"
 msgstr ""
 "Určuje, či sú všetky súbory, ktoré sú aktuálne alebo s neznámym stavom, "
 "skryté"
 
-#: cervisiapart.cpp:546
+#: cervisiapart.cpp:547
 #, kde-format
 msgid "Hide Removed Files"
 msgstr "Skryť odstránené súbory"
 
-#: cervisiapart.cpp:549
+#: cervisiapart.cpp:550
 #, kde-format
 msgid "Determines whether removed files are hidden"
 msgstr "Určuje, či sú odstránené súbory skryté"
 
-#: cervisiapart.cpp:553
+#: cervisiapart.cpp:554
 #, kde-format
 msgid "Hide Non-CVS Files"
 msgstr "Skryť súbory nie v CVS"
 
-#: cervisiapart.cpp:556
+#: cervisiapart.cpp:557
 #, kde-format
 msgid "Determines whether files not in CVS are hidden"
 msgstr "Určuje, či súbory, ktoré nie sú v CVS, sú skryté"
 
-#: cervisiapart.cpp:560
+#: cervisiapart.cpp:561
 #, kde-format
 msgid "Hide Empty Folders"
 msgstr "Skryť prázdne priečinky"
 
-#: cervisiapart.cpp:563
+#: cervisiapart.cpp:564
 #, kde-format
 msgid "Determines whether folders without visible entries are hidden"
 msgstr "Určuje, či skryté priečinky bez zobraziteľných položiek"
 
-#: cervisiapart.cpp:567
+#: cervisiapart.cpp:568
 #, kde-format
 msgid "Create &Folders on Update"
 msgstr "Vytvoriť &priečinky pri aktualizácii"
 
-#: cervisiapart.cpp:570
+#: cervisiapart.cpp:571
 #, kde-format
 msgid "Determines whether updates create folders"
 msgstr "Určuje, či aktualizácie vytvárajú priečinky"
 
-#: cervisiapart.cpp:574
+#: cervisiapart.cpp:575
 #, kde-format
 msgid "&Prune Empty Folders on Update"
 msgstr "&Odstrániť prázdne priečinky pri aktualizácii"
 
-#: cervisiapart.cpp:577
+#: cervisiapart.cpp:578
 #, kde-format
 msgid "Determines whether updates remove empty folders"
 msgstr "Určuje, či aktualizácia odstraňuje prázdne priečinky"
 
-#: cervisiapart.cpp:581
+#: cervisiapart.cpp:582
 #, kde-format
 msgid "&Update Recursively"
 msgstr "&Aktualizovať rekurzívne"
 
-#: cervisiapart.cpp:584
+#: cervisiapart.cpp:585
 #, kde-format
 msgid "Determines whether updates are recursive"
 msgstr "Určuje, či sú aktualizácie rekurzívne"
 
-#: cervisiapart.cpp:588
+#: cervisiapart.cpp:589
 #, kde-format
 msgid "C&ommit && Remove Recursively"
 msgstr "Rekurzívny c&ommit a odstránenie"
 
-#: cervisiapart.cpp:591
+#: cervisiapart.cpp:592
 #, kde-format
 msgid "Determines whether commits and removes are recursive"
 msgstr "Určuje, či sú commity a odstránenia rekurzívne"
 
-#: cervisiapart.cpp:595
+#: cervisiapart.cpp:596
 #, kde-format
 msgid "Do cvs &edit Automatically When Necessary"
 msgstr "Automaticky použiť cvs &edit"
 
-#: cervisiapart.cpp:598
+#: cervisiapart.cpp:599
 #, kde-format
 msgid "Determines whether automatic cvs editing is active"
 msgstr "Určuje, či sa má automaticky používate cvs editing"
 
-#: cervisiapart.cpp:602
+#: cervisiapart.cpp:603
 #, kde-format
 msgid "Configure Cervisia..."
 msgstr "Nastaviť Cervisia..."
 
-#: cervisiapart.cpp:605
+#: cervisiapart.cpp:606
 #, kde-format
 msgid "Allows you to configure the Cervisia KPart"
 msgstr "Umožňuje nastaviť KPart Cervisia"
 
-#: cervisiapart.cpp:613
+#: cervisiapart.cpp:614
 #, kde-format
 msgid "CVS &Manual"
 msgstr "CVS &Manuál"
 
-#: cervisiapart.cpp:616
+#: cervisiapart.cpp:617
 #, kde-format
 msgid "Opens the help browser with the CVS documentation"
 msgstr "Otvorí Pomocníka a zobrazí dokumentáciu k CVS"
 
-#: cervisiapart.cpp:623
+#: cervisiapart.cpp:624
 #, kde-format
 msgid "Unfold Folder"
 msgstr "&Rozbaliť priečinok"
 
-#: cervisiapart.cpp:715
+#: cervisiapart.cpp:716
 #, kde-format
 msgid "Cervisia Part"
 msgstr "Part Cervisia"
 
-#: cervisiapart.cpp:717 main.cpp:140
+#: cervisiapart.cpp:718 main.cpp:140
 #, kde-format
 msgid "A CVS frontend"
 msgstr "Rozhranie pre CVS"
 
-#: cervisiapart.cpp:719 main.cpp:142
+#: cervisiapart.cpp:720 main.cpp:142
 #, kde-format
 msgid ""
 "Copyright (c) 1999-2002 Bernd Gehrmann\n"
@@ -747,123 +747,123 @@ msgstr ""
 "Copyright (c) 1999-2002 Bernd Gehrmann\n"
 "Copyright (c) 2002-2008 Autori Cervisia"
 
-#: cervisiapart.cpp:724 main.cpp:147
+#: cervisiapart.cpp:725 main.cpp:147
 #, kde-format
 msgid "Bernd Gehrmann"
 msgstr "Bernd Gehrmann"
 
-#: cervisiapart.cpp:725 main.cpp:148
+#: cervisiapart.cpp:726 main.cpp:148
 #, kde-format
 msgid "Original author and former maintainer"
 msgstr "Pôvodný autor a bývalý správca"
 
-#: cervisiapart.cpp:728 main.cpp:151
+#: cervisiapart.cpp:729 main.cpp:151
 #, kde-format
 msgid "Christian Loose"
 msgstr "Christian Loose"
 
-#: cervisiapart.cpp:728 main.cpp:151
+#: cervisiapart.cpp:729 main.cpp:151
 #, kde-format
 msgid "Maintainer"
 msgstr "Správca"
 
-#: cervisiapart.cpp:729 main.cpp:152
+#: cervisiapart.cpp:730 main.cpp:152
 #, kde-format
 msgid "André Wöbbeking"
 msgstr "André Wöbbeking"
 
-#: cervisiapart.cpp:729 main.cpp:152
+#: cervisiapart.cpp:730 main.cpp:152
 #, kde-format
 msgid "Developer"
 msgstr "Vývojár"
 
-#: cervisiapart.cpp:730 main.cpp:153
+#: cervisiapart.cpp:731 main.cpp:153
 #, kde-format
 msgid "Carlos Woelz"
 msgstr "Carlos Woelz"
 
-#: cervisiapart.cpp:730 main.cpp:153
+#: cervisiapart.cpp:731 main.cpp:153
 #, kde-format
 msgid "Documentation"
 msgstr "Dokumentácia"
 
-#: cervisiapart.cpp:732 main.cpp:155
+#: cervisiapart.cpp:733 main.cpp:155
 #, kde-format
 msgid "Richard Moore"
 msgstr "Richard Moore"
 
-#: cervisiapart.cpp:732 main.cpp:155
+#: cervisiapart.cpp:733 main.cpp:155
 #, kde-format
 msgid "Conversion to KPart"
 msgstr "Prevod na KPart"
 
-#: cervisiapart.cpp:733 main.cpp:156
+#: cervisiapart.cpp:734 main.cpp:156
 #, kde-format
 msgid "Laurent Montel"
 msgstr "Laurent Montel"
 
-#: cervisiapart.cpp:733 main.cpp:156
+#: cervisiapart.cpp:734 main.cpp:156
 #, kde-format
 msgid "Conversion to D-Bus"
 msgstr "Konverzia na D-Bus"
 
-#: cervisiapart.cpp:734 main.cpp:157
+#: cervisiapart.cpp:735 main.cpp:157
 #, kde-format
 msgid "Martin Koller"
 msgstr "Martin Koller"
 
-#: cervisiapart.cpp:734 main.cpp:157
+#: cervisiapart.cpp:735 main.cpp:157
 #, kde-format
 msgid "Port to KDE Frameworks 5"
 msgstr "Port do KDE Frameworks 5"
 
-#: cervisiapart.cpp:741
+#: cervisiapart.cpp:742
 #, kde-format
 msgid "Open Sandbox"
 msgstr "Otvoriť repository"
 
-#: cervisiapart.cpp:791
+#: cervisiapart.cpp:792
 #, kde-format
 msgid "CVS Edit"
 msgstr "CVS edit"
 
-#: cervisiapart.cpp:1298 diffdialog.cpp:263 logdialog.cpp:472
+#: cervisiapart.cpp:1299 diffdialog.cpp:263 logdialog.cpp:472
 #, kde-format
 msgid "CVS Diff"
 msgstr "CVS diff"
 
-#: cervisiapart.cpp:1311 diffdialog.cpp:473 logdialog.cpp:485
+#: cervisiapart.cpp:1312 diffdialog.cpp:473 logdialog.cpp:485
 #: resolvedialog.cpp:351
 #, kde-format
 msgid "Could not open file for writing."
 msgstr "Nepodarilo sa otvoriť súbor pre zápis."
 
-#: cervisiapart.cpp:1461
+#: cervisiapart.cpp:1462
 #, kde-format
 msgid "The revision looks invalid."
 msgstr "Revízia asi nie je platná."
 
-#: cervisiapart.cpp:1465
+#: cervisiapart.cpp:1466
 #, kde-format
 msgid "This is the first revision of the branch."
 msgstr "Toto je prvá revízia pre branch."
 
-#: cervisiapart.cpp:1575
+#: cervisiapart.cpp:1576
 #, kde-format
 msgid "Invoking help on CVS"
 msgstr "Spúšťam pomocníka pre CVS"
 
-#: cervisiapart.cpp:1610
+#: cervisiapart.cpp:1611
 #, kde-format
 msgid "Done"
 msgstr "Hotovo"
 
-#: cervisiapart.cpp:1616
+#: cervisiapart.cpp:1617
 #, kde-format
 msgid "A CVS commit to repository %1 is done"
 msgstr "CVS uloženie do repozitára %1 je dokončené."
 
-#: cervisiapart.cpp:1633
+#: cervisiapart.cpp:1634
 #, kde-format
 msgid ""
 "This is not a CVS folder.\n"
@@ -888,22 +888,22 @@ msgstr ""
 msgid "Delay (ms) until the progress dialog appears."
 msgstr "Čakanie pred zobrazením dialógu priebehu (v ms)."
 
-#: cervisiashell.cpp:54
+#: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
 msgstr "Nebolo možné načítať knižnicu Cervisia."
 
-#: cervisiashell.cpp:86
+#: cervisiashell.cpp:85
 #, kde-format
 msgid "Allows you to configure the toolbar"
 msgstr "Umožňuje nastaviť panel nástrojov"
 
-#: cervisiashell.cpp:91
+#: cervisiashell.cpp:90
 #, kde-format
 msgid "Allows you to customize the keybindings"
 msgstr "Umožňuje upraviť klávesové skratky"
 
-#: cervisiashell.cpp:96
+#: cervisiashell.cpp:95
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Ukončí Cervisia"

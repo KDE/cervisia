@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:37+0000\n"
+"POT-Creation-Date: 2025-02-03 01:53+0000\n"
 "PO-Revision-Date: 2024-05-30 22:41+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -155,17 +155,17 @@ msgstr "Iri al linio"
 msgid "Go to line number:"
 msgstr "Iri al linionumero:"
 
-#: cervisiapart.cpp:111 main.cpp:138
+#: cervisiapart.cpp:112 main.cpp:138
 #, kde-format
 msgid "Cervisia"
 msgstr "Versioadministrilo"
 
-#: cervisiapart.cpp:118
+#: cervisiapart.cpp:119
 #, kde-format
 msgid "Starting cvsservice failed with message: "
 msgstr "Lanĉi cvsservice malsukcesis kun mesaĝo:"
 
-#: cervisiapart.cpp:148
+#: cervisiapart.cpp:149
 #, kde-format
 msgid ""
 "This KPart is non-functional, because the cvs D-Bus service could not be "
@@ -173,18 +173,18 @@ msgid ""
 msgstr ""
 "Ĉi tiu KPart estas nefunkcia, ĉar la servo de cvs D-Bus ne eblis komenciĝi."
 
-#: cervisiapart.cpp:186
+#: cervisiapart.cpp:187
 #, kde-format
 msgid "Remote CVS working folders are not supported."
 msgstr "Foraj CVS labordosierujoj ne estas subtenataj."
 
-#: cervisiapart.cpp:194
+#: cervisiapart.cpp:195
 #, kde-format
 msgid ""
 "You cannot change to a different folder while there is a running cvs job."
 msgstr "Vi ne povas ŝanĝi al alia dosierujo dum estas funkcianta cvs-laboro."
 
-#: cervisiapart.cpp:214
+#: cervisiapart.cpp:215
 #, kde-format
 msgid ""
 "F - All files are hidden, the tree shows only folders\n"
@@ -195,179 +195,179 @@ msgstr ""
 "N - Ĉiuj ĝisdataj dosieroj estas kaŝitaj\n"
 "R - Ĉiuj forigitaj dosieroj estas kaŝitaj"
 
-#: cervisiapart.cpp:227
+#: cervisiapart.cpp:228
 #, kde-format
 msgid "Open Sandbox..."
 msgstr "Malfermi Provejon..."
 
-#: cervisiapart.cpp:231
+#: cervisiapart.cpp:232
 #, kde-format
 msgid "Opens a CVS working folder in the main window"
 msgstr "Malfermas labordosierujon de CVS en la ĉefa fenestro"
 
-#: cervisiapart.cpp:235
+#: cervisiapart.cpp:236
 #, kde-format
 msgid "Recent Sandboxes"
 msgstr "Lasttempaj Provejoj"
 
-#: cervisiapart.cpp:239
+#: cervisiapart.cpp:240
 #, kde-format
 msgid "&Insert ChangeLog Entry..."
 msgstr "Enmet&i Ŝanĝprotokol-Eron..."
 
-#: cervisiapart.cpp:242
+#: cervisiapart.cpp:243
 #, kde-format
 msgid "Inserts a new intro into the file ChangeLog in the toplevel folder"
 msgstr ""
 "Enmetas novan enkondukon en la dosieron ChangeLog en la supranivela dosierujo"
 
-#: cervisiapart.cpp:246
+#: cervisiapart.cpp:247
 #, kde-format
 msgid "&Update"
 msgstr "Ĝis&datigo"
 
-#: cervisiapart.cpp:250
+#: cervisiapart.cpp:251
 #, kde-format
 msgid "Updates (cvs update) the selected files and folders"
 msgstr "Aktualigas (cvs update) la elektitajn dosierojn kaj dosierujojn"
 
-#: cervisiapart.cpp:254
+#: cervisiapart.cpp:255
 #, kde-format
 msgid "&Status"
 msgstr "&Stato"
 
-#: cervisiapart.cpp:258
+#: cervisiapart.cpp:259
 #, kde-format
 msgid "Updates the status (cvs -n update) of the selected files and folders"
 msgstr ""
 "Aktualigas la staton (cvs -n update) de la elektitaj dosieroj kaj dosierujoj"
 
-#: cervisiapart.cpp:262 resolvedialog.cpp:176
+#: cervisiapart.cpp:263 resolvedialog.cpp:176
 #, kde-format
 msgid "&Edit"
 msgstr "&Redakti"
 
-#: cervisiapart.cpp:265
+#: cervisiapart.cpp:266
 #, kde-format
 msgid "Opens the marked file for editing"
 msgstr "Malfermas la elektitan dosieron en redaktilo"
 
-#: cervisiapart.cpp:269
+#: cervisiapart.cpp:270
 #, kde-format
 msgid "Reso&lve..."
 msgstr "So&lvi..."
 
-#: cervisiapart.cpp:272
+#: cervisiapart.cpp:273
 #, kde-format
 msgid "Opens the resolve dialog with the selected file"
 msgstr "Malfermas la solvan dialogon kun la elektita dosiero"
 
-#: cervisiapart.cpp:276
+#: cervisiapart.cpp:277
 #, kde-format
 msgid "&Commit..."
 msgstr "&Enmeti..."
 
-#: cervisiapart.cpp:280
+#: cervisiapart.cpp:281
 #, kde-format
 msgid "Commits the selected files"
 msgstr "Transdonas la elektitajn dosierojn"
 
-#: cervisiapart.cpp:284
+#: cervisiapart.cpp:285
 #, kde-format
 msgid "&Add to Repository..."
 msgstr "&Aldoni al arĥivo..."
 
-#: cervisiapart.cpp:287
+#: cervisiapart.cpp:288
 #, kde-format
 msgid "Add"
 msgstr "Aldoni"
 
-#: cervisiapart.cpp:289
+#: cervisiapart.cpp:290
 #, kde-format
 msgid "Adds (cvs add) the selected files to the repository"
 msgstr "Aldonas (cvs add) la elektitajn dosierojn al la arĥivo"
 
-#: cervisiapart.cpp:293
+#: cervisiapart.cpp:294
 #, kde-format
 msgid "Add &Binary..."
 msgstr "Aldoni &Binare..."
 
-#: cervisiapart.cpp:296
+#: cervisiapart.cpp:297
 #, kde-format
 msgid "Adds (cvs -kb add) the selected files as binaries to the repository"
 msgstr "Aldonas (cvs -kb add) la elektitajn dosierojn kiel duumajn al deponejo"
 
-#: cervisiapart.cpp:300
+#: cervisiapart.cpp:301
 #, kde-format
 msgid "&Remove From Repository..."
 msgstr "Fo&rigi el la Deponejo..."
 
-#: cervisiapart.cpp:303 repositorydialog.cpp:201
+#: cervisiapart.cpp:304 repositorydialog.cpp:201
 #, kde-format
 msgid "Remove"
 msgstr "Forpreni"
 
-#: cervisiapart.cpp:305
+#: cervisiapart.cpp:306
 #, kde-format
 msgid "Removes (cvs remove) the selected files from the repository"
 msgstr "Forigas (cvs remove) la elektitajn dosierojn el la arĥivo"
 
-#: cervisiapart.cpp:309
+#: cervisiapart.cpp:310
 #, kde-format
 msgid "Rever&t"
 msgstr "&Malfari"
 
-#: cervisiapart.cpp:312
+#: cervisiapart.cpp:313
 #, kde-format
 msgid "Reverts (cvs update -C) the selected files (only cvs 1.11)"
 msgstr "Malfaras (cvs update -C) la elektitajn dosierojn (nur cvs 1.11)"
 
-#: cervisiapart.cpp:316
+#: cervisiapart.cpp:317
 #, kde-format
 msgid "&Properties"
 msgstr "&Ecoj"
 
-#: cervisiapart.cpp:323
+#: cervisiapart.cpp:324
 #, kde-format
 msgid "Stop"
 msgstr "Halti"
 
-#: cervisiapart.cpp:328
+#: cervisiapart.cpp:329
 #, kde-format
 msgid "Stops any running sub-processes"
 msgstr "Ĉesigas ajnajn rulantajn subprocezojn"
 
-#: cervisiapart.cpp:332
+#: cervisiapart.cpp:333
 #, kde-format
 msgid "Browse &Log..."
 msgstr "Fo&liumi Protokolon..."
 
-#: cervisiapart.cpp:336
+#: cervisiapart.cpp:337
 #, kde-format
 msgid "Shows the revision tree of the selected file"
 msgstr "Montras la reviziarbon de la elektita dosiero"
 
-#: cervisiapart.cpp:341
+#: cervisiapart.cpp:342
 #, kde-format
 msgid "Browse Multi-File Log..."
 msgstr "Foliumi Plurdosieran Protokolon..."
 
-#: cervisiapart.cpp:345
+#: cervisiapart.cpp:346
 #, kde-format
 msgid "&Annotate..."
 msgstr "&Prinoti..."
 
-#: cervisiapart.cpp:349
+#: cervisiapart.cpp:350
 #, kde-format
 msgid "Shows a blame-annotated view of the selected file"
 msgstr "Montras kulp-prinotan vidon de la elektita dosiero"
 
-#: cervisiapart.cpp:353
+#: cervisiapart.cpp:354
 #, kde-format
 msgid "&Difference to Repository (BASE)..."
 msgstr "&Diferenco al Deponejo (BASE)..."
 
-#: cervisiapart.cpp:357
+#: cervisiapart.cpp:358
 #, kde-format
 msgid ""
 "Shows the differences of the selected file to the checked out version (tag "
@@ -376,12 +376,12 @@ msgstr ""
 "Montras la diferencon inter la elektita dosiero kaj la baza versio (etikedo "
 "BASE)"
 
-#: cervisiapart.cpp:361
+#: cervisiapart.cpp:362
 #, kde-format
 msgid "Difference to Repository (HEAD)..."
 msgstr "Diferenco al Deponejo (HEAD)..."
 
-#: cervisiapart.cpp:365
+#: cervisiapart.cpp:366
 #, kde-format
 msgid ""
 "Shows the differences of the selected file to the newest version in the "
@@ -390,359 +390,359 @@ msgstr ""
 "Montras la diferencon inter la elektita dosiero kaj la baza versio (etikedo "
 "HEAD)"
 
-#: cervisiapart.cpp:369
+#: cervisiapart.cpp:370
 #, kde-format
 msgid "Last &Change..."
 msgstr "&Lasta ŝanĝo..."
 
-#: cervisiapart.cpp:372
+#: cervisiapart.cpp:373
 #, kde-format
 msgid ""
 "Shows the differences between the last two revisions of the selected file"
 msgstr ""
 "Montras la diferencojn inter la lastaj du revizioj de la elektita dosiero"
 
-#: cervisiapart.cpp:376
+#: cervisiapart.cpp:377
 #, kde-format
 msgid "&History..."
 msgstr "&Historio..."
 
-#: cervisiapart.cpp:379
+#: cervisiapart.cpp:380
 #, kde-format
 msgid "Shows the CVS history as reported by the server"
 msgstr "Montras la CVS-historion kiel raportita de la servilo"
 
-#: cervisiapart.cpp:383
+#: cervisiapart.cpp:384
 #, kde-format
 msgid "&Unfold File Tree"
 msgstr "&Malfaldi Dosier-arbon"
 
-#: cervisiapart.cpp:387
+#: cervisiapart.cpp:388
 #, kde-format
 msgid "Opens all branches of the file tree"
 msgstr "Malfermas ĉiujn branĉojn de la dosierarbo"
 
-#: cervisiapart.cpp:391
+#: cervisiapart.cpp:392
 #, kde-format
 msgid "&Fold File Tree"
 msgstr "&Faldi Dosieran Arbon"
 
-#: cervisiapart.cpp:394
+#: cervisiapart.cpp:395
 #, kde-format
 msgid "Closes all branches of the file tree"
 msgstr "Fermas ĉiujn branĉojn de la dosierarbo"
 
-#: cervisiapart.cpp:401
+#: cervisiapart.cpp:402
 #, kde-format
 msgid "&Tag/Branch..."
 msgstr "E&tikedo/Branĉo..."
 
-#: cervisiapart.cpp:404
+#: cervisiapart.cpp:405
 #, kde-format
 msgid "Creates a tag or branch for the selected files"
 msgstr "Kreas etikedon aŭ branĉon por la elektitaj dosieroj"
 
-#: cervisiapart.cpp:408
+#: cervisiapart.cpp:409
 #, kde-format
 msgid "&Delete Tag..."
 msgstr "&Forigi Etikedon..."
 
-#: cervisiapart.cpp:411
+#: cervisiapart.cpp:412
 #, kde-format
 msgid "Deletes a tag from the selected files"
 msgstr "Forigas etikedon el la elektitaj dosieroj"
 
-#: cervisiapart.cpp:415
+#: cervisiapart.cpp:416
 #, kde-format
 msgid "&Update to Tag/Date..."
 msgstr "&Ĝisdatigi al Etikedo/Branĉo..."
 
-#: cervisiapart.cpp:418
+#: cervisiapart.cpp:419
 #, kde-format
 msgid "Updates the selected files to a given tag, branch or date"
 msgstr "Ĝisdatigas la elektitajn dosierojn al difinita etikedo, branĉo aŭ dato"
 
-#: cervisiapart.cpp:422
+#: cervisiapart.cpp:423
 #, kde-format
 msgid "Update to &HEAD"
 msgstr "Ĝisdatigi al &HEAD"
 
-#: cervisiapart.cpp:425
+#: cervisiapart.cpp:426
 #, kde-format
 msgid "Updates the selected files to the HEAD revision"
 msgstr "Ĝisdatigas la elektitajn dosierojn al la HEAD-revizio"
 
-#: cervisiapart.cpp:429
+#: cervisiapart.cpp:430
 #, kde-format
 msgid "&Merge..."
 msgstr "&Mergi..."
 
-#: cervisiapart.cpp:432
+#: cervisiapart.cpp:433
 #, kde-format
 msgid "Merges a branch or a set of modifications into the selected files"
 msgstr "Kunfandas branĉon aŭ aron de modifoj en la elektitajn dosierojn"
 
-#: cervisiapart.cpp:436
+#: cervisiapart.cpp:437
 #, kde-format
 msgid "&Add Watch..."
 msgstr "&Aldoni Observilon..."
 
-#: cervisiapart.cpp:439
+#: cervisiapart.cpp:440
 #, kde-format
 msgid "Adds a watch for the selected files"
 msgstr "Aldonas observanton por la elektitaj dosieroj"
 
-#: cervisiapart.cpp:443
+#: cervisiapart.cpp:444
 #, kde-format
 msgid "&Remove Watch..."
 msgstr "Fo&rigi Observilon..."
 
-#: cervisiapart.cpp:446
+#: cervisiapart.cpp:447
 #, kde-format
 msgid "Removes a watch from the selected files"
 msgstr "Forigas observanton el la elektitaj dosieroj"
 
-#: cervisiapart.cpp:450
+#: cervisiapart.cpp:451
 #, kde-format
 msgid "Show &Watchers"
 msgstr "Montri &Observantojn"
 
-#: cervisiapart.cpp:453
+#: cervisiapart.cpp:454
 #, kde-format
 msgid "Shows the watchers of the selected files"
 msgstr "Montras la observantojn de la elektitaj dosieroj"
 
-#: cervisiapart.cpp:457
+#: cervisiapart.cpp:458
 #, kde-format
 msgid "Ed&it Files"
 msgstr "Redakt&i Dosierojn"
 
-#: cervisiapart.cpp:460
+#: cervisiapart.cpp:461
 #, kde-format
 msgid "Edits (cvs edit) the selected files"
 msgstr "Redaktas (cvs edit) la elektitajn dosierojn"
 
-#: cervisiapart.cpp:464
+#: cervisiapart.cpp:465
 #, kde-format
 msgid "U&nedit Files"
 msgstr "Malredakti Dosieroj&n"
 
-#: cervisiapart.cpp:467
+#: cervisiapart.cpp:468
 #, kde-format
 msgid "Unedits (cvs unedit) the selected files"
 msgstr "Malredaktas (cvs unedit) la elektitajn dosierojn"
 
-#: cervisiapart.cpp:471
+#: cervisiapart.cpp:472
 #, kde-format
 msgid "Show &Editors"
 msgstr "Montri R&edaktilojn"
 
-#: cervisiapart.cpp:474
+#: cervisiapart.cpp:475
 #, kde-format
 msgid "Shows the editors of the selected files"
 msgstr "Montras la redaktilojn de la elektitaj dosieroj"
 
-#: cervisiapart.cpp:478
+#: cervisiapart.cpp:479
 #, kde-format
 msgid "&Lock Files"
 msgstr "Ŝ&losi Dosierojn"
 
-#: cervisiapart.cpp:481
+#: cervisiapart.cpp:482
 #, kde-format
 msgid "Locks the selected files, so that others cannot modify them"
 msgstr "Ŝlosas la elektitajn dosierojn, por ke aliaj ne povas modifi ilin"
 
-#: cervisiapart.cpp:485
+#: cervisiapart.cpp:486
 #, kde-format
 msgid "Unl&ock Files"
 msgstr "Malŝl&osi Dosierojn"
 
-#: cervisiapart.cpp:488
+#: cervisiapart.cpp:489
 #, kde-format
 msgid "Unlocks the selected files"
 msgstr "Malŝlosas la elektitajn dosierojn"
 
-#: cervisiapart.cpp:492
+#: cervisiapart.cpp:493
 #, kde-format
 msgid "Create &Patch Against Repository..."
 msgstr "Krei Flikon kontraŭ De&ponejo..."
 
-#: cervisiapart.cpp:495
+#: cervisiapart.cpp:496
 #, kde-format
 msgid "Creates a patch from the modifications in your sandbox"
 msgstr "Kreas diakilon el la modifoj en via sablokesto"
 
-#: cervisiapart.cpp:502
+#: cervisiapart.cpp:503
 #, kde-format
 msgid "&Create..."
 msgstr "&Krei..."
 
-#: cervisiapart.cpp:506
+#: cervisiapart.cpp:507
 #, kde-format
 msgid "&Checkout..."
 msgstr "&Elpreni..."
 
-#: cervisiapart.cpp:509
+#: cervisiapart.cpp:510
 #, kde-format
 msgid "Allows you to checkout a module from a repository"
 msgstr "Permesas al vi elpreni modulon el deponejo"
 
-#: cervisiapart.cpp:513
+#: cervisiapart.cpp:514
 #, kde-format
 msgid "&Import..."
 msgstr "&Importi..."
 
-#: cervisiapart.cpp:516
+#: cervisiapart.cpp:517
 #, kde-format
 msgid "Allows you to import a module into a repository"
 msgstr "Ebligas al vi importi modulon en deponejon"
 
-#: cervisiapart.cpp:520
+#: cervisiapart.cpp:521
 #, kde-format
 msgid "&Repositories..."
 msgstr "&Deponejoj..."
 
-#: cervisiapart.cpp:523
+#: cervisiapart.cpp:524
 #, kde-format
 msgid "Configures a list of repositories you regularly use"
 msgstr "Agordas liston de deponejoj, kiujn vi regule uzas"
 
-#: cervisiapart.cpp:530
+#: cervisiapart.cpp:531
 #, kde-format
 msgid "Hide All &Files"
 msgstr "Kaŝi Ĉiu&jn Dosierojn"
 
-#: cervisiapart.cpp:533
+#: cervisiapart.cpp:534
 #, kde-format
 msgid "Determines whether only folders are shown"
 msgstr "Determinas ĉu nur dosierujoj estas montritaj"
 
-#: cervisiapart.cpp:537
+#: cervisiapart.cpp:538
 #, kde-format
 msgid "Hide Unmodified Files"
 msgstr "Kaŝi Nemodifitajn Dosierojn"
 
-#: cervisiapart.cpp:541
+#: cervisiapart.cpp:542
 #, kde-format
 msgid "Determines whether files with status up-to-date or unknown are hidden"
 msgstr "Determinas ĉu dosieroj kun stato ĝisdatigita aŭ nekonata estas kaŝitaj"
 
-#: cervisiapart.cpp:546
+#: cervisiapart.cpp:547
 #, kde-format
 msgid "Hide Removed Files"
 msgstr "Kaŝi Forigitajn Dosierojn"
 
-#: cervisiapart.cpp:549
+#: cervisiapart.cpp:550
 #, kde-format
 msgid "Determines whether removed files are hidden"
 msgstr "Determinas ĉu forigitaj dosieroj estas kaŝitaj"
 
-#: cervisiapart.cpp:553
+#: cervisiapart.cpp:554
 #, kde-format
 msgid "Hide Non-CVS Files"
 msgstr "Kaŝi Ne-CVS-ajn Dosierojn"
 
-#: cervisiapart.cpp:556
+#: cervisiapart.cpp:557
 #, kde-format
 msgid "Determines whether files not in CVS are hidden"
 msgstr "Determinas ĉu dosieroj ne en CVS estas kaŝitaj"
 
-#: cervisiapart.cpp:560
+#: cervisiapart.cpp:561
 #, kde-format
 msgid "Hide Empty Folders"
 msgstr "Kaŝi Malplenajn Dosierujojn"
 
-#: cervisiapart.cpp:563
+#: cervisiapart.cpp:564
 #, kde-format
 msgid "Determines whether folders without visible entries are hidden"
 msgstr "Determinas ĉu dosierujoj sen videblaj enskriboj estas kaŝitaj"
 
-#: cervisiapart.cpp:567
+#: cervisiapart.cpp:568
 #, kde-format
 msgid "Create &Folders on Update"
 msgstr "Krei &Dosierujojn dum Aktualigo"
 
-#: cervisiapart.cpp:570
+#: cervisiapart.cpp:571
 #, kde-format
 msgid "Determines whether updates create folders"
 msgstr "Determinas ĉu ĝisdatigoj kreas dosierujojn"
 
-#: cervisiapart.cpp:574
+#: cervisiapart.cpp:575
 #, kde-format
 msgid "&Prune Empty Folders on Update"
 msgstr "&Pritondi Malplenajn Dosierujojn dum Aktualigo"
 
-#: cervisiapart.cpp:577
+#: cervisiapart.cpp:578
 #, kde-format
 msgid "Determines whether updates remove empty folders"
 msgstr "Determinas ĉu ĝisdatigoj forigas malplenajn dosierujojn"
 
-#: cervisiapart.cpp:581
+#: cervisiapart.cpp:582
 #, kde-format
 msgid "&Update Recursively"
 msgstr "Akt&ualigi Rekursie"
 
-#: cervisiapart.cpp:584
+#: cervisiapart.cpp:585
 #, kde-format
 msgid "Determines whether updates are recursive"
 msgstr "Determinas ĉu ĝisdatigoj estas rekursivaj"
 
-#: cervisiapart.cpp:588
+#: cervisiapart.cpp:589
 #, kde-format
 msgid "C&ommit && Remove Recursively"
 msgstr "Enmeti && F&origi Rekursie"
 
-#: cervisiapart.cpp:591
+#: cervisiapart.cpp:592
 #, kde-format
 msgid "Determines whether commits and removes are recursive"
 msgstr "Determinas ĉu transmetado kaj forigo estas rekursivaj"
 
-#: cervisiapart.cpp:595
+#: cervisiapart.cpp:596
 #, kde-format
 msgid "Do cvs &edit Automatically When Necessary"
 msgstr "Fari \"cvs &edit\" aŭtomate se necesas"
 
-#: cervisiapart.cpp:598
+#: cervisiapart.cpp:599
 #, kde-format
 msgid "Determines whether automatic cvs editing is active"
 msgstr "Determinas ĉu aŭtomata cvs-redaktado estas aktiva"
 
-#: cervisiapart.cpp:602
+#: cervisiapart.cpp:603
 #, kde-format
 msgid "Configure Cervisia..."
 msgstr "Agordi Versioadministrilon..."
 
-#: cervisiapart.cpp:605
+#: cervisiapart.cpp:606
 #, kde-format
 msgid "Allows you to configure the Cervisia KPart"
 msgstr "Permesas al vi agordi la Cervisia-KPart"
 
-#: cervisiapart.cpp:613
+#: cervisiapart.cpp:614
 #, kde-format
 msgid "CVS &Manual"
 msgstr "CVS &manlibro"
 
-#: cervisiapart.cpp:616
+#: cervisiapart.cpp:617
 #, kde-format
 msgid "Opens the help browser with the CVS documentation"
 msgstr "Malfermas la helpretumilon kun la CVS-dokumentaro"
 
-#: cervisiapart.cpp:623
+#: cervisiapart.cpp:624
 #, kde-format
 msgid "Unfold Folder"
 msgstr "Malfaldi Dosierujon"
 
-#: cervisiapart.cpp:715
+#: cervisiapart.cpp:716
 #, kde-format
 msgid "Cervisia Part"
 msgstr "Cervisia-Parto"
 
-#: cervisiapart.cpp:717 main.cpp:140
+#: cervisiapart.cpp:718 main.cpp:140
 #, kde-format
 msgid "A CVS frontend"
 msgstr "CVS-fasado"
 
-#: cervisiapart.cpp:719 main.cpp:142
+#: cervisiapart.cpp:720 main.cpp:142
 #, kde-format
 msgid ""
 "Copyright (c) 1999-2002 Bernd Gehrmann\n"
@@ -751,123 +751,123 @@ msgstr ""
 "Kopirajto (c) 1999-2002 Bernd Gehrmann\n"
 "Kopirajto (c) 2002-2008 la Cervisia aŭtoroj"
 
-#: cervisiapart.cpp:724 main.cpp:147
+#: cervisiapart.cpp:725 main.cpp:147
 #, kde-format
 msgid "Bernd Gehrmann"
 msgstr "Bernd Gehrmann"
 
-#: cervisiapart.cpp:725 main.cpp:148
+#: cervisiapart.cpp:726 main.cpp:148
 #, kde-format
 msgid "Original author and former maintainer"
 msgstr "Origina aŭtoro kaj iama vartisto"
 
-#: cervisiapart.cpp:728 main.cpp:151
+#: cervisiapart.cpp:729 main.cpp:151
 #, kde-format
 msgid "Christian Loose"
 msgstr "Christian Loose"
 
-#: cervisiapart.cpp:728 main.cpp:151
+#: cervisiapart.cpp:729 main.cpp:151
 #, kde-format
 msgid "Maintainer"
 msgstr "Vartisto"
 
-#: cervisiapart.cpp:729 main.cpp:152
+#: cervisiapart.cpp:730 main.cpp:152
 #, kde-format
 msgid "André Wöbbeking"
 msgstr "André Wöbbeking"
 
-#: cervisiapart.cpp:729 main.cpp:152
+#: cervisiapart.cpp:730 main.cpp:152
 #, kde-format
 msgid "Developer"
 msgstr "Programisto"
 
-#: cervisiapart.cpp:730 main.cpp:153
+#: cervisiapart.cpp:731 main.cpp:153
 #, kde-format
 msgid "Carlos Woelz"
 msgstr "Carlos Woelz"
 
-#: cervisiapart.cpp:730 main.cpp:153
+#: cervisiapart.cpp:731 main.cpp:153
 #, kde-format
 msgid "Documentation"
 msgstr "Dokumentado"
 
-#: cervisiapart.cpp:732 main.cpp:155
+#: cervisiapart.cpp:733 main.cpp:155
 #, kde-format
 msgid "Richard Moore"
 msgstr "Richard Moore"
 
-#: cervisiapart.cpp:732 main.cpp:155
+#: cervisiapart.cpp:733 main.cpp:155
 #, kde-format
 msgid "Conversion to KPart"
 msgstr "Konvertado al KPart"
 
-#: cervisiapart.cpp:733 main.cpp:156
+#: cervisiapart.cpp:734 main.cpp:156
 #, kde-format
 msgid "Laurent Montel"
 msgstr "Laurent Montel"
 
-#: cervisiapart.cpp:733 main.cpp:156
+#: cervisiapart.cpp:734 main.cpp:156
 #, kde-format
 msgid "Conversion to D-Bus"
 msgstr "Konvertado al D-Bus"
 
-#: cervisiapart.cpp:734 main.cpp:157
+#: cervisiapart.cpp:735 main.cpp:157
 #, kde-format
 msgid "Martin Koller"
 msgstr "Martin Koller"
 
-#: cervisiapart.cpp:734 main.cpp:157
+#: cervisiapart.cpp:735 main.cpp:157
 #, kde-format
 msgid "Port to KDE Frameworks 5"
 msgstr "Portado al KDE Frameworks 5"
 
-#: cervisiapart.cpp:741
+#: cervisiapart.cpp:742
 #, kde-format
 msgid "Open Sandbox"
 msgstr "Malfermi Provejon"
 
-#: cervisiapart.cpp:791
+#: cervisiapart.cpp:792
 #, kde-format
 msgid "CVS Edit"
 msgstr "CVS Edit"
 
-#: cervisiapart.cpp:1298 diffdialog.cpp:263 logdialog.cpp:472
+#: cervisiapart.cpp:1299 diffdialog.cpp:263 logdialog.cpp:472
 #, kde-format
 msgid "CVS Diff"
 msgstr "CVS Diff"
 
-#: cervisiapart.cpp:1311 diffdialog.cpp:473 logdialog.cpp:485
+#: cervisiapart.cpp:1312 diffdialog.cpp:473 logdialog.cpp:485
 #: resolvedialog.cpp:351
 #, kde-format
 msgid "Could not open file for writing."
 msgstr "Ne eblis malfermi por skribado."
 
-#: cervisiapart.cpp:1461
+#: cervisiapart.cpp:1462
 #, kde-format
 msgid "The revision looks invalid."
 msgstr "La revizio ŝajnas nevalida."
 
-#: cervisiapart.cpp:1465
+#: cervisiapart.cpp:1466
 #, kde-format
 msgid "This is the first revision of the branch."
 msgstr "Tiu estas la unua revizio de la branĉo."
 
-#: cervisiapart.cpp:1575
+#: cervisiapart.cpp:1576
 #, kde-format
 msgid "Invoking help on CVS"
 msgstr "Alvokante helpon pri CVS"
 
-#: cervisiapart.cpp:1610
+#: cervisiapart.cpp:1611
 #, kde-format
 msgid "Done"
 msgstr "Preta"
 
-#: cervisiapart.cpp:1616
+#: cervisiapart.cpp:1617
 #, kde-format
 msgid "A CVS commit to repository %1 is done"
 msgstr "CVS-enmeto al deponejo %1 estas efektivigita"
 
-#: cervisiapart.cpp:1633
+#: cervisiapart.cpp:1634
 #, kde-format
 msgid ""
 "This is not a CVS folder.\n"
@@ -894,22 +894,22 @@ msgstr ""
 msgid "Delay (ms) until the progress dialog appears."
 msgstr "Prokrasto (ms) ĝis la progreso dialogo aperas."
 
-#: cervisiashell.cpp:54
+#: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
 msgstr "La bibliotekon de Cervisia ne eblis ŝargi."
 
-#: cervisiashell.cpp:86
+#: cervisiashell.cpp:85
 #, kde-format
 msgid "Allows you to configure the toolbar"
 msgstr "Permesas al vi agordi la ilobreton"
 
-#: cervisiashell.cpp:91
+#: cervisiashell.cpp:90
 #, kde-format
 msgid "Allows you to customize the keybindings"
 msgstr "Permesas al vi personecigi la klavbindojn"
 
-#: cervisiashell.cpp:96
+#: cervisiashell.cpp:95
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Eliras Cervisia"

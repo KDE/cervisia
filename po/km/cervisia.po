@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:37+0000\n"
+"POT-Creation-Date: 2025-02-03 01:53+0000\n"
 "PO-Revision-Date: 2010-11-30 20:40+0700\n"
 "Last-Translator:  Seng Sutha <Sutha@khmeros.info>\n"
 "Language-Team: Khmer [km] <Support@khmeros.info>\n"
@@ -156,35 +156,35 @@ msgstr "ទៅកាន់​បន្ទាត់​​"
 msgid "Go to line number:"
 msgstr "ទៅកាន់​ចំនួន​បន្ទាត់​"
 
-#: cervisiapart.cpp:111 main.cpp:138
+#: cervisiapart.cpp:112 main.cpp:138
 #, kde-format
 msgid "Cervisia"
 msgstr "Cervisia"
 
-#: cervisiapart.cpp:118
+#: cervisiapart.cpp:119
 #, fuzzy, kde-format
 msgid "Starting cvsservice failed with message: "
 msgstr "បាន​បរាជ័យ​ការ​ចាប់​ផ្ដើម​ cvsservice ជាមួយ​សារ​ ៖​"
 
-#: cervisiapart.cpp:148
+#: cervisiapart.cpp:149
 #, fuzzy, kde-format
 msgid ""
 "This KPart is non-functional, because the cvs D-Bus service could not be "
 "started."
 msgstr "KPart នេះ​គ្មាន​មុខងារ​ឡើយ​​ ពី​ព្រោះ​សេវា​ cvs D-Bus មិន​ត្រូវ​បាន​ចាប់​ផ្ដើម​ ។"
 
-#: cervisiapart.cpp:186
+#: cervisiapart.cpp:187
 #, fuzzy, kde-format
 msgid "Remote CVS working folders are not supported."
 msgstr "មិន​គាំ​ទ្រ​ការ​ដំណើរការ​ថត​ CVS ពី​ចម្ងាយ​ឡើយ​ ។"
 
-#: cervisiapart.cpp:194
+#: cervisiapart.cpp:195
 #, fuzzy, kde-format
 msgid ""
 "You cannot change to a different folder while there is a running cvs job."
 msgstr "មិន​អាច​ប្ដូរ​​ទៅ​កាន់​ថត​ខុសគ្នា​ខណៈ​ពេល​កំពុង​​ដំណើរការ​កិច្ចការ​​ cvs ឡើយ​ ។"
 
-#: cervisiapart.cpp:214
+#: cervisiapart.cpp:215
 #, fuzzy, kde-format
 msgid ""
 "F - All files are hidden, the tree shows only folders\n"
@@ -195,547 +195,547 @@ msgstr ""
 "N - គ្រប់​ឯកសារ​ទាន់សម័យ ត្រូវ​បាន​លាក់​\n"
 "R - គ្រប់​ឯកសារ​ដែល​បាន​យកចេញ​ត្រូវ​បាន​លាក់​"
 
-#: cervisiapart.cpp:227
+#: cervisiapart.cpp:228
 #, fuzzy, kde-format
 msgid "Open Sandbox..."
 msgstr "បើក Sandbox..."
 
-#: cervisiapart.cpp:231
+#: cervisiapart.cpp:232
 #, fuzzy, kde-format
 msgid "Opens a CVS working folder in the main window"
 msgstr "បើក​ថត​ដែល​កំពុង​ដំណើរ​ការ​របស់​ CVS ក្នុង​បង្អួច​ចម្បង​"
 
-#: cervisiapart.cpp:235
+#: cervisiapart.cpp:236
 #, fuzzy, kde-format
 msgid "Recent Sandboxes"
 msgstr "Sandboxes ថ្មី​"
 
-#: cervisiapart.cpp:239
+#: cervisiapart.cpp:240
 #, fuzzy, kde-format
 msgid "&Insert ChangeLog Entry..."
 msgstr "បញ្ចូល​ធាតុ​ ChangeLog ..."
 
-#: cervisiapart.cpp:242
+#: cervisiapart.cpp:243
 #, fuzzy, kde-format
 msgid "Inserts a new intro into the file ChangeLog in the toplevel folder"
 msgstr "បញ្ចូល​ intro ថ្មី​ទៅ​ក្នុង​ ChangeLog ឯកសារ​ក្នុង​ថត​កម្រិត​ខ្ពស់​"
 
-#: cervisiapart.cpp:246
+#: cervisiapart.cpp:247
 #, kde-format
 msgid "&Update"
 msgstr "ធ្វើបច្ចុប្បន្នភាព​"
 
-#: cervisiapart.cpp:250
+#: cervisiapart.cpp:251
 #, fuzzy, kde-format
 msgid "Updates (cvs update) the selected files and folders"
 msgstr "ធ្វើ​បច្ចុប្បន្នភាព​​ (បច្ចុប្បន្នភាព cvs ) ថត​ និង​ឯកសារ​ដែល​បាន​ជ្រើស​"
 
-#: cervisiapart.cpp:254
+#: cervisiapart.cpp:255
 #, kde-format
 msgid "&Status"
 msgstr "ស្ថានភាព​"
 
-#: cervisiapart.cpp:258
+#: cervisiapart.cpp:259
 #, fuzzy, kde-format
 msgid "Updates the status (cvs -n update) of the selected files and folders"
 msgstr "ធ្វើ​បច្ចុប្បន្ន​ភាព​ស្ថានភាព​ (បច្ចុប្បន្នភាព​ cvs -n ) នៃ​ថត​ និង​ឯកសារ​ដែល​បាន​ជ្រើស​"
 
-#: cervisiapart.cpp:262 resolvedialog.cpp:176
+#: cervisiapart.cpp:263 resolvedialog.cpp:176
 #, kde-format
 msgid "&Edit"
 msgstr "កែសម្រួល​"
 
-#: cervisiapart.cpp:265
+#: cervisiapart.cpp:266
 #, fuzzy, kde-format
 msgid "Opens the marked file for editing"
 msgstr "បើក​ឯកសារ​ដែល​សម្គាល់​ សម្រាប់​ធ្វើ​ការ​កែ​សម្រួល​"
 
-#: cervisiapart.cpp:269
+#: cervisiapart.cpp:270
 #, kde-format
 msgid "Reso&lve..."
 msgstr "ដោះស្រាយ​​..."
 
-#: cervisiapart.cpp:272
+#: cervisiapart.cpp:273
 #, fuzzy, kde-format
 msgid "Opens the resolve dialog with the selected file"
 msgstr "បើក​ប្រអប់​ដោះ​ស្រាយ​ជាមួយ​ឯកសារ​ដែល​បាន​ជ្រើស​"
 
-#: cervisiapart.cpp:276
+#: cervisiapart.cpp:277
 #, kde-format
 msgid "&Commit..."
 msgstr "&Commit..."
 
-#: cervisiapart.cpp:280
+#: cervisiapart.cpp:281
 #, fuzzy, kde-format
 msgid "Commits the selected files"
 msgstr "Commits ឯកសារ​ដែល​បាន​ជ្រើស​"
 
-#: cervisiapart.cpp:284
+#: cervisiapart.cpp:285
 #, kde-format
 msgid "&Add to Repository..."
 msgstr "បន្ថែម​ទៅកាន់​ឃ្លាំង​..."
 
-#: cervisiapart.cpp:287
+#: cervisiapart.cpp:288
 #, kde-format
 msgid "Add"
 msgstr "បន្ថែម​"
 
-#: cervisiapart.cpp:289
+#: cervisiapart.cpp:290
 #, fuzzy, kde-format
 msgid "Adds (cvs add) the selected files to the repository"
 msgstr "បន្ថែម​ (បន្ថែម​ cvs ) ឯកសារ​ដែល​បាន​ជ្រើស​ទៅកាន់​ឃ្លាំង​"
 
-#: cervisiapart.cpp:293
+#: cervisiapart.cpp:294
 #, kde-format
 msgid "Add &Binary..."
 msgstr "បន្ថែម​ទ្វេភាគ​..."
 
-#: cervisiapart.cpp:296
+#: cervisiapart.cpp:297
 #, fuzzy, kde-format
 msgid "Adds (cvs -kb add) the selected files as binaries to the repository"
 msgstr "បន្ថែម​ (បន្ថែម cvs -kb ) ឯកសារ​ដែល​បាន​ជ្រើស​​ទ្វេភាគ​​ទៅ​កាន់​ឃ្លាំង​"
 
-#: cervisiapart.cpp:300
+#: cervisiapart.cpp:301
 #, kde-format
 msgid "&Remove From Repository..."
 msgstr "យក​ចេញ​ពី​ឃ្លាំង​..."
 
-#: cervisiapart.cpp:303 repositorydialog.cpp:201
+#: cervisiapart.cpp:304 repositorydialog.cpp:201
 #, kde-format
 msgid "Remove"
 msgstr "យក​ចេញ​"
 
-#: cervisiapart.cpp:305
+#: cervisiapart.cpp:306
 #, fuzzy, kde-format
 msgid "Removes (cvs remove) the selected files from the repository"
 msgstr "យក​ចេញ​ (យក​ចេញ​ cvs ) ឯកសារ​ដែល​បាន​ជ្រើស​ពី​ឃ្លាំង​"
 
-#: cervisiapart.cpp:309
+#: cervisiapart.cpp:310
 #, kde-format
 msgid "Rever&t"
 msgstr "ត្រឡប់​ទៅ​ដើម​"
 
-#: cervisiapart.cpp:312
+#: cervisiapart.cpp:313
 #, fuzzy, kde-format
 msgid "Reverts (cvs update -C) the selected files (only cvs 1.11)"
 msgstr "ត្រឡប់​ទៅ​ដើម​ (បច្ចុប្បន្នភាព​ cvs ​ -C) ឯកសារ​ដែល​បាន​ជ្រើស​ (​តែ​ cvs 1.11)"
 
-#: cervisiapart.cpp:316
+#: cervisiapart.cpp:317
 #, kde-format
 msgid "&Properties"
 msgstr "លក្ខណសម្បត្តិ​"
 
-#: cervisiapart.cpp:323
+#: cervisiapart.cpp:324
 #, kde-format
 msgid "Stop"
 msgstr "បញ្ឈប់​"
 
-#: cervisiapart.cpp:328
+#: cervisiapart.cpp:329
 #, fuzzy, kde-format
 msgid "Stops any running sub-processes"
 msgstr "បញ្ឈប់​ការ​ដំណើរការ​រង​មួយ​ចំនួន​"
 
-#: cervisiapart.cpp:332
+#: cervisiapart.cpp:333
 #, kde-format
 msgid "Browse &Log..."
 msgstr "រកមើល​កំណត់​ហេតុ​..."
 
-#: cervisiapart.cpp:336
+#: cervisiapart.cpp:337
 #, fuzzy, kde-format
 msgid "Shows the revision tree of the selected file"
 msgstr "បង្ហាញ​មែក​ធាង​ការ​ពិនិត្យ​ឡើងវិញ​នៃ​ឯកសារ​ដែល​បាន​ជ្រើស​"
 
-#: cervisiapart.cpp:341
+#: cervisiapart.cpp:342
 #, kde-format
 msgid "Browse Multi-File Log..."
 msgstr "រកមើល​កំណត់ហេតុ​​​ឯកសារ​ជា​ច្រើន​​...​"
 
-#: cervisiapart.cpp:345
+#: cervisiapart.cpp:346
 #, fuzzy, kde-format
 msgid "&Annotate..."
 msgstr "កត់ហេតុ​​..."
 
-#: cervisiapart.cpp:349
+#: cervisiapart.cpp:350
 #, fuzzy, kde-format
 msgid "Shows a blame-annotated view of the selected file"
 msgstr "បង្ហាញ​ទិដ្ឋភាព​​កត់ហេតុ​រិះគន់​នៃ​ឯកសារ​ដែល​បាន​ជ្រើស​"
 
-#: cervisiapart.cpp:353
+#: cervisiapart.cpp:354
 #, kde-format
 msgid "&Difference to Repository (BASE)..."
 msgstr "ទៅកាន់​ឃ្លាំង​​ផ្សេង​គ្នា​​ (BASE)..."
 
-#: cervisiapart.cpp:357
+#: cervisiapart.cpp:358
 #, fuzzy, kde-format
 msgid ""
 "Shows the differences of the selected file to the checked out version (tag "
 "BASE)"
 msgstr "បង្ហាញ​ភាព​ខុសគ្នា​នៃ​ឯកសារ​ដែល​បាន​ជ្រើស​​ ដើម្បី​បង្ហាញ​ថា​កំណែ​ត្រឹមត្រូវ​​ (ស្លាក​ BASE)"
 
-#: cervisiapart.cpp:361
+#: cervisiapart.cpp:362
 #, kde-format
 msgid "Difference to Repository (HEAD)..."
 msgstr "ទៅកាន់​ឃ្លាំ​ង​ផ្សេង​គ្នា​ (HEAD)..."
 
-#: cervisiapart.cpp:365
+#: cervisiapart.cpp:366
 #, fuzzy, kde-format
 msgid ""
 "Shows the differences of the selected file to the newest version in the "
 "repository (tag HEAD)"
 msgstr "បង្ហាញ​ភាព​ខុសគ្នា​នៃ​ឯកសារ​ដែល​បាន​ជ្រើស​ ទៅកាន់​កំណែ​​ថ្មី​បំផុត​​ក្នុង​ឃ្លាំង​ (ស្លាក HEAD)"
 
-#: cervisiapart.cpp:369
+#: cervisiapart.cpp:370
 #, kde-format
 msgid "Last &Change..."
 msgstr "ប្ដូរ​ចុងក្រោយ​..."
 
-#: cervisiapart.cpp:372
+#: cervisiapart.cpp:373
 #, fuzzy, kde-format
 msgid ""
 "Shows the differences between the last two revisions of the selected file"
 msgstr "បង្ហាញ​ភាព​ខុសគ្នា​​រវាង​កំណែ​ពីរ​​ចុងក្រោយ​នៃ​ឯកសារ​ដែល​បាន​ជ្រើស​"
 
-#: cervisiapart.cpp:376
+#: cervisiapart.cpp:377
 #, kde-format
 msgid "&History..."
 msgstr "ប្រវត្តិ...​"
 
-#: cervisiapart.cpp:379
+#: cervisiapart.cpp:380
 #, fuzzy, kde-format
 msgid "Shows the CVS history as reported by the server"
 msgstr "បង្ហាញ​ប្រវត្តិ​របស់​ CVS ដូច​ដែល​រាយការណ៍​តាម​ម៉ាស៊ីន​បម្រើ​"
 
-#: cervisiapart.cpp:383
+#: cervisiapart.cpp:384
 #, fuzzy, kde-format
 msgid "&Unfold File Tree"
 msgstr "​មែក​ធាង​ឯកសារ​លាតត្រដាង​​"
 
-#: cervisiapart.cpp:387
+#: cervisiapart.cpp:388
 #, fuzzy, kde-format
 msgid "Opens all branches of the file tree"
 msgstr "បើក​គ្រប់​សាខា​នៃ​មែកធាង​របស់​ឯកសារ​"
 
-#: cervisiapart.cpp:391
+#: cervisiapart.cpp:392
 #, fuzzy, kde-format
 msgid "&Fold File Tree"
 msgstr "មែក​ធាង​ឯកសារ​មិន​លាត​ត្រដាង​"
 
-#: cervisiapart.cpp:394
+#: cervisiapart.cpp:395
 #, fuzzy, kde-format
 msgid "Closes all branches of the file tree"
 msgstr "បិទ​គ្រប់​សាខា​​នៃ​មែកធាង​របស់​ឯកសារ​"
 
-#: cervisiapart.cpp:401
+#: cervisiapart.cpp:402
 #, kde-format
 msgid "&Tag/Branch..."
 msgstr "ស្លាក/​សាខា..."
 
-#: cervisiapart.cpp:404
+#: cervisiapart.cpp:405
 #, kde-format
 msgid "Creates a tag or branch for the selected files"
 msgstr "បង្កើត​ស្លាក​ ឬ​​សាខា​ សម្រាប់​ឯកសារ​ដែល​បាន​ជ្រើស​"
 
-#: cervisiapart.cpp:408
+#: cervisiapart.cpp:409
 #, kde-format
 msgid "&Delete Tag..."
 msgstr "លុប​ស្លា​ក​..."
 
-#: cervisiapart.cpp:411
+#: cervisiapart.cpp:412
 #, kde-format
 msgid "Deletes a tag from the selected files"
 msgstr "លុប​ស្លាក​ចេញ​ពី​ឯកសារ​ដែល​បាន​ជ្រើស​"
 
-#: cervisiapart.cpp:415
+#: cervisiapart.cpp:416
 #, kde-format
 msgid "&Update to Tag/Date..."
 msgstr "ធ្វើ​បច្ចុប្បន្នភាព​ ស្លាក​/​កាលបរិច្ឆេទ​..."
 
-#: cervisiapart.cpp:418
+#: cervisiapart.cpp:419
 #, kde-format
 msgid "Updates the selected files to a given tag, branch or date"
 msgstr "ធ្វើ​បច្ចុប្បន្នភាព​ឯកសារ​ដែល​បាន​ជ្រើស​​ទៅ​កាន់​ស្លាក​ដែល​បាន​ផ្ដល់​ ​សាខា ឬ​កាលបរិច្ឆេទ​"
 
-#: cervisiapart.cpp:422
+#: cervisiapart.cpp:423
 #, kde-format
 msgid "Update to &HEAD"
 msgstr "ធ្វើ​បច្ចុប្បន្នភាព​ទៅកាន់​​ &HEAD"
 
-#: cervisiapart.cpp:425
+#: cervisiapart.cpp:426
 #, fuzzy, kde-format
 msgid "Updates the selected files to the HEAD revision"
 msgstr "ធ្វើ​បច្ចុប្បន្នភាព​ឯកសារ​ដែល​​បាន​ជ្រើស​​ទៅកាន់​កំណែ​របស់​ HEAD "
 
-#: cervisiapart.cpp:429
+#: cervisiapart.cpp:430
 #, kde-format
 msgid "&Merge..."
 msgstr "បញ្ចូល​ចូល​គ្នា​..."
 
-#: cervisiapart.cpp:432
+#: cervisiapart.cpp:433
 #, fuzzy, kde-format
 msgid "Merges a branch or a set of modifications into the selected files"
 msgstr "បញ្ចូល​សាខា​​ចូល​គ្នា​ ឬ​​កំណត់​នៃ​ការ​កែប្រែ​ក្នុង​​ឯកសារ​ដែល​បាន​ជ្រើស​"
 
-#: cervisiapart.cpp:436
+#: cervisiapart.cpp:437
 #, kde-format
 msgid "&Add Watch..."
 msgstr "​ឃ្លាំ​មើល​បន្ថែម​​..."
 
-#: cervisiapart.cpp:439
+#: cervisiapart.cpp:440
 #, kde-format
 msgid "Adds a watch for the selected files"
 msgstr "ឃ្លាំ​មើល​បន្ថែម​​ សម្រាប់​ឯកសារ​ដែល​​​បាន​ជ្រើស​"
 
-#: cervisiapart.cpp:443
+#: cervisiapart.cpp:444
 #, kde-format
 msgid "&Remove Watch..."
 msgstr "យក​ឃ្លាំ​មើល​ចេញ​​..."
 
-#: cervisiapart.cpp:446
+#: cervisiapart.cpp:447
 #, kde-format
 msgid "Removes a watch from the selected files"
 msgstr "យក​ឃ្លាំ​មើល​ចេញ​ពី​ឯកសារ​ដែល​បាន​ជ្រើស​"
 
-#: cervisiapart.cpp:450
+#: cervisiapart.cpp:451
 #, kde-format
 msgid "Show &Watchers"
 msgstr "បង្ហាញ​កម្មវិធី​ឃ្លាំ​មើល​"
 
-#: cervisiapart.cpp:453
+#: cervisiapart.cpp:454
 #, kde-format
 msgid "Shows the watchers of the selected files"
 msgstr "បង្ហាញ​កម្មវិធី​ឃ្លាំ​មើល​នៃ​ឯកសារ​ដែល​បាន​ជ្រើស​"
 
-#: cervisiapart.cpp:457
+#: cervisiapart.cpp:458
 #, kde-format
 msgid "Ed&it Files"
 msgstr "កែសម្រួល​ឯកសារ​"
 
-#: cervisiapart.cpp:460
+#: cervisiapart.cpp:461
 #, kde-format
 msgid "Edits (cvs edit) the selected files"
 msgstr "កែសម្រួល​ (កែសម្រួល cvs ) ឯកសារ​ដែល​បាន​ជ្រើស​"
 
-#: cervisiapart.cpp:464
+#: cervisiapart.cpp:465
 #, kde-format
 msgid "U&nedit Files"
 msgstr "គ្មាន​ឯកសារ​កែសម្រួល​"
 
-#: cervisiapart.cpp:467
+#: cervisiapart.cpp:468
 #, kde-format
 msgid "Unedits (cvs unedit) the selected files"
 msgstr "គ្មាន​កែសម្រួល​ (គ្មាន​កែ​សម្រួល​ cvs ) ឯកសារ​ដែល​បាន​ជ្រើស​"
 
-#: cervisiapart.cpp:471
+#: cervisiapart.cpp:472
 #, kde-format
 msgid "Show &Editors"
 msgstr "បង្ហាញ​កម្ម​វិធី​កែ​សម្រួល​"
 
-#: cervisiapart.cpp:474
+#: cervisiapart.cpp:475
 #, fuzzy, kde-format
 msgid "Shows the editors of the selected files"
 msgstr "បង្ហាញ​កម្មវិធី​កែសម្រួល​នៃ​ឯកសារ​ដែល​បាន​ជ្រើស​"
 
-#: cervisiapart.cpp:478
+#: cervisiapart.cpp:479
 #, kde-format
 msgid "&Lock Files"
 msgstr "ឯកសារ​ជាប់​​សោ​"
 
-#: cervisiapart.cpp:481
+#: cervisiapart.cpp:482
 #, fuzzy, kde-format
 msgid "Locks the selected files, so that others cannot modify them"
 msgstr "ឯកសារ​ដែល​បាន​ជ្រើស​ជាប់​សោ​ ដូច្នេះ​ឯកសារ​ផ្សេង​ទៀត​មិន​អាច​កែ​ប្រែ​វា​​បាន​ឡើយ​ "
 
-#: cervisiapart.cpp:485
+#: cervisiapart.cpp:486
 #, kde-format
 msgid "Unl&ock Files"
 msgstr "ឯកសារ​មិន​ជាប់​សោ"
 
-#: cervisiapart.cpp:488
+#: cervisiapart.cpp:489
 #, kde-format
 msgid "Unlocks the selected files"
 msgstr "ឯកសារ​ដែល​បាន​ជ្រើស​មិន​ជាប់​សោ​"
 
-#: cervisiapart.cpp:492
+#: cervisiapart.cpp:493
 #, fuzzy, kde-format
 msgid "Create &Patch Against Repository..."
 msgstr "បង្កើត​ឃ្លាំង​ប្រឆាំង​នឹង​បំណះ​​..."
 
-#: cervisiapart.cpp:495
+#: cervisiapart.cpp:496
 #, kde-format
 msgid "Creates a patch from the modifications in your sandbox"
 msgstr "បង្កើត​បំណះ​ពី​ការ​កែប្រែ​ក្នុង​​ sandbox របស់​អ្នក​"
 
-#: cervisiapart.cpp:502
+#: cervisiapart.cpp:503
 #, kde-format
 msgid "&Create..."
 msgstr "បង្កើត​..."
 
-#: cervisiapart.cpp:506
+#: cervisiapart.cpp:507
 #, fuzzy, kde-format
 msgid "&Checkout..."
 msgstr "បង្ហាញ​​​ត្រឹមត្រូវ​..."
 
-#: cervisiapart.cpp:509
+#: cervisiapart.cpp:510
 #, fuzzy, kde-format
 msgid "Allows you to checkout a module from a repository"
 msgstr "អនុញ្ញាត​ឲ្យ​អ្នកបង្ហាញ​ម៉ូឌុល​ត្រឹមត្រូវ​​ចេញ​ពី​ឃ្លាំង​"
 
-#: cervisiapart.cpp:513
+#: cervisiapart.cpp:514
 #, kde-format
 msgid "&Import..."
 msgstr "នាំចូល...​"
 
-#: cervisiapart.cpp:516
+#: cervisiapart.cpp:517
 #, kde-format
 msgid "Allows you to import a module into a repository"
 msgstr "អនុញ្ញាត​ឲ្យ​អ្នក​នាំចូល​ម៉ូឌុលទៅ​​ក្នុង​ឃ្លាំង​"
 
-#: cervisiapart.cpp:520
+#: cervisiapart.cpp:521
 #, kde-format
 msgid "&Repositories..."
 msgstr "ឃ្លាំង​..."
 
-#: cervisiapart.cpp:523
+#: cervisiapart.cpp:524
 #, fuzzy, kde-format
 msgid "Configures a list of repositories you regularly use"
 msgstr "កំណត់​រចនាសម្ព័ន្ធ​បញ្ជី​របស់​ឃ្លាំង​ដែល​​អ្នក​ប្រើ​យ៉ាង​ទៀត​ទាត់​"
 
-#: cervisiapart.cpp:530
+#: cervisiapart.cpp:531
 #, kde-format
 msgid "Hide All &Files"
 msgstr "លាក់​គ្រប់​ឯកសារ​"
 
-#: cervisiapart.cpp:533
+#: cervisiapart.cpp:534
 #, fuzzy, kde-format
 msgid "Determines whether only folders are shown"
 msgstr "កំណត់​​​ថា​តើ​ថត​​តែ​ប៉ុណ្ណោះ​ត្រូវ​បាន​បង្ហាញ​"
 
-#: cervisiapart.cpp:537
+#: cervisiapart.cpp:538
 #, kde-format
 msgid "Hide Unmodified Files"
 msgstr "លាក់​ឯកសារ​ដែល​មិនបាន​កែប្រែ​"
 
-#: cervisiapart.cpp:541
+#: cervisiapart.cpp:542
 #, fuzzy, kde-format
 msgid "Determines whether files with status up-to-date or unknown are hidden"
 msgstr "កំណត់​ថា​តើ​ឯកសារ​ជាមួយ​ស្ថានភាព​ទាន់សម័យ​ ឬ​មិន​ស្គាល់​ត្រូវ​បាន​លាក់​"
 
-#: cervisiapart.cpp:546
+#: cervisiapart.cpp:547
 #, kde-format
 msgid "Hide Removed Files"
 msgstr "លាក់​យក​ឯកសារ​ចេញ"
 
-#: cervisiapart.cpp:549
+#: cervisiapart.cpp:550
 #, fuzzy, kde-format
 msgid "Determines whether removed files are hidden"
 msgstr "កំណត់​ថា​តើ​ឯកសារ​ដែល​បាន​យក​ចេញ​ត្រូវ​បាន​លាក់​"
 
-#: cervisiapart.cpp:553
+#: cervisiapart.cpp:554
 #, fuzzy, kde-format
 msgid "Hide Non-CVS Files"
 msgstr "លាក់​ឯកសារ​គ្មាន​ -CVS "
 
-#: cervisiapart.cpp:556
+#: cervisiapart.cpp:557
 #, fuzzy, kde-format
 msgid "Determines whether files not in CVS are hidden"
 msgstr "កំណត់​ថា​តើ​ឯកសារ​គ្មាន​នៅ​ក្នុង​ CVS ត្រូវ​បាន​លាក់​"
 
-#: cervisiapart.cpp:560
+#: cervisiapart.cpp:561
 #, kde-format
 msgid "Hide Empty Folders"
 msgstr "លាក់​ថត​ទទេ​"
 
-#: cervisiapart.cpp:563
+#: cervisiapart.cpp:564
 #, fuzzy, kde-format
 msgid "Determines whether folders without visible entries are hidden"
 msgstr "កំណត់​ថា​តើ​​ធាតុ​ដែល​អាច​មើល​ឃើញ​ថត​ខាង​ក្រៅ​ត្រូវ​បាន​លាក់​"
 
-#: cervisiapart.cpp:567
+#: cervisiapart.cpp:568
 #, kde-format
 msgid "Create &Folders on Update"
 msgstr "បង្កើត​ថត​នៅ​ពេល​ធ្វើ​​បច្ចុប្បន្នភាព​"
 
-#: cervisiapart.cpp:570
+#: cervisiapart.cpp:571
 #, fuzzy, kde-format
 msgid "Determines whether updates create folders"
 msgstr "កំណត់​ថា​តើ​ធ្វើ​បច្ចុប្បន្នភាព​បង្កើត​ថត​"
 
-#: cervisiapart.cpp:574
+#: cervisiapart.cpp:575
 #, kde-format
 msgid "&Prune Empty Folders on Update"
 msgstr "កាត់​ថត​ទទេ​ចេញ​ពេល​ធ្វើ​បច្ចុប្បន្នភាព​"
 
-#: cervisiapart.cpp:577
+#: cervisiapart.cpp:578
 #, fuzzy, kde-format
 msgid "Determines whether updates remove empty folders"
 msgstr "កំណត់​ថា​តើ​ធ្វើ​បច្ចុប្បន្នភាព​យក​ថត​ទទេ​ចេញ​"
 
-#: cervisiapart.cpp:581
+#: cervisiapart.cpp:582
 #, fuzzy, kde-format
 msgid "&Update Recursively"
 msgstr "ធ្វើ​បច្ចុប្បន្នភាព​ដោយ​សរសេរ​ជាប់​គ្នា​ឡើងវិញ​"
 
-#: cervisiapart.cpp:584
+#: cervisiapart.cpp:585
 #, fuzzy, kde-format
 msgid "Determines whether updates are recursive"
 msgstr "កំណត់​ថា​តើ​ធ្វើ​បច្ចុប្បន្ន​គឺ​សរសេរ​ជាប់​គ្នា​ឡើងវិញ​"
 
-#: cervisiapart.cpp:588
+#: cervisiapart.cpp:589
 #, fuzzy, kde-format
 msgid "C&ommit && Remove Recursively"
 msgstr "យក &ommit ចេញ​ដែល​​សរសេរ​ជាប់​​គ្នា​ឡើង​វិញ​"
 
-#: cervisiapart.cpp:591
+#: cervisiapart.cpp:592
 #, fuzzy, kde-format
 msgid "Determines whether commits and removes are recursive"
 msgstr "កំណត់​ថា​តើ​ commits និង​យក​ចេញ​ដែល​សរសេរ​ជាប់​គ្នា​"
 
-#: cervisiapart.cpp:595
+#: cervisiapart.cpp:596
 #, kde-format
 msgid "Do cvs &edit Automatically When Necessary"
 msgstr "កែសម្រួល​ cvs ដោយ​ស្វ័យ​ប្រវត្តិ​ នៅ​ពេល​ចាំបាច់​"
 
-#: cervisiapart.cpp:598
+#: cervisiapart.cpp:599
 #, fuzzy, kde-format
 msgid "Determines whether automatic cvs editing is active"
 msgstr "កំណត់​ថា​តើ​ការ​កែសម្រួល​ cvs ស្វ័យ​ប្រវត្តិ​​សកម្ម​"
 
-#: cervisiapart.cpp:602
+#: cervisiapart.cpp:603
 #, kde-format
 msgid "Configure Cervisia..."
 msgstr "កំណត់​រចនាសម្ព័ន្ធ​ Cervisia..."
 
-#: cervisiapart.cpp:605
+#: cervisiapart.cpp:606
 #, fuzzy, kde-format
 msgid "Allows you to configure the Cervisia KPart"
 msgstr "អនុញ្ញាត​ឲ្យ​កំណត់​រចនាសម្ព័ន្ធ​ Cervisia KPart"
 
-#: cervisiapart.cpp:613
+#: cervisiapart.cpp:614
 #, kde-format
 msgid "CVS &Manual"
 msgstr "សៀវភៅ​ដៃ​ CVS "
 
-#: cervisiapart.cpp:616
+#: cervisiapart.cpp:617
 #, kde-format
 msgid "Opens the help browser with the CVS documentation"
 msgstr "បើក​កម្មវិធី​រុករក​ជំនួយ​ជាមួយ​ឯកសារ​ CVS "
 
-#: cervisiapart.cpp:623
+#: cervisiapart.cpp:624
 #, fuzzy, kde-format
 msgid "Unfold Folder"
 msgstr "ថត​លាតត្រដាង​"
 
-#: cervisiapart.cpp:715
+#: cervisiapart.cpp:716
 #, kde-format
 msgid "Cervisia Part"
 msgstr "ផ្នែក​របស់​​ Cervisia"
 
-#: cervisiapart.cpp:717 main.cpp:140
+#: cervisiapart.cpp:718 main.cpp:140
 #, kde-format
 msgid "A CVS frontend"
 msgstr "ផ្នែក​ខាង​មុខ​របស់​ CVS "
 
-#: cervisiapart.cpp:719 main.cpp:142
+#: cervisiapart.cpp:720 main.cpp:142
 #, kde-format
 msgid ""
 "Copyright (c) 1999-2002 Bernd Gehrmann\n"
@@ -744,123 +744,123 @@ msgstr ""
 "រក្សាសិទ្ធិ​ឆ្នាំ​ ១៩៩៩-២០០២ ដោយ​ Bernd Gehrmann\n"
 "រក្សាសិទ្ធិ​ឆ្នាំ​ ២០០២-២០០៨ ដោយ​អ្នកនិពន្ធ​របស់​ Cervisia "
 
-#: cervisiapart.cpp:724 main.cpp:147
+#: cervisiapart.cpp:725 main.cpp:147
 #, kde-format
 msgid "Bernd Gehrmann"
 msgstr "Bernd Gehrmann"
 
-#: cervisiapart.cpp:725 main.cpp:148
+#: cervisiapart.cpp:726 main.cpp:148
 #, fuzzy, kde-format
 msgid "Original author and former maintainer"
 msgstr "អ្នក​និពន្ធ​ដើម​ និង​អ្នក​ថែទាំ​មុន"
 
-#: cervisiapart.cpp:728 main.cpp:151
+#: cervisiapart.cpp:729 main.cpp:151
 #, kde-format
 msgid "Christian Loose"
 msgstr "Christian Loose"
 
-#: cervisiapart.cpp:728 main.cpp:151
+#: cervisiapart.cpp:729 main.cpp:151
 #, kde-format
 msgid "Maintainer"
 msgstr "អ្នក​ថែទាំ​"
 
-#: cervisiapart.cpp:729 main.cpp:152
+#: cervisiapart.cpp:730 main.cpp:152
 #, kde-format
 msgid "André Wöbbeking"
 msgstr "André Wöbbeking"
 
-#: cervisiapart.cpp:729 main.cpp:152
+#: cervisiapart.cpp:730 main.cpp:152
 #, kde-format
 msgid "Developer"
 msgstr "អ្នក​អភិវឌ្ឍន៍​"
 
-#: cervisiapart.cpp:730 main.cpp:153
+#: cervisiapart.cpp:731 main.cpp:153
 #, kde-format
 msgid "Carlos Woelz"
 msgstr "Carlos Woelz"
 
-#: cervisiapart.cpp:730 main.cpp:153
+#: cervisiapart.cpp:731 main.cpp:153
 #, kde-format
 msgid "Documentation"
 msgstr "ឯកសារ​"
 
-#: cervisiapart.cpp:732 main.cpp:155
+#: cervisiapart.cpp:733 main.cpp:155
 #, fuzzy, kde-format
 msgid "Richard Moore"
 msgstr "Richard Moore"
 
-#: cervisiapart.cpp:732 main.cpp:155
+#: cervisiapart.cpp:733 main.cpp:155
 #, kde-format
 msgid "Conversion to KPart"
 msgstr "ការ​បម្លែង​ទៅកាន់​ KPart"
 
-#: cervisiapart.cpp:733 main.cpp:156
+#: cervisiapart.cpp:734 main.cpp:156
 #, kde-format
 msgid "Laurent Montel"
 msgstr "Laurent Montel"
 
-#: cervisiapart.cpp:733 main.cpp:156
+#: cervisiapart.cpp:734 main.cpp:156
 #, kde-format
 msgid "Conversion to D-Bus"
 msgstr "ការ​បម្លែង​ទៅកាន់​ D-Bus"
 
-#: cervisiapart.cpp:734 main.cpp:157
+#: cervisiapart.cpp:735 main.cpp:157
 #, kde-format
 msgid "Martin Koller"
 msgstr ""
 
-#: cervisiapart.cpp:734 main.cpp:157
+#: cervisiapart.cpp:735 main.cpp:157
 #, kde-format
 msgid "Port to KDE Frameworks 5"
 msgstr ""
 
-#: cervisiapart.cpp:741
+#: cervisiapart.cpp:742
 #, kde-format
 msgid "Open Sandbox"
 msgstr "បើក​ Sandbox"
 
-#: cervisiapart.cpp:791
+#: cervisiapart.cpp:792
 #, kde-format
 msgid "CVS Edit"
 msgstr "កែសម្រួល​ CVS "
 
-#: cervisiapart.cpp:1298 diffdialog.cpp:263 logdialog.cpp:472
+#: cervisiapart.cpp:1299 diffdialog.cpp:263 logdialog.cpp:472
 #, kde-format
 msgid "CVS Diff"
 msgstr "CVS Diff"
 
-#: cervisiapart.cpp:1311 diffdialog.cpp:473 logdialog.cpp:485
+#: cervisiapart.cpp:1312 diffdialog.cpp:473 logdialog.cpp:485
 #: resolvedialog.cpp:351
 #, kde-format
 msgid "Could not open file for writing."
 msgstr "មិន​អាច​បើក​ឯកសារ​ដើម្បី​សរសេរ​បាន​ឡើយ ។"
 
-#: cervisiapart.cpp:1461
+#: cervisiapart.cpp:1462
 #, fuzzy, kde-format
 msgid "The revision looks invalid."
 msgstr "មើល​ការ​ពិនិត្យ​ឡើងវិញ​មិន​ត្រឹមត្រូវ​ ។"
 
-#: cervisiapart.cpp:1465
+#: cervisiapart.cpp:1466
 #, fuzzy, kde-format
 msgid "This is the first revision of the branch."
 msgstr "នេះ​ជា​ការ​ពិនិត្យ​សាខា​ឡើងវិញ​ដំបូង​ ។"
 
-#: cervisiapart.cpp:1575
+#: cervisiapart.cpp:1576
 #, fuzzy, kde-format
 msgid "Invoking help on CVS"
 msgstr "ការ​ហៅ​ជំនួយ​លើ​​ CVS"
 
-#: cervisiapart.cpp:1610
+#: cervisiapart.cpp:1611
 #, kde-format
 msgid "Done"
 msgstr "ធ្វើ​រួច​"
 
-#: cervisiapart.cpp:1616
+#: cervisiapart.cpp:1617
 #, kde-format
 msgid "A CVS commit to repository %1 is done"
 msgstr "A CVS commit ទៅកាន់​ឃ្លាំង​ %1 ត្រូវ​បាន​ធ្វើ​រួច​ហើយ​"
 
-#: cervisiapart.cpp:1633
+#: cervisiapart.cpp:1634
 #, fuzzy, kde-format
 msgid ""
 "This is not a CVS folder.\n"
@@ -884,22 +884,22 @@ msgstr "បាន​ប្រើ​ពណ៌​ផ្ទៃ​ខាងមុខ
 msgid "Delay (ms) until the progress dialog appears."
 msgstr "ពន្យារពេល​ (មិល្លី​វិនាទី​) រហូត​ដល់​ប្រអប់​វឌ្ឍនភាព​លេចឡើង​ ។"
 
-#: cervisiashell.cpp:54
+#: cervisiashell.cpp:53
 #, fuzzy, kde-format
 msgid "The Cervisia library could not be loaded."
 msgstr "បណ្ណាល័យ​ Cervisia មិន​អាច​ត្រូវ​បា​ផ្ទុក​ឡើយ​ ។"
 
-#: cervisiashell.cpp:86
+#: cervisiashell.cpp:85
 #, kde-format
 msgid "Allows you to configure the toolbar"
 msgstr "អនុញ្ញាត​ឲ្យ​អ្នក​កំណត់​រចនាសម្ព័ន្ធ​របារ​ឧបករណ៍​"
 
-#: cervisiashell.cpp:91
+#: cervisiashell.cpp:90
 #, fuzzy, kde-format
 msgid "Allows you to customize the keybindings"
 msgstr "អនុញ្ញាត​ឲ្យ​អ្នក​ប្ដូរ keybindings​ តាម​បំណង​"
 
-#: cervisiashell.cpp:96
+#: cervisiashell.cpp:95
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "ចេញ​ Cervisia"

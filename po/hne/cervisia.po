@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:37+0000\n"
+"POT-Creation-Date: 2025-02-03 01:53+0000\n"
 "PO-Revision-Date: 2009-03-01 09:10+0530\n"
 "Last-Translator: Ravishankar Shrivastava <raviratlami@aol.in>\n"
 "Language-Team: Hindi <kde-i18n-doc@lists.kde.org>\n"
@@ -157,35 +157,35 @@ msgstr ""
 msgid "Go to line number:"
 msgstr ""
 
-#: cervisiapart.cpp:111 main.cpp:138
+#: cervisiapart.cpp:112 main.cpp:138
 #, kde-format
 msgid "Cervisia"
 msgstr "सर्विसिया"
 
-#: cervisiapart.cpp:118
+#: cervisiapart.cpp:119
 #, kde-format
 msgid "Starting cvsservice failed with message: "
 msgstr "सीवीएससर्विस के चालू होना ए संदेस के साथ फेल होइस:"
 
-#: cervisiapart.cpp:148
+#: cervisiapart.cpp:149
 #, kde-format
 msgid ""
 "This KPart is non-functional, because the cvs D-Bus service could not be "
 "started."
 msgstr "ये के-पार्ट नान-फंक्सनल हे, काबर कि सीवीएस डी-बस सेवा चालू नइ कर सकिस."
 
-#: cervisiapart.cpp:186
+#: cervisiapart.cpp:187
 #, kde-format
 msgid "Remote CVS working folders are not supported."
 msgstr "रिमोट सीवीएस काम वाले फोल्डर समर्थित नइ हे."
 
-#: cervisiapart.cpp:194
+#: cervisiapart.cpp:195
 #, kde-format
 msgid ""
 "You cannot change to a different folder while there is a running cvs job."
 msgstr "जब कोनो सीवीएस काम चलत होही तहां आप मन कोनो अउ फोल्डर मं बदल नइ सकहू."
 
-#: cervisiapart.cpp:214
+#: cervisiapart.cpp:215
 #, kde-format
 msgid ""
 "F - All files are hidden, the tree shows only folders\n"
@@ -196,548 +196,548 @@ msgstr ""
 "N - सब्बो अपडेट फाइल मन ल लुकाए हे\n"
 "R - सब्बो मिटाय गे फाइल मन ल लुकाए हे"
 
-#: cervisiapart.cpp:227
+#: cervisiapart.cpp:228
 #, fuzzy, kde-format
 #| msgid "O&pen Sandbox..."
 msgid "Open Sandbox..."
 msgstr "सेंडबाक्स खोलव... (&p)"
 
-#: cervisiapart.cpp:231
+#: cervisiapart.cpp:232
 #, kde-format
 msgid "Opens a CVS working folder in the main window"
 msgstr "मुख्य विंडो मं एक सीवीएस काम वाले फोल्डर खोलथे "
 
-#: cervisiapart.cpp:235
+#: cervisiapart.cpp:236
 #, kde-format
 msgid "Recent Sandboxes"
 msgstr "हाल केसेंडबाक्सेस"
 
-#: cervisiapart.cpp:239
+#: cervisiapart.cpp:240
 #, kde-format
 msgid "&Insert ChangeLog Entry..."
 msgstr "चेंज लाग प्रविस्टि भरव... (&I)"
 
-#: cervisiapart.cpp:242
+#: cervisiapart.cpp:243
 #, kde-format
 msgid "Inserts a new intro into the file ChangeLog in the toplevel folder"
 msgstr "सीर्स स्तर के फोल्डर मं फाइल चेंजलाग मं नवा इंट्रो भरव करथे "
 
-#: cervisiapart.cpp:246
+#: cervisiapart.cpp:247
 #, kde-format
 msgid "&Update"
 msgstr "अपडेट (&U)"
 
-#: cervisiapart.cpp:250
+#: cervisiapart.cpp:251
 #, kde-format
 msgid "Updates (cvs update) the selected files and folders"
 msgstr "चुने गे फाइल मन ल अउ फोल्डर ल अपडेट (cvs update) करथे "
 
-#: cervisiapart.cpp:254
+#: cervisiapart.cpp:255
 #, kde-format
 msgid "&Status"
 msgstr "स्थिति (&S)"
 
-#: cervisiapart.cpp:258
+#: cervisiapart.cpp:259
 #, kde-format
 msgid "Updates the status (cvs -n update) of the selected files and folders"
 msgstr "चुने गे फाइल मन ल अउ फोल्डर के स्थिति ल अपडेट (cvs -n update) करथे "
 
-#: cervisiapart.cpp:262 resolvedialog.cpp:176
+#: cervisiapart.cpp:263 resolvedialog.cpp:176
 #, kde-format
 msgid "&Edit"
 msgstr "संपादन (&E)"
 
-#: cervisiapart.cpp:265
+#: cervisiapart.cpp:266
 #, kde-format
 msgid "Opens the marked file for editing"
 msgstr "चिनहित फाइल ल संपादन बर खोलथे "
 
-#: cervisiapart.cpp:269
+#: cervisiapart.cpp:270
 #, kde-format
 msgid "Reso&lve..."
 msgstr "निराकरन... (&l)"
 
-#: cervisiapart.cpp:272
+#: cervisiapart.cpp:273
 #, kde-format
 msgid "Opens the resolve dialog with the selected file"
 msgstr "चुने गे फाइल के साथ निराकरन गोठ खोलथे "
 
-#: cervisiapart.cpp:276
+#: cervisiapart.cpp:277
 #, kde-format
 msgid "&Commit..."
 msgstr "कमिट... (&C)"
 
-#: cervisiapart.cpp:280
+#: cervisiapart.cpp:281
 #, kde-format
 msgid "Commits the selected files"
 msgstr "चुने गे फाइल मन ल कमिट करव"
 
-#: cervisiapart.cpp:284
+#: cervisiapart.cpp:285
 #, kde-format
 msgid "&Add to Repository..."
 msgstr "रेपासिटरी मं जोड़व... (&A)"
 
-#: cervisiapart.cpp:287
+#: cervisiapart.cpp:288
 #, kde-format
 msgid "Add"
 msgstr "जोड़व"
 
-#: cervisiapart.cpp:289
+#: cervisiapart.cpp:290
 #, kde-format
 msgid "Adds (cvs add) the selected files to the repository"
 msgstr "चुने गे फाइल मन ल भंडार मं (cvs add) जोड़थे "
 
-#: cervisiapart.cpp:293
+#: cervisiapart.cpp:294
 #, kde-format
 msgid "Add &Binary..."
 msgstr "द्विचर जोडें... (&B)"
 
-#: cervisiapart.cpp:296
+#: cervisiapart.cpp:297
 #, kde-format
 msgid "Adds (cvs -kb add) the selected files as binaries to the repository"
 msgstr "चुने गे फाइल मन ल द्विचर रूप मं भंडार मं (cvs -kb add) जोड़थे "
 
-#: cervisiapart.cpp:300
+#: cervisiapart.cpp:301
 #, kde-format
 msgid "&Remove From Repository..."
 msgstr "भन्डार से मेटाव... (&R)"
 
-#: cervisiapart.cpp:303 repositorydialog.cpp:201
+#: cervisiapart.cpp:304 repositorydialog.cpp:201
 #, kde-format
 msgid "Remove"
 msgstr "हटाव"
 
-#: cervisiapart.cpp:305
+#: cervisiapart.cpp:306
 #, kde-format
 msgid "Removes (cvs remove) the selected files from the repository"
 msgstr "(सीवीएस रीमूव) चुने गे फाइल मन ल भन्डार से मिटाथे "
 
-#: cervisiapart.cpp:309
+#: cervisiapart.cpp:310
 #, kde-format
 msgid "Rever&t"
 msgstr "पीछू करव (&t)"
 
-#: cervisiapart.cpp:312
+#: cervisiapart.cpp:313
 #, kde-format
 msgid "Reverts (cvs update -C) the selected files (only cvs 1.11)"
 msgstr "चुने गे फाइल मन ल (सिरिफ सीवीएस 1.11) रिवर्ट (cvs update -C) करथे "
 
-#: cervisiapart.cpp:316
+#: cervisiapart.cpp:317
 #, kde-format
 msgid "&Properties"
 msgstr "गुन (&P)"
 
-#: cervisiapart.cpp:323
+#: cervisiapart.cpp:324
 #, kde-format
 msgid "Stop"
 msgstr "रुकव"
 
-#: cervisiapart.cpp:328
+#: cervisiapart.cpp:329
 #, kde-format
 msgid "Stops any running sub-processes"
 msgstr "कोई चलती उप-काम मन ल रोकथे "
 
-#: cervisiapart.cpp:332
+#: cervisiapart.cpp:333
 #, kde-format
 msgid "Browse &Log..."
 msgstr "लाग ब्राउज करव... (&L)"
 
-#: cervisiapart.cpp:336
+#: cervisiapart.cpp:337
 #, kde-format
 msgid "Shows the revision tree of the selected file"
 msgstr "चुने गे फाइल मन के संसोधन ट्री देखाथे "
 
-#: cervisiapart.cpp:341
+#: cervisiapart.cpp:342
 #, kde-format
 msgid "Browse Multi-File Log..."
 msgstr "बहु-फाइल लाग ब्राउज करव..."
 
-#: cervisiapart.cpp:345
+#: cervisiapart.cpp:346
 #, kde-format
 msgid "&Annotate..."
 msgstr "एन्नोटेट... (&A)"
 
-#: cervisiapart.cpp:349
+#: cervisiapart.cpp:350
 #, kde-format
 msgid "Shows a blame-annotated view of the selected file"
 msgstr "चुने गे फाइल मन के ब्लेम-एन्नोटेटेड दृस्य देखाथे "
 
-#: cervisiapart.cpp:353
+#: cervisiapart.cpp:354
 #, kde-format
 msgid "&Difference to Repository (BASE)..."
 msgstr "भंडार (बेस) मं भिन्नता... (&D)"
 
-#: cervisiapart.cpp:357
+#: cervisiapart.cpp:358
 #, kde-format
 msgid ""
 "Shows the differences of the selected file to the checked out version (tag "
 "BASE)"
 msgstr "चुने गे फाइल अउ चेक्ड आउट संस्करन के बीच के भिन्नता देखाथे  (टैग BASE)"
 
-#: cervisiapart.cpp:361
+#: cervisiapart.cpp:362
 #, kde-format
 msgid "Difference to Repository (HEAD)..."
 msgstr "भंडार (सीर्स) मं भिन्नता..."
 
-#: cervisiapart.cpp:365
+#: cervisiapart.cpp:366
 #, kde-format
 msgid ""
 "Shows the differences of the selected file to the newest version in the "
 "repository (tag HEAD)"
 msgstr "रेपासिटरी (टैग हेड) मं चुने गे फाइल अउ नवीन संस्करन के बीच भिन्नता देखाथे "
 
-#: cervisiapart.cpp:369
+#: cervisiapart.cpp:370
 #, kde-format
 msgid "Last &Change..."
 msgstr "आखरी बदलाव... (&C)"
 
-#: cervisiapart.cpp:372
+#: cervisiapart.cpp:373
 #, kde-format
 msgid ""
 "Shows the differences between the last two revisions of the selected file"
 msgstr "चुने गे फाइल के आखरी दो रिवीजनों के बीच के भिन्नता देखाथे "
 
-#: cervisiapart.cpp:376
+#: cervisiapart.cpp:377
 #, kde-format
 msgid "&History..."
 msgstr "इतिहास....(&H)"
 
-#: cervisiapart.cpp:379
+#: cervisiapart.cpp:380
 #, kde-format
 msgid "Shows the CVS history as reported by the server"
 msgstr "सर्वर से रिपोट करे सीवीएस इतिहास ल देखाथे "
 
-#: cervisiapart.cpp:383
+#: cervisiapart.cpp:384
 #, kde-format
 msgid "&Unfold File Tree"
 msgstr "फाइल ट्री अनफोल्ड करव (&U)"
 
-#: cervisiapart.cpp:387
+#: cervisiapart.cpp:388
 #, kde-format
 msgid "Opens all branches of the file tree"
 msgstr "फाइल ट्री के सब्बो साखाओं ल खोलथे "
 
-#: cervisiapart.cpp:391
+#: cervisiapart.cpp:392
 #, kde-format
 msgid "&Fold File Tree"
 msgstr "फाइल ट्री फोल्ड करव (&F)"
 
-#: cervisiapart.cpp:394
+#: cervisiapart.cpp:395
 #, kde-format
 msgid "Closes all branches of the file tree"
 msgstr "फाइल ट्री के सब्बो साखाओं ल बन्द करथे "
 
-#: cervisiapart.cpp:401
+#: cervisiapart.cpp:402
 #, kde-format
 msgid "&Tag/Branch..."
 msgstr "टैग/साखा... (&T)"
 
-#: cervisiapart.cpp:404
+#: cervisiapart.cpp:405
 #, kde-format
 msgid "Creates a tag or branch for the selected files"
 msgstr "चुने गे फाइल मन के टैग या साखा बनाथे "
 
-#: cervisiapart.cpp:408
+#: cervisiapart.cpp:409
 #, kde-format
 msgid "&Delete Tag..."
 msgstr "टैग मेटाव... (&D)"
 
-#: cervisiapart.cpp:411
+#: cervisiapart.cpp:412
 #, kde-format
 msgid "Deletes a tag from the selected files"
 msgstr "चुने गे फाइल मन ल टैग मिटाथे "
 
-#: cervisiapart.cpp:415
+#: cervisiapart.cpp:416
 #, kde-format
 msgid "&Update to Tag/Date..."
 msgstr "टैग/तारीक मं अपडेट करव... (&U)"
 
-#: cervisiapart.cpp:418
+#: cervisiapart.cpp:419
 #, kde-format
 msgid "Updates the selected files to a given tag, branch or date"
 msgstr "चुने गे फाइल ल दे गे टैग, साखा या तारीक से अपडेट करथे "
 
-#: cervisiapart.cpp:422
+#: cervisiapart.cpp:423
 #, kde-format
 msgid "Update to &HEAD"
 msgstr "सीर्स मं अपडेट करव (&H)"
 
-#: cervisiapart.cpp:425
+#: cervisiapart.cpp:426
 #, kde-format
 msgid "Updates the selected files to the HEAD revision"
 msgstr "चुने गे फाइल मन के सीर्स संसोधन अपडेट करथे "
 
-#: cervisiapart.cpp:429
+#: cervisiapart.cpp:430
 #, kde-format
 msgid "&Merge..."
 msgstr "मिलाव... (&M)"
 
-#: cervisiapart.cpp:432
+#: cervisiapart.cpp:433
 #, kde-format
 msgid "Merges a branch or a set of modifications into the selected files"
 msgstr "साखा या परिवर्धनों के सेट ल चुने गे फाइल मन सामिल करथे "
 
-#: cervisiapart.cpp:436
+#: cervisiapart.cpp:437
 #, kde-format
 msgid "&Add Watch..."
 msgstr "पहरा जोड़व... (&A)"
 
-#: cervisiapart.cpp:439
+#: cervisiapart.cpp:440
 #, kde-format
 msgid "Adds a watch for the selected files"
 msgstr "चुने गे फाइल मन बर पहरा जोड़व"
 
-#: cervisiapart.cpp:443
+#: cervisiapart.cpp:444
 #, kde-format
 msgid "&Remove Watch..."
 msgstr "पहरा मेटाव... (&R)"
 
-#: cervisiapart.cpp:446
+#: cervisiapart.cpp:447
 #, kde-format
 msgid "Removes a watch from the selected files"
 msgstr "चुने गे फाइल मन ल पहरा मेटाव"
 
-#: cervisiapart.cpp:450
+#: cervisiapart.cpp:451
 #, kde-format
 msgid "Show &Watchers"
 msgstr "पहरेदार देखाव (&W)"
 
-#: cervisiapart.cpp:453
+#: cervisiapart.cpp:454
 #, kde-format
 msgid "Shows the watchers of the selected files"
 msgstr "चुने गे फाइल मन बर पहरेदार देखाव"
 
-#: cervisiapart.cpp:457
+#: cervisiapart.cpp:458
 #, kde-format
 msgid "Ed&it Files"
 msgstr "फाइल मन के संपादन करव (&i)"
 
-#: cervisiapart.cpp:460
+#: cervisiapart.cpp:461
 #, kde-format
 msgid "Edits (cvs edit) the selected files"
 msgstr "(सीवीएस संपादन) चुने गे फाइल मन ल संपादित करथे "
 
-#: cervisiapart.cpp:464
+#: cervisiapart.cpp:465
 #, kde-format
 msgid "U&nedit Files"
 msgstr "फाइल मन ल अका संपादन करव (&n)"
 
-#: cervisiapart.cpp:467
+#: cervisiapart.cpp:468
 #, kde-format
 msgid "Unedits (cvs unedit) the selected files"
 msgstr "(सीवीएस असंपादन) चुने गे फाइल मन ल असंपादित करथे "
 
-#: cervisiapart.cpp:471
+#: cervisiapart.cpp:472
 #, kde-format
 msgid "Show &Editors"
 msgstr "संपादक देखाव (&E)"
 
-#: cervisiapart.cpp:474
+#: cervisiapart.cpp:475
 #, kde-format
 msgid "Shows the editors of the selected files"
 msgstr "चुने गे फाइल मन के संपादक देखाथे "
 
-#: cervisiapart.cpp:478
+#: cervisiapart.cpp:479
 #, kde-format
 msgid "&Lock Files"
 msgstr "फाइल मन ल तालाबंद करव (&L)"
 
-#: cervisiapart.cpp:481
+#: cervisiapart.cpp:482
 #, kde-format
 msgid "Locks the selected files, so that others cannot modify them"
 msgstr "चुने गे फाइल मन ल तालाबंद करथे , जेखर से अउ ओ मन ल परिवर्धित नइ कर सकें"
 
-#: cervisiapart.cpp:485
+#: cervisiapart.cpp:486
 #, kde-format
 msgid "Unl&ock Files"
 msgstr "फाइल मन से तालाबंदी हटाव (&o)"
 
-#: cervisiapart.cpp:488
+#: cervisiapart.cpp:489
 #, kde-format
 msgid "Unlocks the selected files"
 msgstr "चुने गे फाइल मन के तालाबंदी हटाव"
 
-#: cervisiapart.cpp:492
+#: cervisiapart.cpp:493
 #, kde-format
 msgid "Create &Patch Against Repository..."
 msgstr "रेपोसिटरी के विरूद्ध पैच तैयार करव... (&P)"
 
-#: cervisiapart.cpp:495
+#: cervisiapart.cpp:496
 #, kde-format
 msgid "Creates a patch from the modifications in your sandbox"
 msgstr "आप मन के सेंडबक्से मं परिवर्धनों के पैच बनाथे "
 
-#: cervisiapart.cpp:502
+#: cervisiapart.cpp:503
 #, kde-format
 msgid "&Create..."
 msgstr "बनाव... (&C)"
 
-#: cervisiapart.cpp:506
+#: cervisiapart.cpp:507
 #, kde-format
 msgid "&Checkout..."
 msgstr "चेकआउट... (&C)"
 
-#: cervisiapart.cpp:509
+#: cervisiapart.cpp:510
 #, kde-format
 msgid "Allows you to checkout a module from a repository"
 msgstr "रेपासिटरी से माड्यूल चैकआउट करन देथे "
 
-#: cervisiapart.cpp:513
+#: cervisiapart.cpp:514
 #, kde-format
 msgid "&Import..."
 msgstr "आयात... (&I)"
 
-#: cervisiapart.cpp:516
+#: cervisiapart.cpp:517
 #, kde-format
 msgid "Allows you to import a module into a repository"
 msgstr "रेपासिटरी मं आप मन ल माड्यूल आयात करन देथे "
 
-#: cervisiapart.cpp:520
+#: cervisiapart.cpp:521
 #, kde-format
 msgid "&Repositories..."
 msgstr "रेपासिटरीज... (&R)"
 
-#: cervisiapart.cpp:523
+#: cervisiapart.cpp:524
 #, kde-format
 msgid "Configures a list of repositories you regularly use"
 msgstr "जो आप मन नियमित उपयोग करथो ओ रेपासिटरी के सूची कान्फिगर करथे "
 
-#: cervisiapart.cpp:530
+#: cervisiapart.cpp:531
 #, kde-format
 msgid "Hide All &Files"
 msgstr "सब्बो फाइल मन ल लुकाव (&F)"
 
-#: cervisiapart.cpp:533
+#: cervisiapart.cpp:534
 #, kde-format
 msgid "Determines whether only folders are shown"
 msgstr "तय करथे  कि का सिरिफ फोल्डर देखाव"
 
-#: cervisiapart.cpp:537
+#: cervisiapart.cpp:538
 #, kde-format
 msgid "Hide Unmodified Files"
 msgstr "अपरिवर्धित फाइल मन ल लुकाव"
 
-#: cervisiapart.cpp:541
+#: cervisiapart.cpp:542
 #, kde-format
 msgid "Determines whether files with status up-to-date or unknown are hidden"
 msgstr "तय करथे  कि अपडेट करे गे या अग्यात फाइल मन ल लुकाए हे"
 
-#: cervisiapart.cpp:546
+#: cervisiapart.cpp:547
 #, kde-format
 msgid "Hide Removed Files"
 msgstr "मिटाय गे फाइल मन ल लुकाव"
 
-#: cervisiapart.cpp:549
+#: cervisiapart.cpp:550
 #, kde-format
 msgid "Determines whether removed files are hidden"
 msgstr "तय करथे  कि मिटाय गे फाइल मन ल लुकाव या नइ"
 
-#: cervisiapart.cpp:553
+#: cervisiapart.cpp:554
 #, kde-format
 msgid "Hide Non-CVS Files"
 msgstr "नान-सीवीएस फाइल मन ल लुकाव"
 
-#: cervisiapart.cpp:556
+#: cervisiapart.cpp:557
 #, kde-format
 msgid "Determines whether files not in CVS are hidden"
 msgstr "तय करथे  कि जऊन फाइल मन ल सीवीएस मं नइ हे, ओला लुकाव या नइ"
 
-#: cervisiapart.cpp:560
+#: cervisiapart.cpp:561
 #, kde-format
 msgid "Hide Empty Folders"
 msgstr "खाली फोल्डर लुकाव"
 
-#: cervisiapart.cpp:563
+#: cervisiapart.cpp:564
 #, kde-format
 msgid "Determines whether folders without visible entries are hidden"
 msgstr "तय करथे  कि जऊन फोल्डर दिखत प्रविस्टि के साथ नइ हे, ओला लुकाव या नइ"
 
-#: cervisiapart.cpp:567
+#: cervisiapart.cpp:568
 #, kde-format
 msgid "Create &Folders on Update"
 msgstr "अपडेट करे मं फोल्डर बनाव (&F)"
 
-#: cervisiapart.cpp:570
+#: cervisiapart.cpp:571
 #, kde-format
 msgid "Determines whether updates create folders"
 msgstr "तय करथे  कि अपडेट करे मं फोल्डर बनाव या नइ"
 
-#: cervisiapart.cpp:574
+#: cervisiapart.cpp:575
 #, kde-format
 msgid "&Prune Empty Folders on Update"
 msgstr "अपडेट करे मं खाली फोल्डर छांटव (&P)"
 
-#: cervisiapart.cpp:577
+#: cervisiapart.cpp:578
 #, kde-format
 msgid "Determines whether updates remove empty folders"
 msgstr "तय करथे  कि अपडेट करे मं खाली फोल्डर मेटाव या नइ"
 
-#: cervisiapart.cpp:581
+#: cervisiapart.cpp:582
 #, kde-format
 msgid "&Update Recursively"
 msgstr "रीकर्सिवली अपडेट करव (&U)"
 
-#: cervisiapart.cpp:584
+#: cervisiapart.cpp:585
 #, kde-format
 msgid "Determines whether updates are recursive"
 msgstr "तय करथे  कि अपडेट रीकर्सिव करव या नइ"
 
-#: cervisiapart.cpp:588
+#: cervisiapart.cpp:589
 #, kde-format
 msgid "C&ommit && Remove Recursively"
 msgstr "भंडारित करव अउ मेटाव रीकर्सिवली (&o)"
 
-#: cervisiapart.cpp:591
+#: cervisiapart.cpp:592
 #, kde-format
 msgid "Determines whether commits and removes are recursive"
 msgstr "तय करथे  कि भंडारन अउ मिटाना रीकर्सिव हे या नइ"
 
-#: cervisiapart.cpp:595
+#: cervisiapart.cpp:596
 #, kde-format
 msgid "Do cvs &edit Automatically When Necessary"
 msgstr "जब जरूरी होथे सीवीएस संपादन अपने अपन करव (&e)"
 
-#: cervisiapart.cpp:598
+#: cervisiapart.cpp:599
 #, kde-format
 msgid "Determines whether automatic cvs editing is active"
 msgstr "निरधारित करथे  कि का अपने अपन सीवीएस संपादन सक्रिय हे"
 
-#: cervisiapart.cpp:602
+#: cervisiapart.cpp:603
 #, kde-format
 msgid "Configure Cervisia..."
 msgstr "सर्विसिया कान्फिगर करव..."
 
-#: cervisiapart.cpp:605
+#: cervisiapart.cpp:606
 #, kde-format
 msgid "Allows you to configure the Cervisia KPart"
 msgstr "आप मन ल सर्विसिया के-पार्ट कान्फिगर करन देथे "
 
-#: cervisiapart.cpp:613
+#: cervisiapart.cpp:614
 #, kde-format
 msgid "CVS &Manual"
 msgstr "सीवीएस मैनुअल (&M)"
 
-#: cervisiapart.cpp:616
+#: cervisiapart.cpp:617
 #, kde-format
 msgid "Opens the help browser with the CVS documentation"
 msgstr "मदद ब्राउजर ल सीवीएस कागद के साथ खोलथे "
 
-#: cervisiapart.cpp:623
+#: cervisiapart.cpp:624
 #, kde-format
 msgid "Unfold Folder"
 msgstr "फोल्डर अनफोल्ड करव"
 
-#: cervisiapart.cpp:715
+#: cervisiapart.cpp:716
 #, kde-format
 msgid "Cervisia Part"
 msgstr "सर्विसिया पार्ट"
 
-#: cervisiapart.cpp:717 main.cpp:140
+#: cervisiapart.cpp:718 main.cpp:140
 #, kde-format
 msgid "A CVS frontend"
 msgstr "सीवीएस फ्रन्टएन्ड"
 
-#: cervisiapart.cpp:719 main.cpp:142
+#: cervisiapart.cpp:720 main.cpp:142
 #, kde-format
 msgid ""
 "Copyright (c) 1999-2002 Bernd Gehrmann\n"
@@ -746,123 +746,123 @@ msgstr ""
 "कापीराइट (c) 1999-2002 बेर्न्द गेहर्मन\n"
 "कापीराइट (c) 2002-2008 सर्विसिया लिखइया मन"
 
-#: cervisiapart.cpp:724 main.cpp:147
+#: cervisiapart.cpp:725 main.cpp:147
 #, kde-format
 msgid "Bernd Gehrmann"
 msgstr "बर्नद गेहमन"
 
-#: cervisiapart.cpp:725 main.cpp:148
+#: cervisiapart.cpp:726 main.cpp:148
 #, kde-format
 msgid "Original author and former maintainer"
 msgstr "मूल लेखक अउ पहिली के मेंटेनर"
 
-#: cervisiapart.cpp:728 main.cpp:151
+#: cervisiapart.cpp:729 main.cpp:151
 #, kde-format
 msgid "Christian Loose"
 msgstr "क्रिस्चियन लूज"
 
-#: cervisiapart.cpp:728 main.cpp:151
+#: cervisiapart.cpp:729 main.cpp:151
 #, kde-format
 msgid "Maintainer"
 msgstr "मेंटेनर"
 
-#: cervisiapart.cpp:729 main.cpp:152
+#: cervisiapart.cpp:730 main.cpp:152
 #, kde-format
 msgid "André Wöbbeking"
 msgstr "आंद्रे वाबेकिंग"
 
-#: cervisiapart.cpp:729 main.cpp:152
+#: cervisiapart.cpp:730 main.cpp:152
 #, kde-format
 msgid "Developer"
 msgstr "डेवलपर"
 
-#: cervisiapart.cpp:730 main.cpp:153
+#: cervisiapart.cpp:731 main.cpp:153
 #, kde-format
 msgid "Carlos Woelz"
 msgstr "कार्लोस वोएल्ज"
 
-#: cervisiapart.cpp:730 main.cpp:153
+#: cervisiapart.cpp:731 main.cpp:153
 #, kde-format
 msgid "Documentation"
 msgstr "कागद लिखना"
 
-#: cervisiapart.cpp:732 main.cpp:155
+#: cervisiapart.cpp:733 main.cpp:155
 #, kde-format
 msgid "Richard Moore"
 msgstr "रिचर्ड मूर"
 
-#: cervisiapart.cpp:732 main.cpp:155
+#: cervisiapart.cpp:733 main.cpp:155
 #, kde-format
 msgid "Conversion to KPart"
 msgstr "के-पार्ट मं बदलव"
 
-#: cervisiapart.cpp:733 main.cpp:156
+#: cervisiapart.cpp:734 main.cpp:156
 #, kde-format
 msgid "Laurent Montel"
 msgstr "लारेंट मोंटेल"
 
-#: cervisiapart.cpp:733 main.cpp:156
+#: cervisiapart.cpp:734 main.cpp:156
 #, kde-format
 msgid "Conversion to D-Bus"
 msgstr "डी-बस मं बदलाव"
 
-#: cervisiapart.cpp:734 main.cpp:157
+#: cervisiapart.cpp:735 main.cpp:157
 #, kde-format
 msgid "Martin Koller"
 msgstr ""
 
-#: cervisiapart.cpp:734 main.cpp:157
+#: cervisiapart.cpp:735 main.cpp:157
 #, kde-format
 msgid "Port to KDE Frameworks 5"
 msgstr ""
 
-#: cervisiapart.cpp:741
+#: cervisiapart.cpp:742
 #, kde-format
 msgid "Open Sandbox"
 msgstr "सेंडबाक्स खोलव"
 
-#: cervisiapart.cpp:791
+#: cervisiapart.cpp:792
 #, kde-format
 msgid "CVS Edit"
 msgstr "सीवीएस के संपादन करव"
 
-#: cervisiapart.cpp:1298 diffdialog.cpp:263 logdialog.cpp:472
+#: cervisiapart.cpp:1299 diffdialog.cpp:263 logdialog.cpp:472
 #, kde-format
 msgid "CVS Diff"
 msgstr "सीवीएस डिफ"
 
-#: cervisiapart.cpp:1311 diffdialog.cpp:473 logdialog.cpp:485
+#: cervisiapart.cpp:1312 diffdialog.cpp:473 logdialog.cpp:485
 #: resolvedialog.cpp:351
 #, kde-format
 msgid "Could not open file for writing."
 msgstr "लिखे बर फाइल खोल नइ सकिस."
 
-#: cervisiapart.cpp:1461
+#: cervisiapart.cpp:1462
 #, kde-format
 msgid "The revision looks invalid."
 msgstr "संसोधन अवैध लगथे ."
 
-#: cervisiapart.cpp:1465
+#: cervisiapart.cpp:1466
 #, kde-format
 msgid "This is the first revision of the branch."
 msgstr "ये साखा के पहिली संसोधन हे."
 
-#: cervisiapart.cpp:1575
+#: cervisiapart.cpp:1576
 #, kde-format
 msgid "Invoking help on CVS"
 msgstr "सीवीएस मं मदद मांग रहे"
 
-#: cervisiapart.cpp:1610
+#: cervisiapart.cpp:1611
 #, kde-format
 msgid "Done"
 msgstr "पूरा"
 
-#: cervisiapart.cpp:1616
+#: cervisiapart.cpp:1617
 #, kde-format
 msgid "A CVS commit to repository %1 is done"
 msgstr "रेपासिटरी %1 मं सीवीएस कमिट पूरा"
 
-#: cervisiapart.cpp:1633
+#: cervisiapart.cpp:1634
 #, kde-format
 msgid ""
 "This is not a CVS folder.\n"
@@ -887,22 +887,22 @@ msgstr "फाइल दृस्य मं अंर्विरोध सह�
 msgid "Delay (ms) until the progress dialog appears."
 msgstr "जब तक कि प्रगति गोठ प्रकट होथे  तब तक के देरी."
 
-#: cervisiashell.cpp:54
+#: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
 msgstr "सर्विसिया लाइब्रेरी लोड नइ कर सकिस. "
 
-#: cervisiashell.cpp:86
+#: cervisiashell.cpp:85
 #, kde-format
 msgid "Allows you to configure the toolbar"
 msgstr "आप मन ल औजार-पट्टी ल कान्फिगर करन देथे "
 
-#: cervisiashell.cpp:91
+#: cervisiashell.cpp:90
 #, kde-format
 msgid "Allows you to customize the keybindings"
 msgstr "आप मन ल कुंजी-बाइंडिंग्स मनमाफिक बनान देथे "
 
-#: cervisiashell.cpp:96
+#: cervisiashell.cpp:95
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "सर्विसिया से बाहिर जाव"

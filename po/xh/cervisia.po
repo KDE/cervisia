@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:37+0000\n"
+"POT-Creation-Date: 2025-02-03 01:53+0000\n"
 "PO-Revision-Date: 2002-11-14 16:55SAST\n"
 "Last-Translator: Lwandle Mgidlana <lwandle@translate.org.za>\n"
 "Language-Team: Xhosa <xhosa@translate.org.za>\n"
@@ -166,35 +166,35 @@ msgstr ""
 msgid "Go to line number:"
 msgstr ""
 
-#: cervisiapart.cpp:111 main.cpp:138
+#: cervisiapart.cpp:112 main.cpp:138
 #, kde-format
 msgid "Cervisia"
 msgstr "Cervisia"
 
-#: cervisiapart.cpp:118
+#: cervisiapart.cpp:119
 #, kde-format
 msgid "Starting cvsservice failed with message: "
 msgstr ""
 
-#: cervisiapart.cpp:148
+#: cervisiapart.cpp:149
 #, kde-format
 msgid ""
 "This KPart is non-functional, because the cvs D-Bus service could not be "
 "started."
 msgstr ""
 
-#: cervisiapart.cpp:186
+#: cervisiapart.cpp:187
 #, kde-format
 msgid "Remote CVS working folders are not supported."
 msgstr ""
 
-#: cervisiapart.cpp:194
+#: cervisiapart.cpp:195
 #, kde-format
 msgid ""
 "You cannot change to a different folder while there is a running cvs job."
 msgstr ""
 
-#: cervisiapart.cpp:214
+#: cervisiapart.cpp:215
 #, fuzzy, kde-format
 msgid ""
 "F - All files are hidden, the tree shows only folders\n"
@@ -205,683 +205,683 @@ msgstr ""
 "N - Zonke iifayile ezigqibekileyo zifihliwe\n"
 "R - Zonkle iifayile ezisusiweyo zifihliwe"
 
-#: cervisiapart.cpp:227
+#: cervisiapart.cpp:228
 #, fuzzy, kde-format
 #| msgid "O&pen Sandbox..."
 msgid "Open Sandbox..."
 msgstr "Vula "
 
-#: cervisiapart.cpp:231
+#: cervisiapart.cpp:232
 #, fuzzy, kde-format
 msgid "Opens a CVS working folder in the main window"
 msgstr "Ivula i CVS "
 
-#: cervisiapart.cpp:235
+#: cervisiapart.cpp:236
 #, kde-format
 msgid "Recent Sandboxes"
 msgstr "Iibhokisi"
 
-#: cervisiapart.cpp:239
+#: cervisiapart.cpp:240
 #, kde-format
 msgid "&Insert ChangeLog Entry..."
 msgstr "&Faka TshintshaLog Ungeno..."
 
-#: cervisiapart.cpp:242
+#: cervisiapart.cpp:243
 #, fuzzy, kde-format
 msgid "Inserts a new intro into the file ChangeLog in the toplevel folder"
 msgstr ""
 "Ifaka uqalo olutsha kwifayile ye ChangeLog kwisilawuli kumphakamoophezulu"
 
-#: cervisiapart.cpp:246
+#: cervisiapart.cpp:247
 #, fuzzy, kde-format
 msgid "&Update"
 msgstr "Igqityiwe"
 
-#: cervisiapart.cpp:250
+#: cervisiapart.cpp:251
 #, fuzzy, kde-format
 msgid "Updates (cvs update) the selected files and folders"
 msgstr ""
 "Yenza kugqibeke (ulwenzo lugqibeke lwe cvs) ifayile ekhethiweyo nabalawuli"
 
-#: cervisiapart.cpp:254
+#: cervisiapart.cpp:255
 #, kde-format
 msgid "&Status"
 msgstr "&Indawo engatshintshiyo"
 
-#: cervisiapart.cpp:258
+#: cervisiapart.cpp:259
 #, fuzzy, kde-format
 msgid "Updates the status (cvs -n update) of the selected files and folders"
 msgstr ""
 "Yenza kugqibeke indawo esemthethjweni (cvs - n ulwenzo olugqibekileyo) "
 "yefayile ekhethiweyo nabalawuli"
 
-#: cervisiapart.cpp:262 resolvedialog.cpp:176
+#: cervisiapart.cpp:263 resolvedialog.cpp:176
 #, fuzzy, kde-format
 msgid "&Edit"
 msgstr "&Ihlela"
 
-#: cervisiapart.cpp:265
+#: cervisiapart.cpp:266
 #, kde-format
 msgid "Opens the marked file for editing"
 msgstr "Ivula ifayile ephawulweyo xa ufuna ukuhlela"
 
-#: cervisiapart.cpp:269
+#: cervisiapart.cpp:270
 #, kde-format
 msgid "Reso&lve..."
 msgstr "Sombul&ula..."
 
-#: cervisiapart.cpp:272
+#: cervisiapart.cpp:273
 #, kde-format
 msgid "Opens the resolve dialog with the selected file"
 msgstr "Ivula ukululo lwemboniselwano nge fayile ekhethiweyo"
 
-#: cervisiapart.cpp:276
+#: cervisiapart.cpp:277
 #, kde-format
 msgid "&Commit..."
 msgstr "&Bophelela..."
 
-#: cervisiapart.cpp:280
+#: cervisiapart.cpp:281
 #, kde-format
 msgid "Commits the selected files"
 msgstr "Ibophelela ifayile ezikhethiweyo"
 
-#: cervisiapart.cpp:284
+#: cervisiapart.cpp:285
 #, kde-format
 msgid "&Add to Repository..."
 msgstr "&Dibanisa kwindawo Yokugcina izinto..."
 
-#: cervisiapart.cpp:287
+#: cervisiapart.cpp:288
 #, fuzzy, kde-format
 #| msgid "CVS Add"
 msgid "Add"
 msgstr "Yongeza CVS"
 
-#: cervisiapart.cpp:289
+#: cervisiapart.cpp:290
 #, kde-format
 msgid "Adds (cvs add) the selected files to the repository"
 msgstr "Yongeza (cvs yongeza) ifayile ezikhethiweyo kwindawo yokugcina"
 
-#: cervisiapart.cpp:293
+#: cervisiapart.cpp:294
 #, kde-format
 msgid "Add &Binary..."
 msgstr "Yongeza &Kabini..."
 
-#: cervisiapart.cpp:296
+#: cervisiapart.cpp:297
 #, kde-format
 msgid "Adds (cvs -kb add) the selected files as binaries to the repository"
 msgstr ""
 "Yongeza (cvs -kb yongeza) ifayile ezikhethiweyo njengokwenzwe kabini "
 "kwindawo yogcino"
 
-#: cervisiapart.cpp:300
+#: cervisiapart.cpp:301
 #, fuzzy, kde-format
 msgid "&Remove From Repository..."
 msgstr "&Susa Kwindawo Yokugcina"
 
-#: cervisiapart.cpp:303 repositorydialog.cpp:201
+#: cervisiapart.cpp:304 repositorydialog.cpp:201
 #, fuzzy, kde-format
 #| msgid "Removed"
 msgid "Remove"
 msgstr "Isusiwe"
 
-#: cervisiapart.cpp:305
+#: cervisiapart.cpp:306
 #, kde-format
 msgid "Removes (cvs remove) the selected files from the repository"
 msgstr "Isusa (cvs susa) ifayile ekhethiweyo kwindawo yogcino"
 
-#: cervisiapart.cpp:309
+#: cervisiapart.cpp:310
 #, kde-format
 msgid "Rever&t"
 msgstr "Buyisel&a"
 
-#: cervisiapart.cpp:312
+#: cervisiapart.cpp:313
 #, kde-format
 msgid "Reverts (cvs update -C) the selected files (only cvs 1.11)"
 msgstr ""
 "Ibuyela (cvs ulwenzo olugqibekileyo - C) ifayile ekhetiweyo (i cvs 1.11 "
 "kuphela)"
 
-#: cervisiapart.cpp:316
+#: cervisiapart.cpp:317
 #, kde-format
 msgid "&Properties"
 msgstr ""
 
-#: cervisiapart.cpp:323
+#: cervisiapart.cpp:324
 #, kde-format
 msgid "Stop"
 msgstr ""
 
-#: cervisiapart.cpp:328
+#: cervisiapart.cpp:329
 #, kde-format
 msgid "Stops any running sub-processes"
 msgstr "Imisa iinkqubo ezisezantsi ezisebenzayo"
 
-#: cervisiapart.cpp:332
+#: cervisiapart.cpp:333
 #, kde-format
 msgid "Browse &Log..."
 msgstr "Khangela iincwadi &Ilog..."
 
-#: cervisiapart.cpp:336
+#: cervisiapart.cpp:337
 #, kde-format
 msgid "Shows the revision tree of the selected file"
 msgstr "Ibonisa umthi wokuzikumbuza wefayile ekhethiweyo"
 
-#: cervisiapart.cpp:341
+#: cervisiapart.cpp:342
 #, kde-format
 msgid "Browse Multi-File Log..."
 msgstr "Khangela iincwadi Ezininzi-Ifayile Ilog..."
 
-#: cervisiapart.cpp:345
+#: cervisiapart.cpp:346
 #, kde-format
 msgid "&Annotate..."
 msgstr "&Annotate..."
 
-#: cervisiapart.cpp:349
+#: cervisiapart.cpp:350
 #, kde-format
 msgid "Shows a blame-annotated view of the selected file"
 msgstr "Ibonisa i "
 
-#: cervisiapart.cpp:353
+#: cervisiapart.cpp:354
 #, fuzzy, kde-format
 msgid "&Difference to Repository (BASE)..."
 msgstr "&Umehluko Kwindawo yokugcina izinto..."
 
-#: cervisiapart.cpp:357
+#: cervisiapart.cpp:358
 #, fuzzy, kde-format
 msgid ""
 "Shows the differences of the selected file to the checked out version (tag "
 "BASE)"
 msgstr "Ibonisa umehluko"
 
-#: cervisiapart.cpp:361
+#: cervisiapart.cpp:362
 #, fuzzy, kde-format
 msgid "Difference to Repository (HEAD)..."
 msgstr "&Umehluko Kwindawo yokugcina izinto..."
 
-#: cervisiapart.cpp:365
+#: cervisiapart.cpp:366
 #, fuzzy, kde-format
 msgid ""
 "Shows the differences of the selected file to the newest version in the "
 "repository (tag HEAD)"
 msgstr "Ibonisa umehluko"
 
-#: cervisiapart.cpp:369
+#: cervisiapart.cpp:370
 #, kde-format
 msgid "Last &Change..."
 msgstr "Utshintsho &Lokugqibela..."
 
-#: cervisiapart.cpp:372
+#: cervisiapart.cpp:373
 #, kde-format
 msgid ""
 "Shows the differences between the last two revisions of the selected file"
 msgstr "Ibonisa umehluko phakathi kokumbuzo "
 
-#: cervisiapart.cpp:376
+#: cervisiapart.cpp:377
 #, kde-format
 msgid "&History..."
 msgstr "&Imbali..."
 
-#: cervisiapart.cpp:379
+#: cervisiapart.cpp:380
 #, kde-format
 msgid "Shows the CVS history as reported by the server"
 msgstr "Ibonisa i CVS imbali njengengxelo yomncedisi"
 
-#: cervisiapart.cpp:383
+#: cervisiapart.cpp:384
 #, kde-format
 msgid "&Unfold File Tree"
 msgstr "&Sukusonga Ifayile Emthini"
 
-#: cervisiapart.cpp:387
+#: cervisiapart.cpp:388
 #, kde-format
 msgid "Opens all branches of the file tree"
 msgstr "Ivula zonke "
 
-#: cervisiapart.cpp:391
+#: cervisiapart.cpp:392
 #, kde-format
 msgid "&Fold File Tree"
 msgstr "&Songa Ifayile Yomthi"
 
-#: cervisiapart.cpp:394
+#: cervisiapart.cpp:395
 #, kde-format
 msgid "Closes all branches of the file tree"
 msgstr "Vala onke amasebe efayile yomthi"
 
-#: cervisiapart.cpp:401
+#: cervisiapart.cpp:402
 #, kde-format
 msgid "&Tag/Branch..."
 msgstr "&Iphetshana elichazayo/Umthi..."
 
-#: cervisiapart.cpp:404
+#: cervisiapart.cpp:405
 #, kde-format
 msgid "Creates a tag or branch for the selected files"
 msgstr "Yenza a tag or branch for the selected files"
 
-#: cervisiapart.cpp:408
+#: cervisiapart.cpp:409
 #, kde-format
 msgid "&Delete Tag..."
 msgstr "&Cima Iphetshana elichazayo..."
 
-#: cervisiapart.cpp:411
+#: cervisiapart.cpp:412
 #, kde-format
 msgid "Deletes a tag from the selected files"
 msgstr "Icima iphetshana elichazayo ukusuka kwifayile ekhethiweyo"
 
-#: cervisiapart.cpp:415
+#: cervisiapart.cpp:416
 #, kde-format
 msgid "&Update to Tag/Date..."
 msgstr "&Yenze igqibeke okuya kwiphetshana elichazayo/Umhla..."
 
-#: cervisiapart.cpp:418
+#: cervisiapart.cpp:419
 #, kde-format
 msgid "Updates the selected files to a given tag, branch or date"
 msgstr ""
 "Yenza kugqibeke ifayile ezikhetiweyo kwiphetshana elichazayo elithile, i "
 "branch okanye umhla"
 
-#: cervisiapart.cpp:422
+#: cervisiapart.cpp:423
 #, kde-format
 msgid "Update to &HEAD"
 msgstr "Gqiba ku &Intloko"
 
-#: cervisiapart.cpp:425
+#: cervisiapart.cpp:426
 #, kde-format
 msgid "Updates the selected files to the HEAD revision"
 msgstr "Yenze kugqibeke ifayile ekhethiweyo kwi HEAD ukuzikumbuza"
 
-#: cervisiapart.cpp:429
+#: cervisiapart.cpp:430
 #, kde-format
 msgid "&Merge..."
 msgstr "&Lungisa ngendlela..."
 
-#: cervisiapart.cpp:432
+#: cervisiapart.cpp:433
 #, kde-format
 msgid "Merges a branch or a set of modifications into the selected files"
 msgstr "Ilungisa ngendlela "
 
-#: cervisiapart.cpp:436
+#: cervisiapart.cpp:437
 #, kde-format
 msgid "&Add Watch..."
 msgstr "&Yongeza Ujongo..."
 
-#: cervisiapart.cpp:439
+#: cervisiapart.cpp:440
 #, kde-format
 msgid "Adds a watch for the selected files"
 msgstr "Yongeza ujongo lwefayile ezikhethiweyo"
 
-#: cervisiapart.cpp:443
+#: cervisiapart.cpp:444
 #, kde-format
 msgid "&Remove Watch..."
 msgstr "&Susa ..."
 
-#: cervisiapart.cpp:446
+#: cervisiapart.cpp:447
 #, kde-format
 msgid "Removes a watch from the selected files"
 msgstr "Susa ujongo ukusuka kwifayile ezikhethiweyo"
 
-#: cervisiapart.cpp:450
+#: cervisiapart.cpp:451
 #, kde-format
 msgid "Show &Watchers"
 msgstr "Bonisa &Abajongi"
 
-#: cervisiapart.cpp:453
+#: cervisiapart.cpp:454
 #, kde-format
 msgid "Shows the watchers of the selected files"
 msgstr "Bonisa abajongi befayile ezikhethiweyo"
 
-#: cervisiapart.cpp:457
+#: cervisiapart.cpp:458
 #, kde-format
 msgid "Ed&it Files"
 msgstr "Hl&ela Ifayile"
 
-#: cervisiapart.cpp:460
+#: cervisiapart.cpp:461
 #, kde-format
 msgid "Edits (cvs edit) the selected files"
 msgstr "Ihlela (cvc hlela) ifayile ezikhethiweyo"
 
-#: cervisiapart.cpp:464
+#: cervisiapart.cpp:465
 #, kde-format
 msgid "U&nedit Files"
 msgstr " Iifayile"
 
-#: cervisiapart.cpp:467
+#: cervisiapart.cpp:468
 #, kde-format
 msgid "Unedits (cvs unedit) the selected files"
 msgstr "Sukuhlela (cvs sukuhlela) ifayile ezikhethiweyo"
 
-#: cervisiapart.cpp:471
+#: cervisiapart.cpp:472
 #, kde-format
 msgid "Show &Editors"
 msgstr "Bonisa &Abahleli"
 
-#: cervisiapart.cpp:474
+#: cervisiapart.cpp:475
 #, kde-format
 msgid "Shows the editors of the selected files"
 msgstr "Bonisa abahleli befayile ezikhethiweyo"
 
-#: cervisiapart.cpp:478
+#: cervisiapart.cpp:479
 #, kde-format
 msgid "&Lock Files"
 msgstr "&Tshixa Ifayile"
 
-#: cervisiapart.cpp:481
+#: cervisiapart.cpp:482
 #, fuzzy, kde-format
 msgid "Locks the selected files, so that others cannot modify them"
 msgstr "Itshixa ifayile ezikhetiweyo, ukwenza lula xa abanye beziguqula"
 
-#: cervisiapart.cpp:485
+#: cervisiapart.cpp:486
 #, kde-format
 msgid "Unl&ock Files"
 msgstr "Suk&uyitshixa Ifayile"
 
-#: cervisiapart.cpp:488
+#: cervisiapart.cpp:489
 #, kde-format
 msgid "Unlocks the selected files"
 msgstr "Ayitshixi ifayile ezikhethiweyo ezibophelelweyo"
 
-#: cervisiapart.cpp:492
+#: cervisiapart.cpp:493
 #, fuzzy, kde-format
 msgid "Create &Patch Against Repository..."
 msgstr "Yenza &"
 
-#: cervisiapart.cpp:495
+#: cervisiapart.cpp:496
 #, kde-format
 msgid "Creates a patch from the modifications in your sandbox"
 msgstr "Yenza i patch ukusuka kuguqulo kwi bhkisi yesanti"
 
-#: cervisiapart.cpp:502
+#: cervisiapart.cpp:503
 #, fuzzy, kde-format
 msgid "&Create..."
 msgstr "Yenza"
 
-#: cervisiapart.cpp:506
+#: cervisiapart.cpp:507
 #, kde-format
 msgid "&Checkout..."
 msgstr "&Yijonge..."
 
-#: cervisiapart.cpp:509
+#: cervisiapart.cpp:510
 #, kde-format
 msgid "Allows you to checkout a module from a repository"
 msgstr "Ikuvumela ukuba ujonge umnqongo osuka kwindawo yokugcina"
 
-#: cervisiapart.cpp:513
+#: cervisiapart.cpp:514
 #, kde-format
 msgid "&Import..."
 msgstr "&Rhweba ngaphakathi..."
 
-#: cervisiapart.cpp:516
+#: cervisiapart.cpp:517
 #, kde-format
 msgid "Allows you to import a module into a repository"
 msgstr "Ikuvumela ukuba urhwebe ngaphakathi umnqongo kwindawo yokugcina"
 
-#: cervisiapart.cpp:520
+#: cervisiapart.cpp:521
 #, kde-format
 msgid "&Repositories..."
 msgstr "&Indawo zokugcina..."
 
-#: cervisiapart.cpp:523
+#: cervisiapart.cpp:524
 #, kde-format
 msgid "Configures a list of repositories you regularly use"
 msgstr "Qwalasela uluhlu lwendawo zokugcina ozisebenzisa rhoqo"
 
-#: cervisiapart.cpp:530
+#: cervisiapart.cpp:531
 #, kde-format
 msgid "Hide All &Files"
 msgstr "Fihla Zonke &Ifayile"
 
-#: cervisiapart.cpp:533
+#: cervisiapart.cpp:534
 #, fuzzy, kde-format
 msgid "Determines whether only folders are shown"
 msgstr "Ichaza xa abalawuli bebonisiwe"
 
-#: cervisiapart.cpp:537
+#: cervisiapart.cpp:538
 #, fuzzy, kde-format
 msgid "Hide Unmodified Files"
 msgstr "Ifayile Zofihlo Zisusiwe"
 
-#: cervisiapart.cpp:541
+#: cervisiapart.cpp:542
 #, fuzzy, kde-format
 msgid "Determines whether files with status up-to-date or unknown are hidden"
 msgstr "Ikhangela ukuba ifayile zangoku ezifihliweyo"
 
-#: cervisiapart.cpp:546
+#: cervisiapart.cpp:547
 #, kde-format
 msgid "Hide Removed Files"
 msgstr "Ifayile Zofihlo Zisusiwe"
 
-#: cervisiapart.cpp:549
+#: cervisiapart.cpp:550
 #, kde-format
 msgid "Determines whether removed files are hidden"
 msgstr "Ichaza ukuba ifayile "
 
-#: cervisiapart.cpp:553
+#: cervisiapart.cpp:554
 #, kde-format
 msgid "Hide Non-CVS Files"
 msgstr "Fihla Iifayile ze Ezingo ze CVS"
 
-#: cervisiapart.cpp:556
+#: cervisiapart.cpp:557
 #, kde-format
 msgid "Determines whether files not in CVS are hidden"
 msgstr "Ichaza ukuba ifayile ezingekho kwi CVS zizakufihlwa na"
 
-#: cervisiapart.cpp:560
+#: cervisiapart.cpp:561
 #, fuzzy, kde-format
 msgid "Hide Empty Folders"
 msgstr "&Sika Abalawuli Abangenanto Kugqibo"
 
-#: cervisiapart.cpp:563
+#: cervisiapart.cpp:564
 #, fuzzy, kde-format
 msgid "Determines whether folders without visible entries are hidden"
 msgstr "Ichaza ukuba ifayile "
 
-#: cervisiapart.cpp:567
+#: cervisiapart.cpp:568
 #, fuzzy, kde-format
 msgid "Create &Folders on Update"
 msgstr "Yenza &Abalawuli "
 
-#: cervisiapart.cpp:570
+#: cervisiapart.cpp:571
 #, fuzzy, kde-format
 msgid "Determines whether updates create folders"
 msgstr "Ichaza ukuba ulwenzo olugqibekileyo lwenza abalawuli"
 
-#: cervisiapart.cpp:574
+#: cervisiapart.cpp:575
 #, fuzzy, kde-format
 msgid "&Prune Empty Folders on Update"
 msgstr "&Sika Abalawuli Abangenanto Kugqibo"
 
-#: cervisiapart.cpp:577
+#: cervisiapart.cpp:578
 #, fuzzy, kde-format
 msgid "Determines whether updates remove empty folders"
 msgstr "Ichaza ukuba ulwenzo olugqibekileyo lususa abalawuli abangenanto"
 
-#: cervisiapart.cpp:581
+#: cervisiapart.cpp:582
 #, kde-format
 msgid "&Update Recursively"
 msgstr "&Gqibezela "
 
-#: cervisiapart.cpp:584
+#: cervisiapart.cpp:585
 #, kde-format
 msgid "Determines whether updates are recursive"
 msgstr "Icaza ukuba ulwenzo olugqibekileyo oluziphindayo"
 
-#: cervisiapart.cpp:588
+#: cervisiapart.cpp:589
 #, kde-format
 msgid "C&ommit && Remove Recursively"
 msgstr "B&ophelela && Usese Ususe Ngokwenziwa kwakhona"
 
-#: cervisiapart.cpp:591
+#: cervisiapart.cpp:592
 #, kde-format
 msgid "Determines whether commits and removes are recursive"
 msgstr "Ichaza ukuba iyabophelela okanye ususo luziphinda kabini"
 
-#: cervisiapart.cpp:595
+#: cervisiapart.cpp:596
 #, kde-format
 msgid "Do cvs &edit Automatically When Necessary"
 msgstr "Yenza i cvs &hlela Ngokuzenzekelayo Xa Ifuneka"
 
-#: cervisiapart.cpp:598
+#: cervisiapart.cpp:599
 #, kde-format
 msgid "Determines whether automatic cvs editing is active"
 msgstr "Ixela ukuba i cvs ezenzekelayo iyasebenza"
 
-#: cervisiapart.cpp:602
+#: cervisiapart.cpp:603
 #, kde-format
 msgid "Configure Cervisia..."
 msgstr "Qwalasela i Cervisia..."
 
-#: cervisiapart.cpp:605
+#: cervisiapart.cpp:606
 #, kde-format
 msgid "Allows you to configure the Cervisia KPart"
 msgstr "Ikuvumela ukuba uqwalasele i Cervisia KPart"
 
-#: cervisiapart.cpp:613
+#: cervisiapart.cpp:614
 #, kde-format
 msgid "CVS &Manual"
 msgstr "CVS &Incwadi yesandla"
 
-#: cervisiapart.cpp:616
+#: cervisiapart.cpp:617
 #, kde-format
 msgid "Opens the help browser with the CVS documentation"
 msgstr "Ivula "
 
-#: cervisiapart.cpp:623
+#: cervisiapart.cpp:624
 #, fuzzy, kde-format
 msgid "Unfold Folder"
 msgstr "&Sukusonga Ifayile Emthini"
 
-#: cervisiapart.cpp:715
+#: cervisiapart.cpp:716
 #, fuzzy, kde-format
 msgid "Cervisia Part"
 msgstr "Cervisia"
 
-#: cervisiapart.cpp:717 main.cpp:140
+#: cervisiapart.cpp:718 main.cpp:140
 #, kde-format
 msgid "A CVS frontend"
 msgstr "Umphambili wesiphelo se CVS"
 
-#: cervisiapart.cpp:719 main.cpp:142
+#: cervisiapart.cpp:720 main.cpp:142
 #, fuzzy, kde-format
 msgid ""
 "Copyright (c) 1999-2002 Bernd Gehrmann\n"
 "Copyright (c) 2002-2008 the Cervisia authors"
 msgstr "Ukhuphelo olusemthethweni (c) 1999-2002 Bernd Gehrmann"
 
-#: cervisiapart.cpp:724 main.cpp:147
+#: cervisiapart.cpp:725 main.cpp:147
 #, kde-format
 msgid "Bernd Gehrmann"
 msgstr ""
 
-#: cervisiapart.cpp:725 main.cpp:148
+#: cervisiapart.cpp:726 main.cpp:148
 #, kde-format
 msgid "Original author and former maintainer"
 msgstr ""
 
-#: cervisiapart.cpp:728 main.cpp:151
+#: cervisiapart.cpp:729 main.cpp:151
 #, kde-format
 msgid "Christian Loose"
 msgstr ""
 
-#: cervisiapart.cpp:728 main.cpp:151
+#: cervisiapart.cpp:729 main.cpp:151
 #, kde-format
 msgid "Maintainer"
 msgstr ""
 
-#: cervisiapart.cpp:729 main.cpp:152
+#: cervisiapart.cpp:730 main.cpp:152
 #, kde-format
 msgid "André Wöbbeking"
 msgstr ""
 
-#: cervisiapart.cpp:729 main.cpp:152
+#: cervisiapart.cpp:730 main.cpp:152
 #, kde-format
 msgid "Developer"
 msgstr ""
 
-#: cervisiapart.cpp:730 main.cpp:153
+#: cervisiapart.cpp:731 main.cpp:153
 #, kde-format
 msgid "Carlos Woelz"
 msgstr ""
 
-#: cervisiapart.cpp:730 main.cpp:153
+#: cervisiapart.cpp:731 main.cpp:153
 #, kde-format
 msgid "Documentation"
 msgstr ""
 
-#: cervisiapart.cpp:732 main.cpp:155
+#: cervisiapart.cpp:733 main.cpp:155
 #, kde-format
 msgid "Richard Moore"
 msgstr ""
 
-#: cervisiapart.cpp:732 main.cpp:155
+#: cervisiapart.cpp:733 main.cpp:155
 #, fuzzy, kde-format
 msgid "Conversion to KPart"
 msgstr "Cervisia"
 
-#: cervisiapart.cpp:733 main.cpp:156
+#: cervisiapart.cpp:734 main.cpp:156
 #, kde-format
 msgid "Laurent Montel"
 msgstr ""
 
-#: cervisiapart.cpp:733 main.cpp:156
+#: cervisiapart.cpp:734 main.cpp:156
 #, fuzzy, kde-format
 msgid "Conversion to D-Bus"
 msgstr "Cervisia"
 
-#: cervisiapart.cpp:734 main.cpp:157
+#: cervisiapart.cpp:735 main.cpp:157
 #, kde-format
 msgid "Martin Koller"
 msgstr ""
 
-#: cervisiapart.cpp:734 main.cpp:157
+#: cervisiapart.cpp:735 main.cpp:157
 #, kde-format
 msgid "Port to KDE Frameworks 5"
 msgstr ""
 
-#: cervisiapart.cpp:741
+#: cervisiapart.cpp:742
 #, kde-format
 msgid "Open Sandbox"
 msgstr "vula Ibhokisi yeasanti"
 
-#: cervisiapart.cpp:791
+#: cervisiapart.cpp:792
 #, kde-format
 msgid "CVS Edit"
 msgstr "CVS Hlela"
 
-#: cervisiapart.cpp:1298 diffdialog.cpp:263 logdialog.cpp:472
+#: cervisiapart.cpp:1299 diffdialog.cpp:263 logdialog.cpp:472
 #, kde-format
 msgid "CVS Diff"
 msgstr "CVS Diff"
 
-#: cervisiapart.cpp:1311 diffdialog.cpp:473 logdialog.cpp:485
+#: cervisiapart.cpp:1312 diffdialog.cpp:473 logdialog.cpp:485
 #: resolvedialog.cpp:351
 #, kde-format
 msgid "Could not open file for writing."
 msgstr "Ayinakuvula ifayile yokubhala."
 
-#: cervisiapart.cpp:1461
+#: cervisiapart.cpp:1462
 #, kde-format
 msgid "The revision looks invalid."
 msgstr "Ukuzikumbuza kujongeka kungasebenzi."
 
-#: cervisiapart.cpp:1465
+#: cervisiapart.cpp:1466
 #, kde-format
 msgid "This is the first revision of the branch."
 msgstr "Oku kukuzikumbuza bokuqala besebe."
 
-#: cervisiapart.cpp:1575
+#: cervisiapart.cpp:1576
 #, kde-format
 msgid "Invoking help on CVS"
 msgstr "Cela uncedo kwi CVS"
 
-#: cervisiapart.cpp:1610
+#: cervisiapart.cpp:1611
 #, kde-format
 msgid "Done"
 msgstr "Yenzekile"
 
-#: cervisiapart.cpp:1616
+#: cervisiapart.cpp:1617
 #, kde-format
 msgid "A CVS commit to repository %1 is done"
 msgstr ""
 
-#: cervisiapart.cpp:1633
+#: cervisiapart.cpp:1634
 #, fuzzy, kde-format
 msgid ""
 "This is not a CVS folder.\n"
@@ -903,22 +903,22 @@ msgstr ""
 msgid "Delay (ms) until the progress dialog appears."
 msgstr "&Ixesha lokuphuma emva kuqhubeko lothetho lubonaka (kwi ms):"
 
-#: cervisiashell.cpp:54
+#: cervisiashell.cpp:53
 #, fuzzy, kde-format
 msgid "The Cervisia library could not be loaded."
 msgstr "Ifayile ye ChangeLog ayifundekanga."
 
-#: cervisiashell.cpp:86
+#: cervisiashell.cpp:85
 #, kde-format
 msgid "Allows you to configure the toolbar"
 msgstr "Ikuvumela ukuba uqwalasele isixhobo se bar"
 
-#: cervisiashell.cpp:91
+#: cervisiashell.cpp:90
 #, kde-format
 msgid "Allows you to customize the keybindings"
 msgstr "Ikuvumela ukuba uqwalasele izibophelelo ezingundoqo"
 
-#: cervisiashell.cpp:96
+#: cervisiashell.cpp:95
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Iphuma kwi Cervisia"
