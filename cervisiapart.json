@@ -5,6 +5,14 @@
             "inode/directory"
         ],
         "Name": "Cervisia",
+        "Name[ar]": "سرفيسيا",
+        "Name[ca]": "Cervisia",
+        "Name[es]": "Cervisia",
+        "Name[nl]": "Cervisia",
+        "Name[sl]": "Cervisia",
+        "Name[sv]": "Cervisia",
+        "Name[uk]": "Cervisia",
+        "Name[x-test]": "xxCervisiaxx",
         "ServiceTypes": [
             "KParts/ReadOnlyPart",
             "Browser/View"
