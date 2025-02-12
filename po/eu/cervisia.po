@@ -1,5 +1,5 @@
 # Translation for cervisia.po to Euskara/Basque (eu).
-# Copyright (C) 2003-2023 This file is copyright:
+# Copyright (C) 2003-2025 This file is copyright:
 # This file is distributed under the same license as the cervisia package.
 # KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
 #
@@ -7,7 +7,7 @@
 # Marcos  <marcos@euskalgnu.org>, 2003, 2005, 2006.
 # Ion Gaztañaga <ion_g_m@hotmail.com>, 2005.
 # Ion Gaztañaga <igaztanaga@gmail.com>, 2005.
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2023.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2023, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
