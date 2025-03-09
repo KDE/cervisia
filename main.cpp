@@ -159,6 +159,7 @@ int main(int argc, char **argv)
     about.setOrganizationDomain(QByteArray("kde.org"));
 
     KAboutData::setApplicationData(about);
+    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("cervisia")));
 
     QCommandLineParser parser;
     about.setupCommandLine(&parser);
