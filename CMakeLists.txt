@@ -41,6 +41,9 @@ kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 ecm_setup_version(${RELEASE_SERVICE_VERSION} VARIABLE_PREFIX CERVISIA VERSION_HEADER cervisia_version.h)
 
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Widgets DBus)
+if (QT_MAJOR_VERSION STREQUAL "6")
+    find_package(Qt6Core5Compat ${QT_MIN_VERSION} CONFIG REQUIRED)
+endif()
 
 find_package(KF${KF_MAJOR_VERSION} REQUIRED COMPONENTS Completion CoreAddons DBusAddons I18n Parts DocTools IconThemes Notifications WidgetsAddons ItemViews Su TextWidgets)
 
