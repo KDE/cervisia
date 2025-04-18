@@ -111,7 +111,7 @@ set(cervisia_SRCS ${libcervisia_SRCS}
 
 add_executable(cervisia ${cervisia_SRCS})
 
-target_link_libraries(cervisia KF${KF_MAJOR_VERSION}::Completion KF${KF_MAJOR_VERSION}::I18n KF${KF_MAJOR_VERSION}::TextWidgets KF${KF_MAJOR_VERSION}::Parts KF${KF_MAJOR_VERSION}::ItemViews)
+target_link_libraries(cervisia KF${KF_MAJOR_VERSION}::Completion KF${KF_MAJOR_VERSION}::CoreAddons KF${KF_MAJOR_VERSION}::I18n KF${KF_MAJOR_VERSION}::KIOCore KF${KF_MAJOR_VERSION}::Notifications KF${KF_MAJOR_VERSION}::TextWidgets KF${KF_MAJOR_VERSION}::Parts KF${KF_MAJOR_VERSION}::ItemViews)
 
 install(TARGETS cervisia  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
