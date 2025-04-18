@@ -31,6 +31,9 @@ ecm_mark_nongui_executable(cvsservice_bin)
 set_target_properties(cvsservice_bin PROPERTIES OUTPUT_NAME cvsservice5)
 
 target_link_libraries(cvsservice_bin Qt::Widgets Qt::DBus KF${KF_MAJOR_VERSION}::KIOCore KF${KF_MAJOR_VERSION}::I18n KF${KF_MAJOR_VERSION}::WidgetsAddons KF${KF_MAJOR_VERSION}::Su KF${KF_MAJOR_VERSION}::DBusAddons KF${KF_MAJOR_VERSION}::ConfigCore)
+if (QT_MAJOR_VERSION STREQUAL "6")
+    target_link_libraries(cvsservice_bin Qt::Core5Compat)
+endif()
 
 install(TARGETS cvsservice_bin ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
@@ -39,6 +42,9 @@ install(TARGETS cvsservice_bin ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 add_executable(cvsaskpass cvsaskpass.cpp)
 
 target_link_libraries(cvsaskpass Qt::Widgets KF${KF_MAJOR_VERSION}::WidgetsAddons KF${KF_MAJOR_VERSION}::CoreAddons KF${KF_MAJOR_VERSION}::I18n)
+if (QT_MAJOR_VERSION STREQUAL "6")
+    target_link_libraries(cvsaskpass Qt::Core5Compat)
+endif()
 
 install(TARGETS cvsaskpass  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
