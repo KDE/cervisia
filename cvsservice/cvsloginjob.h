@@ -26,7 +26,7 @@
 #include <qstring.h>
 #include <qstringlist.h>
 
-#include <kdesu/process.h>
+#include <KDESu/PtyProcess>
 
 class CvsLoginJob : public QObject
 {
