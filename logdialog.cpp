@@ -34,12 +34,13 @@
 
 #include <KConfigGroup>
 #include <KHelpClient>
+#include <KIO/OpenUrlJob>
 #include <KLocalizedString>
+#include <KNotificationJobUiDelegate>
 #include <kconfig.h>
 #include <kconfiggroup.h>
 #include <kfinddialog.h>
 #include <kmessagebox.h>
-#include <krun.h>
 #include <ktreewidgetsearchline.h>
 
 #include <KGuiItem>
@@ -445,7 +446,8 @@ void LogDialog::slotOk()
         QFile::setPermissions(tempFileName, QFileDevice::ReadOwner);
 
         // open file in preferred editor
-        (void)new KRun(QUrl::fromLocalFile(tempFileName), 0, true);
+        auto *job = new KIO::OpenUrlJob(tempFileName);
+        job->start();
     }
 }
 
