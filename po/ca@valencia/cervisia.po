@@ -1077,7 +1077,7 @@ msgstr "Només ex&porta"
 #: checkoutdialog.cpp:304
 #, kde-format
 msgid "Please choose an existing working folder."
-msgstr "Escolliu una carpeta de treball existent."
+msgstr "Trieu una carpeta de treball existent."
 
 #: checkoutdialog.cpp:308 checkoutdialog.cpp:379
 #, kde-format
@@ -1441,7 +1441,7 @@ msgid ""
 "Choose revision A by clicking with the left mouse button,\n"
 "revision B by clicking with the middle mouse button."
 msgstr ""
-"Escollir la revisió A fent clic amb el botó esquerre del ratolí\n"
+"Escollir la revisió A clicant amb el botó esquerre del ratolí\n"
 "i la revisió B amb el botó central."
 
 #: logdialog.cpp:133
@@ -1490,7 +1490,7 @@ msgid ""
 "This revision is used when you click Annotate.\n"
 "It is also used as the first item of a Diff operation."
 msgstr ""
-"Esta revisió s'utilitza quan feu clic en Anota.\n"
+"Esta revisió s'utilitza quan cliqueu damunt «Anota».\n"
 "També s'utilitza com a primer element d'una operació de «diff»."
 
 #: logdialog.cpp:212
