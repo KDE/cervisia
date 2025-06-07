@@ -1,19 +1,20 @@
-# translation of cervisia.po to Spanish
-# Copyright (C) 2004, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
+# Spanish translations for cervisia.po package.
+# Copyright (C) 2004-2025 This file is copyright:
+# This file is distributed under the same license as the cervisia package.
 #
-# Marcos Fouces Lago <mfouces@yahoo.es>, 2004.
-# Pablo de Vicente <p.devicente@wanadoo.es>, 2005.
-# Juan Manuel Garcia Molina <juanma@superiodico.net>, 2005.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2006, 2007, 2008, 2009, 2016.
-# Pablo de Vicente <pablo.devicente@gmail.com>, 2006.
-# Ricardo Varas Santana <ricardoivaras@gmail.com>, 2011.
-# Javier Viñal <fjvinal@gmail.com>, 2013.
+# SPDX-FileCopyrightText: 2004 Marcos Fouces Lago <mfouces@yahoo.es>
+# SPDX-FileCopyrightText: 2005 Pablo de Vicente <p.devicente@wanadoo.es>
+# SPDX-FileCopyrightText: 2005 Juan Manuel Garcia Molina <juanma@superiodico.net>
+# SPDX-FileCopyrightText: 2006, 2007, 2008, 2009, 2016, 2025 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2006 Pablo de Vicente <pablo.devicente@gmail.com>
+# SPDX-FileCopyrightText: 2011 Ricardo Varas Santana <ricardoivaras@gmail.com>
+# SPDX-FileCopyrightText: 2013 Javier Viñal <fjvinal@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-03 01:53+0000\n"
-"PO-Revision-Date: 2016-06-06 12:07+0200\n"
+"PO-Revision-Date: 2025-06-06 19:40+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -134,7 +135,7 @@ msgstr "Comentario CVS"
 #: annotatedialog.cpp:44
 #, kde-format
 msgid "Go to Line..."
-msgstr "Ir a la línea..."
+msgstr "Ir a la línea…"
 
 #: annotatedialog.cpp:49
 #, kde-format
@@ -207,7 +208,7 @@ msgstr ""
 #: cervisiapart.cpp:228
 #, kde-format
 msgid "Open Sandbox..."
-msgstr "Abrir entorno de pruebas..."
+msgstr "Abrir entorno de pruebas…"
 
 #: cervisiapart.cpp:232
 #, kde-format
@@ -222,7 +223,7 @@ msgstr "Entornos de pruebas recientes"
 #: cervisiapart.cpp:240
 #, kde-format
 msgid "&Insert ChangeLog Entry..."
-msgstr "&Insertar entrada de registro de cambios..."
+msgstr "&Insertar entrada de registro de cambios…"
 
 #: cervisiapart.cpp:243
 #, kde-format
@@ -266,7 +267,7 @@ msgstr "Abre el archivo marcado para editarlo"
 #: cervisiapart.cpp:270
 #, kde-format
 msgid "Reso&lve..."
-msgstr "Reso&lver..."
+msgstr "Reso&lver…"
 
 #: cervisiapart.cpp:273
 #, kde-format
@@ -276,7 +277,7 @@ msgstr "Abre el cuadro de diálogo para resolver con el archivo seleccionado"
 #: cervisiapart.cpp:277
 #, kde-format
 msgid "&Commit..."
-msgstr "&Entregar..."
+msgstr "&Entregar…"
 
 #: cervisiapart.cpp:281
 #, kde-format
@@ -286,7 +287,7 @@ msgstr "Entrega los archivos seleccionados"
 #: cervisiapart.cpp:285
 #, kde-format
 msgid "&Add to Repository..."
-msgstr "&Añadir al repositorio..."
+msgstr "&Añadir al repositorio…"
 
 #: cervisiapart.cpp:288
 #, kde-format
@@ -301,7 +302,7 @@ msgstr "Añade (cvs add) los archivos seleccionados al repositorio"
 #: cervisiapart.cpp:294
 #, kde-format
 msgid "Add &Binary..."
-msgstr "Añadir &binario..."
+msgstr "Añadir &binario…"
 
 #: cervisiapart.cpp:297
 #, kde-format
@@ -312,7 +313,7 @@ msgstr ""
 #: cervisiapart.cpp:301
 #, kde-format
 msgid "&Remove From Repository..."
-msgstr "Elimina&r del repositorio..."
+msgstr "Elimina&r del repositorio…"
 
 #: cervisiapart.cpp:304 repositorydialog.cpp:201
 #, kde-format
@@ -352,7 +353,7 @@ msgstr "Detiene cualquier subproceso que esté funcionando"
 #: cervisiapart.cpp:333
 #, kde-format
 msgid "Browse &Log..."
-msgstr "Navegar por e&l registro..."
+msgstr "Navegar por e&l registro…"
 
 #: cervisiapart.cpp:337
 #, kde-format
@@ -362,12 +363,12 @@ msgstr "Muestra el árbol de revisiones del archivo seleccionado"
 #: cervisiapart.cpp:342
 #, kde-format
 msgid "Browse Multi-File Log..."
-msgstr "Examinar archivo múltiple de registro..."
+msgstr "Examinar archivo múltiple de registro…"
 
 #: cervisiapart.cpp:346
 #, kde-format
 msgid "&Annotate..."
-msgstr "Coment&ar..."
+msgstr "Coment&ar…"
 
 #: cervisiapart.cpp:350
 #, kde-format
@@ -378,7 +379,7 @@ msgstr ""
 #: cervisiapart.cpp:354
 #, kde-format
 msgid "&Difference to Repository (BASE)..."
-msgstr "&Diferencia con el repositorio (BASE)..."
+msgstr "&Diferencia con el repositorio (BASE)…"
 
 #: cervisiapart.cpp:358
 #, kde-format
@@ -392,7 +393,7 @@ msgstr ""
 #: cervisiapart.cpp:362
 #, kde-format
 msgid "Difference to Repository (HEAD)..."
-msgstr "Diferencia con el repositorio (HEAD)..."
+msgstr "Diferencia con el repositorio (HEAD)…"
 
 #: cervisiapart.cpp:366
 #, kde-format
@@ -406,7 +407,7 @@ msgstr ""
 #: cervisiapart.cpp:370
 #, kde-format
 msgid "Last &Change..."
-msgstr "Ultimo &cambio..."
+msgstr "Ultimo &cambio…"
 
 #: cervisiapart.cpp:373
 #, kde-format
@@ -419,7 +420,7 @@ msgstr ""
 #: cervisiapart.cpp:377
 #, kde-format
 msgid "&History..."
-msgstr "&Historial..."
+msgstr "&Historial…"
 
 #: cervisiapart.cpp:380
 #, kde-format
@@ -449,7 +450,7 @@ msgstr "Cierra todas las ramificaciones del árbol de archivos"
 #: cervisiapart.cpp:402
 #, kde-format
 msgid "&Tag/Branch..."
-msgstr "&Etiqueta/Rama..."
+msgstr "&Etiqueta/Rama…"
 
 #: cervisiapart.cpp:405
 #, kde-format
@@ -459,7 +460,7 @@ msgstr "Crea una etiqueta o rama para los archivos seleccionados"
 #: cervisiapart.cpp:409
 #, kde-format
 msgid "&Delete Tag..."
-msgstr "&Suprimir etiqueta..."
+msgstr "&Suprimir etiqueta…"
 
 #: cervisiapart.cpp:412
 #, kde-format
@@ -469,7 +470,7 @@ msgstr "Elimina una etiqueta de los archivos seleccionados"
 #: cervisiapart.cpp:416
 #, kde-format
 msgid "&Update to Tag/Date..."
-msgstr "Act&ualizar a etiqueta/fecha..."
+msgstr "Act&ualizar a etiqueta/fecha…"
 
 #: cervisiapart.cpp:419
 #, kde-format
@@ -490,7 +491,7 @@ msgstr "Actualiza los archivos seleccionados a la revisión HEAD"
 #: cervisiapart.cpp:430
 #, kde-format
 msgid "&Merge..."
-msgstr "Co&mbinar..."
+msgstr "Co&mbinar…"
 
 #: cervisiapart.cpp:433
 #, kde-format
@@ -501,7 +502,7 @@ msgstr ""
 #: cervisiapart.cpp:437
 #, kde-format
 msgid "&Add Watch..."
-msgstr "&Añadir testigo..."
+msgstr "&Añadir testigo…"
 
 #: cervisiapart.cpp:440
 #, kde-format
@@ -511,7 +512,7 @@ msgstr "Añade un testigo a los archivos seleccionados"
 #: cervisiapart.cpp:444
 #, kde-format
 msgid "&Remove Watch..."
-msgstr "Elimina&r testigo..."
+msgstr "Elimina&r testigo…"
 
 #: cervisiapart.cpp:447
 #, kde-format
@@ -583,7 +584,7 @@ msgstr "Desbloquea los archivos seleccionados"
 #: cervisiapart.cpp:493
 #, kde-format
 msgid "Create &Patch Against Repository..."
-msgstr "Crear un &parche contra el repositorio..."
+msgstr "Crear un &parche contra el repositorio…"
 
 #: cervisiapart.cpp:496
 #, kde-format
@@ -594,12 +595,12 @@ msgstr ""
 #: cervisiapart.cpp:503
 #, kde-format
 msgid "&Create..."
-msgstr "&Crear..."
+msgstr "&Crear…"
 
 #: cervisiapart.cpp:507
 #, kde-format
 msgid "&Checkout..."
-msgstr "Des&cargar..."
+msgstr "Des&cargar…"
 
 #: cervisiapart.cpp:510
 #, kde-format
@@ -609,7 +610,7 @@ msgstr "Permite descargar un módulo de un repositorio"
 #: cervisiapart.cpp:514
 #, kde-format
 msgid "&Import..."
-msgstr "&Importar..."
+msgstr "&Importar…"
 
 #: cervisiapart.cpp:517
 #, kde-format
@@ -619,7 +620,7 @@ msgstr "Permite importar un módulo a un repositorio"
 #: cervisiapart.cpp:521
 #, kde-format
 msgid "&Repositories..."
-msgstr "&Repositorios..."
+msgstr "&Repositorios…"
 
 #: cervisiapart.cpp:524
 #, kde-format
@@ -730,7 +731,7 @@ msgstr "Determina si está activa la edición automática de cvs"
 #: cervisiapart.cpp:603
 #, kde-format
 msgid "Configure Cervisia..."
-msgstr "Configurar Cervisia..."
+msgstr "Configurar Cervisia…"
 
 #: cervisiapart.cpp:606
 #, kde-format
@@ -1511,7 +1512,7 @@ msgstr "&Ver A"
 #: logdialog.cpp:226
 #, kde-format
 msgid "Create Patch..."
-msgstr "Crear parche..."
+msgstr "Crear parche…"
 
 #: logdialog.cpp:269
 #, kde-format
@@ -1778,17 +1779,17 @@ msgstr "Estado"
 #: repositorydialog.cpp:199
 #, kde-format
 msgid "Add..."
-msgstr "Añadir..."
+msgstr "Añadir…"
 
 #: repositorydialog.cpp:200
 #, kde-format
 msgid "Modify..."
-msgstr "Modificar..."
+msgstr "Modificar…"
 
 #: repositorydialog.cpp:202
 #, kde-format
 msgid "Login..."
-msgstr "Acceder..."
+msgstr "Acceder…"
 
 #: repositorydialog.cpp:203
 #, kde-format
@@ -1916,22 +1917,22 @@ msgstr "Tipos de letra"
 #: settingsdialog.cpp:341
 #, kde-format
 msgid "Font for &Protocol Window..."
-msgstr "Tipo de letra para la ventana de &protocolo..."
+msgstr "Tipo de letra para la ventana de &protocolo…"
 
 #: settingsdialog.cpp:342
 #, kde-format
 msgid "Font for A&nnotate View..."
-msgstr "Tipo de letra para la vista a&notada..."
+msgstr "Tipo de letra para la vista a&notada…"
 
 #: settingsdialog.cpp:343
 #, kde-format
 msgid "Font for D&iff View..."
-msgstr "Tipo de letra para la vista de d&iferencias..."
+msgstr "Tipo de letra para la vista de d&iferencias…"
 
 #: settingsdialog.cpp:344
 #, kde-format
 msgid "Font for ChangeLog View..."
-msgstr "Tipo de letra para la vista del registro de cambios..."
+msgstr "Tipo de letra para la vista del registro de cambios…"
 
 #: settingsdialog.cpp:352
 #, kde-format
@@ -2140,24 +2141,3 @@ msgstr "Deshacer cambios"
 #, kde-format
 msgid "Commit"
 msgstr "Entrega"
-
-#~ msgid "Invoking help on Cervisia"
-#~ msgstr "Invocando ayuda sobre Cervisia"
-
-#~ msgid "&Overwrite"
-#~ msgstr "&Sobrescribir"
-
-#~ msgid "Invokes the KDE help system with the Cervisia documentation"
-#~ msgstr "Abre el sistema de ayuda de KDE con la documentación de Cervisia"
-
-#~ msgid "Opens the bug report dialog"
-#~ msgstr "Abre el cuadro de diálogo para informar de fallos"
-
-#~ msgid "Displays the version number and copyright information"
-#~ msgstr "Muestra el número de versión y la información del copyright"
-
-#~ msgid "Displays the information about KDE and its version number"
-#~ msgstr "Muestra información sobre KDE y su número de versión"
-
-#~ msgid "&Remove"
-#~ msgstr "E&liminar"
