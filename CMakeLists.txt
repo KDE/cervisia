@@ -8,22 +8,10 @@ set(RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_
 
 project(cervisia VERSION ${RELEASE_SERVICE_VERSION})
 
-set(QT_REQUIRED_VERSION "5.15.0")
 set (KDE_COMPILERSETTINGS_LEVEL "5.82.0")
-
-if (QT_MAJOR_VERSION STREQUAL "6")
-    set(QT_REQUIRED_VERSION "6.4.0")
-    set(KF_MIN_VERSION "5.240.0")
-    set(KF_MAJOR_VERSION "6")
-else()
-    set(KF_MAJOR_VERSION "5")
-endif()
-
 
 find_package(ECM 5.90.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
-
-add_definitions(-DTRANSLATION_DOMAIN="cervisia")
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
@@ -35,6 +23,19 @@ include(FeatureSummary)
 include(ECMSetupVersion)
 include(KDEGitCommitHooks)
 include(KDEClangFormat)
+
+set(QT_REQUIRED_VERSION "5.15.0")
+
+if (QT_MAJOR_VERSION STREQUAL "6")
+    set(QT_REQUIRED_VERSION "6.4.0")
+    set(KF_MIN_VERSION "5.240.0")
+    set(KF_MAJOR_VERSION "6")
+else()
+    set(KF_MAJOR_VERSION "5")
+endif()
+
+add_definitions(-DTRANSLATION_DOMAIN="cervisia")
+
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h *.c)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 

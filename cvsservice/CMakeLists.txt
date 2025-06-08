@@ -51,7 +51,9 @@ install(TARGETS cvsaskpass  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### install files ###############
 
-install( FILES  org.kde.cvsservice5.desktop  DESTINATION  ${KDE_INSTALL_KSERVICESDIR} )
+if (QT_MAJOR_VERSION STREQUAL "5")
+    install( FILES  org.kde.cvsservice5.desktop  DESTINATION  ${KDE_INSTALL_KSERVICESDIR} )
+endif()
 
 install( FILES org.kde.cervisia5.cvsjob.xml
                org.kde.cervisia5.cvsservice.xml
