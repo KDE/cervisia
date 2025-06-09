@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-06-09 02:03+0000\n"
 "PO-Revision-Date: 2022-02-07 09:35+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -834,12 +834,12 @@ msgstr "إفتح المِرْملة"
 msgid "CVS Edit"
 msgstr "تحرير CVS"
 
-#: cervisiapart.cpp:1299 diffdialog.cpp:263 logdialog.cpp:472
+#: cervisiapart.cpp:1299 diffdialog.cpp:263 logdialog.cpp:474
 #, kde-format
 msgid "CVS Diff"
 msgstr "إختلافات CVS"
 
-#: cervisiapart.cpp:1312 diffdialog.cpp:473 logdialog.cpp:485
+#: cervisiapart.cpp:1312 diffdialog.cpp:473 logdialog.cpp:487
 #: resolvedialog.cpp:351
 #, kde-format
 msgid "Could not open file for writing."
@@ -1100,7 +1100,7 @@ msgstr "سجل CVS بعيد"
 msgid "CVS Commit"
 msgstr "إيداع CVS"
 
-#: commitdialog.cpp:84 logdialog.cpp:199
+#: commitdialog.cpp:84 logdialog.cpp:200
 #, kde-format
 msgid "&Diff"
 msgstr " أظهر ال&اختلافات"
@@ -1401,27 +1401,27 @@ msgstr "حدّث، المرقّعات"
 msgid "Unknown "
 msgstr "مجهول"
 
-#: logdialog.cpp:86
+#: logdialog.cpp:87
 #, kde-format
 msgid "Search:"
 msgstr "ابحث:"
 
-#: logdialog.cpp:97
+#: logdialog.cpp:98
 #, kde-format
 msgid "&Tree"
 msgstr "ش&جرة"
 
-#: logdialog.cpp:98
+#: logdialog.cpp:99
 #, kde-format
 msgid "&List"
 msgstr "قائمة"
 
-#: logdialog.cpp:99
+#: logdialog.cpp:100
 #, kde-format
 msgid "CVS &Output"
 msgstr "&نتاج CVS"
 
-#: logdialog.cpp:106
+#: logdialog.cpp:107
 #, kde-format
 msgid ""
 "Choose revision A by clicking with the left mouse button,\n"
@@ -1430,47 +1430,47 @@ msgstr ""
 "اختر النسخة A بالنقر بزر الفأرة الأيسر،\n"
 "أو النسخة B بالنقر بواسطة زر الفأرة الأيمن"
 
-#: logdialog.cpp:133
+#: logdialog.cpp:134
 #, kde-format
 msgid "Revision A:"
 msgstr "مراجعة A:"
 
-#: logdialog.cpp:133
+#: logdialog.cpp:134
 #, kde-format
 msgid "Revision B:"
 msgstr "مراجعة B:"
 
-#: logdialog.cpp:142
+#: logdialog.cpp:143
 #, kde-format
 msgid "Select by tag:"
 msgstr "اختر على العلامة :"
 
-#: logdialog.cpp:150
+#: logdialog.cpp:151
 #, kde-format
 msgid "Author:"
 msgstr "المؤلف:"
 
-#: logdialog.cpp:158
+#: logdialog.cpp:159
 #, kde-format
 msgid "Date:"
 msgstr "التاريخ:"
 
-#: logdialog.cpp:166
+#: logdialog.cpp:167
 #, kde-format
 msgid "Comment/Tags:"
 msgstr "تعليق/علامات:"
 
-#: logdialog.cpp:198
+#: logdialog.cpp:199
 #, kde-format
 msgid "&Annotate A"
 msgstr "ا&شرح A"
 
-#: logdialog.cpp:200
+#: logdialog.cpp:201
 #, kde-format
 msgid "&Find"
 msgstr "ا&بحث"
 
-#: logdialog.cpp:207
+#: logdialog.cpp:208
 #, kde-format
 msgid ""
 "This revision is used when you click Annotate.\n"
@@ -1479,47 +1479,47 @@ msgstr ""
 "هذه النسخة تستخدم حين نقرك على (تحشية).\n"
 "تستخدم أيضاً كأول بنْد في عملية فحص الاختلافات."
 
-#: logdialog.cpp:212
+#: logdialog.cpp:213
 #, kde-format
 msgid "This revision is used as the second item of a Diff operation."
 msgstr "هذه النسخة تستخدم كالبند الثاني في عملية فحص الاختلافات."
 
-#: logdialog.cpp:225
+#: logdialog.cpp:226
 #, kde-format
 msgid "&View A"
 msgstr "ا&عرض A"
 
-#: logdialog.cpp:226
+#: logdialog.cpp:227
 #, kde-format
 msgid "Create Patch..."
 msgstr "أنشئ رقعة..."
 
-#: logdialog.cpp:269
+#: logdialog.cpp:270
 #, kde-format
 msgid "CVS Log: %1"
 msgstr "سجل CVS: %1"
 
-#: logdialog.cpp:275
+#: logdialog.cpp:276
 #, kde-format
 msgid "CVS Log"
 msgstr "سجل CVS"
 
-#: logdialog.cpp:402
+#: logdialog.cpp:403
 #, kde-format
 msgid " (Branchpoint)"
 msgstr "(نقطة التشعب)"
 
-#: logdialog.cpp:421
+#: logdialog.cpp:422
 #, kde-format
 msgid "Please select revision A or B first."
 msgstr "رجاءاً، في البداية اختر النسخة A أو النسخة B"
 
-#: logdialog.cpp:442
+#: logdialog.cpp:443
 #, kde-format
 msgid "View File"
 msgstr "شاهد الملف"
 
-#: logdialog.cpp:457 logdialog.cpp:516
+#: logdialog.cpp:459 logdialog.cpp:518
 #, kde-format
 msgid "Please select revision A or revisions A and B first."
 msgstr "رجاءاً،في البداية اختر النسخة A، أو النسختان A و B."
@@ -1569,22 +1569,22 @@ msgstr "اخترْ من أجل النسخة B"
 msgid "date: %1; author: %2"
 msgstr "التاريخ: %1، المؤلف: %2"
 
-#: main.cpp:166
+#: main.cpp:167
 #, kde-format
 msgid "The sandbox to be loaded"
 msgstr "أظهر المِرْمَلة اللتي ستُحمّل"
 
-#: main.cpp:167
+#: main.cpp:168
 #, kde-format
 msgid "Show resolve dialog for the given file."
 msgstr "أظهر محاور الحلّ للملف المذكور."
 
-#: main.cpp:168
+#: main.cpp:169
 #, kde-format
 msgid "Show log dialog for the given file."
 msgstr "أظهر محاور السّجل للملف المذكور."
 
-#: main.cpp:169
+#: main.cpp:170
 #, kde-format
 msgid "Show annotation dialog for the given file."
 msgstr "أظهر محاور الشرح للملف المذكور."

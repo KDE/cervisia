@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-06-09 02:03+0000\n"
 "PO-Revision-Date: 2021-01-18 18:59+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -838,12 +838,12 @@ msgstr "Sandbox ஐ திற"
 msgid "CVS Edit"
 msgstr "சிவிஸ் திருத்தம்"
 
-#: cervisiapart.cpp:1299 diffdialog.cpp:263 logdialog.cpp:472
+#: cervisiapart.cpp:1299 diffdialog.cpp:263 logdialog.cpp:474
 #, kde-format
 msgid "CVS Diff"
 msgstr "சிவிஸ் வேறுபாடு"
 
-#: cervisiapart.cpp:1312 diffdialog.cpp:473 logdialog.cpp:485
+#: cervisiapart.cpp:1312 diffdialog.cpp:473 logdialog.cpp:487
 #: resolvedialog.cpp:351
 #, kde-format
 msgid "Could not open file for writing."
@@ -1105,7 +1105,7 @@ msgstr "CVS  தொலைதூர பதிவு"
 msgid "CVS Commit"
 msgstr "சிவிஸ் கமிட்"
 
-#: commitdialog.cpp:84 logdialog.cpp:199
+#: commitdialog.cpp:84 logdialog.cpp:200
 #, kde-format
 msgid "&Diff"
 msgstr "&வித்தியாசம்"
@@ -1403,27 +1403,27 @@ msgstr "அழித்தவற்றை புதுப்பி"
 msgid "Unknown "
 msgstr "தெரியாத"
 
-#: logdialog.cpp:86
+#: logdialog.cpp:87
 #, kde-format
 msgid "Search:"
 msgstr ""
 
-#: logdialog.cpp:97
+#: logdialog.cpp:98
 #, kde-format
 msgid "&Tree"
 msgstr "&மரம்"
 
-#: logdialog.cpp:98
+#: logdialog.cpp:99
 #, kde-format
 msgid "&List"
 msgstr "&பட்டியல்"
 
-#: logdialog.cpp:99
+#: logdialog.cpp:100
 #, kde-format
 msgid "CVS &Output"
 msgstr "சிவிஸ் &வெளியீடு"
 
-#: logdialog.cpp:106
+#: logdialog.cpp:107
 #, kde-format
 msgid ""
 "Choose revision A by clicking with the left mouse button,\n"
@@ -1432,48 +1432,48 @@ msgstr ""
 "மீள்நோக்கு A தேர்வு செய்ய வலது சுட்டி விசை அழுத்தவும்.\n"
 "மீள்நோக்கு B தேர்வு செய்ய இடது சுட்டி விசை அழுத்தவும்."
 
-#: logdialog.cpp:133
+#: logdialog.cpp:134
 #, kde-format
 msgid "Revision A:"
 msgstr "மீள்நோக்கு ஏ:"
 
-#: logdialog.cpp:133
+#: logdialog.cpp:134
 #, kde-format
 msgid "Revision B:"
 msgstr "மீள்நோக்கு பி:"
 
-#: logdialog.cpp:142
+#: logdialog.cpp:143
 #, kde-format
 msgid "Select by tag:"
 msgstr "அட்டையின் படி தேர்வு செய்"
 
-#: logdialog.cpp:150
+#: logdialog.cpp:151
 #, kde-format
 msgid "Author:"
 msgstr "எழுதியவர்"
 
-#: logdialog.cpp:158
+#: logdialog.cpp:159
 #, kde-format
 msgid "Date:"
 msgstr "நாள்"
 
-#: logdialog.cpp:166
+#: logdialog.cpp:167
 #, kde-format
 msgid "Comment/Tags:"
 msgstr "குறிப்பு/அட்டை"
 
-#: logdialog.cpp:198
+#: logdialog.cpp:199
 #, fuzzy, kde-format
 #| msgid "&Annotate"
 msgid "&Annotate A"
 msgstr "விளக்கு"
 
-#: logdialog.cpp:200
+#: logdialog.cpp:201
 #, kde-format
 msgid "&Find"
 msgstr ""
 
-#: logdialog.cpp:207
+#: logdialog.cpp:208
 #, kde-format
 msgid ""
 "This revision is used when you click Annotate.\n"
@@ -1482,47 +1482,47 @@ msgstr ""
 "இந்த மீள்நோக்கு Annotateயை அழுத்தும் பொது உபயோகப்படும்.\n"
 "இந்த மீள்நோக்கு Diff  செயல்களில் உள்ள முதல் தர விவரங்கள் ஆகும்"
 
-#: logdialog.cpp:212
+#: logdialog.cpp:213
 #, kde-format
 msgid "This revision is used as the second item of a Diff operation."
 msgstr "இந்த மீள்நோக்கு Diff  செயல்களில் உள்ள இரண்டம் தர விவரங்கள் ஆகும்"
 
-#: logdialog.cpp:225
+#: logdialog.cpp:226
 #, fuzzy, kde-format
 msgid "&View A"
 msgstr "பார்வை"
 
-#: logdialog.cpp:226
+#: logdialog.cpp:227
 #, kde-format
 msgid "Create Patch..."
 msgstr "&உருவாக்கு..."
 
-#: logdialog.cpp:269
+#: logdialog.cpp:270
 #, kde-format
 msgid "CVS Log: %1"
 msgstr "CVS பதிவேடு: %1"
 
-#: logdialog.cpp:275
+#: logdialog.cpp:276
 #, kde-format
 msgid "CVS Log"
 msgstr "CVS பதிவேடு"
 
-#: logdialog.cpp:402
+#: logdialog.cpp:403
 #, kde-format
 msgid " (Branchpoint)"
 msgstr " (புள்ளியின் கிளை)"
 
-#: logdialog.cpp:421
+#: logdialog.cpp:422
 #, kde-format
 msgid "Please select revision A or B first."
 msgstr "தயவு செய்து மீள்நோக்கு A அல்லது B யை முதலில் தேர்வு செய்யவும்"
 
-#: logdialog.cpp:442
+#: logdialog.cpp:443
 #, kde-format
 msgid "View File"
 msgstr "கோப்பு காட்சி"
 
-#: logdialog.cpp:457 logdialog.cpp:516
+#: logdialog.cpp:459 logdialog.cpp:518
 #, kde-format
 msgid "Please select revision A or revisions A and B first."
 msgstr "தயவு செய்து மீள்நோக்கு A அல்லது மீள்நோக்கு A அல்லது B யை முதலில் தேர்வு செய்யவும்."
@@ -1572,24 +1572,24 @@ msgstr "மீள்நோக்கு பிக்கு தேர்வு ச
 msgid "date: %1; author: %2"
 msgstr "தேதி: %1; எழுத்தாளர்: %2"
 
-#: main.cpp:166
+#: main.cpp:167
 #, kde-format
 msgid "The sandbox to be loaded"
 msgstr "sandbox யை உள்வாங்கு"
 
-#: main.cpp:167
+#: main.cpp:168
 #, fuzzy, kde-format
 #| msgid "Show resolve dialog for the given file"
 msgid "Show resolve dialog for the given file."
 msgstr "கொடுக்கப்பட்ட கோப்புக்கு சரிசெய்யப்பட்ட உரையாடலை காட்டு"
 
-#: main.cpp:168
+#: main.cpp:169
 #, fuzzy, kde-format
 #| msgid "Show log dialog for the given file"
 msgid "Show log dialog for the given file."
 msgstr "கொடுக்கப்பட்ட கோப்புக்கு உள்ளிடு உரையாடலை காட்டு"
 
-#: main.cpp:169
+#: main.cpp:170
 #, fuzzy, kde-format
 msgid "Show annotation dialog for the given file."
 msgstr "கொடுக்கப்பட்ட கோப்புக்கு உள்ளிடு உரையாடலை காட்டு"

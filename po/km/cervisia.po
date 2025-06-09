@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-06-09 02:03+0000\n"
 "PO-Revision-Date: 2010-11-30 20:40+0700\n"
 "Last-Translator:  Seng Sutha <Sutha@khmeros.info>\n"
 "Language-Team: Khmer [km] <Support@khmeros.info>\n"
@@ -824,12 +824,12 @@ msgstr "បើក​ Sandbox"
 msgid "CVS Edit"
 msgstr "កែសម្រួល​ CVS "
 
-#: cervisiapart.cpp:1299 diffdialog.cpp:263 logdialog.cpp:472
+#: cervisiapart.cpp:1299 diffdialog.cpp:263 logdialog.cpp:474
 #, kde-format
 msgid "CVS Diff"
 msgstr "CVS Diff"
 
-#: cervisiapart.cpp:1312 diffdialog.cpp:473 logdialog.cpp:485
+#: cervisiapart.cpp:1312 diffdialog.cpp:473 logdialog.cpp:487
 #: resolvedialog.cpp:351
 #, kde-format
 msgid "Could not open file for writing."
@@ -1091,7 +1091,7 @@ msgstr "ចុះកំណត់ហេតុ​ CVS ពី​ចម្ងាយ�
 msgid "CVS Commit"
 msgstr "CVS Commit"
 
-#: commitdialog.cpp:84 logdialog.cpp:199
+#: commitdialog.cpp:84 logdialog.cpp:200
 #, kde-format
 msgid "&Diff"
 msgstr "&Diff"
@@ -1387,28 +1387,28 @@ msgstr "បាន​ប៉ះ​ ធ្វើ​បច្ចុប្បន្�
 msgid "Unknown "
 msgstr "មិន​ស្គាល់​"
 
-#: logdialog.cpp:86
+#: logdialog.cpp:87
 #, fuzzy, kde-format
 #| msgid "S&earch:"
 msgid "Search:"
 msgstr "ស្វែងរក ៖ "
 
-#: logdialog.cpp:97
+#: logdialog.cpp:98
 #, kde-format
 msgid "&Tree"
 msgstr "មែក​ធាង "
 
-#: logdialog.cpp:98
+#: logdialog.cpp:99
 #, kde-format
 msgid "&List"
 msgstr "បញ្ជី "
 
-#: logdialog.cpp:99
+#: logdialog.cpp:100
 #, kde-format
 msgid "CVS &Output"
 msgstr "ទិន្នផល​ CVS "
 
-#: logdialog.cpp:106
+#: logdialog.cpp:107
 #, fuzzy, kde-format
 msgid ""
 "Choose revision A by clicking with the left mouse button,\n"
@@ -1417,47 +1417,47 @@ msgstr ""
 "ជ្រើស​ការ​ពិនិត្យ​ A ឡើង​វិញ​​ដោយ​ប៊ូតុង​​​ចុច​កណ្ដុរ​ឆ្វេង​​\n"
 "ការ​ពិនិត្យ​ B ដោយ​ចុច​ប៊ូតុង​កណ្ដុរ​កណ្ដាល​ ។"
 
-#: logdialog.cpp:133
+#: logdialog.cpp:134
 #, kde-format
 msgid "Revision A:"
 msgstr "ការ​ពិនិត្យ A ឡើងវិញ​ ៖"
 
-#: logdialog.cpp:133
+#: logdialog.cpp:134
 #, kde-format
 msgid "Revision B:"
 msgstr "ការ​ពិនិត្យ B ឡើង​វិញ​ ៖"
 
-#: logdialog.cpp:142
+#: logdialog.cpp:143
 #, kde-format
 msgid "Select by tag:"
 msgstr "ជ្រើស​តាម​ស្លាក​ ៖​"
 
-#: logdialog.cpp:150
+#: logdialog.cpp:151
 #, kde-format
 msgid "Author:"
 msgstr "អ្នក​និពន្ធ ៖​"
 
-#: logdialog.cpp:158
+#: logdialog.cpp:159
 #, kde-format
 msgid "Date:"
 msgstr "កាល​បរិច្ឆេទ ៖​"
 
-#: logdialog.cpp:166
+#: logdialog.cpp:167
 #, kde-format
 msgid "Comment/Tags:"
 msgstr "សេចក្ដី​អធិប្បាយ​​/ស្លាក​ ៖​"
 
-#: logdialog.cpp:198
+#: logdialog.cpp:199
 #, fuzzy, kde-format
 msgid "&Annotate A"
 msgstr "ចារ​សេចក្ដី​ពន្យល់​ A"
 
-#: logdialog.cpp:200
+#: logdialog.cpp:201
 #, kde-format
 msgid "&Find"
 msgstr "រក "
 
-#: logdialog.cpp:207
+#: logdialog.cpp:208
 #, fuzzy, kde-format
 msgid ""
 "This revision is used when you click Annotate.\n"
@@ -1466,49 +1466,49 @@ msgstr ""
 "ការ​ពិនិត្យ​ឡើង​វិញ​នេះ​ត្រូវ​បាន​ប្រើ​ នៅ​ពេល​អ្នក​ចុច​​ Annotate ។\n"
 "វា​ត្រូវ​បាន​ប្រើ​ធាតុ​នៃ​ប្រតិបត្តិការ​ Diff ​ដំបូង​ ។"
 
-#: logdialog.cpp:212
+#: logdialog.cpp:213
 #, fuzzy, kde-format
 msgid "This revision is used as the second item of a Diff operation."
 msgstr "កំណែ​នេះ​ត្រូវ​បាន​​ប្រើ​ធាតុ​នៃ​ប្រតិបត្តិការ​ Diff ទីពីរ​ ។"
 
-#: logdialog.cpp:225
+#: logdialog.cpp:226
 #, fuzzy, kde-format
 #| msgctxt "to view revision A"
 #| msgid "&View A"
 msgid "&View A"
 msgstr "មើល​ A"
 
-#: logdialog.cpp:226
+#: logdialog.cpp:227
 #, kde-format
 msgid "Create Patch..."
 msgstr "បង្កើត​បំណះ​..."
 
-#: logdialog.cpp:269
+#: logdialog.cpp:270
 #, kde-format
 msgid "CVS Log: %1"
 msgstr "កំណត់​ហេតុ​ CVS ៖ %1"
 
-#: logdialog.cpp:275
+#: logdialog.cpp:276
 #, kde-format
 msgid "CVS Log"
 msgstr "កំណត់ហេតុ​ CVS "
 
-#: logdialog.cpp:402
+#: logdialog.cpp:403
 #, kde-format
 msgid " (Branchpoint)"
 msgstr " (Branchpoint)"
 
-#: logdialog.cpp:421
+#: logdialog.cpp:422
 #, fuzzy, kde-format
 msgid "Please select revision A or B first."
 msgstr "ដំបូង​សូម​ជ្រើស​ការ​ពិនិត្យ​ឡើង​វិញ​ A ឬ​ B ។"
 
-#: logdialog.cpp:442
+#: logdialog.cpp:443
 #, fuzzy, kde-format
 msgid "View File"
 msgstr "មើល​ឯកសារ​"
 
-#: logdialog.cpp:457 logdialog.cpp:516
+#: logdialog.cpp:459 logdialog.cpp:518
 #, fuzzy, kde-format
 msgid "Please select revision A or revisions A and B first."
 msgstr "ដំបូង​សូម​ជ្រើស​ការ​ពិនិត្យ A ឡើង​វិញ​ ឬ​ការ​ពិនិត្យ​ A និង​ B ឡើង​វិញ​ ។"
@@ -1558,22 +1558,22 @@ msgstr "ជ្រើស​សម្រាប់​ការពិនិត្យ
 msgid "date: %1; author: %2"
 msgstr "date: %1; author: %2"
 
-#: main.cpp:166
+#: main.cpp:167
 #, fuzzy, kde-format
 msgid "The sandbox to be loaded"
 msgstr "sandbox ​ត្រូវ​បាន​ផ្ទុក​"
 
-#: main.cpp:167
+#: main.cpp:168
 #, fuzzy, kde-format
 msgid "Show resolve dialog for the given file."
 msgstr "បង្ហាញ​ប្រអប់​ដោះស្រាយ​ សម្រាប់​ឯកសារ​ដែល​បាន​ផ្ដល់​"
 
-#: main.cpp:168
+#: main.cpp:169
 #, fuzzy, kde-format
 msgid "Show log dialog for the given file."
 msgstr "បង្ហាញ​ប្រអប់​កំណត់​ហេតុ​ សម្រាប់​ឯកសារ​ដែល​បាន​ផ្ដល់​"
 
-#: main.cpp:169
+#: main.cpp:170
 #, fuzzy, kde-format
 msgid "Show annotation dialog for the given file."
 msgstr "បង្ហាញ​ប្រអប់​ចំណារ​ពន្យល់​ សម្រាប់​ឯកសារ​ដែល​បាន​ផ្ដល់​"

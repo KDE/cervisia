@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-06-09 02:03+0000\n"
 "PO-Revision-Date: 2016-09-05 12:47+0100\n"
 "Last-Translator: Luciano Montanaro <mikelima@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -836,12 +836,12 @@ msgstr "Apri copia locale"
 msgid "CVS Edit"
 msgstr "CVS Edit"
 
-#: cervisiapart.cpp:1299 diffdialog.cpp:263 logdialog.cpp:472
+#: cervisiapart.cpp:1299 diffdialog.cpp:263 logdialog.cpp:474
 #, kde-format
 msgid "CVS Diff"
 msgstr "Confronto CVS"
 
-#: cervisiapart.cpp:1312 diffdialog.cpp:473 logdialog.cpp:485
+#: cervisiapart.cpp:1312 diffdialog.cpp:473 logdialog.cpp:487
 #: resolvedialog.cpp:351
 #, kde-format
 msgid "Could not open file for writing."
@@ -1106,7 +1106,7 @@ msgstr "Registro remoto di CVS"
 msgid "CVS Commit"
 msgstr "Deposita in CVS"
 
-#: commitdialog.cpp:84 logdialog.cpp:199
+#: commitdialog.cpp:84 logdialog.cpp:200
 #, kde-format
 msgid "&Diff"
 msgstr "&Confronto"
@@ -1403,27 +1403,27 @@ msgstr "Aggiornamento, con patch "
 msgid "Unknown "
 msgstr "Sconosciuto "
 
-#: logdialog.cpp:86
+#: logdialog.cpp:87
 #, kde-format
 msgid "Search:"
 msgstr "Cerca:"
 
-#: logdialog.cpp:97
+#: logdialog.cpp:98
 #, kde-format
 msgid "&Tree"
 msgstr "&Albero"
 
-#: logdialog.cpp:98
+#: logdialog.cpp:99
 #, kde-format
 msgid "&List"
 msgstr "&Lista"
 
-#: logdialog.cpp:99
+#: logdialog.cpp:100
 #, kde-format
 msgid "CVS &Output"
 msgstr "&Output di CVS"
 
-#: logdialog.cpp:106
+#: logdialog.cpp:107
 #, kde-format
 msgid ""
 "Choose revision A by clicking with the left mouse button,\n"
@@ -1432,47 +1432,47 @@ msgstr ""
 "Scegli la revisione A con un clic del tasto sinistro del mouse,\n"
 "la revisione B con un clic del tasto centrale del mouse."
 
-#: logdialog.cpp:133
+#: logdialog.cpp:134
 #, kde-format
 msgid "Revision A:"
 msgstr "Revisione A:"
 
-#: logdialog.cpp:133
+#: logdialog.cpp:134
 #, kde-format
 msgid "Revision B:"
 msgstr "Revisione B:"
 
-#: logdialog.cpp:142
+#: logdialog.cpp:143
 #, kde-format
 msgid "Select by tag:"
 msgstr "Seleziona per tag:"
 
-#: logdialog.cpp:150
+#: logdialog.cpp:151
 #, kde-format
 msgid "Author:"
 msgstr "Autore:"
 
-#: logdialog.cpp:158
+#: logdialog.cpp:159
 #, kde-format
 msgid "Date:"
 msgstr "Data:"
 
-#: logdialog.cpp:166
+#: logdialog.cpp:167
 #, kde-format
 msgid "Comment/Tags:"
 msgstr "Commento o tag:"
 
-#: logdialog.cpp:198
+#: logdialog.cpp:199
 #, kde-format
 msgid "&Annotate A"
 msgstr "&Annotazioni A"
 
-#: logdialog.cpp:200
+#: logdialog.cpp:201
 #, kde-format
 msgid "&Find"
 msgstr "&Trova"
 
-#: logdialog.cpp:207
+#: logdialog.cpp:208
 #, kde-format
 msgid ""
 "This revision is used when you click Annotate.\n"
@@ -1481,49 +1481,49 @@ msgstr ""
 "Questa revisione è usata quando premi Annotazioni.\n"
 "È anche usata come primo elemento di una operazione di confronto."
 
-#: logdialog.cpp:212
+#: logdialog.cpp:213
 #, kde-format
 msgid "This revision is used as the second item of a Diff operation."
 msgstr ""
 "Questa revisione è usata come secondo elemento di una operazione di "
 "confronto."
 
-#: logdialog.cpp:225
+#: logdialog.cpp:226
 #, kde-format
 msgid "&View A"
 msgstr "&Visualizza A"
 
-#: logdialog.cpp:226
+#: logdialog.cpp:227
 #, kde-format
 msgid "Create Patch..."
 msgstr "Crea patch..."
 
-#: logdialog.cpp:269
+#: logdialog.cpp:270
 #, kde-format
 msgid "CVS Log: %1"
 msgstr "Registro di CVS: %1"
 
-#: logdialog.cpp:275
+#: logdialog.cpp:276
 #, kde-format
 msgid "CVS Log"
 msgstr "Registro di CVS"
 
-#: logdialog.cpp:402
+#: logdialog.cpp:403
 #, kde-format
 msgid " (Branchpoint)"
 msgstr " (Diramazione)"
 
-#: logdialog.cpp:421
+#: logdialog.cpp:422
 #, kde-format
 msgid "Please select revision A or B first."
 msgstr "Seleziona prima le revisioni A e B, per piacere."
 
-#: logdialog.cpp:442
+#: logdialog.cpp:443
 #, kde-format
 msgid "View File"
 msgstr "Mostra file"
 
-#: logdialog.cpp:457 logdialog.cpp:516
+#: logdialog.cpp:459 logdialog.cpp:518
 #, kde-format
 msgid "Please select revision A or revisions A and B first."
 msgstr "Per cominciare seleziona la revisione A o le revisioni A e B."
@@ -1573,22 +1573,22 @@ msgstr "Seleziona come revisione B"
 msgid "date: %1; author: %2"
 msgstr "data: %1; autore: %2"
 
-#: main.cpp:166
+#: main.cpp:167
 #, kde-format
 msgid "The sandbox to be loaded"
 msgstr "La copia locale da caricare"
 
-#: main.cpp:167
+#: main.cpp:168
 #, kde-format
 msgid "Show resolve dialog for the given file."
 msgstr "Apri la finestra di risoluzione per il file selezionato."
 
-#: main.cpp:168
+#: main.cpp:169
 #, kde-format
 msgid "Show log dialog for the given file."
 msgstr "Apri la finestra di registro per il file selezionato."
 
-#: main.cpp:169
+#: main.cpp:170
 #, kde-format
 msgid "Show annotation dialog for the given file."
 msgstr "Apri la finestra delle annotazioni per il file selezionato."

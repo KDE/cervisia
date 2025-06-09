@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-06-09 02:03+0000\n"
 "PO-Revision-Date: 2002-11-14 16:55SAST\n"
 "Last-Translator: Lwandle Mgidlana <lwandle@translate.org.za>\n"
 "Language-Team: Xhosa <xhosa@translate.org.za>\n"
@@ -845,12 +845,12 @@ msgstr "vula Ibhokisi yeasanti"
 msgid "CVS Edit"
 msgstr "CVS Hlela"
 
-#: cervisiapart.cpp:1299 diffdialog.cpp:263 logdialog.cpp:472
+#: cervisiapart.cpp:1299 diffdialog.cpp:263 logdialog.cpp:474
 #, kde-format
 msgid "CVS Diff"
 msgstr "CVS Diff"
 
-#: cervisiapart.cpp:1312 diffdialog.cpp:473 logdialog.cpp:485
+#: cervisiapart.cpp:1312 diffdialog.cpp:473 logdialog.cpp:487
 #: resolvedialog.cpp:351
 #, kde-format
 msgid "Could not open file for writing."
@@ -1111,7 +1111,7 @@ msgstr "CVS Susa"
 msgid "CVS Commit"
 msgstr "Ubophelelo lwe CVS"
 
-#: commitdialog.cpp:84 logdialog.cpp:199
+#: commitdialog.cpp:84 logdialog.cpp:200
 #, kde-format
 msgid "&Diff"
 msgstr "&Diff"
@@ -1409,27 +1409,27 @@ msgstr "Gqiba, Cima "
 msgid "Unknown "
 msgstr "Ayaziwa "
 
-#: logdialog.cpp:86
+#: logdialog.cpp:87
 #, kde-format
 msgid "Search:"
 msgstr ""
 
-#: logdialog.cpp:97
+#: logdialog.cpp:98
 #, kde-format
 msgid "&Tree"
 msgstr "&Umthi"
 
-#: logdialog.cpp:98
+#: logdialog.cpp:99
 #, kde-format
 msgid "&List"
 msgstr "&Uluhlu"
 
-#: logdialog.cpp:99
+#: logdialog.cpp:100
 #, kde-format
 msgid "CVS &Output"
 msgstr ""
 
-#: logdialog.cpp:106
+#: logdialog.cpp:107
 #, fuzzy, kde-format
 msgid ""
 "Choose revision A by clicking with the left mouse button,\n"
@@ -1438,48 +1438,48 @@ msgstr ""
 "Khetha ukumbuzo B ngokunqakraza ngeqhosha lasekunene.\n"
 "ukuzikumbuza B ngokunqakraza ngeqosha le mouse eliphakathi."
 
-#: logdialog.cpp:133
+#: logdialog.cpp:134
 #, kde-format
 msgid "Revision A:"
 msgstr "Ukuzikumbuza A:"
 
-#: logdialog.cpp:133
+#: logdialog.cpp:134
 #, kde-format
 msgid "Revision B:"
 msgstr "Ukuzikumbuza B:"
 
-#: logdialog.cpp:142
+#: logdialog.cpp:143
 #, kde-format
 msgid "Select by tag:"
 msgstr "Khetha iphetshana elichazayo:"
 
-#: logdialog.cpp:150
+#: logdialog.cpp:151
 #, kde-format
 msgid "Author:"
 msgstr "Umbhali:"
 
-#: logdialog.cpp:158
+#: logdialog.cpp:159
 #, kde-format
 msgid "Date:"
 msgstr "Umhla:"
 
-#: logdialog.cpp:166
+#: logdialog.cpp:167
 #, kde-format
 msgid "Comment/Tags:"
 msgstr "Umbono/Amapetshana achazayo:"
 
-#: logdialog.cpp:198
+#: logdialog.cpp:199
 #, fuzzy, kde-format
 #| msgid "&Annotate"
 msgid "&Annotate A"
 msgstr "&Annotate"
 
-#: logdialog.cpp:200
+#: logdialog.cpp:201
 #, kde-format
 msgid "&Find"
 msgstr ""
 
-#: logdialog.cpp:207
+#: logdialog.cpp:208
 #, kde-format
 msgid ""
 "This revision is used when you click Annotate.\n"
@@ -1488,47 +1488,47 @@ msgstr ""
 "Okukuzikumbuza kusebenziseka xa unqakraza Annonate.\n"
 "Isebenziseka njengomba wokuqala wosebenziso we Diff."
 
-#: logdialog.cpp:212
+#: logdialog.cpp:213
 #, kde-format
 msgid "This revision is used as the second item of a Diff operation."
 msgstr "Oluguqulelo lusebenziseka njengomba wesibini wosebenziso we Diff."
 
-#: logdialog.cpp:225
+#: logdialog.cpp:226
 #, fuzzy, kde-format
 msgid "&View A"
 msgstr "Hl&ela Ifayile"
 
-#: logdialog.cpp:226
+#: logdialog.cpp:227
 #, fuzzy, kde-format
 msgid "Create Patch..."
 msgstr "Yenza"
 
-#: logdialog.cpp:269
+#: logdialog.cpp:270
 #, kde-format
 msgid "CVS Log: %1"
 msgstr "CVS Ushicilelo oluneenkcukacha: %1"
 
-#: logdialog.cpp:275
+#: logdialog.cpp:276
 #, kde-format
 msgid "CVS Log"
 msgstr "CVS i Log"
 
-#: logdialog.cpp:402
+#: logdialog.cpp:403
 #, kde-format
 msgid " (Branchpoint)"
 msgstr " (Isebe lencopho)"
 
-#: logdialog.cpp:421
+#: logdialog.cpp:422
 #, fuzzy, kde-format
 msgid "Please select revision A or B first."
 msgstr "Nceda ukhethe uguqulelo A no B kuqala."
 
-#: logdialog.cpp:442
+#: logdialog.cpp:443
 #, fuzzy, kde-format
 msgid "View File"
 msgstr "Hl&ela Ifayile"
 
-#: logdialog.cpp:457 logdialog.cpp:516
+#: logdialog.cpp:459 logdialog.cpp:518
 #, fuzzy, kde-format
 msgid "Please select revision A or revisions A and B first."
 msgstr "Nceda ukhethe uguqulelo A no B kuqala."
@@ -1580,23 +1580,23 @@ msgstr ""
 msgid "date: %1; author: %2"
 msgstr ""
 
-#: main.cpp:166
+#: main.cpp:167
 #, kde-format
 msgid "The sandbox to be loaded"
 msgstr "Ibhokisi yesanti ezakongezwa"
 
-#: main.cpp:167
+#: main.cpp:168
 #, fuzzy, kde-format
 #| msgid "Show resolve dialog for the given file"
 msgid "Show resolve dialog for the given file."
 msgstr "Ibonisa usombululo lwencoko yababini yefayile enikiweyo"
 
-#: main.cpp:168
+#: main.cpp:169
 #, fuzzy, kde-format
 msgid "Show log dialog for the given file."
 msgstr "Ibonisa usombululo lwencoko yababini yefayile enikiweyo"
 
-#: main.cpp:169
+#: main.cpp:170
 #, fuzzy, kde-format
 msgid "Show annotation dialog for the given file."
 msgstr "Ibonisa usombululo lwencoko yababini yefayile enikiweyo"

@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-06-09 02:03+0000\n"
 "PO-Revision-Date: 2019-09-29 12:44+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -852,12 +852,12 @@ msgstr "Боз кардани регдон"
 msgid "CVS Edit"
 msgstr "Таъғир додани CVS"
 
-#: cervisiapart.cpp:1299 diffdialog.cpp:263 logdialog.cpp:472
+#: cervisiapart.cpp:1299 diffdialog.cpp:263 logdialog.cpp:474
 #, kde-format
 msgid "CVS Diff"
 msgstr "Фарқияти CVS"
 
-#: cervisiapart.cpp:1312 diffdialog.cpp:473 logdialog.cpp:485
+#: cervisiapart.cpp:1312 diffdialog.cpp:473 logdialog.cpp:487
 #: resolvedialog.cpp:351
 #, kde-format
 msgid "Could not open file for writing."
@@ -1121,7 +1121,7 @@ msgstr "CVS дурдаст кардани сабти воқеъӣ"
 msgid "CVS Commit"
 msgstr "Ҷойгиркуни дар CVS"
 
-#: commitdialog.cpp:84 logdialog.cpp:199
+#: commitdialog.cpp:84 logdialog.cpp:200
 #, kde-format
 msgid "&Diff"
 msgstr "&Фарқият"
@@ -1419,28 +1419,28 @@ msgstr "Нав карда шуд, ҳузф карда шуд"
 msgid "Unknown "
 msgstr "Номаълум"
 
-#: logdialog.cpp:86
+#: logdialog.cpp:87
 #, fuzzy, kde-format
 #| msgid "S&earch:"
 msgid "Search:"
 msgstr "К&офтани:"
 
-#: logdialog.cpp:97
+#: logdialog.cpp:98
 #, kde-format
 msgid "&Tree"
 msgstr "&Дарахт"
 
-#: logdialog.cpp:98
+#: logdialog.cpp:99
 #, kde-format
 msgid "&List"
 msgstr "&Рӯйхат"
 
-#: logdialog.cpp:99
+#: logdialog.cpp:100
 #, kde-format
 msgid "CVS &Output"
 msgstr "&Баровардани CVS"
 
-#: logdialog.cpp:106
+#: logdialog.cpp:107
 #, kde-format
 msgid ""
 "Choose revision A by clicking with the left mouse button,\n"
@@ -1449,48 +1449,48 @@ msgstr ""
 "Тафтиши А-ро бо прхш кардани тугмаи чапи муш, \n"
 "тафтиши В-ро бо тугмаи мобайни муш интихоб кунед."
 
-#: logdialog.cpp:133
+#: logdialog.cpp:134
 #, kde-format
 msgid "Revision A:"
 msgstr "Тафтиши А:"
 
-#: logdialog.cpp:133
+#: logdialog.cpp:134
 #, kde-format
 msgid "Revision B:"
 msgstr "Тафтиши В:"
 
-#: logdialog.cpp:142
+#: logdialog.cpp:143
 #, kde-format
 msgid "Select by tag:"
 msgstr "Интихоб аз рӯи нишони:"
 
-#: logdialog.cpp:150
+#: logdialog.cpp:151
 #, kde-format
 msgid "Author:"
 msgstr "Муаллиф:"
 
-#: logdialog.cpp:158
+#: logdialog.cpp:159
 #, kde-format
 msgid "Date:"
 msgstr "Сана:"
 
-#: logdialog.cpp:166
+#: logdialog.cpp:167
 #, kde-format
 msgid "Comment/Tags:"
 msgstr "Эзоҳот/нишона:"
 
-#: logdialog.cpp:198
+#: logdialog.cpp:199
 #, fuzzy, kde-format
 #| msgid "&Annotate"
 msgid "&Annotate A"
 msgstr "&Шарҳи мухтасар"
 
-#: logdialog.cpp:200
+#: logdialog.cpp:201
 #, kde-format
 msgid "&Find"
 msgstr ""
 
-#: logdialog.cpp:207
+#: logdialog.cpp:208
 #, kde-format
 msgid ""
 "This revision is used when you click Annotate.\n"
@@ -1499,49 +1499,49 @@ msgstr ""
 "Ин тафтишот дар шарҳи мухтасар ва ҳамчун далели \n"
 "якуми амалиёти ҷустуҷӯи фарқият истифода бурда мешавад."
 
-#: logdialog.cpp:212
+#: logdialog.cpp:213
 #, kde-format
 msgid "This revision is used as the second item of a Diff operation."
 msgstr ""
 "Ин тафтишот ҳамчун далели дюми амалиёти ҷустуҷӯи фарқият истифода бурда "
 "мешавад."
 
-#: logdialog.cpp:225
+#: logdialog.cpp:226
 #, fuzzy, kde-format
 msgid "&View A"
 msgstr "&Нишон додан"
 
-#: logdialog.cpp:226
+#: logdialog.cpp:227
 #, kde-format
 msgid "Create Patch..."
 msgstr "Эҷоди дарбеҳ..."
 
-#: logdialog.cpp:269
+#: logdialog.cpp:270
 #, kde-format
 msgid "CVS Log: %1"
 msgstr "Маҷалаи CVS: %1"
 
-#: logdialog.cpp:275
+#: logdialog.cpp:276
 #, kde-format
 msgid "CVS Log"
 msgstr "Маҷалаи CVS"
 
-#: logdialog.cpp:402
+#: logdialog.cpp:403
 #, kde-format
 msgid " (Branchpoint)"
 msgstr " (Нуқтаи шоха)"
 
-#: logdialog.cpp:421
+#: logdialog.cpp:422
 #, kde-format
 msgid "Please select revision A or B first."
 msgstr "Дар аввал тафтишоти А ё В-ро интихоб кунед."
 
-#: logdialog.cpp:442
+#: logdialog.cpp:443
 #, kde-format
 msgid "View File"
 msgstr "Намоиши файл"
 
-#: logdialog.cpp:457 logdialog.cpp:516
+#: logdialog.cpp:459 logdialog.cpp:518
 #, kde-format
 msgid "Please select revision A or revisions A and B first."
 msgstr "Дар аввал тафтишоти А ё тафтишоти А ва В-ро интихоб кунед."
@@ -1591,24 +1591,24 @@ msgstr "Барои тафтиши В интихоб кунед"
 msgid "date: %1; author: %2"
 msgstr "сана: %1; муаллиф: %2"
 
-#: main.cpp:166
+#: main.cpp:167
 #, kde-format
 msgid "The sandbox to be loaded"
 msgstr "Регдоне, ки пурбор карда мешавад"
 
-#: main.cpp:167
+#: main.cpp:168
 #, fuzzy, kde-format
 #| msgid "Show resolve dialog for the given file"
 msgid "Show resolve dialog for the given file."
 msgstr "Намоиши мубоҳисаи бартарафкунии низоъ барои файли ишорашуда"
 
-#: main.cpp:168
+#: main.cpp:169
 #, fuzzy, kde-format
 #| msgid "Show log dialog for the given file"
 msgid "Show log dialog for the given file."
 msgstr "Намоиши маҷала барои файли ишорашуда"
 
-#: main.cpp:169
+#: main.cpp:170
 #, fuzzy, kde-format
 #| msgid "Show annotation dialog for the given file"
 msgid "Show annotation dialog for the given file."
