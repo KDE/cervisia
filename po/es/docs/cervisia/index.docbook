@@ -189,7 +189,7 @@
 <step
 ><para
 >Pulse el botón <guilabel
->...</guilabel
+>…</guilabel
 > para seleccionar la directorio en la que quiere crear el repositorio o escriba directamente su ubicación en el cuadro de texto. Por ejemplo, si quiere situar el repositorio en la carpeta <filename
 >/home/usuario</filename
 > y llamarlo<filename
@@ -352,7 +352,7 @@
 ><guimenu
 >Repositorio</guimenu
 ><guimenuitem
->Repositorios...</guimenuitem
+>Repositorios…</guimenuitem
 > </menuchoice
 >. </para
 ></step>
@@ -1055,7 +1055,7 @@
 ><guimenu
 >Archivo</guimenu
 ><guimenuitem
->Entregar...</guimenuitem
+>Entregar…</guimenuitem
 ></menuchoice
 > cuando tenga seleccionada una carpeta, se entregarán todos los archivos de esa carpeta así como los contenidos por otras dentro de ella. Si no la tiene marcada, solo se entregarán los archivos de la carpeta seleccionada. </para>
 
@@ -1217,10 +1217,10 @@
 ><guimenu
 >Archivo</guimenu
 ><guimenuitem
->Añadir al repositorio...</guimenuitem
+>Añadir al repositorio…</guimenuitem
 ></menuchoice
 > o bien pulsando con el botón derecho sobre la carpeta seleccionada y eligiendo <guimenuitem
->Añadir al repositorio...</guimenuitem
+>Añadir al repositorio…</guimenuitem
 > en el menú contextual. Observe que a diferencia del proceso de añadir archivos, al añadir directorios no es necesario realizar una entrega posterior. &cervisia; ejecutará la orden </para>
 
 
@@ -1322,7 +1322,7 @@
 ><guimenu
 >Archivo</guimenu
 ><guimenuitem
->Insertar entrada de registro de cambios...</guimenuitem
+>Insertar entrada de registro de cambios…</guimenuitem
 ></menuchoice
 >. Si ya existe un archivo llamado <filename
 >ChangeLog</filename
@@ -2212,7 +2212,7 @@ Cambios en el repositorio
 <para
 >Aquí discutiremos solo los aspectos técnicos del etiquetado y denominación de las ramas. Si usted es <emphasis
 >usuario</emphasis
-> y no administrador de un repositorio, probablemente nunca se le presente este problema.Pero si usted administra un proyecto, debería leer también acerca de los problemas no técnicos (cantidad de tiempo, facilidad con la que se cometen errores...) que conlleva el mantenimiento de varias ramas de un mismo proyecto. Podrá encontrar algunas referencias sobre este tema en el apéndice. </para>
+> y no administrador de un repositorio, probablemente nunca se le presente este problema.Pero si usted administra un proyecto, debería leer también acerca de los problemas no técnicos (cantidad de tiempo, facilidad con la que se cometen errores…) que conlleva el mantenimiento de varias ramas de un mismo proyecto. Podrá encontrar algunas referencias sobre este tema en el apéndice. </para>
 
 <para
 >El etiquetado suele hacerse cada vez que se publica una nueva versión con lo cual es bastante sencillo volver a la situación anterior si algo va mal. En general, el nombre de las etiquetas está formado por el nombre del proyecto y el número de versión. Por ejemplo, puede obtener la versión 1.0 de  &cervisia; si busca la etiqueta <literal
@@ -2798,7 +2798,7 @@ Cambios en el repositorio
 <varlistentry id="customize-protocolfont">
 <term
 ><guilabel
->Tipo de letra para la ventana de protocolo...</guilabel
+>Tipo de letra para la ventana de protocolo…</guilabel
 ></term>
 <listitem
 ><para
@@ -2813,7 +2813,7 @@ Cambios en el repositorio
 <varlistentry id="customize-annotatefont">
 <term
 ><guilabel
->Tipo de letra para la vista anotada...</guilabel
+>Tipo de letra para la vista anotada…</guilabel
 ></term>
 <listitem
 ><para
@@ -2828,7 +2828,7 @@ Cambios en el repositorio
 <varlistentry id="customize-difffont">
 <term
 ><guilabel
->Tipo de letra para vista de diferencias...</guilabel
+>Tipo de letra para vista de diferencias…</guilabel
 ></term>
 <listitem
 ><para
@@ -3017,7 +3017,7 @@ Cambios en el repositorio
 > <guimenu
 >Archivo</guimenu
 ><guimenuitem
->Abrir entorno de pruebas...</guimenuitem
+>Abrir entorno de pruebas…</guimenuitem
 > </menuchoice
 ></term>
 <listitem
@@ -3157,7 +3157,7 @@ Cambios en el repositorio
 > <guimenu
 >Archivo</guimenu
 ><guimenuitem
->Añadir al repositorio...</guimenuitem
+>Añadir al repositorio…</guimenuitem
 > </menuchoice
 ></term>
 <listitem
@@ -3195,7 +3195,7 @@ Cambios en el repositorio
 > <guimenu
 >Archivo</guimenu
 ><guimenuitem
->Eliminar del repositorio...</guimenuitem
+>Eliminar del repositorio…</guimenuitem
 > </menuchoice
 ></term>
 <listitem
@@ -3316,7 +3316,7 @@ Cambios en el repositorio
 > <guimenu
 >Ver</guimenu
 ><guimenuitem
->Anotar...</guimenuitem
+>Anotar…</guimenuitem
 > </menuchoice
 ></term>
 <listitem
@@ -3616,7 +3616,7 @@ Cambios en el repositorio
 ><guimenu
 >Avanzado</guimenu
 ><guimenuitem
->Eliminar testigo...</guimenuitem
+>Eliminar testigo…</guimenuitem
 > </menuchoice
 ></term>
 <listitem
