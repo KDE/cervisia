@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2016-06-05 07:40+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -883,21 +883,6 @@ msgstr ""
 "Det här är inte en CVS-katalog.\n"
 "Om du inte avsåg att använda Cervisia, kan du byta visningsläge i Konqueror."
 
-#. i18n: ectx: label, entry (ConflictColor), group (Colors)
-#: cervisiapart.kcfg:24
-#, kde-format
-msgid ""
-"The foreground color used to highlight files with a conflict in the file "
-"view."
-msgstr ""
-"Förgrundsfärg som används för att markera filer med konflikter i filvyn."
-
-#. i18n: ectx: label, entry, group (General)
-#: cervisiapart.kcfg:46
-#, kde-format
-msgid "Delay (ms) until the progress dialog appears."
-msgstr "Tidsgräns (i ms) innan förloppsdialogrutan visas."
-
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -917,48 +902,6 @@ msgstr "Låter dig anpassa tangentbindingar"
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Avslutar Cervisia"
-
-#. i18n: ectx: Menu (file)
-#: cervisiashellui.rc:4 cervisiaui.rc:4
-#, kde-format
-msgid "&File"
-msgstr "&Arkiv"
-
-#. i18n: ectx: Menu (settings)
-#: cervisiashellui.rc:7 cervisiaui.rc:70
-#, kde-format
-msgid "&Settings"
-msgstr "In&ställningar"
-
-#. i18n: ectx: Menu (help)
-#: cervisiashellui.rc:11 cervisiaui.rc:80
-#, kde-format
-msgid "&Help"
-msgstr "&Hjälp"
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: cervisiashellui.rc:16 cervisiaui.rc:84
-#, kde-format
-msgid "Main Toolbar"
-msgstr "Huvudverktygsrad"
-
-#. i18n: ectx: Menu (view)
-#: cervisiaui.rc:24
-#, kde-format
-msgid "&View"
-msgstr "&Visa"
-
-#. i18n: ectx: Menu (advanced)
-#: cervisiaui.rc:43
-#, kde-format
-msgid "&Advanced"
-msgstr "Avan&cerat"
-
-#. i18n: ectx: Menu (repository)
-#: cervisiaui.rc:63
-#, kde-format
-msgid "&Repository"
-msgstr "A&rkivering"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1961,24 +1904,6 @@ msgstr "Inte i CVS:"
 msgid "Split main window &horizontally"
 msgstr "&Dela huvudfönstret horisontellt"
 
-#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
-#: settingsdialog_advanced.ui:32
-#, kde-format
-msgid "&Timeout after which a progress dialog appears (in ms):"
-msgstr "&Tidsgräns innan en förloppsdialogruta visas (i ms):"
-
-#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
-#: settingsdialog_advanced.ui:45
-#, kde-format
-msgid "Default compression &level:"
-msgstr "Förvald komprimerings&nivå:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
-#: settingsdialog_advanced.ui:58
-#, kde-format
-msgid "Utilize a running or start a new ssh-agent process"
-msgstr "Använd en som körs, eller starta en ny SSH-agentprocess"
-
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2122,6 +2047,45 @@ msgstr "Ta bort redigering"
 #, kde-format
 msgid "Commit"
 msgstr "Arkivera"
+
+#~ msgid ""
+#~ "The foreground color used to highlight files with a conflict in the file "
+#~ "view."
+#~ msgstr ""
+#~ "Förgrundsfärg som används för att markera filer med konflikter i filvyn."
+
+#~ msgid "Delay (ms) until the progress dialog appears."
+#~ msgstr "Tidsgräns (i ms) innan förloppsdialogrutan visas."
+
+#~ msgid "&File"
+#~ msgstr "&Arkiv"
+
+#~ msgid "&Settings"
+#~ msgstr "In&ställningar"
+
+#~ msgid "&Help"
+#~ msgstr "&Hjälp"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Huvudverktygsrad"
+
+#~ msgid "&View"
+#~ msgstr "&Visa"
+
+#~ msgid "&Advanced"
+#~ msgstr "Avan&cerat"
+
+#~ msgid "&Repository"
+#~ msgstr "A&rkivering"
+
+#~ msgid "&Timeout after which a progress dialog appears (in ms):"
+#~ msgstr "&Tidsgräns innan en förloppsdialogruta visas (i ms):"
+
+#~ msgid "Default compression &level:"
+#~ msgstr "Förvald komprimerings&nivå:"
+
+#~ msgid "Utilize a running or start a new ssh-agent process"
+#~ msgstr "Använd en som körs, eller starta en ny SSH-agentprocess"
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr "Visar hjälp för Cervisia"

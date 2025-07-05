@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2007-09-10 11:49+0545\n"
 "Last-Translator: Narayan Kumar Magar <narayan@mpp.org.np>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -877,20 +877,6 @@ msgstr ""
 "यो CVS फोल्डर होइन ।\n"
 "यदि तपाईँले Cervisia प्रयोग गर्ने चाहाना नगरेमा, कन्क्वेररको दृश्य मोड स्विच गर्न सक्नुहुन्छ ।"
 
-#. i18n: ectx: label, entry (ConflictColor), group (Colors)
-#: cervisiapart.kcfg:24
-#, kde-format
-msgid ""
-"The foreground color used to highlight files with a conflict in the file "
-"view."
-msgstr "फाइल दृश्यमा विवादीत फाइलहरू हाइलाइट गर्न प्रयोग गरिने अग्रभूमि रङ ।"
-
-#. i18n: ectx: label, entry, group (General)
-#: cervisiapart.kcfg:46
-#, kde-format
-msgid "Delay (ms) until the progress dialog appears."
-msgstr "प्रगति संवाद देखापर्ने सम्मको विलम्ब (मिलिसेकेन्ड) ।"
-
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -910,48 +896,6 @@ msgstr "तपाईँलाई कुञ्जी बाइन्डिङ अ
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Cervisia निस्कन्छ"
-
-#. i18n: ectx: Menu (file)
-#: cervisiashellui.rc:4 cervisiaui.rc:4
-#, kde-format
-msgid "&File"
-msgstr "फाइल"
-
-#. i18n: ectx: Menu (settings)
-#: cervisiashellui.rc:7 cervisiaui.rc:70
-#, kde-format
-msgid "&Settings"
-msgstr "सेटिङ"
-
-#. i18n: ectx: Menu (help)
-#: cervisiashellui.rc:11 cervisiaui.rc:80
-#, kde-format
-msgid "&Help"
-msgstr "मद्दत"
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: cervisiashellui.rc:16 cervisiaui.rc:84
-#, kde-format
-msgid "Main Toolbar"
-msgstr "मुख्य उपकरण पट्टी"
-
-#. i18n: ectx: Menu (view)
-#: cervisiaui.rc:24
-#, kde-format
-msgid "&View"
-msgstr "हेर्नुहोस्"
-
-#. i18n: ectx: Menu (advanced)
-#: cervisiaui.rc:43
-#, kde-format
-msgid "&Advanced"
-msgstr "उन्नत"
-
-#. i18n: ectx: Menu (repository)
-#: cervisiaui.rc:63
-#, kde-format
-msgid "&Repository"
-msgstr "भण्डार"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1963,24 +1907,6 @@ msgstr "cvs मा छैन:"
 msgid "Split main window &horizontally"
 msgstr "मुख्य सञ्झ्याल तेर्सो रुपमा विभाजन गर्नुहोस्"
 
-#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
-#: settingsdialog_advanced.ui:32
-#, kde-format
-msgid "&Timeout after which a progress dialog appears (in ms):"
-msgstr "टाइम आउट जुन पछि प्रगति संवाद देखिन्छ (मिलिसेकेन्डमा):"
-
-#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
-#: settingsdialog_advanced.ui:45
-#, kde-format
-msgid "Default compression &level:"
-msgstr "पूर्वनिर्धारित सङ्कुचन स्तर:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
-#: settingsdialog_advanced.ui:58
-#, kde-format
-msgid "Utilize a running or start a new ssh-agent process"
-msgstr "चलिराखेकोलाई उपयोग गर्नुहोस् वा नयाँ ssh-agent प्रक्रिया सुरुआत गर्नुहोस्"
-
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2124,6 +2050,44 @@ msgstr "सम्पादनबाट हटाउनुहोस्"
 #, kde-format
 msgid "Commit"
 msgstr "कमिट गर्नुहोस्"
+
+#~ msgid ""
+#~ "The foreground color used to highlight files with a conflict in the file "
+#~ "view."
+#~ msgstr "फाइल दृश्यमा विवादीत फाइलहरू हाइलाइट गर्न प्रयोग गरिने अग्रभूमि रङ ।"
+
+#~ msgid "Delay (ms) until the progress dialog appears."
+#~ msgstr "प्रगति संवाद देखापर्ने सम्मको विलम्ब (मिलिसेकेन्ड) ।"
+
+#~ msgid "&File"
+#~ msgstr "फाइल"
+
+#~ msgid "&Settings"
+#~ msgstr "सेटिङ"
+
+#~ msgid "&Help"
+#~ msgstr "मद्दत"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "मुख्य उपकरण पट्टी"
+
+#~ msgid "&View"
+#~ msgstr "हेर्नुहोस्"
+
+#~ msgid "&Advanced"
+#~ msgstr "उन्नत"
+
+#~ msgid "&Repository"
+#~ msgstr "भण्डार"
+
+#~ msgid "&Timeout after which a progress dialog appears (in ms):"
+#~ msgstr "टाइम आउट जुन पछि प्रगति संवाद देखिन्छ (मिलिसेकेन्डमा):"
+
+#~ msgid "Default compression &level:"
+#~ msgstr "पूर्वनिर्धारित सङ्कुचन स्तर:"
+
+#~ msgid "Utilize a running or start a new ssh-agent process"
+#~ msgstr "चलिराखेकोलाई उपयोग गर्नुहोस् वा नयाँ ssh-agent प्रक्रिया सुरुआत गर्नुहोस्"
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr "Cervisia मा मद्दत आह्वान गर्दै"

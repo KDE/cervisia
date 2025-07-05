@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia 0\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2004-04-20 13:20+CEST\n"
 "Last-Translator: auto\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -881,20 +881,6 @@ msgstr ""
 "Ako niste nameravali da koristite Cervisia-u, možete mijenjati modove "
 "gledanja unutar Konqueror-a."
 
-#. i18n: ectx: label, entry (ConflictColor), group (Colors)
-#: cervisiapart.kcfg:24
-#, kde-format
-msgid ""
-"The foreground color used to highlight files with a conflict in the file "
-"view."
-msgstr ""
-
-#. i18n: ectx: label, entry, group (General)
-#: cervisiapart.kcfg:46
-#, fuzzy, kde-format
-msgid "Delay (ms) until the progress dialog appears."
-msgstr "&Vrijeme nakon koga se pojavljuje prozor „naprijedak“ (u ms):"
-
 #: cervisiashell.cpp:53
 #, fuzzy, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -914,48 +900,6 @@ msgstr "Omogućava vam prilagođavanje kratice na tipkovnici"
 #, fuzzy, kde-format
 msgid "Exits Cervisia"
 msgstr "Izlazi iz Cervisia-e"
-
-#. i18n: ectx: Menu (file)
-#: cervisiashellui.rc:4 cervisiaui.rc:4
-#, fuzzy, kde-format
-msgid "&File"
-msgstr "Ure&di datotekaove"
-
-#. i18n: ectx: Menu (settings)
-#: cervisiashellui.rc:7 cervisiaui.rc:70
-#, fuzzy, kde-format
-msgid "&Settings"
-msgstr "&Status"
-
-#. i18n: ectx: Menu (help)
-#: cervisiashellui.rc:11 cervisiaui.rc:80
-#, kde-format
-msgid "&Help"
-msgstr ""
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: cervisiashellui.rc:16 cervisiaui.rc:84
-#, kde-format
-msgid "Main Toolbar"
-msgstr ""
-
-#. i18n: ectx: Menu (view)
-#: cervisiaui.rc:24
-#, fuzzy, kde-format
-msgid "&View"
-msgstr "&Pogledaj"
-
-#. i18n: ectx: Menu (advanced)
-#: cervisiaui.rc:43
-#, kde-format
-msgid "&Advanced"
-msgstr "&Napredno"
-
-#. i18n: ectx: Menu (repository)
-#: cervisiaui.rc:63
-#, fuzzy, kde-format
-msgid "&Repository"
-msgstr "&Skladište"
 
 #: changelogdialog.cpp:48
 #, fuzzy, kde-format
@@ -1960,24 +1904,6 @@ msgstr "Nije u CVS-u"
 msgid "Split main window &horizontally"
 msgstr "Podeli glavni prozor &vodoravno"
 
-#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
-#: settingsdialog_advanced.ui:32
-#, fuzzy, kde-format
-msgid "&Timeout after which a progress dialog appears (in ms):"
-msgstr "&Vrijeme nakon koga se pojavljuje prozor „naprijedak“ (u ms):"
-
-#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
-#: settingsdialog_advanced.ui:45
-#, fuzzy, kde-format
-msgid "Default compression &level:"
-msgstr "Uobičajeni &nivo kompresije:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
-#: settingsdialog_advanced.ui:58
-#, fuzzy, kde-format
-msgid "Utilize a running or start a new ssh-agent process"
-msgstr "Iskoristi pokrenuti ili pokreni novi ssh-agent proces"
-
 #: tagdialog.cpp:48
 #, fuzzy, kde-format
 msgid "CVS Delete Tag"
@@ -2121,6 +2047,41 @@ msgstr "Poništi uređivanje"
 #, kde-format
 msgid "Commit"
 msgstr "Pošalji"
+
+#, fuzzy
+#~ msgid "Delay (ms) until the progress dialog appears."
+#~ msgstr "&Vrijeme nakon koga se pojavljuje prozor „naprijedak“ (u ms):"
+
+#, fuzzy
+#~ msgid "&File"
+#~ msgstr "Ure&di datotekaove"
+
+#, fuzzy
+#~ msgid "&Settings"
+#~ msgstr "&Status"
+
+#, fuzzy
+#~ msgid "&View"
+#~ msgstr "&Pogledaj"
+
+#~ msgid "&Advanced"
+#~ msgstr "&Napredno"
+
+#, fuzzy
+#~ msgid "&Repository"
+#~ msgstr "&Skladište"
+
+#, fuzzy
+#~ msgid "&Timeout after which a progress dialog appears (in ms):"
+#~ msgstr "&Vrijeme nakon koga se pojavljuje prozor „naprijedak“ (u ms):"
+
+#, fuzzy
+#~ msgid "Default compression &level:"
+#~ msgstr "Uobičajeni &nivo kompresije:"
+
+#, fuzzy
+#~ msgid "Utilize a running or start a new ssh-agent process"
+#~ msgstr "Iskoristi pokrenuti ili pokreni novi ssh-agent proces"
 
 #, fuzzy
 #~ msgid "Invoking help on Cervisia"

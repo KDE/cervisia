@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2010-11-30 20:40+0700\n"
 "Last-Translator:  Seng Sutha <Sutha@khmeros.info>\n"
 "Language-Team: Khmer [km] <Support@khmeros.info>\n"
@@ -870,20 +870,6 @@ msgstr ""
 "នេះ​មិនមែន​ជា​ថត​​របស់​ CVS ។\n"
 "ប្រសិនបើ​ អ្នក​មិន​​បម្រុង​ប្រើ​ Cervisia ទេ​ ​អ្នក​អាច​ប្ដូរ​របៀប​ទិដ្ឋភាព​នៅ​ក្នុង Konqueror ។"
 
-#. i18n: ectx: label, entry (ConflictColor), group (Colors)
-#: cervisiapart.kcfg:24
-#, fuzzy, kde-format
-msgid ""
-"The foreground color used to highlight files with a conflict in the file "
-"view."
-msgstr "បាន​ប្រើ​ពណ៌​ផ្ទៃ​ខាងមុខ​ទៅកាន់​ឯកសារ​ផ្នែក​សំខាន់​ប៉ះទង្គិច​ជាមួយ​ទិដ្ឋភាព​ឯកសារ​ ។ "
-
-#. i18n: ectx: label, entry, group (General)
-#: cervisiapart.kcfg:46
-#, fuzzy, kde-format
-msgid "Delay (ms) until the progress dialog appears."
-msgstr "ពន្យារពេល​ (មិល្លី​វិនាទី​) រហូត​ដល់​ប្រអប់​វឌ្ឍនភាព​លេចឡើង​ ។"
-
 #: cervisiashell.cpp:53
 #, fuzzy, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -903,48 +889,6 @@ msgstr "អនុញ្ញាត​ឲ្យ​អ្នក​ប្ដូរ ke
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "ចេញ​ Cervisia"
-
-#. i18n: ectx: Menu (file)
-#: cervisiashellui.rc:4 cervisiaui.rc:4
-#, kde-format
-msgid "&File"
-msgstr "ឯកសារ​"
-
-#. i18n: ectx: Menu (settings)
-#: cervisiashellui.rc:7 cervisiaui.rc:70
-#, kde-format
-msgid "&Settings"
-msgstr "ការ​កំណត់​"
-
-#. i18n: ectx: Menu (help)
-#: cervisiashellui.rc:11 cervisiaui.rc:80
-#, kde-format
-msgid "&Help"
-msgstr "ជំនួយ ​"
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: cervisiashellui.rc:16 cervisiaui.rc:84
-#, kde-format
-msgid "Main Toolbar"
-msgstr "របារ​ឧបករណ៍​មេ​"
-
-#. i18n: ectx: Menu (view)
-#: cervisiaui.rc:24
-#, kde-format
-msgid "&View"
-msgstr "មើល​"
-
-#. i18n: ectx: Menu (advanced)
-#: cervisiaui.rc:43
-#, kde-format
-msgid "&Advanced"
-msgstr "កម្រិត​ខ្ពស់​"
-
-#. i18n: ectx: Menu (repository)
-#: cervisiaui.rc:63
-#, kde-format
-msgid "&Repository"
-msgstr "ឃ្លាំង​"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1949,24 +1893,6 @@ msgstr "គ្មាន​ក្នុង​ cvs ៖​"
 msgid "Split main window &horizontally"
 msgstr "ពុះ​បង្អួច​ចម្បង​ផ្ដេក​​"
 
-#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
-#: settingsdialog_advanced.ui:32
-#, fuzzy, kde-format
-msgid "&Timeout after which a progress dialog appears (in ms):"
-msgstr "អស់​ពេលវេលា​ដែល​ប្រអប់​វឌ្ឍនភាព​លេចឡើង​ (ជា​មិល្លី​វិនាទី​) ៖​"
-
-#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
-#: settingsdialog_advanced.ui:45
-#, kde-format
-msgid "Default compression &level:"
-msgstr "កម្រិត​នៃ​ការ​បង្ហាប់​លំនាំ​ដើម​ ៖​"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
-#: settingsdialog_advanced.ui:58
-#, kde-format
-msgid "Utilize a running or start a new ssh-agent process"
-msgstr "កំពុង​ដំណើរការ​ ឬ​ចាប់​ផ្ដើម​ដំណើរការ​​ ssh-agent ថ្មី​"
-
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2108,6 +2034,47 @@ msgstr "មិន​កែសម្រួល​"
 #, kde-format
 msgid "Commit"
 msgstr "Commit"
+
+#, fuzzy
+#~ msgid ""
+#~ "The foreground color used to highlight files with a conflict in the file "
+#~ "view."
+#~ msgstr "បាន​ប្រើ​ពណ៌​ផ្ទៃ​ខាងមុខ​ទៅកាន់​ឯកសារ​ផ្នែក​សំខាន់​ប៉ះទង្គិច​ជាមួយ​ទិដ្ឋភាព​ឯកសារ​ ។ "
+
+#, fuzzy
+#~ msgid "Delay (ms) until the progress dialog appears."
+#~ msgstr "ពន្យារពេល​ (មិល្លី​វិនាទី​) រហូត​ដល់​ប្រអប់​វឌ្ឍនភាព​លេចឡើង​ ។"
+
+#~ msgid "&File"
+#~ msgstr "ឯកសារ​"
+
+#~ msgid "&Settings"
+#~ msgstr "ការ​កំណត់​"
+
+#~ msgid "&Help"
+#~ msgstr "ជំនួយ ​"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "របារ​ឧបករណ៍​មេ​"
+
+#~ msgid "&View"
+#~ msgstr "មើល​"
+
+#~ msgid "&Advanced"
+#~ msgstr "កម្រិត​ខ្ពស់​"
+
+#~ msgid "&Repository"
+#~ msgstr "ឃ្លាំង​"
+
+#, fuzzy
+#~ msgid "&Timeout after which a progress dialog appears (in ms):"
+#~ msgstr "អស់​ពេលវេលា​ដែល​ប្រអប់​វឌ្ឍនភាព​លេចឡើង​ (ជា​មិល្លី​វិនាទី​) ៖​"
+
+#~ msgid "Default compression &level:"
+#~ msgstr "កម្រិត​នៃ​ការ​បង្ហាប់​លំនាំ​ដើម​ ៖​"
+
+#~ msgid "Utilize a running or start a new ssh-agent process"
+#~ msgstr "កំពុង​ដំណើរការ​ ឬ​ចាប់​ផ្ដើម​ដំណើរការ​​ ssh-agent ថ្មី​"
 
 #, fuzzy
 #~ msgid "Invoking help on Cervisia"

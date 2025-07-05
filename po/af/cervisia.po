@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2002-09-27 16:42+0200\n"
 "Last-Translator: WEB-Translator <http://kde.af.org.za>\n"
 "Language-Team: AFRIKAANS <AF@lia.org.za>\n"
@@ -871,20 +871,6 @@ msgstr ""
 "If jy het nie intensie na gebruik Cervisia, jy kan wissel besigtig modusse "
 "binne in Konqueror."
 
-#. i18n: ectx: label, entry (ConflictColor), group (Colors)
-#: cervisiapart.kcfg:24
-#, kde-format
-msgid ""
-"The foreground color used to highlight files with a conflict in the file "
-"view."
-msgstr ""
-
-#. i18n: ectx: label, entry, group (General)
-#: cervisiapart.kcfg:46
-#, fuzzy, kde-format
-msgid "Delay (ms) until the progress dialog appears."
-msgstr "Tydverstreke na wat 'n vordering dialoog verskyn (in mev):"
-
 #: cervisiashell.cpp:53
 #, fuzzy, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -904,48 +890,6 @@ msgstr "Laat toe jy na pasmaak die sleutel bindinge"
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Uitgaan Cervisia"
-
-#. i18n: ectx: Menu (file)
-#: cervisiashellui.rc:4 cervisiaui.rc:4
-#, fuzzy, kde-format
-msgid "&File"
-msgstr "Redigeer Lêers"
-
-#. i18n: ectx: Menu (settings)
-#: cervisiashellui.rc:7 cervisiaui.rc:70
-#, fuzzy, kde-format
-msgid "&Settings"
-msgstr "Status"
-
-#. i18n: ectx: Menu (help)
-#: cervisiashellui.rc:11 cervisiaui.rc:80
-#, kde-format
-msgid "&Help"
-msgstr ""
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: cervisiashellui.rc:16 cervisiaui.rc:84
-#, kde-format
-msgid "Main Toolbar"
-msgstr ""
-
-#. i18n: ectx: Menu (view)
-#: cervisiaui.rc:24
-#, fuzzy, kde-format
-msgid "&View"
-msgstr "Redigeer Lêers"
-
-#. i18n: ectx: Menu (advanced)
-#: cervisiaui.rc:43
-#, kde-format
-msgid "&Advanced"
-msgstr "Gevorderde"
-
-#. i18n: ectx: Menu (repository)
-#: cervisiaui.rc:63
-#, kde-format
-msgid "&Repository"
-msgstr "Stoorplek"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1945,24 +1889,6 @@ msgstr "Nie in Cvs"
 msgid "Split main window &horizontally"
 msgstr "Skei hoof venster horisontaal"
 
-#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
-#: settingsdialog_advanced.ui:32
-#, kde-format
-msgid "&Timeout after which a progress dialog appears (in ms):"
-msgstr "Tydverstreke na wat 'n vordering dialoog verskyn (in mev):"
-
-#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
-#: settingsdialog_advanced.ui:45
-#, kde-format
-msgid "Default compression &level:"
-msgstr "Verstek saampersing vlak:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
-#: settingsdialog_advanced.ui:58
-#, kde-format
-msgid "Utilize a running or start a new ssh-agent process"
-msgstr ""
-
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2108,6 +2034,34 @@ msgstr ""
 #, fuzzy, kde-format
 msgid "Commit"
 msgstr "Stuur in"
+
+#, fuzzy
+#~ msgid "Delay (ms) until the progress dialog appears."
+#~ msgstr "Tydverstreke na wat 'n vordering dialoog verskyn (in mev):"
+
+#, fuzzy
+#~ msgid "&File"
+#~ msgstr "Redigeer Lêers"
+
+#, fuzzy
+#~ msgid "&Settings"
+#~ msgstr "Status"
+
+#, fuzzy
+#~ msgid "&View"
+#~ msgstr "Redigeer Lêers"
+
+#~ msgid "&Advanced"
+#~ msgstr "Gevorderde"
+
+#~ msgid "&Repository"
+#~ msgstr "Stoorplek"
+
+#~ msgid "&Timeout after which a progress dialog appears (in ms):"
+#~ msgstr "Tydverstreke na wat 'n vordering dialoog verskyn (in mev):"
+
+#~ msgid "Default compression &level:"
+#~ msgstr "Verstek saampersing vlak:"
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr "Aktivering hulp op Cervisia"

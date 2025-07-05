@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2017-12-29 15:37+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -880,22 +880,6 @@ msgstr ""
 "If you did not intend to use Cervisia, you can switch view modes within "
 "Konqueror."
 
-#. i18n: ectx: label, entry (ConflictColor), group (Colors)
-#: cervisiapart.kcfg:24
-#, kde-format
-msgid ""
-"The foreground color used to highlight files with a conflict in the file "
-"view."
-msgstr ""
-"The foreground colour used to highlight files with a conflict in the file "
-"view."
-
-#. i18n: ectx: label, entry, group (General)
-#: cervisiapart.kcfg:46
-#, kde-format
-msgid "Delay (ms) until the progress dialog appears."
-msgstr "Delay (ms) until the progress dialogue appears."
-
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -915,48 +899,6 @@ msgstr "Allows you to customise the keybindings"
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Exits Cervisia"
-
-#. i18n: ectx: Menu (file)
-#: cervisiashellui.rc:4 cervisiaui.rc:4
-#, kde-format
-msgid "&File"
-msgstr "&File"
-
-#. i18n: ectx: Menu (settings)
-#: cervisiashellui.rc:7 cervisiaui.rc:70
-#, kde-format
-msgid "&Settings"
-msgstr "&Settings"
-
-#. i18n: ectx: Menu (help)
-#: cervisiashellui.rc:11 cervisiaui.rc:80
-#, kde-format
-msgid "&Help"
-msgstr "&Help"
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: cervisiashellui.rc:16 cervisiaui.rc:84
-#, kde-format
-msgid "Main Toolbar"
-msgstr "Main Toolbar"
-
-#. i18n: ectx: Menu (view)
-#: cervisiaui.rc:24
-#, kde-format
-msgid "&View"
-msgstr "&View"
-
-#. i18n: ectx: Menu (advanced)
-#: cervisiaui.rc:43
-#, kde-format
-msgid "&Advanced"
-msgstr "&Advanced"
-
-#. i18n: ectx: Menu (repository)
-#: cervisiaui.rc:63
-#, kde-format
-msgid "&Repository"
-msgstr "&Repository"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1958,24 +1900,6 @@ msgstr "Not in cvs:"
 msgid "Split main window &horizontally"
 msgstr "Split main window &horizontally"
 
-#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
-#: settingsdialog_advanced.ui:32
-#, kde-format
-msgid "&Timeout after which a progress dialog appears (in ms):"
-msgstr "&Timeout after which a progress dialogue appears (in ms):"
-
-#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
-#: settingsdialog_advanced.ui:45
-#, kde-format
-msgid "Default compression &level:"
-msgstr "Default compression &level:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
-#: settingsdialog_advanced.ui:58
-#, kde-format
-msgid "Utilize a running or start a new ssh-agent process"
-msgstr "Use a running or start a new ssh-agent process"
-
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2119,6 +2043,46 @@ msgstr "Unedit"
 #, kde-format
 msgid "Commit"
 msgstr "Commit"
+
+#~ msgid ""
+#~ "The foreground color used to highlight files with a conflict in the file "
+#~ "view."
+#~ msgstr ""
+#~ "The foreground colour used to highlight files with a conflict in the file "
+#~ "view."
+
+#~ msgid "Delay (ms) until the progress dialog appears."
+#~ msgstr "Delay (ms) until the progress dialogue appears."
+
+#~ msgid "&File"
+#~ msgstr "&File"
+
+#~ msgid "&Settings"
+#~ msgstr "&Settings"
+
+#~ msgid "&Help"
+#~ msgstr "&Help"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Main Toolbar"
+
+#~ msgid "&View"
+#~ msgstr "&View"
+
+#~ msgid "&Advanced"
+#~ msgstr "&Advanced"
+
+#~ msgid "&Repository"
+#~ msgstr "&Repository"
+
+#~ msgid "&Timeout after which a progress dialog appears (in ms):"
+#~ msgstr "&Timeout after which a progress dialogue appears (in ms):"
+
+#~ msgid "Default compression &level:"
+#~ msgstr "Default compression &level:"
+
+#~ msgid "Utilize a running or start a new ssh-agent process"
+#~ msgstr "Use a running or start a new ssh-agent process"
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr "Invoking help on Cervisia"

@@ -1,7 +1,7 @@
 # translation of cervisia.po to Slovenian
 # Translation of cervisia.po to Slovenian
 # Copyright (C) 2003, 2004, 2005, 2006 Free Software Foundation, Inc.
-# $Id: cervisia.po 1701829 2025-02-03 02:13:03Z scripty $
+# $Id: cervisia.po 1712705 2025-07-05 03:36:47Z scripty $
 # $Source$
 #
 # Gregor Rakar <gregor.rakar@kiss.si>, 2003, 2004, 2005.
@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2020-02-26 01:24+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -885,20 +885,6 @@ msgstr ""
 "Če niste mislili uporabiti Cervisie, lahko preklopite načine prikaza znotraj "
 "Konquerorja."
 
-#. i18n: ectx: label, entry (ConflictColor), group (Colors)
-#: cervisiapart.kcfg:24
-#, kde-format
-msgid ""
-"The foreground color used to highlight files with a conflict in the file "
-"view."
-msgstr "Barva ospredja za poudarjanje spornih datotek v prikazu datotek."
-
-#. i18n: ectx: label, entry, group (General)
-#: cervisiapart.kcfg:46
-#, kde-format
-msgid "Delay (ms) until the progress dialog appears."
-msgstr "Zakasnitev (ms) za pojavitev pogovornega okna napredka."
-
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -918,48 +904,6 @@ msgstr "Omogoča vam, da nastavite tipkovne bližnjice"
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Konča Cervisio"
-
-#. i18n: ectx: Menu (file)
-#: cervisiashellui.rc:4 cervisiaui.rc:4
-#, kde-format
-msgid "&File"
-msgstr "Datoteka"
-
-#. i18n: ectx: Menu (settings)
-#: cervisiashellui.rc:7 cervisiaui.rc:70
-#, kde-format
-msgid "&Settings"
-msgstr "Na&stavitve"
-
-#. i18n: ectx: Menu (help)
-#: cervisiashellui.rc:11 cervisiaui.rc:80
-#, kde-format
-msgid "&Help"
-msgstr "Pomoč"
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: cervisiashellui.rc:16 cervisiaui.rc:84
-#, kde-format
-msgid "Main Toolbar"
-msgstr "Glavna orodna vrstica"
-
-#. i18n: ectx: Menu (view)
-#: cervisiaui.rc:24
-#, kde-format
-msgid "&View"
-msgstr "Pogled"
-
-#. i18n: ectx: Menu (advanced)
-#: cervisiaui.rc:43
-#, kde-format
-msgid "&Advanced"
-msgstr "N&apredno"
-
-#. i18n: ectx: Menu (repository)
-#: cervisiaui.rc:63
-#, kde-format
-msgid "&Repository"
-msgstr "Skladišče"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1964,24 +1908,6 @@ msgstr "Ni v CVS:"
 msgid "Split main window &horizontally"
 msgstr "Razdeli glavno okno vodoravno"
 
-#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
-#: settingsdialog_advanced.ui:32
-#, kde-format
-msgid "&Timeout after which a progress dialog appears (in ms):"
-msgstr "Zakasni&tev (ms) po kateri se pojavi pogovorno okno napredka:"
-
-#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
-#: settingsdialog_advanced.ui:45
-#, kde-format
-msgid "Default compression &level:"
-msgstr "Privzeta stopnja stiskanja:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
-#: settingsdialog_advanced.ui:58
-#, kde-format
-msgid "Utilize a running or start a new ssh-agent process"
-msgstr "Uporabi zagnano ali začni novo opravilo ssh-agent"
-
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2125,6 +2051,44 @@ msgstr "Razveljavi urejanje"
 #, kde-format
 msgid "Commit"
 msgstr "Uveljavi"
+
+#~ msgid ""
+#~ "The foreground color used to highlight files with a conflict in the file "
+#~ "view."
+#~ msgstr "Barva ospredja za poudarjanje spornih datotek v prikazu datotek."
+
+#~ msgid "Delay (ms) until the progress dialog appears."
+#~ msgstr "Zakasnitev (ms) za pojavitev pogovornega okna napredka."
+
+#~ msgid "&File"
+#~ msgstr "Datoteka"
+
+#~ msgid "&Settings"
+#~ msgstr "Na&stavitve"
+
+#~ msgid "&Help"
+#~ msgstr "Pomoč"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Glavna orodna vrstica"
+
+#~ msgid "&View"
+#~ msgstr "Pogled"
+
+#~ msgid "&Advanced"
+#~ msgstr "N&apredno"
+
+#~ msgid "&Repository"
+#~ msgstr "Skladišče"
+
+#~ msgid "&Timeout after which a progress dialog appears (in ms):"
+#~ msgstr "Zakasni&tev (ms) po kateri se pojavi pogovorno okno napredka:"
+
+#~ msgid "Default compression &level:"
+#~ msgstr "Privzeta stopnja stiskanja:"
+
+#~ msgid "Utilize a running or start a new ssh-agent process"
+#~ msgstr "Uporabi zagnano ali začni novo opravilo ssh-agent"
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr "Klicanje pomoči o Cervisii"

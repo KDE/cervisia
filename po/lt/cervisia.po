@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2017-06-25 14:59+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -867,20 +867,6 @@ msgid ""
 "Konqueror."
 msgstr ""
 
-#. i18n: ectx: label, entry (ConflictColor), group (Colors)
-#: cervisiapart.kcfg:24
-#, kde-format
-msgid ""
-"The foreground color used to highlight files with a conflict in the file "
-"view."
-msgstr ""
-
-#. i18n: ectx: label, entry, group (General)
-#: cervisiapart.kcfg:46
-#, kde-format
-msgid "Delay (ms) until the progress dialog appears."
-msgstr ""
-
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -900,48 +886,6 @@ msgstr ""
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Išjungia Cervisia"
-
-#. i18n: ectx: Menu (file)
-#: cervisiashellui.rc:4 cervisiaui.rc:4
-#, kde-format
-msgid "&File"
-msgstr "&Failas"
-
-#. i18n: ectx: Menu (settings)
-#: cervisiashellui.rc:7 cervisiaui.rc:70
-#, kde-format
-msgid "&Settings"
-msgstr "&Nuostatos"
-
-#. i18n: ectx: Menu (help)
-#: cervisiashellui.rc:11 cervisiaui.rc:80
-#, kde-format
-msgid "&Help"
-msgstr "&Pagalba"
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: cervisiashellui.rc:16 cervisiaui.rc:84
-#, kde-format
-msgid "Main Toolbar"
-msgstr "Pagrindinė įrankinė"
-
-#. i18n: ectx: Menu (view)
-#: cervisiaui.rc:24
-#, kde-format
-msgid "&View"
-msgstr "&Rodymas"
-
-#. i18n: ectx: Menu (advanced)
-#: cervisiaui.rc:43
-#, kde-format
-msgid "&Advanced"
-msgstr "&Išsamiau"
-
-#. i18n: ectx: Menu (repository)
-#: cervisiaui.rc:63
-#, kde-format
-msgid "&Repository"
-msgstr "&Saugykla"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1941,24 +1885,6 @@ msgstr ""
 msgid "Split main window &horizontally"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
-#: settingsdialog_advanced.ui:32
-#, kde-format
-msgid "&Timeout after which a progress dialog appears (in ms):"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
-#: settingsdialog_advanced.ui:45
-#, kde-format
-msgid "Default compression &level:"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
-#: settingsdialog_advanced.ui:58
-#, kde-format
-msgid "Utilize a running or start a new ssh-agent process"
-msgstr ""
-
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2100,6 +2026,27 @@ msgstr ""
 #, kde-format
 msgid "Commit"
 msgstr "Įkelti (commit)"
+
+#~ msgid "&File"
+#~ msgstr "&Failas"
+
+#~ msgid "&Settings"
+#~ msgstr "&Nuostatos"
+
+#~ msgid "&Help"
+#~ msgstr "&Pagalba"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Pagrindinė įrankinė"
+
+#~ msgid "&View"
+#~ msgstr "&Rodymas"
+
+#~ msgid "&Advanced"
+#~ msgstr "&Išsamiau"
+
+#~ msgid "&Repository"
+#~ msgstr "&Saugykla"
 
 #~ msgid "&Overwrite"
 #~ msgstr "&Perrašyti"

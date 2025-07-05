@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2024-06-18 15:57+0200\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -874,20 +874,6 @@ msgstr ""
 "Pokud si nepřejete používat program Cervisia, můžete v Konqueroru přepnout "
 "pohled."
 
-#. i18n: ectx: label, entry (ConflictColor), group (Colors)
-#: cervisiapart.kcfg:24
-#, kde-format
-msgid ""
-"The foreground color used to highlight files with a conflict in the file "
-"view."
-msgstr "Barva popředí používaná pro zvýraznění souborů obsahujících konflikt."
-
-#. i18n: ectx: label, entry, group (General)
-#: cervisiapart.kcfg:46
-#, kde-format
-msgid "Delay (ms) until the progress dialog appears."
-msgstr "Čekání v milisekundách před zobrazením dialogu průběhu"
-
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -907,48 +893,6 @@ msgstr "Umožňuje přizpůsobit klávesové zkratky"
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Ukončí Cervisii"
-
-#. i18n: ectx: Menu (file)
-#: cervisiashellui.rc:4 cervisiaui.rc:4
-#, kde-format
-msgid "&File"
-msgstr "Sou&bor"
-
-#. i18n: ectx: Menu (settings)
-#: cervisiashellui.rc:7 cervisiaui.rc:70
-#, kde-format
-msgid "&Settings"
-msgstr "Na&stavení"
-
-#. i18n: ectx: Menu (help)
-#: cervisiashellui.rc:11 cervisiaui.rc:80
-#, kde-format
-msgid "&Help"
-msgstr "Nápo&věda"
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: cervisiashellui.rc:16 cervisiaui.rc:84
-#, kde-format
-msgid "Main Toolbar"
-msgstr "Hlavní panel nástrojů"
-
-#. i18n: ectx: Menu (view)
-#: cervisiaui.rc:24
-#, kde-format
-msgid "&View"
-msgstr "Po&hled"
-
-#. i18n: ectx: Menu (advanced)
-#: cervisiaui.rc:43
-#, kde-format
-msgid "&Advanced"
-msgstr "&Pokročilé"
-
-#. i18n: ectx: Menu (repository)
-#: cervisiaui.rc:63
-#, kde-format
-msgid "&Repository"
-msgstr "&Repozitář"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1950,24 +1894,6 @@ msgstr "Není v CVS:"
 msgid "Split main window &horizontally"
 msgstr "Rozdělit hlavní okno vo&dorovně"
 
-#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
-#: settingsdialog_advanced.ui:32
-#, kde-format
-msgid "&Timeout after which a progress dialog appears (in ms):"
-msgstr "Če&kání před zobrazením dialogu průběhu (v ms):"
-
-#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
-#: settingsdialog_advanced.ui:45
-#, kde-format
-msgid "Default compression &level:"
-msgstr "Výchozí úroveň &komprese:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
-#: settingsdialog_advanced.ui:58
-#, kde-format
-msgid "Utilize a running or start a new ssh-agent process"
-msgstr "Využít běžící nebo spustit nový proces 'ssh-agent'"
-
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2111,3 +2037,42 @@ msgstr "Vrácená úprava"
 #, kde-format
 msgid "Commit"
 msgstr "Commit"
+
+#~ msgid ""
+#~ "The foreground color used to highlight files with a conflict in the file "
+#~ "view."
+#~ msgstr ""
+#~ "Barva popředí používaná pro zvýraznění souborů obsahujících konflikt."
+
+#~ msgid "Delay (ms) until the progress dialog appears."
+#~ msgstr "Čekání v milisekundách před zobrazením dialogu průběhu"
+
+#~ msgid "&File"
+#~ msgstr "Sou&bor"
+
+#~ msgid "&Settings"
+#~ msgstr "Na&stavení"
+
+#~ msgid "&Help"
+#~ msgstr "Nápo&věda"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Hlavní panel nástrojů"
+
+#~ msgid "&View"
+#~ msgstr "Po&hled"
+
+#~ msgid "&Advanced"
+#~ msgstr "&Pokročilé"
+
+#~ msgid "&Repository"
+#~ msgstr "&Repozitář"
+
+#~ msgid "&Timeout after which a progress dialog appears (in ms):"
+#~ msgstr "Če&kání před zobrazením dialogu průběhu (v ms):"
+
+#~ msgid "Default compression &level:"
+#~ msgstr "Výchozí úroveň &komprese:"
+
+#~ msgid "Utilize a running or start a new ssh-agent process"
+#~ msgstr "Využít běžící nebo spustit nový proces 'ssh-agent'"

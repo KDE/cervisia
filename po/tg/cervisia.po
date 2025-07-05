@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2019-09-29 12:44+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -899,21 +899,6 @@ msgstr ""
 "Агар шумо Cervisia-ро истифода бурдани набошед, метавонед тартиби тасвиротро "
 "ба Konqueror гузаронед."
 
-#. i18n: ectx: label, entry (ConflictColor), group (Colors)
-#: cervisiapart.kcfg:24
-#, kde-format
-msgid ""
-"The foreground color used to highlight files with a conflict in the file "
-"view."
-msgstr ""
-"Истифодабарии файли пешзаминаи ранги равшан бо нобаробарии намуди файл."
-
-#. i18n: ectx: label, entry, group (General)
-#: cervisiapart.kcfg:46
-#, kde-format
-msgid "Delay (ms) until the progress dialog appears."
-msgstr "Боздоштан пеш аз барориши иттилоот оиди иҷрошави дар миллисонияҳо."
-
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -933,48 +918,6 @@ msgstr "Иҷозат медиҳад мувофиқати тугмаҳоро та
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Баормад аз Cervisia"
-
-#. i18n: ectx: Menu (file)
-#: cervisiashellui.rc:4 cervisiaui.rc:4
-#, fuzzy, kde-format
-msgid "&File"
-msgstr "&Муҳарририяти файлҳо"
-
-#. i18n: ectx: Menu (settings)
-#: cervisiashellui.rc:7 cervisiaui.rc:70
-#, fuzzy, kde-format
-msgid "&Settings"
-msgstr "&Ҳолат"
-
-#. i18n: ectx: Menu (help)
-#: cervisiashellui.rc:11 cervisiaui.rc:80
-#, kde-format
-msgid "&Help"
-msgstr ""
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: cervisiashellui.rc:16 cervisiaui.rc:84
-#, kde-format
-msgid "Main Toolbar"
-msgstr ""
-
-#. i18n: ectx: Menu (view)
-#: cervisiaui.rc:24
-#, fuzzy, kde-format
-msgid "&View"
-msgstr "&Нишон додан"
-
-#. i18n: ectx: Menu (advanced)
-#: cervisiaui.rc:43
-#, kde-format
-msgid "&Advanced"
-msgstr "&Иловагӣ"
-
-#. i18n: ectx: Menu (repository)
-#: cervisiaui.rc:63
-#, kde-format
-msgid "&Repository"
-msgstr "&Репозитория"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1986,24 +1929,6 @@ msgstr "Дар cvs нест:"
 msgid "Split main window &horizontally"
 msgstr "Ҷудо кардани тирезаи &асосӣ ба тарзи уфуқӣ "
 
-#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
-#: settingsdialog_advanced.ui:32
-#, kde-format
-msgid "&Timeout after which a progress dialog appears (in ms):"
-msgstr "&Боздошт пеш аз намоиши мубоҳисаи ҳолати иҷрошави (дар мс):"
-
-#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
-#: settingsdialog_advanced.ui:45
-#, kde-format
-msgid "Default compression &level:"
-msgstr "Дараҷаи &фишудашавӣ бо пешарзӣ:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
-#: settingsdialog_advanced.ui:58
-#, kde-format
-msgid "Utilize a running or start a new ssh-agent process"
-msgstr "Истифодаи иҷро шуда истода ё инки оғози амали нави ssh-agent"
-
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2147,6 +2072,42 @@ msgstr "Хотима додани таъғирдиҳӣ"
 #, kde-format
 msgid "Commit"
 msgstr "Супурдан"
+
+#~ msgid ""
+#~ "The foreground color used to highlight files with a conflict in the file "
+#~ "view."
+#~ msgstr ""
+#~ "Истифодабарии файли пешзаминаи ранги равшан бо нобаробарии намуди файл."
+
+#~ msgid "Delay (ms) until the progress dialog appears."
+#~ msgstr "Боздоштан пеш аз барориши иттилоот оиди иҷрошави дар миллисонияҳо."
+
+#, fuzzy
+#~ msgid "&File"
+#~ msgstr "&Муҳарририяти файлҳо"
+
+#, fuzzy
+#~ msgid "&Settings"
+#~ msgstr "&Ҳолат"
+
+#, fuzzy
+#~ msgid "&View"
+#~ msgstr "&Нишон додан"
+
+#~ msgid "&Advanced"
+#~ msgstr "&Иловагӣ"
+
+#~ msgid "&Repository"
+#~ msgstr "&Репозитория"
+
+#~ msgid "&Timeout after which a progress dialog appears (in ms):"
+#~ msgstr "&Боздошт пеш аз намоиши мубоҳисаи ҳолати иҷрошави (дар мс):"
+
+#~ msgid "Default compression &level:"
+#~ msgstr "Дараҷаи &фишудашавӣ бо пешарзӣ:"
+
+#~ msgid "Utilize a running or start a new ssh-agent process"
+#~ msgstr "Истифодаи иҷро шуда истода ё инки оғози амали нави ssh-agent"
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr "Даъвати ёри аз рӯи Cervisia"

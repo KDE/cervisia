@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2009-02-19 23:54+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <kedidiemas@yahoogroups.com>\n"
@@ -862,20 +862,6 @@ msgid ""
 "Konqueror."
 msgstr ""
 
-#. i18n: ectx: label, entry (ConflictColor), group (Colors)
-#: cervisiapart.kcfg:24
-#, kde-format
-msgid ""
-"The foreground color used to highlight files with a conflict in the file "
-"view."
-msgstr ""
-
-#. i18n: ectx: label, entry, group (General)
-#: cervisiapart.kcfg:46
-#, kde-format
-msgid "Delay (ms) until the progress dialog appears."
-msgstr ""
-
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -895,48 +881,6 @@ msgstr ""
 #, fuzzy, kde-format
 msgid "Exits Cervisia"
 msgstr "GenericName=Integrasi CVS (Cervisia)"
-
-#. i18n: ectx: Menu (file)
-#: cervisiashellui.rc:4 cervisiaui.rc:4
-#, fuzzy, kde-format
-msgid "&File"
-msgstr "&Fail"
-
-#. i18n: ectx: Menu (settings)
-#: cervisiashellui.rc:7 cervisiaui.rc:70
-#, fuzzy, kde-format
-msgid "&Settings"
-msgstr "&Tetapan"
-
-#. i18n: ectx: Menu (help)
-#: cervisiashellui.rc:11 cervisiaui.rc:80
-#, fuzzy, kde-format
-msgid "&Help"
-msgstr "&Bantuan"
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: cervisiashellui.rc:16 cervisiaui.rc:84
-#, fuzzy, kde-format
-msgid "Main Toolbar"
-msgstr "Bar Alatan Utama"
-
-#. i18n: ectx: Menu (view)
-#: cervisiaui.rc:24
-#, fuzzy, kde-format
-msgid "&View"
-msgstr "&Lihat"
-
-#. i18n: ectx: Menu (advanced)
-#: cervisiaui.rc:43
-#, fuzzy, kde-format
-msgid "&Advanced"
-msgstr "L&anjutan"
-
-#. i18n: ectx: Menu (repository)
-#: cervisiaui.rc:63
-#, fuzzy, kde-format
-msgid "&Repository"
-msgstr "<b>URL repositori:</b>"
 
 #: changelogdialog.cpp:48
 #, fuzzy, kde-format
@@ -1927,24 +1871,6 @@ msgstr "%s: %s: bukan dalam format a.out\n"
 msgid "Split main window &horizontally"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
-#: settingsdialog_advanced.ui:32
-#, kde-format
-msgid "&Timeout after which a progress dialog appears (in ms):"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
-#: settingsdialog_advanced.ui:45
-#, fuzzy, kde-format
-msgid "Default compression &level:"
-msgstr "         %s [--level <tahap>] <nama> %s)\n"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
-#: settingsdialog_advanced.ui:58
-#, kde-format
-msgid "Utilize a running or start a new ssh-agent process"
-msgstr ""
-
 #: tagdialog.cpp:48
 #, fuzzy, kde-format
 msgid "CVS Delete Tag"
@@ -2086,6 +2012,38 @@ msgstr ""
 #, kde-format
 msgid "Commit"
 msgstr "Lakukan"
+
+#, fuzzy
+#~ msgid "&File"
+#~ msgstr "&Fail"
+
+#, fuzzy
+#~ msgid "&Settings"
+#~ msgstr "&Tetapan"
+
+#, fuzzy
+#~ msgid "&Help"
+#~ msgstr "&Bantuan"
+
+#, fuzzy
+#~ msgid "Main Toolbar"
+#~ msgstr "Bar Alatan Utama"
+
+#, fuzzy
+#~ msgid "&View"
+#~ msgstr "&Lihat"
+
+#, fuzzy
+#~ msgid "&Advanced"
+#~ msgstr "L&anjutan"
+
+#, fuzzy
+#~ msgid "&Repository"
+#~ msgstr "<b>URL repositori:</b>"
+
+#, fuzzy
+#~ msgid "Default compression &level:"
+#~ msgstr "         %s [--level <tahap>] <nama> %s)\n"
 
 #, fuzzy
 #~ msgid "Invoking help on Cervisia"

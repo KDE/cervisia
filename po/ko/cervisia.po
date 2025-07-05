@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2021-05-24 16:24+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -868,20 +868,6 @@ msgstr ""
 "Cervisia를 사용하려고 한 것이 아니었다면 Konqueror에서 보기 모드를 변경할 수 "
 "있습니다."
 
-#. i18n: ectx: label, entry (ConflictColor), group (Colors)
-#: cervisiapart.kcfg:24
-#, kde-format
-msgid ""
-"The foreground color used to highlight files with a conflict in the file "
-"view."
-msgstr "파일 보기에서 충돌하는 파일을 강조할 때 사용할 배경색입니다."
-
-#. i18n: ectx: label, entry, group (General)
-#: cervisiapart.kcfg:46
-#, kde-format
-msgid "Delay (ms) until the progress dialog appears."
-msgstr "진행 대화 상자를 표시할 지연 시간(ms)입니다."
-
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -901,48 +887,6 @@ msgstr "키보드 단축키 설정"
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Cervisia 끝내기"
-
-#. i18n: ectx: Menu (file)
-#: cervisiashellui.rc:4 cervisiaui.rc:4
-#, kde-format
-msgid "&File"
-msgstr "파일(&F)"
-
-#. i18n: ectx: Menu (settings)
-#: cervisiashellui.rc:7 cervisiaui.rc:70
-#, kde-format
-msgid "&Settings"
-msgstr "설정(&S)"
-
-#. i18n: ectx: Menu (help)
-#: cervisiashellui.rc:11 cervisiaui.rc:80
-#, kde-format
-msgid "&Help"
-msgstr "도움말(&H)"
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: cervisiashellui.rc:16 cervisiaui.rc:84
-#, kde-format
-msgid "Main Toolbar"
-msgstr "주 도구 모음"
-
-#. i18n: ectx: Menu (view)
-#: cervisiaui.rc:24
-#, kde-format
-msgid "&View"
-msgstr "보기(&V)"
-
-#. i18n: ectx: Menu (advanced)
-#: cervisiaui.rc:43
-#, kde-format
-msgid "&Advanced"
-msgstr "고급 설정(&A)"
-
-#. i18n: ectx: Menu (repository)
-#: cervisiaui.rc:63
-#, kde-format
-msgid "&Repository"
-msgstr "저장소(&R)"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1942,24 +1886,6 @@ msgstr "CVS에 없음:"
 msgid "Split main window &horizontally"
 msgstr "주 창을 수평으로 나누기(&H)"
 
-#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
-#: settingsdialog_advanced.ui:32
-#, kde-format
-msgid "&Timeout after which a progress dialog appears (in ms):"
-msgstr "진행 대화 상자를 표시할 지연 시간(ms)(&T):"
-
-#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
-#: settingsdialog_advanced.ui:45
-#, kde-format
-msgid "Default compression &level:"
-msgstr "기본 압축 단계(&L):"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
-#: settingsdialog_advanced.ui:58
-#, kde-format
-msgid "Utilize a running or start a new ssh-agent process"
-msgstr "기존 ssh-agent 프로세스를 사용하거나 새 프로세스 시작"
-
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2103,6 +2029,44 @@ msgstr "편집 해제"
 #, kde-format
 msgid "Commit"
 msgstr "커밋"
+
+#~ msgid ""
+#~ "The foreground color used to highlight files with a conflict in the file "
+#~ "view."
+#~ msgstr "파일 보기에서 충돌하는 파일을 강조할 때 사용할 배경색입니다."
+
+#~ msgid "Delay (ms) until the progress dialog appears."
+#~ msgstr "진행 대화 상자를 표시할 지연 시간(ms)입니다."
+
+#~ msgid "&File"
+#~ msgstr "파일(&F)"
+
+#~ msgid "&Settings"
+#~ msgstr "설정(&S)"
+
+#~ msgid "&Help"
+#~ msgstr "도움말(&H)"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "주 도구 모음"
+
+#~ msgid "&View"
+#~ msgstr "보기(&V)"
+
+#~ msgid "&Advanced"
+#~ msgstr "고급 설정(&A)"
+
+#~ msgid "&Repository"
+#~ msgstr "저장소(&R)"
+
+#~ msgid "&Timeout after which a progress dialog appears (in ms):"
+#~ msgstr "진행 대화 상자를 표시할 지연 시간(ms)(&T):"
+
+#~ msgid "Default compression &level:"
+#~ msgstr "기본 압축 단계(&L):"
+
+#~ msgid "Utilize a running or start a new ssh-agent process"
+#~ msgstr "기존 ssh-agent 프로세스를 사용하거나 새 프로세스 시작"
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr "Cervisia 도움말 호출"

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2002-11-14 16:55SAST\n"
 "Last-Translator: Lwandle Mgidlana <lwandle@translate.org.za>\n"
 "Language-Team: Xhosa <xhosa@translate.org.za>\n"
@@ -889,20 +889,6 @@ msgid ""
 "Konqueror."
 msgstr "yi a CVS ku Cervisia imboniselo Konqueror."
 
-#. i18n: ectx: label, entry (ConflictColor), group (Colors)
-#: cervisiapart.kcfg:24
-#, kde-format
-msgid ""
-"The foreground color used to highlight files with a conflict in the file "
-"view."
-msgstr ""
-
-#. i18n: ectx: label, entry, group (General)
-#: cervisiapart.kcfg:46
-#, fuzzy, kde-format
-msgid "Delay (ms) until the progress dialog appears."
-msgstr "&Ixesha lokuphuma emva kuqhubeko lothetho lubonaka (kwi ms):"
-
 #: cervisiashell.cpp:53
 #, fuzzy, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -922,48 +908,6 @@ msgstr "Ikuvumela ukuba uqwalasele izibophelelo ezingundoqo"
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Iphuma kwi Cervisia"
-
-#. i18n: ectx: Menu (file)
-#: cervisiashellui.rc:4 cervisiaui.rc:4
-#, fuzzy, kde-format
-msgid "&File"
-msgstr "Hl&ela Ifayile"
-
-#. i18n: ectx: Menu (settings)
-#: cervisiashellui.rc:7 cervisiaui.rc:70
-#, fuzzy, kde-format
-msgid "&Settings"
-msgstr "&Indawo engatshintshiyo"
-
-#. i18n: ectx: Menu (help)
-#: cervisiashellui.rc:11 cervisiaui.rc:80
-#, kde-format
-msgid "&Help"
-msgstr ""
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: cervisiashellui.rc:16 cervisiaui.rc:84
-#, kde-format
-msgid "Main Toolbar"
-msgstr ""
-
-#. i18n: ectx: Menu (view)
-#: cervisiaui.rc:24
-#, fuzzy, kde-format
-msgid "&View"
-msgstr "Hl&ela Ifayile"
-
-#. i18n: ectx: Menu (advanced)
-#: cervisiaui.rc:43
-#, kde-format
-msgid "&Advanced"
-msgstr "&Ukubheka phambili"
-
-#. i18n: ectx: Menu (repository)
-#: cervisiaui.rc:63
-#, kde-format
-msgid "&Repository"
-msgstr "&Indawo yokugcina"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1971,24 +1915,6 @@ msgstr "Ayikho kwi CVS"
 msgid "Split main window &horizontally"
 msgstr "Sika i window engundoqo &ethe tye"
 
-#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
-#: settingsdialog_advanced.ui:32
-#, kde-format
-msgid "&Timeout after which a progress dialog appears (in ms):"
-msgstr "&Ixesha lokuphuma emva kuqhubeko lothetho lubonaka (kwi ms):"
-
-#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
-#: settingsdialog_advanced.ui:45
-#, kde-format
-msgid "Default compression &level:"
-msgstr "Umphakamo wocinizelo &wendalo:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
-#: settingsdialog_advanced.ui:58
-#, kde-format
-msgid "Utilize a running or start a new ssh-agent process"
-msgstr ""
-
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2135,6 +2061,34 @@ msgstr "&Sukuhlela"
 #, fuzzy, kde-format
 msgid "Commit"
 msgstr "&Bophelela"
+
+#, fuzzy
+#~ msgid "Delay (ms) until the progress dialog appears."
+#~ msgstr "&Ixesha lokuphuma emva kuqhubeko lothetho lubonaka (kwi ms):"
+
+#, fuzzy
+#~ msgid "&File"
+#~ msgstr "Hl&ela Ifayile"
+
+#, fuzzy
+#~ msgid "&Settings"
+#~ msgstr "&Indawo engatshintshiyo"
+
+#, fuzzy
+#~ msgid "&View"
+#~ msgstr "Hl&ela Ifayile"
+
+#~ msgid "&Advanced"
+#~ msgstr "&Ukubheka phambili"
+
+#~ msgid "&Repository"
+#~ msgstr "&Indawo yokugcina"
+
+#~ msgid "&Timeout after which a progress dialog appears (in ms):"
+#~ msgstr "&Ixesha lokuphuma emva kuqhubeko lothetho lubonaka (kwi ms):"
+
+#~ msgid "Default compression &level:"
+#~ msgstr "Umphakamo wocinizelo &wendalo:"
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr "Icela uncedo kwi Cervisia"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2024-01-28 18:32+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -895,22 +895,6 @@ msgstr ""
 "Si no teniu la intenció d'utilitzar Cervisia, podeu canviar el mode de vista "
 "amb Konqueror."
 
-#. i18n: ectx: label, entry (ConflictColor), group (Colors)
-#: cervisiapart.kcfg:24
-#, kde-format
-msgid ""
-"The foreground color used to highlight files with a conflict in the file "
-"view."
-msgstr ""
-"El color de primer pla emprat per a marcar en la vista de fitxers aquells "
-"fitxers que tenen conflictes."
-
-#. i18n: ectx: label, entry, group (General)
-#: cervisiapart.kcfg:46
-#, kde-format
-msgid "Delay (ms) until the progress dialog appears."
-msgstr "Retard (ms) després del qual apareixerà el diàleg de progrés."
-
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -930,48 +914,6 @@ msgstr "Us permet configurar els lligams de tecla"
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Ix de Cervisia"
-
-#. i18n: ectx: Menu (file)
-#: cervisiashellui.rc:4 cervisiaui.rc:4
-#, kde-format
-msgid "&File"
-msgstr "Fi&txer"
-
-#. i18n: ectx: Menu (settings)
-#: cervisiashellui.rc:7 cervisiaui.rc:70
-#, kde-format
-msgid "&Settings"
-msgstr "Con&figuració"
-
-#. i18n: ectx: Menu (help)
-#: cervisiashellui.rc:11 cervisiaui.rc:80
-#, kde-format
-msgid "&Help"
-msgstr "A&juda"
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: cervisiashellui.rc:16 cervisiaui.rc:84
-#, kde-format
-msgid "Main Toolbar"
-msgstr "Barra d'eines principal"
-
-#. i18n: ectx: Menu (view)
-#: cervisiaui.rc:24
-#, kde-format
-msgid "&View"
-msgstr "Vi&sualitza"
-
-#. i18n: ectx: Menu (advanced)
-#: cervisiaui.rc:43
-#, kde-format
-msgid "&Advanced"
-msgstr "&Avançat"
-
-#. i18n: ectx: Menu (repository)
-#: cervisiaui.rc:63
-#, kde-format
-msgid "&Repository"
-msgstr "&Repositori"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1972,25 +1914,6 @@ msgstr "No és a CVS:"
 msgid "Split main window &horizontally"
 msgstr "Dividix la finestra principal &horitzontalment"
 
-#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
-#: settingsdialog_advanced.ui:32
-#, kde-format
-msgid "&Timeout after which a progress dialog appears (in ms):"
-msgstr ""
-"&Temps d'espera després del qual apareixerà el diàleg de progrés (en ms):"
-
-#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
-#: settingsdialog_advanced.ui:45
-#, kde-format
-msgid "Default compression &level:"
-msgstr "Nive&ll de compressió predeterminat:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
-#: settingsdialog_advanced.ui:58
-#, kde-format
-msgid "Utilize a running or start a new ssh-agent process"
-msgstr "Inicia un procés nou de ssh-agent o utilitza'n un d'existent"
-
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2134,3 +2057,44 @@ msgstr "Deseditat"
 #, kde-format
 msgid "Commit"
 msgstr "Comet"
+
+#~ msgid ""
+#~ "The foreground color used to highlight files with a conflict in the file "
+#~ "view."
+#~ msgstr ""
+#~ "El color de primer pla emprat per a marcar en la vista de fitxers aquells "
+#~ "fitxers que tenen conflictes."
+
+#~ msgid "Delay (ms) until the progress dialog appears."
+#~ msgstr "Retard (ms) després del qual apareixerà el diàleg de progrés."
+
+#~ msgid "&File"
+#~ msgstr "Fi&txer"
+
+#~ msgid "&Settings"
+#~ msgstr "Con&figuració"
+
+#~ msgid "&Help"
+#~ msgstr "A&juda"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Barra d'eines principal"
+
+#~ msgid "&View"
+#~ msgstr "Vi&sualitza"
+
+#~ msgid "&Advanced"
+#~ msgstr "&Avançat"
+
+#~ msgid "&Repository"
+#~ msgstr "&Repositori"
+
+#~ msgid "&Timeout after which a progress dialog appears (in ms):"
+#~ msgstr ""
+#~ "&Temps d'espera després del qual apareixerà el diàleg de progrés (en ms):"
+
+#~ msgid "Default compression &level:"
+#~ msgstr "Nive&ll de compressió predeterminat:"
+
+#~ msgid "Utilize a running or start a new ssh-agent process"
+#~ msgstr "Inicia un procés nou de ssh-agent o utilitza'n un d'existent"

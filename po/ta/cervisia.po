@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2021-01-18 18:59+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -884,20 +884,6 @@ msgstr ""
 "இது CVSஆவணம் அல்ல.\n"
 "உங்களுக்கு cervisia உபயோகப்படுத்த விருப்பம் இல்லையென்றால் Konquerorக்கு மாற்றிக்கொள்ளலாம்"
 
-#. i18n: ectx: label, entry (ConflictColor), group (Colors)
-#: cervisiapart.kcfg:24
-#, kde-format
-msgid ""
-"The foreground color used to highlight files with a conflict in the file "
-"view."
-msgstr ""
-
-#. i18n: ectx: label, entry, group (General)
-#: cervisiapart.kcfg:46
-#, kde-format
-msgid "Delay (ms) until the progress dialog appears."
-msgstr "முன்னேற்ற உரையாடல் தோன்றிய (ms) நேரமின்மை."
-
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -917,48 +903,6 @@ msgstr "உங்களை தனதாக்கு விசைகாட்ட�
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "சர்விஸ்யாவிலிருந்து வெளியேற்றுகிறது"
-
-#. i18n: ectx: Menu (file)
-#: cervisiashellui.rc:4 cervisiaui.rc:4
-#, fuzzy, kde-format
-msgid "&File"
-msgstr "கோப்புக்களைத் திருத்து"
-
-#. i18n: ectx: Menu (settings)
-#: cervisiashellui.rc:7 cervisiaui.rc:70
-#, fuzzy, kde-format
-msgid "&Settings"
-msgstr "நிலை"
-
-#. i18n: ectx: Menu (help)
-#: cervisiashellui.rc:11 cervisiaui.rc:80
-#, kde-format
-msgid "&Help"
-msgstr ""
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: cervisiashellui.rc:16 cervisiaui.rc:84
-#, kde-format
-msgid "Main Toolbar"
-msgstr "பிரதான கருவிப்பட்டை"
-
-#. i18n: ectx: Menu (view)
-#: cervisiaui.rc:24
-#, fuzzy, kde-format
-msgid "&View"
-msgstr "பார்வை"
-
-#. i18n: ectx: Menu (advanced)
-#: cervisiaui.rc:43
-#, kde-format
-msgid "&Advanced"
-msgstr "முன்னேற்றம்"
-
-#. i18n: ectx: Menu (repository)
-#: cervisiaui.rc:63
-#, kde-format
-msgid "&Repository"
-msgstr "தகவல்"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1965,24 +1909,6 @@ msgstr "சிவிஸ்ல் இல்லை"
 msgid "Split main window &horizontally"
 msgstr "பிரதான சாளரத்தை நீள்வாக்கில் பிரி"
 
-#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
-#: settingsdialog_advanced.ui:32
-#, kde-format
-msgid "&Timeout after which a progress dialog appears (in ms):"
-msgstr "முன்னேற்ற உரையாடல் தோன்றிய பிறகு &timeout(in ms)"
-
-#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
-#: settingsdialog_advanced.ui:45
-#, kde-format
-msgid "Default compression &level:"
-msgstr "முன்பிருந்த அழுத்த நிலை"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
-#: settingsdialog_advanced.ui:58
-#, kde-format
-msgid "Utilize a running or start a new ssh-agent process"
-msgstr "நடைமுறையில் உள்ளதை உபயோகி அல்லது  புதிய ssh-agent செயல்முறையை துவக்கு."
-
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2126,6 +2052,39 @@ msgstr "திருத்தம் திரும்பப் பெறு"
 #, kde-format
 msgid "Commit"
 msgstr "சொருகுக"
+
+#~ msgid "Delay (ms) until the progress dialog appears."
+#~ msgstr "முன்னேற்ற உரையாடல் தோன்றிய (ms) நேரமின்மை."
+
+#, fuzzy
+#~ msgid "&File"
+#~ msgstr "கோப்புக்களைத் திருத்து"
+
+#, fuzzy
+#~ msgid "&Settings"
+#~ msgstr "நிலை"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "பிரதான கருவிப்பட்டை"
+
+#, fuzzy
+#~ msgid "&View"
+#~ msgstr "பார்வை"
+
+#~ msgid "&Advanced"
+#~ msgstr "முன்னேற்றம்"
+
+#~ msgid "&Repository"
+#~ msgstr "தகவல்"
+
+#~ msgid "&Timeout after which a progress dialog appears (in ms):"
+#~ msgstr "முன்னேற்ற உரையாடல் தோன்றிய பிறகு &timeout(in ms)"
+
+#~ msgid "Default compression &level:"
+#~ msgstr "முன்பிருந்த அழுத்த நிலை"
+
+#~ msgid "Utilize a running or start a new ssh-agent process"
+#~ msgstr "நடைமுறையில் உள்ளதை உபயோகி அல்லது  புதிய ssh-agent செயல்முறையை துவக்கு."
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr " Cervisia வில் உதவி துவங்குகின்றது "

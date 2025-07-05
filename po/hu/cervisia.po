@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-03 01:53+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2012-01-08 14:14+0100\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -889,20 +889,6 @@ msgstr ""
 "Ez nem CVS-mappa.\n"
 "Ha nem a Cervisiát szeretné használni, váltson át más nézetre a Konquerorban."
 
-#. i18n: ectx: label, entry (ConflictColor), group (Colors)
-#: cervisiapart.kcfg:24
-#, kde-format
-msgid ""
-"The foreground color used to highlight files with a conflict in the file "
-"view."
-msgstr "Ezzel a színnel lesznek kiemelve az ütköző fájlok fájlnézetben."
-
-#. i18n: ectx: label, entry, group (General)
-#: cervisiapart.kcfg:46
-#, kde-format
-msgid "Delay (ms) until the progress dialog appears."
-msgstr "Ennyi várakozás után jelenik meg az állapotjelző ablak (ms)."
-
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -922,48 +908,6 @@ msgstr "A billentyűparancsokat lehet itt testreszabni"
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Kilépés a Cervisiából"
-
-#. i18n: ectx: Menu (file)
-#: cervisiashellui.rc:4 cervisiaui.rc:4
-#, kde-format
-msgid "&File"
-msgstr "Fáj&l"
-
-#. i18n: ectx: Menu (settings)
-#: cervisiashellui.rc:7 cervisiaui.rc:70
-#, kde-format
-msgid "&Settings"
-msgstr "B&eállítások"
-
-#. i18n: ectx: Menu (help)
-#: cervisiashellui.rc:11 cervisiaui.rc:80
-#, kde-format
-msgid "&Help"
-msgstr "&Súgó"
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: cervisiashellui.rc:16 cervisiaui.rc:84
-#, kde-format
-msgid "Main Toolbar"
-msgstr "Alap eszköztár"
-
-#. i18n: ectx: Menu (view)
-#: cervisiaui.rc:24
-#, kde-format
-msgid "&View"
-msgstr "Né&zet"
-
-#. i18n: ectx: Menu (advanced)
-#: cervisiaui.rc:43
-#, kde-format
-msgid "&Advanced"
-msgstr "&Speciális"
-
-#. i18n: ectx: Menu (repository)
-#: cervisiaui.rc:63
-#, kde-format
-msgid "&Repository"
-msgstr "&Adattár"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1973,26 +1917,6 @@ msgstr "Nem szerepel a CVS-ben:"
 msgid "Split main window &horizontally"
 msgstr "A főablak &vízszintes megosztása"
 
-#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
-#: settingsdialog_advanced.ui:32
-#, kde-format
-msgid "&Timeout after which a progress dialog appears (in ms):"
-msgstr ""
-"Ennyi várakozás után jelenjen meg az állapotjelző (előrehaladási) ablak "
-"(ezredmp.):"
-
-#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
-#: settingsdialog_advanced.ui:45
-#, kde-format
-msgid "Default compression &level:"
-msgstr "Az alapértelme&zett tömörítési szint:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
-#: settingsdialog_advanced.ui:58
-#, kde-format
-msgid "Utilize a running or start a new ssh-agent process"
-msgstr "Egy már futó ssh-agent folyamat felhasználása vagy új elindítása"
-
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2136,6 +2060,46 @@ msgstr "Módosítás visszavonása"
 #, kde-format
 msgid "Commit"
 msgstr "Eltárolás"
+
+#~ msgid ""
+#~ "The foreground color used to highlight files with a conflict in the file "
+#~ "view."
+#~ msgstr "Ezzel a színnel lesznek kiemelve az ütköző fájlok fájlnézetben."
+
+#~ msgid "Delay (ms) until the progress dialog appears."
+#~ msgstr "Ennyi várakozás után jelenik meg az állapotjelző ablak (ms)."
+
+#~ msgid "&File"
+#~ msgstr "Fáj&l"
+
+#~ msgid "&Settings"
+#~ msgstr "B&eállítások"
+
+#~ msgid "&Help"
+#~ msgstr "&Súgó"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Alap eszköztár"
+
+#~ msgid "&View"
+#~ msgstr "Né&zet"
+
+#~ msgid "&Advanced"
+#~ msgstr "&Speciális"
+
+#~ msgid "&Repository"
+#~ msgstr "&Adattár"
+
+#~ msgid "&Timeout after which a progress dialog appears (in ms):"
+#~ msgstr ""
+#~ "Ennyi várakozás után jelenjen meg az állapotjelző (előrehaladási) ablak "
+#~ "(ezredmp.):"
+
+#~ msgid "Default compression &level:"
+#~ msgstr "Az alapértelme&zett tömörítési szint:"
+
+#~ msgid "Utilize a running or start a new ssh-agent process"
+#~ msgstr "Egy már futó ssh-agent folyamat felhasználása vagy új elindítása"
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr "A Cervisia dokumentációjának előhívása"
