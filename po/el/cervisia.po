@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:55+0000\n"
 "PO-Revision-Date: 2016-10-12 16:56+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -892,6 +892,22 @@ msgstr ""
 "Αν δε σκοπεύετε να χρησιμοποιήσετε το Cervisia, μπορείτε να αλλάξετε "
 "λειτουργία προβολής μέσα από τον Konqueror."
 
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr ""
+"Το χρώμα προσκηνίου που θα χρησιμοποιηθεί για τον τονισμό μιας σύγκρουσης "
+"στην προβολή αρχείου."
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr "Καθυστέρηση (ms) μέχρι να εμφανιστεί ο διάλογος προόδου."
+
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -911,6 +927,48 @@ msgstr "Σας επιτρέπει να ρυθμίσετε τις συντομε�
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Τερματίζει το Cervisia"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "&Αρχείο"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, kde-format
+msgid "&Settings"
+msgstr "Ρ&υθμίσεις"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr "&Βοήθεια"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Κύρια γραμμή εργαλείων"
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, kde-format
+msgid "&View"
+msgstr "Π&ροβολή"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, kde-format
+msgid "&Advanced"
+msgstr "Για &προχωρημένους"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, kde-format
+msgid "&Repository"
+msgstr "&Χώρος αποθήκευσης"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1915,6 +1973,26 @@ msgstr "Όχι στο cvs:"
 msgid "Split main window &horizontally"
 msgstr "Διαίρεση κύριου παραθύρου &οριζόντια"
 
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr ""
+"&Χρονικό περιθώριο μετά από το οποίο εμφανίζεται ένας διάλογος προόδου (σε "
+"ms):"
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, kde-format
+msgid "Default compression &level:"
+msgstr "Προκαθορισμένο επίπεδο &συμπίεσης:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr "Χρήση ενός ήδη εκτελούμενου ssh-agent ή εκκίνηση μιας νέας διεργασίας"
+
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2058,49 +2136,6 @@ msgstr "Αναίρεση επεξεργασίας"
 #, kde-format
 msgid "Commit"
 msgstr "Καταχώρηση"
-
-#~ msgid ""
-#~ "The foreground color used to highlight files with a conflict in the file "
-#~ "view."
-#~ msgstr ""
-#~ "Το χρώμα προσκηνίου που θα χρησιμοποιηθεί για τον τονισμό μιας σύγκρουσης "
-#~ "στην προβολή αρχείου."
-
-#~ msgid "Delay (ms) until the progress dialog appears."
-#~ msgstr "Καθυστέρηση (ms) μέχρι να εμφανιστεί ο διάλογος προόδου."
-
-#~ msgid "&File"
-#~ msgstr "&Αρχείο"
-
-#~ msgid "&Settings"
-#~ msgstr "Ρ&υθμίσεις"
-
-#~ msgid "&Help"
-#~ msgstr "&Βοήθεια"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "Κύρια γραμμή εργαλείων"
-
-#~ msgid "&View"
-#~ msgstr "Π&ροβολή"
-
-#~ msgid "&Advanced"
-#~ msgstr "Για &προχωρημένους"
-
-#~ msgid "&Repository"
-#~ msgstr "&Χώρος αποθήκευσης"
-
-#~ msgid "&Timeout after which a progress dialog appears (in ms):"
-#~ msgstr ""
-#~ "&Χρονικό περιθώριο μετά από το οποίο εμφανίζεται ένας διάλογος προόδου "
-#~ "(σε ms):"
-
-#~ msgid "Default compression &level:"
-#~ msgstr "Προκαθορισμένο επίπεδο &συμπίεσης:"
-
-#~ msgid "Utilize a running or start a new ssh-agent process"
-#~ msgstr ""
-#~ "Χρήση ενός ήδη εκτελούμενου ssh-agent ή εκκίνηση μιας νέας διεργασίας"
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr "Κλήση βοήθειας για το Cervisia"

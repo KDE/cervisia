@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:55+0000\n"
 "PO-Revision-Date: 2025-03-08 00:03+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -884,6 +884,20 @@ msgstr ""
 "Eğer Cervisia'yı kullanmayı düşünmüyorsanız, Konqueror'daki görünüm kipleri "
 "arasında değişiklik yapabilirsiniz."
 
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr "Dosya görünümünde çakışan dosyaları vurgulamak için kullanılacak renk."
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr "Bir işlem penceresi göründükten sonraki zamanaşımı (ms)."
+
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -903,6 +917,48 @@ msgstr "Düğme bağıntılarını özelleştirmenize izin verir"
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Cervisia'dan Çıkar"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "&Dosya"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, kde-format
+msgid "&Settings"
+msgstr "Ayar&lar"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr "&Yardım"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Ana Araç Çubuğu"
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, kde-format
+msgid "&View"
+msgstr "&Görünüm"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, kde-format
+msgid "&Advanced"
+msgstr "&Gelişmiş"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, kde-format
+msgid "&Repository"
+msgstr "&Depo"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1905,6 +1961,24 @@ msgstr "CVS'de değil:"
 msgid "Split main window &horizontally"
 msgstr "Ana pencereyi &alt/üst olarak böl"
 
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr "Bir işlem penceresi göründükten sonraki &zamanaşımı (ms):"
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, kde-format
+msgid "Default compression &level:"
+msgstr "Ö&ntanımlı sıkıştırma düzeyi:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr "Bir ssh-agent sürecine bir çalışma veya başlangıç kullan"
+
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2048,42 +2122,3 @@ msgstr "Kaldırılan Düzenleme"
 #, kde-format
 msgid "Commit"
 msgstr "İşle"
-
-#~ msgid ""
-#~ "The foreground color used to highlight files with a conflict in the file "
-#~ "view."
-#~ msgstr ""
-#~ "Dosya görünümünde çakışan dosyaları vurgulamak için kullanılacak renk."
-
-#~ msgid "Delay (ms) until the progress dialog appears."
-#~ msgstr "Bir işlem penceresi göründükten sonraki zamanaşımı (ms)."
-
-#~ msgid "&File"
-#~ msgstr "&Dosya"
-
-#~ msgid "&Settings"
-#~ msgstr "Ayar&lar"
-
-#~ msgid "&Help"
-#~ msgstr "&Yardım"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "Ana Araç Çubuğu"
-
-#~ msgid "&View"
-#~ msgstr "&Görünüm"
-
-#~ msgid "&Advanced"
-#~ msgstr "&Gelişmiş"
-
-#~ msgid "&Repository"
-#~ msgstr "&Depo"
-
-#~ msgid "&Timeout after which a progress dialog appears (in ms):"
-#~ msgstr "Bir işlem penceresi göründükten sonraki &zamanaşımı (ms):"
-
-#~ msgid "Default compression &level:"
-#~ msgstr "Ö&ntanımlı sıkıştırma düzeyi:"
-
-#~ msgid "Utilize a running or start a new ssh-agent process"
-#~ msgstr "Bir ssh-agent sürecine bir çalışma veya başlangıç kullan"

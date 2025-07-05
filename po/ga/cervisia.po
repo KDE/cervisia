@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesdk/cervisia.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:55+0000\n"
 "PO-Revision-Date: 2004-12-03 14:52-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -871,6 +871,20 @@ msgstr ""
 "Murar mhian leat Cervisia a úsáid, b'fhéidir leat an mód amhairc a athrú i "
 "Konqueror."
 
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr ""
+
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -890,6 +904,48 @@ msgstr "Ceadaíonn sé seo duit ceangail eochracha a shaincheapadh"
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Scoir Cervisia"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "&Comhad"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, kde-format
+msgid "&Settings"
+msgstr "&Socruithe"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr "&Cabhair"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Príomhbharra Uirlisí"
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, kde-format
+msgid "&View"
+msgstr "&Amharc"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, kde-format
+msgid "&Advanced"
+msgstr "&Casta"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, kde-format
+msgid "&Repository"
+msgstr "&Stór"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1893,6 +1949,25 @@ msgstr ""
 msgid "Split main window &horizontally"
 msgstr ""
 
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, fuzzy, kde-format
+#| msgid "Use different &compression level:"
+msgid "Default compression &level:"
+msgstr "Úsáid leibhéal difriúil &comhbhrúite:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr ""
+
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2034,32 +2109,6 @@ msgstr ""
 #, kde-format
 msgid "Commit"
 msgstr "Cuir i bhFeidhm"
-
-#~ msgid "&File"
-#~ msgstr "&Comhad"
-
-#~ msgid "&Settings"
-#~ msgstr "&Socruithe"
-
-#~ msgid "&Help"
-#~ msgstr "&Cabhair"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "Príomhbharra Uirlisí"
-
-#~ msgid "&View"
-#~ msgstr "&Amharc"
-
-#~ msgid "&Advanced"
-#~ msgstr "&Casta"
-
-#~ msgid "&Repository"
-#~ msgstr "&Stór"
-
-#, fuzzy
-#~| msgid "Use different &compression level:"
-#~ msgid "Default compression &level:"
-#~ msgstr "Úsáid leibhéal difriúil &comhbhrúite:"
 
 #~ msgid "&Overwrite"
 #~ msgstr "F&orscríobh"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:55+0000\n"
 "PO-Revision-Date: 2024-08-14 00:39+0330\n"
 "Last-Translator: Mohi Mirdamadi <mohi.pub@gmail.com>\n"
 "Language-Team: fa\n"
@@ -880,6 +880,22 @@ msgstr ""
 "این پوشه CVS نیست.‌ اگر قصد استفاده از Cervisia را نداشتید، می‌توانید حالات "
 "نما را در Konqueror سودهی کنید."
 
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr ""
+"رنگ پیش‌زمینه برای مشخص کردن پرونده‌هایی که با یک ناسازگاری در نمای پرونده "
+"استفاده می‌شوند."
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr "تأخیر )میلی‌ثانیه( تا زمانی که محاوره پیشرفت ظاهر می‌شود."
+
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -899,6 +915,48 @@ msgstr "اجازه می‌دهد مقیدسازیهای کلید را سفارش
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Cervisia را خارج می‌کند"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "&پرونده‌"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, kde-format
+msgid "&Settings"
+msgstr "&تنظیمات‌"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr "&کمک‌"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr "میله ابزار اصلی"
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, kde-format
+msgid "&View"
+msgstr "&نما‌"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, kde-format
+msgid "&Advanced"
+msgstr "&پیشرفته‌"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, kde-format
+msgid "&Repository"
+msgstr "&مخزن‌"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1910,6 +1968,26 @@ msgstr "در cvs نیست:"
 msgid "Split main window &horizontally"
 msgstr "تقسیم پنجره اصلی &به طور افقی‌"
 
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr ""
+"&اتمام‌ وقت بعد از این که یک محاوره پیشرفت ظاهر می‌شود )برحسب میلی‌ثانیه(:‌"
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, kde-format
+msgid "Default compression &level:"
+msgstr "&سطح‌ فشرده‌سازی پیش‌فرض:‌"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr ""
+"استفاده از یک فرآیند عامل-ssh در حال اجرا، یا آغاز فرآیند عامل-ssh جدید"
+
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2053,48 +2131,6 @@ msgstr "ویرایش‌نشده"
 #, kde-format
 msgid "Commit"
 msgstr "تصدیق"
-
-#~ msgid ""
-#~ "The foreground color used to highlight files with a conflict in the file "
-#~ "view."
-#~ msgstr ""
-#~ "رنگ پیش‌زمینه برای مشخص کردن پرونده‌هایی که با یک ناسازگاری در نمای پرونده "
-#~ "استفاده می‌شوند."
-
-#~ msgid "Delay (ms) until the progress dialog appears."
-#~ msgstr "تأخیر )میلی‌ثانیه( تا زمانی که محاوره پیشرفت ظاهر می‌شود."
-
-#~ msgid "&File"
-#~ msgstr "&پرونده‌"
-
-#~ msgid "&Settings"
-#~ msgstr "&تنظیمات‌"
-
-#~ msgid "&Help"
-#~ msgstr "&کمک‌"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "میله ابزار اصلی"
-
-#~ msgid "&View"
-#~ msgstr "&نما‌"
-
-#~ msgid "&Advanced"
-#~ msgstr "&پیشرفته‌"
-
-#~ msgid "&Repository"
-#~ msgstr "&مخزن‌"
-
-#~ msgid "&Timeout after which a progress dialog appears (in ms):"
-#~ msgstr ""
-#~ "&اتمام‌ وقت بعد از این که یک محاوره پیشرفت ظاهر می‌شود )برحسب میلی‌ثانیه(:‌"
-
-#~ msgid "Default compression &level:"
-#~ msgstr "&سطح‌ فشرده‌سازی پیش‌فرض:‌"
-
-#~ msgid "Utilize a running or start a new ssh-agent process"
-#~ msgstr ""
-#~ "استفاده از یک فرآیند عامل-ssh در حال اجرا، یا آغاز فرآیند عامل-ssh جدید"
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr "احضار کمک در مورد Cervisia"

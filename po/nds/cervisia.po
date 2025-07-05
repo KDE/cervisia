@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:55+0000\n"
 "PO-Revision-Date: 2010-09-21 07:46+0200\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -888,6 +888,20 @@ msgstr ""
 "Wenn Du Cervisia nich bruken wullst, kannst Du de Ansichtmetood binnen "
 "Konqueror wesseln."
 
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr "De Vörgrundklöör för't Markeren vun Dateien mit Konflikten."
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr "Töövtiet (ms) bet en Vörankamen-Dialoog opdukt."
+
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -907,6 +921,48 @@ msgstr "Verlöövt dat Inrichten vun de Tastkombinatschonen"
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Cervisia beennen"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "&Datei"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, kde-format
+msgid "&Settings"
+msgstr "&Instellen"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr "&Hülp"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Hööft-Warktüüchbalken"
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, kde-format
+msgid "&View"
+msgstr "&Wiesen"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, kde-format
+msgid "&Advanced"
+msgstr "&Verwiedert"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, kde-format
+msgid "&Repository"
+msgstr "&Archiv"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1917,6 +1973,24 @@ msgstr "Nich in CVS:"
 msgid "Split main window &horizontally"
 msgstr "Hööftfinster &kimmrecht delen"
 
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr "&Tietgrenz för't Opduken vun den Vörankamen-Dialoog (in ms):"
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, kde-format
+msgid "Default compression &level:"
+msgstr "Standard-&Komprimeerstoop:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr "Lopen \"ssh-agent\"-Perzess bruken oder en niegen starten"
+
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2060,44 +2134,6 @@ msgstr "Bewerk-Torechtmaken torüchdreihen"
 #, kde-format
 msgid "Commit"
 msgstr "Inspelen"
-
-#~ msgid ""
-#~ "The foreground color used to highlight files with a conflict in the file "
-#~ "view."
-#~ msgstr "De Vörgrundklöör för't Markeren vun Dateien mit Konflikten."
-
-#~ msgid "Delay (ms) until the progress dialog appears."
-#~ msgstr "Töövtiet (ms) bet en Vörankamen-Dialoog opdukt."
-
-#~ msgid "&File"
-#~ msgstr "&Datei"
-
-#~ msgid "&Settings"
-#~ msgstr "&Instellen"
-
-#~ msgid "&Help"
-#~ msgstr "&Hülp"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "Hööft-Warktüüchbalken"
-
-#~ msgid "&View"
-#~ msgstr "&Wiesen"
-
-#~ msgid "&Advanced"
-#~ msgstr "&Verwiedert"
-
-#~ msgid "&Repository"
-#~ msgstr "&Archiv"
-
-#~ msgid "&Timeout after which a progress dialog appears (in ms):"
-#~ msgstr "&Tietgrenz för't Opduken vun den Vörankamen-Dialoog (in ms):"
-
-#~ msgid "Default compression &level:"
-#~ msgstr "Standard-&Komprimeerstoop:"
-
-#~ msgid "Utilize a running or start a new ssh-agent process"
-#~ msgstr "Lopen \"ssh-agent\"-Perzess bruken oder en niegen starten"
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr "Hülp för Cervisia wiesen"

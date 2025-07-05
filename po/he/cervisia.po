@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:55+0000\n"
 "PO-Revision-Date: 2017-05-16 07:03-0400\n"
 "Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
 "Language-Team: hebrew <kde-l10n-he@kde.org>\n"
@@ -878,6 +878,20 @@ msgstr ""
 "זו אינה ספריית CVS.\n"
 "אם לא התכוונת להשתמש ב Cervisia, באפשרותך להחליף מצבי תצוגה ב־Konqueror."
 
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr "&פרק זמן אחריו יופיע דו־שיח התקדמות (באלפיות שנייה):"
+
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -897,6 +911,48 @@ msgstr "מאפשר לך להתאים אישית את קיצורי המקשים"
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "יציאה מ־Cervisia"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, fuzzy, kde-format
+msgid "&File"
+msgstr "&ערוך קבצים"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, fuzzy, kde-format
+msgid "&Settings"
+msgstr "&מצב"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr ""
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr ""
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, fuzzy, kde-format
+msgid "&View"
+msgstr "הצג קובץ"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, kde-format
+msgid "&Advanced"
+msgstr "מתק&דם"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, kde-format
+msgid "&Repository"
+msgstr "מ&אגר"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1897,6 +1953,24 @@ msgstr "לא ב־CVS"
 msgid "Split main window &horizontally"
 msgstr "&פצל את החלון הראשי אופקית"
 
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr "&פרק זמן אחריו יופיע דו־שיח התקדמות (באלפיות שנייה):"
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, kde-format
+msgid "Default compression &level:"
+msgstr "רמת &דחיסה ברירת מחדל:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr ""
+
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2039,33 +2113,6 @@ msgstr "ביטול עריכה"
 #, kde-format
 msgid "Commit"
 msgstr "שליחה"
-
-#~ msgid "Delay (ms) until the progress dialog appears."
-#~ msgstr "&פרק זמן אחריו יופיע דו־שיח התקדמות (באלפיות שנייה):"
-
-#, fuzzy
-#~ msgid "&File"
-#~ msgstr "&ערוך קבצים"
-
-#, fuzzy
-#~ msgid "&Settings"
-#~ msgstr "&מצב"
-
-#, fuzzy
-#~ msgid "&View"
-#~ msgstr "הצג קובץ"
-
-#~ msgid "&Advanced"
-#~ msgstr "מתק&דם"
-
-#~ msgid "&Repository"
-#~ msgstr "מ&אגר"
-
-#~ msgid "&Timeout after which a progress dialog appears (in ms):"
-#~ msgstr "&פרק זמן אחריו יופיע דו־שיח התקדמות (באלפיות שנייה):"
-
-#~ msgid "Default compression &level:"
-#~ msgstr "רמת &דחיסה ברירת מחדל:"
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr "מפעיל את העזרה של Cervisia"

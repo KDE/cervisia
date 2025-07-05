@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:55+0000\n"
 "PO-Revision-Date: 2024-05-30 22:41+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -878,6 +878,22 @@ msgstr ""
 "Se vi ne intencis uzi Cervisia, vi povas ŝanĝi rigardreĝimojn ene de "
 "Konqueror."
 
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr ""
+"La malfonokoloro uzata por reliefigi dosierojn kun konflikto en la "
+"dosiervido."
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr "Prokrasto (ms) ĝis la progreso dialogo aperas."
+
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -897,6 +913,48 @@ msgstr "Permesas al vi personecigi la klavbindojn"
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Eliras Cervisia"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "&Dosiero"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, kde-format
+msgid "&Settings"
+msgstr "&Agordo"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr "&Helpo"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Ĉefa ilobreto"
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, kde-format
+msgid "&View"
+msgstr "&Rigardi"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, kde-format
+msgid "&Advanced"
+msgstr "&Progresinta"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, kde-format
+msgid "&Repository"
+msgstr "&Deponejo"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1897,6 +1955,24 @@ msgstr "Ne en cvs:"
 msgid "Split main window &horizontally"
 msgstr "Dividi ĉeffenestron &horizontale"
 
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr "El&tempiĝo post kiu aperas dialogo de progreso (en ms):"
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, kde-format
+msgid "Default compression &level:"
+msgstr "Defaŭlta kunpremado nive&lo:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr "Uzu funkciadon aŭ komencu novan ssh-agent-procezon"
+
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2040,43 +2116,3 @@ msgstr "Malredakti"
 #, kde-format
 msgid "Commit"
 msgstr "Enmeti"
-
-#~ msgid ""
-#~ "The foreground color used to highlight files with a conflict in the file "
-#~ "view."
-#~ msgstr ""
-#~ "La malfonokoloro uzata por reliefigi dosierojn kun konflikto en la "
-#~ "dosiervido."
-
-#~ msgid "Delay (ms) until the progress dialog appears."
-#~ msgstr "Prokrasto (ms) ĝis la progreso dialogo aperas."
-
-#~ msgid "&File"
-#~ msgstr "&Dosiero"
-
-#~ msgid "&Settings"
-#~ msgstr "&Agordo"
-
-#~ msgid "&Help"
-#~ msgstr "&Helpo"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "Ĉefa ilobreto"
-
-#~ msgid "&View"
-#~ msgstr "&Rigardi"
-
-#~ msgid "&Advanced"
-#~ msgstr "&Progresinta"
-
-#~ msgid "&Repository"
-#~ msgstr "&Deponejo"
-
-#~ msgid "&Timeout after which a progress dialog appears (in ms):"
-#~ msgstr "El&tempiĝo post kiu aperas dialogo de progreso (en ms):"
-
-#~ msgid "Default compression &level:"
-#~ msgstr "Defaŭlta kunpremado nive&lo:"
-
-#~ msgid "Utilize a running or start a new ssh-agent process"
-#~ msgstr "Uzu funkciadon aŭ komencu novan ssh-agent-procezon"

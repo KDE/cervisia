@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:55+0000\n"
 "PO-Revision-Date: 2010-01-31 12:09+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: ਪੰਜਾਬੀ <punjabi-users@lists.sf.net>\n"
@@ -869,6 +869,20 @@ msgstr ""
 "ਇਹ ਇੱਕ CVS ਫੋਲਡਰ ਨਹੀਂ ਹੈ।\n"
 "ਜੇ ਤੁਹਾਡਾ ਮਕਸਦ ਸਰਵੀਸੀਆ ਦੀ ਵਰਤੋਂ ਕਰਨਾ ਨਹੀਂ ਸੀ ਤਾਂ ਤੁਸੀਂ ਕੋਨਕਿਉਰੋਰ ਨਾਲ ਵੇਖਣ ਢੰਗ ਬਦਲ ਸਕਦੇ ਹੋ।"
 
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr ""
+
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -888,6 +902,48 @@ msgstr ""
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "ਸਰਵੀਸੀਆ ਬੰਦ"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "ਫਾਇਲ(&F)"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, kde-format
+msgid "&Settings"
+msgstr "ਸੈਟਿੰਗ(&S)"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr "ਮੱਦਦ(&H)"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr "ਮੁੱਖ ਟੂਲਬਾਰ"
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, kde-format
+msgid "&View"
+msgstr "ਵੇਖੋ(&V)"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, kde-format
+msgid "&Advanced"
+msgstr "ਤਕਨੀਕੀ(&A)"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, kde-format
+msgid "&Repository"
+msgstr "ਰਿਪੋਜ਼ਟਰੀ(&R)"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1884,6 +1940,24 @@ msgstr "CVS ਵਿੱਚ ਨਹੀਂ:"
 msgid "Split main window &horizontally"
 msgstr "ਮੁੱਖ ਝਰੋਖਾ ਖਿਤਿਜੀ ਵੰਡੋ(&h)"
 
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, kde-format
+msgid "Default compression &level:"
+msgstr "ਮੂਲ ਨਪੀੜਨ ਪੱਧਰ (&l):"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr "ਇੱਕ ਚੱਲਦਾ ssh-agent ਕਾਰਜ ਵਰਤਣਾ ਹੈ ਜਾਂ ਨਵਾਂ ਸ਼ੁਰੂ ਕਰਨਾ ਹੈ"
+
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2025,33 +2099,6 @@ msgstr "ਅਣ-ਸੋਧ"
 #, kde-format
 msgid "Commit"
 msgstr "ਕਮਿਟ(Commit)"
-
-#~ msgid "&File"
-#~ msgstr "ਫਾਇਲ(&F)"
-
-#~ msgid "&Settings"
-#~ msgstr "ਸੈਟਿੰਗ(&S)"
-
-#~ msgid "&Help"
-#~ msgstr "ਮੱਦਦ(&H)"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "ਮੁੱਖ ਟੂਲਬਾਰ"
-
-#~ msgid "&View"
-#~ msgstr "ਵੇਖੋ(&V)"
-
-#~ msgid "&Advanced"
-#~ msgstr "ਤਕਨੀਕੀ(&A)"
-
-#~ msgid "&Repository"
-#~ msgstr "ਰਿਪੋਜ਼ਟਰੀ(&R)"
-
-#~ msgid "Default compression &level:"
-#~ msgstr "ਮੂਲ ਨਪੀੜਨ ਪੱਧਰ (&l):"
-
-#~ msgid "Utilize a running or start a new ssh-agent process"
-#~ msgstr "ਇੱਕ ਚੱਲਦਾ ssh-agent ਕਾਰਜ ਵਰਤਣਾ ਹੈ ਜਾਂ ਨਵਾਂ ਸ਼ੁਰੂ ਕਰਨਾ ਹੈ"
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr "ਸਰਵੀਸੀਆ ਉੱਤੇ ਉਪਲੱਬਧ ਸਹਾਇਤਾ"

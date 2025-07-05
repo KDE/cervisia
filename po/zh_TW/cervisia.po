@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:55+0000\n"
 "PO-Revision-Date: 2016-11-15 21:08+0800\n"
 "Last-Translator: Jeff Huang <s8321414@gmail.com>\n"
 "Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
@@ -867,6 +867,20 @@ msgstr ""
 "這不是 CVS 資料夾。\n"
 "如果您沒有打算使用 Cervisia，您可以在 Konqueror 中切換顯示模式。"
 
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr "在檔案檢視時，顯示有衝突檔案的前景顏色。"
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr "進度對話框出現前的延遲（毫秒）。"
+
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -886,6 +900,48 @@ msgstr "讓您自訂組合鍵"
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "離開 Cervisia"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "檔案(&F)"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, kde-format
+msgid "&Settings"
+msgstr "設定(&S)"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr "說明(&H)"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr "主工具列"
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, kde-format
+msgid "&View"
+msgstr "檢視(&V)"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, kde-format
+msgid "&Advanced"
+msgstr "進階(&A)"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, kde-format
+msgid "&Repository"
+msgstr "主目錄(&R)"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1879,6 +1935,24 @@ msgstr "不在 CVS 內："
 msgid "Split main window &horizontally"
 msgstr "水平切割主視窗(&H)"
 
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr "進度對話框出現後的逾時時間（毫秒）："
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, kde-format
+msgid "Default compression &level:"
+msgstr "預設壓縮等級(&L)："
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr "使用正在執行中的，或是開啟新的 ssh 代理者行程"
+
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2020,44 +2094,6 @@ msgstr "解除編輯"
 #, kde-format
 msgid "Commit"
 msgstr "提交"
-
-#~ msgid ""
-#~ "The foreground color used to highlight files with a conflict in the file "
-#~ "view."
-#~ msgstr "在檔案檢視時，顯示有衝突檔案的前景顏色。"
-
-#~ msgid "Delay (ms) until the progress dialog appears."
-#~ msgstr "進度對話框出現前的延遲（毫秒）。"
-
-#~ msgid "&File"
-#~ msgstr "檔案(&F)"
-
-#~ msgid "&Settings"
-#~ msgstr "設定(&S)"
-
-#~ msgid "&Help"
-#~ msgstr "說明(&H)"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "主工具列"
-
-#~ msgid "&View"
-#~ msgstr "檢視(&V)"
-
-#~ msgid "&Advanced"
-#~ msgstr "進階(&A)"
-
-#~ msgid "&Repository"
-#~ msgstr "主目錄(&R)"
-
-#~ msgid "&Timeout after which a progress dialog appears (in ms):"
-#~ msgstr "進度對話框出現後的逾時時間（毫秒）："
-
-#~ msgid "Default compression &level:"
-#~ msgstr "預設壓縮等級(&L)："
-
-#~ msgid "Utilize a running or start a new ssh-agent process"
-#~ msgstr "使用正在執行中的，或是開啟新的 ssh 代理者行程"
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr "打開 Cervisia 說明"

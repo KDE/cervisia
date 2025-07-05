@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:55+0000\n"
 "PO-Revision-Date: 2024-01-28 18:32+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -894,6 +894,20 @@ msgstr ""
 "Si no teniu la intenció d'usar el Cervisia, podeu canviar el mode de vista "
 "amb el Konqueror."
 
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr ""
+
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -913,6 +927,52 @@ msgstr "Us permet configurar els lligams de tecla"
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Surt del Cervisia"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, fuzzy, kde-format
+#| msgid "File"
+msgid "&File"
+msgstr "Fitxer"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, kde-format
+msgid "&Settings"
+msgstr ""
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr ""
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr ""
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, fuzzy, kde-format
+#| msgid "&View A"
+msgid "&View"
+msgstr "&Visualitza A"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, fuzzy, kde-format
+#| msgid "Advanced"
+msgid "&Advanced"
+msgstr "Avançat"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, fuzzy, kde-format
+#| msgid "&Repository:"
+msgid "&Repository"
+msgstr "&Repositori:"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1916,6 +1976,25 @@ msgstr "No és al CVS:"
 msgid "Split main window &horizontally"
 msgstr "Divideix la finestra principal &horitzontalment"
 
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, fuzzy, kde-format
+#| msgid "Use different &compression level:"
+msgid "Default compression &level:"
+msgstr "Usa un nive&ll de compressió diferent:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr ""
+
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2059,44 +2138,3 @@ msgstr "Deseditat"
 #, kde-format
 msgid "Commit"
 msgstr "Comet"
-
-#~ msgid ""
-#~ "The foreground color used to highlight files with a conflict in the file "
-#~ "view."
-#~ msgstr ""
-#~ "El color de primer pla emprat per a marcar a la vista de fitxers aquells "
-#~ "fitxers que tenen conflictes."
-
-#~ msgid "Delay (ms) until the progress dialog appears."
-#~ msgstr "Retard (ms) després del qual apareixerà el diàleg de progrés."
-
-#~ msgid "&File"
-#~ msgstr "&Fitxer"
-
-#~ msgid "&Settings"
-#~ msgstr "A&rranjament"
-
-#~ msgid "&Help"
-#~ msgstr "A&juda"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "Barra d'eines principal"
-
-#~ msgid "&View"
-#~ msgstr "Vi&sualitza"
-
-#~ msgid "&Advanced"
-#~ msgstr "&Avançat"
-
-#~ msgid "&Repository"
-#~ msgstr "&Repositori"
-
-#~ msgid "&Timeout after which a progress dialog appears (in ms):"
-#~ msgstr ""
-#~ "&Temps d'espera després del qual apareixerà el diàleg de progrés (en ms):"
-
-#~ msgid "Default compression &level:"
-#~ msgstr "Nive&ll de compressió per omissió:"
-
-#~ msgid "Utilize a running or start a new ssh-agent process"
-#~ msgstr "Inicia un procés nou de ssh-agent o empra'n un d'existent"

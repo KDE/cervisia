@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:55+0000\n"
 "PO-Revision-Date: 2016-06-07 22:15+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -873,6 +873,21 @@ msgstr ""
 "Toto nie je priečinok CVS.\n"
 "Ak nechcete používať program Cervisia, v Konquerori môžete prepnúť pohľad."
 
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr ""
+"Farba popredia pre zvýraznenie súborov s konfliktom v zobrazení súborov."
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr "Čakanie pred zobrazením dialógu priebehu (v ms)."
+
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -892,6 +907,48 @@ msgstr "Umožňuje upraviť klávesové skratky"
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Ukončí Cervisia"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "&Súbor"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, kde-format
+msgid "&Settings"
+msgstr "&Nastavenia"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr "&Pomocník"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Hlavný panel nástrojov"
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, kde-format
+msgid "&View"
+msgstr "&Zobraziť"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, kde-format
+msgid "&Advanced"
+msgstr "&Pokročilé"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, kde-format
+msgid "&Repository"
+msgstr "&Repository"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1894,6 +1951,24 @@ msgstr "Nie je v CVS:"
 msgid "Split main window &horizontally"
 msgstr "Rozdeliť hlavné okno &horizontálne"
 
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr "Ča&kanie pred zobrazením dialógu priebehu (v ms):"
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, kde-format
+msgid "Default compression &level:"
+msgstr "Štandardná úroveň &kompresie:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr "Využiť bežiaci, alebo spustiť nový proces ssh-agent"
+
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2036,45 +2111,6 @@ msgstr "Vrátiť úpravy"
 #, kde-format
 msgid "Commit"
 msgstr "Commit"
-
-#~ msgid ""
-#~ "The foreground color used to highlight files with a conflict in the file "
-#~ "view."
-#~ msgstr ""
-#~ "Farba popredia pre zvýraznenie súborov s konfliktom v zobrazení súborov."
-
-#~ msgid "Delay (ms) until the progress dialog appears."
-#~ msgstr "Čakanie pred zobrazením dialógu priebehu (v ms)."
-
-#~ msgid "&File"
-#~ msgstr "&Súbor"
-
-#~ msgid "&Settings"
-#~ msgstr "&Nastavenia"
-
-#~ msgid "&Help"
-#~ msgstr "&Pomocník"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "Hlavný panel nástrojov"
-
-#~ msgid "&View"
-#~ msgstr "&Zobraziť"
-
-#~ msgid "&Advanced"
-#~ msgstr "&Pokročilé"
-
-#~ msgid "&Repository"
-#~ msgstr "&Repository"
-
-#~ msgid "&Timeout after which a progress dialog appears (in ms):"
-#~ msgstr "Ča&kanie pred zobrazením dialógu priebehu (v ms):"
-
-#~ msgid "Default compression &level:"
-#~ msgstr "Štandardná úroveň &kompresie:"
-
-#~ msgid "Utilize a running or start a new ssh-agent process"
-#~ msgstr "Využiť bežiaci, alebo spustiť nový proces ssh-agent"
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr "Spúšťam pomocníka pre Cervisia"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:55+0000\n"
 "PO-Revision-Date: 2022-02-07 09:35+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -880,6 +880,21 @@ msgstr ""
 "هذا ليس مجلّد CVS.\n"
 "إذا لم تكن تقصد إستعمال Cervisia ، يمكنك تحويل أنماط العرض في Konqueror."
 
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr ""
+"اللون الأمامي المستخدم من أجل تعليم الملفات ذات التضارب في مشهد الملفات"
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr "الفترة قبل ظهور مربّعْ التّقدّم-بالمللي ثانية-."
+
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -899,6 +914,48 @@ msgstr "يهيئ لك تخصيص ارتباطات المفاتيح"
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "يخرجك من Cervisia"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "&ملف"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, kde-format
+msgid "&Settings"
+msgstr "إ&عدادات"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr "م&ساعدة"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr "شريط الأدوات الرئيسي"
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, kde-format
+msgid "&View"
+msgstr "&عرض"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, kde-format
+msgid "&Advanced"
+msgstr "مت&قدم"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, kde-format
+msgid "&Repository"
+msgstr "المستودع"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1901,6 +1958,24 @@ msgstr "ليس في CVS:"
 msgid "Split main window &horizontally"
 msgstr "تقسيم الشاشة الرئيسية أفقيًا"
 
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr "الو&قت الواجب مروره قبل إظهار مربع تقّدم (م.ث.):"
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, kde-format
+msgid "Default compression &level:"
+msgstr "مستوى الضغط الافتراضي:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr "استعمل عملية ssh-agent شغالة أو ابدأ واحدة جديدة"
+
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2044,45 +2119,6 @@ msgstr "تراجع عن تحرير"
 #, kde-format
 msgid "Commit"
 msgstr "أوْدِعْ"
-
-#~ msgid ""
-#~ "The foreground color used to highlight files with a conflict in the file "
-#~ "view."
-#~ msgstr ""
-#~ "اللون الأمامي المستخدم من أجل تعليم الملفات ذات التضارب في مشهد الملفات"
-
-#~ msgid "Delay (ms) until the progress dialog appears."
-#~ msgstr "الفترة قبل ظهور مربّعْ التّقدّم-بالمللي ثانية-."
-
-#~ msgid "&File"
-#~ msgstr "&ملف"
-
-#~ msgid "&Settings"
-#~ msgstr "إ&عدادات"
-
-#~ msgid "&Help"
-#~ msgstr "م&ساعدة"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "شريط الأدوات الرئيسي"
-
-#~ msgid "&View"
-#~ msgstr "&عرض"
-
-#~ msgid "&Advanced"
-#~ msgstr "مت&قدم"
-
-#~ msgid "&Repository"
-#~ msgstr "المستودع"
-
-#~ msgid "&Timeout after which a progress dialog appears (in ms):"
-#~ msgstr "الو&قت الواجب مروره قبل إظهار مربع تقّدم (م.ث.):"
-
-#~ msgid "Default compression &level:"
-#~ msgstr "مستوى الضغط الافتراضي:"
-
-#~ msgid "Utilize a running or start a new ssh-agent process"
-#~ msgstr "استعمل عملية ssh-agent شغالة أو ابدأ واحدة جديدة"
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr "إستدعاء مساعدة Cervisia"

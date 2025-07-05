@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:55+0000\n"
 "PO-Revision-Date: 2023-01-03 10:47+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -895,6 +895,22 @@ msgstr ""
 "Hau ez da CVS direktorio bat.\n"
 "Cervisia erabili nahi ez bazenuen, alda ezazu ikuspegia Konqueror-en."
 
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr ""
+"Fitxategi ikuspegian gatazka duten fitxategiak nabarmentzeko erabiliko den "
+"aurreko planoaren kolorea."
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr "Aurrerapen elkarrizketa-koadroa agertu arte itxarongo den denbora (ms)"
+
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -914,6 +930,48 @@ msgstr "Zure laster-teklak pertsonalizatzeko aukera ematen dizu"
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Irten Cervisia-tik"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "&Fitxategia"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, kde-format
+msgid "&Settings"
+msgstr "E&zarpenak"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr "&Laguntza"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Tresna-barra nagusia"
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, kde-format
+msgid "&View"
+msgstr "I&kuspegia"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, kde-format
+msgid "&Advanced"
+msgstr "&Aurreratua"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, kde-format
+msgid "&Repository"
+msgstr "&Biltegia"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1917,6 +1975,26 @@ msgstr "Ez dago CVS-n:"
 msgid "Split main window &horizontally"
 msgstr "Zatitu lehio nagusia &horizontalki"
 
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr ""
+"Aurrerapen elkarrizketa-koadroa azaldu aurretik itxarongo den &denbora (ms-"
+"tan):"
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, kde-format
+msgid "Default compression &level:"
+msgstr "Konpresio &maila lehenetsia:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr "Erabili martxan dagoen ssh-agente prozesu bat edo abiarazi berria"
+
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2060,49 +2138,6 @@ msgstr "Deseditatu"
 #, kde-format
 msgid "Commit"
 msgstr "Entregatu"
-
-#~ msgid ""
-#~ "The foreground color used to highlight files with a conflict in the file "
-#~ "view."
-#~ msgstr ""
-#~ "Fitxategi ikuspegian gatazka duten fitxategiak nabarmentzeko erabiliko "
-#~ "den aurreko planoaren kolorea."
-
-#~ msgid "Delay (ms) until the progress dialog appears."
-#~ msgstr ""
-#~ "Aurrerapen elkarrizketa-koadroa agertu arte itxarongo den denbora (ms)"
-
-#~ msgid "&File"
-#~ msgstr "&Fitxategia"
-
-#~ msgid "&Settings"
-#~ msgstr "E&zarpenak"
-
-#~ msgid "&Help"
-#~ msgstr "&Laguntza"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "Tresna-barra nagusia"
-
-#~ msgid "&View"
-#~ msgstr "I&kuspegia"
-
-#~ msgid "&Advanced"
-#~ msgstr "&Aurreratua"
-
-#~ msgid "&Repository"
-#~ msgstr "&Biltegia"
-
-#~ msgid "&Timeout after which a progress dialog appears (in ms):"
-#~ msgstr ""
-#~ "Aurrerapen elkarrizketa-koadroa azaldu aurretik itxarongo den &denbora "
-#~ "(ms-tan):"
-
-#~ msgid "Default compression &level:"
-#~ msgstr "Konpresio &maila lehenetsia:"
-
-#~ msgid "Utilize a running or start a new ssh-agent process"
-#~ msgstr "Erabili martxan dagoen ssh-agente prozesu bat edo abiarazi berria"
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr "Cervisia-ren laguntza deitzen"

@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:55+0000\n"
 "PO-Revision-Date: 2024-04-29 15:30+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -918,6 +918,23 @@ msgstr ""
 "Si vous n'avez pas l'intention d'utiliser Cervisia, vous pouvez changer de "
 "mode d'affichage dans Konqueror."
 
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr ""
+"La couleur au premier plan utilisée pour pour surligner les fichiers en "
+"conflit avec le fichier affiché."
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr ""
+"Délai (ms) jusqu'à ce que la boîte de dialogue de progression apparaisse."
+
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -937,6 +954,48 @@ msgstr "Permet de personnaliser les combinaisons de touches"
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Quitte Cervisia"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "&Fichier"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, kde-format
+msgid "&Settings"
+msgstr "&Configuration"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr "&Aide"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Barre principale"
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, kde-format
+msgid "&View"
+msgstr "&Affichage"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, kde-format
+msgid "&Advanced"
+msgstr "A&vancé"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, kde-format
+msgid "&Repository"
+msgstr "&Dépôt"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1941,6 +2000,25 @@ msgstr "Absent du CVS :"
 msgid "Split main window &horizontally"
 msgstr "Scinder la fenêtre principale h&orizontalement"
 
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr ""
+"&Délai au-delà duquel une boîte de dialogue de progression apparaît (en ms) :"
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, kde-format
+msgid "Default compression &level:"
+msgstr "Niveau de compression par d&éfaut :"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr "Utiliser un processus « ssh-agent » opérationnel ou en démarrer un"
+
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2084,49 +2162,6 @@ msgstr "Annulation des éditions"
 #, kde-format
 msgid "Commit"
 msgstr "Validation"
-
-#~ msgid ""
-#~ "The foreground color used to highlight files with a conflict in the file "
-#~ "view."
-#~ msgstr ""
-#~ "La couleur au premier plan utilisée pour pour surligner les fichiers en "
-#~ "conflit avec le fichier affiché."
-
-#~ msgid "Delay (ms) until the progress dialog appears."
-#~ msgstr ""
-#~ "Délai (ms) jusqu'à ce que la boîte de dialogue de progression apparaisse."
-
-#~ msgid "&File"
-#~ msgstr "&Fichier"
-
-#~ msgid "&Settings"
-#~ msgstr "&Configuration"
-
-#~ msgid "&Help"
-#~ msgstr "&Aide"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "Barre principale"
-
-#~ msgid "&View"
-#~ msgstr "&Affichage"
-
-#~ msgid "&Advanced"
-#~ msgstr "A&vancé"
-
-#~ msgid "&Repository"
-#~ msgstr "&Dépôt"
-
-#~ msgid "&Timeout after which a progress dialog appears (in ms):"
-#~ msgstr ""
-#~ "&Délai au-delà duquel une boîte de dialogue de progression apparaît (en "
-#~ "ms) :"
-
-#~ msgid "Default compression &level:"
-#~ msgstr "Niveau de compression par d&éfaut :"
-
-#~ msgid "Utilize a running or start a new ssh-agent process"
-#~ msgstr "Utiliser un processus « ssh-agent » opérationnel ou en démarrer un"
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr "Demander de l'aide sur Cervisia"

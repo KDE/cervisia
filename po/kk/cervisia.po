@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:55+0000\n"
 "PO-Revision-Date: 2013-04-19 06:44+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -871,6 +871,20 @@ msgstr ""
 "Егерде Cervisia-ны қолданбайтын боллсаңыз, Konqueror-дегі қарау режімін "
 "ауыстырыңызға болады.."
 
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr "Қайшылықты файлдарды белгілейтін түсі."
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr "Барыс диалогы шығу алдындағы (мсек) кідіруі."
+
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -890,6 +904,48 @@ msgstr "Перне тіркесімдерін баптауға мүмкінді�
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Cervisia-дан шығу"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "&Файл"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, kde-format
+msgid "&Settings"
+msgstr "&Баптау"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr "&Анықтама"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Негізгі құралдар"
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, kde-format
+msgid "&View"
+msgstr "&Көрініс"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, kde-format
+msgid "&Advanced"
+msgstr "&Жетелеу"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, kde-format
+msgid "&Repository"
+msgstr "&Қойма"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1897,6 +1953,24 @@ msgstr "CVS-тен тысы:"
 msgid "Split main window &horizontally"
 msgstr "Негізгі терезе &тігінен бөлінсін"
 
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr "&Барыс диалогын көрсету алдындағы кідіру (мсек):"
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, kde-format
+msgid "Default compression &level:"
+msgstr "Әдетті &сығу деңгейі:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr "Жегілген немесе жаңа ssh-agent процесі қолдансын"
+
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2040,44 +2114,6 @@ msgstr "Өңдемеу"
 #, kde-format
 msgid "Commit"
 msgstr "Тапсыру"
-
-#~ msgid ""
-#~ "The foreground color used to highlight files with a conflict in the file "
-#~ "view."
-#~ msgstr "Қайшылықты файлдарды белгілейтін түсі."
-
-#~ msgid "Delay (ms) until the progress dialog appears."
-#~ msgstr "Барыс диалогы шығу алдындағы (мсек) кідіруі."
-
-#~ msgid "&File"
-#~ msgstr "&Файл"
-
-#~ msgid "&Settings"
-#~ msgstr "&Баптау"
-
-#~ msgid "&Help"
-#~ msgstr "&Анықтама"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "Негізгі құралдар"
-
-#~ msgid "&View"
-#~ msgstr "&Көрініс"
-
-#~ msgid "&Advanced"
-#~ msgstr "&Жетелеу"
-
-#~ msgid "&Repository"
-#~ msgstr "&Қойма"
-
-#~ msgid "&Timeout after which a progress dialog appears (in ms):"
-#~ msgstr "&Барыс диалогын көрсету алдындағы кідіру (мсек):"
-
-#~ msgid "Default compression &level:"
-#~ msgstr "Әдетті &сығу деңгейі:"
-
-#~ msgid "Utilize a running or start a new ssh-agent process"
-#~ msgstr "Жегілген немесе жаңа ssh-agent процесі қолдансын"
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr "Cervisia көмек анықтамасын сұрау"

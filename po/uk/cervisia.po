@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:55+0000\n"
 "PO-Revision-Date: 2016-06-05 09:17+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -883,6 +883,20 @@ msgstr ""
 "Якщо ви не хотіли використовувати Cervisia, то можете перемикнути режими "
 "перегляду в Konqueror."
 
+#. i18n: ectx: label, entry (ConflictColor), group (Colors)
+#: cervisiapart.kcfg:24
+#, kde-format
+msgid ""
+"The foreground color used to highlight files with a conflict in the file "
+"view."
+msgstr "Колір тесту для виділення файлів з конфліктами."
+
+#. i18n: ectx: label, entry, group (General)
+#: cervisiapart.kcfg:46
+#, kde-format
+msgid "Delay (ms) until the progress dialog appears."
+msgstr "Затримка, після якої з'являється вікно поступу (в мс)."
+
 #: cervisiashell.cpp:53
 #, kde-format
 msgid "The Cervisia library could not be loaded."
@@ -902,6 +916,48 @@ msgstr "Дозволяє вам встановити прив'язки клав�
 #, kde-format
 msgid "Exits Cervisia"
 msgstr "Виходить з Cervisia"
+
+#. i18n: ectx: Menu (file)
+#: cervisiashellui.rc:4 cervisiaui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "&Файл"
+
+#. i18n: ectx: Menu (settings)
+#: cervisiashellui.rc:7 cervisiaui.rc:70
+#, kde-format
+msgid "&Settings"
+msgstr "П&араметри"
+
+#. i18n: ectx: Menu (help)
+#: cervisiashellui.rc:11 cervisiaui.rc:80
+#, kde-format
+msgid "&Help"
+msgstr "&Довідка"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: cervisiashellui.rc:16 cervisiaui.rc:84
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Головний пенал"
+
+#. i18n: ectx: Menu (view)
+#: cervisiaui.rc:24
+#, kde-format
+msgid "&View"
+msgstr "П&ерегляд"
+
+#. i18n: ectx: Menu (advanced)
+#: cervisiaui.rc:43
+#, kde-format
+msgid "&Advanced"
+msgstr "Д&одаткові"
+
+#. i18n: ectx: Menu (repository)
+#: cervisiaui.rc:63
+#, kde-format
+msgid "&Repository"
+msgstr "&Сховище"
 
 #: changelogdialog.cpp:48
 #, kde-format
@@ -1904,6 +1960,24 @@ msgstr "Не в CVS:"
 msgid "Split main window &horizontally"
 msgstr "Розбити головне вікно горизонтал&ьно"
 
+#. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
+#: settingsdialog_advanced.ui:32
+#, kde-format
+msgid "&Timeout after which a progress dialog appears (in ms):"
+msgstr "Та&йм-аут, після якого з'являється діалогове вікно поступу (в мс):"
+
+#. i18n: ectx: property (text), widget (QLabel, compressionLbl)
+#: settingsdialog_advanced.ui:45
+#, kde-format
+msgid "Default compression &level:"
+msgstr "Типовий рівень стисненн&я:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
+#: settingsdialog_advanced.ui:58
+#, kde-format
+msgid "Utilize a running or start a new ssh-agent process"
+msgstr "Використовувати вже існуючий або запустити новий процес ssh-agent"
+
 #: tagdialog.cpp:48
 #, kde-format
 msgid "CVS Delete Tag"
@@ -2047,44 +2121,6 @@ msgstr "Закінчити редагування"
 #, kde-format
 msgid "Commit"
 msgstr "Передати"
-
-#~ msgid ""
-#~ "The foreground color used to highlight files with a conflict in the file "
-#~ "view."
-#~ msgstr "Колір тесту для виділення файлів з конфліктами."
-
-#~ msgid "Delay (ms) until the progress dialog appears."
-#~ msgstr "Затримка, після якої з'являється вікно поступу (в мс)."
-
-#~ msgid "&File"
-#~ msgstr "&Файл"
-
-#~ msgid "&Settings"
-#~ msgstr "П&араметри"
-
-#~ msgid "&Help"
-#~ msgstr "&Довідка"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "Головний пенал"
-
-#~ msgid "&View"
-#~ msgstr "П&ерегляд"
-
-#~ msgid "&Advanced"
-#~ msgstr "Д&одаткові"
-
-#~ msgid "&Repository"
-#~ msgstr "&Сховище"
-
-#~ msgid "&Timeout after which a progress dialog appears (in ms):"
-#~ msgstr "Та&йм-аут, після якого з'являється діалогове вікно поступу (в мс):"
-
-#~ msgid "Default compression &level:"
-#~ msgstr "Типовий рівень стисненн&я:"
-
-#~ msgid "Utilize a running or start a new ssh-agent process"
-#~ msgstr "Використовувати вже існуючий або запустити новий процес ssh-agent"
 
 #~ msgid "Invoking help on Cervisia"
 #~ msgstr "Пробуджує довідку в Cervisia"
