@@ -85,6 +85,7 @@ Comment[fi]=D-Bus-palvelu, joka tarjoaa rajapinnan cvs:lle
 Comment[fr]=Un service D-Bus fournissant une interface à CVS
 Comment[ga]=Seirbhís D-Bus a sholáthraíonn comhéadan CVS
 Comment[gl]=Un servizo de D-Bus que fornece unha interface para CVS.
+Comment[he]=שירות D-Bus שמספק ממשק ל־cvs
 Comment[hu]=D-Bus-alapú szolgáltatás CVS adattárak eléréséhez
 Comment[it]=Un servizio D-Bus che fornisce un'interfaccia a cvs
 Comment[ja]=CVS インターフェースを提供する D-Bus サービス
