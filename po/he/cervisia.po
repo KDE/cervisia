@@ -12,20 +12,20 @@
 # Diego Iastrubni <elcuco@kdemail.net>, 2004.
 # Diego Iastrubni <elcuco@kde.org>, 2005.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
-# SPDX-FileCopyrightText: 2024 Yaron Shahrabani <sh.yaron@gmail.com>
+# SPDX-FileCopyrightText: 2024, 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-09 02:03+0000\n"
-"PO-Revision-Date: 2024-10-10 09:36+0300\n"
+"PO-Revision-Date: 2025-08-02 19:25+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.08.1\n"
+"X-Generator: Lokalize 25.04.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -41,7 +41,7 @@ msgstr "tal@whatsup.org.il"
 #: addignoremenu.cpp:34
 #, kde-format
 msgid "Add to Ignore List"
-msgstr ""
+msgstr "הוספה לרשימת ההתעלמות"
 
 #: addignoremenu.cpp:65
 #, fuzzy, kde-format
@@ -138,32 +138,32 @@ msgstr "הערת CVS"
 #: annotatedialog.cpp:44
 #, kde-format
 msgid "Go to Line..."
-msgstr ""
+msgstr "מעבר לשורה…"
 
 #: annotatedialog.cpp:49
 #, kde-format
 msgid "Find Prev"
-msgstr ""
+msgstr "איתור הקודם"
 
 #: annotatedialog.cpp:54
 #, kde-format
 msgid "Find Next"
-msgstr ""
+msgstr "איתור הבא"
 
 #: annotatedialog.cpp:64
 #, kde-format
 msgid "Search"
-msgstr ""
+msgstr "חיפוש"
 
 #: annotatedialog.cpp:115
 #, kde-format
 msgid "Go to Line"
-msgstr ""
+msgstr "מעבר לשורה"
 
 #: annotatedialog.cpp:115
 #, kde-format
 msgid "Go to line number:"
-msgstr ""
+msgstr "מספר לשורה מס׳:"
 
 #: cervisiapart.cpp:112 main.cpp:138
 #, kde-format
@@ -173,7 +173,7 @@ msgstr "Cervisia"
 #: cervisiapart.cpp:119
 #, kde-format
 msgid "Starting cvsservice failed with message: "
-msgstr ""
+msgstr "הפעלת cvsservice נכשל עם ההודעה:"
 
 #: cervisiapart.cpp:149
 #, fuzzy, kde-format
@@ -185,13 +185,13 @@ msgstr "חלק KPart זה לא שמיש, מפני שלא יכולנו להתחי
 #: cervisiapart.cpp:187
 #, kde-format
 msgid "Remote CVS working folders are not supported."
-msgstr ""
+msgstr "אין תמיכה בתיקיות עבודה מרוחקות של CVS."
 
 #: cervisiapart.cpp:195
 #, kde-format
 msgid ""
 "You cannot change to a different folder while there is a running cvs job."
-msgstr ""
+msgstr "אי אפשר לשנות לתיקייה אחרת כשאין משימת cvs פעילה."
 
 #: cervisiapart.cpp:215
 #, kde-format
@@ -332,12 +332,12 @@ msgstr "שיחזור (cvs update -C) הקבצים הנבחרים (cvs 1.11 בל�
 #: cervisiapart.cpp:317
 #, kde-format
 msgid "&Properties"
-msgstr ""
+msgstr "מ&אפיינים"
 
 #: cervisiapart.cpp:324
 #, kde-format
 msgid "Stop"
-msgstr ""
+msgstr "עצירה"
 
 #: cervisiapart.cpp:329
 #, kde-format
@@ -730,14 +730,14 @@ msgid "Opens the help browser with the CVS documentation"
 msgstr "פתיחת דפדפן העזרה עם התיעוד של CVS"
 
 #: cervisiapart.cpp:624
-#, fuzzy, kde-format
+#, kde-format
 msgid "Unfold Folder"
-msgstr "ה&רחב עץ קבצים"
+msgstr "ה&רחבת תיקייה"
 
 #: cervisiapart.cpp:716
-#, fuzzy, kde-format
+#, kde-format
 msgid "Cervisia Part"
-msgstr "Cervisia"
+msgstr "חלק של Cervisia"
 
 #: cervisiapart.cpp:718 main.cpp:140
 #, kde-format
@@ -756,22 +756,22 @@ msgstr ""
 #: cervisiapart.cpp:725 main.cpp:147
 #, kde-format
 msgid "Bernd Gehrmann"
-msgstr ""
+msgstr "ברנד גרמן"
 
 #: cervisiapart.cpp:726 main.cpp:148
 #, kde-format
 msgid "Original author and former maintainer"
-msgstr ""
+msgstr "יוצר מקורי ומתחזק לשעבר"
 
 #: cervisiapart.cpp:729 main.cpp:151
 #, kde-format
 msgid "Christian Loose"
-msgstr ""
+msgstr "כריסטיאן לוז"
 
 #: cervisiapart.cpp:729 main.cpp:151
 #, kde-format
 msgid "Maintainer"
-msgstr ""
+msgstr "מתחזק"
 
 #: cervisiapart.cpp:730 main.cpp:152
 #, kde-format
@@ -781,7 +781,7 @@ msgstr ""
 #: cervisiapart.cpp:730 main.cpp:152
 #, kde-format
 msgid "Developer"
-msgstr ""
+msgstr "מפתח"
 
 #: cervisiapart.cpp:731 main.cpp:153
 #, kde-format
@@ -796,32 +796,32 @@ msgstr "תיעוד"
 #: cervisiapart.cpp:733 main.cpp:155
 #, kde-format
 msgid "Richard Moore"
-msgstr ""
+msgstr "ריצ׳ארד מור"
 
 #: cervisiapart.cpp:733 main.cpp:155
 #, kde-format
 msgid "Conversion to KPart"
-msgstr ""
+msgstr "המרה ל־KPart"
 
 #: cervisiapart.cpp:734 main.cpp:156
 #, kde-format
 msgid "Laurent Montel"
-msgstr ""
+msgstr "לורנט מונטל"
 
 #: cervisiapart.cpp:734 main.cpp:156
 #, kde-format
 msgid "Conversion to D-Bus"
-msgstr ""
+msgstr "המרה ל־D-Bus"
 
 #: cervisiapart.cpp:735 main.cpp:157
 #, kde-format
 msgid "Martin Koller"
-msgstr ""
+msgstr "מרטין קולר"
 
 #: cervisiapart.cpp:735 main.cpp:157
 #, kde-format
 msgid "Port to KDE Frameworks 5"
-msgstr ""
+msgstr "הסבה לתשתיות KDE 5"
 
 #: cervisiapart.cpp:742
 #, kde-format
@@ -867,7 +867,7 @@ msgstr "הושלם"
 #: cervisiapart.cpp:1617
 #, kde-format
 msgid "A CVS commit to repository %1 is done"
-msgstr ""
+msgstr "בוצע קיבוע CVS למאגר %1"
 
 #: cervisiapart.cpp:1634
 #, kde-format
@@ -885,7 +885,7 @@ msgstr ""
 msgid ""
 "The foreground color used to highlight files with a conflict in the file "
 "view."
-msgstr ""
+msgstr "צבע החזית שמשמש להדגיש קבצים עם סתירה בתצוגת הקבצים."
 
 #. i18n: ectx: label, entry, group (General)
 #: cervisiapart.kcfg:46
@@ -915,33 +915,33 @@ msgstr "יציאה מ־Cervisia"
 
 #. i18n: ectx: Menu (file)
 #: cervisiashellui.rc:4 cervisiaui.rc:4
-#, fuzzy, kde-format
+#, kde-format
 msgid "&File"
-msgstr "&ערוך קבצים"
+msgstr "&קובץ"
 
 #. i18n: ectx: Menu (settings)
 #: cervisiashellui.rc:7 cervisiaui.rc:70
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Settings"
-msgstr "&מצב"
+msgstr "ה&גדרות"
 
 #. i18n: ectx: Menu (help)
 #: cervisiashellui.rc:11 cervisiaui.rc:80
 #, kde-format
 msgid "&Help"
-msgstr ""
+msgstr "ע&זרה"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: cervisiashellui.rc:16 cervisiaui.rc:84
 #, kde-format
 msgid "Main Toolbar"
-msgstr ""
+msgstr "סרגל כלים ראשי"
 
 #. i18n: ectx: Menu (view)
 #: cervisiaui.rc:24
-#, fuzzy, kde-format
+#, kde-format
 msgid "&View"
-msgstr "הצג קובץ"
+msgstr "ת&צוגה"
 
 #. i18n: ectx: Menu (advanced)
 #: cervisiaui.rc:43
@@ -1012,9 +1012,9 @@ msgid "Re&cursive checkout"
 msgstr ""
 
 #: checkoutdialog.cpp:153
-#, fuzzy, kde-format
+#, kde-format
 msgid "Working &folder:"
-msgstr "&ספריית עבודה:"
+msgstr "תיקיית &עבודה:"
 
 #: checkoutdialog.cpp:162
 #, kde-format
@@ -1057,9 +1057,9 @@ msgid "Ex&port only"
 msgstr ""
 
 #: checkoutdialog.cpp:304
-#, fuzzy, kde-format
+#, kde-format
 msgid "Please choose an existing working folder."
-msgstr "יש לבחור ספריית עבודה קיימת."
+msgstr "נא לבחור ספריית עבודה קיימת."
 
 #: checkoutdialog.cpp:308 checkoutdialog.cpp:379
 #, kde-format
@@ -1086,9 +1086,9 @@ msgid "A branch must be specified for export."
 msgstr ""
 
 #: checkoutdialog.cpp:374
-#, fuzzy, kde-format
+#, kde-format
 msgid "Please specify a repository."
-msgstr "יש לציין שם מודול."
+msgstr "נא לציין מאגר."
 
 #: checkoutdialog.cpp:387
 #, kde-format
@@ -1131,14 +1131,14 @@ msgid "Current"
 msgstr "נוכחית"
 
 #: cvsinitdialog.cpp:39
-#, fuzzy, kde-format
+#, kde-format
 msgid "Create New Repository (cvs init)"
-msgstr "צור &טלאי כנגד המאגר"
+msgstr "יצירת מאגר חדש (cvs init)"
 
 #: cvsinitdialog.cpp:51
-#, fuzzy, kde-format
+#, kde-format
 msgid "Repository folder:"
-msgstr "&מאגר:"
+msgstr "תיקיית מאגר:"
 
 #: diffdialog.cpp:102
 #, kde-format
@@ -1146,10 +1146,10 @@ msgid "Synchronize scroll bars"
 msgstr "סנכרן פסי גלילה"
 
 #: diffdialog.cpp:112 diffdialog.cpp:403
-#, fuzzy, kde-format
+#, kde-format
 msgid "%1 difference"
 msgid_plural "%1 differences"
-msgstr[0] "%1 הבדלים"
+msgstr[0] "הבדל"
 msgstr[1] "%1 הבדלים"
 
 #: diffdialog.cpp:238
@@ -1158,9 +1158,9 @@ msgid "CVS Diff: %1"
 msgstr "הבדלי CVS: %1"
 
 #: diffdialog.cpp:239
-#, fuzzy, kde-format
+#, kde-format
 msgid "Repository:"
-msgstr "&מאגר:"
+msgstr "מאגר:"
 
 #: diffdialog.cpp:239 diffdialog.cpp:240
 #, kde-format
@@ -1168,9 +1168,9 @@ msgid "Revision "
 msgstr "גירסה "
 
 #: diffdialog.cpp:240
-#, fuzzy, kde-format
+#, kde-format
 msgid "Working dir:"
-msgstr "ספריית עבודה"
+msgstr "תיקיית עבודה:"
 
 #: diffdialog.cpp:401 resolvedialog.cpp:383
 #, kde-format
@@ -1178,24 +1178,24 @@ msgid "%1 of %2"
 msgstr "%1 מתוך %2"
 
 #: diffview.cpp:255 diffview.cpp:313
-#, fuzzy, kde-format
+#, kde-format
 msgid "Delete"
-msgstr "&מחיקת תגית..."
+msgstr "מחיקה"
 
 #: diffview.cpp:255 diffview.cpp:313
 #, kde-format
 msgid "Insert"
-msgstr ""
+msgstr "הוספה"
 
 #: diffview.cpp:255 diffview.cpp:313
-#, fuzzy, kde-format
+#, kde-format
 msgid "Change"
-msgstr "עריכת ChangeLog"
+msgstr "שינוי"
 
 #: editwithmenu.cpp:46
-#, fuzzy, kde-format
+#, kde-format
 msgid "Edit With"
-msgstr "&ערוך קבצים"
+msgstr "עריכה עם"
 
 #: entry_status.cpp:33
 #, kde-format
@@ -1228,7 +1228,7 @@ msgid "Needs Merge"
 msgstr "זקוק למיזוג"
 
 #: entry_status.cpp:51
-#, fuzzy, kde-format
+#, kde-format
 msgid "Up to Date"
 msgstr "עדכני"
 
@@ -1308,12 +1308,12 @@ msgid "Revision"
 msgstr "גירסה"
 
 #: historydialog.cpp:138 watchersmodel.cpp:84
-#, fuzzy, kde-format
+#, kde-format
 msgid "File"
-msgstr "הצג קובץ"
+msgstr "קובץ"
 
 #: historydialog.cpp:138
-#, fuzzy, kde-format
+#, kde-format
 msgid "Repo Path"
 msgstr "נתיב מאגר"
 
@@ -1343,14 +1343,14 @@ msgid "Only &user:"
 msgstr "&רק משתמש:"
 
 #: historydialog.cpp:156
-#, fuzzy, kde-format
+#, kde-format
 msgid "Only &filenames matching:"
-msgstr "רק שמות &קבצים תואמים:"
+msgstr "רק שמות &קבצים שתואמים:"
 
 #: historydialog.cpp:158
-#, fuzzy, kde-format
+#, kde-format
 msgid "Only &folders matching:"
-msgstr "רק שמות &קבצים תואמים:"
+msgstr "רק &תיקיות שתואמות:"
 
 #: historydialog.cpp:279 historydialog.cpp:285
 #, kde-format
@@ -1388,9 +1388,9 @@ msgid "Update, Conflict "
 msgstr "עידכון, התנגשות "
 
 #: historydialog.cpp:340
-#, fuzzy, kde-format
+#, kde-format
 msgid "Update, Patched "
-msgstr "עידכון, נמחקו "
+msgstr "מעודכן, עם טלאי "
 
 #: historydialog.cpp:352
 #, kde-format
@@ -1400,7 +1400,7 @@ msgstr "לא ידוע "
 #: logdialog.cpp:87
 #, kde-format
 msgid "Search:"
-msgstr ""
+msgstr "חיפוש:"
 
 #: logdialog.cpp:98
 #, kde-format
@@ -1415,16 +1415,16 @@ msgstr "&רשימה"
 #: logdialog.cpp:100
 #, kde-format
 msgid "CVS &Output"
-msgstr ""
+msgstr "&פלט CVS"
 
 #: logdialog.cpp:107
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "Choose revision A by clicking with the left mouse button,\n"
 "revision B by clicking with the middle mouse button."
 msgstr ""
-"בחר את גירסה A על ידי לחיצה על הלחצן השמאלי של העכבר,\n"
-"ואת גירסה B על ידי לחיצה על הלחצן האמצעי של העכבר."
+"אפשר לבחור במהדורה א בלחיצה עם לחצן העכבר השמאלי,\n"
+"על מהדורה ב עם לחצן העכבר האמצעי."
 
 #: logdialog.cpp:134
 #, kde-format
@@ -1457,14 +1457,14 @@ msgid "Comment/Tags:"
 msgstr "הערה\\תגיות:"
 
 #: logdialog.cpp:199
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Annotate A"
-msgstr "הוסף ה&ערה"
+msgstr "&פירוש א"
 
 #: logdialog.cpp:201
 #, kde-format
 msgid "&Find"
-msgstr ""
+msgstr "&איתור"
 
 #: logdialog.cpp:208
 #, kde-format
@@ -1481,9 +1481,9 @@ msgid "This revision is used as the second item of a Diff operation."
 msgstr "בגירסה זו נעשה שימוש בתור הפריט השני של פעולת Diff."
 
 #: logdialog.cpp:226
-#, fuzzy, kde-format
+#, kde-format
 msgid "&View A"
-msgstr "הצג קובץ"
+msgstr "&תצוגה א"
 
 #: logdialog.cpp:227
 #, kde-format
@@ -1553,17 +1553,17 @@ msgstr "גרסה %1"
 #: logplainview.cpp:47
 #, kde-format
 msgid "Select for revision A"
-msgstr ""
+msgstr "נא לבחור למהדורה א"
 
 #: logplainview.cpp:48
 #, kde-format
 msgid "Select for revision B"
-msgstr ""
+msgstr "נא לבחור למהדורה ב"
 
 #: logplainview.cpp:49
 #, kde-format
 msgid "date: %1; author: %2"
-msgstr ""
+msgstr "תאריך: %1; יוצר/ת: %2"
 
 #: main.cpp:167
 #, kde-format
@@ -1571,19 +1571,19 @@ msgid "The sandbox to be loaded"
 msgstr "ארגז חול לטעינה"
 
 #: main.cpp:168
-#, fuzzy, kde-format
+#, kde-format
 msgid "Show resolve dialog for the given file."
-msgstr "הצגת דו־שיח פיתרון עבור הקובץ הנתון"
+msgstr "הצגת חלונית פתרון לקובץ שסופק."
 
 #: main.cpp:169
-#, fuzzy, kde-format
+#, kde-format
 msgid "Show log dialog for the given file."
-msgstr "הצגת דו־שיח פיתרון עבור הקובץ הנתון"
+msgstr "הצגת חלונית יומן לקובץ שסופק."
 
 #: main.cpp:170
-#, fuzzy, kde-format
+#, kde-format
 msgid "Show annotation dialog for the given file."
-msgstr "הצגת דו־שיח פיתרון עבור הקובץ הנתון"
+msgstr "הצגת חלונית פירוש לקובץ שסופק."
 
 #: mergedialog.cpp:41
 #, kde-format
@@ -1623,18 +1623,18 @@ msgstr "מצב CVS"
 #: misc.cpp:197
 #, kde-format
 msgid "Overwrite the file"
-msgstr ""
+msgstr "לשכתב על הקובץ"
 
 #: misc.cpp:200
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
-msgstr ""
+msgstr "כבר קיים קובץ בשם „%1”. לשכתב אותו?"
 
 #: misc.cpp:201
 #, kde-format
 msgid "Overwrite File?"
-msgstr ""
+msgstr "לשכתב קובץ?"
 
 #: patchoptiondialog.cpp:58
 #, kde-format
@@ -1647,9 +1647,9 @@ msgid "Normal"
 msgstr "רגיל"
 
 #: patchoptiondialog.cpp:60
-#, fuzzy, kde-format
+#, kde-format
 msgid "Unified"
-msgstr "בי&טולי עריכות"
+msgstr "מאוחד"
 
 #: patchoptiondialog.cpp:64
 #, kde-format
@@ -1689,7 +1689,7 @@ msgstr "אפשרויות התעלמות"
 #: protocolview.cpp:90
 #, kde-format
 msgid "Clear"
-msgstr ""
+msgstr "פינוי"
 
 #: protocolview.cpp:127
 #, kde-format
@@ -1709,7 +1709,7 @@ msgstr "[בוטל]\n"
 #: repositorydialog.cpp:138
 #, kde-format
 msgid "Default"
-msgstr ""
+msgstr "ברירת מחדל"
 
 #: repositorydialog.cpp:155
 #, kde-format
@@ -1752,14 +1752,14 @@ msgid "Status"
 msgstr "מצב"
 
 #: repositorydialog.cpp:199
-#, fuzzy, kde-format
+#, kde-format
 msgid "Add..."
-msgstr "ה&וספה..."
+msgstr "הוספה…"
 
 #: repositorydialog.cpp:200
-#, fuzzy, kde-format
+#, kde-format
 msgid "Modify..."
-msgstr "&שינוי..."
+msgstr "שינוי…"
 
 #: repositorydialog.cpp:202
 #, kde-format
@@ -1767,9 +1767,9 @@ msgid "Login..."
 msgstr "כניסה למערכת..."
 
 #: repositorydialog.cpp:203
-#, fuzzy, kde-format
+#, kde-format
 msgid "Logout"
-msgstr "יציאה מהמערכת..."
+msgstr "יציאה"
 
 #: repositorydialog.cpp:335
 #, kde-format
@@ -1882,12 +1882,12 @@ msgstr "מתקדם"
 #: settingsdialog.cpp:335
 #, kde-format
 msgid "Appearance"
-msgstr ""
+msgstr "מראה"
 
 #: settingsdialog.cpp:338
 #, kde-format
 msgid "Fonts"
-msgstr ""
+msgstr "גופנים"
 
 #: settingsdialog.cpp:341
 #, kde-format
@@ -1945,9 +1945,9 @@ msgid "Diff deletion:"
 msgstr "מחיקה ב־diff:"
 
 #: settingsdialog.cpp:379
-#, fuzzy, kde-format
+#, kde-format
 msgid "Not in cvs:"
-msgstr "לא ב־CVS"
+msgstr "לא ב־cvs:"
 
 #: settingsdialog.cpp:400
 #, kde-format
@@ -2101,9 +2101,9 @@ msgid "Watcher"
 msgstr "עוקב"
 
 #: watchersmodel.cpp:88
-#, fuzzy, kde-format
+#, kde-format
 msgid "Edit"
-msgstr "&עריכות"
+msgstr "עריכה"
 
 #: watchersmodel.cpp:90
 #, kde-format
