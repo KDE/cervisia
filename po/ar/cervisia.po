@@ -6,13 +6,13 @@
 # Ahmad M. Zawawi <zawawi@arabeyes.org>, 2004.
 # محمد سعد  Mohamed SAAD <metehyi@free.fr>, 2006.
 # Youssef Chahibi <chahibi@gmail.com>, 2007.
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2022.
+# SPDX-FileCopyrightText: 2022, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-09 02:03+0000\n"
-"PO-Revision-Date: 2022-02-07 09:35+0400\n"
+"PO-Revision-Date: 2025-08-03 14:27+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -21,6 +21,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -212,7 +213,7 @@ msgstr "افتح المِرْملة"
 #: cervisiapart.cpp:232
 #, kde-format
 msgid "Opens a CVS working folder in the main window"
-msgstr "إفتح مجلّد عمل CVS في النافذة الرئيسية"
+msgstr "إفتح مجلّد عمل CVS في النافذة الرئيسة"
 
 #: cervisiapart.cpp:236
 #, kde-format
@@ -448,7 +449,7 @@ msgstr "ينشئ علامة أو شعبة للملفات المختارة"
 #: cervisiapart.cpp:409
 #, kde-format
 msgid "&Delete Tag..."
-msgstr "ا&مح العلامة"
+msgstr "ا&محُ العلامة"
 
 #: cervisiapart.cpp:412
 #, kde-format
@@ -1956,7 +1957,7 @@ msgstr "ليس في CVS:"
 #: settingsdialog.cpp:400
 #, kde-format
 msgid "Split main window &horizontally"
-msgstr "تقسيم الشاشة الرئيسية أفقيًا"
+msgstr "تقسيم الشاشة الرئيسة أفقيًا"
 
 #. i18n: ectx: property (text), widget (QLabel, timeoutLbl)
 #: settingsdialog_advanced.ui:32

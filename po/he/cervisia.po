@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-09 02:03+0000\n"
-"PO-Revision-Date: 2025-08-02 19:25+0300\n"
+"PO-Revision-Date: 2025-08-03 11:53+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -44,16 +44,16 @@ msgid "Add to Ignore List"
 msgstr "הוספה לרשימת ההתעלמות"
 
 #: addignoremenu.cpp:65
-#, fuzzy, kde-format
+#, kde-format
 msgid "Ignore File"
 msgid_plural "Ignore %1 Files"
-msgstr[0] "&התעלם מקבצים:"
-msgstr[1] "&התעלם מקבצים:"
+msgstr[0] "התעלמות מקובץ"
+msgstr[1] "התעלמות מ־%1 קבצים"
 
 #: addignoremenu.cpp:85
-#, fuzzy, kde-format
+#, kde-format
 msgid "Cannot open file '%1' for writing."
-msgstr "אין אפשרות לפתוח את הקובץ לכתיבה."
+msgstr "לא ניתן לפתוח את הקובץ ‚%1’ לכתיבה"
 
 #: addremovedialog.cpp:40
 #, kde-format
@@ -86,9 +86,9 @@ msgid "Remove the following files from the repository:"
 msgstr "הסר את הקבצים הבאים מהמאגר:"
 
 #: addremovedialog.cpp:73
-#, fuzzy, kde-format
+#, kde-format
 msgid "This will also remove the files from your local working copy."
-msgstr "דבר זה יביא גם להסרת הקבצים מהעותק המקומי שלך."
+msgstr "הפעולה הזאת גם תסיר גם את הקבצים מעותק העבודה המקומי שלך."
 
 #: addrepositorydialog.cpp:40
 #, kde-format
@@ -176,11 +176,11 @@ msgid "Starting cvsservice failed with message: "
 msgstr "הפעלת cvsservice נכשל עם ההודעה:"
 
 #: cervisiapart.cpp:149
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "This KPart is non-functional, because the cvs D-Bus service could not be "
 "started."
-msgstr "חלק KPart זה לא שמיש, מפני שלא יכולנו להתחיל את שירות DCOP של cvs."
+msgstr "חלק KPart זה לא מתפקד, מפני שלא ניתן להפעיל את שירות ה־D-Bus של cvs."
 
 #: cervisiapart.cpp:187
 #, kde-format
@@ -205,14 +205,14 @@ msgstr ""
 "R - כל הקבצים שהוסרו מוסתרים"
 
 #: cervisiapart.cpp:228
-#, fuzzy, kde-format
+#, kde-format
 msgid "Open Sandbox..."
-msgstr "&פתיחת ארגז חול..."
+msgstr "פתיחת ארגז חול…"
 
 #: cervisiapart.cpp:232
-#, fuzzy, kde-format
+#, kde-format
 msgid "Opens a CVS working folder in the main window"
-msgstr "פתיחת ספריית עבודה של CVS בחלון הראשי"
+msgstr "פתיחת תיקייתעבודה של CVS בחלון הראשי"
 
 #: cervisiapart.cpp:236
 #, kde-format
@@ -225,19 +225,19 @@ msgid "&Insert ChangeLog Entry..."
 msgstr "הוספת &רשומת ChangeLog..."
 
 #: cervisiapart.cpp:243
-#, fuzzy, kde-format
+#, kde-format
 msgid "Inserts a new intro into the file ChangeLog in the toplevel folder"
-msgstr "הוספת הקדמה חדשה לקובץ ChangeLog בספריה העליונה"
+msgstr "הוספת הקדמה חדשה לקובץ ChangeLog בתיקייה העליונה"
 
 #: cervisiapart.cpp:247
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Update"
-msgstr "עודכן"
+msgstr "ע&דכון"
 
 #: cervisiapart.cpp:251
-#, fuzzy, kde-format
+#, kde-format
 msgid "Updates (cvs update) the selected files and folders"
-msgstr "עידכון (cvs update) הקבצים והספריות הנבחרים"
+msgstr "עדכון (cvs update) הקבצים והתיקיות הנבחרים"
 
 #: cervisiapart.cpp:255
 #, kde-format
@@ -245,14 +245,14 @@ msgid "&Status"
 msgstr "&מצב"
 
 #: cervisiapart.cpp:259
-#, fuzzy, kde-format
+#, kde-format
 msgid "Updates the status (cvs -n update) of the selected files and folders"
-msgstr "עידכון המצב (cvs -n update) של הקבצים והספריות הנבחרים"
+msgstr "עדכון המצב (cvs -n update) של הקבצים והתיקיות הנבחרים"
 
 #: cervisiapart.cpp:263 resolvedialog.cpp:176
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Edit"
-msgstr "&עריכות"
+msgstr "&עריכה"
 
 #: cervisiapart.cpp:266
 #, kde-format
@@ -285,9 +285,9 @@ msgid "&Add to Repository..."
 msgstr "&הוספה למאגר..."
 
 #: cervisiapart.cpp:288
-#, fuzzy, kde-format
+#, kde-format
 msgid "Add"
-msgstr "הוספה ל־CVS"
+msgstr "הוספה"
 
 #: cervisiapart.cpp:290
 #, kde-format
@@ -305,14 +305,14 @@ msgid "Adds (cvs -kb add) the selected files as binaries to the repository"
 msgstr "הוספת (cvs -kb add) הקבצים הנבחרים למאגר כקבצים בינריים"
 
 #: cervisiapart.cpp:301
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Remove From Repository..."
-msgstr "ה&סר מהמאגר"
+msgstr "ה&סרה מהמאגר…"
 
 #: cervisiapart.cpp:304 repositorydialog.cpp:201
-#, fuzzy, kde-format
+#, kde-format
 msgid "Remove"
-msgstr "הוסר"
+msgstr "הסרה"
 
 #: cervisiapart.cpp:306
 #, kde-format
@@ -370,28 +370,29 @@ msgid "Shows a blame-annotated view of the selected file"
 msgstr "הצגת הקובץ הנבחר עם הערות"
 
 #: cervisiapart.cpp:354
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Difference to Repository (BASE)..."
-msgstr "ה&בדלים ביחס למאגר..."
+msgstr "ה&בדלים ביחס למאגר (BASE/בסיס)…"
 
 #: cervisiapart.cpp:358
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "Shows the differences of the selected file to the checked out version (tag "
 "BASE)"
-msgstr "הצגת ההבדלים בין הקובץ הנבחר לבין גירסת הבסיס"
+msgstr "הצגת ההבדלים בין הקובץ הנבחר לבין הגרסה שנמשכה (תגית BASE/בסיס)"
 
 #: cervisiapart.cpp:362
-#, fuzzy, kde-format
+#, kde-format
 msgid "Difference to Repository (HEAD)..."
-msgstr "ה&בדלים ביחס למאגר..."
+msgstr "ה&בדלים ביחס למאגר (HEAD/ראש)…"
 
 #: cervisiapart.cpp:366
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "Shows the differences of the selected file to the newest version in the "
 "repository (tag HEAD)"
-msgstr "הצגת ההבדלים בין הקובץ הנבחר לבין גירסת הבסיס"
+msgstr ""
+"הצגת ההבדלים בין הקובץ הנבחר לבין הגרסה החדשה ביותר במאגר (תגית HEAD/ראש)"
 
 #: cervisiapart.cpp:370
 #, kde-format
@@ -550,7 +551,7 @@ msgid "&Lock Files"
 msgstr "&נעל קבצים"
 
 #: cervisiapart.cpp:482
-#, fuzzy, kde-format
+#, kde-format
 msgid "Locks the selected files, so that others cannot modify them"
 msgstr "נעילת הקבצים הנבחרים כך שאחרים לא יוכלו לשנותם"
 
@@ -565,9 +566,9 @@ msgid "Unlocks the selected files"
 msgstr "ביטול נעילת הקבצים הנבחרים"
 
 #: cervisiapart.cpp:493
-#, fuzzy, kde-format
+#, kde-format
 msgid "Create &Patch Against Repository..."
-msgstr "צור &טלאי כנגד המאגר"
+msgstr "יצירת &טלאי כנגד המאגר…"
 
 #: cervisiapart.cpp:496
 #, kde-format
@@ -575,9 +576,9 @@ msgid "Creates a patch from the modifications in your sandbox"
 msgstr "יצירת טלאי מתוך השינויים שבארגז החול שלך"
 
 #: cervisiapart.cpp:503
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Create..."
-msgstr "צור"
+msgstr "י&צירה…"
 
 #: cervisiapart.cpp:507
 #, kde-format
@@ -615,19 +616,19 @@ msgid "Hide All &Files"
 msgstr "ה&סתר את כל הקבצים"
 
 #: cervisiapart.cpp:534
-#, fuzzy, kde-format
+#, kde-format
 msgid "Determines whether only folders are shown"
-msgstr "קובע אם יוצגו רק ספריות"
+msgstr "קביעה האם תופענה תיקיות בלבד"
 
 #: cervisiapart.cpp:538
-#, fuzzy, kde-format
+#, kde-format
 msgid "Hide Unmodified Files"
-msgstr "הסתר קבצים שהוסרו"
+msgstr "הסתר קבצים שלא השתנו"
 
 #: cervisiapart.cpp:542
-#, fuzzy, kde-format
+#, kde-format
 msgid "Determines whether files with status up-to-date or unknown are hidden"
-msgstr "קובע האם קבצים עדכניים יוסתרו"
+msgstr "קביעה האם קבצים עם מצב עדכני לא ידועים או מוסתרים"
 
 #: cervisiapart.cpp:547
 #, kde-format
@@ -650,34 +651,34 @@ msgid "Determines whether files not in CVS are hidden"
 msgstr "קובע האם קבצים שאינם ב־CVS יוסתרו"
 
 #: cervisiapart.cpp:561
-#, fuzzy, kde-format
+#, kde-format
 msgid "Hide Empty Folders"
-msgstr "הסר ספריות &ריקות בעת עידכון"
+msgstr "הסתרת תיקיות ריקות"
 
 #: cervisiapart.cpp:564
-#, fuzzy, kde-format
+#, kde-format
 msgid "Determines whether folders without visible entries are hidden"
-msgstr "קובע אם קבצים שהוסרו יוסתרו"
+msgstr "קביעה האם תיקיות בלי רשומות גלויות מוסתרות"
 
 #: cervisiapart.cpp:568
-#, fuzzy, kde-format
+#, kde-format
 msgid "Create &Folders on Update"
-msgstr "&צור ספריות בעת עידכון"
+msgstr "יצירת תיקיות בעת &עדכון"
 
 #: cervisiapart.cpp:571
-#, fuzzy, kde-format
+#, kde-format
 msgid "Determines whether updates create folders"
-msgstr "קובע האם עידכונים יביאו ליצירת ספריות"
+msgstr "קביעה האם עדכונים יוצרים תיקיות"
 
 #: cervisiapart.cpp:575
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Prune Empty Folders on Update"
-msgstr "הסר ספריות &ריקות בעת עידכון"
+msgstr "הסרת תיקיות &ריקות בעת עדכון"
 
 #: cervisiapart.cpp:578
-#, fuzzy, kde-format
+#, kde-format
 msgid "Determines whether updates remove empty folders"
-msgstr "קובע האם עידכונים יביאו להסרת ספריות ריקות"
+msgstr "קביעה האם עדכונים מסירים תיקיות ריקות"
 
 #: cervisiapart.cpp:582
 #, kde-format
@@ -745,13 +746,13 @@ msgid "A CVS frontend"
 msgstr "ממשק ל־CVS"
 
 #: cervisiapart.cpp:720 main.cpp:142
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "Copyright (c) 1999-2002 Bernd Gehrmann\n"
 "Copyright (c) 2002-2008 the Cervisia authors"
 msgstr ""
-"Copyright (c) 1999-2002 Bernd Gehrmann\n"
-"Copyright (c) 2002-2004 הכותבים של Cervisia "
+"כל הזכויות שמורות (c) 1999‏-2002 לברנד גרמן\n"
+"כל הזכויות שמורות (c) 2002‏-2004 ליוצרים של Cervisia"
 
 #: cervisiapart.cpp:725 main.cpp:147
 #, kde-format
@@ -776,7 +777,7 @@ msgstr "מתחזק"
 #: cervisiapart.cpp:730 main.cpp:152
 #, kde-format
 msgid "André Wöbbeking"
-msgstr ""
+msgstr "אנדרה וובקינג"
 
 #: cervisiapart.cpp:730 main.cpp:152
 #, kde-format
@@ -786,7 +787,7 @@ msgstr "מפתח"
 #: cervisiapart.cpp:731 main.cpp:153
 #, kde-format
 msgid "Carlos Woelz"
-msgstr ""
+msgstr "קרלוס וולץ"
 
 #: cervisiapart.cpp:731 main.cpp:153
 #, kde-format
@@ -1009,7 +1010,7 @@ msgstr "&תגית ענף:"
 #: checkoutdialog.cpp:130
 #, kde-format
 msgid "Re&cursive checkout"
-msgstr ""
+msgstr "משיכה &רקורסיבית"
 
 #: checkoutdialog.cpp:153
 #, kde-format
@@ -1044,17 +1045,17 @@ msgstr "ייבא &כבינריים"
 #: checkoutdialog.cpp:193
 #, kde-format
 msgid "Use file's modification time as time of import"
-msgstr ""
+msgstr "להשתמש בזמן השינוי של הקובץ כזמן הייבוא"
 
 #: checkoutdialog.cpp:200
-#, fuzzy, kde-format
+#, kde-format
 msgid "Chec&k out as:"
-msgstr "משוך "
+msgstr "למשוך ב&תור:"
 
 #: checkoutdialog.cpp:204
 #, kde-format
 msgid "Ex&port only"
-msgstr ""
+msgstr "ייצוא ב&לבד"
 
 #: checkoutdialog.cpp:304
 #, kde-format
@@ -1083,7 +1084,7 @@ msgstr ""
 #: checkoutdialog.cpp:325
 #, kde-format
 msgid "A branch must be specified for export."
-msgstr ""
+msgstr "יש לציין ענף לייצוא."
 
 #: checkoutdialog.cpp:374
 #, kde-format
@@ -1123,7 +1124,7 @@ msgstr "הודעת &רישום:"
 #: commitdialog.cpp:115
 #, kde-format
 msgid "Use log message &template"
-msgstr ""
+msgstr "להשתמש ב&תבנית הודעת יומן"
 
 #: commitdialog.cpp:190
 #, kde-format
@@ -1518,7 +1519,7 @@ msgstr "הצג קובץ"
 #: logdialog.cpp:459 logdialog.cpp:518
 #, kde-format
 msgid "Please select revision A or revisions A and B first."
-msgstr ""
+msgstr "נא לבחור מהדורה א או את מהדורות א ואת ב תחילה."
 
 #: loginfo.cpp:51
 #, kde-format
@@ -1970,7 +1971,7 @@ msgstr "רמת &דחיסה ברירת מחדל:"
 #: settingsdialog_advanced.ui:58
 #, kde-format
 msgid "Utilize a running or start a new ssh-agent process"
-msgstr ""
+msgstr "שימוש בתהליך ssh-agent פעיל או לפתוח חדש"
 
 #: tagdialog.cpp:48
 #, kde-format
