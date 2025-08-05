@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-09 02:03+0000\n"
-"PO-Revision-Date: 2025-08-03 14:27+0400\n"
+"PO-Revision-Date: 2025-08-04 14:43+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -704,12 +704,12 @@ msgstr "يقرر ما إذا كان التدوين والإزالة تعاودي
 #: cervisiapart.cpp:596
 #, kde-format
 msgid "Do cvs &edit Automatically When Necessary"
-msgstr "افعل &تحرير cvs تلقائياً عند الحاجة لذلك"
+msgstr "افعل &تحرير cvs آليّاً عند الحاجة لذلك"
 
 #: cervisiapart.cpp:599
 #, kde-format
 msgid "Determines whether automatic cvs editing is active"
-msgstr "يقرر موضوع تفعيل التحرير التلقائية"
+msgstr "يقرر موضوع تفعيل التحرير الآليّة"
 
 #: cervisiapart.cpp:603
 #, kde-format
@@ -1694,7 +1694,7 @@ msgstr "تجاهل الخيارات"
 #: protocolview.cpp:90
 #, kde-format
 msgid "Clear"
-msgstr "امسح"
+msgstr "امحُ"
 
 #: protocolview.cpp:127
 #, kde-format
@@ -1868,7 +1868,7 @@ msgid ""
 "start a File->Status command automatically"
 msgstr ""
 "حين فتح مِرْملة من مستودع منعزل،\n"
-"نفّذ أمر ملف-حالة بشكل تلقائي"
+"نفّذ أمر ملف-حالة بشكل آليّ"
 
 #: settingsdialog.cpp:299
 #, kde-format
@@ -1877,7 +1877,7 @@ msgid ""
 "start a File->Status command automatically"
 msgstr ""
 "حين فتح مِرْملة من المستودع الم&حلّي،\n"
-"نفّذ أمر ملف-حالة بشكل تلقائي"
+"نفّذ أمر ملف-حالة بشكل آليّ"
 
 #: settingsdialog.cpp:316
 #, kde-format
@@ -1969,7 +1969,7 @@ msgstr "الو&قت الواجب مروره قبل إظهار مربع تقّد�
 #: settingsdialog_advanced.ui:45
 #, kde-format
 msgid "Default compression &level:"
-msgstr "مستوى الضغط الافتراضي:"
+msgstr "مستوى الضغط المبدئي:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseSshAgent)
 #: settingsdialog_advanced.ui:58

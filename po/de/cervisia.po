@@ -1,3 +1,4 @@
+# SPDX-FileCopyrightText: 2025 Alexander Becker <alex-at-kde-l10n-de@freenet.de>
 # Stephan Johach <lucardus@onlinehome.de>, 2002, 2003.
 # Thomas Diehl <thd@kde.org>, 2002, 2003.
 # Stephan Johach <hunsum@gmx.de>, 2003, 2004, 2005, 2006.
@@ -10,14 +11,15 @@ msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-09 02:03+0000\n"
-"PO-Revision-Date: 2016-06-06 12:34+0100\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
+"PO-Revision-Date: 2025-07-31 22:37+0200\n"
+"Last-Translator: Alexander Becker <alex-at-kde-l10n-de@freenet.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -80,7 +82,7 @@ msgstr "Folgenden Dateien aus dem Archiv entfernen:"
 #, kde-format
 msgid "This will also remove the files from your local working copy."
 msgstr ""
-"Hierbei werden auch die Dateien in Ihrem lokalen Arbeitsordner gelöscht."
+"Hierbei werden die Dateien auch aus Ihrem lokalen Arbeitsordner gelöscht."
 
 #: addrepositorydialog.cpp:40
 #, kde-format
@@ -130,7 +132,7 @@ msgstr "CVS-Anmerkung"
 #: annotatedialog.cpp:44
 #, kde-format
 msgid "Go to Line..."
-msgstr "Gehe zu Zeile ..."
+msgstr "Gehe zu Zeile …"
 
 #: annotatedialog.cpp:49
 #, kde-format
@@ -186,8 +188,8 @@ msgstr "Entfernte CVS-Arbeitsordner werden nicht unterstützt."
 msgid ""
 "You cannot change to a different folder while there is a running cvs job."
 msgstr ""
-"Sie können nicht in einen anderen Ordner wechseln, solange noch ein cvs-"
-"Prozess läuft."
+"Sie können nicht in einen anderen Ordner wechseln, solange ein cvs-Prozess "
+"läuft."
 
 #: cervisiapart.cpp:215
 #, kde-format
@@ -196,15 +198,15 @@ msgid ""
 "N - All up-to-date files are hidden\n"
 "R - All removed files are hidden"
 msgstr ""
-"F – Dateien werden nicht angezeigt, der Dateibaum zeigt nur Ordner.\n"
+"F – Dateien werden nicht angezeigt, der Dateibaum zeigt nur Ordner\n"
 "N – Dateien, die keinen Unterschied zum Archiv aufweisen, werden "
-"ausgeblendet.\n"
-"R – Alle aus dem Archiv entfernten Dateien werden ausgeblendet."
+"ausgeblendet\n"
+"R – Alle aus dem Archiv entfernten Dateien werden ausgeblendet"
 
 #: cervisiapart.cpp:228
 #, kde-format
 msgid "Open Sandbox..."
-msgstr "Arbeitsordner öffnen ..."
+msgstr "Arbeitsordner öffnen …"
 
 #: cervisiapart.cpp:232
 #, kde-format
@@ -219,7 +221,7 @@ msgstr "Zuletzt geöffnete Arbeitsordner"
 #: cervisiapart.cpp:240
 #, kde-format
 msgid "&Insert ChangeLog Entry..."
-msgstr "&ChangeLog-Eintrag hinzufügen ..."
+msgstr "&ChangeLog-Eintrag hinzufügen …"
 
 #: cervisiapart.cpp:243
 #, kde-format
@@ -260,7 +262,7 @@ msgstr "Öffnet die markierte Datei zur Bearbeitung"
 #: cervisiapart.cpp:270
 #, kde-format
 msgid "Reso&lve..."
-msgstr "K&onflikte auflösen ..."
+msgstr "K&onflikte auflösen …"
 
 #: cervisiapart.cpp:273
 #, kde-format
@@ -270,7 +272,7 @@ msgstr "Öffnet den Dialog „Konflikte auflösen“ für die ausgewählte Datei
 #: cervisiapart.cpp:277
 #, kde-format
 msgid "&Commit..."
-msgstr "Eins&pielen ..."
+msgstr "Eins&pielen …"
 
 #: cervisiapart.cpp:281
 #, kde-format
@@ -280,7 +282,7 @@ msgstr "Spielt die ausgewählten Dateien ein"
 #: cervisiapart.cpp:285
 #, kde-format
 msgid "&Add to Repository..."
-msgstr "Zum CVS-Archiv &hinzufügen ..."
+msgstr "Zum CVS-Archiv &hinzufügen …"
 
 #: cervisiapart.cpp:288
 #, kde-format
@@ -295,7 +297,7 @@ msgstr "Fügt die ausgewählten Dateien dem CVS-Archiv hinzu"
 #: cervisiapart.cpp:294
 #, kde-format
 msgid "Add &Binary..."
-msgstr "Binärdatei &hinzufügen ..."
+msgstr "Binärdatei &hinzufügen …"
 
 #: cervisiapart.cpp:297
 #, kde-format
@@ -305,7 +307,7 @@ msgstr "Fügt die ausgewählten Dateien dem CVS-Archiv als Binärdateien hinzu"
 #: cervisiapart.cpp:301
 #, kde-format
 msgid "&Remove From Repository..."
-msgstr "Aus CVS-Archiv ent&fernen ..."
+msgstr "Aus CVS-Archiv ent&fernen …"
 
 #: cervisiapart.cpp:304 repositorydialog.cpp:201
 #, kde-format
@@ -347,7 +349,7 @@ msgstr "Beendet alle laufenden Unterprozesse"
 #: cervisiapart.cpp:333
 #, kde-format
 msgid "Browse &Log..."
-msgstr "Protoko&ll durchsuchen ..."
+msgstr "Protoko&ll durchsuchen …"
 
 #: cervisiapart.cpp:337
 #, kde-format
@@ -357,12 +359,12 @@ msgstr "Zeigt den Revisionsbaum der ausgewählten Datei"
 #: cervisiapart.cpp:342
 #, kde-format
 msgid "Browse Multi-File Log..."
-msgstr "Multi-Datei-Protokoll durchsuchen ..."
+msgstr "Multi-Datei-Protokoll durchsuchen …"
 
 #: cervisiapart.cpp:346
 #, kde-format
 msgid "&Annotate..."
-msgstr "&Anmerkung ..."
+msgstr "&Anmerkung …"
 
 #: cervisiapart.cpp:350
 #, kde-format
@@ -374,7 +376,7 @@ msgstr ""
 #: cervisiapart.cpp:354
 #, kde-format
 msgid "&Difference to Repository (BASE)..."
-msgstr "A&bweichungen vom Archiv (BASE) ..."
+msgstr "A&bweichungen vom Archiv (BASE) …"
 
 #: cervisiapart.cpp:358
 #, kde-format
@@ -388,7 +390,7 @@ msgstr ""
 #: cervisiapart.cpp:362
 #, kde-format
 msgid "Difference to Repository (HEAD)..."
-msgstr "Abweichungen vom Archiv (HEAD) ..."
+msgstr "Abweichungen vom Archiv (HEAD) …"
 
 #: cervisiapart.cpp:366
 #, kde-format
@@ -402,7 +404,7 @@ msgstr ""
 #: cervisiapart.cpp:370
 #, kde-format
 msgid "Last &Change..."
-msgstr "Letzte Ä&nderung ..."
+msgstr "Letzte Ä&nderung …"
 
 #: cervisiapart.cpp:373
 #, kde-format
@@ -415,7 +417,7 @@ msgstr ""
 #: cervisiapart.cpp:377
 #, kde-format
 msgid "&History..."
-msgstr "&Versionsgeschichte ..."
+msgstr "&Versionsgeschichte …"
 
 #: cervisiapart.cpp:380
 #, kde-format
@@ -447,7 +449,7 @@ msgstr "Schließt alle Verzweigungen (Branches) des Dateibaums"
 #: cervisiapart.cpp:402
 #, kde-format
 msgid "&Tag/Branch..."
-msgstr "Tag setzen/verz&weigen ..."
+msgstr "Tag setzen/verz&weigen …"
 
 #: cervisiapart.cpp:405
 #, kde-format
@@ -458,7 +460,7 @@ msgstr ""
 #: cervisiapart.cpp:409
 #, kde-format
 msgid "&Delete Tag..."
-msgstr "&Tag löschen ..."
+msgstr "&Tag löschen …"
 
 #: cervisiapart.cpp:412
 #, kde-format
@@ -468,7 +470,7 @@ msgstr "Entfernt ein Tag von den ausgewählten Dateien"
 #: cervisiapart.cpp:416
 #, kde-format
 msgid "&Update to Tag/Date..."
-msgstr "Tag/Datum &aktualisieren ..."
+msgstr "Tag/Datum &aktualisieren …"
 
 #: cervisiapart.cpp:419
 #, kde-format
@@ -489,7 +491,7 @@ msgstr "Aktualisiert die ausgewählten Dateien auf die HEAD-Revision"
 #: cervisiapart.cpp:430
 #, kde-format
 msgid "&Merge..."
-msgstr "Zusa&mmenführen ..."
+msgstr "Zusa&mmenführen …"
 
 #: cervisiapart.cpp:433
 #, kde-format
@@ -501,7 +503,7 @@ msgstr ""
 #: cervisiapart.cpp:437
 #, kde-format
 msgid "&Add Watch..."
-msgstr "Status „Ü&berwachen“ setzen ..."
+msgstr "Status „Ü&berwachen“ setzen …"
 
 #: cervisiapart.cpp:440
 #, kde-format
@@ -511,7 +513,7 @@ msgstr "Setzt den Status „Überwachen“ für die ausgewählten Dateien"
 #: cervisiapart.cpp:444
 #, kde-format
 msgid "&Remove Watch..."
-msgstr "Status „Überwachen“ &entfernen ..."
+msgstr "Status „Überwachen“ &entfernen …"
 
 #: cervisiapart.cpp:447
 #, kde-format
@@ -583,7 +585,7 @@ msgstr "Gibt die ausgewählten Dateien frei"
 #: cervisiapart.cpp:493
 #, kde-format
 msgid "Create &Patch Against Repository..."
-msgstr "&Patch gegen das Archiv erstellen ..."
+msgstr "&Patch gegen das Archiv erstellen …"
 
 #: cervisiapart.cpp:496
 #, kde-format
@@ -593,12 +595,12 @@ msgstr "Erstellt ein Patch mit den Änderungen im lokalen Arbeitsordner"
 #: cervisiapart.cpp:503
 #, kde-format
 msgid "&Create..."
-msgstr "&Erstellen ..."
+msgstr "&Erstellen …"
 
 #: cervisiapart.cpp:507
 #, kde-format
 msgid "&Checkout..."
-msgstr "&Herunterladen ..."
+msgstr "&Herunterladen …"
 
 #: cervisiapart.cpp:510
 #, kde-format
@@ -608,7 +610,7 @@ msgstr "Lädt ein Modul aus dem Archiv herunter (checkout)"
 #: cervisiapart.cpp:514
 #, kde-format
 msgid "&Import..."
-msgstr "&Importieren ..."
+msgstr "&Importieren …"
 
 #: cervisiapart.cpp:517
 #, kde-format
@@ -618,7 +620,7 @@ msgstr "Importiert ein Modul in das Archiv"
 #: cervisiapart.cpp:521
 #, kde-format
 msgid "&Repositories..."
-msgstr "Archi&ve ..."
+msgstr "Archi&ve …"
 
 #: cervisiapart.cpp:524
 #, kde-format
@@ -665,7 +667,8 @@ msgstr "Dateien ausblenden, die nicht zum Archiv gehören"
 #: cervisiapart.cpp:557
 #, kde-format
 msgid "Determines whether files not in CVS are hidden"
-msgstr "Legt fest, ob Dateien, die nicht zum Archiv gehören, angezeigt werden"
+msgstr ""
+"Legt fest, ob Dateien, die nicht zum Archiv gehören, ausgeblendet werden"
 
 #: cervisiapart.cpp:561
 #, kde-format
@@ -735,7 +738,7 @@ msgstr "Legt fest, ob der automatische Modus „Bearbeiten“ aktiv ist"
 #: cervisiapart.cpp:603
 #, kde-format
 msgid "Configure Cervisia..."
-msgstr "Cervisia einrichten ..."
+msgstr "Cervisia einrichten …"
 
 #: cervisiapart.cpp:606
 #, kde-format
@@ -1519,7 +1522,7 @@ msgstr "A &anzeigen"
 #: logdialog.cpp:227
 #, kde-format
 msgid "Create Patch..."
-msgstr "Patch erstellen ..."
+msgstr "Patch erstellen …"
 
 #: logdialog.cpp:270
 #, kde-format
@@ -1787,17 +1790,17 @@ msgstr "Status"
 #: repositorydialog.cpp:199
 #, kde-format
 msgid "Add..."
-msgstr "Hinzufügen ..."
+msgstr "Hinzufügen …"
 
 #: repositorydialog.cpp:200
 #, kde-format
 msgid "Modify..."
-msgstr "Bearbeiten ..."
+msgstr "Bearbeiten …"
 
 #: repositorydialog.cpp:202
 #, kde-format
 msgid "Login..."
-msgstr "Anmeldung ..."
+msgstr "Anmeldung …"
 
 #: repositorydialog.cpp:203
 #, kde-format
@@ -1925,22 +1928,22 @@ msgstr "Schriftarten"
 #: settingsdialog.cpp:341
 #, kde-format
 msgid "Font for &Protocol Window..."
-msgstr "Schriftart für das &Protokoll-Fenster ..."
+msgstr "Schriftart für das &Protokoll-Fenster …"
 
 #: settingsdialog.cpp:342
 #, kde-format
 msgid "Font for A&nnotate View..."
-msgstr "Schriftart für die An&merkungs-Ansicht ..."
+msgstr "Schriftart für die An&merkungs-Ansicht …"
 
 #: settingsdialog.cpp:343
 #, kde-format
 msgid "Font for D&iff View..."
-msgstr "Schriftart für D&iff-Ansicht ..."
+msgstr "Schriftart für D&iff-Ansicht …"
 
 #: settingsdialog.cpp:344
 #, kde-format
 msgid "Font for ChangeLog View..."
-msgstr "Schriftart für die ChangeLog-Ansicht ..."
+msgstr "Schriftart für die ChangeLog-Ansicht …"
 
 #: settingsdialog.cpp:352
 #, kde-format
