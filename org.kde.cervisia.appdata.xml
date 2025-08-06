@@ -20,6 +20,7 @@
   <name xml:lang="fi">Cervisia</name>
   <name xml:lang="fr">Cervisia</name>
   <name xml:lang="gl">Cervisia</name>
+  <name xml:lang="he">Cervisia</name>
   <name xml:lang="id">Cervisia</name>
   <name xml:lang="it">Cervisia</name>
   <name xml:lang="ka">Cervisia</name>
@@ -53,6 +54,7 @@
   <summary xml:lang="fi">Graafinen käyttöliittymä CVS-versionhallintajärjestelmään</summary>
   <summary xml:lang="fr">Une interface utilisateur graphique pour le système de contrôle de versions CVS</summary>
   <summary xml:lang="gl">Unha interface gráfica para o sistema de control de versións CVS</summary>
+  <summary xml:lang="he">ממשק גרפי חזותי למערכת ניהול הגרסאות CVS</summary>
   <summary xml:lang="id">Sebuah frontend sistem kendali versi CVS grafik</summary>
   <summary xml:lang="it">Un'interfaccia grafica per il sistema di controllo di versione CVS</summary>
   <summary xml:lang="ka">CVS-ის გრაფიკული წინაბოლო</summary>
