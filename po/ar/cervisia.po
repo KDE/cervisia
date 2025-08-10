@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-09 02:03+0000\n"
-"PO-Revision-Date: 2025-08-04 14:43+0400\n"
+"PO-Revision-Date: 2025-08-09 18:17+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -115,7 +115,7 @@ msgstr "نفذ هذا البرنامج على الطرف الخادم:"
 #: addrepositorydialog.cpp:86
 #, kde-format
 msgid "Use different &compression level:"
-msgstr "إستعمل مستوى &ضغط مختلف:"
+msgstr "استعمل مستوى &ضغط مختلف:"
 
 #: addrepositorydialog.cpp:94
 #, kde-format
@@ -203,7 +203,8 @@ msgid ""
 "R - All removed files are hidden"
 msgstr ""
 "F - كل الملفات مخبئة ، الشجرة تعرض فقط المجلّدات\n"
-"N - كلّ الملفات المحدثة مخبئةR - كل الملفات المحذوفة مخبئة"
+"N - كلّ الملفات المحدثة مخبئة\n"
+"R - كل الملفات المحذوفة مخبئة"
 
 #: cervisiapart.cpp:228
 #, kde-format
@@ -213,12 +214,12 @@ msgstr "افتح المِرْملة"
 #: cervisiapart.cpp:232
 #, kde-format
 msgid "Opens a CVS working folder in the main window"
-msgstr "إفتح مجلّد عمل CVS في النافذة الرئيسة"
+msgstr "افتح مجلّد عمل CVS في النافذة الرئيسة"
 
 #: cervisiapart.cpp:236
 #, kde-format
 msgid "Recent Sandboxes"
-msgstr "مرامِلْ حديثة"
+msgstr "مِرْملات حديثة"
 
 #: cervisiapart.cpp:240
 #, kde-format
@@ -268,7 +269,7 @@ msgstr "حِ&ل...ّ"
 #: cervisiapart.cpp:273
 #, kde-format
 msgid "Opens the resolve dialog with the selected file"
-msgstr "يفتح حوار الحلّ بِلملف الحالي"
+msgstr "يفتح حوار الحلّ بملف الحالي"
 
 #: cervisiapart.cpp:277
 #, kde-format
@@ -343,12 +344,12 @@ msgstr "أوقف"
 #: cervisiapart.cpp:329
 #, kde-format
 msgid "Stops any running sub-processes"
-msgstr "يوقِف تنفيذ إي إجرائات فرعية"
+msgstr "يوقِف تنفيذ إي إجراءات فرعية"
 
 #: cervisiapart.cpp:333
 #, kde-format
 msgid "Browse &Log..."
-msgstr "تصفح &سجِلّل الوقائع..."
+msgstr "تصفح سجل الوقائع..."
 
 #: cervisiapart.cpp:337
 #, kde-format
@@ -373,7 +374,7 @@ msgstr "يُظهِر ملامة في الحواشي للملف المُختار"
 #: cervisiapart.cpp:354
 #, kde-format
 msgid "&Difference to Repository (BASE)..."
-msgstr "ال&إختلاف مع المستودع (BASE)..."
+msgstr "الاختلاف مع المستودع (BASE)..."
 
 #: cervisiapart.cpp:358
 #, kde-format
@@ -385,7 +386,7 @@ msgstr "يُظهِرْ الفروقات بين بين الملف المختار 
 #: cervisiapart.cpp:362
 #, kde-format
 msgid "Difference to Repository (HEAD)..."
-msgstr "الإختلاف مع المستودع  (HEAD)..."
+msgstr "الاختلاف مع المستودع  (HEAD)..."
 
 #: cervisiapart.cpp:366
 #, kde-format
@@ -469,7 +470,7 @@ msgstr "يحدث الملفات المختارة بعلامة أو شعبة أو
 #: cervisiapart.cpp:423
 #, kde-format
 msgid "Update to &HEAD"
-msgstr "أجر تحديث لل&ترويسة"
+msgstr "أجر تحديث الترويسة"
 
 #: cervisiapart.cpp:426
 #, kde-format
@@ -579,12 +580,12 @@ msgstr "ينشئ رقعة من التغييرات في مِرْملتِك"
 #: cervisiapart.cpp:503
 #, kde-format
 msgid "&Create..."
-msgstr "إن&شاء..."
+msgstr "أ&نشئ..."
 
 #: cervisiapart.cpp:507
 #, kde-format
 msgid "&Checkout..."
-msgstr "&سحب..."
+msgstr "ا&سحب..."
 
 #: cervisiapart.cpp:510
 #, kde-format
@@ -614,7 +615,7 @@ msgstr "إعداد لائحة مستودعات تستعملها تِكراراً
 #: cervisiapart.cpp:531
 #, kde-format
 msgid "Hide All &Files"
-msgstr "إخفاء كل ال&ملفات"
+msgstr "أخفِ كل ال&ملفات"
 
 #: cervisiapart.cpp:534
 #, kde-format
@@ -624,7 +625,7 @@ msgstr "يقرّر إذا كان يجب عرض المجلّدات فقط"
 #: cervisiapart.cpp:538
 #, kde-format
 msgid "Hide Unmodified Files"
-msgstr "إخفاء الملفات غير المغييرة"
+msgstr "أخف الملفات غير المغيرة"
 
 #: cervisiapart.cpp:542
 #, kde-format
@@ -634,7 +635,7 @@ msgstr "يقرر موضوع إخفاء الملفات التي (حالتها ح�
 #: cervisiapart.cpp:547
 #, kde-format
 msgid "Hide Removed Files"
-msgstr "إخفاء الملفات المزالة"
+msgstr "أخفِ الملفات المزالة"
 
 #: cervisiapart.cpp:550
 #, kde-format
@@ -644,7 +645,7 @@ msgstr "يحدد ما إذا كانت الملفات المزالة مخفية"
 #: cervisiapart.cpp:554
 #, kde-format
 msgid "Hide Non-CVS Files"
-msgstr "إخفاء الملفات الغير CVS"
+msgstr "أخفِ الملفات الغير CVS"
 
 #: cervisiapart.cpp:557
 #, kde-format
@@ -664,7 +665,7 @@ msgstr "يُقَرِّرْ موضوع إخفاء المجلدات غير الم�
 #: cervisiapart.cpp:568
 #, kde-format
 msgid "Create &Folders on Update"
-msgstr "أنشيء &مجلدات عند التحديث"
+msgstr "أنشئ &مجلدات عند التحديث"
 
 #: cervisiapart.cpp:571
 #, kde-format
@@ -674,7 +675,7 @@ msgstr "يقرر موضوع السماح للتحديثات بإنشاء مجل�
 #: cervisiapart.cpp:575
 #, kde-format
 msgid "&Prune Empty Folders on Update"
-msgstr "&تجاهل المجلدات الفارغة عند التحذيث"
+msgstr "&تجاهل المجلدات الفارغة عند التحديث"
 
 #: cervisiapart.cpp:578
 #, kde-format
@@ -694,12 +695,12 @@ msgstr "يحدد ما إذا كان التحديث دوريًا"
 #: cervisiapart.cpp:589
 #, kde-format
 msgid "C&ommit && Remove Recursively"
-msgstr "&أرسل و أزل بنمط تعاودي"
+msgstr "أ&رسل و أزل بنمط تعاودي"
 
 #: cervisiapart.cpp:592
 #, kde-format
 msgid "Determines whether commits and removes are recursive"
-msgstr "يقرر ما إذا كان التدوين والإزالة تعاوديان."
+msgstr "يقرر ما إذا كان الإيداع والإزالة بنمط تعاودي."
 
 #: cervisiapart.cpp:596
 #, kde-format
@@ -714,7 +715,7 @@ msgstr "يقرر موضوع تفعيل التحرير الآليّة"
 #: cervisiapart.cpp:603
 #, kde-format
 msgid "Configure Cervisia..."
-msgstr "تكوين Cervisia..."
+msgstr "اضبط Cervisia..."
 
 #: cervisiapart.cpp:606
 #, kde-format
@@ -758,7 +759,7 @@ msgstr ""
 #: cervisiapart.cpp:725 main.cpp:147
 #, kde-format
 msgid "Bernd Gehrmann"
-msgstr "Bernd Gehrmann"
+msgstr "بيرند جيرمان"
 
 #: cervisiapart.cpp:726 main.cpp:148
 #, kde-format
@@ -773,7 +774,7 @@ msgstr "Christian Loose"
 #: cervisiapart.cpp:729 main.cpp:151
 #, kde-format
 msgid "Maintainer"
-msgstr "المشرف على الصيانة"
+msgstr "الصائن"
 
 #: cervisiapart.cpp:730 main.cpp:152
 #, kde-format
@@ -798,7 +799,7 @@ msgstr "توثيق"
 #: cervisiapart.cpp:733 main.cpp:155
 #, kde-format
 msgid "Richard Moore"
-msgstr "Richard Moore"
+msgstr "ريتشارد مور"
 
 #: cervisiapart.cpp:733 main.cpp:155
 #, kde-format
@@ -808,7 +809,7 @@ msgstr "تحويل إلى KPart"
 #: cervisiapart.cpp:734 main.cpp:156
 #, kde-format
 msgid "Laurent Montel"
-msgstr "Laurent Montel"
+msgstr "لوران مونتال"
 
 #: cervisiapart.cpp:734 main.cpp:156
 #, kde-format
@@ -818,7 +819,7 @@ msgstr "محاورة دي-باص"
 #: cervisiapart.cpp:735 main.cpp:157
 #, kde-format
 msgid "Martin Koller"
-msgstr "Martin Koller"
+msgstr "مارتين كوللر"
 
 #: cervisiapart.cpp:735 main.cpp:157
 #, kde-format
@@ -828,7 +829,7 @@ msgstr "النّقل إلى أُطر العمل 5"
 #: cervisiapart.cpp:742
 #, kde-format
 msgid "Open Sandbox"
-msgstr "إفتح المِرْملة"
+msgstr "افتح المِرْملة"
 
 #: cervisiapart.cpp:792
 #, kde-format
@@ -838,7 +839,7 @@ msgstr "تحرير CVS"
 #: cervisiapart.cpp:1299 diffdialog.cpp:263 logdialog.cpp:474
 #, kde-format
 msgid "CVS Diff"
-msgstr "إختلافات CVS"
+msgstr "اختلافات CVS"
 
 #: cervisiapart.cpp:1312 diffdialog.cpp:473 logdialog.cpp:487
 #: resolvedialog.cpp:351
@@ -859,7 +860,7 @@ msgstr "هذه المراجعة الأولى لِلفرع."
 #: cervisiapart.cpp:1576
 #, kde-format
 msgid "Invoking help on CVS"
-msgstr "إستدعاء مساعدة CVS"
+msgstr "استدعاء مساعدة CVS"
 
 #: cervisiapart.cpp:1611
 #, kde-format
@@ -869,7 +870,7 @@ msgstr "تم"
 #: cervisiapart.cpp:1617
 #, kde-format
 msgid "A CVS commit to repository %1 is done"
-msgstr "إنتهى إيداع CVS إلى المستودع %1"
+msgstr "انتهى إيداع CVS إلى المستودع %1"
 
 #: cervisiapart.cpp:1634
 #, kde-format
@@ -879,7 +880,7 @@ msgid ""
 "Konqueror."
 msgstr ""
 "هذا ليس مجلّد CVS.\n"
-"إذا لم تكن تقصد إستعمال Cervisia ، يمكنك تحويل أنماط العرض في Konqueror."
+"إذا لم تكن تقصد استعمال Cervisia ، يمكنك تحويل أنماط العرض في Konqueror."
 
 #. i18n: ectx: label, entry (ConflictColor), group (Colors)
 #: cervisiapart.kcfg:24
@@ -981,7 +982,7 @@ msgstr "إنشاء"
 #: changelogdialog.cpp:107
 #, kde-format
 msgid "The ChangeLog file could not be read."
-msgstr "ملف سجلّ التغييرات لا يمكن قرائته."
+msgstr "ملف سجلّ التغييرات لا يمكن فراءته."
 
 #: checkoutdialog.cpp:59 checkoutdialog.cpp:348
 #, kde-format
@@ -991,7 +992,7 @@ msgstr "سحب CVS"
 #: checkoutdialog.cpp:59
 #, kde-format
 msgid "CVS Import"
-msgstr "إستيراد CVS"
+msgstr "استيراد CVS"
 
 #: checkoutdialog.cpp:94 checkoutdialog.cpp:109
 #, kde-format
@@ -1062,7 +1063,7 @@ msgstr "&صدٍّرْ فَقَطْ"
 #: checkoutdialog.cpp:304
 #, kde-format
 msgid "Please choose an existing working folder."
-msgstr "الرجاء إختيار مجلّد عمل موجود."
+msgstr "الرجاء اختيار مجلّد عمل موجود."
 
 #: checkoutdialog.cpp:308 checkoutdialog.cpp:379
 #, kde-format
@@ -1072,7 +1073,7 @@ msgstr "الرجاء تحديد اسم وحدة."
 #: checkoutdialog.cpp:314
 #, kde-format
 msgid "Please specify a vendor tag and a release tag."
-msgstr "رجاءاً حدٍّدْ علامة مُنْتِجْ و علامة إصْدَارة"
+msgstr "رجاءً حدٍّدْ علامة مُنْتِجْ و علامة إصْدَارة"
 
 #: checkoutdialog.cpp:319
 #, kde-format
@@ -1089,7 +1090,7 @@ msgstr "يجب تحديد شعبة من أجل التصدير"
 #: checkoutdialog.cpp:374
 #, kde-format
 msgid "Please specify a repository."
-msgstr "رجاءاً حدد مستودعاً"
+msgstr "رجاءً حدد مستودعاً"
 
 #: checkoutdialog.cpp:387
 #, kde-format
@@ -1129,7 +1130,7 @@ msgstr "استخدم قالب رسالة السجلّ"
 #: commitdialog.cpp:190
 #, kde-format
 msgid "Current"
-msgstr "االحالي"
+msgstr "الحالي"
 
 #: cvsinitdialog.cpp:39
 #, kde-format
@@ -1139,7 +1140,7 @@ msgstr "أنشئ مستودع جديد (cvs ابتدائي)"
 #: cvsinitdialog.cpp:51
 #, kde-format
 msgid "Repository folder:"
-msgstr "مجلد المُسْتَوْدًعْ:"
+msgstr "مجلد المستودع:"
 
 #: diffdialog.cpp:102
 #, kde-format
@@ -1513,7 +1514,7 @@ msgstr "(نقطة التشعب)"
 #: logdialog.cpp:422
 #, kde-format
 msgid "Please select revision A or B first."
-msgstr "رجاءاً، في البداية اختر النسخة A أو النسخة B"
+msgstr "رجاءً، في البداية اختر النسخة A أو النسخة B"
 
 #: logdialog.cpp:443
 #, kde-format
@@ -1523,7 +1524,7 @@ msgstr "شاهد الملف"
 #: logdialog.cpp:459 logdialog.cpp:518
 #, kde-format
 msgid "Please select revision A or revisions A and B first."
-msgstr "رجاءاً،في البداية اختر النسخة A، أو النسختان A و B."
+msgstr "رجاءً،في البداية اختر النسخة A، أو النسختان A و B."
 
 #: loginfo.cpp:51
 #, kde-format
@@ -1548,12 +1549,12 @@ msgstr "تعليق"
 #: loglist.cpp:106
 #, kde-format
 msgid "Tags"
-msgstr "ughlhj"
+msgstr "الوسوم"
 
 #: logplainview.cpp:46
 #, kde-format
 msgid "revision %1"
-msgstr "hgksom %1"
+msgstr "المراجعة %1"
 
 #: logplainview.cpp:47
 #, kde-format
@@ -1573,7 +1574,7 @@ msgstr "التاريخ: %1، المؤلف: %2"
 #: main.cpp:167
 #, kde-format
 msgid "The sandbox to be loaded"
-msgstr "أظهر المِرْمَلة اللتي ستُحمّل"
+msgstr "أظهر المِرْمَلة أللتي ستُحمّل"
 
 #: main.cpp:168
 #, kde-format
@@ -1699,7 +1700,7 @@ msgstr "امحُ"
 #: protocolview.cpp:127
 #, kde-format
 msgid "[Exited with status %1]\n"
-msgstr "[تم الخروج مع الحالة %1]\n"
+msgstr "[خرجت مع الحالة %1]\n"
 
 #: protocolview.cpp:129
 #, kde-format
@@ -1719,12 +1720,12 @@ msgstr "المبدئيّ"
 #: repositorydialog.cpp:155
 #, kde-format
 msgid "Logged in"
-msgstr "تم تسجيل الدخول"
+msgstr "ولجت"
 
 #: repositorydialog.cpp:155
 #, kde-format
 msgid "Not logged in"
-msgstr "لم يتم تسجيل الدخول"
+msgstr "لم يلج"
 
 #: repositorydialog.cpp:157
 #, kde-format
@@ -1799,12 +1800,12 @@ msgstr "إصدارتُك (A):"
 #: resolvedialog.cpp:144
 #, kde-format
 msgid "Other version (B):"
-msgstr "إصدارة إخرى (B):"
+msgstr "إصدارة أخرى (B):"
 
 #: resolvedialog.cpp:156
 #, kde-format
 msgid "Merged version:"
-msgstr "الإصدارة المدموجة:"
+msgstr "الإصدارة المدمجة:"
 
 #: resolvedialog.cpp:250
 #, kde-format
@@ -1819,7 +1820,7 @@ msgstr "%1 تضاربات"
 #: settingsdialog.cpp:70
 #, kde-format
 msgid "Configure Cervisia"
-msgstr "تكوين Cervisia..."
+msgstr "اضبط Cervisia"
 
 #: settingsdialog.cpp:215
 #, kde-format
@@ -1897,12 +1898,12 @@ msgstr "الخطوط"
 #: settingsdialog.cpp:341
 #, kde-format
 msgid "Font for &Protocol Window..."
-msgstr "خط نافذة البروتوكول..."
+msgstr "خط نافذة الميفاق..."
 
 #: settingsdialog.cpp:342
 #, kde-format
 msgid "Font for A&nnotate View..."
-msgstr "خط مشهد ال&وامش"
+msgstr "خط مشهد ال&شروح…"
 
 #: settingsdialog.cpp:343
 #, kde-format
@@ -1995,7 +1996,7 @@ msgstr "اسم العلامة"
 #: tagdialog.cpp:95
 #, kde-format
 msgid "Create &branch with this tag"
-msgstr "أنشيء &شعبة بهذه العلامة"
+msgstr "أنشئ &شعبة بهذه العلامة"
 
 #: tagdialog.cpp:99
 #, kde-format
@@ -2054,12 +2055,12 @@ msgstr "ختم الوقت"
 #: watchdialog.cpp:38
 #, kde-format
 msgid "CVS Watch Add"
-msgstr "أضف ترقُّبْ CVS"
+msgstr "إضافة ترقُّب CVS"
 
 #: watchdialog.cpp:38
 #, kde-format
 msgid "CVS Watch Remove"
-msgstr "نامحُ ترقّب CVS"
+msgstr "إزالة ترقّب CVS"
 
 #: watchdialog.cpp:51
 #, kde-format
@@ -2099,7 +2100,7 @@ msgstr "ال&تراجعات عن التحرير"
 #: watchersdialog.cpp:68 watchersdialog.cpp:74
 #, kde-format
 msgid "CVS Watchers"
-msgstr "مراقبوا CVS"
+msgstr "مراقبو CVS"
 
 #: watchersmodel.cpp:86
 #, kde-format
