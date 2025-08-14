@@ -182,7 +182,7 @@ msgstr "فشل بِدء تشغيل الخدمة cvsservice مع الخبر:"
 msgid ""
 "This KPart is non-functional, because the cvs D-Bus service could not be "
 "started."
-msgstr "جزء ك هذا لا يعمل ، لأنه لا يمكن بدء تشغيل خدمة cvs دي-باص."
+msgstr "جزء ك هذا لا يعمل، لأنه لا يمكن بدء تشغيل خدمة cvs دي-باص."
 
 #: cervisiapart.cpp:187
 #, kde-format
@@ -202,7 +202,7 @@ msgid ""
 "N - All up-to-date files are hidden\n"
 "R - All removed files are hidden"
 msgstr ""
-"F - كل الملفات مخبئة ، الشجرة تعرض فقط المجلّدات\n"
+"F - كل الملفات مخبئة، الشجرة تعرض فقط المجلّدات\n"
 "N - كلّ الملفات المحدثة مخبئة\n"
 "R - كل الملفات المحذوفة مخبئة"
 
@@ -555,7 +555,7 @@ msgstr "أ&قفل ملفات"
 #: cervisiapart.cpp:482
 #, kde-format
 msgid "Locks the selected files, so that others cannot modify them"
-msgstr "يقفِل الملفات المحددة ، لكي لا يستطيع الآخرون تغييرها"
+msgstr "يقفِل الملفات المحددة، لكي لا يستطيع الآخرون تغييرها"
 
 #: cervisiapart.cpp:486
 #, kde-format
@@ -880,7 +880,7 @@ msgid ""
 "Konqueror."
 msgstr ""
 "هذا ليس مجلّد CVS.\n"
-"إذا لم تكن تقصد استعمال Cervisia ، يمكنك تحويل أنماط العرض في Konqueror."
+"إذا لم تكن تقصد استعمال Cervisia، يمكنك تحويل أنماط العرض في Konqueror."
 
 #. i18n: ectx: label, entry (ConflictColor), group (Colors)
 #: cervisiapart.kcfg:24
