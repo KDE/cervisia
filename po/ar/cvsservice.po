@@ -74,7 +74,7 @@ msgstr "تحتاج لتحديد مجلّد نسخة العمل المحلّية 
 #: cvsservice.cpp:896
 #, kde-format
 msgid "There is already a job running"
-msgstr "هناك مهمة تعمل بالفعل"
+msgstr "هناك مهمة تعمل فعلًا"
 
 #: main.cpp:36
 #, kde-format
