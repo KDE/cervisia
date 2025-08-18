@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: cervisia\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-09 02:03+0000\n"
-"PO-Revision-Date: 2025-08-09 18:17+0400\n"
+"PO-Revision-Date: 2025-08-17 20:09+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -209,7 +209,7 @@ msgstr ""
 #: cervisiapart.cpp:228
 #, kde-format
 msgid "Open Sandbox..."
-msgstr "افتح المِرْملة"
+msgstr "افتح المعزل"
 
 #: cervisiapart.cpp:232
 #, kde-format
@@ -219,7 +219,7 @@ msgstr "افتح مجلّد عمل CVS في النافذة الرئيسة"
 #: cervisiapart.cpp:236
 #, kde-format
 msgid "Recent Sandboxes"
-msgstr "مِرْملات حديثة"
+msgstr "المعازل حديثة"
 
 #: cervisiapart.cpp:240
 #, kde-format
@@ -575,7 +575,7 @@ msgstr "إنشاء رق&عة مقابل المستودع..."
 #: cervisiapart.cpp:496
 #, kde-format
 msgid "Creates a patch from the modifications in your sandbox"
-msgstr "ينشئ رقعة من التغييرات في مِرْملتِك"
+msgstr "ينشئ رقعة من التغييرات في معزلك"
 
 #: cervisiapart.cpp:503
 #, kde-format
@@ -829,7 +829,7 @@ msgstr "النّقل إلى أُطر العمل 5"
 #: cervisiapart.cpp:742
 #, kde-format
 msgid "Open Sandbox"
-msgstr "افتح المِرْملة"
+msgstr "افتح المعزل"
 
 #: cervisiapart.cpp:792
 #, kde-format
@@ -1574,7 +1574,7 @@ msgstr "التاريخ: %1، المؤلف: %2"
 #: main.cpp:167
 #, kde-format
 msgid "The sandbox to be loaded"
-msgstr "أظهر المِرْمَلة أللتي ستُحمّل"
+msgstr "أظهر المعزل التي ستُحمّل"
 
 #: main.cpp:168
 #, kde-format
@@ -1868,7 +1868,7 @@ msgid ""
 "When opening a sandbox from a &remote repository,\n"
 "start a File->Status command automatically"
 msgstr ""
-"حين فتح مِرْملة من مستودع منعزل،\n"
+"حين فتح معزل من مستودع بعيد،\n"
 "نفّذ أمر ملف-حالة بشكل آليّ"
 
 #: settingsdialog.cpp:299
@@ -1877,7 +1877,7 @@ msgid ""
 "When opening a sandbox from a &local repository,\n"
 "start a File->Status command automatically"
 msgstr ""
-"حين فتح مِرْملة من المستودع الم&حلّي،\n"
+"حين فتح معزل من المستودع الم&حلّي،\n"
 "نفّذ أمر ملف-حالة بشكل آليّ"
 
 #: settingsdialog.cpp:316
