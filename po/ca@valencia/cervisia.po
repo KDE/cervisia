@@ -1457,7 +1457,7 @@ msgstr "Revisió B:"
 #: logdialog.cpp:143
 #, kde-format
 msgid "Select by tag:"
-msgstr "Selecciona per etiqueta:"
+msgstr "Tria per etiqueta:"
 
 #: logdialog.cpp:151
 #, kde-format
