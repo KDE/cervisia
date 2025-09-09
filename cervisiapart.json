@@ -25,7 +25,6 @@
         "Name[sv]": "Cervisia",
         "Name[tr]": "Cervisia",
         "Name[uk]": "Cervisia",
-        "Name[x-test]": "xxCervisiaxx",
         "Name[zh_TW]": "Cervisia",
         "ServiceTypes": [
             "KParts/ReadOnlyPart",
