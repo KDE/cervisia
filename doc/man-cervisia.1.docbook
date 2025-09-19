@@ -82,7 +82,7 @@ support for most version control functions.</para>
 <title>See Also</title>
 <simplelist>
 <member>More detailed user documentation is available from <ulink
-url="help:/cervisia ">help:/cervisia</ulink>
+url="help:/cervisia">help:/cervisia</ulink>
 (either enter this &URL; into &konqueror;, or run
 <userinput><command>khelpcenter</command>
 <parameter>help:/cervisia</parameter></userinput>).</member>
