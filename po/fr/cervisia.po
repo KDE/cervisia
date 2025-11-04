@@ -288,7 +288,7 @@ msgstr "Réso&udre..."
 #: cervisiapart.cpp:273
 #, kde-format
 msgid "Opens the resolve dialog with the selected file"
-msgstr "Ouvre la boîte de dialogue de résolution avec le fichier sélectionné"
+msgstr "Ouvre la boite de dialogue de résolution avec le fichier sélectionné"
 
 #: cervisiapart.cpp:277
 #, kde-format
@@ -933,7 +933,7 @@ msgstr ""
 #, kde-format
 msgid "Delay (ms) until the progress dialog appears."
 msgstr ""
-"Délai (ms) jusqu'à ce que la boîte de dialogue de progression apparaisse."
+"Délai (ms) jusqu'à ce que la boite de dialogue de progression apparaisse."
 
 #: cervisiashell.cpp:53
 #, kde-format
@@ -1618,17 +1618,17 @@ msgstr "La copie locale à charger"
 #: main.cpp:168
 #, kde-format
 msgid "Show resolve dialog for the given file."
-msgstr "Afficher la boîte de dialogue de résolution correspondant au fichier."
+msgstr "Afficher la boite de dialogue de résolution correspondant au fichier."
 
 #: main.cpp:169
 #, kde-format
 msgid "Show log dialog for the given file."
-msgstr "Afficher la boîte de dialogue du journal correspondant au fichier."
+msgstr "Afficher la boite de dialogue du journal correspondant au fichier."
 
 #: main.cpp:170
 #, kde-format
 msgid "Show annotation dialog for the given file."
-msgstr "Afficher la boîte de dialogue d'annotations correspondant au fichier."
+msgstr "Afficher la boite de dialogue d'annotations correspondant au fichier."
 
 #: mergedialog.cpp:41
 #, kde-format
@@ -2005,7 +2005,7 @@ msgstr "Scinder la fenêtre principale h&orizontalement"
 #, kde-format
 msgid "&Timeout after which a progress dialog appears (in ms):"
 msgstr ""
-"&Délai au-delà duquel une boîte de dialogue de progression apparaît (en ms) :"
+"&Délai au-delà duquel une boite de dialogue de progression apparait (en ms) :"
 
 #. i18n: ectx: property (text), widget (QLabel, compressionLbl)
 #: settingsdialog_advanced.ui:45
