@@ -147,7 +147,7 @@
 
 <step
 ><para
->Ouvrez la boîte de dialogue <guilabel
+>Ouvrez la boite de dialogue <guilabel
 >Créer un nouveau dépôt (cvs init)</guilabel
 > en choisissant <menuchoice
 ><guimenu
@@ -193,7 +193,7 @@
 
 
 <para
->&cervisia; offre une interface frontale intégrée pour gérer tous les emplacements de votre dépôt, la boîte de dialogue <guilabel
+>&cervisia; offre une interface frontale intégrée pour gérer tous les emplacements de votre dépôt, la boite de dialogue <guilabel
 >Configurer l'accès aux dépôts</guilabel
 >. Pour l'afficher, cliquez sur l'élément de menu <menuchoice
 ><guimenu
@@ -205,13 +205,13 @@
 
 <figure id="screenshot-repositories" float="1">
 <title
->Une copie d'écran de la boîte de dialogue Configurer l'accès aux dépôts de &cervisia;</title>
+>Une copie d'écran de la boite de dialogue Configurer l'accès aux dépôts de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="repositories.png"/></imageobject>
 <textobject
 ><phrase
->Une copie d'écran de la boîte de dialogue Configurer l'accès aux dépôts de &cervisia;</phrase
+>Une copie d'écran de la boite de dialogue Configurer l'accès aux dépôts de &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
@@ -326,7 +326,7 @@
 
 <step
 ><para
->Ouvrez la boîte de dialogue <guilabel
+>Ouvrez la boite de dialogue <guilabel
 >Configurer l'accès aux dépôts</guilabel
 > en choisissant l'élément de menu <menuchoice
 ><guimenu
@@ -341,7 +341,7 @@
 ><para
 >Cliquez sur le bouton <guilabel
 >Ajouter...</guilabel
-> pour ouvrir la boîte de dialogue <guilabel
+> pour ouvrir la boite de dialogue <guilabel
 >Ajouter un dépôt</guilabel
 >. </para
 ></step>
@@ -350,7 +350,7 @@
 ><para
 >Saisissez l'emplacement du dépôt dans la zone de texte <guilabel
 >Dépôt : </guilabel
->. &cervisia; désactivera automatiquement les zones de la boîte de dialogue qui ne sont pas en rapport avec la méthode d'accès que vous avez choisie. </para
+>. &cervisia; désactivera automatiquement les zones de la boite de dialogue qui ne sont pas en rapport avec la méthode d'accès que vous avez choisie. </para
 ></step>
 
 <step
@@ -371,7 +371,7 @@
 ><para
 >Si la méthode d'accès au dépôt que vous avez choisie est l'authentification par mot de passe (pserver), vous devrez vous y connecter avant de vous connecter au serveur proprement dit. Cliquez sur le dépôt dans la liste pour le sélectionner et cliquez sur le bouton <guilabel
 >Connexion...</guilabel
->. Saisissez votre mot de passe dans la boîte de dialogue qui apparaît. </para>
+>. Saisissez votre mot de passe dans la boite de dialogue qui apparait. </para>
 <para
 >Si vous avez réussi à saisir votre mot de passe, la ligne de la colonne <guilabel
 >État</guilabel
@@ -410,7 +410,7 @@
 ><para
 >Importez les fichiers et dossiers dans un nouveau <firstterm
 >module</firstterm
->, à l'aide de la boîte de dialogue d'importation de &cervisia;. Les modules sont les dossiers de premier niveau dans l'arborescence des dossiers du dépôt &CVS;. Ils sont utilisés pour séparer et organiser les différents projets logiciel à l'intérieur du dépôt. </para
+>, à l'aide de la boite de dialogue d'importation de &cervisia;. Les modules sont les dossiers de premier niveau dans l'arborescence des dossiers du dépôt &CVS;. Ils sont utilisés pour séparer et organiser les différents projets logiciel à l'intérieur du dépôt. </para
 ></listitem>
 
 <listitem
@@ -429,7 +429,7 @@
 
 
 <para
->L'importation d'un projet (en tant que nouveau module) a certains avantages : vous importez tous les fichiers et dossiers récursivement, et le module sera automatiquement créé pour vous. Ce comportement facilite l'importation de gros projets existants dans le dépôt. Néanmoins, il y a des inconvénients : vous ne pouvez pas utiliser la boîte de dialogue d'importation de &cervisia; pour ajouter des fichiers aux modules existants, mais il est possible d'importer les fichiers sous forme de fichiers texte ou binaires. Pour contourner cette limitation, il suffit de créer un dossier avec des fichiers d'un seul de ces types ou d'informer les motifs des fichiers qu'il faut les ignorer pendant le processus d'importation. </para>
+>L'importation d'un projet (en tant que nouveau module) a certains avantages : vous importez tous les fichiers et dossiers récursivement, et le module sera automatiquement créé pour vous. Ce comportement facilite l'importation de gros projets existants dans le dépôt. Néanmoins, il y a des inconvénients : vous ne pouvez pas utiliser la boite de dialogue d'importation de &cervisia; pour ajouter des fichiers aux modules existants, mais il est possible d'importer les fichiers sous forme de fichiers texte ou binaires. Pour contourner cette limitation, il suffit de créer un dossier avec des fichiers d'un seul de ces types ou d'informer les motifs des fichiers qu'il faut les ignorer pendant le processus d'importation. </para>
 
 <para
 >Supposez par exemple que votre projet contienne des fichiers texte et quelques fichiers image PNG (fichiers binaires) uniquement. Vous pouvez demander à &CVS; d'ignorer tous les fichiers correspond au schéma <filename class="extension"
@@ -454,21 +454,21 @@
 
 <figure id="screenshot-import" float="1">
 <title
->Une copie d'écran de la boîte de dialogue d'importation de &cervisia;</title>
+>Une copie d'écran de la boite de dialogue d'importation de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="import.png"/></imageobject>
 <textobject
 ><phrase
->Une copie d'écran de la boîte de dialogue d'importation de &cervisia;</phrase
+>Une copie d'écran de la boite de dialogue d'importation de &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
 
 <para
->Dans <xref linkend="screenshot-import"/>, vous pouvez voir la boîte de dialogue qui vous aide à <emphasis
+>Dans <xref linkend="screenshot-import"/>, vous pouvez voir la boite de dialogue qui vous aide à <emphasis
 >importer</emphasis
-> un projet en tant que module. Pour accéder à la boîte de dialogue d'importation de &cervisia;, choisissez l'élément de menu <menuchoice
+> un projet en tant que module. Pour accéder à la boite de dialogue d'importation de &cervisia;, choisissez l'élément de menu <menuchoice
 ><guimenu
 >Dépôt</guimenu
 > <guimenuitem
@@ -495,7 +495,7 @@
 > </menuchoice
 >. </para>
 <para
->La zone déroulante affiche une liste des dépôts que vous avez saisie précédemment à l'aide de la boîte de dialogue <guilabel
+>La zone déroulante affiche une liste des dépôts que vous avez saisie précédemment à l'aide de la boite de dialogue <guilabel
 >Configurer l'accès aux dépôts</guilabel
 >. Si le dépôt est distant, assurez-vous que l'authentification fonctionne. Voir <xref linkend="accessing-repository"/> pour plus d'informations. </para
 ></listitem>
@@ -543,7 +543,7 @@
 ><para
 >On emploie également souvent cette marque pour importer différentes versions de logiciels tiers. Si vous ne le faites pas, utilisez le mot <literal
 >start</literal
-> ou une chaîne de caractères <literal
+> ou une chaine de caractères <literal
 >FOO_1_0</literal
 >, où <literal
 >FOO</literal
@@ -666,13 +666,13 @@
 
 <figure id="screenshot-checkout" float="1">
 <title
->Une copie d'écran de la boîte de dialogue d'extraction de &cervisia;</title>
+>Une copie d'écran de la boite de dialogue d'extraction de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="checkout.png"/></imageobject>
 <textobject
 ><phrase
->Une copie d'écran de la boîte de dialogue d'extraction de &cervisia;</phrase
+>Une copie d'écran de la boite de dialogue d'extraction de &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
@@ -690,7 +690,7 @@
 ><envar
 >$CVSROOT</envar
 ></filename
->. La zone de liste déroulante affiche une liste des dépôts que vous avez précédemment saisie à l'aide de la boîte de dialogue <guilabel
+>. La zone de liste déroulante affiche une liste des dépôts que vous avez précédemment saisie à l'aide de la boite de dialogue <guilabel
 >Configurer l'accès aux dépôts</guilabel
 >. Si le dépôt est distant, assurez-vous que l'authentification fonctionne. Voir <xref linkend="accessing-repository"/> pour plus d'informations. </para
 ></listitem>
@@ -861,7 +861,7 @@
 <para
 >pour obtenir les informations d'état des fichiers marqués. Notez que &cervisia; ne parcourt récursivement les sous-dossiers que si vous avez défini l'option correspondante dans le menu <guimenu
 >Configuration</guimenu
->. Selon l'état du fichier correspondant, un élément apparaît à présent dans la colonne <guilabel
+>. Selon l'état du fichier correspondant, un élément apparait à présent dans la colonne <guilabel
 >État</guilabel
 > : </para>
 
@@ -1080,7 +1080,7 @@
 ></menuchoice
 > ou cliquez avec le bouton droit sur les fichiers marqués et choisissez <guimenuitem
 >Ajouter au dépôt....</guimenuitem
->. La boîte de dialogue <guilabel
+>. La boite de dialogue <guilabel
 >Ajout CVS</guilabel
 > s'ouvre, répertoriant les fichiers que vous avez marqués et demande confirmation. Cliquez sur <guibutton
 >Ok</guibutton
@@ -1103,7 +1103,7 @@
 
 <warning
 ><para
->&CVS; n'est pas conçu pour mettre en place un contrôle de révision satisfaisant pour les fichiers binaires. Par exemple, fusionner des fichiers binaires ne présente normalement aucun intérêt. De plus, &CVS; développe par défaut les mots clés (&pex; sur la chaîne <literal
+>&CVS; n'est pas conçu pour mettre en place un contrôle de révision satisfaisant pour les fichiers binaires. Par exemple, fusionner des fichiers binaires ne présente normalement aucun intérêt. De plus, &CVS; développe par défaut les mots clés (&pex; sur la chaine <literal
 >&dollar;Révision : 1.6 &dollar;</literal
 >) lorsqu'un fichier est validé. Dans les fichiers binaires, de tels remplacements risquent de corrompre le fichier et le rendre totalement inutilisable. </para
 ></warning>
@@ -1115,7 +1115,7 @@
 ><guimenuitem
 >Ajouter un binaire...</guimenuitem
 ></menuchoice
->. La boîte de dialogue<guilabel
+>. La boite de dialogue<guilabel
 >Ajout CVS</guilabel
 > s'ouvre, répertoriant les fichiers binaires que vous avez marqués et demande confirmation. Cliquez sur <guibutton
 >Ok</guibutton
@@ -1149,7 +1149,7 @@
 ></menuchoice
 > ou en cliquant-droit sur les fichiers marqués et en choisissant <guimenuitem
 >Supprimer du dépôt...</guimenuitem
-> dans le menu contextuel. La boîte de dialogue <guilabel
+> dans le menu contextuel. La boite de dialogue <guilabel
 >Suppression CVS</guilabel
 >s'ouvre, répertoriant les fichiers que vous avez marqués et demandant confirmation. Cliquez sur <guibutton
 >Ok</guibutton
@@ -1244,7 +1244,7 @@
 
 <figure id="screenshot-commit" float="1">
 <title
->Une copie d'écran de la boîte de dialogue de validation de &cervisia;</title>
+>Une copie d'écran de la boite de dialogue de validation de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="commit.png"/></imageobject>
@@ -1252,9 +1252,9 @@
 </figure>
 
 <para
->Vous obtenez une boîte de dialogue qui affiche une liste des fichiers sélectionnés au début de la section, ainsi qu'un message de journal de vos changements au-dessous. &cervisia; vous aide de plusieurs manières à trouver un message de journal significatif : en premier lieu, dans la liste des fichiers, vous pouvez double-cliquer sur un fichier ou appuyer sur <keycap
+>Vous obtenez une boite de dialogue qui affiche une liste des fichiers sélectionnés au début de la section, ainsi qu'un message de journal de vos changements au-dessous. &cervisia; vous aide de plusieurs manières à trouver un message de journal significatif : en premier lieu, dans la liste des fichiers, vous pouvez double-cliquer sur un fichier ou appuyer sur <keycap
 >Entrée</keycap
-> afin de voir les changements que vous avez apportés au fichier. En deuxième lieu, &cervisia; fournit une liste des messages de journal que vous avez précédemment utilisés dans une liste déroulante. Troisièmement, cette boîte de dialogue est intégrée à l'éditeur du journal des modifications de &cervisia; décrit ci-après. Quand vous avez terminé avec la boîte de dialogue, la commande </para>
+> afin de voir les changements que vous avez apportés au fichier. En deuxième lieu, &cervisia; fournit une liste des messages de journal que vous avez précédemment utilisés dans une liste déroulante. Troisièmement, cette boite de dialogue est intégrée à l'éditeur du journal des modifications de &cervisia; décrit ci-après. Quand vous avez terminé avec la boite de dialogue, la commande </para>
 
 <para>
 <screen
@@ -1312,9 +1312,9 @@
 ></menuchoice
 >. S'il existe un fichier nommé <filename
 >ChangeLog</filename
-> dans le dossier de premier niveau de votre copie locale, ce fichier est chargé et vous avez la possibilité de le modifier. À cette fin, au début du fichier, une ligne composée de la date actuelle et de votre nom d'utilisateur (ce que vous pouvez configurer comme décrit dans <xref linkend="customize-general"/>) est insérée. Lorsque vous en avez terminé, cette boîte de dialogue peut être fermée en cliquant sur <guibutton
+> dans le dossier de premier niveau de votre copie locale, ce fichier est chargé et vous avez la possibilité de le modifier. À cette fin, au début du fichier, une ligne composée de la date actuelle et de votre nom d'utilisateur (ce que vous pouvez configurer comme décrit dans <xref linkend="customize-general"/>) est insérée. Lorsque vous en avez terminé, cette boite de dialogue peut être fermée en cliquant sur <guibutton
 >Ok</guibutton
->, la prochaine boîte de dialogue de validation que vous ouvrirez comportera le message de journal rédigé lors de votre dernière saisie dans le fichier « ChangeLog ». </para>
+>, la prochaine boite de dialogue de validation que vous ouvrirez comportera le message de journal rédigé lors de votre dernière saisie dans le fichier « ChangeLog ». </para>
 
 </sect1>
 
@@ -1344,7 +1344,7 @@ Modifications dans le dépôt
 >Vous devrez remplacer ce bloc entier par la version récemment fusionnée. Naturellement, vous bénéficiez d'une grande liberté quand il s'agit de résoudre un groupe de conflits : pour chacun, vous pouvez décider de choisir une des deux versions alternatives. Vous pouvez également décider que les deux approches ont échoué et réécrire une routine entière voire même le fichier complet à partir de zéro. </para>
 
 <para
->Heureusement, &cervisia; offre une interface plus conviviale pour gérer ces conflits. Cela ne signifie pas que vous n'aurez jamais à modifier manuellement les fichiers, mais elle élimine au moins le besoin de le faire pour résoudre les conflits triviaux. Pour employer la boîte de dialogue <guilabel
+>Heureusement, &cervisia; offre une interface plus conviviale pour gérer ces conflits. Cela ne signifie pas que vous n'aurez jamais à modifier manuellement les fichiers, mais elle élimine au moins le besoin de le faire pour résoudre les conflits triviaux. Pour employer la boite de dialogue <guilabel
 >Résolution CVS</guilabel
 > de &cervisia;, choisissez <menuchoice
 ><guimenu
@@ -1358,19 +1358,19 @@ Modifications dans le dépôt
 
 <figure id="screenshot-resolve" float="1">
 <title
->Une copie d'écran de la boîte de dialogue de résolution de &cervisia;</title>
+>Une copie d'écran de la boite de dialogue de résolution de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="resolve.png"/></imageobject>
 <textobject
 ><phrase
->Une copie d'écran de la boîte de dialogue de résolution de &cervisia;</phrase
+>Une copie d'écran de la boite de dialogue de résolution de &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
 
 <para
->Dans la partie supérieure da la boîte de dialogue, vous voyez <guilabel
+>Dans la partie supérieure da la boite de dialogue, vous voyez <guilabel
 >Votre version (A)</guilabel
 > du fichier, sur le côté gauche et la version du dépôt, <guilabel
 >Autre version (B)</guilabel
@@ -1385,7 +1385,7 @@ Modifications dans le dépôt
 >&lt;&lt;</guibutton
 > et <guibutton
 >&gt;&gt;</guibutton
->. Au centre de la partie inférieure de la boîte de dialogue, vous pouvez voir quelle est la section actuellement marquée. Par exemple, <literal
+>. Au centre de la partie inférieure de la boite de dialogue, vous pouvez voir quelle est la section actuellement marquée. Par exemple, <literal
 >2 parmi 3</literal
 > signifie que vous êtes actuellement positionné sur la deuxième section présentant des différences, sur un total de 3. </para>
 
@@ -1405,7 +1405,7 @@ Modifications dans le dépôt
 >Édition</guibutton
 > pour ouvrir un éditeur de texte simple dans lequel vous pouvez modifier la section. Quand vous avez terminé, cliquez sur <guibutton
 >Ok</guibutton
-> pour revenir à la boîte de dialogue <guilabel
+> pour revenir à la boite de dialogue <guilabel
 >Résolution CVS</guilabel
 > et reprendre la résolution des conflits. Vous verrez la section que vous venez de modifier dans <guilabel
 >Version fusionnée</guilabel
@@ -1418,7 +1418,7 @@ Modifications dans le dépôt
 >Enregistrer sous...</guibutton
 >. Cliquez sur <guibutton
 >Fermer</guibutton
-> pour sortir de la boîte de dialogue. Si vous fermez la boîte de dialogue sans enregistrer, les changements que vous avez faits seront perdus. </para>
+> pour sortir de la boite de dialogue. Si vous fermez la boite de dialogue sans enregistrer, les changements que vous avez faits seront perdus. </para>
 
 </sect1>
 
@@ -1490,7 +1490,7 @@ Modifications dans le dépôt
 
 <listitem
 ><para
->Dans la boîte de dialogue qui s'affiche lorsque vous validez un ensemble de fichiers, vous pouvez demander une fenêtre de différences en choisissant un nom de fichier dans la liste de sélection, soit en double-cliquant dessus, soit en appuyant sur <keycap
+>Dans la boite de dialogue qui s'affiche lorsque vous validez un ensemble de fichiers, vous pouvez demander une fenêtre de différences en choisissant un nom de fichier dans la liste de sélection, soit en double-cliquant dessus, soit en appuyant sur <keycap
 >Entrée</keycap
 >. Cela revient pratiquement à cliquer sur <menuchoice
 ><guimenu
@@ -1503,7 +1503,7 @@ Modifications dans le dépôt
 
 <listitem
 ><para
->Dans la boîte de dialogue Explorer le journal, vous pouvez marquer deux révisions d'un fichier et demander une boîte de dialogue montrant les différences entre elles (reportez-vous à la section <xref linkend="browsinglogs"/>). </para
+>Dans la boite de dialogue Explorer le journal, vous pouvez marquer deux révisions d'un fichier et demander une boite de dialogue montrant les différences entre elles (reportez-vous à la section <xref linkend="browsinglogs"/>). </para
 ></listitem>
 
 </itemizedlist>
@@ -1515,32 +1515,32 @@ Modifications dans le dépôt
 
 <figure id="screenshot-log" float="1">
 <title
->Une copie d'écran de la boîte de dialogue Diff de &cervisia;</title>
+>Une copie d'écran de la boite de dialogue Diff de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="diff.png"/></imageobject>
 <textobject
 ><phrase
->Une copie d'écran de la boîte de dialogue Diff de &cervisia;</phrase
+>Une copie d'écran de la boite de dialogue Diff de &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
 
 <para
->Le texte de la boîte de dialogue est une variante améliorée du texte fourni par la commande « diff » avec l'option <option
+>Le texte de la boite de dialogue est une variante améliorée du texte fourni par la commande « diff » avec l'option <option
 >u</option
 >. Vous pouvez voir les versions présentant des différences dans deux fenêtres, dont les lignes sont disposées de telle sorte que vous pouvez faire une comparaison côte à côte. Cela signifie qu'aux endroits où du texte a été ajouté ou supprimé, la fenêtre correspondante affiche des lignes vides avec l'indicateur <literal
 >+++++</literal
 > sur le côté gauche. Partout ailleurs, vous pouvez voir le numéro actuel de chaque ligne dans la colonne de gauche. </para>
 
 <para
->Dans la deuxième colonne de la fenêtre de droite, le type de changement effectué apparaît. Les types possibles sont <literal
+>Dans la deuxième colonne de la fenêtre de droite, le type de changement effectué apparait. Les types possibles sont <literal
 >Ajouter</literal
 >, <literal
 >Supprimer</literal
 > et <literal
 >Changer</literal
->. Les lignes correspondantes sont marquées en bleu, vert et rouge. Au centre de la boîte de dialogue, une image compressée des indicateurs de couleur est affichée. Ainsi, vous pouvez obtenir un rapide aperçu de l'ensemble des changements apportés au fichier. Vous pouvez également utiliser la position des régions colorées dans l'image compressée quand vous faites appel aux barres de défilement. </para>
+>. Les lignes correspondantes sont marquées en bleu, vert et rouge. Au centre de la boite de dialogue, une image compressée des indicateurs de couleur est affichée. Ainsi, vous pouvez obtenir un rapide aperçu de l'ensemble des changements apportés au fichier. Vous pouvez également utiliser la position des régions colorées dans l'image compressée quand vous faites appel aux barres de défilement. </para>
 
 <para
 >Normalement, les barres de défilement des fenêtres gauche et droite sont synchronisées. &cad;que si vous faites défiler le côté gauche, le côté droit défile au même rythme. Vous pouvez changer ce comportement en cochant la case <guibutton
@@ -1548,7 +1548,7 @@ Modifications dans le dépôt
 >. </para>
 
 <para
->Pour plus d'informations sur la manière de personnaliser la boîte de dialogue « Diff », reportez-vous à <xref linkend="customize-diff"/>. </para>
+>Pour plus d'informations sur la manière de personnaliser la boite de dialogue « Diff », reportez-vous à <xref linkend="customize-diff"/>. </para>
 
 </sect1>
 
@@ -1589,7 +1589,7 @@ Modifications dans le dépôt
 > ou de fait un clic droit sur le fichier marqué et de choisir <guimenuitem
 >Explorer le journal...</guimenuitem
 > dans le menu contextuel, afin d'ouvrir la <link linkend="browsinglogs"
->boîte de dialogue « Explorer le journal »</link
+>boite de dialogue « Explorer le journal »</link
 >. Maintenant, sélectionnez la version pour laquelle vous voulez créer un correctif comme révision « A » et cliquez sur le bouton <guilabel
 >Créer un correctif...</guilabel
 >. Ceci générera un correctif avec les différences entre le <emphasis
@@ -1597,17 +1597,17 @@ Modifications dans le dépôt
 > dans votre copie de travail et la version sélectionnée comme révision « A ». </para>
 
 <para
->Avant de générer le correctif, &cervisia; affiche une boîte de dialogue permettant de configurer le format de sortie. </para>
+>Avant de générer le correctif, &cervisia; affiche une boite de dialogue permettant de configurer le format de sortie. </para>
 
 <figure id="screenshot-patch" float="1">
 <title
->Une copie d'écran de la boîte de dialogue « Correctif » de &cervisia;</title>
+>Une copie d'écran de la boite de dialogue « Correctif » de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="patch.png"/></imageobject>
 <textobject
 ><phrase
->Une copie d'écran de la boîte de dialogue « Correctif » de &cervisia;</phrase
+>Une copie d'écran de la boite de dialogue « Correctif » de &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
@@ -1663,9 +1663,9 @@ Modifications dans le dépôt
 
 
 <para
->Après avoir défini le format de sortie, &cervisia; génère le correctif et affiche la boîte de dialogue <guilabel
+>Après avoir défini le format de sortie, &cervisia; génère le correctif et affiche la boite de dialogue <guilabel
 >Enregistrer sous</guilabel
->. Dans cette boîte de dialogue, saisissez le nom du fichier et l'emplacement du fichier correctif. </para>
+>. Dans cette boite de dialogue, saisissez le nom du fichier et l'emplacement du fichier correctif. </para>
 
 
 </sect1>
@@ -1689,31 +1689,31 @@ Modifications dans le dépôt
 >. Une autre possibilité est de cliquer sur le bouton <guilabel
 >Annoter...</guilabel
 > dans la <link linkend="browsinglogs"
->boîte de dialogue Explorer le journal</link
->, dans laquelle vous pouvez sélectionner la version du fichier que vous voulez afficher. <xref linkend="screenshot-annotate"/> montre une capture d'écran de la boîte de dialogue. </para>
+>boite de dialogue Explorer le journal</link
+>, dans laquelle vous pouvez sélectionner la version du fichier que vous voulez afficher. <xref linkend="screenshot-annotate"/> montre une capture d'écran de la boite de dialogue. </para>
 
 <figure id="screenshot-annotate" float="1">
 <title
->Une copie d'écran de la boîte de dialogue « Annotations » de &cervisia;</title>
+>Une copie d'écran de la boite de dialogue « Annotations » de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="annotate.png"/></imageobject>
 <textobject
 ><phrase
->Une copie d'écran de la boîte de dialogue « Annotations » de &cervisia;</phrase
+>Une copie d'écran de la boite de dialogue « Annotations » de &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
 
 <para
->Dans la boîte de dialogue d'annotation, une fenêtre s'ouvre, montrant la toute dernière version du fichier sélectionné ou la version « A »de la révision, dans le cas où vous avez lancé la boîte de dialogue « Annoter » depuis la <link linkend="browsinglogs"
->boîte de dialogue « Explorer le journal »</link
+>Dans la boite de dialogue d'annotation, une fenêtre s'ouvre, montrant la toute dernière version du fichier sélectionné ou la version « A »de la révision, dans le cas où vous avez lancé la boite de dialogue « Annoter » depuis la <link linkend="browsinglogs"
+>boite de dialogue « Explorer le journal »</link
 >). Les colonnes placées avant le texte donnent quelques informations relatives au changement le plus récent dans chaque ligne. La première colonne affiche le numéro de ligne. La deuxième colonne montre le nom de l'auteur et le numéro de révision. Enfin, la troisième colonne indique le contenu réel de cette ligne. </para>
 
 <para
->En conséquence, lorsqu'une ligne vous paraît étrange ou que vous supposez un bogue à cet endroit, vous pouvez savoir immédiatement qui est responsable de cette ligne. Il est également possible de découvrir <emphasis
+>En conséquence, lorsqu'une ligne vous parait étrange ou que vous supposez un bogue à cet endroit, vous pouvez savoir immédiatement qui est responsable de cette ligne. Il est également possible de découvrir <emphasis
 >pourquoi</emphasis
-> cette ligne a été modifiée. Pour ce faire, déplacez le pointeur de souris sur le numéro de révision correspondant. Une infobulle apparaît alors, qui affiche le message du journal ainsi que la date du changement. </para>
+> cette ligne a été modifiée. Pour ce faire, déplacez le pointeur de souris sur le numéro de révision correspondant. Une infobulle apparait alors, qui affiche le message du journal ainsi que la date du changement. </para>
 
 </sect1>
 
@@ -1729,9 +1729,9 @@ Modifications dans le dépôt
 >Affichage</guimenu
 > ou que vous cliquez-droit sur le fichier marqué et choisissez <guimenuitem
 >Explorer le journal...</guimenuitem
-> dans le menu contextuel, la boîte de dialogue <guilabel
+> dans le menu contextuel, la boite de dialogue <guilabel
 >Journal CVS</guilabel
-> s'affiche (si vous en marquez plusieurs, rien ne se passe puisque &cervisia; ne peut générer et analyser le journal que pour un fichier à la fois). La fonctionnalité qu'offre cette boîte de dialogue dépasse l'affichage de l'historique du fichier. En l'utilisant comme un explorateur de versions, vous pouvez : </para>
+> s'affiche (si vous en marquez plusieurs, rien ne se passe puisque &cervisia; ne peut générer et analyser le journal que pour un fichier à la fois). La fonctionnalité qu'offre cette boite de dialogue dépasse l'affichage de l'historique du fichier. En l'utilisant comme un explorateur de versions, vous pouvez : </para>
 
 <itemizedlist>
 
@@ -1769,13 +1769,13 @@ Modifications dans le dépôt
 
 <figure float="1">
 <title
->Une copie d'écran de la boîte de dialogue « Explorer le journal » de &cervisia;</title>
+>Une copie d'écran de la boite de dialogue « Explorer le journal » de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="logtree.png"/></imageobject>
 <textobject
 ><phrase
->Une copie d'écran de la boîte de dialogue « Explorer le journal » de &cervisia;</phrase
+>Une copie d'écran de la boite de dialogue « Explorer le journal » de &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
@@ -1794,7 +1794,7 @@ Modifications dans le dépôt
 >. </para>
 
 <para
->Pour obtenir plus d'information sur une révision donnée, vous pouvez cliquer sur celle-ci soit dans la liste, soit dans la vue arborescente. Les champs situés au centre de la boîte de dialogue sont alors remplis à l'aide des informations complètes fournies par la commande <command
+>Pour obtenir plus d'information sur une révision donnée, vous pouvez cliquer sur celle-ci soit dans la liste, soit dans la vue arborescente. Les champs situés au centre de la boite de dialogue sont alors remplis à l'aide des informations complètes fournies par la commande <command
 >cvs log</command
 >. Vous pouvez marquer deux révisions, appelées « A » et « B »qui sont pertinentes si vous employez les autres fonctionnalités qu'offrent les boutons. Vous pouvez choisir la révision « A » avec le bouton gauche de la souris et la révision « B »avec le bouton central de la souris. Dans l'affichage sous forme de liste, vous pouvez également naviguer avec les touches du curseur. Pour marquer les révisions « A » et « B », utilisez respectivement les associations de touches <keycombo action="simul"
 >&Ctrl;<keycap
@@ -1815,25 +1815,25 @@ Modifications dans le dépôt
 <para
 >En cliquant sur le bouton <guibutton
 >Annoter...</guibutton
->, vous obtenez une boîte de dialogue affichant le texte du fichier appartenant à la version marquée par « A ». Chaque ligne est préfixée avec les informations relatives à la personne les ayant modifiées en dernier lieu et la révision au cours de laquelle ceci s'est produit. Vous pouvez obtenir d'autres informations sur l'affichage des versions annotées dans <xref linkend="annotate"/>. </para>
+>, vous obtenez une boite de dialogue affichant le texte du fichier appartenant à la version marquée par « A ». Chaque ligne est préfixée avec les informations relatives à la personne les ayant modifiées en dernier lieu et la révision au cours de laquelle ceci s'est produit. Vous pouvez obtenir d'autres informations sur l'affichage des versions annotées dans <xref linkend="annotate"/>. </para>
 
 <para
 >En cliquant sur le bouton <guibutton
 >Diff</guibutton
 >, un appel <command
 >cvs diff</command
-> est réalisé. Une boîte de dialogue vous sera proposé pour afficher toutes les modifications entre les deux versions marquées. Si vous marquez la révision « A » mais pas la révision « B », &cervisia; identifiera les modifications entre la version du fichier marquée en tant que révision « A » et la version du fichier de la copie de travail. Ainsi, vous pouvez afficher les différences entre votre version du fichier et n'importe quelle version disponible dans &CVS;. Afin de faciliter l'affichage des changements, différentes couleurs sont utilisées pour marquer les lignes ayant été ajoutées, supprimées ou simplement changées. Plus d'informations sur l'affichage des différences sont disponibles dans <xref linkend="diff"/>. </para>
+> est réalisé. Une boite de dialogue vous sera proposé pour afficher toutes les modifications entre les deux versions marquées. Si vous marquez la révision « A » mais pas la révision « B », &cervisia; identifiera les modifications entre la version du fichier marquée en tant que révision « A » et la version du fichier de la copie de travail. Ainsi, vous pouvez afficher les différences entre votre version du fichier et n'importe quelle version disponible dans &CVS;. Afin de faciliter l'affichage des changements, différentes couleurs sont utilisées pour marquer les lignes ayant été ajoutées, supprimées ou simplement changées. Plus d'informations sur l'affichage des différences sont disponibles dans <xref linkend="diff"/>. </para>
 
 <para
 >En cliquant sur le bouton <guibutton
 >Créer un correctif...</guibutton
->, une boîte de dialogue vous est proposée vous permettant de définir les options de format pour l'affichage du fichier regroupant toutes les modifications entre les deux révisions marquées. Si vous marquez la révision « A » mais pas la révision « B », &cervisia; identifiera les modifications entre la version du fichier marquée en tant que révision « A » et la version du fichier de la copie de travail. Ainsi, vous pouvez générer un correctif ou fichier de différences, entre votre version du fichier et n'importe quelle version disponible dans &CVS;. Après avoir configuré le format du correctif dans la boîte de dialogue et cliqué sur <guibutton
+>, une boite de dialogue vous est proposée vous permettant de définir les options de format pour l'affichage du fichier regroupant toutes les modifications entre les deux révisions marquées. Si vous marquez la révision « A » mais pas la révision « B », &cervisia; identifiera les modifications entre la version du fichier marquée en tant que révision « A » et la version du fichier de la copie de travail. Ainsi, vous pouvez générer un correctif ou fichier de différences, entre votre version du fichier et n'importe quelle version disponible dans &CVS;. Après avoir configuré le format du correctif dans la boite de dialogue et cliqué sur <guibutton
 >Ok</guibutton
 >, une commande <command
 >cvs diff</command
-> est lancée pour la génération d'un fichier de différences. Une boîte de dialogue <guilabel
+> est lancée pour la génération d'un fichier de différences. Une boite de dialogue <guilabel
 >Enregistrer sous...</guilabel
->apparaîtra. Saisissez le nom du fichier et l'emplacement du fichier correctif que &cervisia; a généré afin de l'enregistrer. D'autres informations sur la création des correctifs et les options de format de ceux-ci sont disponibles dans <xref linkend="creatingpatches"/>. </para>
+>apparaitra. Saisissez le nom du fichier et l'emplacement du fichier correctif que &cervisia; a généré afin de l'enregistrer. D'autres informations sur la création des correctifs et les options de format de ceux-ci sont disponibles dans <xref linkend="creatingpatches"/>. </para>
 
 <para
 >En cliquant sur le bouton <guibutton
@@ -1843,11 +1843,11 @@ Modifications dans le dépôt
 <para
 >Cliquez sur le bouton <guibutton
 >Fermer</guibutton
-> pour quitter la boîte de dialogue et revenir à la fenêtre principale. </para>
+> pour quitter la boite de dialogue et revenir à la fenêtre principale. </para>
 
 
 <para
->Pour générer le journal qui est la base de la boîte de dialogue <guilabel
+>Pour générer le journal qui est la base de la boite de dialogue <guilabel
 >Journal CVS</guilabel
 >, &cervisia; émet la commande suivante : </para>
 
@@ -1957,13 +1957,13 @@ Modifications dans le dépôt
 
 <figure id="screenshot-history" float="1">
 <title
->Une copie d'écran de la boîte de dialogue « Historique » de &cervisia;</title>
+>Une copie d'écran de la boite de dialogue « Historique » de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="history.png"/></imageobject>
 <textobject
 ><phrase
->Une copie d'écran de la boîte de dialogue « Historique » de &cervisia;</phrase
+>Une copie d'écran de la boite de dialogue « Historique » de &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
@@ -2038,14 +2038,14 @@ Modifications dans le dépôt
 ><para
 ><literal
 >^</literal
-> correspond au début de la chaîne. </para
+> correspond au début de la chaine. </para
 ></listitem>
 
 <listitem
 ><para
 ><literal
 >$</literal
-> correspond à la fin de la chaîne. </para
+> correspond à la fin de la chaine. </para
 ></listitem>
 
 <listitem
@@ -2091,13 +2091,13 @@ Modifications dans le dépôt
 
 <figure id="screenshot-updatetag" float="1">
 <title
->Une copie d'écran de la boîte de dialogue « Mettre à jour vers une marque » de &cervisia;</title>
+>Une copie d'écran de la boite de dialogue « Mettre à jour vers une marque » de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="updatetag.png"/></imageobject>
 <textobject
 ><phrase
->Une copie d'écran de la boîte de dialogue « Mettre à jour vers une marque » de &cervisia;</phrase
+>Une copie d'écran de la boite de dialogue « Mettre à jour vers une marque » de &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
@@ -2221,7 +2221,7 @@ Modifications dans le dépôt
 > et tout est terminé. </para>
 
 <para
->Créer une branche n'est guère plus difficile : dans la boîte de dialogue de la marque, cochez la case <guibutton
+>Créer une branche n'est guère plus difficile : dans la boite de dialogue de la marque, cochez la case <guibutton
 >Créer une branche avec cette marque</guibutton
 >. Vous pouvez aussi supprimer une marque existante : choisissez <menuchoice
 ><guimenu
@@ -2238,7 +2238,7 @@ Modifications dans le dépôt
 ><guimenuitem
 >Fusionner...</guimenuitem
 ></menuchoice
->. La boîte de dialogue qui apparaît à présent vous offre deux possibilités : </para>
+>. La boite de dialogue qui apparait à présent vous offre deux possibilités : </para>
 
 <para
 >Soit vous pouvez fusionner toutes les modifications effectuées sur une branche vers la branche actuelle. Dans ce cas, cochez la case <guibutton
@@ -2300,13 +2300,13 @@ Modifications dans le dépôt
 ><guimenuitem
 >Ajouter une alerte...</guimenuitem
 ></menuchoice
->. La boîte de dialogue qui apparaît permet de choisir d'être averti de tout type d'évènement que &CVS; prend en charge. Par exemple, si vous voulez être averti uniquement lorsqu'un fichier est validé, cochez les cases <guibutton
+>. La boite de dialogue qui apparait permet de choisir d'être averti de tout type d'évènement que &CVS; prend en charge. Par exemple, si vous voulez être averti uniquement lorsqu'un fichier est validé, cochez les cases <guibutton
 >Uniquement</guibutton
 > et <guibutton
 >Validations</guibutton
 >. Pour être averti de tout évènement relatif aux fichiers marqués, cochez la case <guibutton
 >Tous</guibutton
->. Lorsque vous confirmez dans la boîte de dialogue, la ligne de commande utilisée est  </para>
+>. Lorsque vous confirmez dans la boite de dialogue, la ligne de commande utilisée est  </para>
 
 <para>
 <screen
@@ -2327,7 +2327,7 @@ Modifications dans le dépôt
 ><guimenuitem
 >Supprimer une alerte...</guimenuitem
 ></menuchoice
->. La boîte de dialogue qui apparaît offre les mêmes options que le formulaire que vous avez rempli en ajoutant l'alerte. Lorsque vous confirmez cette boîte de dialogue, &cervisia; émet la commande </para>
+>. La boite de dialogue qui apparait offre les mêmes options que le formulaire que vous avez rempli en ajoutant l'alerte. Lorsque vous confirmez cette boite de dialogue, &cervisia; émet la commande </para>
 
 <para>
 <screen
@@ -2606,7 +2606,7 @@ Modifications dans le dépôt
 ></term>
 <listitem
 ><para
->La boîte de dialogue « Diff » de &cervisia; utilise l'option <option
+>La boite de dialogue « Diff » de &cervisia; utilise l'option <option
 >U</option
 > pour <command
 >diff</command
@@ -2642,7 +2642,7 @@ Modifications dans le dépôt
 ></term>
 <listitem
 ><para
->Dans la boîte de dialogue « Diff », les tabulations présentes dans votre fichier ou dans la sortie de la commande <command
+>Dans la boite de dialogue « Diff », les tabulations présentes dans votre fichier ou dans la sortie de la commande <command
 >diff</command
 > sont rendues par un nombre fixe de caractères d'espacement. Par défaut, chaque tabulation est remplacée par huit espaces, mais vous pouvez définir ici un autre nombre. </para
 ></listitem>
@@ -2655,7 +2655,7 @@ Modifications dans le dépôt
 ></term>
 <listitem
 ><para
->Lorsque vous employez une des fonctionnalités qui affiche la boîte de dialogue « Diff », comme <menuchoice
+>Lorsque vous employez une des fonctionnalités qui affiche la boite de dialogue « Diff », comme <menuchoice
 ><guimenu
 >Affichage</guimenu
 ><guimenuitem
@@ -2726,7 +2726,7 @@ Modifications dans le dépôt
 <varlistentry id="customize-timeout">
 <term
 ><guilabel
->Délai au bout duquel apparaît une boîte de dialogue de progression (en ms) :</guilabel
+>Délai au bout duquel apparait une boite de dialogue de progression (en ms) :</guilabel
 ></term>
 <listitem
 ><para
@@ -2736,7 +2736,7 @@ Modifications dans le dépôt
 ><guimenuitem
 >Différence par rapport au dépôt...</guimenuitem
 ></menuchoice
->, &cervisia; ouvre une boîte de dialogue indiquant que la commande s'exécute encore et permet de l'interrompre. De plus, ce dialogue sert à afficher vos messages d'erreur dans &CVS;. Comme il peut devenir ennuyeux au bout d'un certain temps, il n'est affiché qu'après un délai donné fixé à 4 secondes par défaut. Vous pouvez changer ici cette valeur. </para
+>, &cervisia; ouvre une boite de dialogue indiquant que la commande s'exécute encore et permet de l'interrompre. De plus, ce dialogue sert à afficher vos messages d'erreur dans &CVS;. Comme il peut devenir ennuyeux au bout d'un certain temps, il n'est affiché qu'après un délai donné fixé à 4 secondes par défaut. Vous pouvez changer ici cette valeur. </para
 ></listitem>
 </varlistentry>
 
@@ -2794,7 +2794,7 @@ Modifications dans le dépôt
 ></term>
 <listitem
 ><para
->Cliquez sur ce bouton pour ouvrir la boîte de dialogue <guilabel
+>Cliquez sur ce bouton pour ouvrir la boite de dialogue <guilabel
 >Choisir une police</guilabel
 >, afin de définir la police de la fenêtre de protocole (la fenêtre qui affiche la sortie du client <command
 >cvs</command
@@ -2809,7 +2809,7 @@ Modifications dans le dépôt
 ></term>
 <listitem
 ><para
->Cliquez sur ce bouton pour ouvrir la boîte de dialogue <guilabel
+>Cliquez sur ce bouton pour ouvrir la boite de dialogue <guilabel
 >Choisir une police</guilabel
 >, afin de définir la police utilisée dans l'<link linkend="annotate"
 >affichage annoté</link
@@ -2824,10 +2824,10 @@ Modifications dans le dépôt
 ></term>
 <listitem
 ><para
->Cliquez sur ce bouton pour ouvrir la boîte de dialogue <guilabel
+>Cliquez sur ce bouton pour ouvrir la boite de dialogue <guilabel
 >Choisir une police</guilabel
 >, afin de définir la police utilisée dans les <link linkend="diff"
->boîtes de dialogue « Diff » </link
+>boites de dialogue « Diff » </link
 >. </para
 ></listitem>
 </varlistentry>
@@ -2839,7 +2839,7 @@ Modifications dans le dépôt
 ></term>
 <listitem
 ><para
->Cliquez sur les boutons colorés pour ouvrir la boîte de dialogue <guilabel
+>Cliquez sur les boutons colorés pour ouvrir la boite de dialogue <guilabel
 >Choisir une couleur</guilabel
 >, afin de définir la couleur utilisée dans <guilabel
 >Conflit</guilabel
@@ -3118,7 +3118,7 @@ Modifications dans le dépôt
 ></term>
 <listitem
 ><para
->Ouvre une boîte de dialogue pour le ficher sélectionné, ce qui permet de résoudre les conflits de fusion qu'il présente. Voir <xref linkend="resolvingconflicts"/>. </para
+>Ouvre une boite de dialogue pour le ficher sélectionné, ce qui permet de résoudre les conflits de fusion qu'il présente. Voir <xref linkend="resolvingconflicts"/>. </para
 ></listitem>
 </varlistentry>
 
@@ -3743,7 +3743,7 @@ Modifications dans le dépôt
 ></term>
 <listitem
 ><para
->Ouvre une boîte de dialogue permettant de créer un nouveau dépôt local. Voir <xref linkend="accessing-repository"/>. </para
+>Ouvre une boite de dialogue permettant de créer un nouveau dépôt local. Voir <xref linkend="accessing-repository"/>. </para
 ></listitem>
 </varlistentry>
 
@@ -3758,7 +3758,7 @@ Modifications dans le dépôt
 ></term>
 <listitem
 ><para
->Ouvre une boîte de dialogue permettant d'extraire un module d'un dépôt. Voir <xref linkend="checkingout"/>. </para
+>Ouvre une boite de dialogue permettant d'extraire un module d'un dépôt. Voir <xref linkend="checkingout"/>. </para
 ></listitem>
 </varlistentry>
 
@@ -3773,7 +3773,7 @@ Modifications dans le dépôt
 ></term>
 <listitem
 ><para
->Ouvre une boîte de dialogue permettant d'importer un paquet dans le dépôt. Voir <xref linkend="importing"/>. </para
+>Ouvre une boite de dialogue permettant d'importer un paquet dans le dépôt. Voir <xref linkend="importing"/>. </para
 ></listitem>
 </varlistentry>
 
