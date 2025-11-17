@@ -1,5 +1,5 @@
 # translation of cervisia.po to
-# Version: $Revision: 1710696 $
+# Version: $Revision: 1722990 $
 # Copyright (C) 2002,2003, 2004, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
 # Marta Rybczynska <mrybczynska@poczta.onet.pl>, 2002, 2004, 2005.
 # Marta Rybczyńska <mrybczynska@poczta.onet.pl>, 2002.

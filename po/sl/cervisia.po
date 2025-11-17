@@ -1,7 +1,7 @@
 # translation of cervisia.po to Slovenian
 # Translation of cervisia.po to Slovenian
 # Copyright (C) 2003, 2004, 2005, 2006 Free Software Foundation, Inc.
-# $Id: cervisia.po 1710696 2025-06-09 02:21:43Z scripty $
+# $Id: cervisia.po 1722990 2025-11-17 09:39:34Z scripty $
 # $Source$
 #
 # Gregor Rakar <gregor.rakar@kiss.si>, 2003, 2004, 2005.
