@@ -191,7 +191,7 @@ void DiffDialog::comboActivated(int index)
 
 static void interpretRegion(QString line, int *linenoA, int *linenoB)
 {
-    QRegExp region("^@@ -([0-9]+),([0-9]+) \\+([0-9]+),([0-9]+) @@.*$");
+    QRegularExpression region("^@@ -([0-9]+),([0-9]+) \\+([0-9]+),([0-9]+) @@.*$");
 
     if (!region.exactMatch(line))
         return;

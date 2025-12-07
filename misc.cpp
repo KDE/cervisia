@@ -155,7 +155,7 @@ QString Cervisia::NormalizeRepository(const QString &repository)
     if (!repository.startsWith(QLatin1String(":pserver:")))
         return repository;
 
-    QRegExp rx(":pserver:(" + userNameRegExp + passwordRegExp + "@)?" + hostNameRegExp + portRegExp + pathRegExp);
+    QRegularExpression rx(":pserver:(" + userNameRegExp + passwordRegExp + "@)?" + hostNameRegExp + portRegExp + pathRegExp);
 
     // extract username, hostname, port and path from CVSROOT
     QString userName, hostName, port, path;

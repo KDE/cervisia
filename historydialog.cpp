@@ -25,7 +25,7 @@
 #include <QHeaderView>
 #include <QLineEdit>
 #include <QPushButton>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QTreeWidget>
 #include <QVBoxLayout>
 
@@ -232,8 +232,8 @@ void HistoryDialog::slotHelp()
 void HistoryDialog::choiceChanged()
 {
     const QString author(user_edit->text());
-    const QRegExp fileMatcher(filename_edit->text(), Qt::CaseSensitive, QRegExp::Wildcard);
-    const QRegExp pathMatcher(dirname_edit->text(), Qt::CaseSensitive, QRegExp::Wildcard);
+    const QRegularExpression fileMatcher(filename_edit->text(), Qt::CaseSensitive, QRegularExpression::Wildcard);
+    const QRegularExpression pathMatcher(dirname_edit->text(), Qt::CaseSensitive, QRegularExpression::Wildcard);
 
     const bool showCommitEvents(commit_box->isChecked());
     const bool showCheckoutEvents(checkout_box->isChecked());

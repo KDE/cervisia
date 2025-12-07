@@ -20,7 +20,7 @@
 
 #include <QApplication>
 #include <QCommandLineParser>
-#include <QRegExp>
+#include <QRegularExpression>
 
 #include <KLocalizedString>
 #include <KPasswordDialog>
@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 
     // parse repository name from the passed argument
     QString prompt = parser.positionalArguments()[0];
-    QRegExp rx("(.*@.*)'s password:");
+    QRegularExpression rx("(.*@.*)'s password:");
 
     KPasswordDialog dlg;
     dlg.setPrompt(i18n("Please type in your password below."));

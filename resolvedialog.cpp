@@ -272,7 +272,7 @@ bool ResolveDialog::parseFile(const QString &name)
             // check for start of conflict block
             // Set to look for <<<<<<< at beginning of line with exactly one
             // space after then anything after that.
-            QRegExp rx("^<{7}\\s.*$");
+            QRegularExpression rx("^<{7}\\s.*$");
             if (line.contains(rx)) {
                 state = VersionA;
                 advanced1 = 0;
@@ -284,7 +284,7 @@ bool ResolveDialog::parseFile(const QString &name)
         case VersionA: {
             // Set to look for ======= at beginning of line which may have one
             // or more spaces after then nothing else.
-            QRegExp rx("^={7}\\s*$");
+            QRegularExpression rx("^={7}\\s*$");
             if (!line.contains(rx)) // still in version A
             {
                 advanced1++;
@@ -297,7 +297,7 @@ bool ResolveDialog::parseFile(const QString &name)
         case VersionB: {
             // Set to look for >>>>>>> at beginning of line with exactly one
             // space after then anything after that.
-            QRegExp rx("^>{7}\\s.*$");
+            QRegularExpression rx("^>{7}\\s.*$");
             if (!line.contains(rx)) // still in version B
             {
                 advanced2++;

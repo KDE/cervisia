@@ -115,11 +115,11 @@ void SshAgent::slotProcessFinished()
 {
     qCDebug(log_cervisia) << "ENTER";
 
-    QRegExp cshPidRx("setenv SSH_AGENT_PID (\\d*);");
-    QRegExp cshSockRx("setenv SSH_AUTH_SOCK (.*);");
+    QRegularExpression cshPidRx("setenv SSH_AGENT_PID (\\d*);");
+    QRegularExpression cshSockRx("setenv SSH_AUTH_SOCK (.*);");
 
-    QRegExp bashPidRx("SSH_AGENT_PID=(\\d*).*");
-    QRegExp bashSockRx("SSH_AUTH_SOCK=(.*\\.\\d*);.*");
+    QRegularExpression bashPidRx("SSH_AGENT_PID=(\\d*).*");
+    QRegularExpression bashSockRx("SSH_AUTH_SOCK=(.*\\.\\d*);.*");
 
     foreach (const QString &line, m_outputLines) {
         if (m_pid.isEmpty()) {
