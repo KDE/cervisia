@@ -6,4 +6,3 @@ include:
     file:
       - /gitlab-templates/linux.yml
       - /gitlab-templates/flatpak.yml
-      - /gitlab-templates/documentation.yml
