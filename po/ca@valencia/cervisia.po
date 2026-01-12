@@ -676,7 +676,7 @@ msgstr ""
 #: cervisiapart.cpp:568
 #, kde-format
 msgid "Create &Folders on Update"
-msgstr "En actualitzar crea les &carpetes"
+msgstr "Quan s'actualitze, crea les &carpetes"
 
 #: cervisiapart.cpp:571
 #, kde-format
