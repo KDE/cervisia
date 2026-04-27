@@ -1226,7 +1226,7 @@ msgstr "Vyžaduje merge"
 #: entry_status.cpp:51
 #, kde-format
 msgid "Up to Date"
-msgstr "Akuálne"
+msgstr "Aktuálne"
 
 #: entry_status.cpp:54
 #, kde-format
@@ -1841,7 +1841,7 @@ msgstr "&Počet riadkov kontextu pre dialóg diff:"
 #: settingsdialog.cpp:259
 #, kde-format
 msgid "Additional &options for cvs diff:"
-msgstr "Dalšie &možnosti pre cvs diff:"
+msgstr "Ďalšie &možnosti pre cvs diff:"
 
 #: settingsdialog.cpp:266
 #, kde-format
