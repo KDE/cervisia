@@ -205,13 +205,13 @@
 
 <figure id="screenshot-repositories" float="1">
 <title
->Une copie d'écran de la boite de dialogue Configurer l'accès aux dépôts de &cervisia;</title>
+>Une capture d'écran de la boite de dialogue Configurer l'accès aux dépôts de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="repositories.png"/></imageobject>
 <textobject
 ><phrase
->Une copie d'écran de la boite de dialogue Configurer l'accès aux dépôts de &cervisia;</phrase
+>Une capture d'écran de la boite de dialogue Configurer l'accès aux dépôts de &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
@@ -454,13 +454,13 @@
 
 <figure id="screenshot-import" float="1">
 <title
->Une copie d'écran de la boite de dialogue d'importation de &cervisia;</title>
+>Une capture d'écran de la boite de dialogue d'importation de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="import.png"/></imageobject>
 <textobject
 ><phrase
->Une copie d'écran de la boite de dialogue d'importation de &cervisia;</phrase
+>Une capture d'écran de la boite de dialogue d'importation de &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
@@ -666,13 +666,13 @@
 
 <figure id="screenshot-checkout" float="1">
 <title
->Une copie d'écran de la boite de dialogue d'extraction de &cervisia;</title>
+>Une capture d'écran de la boite de dialogue d'extraction de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="checkout.png"/></imageobject>
 <textobject
 ><phrase
->Une copie d'écran de la boite de dialogue d'extraction de &cervisia;</phrase
+>Une capture d'écran de la boite de dialogue d'extraction de &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
@@ -827,13 +827,13 @@
 
 <figure id="screenshot-mainview" float="1">
 <title
->Une copie d'écran de la fenêtre principale de &cervisia;</title>
+>Une capture d'écran de la fenêtre principale de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="mainview.png"/></imageobject>
 <textobject
 ><phrase
->Une copie d'écran de la fenêtre principale de &cervisia;</phrase
+>Une capture d'écran de la fenêtre principale de &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
@@ -1043,7 +1043,7 @@
 
 <figure id="screenshot-popup" float="1">
 <title
->Une copie d'écran du menu contextuel de &cervisia;</title>
+>Une capture d'écran du menu contextuel de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="popup.png"/></imageobject>
@@ -1244,7 +1244,7 @@
 
 <figure id="screenshot-commit" float="1">
 <title
->Une copie d'écran de la boite de dialogue de validation de &cervisia;</title>
+>Une capture d'écran de la boite de dialogue de validation de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="commit.png"/></imageobject>
@@ -1358,13 +1358,13 @@ Modifications dans le dépôt
 
 <figure id="screenshot-resolve" float="1">
 <title
->Une copie d'écran de la boite de dialogue de résolution de &cervisia;</title>
+>Une capture d'écran de la boite de dialogue de résolution de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="resolve.png"/></imageobject>
 <textobject
 ><phrase
->Une copie d'écran de la boite de dialogue de résolution de &cervisia;</phrase
+>Une capture d'écran de la boite de dialogue de résolution de &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
@@ -1515,13 +1515,13 @@ Modifications dans le dépôt
 
 <figure id="screenshot-log" float="1">
 <title
->Une copie d'écran de la boite de dialogue Diff de &cervisia;</title>
+>Une capture d'écran de la boite de dialogue Diff de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="diff.png"/></imageobject>
 <textobject
 ><phrase
->Une copie d'écran de la boite de dialogue Diff de &cervisia;</phrase
+>Une capture d'écran de la boite de dialogue Diff de &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
@@ -1601,13 +1601,13 @@ Modifications dans le dépôt
 
 <figure id="screenshot-patch" float="1">
 <title
->Une copie d'écran de la boite de dialogue « Correctif » de &cervisia;</title>
+>Une capture d'écran de la boite de dialogue « Correctif » de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="patch.png"/></imageobject>
 <textobject
 ><phrase
->Une copie d'écran de la boite de dialogue « Correctif » de &cervisia;</phrase
+>Une capture d'écran de la boite de dialogue « Correctif » de &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
@@ -1694,13 +1694,13 @@ Modifications dans le dépôt
 
 <figure id="screenshot-annotate" float="1">
 <title
->Une copie d'écran de la boite de dialogue « Annotations » de &cervisia;</title>
+>Une capture d'écran de la boite de dialogue « Annotations » de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="annotate.png"/></imageobject>
 <textobject
 ><phrase
->Une copie d'écran de la boite de dialogue « Annotations » de &cervisia;</phrase
+>Une capture d'écran de la boite de dialogue « Annotations » de &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
@@ -1769,13 +1769,13 @@ Modifications dans le dépôt
 
 <figure float="1">
 <title
->Une copie d'écran de la boite de dialogue « Explorer le journal » de &cervisia;</title>
+>Une capture d'écran de la boite de dialogue « Explorer le journal » de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="logtree.png"/></imageobject>
 <textobject
 ><phrase
->Une copie d'écran de la boite de dialogue « Explorer le journal » de &cervisia;</phrase
+>Une capture d'écran de la boite de dialogue « Explorer le journal » de &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
@@ -1957,13 +1957,13 @@ Modifications dans le dépôt
 
 <figure id="screenshot-history" float="1">
 <title
->Une copie d'écran de la boite de dialogue « Historique » de &cervisia;</title>
+>Une capture d'écran de la boite de dialogue « Historique » de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="history.png"/></imageobject>
 <textobject
 ><phrase
->Une copie d'écran de la boite de dialogue « Historique » de &cervisia;</phrase
+>Une capture d'écran de la boite de dialogue « Historique » de &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
@@ -2091,13 +2091,13 @@ Modifications dans le dépôt
 
 <figure id="screenshot-updatetag" float="1">
 <title
->Une copie d'écran de la boite de dialogue « Mettre à jour vers une marque » de &cervisia;</title>
+>Une capture d'écran de la boite de dialogue « Mettre à jour vers une marque » de &cervisia;</title>
 <mediaobject>
 <imageobject
 ><imagedata format="PNG" fileref="updatetag.png"/></imageobject>
 <textobject
 ><phrase
->Une copie d'écran de la boite de dialogue « Mettre à jour vers une marque » de &cervisia;</phrase
+>Une capture d'écran de la boite de dialogue « Mettre à jour vers une marque » de &cervisia;</phrase
 ></textobject>
 </mediaobject>
 </figure>
